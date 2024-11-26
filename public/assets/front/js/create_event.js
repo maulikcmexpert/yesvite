@@ -86,6 +86,26 @@ $(document).ready(function () {
             if(final_step == 1){
                 final_step = 2;
             }
+        }else if(current_step == '3'){
+            $("#myCustomModal").modal("hide");
+            $("#exampleModal").modal("hide");
+            $("#loader").css("display", "none");
+            $('.store_desgin_temp').prop("disabled", false);
+            $('.btn-close').prop("disabled", false);
+            $(".main-content-wrp").removeClass("blurred");
+            $(".step_1").hide();
+            $(".step_2").hide();
+            $('#edit-design-temp').hide();
+            handleActiveClass('.li_guest');
+            $('.pick-card').addClass('menu-success');
+            $('.edit-design').addClass('menu-success');
+            $('.edit-design').removeClass('active');
+            $('.li_design').find(".side-bar-list").addClass("menu-success");
+            active_responsive_dropdown('drop-down-event-guest');
+            $('.event_create_percent').text('75%');
+            $('.current_step').text('3 of 4');
+            $(".step_3").show();
+            final_step = 3;
         }
     }
     $('#address1').attr('placeholder', '');
