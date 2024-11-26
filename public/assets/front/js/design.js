@@ -534,6 +534,7 @@ function bindData() {
             // Load static information (text elements)
             if (dbJson) {
                 const staticInfo = dbJson;
+                console.log(dbJson);
                 staticInfo.textElements.forEach((element) => {
                     const textMeasurement = new fabric.Text(element.text, {
                         fontSize: element.fontSize,
