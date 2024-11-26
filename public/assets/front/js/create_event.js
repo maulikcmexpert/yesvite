@@ -3400,6 +3400,7 @@ function edit_design_modal() {
         });
         $(".modal-design-card").html(newCanvas);
         $("#exampleModal").modal("show");
+        $('.edit_design_tem').attr('data-event_id',eventData.event_id);
         canvas = new fabric.Canvas("imageEditor2", {
             width: static_information_json.width,
             height: static_information_json.height,
