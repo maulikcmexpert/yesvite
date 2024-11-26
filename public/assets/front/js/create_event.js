@@ -101,6 +101,7 @@ $(document).ready(function () {
             $('.pick-card').addClass('menu-success');
             $('.edit-design').addClass('menu-success');
             $('.edit-design').removeClass('active');
+            $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
             $('.li_design').find(".side-bar-list").addClass("menu-success");
             active_responsive_dropdown('drop-down-event-guest');
             $('.event_create_percent').text('75%');
