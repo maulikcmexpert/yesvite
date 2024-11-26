@@ -498,7 +498,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
 
 });
 
-function bindData(current_event_id = NULL) {
+function bindData(current_event_id) {
 
     let iw = document.getElementById('imageWrapper')
     // $(iw).on('mousedown', handleMouseDown);
@@ -533,7 +533,7 @@ function bindData(current_event_id = NULL) {
 
             // Load static information (text elements)
             if (dbJson) {
-                if(current_event_id != NULL){
+                if(current_event_id != ''){
                     const staticInfo = {};
                     staticInfo.textElements = dbJson;
 
@@ -592,7 +592,7 @@ function bindData(current_event_id = NULL) {
                         mr: true   // Show middle right control
                     });
 
-                    if(current_event_id != NULL){
+                    if(current_event_id != ''){
                     }else{
                         switch (element.text.toLowerCase()) {
                             case "event_name":
