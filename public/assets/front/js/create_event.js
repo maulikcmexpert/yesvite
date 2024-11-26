@@ -3363,9 +3363,10 @@ function edit_design_modal() {
     var eventDetail2 = $('#eventDetail').val();
     eventDetail2 = JSON.parse(eventDetail2);
     if(eventDetail2.static_information != ''){
-        dbJson = JSON.parse(eventDetail2.static_information);
+        var static_information_json = JSON.parse(eventDetail2.static_information);
+        dbJson = static_information_json.textData;
         // console.log(eventDetail2.static_information);
-        console.log(dbJson.textData);
+        console.log(dbJson);
         // Set the image URL in the modal's image tag
         $("#modalImage").attr("src", dbJson.template_url);
         image = dbJson.template_url;
