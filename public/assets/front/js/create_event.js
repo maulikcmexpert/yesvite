@@ -3390,45 +3390,29 @@ function edit_design_modal() {
     if(eventDetail2.static_information != ''){
         var static_information_json = JSON.parse(eventDetail2.static_information);
         dbJson = static_information_json.textData;
-        // console.log(eventDetail2.static_information);
-        // console.log(dbJson);
-        // Set the image URL in the modal's image tag
         $("#modalImage").attr("src", static_information_json.template_url);
         image = static_information_json.template_url;
-
-        // Remove the old canvas if it exists
         $("#imageEditor2").remove();
-
-        // Create a new canvas element
         var newCanvas = $("<canvas>", {
             id: "imageEditor2",
             width: 345,
             height: 490,
         });
-
-        // Append the new canvas to the modal-design-card
         $(".modal-design-card").html(newCanvas);
-
-        // Show the modal
         $("#exampleModal").modal("show");
-
         canvas = new fabric.Canvas("imageEditor2", {
             width: 345,
             height: 490,
             position: "relative",
         });
-
         const defaultSettings = {
             fontSize: 20,
             letterSpacing: 0,
             lineHeight: 1.2,
         };
-
         fabric.Image.fromURL(image, function(img) {
             var canvasWidth = canvas.getWidth();
             var canvasHeight = canvas.getHeight();
-
-            // Calculate scale to maintain aspect ratio
             var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
             img.set({
                 left: 0,
@@ -3441,8 +3425,10 @@ function edit_design_modal() {
             canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
         });
 
-        const staticInfo = dbJson;
-        staticInfo.forEach((element) => {
+        const staticInfo = {};
+        staticInfo.textElements = dbJson;
+        console.log(staticInfo);
+        staticInfo.textElements.forEach((element) => {
             
             const textMeasurement = new fabric.Text(element.text, {
                 fontSize: element.fontSize,
