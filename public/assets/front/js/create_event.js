@@ -3446,9 +3446,9 @@ function edit_design_modal() {
             console.log({textTop});
             console.log({textWidth1});
             let textElement = new fabric.Textbox(element.text, {
-                left: textLeft,
-                top: textTop,
-                width: textWidth1,
+                left: element.centerX,
+                top: element.centerY,
+                // width: textWidth1,
                 fontSize: 50,
                 fill: element.fill,
                 fontFamily: element.fontFamily,
