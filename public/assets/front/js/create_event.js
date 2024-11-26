@@ -3366,10 +3366,10 @@ function edit_design_modal() {
         var static_information_json = JSON.parse(eventDetail2.static_information);
         dbJson = static_information_json.textData;
         // console.log(eventDetail2.static_information);
-        console.log(dbJson);
+        // console.log(dbJson);
         // Set the image URL in the modal's image tag
-        $("#modalImage").attr("src", dbJson.template_url);
-        image = dbJson.template_url;
+        $("#modalImage").attr("src", static_information_json.template_url);
+        image = static_information_json.template_url;
 
         // Remove the old canvas if it exists
         $("#imageEditor2").remove();
@@ -3417,44 +3417,44 @@ function edit_design_modal() {
         });
 
         const staticInfo = dbJson;
+        console.log(staticInfo);
+        // staticInfo.textElements.forEach((element) => {
+        //     //console.log(element);
+        //     const textMeasurement = new fabric.Text(element.text, {
+        //         fontSize: element.fontSize,
+        //         fontFamily: element.fontFamily,
+        //         fontWeight: element.fontWeight,
+        //         fontStyle: element.fontStyle,
+        //         underline: element.underline,
+        //         linethrough: element.linethrough,
+        //     });
+        //     const textWidth1 = textMeasurement.width;
 
-        staticInfo.textElements.forEach((element) => {
-            //console.log(element);
-            const textMeasurement = new fabric.Text(element.text, {
-                fontSize: element.fontSize,
-                fontFamily: element.fontFamily,
-                fontWeight: element.fontWeight,
-                fontStyle: element.fontStyle,
-                underline: element.underline,
-                linethrough: element.linethrough,
-            });
-            const textWidth1 = textMeasurement.width;
-
-            let textElement = new fabric.Textbox(element.text, {
-                left: element.left,
-                top: element.top,
-                width: textWidth1,
-                fontSize: element.fontSize,
-                fill: element.fill,
-                fontFamily: element.fontFamily,
-                fontWeight: element.fontWeight,
-                fontStyle: element.fontStyle,
-                underline: element.underline,
-                linethrough: element.linethrough,
-                backgroundColor: element.backgroundColor,
-                textAlign: element.textAlign,
-                editable: false,
-                selectable: false,
-                hasControls: false,
-                borderColor: "#2DA9FC",
-                cornerColor: "#fff",
-                cornerSize: 10,
-                transparentCorners: false,
-                isStatic: true,
-                angle: element?.rotation ? element?.rotation : 0
-            });
-            canvas.add(textElement);
-        });
+        //     let textElement = new fabric.Textbox(element.text, {
+        //         left: element.left,
+        //         top: element.top,
+        //         width: textWidth1,
+        //         fontSize: element.fontSize,
+        //         fill: element.fill,
+        //         fontFamily: element.fontFamily,
+        //         fontWeight: element.fontWeight,
+        //         fontStyle: element.fontStyle,
+        //         underline: element.underline,
+        //         linethrough: element.linethrough,
+        //         backgroundColor: element.backgroundColor,
+        //         textAlign: element.textAlign,
+        //         editable: false,
+        //         selectable: false,
+        //         hasControls: false,
+        //         borderColor: "#2DA9FC",
+        //         cornerColor: "#fff",
+        //         cornerSize: 10,
+        //         transparentCorners: false,
+        //         isStatic: true,
+        //         angle: element?.rotation ? element?.rotation : 0
+        //     });
+        //     canvas.add(textElement);
+        // });
     }
 }
 
