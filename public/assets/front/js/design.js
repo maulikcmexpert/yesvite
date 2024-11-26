@@ -533,15 +533,14 @@ function bindData(current_event_id) {
 
             // Load static information (text elements)
             if (dbJson) {
+                const staticInfo = {};
                 if(current_event_id != ''){
-                    const staticInfo = {};
                     staticInfo.textElements = dbJson;
 
                 }else{
-                    const staticInfo = dbJson;
-
+                    staticInfo = dbJson;
                 }
-                console.log(dbJson);
+                console.log(staticInfo);
                 staticInfo.textElements.forEach((element) => {
                     const textMeasurement = new fabric.Text(element.text, {
                         fontSize: element.fontSize,
