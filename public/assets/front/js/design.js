@@ -464,7 +464,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
     e.preventDefault();
     // //console.log(dbJson);
     // //console.log(image);
-
+    var current_event_id = $(this).data('event_id');
     $("step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
@@ -491,14 +491,14 @@ $(document).on("click", ".edit_design_tem", function(e) {
         success: function(response) {
             //console.log(response);
             $("#edit-design-temp").html(response).show();
-            bindData();
+            bindData(current_event_id);
         },
         error: function(xhr, status, error) {},
     });
 
 });
 
-function bindData() {
+function bindData(current_event_id = NULL) {
 
     let iw = document.getElementById('imageWrapper')
     // $(iw).on('mousedown', handleMouseDown);
@@ -533,7 +533,14 @@ function bindData() {
 
             // Load static information (text elements)
             if (dbJson) {
-                const staticInfo = dbJson;
+                if(current_event_id != NULL){
+                    const staticInfo = {};
+                    staticInfo.textElements = dbJson;
+
+                }else{
+                    const staticInfo = dbJson;
+
+                }
                 console.log(dbJson);
                 staticInfo.textElements.forEach((element) => {
                     const textMeasurement = new fabric.Text(element.text, {
@@ -584,6 +591,9 @@ function bindData() {
                         ml: true,  // Show middle left control
                         mr: true   // Show middle right control
                     });
+
+                    if(current_event_id != NULL){
+                    }else{
                         switch (element.text.toLowerCase()) {
                             case "event_name":
                                 if (eventData.event_name) {
@@ -694,6 +704,8 @@ function bindData() {
                                 }
                                 break;
                         }
+
+                    }
                     
                     canvas.add(textElement);
                 });
