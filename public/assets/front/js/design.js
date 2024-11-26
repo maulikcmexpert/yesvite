@@ -584,7 +584,6 @@ function bindData() {
                         ml: true,  // Show middle left control
                         mr: true   // Show middle right control
                     });
-                    if(eventData.event_id == '' || eventData.event_id === undefined){
                         switch (element.text.toLowerCase()) {
                             case "event_name":
                                 if (eventData.event_name) {
@@ -695,8 +694,7 @@ function bindData() {
                                 }
                                 break;
                         }
-                    }
-
+                    
                     canvas.add(textElement);
                 });
 
