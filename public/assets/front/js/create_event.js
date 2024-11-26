@@ -3429,9 +3429,12 @@ function edit_design_modal() {
             });
             const textWidth1 = textMeasurement.width;
 
+            var textLeft = (element.centerX * 2) - textWidth1;
+            var textTop = (element.centerY * 2) - textWidth1;
+
             let textElement = new fabric.Textbox(element.text, {
-                left: element.centerX,
-                top: element.centerY,
+                left: textLeft,
+                top: textTop,
                 width: textWidth1,
                 fontSize: element.fontSize,
                 fill: element.fill,
@@ -3452,11 +3455,6 @@ function edit_design_modal() {
                 isStatic: true,
                 angle: element?.rotation ? element?.rotation : 0
             });
-            textElement.set({
-                text: element.text,
-                width: textWidth1,
-            });
-            
             canvas.add(textElement);
         });
     }
