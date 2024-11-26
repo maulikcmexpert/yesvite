@@ -3440,7 +3440,7 @@ function edit_design_modal() {
                 width: textWidth1,
                 fontSize: element.fontSize,
                 fill: element.fill,
-                fontFamily: 'Times New Roman',
+                fontFamily: element.fontFamily,
                 fontWeight: element.fontWeight,
                 fontStyle: element.fontStyle,
                 underline: element.underline,
