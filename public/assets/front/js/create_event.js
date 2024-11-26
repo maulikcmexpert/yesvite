@@ -107,6 +107,9 @@ $(document).ready(function () {
             $('.current_step').text('3 of 4');
             $(".step_3").show();
             final_step = 3;
+
+            var type="all"
+            get_user(type);
         }
     }
     $('#address1').attr('placeholder', '');
