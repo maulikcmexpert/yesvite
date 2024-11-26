@@ -3427,8 +3427,8 @@ function edit_design_modal() {
 
         const staticInfo = {};
         staticInfo.textElements = dbJson;
-        console.log(staticInfo);
         staticInfo.textElements.forEach((element) => {
+            console.log(element);
             
             const textMeasurement = new fabric.Text(element.text, {
                 fontSize: element.fontSize,
@@ -3440,8 +3440,8 @@ function edit_design_modal() {
             });
             const textWidth1 = textMeasurement.width;
 
-            var textLeft = (element.centerX / 2) - textWidth1;
-            var textTop = (element.centerY / 2) - textWidth1;
+            var textLeft = element.centerX;
+            var textTop = element.centerY;
             console.log({textLeft});
             console.log({textTop});
             console.log({textWidth1});
