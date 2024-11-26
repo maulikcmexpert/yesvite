@@ -3430,8 +3430,8 @@ function edit_design_modal() {
             const textWidth1 = textMeasurement.width;
 
             let textElement = new fabric.Textbox(element.text, {
-                left: element.left,
-                top: element.top,
+                left: element.centerX,
+                top: element.centerY,
                 width: textWidth1,
                 fontSize: element.fontSize,
                 fill: element.fill,
