@@ -3417,8 +3417,8 @@ function edit_design_modal() {
         });
 
         const staticInfo = dbJson;
-        console.log(staticInfo);
         staticInfo.forEach((element) => {
+            console.log(element);
             const textMeasurement = new fabric.Text(element.text, {
                 fontSize: element.fontSize,
                 fontFamily: element.fontFamily,
