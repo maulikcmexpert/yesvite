@@ -3449,7 +3449,7 @@ function edit_design_modal() {
                 left: textLeft,
                 top: textTop,
                 width: textWidth1,
-                fontSize: element.fontSize,
+                fontSize: element.fontSize*2,
                 fill: element.fill,
                 fontFamily: element.fontFamily,
                 fontWeight: element.fontWeight,
