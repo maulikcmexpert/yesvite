@@ -3429,8 +3429,8 @@ function edit_design_modal() {
             });
             const textWidth1 = textMeasurement.width;
 
-            var textLeft = (element.centerX * 2) - textWidth1;
-            var textTop = (element.centerY * 2) - textWidth1;
+            var textLeft = element.centerX - textWidth1;
+            var textTop = element.centerY - textWidth1;
             console.log({textLeft});
             console.log({textTop});
             console.log({textWidth1});
