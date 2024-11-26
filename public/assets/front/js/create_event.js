@@ -3416,7 +3416,7 @@ function edit_design_modal() {
             canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
         });
 
-        const staticInfo = dbJson;
+        const staticInfo = JSON.parse(dbJson);
         console.log(staticInfo);
         // staticInfo.textElements.forEach((element) => {
         //     //console.log(element);
