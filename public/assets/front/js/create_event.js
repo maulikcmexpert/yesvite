@@ -71,7 +71,8 @@ $(document).ready(function () {
         eventData.message_to_guests = eventDetail.message_to_guests;
         eventData.longitude = eventDetail.longitude;
         eventData.latitude = eventDetail.latitude;
-        
+        console.log(eventData);
+        console.log(eventDetail);
         if(current_step == '2'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
