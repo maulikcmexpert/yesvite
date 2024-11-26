@@ -3395,14 +3395,14 @@ function edit_design_modal() {
         $("#imageEditor2").remove();
         var newCanvas = $("<canvas>", {
             id: "imageEditor2",
-            width: 345,
-            height: 490,
+            width: static_information_json.width,
+            height: static_information_json.height,
         });
         $(".modal-design-card").html(newCanvas);
         $("#exampleModal").modal("show");
         canvas = new fabric.Canvas("imageEditor2", {
-            width: 345,
-            height: 490,
+            width: static_information_json.width,
+            height: static_information_json.height,
             position: "relative",
         });
         const defaultSettings = {
