@@ -3416,45 +3416,44 @@ function edit_design_modal() {
             canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
         });
 
-        const staticInfo = JSON.parse(dbJson);
+        const staticInfo = dbJson;
         console.log(staticInfo);
-        // staticInfo.textElements.forEach((element) => {
-        //     //console.log(element);
-        //     const textMeasurement = new fabric.Text(element.text, {
-        //         fontSize: element.fontSize,
-        //         fontFamily: element.fontFamily,
-        //         fontWeight: element.fontWeight,
-        //         fontStyle: element.fontStyle,
-        //         underline: element.underline,
-        //         linethrough: element.linethrough,
-        //     });
-        //     const textWidth1 = textMeasurement.width;
+        staticInfo.textElements.forEach((element) => {
+            const textMeasurement = new fabric.Text(element.text, {
+                fontSize: element.fontSize,
+                fontFamily: element.fontFamily,
+                fontWeight: element.fontWeight,
+                fontStyle: element.fontStyle,
+                underline: element.underline,
+                linethrough: element.linethrough,
+            });
+            const textWidth1 = textMeasurement.width;
 
-        //     let textElement = new fabric.Textbox(element.text, {
-        //         left: element.left,
-        //         top: element.top,
-        //         width: textWidth1,
-        //         fontSize: element.fontSize,
-        //         fill: element.fill,
-        //         fontFamily: element.fontFamily,
-        //         fontWeight: element.fontWeight,
-        //         fontStyle: element.fontStyle,
-        //         underline: element.underline,
-        //         linethrough: element.linethrough,
-        //         backgroundColor: element.backgroundColor,
-        //         textAlign: element.textAlign,
-        //         editable: false,
-        //         selectable: false,
-        //         hasControls: false,
-        //         borderColor: "#2DA9FC",
-        //         cornerColor: "#fff",
-        //         cornerSize: 10,
-        //         transparentCorners: false,
-        //         isStatic: true,
-        //         angle: element?.rotation ? element?.rotation : 0
-        //     });
-        //     canvas.add(textElement);
-        // });
+            let textElement = new fabric.Textbox(element.text, {
+                left: element.left,
+                top: element.top,
+                width: textWidth1,
+                fontSize: element.fontSize,
+                fill: element.fill,
+                fontFamily: element.fontFamily,
+                fontWeight: element.fontWeight,
+                fontStyle: element.fontStyle,
+                underline: element.underline,
+                linethrough: element.linethrough,
+                backgroundColor: element.backgroundColor,
+                textAlign: element.textAlign,
+                editable: false,
+                selectable: false,
+                hasControls: false,
+                borderColor: "#2DA9FC",
+                cornerColor: "#fff",
+                cornerSize: 10,
+                transparentCorners: false,
+                isStatic: true,
+                angle: element?.rotation ? element?.rotation : 0
+            });
+            canvas.add(textElement);
+        });
     }
 }
 
