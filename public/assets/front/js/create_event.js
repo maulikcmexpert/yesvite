@@ -3442,9 +3442,9 @@ function edit_design_modal() {
 
             var textLeft = element.centerX;
             var textTop = element.centerY;
-            console.log({textLeft});
-            console.log({textTop});
-            console.log({textWidth1});
+            // console.log({textLeft});
+            // console.log({textTop});
+            // console.log({textWidth1});
             let textElement = new fabric.Textbox(element.text, {
                 left: textLeft,
                 top: textTop,
