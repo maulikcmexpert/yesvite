@@ -3315,7 +3315,7 @@ class ApiControllerv2 extends Controller
                 foreach ($draftEvents as $value) {
                     $eventDetail['id'] = $value->id;
                     $eventDetail['event_name'] = $value->event_name;
-                    $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
+                    $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
                     $eventDetail['saved_date'] = $formattedDate;
                     $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
 
