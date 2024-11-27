@@ -1,4 +1,4 @@
-{{-- <div class="container-fluid">
+<div class="container-fluid">
 
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -88,4 +88,4 @@
 
     </table>
 
-</div> --}}
+</div>
