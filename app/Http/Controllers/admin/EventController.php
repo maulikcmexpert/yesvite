@@ -57,14 +57,14 @@ class EventController extends Controller
             }
 
             return Datatables::of($data)
-                ->addIndexColumn()
+                // ->addIndexColumn()
                 
-                // ->addColumn('number', function ($row) {
-                //     $page = request()->get('start') / request()->get('length') + 1;
-                //     $itemsPerPage = request()->get('length');
-                //     static $count = 0;
-                //     return ++$count + ($page - 1) * $itemsPerPage;
-                // })
+                ->addColumn('number', function ($row) {
+                    $page = request()->get('start') / request()->get('length') + 1;
+                    $itemsPerPage = request()->get('length');
+                    static $count = 0;
+                    return ++$count + ($page - 1) * $itemsPerPage;
+                })
 
                 ->addColumn('event_by', function ($row) {
                     return $row->user->firstname . ' ' . $row->user->lastname;
