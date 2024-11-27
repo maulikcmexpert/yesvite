@@ -14,7 +14,7 @@
                 {
                     data: "event_name",
                     name: "event_name"
-                    searchable: true,
+                    // searchable: true,
                 },
                 {
                     data: "event_by",
