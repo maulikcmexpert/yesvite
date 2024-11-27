@@ -65,6 +65,7 @@ class EventController extends Controller
                     static $count = 0;
                     return ++$count + ($page - 1) * $itemsPerPage;
                 })
+
                 ->addColumn('event_by', function ($row) {
                     return $row->user->firstname . ' ' . $row->user->lastname;
                 })
