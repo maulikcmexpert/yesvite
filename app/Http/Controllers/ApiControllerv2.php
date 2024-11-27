@@ -3305,7 +3305,7 @@ class ApiControllerv2 extends Controller
             $eventData = json_decode($rawData, true);
             if (isset($eventData['event_name']) && $eventData['event_name'] != '' ) {
                 $event_name = $eventData['event_name'];
-                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('name', 'like', "%$event_name%")->orderBy('id', 'DESC')->get();
+                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('event_name', 'like', "%$event_name%")->orderBy('id', 'DESC')->get();
             }else{
                 $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
             }
@@ -3327,7 +3327,7 @@ class ApiControllerv2 extends Controller
                 return response()->json(['status' => 0, 'message' => "No Draft Events", "data" => $draftEventArray]);
             }
         } catch (QueryException $e) {
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
