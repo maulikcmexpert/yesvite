@@ -12730,7 +12730,7 @@ class ApiControllerv3 extends Controller
                 $product_id = $input['productId'];
                 $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
                 if (!isset($responce['purchaseTimeMillis'])) {
-                    // dd($responce);
+                    dd($responce);
                     return response()->json(['status' => 0, 'message' => 'Refresh token expired']);
                 }
                 $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
