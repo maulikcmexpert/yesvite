@@ -27,6 +27,7 @@ class EventController extends Controller
             $status = $request->input('status');
             $event_type = $request->input('event_type');
             $event_by = $request->input('event_by');
+            $search = $request->input('search')['value'];
 
             
             $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
@@ -58,7 +59,33 @@ class EventController extends Controller
 
             return Datatables::of($data)
                 ->addIndexColumn()
-                
+                ->filter(function ($data) {
+                    $search = request()->get('search')['value'];
+                    $nameParts = explode(' ', $search);
+                   if($search){
+                       $data->where(function ($q) use ($nameParts, $search) {
+                           if (count($nameParts) > 1) {
+                               // Search for firstname and lastname separately
+                               $q->whereHas('user', function ($q) use ($nameParts) {
+                                   $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                     ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                               })->orWhere('event_name','LIKE',"%{$search}%")
+                               ->orWhere('start_date','LIKE',"%{$search}%")
+                               ->orWhere('event_location_name','LIKE',"%{$search}%");
+                           } else {
+                               // Search for firstname or lastname if only one term is provided
+                               $q->whereHas('user', function ($q) use ($search) {
+                                   $q->where('firstname', 'LIKE', "%{$search}%")
+                                     ->orWhere('lastname', 'LIKE', "%{$search}%");
+                               })->orWhere('event_name','LIKE',"%{$search}%")
+                               ->orWhere('start_date','LIKE',"%{$search}%")
+                               ->orWhere('event_location_name','LIKE',"%{$search}%");
+
+
+                           }
+                       });
+                   }
+               })
                 ->addColumn('number', function ($row) {
                     $page = request()->get('start') / request()->get('length') + 1;
                     $itemsPerPage = request()->get('length');
