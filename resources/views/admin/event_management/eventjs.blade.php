@@ -11,10 +11,10 @@
                     data: "number",
                     name: "number"
                 },
-                {
-                    data: "event_name",
-                    name: "event_name"
-                },
+                // {
+                //     data: "event_name",
+                //     name: "event_name"
+                // },
                 {
                     data: "event_by",
                     name: "event_by"
