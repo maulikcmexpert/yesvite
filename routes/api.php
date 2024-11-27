@@ -96,7 +96,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('create_event', [ApiControllerv2::class, 'createEvent']);
     Route::post('edit_event', [ApiControllerv2::class, 'editEvent']);
     Route::post('set_user_event_create_step', [ApiControllerv2::class, 'setUserEventCreateStep']);
-    Route::get('draft_event_list', [ApiControllerv2::class, 'draftEventList']);
+    Route::post('draft_event_list', [ApiControllerv2::class, 'draftEventList']);
     Route::post('get_event_data', [ApiControllerv2::class, 'getEventData']);
     Route::post('get_single_event', [ApiControllerv2::class, 'getSingleEvent']);
 
