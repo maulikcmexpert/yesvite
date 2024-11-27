@@ -3297,12 +3297,18 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function draftEventList()
+    public function draftEventList(Request $request)
     {
         try {
             $user  = Auth::guard('api')->user();
-
-            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
+            $rawData = $request->getContent();
+            $eventData = json_decode($rawData, true);
+            if (isset($eventData['event_name']) && $eventData['event_name'] != '' ) {
+                $event_name = $eventData['event_name'];
+                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('name', 'like', "%$event_name%")->orderBy('id', 'DESC')->get();
+            }else{
+                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->get();
+            }
             $draftEventArray = [];
             if (!empty($draftEvents) && count($draftEvents) != 0) {
 
