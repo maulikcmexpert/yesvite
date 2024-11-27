@@ -12763,7 +12763,7 @@ class ApiControllerv3 extends Controller
                             ];
                             // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                            sendNotification('invite', $notificationParam);
+                            // sendNotification('invite', $notificationParam);
                             sendNotification('owner_notify', $notificationParam);
                             $updateEvent->is_draft_save = '0';
                         // }
