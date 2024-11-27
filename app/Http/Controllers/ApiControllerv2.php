@@ -5575,7 +5575,7 @@ class ApiControllerv2 extends Controller
                                 'post_id' => ""
                             ];
                             // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                            sendNotification('invite', $notificationParam);
+                            // sendNotification('invite', $notificationParam);
                         }
                         if ($checkUserInvited->is_draft_save == '0') {
                             $notificationParam = [
