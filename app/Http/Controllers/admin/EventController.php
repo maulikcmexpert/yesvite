@@ -146,16 +146,16 @@ class EventController extends Controller
                     return $actionBtn;
                 })
 
-                // ->rawColumns([
-                //     'number',
-                //     'event_by',
-                //     'email',
-                //     'start_date',
-                //     'end_date',
-                //     'venue',
-                //     'event_status',
-                //     'action'
-                // ])
+                ->rawColumns([
+                    'number',
+                    'event_by',
+                    'email',
+                    'start_date',
+                    'end_date',
+                    'venue',
+                    'event_status',
+                    'action'
+                ])
                 ->make(true);
         }
 
