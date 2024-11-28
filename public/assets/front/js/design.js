@@ -540,7 +540,7 @@ function bindData(current_event_id) {
                 }else{
                     staticInfo = dbJson;
                 }
-                console.log(staticInfo);
+                console.log(dbJson);
                 staticInfo.textElements.forEach((element) => {
                     const textMeasurement = new fabric.Text(element.text, {
                         fontSize: element.fontSize,
