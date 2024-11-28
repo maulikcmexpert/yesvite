@@ -1633,8 +1633,15 @@ class ApiControllerv2 extends Controller
 
 
             // Need RSVP To //
-            $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
-                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) use($input){
+                $query->where('is_draft_save', '0')
+                ->when($input['past_event'] == '1', function($que) {
+                    $que->where('end_date', '<', date('Y-m-d'));
+                })    
+                ->when($input['past_event'] == '0', function($que) {
+                    $que->where('start_date', '>=', date('Y-m-d'));
+                });
+                // ->where('start_date', '>=', date('Y-m-d'));
             })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
 
 
@@ -1655,9 +1662,15 @@ class ApiControllerv2 extends Controller
                     $year = $month_wise_search->year;
                 }
 
-                $totalCounts += EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year) {
-                    $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'))
-
+                $totalCounts += EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $input) {
+                    $query->where('is_draft_save', '0')
+                        ->when($input['past_event'] == '1', function($que) {
+                            $que->where('end_date', '<', date('Y-m-d'));
+                        })    
+                        ->when($input['past_event'] == '0', function($que) {
+                            $que->where('start_date', '>=', date('Y-m-d'));
+                        })
+                        // ->where('start_date', '>=', date('Y-m-d'))
                         ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                         ->orderBy('id', 'DESC');
 
@@ -1680,8 +1693,15 @@ class ApiControllerv2 extends Controller
 
 
 
-                $userNeedRsvpEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year) {
-                    $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'))
+                $userNeedRsvpEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year,$input) {
+                    $query->where('is_draft_save', '0')
+                        ->when($input['past_event'] == '1', function($que) {
+                            $que->where('end_date', '<', date('Y-m-d'));
+                        })    
+                        ->when($input['past_event'] == '0', function($que) {
+                            $que->where('start_date', '>=', date('Y-m-d'));
+                        })
+                        // ->where('start_date', '>=', date('Y-m-d'))
 
                         ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                         ->orderBy('id', 'DESC');
