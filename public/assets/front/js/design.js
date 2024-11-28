@@ -538,7 +538,7 @@ function bindData(current_event_id) {
                     staticInfo.textElements = dbJson;
 
                 }else{
-                    staticInfo = dbJson;
+                    staticInfo.textElements = dbJson.textElements;
                 }
                 console.log(dbJson.textElements);
                 staticInfo.textElements.forEach((element) => {
