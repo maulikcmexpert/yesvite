@@ -192,7 +192,12 @@
             var event_type = $("#event_type").val();
 
             var status = $(this).val();
-
+            
+            if(status=="past_events"){
+                if(eventDate!=""){
+                    $("#eventDate").val("");
+                }
+            }
             var table = $('#events_table').DataTable();
 
             if ($.fn.DataTable.isDataTable('#events_table')) {
