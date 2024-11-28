@@ -61,6 +61,10 @@ class UserPostReportDataTable extends DataTable
                         $q->orWhereHas('events', function ($q) use ($keyword) {
                             $q->where('event_name', 'LIKE', "%{$keyword}%");
                         });
+
+                        
+                        $q->orWhere('report_type', 'LIKE', "%{$keyword}%")
+                        ->orWhere('report_description', 'LIKE', "%{$keyword}%");
                     });
                 }
             })
