@@ -883,8 +883,15 @@ class ApiControllerv2 extends Controller
             // All  //
 
             // Invited To //
-            $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
-                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            $totalInvited = EventInvitedUser::whereHas('event', function ($query) use($input){
+                $query->where('is_draft_save', '0')
+                ->when($input['past_event'] == '1', function($que) {
+                    $que->where('end_date', '<', date('Y-m-d'));
+                })    
+                ->when($input['past_event'] == '0', function($que) {
+                    $que->where('start_date', '>=', date('Y-m-d'));
+                });
+                // ->where('start_date', '>=', date('Y-m-d'));
             })->where('user_id', $user->id)->count();
 
 
@@ -903,9 +910,17 @@ class ApiControllerv2 extends Controller
                     $year = $month_wise_search->year;
                 }
 
-                $totalCounts += EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year) {
+                $totalCounts += EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year,$input) {
                     $query->where('is_draft_save', '0');
-                    $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->orderBy('id', 'DESC');
+                    $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                        ->when($input['past_event'] == '1', function($que) {
+                            $que->where('end_date', '<', date('Y-m-d'));
+                        })    
+                        ->when($input['past_event'] == '0', function($que) {
+                            $que->where('start_date', '>=', date('Y-m-d'));
+                        })
+                        // ->where('start_date', '>=', date('Y-m-d'))
+                    ->orderBy('id', 'DESC');
 
                     $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
@@ -922,9 +937,17 @@ class ApiControllerv2 extends Controller
                 })->where('user_id', $user->id)->count();
 
                 // Make sure to handle the retrieved $userInvitedEventList accordingly
-                $userInvitedEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year) {
+                $userInvitedEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year,$input) {
                     $query->where('is_draft_save', '0');
-                    $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->orderBy('id', 'DESC');
+                    $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                        // ->where('start_date', '>=', date('Y-m-d'))
+                        ->when($input['past_event'] == '1', function($que) {
+                            $que->where('end_date', '<', date('Y-m-d'));
+                        })    
+                        ->when($input['past_event'] == '0', function($que) {
+                            $que->where('start_date', '>=', date('Y-m-d'));
+                        })
+                        ->orderBy('id', 'DESC');
 
                     $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
@@ -1100,7 +1123,11 @@ class ApiControllerv2 extends Controller
 
 
             // Hosting//
-            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+            if($input['past_event'] == '1'){
+                $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'))->count();
+            }else{
+                $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+            }
 
 
 
@@ -1124,7 +1151,12 @@ class ApiControllerv2 extends Controller
 
 
                 $totalCounts += Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
-                    ->where('start_date', '>=', date('Y-m-d'))
+                ->when($input['past_event'] == '1', function($query) {
+                    $query->where('end_date', '<', date('Y-m-d'));
+                })    
+                ->when($input['past_event'] == '0', function($query) {
+                    $query->where('start_date', '>=', date('Y-m-d'));
+                })
                     ->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
                     })->when($search != "", function ($query) use ($search) {
@@ -1140,7 +1172,12 @@ class ApiControllerv2 extends Controller
 
 
                 $hostingEvents =  Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
-                    ->where('start_date', '>=', date('Y-m-d'))
+                    ->when($input['past_event'] == '1', function($query) {
+                        $query->where('end_date', '<', date('Y-m-d'));
+                    })    
+                    ->when($input['past_event'] == '0', function($query) {
+                        $query->where('start_date', '>=', date('Y-m-d'));
+                    })
                     ->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
                     })->when($search != "", function ($query) use ($search) {
@@ -1589,7 +1626,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
-
+            
 
             // Past Event // 
 
@@ -1835,11 +1872,11 @@ class ApiControllerv2 extends Controller
             $total_allEvent_page = ceil(count($uniqueArray) / 5);
             $offset = ($page - 1) * 5;
             $paginatedArray = array_slice($uniqueArray, $offset, 5);
-
+            $draft_count = Event::where(['is_draft_save' => '1', 'user_id' => $user->id])->count();
             if (!empty($paginatedArray)) {
-                return response()->json(['status' => 1, "total_invited" => $totalInvited, "total_hosting" => $totalHosting, 'total_past_event_count' => $totalPastEventCount, 'total_need_rsvp_event_count' => $total_need_rsvp_event_count, "count" => $totalCounts, 'total_allEvent_page' => $total_allEvent_page, 'data' => $paginatedArray, 'message' => "All events"]);
+                return response()->json(['status' => 1,"draft_count" => $draft_count,"upcoming_event_count" => $this->upcomingEventCount, "total_invited" => $totalInvited, "total_hosting" => $totalHosting, 'total_past_event_count' => $totalPastEventCount, 'total_need_rsvp_event_count' => $total_need_rsvp_event_count, "count" => $totalCounts, 'total_allEvent_page' => $total_allEvent_page, 'data' => $paginatedArray, 'message' => "All events"]);
             } else {
-                return response()->json(['status' => 0, "total_invited" => $totalInvited, "total_hosting" => $totalHosting, 'total_past_event_count' => $totalPastEventCount, 'total_need_rsvp_event_count' => $total_need_rsvp_event_count, "count" => $totalCounts, 'total_allEvent_page' => $total_allEvent_page, 'data' => $paginatedArray, 'message' => "Events not found"]);
+                return response()->json(['status' => 0,"draft_count" => $draft_count,"upcoming_event_count" => $this->upcomingEventCount, "total_invited" => $totalInvited, "total_hosting" => $totalHosting, 'total_past_event_count' => $totalPastEventCount, 'total_need_rsvp_event_count' => $total_need_rsvp_event_count, "count" => $totalCounts, 'total_allEvent_page' => $total_allEvent_page, 'data' => $paginatedArray, 'message' => "Events not found"]);
             }
         }
 
