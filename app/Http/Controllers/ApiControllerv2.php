@@ -7387,11 +7387,11 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if (empty($eventData)) {
-                    $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
-                    $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
-                    $eventData[] = "Number of guests : " . $numberOfGuest;
-                }
+                // if (empty($eventData)) {
+                //     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
+                //     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
+                //     $eventData[] = "Number of guests : " . $numberOfGuest;
+                // }
                 $eventDetails['event_detail'] = $eventData;
             }
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
