@@ -536,9 +536,8 @@ function bindData(current_event_id) {
                 const staticInfo = {};
                 if(current_event_id != '' && (eventData.desgin_selected === undefined  || eventData.desgin_selected =='')){
                     staticInfo.textElements = dbJson;
-
                 }else{
-                    staticInfo = dbJson;
+                    staticInfo = dbJson.textElements;
                 }
                 console.log(dbJson);
                 console.log(staticInfo);
