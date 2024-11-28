@@ -21,7 +21,7 @@ $(document).on("click", ".design-card", function() {
     if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
         dbJson = eventData.textData;
     } else {
-        //console.log(json);
+        console.log(json);
         dbJson = json;
         temp_id = id;
     }
