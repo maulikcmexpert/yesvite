@@ -648,7 +648,7 @@
             @php
 
                 
-                $currentDate = (isset($eventDetail['start_date']) && $eventDetail['start_date']!=""); 
+                $currentDate = (isset($eventDetail['start_date']) && $eventDetail['start_date']!="")?$eventDetail['start_date']:date('m-d-Y'); 
                 $i = 0;
             @endphp
             @if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != "")
