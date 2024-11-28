@@ -13424,28 +13424,31 @@ class ApiControllerv2 extends Controller
                             break;
                         case 'start_time':
                             if (!empty($request->start_time)) {
-                                $udpated[$k][$key] = $request->start_time;
+                                $inputString = $request->start_time;
+                                $udpated[$k][$key] = $inputString[0] === '0' ? substr($inputString, 1) : $inputString;
                             } else {
                                 unset($udpated[$k]); // Remove entry if start_time is empty
                             }
                             break;
                         case 'end_time':
                             if (!empty($request->rsvp_end_time)) {
-                                $udpated[$k][$key] = $request->rsvp_end_time;
+                                $inputString = $request->rsvp_end_time;
+                                
+                                $udpated[$k][$key] = $inputString[0] === '0' ? substr($inputString, 1) : $inputString;
                             } else {
                                 unset($udpated[$k]); // Remove entry if rsvp_end_time is empty
                             }
                             break;
                         case 'start_date':
                             if (!empty($request->start_date)) {
-                                $udpated[$k][$key] = date('F-d-Y',strtotime($request->start_date));
+                                $udpated[$k][$key] = date('F d,Y',strtotime($request->start_date));
                             } else {
                                 unset($udpated[$k]); // Remove entry if start_date is empty
                             }
                             break;
                         case 'end_date':
                             if (!empty($request->end_date)) {
-                                $udpated[$k][$key] = date('F-d-Y',strtotime($request->end_date));
+                                $udpated[$k][$key] = date('F d,Y',strtotime($request->end_date));
                             } else {
                                 unset($udpated[$k]); // Remove entry if end_date is empty
                             }
