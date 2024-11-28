@@ -76,7 +76,7 @@ function getGuestRsvpPendingCount($eventId)
 
 function upcomingEventsCount($userId)
 {
-    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
+    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
 
         ->where('user_id', $userId)
         ->where('is_draft_save', '0')
@@ -93,7 +93,7 @@ function upcomingEventsCount($userId)
 
     $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
 
-        ->whereIn('id', $invitedEvents)->where('start_date', '>', date('Y-m-d'))
+        ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
         ->where('is_draft_save', '0')
         ->orderBy('start_date', 'ASC')
         ->get();
