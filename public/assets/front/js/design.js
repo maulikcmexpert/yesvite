@@ -489,7 +489,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function(response) {
-            //console.log(response);
+            console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
