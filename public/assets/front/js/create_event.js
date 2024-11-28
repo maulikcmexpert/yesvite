@@ -3387,7 +3387,7 @@ function li_design_click(){
 function edit_design_modal() {
     var eventDetail2 = $('#eventDetail').val();
     eventDetail2 = JSON.parse(eventDetail2);
-    if(eventDetail2.static_information != '' && (eventData.desgin_selected =='')){
+    if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
         var static_information_json = JSON.parse(eventDetail2.static_information);
         dbJson = static_information_json.textData;
         $("#modalImage").attr("src", static_information_json.template_url);
