@@ -593,7 +593,7 @@ function bindData(current_event_id) {
                         mr: true   // Show middle right control
                     });
 
-                    if(current_event_id != '' && (eventData.desgin_selected === undefined  || eventData.desgin_selected =='')){
+                    if(current_event_id != '' && (eventData.desgin_selected =='')){
                     }else{
                         switch (element.text.toLowerCase()) {
                             case "event_name":
