@@ -534,7 +534,7 @@ function bindData(current_event_id) {
             // Load static information (text elements)
             if (dbJson) {
                 const staticInfo = {};
-                if(current_event_id != ''){
+                if(current_event_id != '' && (eventData.desgin_selected === undefined  || eventData.desgin_selected =='')){
                     staticInfo.textElements = dbJson;
 
                 }else{
@@ -591,7 +591,7 @@ function bindData(current_event_id) {
                         mr: true   // Show middle right control
                     });
 
-                    if(current_event_id != ''){
+                    if(current_event_id != '' && (eventData.desgin_selected === undefined  || eventData.desgin_selected =='')){
                     }else{
                         switch (element.text.toLowerCase()) {
                             case "event_name":
