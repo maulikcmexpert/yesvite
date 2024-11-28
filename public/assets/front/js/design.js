@@ -539,7 +539,7 @@ function bindData(current_event_id) {
                     staticInfo.textElements = dbJson;
                 }else{
                     console.log(2);
-                    staticInfo = dbJson.textElements;
+                    staticInfo = dbJson;
                 }
                 console.log(dbJson);
                 console.log(staticInfo);
