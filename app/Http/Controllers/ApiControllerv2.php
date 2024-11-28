@@ -7387,7 +7387,7 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if(!empty($eventDetails['co_host_list'])){
+                if($coHosts != NULL){
                     $eventData[] = "Co-Host";
                 }
                 // if (empty($eventData)) {
