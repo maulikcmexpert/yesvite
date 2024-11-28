@@ -1217,7 +1217,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
                         $eventDetail['user_id'] = $value->user->id;
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                        $eventDetail['event_wall'] = $value->event_settings->event_wall;
+                        $eventDetail['event_wall'] = (isset($value->event_settings->event_wall) && $value->event_settings->event_wall !='')?$value->event_settings->event_wall:0;
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
