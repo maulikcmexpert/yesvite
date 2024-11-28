@@ -29,15 +29,41 @@ class EventController extends Controller
             $event_by = $request->input('event_by');
             $search = $request->input('search')['value'];
 
+            $col = $request->input('order')[0]['column'];
             
-            $data = Event::with(['user'])->whereHas('user', function ($query) use ($event_type) {
+            $order = $request->input('order')[0]['dir'];
+            
+            $data = Event::with('user')
+            ->whereHas('user', function ($query) use ($event_type) {
                 if ($event_type == 'normal_user_event') {
                     $query->where('account_type', '0');
-                }
-                if ($event_type == 'professional_event') {
+                } elseif ($event_type == 'professional_event') {
                     $query->where('account_type', '1');
                 }
-            })->orderBy('id', 'desc');
+            });
+
+            // dd($data->toSql());
+            if($col=="0"){
+                $data->orderBy('id','desc');
+            }
+            if($col=="1"){
+                $data->orderBy('event_name',$order);
+            }if($col=="2"){
+                $data->orderByRaw('(select firstname from users where users.id = events.user_id)' . strtoupper($order)); 
+            }
+            if($col=="3"){
+                $data->orderByRaw('(select email from users where users.id = events.user_id)' . strtoupper($order)); 
+            }
+            if($col=="4"){
+                $data->orderBy('start_date',$order);
+            }
+            if($col=="5"){
+                $data->orderBy('end_date',$order);
+            }
+            if($col=="6"){
+                $data->orderBy('event_location_nameevent_location_name',$order);
+            }
+
             
             if ($eventDate && $status != 'past_events' ) {
                 $data->where('start_date', $eventDate);
@@ -66,9 +92,10 @@ class EventController extends Controller
                        $data->where(function ($q) use ($nameParts, $search) {
                            if (count($nameParts) > 1) {
                                // Search for firstname and lastname separately
-                               $q->whereHas('user', function ($q) use ($nameParts) {
+                               $q->whereHas('user', function ($q) use ($nameParts,$search) {
                                    $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
-                                     ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                                     ->where('lastname', 'LIKE', "%{$nameParts[1]}%")
+                                     ->orWhere('email','LIKE',"%{$search}%");
                                })->orWhere('event_name','LIKE',"%{$search}%")
                                ->orWhere('start_date','LIKE',"%{$search}%")
                                ->orWhere('event_location_name','LIKE',"%{$search}%");
@@ -76,15 +103,15 @@ class EventController extends Controller
                                // Search for firstname or lastname if only one term is provided
                                $q->whereHas('user', function ($q) use ($search) {
                                    $q->where('firstname', 'LIKE', "%{$search}%")
-                                     ->orWhere('lastname', 'LIKE', "%{$search}%");
+                                     ->orWhere('lastname', 'LIKE', "%{$search}%")
+                                     ->orwhere('email','LIKE',"%{$search}%");
                                })->orWhere('event_name','LIKE',"%{$search}%")
                                ->orWhere('start_date','LIKE',"%{$search}%")
                                ->orWhere('event_location_name','LIKE',"%{$search}%");
-
-
                            }
                        });
                    }
+                    
                })
                 ->addColumn('number', function ($row) {
                     $page = request()->get('start') / request()->get('length') + 1;

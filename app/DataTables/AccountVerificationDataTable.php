@@ -45,7 +45,9 @@ class AccountVerificationDataTable extends DataTable
                         } else {
                             // If only one search term, search both firstname and lastname
                             $q->where('firstname', 'LIKE', "%{$keyword}%")
-                              ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                              ->orWhere('lastname', 'LIKE', "%{$keyword}%")
+                              ->orWhere('email', 'LIKE', "%{$keyword}%");
+
                         }
                     });
                 }
