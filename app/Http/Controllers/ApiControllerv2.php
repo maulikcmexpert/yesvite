@@ -1218,15 +1218,15 @@ class ApiControllerv2 extends Controller
                         $eventDetail['user_id'] = $value->user->id;
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                         $eventDetail['event_wall'] = (isset($value->event_settings->event_wall) && $value->event_settings->event_wall !='')?$value->event_settings->event_wall:0;
-                        $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
+                        $eventDetail["guest_list_visible_to_guests"] = (isset($value->event_settings->guest_list_visible_to_guests) && $value->event_settings->guest_list_visible_to_guests!= '')?$value->event_settings->guest_list_visible_to_guests:0;
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
-                        $eventDetail['event_potluck'] = $value->event_settings->podluck;
-                        $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
+                        $eventDetail['event_potluck'] = (isset($value->event_settings->podluck) && $value->event_settings->podluck!= '')?$value->event_settings->podluck:0;
+                        $eventDetail['adult_only_party'] = (isset($value->event_settings->adult_only_party) && $value->event_settings->adult_only_party!='')?$value->event_settings->adult_only_party:0;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                         $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                        $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
+                        $eventDetail['allow_limit'] = (isset($value->event_settings->allow_limit) && $value->event_settings->allow_limit!='')?$value->event_settings->allow_limit:0;
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
 
