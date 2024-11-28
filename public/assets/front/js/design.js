@@ -534,14 +534,14 @@ function bindData(current_event_id) {
             // Load static information (text elements)
             if (dbJson) {
                 const staticInfo = {};
+                console.log(dbJson);
                 if(current_event_id != '' && (eventData.desgin_selected =='')){
-                    console.log(eventData.desgin_selected);
+                    // console.log(eventData.desgin_selected);
                     staticInfo.textElements = dbJson;
                 }else{
-                    console.log(2);
+                    // console.log(2);
                     staticInfo = dbJson;
                 }
-                console.log(dbJson);
                 console.log(staticInfo);
                 staticInfo.textElements.forEach((element) => {
                     const textMeasurement = new fabric.Text(element.text, {
