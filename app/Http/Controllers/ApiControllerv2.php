@@ -1382,7 +1382,7 @@ class ApiControllerv2 extends Controller
             $allPastEventC = $usercreatedAllPastEventCount->union($total_past_event)->orderByDesc('id')->get();
             $totalPastEventCount = count($allPastEventC);
 
-            if ($input['past_event'] == '1') {
+            if ($input['past_event'] == '1' && $input['hosting'] == '0' && $input['invited_to'] == '0' && $input['need_rsvp_to'] == '0') {
 
                 $usercreatedAllPastEventList = Event::query();
                 $usercreatedAllPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
