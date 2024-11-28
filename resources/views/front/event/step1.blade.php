@@ -634,6 +634,8 @@
                 @endphp
                 @endwhile
             @else
+            @if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != "")
+            
             @php
                 $start_date = '';
                 $end_date = '';
@@ -646,8 +648,6 @@
                 }
             @endphp
             @php
-
-                
                 $currentDate = $eventDetail['start_date']; 
                 $i = 0;
             @endphp
@@ -716,6 +716,7 @@
                 $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day')); 
             @endphp
             @endwhile
+            @endif
             @endif
         </div>
     </div>
