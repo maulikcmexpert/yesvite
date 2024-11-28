@@ -651,6 +651,9 @@
                 $currentDate = (isset($eventDetail['start_date']) && $eventDetail['start_date']!=""); 
                 $i = 0;
             @endphp
+            @if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != "")
+                
+            
             @while (strtotime($currentDate) <= strtotime($eventDetail['end_date']))
             <div class="activity-schedule-wrp">
                 <div class="activity-schedule-head">
@@ -716,6 +719,7 @@
                 $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day')); 
             @endphp
             @endwhile
+            @endif
             @endif
         </div>
     </div>
