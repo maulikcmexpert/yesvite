@@ -7387,6 +7387,9 @@ class ApiControllerv2 extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
+                if(!empty($eventDetails['co_host_list'])){
+                    $eventData[] = "Co-Host";
+                }
                 // if (empty($eventData)) {
                 //     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                 //     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
