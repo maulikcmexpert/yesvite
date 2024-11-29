@@ -3522,9 +3522,9 @@ $(document).on("click", ".li_guest", function () {
         var design = eventData.desgin_selected;
     // }
     
-    if( design == undefined || design == ''){
+    // if( design == undefined || design == ''){
     //     console.log(final_step);
-    // if( final_step <= '2'){
+    if( final_step <= '2'){
         return;
     }else{
         $(".step_1").css("display", "none");
