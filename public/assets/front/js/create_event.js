@@ -3513,14 +3513,16 @@ function active_responsive_dropdown(current_page,design_page = null){
 }
 
 $(document).on("click", ".li_guest", function () {
-    var eventDetail2 = $('#eventDetail').val();
-    eventDetail2 = JSON.parse(eventDetail2);
-    if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
-        var design = eventDetail2.static_information;
-    }else{
-        var design = eventData.desgin_selected;
-    }
-    if( design == undefined || design == ''){
+    // var eventDetail2 = $('#eventDetail').val();
+    // eventDetail2 = JSON.parse(eventDetail2);
+    // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
+    //     var design = eventData.desgin_selected;
+    // }else{
+    //     var design = eventData.desgin_selected;
+    // }
+    
+    // if( design == undefined || design == ''){
+    if( final_step <= '2'){
         return;
     }else{
         $(".step_1").css("display", "none");
