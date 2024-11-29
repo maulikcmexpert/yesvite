@@ -3540,7 +3540,8 @@ $(document).on("click", ".li_guest", function () {
         $('#sidebar_select_design_category').css('display','none');
         active_responsive_dropdown('drop-down-event-guest');
         handleActiveClass('.li_guest');
-
+        var type="all"
+        get_user(type);
     }
 });
 
