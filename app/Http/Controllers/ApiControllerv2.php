@@ -2747,7 +2747,7 @@ class ApiControllerv2 extends Controller
             $validator = Validator::make($input, [
                 'firstname' => ['required'],
                 'lastname' => ['required'],
-                'email' => 'required|email|unique:users',
+                'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
                 'prefer_by' => ['required', 'in:email,phone']
 
             ]);
@@ -2756,9 +2756,8 @@ class ApiControllerv2 extends Controller
                 'firstname' => ['required'],
                 'lastname' => ['required'],
                 'country_code' => ['required'],
-                // 'phone_number' => ['required', 'unique:users,phone_number'],
-                'phone_number' => 'required|unique:users',
-                'email' => 'required|email|unique:users',
+                'phone_number' => ['required', 'unique:users,phone_number'],
+                'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
                 'prefer_by' => ['required', 'in:email,phone']
 
             ]);
