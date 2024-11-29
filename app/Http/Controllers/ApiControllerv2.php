@@ -3161,8 +3161,8 @@ class ApiControllerv2 extends Controller
                     $template_data['event_design_sub_category_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id  != null) ? $data->event_design_sub_category_id : '';
                     $template_data['event_design_category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
-                    $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['height'] = (isset($data->width) && $data->width != null) ? $data->width : '';
+                    $template_data['width'] = (isset($data->height) && $data->height != null) ? $data->height : '';
                     $url = asset('storage/canvas/' . $data->filled_image);
                     $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
                     // $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
