@@ -71,6 +71,7 @@ $(document).ready(function () {
         eventData.message_to_guests = eventDetail.message_to_guests;
         eventData.longitude = eventDetail.longitude;
         eventData.latitude = eventDetail.latitude;
+        final_step = eventDetail.step;
         console.log(eventData);
         console.log(eventDetail);
         if(current_step == '2'){
