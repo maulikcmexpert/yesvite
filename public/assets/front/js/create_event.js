@@ -3522,6 +3522,7 @@ $(document).on("click", ".li_guest", function () {
     // }
     
     // if( design == undefined || design == ''){
+        console.log(final_step);
     if( final_step <= '2'){
         return;
     }else{
