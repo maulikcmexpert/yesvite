@@ -3513,7 +3513,13 @@ function active_responsive_dropdown(current_page,design_page = null){
 }
 
 $(document).on("click", ".li_guest", function () {
-    var design = eventData.desgin_selected;
+    var eventDetail2 = $('#eventDetail').val();
+    eventDetail2 = JSON.parse(eventDetail2);
+    if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
+        var design = eventDetail2.static_information;
+    }else{
+        var design = eventData.desgin_selected;
+    }
     if( design == undefined || design == ''){
         return;
     }else{
