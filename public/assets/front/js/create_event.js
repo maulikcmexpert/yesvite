@@ -3519,12 +3519,12 @@ $(document).on("click", ".li_guest", function () {
     // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
     //     var design = eventData.desgin_selected;
     // }else{
-    //     var design = eventData.desgin_selected;
+        var design = eventData.desgin_selected;
     // }
     
-    // if( design == undefined || design == ''){
-        console.log(final_step);
-    if( final_step <= '2'){
+    if( design == undefined || design == ''){
+    //     console.log(final_step);
+    // if( final_step <= '2'){
         return;
     }else{
         $(".step_1").css("display", "none");
