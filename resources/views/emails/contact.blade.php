@@ -34,7 +34,7 @@
          <tbody>
             <tr>
                <td>
-                  <img src="{{ asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px" alt="logo">
+                  <img src="{{ asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:65px" alt="logo">
                </td>
             </tr>
             <tr>

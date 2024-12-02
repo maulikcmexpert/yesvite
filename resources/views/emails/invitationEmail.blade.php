@@ -113,8 +113,8 @@
             <tbody>
                 <tr>
                     <td>
-                        <div style="width: 100%;max-width: 150px;height:40px">
-                            <img src="{{asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:40px" alt="logo">
+                        <div style="width: 100%;max-width: 150px;height:65px">
+                            <img src="{{asset('public/storage/yesvitelogo.png')}}" style="width: 100%;max-width: 150px;height:65px" alt="logo">
                         </div>
                     </td>
                 </tr>
