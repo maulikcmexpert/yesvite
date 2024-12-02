@@ -1677,11 +1677,14 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
 {
     $ch = curl_init();
     $clientId = env('InGOOGLE_CLIENT_ID');
-
     $clientSecret = env('InGOOGLE_CLIENT_SECRET');
-    $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+    $redirectUri = env('INAPP_REDIRECT_URL');
+    $refreshToken = env('INAPP_PURCHASE_REFRESH_TOKEN');
 
-    $refreshToken = '1//0gNUrRx3nx_asCgYIARAAGBASNwF-L9Ir-s8ZuTC1TOFWoOvWDbyzUtdTG6z40XfSaTLekuuEEGW43Pqb_WMyS5qdJcb0v7H4KEg';
+    // $clientSecret = env('InGOOGLE_CLIENT_SECRET');
+    // $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+
+    // $refreshToken = '1//0gNUrRx3nx_asCgYIARAAGBASNwF-L9Ir-s8ZuTC1TOFWoOvWDbyzUtdTG6z40XfSaTLekuuEEGW43Pqb_WMyS5qdJcb0v7H4KEg';
 
 
     $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
@@ -1711,23 +1714,38 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = curl_exec($ch);
     $result = json_decode($result, true);
 
-    if (!$result || !$result["access_token"]) {
-        //error  
-        // return;
+    // if (!$result || !$result["access_token"]) {
+    //     //error  
+    //     // return;
+    // }
+    if (isset($result['access_token']) && $result['access_token'] != null) {
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result1 = curl_exec($ch);
+        $result1 = json_decode($result1, true);
+        if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+            //error
+            // return;
+        }
+    } else {
+        $result1 = $result;
     }
-
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result1 = curl_exec($ch);
-    $result1 = json_decode($result1, true);
-    if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
-        //error
-        // return;
-    }
-
+    // dd($result1);
     return $result1;
+
+    // $ch = curl_init();
+    // curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // $result1 = curl_exec($ch);
+    // $result1 = json_decode($result1, true);
+    // if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+    //     //error
+    //     // return;
+    // }
+
+    // return $result1;
 }
 
 function set_apple_iap($receipt)
