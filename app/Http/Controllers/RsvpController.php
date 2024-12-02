@@ -92,19 +92,19 @@ class RsvpController extends Controller
                 $is_adultOnly = (isset($event->event_settings->adult_only_party) ? $event->event_settings->adult_only_party : "");
 
 
-                // return view('layout', compact(
-                //     'title',
-                //     'page',
-                //     'js',
-                //     'event',
-                //     'giftRegistryDetails',
-                //     'isInvited',
-                //     'event_id',
-                //     'user_id',
-                //     'is_podluck',
-                //     'is_adultOnly'
-                // ));
-                return redirect('home');
+                return view('layout', compact(
+                    'title',
+                    'page',
+                    'js',
+                    'event',
+                    'giftRegistryDetails',
+                    'isInvited',
+                    'event_id',
+                    'user_id',
+                    'is_podluck',
+                    'is_adultOnly'
+                ));
+                // return redirect('home');
             }
             return redirect('home')->with('error', 'You are not connect with this event');
         }
