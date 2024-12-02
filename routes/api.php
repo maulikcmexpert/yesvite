@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiContactController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ApiControllerv1 as ApiControllerv1;
 use App\Http\Controllers\ApiControllerv2 as ApiControllerv2;
@@ -212,6 +213,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::get('notificationtest', [ApiControllerv2::class, 'notificationtest']);
 
     Route::get('logout', [ApiControllerv2::class, 'logout']);
+    Route::post('sync_contact', [ApiContactController::class, 'sync_contact']);
 });
 
 
