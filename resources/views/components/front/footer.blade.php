@@ -39,7 +39,7 @@
 <script src="{{ asset('assets/front/js/design.js') }}"></script>
 
 <script src="{{ asset('assets/front/js/map.js') }}"></script>
-<script src="{{ asset('assets/front/js/map.js') }}"></script>
+{{-- <script src="{{ asset('assets/front/js/map.js') }}"></script> --}}
 <script src="{{ asset('assets/front/js/contact_us.js') }}"></script>
 
 
@@ -75,7 +75,7 @@
 
 {{-- <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW43KgTNs_Kusuvbian6KYGi_QzXOLS4w&libraries=places&callback=initMap" ></script> --}}
 <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW43KgTNs_Kusuvbian6KYGi_QzXOLS4w&callback=initMap&v=weekly&libraries=places"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ6e3i9cPi2enVGmw16LlPWieJUjvrrYU&callback=initMap&v=weekly&libraries=places"
 defer
 ></script>
 
