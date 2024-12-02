@@ -234,6 +234,8 @@ class ApiContactController extends Controller
                     $duplicateContact['firstName'] = $userDetail->firstname;
                     $duplicateContact['lastName'] = $userDetail->lastname;
                     $duplicateContact['photo'] = (isset($userDetail->profile) && $userDetail->profile != '')?asset('storage/contact_profile/' . $userDetail->profile):'';
+                    $duplicateContact['isAppUser'] = (int)(isset($userDetail->app_user) && $userDetail->app_user != '')?$userDetail->app_user:0;
+                    
                 }
             }
         }
