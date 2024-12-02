@@ -121,7 +121,10 @@ class ApiContactController extends Controller
     public function sync_contact(Request $request)
     {
         $user = Auth::guard('api')->user();
-        $contacts = $request->input('contacts');
+        $rawData = $request->getContent();
+        $contacts = json_decode($rawData, true);
+        // dd($input);
+        // $contacts = $request->input('contacts');
 
         if (empty($contacts)) {
             return response()->json(['message' => 'No contacts provided.'], 400);
@@ -133,10 +136,7 @@ class ApiContactController extends Controller
 
         // Process each contact
         foreach ($contacts as $contact) {
-
             if (!empty($contact['firstName']) && !empty($contact['phone'])) {
-
-
                 // Check if contact already exists in `contact_sync`
                 $existingContact = contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($contact) {
@@ -151,10 +151,10 @@ class ApiContactController extends Controller
 
                         'firstName' => $contact['firstName'],
                         'lastName' => $contact['lastName'],
-                        'photo' => $existingContact['photo'] ?? "" ,
+                        'photo' => $contact['photo'] ?? "",
                         'phoneWithCode' => $contact['phoneWithCode'] ?? "",
-                        'isAppUser' => (int)isset($contact['isAppUser']) ?  $contact['isAppUser'] : '0',
-                        'visible' => (int)isset($contact['visible']) ?  $contact['visible'] : '0',
+                        'isAppUser' => isset($contact['isAppUser']) ? (string) $contact['isAppUser'] : '0',
+                        'visible' => isset($contact['visible']) ? (string) $contact['visible'] : '0',
                         'prefer_by' => isset($contact['prefer_by']) ? (string) $contact['prefer_by'] : 'phone',
                         'updated_at' => now(),
                     ]);
@@ -162,36 +162,34 @@ class ApiContactController extends Controller
                     // Add to duplicates array
                     $duplicateContacts[] = [
                         'id' => $existingContact['id'],
-                        'userId' => 0, // To be updated later
+                        'user_id' => null, // To be updated later
                         'contact_id' => $user->id,
-                        'firstName' => $contact['firstName'] ?? "",
-                        'lastName' => $contact['lastName'] ?? "",
+                        'firstName' => $contact['firstName'],
+                        'lastName' => $contact['lastName'],
                         'phone' => $contact['phone'],
                         'email' => $contact['email'] ?? "",
-                        'photo' => $existingContact['photo'] ?? "" ,
+                        'photo' => $contact['photo'] ?? "",
                         'phoneWithCode' => $contact['phoneWithCode'] ?? "",
-                        'isAppUser' => (int)isset($contact['isAppUser']) ?  $contact['isAppUser'] : '0',
-                        'visible' => (int)isset($contact['visible']) ?  $contact['visible'] : '0',
+                        'isAppUser' => isset($contact['isAppUser']) ? (string) $contact['isAppUser'] : '0',
+                        'visible' => isset($contact['visible']) ? (string) $contact['visible'] : '0',
                         'prefer_by' => isset($contact['prefer_by']) ? (string) $contact['prefer_by'] : 'phone',
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
                 } else {
-                    // Handle photo upload if it is an instance of UploadedFile
-
                     // Prepare contact for bulk insert
                     $insertedContacts[] = [
-                        'userId' => null,
-
+                        'user_id' => null,
+                        'id' => null,
                         'contact_id' => $user->id,
-                        'firstName' => $contact['firstName'] ?? "",
-                        'lastName' => $contact['lastName'] ?? "",
+                        'firstName' => $contact['firstName'],
+                        'lastName' => $contact['lastName'],
                         'phone' => $contact['phone'],
                         'email' => $contact['email'] ?? "",
-                        'photo'  => $contact['photo'] ?? "",
+                        'photo' => $contact['photo'] ?? "",
                         'phoneWithCode' => $contact['phoneWithCode'] ?? "",
-                        'isAppUser' => isset($contact['isAppUser']) ? (string)$contact['isAppUser'] : '0',
-                        'visible' => isset($contact['visible']) ?  (string)$contact['visible'] : '0',
+                        'isAppUser' => isset($contact['isAppUser']) ? (string) $contact['isAppUser'] : '0',
+                        'visible' => isset($contact['visible']) ? (string) $contact['visible'] : '0',
                         'prefer_by' => isset($contact['prefer_by']) ? (string) $contact['prefer_by'] : 'phone',
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -209,7 +207,7 @@ class ApiContactController extends Controller
         $emails = array_filter(array_column($contacts, 'email'));
         $phoneNumbers = array_filter(array_column($contacts, 'phone'));
 
-        $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile')
+        $userDetails = User::select('id', 'email', 'phone_number')
             ->whereIn('email', $emails)
             ->orWhereIn('phone_number', $phoneNumbers)
             ->get();
@@ -220,40 +218,34 @@ class ApiContactController extends Controller
                 ->where(function ($query) use ($userDetail) {
                     $query->where('email', $userDetail->email)
                         ->orWhere('phone', $userDetail->phone_number);
-                })->update([
-                    'userId' =>  $userDetail->id ?? 0,
-                    'firstName' => $userDetail->firstname,
-                    'lastName' => $userDetail->lastname
-                ]);
+                })
+                ->update(['user_id' => $userDetail->id]);
             foreach ($duplicateContacts as &$duplicateContact) {
                 if (
                     ($duplicateContact['email'] === $userDetail->email) ||
                     ($duplicateContact['phone'] === $userDetail->phone_number)
                 ) {
-                    $duplicateContact['userId'] = $userDetail->id; // Update user_id
-                    $duplicateContact['firstName'] = $userDetail->firstname;
-                    $duplicateContact['lastName'] = $userDetail->lastname;
-                    $duplicateContact['photo'] = (isset($userDetail->profile) && $userDetail->profile != '')?asset('storage/contact_profile/' . $userDetail->profile):'';
+                    $duplicateContact['user_id'] = $userDetail->id; // Update user_id
+
                 }
             }
         }
 
-
         // Filter duplicate contacts to include only those with updated user_id
         $updatedDuplicateContacts = array_filter($duplicateContacts, function ($contact) {
-            return !is_null($contact['userId']);
+            return !is_null($contact['user_id']);
         });
 
-        // Prepare the response
-        $message = empty($updatedDuplicateContacts)
+       // Prepare the response
+            $message = empty($updatedDuplicateContacts)
             ? 'Contacts inserted successfully.'
             : 'Some contacts already exist.';
 
-        $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
+            $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
 
-        return response()->json([
+            return response()->json([
             'message' => $message,
             'all_contacts' => $allContacts,
-        ], 200); // Prepare the response
+            ], 200);// Prepare the response
     }
 }
