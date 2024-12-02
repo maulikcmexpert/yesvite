@@ -121,6 +121,9 @@ class ApiContactController extends Controller
     public function sync_contact(Request $request)
     {
         $user = Auth::guard('api')->user();
+        $rawData = $request->getContent();
+        $input = json_decode($rawData, true);
+        dd($input);
         $contacts = $request->input('contacts');
 
         if (empty($contacts)) {
