@@ -1647,26 +1647,46 @@ function checkSubscription($userId)
         }else{
 
             $responce =  set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
-    
-    
-            $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-    
-    
-            $current_date = date('Y-m-d H:i:s');
-    
-            if (strtotime($current_date) > strtotime($exp_date)) {
-    
-                $userSubscription->endDate = $exp_date;
-                $userSubscription->save();
-                return false;
+            if (isset($responce) && !empty($responce)) {
+                if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
+                    $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+                    $date = Carbon::parse($exp_date);
+                    $current_date = date('Y-m-d H:i:s');
+                    if (strtotime($current_date) > strtotime($exp_date)) {
+                        $userSubscription->endDate = $exp_date;
+                        $userSubscription->save();
+                        return false;
+                    }
+                }
+                if (isset($responce['userCancellationTimeMillis'])) {
+                    $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+                    $userSubscription->cancellationdate = $cancellationdate;
+                    $userSubscription->save();
+                    return false;
+                }
+                if (isset($responce['error'])) {
+                    return false;
+                }
             }
-            if (isset($responce['userCancellationTimeMillis'])) {
     
-                $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
-                $userSubscription->cancellationdate = $cancellationdate;
-                $userSubscription->save();
-                return false;
-            }
+            // $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+    
+    
+            // $current_date = date('Y-m-d H:i:s');
+    
+            // if (strtotime($current_date) > strtotime($exp_date)) {
+    
+            //     $userSubscription->endDate = $exp_date;
+            //     $userSubscription->save();
+            //     return false;
+            // }
+            // if (isset($responce['userCancellationTimeMillis'])) {
+    
+            //     $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+            //     $userSubscription->cancellationdate = $cancellationdate;
+            //     $userSubscription->save();
+            //     return false;
+            // }
         }
         return true;
     }
