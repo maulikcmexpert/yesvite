@@ -124,7 +124,7 @@
                         </div>
                         <div class="rsvp-btns d-flex">
                             {{-- <button type="button"  class="cancel-btn">Cancel</button> --}}
-                            <a  href="javascript:close_window();" class="cancel-btn">Cancel</a>
+                            <a  href="{{route('front.home')}}" class="cancel-btn">Cancel</a>
                             <button type="submit" class="send-btn">Send</button>
                         </div>
                     </form>
