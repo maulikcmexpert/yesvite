@@ -30,6 +30,7 @@
     align-items: center;
     justify-content: center;
     height: 26px;
+    display: none !important;
 }
 
 .rsvp-slider.owl-carousel .owl-dots button {
