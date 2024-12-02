@@ -209,7 +209,7 @@ class ApiContactController extends Controller
         $emails = array_filter(array_column($contacts, 'email'));
         $phoneNumbers = array_filter(array_column($contacts, 'phone'));
 
-        $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile')
+        $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile','app_user')
             ->whereIn('email', $emails)
             ->orWhereIn('phone_number', $phoneNumbers)
             ->get();
@@ -235,7 +235,6 @@ class ApiContactController extends Controller
                     $duplicateContact['lastName'] = $userDetail->lastname;
                     $duplicateContact['photo'] = (isset($userDetail->profile) && $userDetail->profile != '')?asset('storage/contact_profile/' . $userDetail->profile):'';
                     $duplicateContact['isAppUser'] = (int)(isset($userDetail->app_user) && $userDetail->app_user != '')?$userDetail->app_user:0;
-                    
                 }
             }
         }
