@@ -70,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Kolkata',
+    // 'timezone' => 'Asia/Kolkata',
+    'timezone' => 'America/Los_Angeles',
 
     /*
     |--------------------------------------------------------------------------
