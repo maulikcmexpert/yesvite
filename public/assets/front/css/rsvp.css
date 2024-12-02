@@ -508,6 +508,10 @@
     color: #27B076;
 }
 
+.rsvp_count_member {
+    text-align: center;
+}
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px) {
