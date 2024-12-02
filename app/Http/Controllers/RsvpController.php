@@ -60,11 +60,11 @@ class RsvpController extends Controller
                     if ($event->start_date != $event->end_date) {
                         $eventData[] = "Multiple Day Event";
                     }
-                    if (empty($eventData)) {
-                        $eventData[] = date('F d, Y', strtotime($event->start_date));
-                        $numberOfGuest = EventInvitedUser::where('event_id', $event->id)->count();
-                        $eventData[] = "Number of guests : " . $numberOfGuest;
-                    }
+                    // if (empty($eventData)) {
+                    //     $eventData[] = date('F d, Y', strtotime($event->start_date));
+                    //     $numberOfGuest = EventInvitedUser::where('event_id', $event->id)->count();
+                    //     $eventData[] = "Number of guests : " . $numberOfGuest;
+                    // }
                     $event['event_detail'] = $eventData;
                 }
 
@@ -92,18 +92,19 @@ class RsvpController extends Controller
                 $is_adultOnly = (isset($event->event_settings->adult_only_party) ? $event->event_settings->adult_only_party : "");
 
 
-                return view('layout', compact(
-                    'title',
-                    'page',
-                    'js',
-                    'event',
-                    'giftRegistryDetails',
-                    'isInvited',
-                    'event_id',
-                    'user_id',
-                    'is_podluck',
-                    'is_adultOnly'
-                ));
+                // return view('layout', compact(
+                //     'title',
+                //     'page',
+                //     'js',
+                //     'event',
+                //     'giftRegistryDetails',
+                //     'isInvited',
+                //     'event_id',
+                //     'user_id',
+                //     'is_podluck',
+                //     'is_adultOnly'
+                // ));
+                return redirect('home');
             }
             return redirect('home')->with('error', 'You are not connect with this event');
         }
