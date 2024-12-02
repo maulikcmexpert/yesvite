@@ -228,7 +228,7 @@
                 <tr>
                     <td>
                         <div class="social-icons" style="display: flex;align-items: center;justify-content: space-between;">
-                            <div style="width: 100%;max-width: 95px;height: 24px;"><img src="{{ asset('public/storage/yesvitelogo.png')}}" alt="" style="width: 100%;height: 100%;"></div>
+                            <div style="width: 100%;max-width: 95px;height: 50px;"><img src="{{ asset('public/storage/yesvitelogo.png')}}" alt="" style="width: 100%;height: 100%;"></div>
                             <ul style="display: flex;align-items: center;gap: 10px;margin: 0px 0px;">
                                 <li style="list-style-type: none;"><a href="" style="color: #475569;width: 100%;max-width: 16px;height: 16px;"><i class="fa-brands fa-facebook"></i></a></li>
                                 <li style="list-style-type: none;"><a href="" style="color: #475569;width: 100%;max-width: 16px;height: 16px;"><i class="fa-brands fa-twitter"></i></a></li>
