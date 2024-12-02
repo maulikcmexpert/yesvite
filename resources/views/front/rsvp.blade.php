@@ -123,7 +123,8 @@
                             <textarea name="message_to_host" id="" placeholder="Message to host......">{{ ($isInvited->message_to_host != NULL)?$isInvited->message_to_host:""}}</textarea>
                         </div>
                         <div class="rsvp-btns d-flex">
-                            <button type="button" onclick="close_window();return false;" class="cancel-btn">Cancel</button>
+                            {{-- <button type="button"  class="cancel-btn">Cancel</button> --}}
+                            <a  href="javascript:close_window();" class="cancel-btn">Cancel</a>
                             <button type="submit" class="send-btn">Send</button>
                         </div>
                     </form>
