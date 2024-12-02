@@ -162,7 +162,7 @@ class ApiContactController extends Controller
                     // Add to duplicates array
                     $duplicateContacts[] = [
                         'id' => $existingContact['id'],
-                        'userId' => 0, // To be updated later
+                        'user_id' => 0, // To be updated later
                         'contact_id' => $user->id,
                         'firstName' => $contact['firstName'] ?? "",
                         'lastName' => $contact['lastName'] ?? "",
@@ -181,7 +181,7 @@ class ApiContactController extends Controller
 
                     // Prepare contact for bulk insert
                     $insertedContacts[] = [
-                        'userId' => null,
+                        'user_id' => null,
 
                         'contact_id' => $user->id,
                         'firstName' => $contact['firstName'] ?? "",
@@ -221,7 +221,7 @@ class ApiContactController extends Controller
                     $query->where('email', $userDetail->email)
                         ->orWhere('phone', $userDetail->phone_number);
                 })->update([
-                    'userId' =>  $userDetail->id ?? 0,
+                    'user_id' =>  $userDetail->id ?? 0,
                     'firstName' => $userDetail->firstname,
                     'lastName' => $userDetail->lastname
                 ]);
