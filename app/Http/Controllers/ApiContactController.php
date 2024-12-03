@@ -203,7 +203,7 @@ class ApiContactController extends Controller
             }
             unset($contact);
         }
-        dd($insertedContacts);
+        // dd($insertedContacts);
         // Update duplicate contacts with user details
         $emails = array_filter(array_column($contacts, 'email'));
         $phoneNumbers = array_filter(array_column($contacts, 'phone'));
