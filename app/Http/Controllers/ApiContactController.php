@@ -221,9 +221,7 @@ class ApiContactController extends Controller
             // Find matching contacts using array_search()
             $index = array_search(true, array_map(function ($duplicateContact) use ($userDetail) {
                 if($duplicateContact['email'] == $userDetail->email || $duplicateContact['phone'] == $userDetail->phone_number){
-                    if($userDetail->phone_number == '7567264803'){
-                        dd($userDetail);
-                    }
+                    
                     return $duplicateContact['email'] === $userDetail->email;
                 }
                 // return $duplicateContact['email'] === $userDetail->email || $duplicateContact['phone'] === $userDetail->phone_number;
@@ -241,9 +239,9 @@ class ApiContactController extends Controller
                 $duplicateContacts[$index]['phone'] = $userDetail->phone_number;
                 $duplicateContacts[$index]['photo'] = $userDetail->profile ? asset('storage/profile/' . $userDetail->profile) : '';
 
-                // if($userDetail->email == 'rocky123@yopmail.com'){
-                //     dd($duplicateContacts);
-                // }
+                if($userDetail->phone_number == '7567264803'){
+                    dd($duplicateContacts);
+                }
             }
         }
         // foreach ($userDetails as $userDetail) {
