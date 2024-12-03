@@ -140,10 +140,8 @@ class ApiContactController extends Controller
                     ->first();
 
                 if ($existingContact) {
-
-                    // dd($existingContact);
                     // Update existing contact
-                    $existingContact->update([
+                    $updatedContactId = tap($existingContact)->update([
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
                         'lastName' => (isset($contact['lastName']) && $contact['lastName'] != '')?$contact['lastName']:'',
                         'photo' => ($contact['photo']!='')?$contact['photo']:'',
@@ -152,11 +150,11 @@ class ApiContactController extends Controller
                         'visible' => (int)($contact['visible'] ?? 0),
                         'preferBy' => (isset($contact['preferBy']) && $contact['preferBy'] != '')?$contact['preferBy']:'',
                         'updated_at' => now(),
-                    ]);
+                    ])->id;
 
                     // Add to duplicate contacts array with updated details
                     $duplicateContacts[] = [
-                        'id' => $existingContact->id,
+                        'id' => $updatedContactId,
                         'userId' => null,
                         'contact_id' => $user->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
