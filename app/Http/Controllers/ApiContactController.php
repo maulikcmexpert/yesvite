@@ -141,9 +141,7 @@ class ApiContactController extends Controller
 
                 if ($existingContact) {
                     $id = $existingContact->id;
-                    if($id > 3){
-                        dd($existingContact);
-                    }
+                   
                     // Update existing contact
                     $existingContact->update([
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
