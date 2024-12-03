@@ -144,7 +144,7 @@ class ApiContactController extends Controller
                     $existingContact->update([
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
                         'lastName' => (isset($contact['lastName']) && $contact['lastName'] != '')?$contact['lastName']:'',
-                        'photo' => $existingContact->photo ?? ($contact['photo']!='')?$contact['photo']:'',
+                        'photo' => ($contact['photo']!='')?$contact['photo']:'',
                         'phoneWithCode' => (isset($contact['phoneWithCode']) && $contact['phoneWithCode'] !='')?$contact['phoneWithCode']:'',
                         'isAppUser' => (int)($contact['isAppUser'] ?? 0),
                         'visible' => (int)($contact['visible'] ?? 0),
@@ -160,7 +160,7 @@ class ApiContactController extends Controller
                         'lastName' => (isset($contact['lastName']) && $contact['lastName'] != '')?$contact['lastName']:'',
                         'phone' => (isset($contact['phone']) && $contact['phone'] != '')?$contact['phone']:'',
                         'email' => (isset($contact['email']) && $contact['email'] != '')?$contact['email']:'',
-                        'photo' => $existingContact->photo ?? ($contact['photo']!='')?$contact['photo']:'',
+                        'photo' => ($contact['photo']!='')?$contact['photo']:'',
                         'phoneWithCode' => (isset($contact['phoneWithCode']) && $contact['phoneWithCode'] !='')?$contact['phoneWithCode']:'',
                         'isAppUser' => (int)($contact['isAppUser'] ?? 0),
                         'visible' => (int)($contact['visible'] ?? 0),
