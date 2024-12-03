@@ -140,6 +140,7 @@ class ApiContactController extends Controller
                     ->first();
 
                 if ($existingContact) {
+                    dd($existingContact);
                     // Update existing contact
                     $existingContact->update([
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
