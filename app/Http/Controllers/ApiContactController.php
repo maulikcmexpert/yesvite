@@ -177,7 +177,7 @@ class ApiContactController extends Controller
 
                     // Add to duplicate contacts array with updated details
                     $duplicateContacts[] = [
-                        'id' => $existingContact->id,
+                        'sync_id' => $existingContact->id,
                         'userId' => null,
                         'contact_id' => $user->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
@@ -221,7 +221,7 @@ class ApiContactController extends Controller
             ->pluck('id')                        
             ->toArray();
             foreach ($insertedContacts as $index => &$contact) {
-                $contact['id'] = $insertedIds[$index] ?? null;
+                $contact['sync_id'] = $insertedIds[$index] ?? null;
             }
             unset($contact);
         }
