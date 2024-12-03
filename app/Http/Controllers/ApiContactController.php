@@ -131,16 +131,35 @@ class ApiContactController extends Controller
 // dd($contacts);
         // Process each contact from the request
         foreach ($contacts as $contact) {
-            if (!empty($contact['firstName']) && (!empty($contact['phone']) || !empty($contact['email']))) {
+            if (!empty($contact['firstName']) && (!empty($contact['phoneWithCode']) || !empty($contact['email']))) {
 
-                
-
-                $existingContact = contact_sync::where('contact_id', $user->id)
+                if(!empty($contact['phoneWithCode']) && !empty($contact['email'])){
+                    $existingContact = contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($contact) {
                         $query->where('email', $contact['email'])
-                            ->orWhere('phone', $contact['phone']);
+                            ->where('phoneWithCode', $contact['phoneWithCode']);
                     })
                     ->first();
+                }elseif (empty($contact['phoneWithCode']) && !empty($contact['email'])) {
+                    $existingContact = contact_sync::where('contact_id', $user->id)
+                        ->where(function ($query) use ($contact) {
+                            $query->where('email', $contact['email']);
+                        })
+                        ->first();
+                }elseif (!empty($contact['phoneWithCode']) && empty($contact['email'])) {
+                    $existingContact = contact_sync::where('contact_id', $user->id)
+                        ->where(function ($query) use ($contact) {
+                            $query->where('phoneWithCode', $contact['phoneWithCode']);
+                        })
+                        ->first();
+                }
+
+                // $existingContact = contact_sync::where('contact_id', $user->id)
+                //     ->where(function ($query) use ($contact) {
+                //         $query->where('email', $contact['email'])
+                //             ->orWhere('phoneWithCode', $contact['phoneWithCode']);
+                //     })
+                //     ->first();
 
                 if ($existingContact) {
                    
