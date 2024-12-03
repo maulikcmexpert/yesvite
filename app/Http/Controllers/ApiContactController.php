@@ -226,7 +226,7 @@ class ApiContactController extends Controller
             if ($index !== false) {
                
                 // Update the matching contact
-                $duplicateContacts[$index]['userId'] = $userDetail->id;
+                $duplicateContacts[$index]['userId'] = (int)$userDetail->id;
                 $duplicateContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
                 $duplicateContacts[$index]['firstName'] = $userDetail->firstname;
                 $duplicateContacts[$index]['lastName'] = $userDetail->lastname;
