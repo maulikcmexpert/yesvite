@@ -2738,8 +2738,8 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
 
         $input = json_decode($rawData, true);
+        return response()->json(['status' => 0, 'message' => "Json invalid"]);
         if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
 
         if ($input['prefer_by'] == 'email') {
