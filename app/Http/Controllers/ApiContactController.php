@@ -320,6 +320,9 @@ class ApiContactController extends Controller
             if ($item['userId'] === null) {
                 $item['userId'] = 0;
             }
+            if ($item['phone'] === null) {
+                $item['phone'] = '';
+            }
             return $item;
         }, $mergeArray);
 
