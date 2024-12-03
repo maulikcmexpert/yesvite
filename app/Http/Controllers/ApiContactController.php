@@ -222,6 +222,8 @@ class ApiContactController extends Controller
             $index = array_search(true, array_map(function ($duplicateContact) use ($userDetail) {
                 if($duplicateContact['email'] === $userDetail->email){
                     return $duplicateContact['email'] === $userDetail->email;
+                }else if($duplicateContact['phone'] === $userDetail->phone_number){
+                    return  $duplicateContact['phone'] === $userDetail->phone_number;
                 }
                 // return $duplicateContact['email'] === $userDetail->email || $duplicateContact['phone'] === $userDetail->phone_number;
             }, $duplicateContacts));
