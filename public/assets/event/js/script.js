@@ -69,7 +69,7 @@ function progressBar(elem){
 
 // rsvp-slider
 $('.rsvp-slide').owlCarousel({
-  loop:false,
+  loop:true,
   margin:10,
   nav:true,
   responsive:{
