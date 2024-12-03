@@ -236,7 +236,7 @@ class ApiContactController extends Controller
                 $duplicateContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
 
                 if($userDetail->email == 'rocky123@yopmail.com'){
-                    dd($duplicateContacts[$index]);
+                    dd($duplicateContacts);
                 }
             }
         }
