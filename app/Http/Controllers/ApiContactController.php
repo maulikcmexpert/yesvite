@@ -220,7 +220,8 @@ class ApiContactController extends Controller
 
             // Find matching contacts using array_search()
             $index = array_search(true, array_map(function ($duplicateContact) use ($userDetail) {
-                return $duplicateContact['email'] === $userDetail->email || $duplicateContact['phone'] === $userDetail->phone_number;
+                // return $duplicateContact['email'] === $userDetail->email || $duplicateContact['phone'] === $userDetail->phone_number;
+                return $duplicateContact['email'] === $userDetail->email;
             }, $duplicateContacts));
 
             if ($index !== false) {
