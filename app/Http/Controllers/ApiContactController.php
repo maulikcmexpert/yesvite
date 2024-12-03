@@ -226,6 +226,7 @@ class ApiContactController extends Controller
                     }
 
                     if($duplicateContact['phone'] == $userDetail->phone_number){
+                        dd($duplicateContact);
                         return $duplicateContact['phone'] === $userDetail->phone_number;
                     }
                 }
