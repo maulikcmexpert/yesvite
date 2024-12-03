@@ -203,7 +203,7 @@ class ApiContactController extends Controller
         ->orWhereIn('phone_number', $phoneNumbers)
         ->get();
         
-        dd($userDetails);
+        
 
         foreach ($userDetails as $userDetail) {
             // Update existing contacts in the database
@@ -224,7 +224,7 @@ class ApiContactController extends Controller
             }, $duplicateContacts));
 
             if ($index !== false) {
-                // dd($duplicateContacts[$index]);
+                dd($duplicateContacts[$index]);
                 // Update the matching contact
                 $duplicateContacts[$index]['userId'] = $userDetail->id;
                 $duplicateContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
