@@ -142,6 +142,7 @@ class ApiContactController extends Controller
                 if ($existingContact) {
                     // Update existing contact
                     $existingContact->update([
+                        'id' => $existingContact->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
                         'lastName' => (isset($contact['lastName']) && $contact['lastName'] != '')?$contact['lastName']:'',
                         'photo' => ($contact['photo']!='')?$contact['photo']:'',
@@ -154,6 +155,7 @@ class ApiContactController extends Controller
 
                     // Add to duplicate contacts array with updated details
                     $duplicateContacts[] = [
+                        'id' => $existingContact->id,
                         'userId' => null,
                         'contact_id' => $user->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
@@ -192,6 +194,14 @@ class ApiContactController extends Controller
         // Bulk insert new contacts
         if (!empty($insertedContacts)) {
             contact_sync::insert($insertedContacts);
+            $insertedIds = contact_sync::latest('id')
+            ->take(count($insertedContacts))     
+            ->pluck('id')                        
+            ->toArray();
+            foreach ($insertedContacts as $index => &$contact) {
+                $contact['id'] = $insertedIds[$index] ?? null;
+            }
+            unset($contact);
         }
 
         // Update duplicate contacts with user details
@@ -240,7 +250,7 @@ class ApiContactController extends Controller
                 $duplicateContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
                 $duplicateContacts[$index]['firstName'] = $userDetail->firstname;
                 $duplicateContacts[$index]['lastName'] = $userDetail->lastname;
-                $duplicateContacts[$index]['visible'] = $userDetail->visible;
+                $duplicateContacts[$index]['visible'] = (int)$userDetail->visible;
                 $duplicateContacts[$index]['email'] = $userDetail->email;
                 $duplicateContacts[$index]['phone'] = $userDetail->phone_number;
                 $duplicateContacts[$index]['photo'] = $userDetail->profile ? asset('storage/profile/' . $userDetail->profile) : '';
