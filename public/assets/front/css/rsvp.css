@@ -30,6 +30,11 @@
     align-items: center;
     justify-content: center;
     height: 26px;
+    display: none;
+}
+
+.rsvp-slider.slider-count.owl-carousel .owl-dots{
+    display: flex;
 }
 
 .rsvp-slider.owl-carousel .owl-dots button {
