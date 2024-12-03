@@ -132,15 +132,17 @@ class ApiContactController extends Controller
         // Process each contact from the request
         foreach ($contacts as $contact) {
             if (!empty($contact['firstName']) && (!empty($contact['phone']) || !empty($contact['email']))) {
+
+                
+
                 $existingContact = contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($contact) {
-                        $query->where('email', $contact['email'] ?? "")
+                        $query->where('email', $contact['email'])
                             ->orWhere('phone', $contact['phone']);
                     })
                     ->first();
 
                 if ($existingContact) {
-                    $id = $existingContact->id;
                    
                     // Update existing contact
                     $existingContact->update([
@@ -156,7 +158,7 @@ class ApiContactController extends Controller
 
                     // Add to duplicate contacts array with updated details
                     $duplicateContacts[] = [
-                        'id' => $id,
+                        'id' => $existingContact->id,
                         'userId' => null,
                         'contact_id' => $user->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
