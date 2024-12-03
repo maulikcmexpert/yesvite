@@ -239,9 +239,9 @@ class ApiContactController extends Controller
                 $duplicateContacts[$index]['phone'] = $userDetail->phone_number;
                 $duplicateContacts[$index]['photo'] = $userDetail->profile ? asset('storage/profile/' . $userDetail->profile) : '';
 
-                if($userDetail->phone_number == '7567264803'){
-                    dd($duplicateContacts);
-                }
+                // if($userDetail->phone_number == '7567264803'){
+                //     dd($duplicateContacts);
+                // }
             }
         }
         // foreach ($userDetails as $userDetail) {
@@ -272,7 +272,7 @@ class ApiContactController extends Controller
 
 
         // Filter out contacts that have a user ID (i.e., contacts that were matched with an existing user)
-        // dd($duplicateContacts);
+        dd($duplicateContacts);
         $updatedDuplicateContacts = array_filter($duplicateContacts);
         $mergeArray = array_merge($insertedContacts, $duplicateContacts);
         $mergeArray = array_map(function($item) {
