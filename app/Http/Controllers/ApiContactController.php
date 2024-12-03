@@ -142,7 +142,6 @@ class ApiContactController extends Controller
                 if ($existingContact) {
                     // Update existing contact
                     $existingContact->update([
-                        'id' => $existingContact->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
                         'lastName' => (isset($contact['lastName']) && $contact['lastName'] != '')?$contact['lastName']:'',
                         'photo' => ($contact['photo']!='')?$contact['photo']:'',
