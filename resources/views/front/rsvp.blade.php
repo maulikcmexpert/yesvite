@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
-                <div class="rsvp-slider owl-carousel owl-theme">
+                <div class="rsvp-slider owl-carousel owl-theme {{($event->event_image->isNotEmpty() && count($event->event_image) > 1 )?'slider-count':''}}">
 
                     <?php
                     if ($event->event_image->isNotEmpty()) { ?>
