@@ -266,7 +266,7 @@ class ApiContactController extends Controller
         // Filter out contacts that have a user ID (i.e., contacts that were matched with an existing user)
         // dd($duplicateContacts);
         $updatedDuplicateContacts = array_filter($duplicateContacts);
-        $mergeArray = array_merge($insertedContacts, $updatedDuplicateContacts);
+        $mergeArray = array_merge($insertedContacts, $duplicateContacts);
         $mergeArray = array_map(function($item) {
             // dd($item);
             $item['isAppUser'] = (int)$item['isAppUser'];
