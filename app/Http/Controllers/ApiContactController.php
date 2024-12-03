@@ -196,14 +196,14 @@ class ApiContactController extends Controller
 
         // Update duplicate contacts with user details
         $emails = array_filter(array_column($contacts, 'email'));
-        dd($emails);
         $phoneNumbers = array_filter(array_column($contacts, 'phone'));
-
+        
         $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile','app_user','visible')
-            ->whereIn('email', $emails)
-            ->orWhereIn('phone_number', $phoneNumbers)
-            ->get();
-
+        ->whereIn('email', $emails)
+        ->orWhereIn('phone_number', $phoneNumbers)
+        ->get();
+        
+        dd($userDetails);
 
         foreach ($userDetails as $userDetail) {
             // Update existing contacts in the database
