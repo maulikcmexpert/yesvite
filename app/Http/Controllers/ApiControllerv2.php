@@ -2941,7 +2941,7 @@ class ApiControllerv2 extends Controller
                 ->orWhereIn('phone_number', $phoneNumbers)
                 ->get();
             foreach ($userDetails as $userDetail) {
-
+                dd($userDetail);
                 contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($userDetail) {
                         $query->where('email', $userDetail->email)
@@ -2977,7 +2977,7 @@ class ApiControllerv2 extends Controller
                     $allSyncedContacts[$index]['email'] = $userDetail->email;
                     $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
                     $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
-                    dd($userDetail);
+                    
                 }
             }
             // Fetch all updated contacts from the request payload
