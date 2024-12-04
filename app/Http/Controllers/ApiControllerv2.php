@@ -2983,7 +2983,7 @@ class ApiControllerv2 extends Controller
             // Fetch all updated contacts from the request payload
 
             $allSyncedContacts = array_map(function ($item) {
-                dd($item);
+                // dd($item);
                 $item['isAppUser'] = (int)$item['isAppUser'];
                 $item['visible'] = (int)$item['visible'];
                 if ($item['userId'] === null) {
