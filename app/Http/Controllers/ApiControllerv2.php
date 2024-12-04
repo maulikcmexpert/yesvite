@@ -2965,7 +2965,7 @@ class ApiControllerv2 extends Controller
                 }, $allSyncedContacts));
 
                 if ($index !== false) {
-                    // dd($duplicateContacts[$index]);
+                    dd($userDetail);
                     // Update the matching contact
                     $allSyncedContacts[$index]['userId'] = $userDetail->id;
                     $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
