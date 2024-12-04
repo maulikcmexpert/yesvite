@@ -2988,11 +2988,11 @@ class ApiControllerv2 extends Controller
                 }
                 return $item;
             }, $allSyncedContacts);
-            dd($allSyncedContacts);
+            // dd($allSyncedContacts);
             return response()->json([
                 'status' => 1,
-                'message' => empty($updatedContacts) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
-                'data' => $allSyncedContacts,
+                'message' => empty($updatedContacts) ? 'Contacts inserted successfully.' : 'Contacts updated successfully.',
+                'data' => $allSyncedContacts[0],
             ]);
         } catch (QueryException $e) {
             DB::rollBack();
