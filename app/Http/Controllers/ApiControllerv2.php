@@ -2937,8 +2937,8 @@ class ApiControllerv2 extends Controller
             $phoneNumbers = array_filter(array_column($input, 'phone'));
 
             $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible')
-                ->whereIn('email', $emails)
-                ->orWhereIn('phone_number', $phoneNumbers)
+                ->where('email', $contact['email'])
+                ->orWhere('phone_number', $contact['photo'])
                 ->get();
                 dd($userDetails);
             foreach ($userDetails as $userDetail) {
