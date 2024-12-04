@@ -2887,7 +2887,7 @@ class ApiControllerv2 extends Controller
                         'firstName' => $contact['firstName'] ?? $existingContact->firstName,
                         'lastName' => $contact['lastName'] ?? $existingContact->lastName,
                         'photo' => $contact['photo'] ?? $existingContact->photo,
-                        'phoneWithCode' => $contact['country_code'].$contact['phone'] ?? $existingContact->phoneWithCode,
+                        'phoneWithCode' => $contact['country_code'].''.$contact['phone'] ?? $existingContact->phoneWithCode,
                         'visible' => ($contact['visible'] ?? $existingContact->visible),
                         'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
                     ]);
@@ -2904,7 +2904,7 @@ class ApiControllerv2 extends Controller
                         'phone' => $contact['phone'] ?? '',
                         'email' => $contact['email'] ?? '',
                         'photo' => $contact['photo'] ?? '',
-                        'phoneWithCode' => $contact['country_code'].$contact['phone'] ?? '',
+                        'phoneWithCode' => $contact['country_code'].''.$contact['phone'] ?? '',
                         'isAppUser' => (string)($contact['isAppUser'] ?? 0),
                         'visible' => (string)($contact['visible'] ?? 0),
                         'preferBy' => $contact['prefer_by'] ?? '',
