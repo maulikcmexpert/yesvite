@@ -2894,6 +2894,7 @@ class ApiControllerv2 extends Controller
                     $existingContact->sync_id = $existingContact->id;
                     $updatedContacts[] = $existingContact;
                 } else {
+                    dd($contact);
                     // Insert new contact
                     $newContacts[] = [
                         'userId' => null,
