@@ -2884,7 +2884,7 @@ class ApiControllerv2 extends Controller
 
                     // Update contact_sync with app user data
                     $existingContact->update([
-                        'isAppUser' =>  $contact['isAppUser'] ?? $existingContact->isAppUser,
+                        'isAppUser' => $existingContact->isAppUser,
                         'phone' => $contact['phone_number'] ?? $existingContact->phone,
                         'firstName' => $contact['firstname'] ?? $existingContact->firstName,
                         'lastName' => $contact['lastname'] ?? $existingContact->lastName,
