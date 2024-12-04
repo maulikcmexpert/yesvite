@@ -2936,7 +2936,7 @@ class ApiControllerv2 extends Controller
             $emails = array_filter(array_column($input, 'email'));
             $phoneNumbers = array_filter(array_column($input, 'phone_number'));
 
-            $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible')
+            $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible','prefer_by')
                 ->where('email', $contact['email'])
                 ->orWhere('phone_number', $contact['phone_number'])
                 ->get();
