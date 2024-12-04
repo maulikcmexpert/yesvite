@@ -229,7 +229,7 @@ class ApiContactController extends Controller
         // Update duplicate contacts with user details
         $emails = array_filter(array_column($contacts, 'email'));
         $phoneNumbers = array_filter(array_column($contacts, 'phone'));
-        
+        $mergeArray = array_merge($insertedContacts, $duplicateContacts);
         $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile','app_user','visible')
         ->whereIn('email', $emails)
         ->orWhereIn('phone_number', $phoneNumbers)
@@ -263,19 +263,19 @@ class ApiContactController extends Controller
                     }
                 }
                 // return $duplicateContact['email'] === $userDetail->email || $duplicateContact['phone'] === $userDetail->phone_number;
-            }, $duplicateContacts));
+            }, $mergeArray));
 
             if ($index !== false) {
                
                 // Update the matching contact
-                $duplicateContacts[$index]['userId'] = (int)$userDetail->id;
-                $duplicateContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
-                $duplicateContacts[$index]['firstName'] = $userDetail->firstname;
-                $duplicateContacts[$index]['lastName'] = $userDetail->lastname;
-                $duplicateContacts[$index]['visible'] = (int)$userDetail->visible;
-                $duplicateContacts[$index]['email'] = $userDetail->email;
-                $duplicateContacts[$index]['phone'] = $userDetail->phone_number;
-                $duplicateContacts[$index]['photo'] = $userDetail->profile ? asset('storage/profile/' . $userDetail->profile) : '';
+                $mergeArray[$index]['userId'] = (int)$userDetail->id;
+                $mergeArray[$index]['isAppUser'] = (int)$userDetail->app_user;
+                $mergeArray[$index]['firstName'] = $userDetail->firstname;
+                $mergeArray[$index]['lastName'] = $userDetail->lastname;
+                $mergeArray[$index]['visible'] = (int)$userDetail->visible;
+                $mergeArray[$index]['email'] = $userDetail->email;
+                $mergeArray[$index]['phone'] = $userDetail->phone_number;
+                $mergeArray[$index]['photo'] = $userDetail->profile ? asset('storage/profile/' . $userDetail->profile) : '';
 
                 // if($userDetail->phone_number == '7567264803'){
                 //     dd($duplicateContacts);
@@ -311,9 +311,9 @@ class ApiContactController extends Controller
 
         // Filter out contacts that have a user ID (i.e., contacts that were matched with an existing user)
         // dd($duplicateContacts);
-        $updatedDuplicateContacts = array_filter($duplicateContacts);
-        $mergeArray = array_merge($insertedContacts, $duplicateContacts);
-        $mergeArray = array_map(function($item) {
+        $updatedDuplicateContacts = array_filter($mergeArray);
+       
+        $updatedDuplicateContacts = array_map(function($item) {
             // dd($item);
             $item['isAppUser'] = (int)$item['isAppUser'];
             $item['visible'] = (int)$item['visible'];
@@ -324,11 +324,11 @@ class ApiContactController extends Controller
                 $item['phone'] = '';
             }
             return $item;
-        }, $mergeArray);
+        }, $updatedDuplicateContacts);
 
         return response()->json([
             'message' => empty($updatedDuplicateContacts) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
-            'all_contacts' => $mergeArray,
+            'all_contacts' => $updatedDuplicateContacts,
         ], 200);
     }
 
