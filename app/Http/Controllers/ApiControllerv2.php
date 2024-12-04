@@ -2983,7 +2983,6 @@ class ApiControllerv2 extends Controller
                 // dd($item);
                 $item['isAppUser'] = (int)$item['isAppUser'];
                 $item['visible'] = (int)$item['visible'];
-                $item['id'] = (int)$item['id'];
                 if ($item['userId'] === null) {
                     $item['userId'] = 0;
                 }
