@@ -2952,17 +2952,17 @@ class ApiControllerv2 extends Controller
                         'firstName' => $userDetail->firstname,
                         'lastName' => $userDetail->lastname
                     ]);
-                    dd($allSyncedContacts);
-                $index = array_search(true, array_map(function ($allSyncedContacts) use ($userDetail) {
+                    $index = array_search(true, array_map(function ($allSyncedContact) use ($userDetail) {
+                    dd($allSyncedContact);
                     // return $updatedContacts['email'] === $userDetail->email || $updatedContacts['phone'] === $userDetail->phone_number;
-                    if($allSyncedContacts['email'] == $userDetail->email || $allSyncedContacts['phone'] == $userDetail->phone_number){
-                        if($allSyncedContacts['email'] == $userDetail->email){
-                            return $allSyncedContacts['email'] === $userDetail->email;
+                    if($allSyncedContact['email'] == $userDetail->email || $allSyncedContact['phone'] == $userDetail->phone_number){
+                        if($allSyncedContact['email'] == $userDetail->email){
+                            return $allSyncedContact['email'] === $userDetail->email;
                         }
 
-                        if($userDetail->phone_number !='' && $allSyncedContacts['phone'] == $userDetail->phone_number){
-                            // dd($allSyncedContacts);
-                            return $allSyncedContacts['phone'] === $userDetail->phone_number;
+                        if($userDetail->phone_number !='' && $allSyncedContact['phone'] == $userDetail->phone_number){
+                            // dd($allSyncedContact);
+                            return $allSyncedContact['phone'] === $userDetail->phone_number;
                         }
                     }
                 }, $allSyncedContacts));
