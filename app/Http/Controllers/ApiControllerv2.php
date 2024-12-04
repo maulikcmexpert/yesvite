@@ -2866,7 +2866,9 @@ class ApiControllerv2 extends Controller
             $newContacts = [];
             $updatedContacts = [];
 
-            foreach ($input as $contact) {
+            // foreach ($input as $contact) {
+                $contact = $input;
+                dd($contact);
                 $email = $contact['email'] ?? '';
                 $phone = $contact['phone'] ?? '';
                 if ($email != "" && $phone != "") {
@@ -2912,7 +2914,7 @@ class ApiControllerv2 extends Controller
                         'updated_at' => now(),
                     ];
                 }
-            }
+            // }
 
             // Bulk insert new contacts
             if (!empty($newContacts)) {
