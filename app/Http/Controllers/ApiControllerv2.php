@@ -17,6 +17,7 @@ use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Exception\RuntimeException;
 
 use App\Models\{
+    contact_sync,
     User,
     Event,
     EventInvitedUser,
@@ -2730,24 +2731,109 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    // public function addContact(Request $request)
+    // {
+
+    //     $user  = Auth::guard('api')->user();
+
+    //     $rawData = $request->getContent();
+
+    //     $input = json_decode($rawData, true);
+    //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //     if ($input == null) {
+    //     }
+
+    //     if ($input['prefer_by'] == 'email') {
+
+    //         $validator = Validator::make($input, [
+    //             'firstname' => ['required'],
+    //             'lastname' => ['required'],
+    //             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
+    //             'prefer_by' => ['required', 'in:email,phone']
+
+    //         ]);
+    //     } elseif ($input['prefer_by'] == 'phone') {
+    //         $validator = Validator::make($input, [
+    //             'firstname' => ['required'],
+    //             'lastname' => ['required'],
+    //             'country_code' => ['required'],
+    //             'phone_number' => ['required', 'unique:users,phone_number'],
+    //             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
+    //             'prefer_by' => ['required', 'in:email,phone']
+
+    //         ]);
+    //     }
+
+
+
+    //     $customMessages = [
+    //         'prefer_by.in' => 'The prefer_by field must be email or phone.',
+    //     ];
+
+
+    //     $validator->setCustomMessages($customMessages);
+    //     if ($validator->fails()) {
+
+    //         return response()->json([
+    //             'status' => 0,
+    //             'message' => $validator->errors()->first(),
+
+
+
+    //         ]);
+    //     }
+    //     try {
+    //         DB::beginTransaction();
+
+    //         $addContact = new User;
+    //         $addContact->parent_user_phone_contact = $user->id;
+    //         $addContact->firstname = $input['firstname'];
+    //         $addContact->lastname = $input['lastname'];
+    //         $addContact->country_code = ($input['country_code'] != "") ? $input['country_code'] : 0;
+    //         $addContact->phone_number = $input['phone_number'];
+    //         $addContact->email = $input['email'];
+    //         $addContact->app_user = '0';
+    //         $addContact->prefer_by = $input['prefer_by'];
+    //         $addContact->save();
+    //         DB::commit();
+    //         // $addedUser =  User::where('id', $addContact->id)->first();
+    //         $addedUser = User::where('id', $addContact->id)->select('id', 'firstname', 'lastname', 'country_code', 'phone_number', 'email', 'app_user', 'prefer_by')->first();
+    //         $useData = [
+    //             'id' =>  $addedUser->id,
+    //             'first_name' =>  $addedUser->firstname,
+    //             'last_name' =>  $addedUser->lastname,
+    //             'profile' => (isset($addedUser->profile) && $addedUser->profile != NULL) ? asset('storage/profile/' . $addedUser->profile) : "",
+    //             'country_code' =>  (string)$addedUser->country_code,
+    //             'phone_number' =>  $addedUser->phone_number,
+    //             'email' =>  $addedUser->email,
+    //             'app_user' =>  $addedUser->app_user,
+    //             'prefer_by' => $addedUser->prefer_by
+    //         ];
+
+    //         return response()->json(['status' => 1, 'data' => $useData, 'message' => "Contact Saved"]);
+    //     } catch (QueryException $e) {
+    //         DB::rollBack();
+    //         return response()->json(['status' => 0, 'message' => "db error"]);
+    //     } catch (Exception  $e) {
+    //         return response()->json(['status' => 0, 'message' => 'something went wrong']);
+    //     }
+    // }
+
     public function addContact(Request $request)
     {
-
-        $user  = Auth::guard('api')->user();
-
+        $user = Auth::guard('api')->user();
         $rawData = $request->getContent();
-
         $input = json_decode($rawData, true);
-        return response()->json(['status' => 0, 'message' => "Json invalid"]);
-        if ($input == null) {
+
+        if ($input === null) {
+            return response()->json(['status' => 0, 'message' => 'Invalid JSON']);
         }
 
         if ($input['prefer_by'] == 'email') {
-
             $validator = Validator::make($input, [
                 'firstname' => ['required'],
                 'lastname' => ['required'],
-                'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
+                'email' => ['required', 'email:rfc,dns'],
                 'prefer_by' => ['required', 'in:email,phone']
 
             ]);
@@ -2756,19 +2842,15 @@ class ApiControllerv2 extends Controller
                 'firstname' => ['required'],
                 'lastname' => ['required'],
                 'country_code' => ['required'],
-                'phone_number' => ['required', 'unique:users,phone_number'],
-                'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
+                'phone_number' => ['required'],
+                'email' => ['required', 'email:rfc,dns'],
                 'prefer_by' => ['required', 'in:email,phone']
-
             ]);
         }
-
-
 
         $customMessages = [
             'prefer_by.in' => 'The prefer_by field must be email or phone.',
         ];
-
 
         $validator->setCustomMessages($customMessages);
         if ($validator->fails()) {
@@ -2776,40 +2858,139 @@ class ApiControllerv2 extends Controller
             return response()->json([
                 'status' => 0,
                 'message' => $validator->errors()->first(),
-
-
-
             ]);
         }
         try {
             DB::beginTransaction();
+            $emails = array_filter(array_column($input, 'email'));
+            $newContacts = [];
+            $updatedContacts = [];
 
-            $addContact = new User;
-            $addContact->parent_user_phone_contact = $user->id;
-            $addContact->firstname = $input['firstname'];
-            $addContact->lastname = $input['lastname'];
-            $addContact->country_code = ($input['country_code'] != "") ? $input['country_code'] : 0;
-            $addContact->phone_number = $input['phone_number'];
-            $addContact->email = $input['email'];
-            $addContact->app_user = '0';
-            $addContact->prefer_by = $input['prefer_by'];
-            $addContact->save();
+            foreach ($input as $contact) {
+                $email = $contact['email'] ?? '';
+                $phone = $contact['phone'] ?? '';
+                if ($email != "" && $phone != "") {
+                    $existingContact = contact_sync::where('email', $email)->where('phone', $phone)->first();
+                } elseif ($email != "" && $phone == "") {
+                    $existingContact = contact_sync::where('email', $email)->first();
+                } elseif ($email == "" && $phone != "") {
+                    $existingContact = contact_sync::where('phone', $phone)->first();
+                }         // Check if the contact exists in contact_sync
+
+                if (isset($existingContact)) {
+                    // Check if the user exists in the user table
+
+                    // Update contact_sync with app user data
+                    $existingContact->update([
+                        'isAppUser' =>  $contact['isAppUser'] ?? $existingContact->isAppUser,
+                        'phone' => $contact['phone'] ?? $existingContact->phone,
+                        'firstName' => $contact['firstName'] ?? $existingContact->firstName,
+                        'lastName' => $contact['lastName'] ?? $existingContact->lastName,
+                        'photo' => $contact['photo'] ?? $existingContact->photo,
+                        'phoneWithCode' => $contact['country_code'].$contact['phone'] ?? $existingContact->phoneWithCode,
+                        'visible' => ($contact['visible'] ?? $existingContact->visible),
+                        'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
+                    ]);
+                    $existingContact->sync_id = $existingContact->id;
+                    $updatedContacts[] = $existingContact;
+                } else {
+                    // Insert new contact
+                    $newContacts[] = [
+                        'sync_id' => null,
+                        'userId' => null,
+                        'contact_id' => $user->id,
+                        'firstName' => $contact['firstName'] ?? '',
+                        'lastName' => $contact['lastName'] ?? '',
+                        'phone' => $contact['phone'] ?? '',
+                        'email' => $contact['email'] ?? '',
+                        'photo' => $contact['photo'] ?? '',
+                        'phoneWithCode' => $contact['country_code'].$contact['phone'] ?? '',
+                        'isAppUser' => (string)($contact['isAppUser'] ?? 0),
+                        'visible' => (string)($contact['visible'] ?? 0),
+                        'preferBy' => $contact['prefer_by'] ?? '',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+            }
+
+            // Bulk insert new contacts
+            if (!empty($newContacts)) {
+                contact_sync::insert($newContacts);
+                $insertedIds = contact_sync::latest('id')
+                    ->take(count($newContacts))     
+                    ->pluck('id')                        
+                    ->toArray();
+                foreach ($newContacts as $index => &$contact) {
+                    $contact['sync_id'] = $insertedIds[$index] ?? null;
+                }
+                unset($contact);
+            }
             DB::commit();
-            // $addedUser =  User::where('id', $addContact->id)->first();
-            $addedUser = User::where('id', $addContact->id)->select('id', 'firstname', 'lastname', 'country_code', 'phone_number', 'email', 'app_user', 'prefer_by')->first();
-            $useData = [
-                'id' =>  $addedUser->id,
-                'first_name' =>  $addedUser->firstname,
-                'last_name' =>  $addedUser->lastname,
-                'profile' => (isset($addedUser->profile) && $addedUser->profile != NULL) ? asset('storage/profile/' . $addedUser->profile) : "",
-                'country_code' =>  (string)$addedUser->country_code,
-                'phone_number' =>  $addedUser->phone_number,
-                'email' =>  $addedUser->email,
-                'app_user' =>  $addedUser->app_user,
-                'prefer_by' => $addedUser->prefer_by
-            ];
+            $allSyncedContacts = array_merge($newContacts, $updatedContacts);
+            $emails = array_filter(array_column($input, 'email'));
+            $phoneNumbers = array_filter(array_column($input, 'phone'));
 
-            return response()->json(['status' => 1, 'data' => $useData, 'message' => "Contact Saved"]);
+            $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible')
+                ->whereIn('email', $emails)
+                ->orWhereIn('phone_number', $phoneNumbers)
+                ->get();
+            foreach ($userDetails as $userDetail) {
+
+                contact_sync::where('contact_id', $user->id)
+                    ->where(function ($query) use ($userDetail) {
+                        $query->where('email', $userDetail->email)
+                            ->orWhere('phone', $userDetail->phone_number);
+                    })
+                    ->update([
+                        'userId' => $userDetail->id,
+                        'firstName' => $userDetail->firstname,
+                        'lastName' => $userDetail->lastname
+                    ]);
+                $index = array_search(true, array_map(function ($allSyncedContacts) use ($userDetail) {
+                    // return $updatedContacts['email'] === $userDetail->email || $updatedContacts['phone'] === $userDetail->phone_number;
+                    if($allSyncedContacts['email'] == $userDetail->email || $allSyncedContacts['phone'] == $userDetail->phone_number){
+                        if($allSyncedContacts['email'] == $userDetail->email){
+                            return $allSyncedContacts['email'] === $userDetail->email;
+                        }
+
+                        if($userDetail->phone_number !='' && $allSyncedContacts['phone'] == $userDetail->phone_number){
+                            // dd($allSyncedContacts);
+                            return $allSyncedContacts['phone'] === $userDetail->phone_number;
+                        }
+                    }
+                }, $allSyncedContacts));
+
+                if ($index !== false) {
+                    // dd($duplicateContacts[$index]);
+                    // Update the matching contact
+                    $allSyncedContacts[$index]['userId'] = $userDetail->id;
+                    $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
+                    $allSyncedContacts[$index]['firstName'] = $userDetail->firstname;
+                    $allSyncedContacts[$index]['lastName'] = $userDetail->lastname;
+                    $allSyncedContacts[$index]['visible'] = $userDetail->visible;
+                    $allSyncedContacts[$index]['email'] = $userDetail->email;
+                    $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
+                    $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
+                }
+            }
+            // Fetch all updated contacts from the request payload
+
+            $allSyncedContacts = array_map(function ($item) {
+                // dd($item);
+                $item['isAppUser'] = (int)$item['isAppUser'];
+                $item['visible'] = (int)$item['visible'];
+                $item['id'] = (int)$item['id'];
+                if ($item['userId'] === null) {
+                    $item['userId'] = 0;
+                }
+                return $item;
+            }, $allSyncedContacts);
+            return response()->json([
+                'status' => 1,
+                'message' => empty($updatedContacts) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
+                'data' => $allSyncedContacts,
+            ]);
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "db error"]);
