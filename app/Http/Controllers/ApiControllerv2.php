@@ -2976,6 +2976,7 @@ class ApiControllerv2 extends Controller
                     $allSyncedContacts[$index]['visible'] = $userDetail->visible;
                     $allSyncedContacts[$index]['email'] = $userDetail->email;
                     $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
+                    $allSyncedContacts[$index]['preferBy'] = $userDetail->prefer_by;
                     $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
                     
                 }
