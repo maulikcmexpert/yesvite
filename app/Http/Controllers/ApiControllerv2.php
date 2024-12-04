@@ -2896,7 +2896,6 @@ class ApiControllerv2 extends Controller
                 } else {
                     // Insert new contact
                     $newContacts[] = [
-                        'sync_id' => null,
                         'userId' => null,
                         'contact_id' => $user->id,
                         'firstName' => $contact['firstName'] ?? '',
