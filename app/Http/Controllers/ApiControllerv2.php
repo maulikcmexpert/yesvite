@@ -2940,7 +2940,7 @@ class ApiControllerv2 extends Controller
                 ->where('email', $contact['email'])
                 ->orWhere('phone_number', $contact['phone_number'])
                 ->get();
-                dd($userDetails);
+                // dd($userDetails);
             foreach ($userDetails as $userDetail) {
                 contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($userDetail) {
