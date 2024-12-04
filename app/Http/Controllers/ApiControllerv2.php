@@ -2977,7 +2977,7 @@ class ApiControllerv2 extends Controller
                     $allSyncedContacts[$index]['email'] = $userDetail->email;
                     $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
                     $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
-                    dd($allSyncedContacts);
+                    dd($userDetail);
                 }
             }
             // Fetch all updated contacts from the request payload
