@@ -2915,6 +2915,7 @@ class ApiControllerv2 extends Controller
 
             // Bulk insert new contacts
             if (!empty($newContacts)) {
+                dd($newContacts);
                 contact_sync::insert($newContacts);
                 $insertedIds = contact_sync::latest('id')
                     ->take(count($newContacts))     
