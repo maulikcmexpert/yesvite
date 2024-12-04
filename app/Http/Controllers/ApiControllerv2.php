@@ -2918,7 +2918,7 @@ class ApiControllerv2 extends Controller
 
             // Bulk insert new contacts
             if (!empty($newContacts)) {
-                dd($newContacts);
+                // dd($newContacts);
                 contact_sync::insert($newContacts);
                 $insertedIds = contact_sync::latest('id')
                     ->take(count($newContacts))     
@@ -2996,7 +2996,7 @@ class ApiControllerv2 extends Controller
             ]);
         } catch (QueryException $e) {
             DB::rollBack();
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
