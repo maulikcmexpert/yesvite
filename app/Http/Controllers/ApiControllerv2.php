@@ -2934,11 +2934,11 @@ class ApiControllerv2 extends Controller
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
             
             $emails = array_filter(array_column($input, 'email'));
-            $phoneNumbers = array_filter(array_column($input, 'phone'));
+            $phoneNumbers = array_filter(array_column($input, 'phone_number'));
 
             $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible')
                 ->where('email', $contact['email'])
-                ->orWhere('phone_number', $contact['phone'])
+                ->orWhere('phone_number', $contact['phone_number'])
                 ->get();
                 dd($userDetails);
             foreach ($userDetails as $userDetail) {
