@@ -2967,7 +2967,7 @@ class ApiControllerv2 extends Controller
                     }
                 }, $allSyncedContacts));
                 if ($index !== false) {
-                    dd($userDetail);
+                    
                     // Update the matching contact
                     $allSyncedContacts[$index]['userId'] = $userDetail->id;
                     $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
@@ -2977,6 +2977,7 @@ class ApiControllerv2 extends Controller
                     $allSyncedContacts[$index]['email'] = $userDetail->email;
                     $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
                     $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
+                    dd($allSyncedContacts);
                 }
             }
             // Fetch all updated contacts from the request payload
