@@ -2986,12 +2986,15 @@ class ApiControllerv2 extends Controller
                 // dd($item);
                 $item['isAppUser'] = (int)$item['isAppUser'];
                 $item['visible'] = (int)$item['visible'];
+                if ($item['phone'] === null) {
+                    $item['phone'] = '';
+                }
                 if ($item['userId'] === null) {
                     $item['userId'] = 0;
                 }
                 return $item;
             }, $allSyncedContacts);
-            dd($allSyncedContacts);
+            // dd($allSyncedContacts);
             return response()->json([
                 'status' => 1,
                 'message' => empty($updatedContacts) ? 'Contacts inserted successfully.' : 'Contacts updated successfully.',
