@@ -2932,7 +2932,7 @@ class ApiControllerv2 extends Controller
             }
             DB::commit();
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
-            dd($allSyncedContacts);
+            
             $emails = array_filter(array_column($input, 'email'));
             $phoneNumbers = array_filter(array_column($input, 'phone'));
 
@@ -2967,7 +2967,7 @@ class ApiControllerv2 extends Controller
                 }, $allSyncedContacts));
 
                 if ($index !== false) {
-                    dd($userDetail);
+                    // dd($userDetail);
                     // Update the matching contact
                     $allSyncedContacts[$index]['userId'] = $userDetail->id;
                     $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
@@ -2982,7 +2982,7 @@ class ApiControllerv2 extends Controller
             // Fetch all updated contacts from the request payload
 
             $allSyncedContacts = array_map(function ($item) {
-                // dd($item);
+                dd($item);
                 $item['isAppUser'] = (int)$item['isAppUser'];
                 $item['visible'] = (int)$item['visible'];
                 if ($item['userId'] === null) {
