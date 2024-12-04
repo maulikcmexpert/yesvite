@@ -2938,7 +2938,7 @@ class ApiControllerv2 extends Controller
 
             $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible')
                 ->where('email', $contact['email'])
-                ->orWhere('phone_number', $contact['photo'])
+                ->orWhere('phone_number', $contact['phone'])
                 ->get();
                 dd($userDetails);
             foreach ($userDetails as $userDetail) {
