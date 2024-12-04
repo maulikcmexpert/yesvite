@@ -2925,10 +2925,10 @@ class ApiControllerv2 extends Controller
                     ->take(count($newContacts))     
                     ->pluck('id')                        
                     ->toArray();
-                foreach ($newContacts as $index => &$contact) {
-                    $contact['sync_id'] = $insertedIds[$index] ?? null;
+                foreach ($newContacts as $index => &$contacts) {
+                    $contacts['sync_id'] = $insertedIds[$index] ?? null;
                 }
-                unset($contact);
+                unset($contacts);
             }
             DB::commit();
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
