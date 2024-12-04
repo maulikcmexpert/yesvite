@@ -2953,7 +2953,7 @@ class ApiControllerv2 extends Controller
                         'lastName' => $userDetail->lastname
                     ]);
                     $index = array_search(true, array_map(function ($allSyncedContact) use ($userDetail) {
-                    dd($allSyncedContact);
+                   
                     // return $updatedContacts['email'] === $userDetail->email || $updatedContacts['phone'] === $userDetail->phone_number;
                     if($allSyncedContact['email'] == $userDetail->email || $allSyncedContact['phone'] == $userDetail->phone_number){
                         if($allSyncedContact['email'] == $userDetail->email){
@@ -2967,7 +2967,7 @@ class ApiControllerv2 extends Controller
                     }
                 }, $allSyncedContacts));
                 if ($index !== false) {
-                    // dd($userDetail);
+                    dd($userDetail);
                     // Update the matching contact
                     $allSyncedContacts[$index]['userId'] = $userDetail->id;
                     $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
