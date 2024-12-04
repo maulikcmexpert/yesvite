@@ -2868,7 +2868,7 @@ class ApiControllerv2 extends Controller
 
             // foreach ($input as $contact) {
                 $contact = $input;
-                dd($contact);
+                // dd($contact);
                 $email = $contact['email'] ?? '';
                 $phone = $contact['phone'] ?? '';
                 if ($email != "" && $phone != "") {
@@ -2885,30 +2885,30 @@ class ApiControllerv2 extends Controller
                     // Update contact_sync with app user data
                     $existingContact->update([
                         'isAppUser' =>  $contact['isAppUser'] ?? $existingContact->isAppUser,
-                        'phone' => $contact['phone'] ?? $existingContact->phone,
-                        'firstName' => $contact['firstName'] ?? $existingContact->firstName,
-                        'lastName' => $contact['lastName'] ?? $existingContact->lastName,
+                        'phone' => $contact['phone_number'] ?? $existingContact->phone,
+                        'firstName' => $contact['firstname'] ?? $existingContact->firstName,
+                        'lastName' => $contact['lastname'] ?? $existingContact->lastName,
                         'photo' => $contact['photo'] ?? $existingContact->photo,
-                        'phoneWithCode' => $contact['phone'] ?? $existingContact->phoneWithCode,
+                        'phoneWithCode' => $contact['phone_number'] ?? $existingContact->phoneWithCode,
                         'visible' => ($contact['visible'] ?? $existingContact->visible),
                         'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
                     ]);
                     $existingContact->sync_id = $existingContact->id;
                     $updatedContacts[] = $existingContact;
                 } else {
-                    dd($contact);
+                    // dd($contact);
                     // Insert new contact
                     $newContacts[] = [
                         'userId' => null,
                         'contact_id' => $user->id,
-                        'firstName' => $contact['firstName'] ?? '',
-                        'lastName' => $contact['lastName'] ?? '',
-                        'phone' => $contact['phone'] ?? '',
+                        'firstName' => $contact['firstname'] ?? '',
+                        'lastName' => $contact['lastname'] ?? '',
+                        'phone' => $contact['phone_number'] ?? '',
                         'email' => $contact['email'] ?? '',
                         'photo' => $contact['photo'] ?? '',
-                        'phoneWithCode' => $contact['phone'] ?? '',
-                        'isAppUser' => (string)($contact['isAppUser'] ?? 0),
-                        'visible' => (string)($contact['visible'] ?? 0),
+                        'phoneWithCode' => $contact['phone_number'] ?? '',
+                        'isAppUser' => '0',
+                        'visible' => '0',
                         'preferBy' => $contact['prefer_by'] ?? '',
                         'created_at' => now(),
                         'updated_at' => now(),
