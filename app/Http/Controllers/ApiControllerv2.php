@@ -2894,6 +2894,7 @@ class ApiControllerv2 extends Controller
                         'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
                     ]);
                     $existingContact->sync_id = $existingContact->id;
+                    
                     $updatedContacts[] = $existingContact;
                 } else {
                     // dd($contact);
@@ -2931,6 +2932,7 @@ class ApiControllerv2 extends Controller
             }
             DB::commit();
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
+            dd($allSyncedContacts);
             $emails = array_filter(array_column($input, 'email'));
             $phoneNumbers = array_filter(array_column($input, 'phone'));
 
