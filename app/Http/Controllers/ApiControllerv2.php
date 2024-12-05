@@ -4436,7 +4436,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['guest_co_host_list'] = [];
 
                 $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->where('user_id','!=','')->get();
-                $invited_sync_user = EventInvitedUser::with('invited_sync_user_event')->where(['event_id' => $getEventData->id])->where('sync_id','!=','')->get();
+                $invited_sync_user = EventInvitedUser::with('contact_sync')->where(['event_id' => $getEventData->id])->where('sync_id','!=','')->get();
                 dd($invited_sync_user);
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
