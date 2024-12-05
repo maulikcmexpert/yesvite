@@ -4436,12 +4436,18 @@ class ApiControllerv2 extends Controller
                 $eventDetail['guest_co_host_list'] = [];
 
                 $invitedUser = EventInvitedUser::with(['user','contact_sync'])->where(['event_id' => $getEventData->id])->get();
-                $invited_sync_user = EventInvitedUser::with('contact_sync')->where(['event_id' => $getEventData->id])->where('sync_id','!=','')->get();
                 dd($invitedUser);
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
                         if ($guestVal->is_co_host == '0') {
                             if ($guestVal->user_id == "" && $guestVal->sync_id != "") {
+                                $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
+                                $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
+                                $invitedGuestDetail['email'] = (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "";
+                                $invitedGuestDetail['country_code'] = "";
+                                $invitedGuestDetail['phone_number'] = (!empty($guestVal->contact_sync->phoneWithCode) && $guestVal->contact_sync->phoneWithCode != NULL) ? $guestVal->contact_sync->phoneWithCode : "";
+                                $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $invitedGuestDetail['user_id'] = (!empty($guestVal->sync_id) && $guestVal->sync_id != NULL) ? $guestVal->sync_id : "";
                                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
                             } elseif ($guestVal->user->is_user_phone_contact == '0') {
                                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
