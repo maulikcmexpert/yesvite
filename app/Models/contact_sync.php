@@ -23,4 +23,9 @@ class contact_sync extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function invited_sync_user_event()
+    {
+        return $this->hasMany(EventInvitedUser::class);
+    }
 }

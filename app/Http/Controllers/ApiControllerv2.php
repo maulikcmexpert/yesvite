@@ -4435,12 +4435,12 @@ class ApiControllerv2 extends Controller
                 $eventDetail['invited_guests'] = [];
                 $eventDetail['guest_co_host_list'] = [];
 
-                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
+                $invitedUser = EventInvitedUser::with(['user','contact_sync'])->where(['event_id' => $getEventData->id])->get();
 
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
                         if ($guestVal->is_co_host == '0') {
-                            if ($guestVal->user->is_user_phone_contact == '1') {
+                            if ($guestVal->user_id == "" && $guestVal->sync_id != "") {
                                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                                 $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
                                 $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
@@ -4832,7 +4832,7 @@ class ApiControllerv2 extends Controller
                                             $eventInvite->sync_id = $checkUserExist->id;
                                             $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                                             $eventInvite->save();
-                                            
+
                                             // EventInvitedUser::create([
                                             //     'event_id' => $eventData['event_id'],
                                             //     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",

@@ -33,6 +33,10 @@ class EventInvitedUser extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function contact_sync()
+    {
+        return $this->belongsTo(contact_sync::class);
+    }
 
     public function event_post_photo()
     {
