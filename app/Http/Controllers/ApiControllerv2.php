@@ -4827,12 +4827,17 @@ class ApiControllerv2 extends Controller
                                     // $alreadyselectedUser =  collect($eventData['invited_guests'])->pluck('sync_id')->toArray();
                                     // if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
                                         if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
-
-                                            EventInvitedUser::create([
-                                                'event_id' => $eventData['event_id'],
-                                                'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-                                                'sync_id' => $checkUserExist->id
-                                            ]);
+                                            $eventInvite = new EventInvitedUser();
+                                            $eventInvite->event_id = $eventData['event_id'];
+                                            $eventInvite->sync_id = $checkUserExist->id;
+                                            $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                                            $eventInvite->save();
+                                            
+                                            // EventInvitedUser::create([
+                                            //     'event_id' => $eventData['event_id'],
+                                            //     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
+                                            //     'sync_id' => $checkUserExist->id
+                                            // ]);
                                         }
                                     // }
                                 }
