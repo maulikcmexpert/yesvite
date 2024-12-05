@@ -121,7 +121,8 @@ function pendingRsvpCount($userId)
 function hostingCount($userId)
 {
 
-    $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))->count();
+    // $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))->count();
+    $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->count();
     return $totalHosting;
 }
 function hostingCountCurrentMonth($userId)
@@ -136,7 +137,8 @@ function hostingCountCurrentMonth($userId)
 function invitedToCount($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
-        $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+        // $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+        $query->where('is_draft_save', '0');
     })->where('user_id', $userId)->count();
     return $totalInvited;
 }
