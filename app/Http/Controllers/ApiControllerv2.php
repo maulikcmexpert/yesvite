@@ -4799,7 +4799,7 @@ class ApiControllerv2 extends Controller
 
 
                         $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('sync_id')->toArray();
-                        dd($alreadyinvitedUser);
+                        dd($invitedGuestUsers);
                         foreach ($invitedGuestUsers as $value) {
 
                             if ($value['prefer_by'] == 'phone') {
