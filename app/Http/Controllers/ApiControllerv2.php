@@ -10855,7 +10855,7 @@ class ApiControllerv2 extends Controller
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
                             'prefer_by' => $value['prefer_by'],
-                            'sync_id_id' => $value['id']
+                            'sync_id' => $value['id']
                         ]);
                     } else {
                         $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $input['event_id'], 'sync_id' => $id])->first();
