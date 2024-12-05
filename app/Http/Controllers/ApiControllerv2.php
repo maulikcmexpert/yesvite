@@ -10848,26 +10848,20 @@ class ApiControllerv2 extends Controller
             $ids = [];
             foreach ($input['guest_list'] as $value) {
 
-                if ($value['id'] == "0") {
-                    $addNewUser = new User;
-                    $addNewUser->firstname = $value['first_name'];
-                    $addNewUser->email = (isset($value['email']) && $value['email']!= '')?$value['email']:NULL;
-                    $addNewUser->country_code = '1';
-                    $addNewUser->app_user = '0';
-                    $addNewUser->is_user_phone_contact = '1';
-                    $addNewUser->parent_user_phone_contact = $user->id;
-
-                    $addNewUser->phone_number = $value['phone_number'];
-                    $addNewUser->prefer_by = $value['prefer_by'];
-
-                    if ($addNewUser->save()) {
+                if ($value['app_user'] == "0") {
+                    $checkUserInvitation = EventInvitedUser::with(['contact_sync'])->where(['event_id' => $input['event_id'],'user_id' => ''])->where('sync_id','!=','')->get()->pluck('sync_id')->toArray();
+                    $id = $value['id'];
+                    if (!in_array($value['id'], $checkUserInvitation)) {
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
                             'prefer_by' => $value['prefer_by'],
-                            'user_id' => $addNewUser->id
+                            'sync_id_id' => $value['id']
                         ]);
+                    } else {
+                        $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $input['event_id'], 'sync_id' => $id])->first();
+                        $updateUser->prefer_by = $value['prefer_by'];
+                        $updateUser->save();
                     }
-                    $id = $addNewUser->id;
                 } else {
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
