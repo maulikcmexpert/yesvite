@@ -10850,7 +10850,7 @@ class ApiControllerv2 extends Controller
 
                 if ($value['app_user'] == "0") {
                     $checkUserInvitation = EventInvitedUser::with(['contact_sync'])->where(['event_id' => $input['event_id'],'user_id' => ''])->where('sync_id','!=','')->get()->pluck('sync_id')->toArray();
-                    $id = $value['id'];
+                    // $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
@@ -10858,7 +10858,7 @@ class ApiControllerv2 extends Controller
                             'sync_id_id' => $value['id']
                         ]);
                     } else {
-                        $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $input['event_id'], 'sync_id' => $id])->first();
+                        $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $input['event_id'], 'sync_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
