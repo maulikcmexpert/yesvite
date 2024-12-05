@@ -448,26 +448,35 @@ function getInvitedUsers($eventId)
     $eventDetail['invited_user_id'] = [];
 
     $invitedUsers = EventInvitedUser::query();
-    $invitedUsers->with(['event', 'user'])->where(['event_id' => $eventId])->where('user_id','!=','');
+    $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId])->where('user_id','!=','');
     $result = $invitedUsers->get();
 
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            if ($guestVal->user->parent_user_phone_contact ==  $guestVal->event->user_id && $guestVal->user->is_user_phone_contact == '1') {
-
-                $invitedGuestDetail['user_id'] = (!empty($guestVal->user->id) && $guestVal->user->id != NULL) ? $guestVal->user->id : "";
-
-                $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+            if ($guestVal->user_id ==  '' && $guestVal->sync_id != '') {
+                $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
+                $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
+                $invitedGuestDetail['email'] = (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "";
+                $invitedGuestDetail['country_code'] = "";
+                $invitedGuestDetail['phone_number'] = (!empty($guestVal->contact_sync->phoneWithCode) && $guestVal->contact_sync->phoneWithCode != NULL) ? $guestVal->contact_sync->phoneWithCode : "";
                 $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                $invitedGuestDetail['id'] = (!empty($guestVal->sync_id) && $guestVal->sync_id != NULL) ? $guestVal->sync_id : "";
+                $invitedGuestDetail['app_user'] = (!empty($guestVal->contact_sync->isAppUser) && $guestVal->contact_sync->isAppUser != NULL) ? (int)$guestVal->contact_sync->isAppUser : 0;
+                $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
+                $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
             } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                $invitedUserIdDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                $invitedUserIdDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                $invitedUserIdDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
                 $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                $invitedUserIdDetail['id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                $invitedUserIdDetail['app_user'] = (!empty($guestVal->user->app_user) && $guestVal->user->app_user != NULL) ? (int)$guestVal->user->app_user : 0;
+                $invitedUserIdDetail['visible'] = (!empty($guestVal->user->visible) && $guestVal->user->visible != NULL) ? (int)$guestVal->user->visible : 0;
+                $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/').$guestVal->user->profile : "";
                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
             }
         }
