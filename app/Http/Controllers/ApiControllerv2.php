@@ -5272,13 +5272,19 @@ class ApiControllerv2 extends Controller
                 }
 
                 if (isset($eventData['invited_new_guest']) && count($eventData['invited_new_guest']) != 0) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
+                    );
+
                     $notificationParam = [
 
                         'sender_id' => $user->id,
 
                         'event_id' => $eventData['event_id'],
 
-                        'newUser' => $eventData['invited_new_guest']
+                        'newUser' => $filteredIds
 
                     ];
 
