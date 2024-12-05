@@ -4833,94 +4833,16 @@ class ApiControllerv2 extends Controller
 
                         $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('sync_id')->toArray();
                         foreach ($invitedGuestUsers as $value) {
-                            
-                            // if ($value['prefer_by'] == 'phone') {
-                                
                             $checkUserExist = contact_sync::where('id', $value['id'])->first();
-                            
-                            
-                                if ($checkUserExist) {
-                                    //     $guestUser = User::create([
-                                    //         'firstname' => $value['first_name'],
-                                    //         'lastname' => $value['last_name'],
-                                    //         'country_code' => $value['country_code'],
-                                    //         'phone_number' => $value['phone_number'],
-                                    //         'app_user' => '0',
-                                    //         'is_user_phone_contact' => '1',
-                                    //         'parent_user_phone_contact' => $user->id
-                                    //     ]);
-
-                                    //     EventInvitedUser::create([
-                                    //         'event_id' =>  $eventData['event_id'],
-                                    //         'prefer_by' => $value['prefer_by'],
-                                    //         'user_id' => $guestUser->id
-                                    //     ]);
-                                    // } else {
-
-                                    // $alreadyselectedUser =  collect($eventData['invited_guests'])->pluck('sync_id')->toArray();
-                                    // if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-                                        if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
-                                            $eventInvite = new EventInvitedUser();
-                                            $eventInvite->event_id = $eventData['event_id'];
-                                            $eventInvite->sync_id = $checkUserExist->id;
-                                            $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
-                                            $eventInvite->save();
-
-                                            // EventInvitedUser::create([
-                                            //     'event_id' => $eventData['event_id'],
-                                            //     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-                                            //     'sync_id' => $checkUserExist->id
-                                            // ]);
-                                        }
-                                    // }
+                            if ($checkUserExist) {
+                                if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
+                                    $eventInvite = new EventInvitedUser();
+                                    $eventInvite->event_id = $eventData['event_id'];
+                                    $eventInvite->sync_id = $checkUserExist->id;
+                                    $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                                    $eventInvite->save();
                                 }
-                            // } 
-                            // else if ($value['prefer_by'] == 'email') {
-
-                            //     $checkUserExist = contact_sync::where('id', $value['id'])->first();
-
-                            //     if (empty($checkUserExist)) {
-
-                            //         $guestUser = User::create([
-
-                            //             'firstname' => $value['first_name'],
-
-                            //             'lastname' => $value['last_name'],
-
-                            //             'email' => $value['email'],
-
-                            //             'app_user' => '0',
-                            //             'is_user_phone_contact' => '1',
-                            //             'parent_user_phone_contact' => $user->id
-
-                            //         ]);
-
-                            //         EventInvitedUser::create([
-
-                            //             'event_id' =>  $eventData['event_id'],
-
-                            //             'prefer_by' => $value['prefer_by'],
-
-                            //             'user_id' => $guestUser->id
-
-                            //         ]);
-                            //     } else {
-                            //         $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('user_id')->toArray();
-
-                            //         if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
-                            //             if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
-                            //                 EventInvitedUser::create([
-
-                            //                     'event_id' => $eventData['event_id'],
-
-                            //                     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "email",
-
-                            //                     'user_id' => $checkUserExist->id
-                            //                 ]);
-                            //             }
-                            //         }
-                            //     }
-                            // }
+                            }
                         }
                     }
 
