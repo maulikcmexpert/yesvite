@@ -4435,14 +4435,13 @@ class ApiControllerv2 extends Controller
                 $eventDetail['invited_guests'] = [];
                 $eventDetail['guest_co_host_list'] = [];
 
-                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->where('user_id','!=','')->get();
+                $invitedUser = EventInvitedUser::with(['user','contact_sync'])->where(['event_id' => $getEventData->id])->get();
                 $invited_sync_user = EventInvitedUser::with('contact_sync')->where(['event_id' => $getEventData->id])->where('sync_id','!=','')->get();
-                dd($invited_sync_user);
+                dd($invitedUser);
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
                         if ($guestVal->is_co_host == '0') {
                             if ($guestVal->user_id == "" && $guestVal->sync_id != "") {
-                               
                                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
                             } elseif ($guestVal->user->is_user_phone_contact == '0') {
                                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
@@ -4475,8 +4474,10 @@ class ApiControllerv2 extends Controller
                             }
                         }
                     }
-                    $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
                 }
+
+
+                $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
                 // $eventDetail['events_schedule_list'] = [];
                 $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
