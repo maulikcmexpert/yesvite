@@ -3744,7 +3744,7 @@ class ApiControllerv2 extends Controller
                     $checkUserExist = contact_sync::where('id', $value['id'])->first();
                     if ($checkUserExist) {
                         $eventInvite = new EventInvitedUser();
-                        $eventInvite->event_id = $eventData['event_id'];
+                        $eventInvite->event_id = $eventId;
                         $eventInvite->sync_id = $checkUserExist->id;
                         $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                         $eventInvite->save();
