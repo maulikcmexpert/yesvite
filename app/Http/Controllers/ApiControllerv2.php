@@ -4804,10 +4804,10 @@ class ApiControllerv2 extends Controller
                             // if ($value['prefer_by'] == 'phone') {
                                 
                             $checkUserExist = contact_sync::where('id', $value['id'])->first();
-                            dd($checkUserExist);
                             
-                                if (!empty($checkUserExist)) {
-
+                            
+                                if ($checkUserExist) {
+                                    dd($checkUserExist);
                                     //     $guestUser = User::create([
                                     //         'firstname' => $value['first_name'],
                                     //         'lastname' => $value['last_name'],
