@@ -4799,10 +4799,10 @@ class ApiControllerv2 extends Controller
 
 
                         $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('sync_id')->toArray();
-                        dd($invitedGuestUsers);
+                        // dd($invitedGuestUsers);
                         foreach ($invitedGuestUsers as $value) {
 
-                            if ($value['prefer_by'] == 'phone') {
+                            // if ($value['prefer_by'] == 'phone') {
 
                                 $checkUserExist = contact_sync::where('id', $value['id'])->first();
 
@@ -4838,7 +4838,7 @@ class ApiControllerv2 extends Controller
                                         }
                                     // }
                                 }
-                            } 
+                            // } 
                             // else if ($value['prefer_by'] == 'email') {
 
                             //     $checkUserExist = contact_sync::where('id', $value['id'])->first();
