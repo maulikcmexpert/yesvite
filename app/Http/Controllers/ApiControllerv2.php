@@ -4462,7 +4462,7 @@ class ApiControllerv2 extends Controller
                                 $invitedUserIdDetail['id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
                                 $invitedUserIdDetail['app_user'] = (!empty($guestVal->user->app_user) && $guestVal->user->app_user != NULL) ? $guestVal->user->app_user : "";
                                 $invitedUserIdDetail['visible'] = (!empty($guestVal->user->visible) && $guestVal->user->visible != NULL) ? $guestVal->user->visible : "";
-                                $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? $guestVal->user->profile : "";
+                                $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/').$guestVal->user->profile : "";
                                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
                             }
                         } else if ($guestVal->is_co_host == '1') {
