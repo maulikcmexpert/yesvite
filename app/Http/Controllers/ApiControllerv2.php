@@ -3728,11 +3728,11 @@ class ApiControllerv2 extends Controller
                 $invitedUsers = $eventData['invited_user_id'];
                 foreach ($invitedUsers as $value) {
                     $alreadyselectedCohost =  collect($eventData['co_host_list'])->pluck('user_id')->toArray();
-                    if (!in_array($value['user_id'], $alreadyselectedCohost)) {
+                    if (!in_array($value['id'], $alreadyselectedCohost)) {
                         EventInvitedUser::create([
                             'event_id' => $eventId,
                             'prefer_by' => $value['prefer_by'],
-                            'user_id' => $value['user_id']
+                            'user_id' => $value['id']
                         ]);
                     }
                 }
