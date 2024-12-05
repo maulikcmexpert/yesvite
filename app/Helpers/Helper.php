@@ -122,14 +122,14 @@ function sendNotification($notificationType, $postData)
 
     $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
         //  $query->where('app_user', '1');
-    })->where('event_id', $postData['event_id'])->get();
+    })->where('event_id', $postData['event_id'])->where('user_id','!=','')->get();
 
     if ($notificationType == 'invite') {
         if (count($invitedusers) != 0) {
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                 $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
                     //  $query->where('app_user', '1');
-                })->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])->get();
+                })->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])->where('user_id','!=','')->get();
             }
             foreach ($invitedusers as $value) {
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
