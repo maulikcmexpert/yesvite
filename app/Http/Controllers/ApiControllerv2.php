@@ -4448,7 +4448,7 @@ class ApiControllerv2 extends Controller
                                 $invitedGuestDetail['phone_number'] = (!empty($guestVal->contact_sync->phoneWithCode) && $guestVal->contact_sync->phoneWithCode != NULL) ? $guestVal->contact_sync->phoneWithCode : "";
                                 $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
                                 $invitedGuestDetail['id'] = (!empty($guestVal->sync_id) && $guestVal->sync_id != NULL) ? $guestVal->sync_id : "";
-                                $invitedGuestDetail['app_user'] = (!empty($guestVal->contact_sync->isAppUser) && $guestVal->contact_sync->isAppUser != NULL) ? $guestVal->contact_sync->isAppUser : 0;
+                                $invitedGuestDetail['app_user'] = (!empty($guestVal->contact_sync->isAppUser) && $guestVal->contact_sync->isAppUser != NULL) ? $guestVal->contact_sync->isAppUser : '0';
                                 $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
                                 $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
                                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
@@ -4460,7 +4460,7 @@ class ApiControllerv2 extends Controller
                                 $invitedUserIdDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
                                 $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
                                 $invitedUserIdDetail['id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                $invitedUserIdDetail['app_user'] = (!empty($guestVal->user->app_user) && $guestVal->user->app_user != NULL) ? $guestVal->user->app_user : 0;
+                                $invitedUserIdDetail['app_user'] = (!empty($guestVal->user->app_user) && $guestVal->user->app_user != NULL) ? $guestVal->user->app_user : '0';
                                 $invitedUserIdDetail['visible'] = (!empty($guestVal->user->visible) && $guestVal->user->visible != NULL) ? (int)$guestVal->user->visible : 0;
                                 $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/').$guestVal->user->profile : "";
                                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
