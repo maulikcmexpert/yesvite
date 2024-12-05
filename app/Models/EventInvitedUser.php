@@ -10,6 +10,7 @@ class EventInvitedUser extends Model
 {
     protected $fillable = [
         'event_id',
+        'sync_id',
         'user_id',
         'rsvp_status',
         'adults',
