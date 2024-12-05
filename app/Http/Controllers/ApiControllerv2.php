@@ -4807,7 +4807,6 @@ class ApiControllerv2 extends Controller
                             
                             
                                 if ($checkUserExist) {
-                                    dd($checkUserExist);
                                     //     $guestUser = User::create([
                                     //         'firstname' => $value['first_name'],
                                     //         'lastname' => $value['last_name'],
@@ -4826,7 +4825,6 @@ class ApiControllerv2 extends Controller
                                     // } else {
 
                                     // $alreadyselectedUser =  collect($eventData['invited_guests'])->pluck('sync_id')->toArray();
-
                                     // if (!in_array($checkUserExist->id, $alreadyselectedUser)) {
                                         if (!in_array($checkUserExist->id, $alreadyinvitedUser)) {
 
