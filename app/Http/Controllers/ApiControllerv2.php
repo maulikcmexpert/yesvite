@@ -3786,56 +3786,56 @@ class ApiControllerv2 extends Controller
                 if (!empty($coHostList)) {
 
                     foreach ($coHostList as $value) {
-                        $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('id')->toArray();
-                        if (!in_array($value['id'], $alreadyselectedUser)) {
+                        // $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('id')->toArray();
+                        // if (!in_array($value['id'], $alreadyselectedUser)) {
                             EventInvitedUser::create([
                                 'event_id' => $eventId,
                                 'prefer_by' => $value['prefer_by'],
                                 'user_id' => $value['id'],
                                 'is_co_host' => '1'
                             ]);
-                        } else {
-                            $updateRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventId])->first();
-                            if($updateRecord != null){
-                                $updateRecord->is_co_host = '1';
-                                $updateRecord->save();
-                            }else{
-                                EventInvitedUser::create([
-                                    'event_id' => $eventId,
-                                    'prefer_by' => $value['prefer_by'],
-                                    'user_id' => $value['id'],
-                                    'is_co_host' => '1'
-                                ]);
-                            }
-                        }
+                        // } else {
+                        //     $updateRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventId])->first();
+                        //     if($updateRecord != null){
+                        //         $updateRecord->is_co_host = '1';
+                        //         $updateRecord->save();
+                        //     }else{
+                        //         EventInvitedUser::create([
+                        //             'event_id' => $eventId,
+                        //             'prefer_by' => $value['prefer_by'],
+                        //             'user_id' => $value['id'],
+                        //             'is_co_host' => '1'
+                        //         ]);
+                        //     }
+                        // }
                     }
                 }
                 $guestcoHostList = $eventData['guest_co_host_list'];
 
                 if (!empty($guestcoHostList)) {
                     foreach ($guestcoHostList as $value) {
-                        $alreadyselectedguestUser =  collect($eventData['invited_guests'])->pluck('id')->toArray();
-                        if (!in_array($value['id'], $alreadyselectedguestUser)) {
+                        // $alreadyselectedguestUser =  collect($eventData['invited_guests'])->pluck('id')->toArray();
+                        // if (!in_array($value['id'], $alreadyselectedguestUser)) {
                             EventInvitedUser::create([
                                 'event_id' => $eventId,
                                 'prefer_by' => $value['prefer_by'],
                                 'sync_id' => $value['id'],
                                 'is_co_host' => '1'
                             ]);
-                        } else {
-                            $updateRecords = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventId])->first();
-                            if($updateRecords != null){
-                                $updateRecords->is_co_host = '1';
-                                $updateRecords->save();
-                            }else{
-                                EventInvitedUser::create([
-                                    'event_id' => $eventId,
-                                    'prefer_by' => $value['prefer_by'],
-                                    'sync_id' => $value['id'],
-                                    'is_co_host' => '1'
-                                ]);
-                            }
-                        }
+                        // } else {
+                        //     $updateRecords = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventId])->first();
+                        //     if($updateRecords != null){
+                        //         $updateRecords->is_co_host = '1';
+                        //         $updateRecords->save();
+                        //     }else{
+                        //         EventInvitedUser::create([
+                        //             'event_id' => $eventId,
+                        //             'prefer_by' => $value['prefer_by'],
+                        //             'sync_id' => $value['id'],
+                        //             'is_co_host' => '1'
+                        //         ]);
+                        //     }
+                        // }
                     }
                 }
             }
@@ -4763,28 +4763,28 @@ class ApiControllerv2 extends Controller
                                 $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('id')->toArray();
                                 foreach ($coHostList as $value) {
 
-                                    if (!in_array($value['id'], $alreadyselectedUser) && !in_array($value['id'], $getalreadyInviteduser)) {
-                                        $cohost = new EventInvitedUser();
-                                        $cohost->event_id = $eventData['event_id'];
-                                        $cohost->prefer_by = $value['prefer_by'];
-                                        $cohost->user_id = $value['id'];
-                                        $cohost->is_co_host = '1';
-                                        $cohost->save();
-                                    }
-                                    else {
-                                        $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventData['event_id']])->first();
-                                        if ($updateCohostRecord) {
-                                            $updateCohostRecord->is_co_host = '1';
-                                            $updateCohostRecord->save();
-                                        }else{
+                                    // if (!in_array($value['id'], $alreadyselectedUser) && !in_array($value['id'], $getalreadyInviteduser)) {
+                                    //     $cohost = new EventInvitedUser();
+                                    //     $cohost->event_id = $eventData['event_id'];
+                                    //     $cohost->prefer_by = $value['prefer_by'];
+                                    //     $cohost->user_id = $value['id'];
+                                    //     $cohost->is_co_host = '1';
+                                    //     $cohost->save();
+                                    // }
+                                    // else {
+                                    //     $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventData['event_id']])->first();
+                                    //     if ($updateCohostRecord) {
+                                    //         $updateCohostRecord->is_co_host = '1';
+                                    //         $updateCohostRecord->save();
+                                    //     }else{
                                             $cohost = new EventInvitedUser();
                                             $cohost->event_id = $eventData['event_id'];
                                             $cohost->prefer_by = $value['prefer_by'];
                                             $cohost->user_id = $value['id'];
                                             $cohost->is_co_host = '1';
                                             $cohost->save();
-                                        }
-                                    }
+                                        // }
+                                    // }
                                 }
                             }
                         }
@@ -4794,31 +4794,31 @@ class ApiControllerv2 extends Controller
                             if (!empty($guestcoHostList)) {
 
                                 foreach ($guestcoHostList as $value) {
-                                    $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('id')->toArray();
-                                    if (!in_array($value['id'], $alreadyselectedCoHostUser)) {
-                                        $checkIsAlreadyInvited = EventInvitedUser::where(['event_id' => $eventData['event_id'], 'sync_id' => $value['id']])->first();
-                                        if ($checkIsAlreadyInvited == null) {
+                                    // $alreadyselectedCoHostUser =  collect($eventData['co_host_list'])->pluck('id')->toArray();
+                                    // if (!in_array($value['id'], $alreadyselectedCoHostUser)) {
+                                    //     $checkIsAlreadyInvited = EventInvitedUser::where(['event_id' => $eventData['event_id'], 'sync_id' => $value['id']])->first();
+                                    //     if ($checkIsAlreadyInvited == null) {
                                             EventInvitedUser::create([
                                                 'event_id' => $eventData['event_id'],
                                                 'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
                                                 'sync_id' => $value['id'],
                                                 'is_co_host' => '1'
                                             ]);
-                                        } else {
-                                            $updateRecord = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventData['event_id']])->first();
-                                            if($updateRecord){
-                                                $updateRecord->is_co_host = '1';
-                                                $updateRecord->save();
-                                            }else{
-                                                EventInvitedUser::create([
-                                                    'event_id' => $eventData['event_id'],
-                                                    'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
-                                                    'sync_id' => $value['id'],
-                                                    'is_co_host' => '1'
-                                                ]);
-                                            }
-                                        }
-                                    }  
+                                        // } else {
+                                        //     $updateRecord = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventData['event_id']])->first();
+                                        //     if($updateRecord){
+                                        //         $updateRecord->is_co_host = '1';
+                                        //         $updateRecord->save();
+                                        //     }else{
+                                        //         EventInvitedUser::create([
+                                        //             'event_id' => $eventData['event_id'],
+                                        //             'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
+                                        //             'sync_id' => $value['id'],
+                                        //             'is_co_host' => '1'
+                                        //         ]);
+                                        //     }
+                                        // }
+                                    // }  
                                 }
                             }
                         }
