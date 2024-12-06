@@ -4762,7 +4762,7 @@ class ApiControllerv2 extends Controller
                         }
                         if (isset($eventData['guest_co_host_list'])) {
                             $guestcoHostList = $eventData['guest_co_host_list'];
-                            $alreadyselectedasguestCoUser =  collect($eventData['guest_co_host_list'])->pluck('user_id')->toArray();
+                            // $alreadyselectedasguestCoUser =  collect($eventData['guest_co_host_list'])->pluck('user_id')->toArray();
                             if (!empty($guestcoHostList)) {
 
                                 foreach ($guestcoHostList as $value) {
