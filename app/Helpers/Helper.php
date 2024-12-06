@@ -154,7 +154,7 @@ function sendNotification($notificationType, $postData)
                 // ->where('user_id','!=','')
                 ->get();
             }
-            dd($invitedusers);
+           
             foreach ($invitedusers as $value) {
                 if($value->user_id != ''){
                     Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
@@ -284,6 +284,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                 }else if($value->sync_id != ''){
+                    dd($invitedusers);
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                     if ($value->is_co_host == '1') {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
