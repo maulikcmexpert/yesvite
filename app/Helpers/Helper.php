@@ -284,7 +284,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                 }else if($value->sync_id != ''){
-                    dd($invitedusers);
+                    dd($value);
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                     if ($value->is_co_host == '1') {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
