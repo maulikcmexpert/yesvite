@@ -78,7 +78,7 @@ class ApiAuthController extends Controller
                 $usersignup =  User::where('id', $existUser->id)->update([
                     'firstname' => $input['firstname'],
                     'lastname' => $input['lastname'],
-                    'email' => $input['email'],
+                    'email' => strtolower($input['email']),
                     'account_type' => $input['account_type'],
                     'company_name' => ($input['account_type'] == '1') ? $input['company_name'] : "",
                     'password' => Hash::make($input['password']),
@@ -148,7 +148,7 @@ class ApiAuthController extends Controller
             if ($checkUser != null) {
                 $checkUser->firstname = $input['firstname'];
                 $checkUser->lastname = $input['lastname'];
-                $checkUser->email = $input['email'];
+                $checkUser->email = strtolower($input['email']);
                 $checkUser->account_type = $input['account_type'];
                 $checkUser->company_name = ($input['account_type'] == '1') ? $input['company_name'] : "";
                 $checkUser->password = Hash::make($input['password']);
@@ -160,7 +160,7 @@ class ApiAuthController extends Controller
                 $checkUser = new User();
                 $checkUser->firstname = $input['firstname'];
                 $checkUser->lastname = $input['lastname'];
-                $checkUser->email = $input['email'];
+                $checkUser->email = strtolower($input['email']);
                 $checkUser->account_type = $input['account_type'];
                 $checkUser->company_name = ($input['account_type'] == '1') ? $input['company_name'] : "";
                 $checkUser->password = Hash::make($input['password']);
@@ -193,7 +193,7 @@ class ApiAuthController extends Controller
                 'token' => $randomString
             ];
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
-                $message->to($input['email']);
+                $message->to(strtolower($input['email']));
                 $message->subject('Verify your Yesvite email address');
             });
 
