@@ -10628,11 +10628,12 @@ class ApiControllerv2 extends Controller
             DB::beginTransaction();
             $id = 0;
             $ids = [];
+            $newInvite = [];
             foreach ($input['guest_list'] as $value) {
 
                 if ($value['app_user'] == "0") {
                     $checkUserInvitation = EventInvitedUser::with(['contact_sync'])->where(['event_id' => $input['event_id'],'user_id' => ''])->where('sync_id','!=','')->get()->pluck('sync_id')->toArray();
-                    // $id = $value['id'];
+                    $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
@@ -10644,6 +10645,7 @@ class ApiControllerv2 extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
+                    
                 } else {
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
@@ -10659,6 +10661,7 @@ class ApiControllerv2 extends Controller
                         $updateUser->save();
                     }
                 }
+                $newInvite[] = ['app_user' =>$value['app_user'] ,'id' => $id];
                 // if ($value['prefer_by'] == 'email') {
 
                 //     $email = $value['email'];
@@ -10720,12 +10723,22 @@ class ApiControllerv2 extends Controller
                 $ids[] = $id;
             }
 
-            if (isset($ids) && !empty($ids)) {
+            // if (isset($ids) && !empty($ids)) {
+
+            //     $notificationParam = [
+            //         'sender_id' => $user->id,
+            //         'event_id' => $input['event_id'],
+            //         'newUser' => $ids
+            //     ];
+            //     // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+            //     sendNotification('invite', $notificationParam);
+            // }
+            if (isset($newInvite) && !empty($newInvite)) {
 
                 $notificationParam = [
                     'sender_id' => $user->id,
                     'event_id' => $input['event_id'],
-                    'newUser' => $ids
+                    'newUser' => $newInvite
                 ];
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
