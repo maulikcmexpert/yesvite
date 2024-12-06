@@ -284,7 +284,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                 }else if($value->sync_id != ''){
-                    dd($value);
+                   
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                     if ($value->is_co_host == '1') {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
@@ -314,7 +314,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                     if ($value->prefer_by == 'phone') {
-
+                        dd($value);
                         $sent = sendSMSForApplication($value->contact_sync->phoneWithCode, $notification_message);
                         if ($sent == true) {
                             $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
