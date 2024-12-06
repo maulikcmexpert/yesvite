@@ -276,8 +276,8 @@ function sendNotification($notificationType, $postData)
                 
             }
         }
-        $inviteduserGuests = EventInvitedUser::with(['contact_sync'])->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
         if (isset($inviteduserGuests) && count($inviteduserGuests) != 0) {
+            $inviteduserGuests = EventInvitedUser::with(['contact_sync'])->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
             if (isset($filteredIdsguest) && count($filteredIdsguest) != 0) {
                 
                 $inviteduserGuests = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])
