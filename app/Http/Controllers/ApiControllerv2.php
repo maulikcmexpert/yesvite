@@ -3787,6 +3787,7 @@ class ApiControllerv2 extends Controller
 
                     foreach ($coHostList as $value) {
                         $alreadyselectedUser =  collect($eventData['invited_user_id'])->pluck('id')->toArray();
+                        dd($value['id']);
                         if (!in_array($value['id'], $alreadyselectedUser)) {
                             EventInvitedUser::create([
                                 'event_id' => $eventId,
@@ -3794,6 +3795,11 @@ class ApiControllerv2 extends Controller
                                 'user_id' => $value['id'],
                                 'is_co_host' => '1'
                             ]);
+                        } else {
+                            $updateRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventId])->first();
+                            
+                            $updateRecord->is_co_host = '1';
+                            $updateRecord->save();
                         }
                     }
                 }
@@ -3809,6 +3815,10 @@ class ApiControllerv2 extends Controller
                                 'sync_id' => $value['id'],
                                 'is_co_host' => '1'
                             ]);
+                        } else {
+                            $updateRecord = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventId])->first();
+                            $updateRecord->is_co_host = '1';
+                            $updateRecord->save();
                         }
                     }
                 }
