@@ -150,7 +150,7 @@ function sendNotification($notificationType, $postData)
                 // ->whereHas('user', function ($query) {
                     //  $query->where('app_user', '1');
                 // })
-                ->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])
+                ->whereIn('user_id', $postData['newUser'])->orWhereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])
                 // ->where('user_id','!=','')
                 ->get();
             }
