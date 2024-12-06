@@ -3823,9 +3823,18 @@ class ApiControllerv2 extends Controller
                                 'is_co_host' => '1'
                             ]);
                         } else {
-                            $updateRecord = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventId])->first();
-                            $updateRecord->is_co_host = '1';
-                            $updateRecord->save();
+                            $updateRecords = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventId])->first();
+                            if($updateRecords != null){
+                                $updateRecords->is_co_host = '1';
+                                $updateRecords->save();
+                            }else{
+                                EventInvitedUser::create([
+                                    'event_id' => $eventId,
+                                    'prefer_by' => $value['prefer_by'],
+                                    'sync_id' => $value['id'],
+                                    'is_co_host' => '1'
+                                ]);
+                            }
                         }
                     }
                 }
