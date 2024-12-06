@@ -4776,15 +4776,17 @@ class ApiControllerv2 extends Controller
                                         if ($updateCohostRecord) {
                                             $updateCohostRecord->is_co_host = '1';
                                             $updateCohostRecord->save();
+                                        }else{
+                                            $cohost = new EventInvitedUser();
+                                            $cohost->event_id = $eventData['event_id'];
+                                            $cohost->prefer_by = $value['prefer_by'];
+                                            $cohost->user_id = $value['id'];
+                                            $cohost->is_co_host = '1';
+                                            $cohost->save();
                                         }
                                     }
                                 }
                             }
-                            // else {
-                            //     // remove //
-
-                            //     EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '1'])->delete();
-                            // }
                         }
                         if (isset($eventData['guest_co_host_list'])) {
                             $guestcoHostList = $eventData['guest_co_host_list'];
@@ -4804,8 +4806,17 @@ class ApiControllerv2 extends Controller
                                             ]);
                                         } else {
                                             $updateRecord = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventData['event_id']])->first();
-                                            $updateRecord->is_co_host = '1';
-                                            $updateRecord->save();
+                                            if($updateRecord){
+                                                $updateRecord->is_co_host = '1';
+                                                $updateRecord->save();
+                                            }else{
+                                                EventInvitedUser::create([
+                                                    'event_id' => $eventData['event_id'],
+                                                    'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
+                                                    'sync_id' => $value['id'],
+                                                    'is_co_host' => '1'
+                                                ]);
+                                            }
                                         }
                                     }  
                                 }
