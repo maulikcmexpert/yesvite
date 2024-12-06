@@ -2874,6 +2874,13 @@ class ApiControllerv2 extends Controller
                 // dd($contact);
                 $email = $contact['email'] ?? '';
                 $phone = $contact['phone'] ?? '';
+                if((isset($contact['email']) && $contact['email'] != '' && $user->email == $contact['email']) || (isset($contact['phone_number']) && $contact['phone_number'] != '' && $user->phone_number == $contact['phone_number']) ){
+                    return response()->json([
+                        'status' => 1,
+                        'message' => 'You can not add your details as contact',
+                        'data' => $updatedContacts,
+                    ]);
+                }
                 if ($email != "" && $phone != "") {
                     $existingContact = contact_sync::where('email', $email)->where('phone', $phone)->first();
                 } elseif ($email != "" && $phone == "") {
@@ -2945,6 +2952,7 @@ class ApiControllerv2 extends Controller
                 ->get();
                 // dd($userDetails);
             foreach ($userDetails as $userDetail) {
+
                 contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($userDetail) {
                         $query->where('email', $userDetail->email)
