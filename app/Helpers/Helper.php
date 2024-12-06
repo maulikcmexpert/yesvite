@@ -150,7 +150,7 @@ function sendNotification($notificationType, $postData)
                 // ->whereHas('user', function ($query) {
                     //  $query->where('app_user', '1');
                 // })
-                ->whereIn('user_id', $postData['newUser'])->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])
+                ->whereIn('user_id', $filteredIds)->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])
                 // ->where('user_id','!=','')
                 ->get();
             }
@@ -284,7 +284,7 @@ function sendNotification($notificationType, $postData)
                         }
                     }
                 }else if($value->sync_id != ''){
-                   
+                    
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                     if ($value->is_co_host == '1') {
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
