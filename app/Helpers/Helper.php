@@ -110,6 +110,7 @@ function sendNotification($notificationType, $postData)
             fn($guest) => $guest['id'],
             array_filter($postData['newUser'], fn($guest) => $guest['app_user'] === 0)
         );
+        dd($filteredIdsguest);
         $postData['newUser'] = $filteredIds;
     }
 
@@ -279,7 +280,10 @@ function sendNotification($notificationType, $postData)
         if (isset($inviteduserGuests) && count($inviteduserGuests) != 0) {
             if (isset($filteredIdsguest) && count($filteredIdsguest) != 0) {
                 
-                $inviteduserGuests = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
+                $inviteduserGuests = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])
+                    ->whereIn('sync_id', $filteredIdsguest)
+                    ->where('event_id', $postData['event_id'])
+                    ->where('sync_id','!=','')->get();
             }
             foreach ($inviteduserGuests as $value) {
                 
