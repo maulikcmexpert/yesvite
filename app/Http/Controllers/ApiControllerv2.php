@@ -5000,7 +5000,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_addr' => $eventData['from_addr'],
                             'to_addr' => $eventData['to_addr'],
-                            'newUser' => $filteredIds
+                            'newUser' => $eventData['invited_new_guest'],
                         ];
 
                         sendNotification('update_address', $notificationParam);
@@ -5018,7 +5018,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_time' => $eventData['from_time'],
                             'to_time' => $eventData['to_time'],
-                            'newUser' => $filteredIds
+                            'newUser' => $eventData['invited_new_guest']
                         ];
 
                         sendNotification('update_time', $notificationParam);
@@ -5036,7 +5036,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'old_start_end_date' => $eventData['old_start_end_date'],
                             'new_start_end_date' => $eventData['new_start_end_date'],
-                            'newUser' => $filteredIds
+                            'newUser' => $eventData['invited_new_guest']
                         ];
 
                         sendNotification('update_date', $notificationParam);
@@ -5054,7 +5054,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_time' => $eventData['from_time'],
                             'to_time' => $eventData['to_time'],
-                            'newUser' => $filteredIds
+                            'newUser' => $eventData['invited_new_guest']
                         ];
 
                         sendNotification('update_event', $notificationParam);
@@ -5072,7 +5072,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_time' => $eventData['from_time'],
                             'to_time' => $eventData['to_time'],
-                            'newUser' => $filteredIds
+                            'newUser' => $eventData['invited_new_guest']
                         ];
 
                         sendNotification('update_potluck', $notificationParam);
@@ -5092,7 +5092,7 @@ class ApiControllerv2 extends Controller
 
                         'event_id' => $eventData['event_id'],
 
-                        'newUser' => $filteredIds
+                        'newUser' => $eventData['invited_new_guest']
 
                     ];
 
