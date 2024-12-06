@@ -10567,21 +10567,31 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $sendFaildInvites = EventInvitedUser::where(['event_id' => $input['event_id'],'invitation_sent' => '9'])->where('user_id','!=','')->get();
+            $sendFaildInvites = EventInvitedUser::where(['event_id' => $input['event_id'],'invitation_sent' => '9'])->get();
 
             $faildInviteList = [];
-
             foreach ($sendFaildInvites as $value) {
-
-                $userDetail['id'] = $value->user->id;
-                $userDetail['first_name'] = (!empty($value->user->firstname) || $value->user->firstname != NULL) ? $value->user->firstname : "";
-                $userDetail['last_name'] = (!empty($value->user->lastname) || $value->user->lastname != NULL) ? $value->user->lastname : "";
-                $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-                $userDetail['email'] = (!empty($value->user->email)) ? $value->user->email : "";
-                $userDetail['country_code'] = (string)$value->user->country_code;
-                $userDetail['phone_number'] = (!empty($value->user->phone_number)) ? $value->user->phone_number : "";
-                $userDetail['app_user'] = $value->user->app_user;
-                $userDetail['prefer_by'] = $value->prefer_by;
+                if($value->user_id != ''){
+                    $userDetail['id'] = $value->user->id;
+                    $userDetail['first_name'] = (!empty($value->user->firstname) || $value->user->firstname != NULL) ? $value->user->firstname : "";
+                    $userDetail['last_name'] = (!empty($value->user->lastname) || $value->user->lastname != NULL) ? $value->user->lastname : "";
+                    $userDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
+                    $userDetail['email'] = (!empty($value->user->email)) ? $value->user->email : "";
+                    $userDetail['country_code'] = (string)$value->user->country_code;
+                    $userDetail['phone_number'] = (!empty($value->user->phone_number)) ? $value->user->phone_number : "";
+                    $userDetail['app_user'] = $value->user->app_user;
+                    $userDetail['prefer_by'] = $value->prefer_by;
+                }else if($value->sync_id != ''){
+                    $userDetail['id'] = $value->contact_sync->id;
+                    $userDetail['first_name'] = (!empty($value->contact_sync->firstName) || $value->contact_sync->firstName != NULL) ? $value->contact_sync->firstName : "";
+                    $userDetail['last_name'] = (!empty($value->contact_sync->lastName) || $value->contact_sync->lastName != NULL) ? $value->contact_sync->lastName : "";
+                    $userDetail['profile'] = (!empty($value->contact_sync->photo) || $value->contact_sync->photo != NULL) ? $value->contact_sync->photo : "";
+                    $userDetail['email'] = (!empty($value->contact_sync->email)) ? $value->contact_sync->email : "";
+                    $userDetail['country_code'] = '';
+                    $userDetail['phone_number'] = (!empty($value->contact_sync->phoneWithCode)) ? $value->contact_sync->phoneWithCode : "";
+                    $userDetail['app_user'] = $value->contact_sync->isAppUser;
+                    $userDetail['prefer_by'] = $value->prefer_by;
+                }
                 $faildInviteList[] = $userDetail;
             }
 
