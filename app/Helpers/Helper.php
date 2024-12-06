@@ -154,6 +154,7 @@ function sendNotification($notificationType, $postData)
                 // ->where('user_id','!=','')
                 ->get();
             }
+            dd($invitedusers);
             foreach ($invitedusers as $value) {
                 if($value->user_id != ''){
                     Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
