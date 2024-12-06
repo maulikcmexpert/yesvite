@@ -131,6 +131,7 @@ class ApiContactController extends Controller
 // dd($contacts);
         // Process each contact from the request
         foreach ($contacts as $contact) {
+            $contact['email'] = @strtolower($contact['email']);
             if (!empty($contact['firstName']) && (!empty($contact['phoneWithCode']) || !empty($contact['email']))) {
                 if((isset($contact['email']) && $contact['email'] != '' && $user->email == $contact['email']) || (isset($contact['phoneWithCode']) && $contact['phoneWithCode'] != '' && $user->phone_number == $contact['phoneWithCode']) ){
                     continue;
