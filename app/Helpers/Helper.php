@@ -315,7 +315,7 @@ function sendNotification($notificationType, $postData)
                     }
                     if ($value->prefer_by == 'phone') {
                         $sent = sendSMSForApplication($value->contact_sync->phoneWithCode, $notification_message);
-                        dd($sent);
+                        // dd($sent);
                         if ($sent == true) {
                             $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
                             $updateinvitation->invitation_sent = '1';
