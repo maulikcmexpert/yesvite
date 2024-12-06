@@ -37,6 +37,7 @@ use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use App\Mail\BulkEmail;
+use Illuminate\Support\Facades\DB;
 
 function getVideoDuration($filePath)
 {
@@ -122,21 +123,27 @@ function sendNotification($notificationType, $postData)
     }
     $notification_message = "";
 
-    $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
-        //  $query->where('app_user', '1');
-    })->where('event_id', $postData['event_id'])->where('user_id','!=','')->groupBy('user_id')->get();
+    $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])
+        ->select('user_id', DB::raw('MAX(id) as id'))
+        ->whereHas('user', function ($query) {
+            //  $query->where('app_user', '1');
+        })->where('event_id', $postData['event_id'])
+            ->where('user_id','!=','')
+            ->groupBy('user_id')->get();
 
     if ($notificationType == 'invite') {
         if (count($invitedusers) != 0) {
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                 
-                $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])->whereHas('user', function ($query) {
-                    //  $query->where('app_user', '1');
-                })->whereIn('user_id', $postData['newUser'])
-                    ->where('event_id', $postData['event_id'])
-                    ->where('user_id','!=','')
-                    ->groupBy('user_id')
-                    ->get();
+                $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])
+                    ->select('user_id', DB::raw('MAX(id) as id'))
+                    ->whereHas('user', function ($query) {
+                        //  $query->where('app_user', '1');
+                    })->whereIn('user_id', $postData['newUser'])
+                        ->where('event_id', $postData['event_id'])
+                        ->where('user_id','!=','')
+                        ->groupBy('user_id')
+                        ->get();
             }
             foreach ($invitedusers as $value) {
                 Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
