@@ -4317,7 +4317,7 @@ class ApiControllerv2 extends Controller
                 // dd($invitedUser);
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
-                        if ($guestVal->is_co_host == '0') {
+                        // if ($guestVal->is_co_host == '0') {
                             if ($guestVal->user_id == "" && $guestVal->sync_id != "") {
                                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
@@ -4343,7 +4343,8 @@ class ApiControllerv2 extends Controller
                                 $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/'.$guestVal->user->profile) : "";
                                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
                             }
-                        } else if ($guestVal->is_co_host == '1') {
+                        // } else 
+                        if ($guestVal->is_co_host == '1') {
                             if ($guestVal->user_id == '' && $guestVal->sync_id != "") {
                                 $guestCoHostDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                                 $guestCoHostDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
