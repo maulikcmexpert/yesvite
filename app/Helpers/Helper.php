@@ -275,14 +275,13 @@ function sendNotification($notificationType, $postData)
                 
             }
         }
-        $inviteduserGuest = EventInvitedUser::with(['contact_sync'])->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
-        if (isset($inviteduserGuest) && count($inviteduserGuest) != 0) {
+        $inviteduserGuests = EventInvitedUser::with(['contact_sync'])->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
+        if (isset($inviteduserGuests) && count($inviteduserGuests) != 0) {
             if (isset($filteredIdsguest) && count($filteredIdsguest) != 0) {
                 
-                $inviteduserguest = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
+                $inviteduserGuests = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
             }
-            dd($inviteduserGuest);
-            foreach ($inviteduserguest as $value) {
+            foreach ($inviteduserGuests as $value) {
                 
 
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
