@@ -111,7 +111,7 @@ function sendNotification($notificationType, $postData)
             array_filter($postData['newUser'], fn($guest) => $guest['app_user'] === 0)
         );
         // dd($filteredIdsguest);
-        $postData['newUser'] = $filteredIds;
+        // $postData['newUser'] = $filteredIds;
     }
 
     
