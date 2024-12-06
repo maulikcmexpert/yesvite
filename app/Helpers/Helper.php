@@ -281,6 +281,7 @@ function sendNotification($notificationType, $postData)
                 
                 $inviteduserguest = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
             }
+            dd($inviteduserGuest);
             foreach ($inviteduserguest as $value) {
                 
 
