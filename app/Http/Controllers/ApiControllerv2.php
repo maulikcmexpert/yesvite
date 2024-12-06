@@ -4316,9 +4316,9 @@ class ApiControllerv2 extends Controller
                 //     echo  $user->id;
                 //     continue;
                 // }
-                if ($user->email_verified_at == NULL && $user->app_user == '1') {
-                    continue;
-                }
+                // if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                //     continue;
+                // }
                 $yesviteUserDetail['id'] = $user->id;
                 $yesviteUserDetail['profile'] = empty($user->profile) ? "" : asset('storage/profile/' . $user->profile);
                 $yesviteUserDetail['first_name'] = $user->firstname;
