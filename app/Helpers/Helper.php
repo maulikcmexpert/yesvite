@@ -398,7 +398,9 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event' || $notificationType == 'update_date') {
         if (count($invitedusers) != 0) {
             foreach ($invitedusers as $value) {
-
+                if($value->user_id == ''){
+                    continue;
+                }
                 if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                     if (in_array($value->user_id, $postData['newUser'])) {
                         continue;
@@ -464,7 +466,9 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'update_potluck') {
         if (count($invitedusers) != 0) {
             foreach ($invitedusers as $value) {
-
+                if($value->user_id == ''){
+                    continue;
+                }
                 if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
                     if (in_array($value->user_id, $postData['newUser'])) {
                         continue;
