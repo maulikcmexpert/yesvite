@@ -2876,7 +2876,7 @@ class ApiControllerv2 extends Controller
                 $phone = $contact['phone'] ?? '';
                 if((isset($contact['email']) && $contact['email'] != '' && $user->email == $contact['email']) || (isset($contact['phone_number']) && $contact['phone_number'] != '' && $user->phone_number == $contact['phone_number']) ){
                     return response()->json([
-                        'status' => 1,
+                        'status' => 0,
                         'message' => 'You can not add your details as contact',
                         'data' => $updatedContacts,
                     ]);
