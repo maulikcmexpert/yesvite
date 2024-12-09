@@ -6771,6 +6771,10 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->save();
                 //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
                 if ($rsvpSent->save()) {
+                    EventPost::where('event_id',$request->event_id)
+                        ->where('user_id',$request->user_id)
+                        ->where('post_type','4')->delete();
+                        
                     $postMessage = [];
                     $postMessage = [
                         'status' => ($request->rsvp_status == '0') ? '2' : '1',
