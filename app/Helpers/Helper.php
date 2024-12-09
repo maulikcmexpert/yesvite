@@ -101,18 +101,18 @@ function sendNotification($notificationType, $postData)
     $user  = Auth::guard('api')->user();
 
     $senderData = User::where('id', $postData['sender_id'])->first();
-    if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
-        $filteredIds = array_map(
-            fn($guest) => $guest['id'],
-            array_filter($postData['newUser'], fn($guest) => $guest['app_user'] === 1)
-        );
-        $filteredIdsguest = array_map(
-            fn($guest) => $guest['id'],
-            array_filter($postData['newUser'], fn($guest) => $guest['app_user'] === 0)
-        );
-        // dd($filteredIdsguest);
-        // $postData['newUser'] = $filteredIds;
-    }
+    // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
+    //     $filteredIds = array_map(
+    //         fn($guest) => $guest['id'],
+    //         array_filter($postData['newUser'], fn($guest) => $guest['app_user'] === 1)
+    //     );
+    //     $filteredIdsguest = array_map(
+    //         fn($guest) => $guest['id'],
+    //         array_filter($postData['newUser'], fn($guest) => $guest['app_user'] === 0)
+    //     );
+    //     // dd($filteredIdsguest);
+    //     // $postData['newUser'] = $filteredIds;
+    // }
 
     
     
@@ -135,7 +135,7 @@ function sendNotification($notificationType, $postData)
     }
     $notification_message = "";
 
-    $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user','contact_sync'])
+    $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])
     // ->whereHas('user', function ($query) {
         //  $query->where('app_user', '1');
     // })
@@ -146,17 +146,17 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'invite') {
         if (count($invitedusers) != 0) {
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
-                $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user','contact_sync'])
+                $invitedusers = EventInvitedUser::with(['event', 'event.event_image', 'event.user', 'event.event_settings', 'event.event_schedule', 'user'])
                 // ->whereHas('user', function ($query) {
                     //  $query->where('app_user', '1');
                 // })
-                ->whereIn('user_id', $filteredIds)->whereIn('sync_id', $filteredIdsguest)->where('event_id', $postData['event_id'])
+                ->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])
                 // ->where('user_id','!=','')
                 ->get();
             }
            
             foreach ($invitedusers as $value) {
-                if($value->user_id != ''){
+              
                     Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
     
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
@@ -283,116 +283,8 @@ function sendNotification($notificationType, $postData)
                             }
                         }
                     }
-                }else if($value->sync_id != ''){
-                    
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
-                    if ($value->is_co_host == '1') {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
-                    }  
-                    if ($value->prefer_by == 'email') {
-                        $eventData = [
-                            'event_id' => (int)$postData['event_id'],
-                            'user_id' => $value->contact_sync->id,
-                            'event_name' => $value->event->event_name,
-                            'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
-                            'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
-                            'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
-                            'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
-                            'time' => $value->event->rsvp_start_time,
-                            'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
-                        ];
-
-                        $emailCheck = dispatch(new sendInvitation(array($value->contact_sync->email, $eventData)));
-                        $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'email'])->first();
-
-                        if (!empty($emailCheck)) {
-                            $updateinvitation->invitation_sent = '1';
-                            $updateinvitation->save();
-                        }else{
-                            $updateinvitation->invitation_sent = '9';
-                            $updateinvitation->save();
-                        }
-                    }
-                    if ($value->prefer_by == 'phone') {
-                        $sent = sendSMSForApplication($value->contact_sync->phoneWithCode, $notification_message);
-                        // dd($sent);
-                        if ($sent == true) {
-                            $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
-                            $updateinvitation->invitation_sent = '1';
-                            $updateinvitation->save();
-                        }else{
-                            $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
-                            $updateinvitation->invitation_sent = '9';
-                            $updateinvitation->save();
-                            
-                        }
-                    }
-                }
-                
             }
         }
-        // if(!isset($postData['newUser'])){
-        //     $inviteduserGuests = EventInvitedUser::with(['contact_sync'])->where('event_id', $postData['event_id'])->where('sync_id','!=','')->get();
-        // }
-        // if (isset($filteredIdsguest) && count($filteredIdsguest) != 0) {
-        //     if (isset($filteredIdsguest) && count($filteredIdsguest) != 0) {
-                
-        //         $inviteduserGuests = EventInvitedUser::with(['contact_sync','event','event.user','event.event_image', 'event.event_schedule'])
-        //             ->whereIn('sync_id', $filteredIdsguest)
-        //             ->where('event_id', $postData['event_id'])
-        //             ->where('sync_id','!=','')->get();
-        //     }
-        //     if(isset($inviteduserGuests) && count($inviteduserGuests) != 0){
-        //         foreach ($inviteduserGuests as $value) {
-                    
-
-        //             $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
-        //             if ($value->is_co_host == '1') {
-        //                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
-        //             }
-
-                        
-        //                 if ($value->prefer_by == 'email') {
-        //                     $eventData = [
-        //                         'event_id' => (int)$postData['event_id'],
-        //                         'user_id' => $value->contact_sync->id,
-        //                         'event_name' => $value->event->event_name,
-        //                         'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
-        //                         'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
-        //                         'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
-        //                         'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
-        //                         'time' => $value->event->rsvp_start_time,
-        //                         'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
-        //                     ];
-
-        //                     $emailCheck = dispatch(new sendInvitation(array($value->contact_sync->email, $eventData)));
-        //                     $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'email'])->first();
-
-        //                     if (!empty($emailCheck)) {
-        //                         $updateinvitation->invitation_sent = '1';
-        //                         $updateinvitation->save();
-        //                     }else{
-        //                         $updateinvitation->invitation_sent = '9';
-        //                         $updateinvitation->save();
-        //                     }
-        //                 }
-        //                 if ($value->prefer_by == 'phone') {
-
-        //                     $sent = sendSMSForApplication($value->contact_sync->phoneWithCode, $notification_message);
-        //                     if ($sent == true) {
-        //                         $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
-        //                         $updateinvitation->invitation_sent = '1';
-        //                         $updateinvitation->save();
-        //                     }else{
-        //                         $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
-        //                         $updateinvitation->invitation_sent = '9';
-        //                         $updateinvitation->save();
-                                
-        //                     }
-        //                 }
-        //         }
-        //     }
-        // }
     }
 
     if ($notificationType == 'update_address' || $notificationType == 'update_time' || $notificationType == 'update_event' || $notificationType == 'update_date') {
