@@ -10501,8 +10501,8 @@ class ApiControllerv2 extends Controller
                         ];
 
                     }else if($value->sync_id != ''){
-                        dd($value->sync_id);
                         $contactData = contact_sync::where('id',$value->sync_id)->first();
+                        dd($contactData);
                         if($contactData){
                             $rsvpUserStatus['id'] = $value->id;
                             $rsvpUserStatus['user_id'] = $value->sync_id;
