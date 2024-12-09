@@ -10499,6 +10499,50 @@ class ApiControllerv2 extends Controller
                             'message_privacy' =>  $value->user->message_privacy
                         ];
 
+                    }else if($value->sync_id != ''){
+                        $rsvpUserStatus['user_id'] = $value->sync_id;
+                        $rsvpUserStatus['first_name'] = $value->contact_user->firstName;
+                        $rsvpUserStatus['last_name'] = $value->contact_user->lastName;
+                        $rsvpUserStatus['username'] = $value->contact_user->firstName . ' ' . $value->contact_user->lastName;
+                        $rsvpUserStatus['profile'] = (!empty($value->contact_user->photo) || $value->contact_user->photo != NULL) ? $value->contact_user->photo: "";
+                        $rsvpUserStatus['email'] = ($value->contact_user->email != '') ? $value->contact_user->email : "";
+                        $rsvpUserStatus['phone_number'] = ($value->contact_user->phoneWithCode != '') ? $value->contact_user->phoneWithCode : "";
+                        $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
+                        $rsvpUserStatus['kids'] = $value->kids;
+                        $rsvpUserStatus['adults'] = $value->adults;
+                        $rsvpUserStatus['rsvp_status'] =  ($value->rsvp_status != null) ? (int)$value->rsvp_status : NULL;
+    
+                        if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
+    
+                            $rsvpUserStatus['rsvp_status'] = 2; // no reply 
+                        }
+    
+                        $rsvpUserStatus['read'] = $value->read;
+    
+                        $rsvpUserStatus['rsvp_d'] = $value->rsvp_d;
+    
+                        $rsvpUserStatus['invitation_sent'] = $value->invitation_sent;
+                        $totalEvent =  Event::where('sync_id', $value->sync_id)->count();
+                        $totalEventPhotos =  0;
+                        $comments =  0;
+                        $rsvpUserStatus['user_profile'] = [
+                            'id' => $value->sync_id,
+                            'profile' => (!empty($value->contact_user->photo) || $value->contact_user->photo != NULL) ? $value->contact_user->photo: "",
+                            'bg_profile' => '',
+                            'app_user' =>  $value->contact_user->app_user,
+                            'gender' => "",
+                            'first_name' =>$value->contact_user->firstName,
+                            'last_name' => $value->contact_user->lastName,
+                            'username' =>$value->contact_user->firstName . ' ' . $value->contact_user->lastName,
+                            'location' => "",
+                            'about_me' => "",
+                            'created_at' => empty($value->contact_user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->contact_user->created_at))),
+                            'total_events' => $totalEvent,
+                            'visible' => $value->contact_user->visible,
+                            'total_photos' => $totalEventPhotos,
+                            'comments' => $comments,
+                            'message_privacy' =>  ''
+                        ];
                     }
 
 
