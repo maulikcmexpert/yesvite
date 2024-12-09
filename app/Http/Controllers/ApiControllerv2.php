@@ -10463,6 +10463,7 @@ class ApiControllerv2 extends Controller
                         $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
                         $rsvpUserStatus['phone_number'] = ($value->user->phone_number != '') ? $value->user->phone_number : "";
                         $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
+                        $rsvpUserStatus['app_user'] =  $value->user->app_user;
                         $rsvpUserStatus['kids'] = $value->kids;
                         $rsvpUserStatus['adults'] = $value->adults;
                         $rsvpUserStatus['rsvp_status'] =  ($value->rsvp_status != null) ? (int)$value->rsvp_status : NULL;
@@ -10507,6 +10508,7 @@ class ApiControllerv2 extends Controller
                         $rsvpUserStatus['profile'] = (!empty($value->contact_user->photo) || $value->contact_user->photo != NULL) ? $value->contact_user->photo: "";
                         $rsvpUserStatus['email'] = ($value->contact_user->email != '') ? $value->contact_user->email : "";
                         $rsvpUserStatus['phone_number'] = ($value->contact_user->phoneWithCode != '') ? $value->contact_user->phoneWithCode : "";
+                        $rsvpUserStatus['app_user'] =  $value->contact_user->isAppUser;
                         $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
                         $rsvpUserStatus['kids'] = $value->kids;
                         $rsvpUserStatus['adults'] = $value->adults;
