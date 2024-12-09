@@ -10414,7 +10414,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
             $userRsvpStatusList = EventInvitedUser::query();
-            $userRsvpStatusList
+            $userRsvpStatusList->with(['user','contact_sync'])
                 // ->whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
                 // })
@@ -10450,7 +10450,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['rsvp_status_list'] = [];
 
             if (count($result) != 0) {
-                dd($result);
+                
                 foreach ($result as $value) {
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
