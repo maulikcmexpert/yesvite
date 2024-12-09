@@ -1269,6 +1269,22 @@ function sendNotificationGuest($notificationType, $postData)
     }
 }
 
+function checkUserEmailExist($checkContactExist){
+    $checkUserExist = User::where('email',$checkContactExist->email)->first(); 
+    if($checkUserExist == NULL){
+        $addUser = new User();
+        $addUser->firstname = $checkContactExist->firstName;
+        $addUser->lastname = $checkContactExist->lastName;
+        $addUser->email = $checkContactExist->email;
+        $addUser->app_user = '0';
+        $addUser->save();
+        $newUserId = $addUser->id;
+    }else{
+        $newUserId = $checkUserExist->id;
+    }
+    return $newUserId;
+}
+
 function isOwnerOrInvited($userId, $eventId, $postId = null)
 {
     $event = Event::with('event_invited_user')->find($eventId);
