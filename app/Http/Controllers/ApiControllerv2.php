@@ -10667,7 +10667,7 @@ class ApiControllerv2 extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    $newInviteGuest[] = ['app_user' =>$value['app_user'] ,'id' => $id];
+                    $newInviteGuest[] = ['id' => $id];
                 } else {
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
@@ -10682,7 +10682,7 @@ class ApiControllerv2 extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    $newInvite[] = ['app_user' =>$value['app_user'] ,'id' => $id];
+                    $newInvite[] = ['id' => $id];
                 }
                 // if ($value['prefer_by'] == 'email') {
 
