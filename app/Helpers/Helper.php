@@ -1239,7 +1239,7 @@ function sendNotificationGuest($notificationType, $postData)
                             'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                         ];
 
-                        $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+                        $emailCheck = dispatch(new sendInvitation(array($value->contact_sync->email, $eventData)));
                         $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'email'])->first();
 
                         if (!empty($emailCheck)) {
