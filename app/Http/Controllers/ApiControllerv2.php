@@ -10414,9 +10414,11 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
             $userRsvpStatusList = EventInvitedUser::query();
-            $userRsvpStatusList->whereHas('user', function ($query) {
-                $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
+            $userRsvpStatusList
+                // ->whereHas('user', function ($query) {
+                // $query->where('app_user', '1');
+                // })
+            ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
 
             $selectedFilters = $request->input('filters');
             if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
@@ -10448,29 +10450,21 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['rsvp_status_list'] = [];
 
             if (count($result) != 0) {
-
+                dd($result);
                 foreach ($result as $value) {
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
 
                     $rsvpUserStatus['user_id'] = $value->user->id;
-
                     $rsvpUserStatus['first_name'] = $value->user->firstname;
                     $rsvpUserStatus['last_name'] = $value->user->lastname;
                     $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
-
-
                     $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-
-
                     $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
-
                     $rsvpUserStatus['phone_number'] = ($value->user->phone_number != '') ? $value->user->phone_number : "";
                     $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
                     $rsvpUserStatus['kids'] = $value->kids;
-
                     $rsvpUserStatus['adults'] = $value->adults;
-
                     $rsvpUserStatus['rsvp_status'] =  ($value->rsvp_status != null) ? (int)$value->rsvp_status : NULL;
 
                     if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
