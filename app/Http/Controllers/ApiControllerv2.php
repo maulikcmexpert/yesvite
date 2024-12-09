@@ -5605,6 +5605,7 @@ class ApiControllerv2 extends Controller
                 if (isset($request->is_draft) && $request->is_draft == '1') {
 
                     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+                    dd($checkUserInvited);
                     if ($request->is_update_event == '0') {
                         if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
 
