@@ -456,7 +456,7 @@ function getInvitedUsers($eventId)
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            if ($guestVal->user_id ==  '' && $guestVal->sync_id != '') {
+            if ($guestVal->sync_id != '') {
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
                 $invitedGuestDetail['email'] = (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "";
@@ -468,7 +468,7 @@ function getInvitedUsers($eventId)
                 $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
                 $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
-            } elseif ($guestVal->user->is_user_phone_contact == '0') {
+            } elseif ($guestVal->user->app_user == '1') {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
                 $invitedUserIdDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
