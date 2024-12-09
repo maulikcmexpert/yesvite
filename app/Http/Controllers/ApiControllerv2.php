@@ -10415,9 +10415,9 @@ class ApiControllerv2 extends Controller
 
             $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList
-                ->whereHas('user', function ($query) {
+                // ->whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
-                })
+                // })
             ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
 
             $selectedFilters = $request->input('filters');
