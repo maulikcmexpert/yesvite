@@ -28,7 +28,8 @@ class NewRsvpsEmailNotify extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "New Rsvps for " . $this->eventData['event_name'] . " from " . $this->eventData['guest_name'] . " who just RSVP'd",
+            // subject: "New RSVP Received for " . $this->eventData['event_name'] . " from " . $this->eventData['guest_name'] . " who just RSVP'd",
+            subject: "New RSVP Received for " . $this->eventData['event_name'],
         );
     }
 
