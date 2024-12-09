@@ -4541,6 +4541,7 @@ class ApiControllerv2 extends Controller
 
     public function editEvent(Request $request)
     {
+        dd(1);
         $user  = Auth::guard('api')->user();
 
         $rawData = $request->getContent();
