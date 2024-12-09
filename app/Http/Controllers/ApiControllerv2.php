@@ -10448,13 +10448,13 @@ class ApiControllerv2 extends Controller
             $result = $userRsvpStatusList->get();
 
             $eventAboutHost['rsvp_status_list'] = [];
-            dd($result);
+          
             if (count($result) != 0) {
                 foreach ($result as $value) {
                     // dd($value->user_id);
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
-                    if(isset($value->user->id) && isset($value->user->app_user) && $value->user->app_user == '1' ){
+                    if($value->sync_id == ''){
                         $rsvpUserStatus['user_id'] = $value->user->id;
                         $rsvpUserStatus['first_name'] = $value->user->firstname;
                         $rsvpUserStatus['last_name'] = $value->user->lastname;
@@ -10501,6 +10501,7 @@ class ApiControllerv2 extends Controller
                         ];
 
                     }else if($value->sync_id != ''){
+                        dd($value);
                         $rsvpUserStatus['user_id'] = $value->sync_id;
                         $rsvpUserStatus['first_name'] = $value->contact_user->firstName;
                         $rsvpUserStatus['last_name'] = $value->contact_user->lastName;
