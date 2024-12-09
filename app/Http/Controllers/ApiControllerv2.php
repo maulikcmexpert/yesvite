@@ -5085,21 +5085,28 @@ class ApiControllerv2 extends Controller
                         fn($guest) => $guest['id'],
                         array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
                     );
-
                     $notificationParam = [
-
                         'sender_id' => $user->id,
-
                         'event_id' => $eventData['event_id'],
-
                         'newUser' => $filteredIds
-
                     ];
 
                     sendNotification('invite', $notificationParam);
+
+                    $newInviteGuest = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
+                    );
+
+                    if(isset($newInviteGuest) && !empty($newInviteGuest)){
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'newUser' => $newInviteGuest
+                        ];
+                        sendNotificationGuest('invite', $notificationParam);
+                    }
                 }
-
-
 
                 DB::commit();
 
@@ -5608,6 +5615,9 @@ class ApiControllerv2 extends Controller
                             ];
                             // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             sendNotification('invite', $notificationParam);
+                       
+                            sendNotificationGuest('invite', $notificationParam);
+                            
                         }
                         if ($checkUserInvited->is_draft_save == '0') {
                             $notificationParam = [
@@ -10639,6 +10649,7 @@ class ApiControllerv2 extends Controller
             $id = 0;
             $ids = [];
             $newInvite = [];
+            $newInviteGuest = [];
             foreach ($input['guest_list'] as $value) {
 
                 if ($value['app_user'] == "0") {
@@ -10655,7 +10666,7 @@ class ApiControllerv2 extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    $newInvite[] = ['app_user' =>$value['app_user'] ,'id' => $id];
+                    $newInviteGuest[] = ['app_user' =>$value['app_user'] ,'id' => $id];
                 } else {
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
@@ -10752,6 +10763,14 @@ class ApiControllerv2 extends Controller
                 ];
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
+            }
+            if(isset($newInviteGuest) && !empty($newInviteGuest)){
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $input['event_id'],
+                    'newUser' => $newInviteGuest
+                ];
+                sendNotificationGuest('invite', $notificationParam);
             }
         }
 
