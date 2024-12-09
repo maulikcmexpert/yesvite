@@ -10451,53 +10451,57 @@ class ApiControllerv2 extends Controller
 
             if (count($result) != 0) {
                 foreach ($result as $value) {
-                    dd($value);
+                    // dd($value->user_id);
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
+                    if(isset($value->user->id) && isset($value->user->app_user) && $value->user->app_user == '1' ){
+                        $rsvpUserStatus['user_id'] = $value->user->id;
+                        $rsvpUserStatus['first_name'] = $value->user->firstname;
+                        $rsvpUserStatus['last_name'] = $value->user->lastname;
+                        $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
+                        $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
+                        $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
+                        $rsvpUserStatus['phone_number'] = ($value->user->phone_number != '') ? $value->user->phone_number : "";
+                        $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
+                        $rsvpUserStatus['kids'] = $value->kids;
+                        $rsvpUserStatus['adults'] = $value->adults;
+                        $rsvpUserStatus['rsvp_status'] =  ($value->rsvp_status != null) ? (int)$value->rsvp_status : NULL;
+    
+                        if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
+    
+                            $rsvpUserStatus['rsvp_status'] = 2; // no reply 
+                        }
+    
+                        $rsvpUserStatus['read'] = $value->read;
+    
+                        $rsvpUserStatus['rsvp_d'] = $value->rsvp_d;
+    
+                        $rsvpUserStatus['invitation_sent'] = $value->invitation_sent;
+                        $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                        $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
+                        $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+                        $rsvpUserStatus['user_profile'] = [
+                            'id' => $value->user->id,
+                            'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
+                            'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
+                            'app_user' =>  $value->user->app_user,
+                            'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
+                            'first_name' => $value->user->firstname,
+                            'last_name' => $value->user->lastname,
+                            'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                            'location' => ($value->user->city != NULL) ? $value->user->city : "",
+                            'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
+                            'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                            'total_events' => $totalEvent,
+                            'visible' => $value->user->visible,
+                            'total_photos' => $totalEventPhotos,
+                            'comments' => $comments,
+                            'message_privacy' =>  $value->user->message_privacy
+                        ];
 
-                    $rsvpUserStatus['user_id'] = $value->user->id;
-                    $rsvpUserStatus['first_name'] = $value->user->firstname;
-                    $rsvpUserStatus['last_name'] = $value->user->lastname;
-                    $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
-                    $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-                    $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
-                    $rsvpUserStatus['phone_number'] = ($value->user->phone_number != '') ? $value->user->phone_number : "";
-                    $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
-                    $rsvpUserStatus['kids'] = $value->kids;
-                    $rsvpUserStatus['adults'] = $value->adults;
-                    $rsvpUserStatus['rsvp_status'] =  ($value->rsvp_status != null) ? (int)$value->rsvp_status : NULL;
-
-                    if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
-
-                        $rsvpUserStatus['rsvp_status'] = 2; // no reply 
                     }
 
-                    $rsvpUserStatus['read'] = $value->read;
 
-                    $rsvpUserStatus['rsvp_d'] = $value->rsvp_d;
-
-                    $rsvpUserStatus['invitation_sent'] = $value->invitation_sent;
-                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
-                    $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
-                    $comments =  EventPostComment::where('user_id', $value->user->id)->count();
-                    $rsvpUserStatus['user_profile'] = [
-                        'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
-                        'app_user' =>  $value->user->app_user,
-                        'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
-                        'first_name' => $value->user->firstname,
-                        'last_name' => $value->user->lastname,
-                        'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                        'location' => ($value->user->city != NULL) ? $value->user->city : "",
-                        'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
-                        'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
-                        'total_events' => $totalEvent,
-                        'visible' => $value->user->visible,
-                        'total_photos' => $totalEventPhotos,
-                        'comments' => $comments,
-                        'message_privacy' =>  $value->user->message_privacy
-                    ];
 
 
 
