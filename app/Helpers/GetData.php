@@ -260,14 +260,16 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
 function getEventInvitedUser($event_id, $rsvp_d = null)
 {
 
-    return  EventInvitedUser::whereHas('user', function ($query) use ($rsvp_d) {
-        $query->when($rsvp_d == null, function ($q) {
-            $q->where('app_user', '1');
-        })->when($rsvp_d != null, function ($q) {
-            $q->where('rsvp_d', '1')
-                ->where('app_user', '1');
-        });
-    })->where('event_id', $event_id)->get();
+    return  EventInvitedUser::
+    // whereHas('user', function ($query) use ($rsvp_d) {
+    //     $query->when($rsvp_d == null, function ($q) {
+    //         $q->where('app_user', '1');
+    //     })->when($rsvp_d != null, function ($q) {
+    //         $q->where('rsvp_d', '1')
+    //             ->where('app_user', '1');
+    //     });
+    // })->
+    where('event_id', $event_id)->get();
 }
 
 
