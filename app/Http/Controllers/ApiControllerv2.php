@@ -10413,11 +10413,11 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
-            $userRsvpStatusList = EventInvitedUser::with(['contact_sync','user'])->query();
+            $userRsvpStatusList = EventInvitedUser::query();
             $userRsvpStatusList
-                // ->whereHas('user', function ($query) {
+                ->whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
-                // })
+                })
             ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
 
             $selectedFilters = $request->input('filters');
