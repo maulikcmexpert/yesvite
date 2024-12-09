@@ -3754,11 +3754,27 @@ class ApiControllerv2 extends Controller
                 $alreadyselectedguestCohost =  collect($eventData['guest_co_host_list'])->pluck('id')->toArray();
                 foreach ($invitedGuestUsers as $value) {
                     // if(!in_array($value['id'],$alreadyselectedguestCohost)){
-                        $checkUserExist = contact_sync::where('id', $value['id'])->first();
-                        if ($checkUserExist) {
+                        $checkContactExist = contact_sync::where('id', $value['id'])->first();
+                        if ($checkContactExist) {
+                            $newUserId = NULL;
+                            if($checkContactExist->email != ''){
+                                $checkUserExist = User::where('email',$checkContactExist->email)->first(); 
+                                if($checkUserExist == NULL){
+                                    $addUser = new User();
+                                    $addUser->firstname = $checkContactExist->firstName;
+                                    $addUser->lastname = $checkContactExist->lastName;
+                                    $addUser->email = $checkContactExist->email;
+                                    $addUser->app_user = '0';
+                                    $addUser->save();
+                                    $newUserId = $addUser->id;
+                                }else{
+                                    $newUserId = $checkUserExist->id;
+                                }
+                            }
                             $eventInvite = new EventInvitedUser();
                             $eventInvite->event_id = $eventId;
-                            $eventInvite->sync_id = $checkUserExist->id;
+                            $eventInvite->sync_id = $checkContactExist->id;
+                            $eventInvite->user_id = $newUserId;
                             $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                             $eventInvite->save();
                         }
@@ -3822,12 +3838,30 @@ class ApiControllerv2 extends Controller
 
                 if (!empty($guestcoHostList)) {
                     foreach ($guestcoHostList as $value) {
+                        $newUserId = NULL;
+                        $checkSyncContact = contact_sync::where('id',$value['id'])->where('email','!=','')->first();
+
+                        if($checkSyncContact){
+                            $checkUserExist = User::where('email',$checkSyncContact->email)->first();
+                            if($checkUserExist == NULL){
+                                $addUser = new User();
+                                $addUser->firstname = $checkSyncContact->firstName;
+                                $addUser->lastname = $checkSyncContact->lastName;
+                                $addUser->email = $checkSyncContact->email;
+                                $addUser->app_user = '0';
+                                $addUser->save();
+                                $newUserId = $addUser->id;
+                            }else{
+                                $newUserId = $checkUserExist->id;
+                            }
+                        }
                         // $alreadyselectedguestUser =  collect($eventData['invited_guests'])->pluck('id')->toArray();
                         // if (!in_array($value['id'], $alreadyselectedguestUser)) {
                             EventInvitedUser::create([
                                 'event_id' => $eventId,
                                 'prefer_by' => $value['prefer_by'],
                                 'sync_id' => $value['id'],
+                                'user_id' => $newUserId,
                                 'is_co_host' => '1'
                             ]);
                         // } else {
