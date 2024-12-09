@@ -10546,6 +10546,7 @@ class ApiControllerv2 extends Controller
                             'comments' => $comments,
                             'message_privacy' =>  ''
                         ];
+                        dd($rsvpUserStatus);
                     }
 
 
