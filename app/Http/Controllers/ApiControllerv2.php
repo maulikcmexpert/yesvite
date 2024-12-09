@@ -4733,12 +4733,16 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
-                            foreach ($getalreadyInvitedguest as $value) {
-                                if (!in_array($value, $alreadyselectedasCoUserGuest)) {
-                                    EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '1'])->delete();
-                                } else {
-                                    if (!in_array($value, $userSelectedGuestContact)) {
-                                        EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '0'])->delete();
+                            if(count($getalreadyInvitedguest) > 0){
+                                foreach ($getalreadyInvitedguest as $value) {
+                                    if (!in_array($value, $alreadyselectedasCoUserGuest)) {
+                                        EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '1'])->delete();
+                                    } else {
+                                        if(!empty($userSelectedGuestContact)){
+                                            if (!in_array($value, $userSelectedGuestContact)) {
+                                                EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '0'])->delete();
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -6774,7 +6778,7 @@ class ApiControllerv2 extends Controller
                     EventPost::where('event_id',$request->event_id)
                         ->where('user_id',$request->user_id)
                         ->where('post_type','4')->delete();
-                        
+
                     $postMessage = [];
                     $postMessage = [
                         'status' => ($request->rsvp_status == '0') ? '2' : '1',
