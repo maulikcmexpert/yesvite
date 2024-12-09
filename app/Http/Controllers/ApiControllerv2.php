@@ -10619,7 +10619,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
             return response()->json(['status' => 1, 'data' => $eventAboutHost, 'message' => "Guest event"]);
         } catch (QueryException $e) {
-
+            dd($e);
             DB::rollBack();
 
             return response()->json(['status' => 0, 'message' => "error"]);
