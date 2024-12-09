@@ -10454,7 +10454,7 @@ class ApiControllerv2 extends Controller
                     // dd($value->user_id);
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
-                    if($value->sync_id == ''){
+                    if(isset($value->user->id) && isset($value->user->app_user) && $value->user->app_user == '1' ){
                         $rsvpUserStatus['user_id'] = $value->user->id;
                         $rsvpUserStatus['first_name'] = $value->user->firstname;
                         $rsvpUserStatus['last_name'] = $value->user->lastname;
@@ -10501,6 +10501,7 @@ class ApiControllerv2 extends Controller
                         ];
 
                     }else if($value->sync_id != ''){
+                        
                         $rsvpUserStatus['user_id'] = $value->sync_id;
                         $rsvpUserStatus['first_name'] = $value->contact_sync->firstName;
                         $rsvpUserStatus['last_name'] = $value->contact_sync->lastName;
