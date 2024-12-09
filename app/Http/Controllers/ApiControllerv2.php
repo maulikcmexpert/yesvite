@@ -10414,7 +10414,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
             $userRsvpStatusList = EventInvitedUser::query();
-            $userRsvpStatusList->with(['user','contact_sync'])
+            $userRsvpStatusList->with(['contact_sync'])
                 // ->whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
                 // })
