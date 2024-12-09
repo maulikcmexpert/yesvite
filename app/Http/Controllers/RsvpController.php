@@ -170,6 +170,9 @@ class RsvpController extends Controller
             $rsvpSent->save();
 
             if ($rsvpSent->save()) {
+                EventPost::where('event_id',$eventId)
+                        ->where('user_id',$userId)
+                        ->where('post_type','4')->delete();
                 $postMessage = [];
                 $postMessage = [
                     'status' => ($request->rsvp_status == '0') ? '2' : '1',
