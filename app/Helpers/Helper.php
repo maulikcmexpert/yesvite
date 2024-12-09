@@ -140,7 +140,7 @@ function sendNotification($notificationType, $postData)
         //  $query->where('app_user', '1');
     // })
     ->where('event_id', $postData['event_id'])
-    // ->where('user_id','!=','')
+    ->where('user_id','!=','')
     ->get();
 
     if ($notificationType == 'invite') {
@@ -151,7 +151,7 @@ function sendNotification($notificationType, $postData)
                     //  $query->where('app_user', '1');
                 // })
                 ->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])
-                // ->where('user_id','!=','')
+                ->where('user_id','!=','')
                 ->get();
             }
            
