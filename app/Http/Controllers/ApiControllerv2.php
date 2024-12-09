@@ -10700,10 +10700,18 @@ class ApiControllerv2 extends Controller
                     $checkUserInvitation = EventInvitedUser::with(['contact_sync'])->where(['event_id' => $input['event_id'],'user_id' => ''])->where('sync_id','!=','')->get()->pluck('sync_id')->toArray();
                     $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
+                        $checkUserExist = contact_sync::where('id', $value['id'])->first();
+                        $newUserId = NULL;
+                        if ($checkUserExist) {
+                            if($checkUserExist->email != ''){
+                                $newUserId = checkUserEmailExist($checkUserExist);
+                            }
+                        }
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
                             'prefer_by' => $value['prefer_by'],
-                            'sync_id' => $value['id']
+                            'sync_id' => $value['id'],
+                            'user_id' => $newUserId
                         ]);
                     } else {
                         $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $input['event_id'], 'sync_id' => $id])->first();
