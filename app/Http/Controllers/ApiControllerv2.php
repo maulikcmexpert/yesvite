@@ -10450,8 +10450,8 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['rsvp_status_list'] = [];
 
             if (count($result) != 0) {
-                dd($result);
                 foreach ($result as $value) {
+                    dd($value);
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
 
