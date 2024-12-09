@@ -76,7 +76,7 @@
                     <td>
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Your email address: {{$userData['email']}} was added to your Yesvite account..</p>
+                            Your email address: {{$userData['email']}} was added to your Yesvite account.</p>
                         </p>
                     </td>
                 </tr>
