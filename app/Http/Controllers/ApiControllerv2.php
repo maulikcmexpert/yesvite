@@ -4733,19 +4733,21 @@ class ApiControllerv2 extends Controller
                                     }
                                 }
                             }
-                            if(count($getalreadyInvitedguest) > 0){
+                         
                                 foreach ($getalreadyInvitedguest as $value) {
-                                    if (!in_array($value, $alreadyselectedasCoUserGuest)) {
-                                        EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '1'])->delete();
-                                    } else {
-                                        if(!empty($userSelectedGuestContact)){
-                                            if (!in_array($value, $userSelectedGuestContact)) {
-                                                EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '0'])->delete();
+                                    if($value != ''){
+                                        if (!in_array($value, $alreadyselectedasCoUserGuest)) {
+                                            EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '1'])->delete();
+                                        } else {
+                                            if(!empty($userSelectedGuestContact)){
+                                                if (!in_array($value, $userSelectedGuestContact)) {
+                                                    EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '0'])->delete();
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
+                            
                         }
                     } else {
                         EventInvitedUser::where(['event_id' => $eventData['event_id'], 'is_co_host' => '0'])->delete();
