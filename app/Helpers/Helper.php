@@ -1208,7 +1208,6 @@ function sendNotificationGuest($notificationType, $postData)
     ->where('event_id', $postData['event_id'])
     ->where('sync_id','!=','')
     ->get();
-    dd($invitedusers);
     if ($notificationType == 'invite') {
         if (count($invitedusers) != 0) {
             if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
