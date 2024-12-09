@@ -4737,6 +4737,11 @@ class ApiControllerv2 extends Controller
                                 }
                             }
                         }
+                    }else{
+                        EventInvitedUser::where('event_id',$eventData['event_id'])
+                            ->where('sync_id','!=','')
+                            ->where('is_co_host','0')
+                            ->delete();
                     }
 
                     if ($eventData['event_setting']) {
