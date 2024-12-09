@@ -12610,6 +12610,7 @@ class ApiControllerv3 extends Controller
                             // }
                             sendNotification('invite', $notificationParam);
                             sendNotification('owner_notify', $notificationParam);
+                            sendNotificationGuest('invite', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
@@ -12656,6 +12657,7 @@ class ApiControllerv3 extends Controller
                             // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
                             sendNotification('invite', $notificationParam);
                             sendNotification('owner_notify', $notificationParam);
+                            sendNotificationGuest('invite', $notificationParam);
                             Event::where('id',$input['event_id'])->update(['is_draft_save'=>'0']);
                         }
                     }
@@ -12765,6 +12767,7 @@ class ApiControllerv3 extends Controller
                             // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
                             sendNotification('invite', $notificationParam);
                             sendNotification('owner_notify', $notificationParam);
+                            sendNotificationGuest('invite', $notificationParam);
                             $updateEvent->is_draft_save = '0';
                         }
                         $updateEvent->product_payment_id = $new_subscription->id;
