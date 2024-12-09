@@ -4740,6 +4740,7 @@ class ApiControllerv2 extends Controller
                                             EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '1'])->delete();
                                         } else {
                                             if(!empty($userSelectedGuestContact)){
+                                                dd($value);
                                                 if (!in_array($value, $userSelectedGuestContact)) {
                                                     EventInvitedUser::where(['sync_id' => $value, 'is_co_host' => '0'])->delete();
                                                 }
