@@ -239,7 +239,7 @@ class ApiAuthController extends Controller
         $getUser = User::where('email',$input['email'])->first();
         if($getUser){
             if($getUser->password == NULL){
-                return response()->json(['status' => 0, 'message' => 'Email or password invalid']);
+                return response()->json(['status' => 0, 'message' => 'Invalid login method']);
             }
         }
         if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
