@@ -235,6 +235,7 @@ class ApiContactController extends Controller
         $mergeArray = array_merge($insertedContacts, $duplicateContacts);
         $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile','app_user','visible')
         ->whereIn('email', $emails)
+        ->where('app_user','1')
         // ->orWhereIn('phone_number', $phoneNumbers)
         ->get();
         
