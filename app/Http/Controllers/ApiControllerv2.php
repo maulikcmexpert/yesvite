@@ -9113,6 +9113,8 @@ class ApiControllerv2 extends Controller
             try {
                 $record = $request->file('post_recording');
 
+                
+
                 // Generate a unique file name
                 $recordingName = time() . '_' . $record->getClientOriginalName();
 
@@ -9123,13 +9125,16 @@ class ApiControllerv2 extends Controller
                 $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
                 $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.mp3';
 
-
-                // Convert the audio to MP3 using FFmpeg
                 $ffmpeg = FFMpeg::create();
                 $audio = $ffmpeg->open($inputPath);
+                $audio->filters()->resample(44100);
+                $audio->save(new \FFMpeg\Format\Audio\Mp3(), $outputPath);
+                // Convert the audio to MP3 using FFmpeg
+                // $ffmpeg = FFMpeg::create();
+                // $audio = $ffmpeg->open($inputPath);
 
-                $format = new Mp3();
-                $audio->save($format, $outputPath);
+                // $format = new Mp3();
+                // $audio->save($format, $outputPath);
 
                 // Save the recording name to the database
                 $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
