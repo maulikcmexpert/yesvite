@@ -5,6 +5,9 @@
     </div>
 </div>
 @else
+@if ($yesviteUser->isNotEmpty())
+    
+
 @foreach($yesviteUser as $value)
 <?php
 $initials = '';
@@ -49,4 +52,5 @@ if ($value->firstname !== null && $value->lastname !== null) {
     <a href="#" class="btn edit-contact edit_contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a>
 </div>
 @endforeach
+@endif
 @endif
