@@ -9135,7 +9135,7 @@ class ApiControllerv2 extends Controller
                 $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
             } catch (RuntimeException $e) {
                 // Log the error message
-
+                dd($e);
                 Log::error('FFmpeg error: ' . $e->getMessage());
                 echo 'Error: ' . $e->getMessage();
             }
