@@ -10,6 +10,7 @@
 
 @foreach($yesviteUser as $value)
 <?php
+dd($yesviteUser);
 $initials = '';
 $fontColor = '';
 if ($value->firstname !== null && $value->lastname !== null) {
