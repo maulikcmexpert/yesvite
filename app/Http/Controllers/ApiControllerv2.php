@@ -9102,44 +9102,44 @@ class ApiControllerv2 extends Controller
         $creatEventPost->user_id = $user->id;
         $creatEventPost->post_message = $request->post_message;
 
-        if ($request->hasFile('post_recording')) {
-            $record = $request->post_recording;
-            $recordingName = time() . '_' . $record->getClientOriginalName();
-            $record->move(public_path('storage/event_post_recording'), $recordingName);
-            $creatEventPost->post_recording = $recordingName;
-        }
-
         // if ($request->hasFile('post_recording')) {
-        //     try {
-        //         $record = $request->file('post_recording');
-
-        //         // Generate a unique file name
-        //         $recordingName = time() . '_' . $record->getClientOriginalName();
-
-        //         // Move the uploaded file to the desired location
-        //         $record->move(public_path('storage/event_post_recording'), $recordingName);
-
-
-        //         $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
-        //         $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.mp3';
-
-
-        //         // Convert the audio to MP3 using FFmpeg
-        //         $ffmpeg = FFMpeg::create();
-        //         $audio = $ffmpeg->open($inputPath);
-
-        //         $format = new Mp3();
-        //         $audio->save($format, $outputPath);
-
-        //         // Save the recording name to the database
-        //         $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
-        //     } catch (RuntimeException $e) {
-        //         // Log the error message
-
-        //         Log::error('FFmpeg error: ' . $e->getMessage());
-        //         echo 'Error: ' . $e->getMessage();
-        //     }
+        //     $record = $request->post_recording;
+        //     $recordingName = time() . '_' . $record->getClientOriginalName();
+        //     $record->move(public_path('storage/event_post_recording'), $recordingName);
+        //     $creatEventPost->post_recording = $recordingName;
         // }
+
+        if ($request->hasFile('post_recording')) {
+            try {
+                $record = $request->file('post_recording');
+
+                // Generate a unique file name
+                $recordingName = time() . '_' . $record->getClientOriginalName();
+
+                // Move the uploaded file to the desired location
+                $record->move(public_path('storage/event_post_recording'), $recordingName);
+
+
+                $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
+                $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.mp3';
+
+
+                // Convert the audio to MP3 using FFmpeg
+                $ffmpeg = FFMpeg::create();
+                $audio = $ffmpeg->open($inputPath);
+
+                $format = new Mp3();
+                $audio->save($format, $outputPath);
+
+                // Save the recording name to the database
+                $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
+            } catch (RuntimeException $e) {
+                // Log the error message
+
+                Log::error('FFmpeg error: ' . $e->getMessage());
+                echo 'Error: ' . $e->getMessage();
+            }
+        }
 
         $creatEventPost->post_privacy = $request->post_privacy;
         $creatEventPost->post_type = $request->post_type;
