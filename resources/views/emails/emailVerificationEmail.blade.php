@@ -24,7 +24,7 @@
     <!-- partial:index.partial.html -->
     <div style="width: 100%;max-width: 650px; margin:0 auto; height:100%;padding: 1 0px 10px;" class="ui-sortable">
         <table
-            style="border-radius: 5px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;"
+            style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);width: 100%;height:100%;background: #fff;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);padding: 30px;border-radius: 20px;"
             class="full selected-table" border="0" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
