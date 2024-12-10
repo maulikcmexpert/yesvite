@@ -140,21 +140,27 @@ class ApiContactController extends Controller
                     $existingContact = contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($contact) {
                         $query->where('email', $contact['email'])
-                            ->where('phoneWithCode', $contact['phoneWithCode']);
+                            ->where('phoneWithCode', $contact['phoneWithCode'])
+                            ->where('firstName',$contact['firstName'])
+                            ->where('lastName', $contact['lastName']);
                     })
                     ->first();
                 }elseif (empty($contact['phoneWithCode']) && !empty($contact['email'])) {
                     $existingContact = contact_sync::where('contact_id', $user->id)
                         ->where(function ($query) use ($contact) {
                             $query->where('email', $contact['email'])
-                                ->where('phoneWithCode','');
+                                ->where('phoneWithCode','')
+                                ->where('firstName',$contact['firstName'])
+                                ->where('lastName', $contact['lastName']);
                         })
                         ->first();
                 }elseif (!empty($contact['phoneWithCode']) && empty($contact['email'])) {
                     $existingContact = contact_sync::where('contact_id', $user->id)
                         ->where(function ($query) use ($contact) {
                             $query->where('phoneWithCode', $contact['phoneWithCode'])
-                                ->where('email', '');
+                                ->where('email', '')
+                                ->where('firstName',$contact['firstName'])
+                                ->where('lastName', $contact['lastName']);
                         })
                         ->first();
                 }
