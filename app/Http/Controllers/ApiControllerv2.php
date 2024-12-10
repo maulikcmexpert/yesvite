@@ -5746,8 +5746,10 @@ class ApiControllerv2 extends Controller
                     // }
                     
                     $deleteEvent->delete();
-
-                    UserReportToPost::where('event_id', $input['event_id'])->delete();
+                    $userReportPost =  UserReportToPost::where('event_id', $input['event_id'])->get();
+                    if(isset($userReportPost) && !empty($userReportPost)){
+                        UserReportToPost::where('event_id', $input['event_id'])->delete();
+                    }
 
                     $event_images=EventImage::where('event_id', $input['event_id'])->get();
                     if(isset($event_images)&&!empty($event_images)){
