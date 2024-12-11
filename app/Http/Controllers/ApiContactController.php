@@ -132,11 +132,11 @@ class ApiContactController extends Controller
             
         })->values()->toArray();
 
-        $contact = collect($uniqueData)->unique(function ($item) {
+        // $contact = collect($uniqueData)->unique(function ($item) {
 
-                return $item['email'];
+        //         return $item['email'];
             
-        })->values()->toArray();
+        // })->values()->toArray();
         return response()->json([
             'without_sync_count' => count($contacts),
             'all_contacts' => $contact,
