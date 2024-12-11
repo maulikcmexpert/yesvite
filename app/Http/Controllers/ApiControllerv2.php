@@ -2887,9 +2887,8 @@ class ApiControllerv2 extends Controller
                         'data' => $updatedContacts,
                     ]);
                 }
-                if ($email != "" && $phone != "") {
-                    $existingContact = contact_sync::where('email', $email)->where('phone', $phone)->first();
-                } elseif ($email != "" && $phone == "") {
+
+                if ($email != "") {
                     $existingContact = contact_sync::where('email', $email)->first();
                     if(isset($existingContact)){
                         $existingContact->update([
@@ -2922,8 +2921,9 @@ class ApiControllerv2 extends Controller
                             'updated_at' => now(),
                         ];
                     }
-                } elseif ($email == "" && $phone != "") {
-                    $existingContact = contact_sync::where('phone', $phone)->first();
+                }
+                if ($phone != "") {
+                    $existingContact = contact_sync::where('phoneWithCode', $phone)->first();
                     if(isset($existingContact)){
                         $existingContact->update([
                             'isAppUser' => $existingContact->isAppUser,
@@ -2956,6 +2956,75 @@ class ApiControllerv2 extends Controller
                         ];
                     }
                 }
+                // if ($email != "" && $phone != "") {
+                //     $existingContact = contact_sync::where('email', $email)->where('phone', $phone)->first();
+                // } elseif ($email != "" && $phone == "") {
+                //     $existingContact = contact_sync::where('email', $email)->first();
+                //     if(isset($existingContact)){
+                //         $existingContact->update([
+                //             'isAppUser' => $existingContact->isAppUser,
+                //             'phone' => $contact['phone_number'] ?? $existingContact->phone,
+                //             'firstName' => $contact['firstname'] ?? $existingContact->firstName,
+                //             'lastName' => $contact['lastname'] ?? $existingContact->lastName,
+                //             'photo' => $contact['photo'] ?? $existingContact->photo,
+                //             'phoneWithCode' => $contact['phone_number'] ?? $existingContact->phoneWithCode,
+                //             'visible' => ($contact['visible'] ?? $existingContact->visible),
+                //             'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
+                //         ]);
+                //         $existingContact->sync_id = $existingContact->id;
+                        
+                //         $updatedContacts[] = $existingContact;
+                //     }else{
+                //         $newContacts[] = [
+                //             'userId' => null,
+                //             'contact_id' => $user->id,
+                //             'firstName' => $contact['firstname'] ?? '',
+                //             'lastName' => $contact['lastname'] ?? '',
+                //             'phone' => $contact['phone_number'] ?? '',
+                //             'email' => $contact['email'] ?? '',
+                //             'photo' => $contact['photo'] ?? '',
+                //             'phoneWithCode' => $contact['phone_number'] ?? '',
+                //             'isAppUser' => '0',
+                //             'visible' => '0',
+                //             'preferBy' => $contact['prefer_by'] ?? '',
+                //             'created_at' => now(),
+                //             'updated_at' => now(),
+                //         ];
+                //     }
+                // } elseif ($email == "" && $phone != "") {
+                //     $existingContact = contact_sync::where('phone', $phone)->first();
+                //     if(isset($existingContact)){
+                //         $existingContact->update([
+                //             'isAppUser' => $existingContact->isAppUser,
+                //             'phone' => $contact['phone_number'] ?? $existingContact->phone,
+                //             'firstName' => $contact['firstname'] ?? $existingContact->firstName,
+                //             'lastName' => $contact['lastname'] ?? $existingContact->lastName,
+                //             'photo' => $contact['photo'] ?? $existingContact->photo,
+                //             'phoneWithCode' => $contact['phone_number'] ?? $existingContact->phoneWithCode,
+                //             'visible' => ($contact['visible'] ?? $existingContact->visible),
+                //             'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
+                //         ]);
+                //         $existingContact->sync_id = $existingContact->id;
+                        
+                //         $updatedContacts[] = $existingContact;
+                //     }else{
+                //         $newContacts[] = [
+                //             'userId' => null,
+                //             'contact_id' => $user->id,
+                //             'firstName' => $contact['firstname'] ?? '',
+                //             'lastName' => $contact['lastname'] ?? '',
+                //             'phone' => $contact['phone_number'] ?? '',
+                //             'email' => $contact['email'] ?? '',
+                //             'photo' => $contact['photo'] ?? '',
+                //             'phoneWithCode' => $contact['phone_number'] ?? '',
+                //             'isAppUser' => '0',
+                //             'visible' => '0',
+                //             'preferBy' => $contact['prefer_by'] ?? '',
+                //             'created_at' => now(),
+                //             'updated_at' => now(),
+                //         ];
+                //     }
+                // }
             // }
 
             // Bulk insert new contacts
