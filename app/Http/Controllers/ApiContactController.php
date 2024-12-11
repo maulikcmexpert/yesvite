@@ -126,7 +126,7 @@ class ApiContactController extends Controller
         if (empty($contacts)) {
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
-        $uniqueData = collect($contacts)->unique(function ($item) {
+        $contact = collect($contacts)->unique(function ($item) {
        
                 return $item['phoneWithCode'];
             
