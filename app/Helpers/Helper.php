@@ -1617,13 +1617,39 @@ function validateAndFormatPhoneNumber($receiverNumber, $defaultCountryCode = 'IN
     }
 }
 
+function cleanPhoneNumber(string $phoneNumber): string {
+    // Replace unwanted characters from the phone number
+    $cleanedNumber = str_replace(
+        [
+            "+91", "+1", "+", " ", "(", ")", "-", "\n", "\r", "%0A", "%0a", "%0D", "%0d"
+        ],
+        "",
+        $phoneNumber
+    );
+
+    // Remove any remaining whitespace or control characters
+    $cleanedNumber = preg_replace([
+        '/\s+/',                // Matches any whitespace character
+        '/[\p{Cf}\p{Cn}\p{Cs}]/u' // Matches control characters
+    ], "", $cleanedNumber);
+
+    try {
+        // Encode the cleaned number
+        return urlencode($cleanedNumber);
+    } catch (Exception $e) {
+        // Handle encoding exception
+        error_log($e->getMessage());
+        return $cleanedNumber;
+    }
+}
+
 function sendSMSForApplication($receiverNumber, $message)
 {
 
     // dd($message);
     try {
-
-        $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
+        $cleanedNumber = cleanPhoneNumber($receiverNumber);
+        $formattedNumber = validateAndFormatPhoneNumber($cleanedNumber);
         $serverKeys = ServerKey::first();
         $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
         $client->messages->create($formattedNumber, [
