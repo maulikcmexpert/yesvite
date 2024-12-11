@@ -127,15 +127,15 @@ class ApiContactController extends Controller
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
         $uniqueData = collect($contacts)->unique(function ($item) {
-            if($item['phoneWithCode'] != ''){
+       
                 return $item['phoneWithCode'];
-            }
+            
         })->values()->toArray();
 
         $contacts = collect($uniqueData)->unique(function ($item) {
-            if($item['email'] != ''){
+       
                 return $item['email'];
-            }
+            
         })->values()->toArray();
         return response()->json([
             'all_contacts' => $contacts,
