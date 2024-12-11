@@ -128,6 +128,8 @@ class ApiControllerv2 extends Controller
     protected $pendingRsvpCount;
     protected $hostingCount;
     protected $invitedToCount;
+    protected $profileHostingCount;
+    protected $profileInvitedToCount;
 
 
 
@@ -144,6 +146,9 @@ class ApiControllerv2 extends Controller
 
             $this->hostingCount = hostingCount($this->user->id);
             $this->invitedToCount = invitedToCount($this->user->id);
+            
+            $this->profileHostingCount = profileHostingCount($this->user->id);
+            $this->profileInvitedToCount = profileInvitedToCount($this->user->id);
         }
     }
 
@@ -2323,6 +2328,7 @@ class ApiControllerv2 extends Controller
             $user = User::where('id', $userId)->first();
 
             $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+            
             $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
 
 
@@ -2350,13 +2356,13 @@ class ApiControllerv2 extends Controller
                     'about_me' => empty($user->about_me) ? "" : $user->about_me,
                     'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
                     // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
-                    'total_events' => $totalEvent,
+                    'total_events' => $totalEvent + $this->invitedToCount,
                     'total_draft_events' => $totalDraftEvent,
                     'total_upcoming_events' => $this->upcomingEventCount,
                     'pending_rsvp_count' =>  $this->pendingRsvpCount['total_need_rsvp_event_count'],
                     'Pending_rsvp_event_id' => $this->pendingRsvpCount['PendingRsvpEventId'],
-                    'hosting_count' => $this->hostingCount,
-                    'invitedTo_count' => $this->invitedToCount,
+                    'hosting_count' => $this->profileHostingCount,
+                    'invitedTo_count' => $this->profileInvitedToCount,
                     'total_photos' => $totalEventPhotos,
                     'comments' => $postComments,
                     'gender' => empty($user->gender) ? "" : $user->gender,
