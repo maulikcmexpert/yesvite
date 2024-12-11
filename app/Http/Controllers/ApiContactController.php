@@ -151,7 +151,7 @@ class ApiContactController extends Controller
             'without_sync_count' => count($contacts),
             'phone' => $new_phone_contact,
             'email' => $new_email_contact,
-            'sync_contact' => count($new_phone_contact) + count($new_email_contact)
+            'sync_contact' =>'phone -> '. count($new_phone_contact) .', email -> '. count($new_email_contact)
         ], 200);
         dd($contacts);
         $insertedContacts = [];
