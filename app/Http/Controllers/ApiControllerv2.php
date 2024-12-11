@@ -2893,7 +2893,7 @@ class ApiControllerv2 extends Controller
                     if(isset($existingContact)){
                         $existingContact->update([
                             'isAppUser' => $existingContact->isAppUser,
-                            'phone' => $contact['phone_number'] ?? $existingContact->phone,
+                            'phone' => '',
                             'firstName' => $contact['firstname'] ?? $existingContact->firstName,
                             'lastName' => $contact['lastname'] ?? $existingContact->lastName,
                             'photo' => $contact['photo'] ?? $existingContact->photo,
