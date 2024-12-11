@@ -147,13 +147,14 @@ class ApiContactController extends Controller
                 return $item['email'];
             
         })->values()->toArray();
-        return response()->json([
-            'without_sync_count' => count($contacts),
-            'phone' => $phone_contact,
-            'email' => $email_contact,
-            'sync_contact' =>'phone -> '. count($phone_contact) .', email -> '. count($email_contact)
-        ], 200);
-        dd($contacts);
+        // return response()->json([
+        //     'without_sync_count' => count($contacts),
+        //     'phone' => $phone_contact,
+        //     'email' => $email_contact,
+        //     'sync_contact' =>'phone -> '. count($phone_contact) .', email -> '. count($email_contact)
+        // ], 200);
+        // dd($contacts);
+        $contacts = array_merge($phone_contact, $email_contact);
         $insertedContacts = [];
         $duplicateContacts = [];
 // dd($contacts);
@@ -168,27 +169,21 @@ class ApiContactController extends Controller
                     $existingContact = contact_sync::where('contact_id', $user->id)
                     ->where(function ($query) use ($contact) {
                         $query->where('email', $contact['email'])
-                            ->where('phoneWithCode', $contact['phoneWithCode'])
-                            ->where('firstName',$contact['firstName'])
-                            ->where('lastName', $contact['lastName']);
+                            ->where('phoneWithCode', $contact['phoneWithCode']);
                     })
                     ->first();
                 }elseif (empty($contact['phoneWithCode']) && !empty($contact['email'])) {
                     $existingContact = contact_sync::where('contact_id', $user->id)
                         ->where(function ($query) use ($contact) {
                             $query->where('email', $contact['email'])
-                                ->where('phoneWithCode','')
-                                ->where('firstName',$contact['firstName'])
-                                ->where('lastName', $contact['lastName']);
+                                ->where('phoneWithCode','');
                         })
                         ->first();
                 }elseif (!empty($contact['phoneWithCode']) && empty($contact['email'])) {
                     $existingContact = contact_sync::where('contact_id', $user->id)
                         ->where(function ($query) use ($contact) {
                             $query->where('phoneWithCode', $contact['phoneWithCode'])
-                                ->where('email', '')
-                                ->where('firstName',$contact['firstName'])
-                                ->where('lastName', $contact['lastName']);
+                                ->where('email', '');
                         })
                         ->first();
                 }
