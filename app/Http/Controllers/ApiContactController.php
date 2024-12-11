@@ -129,8 +129,10 @@ class ApiContactController extends Controller
         $uniqueData = collect($contacts)->unique(function ($item) {
             return $item['phoneWithCode'];
         })->values()->toArray();
+        return response()->json([
+            'all_contacts' => $uniqueData,
+        ], 200);
         dd($uniqueData);
-
         $insertedContacts = [];
         $duplicateContacts = [];
 // dd($contacts);
