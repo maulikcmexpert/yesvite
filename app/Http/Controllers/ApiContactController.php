@@ -122,12 +122,12 @@ class ApiContactController extends Controller
         $user = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $contacts = json_decode($rawData, true);
-        dd(count($contacts));
+        // dd(count($contacts));
         if (empty($contacts)) {
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
         $uniqueData = collect($contacts)->unique(function ($item) {
-            return $item['phoneWithCode'];
+            return $item['email'];
         })->values()->toArray();
         dd($uniqueData);
 
