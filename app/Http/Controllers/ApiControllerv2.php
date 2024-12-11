@@ -2879,7 +2879,7 @@ class ApiControllerv2 extends Controller
                 $contact = $input;
                 // dd($contact);
                 $email = $contact['email'] ?? '';
-                $phone = $contact['phone'] ?? '';
+                $phone = $contact['phone_number'] ?? '';
                 if((isset($contact['email']) && $contact['email'] != '' && $user->email == $contact['email']) || (isset($contact['phone_number']) && $contact['phone_number'] != '' && $user->phone_number == $contact['phone_number']) ){
                     return response()->json([
                         'status' => 0,
