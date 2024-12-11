@@ -157,7 +157,7 @@ class ApiContactController extends Controller
         $contacts = array_merge($phone_contact, $email_contact);
         $insertedContacts = [];
         $duplicateContacts = [];
-// dd($contacts);
+        // dd($contacts);
         // Process each contact from the request
         foreach ($contacts as $contact) {
             $contact['email'] = @strtolower($contact['email']);
