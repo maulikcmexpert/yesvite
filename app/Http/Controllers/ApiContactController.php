@@ -132,14 +132,15 @@ class ApiContactController extends Controller
             
         })->values()->toArray();
 
-        $contacts = collect($uniqueData)->unique(function ($item) {
-       
+        $contact = collect($uniqueData)->unique(function ($item) {
+
                 return $item['email'];
             
         })->values()->toArray();
         return response()->json([
-            'all_contacts' => $contacts,
-            'count' => count($contacts),
+            'without_sync_count' => count($contacts),
+            'all_contacts' => $contact,
+            'count' => count($contact),
         ], 200);
         dd($contacts);
         $insertedContacts = [];
