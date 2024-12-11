@@ -126,11 +126,21 @@ class ApiContactController extends Controller
         if (empty($contacts)) {
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
-        $contact = collect($contacts)->unique(function ($item) {
+        $new_phone_contact = [];
+        $new_email_contact = [];
+        foreach ($contacts as $key => $value) {
+            if($value['phoneWithCode'] != ''){
+                $new_phone_contact[] = $value;
+            }
+            if($value['email'] != ''){
+                $new_email_contact[] = $value;
+            }
+        }
+        // $contact = collect($contacts)->unique(function ($item) {
        
-                return $item['phoneWithCode'];
+        //         return $item['phoneWithCode'];
             
-        })->values()->toArray();
+        // })->values()->toArray();
 
         // $contact = collect($uniqueData)->unique(function ($item) {
 
@@ -139,8 +149,9 @@ class ApiContactController extends Controller
         // })->values()->toArray();
         return response()->json([
             'without_sync_count' => count($contacts),
-            'all_contacts' => $contact,
-            'count' => count($contact),
+            'phone' => $new_phone_contact,
+            'email' => $new_email_contact,
+            'sync_contact' => count($new_phone_contact) + count($new_email_contact)
         ], 200);
         dd($contacts);
         $insertedContacts = [];
