@@ -129,11 +129,11 @@ class ApiContactController extends Controller
         $new_phone_contact = [];
         $new_email_contact = [];
         foreach ($contacts as $key => $value) {
-            dd($value['phoneWithCode']);
-            if($value['phoneWithCode'] != ''){
+            
+            if(isset($value['phoneWithCode']) && isset($value['email']) && $value['phoneWithCode'] != ''){
                 $new_phone_contact[] = $value;
             }
-            if($value['email'] != ''){
+            if( isset($value['phoneWithCode']) && isset($value['email']) && $value['email'] != ''){
                 $new_email_contact[] = $value;
             }
         }
