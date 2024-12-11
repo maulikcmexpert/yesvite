@@ -1648,8 +1648,8 @@ function sendSMSForApplication($receiverNumber, $message)
 
     // dd($message);
     try {
-        $cleanedNumber = cleanPhoneNumber($receiverNumber);
-        $formattedNumber = validateAndFormatPhoneNumber($cleanedNumber);
+        // $cleanedNumber = cleanPhoneNumber($phoneNumber);
+        $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
         $serverKeys = ServerKey::first();
         $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
         $client->messages->create($formattedNumber, [
