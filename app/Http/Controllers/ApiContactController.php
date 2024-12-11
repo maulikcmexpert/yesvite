@@ -139,6 +139,7 @@ class ApiContactController extends Controller
         })->values()->toArray();
         return response()->json([
             'all_contacts' => $contacts,
+            'count' => count($contacts),
         ], 200);
         dd($contacts);
         $insertedContacts = [];
