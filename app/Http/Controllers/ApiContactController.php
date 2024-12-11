@@ -127,17 +127,20 @@ class ApiContactController extends Controller
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
         $uniqueData = collect($contacts)->unique(function ($item) {
-            return $item['phoneWithCode'];
+            if($item['phoneWithCode'] != ''){
+                return $item['phoneWithCode'];
+            }
         })->values()->toArray();
 
-        $uniqueData = collect($uniqueData)->unique(function ($item) {
-            dd($item);
-            return $item['email'];
+        $contacts = collect($uniqueData)->unique(function ($item) {
+            if($item['email'] != ''){
+                return $item['email'];
+            }
         })->values()->toArray();
         return response()->json([
-            'all_contacts' => $uniqueData,
+            'all_contacts' => $contacts,
         ], 200);
-        dd($uniqueData);
+        dd($contacts);
         $insertedContacts = [];
         $duplicateContacts = [];
 // dd($contacts);
