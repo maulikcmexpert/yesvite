@@ -58,6 +58,7 @@ class SendThankYouMessage extends Command
 
 
                             $eventData = [
+                                'host_email' => $event->user->email,
                                 'event_name' => $event->event_name,
                                 'date' =>  date('l, M. jS', strtotime($event->start_date)),
                                 'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",

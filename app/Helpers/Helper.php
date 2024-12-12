@@ -221,6 +221,7 @@ function sendNotification($notificationType, $postData)
                                     'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
                                     'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
                                     'time' => $value->event->rsvp_start_time,
+                                    'host_email' => $senderData->email,
                                     'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                                 ];
     
@@ -1136,6 +1137,7 @@ function sendNotification($notificationType, $postData)
                             'rsvp_status' =>  $postData['rsvp_status'],
                             'kids' => $postData['kids'],
                             'adults' => $postData['adults'],
+                            'host_email' => $senderData->email,
                             'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
                         ];
                         $invitation_email = new NewRsvpsEmailNotify($eventData);
@@ -1236,6 +1238,7 @@ function sendNotificationGuest($notificationType, $postData)
                             'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
                             'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
                             'time' => $value->event->rsvp_start_time,
+                            'host_email' => $senderData->email,
                             'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                         ];
 

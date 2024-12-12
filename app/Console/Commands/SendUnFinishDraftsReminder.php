@@ -45,6 +45,7 @@ class SendUnFinishDraftsReminder extends Command
                     }
 
                     $eventData = [
+                        'host_email' => $value->user->email,
                         'event_name' => $value->event_name,
                         'event_image' => ($value->event_image->isNotEmpty()) ? $value->event_image[0]->image : "no_image.png",
                         'date' =>   date('l - M jS, Y', strtotime($value->start_date)),

@@ -54,6 +54,7 @@ class SendPhotoShareReminder extends Command
 
 
                         $eventData = [
+                            'host_email' => $event->user->email,
                             'event_name' => $event->event_name,
                             'host_name' => $event->user->firstname . ' ' . $event->user->firstname,
 

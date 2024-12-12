@@ -175,7 +175,7 @@
                     <td>
                         <p style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">Please add <a href="" style="font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;">notifications@yesvite.com</a> to your contacts so the email does not go to your SPAM folder.</p>
                         <p style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">If you don’t want to receive these notifications please update your <a href="" style="color: #F73C71;font-weight: 700;text-transform: capitalize;">account settings >Notifications.</a></p>
-                        <p style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">You have received this email from <a href="" style="color: #F73C71;font-weight: 700;">notifications@yesvite.com</a> on behalf of <a href="" style="color: #F73C71;font-weight: 700;">ekuanox@gmail.com</a>.</p>
+                        <p style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">You have received this email from <a href="" style="color: #F73C71;font-weight: 700;">notifications@yesvite.com</a> on behalf of <a href="" style="color: #F73C71;font-weight: 700;">{{ @$eventData['host_email']}}</a>.</p>
                         <p style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">© Yesvite {{date('Y')}}</p>
                     </td>
                 </tr>
@@ -218,7 +218,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <p style="font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">Invite Email: <span style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">crisilis@hotmail.com</span></p>
+                        <p style="font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">Invite Email: <span style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">{{@$eventData['host_email']}}</span></p>
                     </td>
                 </tr>
                 <!-- -------------- -->
