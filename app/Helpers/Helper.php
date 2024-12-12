@@ -512,7 +512,7 @@ function sendNotification($notificationType, $postData)
                     $video = ($postData['video'] > 1) ? 'videos' : 'video';
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " uploaded " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                 } else {
-                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post.";
+                    $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " posted on the ".$photo_module_type." for ".$ownerEvent->event_name;
                 }
 
                 $notification = new Notification;
@@ -605,7 +605,7 @@ function sendNotification($notificationType, $postData)
                         $video = ($postData['video'] > 1) ? 'videos' : 'video';
                         $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload " . $postData['video'] . " " . $video . " to " . $ownerEvent->event_name . ' ' . $photo_module_type . '.';
                     } else {
-                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " upload new post.";
+                        $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " posted on the ".$photo_module_type." for ".$ownerEvent->event_name;
                     }
                 }
                 $notification = new Notification;
