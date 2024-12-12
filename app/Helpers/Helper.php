@@ -124,6 +124,7 @@ function sendNotification($notificationType, $postData)
             $event_time =  $event->event_schedule->first()->start_time;
         }
         $eventData = [
+            'host_email' => $senderData->email,
             'event_name' => $event->event_name,
             'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
             'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
