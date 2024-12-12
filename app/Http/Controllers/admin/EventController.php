@@ -90,7 +90,7 @@ class EventController extends Controller
                     $nameParts = explode(' ', $search);
                    if($search){
                        $data->where(function ($q) use ($nameParts, $search) {
-                           if (count($nameParts) > 1) {
+                            if (count($nameParts) > 1) {
                                // Search for firstname and lastname separately
                                $q->whereHas('user', function ($q) use ($nameParts,$search) {
                                    $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
@@ -99,7 +99,7 @@ class EventController extends Controller
                                })->orWhere('event_name','LIKE',"%{$search}%")
                                ->orWhere('start_date','LIKE',"%{$search}%")
                                ->orWhere('event_location_name','LIKE',"%{$search}%");
-                           } else {
+                            } else {
                                // Search for firstname or lastname if only one term is provided
                                $q->whereHas('user', function ($q) use ($search) {
                                    $q->where('firstname', 'LIKE', "%{$search}%")
@@ -108,11 +108,11 @@ class EventController extends Controller
                                })->orWhere('event_name','LIKE',"%{$search}%")
                                ->orWhere('start_date','LIKE',"%{$search}%")
                                ->orWhere('event_location_name','LIKE',"%{$search}%");
-                           }
+                            }
                        });
                    }
                     
-               })
+                })
                 ->addColumn('number', function ($row) {
                     $page = request()->get('start') / request()->get('length') + 1;
                     $itemsPerPage = request()->get('length');
