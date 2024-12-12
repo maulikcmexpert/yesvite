@@ -9210,42 +9210,75 @@ class ApiControllerv2 extends Controller
         //     $creatEventPost->post_recording = $recordingName;
         // }
 
-        if ($request->hasFile('post_recording')) {
-            try {
-                $record = $request->file('post_recording');
+        // if ($request->hasFile('post_recording')) {
+        //     try {
+        //         $record = $request->file('post_recording');
 
                 
 
+        //         // Generate a unique file name
+        //         $recordingName = time() . '_' . $record->getClientOriginalName();
+
+        //         // Move the uploaded file to the desired location
+        //         $record->move(public_path('storage/event_post_recording'), $recordingName);
+
+
+        //         $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
+        //         $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.mp3';
+
+        //         $ffmpeg = FFMpeg::create();
+        //         $audio = $ffmpeg->open($inputPath);
+        //         $audio->filters()->resample(44100);
+        //         $audio->save(new \FFMpeg\Format\Audio\Mp3(), $outputPath);
+        //         // Convert the audio to MP3 using FFmpeg
+        //         // $ffmpeg = FFMpeg::create();
+        //         // $audio = $ffmpeg->open($inputPath);
+
+        //         // $format = new Mp3();
+        //         // $audio->save($format, $outputPath);
+
+        //         // Save the recording name to the database
+        //         $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
+        //     } catch (RuntimeException $e) {
+        //         // Log the error message
+        //         // dd($e);
+        //         Log::error('FFmpeg error: ' . $e->getMessage());
+        //         echo 'Error: ' . $e->getMessage();
+        //     }
+        // }
+
+        if ($request->hasFile('post_recording')) {
+            try {
+                $record = $request->file('post_recording');
+        
                 // Generate a unique file name
                 $recordingName = time() . '_' . $record->getClientOriginalName();
-
+        
                 // Move the uploaded file to the desired location
                 $record->move(public_path('storage/event_post_recording'), $recordingName);
-
-
+        
                 $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
-                $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.mp3';
-
+                $outputDir = public_path('storage/event_post_recording/new/');
+                $outputPath = $outputDir . pathinfo($recordingName, PATHINFO_FILENAME) . '_new.mp3';
+        
+                if (!file_exists($outputDir)) {
+                    mkdir($outputDir, 0777, true);
+                }
+        
                 $ffmpeg = FFMpeg::create();
                 $audio = $ffmpeg->open($inputPath);
-                $audio->filters()->resample(44100);
-                $audio->save(new \FFMpeg\Format\Audio\Mp3(), $outputPath);
-                // Convert the audio to MP3 using FFmpeg
-                // $ffmpeg = FFMpeg::create();
-                // $audio = $ffmpeg->open($inputPath);
-
-                // $format = new Mp3();
-                // $audio->save($format, $outputPath);
-
+                $format = new \FFMpeg\Format\Audio\Mp3();
+                $format->setAudioChannels(2)->setAudioKiloBitrate(128);
+                $audio->save($format, $outputPath);
+        
                 // Save the recording name to the database
                 $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
-            } catch (RuntimeException $e) {
-                // Log the error message
-                // dd($e);
+            } catch (\Exception $e) {
                 Log::error('FFmpeg error: ' . $e->getMessage());
-                echo 'Error: ' . $e->getMessage();
+                return response()->json(['error' => 'Audio conversion failed.'], 500);
             }
         }
+        
 
         $creatEventPost->post_privacy = $request->post_privacy;
         $creatEventPost->post_type = $request->post_type;
