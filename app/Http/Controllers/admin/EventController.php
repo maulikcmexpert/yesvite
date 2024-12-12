@@ -280,7 +280,7 @@ class EventController extends Controller
         $eventId = $request->input('eventId');
         $event_id = decrypt($eventId);
 
-        $data =  EventInvitedUser::with('user')->where('event_id', $event_id)->get();
+        $data =  EventInvitedUser::with(['user','contact_sync'])->where('event_id', $event_id)->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
@@ -294,10 +294,18 @@ class EventController extends Controller
                 if ($row->is_co_host == '1') {
                     $isCoHost =  "<span class='text-success'>Co-host</span>";
                 }
-                return $row->user->firstname . ' ' . $row->lastname . ' ' . $isCoHost;
+                if($row->sync_id !=''){
+                    return $row->contact_sync->firstName . ' ' . $row->contact_sync->lastName . ' ' . $isCoHost;
+                }else{
+                    return $row->user->firstname . ' ' . $row->user->lastname . ' ' . $isCoHost;
+                }
             })
             ->addColumn('email', function ($row) {
-                return $row->user->email;
+                if($row->sync_id != ''){
+                    return $row->contact_sync->email;
+                }else{
+                    return $row->user->email;
+                }
             })
 
 
