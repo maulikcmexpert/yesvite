@@ -1087,6 +1087,14 @@ function sendNotification($notificationType, $postData)
             $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
         if ($getPostOwnerId->user_id != $postData['sender_id']) {
+
+            Notification::where([
+                'event_id'=> $postData['event_id'],
+                'user_id' => $getPostOwnerId->user_id,
+                'sender_id' => $postData['sender_id'],
+                'notification_type' => $notificationType
+            ])->delete();
+
             $notification = new Notification;
             $notification->event_id = $postData['event_id'];
             $notification->user_id =  $getPostOwnerId->user_id;
