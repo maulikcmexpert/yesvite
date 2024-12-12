@@ -81,7 +81,7 @@
                     <td>
                         <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">Please add <a href="" style="color: #0F172A;font-size: 12px;line-height: 20px;font-weight: 700;">notifications@yesvite.com</a> to your contacts so the email does not go to your SPAM folder.</p>
                         <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">If you don’t want to receive these notifications please update your <a href="" style="color: #F73C71;font-weight: 700;text-transform: capitalize;">account settings >Notifications.</a></p>
-                        <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">You have received this email from <a href="" style="color: #F73C71;font-weight: 700;">contact@yesvite.com</a> on behalf of <a href="" style="color: #F73C71;font-weight: 700;">ekuanox@gmail.com</a>.</p>
+                        <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">You have received this email from <a href="" style="color: #F73C71;font-weight: 700;">notifications@yesvite.com</a> on behalf of <a href="" style="color: #F73C71;font-weight: 700;">ekuanox@gmail.com</a>.</p>
                         <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">© Yesvite {{date('Y')}}</p>
                     </td>
                 </tr>
