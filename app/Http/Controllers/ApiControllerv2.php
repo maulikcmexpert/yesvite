@@ -9248,18 +9248,21 @@ class ApiControllerv2 extends Controller
                 // Move the uploaded file
                 $record->move(public_path('storage/event_post_recording'), $recordingName);
             
+                // Define input and output paths
                 $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
-                $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName, PATHINFO_FILENAME) . '.mp3';
+                $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName, PATHINFO_FILENAME) . '.wav';
             
-                // Check FFmpeg installation
+                // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
                 $audio = $ffmpeg->open($inputPath);
             
-                // Normalize and convert
-                $format = new \FFMpeg\Format\Audio\Mp3();
-                $format->setAudioChannels(2)->setAudioKiloBitrate(128);
+                // Set format to WAV
+                $format = new \FFMpeg\Format\Audio\Wav();
+                $format->setAudioChannels(2); // Stereo
+                $format->setAudioKiloBitrate(1411); // Standard WAV bitrate (can be omitted for WAV)
             
-                $audio->filters()->resample(44100); // Resample to standard rate
+                // Apply filters and save the output
+                $audio->filters()->resample(44100); // Resample to standard WAV frequency
                 $audio->save($format, $outputPath);
             
                 // Verify file exists
@@ -9267,12 +9270,13 @@ class ApiControllerv2 extends Controller
                     throw new \RuntimeException('Output file not created.');
                 }
             
-                // Save to database
+                // Save to the database
                 $creatEventPost->post_recording = pathinfo($outputPath, PATHINFO_BASENAME);
             } catch (RuntimeException $e) {
                 Log::error('FFmpeg error: ' . $e->getMessage());
                 echo 'Error: ' . $e->getMessage();
             }
+            
             
             
         }        
