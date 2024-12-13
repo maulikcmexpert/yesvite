@@ -1484,8 +1484,11 @@ class EventController extends Controller
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
-
+        $emails = [];
         $getAllContacts = contact_sync::where(['contact_id' => $id,'email' != ''])->get();
+        if($getAllContacts->isNotEmpty()){
+            
+        }
         $emails = $getAllContacts->pluck('email')->toArray();
         dd($emails);
 
