@@ -462,7 +462,20 @@ class ApiControllerv2 extends Controller
                     $eventDetail['event_wall'] = $value->event_settings->event_wall;
                     $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
-                    $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
+                    $adults = EventInvitedUser::
+                        // whereHas('user', function ($query) {
+                        //     $query->where('app_user', '1');
+                        // })->
+                        where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('adults');
+
+                    $kids = EventInvitedUser::
+                        // whereHas('user', function ($query) {
+                        //     $query->where('app_user', '1');
+                        // })->
+                        where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
+
+                    // $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
+                    $eventDetail['guest_pending_count'] = $adults + $kids;
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
