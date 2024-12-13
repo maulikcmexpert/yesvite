@@ -1485,11 +1485,8 @@ class EventController extends Controller
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
 
-        $getAllContacts = contact_sync::with('user')->where(['contact_id' => $id])->get();
-
-        $emails = array_map(function($contact) {
-                        return $contact->email;
-                    }, $getAllContacts);
+        $getAllContacts = contact_sync::with('user')->where(['contact_id' => $id,'email' != ''])->get();
+        $emails = $getAllContacts->pluck('email')->toArray();
         dd($emails);
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
