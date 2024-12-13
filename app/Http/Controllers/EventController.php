@@ -1489,12 +1489,12 @@ class EventController extends Controller
         if($getAllContacts->isNotEmpty()){
             $emails = $getAllContacts->pluck('email')->toArray();
         }
-        dd($emails);
+        
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->where('id', '!=', $id)
             ->where(['app_user' => '1'])
-
+            ->whereIn('email',$emails)
             ->orderBy('firstname')
             ->when($type != 'group', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
@@ -1509,6 +1509,8 @@ class EventController extends Controller
                 });
             })
             ->get();
+
+        dd($yesvite_users);
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
