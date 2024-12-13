@@ -80,9 +80,9 @@ function getGuestRsvpPendingCount($eventId)
         //     $query->where('app_user', '1');
         // })->
         where(['event_id' => $eventId,'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
-
     // $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
     return $adults + $kids;
+    
     // return  EventInvitedUser::whereHas('user', function ($query) {
 
     //     $query->where('app_user', '1');
