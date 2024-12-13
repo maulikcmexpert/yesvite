@@ -90,9 +90,22 @@ function checkNotificationSetting($userId)
 
 function getGuestPendingRsvpCount($eventId)
 {
-    return  EventInvitedUser::whereHas('user', function ($query) {
-        $query->where('app_user', '1');
-    })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
+    $adults = EventInvitedUser::
+    // whereHas('user', function ($query) {
+    //     $query->where('app_user', '1');
+    // })->
+    where(['event_id' => $eventId, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('adults');
+
+    $kids = EventInvitedUser::
+        // whereHas('user', function ($query) {
+        //     $query->where('app_user', '1');
+        // })->
+        where(['event_id' => $eventId,'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
+        
+    return $adults + $kids;
+    // return  EventInvitedUser::whereHas('user', function ($query) {
+    //     $query->where('app_user', '1');
+    // })->where(['event_id' => $eventId, 'rsvp_d' => '0'])->count();
 }
 
 function sendNotification($notificationType, $postData)
