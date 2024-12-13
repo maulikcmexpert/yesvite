@@ -9250,7 +9250,7 @@ class ApiControllerv2 extends Controller
             
                 // Define input and output paths
                 $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
-                $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName, PATHINFO_FILENAME) . '.wav';
+                $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.wav';
             
                 // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
