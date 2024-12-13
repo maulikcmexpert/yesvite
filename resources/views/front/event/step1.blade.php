@@ -194,7 +194,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 mb-4 rsvp_by_date" style="{{(isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set']=='0')?'display: none;':''}}">
+                    @php
+                        $style = 'display:none';
+                        if(isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set']=='1'){
+                            $style ='';
+                        }
+                    @endphp
+                    <div class="col-lg-12 mb-4 rsvp_by_date" style="{{$style}}">
                         <div class="input-form">
                             
                             <input type="text" class="form-control inputText" id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
