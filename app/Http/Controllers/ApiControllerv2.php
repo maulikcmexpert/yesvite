@@ -8680,7 +8680,7 @@ class ApiControllerv2 extends Controller
             }
 
             if ($eventDetails->post_type == '3') { // record
-                $postsDetail['post_recording'] = empty($eventDetails->post_recording) ? "" : asset('storage/event_post_recording/' . $eventDetails->post_recording);
+                $postsDetail['post_recording'] = empty($eventDetails->post_recording) ? "" : asset('storage/event_post_recording/new/' . $eventDetails->post_recording);
             }
 
 
