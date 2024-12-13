@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\{
+    contact_sync,
     User,
     Event,
     EventInvitedUser,
@@ -1483,6 +1484,9 @@ class EventController extends Controller
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
+
+        $getAllContacts = contact_sync::where('contact_id',$id)->get();
+        dd($getAllContacts);
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->where('id', '!=', $id)
