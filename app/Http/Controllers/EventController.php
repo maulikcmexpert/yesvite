@@ -1486,11 +1486,16 @@ class EventController extends Controller
         $type = $request->type;
 
         $getAllContacts = contact_sync::with('user')->where(['contact_id' => $id])->get();
-        dd($getAllContacts);
+
+        $emails = array_map(function($contact) {
+                        return $contact->email;
+                    }, $getAllContacts);
+        dd($emails);
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->where('id', '!=', $id)
             ->where(['app_user' => '1'])
+
             ->orderBy('firstname')
             ->when($type != 'group', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
