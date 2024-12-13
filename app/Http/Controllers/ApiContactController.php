@@ -281,7 +281,8 @@ class ApiContactController extends Controller
                 ->update([
                     'userId' => $userDetail->id,
                     'firstName' => $userDetail->firstname,
-                    'lastName' => $userDetail->lastname
+                    'lastName' => $userDetail->lastname,
+                    'isAppUser' => $userDetail->app_user
                 ]);
 
             // Find matching contacts using array_search()
