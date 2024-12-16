@@ -1,7 +1,7 @@
   <!-- ========== footer ======= -->
   @php
       $getSocialLink = getSocialLink();
-      dd($getSocialLink->facebook_link);
+    //   dd($getSocialLink->facebook_link);
   @endphp
   <footer>
       <div class="container-fluid">
@@ -84,6 +84,7 @@
           </div>
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
               <ul class="footer-social-link">
+                @if(isset($getSocialLink->x_link) && $data->x_link !== null)
                   <li>
                       {{-- <a href="{{ route('event.event_detail', 3775 ) }}"> --}}
                         <a href="#">
@@ -95,6 +96,9 @@
                           </span>
                       </a>
                   </li>
+                  @endif
+
+                  @if(isset($getSocialLink->x_link) && $data->x_link !== null)
                   <li>
                     {{-- <a href="{{ route('event.event_guest', 3775 )}}"> --}}
 
@@ -106,6 +110,7 @@
                           </span>
                       </a>
                   </li>
+                  @endif
                   <li>
                       <a href="#">
                           <span>
