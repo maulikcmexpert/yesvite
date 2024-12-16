@@ -28,7 +28,8 @@ use App\Http\Controllers\admin\{
     Privacy_policyController,
     Terms_ConditionController,
     RolesController,
-    faqController
+    faqController,
+    SocialLinkController
 };
 use App\Http\Controllers\sendNotificationController;
 
@@ -90,7 +91,8 @@ Route::group(['middleware' => adminAuth::Class], function () {
         'terms_condition'=>Terms_ConditionController::class,
         'roles'=>RolesController::class,
         'faq'=>faqController::class,
-        'admin'=>adminController::class
+        'admin'=>adminController::class,
+        'social_link'=>SocialLinkController::class
     ]);
 
     Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');

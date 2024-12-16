@@ -270,6 +270,20 @@
         </li>
       </ul>
     </li>
+
+    <li class="nav-item">
+      <p class="asideTitle">Social Links
+      </p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="{{ URL::to('/admin/social_link') }}"
+          class="nav-link {{ Request::segment(2) == 'social_link' ? 'active' : '' }}">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <p>Social Links</p>
+      </a>
+        </li>
+      </ul>
+    </li>
         <!-- <li class="nav-item">
             <a href="{{URL::to('/admin/users')}}" class="nav-link {{ (Request::segment(2) == 'users')? 'active':'' }}">
               <i class="fas fa-users nav-icon"></i>
