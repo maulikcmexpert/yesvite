@@ -1,8 +1,5 @@
   <!-- ========== footer ======= -->
-  @php
-      $getSocialLink = getSocialLink();
-    //   dd($getSocialLink->facebook_link);
-  @endphp
+
   <footer>
       <div class="container-fluid">
           <div class="footer-content d-flex justify-content-between">
@@ -84,10 +81,13 @@
           </div>
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
               <ul class="footer-social-link">
-                {{-- @if(isset($getSocialLink->x_link) && $data->x_link != null) --}}
+                @php
+                    $getSocialLink = getSocialLink();
+                @endphp
+                @if(isset($getSocialLink->x_link) && $getSocialLink->x_link != null)
                   <li>
                       {{-- <a href="{{ route('event.event_detail', 3775 ) }}"> --}}
-                        <a href="#">
+                        <a href="{{isset($getSocialLink->x_link) && $getSocialLink->x_link != null ? $getSocialLink->x_link : "#"}}">
 
                           <span>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,23 +96,25 @@
                           </span>
                       </a>
                   </li>
-                  {{-- @endif --}}
+                  @endif
 
-                  {{-- @if(isset($getSocialLink->x_link) && $data->x_link != null) --}}
-                  <li>
-                    {{-- <a href="{{ route('event.event_guest', 3775 )}}"> --}}
+                  @if(isset($getSocialLink->facebook_link) && $getSocialLink->facebook_link != null)
+                    <li>
+                        {{-- <a href="{{ route('event.event_guest', 3775 )}}"> --}}
 
-                      <a href="#">
-                          <span>
-                              <svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M9.34922 13.8015H12.3492L13.5492 9.00146H9.34922V6.60147C9.34922 5.36547 9.34922 4.20147 11.7492 4.20147H13.5492V0.169465C13.158 0.117865 11.6808 0.00146484 10.1208 0.00146484C6.86282 0.00146484 4.54922 1.98986 4.54922 5.64146V9.00146H0.949219V13.8015H4.54922V24.0015H9.34922V13.8015Z" fill="#1877F2" />
-                              </svg>
-                          </span>
-                      </a>
-                  </li>
-                  {{-- @endif --}}
+                        <a href="{{isset($getSocialLink->facebook_link) && $getSocialLink->facebook_link != null ? $getSocialLink->facebook_link : "#"}}">
+                            <span>
+                                <svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.34922 13.8015H12.3492L13.5492 9.00146H9.34922V6.60147C9.34922 5.36547 9.34922 4.20147 11.7492 4.20147H13.5492V0.169465C13.158 0.117865 11.6808 0.00146484 10.1208 0.00146484C6.86282 0.00146484 4.54922 1.98986 4.54922 5.64146V9.00146H0.949219V13.8015H4.54922V24.0015H9.34922V13.8015Z" fill="#1877F2" />
+                                </svg>
+                            </span>
+                        </a>
+                    </li>
+                  @endif
+
+                  @if(isset($getSocialLink->instagram_link) && $getSocialLink->instagram_link != null)
                   <li>
-                      <a href="#">
+                      <a href="{{isset($getSocialLink->instagram_link) && $getSocialLink->instagram_link != null ? $getSocialLink->instagram_link : "#"}}">
                           <span>
                               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <g clip-path="url(#clip0_3391_343)">
@@ -133,8 +135,11 @@
                           </span>
                       </a>
                   </li>
+                  @endif
+
+                  @if(isset($getSocialLink->linkedin_link) && $getSocialLink->linkedin_link != null)
                   <li>
-                      <a href="#">
+                      <a href="{{isset($getSocialLink->linkedin_link) && $getSocialLink->linkedin_link != null ? $getSocialLink->linkedin_link : "#"}}">
                           <span>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path fill-rule="evenodd" clip-rule="evenodd" d="M8.9148 8.36427H13.3716V10.5843C14.0136 9.30747 15.66 8.16027 18.1332 8.16027C22.8744 8.16027 24 10.7019 24 15.3651V24.0015H19.2V16.4271C19.2 13.7715 18.558 12.2739 16.9236 12.2739C14.6568 12.2739 13.7148 13.8879 13.7148 16.4259V24.0015H8.9148V8.36427ZM0.684 23.7975H5.484V8.16027H0.684V23.7975ZM6.1716 3.06147C6.17178 3.46379 6.09199 3.86215 5.93686 4.23337C5.78174 4.60459 5.55438 4.94128 5.268 5.22387C4.68768 5.80061 3.90217 6.12345 3.084 6.12147C2.26727 6.12092 1.48357 5.7989 0.9024 5.22507C0.617054 4.94152 0.390463 4.60445 0.235612 4.23318C0.0807618 3.86191 0.000694958 3.46373 0 3.06147C0 2.24907 0.324 1.47147 0.9036 0.897865C1.48426 0.323255 2.26829 0.00110579 3.0852 0.00146514C3.9036 0.00146514 4.6884 0.324265 5.268 0.897865C5.8464 1.47147 6.1716 2.24907 6.1716 3.06147Z" fill="#0B66C2" />
@@ -142,12 +147,14 @@
                           </span>
                       </a>
                   </li>
+                  @endif
               </ul>
               <div class="app-store d-flex gap-2">
-                  <a href="#" class="google-app">
+
+                  <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
                       <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                   </a>
-                  <a href="#" class="mobile-app">
+                  <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app">
                       <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                   </a>
               </div>
