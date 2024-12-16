@@ -1,7 +1,7 @@
   <!-- ========== footer ======= -->
   @php
       $getSocialLink = getSocialLink();
-      dd($getSocialLink);
+    //   dd($getSocialLink);
   @endphp
   <footer>
       <div class="container-fluid">
