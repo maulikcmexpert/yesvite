@@ -77,11 +77,25 @@ class SocialLinkController extends Controller
         $page = 'admin.social_link.edit';
         $link=decrypt($url) ;
         $js = 'admin.social_link.social_linkjs';
+        $lable = '';
+        if($link == 'x_link'){
+            $lable = 'X Link';
+        }elseif ($link == 'facebook_link') {
+            $lable = 'Facebook Link';
+        }elseif ($link == 'instagram_link') {
+            $lable = 'Instagram Link';
+        }elseif ($link == 'linkedin_link') {
+            $lable = 'Linkedin Link';
+        }elseif ($link == 'playstore_link') {
+            $lable = 'Playstore Link';
+        }elseif ($link == 'appstore_link') {
+            $lable = 'Appstore Link';
+        }
 
 
         $data = Social_link::select($link)->first();
         $value = $data ? ($data->$link ?? "") : "";
-        return view('admin.includes.layout', compact('title', 'page','link','value','js'));
+        return view('admin.includes.layout', compact('title', 'page','link','value','js','lable'));
     }
 
     /**

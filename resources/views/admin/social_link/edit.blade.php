@@ -31,7 +31,7 @@
 
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
-                            <label for="url">{{$link}}</label>
+                            <label for="url">{{$lable}}</label>
                             <input type="hidden" class="form-control url" name="column_name" value="{{$link}}">
                             <input type="text" class="form-control url" name="url" id="url" placeholder="Enter the Url" value="{{$value}}">
                             <span class="text-danger">{{ $errors->first('url') }}</span>
