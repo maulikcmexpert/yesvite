@@ -98,7 +98,7 @@
                   </li>
                   @endif
 
-                  @if(isset($getSocialLink->x_link) && $data->x_link != null)
+                  {{-- @if(isset($getSocialLink->x_link) && $data->x_link != null) --}}
                   <li>
                     {{-- <a href="{{ route('event.event_guest', 3775 )}}"> --}}
 
@@ -110,7 +110,7 @@
                           </span>
                       </a>
                   </li>
-                  @endif
+                  {{-- @endif --}}
                   <li>
                       <a href="#">
                           <span>
