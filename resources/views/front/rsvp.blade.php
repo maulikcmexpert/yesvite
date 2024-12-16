@@ -50,13 +50,13 @@
                         <p>{{$event->message_to_guests}}</p>
                     </div>
                     @endif
+                    <?php
+                    $i = 1;
+                    ?>
+                    @if($event->event_detail)
                     <div class="event-detail">
                         <h5>Event Details</h5>
                         <div class="d-flex flex-wrap">
-                            <?php
-                            $i = 1;
-                            ?>
-                            @if($event->event_detail)
                             <div class="d-flex align-items-center justify-content-between {{($i<= 3)?'w-100 mb-2':'w-100'}}">
                                 @foreach($event->event_detail as $val)
 
@@ -64,10 +64,10 @@
                                 <?php $i++; ?>
                                 @endforeach
                             </div>
-                            @endif
-
+                            
                         </div>
                     </div>
+                    @endif
                     <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpForm">
                         @csrf
                         <input type="hidden" name="event_id" value="{{ $event_id }}">
