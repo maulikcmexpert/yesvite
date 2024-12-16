@@ -11,10 +11,10 @@
                 <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly app handles everything from invites to
                     decorations, so you can relax and enjoy your celebration</p>
                 <div class="app-store d-flex justify-content-center gap-2">
-                    <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "11"}}" class="google-app">
+                    <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
                         <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                     </a>
-                    <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "11"}}" class="mobile-app">
+                    <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app">
                         <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                     </a>
                 </div>
@@ -649,10 +649,10 @@
                             <h2>The best platform to manage all your events</h2>
                             <p>Customizable Designs to Reflect Your Unique Event</p>
                             <div class="app-store d-flex gap-2">
-                                <a href="#" class="google-app">
+                                <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
                                     <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                                 </a>
-                                <a href="#" class="mobile-app">
+                                <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app">
                                     <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                                 </a>
                             </div>
