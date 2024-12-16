@@ -19,9 +19,14 @@ use App\Models\Group;
 use App\Models\EventDesignCategory;
 use App\Models\EventPostPhotoComment;
 use App\Models\EventPhotoCommentReaction;
+use App\Models\Social_link;
 use App\Models\UserPrivacyPolicy;
 use Carbon\Carbon;
 use Kreait\Laravel\Firebase\Facades\Firebase;
+
+function getSocialLink(){
+    return Social_link::first();
+}
 
 function getTotalUnreadMessageCount()
 {

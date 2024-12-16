@@ -1,4 +1,8 @@
   <!-- ========== footer ======= -->
+  @php
+      $getSocialLink = getSocialLink();
+      dd($getSocialLink);
+  @endphp
   <footer>
       <div class="container-fluid">
           <div class="footer-content d-flex justify-content-between">
