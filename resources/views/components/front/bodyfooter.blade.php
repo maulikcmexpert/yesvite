@@ -84,7 +84,7 @@
           </div>
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
               <ul class="footer-social-link">
-                @if(isset($getSocialLink->x_link) && $data->x_link != null)
+                {{-- @if(isset($getSocialLink->x_link) && $data->x_link != null) --}}
                   <li>
                       {{-- <a href="{{ route('event.event_detail', 3775 ) }}"> --}}
                         <a href="#">
@@ -96,7 +96,7 @@
                           </span>
                       </a>
                   </li>
-                  @endif
+                  {{-- @endif --}}
 
                   {{-- @if(isset($getSocialLink->x_link) && $data->x_link != null) --}}
                   <li>
