@@ -1,4 +1,7 @@
     <!-- ============= banner-wrapper ======== -->
+@php
+    $getSocialLink = getSocialLink();
+@endphp
     <section class="banner-wrapper">
         <img src="{{asset('assets/front/image/left-banner.png')}}" alt="left-banner" class="left-img wow fadeInLeft" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
         <img src="{{asset('assets/front/image/right-banner.png')}}" alt="right-banner" class="right-img wow fadeInRight" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
@@ -8,10 +11,10 @@
                 <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly app handles everything from invites to
                     decorations, so you can relax and enjoy your celebration</p>
                 <div class="app-store d-flex justify-content-center gap-2">
-                    <a href="#" class="google-app">
+                    <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "11"}}" class="google-app">
                         <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
                     </a>
-                    <a href="#" class="mobile-app">
+                    <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "11"}}" class="mobile-app">
                         <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
                     </a>
                 </div>
