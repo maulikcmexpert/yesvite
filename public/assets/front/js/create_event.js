@@ -5599,8 +5599,8 @@ $(document).on('click','.select_design_category_close',function(){
 })
   
 $(document).on('click','.brand-progress',function () { 
-    var event_id = $(this).data('id');
-    window.location.href="event?id="+event_id;       
+    // var event_id = $(this).data('id');
+    // window.location.href="event?id="+event_id;       
 });
 
 // $(document).on("click", ".new-temp", function () {
