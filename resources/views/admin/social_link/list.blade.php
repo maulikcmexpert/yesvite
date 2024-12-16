@@ -64,7 +64,7 @@
             </tr>
             <tr>
                 <td>4</td>
-                <td >Linkin Link</td>
+                <td >Linkedin Link</td>
                 <td>{{isset($data->linkedin_link) && $data->linkedin_link !== null ? $data->linkedin_link : ""}}</td>
                 <td>  @php
                     $edit_url = route('social_link.edit', encrypt('linkedin_link'));
@@ -76,7 +76,7 @@
           
             <tr class="odd">
                 <td>5</td>
-                <td>Play Store</td>
+                <td>Play Store Link</td>
                 <td>{{isset($data->playstore_link) && $data->playstore_link !== null ? $data->playstore_link : ""}}</td>
                 <td>  @php
                     $edit_url = route('social_link.edit', encrypt('playstore_link'));
@@ -87,7 +87,7 @@
             </tr>
             <tr>
                 <td>6</td>
-                <td>App Store</td>
+                <td>App Store Link</td>
                 <td>{{isset($data->appstore_link) && $data->appstore_link !== null ? $data->appstore_link : ""}}</td>
                 <td>  @php
                     $edit_url = route('social_link.edit', encrypt('appstore_link'));
