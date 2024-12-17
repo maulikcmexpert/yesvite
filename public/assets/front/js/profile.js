@@ -393,25 +393,9 @@ $("#bg-choose-file").on("change", function () {
 });
 var selectedDates = new Set();
 
-$("#birth_date").daterangepicker(
-    {
-        singleDatePicker: true,       // Enable single date selection
-        autoUpdateInput: true,
-        locale: {
-            format: "MM/DD/YYYY",
-        },
-        showDropdowns: true,              // Allow month/year dropdowns
-     
-        // alwaysShowCalendars: true, // Keep the calendar visible
-      
-    },
-);
-$("#birth_date").on('change', function () {
-    var selectedDate = $(this).val();
-    if (selectedDate) {
-        // Update the input with MM/DD format
-        $(this).val(moment(selectedDate, 'MM/DD/YYYY').format('MM/DD'));
-        // Close the datepicker after selection
-        $(this).data('daterangepicker').hide();
-    }
-});
+$('input[name="birth_date"]').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
+  });
