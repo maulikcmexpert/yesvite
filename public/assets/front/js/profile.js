@@ -405,6 +405,7 @@ var selectedDates = new Set();
 
     // Automatically close the picker when a date is selected
     $('input[name="birth_date"]').on('apply.daterangepicker', function (ev, picker) {
+        alert();
         $(this).data('daterangepicker').hide();  // Close the date picker
     });
 
