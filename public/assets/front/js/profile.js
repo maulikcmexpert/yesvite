@@ -341,22 +341,7 @@ $(document).ready(function () {
         });
     });
 
-    let birthDate = $('#birth_date').val();
-    $('#birth_date').daterangepicker({
-        singleDatePicker: true,
-        autoUpdateInput: false,  
-        //   showDropdowns: true,
-        minYear: 1901,
-        maxDate: adjustedStartTime, 
-        minDate: moment().add(0, 'days'), 
-        locale: {
-            format: 'MM-DD-YYYY'  // Set the desired format
-        },
-        maxYear: parseInt(moment().format('YYYY'),10)
-        }, function(start, end, label) {
-        //   var years = moment().diff(start, 'years');
-        //   alert("You are " + years + " years old!");
-    });
+  
 });
 
 
@@ -405,4 +390,15 @@ $("#bg-choose-file").on("change", function () {
         });
     };
     reader.readAsDataURL(this.files[0]);
+});
+$('#birth_date').datepicker({
+    dateFormat: 'MM d, yy', // Format: F j, Y (e.g., January 1, 2024)
+    changeMonth: true,     // Allows changing months
+    changeYear: true,      // Allows changing years
+    yearRange: "1900:2100" // Set a range of years
+});
+
+// Open datepicker when the input field is clicked
+$('#birth_date').on('click', function () {
+    $(this).datepicker('show');
 });
