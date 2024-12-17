@@ -393,9 +393,30 @@ $("#bg-choose-file").on("change", function () {
 });
 var selectedDates = new Set();
 
-$('input[name="birth_date"]').daterangepicker({
-    singleDatePicker: true,
-    showDropdowns: true,
-    minYear: 1901,
-    maxYear: parseInt(moment().format('YYYY'),10)
-  });   
+$(document).ready(function () {
+    $('input[name="birth_date"]').daterangepicker({
+        singleDatePicker: true,            // Enable single date selection
+        showDropdowns: true,               // Allow month/year dropdowns
+        autoUpdateInput: true,             // Automatically update the input when a date is selected
+        minYear: 1901,                     // Minimum year for selection
+        maxYear: parseInt(moment().format('YYYY'), 10), // Maximum year (current year)
+        locale: {
+            format: 'MM/DD/YYYY'           // Date format: Month/Day/Year
+        },
+        showCalendar: true,                // Show the calendar
+        opens: 'center',                   // Open the calendar in the center
+        drops: 'down',                     // Calendar drops down
+        isInvalidDate: function(date) {
+            return false;
+        },
+        // Disable the Apply and Cancel buttons
+        buttonClasses: ['daterangepicker__apply', 'daterangepicker__cancel'].forEach(function(className){
+            $('.'+className).hide();
+        })
+    });
+
+    // Automatically update the input and close the picker after a date selection
+    $('input[name="birth_date"]').on('change', function () {
+        $(this).data('daterangepicker').hide(); // Hide the date picker after selection
+    });
+});
