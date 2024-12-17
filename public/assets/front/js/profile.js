@@ -400,7 +400,7 @@ $("#birth_date").daterangepicker(
         locale: {
             format: "MM/DD/YYYY",
         },
-        showDropdowns: false,
+        showDropdowns: true,              // Allow month/year dropdowns
      
         // alwaysShowCalendars: true, // Keep the calendar visible
         maxSpan: { days: 2 },
