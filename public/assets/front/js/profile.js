@@ -396,14 +396,14 @@ var selectedDates = new Set();
 $("#birth_date").daterangepicker(
     {
         singleDatePicker: true,       // Enable single date selection
-        autoUpdateInput: false,
+        autoUpdateInput: true,
         locale: {
             format: "MM/DD/YYYY",
         },
         showDropdowns: true,              // Allow month/year dropdowns
      
         // alwaysShowCalendars: true, // Keep the calendar visible
-        maxSpan: { days: 2 },
+      
     },
 );
 $("#birth_date").on('change', function () {
