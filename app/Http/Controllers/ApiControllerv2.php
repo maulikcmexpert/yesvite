@@ -17,6 +17,7 @@ use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Exception\RuntimeException;
 
 use App\Models\{
+    Coin_transactions,
     contact_sync,
     User,
     Event,
@@ -12820,6 +12821,178 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    // public function addProductSubscription(Request $request)
+    // {
+
+    //     $rawData = $request->getContent();
+
+    //     $input = json_decode($rawData, true);
+
+    //     if ($input == null) {
+    //         return response()->json(['status' => 0, 'message' => "Json invalid"]);
+    //     }
+
+
+
+    //     // $validator = Validator::make($input, [
+
+    //     //      'orderId' => 'required',
+    //     //      'packageName' => 'required',
+    //     //      'productId' => 'required',
+    //     //      'purchaseTime' => 'required',
+    //     //      'purchaseToken' => 'required|string',
+    //     //      'event_id' => 'required'
+    //     // ]);
+
+
+    //     // if ($validator->fails()) {
+    //     //     return response()->json(
+    //     //         [
+    //     //             'status' => 0,
+    //     //             'message' => $validator->errors()->first()
+    //     //         ],
+    //     //     );
+    //     // }
+
+
+    //     try {
+    //         // $app_id = $input['packageName'];
+    //         // $product_id = $input['productId'];
+    //         // $user_id = $this->user->id;
+    //         // $purchaseToken = $input['purchaseToken'];
+
+    //         // $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
+
+
+
+    //         // $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
+
+
+    //         // $new_subscription = new UserSubscription();
+    //         // $new_subscription->user_id = $user_id;
+    //         // $new_subscription->orderId = $input['orderId'];
+    //         // $new_subscription->packageName = $input['packageName'];
+    //         // $new_subscription->countryCode = $responce['regionCode'];
+    //         // $new_subscription->startDate = $startDate;
+
+    //         // $new_subscription->productId = $input['productId'];
+    //         // $new_subscription->type = 'product';
+    //         // $new_subscription->purchaseToken = $input['purchaseToken'];
+    //         // $new_subscription->save();
+    //         $updateEvent = Event::where('id', $input['event_id'])->first();
+    //         if ($updateEvent != null) {
+    //             $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
+    //             $updateEvent->is_draft_save = '0';
+    //             if ($updateEvent->subscription_plan_name != 'Free') {
+    //                 $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
+    //             } else {
+    //                 $updateEvent->subscription_invite_count = $invite_count;
+    //             }
+    //             $updateEvent->subscription_plan_name = 'Pro';
+    //             $updateEvent->save();
+    //         }
+
+    //         return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
+    //     } catch (QueryException $e) {
+    //         return response()->json(['status' => 0, 'message' => "db error"]);
+    //     } catch (Exception  $e) {
+    //         return response()->json(['status' => 0, 'message' => 'something went wrong']);
+    //     }
+    // }
+    // public function checkSubscription()
+    // {
+    //     $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
+
+    //     if ($userSubscription != null) {
+    //         $app_id = $userSubscription->packageName;
+    //         $product_id = $userSubscription->productId;
+    //         $purchaseToken = $userSubscription->purchaseToken;
+
+    //         $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
+
+    //         if (isset($responce) && !empty($responce)) {
+    //             if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
+    //                 $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
+    //                 $current_date = date('Y-m-d H:i:s');
+    //                 if (strtotime($current_date) > strtotime($exp_date)) {
+    //                     $userSubscription->endDate = $exp_date;
+    //                     $userSubscription->save();
+    //                     return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+    //                 }
+    //             }
+    //             if (isset($responce['userCancellationTimeMillis'])) {
+    //                 $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
+    //                 $userSubscription->cancellationdate = $cancellationdate;
+    //                 $userSubscription->save();
+    //                 return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+    //             }
+    //             if (isset($responce['error'])) {
+    //                 return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
+    //             }
+    //             return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
+    //         }
+    //     }
+    //     return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'Free']);
+    // }
+    // public function set_android_iap($appid, $productID, $purchaseToken, $type)
+    // {
+
+    //     $ch = curl_init();
+    //     $clientId = env('InGOOGLE_CLIENT_ID');
+
+    //     $clientSecret = env('InGOOGLE_CLIENT_SECRET');
+    //     $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+
+    //     $refreshToken = '1//0gHZPawBGjoQ4CgYIARAAGBASNwF-L9IrZT9Hzb4z5DpT1bUdoSXosX2JZjiA_2TKQZ9uqoUfYTvgD0OA2RvL4SQ7Ecdei1ooEZs';
+    //     $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
+
+    //     $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+    //         $appid . "/purchases/subscriptions/" .
+    //         $productID . "/tokens/" . $purchaseToken;
+    //     if ($type == 'product') {
+
+    //         $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
+    //             $appid . "/purchases/products/" .
+    //             $productID . "/tokens/" . $purchaseToken;
+    //     }
+
+
+    //     $input_fields = 'refresh_token=' . $refreshToken .
+    //         '&client_secret=' . $clientSecret .
+    //         '&client_id=' . $clientId .
+    //         '&redirect_uri=' . $redirectUri .
+    //         '&grant_type=refresh_token';
+
+    //     //Request to google oauth for authentication
+    //     curl_setopt($ch, CURLOPT_URL, $TOKEN_URL);
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $input_fields);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     $result = curl_exec($ch);
+    //     $result = json_decode($result, true);
+
+    //     // if (!$result || !$result["access_token"]) {
+    //     //     //error  
+    //     //     // return;
+    //     // }
+    //     if (isset($result['access_token']) && $result['access_token'] != null) {
+
+    //         $ch = curl_init();
+    //         curl_setopt($ch, CURLOPT_URL, $VALIDATE_URL . "?access_token=" . $result["access_token"]);
+    //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //         $result1 = curl_exec($ch);
+    //         $result1 = json_decode($result1, true);
+    //         if (!$result1 || (isset($result1["error"]) && $result1["error"] != null)) {
+    //             //error
+    //             // return;
+    //         }
+    //     } else {
+    //         $result1 = $result;
+    //     }
+
+    //     return $result1;
+    // }
+
     public function addProductSubscription(Request $request)
     {
 
@@ -12830,67 +13003,106 @@ class ApiControllerv2 extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
+        $validator = Validator::make($input, [
+
+            // 'orderId' => 'required',
+            // 'productId' => 'required',
+            // 'purchaseTime' => 'required',
+            // 'subscription_invite_count' => 'required',
+            'packageName' => 'required',
+            'purchaseToken' => 'required|string',
+            'event_id' => 'required',
+            'coins' => 'required',
+        ]);
 
 
-
-        // $validator = Validator::make($input, [
-
-        //      'orderId' => 'required',
-        //      'packageName' => 'required',
-        //      'productId' => 'required',
-        //      'purchaseTime' => 'required',
-        //      'purchaseToken' => 'required|string',
-        //      'event_id' => 'required'
-        // ]);
-
-
-        // if ($validator->fails()) {
-        //     return response()->json(
-        //         [
-        //             'status' => 0,
-        //             'message' => $validator->errors()->first()
-        //         ],
-        //     );
-        // }
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'status' => 0,
+                    'message' => $validator->errors()->first()
+                ],
+            );
+        }
 
 
         try {
-            // $app_id = $input['packageName'];
-            // $product_id = $input['productId'];
-            // $user_id = $this->user->id;
-            // $purchaseToken = $input['purchaseToken'];
-
-            // $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
-
-
-
-            // $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
-
-
-            // $new_subscription = new UserSubscription();
-            // $new_subscription->user_id = $user_id;
-            // $new_subscription->orderId = $input['orderId'];
-            // $new_subscription->packageName = $input['packageName'];
-            // $new_subscription->countryCode = $responce['regionCode'];
-            // $new_subscription->startDate = $startDate;
-
-            // $new_subscription->productId = $input['productId'];
-            // $new_subscription->type = 'product';
-            // $new_subscription->purchaseToken = $input['purchaseToken'];
-            // $new_subscription->save();
-            $updateEvent = Event::where('id', $input['event_id'])->first();
-            if ($updateEvent != null) {
-                $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
-                $updateEvent->is_draft_save = '0';
-                if ($updateEvent->subscription_plan_name != 'Free') {
-                    $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + $invite_count;
-                } else {
-                    $updateEvent->subscription_invite_count = $invite_count;
+            $user_id = $this->user->id;
+            $purchaseToken = $input['purchaseToken'];
+            if (isset($input['device_type']) && $input['device_type'] == 'ios') {
+                $startDate = date('Y-m-d H:i:s');
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user_id;
+                $new_subscription->packageName = $input['packageName'];
+                $new_subscription->startDate = $startDate;
+                $new_subscription->device_type = 'ios';
+                $new_subscription->type = 'product';
+                $new_subscription->purchaseToken = $input['purchaseToken'];
+              
+            }else{
+                $app_id = $input['packageName'];
+                $product_id = $input['productId'];
+                $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'product');
+                if (!isset($responce['purchaseTimeMillis'])) {
+                    // dd($responce);
+                    return response()->json(['status' => 0, 'message' => 'Refresh token expired']);
                 }
-                $updateEvent->subscription_plan_name = 'Pro';
-                $updateEvent->save();
+                $startDate = date('Y-m-d H:i:s', ($responce['purchaseTimeMillis'] / 1000));
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user_id;
+                $new_subscription->orderId = $input['orderId'];
+                $new_subscription->packageName = $input['packageName'];
+                $new_subscription->countryCode = $responce['regionCode'];
+                $new_subscription->startDate = $startDate;
+                $new_subscription->productId = $input['productId'];
+                $new_subscription->type = 'product';
+                $new_subscription->purchaseToken = $input['purchaseToken'];
             }
 
+            if ($new_subscription->save()) {
+                    $user = User::where('id',$user_id)->first();
+                    if($user){
+                        $total_coin = $user->coins + $input['coins'];
+                        User::where('id',$user_id)->update(['coins'=>$total_coin]);
+
+                        $coin_transaction = new Coin_transactions();
+                        $coin_transaction->user_id = $user_id;
+                        $coin_transaction->status = '0';
+                        $coin_transaction->type = 'credit';
+                        $coin_transaction->coins = env('DEFAULT_COIN');
+                        $coin_transaction->current_balance = env('DEFAULT_COIN');
+                        $coin_transaction->description = 'In App Purchase';
+                        $coin_transaction->endDate = Carbon::now()->addYears(5)->toDateString();
+                        $coin_transaction->save();
+                    }
+                    // $updateEvent = Event::where('id', $input['event_id'])->first();
+                    // if ($updateEvent != null) {
+                    //     $invite_count = (isset($input['subscription_invite_count']) && $input['subscription_invite_count'] != null) ? $input['subscription_invite_count'] : 0;
+                    //     if($updateEvent->is_draft_save == '1'){
+                    //         $notificationParam = [
+                    //             'sender_id' => $user_id,
+                    //             'event_id' => $input['event_id'],
+                    //             'post_id' => ""
+                    //         ];
+                    //         // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                    //         // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+                    //         sendNotification('invite', $notificationParam);
+                    //         sendNotification('owner_notify', $notificationParam);
+                    //         sendNotificationGuest('invite', $notificationParam);
+                    //         $updateEvent->is_draft_save = '0';
+                    //     }
+                    //     $updateEvent->product_payment_id = $new_subscription->id;
+                    //     if ($updateEvent->subscription_plan_name != 'Free') {
+                    //         $updateEvent->subscription_invite_count = $updateEvent->subscription_invite_count + (int)$invite_count;
+                    //     } else {
+                    //         $updateEvent->subscription_invite_count = $invite_count;
+                    //     }
+                    //     $updateEvent->subscription_plan_name = 'Pro';
+                    //     $updateEvent->save();
+
+                    // }
+                // }
+            }
             return response()->json(['status' => 1, 'message' => "purchase sucessfully"]);
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "db error"]);
@@ -12898,42 +13110,14 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
-
-
     public function checkSubscription()
     {
-        $userSubscription = UserSubscription::where('user_id', $this->user->id)->orderBy('id', 'DESC')->limit(1)->first();
+        $userSubscription = User::where('id', $this->user->id)->first();
 
         if ($userSubscription != null) {
-            $app_id = $userSubscription->packageName;
-            $product_id = $userSubscription->productId;
-            $purchaseToken = $userSubscription->purchaseToken;
-
-            $responce =  $this->set_android_iap($app_id, $product_id, $purchaseToken, 'subscribe');
-
-            if (isset($responce) && !empty($responce)) {
-                if (isset($responce['expiryTimeMillis']) && $responce['expiryTimeMillis'] != null) {
-                    $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-                    $current_date = date('Y-m-d H:i:s');
-                    if (strtotime($current_date) > strtotime($exp_date)) {
-                        $userSubscription->endDate = $exp_date;
-                        $userSubscription->save();
-                        return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
-                    }
-                }
-                if (isset($responce['userCancellationTimeMillis'])) {
-                    $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
-                    $userSubscription->cancellationdate = $cancellationdate;
-                    $userSubscription->save();
-                    return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
-                }
-                if (isset($responce['error'])) {
-                    return response()->json(['status' => 0, 'message' => "subscription is not active", 'type' => 'Free']);
-                }
-                return response()->json(['status' => 1, 'message' => "subscription is active", 'type' => 'Pro-Year']);
-            }
+                return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins]);
         }
-        return response()->json(['status' => 0, 'message' => "No subscribe", 'type' => 'Free']);
+        return response()->json(['status' => 0, 'message' => "Login Checked", 'coins' => 0]);
     }
     public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
@@ -12942,9 +13126,9 @@ class ApiControllerv2 extends Controller
         $clientId = env('InGOOGLE_CLIENT_ID');
 
         $clientSecret = env('InGOOGLE_CLIENT_SECRET');
-        $redirectUri = 'https://yesvite.cmexpertiseinfotech.in/google/callback';
+        $redirectUri = env('INAPP_REDIRECT_URL');
 
-        $refreshToken = '1//0gHZPawBGjoQ4CgYIARAAGBASNwF-L9IrZT9Hzb4z5DpT1bUdoSXosX2JZjiA_2TKQZ9uqoUfYTvgD0OA2RvL4SQ7Ecdei1ooEZs';
+        $refreshToken = env('INAPP_PURCHASE_REFRESH_TOKEN');
         $TOKEN_URL = "https://accounts.google.com/o/oauth2/token";
 
         $VALIDATE_URL = "https://www.googleapis.com/androidpublisher/v3/applications/" .
@@ -12971,7 +13155,7 @@ class ApiControllerv2 extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $result = json_decode($result, true);
-
+        
         // if (!$result || !$result["access_token"]) {
         //     //error  
         //     // return;
@@ -12990,8 +13174,42 @@ class ApiControllerv2 extends Controller
         } else {
             $result1 = $result;
         }
-
+        // dd($result1);
         return $result1;
+    }
+    public function set_apple_iap($receipt)
+    {
+        $data = array(
+            'receipt-data' => $receipt,
+            'password' => 'e26c3c7903f74a89a2103d424cd33d4b',
+            'exclude-old-transactions' => 'true'
+        );
+
+        $payload = json_encode($data);
+
+        // Prepare new cURL resource
+        $ch = curl_init('https://sandbox.itunes.apple.com/verifyReceipt');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+        // Set HTTP Header for POST request 
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($payload)
+            )
+        );
+
+        // Submit the POST request
+        $result = curl_exec($ch);
+        // Close cURL session handle
+        curl_close($ch);
+        $userReceiptData = json_decode($result);
+        return $userReceiptData;
     }
 
     public function getSingleEvent(Request $request)

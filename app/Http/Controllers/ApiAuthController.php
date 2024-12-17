@@ -87,7 +87,7 @@ class ApiAuthController extends Controller
                     'remember_token' =>  $randomString,
                     'register_type' => 'API Normal register',
                     'app_user' => '1',
-                    'coins' => 30,
+                    'coins' => env('DEFAULT_COIN'),
                 ]);
 
                 DB::commit();
@@ -105,8 +105,8 @@ class ApiAuthController extends Controller
                 $coin_transaction->user_id = $existUser->id;
                 $coin_transaction->status = '0';
                 $coin_transaction->type = 'credit';
-                $coin_transaction->coins = 30;
-                $coin_transaction->current_balance = 30;
+                $coin_transaction->coins = env('DEFAULT_COIN');
+                $coin_transaction->current_balance = env('DEFAULT_COIN');
                 $coin_transaction->description = 'Signup Bonus';
                 $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
                 $coin_transaction->save();
@@ -210,8 +210,8 @@ class ApiAuthController extends Controller
             $coin_transaction->user_id = $checkUser->id;
             $coin_transaction->status = '0';
             $coin_transaction->type = 'credit';
-            $coin_transaction->coins = 30;
-            $coin_transaction->current_balance = 30;
+            $coin_transaction->coins = env('DEFAULT_COIN');
+            $coin_transaction->current_balance = env('DEFAULT_COIN');
             $coin_transaction->description = 'Signup Bonus';
             $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
             $coin_transaction->save();
@@ -452,7 +452,7 @@ class ApiAuthController extends Controller
                 'account_type' => $userInfo->account_type,
                 'is_first_login' => $userInfo->is_first_login
             ];
-            logoutFromWeb($userId);
+            // logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         } else {
 
@@ -507,8 +507,8 @@ class ApiAuthController extends Controller
             $coin_transaction->user_id = $userId;
             $coin_transaction->status = '0';
             $coin_transaction->type = 'credit';
-            $coin_transaction->coins = 30;
-            $coin_transaction->current_balance = 30;
+            $coin_transaction->coins = env('DEFAULT_COIN');
+            $coin_transaction->current_balance = env('DEFAULT_COIN');
             $coin_transaction->description = 'Signup Bonus';
             $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
             $coin_transaction->save();
@@ -523,7 +523,7 @@ class ApiAuthController extends Controller
                 'is_first_login' => $userInfo->is_first_login
             ];
             DB::commit();
-            logoutFromWeb($userId);
+            // logoutFromWeb($userId);
             return response()->json(['status' => 1, 'data' => $detail, 'token' => $token]);
         }
 
