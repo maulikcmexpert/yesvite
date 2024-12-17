@@ -393,10 +393,16 @@ $("#bg-choose-file").on("change", function () {
 });
 var selectedDates = new Set();
 
-$( "#birth_date" ).datepicker({
-    
-    changeMonth: true,
-    changeYear: true,
-    showButtonPanel: true,
+$('input[name="birth_date"]').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
+  });   
 
+  $("#birth_date").on('apply.daterangepicker', function(ev, picker) {
+    picker.hide();
+});
+$('#birth_date').on('hide.daterangepicker', function(ev, picker) {
+    picker.show();
 });
