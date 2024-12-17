@@ -340,7 +340,30 @@ $(document).ready(function () {
             },
         });
     });
+
+    let birthDate = $('#birth_date').val();
+
+    if (birthDate) {
+        let date = new Date(birthDate);
+        let formattedDate = formatDate(date); // Format the date
+        $('#formatted_birth_date').val(formattedDate); // Set formatted date
+    }
+
+    // Function to format the date as "F j, Y" (e.g., January 1, 2024)
+    function formatDate(date) {
+        let options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    // Update formatted date when the date input changes
+    $('#birth_date').on('change', function () {
+        let newDate = new Date($(this).val());
+        let formattedDate = formatDate(newDate);
+        $('#formatted_birth_date').val(formattedDate);
+    });
 });
+
+
 
 var profileCroppie = new Croppie(document.getElementById("profileIm"), {
     viewport: { width: 200, height: 200, type: "circle" },
