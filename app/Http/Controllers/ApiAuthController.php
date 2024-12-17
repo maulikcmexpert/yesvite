@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Password_reset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\forgotpasswordMail;
+use App\Models\Coin_transactions;
 use App\Models\Device;
 use App\Models\LoginHistory;
 
@@ -86,6 +87,7 @@ class ApiAuthController extends Controller
                     'remember_token' =>  $randomString,
                     'register_type' => 'API Normal register',
                     'app_user' => '1',
+                    'coins' => 30,
                 ]);
 
                 DB::commit();
@@ -98,6 +100,17 @@ class ApiAuthController extends Controller
                     'email' => $userDetails->email,
                     'token' => $randomString
                 ];
+
+                $coin_transaction = new Coin_transactions();
+                $coin_transaction->user_id = $existUser->id;
+                $coin_transaction->status = '0';
+                $coin_transaction->type = 'credit';
+                $coin_transaction->coins = 30;
+                $coin_transaction->current_balance = 30;
+                $coin_transaction->description = 'Signup Bonus';
+                $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+                $coin_transaction->save();
+
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
                     $message->to($input['email']);
                     $message->subject('Verify your Yesvite email address');
@@ -192,6 +205,17 @@ class ApiAuthController extends Controller
                 'email' => $userDetails->email,
                 'token' => $randomString
             ];
+
+            $coin_transaction = new Coin_transactions();
+            $coin_transaction->user_id = $checkUser->id;
+            $coin_transaction->status = '0';
+            $coin_transaction->type = 'credit';
+            $coin_transaction->coins = 30;
+            $coin_transaction->current_balance = 30;
+            $coin_transaction->description = 'Signup Bonus';
+            $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+            $coin_transaction->save();
+
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
                 $message->to(strtolower($input['email']));
                 $message->subject('Verify your Yesvite email address');
@@ -478,6 +502,17 @@ class ApiAuthController extends Controller
                 $token->delete();
             }
             $userInfo = User::where("id", $userId)->first();
+
+            $coin_transaction = new Coin_transactions();
+            $coin_transaction->user_id = $userId;
+            $coin_transaction->status = '0';
+            $coin_transaction->type = 'credit';
+            $coin_transaction->coins = 30;
+            $coin_transaction->current_balance = 30;
+            $coin_transaction->description = 'Signup Bonus';
+            $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+            $coin_transaction->save();
+
             $token = $userInfo->createToken('API Token')->accessToken;
             $detail = [
                 'user_id' => $userId,
