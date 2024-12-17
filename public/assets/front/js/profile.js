@@ -400,5 +400,6 @@ $('#birth_date').datepicker({
 
 // Open datepicker when the input field is clicked
 $('#birth_date').on('click', function () {
+    alert();
     $(this).datepicker('show');
 });
