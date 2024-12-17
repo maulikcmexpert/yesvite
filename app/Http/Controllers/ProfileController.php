@@ -480,7 +480,7 @@ class ProfileController extends Controller
         
         
                     $user = Auth::guard('web')->user();
-                    dd($user);
+                    dd($request);
         try {
             if ($request->visible != null) {
                 
