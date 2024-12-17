@@ -401,9 +401,7 @@ $("#birth_date").daterangepicker(
             format: "MM/DD/YYYY",
         },
         showDropdowns: false,
-        startDate: moment().startOf("month"),
-        endDate: moment().endOf("month"),
-        minDate: moment().add(1, 'days'),  
+     
         // alwaysShowCalendars: true, // Keep the calendar visible
         maxSpan: { days: 2 },
     },
