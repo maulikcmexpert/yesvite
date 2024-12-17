@@ -1,11 +1,14 @@
 @if(!session('advertisement_closed'))
 <div class="google-add">
+    @php
+        $getSocialLink = getSocialLink();
+    @endphp
     <p>Full web functionality will be available in Late Q4 {{date('Y')}} - for full functionality use our apps</p>
     <div class="app-store ms-auto d-flex gap-2">
-        <a href="#" class="google-app">
+        <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
             <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
         </a>
-        <a href="#" class="mobile-app">
+        <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app">
             <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
         </a>
     </div>

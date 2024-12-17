@@ -73,7 +73,10 @@ return new class extends Migration
             $table->enum('resend_verification_mail', allowed: ['0', '1'])->default('0')->comment('1 = user requested verification mail 0 =  user not requested verification mail');
             $table->enum('isTemporary_password', allowed: ['0', '1'])->default('0')->comment('0= if it not temp password,1= if it is temp password');
             
+            $table->string('account_status')->default('Unblock');
             $table->string('register_type')->nullable();
+            $table->text('current_session_id')->nullable();
+            $table->unsignedBigInteger('coins')->nullable();
             $table->timestamps();
         });
     }
