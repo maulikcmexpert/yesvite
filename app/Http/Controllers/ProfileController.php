@@ -142,6 +142,7 @@ class ProfileController extends Controller
         )->findOrFail($id);
         $title = 'Edit Profile';
         $page = 'front.edit_profile';
+        $user_birth_date = Carbon::parse($user->birth_date)->format('F j, Y');
         $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
@@ -149,6 +150,7 @@ class ProfileController extends Controller
             'title',
             'page',
             'user',
+            'user_birth_date',
             'js'
         ));
     }

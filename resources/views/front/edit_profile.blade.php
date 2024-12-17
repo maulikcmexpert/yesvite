@@ -134,7 +134,7 @@
                                     <div class="col-lg-12">
                                         <div class="input-form">
                                       
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$user->birth_date}}">
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$user_birth_date}}">
                                             <label for="birthday" class="floating-label birthday-label">Birthday</label>
                                             <div class="label-error">
                                                 <label id="birth_date-error" class="error" for="birth_date"></label>
