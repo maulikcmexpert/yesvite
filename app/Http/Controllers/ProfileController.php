@@ -230,7 +230,6 @@ class ProfileController extends Controller
             $userUpdate->gender = ($request->gender != "" || $request->gender != NULL) ? $request->gender : $userUpdate->gender;
 
             $user_birth_date = Carbon::parse($request->birth_date)->format("Y-m-d");
-            dd($user_birth_date);
             $userUpdate->birth_date = ($request->birth_date != "" || $request->birth_date != NULL) ? $user_birth_date : $userUpdate->birth_date;
             $userUpdate->country_code = ($request->country_code != "" || $request->country_code != NULL) ? $request->country_code : $userUpdate->country_code;
             $userUpdate->phone_number = ($request->phone_number != ""  || $request->phone_number != NULL)  ? $request->phone_number : "";
