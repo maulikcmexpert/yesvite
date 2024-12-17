@@ -133,10 +133,8 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            @php
-                                                $formattedDate = DateTime::createFromFormat('d-m-Y', $user->birth_date)->format('F j, Y');
-                                            @endphp
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$formattedDate}}">
+                                      
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$user->birth_date}}">
                                             <label for="birthday" class="floating-label birthday-label">Birthday</label>
                                             <div class="label-error">
                                                 <label id="birth_date-error" class="error" for="birth_date"></label>
