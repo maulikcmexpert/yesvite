@@ -395,6 +395,7 @@ var selectedDates = new Set();
 
 $("#birth_date").daterangepicker(
     {
+        singleDatePicker: true,       // Enable single date selection
         autoUpdateInput: false,
         locale: {
             format: "MM/DD/YYYY",
