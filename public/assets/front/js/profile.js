@@ -391,26 +391,12 @@ $("#bg-choose-file").on("change", function () {
     };
     reader.readAsDataURL(this.files[0]);
 });
+var selectedDates = new Set();
 
-
-$('input[name="birth_date"]').datepicker();
-
-// var selectedDates = new Set();
-//     $('input[name="birth_date"]').daterangepicker({
-//         singleDatePicker: true,            // Enable single date selection
-//         showDropdowns: true,               // Allow month/year dropdowns
-//         minYear: 1901,                     // Minimum year for selection
-//         maxYear: parseInt(moment().format('YYYY'), 10), // Maximum year (current year)
-//         locale: {
-//             format: 'MM/DD/YYYY'           // Date format: Month/Day/Year
-//         },
-//         autoUpdateInput: true,             // Automatically update the input when a date is selected
-//     });
-
-//     // Automatically close the picker when a date is selected
-//     $('input[name="birth_date"]').on('apply.daterangepicker', function (ev, picker) {
-//         alert();
-//         $(this).data('daterangepicker').hide();  // Close the date picker
-//     });
-
+$('input[name="birth_date"]').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
+  });   
 
