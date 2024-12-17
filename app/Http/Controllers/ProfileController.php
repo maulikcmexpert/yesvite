@@ -485,7 +485,7 @@ class ProfileController extends Controller
             if ($request->visible != null) {        
                 $user->visible = $request->visible;
                 $user->save();
-                dd(1);
+                dd($user->visible);
             }
 
             $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
