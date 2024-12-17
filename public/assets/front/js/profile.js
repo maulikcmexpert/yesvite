@@ -394,9 +394,12 @@ $("#bg-choose-file").on("change", function () {
 var selectedDates = new Set();
 
 $('input[name="birth_date"]').daterangepicker({
-    singleDatePicker: true,
-    showDropdowns: true,
-    minYear: 1901,
-    maxYear: parseInt(moment().format('YYYY'),10)
-  });   
-
+    singleDatePicker: true,           
+    showDropdowns: true,               
+    minYear: 1901,                     
+    maxYear: parseInt(moment().format('YYYY'), 10), 
+    locale: {
+        format: 'MMMM D, YYYY'        
+    },
+    autoUpdateInput: true,             
+});
