@@ -406,3 +406,7 @@ $("#birth_date").daterangepicker(
         maxSpan: { days: 2 },
     },
 );
+$("#birth_date").on('apply.daterangepicker', function (ev, picker) {
+    // Update the input field with MM/DD format
+    $(this).val(picker.startDate.format('MM/DD'));
+});
