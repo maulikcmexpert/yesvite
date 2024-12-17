@@ -479,13 +479,13 @@ class ProfileController extends Controller
     {
         
         
-                    $user = Auth::guard('web')->user();
-                    dd($request);
+        
+        $user = Auth::guard('web')->user();
         try {
-            if ($request->visible != null) {
-                
+            if ($request->visible != null) {        
                 $user->visible = $request->visible;
                 $user->save();
+                dd(1);
             }
 
             $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
