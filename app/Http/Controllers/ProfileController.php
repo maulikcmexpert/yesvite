@@ -477,13 +477,13 @@ class ProfileController extends Controller
 
     public function updateProfilePrivacy(Request $request)
     {
-
+        
+        
+                    $user = Auth::guard('web')->user();
+                    dd($user);
         try {
-
-            $user = Auth::guard('web')->user();
             if ($request->visible != null) {
-
-
+                
                 $user->visible = $request->visible;
                 $user->save();
             }

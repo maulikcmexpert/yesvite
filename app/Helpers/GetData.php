@@ -20,6 +20,7 @@ use App\Models\EventDesignCategory;
 use App\Models\EventPostPhotoComment;
 use App\Models\EventPhotoCommentReaction;
 use App\Models\Social_link;
+use App\Models\EventPost;
 use App\Models\UserPrivacyPolicy;
 use Carbon\Carbon;
 use Kreait\Laravel\Firebase\Facades\Firebase;
@@ -53,7 +54,6 @@ function getTotalUnreadMessageCount()
         return 0;
     }
 }
-
 function getUser($id)
 {
     return User::where('id', $id)->first();
@@ -70,7 +70,6 @@ function getEventType()
     //     return  $eventType;
     return  EventType::all();
 }
-
 function getGuestRsvpPendingCount($eventId)
 {
 
@@ -93,7 +92,6 @@ function getGuestRsvpPendingCount($eventId)
     //     $query->where('app_user', '1');
     // })->where(['event_id' => $eventId, 'rsvp_status' => '1'])->count();
 }
-
 function upcomingEventsCount($userId)
 {
     $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
@@ -122,7 +120,6 @@ function upcomingEventsCount($userId)
 
     return count($allEvents);
 }
-
 function pendingRsvpCount($userId)
 {
     $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
@@ -137,7 +134,6 @@ function pendingRsvpCount($userId)
     }
     return compact('total_need_rsvp_event_count', 'PendingRsvpEventId');
 }
-
 function hostingCount($userId)
 {
 
@@ -145,7 +141,6 @@ function hostingCount($userId)
     $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->count();
     return $totalHosting;
 }
-
 function profileHostingCount($userId)
 {
 
@@ -155,14 +150,12 @@ function profileHostingCount($userId)
 }
 function hostingCountCurrentMonth($userId)
 {
-
     $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))
     ->whereYear('start_date', date('Y'))   
     ->whereMonth('start_date', date('m'))
     ->count();
     return $totalHosting;
 }
-
 function invitedToCount($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
@@ -171,7 +164,6 @@ function invitedToCount($userId)
     })->where('user_id', $userId)->count();
     return $totalInvited;
 }
-
 function profileInvitedToCount($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
@@ -179,7 +171,6 @@ function profileInvitedToCount($userId)
     })->where('user_id', $userId)->count();
     return $totalInvited;
 }
-
 function invitedToCountCurrentMonth($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
@@ -200,7 +191,6 @@ function getPhotoParentCommentUserData($parent_comment_id)
 {
     return EventPostPhotoComment::with('user')->where('id', $parent_comment_id)->first();
 }
-
 function getGroupList($id)
 {
     $groupList = Group::withCount('groupMembers')
@@ -250,7 +240,6 @@ function getYesviteContactList($id)
     }
     return  $yesviteUser;
 }
-
 function getYesviteContactListPage($id, $perPage, $page, $search_name)
 {
     $yesviteRegisteredUser = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
@@ -293,7 +282,6 @@ function getYesviteContactListPage($id, $perPage, $page, $search_name)
 
     return  $yesviteUser;
 }
-
 function getEventInvitedUser($event_id, $rsvp_d = null)
 {
 
@@ -308,42 +296,31 @@ function getEventInvitedUser($event_id, $rsvp_d = null)
     // })->
     where('event_id', $event_id)->get();
 }
-
-
 function checkUserGivePoll($user_id, $post_poll_id, $option_id)
 {
     return UserEventPollData::where(['user_id' => $user_id, 'event_post_poll_id' => $post_poll_id, 'event_poll_option_id' => $option_id])->exists();
 }
 function getTotalEventInvitedUser($event_id)
 {
-
     $total =   EventInvitedUser::whereHas('user', function ($query) {
         $query->where('app_user', '1');
     })->where('event_id', $event_id)->count();
     return $total + 1;
 }
-
 function getEventImages($event_id)
 {
-
     return  EventImage::where('event_id', $event_id)->get();
 }
-
 function getPostImages($event_post_id)
 {
     return  EventPostImage::where('event_post_id', $event_post_id)->get();
 }
-
 function getReaction($event_post_id)
 {
-
-
     return  EventPostReaction::with('user')->where('event_post_id', $event_post_id)->get();
 }
-
 function getOnlyReaction($event_post_id)
 {
-
     $onlyReaction =   EventPostReaction::where([
 
         'event_post_id' => $event_post_id
@@ -364,35 +341,26 @@ function getOnlyReaction($event_post_id)
     }
     return $reactionList;
 }
-
-
-
 function getPhotoReaction($event_post_photo_id)
 {
     return  EventPostPhotoReaction::with('user')->where('event_post_photo_id', $event_post_photo_id)->get();
 }
-
 function getPostPhotoComments($event_post_photo_id)
 {
     return  EventPostPhotoComment::with(['user', 'replies' => function ($query) {
         $query->withcount('post_photo_comment_reaction', 'replies')->orderBy('id', 'DESC');
     }])->withcount('post_photo_comment_reaction', 'replies')->where(['event_post_photo_id' => $event_post_photo_id, 'parent_comment_id' => NULl])->get();
 }
-
-
 function getPhotoCommentReaction($event_photo_comment_id)
 {
     return  EventPhotoCommentReaction::where(['event_photo_comment_id' => $event_photo_comment_id])->count();
 }
-
 function getComments($event_post_id)
 {
     return  EventPostComment::with(['user', 'replies' => function ($query) {
         $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
     }])->withcount('post_comment_reaction', 'replies')->where(['event_post_id' => $event_post_id, 'parent_comment_id' => NULl])->orderBy('id', 'DESC')->get();
 }
-
-
 function checkUserIsLike($event_post_comment_id, $user_id)
 {
     $checkUserRection = EventPostCommentReaction::where(['event_post_comment_id' => $event_post_comment_id, 'user_id' => $user_id])->count();
@@ -402,7 +370,6 @@ function checkUserIsLike($event_post_comment_id, $user_id)
         return 0;
     }
 }
-
 function checkUserPhotoIsLike($event_photo_comment_id, $user_id)
 {
     $checkUserRection = EventPhotoCommentReaction::where(['event_photo_comment_id' => $event_photo_comment_id, 'user_id' => $user_id])->count();
@@ -412,19 +379,14 @@ function checkUserPhotoIsLike($event_photo_comment_id, $user_id)
         return 0;
     }
 }
-
 function getOptionTotalVote($event_poll_option_id)
 {
     return UserEventPollData::where('event_poll_option_id', $event_poll_option_id)->count();
 }
-
 function getOptionAllTotalVote($id)
 {
     return UserEventPollData::where('event_post_poll_id', $id)->count();
 }
-
-
-
 function checkUserAttendOrNOt($event_id, $user_id)
 {
     $checkEventOwner = Event::where(['user_id' => $user_id, "id" => $event_id])->exists();
@@ -448,7 +410,6 @@ function checkUserAttendOrNOt($event_id, $user_id)
     }
     return 0;
 }
-
 function getPollData($event_id, $post_id)
 {
 
@@ -480,7 +441,6 @@ function getPollData($event_id, $post_id)
     }
     return $postsPollDetail;
 }
-
 function getInvitedUsers($eventId)
 {
     $eventDetail['invited_guests'] = [];
@@ -522,12 +482,8 @@ function getInvitedUsers($eventId)
     }
     return $eventDetail;
 }
-
 function getDeferentBetweenTime($time1, $time2)
 {
-
-
-
     // Convert time strings to Carbon objects
     $carbonTime1 = Carbon::createFromFormat('h:i A', $time1);
     $carbonTime2 = Carbon::createFromFormat('h:i A', $time2);
@@ -549,8 +505,6 @@ function getDeferentBetweenTime($time1, $time2)
     }
     return $response;
 }
-
-
 function getLeftPollTime($createdDate, $pollDuration)
 {
 
@@ -631,7 +585,6 @@ function getLeftPollTime($createdDate, $pollDuration)
 
 
 }
-
 function getYesviteSelectedUserPage($id, $perPage, $page, $eventId)
 {
     $yesviteEvents = Event::where('id', '=', $eventId)->first();
@@ -667,4 +620,15 @@ function getYesviteSelectedUserPage($id, $perPage, $page, $eventId)
         $yesviteUser[] = $yesviteUserDetail;
     }
     return  $yesviteUser;
+}
+function getProfileCounter(){
+
+    $user  = Auth::guard('web')->user();
+    
+    $totalEvent =  Event::where('user_id', $user->id)->count();
+    $totalEventPhotos =  EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
+    $comments =  EventPostComment::where('user_id', $user->id)->count();
+    $counter=['events'=>$totalEvent,'photos'=>$totalEventPhotos,'comments'=>$comments];
+
+    return $counter;
 }
