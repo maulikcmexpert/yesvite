@@ -340,7 +340,11 @@ $(document).ready(function () {
             },
         });
     });
+
+  
 });
+
+
 
 var profileCroppie = new Croppie(document.getElementById("profileIm"), {
     viewport: { width: 200, height: 200, type: "circle" },
@@ -387,3 +391,19 @@ $("#bg-choose-file").on("change", function () {
     };
     reader.readAsDataURL(this.files[0]);
 });
+var selectedDates = new Set();
+
+$("#birth_date").daterangepicker(
+    {
+        autoUpdateInput: false,
+        locale: {
+            format: "MM/DD/YYYY",
+        },
+        showDropdowns: false,
+        startDate: moment().startOf("month"),
+        endDate: moment().endOf("month"),
+        minDate: moment().add(1, 'days'),  
+        // alwaysShowCalendars: true, // Keep the calendar visible
+        maxSpan: { days: 2 },
+    },
+);
