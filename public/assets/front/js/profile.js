@@ -391,9 +391,19 @@ $("#bg-choose-file").on("change", function () {
     };
     reader.readAsDataURL(this.files[0]);
 });
-$('#birth_date').datepicker({
-    dateFormat: 'MM d, yy', // Format: F j, Y
-    changeMonth: true,
-    changeYear: true,
-    yearRange: "1900:2100"
-});
+var selectedDates = new Set();
+
+$("#birth_date").daterangepicker(
+    {
+        autoUpdateInput: false,
+        locale: {
+            format: "MM/DD/YYYY",
+        },
+        showDropdowns: false,
+        startDate: moment().startOf("month"),
+        endDate: moment().endOf("month"),
+        minDate: moment().add(1, 'days'),  
+        // alwaysShowCalendars: true, // Keep the calendar visible
+        maxSpan: { days: 2 },
+    },
+);
