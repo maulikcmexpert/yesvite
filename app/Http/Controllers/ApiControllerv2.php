@@ -13069,8 +13069,8 @@ class ApiControllerv2 extends Controller
                         $coin_transaction->user_id = $user_id;
                         $coin_transaction->status = '0';
                         $coin_transaction->type = 'credit';
-                        $coin_transaction->coins = env('DEFAULT_COIN');
-                        $coin_transaction->current_balance = env('DEFAULT_COIN');
+                        $coin_transaction->coins = $input['coins'];
+                        $coin_transaction->current_balance = $total_coin;
                         $coin_transaction->description = 'In App Purchase';
                         $coin_transaction->endDate = Carbon::now()->addYears(5)->toDateString();
                         $coin_transaction->save();
