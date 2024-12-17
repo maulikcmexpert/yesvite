@@ -342,24 +342,20 @@ $(document).ready(function () {
     });
 
     let birthDate = $('#birth_date').val();
-
-    if (birthDate) {
-        let date = new Date(birthDate);
-        let formattedDate = formatDate(date); // Format the date
-        $('#formatted_birth_date').val(formattedDate); // Set formatted date
-    }
-
-    // Function to format the date as "F j, Y" (e.g., January 1, 2024)
-    function formatDate(date) {
-        let options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
-    }
-
-    // Update formatted date when the date input changes
-    $('#birth_date').on('change', function () {
-        let newDate = new Date($(this).val());
-        let formattedDate = formatDate(newDate);
-        $('#formatted_birth_date').val(formattedDate);
+    $('#birth_date').daterangepicker({
+        singleDatePicker: true,
+        autoUpdateInput: false,  
+        //   showDropdowns: true,
+        minYear: 1901,
+        maxDate: adjustedStartTime, 
+        minDate: moment().add(0, 'days'), 
+        locale: {
+            format: 'MM-DD-YYYY'  // Set the desired format
+        },
+        maxYear: parseInt(moment().format('YYYY'),10)
+        }, function(start, end, label) {
+        //   var years = moment().diff(start, 'years');
+        //   alert("You are " + years + " years old!");
     });
 });
 
