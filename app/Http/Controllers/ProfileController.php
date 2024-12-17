@@ -477,19 +477,13 @@ class ProfileController extends Controller
 
     public function updateProfilePrivacy(Request $request)
     {
-
+        $user = Auth::guard('web')->user();
         try {
-
-            $user = Auth::guard('web')->user();
-            if ($request->visible != null) {
-
-
+            if ($request->visible != null) {        
                 $user->visible = $request->visible;
                 $user->save();
             }
-
             $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
-
             if ($checkProfilePrivacy == 0) {
                 foreach ($request->profile_privacy as $key => $value) {
                     $setPrivacyData = new UserProfilePrivacy();
@@ -526,7 +520,6 @@ class ProfileController extends Controller
 
             ]);
         } catch (Exception  $e) {
-
             return response()->json([
                 'status' => 0,
                 'message' => "something went wrong",
