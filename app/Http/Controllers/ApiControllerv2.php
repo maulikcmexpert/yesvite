@@ -13067,6 +13067,7 @@ class ApiControllerv2 extends Controller
 
                         $coin_transaction = new Coin_transactions();
                         $coin_transaction->user_id = $user_id;
+                        $coin_transaction->user_subscription_id = $new_subscription->id;
                         $coin_transaction->status = '0';
                         $coin_transaction->type = 'credit';
                         $coin_transaction->coins = $input['coins'];
