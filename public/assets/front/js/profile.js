@@ -392,14 +392,8 @@ $("#bg-choose-file").on("change", function () {
     reader.readAsDataURL(this.files[0]);
 });
 $('#birth_date').datepicker({
-    dateFormat: 'MM d, yy', // Format: F j, Y (e.g., January 1, 2024)
-    changeMonth: true,     // Allows changing months
-    changeYear: true,      // Allows changing years
-    yearRange: "1900:2100" // Set a range of years
-});
-
-// Open datepicker when the input field is clicked
-$(document).on('click','#birth_date', function () {
-    alert();
-    $(this).datepicker('show');
+    dateFormat: 'MM d, yy', // Format: F j, Y
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "1900:2100"
 });
