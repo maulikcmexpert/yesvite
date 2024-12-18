@@ -13160,7 +13160,7 @@ class ApiControllerv2 extends Controller
         $userSubscription = User::where('id', $this->user->id)->first();
 
         if ($userSubscription != null) {
-            $lastRecharge = Coin_transactions::where(['user_id' => $this->user->id,'type' => 'credit'])->first();
+            $lastRecharge = Coin_transactions::where(['user_id' => $this->user->id,'type' => 'credit'])->orderBy('id','DESC')->first();
             $last_recharge = 0;
             if($lastRecharge){
                 $last_recharge = $lastRecharge->coins;
