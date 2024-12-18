@@ -14004,9 +14004,16 @@ class ApiControllerv2 extends Controller
     }
 
     public function coin_transactions(Request $request){
+        $input = $request->getContent();
+
+        $input = json_decode($input, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+        
         try {
             $page = isset($input['page']) ? $input['page'] : "1";
-
+            
             $pages = ($page != "") ? $page : "1";
             $search = "";
             if (isset($input['search'])) {
