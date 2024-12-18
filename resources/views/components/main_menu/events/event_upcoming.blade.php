@@ -54,7 +54,7 @@
                         <a href="" class="home-upcoming-events-card-left-profile">
                             <div class="home-upcoming-events-card-left-profile-img">
                                 @if($upcomingEvent['host_profile'] != "")
-                                    <img src="{{$upcomingEvent['host_profile']}}" class="lazy" alt="">
+                                    <img src="{{$upcomingEvent['host_profile']}}" loading="lazy" alt="">
                                 @else
                                 @php 
                                     $name = $upcomingEvent['host_name'];
@@ -167,7 +167,7 @@
                         </div>
                     </div>
                     <a href="" class="home-upcoming-events-card-right">
-                        <img src="{{$upcomingEvent['event_images']}}" class="lazy" alt="">
+                        <img src="{{$upcomingEvent['event_images']}}" loading="lazy" alt="">
                     </a>
                 </div>
                 <h6 class="all-events-date-show">{{$upcomingEvent['event_date_only']}}</h6>
