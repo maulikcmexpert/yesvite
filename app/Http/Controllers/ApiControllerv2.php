@@ -14013,13 +14013,15 @@ class ApiControllerv2 extends Controller
                 $search = $input['search'];
             }
 
-            $groupCount = Coin_transactions::where('user_id', $this->user->id)
+            $groupCount = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
+                ->orderBy('id','DESC')
                 ->count();
             $total_page = ceil($groupCount / 10);
 
 
 
             $groupList = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
+                ->orderBy('id','DESC')
                 ->paginate(10, ['*'], 'page', $pages);
             // dd($groupList);
 
