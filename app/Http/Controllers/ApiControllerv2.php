@@ -14004,22 +14004,31 @@ class ApiControllerv2 extends Controller
     }
 
     public function coin_transactions(Request $request){
+        $input = $request->getContent();
+
+        $input = json_decode($input, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+        
         try {
             $page = isset($input['page']) ? $input['page'] : "1";
-
+            
             $pages = ($page != "") ? $page : "1";
             $search = "";
             if (isset($input['search'])) {
                 $search = $input['search'];
             }
 
-            $groupCount = Coin_transactions::where('user_id', $this->user->id)
+            $groupCount = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
+                ->orderBy('id','DESC')
                 ->count();
             $total_page = ceil($groupCount / 10);
 
 
 
             $groupList = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
+                ->orderBy('id','DESC')
                 ->paginate(10, ['*'], 'page', $pages);
             // dd($groupList);
 
@@ -14031,8 +14040,8 @@ class ApiControllerv2 extends Controller
                 $group['current_balance'] = $value->current_balance;
                 $group['description'] = $value->description;
                 $group['event_name'] = (isset($value->event->name) && $value->event->name != '')?$value->event->name:'';
-                $group['date'] = $value->created_at;
-                $group['time'] = $value->created_at;
+                $group['date'] = Carbon::parse($value->created_at)->format('M d, Y');
+                $group['time'] = Carbon::parse($value->created_at)->format('g:i A');
                 $groupListArr[] = $group;
             }
             return response()->json(['status' => 1, 'message' => 'Coin Transactions', 'total_page' => $total_page, 'data' => $groupListArr]);
