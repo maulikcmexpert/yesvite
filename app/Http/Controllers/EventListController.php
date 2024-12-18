@@ -69,6 +69,20 @@ class EventListController extends Controller
                     $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
                 })
                ->where('user_id', $user->id)->count();
+               $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+
+               $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
+               $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
+                   $query->where('app_user', '1');
+               })
+               ->whereHas('event', function ($query) {
+                   $query->whereNull('deleted_at'); // Filter events where deleted is null
+               })->where('user_id', $user->id)->get()->pluck('event_id');
+               // dd($total_past_event->toSql());
+
+               $total_past_event = Event::where('end_date', '<', date('Y-m-d'))->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
+               $allPastEventC = $usercreatedAllPastEventCount->union($total_past_event)->orderByDesc('id')->get();
+               $totalPastEventCount = count($allPastEventC);
                 if (count($allEvent) != 0) {
 
                     foreach ($allEvent as $value) {
