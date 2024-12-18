@@ -54,16 +54,27 @@ class EventDraftController extends Controller
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
                     $eventDetail['saved_date'] = $formattedDate;
                     $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
+                    $eventDetail['event_plan_name'] = $value->subscription_plan_name;
+
                     $draftEventArray[] = $eventDetail;
                 }
                 $eventDraftdata= $draftEventArray;
             } else {
-                $eventDraftdata= "";
+                $eventDraftdata= [];
             }
-            return compact(
-                    'eventDraftdata',
-                    'profileData', 
-                );
+            // return compact(
+            //         'eventDraftdata',
+            //         'profileData', 
+            //     );
+
+            $title = 'Drafts';
+            $js = ['event'];
+            $page = 'front.event_drafts';
+            return view('layout', compact(
+                'title',
+                'page','js',
+                            'profileData','eventDraftdata'
+            )); 
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception  $e) {
