@@ -5754,7 +5754,7 @@ class ApiControllerv2 extends Controller
             //         }
             //     }
             // } else {
-                if (isset($request->is_draft) && $request->is_draft == '1') {
+                // if (isset($request->is_draft) && $request->is_draft == '1') {
 
                     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
                     if ($request->is_update_event == '0') {
@@ -5782,7 +5782,7 @@ class ApiControllerv2 extends Controller
                             sendNotification('owner_notify', $notificationParam);
                         }
                     }
-                }
+                // }
             // }
             DB::commit();
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
