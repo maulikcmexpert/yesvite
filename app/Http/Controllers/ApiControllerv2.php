@@ -5257,6 +5257,8 @@ class ApiControllerv2 extends Controller
                         ];
                         sendNotificationGuest('invite', $notificationParam);
                     }
+
+                    debit_coins($user->id,$eventData['event_id'],count($eventData['invited_new_guest']));
                 }
 
                 DB::commit();
@@ -5768,8 +5770,8 @@ class ApiControllerv2 extends Controller
                             // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             sendNotification('invite', $notificationParam);
                             sendNotificationGuest('invite', $notificationParam);
-
-                            debit_coins($user->id,$input['event_id']);
+                            $get_count_invited_user = EventInvitedUser::where(['event_id' => $input['event_id'],'is_co_host'=>'0'])->count();
+                            debit_coins($user->id,$input['event_id'],$get_count_invited_user);
                             
                         }
                         if ($checkUserInvited->is_draft_save == '0') {
@@ -11032,6 +11034,8 @@ class ApiControllerv2 extends Controller
                 ];
                 sendNotificationGuest('invite', $notificationParam);
             }
+
+            debit_coins($user->id,$input['event_id'],count($ids));
         }
 
 

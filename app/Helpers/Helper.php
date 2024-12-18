@@ -2036,9 +2036,9 @@ function delete_event_post_images($post_id)
     }
 }
 
-function debit_coins($user_id,$event_id){
+function debit_coins($user_id,$event_id,$get_count_invited_user){
 
-    $get_count_invited_user = EventInvitedUser::where(['event_id' => $event_id,'is_co_host'=>'0'])->count();
+    
     $user_data = User::where('id',$user_id)->first();    
     if($get_count_invited_user > 0){
         $current_balance = $user_data->coins - $get_count_invited_user;
