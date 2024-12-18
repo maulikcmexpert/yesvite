@@ -1,0 +1,20 @@
+:root{
+
+    /* ---fonts--- */
+    --SFProDisplay-HeavyItalic: 'SFProDisplay-HeavyItalic';
+    --SFProDisplay-Bold: 'SFProDisplay-Bold';
+    --SFProDisplay-Semibold: 'SFProDisplay-Semibold';
+    --SFProDisplay-Medium: 'SFProDisplay-Medium';
+    --SFProDisplay-Regular: 'SFProDisplay-Regular';
+
+    /* ---colors--- */
+    --pink:#F73C71;
+    --primary-black: #000000;
+    --secondary-black: #0F172A;
+    --lightgreay:#64748B;
+    --light-color: #94A3B8;
+    --border:#E2E8F0;
+    --white: #fff;
+    --green: #23AA26;
+
+}

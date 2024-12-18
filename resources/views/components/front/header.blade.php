@@ -5,6 +5,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.png')}}">
 <!-- custom-style -->
+<link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
 <link href="{{asset('assets/front/css/style.css')}}" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" integrity="sha512-2eMmukTZtvwlfQoG8ztapwAH5fXaQBzaMqdljLopRSA0i6YKM8kBAOrSSykxu9NN9HrtD45lIqfONLII2AFL/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -45,7 +46,6 @@ if(isset($page) && $page=="front.profile"){
 @php
 }
 @endphp
-<link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
 
 <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 
