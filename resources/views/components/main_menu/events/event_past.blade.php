@@ -52,7 +52,7 @@
                         <div class="home-upcoming-events-card-left-profile-img">
                             {{-- <img src="{{$pastEvent['host_profile']}}" class="lazy" alt=""> --}}
                         @if($pastEvent['host_profile'] != "")
-                            <img src="{{$pastEvent['host_profile']}}" class="lazy" alt="">
+                            <img src="{{$pastEvent['host_profile']}}" loading="lazy" alt="">
                         @else
                         @php 
                             $name = $pastEvent['host_name'];
@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <a href="" class="home-upcoming-events-card-right">
-                  <img src="{{$pastEvent['event_images']}}" class="lazy" alt="">
+                  <img src="{{$pastEvent['event_images']}}" loading="lazy" alt="">
               </a>
             </div>
             <h6 class="all-events-date-show">{{$pastEvent['event_date_only']}}</h6>
