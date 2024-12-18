@@ -180,6 +180,7 @@
                           <img
                             src="{{$value[0]['event_image']}}"
                             alt=""
+                            loading="lazy"
                           />
                         </div>
                         <div class="accordion-button-content-wrp">
@@ -203,6 +204,7 @@
                                       <img
                                         src="{{$inner_data['profile']}}"
                                         alt=""
+                                        loading="lazy"
                                       />
                                       <span class="active-dot"></span>
                                     </div>
@@ -238,6 +240,8 @@
                                       <img
                                         src="{{$inner_data['profile']}}"
                                         alt=""
+                                        loading="lazy"
+
                                       />
                                       <span class="active-dot"></span>
                                     </div>
@@ -272,6 +276,8 @@
                                       <img
                                         src="{{$inner_data['profile']}}"
                                         alt=""
+                                        loading="lazy"
+
                                       />
                                       <span class="active-dot"></span>
                                     </div>
@@ -306,6 +312,8 @@
                                       <img
                                         src="./assets/img/header-profile-img.png"
                                         alt=""
+                                        loading="lazy"
+
                                       />
                                       <span class="active-dot"></span>
                                     </div>
@@ -337,6 +345,8 @@
                                               ><img
                                                 src="./assets/img/notification-video_play-icon.png"
                                                 alt=""
+                                                loading="lazy"
+
                                             /></span>
                                           </a>
                                           <div class="notification-video-content">
@@ -356,6 +366,8 @@
                                       <img
                                         src="./assets/img/header-profile-img.png"
                                         alt=""
+                                        loading="lazy"
+
                                       />
                                       <span class="active-dot"></span>
                                     </div>
