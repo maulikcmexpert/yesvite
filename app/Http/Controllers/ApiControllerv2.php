@@ -4764,6 +4764,23 @@ class ApiControllerv2 extends Controller
 
                 // $rsvpEndTime = "";
                 if($updateEvent->is_draft_save == '1' && $eventData['is_draft_save'] == '0'){
+                    $invitation_count = 0;
+                    if (!empty($eventData['invited_user_id'])) {
+                        $invitation_count = count($eventData['invited_user_id']);
+                    }
+            
+                    if (!empty($eventData['invited_guests'])) {
+                        $invitation_count = $invitation_count + count($eventData['invited_guests']);
+                    }
+            
+                    if($invitation_count > 0){
+                        $user_detail = User::where('id',$user->id)->first();
+                        if($user_detail){
+                            if($user_detail->coins < $invitation_count){
+                                return response()->json(['status' => 0, 'message' => "Insufficient coins."]);
+                            }
+                        }
+                    }
                     EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
                 }
                 $greeting_card_id = "";
