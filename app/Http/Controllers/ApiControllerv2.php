@@ -13011,7 +13011,7 @@ class ApiControllerv2 extends Controller
             // 'subscription_invite_count' => 'required',
             'packageName' => 'required',
             'purchaseToken' => 'required|string',
-            'event_id' => 'required',
+            // 'event_id' => 'required',
             'coins' => 'required',
         ]);
 
