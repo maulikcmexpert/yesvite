@@ -31,7 +31,7 @@ class EventListController extends Controller
     public function index()
     {
                 $user  = Auth::guard('web')->user();
-                
+                $eventList = [];
                 // $pages = ($page != "") ? $page : 1;
 
                 //upcoming_event
