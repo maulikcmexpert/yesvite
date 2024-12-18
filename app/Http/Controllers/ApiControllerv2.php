@@ -14019,15 +14019,20 @@ class ApiControllerv2 extends Controller
 
 
 
-            $groupList = Coin_transactions::with(['users','event'])->where('user_id', $this->user->id)
-                ->paginate(2, ['*'], 'page', $pages);
-            dd($groupList);
+            $groupList = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
+                ->paginate(10, ['*'], 'page', $pages);
+            // dd($groupList);
 
             $groupListArr = [];
             foreach ($groupList as $value) {
                 $group['id'] = $value->id;
-                $group['name'] = $value->name;
-                $group['member_count'] = $value->members_count;
+                $group['type'] = $value->type;
+                $group['coins'] = $value->coins;
+                $group['current_balance'] = $value->current_balance;
+                $group['description'] = $value->description;
+                $group['event_name'] = (isset($value->event->name) && $value->event->name != '')?$value->event->name:'';
+                $group['date'] = $value->created_at;
+                $group['time'] = $value->created_at;
                 $groupListArr[] = $group;
             }
             return response()->json(['status' => 1, 'message' => 'Coin Transactions', 'total_page' => $total_page, 'data' => $groupListArr]);
