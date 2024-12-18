@@ -175,7 +175,7 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         App\Providers\FirebaseServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+        // ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
     ])->toArray(),
 
@@ -196,8 +196,8 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Flasher' => Flasher\Laravel\Facade\Flasher::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
-        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
-        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
+        // 'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        // 'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
 
     ])->toArray(),
 
