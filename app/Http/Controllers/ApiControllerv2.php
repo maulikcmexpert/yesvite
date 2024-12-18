@@ -14002,4 +14002,37 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function coin_transactions(Request $request){
+        try {
+            $page = isset($input['page']) ? $input['page'] : "1";
+
+            $pages = ($page != "") ? $page : "1";
+            $search = "";
+            if (isset($input['search'])) {
+                $search = $input['search'];
+            }
+
+            $groupCount = Coin_transactions::where('user_id', $this->user->id)
+                ->count();
+            $total_page = ceil($groupCount / 10);
+
+
+
+            $groupList = Coin_transactions::where('user_id', $this->user->id)
+                ->paginate(10, ['*'], 'page', $pages);
+
+
+            $groupListArr = [];
+            foreach ($groupList as $value) {
+                $group['id'] = $value->id;
+                $group['name'] = $value->name;
+                $group['member_count'] = $value->members_count;
+                $groupListArr[] = $group;
+            }
+            return response()->json(['status' => 1, 'message' => 'Coin Transactions', 'total_page' => $total_page, 'data' => $groupListArr]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
 }
