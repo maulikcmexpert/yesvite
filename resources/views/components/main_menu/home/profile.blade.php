@@ -1,4 +1,3 @@
-{{dd($profileData)}}
 
 <div class="home-center-content-head">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
