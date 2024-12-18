@@ -195,8 +195,27 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/shape_image', [ControllersEventController::class, 'shape_image']);
     Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
 
+   
     Route::get('event_drafts',  [EventDraftController::class, 'index'])->name('event.event_drafts');
     Route::get('event_lists',  [EventListController::class, 'index'])->name('event.event_lists');
+    Route::get('fetch_past_event',  [EventListController::class, 'fetchPastEvents'])->name('fetch_past_event');
+    Route::get('fetch_draft_event',  [EventListController::class, 'fetchDraftEvents'])->name('fetch_draft_event');
+    Route::get('fetch_upcoming_event',  [EventListController::class, 'fetchUpcomingEvents'])->name('fetch_upcoming_event');
+    Route::get('search_upcoming_event',  [EventListController::class, 'SearchUpcomingEvent'])->name('search_upcoming_event');
+    Route::get('search_draft_event',  [EventListController::class, 'SearchDraftEvent'])->name('search_draft_event');
+    Route::get('search_past_event',  [EventListController::class, 'SearchPastEvent'])->name('search_past_event');
+    Route::get('event_filter',  [EventListController::class, 'EventFilter'])->name('event_filter');
+    Route::get('get_total_month_data',  [EventListController::class, 'TotalMonthData'])->name('get_total_month_data');
+
+    Route::get('event_filter_data',  [EventListController::class, 'EventFilterData'])->name('event_filter_data');
+    Route::get('get_event_list_data',  [EventListController::class, 'getEventDateList'])->name('get_event_list_data');
+    Route::get('update_notification_read',  [EventListController::class, 'UpdateNotificationRead'])->name('update_notification_read');
+    Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
+
+
+
+
+
     Route::get('event_about/{id}',  [EventAboutController::class, 'index'])->name('event.event_about');
     Route::get('event_potluck/{id}',  [EventPotluckController::class, 'index'])->name('event.event_potluck');
     Route::get('event_photo/{id}',  [EventPhotoController::class, 'index'])->name('event.event_photo');
