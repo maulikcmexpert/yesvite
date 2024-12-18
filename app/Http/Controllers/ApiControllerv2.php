@@ -3711,16 +3711,16 @@ class ApiControllerv2 extends Controller
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
                 // 'event_type_id' => ['required'],
-                'event_name' => ['required'],
-                'start_date' => ['required'],
-                'end_date' => ['required'],
-                'rsvp_by_date_set' => ['required', 'in:0,1'],
-                'rsvp_by_date' => ['present'],
-                'rsvp_start_time' => ['required'],
-                'rsvp_start_timezone' => ['required'],
-                'rsvp_end_time_set' => ['required', 'in:0,1'],
-                'rsvp_end_time' => ['present'],
-                'rsvp_end_timezone' => ['present'],
+                // 'event_name' => ['required'],
+                // 'start_date' => ['required'],
+                // 'end_date' => ['required'],
+                // 'rsvp_by_date_set' => ['required', 'in:0,1'],
+                // 'rsvp_by_date' => ['present'],
+                // 'rsvp_start_time' => ['required'],
+                // 'rsvp_start_timezone' => ['required'],
+                // 'rsvp_end_time_set' => ['required', 'in:0,1'],
+                // 'rsvp_end_time' => ['present'],
+                // 'rsvp_end_timezone' => ['present'],
                 // 'event_location_name' => ['required'],
                 // 'address_1' => ['required'],
                 // 'address_2' => ['required'],
@@ -3729,16 +3729,16 @@ class ApiControllerv2 extends Controller
                 // 'city' => ['required'],
                 // 'latitude' => ['required'],
                 // 'longitude' => ['required'],
-                'message_to_guests' => ['present'],
-                'invited_user_id' => ['array'],
-                'invited_guests' => ['present', 'array'],
-                'event_setting' => ['required'],
-                'greeting_card_list' => ['array'],
-                'co_host_list' => ['array'],
-                'guest_co_host_list' => ['array'],
-                'gift_registry_list' => ['array'],
-                'podluck_category_list' => ['array'],
-                'events_schedule_list' => ['array'],
+                // 'message_to_guests' => ['present'],
+                // 'invited_user_id' => ['array'],
+                // 'invited_guests' => ['present', 'array'],
+                // 'event_setting' => ['required'],
+                // 'greeting_card_list' => ['array'],
+                // 'co_host_list' => ['array'],
+                // 'guest_co_host_list' => ['array'],
+                // 'gift_registry_list' => ['array'],
+                // 'podluck_category_list' => ['array'],
+                // 'events_schedule_list' => ['array'],
                 'is_draft_save' => ['required', 'in:0,1']
             ]);
         } else {
@@ -3746,9 +3746,9 @@ class ApiControllerv2 extends Controller
             $validator = Validator::make($eventData, [
 
                 // 'event_type_id' => ['required'],
-                'event_name' => ['required'],
-                'start_date' => ['required'],
-                'end_date' => ['required'],
+                // 'event_name' => ['required'],
+                // 'start_date' => ['required'],
+                // 'end_date' => ['required'],
                 'is_draft_save' => ['required', 'in:0,1']
             ]);
         }
