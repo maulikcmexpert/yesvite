@@ -14026,8 +14026,11 @@ class ApiControllerv2 extends Controller
             $groupListArr = [];
             foreach ($groupList as $value) {
                 $group['id'] = $value->id;
-                $group['name'] = $value->name;
-                $group['member_count'] = $value->members_count;
+                $group['type'] = $value->type;
+                $group['coins'] = $value->coins;
+                $group['current_balance'] = $value->current_balance;
+                $group['description'] = $value->description;
+                $group['event_name'] = (isset($value->event->name) && $value->event->name != '')?$value->event->name:'';
                 $groupListArr[] = $group;
             }
             return response()->json(['status' => 1, 'message' => 'Coin Transactions', 'total_page' => $total_page, 'data' => $groupListArr]);
