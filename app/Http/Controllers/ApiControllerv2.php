@@ -14021,7 +14021,7 @@ class ApiControllerv2 extends Controller
 
             $groupList = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
                 ->paginate(2, ['*'], 'page', $pages);
-            dd($groupList);
+            // dd($groupList);
 
             $groupListArr = [];
             foreach ($groupList as $value) {
