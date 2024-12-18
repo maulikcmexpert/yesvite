@@ -1,5 +1,5 @@
 
-{{-- {{dd(Session::get('draft_count'))}} --}}
+{{dd(Session::get($profileData))}}
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
