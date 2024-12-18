@@ -845,3 +845,8 @@ function getProfileCounter(){
 
     return $counter;
 }
+
+function getTotalUnreadNotification($user_id){
+    $total=Notification::where(['user_id' => $user_id, 'read' => '0'])->count();
+    return $total;
+}
