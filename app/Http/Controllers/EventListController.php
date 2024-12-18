@@ -31,7 +31,7 @@ class EventListController extends Controller
     public function index()
     {
                 $user  = Auth::guard('web')->user();
-                
+                $eventList = [];
                 // $pages = ($page != "") ? $page : 1;
 
                 //upcoming_event
@@ -64,6 +64,34 @@ class EventListController extends Controller
 
                 // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
                 // $paginatedEvents =  collect($allEvent)->sortBy('start_date');
+                $totalEvent =  Event::where('user_id', $user->id)->count();
+                $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+                    $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                })
+               ->where('user_id', $user->id)->count();
+               $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+
+               $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
+               $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
+                   $query->where('app_user', '1');
+               })
+               ->whereHas('event', function ($query) {
+                   $query->whereNull('deleted_at'); // Filter events where deleted is null
+               })->where('user_id', $user->id)->get()->pluck('event_id');
+               // dd($total_past_event->toSql());
+
+               $total_past_event = Event::where('end_date', '<', date('Y-m-d'))->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
+               $allPastEventC = $usercreatedAllPastEventCount->union($total_past_event)->orderByDesc('id')->get();
+               $totalPastEventCount = count($allPastEventC);
+
+
+               $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
+                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
+
+
+            $totalDraftEvent =  Event::where(column: ['user_id' => $user->id, 'is_draft_save' => '1'])->count();
+
                 if (count($allEvent) != 0) {
 
                     foreach ($allEvent as $value) {
@@ -178,7 +206,8 @@ class EventListController extends Controller
                             }
                             $eventDetail['event_detail'] = $eventData;
                         }
-                        $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                        
+
                         $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                         $comments =  EventPostComment::where('user_id', $value->user->id)->count();
 
