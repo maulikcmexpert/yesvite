@@ -14020,8 +14020,8 @@ class ApiControllerv2 extends Controller
 
 
             $groupList = Coin_transactions::where('user_id', $this->user->id)
-                ->paginate(10, ['*'], 'page', $pages);
-
+                ->paginate(2, ['*'], 'page', $pages);
+            dd($groupList);
 
             $groupListArr = [];
             foreach ($groupList as $value) {
