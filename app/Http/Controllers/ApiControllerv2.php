@@ -3762,6 +3762,24 @@ class ApiControllerv2 extends Controller
         }
 
         DB::beginTransaction();
+        $invitation_count = 0;
+        if (!empty($eventData['invited_user_id'])) {
+            $invitation_count = count($eventData['invited_user_id']);
+        }
+
+        if (!empty($eventData['invited_guests'])) {
+            $invitation_count = $invitation_count + count($eventData['invited_guests']);
+        }
+
+        if($invitation_count > 0){
+            $user_detail = User::where('id',$user->id)->first();
+            if($user_detail){
+                if($user_detail->coins < $invitation_count){
+                    return response()->json(['status' => 0, 'message' => "Insufficient coins."]);
+                }
+            }
+        }
+
         $rsvp_by_date = date('Y-m-d');
         $rsvp_by_date_set = '0';
         $rsvpEndTime = "";
