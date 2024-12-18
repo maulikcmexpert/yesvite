@@ -176,4 +176,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSubscription::class, 'user_id', 'id');
     }
+    
+    public function coin_transactions()
+    {
+        return $this->hasMany(Coin_transactions::class, 'user_id', 'id');
+    }
+
+
 }

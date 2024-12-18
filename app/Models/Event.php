@@ -146,4 +146,8 @@ class Event extends Model
 
         return $this->hasMany(UserPotluckItem::class, 'event_id', 'id');
     }
+    public function coin_transactions()
+    {
+        return $this->hasMany(Coin_transactions::class, 'event_id', 'id');
+    }
 }

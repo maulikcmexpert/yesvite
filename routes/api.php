@@ -214,6 +214,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
 
     Route::get('logout', [ApiControllerv2::class, 'logout']);
     Route::post('sync_contact', [ApiContactController::class, 'sync_contact']);
+    Route::post('coin_transactions', [ApiControllerv2::class, 'coin_transactions']);
 });
 
 
