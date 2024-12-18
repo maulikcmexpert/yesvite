@@ -333,6 +333,11 @@ function upcomingEventsCount($userId)
 
     return count($allEvents);
 }
+function draftEventsCount(){
+    $user = Auth::guard('web')->user();
+    $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
+    return $draftEvents;
+}
 function pendingRsvpCount($userId)
 {
     $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
