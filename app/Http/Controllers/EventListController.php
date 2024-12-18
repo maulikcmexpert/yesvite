@@ -64,6 +64,11 @@ class EventListController extends Controller
 
                 // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
                 // $paginatedEvents =  collect($allEvent)->sortBy('start_date');
+                $totalEvent =  Event::where('user_id', $user->id)->count();
+                $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+                    $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                })
+               ->where('user_id', $user->id)->count();
                 if (count($allEvent) != 0) {
 
                     foreach ($allEvent as $value) {
@@ -178,7 +183,8 @@ class EventListController extends Controller
                             }
                             $eventDetail['event_detail'] = $eventData;
                         }
-                        $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                        
+
                         $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                         $comments =  EventPostComment::where('user_id', $value->user->id)->count();
 
