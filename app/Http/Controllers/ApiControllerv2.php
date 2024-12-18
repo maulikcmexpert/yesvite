@@ -4763,6 +4763,9 @@ class ApiControllerv2 extends Controller
                 // $rsvp_by_date_set = '0';
 
                 // $rsvpEndTime = "";
+                if($updateEvent->is_draft_save == '1' && $eventData['is_draft_save'] == '0'){
+                    EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
+                }
                 $greeting_card_id = "";
                 if ($eventData['event_setting']['thank_you_cards'] == '1') {
                     if (!empty($eventData['greeting_card_list']) && is_int($eventData['greeting_card_list'][0])) {
