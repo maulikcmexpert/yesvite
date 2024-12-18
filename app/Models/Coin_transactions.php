@@ -17,6 +17,10 @@ class Coin_transactions extends Model
     {
         return $this->belongsTo(Event::class, 'event_id');
     }
+    public function user_subscriptions()
+    {
+        return $this->belongsTo(UserSubscription::class, 'user_subscription_id');
+    }
 
-    
+
 }
