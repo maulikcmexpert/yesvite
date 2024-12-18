@@ -37,6 +37,7 @@ use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use App\Mail\BulkEmail;
+use App\Models\Coin_transactions;
 
 function getVideoDuration($filePath)
 {
@@ -2032,5 +2033,28 @@ function delete_event_post_images($post_id)
             }
             EventPostImage::where('id', $value->id)->delete();
         }
+    }
+}
+
+function debit_coins($user_id,$event_id){
+
+    $get_count_invited_user = EventInvitedUser::where(['event_id' => $event_id,'is_co_host'=>'0'])->count();
+    $user_data = User::where('id',$user_id)->first();    
+    if($get_count_invited_user > 0){
+        $current_balance = $user_data->coins - $get_count_invited_user;
+
+        $coin_transaction = new Coin_transactions();
+        $coin_transaction->user_id = $user_id;
+        $coin_transaction->event_id = $event_id;
+        $coin_transaction->type = 'debit';
+        $coin_transaction->coins = $get_count_invited_user;
+        $coin_transaction->description = 'Event Invite Users';
+        $coin_transaction->current_balance = $current_balance;
+        
+        $user_data->coins = $current_balance;
+        $user_data->save();
+        
+        // $getUnusedCoin = Coin_transactions::where(['user_id'=>$user_id,'type'=>'credit','status' => '0'])->orderBy('id','DESC')->get();
+        // $getdebitCoin = Coin_transactions::where(['user_id'=>$user_id,'type'=>'debit','status' => '0'])->orderBy('id','DESC')->sum('coins');
     }
 }
