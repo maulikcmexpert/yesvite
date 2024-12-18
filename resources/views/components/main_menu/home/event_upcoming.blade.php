@@ -19,7 +19,7 @@
                 <div class="home-upcoming-events-card-left-profile-img">
                     {{-- <img src="{{$events['host_profile']}}" class="lazy" alt=""> --}}
                     @if($events['host_profile'] != "")
-                    <img src="{{$events['host_profile']}}" class="lazy" alt="">
+                    <img src="{{$events['host_profile']}}" loading="lazy" alt="">
                 @else
                 @php 
                     $name = $events['host_name'];
@@ -123,7 +123,7 @@
             </div>
         </div>
         <a href="" class="home-upcoming-events-card-right">
-            <img src="{{$events['event_images']}}" class="lazy" alt="">
+            <img src="{{$events['event_images']}}" loading="lazy" alt="">
         </a>
     </div>
     @endforeach
