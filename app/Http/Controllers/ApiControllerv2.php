@@ -5257,8 +5257,8 @@ class ApiControllerv2 extends Controller
                         ];
                         sendNotificationGuest('invite', $notificationParam);
                     }
-
-                    debit_coins($user->id,$eventData['event_id'],count($eventData['invited_new_guest']));
+                    $total_count = count($filteredIds) + count($newInviteGuest);
+                    debit_coins($user->id,$eventData['event_id'],$total_count);
                 }
 
                 DB::commit();

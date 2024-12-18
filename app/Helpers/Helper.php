@@ -2050,7 +2050,7 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
         $coin_transaction->coins = $get_count_invited_user;
         $coin_transaction->description = 'Event Invite Users';
         $coin_transaction->current_balance = $current_balance;
-        
+        $coin_transaction->save();
         $user_data->coins = $current_balance;
         $user_data->save();
         
