@@ -1,5 +1,5 @@
 
-{{dd(Session::get($profileData))}}
+{{dd($profileData)}}
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
