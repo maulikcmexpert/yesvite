@@ -45,6 +45,7 @@ if(isset($page) && $page=="front.profile"){
 @php
 }
 @endphp
+<link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
 
 <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 
