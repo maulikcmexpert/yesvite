@@ -82,7 +82,9 @@ defer
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
-
+<script src="{{ asset('assets/front/newjs/slider.js') }}"></script>
+<script src="{{ asset('assets/front/newjs/scritp.js')}}"></script>
+<script src="{{ asset('assets/front/newjs/calender.js')}}"></script>
 <script>
     new WOW().init()
 </script>
