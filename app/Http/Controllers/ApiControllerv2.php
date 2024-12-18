@@ -3771,7 +3771,7 @@ class ApiControllerv2 extends Controller
             $invitation_count = $invitation_count + count($eventData['invited_guests']);
         }
 
-        if($invitation_count > 0){
+        if($invitation_count > 0 && $eventData['is_draft_save'] == '0'){
             $user_detail = User::where('id',$user->id)->first();
             if($user_detail){
                 if($user_detail->coins < $invitation_count){
