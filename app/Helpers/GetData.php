@@ -850,6 +850,22 @@ function getTotalUnreadNotification($user_id){
     $total=Notification::where(['user_id' => $user_id, 'read' => '0'])->count();
     return $total;
 }
+
+
+
+function totalEventOfCurrentMonth($user_id){
+    $eventData = Event::where(['user_id' => $user_id, 'is_draft_save' => '0'])
+    ->whereYear('start_date', date('Y'))
+    ->whereMonth('start_date', date('m'));
+    $invitedEvents = EventInvitedUser::where('user_id', $user_id)->get()->pluck('event_id');
+    $invitedEventsList = Event::whereIn('id', $invitedEvents)
+        ->where('is_draft_save', '0')
+        ->whereYear('start_date', date('Y'))
+        ->whereMonth('start_date', date('m'));
+    
+    $totalEventOfCurrentMonth = $eventData->union($invitedEventsList)->get();
+    return count($totalEventOfCurrentMonth);
+}
 function totalEventOfCurrentYear($user_id){
     $eventData = Event::where(['user_id' => $user_id, 'is_draft_save' => '0'])
     ->whereYear('start_date', date('Y'))
