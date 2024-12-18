@@ -5723,37 +5723,37 @@ class ApiControllerv2 extends Controller
                 $eventDesingInnerImage->save();
             }
 
-            $userSubscription = UserSubscription::where('user_id', $user->id)
-                ->where('endDate', '>', date('Y-m-d H:i:s'))
-                ->where('type', 'subscribe')
-                ->orderBy('id', 'DESC')
-                ->limit(1)
-                ->first();
-            if ((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] == 'Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] == 'Pro-Year' && isset($userSubscription->id))) {
-                $user  = Auth::guard('api')->user();
-                $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
-                if ($request->is_update_event == '0') {
-                    if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-                        $notificationParam = [
-                            'sender_id' => $user->id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-                        // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                        sendNotification('invite', $notificationParam);
-                        sendNotificationGuest('invite', $notificationParam);
-                    }
-                    if ($checkUserInvited->is_draft_save == '0') {
-                        $notificationParam = [
-                            'sender_id' => $user->id,
-                            'event_id' => $input['event_id'],
-                            'post_id' => ""
-                        ];
-                        // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
-                        sendNotification('owner_notify', $notificationParam);
-                    }
-                }
-            } else {
+            // $userSubscription = UserSubscription::where('user_id', $user->id)
+            //     ->where('endDate', '>', date('Y-m-d H:i:s'))
+            //     ->where('type', 'subscribe')
+            //     ->orderBy('id', 'DESC')
+            //     ->limit(1)
+            //     ->first();
+            // if ((isset($input['subscription_plan_name']) && $input['subscription_plan_name'] == 'Free') || (isset($input['subscription_plan_name']) && $input['subscription_plan_name'] == 'Pro-Year' && isset($userSubscription->id))) {
+            //     $user  = Auth::guard('api')->user();
+            //     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
+            //     if ($request->is_update_event == '0') {
+            //         if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+            //             $notificationParam = [
+            //                 'sender_id' => $user->id,
+            //                 'event_id' => $input['event_id'],
+            //                 'post_id' => ""
+            //             ];
+            //             // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+            //             sendNotification('invite', $notificationParam);
+            //             sendNotificationGuest('invite', $notificationParam);
+            //         }
+            //         if ($checkUserInvited->is_draft_save == '0') {
+            //             $notificationParam = [
+            //                 'sender_id' => $user->id,
+            //                 'event_id' => $input['event_id'],
+            //                 'post_id' => ""
+            //             ];
+            //             // dispatch(new SendNotificationJob(array('owner_notify', $notificationParam)));
+            //             sendNotification('owner_notify', $notificationParam);
+            //         }
+            //     }
+            // } else {
                 if (isset($request->is_draft) && $request->is_draft == '1') {
 
                     $checkUserInvited = Event::withCount('event_invited_user')->where('id', $input['event_id'])->first();
@@ -5767,8 +5767,9 @@ class ApiControllerv2 extends Controller
                             ];
                             // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                             sendNotification('invite', $notificationParam);
-                       
                             sendNotificationGuest('invite', $notificationParam);
+
+                            debit_coins($user->id,$input['event_id']);
                             
                         }
                         if ($checkUserInvited->is_draft_save == '0') {
@@ -5782,7 +5783,7 @@ class ApiControllerv2 extends Controller
                         }
                     }
                 }
-            }
+            // }
             DB::commit();
             return response()->json(['status' => 1, 'message' => "Event images stored successfully"]);
         } catch (QueryException $e) {
@@ -14010,7 +14011,7 @@ class ApiControllerv2 extends Controller
         if ($input == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        
+
         try {
             $page = isset($input['page']) ? $input['page'] : "1";
             
