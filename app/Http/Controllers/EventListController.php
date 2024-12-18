@@ -438,6 +438,7 @@ class EventListController extends Controller
 
                             // $invitedToCountCurrentMonth=count($invitedEventsListTo);
                             //ProfileData//
+                            $totalEvent =  Event::where('user_id', $value->user->id)->count();
 
                             $profileData = [
                                 'total_events' => $totalEvent,
