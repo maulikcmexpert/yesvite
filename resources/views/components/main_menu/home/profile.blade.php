@@ -1,3 +1,5 @@
+{{dd($profileData)}}
+
 <div class="home-center-content-head">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
     <span class="home-center-content-head-calender-icon profile-calender-view">

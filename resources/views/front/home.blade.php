@@ -1,5 +1,4 @@
 
-{{dd($profileData)}}
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
