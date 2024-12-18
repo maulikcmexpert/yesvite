@@ -83,6 +83,11 @@ class EventListController extends Controller
                $total_past_event = Event::where('end_date', '<', date('Y-m-d'))->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
                $allPastEventC = $usercreatedAllPastEventCount->union($total_past_event)->orderByDesc('id')->get();
                $totalPastEventCount = count($allPastEventC);
+
+
+               $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
+                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
                 if (count($allEvent) != 0) {
 
                     foreach ($allEvent as $value) {
