@@ -13160,9 +13160,14 @@ class ApiControllerv2 extends Controller
         $userSubscription = User::where('id', $this->user->id)->first();
 
         if ($userSubscription != null) {
-                return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins]);
+            $lastRecharge = Coin_transactions::where(['user_id' => $this->user->id,'type' => 'credit'])->first();
+            $last_recharge = 0;
+            if($lastRecharge){
+                $last_recharge = $lastRecharge->coins;
+            }
+            return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins,'lastRechargeCoins' => (int)$last_recharge]);
         }
-        return response()->json(['status' => 0, 'message' => "Login Checked", 'coins' => 0]);
+        return response()->json(['status' => 0, 'message' => "Login Checked", 'coins' => 0,'lastRechargeCoins' => 0]);
     }
     public function set_android_iap($appid, $productID, $purchaseToken, $type)
     {
