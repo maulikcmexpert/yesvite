@@ -14071,17 +14071,18 @@ class ApiControllerv2 extends Controller
             $groupCount = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
                 ->orderBy('id','DESC')
                 ->count();
-            $total_page = ceil($groupCount / 10);
+            $total_page = ceil($groupCount / 20);
 
 
 
             $groupList = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
                 ->orderBy('id','DESC')
-                ->paginate(10, ['*'], 'page', $pages);
+                ->paginate(20, ['*'], 'page', $pages);
             // dd($groupList);
 
             $groupListArr = [];
             foreach ($groupList as $value) {
+
                 $group['id'] = $value->id;
                 $group['type'] = $value->type;
                 $group['coins'] = $value->coins;
