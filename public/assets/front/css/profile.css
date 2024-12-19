@@ -583,7 +583,7 @@ input::-webkit-slider-thumb {
     color: var(--primaryColor);
 }
 
-.profile-wrapper .user-location a {
+.profile-wrapper .user-location div a { 
     font-size: 14px !important;
     line-height: normal !important;
 }
