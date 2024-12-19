@@ -46,6 +46,11 @@
 
 }
 
+.profile-img .user-img a svg{
+    width: 20px;
+    height: 20px;
+}
+
 .profile-img .user-img h5 {
     font-size: 30px;
 }
@@ -269,6 +274,11 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
+}
+
+.Edit-img svg{
+    width: 16px;
+    height: 16px;
 }
 
 #img-previews {
