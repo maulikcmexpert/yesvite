@@ -63,7 +63,7 @@
                         
                 </span>
                 {{-- <span>{{$profileData->city.','.$profileData->state}}</span> --}}
-                <span>Califonia,US</span>
+                <p>Califonia,US</p>
 
             </div>
             {{-- @endif --}}

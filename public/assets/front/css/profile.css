@@ -612,13 +612,6 @@ input::-webkit-slider-thumb {
     justify-content: center;
 }
 
-.profile-details .user-location div{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px
-}
 
 @media only screen and (max-width:991px) {
     .profile-img .user-img {
