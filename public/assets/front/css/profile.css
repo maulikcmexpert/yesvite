@@ -592,6 +592,19 @@ input::-webkit-slider-thumb {
     height: 18px;
 }
 
+.profile-details .user-name h3{
+    font-size: 20px;
+}
+
+.profile-details .user-location span{
+    width: 14px;
+    height: 14px;
+}
+
+.profile-details .user-gallery{
+    border: none !important;
+}
+
 @media only screen and (max-width:991px) {
     .profile-img .user-img {
         width: 80px;

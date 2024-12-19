@@ -71,7 +71,7 @@
                 <p>Comments</p>
             </div>
         </div>
-        <ul class="user-account">
+        {{-- <ul class="user-account">
             <li>
                 <a href="{{route('profile')}}" class="d-flex align-items-center {{ (Request::segment(1) == 'profile')? 'active':'' }}">
                     <span>
@@ -143,7 +143,7 @@
                 Logout
             </a>
 
-        </div>
+        </div> --}}
     </div>
 </div>
 

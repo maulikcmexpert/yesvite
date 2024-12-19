@@ -205,6 +205,11 @@
     padding-bottom: 0;
 }
 
+.general-wrap .public-view svg{
+    width: 7px;
+    height: 14px;
+}
+
 
 /* =========== responsive =========== */
 @media only screen and (max-width:768px) {
