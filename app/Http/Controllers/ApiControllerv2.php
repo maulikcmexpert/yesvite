@@ -14132,7 +14132,9 @@ class ApiControllerv2 extends Controller
             $lastMonthBalance = (isset($lastTwoItems[0]['current_balance']) && $lastTwoItems[0]['current_balance'] != '')?$lastTwoItems[0]['current_balance']:0;
             $thisMonthBalance = (isset($lastTwoItems[1]['current_balance']) && $lastTwoItems[1]['current_balance'] != '')?$lastTwoItems[1]['current_balance']:0;
             $percentage = 0;
-            $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
+            if($lastMonthBalance > 0){
+                $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
+            }
             
             return response()->json([
                 'status' => 1,
