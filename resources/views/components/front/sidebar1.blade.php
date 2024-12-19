@@ -42,7 +42,7 @@
                 </span>
                 <a href="mailto:{{$profileData->email }}">{{$profileData->email }}</a>
             </div>
-            {{-- @if($profileData->city != NULL) --}}
+            @if($profileData->city != NULL)
             <div>
                 <span>
                     {{-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,11 +62,11 @@
                     </svg>
                         
                 </span>
-                {{-- <span>{{$profileData->city.','.$profileData->state}}</span> --}}
-                <p>Califonia,US</p> 
+                <p>{{$profileData->city.','.$profileData->state}}</p>
+                {{-- <p>Califonia,US</p>  --}}
 
             </div>
-            {{-- @endif --}}
+            @endif
         </div>
         <!-- <a href="#" class="switch-ac" data-bs-toggle="modal" data-bs-target="#manageModel">
             <span>Manage | Switch Accounts</span>
