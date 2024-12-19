@@ -604,6 +604,8 @@ input::-webkit-slider-thumb {
 
 .profile-details .user-gallery{
     border: none !important;
+    margin-top:10px !important;
+    margin-bottom: 0px !important;
 }
 
 @media only screen and (max-width:991px) {
