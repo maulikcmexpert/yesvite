@@ -4079,10 +4079,10 @@ class ApiControllerv2 extends Controller
             //         $purchase_status = false;
             //         $eventCreation->is_draft_save = '1';
             //     } elseif ($checkProductSubscribe->subscription_plan_name == 'Pro-Year') {
-            //         $purchase_status = false;
-            //         $eventCreation->is_draft_save = '1';
-            //     }
-            // }
+                //         $eventCreation->is_draft_save = '1';
+                //     }
+                // }
+                        $purchase_status = false;
             $eventCreation->save();
         }
         DB::commit();
