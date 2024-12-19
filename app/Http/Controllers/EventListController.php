@@ -2092,7 +2092,7 @@ class EventListController extends Controller
         }
 
 
-       
+      dd($eventList); 
         if($page=="upcoming"){
 
             $collection = collect($eventList);
@@ -2106,29 +2106,18 @@ class EventListController extends Controller
             return response()->json(['view' => view( 'front.event.event_list.upcoming_event', compact('eventList','get_current_month'))->render(),"page"=>$page,"last_month"=>$last_month]);
         }
 
-        // if($page=="past"){
-        //     $collection = collect($eventList);
-        //     // Use unique() method on the collection to make it unique based on a specific key
-        //     $uniqueCollection = $collection->unique('id');
-        //     // Convert the unique collection back to a plain array
-        //     $eventPasttList = $uniqueCollection->values()->all();
-        //     usort($eventPasttList, function ($a, $b) {
-        //         return strtotime($a['event_date']) - strtotime($b['event_date']);
-        //     });
-        //     // dd($eventPasttList);
-        //     return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),"page"=>$page,"last_month"=>$last_month]);
-        // }
-        
-        $collection = collect($eventList);
-        // Use unique() method on the collection to make it unique based on a specific key
-        $uniqueCollection = $collection->unique('id');
-        // Convert the unique collection back to a plain array
-        $eventPasttList = $uniqueCollection->values()->all();
-        usort($eventPasttList, function ($a, $b) {
-            return strtotime($a['event_date']) - strtotime($b['event_date']);
-        });
-        // dd($eventPasttList);
-        return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),"page"=>$page,"last_month"=>$last_month]);
+        if($page=="past"){
+            $collection = collect($eventList);
+            // Use unique() method on the collection to make it unique based on a specific key
+            $uniqueCollection = $collection->unique('id');
+            // Convert the unique collection back to a plain array
+            $eventPasttList = $uniqueCollection->values()->all();
+            usort($eventPasttList, function ($a, $b) {
+                return strtotime($a['event_date']) - strtotime($b['event_date']);
+            });
+            // dd($eventPasttList);
+            return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),"page"=>$page,"last_month"=>$last_month]);
+        }
 
     }
 
