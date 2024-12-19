@@ -601,8 +601,8 @@ input::-webkit-slider-thumb {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
 }
 
 .profile-details .user-gallery{
@@ -624,7 +624,7 @@ input::-webkit-slider-thumb {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
 }
 
 .profile-details .user-location div:nth-child(2)::before{
