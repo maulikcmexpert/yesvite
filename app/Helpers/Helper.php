@@ -2040,6 +2040,7 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
 
     
     $user_data = User::where('id',$user_id)->first();    
+    $event = Event::where('id',$event_id)->first();
     if($get_count_invited_user > 0){
         $current_balance = $user_data->coins - $get_count_invited_user;
 
@@ -2048,7 +2049,7 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
         $coin_transaction->event_id = $event_id;
         $coin_transaction->type = 'debit';
         $coin_transaction->coins = $get_count_invited_user;
-        $coin_transaction->description = 'Event Invite Users';
+        $coin_transaction->description = (isset($event->event_name) && $event->event_name != '')?$event->event_name:'';
         $coin_transaction->current_balance = $current_balance;
         $coin_transaction->save();
         $user_data->coins = $current_balance;

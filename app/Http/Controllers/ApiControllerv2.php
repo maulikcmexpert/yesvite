@@ -13115,7 +13115,7 @@ class ApiControllerv2 extends Controller
                         $coin_transaction->type = 'credit';
                         $coin_transaction->coins = $input['coins'];
                         $coin_transaction->current_balance = $total_coin;
-                        $coin_transaction->description = 'In App Purchase';
+                        $coin_transaction->description = $input['coins'].' Credits Bulk Credits';
                         $coin_transaction->endDate = Carbon::now()->addYears(5)->toDateString();
                         $coin_transaction->save();
                     }
@@ -14082,7 +14082,10 @@ class ApiControllerv2 extends Controller
 
             $groupListArr = [];
             foreach ($groupList as $value) {
-
+                $description = '';
+                if($value->type == 'credit'){
+                    $description = $value->coins.' Credits Bulk Credits'
+                }
                 $group['id'] = $value->id;
                 $group['type'] = $value->type;
                 $group['coins'] = $value->coins;
