@@ -2055,6 +2055,44 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
         $user_data->coins = $current_balance;
         $user_data->save();
         
+        $current_debit_coin = $get_count_invited_user;
+        // Fetch all credit transactions where 'status' is 0 and user is specified.
+        $creditCoins = Coin_transactions::where(['user_id' => $user_id, 'type' => 'credit', 'status' => '0'])->get();
+
+        foreach ($creditCoins as $getCreditCoin) {
+            $remain = $getCreditCoin->coins - $getCreditCoin->used_coins;
+
+            // If remaining coins are greater than 0, process the current debit coin.
+            if ($remain > 0 && $current_debit_coin > 0) {
+                // Calculate the temp variable (remaining - current_debit_coin)
+                $temp = $remain - $current_debit_coin;
+
+                // If temp is greater than 0, it means we can fully process current_debit_coin here.
+                if ($temp > 0) {
+                    $getCreditCoin->used_coins += $current_debit_coin;
+                    if ($getCreditCoin->used_coins == $getCreditCoin->coins) {
+                        $getCreditCoin->status = '1';  // Mark as fully used
+                    }
+                    $getCreditCoin->save(); // Save changes to the credit transaction
+                    $current_debit_coin = 0; // All debit coins processed
+                } else {
+                    // If temp is less than or equal to 0, process all remaining credit coins
+                    $getCreditCoin->used_coins += $remain;
+                    if ($getCreditCoin->used_coins == $getCreditCoin->coins) {
+                        $getCreditCoin->status = '1';  // Mark as fully used
+                    }
+                    $getCreditCoin->save(); // Save changes to the credit transaction
+                    $current_debit_coin -= $remain; // Subtract the used coins from the debit
+                }
+            }
+
+            // If there are no more debit coins to process, exit the loop
+            if ($current_debit_coin <= 0) {
+                break;
+            }
+        }
+
+
         // $getUnusedCoin = Coin_transactions::where(['user_id'=>$user_id,'type'=>'credit','status' => '0'])->orderBy('id','DESC')->get();
         // $getdebitCoin = Coin_transactions::where(['user_id'=>$user_id,'type'=>'debit','status' => '0'])->orderBy('id','DESC')->sum('coins');
     }
