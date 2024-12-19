@@ -2092,12 +2092,12 @@ class EventListController extends Controller
         }
 
 
-      dd($page,$eventList); 
         if($page=="upcoming"){
 
             $collection = collect($eventList);
             // Use unique() method on the collection to make it unique based on a specific key
             $uniqueCollection = $collection->unique('id');
+            dd($uniqueCollection);
             // Convert the unique collection back to a plain array
             $eventList = $uniqueCollection->values()->all();
             usort($eventList, function ($a, $b) {
