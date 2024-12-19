@@ -46,6 +46,11 @@
 
 }
 
+.profile-img .user-img a svg{
+    width: 20px;
+    height: 20px;
+}
+
 .profile-img .user-img h5 {
     font-size: 30px;
 }
@@ -269,6 +274,11 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
+}
+
+.Edit-img svg{
+    width: 16px;
+    height: 16px;
 }
 
 #img-previews {
@@ -584,7 +594,8 @@ input::-webkit-slider-thumb {
 }
 
 .profile-wrapper .user-location a {
-    font-size: 14px;
+    font-size: 14px !important;
+    line-height: normal !important;
 }
 
 .profile-wrapper .user-contact-data svg {
@@ -597,13 +608,59 @@ input::-webkit-slider-thumb {
 }
 
 .profile-details .user-location span{
-    display: inline-block;
-    width: 14px;
-    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
 }
 
 .profile-details .user-gallery{
     border: none !important;
+    margin-top:10px !important;
+    margin-bottom: 0px !important;
+}
+
+.profile-details .user-location{
+    justify-content: center;
+}
+
+.profile-details .user-location div p, .profile-details .user-location div a{
+    font-size: 14px;
+    display: inline-block;
+}
+
+.profile-details .user-location div{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.profile-details .user-location div:nth-child(2)::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -8px;
+    width: 2px;
+    height: 14px;
+    background-color: #CBD5E1;
+}
+
+.profile-details .contact-title .edit-btn{
+    border: 1px solid var(--borderColor);
+    background-color: transparent;
+    color: var(--secondryColor);
+    font-size: 14px !important;
+    border-radius: 16px !important;
+    padding: 15px 24px !important;
+}
+
+#save_changes{
+    font-size: 14px !important;
+    border-radius: 16px !important;
+    padding: 15px 24px !important;
 }
 
 @media only screen and (max-width:991px) {
