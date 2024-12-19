@@ -2105,14 +2105,14 @@ class EventListController extends Controller
             
             // Ensure at least one entry exists
             if (empty($filteredEvents)) {
-                $eventList = [$eventList[0]]; // Keep the first event as fallback
+                $filteredEvents = [$eventList[0]]; // Keep the first event as fallback
             } else {
-                $eventList = array_values($eventList); // Re-index the array
+                $filteredEvents = array_values($filteredEvents); // Re-index the array
             }
             
             // Convert the unique collection back to a plain array
             // $eventList = $uniqueCollection->values()->all();
-            dd($eventList);
+            dd($filteredEvents);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
