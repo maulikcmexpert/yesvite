@@ -3,7 +3,7 @@
 <section class="contact-details change-password-wrap">
     <div class="container">
         <div class="row">
-            <x-front.sidebar :profileData="$user" />
+            <x-front.sidebar1 :profileData="$user" />
 
             <div class="col-xxl-9 col-xl-8 col-lg-8 col-md-7">
                 <div class="contact-list">
@@ -74,7 +74,7 @@
                                 </div>
 
                             </div>
-                            {{-- <a href="#">Forgot Password</a> --}}
+                            <a href="{{ route('auth.forgetpassword')}}">Forgot Password?</a>
                         </form>
                     </div>
                 </div>
