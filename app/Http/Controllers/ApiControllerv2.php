@@ -14109,7 +14109,7 @@ class ApiControllerv2 extends Controller
                 ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
                 ->where('user_id', $this->user->id)
                 ->orderByRaw('DATE_FORMAT(created_at, "%Y-%m") DESC')
-                ->groupByRaw('DATE_FORMAT(created_at, "%Y-%m")')
+                ->groupBy('month')
                 ->pluck('balance', 'month');
             $currentYear = Carbon::now()->year;
             $lastYear = $currentYear - 1;
