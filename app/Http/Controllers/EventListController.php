@@ -2102,7 +2102,7 @@ class EventListController extends Controller
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
 
-            dd($eventList);
+            // dd($eventList);
 
             return response()->json(['view' => view( 'front.event.event_list.upcoming_event', compact('eventList','get_current_month'))->render(),"page"=>$page,"last_month"=>$last_month]);
         }
