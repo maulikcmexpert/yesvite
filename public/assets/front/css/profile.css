@@ -597,6 +597,7 @@ input::-webkit-slider-thumb {
 }
 
 .profile-details .user-location span{
+    display: inline-block;
     width: 14px;
     height: 14px;
 }
