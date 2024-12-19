@@ -14082,10 +14082,6 @@ class ApiControllerv2 extends Controller
 
             $groupListArr = [];
             foreach ($groupList as $value) {
-                $description = '';
-                if($value->type == 'credit'){
-                    $description = $value->coins.' Credits Bulk Credits'
-                }
                 $group['id'] = $value->id;
                 $group['type'] = $value->type;
                 $group['coins'] = $value->coins;
