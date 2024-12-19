@@ -14082,6 +14082,7 @@ class ApiControllerv2 extends Controller
 
             $groupListArr = [];
             foreach ($groupList as $value) {
+                dd($value);
                 $group['id'] = $value->id;
                 $group['type'] = $value->type;
                 $group['coins'] = $value->coins;
