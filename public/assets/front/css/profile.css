@@ -608,6 +608,14 @@ input::-webkit-slider-thumb {
     margin-bottom: 0px !important;
 }
 
+.profile-details .user-location{
+    justify-content: center;
+}
+
+.profile-details .user-location div{
+    width: max-content;
+}
+
 @media only screen and (max-width:991px) {
     .profile-img .user-img {
         width: 80px;
