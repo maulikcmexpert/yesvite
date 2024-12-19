@@ -14117,7 +14117,7 @@ class ApiControllerv2 extends Controller
                 SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as current_year_coins,
                 SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as last_year_coins
             ", [$currentYear, $lastYear])->first();
-            dd($debitSums);
+            
             $lastBalance = 0; 
             $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
                 $currentBalance = $transactionData->get($month, $lastBalance); 
@@ -14135,6 +14135,11 @@ class ApiControllerv2 extends Controller
             if($lastMonthBalance > 0){
                 $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
             }
+
+            $percentageIncreaseByYear = 0;
+            if($debitSums->last_year_coins > 0){
+                $percentageIncreaseByYear = (($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins;
+            }
             
             return response()->json([
                 'status' => 1,
@@ -14142,7 +14147,7 @@ class ApiControllerv2 extends Controller
                 'graph_data' => $result,
                 'last_month_balance' => $lastMonthBalance,
                 'last_month_comparison_percentage' => $percentageIncrease,
-                'last_year_comparison' => $debitSums
+                'last_year_comparison' => $percentageIncreaseByYear
             ]);
         }catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
