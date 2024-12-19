@@ -584,7 +584,8 @@ input::-webkit-slider-thumb {
 }
 
 .profile-wrapper .user-location a {
-    font-size: 14px;
+    font-size: 14px !important;
+    line-height: normal !important;
 }
 
 .profile-wrapper .user-contact-data svg {
@@ -615,7 +616,8 @@ input::-webkit-slider-thumb {
 }
 
 .profile-details .user-location div p{
-    font-size: 12px;
+    font-size: 14px !important;
+    line-height: normal !important;
     display: inline-block;
 }
 
