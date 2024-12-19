@@ -2098,21 +2098,24 @@ class EventListController extends Controller
             // Use unique() method on the collection to make it unique based on a specific key
             // $uniqueCollection = $collection->unique('id');
 
-            $idCounts = array_count_values(array_column($eventList, 'id')); // Count occurrences of each ID
-            $filteredEvents = array_filter($eventList, function ($event) use ($idCounts) {
-                return $idCounts[$event['id']] === 1; // Keep only unique IDs
+            $collection = collect($eventList);
+
+            // Count occurrences of each ID
+            $idCounts = $collection->groupBy('id')->map->count();
+            
+            // Filter out duplicates
+            $filteredCollection = $collection->reject(function ($item) use ($idCounts) {
+                return $idCounts[$item['id']] > 1;
             });
             
             // Ensure at least one entry exists
-            if (empty($filteredEvents)) {
-                $filteredEvents = [$eventList[0]]; // Keep the first event as fallback
-            } else {
-                $filteredEvents = array_values($filteredEvents); // Re-index the array
+            if ($filteredCollection->isEmpty()) {
+                $filteredCollection = collect([$eventList[0]]);
             }
             
             // Convert the unique collection back to a plain array
             // $eventList = $uniqueCollection->values()->all();
-            dd($filteredEvents);
+            dd($filteredCollection);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
