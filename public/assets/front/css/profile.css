@@ -638,6 +638,12 @@ input::-webkit-slider-thumb {
     background-color: #CBD5E1;
 }
 
+.profile-details .contact-title .edit-btn{
+    border: 1px solid var(--borderColor);
+    background-color: transparent;
+    color: var(--secondryColor);
+}
+
 @media only screen and (max-width:991px) {
     .profile-img .user-img {
         width: 80px;
