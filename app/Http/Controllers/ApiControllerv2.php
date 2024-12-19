@@ -14105,10 +14105,11 @@ class ApiControllerv2 extends Controller
                 $lastSevenMonths->push(Carbon::now()->subMonths($i)->format('M'));
             }
             
-            $transactionData = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%b") as month, MAX(current_balance) as balance')
+            $transactionData = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%b") as month, current_balance as balance')
                 ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
                 ->where('user_id', $this->user->id)
-                ->groupBy('month')
+                ->orderByRaw('DATE_FORMAT(created_at, "%Y-%m") DESC')
+                ->groupByRaw('DATE_FORMAT(created_at, "%Y-%m")')
                 ->pluck('balance', 'month');
             $currentYear = Carbon::now()->year;
             $lastYear = $currentYear - 1;
