@@ -14154,10 +14154,10 @@ class ApiControllerv2 extends Controller
                 'status' => 1,
                 'message' => 'Coin Transactions',
                 'graph_data' => $result,
-                'last_month_balance' => $lastMonthBalance,
-                'last_month_comparison_percentage' => $percentageIncrease,
-                'last_year_comparison' => $percentageIncreaseByYear,
-                'credit_use_this_year' => $debitSums->current_year_coins
+                'last_month_balance' => (string)$lastMonthBalance,
+                'last_month_comparison_percentage' => (string)$percentageIncrease,
+                'last_year_comparison' => (string)$percentageIncreaseByYear,
+                'credit_use_this_year' => (string)$debitSums->current_year_coins
             ]);
         }catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
