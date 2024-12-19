@@ -2104,11 +2104,11 @@ class EventListController extends Controller
             $uniqueCollection = $collection->unique('id');
 
             // Convert the unique collection back to a plain array
-            $uniqueArray = $uniqueCollection->values()->all();
+            $eventList = $uniqueCollection->values()->all();
             
             // Convert the unique collection back to a plain array
             // $eventList = $uniqueCollection->values()->all();
-            dd($uniqueArray);
+            dd($eventList);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
