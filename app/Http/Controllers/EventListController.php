@@ -2092,7 +2092,7 @@ class EventListController extends Controller
         }
 
 
-      dd($eventList); 
+      dd($page,$eventList); 
         if($page=="upcoming"){
 
             $collection = collect($eventList);
