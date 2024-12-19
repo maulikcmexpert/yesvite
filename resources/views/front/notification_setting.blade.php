@@ -190,7 +190,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="reminder">
+                        {{-- <div class="reminder">
                             <div>
                                 <h6 class="title border-bottom">Reminders</h6>
                                 <div class="d-flex align-items-center justify-content-between border-bottom">
@@ -218,7 +218,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     @endif
                 </div>
