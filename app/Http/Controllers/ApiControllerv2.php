@@ -14110,6 +14110,13 @@ class ApiControllerv2 extends Controller
                 ->where('user_id', $this->user->id)
                 ->groupBy('month')
                 ->pluck('balance', 'month');
+            $currentYear = Carbon::now()->year;
+            $lastYear = $currentYear - 1;
+            
+            $debitSums = Coin_transactions::selectRaw("
+                SUM(CASE WHEN YEAR(created_at) = ? THEN debit ELSE 0 END) as current_year_debit,
+                SUM(CASE WHEN YEAR(created_at) = ? THEN debit ELSE 0 END) as last_year_debit
+            ", [$currentYear, $lastYear])->first();
             
             $lastBalance = 0; 
             $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
@@ -14122,7 +14129,19 @@ class ApiControllerv2 extends Controller
             });
 
             $lastTwoItems = $result->slice(-2)->values();
-            dd($lastTwoItems);
+            $lastMonthBalance = (isset($lastTwoItems[0]['current_balance']) && $lastTwoItems[0]['current_balance'] != '')?$lastTwoItems[0]['current_balance']:0;
+            $thisMonthBalance = (isset($lastTwoItems[1]['current_balance']) && $lastTwoItems[1]['current_balance'] != '')?$lastTwoItems[1]['current_balance']:0;
+            $percentage = 0;
+            $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
+            
+            return response()->json([
+                'status' => 1,
+                'message' => 'Coin Transactions',
+                'graph_data' => $result,
+                'last_month_balance' => $lastMonthBalance,
+                'last_month_comparison_percentage' => $percentageIncrease,
+                'last_year_comparison' => $debitSums
+            ]);
         }catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
