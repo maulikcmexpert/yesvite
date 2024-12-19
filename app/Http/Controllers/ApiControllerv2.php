@@ -14097,4 +14097,34 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function coin_graph(Request $request){
+        // $lastSevenMonths = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, MAX(current_balance) as balance')
+        //     ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+        //     ->where('user_id', $this->user->id)
+        //     ->groupBy('month')
+        //     ->orderBy('month', 'asc')
+        //     ->get();
+
+        $lastSevenMonths = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $lastSevenMonths->push(Carbon::now()->subMonths($i)->format('Y-m'));
+        }
+        
+        // Step 2: Fetch data from the database
+        $transactionData = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, MAX(current_balance) as balance')
+            ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+            ->where('user_id', $this->user->id)
+            ->groupBy('month')
+            ->pluck('balance', 'month');
+        
+        // Step 3: Merge with generated months, default balance to 0
+        $result = $lastSevenMonths->map(function ($month) use ($transactionData) {
+            return [
+                'month' => $month,
+                'current_balance' => $transactionData->get($month, 0),
+            ];
+        });
+        dd($result);
+    }
 }

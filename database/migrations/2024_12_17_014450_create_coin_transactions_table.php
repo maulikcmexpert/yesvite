@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('coins')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('current_balance')->nullable();
+            $table->bigInteger('used_coins')->default(0);
             $table->string('endDate')->nullable();
             $table->timestamps();
 
