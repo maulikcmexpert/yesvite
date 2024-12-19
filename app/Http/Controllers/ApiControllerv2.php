@@ -14118,11 +14118,13 @@ class ApiControllerv2 extends Controller
             ->groupBy('month')
             ->pluck('balance', 'month');
         
-        // Step 3: Merge with generated months, default balance to 0
-        $result = $lastSevenMonths->map(function ($month) use ($transactionData) {
+        $lastBalance = 0; // Initialize last balance as 0
+        $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
+            $currentBalance = $transactionData->get($month, $lastBalance); // Use current balance if available, else previous
+            $lastBalance = $currentBalance; // Update last balance
             return [
-                'month' => $month,
-                'current_balance' => $transactionData->get($month, 0),
+                'month' => strtoupper($month), // Ensure uppercase
+                'current_balance' => $currentBalance,
             ];
         });
         dd($result);
