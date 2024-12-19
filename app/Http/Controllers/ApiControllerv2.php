@@ -14108,21 +14108,23 @@ class ApiControllerv2 extends Controller
 
         $lastSevenMonths = collect();
         for ($i = 6; $i >= 0; $i--) {
-            $lastSevenMonths->push(Carbon::now()->subMonths($i)->format('Y-m'));
+            $lastSevenMonths->push(Carbon::now()->subMonths($i)->format('M'));
         }
         
         // Step 2: Fetch data from the database
-        $transactionData = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, MAX(current_balance) as balance')
+        $transactionData = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%b") as month, MAX(current_balance) as balance')
             ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
             ->where('user_id', $this->user->id)
             ->groupBy('month')
             ->pluck('balance', 'month');
         
-        // Step 3: Merge with generated months, default balance to 0
-        $result = $lastSevenMonths->map(function ($month) use ($transactionData) {
+        $lastBalance = 0; // Initialize last balance as 0
+        $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
+            $currentBalance = $transactionData->get($month, $lastBalance); // Use current balance if available, else previous
+            $lastBalance = $currentBalance; // Update last balance
             return [
-                'month' => $month,
-                'current_balance' => $transactionData->get($month, 0),
+                'month' => strtoupper($month), // Ensure uppercase
+                'current_balance' => $currentBalance,
             ];
         });
         dd($result);
