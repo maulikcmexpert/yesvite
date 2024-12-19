@@ -12,11 +12,13 @@
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile.account_settings')}}">Account Setting</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Notification & Reminders</li>
+                            <li class="breadcrumb-item active" aria-current="page">Notification</li>
                         </ol>
                     </nav>
                     <div class="contact-title">
-                        <h3>Notification & Reminders</h3>
+                        {{-- <h3>Notification & Reminders</h3> --}}
+                        <h3>Notification</h3>
+
                     </div>
 
                     @if($user->user_notification_type->isNotEmpty())
