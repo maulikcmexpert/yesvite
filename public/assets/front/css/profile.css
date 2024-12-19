@@ -597,7 +597,9 @@ input::-webkit-slider-thumb {
 }
 
 .profile-details .user-location span{
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 14px;
     height: 14px;
 }
@@ -615,6 +617,20 @@ input::-webkit-slider-thumb {
 .profile-details .user-location div p{
     font-size: 12px;
     display: inline-block;
+}
+
+.profile-details .user-location div{
+    position: relative;
+}
+
+.profile-details .user-location div:nth-child(2)::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: red;
 }
 
 @media only screen and (max-width:991px) {
