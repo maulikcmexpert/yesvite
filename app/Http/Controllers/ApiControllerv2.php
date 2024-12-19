@@ -14082,13 +14082,12 @@ class ApiControllerv2 extends Controller
 
             $groupListArr = [];
             foreach ($groupList as $value) {
-                dd($value);
                 $group['id'] = $value->id;
                 $group['type'] = $value->type;
                 $group['coins'] = $value->coins;
                 $group['current_balance'] = $value->current_balance;
                 $group['description'] = $value->description;
-                $group['event_name'] = (isset($value->event->name) && $value->event->name != '')?$value->event->name:'';
+                $group['event_name'] = (isset($value->event->event_name) && $value->event->event_name != '')?$value->event->event_name:'';
                 $group['date'] = Carbon::parse($value->created_at)->format('M d, Y');
                 $group['time'] = Carbon::parse($value->created_at)->format('g:i A');
                 $groupListArr[] = $group;
