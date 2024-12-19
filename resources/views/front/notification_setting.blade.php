@@ -67,9 +67,9 @@
 
                             @endforeach
                         </div>
-                        <div class="reminder">
+                        {{-- <div class="reminder">
                             <div>
-                                <h6 class="title border-bottom">Reminderss</h6>
+                                <h6 class="title border-bottom">Reminders</h6>
                                 <div class="d-flex align-items-center justify-content-between border-bottom">
                                     <h6>Ask guests to upload their photos</h6>
                                     <div class="toggle-button-cover ">
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     @else
                     <div class="notification">
@@ -190,7 +190,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="reminder">
+                        {{-- <div class="reminder">
                             <div>
                                 <h6 class="title border-bottom">Reminders</h6>
                                 <div class="d-flex align-items-center justify-content-between border-bottom">
@@ -218,7 +218,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     @endif
                 </div>
