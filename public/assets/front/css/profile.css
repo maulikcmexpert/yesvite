@@ -631,9 +631,9 @@ input::-webkit-slider-thumb {
     position: absolute;
     top: 0;
     left: 0;
-    width: 10px;
-    height: 10px;
-    background-color: red;
+    width: 2px;
+    height: 14px;
+    background-color: #CBD5E1;
 }
 
 @media only screen and (max-width:991px) {
