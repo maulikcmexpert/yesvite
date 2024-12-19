@@ -14097,4 +14097,14 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function coin_graph(Request $request){
+        $lastSevenMonths = Coin_transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, MAX(current_balance) as balance')
+            ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+            ->where('user_id', $this->user->id)
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->get();
+        dd($lastSevenMonths);
+    }
 }
