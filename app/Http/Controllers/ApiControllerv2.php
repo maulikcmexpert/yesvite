@@ -14114,8 +14114,8 @@ class ApiControllerv2 extends Controller
             $lastYear = $currentYear - 1;
             
             $debitSums = Coin_transactions::selectRaw("
-                SUM(CASE WHEN YEAR(created_at) = ? THEN debit ELSE 0 END) as current_year_debit,
-                SUM(CASE WHEN YEAR(created_at) = ? THEN debit ELSE 0 END) as last_year_debit
+                SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as current_year_coins,
+                SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as last_year_coins
             ", [$currentYear, $lastYear])->first();
             
             $lastBalance = 0; 
