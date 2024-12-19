@@ -103,7 +103,7 @@ function getNotificationList(){
     // }
     $notificationDatacount = $notificationData->count();
     $total_page = ceil($notificationDatacount / 10);
-    $result = $notificationData->get();
+    $result = $notificationData->limit(3)->get();
 
     $notificationInfo = [];
         foreach ($result as $values) {
