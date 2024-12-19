@@ -2092,14 +2092,23 @@ class EventListController extends Controller
         }
 
 
-       
         if($page=="upcoming"){
 
+            // $collection = collect($eventList);
+            // Use unique() method on the collection to make it unique based on a specific key
+            // $uniqueCollection = $collection->unique('id');
+
             $collection = collect($eventList);
+
             // Use unique() method on the collection to make it unique based on a specific key
             $uniqueCollection = $collection->unique('id');
+
             // Convert the unique collection back to a plain array
             $eventList = $uniqueCollection->values()->all();
+            
+            // Convert the unique collection back to a plain array
+            // $eventList = $uniqueCollection->values()->all();
+            dd($eventList);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
@@ -2118,8 +2127,7 @@ class EventListController extends Controller
             // dd($eventPasttList);
             return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),"page"=>$page,"last_month"=>$last_month]);
         }
-        
-        
+
     }
 
     public function TotalMonthData(Request $request){
