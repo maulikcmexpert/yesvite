@@ -34,7 +34,7 @@
                 </div>
                 <div class="home-upcoming-events-card-left-profile-content">
                     <h3>{{$upcomingEvent['event_name']}}</h3>
-                    <p>{{$upcomingEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$upcomingEvent['post_time']}}</span></p>
+                    <p class="host-name-{{$colorClass}}">{{$upcomingEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$upcomingEvent['post_time']}}</span></p>
                 </div>
             </a>
             <ul class="home-upcoming-events-card-left-detail">
