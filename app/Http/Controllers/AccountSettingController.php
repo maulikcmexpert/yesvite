@@ -253,25 +253,17 @@ class AccountSettingController extends Controller
 
     public function updateMessagePrivacy(Request $request)
     {
-
         try {
-
-
             $user = Auth::guard('web')->user();
             $user->message_privacy = $request->message_privacy;
-
             if ($user->save()) {
-
-                dd($user);
                 return response()->json([
                     'status' => 1,
                     'message' => "Message Privacy set successfully",
-
                 ]);
             }
         } catch (QueryException $e) {
             DB::Rollback();
-
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
