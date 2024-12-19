@@ -3,6 +3,7 @@
 <section class="contact-details profile-details public-wrp">
     <div class="container">
         <div class="row">
+            <x-front.sidebar1 :profileData="$user" />
             <div class="contact-list">
                 <nav class="breadcrumb-nav" aria-label="breadcrumb">
                     <ol class="breadcrumb">
