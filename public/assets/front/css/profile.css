@@ -583,7 +583,7 @@ input::-webkit-slider-thumb {
     color: var(--primaryColor);
 }
 
-.profile-wrapper .user-location div a { 
+.profile-wrapper .user-location a {
     font-size: 14px !important;
     line-height: normal !important;
 }
@@ -615,9 +615,8 @@ input::-webkit-slider-thumb {
     justify-content: center;
 }
 
-.profile-details .user-location div p{
-    font-size: 14px !important;
-    line-height: normal !important;
+.profile-details .user-location div p, .profile-details .user-location div a{
+    font-size: 14px;
     display: inline-block;
 }
 
