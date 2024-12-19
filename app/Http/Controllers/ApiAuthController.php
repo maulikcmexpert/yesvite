@@ -168,6 +168,7 @@ class ApiAuthController extends Controller
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
                 $checkUser->register_type =  'API Normal register';
+                $checkUser->coins =  env('DEFAULT_COIN');
                 $checkUser->save();
             } else {
                 $checkUser = new User();
@@ -180,6 +181,7 @@ class ApiAuthController extends Controller
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
                 $checkUser->register_type =  'API Normal register';
+                $checkUser->coins =  env('DEFAULT_COIN');
                 $checkUser->save();
 
                 // $usersignup =  User::create([
@@ -489,6 +491,7 @@ class ApiAuthController extends Controller
             }
             $usersignup->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
             $usersignup->register_type = 'API Social signup';
+            $usersignup->coins = env('DEFAULT_COIN');
             $usersignup->save();
 
             $userId = $usersignup->id;
