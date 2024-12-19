@@ -255,11 +255,22 @@ $(document).ready(function () {
         }, 200);
     });
 
+    $.validator.addMethod(
+        "passwordCheck",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
+            );
+        },
+        "At least 6 characters with a combination of letters, numbers, and a special character"
+    );
+
     $("#updateUserPassword").validate({
         rules: {
             current_password: {
                 required: true,
-                minlength: 8,
+                minlength: 6,
                 remote: {
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -277,28 +288,27 @@ $(document).ready(function () {
             },
             new_password: {
                 required: true,
-                minlength: 8,
+                passwordCheck: true, 
             },
             conform_password: {
                 required: true,
-                minlength: 8,
                 equalTo: "#new_password",
             },
         },
         messages: {
             current_password: {
                 required: "Please enter your Current password",
-                minlength: "Please enter minimum 8 character",
+                minlength: "Please enter minimum 6 character",
                 remote: "Please enter correct Current password",
             },
             new_password: {
-                required: "Please enter your New password",
-                minlength: "Please enter minimum 8 character",
+                required: "Please enter your password",
+                passwordCheck:
+                    "At least 6 characters with a combination of letters, numbers, and a special character",
             },
             conform_password: {
-                required: "Please Re-type your New password",
-                minlength: "Please enter minimum 8 character",
-                equalTo: "New Password did not matched",
+                required: "Please confirm your password",
+                equalTo: "Passwords do not match",
             },
         },
     });
