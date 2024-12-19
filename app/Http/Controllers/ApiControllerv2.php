@@ -14117,7 +14117,7 @@ class ApiControllerv2 extends Controller
                 SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as current_year_coins,
                 SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as last_year_coins
             ", [$currentYear, $lastYear])->first();
-            dd($debitSums[0]);
+            dd($debitSums);
             $lastBalance = 0; 
             $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
                 $currentBalance = $transactionData->get($month, $lastBalance); 
