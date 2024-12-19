@@ -2,7 +2,7 @@
 <section class="contact-details profile-privacy-wrp">
     <div class="container">
         <div class="row">
-            <x-front.sidebar :profileData="$user" />
+            <x-front.sidebar1 :profileData="$user" />
             <div class="col-xxl-9 col-xl-8 col-lg-8 col-md-7">
                 <div class="contact-list">
                     <nav class="breadcrumb-nav" aria-label="breadcrumb">
@@ -10,7 +10,7 @@
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile.account_settings')}}">Account Setting</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Message Privacy</li>
+                            <li class="breadcrumb-item active" aria-current="page">Message Privacysss</li>
                         </ol>
                     </nav>
                     <div class="contact-title">
