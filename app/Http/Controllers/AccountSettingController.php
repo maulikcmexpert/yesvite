@@ -262,6 +262,7 @@ class AccountSettingController extends Controller
 
             if ($user->save()) {
 
+                dd($user);
                 return response()->json([
                     'status' => 1,
                     'message' => "Message Privacy set successfully",
