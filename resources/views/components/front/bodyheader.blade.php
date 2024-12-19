@@ -5,8 +5,9 @@
   <div class="container">
     <div class="header-wrp">
       <a class="header-logo">
-        <img src="{{asset('assets/front/image/header_logo.png')}}" alt="logo">
-        <span>beta</span>
+        {{-- <img src="{{asset('assets/front/image/header_logo.png')}}" alt="logo">
+        <span>beta</span> --}}
+        <img src="{{asset('assets/front/image/yesvite_logo.png')}}" alt="logo">
       </a>
       @if (Auth::guard('web')->check()) 
       <div class="header-right">
