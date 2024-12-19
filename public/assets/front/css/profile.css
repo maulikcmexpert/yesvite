@@ -629,8 +629,9 @@ input::-webkit-slider-thumb {
 .profile-details .user-location div:nth-child(2)::before{
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -8px;
     width: 2px;
     height: 14px;
     background-color: #CBD5E1;
