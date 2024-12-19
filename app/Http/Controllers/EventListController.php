@@ -2102,9 +2102,14 @@ class EventListController extends Controller
             $filteredEvents = array_filter($eventList, function ($event) use ($idCounts) {
                 return $idCounts[$event['id']] === 1; // Keep only unique IDs
             });
-
-// Re-index the array
-        $eventList = array_values($filteredEvents);
+            
+            // Ensure at least one entry exists
+            if (empty($filteredEvents)) {
+                $eventList = [$eventList[0]]; // Keep the first event as fallback
+            } else {
+                $eventList = array_values($eventList); // Re-index the array
+            }
+            
             // Convert the unique collection back to a plain array
             // $eventList = $uniqueCollection->values()->all();
             dd($eventList);
