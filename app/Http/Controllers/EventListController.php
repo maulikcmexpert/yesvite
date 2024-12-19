@@ -2094,12 +2094,20 @@ class EventListController extends Controller
 
         if($page=="upcoming"){
 
-            $collection = collect($eventList);
+            // $collection = collect($eventList);
             // Use unique() method on the collection to make it unique based on a specific key
-            $uniqueCollection = $collection->unique('id');
-            dd($uniqueCollection);
+            // $uniqueCollection = $collection->unique('id');
+
+            $idCounts = array_count_values(array_column($eventList, 'id')); // Count occurrences of each ID
+            $filteredEvents = array_filter($eventList, function ($event) use ($idCounts) {
+                return $idCounts[$event['id']] === 1; // Keep only unique IDs
+            });
+
+// Re-index the array
+        $eventList = array_values($filteredEvents);
             // Convert the unique collection back to a plain array
-            $eventList = $uniqueCollection->values()->all();
+            // $eventList = $uniqueCollection->values()->all();
+            dd($eventList);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
