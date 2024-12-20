@@ -417,7 +417,7 @@ function getNotificationList(){
                     $notificationDetail['post_message'] = (!empty($values->post->post_message)) ? $values->post->post_message : "";
                     $notificationDetail['notification_message'] = $values->notification_message;
                     $notificationDetail['read'] = $values->read;
-                    $notificationDetail['post_time'] = $this->setpostTime($values->created_at);
+                    $notificationDetail['post_time'] = $this->setposttTime($values->created_at);
                     $notificationDetail['created_at'] = $values->created_at;
                     $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
                     if (!empty($checkrsvp)) {
