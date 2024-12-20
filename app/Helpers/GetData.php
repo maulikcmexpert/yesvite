@@ -279,35 +279,8 @@ function getNotificationList(){
                 ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
                     $query->where('parent_comment_id', NULL);
                 }]);
-        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->get();
-        // ->where('notification_type', '!=', 'upload_post')->where('notification_type', '!=', 'photos')->where('notification_type', '!=', 'invite')
-        // if (isset($input['filters']) && !empty($input['filters']) && !in_array('all', $input['filters'])) {
+        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id]);
 
-        //     $selectedEvents = $input['filters']['events'];
-        //     $notificationTypes = $input['filters']['notificationTypes'];
-        //     $activityTypes = $input['filters']['activityTypes'];
-
-        //     $notificationData->where(function ($query) use ($selectedEvents, $notificationTypes, $activityTypes) {
-        //         // Add conditions based on selected events
-        //         if (!empty($selectedEvents)) {
-        //             $query->whereIn('event_id', $selectedEvents);
-        //         }
-
-        //         // Add conditions based on notification types (read, unread)
-        //         if (!empty($notificationTypes) && in_array('read', $notificationTypes)) {
-        //             $query->orWhere('read', "1");
-        //         }
-        //         if (!empty($notificationTypes) && in_array('unread', $notificationTypes)) {
-        //             $query->orWhere('read', "0");
-        //         }
-
-        //         // Add conditions based on activity types
-        //         if (!empty($activityTypes)) {
-
-        //             $query->whereIn('notification_type', $activityTypes);
-        //         }
-        //     });
-        // }
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
         $result = $notificationData->limit(4)->get();
