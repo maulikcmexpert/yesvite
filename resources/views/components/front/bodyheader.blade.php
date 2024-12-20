@@ -1026,7 +1026,7 @@
                 {!! $userProfile !!}                
               </div>
               <div class="home-center-profile-content">
-                <h3>{{$userprofile->firstname.' '.$userprofile->lastname}}<span>PRO</span></h3>
+                <h3>{{$userprofile->firstname.' '.$userprofile->lastname}}</h3>
                 <h6>{{$userprofile->email}}</h6>
                 <p>Member Since: {{empty($userprofile->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($userprofile->created_at)))}}</p>
               </div>

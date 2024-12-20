@@ -40,12 +40,12 @@
                             <div class="user-name">
                                 <div class="d-flex">
                                     <h3>{{$user->firstname.' '.$user->lastname}}</h3>
-                                    @if($user->subscribe_status == false)
+                                    {{-- @if($user->subscribe_status == false)
                                     <span class="free">Free</span>
                                     @else
                                     <spa
                                         n>Pro Year</span>
-                                        @endif
+                                        @endif --}}
                                 </div>
                                 <div class="user-location justify-content-start {{ ($user->city == NULL)?'remove-border':''}}">
                                     <div>

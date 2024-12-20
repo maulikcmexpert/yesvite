@@ -213,7 +213,16 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
 
 
+// //vrushali
+//     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
+//     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
+//     Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
+//     Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
+//     Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
 
+
+//     Route::post('event_wall/event_post', [EventWallController::class, 'createEventPost'])->name('event_wall.eventPost');
+// //vrushali
 
 
     Route::get('event_about/{id}',  [EventAboutController::class, 'index'])->name('event.event_about');
