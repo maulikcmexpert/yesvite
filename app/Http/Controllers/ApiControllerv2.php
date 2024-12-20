@@ -13176,7 +13176,7 @@ class ApiControllerv2 extends Controller
                     $last_recharge = $lastRecharge->coins.' credits';
                 }
             }
-            return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins,'lastRechargeCoins' => (int)$last_recharge]);
+            return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins,'lastRechargeCoins' => $last_recharge]);
         }
         return response()->json(['status' => 0, 'message' => "Login Checked", 'coins' => 0,'lastRechargeCoins' => 0]);
     }
