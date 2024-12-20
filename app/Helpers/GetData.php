@@ -64,7 +64,7 @@ function getNotificationList(){
     // if ($input == null) {
     //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
     // }
-    $final_data=[];
+    // $final_data=[];
     $page = '1';
     $pages = ($page != "") ? $page : 1;
     $notificationData = Notification::query();
