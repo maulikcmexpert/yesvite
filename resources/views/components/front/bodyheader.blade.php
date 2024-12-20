@@ -96,7 +96,9 @@
               <h3>Notifications <span class="notification_count_display">{{$notification}}</span></h3>
               <h5 class="notification_read" data-user_id="{{$user->id}}"style="cursor: pointer;">
                 Mark All Read
-                <span type="button" data-bs-toggle="modal" data-bs-target="#all-notification-filter-modal">
+                <span type="button" data-bs-toggle="modal" data-bs-target="#">
+                  {{-- <span type="button" data-bs-toggle="modal" data-bs-target="#all-notification-filter-modal"> --}}
+
                   <svg
                     viewBox="0 0 20 21"
                     fill="none"
@@ -210,11 +212,12 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                      <span class="active-dot"></span>
+
                                      @else
                                        {!! $userProfile !!}         
                                     <span class="active-dot"></span>
                                     @endif
-                                      <span class="active-dot"></span>
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
                                       <div>
@@ -322,32 +325,38 @@
                             @elseif($inner_data['notification_type']=="comment_post")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      <img
-                                        src="./assets/img/header-profile-img.png"
-                                        alt=""
-                                        loading="lazy"
+                                      @php
+                                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                      @endphp
+                                      @if($inner_data['profile']!="")
+                                          <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                          <span class="active-dot"></span>
 
-                                      />
-                                      <span class="active-dot"></span>
+                                      @else
+                                          {!! $userProfile !!}         
+                                        <span class="active-dot"></span>
+                                      @endif
                                     </div>
                                     <div
                                       class="notification-drodown-body-inner-content"
                                     >
                                       <div>
                                         <h3>
-                                          James Clark
+                                          {{$inner_data['first_name']}} {{$inner_data['last_name']}}
                                           <span> commented on your post on </span>
                                         </h3>
-                                        <h6 class="notification-time-count">10min</h6>
+                                        <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
                                         <p>
-                                          Sarah’s Birthday
+                                          {{$inner_data['event_name']}}
                                           <span><strong>Wall</strong></span>
                                         </p>
                                         <h6 class="notification-read-dot"></h6>
                                       </div>
-                                      <div class="notification-video-comment-wrp">
+                                      {{-- <div class="notification-video-comment-wrp">
                                         <h6>That’s was great! love it ❤️</h6>
                                         <div class="notification-video-wrp">
                                           <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
@@ -370,7 +379,7 @@
                                             </p>
                                           </div>
                                         </div>
-                                      </div>
+                                      </div> --}}
                                     </div>
                                   </div>
                             @elseif($inner_data['notification_type']=="first")
@@ -455,25 +464,41 @@
                                 <div class="notification-drodown-body-inner-content">
                                   <div>
                                     <h3>
-                                      {{$inner_data['notification_message']}}
-                                    </h3>
+                                      {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                      @if($inner_data['rsvp_attempt']=="no_to_yes")
+                                        <span> changed RSVP response from <strong>NO</strong> to <strong>YES</strong> for </span>
+                                      @else
+                                        <span> RSVP’d <strong>YES</strong> for </span>
+                                      @endif                                    </h3>
                                     <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                   </div>
-                      
+                                  <div>
+                                    <p>
+                                      {{$inner_data['event_name']}}
+                                      <span><strong>Wall</strong></span>
+                                    </p>
+                                    <h6 class="notification-read-dot"></h6>
+                                  </div>
                                 </div>
                               </div>
                             @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="0" ) 
                               <div class="notification-drodown-body-inner">
                                 <div class="notification-drodown-body-inner-img">
-                                  <img
-                                    src="./assets/img/header-profile-img.png"
-                                    alt=""
-                                  />
-                                  <span class="active-dot"></span>
+                                  @php
+                                    $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                    $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                    $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                  @endphp
+                                  @if($inner_data['profile']!="")
+                                      <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                      <span class="active-dot"></span>
+                                @else
+                                        {!! $userProfile !!}         
+                                      <span class="active-dot"></span>
+                                @endif
                                 </div>
                                 <div
-                                  class="notification-drodown-body-inner-content"
-                                >
+                                  class="notification-drodown-body-inner-content">
                                   <div>
                                     <h3>
                                       {{$inner_data['first_name']}} {{$inner_data['last_name']}}
@@ -527,7 +552,62 @@
                                   </div>
                                 </div>
                               </div>
-                            @endif
+                            @elseif($inner_data['notification_type']=="photos") 
+                                  <div class="notification-drodown-body-inner">
+                                    <div class="notification-drodown-body-inner-img">
+                                      @php
+                                                  $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                                  $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                      @endphp
+                                      @if($inner_data['profile']!="")
+                                      <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                      <span class="active-dot"></span>
+
+                                    @else
+                                      {!! $userProfile !!}         
+                                    <span class="active-dot"></span>
+                                    @endif
+                                    </div>
+                                    <div class="notification-drodown-body-inner-content">
+                                      <div>
+                                        
+                                        <h3>
+                                          {{-- {{$inner_data['notification_message']}} --}}
+                                          {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                          <span> posted new photo on photos for</span>
+                                        </h3>
+                                        <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                                      </div>
+                                    <div>
+                                        <p>{{$inner_data['event_name']}}</p>
+                                        <h6 class="notification-read-dot"></h6>
+                                      </div>
+                                        {{-- <div class="notification-video-comment-wrp">
+                                        <div class="notification-video-wrp">
+                                          <a href="#" class="notification-video popup-videos">
+                                              <img src="{{$inner_data['post_image']}}" />
+                                          </a>
+                                          <div class="notification-video-content">
+                                            <p>
+                                                See detail post
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div> --}}
+                                      {{--  <div class="notification-accept-invite-btn-wrp">
+                                        <button class="accept-btn">
+                                          <i class="fa-regular fa-circle-check"></i>
+                                          Accept
+                                        </button>
+                                        <button class="decline-btn">
+                                          <i class="fa-regular fa-circle-xmark"></i>
+                                          Decline
+                                        </button>
+                                      </div> --}}
+                                    </div>
+                                  </div>
+                              @endif
                             {{-- <div class="notification-drodown-body-inner">
                               <div class="notification-drodown-body-inner-img">
                                 <img
