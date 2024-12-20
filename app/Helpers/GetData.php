@@ -250,9 +250,12 @@ function getNotificationList(){
             }
 
 
-            foreach($notificationInfo as $notify_data){
-                if ($values->event_id === $notify_data['event_id']) {
-                    $final_data[$values->event->event_name][] = $notify_data; 
+            $final_data=[];
+            if($notificationInfo!=""&&!empty($notificationInfo)){
+                foreach($notificationInfo as $notify_data){
+                    if ($values->event_id === $notify_data['event_id']) {
+                        $final_data[$values->event->event_name][] = $notify_data; 
+                    }
                 }
             }
         }
