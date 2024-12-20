@@ -4968,12 +4968,16 @@ class ApiControllerv2 extends Controller
                                     //         $updateCohostRecord->is_co_host = '1';
                                     //         $updateCohostRecord->save();
                                     //     }else{
-                                            $cohost = new EventInvitedUser();
-                                            $cohost->event_id = $eventData['event_id'];
-                                            $cohost->prefer_by = $value['prefer_by'];
-                                            $cohost->user_id = $value['id'];
-                                            $cohost->is_co_host = '1';
-                                            $cohost->save();
+                                    $alreadyCoHost = EventInvitedUser::where(['event_id' => $eventData['event_id'],'user_id' => $value['id'],'is_co_host' => '1'])->first();
+                                    if($alreadyCoHost == null){
+                                        $cohost = new EventInvitedUser();
+                                        $cohost->event_id = $eventData['event_id'];
+                                        $cohost->prefer_by = $value['prefer_by'];
+                                        $cohost->user_id = $value['id'];
+                                        $cohost->is_co_host = '1';
+                                        $cohost->save();
+                                    }
+
                                         // }
                                     // }
                                 }
