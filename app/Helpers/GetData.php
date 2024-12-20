@@ -279,12 +279,12 @@ function getNotificationList(){
                 ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
                     $query->where('parent_comment_id', NULL);
                 }]);
-        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id]);
+        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->limit(5);
 
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
         // $result = $notificationData->get();
-        $result = $notificationData->limit(5)->get();
+        $result = $notificationData->get();
         $notificationInfo = [];
             foreach ($result as $values) {
                 if ($values->user_id == $user->id) {
