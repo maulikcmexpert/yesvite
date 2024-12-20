@@ -462,11 +462,21 @@
                                 <div class="notification-drodown-body-inner-content">
                                   <div>
                                     <h3>
-                                      {{$inner_data['notification_message']}}
-                                    </h3>
+                                      {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                      @if($inner_data['rsvp_attempt']=="no_to_yes")
+                                        <span> changed RSVP response from <strong>NO</strong> to <strong>YES</strong> for </span>
+                                      @else
+                                        <span> RSVP’d <strong>YES</strong> for </span>
+                                      @endif                                    </h3>
                                     <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                   </div>
-                      
+                                  <div>
+                                    <p>
+                                      {{$inner_data['event_name']}}
+                                      <span><strong>Wall</strong></span>
+                                    </p>
+                                    <h6 class="notification-read-dot"></h6>
+                                  </div>
                                 </div>
                               </div>
                             @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="0" ) 
@@ -486,8 +496,7 @@
                                 @endif
                                 </div>
                                 <div
-                                  class="notification-drodown-body-inner-content"
-                                >
+                                  class="notification-drodown-body-inner-content">
                                   <div>
                                     <h3>
                                       {{$inner_data['first_name']}} {{$inner_data['last_name']}}
