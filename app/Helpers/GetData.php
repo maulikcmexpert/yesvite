@@ -57,198 +57,403 @@ function getTotalUnreadMessageCount()
     }
 }
 
+// function getNotificationList(){
+//     $user = Auth::guard('web')->user();
+//     // $rawData = $request->getContent();
+//     // $input = json_decode($rawData, true);
+//     // if ($input == null) {
+//     //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
+//     // }
+//     $final_data=[];
+//     $page = '1';
+//     $pages = ($page != "") ? $page : 1;
+//     $notificationData = Notification::query();
+//     $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
+//         $query->with(['post_image', 'event_post_poll'])
+//             ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
+//                 $query->where('parent_comment_id', NULL);
+//             }]);
+//     }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->get();
+//     // ->where('notification_type', '!=', 'upload_post')->where('notification_type', '!=', 'photos')->where('notification_type', '!=', 'invite')
+//     // if (isset($input['filters']) && !empty($input['filters']) && !in_array('all', $input['filters'])) {
+
+//     //     $selectedEvents = $input['filters']['events'];
+//     //     $notificationTypes = $input['filters']['notificationTypes'];
+//     //     $activityTypes = $input['filters']['activityTypes'];
+
+//     //     $notificationData->where(function ($query) use ($selectedEvents, $notificationTypes, $activityTypes) {
+//     //         // Add conditions based on selected events
+//     //         if (!empty($selectedEvents)) {
+//     //             $query->whereIn('event_id', $selectedEvents);
+//     //         }
+
+//     //         // Add conditions based on notification types (read, unread)
+//     //         if (!empty($notificationTypes) && in_array('read', $notificationTypes)) {
+//     //             $query->orWhere('read', "1");
+//     //         }
+//     //         if (!empty($notificationTypes) && in_array('unread', $notificationTypes)) {
+//     //             $query->orWhere('read', "0");
+//     //         }
+
+//     //         // Add conditions based on activity types
+//     //         if (!empty($activityTypes)) {
+
+//     //             $query->whereIn('notification_type', $activityTypes);
+//     //         }
+//     //     });
+//     // }
+//     $notificationDatacount = $notificationData->count();
+//     $total_page = ceil($notificationDatacount / 10);
+//     $result = $notificationData->limit(3)->get();
+
+//     $notificationInfo = [];
+//         foreach ($result as $values) {
+//             if ($values->user_id == $user->id) {
+//                 $notificationDetail['event_name'] = $values->event->event_name;
+//                 $images = EventImage::where('event_id', $values->event->id)->first();
+
+//                 $notificationDetail['event_image'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
+//                 $formattedDate = Carbon::parse($values->event->created_at)->format('F d, Y');
+//                 $notificationDetail['event_date'] = $formattedDate;
+//                 $notificationDetail['notification_id'] = $values->id;
+//                 $notificationDetail['notification_type'] = $values->notification_type;
+//                 $notificationDetail['user_id'] = $values->sender_id;
+//                 $notificationDetail['profile'] = (!empty($values->sender_user->profile) || $values->sender_user->profile != null) ? asset('storage/profile/' . $values->sender_user->profile) : "";
+//                 $notificationDetail['email'] = $values->sender_user->email;
+//                 $notificationDetail['first_name'] = $values->sender_user->firstname;
+//                 $notificationDetail['last_name'] = ($values->sender_user->lastname != null) ? $values->sender_user->lastname : "";
+//                 $notificationDetail['event_id'] = ($values->event_id != null) ? $values->event_id : 0;
+//                 $notificationDetail['post_id'] = ($values->post_id != null) ? $values->post_id : 0;
+//                 $notificationDetail['comment_id'] = ($values->comment_id != null) ? $values->comment_id : 0;
+//                 $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
+//                 $notificationDetail['reply_comment_id'] = 0;
+//                 $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
+//                 if (isset($postCommentDetail->main_parent_comment_id) && $postCommentDetail->main_parent_comment_id != null) {
+//                     $commentText = EventPostComment::where('id', $postCommentDetail->main_parent_comment_id)->first();
+//                     $notificationDetail['comment'] = ($commentText != null) ? $commentText->comment_text : "";
+//                     $notificationDetail['reply_comment_id'] = $values->comment_id;
+//                     $notificationDetail['comment_id'] = isset($postCommentDetail->main_parent_comment_id) ? $postCommentDetail->main_parent_comment_id : 0;
+//                     $notificationDetail['comment_reply'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
+//                 } else {
+//                     $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
+//                     $notificationDetail['comment_reply'] = "";
+//                 }
+//                 $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('storage/comment_video' . $postCommentDetail->video) : "";
+//                 $checkIsSefRect = EventPostCommentReaction::where(['user_id' => $values->user_id, 'event_post_comment_id' => $values->comment_id])->first();
+//                 $notificationDetail['is_self_reaction'] = ($checkIsSefRect != null) ? 1 : 0;
+//                 $notificationDetail['message_to_host'] = "";
+//                 $notificationDetail['rsvp_attempt'] = "";
+//                 $notificationDetail['is_co_host'] = "";
+//                 $notificationDetail['accept_as_co_host'] = "";
+//                 $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
+//                 $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
+//                 $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
+//                 $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
+//                 $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
+//                 $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
+//                 $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
+//                 $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
+//                 $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
+//                 $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
+//                 $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
+//                 if ($values->notification_type == 'invite') {
+//                     $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+//                     if ($checkIsCoHost != null) {
+//                         $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
+//                         $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
+//                     }
+//                 }
+//                 $notificationDetail['potluck_item'] = "";
+//                 $notificationDetail['count'] = "";
+//                 if ($values->notification_type == 'potluck_bring') {
+//                     $getUserPotluckItem = UserPotluckItem::with('event_potluck_category_items')->where('id', $values->user_potluck_item_id)->first();
+//                     $notificationDetail['potluck_item'] = $getUserPotluckItem->event_potluck_category_items->description;
+//                     $notificationDetail['count'] = $values->user_potluck_item_count;
+//                 }
+//                 if ($values->notification_type == 'sent_rsvp') {
+//                     $notificationDetail['message_to_host'] = ($values->rsvp_message != null && $values->rsvp_message != "") ? $values->rsvp_message : "";
+//                     $notificationDetail['rsvp_attempt'] = $values->rsvp_attempt;
+//                     $notificationDetail['video'] = ($values->rsvp_video != null && $values->rsvp_video != null) ? asset('storage/rsvp_video/' . $values->rsvp_video) : "";
+//                 }
+//                 if (isset($values->post->post_type) && $values->post->post_type == '1') {
+//                     if (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
+//                         $notificationDetail['video'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
+//                         $notificationDetail['media_type'] = $values->post->post_image[0]->type;
+//                     }
+//                 }
+//                 // if ($values->notification_type == 'reply_on_comment_post') {
+//                 //     $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
+//                 //     $notificationDetail['reply_comment_id'] = (isset($comment_reply_id->id) && $comment_reply_id->id != null) ? $comment_reply_id->id : 0;
+//                 // }
+//                 $notificationDetail['total_likes'] = (!empty($values->post->event_post_reaction_count)) ? $values->post->event_post_reaction_count : 0;
+//                 $notificationDetail['total_comments'] = (!empty($values->post->event_post_comment_count)) ? $values->post->event_post_comment_count : 0;
+//                 $postreplyCommentDetail =  EventPostComment::where(['user_id' => $values->sender_id, 'parent_comment_id' => $values->comment_id])->first();
+//                 // $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
+//                 $notificationDetail['post_image'] = "";
+//                 $notificationDetail['media_type'] = "";
+//                 $notificationDetail['is_post_by_host'] = 0;
+//                 if (isset($values->post->user_id) && isset($values->event->user_id)) {
+//                     if ($values->post->user_id == $values->event->user_id) {
+//                         $notificationDetail['is_post_by_host'] = 1;
+//                     }
+//                 }
+//                 if (isset($values->post->post_type) && $values->post->post_type == '1' && isset($values->post->post_image[0]->type)) {
+//                     $notificationDetail['post_image'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
+//                     if (isset($values->post->post_image[0]->type) &&  $values->post->post_image[0]->type == 'image') {
+//                         $notificationDetail['media_type'] = 'photo';
+//                     } elseif (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
+//                         $notificationDetail['media_type'] = (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type != '') ? $values->post->post_image[0]->type : '';
+//                     }
+//                 }
+//                 $notificationDetail['post_type'] = "";
+//                 if (isset($values->post->post_type)) {
+//                     $notificationDetail['post_type'] = $values->post->post_type;
+//                 }
+//                 $notificationDetail['post_message'] = (!empty($values->post->post_message)) ? $values->post->post_message : "";
+//                 $notificationDetail['notification_message'] = $values->notification_message;
+//                 $notificationDetail['read'] = $values->read;
+//                 $notificationDetail['post_time'] = setposttTime($values->created_at);
+//                 $notificationDetail['created_at'] = $values->created_at;
+//                 $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+//                 if (!empty($checkrsvp)) {
+//                     $notificationDetail['rsvp_status'] =  (isset($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
+//                 } else {
+//                     $notificationDetail['rsvp_status'] = '';
+//                 }
+//                 $rsvpData['rsvpd_status'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
+//                 $rsvpData['Adults'] = (!empty($values->adults) || $values->adults != null) ? $values->adults : 0;
+//                 $rsvpData['Kids']  =  (!empty($values->kids) || $values->kids != null) ? $values->kids : 0;
+
+//                 $notificationDetail['notification_id'] = $values->id;
+//                 $notificationDetail['notification_type'] = $values->notification_type;
+//                 $notificationDetail['user_id'] = $values->user_id;
+//                 $notificationDetail['sender_id'] = $values->sender_id;
+//                 $notificationDetail['notification_message'] = $values->notification_message;
+//                 $notificationDetail['read'] = $values->read;
+//                 $notificationDetail['rsvp_detail'] = $rsvpData;
+//                 $totalEvent =  Event::where('user_id', $values->sender_user->id)->count();
+//                 $totalEventPhotos =  EventPost::where(['user_id' => $values->sender_user->id, 'post_type' => '1'])->count();
+//                 $comments =  EventPostComment::where('user_id', $values->sender_user->id)->count();
+//                 $notificationDetail['user_profile'] = [
+//                     'id' => $values->sender_user->id,
+//                     'profile' => empty($values->sender_user->profile) ? "" : asset('storage/profile/' . $values->sender_user->profile),
+//                     'bg_profile' => empty($values->sender_user->bg_profile) ? "" : asset('storage/bg_profile/' . $values->sender_user->bg_profile),
+//                     'gender' => ($values->sender_user->gender != NULL) ? $values->sender_user->gender : "",
+//                     'username' => $values->sender_user->firstname . ' ' . $values->sender_user->lastname,
+//                     'location' => ($values->sender_user->city != NULL) ? $values->sender_user->city : "",
+//                     'about_me' => ($values->sender_user->about_me != NULL) ? $values->sender_user->about_me : "",
+//                     'created_at' => empty($values->sender_user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($values->sender_user->created_at))),
+//                     'total_events' => $totalEvent,
+//                     'visible' => $values->sender_user->visible,
+//                     'comments' => $comments,
+//                 ];
+//                 $notificationInfo[$values->event_id] = $notificationDetail;
+//             }
+
+
+//                 foreach($notificationInfo as $notify_data){
+//                     if ($values->event_id === $notify_data['event_id']) {
+//                         $final_data[$values->event->event_name][] = $notify_data; 
+//                     }
+//                 }
+            
+//         }
+//     $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
+    
+//     return $final_data;
+// }
+
 function getNotificationList(){
     $user = Auth::guard('web')->user();
-    // $rawData = $request->getContent();
-    // $input = json_decode($rawData, true);
-    // if ($input == null) {
-    //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
-    // }
-    $final_data=[];
-    $page = '1';
-    $pages = ($page != "") ? $page : 1;
-    $notificationData = Notification::query();
-    $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
-        $query->with(['post_image', 'event_post_poll'])
-            ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
-                $query->where('parent_comment_id', NULL);
-            }]);
-    }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->get();
-    // ->where('notification_type', '!=', 'upload_post')->where('notification_type', '!=', 'photos')->where('notification_type', '!=', 'invite')
-    // if (isset($input['filters']) && !empty($input['filters']) && !in_array('all', $input['filters'])) {
+        // $rawData = $request->getContent();
+        // $input = json_decode($rawData, true);
+        // if ($input == null) {
+        //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        // }
+        $page = '1';
+        $pages = ($page != "") ? $page : 1;
+        $notificationData = Notification::query();
+        $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
+            $query->with(['post_image', 'event_post_poll'])
+                ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
+                    $query->where('parent_comment_id', NULL);
+                }]);
+        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->get();
+        // ->where('notification_type', '!=', 'upload_post')->where('notification_type', '!=', 'photos')->where('notification_type', '!=', 'invite')
+        // if (isset($input['filters']) && !empty($input['filters']) && !in_array('all', $input['filters'])) {
 
-    //     $selectedEvents = $input['filters']['events'];
-    //     $notificationTypes = $input['filters']['notificationTypes'];
-    //     $activityTypes = $input['filters']['activityTypes'];
+        //     $selectedEvents = $input['filters']['events'];
+        //     $notificationTypes = $input['filters']['notificationTypes'];
+        //     $activityTypes = $input['filters']['activityTypes'];
 
-    //     $notificationData->where(function ($query) use ($selectedEvents, $notificationTypes, $activityTypes) {
-    //         // Add conditions based on selected events
-    //         if (!empty($selectedEvents)) {
-    //             $query->whereIn('event_id', $selectedEvents);
-    //         }
+        //     $notificationData->where(function ($query) use ($selectedEvents, $notificationTypes, $activityTypes) {
+        //         // Add conditions based on selected events
+        //         if (!empty($selectedEvents)) {
+        //             $query->whereIn('event_id', $selectedEvents);
+        //         }
 
-    //         // Add conditions based on notification types (read, unread)
-    //         if (!empty($notificationTypes) && in_array('read', $notificationTypes)) {
-    //             $query->orWhere('read', "1");
-    //         }
-    //         if (!empty($notificationTypes) && in_array('unread', $notificationTypes)) {
-    //             $query->orWhere('read', "0");
-    //         }
+        //         // Add conditions based on notification types (read, unread)
+        //         if (!empty($notificationTypes) && in_array('read', $notificationTypes)) {
+        //             $query->orWhere('read', "1");
+        //         }
+        //         if (!empty($notificationTypes) && in_array('unread', $notificationTypes)) {
+        //             $query->orWhere('read', "0");
+        //         }
 
-    //         // Add conditions based on activity types
-    //         if (!empty($activityTypes)) {
+        //         // Add conditions based on activity types
+        //         if (!empty($activityTypes)) {
 
-    //             $query->whereIn('notification_type', $activityTypes);
-    //         }
-    //     });
-    // }
-    $notificationDatacount = $notificationData->count();
-    $total_page = ceil($notificationDatacount / 10);
-    $result = $notificationData->limit(3)->get();
+        //             $query->whereIn('notification_type', $activityTypes);
+        //         }
+        //     });
+        // }
+        $notificationDatacount = $notificationData->count();
+        $total_page = ceil($notificationDatacount / 10);
+        $result = $notificationData->get();
 
-    $notificationInfo = [];
-        foreach ($result as $values) {
-            if ($values->user_id == $user->id) {
-                $notificationDetail['event_name'] = $values->event->event_name;
-                $images = EventImage::where('event_id', $values->event->id)->first();
+        $notificationInfo = [];
+            foreach ($result as $values) {
+                if ($values->user_id == $user->id) {
+                    $notificationDetail['event_name'] = $values->event->event_name;
+                    $images = EventImage::where('event_id', $values->event->id)->first();
 
-                $notificationDetail['event_image'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
-                $formattedDate = Carbon::parse($values->event->created_at)->format('F d, Y');
-                $notificationDetail['event_date'] = $formattedDate;
-                $notificationDetail['notification_id'] = $values->id;
-                $notificationDetail['notification_type'] = $values->notification_type;
-                $notificationDetail['user_id'] = $values->sender_id;
-                $notificationDetail['profile'] = (!empty($values->sender_user->profile) || $values->sender_user->profile != null) ? asset('storage/profile/' . $values->sender_user->profile) : "";
-                $notificationDetail['email'] = $values->sender_user->email;
-                $notificationDetail['first_name'] = $values->sender_user->firstname;
-                $notificationDetail['last_name'] = ($values->sender_user->lastname != null) ? $values->sender_user->lastname : "";
-                $notificationDetail['event_id'] = ($values->event_id != null) ? $values->event_id : 0;
-                $notificationDetail['post_id'] = ($values->post_id != null) ? $values->post_id : 0;
-                $notificationDetail['comment_id'] = ($values->comment_id != null) ? $values->comment_id : 0;
-                $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
-                $notificationDetail['reply_comment_id'] = 0;
-                $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
-                if (isset($postCommentDetail->main_parent_comment_id) && $postCommentDetail->main_parent_comment_id != null) {
-                    $commentText = EventPostComment::where('id', $postCommentDetail->main_parent_comment_id)->first();
-                    $notificationDetail['comment'] = ($commentText != null) ? $commentText->comment_text : "";
-                    $notificationDetail['reply_comment_id'] = $values->comment_id;
-                    $notificationDetail['comment_id'] = isset($postCommentDetail->main_parent_comment_id) ? $postCommentDetail->main_parent_comment_id : 0;
-                    $notificationDetail['comment_reply'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
-                } else {
-                    $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
-                    $notificationDetail['comment_reply'] = "";
-                }
-                $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('storage/comment_video' . $postCommentDetail->video) : "";
-                $checkIsSefRect = EventPostCommentReaction::where(['user_id' => $values->user_id, 'event_post_comment_id' => $values->comment_id])->first();
-                $notificationDetail['is_self_reaction'] = ($checkIsSefRect != null) ? 1 : 0;
-                $notificationDetail['message_to_host'] = "";
-                $notificationDetail['rsvp_attempt'] = "";
-                $notificationDetail['is_co_host'] = "";
-                $notificationDetail['accept_as_co_host'] = "";
-                $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
-                $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
-                $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
-                $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
-                $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
-                $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
-                $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
-                $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
-                $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
-                $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
-                $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
-                if ($values->notification_type == 'invite') {
-                    $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
-                    if ($checkIsCoHost != null) {
-                        $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
-                        $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
+                    $notificationDetail['event_image'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
+                    // $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
+
+                    $notificationDetail['notification_id'] = $values->id;
+                    $notificationDetail['notification_type'] = $values->notification_type;
+                    $notificationDetail['user_id'] = $values->sender_id;
+                    $notificationDetail['profile'] = (!empty($values->sender_user->profile) || $values->sender_user->profile != null) ? asset('storage/profile/' . $values->sender_user->profile) : "";
+                    $notificationDetail['email'] = $values->sender_user->email;
+                    $notificationDetail['first_name'] = $values->sender_user->firstname;
+                    $notificationDetail['last_name'] = ($values->sender_user->lastname != null) ? $values->sender_user->lastname : "";
+                    $notificationDetail['event_id'] = ($values->event_id != null) ? $values->event_id : 0;
+                    $notificationDetail['post_id'] = ($values->post_id != null) ? $values->post_id : 0;
+                    $notificationDetail['comment_id'] = ($values->comment_id != null) ? $values->comment_id : 0;
+                    $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
+                    $notificationDetail['reply_comment_id'] = 0;
+                    $postCommentDetail =  EventPostComment::where(['id' => $values->comment_id])->first();
+                    if (isset($postCommentDetail->main_parent_comment_id) && $postCommentDetail->main_parent_comment_id != null) {
+                        $commentText = EventPostComment::where('id', $postCommentDetail->main_parent_comment_id)->first();
+                        $notificationDetail['comment'] = ($commentText != null) ? $commentText->comment_text : "";
+                        $notificationDetail['reply_comment_id'] = $values->comment_id;
+                        $notificationDetail['comment_id'] = isset($postCommentDetail->main_parent_comment_id) ? $postCommentDetail->main_parent_comment_id : 0;
+                        $notificationDetail['comment_reply'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
+                    } else {
+                        $notificationDetail['comment'] = ($postCommentDetail != null) ? $postCommentDetail->comment_text : "";
+                        $notificationDetail['comment_reply'] = "";
                     }
-                }
-                $notificationDetail['potluck_item'] = "";
-                $notificationDetail['count'] = "";
-                if ($values->notification_type == 'potluck_bring') {
-                    $getUserPotluckItem = UserPotluckItem::with('event_potluck_category_items')->where('id', $values->user_potluck_item_id)->first();
-                    $notificationDetail['potluck_item'] = $getUserPotluckItem->event_potluck_category_items->description;
-                    $notificationDetail['count'] = $values->user_potluck_item_count;
-                }
-                if ($values->notification_type == 'sent_rsvp') {
-                    $notificationDetail['message_to_host'] = ($values->rsvp_message != null && $values->rsvp_message != "") ? $values->rsvp_message : "";
-                    $notificationDetail['rsvp_attempt'] = $values->rsvp_attempt;
-                    $notificationDetail['video'] = ($values->rsvp_video != null && $values->rsvp_video != null) ? asset('storage/rsvp_video/' . $values->rsvp_video) : "";
-                }
-                if (isset($values->post->post_type) && $values->post->post_type == '1') {
-                    if (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
-                        $notificationDetail['video'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
-                        $notificationDetail['media_type'] = $values->post->post_image[0]->type;
+                    $notificationDetail['video'] = ($postCommentDetail != null && $postCommentDetail->video != null) ? asset('storage/comment_video' . $postCommentDetail->video) : "";
+                    $checkIsSefRect = EventPostCommentReaction::where(['user_id' => $values->user_id, 'event_post_comment_id' => $values->comment_id])->first();
+                    $notificationDetail['is_self_reaction'] = ($checkIsSefRect != null) ? 1 : 0;
+                    $notificationDetail['message_to_host'] = "";
+                    $notificationDetail['rsvp_attempt'] = "";
+                    $notificationDetail['is_co_host'] = "";
+                    $notificationDetail['accept_as_co_host'] = "";
+                    $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
+                    $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
+                    $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
+                    $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
+                    $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
+                    $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
+                    $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
+                    $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
+                    $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
+                    $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
+                    $notificationDetail['is_event_owner'] = ($values->event->user_id == $user->id) ? 1 : 0;
+                    if ($values->notification_type == 'invite') {
+                        $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+                        if ($checkIsCoHost != null) {
+                            $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
+                            $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
+                        }
                     }
-                }
-                // if ($values->notification_type == 'reply_on_comment_post') {
-                //     $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
-                //     $notificationDetail['reply_comment_id'] = (isset($comment_reply_id->id) && $comment_reply_id->id != null) ? $comment_reply_id->id : 0;
-                // }
-                $notificationDetail['total_likes'] = (!empty($values->post->event_post_reaction_count)) ? $values->post->event_post_reaction_count : 0;
-                $notificationDetail['total_comments'] = (!empty($values->post->event_post_comment_count)) ? $values->post->event_post_comment_count : 0;
-                $postreplyCommentDetail =  EventPostComment::where(['user_id' => $values->sender_id, 'parent_comment_id' => $values->comment_id])->first();
-                // $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
-                $notificationDetail['post_image'] = "";
-                $notificationDetail['media_type'] = "";
-                $notificationDetail['is_post_by_host'] = 0;
-                if (isset($values->post->user_id) && isset($values->event->user_id)) {
-                    if ($values->post->user_id == $values->event->user_id) {
-                        $notificationDetail['is_post_by_host'] = 1;
+                    $notificationDetail['potluck_item'] = "";
+                    $notificationDetail['count'] = "";
+                    if ($values->notification_type == 'potluck_bring') {
+                        $getUserPotluckItem = UserPotluckItem::with('event_potluck_category_items')->where('id', $values->user_potluck_item_id)->first();
+                        $notificationDetail['potluck_item'] = $getUserPotluckItem->event_potluck_category_items->description;
+                        $notificationDetail['count'] = $values->user_potluck_item_count;
                     }
-                }
-                if (isset($values->post->post_type) && $values->post->post_type == '1' && isset($values->post->post_image[0]->type)) {
-                    $notificationDetail['post_image'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
-                    if (isset($values->post->post_image[0]->type) &&  $values->post->post_image[0]->type == 'image') {
-                        $notificationDetail['media_type'] = 'photo';
-                    } elseif (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
-                        $notificationDetail['media_type'] = (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type != '') ? $values->post->post_image[0]->type : '';
+                    if ($values->notification_type == 'sent_rsvp') {
+                        $notificationDetail['message_to_host'] = ($values->rsvp_message != null && $values->rsvp_message != "") ? $values->rsvp_message : "";
+                        $notificationDetail['rsvp_attempt'] = $values->rsvp_attempt;
+                        $notificationDetail['video'] = ($values->rsvp_video != null && $values->rsvp_video != null) ? asset('storage/rsvp_video/' . $values->rsvp_video) : "";
                     }
-                }
-                $notificationDetail['post_type'] = "";
-                if (isset($values->post->post_type)) {
-                    $notificationDetail['post_type'] = $values->post->post_type;
-                }
-                $notificationDetail['post_message'] = (!empty($values->post->post_message)) ? $values->post->post_message : "";
-                $notificationDetail['notification_message'] = $values->notification_message;
-                $notificationDetail['read'] = $values->read;
-                $notificationDetail['post_time'] = setposttTime($values->created_at);
-                $notificationDetail['created_at'] = $values->created_at;
-                $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
-                if (!empty($checkrsvp)) {
-                    $notificationDetail['rsvp_status'] =  (isset($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
-                } else {
-                    $notificationDetail['rsvp_status'] = '';
-                }
-                $rsvpData['rsvpd_status'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
-                $rsvpData['Adults'] = (!empty($values->adults) || $values->adults != null) ? $values->adults : 0;
-                $rsvpData['Kids']  =  (!empty($values->kids) || $values->kids != null) ? $values->kids : 0;
+                    if (isset($values->post->post_type) && $values->post->post_type == '1') {
+                        if (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
+                            $notificationDetail['video'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
+                            $notificationDetail['media_type'] = $values->post->post_image[0]->type;
+                        }
+                    }
+                    // if ($values->notification_type == 'reply_on_comment_post') {
+                    //     $comment_reply_id = EventPostComment::where('parent_comment_id', $values->comment_id)->orderBy('id', 'DESC')->select('id')->first();
+                    //     $notificationDetail['reply_comment_id'] = (isset($comment_reply_id->id) && $comment_reply_id->id != null) ? $comment_reply_id->id : 0;
+                    // }
+                    $notificationDetail['total_likes'] = (!empty($values->post->event_post_reaction_count)) ? $values->post->event_post_reaction_count : 0;
+                    $notificationDetail['total_comments'] = (!empty($values->post->event_post_comment_count)) ? $values->post->event_post_comment_count : 0;
+                    $postreplyCommentDetail =  EventPostComment::where(['user_id' => $values->sender_id, 'parent_comment_id' => $values->comment_id])->first();
+                    // $notificationDetail['comment_reply'] = ($values->notification_type == 'reply_on_comment_post' && $postreplyCommentDetail != null) ? $postreplyCommentDetail->comment_text : "";
+                    $notificationDetail['post_image'] = "";
+                    $notificationDetail['media_type'] = "";
+                    $notificationDetail['is_post_by_host'] = 0;
+                    if (isset($values->post->user_id) && isset($values->event->user_id)) {
+                        if ($values->post->user_id == $values->event->user_id) {
+                            $notificationDetail['is_post_by_host'] = 1;
+                        }
+                    }
+                    if (isset($values->post->post_type) && $values->post->post_type == '1' && isset($values->post->post_image[0]->type)) {
+                        $notificationDetail['post_image'] = asset('storage/post_image/' . $values->post->post_image[0]->post_image);
+                        if (isset($values->post->post_image[0]->type) &&  $values->post->post_image[0]->type == 'image') {
+                            $notificationDetail['media_type'] = 'photo';
+                        } elseif (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type == 'video') {
+                            $notificationDetail['media_type'] = (isset($values->post->post_image[0]->type) && $values->post->post_image[0]->type != '') ? $values->post->post_image[0]->type : '';
+                        }
+                    }
+                    $notificationDetail['post_type'] = "";
+                    if (isset($values->post->post_type)) {
+                        $notificationDetail['post_type'] = $values->post->post_type;
+                    }
+                    $notificationDetail['post_message'] = (!empty($values->post->post_message)) ? $values->post->post_message : "";
+                    $notificationDetail['notification_message'] = $values->notification_message;
+                    $notificationDetail['read'] = $values->read;
+                    $notificationDetail['post_time'] = $this->setpostTime($values->created_at);
+                    $notificationDetail['created_at'] = $values->created_at;
+                    $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+                    if (!empty($checkrsvp)) {
+                        $notificationDetail['rsvp_status'] =  (isset($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
+                    } else {
+                        $notificationDetail['rsvp_status'] = '';
+                    }
+                    $rsvpData['rsvpd_status'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
+                    $rsvpData['Adults'] = (!empty($values->adults) || $values->adults != null) ? $values->adults : 0;
+                    $rsvpData['Kids']  =  (!empty($values->kids) || $values->kids != null) ? $values->kids : 0;
 
-                $notificationDetail['notification_id'] = $values->id;
-                $notificationDetail['notification_type'] = $values->notification_type;
-                $notificationDetail['user_id'] = $values->user_id;
-                $notificationDetail['sender_id'] = $values->sender_id;
-                $notificationDetail['notification_message'] = $values->notification_message;
-                $notificationDetail['read'] = $values->read;
-                $notificationDetail['rsvp_detail'] = $rsvpData;
-                $totalEvent =  Event::where('user_id', $values->sender_user->id)->count();
-                $totalEventPhotos =  EventPost::where(['user_id' => $values->sender_user->id, 'post_type' => '1'])->count();
-                $comments =  EventPostComment::where('user_id', $values->sender_user->id)->count();
-                $notificationDetail['user_profile'] = [
-                    'id' => $values->sender_user->id,
-                    'profile' => empty($values->sender_user->profile) ? "" : asset('storage/profile/' . $values->sender_user->profile),
-                    'bg_profile' => empty($values->sender_user->bg_profile) ? "" : asset('storage/bg_profile/' . $values->sender_user->bg_profile),
-                    'gender' => ($values->sender_user->gender != NULL) ? $values->sender_user->gender : "",
-                    'username' => $values->sender_user->firstname . ' ' . $values->sender_user->lastname,
-                    'location' => ($values->sender_user->city != NULL) ? $values->sender_user->city : "",
-                    'about_me' => ($values->sender_user->about_me != NULL) ? $values->sender_user->about_me : "",
-                    'created_at' => empty($values->sender_user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($values->sender_user->created_at))),
-                    'total_events' => $totalEvent,
-                    'visible' => $values->sender_user->visible,
-                    'comments' => $comments,
-                ];
-                $notificationInfo[$values->event_id] = $notificationDetail;
-            }
+                    $notificationDetail['notification_id'] = $values->id;
+                    $notificationDetail['notification_type'] = $values->notification_type;
+                    $notificationDetail['user_id'] = $values->user_id;
+                    $notificationDetail['sender_id'] = $values->sender_id;
+                    $notificationDetail['notification_message'] = $values->notification_message;
+                    $notificationDetail['read'] = $values->read;
+                    $notificationDetail['rsvp_detail'] = $rsvpData;
+                    $totalEvent =  Event::where('user_id', $values->sender_user->id)->count();
+                    $totalEventPhotos =  EventPost::where(['user_id' => $values->sender_user->id, 'post_type' => '1'])->count();
+                    $comments =  EventPostComment::where('user_id', $values->sender_user->id)->count();
+                    $notificationDetail['user_profile'] = [
+                        'id' => $values->sender_user->id,
+                        'profile' => empty($values->sender_user->profile) ? "" : asset('storage/profile/' . $values->sender_user->profile),
+                        'bg_profile' => empty($values->sender_user->bg_profile) ? "" : asset('storage/bg_profile/' . $values->sender_user->bg_profile),
+                        'gender' => ($values->sender_user->gender != NULL) ? $values->sender_user->gender : "",
+                        'username' => $values->sender_user->firstname . ' ' . $values->sender_user->lastname,
+                        'location' => ($values->sender_user->city != NULL) ? $values->sender_user->city : "",
+                        'about_me' => ($values->sender_user->about_me != NULL) ? $values->sender_user->about_me : "",
+                        'created_at' => empty($values->sender_user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($values->sender_user->created_at))),
+                        'total_events' => $totalEvent,
+                        'visible' => $values->sender_user->visible,
+                        'comments' => $comments,
+                    ];
+                    $notificationInfo[$values->event_id] = $notificationDetail;
+                }
 
 
                 foreach($notificationInfo as $notify_data){
@@ -256,11 +461,10 @@ function getNotificationList(){
                         $final_data[$values->event->event_name][] = $notify_data; 
                     }
                 }
-            
-        }
-    $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
-    
-    return $final_data;
+            }
+        $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
+        // dd($notificationInfo);
+        return $final_data;
 }
 function setposttTime($dateTime)
 {

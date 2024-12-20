@@ -552,8 +552,8 @@
                                   </div>
                                 </div>
                               </div>
-                            @elseif($inner_data['notification_type']=="photos") 
-                                  <div class="notification-drodown-body-inner">
+                            @elseif($inner_data['notification_type']=="photos")   
+                                <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
                                       @php
                                                   $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
