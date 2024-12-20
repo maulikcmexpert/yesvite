@@ -12067,6 +12067,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['rsvp_attempt'] = "";
                 $notificationDetail['is_co_host'] = "";
                 $notificationDetail['accept_as_co_host'] = "";
+                $notificationDetail['event_invited_user_id'] = "";
 
                 $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
                 $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
@@ -12093,6 +12094,7 @@ class ApiControllerv2 extends Controller
 
                         $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
                         $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
+                        $notificationDetail['event_invited_user_id'] = $values->event_invited_user_id;
                     }
                     
                 }
