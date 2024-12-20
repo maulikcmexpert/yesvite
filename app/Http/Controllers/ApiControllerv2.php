@@ -6805,7 +6805,8 @@ class ApiControllerv2 extends Controller
 
                     'sender_id' => $user->id,
                     'event_id' => $input['event_id'],
-                    'status' => $input['status']
+                    'status' => $input['status'],
+                    'notification_id' => $input['notification_id']
                 ];
 
                 DB::commit();
