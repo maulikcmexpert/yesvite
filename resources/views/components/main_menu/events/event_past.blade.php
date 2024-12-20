@@ -67,7 +67,7 @@
                         </div>
                         <div class="home-upcoming-events-card-left-profile-content">
                             <h3>{{$pastEvent['event_name']}}</h3>
-                            <p>{{$pastEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$pastEvent['post_time']}}</span></p>
+                            <p class="host-name-{{$colorClass}}">{{$pastEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$pastEvent['post_time']}}</span></p>
                         </div>
                       </a>
                     <ul class="home-upcoming-events-card-left-detail">

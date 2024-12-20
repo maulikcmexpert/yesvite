@@ -196,17 +196,24 @@
                     id="collapseOne{{$i}}"
                     class="accordion-collapse collapse"
                     data-bs-parent="#accordionExample">
+                    
                     @foreach ($value as $inner_data )
                       
                           <div class="accordion-body">
                             @if($inner_data['notification_type']=="invite")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      <img
-                                        src="{{$inner_data['profile']}}"
-                                        alt=""
-                                        loading="lazy"
-                                      />
+                                      {{-- @php
+                                                  $initials = strtoupper($inner_data['firstname'][0]) . strtoupper($inner_data['lastname'][0]);
+                                                  $fontColor = "fontcolor" . strtoupper($inner_data['firstname'][0]);
+                                                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                      @endphp
+                                      @if($profileData['profile']!="") --}}
+                                      <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                     {{-- @else
+                                       {!! $userProfile !!}         
+                                    <span class="active-dot"></span>
+                                    @endif --}}
                                       <span class="active-dot"></span>
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
@@ -238,12 +245,17 @@
                             @elseif($inner_data['notification_type']=="update_event")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      <img
-                                        src="{{$inner_data['profile']}}"
-                                        alt=""
-                                        loading="lazy"
-
-                                      />
+                                      {{-- @php
+                                                  $initials = strtoupper($inner_data['firstname'][0]) . strtoupper($inner_data['lastname'][0]);
+                                                  $fontColor = "fontcolor" . strtoupper($inner_data['firstname'][0]);
+                                                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                      @endphp --}}
+                                      {{-- @if($profileData['profile']!="") --}}
+                                      <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                     {{-- @else
+                                       {!! $userProfile !!}         
+                                    <span class="active-dot"></span>
+                                    @endif --}}
                                       <span class="active-dot"></span>
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
