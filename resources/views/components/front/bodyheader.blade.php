@@ -210,11 +210,12 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                      <span class="active-dot"></span>
+
                                      @else
                                        {!! $userProfile !!}         
                                     <span class="active-dot"></span>
                                     @endif
-                                      <span class="active-dot"></span>
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
                                       <div>
@@ -322,13 +323,19 @@
                             @elseif($inner_data['notification_type']=="comment_post")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      <img
-                                        src="./assets/img/header-profile-img.png"
-                                        alt=""
-                                        loading="lazy"
+                                      @php
+                                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                      @endphp
+                                      @if($inner_data['profile']!="")
+                                          <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                          <span class="active-dot"></span>
 
-                                      />
-                                      <span class="active-dot"></span>
+                                      @else
+                                          {!! $userProfile !!}         
+                                        <span class="active-dot"></span>
+                                      @endif
                                     </div>
                                     <div
                                       class="notification-drodown-body-inner-content"
