@@ -194,7 +194,7 @@ class AuthController extends Controller
             $storeUser->password_updated_date =  date('Y-m-d');
             $storeUser->remember_token =   $randomString;
             $storeUser->register_type =   'web normal register';
-            $storeUser->coins =  30;
+            $storeUser->coins =  env('DEFAULT_COIN');
             $storeUser->save();
             DB::commit();
             $userDetails = User::where('id', $storeUser->id)->first();
