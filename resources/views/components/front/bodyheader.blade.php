@@ -589,13 +589,8 @@
                                             <video>
                                               <img src="{{$inner_data['post_image']}}" />
                                             </video>
-                                            {{-- <span class="notification-video_play-icon"
-                                              ><img
-                                                src="./assets/img/notification-video_play-icon.png"
-                                                alt=""
-                                                loading="lazy"
-
-                                            /></span> --}}
+                                            <span class="notification-video_play-icon"
+                                              ></span>
                                           </a>
                                           <div class="notification-video-content">
                                             <p>
