@@ -279,14 +279,14 @@ function getNotificationList(){
                 ->withcount(['event_post_reaction', 'event_post_comment' => function ($query) {
                     $query->where('parent_comment_id', NULL);
                 }]);
-        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->limit(5);
+        }])->orderBy('id', 'DESC')->where(['user_id' => $user->id])->limit(5)->get();
 
-        $notificationDatacount = $notificationData->count();
-        $total_page = ceil($notificationDatacount / 10);
+        // $notificationDatacount = $notificationData->count();
+        // $total_page = ceil($notificationDatacount / 10);
+        // // $result = $notificationData->get();
         // $result = $notificationData->get();
-        $result = $notificationData->get();
         $notificationInfo = [];
-            foreach ($result as $values) {
+            foreach ($notificationData as $values) {
                 if ($values->user_id == $user->id) {
                     $notificationDetail['event_name'] = $values->event->event_name;
                     $images = EventImage::where('event_id', $values->event->id)->first();
