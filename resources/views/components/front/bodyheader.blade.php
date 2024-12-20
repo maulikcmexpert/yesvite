@@ -586,11 +586,7 @@
                                         <div class="notification-video-comment-wrp">
                                         <div class="notification-video-wrp">
                                           <a href="#" class="notification-video popup-videos">
-                                            <video>
                                               <img src="{{$inner_data['post_image']}}" />
-                                            </video>
-                                            <span class="notification-video_play-icon"
-                                              ></span>
                                           </a>
                                           <div class="notification-video-content">
                                             <p>
