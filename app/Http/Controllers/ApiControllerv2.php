@@ -14079,7 +14079,7 @@ class ApiControllerv2 extends Controller
             if (isset($input['search'])) {
                 $search = $input['search'];
             }
-
+            $total_page = 0;
             $groupCount = Coin_transactions::with(['users','event','user_subscriptions'])->where('user_id', $this->user->id)
                 ->orderBy('id','DESC')
                 ->count();
