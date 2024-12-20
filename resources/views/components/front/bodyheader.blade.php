@@ -476,14 +476,14 @@
                                 >
                                   <div>
                                     <h3>
-                                      James Clark
+                                      {{$inner_data['first_name']}} {{$inner_data['last_name']}}
                                       <span> RSVP’d <strong>NO</strong> for </span>
                                     </h3>
-                                    <h6 class="notification-time-count">10min</h6>
+                                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                   </div>
                                   <div>
                                     <p>
-                                      Sarah’s Birthday
+                                      {{$inner_data['event_name']}}
                                       <span><strong>Wall</strong></span>
                                     </p>
                                     <h6 class="notification-read-dot"></h6>
