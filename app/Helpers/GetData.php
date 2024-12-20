@@ -251,13 +251,12 @@ function getNotificationList(){
             }
 
 
-            if($notificationInfo!=""&&!empty($notificationInfo)){
                 foreach($notificationInfo as $notify_data){
                     if ($values->event_id === $notify_data['event_id']) {
                         $final_data[$values->event->event_name][] = $notify_data; 
                     }
                 }
-            }
+            
         }
     $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
     
