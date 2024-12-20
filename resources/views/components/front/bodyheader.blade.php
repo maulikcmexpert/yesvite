@@ -477,7 +477,11 @@
                                   <div>
                                     <h3>
                                       {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                      <span> RSVP’d <strong>NO</strong> for </span>
+                                      @if($inner_data[['rsvp_attempt']=="no_to_yes"])
+                                        <span> changed RSVP response from <strong>NO</strong>to<strong>YES</strong> for </span>
+                                      @else
+                                        <span> RSVP’d <strong>NO</strong> for </span>
+                                      @endif
                                     </h3>
                                     <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                   </div>
