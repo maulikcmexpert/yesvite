@@ -35,11 +35,11 @@
                             <div class="user-name">
                                 <div class="d-flex align-items-center">
                                     <h3>{{$user->firstname.' '.$user->lastname}}</h3>
-                                    @if($user->subscribe_status == false)
+                                    {{-- @if($user->subscribe_status == false)
                                     <span class="free">Free</span>
                                     @else
                                     <span>Pro Year</span>
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <a href="mailto:{{$user->email}}">{{$user->email}}</a>
                                 <p>Member Since: {{$user->join_date}}</p>

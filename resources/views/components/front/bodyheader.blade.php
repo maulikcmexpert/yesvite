@@ -1044,7 +1044,7 @@
             <ul>
               <li><a href="{{route('profile')}}">Profile</a></li>
               <li><a href="{{route('profile.account_settings')}}">Account Settings</a></li>
-              <li><a href="#">Pro Subscription</a></li>
+              {{-- <li><a href="#">Pro Subscription</a></li> --}}
             </ul>
             <div class="header-profile-button-wrp">
                 <a href="#"><span><svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
