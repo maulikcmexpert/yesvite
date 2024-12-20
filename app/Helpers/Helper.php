@@ -442,9 +442,9 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'accept_reject_co_host') {
-        if(isset($postData['notification_id']) && $postData['notification_id'] != '' ){
-            Notification::where('id',$postData['notification_id'])->delete();
-        }
+        // if(isset($postData['notification_id']) && $postData['notification_id'] != '' ){
+        //     Notification::where('id',$postData['notification_id'])->first();
+        // }
         $getEventOwner = Event::with('event_settings')->where('id', $postData['event_id'])->first();
         if ($postData['status'] == '1') {
             $notification_message = $senderData->firstname . ' '  . $senderData->lastname . ' $accepted your invitation to co-host';
