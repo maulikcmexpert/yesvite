@@ -203,17 +203,17 @@
                             @if($inner_data['notification_type']=="invite")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      {{-- @php
-                                                  $initials = strtoupper($inner_data['firstname'][0]) . strtoupper($inner_data['lastname'][0]);
-                                                  $fontColor = "fontcolor" . strtoupper($inner_data['firstname'][0]);
+                                      @php
+                                                  $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                                  $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
                                                   $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
                                       @endphp
-                                      @if($profileData['profile']!="") --}}
+                                      @if($profileData['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     {{-- @else
+                                     @else
                                        {!! $userProfile !!}         
                                     <span class="active-dot"></span>
-                                    @endif --}}
+                                    @endif
                                       <span class="active-dot"></span>
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
@@ -245,18 +245,18 @@
                             @elseif($inner_data['notification_type']=="update_event")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      {{-- @php
-                                                  $initials = strtoupper($inner_data['firstname'][0]) . strtoupper($inner_data['lastname'][0]);
-                                                  $fontColor = "fontcolor" . strtoupper($inner_data['firstname'][0]);
+                                      @php
+                                                  $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                                  $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
                                                   $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                                      @endphp --}}
-                                      {{-- @if($profileData['profile']!="") --}}
+                                      @endphp
+                                      @if($profileData['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     {{-- @else
+                                     @else
                                        {!! $userProfile !!}         
                                     <span class="active-dot"></span>
-                                    @endif --}}
-                                      <span class="active-dot"></span>
+                                    @endif
+                                      {{-- <span class="active-dot"></span> --}}
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
                                       <div>
