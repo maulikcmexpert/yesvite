@@ -261,16 +261,16 @@
                                     <div class="notification-drodown-body-inner-content">
                                       <div>
                                         <h3>
-                                          {{$inner_data['notification_message']}}
-                                          {{-- James Clark
-                                          <span> Invited you to co-host</span> --}}
+                                          {{-- {{$inner_data['notification_message']}} --}}
+                                          {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                          <span> Has updated the event details for</span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
-                                      {{-- <div>
-                                        <p>{{$inner_data['event_name']}} <span>Accept? </span></p>
+                                      <div>
+                                        <p>{{$inner_data['event_name']}}</p>
                                         <h6 class="notification-read-dot"></h6>
-                                      </div> --}}
+                                      </div>
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
