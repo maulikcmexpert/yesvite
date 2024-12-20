@@ -185,6 +185,7 @@ function sendNotification($notificationType, $postData)
                     $notification->sender_id = $postData['sender_id'];
                     $notification->notification_message = $notification_message;
                     $notification->is_co_host = $value->is_co_host;
+                    $notification->event_invited_user_id = $value->id;
     
                     if ($notification->save()) {
     
