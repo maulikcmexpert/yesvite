@@ -335,19 +335,19 @@
                                     >
                                       <div>
                                         <h3>
-                                          James Clark
+                                          {{$inner_data['first_name']}} {{$inner_data['last_name']}}
                                           <span> commented on your post on </span>
                                         </h3>
-                                        <h6 class="notification-time-count">10min</h6>
+                                        <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
                                         <p>
-                                          Sarah’s Birthday
+                                          {{$inner_data['event_name']}}
                                           <span><strong>Wall</strong></span>
                                         </p>
                                         <h6 class="notification-read-dot"></h6>
                                       </div>
-                                      <div class="notification-video-comment-wrp">
+                                      {{-- <div class="notification-video-comment-wrp">
                                         <h6>That’s was great! love it ❤️</h6>
                                         <div class="notification-video-wrp">
                                           <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
@@ -370,7 +370,7 @@
                                             </p>
                                           </div>
                                         </div>
-                                      </div>
+                                      </div> --}}
                                     </div>
                                   </div>
                             @elseif($inner_data['notification_type']=="first")
