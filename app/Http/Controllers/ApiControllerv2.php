@@ -13168,9 +13168,11 @@ class ApiControllerv2 extends Controller
 
         if ($userSubscription != null) {
             $lastRecharge = Coin_transactions::where(['user_id' => $this->user->id,'type' => 'credit'])->orderBy('id','DESC')->first();
-            $last_recharge = 0;
+            $last_recharge = '';
             if($lastRecharge){
-                $last_recharge = $lastRecharge->coins;
+                if($lastRecharge->description == 'Signup Bonus'){
+                    $last_recharge = $lastRecharge->coins.' Free trial credits';
+                }
             }
             return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins,'lastRechargeCoins' => (int)$last_recharge]);
         }
