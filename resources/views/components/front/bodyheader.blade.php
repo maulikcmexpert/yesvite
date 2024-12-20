@@ -208,7 +208,7 @@
                                                   $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
                                                   $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
                                       @endphp
-                                      @if($profileData['profile']!="")
+                                      @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                      @else
                                        {!! $userProfile !!}         
@@ -250,7 +250,7 @@
                                                   $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
                                                   $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
                                       @endphp
-                                      @if($profileData['profile']!="")
+                                      @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                      @else
                                        {!! $userProfile !!}         
