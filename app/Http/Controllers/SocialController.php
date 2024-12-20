@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coin_transactions;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Session;
 use Cookie;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 
@@ -109,6 +111,7 @@ class SocialController extends Controller
         $users->instagram_token_id = $socialUser->getId();
         $users->apple_token_id = $socialUser->getId();
         $users->remember_token =   $randomString;
+        $users->coins =  env('DEFAULT_COIN');
 
         // $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
@@ -120,6 +123,17 @@ class SocialController extends Controller
         $users->save();
 
         $newUser = User::where('id', $users->id)->first();
+
+        $coin_transaction = new Coin_transactions();
+        $coin_transaction->user_id = $users->id;
+        $coin_transaction->status = '0';
+        $coin_transaction->type = 'credit';
+        $coin_transaction->coins = env('DEFAULT_COIN');
+        $coin_transaction->current_balance = env('DEFAULT_COIN');
+        $coin_transaction->description = 'Signup Bonus';
+        $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+        $coin_transaction->save();
+
         $sessionArray = [
             'id' => encrypt($newUser->id),
             'first_name' => $newUser->firstname,
