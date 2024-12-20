@@ -4850,13 +4850,13 @@ class ApiControllerv2 extends Controller
                             if (in_array($value['id'], $getalreadyInviteduser)) {
                                 continue;
                             }
-                            // if (!in_array($value['id'], $alreadyselectedasCoHost)) {
+                            if (!in_array($value['id'], $alreadyselectedasCoHost)) {
                                 EventInvitedUser::create([
                                     'event_id' => $eventData['event_id'],
                                     'prefer_by' => $value['prefer_by'],
                                     'user_id' => $value['id']
                                 ]);
-                            // }
+                            }
                         }
                         $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('id')->toArray();
                         $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('id')->toArray();
