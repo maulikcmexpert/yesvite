@@ -64,6 +64,7 @@ function getNotificationList(){
     // if ($input == null) {
     //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
     // }
+    $final_data=[];
     $page = '1';
     $pages = ($page != "") ? $page : 1;
     $notificationData = Notification::query();
@@ -250,7 +251,6 @@ function getNotificationList(){
             }
 
 
-            $final_data=[];
             if($notificationInfo!=""&&!empty($notificationInfo)){
                 foreach($notificationInfo as $notify_data){
                     if ($values->event_id === $notify_data['event_id']) {
