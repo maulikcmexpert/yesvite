@@ -25,12 +25,14 @@ use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
 use Google_Client;
 use App\Mail\forgotpasswordMail;
+use App\Models\Coin_transactions;
 use Laravel\Passport\Token;
 // use GuzzleHttp\Client;
 use Google\Client;
 use Google\Service\AndroidPublisher;
 use Laravel\Socialite\Facades\Socialite;
 use Biscolab\ReCaptcha\Facades\ReCaptcha;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
@@ -192,9 +194,20 @@ class AuthController extends Controller
             $storeUser->password_updated_date =  date('Y-m-d');
             $storeUser->remember_token =   $randomString;
             $storeUser->register_type =   'web normal register';
+            $storeUser->coins =  30;
             $storeUser->save();
             DB::commit();
             $userDetails = User::where('id', $storeUser->id)->first();
+
+            $coin_transaction = new Coin_transactions();
+            $coin_transaction->user_id = $storeUser->id;
+            $coin_transaction->status = '0';
+            $coin_transaction->type = 'credit';
+            $coin_transaction->coins = env('DEFAULT_COIN');
+            $coin_transaction->current_balance = env('DEFAULT_COIN');
+            $coin_transaction->description = 'Signup Bonus';
+            $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+            $coin_transaction->save();
 
             $userData = [
                 // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
