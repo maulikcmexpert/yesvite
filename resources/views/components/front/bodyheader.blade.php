@@ -477,7 +477,7 @@
                                   <div>
                                     <h3>
                                       {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                      @if($inner_data[['rsvp_attempt']=="no_to_yes"])
+                                      @if($inner_data['rsvp_attempt']=="no_to_yes")
                                         <span> changed RSVP response from <strong>NO</strong>to<strong>YES</strong> for </span>
                                       @else
                                         <span> RSVP’d <strong>NO</strong> for </span>
