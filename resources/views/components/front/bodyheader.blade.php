@@ -251,8 +251,8 @@
                                                   $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
                                       @endphp --}}
                                       {{-- @if($profileData['profile']!="") --}}
-                                      {{-- <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                     {{-- @else
                                        {!! $userProfile !!}         
                                     <span class="active-dot"></span>
                                     @endif --}}
