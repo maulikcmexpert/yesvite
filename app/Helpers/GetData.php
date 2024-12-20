@@ -323,6 +323,8 @@ function getNotificationList(){
                     $notificationDetail['notification_id'] = $values->id;
                     $notificationDetail['notification_type'] = $values->notification_type;
                     $notificationDetail['user_id'] = $values->sender_id;
+                    $formattedDate = Carbon::parse($values->event->created_at)->format('F d, Y');
+                                    $notificationDetail['event_date'] = $formattedDate;
                     $notificationDetail['profile'] = (!empty($values->sender_user->profile) || $values->sender_user->profile != null) ? asset('storage/profile/' . $values->sender_user->profile) : "";
                     $notificationDetail['email'] = $values->sender_user->email;
                     $notificationDetail['first_name'] = $values->sender_user->firstname;
