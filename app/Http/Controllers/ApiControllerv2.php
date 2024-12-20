@@ -13172,6 +13172,8 @@ class ApiControllerv2 extends Controller
             if($lastRecharge){
                 if($lastRecharge->description == 'Signup Bonus'){
                     $last_recharge = $lastRecharge->coins.' Free trial credits';
+                }else{
+                    $last_recharge = $lastRecharge->coins.' credits';
                 }
             }
             return response()->json(['status' => 1,'message' => 'Login Checked','coins'=>(int)$userSubscription->coins,'lastRechargeCoins' => (int)$last_recharge]);
