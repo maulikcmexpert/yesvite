@@ -2085,9 +2085,5 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
                 break;
             }
         }
-
-
-        // $getUnusedCoin = Coin_transactions::where(['user_id'=>$user_id,'type'=>'credit','status' => '0'])->orderBy('id','DESC')->get();
-        // $getdebitCoin = Coin_transactions::where(['user_id'=>$user_id,'type'=>'debit','status' => '0'])->orderBy('id','DESC')->sum('coins');
     }
 }
