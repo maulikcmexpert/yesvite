@@ -12087,12 +12087,14 @@ class ApiControllerv2 extends Controller
 
 
                 if ($values->notification_type == 'invite') {
-                    $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
+                    
+                    $checkIsCoHost =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id,'is_co_host'=>$values->is_co_host])->first();
                     if ($checkIsCoHost != null) {
 
                         $notificationDetail['is_co_host'] = $checkIsCoHost->is_co_host;
                         $notificationDetail['accept_as_co_host'] = $checkIsCoHost->accept_as_co_host;
                     }
+                    
                 }
                 $notificationDetail['potluck_item'] = "";
                 $notificationDetail['count'] = "";

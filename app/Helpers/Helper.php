@@ -184,6 +184,7 @@ function sendNotification($notificationType, $postData)
                     $notification->notification_type = $notificationType;
                     $notification->sender_id = $postData['sender_id'];
                     $notification->notification_message = $notification_message;
+                    $notification->is_co_host = $value->is_co_host;
     
                     if ($notification->save()) {
     
