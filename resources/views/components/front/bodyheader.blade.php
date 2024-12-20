@@ -373,7 +373,7 @@
                                       </div>
                                     </div>
                                   </div>
-                           @elseif($inner_data['notification_type']=="first")
+                            @elseif($inner_data['notification_type']=="first")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
                                       <img
@@ -436,6 +436,33 @@
                                       </div>
                                     </div>
                                   </div>
+                            @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="1" ) 
+                              <div class="notification-drodown-body-inner">
+                                <div class="notification-drodown-body-inner-img">
+                                  @php
+                                              $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                              $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                              $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                  @endphp
+                                  @if($inner_data['profile']!="")
+                                  <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                @else
+                                  {!! $userProfile !!}         
+                                <span class="active-dot"></span>
+                                @endif
+                                  <span class="active-dot"></span>
+                                </div>
+                                <div class="notification-drodown-body-inner-content">
+                                  <div>
+                                    <h3>
+                                      {{$inner_data['notification_message']}}
+                                    </h3>
+                                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                                  </div>
+                      
+                                </div>
+                              </div>
+                                  
                             @endif
                             {{-- <div class="notification-drodown-body-inner">
                               <div class="notification-drodown-body-inner-img">
