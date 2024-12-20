@@ -583,7 +583,7 @@
                                         <p>{{$inner_data['event_name']}}</p>
                                         <h6 class="notification-read-dot"></h6>
                                       </div>
-                                        <div class="notification-video-comment-wrp">
+                                        {{-- <div class="notification-video-comment-wrp">
                                         <div class="notification-video-wrp">
                                           <a href="#" class="notification-video popup-videos">
                                               <img src="{{$inner_data['post_image']}}" />
@@ -594,7 +594,7 @@
                                             </p>
                                           </div>
                                         </div>
-                                      </div>
+                                      </div> --}}
                                       {{--  <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
