@@ -6766,6 +6766,7 @@ class ApiControllerv2 extends Controller
         $validator = Validator::make($input, [
 
             'event_id' => ['required', 'exists:events,id'],
+            'event_invited_user_id' => ['required', 'exists:event_invited_users,id'],
             'status' => ['required', 'in:1,2']
         ]);
 
@@ -6783,7 +6784,8 @@ class ApiControllerv2 extends Controller
             // 
             DB::beginTransaction();
 
-            $acceptReject = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->first();
+            // $acceptReject = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->first();
+            $acceptReject = EventInvitedUser::where(['id' => $input['event_invited_user_id']])->first();
 
 
             if ($acceptReject != null) {
@@ -12067,7 +12069,7 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['rsvp_attempt'] = "";
                 $notificationDetail['is_co_host'] = "";
                 $notificationDetail['accept_as_co_host'] = "";
-                $notificationDetail['event_invited_user_id'] = "";
+                $notificationDetail['event_invited_user_id'] = 0;
 
                 $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
                 $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
@@ -14129,7 +14131,7 @@ class ApiControllerv2 extends Controller
             $debitSums = Coin_transactions::selectRaw("
                 SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as current_year_coins,
                 SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as last_year_coins
-            ", [$currentYear, $lastYear])->first();
+            ", [$currentYear, $lastYear])->where('user_id',$this->user->id)->first();
             
             $lastBalance = 0; 
             $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
