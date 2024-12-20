@@ -271,7 +271,7 @@ function getNotificationList(){
         //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
         // }
         $page = '1';
-        $final_data=[];
+        $final_data[]=[];
         $pages = ($page != "") ? $page : 1;
         $notificationData = Notification::query();
         $notificationData->with(['user', 'event', 'event.event_settings', 'sender_user', 'post' => function ($query) {
