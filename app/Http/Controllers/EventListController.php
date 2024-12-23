@@ -1179,7 +1179,7 @@ class EventListController extends Controller
         $user  = Auth::guard('web')->user();
         $eventName = $request->input('searchValue'); 
         if($search_date!=""){
-            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('start_date',$search_date)->orderBy('id', 'DESC')
+            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('start_date',$search_date)->orderBy('start_date', 'DESC')
             ->get();
         }else{
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')
