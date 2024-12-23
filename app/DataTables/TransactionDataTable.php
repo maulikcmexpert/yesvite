@@ -90,10 +90,13 @@ class TransactionDataTable extends DataTable
             ->addColumn('used_coins', function ($row) {
                 return $row->used_coins;
             })
+            ->addColumn('transcation_date', function ($row) {
+                return $row->created_at;
+            })
             
             
 
-            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance', 'used_coins']);
+            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance', 'used_coins','transcation_date']);
     }
 
     /**
@@ -135,7 +138,8 @@ class TransactionDataTable extends DataTable
 
         $userId =decrypt($request->user_id); // Retrieve the passed user ID
         // return $model->newQuery();
-        return Coin_transactions::with([ 'users','event','user_subscriptions'])->where('user_id',$userId)        ->orderBy($column, $direction);
+        return Coin_transactions::with([ 'users','event','user_subscriptions'])->where('user_id',$userId)
+                                ->orderBy($column, $direction);
 
     }
 
@@ -175,6 +179,7 @@ class TransactionDataTable extends DataTable
             Column::make('coins')->orderable(true),
             Column::make('current_balance')->title('Current Balance')->orderable(true),
             Column::make('used_coins')->title('Used Coins')->orderable(true),
+            Column::make('transcation_date')->title('Transcation Date')->orderable(true),
         ];
     }
 
