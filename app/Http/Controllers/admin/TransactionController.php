@@ -54,7 +54,17 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'credit_coin' => [
+                'required',
+                'regex:/^\d+$/', // Ensures only digits, no decimals or negative numbers
+            ],
+        ]);
+        
+
+
         $coins=$request->input('credit_coin');
+        $description=$request->input('description');
         $user_id=$request->input('user_id');
 
         $user = User::where('id',$user_id)->first();
@@ -70,7 +80,7 @@ class TransactionController extends Controller
             $coin_transaction->type = 'credit';
             $coin_transaction->coins = $coins;
             $coin_transaction->current_balance = $total_coin;
-            $coin_transaction->description = $coins.' Credits Bulk Credits';
+            $coin_transaction->description = $description;
             $coin_transaction->endDate = Carbon::now()->addYears(5)->toDateString();
             $coin_transaction->save();
 

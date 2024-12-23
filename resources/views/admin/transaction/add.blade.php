@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="firstname">Credit Coins</label>
                             <input type="text" class="form-control firstname" id="credit_coin"name="credit_coin" placeholder="Credit coin here" value="">
-                            <span class="text-danger">{{ $errors->first('coin') }}</span>
+                            <span class="text-danger">{{ $errors->first('credit_coin') }}</span>
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="lastname">Description</label>
                             <input type="text" class="form-control lastname" name="description" placeholder="Enter the description" value="">
-                            <input type="text" class="form-control lastname" name="userId" placeholder="Enter the description" value="{{$userId}}">
+                            <input type="hidden" class="form-control lastname" name="user_id" id="user_id" placeholder="Enter the description" value="{{$userId}}">
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         </div>
                     </div>
