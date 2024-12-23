@@ -2105,7 +2105,7 @@ class EventListController extends Controller
         if($page=="past"){
             $collection = collect($eventList);
             $uniqueCollection = $collection->unique('id');
-            $eventList = $uniqueCollection->values()->all();
+            $eventPasttList = $uniqueCollection->values()->all();
            
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
