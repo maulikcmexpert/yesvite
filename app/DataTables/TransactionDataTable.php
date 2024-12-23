@@ -34,7 +34,7 @@ class TransactionDataTable extends DataTable
                 return $row->users->firstname . ' ' . $row->users->lastname;
             })
             ->addColumn('event', function ($row) {
-                return $row->event_id;
+                return $row->event->event_name;
             })
             ->addColumn('type', function ($row) {
                 return $row->type;
