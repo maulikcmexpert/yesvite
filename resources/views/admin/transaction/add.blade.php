@@ -7,7 +7,6 @@
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/users')}}">Users</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/transcation')}}">Transactions</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -33,7 +32,7 @@
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="firstname">Credit Coins</label>
-                            <input type="text" class="form-control firstname" name="credit_coin" placeholder="Credit coin here" value="">
+                            <input type="number" class="form-control firstname" name="credit_coin" placeholder="Credit coin here" value="">
                             <span class="text-danger">{{ $errors->first('coin') }}</span>
                         </div>
                     </div>
