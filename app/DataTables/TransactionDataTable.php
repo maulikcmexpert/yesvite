@@ -72,8 +72,8 @@ class TransactionDataTable extends DataTable
                 $column = Event::select('event_name')
                 ->whereColumn('events.id', 'coin_transactions.event_id');
 
-            }else if ($request->order[0]['column'] == '4'){
-                $column = 'email';
+            }else if ($request->order[0]['column'] == '3'){
+                $column = 'type';
             }
         }
 
@@ -120,7 +120,7 @@ class TransactionDataTable extends DataTable
             Column::make('no')->title('#')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('user')->orderable(false),
             Column::make('event')->orderable(true),
-            Column::make('type')->orderable(false),
+            Column::make('type')->orderable(true),
             Column::make('coins')->orderable(true),
             Column::make('current_balance')->title('Current Balance')->orderable(false),
             Column::make('used_coins')->title('Used Coins')->orderable(false),
