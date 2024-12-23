@@ -2173,7 +2173,7 @@ class EventListController extends Controller
             if($page=="upcoming"){
                 $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
             }else{
-                $query->where('is_draft_save', '0')->where('start_date', '<', date('Y-m-d'));
+                $query->where('is_draft_save', '0')->where('end', '<', date('Y-m-d'));
             }
         })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
 
