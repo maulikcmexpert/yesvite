@@ -30,7 +30,43 @@ class TransactionDataTable extends DataTable
             ->addColumn('no', function () use (&$counter) {
                 return $counter++;
             })
+            ->filter(function ($query) {
+                if ($this->request->has('search')) {
+                    $keyword = $this->request->get('search');
+                    $keyword = $keyword['value'];
+            
+                    // Split the keyword by spaces
+                    $nameParts = explode(' ', $keyword);
+            
+                    $query->where(function ($q) use ($nameParts, $keyword) {
+                        if (count($nameParts) === 2) {
+                            // If two parts (assumed first and last name)
+                            $q->whereHas('users', function ($q) use ($nameParts) {
+                                $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                  ->where('lastname', 'LIKE', "%{$nameParts[1]}%");
+                            });
+                        } else {
+                            // If one part, search for either firstname or lastname
+                            $q->whereHas('users', function ($q) use ($keyword) {
+                                $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                  ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                            });
+                        }
+            
+                        // Search in 'events' as well
+                        $q->orWhereHas('events', function ($q) use ($keyword) {
+                            $q->where('event_name', 'LIKE', "%{$keyword}%");
+                        });
 
+                        
+                        $q->orWhere('type', 'LIKE', "%{$keyword}%")
+                        ->orWhere('coins', 'LIKE', "%{$keyword}%")
+                        ->orWhere('coins', 'LIKE', "%{$keyword}%")
+                        ->orWhere('current_balance', 'LIKE', "%{$keyword}%")
+                        ->orWhere('used_coins', 'LIKE', "%{$keyword}%");
+                    });
+                }
+            })
             ->addColumn('user', function ($row) {
                 return $row->users->firstname . ' ' . $row->users->lastname;
             })
