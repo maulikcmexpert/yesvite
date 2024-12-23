@@ -24,24 +24,27 @@ class TransactionController extends Controller
     {
 
         // dd(decrypt($request['user_id']));
+        $userId = $request->user_id; // Decrypt the user ID from the request
         $title = 'Coin Transaction';
         $page = 'admin.transaction.list';
         // $js = 'admin.user.userjs';
-        return $DataTable->render('admin.includes.layout', compact('title', 'page'));
+        return $DataTable->render('admin.includes.layout', compact('title', 'page','userId'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $title = 'Add Coin';
+        $userId = decrypt($request->user_id); // Decrypt the user ID from the request
+
         $page = 'admin.transaction.add';
         $js = 'admin.transaction.transactionjs';
                 return view('admin.includes.layout', compact(
                     'title',
                     'page',
-                    'js'
+                    'js','userId'
                 ));
     }
 
