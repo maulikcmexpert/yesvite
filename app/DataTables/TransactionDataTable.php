@@ -63,7 +63,9 @@ class TransactionDataTable extends DataTable
                         ->orWhere('coins', 'LIKE', "%{$keyword}%")
                         ->orWhere('coins', 'LIKE', "%{$keyword}%")
                         ->orWhere('current_balance', 'LIKE', "%{$keyword}%")
-                        ->orWhere('used_coins', 'LIKE', "%{$keyword}%");
+                        ->orWhere('used_coins', 'LIKE', "%{$keyword}%")
+                        ->orWhere('description', 'LIKE', "%{$keyword}%");
+
                     });
                 }
             })
@@ -113,11 +115,14 @@ class TransactionDataTable extends DataTable
 
             }else if ($request->order[0]['column'] == '3'){
                 $column = 'type';
-            }else if ($request->order[0]['column'] == '4'){
-                $column = 'coins';
+            }
+            else if ($request->order[0]['column'] == '4'){
+                $column = 'description';
             }else if ($request->order[0]['column'] == '5'){
-                $column = 'current_balance';
+                $column = 'coins';
             }else if ($request->order[0]['column'] == '6'){
+                $column = 'current_balance';
+            }else if ($request->order[0]['column'] == '7'){
                 $column = 'used_coins';
             }
         }
