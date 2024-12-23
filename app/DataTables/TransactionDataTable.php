@@ -61,7 +61,7 @@ class TransactionDataTable extends DataTable
 
     {
         // return $model->newQuery();
-        return Coin_transactions::with([ 'users','event','user_subscriptionss']);
+        return Coin_transactions::with([ 'users','event','user_subscriptions']);
     }
 
     /**
