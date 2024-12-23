@@ -442,9 +442,9 @@ function getNotificationList(){
                         $final_data[$values->event->event_name][] = $notify_data; 
                     }
                     
-                    // if ($i==7) {
-                    //     break; // Stop when $i exceeds 7
-                    // }
+                    if ($i==5) {
+                        break; // Stop when $i exceeds 7
+                    }
                 }
             }
         $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
