@@ -2149,9 +2149,20 @@ class EventListController extends Controller
             if($page=="upcoming"){
                 $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
              }else{
-                $query->where('is_draft_save', '0')->where('start_date', '<', date('Y-m-d'));
+                $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'));
              }
         })->where('user_id', $user->id)->count();
+
+        // $totalInvited = EventInvitedUser::whereHas('event', function ($query) use($input){
+        //     $query->where('is_draft_save', '0')
+        //     ->when($input['past_event'] == '1', function($que) {
+        //         $que->where('end_date', '<', date('Y-m-d'));
+        //     })    
+        //     ->when($input['past_event'] == '0', function($que) {
+        //         $que->where('start_date', '>=', date('Y-m-d'));
+        //     });
+        //     // ->where('start_date', '>=', date('Y-m-d'));
+        // })->where('user_id', $user->id)->count();
 
         if($page=="upcoming"){
             $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
