@@ -1422,6 +1422,7 @@ class EventListController extends Controller
         $month="";
         $year="";
         $last_month="";
+        $eventList =[];
 
         if($is_hosting==1){
             $allEvent =  Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id]);
@@ -1576,9 +1577,7 @@ class EventListController extends Controller
             if(!empty($eventList)){
                 $last_month = $eventList[0]['event_month'];
             }
-        }else{
-                $eventList =[];
-            }
+        }
      
         }
 
@@ -1739,8 +1738,6 @@ class EventListController extends Controller
                     $last_month=$eventList[0]['event_month'];
                 }
            
-            }else{
-                $eventList =[];
             }
         }
 
@@ -1909,8 +1906,6 @@ class EventListController extends Controller
                     $last_month=$eventList[0]['event_month'];
                 }
                 
-            }else{
-                $eventList =[];
             }
         }
 
@@ -2091,7 +2086,6 @@ class EventListController extends Controller
                     }
         }
 
-        dd($eventList);
 
         if($page=="upcoming"){
 
