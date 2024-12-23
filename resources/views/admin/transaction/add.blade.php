@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="lastname">Description</label>
                             <input type="text" class="form-control lastname" name="description" placeholder="Enter the description" value="">
-                            <input type="text" class="form-control lastname" name="userId" placeholder="Enter the description" value="{{userId}}">
+                            <input type="text" class="form-control lastname" name="userId" placeholder="Enter the description" value="{{$userId}}">
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         </div>
                     </div>

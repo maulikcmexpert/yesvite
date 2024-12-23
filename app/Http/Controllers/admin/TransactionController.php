@@ -39,7 +39,6 @@ class TransactionController extends Controller
         $title = 'Add Coin';
         $userId = decrypt($request->user_id); // Decrypt the user ID from the request
 
-        dd($userId);
         $page = 'admin.transaction.add';
         $js = 'admin.transaction.transactionjs';
                 return view('admin.includes.layout', compact(
