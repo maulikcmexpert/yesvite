@@ -284,7 +284,7 @@ function getNotificationList(){
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
         // $result = $notificationData->get();
-        $result = $notificationData->limit(3)->get();
+        $result = $notificationData->get();
         $notificationInfo = [];
             foreach ($result as $values) {
                 if ($values->user_id == $user->id) {
@@ -431,10 +431,14 @@ function getNotificationList(){
                     $notificationInfo[$values->event_id] = $notificationDetail;
                 }
 
-
+                $i=0;
                 foreach($notificationInfo as $notify_data){
+                    $i++;
                     if ($values->event_id === $notify_data['event_id']) {
                         $final_data[$values->event->event_name][] = $notify_data; 
+                    }
+                    if($i==2){
+                        break;
                     }
                 }
             }
