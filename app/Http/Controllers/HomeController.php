@@ -296,7 +296,7 @@ class HomeController extends Controller
 
                     foreach ($draftEvents as $value) {
                         $eventdraft['id'] = $value->id;
-                        $eventdraft['event_name'] = $value->event_name;
+                        $eventdraft['event_name'] = ($value->event_name!="")?$value->event_name:"No name";;
                         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
                         $eventdraft['saved_date'] = $formattedDate;
                         $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
