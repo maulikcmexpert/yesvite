@@ -76,6 +76,9 @@ class TransactionDataTable extends DataTable
             ->addColumn('type', function ($row) {
                 return $row->type;
             })
+            ->addColumn('description', function ($row) {
+                return $row->description;
+            })
             ->addColumn('coins', function ($row) {
                 return $row->coins;
             })
@@ -88,7 +91,7 @@ class TransactionDataTable extends DataTable
             
             
 
-            ->rawColumns(['user', 'event', 'type', 'coins','current_balance', 'used_coins']);
+            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance', 'used_coins']);
     }
 
     /**
@@ -163,6 +166,7 @@ class TransactionDataTable extends DataTable
             Column::make('user')->orderable(false),
             Column::make('event')->orderable(true),
             Column::make('type')->orderable(true),
+            Column::make('description')->orderable(true),
             Column::make('coins')->orderable(true),
             Column::make('current_balance')->title('Current Balance')->orderable(true),
             Column::make('used_coins')->title('Used Coins')->orderable(true),
