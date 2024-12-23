@@ -72,7 +72,7 @@
                       </a>
                     <ul class="home-upcoming-events-card-left-detail">
                         @if($pastEvent['is_event_owner']==1)
-                            <li><span>Hosting</span> {{ $pastEvent['event_plan_name']}}</li>
+                            <li><span>Hosting</span></li>
                         @else
                                 @if($pastEvent['rsvp_status'] == '1')
                                     <li><span>Guest : </span> RSVP’d - Yes</li>
