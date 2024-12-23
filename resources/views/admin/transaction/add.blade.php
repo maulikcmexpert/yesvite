@@ -7,6 +7,8 @@
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/users')}}">Users</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('transcation.index',['user_id'=>decrypt($userId)])}}">Coin Transcation</a></li>
+
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
