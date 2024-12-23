@@ -28,7 +28,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        $title = 'Coin Transaction';
+        $title = 'Add Coin';
         $page = 'admin.transaction.add';
                 // $js = 'admin.user.userjs';
                 return view('admin.includes.layout', compact(
