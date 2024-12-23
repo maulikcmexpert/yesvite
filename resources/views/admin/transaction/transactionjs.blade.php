@@ -1,4 +1,4 @@
-{{-- <script type="text/javascript">
+<script type="text/javascript">
     $(function() {
 
 $("#addCoin_form").validate({
@@ -20,4 +20,4 @@ $("#addCoin_form").validate({
 })
 
     });
-</script> --}}
+</script>

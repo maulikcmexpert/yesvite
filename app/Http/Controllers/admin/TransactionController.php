@@ -53,15 +53,12 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'credit_coin' => [
                 'required',
                 'regex:/^\d+$/', // Ensures only digits, no decimals or negative numbers
             ],
         ]);
-        
-
 
         $coins=$request->input('credit_coin');
         $description=$request->input('description');
@@ -71,7 +68,8 @@ class TransactionController extends Controller
         if($user){
             $total_coin = $user->coins + $coins;
             User::where('id',$user_id)->update(['coins'=>$total_coin]);
-            $subscription=UserSubscription::where('user_id',$user_id);
+            $subscription=UserSubscription::where('user_id',$user_id)->get();
+            dd($subscription);
 
             $coin_transaction = new Coin_transactions();
             $coin_transaction->user_id = $user_id;
