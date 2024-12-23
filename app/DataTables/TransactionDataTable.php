@@ -74,6 +74,12 @@ class TransactionDataTable extends DataTable
 
             }else if ($request->order[0]['column'] == '3'){
                 $column = 'type';
+            }else if ($request->order[0]['column'] == '4'){
+                $column = 'coins';
+            }else if ($request->order[0]['column'] == '5'){
+                $column = 'current_balance';
+            }else if ($request->order[0]['column'] == '6'){
+                $column = 'used_coins';
             }
         }
 
