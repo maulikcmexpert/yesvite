@@ -53,7 +53,7 @@
                 @endif
             <li><span>{{$pastEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$pastEvent['event_day']}}</span> {{$pastEvent['start_time']}}</li>
             </ul>
-            <div class="home-upcoming-events-card-left-foot">
+            <div class="home-upcoming-events-card-left-foot disable-class">
                 <div class="home-upcoming-events-card-rsvp-data">
                     <h6 class="card-rsvp-done"><i class="fa-regular fa-circle-check"></i> {{$pastEvent['total_accept_event_user']}}</h6>
                     <h6 class="card-rsvp-pending"><i class="fa-regular fa-circle-question"></i> {{$pastEvent['total_invited_user']}}</h6>
