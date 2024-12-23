@@ -7,7 +7,7 @@
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/users')}}">Users</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('transcation.index', ['user_id' => $userId]) }}">Coin Transaction</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('transcation.index', ['user_id' => encrypt($userId)]) }}">Coin Transaction</a></li>
 
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
