@@ -2167,7 +2167,7 @@ class EventListController extends Controller
         if($page=="upcoming"){
             $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
         }else{
-            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '<', date('Y-m-d'))->count();
+            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'))->count();
         }
         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) use($page) {
             if($page=="upcoming"){
