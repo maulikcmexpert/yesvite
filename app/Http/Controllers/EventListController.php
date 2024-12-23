@@ -1589,7 +1589,7 @@ class EventListController extends Controller
                     $query->where('start_date', '>=', date('Y-m-d'))->orderBy('id', 'DESC');
                 }
                 if($page=="past"){
-                    $query->where('start_date', '<', date('Y-m-d'))->orderBy('start_date', 'asc');
+                    $query->where('end', '<', date('Y-m-d'))->orderBy('start_date', 'asc');
                 }
 
                 $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
@@ -1750,7 +1750,7 @@ class EventListController extends Controller
                     ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->orderBy('id', 'DESC');                }
                 if($page=="past"){
-                    $query->where('is_draft_save', '0')->where('start_date', '<', date('Y-m-d'))
+                    $query->where('is_draft_save', '0')->where('end', '<', date('Y-m-d'))
                     ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->orderBy('start_date', 'ASC');                }
                 
@@ -1928,7 +1928,7 @@ class EventListController extends Controller
                 $allEvents = $usercreatedList->union($invitedEventsList);
             }
             if($page=="past"){
-                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '<', date('Y-m-d'))
+                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('end', '<', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
                 // ->orderBy('start_date', 'ASC')  
@@ -1937,7 +1937,7 @@ class EventListController extends Controller
                 $query->where('app_user', '1');
                 })->where('user_id', $user->id)->get()->pluck('event_id');
                 $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-                    ->whereIn('id', $invitedEvents)->where('start_date', '<', date('Y-m-d'))
+                    ->whereIn('id', $invitedEvents)->where('end', '<', date('Y-m-d'))
                     ->where('is_draft_save', '0');
                     // ->orderBy('start_date', 'ASC')
                     // ->get();
