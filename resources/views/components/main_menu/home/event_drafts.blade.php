@@ -42,7 +42,7 @@
           <progress id="progress-bar" value="{{$percent}}" max="100"></progress>
           <div class="d-flex align-items-center justify-content-between">
               <h4>{{$draft['step']}}/4 Steps - Guest</h4>
-              <span class="prograsbar-pro">{{$draft['event_plan_name']}}</span>
+              {{-- <span class="prograsbar-pro">{{$draft['event_plan_name']}}</span> --}}
               <label class="progress-bar__value" htmlfor="progress-bar"> {{$percent}}%</label>
           </div>
         </div>
