@@ -434,15 +434,15 @@ function getNotificationList(){
                 $i=0;
                 foreach($notificationInfo as $notify_data){
                     $i++;
-                    if ($i <= 30) {
-                        continue; // Skip until $i reaches 5
-                    }
+                    // if ($i <= 30) {
+                    //     continue; // Skip until $i reaches 5
+                    // }
                     
                     if ($values->event_id === $notify_data['event_id']) {
                         $final_data[$values->event->event_name][] = $notify_data; 
                     }
                     
-                    if ($i==40) {
+                    if ($i==5) {
                         break; // Stop when $i exceeds 7
                     }
                 }
