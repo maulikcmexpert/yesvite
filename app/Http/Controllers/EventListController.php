@@ -1166,7 +1166,7 @@ class EventListController extends Controller
              if(!empty($eventList)){
                $last_month = $eventList[0]['event_month'];
              }
-            return response()->json(['view' => view( 'front.event.event_list.upcoming_event', compact('eventList','get_current_month'))->render(),'last_month'=>$last_month ]);
+            return response()->json(['view' => view( 'front.event.event_list.upcoming_event', compact('eventList','get_current_month'))->render(),'last_month'=>$last_month,'page'=>'upcoming']);
 
 
     }
@@ -1221,7 +1221,7 @@ class EventListController extends Controller
         if($is_draft_page!=""){
             return response()->json(['view' => view( 'front.event.event_list.search_draft_page', compact('draftEventArray','get_current_month'))->render(),"draft_count"=>count($draftEventArray)]);
         }
-        return response()->json(['view' => view( 'front.event.event_list.draft_event', compact('draftEventArray','get_current_month'))->render(),'last_month'=>$last_month ]);
+        return response()->json(['view' => view( 'front.event.event_list.draft_event', compact('draftEventArray','get_current_month'))->render(),'last_month'=>$last_month,'page'=>'draft' ]);
 
     }
 
@@ -1405,7 +1405,7 @@ class EventListController extends Controller
             }
         }
         
-                return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),'last_month' => $last_month],);
+                return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),'last_month' => $last_month,'page'=>'past'],);
 
     }
 
