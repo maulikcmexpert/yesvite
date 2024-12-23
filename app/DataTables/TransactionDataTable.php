@@ -96,7 +96,7 @@ class TransactionDataTable extends DataTable
                 return $row->created_at;
             })
             ->addColumn('endDate', function ($row) {
-                return $row->endDate;
+                return (isset($row->endDate)&&$row->endDate!="")?$row->endDate:"";
             })
             
             
