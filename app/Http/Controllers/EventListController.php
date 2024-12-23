@@ -1182,7 +1182,7 @@ class EventListController extends Controller
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('start_date',$search_date)->orderBy('id', 'DESC')
             ->get();
         }else{
-            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('start_date', 'DESC')
+            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')
             ->where('event_name', 'LIKE', '%' . $eventName . '%')
             ->get();
         }
