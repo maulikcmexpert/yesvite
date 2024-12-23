@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Coin_transactions;
+use App\Models\Event
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -60,11 +61,32 @@ class TransactionDataTable extends DataTable
     public function query(Coin_transactions $model,Request $request): QueryBuilder
 
     {
-        // dd($request);
+        $column = 'id';
+
+        if (isset($request->order[0]['column'])) {
+            if ($request->order[0]['column'] == '0') {
+                $column = 'id';
+            }
+            if ($request->order[0]['column'] == '2') {
+                // $column = 'firstname';
+                $column = Event::select('event_name')
+                ->whereColumn('events.id', 'coin_transactions.event_id');
+
+            }else if ($request->order[0]['column'] == '4'){
+                $column = 'email';
+            }
+        }
+
+        $direction = 'desc';
+
+        if (isset($request->order[0]['dir']) && $request->order[0]['dir'] == 'asc') {
+            $direction = 'asc';
+        }
 
         $userId =decrypt($request->user_id); // Retrieve the passed user ID
         // return $model->newQuery();
-        return Coin_transactions::with([ 'users','event','user_subscriptions'])->where('user_id',$userId)->orderBy('id','desc');
+        return Coin_transactions::with([ 'users','event','user_subscriptions'])->where('user_id',$userId)        ->orderBy($column, $direction);
+
     }
 
     /**
