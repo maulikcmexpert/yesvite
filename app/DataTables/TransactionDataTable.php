@@ -21,9 +21,6 @@ class TransactionDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
-
-     protected $userId;  // Add a class property to store the user ID
-
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         $counter = 1;
@@ -65,9 +62,9 @@ class TransactionDataTable extends DataTable
     {
         // dd($request);
 
-        $this->userId =decrypt($request->user_id); // Retrieve the passed user ID
+        $userId =decrypt($request->user_id); // Retrieve the passed user ID
         // return $model->newQuery();
-        return Coin_transactions::with([ 'users','event','user_subscriptions'])->where('user_id',$this->userId);
+        return Coin_transactions::with([ 'users','event','user_subscriptions'])->where('user_id',$userId);
     }
 
     /**
@@ -82,7 +79,6 @@ class TransactionDataTable extends DataTable
                     //->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
-                    ->tableAttribute('data-userid', $this->userId) // Add the data-userid attribute to the table
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
