@@ -585,6 +585,8 @@ $(document).on('click',".day",function () {
         type: 'GET',
         data: { searchValue: searchValue,current_month:current_month,search_date:search_date},
         success: function (response) {
+            console.log(response);
+            
             if (response.view) {
                 $(scrollStatus).html('');
                 $(scrollStatus).html(response.view);
