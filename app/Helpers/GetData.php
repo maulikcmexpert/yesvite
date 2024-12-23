@@ -437,7 +437,7 @@ function getNotificationList(){
                     if ($values->event_id === $notify_data['event_id']) {
                         $final_data[$values->event->event_name][] = $notify_data; 
                     }
-                    if($i==2){
+                    if($i==5){
                         break;
                     }
                 }
