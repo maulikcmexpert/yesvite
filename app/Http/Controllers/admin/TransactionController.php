@@ -13,8 +13,9 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(TransactionDataTable $DataTable)
+    public function index(Request $request,TransactionDataTable $DataTable)
     {
+        dd($request);
         $title = 'Coin Transaction';
         $page = 'admin.transaction.list';
         // $js = 'admin.user.userjs';

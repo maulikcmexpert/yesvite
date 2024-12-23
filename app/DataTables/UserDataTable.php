@@ -153,7 +153,7 @@ class UserDataTable extends DataTable
 
             ->addColumn('transaction', function ($row) {
                 $cryptId = encrypt($row->id);
-                $transaction_url = route('transcation.index');
+                $transaction_url = route('transcation.index',$cryptId);
                 $actionBtn = '<div class="action-icon">
                     <a class="" href="' . $transaction_url . '" title="Edit">View</a>
                     </div>';
