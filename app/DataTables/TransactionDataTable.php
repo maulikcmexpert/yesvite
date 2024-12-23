@@ -60,7 +60,7 @@ class TransactionDataTable extends DataTable
     public function query(Coin_transactions $model,Request $request): QueryBuilder
 
     {
-    
+        dd($request);
         // $userId = $this->get('userId'); // Retrieve the passed user ID
 
         // return $model->newQuery();
