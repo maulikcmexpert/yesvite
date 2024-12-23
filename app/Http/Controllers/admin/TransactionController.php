@@ -15,7 +15,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request,TransactionDataTable $DataTable)
     {
-        
+
         // dd(decrypt($request['user_id']));
         $title = 'Coin Transaction';
         $page = 'admin.transaction.list';
@@ -28,7 +28,13 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Coin Transaction';
+        $page = 'admin.transaction.add';
+                // $js = 'admin.user.userjs';
+                return view('admin.includes.layout', compact(
+                    'title',
+                    'page'
+                ));
     }
 
     /**
@@ -36,7 +42,9 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // $js = 'admin.user.userjs';  
+        
     }
 
     /**
