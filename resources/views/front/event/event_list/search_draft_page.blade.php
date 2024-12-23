@@ -43,7 +43,7 @@
       <div class="d-flex align-items-center justify-content-between">
           <h4>{{$draft['step']}}/4 Steps - Guest</h4>
           <label class="progress-bar__value" htmlfor="progress-bar"> {{$percent}}%</label>
-          <p><span class="prograsbar-hosting">Hosting</span><span class="prograsbar-pro">{{$draft['event_plan_name']}}</span></p>
+          {{-- <p><span class="prograsbar-hosting">Hosting</span><span class="prograsbar-pro">{{$draft['event_plan_name']}}</span></p> --}}
       </div>
     </div>
   </a>
