@@ -150,6 +150,16 @@ class UserDataTable extends DataTable
                     </div>';
                 return $actionBtn;
             })
+
+            ->addColumn('transaction', function ($row) {
+                $cryptId = encrypt($row->id);
+                $transaction_url = route('users.transaction', $cryptId);
+                $actionBtn = '<div class="action-icon">
+                    <a class="" href="' . $transaction_url . '" title="Edit">View</a>
+                    </div>';
+                return $actionBtn;
+            })
+
             ->addColumn('status', function ($row) {
                 // Determine button text and dropdown action based on account status
                 $buttonText = $row->account_status == 'Block' ? 'Block' : 'Unblock';
@@ -171,7 +181,7 @@ class UserDataTable extends DataTable
                 ';
             })
 
-            ->rawColumns(['profile', 'app_user', 'setpassword', 'action', 'status', 'package_name']);
+            ->rawColumns(['profile', 'app_user', 'setpassword', 'action','transaction', 'status', 'package_name']);
     }
 
     /**
@@ -267,6 +277,7 @@ class UserDataTable extends DataTable
             Column::make('setpassword')->title('Set Password')->orderable(false),
             Column::make('package_name')->title('Plan')->orderable(false),
             Column::make('action')->orderable(false),
+            Column::make('transaction')->title('Transaction')->orderable(false),
             Column::make('status')->orderable(false)
 
         ];
