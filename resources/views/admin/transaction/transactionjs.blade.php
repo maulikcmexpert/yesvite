@@ -19,5 +19,10 @@ $("#addCoin_form").validate({
 
 })
 
+$(document).on('click','#addCoin',function(e){
+    e.preventDefault(); // Prevent default action, if necessary.
+    $('#addCoin_form').submit();
+})
+
     });
 </script>

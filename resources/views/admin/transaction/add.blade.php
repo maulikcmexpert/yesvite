@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <input type="submit" class="btn btn-primary" id="addCoin" value="Add">
+                    <input type="button" class="btn btn-primary" id="addCoin" value="Add">
                 </div>
 
             </form>
