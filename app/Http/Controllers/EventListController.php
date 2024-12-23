@@ -974,7 +974,7 @@ class EventListController extends Controller
   
 
         if($search_date!=""){
-                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date',$search_date)->where('start_date','>',date('Y-m-d'))
+                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date',$search_date)->where('start_date','>=',date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0')
                 ->where('event_name', 'LIKE', '%' . $eventName . '%');
@@ -982,7 +982,7 @@ class EventListController extends Controller
                 $query->where('app_user', '1');
                 })->where('user_id', $user->id)->get()->pluck('event_id');
                 $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-                    ->whereIn('id', $invitedEvents)->where('start_date', $search_date)->where('start_date','>',date('Y-m-d'))
+                    ->whereIn('id', $invitedEvents)->where('start_date', $search_date)->where('start_date','>=',date('Y-m-d'))
                     ->where('is_draft_save', '0')
                     ->where('event_name', 'LIKE', '%' . $eventName . '%'); 
         }else{
