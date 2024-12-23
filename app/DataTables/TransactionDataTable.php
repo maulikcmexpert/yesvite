@@ -54,7 +54,7 @@ class TransactionDataTable extends DataTable
                         }
             
                         // Search in 'events' as well
-                        $q->orWhereHas('events', function ($q) use ($keyword) {
+                        $q->orWhereHas('event', function ($q) use ($keyword) {
                             $q->where('event_name', 'LIKE', "%{$keyword}%");
                         });
 
