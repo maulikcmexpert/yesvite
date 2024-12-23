@@ -248,26 +248,34 @@ class ApiContactController extends Controller
 
         // Bulk insert new contacts
         if (!empty($insertedContacts)) {
-            contact_sync::insert($insertedContacts);
-            $insertedIds = contact_sync::latest('id')
-            ->take(count($insertedContacts))     
-            ->pluck('id')                        
-            ->toArray();
+            // contact_sync::insert($insertedContacts);
+            // $insertedIds = contact_sync::latest('id')
+            // ->take(count($insertedContacts))     
+            // ->pluck('id')                        
+            // ->toArray();
+            // foreach ($insertedContacts as $index => &$contact) {
+            //     $contact['sync_id'] = $insertedIds[$index] ?? null;
+            // }
+
+            $insertedIds = DB::table('contact_sync')
+                ->insertGetIdBatch($insertedContacts);
+    
+            // Map the inserted IDs back to the contacts
             foreach ($insertedContacts as $index => &$contact) {
                 $contact['sync_id'] = $insertedIds[$index] ?? null;
             }
+
             unset($contact);
-        }
-        // dd($insertedContacts);
-        // Update duplicate contacts with user details
+        } 
+
         $emails = array_filter(array_column($contacts, 'email'));
-        // $phoneNumbers = array_filter(array_column($contacts, 'phone'));
+
         $mergeArray = array_merge($insertedContacts, $duplicateContacts);
         $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile','app_user','visible')
         ->whereIn('email', $emails)
         ->where('app_user','1')
-        // ->orWhereIn('phone_number', $phoneNumbers)
         ->get();
+        // ->orWhereIn('phone_number', $phoneNumbers)
         
         
 
