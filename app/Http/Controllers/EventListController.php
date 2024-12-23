@@ -2164,7 +2164,7 @@ class EventListController extends Controller
             }else{
                 $query->where('is_draft_save', '0')->where('start_date', '<', date('Y-m-d'));
             }
-        })->where(['user_id' => $user->id])->count();
+        })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
 
         $filter = [
             'invited_to' => $totalInvited,
