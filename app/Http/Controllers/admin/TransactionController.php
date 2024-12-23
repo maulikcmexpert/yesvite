@@ -18,7 +18,7 @@ class TransactionController extends Controller
         $title = 'Coin Transaction';
         $page = 'admin.transaction.list';
         // $js = 'admin.user.userjs';
-        return $DataTable->render('admin.includes.layout', compact('title', 'page'));
+        return $DataTable->with('userId', 2)->render('admin.includes.layout', compact('title', 'page'));
     }
 
     /**
