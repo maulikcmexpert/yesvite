@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="text-right">
-                        <a class="btn btn-primary" href="{{URL::to('admin/transaction/create')}}">Add</a>
+                        <a class="btn btn-primary" href="{{route('transcation.create')}}">Add</a>
                     </div>
                 </div>
             </div><!-- /.row -->
