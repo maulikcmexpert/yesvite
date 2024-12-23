@@ -440,7 +440,7 @@ function getNotificationList(){
                     if ($i < 5) {
                         continue; // Skip until $i reaches 5
                     }
-                    if ($i > 7) {
+                    if ($i==7) {
                         break; // Stop when $i exceeds 7
                     }
                 }
