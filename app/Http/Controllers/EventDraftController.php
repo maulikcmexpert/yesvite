@@ -49,7 +49,7 @@ class EventDraftController extends Controller
             if (!empty($draftEvents) && count($draftEvents) != 0) {
                 foreach ($draftEvents as $value) {
                     $eventDetail['id'] = $value->id;
-                    $eventDetail['event_name'] = $value->event_name;
+                    $eventDetail['event_name'] = ($value->event_name!="")?$value->event_name:"No name";
                     // $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
                     $eventDetail['saved_date'] = $formattedDate;
