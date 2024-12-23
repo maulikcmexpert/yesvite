@@ -434,7 +434,7 @@ function getNotificationList(){
                 $i=0;
                 foreach($notificationInfo as $notify_data){
                     $i++;
-                    if ($i <= 35) {
+                    if ($i <= 30) {
                         continue; // Skip until $i reaches 5
                     }
                     
