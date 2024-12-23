@@ -227,7 +227,9 @@ class ApiContactController extends Controller
                     ];
                 } else {
                     // Insert new contact if it doesn't exist
+                    $tempId = (string) Str::uuid();
                     $insertedContacts[] = [
+                        'temp_id' => $tempId,
                         'userId' => null,
                         'contact_id' => $user->id,
                         'firstName' => (isset($contact['firstName']) && $contact['firstName'] !='')?$contact['firstName']:'',
@@ -257,12 +259,16 @@ class ApiContactController extends Controller
             //     $contact['sync_id'] = $insertedIds[$index] ?? null;
             // }
 
-            $insertedIds = DB::table('contact_sync')
-                ->insertGetIdBatch($insertedContacts);
-    
-            // Map the inserted IDs back to the contacts
-            foreach ($insertedContacts as $index => &$contact) {
-                $contact['sync_id'] = $insertedIds[$index] ?? null;
+            contact_sync::insert($insertedContacts);
+
+            // Fetch inserted rows using temp_id
+            $tempIds = array_column($insertedContacts, 'temp_id');
+            $insertedRows = contact_sync::whereIn('temp_id', $tempIds)->get(['id', 'temp_id']);
+
+            // Map the sync_id back to the original array
+            foreach ($insertedContacts as &$contact) {
+                $contact['sync_id'] = $insertedRows->firstWhere('temp_id', $contact['temp_id'])->id ?? null;
+                unset($contact['temp_id']); // Remove the temporary identifier
             }
 
             unset($contact);
