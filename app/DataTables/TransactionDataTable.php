@@ -61,6 +61,7 @@ class TransactionDataTable extends DataTable
 
     {
         dd($request);
+        
         // $userId = $this->get('userId'); // Retrieve the passed user ID
 
         // return $model->newQuery();

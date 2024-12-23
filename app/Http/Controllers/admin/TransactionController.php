@@ -15,7 +15,8 @@ class TransactionController extends Controller
      */
     public function index(Request $request,TransactionDataTable $DataTable)
     {
-        dd(decrypt($request['user_id']));
+        
+        // dd(decrypt($request['user_id']));
         $title = 'Coin Transaction';
         $page = 'admin.transaction.list';
         // $js = 'admin.user.userjs';
