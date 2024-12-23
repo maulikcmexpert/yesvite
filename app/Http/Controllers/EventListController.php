@@ -1192,7 +1192,7 @@ class EventListController extends Controller
         if (!empty($draftEvents) && count($draftEvents) != 0) {
             foreach ($draftEvents as $value) {
                 $eventDraftDetail['id'] = $value->id;
-                $eventDraftDetail['event_name'] = $value->event_name;
+                $eventDraftDetail['event_name'] = ($value->event_name!="")?$value->event_name:"";
                 $eventDraftDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
                 $eventDraftDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
 
