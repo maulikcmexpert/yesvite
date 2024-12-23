@@ -6,6 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\TransactionDataTable;
 use Yajra\DataTables\DataTables;
+use App\Models\{
+    User,
+    UserSubscription,
+    Coin_transactions
+};
+
+use Carbon\Carbon;
 
 
 class TransactionController extends Controller
@@ -44,7 +51,30 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
-        // $js = 'admin.user.userjs';  
+        $coins=$request->input('credit_coin');
+        $user_id=$request->input('user_id');
+
+        $user = User::where('id',$user_id)->first();
+        if($user){
+            $total_coin = $user->coins + $coins;
+            User::where('id',$user_id)->update(['coins'=>$total_coin]);
+            $subscription=UserSubscription::where('user_id',$user_id);
+
+            $coin_transaction = new Coin_transactions();
+            $coin_transaction->user_id = $user_id;
+            $coin_transaction->user_subscription_id = $subscription->id;
+            $coin_transaction->status = '0';
+            $coin_transaction->type = 'credit';
+            $coin_transaction->coins = $coins;
+            $coin_transaction->current_balance = $total_coin;
+            $coin_transaction->description = $coins.' Credits Bulk Credits';
+            $coin_transaction->endDate = Carbon::now()->addYears(5)->toDateString();
+            $coin_transaction->save();
+
+            $cryptId=encrypt($user->id);
+            return redirect()->route('transcation.index',['user_id' => $cryptId])
+            ->with('success', 'Coins Credited Successfully');
+        }
         
     }
 
