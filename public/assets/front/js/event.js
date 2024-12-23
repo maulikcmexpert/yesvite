@@ -598,7 +598,19 @@ $(document).on('click',".day",function () {
                 $(scrollStatus).html('');
                 $(scrollStatus).html('No Data Found');
                 $('#all-months-upcoming').css('display','none');
-                $('#tabbtn3').css('display','none');
+                if(response.page=="upcoming"){
+
+                    $('#tabbtn1').css('display','none');
+                }
+
+                if(response.page=="past"){
+
+                    $('#tabbtn3').css('display','none');
+                }
+                if(response.page=="draft"){
+
+                    $('#tabbtn2').css('display','none');
+                }
 
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
