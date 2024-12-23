@@ -30,10 +30,11 @@ class TransactionController extends Controller
     {
         $title = 'Add Coin';
         $page = 'admin.transaction.add';
-                // $js = 'admin.user.userjs';
+        $js = 'admin.transaction.transactionjs';
                 return view('admin.includes.layout', compact(
                     'title',
-                    'page'
+                    'page',
+                    'js'
                 ));
     }
 
