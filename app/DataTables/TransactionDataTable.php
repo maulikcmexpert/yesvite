@@ -97,8 +97,8 @@ class TransactionDataTable extends DataTable
             Column::make('event')->orderable(true),
             Column::make('type')->orderable(false),
             Column::make('coins')->orderable(true),
-            Column::make('current_balance')->title('User Type')->orderable(false),
-            Column::make('used_coins')->title('Set Password')->orderable(false),
+            Column::make('current_balance')->title('Current Balance')->orderable(false),
+            Column::make('used_coins')->title('Used Coins')->orderable(false),
         ];
     }
 
