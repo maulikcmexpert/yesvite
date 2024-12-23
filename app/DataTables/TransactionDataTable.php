@@ -62,7 +62,7 @@ class TransactionDataTable extends DataTable
     {
         // dd($request);
 
-        $userId =$request->userId; // Retrieve the passed user ID
+        $userId =$request->user_id; // Retrieve the passed user ID
         dd(decrypt($userId));
         // return $model->newQuery();
         return Coin_transactions::with([ 'users','event','user_subscriptions']);
