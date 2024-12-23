@@ -2091,6 +2091,7 @@ class EventListController extends Controller
                     }
         }
 
+        dd($eventList);
 
         if($page=="upcoming"){
 
