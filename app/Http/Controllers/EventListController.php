@@ -35,7 +35,7 @@ class EventListController extends Controller
                 // $pages = ($page != "") ? $page : 1;
 
                 //upcoming_event
-                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '==', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
                 // ->orderBy('start_date', 'ASC')  
@@ -44,7 +44,7 @@ class EventListController extends Controller
             $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
             $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+                ->whereIn('id', $invitedEvents)->where('start_date', '==', date('Y-m-d'))
                 ->where('is_draft_save', '0');
                 // ->orderBy('start_date', 'ASC')
                 // ->get();
