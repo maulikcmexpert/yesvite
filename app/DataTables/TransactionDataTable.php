@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Coin_transactions;
-use App\Models\Event
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
