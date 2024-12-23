@@ -21,6 +21,7 @@ $("#addCoin_form").validate({
 
 $(document).on('click','#addCoin',function(e){
     e.preventDefault(); // Prevent default action, if necessary.
+    $(this).prop('disabled', true);
     $('#addCoin_form').submit();
 })
 
