@@ -12,7 +12,7 @@ $("#addCoin_form").validate({
     messages: {
         credit_coin: {
             required: "Please enter credit coins",
-            pattern: "Please enter a credit coins",  
+            pattern: "Please enter valid credit coins",  
         },
 
     },
