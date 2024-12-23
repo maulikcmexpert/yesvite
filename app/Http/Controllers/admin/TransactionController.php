@@ -68,7 +68,7 @@ class TransactionController extends Controller
         if($user){
             $total_coin = $user->coins + $coins;
             User::where('id',$user_id)->update(['coins'=>$total_coin]);
-            $subscription=UserSubscription::where('user_id',$user_id)->get();
+            $subscription=UserSubscription::where('user_id',$user->id)->get();
             dd($subscription);
 
             $coin_transaction = new Coin_transactions();
