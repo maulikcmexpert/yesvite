@@ -1054,11 +1054,12 @@ function getAllEventList(){
     $query->where('app_user', '1');
     })->where('user_id', $user->id)->get()->pluck('event_id');
     $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
+        ->whereIn('id', $invitedEvents)
         ->where('is_draft_save', '0');
 
     $allEvents = $usercreatedList->union($invitedEventsList)->get();
     
-    // return $allEvents;
+    return $allEvents;
 
     if (count($allEvents) != 0) {
 
