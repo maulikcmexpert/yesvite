@@ -1323,18 +1323,24 @@
             <div class="all-events-filter-wrp">
               <form action="" id="event_filter">
                   <div class="notification-filter-sub">
-                    <div class="form-check">
+                    {{-- <div class="form-check">
                       <input class="form-check-input hosting_chk" type="checkbox" value="" id="flexCheckDefault1">
                       <label class="form-check-label hosting_chk_lbl" for="flexCheckDefault1">
                         Hosting <strong>1</strong>
                       </label>
-                    </div>
+                    </div> --}}
+                    @php
+                      $data=getAllEventList();
+                    @endphp
+
+                    @foreach ($data as $event )
                     <div class="form-check">
-                      <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
+                      <input class="form-check-input invited_to_chk" data-event_id="{{$event['id']}}" type="checkbox" value="" id="flexCheckDefault2">
                       <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
-                        Invited To <strong>2</strong>
+                        {{$event['event_name']}}
                       </label>
                     </div>
+                    @endforeach
                   </div>
               </form>
             </div>
