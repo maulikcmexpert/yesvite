@@ -414,7 +414,7 @@ class ApiControllerv2 extends Controller
                 ->where('is_draft_save', '0')
                 ->orderBy('start_date', 'ASC')
                 ->get();
-            dd($usercreatedList);
+            dd(date('Y-m-d'));
 
             $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
 
