@@ -442,7 +442,7 @@ function getNotificationList(){
                         $final_data[$values->event->event_name][] = $notify_data; 
                     }
                     
-                    if ($i==5) {
+                    if ($i==10) {
                         break; // Stop when $i exceeds 7
                     }
                 }
