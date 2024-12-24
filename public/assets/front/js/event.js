@@ -659,3 +659,12 @@ $(document).on('click','.notification-filter-events',function () {
     $('.notification-all-event-wrp').addClass('d-none');
     $('.notification-back').addClass('d-none');
   })
+
+  $('.notification_div').scroll(function () {
+    var scrollTop = $(this).scrollTop(); 
+    var scrollHeight = $(this)[0].scrollHeight; 
+    var elementHeight = $(this).height();
+    if (scrollTop + elementHeight >= scrollHeight) {
+    alert();
+    }
+});

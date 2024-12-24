@@ -158,7 +158,7 @@
             </div>
             <div class="notification-dropdown-content">
        
-              <div class="accordion" id="accordionExample">
+              <div class="accordion notification_div" id="accordionExample">
               @php
                   $notification_list=getNotificationList();
                   $i=0;
