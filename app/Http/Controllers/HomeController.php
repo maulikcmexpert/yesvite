@@ -37,10 +37,10 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->user = Auth::guard('api')->user();
+        $user = Auth::guard('api')->user();
 
         $this->perPage = 5;
-        $this->invitedToCount = invitedToCount($this->user->id);
+        $this->invitedToCount = invitedToCount($user->id);
 
         
     }
