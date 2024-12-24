@@ -1044,29 +1044,29 @@ function getTotalUnreadNotification($user_id){
 }
 
 function getAllEventList(){
-    $user  = Auth::guard('web')->user();
+    $user  = Auth::guard('api')->user();
+
+    $eventData = EventInvitedUser::where(['user_id' => $user->id])->get();
+
     $eventList = [];
-    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])
-    ->where('user_id', $user->id)
-    ->where('is_draft_save', '0');
 
-    $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
-    $query->where('app_user', '1');
-    })->where('user_id', $user->id)->get()->pluck('event_id');
-    $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-        ->whereIn('id', $invitedEvents)
-        ->where('is_draft_save', '0');
+    foreach ($eventData as $val) {
 
-    $allEvents = $usercreatedList->union($invitedEventsList)->get();
-    
-
-    if (count($allEvents) != 0) {
-
-        foreach ($allEvents as $value) {
-            $eventDetail['event_name'] = $value->event_name;
+        $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->get();
+        foreach ($eventDatas as $vals) {
+            $eventDetail['id'] = $vals->id;
+            $eventDetail['event_name'] = $vals->event_name;
             $eventList[] = $eventDetail;
         }
     }
+    $ownerEvent =    Event::select('id', 'event_name')->where(['user_id' => $user->id, 'is_draft_save' => '0'])->get();
+
+    foreach ($ownerEvent as $ownerEvent) {
+        $eventOwnDetail['id'] = $ownerEvent->id;
+        $eventOwnDetail['event_name'] = $ownerEvent->event_name;
+        $eventList[] = $eventOwnDetail;
+    }
+    
     return $eventList;
 }
 
