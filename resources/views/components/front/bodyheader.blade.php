@@ -1330,12 +1330,14 @@
                       </label>
                     </div> --}}
                     @php
-                      $data=getAllEventList();
+                      $user  = Auth::guard('web')->user()->id;
+
+                      $data=getAllEventList($user);
                     @endphp
 
                     @foreach ($data as $event )
                     <div class="form-check">
-                      <input class="form-check-input" name="all_event_list[]"data-event_id="{{$event['id']}}" type="checkbox" value="" id="flexCheckDefault2">
+                      <input class="form-check-input" name="all_event_list[]" data-event_name="{{$event['event_name']}}"data-event_id="{{$event['id']}}" type="checkbox" value="" id="flexCheckDefault2">
                       <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
                         {{$event['event_name']}}
                       </label>
@@ -1348,7 +1350,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="cmn-btn reset-btn all-event-filter-reset">Reset</button>
-        <button type="button" class="cmn-btn filter_apply_btn">Apply</button>
+        <button type="button" class="cmn-btn notification_filter_apply_btn">Apply</button>
       </div>
     </div>
   </div>
