@@ -1056,8 +1056,10 @@ function getAllEventList(){
     $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
         ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
         ->where('is_draft_save', '0');
+
     $allEvents = $usercreatedList->union($invitedEventsList)->get();
     
+    return $allEvents;
 
     if (count($allEvents) != 0) {
 
