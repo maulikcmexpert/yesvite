@@ -1,4 +1,4 @@
-{{dd($filter)}}
+{{-- {{dd($filter)}} --}}
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
