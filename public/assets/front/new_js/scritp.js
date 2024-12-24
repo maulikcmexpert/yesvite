@@ -97,14 +97,14 @@ $("#dropdownButton").on("click", function (event) {
   }
 });
 
-document.addEventListener("click", (event) => {
-  if (
-    !dropdownMenu.contains(event.target) &&
-    !dropdownButton.contains(event.target)
-  ) {
-    dropdownMenu.classList.remove("show");
-  }
-});
+// document.addEventListener("click", (event) => {
+//   if (
+//     !dropdownMenu.contains(event.target) &&
+//     !dropdownButton.contains(event.target)
+//   ) {
+//     dropdownMenu.classList.remove("show");
+//   }
+// });
 // Close the dropdown when clicking outside
 // document.addEventListener("click", (event) => {
 //   if (
