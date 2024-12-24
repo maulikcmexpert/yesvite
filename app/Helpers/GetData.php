@@ -1043,7 +1043,31 @@ function getTotalUnreadNotification($user_id){
     return $total;
 }
 
+function getAllEventList(){
+    $user  = Auth::guard('web')->user();
+    $eventList = [];
+    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+    ->where('user_id', $user->id)
+    ->where('is_draft_save', '0');
 
+    $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
+    $query->where('app_user', '1');
+    })->where('user_id', $user->id)->get()->pluck('event_id');
+    $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
+        ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+        ->where('is_draft_save', '0');
+    $allEvents = $usercreatedList->union($invitedEventsList)->get();
+    
+
+    if (count($allEvents) != 0) {
+
+        foreach ($allEvents as $value) {
+            $eventDetail['event_name'] = $value->event_name;
+            $eventList[] = $eventDetail;
+        }
+    }
+    return $eventList;
+}
 
 function totalEventOfCurrentMonth($user_id){
     $eventData = Event::where(['user_id' => $user_id, 'is_draft_save' => '0'])
