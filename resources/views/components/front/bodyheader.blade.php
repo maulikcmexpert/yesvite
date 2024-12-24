@@ -1243,11 +1243,11 @@
               <form action="" id="event_filter">
                 <div class="notification-filter-events">
                   <h4>Events <i class="fa-solid fa-angle-right"></i></h4>
-                  <div class="notification-selected-events-wrp pb-2">
+                  {{-- <div class="notification-selected-events-wrp pb-2">
                     <span>All Events</span>
                     <span>All Events</span>
                     <span>All Events</span>
-                  </div>
+                  </div> --}}
                 </div>
                 
                 <div class="notification-filter-sub">
@@ -1255,13 +1255,13 @@
                   <div class="form-check">
                     <input class="form-check-input hosting_chk" type="checkbox" value="" id="flexCheckDefault1">
                     <label class="form-check-label hosting_chk_lbl" for="flexCheckDefault1">
-                      Hosting <strong>1</strong>
+                      Read
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
                     <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
-                      Invited To <strong>2</strong>
+                      Unread
                     </label>
                   </div>
                 </div>
@@ -1270,13 +1270,31 @@
                   <div class="form-check">
                     <input class="form-check-input hosting_chk" type="checkbox" value="" id="flexCheckDefault1">
                     <label class="form-check-label hosting_chk_lbl" for="flexCheckDefault1">
-                      Hosting <strong>1</strong>
+                      All
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
                     <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
-                      Invited To <strong>2</strong>
+                      Tag & Mentions
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
+                    <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
+                      Comments
+                    </label>
+                  </div> 
+                  <div class="form-check">
+                    <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
+                    <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
+                      RSVP's
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
+                    <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
+                      Likes
                     </label>
                   </div>
                 </div>
