@@ -408,11 +408,13 @@ class ApiControllerv2 extends Controller
                 $userIsLogin->is_first_login = '0';
                 $userIsLogin->save();
             }
-            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])
+                ->where('start_date', '>=', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0')
                 ->orderBy('start_date', 'ASC')
                 ->get();
+            dd($usercreatedList);
 
             $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
 
@@ -421,7 +423,8 @@ class ApiControllerv2 extends Controller
 
             $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
 
-                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+                ->whereIn('id', $invitedEvents)
+                ->where('start_date', '>=', date('Y-m-d'))
                 ->where('is_draft_save', '0')
                 ->orderBy('start_date', 'ASC')
                 ->get();
