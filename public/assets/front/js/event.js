@@ -696,7 +696,7 @@ $(document).on('click','.notification-filter-events',function () {
             error: function (xhr, status, error) {
                 console.error('Error fetching events:', error);
                 busy4 = false;
-                // $('.loader').css('display','none');    
+                // $('.loader').css('display','none');      
             }
         });
     }
