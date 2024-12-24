@@ -1332,9 +1332,7 @@
                     @if (Auth::guard('web')->check()) 
 
                     @php
-
                       $user  = Auth::guard('web')->user()->id;
-
                       $data=getAllEventList($user);
                     @endphp
 
