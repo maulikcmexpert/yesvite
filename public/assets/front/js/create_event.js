@@ -72,8 +72,8 @@ $(document).ready(function () {
         eventData.longitude = eventDetail.longitude;
         eventData.latitude = eventDetail.latitude;
         final_step = eventDetail.step;
-        console.log(eventData);
-        console.log(eventDetail);
+        // console.log(eventData);
+        // console.log(eventDetail);
         if(current_step == '2'){
             $(".step_1").hide();
             handleActiveClass('.li_design');
@@ -109,15 +109,12 @@ $(document).ready(function () {
             $('.current_step').text('3 of 4');
             $(".step_3").show();
             final_step = 3;
-
             var type="all"
             get_user(type);
         }
     }
     $('#address1').attr('placeholder', '');
-
-    $('.search_user').val('');
-        
+    $('.search_user').val('');        
 });
 
 var swiper = new Swiper(".mySwiper", {
