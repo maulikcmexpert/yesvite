@@ -33,14 +33,12 @@ class HomeController extends Controller
     protected $user;
     // protected $pendingRsvpCount;
     // protected $hostingCount;
-    protected $invitedToCount;
+    // protected $invitedToCount;
 
     public function __construct()
     {
-        $user = Auth::guard('web')->user()->id;
 
         $this->perPage = 5;
-        $this->invitedToCount = invitedToCount($user);
 
         
     }
@@ -102,7 +100,7 @@ class HomeController extends Controller
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'lastname' => empty($user->lastname) ? "" : $user->lastname,
                     'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
-                    'total_events' => $totalEvent+$this->invitedToCount,
+                    'total_events' => $totalEvent+ $invitedToCount,
                     'total_events_of_year' => $totalEventOfYear,
                     'total_events_of_current_month' => count($totalEventOfCurrentMonth),
                     'total_photos' => $totalEventPhotos,
