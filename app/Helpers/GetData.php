@@ -1046,7 +1046,7 @@ function getTotalUnreadNotification($user_id){
 function getAllEventList(){
     $user  = Auth::guard('web')->user();
     $eventList = [];
-    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])
     ->where('user_id', $user->id)
     ->where('is_draft_save', '0');
 
@@ -1054,7 +1054,6 @@ function getAllEventList(){
     $query->where('app_user', '1');
     })->where('user_id', $user->id)->get()->pluck('event_id');
     $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-        ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
         ->where('is_draft_save', '0');
 
     $allEvents = $usercreatedList->union($invitedEventsList)->get();
