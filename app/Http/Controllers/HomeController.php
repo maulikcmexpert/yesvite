@@ -30,15 +30,18 @@ class HomeController extends Controller
 
     protected $perPage;
     // protected  $upcomingEventCount;
-    // protected $user;
+    protected $user;
     // protected $pendingRsvpCount;
     // protected $hostingCount;
-    // protected $invitedToCount;
+    protected $invitedToCount;
 
     public function __construct()
     {
-     
+        $this->user = Auth::guard('api')->user();
+
         $this->perPage = 5;
+        $this->invitedToCount = invitedToCount($this->user->id);
+
         
     }
     // public function index()
@@ -99,7 +102,7 @@ class HomeController extends Controller
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'lastname' => empty($user->lastname) ? "" : $user->lastname,
                     'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
-                    'total_events' => $totalEvent,
+                    'total_events' => $totalEvent+$this->invitedToCount,
                     'total_events_of_year' => $totalEventOfYear,
                     'total_events_of_current_month' => count($totalEventOfCurrentMonth),
                     'total_photos' => $totalEventPhotos,
@@ -266,7 +269,8 @@ class HomeController extends Controller
                         $eventDetail['event_detail'] = $eventData;
                     }
                     $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
-                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
+                    $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+
                     $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                     $comments =  EventPostComment::where('user_id', $value->user->id)->count();
                     $eventDetail['user_profile'] = [
