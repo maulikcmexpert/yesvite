@@ -468,7 +468,8 @@ class EventListController extends Controller
                             $totalInvitedUpcoming = EventInvitedUser::whereHas('event', function ($query) {
                                 $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
                             })->where('user_id', $user->id)
-                            ->where('is_co_host','0')->count();
+                            // ->where('is_co_host','0')
+                            ->count();
 
 
                             // return $totalInvited;
