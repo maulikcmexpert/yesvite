@@ -1,5 +1,8 @@
 
-{{getAllEventList()}}
+@php
+  $data=getAllEventList();
+  dd($data);
+@endphp
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details">
