@@ -1,4 +1,5 @@
-<div class="step_2" style="display: none;">
+{{-- <div class="step_2" style="display: none;"> --}}
+<div class="step_2">
     
     <div class="main-content-right">
         <div class="new_event_detail_form choose-design-form">

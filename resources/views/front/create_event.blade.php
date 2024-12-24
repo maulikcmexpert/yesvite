@@ -277,14 +277,9 @@
             <div class="new-event-sidebar-menu">
                 <ul>
                     <!-- ---for active menu add active class--- -->
-                    <li class="li_event_detail">
-                        <div class="menu-circle-wrp side-bar-list active ">
-                            <span></span>
-                            <h3>Event Details</h3>
-                        </div>
-                    </li>
+                   
                     <li class="li_design">
-                        <div class="menu-circle-wrp side-bar-list">
+                        <div class="menu-circle-wrp side-bar-list active">
                             <span class="design-span"></span>
                             <h3>Design</h3>
                         </div>
@@ -300,6 +295,12 @@
                                 </div>
                             </li>
                         </ul>
+                    </li>
+                    <li class="li_event_detail">
+                        <div class="menu-circle-wrp side-bar-list  ">
+                            <span></span>
+                            <h3>Event Details</h3>
+                        </div>
                     </li>
                     <li class="li_guest">
                         <div class="menu-circle-wrp side-bar-list">

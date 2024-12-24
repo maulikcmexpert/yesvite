@@ -1,7 +1,7 @@
 @php
     use Carbon\Carbon;
 @endphp
-<div class="step_1">
+<div class="step_1" style="display: none;">
     <div class="main-content-right">
         <div class="new_event_detail_form">
             <form action="">
