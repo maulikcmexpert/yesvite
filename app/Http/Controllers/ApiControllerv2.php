@@ -7352,6 +7352,7 @@ class ApiControllerv2 extends Controller
             $eventDetails['subscription_plan_name'] = $eventDetail->subscription_plan_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+            $eventDetails['event_timezone'] = (isset($eventDetail->rsvp_start_timezone) && $eventDetail->rsvp_start_timezone != '')?$eventDetail->rsvp_start_timezone:'';
 
             $event_date = $eventDetail->start_date;
             if ($eventDetail->start_date != $eventDetail->end_date) {
