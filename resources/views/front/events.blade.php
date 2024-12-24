@@ -115,7 +115,7 @@
                       <div class="form-check">
                         <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2"checked>
                         <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
-                          Invited To <strong>({{$filter['invited_to']}})</strong>
+                          Invited To <strong>({{$filter['invitedTo_count_upcoming']}})</strong>
                         </label>
                       </div>
                       <div class="form-check">

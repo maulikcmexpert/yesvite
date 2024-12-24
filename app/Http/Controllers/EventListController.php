@@ -465,6 +465,10 @@ class EventListController extends Controller
                             $invitedToCountCurrentMonth= invitedToCountCurrentMonth($user->id);
                             $totalEventOfCurrentMonth = totalEventOfCurrentMonth($user->id);
 
+                            $totalInvitedUpcoming = EventInvitedUser::whereHas('event', function ($query) {
+                                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                            })->where('user_id', $user->id)->count();
+                            // return $totalInvited;
                             // $invitedToCountCurrentMonth=count($invitedEventsListTo);
                             //ProfileData//
 
@@ -474,6 +478,7 @@ class EventListController extends Controller
                                 'total_events_of_current_month' => $totalEventOfCurrentMonth,   
                                 'total_upcoming_events' => $upcomingEventCount,
                                 'invitedTo_count' => $invitedToCount,
+                                'invitedTo_count_upcoming' => $totalInvitedUpcoming,
                                 'invitedTo_count_current_month' => $invitedToCountCurrentMonth,
                                 'hosting_count' => $hostingCount,
                                 'hosting_count_current_month'=>$hostingCountCurrentMonth,
@@ -483,6 +488,7 @@ class EventListController extends Controller
 
                             $filter = [
                                 'invited_to' => $totalInvited,
+                                'invitedTo_count_upcoming' => $totalInvitedUpcoming,
                                 'hosting' => $totalHosting,
                                 'need_to_rsvp' => $total_need_rsvp_event_count,
                                 'past_event'=>$totalPastEventCount,
