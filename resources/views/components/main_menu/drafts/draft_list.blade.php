@@ -62,7 +62,19 @@
                         <div class="progress-bar__wrapper {{$color}}">
                           <progress id="progress-bar" value="{{$percent}}" max="100"></progress>
                           <div class="d-flex align-items-center justify-content-between">
-                              <h4>{{$draft['step']}}/4 Steps - Guest</h4>
+                            @php
+                            $step_name="";
+                              if($draft['step']=='1'){
+                                $step_name="Design";
+                              }elseif ($draft['step']=='2') {
+                                $step_name="Event Details";
+                              }elseif ($draft['step']=='3') {
+                                $step_name="Guests";
+                              }elseif ($draft['step']=='4') {
+                                $step_name="Event Settings";
+                              }
+                            @endphp
+                              <h4>{{$draft['step']}}/4 Steps - {{$step_name}}</h4>
                               <label class="progress-bar__value" htmlfor="progress-bar"> {{$percent}}%</label>
                               {{-- <p><span class="prograsbar-hosting">Hosting</span><span class="prograsbar-pro">{{$draft['event_plan_name']}}</span></p> --}}
                           </div>
