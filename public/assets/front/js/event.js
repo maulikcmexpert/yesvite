@@ -10,10 +10,13 @@ var base_url=$('#base_url').val();
 var busy1 = false;
 var busy2 = false;
 var busy3 = false;
+var busy4=false;
 var limit = 10;
 var offset1 = 0;
 var offset2 = 0;
 var offset3 = 0;
+var offset4 = 0;
+
 
 var page = '';
 var busy=false;
@@ -661,10 +664,40 @@ $(document).on('click','.notification-filter-events',function () {
   })
 
   $('.notification_div').scroll(function () {
+    if (busy4) return; 
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
     if (scrollTop + elementHeight >= scrollHeight) {
-    alert();
+        busy4 = true;
+        offset4 += limit;
+        // var current_month2="";
+
+        // $('.latest_month_draft').each(function () { 
+        //     current_month2=$(this).val();
+        // });
+        // $('.loader').css('display','block');    
+        $.ajax({
+            url: `${base_url}fetch_notification`,
+            type: 'GET',
+            data: { limit: limit, offset: offset4 },
+            success: function (response) {
+                if (response.view && response.view!="") {
+                    $('#notification_div').append(response.view);
+                    busy4 = false; // Allow further AJAX calls
+
+                }else{
+                    // $('.loader').css('display', 'none');
+                    return; 
+                }
+                // hasMore = response.has_more; // Update the `hasMore` flag
+                // $('.loader').css('display','none');    
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching events:', error);
+                busy4 = false;
+                // $('.loader').css('display','none');    
+            }
+        });
     }
 });
