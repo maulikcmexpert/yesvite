@@ -1329,7 +1329,10 @@
                         Hosting <strong>1</strong>
                       </label>
                     </div> --}}
+                    @if (Auth::guard('web')->check()) 
+
                     @php
+
                       $user  = Auth::guard('web')->user()->id;
 
                       $data=getAllEventList($user);
@@ -1343,6 +1346,7 @@
                       </label>
                     </div>
                     @endforeach
+                    @endif
                   </div>
               </form>
             </div>
