@@ -1059,7 +1059,6 @@ function getAllEventList(){
 
     $allEvents = $usercreatedList->union($invitedEventsList)->get();
     
-    return $allEvents;
 
     if (count($allEvents) != 0) {
 
