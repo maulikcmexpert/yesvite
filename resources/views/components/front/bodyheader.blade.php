@@ -1351,7 +1351,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="cmn-btn reset-btn all-event-filter-reset">Reset</button>
+        <button type="button" class="cmn-btn reset-btn all-event-notification-filter-reset">Reset</button>
         <button type="button" class="cmn-btn notification_filter_apply_btn">Apply</button>
       </div>
     </div>
