@@ -740,6 +740,9 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='notificationTypes[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
+
+    $('.notification-selected-events-wrp').html('');
+
 });
 
 $(document).on('change', 'input[name="selectedEvents[]"]', function () {
