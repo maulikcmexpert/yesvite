@@ -1253,14 +1253,14 @@
                 <div class="notification-filter-sub">
                   <h3>Notification Type</h3>
                   <div class="form-check">
-                    <input class="form-check-input hosting_chk" type="checkbox" value="" id="flexCheckDefault1">
-                    <label class="form-check-label hosting_chk_lbl" for="flexCheckDefault1">
+                    <input class="form-check-input " data-name="read" name="notificationTypes[]" type="checkbox" value="" id="flexCheckDefault1">
+                    <label class="form-check-label " for="flexCheckDefault1">
                       Read
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input invited_to_chk" type="checkbox" value="" id="flexCheckDefault2">
-                    <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
+                    <input class="form-check-input " data-name="unread" name="notificationTypes[]" type="checkbox" value="" id="flexCheckDefault2">
+                    <label class="form-check-label " for="flexCheckDefault2">
                       Unread
                     </label>
                   </div>

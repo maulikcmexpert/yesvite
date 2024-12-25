@@ -701,3 +701,17 @@ $(document).on('click','.notification-filter-events',function () {
         });
     }
 });
+
+$(document).on('click','.notification_filter_apply_btn',function(){
+
+    var notificationTypes=[];
+    var selectedEvents=[];
+    var activityTypes=[];
+
+    $("input[name='activityTypes[]']:checked").each(function () {
+        notificationTypes.push($(this).data("name"));
+    });
+
+    console.log(notificationTypes);
+    
+});
