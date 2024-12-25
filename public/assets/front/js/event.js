@@ -723,3 +723,9 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
     console.log(activityTypes); 
 
 });
+
+$(document).on('change', 'input[data-name="all"]', function () {
+    var isChecked = $(this).is(':checked');
+    $("input[name='activityTypes[]']").prop('checked', isChecked);
+});
+
