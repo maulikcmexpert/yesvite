@@ -730,7 +730,7 @@ $(document).on('change', 'input[data-name="all"]', function () {
     $("input[name='activityTypes[]']").prop('checked', isChecked);
 });
 
-$(document).on('change', '.all-event-notification-filter-reset', function () {
+$(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='selectedEvents[]']:checked").each(function () {
             $(this).prop('checked', isChecked);
     });
