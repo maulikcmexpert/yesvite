@@ -716,7 +716,7 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
     });
 
     $("input[name='selectedEvents[]']:checked").each(function () {
-        selectedEvents.push($(this).data("name"));
+        selectedEvents.push($(this).data("event_id"));
     });
 
     console.log(notificationTypes); 
