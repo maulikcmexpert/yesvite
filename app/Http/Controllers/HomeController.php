@@ -467,7 +467,13 @@ class HomeController extends Controller
     }
  
     public function notificationFilter(Request $request){
-        dd($request);
+
+        $notificationTypes = $request->input('notificationTypes', []);
+        $activityTypes = $request->input('activityTypes', []);
+        $selectedEvents = $request->input('selectedEvents', []);
+
+        dd($notificationTypes);
+        // dd($request);
         
     }
 }
