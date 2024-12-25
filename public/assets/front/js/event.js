@@ -702,16 +702,13 @@ $(document).on('click','.notification-filter-events',function () {
     }
 });
 
-$(document).on('click','.notification_filter_apply_btn',function(){
+$(document).on('click', '.notification_filter_apply_btn', function () {
+    var notificationTypes = [];
 
-    var notificationTypes=[];
-    var selectedEvents=[];
-    var activityTypes=[];
-
-    $("input[name='activityTypes[]']:checked").each(function () {
+    $("input[name='notificationTypes[]']:checked").each(function () {
         notificationTypes.push($(this).data("name"));
     });
 
-    console.log(notificationTypes);
-    
+    console.log(notificationTypes); 
+
 });
