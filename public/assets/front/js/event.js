@@ -743,9 +743,12 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 });
 
 $(document).on('change', 'input[name="selectedEvents[]"]', function () {
-    $eventname=$(this).data('event_name');
-    console.log($eventname);
-    $('.notification-selected-events-wrp').append('');
+    var eventname=$(this).data('event_name');
+    if ($(this).is(':checked')) {
+        $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventName + '</span>');
+    } else {
+        $('.notification-selected-events-wrp .selected-event:contains(' + eventName + ')').remove();
+    }   
 });
 
 

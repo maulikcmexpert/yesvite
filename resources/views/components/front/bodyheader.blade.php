@@ -1244,9 +1244,9 @@
                 <div class="notification-filter-events">
                   <h4>Events <i class="fa-solid fa-angle-right"></i></h4>
                   <div class="notification-selected-events-wrp pb-2">
+                    {{-- <span>All Events</span>
                     <span>All Events</span>
-                    <span>All Events</span>
-                    <span>All Events</span>
+                    <span>All Events</span> --}}
                   </div>
                 </div>
                 
