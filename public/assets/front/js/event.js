@@ -727,7 +727,7 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
   $.ajax({
         url: `${base_url}notification_filter`,
         type: 'GET',
-        data: {notificationTypes:notification_filter,activityTypes:activityTypes,selectedEvents:selectedEvents},
+        data: {notificationTypes:notificationTypes,activityTypes:activityTypes,selectedEvents:selectedEvents},
         success: function (response) {
            
         },
