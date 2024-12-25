@@ -264,6 +264,7 @@ function getTotalUnreadMessageCount()
 // }
 
 function getNotificationList($notificationTypes = [], $activityTypes = [], $selectedEvents = []){
+    dd($notificationTypes,$activityTypes,$selectedEvents);
     $user = Auth::guard('web')->user();
         // $rawData = $request->getContent();
         // $input = json_decode($rawData, true);
