@@ -467,6 +467,7 @@ class HomeController extends Controller
     }
  
     public function notificationFilter(Request $request){
-        dd(1);
+        dd($request);
+        
     }
 }
