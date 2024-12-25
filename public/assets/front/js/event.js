@@ -732,7 +732,7 @@ $(document).on('change', 'input[data-name="all"]', function () {
 
 $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='selectedEvents[]']:checked").each(function () {
-            $(this).prop('checked', isChecked);
+        $(this).prop('checked', false);
     });
 });
 
