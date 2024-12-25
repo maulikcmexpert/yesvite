@@ -62,7 +62,7 @@
     </filter>
     </defs>
 </svg> --}}
-<img src="{{asset('assets/front/image/yesvite_logo.png')}}" width="140" height="65" alt="logo">
+<img src="{{asset('assets/front/image/yesvite_logo.png')}}" style="width:140px;height:65px;" alt="logo">
               </a>
               <ul class="nav">
                   <li class="nav-item">
