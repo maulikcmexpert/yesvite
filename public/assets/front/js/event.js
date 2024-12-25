@@ -734,6 +734,12 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='selectedEvents[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
+    $("input[name='activityTypes[]']:checked").each(function () {
+        $(this).prop('checked', false);
+    });
+    $("input[name='notificationTypes[]']:checked").each(function () {
+        $(this).prop('checked', false);
+    });
 });
 
 
