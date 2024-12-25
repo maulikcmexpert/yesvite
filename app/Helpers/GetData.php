@@ -263,7 +263,7 @@ function getTotalUnreadMessageCount()
 //     return $final_data;
 // }
 
-function getNotificationList(){
+function getNotificationList($notificationTypes = [], $activityTypes = [], $selectedEvents = []){
     $user = Auth::guard('web')->user();
         // $rawData = $request->getContent();
         // $input = json_decode($rawData, true);

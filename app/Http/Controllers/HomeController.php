@@ -471,9 +471,7 @@ class HomeController extends Controller
         $notificationTypes = $request->input('notificationTypes', []);
         $activityTypes = $request->input('activityTypes', []);
         $selectedEvents = $request->input('selectedEvents', []);
-
-        dd($notificationTypes);
-        // dd($request);
+        getNotificationList($notificationTypes,$activityTypes,$selectedEvents);
         
     }
 }
