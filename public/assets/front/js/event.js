@@ -715,12 +715,13 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
         activityTypes.push($(this).data("name"));
     });
 
-    $("input[name='notificationTypes[]']:checked").each(function () {
-        notificationTypes.push($(this).data("name"));
+    $("input[name='selectedEvents[]']:checked").each(function () {
+        selectedEvents.push($(this).data("name"));
     });
 
     console.log(notificationTypes); 
     console.log(activityTypes); 
+    console.log(selectedEvents); 
 
 });
 
