@@ -704,11 +704,22 @@ $(document).on('click','.notification-filter-events',function () {
 
 $(document).on('click', '.notification_filter_apply_btn', function () {
     var notificationTypes = [];
+    var selectedEvents= [];
+    var activityTypes= [];
+
+    $("input[name='notificationTypes[]']:checked").each(function () {
+        notificationTypes.push($(this).data("name"));
+    });
+
+    $("input[name='activityTypes[]']:checked").each(function () {
+        activityTypes.push($(this).data("name"));
+    });
 
     $("input[name='notificationTypes[]']:checked").each(function () {
         notificationTypes.push($(this).data("name"));
     });
 
     console.log(notificationTypes); 
+    console.log(activityTypes); 
 
 });
