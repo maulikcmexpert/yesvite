@@ -742,7 +742,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     });
 });
 
-$(document).on('change', 'input[name="selectedEvents"]', function () {
+$(document).on('change', 'input[name="selectedEvents[]"]', function () {
     $eventname=$(this).data('event_name');
     console.log($eventname);
     $('.notification-selected-events-wrp').append('');
