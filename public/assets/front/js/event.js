@@ -723,13 +723,34 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
     console.log(activityTypes); 
     console.log(selectedEvents); 
 
+
+  $.ajax({
+        url: `${base_url}notification_filter`,
+        type: 'GET',
+        data: { },
+        success: function (response) {
+           
+        },
+        error: function (xhr, status, error) {
+    
+        },
+        complete: function () {
+        }
+    });
 });
 
 $(document).on('change', 'input[data-name="all"]', function () {
     var isChecked = $(this).is(':checked');
     $("input[name='activityTypes[]']").prop('checked', isChecked);
 });
-
+$(document).on('change', 'input[name="selectedEvents[]"]', function () {
+    var eventname=$(this).data('event_name');
+    if ($(this).is(':checked')) {
+        $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+    } else {
+        $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
+    }   
+});
 $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='selectedEvents[]']:checked").each(function () {
         $(this).prop('checked', false);
@@ -740,18 +761,9 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='notificationTypes[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
-
     $('.notification-selected-events-wrp').html('');
-
 });
 
-$(document).on('change', 'input[name="selectedEvents[]"]', function () {
-    var eventname=$(this).data('event_name');
-    if ($(this).is(':checked')) {
-        $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
-    } else {
-        $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
-    }   
-});
+
 
 

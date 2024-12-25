@@ -466,4 +466,7 @@ class HomeController extends Controller
         return $totalInvited;
     }
  
+    public function notificationFilter(Request $request){
+        dd(1);
+    }
 }
