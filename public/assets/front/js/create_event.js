@@ -3495,7 +3495,7 @@ $(document).on("click", ".li_event_detail", function () {
 
     setTimeout(() => {
         var downloadImage = document.getElementById("imageEditor1");
-        $("#loader").show();
+        // $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         dbJson = getTextDataFromCanvas();
@@ -4797,30 +4797,30 @@ $(document).on("click", ".store_desgin_temp", function () {
 });
 
 $(document).on("click", ".next_guest_step", function () {
-    
-    canvas.discardActiveObject();
-    canvas.getObjects().forEach(obj => {
-        if (obj.type === 'group') {
-            canvas.remove(obj) // Your existing function to add icons
-        }
-    });
+    savePage1Data();  
+    // canvas.discardActiveObject();
+    // canvas.getObjects().forEach(obj => {
+    //     if (obj.type === 'group') {
+    //         canvas.remove(obj) // Your existing function to add icons
+    //     }
+    // });
 
-    canvas.renderAll();
-    setTimeout(() => {
-        var downloadImage = document.getElementById("imageEditor1");
-        $("#loader").show();
-        $(this).prop("disabled", true);
-        $('.btn-close').prop("disabled", true);
-        dbJson = getTextDataFromCanvas();
-        // console.log(textData);
-        // dbJson = {
-        //     textElements: textData
-        // };
-        eventData.textData = dbJson;
-        eventData.temp_id = temp_id;
-        save_image_design(downloadImage);
-        $(".main-content-wrp").addClass("blurred");
-    }, 500);
+    // canvas.renderAll();
+    // setTimeout(() => {
+    //     var downloadImage = document.getElementById("imageEditor1");
+    //     $("#loader").show();
+    //     $(this).prop("disabled", true);
+    //     $('.btn-close').prop("disabled", true);
+    //     dbJson = getTextDataFromCanvas();
+    //     // console.log(textData);
+    //     // dbJson = {
+    //     //     textElements: textData
+    //     // };
+    //     eventData.textData = dbJson;
+    //     eventData.temp_id = temp_id;
+    //     save_image_design(downloadImage);
+    //     $(".main-content-wrp").addClass("blurred");
+    // }, 500);
 });
 
 var design_inner_image = '';
