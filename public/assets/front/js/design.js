@@ -464,12 +464,11 @@ $(document).on("click", ".edit_design_tem", function(e) {
     e.preventDefault();
     var url = $(this).data("url");
     var template = $(this).data("template");
-    var imageUrl = $(this).data("image");
+    image = $(this).data("image");
     shapeImageUrl = $(this).data('shape_image');
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
-    $(".edit_design_tem").attr("data-image", imageUrl);
     if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
         dbJson = eventData.textData;
     } else {
