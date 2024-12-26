@@ -2876,24 +2876,24 @@ function savePage1Data(close = null) {
     }
     
 
-    if (
-        event_type != "" &&
-        event_name != "" &&
-        hostedby != "" &&
-        event_date != "" &&
-        start_time != "" &&
-        address1 != "" &&
-        city != "" &&
-        state != "" &&
-        zipcode != ""
-    ) {
-        if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
-            $('#end-time-zone').focus();
-            $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
-                .css("display", "block")
-                .css("color", "red");
-            return;
-        }
+    // if (
+    //     event_type != "" &&
+    //     event_name != "" &&
+    //     hostedby != "" &&
+    //     event_date != "" &&
+    //     start_time != "" &&
+    //     address1 != "" &&
+    //     city != "" &&
+    //     state != "" &&
+    //     zipcode != ""
+    // ) {
+    //     if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
+    //         $('#end-time-zone').focus();
+    //         $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
+    //             .css("display", "block")
+    //             .css("color", "red");
+    //         return;
+    //     }
         // eventData = {
 
             eventData.event_id= $('#event_id').val();
@@ -2945,8 +2945,8 @@ function savePage1Data(close = null) {
         // $(".event_address").text(description);
         // $(".event_time").text(formattedTime);
         $(".step_2").show();
-        $('.event_create_percent').text('50%');
-        $('.current_step').text('2 of 4');
+        $('.event_create_percent').text('25%');
+        $('.current_step').text('1 of 4');
         active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
         if(final_step == 1){
             final_step = 2;
@@ -2954,7 +2954,7 @@ function savePage1Data(close = null) {
         eventData.step = final_step;
         console.log(eventData);
 
-    }
+    // }
 
     // eventData.page1 = {
     //     event_type: event_type,
@@ -3372,7 +3372,7 @@ function li_design_click(){
         $("#edit-design-temp").css("display", "none");
         $(".step_final_checkout").css("display", "none");
         active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
-        $('.event_create_percent').text('0%');
+        $('.event_create_percent').text('25%');
         $('.current_step').text('1 of 4');
 
         // edit_design_modal();
@@ -3483,8 +3483,8 @@ $(document).on("click", ".li_event_detail", function () {
     $(".step_final_checkout").css("display", "none");
     active_responsive_dropdown('drop-down-event-detail');
     
-    $('.event_create_percent').text('25%');
-    $('.current_step').text('1 of 4');
+    $('.event_create_percent').text('50%');
+    $('.current_step').text('2 of 4');
     
     
     handleActiveClass(this);
