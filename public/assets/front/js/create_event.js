@@ -561,7 +561,11 @@ $(function() {
   });
 $(document).on('click',function(e){
     e.preventDefault();
+    
+})
+$(function () {
     var selectedDates = new Set();
+    
     $("#event-date").daterangepicker(
         {
             autoUpdateInput: false,
@@ -619,13 +623,8 @@ $(document).on('click',function(e){
         picker.show();
         $('#event-date').next().addClass('floatingfocus');
     });
-})
-// $(function () {
-    
-//     alert();
-    
    
-// });
+});
 
 $("#schedule").on("change", function () {
     var eventDate = $("#event-date").val();
