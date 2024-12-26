@@ -9,7 +9,7 @@ let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
 var current_shape;
-$(document).on("click", ".design-card", function() {
+$(document).on("click", ".design-cards", function() {
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
