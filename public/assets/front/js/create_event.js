@@ -3495,7 +3495,7 @@ $(document).on("click", ".li_event_detail", function () {
         var downloadImage = document.getElementById("imageEditor1");
         console.log({downloadImage});
         
-        // $("#loader").show();
+        $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         dbJson = getTextDataFromCanvas();
