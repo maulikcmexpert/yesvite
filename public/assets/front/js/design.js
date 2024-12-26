@@ -461,6 +461,13 @@ $(document).on("click", ".design-sidebar-action", function() {
 });
 
 $(document).on("click", ".edit_design_tem", function(e) {
+    var url = $(this).data("url");
+    var template = $(this).data("template");
+    var imageUrl = $(this).data("image");
+    shapeImageUrl = $(this).data('shape_image');
+    var json = $(this).data("json");
+    //console.log(json);
+    var id = $(this).data("id");
     e.preventDefault();
     // //console.log(dbJson);
     // //console.log(image);
