@@ -2560,10 +2560,19 @@ $(document).on("click", "#next_setting", function () {
 
 
 $(document).on('click','#next_design',function() {
-    // alert();
-    savePage1Data('next');
-    // console.log(eventData);
-    // 
+   
+    $(".step_1").hide();
+    handleActiveClass('.li_design');
+    $('.pick-card').addClass('active');
+    $('.design-span').addClass('active');
+    $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+    $(".step_2").show();
+    $('.event_create_percent').text('25%');
+    $('.current_step').text('1 of 4');
+    active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
+  
+    final_step = 2;
+    eventData.step = final_step;
 })
 
 $(document).on("click", "#close_createEvent", function () {
