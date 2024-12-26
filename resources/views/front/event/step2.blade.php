@@ -58,7 +58,7 @@
                                         </nav>
                                         <div class="choose-design-cards">
                                             @foreach ($subcategory->textdatas as $temp)
-                                                <div class="design-card" data-bs-toggle="modal"
+                                                <div class="edit_design_tem design-cards" data-bs-toggle="modal"
                                                 type="button" data-template="template_1" data-image="{{ asset('storage/canvas/'.$temp->image) }}"
                                                 data-shape_image="{{ ($temp->shape_image!='')?asset('storage/canvas/'.$temp->shape_image):'' }}"
                                                     data-json="{{json_encode($temp->static_information)}}" data-id="{{$temp->id}}">
