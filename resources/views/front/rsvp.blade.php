@@ -3,7 +3,7 @@
     use Carbon\Carbon;
 @endphp
 <x-front.advertise />
-<section class="rsvp-wrp">
+<section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
    <div class="rsvp-tab-wrp event-center-tabs-main">
     <nav>
