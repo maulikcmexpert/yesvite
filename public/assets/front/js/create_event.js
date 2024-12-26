@@ -4797,7 +4797,6 @@ $(document).on("click", ".store_desgin_temp", function () {
 });
 
 $(document).on("click", "#next_guest_step", function () {
-    alert();
     savePage1Data();  
     // canvas.discardActiveObject();
     // canvas.getObjects().forEach(obj => {
