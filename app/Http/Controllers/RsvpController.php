@@ -31,7 +31,7 @@ class RsvpController extends Controller
         $event = Event::with(['user', 'event_image', 'event_settings'])->where('id', decrypt($eventId))->first();
 
         if ($event != null) {
-
+            $co_hosts = EventInvitedUser::with('user')->where(['event_id' => decrypt($eventId),'is_co_host' => '1'])->first();
             $isInvited = EventInvitedUser::where(['event_id' => decrypt($eventId), 'user_id' => decrypt($userId)])->first();
             if ($isInvited != null) {
 
@@ -102,7 +102,8 @@ class RsvpController extends Controller
                     'event_id',
                     'user_id',
                     'is_podluck',
-                    'is_adultOnly'
+                    'is_adultOnly',
+                    'co_hosts'
                 ));
                 // return redirect('home');
             }
