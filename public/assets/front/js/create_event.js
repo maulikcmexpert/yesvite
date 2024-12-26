@@ -562,7 +562,7 @@ $(function() {
 
 $(function () {
     var selectedDates = new Set();
-
+    alert();
     $("#event-date").daterangepicker(
         {
             autoUpdateInput: false,
