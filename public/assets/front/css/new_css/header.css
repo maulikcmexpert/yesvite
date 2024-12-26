@@ -99,8 +99,11 @@ header{
     height: 40px;
     border-radius: 50%;
     background-color: transparent;
-    border: none;
-    
+    border: none;   
+}
+
+.header-profile-wrp .profile-drop-down-menu img{
+    border-radius: 50%;
 }
 
 .header-profile-wrp button h5{
