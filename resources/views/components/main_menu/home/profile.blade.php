@@ -37,7 +37,7 @@
         @endif
       </div>
       <div class="home-center-profile-content">
-          <h3>{{$profileData['firstname']}} {{$profileData['lastname']}} <span>PRO</span></h3>
+          <h3>{{$profileData['firstname']}} {{$profileData['lastname']}}</h3>
           <p>Member Since: {{$profileData['created_at']}}</p>
       </div>
     </div>
