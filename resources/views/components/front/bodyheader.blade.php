@@ -437,9 +437,7 @@
                                               @endif
                                         <div class="notification-video-content">
                                           <p>
-                                            Thanks everyone for RSVP'ing on time. I
-                                            hope everyone can make it to this special
-                                            day of ours”
+                                            {{$inner_data['post_message']}}
                                           </p>
                                         </div>
                                       </div>
