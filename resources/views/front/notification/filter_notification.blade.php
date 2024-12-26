@@ -266,7 +266,7 @@ $i++;
                               @if($inner_data['media_type']=="photo")
                               <img src="{{$inner_data['post_image']}}" alt=""/>
                               @elseif($inner_data['media_type']=="video")
-                              <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
+                              <a href="{{$inner_data['post_image']}}" class="notification-video popup-videos">
                                 <video>
                                   <source src="{{$inner_data['post_image']}}" type="video/mp4" />
                                 </video>
