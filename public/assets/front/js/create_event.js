@@ -3483,26 +3483,25 @@ function edit_design_modal() {
 }
 
 $(document).on("click", ".li_event_detail", function () {
+    $('#sidebar_select_design_category').css('display','none');
     canvas.discardActiveObject();
     canvas.getObjects().forEach(obj => {
         if (obj.type === 'group') {
             canvas.remove(obj) // Your existing function to add icons
         }
     });
-
     canvas.renderAll();
+
     setTimeout(() => {
-        var downloadImage = document.getElementById("imageEditor1");
-        console.log({downloadImage});
-        
+        var downloadImage = document.getElementById("download_image");
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         dbJson = getTextDataFromCanvas();
-        // console.log(textData);
         // dbJson = {
         //     textElements: textData
         // };
+        // console.log(dbJson);
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
         save_image_design(downloadImage);
