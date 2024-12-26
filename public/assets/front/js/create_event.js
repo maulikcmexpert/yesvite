@@ -2560,10 +2560,19 @@ $(document).on("click", "#next_setting", function () {
 
 
 $(document).on('click','#next_design',function() {
-    // alert();
-    savePage1Data('next');
-    // console.log(eventData);
-    // 
+   
+    $(".step_1").hide();
+    handleActiveClass('.li_design');
+    $('.pick-card').addClass('active');
+    $('.design-span').addClass('active');
+    $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+    $(".step_2").show();
+    $('.event_create_percent').text('25%');
+    $('.current_step').text('1 of 4');
+    active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
+  
+    final_step = 2;
+    eventData.step = final_step;
 })
 
 $(document).on("click", "#close_createEvent", function () {
@@ -2876,24 +2885,24 @@ function savePage1Data(close = null) {
     }
     
 
-    // if (
-    //     event_type != "" &&
-    //     event_name != "" &&
-    //     hostedby != "" &&
-    //     event_date != "" &&
-    //     start_time != "" &&
-    //     address1 != "" &&
-    //     city != "" &&
-    //     state != "" &&
-    //     zipcode != ""
-    // ) {
-    //     if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
-    //         $('#end-time-zone').focus();
-    //         $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
-    //             .css("display", "block")
-    //             .css("color", "red");
-    //         return;
-    //     }
+    if (
+        event_type != "" &&
+        event_name != "" &&
+        hostedby != "" &&
+        event_date != "" &&
+        start_time != "" &&
+        address1 != "" &&
+        city != "" &&
+        state != "" &&
+        zipcode != ""
+    ) {
+        if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
+            $('#end-time-zone').focus();
+            $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
+                .css("display", "block")
+                .css("color", "red");
+            return;
+        }
         // eventData = {
 
             eventData.event_id= $('#event_id').val();
@@ -2954,7 +2963,7 @@ function savePage1Data(close = null) {
         eventData.step = final_step;
         console.log(eventData);
 
-    // }
+    }
 
     // eventData.page1 = {
     //     event_type: event_type,
