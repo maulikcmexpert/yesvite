@@ -63,9 +63,14 @@
                                     }
                                 }
                             @endphp
-                            <input type="text" class="form-control inputText" id="event-date"
-                                value="{{(isset($event_date) && $event_date != '')?$event_date:''}}"
-                                name="event-date" onblur="clearError(this)" readonly>
+                            @if (isset($event_date) && $event_date != '')
+                                <input type="text" class="form-control inputText" id="event-date"
+                                    value="{{(isset($event_date) && $event_date != '')?$event_date:''}}"
+                                    name="event-date" onblur="clearError(this)" readonly>
+                            @else
+                                <input type="text" class="form-control inputText" id="event-date"
+                                    name="event-date" onblur="clearError(this)" readonly>
+                            @endif
                             <label for="birthday" class="form-label input-field floating-label select-label">Date of event</label>
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
