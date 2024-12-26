@@ -281,7 +281,7 @@ class EventController extends Controller
         $event_id = decrypt($eventId);
 
         $data =  EventInvitedUser::with(['user','event','contact_sync'])->where('event_id', $event_id)->get();
-        // dd($data);
+        dd($data);
         return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('number', function ($row) {
