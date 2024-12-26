@@ -732,8 +732,10 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
            if(response.view!=""){
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
+            $("#all-notification-filter-modal").modal('hide');
            }else{
             $(".notification_div").html('');
+            $("#all-notification-filter-modal").modal('hide');
            }
 
         },
