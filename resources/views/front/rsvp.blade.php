@@ -130,12 +130,23 @@
                                          <h4 class="title">Your hosts</h4>
                                          <div class="host-user-con-box">
                                            <div class="host-user-con">
-                                               <div class="img-wrp">
-                                                   <img src="./assets/img/host-img.png" alt="host-img">                                 
-                                               </div>
-                                               <h5>Christina Walton</h5>
-                                               <span>Host</span>
-                                               <a href="#" class="msg-btn">Message</a>
+                                                <div class="img-wrp">
+                                                    @if ($event->profile != '')
+                                                        {{-- <img src="./assets/img/host-img.png" alt="host-img">                                  --}}
+                                                        <img src="{{ $event->profile}}" alt="">
+                                                    @else
+                                                    @php
+                                                        $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';
+                                                        $lastInitial = !empty($event->user->lastname) ? strtoupper($event->user->lastname[0]) : '';
+                                                        $initials = $firstInitial . $lastInitial;
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                    @endphp
+                                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                                    @endif
+                                                </div>
+                                                <h5>{{ $event->hosted_by}}</h5>
+                                                <span>Host</span>
+                                                <a href="#" class="msg-btn">Message</a>
                                            </div>
                                            <div class="host-user-con">
                                              <div class="img-wrp">
