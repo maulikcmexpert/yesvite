@@ -12,7 +12,9 @@
 </head>
 
 <body>
-
+    <div id="home_loader" style="display: none;">
+        <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
+    </div>
     <x-front.bodyheader title={{$title}} />
 
     @include($page)
