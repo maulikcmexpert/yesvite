@@ -723,6 +723,7 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
     console.log(activityTypes); 
     console.log(selectedEvents); 
 
+    $('#loader').css('display','block');
 
   $.ajax({
         url: `${base_url}notification_filter`,
@@ -733,9 +734,13 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
+            $('#loader').css('display','none');
+
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
+            $('#loader').css('display','none');
+
            }
 
         },
@@ -771,6 +776,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     });
     $('.notification-selected-events-wrp').html('');
 
+    $('#loader').css('display','block');
 
  $.ajax({
         url: `${base_url}notification_all`,
@@ -781,9 +787,12 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
+            $('#loader').css('display','none');
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
+            $('#loader').css('display','none');
+
            }
 
         },
