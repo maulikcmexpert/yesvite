@@ -257,10 +257,10 @@ $i++;
                           <div class="notification-video-comment-wrp">
                             <h6>That’s was great! love it ❤️</h6>
                             <div class="notification-video-wrp">
+                              @if($inner_data['media_type']=="photo")
+                              <img src="{{$inner_data['post_image']}}" alt=""/>
+                              @elseif($inner_data['media_type']=="video")
                               <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
-                                @if($inner_data['media_type']=="photo")
-                                  <img src="{{$inner_data['post_image']}}" alt=""/>
-                                @else
                                 <video>
                                   <source src="{{$inner_data['post_image']}}" type="video/mp4" />
                                 </video>
@@ -271,9 +271,9 @@ $i++;
                                     loading="lazy"
 
                                 /></span>
-                                @endif
                               </a>
-                              <div class="notification-video-content">
+                                @endif
+                                <div class="notification-video-content">
                                 <p>
                                   Thanks everyone for RSVP'ing on time. I
                                   hope everyone can make it to this special

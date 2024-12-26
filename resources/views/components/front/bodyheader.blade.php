@@ -416,21 +416,25 @@
                                       </p>
                                       <h6 class="notification-read-dot"></h6>
                                     </div>
-                                    {{-- <div class="notification-video-comment-wrp">
+                                    <div class="notification-video-comment-wrp">
                                       <h6>That’s was great! love it ❤️</h6>
                                       <div class="notification-video-wrp">
-                                        <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
-                                          <video>
-                                            <source src="./assets/img/sample-video.mp4" type="video/mp4" />
-                                          </video>
-                                          <span class="notification-video_play-icon"
-                                            ><img
-                                              src="./assets/img/notification-video_play-icon.png"
-                                              alt=""
-                                              loading="lazy"
-
-                                          /></span>
-                                        </a>
+                                              @if($inner_data['media_type']=="photo")
+                                                <img src="{{$inner_data['post_image']}}" alt=""/>
+                                              @elseif($inner_data['media_type']=="video")
+                                              <a href="{{$inner_data['post_image']}}" class="notification-video popup-videos">
+                                              <video>
+                                                <source src="{{$inner_data['post_image']}}" type="video/mp4" />
+                                              </video>
+                                              <span class="notification-video_play-icon"
+                                                ><img
+                                                  src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
+                                                  alt=""
+                                                  loading="lazy"
+              
+                                              /></span>
+                                            </a>
+                                              @endif
                                         <div class="notification-video-content">
                                           <p>
                                             Thanks everyone for RSVP'ing on time. I
@@ -439,7 +443,7 @@
                                           </p>
                                         </div>
                                       </div>
-                                    </div> --}}
+                                    </div>
                                   </div>
                                 </div>
                             @elseif($inner_data['notification_type']=="first")
