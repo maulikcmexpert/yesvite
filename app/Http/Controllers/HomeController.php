@@ -477,4 +477,13 @@ class HomeController extends Controller
         return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
 
     }
+
+    public function notificationAll(Request $request){
+ 
+        $notfication_data=getNotificationList();
+
+        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
+
+    }
 }
+

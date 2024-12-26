@@ -106,6 +106,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('/home1', [HomeController::class, 'home'])->name('home1');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notification_filter', [HomeController::class, 'notificationFilter'])->name('notification_filter');
+    Route::get('/notification_all', [HomeController::class, 'notificationAll'])->name('notification_all');
     Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');

@@ -770,6 +770,30 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
         $(this).prop('checked', false);
     });
     $('.notification-selected-events-wrp').html('');
+
+
+ $.ajax({
+        url: `${base_url}notification_all`,
+        type: 'GET',
+        data: {},
+        success: function (response) {
+           if(response.view!=""){
+            $(".notification_div").html('');
+            $(".notification_div").append(response.view);
+            $("#all-notification-filter-modal").modal('hide');
+           }else{
+            $(".notification_div").html('');
+            $("#all-notification-filter-modal").modal('hide');
+           }
+
+        },
+        error: function (xhr, status, error) {
+    
+        },
+        complete: function () {
+        }
+    });
+
 });
 
 
