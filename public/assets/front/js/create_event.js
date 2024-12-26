@@ -3483,6 +3483,30 @@ function edit_design_modal() {
 }
 
 $(document).on("click", ".li_event_detail", function () {
+    canvas.discardActiveObject();
+    canvas.getObjects().forEach(obj => {
+        if (obj.type === 'group') {
+            canvas.remove(obj) // Your existing function to add icons
+        }
+    });
+
+    canvas.renderAll();
+    setTimeout(() => {
+        var downloadImage = document.getElementById("imageEditor1");
+        $("#loader").show();
+        $(this).prop("disabled", true);
+        $('.btn-close').prop("disabled", true);
+        dbJson = getTextDataFromCanvas();
+        // console.log(textData);
+        // dbJson = {
+        //     textElements: textData
+        // };
+        eventData.textData = dbJson;
+        eventData.temp_id = temp_id;
+        save_image_design(downloadImage);
+        $(".main-content-wrp").addClass("blurred");
+    }, 500);
+    
     $('#sidebar_select_design_category').css('display','none');
     $(".step_1").show();
     $(".step_2").css("display", "none");
@@ -4362,8 +4386,6 @@ $(document).on("click", ".delete_thankyou_card", function () {
     });
 });
 
-
-
 $(document).on("click", ".edit_thankyou_card", function () {
     var id = $(this).data("id");
 
@@ -4697,6 +4719,7 @@ $(document).on("click", ".store_desgin_temp", function () {
 });
 
 $(document).on("click", ".next_guest_step", function () {
+    
     canvas.discardActiveObject();
     canvas.getObjects().forEach(obj => {
         if (obj.type === 'group') {
