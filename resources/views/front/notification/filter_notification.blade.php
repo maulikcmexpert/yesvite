@@ -267,9 +267,9 @@ $i++;
                               <img src="{{$inner_data['post_image']}}" alt=""/>
                               @elseif($inner_data['media_type']=="video")
                               <a href="{{$inner_data['post_image']}}" class="notification-video popup-videos">
-                                <video>
+                                {{-- <video>
                                   <source src="{{$inner_data['post_image']}}" type="video/mp4" />
-                                </video>
+                                </video> --}}
                                 <span class="notification-video_play-icon"
                                   ><img
                                     src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
