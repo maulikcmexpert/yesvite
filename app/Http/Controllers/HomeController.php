@@ -473,6 +473,8 @@ class HomeController extends Controller
         $selectedEvents = $request->input('selectedEvents', []);
         $filter=["notificationTypes"=>$notificationTypes,"activityTypes"=>$activityTypes,"selectedEvents"=>$selectedEvents];
         $notfication_data=getNotificationList($filter);
-        dd($notfication_data);
+
+        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
+
     }
 }
