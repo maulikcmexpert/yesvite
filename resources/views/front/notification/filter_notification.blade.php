@@ -262,11 +262,11 @@ $i++;
                                   <img src="{{$inner_data['post_image']}}" alt=""/>
                                 @endif
                                 <video>
-                                  <source src="./assets/img/sample-video.mp4" type="video/mp4" />
+                                  <source src="{{$inner_data['post_image']}}" type="video/mp4" />
                                 </video>
                                 <span class="notification-video_play-icon"
                                   ><img
-                                    src="./assets/img/notification-video_play-icon.png"
+                                    src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
                                     alt=""
                                     loading="lazy"
 
