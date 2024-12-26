@@ -467,12 +467,14 @@ class HomeController extends Controller
     }
  
     public function notificationFilter(Request $request){
-
+        $notfication_data=[];
         $notificationTypes = $request->input('notificationTypes', []);
         $activityTypes = $request->input('activityTypes', []);
         $selectedEvents = $request->input('selectedEvents', []);
         $filter=["notificationTypes"=>$notificationTypes,"activityTypes"=>$activityTypes,"selectedEvents"=>$selectedEvents];
         $notfication_data=getNotificationList($filter);
-        dd($notfication_data);
+
+        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
+
     }
 }

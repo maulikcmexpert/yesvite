@@ -729,7 +729,13 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
         type: 'GET',
         data: {notificationTypes:notificationTypes,activityTypes:activityTypes,selectedEvents:selectedEvents},
         success: function (response) {
-           
+           if(response.view!=""){
+            $(".notification_div").html('');
+            $(".notification_div").append(response.view);
+           }else{
+            $(".notification_div").html('');
+           }
+
         },
         error: function (xhr, status, error) {
     

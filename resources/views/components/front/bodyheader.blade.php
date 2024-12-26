@@ -607,7 +607,7 @@
                                       </div> --}}
                                     </div>
                                   </div>
-                              @endif
+                            @endif
                             {{-- <div class="notification-drodown-body-inner">
                               <div class="notification-drodown-body-inner-img">
                                 <img
@@ -764,7 +764,7 @@
                               </div>
                             </div> --}}
                           </div>
-                          @endforeach
+                    @endforeach
 
                   </div>
                 </div>
