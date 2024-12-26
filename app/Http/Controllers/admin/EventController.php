@@ -280,7 +280,7 @@ class EventController extends Controller
         $eventId = $request->input('eventId');
         $event_id = decrypt($eventId);
 
-        $data =  EventInvitedUser::whereHas('event', function ($query) use($event_id) {
+        $data =  Event::whereHas('event_invited_user', function ($query) use($event_id) {
             $query->where('id', $event_id);
         })->
         with(['user','event','contact_sync'])->where('event_id', $event_id)->get();
