@@ -3493,6 +3493,8 @@ $(document).on("click", ".li_event_detail", function () {
     canvas.renderAll();
     setTimeout(() => {
         var downloadImage = document.getElementById("imageEditor1");
+        console.log({downloadImage});
+        
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
@@ -3506,7 +3508,7 @@ $(document).on("click", ".li_event_detail", function () {
         save_image_design(downloadImage);
         $(".main-content-wrp").addClass("blurred");
     }, 500);
-    
+
     $('#sidebar_select_design_category').css('display','none');
     $(".step_1").show();
     $(".step_2").css("display", "none");
