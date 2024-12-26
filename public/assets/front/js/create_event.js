@@ -3372,7 +3372,7 @@ function li_design_click(){
         $("#edit-design-temp").css("display", "none");
         $(".step_final_checkout").css("display", "none");
         active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
-        $('.event_create_percent').text('0%');
+        $('.event_create_percent').text('25%');
         $('.current_step').text('1 of 4');
 
         // edit_design_modal();

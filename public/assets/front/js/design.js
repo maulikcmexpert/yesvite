@@ -486,7 +486,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
     $('.pick-card').addClass('menu-success');
     $('.edit-design').removeClass('menu-success')
     $('.edit-design').addClass('active');
-    $(".event_create_percent").text("0%");
+    $(".event_create_percent").text("25%");
     $(".current_step").text("1 of 4");
     $('#sidebar_select_design_category').css('display','none');
 
