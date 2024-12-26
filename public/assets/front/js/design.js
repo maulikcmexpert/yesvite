@@ -461,6 +461,7 @@ $(document).on("click", ".design-sidebar-action", function() {
 });
 
 $(document).on("click", ".edit_design_tem", function(e) {
+    e.preventDefault();
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
@@ -468,7 +469,14 @@ $(document).on("click", ".edit_design_tem", function(e) {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
-    e.preventDefault();
+    $(".edit_design_tem").attr("data-image", imageUrl);
+    if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
+        dbJson = eventData.textData;
+    } else {
+        console.log(json);
+        dbJson = json;
+        temp_id = id;
+    }
     // //console.log(dbJson);
     // //console.log(image);
     var current_event_id = $(this).data('event_id');
