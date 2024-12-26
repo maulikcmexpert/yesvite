@@ -86,6 +86,9 @@ defer
 <script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
 <script src="{{ asset('assets/front/new_js/scritp.js')}}"></script>
 <script src="{{ asset('assets/front/new_js/calender.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
 <script>
     new WOW().init()
 </script>
