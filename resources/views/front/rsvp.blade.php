@@ -78,6 +78,7 @@
                                              </div> --}}
                                          </div>
                                      </div>
+                                     @endif
                                      <div class="rsvp-hosted-by-date-time-wrp">
                                          <div class="hosted-by-date-time rsvp-hosted-by-date-time">
                                              <div class="hosted-by-date-time-left">
