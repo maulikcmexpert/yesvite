@@ -243,7 +243,13 @@ $i++;
                           <div>
                             <h3>
                               {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                              @if($inner_data['media_type']=="photo")
+                              <span> posted new photo on wall at </span>
+                              @elseif($inner_data['media_type']=="video")
+                                <span> posted video on wall at </span>
+                              @else
                               <span> posted on wall at </span>
+                              @endif               
                             </h3>
                             <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                           </div>

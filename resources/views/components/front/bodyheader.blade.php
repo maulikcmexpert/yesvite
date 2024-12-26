@@ -405,13 +405,21 @@
                                     <div>
                                       <h3>
                                         {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                        {{-- <span> posted on wall at </span> --}}
+                                        @if($inner_data['media_type']=="photo")
+                                            <span> posted new photo on wall at </span>
+                                        @elseif($inner_data['media_type']=="video")
+                                          <span> posted video on wall at </span>
+                                        @else
                                         <span> posted on wall at </span>
+                                        @endif
                                       </h3>
                                       <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                     </div>
                                     <div>
                                       <p>
                                         {{$inner_data['event_name']}}
+                                        
                                         <span><strong>Wall</strong></span>
                                       </p>
                                       <h6 class="notification-read-dot"></h6>
