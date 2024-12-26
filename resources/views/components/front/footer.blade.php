@@ -42,6 +42,8 @@
 {{-- <script src="{{ asset('assets/front/js/map.js') }}"></script> --}}
 <script src="{{ asset('assets/front/js/contact_us.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
 
