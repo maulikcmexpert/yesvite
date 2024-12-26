@@ -3481,6 +3481,7 @@ function edit_design_modal() {
         });
     }
 }
+
 var design_inner_image = '';
 $(document).on("click", ".li_event_detail", function () {
     $('#sidebar_select_design_category').css('display','none');
@@ -3493,18 +3494,15 @@ $(document).on("click", ".li_event_detail", function () {
     canvas.renderAll();
 
     setTimeout(() => {
-        var downloadImage = document.getElementById("border");
+        var downloadImage = document.getElementById("imageEditor1");
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         dbJson = getTextDataFromCanvas();
-        // dbJson = {
-        //     textElements: textData
-        // };
-        // console.log(dbJson);
+
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
-        
+        console.log(downloadImage);
         // save_image_design(downloadImage);
         if($('#shape_img').attr("src")){
             design_inner_image = $('#shape_img').attr("src");
