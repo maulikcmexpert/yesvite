@@ -486,8 +486,8 @@ $(document).on("click", ".edit_design_tem", function(e) {
     $('.pick-card').addClass('menu-success');
     $('.edit-design').removeClass('menu-success')
     $('.edit-design').addClass('active');
-    $(".event_create_percent").text("50%");
-    $(".current_step").text("2 of 4");
+    $(".event_create_percent").text("0%");
+    $(".current_step").text("1 of 4");
     $('#sidebar_select_design_category').css('display','none');
 
     active_responsive_dropdown('drop-down-event-design','drop-down-edit-design');
