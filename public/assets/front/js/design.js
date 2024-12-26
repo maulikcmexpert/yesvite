@@ -9,7 +9,7 @@ let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
 var current_shape;
-$(document).on("click", ".design-card", function() {
+$(document).on("click", ".design-cards", function() {
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
@@ -462,10 +462,24 @@ $(document).on("click", ".design-sidebar-action", function() {
 
 $(document).on("click", ".edit_design_tem", function(e) {
     e.preventDefault();
+    var url = $(this).data("url");
+    var template = $(this).data("template");
+    image = $(this).data("image");
+    shapeImageUrl = $(this).data('shape_image');
+    var json = $(this).data("json");
+    //console.log(json);
+    var id = $(this).data("id");
+    if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
+        dbJson = eventData.textData;
+    } else {
+        console.log(json);
+        dbJson = json;
+        temp_id = id;
+    }
     // //console.log(dbJson);
     // //console.log(image);
     var current_event_id = $(this).data('event_id');
-    $("step_1").hide();
+    $(".step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
     $('.pick-card').removeClass('active');
@@ -501,23 +515,13 @@ $(document).on("click", ".edit_design_tem", function(e) {
 function bindData(current_event_id) {
 
     let iw = document.getElementById('imageWrapper')
-    // $(iw).on('mousedown', handleMouseDown);
-   
-    // document.addEventListener('mousemove', resize);
-    // document.addEventListener('mouseup', handleMouseUp);
-    
-    // document.addEventListener('mousemove', handleMouseMove);
 
     function loadTextDataFromDatabase() {
         if (image) {
-            // //console.log(image);
-
-            // Load background image
             fabric.Image.fromURL(image, function(img) {
                 var canvasWidth = canvas.getWidth();
                 var canvasHeight = canvas.getHeight();
 
-                // Calculate scale to maintain aspect ratio
                 var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
                 img.set({
                     left: 0,
@@ -530,16 +534,12 @@ function bindData(current_event_id) {
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
             });
            
-
-            // Load static information (text elements)
             if (dbJson) {
                 const staticInfo = {};
                 console.log(dbJson);
                 if(current_event_id != '' && (eventData.desgin_selected =='')){
-                    // console.log(eventData.desgin_selected);
                     staticInfo.textElements = dbJson;
                 }else{
-                    // console.log(2);
                     staticInfo.textElements = dbJson.textElements;
                 }
                 console.log(staticInfo);
@@ -593,120 +593,120 @@ function bindData(current_event_id) {
                         mr: true   // Show middle right control
                     });
 
-                    if(current_event_id != '' && (eventData.desgin_selected =='')){
-                    }else{
-                        switch (element.text.toLowerCase()) {
-                            case "event_name":
-                                if (eventData.event_name) {
-                                    let textWidth = getWidth(
-                                        element,
-                                        eventData.event_name
-                                    );
-                                    textElement.set({
-                                        text: eventData.event_name,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if event_name is empty
-                                }
-                                break;
-                            case "host_name":
-                                if (eventData.hosted_by) {
-                                    let textWidth = getWidth(
-                                        element,
-                                        eventData.hosted_by
-                                    );
-                                    textElement.set({
-                                        text: eventData.hosted_by,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if host_name is empty
-                                }
-                                break;
-                            case "location_description":
-                                if (eventData.event_location) {
-                                    let textWidth = getWidth(
-                                        element,
-                                        eventData.event_location
-                                    );
-                                    textElement.set({
-                                        text: eventData.event_location,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if event_location_name is empty
-                                }
-                                break;
-                            case "start_time":
-                                if (eventData.start_time) {
-                                    let textWidth = getWidth(
-                                        element,
-                                        eventData.start_time
-                                    );
-                                    textElement.set({
-                                        text: eventData.start_time,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if start_time is empty
-                                }
-                                break;
-                            case "end_time":
-                                if (eventData.rsvp_end_time) {
-                                    let textWidth = getWidth(
-                                        element,
-                                        eventData.rsvp_end_time
-                                    );
-                                    textElement.set({
-                                        text: eventData.rsvp_end_time,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if rsvp_end_time is empty
-                                }
-                                break;
-                            case "start_date":
-                                if (eventData.event_date) {
-                                    var start_date = "";
-                                    if (eventData.event_date.includes(" To ")) {
-                                        let [start, end] =
-                                        eventData.event_date.split(" To ");
-                                        start_date = start;
-                                    } else {
-                                        start_date = eventData.event_date;
-                                    }
-                                    let textWidth = getWidth(element, start_date);
-                                    textElement.set({
-                                        text: start_date,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if start_date is empty
-                                }
-                                break;
-                            case "end_date":
-                                if (eventData.event_date) {
-                                    var end_date = "";
-                                    if (eventData.event_date.includes(" To ")) {
-                                        let [start, end] =
-                                        eventData.event_date.split(" To ");
-                                        end_date = end;
-                                    } else {
-                                        end_date = eventData.event_date;
-                                    }
-                                    let textWidth = getWidth(element, end_date);
-                                    textElement.set({
-                                        text: end_date,
-                                        width: textWidth,
-                                    });
-                                } else {
-                                    return; // Skip adding the element if end_date is empty
-                                }
-                                break;
-                        }
+                    // if(current_event_id != '' && (eventData.desgin_selected =='')){
+                    // }else{
+                    //     switch (element.text.toLowerCase()) {
+                    //         case "event_name":
+                    //             if (eventData.event_name) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.event_name
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.event_name,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if event_name is empty
+                    //             }
+                    //             break;
+                    //         case "host_name":
+                    //             if (eventData.hosted_by) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.hosted_by
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.hosted_by,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if host_name is empty
+                    //             }
+                    //             break;
+                    //         case "location_description":
+                    //             if (eventData.event_location) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.event_location
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.event_location,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if event_location_name is empty
+                    //             }
+                    //             break;
+                    //         case "start_time":
+                    //             if (eventData.start_time) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.start_time
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.start_time,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if start_time is empty
+                    //             }
+                    //             break;
+                    //         case "end_time":
+                    //             if (eventData.rsvp_end_time) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.rsvp_end_time
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.rsvp_end_time,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if rsvp_end_time is empty
+                    //             }
+                    //             break;
+                    //         case "start_date":
+                    //             if (eventData.event_date) {
+                    //                 var start_date = "";
+                    //                 if (eventData.event_date.includes(" To ")) {
+                    //                     let [start, end] =
+                    //                     eventData.event_date.split(" To ");
+                    //                     start_date = start;
+                    //                 } else {
+                    //                     start_date = eventData.event_date;
+                    //                 }
+                    //                 let textWidth = getWidth(element, start_date);
+                    //                 textElement.set({
+                    //                     text: start_date,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if start_date is empty
+                    //             }
+                    //             break;
+                    //         case "end_date":
+                    //             if (eventData.event_date) {
+                    //                 var end_date = "";
+                    //                 if (eventData.event_date.includes(" To ")) {
+                    //                     let [start, end] =
+                    //                     eventData.event_date.split(" To ");
+                    //                     end_date = end;
+                    //                 } else {
+                    //                     end_date = eventData.event_date;
+                    //                 }
+                    //                 let textWidth = getWidth(element, end_date);
+                    //                 textElement.set({
+                    //                     text: end_date,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if end_date is empty
+                    //             }
+                    //             break;
+                    //     }
 
-                    }
+                    // }
                     
                     canvas.add(textElement);
                 });
