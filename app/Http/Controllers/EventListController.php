@@ -422,7 +422,7 @@ class EventListController extends Controller
                    
                 }
                 //draftEvent
-                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('start_date', 'DESC')
+                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')
                 ->offset(0)
                 ->limit(10)
                 ->get();
@@ -739,7 +739,7 @@ class EventListController extends Controller
 
         $user  = Auth::guard('web')->user();
 
-        $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('start_date', 'DESC')
+        $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')
         ->offset($offset)
         ->limit($limit)
         ->get();
@@ -1189,7 +1189,7 @@ class EventListController extends Controller
         $user  = Auth::guard('web')->user();
         $eventName = $request->input('searchValue'); 
         if($search_date!=""){
-            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('start_date',$search_date)->orderBy('start_date', 'DESC')
+            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('start_date',$search_date)->orderBy('id', 'DESC')
             ->get();
         }else{
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')
