@@ -113,7 +113,8 @@
                                              </div>
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Time</h6>
-                                                 <h3>8:00 to 10:00PM</h3>
+                                                 {{-- <h3>8:00 to 10:00PM</h3> --}}
+                                                 <h3>{{ $event->rsvp_start_time }}</h3>
                                              </div>
                                              </div>
                                          </div>
