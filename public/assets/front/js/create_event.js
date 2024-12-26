@@ -2876,24 +2876,24 @@ function savePage1Data(close = null) {
     }
     
 
-    // if (
-    //     event_type != "" &&
-    //     event_name != "" &&
-    //     hostedby != "" &&
-    //     event_date != "" &&
-    //     start_time != "" &&
-    //     address1 != "" &&
-    //     city != "" &&
-    //     state != "" &&
-    //     zipcode != ""
-    // ) {
-    //     if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
-    //         $('#end-time-zone').focus();
-    //         $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
-    //             .css("display", "block")
-    //             .css("color", "red");
-    //         return;
-    //     }
+    if (
+        event_type != "" &&
+        event_name != "" &&
+        hostedby != "" &&
+        event_date != "" &&
+        start_time != "" &&
+        address1 != "" &&
+        city != "" &&
+        state != "" &&
+        zipcode != ""
+    ) {
+        if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
+            $('#end-time-zone').focus();
+            $('#end-time-zone-error').text('End Time zone : Please select same start time zone and end time zone')
+                .css("display", "block")
+                .css("color", "red");
+            return;
+        }
         // eventData = {
 
             eventData.event_id= $('#event_id').val();
@@ -2954,7 +2954,7 @@ function savePage1Data(close = null) {
         eventData.step = final_step;
         console.log(eventData);
 
-    // }
+    }
 
     // eventData.page1 = {
     //     event_type: event_type,
