@@ -1,6 +1,9 @@
 {{-- {{                dd($is_adultOnly);}} --}}
+@php
+    use Carbon\Carbon;
+@endphp
 <x-front.advertise />
-<section class="rsvp-wrp">
+<section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
    <div class="rsvp-tab-wrp event-center-tabs-main">
     <nav>
@@ -98,7 +101,7 @@
                                              </div>
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Date</h6>
-                                                 <h3>July 23, 2020</h3>
+                                                 <h3>{{Carbon::parse($event->start_date)->format('F j, Y')}}</h3>
                                              </div>
                                              </div>
                                              <div class="hosted-by-date-time-left">
@@ -110,7 +113,8 @@
                                              </div>
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Time</h6>
-                                                 <h3>8:00 to 10:00PM</h3>
+                                                 {{-- <h3>8:00 to 10:00PM</h3> --}}
+                                                 <h3>{{ $event->rsvp_start_time }}</h3>
                                              </div>
                                              </div>
                                          </div>
@@ -126,12 +130,23 @@
                                          <h4 class="title">Your hosts</h4>
                                          <div class="host-user-con-box">
                                            <div class="host-user-con">
-                                               <div class="img-wrp">
-                                                   <img src="./assets/img/host-img.png" alt="host-img">                                 
-                                               </div>
-                                               <h5>Christina Walton</h5>
-                                               <span>Host</span>
-                                               <a href="#" class="msg-btn">Message</a>
+                                                <div class="img-wrp">
+                                                    @if ($event->profile != '')
+                                                        {{-- <img src="./assets/img/host-img.png" alt="host-img">                                  --}}
+                                                        <img src="{{ $event->profile}}" alt="">
+                                                    @else
+                                                    @php
+                                                        $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';
+                                                        $lastInitial = !empty($event->user->lastname) ? strtoupper($event->user->lastname[0]) : '';
+                                                        $initials = $firstInitial . $lastInitial;
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                    @endphp
+                                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                                    @endif
+                                                </div>
+                                                <h5>{{ $event->hosted_by}}</h5>
+                                                <span>Host</span>
+                                                <a href="#" class="msg-btn">Message</a>
                                            </div>
                                            <div class="host-user-con">
                                              <div class="img-wrp">
