@@ -258,6 +258,9 @@ $i++;
                             <h6>That’s was great! love it ❤️</h6>
                             <div class="notification-video-wrp">
                               <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
+                                @if($inner_data['media_type']=="photo")
+                                  <img src="{{$inner_data['post_image']}}" alt=""/>
+                                @endif
                                 <video>
                                   <source src="./assets/img/sample-video.mp4" type="video/mp4" />
                                 </video>
