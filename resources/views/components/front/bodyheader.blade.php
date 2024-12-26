@@ -417,7 +417,7 @@
                                       <h6 class="notification-read-dot"></h6>
                                     </div>
                                     <div class="notification-video-comment-wrp">
-                                      <h6>That’s was great! love it ❤️</h6>
+                                      {{-- <h6>That’s was great! love it ❤️</h6> --}}
                                       <div class="notification-video-wrp">
                                               @if($inner_data['media_type']=="photo")
                                                 <img src="{{$inner_data['post_image']}}" alt=""/>
