@@ -424,7 +424,7 @@
                                       </p>
                                       <h6 class="notification-read-dot"></h6>
                                     </div>
-                                    <div class="notification-video-comment-wrp">
+                                    {{-- <div class="notification-video-comment-wrp"> --}}
                                       {{-- <h6>That’s was great! love it ❤️</h6> --}}
                                       <div class="notification-video-wrp">
                                               @if($inner_data['media_type']=="photo")
@@ -449,7 +449,7 @@
                                           </p>
                                         </div>
                                       </div>
-                                    </div>
+                                    {{-- </div> --}}
                                   </div>
                                 </div>
                             @elseif($inner_data['notification_type']=="first")

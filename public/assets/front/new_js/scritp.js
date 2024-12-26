@@ -1,5 +1,15 @@
 var base_url=$('#base_url').val();
 
+$(document).ready(function () {
+  $(".popup-videos").magnificPopup({
+    disableOn: 320,
+    type: "iframe",
+    mainClass: "mfp-fade",
+    removalDelay: 160,
+    preloader: false,
+    fixedContentPos: false,
+  });
+});
 
 
 $(".notification-btn").on("click", function() {
@@ -306,16 +316,6 @@ $(".upload-poll-delete").click(function () {
   $(".create-post-poll-wrp").addClass("d-none");
 });
 
-$(document).ready(function () {
-  $(".popup-videos").magnificPopup({
-    disableOn: 320,
-    type: "iframe",
-    mainClass: "mfp-fade",
-    removalDelay: 160,
-    preloader: false,
-    fixedContentPos: false,
-  });
-});
 
 
 $(document).on('click','.header-profile-wrp',function(){
