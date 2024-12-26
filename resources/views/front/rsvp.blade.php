@@ -20,66 +20,65 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
-                                 <div class="rsvp-slider owl-carousel owl-theme rsvp-slide" >
-                                     <div class="item">
-                                         <div class="rsvp-img">
-                                             <img src="./assets/img/host-by-template-img.png" alt="birth-card">
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="rsvp-img">
-                                             <img src="./assets/img/host-by-template-img.png" alt="birth-card">
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="rsvp-img">
-                                             <img src="./assets/img/host-by-template-img.png" alt="birth-card">
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="rsvp-img">
-                                             <img src="./assets/img/host-by-template-img.png" alt="birth-card">
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="rsvp-img">
-                                             <img src="./assets/img/host-by-template-img.png" alt="birth-card">
-                                         </div>
-                                     </div>
-                                 </div>
+                                <div class="rsvp-slider owl-carousel owl-theme {{($event->event_image->isNotEmpty() && count($event->event_image) > 1 )?'rsvp-slide':''}} " >    
+                                    @if ($event->event_image->isNotEmpty())
+                                        @foreach($event->event_image as $value)
+                                        <div class="item">
+                                            <div class="rsvp-img">
+                                                <img src="{{ asset('storage/event_images/'.$value->image)}}" alt="birth-card">
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-lg-7">
                                  <div class="rsvp-form">
                                      <h5 class="title">RSVP</h5>
                                      <div class="author-wrp">
                                          <div class="author-img">
-                                             <img src="./assets/img/header-profile-img.png" alt="">
+                                            @if ($event->profile != '')
+                                                <img src="{{ $event->profile}}" alt="">
+                                            @else
+                                            @php
+                                                $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';
+                                                $lastInitial = !empty($event->user->lastname) ? strtoupper($event->user->lastname[0]) : '';
+                                                $initials = $firstInitial . $lastInitial;
+                                                $fontColor = 'fontcolor' . $firstInitial;
+                                            @endphp
+                                                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                            @endif
                                          </div>
                                          <div class="author-title">
-                                             <h4>Aaron Loeb’s 5th Birthday</h4>
-                                             <p><span>Hosted by:</span>The Walton Family</p>
+                                             <h4>{{$event->event_name}}</h4>
+                                             <p><span>Hosted by:</span>{{ $event->hosted_by}}</p>
                                          </div>
                                      </div>
+                                     @if($event->message_to_guests != null || $event->message_to_guests != "")
                                      <div class="thank-card">
-                                         <p>Thanks everyone for RSVP'ing on time. I hope everyone can make it to this special day of ours!</p>
+                                         <p>{{$event->message_to_guests}}</p>
                                      </div>
+                                     @endif
+                                     @php
+                                        $i = 1;
+                                     @endphp
+                                     @if($event->event_detail)
                                      <div class="event-detail">
                                          <h5>Event Details</h5>
                                          <div class="d-flex flex-wrap px-2">
-                                             <!-- <li>RSVP By Sept 20</li>
-                                             <li>+1 (Limit 5)</li>
-                                             <li>Adults & Kids </li>
-                                             <li>Potluck Event</li> -->
-                                             <div class="d-flex align-items-center justify-content-between w-100 mb-2">
-                                                 <h6>RSVP By Sept 20</h6>
-                                                 <h6>+1 (Limit 5)</h6>
+                                             <div class="d-flex align-items-center justify-content-between {{($i<= 3)?'w-100 mb-2':'w-100'}}">
+                                                @foreach($event->event_detail as $val)
+                                                <h6>{{$val}}</h6>
+                                                @php $i++; @endphp
+                                                @endforeach
                                              </div>
-                                             <div class="d-flex align-items-center justify-content-between w-100">
+                                             {{-- <div class="d-flex align-items-center justify-content-between w-100">
                                                  <h6>Adults & Kids</h6>
                                                  <h6>Potluck Event</h6>
-                                             </div>
+                                             </div> --}}
                                          </div>
                                      </div>
+                                     @endif
                                      <div class="rsvp-hosted-by-date-time-wrp">
                                          <div class="hosted-by-date-time rsvp-hosted-by-date-time">
                                              <div class="hosted-by-date-time-left">
