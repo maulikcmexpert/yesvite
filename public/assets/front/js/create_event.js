@@ -559,10 +559,9 @@ $(function() {
         }
     });
   });
-
-$(function () {
+$(document).on('click',function(e){
+    e.preventDefault();
     var selectedDates = new Set();
-    alert();
     $("#event-date").daterangepicker(
         {
             autoUpdateInput: false,
@@ -620,8 +619,13 @@ $(function () {
         picker.show();
         $('#event-date').next().addClass('floatingfocus');
     });
+})
+// $(function () {
+    
+//     alert();
+    
    
-});
+// });
 
 $("#schedule").on("change", function () {
     var eventDate = $("#event-date").val();
