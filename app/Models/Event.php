@@ -64,6 +64,10 @@ class Event extends Model
     {
         return $this->hasMany(InviteViewRate::class);
     }
+    public function contact_sync()
+    {
+        return $this->belongsTo(contact_sync::class,'sync_id','id');
+    }
 
     public function user()
     {
