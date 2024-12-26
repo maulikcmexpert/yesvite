@@ -2939,29 +2939,47 @@ function savePage1Data(close = null) {
             day: "numeric",
         });
         
-        var formattedTime = convertTo12HourFormat(start_time);
-        if(close == 'next'){
-            $(".step_1").hide();
-            handleActiveClass('.li_design');
-            $('.pick-card').addClass('active');
-            $('.design-span').addClass('active');
-            $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
-        }
-        // alert(description);
-        // $(".titlename").text(hostedby);
-        // $(".event_name").text(event_name);
-        // $(".event_date").text(formattedDate);
-        // $(".event_address").text(description);
-        // $(".event_time").text(formattedTime);
-        $(".step_2").show();
-        $('.event_create_percent').text('25%');
-        $('.current_step').text('1 of 4');
-        active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
-        if(final_step == 1){
-            final_step = 2;
-        }
-        eventData.step = final_step;
-        console.log(eventData);
+        // var formattedTime = convertTo12HourFormat(start_time);
+        // if(close == 'next'){
+        //     $(".step_1").hide();
+        //     handleActiveClass('.li_design');
+        //     $('.pick-card').addClass('active');
+        //     $('.design-span').addClass('active');
+        //     $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+        // }
+        // // alert(description);
+        // // $(".titlename").text(hostedby);
+        // // $(".event_name").text(event_name);
+        // // $(".event_date").text(formattedDate);
+        // // $(".event_address").text(description);
+        // // $(".event_time").text(formattedTime);
+        // $(".step_2").show();
+        // $('.event_create_percent').text('25%');
+        // $('.current_step').text('1 of 4');
+        // active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
+        // if(final_step == 1){
+        //     final_step = 2;
+        // }
+        // eventData.step = final_step;
+        // console.log(eventData);
+
+
+        // ---------------newcode-------------
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $("#edit-design-temp").css("display", "none");
+        $(".step_4").css("display", "none");
+        $(".step_final_checkout").css("display", "none");
+        $(".step_3").show();
+        $('.pick-card').addClass('menu-success');
+        $('.edit-design').addClass('menu-success');
+        $('.event_create_percent').text('75%');
+        $('.current_step').text('3 of 4');
+        $('#sidebar_select_design_category').css('display','none');
+        active_responsive_dropdown('drop-down-event-guest');
+        handleActiveClass('.li_guest');
+        var type="all"
+        get_user(type);
 
     }
 
