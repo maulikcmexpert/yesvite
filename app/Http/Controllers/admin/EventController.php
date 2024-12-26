@@ -281,9 +281,9 @@ class EventController extends Controller
         $event_id = decrypt($eventId);
 
         $data =  Event::whereHas('event_invited_user', function ($query) use($event_id) {
-            $query->where('id', $event_id);
+            $query->where('event_id', $event_id);
         })->
-        with(['user','event','contact_sync'])->where('event_id', $event_id)->get();
+        with(['user','event','contact_sync'])->where('id', $event_id)->get();
         // dd($data);
         return Datatables::of($data)
             ->addIndexColumn()
