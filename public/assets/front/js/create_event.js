@@ -3493,7 +3493,7 @@ $(document).on("click", ".li_event_detail", function () {
     canvas.renderAll();
 
     setTimeout(() => {
-        var downloadImage = document.getElementById("download_image");
+        var downloadImage = document.getElementById("imageEditor1");
         $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
