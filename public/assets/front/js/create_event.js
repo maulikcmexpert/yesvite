@@ -3483,8 +3483,8 @@ $(document).on("click", ".li_event_detail", function () {
     $(".step_final_checkout").css("display", "none");
     active_responsive_dropdown('drop-down-event-detail');
     
-    $('.event_create_percent').text('25%');
-    $('.current_step').text('1 of 4');
+    $('.event_create_percent').text('50%');
+    $('.current_step').text('2 of 4');
     
     
     handleActiveClass(this);
