@@ -6,6 +6,7 @@
 @import url('./potluck.css');
 @import url('./guest.css');
 @import url('./calender.css');
+@import url('./newrsvp.css');
 
 *{
     margin: 0;

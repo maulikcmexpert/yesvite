@@ -39,3 +39,39 @@ var swiper = new Swiper(".mySwiper", {
       },
     },
   });
+
+  $('.rsvp-slide').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+  })
+
+// Function to update dots for each Swiper instance
+function updateDots(swiper, $dotsContainer) {
+    const total = swiper.slides.length; // Total slides
+    const current = swiper.realIndex + 1; // Current active slide (1-based index)
+
+    // Generate dot HTML
+    let dotsHTML = '';
+    for (let i = 1; i <= total; i++) {
+        dotsHTML += `<span class="dot ${i === current ? 'active' : ''}" data-slide="${i}"></span>`;
+    }
+    $dotsContainer.html(dotsHTML); // Update the dots container
+
+    // Add click event for navigation
+    $dotsContainer.find('.dot').off('click').on('click', function () {
+        const slideIndex = parseInt($(this).data('slide'), 10) - 1; // Convert to zero-based index
+        swiper.slideTo(slideIndex);
+    });
+}
