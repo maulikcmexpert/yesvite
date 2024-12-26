@@ -465,7 +465,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
     // //console.log(dbJson);
     // //console.log(image);
     var current_event_id = $(this).data('event_id');
-    $("step_1").hide();
+    $(".step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
     $('.pick-card').removeClass('active');
