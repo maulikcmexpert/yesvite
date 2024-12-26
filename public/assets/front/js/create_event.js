@@ -3343,26 +3343,26 @@ $(document).on("click", ".li_design", function (e) {
 
 function li_design_click(){
     // console.log(eventData);
-    if (
-        eventData.event_type != "" &&
-        eventData.event_name != "" &&
-        eventData.hosted_by != "" &&
-        eventData.event_date != "" &&
-        eventData.start_time != "" &&
-        eventData.address1 != "" &&
-        eventData.city != "" &&
-        eventData.state != "" &&
-        eventData.zipcode != "" &&
-        eventData.event_type != undefined &&
-        eventData.event_name != undefined &&
-        eventData.hosted_by != undefined &&
-        eventData.event_date != undefined &&
-        eventData.start_time != undefined &&
-        eventData.address1 != undefined &&
-        eventData.city != undefined &&
-        eventData.state != undefined &&
-        eventData.zipcode != undefined
-    ) {
+    // if (
+    //     eventData.event_type != "" &&
+    //     eventData.event_name != "" &&
+    //     eventData.hosted_by != "" &&
+    //     eventData.event_date != "" &&
+    //     eventData.start_time != "" &&
+    //     eventData.address1 != "" &&
+    //     eventData.city != "" &&
+    //     eventData.state != "" &&
+    //     eventData.zipcode != "" &&
+    //     eventData.event_type != undefined &&
+    //     eventData.event_name != undefined &&
+    //     eventData.hosted_by != undefined &&
+    //     eventData.event_date != undefined &&
+    //     eventData.start_time != undefined &&
+    //     eventData.address1 != undefined &&
+    //     eventData.city != undefined &&
+    //     eventData.state != undefined &&
+    //     eventData.zipcode != undefined
+    // ) {
         
         $('.design-span').addClass('active');
         $(".step_1").css("display", "none");
@@ -3373,13 +3373,13 @@ function li_design_click(){
         $(".step_final_checkout").css("display", "none");
         active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
         $('.event_create_percent').text('50%');
-        $('.current_step').text('2 of 4');
+        $('.current_step').text('1 of 4');
 
-        edit_design_modal();
+        // edit_design_modal();
 
         var subclass = ".side-bar-sub-list";
         handleActiveClass('.li_design');
-    }
+    // }
 }
 
 function edit_design_modal() {
