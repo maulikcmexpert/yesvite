@@ -1,5 +1,8 @@
 var base_url=$('#base_url').val();
 
+$(document).on('click','.popup-videos',function(){
+alert();
+});
 $(document).ready(function () {
   $(".popup-videos").magnificPopup({
     disableOn: 320,
