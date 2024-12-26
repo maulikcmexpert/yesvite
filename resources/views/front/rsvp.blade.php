@@ -1,4 +1,7 @@
 {{-- {{                dd($is_adultOnly);}} --}}
+@php
+    use Carbon\Carbon;
+@endphp
 <x-front.advertise />
 <section class="rsvp-wrp">
    <!-- ===main-section-start=== -->
@@ -98,7 +101,7 @@
                                              </div>
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Date</h6>
-                                                 <h3>July 23, 2020</h3>
+                                                 <h3>{{Carbon::parse($event->start_date)->format('F j, Y')}}</h3>
                                              </div>
                                              </div>
                                              <div class="hosted-by-date-time-left">
