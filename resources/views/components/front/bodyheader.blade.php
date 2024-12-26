@@ -437,7 +437,7 @@
                                               @endif
                                         <div class="notification-video-content">
                                           <p>
-                                            {{$inner_data['post_message']}}
+                                            {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
                                           </p>
                                         </div>
                                       </div>
