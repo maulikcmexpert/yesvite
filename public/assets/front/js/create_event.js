@@ -2964,6 +2964,7 @@ function savePage1Data(close = null) {
         $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
         var type="all"
         get_user(type);
+        final_step = 3;
 
     }
 
