@@ -4900,7 +4900,9 @@ class ApiControllerv2 extends Controller
                         $invitedGuestUsers = $eventData['invited_guests'];
 
 
-                        $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('sync_id')->toArray();
+                        $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])
+                            ->where('is_co_host','0')    
+                        ->pluck('sync_id')->toArray();
                         foreach ($invitedGuestUsers as $value) {
                             $checkUserExist = contact_sync::where('id', $value['id'])->first();
                             if ($checkUserExist) {
