@@ -3,7 +3,7 @@
 
 <head>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css" stylesheet.crossOrigin = "anonymous">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
 
