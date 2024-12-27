@@ -431,102 +431,104 @@
 <!-- about yes rsvp Modal -->
 <div class="modal fade cmn-modal about-rsvp rsvp-yes-modal" id="rsvp-yes-modal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="d-flex align-items-center">
-                    <div>
-                      <h4 class="modal-title" id="aboutsuccessLabel">RSVP’ing: <span>Yes</span></h4>
-                    </div>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="d-flex align-items-center rsvp-yes-profile">
-                    <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
-                    <div>
-                        <h4 class="modal-title" id="aboutsuccessLabel">Aaron Loeb’s 5th Birthday</h4>
-                        <p>Hosted by: <span>The Walton Family</span></p>
-                    </div>
-                </div>
-                <div class="rsvp-custom-radio guest-rsvp-attend">
-                    <h6>Your Info</h6>
-                    <div class="rsvp-input-form row">
-                        <div class="col-lg-6">
-                            <div class="input-form">
-                                <input type="text" class="form-control inputText" >
-                                <label for="Fname" class="form-label input-field floating-label">First Name</label>
+        <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="d-flex align-items-center">
+                            <div>
+                            <h4 class="modal-title" id="aboutsuccessLabel">RSVP’ing: <span>Yes</span></h4>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="input-form">
-                                <input type="text" class="form-control inputText" >
-                                <label for="Fname" class="form-label input-field floating-label">Last Name</label>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex align-items-center rsvp-yes-profile">
+                            <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
+                            <div>
+                                <h4 class="modal-title" id="aboutsuccessLabel">{{$eventInfo['guest_view']['event_name']}}</h4>
+                                <p>Hosted by: <span>{{$eventInfo['guest_view']['hosted_by']}}</span></p>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="rsvp-custom-radio guest-rsvp-attend">
+                            <h6>Your Info</h6>
+                            <div class="rsvp-input-form row">
+                                <div class="col-lg-6">
+                                    <div class="input-form">
+                                        <input type="text" name="firstname" id="firstname" class="form-control inputText" >
+                                        <label for="Fname" class="form-label input-field floating-label">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-form">
+                                        <input type="text"  name="lastname" id="lastname"  class="form-control inputText" >
+                                        <label for="Fname" class="form-label input-field floating-label">Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="input-form">
+                                        <input type="email"  name="email" id="email" class="form-control inputText" >
+                                        <label for="Fname" class="form-label input-field floating-label">Email Address</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rsvp-guest">
+                            <h5>Guests</h5>
+                            <div class="rsvp-guest-count">
+                            <div>
+                                <h6>Adults</h6>
+                                <div class="qty-container ms-auto">
+                                <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
+                                <input type="number" name="adult_count" id="adult_count" value="0" class="input-qty">
+                                <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div>
+                                <h6>Kids</h6>
+                                <div class="qty-container ms-auto">
+                                <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
+                                <input type="number" name="kid_count" id="kid_count" value="0" class="input-qty">
+                                <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="rsvp-msgbox">
+                            <h5>Message</h5>
                             <div class="input-form">
-                                <input type="email" class="form-control inputText" >
-                                <label for="Fname" class="form-label input-field floating-label">Email Address</label>
+                                <textarea name="" id="" class="form-control inputText" id="message" name="Fname" message="">Thanks for create this event! so exited!</textarea>
+                                <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="d-flex align-items-center">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.9987 1.3335C4.32536 1.3335 1.33203 4.32683 1.33203 8.00016C1.33203 11.6735 4.32536 14.6668 7.9987 14.6668C11.672 14.6668 14.6654 11.6735 14.6654 8.00016C14.6654 4.32683 11.672 1.3335 7.9987 1.3335ZM7.4987 5.3335C7.4987 5.06016 7.72536 4.8335 7.9987 4.8335C8.27203 4.8335 8.4987 5.06016 8.4987 5.3335V8.66683C8.4987 8.94016 8.27203 9.16683 7.9987 9.16683C7.72536 9.16683 7.4987 8.94016 7.4987 8.66683V5.3335ZM8.61203 10.9202C8.5787 11.0068 8.53203 11.0735 8.47203 11.1402C8.40536 11.2002 8.33203 11.2468 8.25203 11.2802C8.17203 11.3135 8.08536 11.3335 7.9987 11.3335C7.91203 11.3335 7.82536 11.3135 7.74536 11.2802C7.66536 11.2468 7.59203 11.2002 7.52536 11.1402C7.46536 11.0735 7.4187 11.0068 7.38536 10.9202C7.35203 10.8402 7.33203 10.7535 7.33203 10.6668C7.33203 10.5802 7.35203 10.4935 7.38536 10.4135C7.4187 10.3335 7.46536 10.2602 7.52536 10.1935C7.59203 10.1335 7.66536 10.0868 7.74536 10.0535C7.90536 9.98683 8.09203 9.98683 8.25203 10.0535C8.33203 10.0868 8.40536 10.1335 8.47203 10.1935C8.53203 10.2602 8.5787 10.3335 8.61203 10.4135C8.64536 10.4935 8.66536 10.5802 8.66536 10.6668C8.66536 10.7535 8.64536 10.8402 8.61203 10.9202Z" fill="#E2E8F0"/>
+                                </svg></span>
+                                <h6>This message will be visible to all guests.</h6>
+                            </div>
+                        </div>
+                        <div class="rsvp-yes-notification-wrp">
+                            <h5>Notifications</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="notifications[]" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    All event activity <br>
+                                    (Wall posts, potluck activity,  photo uploads, event updates, messages)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="notifications[]" type="checkbox" value="" id="flexCheckDefault1">
+                                <label class="form-check-label" for="flexCheckDefault1">
+                                    All event activity <br>
+                                </label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="rsvp-guest">
-                    <h5>Guests</h5>
-                    <div class="rsvp-guest-count">
-                    <div>
-                        <h6>Adults</h6>
-                        <div class="qty-container ms-auto">
-                        <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                        <input type="number" name="qty" value="0" class="input-qty">
-                        <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
-                        </div>
-                    </div>
-                    <div>
-                        <h6>Kids</h6>
-                        <div class="qty-container ms-auto">
-                        <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                        <input type="number" name="qty" value="0" class="input-qty">
-                        <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
-                        </div>
-                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">RSVP</button>
                     </div>
                 </div>
-                <div class="rsvp-msgbox">
-                    <h5>Message</h5>
-                    <div class="input-form">
-                        <textarea name="" id="" class="form-control inputText" id="Fname" name="Fname" required="">Thanks for create this event! so exited!</textarea>
-                        <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <span class="d-flex align-items-center">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.9987 1.3335C4.32536 1.3335 1.33203 4.32683 1.33203 8.00016C1.33203 11.6735 4.32536 14.6668 7.9987 14.6668C11.672 14.6668 14.6654 11.6735 14.6654 8.00016C14.6654 4.32683 11.672 1.3335 7.9987 1.3335ZM7.4987 5.3335C7.4987 5.06016 7.72536 4.8335 7.9987 4.8335C8.27203 4.8335 8.4987 5.06016 8.4987 5.3335V8.66683C8.4987 8.94016 8.27203 9.16683 7.9987 9.16683C7.72536 9.16683 7.4987 8.94016 7.4987 8.66683V5.3335ZM8.61203 10.9202C8.5787 11.0068 8.53203 11.0735 8.47203 11.1402C8.40536 11.2002 8.33203 11.2468 8.25203 11.2802C8.17203 11.3135 8.08536 11.3335 7.9987 11.3335C7.91203 11.3335 7.82536 11.3135 7.74536 11.2802C7.66536 11.2468 7.59203 11.2002 7.52536 11.1402C7.46536 11.0735 7.4187 11.0068 7.38536 10.9202C7.35203 10.8402 7.33203 10.7535 7.33203 10.6668C7.33203 10.5802 7.35203 10.4935 7.38536 10.4135C7.4187 10.3335 7.46536 10.2602 7.52536 10.1935C7.59203 10.1335 7.66536 10.0868 7.74536 10.0535C7.90536 9.98683 8.09203 9.98683 8.25203 10.0535C8.33203 10.0868 8.40536 10.1335 8.47203 10.1935C8.53203 10.2602 8.5787 10.3335 8.61203 10.4135C8.64536 10.4935 8.66536 10.5802 8.66536 10.6668C8.66536 10.7535 8.64536 10.8402 8.61203 10.9202Z" fill="#E2E8F0"/>
-                        </svg></span>
-                        <h6>This message will be visible to all guests.</h6>
-                    </div>
-                </div>
-                <div class="rsvp-yes-notification-wrp">
-                    <h5>Notifications</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            All event activity <br>
-                            (Wall posts, potluck activity,  photo uploads, event updates, messages)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                        <label class="form-check-label" for="flexCheckDefault1">
-                            All event activity <br>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">RSVP</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 

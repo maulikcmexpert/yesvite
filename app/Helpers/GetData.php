@@ -874,7 +874,7 @@ function getInvitedUsers($eventId)
     $eventDetail['invited_user_id'] = [];
 
     $invitedUsers = EventInvitedUser::query();
-    $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId]);
+    $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0']);
     $result = $invitedUsers->get();
 
     if (!empty($result)) {
