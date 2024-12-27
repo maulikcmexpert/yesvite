@@ -137,6 +137,8 @@ class RsvpController extends Controller
                     $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                         $query->where('is_co_host', '1')->with('user');
                     }])->where('id', $event_id)->first();
+
+                    dd($eventDetail);
                     $guestView = [];
                     $eventDetails['id'] = $eventDetail->id;
                     $eventDetails['event_images'] = [];
