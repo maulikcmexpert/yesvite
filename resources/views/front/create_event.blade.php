@@ -281,7 +281,7 @@
                    
                     <li class="li_design">
                         <div class="menu-circle-wrp side-bar-list ">
-                            <span class="design-span"></span>
+                            <span class="design-span active"></span>
                             <h3>Design</h3>
                         </div>
                         <ul class="new-event-sidebar-sub-menu">
