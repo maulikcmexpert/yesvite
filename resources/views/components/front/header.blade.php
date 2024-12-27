@@ -39,14 +39,11 @@
 <link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet_live.css') }}">
 @endif
 
-@php
-if(isset($page) && $page=="front.profile"){
-    @endphp
+@if(isset($page) && $page=="front.profile")
     <link rel="stylesheet" href="{{ asset('assets/event/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/event/css/contact.css') }}">
-    @php
-}
-@endphp
+@endif
+
 
 <link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
 <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" crossorigin="anonymous"/>
