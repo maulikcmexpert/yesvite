@@ -3,7 +3,8 @@
 
 <head>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css" stylesheet.crossOrigin = "anonymous"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/event/css/spectrum.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/about-us.css') }}">
 
@@ -52,10 +53,11 @@
     <link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/edit-design.css') }}">
-
+    
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/event/style1.css') }}"> --}}
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <link rel="stylesheet" href="{{ asset('assets/event/css/swiper-bundle.min.css') }}">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /> --}}
 
 
 
