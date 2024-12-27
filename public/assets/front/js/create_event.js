@@ -3567,6 +3567,7 @@ $(document).on("click", ".li_event_detail", function () {
     $(".main-content-wrp").removeClass("blurred");
     $(".step_2").hide();
     $('#edit-design-temp').hide();
+    $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
     // handleActiveClass('.li_guest');
     $('.pick-card').addClass('menu-success');
     $('.edit-design').addClass('menu-success');
