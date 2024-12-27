@@ -10578,7 +10578,7 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['rsvp_status' => '1', 'event_id' => $eventDetail->id],'is_co_host'=>'0')->count();
+            where(['rsvp_status' => '1', 'event_id' => $eventDetail->id,'is_co_host'=>'0'])->count();
 
             $eventNotComing = EventInvitedUser::
             // whereHas('user', function ($query) {
