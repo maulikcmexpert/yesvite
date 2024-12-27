@@ -23,9 +23,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
-                                <div class="rsvp-slider owl-carousel owl-theme {{($event->event_image->isNotEmpty() && count($event->event_image) > 1 )?'rsvp-slide':''}} " >    
-                                    @if ($event->event_image->isNotEmpty())
-                                        @foreach($event->event_image as $value)
+                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo->guest_view['event_images']->isNotEmpty() && count($eventInfo->guest_view['event_images']) > 1 )?'rsvp-slide':''}} " >    
+                                    @if ($eventInfo->guest_view['event_images']->isNotEmpty())
+                                        @foreach($eventInfo->guest_view['event_images'] as $value)
                                         <div class="item">
                                             <div class="rsvp-img">
                                                 <img src="{{ asset('storage/event_images/'.$value->image)}}" alt="birth-card">
@@ -40,8 +40,8 @@
                                      <h5 class="title">RSVP</h5>
                                      <div class="author-wrp">
                                          <div class="author-img">
-                                            @if ($event->profile != '')
-                                                <img src="{{ $event->profile}}" alt="">
+                                            @if ($eventInfo->guest_view['user_profile'] != '')
+                                                <img src="{{ $eventInfo->guest_view['user_profile']}}" alt="">
                                             @else
                                             @php
                                                 $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';

@@ -148,6 +148,8 @@ class RsvpController extends Controller
                     $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
                     $eventDetails['event_name'] = $eventDetail->event_name;
                     $eventDetails['hosted_by'] = $eventDetail->hosted_by;
+                    $eventDetails['host_first_name'] = $eventDetail->user->first_name;
+                    $eventDetails['host_last_name'] = $eventDetail->user->last_name;
                     $eventDetails['is_host'] = ($eventDetail->user_id == $user_id) ? 1 : 0;
                     $eventDetails['event_date'] = $eventDetail->start_date;
                     $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
