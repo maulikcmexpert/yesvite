@@ -4473,9 +4473,16 @@ class ApiControllerv2 extends Controller
 
                 $invitedUser = EventInvitedUser::with(['user','contact_sync'])->where( ['event_id' => $getEventData->id])->get();
                 // dd($invitedUser);
+                $processedSyncIds = []; 
+
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
                         if ($guestVal->is_co_host == '0') {
+
+                            if (!empty($guestVal->sync_id) && in_array($guestVal->sync_id, $processedSyncIds)) {
+                                continue;
+                            }
+                            
                             if ($guestVal->sync_id != "" && ($guestVal->user_id == "" || (isset($guestVal->user->app_user) && $guestVal->user->app_user == '0'))) {
                                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
@@ -4488,6 +4495,9 @@ class ApiControllerv2 extends Controller
                                 $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
                                 $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
                                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
+
+                                $processedSyncIds[] = $guestVal->sync_id;
+
                             } elseif ($guestVal->user->is_user_phone_contact == '0') {
                                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
