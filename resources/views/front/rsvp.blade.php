@@ -133,7 +133,7 @@
                                                 <div class="img-wrp">
                                                     @if ($eventInfo['guest_view']['user_profile'] != '')
                                                         {{-- <img src="./assets/img/host-img.png" alt="host-img">                                  --}}
-                                                        <img src="{{ $event->profile}}" alt="">
+                                                        <img src="{{ $eventInfo['guest_view']['user_profile']}}" alt="">
                                                     @else
                                                     @php
                                                         $firstInitial = !empty($eventInfo['guest_view']['host_first_name']) ? strtoupper($eventInfo['guest_view']['host_first_name'][0]) : '';
