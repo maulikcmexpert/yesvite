@@ -1,4 +1,4 @@
-{{                dd($eventInfo);}}
+{{-- {{                dd($eventInfo);}} --}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -148,7 +148,7 @@
                                                 <span>Host</span>
                                                 {{-- <a href="#" class="msg-btn">Message</a> --}}
                                             </div>
-                                            @if($co_hosts)
+                                            @if(!empty($eventInfo['guest_view']['co_hosts']))
                                             <div class="host-user-con">
                                                 <div class="img-wrp">
                                                     <img src="./assets/img/host-img2.png" alt="host-img">                                 
