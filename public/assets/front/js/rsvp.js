@@ -41,7 +41,11 @@ $(document).ready(function() {
 
 $(document).on('click','.yes_rsvp_btn',function (e) {
     e.preventDefault();
-
     $('#rsvpYesForm').submit();
+  });
+
+  $(document).on('click','.no_rsvp_btn',function (e) {
+    e.preventDefault();
+    $('#rsvpNoForm').submit();
 
   })
