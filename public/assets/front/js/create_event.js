@@ -559,10 +559,7 @@ $(function() {
         }
     });
   });
-$(document).on('click',function(e){
-    e.preventDefault();
-    
-})
+
 $(function () {
     var selectedDates = new Set();
     
