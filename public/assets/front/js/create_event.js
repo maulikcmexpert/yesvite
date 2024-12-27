@@ -3544,33 +3544,7 @@ $(document).on("click", ".li_event_detail", function () {
                         console.log(eventData);
                         eventData.step = final_step;
                         console.log("Image uploaded and saved successfully");
-                        $("#myCustomModal").modal("hide");
-                        $("#exampleModal").modal("hide");
-                        $("#loader").css("display", "none");
-                        $('.store_desgin_temp').prop("disabled", false);
-                        $('.btn-close').prop("disabled", false);
-                        $(".main-content-wrp").removeClass("blurred");
-                        $(".step_2").hide();
-                        $('#edit-design-temp').hide();
-                        handleActiveClass('.li_guest');
-                        $('.pick-card').addClass('menu-success');
-                        $('.edit-design').addClass('menu-success');
-                        $('.edit-design').removeClass('active');
-                        $('.li_design').find(".side-bar-list").addClass("menu-success");
-    
-                        active_responsive_dropdown('drop-down-event-guest');
-    
-                        $('.event_create_percent').text('75%');
-                        $('.current_step').text('3 of 4');
                         
-                        $(".step_3").show();
-                        console.log(eventData);
-                        
-                        var type="all"
-                        get_user(type);
-                        if(response.shape_image){
-                            eventData.shape_image = response.shape_image;
-                        }
                     },
                     error: function (xhr, status, error) {
                         console.error(
@@ -3584,20 +3558,41 @@ $(document).on("click", ".li_event_detail", function () {
                 console.error("Error capturing image:", error);
             });
         $(".main-content-wrp").addClass("blurred");
-    }, 1000);
+    }, 500);
+    $("#myCustomModal").modal("hide");
+    $("#exampleModal").modal("hide");
+    $("#loader").css("display", "none");
+    $('.store_desgin_temp').prop("disabled", false);
+    $('.btn-close').prop("disabled", false);
+    $(".main-content-wrp").removeClass("blurred");
+    $(".step_2").hide();
+    $('#edit-design-temp').hide();
+    handleActiveClass('.li_guest');
+    $('.pick-card').addClass('menu-success');
+    $('.edit-design').addClass('menu-success');
+    $('.edit-design').removeClass('active');
+    $('.li_design').find(".side-bar-list").addClass("menu-success");
 
-    $('#sidebar_select_design_category').css('display','none');
-    $(".step_1").show();
-    $(".step_2").css("display", "none");
-    $("#edit-design-temp").css("display", "none");
-    $(".step_3").css("display", "none");
-    $(".step_4").css("display", "none");
-    $(".step_final_checkout").css("display", "none");
-    active_responsive_dropdown('drop-down-event-detail');
-    
+    active_responsive_dropdown('drop-down-event-guest');
+
     $('.event_create_percent').text('50%');
     $('.current_step').text('2 of 4');
     
+    console.log(eventData);
+    
+    var type="all"
+    get_user(type);
+    // $('#sidebar_select_design_category').css('display','none');
+    $(".step_1").show();
+    // $(".step_2").css("display", "none");
+    // $("#edit-design-temp").css("display", "none");
+    // $(".step_3").css("display", "none");
+    // $(".step_4").css("display", "none");
+    // $(".step_final_checkout").css("display", "none");
+    // active_responsive_dropdown('drop-down-event-detail');
+    
+    // $('.event_create_percent').text('50%');
+    // $('.current_step').text('2 of 4');
     
     handleActiveClass(this);
     var design = eventData.desgin_selected;
