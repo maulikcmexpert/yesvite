@@ -820,7 +820,7 @@ class ApiControllerv2 extends Controller
                         $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id])->count();
+                        })->where(['event_id' => $value->id,'is_co_host'=>'0'])->count();
 
 
 
