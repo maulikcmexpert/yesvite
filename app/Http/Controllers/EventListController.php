@@ -1048,8 +1048,8 @@ class EventListController extends Controller
                 $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                 $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                 $eventDetail['host_name'] = $value->hosted_by;
-                $eventDetail['host_firstname'] = $value->event->firstname;
-                $eventDetail['host_lastname'] = $value->event->lastname;
+                $eventDetail['host_firstname'] = $value->user->firstname;
+                $eventDetail['host_lastname'] = $value->user->lastname;
                 $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
                 $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                 $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
