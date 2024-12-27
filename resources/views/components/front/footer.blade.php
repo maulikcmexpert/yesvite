@@ -1,5 +1,5 @@
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" stylesheet.crossOrigin = "anonymous"></script>
 
@@ -52,7 +52,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
 <script src="{{ asset('assets/front/js/dom-to-image.min.js') }}"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> --}}
 
 
 {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
