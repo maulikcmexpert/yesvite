@@ -10976,7 +10976,7 @@ class ApiControllerv2 extends Controller
                     }
                     $newInviteGuest[] = ['id' => $id];
                 } else {
-                    $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id']])->get()->pluck('user_id')->toArray();
+                    $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id'],'is_co_host'=>'0'])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
                         EventInvitedUser::create([
