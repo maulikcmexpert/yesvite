@@ -2961,6 +2961,7 @@ function savePage1Data(close = null) {
         $('#sidebar_select_design_category').css('display','none');
         active_responsive_dropdown('drop-down-event-guest');
         handleActiveClass('.li_guest');
+        $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
         var type="all"
         get_user(type);
 
@@ -3567,6 +3568,8 @@ $(document).on("click", ".li_event_detail", function () {
     $('.btn-close').prop("disabled", false);
     $(".main-content-wrp").removeClass("blurred");
     $(".step_2").hide();
+    $(".step_4").hide();
+    $(".step_3").hide();
     $('#edit-design-temp').hide();
     
     // handleActiveClass('.li_guest');
