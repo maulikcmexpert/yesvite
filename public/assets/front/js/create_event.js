@@ -3488,198 +3488,105 @@ function edit_design_modal() {
 var design_inner_image = '';
 $(document).on("click", ".li_event_detail", function () {
     $('#sidebar_select_design_category').css('display','none');
-    // canvas.discardActiveObject();
-    // canvas.getObjects().forEach(obj => {
-    //     if (obj.type === 'group') {
-    //         canvas.remove(obj) // Your existing function to add icons
-    //     }
-    // });
-    // canvas.renderAll();
-
-    // setTimeout(() => {
-    //     var downloadImage = document.getElementById("imageEditor1");
-    //     // $("#loader").show();
-    //     $(this).prop("disabled", true);
-    //     $('.btn-close').prop("disabled", true);
-    //     dbJson = getTextDataFromCanvas();
-
-    //     eventData.textData = dbJson;
-    //     eventData.temp_id = temp_id;
-    //     console.log(downloadImage);
-    //     // save_image_design(downloadImage);
-    //     if($('#shape_img').attr("src")){
-    //         design_inner_image = $('#shape_img').attr("src");
-    //     }
-    //     var old_shape_url = $("#first_shape_img").attr("src"); 
-    
-    //     domtoimage.toBlob(downloadImage)
-    //         .then(function (blob) {
-    //             console.log({blob});
-                
-    //             var formData = new FormData();
-    //             formData.append("image", blob, "design.png");
-    //             formData.append('design_inner_image',design_inner_image);
-    //             formData.append('shapeImageUrl',old_shape_url);
-    //             $.ajax({
-    //                 headers: {
-    //                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-    //                         "content"
-    //                     ),
-    //                 },
-    //                 url: base_url + "event/store_temp_design",
-    //                 type: "POST",
-    //                 data: formData,
-    //                 processData: false,
-    //                 contentType: false,
-    //                 success: function (response) {
-    //                     let image = response.image;
-    //                     eventData.desgin_selected = image;
-                        
-                        
-    //                     // if(eventData.step == '1'){
-    //                     //     eventData.step = '2';
-    //                     // }
-    //                     console.log(final_step);
-    //                     if(final_step == 2){
-    //                         final_step = 3;
-    //                     }
-    //                     console.log(eventData);
-    //                     eventData.step = final_step;
-    //                     console.log("Image uploaded and saved successfully");
-    //                     $("#myCustomModal").modal("hide");
-    //                     $("#exampleModal").modal("hide");
-    //                     $("#loader").css("display", "none");
-    //                     $('.store_desgin_temp').prop("disabled", false);
-    //                     $('.btn-close').prop("disabled", false);
-    //                     $(".main-content-wrp").removeClass("blurred");
-    //                     $(".step_2").hide();
-    //                     $('#edit-design-temp').hide();
-    //                     handleActiveClass('.li_guest');
-    //                     $('.pick-card').addClass('menu-success');
-    //                     $('.edit-design').addClass('menu-success');
-    //                     $('.edit-design').removeClass('active');
-    //                     $('.li_design').find(".side-bar-list").addClass("menu-success");
-    
-    //                     active_responsive_dropdown('drop-down-event-guest');
-    
-    //                     $('.event_create_percent').text('75%');
-    //                     $('.current_step').text('3 of 4');
-                        
-    //                     $(".step_3").show();
-    //                     console.log(eventData);
-                        
-    //                     var type="all"
-    //                     get_user(type);
-    //                     if(response.shape_image){
-    //                         eventData.shape_image = response.shape_image;
-    //                     }
-    //                 },
-    //                 error: function (xhr, status, error) {
-    //                     console.error(
-    //                         "Failed to upload and save the image:",
-    //                         error
-    //                     );
-    //                 },
-    //             });
-    //         })
-    //         .catch(function (error) {
-    //             console.error("Error capturing image:", error);
-    //         });
-    //     $(".main-content-wrp").addClass("blurred");
-    // }, 500);
-
     canvas.discardActiveObject();
     canvas.getObjects().forEach(obj => {
         if (obj.type === 'group') {
-            canvas.remove(obj); // Remove group objects from canvas
+            canvas.remove(obj) // Your existing function to add icons
         }
     });
     canvas.renderAll();
 
     setTimeout(() => {
-        const downloadImage = document.getElementById("imageEditor1");
+        var downloadImage = document.getElementById("imageEditor1");
+        // $("#loader").show();
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
+        dbJson = getTextDataFromCanvas();
 
-        // Gather data from canvas and other elements
-        const dbJson = getTextDataFromCanvas();
-        const designInnerImage = $('#shape_img').attr("src") || "";
-        const oldShapeUrl = $("#first_shape_img").attr("src") || "";
-        
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
-
-        // Capture canvas as a blob
+        console.log(downloadImage);
+        // save_image_design(downloadImage);
+        if($('#shape_img').attr("src")){
+            design_inner_image = $('#shape_img').attr("src");
+        }
+        var old_shape_url = $("#first_shape_img").attr("src"); 
+    
         domtoimage.toBlob(downloadImage)
-            .then(blob => {
-                console.log({ blob });
-
-                const formData = new FormData();
+            .then(function (blob) {
+                console.log({blob});
+                
+                var formData = new FormData();
                 formData.append("image", blob, "design.png");
-                formData.append("design_inner_image", designInnerImage);
-                formData.append("shapeImageUrl", oldShapeUrl);
-
-                // Perform AJAX request
+                formData.append('design_inner_image',design_inner_image);
+                formData.append('shapeImageUrl',old_shape_url);
                 $.ajax({
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
                     },
-                    url: `${base_url}event/store_temp_design`,
+                    url: base_url + "event/store_temp_design",
                     type: "POST",
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: response => {
-                        handleSuccess(response);
+                    success: function (response) {
+                        let image = response.image;
+                        eventData.desgin_selected = image;
+                        
+                        
+                        // if(eventData.step == '1'){
+                        //     eventData.step = '2';
+                        // }
+                        console.log(final_step);
+                        if(final_step == 2){
+                            final_step = 3;
+                        }
+                        console.log(eventData);
+                        eventData.step = final_step;
+                        console.log("Image uploaded and saved successfully");
+                        $("#myCustomModal").modal("hide");
+                        $("#exampleModal").modal("hide");
+                        $("#loader").css("display", "none");
+                        $('.store_desgin_temp').prop("disabled", false);
+                        $('.btn-close').prop("disabled", false);
+                        $(".main-content-wrp").removeClass("blurred");
+                        $(".step_2").hide();
+                        $('#edit-design-temp').hide();
+                        handleActiveClass('.li_guest');
+                        $('.pick-card').addClass('menu-success');
+                        $('.edit-design').addClass('menu-success');
+                        $('.edit-design').removeClass('active');
+                        $('.li_design').find(".side-bar-list").addClass("menu-success");
+    
+                        active_responsive_dropdown('drop-down-event-guest');
+    
+                        $('.event_create_percent').text('75%');
+                        $('.current_step').text('3 of 4');
+                        
+                        $(".step_3").show();
+                        console.log(eventData);
+                        
+                        var type="all"
+                        get_user(type);
+                        if(response.shape_image){
+                            eventData.shape_image = response.shape_image;
+                        }
                     },
-                    error: (xhr, status, error) => {
-                        console.error("Failed to upload and save the image:", error);
+                    error: function (xhr, status, error) {
+                        console.error(
+                            "Failed to upload and save the image:",
+                            error
+                        );
                     },
                 });
             })
-            .catch(error => {
+            .catch(function (error) {
                 console.error("Error capturing image:", error);
             });
-
         $(".main-content-wrp").addClass("blurred");
     }, 500);
-
-    // Success handler
-    function handleSuccess(response) {
-        let { image, shape_image } = response;
-        eventData.design_selected = image;
-        if (final_step === 2) final_step = 3;
-
-        eventData.step = final_step;
-        if (shape_image) eventData.shape_image = shape_image;
-
-        updateUI();
-        get_user("all"); // Fetch user data
-    }
-
-    // Update UI after success
-    function updateUI() {
-        $("#myCustomModal, #exampleModal").modal("hide");
-        $("#loader").hide();
-        $('.store_desgin_temp, .btn-close').prop("disabled", false);
-        $(".main-content-wrp").removeClass("blurred");
-        $(".step_2").hide();
-        $('#edit-design-temp').hide();
-
-        handleActiveClass('.li_guest');
-        $('.pick-card, .edit-design').addClass('menu-success');
-        $('.edit-design').removeClass('active');
-        $('.li_design .side-bar-list').addClass("menu-success");
-
-        active_responsive_dropdown('drop-down-event-guest');
-        $('.event_create_percent').text('75%');
-        $('.current_step').text('3 of 4');
-        $(".step_3").show();
-
-        console.log("Image uploaded and saved successfully");
-        console.log(eventData);
-    }
-
 
     $('#sidebar_select_design_category').css('display','none');
     $(".step_1").show();
