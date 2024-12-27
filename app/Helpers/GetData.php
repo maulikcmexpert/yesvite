@@ -939,7 +939,8 @@ function getInvitedUsersList($eventId)
                 $invitedUserIdDetail['kids']= $guestVal->kids;
                 $invitedUserIdDetail['adults']= $guestVal->adults;
                 $invitedUserIdDetail['read']= $guestVal->read;
-                $invitedUserIdDetail['rsvp_d']= $guestVal->rsvp_d;
+                $invitedUserIdDetail['rsvp_d']= $guestVal->rsvp_d;  
+                $invitedUserIdDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
             } elseif ($guestVal->user->app_user == '1') {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
@@ -958,6 +959,7 @@ function getInvitedUsersList($eventId)
                 $invitedUserIdDetail['adults']= $guestVal->adults;
                 $invitedUserIdDetail['read']= $guestVal->read;
                 $invitedUserIdDetail['rsvp_d']= $guestVal->rsvp_d;
+                $invitedUserIdDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
             }
         }
