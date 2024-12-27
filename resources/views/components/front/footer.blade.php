@@ -118,7 +118,7 @@ defer
         var plan = checkedPlan.data('plan');
         // alert(plan);
     }
-    eventData.plan_selected = 'Fre';
+    // eventData.plan_selected = 'Free';
     window.location.href = "event";
 });
 </script>
