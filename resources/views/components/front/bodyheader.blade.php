@@ -11,7 +11,7 @@
       </a>
       @if (Auth::guard('web')->check()) 
       <div class="header-right">
-        <a href="#" class="add_new_event_btn"
+        <a href="#" class="add_new_event_btn create_event_with_plan"
           ><i class="fa-solid fa-plus"></i> New Event</a
         >
 
@@ -1242,7 +1242,7 @@
             <li><a href="{{route('profile')}}">Profile</a>
             </li>
             <div class="mobile-menu-inner-btns">
-                <a href="#" class="add_new_event_btn"><i class="fa-solid fa-plus"></i> New Event</a>
+                <a href="#" class="add_new_event_btn create_event_with_plan"><i class="fa-solid fa-plus"></i> New Event</a>
                 <div class="header-msg-wrp">
                   <a href="{{route('message.list')}}">
                     <svg viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
