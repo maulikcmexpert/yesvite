@@ -170,23 +170,7 @@
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li class="li_event_detail">
-                        <a class="dropdown-item drop-down-event-detail active" href="#">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.57751 3.40771C7.93585 5.70771 9.80251 7.46605 12.1192 7.69938"
-                                        stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M8.71939 2.19924L1.87772 9.4409C1.61939 9.7159 1.36939 10.2576 1.31939 10.6326L1.01106 13.3326C0.902725 14.3076 1.60272 14.9742 2.56939 14.8076L5.25272 14.3492C5.62772 14.2826 6.15272 14.0076 6.41106 13.7242L13.2527 6.48257C14.4361 5.23257 14.9694 3.80757 13.1277 2.0659C11.2944 0.340903 9.90272 0.949237 8.71939 2.19924Z"
-                                        stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                            Event Details
-                        </a>
-                    </li>
+                   
                     <li class="li_design">
                         <div class="dropdown-item drop-down-event-design ">
                             <span>
@@ -212,13 +196,30 @@
                             Design <i class="fa-solid fa-angle-down"></i>
                         </div>
                         <ul class="dropdown-sub-menu">
-                            <li class="pick-card">
-                                <a href="" class="dropdown-item drop-down-pick-card">Pick Card</a>
+                            <li class="pick-card active">
+                                <a href="" class="dropdown-item drop-down-pick-card ">Pick Card</a>
                             </li>
                             <li class="edit-design">
                                 <a href="" class="dropdown-item drop-down-edit-design">Edit Design</a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="li_event_detail">
+                        <a class="dropdown-item drop-down-event-detail " href="#">
+                            <span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.57751 3.40771C7.93585 5.70771 9.80251 7.46605 12.1192 7.69938"
+                                        stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M8.71939 2.19924L1.87772 9.4409C1.61939 9.7159 1.36939 10.2576 1.31939 10.6326L1.01106 13.3326C0.902725 14.3076 1.60272 14.9742 2.56939 14.8076L5.25272 14.3492C5.62772 14.2826 6.15272 14.0076 6.41106 13.7242L13.2527 6.48257C14.4361 5.23257 14.9694 3.80757 13.1277 2.0659C11.2944 0.340903 9.90272 0.949237 8.71939 2.19924Z"
+                                        stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            Event Details
+                        </a>
                     </li>
                     <li class="li_guest">
                         <a class="dropdown-item drop-down-event-guest" href="#">
@@ -279,12 +280,12 @@
                     <!-- ---for active menu add active class--- -->
                    
                     <li class="li_design">
-                        <div class="menu-circle-wrp side-bar-list active">
-                            <span class="design-span"></span>
+                        <div class="menu-circle-wrp side-bar-list ">
+                            <span class="design-span active"></span>
                             <h3>Design</h3>
                         </div>
                         <ul class="new-event-sidebar-sub-menu">
-                            <li class="pick-card">
+                            <li class="pick-card active">
                                 <div class="side-bar-sub-list">
                                     <h3>Pick Design</h3>
                                 </div>

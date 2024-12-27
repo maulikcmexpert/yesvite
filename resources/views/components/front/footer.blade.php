@@ -8,7 +8,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
 
-<script src="{{ asset('assets/event/js/fontLoder.js') }}"></script>
+{{-- <script src="{{ asset('assets/event/js/fontLoder.js') }}"></script> --}}
 <!-- owl-carousel-js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
