@@ -625,8 +625,11 @@ $(function () {
     });
    
 });
+// $(document).on('click',,function(){
 
-$("#schedule").on("change", function () {
+$(document).on("click change", "#schedule", function () {
+// $("#schedule").on("click change", function () {
+    alert();
     var eventDate = $("#event-date").val();
     var activities = {};
     eventData.activity = {};
