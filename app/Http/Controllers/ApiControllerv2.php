@@ -10629,6 +10629,7 @@ class ApiControllerv2 extends Controller
                 // })
             ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1','is_co_host'=>'0'])->get();
 
+            dd($userRsvpStatusList);
             $selectedFilters = $request->input('filters');
             if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
 
