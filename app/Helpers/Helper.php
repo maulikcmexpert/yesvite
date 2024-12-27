@@ -244,7 +244,7 @@ function sendNotification($notificationType, $postData)
                                 ];
     
                                 $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
-                                $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
+                                $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->orderBy('id','DESC')->first();
     
                                 if (!empty($emailCheck)) {
                                     $updateinvitation->invitation_sent = '1';
