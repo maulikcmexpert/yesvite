@@ -3486,6 +3486,7 @@ function edit_design_modal() {
 var design_inner_image = '';
 $(document).on("click", ".li_event_detail", function () {
     $('#sidebar_select_design_category').css('display','none');
+    $('.li_event_detail').find(".side-bar-list").addClass("active");
     canvas.discardActiveObject();
     canvas.getObjects().forEach(obj => {
         if (obj.type === 'group') {
@@ -3567,7 +3568,7 @@ $(document).on("click", ".li_event_detail", function () {
     $(".main-content-wrp").removeClass("blurred");
     $(".step_2").hide();
     $('#edit-design-temp').hide();
-    $('.li_event_detail').find(".side-bar-list").addClass("active");
+    
     // handleActiveClass('.li_guest');
     $('.pick-card').addClass('menu-success');
     $('.edit-design').addClass('menu-success');
