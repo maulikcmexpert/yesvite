@@ -1,4 +1,4 @@
-{{                dd($eventInfo->guest_view['host_first_name']);}}
+{{                dd($eventInfo['guest_view']['host_first_name']);}}
 @php
     use Carbon\Carbon;
 @endphp
