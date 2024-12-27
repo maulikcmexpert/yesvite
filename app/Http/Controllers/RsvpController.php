@@ -335,7 +335,9 @@ class RsvpController extends Controller
                         'title',
                         'page',
                         'js',
-                        'eventInfo'  
+                        'eventInfo',
+                        'event_id',
+                        'user_id'
                     ));
                     // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
                 } catch (QueryException $e) {
