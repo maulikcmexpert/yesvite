@@ -82,9 +82,9 @@ defer
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
-<script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
+{{-- <script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
 <script src="{{ asset('assets/front/new_js/scritp.js')}}"></script>
-<script src="{{ asset('assets/front/new_js/calender.js')}}"></script>
+<script src="{{ asset('assets/front/new_js/calender.js')}}"></script> --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
