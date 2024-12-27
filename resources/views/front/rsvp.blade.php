@@ -164,7 +164,7 @@
                                      <div class="location-wrp cmn-card rsvp-location-wrp">
                                          <h4 class="title">Event Location</h4>
                                          <h5>{{$eventInfo['guest_view']['event_location_name']}}</h5>
-                                         <p>2369 Graystone Lakes Maconey, CA 90210</p>
+                                         {{-- <p>2369 Graystone Lakes Maconey, CA 90210</p> --}}
                                          <p>{{$eventInfo['guest_view']['address_1']}} {{$eventInfo['guest_view']['city']}}, {{$eventInfo['guest_view']['state']}} {{$eventInfo['guest_view']['zip_code']}}</p>
 
                                          <div id="map">
