@@ -59,7 +59,7 @@
                                      </div>
                                      @if($eventInfo['guest_view']['message_to_guests'] != null || $eventInfo['guest_view']['message_to_guests'] != "")
                                      <div class="thank-card">
-                                         <p>{{$event->message_to_guests}}</p>
+                                         <p>{{$eventInfo['guest_view']['message_to_guests'] }}</p>
                                      </div>
                                      @endif
                                      @php
