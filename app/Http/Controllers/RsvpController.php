@@ -137,6 +137,7 @@ class RsvpController extends Controller
                     $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                         $query->where('is_co_host', '1')->with('user');
                     }])->where('id', $event_id)->first();
+
                     $guestView = [];
                     $eventDetails['id'] = $eventDetail->id;
                     $eventDetails['event_images'] = [];
@@ -148,6 +149,8 @@ class RsvpController extends Controller
                     $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
                     $eventDetails['event_name'] = $eventDetail->event_name;
                     $eventDetails['hosted_by'] = $eventDetail->hosted_by;
+                    $eventDetails['host_first_name'] = $eventDetail->user->firstname;
+                    $eventDetails['host_last_name'] = $eventDetail->user->lastname;
                     $eventDetails['is_host'] = ($eventDetail->user_id == $user_id) ? 1 : 0;
                     $eventDetails['event_date'] = $eventDetail->start_date;
                     $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
