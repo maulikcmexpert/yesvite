@@ -445,7 +445,7 @@
                         @csrf
                         <input type="hidden" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
                         <input type="hidden" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
-                        <input type="hidden" value="1" name="rsvp_yes" id="rsvp_yes"/>
+                        <input type="hidden" value="1" name="rsvp_status" id="rsvp_status"/>
                     <div class="modal-body">
                         <div class="d-flex align-items-center rsvp-yes-profile">
                             <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
@@ -502,7 +502,7 @@
                                     <div class="rsvp-msgbox">
                                         <h5>Message</h5>
                                         <div class="input-form">
-                                            <textarea name="" id="" class="form-control inputText" id="message" name="Fname" message="">Thanks for create this event! so exited!</textarea>
+                                            <textarea name="" id="" class="form-control inputText" id="message_to_host" name="message_to_host" message="">Thanks for create this event! so exited!</textarea>
                                             <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -556,7 +556,7 @@
                     @csrf
                     <input type="text" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
                     <input type="text" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
-                    <input type="hidden" value="0" name="rsvp_no" id="rsvp_no"/>
+                    <input type="hidden" value="0" name="rsvp_status" id="rsvp_status"/>
                         <div class="modal-body">
                             <div class="d-flex align-items-center rsvp-yes-profile">
                                 <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
@@ -592,7 +592,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea name="" id="" class="form-control inputText" id="rsvp_message" name="rsvp_message" required="">Thanks for create this event! so exited!</textarea>
+                                    <textarea name="" id="" class="form-control inputText" id="message_to_host" name="message_to_host" required="">Thanks for create this event! so exited!</textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">
