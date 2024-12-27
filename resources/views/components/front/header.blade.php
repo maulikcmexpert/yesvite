@@ -48,7 +48,7 @@ if(isset($page) && $page=="front.profile"){
 }
 @endphp
 
-{{-- <link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" /> --}}
+<link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
 <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" crossorigin="anonymous"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
