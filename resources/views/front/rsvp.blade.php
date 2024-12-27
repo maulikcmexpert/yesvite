@@ -163,8 +163,10 @@
                                      </div>
                                      <div class="location-wrp cmn-card rsvp-location-wrp">
                                          <h4 class="title">Event Location</h4>
-                                         <h5>Tom’s House</h5>
+                                         <h5>{{$eventInfo['guest_view']['event_location_name']}}</h5>
                                          <p>2369 Graystone Lakes Maconey, CA 90210</p>
+                                         <p>{{$eventInfo['guest_view']['address_1']}} {{$eventInfo['guest_view']['city']}}, {{$eventInfo['guest_view']['state']}} {{$eventInfo['guest_view']['zip_code']}}</p>
+
                                          <div id="map">
                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d144.9630579153168!3d-37.81410797975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d1b1f5f1f1f1!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1611815623456!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                            <img src="./assets/img/location-marker.svg" alt="marker" class="marker">
