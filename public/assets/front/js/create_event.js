@@ -809,10 +809,10 @@ $(document).on('click','.create_event_with_plan',function(){
     var checkedPlan = $('input[name="plan_check"]:checked'); // Select the checked one
     if (checkedPlan.length) { // Ensure there is a checked checkbox
         var plan = checkedPlan.data('plan');
-        eventData.plan_selected = plan;
         // alert(plan);
-        window.location.href = "event";
     }
+    eventData.plan_selected = 'Fre';
+    window.location.href = "event";
     
 
 });
