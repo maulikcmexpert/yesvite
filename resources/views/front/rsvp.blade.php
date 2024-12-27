@@ -1,4 +1,4 @@
-{{                dd($eventInfo);}}
+{{                dd($getInvitedusers);}}
 @php
     use Carbon\Carbon;
 @endphp
