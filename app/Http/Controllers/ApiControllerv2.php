@@ -4478,11 +4478,9 @@ class ApiControllerv2 extends Controller
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
                         if ($guestVal->is_co_host == '0') {
-
                             if (!empty($guestVal->sync_id) && in_array($guestVal->sync_id, $processedSyncIds)) {
                                 continue;
                             }
-                            
                             if ($guestVal->sync_id != "" && ($guestVal->user_id == "" || (isset($guestVal->user->app_user) && $guestVal->user->app_user == '0'))) {
                                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
@@ -4497,7 +4495,6 @@ class ApiControllerv2 extends Controller
                                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
 
                                 $processedSyncIds[] = $guestVal->sync_id;
-
                             } elseif ($guestVal->user->is_user_phone_contact == '0') {
                                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
