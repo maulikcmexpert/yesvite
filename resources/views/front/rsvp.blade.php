@@ -1,4 +1,4 @@
-{{                dd($eventInfo['guest_view']['host_first_name']);}}
+{{                dd($eventInfo);}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -23,9 +23,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
-                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo->guest_view['event_images']->isNotEmpty() && count($eventInfo->guest_view['event_images']) > 1 )?'rsvp-slide':''}} " >    
-                                    @if ($eventInfo->guest_view['event_images']->isNotEmpty())
-                                        @foreach($eventInfo->guest_view['event_images'] as $value)
+                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo['guest_view']['event_images']->isNotEmpty() && count($eventInfo['guest_view']['event_images']) > 1 )?'rsvp-slide':''}} " >    
+                                    @if ($eventInfo['guest_view']['event_images']->isNotEmpty())
+                                        @foreach($eventInfo['guest_view']['event_images'] as $value)
                                         <div class="item">
                                             <div class="rsvp-img">
                                                 <img src="{{ asset('storage/event_images/'.$value->image)}}" alt="birth-card">
@@ -40,12 +40,12 @@
                                      <h5 class="title">RSVP</h5>
                                      <div class="author-wrp">
                                          <div class="author-img">
-                                            @if ($eventInfo->guest_view['user_profile'] != '')
-                                                <img src="{{ $eventInfo->guest_view['user_profile']}}" alt="">
+                                            @if ($eventInfo['guest_view']['user_profile'] != '')
+                                                <img src="{{ $eventInfo['guest_view']['user_profile']}}" alt="">
                                             @else
                                             @php
-                                                $firstInitial = !empty($eventInfo->guest_view['host_first_name']) ? strtoupper($eventInfo->guest_view['host_first_name'][0]) : '';
-                                                $lastInitial = !empty($eventInfo->guest_view['host_first_name']) ? strtoupper($eventInfo->guest_view['host_first_name'][0]) : '';
+                                                $firstInitial = !empty($eventInfo['guest_view']['host_first_name']) ? strtoupper($eventInfo['guest_view']['host_first_name'][0]) : '';
+                                                $lastInitial = !empty($eventInfo['guest_view']['host_last_name']) ? strtoupper($eventInfo['guest_view']['host_last_name'][0]) : '';
                                                 $initials = $firstInitial . $lastInitial;
                                                 $fontColor = 'fontcolor' . $firstInitial;
                                             @endphp
@@ -53,7 +53,7 @@
                                             @endif
                                          </div>
                                          <div class="author-title">
-                                             <h4>{{$event->event_name}}</h4>
+                                             <h4>{{$$eventInfo['guest_view']['event_name']}}</h4>
                                              <p><span>Hosted by:</span>{{ $event->hosted_by}}</p>
                                          </div>
                                      </div>
