@@ -3514,10 +3514,7 @@ $(document).on("click", ".li_event_details", function () {
         var old_shape_url = $("#first_shape_img").attr("src"); 
     
         domtoimage.toBlob(downloadImage)
-            .then(function (blob) {
-
-                console.log(domtoimage.toBlob(downloadImage));
-                
+            .then(function (blob) { 
                 var formData = new FormData();
                 formData.append("image", blob, "design.png");
                 formData.append('design_inner_image',design_inner_image);
@@ -3548,6 +3545,53 @@ $(document).on("click", ".li_event_details", function () {
                         console.log(eventData);
                         eventData.step = final_step;
                         console.log("Image uploaded and saved successfully");
+                        $("#myCustomModal").modal("hide");
+                        $("#exampleModal").modal("hide");
+                        $("#loader").css("display", "none");
+                        $('.store_desgin_temp').prop("disabled", false);
+                        $('.btn-close').prop("disabled", false);
+                        $(".main-content-wrp").removeClass("blurred");
+                        $(".step_2").hide();
+                        $(".step_4").hide();
+                        $(".step_3").hide();
+                        $('#edit-design-temp').hide();
+                        
+                        // handleActiveClass('.li_guest');
+                        $('.pick-card').addClass('menu-success');
+                        $('.edit-design').addClass('menu-success');
+                        $('.edit-design').removeClass('active');
+                        $('.li_design').find(".side-bar-list").addClass("menu-success");
+                    
+                        // active_responsive_dropdown('drop-down-event-guest');
+                    
+                        $('.event_create_percent').text('50%');
+                        $('.current_step').text('2 of 4');
+                        
+                        console.log(eventData);
+                        
+                        var type="all"
+                        get_user(type);
+                        // $('#sidebar_select_design_category').css('display','none');
+                        $(".step_1").show();
+                        // $(".step_2").css("display", "none");
+                        // $("#edit-design-temp").css("display", "none");
+                        // $(".step_3").css("display", "none");
+                        // $(".step_4").css("display", "none");
+                        // $(".step_final_checkout").css("display", "none");
+                        active_responsive_dropdown('drop-down-event-detail');
+                        
+                        // $('.event_create_percent').text('50%');
+                        // $('.current_step').text('2 of 4');
+                        
+                        handleActiveClass(this);
+                        var design = eventData.desgin_selected;
+                        $('.li_event_detail').find(".side-bar-list").addClass("active");
+                        if( design == undefined || design == ''){
+                    
+                        }else{
+                            $('.pick-card').addClass('menu-success');
+                            $('.edit-design').addClass('menu-success');
+                        }
                         
                     },
                     error: function (xhr, status, error) {
@@ -3563,53 +3607,7 @@ $(document).on("click", ".li_event_details", function () {
             });
         $(".main-content-wrp").addClass("blurred");
     }, 500);
-    $("#myCustomModal").modal("hide");
-    $("#exampleModal").modal("hide");
-    $("#loader").css("display", "none");
-    $('.store_desgin_temp').prop("disabled", false);
-    $('.btn-close').prop("disabled", false);
-    $(".main-content-wrp").removeClass("blurred");
-    $(".step_2").hide();
-    $(".step_4").hide();
-    $(".step_3").hide();
-    $('#edit-design-temp').hide();
-    
-    // handleActiveClass('.li_guest');
-    $('.pick-card').addClass('menu-success');
-    $('.edit-design').addClass('menu-success');
-    $('.edit-design').removeClass('active');
-    $('.li_design').find(".side-bar-list").addClass("menu-success");
-
-    // active_responsive_dropdown('drop-down-event-guest');
-
-    $('.event_create_percent').text('50%');
-    $('.current_step').text('2 of 4');
-    
-    console.log(eventData);
-    
-    var type="all"
-    get_user(type);
-    // $('#sidebar_select_design_category').css('display','none');
-    $(".step_1").show();
-    // $(".step_2").css("display", "none");
-    // $("#edit-design-temp").css("display", "none");
-    // $(".step_3").css("display", "none");
-    // $(".step_4").css("display", "none");
-    // $(".step_final_checkout").css("display", "none");
-    active_responsive_dropdown('drop-down-event-detail');
-    
-    // $('.event_create_percent').text('50%');
-    // $('.current_step').text('2 of 4');
-    
-    handleActiveClass(this);
-    var design = eventData.desgin_selected;
-    $('.li_event_detail').find(".side-bar-list").addClass("active");
-    if( design == undefined || design == ''){
-
-    }else{
-        $('.pick-card').addClass('menu-success');
-        $('.edit-design').addClass('menu-success');
-    }
+   
 });
 
 $(document).on("click", ".li_event_detail", function () {
@@ -3628,6 +3626,7 @@ $(document).on("click", ".li_event_detail", function () {
         $(".step_2").hide();
         $(".step_4").hide();
         $(".step_3").hide();
+        $(".step_final_checkout").hide();
         $('#edit-design-temp').hide();
         $('.pick-card').addClass('menu-success');
         $('.edit-design').addClass('menu-success');
