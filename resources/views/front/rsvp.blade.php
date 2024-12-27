@@ -1,4 +1,4 @@
-{{                dd($eventInfo);}}
+{{-- {{                dd($eventInfo);}} --}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -23,12 +23,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
-                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo['guest_view']['event_images']->isNotEmpty() && count($eventInfo['guest_view']['event_images']) > 1 )?'rsvp-slide':''}} " >    
-                                    @if ($eventInfo['guest_view']['event_images']->isNotEmpty())
+                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo['guest_view']['event_images']!="" && count($eventInfo['guest_view']['event_images']) > 1 )?'rsvp-slide':''}} " >    
+                                    @if ($eventInfo['guest_view']['event_images']!="")
                                         @foreach($eventInfo['guest_view']['event_images'] as $value)
                                         <div class="item">
                                             <div class="rsvp-img">
-                                                <img src="{{ asset('storage/event_images/'.$value->image)}}" alt="birth-card">
+                                                <img src="{{ asset($value)}}" alt="birth-card">
                                             </div>
                                         </div>
                                         @endforeach
@@ -53,11 +53,11 @@
                                             @endif
                                          </div>
                                          <div class="author-title">
-                                             <h4>{{$$eventInfo['guest_view']['event_name']}}</h4>
-                                             <p><span>Hosted by:</span>{{ $event->hosted_by}}</p>
+                                             <h4>{{$eventInfo['guest_view']['event_name']}}</h4>
+                                             <p><span>Hosted by:</span>{{ $eventInfo['guest_view']['hosted_by']}}</p>
                                          </div>
                                      </div>
-                                     @if($event->message_to_guests != null || $event->message_to_guests != "")
+                                     @if($eventInfo['guest_view']['message_to_guests'] != null || $eventInfo['guest_view']['message_to_guests'] != "")
                                      <div class="thank-card">
                                          <p>{{$event->message_to_guests}}</p>
                                      </div>
@@ -65,12 +65,12 @@
                                      @php
                                         $i = 1;
                                      @endphp
-                                     @if($event->event_detail)
+                                     @if($eventInfo['guest_view']['event_detail'])
                                      <div class="event-detail">
                                          <h5>Event Details</h5>
                                          <div class="d-flex flex-wrap px-2">
                                              <div class="d-flex align-items-center justify-content-between {{($i<= 3)?'w-100 mb-2':'w-100'}}">
-                                                @foreach($event->event_detail as $val)
+                                                @foreach($eventInfo['guest_view']['event_detail'] as $val)
                                                 <h6>{{$val}}</h6>
                                                 @php $i++; @endphp
                                                 @endforeach
@@ -101,7 +101,7 @@
                                              </div>
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Date</h6>
-                                                 <h3>{{Carbon::parse($event->start_date)->format('F j, Y')}}</h3>
+                                                 <h3>{{Carbon::parse($eventInfo['guest_view']['event_date'])->format('F j, Y')}}</h3>
                                              </div>
                                              </div>
                                              <div class="hosted-by-date-time-left">
@@ -114,7 +114,7 @@
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Time</h6>
                                                  {{-- <h3>8:00 to 10:00PM</h3> --}}
-                                                 <h3>{{ $event->rsvp_start_time }}</h3>
+                                                 <h3>{{ $eventInfo['guest_view']['event_time'] }}</h3>
                                              </div>
                                              </div>
                                          </div>
@@ -131,24 +131,24 @@
                                          <div class="host-user-con-box">
                                             <div class="host-user-con">
                                                 <div class="img-wrp">
-                                                    @if ($event->profile != '')
+                                                    @if ($eventInfo['guest_view']['user_profile'] != '')
                                                         {{-- <img src="./assets/img/host-img.png" alt="host-img">                                  --}}
-                                                        <img src="{{ $event->profile}}" alt="">
+                                                        <img src="{{ $eventInfo['guest_view']['user_profile']}}" alt="">
                                                     @else
                                                     @php
-                                                        $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';
-                                                        $lastInitial = !empty($event->user->lastname) ? strtoupper($event->user->lastname[0]) : '';
+                                                        $firstInitial = !empty($eventInfo['guest_view']['host_first_name']) ? strtoupper($eventInfo['guest_view']['host_first_name'][0]) : '';
+                                                        $lastInitial = !empty($eventInfo['guest_view']['host_last_name']) ? strtoupper($eventInfo['guest_view']['host_last_name'][0]) : '';
                                                         $initials = $firstInitial . $lastInitial;
                                                         $fontColor = 'fontcolor' . $firstInitial;
                                                     @endphp
                                                     <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
                                                 </div>
-                                                <h5>{{ $event->hosted_by}}</h5>
+                                                <h5>{{ $eventInfo['guest_view']['hosted_by']}}</h5>
                                                 <span>Host</span>
                                                 {{-- <a href="#" class="msg-btn">Message</a> --}}
                                             </div>
-                                            @if($co_hosts)
+                                            @if(!empty($eventInfo['guest_view']['co_hosts']))
                                             <div class="host-user-con">
                                                 <div class="img-wrp">
                                                     <img src="./assets/img/host-img2.png" alt="host-img">                                 
