@@ -3498,7 +3498,7 @@ $(document).on("click", ".li_event_details", function () {
     canvas.renderAll();
     setTimeout(() => {
         var downloadImage = document.getElementById("imageEditor1");
-        console.log(domtoimage.toBlob());
+        console.log(domtoimage.toBlob(downloadImage));
         // $("#loader").show();
         eventData.desgin_selected = 'dom_to_image_not_working_in_server';
         $(this).prop("disabled", true);
