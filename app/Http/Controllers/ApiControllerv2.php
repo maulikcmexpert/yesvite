@@ -4472,7 +4472,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['guest_co_host_list'] = [];
 
                 $invitedUser = EventInvitedUser::with(['user','contact_sync'])->where( ['event_id' => $getEventData->id])->distinct('sync_id')->get();
-                dd($invitedUser);
+                // dd($invitedUser);
                 if (!empty($invitedUser)) {
                     foreach ($invitedUser as $guestVal) {
                         if ($guestVal->is_co_host == '0') {
@@ -4682,7 +4682,6 @@ class ApiControllerv2 extends Controller
                 return response()->json(['status' => 0, 'message' => "data not found"]);
             }
         } catch (QueryException $e) {
-            dd($e);
             return response()->json(['status' => 0, 'message' => 'Db error']);
         } catch (Exception $e) {
 
