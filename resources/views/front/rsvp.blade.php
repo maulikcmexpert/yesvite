@@ -1,4 +1,4 @@
-{{                dd($eventInfo);}}
+{{                dd($$eventInfo->guest_view['host_first_name']);}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -44,8 +44,8 @@
                                                 <img src="{{ $eventInfo->guest_view['user_profile']}}" alt="">
                                             @else
                                             @php
-                                                $firstInitial = !empty($event->user->firstname) ? strtoupper($event->user->firstname[0]) : '';
-                                                $lastInitial = !empty($event->user->lastname) ? strtoupper($event->user->lastname[0]) : '';
+                                                $firstInitial = !empty($eventInfo->guest_view['host_first_name']) ? strtoupper($eventInfo->guest_view['host_first_name'][0]) : '';
+                                                $lastInitial = !empty($eventInfo->guest_view['host_first_name']) ? strtoupper($eventInfo->guest_view['host_first_name'][0]) : '';
                                                 $initials = $firstInitial . $lastInitial;
                                                 $fontColor = 'fontcolor' . $firstInitial;
                                             @endphp
