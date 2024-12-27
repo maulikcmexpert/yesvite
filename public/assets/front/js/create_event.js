@@ -3567,13 +3567,13 @@ $(document).on("click", ".li_event_detail", function () {
     $(".main-content-wrp").removeClass("blurred");
     $(".step_2").hide();
     $('#edit-design-temp').hide();
-    handleActiveClass('.li_guest');
+    // handleActiveClass('.li_guest');
     $('.pick-card').addClass('menu-success');
     $('.edit-design').addClass('menu-success');
     $('.edit-design').removeClass('active');
     $('.li_design').find(".side-bar-list").addClass("menu-success");
 
-    active_responsive_dropdown('drop-down-event-guest');
+    // active_responsive_dropdown('drop-down-event-guest');
 
     $('.event_create_percent').text('50%');
     $('.current_step').text('2 of 4');
@@ -3589,7 +3589,7 @@ $(document).on("click", ".li_event_detail", function () {
     // $(".step_3").css("display", "none");
     // $(".step_4").css("display", "none");
     // $(".step_final_checkout").css("display", "none");
-    // active_responsive_dropdown('drop-down-event-detail');
+    active_responsive_dropdown('drop-down-event-detail');
     
     // $('.event_create_percent').text('50%');
     // $('.current_step').text('2 of 4');
