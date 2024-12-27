@@ -59,8 +59,8 @@
                                 @php 
                                     $name = $upcomingEvent['host_name'];
                                     $parts = explode(" ", $name); 
-                                    $firstInitial = isset($parts[0]) ? strtoupper($parts[0][0]) : '';
-                                    $secondInitial = isset($parts[1]) ? strtoupper($parts[1][0]) : '';
+                                    $firstInitial = isset($$upcomingEvent['host_firstname'][0]) ? strtoupper($$upcomingEvent['host_firstname'][0][0]) : '';
+                                    $secondInitial = isset($$upcomingEvent['host_lastname'][1]) ? strtoupper($$upcomingEvent['host_lastname'][1][0]) : '';
                                     $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                     $fontColor = "fontcolor" . strtoupper($firstInitial);
                                 @endphp
