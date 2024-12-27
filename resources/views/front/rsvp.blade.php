@@ -23,8 +23,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
-                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo['guest_view']['event_images']->isNotEmpty() && count($eventInfo['guest_view']['event_images']) > 1 )?'rsvp-slide':''}} " >    
-                                    @if ($eventInfo['guest_view']['event_images']->isNotEmpty())
+                                <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo['guest_view']['event_images']!="" && count($eventInfo['guest_view']['event_images']) > 1 )?'rsvp-slide':''}} " >    
+                                    @if ($eventInfo['guest_view']['event_images']!="")
                                         @foreach($eventInfo['guest_view']['event_images'] as $value)
                                         <div class="item">
                                             <div class="rsvp-img">
