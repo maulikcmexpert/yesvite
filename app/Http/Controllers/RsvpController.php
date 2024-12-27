@@ -133,6 +133,7 @@ class RsvpController extends Controller
         $event_id =  $eventId;
         $user_id = $userId;
       
+        dd($event_id,$user_id);
                 // return redirect('home');
 
                 try {
