@@ -10627,7 +10627,7 @@ class ApiControllerv2 extends Controller
                 // ->whereHas('contact_sync', function ($query) {
                 // $query->where('app_user', '1');
                 // })
-            ->where('is_co_host','0')
+            ->where('is_co_host','1')
             ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
 
             $selectedFilters = $request->input('filters');
