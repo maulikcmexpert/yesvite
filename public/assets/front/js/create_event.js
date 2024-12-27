@@ -624,9 +624,7 @@ $(function () {
 });
 // $(document).on('click',,function(){
 
-$(document).on("click change", "#schedule", function () {
-// $("#schedule").on("click change", function () {
-    alert();
+$(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
     var activities = {};
     eventData.activity = {};
