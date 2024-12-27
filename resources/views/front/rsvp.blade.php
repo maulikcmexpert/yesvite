@@ -485,7 +485,7 @@
                                             <h6>Adults</h6>
                                             <div class="qty-container ms-auto">
                                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                            <input type="number" name="adult_count" id="adult_count" value="0" class="input-qty">
+                                            <input type="number" name="adults" id="adults" value="0" class="input-qty">
                                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
@@ -493,7 +493,7 @@
                                             <h6>Kids</h6>
                                             <div class="qty-container ms-auto">
                                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                            <input type="number" name="kid_count" id="kid_count" value="0" class="input-qty">
+                                            <input type="number" name="kids" id="kids" value="0" class="input-qty">
                                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
