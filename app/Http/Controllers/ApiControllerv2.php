@@ -4853,13 +4853,13 @@ class ApiControllerv2 extends Controller
                             if (in_array($value['id'], $getalreadyInviteduser)) {
                                 continue;
                             }
-                            if (!in_array($value['id'], $alreadyselectedasCoHost)) {
+                            // if (!in_array($value['id'], $alreadyselectedasCoHost)) {
                                 EventInvitedUser::create([
                                     'event_id' => $eventData['event_id'],
                                     'prefer_by' => $value['prefer_by'],
                                     'user_id' => $value['id']
                                 ]);
-                            }
+                            // }
                         }
                         $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('id')->toArray();
                         $alreadyselectedasCoUser =  collect($eventData['co_host_list'])->pluck('id')->toArray();
@@ -4900,7 +4900,9 @@ class ApiControllerv2 extends Controller
                         $invitedGuestUsers = $eventData['invited_guests'];
 
 
-                        $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])->pluck('sync_id')->toArray();
+                        $alreadyinvitedUser = EventInvitedUser::where('event_id', $eventData['event_id'])
+                            ->where('is_co_host','0')    
+                        ->pluck('sync_id')->toArray();
                         foreach ($invitedGuestUsers as $value) {
                             $checkUserExist = contact_sync::where('id', $value['id'])->first();
                             if ($checkUserExist) {
