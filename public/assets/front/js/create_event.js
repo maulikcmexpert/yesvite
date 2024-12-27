@@ -3496,7 +3496,7 @@ $(document).on("click", ".li_event_details", function () {
         }
     });
     canvas.renderAll();
-
+    console.log({domtoimage});
     setTimeout(() => {
         var downloadImage = document.getElementById("imageEditor1");
         // $("#loader").show();
