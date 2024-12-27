@@ -3486,7 +3486,7 @@ function edit_design_modal() {
 var design_inner_image = '';
 $(document).on("click", ".li_event_detail", function () {
     $('#sidebar_select_design_category').css('display','none');
-    $('.li_event_detail').find(".side-bar-list").addClass("active");
+    
     canvas.discardActiveObject();
     canvas.getObjects().forEach(obj => {
         if (obj.type === 'group') {
@@ -3598,6 +3598,7 @@ $(document).on("click", ".li_event_detail", function () {
     
     handleActiveClass(this);
     var design = eventData.desgin_selected;
+    $('.li_event_detail').find(".side-bar-list").addClass("active");
     if( design == undefined || design == ''){
 
     }else{
