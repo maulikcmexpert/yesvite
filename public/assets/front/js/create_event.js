@@ -3498,8 +3498,8 @@ $(document).on("click", ".li_event_details", function () {
     canvas.renderAll();
     setTimeout(() => {
         var downloadImage = document.getElementById("imageEditor1");
-        // $("#loader").show();
-        eventData.desgin_selected = 'dom_to_image_not_working_in_server';
+        $("#loader").show();
+        // eventData.desgin_selected = 'dom_to_image_not_working_in_server';
         $(this).prop("disabled", true);
         $('.btn-close').prop("disabled", true);
         dbJson = getTextDataFromCanvas();
