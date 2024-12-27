@@ -3584,7 +3584,7 @@ $(document).on("click", ".li_event_detail", function () {
                 console.error("Error capturing image:", error);
             });
         $(".main-content-wrp").addClass("blurred");
-    }, 500);
+    }, 1000);
 
     $('#sidebar_select_design_category').css('display','none');
     $(".step_1").show();
