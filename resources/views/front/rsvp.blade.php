@@ -451,8 +451,9 @@
                         </div>
                         <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpYesForm">
                             @csrf
-                            <input type="text" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
-                            <input type="text" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
+                            <input type="hidden" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
+                            <input type="hidden" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
+                            <input type="hidden" value="1" name="rsvp_yes" id="rsvp_yes"/>
                                     <div class="rsvp-custom-radio guest-rsvp-attend">
                                         <h6>Your Info</h6>
                                         <div class="rsvp-input-form row">
