@@ -10578,7 +10578,7 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
+            where(['rsvp_status' => '1', 'event_id' => $eventDetail->id,'is_co_host'=>'0'])->count();
 
             $eventNotComing = EventInvitedUser::
             // whereHas('user', function ($query) {
@@ -10591,7 +10591,7 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id, 'rsvp_d' => '0'])->count();
+            where(['event_id' => $eventDetail->id, 'rsvp_d' => '0','is_co_host'=>'0'])->count();
 
 
 
@@ -10628,7 +10628,7 @@ class ApiControllerv2 extends Controller
                 // $query->where('app_user', '1');
                 // })
             
-            ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
+            ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1','is_co_host'=>'0'])->get();
 
             $selectedFilters = $request->input('filters');
             if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {

@@ -721,7 +721,7 @@ function getEventInvitedUser($event_id, $rsvp_d = null)
     //             ->where('app_user', '1');
     //     });
     // })->
-    where('event_id', $event_id)->get();
+    where(['event_id'=>$event_id,'is_co_host'=>'0'])->get();
 }
 function checkUserGivePoll($user_id, $post_poll_id, $option_id)
 {
