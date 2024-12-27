@@ -2043,4 +2043,113 @@ class EventController extends Controller
         // dd($data);
         return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data'))->render()]);
     }
+
+    public function CancelEvent(Request $request){
+        $user  = Auth::guard('web')->user();
+        $event_id=$request->input('event_id');
+        $reason=$request->input('reason');
+        // $rawData = $request->getContent();
+
+        // $input = json_decode($rawData, true);
+        // if ($input == null) {
+        //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        // }
+        // $validator = Validator::make($input, [
+
+        //     // 'event_id' => ['required', 'exists:events,id'],
+        //     'reason' => ['required']
+        // ]);
+
+        // if ($validator->fails()) {
+
+        //     return response()->json([
+        //         'status' => 0,
+        //         'message' => $validator->errors()->first(),
+
+        //     ]);
+        // }
+
+        try {
+            DB::beginTransaction();
+            $deleteEvent = Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
+            // dd($event_id,$user->id);
+            if (!empty($deleteEvent)) {
+                Notification::where('event_id', $event_id)->delete();
+                $deleteEvent->reason = $reason;
+                if ($deleteEvent->save()) {  
+                    if(isset($deleteEvent->design_image)&& $deleteEvent->design_image!=""){
+                        if (file_exists(public_path('storage/canvas') . $deleteEvent->design_image)) {
+                            $design_imagedesign_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_image;
+                            unlink($design_imagedesign_image_imagePath);
+                        }
+                    }
+                    // if (file_exists(public_path('storage/canvas') . $deleteEvent->design_inner_image)) {
+                    //     $design_inner_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_inner_image;
+                    //     unlink($design_inner_image_imagePath);
+                    // }
+                    $deleteEvent->delete();
+
+                    UserReportToPost::where('event_id', $event_id)->delete();
+
+                    $event_images=EventImage::where('event_id', $event_id)->get();
+                    if(isset($event_images)&&!empty($event_images)){
+                            foreach($event_images as $eventImage){
+                                if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
+                                    $imagePath = public_path('storage/event_images/') . $eventImage->image;
+                                    unlink($imagePath);
+                                }
+                            }
+                            EventImage::where('event_id', $event_id)->delete();
+                    }
+                    $event_post_image=EventPostImage::where('event_id', $event_id)->get();
+                    if(isset($event_post_image)&&!empty($event_post_image)){
+                            foreach($event_post_image as $postImage){
+                                    if($postImage->type=="video")
+                                    {
+                                        if (file_exists(public_path('storage/post_image/') . $postImage->post_image)) {
+                                            $videoPath = public_path('storage/post_image/') . $postImage->post_image;
+                                            unlink($videoPath);
+                                        }
+                                        if (file_exists(public_path('storage/thumbnails/') . $postImage->thumbnail)) {
+                                            $thumbnailPath = public_path('storage/thumbnails/') . $postImage->thumbnail;
+                                            unlink($thumbnailPath);
+                                        }
+                                    }elseif($postImage->type=="audio"){
+                                        if (file_exists(public_path('storage/event_post_recording') . $postImage->post_image)) {
+                                            $audioPath = public_path('storage/event_post_recording/') . $postImage->post_image;
+                                            unlink($audioPath);
+                                        }
+                                    }else{
+                                        if (file_exists(public_path('storage/post_image') . $postImage->post_image)) {
+                                            $postImagePath = public_path('storage/post_image/') . $postImage->post_image;
+                                            unlink($postImagePath);
+                                        } 
+                                    }
+                            }
+                            EventPostImage::where('event_id', $event_id)->delete();
+                        }
+                        EventPost::where('event_id', $event_id)->delete();
+                        EventInvitedUser::where('event_id', $event_id)->delete();
+                        EventSchedule::where('event_id', $event_id)->delete();
+                        EventSetting::where('event_id', $event_id)->delete();
+                        EventPotluckCategoryItem::where('event_id', $event_id)->delete();
+                        EventPotluckCategory::where('event_id', $event_id)->delete();
+                        EventPostComment::where('event_id', $event_id)->delete();
+                        EventPostPoll::where('event_id', $event_id)->delete();
+                        EventUserStory::where('event_id', $event_id)->delete();
+                }
+                DB::commit();
+                return response()->json(['status' => 1,'event_id'=>$event_id, 'message' => "Event deleted successfully"]);
+            } else {
+                return response()->json(['status' => 0, 'message' => "data is incorrect"]);
+            }
+        } catch (QueryException $e) {
+            DB::rollBack();
+            // dd($e);
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+            // dd($e);
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
+    }
 }
