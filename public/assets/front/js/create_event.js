@@ -3626,6 +3626,7 @@ $(document).on("click", ".li_event_detail", function () {
         $(".step_2").hide();
         $(".step_4").hide();
         $(".step_3").hide();
+        $(".step_final_checkout").hide();
         $('#edit-design-temp').hide();
         $('.pick-card').addClass('menu-success');
         $('.edit-design').addClass('menu-success');
