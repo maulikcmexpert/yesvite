@@ -904,7 +904,7 @@ function getInvitedUsers($eventId)
                 $invitedUserIdDetail['visible'] = (!empty($guestVal->user->visible) && $guestVal->user->visible != NULL) ? (int)$guestVal->user->visible : 0;
                 // $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/').$guestVal->user->profile : "";
                 $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/' . $guestVal->user->profile) : "";
-            
+                
                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
             }
         }
