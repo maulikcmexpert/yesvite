@@ -3486,7 +3486,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = '';
-$(document).on("click", ".li_event_detail", function () {
+$(document).on("click", ".li_event_details", function () {
     $('#sidebar_select_design_category').css('display','none');
     
     canvas.discardActiveObject();
@@ -3541,8 +3541,8 @@ $(document).on("click", ".li_event_detail", function () {
                         //     eventData.step = '2';
                         // }
                         console.log(final_step);
-                        if(final_step == 2){
-                            final_step = 3;
+                        if(final_step == 1){
+                            final_step = 2;
                         }
                         console.log(eventData);
                         eventData.step = final_step;
