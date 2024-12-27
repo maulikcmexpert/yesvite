@@ -38,3 +38,9 @@ $(document).ready(function() {
 
     toggleGuestCount();
 });
+
+$(document).on('click','.yes_rsvp_btn',function () {
+
+    alert();
+
+  })

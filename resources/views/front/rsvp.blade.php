@@ -527,7 +527,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">RSVP</button>
+                        <button type="button" class="btn btn-secondary yes_rsvp_btn" data-bs-dismiss="modal">RSVP</button>
                     </div>
                 </div>
         </form>
@@ -596,7 +596,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">RSVP</button>
+                    <button type="button" class="btn btn-secondary no_rsvp_btn" data-bs-dismiss="modal">RSVP</button>
                 </div>
             </div>
         </form>
