@@ -130,8 +130,8 @@ class RsvpController extends Controller
 
 
 
-        $event_id =  $eventId;
-        $user_id = $userId;
+        $event_id =  decrypt($eventId);
+        $user_id = decrypt($userId);
       
         dd($event_id,$user_id);
                 // return redirect('home');
