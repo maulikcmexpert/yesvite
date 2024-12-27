@@ -176,7 +176,7 @@
                                      </div>
                                      <div class="guest-user-list rsvp-guest-user-list-wrp cmn-card">
                                          <div class="rsvp-guest-user-list-title">
-                                           <h5 class="heading">Guest List (45 Guests)</h5>
+                                           <h5 class="heading">Guest List ({{count($getInvitedusers['invited_user_id'])}} Guests)</h5>
                                            <a href="#" data-bs-toggle="modal" data-bs-target="#rsvp-guest-list-modal">See All</a>
                                          </div>
                                          <div>
