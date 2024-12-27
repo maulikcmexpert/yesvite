@@ -328,7 +328,9 @@ class RsvpController extends Controller
                     $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
                     $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
                     $eventInfo['host_view'] = $eventAboutHost;
-        
+
+                    $getInvitedusers = getInvitedUsers($event_id);
+
 
                     
                     return view('layout', compact(
@@ -337,7 +339,8 @@ class RsvpController extends Controller
                         'js',
                         'eventInfo',
                         'event_id',
-                        'user_id'
+                        'user_id',
+                        'getInvitedusers'
                     ));
                     // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
                 } catch (QueryException $e) {
