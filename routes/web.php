@@ -196,6 +196,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
     Route::post('event/shape_image', [ControllersEventController::class, 'shape_image']);
     Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
+    Route::post('event/cancel_event', [ControllersEventController::class, 'CancelEvent']);
 
    
     Route::get('event_drafts',  [EventDraftController::class, 'index'])->name('event.event_drafts');
