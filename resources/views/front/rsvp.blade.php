@@ -431,7 +431,7 @@
 <!-- about yes rsvp Modal -->
 <div class="modal fade cmn-modal about-rsvp rsvp-yes-modal" id="rsvp-yes-modal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form method="POST" action="{{ route('rsvp.store') }}" class="rsvpForm">
+        <form method="POST" action="{{ route('rsvp.store') }}" id="rsvpYesForm">
                 <input type="text" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
                 <input type="text" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
                 <div class="modal-content">
