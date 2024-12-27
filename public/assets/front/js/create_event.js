@@ -626,7 +626,7 @@ $(function () {
    
 });
 
-$("#schedule").on("change", function () {
+$("#schedule").on("click change", function () {
     var eventDate = $("#event-date").val();
     var activities = {};
     eventData.activity = {};
