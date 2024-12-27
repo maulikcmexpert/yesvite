@@ -3,7 +3,9 @@
     @php
         $getSocialLink = getSocialLink();
     @endphp
-    <p>Full web functionality will be available in Late Q1 {{date('Y')}} - for full functionality use our apps</p>
+    {{-- <p>Full web functionality will be available in Late Q1 {{date('Y')}} - for full functionality use our apps</p> --}}
+    <p>Full web functionality will be available in Late Q1 2025 - for full functionality use our apps</p>
+
     <div class="app-store ms-auto d-flex gap-2">
         <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
             <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
