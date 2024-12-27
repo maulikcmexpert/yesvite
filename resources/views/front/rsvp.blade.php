@@ -159,7 +159,8 @@
                                             </div>
                                             @endif
                                          </div>
-                                         <p>“Thanks everyone for RSVP'ing on time.<br> I hope everyone can make it to this special day of ours!”</p>
+                                         {{-- <p>“Thanks everyone for RSVP'ing on time.<br> I hope everyone can make it to this special day of ours!”</p> --}}
+                                         <p>“{{$eventInfo['guest_view']['message_to_guests']}}”</p>
                                      </div>
                                      <div class="location-wrp cmn-card rsvp-location-wrp">
                                          <h4 class="title">Event Location</h4>
