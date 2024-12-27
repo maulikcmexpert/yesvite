@@ -28,7 +28,7 @@
                                         @foreach($eventInfo['guest_view']['event_images'] as $value)
                                         <div class="item">
                                             <div class="rsvp-img">
-                                                <img src="{{ asset('storage/event_images/'.$value->image)}}" alt="birth-card">
+                                                <img src="{{ asset('storage/event_images/'.$value)}}" alt="birth-card">
                                             </div>
                                         </div>
                                         @endforeach
