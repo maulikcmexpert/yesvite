@@ -329,7 +329,7 @@ class RsvpController extends Controller
                     $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
                     $eventInfo['host_view'] = $eventAboutHost;
 
-                    $getInvitedusers = getInvitedUsers($event_id);
+                    $getInvitedusers = getInvitedUsersList($event_id);
 
 
                     
