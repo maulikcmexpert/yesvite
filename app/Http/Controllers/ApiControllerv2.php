@@ -10628,7 +10628,7 @@ class ApiControllerv2 extends Controller
                 // $query->where('app_user', '1');
                 // })
             ->where('is_co_host','1')
-            ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
+            ->where(['event_id' => $eventDetail->id, 'invitation_sent' => '0'])->get();
 
             $selectedFilters = $request->input('filters');
             if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
