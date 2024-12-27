@@ -432,8 +432,8 @@
 <div class="modal fade cmn-modal about-rsvp rsvp-yes-modal" id="rsvp-yes-modal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <form method="POST" action="{{ route('rsvp.store') }}" class="rsvpForm">
-                <input type="text" value="{{$user_id}}" name="user_id" id="user_id"/>
-                <input type="text" value="{{$event_id}}" name="event_id" id="event_id"/>
+                <input type="text" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
+                <input type="text" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="d-flex align-items-center">
@@ -538,8 +538,8 @@
 <div class="modal fade cmn-modal about-rsvp rsvp-yes-modal rsvp-no-modal" id="rsvp-no-modal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <form method="POST" action="{{ route('rsvp.store') }}" class="rsvpForm">
-            <input type="text" value="{{$user_id}}" name="user_id" id="user_id"/>
-            <input type="text" value="{{$event_id}}" name="event_id" id="event_id"/>
+            <input type="text" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
+            <input type="text" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex align-items-center">
