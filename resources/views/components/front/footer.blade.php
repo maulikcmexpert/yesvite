@@ -103,4 +103,23 @@ defer
 @endif
 
 @stack('scripts')
+<script>
+    $(document).on('click','.create_event_with_plan',function(){
+    // toggleSidebar('sidebar_change_plan_create');
+    // $('input[name="plan_check"]:checked').each(function () {
+    //     var plan = $(this).data('plan');
+    //     eventData.plan_selected=plan;
+    //     alert(plan);
+    //     window.location.href="event";
+    // });
+
+    var checkedPlan = $('input[name="plan_check"]:checked'); // Select the checked one
+    if (checkedPlan.length) { // Ensure there is a checked checkbox
+        var plan = checkedPlan.data('plan');
+        // alert(plan);
+    }
+    eventData.plan_selected = 'Fre';
+    window.location.href = "event";
+});
+</script>
 
