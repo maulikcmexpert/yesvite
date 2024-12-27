@@ -167,6 +167,7 @@ function sendNotification($notificationType, $postData)
                 // })
                 ->whereIn('user_id', $postData['newUser'])->where('event_id', $postData['event_id'])
                 ->where('user_id','!=','')
+                ->orderBy('id','DESC')
                 ->get();
             }
            
