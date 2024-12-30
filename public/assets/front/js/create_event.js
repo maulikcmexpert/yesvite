@@ -5761,7 +5761,8 @@ $(document).on('click','#phone-tab',function () {
 
 $(document).on('click','#search_contacts',function () { 
     $('#loader').show();
-    displayPhoneContacts();     
+    var search_name = '';
+    displayPhoneContacts('all',10000,'0',search_name);     
 });
 
 var search_contacts = 0;
@@ -5775,7 +5776,7 @@ $(document).on('keyup','#search_contacts',function(){
     }, 750);
 })
 
-function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name = '') {
+function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
     console.log(search_name);
     
     // $.ajax({
