@@ -5768,6 +5768,8 @@ $(document).on('click','#search_contacts',function () {
 var search_contacts = 0;
 $(document).on('keyup','#search_contacts',function(){
     var search_name = $(this).val();
+    console.log(search_name);
+    
     offset = 0;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
