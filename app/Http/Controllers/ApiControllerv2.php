@@ -448,6 +448,9 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
+
+
+
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
@@ -7360,6 +7363,12 @@ class ApiControllerv2 extends Controller
             $eventDetails['subscription_plan_name'] = $eventDetail->subscription_plan_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+
+
+            $isCoHost =     EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id])->first();
+            $eventDetails['is_co_host'] = $isCoHost->is_co_host;
+
+
             $eventDetails['event_timezone'] = (isset($eventDetail->rsvp_start_timezone) && $eventDetail->rsvp_start_timezone != '')?$eventDetail->rsvp_start_timezone:'';
 
             $event_date = $eventDetail->start_date;
