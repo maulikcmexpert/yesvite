@@ -1,4 +1,4 @@
-{{                dd($eventInfo['guest_view']['co_hosts']->profile);}}
+{{                dd($eventInfo['guest_view']['co_hosts']['profile']);}}
 @php
     use Carbon\Carbon;
 @endphp
