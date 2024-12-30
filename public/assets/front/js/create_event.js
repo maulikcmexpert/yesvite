@@ -5767,7 +5767,7 @@ function displayPhoneContacts(type ='all',lim = 10000,off = '0') {
     $.ajax({
         type: "GET",
         async: false,
-        url: base_url+'event/get_user_ajax',
+        url: base_url+'event/get_contacts',
         data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
         cache: false,
         beforeSend: function () {

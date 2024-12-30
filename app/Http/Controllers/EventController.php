@@ -1537,6 +1537,65 @@ class EventController extends Controller
         // dd(count($selected_user));
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
+    
+    public function getContacts(Request $request)
+    {
+        dd($request);
+        $search_user = $request->search_user;
+        $id = Auth::guard('web')->user()->id;
+        $type = $request->type;
+        $emails = [];
+        $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')->get();
+        if($getAllContacts->isNotEmpty()){
+            $emails = $getAllContacts->pluck('email')->toArray();
+        }
+        
+
+        $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+            ->where('id', '!=', $id)
+            ->where(['app_user' => '1'])
+            ->whereIn('email',$emails)
+            ->orderBy('firstname')
+            ->when($type != 'group', function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->limit($request->limit)
+                        ->skip($request->offset);
+                });
+            })
+            ->when($request->search_user != '', function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+            ->get();
+
+        // dd($yesvite_users);
+        $yesvite_user = [];
+        foreach ($yesvite_users as $user) {
+            if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                continue;
+            }
+            $yesviteUserDetail = [
+                'id' => $user->id,
+                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
+                'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
+                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+                'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
+                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
+                'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
+            ];
+            // $yesviteUserDetail['app_user']  = $user->app_user;
+            // $yesviteUserDetail['visible'] =  $user->visible;
+            // $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
+            // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
+            $yesvite_user[] = (object)$yesviteUserDetail;
+        }
+        $selected_user = Session::get('user_ids');
+        // dd(count($selected_user));
+        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
+    }
 
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
