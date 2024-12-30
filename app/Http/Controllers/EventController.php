@@ -1018,11 +1018,11 @@ class EventController extends Controller
     
             if ($isChecked == true || $isChecked == "true") {
                 $userExists = array_filter($userIds, function ($entry) use ($userId) {
-                    return $entry['id'] === $userId;
+                    return $entry['sync_id'] === $userId;
                 });
     
                 $userIds = array_filter($userIds, function ($entry) use ($userId) {
-                    return $entry['id'] !== $userId;
+                    return $entry['sync_id'] !== $userId;
                 });
                 $userIds[] = $userEntry;
                 session()->put('user_ids', $userIds);
@@ -1030,10 +1030,10 @@ class EventController extends Controller
                 $user_list = Session::get('user_ids');
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                    return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
+                    return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
                 }
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
+                return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
             }
         }
     }
