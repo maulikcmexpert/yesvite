@@ -75,7 +75,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     var current_status="";
 
 
-    checkRsvpStatus(event_id, user_id, function(status) {
+    checkRsvpStaus(event_id, user_id, function(status) {
         current_status=status;
     });
     
