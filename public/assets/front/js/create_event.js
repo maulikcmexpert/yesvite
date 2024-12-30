@@ -5768,7 +5768,7 @@ $(document).on('keyup','#search_contacts',function(){
     offset = 0;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
-        // $('#loader').css('display','block');
+        $('#loader').css('display','block');
         displayPhoneContacts('all',10000,'0',search_name);
     }, 750);
 })
