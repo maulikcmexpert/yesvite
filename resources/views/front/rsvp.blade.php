@@ -240,7 +240,9 @@
                                                   </div>
                                                   </div>
                                                   <div class="rsvp-guest-user-replay">
-                                                      <h6>{{“ $guest_data['message_to_host'] “}} </h6>
+                                                        @if($guest_data['message_to_host']!="")
+                                                            <h6>“ {{$guest_data['message_to_host']}} “</h6>
+                                                        @endif
                                                   </div>
                                                 </div>
                                               </div>
