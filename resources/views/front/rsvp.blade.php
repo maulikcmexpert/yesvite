@@ -406,7 +406,7 @@
                                              </div>
                                          </div>
                                      </div>
-                                     @endphp
+                                     @endif
                                      
                                      @if(!empty($eventInfo['guest_view']['gift_registry']))
                                      <div class="rsvp-app new-rsvp-app">
