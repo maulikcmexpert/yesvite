@@ -72,6 +72,9 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
 
+    $(modal).on('show.bs.modal', function (e) {
+        e.preventDefault();  
+    });
 
     $.ajax({
         url: `${base_url}check_rsvp_status`,
@@ -83,8 +86,11 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             if(status=="1"){
                 toastr.success('You have already done RSVP YES');
                 $(modal).on('show.bs.modal', function (e) {
-                    e.preventDefault();  // Prevent modal from opening
+                    e.preventDefault();  
                 });
+                      }else{
+                        $(modal).off('show.bs.modal');  
+                        $(modal).modal('show');  
                       }
         },
         error: function (xhr, status, error) {
