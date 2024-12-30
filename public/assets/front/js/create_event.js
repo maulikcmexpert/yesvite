@@ -1265,6 +1265,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
+    var is_contact = $(this).data("contact");
 
     if (isChecked == true || isChecked == "true") {
         $.ajax({
@@ -1274,6 +1275,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 user_id: userId,
                 is_checked: isChecked,
                 mobile: mobile,
+                is_contact:is_contact,
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
