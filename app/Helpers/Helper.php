@@ -358,7 +358,7 @@ function sendNotification($notificationType, $postData)
                             }
                             $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
                             
-                            $isCoHost =  EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
+                            $isCoHost =  EventInvitedUser::where(column: ['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
                             $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
 
                             $notificationData = [
@@ -1156,10 +1156,6 @@ function sendNotification($notificationType, $postData)
                         $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                     }
 
-                    $isCoHost =  EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
-                    $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
-
-
                     $notificationData = [
                         'message' => $notification_message,
                         'type' => (string)$notificationType,
@@ -1171,7 +1167,6 @@ function sendNotification($notificationType, $postData)
                         'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
                         'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
                         'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
-                        'is_co_host'=>$is_co_host
                     ];
 
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
