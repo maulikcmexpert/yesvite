@@ -55,7 +55,8 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
 
-    checkRsvpStaus(event_id,user_id, modal, e);
+    var status=checkRsvpStaus(event_id,user_id);
+    console.log(status);
   })
 
   
@@ -66,25 +67,14 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
 
   })
 
-  function checkRsvpStaus(event_id,user_id, modal, event){
+  function checkRsvpStaus(event_id,user_id){
         $.ajax({
             url: `${base_url}check_rsvp_status`,
             type: 'GET',
             data: {event_id:event_id,user_id:user_id},
             success: function (response) {
-            if(response.rsvp_status=="1"){
-                event.preventDefault(); // Prevent modal opening
-                console.log(modal);
-                $(modal).modal('hide'); 
-              toastr.success('You have already done rsvp YES');  
-            }
-            else if(response.rsvp_status=="0"){
-                toastr.success('You have already done rsvp NO');  
-            }
-            else{
-            
-
-            }
+          
+                return $response.rsvp_status;
 
             },
             error: function (xhr, status, error) {
