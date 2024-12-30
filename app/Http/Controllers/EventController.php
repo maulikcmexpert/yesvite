@@ -1019,7 +1019,7 @@ class EventController extends Controller
                 'lastname' => $user->lastName,
                 'invited_by' => $user_invited_by,
                 'prefer_by' => $prefer_by,
-                'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+                'profile' => ''
             ];
     
             if ($isChecked == true || $isChecked == "true") {
