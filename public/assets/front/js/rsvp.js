@@ -70,15 +70,10 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     type: 'GET',
     data: {event_id:event_id,user_id:user_id},
     success: function (response) {
-       if(response.view!=""){
-        $(".notification_div").html('');
-        $(".notification_div").append(response.view);
-        $("#all-notification-filter-modal").modal('hide');
-        $('#home_loader').css('display','none');
+       if(response){
+        console.log(response);
        }else{
-        $(".notification_div").html('');
-        $("#all-notification-filter-modal").modal('hide');
-        $('#home_loader').css('display','none');
+      
 
        }
 

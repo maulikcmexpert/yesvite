@@ -507,6 +507,16 @@ class RsvpController extends Controller
 
     public function CheckRsvpStatus(Request $request)
     {
-        dd($request);
+       $user_id=decrypt($request->input('user_id'));
+       $event_id=decrypt($request->input('event_id'));
+       
+    $rsvp = EventInvitedUser::whereHas('user', function ($query) {
+        $query->where('app_user', '1');
+    })->where(['user_id' => $user_id, 'event_id' => $event_id])->first();
+
+    $rsvpStatus=$rsvp->rsvp_status;
+
+    return response()->json(['status' => 1, 'rsvp_status' => $rsvpStatus]);
+
     }
 }
