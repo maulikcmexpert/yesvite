@@ -990,6 +990,51 @@ class EventController extends Controller
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
                 return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
             }
+        }else{
+            $user = contact_sync::where('id', $userId)->first();
+            $userimage = $user->photo;
+            $useremail = $request->input('email');
+            $phone = $request->input('mobile');
+            $isChecked = $request->input('is_checked');
+            $userIds = session()->get('user_ids', []);
+    
+            if (isset($useremail) && $useremail != "") {
+                $user_invited_by = $useremail;
+                $prefer_by = "email";
+            }
+            if (isset($phone) && $phone != "") {
+                $user_invited_by = $user->phone_number;
+                $prefer_by = "phone";
+            }
+    
+            $userEntry = [
+                'sync_id' => $userId,
+                'firstname' => $user->firstName,
+                'lastname' => $user->lastName,
+                'invited_by' => $user_invited_by,
+                'prefer_by' => $prefer_by,
+                'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+            ];
+    
+            if ($isChecked == true || $isChecked == "true") {
+                $userExists = array_filter($userIds, function ($entry) use ($userId) {
+                    return $entry['id'] === $userId;
+                });
+    
+                $userIds = array_filter($userIds, function ($entry) use ($userId) {
+                    return $entry['id'] !== $userId;
+                });
+                $userIds[] = $userEntry;
+                session()->put('user_ids', $userIds);
+                Session::save();
+                $user_list = Session::get('user_ids');
+                if (!empty($userExists)) {
+                    $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
+                    return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
+                }
+                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
+                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
+            }
         }
     }
 
