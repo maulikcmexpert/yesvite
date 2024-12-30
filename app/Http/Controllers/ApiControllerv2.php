@@ -7366,6 +7366,7 @@ class ApiControllerv2 extends Controller
 
 
             $isCoHost =     EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+            dd($isCoHost);
             $eventDetails['is_co_host'] = $isCoHost->is_co_host;
             $eventDetails['event_timezone'] = (isset($eventDetail->rsvp_start_timezone) && $eventDetail->rsvp_start_timezone != '')?$eventDetail->rsvp_start_timezone:'';
 
