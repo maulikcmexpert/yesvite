@@ -1,4 +1,4 @@
-{{-- {{                dd($eventInfo['guest_view']);}} --}}
+{{                dd($eventInfo);}}
 @php
     use Carbon\Carbon;
 @endphp
