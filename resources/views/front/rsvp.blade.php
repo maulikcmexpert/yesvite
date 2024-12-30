@@ -243,9 +243,15 @@
                                                   @elseif ($guest_data['rsvp_status']=="0")
                                                   <div class="sucess-yes">
                                                     <h5 class="green">RSVP'D NO</h5>
+                                                    <div class="sucesss-cat ms-auto">
+                                              
+                                                    </div>
                                                   @else
                                                   </div><div class="sucess-yes">
                                                     <h5 class="green">NO REPLY</h5>
+                                                    <div class="sucesss-cat ms-auto">
+                                              
+                                                    </div>
                                                   </div>
                                                   @endif
                                                   <div class="rsvp-guest-user-replay">
