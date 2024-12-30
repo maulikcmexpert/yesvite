@@ -8685,6 +8685,9 @@ class ApiControllerv2 extends Controller
             $postsDetail['user_id'] =  $eventDetails->user->id;
             $postsDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
 
+            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $user->id])->first();
+            $postsDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+
             $postsDetail['username'] =  $eventDetails->user->firstname . ' ' . $eventDetails->user->lastname;
 
             $postsDetail['profile'] =  empty($eventDetails->user->profile) ? "" : asset('storage/profile/' . $eventDetails->user->profile);
