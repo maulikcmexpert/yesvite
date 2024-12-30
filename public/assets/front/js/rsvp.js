@@ -69,6 +69,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             data: {event_id:event_id,user_id:user_id},
             success: function (response) {
             if(response.rsvp_status=="1"){
+                alert();
               toastr.success('You have already done rsvp yes');  
             }else{
             
