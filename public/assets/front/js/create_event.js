@@ -5776,10 +5776,6 @@ $(document).on('keyup','#search_contacts',function(){
 })
 
 function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name = '') {
-    
-    var search_name = '';
-    var search = '';
-
     $.ajax({
         type: "GET",
         async: false,
