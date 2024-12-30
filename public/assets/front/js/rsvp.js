@@ -53,7 +53,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
-    var modal = $(this).data('target');
+    var modal = $(this).data('bs-target');
 
     checkRsvpStaus(event_id,user_id, modal, e);
   })
