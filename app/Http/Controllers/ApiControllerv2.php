@@ -11412,6 +11412,8 @@ class ApiControllerv2 extends Controller
 
                 $postPhotoDetail['user_id'] = $value->user->id;
                 $postPhotoDetail['is_own_post'] = ($value->user->id == $user->id) ? "1" : "0";
+                $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+                $postPhotoDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
                 $postPhotoDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                 $postPhotoDetail['firstname'] = $value->user->firstname;
 
