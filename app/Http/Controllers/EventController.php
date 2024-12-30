@@ -1018,11 +1018,11 @@ class EventController extends Controller
     
             if ($isChecked == true || $isChecked == "true") {
                 $userExists = array_filter($userIds, function ($entry) use ($userId) {
-                    return $entry['id'] === $userId;
+                    return $entry['sync_id'] === $userId;
                 });
     
                 $userIds = array_filter($userIds, function ($entry) use ($userId) {
-                    return $entry['id'] !== $userId;
+                    return $entry['sync_id'] !== $userId;
                 });
                 $userIds[] = $userEntry;
                 session()->put('user_ids', $userIds);
