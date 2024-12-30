@@ -452,7 +452,16 @@
                                             @foreach ($eventInfo['guest_view']['gift_registry'] as $gift )
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">
                                                 <div class="target d-flex gap-3 align-items-center">
-                                                   <img src="./assets/img/rsvp-target-img.png" alt="">
+
+                                                    @php
+                                                    $logo="";
+                                                    if($gift['registry_recipient_name']=="amazon"){
+                                                        $logo=asset('assets/amazon.jpg');
+                                                    }elseif ($gift['registry_recipient_name']=="target") {
+                                                        $logo=asset('assets/target.jpg');
+                                                    }
+                                                    @endphp
+                                                   <img src="{{$logo}}" alt="">
                                                     <div>
                                                         <h5>{{$gift['registry_recipient_name']}}</h5>
                                                         <p>View their wish list</p>
