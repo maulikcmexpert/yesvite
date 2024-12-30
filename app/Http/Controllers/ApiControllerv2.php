@@ -7819,6 +7819,9 @@ class ApiControllerv2 extends Controller
             $storiesDetaill['user_id'] =  $eventLoginUserStoriesList->user->id;
             $storiesDetaill['username'] =  $eventLoginUserStoriesList->user->firstname . ' ' . $eventLoginUserStoriesList->user->lastname;
             $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('storage/profile/' . $eventLoginUserStoriesList->user->profile);
+            $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+            $storiesDetaill['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+            
             $storiesDetaill['story'] = [];
             foreach ($eventLoginUserStoriesList->user_event_story as $storyVal) {
                 $storiesData['id'] = $storyVal->id;
