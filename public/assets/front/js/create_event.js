@@ -5749,7 +5749,7 @@ $(document).on('click','.brand-progress',function () {
     // window.location.href="event?id="+event_id;       
 });
 
-$(document).on('click','.phone-tab',function () { 
+$(document).on('click','#phone-tab',function () { 
     alert();     
 });
 
