@@ -66,7 +66,9 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
 // }
 
 
-
+$("#rsvp-yes-modal").on('show.bs.modal', function (e) {
+    e.preventDefault();  
+});
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
