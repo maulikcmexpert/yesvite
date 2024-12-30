@@ -5772,15 +5772,17 @@ function displayPhoneContacts(type ='all',lim = 10000,off = '0') {
 
         },
         success: function (html) {
+            console.log(html);
+            
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             if(currentInviteCount >= 15){
                 $('.user_choice').prop('disabled',true);
             }
             if(type=="all"){
                 if(search != null){
-                    $(".user-contacts").html(html);
+                    $("#YesviteContactsAll").html(html);
                 }else{
-                    $(".user-contacts").append(html);
+                    $("#YesviteContactsAll").append(html);
                 }
             }
             busy = false;

@@ -170,7 +170,7 @@
                     </span>
                 </div>
 
-                <div class="user-contacts">
+                <div class="user-contacts" id="YesviteContactsAll">
                    
 
     </div>
