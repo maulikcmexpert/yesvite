@@ -158,7 +158,7 @@
                                                 </div>
                                                 <h5>{{$coHost['name']}}</h5>
                                                 <span>Co-host</span>
-                                                <a href="#" class="msg-btn">Message</a>
+                                                <a href="#" class="msg-btn">{{$coHost['message']}}</a>
                                             </div>
                                             @endif
                                          </div>
