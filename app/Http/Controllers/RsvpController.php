@@ -265,6 +265,9 @@ class RsvpController extends Controller
                             $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                             $eventData[] = "Number of guests : " . $numberOfGuest;
                         }
+                        if($coHosts!=NULL){
+                            $eventData[] = "Co-Host";
+                        }
                         $eventDetails['event_detail'] = $eventData;
                     }
                     $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
