@@ -47,9 +47,6 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     if (adultsCount == 0 && kidsCount == 0) {
         e.preventDefault();
         toastr.error("Please add at least one adult or kid."); 
-        // $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
-        //     e.preventDefault(); // Prevent modal from closing
-        // });
         return;
     }
 
