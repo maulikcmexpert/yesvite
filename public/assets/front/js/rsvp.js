@@ -82,8 +82,9 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             // console.log(status);
             if(status=="1"){
                 toastr.success('You have already done RSVP YES');
-                $('#rsvp-yes-modal').off('show.bs.modal'); 
-            }
+                $('#rsvp-yes-modal').on('show.bs.modal', function (e) {
+                    return e.preventDefault(); 
+                   });            }
         },
         error: function (xhr, status, error) {
         },
