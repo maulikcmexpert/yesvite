@@ -1,4 +1,4 @@
-{{-- {{                dd($getInvitedusers);}} --}}
+{{                dd($email);}}
 @php
     use Carbon\Carbon;
 @endphp
