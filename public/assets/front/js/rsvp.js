@@ -69,15 +69,13 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
 $("#rsvp-yes-modal").on('show.bs.modal', function (e) {
     e.preventDefault();  
 });
+$("#rsvp-no-modal").on('show.bs.modal', function (e) {
+    e.preventDefault();  
+});
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
-
-    $(modal).on('show.bs.modal', function (e) {
-        e.preventDefault();  
-    });
-
     $.ajax({
         url: `${base_url}check_rsvp_status`,
         type: 'GET',
@@ -87,13 +85,10 @@ $("#rsvp-yes-modal").on('show.bs.modal', function (e) {
             // console.log(status);
             if(status=="1"){
                 toastr.success('You have already done RSVP YES');
-                $(modal).on('show.bs.modal', function (e) {
-                    e.preventDefault();  
-                });
-                      }else{
+            }else{
                         $(modal).off('show.bs.modal');  
                         $(modal).modal('show');  
-                      }
+         }
         },
         error: function (xhr, status, error) {
         },
@@ -107,8 +102,26 @@ $("#rsvp-yes-modal").on('show.bs.modal', function (e) {
   $(document).on('click','.check_rsvp_no',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
-    var modal = $(this).data('target');
-
+    var modal = $(this).data('bs-target');
+    $.ajax({
+        url: `${base_url}check_rsvp_status`,
+        type: 'GET',
+        data: {event_id:event_id,user_id:user_id},
+        success: function (response) {
+            var status=response.rsvp_status;
+            // console.log(status);
+            if(status=="0"){
+                toastr.success('You have already done RSVP NO');
+            }else{
+                        $(modal).off('show.bs.modal');  
+                        $(modal).modal('show');  
+         }
+        },
+        error: function (xhr, status, error) {
+        },
+        complete: function () {
+        }
+    });
   })
 
 
