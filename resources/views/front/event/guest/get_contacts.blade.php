@@ -85,13 +85,13 @@ if(isset($selected_user) && !empty($selected_user)){
         @if(isset($user->email)&&$user->email!="")
         <div class="right-note d-flex">
             <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
-                name="email_invite[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}"
+                name="email_invite[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}" data-contact = "1"
                 value="{{ $user->id }}" {{$email_checked}} {{$disabled}}>
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
         <div class="right-note ms-auto">
-            <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
+            <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox" data-contact = "1"
                 name="mobile[]" data-mobile="{{$user->phone_number}}" value="{{ $user->id }}" {{$phone_checked}} {{$disabled}}>
         </div>
         @endif
@@ -102,14 +102,14 @@ if(isset($selected_user) && !empty($selected_user)){
         <div class="right-note d-flex mb-2">
             <input class="form-check-input user_group_member user_choice"
                 type="checkbox" name="add_by_email[]" data-preferby="email"
-                data-id="user-{{ $user->id }}" data-email="{{ $user->email }}"
+                data-id="user-{{ $user->id }}" data-email="{{ $user->email }}" data-contact = "1"
                 value="{{ $user->id }}">
         </div>
         @endif
         @if (isset($user->phone_number) && $user->phone_number != '')
         <div class="right-note ms-auto">
             <input class="form-check-input user_group_member user_choice"
-                type="checkbox" name="add_by_mobile[]"
+                type="checkbox" name="add_by_mobile[]" data-contact = "1"
                 data-preferby="phone" data-mobile="{{ $user->phone_number }}"
                 value="{{ $user->id }}">
         </div>
