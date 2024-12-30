@@ -449,16 +449,19 @@
                                      <div class="rsvp-app new-rsvp-app">
                                         <h4 class="title">Host created registries</h4>
                                          <div class="row">
+                                            @foreach ($eventInfo['guest_view']['gift_registry'] as $gift )
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">
-                                                 <div class="target d-flex gap-3 align-items-center">
-                                                    <img src="./assets/img/rsvp-target-img.png" alt="">
-                                                     <div>
-                                                         <h5>Target</h5>
-                                                         <p>View their wish list</p>
-                                                     </div>
-                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="target d-flex gap-3 align-items-center">
+                                                   <img src="./assets/img/rsvp-target-img.png" alt="">
+                                                    <div>
+                                                        <h5>{{$gift['registry_recipient_name']}}</h5>
+                                                        <p>View their wish list</p>
+                                                    </div>
+                                                </div>
+                                           </div> 
+                                            @endforeach
+                                            
+                                            {{-- <div class="col-lg-6 col-md-6 col-sm-6">
                                              <div class="target d-flex gap-3 align-items-center">
                                                 <img src="./assets/img/rsvp-amazon-img.png" alt="">
                                                 <div>
@@ -466,7 +469,7 @@
                                                      <p>View their wish list</p>
                                                  </div>
                                              </div>
-                                        </div>
+                                        </div> --}}
                                          </div>
                                      </div>
                                      @endif
