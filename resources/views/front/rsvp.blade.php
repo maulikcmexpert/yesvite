@@ -156,7 +156,7 @@
                                                 <div class="img-wrp">
                                                     <img src="{{$coHost['profile']}}" alt="host-img">                                 
                                                 </div>
-                                                <h5>Chris Walton</h5>
+                                                <h5>{{$coHost['name']}}</h5>
                                                 <span>Co-host</span>
                                                 <a href="#" class="msg-btn">Message</a>
                                             </div>
