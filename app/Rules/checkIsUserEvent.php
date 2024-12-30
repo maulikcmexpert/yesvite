@@ -27,7 +27,6 @@ class checkIsUserEvent implements ValidationRule
             ->exists();
 
         $isCoHost =  EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user_id,'is_co_host'=>'1'])->exists();
-            // $eventAboutHost['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
             
             if (!$exists && !$isCoHost) {
                 $fail("The combination of user and event is invalid.");
