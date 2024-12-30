@@ -5776,30 +5776,32 @@ $(document).on('keyup','#search_contacts',function(){
 })
 
 function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name = '') {
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: base_url+'event/get_contacts',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
-        cache: false,
-        beforeSend: function () {
+    console.log(search_name);
+    
+    // $.ajax({
+    //     type: "GET",
+    //     async: false,
+    //     url: base_url+'event/get_contacts',
+    //     data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
+    //     cache: false,
+    //     beforeSend: function () {
 
-        },
-        success: function (html) {
-            console.log(html);
-            var currentInviteCount = parseInt($('#currentInviteCount').val())
-            if(currentInviteCount >= 15){
-                $('.user_choice').prop('disabled',true);
-            }
-            if(type=="all"){
-                $("#YesviteContactsAll").html(html);
-            }
-            busy = false;
-            setTimeout(function () {
-                $('#loader').css('display','none');
-            }, 1000);
-        },
-    });
+    //     },
+    //     success: function (html) {
+    //         console.log(html);
+    //         var currentInviteCount = parseInt($('#currentInviteCount').val())
+    //         if(currentInviteCount >= 15){
+    //             $('.user_choice').prop('disabled',true);
+    //         }
+    //         if(type=="all"){
+    //             $("#YesviteContactsAll").html(html);
+    //         }
+    //         busy = false;
+    //         setTimeout(function () {
+    //             $('#loader').css('display','none');
+    //         }, 1000);
+    //     },
+    // });
 }
 
 
