@@ -5756,6 +5756,8 @@ $(document).on('click','#phone-tab',function () {
 function displayPhoneContacts(type ='all',lim = 10000,off = '0') {
     
     var search_name = '';
+    var search = '';
+
     if(type!='group'){
         search_name = $('.search_user').val();
         if(search_name !=''){
