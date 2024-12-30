@@ -227,7 +227,7 @@
                                                       </div>
                                                   </div>
                                                   <div class="sucess-yes">
-                                                  <h5 class="green">YES</h5>
+                                                  <h5 class="green">RSVP'D YES</h5>
                                                   <div class="sucesss-cat ms-auto">
                                                       <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                       <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
@@ -678,7 +678,7 @@
                                 <span class="guest-email">{{$guest_data['email']}}</span>
                             </div>
                             <div class="sucess-yes">
-                            <h5 class="green">YES</h5>
+                            <h5 class="green">RSVP'D YES</h5>
                             <div class="sucesss-cat ms-auto">
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
