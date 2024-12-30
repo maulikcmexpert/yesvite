@@ -53,6 +53,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
+    checkRsvpStaus(event_id,user_id);
   })
 
   
