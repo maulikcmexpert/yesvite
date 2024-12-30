@@ -1,4 +1,4 @@
-{{-- {{                dd($email);}} --}}
+{{                dd($eventInfo);}}
 @php
     use Carbon\Carbon;
 @endphp
