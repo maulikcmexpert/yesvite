@@ -74,7 +74,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             success: function (response) {
             if(response.rsvp_status=="1"){
                 event.preventDefault(); // Prevent modal opening
-                $(modal).off('show.bs.modal'); 
+                $(modal).modal('hide'); 
               toastr.success('You have already done rsvp YES');  
             }
             else if(response.rsvp_status=="0"){
