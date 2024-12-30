@@ -76,6 +76,7 @@ class EventController extends Controller
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
+        Session::forget('contact_ids');
         Session::forget('category');
         Session::forget('category_item');
         Session::forget('gift_registry_data');
