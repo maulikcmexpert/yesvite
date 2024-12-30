@@ -6581,7 +6581,7 @@ class ApiControllerv2 extends Controller
 
             
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-            $potluckDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+            $potluckDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
             
 
 
@@ -7372,7 +7372,7 @@ class ApiControllerv2 extends Controller
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
 
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-            $eventDetails['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+            $eventDetails['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
 
             $eventDetails['event_timezone'] = (isset($eventDetail->rsvp_start_timezone) && $eventDetail->rsvp_start_timezone != '')?$eventDetail->rsvp_start_timezone:'';
 
@@ -8635,7 +8635,7 @@ class ApiControllerv2 extends Controller
         $filename = 'event_wall_response.txt';
 
         $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-        $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+        $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
         
         $commentnumber = json_encode(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
         Storage::append($filename, $commentnumber);
@@ -8686,7 +8686,7 @@ class ApiControllerv2 extends Controller
             $postsDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
 
             $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $user->id])->first();
-            $postsDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+            $postsDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
 
             $postsDetail['username'] =  $eventDetails->user->firstname . ' ' . $eventDetails->user->lastname;
 
@@ -10640,7 +10640,7 @@ class ApiControllerv2 extends Controller
             $eventAboutHost['is_event_owner'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
 
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-            $eventAboutHost['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+            $eventAboutHost['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
             
 
             $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
@@ -11413,7 +11413,7 @@ class ApiControllerv2 extends Controller
                 $postPhotoDetail['user_id'] = $value->user->id;
                 $postPhotoDetail['is_own_post'] = ($value->user->id == $user->id) ? "1" : "0";
                 $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-                $postPhotoDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"";
+                $postPhotoDetail['is_co_host'] = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
                 $postPhotoDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                 $postPhotoDetail['firstname'] = $value->user->firstname;
 
