@@ -111,7 +111,7 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
             var status=response.rsvp_status;
             // console.log(status);
             if(status=="0"){
-                toastr.success('You have already done RSVP NO');
+                toastr.error('You have already done RSVP NO');
             }else{
                         $(modal).off('show.bs.modal');  
                         $(modal).modal('show');  
