@@ -546,7 +546,17 @@
                         <input type="hidden" value="1" name="rsvp_status" id="rsvp_status"/>
                     <div class="modal-body">
                         <div class="d-flex align-items-center rsvp-yes-profile">
-                            <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
+                            @if ($eventInfo['guest_view']['user_profile'] != '')
+                                <img src="{{ $eventInfo['guest_view']['user_profile']}}" alt="rs-img" class="about-rs-img">
+                            @else
+                            @php
+                                $firstInitial = !empty($eventInfo['guest_view']['host_first_name']) ? strtoupper($eventInfo['guest_view']['host_first_name'][0]) : '';
+                                $lastInitial = !empty($eventInfo['guest_view']['host_last_name']) ? strtoupper($eventInfo['guest_view']['host_last_name'][0]) : '';
+                                $initials = $firstInitial . $lastInitial;
+                                $fontColor = 'fontcolor' . $firstInitial;
+                            @endphp
+                                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                            @endif    
                             <div>
                                 <h4 class="modal-title" id="aboutsuccessLabel">{{$eventInfo['guest_view']['event_name']}}</h4>
                                 <p>Hosted by: <span>{{$eventInfo['guest_view']['hosted_by']}}</span></p>
@@ -657,9 +667,18 @@
                     <input type="hidden" value="0" name="rsvp_status" id="rsvp_status"/>
                         <div class="modal-body">
                             <div class="d-flex align-items-center rsvp-yes-profile">
-                                <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
-                                <div>
-                                    <h4 class="modal-title" id="aboutsuccessLabel">{{$eventInfo['guest_view']['event_name']}}</h4>
+                                @if ($eventInfo['guest_view']['user_profile'] != '')
+                                    <img src="{{ $eventInfo['guest_view']['user_profile']}}" alt="rs-img" class="about-rs-img">
+                                @else
+                                @php
+                                    $firstInitial = !empty($eventInfo['guest_view']['host_first_name']) ? strtoupper($eventInfo['guest_view']['host_first_name'][0]) : '';
+                                    $lastInitial = !empty($eventInfo['guest_view']['host_last_name']) ? strtoupper($eventInfo['guest_view']['host_last_name'][0]) : '';
+                                    $initials = $firstInitial . $lastInitial;
+                                    $fontColor = 'fontcolor' . $firstInitial;
+                                @endphp
+                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                @endif                                  <div>
+                                        <h4 class="modal-title" id="aboutsuccessLabel">{{$eventInfo['guest_view']['event_name']}}</h4>
                                     <p>Hosted by: <span>{{$eventInfo['guest_view']['hosted_by']}}</span></p>
                                 </div>
                             </div>
