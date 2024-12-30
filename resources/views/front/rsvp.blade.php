@@ -1,4 +1,4 @@
-{{                dd($eventInfo['guest_view']);}}
+{{-- {{                dd($eventInfo['guest_view']);}} --}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -149,9 +149,12 @@
                                                 {{-- <a href="#" class="msg-btn">Message</a> --}}
                                             </div>
                                             @if(!empty($eventInfo['guest_view']['co_hosts']))
+                                            @php
+                                                $coHost = $eventInfo['guest_view']['co_hosts'][0];
+                                            @endphp
                                             <div class="host-user-con">
                                                 <div class="img-wrp">
-                                                    <img src="{{empty($eventInfo['guest_view']['co_hosts'])}}" alt="host-img">                                 
+                                                    <img src="{{$coHost['profile']}}" alt="host-img">                                 
                                                 </div>
                                                 <h5>Chris Walton</h5>
                                                 <span>Co-host</span>
