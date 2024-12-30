@@ -73,7 +73,8 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             type: 'GET',
             data: {event_id:event_id,user_id:user_id},
             success: function (response) {
-          
+                var status=response.rsvp_status;
+                console.log(status);
                 return response.rsvp_status;
 
             },
