@@ -1,4 +1,4 @@
-{{                dd($eventInfo);}}
+{{-- {{                dd($eventInfo);}} --}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -417,10 +417,12 @@
                                         </div>
                                          </div>
                                      </div>
+                                     @if($eventInfo['guest_view']['potluck']!="0")
                                      <div class="note-wrp rsvp-note-wrp">
                                          <h5><span>Note:</span> This is a Potluck Event</h5>
                                          <p>Sign Up on iOS or Android Apps to let them know what you will be brining.</p>
                                      </div>
+                                     @endif
                                  </div>
                             </div>
                         </div>
