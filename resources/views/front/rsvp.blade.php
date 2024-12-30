@@ -405,7 +405,8 @@
                                              </div>
                                          </div>
                                      </div>
-             
+                                     
+                                     @if(!empty($eventInfo['guest_view']['gift_registry']))
                                      <div class="rsvp-app new-rsvp-app">
                                         <h4 class="title">Host created registries</h4>
                                          <div class="row">
@@ -429,6 +430,7 @@
                                         </div>
                                          </div>
                                      </div>
+                                     @endif
                                      @if($eventInfo['guest_view']['event_potluck']!="0")
                                      <div class="note-wrp rsvp-note-wrp">
                                          <h5><span>Note:</span> This is a Potluck Event</h5>
