@@ -911,7 +911,8 @@ class EventController extends Controller
     public function storeUserId(Request $request)
     {
         $userId = $request->input('user_id');
-
+        $is_contact = $request->input('is_contact');
+        dd($is_contact);
         $user = User::where('id', $userId)->first();
         // $userimage = asset('storage/profile/' . $user->profile);
         $userimage = $user->profile;

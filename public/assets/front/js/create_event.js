@@ -1103,6 +1103,7 @@ function loadMoreData(page, search_name) {
 // }
 
 // $(document).ready(function () {
+
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var inviteCount = parseInt($('#currentInviteCount').val());
 
@@ -1115,6 +1116,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var email = $(this).data("email");
+    var is_contact = $(this).data("contact");
     // if(inviteCount > 15){
     //     e.preventDefault(); 
     //     return;
@@ -1130,6 +1132,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 user_id: userId,
                 is_checked: isChecked,
                 email: email,
+                is_contact: is_contact,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
