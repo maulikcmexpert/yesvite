@@ -5750,8 +5750,45 @@ $(document).on('click','.brand-progress',function () {
 });
 
 $(document).on('click','#phone-tab',function () { 
-    alert();     
+    displayPhoneContacts();     
 });
+
+function displayPhoneContacts() {
+    var search_name = '';
+    if(type!='group'){
+        search_name = $('.search_user').val();
+        if(search_name !=''){
+            offset = 0;
+        }
+    }
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: base_url+'event/get_user_ajax',
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
+        cache: false,
+        beforeSend: function () {
+
+        },
+        success: function (html) {
+            var currentInviteCount = parseInt($('#currentInviteCount').val())
+            if(currentInviteCount >= 15){
+                $('.user_choice').prop('disabled',true);
+            }
+            if(type=="all"){
+                if(search != null){
+                    $(".user-contacts").html(html);
+                }else{
+                    $(".user-contacts").append(html);
+                }
+            }
+            busy = false;
+            setTimeout(function () {
+                $('#loader').css('display','none');
+            }, 1000);
+        },
+    });
+}
 
 
 
