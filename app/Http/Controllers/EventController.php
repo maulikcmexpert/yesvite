@@ -2019,7 +2019,6 @@ class EventController extends Controller
             ->whereIn('email',$emails)
             ->where('id', '!=', $user_id)
             ->where(['app_user' => '1'])
-            ->where(['is_user_phone_contact' => '0'])
             ->orderBy('firstname')
             ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
