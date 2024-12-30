@@ -1009,7 +1009,7 @@ class EventController extends Controller
                 $prefer_by = "email";
             }
             if (isset($phone) && $phone != "") {
-                $user_invited_by = $user->phone_number;
+                $user_invited_by = $user->phoneWithCode;
                 $prefer_by = "phone";
             }
     
