@@ -5756,14 +5756,15 @@ $(document).on('click','.brand-progress',function () {
 
 $(document).on('click','#phone-tab',function () { 
     $('#loader').show();
-    displayPhoneContacts();     
+    var search_name = $('#search_contacts').val();
+    displayPhoneContacts('all',10000,'0',search_name);     
 });
 
 
 var search_contacts = 0;
 $(document).on('keyup','#search_contacts',function(){
     var search_name = $(this).val();
-    console.log(search_name);
+    // console.log(search_name);
     
     offset = 0;
     clearTimeout(search_contacts);
@@ -5774,7 +5775,7 @@ $(document).on('keyup','#search_contacts',function(){
 })
 
 function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
-    console.log(search_name);
+    // console.log(search_name);
     $.ajax({
         type: "GET",
         async: false,
@@ -5785,7 +5786,7 @@ function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
 
         },
         success: function (html) {
-            console.log(html);
+            // console.log(html);
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             if(currentInviteCount >= 15){
                 $('.user_choice').prop('disabled',true);
