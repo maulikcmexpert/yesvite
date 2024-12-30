@@ -197,7 +197,17 @@
                                             <div class="guest-user-box">
                                               <div class="guest-list-data">
                                                 <a href="#" class="guest-img">
-                                                  <img src="./assets/img/event-story-img-1.png" alt="guest-img">
+                                                @if ($guest_data['profile'] != '')
+                                                    <img src="{{$guest_data['profile']}}" alt="guest-img">
+                                                    @else
+                                                    @php
+                                                        $firstInitial = !empty($guest_data['first_name']) ? strtoupper($guest_data['first_name'][0]) : '';
+                                                        $lastInitial = !empty($guest_data['last_name']) ? strtoupper($guest_data['last_name'][0]) : '';
+                                                        $initials = $firstInitial . $lastInitial;
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                    @endphp
+                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                                @endif
                                                 </a>
                                                 <div class="w-100">
                                                   <div class="d-flex flex-column">
