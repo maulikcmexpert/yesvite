@@ -5753,7 +5753,8 @@ $(document).on('click','#phone-tab',function () {
     displayPhoneContacts();     
 });
 
-function displayPhoneContacts() {
+function displayPhoneContacts(type ='all') {
+    
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
