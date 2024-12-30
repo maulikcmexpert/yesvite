@@ -585,7 +585,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="email" name="email" class="form-control inputText" >
+                                            <input type="email" name="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" >
                                             <label for="Fname" class="form-label input-field floating-label">Email Address</label>
                                         </div>
                                     </div>
