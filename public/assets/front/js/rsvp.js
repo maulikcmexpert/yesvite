@@ -49,3 +49,18 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     $('#rsvpNoForm').submit();
 
   })
+
+  $(document).on('click','.check_rsvp_yes',function (e) {
+    $user_id=$(this).data('user_id');
+    $event_id=$(this).data('event_id');
+  })
+
+  
+  $(document).on('click','.check_rsvp_no',function (e) {
+    $user_id=$(this).data('user_id');
+    $event_id=$(this).data('event_id');
+  })
+
+  function checkRsvpStaus(){
+    
+  }

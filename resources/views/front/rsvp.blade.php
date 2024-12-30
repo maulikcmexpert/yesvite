@@ -423,8 +423,8 @@
             <div class="rsvp-footer-btn">
                 <h3>RSVP</h3>
                 <div class="d-flex align-items-center justify-content-end gap-3 w-100">
-                    <button class="cmn-btn" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                    <button class="cmn-btn cmn-no-btn" data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                    <button class="cmn-btn check_rsvp_yes" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                    <button class="cmn-btn cmn-no-btn check_rsvp_no" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
                 </div>
             </div>
         </div>
