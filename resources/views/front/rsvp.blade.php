@@ -355,7 +355,23 @@
                                                  <img src="./assets/img/timing-line.svg" alt="timing">
                                              </div> --}}
                                              @foreach ($eventInfo['guest_view']['event_schedule'] as $schedule )
-                                                        <div class="shedule-manage-timing">
+                                               @if($schedule['type']=="1")
+                                                    <div class="shedule-manage-timing">
+                                                        <div class="shedule-timing">
+                                                            <h6>{{$schedule['start_time']}}</h6>
+                                                        </div>
+                                                        <div class="shedule-box green">
+                                                            <div class="shedule-box-left">
+                                                            <h6>{{$schedule['activity_title']}}</h6>
+                                                            @if($schedule['end_time'])
+                                                            <span>{{$schedule['start_time']}} - {{$schedule['end_time']}}</span>
+                                                            @endif                                                            </div>
+                                                            <span class="hrs ms-auto">1h</span>
+                                                        </div>
+                                                        <img src="./assets/img/timing-line.svg" alt="timing">
+                                                    </div>
+                                                @elseif ($schedule['type']=="2")
+                                                    <div class="shedule-manage-timing">
                                                         <div class="shedule-timing">
                                                             <h6>{{$schedule['start_time']}}</h6>
                                                         </div>
@@ -370,6 +386,22 @@
                                                         </div>
                                                         <img src="./assets/img/timing-line.svg" alt="timing">
                                                         </div>
+                                               @else
+
+                                                    <div class="shedule-manage-timing">
+                                                        <div class="shedule-timing">
+                                                            <h6>{{$schedule['start_time']}}</h6>
+                                                        </div>
+                                                        <div class="shedule-box red">
+                                                            <div class="shedule-box-left">
+                                                                <h6>{{$schedule['activity_title']}}</h6>
+                                                                @if($schedule['end_time'])
+                                                                <span>{{$schedule['end_time']}}</span>
+                                                                @endif                                                            </div>
+                                                            <span class="hrs ms-auto">30m</span>
+                                                        </div>
+                                                        </div>
+                                            @endif
                                              @endforeach
                                              {{-- <div class="shedule-manage-timing">
                                                <div class="shedule-timing">
