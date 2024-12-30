@@ -63,26 +63,23 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
   })
 
   function checkRsvpStaus(event_id,user_id){
+        $.ajax({
+            url: `${base_url}check_rsvp_status`,
+            type: 'GET',
+            data: {event_id:event_id,user_id:user_id},
+            success: function (response) {
+            if(response){
+                console.log(response);
+            }else{
+            
 
-    
- $.ajax({
-    url: `${base_url}check_rsvp_status`,
-    type: 'GET',
-    data: {event_id:event_id,user_id:user_id},
-    success: function (response) {
-       if(response){
-        console.log(response);
-       }else{
-      
+            }
 
-       }
+            },
+            error: function (xhr, status, error) {
 
-    },
-    error: function (xhr, status, error) {
-
-    },
-    complete: function () {
-    }
-});
-
+            },
+            complete: function () {
+            }
+        });
   }
