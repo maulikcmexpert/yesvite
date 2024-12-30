@@ -5759,17 +5759,23 @@ $(document).on('click','#phone-tab',function () {
     displayPhoneContacts();     
 });
 
-function displayPhoneContacts(type ='all',lim = 10000,off = '0') {
-    
-    var search_name = '';
-    var search = '';
+$(document).on('click','#search_contacts',function () { 
+    $('#loader').show();
+    displayPhoneContacts();     
+});
 
-    if(type!='group'){
-        search_name = $('.search_user').val();
-        if(search_name !=''){
-            offset = 0;
-        }
-    }
+var search_contacts = 0;
+$(document).on('keyup','#search_contacts',function(){
+    search_name = $(this).val();
+    offset = 0;
+    clearTimeout(search_contacts);
+    search_contacts = setTimeout(function () {
+        $('#loader').css('display','block');
+        displayPhoneContacts('all',10000,'0',search_name);
+    }, 750);
+})
+
+function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name = '') {
     $.ajax({
         type: "GET",
         async: false,
@@ -5781,17 +5787,12 @@ function displayPhoneContacts(type ='all',lim = 10000,off = '0') {
         },
         success: function (html) {
             console.log(html);
-            
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             if(currentInviteCount >= 15){
                 $('.user_choice').prop('disabled',true);
             }
             if(type=="all"){
-                if(search != null){
-                    $("#YesviteContactsAll").html(html);
-                }else{
-                    $("#YesviteContactsAll").append(html);
-                }
+                $("#YesviteContactsAll").html(html);
             }
             busy = false;
             setTimeout(function () {
