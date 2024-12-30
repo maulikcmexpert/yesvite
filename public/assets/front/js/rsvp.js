@@ -74,7 +74,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             data: {event_id:event_id,user_id:user_id},
             success: function (response) {
           
-                return $response.rsvp_status;
+                return response.rsvp_status;
 
             },
             error: function (xhr, status, error) {
