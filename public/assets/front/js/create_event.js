@@ -5766,7 +5766,7 @@ $(document).on('click','#search_contacts',function () {
 
 var search_contacts = 0;
 $(document).on('keyup','#search_contacts',function(){
-    search_name = $(this).val();
+    var search_name = $(this).val();
     offset = 0;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
