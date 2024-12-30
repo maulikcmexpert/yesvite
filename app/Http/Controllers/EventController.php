@@ -1000,7 +1000,8 @@ class EventController extends Controller
             $useremail = $request->input('email');
             $phone = $request->input('mobile');
             $isChecked = $request->input('is_checked');
-            $userIds = session()->get('user_ids', []);
+            // $userIds = session()->get('user_ids', []);
+            $userIds = session()->get('contact_ids', []);
     
             if (isset($useremail) && $useremail != "") {
                 $user_invited_by = $useremail;
@@ -1033,9 +1034,9 @@ class EventController extends Controller
                     }
                 });
                 $userIds[] = $userEntry;
-                session()->put('user_ids', $userIds);
+                session()->put('contact_ids', $userIds);
                 Session::save();
-                $user_list = Session::get('user_ids');
+                $user_list = Session::get('contact_ids');
                 dd($user_list);
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
@@ -1622,7 +1623,7 @@ class EventController extends Controller
         foreach ($getAllContacts as $user) {
             $yesviteUserDetail = [
                 'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                'profile' => empty($user->profile) ? "" : $user->profile,
                 'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
                 'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
                 'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
@@ -1630,7 +1631,7 @@ class EventController extends Controller
             ];
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
-        $selected_user = Session::get('user_ids');
+        $selected_user = Session::get('contact_ids');
         // dd(count($selected_user));
         return response()->json(view('front.event.guest.get_contacts', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
