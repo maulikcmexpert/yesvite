@@ -53,22 +53,28 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
-    checkRsvpStaus(event_id,user_id);
+    var modal = $(this).data('target');
+
+    checkRsvpStaus(event_id,user_id, modal, e);
   })
 
   
   $(document).on('click','.check_rsvp_no',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
+    var modal = $(this).data('target');
+
   })
 
-  function checkRsvpStaus(event_id,user_id){
+  function checkRsvpStaus(event_id,user_id, modal, event){
         $.ajax({
             url: `${base_url}check_rsvp_status`,
             type: 'GET',
             data: {event_id:event_id,user_id:user_id},
             success: function (response) {
             if(response.rsvp_status=="1"){
+                event.preventDefault(); // Prevent modal opening
+                $(modal).off('show.bs.modal'); 
               toastr.success('You have already done rsvp YES');  
             }
             else if(response.rsvp_status=="0"){
