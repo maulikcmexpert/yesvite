@@ -10,7 +10,8 @@ use App\Models\{
     Notification,
     EventImage,
     EventGiftRegistry,
-    EventPostImage
+    EventPostImage,
+    User
 };
 
 use Carbon\Carbon;
@@ -332,6 +333,8 @@ class RsvpController extends Controller
                     $getInvitedusers = getInvitedUsersList($event_id);
 
 
+                    $user_email=User::where('id',$user_id)->first();
+                    $email=$user_email->email;
                     
                     return view('layout', compact(
                         'title',
@@ -340,6 +343,7 @@ class RsvpController extends Controller
                         'eventInfo',
                         'event_id',
                         'user_id',
+                        'email',
                         'getInvitedusers'
                     ));
                     // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
@@ -349,7 +353,7 @@ class RsvpController extends Controller
         
                     return response()->json(['status' => 0, 'message' => "db error"]);
                 } catch (\Exception $e) {
-                    dd($e);
+                    // dd($e);
                     return response()->json(['status' => 0, 'message' => 'something went wrong']);
                 }        
             
