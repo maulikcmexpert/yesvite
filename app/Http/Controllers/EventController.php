@@ -2015,7 +2015,7 @@ class EventController extends Controller
 
 
         $users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
-            ->whereNotIn('id', $alreadyselectedUser)
+            // ->whereNotIn('id', $alreadyselectedUser)
             ->whereIn('email',$emails)
             ->where('id', '!=', $user_id)
             ->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
