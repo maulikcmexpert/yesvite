@@ -1037,7 +1037,7 @@ class EventController extends Controller
                 session()->put('contact_ids', $userIds);
                 Session::save();
                 $user_list = Session::get('contact_ids');
-                dd($user_list);
+                // dd($user_list);
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
                     return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
