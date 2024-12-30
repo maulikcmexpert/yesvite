@@ -2008,8 +2008,15 @@ class EventController extends Controller
         $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
 
+        $getAllContacts = contact_sync::where('contact_id',$user_id)->where('email','!=','')->get();
+        if($getAllContacts->isNotEmpty()){
+            $emails = $getAllContacts->pluck('email')->toArray();
+        }
+
+
         $users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->whereNotIn('id', $alreadyselectedUser)
+            ->whereIn('email',$emails)
             ->where('id', '!=', $user_id)
             ->where(['is_user_phone_contact' => '0'])->orderBy('firstname')
             ->when($search_user != '', function ($query) use ($search_user) {
