@@ -53,7 +53,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
-    var modal = $(this).data('target');
+    var modal = $(this).data('bs-target');
 
     checkRsvpStaus(event_id,user_id, modal, e);
   })
@@ -74,7 +74,8 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
             success: function (response) {
             if(response.rsvp_status=="1"){
                 event.preventDefault(); // Prevent modal opening
-                $(modal).off('show.bs.modal'); 
+                console.log(modal);
+                $(modal).modal('hide'); 
               toastr.success('You have already done rsvp YES');  
             }
             else if(response.rsvp_status=="0"){
