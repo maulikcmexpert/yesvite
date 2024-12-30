@@ -201,6 +201,9 @@ function sendNotification($notificationType, $postData)
     
                                 $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                             }
+
+                            $isCoHost =  EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
+                            $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
                             $notificationData = [
                                 'message' => $notification_message,
                                 'type' => (string)$notificationType,
@@ -212,6 +215,7 @@ function sendNotification($notificationType, $postData)
                                 'event_potluck' => (string)$value->event->event_settings->podluck,
                                 'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
                                 'rsvp_status' => '0',
+                                'is_co_host'=>$is_co_host
                             ];
     
                             $checkNotificationSetting = checkNotificationSetting($value->user_id);
