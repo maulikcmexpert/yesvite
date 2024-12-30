@@ -5749,6 +5749,12 @@ $(document).on('click','.brand-progress',function () {
     // window.location.href="event?id="+event_id;       
 });
 
+$(document).on('click','.phone-tab',function () { 
+    alert();     
+});
+
+
+
 // $(document).on("click", ".new-temp", function () {
 //     // Get the image URL from the data-image attribute
 //     var imageUrl = $(this).data("image");
