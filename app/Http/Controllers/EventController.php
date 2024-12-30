@@ -1564,7 +1564,7 @@ class EventController extends Controller
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
             $yesviteUserDetail = [
-                'sync_id' => $user->id,
+                'id' => $user->id,
                 'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
                 'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
                 'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
