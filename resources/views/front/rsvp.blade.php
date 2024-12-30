@@ -746,6 +746,7 @@
                                 <a href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</a>
                                 <span class="guest-email">{{$guest_data['email']}}</span>
                             </div>
+                            @if($guest_data['rsvp_status']=="1")
                             <div class="sucess-yes">
                             <h5 class="green">RSVP'D YES</h5>
                             <div class="sucesss-cat ms-auto">
@@ -759,6 +760,21 @@
                                 <h5>{{$guest_data['kids']}} Kids</h5>
                             </div>
                             </div>
+                            @elseif ($guest_data['rsvp_status']=="1")
+                            <div class="sucess-yes">
+                                <h5 class="green">RSVP'D NO</h5>
+                                <div class="sucesss-cat ms-auto">
+                                   
+                                </div>
+                             </div>
+                            @else
+                            <div class="sucess-yes">
+                                <h5 class="green">NO Reply</h5>
+                                <div class="sucesss-cat ms-auto">
+                                   
+                                </div>
+                             </div>
+                            @endif
                             <div class="rsvp-guest-user-replay">
                                 @if($guest_data['message_to_host']!="")
                                 <h6>“ {{$guest_data['message_to_host']}} “</h6>
