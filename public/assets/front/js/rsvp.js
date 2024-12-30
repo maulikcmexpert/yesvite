@@ -49,7 +49,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     $('#rsvpNoForm').submit();
 
   })
-  function checkRsvpStaus(event_id,user_id){
+  function checkRsvpStatus(event_id,user_id,callback){
     $.ajax({
         url: `${base_url}check_rsvp_status`,
         type: 'GET',
@@ -57,23 +57,42 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
         success: function (response) {
             var status=response.rsvp_status;
             console.log(status);
-            return status;
-
+            callback(status);
         },
         error: function (xhr, status, error) {
+            callback(null); // Pass null to indicate an error
 
         },
         complete: function () {
         }
     });
 }
+
+async function checkRsvpStatusAsync(event_id, user_id) {
+    try {
+        const status = await checkRsvpStatus(event_id, user_id); // Call the function that returns a Promise
+        if (status == "1") {
+            console.log("1");
+        } 
+        else if(status=="0"){
+            console.log("0");
+        }
+        else {
+            console.log("");
+        }
+    } catch (error) {
+        console.error("Error occurred while checking RSVP status:", error);
+    }
+}
+
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
 
-    var status=checkRsvpStaus(event_id,user_id);
-    console.log(status);
+    var current_status=checkRsvpStatusAsync(event_id, user_id);
+
+    console.log(current_status);
   })
 
   
