@@ -335,6 +335,7 @@
                                            </div> --}}
                                          </div>
                                      </div>
+                                     @if(!empty($eventInfo['guest_view']['event_schedule']))
                                      <div class="schedule-wrp rsvp-schedule-wrp cmn-card">
                                          <h4 class="title">Schedule</h4>
                                          <span class="timing">10:30 AM - 4:00 PM</span>
@@ -405,6 +406,7 @@
                                              </div>
                                          </div>
                                      </div>
+                                     @endphp
                                      
                                      @if(!empty($eventInfo['guest_view']['gift_registry']))
                                      <div class="rsvp-app new-rsvp-app">
