@@ -5753,7 +5753,7 @@ $(document).on('click','#phone-tab',function () {
     displayPhoneContacts();     
 });
 
-function displayPhoneContacts(type ='all') {
+function displayPhoneContacts(type ='all',lim = 10000,off = '0') {
     
     var search_name = '';
     if(type!='group'){
