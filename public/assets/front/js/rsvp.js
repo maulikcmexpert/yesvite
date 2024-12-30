@@ -51,16 +51,42 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
   })
 
   $(document).on('click','.check_rsvp_yes',function (e) {
-    $user_id=$(this).data('user_id');
-    $event_id=$(this).data('event_id');
+    var user_id=$(this).data('user_id');
+    var event_id=$(this).data('event_id');
   })
 
   
   $(document).on('click','.check_rsvp_no',function (e) {
-    $user_id=$(this).data('user_id');
-    $event_id=$(this).data('event_id');
+    var user_id=$(this).data('user_id');
+    var event_id=$(this).data('event_id');
   })
 
-  function checkRsvpStaus(){
+  function checkRsvpStaus(event_id,user_id){
+
     
+ $.ajax({
+    url: `${base_url}check_rsvp_status`,
+    type: 'GET',
+    data: {event_id:event_id,user_id:user_id},
+    success: function (response) {
+       if(response.view!=""){
+        $(".notification_div").html('');
+        $(".notification_div").append(response.view);
+        $("#all-notification-filter-modal").modal('hide');
+        $('#home_loader').css('display','none');
+       }else{
+        $(".notification_div").html('');
+        $("#all-notification-filter-modal").modal('hide');
+        $('#home_loader').css('display','none');
+
+       }
+
+    },
+    error: function (xhr, status, error) {
+
+    },
+    complete: function () {
+    }
+});
+
   }

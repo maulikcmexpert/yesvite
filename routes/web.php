@@ -63,6 +63,7 @@ Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])-
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
+Route::get('rsvp/check_rsvp_status', [RsvpController::class, 'CheckRsvpStatus'])->name('check_rsvp_status');
 
 Route::view('/design/post_temp_1', 'front.event.design.post_temp_1')->name('post_temp_1');
 Route::view('/design/post_temp_2', 'front.event.design.post_temp_2')->name('post_temp_2');
