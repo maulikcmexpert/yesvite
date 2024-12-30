@@ -1540,15 +1540,13 @@ class EventController extends Controller
     
     public function getContacts(Request $request)
     {
-        dd($request);
+        
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
-        $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')->get();
-        if($getAllContacts->isNotEmpty()){
-            $emails = $getAllContacts->pluck('email')->toArray();
-        }
+        $getAllContacts = contact_sync::where('contact_id',$id)->get();
+        dd($getAllContacts);
         
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
