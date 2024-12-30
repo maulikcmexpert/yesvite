@@ -3928,7 +3928,8 @@ class ApiControllerv2 extends Controller
                                 'event_id' => $eventId,
                                 'prefer_by' => $value['prefer_by'],
                                 'user_id' => $value['id'],
-                                'is_co_host' => '1'
+                                'is_co_host' => '1',
+                                'accept_as_co_host' => '1'
                             ]);
                         // } else {
                         //     $updateRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventId])->first();
@@ -3978,7 +3979,8 @@ class ApiControllerv2 extends Controller
                                 'prefer_by' => $value['prefer_by'],
                                 'sync_id' => $value['id'],
                                 'user_id' => $newUserId,
-                                'is_co_host' => '1'
+                                'is_co_host' => '1',
+                                'accept_as_co_host' => '1'
                             ]);
                         // } else {
                         //     $updateRecords = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventId])->first();
@@ -4971,6 +4973,7 @@ class ApiControllerv2 extends Controller
                                         $updateCohostRecord = EventInvitedUser::where(['user_id' => $value['id'], 'event_id' => $eventData['event_id'],'is_co_host' => '1'])->first();
                                         if ($updateCohostRecord) {
                                             $updateCohostRecord->is_co_host = '1';
+                                            $updateCohostRecord->accept_as_co_host = '1';
                                             $updateCohostRecord->save();
                                         }else{
                                             $cohost = new EventInvitedUser();
@@ -4978,6 +4981,7 @@ class ApiControllerv2 extends Controller
                                             $cohost->prefer_by = $value['prefer_by'];
                                             $cohost->user_id = $value['id'];
                                             $cohost->is_co_host = '1';
+                                            $cohost->accept_as_co_host = '1';
                                             $cohost->save();
                                         }
                                     // }
@@ -5010,6 +5014,7 @@ class ApiControllerv2 extends Controller
                                             $updateRecord = EventInvitedUser::where(['sync_id' => $value['id'], 'event_id' => $eventData['event_id'],'is_co_host' => '1'])->first();
                                             if($updateRecord){
                                                 $updateRecord->is_co_host = '1';
+                                                $updateRecord->accept_as_co_host = '1';
                                                 $updateRecord->save();
                                             }else{
                                                 EventInvitedUser::create([
@@ -5017,7 +5022,8 @@ class ApiControllerv2 extends Controller
                                                     'prefer_by' => (isset($value['prefer_by'])) ? $value['prefer_by'] : "phone",
                                                     'sync_id' => $value['id'],
                                                     'user_id' =>  $newUserId,
-                                                    'is_co_host' => '1'
+                                                    'is_co_host' => '1',
+                                                    'accept_as_co_host' => '1'
                                                 ]);
                                             }
                                         // }
