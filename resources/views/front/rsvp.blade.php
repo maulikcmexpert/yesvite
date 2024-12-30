@@ -341,7 +341,7 @@
                                          <span class="timing">10:30 AM - 4:00 PM</span>
                                          <div>
                                          
-                                             <div class="shedule-manage-timing">
+                                             {{-- <div class="shedule-manage-timing">
                                                  <div class="shedule-timing">
                                                      <h6>10 AM</h6>
                                                  </div>
@@ -353,21 +353,23 @@
                                                      <span class="hrs ms-auto">1h</span>
                                                  </div>
                                                  <img src="./assets/img/timing-line.svg" alt="timing">
-                                             </div>
+                                             </div> --}}
                                              @foreach ($eventInfo['guest_view']['event_schedule'] as $schedule )
-                                                <div class="shedule-manage-timing">
-                                                <div class="shedule-timing">
-                                                    <h6>11 AM</h6>
-                                                </div>
-                                                <div class="shedule-box yellow">
-                                                    <div class="shedule-box-left">
-                                                        <h6>Snack Time</h6>
-                                                        <span>11:00 AM - 12:00AM</span>
-                                                    </div>
-                                                    <span class="hrs ms-auto">1h</span>
-                                                </div>
-                                                <img src="./assets/img/timing-line.svg" alt="timing">
-                                                </div>
+                                                        <div class="shedule-manage-timing">
+                                                        <div class="shedule-timing">
+                                                            <h6>{{$schedule['start_time']}}</h6>
+                                                        </div>
+                                                        <div class="shedule-box yellow">
+                                                            <div class="shedule-box-left">
+                                                                <h6>{{$schedule['activity_title']}}</h6>
+                                                                @if($schedule['end_time'])
+                                                                <span>{{$schedule['start_time']}} - {{$schedule['end_time']}}</span>
+                                                                @endif
+                                                            </div>
+                                                            <span class="hrs ms-auto">1h</span>
+                                                        </div>
+                                                        <img src="./assets/img/timing-line.svg" alt="timing">
+                                                        </div>
                                              @endforeach
                                              {{-- <div class="shedule-manage-timing">
                                                <div class="shedule-timing">
@@ -395,7 +397,7 @@
                                                </div>
                                                <img src="./assets/img/timing-line.svg" alt="timing">
                                              </div> --}}
-                                             <div class="shedule-manage-timing">
+                                             {{-- <div class="shedule-manage-timing">
                                                <div class="shedule-timing">
                                                    <h6>3 AM</h6>
                                                </div>
@@ -406,7 +408,7 @@
                                                    </div>
                                                    <span class="hrs ms-auto">30m</span>
                                                </div>
-                                             </div>
+                                             </div> --}}
                                          </div>
                                      </div>
                                      @endif
