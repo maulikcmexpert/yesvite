@@ -11,6 +11,7 @@ use App\Models\{
     EventImage,
     EventGiftRegistry,
     EventPostImage,
+    EventSetting,
     User
 };
 
@@ -223,7 +224,7 @@ class RsvpController extends Controller
                         $eventsScheduleList[] = $scheduleDetail;
                     }
                     $eventDetails['event_schedule'] = $eventsScheduleList;
-        
+                    $eventDetails['event_potluck'] = EventSetting::where('event_id', $event_id)->pluck('podluck')->first();
                     $eventDetails['gift_registry'] = [];
                     if (!empty($eventDetail->gift_registry_id)) {
                         $giftregistry = explode(',', $eventDetail->gift_registry_id);
