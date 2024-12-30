@@ -507,6 +507,6 @@ class RsvpController extends Controller
 
     public function CheckRsvpStatus(Request $request)
     {
-        dd(1);
+        dd($request);
     }
 }
