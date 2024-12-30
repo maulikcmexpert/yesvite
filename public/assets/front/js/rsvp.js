@@ -57,10 +57,10 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
         success: function (response) {
             var status=response.rsvp_status;
             console.log(status);
-            return status;
-
+            callback(status);
         },
         error: function (xhr, status, error) {
+            callback(null); // Pass null to indicate an error
 
         },
         complete: function () {
@@ -72,8 +72,14 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
 
-    var status=checkRsvpStaus(event_id,user_id);
-    console.log(status);
+    var current_status="";
+
+
+    checkRsvpStatus(event_id, user_id, function(status) {
+        current_status=status;
+    });
+    
+    console.log(current_status);
   })
 
   
