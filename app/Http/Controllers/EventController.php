@@ -1569,8 +1569,7 @@ class EventController extends Controller
                 'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
                 'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
                 'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
-                'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
-                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
+                'phone_number' => (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "",
             ];
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
