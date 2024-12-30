@@ -5759,11 +5759,6 @@ $(document).on('click','#phone-tab',function () {
     displayPhoneContacts();     
 });
 
-$(document).on('click','#search_contacts',function () { 
-    $('#loader').show();
-    var search_name = '';
-    displayPhoneContacts('all',10000,'0',search_name);     
-});
 
 var search_contacts = 0;
 $(document).on('keyup','#search_contacts',function(){
@@ -5773,38 +5768,37 @@ $(document).on('keyup','#search_contacts',function(){
     offset = 0;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
-        $('#loader').css('display','block');
+        // $('#loader').css('display','block');
         displayPhoneContacts('all',10000,'0',search_name);
     }, 750);
 })
 
 function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
     console.log(search_name);
-    
-    // $.ajax({
-    //     type: "GET",
-    //     async: false,
-    //     url: base_url+'event/get_contacts',
-    //     data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
-    //     cache: false,
-    //     beforeSend: function () {
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: base_url+'event/get_contacts',
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
+        cache: false,
+        beforeSend: function () {
 
-    //     },
-    //     success: function (html) {
-    //         console.log(html);
-    //         var currentInviteCount = parseInt($('#currentInviteCount').val())
-    //         if(currentInviteCount >= 15){
-    //             $('.user_choice').prop('disabled',true);
-    //         }
-    //         if(type=="all"){
-    //             $("#YesviteContactsAll").html(html);
-    //         }
-    //         busy = false;
-    //         setTimeout(function () {
-    //             $('#loader').css('display','none');
-    //         }, 1000);
-    //     },
-    // });
+        },
+        success: function (html) {
+            console.log(html);
+            var currentInviteCount = parseInt($('#currentInviteCount').val())
+            if(currentInviteCount >= 15){
+                $('.user_choice').prop('disabled',true);
+            }
+            if(type=="all"){
+                $("#YesviteContactsAll").html(html);
+            }
+            busy = false;
+            setTimeout(function () {
+                $('#loader').css('display','none');
+            }, 1000);
+        },
+    });
 }
 
 
