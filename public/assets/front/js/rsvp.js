@@ -73,6 +73,7 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     e.preventDefault();  
 });
   $(document).on('click','.check_rsvp_yes',function (e) {
+    e.preventDefault();
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
@@ -100,6 +101,7 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
 
   
   $(document).on('click','.check_rsvp_no',function (e) {
+    e.preventDefault();
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
     var modal = $(this).data('bs-target');
