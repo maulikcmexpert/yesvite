@@ -492,9 +492,6 @@ function sendNotification($notificationType, $postData)
                     $push_notification_message = $senderData->firstname . ' '  . $senderData->lastname . ' rejected your invitation to co-host';
                 }
 
-                $isCoHost =  EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
-                $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
-
                 $notificationData = [
                     'message' => $push_notification_message,
                     'type' => (string)$notificationType,
