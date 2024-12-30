@@ -49,7 +49,24 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     $('#rsvpNoForm').submit();
 
   })
+  function checkRsvpStaus(event_id,user_id){
+    $.ajax({
+        url: `${base_url}check_rsvp_status`,
+        type: 'GET',
+        data: {event_id:event_id,user_id:user_id},
+        success: function (response) {
+            var status=response.rsvp_status;
+            console.log(status);
+            return status;
 
+        },
+        error: function (xhr, status, error) {
+
+        },
+        complete: function () {
+        }
+    });
+}
   $(document).on('click','.check_rsvp_yes',function (e) {
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
@@ -67,21 +84,4 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
 
   })
 
-  function checkRsvpStaus(event_id,user_id){
-        $.ajax({
-            url: `${base_url}check_rsvp_status`,
-            type: 'GET',
-            data: {event_id:event_id,user_id:user_id},
-            success: function (response) {
-                var status=response.rsvp_status;
-                console.log(status);
-                return response.rsvp_status;
 
-            },
-            error: function (xhr, status, error) {
-
-            },
-            complete: function () {
-            }
-        });
-  }
