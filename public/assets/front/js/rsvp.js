@@ -41,6 +41,14 @@ $(document).ready(function() {
 
 $(document).on('click','.yes_rsvp_btn',function (e) {
     e.preventDefault();
+    var adultsCount = parseInt($('#adults').val()) || 0; 
+    var kidsCount = parseInt($('#kids').val()) || 0; 
+
+    if (adultsCount == 0 && kidsCount == 0) {
+        e.preventDefault();
+        toastr.error("Please add at least one adult or kid."); 
+        return;
+    }
     $('#rsvpYesForm').submit();
   });
 
