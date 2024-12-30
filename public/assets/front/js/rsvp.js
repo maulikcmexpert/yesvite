@@ -49,7 +49,7 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     $('#rsvpNoForm').submit();
 
   })
-  function checkRsvpStaus(event_id,user_id){
+  function checkRsvpStaus(event_id,user_id,callback){
     $.ajax({
         url: `${base_url}check_rsvp_status`,
         type: 'GET',
