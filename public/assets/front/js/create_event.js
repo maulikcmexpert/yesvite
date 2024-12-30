@@ -5750,6 +5750,7 @@ $(document).on('click','.brand-progress',function () {
 });
 
 $(document).on('click','#phone-tab',function () { 
+    $('#loader').show();
     displayPhoneContacts();     
 });
 
