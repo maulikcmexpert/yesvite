@@ -1022,6 +1022,10 @@ display:none;}
     color: #1C8B5C;
 }
 
+.about-rsvp .rsvp-msgbox label{
+    width: auto !important;
+}
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
