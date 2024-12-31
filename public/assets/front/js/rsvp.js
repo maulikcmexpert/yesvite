@@ -143,3 +143,5 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
       zoom: 8,
     });
   }
+
+  initMap();
