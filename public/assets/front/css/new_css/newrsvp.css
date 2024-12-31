@@ -993,7 +993,7 @@ display:none;}
     line-height: normal;
     color: var(--green);
     padding: 10px;
-    border-radius: 16px;
+    border-radius: 10px;
     border: 1px solid rgba(35, 170, 38, 0.5);
     display: flex;
     align-items: center;
