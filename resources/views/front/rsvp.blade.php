@@ -643,7 +643,7 @@
                 <h3>RSVP</h3>
                 <div class="d-flex align-items-center justify-content-end gap-3 w-100">
                     <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                    <button class="cmn-btn cmn-no-btn check_rsvp_no" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                    <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
                 </div>
             </div>
         </div>
@@ -789,6 +789,8 @@
                     @csrf
                     <input type="hidden" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
                     <input type="hidden" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
+                    <input type="hidden" value="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" name="sync_id" id="sync_id"/>
+
                     <input type="hidden" value="0" name="rsvp_status" id="rsvp_status"/>
                         <div class="modal-body">
                             <div class="d-flex align-items-center rsvp-yes-profile">
