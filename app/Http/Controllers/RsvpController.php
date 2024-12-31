@@ -242,13 +242,14 @@ class RsvpController extends Controller
                     if ($eventDetail->event_settings) {
                         $eventData = [];
                         if ($eventDetail->event_settings->allow_for_1_more == '1') {
-                            $eventData[] = "Can Bring Guests ( limit " . $eventDetail->event_settings->allow_limit . ")";
+                            // $eventData[] = "Can Bring Guests ( limit " . $eventDetail->event_settings->allow_limit . ")";
+                            $eventData[] = "+1 Limit (" . $eventDetail->event_settings->allow_limit . ")";
                         }
                         if ($eventDetail->event_settings->adult_only_party == '1') {
                             $eventData[] = "Adults Only";
                         }
                         if ($eventDetail->rsvp_by_date_set == '1') {
-                            $eventData[] = date('F d, Y', strtotime($eventDetail->rsvp_by_date));
+                            $eventData[] = 'RSVP By :- ' . date('F d, Y', strtotime($eventDetail->rsvp_by_date));
                         }
                         if ($eventDetail->event_settings->podluck == '1') {
                             $eventData[] = "Event Potluck";
@@ -259,17 +260,14 @@ class RsvpController extends Controller
                         if ($eventDetail->event_settings->events_schedule == '1') {
                             $eventData[] = "Event has Schedule";
                         }
-                        if ($eventDetail->start_date!=$eventDetail->end_date) {
+                        if ($eventDetail->start_date != $eventDetail->end_date) {
                             $eventData[] = "Multiple Day Event";
                         }
-                        if (empty($eventData)) {
-                            $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
-                            $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
-                            $eventData[] = "Number of guests : " . $numberOfGuest;
-                        }
+                        // if(!empty($eventDetails['co_host_list'])){
                         if($coHosts!=NULL){
                             $eventData[] = "Co-Host";
                         }
+                        
                         $eventDetails['event_detail'] = $eventData;
                     }
                     $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
