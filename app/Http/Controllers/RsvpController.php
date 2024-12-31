@@ -414,7 +414,7 @@ class RsvpController extends Controller
             })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
         }
 
-        // dd($rsvpSent);
+        dd($rsvpSent);
         $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";   
         if ($rsvpSent != null) {
             $rsvp_attempt = "";
