@@ -553,7 +553,11 @@
             <div class="tab-pane fade" id="nav-messaging" role="tabpanel" aria-labelledby="nav-messaging-tab">
                 <div class="rsvp-no-msg-wrp">
                     <h3>Messages</h3>
+                    <div class="rsvp-no-msg-extra-text">
+                        <p><i class="fa-solid fa-circle-exclamation"></i> To participate in this conversation, you must RSVP.</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

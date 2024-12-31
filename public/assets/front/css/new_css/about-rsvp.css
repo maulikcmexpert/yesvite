@@ -691,18 +691,7 @@
     line-height: normal !important;
 }
 
-.rsvp-no-msg-wrp{
-    border: 1px solid var(--border);
-    border-radius: 20px;
-}
 
-.rsvp-no-msg-wrp h3{
-    padding: 16px 20px;
-    font-family: var(--SFProDisplay-Bold);
-    font-size: 20px;
-    line-height: 32px;
-    letter-spacing: 0.30000001192092896px;
-}
 
 /* ========= responsive =========== */
 @media only screen and (max-width:1399px){
