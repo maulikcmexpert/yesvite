@@ -965,6 +965,12 @@ display:none;}
     display: none !important;
 }
 
+.slider-count
+
+.rsvp-slider.owl-carousel.slider-count .owl-nav{
+    top: 45% !important;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
