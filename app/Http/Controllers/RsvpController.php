@@ -351,7 +351,7 @@ class RsvpController extends Controller
                         $email=$user_email->email;
                     }
                    
-                    dd($email,$sync_contact_user_id);
+                    dd($email,$user_id);
                     
                     return view('layout', compact(
                         'title',
