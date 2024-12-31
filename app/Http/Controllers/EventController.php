@@ -1095,11 +1095,13 @@ class EventController extends Controller
             
         }
         $contact_ids = Session::get('contact_ids');
-        dd($contact_ids);
         $user_list = Session::get('user_ids');
-        return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(),
-            'responsive_contact_view' => view('front.event.guest.addcontact_responsive', compact('contact_ids'))->render()
-            ]);
+        $count = count($contact_ids) + count($user_list);
+        // if(!empty($user_list) && !empty($contact_ids)){
+            return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list','contact_ids'))->render(),
+                ]);
+        // }
+
     }
 
     public function deleteSession(Request $request)
