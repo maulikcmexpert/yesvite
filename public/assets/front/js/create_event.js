@@ -1234,7 +1234,6 @@ function delete_invited_user(userId,is_contact= '0') {
             
             $(".user-list-responsive").empty();
             $(".user-list-responsive").html(response.responsive_view);
-            $(".user-list-responsive").append(response.responsive_contact_view);
             if(is_contact == '1'){
                 $('#contact_tel-'+userId).remove();
                 $('.sync_user_id_tel-'+userId).remove();
