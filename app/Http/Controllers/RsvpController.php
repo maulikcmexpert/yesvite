@@ -131,7 +131,7 @@ class RsvpController extends Controller
         $js = ['rsvp'];
 
 
-        dd($userId, $eventId);
+        // dd($userId, $eventId);
         $event_id =  decrypt($eventId);
         $user_id = decrypt($userId);
       
@@ -360,7 +360,7 @@ class RsvpController extends Controller
         
                     return response()->json(['status' => 0, 'message' => "db error"]);
                 } catch (\Exception $e) {
-                    // dd($e);
+                    dd($e);
                     return response()->json(['status' => 0, 'message' => 'something went wrong']);
                 }        
             
