@@ -96,7 +96,10 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
             // console.log(status);
             if(status=="1"){
                 toastr.success('You have already done RSVP YES');
-            }else{
+            }else if(status=="cohost"){
+                toastr.success('You have are a cohost');
+            }
+                else{
                         $(modal).off('show.bs.modal');  
                         $(modal).modal('show');  
          }
