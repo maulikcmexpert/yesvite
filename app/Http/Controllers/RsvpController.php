@@ -405,6 +405,7 @@ class RsvpController extends Controller
             return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
         }
         DB::beginTransaction();
+        dd($sync_id);
         if($sync_id!=""||$sync_id!=null){
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             })->where(['user_id' => $userId,'sync_id'=>$sync_id, 'event_id' => $eventId])->first();
