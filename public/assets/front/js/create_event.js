@@ -1218,12 +1218,13 @@ function guest_counter(total_guest,max_guest){
     $("#event_guest_left_count").val(remainingCount);
 }
 
-function delete_invited_user(userId) {
+function delete_invited_user(userId,is_contact= '0') {
     $.ajax({
         url: base_url + "event/delete_user_id",
         method: "POST",
         data: {
             user_id: userId,
+            is_contact:is_contact,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         success: function (response) {
@@ -1233,9 +1234,13 @@ function delete_invited_user(userId) {
             
             $(".user-list-responsive").empty();
             $(".user-list-responsive").html(response.responsive_view);
-
-            $('#user-'+userId).remove();
-            $('#user_tel-'+userId).remove();
+            if(is_contact == '1'){
+                $('#contact_tel-'+userId).remove();
+                $('.sync_user_id_tel-'+userId).remove();
+            }else{
+                $('#user_tel-'+userId).remove();
+                $('.user_id_tel-'+userId).remove();
+            }
             var total_guest = $(".users-data.invited_user").length;
             $("#event_guest_count").text(total_guest + " Guests");
             $(".invite-count").text(total_guest);
@@ -3784,10 +3789,15 @@ $(document).on("click", "#delete_invited_user", function () {
 
 $(document).on("click", "#delete_invited_user_tel", function () {
     var id = $(this).data("id");
+    var is_contact = $(this).data('contact');
     $("#" + id).remove();
     var checkbox = $("." + id);
     var userId = $(this).data("userid");
-    $('.user_id_tel-'+userId).remove();
+    if(is_contact == '1'){
+        $('#contact_tel-'+userId).remove();
+    }else{
+        $('.user_id_tel-'+userId).remove();
+    }
     checkbox.prop("checked", false);
 
 
@@ -3813,7 +3823,7 @@ $(document).on("click", "#delete_invited_user_tel", function () {
 
 
 
-    delete_invited_user(userId);
+    delete_invited_user(userId,is_contact);
 });
 
 function enforceCheckboxLimit() {
