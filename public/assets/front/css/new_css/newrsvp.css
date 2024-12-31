@@ -985,6 +985,10 @@ display:none;}
     .rsvp-form .thank-card p {
         line-height: 26px;
     }
+    .rsvp-slider .rsvp-img {
+        border-radius: 10px;
+        height: 550px;
+    }
 }
 
 
