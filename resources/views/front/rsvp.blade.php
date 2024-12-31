@@ -881,7 +881,7 @@
                         </div>
                         </div> --}}
                         <div class="rsvp-guest-user-replay">
-                            @if($guest_data['message_to_host']!="")
+                            @if(isset($guest_data['message_to_host'])&&$guest_data['message_to_host']!="")
                             <h6>“ {{$guest_data['message_to_host']}} “</h6>
                         @endif
                      </div>
