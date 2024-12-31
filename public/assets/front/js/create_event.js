@@ -1334,11 +1334,16 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
+                if(is_contact == '1'){
+                    $('#contact_tel-'+userId).remove();
+                    $('.sync_user_id_tel-'+userId).remove();
+                }else{
+                    $('#user_tel-'+userId).remove();
+                    $('.user_id_tel-'+userId).remove();
+                }
                 var currentInviteCount = $('#currentInviteCount').val();
                 currentInviteCount--;
                 $('#currentInviteCount').val(currentInviteCount);
-                $('#user_tel-'+userId).remove();
-                $('.user_id_tel-'+userId).remove();
                 var total_guest = $(".users-data.invited_user").length;
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
