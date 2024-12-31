@@ -340,6 +340,7 @@
 .schedule-wrp .shedule-box.green{
     background-color: #F3FFFA;
     border-left: 4px solid #2EB67D;
+    min-height: 67px;
 }
 
 .schedule-wrp .shedule-timing h6{
