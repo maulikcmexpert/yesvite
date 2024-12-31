@@ -133,7 +133,7 @@ class RsvpController extends Controller
 
         $event_id =  decrypt($eventId);
         $user_id = decrypt($userId);
-        dd($user_id, $event_id);
+        // dd($user_id, $event_id);
       
                 try {
                     $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
@@ -342,6 +342,7 @@ class RsvpController extends Controller
 
                     $user_email=User::where('id',$user_id)->first();
                     $email=$user_email->email;
+                    
                     
                     return view('layout', compact(
                         'title',
