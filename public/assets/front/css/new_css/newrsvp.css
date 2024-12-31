@@ -938,7 +938,13 @@ display:none;}
     font-size: 15px;
 }
 
+.rsvp-slider.slider-count.owl-carousel .owl-dots{
+    display: flex !important;
+}
 
+.rsvp-slider.owl-carousel .owl-dots{
+    display: none !important;
+}
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
