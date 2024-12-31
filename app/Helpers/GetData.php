@@ -935,12 +935,12 @@ function getInvitedUsersList($eventId)
                 $invitedGuestDetail['app_user'] = (!empty($guestVal->contact_sync->isAppUser) && $guestVal->contact_sync->isAppUser != NULL) ? (int)$guestVal->contact_sync->isAppUser : 0;
                 $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
                 $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
-                $invitedUserIdDetail['rsvp_status']= $guestVal->rsvp_status;
-                $invitedUserIdDetail['kids']= $guestVal->kids;
-                $invitedUserIdDetail['adults']= $guestVal->adults;
-                $invitedUserIdDetail['read']= $guestVal->read;
-                $invitedUserIdDetail['rsvp_d']= $guestVal->rsvp_d;  
-                $invitedUserIdDetail['message_to_host']= $guestVal->message_to_host;
+                $invitedGuestDetail['rsvp_status']= $guestVal->rsvp_status;
+                $invitedGuestDetail['kids']= $guestVal->kids;
+                $invitedGuestDetail['adults']= $guestVal->adults;
+                $invitedGuestDetail['read']= $guestVal->read;
+                $invitedGuestDetail['rsvp_d']= $guestVal->rsvp_d;  
+                $invitedGuestDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
             } elseif ($guestVal->user->app_user == '1') {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
