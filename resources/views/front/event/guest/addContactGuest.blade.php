@@ -1,6 +1,6 @@
 @foreach ( $data as $guest_user)
     @if($guest_user['userdata']['prefer_by']=="email")
-    <div class="users-data invited_user" data-id="sync_"{{$guest_user['userdata']['sync_id']}} id="contact-{{$guest_user['userdata']['sync_id']}}">
+    <div class="users-data invited_user" data-id={{"sync_".$guest_user['userdata']['sync_id']}} id="contact-{{$guest_user['userdata']['sync_id']}}">
         <div class="d-flex align-items-start">
             <div class="contact-img">
                 @if ($guest_user['userdata']['profile'] != '')
