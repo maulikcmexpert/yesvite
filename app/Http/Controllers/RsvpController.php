@@ -131,7 +131,7 @@ class RsvpController extends Controller
         $js = ['rsvp'];
 
 
-
+        dd($userId, $eventId);
         $event_id =  decrypt($eventId);
         $user_id = decrypt($userId);
       
