@@ -834,9 +834,9 @@ display:none;}
 }
 
 .rsvp-yes-modal .modal-title span{
-    font-family: var(--SFProDisplay-Bold);
-    font-size: 22px;
-    color: var(--green);
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 22px !important;
+    color: var(--green) !important;
 }
 
 .rsvp-yes-modal .modal-header{
@@ -847,6 +847,19 @@ display:none;}
 .rsvp-yes-modal .modal-body .about-rs-img{
     width: 45px;
     height: 45px;
+    border-radius: 50%;
+}
+
+.rsvp-yes-modal .modal-body .rsvp-yes-profile > h5{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 15px;
+    margin-right: 16px;
 }
 
 .rsvp-yes-modal .modal-body .rsvp-custom-radio h6 {
@@ -856,6 +869,7 @@ display:none;}
 
 .rsvp-yes-modal .modal-body .rsvp-input-form .input-form{
     width: 100%;
+    margin-bottom: 24px !important;
 }
 
 .rsvp-yes-modal .modal-body .rsvp-input-form{
@@ -1006,6 +1020,14 @@ display:none;}
 
 .rsvp-no-msg-wrp p i{
     color: #1C8B5C;
+}
+
+.about-rsvp .rsvp-msgbox label{
+    width: auto !important;
+}
+
+.rsvp-yes-modal .modal-body .rsvp-input-form label{
+    width: auto !important;
 }
 
 
