@@ -75,10 +75,10 @@
                                                 @php $i++; @endphp
                                                 @endforeach
                                              </div>
-                                             {{-- <div class="d-flex align-items-center justify-content-between w-100">
+                                             <div class="d-flex align-items-center justify-content-between w-100">
                                                  <h6>Adults & Kids</h6>
                                                  <h6>Potluck Event</h6>
-                                             </div> --}}
+                                             </div>
                                          </div>
                                      </div>
                                      @endif
