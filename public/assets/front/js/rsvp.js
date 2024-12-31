@@ -101,12 +101,12 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
                         $(modal).modal('show');  
          }
 
-         if(status=="cohost"){
-            toastr.success('You are a cohost');
-        }else{
-                    $(modal).off('show.bs.modal');  
-                    $(modal).modal('show');  
-     }
+    //      if(status=="cohost"){
+    //         toastr.success('You are a cohost');
+    //     }else{
+    //                 $(modal).off('show.bs.modal');  
+    //                 $(modal).modal('show');  
+    //  }
 
         },
         error: function (xhr, status, error) {
