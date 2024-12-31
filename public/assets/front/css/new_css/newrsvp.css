@@ -937,14 +937,14 @@ display:none;}
 }
 
 .rsvp-yes-notification-wrp .form-check .form-check-input{
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
 }
 
 .rsvp-yes-notification-wrp .form-check .form-check-input:checked[type=checkbox]{
-    background-color: var(--green);
-    box-shadow: none;
-    border: 1px solid var(--green);
+    background-color: var(--green) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--green) !important;
 }
 
 .rsvp-yes-modal .modal-body{
