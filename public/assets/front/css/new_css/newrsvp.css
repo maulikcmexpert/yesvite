@@ -969,9 +969,7 @@ display:none;}
     .qty-container input{
         width: 130px;
     }
-    /* .rsvp-slider.owl-carousel .owl-nav .owl-next{
-        right: 60px;
-    } */
+    
 }
 
 @media only screen and (max-width: 1399px) {
@@ -987,6 +985,9 @@ display:none;}
     .rsvp-slider .rsvp-img {
         border-radius: 10px;
         height: 550px;
+    }
+    .rsvp-slider.owl-carousel .owl-nav .owl-next{
+        right: 35px;
     }
 }
 
