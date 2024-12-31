@@ -412,7 +412,7 @@
                                                             @endif                                                            </div>
                                                             <span class="hrs ms-auto">1h</span>
                                                         </div>
-                                                        <img src="./assets/img/timing-line.svg" alt="timing">
+                                                        <img src="{{asset('assets/front/image/timing-line.svg')}}" alt="timing">
                                                     </div>
                                                 @elseif ($schedule['type']=="2")
                                                     <div class="shedule-manage-timing">
@@ -428,7 +428,7 @@
                                                             </div>
                                                             <span class="hrs ms-auto">1h</span>
                                                         </div>
-                                                        <img src="./assets/img/timing-line.svg" alt="timing">
+                                                        <img src="{{asset('assets/front/image/timing-line.svg')}}" alt="timing">
                                                         </div>
                                                @else
 
