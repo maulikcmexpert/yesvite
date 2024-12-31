@@ -535,7 +535,7 @@ class RsvpController extends Controller
        if($sync_id!=""){
         $rsvp = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');
-        })->where(['user_id' => $user_id,'sync_id'=>$sync_id,'event_id' => $event_id,'is_co_host'=>"0"])->first();
+        })->where(['user_id' => $user_id,'sync_id'=>$sync_id,'event_id' => $event_id,'is_co_host'=>"1"])->first();
        }else{
 
         $rsvp = EventInvitedUser::whereHas('user', function ($query) {
