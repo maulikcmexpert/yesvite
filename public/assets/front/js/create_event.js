@@ -1146,7 +1146,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 }
                 
                 var total_guest = 0;
-                var max_guest = 15;
+                var max_guest =  $("#coins").val();
                 // if (total_guest == max_guest) {
 
                 // } else {
@@ -1160,7 +1160,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     //     add_user_counter();
                     // }
 
-                    guest_counter(0,15);
+                    guest_counter(0,max_guest);
                     $('input[name="email_invite[]"]').prop('disabled', false);
                     // if(currentInviteCount >= 15){
                     //     $('.user_choice').prop('disabled',true);
@@ -1244,8 +1244,9 @@ function delete_invited_user(userId,is_contact= '0') {
             var total_guest = $(".users-data.invited_user").length;
             $("#event_guest_count").text(total_guest + " Guests");
             $(".invite-count").text(total_guest);
-
-            var max_guest = 15;
+           
+            // var max_guest = 15;
+            var max_guest = $("#coins").val();
             var remainingCount = max_guest - total_guest;
 
             if(remainingCount < 0){
@@ -1301,7 +1302,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
                 
-                var max_guest = 15;
+                var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
                 // if(currentInviteCount >= 15){
                 //     $('.user_choice').prop('disabled',true);
@@ -1353,7 +1354,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
 
-                var max_guest = 15;
+                var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
 
                 if(remainingCount < 0){
@@ -3830,7 +3831,8 @@ $(document).on("click", "#delete_invited_user_tel", function () {
 function enforceCheckboxLimit() {
     var checkedCount = $("input[name='email_invite[]']:checked").length;
     // console.log(checkedCount);
-    if (checkedCount >= 15) {
+    const coins = $("#coins").val();
+    if (checkedCount >= coins) {
         $("input[name='email_invite[]']:not(:checked)").prop("disabled", true);
         $("input[name='mobile[]']:not(:checked)").prop("disabled", true);
     } else {
@@ -3892,7 +3894,7 @@ $(document).on("change", "#YesviteUserAll input[name='email_invite[]']", functio
         $("#event_guest_count").text(total_guest + " Guests");
         $(".invite-count").text(total_guest);
 
-        var max_guest = 15;
+        var max_guest =  $("#coins").val();
 
         var remainingCount = max_guest - total_guest;
         if(remainingCount < 0){
@@ -3915,7 +3917,7 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
         $("#event_guest_count").text(total_guest + " Guests");
         $(".invite-count").text(total_guest);
 
-        var max_guest = 15;
+        var max_guest = $("#coins").val();
 
         var remainingCount = max_guest - total_guest;
         if(remainingCount < 0){
@@ -5044,7 +5046,8 @@ function displayRecords(lim, off,type,search = null,) {
         },
         success: function (html) {
             var currentInviteCount = parseInt($('#currentInviteCount').val())
-            if(currentInviteCount >= 15){
+            const coins =  $("#coins").val();
+            if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
             }
             if(type=="all"){
@@ -5806,7 +5809,8 @@ function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
         success: function (html) {
             // console.log(html);
             var currentInviteCount = parseInt($('#currentInviteCount').val())
-            if(currentInviteCount >= 15){
+            const coins =  $("#coins").val();
+            if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
             }
             if(type=="all"){
