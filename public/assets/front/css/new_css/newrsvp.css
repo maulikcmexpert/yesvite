@@ -68,7 +68,7 @@
 
 .rsvp-slider.owl-carousel .owl-nav .owl-prev{
     position: absolute;
-    left: 8px;
+    left: 30px;
     width: 44px;
     height: 44px;
     background-color: #fff;
@@ -82,7 +82,7 @@
 .rsvp-slider.owl-carousel .owl-nav .owl-next{
     position: absolute;
     left: auto;
-    right: 16px;
+    right: 30px;
     width: 44px;
     height: 44px;
     background-color: #fff;
@@ -1005,6 +1005,10 @@ display:none;}
     } */
     .rsvp-form .author-title h4{
         font-size: 24px;
+    }
+    .rsvp-slider .rsvp-img {
+        border-radius: 10px;
+        height: 500px;
     }
    
 }
