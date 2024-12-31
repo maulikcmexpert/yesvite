@@ -401,7 +401,16 @@
                                                  </div>
                                                  <img src="./assets/img/timing-line.svg" alt="timing">
                                              </div> --}}
+                                             @php
+                                                 $colors=['yellow','pink','blue'];
+                                                 $colorIndex = 0;
+                                             @endphp
                                              @foreach ($eventInfo['guest_view']['event_schedule'] as $schedule )
+
+                                             @php
+                                                 $colorClass = $colors[$colorIndex % count($colors)];
+                                                 $colorIndex++;
+                                             @endphp
                                                @if($schedule['type']=="1")
                                                     <div class="shedule-manage-timing">
                                                         <div class="shedule-timing">
@@ -422,7 +431,7 @@
                                                         <div class="shedule-timing">
                                                             <h6>{{$schedule['start_time']}}</h6>
                                                         </div>
-                                                        <div class="shedule-box yellow">
+                                                        <div class="shedule-box {{$colorClass}}">
                                                             <div class="shedule-box-left">
                                                                 <h6>{{$schedule['activity_title']}}</h6>
                                                                 @if($schedule['end_time'])
