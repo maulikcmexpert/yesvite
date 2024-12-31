@@ -1058,6 +1058,14 @@ display:none;}
         right: 40px;
     } */
 
+    .rsvp-slider.owl-carousel .owl-nav .owl-prev{
+        left: 10px;
+    }
+
+    .rsvp-slider.owl-carousel .owl-nav .owl-next {
+        right: 10px;
+    }
+
     .rsvp-form{
         border: none;
     }
