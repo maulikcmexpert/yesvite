@@ -834,9 +834,9 @@ display:none;}
 }
 
 .rsvp-yes-modal .modal-title span{
-    font-family: var(--SFProDisplay-Bold);
-    font-size: 22px;
-    color: var(--green);
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 22px !important;
+    color: var(--green) !important;
 }
 
 .rsvp-yes-modal .modal-header{
