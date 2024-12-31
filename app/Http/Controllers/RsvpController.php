@@ -143,7 +143,6 @@ class RsvpController extends Controller
                     $guestView = [];
                     $eventDetails['id'] = $eventDetail->id;
                     $eventDetails['event_images'] = [];
-                    dd($eventDetail->event_image);
                     if (count($eventDetail->event_image) != 0) {
                         foreach ($eventDetail->event_image as $values) {
                             $eventDetails['event_images'][] = asset('storage/event_images/' . $values->image);
