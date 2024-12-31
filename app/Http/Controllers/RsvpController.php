@@ -556,11 +556,11 @@ class RsvpController extends Controller
        }
  
 
-    if($rsvp==""||$rsvp==null){
-        $rsvpStatus="cohost";
-    }else{
+    // if($rsvp==""||$rsvp==null){
+    //     $rsvpStatus="cohost";
+    // }else{
         $rsvpStatus=$rsvp->rsvp_status;
-    }
+    // }
 
     return response()->json(['status' => 1, 'rsvp_status' => $rsvpStatus]);
 
