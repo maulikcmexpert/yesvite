@@ -15,6 +15,7 @@ use App\Models\{
     User
 };
 
+use App\Models\contact_sync;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -342,7 +343,10 @@ class RsvpController extends Controller
 
                     $user_email=User::where('id',$user_id)->first();
                     $email=$user_email->email;
-                    
+                    if($user_email==""){
+                        $user_email=contact_sync::where('id',$user_id)->first();
+                        dd($user_email);
+                    }
                     
                     return view('layout', compact(
                         'title',
