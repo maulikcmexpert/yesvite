@@ -691,6 +691,11 @@
     line-height: normal !important;
 }
 
+.rsvp-no-msg-wrp{
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
 /* ========= responsive =========== */
 @media only screen and (max-width:1399px){
     .birth-details .hosted-by-date-time{

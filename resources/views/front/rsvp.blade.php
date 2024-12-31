@@ -551,6 +551,9 @@
                 </section>
             </div>
             <div class="tab-pane fade" id="nav-messaging" role="tabpanel" aria-labelledby="nav-messaging-tab">
+                <div class="rsvp-no-msg-wrp">
+                    <h3>Messages</h3>
+                </div>
             </div>
         </div>
     </div>
