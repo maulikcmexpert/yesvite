@@ -702,6 +702,7 @@
     font-size: 20px;
     line-height: 32px;
     letter-spacing: 0.30000001192092896px;
+    border-bottom: 1px solid var(--border);
 }
 
 /* ========= responsive =========== */
