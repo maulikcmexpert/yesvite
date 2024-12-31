@@ -19,9 +19,12 @@
 
 .rsvp-slider .rsvp-img{
     border-radius: 10px;
+    height: 650px;
 }
 .rsvp-slider .rsvp-img img{
     border-radius: 10px;
+    width: 100%;
+    height: 100%;
 }
 
 .rsvp-slider.owl-carousel .owl-dots{
