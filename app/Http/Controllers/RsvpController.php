@@ -530,6 +530,7 @@ class RsvpController extends Controller
         $query->where('app_user', '1');
     })->where(['user_id' => $user_id, 'event_id' => $event_id])->first();
 
+    dd($rsvp);
     $rsvpStatus=$rsvp->rsvp_status;
 
     return response()->json(['status' => 1, 'rsvp_status' => $rsvpStatus]);
