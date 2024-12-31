@@ -393,6 +393,11 @@ class RsvpController extends Controller
         // dd($request);
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
+        if($request->input('sync_id')!=""){
+            $sync_id=decrypt($request->input('sync_id'));
+        }else{
+         $sync_id="";
+        }
 
         try {
         $checkEvent = Event::where(['id' => $eventId])->first();
@@ -400,9 +405,15 @@ class RsvpController extends Controller
             return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
         }
         DB::beginTransaction();
-        $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-            $query->where('app_user', '1');
-        })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
+        if($sync_id!=""){
+            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                $query->where('app_user', '1');
+            })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
+        }else{
+            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            })->where(['user_id' => $userId,'sync_id'=>$sync_id, 'event_id' => $eventId])->first();
+        }
+
         // dd($rsvpSent);
         $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";   
         if ($rsvpSent != null) {
