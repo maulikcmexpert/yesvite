@@ -640,6 +640,8 @@ display:none;}
     align-items: center;
     justify-content: center;
     color: var(--white);
+    border-radius: 50%;
+    font-size: 15px;
 }
 
 .rsvp-guest-user-list-title{
