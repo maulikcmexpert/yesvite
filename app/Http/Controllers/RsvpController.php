@@ -527,7 +527,7 @@ class RsvpController extends Controller
        $event_id=decrypt($request->input('event_id'));
 
        if($request->input('sync_id')!=""){
-           $sync_id=decrypt($request->input('event_id'));
+           $sync_id=decrypt($request->input('sync_id'));
        }else{
         $sync_id="";
        }
