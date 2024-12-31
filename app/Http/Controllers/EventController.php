@@ -1066,6 +1066,7 @@ class EventController extends Controller
 
     public function removeUserId(Request $request)
     {
+        dd($request);
         $userIds = session()->get('user_ids');
         $userId = $request->input('user_id');
         foreach ($userIds as $key => $value) {
