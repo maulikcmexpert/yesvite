@@ -146,7 +146,7 @@
                                                 </div>
                                                 <h5>{{ $eventInfo['guest_view']['hosted_by']}}</h5>
                                                 <span>Host</span>
-                                                {{-- <a href="#" class="msg-btn">Message</a> --}}
+                                                <a href="#" class="msg-btn">Message</a>
                                             </div>
                                             @if(!empty($eventInfo['guest_view']['co_hosts']))
                                             @php
