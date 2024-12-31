@@ -320,6 +320,7 @@
         </div>
     </div>
     <input type="hidden" value="{{ $user->id }}" id="user_id">
+    <input type="hidden" value="{{ $user->coins }}" id="coins">
     <input type="hidden" value="{{(isset($eventDetail['id']) && $eventDetail['id'] != NULL)?$eventDetail['id']:''}}" id="event_id">
     <input type="hidden" value="{{(isset($eventDetail['step']) && $eventDetail['step'] != NULL)?$eventDetail['step']:''}}" id="current_step">
     <input type="hidden" value="{{(isset($eventDetail) && !empty($eventDetail))?json_encode($eventDetail):''}}" id="eventDetail" />

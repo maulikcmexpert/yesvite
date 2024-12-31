@@ -312,7 +312,7 @@
 <div class="invite-pro">
     <div class="invite-left">
         <h6 class="invite-count">0</h6>
-        <p class="invite-left_d"><strong>Invites | 15</strong> Left</p>
+        <p class="invite-left_d"><strong>Invites | {{$user->coins}}</strong> Left</p>
     </div>
     <div class="invite-right">
         <span><strong>15</strong>Guests or less</span>
