@@ -946,6 +946,7 @@ display:none;}
     background-color: var(--green) !important;
     box-shadow: none !important;
     border: 1px solid var(--green) !important;
+    background: unset !important;
 }
 
 .rsvp-yes-modal .modal-body{
