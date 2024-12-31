@@ -94,6 +94,8 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
             all_notification="1"
         }
     });
+    console.log(all_notification);
+return;
     $.ajax({
         url: `${base_url}check_rsvp_status`,
         type: 'GET',
