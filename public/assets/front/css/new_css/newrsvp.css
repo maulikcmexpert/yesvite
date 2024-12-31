@@ -176,7 +176,7 @@
     position: absolute;
     width: 17px;
     height: 16px;
-    background-image: url("../image/rsvp-quot-left.svg");
+    background-image: url("../../image/left-quote.svg");
     background-repeat: no-repeat;
     left: 0;
 }
@@ -186,7 +186,7 @@
     position: absolute;
     width: 17px;
     height: 16px;
-    background-image: url("../image/rsvp-quot-right.svg");
+    background-image: url("../../image/right-quote.svg");
     background-repeat: no-repeat;
     right: 0;
     bottom: 0;
