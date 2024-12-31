@@ -347,6 +347,7 @@
     margin-bottom: 0;
     font-size: 14px;
     font-family: var(--SFProDisplay-Semibold);
+    width: max-content;
 }
 
 .schedule-wrp .shedule-box h6{
