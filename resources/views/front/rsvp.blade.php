@@ -296,6 +296,51 @@
                                               
                                             </div>
                                             @endforeach
+                                            @foreach ($getInvitedusers['invited_guests'] as $guest_data )
+                                            <div class="guest-user-box">
+                                              <div class="guest-list-data">
+                                                <a href="#" class="guest-img">
+                                                @if ($guest_data['profile'] != '')
+                                                    <img src="{{$guest_data['profile']}}" alt="guest-img">
+                                                    @else
+                                                    @php
+                                                        $firstInitial = !empty($guest_data['first_name']) ? strtoupper($guest_data['first_name'][0]) : '';
+                                                        $lastInitial = !empty($guest_data['last_name']) ? strtoupper($guest_data['last_name'][0]) : '';
+                                                        $initials = $firstInitial . $lastInitial;
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                    @endphp
+                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                                @endif
+                                                </a>
+                                                <div class="w-100">
+                                                  <div class="d-flex flex-column">
+                                                      <a href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</a>
+                                                      <span class="guest-email">{{$guest_data['email']}}</span>
+                                                  </div>
+                                                
+                                                  <div class="sucess-rsvp-wrp">
+                                                    <div class="d-flex align-items-center">
+                                                      <h5 class="green d-flex align-items-center">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M11.3335 14.1654H4.66683C4.3935 14.1654 4.16683 13.9387 4.16683 13.6654C4.16683 13.392 4.3935 13.1654 4.66683 13.1654H11.3335C13.2402 13.1654 14.1668 12.2387 14.1668 10.332V5.66536C14.1668 3.7587 13.2402 2.83203 11.3335 2.83203H4.66683C2.76016 2.83203 1.8335 3.7587 1.8335 5.66536C1.8335 5.9387 1.60683 6.16536 1.3335 6.16536C1.06016 6.16536 0.833496 5.9387 0.833496 5.66536C0.833496 3.23203 2.2335 1.83203 4.66683 1.83203H11.3335C13.7668 1.83203 15.1668 3.23203 15.1668 5.66536V10.332C15.1668 12.7654 13.7668 14.1654 11.3335 14.1654Z" fill="#23AA26"></path>
+                                                        <path d="M7.99969 8.57998C7.43969 8.57998 6.87302 8.40665 6.43969 8.05331L4.35302 6.38665C4.13969 6.21331 4.09969 5.89998 4.27302 5.68665C4.44636 5.47331 4.75968 5.43332 4.97302 5.60665L7.05969 7.27332C7.56635 7.67998 8.42635 7.67998 8.93302 7.27332L11.0197 5.60665C11.233 5.43332 11.553 5.46665 11.7197 5.68665C11.893 5.89998 11.8597 6.21998 11.6397 6.38665L9.55301 8.05331C9.12635 8.40665 8.55969 8.57998 7.99969 8.57998Z" fill="#23AA26"></path>
+                                                        <path d="M5.3335 11.5H1.3335C1.06016 11.5 0.833496 11.2733 0.833496 11C0.833496 10.7267 1.06016 10.5 1.3335 10.5H5.3335C5.60683 10.5 5.8335 10.7267 5.8335 11C5.8335 11.2733 5.60683 11.5 5.3335 11.5Z" fill="#23AA26"></path>
+                                                        <path d="M3.3335 8.83203H1.3335C1.06016 8.83203 0.833496 8.60536 0.833496 8.33203C0.833496 8.0587 1.06016 7.83203 1.3335 7.83203H3.3335C3.60683 7.83203 3.8335 8.0587 3.8335 8.33203C3.8335 8.60536 3.60683 8.83203 3.3335 8.83203Z" fill="#23AA26"></path>
+                                                        </svg> Succesful</h5>
+                                                      <h5 class="ms-auto">Read, RSVP’d</h5>
+                                                    </div>
+                                                </div>
+
+                                                  <div class="rsvp-guest-user-replay">
+                                                        @if(isset($guest_data['message_to_host'])&&$guest_data['message_to_host']!="")
+                                                            <h6>“ {{$guest_data['message_to_host']}} “</h6>
+                                                        @endif
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                            </div>
+                                            @endforeach
                                            {{-- <div class="guest-user-box">
                                              <div class="guest-list-data">
                                                <a href="#" class="guest-img">
