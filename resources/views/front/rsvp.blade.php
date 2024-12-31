@@ -75,7 +75,7 @@
                                             @endphp
                                         
                                             @foreach($chunkedDetails as $pair)
-                                                <div class="d-flex align-items-center justify-content-between w-100">
+                                                <div class="d-flex align-items-center justify-content-between w-100 mb-2">
                                                     @foreach($pair as $val)
                                                         <h6>{{ $val }}</h6>
                                                     @endforeach
