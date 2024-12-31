@@ -52,6 +52,7 @@
     font-display: swap;
 }
 
+
 @font-face {
     font-family: 'SFProDisplay-Italic';
     src: url('/public/assets/fonts/new_design/SF-Pro-Display-RegularItalic.woff') format('woff2'),
