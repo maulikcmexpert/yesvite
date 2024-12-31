@@ -1059,11 +1059,11 @@ display:none;}
     } */
 
     .rsvp-slider.owl-carousel .owl-nav .owl-prev{
-        left: 20px;
+        left: 10px;
     }
 
     .rsvp-slider.owl-carousel .owl-nav .owl-next {
-        right: 20px;
+        right: 10px;
     }
 
     .rsvp-form{
