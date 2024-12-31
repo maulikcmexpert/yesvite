@@ -1026,6 +1026,10 @@ display:none;}
     width: auto !important;
 }
 
+.rsvp-yes-modal .modal-body .rsvp-input-form label{
+    width: auto !important;
+}
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
