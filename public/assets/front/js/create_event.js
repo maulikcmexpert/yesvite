@@ -1279,7 +1279,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
-
+                console.log(response);
+                
                 var currentInviteCount = $('#currentInviteCount').val();
                 currentInviteCount++;
                 $('#currentInviteCount').val(currentInviteCount);
