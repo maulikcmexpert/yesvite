@@ -1028,7 +1028,8 @@
                             <a href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</a>
                             <span class="guest-email">{{$guest_data['email']}}</span>
                         </div>
-                        {{-- <div class="sucess-yes">
+                        @if($guest_data['rsvp_status']=="1")
+                        <div class="sucess-yes">
                         <h5 class="green">RSVP'D YES</h5>
                         <div class="sucesss-cat ms-auto">
                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1040,7 +1041,21 @@
                             <h5>{{$guest_data['adults']}} Adults</h5>
                             <h5>{{$guest_data['kids']}} Kids</h5>
                         </div>
-                        </div> --}}
+                        </div>
+                        @elseif ($guest_data['rsvp_status']=="0")
+                        <div class="sucess-no">
+                            <h5>NO</h5>
+                        </div>
+                        @else
+                        <div class="no-reply">
+                            <h5>NO REPLY</h5>
+                          </div>
+                        @endif
+                        <div class="rsvp-guest-user-replay">
+                            @if($guest_data['message_to_host']!="")
+                            <h6>“ {{$guest_data['message_to_host']}} “</h6>
+                        @endif
+                     
                         <div class="rsvp-guest-user-replay">
                             @if(isset($guest_data['message_to_host'])&&$guest_data['message_to_host']!="")
                             <h6>“ {{$guest_data['message_to_host']}} “</h6>
