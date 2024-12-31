@@ -1,4 +1,4 @@
-{{-- {{                dd($getInvitedusers);}} --}}
+{{                dd($sync_contact_user_id);}}
 @php
     use Carbon\Carbon;
 @endphp
