@@ -136,3 +136,10 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
   })
 
 
+   
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8,
+    });
+  }
