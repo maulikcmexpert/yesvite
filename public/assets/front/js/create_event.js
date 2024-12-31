@@ -1329,6 +1329,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             method: "POST",
             data: {
                 user_id: userId,
+                is_contact:is_contact,
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
