@@ -994,7 +994,14 @@ display:none;}
     color: var(--green);
     padding: 10px;
     border-radius: 16px;
-    border: 1px solid rgba(35, 170, 38, 0.5)
+    border: 1px solid rgba(35, 170, 38, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rsvp-no-msg-wrp p i{
+    color: #1C8B5C;
 }
 
 
