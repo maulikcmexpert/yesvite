@@ -407,11 +407,11 @@ class RsvpController extends Controller
         DB::beginTransaction();
         if($sync_id!=""||$sync_id!=null){
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-            })->where(['user_id' => $userId,'sync_id'=>$sync_id, 'event_id' => $eventId])->first();
+            })->where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
         }else{
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
-            })->where(['user_id' => $userId, 'event_id' => $eventId])->first();
+            })->where(['user_id' => $userId, 'is_co_host'=>'0','event_id' => $eventId])->first();
         }
 
         // dd($rsvpSent);
