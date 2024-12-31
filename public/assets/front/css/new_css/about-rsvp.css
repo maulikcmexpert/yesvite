@@ -673,6 +673,10 @@
     line-height: normal !important;
 }
 
+.guest-user-list .sucess-no h5{
+    line-height: normal !important;
+}
+
 /* ========= responsive =========== */
 @media only screen and (max-width:1399px){
     .birth-details .hosted-by-date-time{
