@@ -939,6 +939,7 @@ display:none;}
 .rsvp-yes-notification-wrp .form-check .form-check-input{
     width: 18px !important;
     height: 18px !important;
+    padding: 0px !important;
 }
 
 .rsvp-yes-notification-wrp .form-check .form-check-input:checked[type=checkbox]{
