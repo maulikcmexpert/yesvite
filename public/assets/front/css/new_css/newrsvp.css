@@ -94,6 +94,9 @@
 .rsvp-slider.owl-carousel .owl-nav span{
     font-size: 28px;
     line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .rsvp-form{
