@@ -1070,7 +1070,6 @@ class EventController extends Controller
         if($is_contact == '1'){
             $userIds = session()->get('contact_ids');
             $userId = $request->input('user_id');
-            dd($userId);
             foreach ($userIds as $key => $value) {
                 if ($value['sync_id'] == $userId) {
                     unset($userIds[$key]);
