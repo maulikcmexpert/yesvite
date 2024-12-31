@@ -366,7 +366,7 @@ class EventController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-
+$user['coins']=$user->coins;
         $groups = Group::withCount('groupMembers')
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
