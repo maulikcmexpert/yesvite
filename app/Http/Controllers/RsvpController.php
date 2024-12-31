@@ -390,7 +390,7 @@ class RsvpController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request);
+        dd($request);
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
         if($request->input('sync_id')!=""){
@@ -466,6 +466,10 @@ class RsvpController extends Controller
                 $creatEventPost->is_in_photo_moudle = "0";
                 $creatEventPost->save();
                 // dd($creatEventPost);
+            }
+
+            if($request->input['all_notification']=="1"){
+
             }
 
             $notificationParam = [
