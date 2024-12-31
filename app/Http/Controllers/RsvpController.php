@@ -392,7 +392,7 @@ class RsvpController extends Controller
     {
 
         $userId = decrypt($request->user_id);
-        dd($userId);
+        // dd($userId);
         $eventId = decrypt($request->event_id);
         if($request->input('sync_id')!=""){
             $sync_id=decrypt($request->input('sync_id'));
@@ -469,7 +469,7 @@ class RsvpController extends Controller
                 // dd($creatEventPost);
             }
 
-            if($request->input['notifications'][0]=="1"){
+            if(!empty($request->input('notifications')) &&$request->input('notifications')[0]=="1"){
                 $data = [
                     [
                         'type' => 'guest_rsvp',
