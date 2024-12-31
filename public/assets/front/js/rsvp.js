@@ -87,19 +87,12 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     var event_id=$(this).data('event_id');
     var sync_id=$(this).data('sync_id');
     var modal = $(this).data('bs-target');
-    var all_notification="";
-    $(".notifications").each(function () {
-        if ($(this).is(":checked")) {
-            alert();
-            all_notification="1"
-        }
-    });
-    console.log(all_notification);
-return;
+
+
     $.ajax({
         url: `${base_url}check_rsvp_status`,
         type: 'GET',
-        data: {event_id:event_id,user_id:user_id,sync_id:sync_id,all_notification:all_notification},
+        data: {event_id:event_id,user_id:user_id,sync_id:sync_id},
         success: function (response) {
             var status=response.rsvp_status;
             // console.log(status);
