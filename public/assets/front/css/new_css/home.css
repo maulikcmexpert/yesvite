@@ -466,6 +466,7 @@ main {
   line-height: normal;
   color: var(--secondary-black);
   width: 100%;
+  display: inline-block;
 }
 
 .wall-creat-photo-poll-wrp {
