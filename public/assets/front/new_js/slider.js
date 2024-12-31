@@ -44,10 +44,6 @@ var swiper = new Swiper(".mySwiper", {
     loop:true,
     margin:10,
     nav:true,
-    navText: [
-      '<i class="fa fa-chevron-left"></i>', // Left arrow icon
-      '<i class="fa fa-chevron-right"></i>' // Right arrow icon
-    ],
     responsive:{
         0:{
             items:1
