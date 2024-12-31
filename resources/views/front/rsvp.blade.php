@@ -69,17 +69,20 @@
                                      <div class="event-detail">
                                          <h5>Event Details</h5>
                                          <div class="d-flex flex-wrap px-2">
-                                             <div class="d-flex align-items-center justify-content-between {{($i<= 3)?'w-100 mb-2':'w-100'}}">
-                                                @foreach($eventInfo['guest_view']['event_detail'] as $val)
-                                                <h6>{{$val}}</h6>
-                                                @php $i++; @endphp
-                                                @endforeach
-                                             </div>
-                                             <div class="d-flex align-items-center justify-content-between w-100">
-                                                 <h6>Adults & Kids</h6>
-                                                 <h6>Potluck Event</h6>
-                                             </div>
-                                         </div>
+                                            @php
+                                                $eventDetails = $eventInfo['guest_view']['event_detail'];
+                                                $chunkedDetails = array_chunk($eventDetails, 2); // Group items in pairs
+                                            @endphp
+                                        
+                                            @foreach($chunkedDetails as $pair)
+                                                <div class="d-flex align-items-center justify-content-between w-100">
+                                                    @foreach($pair as $val)
+                                                        <h6>{{ $val }}</h6>
+                                                    @endforeach
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        
                                      </div>
                                      @endif
                                      <div class="rsvp-hosted-by-date-time-wrp">
