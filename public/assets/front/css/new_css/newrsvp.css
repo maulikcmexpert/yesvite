@@ -209,6 +209,7 @@
     font-size: 16px;
     color: var(--secondryColor);
     margin-bottom: 0;
+    flex-basis: 50%;
 }
 
 .event-detail h6::after{
