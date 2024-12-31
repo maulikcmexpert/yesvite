@@ -1006,6 +1006,10 @@ display:none;}
     .rsvp-form .author-title h4{
         font-size: 24px;
     }
+    .rsvp-slider .rsvp-img {
+        border-radius: 10px;
+        height: 500px;
+    }
    
 }
 
