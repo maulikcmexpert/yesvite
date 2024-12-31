@@ -75,7 +75,7 @@ break;
 @endif
 @endforeach
 
-@foreach ( $contact_ids as $guest_user)
+@foreach ( $user_list as $guest_user)
 @php
 $counter++;
 if($counter > 4){
