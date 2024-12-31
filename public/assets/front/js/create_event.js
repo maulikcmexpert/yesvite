@@ -3795,10 +3795,11 @@ $(document).on("click", "#delete_invited_user_tel", function () {
     var userId = $(this).data("userid");
     if(is_contact == '1'){
         $('#contact_tel-'+userId).remove();
+        $('.user_tel-'+userId).prop("checked",false);
     }else{
         $('.user_id_tel-'+userId).remove();
+        checkbox.prop("checked", false);
     }
-    checkbox.prop("checked", false);
 
 
     var total_guest = $(".users-data.invited_user").length;
