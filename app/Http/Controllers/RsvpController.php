@@ -12,7 +12,8 @@ use App\Models\{
     EventGiftRegistry,
     EventPostImage,
     EventSetting,
-    User
+    User,
+    UserNotificationType
 };
 
 use App\Models\contact_sync;
@@ -468,8 +469,54 @@ class RsvpController extends Controller
                 // dd($creatEventPost);
             }
 
-            if($request->input['all_notification']=="1"){
+            if($request->input['notifications'][0]=="1"){
+                $data = [
+                    [
+                        'type' => 'guest_rsvp',
+                        'push' => '1',
+                        'email' => '1',
+                    ],
+                    [
+                        'type' => 'private_message',
+                        'push' => '1',
+                        'email' => '1',
+                    ],
+                    [
+                        'type' => 'potluck_activity',
+                        'push' => '1',
+                        'email' => '1',
+                    ],
+                    [
+                        'type' => 'invitations',
+                        'push' => '1',
+                        'email' => '1',
+                    ],
+                    [
+                        'type' => 'wall_post',
+                        'push' => '1',
+                        'email' => '1',
+                    ],
+                ];
 
+                $checkNotificationSetting =  UserNotificationType::where('user_id', $userId)->count();
+            if ($checkNotificationSetting  == 0) {
+                foreach ($data as $val) {
+                    $setNotification = new UserNotificationType();
+                    $setNotification->user_id = $userId;
+                    $setNotification->type = $val['type'];
+                    $setNotification->push = $val['push'];
+                    $setNotification->email = $val['email'];
+                    $setNotification->save();
+                }
+            } else {
+
+                foreach ($data as $value) {
+                    $updateNotification = UserNotificationType::where(['type' => $value['type'], 'user_id' => $userId])->first();
+                    $updateNotification->push = $value['push'];
+                    $updateNotification->email = $value['email'];
+                    $updateNotification->save();
+                }
+            }
             }
 
             $notificationParam = [
