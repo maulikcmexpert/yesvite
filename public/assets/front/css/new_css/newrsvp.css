@@ -955,7 +955,7 @@ display:none;}
 }
 
 .rsvp-no-modal .modal-title span{
-    color: #EA4335;
+    color: #EA4335 !important;
 }
 
 #rsvp-guest-list-modal .sucess-yes{
