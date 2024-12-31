@@ -526,7 +526,7 @@ class RsvpController extends Controller
        $user_id=decrypt($request->input('user_id'));
        $event_id=decrypt($request->input('event_id'));
        $sync_id=decrypt($request->input('event_id'));
-       dd($request);
+       dd($sync_id);
 
     $rsvp = EventInvitedUser::whereHas('user', function ($query) {
         $query->where('app_user', '1');
