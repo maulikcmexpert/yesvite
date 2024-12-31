@@ -85,7 +85,7 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     e.preventDefault();
     var user_id=$(this).data('user_id');
     var event_id=$(this).data('event_id');
-    var sync_id=$(this).data('sync_ids');
+    var sync_id=$(this).data('sync_id');
     var modal = $(this).data('bs-target');
     $.ajax({
         url: `${base_url}check_rsvp_status`,
