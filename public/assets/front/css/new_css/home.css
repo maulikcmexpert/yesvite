@@ -436,7 +436,7 @@ main {
 }
 
 .new-main-content input {
-  background: transparent;
+  /* background: transparent; */
   border: 1px solid var(--border);
   height: 45px;
   border-radius: 16px;
