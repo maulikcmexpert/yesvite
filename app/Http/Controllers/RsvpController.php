@@ -343,7 +343,6 @@ class RsvpController extends Controller
                     $sync_contact_user_id="";
                     $user_email=User::where('id',$user_id)->first();
                     if($user_email==""){
-                        dd($user_id);
                         $user_sync_email=contact_sync::where('id',$user_id)->first();
                         $email=$user_sync_email->email;
                         $sync_contact_user_id=$user_id;
@@ -352,6 +351,7 @@ class RsvpController extends Controller
                         $email=$user_email->email;
                     }
                    
+                    dd($email,$sync_contact_user_id);
                     
                     return view('layout', compact(
                         'title',
