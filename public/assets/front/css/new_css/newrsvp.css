@@ -972,6 +972,9 @@ display:none;}
 .rsvp-no-msg-wrp{
     border: 1px solid var(--border);
     border-radius: 20px;
+    max-width: 600px;
+    margin: 0px auto;
+    margin-top: 20px;
 }
 
 .rsvp-no-msg-wrp h3{
@@ -993,11 +996,12 @@ display:none;}
     line-height: normal;
     color: var(--green);
     padding: 10px;
-    border-radius: 16px;
+    border-radius: 10px;
     border: 1px solid rgba(35, 170, 38, 0.5);
     display: flex;
     align-items: center;
     gap: 5px;
+    background-color: #F0FFE8;
 }
 
 .rsvp-no-msg-wrp p i{
