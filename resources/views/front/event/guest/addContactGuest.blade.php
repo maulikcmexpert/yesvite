@@ -36,7 +36,7 @@
         </div>
     </div>
     @elseif ($guest_user['userdata']['prefer_by']=="phone")
-    <div class="users-data invited_user" data-id="sync_"{{$guest_user['userdata']['sync_id']}} id="contact_tel-{{$guest_user['userdata']['sync_id']}}">
+    <div class="users-data invited_user" data-id={{"sync_".$guest_user['userdata']['sync_id']}} id="contact_tel-{{$guest_user['userdata']['sync_id']}}">
         <div class="d-flex align-items-start">
             <div class="contact-img">
                 @if ($guest_user['userdata']['profile'] != '')
