@@ -1066,10 +1066,11 @@ class EventController extends Controller
 
     public function removeUserId(Request $request)
     {
-        dd($request->input('is_contact'));
-        // if(isset($request->input('is_contact')) && $request->input('is_contact') == '1'){
+        $is_contact = $request->input('is_contact');
+        if($is_contact == '1'){
             $userIds = session()->get('contact_ids');
             $userId = $request->input('user_id');
+            dd($userId);
             foreach ($userIds as $key => $value) {
                 if ($value['sync_id'] == $userId) {
                     unset($userIds[$key]);
@@ -1081,7 +1082,7 @@ class EventController extends Controller
             $user_list = Session::get('contact_ids');
             return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true]);
 
-        // }else{
+        }else{
             $userIds = session()->get('user_ids');
             $userId = $request->input('user_id');
             foreach ($userIds as $key => $value) {
@@ -1094,7 +1095,7 @@ class EventController extends Controller
             Session::save();
             $user_list = Session::get('user_ids');
             return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(),]);
-        // }
+        }
     }
 
     public function deleteSession(Request $request)
