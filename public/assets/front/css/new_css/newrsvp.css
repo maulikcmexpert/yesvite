@@ -991,6 +991,12 @@ display:none;}
     }
 }
 
+@media only screen and (max-width:1199px){
+    .rsvp-slider .rsvp-img {
+        border-radius: 10px;
+        height: 500px;
+    }
+}
 
 @media only screen and (max-width:991px){
     .rsvp-slider.owl-carousel .owl-nav .owl-next {
@@ -999,6 +1005,7 @@ display:none;}
     .rsvp-form .author-title h4{
         font-size: 24px;
     }
+   
 }
 
 @media only screen and (max-width:767px){
