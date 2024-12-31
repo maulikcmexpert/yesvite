@@ -63,6 +63,7 @@
     width: 100%;
     top: 50%;
     max-width: 100%;
+    left: 0;
 }
 
 .rsvp-slider.owl-carousel .owl-nav .owl-prev{
