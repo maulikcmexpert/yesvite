@@ -62,7 +62,9 @@ $(document).ready(function () {
         search_name = $(this).val();
         page = 1;
         $("#yesviteUser").html("");
-        loadMoreData(page, search_name);
+        // loadMoreData(page, search_name);
+        loadMoreData(search_name,type=null,offset=null,limit=null);
+
     });
 
     $(document).on("keyup", ".search_group", function () {
