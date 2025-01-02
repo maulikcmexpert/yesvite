@@ -271,7 +271,6 @@ class ContactController extends Controller
             ];
             $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
         }
-        dd(count($yesvite_phone));
                 return view('front.ajax_phones', compact('yesvite_phone'))->render();
             }
             return response()->json(['error' => 'Invalid request'], 400);
