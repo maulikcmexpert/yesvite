@@ -258,7 +258,7 @@ class ContactController extends Controller
             //     });
             // })
 
-        dd(count($getAllContacts));
+        // dd(count($getAllContacts));
         $yesvite_phone = [];
         foreach ($getAllContacts as $user) {
             $yesviteUserPhoneDetail = [
