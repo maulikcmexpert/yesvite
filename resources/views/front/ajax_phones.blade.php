@@ -7,11 +7,22 @@
 </div>
 @else
 @foreach($yesvite_phone as $value)
+       @php
+            $initials = '';
+            $fontColor = '';
+            if (!empty($value->firstname) && !empty($value->lastname)) {
+                $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
+                $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
+            }
+            @endphp
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
-            <img src="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/43_profile.jpeg?v=89" alt="contact-img">
-            <h5 class="fontcolorH">HP</h5>
+                    @if($value->profile != null||$value->profile !="")
+                    <img src="{{$value->profile}}" alt="contact-img">
+                    @else
+                    <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
+                    @endif
         </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
