@@ -72,8 +72,13 @@
                                     </ul>
                                 </div>
                                 @endif
+                                <div class="popular-list">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <h5>Groups</h5>
+                                        <a href="#" class="see_all_group">See All</a>
+                                    </div>
+                                </div>
                                 <div class="user-contacts group_list group_search_list">
-        
                                     <div class="group-card added_group16 listgroups" data-id="16">
                                         <div class="view_members" data-id="16">
                                             <h4>test grp 1</h4>
