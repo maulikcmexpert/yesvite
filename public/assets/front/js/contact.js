@@ -27,7 +27,7 @@ $(document).ready(function () {
     var base_url=$('#base_url').val();
     var busy1 = false;
     
-    var limit = 4;
+    var limit = 6;
     var offset = 0;
  
 
