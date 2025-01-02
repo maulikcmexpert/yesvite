@@ -990,10 +990,10 @@ $user['coins']=$user->coins;
                 if (!empty($userExists)) {
                     // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                    return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
+                    return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1,"is_yesvite"=>1]);
                 }
-                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
+                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0 ];
+                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0,"is_yesvite"=>1]);
             }
         }else{
             $user = contact_sync::where('id', $userId)->first();
@@ -1003,6 +1003,7 @@ $user['coins']=$user->coins;
             $isChecked = $request->input('is_checked');
             // $userIds = session()->get('user_ids', []);
             $userIds = session()->get('contact_ids', []);
+           
     
             if (isset($useremail) && $useremail != "") {
                 $user_invited_by = $useremail;
@@ -1038,13 +1039,13 @@ $user['coins']=$user->coins;
                 session()->put('contact_ids', $userIds);
                 Session::save();
                 $user_list = Session::get('contact_ids');
-                // dd($user_list);
+        
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                    return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1]);
+                    return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1,"is_phone"=>1]);
                 }
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-                return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0]);
+                return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0,"is_phone"=>1]);
             }
         }
     }
@@ -1079,7 +1080,7 @@ $user['coins']=$user->coins;
             session()->put('contact_ids', $users);
             Session::save();
             $user_list = Session::get('contact_ids');
-            return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true]);
+            return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true,'is_phone'=>1]);
 
         }else{
             $userIds = session()->get('user_ids');
@@ -1093,7 +1094,7 @@ $user['coins']=$user->coins;
             session()->put('user_ids', $users);
             Session::save();
             $user_list = Session::get('user_ids');
-            return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(),]);
+            return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(),'is_yesvite'=>1]);
         }
     }
 
