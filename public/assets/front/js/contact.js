@@ -2,7 +2,7 @@ $(document).ready(function () {
     var base_url = $("#base_url").val();
 
     // var page = 1;
-    var limit = 4;
+    var limit = 6;
     var offset = 0;
 
     var base_url=$('#base_url').val();
@@ -16,7 +16,8 @@ $(document).ready(function () {
             if (scrollTop + elementHeight >= scrollHeight) {
                 busy1 = true;
                 offset += limit;
-            loadMoreData(page, search_name,type="phone");
+                $type="phone";
+            loadMoreData(page, search_name,type,offset,limit);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
@@ -78,14 +79,16 @@ $(document).ready(function () {
         loadMorePhones(page, search_phone);
     });
 
-    function loadMoreData(page, search_name,$type) {
+    function loadMoreData(page, search_name,type,offset,limit) {
         $.ajax({
             url: base_url + "contacts/load?page=" + page,
             type: "POST",
             data: {
                 search_name: search_name,
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
-                type:type
+                type:type,
+                offset:offset,
+                limit:limit
             },
             beforeSend: function () {
                 $("#loader").show();
