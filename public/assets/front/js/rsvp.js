@@ -153,9 +153,17 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
 
    
   function initMap() {
+    // Create the map
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: 23.0293709, lng: 72.4999604 },
       zoom: 10,
+    });
+
+    // Create the marker
+    const marker = new google.maps.Marker({
+      position: { lat: 23.0293709, lng: 72.4999604 },
+      map: map,
+      title: "test location", // Optional: adds a tooltip on hover
     });
   }
 
