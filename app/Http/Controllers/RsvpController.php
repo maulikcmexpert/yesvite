@@ -387,8 +387,8 @@ class RsvpController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-
+        {
+            dd($request);
         $userId = decrypt($request->user_id);
         // dd($userId);
         $eventId = decrypt($request->event_id);
