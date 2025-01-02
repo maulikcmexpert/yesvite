@@ -154,9 +154,8 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
    
   function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 22.9975314, lng: 72.5632726 },
-      
-      zoom: 8,
+      center: { lat: 23.0293709, lng: 72.4999604 },
+      zoom: 5,
     });
   }
 
