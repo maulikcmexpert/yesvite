@@ -250,13 +250,13 @@ class ContactController extends Controller
                         ->skip($request->offset);
                 });
             })
-            ->when($request->search_name != ''||$request->search_name != null, function ($query) use ($searchName) {
-                $query->where(function ($q) use ($searchName) {
-                    $q->where('firstName', 'LIKE', '%' . $searchName . '%')
-                        ->orWhere('lastName', 'LIKE', '%' . $searchName . '%');
-                });
-            })
             ->get();
+            // ->when($request->search_name != ''||$request->search_name != null, function ($query) use ($searchName) {
+            //     $query->where(function ($q) use ($searchName) {
+            //         $q->where('firstName', 'LIKE', '%' . $searchName . '%')
+            //             ->orWhere('lastName', 'LIKE', '%' . $searchName . '%');
+            //     });
+            // })
 
         dd(count($getAllContacts));
         $yesvite_phone = [];
