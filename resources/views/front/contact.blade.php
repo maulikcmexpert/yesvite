@@ -227,7 +227,7 @@
                             <div class="product-scroll" id="product-scroll-groups">
 
                                 <div class="user-contacts" id="yesvitePhone">
-                                    {{-- @include('front.ajax_groups', ['yesviteGroups' => $yesviteGroups]) --}}
+                                    @include('front.ajax_phones', ['yesvite_phone' => $yesvite_phone])
                                 </div>
                             </div>
 

@@ -54,9 +54,9 @@ class ContactController extends Controller
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $yesviteUser = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
+        // $yesviteUser = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
         $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
-        $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->paginate(10);
+        // $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->paginate(10);
 
 
         $id = Auth::guard('web')->user()->id;
@@ -68,25 +68,25 @@ class ContactController extends Controller
         
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
-            ->where('id', '!=', $id)
-            ->where(['app_user' => '1'])
-            ->whereIn('email',$emails)
-            ->orderBy('firstname')
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
-            // ->when($request->search_user != '', function ($query) use ($search_user) {
-            //     $query->where(function ($q) use ($search_user) {
-            //         $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-            //             ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-            //     });
-            // })
-            ->get();
+                ->where('id', '!=', $id)
+                ->where(['app_user' => '1'])
+                ->whereIn('email',$emails)
+                ->orderBy('firstname')
+                // ->when($type != 'group', function ($query) use ($request) {
+                //     $query->where(function ($q) use ($request) {
+                //         $q->limit($request->limit)
+                //             ->skip($request->offset);
+                //     });
+                // })
+                // ->when($request->search_user != '', function ($query) use ($search_user) {
+                //     $query->where(function ($q) use ($search_user) {
+                //         $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                //             ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                //     });
+                // })
+                ->get();
 
-        // dd($yesvite_users);
+            // dd($yesvite_users);
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
@@ -110,6 +110,38 @@ class ContactController extends Controller
         }
 
 
+
+     
+        $getAllContacts = contact_sync::where('contact_id',$id)
+            // ->when($type != 'group', function ($query) use ($request) {
+            //     $query->where(function ($q) use ($request) {
+            //         $q->limit($request->limit)
+            //             ->skip($request->offset);
+            //     });
+            // })
+            // ->when($request->search_user != '', function ($query) use ($search_user) {
+            //     $query->where(function ($q) use ($search_user) {
+            //         $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+            //             ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+            //     });
+            // })
+            ->get();
+
+        // dd($yesvite_users);
+        $yesvite_phone = [];
+        foreach ($getAllContacts as $user) {
+            $yesviteUserPhoneDetail = [
+                'id' => $user->id,
+                'profile' => empty($user->profile) ? "" : $user->profile,
+                'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
+                'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
+                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+                'phone_number' => (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "",
+            ];
+            $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
+        }
+
+
         return view('layout', compact(
             'title',
             'page',
@@ -117,7 +149,7 @@ class ContactController extends Controller
             'js',
             'yesvite_user',
             'yesviteGroups',
-            'yesvitePhones',
+            'yesvite_phone',
             'groups'
 
         ));
