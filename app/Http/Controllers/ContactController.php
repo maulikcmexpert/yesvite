@@ -174,6 +174,7 @@ class ContactController extends Controller
             // $yesviteUser = $query->paginate(10);
             $id = Auth::guard('web')->user()->id;
             $emails = [];
+            dd($type);
             $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')->get();
             if($getAllContacts->isNotEmpty()){
                 $emails = $getAllContacts->pluck('email')->toArray();
