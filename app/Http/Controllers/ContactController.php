@@ -162,6 +162,7 @@ class ContactController extends Controller
         $searchName = $request->search_name;
         $type = $request->type;
 
+        dd($request);
         if ($request->ajax()) {
             // $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
