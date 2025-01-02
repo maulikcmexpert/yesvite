@@ -246,12 +246,12 @@ class ContactController extends Controller
             $getAllContacts = contact_sync::where('contact_id',$id)
             ->when($type == 'phone', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
-                    dd($request->limit,$request->offset);
                     $q->limit($request->limit)
                         ->skip($request->offset);
                 });
             })
             ->when($request->search_name != '', function ($query) use ($searchName) {
+                dd(1);
                 $query->where(function ($q) use ($searchName) {
                     $q->where('firstName', 'LIKE', '%' . $searchName . '%')
                         ->orWhere('lastName', 'LIKE', '%' . $searchName . '%');
