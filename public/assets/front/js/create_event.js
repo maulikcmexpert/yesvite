@@ -1263,7 +1263,7 @@ function delete_invited_user(userId,is_contact= '0') {
                 $('.sync_user_id_tel-'+userId).remove();
             }else{
                 $('#user_tel-'+userId).remove();
-                $('.user_id_tel-'+userId).remove();
+                $('.user_id_tel-'+userId).remove(); 
             }
             var total_guest = $(".users-data.invited_user").length;
             $("#event_guest_count").text(total_guest + " Guests");
