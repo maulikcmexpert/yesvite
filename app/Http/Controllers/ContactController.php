@@ -161,7 +161,7 @@ class ContactController extends Controller
         $id = Auth::guard('web')->user()->id;
         $searchName = $request->search_name;
         $type = $request->type;
-
+        dd($request);
         if ($request->ajax()) {
             // $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
 
