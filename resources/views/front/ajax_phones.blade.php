@@ -1,4 +1,4 @@
-{{dd($yesvite_phone)}}
+{{-- {{dd($yesvite_phone)}} --}}
 @if(empty($yesvite_phone))
 <div class="users-data">   
     <div class="md-5">
