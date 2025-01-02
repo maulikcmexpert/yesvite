@@ -174,7 +174,6 @@ class ContactController extends Controller
             // $yesviteUser = $query->paginate(10);
             $id = Auth::guard('web')->user()->id;
             $emails = [];
-            dd($type);
             $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')->get();
             if($getAllContacts->isNotEmpty()){
                 $emails = $getAllContacts->pluck('email')->toArray();
@@ -198,8 +197,29 @@ class ContactController extends Controller
             })
             // ->limit(6)
             ->get();
-            dd($yesvite_users);
-            return view('front.ajax_contacts', compact('yesvite_users'))->render();
+
+            $yesvite_user = [];
+            foreach ($yesvite_users as $user) {
+                if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                    continue;
+                }
+                $yesviteUserDetail = [
+                    'id' => $user->id,
+                    'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                    'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
+                    'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
+                    'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+                    'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
+                    'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
+                    'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
+                ];
+                // $yesviteUserDetail['app_user']  = $user->app_user;
+                // $yesviteUserDetail['visible'] =  $user->visible;
+                // $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
+                // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
+                $yesvite_user[] = (object)$yesviteUserDetail;
+            }
+            return view('front.ajax_contacts', compact('yesvite_user'))->render();
         }
         return response()->json(['error' => 'Invalid request'], 400);
     }
