@@ -3,18 +3,18 @@ $(document).ready(function () {
 
     var page = 1;
 
-    // $(".product-scroll").on("scroll", function () {
-    //     console.log("scrollTop = " + $(this).scrollTop());
-    //     console.log("innerHeight =" + $(this).innerHeight());
-    //     console.log("scrollHeight =" + this.scrollHeight);
-    //     // if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
-    //     if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
-    //         page++;
-    //         // loadMoreData(page, search_name);
-    //         // loadMoreGroups(page, search_group);
-    //         // loadMorePhones(page, search_phone);
-    //     }
-    // });
+    $(".product-scroll").on("scroll", function () {
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+        // if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+            if (scrollTop + elementHeight >= scrollHeight) {
+                alert();
+            // loadMoreData(page, search_name);
+            // loadMoreGroups(page, search_group);
+            // loadMorePhones(page, search_phone);
+        }
+    });
 
 
     var base_url=$('#base_url').val();
