@@ -32,6 +32,9 @@
                             <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive</button>
                         </li>
                         <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="group" aria-selected="false">Phone</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#group" type="button" role="tab" aria-controls="group" aria-selected="false">Groups</button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -208,6 +211,27 @@
                                     <a href="#" class="btn edit-contact" data-bs-toggle="modal" data-bs-target="#myModal">Edit Contact</a>
                                 </div>
                             </div>-->
+                        </div>
+                        <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="group-tab">
+                            <div class="position-relative">
+                                <input type="search" class="search_group" placeholder="Search Group">
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </div>
+
+
+                            <div class="product-scroll" id="product-scroll-groups">
+
+                                <div class="user-contacts" id="yesvitePhone">
+                                    {{-- @include('front.ajax_groups', ['yesviteGroups' => $yesviteGroups]) --}}
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="tab-pane fade" id="group" role="tabpanel" aria-labelledby="group-tab">
                             <div class="position-relative">
