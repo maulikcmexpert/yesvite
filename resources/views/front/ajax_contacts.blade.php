@@ -12,7 +12,7 @@
 $initials = '';
 $fontColor = '';
 if ($value->firstname !== null && $value->lastname !== null) {
-    {{dd($value->firstname)}}
+    dd($value->firstname);
     $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
     $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
 }
