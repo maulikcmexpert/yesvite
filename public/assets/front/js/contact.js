@@ -8,6 +8,7 @@ $(document).ready(function () {
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
             if (scrollTop + elementHeight >= scrollHeight) {
+                alert();
             // loadMoreData(page, search_name);
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
