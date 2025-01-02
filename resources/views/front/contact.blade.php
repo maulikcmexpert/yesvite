@@ -54,7 +54,7 @@
                                 </span>
                             </div>
                             <div class="product-scroll" id="product-scroll">
-                                @if($user->groups->isNotEmpty())
+                                @if(!empty($user->groups))
                                 <div class="popular-list">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                                         <h5>Popular group lists</h5>
