@@ -467,109 +467,40 @@ class RsvpController extends Controller
                 // dd($creatEventPost);
             }
 
-            if($request->rsvp_status=="1"){
-                if(!empty($request->input('notifications')) &&$request->input('notifications')[0]=="1"){
-                    $data = [
-                        [
-                            'type' => 'guest_rsvp',
-                            'push' => '1',
-                            'email' => '1',
-                        ],
-                        [
-                            'type' => 'private_message',
-                            'push' => '1',
-                            'email' => '1',
-                        ],
-                        [
-                            'type' => 'potluck_activity',
-                            'push' => '1',
-                            'email' => '1',
-                        ],
-                        [
-                            'type' => 'invitations',
-                            'push' => '1',
-                            'email' => '1',
-                        ],
-                        [
-                            'type' => 'wall_post',
-                            'push' => '1',
-                            'email' => '1',
-                        ],
-                    ];
-    
-                    $checkNotificationSetting =  UserNotificationType::where('user_id', $userId)->count();
-                if ($checkNotificationSetting  == 0) {
-                    foreach ($data as $val) {
-                        $setNotification = new UserNotificationType();
-                        $setNotification->user_id = $userId;
-                        $setNotification->type = $val['type'];
-                        $setNotification->push = $val['push'];
-                        $setNotification->email = $val['email'];
-                        $setNotification->save();
+            if($request->rsvp_status=="1"){      
+                if($sync_id!=""||$sync_id!=null){
+                    $updateUser = EventInvitedUser::where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
+                    if ($updateUser != null) {
+                        $updateUser->notification_on_off = "1";
+                        $updateUser->save();
                     }
-                } else {
-    
-                    foreach ($data as $value) {
-                        $updateNotification = UserNotificationType::where(['type' => $value['type'], 'user_id' => $userId])->first();
-                        $updateNotification->push = $value['push'];
-                        $updateNotification->email = $value['email'];
-                        $updateNotification->save();
+
+                }else{
+                    $updateUser = EventInvitedUser::where(['user_id' => $userId,'is_co_host'=>'0','event_id' => $eventId])->first();
+                    if ($updateUser != null) {
+                        $updateUser->notification_on_off = "1";
+                        $updateUser->save();
                     }
                 }
-                }
-    
             }
 
-            if($request->rsvp_status=="0"){
-                    $data = [
-                        [
-                            'type' => 'guest_rsvp',
-                            'push' => '0',
-                            'email' => '0',
-                        ],
-                        [
-                            'type' => 'private_message',
-                            'push' => '0',
-                            'email' => '0',
-                        ],
-                        [
-                            'type' => 'potluck_activity',
-                            'push' => '0',
-                            'email' => '0',
-                        ],
-                        [
-                            'type' => 'invitations',
-                            'push' => '0',
-                            'email' => '0',
-                        ],
-                        [
-                            'type' => 'wall_post',
-                            'push' => '0',
-                            'email' => '0',
-                        ],
-                    ];
-    
-                    $checkNotificationSetting =  UserNotificationType::where('user_id', $userId)->count();
-                if ($checkNotificationSetting  == 0) {
-                    foreach ($data as $val) {
-                        $setNotification = new UserNotificationType();
-                        $setNotification->user_id = $userId;
-                        $setNotification->type = $val['type'];
-                        $setNotification->push = $val['push'];
-                        $setNotification->email = $val['email'];
-                        $setNotification->save();
-                    }
-                } else {
-    
-                    foreach ($data as $value) {
-                        $updateNotification = UserNotificationType::where(['type' => $value['type'], 'user_id' => $userId])->first();
-                        $updateNotification->push = $value['push'];
-                        $updateNotification->email = $value['email'];
-                        $updateNotification->save();
-                    }
-                }
-    
-            }
+            // if($request->rsvp_status=="0"){
+
+            //     if($sync_id!=""||$sync_id!=null){
+            //         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            //         })->where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
+            //     }else{
+            //         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            //             $query->where('app_user', '1');
+            //         })->where(['user_id' => $userId, 'is_co_host'=>'0','event_id' => $eventId])->first();
+            //     }
+
+            //     $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+            //     if ($updateUser != null) {
+            //         $updateUser->notification_on_off = $input['status'];
+            //         $updateUser->save();
+            //     }
+            // }
         
             $notificationParam = [
 
