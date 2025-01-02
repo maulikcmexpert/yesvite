@@ -243,7 +243,7 @@ class ContactController extends Controller
             //     }
 
             //     $yesvitePhones = $query->paginate(10);
-            $getAllContacts = contact_sync::where('contact_id',$id)->limit(10)
+            $getAllContacts = contact_sync::where('contact_id',$id)
             ->when($type = 'yesvite', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
                     $q->limit($request->limit)
