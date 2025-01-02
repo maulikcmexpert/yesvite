@@ -97,7 +97,7 @@
                                             Download Demo CSV
                                         </a>
                                     </div>
-                                    @if($yesvitePhones->isEmpty())
+                                    @if(empty($yesvite_phone))
                                     <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="csv_file" class="pt-2">
