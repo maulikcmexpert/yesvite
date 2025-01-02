@@ -197,7 +197,7 @@ class ContactController extends Controller
             })
             // ->limit(6)
             ->get();
-            // dd($yesviteUser);
+            dd($yesvite_users);
             return view('front.ajax_contacts', compact('yesvite_users'))->render();
         }
         return response()->json(['error' => 'Invalid request'], 400);
