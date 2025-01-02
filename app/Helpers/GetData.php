@@ -964,6 +964,8 @@ function getInvitedUsersList($eventId)
             }
         }
     }
+    $eventDetail['all_invited_users'] = array_merge($eventDetail['invited_guests'], $eventDetail['invited_user_id']);
+
     return $eventDetail;
 }
 function getDeferentBetweenTime($time1, $time2)

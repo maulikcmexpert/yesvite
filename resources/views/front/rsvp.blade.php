@@ -201,12 +201,12 @@
                                      </div>
                                      <div class="guest-user-list rsvp-guest-user-list-wrp cmn-card">
                                          <div class="rsvp-guest-user-list-title">
-                                           <h5 class="heading">Guest List ({{ count($getInvitedusers['invited_user_id'] ?? []) + count($getInvitedusers['invited_guests'] ?? []) }}
+                                           <h5 class="heading">Guest List ({{ count($getInvitedusers['all_invited_users'] ?? []) }}
                                             Guests)</h5>
                                            <a href="#" data-bs-toggle="modal" data-bs-target="#rsvp-guest-list-modal">See All</a>
                                          </div>
                                          <div>
-                                            @foreach ($getInvitedusers['invited_user_id'] as $guest_data )
+                                    @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
                                             <div class="guest-user-box">
                                               <div class="guest-list-data">
                                                 <a href="#" class="guest-img">
@@ -328,8 +328,8 @@
                                               </div>
                                               
                                             </div>
-                                            @endforeach
-                                            @foreach ($getInvitedusers['invited_guests'] as $guest_data )
+                                    @endforeach
+                                            {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
                                             <div class="guest-user-box">
                                               <div class="guest-list-data">
                                                 <a href="#" class="guest-img">
@@ -436,7 +436,6 @@
                                                          @endphp
                                                         <h5 class="ms-auto">{{$read}}{{$rsvp}}</h5>
 
-                                                      {{-- <h5 class="ms-auto">Read, RSVP’d</h5> --}}
                                                     </div>
                                                 </div>
                                                   <div class="no-reply">
@@ -453,7 +452,7 @@
                                               </div>
                                               
                                             </div>
-                                            @endforeach
+                                            @endforeach --}}
                                            {{-- <div class="guest-user-box">
                                              <div class="guest-list-data">
                                                <a href="#" class="guest-img">
@@ -946,7 +945,7 @@
           <div class="modal-header">
               <div class="d-flex align-items-center">
                   <div>
-                    <h4 class="modal-title" id="aboutsuccessLabel">Guest List ({{ count($getInvitedusers['invited_user_id'] ?? []) + count($getInvitedusers['invited_guests'] ?? []) }}
+                    <h4 class="modal-title" id="aboutsuccessLabel">Guest List ({{ count($getInvitedusers['all_invited_users']?? []) }}
                         Guests)</h4>
                   </div>
               </div>
@@ -954,7 +953,7 @@
           </div>
           <div class="modal-body">
             <div class="guest-user-list rsvp-guest-user-list-wrp">
-                @foreach ($getInvitedusers['invited_user_id'] as $guest_data )
+                @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
 
                     <div class="guest-user-box">
                         <div class="guest-list-data">
@@ -1009,7 +1008,7 @@
                     </div>
                 @endforeach
 
-                @foreach ($getInvitedusers['invited_guests'] as $guest_data )
+                {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
 
                 <div class="guest-user-box">
                     <div class="guest-list-data">
@@ -1067,7 +1066,7 @@
                     </div>
                     
                 </div>
-            @endforeach
+            @endforeach --}}
               {{-- <div class="guest-user-box">
                 <div class="guest-list-data">
                   <a href="#" class="guest-img">
