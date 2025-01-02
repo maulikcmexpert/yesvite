@@ -1,12 +1,12 @@
-@if($yesviteUser->isEmpty())
+@if(empty($yesvite_user))
 <div class="users-data">
     <div class="md-5">
         <h5>No Records Found..</h5>
     </div>
 </div>
 @endif
-@if (!empty($yesviteUser))
-        @foreach($yesviteUser as $value)
+@if (!empty($yesvite_user))
+        @foreach($yesvite_user as $value)
             @php
             $initials = '';
             $fontColor = '';
@@ -16,10 +16,10 @@
             }
             @endphp
         <div class="users-data">
-            <div class="d-flex align-items-start">
+            <div class="d-flex align-items-start">  
                 <div class="contact-img">
-                    @if($value->profile !== null)
-                    <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
+                    @if($value->profile != null||$value->profile !="")
+                    <img src="{{$value->profile}}" alt="contact-img">
                     @else
                     <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
                     @endif

@@ -1,19 +1,29 @@
-@if($yesvitePhones->isEmpty())
-<div class="users-data">
-    
+{{-- {{dd($yesvite_phone)}} --}}
+@if(empty($yesvite_phone))
+<div class="users-data">   
     <div class="md-5">
-<!-- 
-        <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="csv_file">
-            <button type="submit">Import CSV</button>
-        </form> -->
         <h5>No Records Found..</h5>
     </div>
-</div>@else
-@foreach($yesvitePhones as $value)
+</div>
+@else
+@foreach($yesvite_phone as $value)
+       @php
+            $initials = '';
+            $fontColor = '';
+            if (!empty($value->firstname) && !empty($value->lastname)) {
+                $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
+                $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
+            }
+            @endphp
 <div class="users-data">
     <div class="d-flex align-items-start">
+        <div class="contact-img">
+                    @if($value->profile != null||$value->profile !="")
+                    <img src="{{$value->profile}}" alt="contact-img">
+                    @else
+                    <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
+                    @endif
+        </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
 
