@@ -17,7 +17,7 @@
                     <nav class="breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
+                            {{-- <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li> --}}
                             <li class="breadcrumb-item active" aria-current="page">Contacts</li>
                         </ol>
                     </nav>
