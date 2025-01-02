@@ -70,7 +70,7 @@
                                 </div>
                                 @endif
                                 <div class="user-contacts" id="yesviteUser">
-                                    @include('front.ajax_contacts', ['yesviteUser' => $yesviteUser])
+                                    @include('front.ajax_contacts', ['yesvite_user' => $yesvite_user])
                                 </div>
                             </div>
                             <div id="loader" style="display: none;">
