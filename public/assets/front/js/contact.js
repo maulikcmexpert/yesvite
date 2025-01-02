@@ -2,15 +2,15 @@ $(document).ready(function () {
     var base_url = $("#base_url").val();
 
     // var page = 1;
-    var limit = 6;
-    var offset = 0;
-    var offset = 0;
-    var offset = 0;
+  
+
 
     var base_url=$('#base_url').val();
     var busy1 = false;
     var busy2=false;
     $("#product-scroll").on("scroll", function () {
+        var limit = 6;
+        var offset = 0;
         if (busy1) return; 
 
         var scrollTop = $(this).scrollTop(); 
@@ -28,6 +28,8 @@ $(document).ready(function () {
     });
 
     $("#product-scroll-phone").on("scroll", function () {
+        var limit = 6;
+        var offset = 0;
         if (busy2) return; 
 
         var scrollTop = $(this).scrollTop(); 
@@ -37,7 +39,7 @@ $(document).ready(function () {
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
-                loadMorePhones(search_name=null,type,offset1,limit);
+                loadMorePhones(search_name=null,type,offset,limit);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
