@@ -16,7 +16,7 @@ $(document).ready(function () {
             if (scrollTop + elementHeight >= scrollHeight) {
                 busy1 = true;
                 offset += limit;
-                $type="phone";
+                var type="phone";
             loadMoreData(type,offset,limit);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
