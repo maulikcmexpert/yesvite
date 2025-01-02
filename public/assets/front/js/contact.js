@@ -12,9 +12,8 @@ $(document).ready(function () {
     var offset = 0;
     var offset1 = 0;
 
-    $("#product-scroll").on("scroll", function () {
+$("#product-scroll").on("scroll", function () {
         if (busy1) return; 
-
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
@@ -23,13 +22,10 @@ $(document).ready(function () {
                 offset += limit;
                 var type="yesvite";
             loadMoreData(search_name=null,type,offset,limit);
-            // function loadMoreData(page, search_name)
-            // loadMoreGroups(page, search_group);
-            // loadMorePhones(page, search_phone);
         }
-    });
+});
 
-    $("#product-scroll-phone").on("scroll", function () {
+$("#product-scroll-phone").on("scroll", function () {
   
         if (busy2) return; 
 
@@ -45,33 +41,30 @@ $(document).ready(function () {
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
         }
-    });
+});
 
-  
-
-
-    $(document).on("keyup", ".search_name", function () {
+$(document).on("keyup", ".search_name", function () {
         search_name = $(this).val();
         page = 1;
         $("#yesviteUser").html("");
         // loadMoreData(page, search_name);
         loadMoreData(search_name,type=null,offset=null,limit=null);
 
-    });
+});
 
-    $(document).on("keyup", ".search_group", function () {
+$(document).on("keyup", ".search_group", function () {
         search_group = $(this).val();
         page = 1;
         $("#yesviteGroups").html("");
         loadMoreGroups(page, search_group);
-    });
+});
 
-    $(document).on("keyup", ".search_phone", function () {
+$(document).on("keyup", ".search_phone", function () {
         search_name = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
         loadMorePhones(search_name,type=null,offset1=null,limit=null);
-    });
+});
 
     function loadMoreData(search_name,type,offset,limit) {
         $.ajax({
