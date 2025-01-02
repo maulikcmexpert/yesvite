@@ -81,7 +81,7 @@ $(document).ready(function () {
 
     function loadMoreData(page, search_name,type,offset,limit) {
         $.ajax({
-            url: base_url + "contacts/load?page=" + page,
+            url: base_url + "contacts/load",
             type: "POST",
             data: {
                 search_name: search_name,
