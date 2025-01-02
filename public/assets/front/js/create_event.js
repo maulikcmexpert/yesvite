@@ -1310,7 +1310,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $(".inivted_user_list").append(response.view);
                 $(".user-list-responsive").empty();
                 $(".user-list-responsive").html(response.responsive_view);
-                guest_counter(0,15);
+                guest_counter(0,max_guest);
                 // var length = responsive_invite_user();
                 // if(length < 4){
                 //     $('.all_user_list').remove();
@@ -2981,7 +2981,13 @@ function savePage1Data(close = null) {
         handleActiveClass('.li_guest');
         $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
         var type="all"
-        get_user(type);
+        const stepVal= $("#CheckCuurentStep").val();
+        // alert(stepVal);
+        if(stepVal=="0"){
+            get_user(type);
+        }
+        $("#CheckCuurentStep").val("1");
+        
         final_step = 3;
 
     }
@@ -3588,7 +3594,7 @@ $(document).on("click", ".li_event_details", function () {
                         console.log(eventData);
                         
                         var type="all"
-                        get_user(type);
+                        // get_user(type);
                         // $('#sidebar_select_design_category').css('display','none');
                         $(".step_1").show();
                         // $(".step_2").css("display", "none");
@@ -3654,7 +3660,7 @@ $(document).on("click", ".li_event_detail", function () {
         $('.current_step').text('2 of 4');
         console.log(eventData);
         var type="all"
-        get_user(type);
+        // get_user(type);
         $(".step_1").show();
         active_responsive_dropdown('drop-down-event-detail');
         handleActiveClass(this);
@@ -3704,7 +3710,7 @@ $(document).on("click", ".li_guest", function () {
         active_responsive_dropdown('drop-down-event-guest');
         handleActiveClass('.li_guest');
         var type="all"
-        get_user(type);
+        // get_user(type);
     }
 });
 
@@ -5175,6 +5181,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user-list-responsive").html(response.responsive_view);
             console.log(response);
             $(".inivted_user_list").append(response.view);
+            var max_guest =  $("#coins").val();
             // var length = responsive_invite_user();
             // $(".user-list-responsive").html(response.responsive_view);
             // if(length < 4){
@@ -5186,7 +5193,7 @@ $(document).on("click", ".invite_group_member", function () {
             //     // add_user_counter();
             // }
             // $(".inivted_user_list").html('');
-                guest_counter(0,15);
+                guest_counter(0,max_guest);
 
                 toggleSidebar();
                 $("#YesviteUserAll").html('');
