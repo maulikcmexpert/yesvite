@@ -1,12 +1,12 @@
-@if($yesviteUser->isEmpty())
+@if($yesvite_user->isEmpty())
 <div class="users-data">
     <div class="md-5">
         <h5>No Records Found..</h5>
     </div>
 </div>
 @endif
-@if (!empty($yesviteUser))
-        @foreach($yesviteUser as $value)
+@if (!empty($yesvite_user))
+        @foreach($yesvite_user as $value)
             @php
             $initials = '';
             $fontColor = '';
