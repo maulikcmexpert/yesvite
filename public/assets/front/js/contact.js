@@ -67,10 +67,10 @@ $(document).ready(function () {
     });
 
     $(document).on("keyup", ".search_phone", function () {
-        search_phone = $(this).val();
+        search_name = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
-        loadMorePhones(page, search_phone);
+        loadMorePhones(search_name,type=null,offset1=null,limit=null);
     });
 
     function loadMoreData(search_name,type,offset,limit) {
