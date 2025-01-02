@@ -843,14 +843,14 @@
                                     <div class="rsvp-yes-notification-wrp">
                                         <h5>Notifications</h5>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" type="checkbox" name="notifications[]"  value="1" id="flexCheckDefault">
+                                            <input class="form-check-input notifications" type="checkbox" name="notifications[]"  value="1" id="flexCheckDefault" checked>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 All event activity <br>
                                                 (Wall posts, potluck activity,  photo uploads, event updates, messages)
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1">
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 All event activity <br>
                                             </label>
