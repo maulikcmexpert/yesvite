@@ -16,6 +16,40 @@ $(document).ready(function () {
         }
     });
 
+
+    var base_url=$('#base_url').val();
+    var busy1 = false;
+    
+    var limit = 4;
+    var offset = 0;
+ 
+
+    $('#yesviteUser').scroll(function () {
+        if (busy1) return; 
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+        if (scrollTop + elementHeight >= scrollHeight) {
+            busy1 = true;
+            offset += limit;
+            alert();
+            $('.loader').css('display','block');    
+    
+            $.ajax({
+                url: `${base_url}fetch_past_event`,
+                type: 'GET',
+                data: { limit: limit, offset: offset3,current_month:current_month3},
+                success: function (response) {
+                     
+                },
+                error: function (xhr, status, error) {
+                    
+                }
+            });
+        }
+    });
+
+
     $(document).on("keyup", ".search_name", function () {
         search_name = $(this).val();
         page = 1;
