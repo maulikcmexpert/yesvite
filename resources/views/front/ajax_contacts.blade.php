@@ -16,9 +16,9 @@
             }
             @endphp
         <div class="users-data">
-            <div class="d-flex align-items-start">
+            <div class="d-flex align-items-start">  
                 <div class="contact-img">
-                    @if($value->profile !== null)
+                    @if($value->profile != null||$value->profile !="")
                     <img src="{{$value->profile}}" alt="contact-img">
                     @else
                     <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
