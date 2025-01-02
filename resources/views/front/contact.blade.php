@@ -38,7 +38,7 @@
                             <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#group" type="button" role="tab" aria-controls="group" aria-selected="false">Groups</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Upload CSV</button>
+                            <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phonei" type="button" role="tab" aria-controls="phone" aria-selected="false">Upload CSV</button>
                         </li>
 
                     </ul>
