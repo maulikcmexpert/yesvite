@@ -279,11 +279,11 @@
                             </div>
                             <div class="product-scroll" id="product-scroll-groups">
                                 <div class="user-contacts" id="yesvitePhones">
-                                    <div class="mb-3 mt-2">
+                                    {{-- <div class="mb-3 mt-2">
                                         <a href="{{ asset('assets/front/csv/demo.xlsx') }}" class="cmn-btn" download>
                                             Download Demo CSV
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     @if(empty($yesvite_phone))
                                     <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
