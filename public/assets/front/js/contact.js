@@ -132,8 +132,11 @@ $(document).ready(function () {
             url: base_url + "contacts/loadphones",
             type: "POST",
             data: {
-                search_phone: search_phone,
+                search_name: search_name,
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+                type:type,
+                offset:offset,
+                limit:limit
             },
             beforeSend: function () {
                 $("#loader").show();
