@@ -6,8 +6,7 @@
 </div>
 @else
 @if ($yesviteUser->isNotEmpty())
-    
-
+    {{dd($yesviteUser)}}
 @foreach($yesviteUser as $value)
 <?php
 $initials = '';
