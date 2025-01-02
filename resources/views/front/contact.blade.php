@@ -80,7 +80,7 @@
                                 <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:48px;height:48px;">
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
+                        <div class="tab-pane fade" id="phonei" role="tabpanel" aria-labelledby="phone-tab">
                             <div class="position-relative">
                                 <!-- <input type="search" class="search_phone" placeholder="Search Phone"> -->
                                 <!-- <span>
