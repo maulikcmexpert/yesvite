@@ -1,15 +1,23 @@
 $(document).ready(function () {
     var base_url = $("#base_url").val();
 
-    var page = 1;
+    // var page = 1;
+    var limit = 4;
+    var offset = 0;
 
+    var base_url=$('#base_url').val();
+    var busy1 = false;
     $("#product-scroll").on("scroll", function () {
+        if (busy1) return; 
+
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
             if (scrollTop + elementHeight >= scrollHeight) {
-                alert();
-            // loadMoreData(page, search_name);
+                busy1 = true;
+                offset += limit;
+            loadMoreData(page, search_name,type="phone");
+            // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
         }
@@ -70,13 +78,14 @@ $(document).ready(function () {
         loadMorePhones(page, search_phone);
     });
 
-    function loadMoreData(page, search_name) {
+    function loadMoreData(page, search_name,$type) {
         $.ajax({
             url: base_url + "contacts/load?page=" + page,
             type: "POST",
             data: {
                 search_name: search_name,
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+                type:type
             },
             beforeSend: function () {
                 $("#loader").show();
