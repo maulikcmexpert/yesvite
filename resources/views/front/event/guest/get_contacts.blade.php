@@ -84,7 +84,7 @@ if(isset($selected_user) && !empty($selected_user)){
     <div class="d-flex flex-column user_choice_group gap-2" data-id="user-{{$user->id}}">
         @if(isset($user->email)&&$user->email!="")
         <div class="right-note d-flex">
-            <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
+            <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
                 name="email_invite[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}" data-contact = "1"
                 value="{{ $user->id }}" {{$email_checked}} {{$disabled}}>
         </div>

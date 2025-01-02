@@ -1105,6 +1105,7 @@ function loadMoreData(page, search_name) {
 // $(document).ready(function () {
 
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
+    
     var inviteCount = parseInt($('#currentInviteCount').val());
 
     if ($(this).is(':disabled')) {
@@ -1153,9 +1154,18 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     $(".inivted_user_list").append(response.view);
                     // var length = responsive_invite_user();
                     // if(length < 4){
+                        console.log({is_yesvite:response.is_yesvite});
+                        console.log({is_phone:response.is_phone});
                         $('.all_user_list').remove();
-                        $(".user-list-responsive").empty();
-                        $(".user-list-responsive").html(response.responsive_view);
+                        if(response.is_yesvite == "1"){
+                            $(".user-list-responsive_yesvite").empty();
+                            $(".user-list-responsive_yesvite").html(response.responsive_view);
+                        }
+                        if(response.is_phone == "1"){
+                            $(".user-list-responsive_phone").empty();
+                            $(".user-list-responsive_phone").html(response.responsive_view);
+                    
+                        }
                     // }else{
                     //     add_user_counter();
                     // }
@@ -1171,7 +1181,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
             error: function (xhr, status, error) {},
         });
     } else {
-        delete_invited_user(userId);
+        if(is_contact!="1"){
+            is_contact=null
+        }
+        delete_invited_user(userId,is_contact);
         $("#loader").css('display','none');
     }
 });
@@ -1219,6 +1232,7 @@ function guest_counter(total_guest,max_guest){
 }
 
 function delete_invited_user(userId,is_contact= '0') {
+    console.log("IS contact",is_contact);
     $.ajax({
         url: base_url + "event/delete_user_id",
         method: "POST",
@@ -1233,8 +1247,18 @@ function delete_invited_user(userId,is_contact= '0') {
             $('#currentInviteCount').val(currentInviteCount);
             
             $(".user-list-responsive").empty();
-            $(".user-list-responsive").html(response.responsive_view);
+            if(response.is_yesvite == "1"){
+                $(".user-list-responsive_yesvite").empty();
+                $(".user-list-responsive_yesvite").html(response.responsive_view);
+            }
+            if(response.is_phone == "1"){
+                $(".user-list-responsive_phone").empty();
+                $(".user-list-responsive_phone").html(response.responsive_view);
+        
+            }
+            // $(".user-list-responsive").html(response.responsive_view);
             if(is_contact == '1'){
+                console.log("IS contact new",is_contact);
                 $('#contact_tel-'+userId).remove();
                 $('.sync_user_id_tel-'+userId).remove();
             }else{
@@ -1308,8 +1332,19 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 //     $('.user_choice').prop('disabled',true);
                 // }
                 $(".inivted_user_list").append(response.view);
-                $(".user-list-responsive").empty();
-                $(".user-list-responsive").html(response.responsive_view);
+                // $(".user-list-responsive").empty();
+                // $(".user-list-responsive").html(response.responsive_view);
+                console.log({is_yesvite:response.is_yesvite});
+                console.log({is_phone:response.is_phone});
+                if(response.is_yesvite == "1"){
+                    $(".user-list-responsive_yesvite").empty();
+                    $(".user-list-responsive_yesvite").html(response.responsive_view);
+                }
+                if(response.is_phone == "1"){
+                    $(".user-list-responsive_phone").empty();
+                    $(".user-list-responsive_phone").html(response.responsive_view);
+            
+                }
                 guest_counter(0,max_guest);
                 // var length = responsive_invite_user();
                 // if(length < 4){
@@ -5178,7 +5213,8 @@ $(document).on("click", ".invite_group_member", function () {
                 }
             });
             $(".user-list-responsive").empty();
-            $(".user-list-responsive").html(response.responsive_view);
+            // $(".user-list-responsive").html(response.responsive_view);
+            $(".user-list-responsive_yesvite").html(response.responsive_view);
             console.log(response);
             $(".inivted_user_list").append(response.view);
             var max_guest =  $("#coins").val();
