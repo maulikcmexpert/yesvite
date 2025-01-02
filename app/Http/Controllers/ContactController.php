@@ -84,7 +84,7 @@ class ContactController extends Controller
                 //             ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
                 //     });
                 // })
-                ->limit(4)
+                ->limit(8)
                 ->get();
 
             // dd($yesvite_users);
