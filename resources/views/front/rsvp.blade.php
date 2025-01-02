@@ -206,7 +206,17 @@
                                            <a href="#" data-bs-toggle="modal" data-bs-target="#rsvp-guest-list-modal">See All</a>
                                          </div>
                                          <div>
+                                    @php
+                                        $i=0;
+                                    @endphp
                                     @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
+                                            @php
+                                            $i++;
+                                            if($i==3){
+                                                break;
+                                            }
+                                            @endphp
+                                                
                                             <div class="guest-user-box">
                                               <div class="guest-list-data">
                                                 <a href="#" class="guest-img">
@@ -328,6 +338,7 @@
                                               </div>
                                               
                                             </div>
+                                            
                                     @endforeach
                                             {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
                                             <div class="guest-user-box">
