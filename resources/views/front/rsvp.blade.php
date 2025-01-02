@@ -212,9 +212,7 @@
                                     @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
                                             @php
                                             $i++;
-                                            if($i==3){
-                                                break;
-                                            }
+                                         
                                             @endphp
                                                 
                                             <div class="guest-user-box">
@@ -338,7 +336,11 @@
                                               </div>
                                               
                                             </div>
-                                            
+                                            @php
+                                            if($i==3){
+                                                break;
+                                            }
+                                            @endphp
                                     @endforeach
                                             {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
                                             <div class="guest-user-box">
