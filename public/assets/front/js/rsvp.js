@@ -150,7 +150,8 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     });
   })
 
-
+//   latitude
+//   logitude
    
   function initMap() {
     // Create the map
