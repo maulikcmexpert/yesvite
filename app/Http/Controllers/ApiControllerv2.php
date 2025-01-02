@@ -14197,12 +14197,16 @@ class ApiControllerv2 extends Controller
             $thisMonthBalance = (isset($lastTwoItems[1]['current_balance']) && $lastTwoItems[1]['current_balance'] != '')?$lastTwoItems[1]['current_balance']:0;
             $percentageIncrease = 0;
             if($lastMonthBalance > 0){
-                $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
+                // $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
+                $percentageIncrease = round((($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance, 2);
+
             }
 
             $percentageIncreaseByYear = 0;
             if($debitSums->last_year_coins > 0){
-                $percentageIncreaseByYear = (($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins;
+                // $percentageIncreaseByYear = (($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins;
+                $percentageIncreaseByYear = round((($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins, 2);
+
             }
             
             return response()->json([
