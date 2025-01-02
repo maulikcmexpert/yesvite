@@ -4,9 +4,12 @@ $(document).ready(function () {
     // var page = 1;
     var limit = 6;
     var offset = 0;
+    var offset = 0;
+    var offset = 0;
 
     var base_url=$('#base_url').val();
     var busy1 = false;
+    var busy2=false;
     $("#product-scroll").on("scroll", function () {
         if (busy1) return; 
 
@@ -16,7 +19,7 @@ $(document).ready(function () {
             if (scrollTop + elementHeight >= scrollHeight) {
                 busy1 = true;
                 offset += limit;
-                var type="phone";
+                var type="yesvite";
             loadMoreData(search_name=null,type,offset,limit);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
@@ -24,38 +27,24 @@ $(document).ready(function () {
         }
     });
 
+    $("#product-scroll-phone").on("scroll", function () {
+        if (busy2) return; 
 
-    var base_url=$('#base_url').val();
-    var busy1 = false;
-    
-    var limit = 6;
-    var offset = 0;
- 
-
-    $('#yesviteUser').scroll(function () {
-        if (busy1) return; 
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
-        if (scrollTop + elementHeight >= scrollHeight) {
-            busy1 = true;
-            offset += limit;
-            alert();
-            $('.loader').css('display','block');    
-    
-            $.ajax({
-                url: `${base_url}fetch_past_event`,
-                type: 'GET',
-                data: { limit: limit, offset: offset3,current_month:current_month3},
-                success: function (response) {
-                     
-                },
-                error: function (xhr, status, error) {
-                    
-                }
-            });
+            if (scrollTop + elementHeight >= scrollHeight) {
+                busy2 = true;
+                offset1 += limit;
+                var type="phone";
+                loadMorePhones(search_name=null,type,offset1,limit);
+            // function loadMoreData(page, search_name)
+            // loadMoreGroups(page, search_group);
+            // loadMorePhones(page, search_phone);
         }
     });
+
+  
 
 
     $(document).on("keyup", ".search_name", function () {
@@ -136,9 +125,9 @@ $(document).ready(function () {
         });
     }
 
-    function loadMorePhones(page, search_phone = "") {
+    function loadMorePhones(search_name,type,offset,limit) {
         $.ajax({
-            url: base_url + "contacts/loadphones?page=" + page,
+            url: base_url + "contacts/loadphones",
             type: "POST",
             data: {
                 search_phone: search_phone,
