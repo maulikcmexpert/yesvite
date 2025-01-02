@@ -6,8 +6,9 @@
 </div>
 @else
 @if ($yesviteUser->isNotEmpty())
-    {{dd($yesviteUser)}}
+    {{-- {{dd($yesviteUser)}} --}}
 @foreach($yesviteUser as $value)
+{{dd($value)}}
 <?php
 $initials = '';
 $fontColor = '';
