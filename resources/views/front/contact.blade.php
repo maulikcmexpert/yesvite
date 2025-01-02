@@ -104,7 +104,7 @@
                                         <button class="cmn-btn" type="submit">Import CSV</button>
                                     </form>
                                     @else
-                                    @include('front.ajax_phones', ['yesvitePhones' => $yesvitePhones])
+                                    @include('front.ajax_phones', ['yesvite_phone' => $yesvite_phone])
                                     @endif
                                 </div>
                             </div>
