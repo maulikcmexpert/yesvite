@@ -1,4 +1,4 @@
-@if(!empty($yesvite_user))
+@if(empty($yesvite_user))
 <div class="users-data">
     <div class="md-5">
         <h5>No Records Found..</h5>
