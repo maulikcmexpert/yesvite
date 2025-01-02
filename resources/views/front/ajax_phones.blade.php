@@ -9,6 +9,9 @@
 @foreach($yesvite_phone as $value)
 <div class="users-data">
     <div class="d-flex align-items-start">
+        <div class="contact-img">
+            <h5 class="fontcolorH">HP</h5>
+        </div>
         <div class="text-start">
             <h5>{{$value->firstname.' '.$value->lastname}}</h5>
 
