@@ -17,7 +17,7 @@ $(document).ready(function () {
                 busy1 = true;
                 offset += limit;
                 var type="phone";
-            loadMoreData(type,offset,limit);
+            loadMoreData(search_name=null,type,offset,limit);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
@@ -79,7 +79,7 @@ $(document).ready(function () {
         loadMorePhones(page, search_phone);
     });
 
-    function loadMoreData(search_name=null,type=null,offset=null,limit=null) {
+    function loadMoreData(search_name,type,offset,limit) {
         $.ajax({
             url: base_url + "contacts/load",
             type: "POST",
