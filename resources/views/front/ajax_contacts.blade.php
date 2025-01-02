@@ -19,7 +19,7 @@
             <div class="d-flex align-items-start">
                 <div class="contact-img">
                     @if($value->profile !== null)
-                    <img src="{{ asset('storage/profile/' . $value->profile)}}" alt="contact-img">
+                    <img src="{{$value->profile}}" alt="contact-img">
                     @else
                     <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
                     @endif
