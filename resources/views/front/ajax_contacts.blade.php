@@ -10,7 +10,7 @@
             @php
             $initials = '';
             $fontColor = '';
-            if ($value->firstname !== null && $value->lastname !== null) {
+            if (!empty($value->firstname) && !empty($value->lastname)) {
                 $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
                 $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
             }
