@@ -32,14 +32,14 @@
                             <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="group" aria-selected="false">Phone</button>
+                            <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="group" aria-selected="false">Phone</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#group" type="button" role="tab" aria-controls="group" aria-selected="false">Groups</button>
                         </li>
-                        <li class="nav-item" role="presentation">
+                        {{-- <li class="nav-item" role="presentation">
                             <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phonei" type="button" role="tab" aria-controls="phone" aria-selected="false">Upload CSV</button>
-                        </li>
+                        </li> --}}
 
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -80,7 +80,7 @@
                                 <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:48px;height:48px;">
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="phonei" role="tabpanel" aria-labelledby="phone-tab">
+                        {{-- <div class="tab-pane fade" id="phonei" role="tabpanel" aria-labelledby="phone-tab">
                             <div class="position-relative">
                                 <!-- <input type="search" class="search_phone" placeholder="Search Phone"> -->
                                 <!-- <span>
@@ -211,8 +211,8 @@
                                     <a href="#" class="btn edit-contact" data-bs-toggle="modal" data-bs-target="#myModal">Edit Contact</a>
                                 </div>
                             </div>-->
-                        </div>
-                        <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="group-tab">
+                        </div> --}}
+                        <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
                             <div class="position-relative">
                                 <input type="search" class="search_group" placeholder="Search Group">
                                 <span>
