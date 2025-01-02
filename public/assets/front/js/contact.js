@@ -13,8 +13,6 @@ $(document).ready(function () {
     var offset1 = 0;
 
     $("#product-scroll").on("scroll", function () {
-        var limit = 6;
-        var offset = 0;
         if (busy1) return; 
 
         var scrollTop = $(this).scrollTop(); 
@@ -151,6 +149,8 @@ $(document).ready(function () {
                 }
                 $("#loader").hide();
                 $("#yesvitePhones").html(data);
+                busy2 = false;
+
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
