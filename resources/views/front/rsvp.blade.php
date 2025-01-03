@@ -8,7 +8,7 @@
    <div class="rsvp-tab-wrp event-center-tabs-main">
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-invite-tab" data-bs-toggle="tab" data-bs-target="#nav-invite" type="button" role="tab" aria-controls="nav-invite" aria-selected="true">
+            <button class="nav-link active" data-tab="invite_tab" id="nav-invite-tab" data-bs-toggle="tab" data-bs-target="#nav-invite" type="button" role="tab" aria-controls="nav-invite" aria-selected="true">
                 Invite
             </button>
             @if (Auth::guard('web')->check()) 
