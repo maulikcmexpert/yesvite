@@ -602,7 +602,7 @@
                                                             <span>{{$schedule['start_time']}}</span>
                                                             {{-- @endif       --}}
                                                                                                               </div>
-                                                            <span class="hrs ms-auto">1h</span>
+                                                            <span class="hrs ms-auto">{{$schedule['total_time']}}</span>
                                                         </div>
                                                         <img src="{{asset('assets/front/image/timing-line.svg')}}" alt="timing">
                                                     </div>
@@ -618,7 +618,7 @@
                                                                 <span>{{$schedule['start_time']}} - {{$schedule['end_time']}}</span>
                                                                 @endif
                                                             </div>
-                                                            <span class="hrs ms-auto">1h</span>
+                                                            <span class="hrs ms-auto">{{$schedule['total_time']}}</span>
                                                         </div>
                                                         <img src="{{asset('assets/front/image/timing-line.svg')}}" alt="timing">
                                                         </div>
@@ -634,7 +634,7 @@
                                                                 @if($schedule['end_time'])
                                                                 <span>{{$schedule['end_time']}}</span>
                                                                 @endif                                                            </div>
-                                                            <span class="hrs ms-auto">1h</span>
+                                                            <span class="hrs ms-auto">{{$schedule['total_time']}}</span>
                                                         </div>
                                                         </div>
                                             @endif
