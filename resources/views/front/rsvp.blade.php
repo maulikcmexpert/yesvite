@@ -11,9 +11,12 @@
             <button class="nav-link active" id="nav-invite-tab" data-bs-toggle="tab" data-bs-target="#nav-invite" type="button" role="tab" aria-controls="nav-invite" aria-selected="true">
                 Invite
             </button>
+            @if (Auth::guard('web')->check()) 
+
             <button class="nav-link" id="nav-messaging-tab" data-bs-toggle="tab" data-bs-target="#nav-messaging" type="button" role="tab" aria-controls="nav-messaging" aria-selected="false">
                 Messaging
             </button>
+            @endif
         </div>
     </nav>   
     <div class="container">     
