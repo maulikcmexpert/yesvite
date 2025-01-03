@@ -389,22 +389,34 @@
 
 .schedule-wrp .shedule-box.yellow{
     background-color: #FFFCF0;
-    border-left: 4px solid #FCCD1E;
+    border-left: 4px solid #FCCD1E !important;
+    border-top: 1px solid #FCCD1E !important;
+    border-right: 1px solid #FCCD1E !important;
+    border-bottom: 1px solid #FCCD1E !important;
 }
 
 .schedule-wrp .shedule-box.pink{
     background-color: #FFF6FD;
-    border-left: 4px solid #C837AB;
+    border-left: 4px solid #C837AB !important;
+    border-top: 1px solid #C837AB !important;
+    border-right: 1px solid #C837AB !important;
+    border-bottom: 1px solid #C837AB !important;
 }
 
 .schedule-wrp .shedule-box.blue{
     background-color: #EFFBFF;
-    border-left: 4px solid #3ABEEA;
+    border-left: 4px solid #3ABEEA !important;
+    border-top: 1px solid #3ABEEA !important;
+    border-right: 1px solid #3ABEEA !important;
+    border-bottom: 1px solid #3ABEEA !important;
 }
 
 .schedule-wrp .shedule-box.red{
     background-color: #FFF8FA;
-    border-left: 4px solid #FF4F84;
+    border-left: 4px solid #FF4F84 !important;
+    border-top: 1px solid #FF4F84 !important;
+    border-right: 1px solid #FF4F84 !important;
+    border-bottom: 1px solid #FF4F84 !important;
 }
 
 .schedule-wrp .shedule-manage-timing img{
