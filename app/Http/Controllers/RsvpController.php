@@ -404,6 +404,12 @@ class RsvpController extends Controller
                     }
                    
                     
+                    $rsvp_status=EventInvitedUser::where(['event_id'=>$event_id,'user_id'=>$user_id,'is_co_host'=>'0'])->first()->rsvp_status;
+                    $rsvp="";
+                    if($rsvp_status!=""){
+                        $rsvp="1";
+                    }
+
                     return view('layout', compact(
                         'title',
                         'page',
@@ -414,7 +420,8 @@ class RsvpController extends Controller
                         'user_id',
                         'sync_contact_user_id',
                         'email',
-                        'getInvitedusers'
+                        'getInvitedusers',
+                        'rsvp'
                     ));
                     // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
                 } catch (QueryException $e) {
