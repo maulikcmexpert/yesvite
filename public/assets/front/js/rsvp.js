@@ -168,6 +168,7 @@ const address=document.getElementById("event_address").value;
        geocoder.geocode({ address: address }, function (results, status) {
          if (status === "OK") {
            const location = results[0].geometry.location;
+           console.log(location);
            createMap({ lat: location.lat(), lng: location.lng() });
          } else {
            alert("Geocode was not successful for the following reason: " + status);
