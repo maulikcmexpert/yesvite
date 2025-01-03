@@ -562,7 +562,7 @@
                                          <h4 class="title">Schedule</h4>
                                          @php
                                             $event_start_time=$eventInfo['guest_view']['event_timings']['start'];
-                                            $event_end_time=' -'.$eventInfo['guest_view']['event_timings']['end'];
+                                            $event_end_time=' - '.$eventInfo['guest_view']['event_timings']['end'];
                                          @endphp
                                          <span class="timing">{{$event_start_time}}{{$event_end_time}}</span>
                                          <div>
