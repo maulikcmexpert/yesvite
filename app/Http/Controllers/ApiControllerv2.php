@@ -10839,19 +10839,12 @@ class ApiControllerv2 extends Controller
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
 
-                // $invite_view_percent = EventInvitedUser::
-                // // whereHas('user', function ($query) {
-                // //     $query->where('app_user', '1');
-                // // })->
-                // where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0'])->count() / $totalEnvitedUser * 100;
-
                 $invite_view_percent = EventInvitedUser::
                 // whereHas('user', function ($query) {
                 //     $query->where('app_user', '1');
                 // })->
-                where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0'])->count();
-
-                // dd($invite_view_percent,$totalEnvitedUser);
+                where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0'])->count() / $totalEnvitedUser * 100;
+                
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
