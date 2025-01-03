@@ -54,7 +54,7 @@
                                          </div>
                                          <div class="author-title">
                                              <h4>{{$eventInfo['guest_view']['event_name']}}</h4>
-                                             <p><span>Hosted by:</span>{{ $eventInfo['guest_view']['hosted_by']}}</p>
+                                             <p><span>Hosted by: </span>{{ $eventInfo['guest_view']['hosted_by']}}</p>
                                          </div>
                                      </div>
                                      @if($eventInfo['guest_view']['message_to_guests'] != null || $eventInfo['guest_view']['message_to_guests'] != "")
