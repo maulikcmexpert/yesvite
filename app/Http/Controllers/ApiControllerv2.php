@@ -10851,7 +10851,7 @@ class ApiControllerv2 extends Controller
                 // })->
                 where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0'])->count();
 
-                dd($invite_view_percent,$totalEnvitedUser);
+                // dd($invite_view_percent,$totalEnvitedUser);
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
