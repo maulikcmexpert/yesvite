@@ -560,7 +560,11 @@
                                      @if(!empty($eventInfo['guest_view']['event_schedule']))
                                      <div class="schedule-wrp rsvp-schedule-wrp cmn-card">
                                          <h4 class="title">Schedule</h4>
-                                         <span class="timing">10:30 AM - 4:00 PM</span>
+                                         @php
+                                            $event_start_time=$eventInfo['guest_view']['event_timings']['start'];
+                                            $event_end_time=' -'.$eventInfo['guest_view']['event_timings']['end'];
+                                         @endphp
+                                         <span class="timing">{{$event_start_time}}{{$event_end_time}}</span>
                                          <div>
                                          
                                              {{-- <div class="shedule-manage-timing">
