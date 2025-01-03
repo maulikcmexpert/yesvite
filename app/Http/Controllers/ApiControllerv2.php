@@ -905,7 +905,7 @@ class ApiControllerv2 extends Controller
                     $que->where('start_date', '>=', date('Y-m-d'));
                 });
                 // ->where('start_date', '>=', date('Y-m-d'));
-            })->where('user_id', $user->id)->count();
+            })->where(['user_id'=>$user->id,'is_co_host'=>'0'])->count();
 
 
             if ($input['invited_to'] == '1') {
@@ -1657,7 +1657,7 @@ class ApiControllerv2 extends Controller
                     $que->where('start_date', '>=', date('Y-m-d'));
                 });
                 // ->where('start_date', '>=', date('Y-m-d'));
-            })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
+            })->where(['user_id' => $user->id, 'rsvp_status' => NULL,'is_co_host'=>'0'])->count();
 
 
 
@@ -10646,7 +10646,7 @@ class ApiControllerv2 extends Controller
 
             $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
             $eventAboutHost['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
-            $eventAboutHost['attending'] = $adults + $kids;
+            $eventAboutHost['attending'] = $     + $kids;
             $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($input['event_id']));
             $eventAboutHost['adults'] = (int)$adults;
             $eventAboutHost['kids'] =  (int)$kids;
@@ -10843,7 +10843,7 @@ class ApiControllerv2 extends Controller
                 // whereHas('user', function ($query) {
                 //     $query->where('app_user', '1');
                 // })->
-                where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0',])->count() / $totalEnvitedUser * 100;
+                where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0'])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
