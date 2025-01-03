@@ -598,8 +598,8 @@
                                                         <div class="shedule-box green">
                                                             <div class="shedule-box-left">
                                                             <h6>{{$schedule['activity_title']}}</h6>
-                                                            @if($schedule['end_time'])
-                                                            <span>{{$schedule['start_time']}} - {{$schedule['end_time']}}</span>
+                                                            {{-- @if($schedule['end_time']) --}}
+                                                            <span>{{$schedule['start_time']}}</span>
                                                             @endif                                                            </div>
                                                             <span class="hrs ms-auto">1h</span>
                                                         </div>
