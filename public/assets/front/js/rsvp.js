@@ -178,13 +178,12 @@ const longitutde=parseFloat(document.getElementById("event_logitude").value);
   }
 
   $(document).on("click", ".direction-btn", function () {
-    alert();
     const lat = $(this).data("lat");
     const long = $(this).data("long");
   
     if (lat && long) {
       const googleMapsUrl = `https://www.google.com/maps?q=${lat},${long}`;
-      window.location.href = googleMapsUrl;
+      window.open(googleMapsUrl, "_blank"); 
     } 
   });
   
