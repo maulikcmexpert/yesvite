@@ -227,12 +227,12 @@ const address=document.getElementById("event_address").value;
   });
   
   $(document).on("click", "#nav-messaging-tab", function () {
-    alert()
+    alert();
     $('.rsvp-footer-btn-wrp').css('display','none');
   });
 
   $(document).on("click", "#nav-invite-tab", function () {
-    alert()
+    alert();
     $('.rsvp-footer-btn-wrp').css('display','block');
   });
   
