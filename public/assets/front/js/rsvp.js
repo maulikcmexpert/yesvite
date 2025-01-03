@@ -174,7 +174,7 @@ const address=document.getElementById("event_address").value;
           
           console.log("Latitude: " + lat);
           console.log("Longitude: " + lng);
-           createMap({ lat: location.lat(), lng: location.lng() });
+           createMap({ lat: lat, lng: lng });
          } else {
            alert("Geocode was not successful for the following reason: " + status);
          }
