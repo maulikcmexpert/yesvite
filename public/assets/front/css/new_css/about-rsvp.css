@@ -355,6 +355,7 @@
 .schedule-wrp .shedule-box.green{
     background-color: #F3FFFA;
     border-left: 4px solid #2EB67D;
+    border: 1px solid #2EB67D;
 }
 
 .schedule-wrp .shedule-timing h6{
@@ -556,6 +557,7 @@
     box-shadow: none;
     outline: 0;
     padding-top: 13px;
+    resize: none;
 }
 
 .about-rsvp .rsvp-msgbox label{
