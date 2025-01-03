@@ -10646,7 +10646,7 @@ class ApiControllerv2 extends Controller
 
             $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
             $eventAboutHost['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
-            $eventAboutHost['attending'] = $     + $kids;
+            $eventAboutHost['attending'] = $adults + $kids;
             $eventAboutHost['total_invitation'] =  count(getEventInvitedUser($input['event_id']));
             $eventAboutHost['adults'] = (int)$adults;
             $eventAboutHost['kids'] =  (int)$kids;
