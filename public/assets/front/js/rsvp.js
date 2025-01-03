@@ -157,7 +157,7 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     // Create the map
 
     const mapElement = document.getElementById("map");
-    mapElement.style.height = "100%";
+    mapElement.style.height = "198px";
     mapElement.style.width = "100%";
 
 
