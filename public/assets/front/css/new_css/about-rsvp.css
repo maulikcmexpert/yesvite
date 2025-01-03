@@ -294,7 +294,8 @@
 }
 
 .location-wrp #map{
-    position: relative;
+    /* position: relative; */
+    overflow: unset !important;
 }
 
 .location-wrp #map img.marker{
@@ -689,10 +690,6 @@
 
 .guest-user-list .sucess-no h5{
     line-height: normal !important;
-}
-
-#map{
-    overflow: unset !important;
 }
 
 
