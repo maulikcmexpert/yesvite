@@ -6753,7 +6753,7 @@ class ApiControllerv2 extends Controller
                 ->orderBy('id', 'DESC');
         })->whereHas('user', function ($query) {
             $query->where('app_user', '1');
-        })->where(['user_id' => $this->user->id, 'rsvp_status' => NULL])->get();
+        })->where(['user_id' => $this->user->id, 'rsvp_status' => NULL,'is_co_host'=>'0'])->get();
 
         $needRsvpEventList = [];
 
