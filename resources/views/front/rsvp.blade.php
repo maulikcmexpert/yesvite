@@ -186,6 +186,7 @@
                                          <p>{{$eventInfo['guest_view']['address_1']}} {{$eventInfo['guest_view']['city']}}, {{$eventInfo['guest_view']['state']}} {{$eventInfo['guest_view']['zip_code']}}</p>
                                          <input type="hidden" id="event_latitude" value="{{$eventInfo['guest_view']['latitude']}}"/>
                                         <input type="hidden" id="event_logitude" value="{{$eventInfo['guest_view']['logitude']}}"/>
+                                        <input type="hidden" id="event_address" value="{{$eventInfo['guest_view']['address_1']}}"/>
                                          <div id="map">
 
                                                     {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d144.9630579153168!3d-37.81410797975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d1b1f5f1f1f1!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1611815623456!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> --}}
