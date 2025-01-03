@@ -200,7 +200,7 @@
                                                     </iframe>
                                                         <img src="./assets/img/location-marker.svg" alt="marker" class="marker"> --}}
                                          </div>
-                                         <a href="#" class="direction-btn">Directions</a>
+                                         <a href="#" class="direction-btn" data-lat="{{$eventInfo['guest_view']['latitude']}}" data-long="{{$eventInfo['guest_view']['logitude']}}">Directions</a>
                                          @endif
                                      </div>
                                      <div class="guest-user-list rsvp-guest-user-list-wrp cmn-card">

@@ -177,4 +177,15 @@ const longitutde=parseFloat(document.getElementById("event_logitude").value);
     });
   }
 
+
+  document.getElementsByClassName("direction-btn").addEventListener("click", function () {
+    const lat = this.getAttribute("data-lat");
+    const long = this.getAttribute("data-long");
+  
+    if (lat && long) {
+      const googleMapsUrl = `https://www.google.com/maps?q=${lat},${long}`;
+      window.location.href = googleMapsUrl;
+    } 
+  });
+  
 //   initMap();
