@@ -206,7 +206,7 @@ const address=document.getElementById("event_address").value;
     
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: lat, lng: lng },
-      zoom: 30,
+      zoom: 20,
     });
   
     new google.maps.Marker({
