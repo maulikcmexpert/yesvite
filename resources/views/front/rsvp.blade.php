@@ -600,7 +600,8 @@
                                                             <h6>{{$schedule['activity_title']}}</h6>
                                                             {{-- @if($schedule['end_time']) --}}
                                                             <span>{{$schedule['start_time']}}</span>
-                                                            @endif                                                            </div>
+                                                            {{-- @endif       --}}
+                                                                                                              </div>
                                                             <span class="hrs ms-auto">1h</span>
                                                         </div>
                                                         <img src="{{asset('assets/front/image/timing-line.svg')}}" alt="timing">
