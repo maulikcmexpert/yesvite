@@ -237,7 +237,7 @@
                                                 </div>
                                                 <div class="w-100">
                                                   <div class="d-flex flex-column">
-                                                      <a href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</a>
+                                                      <p href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</p>
                                                       <span class="guest-email">{{$guest_data['email']}}</span>
                                                   </div>
                                                 
