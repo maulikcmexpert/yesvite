@@ -621,7 +621,7 @@
 
                                                     <div class="shedule-manage-timing">
                                                         <div class="shedule-timing">
-                                                            <h6>{{$schedule['start_time']}}</h6>
+                                                            <h6>{{$schedule['end_time']}}</h6>
                                                         </div>
                                                         <div class="shedule-box red">
                                                             <div class="shedule-box-left">
