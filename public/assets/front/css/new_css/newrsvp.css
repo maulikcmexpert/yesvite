@@ -1032,6 +1032,10 @@ display:none;}
     width: auto !important;
 }
 
+.rsvp-hosted-by-date-time-wrp .hosted-by-date-time-left{
+    width: 50%;
+}
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
