@@ -44,6 +44,10 @@ var swiper = new Swiper(".mySwiper", {
     loop:true,
     margin:10,
     nav:true,
+    navText: [
+      '<img src="path/to/your/left-arrow.png" alt="Left">',
+      '<img src="path/to/your/right-arrow.png" alt="Right">'
+    ],
     responsive:{
         0:{
             items:1
