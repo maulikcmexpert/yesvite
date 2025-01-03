@@ -4762,9 +4762,6 @@ class ApiControllerv2 extends Controller
         try {
             DB::beginTransaction();
             $updateEvent = Event::where('id', $eventData['event_id'])->first();
-            $isCohost=  EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
-            
-            $isCohostUserId =  (isset($isCohost) && $isCohost!=null)?$isCohost->user_id:"";
             if ($updateEvent != null) {
                 // $rsvp_by_date = date('Y-m-d');
                 // $rsvp_by_date_set = '0';
@@ -5204,8 +5201,6 @@ class ApiControllerv2 extends Controller
                             'from_addr' => $eventData['from_addr'],
                             'to_addr' => $eventData['to_addr'],
                             'newUser' => $filteredIds,
-                            "isCohostUserId"=>$isCohostUserId
-
                         ];
 
                         sendNotification('update_address', $notificationParam);
@@ -5223,8 +5218,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_time' => $eventData['from_time'],
                             'to_time' => $eventData['to_time'],
-                            'newUser' => $filteredIds,
-                            "isCohostUserId"=>$isCohostUserId
+                            'newUser' => $filteredIds
                         ];
 
                         sendNotification('update_time', $notificationParam);
@@ -5242,8 +5236,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'old_start_end_date' => $eventData['old_start_end_date'],
                             'new_start_end_date' => $eventData['new_start_end_date'],
-                            'newUser' => $filteredIds,
-                            "isCohostUserId"=>$isCohostUserId
+                            'newUser' => $filteredIds
                         ];
 
                         sendNotification('update_date', $notificationParam);
@@ -5261,8 +5254,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_time' => $eventData['from_time'],
                             'to_time' => $eventData['to_time'],
-                            'newUser' => $filteredIds,
-                            "isCohostUserId"=>$isCohostUserId
+                            'newUser' => $filteredIds
                         ];
 
                         sendNotification('update_event', $notificationParam);
@@ -5280,7 +5272,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'from_time' => $eventData['from_time'],
                             'to_time' => $eventData['to_time'],
-                            'newUser' => $filteredIds,
+                            'newUser' => $filteredIds
                         ];
 
                         sendNotification('update_potluck', $notificationParam);
@@ -5296,7 +5288,7 @@ class ApiControllerv2 extends Controller
                     $notificationParam = [
                         'sender_id' => $user->id,
                         'event_id' => $eventData['event_id'],
-                        'newUser' => $filteredIds,
+                        'newUser' => $filteredIds
                     ];
 
                     sendNotification('invite', $notificationParam);
