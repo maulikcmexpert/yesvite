@@ -1051,6 +1051,9 @@ display:none;}
     height: unset !important;
 }
 
+#nav-messaging .chat-area{
+    margin-top: 20px;
+}
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
