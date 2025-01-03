@@ -162,7 +162,8 @@ const address=document.getElementById("event_address").value;
     // Create the map
     if ((latitude === 0.0 && longitutde === 0.0) || 
     (latitude === 0 && longitutde === 0)) {
-       // Use geocoding to search by address
+      console.log(address);
+      
        const geocoder = new google.maps.Geocoder();
        geocoder.geocode({ address: address }, function (results, status) {
          if (status === "OK") {
@@ -180,7 +181,7 @@ const address=document.getElementById("event_address").value;
           
       const map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: latitude, lng: longitutde },
-        zoom: 10,
+        zoom: 15,
       });
   
       // Create the marker
