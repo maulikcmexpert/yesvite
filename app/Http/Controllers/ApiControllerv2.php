@@ -10818,12 +10818,13 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id])->count();
+            where(['event_id' => $eventDetail->id,'is_co_host'=>'0',])->count();
+
             $todayrsvprate = EventInvitedUser::
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])
+            where(['rsvp_status' => '1','is_co_host'=>'0', 'event_id' => $eventDetail->id])
                 ->whereDate('created_at', '=', date('Y-m-d'))
                 ->count();
 
@@ -10842,7 +10843,7 @@ class ApiControllerv2 extends Controller
                 // whereHas('user', function ($query) {
                 //     $query->where('app_user', '1');
                 // })->
-                where(['event_id' => $eventDetail->id, 'read' => '1'])->count() / $totalEnvitedUser * 100;
+                where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0',])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
@@ -10853,7 +10854,7 @@ class ApiControllerv2 extends Controller
                     // whereHas('user', function ($query) {
                     //     $query->where('app_user', '1');
                     // })->
-                    where(['event_id' => $eventDetail->id, 'read' => '1', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
+                    where(['event_id' => $eventDetail->id,'is_co_host'=>'0','read' => '1', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
