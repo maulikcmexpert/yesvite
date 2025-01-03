@@ -226,13 +226,13 @@ const address=document.getElementById("event_address").value;
     } 
   });
   
-  $('#nav-messaging-tab').on("click", function () {
-    $('.rsvp-footer-btn-wrp').css('display','none');
-  });
+  // $('#nav-messaging-tab').on("click", function () {
+  //   $('.rsvp-footer-btn-wrp').css('display','none');
+  // });
 
-  $('#nav-invite-tab').on("click", function () {
-    $('.rsvp-footer-btn-wrp').css('display','block');
-  });
+  // $('#nav-invite-tab').on("click", function () {
+  //   $('.rsvp-footer-btn-wrp').css('display','block');
+  // });
 
   // $(document).on("click", ".nav-link", function () {
   //   alert();
