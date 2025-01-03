@@ -629,7 +629,7 @@
                                                                 @if($schedule['end_time'])
                                                                 <span>{{$schedule['end_time']}}</span>
                                                                 @endif                                                            </div>
-                                                            <span class="hrs ms-auto">30m</span>
+                                                            <span class="hrs ms-auto">1h</span>
                                                         </div>
                                                         </div>
                                             @endif
