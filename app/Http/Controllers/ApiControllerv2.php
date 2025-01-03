@@ -10630,13 +10630,13 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('adults');
+            where(['event_id' => $eventDetail->id, 'is_co_host'=>'0','rsvp_status' => '1', 'rsvp_d' => '1'])->sum('adults');
 
             $kids = EventInvitedUser::
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
+            where(['event_id' => $eventDetail->id, 'is_co_host'=>'0','rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
 
             $eventAboutHost['is_event_owner'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventAboutHost['host_id'] = (!empty($eventDetail->user_id) && $eventDetail->user_id != NULL) ? $eventDetail->user_id : "";
