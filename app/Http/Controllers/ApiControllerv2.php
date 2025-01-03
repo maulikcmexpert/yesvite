@@ -1381,9 +1381,7 @@ class ApiControllerv2 extends Controller
 
 
             // Past Event // 
-
             $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
-
             $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
@@ -1557,7 +1555,7 @@ class ApiControllerv2 extends Controller
                         $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+                        })->where(['event_id' => $value->id, 'rsvp_status' => '1','is_co_host'=>'0','rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
@@ -1568,7 +1566,7 @@ class ApiControllerv2 extends Controller
                         $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id])->count();
+                        })->where(['event_id' => $value->id,'is_co_host'=>'0'])->count();
 
 
 
@@ -1579,7 +1577,7 @@ class ApiControllerv2 extends Controller
                         $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
+                        })->where(['event_id' => $value->id, 'rsvp_status' => '0','is_co_host'=>'0' ,'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
 
