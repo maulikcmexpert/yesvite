@@ -75,7 +75,7 @@ break;
 @endif
 @endforeach
 
-@if($counter > 1)
+@if($counter > 4)
 @php
 $counter = count($user_list) - 4;
 @endphp
