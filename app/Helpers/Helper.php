@@ -313,6 +313,7 @@ function sendNotification($notificationType, $postData)
     }
 
     if($isCohostUserId !=null && $isCohostUserId!=""){
+        dD(1);
         $invitedusers = EventInvitedUser::with(['event', 'event.event_settings', 'event.event_schedule', 'user'])
         // ->whereHas('user', function ($query) {
         //  $query->where('app_user', '1');
