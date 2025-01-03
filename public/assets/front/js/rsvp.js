@@ -160,8 +160,8 @@ const address=parseFloat(document.getElementById("event_address").value);
 
   function initMap() {
     // Create the map
-    if ((latitude === 0.0 && longitude === 0.0) || 
-    (latitude === 0 && longitude === 0)) {
+    if ((latitude === 0.0 && longitutde === 0.0) || 
+    (latitude === 0 && longitutde === 0)) {
        // Use geocoding to search by address
        const geocoder = new google.maps.Geocoder();
        geocoder.geocode({ address: address }, function (results, status) {
