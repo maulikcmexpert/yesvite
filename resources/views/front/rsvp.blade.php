@@ -1,4 +1,4 @@
-    {{-- {{dd($eventInfo);}} --}}
+    {{dd($eventInfo);}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -693,7 +693,7 @@
                                                     }elseif ($gift['registry_recipient_name']=="target"||$gift['registry_recipient_name']=="Target") {
                                                         $logo=asset('assets/target.png');
                                                     }
-                                                    
+
                                                     @endphp
                                                    <img src="{{$logo}}" alt="">
                                                     <div>
