@@ -631,19 +631,17 @@
         @endif
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                <button class="nav-link active add_co_host" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
                     type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive
                     Contacts</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button"
+                <button class="nav-link" id="phone-tab-cantact" data-bs-toggle="tab" data-bs-target="#phone" type="button"
                     role="tab" aria-controls="phone" aria-selected="false">Phone Contacts</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-
-
                 <div class="guest-contacts-wrp" style="display: none">
                     <div class="guest-contact">
                         <div class="guest-img">
@@ -686,11 +684,6 @@
 
 
                 <div class="user-contacts list_all_invited_user">
-
-
-
-
-
 
                 </div>
             </div>
