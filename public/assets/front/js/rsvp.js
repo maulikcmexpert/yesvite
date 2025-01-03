@@ -153,6 +153,9 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
 //   latitude
 //   logitude
    
+
+const latitude=parseFloat(document.getElementById("event_latitude").value);
+const longitutde=parseFloat(document.getElementById("event_logitude").value);
   function initMap() {
     // Create the map
 
@@ -160,19 +163,15 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     mapElement.style.height = "198px";
     mapElement.style.width = "100%";
 
-
-    const latt=$('#event_latitude').val();
-    const longg=$('#event_logitude').val();
-
         
     const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 23.0391808, lng: 72.515584 },
+      center: { lat: latitude, lng: longitutde },
       zoom: 10,
     });
 
     // Create the marker
     const marker = new google.maps.Marker({
-      position: {  lat: 23.0391808, lng: 72.515584},
+      position: {  lat: latitude, lng: longitutde},
       map: map,
       title: "test location", // Optional: adds a tooltip on hover
     });
