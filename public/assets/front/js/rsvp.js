@@ -226,4 +226,12 @@ const address=document.getElementById("event_address").value;
     } 
   });
   
+  $(document).on("click", "#nav-messaging-tab", function () {
+    $('.rsvp-footer-btn-wrp').addClass('d-none');
+  });
+
+  $(document).on("click", "#nav-invite-tab", function () {
+    $('.rsvp-footer-btn-wrp').removeClass('d-none');
+  });
+  
 //   initMap();
