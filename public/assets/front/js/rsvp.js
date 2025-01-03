@@ -226,8 +226,7 @@ const address=document.getElementById("event_address").value;
     } 
   });
   
-  $('#nav-link').on("click", function () {
-    alert();
+  $('#nav-messaging-tab').on("click", function () {
     $('.rsvp-footer-btn-wrp').css('display','none');
   });
 
