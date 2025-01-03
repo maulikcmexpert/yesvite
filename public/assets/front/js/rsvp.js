@@ -157,14 +157,16 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     // Create the map
     const latt=$('#event_latitude').val();
     const longg=$('#event_logitude').val();
+
+        
     const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: latt, lng: longg },
+      center: { lat: 23.0391808, lng: 72.515584 },
       zoom: 10,
     });
 
     // Create the marker
     const marker = new google.maps.Marker({
-      position: {  lat: latt, lng: longg  },
+      position: {  lat: 23.0391808, lng: 72.515584   },
       map: map,
       title: "test location", // Optional: adds a tooltip on hover
     });
