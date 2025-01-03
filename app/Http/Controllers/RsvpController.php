@@ -211,7 +211,7 @@ class RsvpController extends Controller
                     $eventDetails['logitude'] = (!empty($eventDetail->longitude) || $eventDetail->longitude != null) ? $eventDetail->longitude : "";
                     
                     $eventsScheduleList = [];
-                    $eventTimings=[];
+                    $event_time=[];
                     foreach ($eventDetail->event_schedule as $key => $value) {
                         $event_name =  $value->activity_title;
                         if ($value->type == '1') {
@@ -221,7 +221,6 @@ class RsvpController extends Controller
                             $event_name = "End Event";
                             $event_time['end']= $value->end_time;
                         }
-                        $eventTimings[] = $event_time;
 
                         $scheduleDetail['id'] = $value->id;
                         $scheduleDetail['activity_title'] = $event_name;
@@ -230,7 +229,8 @@ class RsvpController extends Controller
                         $scheduleDetail['type'] = $value->type;
                         $eventsScheduleList[] = $scheduleDetail;
                     }
-                    $eventDetails['event_timings'] = $eventTimings;
+
+                    $eventDetails['event_timings'] = $event_time;
                     $eventDetails['event_schedule'] = $eventsScheduleList;
                     $eventDetails['event_potluck'] = EventSetting::where('event_id', $event_id)->pluck('podluck')->first();
                     $eventDetails['gift_registry'] = [];
