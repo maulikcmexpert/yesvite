@@ -10818,7 +10818,7 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id,'is_co_host'=>'0',])->count();
+            where(['event_id' => $eventDetail->id,'is_co_host'=>'0'])->count();
 
             $todayrsvprate = EventInvitedUser::
             // whereHas('user', function ($query) {
