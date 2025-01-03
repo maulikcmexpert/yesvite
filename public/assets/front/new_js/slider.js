@@ -1,4 +1,5 @@
 // ===hostby-slider===
+const path =require('../image')
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
     spaceBetween: 30,
@@ -45,8 +46,8 @@ var swiper = new Swiper(".mySwiper", {
     margin:10,
     nav:true,
     navText: [
-      '<img src="path/to/your/left-arrow.png" alt="Left">',
-      '<img src="path/to/your/right-arrow.png" alt="Right">'
+      `<img src="${path}/left-arrow.png" alt="Left">`,
+      `<img src="${path}/right-arrow.png" alt="Right">`
     ],
     responsive:{
         0:{
