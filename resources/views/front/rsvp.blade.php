@@ -1,4 +1,4 @@
-    {{dd($eventInfo);}}
+    {{-- {{dd($eventInfo);}} --}}
 @php
     use Carbon\Carbon;
 @endphp
@@ -688,9 +688,9 @@
 
                                                     @php
                                                     $logo="";
-                                                    if($gift['registry_recipient_name']=="amazon"||$gift['registry_recipient_name']=="Amazon"){
+                                                    if(trim($gift['registry_recipient_name'])=="amazon"||trim($gift['registry_recipient_name'])=="Amazon"){
                                                         $logo=asset('assets/amazon.png');
-                                                    }elseif ($gift['registry_recipient_name']=="target"||$gift['registry_recipient_name']=="Target") {
+                                                    }elseif (trim($gift['registry_recipient_name'])=="target"||trim($gift['registry_recipient_name'])=="Target") {
                                                         $logo=asset('assets/target.png');
                                                     }
 
