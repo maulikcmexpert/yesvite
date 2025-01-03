@@ -3841,7 +3841,6 @@ $(document).on("click", "#delete_invited_user_tel", function () {
         $('.user_tel-'+userId).prop("checked",false);
     }else{
         $('.user_id_tel-'+userId).remove();
-        $('.user_model_tel-'+id).remove();
         checkbox.prop("checked", false);
     }
 
@@ -3973,6 +3972,7 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 });
 
 $(document).on("change", "#YesviteUserAll .user_choice", function () {
+   
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -5605,6 +5605,22 @@ $(document).on('click','.add_co_host',function(){
     }, 500);
 });
 
+$(document).on('click','.add_co_host',function(){
+    
+    $('.co_host_search').val('');
+    get_co_host_list();
+    
+    setTimeout(() => {
+        toggleSidebar('sidebar_add_co_host');
+    }, 500);
+});
+
+$(document).on('click','#phone-tab-cantact',function(){
+    var search_name = $('#search_contacts').val();
+    // displayPhoneContacts();
+    get_phone_host_list('all',10000,'0',search_name);
+})
+
 $(document).on('click','.add_co_host_off',function(){
     if(eventData.co_host !== undefined){
         selected_co_host = eventData.co_host;
@@ -5671,7 +5687,43 @@ function get_co_host_list(search_name=null){
         alert("server not responding...");
     });
 }
-
+function get_phone_host_list(search_name=null){
+    if(search_name ==null){
+        search_name = '';
+    }
+    console.log(selected_co_host);
+    console.log(selected_co_host_prefer_by);
+    if(selected_co_host == ''){
+       $('.guest-contacts-wrp').css('display','none');
+    }else{
+        $('.guest-contacts-wrp').css('display','flex');
+    }
+    $.ajax({
+        url: base_url+'event/get_contacts',
+        type: "GET",
+        data: {
+            search_name: search_name,
+            selected_co_host:selected_co_host,
+            selected_co_host_prefer_by:selected_co_host_prefer_by,
+            _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+        },
+        beforeSend: function () {
+            $("#loader").show();
+        },
+    })
+    .done(function (data) {
+        // console.log(data);
+        if (data == " ") {
+            $("#loader").html("No more contacts found");
+            return;
+        }
+        $("#loader").hide();
+        $(".list_all_invited_user").html(data);
+    })
+    .fail(function (jqXHR, ajaxOptions, thrownError) {
+        alert("server not responding...");
+    });
+}
 $(document).on('keyup','.co_host_search',function(){
     search_name = $(this).val();
     $('#loader').css('display','block');

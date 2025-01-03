@@ -1617,11 +1617,12 @@ $user['coins']=$user->coins;
     
     public function getContacts(Request $request)
     {
-        
+            
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
+       
         $getAllContacts = contact_sync::where('contact_id',$id)
             ->when($type != 'group', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
@@ -1636,8 +1637,7 @@ $user['coins']=$user->coins;
                 });
             })
             ->get();
-
-        // dd($yesvite_users);
+            
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
             $yesviteUserDetail = [
@@ -1651,7 +1651,7 @@ $user['coins']=$user->coins;
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
         $selected_user = Session::get('contact_ids');
-        // dd(count($selected_user));
+        // dd($yesvite_user);
         return response()->json(view('front.event.guest.get_contacts', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 
