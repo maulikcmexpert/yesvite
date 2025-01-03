@@ -551,12 +551,12 @@ function pendingRsvpCount($userId)
 {
     $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
         $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-    })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
+    })->where(['user_id' => $userId, 'rsvp_status' => NULL,'is_co_host'=>'0'])->count();
     $PendingRsvpEventId = "";
     if ($total_need_rsvp_event_count == 1) {
         $res = EventInvitedUser::select('event_id')->whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-        })->where(['user_id' => $userId, 'rsvp_status' => NULL])->first();
+        })->where(['user_id' => $userId, 'rsvp_status' => NULL,'is_co_host'=>'0'])->first();
         $PendingRsvpEventId = $res->event_id;
     }
     return compact('total_need_rsvp_event_count', 'PendingRsvpEventId');
@@ -595,7 +595,7 @@ function profileInvitedToCount($userId)
 {
     $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
         $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-    })->where('user_id', $userId)->count();
+    })->where(['user_id'=>$userId,'is_co_host'=>'0'])->count();
     return $totalInvited;
 }
 function invitedToCountCurrentMonth($userId)

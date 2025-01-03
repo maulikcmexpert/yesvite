@@ -2356,7 +2356,7 @@ class ApiControllerv2 extends Controller
                     'profile' =>  empty($user->profile) ?  "" : asset('storage/profile/' . $user->profile),
                     'bg_profile' =>  empty($user->bg_profile) ? "" : asset('storage/bg_profile/' . $user->bg_profile),
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
-                    'firstname' => empty($user->firstname) ? "" : $user->firstname,
+                    // 'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'lastname' => empty($user->lastname) ? "" : $user->lastname,
                     'birth_date' => empty($user->birth_date) ? "" : $user->birth_date,
                     'email' => empty($user->email) ? "" : $user->email,
