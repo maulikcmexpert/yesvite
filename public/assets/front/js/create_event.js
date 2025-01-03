@@ -3837,9 +3837,11 @@ $(document).on("click", "#delete_invited_user_tel", function () {
     var userId = $(this).data("userid");
     if(is_contact == '1'){
         $('#contact_tel-'+userId).remove();
+        $('.contact_model_tel-'+userId).remove();
         $('.user_tel-'+userId).prop("checked",false);
     }else{
         $('.user_id_tel-'+userId).remove();
+        $('.user_model_tel-'+id).remove();
         checkbox.prop("checked", false);
     }
 
@@ -5784,12 +5786,16 @@ function getStartEndTimeZone(){
 
 
 $(document).on('click','.all_user_list',function(){
+    
+    var is_contact = $(this).data("contact");
+    // alert(is_contact);
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                 "content"
             ),
         },
+        data:{is_contact:is_contact},
         url: base_url+"event/see_all",
         method: "POST",
         success: function (response) {

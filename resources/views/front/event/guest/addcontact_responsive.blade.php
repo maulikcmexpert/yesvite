@@ -78,10 +78,10 @@ break;
 @php
 $counter = count($user_list) - 4;
 @endphp
-<div class="guest-contact all_user_list">
+<div class="guest-contact all_user_list" data-contact="1">
     <div class="guest-img">
         <span class="update_user_count">+{{$counter}}</span>
     </div>
-    <span class="all-contact">See all</span>
+    <span class="all-contact"  >See all</span>
 </div>
 @endif

@@ -2162,12 +2162,18 @@ $user['coins']=$user->coins;
     }
     public function see_all(Request $request)
     {
-        // dd($request);
-        $data  = Session::get('user_ids');
-        // $data[] = ['userdata' => $userEntry];
+// dd()
+        if($request->is_contact != "1"){
+            $data  = Session::get('user_ids');
+            // $data[] = ['userdata' => $userEntry];
+    
+            // dd($data);
+            return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data'))->render()]);
+        }
 
-        // dd($data);
-        return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data'))->render()]);
+       $data = Session::get('contact_ids');
+       return response()->json(['view' => view('front.event.guest.sell_all_invited_contact', compact('data'))->render()]);
+    //    dd($data);
     }
 
     public function CancelEvent(Request $request){
