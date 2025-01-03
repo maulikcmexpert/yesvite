@@ -231,7 +231,7 @@ const address=document.getElementById("event_address").value;
     $('.rsvp-footer-btn-wrp').css('display','none');
   });
 
-  $(document).on("click", "#nav-invite-tab", function () {
+  $(document).on("click", ".nav-link", function () {
     alert();
     $('.rsvp-footer-btn-wrp').css('display','block');
   });
