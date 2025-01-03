@@ -689,9 +689,9 @@
                                                     @php
                                                     $logo="";
                                                     if($gift['registry_recipient_name']=="amazon"||$gift['registry_recipient_name']=="Amazon"){
-                                                        $logo=asset('assets/amazon.jpg');
+                                                        $logo=asset('assets/amazon.png');
                                                     }elseif ($gift['registry_recipient_name']=="target"||$gift['registry_recipient_name']=="Target") {
-                                                        $logo=asset('assets/target.jpg');
+                                                        $logo=asset('assets/target.png');
                                                     }
                                                     @endphp
                                                    <img src="{{$logo}}" alt="">
