@@ -406,7 +406,7 @@ class RsvpController extends Controller
                     
                     $rsvp_status=EventInvitedUser::where(['event_id'=>$event_id,'user_id'=>$user_id,'is_co_host'=>'0'])->first()->rsvp_status;
                     $rsvp="";
-                    if($rsvp_status!=""){
+                    if($rsvp_status!=""||!empty($rsvp_status)){
                         $rsvp="1";
                     }
 
