@@ -230,7 +230,7 @@ class RsvpController extends Controller
                         $scheduleDetail['type'] = $value->type;
                         $eventsScheduleList[] = $scheduleDetail;
                     }
-                    $eventDetails['event_timings']=$eventTimings;
+                    $eventDetails['event_timings'] = $eventTimings;
                     $eventDetails['event_schedule'] = $eventsScheduleList;
                     $eventDetails['event_potluck'] = EventSetting::where('event_id', $event_id)->pluck('podluck')->first();
                     $eventDetails['gift_registry'] = [];
