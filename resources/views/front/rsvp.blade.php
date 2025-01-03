@@ -1,4 +1,4 @@
-    {{-- {{dd($eventInfo);}} --}}
+    {{dd($rsvp_status);}}
 @php
     use Carbon\Carbon;
 @endphp
