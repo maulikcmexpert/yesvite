@@ -210,28 +210,75 @@ class RsvpController extends Controller
                     $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
                     $eventDetails['logitude'] = (!empty($eventDetail->longitude) || $eventDetail->longitude != null) ? $eventDetail->longitude : "";
                     
+                    
+                    
+                    
+                    
                     $eventsScheduleList = [];
                     $event_time=[];
+
                     foreach ($eventDetail->event_schedule as $key => $value) {
+                        $totalTime = "";
                         $event_name =  $value->activity_title;
+        
                         if ($value->type == '1') {
+                            $nextval = $eventDetail->event_schedule[$key + 1];
+        
                             $event_name = "Start Event";
+                            $stattim = $value->start_time;
                             $event_time['start']= $value->start_time;
+
+                            $endtim = "";
+                            if ($nextval->type == '2') {
+                                $endtim =  $nextval->start_time;
+                            } else if ($nextval->type == '3') {
+                                $endtim =  $nextval->end_time;
+                            }
+                            if (
+                                !empty($stattim) &&
+                                !empty($endtim)
+                            ) {
+        
+                                $totalTime =  getDeferentBetweenTime($stattim, $endtim);
+                            }
+                        } elseif ($value->type == '2') {
+                            $stattim = $value->start_time;
+                            $endtim = $value->end_time;;
+                            $totalTime =  getDeferentBetweenTime($stattim, $endtim);
                         } elseif ($value->type == '3') {
                             $event_name = "End Event";
+                            $prevval = $eventDetail->event_schedule[$key - 1];
                             $event_time['end']= $value->end_time;
-                        }
 
+        
+                            $endtim = $value->end_time;
+                            $stattim = "";
+                            if ($prevval->type == '2') {
+                                $stattim =  $prevval->end_time;
+                            } else if ($prevval->type == '1') {
+                                $stattim =  $prevval->start_time;
+                            }
+        
+                            if (
+                                $stattim != "" &&
+                                $endtim != ""
+                            ) {
+        
+                                $totalTime =  getDeferentBetweenTime($stattim, $endtim);
+                            }
+                        }
                         $scheduleDetail['id'] = $value->id;
                         $scheduleDetail['activity_title'] = $event_name;
                         $scheduleDetail['start_time'] = ($value->start_time != null) ? $value->start_time : "";
                         $scheduleDetail['end_time'] = ($value->end_time != null) ? $value->end_time : "";
+                        $scheduleDetail['total_time'] = $totalTime;
                         $scheduleDetail['type'] = $value->type;
+        
                         $eventsScheduleList[] = $scheduleDetail;
                     }
-
-                    $eventDetails['event_timings'] = $event_time;
+        
                     $eventDetails['event_schedule'] = $eventsScheduleList;
+                    $eventDetails['event_timings'] = $event_time;
                     $eventDetails['event_potluck'] = EventSetting::where('event_id', $event_id)->pluck('podluck')->first();
                     $eventDetails['gift_registry'] = [];
                     if (!empty($eventDetail->gift_registry_id)) {
