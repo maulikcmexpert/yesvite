@@ -21,6 +21,7 @@
     </nav>   
     <div class="container">     
         <div class="tab-content" id="nav-tabContent">
+            <input type="text" value="{{$rsvp_status}}" />
             <div class="tab-pane fade show active" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab">
                 <section class="rsvp-wrp">
                     <div class="container">

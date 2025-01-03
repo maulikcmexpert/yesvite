@@ -421,7 +421,7 @@ class RsvpController extends Controller
                         'sync_contact_user_id',
                         'email',
                         'getInvitedusers',
-                        'rsvp'
+                        'rsvp_status'
                     ));
                     // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
                 } catch (QueryException $e) {
