@@ -681,6 +681,7 @@
                                         <h4 class="title">Host created registries</h4>
                                          <div class="row">
                                             @foreach ($eventInfo['guest_view']['gift_registry'] as $gift )
+                                        <a href="{{$eventInfo['guest_view']['registry_link']}}">
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">
                                                 <div class="target d-flex gap-3 align-items-center">
 
@@ -698,7 +699,8 @@
                                                         <p>View their wish list</p>
                                                     </div>
                                                 </div>
-                                           </div> 
+                                            </div> 
+                                        </a>
                                             @endforeach
                                             
                                             {{-- <div class="col-lg-6 col-md-6 col-sm-6">
