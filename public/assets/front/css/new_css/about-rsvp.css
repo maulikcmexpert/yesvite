@@ -275,6 +275,7 @@
     width: 100%;
     height: 198px;
     border-radius: 16px;
+    margin-top: 15px;
 }
 
 .location-wrp .direction-btn{
@@ -295,7 +296,7 @@
 
 .location-wrp #map{
     /* position: relative; */
-    overflow: unset !important;
+    overflow: hidden !important;
 }
 
 .location-wrp #map img.marker{
