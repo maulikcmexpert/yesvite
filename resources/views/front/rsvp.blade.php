@@ -222,7 +222,7 @@
                                                 
                                             <div class="guest-user-box">
                                               <div class="guest-list-data">
-                                                <a href="#" class="guest-img">
+                                                <div class="guest-img">
                                                 @if ($guest_data['profile'] != '')
                                                     <img src="{{$guest_data['profile']}}" alt="guest-img">
                                                     @else
@@ -234,7 +234,7 @@
                                                     @endphp
                                                          <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                 @endif
-                                                </a>
+                                                </div>
                                                 <div class="w-100">
                                                   <div class="d-flex flex-column">
                                                       <a href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</a>
