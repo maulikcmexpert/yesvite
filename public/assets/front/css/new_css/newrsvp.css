@@ -1046,6 +1046,11 @@ display:none;}
     padding-left: 20px;
 }
 
+.nav-messaging svg{
+    width: unset !important;
+    height: unset !important;
+}
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
