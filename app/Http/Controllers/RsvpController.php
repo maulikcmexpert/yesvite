@@ -208,7 +208,7 @@ class RsvpController extends Controller
                     $eventDetails['zip_code'] = $eventDetail->zip_code;
                     $eventDetails['city'] = $eventDetail->city;
                     $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
-                    $eventDetails['logitude'] = (!empty($eventDetail->logitude) || $eventDetail->logitude != null) ? $eventDetail->logitude : "";
+                    $eventDetails['logitude'] = (!empty($eventDetail->longitude) || $eventDetail->longitude != null) ? $eventDetail->longitude : "";
                     
                     $eventsScheduleList = [];
                     foreach ($eventDetail->event_schedule as $key => $value) {
