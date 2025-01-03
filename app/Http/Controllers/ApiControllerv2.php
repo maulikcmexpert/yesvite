@@ -10834,7 +10834,7 @@ class ApiControllerv2 extends Controller
             // whereHas('user', function ($query) {
             //     $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id, 'read' => '1'])->count();
+            where(['event_id' => $eventDetail->id, 'read' => '1','is_co_host'=>'0'])->count();
 
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
