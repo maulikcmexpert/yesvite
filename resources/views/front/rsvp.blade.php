@@ -843,7 +843,7 @@
                                     <div class="rsvp-msgbox">
                                         <h5>Message</h5>
                                         <div class="input-form">
-                                            <textarea class="form-control inputText" id="message_to_host" name="message_to_host" message=""></textarea>
+                                            <textarea class="form-control inputText" id="message_to_host" name="message_to_host" message=""  maxlength="50"></textarea>
                                             <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -944,7 +944,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea class="form-control inputText" id="message_to_host" name="message_to_host" required=""></textarea>
+                                    <textarea class="form-control inputText" id="message_to_host" name="message_to_host" required=""  maxlength="50"></textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">
