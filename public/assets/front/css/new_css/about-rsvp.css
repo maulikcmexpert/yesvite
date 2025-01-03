@@ -691,6 +691,9 @@
     line-height: normal !important;
 }
 
+#map{
+    overflow: unset !important;
+}
 
 
 /* ========= responsive =========== */
