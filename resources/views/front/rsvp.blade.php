@@ -681,16 +681,17 @@
                                         <h4 class="title">Host created registries</h4>
                                          <div class="row">
                                             @foreach ($eventInfo['guest_view']['gift_registry'] as $gift )
-                                        <a href="{{$gift['registry_link']}}">
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">
+                                                <a href="{{$gift['registry_link']}}">
+
                                                 <div class="target d-flex gap-3 align-items-center">
 
                                                     @php
                                                     $logo="";
-                                                    if($gift['registry_recipient_name']=="amazon"){
-                                                        $logo=asset('assets/amazon.jpg');
-                                                    }elseif ($gift['registry_recipient_name']=="target") {
-                                                        $logo=asset('assets/target.jpg');
+                                                    if($gift['registry_recipient_name']=="amazon"||$gift['registry_recipient_name']=="Amazon"){
+                                                        $logo=asset('assets/amazon.png');
+                                                    }elseif ($gift['registry_recipient_name']=="target"||$gift['registry_recipient_name']=="Target") {
+                                                        $logo=asset('assets/target.png');
                                                     }
                                                     @endphp
                                                    <img src="{{$logo}}" alt="">
@@ -699,8 +700,8 @@
                                                         <p>View their wish list</p>
                                                     </div>
                                                 </div>
+                                            </a>
                                             </div> 
-                                        </a>
                                             @endforeach
                                             
                                             {{-- <div class="col-lg-6 col-md-6 col-sm-6">
