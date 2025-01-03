@@ -195,6 +195,8 @@ const address=document.getElementById("event_address").value;
 
 
   function createMap(lat, lng) {
+    console.log(lat+'  '+lng);
+    
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: lat, lng: lng },
       zoom: 10,
