@@ -182,6 +182,7 @@
                                          <h4 class="title">Event Location</h4>
                                          <h5>{{$eventInfo['guest_view']['event_location_name']}}</h5>
                                          {{-- <p>2369 Graystone Lakes Maconey, CA 90210</p> --}}
+                                         @if($eventInfo['guest_view']['address_1']!="")
                                          <p>{{$eventInfo['guest_view']['address_1']}} {{$eventInfo['guest_view']['city']}}, {{$eventInfo['guest_view']['state']}} {{$eventInfo['guest_view']['zip_code']}}</p>
                                          <input type="hidden" id="event_latitude" value="{{$eventInfo['guest_view']['latitude']}}"/>
                                         <input type="hidden" id="event_logitude" value="{{$eventInfo['guest_view']['logitude']}}"/>
@@ -200,6 +201,7 @@
                                                         <img src="./assets/img/location-marker.svg" alt="marker" class="marker"> --}}
                                          </div>
                                          <a href="#" class="direction-btn">Directions</a>
+                                         @endif
                                      </div>
                                      <div class="guest-user-list rsvp-guest-user-list-wrp cmn-card">
                                          <div class="rsvp-guest-user-list-title">
