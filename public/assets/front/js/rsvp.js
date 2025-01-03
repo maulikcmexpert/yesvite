@@ -193,6 +193,20 @@ const address=document.getElementById("event_address").value;
  
   }
 
+
+  function createMap(lat, lng) {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: lat, lng: lng },
+      zoom: 10,
+    });
+  
+    new google.maps.Marker({
+      position: { lat: lat, lng: lng },
+      map: map,
+      title: "Test Location",
+    });
+  }
+
   $(document).on("click", ".direction-btn", function () {
     const lat = $(this).data("lat");
     const long = $(this).data("long");
