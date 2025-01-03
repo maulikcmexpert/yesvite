@@ -131,7 +131,7 @@ class RsvpController extends Controller
         $title = 'RSVP';
         $page = 'front.rsvp';
         $js = ['rsvp'];
-
+        $css = 'message.css';
 
         $event_id =  decrypt($eventId);
         $user_id = decrypt($userId);
@@ -408,6 +408,7 @@ class RsvpController extends Controller
                         'title',
                         'page',
                         'js',
+                        'css',
                         'eventInfo',
                         'event_id',
                         'user_id',
