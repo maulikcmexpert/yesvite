@@ -187,7 +187,7 @@ const address=document.getElementById("event_address").value;
           
       const map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: latitude, lng: longitutde },
-        zoom: 15,
+        zoom: 25,
       });
   
       // Create the marker
