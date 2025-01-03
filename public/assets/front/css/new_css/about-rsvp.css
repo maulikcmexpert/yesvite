@@ -271,10 +271,11 @@
     font-family: var(--SFProDisplay-Regular);
 }
 
-.location-wrp #map iframe{
+.location-wrp #map{
     width: 100%;
     height: 198px;
     border-radius: 16px;
+    margin-top: 15px;
 }
 
 .location-wrp .direction-btn{
@@ -294,7 +295,8 @@
 }
 
 .location-wrp #map{
-    position: relative;
+    /* position: relative; */
+    overflow: hidden !important;
 }
 
 .location-wrp #map img.marker{
@@ -690,7 +692,6 @@
 .guest-user-list .sucess-no h5{
     line-height: normal !important;
 }
-
 
 
 /* ========= responsive =========== */

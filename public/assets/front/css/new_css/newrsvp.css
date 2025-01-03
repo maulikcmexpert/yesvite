@@ -650,6 +650,7 @@ display:none;}
     border: none !important;
     box-shadow: none;
     margin: 0px;
+    border-radius: 20px;
 }
 
 .rsvp-guest-user-list-wrp .guest-img{

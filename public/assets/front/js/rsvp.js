@@ -150,13 +150,73 @@ $("#rsvp-no-modal").on('show.bs.modal', function (e) {
     });
   })
 
-
+//   latitude
+//   logitude
    
+
+const latitude=parseFloat(document.getElementById("event_latitude").value);
+const longitutde=parseFloat(document.getElementById("event_logitude").value);
+const address=document.getElementById("event_address").value;
+
   function initMap() {
+    // Create the map
+    if ((latitude === 0.0 && longitutde === 0.0) || 
+    (latitude === 0 && longitutde === 0)) {
+       // Use geocoding to search by address
+       const geocoder = new google.maps.Geocoder();
+       geocoder.geocode({ address: address }, function (results, status) {
+         if (status === "OK") {
+           const location = results[0].geometry.location;
+           createMap({ lat: location.lat(), lng: location.lng() });
+         } else {
+           alert("Geocode was not successful for the following reason: " + status);
+         }
+       });
+    }else{
+      const mapElement = document.getElementById("map");
+      mapElement.style.height = "198px";
+      mapElement.style.width = "100%";
+  
+          
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: latitude, lng: longitutde },
+        zoom: 10,
+      });
+  
+      // Create the marker
+      const marker = new google.maps.Marker({
+        position: {  lat: latitude, lng: longitutde},
+        map: map,
+        title: "test location", // Optional: adds a tooltip on hover
+      });
+    }
+ 
+  }
+
+
+  function createMap(lat, lng) {
+    console.log(lat+'  '+lng);
+    
     const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
+      center: { lat: lat, lng: lng },
+      zoom: 10,
+    });
+  
+    new google.maps.Marker({
+      position: { lat: lat, lng: lng },
+      map: map,
+      title: "Test Location",
     });
   }
 
-  initMap();
+  $(document).on("click", ".direction-btn", function () {
+    const lat = $(this).data("lat");
+    const long = $(this).data("long");
+  
+    if (lat && long) {
+      const googleMapsUrl = `https://www.google.com/maps?q=${lat},${long}`;
+      window.open(googleMapsUrl, "_blank"); 
+    } 
+  });
+  
+//   initMap();

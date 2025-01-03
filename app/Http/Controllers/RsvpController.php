@@ -208,7 +208,7 @@ class RsvpController extends Controller
                     $eventDetails['zip_code'] = $eventDetail->zip_code;
                     $eventDetails['city'] = $eventDetail->city;
                     $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
-                    $eventDetails['logitude'] = (!empty($eventDetail->logitude) || $eventDetail->logitude != null) ? $eventDetail->logitude : "";
+                    $eventDetails['logitude'] = (!empty($eventDetail->longitude) || $eventDetail->longitude != null) ? $eventDetail->longitude : "";
                     
                     $eventsScheduleList = [];
                     foreach ($eventDetail->event_schedule as $key => $value) {
@@ -485,23 +485,23 @@ class RsvpController extends Controller
         //         }
         // }
 
-            // if($request->rsvp_status=="0"){
+        if(empty($request->input('notifications'))){
+            // dd(1);
+                if($sync_id!=""||$sync_id!=null){
+                    $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                    })->where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
+                }else{
+                    $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                        $query->where('app_user', '1');
+                    })->where(['user_id' => $userId, 'is_co_host'=>'0','event_id' => $eventId])->first();
+                }
 
-            //     if($sync_id!=""||$sync_id!=null){
-            //         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-            //         })->where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
-            //     }else{
-            //         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-            //             $query->where('app_user', '1');
-            //         })->where(['user_id' => $userId, 'is_co_host'=>'0','event_id' => $eventId])->first();
-            //     }
-
-            //     $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-            //     if ($updateUser != null) {
-            //         $updateUser->notification_on_off = $input['status'];
-            //         $updateUser->save();
-            //     }
-            // }
+                // $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+                if ($rsvpSent != null) {
+                    $rsvpSent->notification_on_off = '0';
+                    $rsvpSent->save();
+                }
+            }
         
             $notificationParam = [
 
