@@ -162,13 +162,18 @@ const address=document.getElementById("event_address").value;
     // Create the map
     if ((latitude === 0.0 && longitutde === 0.0) || 
     (latitude === 0 && longitutde === 0)) {
-      console.log(address);
-      
-       const geocoder = new google.maps.Geocoder();
-       geocoder.geocode({ address: address }, function (results, status) {
-         if (status === "OK") {
-           const location = results[0].geometry.location;
-           console.log(location);
+    
+      console.log("Address to geocode: " + address);
+    
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: address }, function (results, status) {
+        if (status === "OK") {
+          const location = results[0].geometry.location;
+          const lat = location.lat();
+          const lng = location.lng();
+          
+          console.log("Latitude: " + lat);
+          console.log("Longitude: " + lng);
            createMap({ lat: location.lat(), lng: location.lng() });
          } else {
            alert("Geocode was not successful for the following reason: " + status);
