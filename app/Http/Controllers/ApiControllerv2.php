@@ -4763,6 +4763,7 @@ class ApiControllerv2 extends Controller
             DB::beginTransaction();
             $updateEvent = Event::where('id', $eventData['event_id'])->first();
             $isCohost=  EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+            dD(1);
             $isCohostUserId =  (isset($isCohost) && $isCohost!=null)?$isCohost->user_id:"";
             if ($updateEvent != null) {
                 // $rsvp_by_date = date('Y-m-d');
