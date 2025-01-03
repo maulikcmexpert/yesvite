@@ -271,7 +271,7 @@
     font-family: var(--SFProDisplay-Regular);
 }
 
-.location-wrp #map iframe{
+.location-wrp #map{
     width: 100%;
     height: 198px;
     border-radius: 16px;
