@@ -1046,7 +1046,7 @@ display:none;}
     padding-left: 20px;
 }
 
-.nav-messaging svg{
+#nav-messaging svg{
     width: unset !important;
     height: unset !important;
 }
