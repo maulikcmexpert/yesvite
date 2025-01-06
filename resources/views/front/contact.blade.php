@@ -53,7 +53,7 @@
                                     </svg>
                                 </span>
                             </div>
-                            @if(!empty($groups))
+                            @if($yesviteGroups->isNotEmpty())
                                 <div class="popular-list">
                                     <div class="d-flex justify-content-between align-items-center w-100">
                                         <h5>Popular group lists</h5>
