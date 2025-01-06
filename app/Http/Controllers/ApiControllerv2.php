@@ -2915,23 +2915,27 @@ class ApiControllerv2 extends Controller
 
                     $updatedContacts[] = $existingContact;
                 } else {
-                    $newContacts[] = [
-                        'userId' => null,
-                        'contact_id' => $user->id,
-                        'firstName' => $contact['firstname'] ?? '',
-                        'lastName' => $contact['lastname'] ?? '',
-                        'phone' => '',
-                        'email' => $contact['email'] ?? '',
-                        'photo' => $contact['photo'] ?? '',
-                        'phoneWithCode' => '',
-                        'isAppUser' => '0',
-                        'visible' => '0',
-                        'preferBy' => $contact['prefer_by'] ?? '',
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
+                    $newContact = new contact_sync();
+                    $newContact->userId = null;
+                    $newContact->contact_id = $user->id;
+                    $newContact->firstName = $contact['firstname'] ?? '';
+                    $newContact->lastName = $contact['lastname'] ?? '';
+                    $newContact->phone = '';
+                    $newContact->email = $contact['email'] ?? '';
+                    $newContact->photo = $contact['photo'] ?? '';
+                    $newContact->phoneWithCode = '';
+                    $newContact->isAppUser = '0';
+                    $newContact->visible = '0';
+                    $newContact->preferBy = $contact['prefer_by'] ?? '';
+                    $newContact->created_at = now();
+                    $newContact->updated_at = now();
+                    $newContact->save();
+
+                    $newContact->sync_id = $newContact->id;
+                    $newContacts[] = $newContact;
                 }
             }
+
             if ($phone != "") {
                 $existingContact = contact_sync::where('phoneWithCode', $phone)->first();
                 if (isset($existingContact)) {
@@ -2949,106 +2953,25 @@ class ApiControllerv2 extends Controller
 
                     $updatedContacts[] = $existingContact;
                 } else {
-                    $newContacts[] = [
-                        'userId' => null,
-                        'contact_id' => $user->id,
-                        'firstName' => $contact['firstname'] ?? '',
-                        'lastName' => $contact['lastname'] ?? '',
-                        'phone' => $contact['phone_number'] ?? '',
-                        'email' => '',
-                        'photo' => $contact['photo'] ?? '',
-                        'phoneWithCode' => $contact['phone_number'] ?? '',
-                        'isAppUser' => '0',
-                        'visible' => '0',
-                        'preferBy' => $contact['prefer_by'] ?? '',
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
+                    $newContact = new contact_sync();
+                    $newContact->userId = null;
+                    $newContact->contact_id = $user->id;
+                    $newContact->firstName = $contact['firstname'] ?? '';
+                    $newContact->lastName = $contact['lastname'] ?? '';
+                    $newContact->phone = $contact['phone_number'] ?? '';
+                    $newContact->email = '';
+                    $newContact->photo = $contact['photo'] ?? '';
+                    $newContact->phoneWithCode = $contact['phone_number'] ?? '';
+                    $newContact->isAppUser = '0';
+                    $newContact->visible = '0';
+                    $newContact->preferBy = $contact['prefer_by'] ?? '';
+                    $newContact->created_at = now();
+                    $newContact->updated_at = now();
+                    $newContact->save();
+
+                    $newContact->sync_id = $newContact->id;
+                    $newContacts[] = $newContact;
                 }
-            }
-            // if ($email != "" && $phone != "") {
-            //     $existingContact = contact_sync::where('email', $email)->where('phone', $phone)->first();
-            // } elseif ($email != "" && $phone == "") {
-            //     $existingContact = contact_sync::where('email', $email)->first();
-            //     if(isset($existingContact)){
-            //         $existingContact->update([
-            //             'isAppUser' => $existingContact->isAppUser,
-            //             'phone' => $contact['phone_number'] ?? $existingContact->phone,
-            //             'firstName' => $contact['firstname'] ?? $existingContact->firstName,
-            //             'lastName' => $contact['lastname'] ?? $existingContact->lastName,
-            //             'photo' => $contact['photo'] ?? $existingContact->photo,
-            //             'phoneWithCode' => $contact['phone_number'] ?? $existingContact->phoneWithCode,
-            //             'visible' => ($contact['visible'] ?? $existingContact->visible),
-            //             'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
-            //         ]);
-            //         $existingContact->sync_id = $existingContact->id;
-
-            //         $updatedContacts[] = $existingContact;
-            //     }else{
-            //         $newContacts[] = [
-            //             'userId' => null,
-            //             'contact_id' => $user->id,
-            //             'firstName' => $contact['firstname'] ?? '',
-            //             'lastName' => $contact['lastname'] ?? '',
-            //             'phone' => $contact['phone_number'] ?? '',
-            //             'email' => $contact['email'] ?? '',
-            //             'photo' => $contact['photo'] ?? '',
-            //             'phoneWithCode' => $contact['phone_number'] ?? '',
-            //             'isAppUser' => '0',
-            //             'visible' => '0',
-            //             'preferBy' => $contact['prefer_by'] ?? '',
-            //             'created_at' => now(),
-            //             'updated_at' => now(),
-            //         ];
-            //     }
-            // } elseif ($email == "" && $phone != "") {
-            //     $existingContact = contact_sync::where('phone', $phone)->first();
-            //     if(isset($existingContact)){
-            //         $existingContact->update([
-            //             'isAppUser' => $existingContact->isAppUser,
-            //             'phone' => $contact['phone_number'] ?? $existingContact->phone,
-            //             'firstName' => $contact['firstname'] ?? $existingContact->firstName,
-            //             'lastName' => $contact['lastname'] ?? $existingContact->lastName,
-            //             'photo' => $contact['photo'] ?? $existingContact->photo,
-            //             'phoneWithCode' => $contact['phone_number'] ?? $existingContact->phoneWithCode,
-            //             'visible' => ($contact['visible'] ?? $existingContact->visible),
-            //             'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
-            //         ]);
-            //         $existingContact->sync_id = $existingContact->id;
-
-            //         $updatedContacts[] = $existingContact;
-            //     }else{
-            //         $newContacts[] = [
-            //             'userId' => null,
-            //             'contact_id' => $user->id,
-            //             'firstName' => $contact['firstname'] ?? '',
-            //             'lastName' => $contact['lastname'] ?? '',
-            //             'phone' => $contact['phone_number'] ?? '',
-            //             'email' => $contact['email'] ?? '',
-            //             'photo' => $contact['photo'] ?? '',
-            //             'phoneWithCode' => $contact['phone_number'] ?? '',
-            //             'isAppUser' => '0',
-            //             'visible' => '0',
-            //             'preferBy' => $contact['prefer_by'] ?? '',
-            //             'created_at' => now(),
-            //             'updated_at' => now(),
-            //         ];
-            //     }
-            // }
-            // }
-
-            // Bulk insert new contacts
-            if (!empty($newContacts)) {
-                // dd($newContacts);
-                contact_sync::insert($newContacts);
-                $insertedIds = contact_sync::latest('id')
-                    ->take(count($newContacts))
-                    ->pluck('id')
-                    ->toArray();
-                foreach ($newContacts as $index => &$contacts) {
-                    $contacts['sync_id'] = $insertedIds[$index] ?? null;
-                }
-                unset($contacts);
             }
             DB::commit();
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
@@ -3103,7 +3026,7 @@ class ApiControllerv2 extends Controller
                 }
             }
             // Fetch all updated contacts from the request payload
-            echo "<<pre>";
+            echo "<pre>";
             print_r($allSyncedContacts);
             die;
             $allSyncedContacts = array_map(function ($item) {
