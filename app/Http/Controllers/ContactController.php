@@ -72,7 +72,7 @@ class ContactController extends Controller
                 ->where(['app_user' => '1'])
                 ->whereIn('email',$emails)
                 ->orderBy('firstname')
-                ->limit(3)
+                ->limit(2)
                 ->get();
 
             // dd($yesvite_users);
