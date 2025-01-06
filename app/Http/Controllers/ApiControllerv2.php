@@ -7743,7 +7743,7 @@ class ApiControllerv2 extends Controller
             $storiesDetaill['user_id'] =  $eventLoginUserStoriesList->user->id;
             $storiesDetaill['username'] =  $eventLoginUserStoriesList->user->firstname . ' ' . $eventLoginUserStoriesList->user->lastname;
             $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('storage/profile/' . $eventLoginUserStoriesList->user->profile);
-            $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+            $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $eventLoginUserStoriesList->user->id, 'is_co_host' => '1'])->first();
             $storiesDetaill['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
           
             $storiesDetaill['story'] = [];
@@ -7799,7 +7799,7 @@ class ApiControllerv2 extends Controller
                 $storiesDetaill['user_id'] =  $value->user->id;
                 $storiesDetaill['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 $storiesDetaill['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                 $storiesDetaill['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $storyAlldata = [];
                 foreach ($value->user_event_story as $storyVal) {
