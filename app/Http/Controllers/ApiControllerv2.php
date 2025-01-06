@@ -6551,6 +6551,9 @@ class ApiControllerv2 extends Controller
                             $potluckItem['id'] =  $itemValue->id;
                             $potluckItem['description'] =  $itemValue->description;
                             $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                            $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $itemValue->user_id, 'is_co_host' => '1'])->first();
+                            $potluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+          
                             $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                             $potluckItem['quantity'] =  $itemValue->quantity;
                             $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
@@ -6562,6 +6565,9 @@ class ApiControllerv2 extends Controller
                                 $userPotluckItem['id'] = $itemcarryUser->id;
                                 $userPotluckItem['user_id'] = $itemcarryUser->user_id;
                                 $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                                $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $itemValue->user_id, 'is_co_host' => '1'])->first();
+                                $userPotluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+              
                                 $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
                                 $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                 $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
