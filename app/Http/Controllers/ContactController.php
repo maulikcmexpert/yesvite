@@ -202,7 +202,7 @@ class ContactController extends Controller
                 $yesvite_user[] = (object)$yesviteUserDetail;
             }
             if(empty($yesvite_user)){
-                return response()->json(['status'=>'0'])->render();
+                return response()->json(['status'=>'0']);
             }else{
                 return view('front.ajax_contacts', compact('yesvite_user'))->render();
             }
@@ -289,6 +289,7 @@ class ContactController extends Controller
             ];
             $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
         }
+        if(empty(''))
                 return view('front.ajax_phones', compact('yesvite_phone'))->render();
             }
             return response()->json(['error' => 'Invalid request'], 400);
