@@ -7952,7 +7952,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['user_id'] =  $value->user->id;
                     // $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
-                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
@@ -8106,7 +8106,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;

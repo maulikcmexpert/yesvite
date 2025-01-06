@@ -72,7 +72,7 @@ class ContactController extends Controller
                 ->where(['app_user' => '1'])
                 ->whereIn('email',$emails)
                 ->orderBy('firstname')
-                ->limit(6)
+                ->limit(3)
                 ->get();
 
             // dd($yesvite_users);
@@ -169,16 +169,17 @@ class ContactController extends Controller
             ->where(['app_user' => '1'])
             ->whereIn('email',$emails)
             ->orderBy('firstname')
-            ->when($type == 'yesvite', function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->limit($request->limit)
-                        ->skip($request->offset);
-                });
+            ->when($request->has('limit') && $request->has('offset'), function ($query) use ($request) {
+                $query->skip($request->offset)
+                      ->take($request->limit);
             })
-            ->when($request->search_name != ''||$request->search_name != null, function ($query) use ($searchName) {
+
+
+            
+            ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
                     $q->where('firstname', 'LIKE', '%' . $searchName . '%')
-                        ->orWhere('lastname', 'LIKE', '%' . $searchName . '%');
+                      ->orWhere('lastname', 'LIKE', '%' . $searchName . '%');
                 });
             })
             ->get();

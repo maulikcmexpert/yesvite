@@ -8,7 +8,7 @@ $(document).ready(function () {
     var base_url=$('#base_url').val();
     var busy1 = false;
     var busy2=false;
-    var limit = 6;
+    var limit = 3;
     var offset = 0;
     var offset1 = 0;
 
