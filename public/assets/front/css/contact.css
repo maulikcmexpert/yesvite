@@ -430,7 +430,7 @@ ul.nav .nav-link:hover {
 .popular-list h5 {
     color: var(--secondryColor);
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0;
 }
 
@@ -728,6 +728,8 @@ ul.listing li span {
     color: #020202;
     text-align: left;
 }
+
+
 
 
 /* ======= Responsive ======= */
