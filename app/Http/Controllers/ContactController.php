@@ -101,7 +101,7 @@ class ContactController extends Controller
 
 
      
-        $getAllContacts = contact_sync::where('contact_id',$id)->limit(6)
+        $getAllContacts = contact_sync::where('contact_id',$id)->orderBy('firstName','asc')->limit(6)
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
@@ -229,28 +229,29 @@ class ContactController extends Controller
     {
         try {
             $id = Auth::guard('web')->user()->id;
-            // $searchPhone = $request->input('search_phone');
-            $searchName = $request->search_name;
-            $type = $request->type;
+            $searchPhone = $request->input('search_phone');
+            // $searchName = $request->search_name;
+            // $type = $request->type;
             if ($request->ajax()) {
-            //     $query = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id]);
+            // //     $query = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id]);
 
-            //     if ($searchPhone) {
-            //         $query->where(function ($q) use ($searchPhone) {
-            //             $q->where('firstname', 'LIKE', '%' . $searchPhone . '%')
-            //                 ->orWhere('lastname', 'LIKE', '%' . $searchPhone . '%');
-            //         });
-            //     }
+            // //     if ($searchPhone) {
+            // //         $query->where(function ($q) use ($searchPhone) {
+            // //             $q->where('firstname', 'LIKE', '%' . $searchPhone . '%')
+            // //                 ->orWhere('lastname', 'LIKE', '%' . $searchPhone . '%');
+            // //         });
+            // //     }
 
-            //     $yesvitePhones = $query->paginate(10);
-            $getAllContacts = contact_sync::where('contact_id',$id)
-            ->when($type == 'phone', function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->limit($request->limit)
-                        ->skip($request->offset);
-                });
-            })
-            ->get();
+            // //     $yesvitePhones = $query->paginate(10);
+            // $getAllContacts = contact_sync::where('contact_id',$id)
+
+            // ->when($type == 'phone', function ($query) use ($request) {
+            //     $query->where(function ($q) use ($request) {
+            //         $q->limit($request->limit)
+            //             ->skip($request->offset);
+            //     });
+            // })
+            // ->get();
             // ->when($request->search_name != ''||$request->search_name != null, function ($query) use ($searchName) {
             //     $query->where(function ($q) use ($searchName) {
             //         $q->where('firstName', 'LIKE', '%' . $searchName . '%')
@@ -259,6 +260,18 @@ class ContactController extends Controller
             // })
 
         // dd(count($getAllContacts));
+
+        $query = contact_sync::where('contact_id', $id)->orderBy('firstName','asc');
+        if (!empty($searchPhone)) {
+            $query->where(function ($q) use ($searchPhone) {
+                $q->where('firstName', 'LIKE', '%' . $searchPhone . '%')
+                    ->orWhere('lastName', 'LIKE', '%' . $searchPhone . '%');
+            });
+        }
+        if ($request->has('limit') && $request->has('offset')) {
+            $query->skip($request->offset)->take($request->limit);
+        }
+        $getAllContacts = $query->get();
         $yesvite_phone = [];
         foreach ($getAllContacts as $user) {
             $yesviteUserPhoneDetail = [

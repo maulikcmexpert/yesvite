@@ -23,7 +23,10 @@
                     </nav>
                     <div class="contact-title">
                         <h3>Contacts</h3>
-                        <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#myModal1">Add New Contact</a>
+                        <div>
+                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#">Upload CSV</button>
+                            <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#myModal1">Add New Contact</a>
+                        </div>
                     </div>
                 </div>
                 <div class="contact-tab contact-user">

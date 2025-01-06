@@ -141,7 +141,7 @@ $(document).on("keyup", ".search_phone", function () {
                     return;
                 }
                 $("#loader").hide();
-                $("#yesvitePhones").html(data);
+                $("#yesvitePhones").append(data);
                 busy2 = false;
 
             },
