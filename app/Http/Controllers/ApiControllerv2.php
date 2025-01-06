@@ -985,7 +985,13 @@ class ApiControllerv2 extends Controller
                         $eventDetail['event_name'] = $value->event->event_name;
                         $eventDetail['is_event_owner'] = ($value->event->user->id == $user->id) ? 1 : 0;
 
-                        $eventDetail['is_co_host'] = $value->is_co_host;
+                        // $eventDetail['is_co_host'] = $value->is_co_host;
+                        $isCoHost = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id,'is_co_host'=>'1'])->first();
+                        $eventDetail['is_co_host'] = "0";
+                        if ($isCoHost != null) {
+                            $eventDetail['is_co_host'] = $isCoHost->is_co_host;
+                        }
+                       
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                         $eventDetail['message_to_guests'] = $value->event->message_to_guests;
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
