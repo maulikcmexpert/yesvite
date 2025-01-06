@@ -55,7 +55,7 @@
                             </div>
                             @if($yesviteGroups->isNotEmpty())
                                 <div class="popular-list">
-                                    <div class="d-flex justify-content-between align-items-center w-100 mb-2">
+                                    <div class="d-flex justify-content-between align-items-center w-100 mb-3 mt-4">
                                         <h5>Popular group lists</h5>
                                         <a href="#" class="see_all_group">See All</a>
                                     </div>
