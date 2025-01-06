@@ -53,29 +53,33 @@
                                     </svg>
                                 </span>
                             </div>
-                            <div class="popular-list">
-                                <div class="d-flex justify-content-between align-items-center w-100">
-                                    <h5>Popular group lists</h5>
-                                    <a href="#" class="see_all_group">See All</a>
-                                </div>
-                            </div>
-                            <div class="user-contacts group_list group_search_list">
-                                    <div class="group-card">
-                                        <div class="view_members">
-                                            <h4>test grp 1</h4>
-                                            <p>2 Guests</p>
-                                        </div>
-                                        <span class="ms-auto me-3">
-                                        </span>
-                                        <span>
-                                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M5.94043 13.7797L10.2871 9.43306C10.8004 8.91973 10.8004 8.07973 10.2871 7.56639L5.94043 3.21973" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </span>
+                            @if(!empty($groups))
+                                <div class="popular-list">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <h5>Popular group lists</h5>
+                                        <a href="#" class="see_all_group">See All</a>
                                     </div>
-                            </div>
+                                </div>
+                                <div class="user-contacts group_list group_search_list">
+                                    @foreach ($groups as $value)
+                                        <div class="group-card">
+                                            <div class="view_members">
+                                                <h4>{{$value->name}}</h4>
+                                                <p>{{$value->group_members_count.' Guests'}}</p>
+                                            </div>
+                                            <span class="ms-auto me-3">
+                                            </span>
+                                            <span>
+                                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M5.94043 13.7797L10.2871 9.43306C10.8004 8.91973 10.8004 8.07973 10.2871 7.56639L5.94043 3.21973" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="product-scroll" id="product-scroll">
-                                @if(!empty($user->groups))
+                                {{-- @if(!empty($user->groups))
                                 <div class="popular-list">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                                         <h5>Popular group lists</h5>
@@ -92,7 +96,7 @@
 
                                     </ul>
                                 </div>
-                                @endif
+                                @endif --}}
                               
                                 <div class="user-contacts" id="yesviteUser">
                                     @include('front.ajax_contacts', ['yesvite_user' => $yesvite_user])

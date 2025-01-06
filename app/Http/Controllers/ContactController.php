@@ -55,7 +55,7 @@ class ContactController extends Controller
         $user['join_date'] = $formatted_date;
 
         // $yesviteUser = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname')->paginate(10);
-        $yesviteGroups = Group::withCount('groupMembers')->paginate(10);
+        $yesviteGroups = Group::where('user_id', $user->id)->withCount('groupMembers')->paginate(10);
         // $yesvitePhones = User::where(['is_user_phone_contact' => '1', 'parent_user_phone_contact' => $id])->paginate(10);
 
 
