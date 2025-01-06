@@ -454,12 +454,11 @@ class ApiControllerv2 extends Controller
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id,'is_co_host'=>'1'])->first();
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
-
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                     } else {
-
-
+                        if ($isCoHost != null) {
                         $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
+                        }
                     }
                     $eventDetail['is_co_host'] = "0";
                     if ($isCoHost != null) {
