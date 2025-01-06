@@ -3026,9 +3026,9 @@ class ApiControllerv2 extends Controller
                 }
             }
             // Fetch all updated contacts from the request payload
-            echo "<pre>";
-            print_r($allSyncedContacts);
-            die;
+            // echo "<pre>";
+            // print_r($allSyncedContacts);
+            // die;
             $allSyncedContacts = array_map(function ($item) {
                 // dd($item);
                 $item['isAppUser'] = (int)$item['isAppUser'];
