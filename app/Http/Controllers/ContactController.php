@@ -293,68 +293,284 @@ class ContactController extends Controller
     }
 
 
-
-
-    public function addContact(Request $request, string $id)
+    public function addContact(Request $request)
     {
+        $user = Auth::guard('web')->user();
+        $rawData = $request->getContent();
+        $input = json_decode($rawData, true);
 
-        // dd($request);
-        $id = decrypt($id);
+        if ($input === null) {
+            return response()->json(['status' => 0, 'message' => 'Invalid JSON']);
+        }
+
+        // if ($input['prefer_by'] == 'email') {
+        //     $validator = Validator::make($input, [
+        //         'firstname' => ['required'],
+        //         'lastname' => ['required'],
+        //         'email' => ['required', 'email:rfc,dns'],
+        //         'prefer_by' => ['required', 'in:email,phone']
+
+        //     ]);
+        // } elseif ($input['prefer_by'] == 'phone') {
+        //     $validator = Validator::make($input, [
+        //         'firstname' => ['required'],
+        //         'lastname' => ['required'],
+        //         'country_code' => ['required'],
+        //         'phone_number' => ['required'],
+        //         'email' => ['required', 'email:rfc,dns'],
+        //         'prefer_by' => ['required', 'in:email,phone']
+        //     ]);
+        // }
+
+        $customMessages = [
+            'prefer_by.in' => 'The prefer_by field must be email or phone.',
+        ];
+
+        // $validator->setCustomMessages($customMessages);
+        // if ($validator->fails()) {
+
+        //     return response()->json([
+        //         'status' => 0,
+        //         'message' => $validator->errors()->first(),
+        //     ]);
+        // }
         try {
-            $validator = Validator::make($request->all(), [
-                'Fname' => 'required|string', // max 2MB
-                'Lname' => 'required|string', // max 2MB
-                // 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
-                'phone_number' => ['present', 'nullable', 'regex:/^\d{3}-\d{3}-\d{4}$/', Rule::unique('users', 'phone_number')->ignore(decrypt($request->id)),
-],
+            DB::beginTransaction();
+            $emails = array_filter(array_column($input, 'email'));
+            $newContacts = [];
+            $updatedContacts = [];
 
-                'email' => ['required', 'email', new EmailExists], // max 2MB
-
-            ], [
-                'Fname.required' => 'Please enter First Name',
-                'Lname.required' => 'Please enter Last Name',
-
-                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
-                'phone_number.regex' => 'Phone number must be in the format 123-123-1234.',
-
-                'email.required' => 'Please enter email',
-                'email.email' => 'Please enter a valid email address',
-            ]);
-
-            if ($validator->fails()) {
+            // foreach ($input as $contact) {
+            $contact = $input;
+            // dd($contact);
+            $email = $contact['email'] ?? '';
+            $phone = $contact['phone_number'] ?? '';
+            if ((isset($contact['email']) && $contact['email'] != '' && $user->email == $contact['email']) || (isset($contact['phone_number']) && $contact['phone_number'] != '' && $user->phone_number == $contact['phone_number'])) {
                 return response()->json([
                     'status' => 0,
-                    'message' => $validator->errors()->first(),
-
+                    'message' => 'You can not add your details as contact',
+                    'data' => $updatedContacts,
                 ]);
             }
 
-            DB::beginTransaction();
+            if ($email != "") {
+                $existingContact = contact_sync::where('email', $email)->first();
+                if (isset($existingContact)) {
+                    $existingContact->update([
+                        'isAppUser' => $existingContact->isAppUser,
+                        'phone' => '',
+                        'firstName' => $contact['firstname'] ?? $existingContact->firstName,
+                        'lastName' => $contact['lastname'] ?? $existingContact->lastName,
+                        'photo' => $contact['photo'] ?? $existingContact->photo,
+                        'phoneWithCode' => '',
+                        'visible' => ($contact['visible'] ?? $existingContact->visible),
+                        'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
+                    ]);
+                    $existingContact->sync_id = $existingContact->id;
 
-            $addcontact =  User::create([
-                'firstname' => $request['Fname'],
-                'lastname' => $request['Lname'],
-                'email' => $request['email'],
-                'phone_number' => $request['phone_number'],
-                'country_code' => $request['country_code'],
-                'app_user' => '0',
-                'parent_user_phone_contact' => $id,
-                'user_parent_id' => $id,
-                'is_user_phone_contact' => '0'
+                    $updatedContacts[] = $existingContact;
+                } else {
+                    $newContact = new contact_sync();
+                    $newContact->userId = null;
+                    $newContact->contact_id = $user->id;
+                    $newContact->firstName = $contact['firstname'] ?? '';
+                    $newContact->lastName = $contact['lastname'] ?? '';
+                    $newContact->phone = '';
+                    $newContact->email = $contact['email'] ?? '';
+                    $newContact->photo = $contact['photo'] ?? '';
+                    $newContact->phoneWithCode = '';
+                    $newContact->isAppUser = '0';
+                    $newContact->visible = '0';
+                    $newContact->preferBy = $contact['prefer_by'] ?? '';
+                    $newContact->created_at = now();
+                    $newContact->updated_at = now();
+                    $newContact->save();
 
-            ]);
+                    $newContact->sync_id = $newContact->id;
+                    $newContacts[] = $newContact;
+                }
+            }
 
+            if ($phone != "") {
+                $existingContact = contact_sync::where('phoneWithCode', $phone)->first();
+                if (isset($existingContact)) {
+                    $existingContact->update([
+                        'isAppUser' => $existingContact->isAppUser,
+                        'phone' => $contact['phone_number'] ?? $existingContact->phone,
+                        'firstName' => $contact['firstname'] ?? $existingContact->firstName,
+                        'lastName' => $contact['lastname'] ?? $existingContact->lastName,
+                        'photo' => $contact['photo'] ?? $existingContact->photo,
+                        'phoneWithCode' => $contact['phone_number'] ?? $existingContact->phoneWithCode,
+                        'visible' => ($contact['visible'] ?? $existingContact->visible),
+                        'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
+                    ]);
+                    $existingContact->sync_id = $existingContact->id;
+
+                    $updatedContacts[] = $existingContact;
+                } else {
+                    $newContact = new contact_sync();
+                    $newContact->userId = null;
+                    $newContact->contact_id = $user->id;
+                    $newContact->firstName = $contact['firstname'] ?? '';
+                    $newContact->lastName = $contact['lastname'] ?? '';
+                    $newContact->phone = $contact['phone_number'] ?? '';
+                    $newContact->email = '';
+                    $newContact->photo = $contact['photo'] ?? '';
+                    $newContact->phoneWithCode = $contact['phone_number'] ?? '';
+                    $newContact->isAppUser = '0';
+                    $newContact->visible = '0';
+                    $newContact->preferBy = $contact['prefer_by'] ?? '';
+                    $newContact->created_at = now();
+                    $newContact->updated_at = now();
+                    $newContact->save();
+
+                    $newContact->sync_id = $newContact->id;
+                    $newContacts[] = $newContact;
+                }
+            }
             DB::commit();
-            return response()->json(['status' => 1, 'message' => "Contact Added!", 'user' => $addcontact]);
+            $allSyncedContacts = array_merge($newContacts, $updatedContacts);
+
+            $emails = array_filter(array_column($input, 'email'));
+            $phoneNumbers = array_filter(array_column($input, 'phone_number'));
+
+            $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible', 'prefer_by')
+                ->where('email', $contact['email'])
+                ->where('app_user', '1')
+                // ->orWhere('phone_number', $contact['phone_number'])
+                ->get();
+            // dd($userDetails);
+            foreach ($userDetails as $userDetail) {
+
+                contact_sync::where('contact_id', $user->id)
+                    ->where(function ($query) use ($userDetail) {
+                        $query->where('email', $userDetail->email)
+                            ->orWhere('phone', $userDetail->phone_number);
+                    })
+                    ->update([
+                        'userId' => $userDetail->id,
+                        'firstName' => $userDetail->firstname,
+                        'lastName' => $userDetail->lastname
+                    ]);
+                $index = array_search(true, array_map(function ($allSyncedContact) use ($userDetail) {
+
+                    // return $updatedContacts['email'] === $userDetail->email || $updatedContacts['phone'] === $userDetail->phone_number;
+                    if ($allSyncedContact['email'] == $userDetail->email || $allSyncedContact['phone'] == $userDetail->phone_number) {
+                        if ($allSyncedContact['email'] == $userDetail->email) {
+                            return $allSyncedContact['email'] === $userDetail->email;
+                        }
+
+                        if ($userDetail->phone_number != '' && $allSyncedContact['phone'] == $userDetail->phone_number) {
+                            // dd($allSyncedContact);
+                            return $allSyncedContact['phone'] === $userDetail->phone_number;
+                        }
+                    }
+                }, $allSyncedContacts));
+                if ($index !== false) {
+
+                    // Update the matching contact
+                    $allSyncedContacts[$index]['userId'] = $userDetail->id;
+                    $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
+                    $allSyncedContacts[$index]['firstName'] = $userDetail->firstname;
+                    $allSyncedContacts[$index]['lastName'] = $userDetail->lastname;
+                    $allSyncedContacts[$index]['visible'] = $userDetail->visible;
+                    $allSyncedContacts[$index]['email'] = $userDetail->email;
+                    $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
+                    $allSyncedContacts[$index]['preferBy'] = $userDetail->prefer_by;
+                    $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/profile/' . $userDetail->profile) : '';
+                }
+            }
+            // Fetch all updated contacts from the request payload
+            // echo "<pre>";
+            // print_r($allSyncedContacts);
+            // die;
+            $allSyncedContacts = array_map(function ($item) {
+                // dd($item);
+                $item['isAppUser'] = (int)$item['isAppUser'];
+                $item['visible'] = (int)$item['visible'];
+                if ($item['phone'] === null) {
+                    $item['phone'] = '';
+                }
+                if ($item['userId'] === null) {
+                    $item['userId'] = 0;
+                }
+                return $item;
+            }, $allSyncedContacts);
+            // dd($allSyncedContacts);
+            return response()->json([
+                'status' => 1,
+                'message' => empty($updatedContacts) ? 'Contacts inserted successfully.' : 'Contacts updated successfully.',
+                'data' => $allSyncedContacts,
+            ]);
         } catch (QueryException $e) {
-            DB::Rollback();
-            $userData =  getUser($id);
-            return response()->json(['status' => 0, 'message' => "db error", 'user' => $userData]);
+            DB::rollBack();
+            // dd($e);
+            return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (Exception  $e) {
-            $userData =  getUser($id);
-            return response()->json(['status' => 0, 'message' => "something went wrong", 'user' => $userData]);
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+//     public function addContact(Request $request, string $id)
+//     {
+
+//         // dd($request);
+//         $id = decrypt($id);
+//         try {
+//             $validator = Validator::make($request->all(), [
+//                 'Fname' => 'required|string', // max 2MB
+//                 'Lname' => 'required|string', // max 2MB
+//                 // 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
+//                 'phone_number' => ['present', 'nullable', 'regex:/^\d{3}-\d{3}-\d{4}$/', Rule::unique('users', 'phone_number')->ignore(decrypt($request->id)),
+// ],
+
+//                 'email' => ['required', 'email', new EmailExists], // max 2MB
+
+//             ], [
+//                 'Fname.required' => 'Please enter First Name',
+//                 'Lname.required' => 'Please enter Last Name',
+
+//                 // 'phone_number.numeric' => 'Please enter Phone Number in digit',
+//                 'phone_number.regex' => 'Phone number must be in the format 123-123-1234.',
+
+//                 'email.required' => 'Please enter email',
+//                 'email.email' => 'Please enter a valid email address',
+//             ]);
+
+//             if ($validator->fails()) {
+//                 return response()->json([
+//                     'status' => 0,
+//                     'message' => $validator->errors()->first(),
+
+//                 ]);
+//             }
+
+//             DB::beginTransaction();
+
+//             $addcontact =  User::create([
+//                 'firstname' => $request['Fname'],
+//                 'lastname' => $request['Lname'],
+//                 'email' => $request['email'],
+//                 'phone_number' => $request['phone_number'],
+//                 'country_code' => $request['country_code'],
+//                 'app_user' => '0',
+//                 'parent_user_phone_contact' => $id,
+//                 'user_parent_id' => $id,
+//                 'is_user_phone_contact' => '0'
+
+//             ]);
+
+//             DB::commit();
+//             return response()->json(['status' => 1, 'message' => "Contact Added!", 'user' => $addcontact]);
+//         } catch (QueryException $e) {
+//             DB::Rollback();
+//             $userData =  getUser($id);
+//             return response()->json(['status' => 0, 'message' => "db error", 'user' => $userData]);
+//         } catch (Exception  $e) {
+//             $userData =  getUser($id);
+//             return response()->json(['status' => 0, 'message' => "something went wrong", 'user' => $userData]);
+//         }
+//     }
     public function editContact(Request $request, string $id)
     {
 

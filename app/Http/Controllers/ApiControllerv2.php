@@ -7743,14 +7743,18 @@ class ApiControllerv2 extends Controller
             $storiesDetaill['user_id'] =  $eventLoginUserStoriesList->user->id;
             $storiesDetaill['username'] =  $eventLoginUserStoriesList->user->firstname . ' ' . $eventLoginUserStoriesList->user->lastname;
             $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('storage/profile/' . $eventLoginUserStoriesList->user->profile);
-
+            $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+            $storiesDetaill['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+          
             $storiesDetaill['story'] = [];
             foreach ($eventLoginUserStoriesList->user_event_story as $storyVal) {
                 $storiesData['id'] = $storyVal->id;
                 $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('storage/event_user_stories/' . $storyVal->story);
                 $storiesData['type'] = $storyVal->type;
                 $storiesData['post_time'] =  $this->setpostTime($storyVal->updated_at);
+                
                 $checkISeen = UserSeenStory::where(['user_id' => $user->id, 'user_event_story_id' => $storyVal->id])->count();
+
                 $storiesData['is_seen'] = ($checkISeen != 0) ? "1" : "0";
                 if ($storyVal->type == 'video') {
                     $storiesData['video_duration'] = (!empty($storyVal->duration)) ? $storyVal->duration : "";
@@ -7795,6 +7799,8 @@ class ApiControllerv2 extends Controller
                 $storiesDetaill['user_id'] =  $value->user->id;
                 $storiesDetaill['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 $storiesDetaill['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $storiesDetaill['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $storyAlldata = [];
                 foreach ($value->user_event_story as $storyVal) {
                     $storiesData['id'] = $storyVal->id;
@@ -7946,7 +7952,8 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['user_id'] =  $value->user->id;
                     // $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
-
+                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
@@ -8099,6 +8106,8 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
                     // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
