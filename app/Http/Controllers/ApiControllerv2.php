@@ -1217,6 +1217,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['event_name'] = $value->event_name;
                         $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                         $isCoHost = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id,'is_co_host'=>'1'])->first();
+                        dd($isCoHost);
                         $eventDetail['is_co_host'] = "0";
                         if ($isCoHost != null) {
                             $eventDetail['is_co_host'] = $isCoHost->is_co_host;
