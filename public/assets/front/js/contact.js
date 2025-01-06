@@ -86,9 +86,12 @@ $(document).on("keyup", ".search_phone", function () {
                     return;
                 }
                 $("#loader").hide();
-                $("#yesviteUser").append(data);
+                if(data.search=='1'){
+                    $("#yesviteUser").html(data.view);
+                }else{
+                    $("#yesviteUser").append(data.view);
+                }
                 busy1 = false;
-
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);

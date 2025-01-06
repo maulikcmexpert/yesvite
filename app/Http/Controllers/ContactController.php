@@ -169,13 +169,13 @@ class ContactController extends Controller
             ->where(['app_user' => '1'])
             ->whereIn('email',$emails)
             ->orderBy('firstname')
-            ->when($request->has('limit') && $request->has('offset'), function ($query) use ($request) {
+            ->when((!empty($request->offset)&&!empty($request->limit))&&($request->has('limit') && $request->has('offset')), function ($query) use ($request) {
                 $query->skip($request->offset)
                 ->limit($request->limit);
             })
-
-
-            
+            // ->when(empty($request->search_name)&&(empty($request->offset)&&empty($request->limit)), function ($query) {
+            //     $query->limit(6);
+            // })
             ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
                     $q->where('firstname', 'LIKE', '%' . $searchName . '%')
@@ -204,7 +204,21 @@ class ContactController extends Controller
             if(empty($yesvite_user)){
                 return response()->json(['status'=>'0']);
             }else{
-                return view('front.ajax_contacts', compact('yesvite_user'))->render();
+                if($searchName!=''){
+                    return response()->json([
+                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'search' =>'1',
+                        'status' => '1',
+                    ]);
+                }else{
+                    return response()->json([
+                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'status' => '1',
+                    ]);
+                }
+             
+
+                // return view('front.ajax_contacts', compact('yesvite_user'))->render();
             }
         }
         return response()->json(['error' => 'Invalid request'], 400);
