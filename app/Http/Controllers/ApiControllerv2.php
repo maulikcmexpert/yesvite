@@ -4595,7 +4595,7 @@ class ApiControllerv2 extends Controller
                                     $userPotluckItem['user_id'] = $itemcarryUser->user_id;
                                     $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $user->id) ? 1 : 0;
                                     $isCoHost =  EventInvitedUser::where(['event_id' => $getEventData->id, 'user_id' => $itemcarryUser->user_id, 'is_co_host' => '1'])->first();
-                                    $potluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+                                    $userPotluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                                     $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
                                     $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
