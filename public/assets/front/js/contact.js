@@ -82,7 +82,7 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 if (data.html == " ") {
-                    $("#loader").html("No more contacts found");
+                    // $("#loader").html("No more contacts found");
                     return;
                 }
                 $("#loader").hide();
