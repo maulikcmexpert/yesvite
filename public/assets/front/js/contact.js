@@ -87,7 +87,7 @@ $(document).on("keyup", ".search_phone", function () {
                     return;
                 }
                 $("#loader").hide();
-                $("#yesviteUser").html(data);
+                $("#yesviteUser").append(data);
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 alert("server not responding...");
