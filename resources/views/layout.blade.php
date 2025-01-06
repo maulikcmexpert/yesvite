@@ -18,10 +18,13 @@
     <x-front.bodyheader title={{$title}} />
 
     @include($page)
-  
+{{--   
     <x-front.bodyfooter page={{$page}} />
 
-    <x-front.footer :js="$js ?? []" />
+    <x-front.footer :js="$js ?? []" /> --}}
+    <x-front.bodyfooter page="{{ $page }}" />
+
+    <x-front.footer :js="$js ?? []" page="{{ $page }}" />
 </body>
 
 </html>
