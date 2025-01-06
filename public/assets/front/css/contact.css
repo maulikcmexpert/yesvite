@@ -645,8 +645,8 @@ ul.listing li span {
 
 
 .contact-tab .product-scroll {
-    /* max-height: 430px; */
-    max-height: 100px;
+    max-height: 430px;
+    /* max-height: 100px; */
 
     overflow-y: scroll;
 }
