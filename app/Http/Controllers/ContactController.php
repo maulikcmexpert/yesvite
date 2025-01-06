@@ -43,7 +43,7 @@ class ContactController extends Controller
             ]
         )->findOrFail($id);
 
-        $groups = Group::where('user_id', $user->id)->orderBy('id', 'DESC')->limit(2)->get();
+        $groups = Group::where('user_id', $user->id)->withCount('groupMembers')->orderBy('id', 'DESC')->limit(2)->get();
 
 
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
