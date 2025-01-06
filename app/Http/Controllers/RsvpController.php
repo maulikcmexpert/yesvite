@@ -13,7 +13,7 @@ use App\Models\{
     EventPostImage,
     EventSetting,
     User,
-    UserNotificationType
+    UserNotificationTypes
 };
 
 use App\Models\contact_sync;
