@@ -140,8 +140,8 @@ $(document).on("keyup", ".search_phone", function () {
                 $("#loader").show();
             },
             success: function (data) {
-                if (data.html == " ") {
-                    $("#loader").html("No more groups found");
+                if (data.status == "0") {
+                    $("#loader").hide();
                     return;
                 }
                 $("#loader").hide();
