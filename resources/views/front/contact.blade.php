@@ -1,5 +1,5 @@
 <?php
-dd($groups);
+// dd($groups);
 ?>
 <x-front.advertise />
 <style>
