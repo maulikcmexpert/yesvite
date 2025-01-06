@@ -72,7 +72,7 @@ class ContactController extends Controller
                 ->where(['app_user' => '1'])
                 ->whereIn('email',$emails)
                 ->orderBy('firstname')
-                ->limit(2)
+                ->limit(6)
                 ->get();
 
             // dd($yesvite_users);
@@ -171,7 +171,7 @@ class ContactController extends Controller
             ->orderBy('firstname')
             ->when($request->has('limit') && $request->has('offset'), function ($query) use ($request) {
                 $query->skip($request->offset)
-                      ->take($request->limit);
+                ->limit($request->limit);
             })
 
 

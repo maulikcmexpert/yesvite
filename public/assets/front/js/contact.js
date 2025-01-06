@@ -8,7 +8,7 @@ $(document).ready(function () {
     var base_url=$('#base_url').val();
     var busy1 = false;
     var busy2=false;
-    var limit = 2;
+    var limit = 6;
     var offset = 0;
     var offset1 = 0;
 
@@ -80,18 +80,22 @@ $(document).on("keyup", ".search_phone", function () {
             beforeSend: function () {
                 $("#loader").show();
             },
-        })
-            .done(function (data) {
+            success: function (data) {
                 if (data.html == " ") {
                     $("#loader").html("No more contacts found");
                     return;
                 }
                 $("#loader").hide();
                 $("#yesviteUser").append(data);
-            })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                busy1 = false;
+
+            },
+            error: function (jqXHR, ajaxOptions, thrownError) {
+                console.error("AJAX Error:", thrownError);
+                console.error("Response:", jqXHR.responseText);
                 alert("server not responding...");
-            });
+            },
+        })
     }
 
     function loadMoreGroups(page, search_group = "") {
