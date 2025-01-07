@@ -282,7 +282,7 @@ class ContactController extends Controller
         // dd(count($getAllContacts));
 
         $query = contact_sync::where('contact_id', $id)->orderBy('firstName','asc');
-        if(empty($searchPhone)||$searchPhone==''){
+        if(empty($searchPhone)){
             $query->limit(6);
         }
         if (!empty($searchPhone)) {
