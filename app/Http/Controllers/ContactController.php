@@ -316,6 +316,7 @@ class ContactController extends Controller
             }
             return response()->json(['error' => 'Invalid request'], 400);
         } catch (\Exception $e) {
+            dd($e);
             return response()->json(['error' => 'Server error'], 500);
         }
     }
