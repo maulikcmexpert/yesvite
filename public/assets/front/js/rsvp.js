@@ -61,14 +61,12 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
 
   $(document).ready(function () {
     $('#rsvp-yes-modal').on('hidden.bs.modal', function () {
-        alert('The RSVP Yes modal has been closed.');
         $('#adults').val('0');
         $('#kids').val('0');
     });
 });
 $(document).ready(function () {
   $('#rsvp-no-modal').on('hidden.bs.modal', function () {
-      alert('The RSVP Yes modal has been closed.');
       $('#adults').val('0');
       $('#kids').val('0');
   });
