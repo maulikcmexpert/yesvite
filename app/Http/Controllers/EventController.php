@@ -607,7 +607,7 @@ $user['coins']=$user->coins;
                
                 foreach ($invitedGuestUsers as $value) {
              
-                    $checkContactExist = contact_sync::where('id', $value['id'])->first();
+                    $checkContactExist = contact_sync::where('id', $value['sync_id'])->first();
                     if ($checkContactExist) {
                         $newUserId = NULL;
                         if ($checkContactExist->email != '') {
