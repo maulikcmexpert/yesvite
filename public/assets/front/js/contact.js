@@ -70,7 +70,7 @@ $(document).on("input", ".search_phone", function () {
     search_phone = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
-        if(search_name==''){
+        if(search_phone==''){
             offset1=0;
             limit=6;
         }else{
