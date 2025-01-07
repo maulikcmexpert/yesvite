@@ -632,6 +632,12 @@ class ContactController extends Controller
         $editContact = contact_sync::where('id', '=', $id)->get()->first();
         return response()->json(['status' => 1, 'message' => "Contact Added!", 'edit' => $editContact]);
     }
+    public function editYesviteContact(Request $request, string $id)
+    {
+        $editContact = User::where('id', '=', $id)->get()->first();
+        return response()->json(['status' => 1, 'message' => "Contact Added!", 'edit' => $editContact]);
+    }
+
 
     public function save_editContact(Request $request)
     {
