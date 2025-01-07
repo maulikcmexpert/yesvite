@@ -173,6 +173,8 @@ $(document).on("input", ".search_phone", function () {
                 if(data.search=='1'){
                     $("#yesvitePhones").html(data.view);
                 }else{
+                    $("#yesvitePhones").html('');
+
                     $("#yesvitePhones").append(data.view);
                 }
 
