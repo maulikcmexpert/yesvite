@@ -409,7 +409,8 @@ $(document).on("input", ".search_phone", function () {
 
             phone_number: {
                 required: true,
-                digits: true,
+                // digits: true,
+                phoneUS: true,
                 minlength: 10,
                 maxlength: 15,
                 remote: {
@@ -418,14 +419,14 @@ $(document).on("input", ".search_phone", function () {
                             "content"
                         ),
                     },
-                    url: base_url + "profile/check_new_contactnumber",
+                    url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
                     type: "POST",
                     data: {
                         phone_number: function () {
-                            return $(".edit_phone").val();
+                            return $(".addnew_contact").val();
                         },
                         id: function () {
-                            return $("#edit_id").val();
+                            return $("input[name='id']").val();
                         },
                     },
                 },
@@ -437,7 +438,8 @@ $(document).on("input", ".search_phone", function () {
 
             phone_number: {
                 required: "Please enter a Phone Number",
-                digits: "Please enter a valid Phone Number",
+                // digits: "Please enter a valid Phone Number",
+                phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
                 remote: "Phone Number is already exsits",
