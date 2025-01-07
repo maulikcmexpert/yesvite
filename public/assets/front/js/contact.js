@@ -44,7 +44,7 @@ $("#product-scroll-phone").on("scroll", function () {
 });
 
 $(document).on("input", ".search_name", function () {
-        search_name = $(this).val();
+        var search_name = $(this).val();
         page = 1;
         $("#yesviteUser").html("");
         // loadMoreData(page, search_name);
@@ -67,7 +67,7 @@ $(document).on("keyup", ".search_group", function () {
 });
 
 $(document).on("input", ".search_phone", function () {
-    search_phone = $(this).val();
+    var search_phone = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
         if(search_phone==''){
