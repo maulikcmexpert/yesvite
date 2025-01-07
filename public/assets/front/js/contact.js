@@ -313,7 +313,9 @@ $(document).on("input", ".search_phone", function () {
                         $("#Lname").val(output.user.lastname);
 
                         $("#email").val(output.user.email);
-                        $("#phone_number").val(output.user.phone_number);
+                        let phoneNumber = output.user.phone_number; // "+1 4444-464-4646"
+                        phoneNumber = phoneNumber.replace('+1 ', '');
+                        $("#phone_number").val(phoneNumber);
 
                         toastr.success(output.message);
 
