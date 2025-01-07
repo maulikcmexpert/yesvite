@@ -5634,8 +5634,7 @@ $(document).on('click','.add_co_host',function(){
     if(selected_co_host!=""){
         lengtUSer= 1;
     }
-    alert(selected_co_host);
-    alert(lengtUSer);
+ 
     $('.co_host_search').val('');
     $('.add_co_host').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
