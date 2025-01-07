@@ -253,9 +253,9 @@
                                     </svg>
                                 </span> -->
                             </div>
+                            <input type="search" class="search_phone" placeholder="Search name">
                             <div class="product-scroll" id="product-scroll-phone">
                                 <div class="user-contacts" id="yesvitePhones">
-                                    <input type="search" class="search_phone" placeholder="Search name">
 
                                     {{-- <div class="mb-3 mt-2">
                                         <a href="{{ asset('assets/front/csv/demo.xlsx') }}" class="cmn-btn" download>
