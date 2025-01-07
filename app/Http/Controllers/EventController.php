@@ -568,7 +568,7 @@ $user['coins']=$user->coins;
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
-            dd($invitedusersession);
+           
             if (isset($invitedusersession) && !empty($invitedusersession)) {
                 foreach ($invitedusersession as $key => $value) {
                     $is_cohost = '0';
@@ -604,7 +604,7 @@ $user['coins']=$user->coins;
                     // }
                 }
             }
-
+            dd($invitedusersession);
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
