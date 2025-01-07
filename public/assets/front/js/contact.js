@@ -51,8 +51,11 @@ $(document).on("input", ".search_name", function () {
         if(search_name==''){
             offset=0;
             limit=6;
+        }else{
+            offset=null;
+            limit=null
         }
-        loadMoreData(search_name,type=null,offset,offset);
+        loadMoreData(search_name,type=null,offset,limit);
 
 });
 
