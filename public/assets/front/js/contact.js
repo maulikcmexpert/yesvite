@@ -48,7 +48,7 @@ $(document).on("input", ".search_name", function () {
         page = 1;
         $("#yesviteUser").html("");
         // loadMoreData(page, search_name);
-        loadMoreData(search_name,type=null,offset=null,limit=null);
+        loadMoreData(search_name,type=null,offset,limit);
 
 });
 
