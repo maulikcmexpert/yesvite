@@ -360,7 +360,7 @@ $(document).on("input", ".search_phone", function () {
                     $("#edit_Fname").val(output.edit.firstName);
                     $("#edit_Lname").val(output.edit.lastName);
                     $("#email").val(output.edit.email);
-                    var phoneNumber = output.user.phone_number; // "+1 4444-464-4646"
+                    var phoneNumber = output.edit.phone; // "+1 4444-464-4646"
                     phoneNumber = phoneNumber.replace('+1 ', '');
                     $("#phone_number").val(phoneNumber);
                     $("#edit_id").val(output.edit.id);
