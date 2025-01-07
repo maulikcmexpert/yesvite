@@ -334,7 +334,7 @@ $(document).on("input", ".search_phone", function () {
         $("#add_contact").submit();
     });
 
-    $("#yesviteUser").on("click", ".edit-contact", function (e) {
+    $(document).on("click", ".edit-contact", function (e) {
         e.preventDefault(); // Prevent the default action
         $(".form-control").next().addClass("floatingfocus");
 
