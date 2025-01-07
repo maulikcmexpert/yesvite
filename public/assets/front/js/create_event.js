@@ -8,6 +8,13 @@ var selected_co_host_prefer_by = '';
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
+var lengtUSer= 0;
+
+var selected_user_name = "";
+var selected_profilePhoto = "";        
+var selected_dataId = '';
+var selected_profile_or_text = "";
+var selected_prefer_by = '';
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
@@ -4642,22 +4649,28 @@ $(document).on("click", ".save_allow_limit", function () {
 });
 
 $(document).on("change", 'input[name="guest_list[]"]', function () {
-       if ($("input[name='guest_list[]']:checked").length > 1) {
+    //    if ($("input[name='guest_list[]']:checked").length > 0) {
+    const old_user_id = selected_co_host;
+    const newUserID = $(this).val();
+       if (lengtUSer> 0 && newUserID!=old_user_id) {
         $(this).prop("checked", false);
         toastr.error("You can select only one co-host");
         return;
     }else{
+
         if ($(this).is(':checked')) {
-            var prefer_by_email = $(this).data('prefer_by');
-            alert(prefer_by_email);
-            alert(prefer_by_email);
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
             var initial = $(this).data("initial");
-            alert({prefer_by_email});
-            alert({selected_co_host});
+            var prefer_by_email = $(this).data('prefer_by');
             selected_co_host = $(this).val();
+            selected_user_name = user_name;
+            selected_profilePhoto = profilePhoto;        
+            selected_dataId = selected_co_host;
+            selected_profile_or_text = profile_or_text;
+            selected_prefer_by = prefer_by_email;
+            
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
                 $('.selected-co-host-image').show();
@@ -4676,16 +4689,24 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             $('.guest-contacts-wrp').css('display','flex');
             
             if(prefer_by_email){
+                if(prefer_by_email == "email"){
+
+                    $('.phoneCheck').prop("checked", false);
+                }else{
+                    $('.emailCheck').prop("checked", false);
+                }
                 selected_co_host_prefer_by = prefer_by_email;
             }else{
                 if ($("input[name='guest_list[]']:checked").length === 0) {
                     $('.guest-contacts-wrp').css('display', 'none');
                 }
             }
+            lengtUSer++;
         }else{
             if ($("input[name='guest_list[]']:checked").length === 0) {
                 selected_co_host = '';
                 selected_co_host_prefer_by = '';
+                lengtUSer=0
                 $('.guest-contacts-wrp').css('display', 'none');
             }
         }
@@ -4713,12 +4734,18 @@ $(document).on("click",".remove_co_host",function(){
 $(document).on("click", ".save_event_co_host", function () {
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
-    if (checkedCheckbox.length > 0) {
-        var profilePhoto = checkedCheckbox.data('profile');
-        var user_name = checkedCheckbox.data('username');
-        var dataId = checkedCheckbox.val();
-        var profile_or_text = checkedCheckbox.data("profile_or_text");
-        var prefer_by = checkedCheckbox.data("prefer_by");
+    if (selected_dataId!="") {
+    
+        // var profilePhoto = checkedCheckbox.data('profile');
+        // var user_name = checkedCheckbox.data('username');
+        // var dataId = checkedCheckbox.val();
+        // var profile_or_text = checkedCheckbox.data("profile_or_text");
+        // var prefer_by = checkedCheckbox.data("prefer_by");
+        var profilePhoto = selected_profilePhoto;
+        var user_name = selected_user_name
+        var dataId = selected_dataId;
+        var profile_or_text = selected_profile_or_text;
+        var prefer_by = selected_prefer_by;
         // console.log(prefer_by);
         eventData.co_host = dataId;
         selected_co_host = dataId;
@@ -5604,7 +5631,11 @@ $(document).on('click','.see_all_group',function(){
 
 $(document).on('click','.add_co_host',function(){
     isPhonecontact = 0;
-
+    if(selected_co_host!=""){
+        lengtUSer= 1;
+    }
+    alert(selected_co_host);
+    alert(lengtUSer);
     $('.co_host_search').val('');
     $('.add_co_host').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
