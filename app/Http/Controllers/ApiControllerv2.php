@@ -5026,6 +5026,7 @@ class ApiControllerv2 extends Controller
 
                         if (!empty($podluckCategoryList)) {
                             // EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
+                            dd($podluckCategoryList);
                             foreach ($podluckCategoryList as $value) {
 
                                 $updateEventPodluck = EventPotluckCategory::where([
