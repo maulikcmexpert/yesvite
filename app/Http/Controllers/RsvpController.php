@@ -547,7 +547,6 @@ class RsvpController extends Controller
         // }
 
         if(empty($request->input('notifications'))){
-            // dd(1);
                 if($sync_id!=""||$sync_id!=null){
                     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                     })->where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
