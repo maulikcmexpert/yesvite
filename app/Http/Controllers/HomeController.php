@@ -185,11 +185,11 @@ class HomeController extends Controller
                         $eventDetail['is_co_host'] = $isCoHost->is_co_host;
                     }
                     $eventDetail['message_to_guests'] = $value->message_to_guests;
-                    $eventDetail['event_wall'] = isset($value->event_settings->event_wall) ||"" ;
-                    $eventDetail['guest_list_visible_to_guests'] = isset($value->event_settings->guest_list_visible_to_guests)||"";
-                    $eventDetail['event_potluck'] = isset($value->event_settings->podluck)||"";
+                    $eventDetail['event_wall'] = isset($value->event_settings->event_wall)?$value->event_settings->event_wall:"" ;
+                    $eventDetail['guest_list_visible_to_guests'] = isset($value->event_settings->guest_list_visible_to_guests)?$value->event_settings->guest_list_visible_to_guests:"";
+                    $eventDetail['event_potluck'] = isset($value->event_settings->podluck)?$value->event_settings->podluck:"";
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
-                    $eventDetail['adult_only_party'] = isset($value->event_settings->adult_only_party)||"";
+                    $eventDetail['adult_only_party'] = isset($value->event_settings->adult_only_party)?$value->event_settings->adult_only_party:"";
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
                     $rsvp_status = "";
                     $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
@@ -266,7 +266,7 @@ class HomeController extends Controller
                         }
                         $eventDetail['event_detail'] = $eventData;
                     }
-                    $eventDetail['allow_limit'] = isset($value->event_settings->allow_limit)||"";
+                    $eventDetail['allow_limit'] = isset($value->event_settings->allow_limit)?$value->event_settings->allow_limit:"";
                     $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
 
                     $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
