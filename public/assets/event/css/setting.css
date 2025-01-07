@@ -874,11 +874,11 @@
 }
 
 .footer-bottom-btn h5 {
-    color: #CBD5E1 !important;
+    color: var(--secondryColor) !important;
 }
 
 .footer-bottom-btn svg path {
-    stroke: #CBD5E1 !important;
+    stroke: var(--secondryColor) !important;
 }
 
 .add-item-under-text {

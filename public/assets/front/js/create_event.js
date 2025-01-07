@@ -7,7 +7,7 @@ var selected_co_host = '';
 var selected_co_host_prefer_by = '';
 var final_step = 1;
 var swiper;
-
+var isPhonecontact = 0;
 $(document).ready(function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
@@ -4642,7 +4642,7 @@ $(document).on("click", ".save_allow_limit", function () {
 });
 
 $(document).on("change", 'input[name="guest_list[]"]', function () {
-    if ($("input[name='guest_list[]']:checked").length > 1) {
+       if ($("input[name='guest_list[]']:checked").length > 1) {
         $(this).prop("checked", false);
         toastr.error("You can select only one co-host");
         return;
@@ -4669,9 +4669,9 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             $('#remove_co_host_id').val('user-'+selected_co_host);
             $('.selected-host-name').text(user_name);
             $('.guest-contacts-wrp').css('display','flex');
-            var prefer_by_email = $(this).data('email');
+            var prefer_by_email = $(this).data('prefer_by');
             if(prefer_by_email){
-                selected_co_host_prefer_by = 'email';
+                selected_co_host_prefer_by = prefer_by_email;
             }else{
                 if ($("input[name='guest_list[]']:checked").length === 0) {
                     $('.guest-contacts-wrp').css('display', 'none');
@@ -4679,6 +4679,8 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             }
         }else{
             if ($("input[name='guest_list[]']:checked").length === 0) {
+                selected_co_host = '';
+                selected_co_host_prefer_by = '';
                 $('.guest-contacts-wrp').css('display', 'none');
             }
         }
@@ -4699,7 +4701,7 @@ $(document).on("click",".remove_co_host",function(){
             </span>
             <h5>Select your co-host</h5>`);
     var delete_co_host = $('#remove_co_host_id').val();
-    console.log(delete_co_host);
+  
     $('.'+delete_co_host).prop("checked", false);
 })
 
@@ -5596,8 +5598,11 @@ $(document).on('click','.see_all_group',function(){
 });
 
 $(document).on('click','.add_co_host',function(){
-    
+    isPhonecontact = 0;
+
     $('.co_host_search').val('');
+    $('.add_co_host').addClass('active');
+    $('#phone-tab-cantact').removeClass('active');
     get_co_host_list();
     
     setTimeout(() => {
@@ -5605,20 +5610,20 @@ $(document).on('click','.add_co_host',function(){
     }, 500);
 });
 
-$(document).on('click','.add_co_host',function(){
+// $(document).on('click','.add_co_host',function(){
     
-    $('.co_host_search').val('');
-    get_co_host_list();
+//     $('.co_host_search').val('');
+//     get_co_host_list();
     
-    setTimeout(() => {
-        toggleSidebar('sidebar_add_co_host');
-    }, 500);
-});
+//     setTimeout(() => {
+//         toggleSidebar('sidebar_add_co_host');
+//     }, 500);
+// });
 
 $(document).on('click','#phone-tab-cantact',function(){
-    var search_name = $('#search_contacts').val();
-    // displayPhoneContacts();
-    get_phone_host_list('all',10000,'0',search_name);
+   
+    isPhonecontact = 1;
+    get_phone_host_list();
 })
 
 $(document).on('click','.add_co_host_off',function(){
@@ -5651,6 +5656,7 @@ $(document).on('click','.overlay',function(){
 });
 
 function get_co_host_list(search_name=null){
+   
     if(search_name ==null){
         search_name = '';
     }
@@ -5691,15 +5697,14 @@ function get_phone_host_list(search_name=null){
     if(search_name ==null){
         search_name = '';
     }
-    console.log(selected_co_host);
-    console.log(selected_co_host_prefer_by);
+   
     if(selected_co_host == ''){
        $('.guest-contacts-wrp').css('display','none');
     }else{
         $('.guest-contacts-wrp').css('display','flex');
     }
     $.ajax({
-        url: base_url+'event/get_contacts',
+        url: base_url+'event/getPhoneContact',
         type: "GET",
         data: {
             search_name: search_name,
@@ -5725,11 +5730,16 @@ function get_phone_host_list(search_name=null){
     });
 }
 $(document).on('keyup','.co_host_search',function(){
+    
     search_name = $(this).val();
     $('#loader').css('display','block');
     $(".list_all_invited_user").empty();
     setTimeout(function () {
-        get_co_host_list(search_name);
+        if(isPhonecontact == 0){
+            get_co_host_list(search_name);
+        } else{
+            get_phone_host_list(search_name)
+        }
     }, 500);
 })
 
