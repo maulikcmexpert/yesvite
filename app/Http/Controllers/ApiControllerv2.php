@@ -4578,7 +4578,7 @@ class ApiControllerv2 extends Controller
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
                                 $potluckItem['is_host'] = ($itemValue->user_id == $user->id) ? 1 : 0;
-                                $isCoHost =  EventInvitedUser::where(['event_id' => $getEventData->id, 'user_id' => $itemValue->users->id, 'is_co_host' => '1'])->first();
+                                $isCoHost =  EventInvitedUser::where(['event_id' => $getEventData->id, 'user_id' => $itemValue->user_id, 'is_co_host' => '1'])->first();
                                 $potluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                                 $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                                 $potluckItem['quantity'] =  $itemValue->quantity;

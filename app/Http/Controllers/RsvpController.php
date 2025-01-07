@@ -584,7 +584,7 @@ class RsvpController extends Controller
         }
         return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
         } catch (QueryException $e) {
-
+                
             return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'DB error');
             DB::rollBack();
         } catch (\Exception $e) {
