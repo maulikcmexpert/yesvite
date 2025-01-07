@@ -344,7 +344,7 @@ class ContactController extends Controller
     {
         
         $user = Auth::guard('web')->user();
-        dd($request);
+        // dd($request);
         // $rawData = $request->getContent();
         // $input = json_decode($rawData, true);
 
@@ -393,7 +393,10 @@ class ContactController extends Controller
             // $contact = $input;
             // dd($contact);
             $email = $request->input('email') ?? '';
-            $phone = $request->input('phone_number') ?? '';
+            $phone = '+1 '.$request->input('phone_number') ?? '';
+            $phonewithCode= $phone;
+
+            // dd($phonewithCode);
             if (
                 (isset($request->email) && $request->email != '' && $user->email == $request->email) || 
                 (isset($request->phone_number) && $request->phone_number != '' && $user->phone_number == $request->phone_number)
@@ -449,7 +452,7 @@ class ContactController extends Controller
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
-                        'phone' => $request->input('phone_number') ?? $existingContact->phone,
+                        'phone' => '+1 '.$request->input('phone_number') ?? $existingContact->phone,
                         'firstName' => $request->input['Fname'] ?? $existingContact->firstName,
                         'lastName' => $request->input('Lname') ?? $existingContact->lastName,
                         'photo' => $request->input('photo') ?? $existingContact->photo,
@@ -466,10 +469,10 @@ class ContactController extends Controller
                     $newContact->contact_id = $user->id;
                     $newContact->firstName = $request->input('Fname') ?? '';
                     $newContact->lastName = $request->input('Lname') ?? '';
-                    $newContact->phone = $request->input('phone_number') ?? '';
+                    $newContact->phone = '+1 '.$request->input('phone_number') ?? '';
                     $newContact->email = '';
                     $newContact->photo = $request->input('photo') ?? '';
-                    $newContact->phoneWithCode = $request->input('phone_number') ?? '';
+                    $newContact->phoneWithCode = $phonewithCode ?? '';
                     $newContact->isAppUser = '0';
                     $newContact->visible = '0';
                     $newContact->preferBy = "phone" ?? '';
@@ -626,8 +629,7 @@ class ContactController extends Controller
 //     }
     public function editContact(Request $request, string $id)
     {
-
-        $editContact = User::where('id', '=', $id)->get()->first();
+        $editContact = contact_sync::where('id', '=', $id)->get()->first();
         return response()->json(['status' => 1, 'message' => "Contact Added!", 'edit' => $editContact]);
     }
 

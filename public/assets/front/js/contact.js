@@ -351,12 +351,12 @@ $(document).on("input", ".search_phone", function () {
             // data: formData,
 
             success: function (output) {
-                // console.log(output.edit);
+                console.log(output.edit);
 
                 if (output.status == 1) {
                     // alert();
-                    $("#edit_Fname").val(output.edit.firstname);
-                    $("#edit_Lname").val(output.edit.lastname);
+                    $("#edit_Fname").val(output.edit.firstName);
+                    $("#edit_Lname").val(output.edit.lastName);
                     $("#email").val(output.edit.email);
                     $("#phone_number").val(output.edit.phone_number);
                     $("#edit_id").val(output.edit.id);
