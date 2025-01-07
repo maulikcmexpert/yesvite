@@ -627,7 +627,7 @@ $user['coins']=$user->coins;
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
                 $prefer_by = $request->co_host_prefer_by;
-dd($prefer_by);
+dd($invited_user);
                 EventInvitedUser::create([
                     'event_id' => $eventId,
                     'prefer_by' => $prefer_by,
