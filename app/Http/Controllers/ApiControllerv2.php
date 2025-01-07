@@ -13985,8 +13985,12 @@ class ApiControllerv2 extends Controller
                 $udpated[$k]['textAlign'] = (isset($value['textAlign']) && $value['textAlign'] != '') ? $value['textAlign'] : 'center';
                 $udpated[$k]['fontStyle'] = (isset($value['fontStyle']) && $value['fontStyle'] != '') ? $value['fontStyle'] : 'normal';
                 $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing']) && $value['letterSpacing'] != '') ? (int)$value['letterSpacing'] : 0;
-
+                if($udpated[$k]['text']==null||$udpated[$k]['text']==""){
+                    $udpated[$k]['text'] = "";
+                    unset($udpated[$k]['text']);
+                }
                 // foreach ($value as $key => $val) {
+                 
                 //     $val = strtolower($val);
                 //     switch ($val) {
                 //         case 'event_name':
