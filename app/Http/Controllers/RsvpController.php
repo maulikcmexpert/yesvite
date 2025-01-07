@@ -449,7 +449,7 @@ class RsvpController extends Controller
      */
     public function store(Request $request)
         {
-            // dd($request);
+            dd($request);
         $userId = decrypt($request->user_id);
         // dd($userId);
         $eventId = decrypt($request->event_id);
@@ -458,6 +458,8 @@ class RsvpController extends Controller
         }else{
          $sync_id="";
         }
+
+    
 
         try {
         $checkEvent = Event::where(['id' => $eventId])->first();
