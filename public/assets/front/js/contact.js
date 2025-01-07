@@ -43,7 +43,7 @@ $("#product-scroll-phone").on("scroll", function () {
         }
 });
 
-$(document).on("keyup", ".search_name", function () {
+$(document).on("input", ".search_name", function () {
         search_name = $(this).val();
         page = 1;
         $("#yesviteUser").html("");
@@ -91,6 +91,7 @@ $(document).on("keyup", ".search_phone", function () {
                 }else{
                     $("#yesviteUser").append(data.view);
                 }
+
                 busy1 = false;
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
