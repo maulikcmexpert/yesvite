@@ -5058,15 +5058,15 @@ class ApiControllerv2 extends Controller
                                     $items = $value['items'];
                                     foreach ($items as $value) {
 
-                                        // $getEventPotluckItem = EventPotluckCategoryItem::where([
-                                        //     'event_id' => $eventData['event_id'],
-                                        //     'user_id' => $user->id,
-                                        //     'event_potluck_category_id' => $eventPodluckid,
-                                        //     'description' => $value['description']
-                                        // ])->first();
-                                        if($value['id'] !=0 && $value['id']!="" || $value['id'] !="0" && $value['id']!=""){
+                                        $getEventPotluckItem = EventPotluckCategoryItem::where([
+                                            'event_id' => $eventData['event_id'],
+                                            'user_id' => $user->id,
+                                            'event_potluck_category_id' => $eventPodluckid,
+                                            'description' => $value['description']
+                                        ])->first();
+                                        // if($value['id'] !=0 && $value['id']!="" || $value['id'] !="0" && $value['id']!=""){
 
-                                        // if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
+                                        if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
                                             $self_bring_item = (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0';
                                             EventPotluckCategoryItem::where([
                                                 'event_id' => $eventData['event_id'],
