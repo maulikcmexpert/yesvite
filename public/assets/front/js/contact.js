@@ -66,11 +66,18 @@ $(document).on("keyup", ".search_group", function () {
         loadMoreGroups(page, search_group);
 });
 
-$(document).on("keyup", ".search_phone", function () {
+$(document).on("input", ".search_phone", function () {
         search_name = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
-        loadMorePhones(search_name,type=null,offset1=null,limit=null);
+        if(search_name==''){
+            offset1=0;
+            limit=6;
+        }else{
+            offset=null;
+            limit=null
+        }
+        loadMorePhones(search_name,type=null,offset1,limit);
 });
 
     function loadMoreData(search_name,type,offset,limit) {

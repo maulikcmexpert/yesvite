@@ -288,6 +288,9 @@ class ContactController extends Controller
                     ->orWhere('lastName', 'LIKE', '%' . $searchPhone . '%');
             });
         }
+        if(empty($searchPhone)||$searchPhone==''){
+            $query->limit(6);
+        }
         if ($request->has('limit') && $request->has('offset')) {
             $query->skip($request->offset)->take($request->limit);
         }

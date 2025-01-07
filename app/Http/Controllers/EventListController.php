@@ -113,7 +113,7 @@ class EventListController extends Controller
                         $eventDetail['self_id']=$user->id;
                         $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                         $eventDetail['message_to_guests'] = $value->message_to_guests;
-                        $eventDetail['event_wall'] = $value->event_settings->event_wall;
+                        $eventDetail['event_wall'] = (isset($value->event_settings->event_wall)&&$value->event_settings->event_wall!="")?$value->event_settings->event_wall:"";
                         $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                         $eventDetail['event_potluck'] = $value->event_settings->podluck;
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
