@@ -623,7 +623,7 @@ $user['coins']=$user->coins;
                     // }
                 }
             }
-            DD($request);
+            // DD($request);
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
