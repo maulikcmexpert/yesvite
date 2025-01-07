@@ -462,7 +462,7 @@ class RsvpController extends Controller
     
         $kids=(isset($request->kids) && $request->kids)?(int)$request->kids:0;
         $adults = (isset($request->adults) && $request->adults)?(int)$request->adults:0;
-        dd($kids,$adults);
+        // dd($kids,$adults);
 
         try {
         $checkEvent = Event::where(['id' => $eventId])->first();
@@ -497,9 +497,9 @@ class RsvpController extends Controller
 
             $rsvpSent->rsvp_status = $request->rsvp_status;
 
-            $rsvpSent->adults = (isset($request->adults) && $request->adults)?(int)$request->adults:0;
+            $rsvpSent->adults = $adults;
 
-            $rsvpSent->kids = (isset($request->kids) && $request->kids)?(int)$request->kids:0;
+            $rsvpSent->kids = $kids;
 
             $rsvpSent->message_to_host = $request->message_to_host;
             $rsvpSent->rsvp_attempt = $rsvp_attempt;
@@ -518,8 +518,8 @@ class RsvpController extends Controller
                 $postMessage = [];
                 $postMessage = [
                     'status' => ($request->rsvp_status == '0') ? '2' : '1',
-                    'adults' => (isset($request->adults) && $request->adults)?(int)$request->adults:0,
-                    'kids' => (isset($request->kids) && $request->kids)?(int)$request->kids:0,
+                    'adults' =>  $adults,
+                    'kids' => $kids,
                 ];
                 $creatEventPost = new EventPost();
                 $creatEventPost->event_id = $eventId;
@@ -573,8 +573,8 @@ class RsvpController extends Controller
                 'sender_id' => $userId,
                 'event_id' => $eventId,
                 'rsvp_status' => $request->rsvp_status,
-                'kids' => (isset($request->adults) && $request->adults)?(int)$request->adults:0,
-                'adults' => (isset($request->kids) && $request->kids)?(int)$request->kids:0,
+                'kids' =>  $kids,
+                'adults' => $adults,
                 'rsvp_video' => "",
                 'rsvp_message' => $request->message_to_host,
                 'post_id' => "",
