@@ -5058,13 +5058,15 @@ class ApiControllerv2 extends Controller
                                     $items = $value['items'];
                                     foreach ($items as $value) {
 
-                                        $getEventPotluckItem = EventPotluckCategoryItem::where([
-                                            'event_id' => $eventData['event_id'],
-                                            'user_id' => $user->id,
-                                            'event_potluck_category_id' => $eventPodluckid,
-                                            'description' => $value['description']
-                                        ])->first();
-                                        if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
+                                        // $getEventPotluckItem = EventPotluckCategoryItem::where([
+                                        //     'event_id' => $eventData['event_id'],
+                                        //     'user_id' => $user->id,
+                                        //     'event_potluck_category_id' => $eventPodluckid,
+                                        //     'description' => $value['description']
+                                        // ])->first();
+                                        if($value['id'] !=0 && $value['id']!="" || $value['id'] !="0" && $value['id']!=""){
+
+                                        // if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
                                             $self_bring_item = (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0';
                                             EventPotluckCategoryItem::where([
                                                 'event_id' => $eventData['event_id'],
@@ -5085,14 +5087,16 @@ class ApiControllerv2 extends Controller
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
-                                                        'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        'event_potluck_item_id' => $value['id'],
                                                     ])->delete();
                                                 } elseif (isset($value['self_quantity'])) {
                                                     UserPotluckItem::where([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
-                                                        'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        'event_potluck_item_id' => $value['id'],
+                                                        // 'event_potluck_item_id' => $getEventPotluckItem->id,
                                                     ])->update(['quantity' => $value['self_quantity']]);
                                                 }
                                             } else {
@@ -5100,7 +5104,8 @@ class ApiControllerv2 extends Controller
                                                     'event_id' => $eventData['event_id'],
                                                     'user_id' => $user->id,
                                                     'event_potluck_category_id' => $eventPodluckid,
-                                                    'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                    // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                    'event_potluck_item_id' => $value['id'],
                                                 ])->delete();
                                             }
                                         } else {
