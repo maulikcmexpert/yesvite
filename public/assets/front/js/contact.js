@@ -67,7 +67,7 @@ $(document).on("keyup", ".search_group", function () {
 });
 
 $(document).on("input", ".search_phone", function () {
-        search_name = $(this).val();
+    search_phone = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
         if(search_name==''){
@@ -77,7 +77,7 @@ $(document).on("input", ".search_phone", function () {
             offset=null;
             limit=null
         }
-        loadMorePhones(search_name,type=null,offset1,limit);
+        loadMorePhones(search_phone,type=null,offset1,limit);
 });
 
     function loadMoreData(search_name,type,offset,limit) {
