@@ -305,6 +305,7 @@ $(document).on("input", ".search_phone", function () {
 
                 success: function (output) {
                     console.log(output.status);
+                    $("#myModal1").modal("hide");
 
                     if (output.status == 1) {
                         removeLoaderHandle("#save_contact", "Save Contact");
