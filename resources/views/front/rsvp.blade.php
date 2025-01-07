@@ -701,6 +701,8 @@
                                                         $logo=asset('assets/amazon.png');
                                                     }elseif (strpos($url, 'target') !== false ||strpos($url, 'Target') !== false) {
                                                         $logo=asset('assets/target.png');
+                                                    }else{
+                                                        $logo=asset('assets/other.png');
                                                     }
 
                                                     @endphp
