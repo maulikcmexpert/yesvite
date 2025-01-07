@@ -388,7 +388,7 @@ $user['coins']=$user->coins;
 
     public function store(Request $request)
     {
-       dd(1);
+     
        
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
@@ -568,6 +568,7 @@ $user['coins']=$user->coins;
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
+            dd($invitedusersession);
             if (isset($invitedusersession) && !empty($invitedusersession)) {
                 foreach ($invitedusersession as $key => $value) {
                     $is_cohost = '0';
