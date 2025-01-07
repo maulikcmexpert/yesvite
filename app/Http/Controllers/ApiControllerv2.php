@@ -13987,7 +13987,7 @@ class ApiControllerv2 extends Controller
                 $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing']) && $value['letterSpacing'] != '') ? (int)$value['letterSpacing'] : 0;
                 if($udpated[$k]['text']==null||$udpated[$k]['text']==""){
                     $udpated[$k]['text'] = "";
-                    unset($udpated[$k]['text']);
+                    unset($udpated[$k]);
                 }
                 // foreach ($value as $key => $val) {
                  
