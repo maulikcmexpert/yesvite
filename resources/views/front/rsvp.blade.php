@@ -1370,13 +1370,13 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" >
+                                                    <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" id="lastname"  class="form-control inputText lastname" >
+                                                    <input type="text"  name="lastname" id="lastname"  class="form-control inputText lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                             </div>
@@ -1492,13 +1492,13 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" >
+                                            <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" id="lastname" class="form-control inputText lastname" >
+                                            <input type="text" name="lastname" id="lastname" class="form-control inputText lastname" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
