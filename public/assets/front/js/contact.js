@@ -75,7 +75,7 @@ $(document).on("input", ".search_phone", function () {
             limit=6;
         }else{
             offset1=null;
-            limit=null
+            limit=null;
         }
         loadMorePhones(search_phone,type=null,offset1,limit);
 });
