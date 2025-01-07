@@ -388,9 +388,7 @@ $user['coins']=$user->coins;
 
     public function store(Request $request)
     {
-     
-       
-        // $potluck = session('category');
+            // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
 
         $user_id =  Auth::guard('web')->user()->id;
@@ -568,7 +566,6 @@ $user['coins']=$user->coins;
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
-           
             if (isset($invitedusersession) && !empty($invitedusersession)) {
                 foreach ($invitedusersession as $key => $value) {
                     $is_cohost = '0';
@@ -604,7 +601,28 @@ $user['coins']=$user->coins;
                     // }
                 }
             }
-            dd(session('contact_ids'));
+            $conatctId = session('contact_ids');
+            if (!empty($conatctId)) {            
+                $invitedGuestUsers = $conatctId;
+               
+                foreach ($invitedGuestUsers as $value) {
+             
+                    $checkContactExist = contact_sync::where('id', $value['id'])->first();
+                    if ($checkContactExist) {
+                        $newUserId = NULL;
+                        if ($checkContactExist->email != '') {
+                            $newUserId = checkUserEmailExist($checkContactExist);
+                        }
+                        $eventInvite = new EventInvitedUser();
+                        $eventInvite->event_id = $eventId;
+                        $eventInvite->sync_id = $checkContactExist->id;
+                        $eventInvite->user_id = $newUserId;
+                        $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        $eventInvite->save();
+                    }
+                    // }
+                }
+            }
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
