@@ -4577,7 +4577,7 @@ class ApiControllerv2 extends Controller
 
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
-                                $potluckItem['is_host'] = ($itemValue->user_id == $user->id) ? 1 : 0;
+                                $potluckItem['is_host'] = ($itemValue->user_id == $getEventData->user_id) ? 1 : 0;
                                 $isCoHost =  EventInvitedUser::where(['event_id' => $getEventData->id, 'user_id' => $itemValue->user_id, 'is_co_host' => '1'])->first();
                                 $potluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                                 $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
@@ -4593,7 +4593,7 @@ class ApiControllerv2 extends Controller
                                 foreach ($itemValue->user_potluck_items as $itemcarryUser) {
                                     $userPotluckItem['id'] = $itemcarryUser->id;
                                     $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                    $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $user->id) ? 1 : 0;
+                                    $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $getEventData->user_id) ? 1 : 0;
                                     $isCoHost =  EventInvitedUser::where(['event_id' => $getEventData->id, 'user_id' => $itemcarryUser->user_id, 'is_co_host' => '1'])->first();
                                     $userPotluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                                     $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
