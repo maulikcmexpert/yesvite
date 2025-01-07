@@ -304,7 +304,8 @@ $(document).on("input", ".search_phone", function () {
                 data: formData,
 
                 success: function (output) {
-                    console.log(output.user);
+                    console.log(output.status);
+                    $("#myModal1").modal("hide");
 
                     if (output.status == 1) {
                         removeLoaderHandle("#save_contact", "Save Contact");
@@ -334,7 +335,7 @@ $(document).on("input", ".search_phone", function () {
         $("#add_contact").submit();
     });
 
-    $("#yesviteUser").on("click", ".edit-contact", function (e) {
+    $(document).on("click", ".edit-contact", function (e) {
         e.preventDefault(); // Prevent the default action
         $(".form-control").next().addClass("floatingfocus");
 
@@ -351,52 +352,52 @@ $(document).on("input", ".search_phone", function () {
             // data: formData,
 
             success: function (output) {
-                // console.log(output.edit);
+                console.log(output.edit);
 
                 if (output.status == 1) {
                     // alert();
-                    $("#edit_Fname").val(output.edit.firstname);
-                    $("#edit_Lname").val(output.edit.lastname);
+                    $("#edit_Fname").val(output.edit.firstName);
+                    $("#edit_Lname").val(output.edit.lastName);
                     $("#email").val(output.edit.email);
-                    $("#phone_number").val(output.edit.phone_number);
+                    $("#phone_number").val(output.edit.phone);
                     $("#edit_id").val(output.edit.id);
                 }
             },
         });
     });
 
-    $("#yesvitePhones").on("click", ".edit-contact", function (e) {
-        // alert();
-        e.preventDefault(); // Prevent the default action
+    // $(document).on("click", ".edit-contact", function (e) {
+    //     // alert();
+    //     e.preventDefault(); // Prevent the default action
 
-        $(".form-control").next().addClass("floatingfocus");
+    //     $(".form-control").next().addClass("floatingfocus");
 
-        var contactId = $(this).data("id");
+    //     var contactId = $(this).data("id");
 
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
+    //     $.ajax({
+    //         headers: {
+    //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //         },
 
-            method: "POST",
-            url: base_url + "contacts/edit/" + contactId,
-            // dataType: "json",
-            // data: formData,
+    //         method: "POST",
+    //         url: base_url + "contacts/edit/" + contactId,
+    //         // dataType: "json",
+    //         // data: formData,
 
-            success: function (output) {
-                // console.log(output.edit);
+    //         success: function (output) {
+    //             // console.log(output.edit);
 
-                if (output.status == 1) {
-                    // alert();
-                    $("#edit_Fname").val(output.edit.firstname);
-                    $("#edit_Lname").val(output.edit.lastname);
-                    $("#email").val(output.edit.email);
-                    $("#phone_number").val(output.edit.phone_number);
-                    $("#edit_id").val(output.edit.id);
-                }
-            },
-        });
-    });
+    //             if (output.status == 1) {
+    //                 // alert();
+    //                 $("#edit_Fname").val(output.edit.firstname);
+    //                 $("#edit_Lname").val(output.edit.lastname);
+    //                 $("#email").val(output.edit.email);
+    //                 $("#phone_number").val(output.edit.phone_number);
+    //                 $("#edit_id").val(output.edit.id);
+    //             }
+    //         },
+    //     });
+    // });
 
     $("#edit_contact_form").validate({
         rules: {

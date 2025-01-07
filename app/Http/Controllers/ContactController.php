@@ -392,10 +392,17 @@ class ContactController extends Controller
             // foreach ($input as $contact) {
             // $contact = $input;
             // dd($contact);
-            $email = $request->input['email'] ?? '';
-            $phone = $request->input['phone'] ?? '';
-            if ((isset($request->input['email']) && $request->input['email'] != '' && $user->email == $request->input['email']) || (isset($request->input['phone']) && $request->input['phone'] != '' && $user->phone_number == $request->input['phone'])) {
-                return response()->json([
+            $email = $request->input('email') ?? '';
+            $phone = '+1 '.$request->input('phone_number') ?? '';
+            $phonewithCode= $phone;
+
+            // dd($phonewithCode);
+            if (
+                (isset($request->email) && $request->email != '' && $user->email == $request->email) || 
+                (isset($request->phone_number) && $request->phone_number != '' && $user->phone_number == $request->phone_number)
+            ) {
+        
+             return response()->json([
                     'status' => 0,
                     'message' => 'You can not add your details as contact',
                     'data' => $updatedContacts,
@@ -408,9 +415,9 @@ class ContactController extends Controller
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
                         'phone' => '',
-                        'firstName' => $contact['firstname'] ?? $existingContact->firstName,
-                        'lastName' => $contact['lastname'] ?? $existingContact->lastName,
-                        'photo' => $contact['photo'] ?? $existingContact->photo,
+                        'firstName' => $request->input('Fname') ?? $existingContact->firstName,
+                        'lastName' => $request->input('Lname') ?? $existingContact->lastName,
+                        'photo' => $request->input('photo') ?? $existingContact->photo,
                         'phoneWithCode' => '',
                         'visible' => ($contact['visible'] ?? $existingContact->visible),
                         'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
@@ -422,15 +429,15 @@ class ContactController extends Controller
                     $newContact = new contact_sync();
                     $newContact->userId = null;
                     $newContact->contact_id = $user->id;
-                    $newContact->firstName = $contact['firstname'] ?? '';
-                    $newContact->lastName = $contact['lastname'] ?? '';
+                    $newContact->firstName = $request->input('Fname') ?? '';
+                    $newContact->lastName = $request->input('Lname') ?? '';
                     $newContact->phone = '';
-                    $newContact->email = $request->input['email'] ?? '';
-                    $newContact->photo = $contact['photo'] ?? '';
+                    $newContact->email = $request->input('email') ?? '';
+                    $newContact->photo = $request->input('photo') ?? '';
                     $newContact->phoneWithCode = '';
                     $newContact->isAppUser = '0';
                     $newContact->visible = '0';
-                    $newContact->preferBy = $contact['prefer_by'] ?? '';
+                    $newContact->preferBy = "email" ?? '';
                     $newContact->created_at = now();
                     $newContact->updated_at = now();
                     $newContact->save();
@@ -445,11 +452,11 @@ class ContactController extends Controller
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
-                        'phone' => $request->input['phone'] ?? $existingContact->phone,
-                        'firstName' => $contact['firstname'] ?? $existingContact->firstName,
-                        'lastName' => $contact['lastname'] ?? $existingContact->lastName,
-                        'photo' => $contact['photo'] ?? $existingContact->photo,
-                        'phoneWithCode' => $request->input['phone'] ?? $existingContact->phoneWithCode,
+                        'phone' => '+1 '.$request->input('phone_number') ?? $existingContact->phone,
+                        'firstName' => $request->input['Fname'] ?? $existingContact->firstName,
+                        'lastName' => $request->input('Lname') ?? $existingContact->lastName,
+                        'photo' => $request->input('photo') ?? $existingContact->photo,
+                        'phoneWithCode' => $request->input('phone_number') ?? $existingContact->phoneWithCode,
                         'visible' => ($contact['visible'] ?? $existingContact->visible),
                         'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
                     ]);
@@ -460,15 +467,15 @@ class ContactController extends Controller
                     $newContact = new contact_sync();
                     $newContact->userId = null;
                     $newContact->contact_id = $user->id;
-                    $newContact->firstName = $contact['firstname'] ?? '';
-                    $newContact->lastName = $contact['lastname'] ?? '';
-                    $newContact->phone = $request->input['phone'] ?? '';
+                    $newContact->firstName = $request->input('Fname') ?? '';
+                    $newContact->lastName = $request->input('Lname') ?? '';
+                    $newContact->phone = '+1 '.$request->input('phone_number') ?? '';
                     $newContact->email = '';
-                    $newContact->photo = $contact['photo'] ?? '';
-                    $newContact->phoneWithCode = $request->input['phone'] ?? '';
+                    $newContact->photo = $request->input('photo') ?? '';
+                    $newContact->phoneWithCode = $phonewithCode ?? '';
                     $newContact->isAppUser = '0';
                     $newContact->visible = '0';
-                    $newContact->preferBy = $contact['prefer_by'] ?? '';
+                    $newContact->preferBy = "phone" ?? '';
                     $newContact->created_at = now();
                     $newContact->updated_at = now();
                     $newContact->save();
@@ -484,9 +491,9 @@ class ContactController extends Controller
             // $phoneNumbers = array_filter(array_column($input, 'phone_number'));
 
             $userDetails = User::select('id', 'email', 'phone_number', 'firstname', 'lastname', 'profile', 'app_user', 'visible', 'prefer_by')
-                ->where('email', $request->input['email'])
+                ->where('email', $request->input('email'))
                 ->where('app_user', '1')
-                // ->orWhere('phone_number', $request->input['phone'])
+                // ->orWhere('phone_number', $request->input('phone_number'))
                 ->get();
             // dd($userDetails);
             foreach ($userDetails as $userDetail) {
@@ -622,8 +629,7 @@ class ContactController extends Controller
 //     }
     public function editContact(Request $request, string $id)
     {
-
-        $editContact = User::where('id', '=', $id)->get()->first();
+        $editContact = contact_sync::where('id', '=', $id)->get()->first();
         return response()->json(['status' => 1, 'message' => "Contact Added!", 'edit' => $editContact]);
     }
 
