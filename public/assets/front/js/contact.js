@@ -313,9 +313,8 @@ $(document).on("input", ".search_phone", function () {
                         $("#Lname").val(output.user.lastname);
 
                         $("#email").val(output.user.email);
-                        let phoneNumber = output.user.phone_number; // "+1 4444-464-4646"
-                        phoneNumber = phoneNumber.replace('+1 ', '');
-                        $("#phone_number").val(phoneNumber);
+                        
+                        $("#phone_number").val(output.user.phone_number);
 
                         toastr.success(output.message);
 
@@ -361,7 +360,9 @@ $(document).on("input", ".search_phone", function () {
                     $("#edit_Fname").val(output.edit.firstName);
                     $("#edit_Lname").val(output.edit.lastName);
                     $("#email").val(output.edit.email);
-                    $("#phone_number").val(output.edit.phone);
+                    var phoneNumber = output.user.phone_number; // "+1 4444-464-4646"
+                    phoneNumber = phoneNumber.replace('+1 ', '');
+                    $("#phone_number").val(phoneNumber);
                     $("#edit_id").val(output.edit.id);
                 }
             },
