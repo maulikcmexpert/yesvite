@@ -228,9 +228,10 @@ class ContactController extends Controller
     {
         try {
             $searchGroup = $request->input('search_group');
+            $user = Auth::guard('web')->user();
 
             if ($request->ajax()) {
-                $query = Group::withCount('groupMembers');
+                $query = Group::where('user_id', $user->id)->withCount('groupMembers');
 
                 if ($searchGroup) {
                     $query->where('name', 'LIKE', '%' . $searchGroup . '%');
