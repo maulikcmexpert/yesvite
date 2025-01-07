@@ -449,7 +449,7 @@ class RsvpController extends Controller
      */
     public function store(Request $request)
         {
-            dd($request);
+            // dd($request);
         $userId = decrypt($request->user_id);
         // dd($userId);
         $eventId = decrypt($request->event_id);
@@ -460,6 +460,9 @@ class RsvpController extends Controller
         }
 
     
+        $kids=(isset($request->kids) && $request->kids)?(int)$request->kids:0;
+        $adults = (isset($request->adults) && $request->adults)?(int)$request->adults:0;
+        dd($kids,$adults);
 
         try {
         $checkEvent = Event::where(['id' => $eventId])->first();
