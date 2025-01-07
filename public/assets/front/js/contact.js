@@ -74,7 +74,7 @@ $(document).on("input", ".search_phone", function () {
             offset1=0;
             limit=6;
         }else{
-            offset=null;
+            offset1=null;
             limit=null
         }
         loadMorePhones(search_phone,type=null,offset1,limit);
@@ -145,6 +145,7 @@ $(document).on("input", ".search_phone", function () {
     }
 
     function loadMorePhones(search_phone,type,offset1,limit) {
+        console.log({search_phone,type,offset1,limit});
         $.ajax({
             url: base_url + "contacts/loadphones",
             type: "POST",
