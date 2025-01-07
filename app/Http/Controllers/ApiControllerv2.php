@@ -5112,7 +5112,6 @@ class ApiControllerv2 extends Controller
                                             // New code 07/01/25
                                             // $item_carry_users = $value['item_carry_users'];
                                             // $item_carry_users = isset($value['item_carry_users'])?$value['item_carry_users']:[];
-                                            dd($value['item_carry_users']);
                                             if(isset($value['item_carry_users'])){
                                             foreach ($value['item_carry_users'] as $value) {
                                                 if($value['id'] !=0){
@@ -5156,6 +5155,7 @@ class ApiControllerv2 extends Controller
                                             //     ]);
                                             // }
                                             $item_carry_users = isset($value['item_carry_users'])?$value['item_carry_users']:[];
+                                            dd($value['item_carry_users']);
 
                                             if(isset($value['item_carry_users'])){
                                                 foreach ($value['item_carry_users'] as $value) {
