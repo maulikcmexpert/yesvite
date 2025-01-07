@@ -5155,9 +5155,9 @@ class ApiControllerv2 extends Controller
                                             //     ]);
                                             // }
                                             $item_carry_users = isset($value['item_carry_users'])?$value['item_carry_users']:[];
-                                            dd($value['item_carry_users']);
-
+                                            
                                             if(isset($value['item_carry_users'])){
+                                                dd($value['item_carry_users']);
                                                 foreach ($value['item_carry_users'] as $value) {
                                                     if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
                                                         UserPotluckItem::where([
