@@ -5028,19 +5028,21 @@ class ApiControllerv2 extends Controller
                             // dd($podluckCategoryList)
                             foreach ($podluckCategoryList as $value) {
 
-                                $updateEventPodluck = EventPotluckCategory::where([
-                                    'event_id' => $eventData['event_id'],
-                                    'user_id' => $user->id,
-                                    'category' => $value['category']
-                                ])->first();
+                                // $updateEventPodluck = EventPotluckCategory::where([
+                                //     'event_id' => $eventData['event_id'],
+                                //     'user_id' => $user->id,
+                                //     'category' => $value['category']
+                                // ])->first();
                                 if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
+                                if($value['id']!=0&&$value['id']!="" || $value['id']!="0"&&$value['id']!="" ){
                                     EventPotluckCategory::where([
                                         'event_id' => $eventData['event_id'],
                                         'user_id' => $user->id,
                                         'category' => $value['category']
                                     ])
                                         ->update(['quantity' => $value['quantity']]);
-                                    $eventPodluckid = $updateEventPodluck->id;
+                                    // $eventPodluckid = $updateEventPodluck->id;
+                                    $eventPodluckid = $value['id'];
                                 } else {
                                     $eventPodluck = EventPotluckCategory::create([
                                         'event_id' => $eventData['event_id'],
@@ -5054,13 +5056,15 @@ class ApiControllerv2 extends Controller
                                     $items = $value['items'];
                                     foreach ($items as $value) {
 
-                                        $getEventPotluckItem = EventPotluckCategoryItem::where([
-                                            'event_id' => $eventData['event_id'],
-                                            'user_id' => $user->id,
-                                            'event_potluck_category_id' => $eventPodluckid,
-                                            'description' => $value['description']
-                                        ])->first();
-                                        if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
+                                        // $getEventPotluckItem = EventPotluckCategoryItem::where([
+                                        //     'event_id' => $eventData['event_id'],
+                                        //     'user_id' => $user->id,
+                                        //     'event_potluck_category_id' => $eventPodluckid,
+                                        //     'description' => $value['description']
+                                        // ])->first();
+                                        // if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
+                                            if($value['id']!=0&&$value['id']!="" || $value['id']!="0"&&$value['id']!="" ){
+
                                             $self_bring_item = (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0';
                                             EventPotluckCategoryItem::where([
                                                 'event_id' => $eventData['event_id'],
@@ -5081,14 +5085,16 @@ class ApiControllerv2 extends Controller
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
-                                                        'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        'event_potluck_item_id' => $value['id'],
                                                     ])->delete();
                                                 } elseif (isset($value['self_quantity'])) {
                                                     UserPotluckItem::where([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
-                                                        'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                        'event_potluck_item_id' => $value['id'],
                                                     ])->update(['quantity' => $value['self_quantity']]);
                                                 }
                                             } else {
@@ -5096,7 +5102,8 @@ class ApiControllerv2 extends Controller
                                                     'event_id' => $eventData['event_id'],
                                                     'user_id' => $user->id,
                                                     'event_potluck_category_id' => $eventPodluckid,
-                                                    'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                    // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                                    'event_potluck_item_id' => $value['id'],
                                                 ])->delete();
                                             }
                                         } else {
