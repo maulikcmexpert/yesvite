@@ -5154,20 +5154,22 @@ class ApiControllerv2 extends Controller
                                             //     ]);
                                             // }
                                             $item_carry_users = $value['item_carry_users'];
-                                            foreach ($item_carry_users as $value) {
-                                                if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
-                                                    UserPotluckItem::where([
-                                                                    'event_id' => $eventData['event_id'],
-                                                                 "id"=>$value['id'],
-                                                                ])->update(['quantity' => $value['quantity']]);
-                                                }else{
-                                                    UserPotluckItem::Create([
-                                                        'event_id' => $eventData['event_id'],
-                                                        'user_id' => $user->id,
-                                                        'event_potluck_category_id' => $eventPodluckid,
-                                                        'event_potluck_item_id' => $eventPodluckitem->id,
-                                                        'quantity' => $value['quantity']
-                                                    ]);
+                                            if(!empty($item_carry_users)){
+                                                foreach ($item_carry_users as $value) {
+                                                    if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
+                                                        UserPotluckItem::where([
+                                                                        'event_id' => $eventData['event_id'],
+                                                                     "id"=>$value['id'],
+                                                                    ])->update(['quantity' => $value['quantity']]);
+                                                    }else{
+                                                        UserPotluckItem::Create([
+                                                            'event_id' => $eventData['event_id'],
+                                                            'user_id' => $user->id,
+                                                            'event_potluck_category_id' => $eventPodluckid,
+                                                            'event_potluck_item_id' => $eventPodluckitem->id,
+                                                            'quantity' => $value['quantity']
+                                                        ]);
+                                                    }
                                                 }
                                             }
                                         }
