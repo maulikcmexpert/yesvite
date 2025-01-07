@@ -173,9 +173,9 @@ class ContactController extends Controller
                 $query->skip($request->offset)
                 ->limit($request->limit);
             })
-            ->when(empty($request->search_name)&&(empty($request->offset)&&empty($request->limit)), function ($query) {
-                $query->limit(6);
-            })
+            // ->when(empty($request->search_name)&&(empty($request->offset)&&empty($request->limit)), function ($query) {
+            //     $query->limit(6);
+            // })
             ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
                     $q->where('firstname', 'LIKE', '%' . $searchName . '%')
