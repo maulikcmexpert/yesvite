@@ -4648,10 +4648,15 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
         return;
     }else{
         if ($(this).is(':checked')) {
+            var prefer_by_email = $(this).data('prefer_by');
+            alert(prefer_by_email);
+            alert(prefer_by_email);
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
             var initial = $(this).data("initial");
+            alert({prefer_by_email});
+            alert({selected_co_host});
             selected_co_host = $(this).val();
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
@@ -4669,7 +4674,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             $('#remove_co_host_id').val('user-'+selected_co_host);
             $('.selected-host-name').text(user_name);
             $('.guest-contacts-wrp').css('display','flex');
-            var prefer_by_email = $(this).data('prefer_by');
+            
             if(prefer_by_email){
                 selected_co_host_prefer_by = prefer_by_email;
             }else{
