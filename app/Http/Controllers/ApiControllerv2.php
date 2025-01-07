@@ -1006,7 +1006,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
                         $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
-                        $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit)&&$value->event->event_settings->allow_limit!="");
+                        $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit)&&$value->event->event_settings->allow_limit!="")?$value->event->event_settings->allow_limit:"";
                         $images = EventImage::where('event_id', $value->event->id)->first();
 
                         $eventDetail['event_images'] = "";
