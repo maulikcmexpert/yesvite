@@ -5023,17 +5023,16 @@ class ApiControllerv2 extends Controller
                     if ($eventData['event_setting']['podluck'] == '1') {
 
                         $podluckCategoryList = $eventData['podluck_category_list'];
-
                         if (!empty($podluckCategoryList)) {
                             // EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
-                            dd($podluckCategoryList);
                             foreach ($podluckCategoryList as $value) {
-
+                                
                                 $updateEventPodluck = EventPotluckCategory::where([
                                     'event_id' => $eventData['event_id'],
                                     'user_id' => $user->id,
                                     'category' => $value['category']
-                                ])->first();
+                                    ])->first();
+                                    dd($updateEventPodluck)
                                 if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
                                     EventPotluckCategory::where([
                                         'event_id' => $eventData['event_id'],
