@@ -996,17 +996,17 @@ class ApiControllerv2 extends Controller
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                         $eventDetail['message_to_guests'] = $value->event->message_to_guests;
                         $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
-                        $eventDetail['event_wall'] = isset($value->event->event_settings->event_wall)||"";
-                        $eventDetail["guest_list_visible_to_guests"] = isset($value->event->event_settings->guest_list_visible_to_guests)||"";
+                        $eventDetail['event_wall'] = (isset($value->event->event_settings->event_wall)&&$value->event->event_settings->event_wall!="")?$value->event->event_settings->event_wall:"";
+                        $eventDetail["guest_list_visible_to_guests"] = (isset($value->event->event_settings->guest_list_visible_to_guests)&&$value->event->event_settings->guest_list_visible_to_guests!="")?$value->event->event_settings->guest_list_visible_to_guests:"";
 
                         $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
-                        $eventDetail['event_potluck'] = isset($value->event->event_settings->podluck)||"";
-                        $eventDetail['adult_only_party'] = isset($value->event->event_settings->adult_only_party)||"";
+                        $eventDetail['event_potluck'] = (isset($value->event->event_settings->podluck)&&$value->event->event_settings->podluck!="")?$value->event->event_settings->podluck:"";
+                        $eventDetail['adult_only_party'] = (isset($value->event->event_settings->adult_only_party)&&$value->event->event_settings->adult_only_party)?$value->event->event_settings->adult_only_party:"";
                         $eventDetail['host_name'] = $value->event->hosted_by;
                         $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
                         $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
-                        $eventDetail['allow_limit'] = isset($value->event->event_settings->allow_limit)||"";
+                        $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit)&&$value->event->event_settings->allow_limit!="")?$value->event->event_settings->allow_limit:"";
                         $images = EventImage::where('event_id', $value->event->id)->first();
 
                         $eventDetail['event_images'] = "";
