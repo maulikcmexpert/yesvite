@@ -1370,13 +1370,13 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" id="firstname" class="form-control inputText" >
+                                                    <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" id="lastname"  class="form-control inputText" >
+                                                    <input type="text"  name="lastname" id="lastname"  class="form-control inputText lastname" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                             </div>
@@ -1412,7 +1412,7 @@
                                     <div class="rsvp-msgbox">
                                         <h5>Message</h5>
                                         <div class="input-form">
-                                            <textarea class="form-control inputText" id="message_to_host" name="message_to_host" message=""  maxlength="50"></textarea>
+                                            <textarea class="form-control inputText message_to_host" id="message_to_host" name="message_to_host" message=""  maxlength="50"></textarea>
                                             <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -1492,13 +1492,13 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" id="firstname" class="form-control inputText" >
+                                            <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" id="lastname" class="form-control inputText" >
+                                            <input type="text" name="lastname" id="lastname" class="form-control inputText lastname" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
@@ -1513,7 +1513,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea class="form-control inputText" id="message_to_host" name="message_to_host" required=""  maxlength="50"></textarea>
+                                    <textarea class="form-control inputText message_to_host" id="message_to_host" name="message_to_host" required=""  maxlength="50"></textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">

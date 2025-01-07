@@ -63,12 +63,18 @@ $(document).on('click','.yes_rsvp_btn',function (e) {
     $('#rsvp-yes-modal').on('hidden.bs.modal', function () {
         $('#adults').val('0');
         $('#kids').val('0');
+        $('.message_to_host').val('');
+        $('.firstname').val('');
+        $('.lastname').val('');
     });
 });
 $(document).ready(function () {
   $('#rsvp-no-modal').on('hidden.bs.modal', function () {
       $('#adults').val('0');
       $('#kids').val('0');
+      $('.message_to_host').val('');
+      $('.firstname').val('');
+      $('.lastname').val('');
   });
 });
 
