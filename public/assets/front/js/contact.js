@@ -304,7 +304,7 @@ $(document).on("input", ".search_phone", function () {
                 data: formData,
 
                 success: function (output) {
-                    console.log(output);
+                    console.log(output.status);
 
                     if (output.status == 1) {
                         removeLoaderHandle("#save_contact", "Save Contact");
