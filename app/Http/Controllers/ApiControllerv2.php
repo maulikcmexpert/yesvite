@@ -751,9 +751,8 @@ class ApiControllerv2 extends Controller
                             $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                         } else {
                             if ($isCoHost != null) {
-                            $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
-                        }
-
+                                $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
+                            }
                         }
                         $eventDetail['is_co_host'] = "0";
                         if ($isCoHost != null) {
@@ -4366,10 +4365,10 @@ class ApiControllerv2 extends Controller
                 $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
                 $eventDetail['host_id'] = (!empty($getEventData->user_id) && $getEventData->user_id != NULL) ? $getEventData->user_id : "";
 
-                
+
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventData['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-              
+
 
                 $eventDetail['start_date'] = (!empty($getEventData->start_date) && $getEventData->start_date != NULL) ? $getEventData->start_date : "";
                 $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
@@ -5034,7 +5033,7 @@ class ApiControllerv2 extends Controller
                                 //     'category' => $value['category']
                                 // ])->first();
                                 // if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
-                                if($value['id']!=0&&$value['id']!="" || $value['id']!="0"&&$value['id']!="" ){
+                                if ($value['id'] != 0 && $value['id'] != "" || $value['id'] != "0" && $value['id'] != "") {
                                     EventPotluckCategory::where([
                                         'event_id' => $eventData['event_id'],
                                         'user_id' => $user->id,
@@ -5063,7 +5062,7 @@ class ApiControllerv2 extends Controller
                                         //     'description' => $value['description']
                                         // ])->first();
                                         // if (isset($getEventPotluckItem) && !empty($getEventPotluckItem)) {
-                                            if($value['id']!=0&&$value['id']!="" || $value['id']!="0"&&$value['id']!="" ){
+                                        if ($value['id'] != 0 && $value['id'] != "" || $value['id'] != "0" && $value['id'] != "") {
 
                                             $self_bring_item = (isset($value['self_bring_item'])) ? $value['self_bring_item'] : '0';
                                             EventPotluckCategoryItem::where([
@@ -5077,35 +5076,60 @@ class ApiControllerv2 extends Controller
                                                     'quantity' => $value['quantity']
                                                 ]);
 
-                                            if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
+                                            // if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1') {
 
-                                                // $userQuantity = (isset($value['self_quantity'])) ? $value['self_quantity'] : 0;
-                                                if (isset($value['self_quantity']) && $value['self_quantity'] == '0') {
+                                            //     // $userQuantity = (isset($value['self_quantity'])) ? $value['self_quantity'] : 0;
+                                            //     if (isset($value['self_quantity']) && $value['self_quantity'] == '0') {
+                                            //         UserPotluckItem::where([
+                                            //             'event_id' => $eventData['event_id'],
+                                            //             'user_id' => $user->id,
+                                            //             'event_potluck_category_id' => $eventPodluckid,
+                                            //             // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                            //             'event_potluck_item_id' => $value['id'],
+                                            //         ])->delete();
+                                            //     } elseif (isset($value['self_quantity'])) {
+                                            //         UserPotluckItem::where([
+                                            //             'event_id' => $eventData['event_id'],
+                                            //             'user_id' => $user->id,
+                                            //             'event_potluck_category_id' => $eventPodluckid,
+                                            //             // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                            //             'event_potluck_item_id' => $value['id'],
+                                            //         ])->update(['quantity' => $value['self_quantity']]);
+                                            //     }
+                                            // } else {
+                                            //     UserPotluckItem::where([
+                                            //         'event_id' => $eventData['event_id'],
+                                            //         'user_id' => $user->id,
+                                            //         'event_potluck_category_id' => $eventPodluckid,
+                                            //         // 'event_potluck_item_id' => $getEventPotluckItem->id,
+                                            //         'event_potluck_item_id' => $value['id'],
+                                            //     ])->delete();
+                                            // }
+
+
+
+                                            // New code 07/01/25
+                                            $item_carry_users = $value['item_carry_users'];
+                                            foreach ($item_carry_users as $value) {
+                                                if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
                                                     UserPotluckItem::where([
+                                                                    'event_id' => $eventData['event_id'],
+                                                                 "id"=>$value['id'],
+                                                                ])->update(['quantity' => $value['quantity']]);
+                                                }else{
+                                                    UserPotluckItem::Create([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
-                                                        // 'event_potluck_item_id' => $getEventPotluckItem->id,
-                                                        'event_potluck_item_id' => $value['id'],
-                                                    ])->delete();
-                                                } elseif (isset($value['self_quantity'])) {
-                                                    UserPotluckItem::where([
-                                                        'event_id' => $eventData['event_id'],
-                                                        'user_id' => $user->id,
-                                                        'event_potluck_category_id' => $eventPodluckid,
-                                                        // 'event_potluck_item_id' => $getEventPotluckItem->id,
-                                                        'event_potluck_item_id' => $value['id'],
-                                                    ])->update(['quantity' => $value['self_quantity']]);
+                                                        'event_potluck_item_id' => $eventPodluckitem->id,
+                                                        'quantity' => $value['quantity']
+                                                    ]);
                                                 }
-                                            } else {
-                                                UserPotluckItem::where([
-                                                    'event_id' => $eventData['event_id'],
-                                                    'user_id' => $user->id,
-                                                    'event_potluck_category_id' => $eventPodluckid,
-                                                    // 'event_potluck_item_id' => $getEventPotluckItem->id,
-                                                    'event_potluck_item_id' => $value['id'],
-                                                ])->delete();
                                             }
+
+
+
+
                                         } else {
                                             $eventPodluckitem =   EventPotluckCategoryItem::create([
                                                 'event_id' => $eventData['event_id'],
@@ -5116,14 +5140,31 @@ class ApiControllerv2 extends Controller
                                                 'quantity' => $value['quantity'],
                                             ]);
 
-                                            if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1' && $value['self_quantity'] != '0') {
-                                                UserPotluckItem::Create([
-                                                    'event_id' => $eventData['event_id'],
-                                                    'user_id' => $user->id,
-                                                    'event_potluck_category_id' => $eventPodluckid,
-                                                    'event_potluck_item_id' => $eventPodluckitem->id,
-                                                    'quantity' => $value['self_quantity']
-                                                ]);
+                                            // if (isset($value['self_bring_item']) && $value['self_bring_item'] == '1' && $value['self_quantity'] != '0') {
+                                            //     UserPotluckItem::Create([
+                                            //         'event_id' => $eventData['event_id'],
+                                            //         'user_id' => $user->id,
+                                            //         'event_potluck_category_id' => $eventPodluckid,
+                                            //         'event_potluck_item_id' => $eventPodluckitem->id,
+                                            //         'quantity' => $value['self_quantity']
+                                            //     ]);
+                                            // }
+
+                                            foreach ($item_carry_users as $value) {
+                                                if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
+                                                    UserPotluckItem::where([
+                                                                    'event_id' => $eventData['event_id'],
+                                                                 "id"=>$value['id'],
+                                                                ])->update(['quantity' => $value['quantity']]);
+                                                }else{
+                                                    UserPotluckItem::Create([
+                                                        'event_id' => $eventData['event_id'],
+                                                        'user_id' => $user->id,
+                                                        'event_potluck_category_id' => $eventPodluckid,
+                                                        'event_potluck_item_id' => $eventPodluckitem->id,
+                                                        'quantity' => $value['quantity']
+                                                    ]);
+                                                }
                                             }
                                         }
                                     }
@@ -6573,7 +6614,7 @@ class ApiControllerv2 extends Controller
                             $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
                             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $itemValue->user_id, 'is_co_host' => '1'])->first();
                             $potluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-          
+
                             $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                             $potluckItem['quantity'] =  $itemValue->quantity;
                             $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
@@ -6587,7 +6628,7 @@ class ApiControllerv2 extends Controller
                                 $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
                                 $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $itemValue->user_id, 'is_co_host' => '1'])->first();
                                 $userPotluckItem['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-              
+
                                 $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
                                 $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                 $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
@@ -7771,14 +7812,14 @@ class ApiControllerv2 extends Controller
             $storiesDetaill['profile'] =  empty($eventLoginUserStoriesList->user->profile) ? "" : asset('storage/profile/' . $eventLoginUserStoriesList->user->profile);
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $eventLoginUserStoriesList->user->id, 'is_co_host' => '1'])->first();
             $storiesDetaill['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-          
+
             $storiesDetaill['story'] = [];
             foreach ($eventLoginUserStoriesList->user_event_story as $storyVal) {
                 $storiesData['id'] = $storyVal->id;
                 $storiesData['storyurl'] = empty($storyVal->story) ? "" : asset('storage/event_user_stories/' . $storyVal->story);
                 $storiesData['type'] = $storyVal->type;
                 $storiesData['post_time'] =  $this->setpostTime($storyVal->updated_at);
-                
+
                 $checkISeen = UserSeenStory::where(['user_id' => $user->id, 'user_event_story_id' => $storyVal->id])->count();
 
                 $storiesData['is_seen'] = ($checkISeen != 0) ? "1" : "0";
