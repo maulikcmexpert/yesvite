@@ -623,11 +623,26 @@ $user['coins']=$user->coins;
                     // }
                 }
             }
+            DD($request);
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
                 $prefer_by = $request->co_host_prefer_by;
-dd($invited_user);
+            if(isset($request->isPhonecontact) && $request->isPhonecontact==1){
+                $checkContactExist = contact_sync::where('id',$invited_user)->first();
+                if ($checkContactExist) {
+                    $newUserId = NULL;
+                    if ($checkContactExist->email != '') {
+                        $newUserId = checkUserEmailExist($checkContactExist);
+                    }
+                    $eventInvite = new EventInvitedUser();
+                    $eventInvite->event_id = $eventId;
+                    $eventInvite->sync_id = $checkContactExist->id;
+                    $eventInvite->user_id = $newUserId;
+                    $eventInvite->prefer_by = $prefer_by;
+                    $eventInvite->save();
+                }
+            }else{
                 EventInvitedUser::create([
                     'event_id' => $eventId,
                     'prefer_by' => $prefer_by,
@@ -646,6 +661,7 @@ dd($invited_user);
                         'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
                     ];
                 }
+            }
             }
 
             if (isset($request->eventSetting) && $request->eventSetting == "1") {

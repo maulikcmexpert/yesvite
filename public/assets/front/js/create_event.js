@@ -4670,7 +4670,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             selected_dataId = selected_co_host;
             selected_profile_or_text = profile_or_text;
             selected_prefer_by = prefer_by_email;
-            
+            eventData.isPhonecontact = isPhonecontact;
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
                 $('.selected-co-host-image').show();
