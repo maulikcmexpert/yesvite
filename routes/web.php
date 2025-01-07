@@ -140,6 +140,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
 
     Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
+    // Route::get('addContact',  [ContactController::class, 'addContact'])->name('addContact');
 
     Route::post('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
     Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
