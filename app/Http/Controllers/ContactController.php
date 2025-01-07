@@ -313,7 +313,7 @@ class ContactController extends Controller
             return response()->json(['status' => '0']);
 
         }else{
-            return view('front.ajax_phones', compact('yesvite_phone'))->render();
+            // return view('front.ajax_phones', compact('yesvite_phone'))->render();
 
             if($searchPhone!=''){
                 return response()->json([
