@@ -54,7 +54,7 @@ $(document).on("input", ".search_name", function () {
         
         }else{
             offset=null;
-            limit=null
+            limit=null;
         }
         loadMoreData(search_name,type=null,offset,limit);
 
@@ -105,6 +105,7 @@ $(document).on("input", ".search_phone", function () {
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
                 }else{
+                    $("#yesviteUser").html('');
                     $("#yesviteUser").append(data.view);
                 }
 
