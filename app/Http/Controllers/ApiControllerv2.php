@@ -5054,6 +5054,7 @@ class ApiControllerv2 extends Controller
                                 if (!empty($value['items'])) {
                                     $items = $value['items'];
                                     foreach ($items as $value) {
+                                        $itemPlotluckId = $value['id']; 
 
                                         // $getEventPotluckItem = EventPotluckCategoryItem::where([
                                         //     'event_id' => $eventData['event_id'],
@@ -5124,7 +5125,7 @@ class ApiControllerv2 extends Controller
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
                                                         'event_potluck_category_id' => $eventPodluckid,
-                                                        'event_potluck_item_id' => $eventPodluckitem->id,
+                                                        'event_potluck_item_id' => $itemPlotluckId,
                                                         'quantity' => $value['quantity']
                                                     ]);
                                                 }
