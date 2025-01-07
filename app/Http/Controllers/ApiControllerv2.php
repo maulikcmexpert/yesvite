@@ -5113,7 +5113,7 @@ class ApiControllerv2 extends Controller
                                             // $item_carry_users = $value['item_carry_users'];
                                             // $item_carry_users = isset($value['item_carry_users'])?$value['item_carry_users']:[];
                                             if(isset($value['item_carry_users'])){
-                                            foreach ($item_carry_users as $value) {
+                                            foreach ($value['item_carry_users'] as $value) {
                                                 if($value['id'] !=0){
                                                  
                                                     UserPotluckItem::where([
@@ -5155,8 +5155,9 @@ class ApiControllerv2 extends Controller
                                             //     ]);
                                             // }
                                             $item_carry_users = isset($value['item_carry_users'])?$value['item_carry_users']:[];
+
                                             if(isset($value['item_carry_users'])){
-                                                foreach ($item_carry_users as $value) {
+                                                foreach ($value['item_carry_users'] as $value) {
                                                     if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
                                                         UserPotluckItem::where([
                                                                         'event_id' => $eventData['event_id'],
