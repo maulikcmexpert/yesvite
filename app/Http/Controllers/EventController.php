@@ -1654,7 +1654,52 @@ $user['coins']=$user->coins;
         // dd($yesvite_user);
         return response()->json(view('front.event.guest.get_contacts', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
-
+    public function getPhoneContact(Request $request)
+    {
+            
+        
+        $id = Auth::guard('web')->user()->id;
+        $type = $request->type;
+      
+        $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
+        
+      
+        $getAllContacts = contact_sync::where('contact_id',$id)
+            ->when($type != 'group', function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->limit($request->limit)
+                        ->skip($request->offset);
+                });
+            })
+            ->when($search_user != '', function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+            ->get();
+            
+        $yesvite_user = [];
+        foreach ($getAllContacts as $user) {
+            $yesviteUserDetail = [
+                'id' => $user->id,
+                'profile' => empty($user->profile) ? "" : $user->profile,
+                'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
+                'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
+                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+                'phone_number' => (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "",
+            ];
+            $yesvite_user[] = (object)$yesviteUserDetail;
+        }
+        
+        $selected_user = Session::get('contact_ids');
+        // dd($selected_co_host_prefer_by);
+        // dd($selected_co_host_prefer_by);
+        
+        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user','selected_co_host','selected_co_host_prefer_by'))->render());
+    }
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
     //     $searchName = $request->search_name;

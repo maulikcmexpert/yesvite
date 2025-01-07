@@ -430,7 +430,7 @@
 #sidebar_add_co_host .list_all_invited_user {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 340px);
+    max-height: calc(100vh - 410px);
 }
 
 #sidebar_gift_registry #registry_list {
@@ -736,6 +736,12 @@
 
     #YesviteUserAll .users-data .text-start a {
         word-break: break-all;
+    }
+
+    #sidebar_add_co_host .list_all_invited_user {
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 510px);
     }
 }
 
