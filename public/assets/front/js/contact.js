@@ -165,7 +165,16 @@ $(document).on("input", ".search_phone", function () {
                     return;
                 }
                 $("#loader").hide();
-                $("#yesvitePhones").append(data);
+                // $("#yesvitePhones").append(data);
+
+
+                if(data.search=='1'){
+                    $("#yesvitePhones").html(data.view);
+                }else{
+                    $("#yesvitePhones").append(data.view);
+                }
+
+
                 busy2 = false;
 
             },

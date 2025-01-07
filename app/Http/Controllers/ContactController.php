@@ -314,6 +314,20 @@ class ContactController extends Controller
 
         }else{
             return view('front.ajax_phones', compact('yesvite_phone'))->render();
+
+            if($searchPhone!=''){
+                return response()->json([
+                    'view' => view('front.ajax_phones', compact('yesvite_phone'))->render(),
+                    'search' =>'1',
+                    'status' => '1',
+                ]);
+            }else{
+                return response()->json([
+                    'view' => view('front.ajax_phones', compact('yesvite_phone'))->render(),
+                    'status' => '1',
+                ]);
+            }
+
         }
             }
             return response()->json(['error' => 'Invalid request'], 400);
