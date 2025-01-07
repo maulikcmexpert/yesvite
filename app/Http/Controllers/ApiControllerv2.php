@@ -12116,6 +12116,11 @@ class ApiControllerv2 extends Controller
                 $notificationDetail['message_to_host'] = "";
                 $notificationDetail['rsvp_attempt'] = "";
                 $notificationDetail['is_co_host'] = "";
+
+                $isCoHost =  EventInvitedUser::where(['event_id' => $values->event_id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $notificationDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+
+
                 $notificationDetail['accept_as_co_host'] = "";
                 $notificationDetail['event_invited_user_id'] = 0;
 
