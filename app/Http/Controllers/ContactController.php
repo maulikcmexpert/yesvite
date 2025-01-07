@@ -318,7 +318,6 @@ class ContactController extends Controller
             // return view('front.ajax_phones', compact('yesvite_phone'))->render();
 
             if($searchPhone!=''){
-                dd(1);
                 return response()->json([
                     'view' => view('front.ajax_phones', compact('yesvite_phone'))->render(),
                     'search' =>'1',
