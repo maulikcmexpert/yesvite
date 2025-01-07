@@ -144,12 +144,12 @@ $(document).on("input", ".search_phone", function () {
         });
     }
 
-    function loadMorePhones(search_name,type,offset1,limit) {
+    function loadMorePhones(search_phone,type,offset1,limit) {
         $.ajax({
             url: base_url + "contacts/loadphones",
             type: "POST",
             data: {
-                search_name: search_name,
+                search_phone: search_phone,
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
                 type:type,
                 offset:offset1,
