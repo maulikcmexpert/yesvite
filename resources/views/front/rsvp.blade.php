@@ -695,10 +695,11 @@
                                                 <div class="target d-flex gap-3 align-items-center">
 
                                                     @php
+                                                    $url=$gift['registry_link'];
                                                     $logo="";
-                                                    if(trim($gift['registry_recipient_name'])=="amazon"||trim($gift['registry_recipient_name'])=="Amazon"){
+                                                    if(strpos($url, 'amazon') !== false ||strpos($url, 'Amazon') !== false){
                                                         $logo=asset('assets/amazon.png');
-                                                    }elseif (trim($gift['registry_recipient_name'])=="target"||trim($gift['registry_recipient_name'])=="Target") {
+                                                    }elseif (strpos($url, 'target') !== false ||strpos($url, 'Target') !== false) {
                                                         $logo=asset('assets/target.png');
                                                     }
 
