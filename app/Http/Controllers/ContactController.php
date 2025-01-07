@@ -173,9 +173,9 @@ class ContactController extends Controller
                 $query->skip($request->offset)
                 ->limit($request->limit);
             })
-            ->when(empty($request->search_name), function ($query) {
-                $query->limit(6);
-            })
+            // ->when(empty($request->search_name), function ($query) {
+            //     $query->limit(6);
+            // })
             ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
                     $q->where('firstname', 'LIKE', '%' . $searchName . '%')
@@ -283,10 +283,7 @@ class ContactController extends Controller
 
         $query = contact_sync::where('contact_id', $id)->orderBy('firstName','asc');
       
-        if(empty($searchPhone)){
-            // dd(1);
-            $query->limit(6);
-        }
+        
         if (!empty($searchPhone)) {
             $query->where(function ($q) use ($searchPhone) {
                 $q->where('firstName', 'LIKE', '%' . $searchPhone . '%')
@@ -297,7 +294,10 @@ class ContactController extends Controller
         if ((!empty($request->offset)&&!empty($request->limit))&&($request->has('limit') && $request->has('offset'))) {
             $query->skip($request->offset)->take($request->limit);
         }
-       
+        // if(empty($searchPhone)){
+        //     // dd(1);
+        //     $query->limit(6);
+        // }
         $getAllContacts = $query->get();
         $yesvite_phone = [];
         foreach ($getAllContacts as $user) {
