@@ -5110,15 +5110,16 @@ class ApiControllerv2 extends Controller
 
                                             // New code 07/01/25
                                             $item_carry_users = $value['item_carry_users'];
-dd($item_carry_users);
 
                                             foreach ($item_carry_users as $value) {
                                                 if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
+                                                    dd(1,$eventData['event_id']);
                                                     UserPotluckItem::where([
                                                                     'event_id' => $eventData['event_id'],
                                                                  "id"=>$value['id'],
                                                                 ])->update(['quantity' => $value['quantity']]);
                                                 }else{
+                                                    dd(2,$eventData['event_id']);
                                                     UserPotluckItem::Create([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
