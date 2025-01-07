@@ -388,7 +388,7 @@ $user['coins']=$user->coins;
 
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
         // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
 
