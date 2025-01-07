@@ -5034,7 +5034,7 @@ class ApiControllerv2 extends Controller
                                 //     ])->first();
                                     // dd($updateEventPodluck);
                                 // if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
-                                if($value['id'] !=0 && $value['id']!=""){
+                                if($value['id'] !=0 && $value['id']!="" || $value['id'] !="0" && $value['id']!=""){
                                     EventPotluckCategory::where([
                                         'event_id' => $eventData['event_id'],
                                         'user_id' => $user->id,
