@@ -67,6 +67,7 @@ $(document).on("keyup", ".search_phone", function () {
 });
 
     function loadMoreData(search_name,type,offset,limit) {
+        console.log({search_name,type,offset,limit});
         $.ajax({
             url: base_url + "contacts/load",
             type: "POST",
