@@ -5033,7 +5033,7 @@ class ApiControllerv2 extends Controller
                                 //     'user_id' => $user->id,
                                 //     'category' => $value['category']
                                 // ])->first();
-                                if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
+                                // if (isset($updateEventPodluck) && !empty($updateEventPodluck)) {
                                 if($value['id']!=0&&$value['id']!="" || $value['id']!="0"&&$value['id']!="" ){
                                     EventPotluckCategory::where([
                                         'event_id' => $eventData['event_id'],
