@@ -5113,7 +5113,7 @@ class ApiControllerv2 extends Controller
 
                                             foreach ($item_carry_users as $value) {
                                                 if($value['id'] !="0" || $value['id'] !=0 || $value['id'] !=""){
-                                                    dd(1,$eventData['event_id']);
+                                                    dd(1,$value['id']);
                                                     UserPotluckItem::where([
                                                                     'event_id' => $eventData['event_id'],
                                                                  "id"=>$value['id'],
