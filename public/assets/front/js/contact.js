@@ -586,7 +586,7 @@ $(document).on("keyup", ".search_phone", function () {
             data: formData,
 
             success: function (output) {
-                console.log(output);
+                console.log(output.user);
 
                 if (output.status == 1) {
                     // removeLoadeerHandle("#save_contact", "Save Contact");
