@@ -414,6 +414,8 @@ $(document).on("keyup", ".search_phone", function () {
                     $("#phone_number").val(phoneNumber);
                     $("#edit_id").val(output.edit.id);
                     $("#is_phone_contact").val(1);
+                    $('#save_edit_contact').attr("data-is_phone_contact", "1");
+
                 }
             },
         });
@@ -560,8 +562,15 @@ $(document).on("keyup", ".search_phone", function () {
         // loaderHandle("#save_edit_contact", "Saving");
         // $("#save_edit_contact").submit();
 
-        var formActionURL = $("#edit_contact_form").attr("action");
+        // var formActionURL = $("#edit_contact_form").attr("action");
         var formData = $("#edit_contact_form").serialize();
+        var formtype=$(this).data('is_phone_contact');
+        var formActionURL="";
+        if(formtype=="1"){
+            formActionURL= base_url+'contacts/save_edit_phone/'
+        }else if(formtype=="0"){
+            formActionURL= base_url+'contacts/save_edit/'
+        }
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
