@@ -5478,9 +5478,12 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function getGiftRegistryList()
+    public function getGiftRegistryList(Request $request)
     {
         $user  = Auth::guard('api')->user();
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
 
         try {
 
@@ -5488,6 +5491,10 @@ class ApiControllerv2 extends Controller
                 ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
                 ->orderBy('id', 'DESC')
                 ->get();
+
+            $getEventGiftRegistry = Event::where('id',$input['event_id'])
+            ->select('gift_registry_id')
+            ->first();
 
             if (count($GiftRegistryList) != 0) {
 
@@ -7461,8 +7468,8 @@ class ApiControllerv2 extends Controller
 
                 $coHostDetail1['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
 
-                $coHostDetail1['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
-
+                $coHostDetail1['name'] = (!empty($hostValues->user->firstname)|| $hostValues->user->firstname!="")?$hostValues->user->firstname:"" . ' ' . (!empty($hostValues->user->lastname)|| $hostValues->user->lastname!="")?$hostValues->user->lastname:"";
+ 
                 $coHostDetail1['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
 
                 $coHostDetail1['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
