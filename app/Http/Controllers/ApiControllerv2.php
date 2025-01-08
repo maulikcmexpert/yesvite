@@ -5772,7 +5772,7 @@ dd($e);
             ->toArray();
 
             $EventGreetingCardList = Event::where('id', $input['event_id'])
-            ->select('gift_registry_id')
+            ->select('greeting_card_id')
             ->first();
             $GreetingCardIds = $EventGreetingCardList ? explode(',', $EventGreetingCardList->greeting_card_id) : [];
 
