@@ -354,7 +354,7 @@ $(document).on("keyup", ".search_phone", function () {
                     $("#myModal1").modal("hide");
 
                     if (output.status == 1) {
-                        removeLoaderHandle("#save_contact", "Save Contact");
+                        // removeLoaderHandle("#save_contact", "Save Contact");
                         $("#Fname").val(output.user.firstname);
                         $("#Lname").val(output.user.lastname);
 
