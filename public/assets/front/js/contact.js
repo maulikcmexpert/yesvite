@@ -26,68 +26,68 @@ $("#product-scroll").on("scroll", function () {
 });
 
 
-// let debounceTimer;
-// $("#product-scroll-phone").on("scroll", function () {
-   
-//     clearTimeout(debounceTimer);
-//     // debounceTimer = setTimeout(() => {
-//         if (busy2) return; 
-
-//         var scrollTop = $(this).scrollTop(); 
-//         var scrollHeight = $(this)[0].scrollHeight; 
-//         var elementHeight = $(this).height();
-//         console.log({scrollTop,
-//             scrollHeight,
-//             elementHeight})
-//             if (scrollTop + elementHeight >= scrollHeight) {
-//                 alert();
-//                 busy2 = true;
-//                 offset1 += limit;
-//                 var type="phone";
-//                 loadMorePhones(search_name=null,type,offset1,limit);
-//             // function loadMoreData(page, search_name)
-//             // loadMoreGroups(page, search_group);
-//             // loadMorePhones(page, search_phone);
-//         }
-//     // }, 200);
-// });
-
 let debounceTimer;
-let busy2 = false; // Ensure busy2 is initialized
-
 $("#product-scroll-phone").on("scroll", function () {
+   
     clearTimeout(debounceTimer);
+    // debounceTimer = setTimeout(() => {
+        if (busy2) return; 
 
-    debounceTimer = setTimeout(() => {
-        if (busy2) return;
-
-        let scrollTop = $(this).scrollTop();
-        let scrollHeight = $(this)[0].scrollHeight;
-        let elementHeight = $(this).height();
-
-        console.log({
-            scrollTop,
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+        console.log({scrollTop,
             scrollHeight,
-            elementHeight
-        });
-
-        if (scrollTop + elementHeight >= scrollHeight - 10) { // Adding a buffer of 10px
-            busy2 = true;
-
-            offset1 += limit; // Increment the offset
-            let type = "phone";
-
-            loadMorePhones(null, type, offset1, limit)
-                .then(() => {
-                    busy2 = false; // Reset busy2 after successful load
-                })
-                .catch(err => {
-                    console.error("Error loading more phones:", err);
-                    busy2 = false; // Reset busy2 even on error
-                });
+            elementHeight})
+            if (scrollTop + elementHeight >= scrollHeight) {
+                alert();
+                busy2 = true;
+                offset1 += limit;
+                var type="phone";
+                loadMorePhones(search_name=null,type,offset1,limit);
+            // function loadMoreData(page, search_name)
+            // loadMoreGroups(page, search_group);
+            // loadMorePhones(page, search_phone);
         }
-    }, 200);
+    // }, 200);
 });
+
+// let debounceTimer;
+// let busy2 = false; // Ensure busy2 is initialized
+
+// $("#product-scroll-phone").on("scroll", function () {
+//     clearTimeout(debounceTimer);
+
+//     debounceTimer = setTimeout(() => {
+//         if (busy2) return;
+
+//         let scrollTop = $(this).scrollTop();
+//         let scrollHeight = $(this)[0].scrollHeight;
+//         let elementHeight = $(this).height();
+
+//         console.log({
+//             scrollTop,
+//             scrollHeight,
+//             elementHeight
+//         });
+
+//         if (scrollTop + elementHeight >= scrollHeight - 10) { // Adding a buffer of 10px
+//             busy2 = true;
+
+//             offset1 += limit; // Increment the offset
+//             let type = "phone";
+
+//             loadMorePhones(null, type, offset1, limit)
+//                 .then(() => {
+//                     busy2 = false; // Reset busy2 after successful load
+//                 })
+//                 .catch(err => {
+//                     console.error("Error loading more phones:", err);
+//                     busy2 = false; // Reset busy2 even on error
+//                 });
+//         }
+//     }, 200);
+// });
 
 $(document).on("keyup", ".search_name", function () {
         var search_name = $(this).val();
