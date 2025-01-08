@@ -413,6 +413,7 @@ $(document).on("keyup", ".search_phone", function () {
                     phoneNumber = phoneNumber.replace('+1 ', '');
                     $("#phone_number").val(phoneNumber);
                     $("#edit_id").val(output.edit.id);
+                    $("#is_phone_contact").val(1);
                 }
             },
         });
@@ -440,12 +441,12 @@ $(document).on("keyup", ".search_phone", function () {
                 // console.log(output.edit);
 
                 if (output.status == 1) {
-                    // alert();
                     $("#edit_Fname").val(output.edit.firstname);
                     $("#edit_Lname").val(output.edit.lastname);
                     $("#email").val(output.edit.email);
                     $("#phone_number").val(output.edit.phone_number);
                     $("#edit_id").val(output.edit.id);
+                    $("#is_phone_contact").val(0);
                 }
             },
         });

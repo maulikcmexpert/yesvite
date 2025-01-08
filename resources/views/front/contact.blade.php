@@ -480,6 +480,7 @@
                                     </div>
                                     <input type="hidden" name="country_code" id="country_code" value="">
                                     <input type="hidden" class="form-control inputText" id="edit_id" name="edit_id">
+                                    <input type="hidden" class="form-control inputText" value="" id="is_phone_contact" name="is_phone_contact">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -545,6 +546,7 @@
                                     </div>
                                     <input type="hidden" name="country_code" id="country_code" value="">
                                     <input type="hidden" class="form-control inputText" id="edit_id_phone" name="edit_id_phone">
+                                    <input type="hidden" class="form-control inputText" id="is_phone_contact" name="edit_id_phone">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
