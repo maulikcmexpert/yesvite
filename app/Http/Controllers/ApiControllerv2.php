@@ -5691,7 +5691,7 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function getGreetingCardList()
+    public function getGreetingCardList(Request $request)
     {
         $user  = Auth::guard('api')->user();
 

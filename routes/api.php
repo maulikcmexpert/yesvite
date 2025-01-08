@@ -104,7 +104,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('create_greeting_card', [ApiControllerv2::class, 'createGreetingCard']);
     Route::post('update_greeting_card', [ApiControllerv2::class, 'updateGreetingCard']);
     Route::post('delete_greeting_card', [ApiControllerv2::class, 'deleteGreetingCard']);
-    Route::get('get_greeting_card_list', [ApiControllerv2::class, 'getGreetingCardList']);
+    Route::post('get_greeting_card_list', [ApiControllerv2::class, 'getGreetingCardList']);
 
     Route::post('create_gift_registry', [ApiControllerv2::class, 'createGiftregistry']);
     Route::post('update_gift_registry', [ApiControllerv2::class, 'updateGiftregistry']);
