@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coin_transactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -276,7 +277,6 @@ class AccountSettingController extends Controller
         $id = Auth::guard('web')->user()->id;
 
         $user = User::with('user_profile_privacy')->withCount(
-
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
@@ -291,11 +291,13 @@ class AccountSettingController extends Controller
 
             ]
         )->findOrFail($id);
+
+        $transcation=Coin_transactions::where('user_id',$id)->get();
         return view('layout', compact(
             'title',
             'page',
-            'user'
-          
+            'user',
+            'transcation'
         ));
     }
 }

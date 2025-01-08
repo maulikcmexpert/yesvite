@@ -1,5 +1,5 @@
+{{-- {{dd($transcation);}} --}}
 <x-front.advertise />
-
 <section class="transaction_history_wrp">
     <div class="container">
         <div class="row">
@@ -36,23 +36,41 @@
                                 <h3>Transactions</h3>
                             </div>
                             <ul class="transaction_detail_list">
-                                <li>
-                                    <div class="transaction_detail_list_left">
-                                        <h3>500 Credits Bulk Credits</h3>
-                                        <ul>
-                                            <li>500 balance</li>
-                                            <li>Aug 30, 2024</li>
-                                            <li>6:00PM</li>
-                                        </ul>
-                                    </div>
-                                    <div class="transaction_detail_list_right">
-                                        <div class="transaction_detail_amount amount-plus">
-                                            <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
-                                            <p>+500</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
+                                @if(!empty($transcation))
+                                        @foreach ($transcation as $transaction_data ) 
+                                                @php
+                                                    $dateTime = new DateTime($transaction_data['created_at']);
+                                                    $date = $dateTime->format('M d, Y'); // Aug 30, 2024
+                                                    $time = $dateTime->format('g:iA'); 
+
+                                                    $type=$transaction_data['type'];
+                                                    $status="";
+                                                    if($type="credit"){
+                                                        $status="+";
+                                                    }else{
+                                                        $status="-";
+                                                    }
+                                                @endphp
+                                                <li>
+                                                    <div class="transaction_detail_list_left">
+                                                        <h3>{{$transaction_data['description']}}</h3>
+                                                        <ul>
+                                                            <li>{{$transaction_data['current_balance']}} balance</li>
+                                                            <li>{{$date}}</li>
+                                                            <li>{{$time}}</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="transaction_detail_list_right">
+                                                        <div class="transaction_detail_amount amount-plus">
+                                                            <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
+                                                            <p>{{$status}}{{$transaction_data['used_coins']}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>                               
+                                        @endforeach
+
+                                @endif
+                                {{-- <li>
                                     <div class="transaction_detail_list_left">
                                         <h3>500 Credits Bulk Credits</h3>
                                         <ul>
@@ -99,7 +117,7 @@
                                             <p>-500</p>
                                         </div>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
