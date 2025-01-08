@@ -5555,12 +5555,12 @@ class ApiControllerv2 extends Controller
 
 
 
-            dd($combined_data);
+            // dd($combined_data);
 
           
-            if (count($GiftRegistryList) != 0) {
+            if (count($combined_data) != 0) {
 
-                return response()->json(['status' => 1, 'data' => $GiftRegistryList, 'message' => "Gift registry list"]);
+                return response()->json(['status' => 1, 'data' => $combined_data, 'message' => "Gift registry list"]);
             } else {
                 return response()->json(['status' => 0, 'message' => "Gift registry list is not available"]);
             }
