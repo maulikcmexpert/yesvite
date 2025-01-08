@@ -499,6 +499,11 @@ $user['coins']=$user->coins;
         //     'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15,
         // ]);
         $eventId = $event_creation->id;
+        $get_count_invited_user=0;
+        $conatctId = session('contact_ids');
+        $invitedCount = session('user_ids');
+        $get_count_invited_user = count($conatctId) +count($invitedCount);
+        debit_coins($user_id, $eventId, $get_count_invited_user);
         if(isset($request->event_id) && $request->event_id != NULL){
             $step = $event_creation->step;
             if(isset($request->step) && $request->step != '' && $step < $request->step ){
@@ -603,7 +608,7 @@ $user['coins']=$user->coins;
                     // }
                 }
             }
-            $conatctId = session('contact_ids');
+            
             if (!empty($conatctId)) {            
                 $invitedGuestUsers = $conatctId;
                
@@ -707,7 +712,7 @@ $user['coins']=$user->coins;
                     ]);
                 }
             }
-
+           
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 if (isset($potluck) && !empty($potluck)) {
