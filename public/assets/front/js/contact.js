@@ -28,6 +28,7 @@ $("#product-scroll").on("scroll", function () {
 
 let debounceTimer;
 $("#product-scroll-phone").on("scroll", function () {
+    alert();
     clearTimeout(debounceTimer);
     // debounceTimer = setTimeout(() => {
         if (busy2) return; 
