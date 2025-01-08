@@ -447,7 +447,7 @@ $(document).on("keyup", ".search_phone", function () {
                     $("#phone_number").val(output.edit.phone_number);
                     $("#edit_id").val(output.edit.id);
                     $("#is_phone_contact").val(0);
-                    $('.save_edit_contact').attr("data-is_phone_contact", "0");
+                    $('#save_edit_contact').attr("data-is_phone_contact", "0");
                 }
             },
         });
