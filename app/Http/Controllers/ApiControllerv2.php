@@ -5510,57 +5510,49 @@ class ApiControllerv2 extends Controller
 
             // }
 
-           // Step 1: Fetch default gift registry
             $GiftRegistryList = EventGiftRegistry::where('user_id', $user->id)
             ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
             ->orderBy('id', 'DESC')
             ->get()
             ->map(function ($item) {
-                $item['is_created'] = 1; // Default event_id for user-specific registries
+                $item['is_created'] = "1";
                 return $item;
             })
             ->toArray();
 
-            // Step 2: Fetch event gift registry IDs
             $EventGiftRegistry = Event::where('id', $input['event_id'])
             ->select('gift_registry_id')
             ->first();
-
             $giftRegistryIds = $EventGiftRegistry ? explode(',', $EventGiftRegistry->gift_registry_id) : [];
 
-            // Step 3: Fetch event-specific gift registries
             $event_gift_data = EventGiftRegistry::whereIn('id', $giftRegistryIds)
             ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
             ->orderBy('id', 'DESC')
             ->get()
             ->map(function ($item) use ($user) {
-                $item['is_created'] = ($item['user_id'] == $user->id) ? 1 :0; // Include event_id from input
+                $item['is_created'] = ($item['user_id'] == $user->id) ? "1" :"0"; // Include event_id from input
                 return $item;
             })
             ->toArray();
 
-            // Step 4: Merge and prioritize event-specific data
             $combined_data = collect(array_merge($GiftRegistryList, $event_gift_data))
-            ->groupBy('id') // Group by `id` to handle duplicates
+            ->groupBy('id') 
+            // ->map(function ($group) {
+               
+            //     if ($group->count() > 1) {
+            //         return $group->firstWhere('event_id', '>', 0);
+            //     }
+            //     return $group->first(); 
+            // })
             ->map(function ($group) {
-                // If there's more than one entry for the same ID, prioritize the one with `event_id > 0`
-                if ($group->count() > 1) {
-                    return $group->firstWhere('event_id', '>', 0); // Get the event-specific entry
-                }
-                return $group->first(); // Get the only entry
+                // Sort by 'is_created' to ensure we get the entry with 'is_created' = "1" first
+                return $group->sortByDesc('is_created')->first();
             })
-            ->values() // Re-index the array
+            ->values() 
             ->toArray();
 
-            // $combined_data now contains unique registries with `event_id` prioritized for duplicates
 
-
-
-            // dd($combined_data);
-
-          
             if (count($combined_data) != 0) {
-
                 return response()->json(['status' => 1, 'data' => $combined_data, 'message' => "Gift registry list"]);
             } else {
                 return response()->json(['status' => 0, 'message' => "Gift registry list is not available"]);
