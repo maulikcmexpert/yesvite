@@ -698,7 +698,7 @@ class ContactController extends Controller
                 'edit_Fname' => 'required|string', // max 2MB
                 'edit_Lname' => 'required|string', // max 2MB
                 // 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
-                'email' => ['required', 'email', 'unique:users,email,' . $request->edit_id],
+                // 'email' => ['required', 'email', 'unique:users,email,' . $request->edit_id],
 
             ], [
                 'edit_Fname.required' => 'Please enter First Name',
@@ -718,13 +718,20 @@ class ContactController extends Controller
             }
 
             DB::beginTransaction();
-            $usercontactUpdate = User::where('id', $request->edit_id)->first();
+            $usercontactUpdate = contact_sync::where('id', $request->edit_id)->first();
 
-            $usercontactUpdate->firstname = $request->edit_Fname;
+            $usercontactUpdate->firstName = $request->edit_Fname;
 
-            $usercontactUpdate->lastname = $request->edit_Lname;
+            $usercontactUpdate->lastName = $request->edit_Lname;
 
-            $usercontactUpdate->phone_number = $request->phone_number;
+            if($request->phone_number!=""){
+                $usercontactUpdate->phoneWithCode = '+1 '.$request->phone_number;
+                $usercontactUpdate->phone = '+1 '.$request->phone_number;
+            }
+
+            if($request->email!=""){
+                $usercontactUpdate->email = $request->email;
+            }
 
             $usercontactUpdate->save();
             DB::commit();
