@@ -5509,35 +5509,50 @@ class ApiControllerv2 extends Controller
 
             // }
 
+           // Step 1: Fetch default gift registry
             $GiftRegistryList = EventGiftRegistry::where('user_id', $user->id)
             ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
             ->orderBy('id', 'DESC')
             ->get()
             ->map(function ($item) {
-                $item['event_id'] = 0; 
+                $item['event_id'] = 0; // Default event_id for user-specific registries
                 return $item;
             })
             ->toArray();
 
+            // Step 2: Fetch event gift registry IDs
             $EventGiftRegistry = Event::where('id', $input['event_id'])
             ->select('gift_registry_id')
             ->first();
+
             $giftRegistryIds = $EventGiftRegistry ? explode(',', $EventGiftRegistry->gift_registry_id) : [];
 
+            // Step 3: Fetch event-specific gift registries
             $event_gift_data = EventGiftRegistry::whereIn('id', $giftRegistryIds)
             ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
             ->orderBy('id', 'DESC')
             ->get()
             ->map(function ($item) use ($input) {
-                $item['event_id'] = $input['event_id'];
+                $item['event_id'] = $input['event_id']; // Include event_id from input
                 return $item;
             })
             ->toArray();
 
+            // Step 4: Merge and prioritize event-specific data
             $combined_data = collect(array_merge($GiftRegistryList, $event_gift_data))
-            ->unique('id') 
-            ->values() 
+            ->groupBy('id') // Group by `id` to handle duplicates
+            ->map(function ($group) {
+                // If there's more than one entry for the same ID, prioritize the one with `event_id > 0`
+                if ($group->count() > 1) {
+                    return $group->firstWhere('event_id', '>', 0); // Get the event-specific entry
+                }
+                return $group->first(); // Get the only entry
+            })
+            ->values() // Re-index the array
             ->toArray();
+
+            // $combined_data now contains unique registries with `event_id` prioritized for duplicates
+
 
 
             dd($combined_data);
