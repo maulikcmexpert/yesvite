@@ -5749,10 +5749,57 @@ dd($e);
 
         try {
 
-            $GreetingCardList = EventGreeting::where('user_id', $user->id)
-                ->select('id', 'user_id', 'template_name', 'message', 'message_sent_time', 'custom_hours_after_event')
-                ->orderBy('id', 'DESC')
-                ->get();
+
+            // $GreetingCardList = EventGreeting::where('user_id', $user->id)
+            //     ->select('id', 'user_id', 'template_name', 'message', 'message_sent_time', 'custom_hours_after_event')
+            //     ->orderBy('id', 'DESC')
+            //     ->get();
+
+            $user  = Auth::guard('api')->user();
+
+            $rawData = $request->getContent();
+    
+            $input = json_decode($rawData, true);
+            
+            $GreetingCardList =  EventGreeting::where('user_id', $user->id)
+            ->select('id', 'user_id', 'template_name', 'message', 'message_sent_time', 'custom_hours_after_event')
+            ->orderBy('id', 'DESC')
+            ->get()
+            ->map(function ($item) {
+                $item['is_created'] = "1";
+                return $item;
+            })
+            ->toArray();
+
+            $EventGreetingCardList = Event::where('id', $input['event_id'])
+            ->select('gift_registry_id')
+            ->first();
+            $GreetingCardIds = $EventGreetingCardList ? explode(',', $EventGreetingCardList->greeting_card_id) : [];
+
+            $event_greeting_card_data = EventGreeting::whereIn('id', $GreetingCardIds)
+            ->select('id', 'user_id', 'template_name', 'message', 'message_sent_time', 'custom_hours_after_event')
+            ->orderBy('id', 'DESC')
+            ->get()
+            ->map(function ($item) use ($user) {
+                $item['is_created'] = ($item['user_id'] == $user->id) ? "1" :"0"; 
+                return $item;
+            })
+            ->toArray();
+
+            $combined_data = collect(array_merge($GreetingCardList, $event_greeting_card_data))
+            ->groupBy('id') 
+            // ->map(function ($group) {
+               
+            //     if ($group->count() > 1) {
+            //         return $group->firstWhere('event_id', '>', 0);
+            //     }
+            //     return $group->first(); 
+            // })
+            ->map(function ($group) {
+                return $group->sortByDesc('is_created')->first();
+            })
+            ->values() 
+            ->toArray();
 
             if (count($GreetingCardList) != 0) {
 

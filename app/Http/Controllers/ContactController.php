@@ -690,6 +690,56 @@ class ContactController extends Controller
         }
     }
 
+    public function save_editPhoneContact(Request $request)
+    {
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'edit_Fname' => 'required|string', // max 2MB
+                'edit_Lname' => 'required|string', // max 2MB
+                // 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
+                'email' => ['required', 'email', 'unique:users,email,' . $request->edit_id],
+
+            ], [
+                'edit_Fname.required' => 'Please enter First Name',
+                'edit_Lname.required' => 'Please enter Last Name',
+
+                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
+                // 'phone_number.regex' => 'Phone Number format is invalid.',
+
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 0,
+                    'message' => $validator->errors()->first(),
+
+                ]);
+            }
+
+            DB::beginTransaction();
+            $usercontactUpdate = User::where('id', $request->edit_id)->first();
+
+            $usercontactUpdate->firstname = $request->edit_Fname;
+
+            $usercontactUpdate->lastname = $request->edit_Lname;
+
+            $usercontactUpdate->phone_number = $request->phone_number;
+
+            $usercontactUpdate->save();
+            DB::commit();
+
+            $usercontactUpdate =  getUser($request->edit_id);
+            return response()->json(['status' => 1, 'message' => "Edit Saved!", 'user' => $usercontactUpdate]);
+        } catch (QueryException $e) {
+            DB::Rollback();
+            $userData =  getUser($request->edit_id);
+            return response()->json(['status' => 0, 'message' => "db error", 'user' => $userData]);
+        } catch (Exception  $e) {
+            $userData =  getUser($request->edit_id);
+            return response()->json(['status' => 0, 'message' => "something went wrong", 'user' => $userData]);
+        }
+    }
     public function checkNewContactEmail(Request $request)
     {
         $user = Auth::guard('web')->user();

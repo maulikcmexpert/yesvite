@@ -48,7 +48,7 @@
         </div>
 
     </div>
-    <a href="#" class="btn edit-contact edit-contact" data-bs-toggle="modal" data-id="{{$value->id}}" data-bs-target="#myModal">Edit Contact</a>
+    <a href="#" class="btn edit-contact edit-contact" data-bs-toggle="modal" data-id="{{$value->id}}" data-bs-target="#myModalphone">Edit Contact</a>
 </div>
 @endforeach
 @endif

@@ -495,6 +495,70 @@
     </div>
 </div>
 
+<div class="modal fade" id="myModalphone">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Contact</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="login-form-wrap">
+                    <form method="POST" id="edit_phone_contact_form" action="{{route('.saveeditphonecontact')}}">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="input-form">
+                                    <input type="text" class="form-control" id="edit_Fname" name="edit_Fname">
+                                    <label for="Fname" class="floating-label">First Name<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="edit_Fname-error" class="error" for="edit_Fname"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="input-form">
+                                    <input type="text" class="form-control" id="edit_Lname" name="edit_Lname">
+                                    <label for="Lname" class="floating-label">Last Name<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="edit_Lname-error" class="error" for="edit_Lname"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="input-form">
+                                    <input type="email" class="form-control inputText" id="email" name="email" required>
+                                    <label for="email" class="form-label input-field floating-label">Work Email
+                                        Address<span class="required">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="input-form add-contact-selectbox">
+                                    <input type="text" class="phone_number border-0" name="countryCode" readonly>
+                                    <input type="text" class="form-control edit_phone" id="phone_number" name="phone_number" value="">
+                                    <label for="phone" class="floating-label">Phone
+                                        Number<span>*</span></label>
+                                    <div class="label-error">
+                                        <label id="phone_number-error" class="error" for="phone_number"></label>
+                                    </div>
+                                    <input type="hidden" name="country_code" id="country_code" value="">
+                                    <input type="hidden" class="form-control inputText" id="edit_id" name="edit_id">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-end">
+                                    <button type="button" id="save_edit_phone_contact" class="cmn-btn save-btn">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Add Modal -->
 <div class="modal fade" id="myModal1">
     <div class="modal-dialog">

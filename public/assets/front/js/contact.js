@@ -595,6 +595,47 @@ $(document).on("keyup", ".search_phone", function () {
         });
     });
 
+    $("#save_edit_phone_contact").click(function () {
+        // loaderHandle("#save_edit_contact", "Saving");
+        // $("#save_edit_contact").submit();
+
+        var formActionURL = $("#edit_phone_contact_form").attr("action");
+        var formData = $("#edit_phone_contact_form").serialize();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                ),
+            },
+            method: "POST",
+            url: formActionURL,
+            // dataType: "json",
+            data: formData,
+
+            success: function (output) {
+                console.log(output.user);
+
+                if (output.status == 1) {
+                    removeLoaderHandle("#save_contact", "Save Contact");
+                    $("#Fname").val(output.user.firstname);
+                    $("#Lname").val(output.user.lastname);
+
+                    $("#email").val(output.user.email);
+                    $("#phone_number").val(output.user.phone_number);
+
+                    toastr.success(output.message);
+
+                    $("#edit_contact_form")[0].reset();
+                    $("#myModal").modal("hide");
+                    window.location.reload();
+                } else {
+                    removeLoaderHandle("#save_contact", "Save Contact");
+                    toastr.error(output.message);
+                }
+            },
+        });
+    });
+
     $("#myModal").on("hidden.bs.modal", function (event) {
         $(".form-control").next().removeClass("floatingfocus");
         $("#edit_contact_form .label-error .error").text("");
