@@ -515,43 +515,43 @@ $(document).on("keyup", ".search_phone", function () {
                 // remote: "Phone Number is already exsits",
             },
         },
-        submitHandler: function (form) {
-            var formActionURL = $("#edit_contact_form").attr("action");
-            var formData = $("#edit_contact_form").serialize();
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
-                method: "POST",
-                url: formActionURL,
-                // dataType: "json",
-                data: formData,
+        // submitHandler: function (form) {
+        //     var formActionURL = $("#edit_contact_form").attr("action");
+        //     var formData = $("#edit_contact_form").serialize();
+        //     $.ajax({
+        //         headers: {
+        //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+        //                 "content"
+        //             ),
+        //         },
+        //         method: "POST",
+        //         url: formActionURL,
+        //         // dataType: "json",
+        //         data: formData,
 
-                success: function (output) {
-                    console.log(output.user);
+        //         success: function (output) {
+        //             console.log(output.user);
 
-                    if (output.status == 1) {
-                        removeLoaderHandle("#save_contact", "Save Contact");
-                        $("#Fname").val(output.user.firstname);
-                        $("#Lname").val(output.user.lastname);
+        //             if (output.status == 1) {
+        //                 removeLoaderHandle("#save_contact", "Save Contact");
+        //                 $("#Fname").val(output.user.firstname);
+        //                 $("#Lname").val(output.user.lastname);
 
-                        $("#email").val(output.user.email);
-                        $("#phone_number").val(output.user.phone_number);
+        //                 $("#email").val(output.user.email);
+        //                 $("#phone_number").val(output.user.phone_number);
 
-                        toastr.success(output.message);
+        //                 toastr.success(output.message);
 
-                        $("#edit_contact_form")[0].reset();
-                        $("#myModal").modal("hide");
-                        window.location.reload();
-                    } else {
-                        removeLoaderHandle("#save_contact", "Save Contact");
-                        toastr.error(output.message);
-                    }
-                },
-            });
-        },
+        //                 $("#edit_contact_form")[0].reset();
+        //                 $("#myModal").modal("hide");
+        //                 window.location.reload();
+        //             } else {
+        //                 removeLoaderHandle("#save_contact", "Save Contact");
+        //                 toastr.error(output.message);
+        //             }
+        //         },
+        //     });
+        // },
     });
 
     $("#save_edit_contact").click(function () {
