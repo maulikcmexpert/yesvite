@@ -567,9 +567,9 @@ $(document).on("keyup", ".search_phone", function () {
         var formtype=$(this).data('is_phone_contact');
         var formActionURL="";
         if(formtype=="1"){
-            formActionURL= base_url+'contacts/save_edit_phone/'
+            formActionURL= base_url+'contacts/save_edit_phone'
         }else if(formtype=="0"){
-            formActionURL= base_url+'contacts/save_edit/'
+            formActionURL= base_url+'contacts/save_edit'
         }
 
         console.log(formActionURL);
