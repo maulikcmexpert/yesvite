@@ -5530,7 +5530,7 @@ class ApiControllerv2 extends Controller
             ->orderBy('id', 'DESC')
             ->get()
             ->map(function ($item) use ($user) {
-                $item['is_created'] = ($item['user_id'] == $user->id) ? "1" :"0"; // Include event_id from input
+                $item['is_created'] = ($item['user_id'] == $user->id) ? "1" :"0"; 
                 return $item;
             })
             ->toArray();
@@ -5545,7 +5545,6 @@ class ApiControllerv2 extends Controller
             //     return $group->first(); 
             // })
             ->map(function ($group) {
-                // Sort by 'is_created' to ensure we get the entry with 'is_created' = "1" first
                 return $group->sortByDesc('is_created')->first();
             })
             ->values() 
