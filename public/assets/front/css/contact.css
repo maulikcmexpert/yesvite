@@ -651,6 +651,14 @@ ul.listing li span {
     overflow-y: scroll;
 }
 
+.contact-tab .product-scroll-phone {
+    max-height: 430px;
+    /* max-height: 100px; */
+
+    overflow-y: scroll;
+}
+
+
 #manageModel .cmn-btn:hover svg path {
     stroke: var(--primaryColor);
 }
