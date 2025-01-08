@@ -5492,15 +5492,26 @@ class ApiControllerv2 extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
 
-            $getEventGiftRegistry = Event::where('id',$input['event_id'])
+            $EventGiftRegistry = Event::where('id',$input['event_id'])
             ->select('gift_registry_id')
             ->first();
-
-            $giftRegistryIds = $getEventGiftRegistry->gift_registry_id; 
-
+            $giftRegistryIds = $EventGiftRegistry->gift_registry_id; 
             $gift_ids = explode(',', $giftRegistryIds);
 
-            dd($gift_ids);
+            $event_gift_data=[];
+            foreach ($gift_ids as $id) {
+                $getEventGiftRegistry = EventGiftRegistry::where('id', $id)
+                ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
+                ->orderBy('id', 'DESC')
+                ->get();
+
+                $event_gift_data = array_merge($event_gift_data, $getEventGiftRegistry->toArray());
+
+            }
+
+            dd($event_gift_data);
+
+          
             if (count($GiftRegistryList) != 0) {
 
                 return response()->json(['status' => 1, 'data' => $GiftRegistryList, 'message' => "Gift registry list"]);
