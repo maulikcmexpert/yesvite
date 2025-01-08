@@ -641,12 +641,16 @@ $(document).on("keyup", ".search_phone", function () {
     $("#myModal").on("hidden.bs.modal", function (event) {
         $(".form-control").next().removeClass("floatingfocus");
         $("#edit_contact_form .label-error .error").text("");
+        $('#save_edit_contact').removeAttr("data-is_phone_contact");
+
     });
 
     $("#myModal1").on("hidden.bs.modal", function (event) {
         $(".form-control").next().removeClass("floatingfocus");
         $("#add_contact .label-error .error").text("");
         $("#add_contact")[0].reset();
+        $('#save_edit_contact').removeAttr("data-is_phone_contact");
+
     });
 });
 $('label[for="email"]').removeClass("floatingfocus");
