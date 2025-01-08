@@ -2613,7 +2613,7 @@ $(document).on('click','#next_design',function() {
     $('.event_create_percent').text('25%');
     $('.current_step').text('1 of 4');
     active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
-  
+  alert(final_step);
     final_step = 2;
     eventData.step = final_step;
 })
@@ -5996,3 +5996,29 @@ function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
 
 
 
+var design_inner_image = '';
+$(document).on("click", ".edit_event_details", function () {
+        
+        $("#loader").show();
+        $(this).prop("disabled", true);
+        $('.btn-close').prop("disabled", true);   
+        if(final_step == 1){                  
+            final_step = 2;                        
+        }                                 
+        eventData.step = final_step;
+        $("#loader").css("display", "none");
+        $('.store_desgin_temp').prop("disabled", false);
+        $('.btn-close').prop("disabled", false);
+        $(".main-content-wrp").removeClass("blurred");
+        $(".step_2").hide();
+        $(".step_4").hide();
+        $(".step_3").hide();  
+        $('.current_step').text('2 of 4');
+        $(".step_1").show();
+        active_responsive_dropdown('drop-down-event-detail');
+        handleActiveClass(this);
+        $('.li_event_detail').find(".side-bar-list").addClass("active");         
+        $(".main-content-wrp").addClass("blurred");
+ 
+   
+});
