@@ -589,7 +589,7 @@ $(document).on("keyup", ".search_phone", function () {
                 console.log(output);
 
                 if (output.status == 1) {
-                    removeLoadeerHandle("#save_contact", "Save Contact");
+                    // removeLoadeerHandle("#save_contact", "Save Contact");
                     alert();
                     if(output.user!=""||output.user!=undefined){
                         $("#Fname").val(output.user.firstname);
