@@ -36,11 +36,8 @@ $("#product-scroll-phone").on("scroll", function () {
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
-        console.log({scrollTop,
-            scrollHeight,
-            elementHeight})
+     
             if (scrollTop + elementHeight >= scrollHeight) {
-                alert();
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
