@@ -737,8 +737,11 @@ class ContactController extends Controller
             DB::commit();
 
             $usercontactUpdate =  getUser($request->edit_id);
-            dd($usercontactUpdate);
-            return response()->json(['status' => 1, 'message' => "Edit Saved!", 'user' => $usercontactUpdate]);
+            if($usercontactUpdate==null){
+                return response()->json(['status' => 1, 'message' => "Edit Saved!", 'user' => ""]);
+            }else{
+                return response()->json(['status' => 1, 'message' => "Edit Saved!", 'user' => $usercontactUpdate]);
+            }
         } catch (QueryException $e) {
             DB::Rollback();
             $userData =  getUser($request->edit_id);
