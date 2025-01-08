@@ -151,6 +151,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
 
     Route::post('contacts/edit/{id}', [ContactController::class, 'editContact'])->name('editcontact');
+    Route::post('contacts/edit_yesvite/{id}', [ContactController::class, 'editYesviteContact'])->name('editYesviteContact');
 
     Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
     Route::get('messages',  [ChatController::class, 'index'])->name('message.list');

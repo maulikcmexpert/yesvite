@@ -25,14 +25,18 @@ $("#product-scroll").on("scroll", function () {
         }
 });
 
+
+let debounceTimer;
 $("#product-scroll-phone").on("scroll", function () {
-  
+    clearTimeout(debounceTimer);
+    // debounceTimer = setTimeout(() => {
         if (busy2) return; 
 
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
             if (scrollTop + elementHeight >= scrollHeight) {
+                alert();
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
@@ -41,9 +45,10 @@ $("#product-scroll-phone").on("scroll", function () {
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
         }
+    // }, 200);
 });
 
-$(document).on("input", ".search_name", function () {
+$(document).on("keyup", ".search_name", function () {
         var search_name = $(this).val();
         page = 1;
         $("#yesviteUser").html("");
@@ -67,12 +72,12 @@ $(document).on("keyup", ".search_group", function () {
         loadMoreGroups(page, search_group);
 });
 
-$(document).on("input", ".search_phone", function () {
+$(document).on("keyup", ".search_phone", function () {
     var search_phone = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
         if(search_phone==''){
-            offset1=0;
+            offset1=null;
             limit=6;
         }else{
             offset1=null;
@@ -163,6 +168,9 @@ $(document).on("input", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $("#loader").hide();
+                    // busy2 = true; 
+                    busy2 = false;
+
                     return;
                 }
                 $("#loader").hide();
@@ -313,9 +321,8 @@ $(document).on("input", ".search_phone", function () {
                         $("#Lname").val(output.user.lastname);
 
                         $("#email").val(output.user.email);
-                        let phoneNumber = output.user.phone_number; // "+1 4444-464-4646"
-                        phoneNumber = phoneNumber.replace('+1 ', '');
-                        $("#phone_number").val(phoneNumber);
+                        
+                        $("#phone_number").val(output.user.phone_number);
 
                         toastr.success(output.message);
 
@@ -361,45 +368,47 @@ $(document).on("input", ".search_phone", function () {
                     $("#edit_Fname").val(output.edit.firstName);
                     $("#edit_Lname").val(output.edit.lastName);
                     $("#email").val(output.edit.email);
-                    $("#phone_number").val(output.edit.phone);
+                    var phoneNumber = output.edit.phone; // "+1 4444-464-4646"
+                    phoneNumber = phoneNumber.replace('+1 ', '');
+                    $("#phone_number").val(phoneNumber);
                     $("#edit_id").val(output.edit.id);
                 }
             },
         });
     });
 
-    // $(document).on("click", ".edit-contact", function (e) {
-    //     // alert();
-    //     e.preventDefault(); // Prevent the default action
+    $(document).on("click", ".edit-yesvite-contact", function (e) {
+        // alert();
+        e.preventDefault(); // Prevent the default action
 
-    //     $(".form-control").next().addClass("floatingfocus");
+        $(".form-control").next().addClass("floatingfocus");
 
-    //     var contactId = $(this).data("id");
+        var contactId = $(this).data("id");
 
-    //     $.ajax({
-    //         headers: {
-    //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    //         },
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
 
-    //         method: "POST",
-    //         url: base_url + "contacts/edit/" + contactId,
-    //         // dataType: "json",
-    //         // data: formData,
+            method: "POST",
+            url: base_url + "contacts/edit_yesvite/" + contactId,
+            // dataType: "json",
+            // data: formData,
 
-    //         success: function (output) {
-    //             // console.log(output.edit);
+            success: function (output) {
+                // console.log(output.edit);
 
-    //             if (output.status == 1) {
-    //                 // alert();
-    //                 $("#edit_Fname").val(output.edit.firstname);
-    //                 $("#edit_Lname").val(output.edit.lastname);
-    //                 $("#email").val(output.edit.email);
-    //                 $("#phone_number").val(output.edit.phone_number);
-    //                 $("#edit_id").val(output.edit.id);
-    //             }
-    //         },
-    //     });
-    // });
+                if (output.status == 1) {
+                    // alert();
+                    $("#edit_Fname").val(output.edit.firstname);
+                    $("#edit_Lname").val(output.edit.lastname);
+                    $("#email").val(output.edit.email);
+                    $("#phone_number").val(output.edit.phone_number);
+                    $("#edit_id").val(output.edit.id);
+                }
+            },
+        });
+    });
 
     $("#edit_contact_form").validate({
         rules: {
@@ -408,7 +417,8 @@ $(document).on("input", ".search_phone", function () {
 
             phone_number: {
                 required: true,
-                digits: true,
+                // digits: true,
+                phoneUS: true,
                 minlength: 10,
                 maxlength: 15,
                 remote: {
@@ -417,14 +427,14 @@ $(document).on("input", ".search_phone", function () {
                             "content"
                         ),
                     },
-                    url: base_url + "profile/check_new_contactnumber",
+                    url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
                     type: "POST",
                     data: {
                         phone_number: function () {
-                            return $(".edit_phone").val();
+                            return $(".addnew_contact").val();
                         },
                         id: function () {
-                            return $("#edit_id").val();
+                            return $("input[name='id']").val();
                         },
                     },
                 },
@@ -436,7 +446,8 @@ $(document).on("input", ".search_phone", function () {
 
             phone_number: {
                 required: "Please enter a Phone Number",
-                digits: "Please enter a valid Phone Number",
+                // digits: "Please enter a valid Phone Number",
+                phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
                 remote: "Phone Number is already exsits",
