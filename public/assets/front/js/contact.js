@@ -552,7 +552,7 @@ $(document).on("keyup", ".search_phone", function () {
         //         },
         //     });
         // },
-    });
+    }); 
 
     $("#save_edit_contact").click(function () {
         // loaderHandle("#save_edit_contact", "Saving");

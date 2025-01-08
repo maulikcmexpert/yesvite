@@ -646,15 +646,15 @@ class ContactController extends Controller
             $validator = Validator::make($request->all(), [
                 'edit_Fname' => 'required|string', // max 2MB
                 'edit_Lname' => 'required|string', // max 2MB
-                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
+                // 'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/'],
                 'email' => ['required', 'email', 'unique:users,email,' . $request->edit_id],
 
             ], [
                 'edit_Fname.required' => 'Please enter First Name',
                 'edit_Lname.required' => 'Please enter Last Name',
 
-                'phone_number.numeric' => 'Please enter Phone Number in digit',
-                'phone_number.regex' => 'Phone Number format is invalid.',
+                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
+                // 'phone_number.regex' => 'Phone Number format is invalid.',
 
             ]);
 
