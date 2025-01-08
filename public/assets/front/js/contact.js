@@ -302,7 +302,7 @@ $(document).on("keyup", ".search_phone", function () {
             },
 
             phone_number: {
-                required: true,
+                // required: true,
                 // digits: true,
                 phoneUS: true,
                 minlength: 10,
@@ -335,7 +335,7 @@ $(document).on("keyup", ".search_phone", function () {
                 remote: "Email is already exsits",
             },
             phone_number: {
-                required: "Please enter a Phone Number",
+                // required: "Please enter a Phone Number",
                 // digits: "Please enter a valid Phone Number",
                 phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
@@ -455,9 +455,26 @@ $(document).on("keyup", ".search_phone", function () {
         rules: {
             edit_Fname: "required",
             edit_Lname: "required",
-
-            phone_number: {
+            email: {
                 required: true,
+                email: true,
+                remote: {
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    url: base_url + "contacts/check_new_contactemail", // Your Laravel API endpoint
+                    type: "POST",
+                    data: {
+                        email: function () {
+                            return $(".addnew_email").val();
+                        },
+                    },
+                },
+            },
+            phone_number: {
+                // required: true,
                 // digits: true,
                 phoneUS: true,
                 minlength: 10,
@@ -484,7 +501,11 @@ $(document).on("keyup", ".search_phone", function () {
         messages: {
             edit_Fname: "Please enter your First name",
             edit_Lname: "Please enter your Last name",
-
+            email: {
+                required: "Please enter your email address",
+                email: "Please enter a valid email address",
+                remote: "Email is already exsits",
+            },
             phone_number: {
                 required: "Please enter a Phone Number",
                 // digits: "Please enter a valid Phone Number",
