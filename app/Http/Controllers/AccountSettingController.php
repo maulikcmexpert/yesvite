@@ -292,7 +292,7 @@ class AccountSettingController extends Controller
             ]
         )->findOrFail($id);
 
-        $transcation=Coin_transactions::where('user_id',$id)->get()->limit(3);
+        $transcation=Coin_transactions::where('user_id',$id)->limit(3)->get();
         return view('layout', compact(
             'title',
             'page',
