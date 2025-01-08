@@ -5496,8 +5496,11 @@ class ApiControllerv2 extends Controller
             ->select('gift_registry_id')
             ->first();
 
-            dd($getEventGiftRegistry->gift_registry_id);
+            $giftRegistryIds = $getEventGiftRegistry->gift_registry_id; 
 
+            $gift_ids = explode(',', $giftRegistryIds);
+
+            dd($gift_ids);
             if (count($GiftRegistryList) != 0) {
 
                 return response()->json(['status' => 1, 'data' => $GiftRegistryList, 'message' => "Gift registry list"]);
