@@ -28,9 +28,8 @@ $("#product-scroll").on("scroll", function () {
 
 let debounceTimer;
 $("#product-scroll-phone").on("scroll", function () {
-    console.log(busy2);
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
+    // debounceTimer = setTimeout(() => {
         if (busy2) return; 
 
         var scrollTop = $(this).scrollTop(); 
@@ -46,7 +45,7 @@ $("#product-scroll-phone").on("scroll", function () {
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
         }
-    }, 200);
+    // }, 200);
 });
 
 $(document).on("keyup", ".search_name", function () {
