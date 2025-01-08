@@ -109,7 +109,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('create_gift_registry', [ApiControllerv2::class, 'createGiftregistry']);
     Route::post('update_gift_registry', [ApiControllerv2::class, 'updateGiftregistry']);
     Route::post('delete_gift_registry', [ApiControllerv2::class, 'deleteGiftregistry']);
-    Route::get('get_gift_registry_list', [ApiControllerv2::class, 'getGiftRegistryList']);
+    Route::post('get_gift_registry_list', [ApiControllerv2::class, 'getGiftRegistryList']);
 
     Route::post('store_event_image', [ApiControllerv2::class, 'storeEventImage']);
     Route::post('delete_event', [ApiControllerv2::class, 'deleteEvent']);

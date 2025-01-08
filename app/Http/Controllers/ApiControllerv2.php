@@ -5478,12 +5478,12 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function getGiftRegistryList()
+    public function getGiftRegistryList(Request $request)
     {
         $user  = Auth::guard('api')->user();
-        // $rawData = $request->getContent();
+        $rawData = $request->getContent();
 
-        // $input = json_decode($rawData, true);
+        $input = json_decode($rawData, true);
 
         try {
 
@@ -5492,9 +5492,11 @@ class ApiControllerv2 extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
 
-            // $getEventGiftRegistry = Event::where('id',$input['event_id'])
-            // ->select('gift_registry_id')
-            // ->first();
+            $getEventGiftRegistry = Event::where('id',$input['event_id'])
+            ->select('gift_registry_id')
+            ->first();
+
+            dd($getEventGiftRegistry);
 
             if (count($GiftRegistryList) != 0) {
 
