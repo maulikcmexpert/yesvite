@@ -694,7 +694,6 @@ class ContactController extends Controller
     {
         $user = Auth::guard('web')->user();
         $email = $user->email;
-        dd($email);  
         $exists = contact_sync::where('email', $email)->exists();
 
         if ($exists) {
