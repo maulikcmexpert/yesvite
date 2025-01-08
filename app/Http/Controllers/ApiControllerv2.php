@@ -5487,29 +5487,60 @@ class ApiControllerv2 extends Controller
 
         try {
 
-            $GiftRegistryList = EventGiftRegistry::where('user_id', $user->id)
-                ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
-                ->orderBy('id', 'DESC')
-                ->get();
+            // $GiftRegistryList = EventGiftRegistry::where('user_id', $user->id)
+            //     ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
+            //     ->orderBy('id', 'DESC')
+            //     ->get();
 
-            $EventGiftRegistry = Event::where('id',$input['event_id'])
+            // $EventGiftRegistry = Event::where('id',$input['event_id'])
+            // ->select('gift_registry_id')
+            // ->first();
+            // $giftRegistryIds = $EventGiftRegistry->gift_registry_id; 
+            // $gift_ids = explode(',', $giftRegistryIds);
+
+            // $event_gift_data=[];
+            // foreach ($gift_ids as $id) {
+            //     $getEventGiftRegistry = EventGiftRegistry::where('id', $id)
+            //     ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
+            //     ->orderBy('id', 'DESC')
+            //     ->get();
+
+            //     $event_gift_data = array_merge($event_gift_data, $getEventGiftRegistry->toArray());
+
+            // }
+
+            $GiftRegistryList = EventGiftRegistry::where('user_id', $user->id)
+            ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
+            ->orderBy('id', 'DESC')
+            ->get()
+            ->map(function ($item) {
+                $item['event_id'] = 0; 
+                return $item;
+            })
+            ->toArray();
+
+            $EventGiftRegistry = Event::where('id', $input['event_id'])
             ->select('gift_registry_id')
             ->first();
-            $giftRegistryIds = $EventGiftRegistry->gift_registry_id; 
-            $gift_ids = explode(',', $giftRegistryIds);
+            $giftRegistryIds = $EventGiftRegistry ? explode(',', $EventGiftRegistry->gift_registry_id) : [];
 
-            $event_gift_data=[];
-            foreach ($gift_ids as $id) {
-                $getEventGiftRegistry = EventGiftRegistry::where('id', $id)
-                ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
-                ->orderBy('id', 'DESC')
-                ->get();
+            $event_gift_data = EventGiftRegistry::whereIn('id', $giftRegistryIds)
+            ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
+            ->orderBy('id', 'DESC')
+            ->get()
+            ->map(function ($item) use ($input) {
+                $item['event_id'] = $input['event_id'];
+                return $item;
+            })
+            ->toArray();
 
-                $event_gift_data = array_merge($event_gift_data, $getEventGiftRegistry->toArray());
+            $combined_data = collect(array_merge($GiftRegistryList, $event_gift_data))
+            ->unique('id') 
+            ->values() 
+            ->toArray();
 
-            }
 
-            dd($event_gift_data);
+            dd($combined_data);
 
           
             if (count($GiftRegistryList) != 0) {
