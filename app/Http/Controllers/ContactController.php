@@ -101,7 +101,7 @@ class ContactController extends Controller
 
 
      
-        $getAllContacts = contact_sync::where('contact_id',$id)->orderBy('firstName','asc')
+        $getAllContacts = contact_sync::where('contact_id',$id)->orderBy('firstName','asc')->limit(6)
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
@@ -294,10 +294,10 @@ class ContactController extends Controller
         if ((!empty($request->offset)&&!empty($request->limit))&&($request->has('limit') && $request->has('offset'))) {
             $query->skip($request->offset)->take($request->limit);
         }
-        if(empty($searchPhone)){
-            // dd(1);
-            $query->limit(6);
-        }
+        // if(empty($searchPhone)){
+        //     // dd(1);
+        //     $query->limit(6);
+        // }
         $getAllContacts = $query->get();
         $yesvite_phone = [];
         foreach ($getAllContacts as $user) {
