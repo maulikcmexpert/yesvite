@@ -592,16 +592,14 @@ $(document).on("keyup", ".search_phone", function () {
                     // removeLoadeerHandle("#save_contact", "Save Contact");
                     // toastr.success(output.message);
 
-                    if(output.user==""||output.user==NULL||output.user==undefined){
-                        alert()
-                        toastr.success(output.message);
-                        window.location.reload();
+                    if(output.user!=""){
+                        $("#Fname").val(output.user.firstname);
+                        $("#Lname").val(output.user.lastname);
+    
+                        $("#email").val(output.user.email);
+                        $("#phone_number").val(output.user.phone_number);
                     }
-                    $("#Fname").val(output.user.firstname);
-                    $("#Lname").val(output.user.lastname);
-
-                    $("#email").val(output.user.email);
-                    $("#phone_number").val(output.user.phone_number);
+               
                     toastr.success(output.message);
 
                     $("#edit_contact_form")[0].reset();
