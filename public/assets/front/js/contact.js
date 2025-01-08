@@ -590,8 +590,10 @@ $(document).on("keyup", ".search_phone", function () {
 
                 if (output.status == 1) {
                     // removeLoadeerHandle("#save_contact", "Save Contact");
-                    alert();
-                    if(output.user!=""||output.user!=undefined){
+                    // toastr.success(output.message);
+
+                    if(output.user!=""||(output.user!=NULL)||output.user!=undefined){
+                        alert()
                         $("#Fname").val(output.user.firstname);
                         $("#Lname").val(output.user.lastname);
     
