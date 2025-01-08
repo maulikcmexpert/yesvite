@@ -5496,7 +5496,7 @@ class ApiControllerv2 extends Controller
             ->select('gift_registry_id')
             ->first();
 
-            dd($getEventGiftRegistry);
+            dd($getEventGiftRegistry->gift_registry_id);
 
             if (count($GiftRegistryList) != 0) {
 
