@@ -350,17 +350,16 @@ $(document).on("keyup", ".search_phone", function () {
                 data: formData,
 
                 success: function (output) {
-                    console.log(output.status);
-                    $("#myModal1").modal("hide");
+                    console.log(output);
 
                     if (output.status == 1) {
                         // removeLoaderHandle("#save_contact", "Save Contact");
-                        $("#Fname").val(output.user.firstname);
-                        $("#Lname").val(output.user.lastname);
+                        // $("#Fname").val(output.user.firstname);
+                        // $("#Lname").val(output.user.lastname);
 
-                        $("#email").val(output.user.email);
+                        // $("#email").val(output.user.email);
                         
-                        $("#phone_number").val(output.user.phone_number);
+                        // $("#phone_number").val(output.user.phone_number);
 
                         toastr.success(output.message);
 
