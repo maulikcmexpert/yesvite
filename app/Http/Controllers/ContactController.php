@@ -694,13 +694,17 @@ class ContactController extends Controller
     {
         $user = Auth::guard('web')->user();
         $email = $user->email;
-        $exists = contact_sync::where('email', $email)->exists();
-
-        if ($exists) {
-            return response()->json(false);
-        } else {
+        $type_email = $request->input('email');
+        if($email==$type_email){
+            $exists = User::where('email', $email)->exists();
+            if ($exists) {
+                return response()->json(false);
+            } else {
+                return response()->json(true);
+            }
+        }else{
             return response()->json(true);
-        }
+        } 
     }
     /**
      * Show the form for creating a new resource.
