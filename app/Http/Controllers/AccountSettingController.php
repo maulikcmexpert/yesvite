@@ -269,4 +269,33 @@ class AccountSettingController extends Controller
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
     }
+
+    public function transactions(){
+        $title = 'Transaction';
+        $page = 'front.transaction';
+        $id = Auth::guard('web')->user()->id;
+
+        $user = User::with('user_profile_privacy')->withCount(
+
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
+
+
+            ]
+        )->findOrFail($id);
+        return view('layout', compact(
+            'title',
+            'page',
+            'user'
+          
+        ));
+    }
 }

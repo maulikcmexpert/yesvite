@@ -899,3 +899,84 @@ $(document).on('click','.notification_read',function(){
 
 });
 })
+
+// ==transaction-history==
+const ctx = document.getElementById('creditChart').getContext('2d');
+
+// Create a gradient for the border color
+const gradientBorder = ctx.createLinearGradient(0, 0, 1, 0);
+gradientBorder.addColorStop(0, '#FF31A6');
+
+// Create a pattern canvas
+const patternCanvas = document.createElement('canvas');
+const patternContext = patternCanvas.getContext('2d');
+patternCanvas.width = 18;
+patternCanvas.height = 7;
+
+// Draw dots on the pattern canvas
+patternContext.fillStyle = '#FFC8DC'; // Dot color
+patternContext.fillRect(0, 0, 6, 3);
+patternContext.fillStyle = '#FFC8DC'; // Background color
+patternContext.fillRect(0, 0, 6, 3);
+patternContext.fillRect(0, 0, 6, 3);
+
+// Create a pattern from the canvas
+const pattern = ctx.createPattern(patternCanvas, 'repeat');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [{
+      label: 'Credit Balance',
+      data: [400, 650, 500, 480, 490, 470, 500],
+      borderColor: gradientBorder,
+      backgroundColor: pattern,
+      borderWidth: 4,
+      pointBackgroundColor: '#ffffff',
+      pointBorderColor: '#ff5ca5',
+      pointBorderWidth: 5,
+      pointRadius: [0, 5, 0, 0, 0, 0, 8],
+      pointHoverRadius: 5,
+      tension: 0,
+      fill: true,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        enabled: true
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        beginAtZero: true,
+        max: 700,
+        grid: {
+          color: 'rgba(0, 0, 0, 0.05)',
+        }
+      }
+    },
+    layout: {
+      padding: 20
+    },
+    elements: {
+      line: {
+        tension: 0,
+        borderWidth: 4,
+      },
+      point: {
+        radius: 5,
+      }
+    }
+  }
+});
