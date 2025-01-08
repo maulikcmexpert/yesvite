@@ -88,6 +88,17 @@ defer
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<script src="{{ asset('assets/front/js/event_wall.js')}}"></script>
+<script src="{{ asset('assets/front/js/slider.js')}}"></script>
+<script src="{{ asset('assets/front/js/scritp.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/4.0.0/apexcharts.min.js" crossorigin="anonymous"></script>
+<script src="{{ asset('assets/front/js/guest.js')}}"></script>
+<script src="{{ asset('assets/front/js/potluck.js')}}"></script>
+
 <script>
     new WOW().init()
 </script>

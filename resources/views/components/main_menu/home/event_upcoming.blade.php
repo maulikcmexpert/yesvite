@@ -15,15 +15,15 @@
           @endphp
     <div class="home-center-upcoming-events-card mb-3">
         <div class="home-upcoming-events-card-left">
-            <a href="" class="home-upcoming-events-card-left-profile">
+            <a href="{{ route('event.event_wall', encrypt($events['id']))  }}" class="home-upcoming-events-card-left-profile">
                 <div class="home-upcoming-events-card-left-profile-img">
                     {{-- <img src="{{$events['host_profile']}}" class="lazy" alt=""> --}}
                     @if($events['host_profile'] != "")
                     <img src="{{$events['host_profile']}}" loading="lazy" alt="">
                 @else
-                @php 
+                @php
                     $name = $events['host_name'];
-                    $parts = explode(" ", $name); 
+                    $parts = explode(" ", $name);
                     $firstInitial = isset($parts[0]) ? strtoupper($parts[0][0]) : '';
                     $secondInitial = isset($parts[1]) ? strtoupper($parts[1][0]) : '';
                     $initials = strtoupper($firstInitial) . strtoupper($secondInitial);

@@ -38,6 +38,8 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
+use FFMpeg\FFMpeg;
+use FFMpeg\Coordinate\TimeCode;
 
 function getVideoDuration($filePath)
 {
@@ -61,6 +63,32 @@ function getVideoDuration($filePath)
 
 
 
+function genrate_thumbnail($fileName, $video_id) {
+
+    $videoPath = public_path('storage/post_image/') . $fileName;
+    //dd($videoPath);
+    $ffmpeg = FFMpeg\FFMpeg::create([
+        'ffmpeg.binaries' => exec('which ffmpeg'),
+       'ffprobe.binaries' => exec('which ffprobe'),
+    ]);
+    $video = $ffmpeg->open($videoPath);
+
+    $k = 1;
+    for ($i = 0; $i <= 4; $i++) {
+        $imgName = rand(10, 99) . '_' . rand(10000, 99999) . '.jpg';
+        $k++;
+        $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
+        $video
+            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(7 * $k))
+            ->save($thumbnailPath);
+
+        if (file_exists($thumbnailPath)) {
+            return $imgName;
+        }
+    }
+
+    return null; // Return null if no thumbnail generated
+}
 
 function checkIsimageOrVideo($postImage)
 {
@@ -102,7 +130,7 @@ function getGuestPendingRsvpCount($eventId)
         //     $query->where('app_user', '1');
         // })->
         where(['event_id' => $eventId,'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
-        
+
     return $adults + $kids;
     // return  EventInvitedUser::whereHas('user', function ($query) {
     //     $query->where('app_user', '1');
@@ -128,8 +156,8 @@ function sendNotification($notificationType, $postData)
     //     // $postData['newUser'] = $filteredIds;
     // }
 
-    
-    
+
+
     if ($notificationType == 'owner_notify') {
         $event = Event::with('event_image', 'event_schedule')->where('id', $postData['event_id'])->first();
         $event_time = "";
@@ -170,11 +198,11 @@ function sendNotification($notificationType, $postData)
                 ->orderBy('id','DESC')
                 ->get();
             }
-           
+
             foreach ($invitedusers as $value) {
-                    
+
                     // Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
-    
+
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                     if ($value->is_co_host == '1') {
                         // $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has turned you into a co-host for: " . $value->event->event_name;
@@ -188,24 +216,24 @@ function sendNotification($notificationType, $postData)
                     $notification->notification_message = $notification_message;
                     $notification->is_co_host = $value->is_co_host;
                     $notification->event_invited_user_id = $value->id;
-    
+
                     if ($notification->save()) {
-    
+
                         $deviceData = Device::where('user_id', $value->user_id)->first();
                         $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if (!empty($deviceData)) {
-    
+
                             $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
-    
+
                             $notification_image = "";
                             if ($notificationImage != NULL) {
-    
+
                                 $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
                             }
 
                             $isCoHost =  EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
                             $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
-                           
+
                             $notificationData = [
                                 'message' => $notification_message,
                                 'type' => (string)$notificationType,
@@ -219,23 +247,23 @@ function sendNotification($notificationType, $postData)
                                 'rsvp_status' => '0',
                                 'is_co_host'=>$is_co_host
                             ];
-    
+
                             $checkNotificationSetting = checkNotificationSetting($value->user_id);
                             if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
                                 send_notification_FCM_and($deviceData->device_token, $notificationData);
                             }
                         }
-                        
+
                         if ($value->prefer_by == 'email') {
-    
+
                             if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
-    
+
                                 // $event_time = "";
                                 // if ($value->event->event_schedule->isNotEmpty()) {
-    
+
                                 //     $event_time = $value->event->event_schedule->first()->start_time;
                                 // }
-    
+
                                 $eventData = [
                                     'event_id' => (int)$postData['event_id'],
                                     'user_id' => $value->user->id,
@@ -248,11 +276,11 @@ function sendNotification($notificationType, $postData)
                                     'host_email' => $senderData->email,
                                     'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                                 ];
-    
+
                                 $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
                                 // $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->orderBy('id','DESC')->first();
                                 $updateinvitation = EventInvitedUser::where('id',$value->id)->first();
-    
+
                                 if (!empty($emailCheck)) {
                                     $updateinvitation->invitation_sent = '1';
                                     $updateinvitation->save();
@@ -263,11 +291,11 @@ function sendNotification($notificationType, $postData)
                             } else {
                                 // $event_time = "";
                                 // if ($value->event->event_schedule->isNotEmpty()) {
-    
+
                                     // $event_time = $value->event->event_schedule->first()->start_time;
                                     // $event_time = $value->event->rsvp_start_time;
                                 // }
-    
+
                                 $eventData = [
                                     'event_id' => (int)$postData['event_id'],
                                     'user_id' => $value->user->id,
@@ -279,11 +307,11 @@ function sendNotification($notificationType, $postData)
                                     'time' => $value->event->rsvp_start_time,
                                     'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                                 ];
-    
+
                                 $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
                                 // $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
                                 $updateinvitation = EventInvitedUser::where('id',$value->id)->first();
-    
+
                                 if (!empty($emailCheck)) {
                                     $updateinvitation->invitation_sent = '1';
                                     $updateinvitation->save();
@@ -293,10 +321,10 @@ function sendNotification($notificationType, $postData)
                                 }
                             }
                         }
-    
-    
+
+
                         if ($value->prefer_by == 'phone') {
-    
+
                             $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
                             if ($sent == true) {
                                 $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
@@ -306,7 +334,7 @@ function sendNotification($notificationType, $postData)
                                 $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
                                 $updateinvitation->invitation_sent = '9';
                                 $updateinvitation->save();
-                                
+
                             }
                         }
                     }
@@ -358,7 +386,7 @@ function sendNotification($notificationType, $postData)
                                 $notification_image = asset('storage/event_images/' . $notificationImage->image);
                             }
                             $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
-                            
+
                             $isCoHost =  EventInvitedUser::where(column: ['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
                             $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
 
@@ -431,7 +459,7 @@ function sendNotification($notificationType, $postData)
                                 $notification_image = asset('storage/event_images/' . $notificationImage->image);
                             }
                             $push_notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has updated the event details for " . $value->event->event_name;
-                            
+
                             $isCoHost =  EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id,'is_co_host'=>'1'])->first();
                             $is_co_host = (isset($isCoHost)&&$isCoHost->is_co_host!="")?$isCoHost->is_co_host:"0";
 
@@ -1264,14 +1292,14 @@ function sendNotificationGuest($notificationType, $postData)
                 ->where('sync_id','!=','')
                 ->get();
             }
-           
+
             foreach ($invitedusers as $value) {
 
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                 if ($value->is_co_host == '1') {
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
                 }
-            
+
                 if ($value->prefer_by == 'email') {
 
                         $eventData = [
@@ -1297,7 +1325,7 @@ function sendNotificationGuest($notificationType, $postData)
                             $updateinvitation->invitation_sent = '9';
                             $updateinvitation->save();
                         }
-                    
+
                 }
                 if ($value->prefer_by == 'phone') {
 
@@ -1318,7 +1346,7 @@ function sendNotificationGuest($notificationType, $postData)
 }
 
 function checkUserEmailExist($checkContactExist){
-    $checkUserExist = User::where('email',$checkContactExist->email)->first(); 
+    $checkUserExist = User::where('email',$checkContactExist->email)->first();
     if($checkUserExist == NULL){
         $addUser = new User();
         $addUser->firstname = $checkContactExist->firstName;
@@ -1416,9 +1444,9 @@ function emailChecker($email)
 function adminNotification($notificationType, $postData)
 {
     if ($notificationType == 'broadcast_message') {
-        $deviceDataArray = []; 
-        $emailsSent = false; 
-        $notificationsSent = false; 
+        $deviceDataArray = [];
+        $emailsSent = false;
+        $notificationsSent = false;
         try {
             $deviceTokens = [];
             $userEmails = [];
@@ -1446,13 +1474,13 @@ function adminNotification($notificationType, $postData)
             }
             try {
                 SendBroadcastEmailJob::dispatch($emails, $message);
-                $emailsSent = true; 
+                $emailsSent = true;
 
             } catch (\Exception $e) {
                 // dd($e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
-          
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
@@ -1833,7 +1861,7 @@ function checkSubscription($userId)
                     if (isset($responce->error)) {
                         return false;
                     }
-                    return true; 
+                    return true;
                 }
             }
         }else{
@@ -1860,20 +1888,20 @@ function checkSubscription($userId)
                     return false;
                 }
             }
-    
+
             // $exp_date =  date('Y-m-d H:i:s', ($responce['expiryTimeMillis'] /  1000));
-    
-    
+
+
             // $current_date = date('Y-m-d H:i:s');
-    
+
             // if (strtotime($current_date) > strtotime($exp_date)) {
-    
+
             //     $userSubscription->endDate = $exp_date;
             //     $userSubscription->save();
             //     return false;
             // }
             // if (isset($responce['userCancellationTimeMillis'])) {
-    
+
             //     $cancellationdate =  date('Y-m-d H:i:s', ($responce['userCancellationTimeMillis'] /  1000));
             //     $userSubscription->cancellationdate = $cancellationdate;
             //     $userSubscription->save();
@@ -1927,7 +1955,7 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = json_decode($result, true);
 
     // if (!$result || !$result["access_token"]) {
-    //     //error  
+    //     //error
     //     // return;
     // }
     if (isset($result['access_token']) && $result['access_token'] != null) {
@@ -1977,7 +2005,7 @@ function set_apple_iap($receipt)
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
-    // Set HTTP Header for POST request 
+    // Set HTTP Header for POST request
     curl_setopt(
         $ch,
         CURLOPT_HTTPHEADER,
@@ -2060,8 +2088,8 @@ function delete_event_post_images($post_id)
 
 function debit_coins($user_id,$event_id,$get_count_invited_user){
 
-    
-    $user_data = User::where('id',$user_id)->first();    
+
+    $user_data = User::where('id',$user_id)->first();
     $event = Event::where('id',$event_id)->first();
     if($get_count_invited_user > 0){
         $current_balance = $user_data->coins - $get_count_invited_user;
@@ -2076,7 +2104,7 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
         $coin_transaction->save();
         $user_data->coins = $current_balance;
         $user_data->save();
-        
+
         $current_debit_coin = $get_count_invited_user;
         $creditCoins = Coin_transactions::where(['user_id' => $user_id, 'type' => 'credit', 'status' => '0'])->get();
 
@@ -2087,22 +2115,22 @@ function debit_coins($user_id,$event_id,$get_count_invited_user){
                 if ($temp > 0) {
                     $getCreditCoin->used_coins += $current_debit_coin;
                     if ($getCreditCoin->used_coins == $getCreditCoin->coins) {
-                        $getCreditCoin->status = '1';  
+                        $getCreditCoin->status = '1';
                     }
-                    $getCreditCoin->save(); 
+                    $getCreditCoin->save();
                     $current_debit_coin = 0;
                 } else {
-                   
+
                     $getCreditCoin->used_coins += $remain;
                     if ($getCreditCoin->used_coins == $getCreditCoin->coins) {
-                        $getCreditCoin->status = '1';  
+                        $getCreditCoin->status = '1';
                     }
-                    $getCreditCoin->save(); 
+                    $getCreditCoin->save();
                     $current_debit_coin -= $remain;
                 }
             }
 
-           
+
             if ($current_debit_coin <= 0) {
                 break;
             }

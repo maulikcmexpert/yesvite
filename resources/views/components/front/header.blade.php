@@ -5,7 +5,9 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.png')}}">
 <!-- custom-style -->
+<link rel="stylesheet" href="{{ asset('assets/front/css/wallcss/main.css')}}" />
 <link href="{{asset('assets/front/css/style.css')}}" rel="stylesheet">
+
 <link rel="stylesheet" href="{{asset('assets/front/css/new_css/bootstrap.min.css')}}" />
 
 {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
@@ -45,7 +47,10 @@
 @endif
 
 
-<link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
+
+
+
+
 <link href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css" rel="stylesheet" crossorigin="anonymous"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
@@ -57,3 +62,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" crossorigin="anonymous">
 
 
+<link rel="stylesheet" href="{{asset('assets')}}/front/css/new_css/main.css" />
+<link rel="stylesheet" href="{{asset('assets/front/css/wall.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/4.0.0/apexcharts.min.css" />

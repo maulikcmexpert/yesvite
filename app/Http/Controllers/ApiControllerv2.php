@@ -1388,7 +1388,7 @@ class ApiControllerv2 extends Controller
 
 
 
-            // Past Event // 
+            // Past Event //
             $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
             $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -1647,7 +1647,7 @@ class ApiControllerv2 extends Controller
             }
 
 
-            // Past Event // 
+            // Past Event //
 
 
 
@@ -3301,7 +3301,7 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    //  event create // 
+    //  event create //
 
     // public function  getDesignList(Request $request)
     // {
@@ -4968,7 +4968,7 @@ class ApiControllerv2 extends Controller
                                         ]);
                                     }
                                     // }
-                                    // }  
+                                    // }
                                 }
                             }
                         }
@@ -5054,7 +5054,7 @@ class ApiControllerv2 extends Controller
                                 if (!empty($value['items'])) {
                                     $items = $value['items'];
                                     foreach ($items as $value) {
-                                        $itemPlotluckId = $value['id']; 
+                                        $itemPlotluckId = $value['id'];
 
                                         // $getEventPotluckItem = EventPotluckCategoryItem::where([
                                         //     'event_id' => $eventData['event_id'],
@@ -5115,13 +5115,13 @@ class ApiControllerv2 extends Controller
                                             if(isset($value['item_carry_users'])){
                                             foreach ($value['item_carry_users'] as $value) {
                                                 if($value['id'] !=0){
-                                                 
+
                                                     UserPotluckItem::where([
                                                                     'event_id' => $eventData['event_id'],
                                                                  "id"=>$value['id'],
                                                                 ])->update(['quantity' => $value['quantity']]);
                                                 }else{
-                                                    
+
                                                     UserPotluckItem::Create([
                                                         'event_id' => $eventData['event_id'],
                                                         'user_id' => $user->id,
@@ -5155,7 +5155,7 @@ class ApiControllerv2 extends Controller
                                             //     ]);
                                             // }
                                             $item_carry_users = isset($value['item_carry_users'])?$value['item_carry_users']:[];
-                                            
+
                                             if(isset($value['item_carry_users'])){
                                                 foreach ($value['item_carry_users'] as $value) {
                                                     if($value['id']!=0){
@@ -6802,7 +6802,7 @@ class ApiControllerv2 extends Controller
 
 
         try {
-            // 
+            //
             DB::beginTransaction();
 
             // $acceptReject = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->first();
@@ -6944,7 +6944,7 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->event_view_date = date('Y-m-d');
 
                 $rsvpSent->save();
-                //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
+                //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes
                 if ($rsvpSent->save()) {
                     EventPost::where('event_id', $request->event_id)
                         ->where('user_id', $request->user_id)
@@ -9889,7 +9889,7 @@ class ApiControllerv2 extends Controller
             }
             return response()->json(['status' => 1, 'is_reaction' => $isReaction, 'message' => $message,  "count" => $counts, "post_reaction" =>  $postReaction, "reactionList" => $total_counts]);
         }
-        // } 
+        // }
 
         // catch (QueryException $e) {
 
@@ -10482,7 +10482,7 @@ class ApiControllerv2 extends Controller
 
 
 
-            // postDetail // 
+            // postDetail //
 
 
 
@@ -10720,7 +10720,7 @@ class ApiControllerv2 extends Controller
 
                         if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
 
-                            $rsvpUserStatus['rsvp_status'] = 2; // no reply 
+                            $rsvpUserStatus['rsvp_status'] = 2; // no reply
                         }
 
                         $rsvpUserStatus['read'] = $value->read;
@@ -10766,7 +10766,7 @@ class ApiControllerv2 extends Controller
 
                         if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
 
-                            $rsvpUserStatus['rsvp_status'] = 2; // no reply 
+                            $rsvpUserStatus['rsvp_status'] = 2; // no reply
                         }
 
                         $rsvpUserStatus['read'] = $value->read;
@@ -11130,7 +11130,7 @@ class ApiControllerv2 extends Controller
 
 
         return response()->json(['status' => 1, 'message' => "invites sent sucessfully"]);
-        // } 
+        // }
         // catch (QueryException $e) {
 
         //     DB::rollBack();
@@ -11865,7 +11865,7 @@ class ApiControllerv2 extends Controller
         //     DB::rollBack();
 
         //     return response()->json(['status' => 0, 'message' => 'db error']);
-        // } 
+        // }
         catch (Exception $e) {
 
 
@@ -13074,7 +13074,7 @@ class ApiControllerv2 extends Controller
     //     $result = json_decode($result, true);
 
     //     // if (!$result || !$result["access_token"]) {
-    //     //     //error  
+    //     //     //error
     //     //     // return;
     //     // }
     //     if (isset($result['access_token']) && $result['access_token'] != null) {
@@ -13269,7 +13269,7 @@ class ApiControllerv2 extends Controller
         $result = json_decode($result, true);
 
         // if (!$result || !$result["access_token"]) {
-        //     //error  
+        //     //error
         //     // return;
         // }
         if (isset($result['access_token']) && $result['access_token'] != null) {
@@ -13306,7 +13306,7 @@ class ApiControllerv2 extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
-        // Set HTTP Header for POST request 
+        // Set HTTP Header for POST request
         curl_setopt(
             $ch,
             CURLOPT_HTTPHEADER,
@@ -13990,7 +13990,7 @@ class ApiControllerv2 extends Controller
                     unset($udpated[$k]);
                 }
                 // foreach ($value as $key => $val) {
-                 
+
                 //     $val = strtolower($val);
                 //     switch ($val) {
                 //         case 'event_name':
@@ -14174,7 +14174,7 @@ class ApiControllerv2 extends Controller
             }
 
             $transactionData = Coin_transactions::selectRaw('
-                    DATE_FORMAT(created_at, "%b") as month, 
+                    DATE_FORMAT(created_at, "%b") as month,
                     current_balance
                 ')
                 ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
