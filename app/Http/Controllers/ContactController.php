@@ -692,9 +692,9 @@ class ContactController extends Controller
 
     public function checkNewContactEmail(Request $request)
     {
-        dd(1);
         $user = Auth::guard('web')->user();
         $email = $user->email;
+        dd($email);  
         $exists = contact_sync::where('email', $email)->exists();
 
         if ($exists) {
