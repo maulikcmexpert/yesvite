@@ -590,12 +590,14 @@ $(document).on("keyup", ".search_phone", function () {
 
                 if (output.status == 1) {
                     removeLoaderHandle("#save_contact", "Save Contact");
-                    $("#Fname").val(output.user.firstname);
-                    $("#Lname").val(output.user.lastname);
-
-                    $("#email").val(output.user.email);
-                    $("#phone_number").val(output.user.phone_number);
-
+                    if(output.user!=""||output.user!=undefined){
+                        $("#Fname").val(output.user.firstname);
+                        $("#Lname").val(output.user.lastname);
+    
+                        $("#email").val(output.user.email);
+                        $("#phone_number").val(output.user.phone_number);
+                    }
+                
                     toastr.success(output.message);
 
                     $("#edit_contact_form")[0].reset();
