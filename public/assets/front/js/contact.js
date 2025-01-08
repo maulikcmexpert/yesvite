@@ -366,6 +366,7 @@ $(document).on("keyup", ".search_phone", function () {
 
                         $("#add_contact")[0].reset();
                         $("#myModal1").modal("hide");
+                        window.location.reload();
                     } else {
                         removeLoaderHandle("#save_contact", "Save Contact");
                         toastr.error(output.message);
