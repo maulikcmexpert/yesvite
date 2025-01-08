@@ -25,8 +25,11 @@ $("#product-scroll").on("scroll", function () {
         }
 });
 
+
+let debounceTimer;
 $("#product-scroll-phone").on("scroll", function () {
-  
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
         if (busy2) return; 
 
         var scrollTop = $(this).scrollTop(); 
@@ -41,6 +44,7 @@ $("#product-scroll-phone").on("scroll", function () {
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
         }
+    }, 200);
 });
 
 $(document).on("keyup", ".search_name", function () {
@@ -163,6 +167,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $("#loader").hide();
+                    busy2 = true; 
                     return;
                 }
                 $("#loader").hide();
