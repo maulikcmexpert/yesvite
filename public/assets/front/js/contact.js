@@ -571,6 +571,9 @@ $(document).on("keyup", ".search_phone", function () {
         }else if(formtype=="0"){
             formActionURL= base_url+'contacts/save_edit/'
         }
+
+        console.log(formActionURL);
+        
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
