@@ -644,7 +644,7 @@ $user['coins']=$user->coins;
                     $eventInvite->sync_id = $checkContactExist->id;
                     $eventInvite->user_id = $newUserId;
                     $eventInvite->prefer_by = $prefer_by;
-                    $eventInvite->is_cohost=$is_cohost;
+                    $eventInvite->is_co_host=$is_cohost;
                     $eventInvite->save();
                 }
             }else{
