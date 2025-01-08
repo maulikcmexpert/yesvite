@@ -76,7 +76,7 @@ $(document).on("keyup", ".search_phone", function () {
         page = 1;
         $("#yesvitePhones").html("");
         if(search_phone==''){
-            offset1=0;
+            offset1=null;
             limit=6;
         }else{
             offset1=null;

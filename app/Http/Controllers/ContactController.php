@@ -294,10 +294,10 @@ class ContactController extends Controller
         if ((!empty($request->offset)&&!empty($request->limit))&&($request->has('limit') && $request->has('offset'))) {
             $query->skip($request->offset)->take($request->limit);
         }
-        // if(empty($searchPhone)){
-        //     // dd(1);
-        //     $query->limit(6);
-        // }
+        if(empty($searchPhone) && empty($request->offset)){
+            // dd(1);
+            $query->limit(6);
+        }
         $getAllContacts = $query->get();
         $yesvite_phone = [];
         foreach ($getAllContacts as $user) {
