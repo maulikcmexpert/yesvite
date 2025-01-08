@@ -426,14 +426,14 @@ $user['coins']=$user->coins;
         }
 
         $gift_registry_id = "";
-        if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
+        if (isset($request->gift_registry) && $request->gift_registry == '1') {
             if (!empty($request->gift_registry_data)) {
                 $gift_registry_data = collect($request->gift_registry_data)->pluck('gr_id')->toArray();
                 $gift_registry_id =  implode(',', $gift_registry_data);
             }
         }
 
-        dd($gift_registry_id);
+       
         if(isset($request->event_id) && $request->event_id != NULL){
             $event_creation = Event::where('id',$request->event_id)->first();
         }else{
