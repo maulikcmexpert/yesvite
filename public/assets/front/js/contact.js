@@ -406,13 +406,13 @@ $(document).on("keyup", ".search_phone", function () {
 
                 if (output.status == 1) {
                     // alert();
-                    $("#edit_Fname").val(output.edit.firstName);
-                    $("#edit_Lname").val(output.edit.lastName);
-                    $("#email").val(output.edit.email);
+                    $("#edit_Fname_phone").val(output.edit.firstName);
+                    $("#edit_Lname_phone").val(output.edit.lastName);
+                    $("#email_phone").val(output.edit.email);
                     var phoneNumber = output.edit.phone; // "+1 4444-464-4646"
                     phoneNumber = phoneNumber.replace('+1 ', '');
-                    $("#phone_number").val(phoneNumber);
-                    $("#edit_id").val(output.edit.id);
+                    $("#phone_number_phone").val(phoneNumber);
+                    $("#edit_id_phone").val(output.edit.id);
                 }
             },
         });

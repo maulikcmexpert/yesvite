@@ -511,40 +511,40 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
-                                    <input type="text" class="form-control" id="edit_Fname" name="edit_Fname">
+                                    <input type="text" class="form-control" id="edit_Fname_phone" name="edit_Fname_phone">
                                     <label for="Fname" class="floating-label">First Name<span>*</span></label>
                                     <div class="label-error">
-                                        <label id="edit_Fname-error" class="error" for="edit_Fname"></label>
+                                        <label id="edit_Fname-error" class="error" for="edit_Fname_phone"></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
-                                    <input type="text" class="form-control" id="edit_Lname" name="edit_Lname">
+                                    <input type="text" class="form-control" id="edit_Lname_phone" name="edit_Lname_phone">
                                     <label for="Lname" class="floating-label">Last Name<span>*</span></label>
                                     <div class="label-error">
-                                        <label id="edit_Lname-error" class="error" for="edit_Lname"></label>
+                                        <label id="edit_Lname-error" class="error" for="edit_Lname_phone"></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-                                    <input type="email" class="form-control inputText" id="email" name="email" required>
-                                    <label for="email" class="form-label input-field floating-label">Work Email
+                                    <input type="email" class="form-control inputText" id="email_phone" name="email_phone" required>
+                                    <label for="email_phone" class="form-label input-field floating-label">Work Email
                                         Address<span class="required">*</span></label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form add-contact-selectbox">
                                     <input type="text" class="phone_number border-0" name="countryCode" readonly>
-                                    <input type="text" class="form-control edit_phone" id="phone_number" name="phone_number" value="">
+                                    <input type="text" class="form-control edit_phone" id="phone_number_phone" name="phone_number_phone" value="">
                                     <label for="phone" class="floating-label">Phone
                                         Number<span>*</span></label>
                                     <div class="label-error">
-                                        <label id="phone_number-error" class="error" for="phone_number"></label>
+                                        <label id="phone_number-error" class="error" for="phone_number_phone"></label>
                                     </div>
                                     <input type="hidden" name="country_code" id="country_code" value="">
-                                    <input type="hidden" class="form-control inputText" id="edit_id" name="edit_id">
+                                    <input type="hidden" class="form-control inputText" id="edit_id_phone" name="edit_id_phone">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
