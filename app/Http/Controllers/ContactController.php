@@ -692,7 +692,8 @@ class ContactController extends Controller
 
     public function checkNewContactEmail(Request $request)
     {
-        $email = $request->input('email');
+        $user = Auth::guard('web')->user();
+        $email = $user->email;
         $exists = User::where('email', $email)->exists();
 
         if ($exists) {
