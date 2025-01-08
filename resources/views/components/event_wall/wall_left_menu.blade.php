@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -68,7 +68,24 @@
 
                         <div class="swiper-slide">
                             <div class="hosted-by-template-slider-img">
-                                <img src="{{ $image }}" alt="" />
+                            @if ($image != '')
+                            <img src="{{ $image }}" alt="" />
+                    @else
+                        @php
+                            $name = $eventDetails['hosted_by'];
+                            // $parts = explode(" ", $name);
+                            $firstInitial = isset( $eventDetails['hosted_by'][0])
+                                ? strtoupper( $eventDetails['hosted_by'][5])
+                                : '';
+                            $secondInitial = isset($eventDetails['hosted_by'][0]) ? strtoupper($eventDetails['hosted_by'][5]) : '';
+                            $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                            $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                        @endphp
+                        <h5 class="{{ $fontColor }}">
+                            {{ $initials }}
+                        </h5>
+                    @endif
+                                <!-- <img src="{{ $image }}" alt="" /> -->
                             </div>
                         </div>
                     @endforeach
