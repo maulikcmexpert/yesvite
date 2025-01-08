@@ -502,7 +502,7 @@ $user['coins']=$user->coins;
         $get_count_invited_user=0;
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
-        $get_count_invited_user = count($conatctId) +count($invitedCount);
+        $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
         debit_coins($user_id, $eventId, $get_count_invited_user);
         if(isset($request->event_id) && $request->event_id != NULL){
             $step = $event_creation->step;
