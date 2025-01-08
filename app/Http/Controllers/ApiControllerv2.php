@@ -7468,8 +7468,11 @@ class ApiControllerv2 extends Controller
 
                 $coHostDetail1['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
 
-                $coHostDetail1['name'] = (!empty($hostValues->user->firstname)|| $hostValues->user->firstname!="")?$hostValues->user->firstname:"" . ' ' . (!empty($hostValues->user->lastname)|| $hostValues->user->lastname!="")?$hostValues->user->lastname:"";
- 
+                $coHostDetail1['name'] = 
+                (!empty($hostValues->user->firstname) && $hostValues->user->firstname != "" ? $hostValues->user->firstname : "") . 
+                ' ' . 
+                (!empty($hostValues->user->lastname) && $hostValues->user->lastname != "" ? $hostValues->user->lastname : "");
+             
                 $coHostDetail1['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
 
                 $coHostDetail1['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
