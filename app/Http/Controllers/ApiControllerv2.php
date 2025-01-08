@@ -5533,7 +5533,7 @@ class ApiControllerv2 extends Controller
             ->select('id', 'user_id', 'registry_recipient_name', 'registry_link')
             ->orderBy('id', 'DESC')
             ->get()
-            ->map(function ($item) use ($input) {
+            ->map(function ($item) use ($user) {
                 $item['is_created'] = ($item['user_id'] == $user->id) ? 1 :0; // Include event_id from input
                 return $item;
             })
