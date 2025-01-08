@@ -307,23 +307,23 @@ $(document).on("keyup", ".search_phone", function () {
                 phoneUS: true,
                 minlength: 10,
                 maxlength: 15,
-                remote: {
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
-                    type: "POST",
-                    data: {
-                        phone_number: function () {
-                            return $(".addnew_contact").val();
-                        },
-                        id: function () {
-                            return $("input[name='id']").val();
-                        },
-                    },
-                },
+                // remote: {
+                //     headers: {
+                //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                //             "content"
+                //         ),
+                //     },
+                //     url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
+                //     type: "POST",
+                //     data: {
+                //         phone_number: function () {
+                //             return $(".addnew_contact").val();
+                //         },
+                //         id: function () {
+                //             return $("input[name='id']").val();
+                //         },
+                //     },
+                // },
             },
         },
         messages: {
@@ -340,7 +340,7 @@ $(document).on("keyup", ".search_phone", function () {
                 phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
-                remote: "Phone Number is already exsits",
+                // remote: "Phone Number is already exsits",
             },
         },
         submitHandler: function (form) {
@@ -462,23 +462,23 @@ $(document).on("keyup", ".search_phone", function () {
                 phoneUS: true,
                 minlength: 10,
                 maxlength: 15,
-                remote: {
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
-                    type: "POST",
-                    data: {
-                        phone_number: function () {
-                            return $(".addnew_contact").val();
-                        },
-                        id: function () {
-                            return $("input[name='id']").val();
-                        },
-                    },
-                },
+                // remote: {
+                //     headers: {
+                //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                //             "content"
+                //         ),
+                //     },
+                //     url: base_url + "profile/check_new_contactnumber", // Your Laravel API endpoint
+                //     type: "POST",
+                //     data: {
+                //         phone_number: function () {
+                //             return $(".addnew_contact").val();
+                //         },
+                //         id: function () {
+                //             return $("input[name='id']").val();
+                //         },
+                //     },
+                // },
             },
         },
         messages: {
@@ -491,7 +491,7 @@ $(document).on("keyup", ".search_phone", function () {
                 phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
-                remote: "Phone Number is already exsits",
+                // remote: "Phone Number is already exsits",
             },
         },
         submitHandler: function (form) {
