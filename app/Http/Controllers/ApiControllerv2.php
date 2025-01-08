@@ -5760,7 +5760,7 @@ dd($e);
             $rawData = $request->getContent();
     
             $input = json_decode($rawData, true);
-            
+
             $GreetingCardList =  EventGreeting::where('user_id', $user->id)
             ->select('id', 'user_id', 'template_name', 'message', 'message_sent_time', 'custom_hours_after_event')
             ->orderBy('id', 'DESC')
@@ -5801,9 +5801,9 @@ dd($e);
             ->values() 
             ->toArray();
 
-            if (count($GreetingCardList) != 0) {
+            if (count($combined_data) != 0) {
 
-                return response()->json(['status' => 1, 'data' => $GreetingCardList, 'message' => "Greeting card list"]);
+                return response()->json(['status' => 1, 'data' => $combined_data, 'message' => "Greeting card list"]);
             } else {
                 return response()->json(['status' => 0, 'message' => "Greeting card list is not available"]);
             }
