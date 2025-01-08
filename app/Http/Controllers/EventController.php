@@ -432,6 +432,8 @@ $user['coins']=$user->coins;
                 $gift_registry_id =  implode(',', $gift_registry_data);
             }
         }
+
+        dd($gift_registry_id);
         if(isset($request->event_id) && $request->event_id != NULL){
             $event_creation = Event::where('id',$request->event_id)->first();
         }else{
@@ -628,8 +630,10 @@ $user['coins']=$user->coins;
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
                 $prefer_by = $request->co_host_prefer_by;
+              
             if(isset($request->isPhonecontact) && $request->isPhonecontact==1){
-                $checkContactExist = contact_sync::where('id',$invited_user)->first();
+
+                $checkContactExist = contact_sync::where('id',$invited_user)->first(); 
                 if ($checkContactExist) {
                     $newUserId = NULL;
                     if ($checkContactExist->email != '') {
@@ -640,6 +644,7 @@ $user['coins']=$user->coins;
                     $eventInvite->sync_id = $checkContactExist->id;
                     $eventInvite->user_id = $newUserId;
                     $eventInvite->prefer_by = $prefer_by;
+                    $eventInvite->is_cohost=$is_cohost;
                     $eventInvite->save();
                 }
             }else{
