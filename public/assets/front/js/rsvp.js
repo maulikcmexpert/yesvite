@@ -66,14 +66,14 @@ $(document).ready(function() {
     const formatToGoogleCalendar = (date) => {
         return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
     };
-console.log({eventDate,
-  eventTime,
-  eventName})
     const eventDetails = {
-        title: eventName || "Meeting with Team", // Event title
-        start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-        end: formatToGoogleCalendar(endDateTime), // End time in UTC format
+      title: eventName || "Meeting with Team", // Event title
+      start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
+      end: formatToGoogleCalendar(endDateTime), // End time in UTC format
     };
+    console.log({eventDate,
+      eventTime,
+      eventName})
 
     // Construct Google Calendar URL
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
