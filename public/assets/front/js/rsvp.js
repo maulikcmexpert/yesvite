@@ -155,11 +155,12 @@ $(document).ready(function () {
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
  
       if (isAndroid) {
-       
-          // Android: Use intent to open default calendar
-          const androidCalendarUrl = `intent://com.android.calendar/time/${startDateTime.getTime()}#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;end=${endDateTime.getTime()};title=${encodeURIComponent(eventDetails.title)};description=;details=;eventLocation=;flag=0;endTime=${endDateTime.getTime()}#Intent;end`;
+       // Default to Google Calendar URL
+       const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+        eventDetails.title
+    )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
 
-          window.location = androidCalendarUrl;
+    window.open(googleCalendarUrl, "_blank");
       } else if (isIOS) {
         alert();  
           // iOS: Generate ICS file for the event
