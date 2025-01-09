@@ -2062,7 +2062,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
 
 <script>
-alert(0);
+
 const createICSFile = (start, end, title, description, location) => {
 // Create a new calendar object
 const calendar = new ICAL.Component(['vcalendar', [], []]);
@@ -2122,11 +2122,9 @@ downloadLink.style.display = "block";
 downloadLink.style.margin = "20px";
 downloadLink.style.color = "blue";
 downloadLink.style.textDecoration = "underline";
-$(".author-title").append(
-            `<a href="${URL.createObjectURL(
-                icsBlob
-            )}" download="event.ics">Download Event</a>`
-        );
+
+document.querySelector(".author-title").appendChild(downloadLink);
+
 alert(downloadLink)
 
 </script>
