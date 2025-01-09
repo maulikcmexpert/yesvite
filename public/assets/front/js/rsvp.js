@@ -226,7 +226,7 @@ $(document).ready(function () {
             $(".author-title").append(
                 `<a href="${URL.createObjectURL(
                     icsBlob
-                )} download="event.ics">Download Event</a>`
+                )}" download="event.ics">Download Event</a>`
             );
             // Append and click the download link
             document.body.appendChild(downloadLink);
