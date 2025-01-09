@@ -2346,7 +2346,8 @@ async function findOrCreateConversation(
         ref(database, `overview/${currentUserId}/${newConversationId}`),
         newConversationData
     );
-
+    console.log({ senderUserName });
+    console.log({ currentUserId });
     const receiverConversationData = {
         contactId: currentUserId,
         contactName: senderUserName,
@@ -4084,7 +4085,12 @@ $(document).on("keyup", "#serach_user_from_list", function () {
         }
     });
 });
-
+if ($("#host_id").length) {
+    var hostId = $("#host_id").val();
+    var hostName = $("#host_name").val();
+    var hostImage = $("#host_profile").val();
+    sendMessageHost(hostId, hostName, hostImage);
+}
 async function sendMessageHost(contactId, contactName, receiverProfile) {
     const currentUserId = senderUser;
     const conversationId = await findOrCreateConversation(
@@ -4140,7 +4146,7 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     // await addMessage(selectedMessageId, messageData, contactId);
 
     await updateOverview(currentUserId, selectedMessageId, {
-        lastMessage: `${senderUserName}: ${message}`,
+        lastMessage: ``,
         timeStamp: Date.now(),
     });
 
@@ -4148,7 +4154,7 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
         ref(database, `overview/${contactId}/${selectedMessageId}`)
     );
     await updateOverview(contactId, selectedMessageId, {
-        lastMessage: `${senderUserName}: ${message}`,
+        lastMessage: ``,
         unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
         timeStamp: Date.now(),
     });
