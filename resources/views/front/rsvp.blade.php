@@ -986,7 +986,9 @@
                                                     </div>
                                                     <a href="javascript:" class="user-detail d-flex ms-3">
                                                         <div class="d-flex align-items-start flex-column tp">
-                                                            <h3>{{$message['contactName']}}</h3> <span class="host-type"></span>
+                                                            <div>
+                                                                <h3>{{$message['contactName']}}</h3> <span class="host-type"></span>
+                                                            </div>
                                                             @php
                                                             $timestamp = $message['timeStamp'] ?? now()->timestamp;
                                                             $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
