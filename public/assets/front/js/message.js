@@ -1575,7 +1575,6 @@ $(".send-message").on("keypress", async function (e) {
             );
 
             if (
-                receiverSnapshot.val() ||
                 receiverSnapshot.val().isMute == undefined ||
                 receiverSnapshot.val().isMute == 0 ||
                 receiverSnapshot.val().isMute == null
