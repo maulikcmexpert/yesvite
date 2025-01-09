@@ -1288,6 +1288,13 @@ display:none;}
     #rsvp-guest-list-modal .rsvp-guest-user-list-wrp{
         padding-top: 0px;
     }
+
+
+.rsvp-yes-modal .modal-body{
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 }
 
 @media only screen and (max-width: 424px) {
