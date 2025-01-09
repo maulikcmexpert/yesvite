@@ -2137,7 +2137,7 @@
 
 
                         // Get the existing <a> tag with class .add-calendar
-            const calendarLink = document.querySelector(".add-calendar");
+            const calendarLink = document.querySelector(".add-calender");
 
             // Set the href attribute to the URL of the .ics file
             calendarLink.href = URL.createObjectURL(icsBlob);
