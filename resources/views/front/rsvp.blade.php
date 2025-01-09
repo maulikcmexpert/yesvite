@@ -855,7 +855,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="chat-area">
-                                <div class="chat-lists">
+                                <div class="chat-lists message-chat-lists">
                                     <div class="chat-header">
                                         <div class="position-relative chat-header-searchbar">
                                             <input type="text" placeholder="Search message" name="search_user_from_list" id="serach_user_from_list">
@@ -1119,7 +1119,7 @@
                                     </ul>
                                     <button id="archive-list" list="0" style="display: none;">Archive List</button>
                                 </div>
-                                <div class="chatbox position-relative w-100">
+                                <div class="chatbox position-relative w-100 message-view-box">
                                     <div class="msg-head">
                                         <div class="row">
                                             <div class="col-lg-8 col-7">

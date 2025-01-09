@@ -1705,6 +1705,7 @@ ul.chat-list li.setpink{
     display: block;
 }
 
+
 /* ======= responsive ======== */
 
 
@@ -1819,6 +1820,17 @@ ul.chat-list li.setpink{
         max-width: 320px;
     }
 }
+
+
+/* @media only screen and (max-width: 767px) {
+    .message-chat-lists{
+        
+    }
+    
+    .message-view-box{
+        display: none;
+    }
+} */
 
 @media only screen and (max-width:763px) {
     .chat-area .chat-header .dropdown-menu.show {

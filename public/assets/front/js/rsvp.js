@@ -542,3 +542,26 @@ $(document).on("click", ".direction-btn", function () {
 // });
 
 //   initMap();
+
+function applyStyles() {
+  if ($(window).width() <= 767) {
+      $(".message-view-box").css("display", "none"); 
+      $(document).on('click','.chat-data',function(){
+        $(".message-view-box").css("display", "block"); 
+        $(".message-chat-lists").css("display", "none"); 
+      })
+      // $(document).on('click','.chat-data',function(){
+      //   $(".message-view-box").css("display", "block"); 
+      //   $(".message-chat-lists").css("display", "none"); 
+      // })
+  } else {
+    $(".message-view-box").css("display", "block"); 
+  }
+}
+
+// Apply styles on page load
+applyStyles();
+
+// Apply styles on window resize
+$(window).resize(applyStyles);
+
