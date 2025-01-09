@@ -4102,7 +4102,7 @@ if ($("#host_id").length && $("#nav-messaging-tab").length) {
 }
 async function sendMessageHost(contactId, contactName, receiverProfile) {
     const currentUserId = senderUser;
-    const conversationId = await findOrCreateConversation(
+    const conversationId = await findOrCreateSingleConversation(
         currentUserId,
         contactId,
         contactName,
@@ -4136,41 +4136,44 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     $(".selected_id").val(conversationId);
     $(".selected_message").val(contactId);
     $(".selected_name").val(contactName);
-
-    // const messageData = {
-    //     data: "Hi,Thanks for the invite!!",
-    //     timeStamp: Date.now(),
-    //     isDelete: {},
-    //     isReply: "0",
-    //     isSeen: false,
-    //     react: "",
-    //     receiverId: contactId,
-    //     receiverName: contactName,
-    //     replyData: {},
-    //     senderId: senderUser,
-    //     senderName: senderUserName,
-    //     status: {},
-    // };
-
-    // await addMessage(selectedMessageId, messageData, contactId);
-
-    // await updateOverview(currentUserId, selectedMessageId, {
-    //     lastMessage: ``,
-    //     timeStamp: Date.now(),
-    // });
-
-    // const receiverSnapshot = await get(
-    //     ref(database, `overview/${contactId}/${selectedMessageId}`)
-    // );
-    // await updateOverview(contactId, selectedMessageId, {
-    //     lastMessage: ``,
-    //     unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-    //     timeStamp: Date.now(),
-    // });
     await updateChat(contactId);
 }
 if ($(".msg-btn").length && $("#nav-messaging-tab").length) {
     $(".msg-btn").on("click", function () {
         $("#nav-messaging-tab").click();
     });
+}
+async function findOrCreateSingleConversation(
+    currentUserId,
+    contactId,
+    contactName,
+    receiverProfile
+) {
+    let userData = await get(userRef);
+    let userSnap = userData.val();
+
+    const newConversationId = await generateConversationId([
+        currentUserId,
+        contactId,
+    ]);
+
+    const newConversationData = {
+        contactId: contactId,
+        contactName: contactName,
+        conversationId: newConversationId,
+        group: false,
+        lastMessage: "",
+        lastSenderId: currentUserId,
+        receiverProfile: receiverProfile,
+        timeStamp: Date.now(),
+        // unRead: true,
+        // unReadCount: 1,
+    };
+
+    await set(
+        ref(database, `overview/${currentUserId}/${newConversationId}`),
+        newConversationData
+    );
+
+    return newConversationId;
 }
