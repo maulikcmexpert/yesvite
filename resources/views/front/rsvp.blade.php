@@ -2168,7 +2168,7 @@
 
             // Set the href attribute to the URL of the .ics file
             calendarLink.href = URL.createObjectURL(icsBlob);
-            calendarLink.download = URL.createObjectURL(icsBlob);
+            calendarLink.download = "event.ics";
 
 </script>
 @if ($userId!=0)
