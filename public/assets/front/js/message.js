@@ -4089,12 +4089,11 @@ $(document).on("keyup", "#serach_user_from_list", function () {
     });
 });
 var hostCreated = false;
-if (
-    $("#host_id").length &&
-    $("#nav-messaging-tab").length &&
-    hostCreated == false
-) {
+if ($("#host_id").length && $("#nav-messaging-tab").length) {
     $("#nav-messaging-tab").on("click", async function () {
+        if (hostCreated == true) {
+            return;
+        }
         hostCreated = true;
 
         var co_host_id = $("#co_host_id").val();
