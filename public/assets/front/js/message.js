@@ -4087,8 +4087,14 @@ $(document).on("keyup", "#serach_user_from_list", function () {
         }
     });
 });
-if ($("#host_id").length && $("#nav-messaging-tab").length) {
+var hostCreated = false;
+if (
+    $("#host_id").length &&
+    $("#nav-messaging-tab").length &&
+    hostCreated == false
+) {
     $("#nav-messaging-tab").on("click", function () {
+        hostCreated = true;
         var hostId = $("#host_id").val();
         var hostName = $("#host_name").val();
         var hostImage = $("#host_profile").val();
