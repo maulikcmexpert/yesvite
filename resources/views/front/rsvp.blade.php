@@ -2106,16 +2106,30 @@
             const eventTime = document.querySelector("#eventTime").value;
             const eventEndTime = document.querySelector("#eventEndTime").value || "12:00 PM"; // Default value if end time is empty
             const eventName = document.querySelector("#eventName").value;
-            console.log({eventDate})
-            console.log({eventEndDate})
-            console.log({eventTime})
-            console.log({eventEndTime})
-            console.log({eventName})
-            // Convert eventDate and eventEndDate to Date objects
-            const startDateTime = new Date(`${eventDate}T${eventTime}`); // Ensure the time and date are correctly combined
-            const endDateTime = new Date(`${eventEndDate}T${eventEndTime}`); // Ensure the time and date are correctly combined
-            console.log({startDateTime})
-            console.log({endDateTime})
+           // Function to convert 12-hour format time to 24-hour format
+                const convertTo24Hour = (time) => {
+                    const [hoursMinutes, period] = time.split(" ");
+                    let [hours, minutes] = hoursMinutes.split(":");
+                    if (period === "PM" && hours !== "12") hours = (parseInt(hours) + 12).toString();
+                    if (period === "AM" && hours === "12") hours = "00";
+                    return `${hours}:${minutes}`;
+                };
+
+                // Convert eventDate and eventEndDate to Date objects
+                const startTime24 = convertTo24Hour(eventTime);
+                const endTime24 = convertTo24Hour(eventEndTime);
+
+                const startDateTime = new Date(`${eventDate}T${startTime24}`); // Ensure the time and date are correctly combined
+                const endDateTime = new Date(`${eventEndDate}T${endTime24}`); // Ensure the time and date are correctly combined
+
+                // Check if the Date objects are valid
+                if (isNaN(startDateTime)) {
+                    console.error("Invalid startDateTime");
+                }
+                if (isNaN(endDateTime)) {
+                    console.error("Invalid endDateTime");
+                }
+
             const eventDetails = {
                 title: eventName,
                 description: `This is an event scheduled on ${eventDate}.\nIncludes multiple lines.`, // Customize the description if needed
