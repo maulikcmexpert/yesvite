@@ -566,6 +566,7 @@ class RsvpController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+
         $userId = decrypt($request->user_id);
         // dd($userId);
         $eventId = decrypt($request->event_id);
@@ -673,6 +674,8 @@ class RsvpController extends Controller
                         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                             $query->where('app_user', '1');
                         })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+
+
                     }
 
                     // $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
