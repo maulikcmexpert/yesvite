@@ -647,22 +647,7 @@ class RsvpController extends Controller
                     // dd($creatEventPost);
                 }
                 //     if(!empty($request->input('notifications')) &&$request->input('notifications')[0]=="1"){
-                //         if($request->rsvp_status=="1"){      
-                //             if($sync_id!=""||$sync_id!=null){
-                //                 $updateUser = EventInvitedUser::where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
-                //                 if ($updateUser != null) {
-                //                     $updateUser->notification_on_off = "1";
-                //                     $updateUser->save();
-                //                 }
-
-                //             }else{
-                //                 $updateUser = EventInvitedUser::where(['user_id' => $userId,'is_co_host'=>'0','event_id' => $eventId])->first();
-                //                 if ($updateUser != null) {
-                //                     $updateUser->notification_on_off = "1";
-                //                     $updateUser->save();
-                //                 }
-                //             }
-                //         }
+                     
                 // }
 
                 // if (empty($request->input('notifications'))) {
@@ -709,9 +694,28 @@ class RsvpController extends Controller
                         }
                     }
                     }else{
-                        $updateNotifications = UserNotificationType::where(['user_id' => $userId]);
-                        $updateNotifications->update(['push' => '0']);
+                        $updateUser = EventInvitedUser::where(['user_id' => $userId,'is_co_host'=>'0','event_id' => $eventId])->first();
+                                        if ($updateUser != null) {
+                                            $updateUser->notification_on_off = "0";
+                                            $updateUser->save();
+                                        }
                     }
+            }
+            if($request->rsvp_status=="0"){      
+                if($sync_id!=""||$sync_id!=null){
+                    $updateUser = EventInvitedUser::where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
+                    if ($updateUser != null) {
+                        $updateUser->notification_on_off = "0";
+                        $updateUser->save();
+                    }
+
+                }else{
+                    $updateUser = EventInvitedUser::where(['user_id' => $userId,'is_co_host'=>'0','event_id' => $eventId])->first();
+                    if ($updateUser != null) {
+                        $updateUser->notification_on_off = "0";
+                        $updateUser->save();
+                    }
+                }
             }
 
                 $notificationParam = [
