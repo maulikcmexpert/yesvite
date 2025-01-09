@@ -21,7 +21,7 @@
             $lastname="";
             if(Auth::guard('web')->check()){
                     $userId = Auth::guard('web')->user();
-                    dd($userId);                
+                    // dd($userId);                
             }
     @endphp
 <x-front.advertise />
