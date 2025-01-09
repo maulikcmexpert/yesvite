@@ -156,7 +156,11 @@ $(document).ready(function () {
         const eventTime = $("#eventTime").val();
         const eventEndTime = $("#eventEndTime").val() || "12:00 PM";
         const eventName = $("#eventName").val();
-        
+        console.log({eventDate,
+            eventEndDate,
+            eventTime,
+            eventEndTime,
+            eventName})
         if (!eventDate || !eventTime) {
             alert("Please provide both date and time for the event.");
             return;
