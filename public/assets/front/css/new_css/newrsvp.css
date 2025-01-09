@@ -1055,6 +1055,15 @@ display:none;}
     margin-top: 20px;
 }
 
+.modal.fade .modal-dialog{
+    transform: translate(0, 200px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
