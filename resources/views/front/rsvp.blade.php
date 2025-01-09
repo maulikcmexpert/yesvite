@@ -2150,16 +2150,16 @@
                 const zipCode = "{{ $eventInfo['guest_view']['zip_code'] }}";
 
                 // Check if address1 is not empty
-                let location = "";  // Default location if no address is provided
+                let el = "";  // Default location if no address is provided
 
                 if (address1 && city && state && zipCode) {
-                    location = `${address1} ${city}, ${state} ${zipCode}`;  // Combine the address components
+                    el = `${address1} ${city}, ${state} ${zipCode}`;  // Combine the address components
                 }
 
             const eventDetails = {
                 title: eventName,
                 description: `${eventName} is scheduled on ${eventDate}.`, // Customize the description if needed
-                location:location, // You can customize the location based on input or hardcode
+                location:el, // You can customize the location based on input or hardcode
             };
             console.log({eventDetails})
 
