@@ -714,6 +714,7 @@ display:none;}
     font-size: 16px;
     line-height: 23.8px;
     color: var(--primary-black);
+    word-break: break-all;
 }
 
 .rsvp-guest-user-list-wrp .guest-list-data{
@@ -1115,6 +1116,10 @@ display:none;}
 
 .user-detail .flex-column .host-type{
 
+}
+
+.user-detail .flex-column{
+    position: relative;
 }
 
 /* ====== responsive ======= */
