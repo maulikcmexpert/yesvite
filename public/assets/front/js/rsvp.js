@@ -23,7 +23,7 @@ function applyStyles() {
 applyStyles();
 
 // Apply styles on window resize
-$(window).resize(applyStyles);
+// $(window).resize(applyStyles);
 
 $(document).ready(function () {
     $("#rsvpForm").on("submit", function (e) {
