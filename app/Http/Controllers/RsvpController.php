@@ -709,11 +709,8 @@ class RsvpController extends Controller
                     }
                     
                 }else{
-                    $updateNotification = UserNotificationType::where( ['user_id' => $userId])->get();
-                    if ($updateNotification) {
-                    $updateNotification->push = '0';
-                    $updateNotification->save(); 
-                    }
+                    $updateNotifications = UserNotificationType::where(['user_id' => $userId]);
+                    $updateNotifications->update(['push' => '0']);
                 }
 
                 $notificationParam = [
