@@ -2190,7 +2190,7 @@
 
 
                         // Get the existing <a> tag with class .add-calendar
-            const calendarLink = document.querySelector(".add-calender-ios");
+            const calendarLink = document.querySelector("#openGoogle");
 
             // Set the href attribute to the URL of the .ics file
             calendarLink.href = URL.createObjectURL(icsBlob);
