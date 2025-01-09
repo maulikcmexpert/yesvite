@@ -102,7 +102,11 @@
                                     </ul>
                                 </div>
                                 @endif --}}
-                              
+                                <div class="users-data no-yesvite-data" style="display: none;">
+                                    <div class="md-5">
+                                        <h5>No search result found</h5>
+                                    </div>
+                                </div>
                                 <div class="user-contacts" id="yesviteUser">
                                     @include('front.ajax_contacts', ['yesvite_user' => $yesvite_user])
                                 </div>
