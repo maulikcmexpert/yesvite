@@ -74,9 +74,9 @@
                   <li class="nav-item">
                       <a class="nav-link" href="https://support.yesvite.com">Help Center</a>
                   </li>
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                       <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
-                  </li>
+                  </li> --}}
               </ul>
           </div>
           <div class="footer-bottom d-flex justify-content-between flex-wrap">
