@@ -2099,6 +2099,7 @@ const createICSFile = (start, end, title, description, location) => {
     // Generate the ICS file content
     return calendar.toString();
 };
+alert("downloadLink")
 
 // Example event details
 const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
@@ -2128,12 +2129,13 @@ downloadLink.style.display = "block";
 downloadLink.style.margin = "20px";
 downloadLink.style.color = "blue";
 downloadLink.style.textDecoration = "underline";
-
 $(".author-title").append(
                 `<a href="${URL.createObjectURL(
                     icsBlob
                 )}" download="event.ics">Download Event</a>`
             );
+alert(downloadLink)
+
     </script>
 @endpush
 @endif
