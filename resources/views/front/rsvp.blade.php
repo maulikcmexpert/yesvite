@@ -986,7 +986,7 @@
                                                     </div>
                                                     <a href="javascript:" class="user-detail d-flex ms-3">
                                                         <div class="d-flex align-items-start flex-column tp">
-                                                            <div>
+                                                            <div class="d-flex align-items-center gap-3">
                                                                 <h3>{{$message['contactName']}}</h3> <span class="host-type"></span>
                                                             </div>
                                                             @php
