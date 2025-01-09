@@ -5,6 +5,10 @@ function applyStyles() {
             $(".message-view-box").css("display", "block");
             $(".message-chat-lists").css("display", "none");
         });
+        $(document).on("click", "#backtomsg-btn", function () {
+            $(".message-view-box").css("display", "none");
+            $(".message-chat-lists").css("display", "block");
+        });
         // $(document).on('click','.chat-data',function(){
         //   $(".message-view-box").css("display", "block");
         //   $(".message-chat-lists").css("display", "none");
