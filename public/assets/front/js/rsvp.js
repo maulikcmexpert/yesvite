@@ -30,24 +30,35 @@ $(document).ready(function() {
     //  })
 
     $("#openGoogle").on("click", function () {
-      const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
-      const eventTime = $("#eventTime").val(); // e.g., "10:00"
-      const eventName = $("#eventName").val(); // e.g., "Team Meeting"
-      console.log(eventDate,eventTime,eventName)
-      if (!eventDate || !eventTime || !eventName) {
-          alert("Please fill in all event details.");
-          return;
-      }
+      const eventDetails = {
+        title: "Meeting with Team", // Event title
+        location: "1234 Main St, Anytown, USA", // Event location
+        description: "Discuss project updates and next steps.", // Event description
+        start: "20250110T100000Z", // Start time in UTC format (YYYYMMDDTHHMMSSZ)
+        end: "20250110T110000Z", // End time in UTC format (YYYYMMDDTHHMMSSZ)
+    };
+
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&details=${encodeURIComponent(eventDetails.description)}&location=${encodeURIComponent(eventDetails.location)}&sf=true&output=xml`;
+
+    window.open(googleCalendarUrl, "_blank");
+  //     const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
+  //     const eventTime = $("#eventTime").val(); // e.g., "10:00"
+  //     const eventName = $("#eventName").val(); // e.g., "Team Meeting"
+  //     // console.log()
+  //     if (!eventDate || !eventTime || !eventName) {
+  //         alert("Please fill in all event details.");
+  //         return;
+  //     }
   
-      // Convert the event date and time to Google Calendar format
-      // const eventStart = new Date(`${eventDate}T${eventTime}`).toISOString().replace(/-|:|\.\d+/g, '');
-      // const eventEnd = new Date(new Date(`${eventDate}T${eventTime}`).getTime() + 60 * 60 * 1000).toISOString().replace(/-|:|\.\d+/g, ''); // Add 1 hour to the start time
-  // alert(eventStart);
-      // Google Calendar URL
-      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${eventDate}/${eventDate}&details=&location=&sf=true&output=xml`;
+  //     // Convert the event date and time to Google Calendar format
+  //     // const eventStart = new Date(`${eventDate}T${eventTime}`).toISOString().replace(/-|:|\.\d+/g, '');
+  //     // const eventEnd = new Date(new Date(`${eventDate}T${eventTime}`).getTime() + 60 * 60 * 1000).toISOString().replace(/-|:|\.\d+/g, ''); // Add 1 hour to the start time
+  // // alert(eventStart);
+  //     // Google Calendar URL
+  //     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${eventDate}/${eventDate}&details=&location=&sf=true&output=xml`;
   
-      // Open Google Calendar with the pre-filled event
-      window.open(googleCalendarUrl, "_blank");
+  //     // Open Google Calendar with the pre-filled event
+  //     window.open(googleCalendarUrl, "_blank");
   });
   
 
