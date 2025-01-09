@@ -1,18 +1,18 @@
 function applyStyles() {
-  if ($(window).width() <= 767) {
-      $(".message-view-box").css("display", "none"); 
-      $(document).on('click','.chat-data',function(){
-        $(".message-view-box").css("display", "block"); 
-        $(".message-chat-lists").css("display", "none"); 
-      })
-      // $(document).on('click','.chat-data',function(){
-      //   $(".message-view-box").css("display", "block"); 
-      //   $(".message-chat-lists").css("display", "none"); 
-      // })
-  }
-  //  else {
-  //   // $(".message-view-box").css("display", "block"); 
-  // }
+    if ($(window).width() <= 767) {
+        $(".message-view-box").css("display", "none");
+        $(document).on("click", ".chat-data", function () {
+            $(".message-view-box").css("display", "block");
+            $(".message-chat-lists").css("display", "none");
+        });
+        // $(document).on('click','.chat-data',function(){
+        //   $(".message-view-box").css("display", "block");
+        //   $(".message-chat-lists").css("display", "none");
+        // })
+    }
+    //  else {
+    //   // $(".message-view-box").css("display", "block");
+    // }
 }
 
 // Apply styles on page load
@@ -115,66 +115,68 @@ $(document).ready(function () {
     // });
     $("#openGoogle").on("click", function () {
         const eventDate = $("#eventDate").val();
-const eventEndDate = $("#eventEndDate").val();
-const eventTime = $("#eventTime").val();
-const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
-const eventName = $("#eventName").val();
+        const eventEndDate = $("#eventEndDate").val();
+        const eventTime = $("#eventTime").val();
+        const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
+        const eventName = $("#eventName").val();
 
-if (!eventDate || !eventTime) {
-    alert("Please provide both date and time for the event.");
-    return;
-}
+        if (!eventDate || !eventTime) {
+            alert("Please provide both date and time for the event.");
+            return;
+        }
 
-const convertTo24HourFormat = (time) => {
-    const [hour, minuteWithPeriod] = time.split(":");
-    const [minute, period] = minuteWithPeriod.split(" ");
-    let newHour = parseInt(hour);
-    if (period.toLowerCase() === "pm" && newHour !== 12) {
-        newHour += 12;  // Convert PM time to 24-hour format
-    }
-    if (period.toLowerCase() === "am" && newHour === 12) {
-        newHour = 0;  // Handle 12 AM as midnight
-    }
-    return `${newHour}:${minute}`;
-};
+        const convertTo24HourFormat = (time) => {
+            const [hour, minuteWithPeriod] = time.split(":");
+            const [minute, period] = minuteWithPeriod.split(" ");
+            let newHour = parseInt(hour);
+            if (period.toLowerCase() === "pm" && newHour !== 12) {
+                newHour += 12; // Convert PM time to 24-hour format
+            }
+            if (period.toLowerCase() === "am" && newHour === 12) {
+                newHour = 0; // Handle 12 AM as midnight
+            }
+            return `${newHour}:${minute}`;
+        };
 
-const formattedTime = convertTo24HourFormat(eventTime);
-const formattedEndTime = convertTo24HourFormat(eventEndTime);
-const startDateTime = new Date(`${eventDate}T${formattedTime}:00`);  // ISO format with correct time
+        const formattedTime = convertTo24HourFormat(eventTime);
+        const formattedEndTime = convertTo24HourFormat(eventEndTime);
+        const startDateTime = new Date(`${eventDate}T${formattedTime}:00`); // ISO format with correct time
 
-if (isNaN(startDateTime)) {
-    alert("Invalid start date or time value. Please check the input.");
-    return;
-}
+        if (isNaN(startDateTime)) {
+            alert("Invalid start date or time value. Please check the input.");
+            return;
+        }
 
-let endDateTime;
-if (eventEndDate) {
-    const endDateString = `${eventEndDate}T${formattedEndTime}:00`;
-    const formattedEndDate = new Date(endDateString);
+        let endDateTime;
+        if (eventEndDate) {
+            const endDateString = `${eventEndDate}T${formattedEndTime}:00`;
+            const formattedEndDate = new Date(endDateString);
 
-    if (isNaN(formattedEndDate)) {
-        alert("Invalid end date or time value. Please check the input.");
-        return;
-    }
+            if (isNaN(formattedEndDate)) {
+                alert(
+                    "Invalid end date or time value. Please check the input."
+                );
+                return;
+            }
 
-    endDateTime = formattedEndDate;
-} else {
-    endDateTime = new Date(startDateTime);
-    endDateTime.setHours(endDateTime.getHours() + 1);  // Default to 1 hour duration if no end date is provided
-}
+            endDateTime = formattedEndDate;
+        } else {
+            endDateTime = new Date(startDateTime);
+            endDateTime.setHours(endDateTime.getHours() + 1); // Default to 1 hour duration if no end date is provided
+        }
 
-// Convert to Google Calendar format (without dashes, colons, and milliseconds)
-const formatToGoogleCalendar = (date) => {
-    return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
-};
+        // Convert to Google Calendar format (without dashes, colons, and milliseconds)
+        const formatToGoogleCalendar = (date) => {
+            return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
+        };
 
-const eventDetails = {
-    title: eventName || "Meeting with Team",
-    start: formatToGoogleCalendar(startDateTime),
-    end: formatToGoogleCalendar(endDateTime),
-};
+        const eventDetails = {
+            title: eventName || "Meeting with Team",
+            start: formatToGoogleCalendar(startDateTime),
+            end: formatToGoogleCalendar(endDateTime),
+        };
 
-console.log(eventDetails); 
+        console.log(eventDetails);
 
         // Platform-specific calendar opening code (Android / iOS)
         const isAndroid = /Android/i.test(navigator.userAgent);
@@ -190,47 +192,64 @@ console.log(eventDetails);
 
             window.open(googleCalendarUrl);
         } else if (isIOS) {
-            alert("ios");
-            // iOS: Generate ICS file for the event
-            const generateICSFile = (
+            const createICSFile = (
                 start,
                 end,
                 title,
                 description,
                 location
             ) => {
-                const formatDate = (date) =>
-                    date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-                const startDate = formatDate(start);
-                const endDate = formatDate(end);
+                // Create a new calendar object
+                const calendar = new ICAL.Component(["vcalendar", [], []]);
 
-                return `
-            BEGIN:VCALENDAR
-            VERSION:2.0
-            PRODID:-//Your Company//Your App//EN
-            BEGIN:VEVENT
-            UID:${Date.now()}@yourdomain.com
-            DTSTAMP:${formatDate(new Date())}
-            SUMMARY:${title}
-            DTSTART:${startDate}
-            DTEND:${endDate}
-            DESCRIPTION:${description}
-            LOCATION:${location}
-            END:VEVENT
-            END:VCALENDAR
-                `.trim();
+                // Add calendar metadata
+                calendar.updatePropertyWithValue("version", "2.0");
+                calendar.updatePropertyWithValue(
+                    "prodid",
+                    "-//Your Company//Your App//EN"
+                );
+
+                // Create an event component
+                const event = new ICAL.Component("vevent");
+
+                // Convert JavaScript Date objects to iCalendar format
+                const startICAL = ICAL.Time.fromJSDate(start, true); // UTC
+                const endICAL = ICAL.Time.fromJSDate(end, true);
+
+                // Add event details
+                event.addPropertyWithValue(
+                    "uid",
+                    `${Date.now()}@yourdomain.com`
+                );
+                event.addPropertyWithValue(
+                    "dtstamp",
+                    ICAL.Time.now().toString()
+                );
+                event.addPropertyWithValue("dtstart", startICAL.toString());
+                event.addPropertyWithValue("dtend", endICAL.toString());
+                event.addPropertyWithValue("summary", title);
+                event.addPropertyWithValue("description", description);
+                event.addPropertyWithValue("location", location);
+
+                // Add the event to the calendar
+                calendar.addSubcomponent(event);
+
+                // Generate the ICS file content
+                return calendar.toString();
             };
 
             // Example event details
-            const startDateTime = new Date("2025-01-15T10:00:00"); // Replace with your start date
-            const endDateTime = new Date("2025-01-15T12:00:00"); // Replace with your end date
+            const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
+            const endDateTime = new Date("2025-01-15T12:00:00Z"); // Ensure valid Date object
             const eventDetails = {
                 title: "Sample Event",
-                description: "This is a sample event description.",
+                description:
+                    "This is a sample event description.\nIncludes multiple lines.",
                 location: "123 Main Street, City",
             };
 
-            const icsData = generateICSFile(
+            // Generate the ICS file
+            const icsData = createICSFile(
                 startDateTime,
                 endDateTime,
                 eventDetails.title,
@@ -238,27 +257,21 @@ console.log(eventDetails);
                 eventDetails.location
             );
 
-            const icsBlob = new Blob([icsData], { type: "text/calendar" });
+            // Create a downloadable link
+            const icsBlob = new Blob([icsData], {
+                type: "text/calendar;charset=utf-8",
+            });
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(icsBlob);
             downloadLink.download = "event.ics";
-            downloadLink.textContent = "Download Event";
+            downloadLink.textContent = "Download Event (.ics)";
             downloadLink.style.display = "block";
             downloadLink.style.margin = "20px";
             downloadLink.style.color = "blue";
             downloadLink.style.textDecoration = "underline";
-            $(".author-title").append(
-                `<a href="${URL.createObjectURL(
-                    icsBlob
-                )}" download="event.ics">Download Event</a>`
-            );
-            // Append and click the download link
             document.body.appendChild(downloadLink);
             downloadLink.click();
-            alert("no err");
-            alert(downloadLink);
-
-            // document.body.removeChild(downloadLink);
+            document.body.removeChild(downloadLink);
         } else {
             // Default to Google Calendar URL
             const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
@@ -499,6 +512,3 @@ $(document).on("click", ".direction-btn", function () {
 // });
 
 //   initMap();
-
-
-
