@@ -9,9 +9,10 @@ function applyStyles() {
       //   $(".message-view-box").css("display", "block"); 
       //   $(".message-chat-lists").css("display", "none"); 
       // })
-  } else {
-    $(".message-view-box").css("display", "block"); 
   }
+  //  else {
+  //   // $(".message-view-box").css("display", "block"); 
+  // }
 }
 
 // Apply styles on page load
