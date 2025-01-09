@@ -1118,7 +1118,13 @@ display:none;}
     position: relative;
 }
 
-.backtomsg-btn
+.backtomsg-btn{
+    width: 100%;
+    max-width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+}
 
 
 
