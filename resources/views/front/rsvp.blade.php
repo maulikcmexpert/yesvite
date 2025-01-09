@@ -2159,7 +2159,7 @@
             const eventDetails = {
                 title: eventName,
                 description: `${eventName} is scheduled on ${eventDate}.`, // Customize the description if needed
-                location, // You can customize the location based on input or hardcode
+                location:location, // You can customize the location based on input or hardcode
             };
             console.log({eventDetails})
 
