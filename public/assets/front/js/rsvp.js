@@ -62,6 +62,7 @@ $(document).ready(function () {
           // Check the provided end date and end time
           console.log("eventEndDate:", eventEndDate);
           console.log("formattedEndTime:", formattedEndTime);
+          console.log("formattedEndTime:", formattedEndTime);
           
           // Combine eventEndDate and eventEndTime to form the end date string
           const endDateString = `${eventEndDate}T${formattedEndTime}:00Z`;

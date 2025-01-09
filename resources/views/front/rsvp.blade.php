@@ -146,7 +146,7 @@
                                                  {{-- <h3>8:00 to 10:00PM</h3> --}}
                                                  <h3>{{ $eventInfo['guest_view']['event_time'] }} {{$final_end_time}}</h3>
                                              </div>
-                                             <input type="hidden" id="eventEndTime" name="eventEndTime" value="{{$final_end_time}}">
+                                             <input type="hidden" id="eventEndTime" name="eventEndTime" value="{{(isset($eventInfo['guest_view']['event_end_time']) && $eventInfo['guest_view']['event_end_time']!=""?$eventInfo['guest_view']['event_end_time']:'' )}}">
                                              </div>
                                          </div>
                                          <a href="#" id="openGoogle" class="add-calender btn">Add to calendar 
