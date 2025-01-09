@@ -683,26 +683,28 @@ class RsvpController extends Controller
                 //     }
                 // }
 
-                if(!empty($request->input('notifications'))){
-                    foreach ($request->input('notifications') as $value) {
-                        if ($value == "1") {
-                         $updateNotifications = UserNotificationType::where('user_id', $userId);
-                         $updateNotifications->update(['push' => '1']);
-                        } elseif ($value == "wall_post") {
-                            $updateNotification = UserNotificationType::where(['type' => 'wall_post', 'user_id' => $userId]);
-                            $updateNotification->update(['push' => '1']);
+                if ($userId != "" || $userId != null) {
+                    if(!empty($request->input('notifications'))){
+                        foreach ($request->input('notifications') as $value) {
+                            if ($value == "1") {
+                            $updateNotifications = UserNotificationType::where('user_id', $userId);
+                            $updateNotifications->update(['push' => '1']);
+                            } elseif ($value == "wall_post") {
+                                $updateNotification = UserNotificationType::where(['type' => 'wall_post', 'user_id' => $userId]);
+                                $updateNotification->update(['push' => '1']);
 
-                        } elseif ($value == "guest_rsvp") {
-                            $updateNotification = UserNotificationType::where(['type' => 'guest_rsvp', 'user_id' => $userId]);
-                            $updateNotification->update(['push' => '1']);
+                            } elseif ($value == "guest_rsvp") {
+                                $updateNotification = UserNotificationType::where(['type' => 'guest_rsvp', 'user_id' => $userId]);
+                                $updateNotification->update(['push' => '1']);
 
+                            }
                         }
+                        
+                    }else{
+                        $updateNotifications = UserNotificationType::where(['user_id' => $userId]);
+                        $updateNotifications->update(['push' => '0']);
                     }
-                    
-                }else{
-                    $updateNotifications = UserNotificationType::where(['user_id' => $userId]);
-                    $updateNotifications->update(['push' => '0']);
-                }
+            }
 
                 $notificationParam = [
 
