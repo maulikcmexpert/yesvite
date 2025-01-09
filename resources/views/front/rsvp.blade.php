@@ -1123,7 +1123,7 @@
                                     <div class="msg-head">
                                         <div class="row">
                                             <div class="col-lg-8 col-7">
-                                                <a href="javascript:;" class="d-flex align-items-center conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
+                                                <a href="javascript:;" class="d-flex conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
                                                     <button id="backtomsg-btn">
                                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M10.07 5.92969L4 11.9997L10.07 18.0697" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2100,17 +2100,24 @@
                 return calendar.toString();
             };
 
-            // Example event details
-            const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
-            const endDateTime = new Date("2025-01-15T12:00:00Z"); // Ensure valid Date object
+                    // Get event details from the form (using vanilla JS)
+            const eventDate = document.querySelector("#eventDate").value;
+            const eventEndDate = document.querySelector("#eventEndDate").value;
+            const eventTime = document.querySelector("#eventTime").value;
+            const eventEndTime = document.querySelector("#eventEndTime").value || "12:00 PM"; // Default value if end time is empty
+            const eventName = document.querySelector("#eventName").value;
+
+            // Convert eventDate and eventEndDate to Date objects
+            const startDateTime = new Date(`${eventDate}T${eventTime}`); // Ensure the time and date are correctly combined
+            const endDateTime = new Date(`${eventEndDate}T${eventEndTime}`); // Ensure the time and date are correctly combined
+
             const eventDetails = {
-                title: "Sample Event",
-                description:
-                    "This is a sample event description.\nIncludes multiple lines.",
-                location: "123 Main Street, City",
+                title: eventName,
+                description: `This is an event scheduled on ${eventDate}.\nIncludes multiple lines.`, // Customize the description if needed
+                location: "Event location goes here", // You can customize the location based on input or hardcode
             };
 
-            // Generate the ICS file
+            // Generate the ICS file using the extracted details
             const icsData = createICSFile(
                 startDateTime,
                 endDateTime,
@@ -2141,6 +2148,7 @@
 
             // Set the href attribute to the URL of the .ics file
             calendarLink.href = URL.createObjectURL(icsBlob);
+            calendarLink.download = URL.createObjectURL(icsBlob);
 
 </script>
 @if ($userId!=0)
