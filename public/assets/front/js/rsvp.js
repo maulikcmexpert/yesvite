@@ -44,10 +44,9 @@ $(document).ready(function() {
   //   window.open(googleCalendarUrl, "_blank");
  
   // });
-  
   $("#openGoogle").on("click", function () {
     const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
-    const eventTime = $("#eventTime").val(); // e.g., "10:00"
+    const eventTime = $("#eventTime").val(); // e.g., "10:00 AM"
     const eventName = $("#eventName").val(); // e.g., "Team Meeting"
 
     if (!eventDate || !eventTime) {
@@ -55,8 +54,31 @@ $(document).ready(function() {
         return;
     }
 
-    // Combine date and time for the start time
-    const startDateTime = new Date(`${eventDate}T${eventTime}:00Z`);
+    // Convert the event time to a 24-hour format
+    const convertTo24HourFormat = (time) => {
+        const [hour, minuteWithPeriod] = time.split(":");
+        const [minute, period] = minuteWithPeriod.split(" ");
+        let newHour = parseInt(hour);
+        if (period.toLowerCase() === "pm" && newHour !== 12) {
+            newHour += 12;
+        }
+        if (period.toLowerCase() === "am" && newHour === 12) {
+            newHour = 0;
+        }
+        return `${newHour}:${minute}`;
+    };
+
+    // Convert the event time to 24-hour format
+    const formattedTime = convertTo24HourFormat(eventTime);
+
+    // Combine date and time for the start time (use UTC format)
+    const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
+
+    // Check if startDateTime is valid
+    if (isNaN(startDateTime)) {
+        alert("Invalid date or time value. Please check the input.");
+        return;
+    }
 
     // Set the end time (e.g., 1 hour later)
     const endDateTime = new Date(startDateTime);
@@ -66,12 +88,12 @@ $(document).ready(function() {
     const formatToGoogleCalendar = (date) => {
         return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
     };
+
     const eventDetails = {
-      title: eventName || "Meeting with Team", // Event title
-      start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-      end: formatToGoogleCalendar(endDateTime), // End time in UTC format
+        title: eventName || "Meeting with Team", // Event title
+        start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
+        end: formatToGoogleCalendar(endDateTime), // End time in UTC format
     };
-    console.log(eventDetails)
 
     // Construct Google Calendar URL
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
@@ -79,6 +101,7 @@ $(document).ready(function() {
     // Open the URL in a new tab
     window.open(googleCalendarUrl, "_blank");
 });
+
 
     function toggleGuestCount() {
         const isNoSelected = $('#no').is(':checked');
