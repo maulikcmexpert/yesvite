@@ -71,9 +71,7 @@ $(document).ready(function() {
       start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
       end: formatToGoogleCalendar(endDateTime), // End time in UTC format
     };
-    console.log({eventDate,
-      eventTime,
-      eventName})
+    console.log(eventDetails)
 
     // Construct Google Calendar URL
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
