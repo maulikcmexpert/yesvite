@@ -2182,7 +2182,7 @@
             const calendarLink = document.querySelector(".add-calender");
 
             // Set the href attribute to the URL of the .ics file
-            calendarLink.ios-href = URL.createObjectURL(icsBlob);
+            calendarLink.ios_href = URL.createObjectURL(icsBlob);
             calendarLink.download = "event.ics";
 
 </script>
