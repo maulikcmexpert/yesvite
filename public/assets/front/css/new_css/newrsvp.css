@@ -1064,11 +1064,8 @@ display:none;}
 }
 
 
-.rsvp-yes-modal input, .rsvp-yes-modal textarea, .rsvp-yes-modal select{
-    touch-action: manipulation !important;
-  -webkit-user-select: none !important;
-  -ms-touch-action: manipulation !important;
-
+body{
+    font-size: 20PX I !important;
 }
 
 /* ====== responsive ======= */
