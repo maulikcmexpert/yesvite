@@ -98,6 +98,7 @@
                                 <option value="MST" {{($start_time_zone == 'MST')?'selected':''}}>MST</option>
                                 <option value="CST" {{($start_time_zone == 'CST')?'selected':''}}>CST</option>
                                 <option value="EST" {{($start_time_zone == 'EST')?'selected':''}}>EST</option>
+                                <option value="EST" {{($start_time_zone == 'EST')?'selected':''}}>GMT+05:30</option>
                             </select>
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label floatingfocus">Time
