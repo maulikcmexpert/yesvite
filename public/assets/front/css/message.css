@@ -208,13 +208,13 @@ ul.chat-list li:hover {
     background-color: #F8F9FD !important;
 }
 
-/* ul.chat-list li:last-child {
-    border-bottom: 0;
-} */
-
-ul.chat-list div:last-child li{
+ul.chat-list div li:last-child {
     border-bottom: 0;
 }
+ul.chat-list div:last-child li {
+    border-bottom: 0;
+}
+
 
 
 .chat-list .user-img .active {
