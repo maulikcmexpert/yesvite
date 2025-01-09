@@ -151,70 +151,33 @@ $(document).ready(function () {
         //     start: formatToGoogleCalendar(startDateTime),
         //     end: formatToGoogleCalendar(endDateTime),
         // };
-        const eventDate = $("#eventDate").val();
-        const eventEndDate = $("#eventEndDate").val();
-        const eventTime = $("#eventTime").val();
-        const eventEndTime = $("#eventEndTime").val() || "12:00 PM";
-        const eventName = $("#eventName").val();
-        
-        if (!eventDate || !eventTime) {
-            alert("Please provide both date and time for the event.");
-            return;
-        }
-        
-        const convertTo24HourFormat = (time) => {
-            const [hour, minuteWithPeriod] = time.split(":");
-            const [minute, period] = minuteWithPeriod.trim().split(" ");
-            let newHour = parseInt(hour, 10);
-            if (period.toLowerCase() === "pm" && newHour !== 12) {
-                newHour += 12;
-            }
-            if (period.toLowerCase() === "am" && newHour === 12) {
-                newHour = 0;
-            }
-            return `${newHour.toString().padStart(2, "0")}:${minute}`;
-        };
-        
-        const formattedTime = convertTo24HourFormat(eventTime);
-        const formattedEndTime = convertTo24HourFormat(eventEndTime);
-        console.log("Formatted Start Time: ", formattedTime);
-        console.log("Formatted End Time: ", formattedEndTime);
-        
-        const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
-        
-        if (isNaN(startDateTime)) {
-            alert("Invalid start date or time value. Please check the input.");
-            return;
-        }
-        
-        let endDateTime;
-        if (eventEndDate) {
-            const endDateString = `${eventEndDate}T${formattedEndTime}:00Z`;
-            const formattedEndDate = new Date(endDateString);
-        
-            if (isNaN(formattedEndDate)) {
-                alert("Invalid end date or time value. Please check the input.");
-                return;
-            }
-        
-            endDateTime = formattedEndDate;
-        } else {
-            // Set the default duration to 1 hour if no end date is provided
-            endDateTime = new Date(startDateTime);
-            endDateTime.setHours(endDateTime.getHours() + 1);
-        }
-        
-        const formatToGoogleCalendar = (date) => {
-            // Ensure it's in UTC format for Google Calendar
-            return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
-        };
-        
-        const eventDetails = {
-            title: eventName || "Meeting with Team",
-            start: formatToGoogleCalendar(startDateTime),
-            end: formatToGoogleCalendar(endDateTime),
-        };
-        
+        // Example event data
+const event = {
+    eventDate: '2025-01-11',
+    eventEndDate: '2025-01-12',
+    eventTime: '12:00 PM',
+    eventEndTime: '01:00 PM',
+    eventName: 'test event'
+  };
+  
+  // Function to format the time in ISO 8601 format with timezone offset
+  function formatEventTime(date, time) {
+    const dateTime = new Date(`${date} ${time}`);
+    const timeZoneOffset = dateTime.getTimezoneOffset() / 60; // Offset in hours
+    const isoString = dateTime.toISOString().replace('Z', `+${Math.abs(timeZoneOffset)}:00`);
+    return isoString;
+  }
+  
+  // Format start and end times
+  const formattedStartTime = formatEventTime(event.eventDate, event.eventTime); // Example: 2025-01-11T12:00:00+05:30
+  const formattedEndTime = formatEventTime(event.eventEndDate, event.eventEndTime); // Example: 2025-01-12T13:00:00+05:30
+  
+  // Event object with properly formatted start and end times
+  const eventDetails = {
+    title: event.eventName,
+    start: formattedStartTime,
+    end: formattedEndTime
+  };
         console.log(eventDetails);
         // Platform-specific calendar opening code (Android / iOS)
         const isAndroid = /Android/i.test(navigator.userAgent);
