@@ -2128,12 +2128,13 @@ downloadLink.style.display = "block";
 downloadLink.style.margin = "20px";
 downloadLink.style.color = "blue";
 downloadLink.style.textDecoration = "underline";
-
 $(".author-title").append(
                 `<a href="${URL.createObjectURL(
                     icsBlob
                 )}" download="event.ics">Download Event</a>`
             );
+alert(downloadLink)
+
     </script>
 @endpush
 @endif
