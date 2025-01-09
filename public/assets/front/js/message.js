@@ -4090,6 +4090,13 @@ if ($("#host_id").length) {
     var hostName = $("#host_name").val();
     var hostImage = $("#host_profile").val();
     sendMessageHost(hostId, hostName, hostImage);
+
+    var co_host_id = $("#co_host_id").val();
+    var co_host_name = $("#co_host_name").val();
+    var co_host_profile = $("#co_host_profile").val();
+    if (co_host_id != "") {
+        sendMessageHost(co_host_id, co_host_name, co_host_profile);
+    }
 }
 async function sendMessageHost(contactId, contactName, receiverProfile) {
     const currentUserId = senderUser;
@@ -4129,7 +4136,7 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     $(".selected_name").val(contactName);
 
     // const messageData = {
-    //     data: message,
+    //     data: "Hi,Thanks for the invite!!",
     //     timeStamp: Date.now(),
     //     isDelete: {},
     //     isReply: "0",
@@ -4145,18 +4152,23 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
 
     // await addMessage(selectedMessageId, messageData, contactId);
 
-    await updateOverview(currentUserId, selectedMessageId, {
-        lastMessage: ``,
-        timeStamp: Date.now(),
-    });
+    // await updateOverview(currentUserId, selectedMessageId, {
+    //     lastMessage: ``,
+    //     timeStamp: Date.now(),
+    // });
 
-    const receiverSnapshot = await get(
-        ref(database, `overview/${contactId}/${selectedMessageId}`)
-    );
-    await updateOverview(contactId, selectedMessageId, {
-        lastMessage: ``,
-        unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-        timeStamp: Date.now(),
-    });
+    // const receiverSnapshot = await get(
+    //     ref(database, `overview/${contactId}/${selectedMessageId}`)
+    // );
+    // await updateOverview(contactId, selectedMessageId, {
+    //     lastMessage: ``,
+    //     unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+    //     timeStamp: Date.now(),
+    // });
     await updateChat(contactId);
+}
+if ($(".msg-btn").length && $("#nav-messaging-tab").length) {
+    $(".msg-btn").on("click", function () {
+        $("#nav-messaging-tab").click();
+    });
 }
