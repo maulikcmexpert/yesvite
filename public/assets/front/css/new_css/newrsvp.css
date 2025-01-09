@@ -1317,7 +1317,7 @@ display:none;}
 
 
 .rsvp-yes-modal .modal-body{
-    max-height: 450px;
+    max-height: 41.67vh;
     overflow: hidden;
     overflow-y: scroll;
 }
