@@ -142,7 +142,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $("#loader").hide();
-                    $("#yesviteUser").html("No search result found")
+                    $(".no-yesvite-data").css("display","block")
 
                     return;
                 }

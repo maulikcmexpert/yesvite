@@ -172,6 +172,7 @@ class RsvpController extends Controller
             $eventDetails['event_date'] = $eventDetail->start_date;
             $eventDetails['event_end_date'] = ($eventDetail->end_date!="")?$eventDetail->end_date:"";
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+            $eventDetails['host_id'] = $eventDetail->user_id;
             $eventDetails['event_end_time'] = ($eventDetail->rsvp_end_time!="")?$eventDetail->rsvp_end_time:"";
 
             // if ($eventDetail->event_schedule->isNotEmpty()) {

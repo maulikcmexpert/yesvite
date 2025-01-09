@@ -1,7 +1,13 @@
     {{-- {{dd($rsvp_status);}} --}}
     @php
     use Carbon\Carbon;
-@endphp
+            $host_id=$eventInfo['guest_view']['host_id'];
+            $co_host_id="";
+            if(!empty($eventInfo['guest_view']['co_hosts'])){
+                $coHost = $eventInfo['guest_view']['co_hosts'][0];
+                $co_host_id=$coHost['id'];
+            }
+    @endphp
 <x-front.advertise />
 <section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
@@ -776,6 +782,8 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="host_id" class="host_id" value="{{$host_id}}"/>
+            <input type="hidden" id="co_host_id" class="co_host_id" value="{{$co_host_id}}"/>
             <div class="tab-pane fade" id="nav-messaging" role="tabpanel" aria-labelledby="nav-messaging-tab">
                 @if($rsvp_status==""||$rsvp_status==null)
                     <div class="rsvp-no-msg-wrp">
