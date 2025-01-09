@@ -31,7 +31,6 @@
             @endif
             @php
                 $userId = 0;
-                $userName = "";
                 if(Auth::guard('web')->check()){
                     $userId = Auth::guard('web')->user()->id;                    
                 }
