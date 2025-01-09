@@ -1,6 +1,5 @@
 function applyStyles() {
   if ($(window).width() <= 767) {
-    alert();
       $(".message-view-box").css("display", "none"); 
       $(document).on('click','.chat-data',function(){
         $(".message-view-box").css("display", "block"); 
