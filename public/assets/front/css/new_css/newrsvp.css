@@ -1063,9 +1063,16 @@ display:none;}
     transform: none;
 }
 
-.modal.cmn-modal .input-form input{
-    font-size: 20px !important;
+.rsvp-yes-modal input,.rsvp-yes-modal select,.rsvp-yes-modal textarea{
+    font-size: 16px !important;
 }
+
+.rsvp-no-modal input,.rsvp-no-modal select,.rsvp-no-modal textarea{
+    font-size: 16px !important;
+}
+
+
+
 
 
 
