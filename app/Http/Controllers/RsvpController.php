@@ -13,7 +13,7 @@ use App\Models\{
     EventPostImage,
     EventSetting,
     User,
-    UserNotificationTypes
+    UserNotificationType
 };
 use Auth;
 use App\Models\contact_sync;
@@ -667,22 +667,44 @@ class RsvpController extends Controller
                 //         }
                 // }
 
-                if (empty($request->input('notifications'))) {
-                    if ($sync_id != "" || $sync_id != null) {
-                        $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
-                    } else {
-                        $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                            $query->where('app_user', '1');
-                        })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+                // if (empty($request->input('notifications'))) {
+                //     if ($sync_id != "" || $sync_id != null) {
+                //         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+                //     } else {
+                //         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                //             $query->where('app_user', '1');
+                //         })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
 
+                //     }
+
+                //     // $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
+                //     if ($rsvpSent != null) {
+                //         $rsvpSent->notification_on_off = '0';
+                //         $rsvpSent->save();
+                //     }
+                // }
+
+                if(!empty($request->input('notifications'))){
+                    foreach ($request->input('notifications') as $value) {
+                        if($value=="1"){
+                            $updateNotification = UserNotificationType::where( ['user_id' => $userId])->get();
+                            $updateNotification->push = '1';
+                            $updateNotification->save(); 
+                        }elseif($value=="wall_post"){
+                            $updateNotification = UserNotificationType::where(['type' => 'wall_post', 'user_id' => $userId])->first();
+                            $updateNotification->push = '1';
+                            $updateNotification->save();
+                        }elseif($value="guest_rsvp"){
+                            $updateNotification = UserNotificationType::where(['type' => 'guest_rsvp', 'user_id' => $userId])->first();
+                            $updateNotification->push = '1';
+                            $updateNotification->save();
+                        }
                     }
-
-                    // $updateUser = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id])->first();
-                    if ($rsvpSent != null) {
-                        $rsvpSent->notification_on_off = '0';
-                        $rsvpSent->save();
-                    }
+                }else{
+                    $updateNotification = UserNotificationType::where( ['user_id' => $userId])->get();
+                    $updateNotification->push = '0';
+                    $updateNotification->save(); 
                 }
 
                 $notificationParam = [
