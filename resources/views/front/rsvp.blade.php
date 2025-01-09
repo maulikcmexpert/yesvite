@@ -1,6 +1,6 @@
     {{-- {{dd($rsvp_status);}} --}}
     @php
-    use Carbon\Carbon;
+        use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
             $host_name=$eventInfo['guest_view']['hosted_by'];
             $host_profile=$eventInfo['guest_view']['user_profile'];
@@ -12,7 +12,7 @@
                 $coHost = $eventInfo['guest_view']['co_hosts'][0];
                 $co_host_id=$coHost['id'];
                 $co_host_name=$coHost['name'];
-                $co_host_profile=$coHost['profile']
+                $co_host_profile=$coHost['profile'];
             }
     @endphp
 <x-front.advertise />
