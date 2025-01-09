@@ -161,7 +161,7 @@ $(document).ready(function () {
 
           window.location = androidCalendarUrl;
       } else if (isIOS) {
-        alert();
+        alert();  
           // iOS: Generate ICS file for the event
           const generateICSFile = (start, end, title) => {
               const startDate = start.toISOString().replace(/-|:|\.\d+/g, '');
