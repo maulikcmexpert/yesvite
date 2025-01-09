@@ -1109,6 +1109,7 @@ display:none;}
     color: var(--green);
     border-radius: 100px;
     padding: 5px 8px;
+    max-width: auto !important;
 }
 
 /* ====== responsive ======= */
