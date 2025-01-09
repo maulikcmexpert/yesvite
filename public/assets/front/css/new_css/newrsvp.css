@@ -1109,7 +1109,7 @@ display:none;}
     color: var(--green) !important;
     border-radius: 100px !important;
     padding: 5px 8px !important;
-    max-width: auto !important;
+    max-width: max-content !important;
 }
 
 /* ====== responsive ======= */
