@@ -66,7 +66,9 @@ $(document).ready(function() {
     const formatToGoogleCalendar = (date) => {
         return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
     };
-
+console.log({eventDate,
+  eventTime,
+  eventName})
     const eventDetails = {
         title: eventName || "Meeting with Team", // Event title
         start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
