@@ -72,7 +72,7 @@ $(document).ready(function() {
 
     // Convert the event time to 24-hour format
     const formattedTime = convertTo24HourFormat(eventTime);
-
+console.log({eventDate,eventTime});
     // Combine date and time for the start time (use UTC format)
     const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
 
@@ -91,6 +91,7 @@ $(document).ready(function() {
         title: eventName || "Meeting with Team", // Event title
         start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
     };
+
 
     // Construct Google Calendar URL with only the start time
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}&sf=true&output=xml`;
