@@ -16,12 +16,13 @@ $(document).ready(function () {
             return;
         }
     });
+  
     $("#openGoogle").on("click", function () {
-      const eventDate = $("#eventDate").val(); 
-      const eventEndDate = $("#eventEndDate").val();
-      const eventTime = $("#eventTime").val(); 
+      const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
+      const eventEndDate = $("#eventEndDate").val(); // e.g., "2025-01-10"
+      const eventTime = $("#eventTime").val(); // e.g., "10:00 AM"
       const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default to "12:00 PM" if not provided
-      const eventName = $("#eventName").val(); 
+      const eventName = $("#eventName").val(); // e.g., "Team Meeting"
   
       if (!eventDate || !eventTime) {
           alert("Please provide both date and time for the event.");
@@ -51,24 +52,34 @@ $(document).ready(function () {
   
       // Check if startDateTime is valid
       if (isNaN(startDateTime)) {
-          alert("Invalid date or time value. Please check the input.");
+          alert("Invalid start date or time value. Please check the input.");
           return;
       }
   
       // Set the end time (if eventEndDate is provided, use it; otherwise, use eventEndTime)
       let endDateTime;
       if (eventEndDate) {
-          // Use the provided end date with the end time
-          const formattedEndDate = new Date(`${eventEndDate}T${formattedEndTime}:00Z`);
+          // Check the provided end date and end time
+          console.log("eventEndDate:", eventEndDate);
+          console.log("formattedEndTime:", formattedEndTime);
+          
+          // Combine eventEndDate and eventEndTime to form the end date string
+          const endDateString = `${eventEndDate}T${formattedEndTime}:00Z`;
+  
+          // Create a new Date object from the combined end date and time
+          const formattedEndDate = new Date(endDateString);
+  
+          // Check if the formatted end date is valid
           if (isNaN(formattedEndDate)) {
               alert("Invalid end date or time value. Please check the input.");
               return;
           }
+  
           endDateTime = formattedEndDate;
       } else {
-          // Default to 12:00 PM if no end date is provided, or 1 hour after start time if no specific time is provided
+          // Default end time logic if no end date is provided (1 hour after start time)
           endDateTime = new Date(startDateTime);
-          endDateTime.setHours(endDateTime.getHours() + 1);
+          endDateTime.setHours(endDateTime.getHours() + 1); // Set default 1 hour after the start time
       }
   
       // Format the dates for Google Calendar
