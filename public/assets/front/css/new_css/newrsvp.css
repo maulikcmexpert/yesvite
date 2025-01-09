@@ -20,6 +20,7 @@
 .rsvp-slider .rsvp-img{
     border-radius: 10px;
     height: 650px;
+    border: 1px solid var(--border);
 }
 .rsvp-slider .rsvp-img img{
     border-radius: 10px;
@@ -1135,7 +1136,7 @@ display:none;}
 
     .rsvp-wrp .rsvp-slider{
         padding: 15px;
-        border: none;
+        /* border: none; */
     }
 
     .rsvp-form .author-title h4{
