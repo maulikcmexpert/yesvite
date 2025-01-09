@@ -4129,7 +4129,7 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     $(".selected_name").val(contactName);
 
     // const messageData = {
-    //     data: message,
+    //     data: "Hi,Thanks for the invite!!",
     //     timeStamp: Date.now(),
     //     isDelete: {},
     //     isReply: "0",
@@ -4145,18 +4145,18 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
 
     // await addMessage(selectedMessageId, messageData, contactId);
 
-    await updateOverview(currentUserId, selectedMessageId, {
-        lastMessage: ``,
-        timeStamp: Date.now(),
-    });
+    // await updateOverview(currentUserId, selectedMessageId, {
+    //     lastMessage: ``,
+    //     timeStamp: Date.now(),
+    // });
 
-    const receiverSnapshot = await get(
-        ref(database, `overview/${contactId}/${selectedMessageId}`)
-    );
-    await updateOverview(contactId, selectedMessageId, {
-        lastMessage: ``,
-        unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-        timeStamp: Date.now(),
-    });
+    // const receiverSnapshot = await get(
+    //     ref(database, `overview/${contactId}/${selectedMessageId}`)
+    // );
+    // await updateOverview(contactId, selectedMessageId, {
+    //     lastMessage: ``,
+    //     unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+    //     timeStamp: Date.now(),
+    // });
     await updateChat(contactId);
 }
