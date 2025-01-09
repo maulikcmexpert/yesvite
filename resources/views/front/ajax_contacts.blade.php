@@ -15,6 +15,11 @@
                 $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
             }
             @endphp
+        <div class="users-data"class="d-none">
+            <div class="md-5">
+                <h5>No Records Found..</h5>
+            </div>
+        </div>
         <div class="users-data">
             <div class="d-flex align-items-start">  
                 <div class="contact-img">
