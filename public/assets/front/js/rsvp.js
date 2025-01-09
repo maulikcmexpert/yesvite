@@ -33,7 +33,7 @@ $(document).ready(function() {
       const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
       const eventTime = $("#eventTime").val(); // e.g., "10:00"
       const eventName = $("#eventName").val(); // e.g., "Team Meeting"
-      
+      console.log(eventDate,eventTime,eventName)
       if (!eventDate || !eventTime || !eventName) {
           alert("Please fill in all event details.");
           return;
