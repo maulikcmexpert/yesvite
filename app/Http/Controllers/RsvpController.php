@@ -148,7 +148,6 @@ class RsvpController extends Controller
 
         $event_id =  decrypt($eventId);
         $user_id = decrypt($userId);
-        dd($user_id);
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
@@ -568,7 +567,7 @@ class RsvpController extends Controller
         // dd($request);
 
         $userId = decrypt($request->user_id);
-        // dd($userId);
+        dd($userId);
         $eventId = decrypt($request->event_id);
         if ($request->input('sync_id') != "") {
             $sync_id = decrypt($request->input('sync_id'));
