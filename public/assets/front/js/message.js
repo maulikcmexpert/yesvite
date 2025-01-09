@@ -4145,17 +4145,17 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     // await addMessage(selectedMessageId, messageData, contactId);
 
     await updateOverview(currentUserId, selectedMessageId, {
-        lastMessage: `${senderUserName}: ${message}`,
+        lastMessage: ``,
         timeStamp: Date.now(),
     });
 
-    const receiverSnapshot = await get(
-        ref(database, `overview/${contactId}/${selectedMessageId}`)
-    );
-    await updateOverview(contactId, selectedMessageId, {
-        lastMessage: `${senderUserName}: ${message}`,
-        unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-        timeStamp: Date.now(),
-    });
+    // const receiverSnapshot = await get(
+    //     ref(database, `overview/${contactId}/${selectedMessageId}`)
+    // );
+    // await updateOverview(contactId, selectedMessageId, {
+    //     lastMessage: ``,
+    //     unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+    //     timeStamp: Date.now(),
+    // });
     await updateChat(contactId);
 }
