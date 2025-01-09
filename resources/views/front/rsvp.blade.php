@@ -2060,7 +2060,6 @@
 
     <script>
 
-
 const createICSFile = (start, end, title, description, location) => {
     // Create a new calendar object
     const calendar = new ICAL.Component(['vcalendar', [], []]);
@@ -2072,17 +2071,9 @@ const createICSFile = (start, end, title, description, location) => {
     // Create an event component
     const event = new ICAL.Component('vevent');
 
-    // Debug: Ensure input dates are valid
-    console.log("Start Date:", start);
-    console.log("End Date:", end);
-
     // Convert JavaScript Date objects to iCalendar format
-    const startICAL = ICAL.Time.fromJSDate(start, true); // Pass 'true' for UTC
+    const startICAL = ICAL.Time.fromJSDate(start, true); // UTC
     const endICAL = ICAL.Time.fromJSDate(end, true);
-
-    // Debug: Check formatted iCalendar dates
-    console.log("Start ICAL:", startICAL.toString());
-    console.log("End ICAL:", endICAL.toString());
 
     // Add event details
     event.addPropertyWithValue('uid', `${Date.now()}@yourdomain.com`);
@@ -2099,7 +2090,6 @@ const createICSFile = (start, end, title, description, location) => {
     // Generate the ICS file content
     return calendar.toString();
 };
-alert("downloadLink")
 
 // Example event details
 const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
@@ -2120,7 +2110,7 @@ const icsData = createICSFile(
 );
 
 // Create a downloadable link
-const icsBlob = new Blob([icsData], { type: "text/calendar" });
+const icsBlob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
 const downloadLink = document.createElement("a");
 downloadLink.href = URL.createObjectURL(icsBlob);
 downloadLink.download = "event.ics";
