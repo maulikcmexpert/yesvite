@@ -4084,3 +4084,73 @@ $(document).on("keyup", "#serach_user_from_list", function () {
         }
     });
 });
+
+async function sendMessageHost(contactId, contactName, receiverProfile) {
+    const currentUserId = senderUser;
+    const conversationId = await findOrCreateConversation(
+        currentUserId,
+        contactId,
+        contactName,
+        receiverProfile
+    );
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
+    const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
+
+    const blockByMeSnapshot = await get(blockByMeRef);
+    const blockByUserSnapshot = await get(blockByUserRef);
+
+    let isBlockedByMe = false;
+    let isBlockedByUser = false;
+
+    if (blockByMeSnapshot.exists()) {
+        const blockByMeList = blockByMeSnapshot.val();
+        isBlockedByMe = blockByMeList.includes(contactId);
+    }
+
+    if (blockByUserSnapshot.exists()) {
+        const blockByUserList = blockByUserSnapshot.val();
+        isBlockedByUser = blockByUserList.includes(contactId);
+    }
+
+    if (isBlockedByMe || isBlockedByUser) {
+        return;
+    }
+
+    // const message = $(this).val();
+    const selectedMessageId = conversationId;
+    $(".selected_id").val(conversationId);
+    $(".selected_message").val(contactId);
+    $(".selected_name").val(contactName);
+
+    // const messageData = {
+    //     data: message,
+    //     timeStamp: Date.now(),
+    //     isDelete: {},
+    //     isReply: "0",
+    //     isSeen: false,
+    //     react: "",
+    //     receiverId: contactId,
+    //     receiverName: contactName,
+    //     replyData: {},
+    //     senderId: senderUser,
+    //     senderName: senderUserName,
+    //     status: {},
+    // };
+
+    // await addMessage(selectedMessageId, messageData, contactId);
+
+    await updateOverview(currentUserId, selectedMessageId, {
+        lastMessage: `${senderUserName}: ${message}`,
+        timeStamp: Date.now(),
+    });
+
+    const receiverSnapshot = await get(
+        ref(database, `overview/${contactId}/${selectedMessageId}`)
+    );
+    await updateOverview(contactId, selectedMessageId, {
+        lastMessage: `${senderUserName}: ${message}`,
+        unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+        timeStamp: Date.now(),
+    });
+    await updateChat(contactId);
+}
