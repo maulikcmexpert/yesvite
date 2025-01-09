@@ -2840,84 +2840,87 @@ $(".close-group-modal").click(function () {
 
 var selectedgrpUserIds = [];
 var newSelectedUserIds = [];
-$("#group-search-user")
-    .autocomplete({
-        source: async function (request, response) {
-            try {
-                const result = await $.ajax({
-                    url: base_url + "autocomplete-users",
-                    dataType: "json",
-                    data: {
-                        term: request.term,
-                        selectedUserIds: selectedgrpUserIds,
-                    },
-                });
+if ($("#group-search-user").length) {
+    $("#group-search-user")
+        .autocomplete({
+            source: async function (request, response) {
+                try {
+                    const result = await $.ajax({
+                        url: base_url + "autocomplete-users",
+                        dataType: "json",
+                        data: {
+                            term: request.term,
+                            selectedUserIds: selectedgrpUserIds,
+                        },
+                    });
 
-                const processedData = await Promise.all(
-                    result.map(async (item) => ({
-                        label: item.name,
-                        value: item.name,
-                        userId: item.id,
-                        imageUrl: item.profile,
-                        email: item.email,
-                        imageElement: await getListUserimg(
-                            item.profile,
-                            item.name
-                        ),
-                    }))
-                );
-
-                response(processedData);
-            } catch (error) {
-                console.error("Error fetching data", error);
-                response([]);
-            }
-        },
-        minLength: 2,
-        select: function (event, ui) {
-            const selectedUserId = ui.item.userId;
-            const selectedUserName = ui.item.label;
-
-            if (!selectedgrpUserIds.includes(selectedUserId)) {
-                selectedgrpUserIds.push(selectedUserId);
-                newSelectedUserIds.push(selectedUserId);
-                updateSelectedgrpUserIds();
-
-                const $tag = $("<div>", {
-                    class: "tag",
-                    "data-user-id": selectedUserId,
-                })
-                    .text(selectedUserName)
-                    .append(
-                        $("<span>", { class: "close-group-btn" }).html(
-                            closeSpan
-                        )
+                    const processedData = await Promise.all(
+                        result.map(async (item) => ({
+                            label: item.name,
+                            value: item.name,
+                            userId: item.id,
+                            imageUrl: item.profile,
+                            email: item.email,
+                            imageElement: await getListUserimg(
+                                item.profile,
+                                item.name
+                            ),
+                        }))
                     );
-                $("#group-selected-tags-container").prepend($tag);
-            }
 
-            setTimeout(() => {
-                $("#group-search-user").val("");
-            }, 100);
-        },
-    })
-    .data("ui-autocomplete")._renderItem = function (ul, item) {
-    const $li = $("<li>");
-    const $divMain = $("<div>").addClass("suggestion-item chat-data d-flex");
-    const $divImage = $("<div>").addClass("user-img position-relative");
-    const $divName = $("<div>").addClass("user-detail d-block ms-3");
-    const $img = item.imageElement;
-    // console.log($img);
-    const $span = $("<h3>").text(item.label);
+                    response(processedData);
+                } catch (error) {
+                    console.error("Error fetching data", error);
+                    response([]);
+                }
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                const selectedUserId = ui.item.userId;
+                const selectedUserName = ui.item.label;
 
-    $divImage.append($img);
-    $divName.append($("<div>")).append($span);
-    $divMain.append($divImage).append($divName);
-    $li.append($divMain).appendTo(ul);
+                if (!selectedgrpUserIds.includes(selectedUserId)) {
+                    selectedgrpUserIds.push(selectedUserId);
+                    newSelectedUserIds.push(selectedUserId);
+                    updateSelectedgrpUserIds();
 
-    return $li;
-};
+                    const $tag = $("<div>", {
+                        class: "tag",
+                        "data-user-id": selectedUserId,
+                    })
+                        .text(selectedUserName)
+                        .append(
+                            $("<span>", { class: "close-group-btn" }).html(
+                                closeSpan
+                            )
+                        );
+                    $("#group-selected-tags-container").prepend($tag);
+                }
 
+                setTimeout(() => {
+                    $("#group-search-user").val("");
+                }, 100);
+            },
+        })
+        .data("ui-autocomplete")._renderItem = function (ul, item) {
+        const $li = $("<li>");
+        const $divMain = $("<div>").addClass(
+            "suggestion-item chat-data d-flex"
+        );
+        const $divImage = $("<div>").addClass("user-img position-relative");
+        const $divName = $("<div>").addClass("user-detail d-block ms-3");
+        const $img = item.imageElement;
+        // console.log($img);
+        const $span = $("<h3>").text(item.label);
+
+        $divImage.append($img);
+        $divName.append($("<div>")).append($span);
+        $divMain.append($divImage).append($divName);
+        $li.append($divMain).appendTo(ul);
+
+        return $li;
+    };
+}
 function updateSelectedgrpUserIds() {
     $("#group-selected-user-id").val(newSelectedUserIds.join(","));
     if (newSelectedUserIds.length > 0) {
