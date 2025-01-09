@@ -212,6 +212,11 @@ ul.chat-list li:hover {
     border-bottom: 0;
 } */
 
+ul.chat-list:last-child li{
+    border-bottom: 0;
+}
+
+
 .chat-list .user-img .active {
     width: 14px;
     height: 14px;
