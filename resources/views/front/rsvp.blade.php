@@ -2060,9 +2060,6 @@
 
     <script>
 
-const createICSFile = (start, end, title, description, location) => {
-    // Create a new calendar object
-    const calendar = new ICAL.Component(['vcalendar', [], []]);
 
     // Add calendar metadata
     calendar.updatePropertyWithValue('version', '2.0');
@@ -2074,9 +2071,9 @@ const createICSFile = (start, end, title, description, location) => {
 
     // Add event details
     event.addPropertyWithValue('uid', `${Date.now()}@yourdomain.com`);
-    event.addPropertyWithValue('dtstamp', ICAL.Time.fromJSDate(now).toICALString());
-    event.addPropertyWithValue('dtstart', ICAL.Time.fromJSDate(start).toICALString());
-    event.addPropertyWithValue('dtend', ICAL.Time.fromJSDate(end).toICALString());
+    event.addPropertyWithValue('dtstamp', ICAL.Time.fromJSDate(now).toString());
+    event.addPropertyWithValue('dtstart', ICAL.Time.fromJSDate(start).toString());
+    event.addPropertyWithValue('dtend', ICAL.Time.fromJSDate(end).toString());
     event.addPropertyWithValue('summary', title);
     event.addPropertyWithValue('description', description);
     event.addPropertyWithValue('location', location);
@@ -2089,8 +2086,8 @@ const createICSFile = (start, end, title, description, location) => {
 };
 
 // Example event details
-const startDateTime = new Date("2025-01-15T10:00:00"); // Start date/time
-const endDateTime = new Date("2025-01-15T12:00:00");   // End date/time
+const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
+const endDateTime = new Date("2025-01-15T12:00:00Z");   // Ensure valid Date object
 const eventDetails = {
     title: "Sample Event",
     description: "This is a sample event description.\nIncludes multiple lines.",
