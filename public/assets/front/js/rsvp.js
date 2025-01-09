@@ -166,38 +166,62 @@ $(document).ready(function () {
 
             window.open(googleCalendarUrl);
         } else if (isIOS) {
-            alert();
+            alert("ios");
             // iOS: Generate ICS file for the event
-            const generateICSFile = (start, end, title) => {
-                const startDate = start.toISOString().replace(/-|:|\.\d+/g, "");
-                const endDate = end.toISOString().replace(/-|:|\.\d+/g, "");
+            const generateICSFile = (
+                start,
+                end,
+                title,
+                description,
+                location
+            ) => {
+                const formatDate = (date) =>
+                    date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+                const startDate = formatDate(start);
+                const endDate = formatDate(end);
+
                 return `
-     BEGIN:VCALENDAR
-     VERSION:2.0
-     BEGIN:VEVENT
-     SUMMARY:${title}
-     DTSTART:${startDate}
-     DTEND:${endDate}
-     DESCRIPTION:Event description
-     LOCATION:Event location
-     END:VEVENT
-     END:VCALENDAR
-              `;
+            BEGIN:VCALENDAR
+            VERSION:2.0
+            PRODID:-//Your Company//Your App//EN
+            BEGIN:VEVENT
+            UID:${Date.now()}@yourdomain.com
+            DTSTAMP:${formatDate(new Date())}
+            SUMMARY:${title}
+            DTSTART:${startDate}
+            DTEND:${endDate}
+            DESCRIPTION:${description}
+            LOCATION:${location}
+            END:VEVENT
+            END:VCALENDAR
+                `.trim();
+            };
+
+            // Example event details
+            const startDateTime = new Date("2025-01-15T10:00:00"); // Replace with your start date
+            const endDateTime = new Date("2025-01-15T12:00:00"); // Replace with your end date
+            const eventDetails = {
+                title: "Sample Event",
+                description: "This is a sample event description.",
+                location: "123 Main Street, City",
             };
 
             const icsData = generateICSFile(
                 startDateTime,
                 endDateTime,
-                eventDetails.title
+                eventDetails.title,
+                eventDetails.description,
+                eventDetails.location
             );
+
             const icsBlob = new Blob([icsData], { type: "text/calendar" });
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(icsBlob);
             downloadLink.download = "event.ics";
 
+            // Append and click the download link
             document.body.appendChild(downloadLink);
             downloadLink.click();
-
             document.body.removeChild(downloadLink);
         } else {
             // Default to Google Calendar URL
