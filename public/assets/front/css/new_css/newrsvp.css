@@ -133,6 +133,7 @@
 
 .rsvp-form .author-img{
     width: 56px;
+    min-width: 56px;
     height: 56px;
     border-radius: 50%;
 }
@@ -1110,6 +1111,10 @@ display:none;}
     border-radius: 100px !important;
     padding: 5px 8px !important;
     max-width: max-content !important;
+}
+
+.user-detail .flex-column .host-type{
+
 }
 
 /* ====== responsive ======= */

@@ -205,7 +205,7 @@
                                                 <h5>{{ $eventInfo['guest_view']['hosted_by']}}</h5>
                                                 <span>Host</span>
                                                 @if (Auth::guard('web')->check()) 
-                                                <a href="javascript:;" class="msg-btn">Message</a>
+                                                <a href="javascript:;" class="msg-btn host-msg">Message</a>
                                                 @endif
                                             </div>
                                             @if(!empty($eventInfo['guest_view']['co_hosts']))
@@ -229,7 +229,7 @@
                                                 <h5>{{$coHost['first_name']}} {{$coHost['last_name']}}</h5>
                                                 <span>Co-host</span>
                                                 @if (Auth::guard('web')->check()) 
-                                                <a href="#" class="msg-btn">Message</a>
+                                                <a href="#" class="msg-btn chost-msg">Message</a>
                                                 @endif
                                             </div>
                                             @endif

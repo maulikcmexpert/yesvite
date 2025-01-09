@@ -4114,6 +4114,21 @@ if ($("#host_id").length && $("#nav-messaging-tab").length) {
         await sendMessageHost(hostId, hostName, hostImage, "host");
     });
 }
+if ($(".chost-msg").length) {
+    $(".chost-msg").on("click", async function () {
+        var co_host_id = $("#co_host_id").val();
+        var co_host_name = $("#co_host_name").val();
+        var co_host_profile = $("#co_host_profile").val();
+        if (co_host_id != "") {
+            await sendMessageHost(
+                co_host_id,
+                co_host_name,
+                co_host_profile,
+                "co-host"
+            );
+        }
+    });
+}
 async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     const currentUserId = senderUser;
     const conversationId = await findOrCreateSingleConversation(
