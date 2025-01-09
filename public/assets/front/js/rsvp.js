@@ -91,94 +91,68 @@ $(document).ready(function () {
     //     window.open(googleCalendarUrl, "_blank");
     // });
     $("#openGoogle").on("click", function () {
-        // const eventDate = $("#eventDate").val();
-        // const eventEndDate = $("#eventEndDate").val();
-        // const eventTime = $("#eventTime").val();
-        // const eventEndTime = $("#eventEndTime").val() || "12:00 PM";
-        // const eventName = $("#eventName").val();
+        const eventDate = $("#eventDate").val();
+const eventEndDate = $("#eventEndDate").val();
+const eventTime = $("#eventTime").val();
+const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
+const eventName = $("#eventName").val();
 
-        // if (!eventDate || !eventTime) {
-        //     alert("Please provide both date and time for the event.");
-        //     return;
-        // }
+if (!eventDate || !eventTime) {
+    alert("Please provide both date and time for the event.");
+    return;
+}
 
-        // const convertTo24HourFormat = (time) => {
-        //     const [hour, minuteWithPeriod] = time.split(":");
-        //     const [minute, period] = minuteWithPeriod.split(" ");
-        //     let newHour = parseInt(hour);
-        //     if (period.toLowerCase() === "pm" && newHour !== 12) {
-        //         newHour += 12;
-        //     }
-        //     if (period.toLowerCase() === "am" && newHour === 12) {
-        //         newHour = 0;
-        //     }
-        //     return `${newHour}:${minute}`;
-        // };
+const convertTo24HourFormat = (time) => {
+    const [hour, minuteWithPeriod] = time.split(":");
+    const [minute, period] = minuteWithPeriod.split(" ");
+    let newHour = parseInt(hour);
+    if (period.toLowerCase() === "pm" && newHour !== 12) {
+        newHour += 12;  // Convert PM time to 24-hour format
+    }
+    if (period.toLowerCase() === "am" && newHour === 12) {
+        newHour = 0;  // Handle 12 AM as midnight
+    }
+    return `${newHour}:${minute}`;
+};
 
-        // const formattedTime = convertTo24HourFormat(eventTime);
-        // const formattedEndTime = convertTo24HourFormat(eventEndTime);
-        // const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
+const formattedTime = convertTo24HourFormat(eventTime);
+const formattedEndTime = convertTo24HourFormat(eventEndTime);
+const startDateTime = new Date(`${eventDate}T${formattedTime}:00`);  // ISO format with correct time
 
-        // if (isNaN(startDateTime)) {
-        //     alert("Invalid start date or time value. Please check the input.");
-        //     return;
-        // }
+if (isNaN(startDateTime)) {
+    alert("Invalid start date or time value. Please check the input.");
+    return;
+}
 
-        // let endDateTime;
-        // if (eventEndDate) {
-        //     const endDateString = `${eventEndDate}T${formattedEndTime}:00Z`;
-        //     const formattedEndDate = new Date(endDateString);
+let endDateTime;
+if (eventEndDate) {
+    const endDateString = `${eventEndDate}T${formattedEndTime}:00`;
+    const formattedEndDate = new Date(endDateString);
 
-        //     if (isNaN(formattedEndDate)) {
-        //         alert(
-        //             "Invalid end date or time value. Please check the input."
-        //         );
-        //         return;
-        //     }
+    if (isNaN(formattedEndDate)) {
+        alert("Invalid end date or time value. Please check the input.");
+        return;
+    }
 
-        //     endDateTime = formattedEndDate;
-        // } else {
-        //     endDateTime = new Date(startDateTime);
-        //     endDateTime.setHours(endDateTime.getHours() + 1);
-        // }
+    endDateTime = formattedEndDate;
+} else {
+    endDateTime = new Date(startDateTime);
+    endDateTime.setHours(endDateTime.getHours() + 1);  // Default to 1 hour duration if no end date is provided
+}
 
-        // const formatToGoogleCalendar = (date) => {
-        //     return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
-        // };
+// Convert to Google Calendar format (without dashes, colons, and milliseconds)
+const formatToGoogleCalendar = (date) => {
+    return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
+};
 
-        // const eventDetails = {
-        //     title: eventName || "Meeting with Team",
-        //     start: formatToGoogleCalendar(startDateTime),
-        //     end: formatToGoogleCalendar(endDateTime),
-        // };
-        // Example event data
-const event = {
-    eventDate: '2025-01-11',
-    eventEndDate: '2025-01-12',
-    eventTime: '12:00 PM',
-    eventEndTime: '01:00 PM',
-    eventName: 'test event'
-  };
-  
-  // Function to format the time in ISO 8601 format with timezone offset
-  function formatEventTime(date, time) {
-    const dateTime = new Date(`${date} ${time}`);
-    const timeZoneOffset = dateTime.getTimezoneOffset() / 60; // Offset in hours
-    const isoString = dateTime.toISOString().replace('Z', `+${Math.abs(timeZoneOffset)}:00`);
-    return isoString;
-  }
-  
-  // Format start and end times
-  const formattedStartTime = formatEventTime(event.eventDate, event.eventTime); // Example: 2025-01-11T12:00:00+05:30
-  const formattedEndTime = formatEventTime(event.eventEndDate, event.eventEndTime); // Example: 2025-01-12T13:00:00+05:30
-  
-  // Event object with properly formatted start and end times
-  const eventDetails = {
-    title: event.eventName,
-    start: formattedStartTime,
-    end: formattedEndTime
-  };
-        console.log(eventDetails);
+const eventDetails = {
+    title: eventName || "Meeting with Team",
+    start: formatToGoogleCalendar(startDateTime),
+    end: formatToGoogleCalendar(endDateTime),
+};
+
+console.log(eventDetails); 
+
         // Platform-specific calendar opening code (Android / iOS)
         const isAndroid = /Android/i.test(navigator.userAgent);
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
