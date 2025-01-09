@@ -223,7 +223,7 @@
                                                     <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                 @endif
                                                 </div>
-                                                <h5>{{$coHost['name']}}</h5>
+                                                <h5>{{$coHost['first_name']}} {{$coHost['last_name']}}</h5>
                                                 <span>Co-host</span>
                                                 @if (Auth::guard('web')->check()) 
                                                 <a href="#" class="msg-btn">Message</a>
