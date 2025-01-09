@@ -16,6 +16,15 @@
                 Messaging
             </button>
             @endif
+            @php
+                $userId = 0;
+                $userName = "";
+                if(Auth::guard('web')->check()){
+                    $userId = Auth::guard('web')->user()->id;
+                    $userData = User::findOrFail($userId);       
+                    $userName =  $userData->firstname . ' ' . $userData->lastname;
+                }
+            @endphp
         </div>
     </nav>   
     <div class="container">     
