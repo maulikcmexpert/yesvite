@@ -2056,5 +2056,71 @@
     <script type="module" src="{{asset('assets/front/js/audio.js')}}"></script>
     <script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
     <script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
+
+    <script>
+
+const createICSFile = (start, end, title, description, location) => {
+    // Create a new calendar object
+    const calendar = new ICAL.Component(['vcalendar', [], []]);
+
+    // Add calendar metadata
+    calendar.updatePropertyWithValue('version', '2.0');
+    calendar.updatePropertyWithValue('prodid', '-//Your Company//Your App//EN');
+
+    // Create an event component
+    const event = new ICAL.Component('vevent');
+    const now = new Date();
+
+    // Add event details
+    event.addPropertyWithValue('uid', `${Date.now()}@yourdomain.com`);
+    event.addPropertyWithValue('dtstamp', ICAL.Time.fromJSDate(now).toICALString());
+    event.addPropertyWithValue('dtstart', ICAL.Time.fromJSDate(start).toICALString());
+    event.addPropertyWithValue('dtend', ICAL.Time.fromJSDate(end).toICALString());
+    event.addPropertyWithValue('summary', title);
+    event.addPropertyWithValue('description', description);
+    event.addPropertyWithValue('location', location);
+
+    // Add the event to the calendar
+    calendar.addSubcomponent(event);
+
+    // Generate the ICS file content
+    return calendar.toString();
+};
+
+// Example event details
+const startDateTime = new Date("2025-01-15T10:00:00"); // Start date/time
+const endDateTime = new Date("2025-01-15T12:00:00");   // End date/time
+const eventDetails = {
+    title: "Sample Event",
+    description: "This is a sample event description.\nIncludes multiple lines.",
+    location: "123 Main Street, City",
+};
+
+// Generate the ICS file
+const icsData = createICSFile(
+    startDateTime,
+    endDateTime,
+    eventDetails.title,
+    eventDetails.description,
+    eventDetails.location
+);
+
+// Create a downloadable link
+const icsBlob = new Blob([icsData], { type: "text/calendar" });
+const downloadLink = document.createElement("a");
+downloadLink.href = URL.createObjectURL(icsBlob);
+downloadLink.download = "event.ics";
+downloadLink.textContent = "Download Event (.ics)";
+downloadLink.style.display = "block";
+downloadLink.style.margin = "20px";
+downloadLink.style.color = "blue";
+downloadLink.style.textDecoration = "underline";
+$(".author-title").append(
+                `<a href="${URL.createObjectURL(
+                    icsBlob
+                )}" download="event.ics">Download Event</a>`
+            );
+    </script>
 @endpush
 @endif
