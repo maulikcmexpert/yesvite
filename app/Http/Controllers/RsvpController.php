@@ -699,7 +699,9 @@ class RsvpController extends Controller
 
                 sendNotification('sent_rsvp', $notificationParam);
 
-                return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
+                // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
+                return redirect()->back()->with('success', 'Rsvp sent Successfully');
+
             }
             return redirect('rsvp/' . $request->user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
         } catch (QueryException $e) {

@@ -955,8 +955,8 @@ display:none;}
     border: 1px solid var(--green) !important;
 }
 
-.rsvp-yes-modal .modal-body{
-    max-height: 600px;
+.rsvp-yes-modal .modal-body {
+    max-height: 55.56vh; /* 600px / 1080px * 100 */
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -1317,7 +1317,7 @@ display:none;}
 
 
 .rsvp-yes-modal .modal-body{
-    max-height: 450px;
+    max-height: 41.67vh;
     overflow: hidden;
     overflow-y: scroll;
 }
