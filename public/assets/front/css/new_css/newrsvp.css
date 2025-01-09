@@ -1103,12 +1103,12 @@ display:none;}
 
 .host-type{
     background-color: #EDFFED;
-    font-family: var(--SFProDisplay-Bold);
-    font-size: 10px;
-    line-height: 18px;
-    color: var(--green);
-    border-radius: 100px;
-    padding: 5px 8px;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 10px !important;
+    line-height: 18px !important;
+    color: var(--green) !important;
+    border-radius: 100px !important;
+    padding: 5px 8px !important;
     max-width: auto !important;
 }
 
