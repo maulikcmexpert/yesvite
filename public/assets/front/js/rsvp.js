@@ -227,7 +227,7 @@ $(document).ready(function () {
             // Append and click the download link
             document.body.appendChild(downloadLink);
             downloadLink.click();
-            document.body.removeChild(downloadLink);
+            // document.body.removeChild(downloadLink);
         } else {
             // Default to Google Calendar URL
             const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
