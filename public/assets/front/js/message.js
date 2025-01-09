@@ -4183,6 +4183,7 @@ async function sendMessageHost(contactId, contactName, receiverProfile, type) {
         .find(".user-detail")
         .children()
         .find(".tp")
+        .children()
         .find("h3")
         .append("<span>test</span>");
 
