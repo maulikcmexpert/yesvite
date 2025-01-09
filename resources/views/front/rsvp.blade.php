@@ -1124,6 +1124,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-7">
                                                 <a href="javascript:;" class="d-flex conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
+                                                    
                                                     <div class="user-img">
                                                         <img id="selected-user-profile" src="{{asset('assets/front')}}/image/user-img.svg" alt="user-img">
                                                         <!-- <h5 class="fontcolorS">ST</h5> -->
