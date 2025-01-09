@@ -214,16 +214,16 @@
                                                 @if ($coHost['profile'] != '')
                                                     <img src="{{$coHost['profile']}}" alt="host-img">  
                                                 @else
-                                                @php
-                                                    $firstInitial = !empty($coHost['first_name']) ? strtoupper($coHost['first_name'][0]) : '';
-                                                    $lastInitial = !empty($coHost['last_name']) ? strtoupper($coHost['last_name'][0]) : '';
-                                                    $initials = $firstInitial . $lastInitial;
-                                                    $fontColor = 'fontcolor' . $firstInitial;
-                                                @endphp
-                                                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                                    @php
+                                                        $firstInitial = !empty($coHost['first_name']) ? strtoupper($coHost['first_name'][0]) : '';
+                                                        $lastInitial = !empty($coHost['last_name']) ? strtoupper($coHost['last_name'][0]) : '';
+                                                        $initials = $firstInitial . $lastInitial;
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                    @endphp
+                                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                 @endif
                                                 </div>
-                                                <h5>{{$coHost['name']}}</h5>
+                                                <h5>{{$coHost['first_name']}} {{$coHost['last_name']}}</h5>
                                                 <span>Co-host</span>
                                                 @if (Auth::guard('web')->check()) 
                                                 <a href="#" class="msg-btn">Message</a>

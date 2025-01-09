@@ -6,11 +6,7 @@
 </div>
 @endif
 @if (!empty($yesvite_user))
-        <div class="users-data" class="no-yesvite-data" style="display: none;">
-            <div class="md-5">
-                <h5>No search result found</h5>
-            </div>
-        </div>
+      
         @foreach($yesvite_user as $value)
             @php
             $initials = '';
