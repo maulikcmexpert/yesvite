@@ -1505,6 +1505,18 @@
     
 </div>
 <!-- about yes rsvp Modal -->
+@php
+
+   $firstname="";
+   $lastname=""; 
+
+  if (Auth::guard('web')->check()){
+    $user = Auth::guard('web')->user();
+    $firstname=$user->firstname;
+    $lastname=$user->lastname;
+  }   
+@endphp
+
 <div class="modal fade cmn-modal about-rsvp rsvp-yes-modal" id="rsvp-yes-modal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       
@@ -1548,13 +1560,13 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
+                                                    <input type="text" value="{{$firstname}}" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" id="lastname"  class="form-control inputText lastname" maxlength="50" >
+                                                    <input type="text"  value="{{$lastname}}"  name="lastname" id="lastname"  class="form-control inputText lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                             </div>
@@ -1670,13 +1682,13 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
+                                            <input type="text" value="{{$firstname}}" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" id="lastname" class="form-control inputText lastname" maxlength="50" >
+                                            <input type="text" value="{{$lastname}}" name="lastname" id="lastname" class="form-control inputText lastname" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
