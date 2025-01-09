@@ -1536,23 +1536,6 @@ $(".send-message").on("keypress", async function (e) {
                 lastMessage: `${senderUserName}: ${message}`,
                 timeStamp: Date.now(),
             });
-            const receiverSnapshot = await get(
-                ref(database, `overview/${receiverId}/${conversationId}`)
-            );
-
-            if (
-                receiverSnapshot.val().isMute == undefined ||
-                receiverSnapshot.val().isMute == 0 ||
-                receiverSnapshot.val().isMute == null
-            ) {
-                await send_push_notification(
-                    receiverId,
-                    message,
-                    conversationId,
-                    image,
-                    senderUserName
-                );
-            }
 
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
@@ -1584,6 +1567,25 @@ $(".send-message").on("keypress", async function (e) {
                 await set(
                     ref(database, `overview/${receiverId}/${conversationId}`),
                     receiverConversationData
+                );
+            }
+
+            const receiverSnapshot = await get(
+                ref(database, `overview/${receiverId}/${conversationId}`)
+            );
+
+            if (
+                receiverSnapshot.val() ||
+                receiverSnapshot.val().isMute == undefined ||
+                receiverSnapshot.val().isMute == 0 ||
+                receiverSnapshot.val().isMute == null
+            ) {
+                await send_push_notification(
+                    receiverId,
+                    message,
+                    conversationId,
+                    image,
+                    senderUserName
                 );
             }
         }
