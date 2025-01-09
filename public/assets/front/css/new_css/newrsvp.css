@@ -1063,6 +1063,12 @@ display:none;}
     transform: none;
 }
 
+body{
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -ms-touch-action: manipulation;
+}
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
