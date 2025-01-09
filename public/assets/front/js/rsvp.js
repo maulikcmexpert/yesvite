@@ -155,9 +155,11 @@ $(document).ready(function () {
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
  
       if (isAndroid) {
-        alert(11);
+       
           // Android: Use intent to open default calendar
-          const androidCalendarUrl = `intent://com.android.calendar/time/${startDateTime.getTime()}#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;end=${endDateTime.getTime()};title=${encodeURIComponent(eventDetails.title)};description=;details=;eventLocation=;flag=0;endTime=${endDateTime.getTime()}#Intent;end`;
+          // const androidCalendarUrl = `intent://com.android.calendar/time/${startDateTime.getTime()}#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;end=${endDateTime.getTime()};title=${encodeURIComponent(eventDetails.title)};description=;details=;eventLocation=;flag=0;endTime=${endDateTime.getTime()}#Intent;end`;
+          const androidCalendarUrl = `intent://calendar/event?action=EDIT&title=${encodeURIComponent(eventDetails.title)}&beginTime=${startDateTime.getTime()}&endTime=${endDateTime.getTime()}&description=&location=&eventTimezone=UTC&details=#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;end=${endDateTime.getTime()};title=${encodeURIComponent(eventDetails.title)};description=;details=;eventLocation=;flag=0;endTime=${endDateTime.getTime()}#Intent;end`;
+
           window.location = androidCalendarUrl;
       } else if (isIOS) {
           // iOS: Generate ICS file for the event
