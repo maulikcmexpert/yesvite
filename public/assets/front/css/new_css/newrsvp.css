@@ -1056,7 +1056,7 @@ display:none;}
 }
 
 .modal.fade .modal-dialog{
-    transform: translate(0, 100px);
+    transform: translate(0, 200px);
 }
 
 .modal.show .modal-dialog {
