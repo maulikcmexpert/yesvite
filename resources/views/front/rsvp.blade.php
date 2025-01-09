@@ -2127,8 +2127,8 @@
             downloadLink.style.color = "blue";
             downloadLink.style.textDecoration = "underline";
             document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.querySelector(".author-title").appendChild(link);
+            // downloadLink.click();
+            // document.querySelector(".author-title").appendChild(link);
 
 
                         // Get the existing <a> tag with class .add-calendar
