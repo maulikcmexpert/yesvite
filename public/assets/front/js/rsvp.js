@@ -44,6 +44,8 @@ $(document).ready(function() {
   //   window.open(googleCalendarUrl, "_blank");
  
   // });
+ 
+
   $("#openGoogle").on("click", function () {
     const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
     const eventTime = $("#eventTime").val(); // e.g., "10:00 AM"
@@ -80,11 +82,7 @@ $(document).ready(function() {
         return;
     }
 
-    // Set the end time (e.g., 1 hour later)
-    const endDateTime = new Date(startDateTime);
-    endDateTime.setHours(endDateTime.getHours() + 1);
-
-    // Format the dates for Google Calendar
+    // Format the start date for Google Calendar
     const formatToGoogleCalendar = (date) => {
         return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
     };
@@ -92,15 +90,15 @@ $(document).ready(function() {
     const eventDetails = {
         title: eventName || "Meeting with Team", // Event title
         start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-        end: formatToGoogleCalendar(endDateTime), // End time in UTC format
     };
 
-    // Construct Google Calendar URL
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
+    // Construct Google Calendar URL with only the start time
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}&sf=true&output=xml`;
 
     // Open the URL in a new tab
     window.open(googleCalendarUrl, "_blank");
 });
+
 
 
     function toggleGuestCount() {
