@@ -2106,16 +2106,22 @@
             const eventTime = document.querySelector("#eventTime").value;
             const eventEndTime = document.querySelector("#eventEndTime").value || "12:00 PM"; // Default value if end time is empty
             const eventName = document.querySelector("#eventName").value;
-
+            console.log({eventDate})
+            console.log({eventEndDate})
+            console.log({eventTime})
+            console.log({eventEndTime})
+            console.log({eventName})
             // Convert eventDate and eventEndDate to Date objects
             const startDateTime = new Date(`${eventDate}T${eventTime}`); // Ensure the time and date are correctly combined
             const endDateTime = new Date(`${eventEndDate}T${eventEndTime}`); // Ensure the time and date are correctly combined
-
+            console.log({startDateTime})
+            console.log({endDateTime})
             const eventDetails = {
                 title: eventName,
                 description: `This is an event scheduled on ${eventDate}.\nIncludes multiple lines.`, // Customize the description if needed
                 location: "Event location goes here", // You can customize the location based on input or hardcode
             };
+            console.log({eventDetails})
 
             // Generate the ICS file using the extracted details
             const icsData = createICSFile(
