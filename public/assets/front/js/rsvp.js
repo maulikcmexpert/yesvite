@@ -1,163 +1,161 @@
+$(document).ready(function () {
+    $("#rsvpForm").on("submit", function (e) {
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        var adultsCount = parseInt($("#adultsInput").val()) || 0;
+        var kidsCount = parseInt($("#kidsInput").val()) || 0;
 
-$(document).ready(function() {
-    $('#rsvpForm').on('submit', function(e) {
-        var rsvpStatus = $('input[name="rsvp_status"]:checked').val(); 
-        var adultsCount = parseInt($('#adultsInput').val()) || 0; 
-        var kidsCount = parseInt($('#kidsInput').val()) || 0; 
-      
         if (!rsvpStatus) {
-            e.preventDefault(); 
-            toastr.error("Please select RSVP"); 
-            return;
-        }
-
-        if (rsvpStatus === '1'&& adultsCount == 0 && kidsCount == 0) {
             e.preventDefault();
-            toastr.error("Please add at least one adult or kid."); 
+            toastr.error("Please select RSVP");
             return;
         }
 
-        
+        if (rsvpStatus === "1" && adultsCount == 0 && kidsCount == 0) {
+            e.preventDefault();
+            toastr.error("Please add at least one adult or kid.");
+            return;
+        }
     });
 
     //  $("#openGoogel").on("click",function(){
     //  const eventDate= $("eventDate").val();
     //  const eventTime= $("eventTime").val();
     //  const eventName= $("eventName").val();
-     
+
     //   const googleCalendarUrl = "https://calendar.google.com";
     //   window.open(googleCalendarUrl, "_blank");
     //  })
 
-  //   $("#openGoogle").on("click", function () {
-  //     const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
-  //     const eventTime = $("#eventTime").val(); // e.g., "10:00"
-  //     const eventName = $("#eventName").val(); // e.g., "Team Meeting"
-  //     const eventDetails = {
-  //       title: eventName || "Meeting with Team", // Event title
-  //       start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-  //       end: formatToGoogleCalendar(endDateTime), // End time in UTC format
-  //   };
+    //   $("#openGoogle").on("click", function () {
+    //     const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
+    //     const eventTime = $("#eventTime").val(); // e.g., "10:00"
+    //     const eventName = $("#eventName").val(); // e.g., "Team Meeting"
+    //     const eventDetails = {
+    //       title: eventName || "Meeting with Team", // Event title
+    //       start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
+    //       end: formatToGoogleCalendar(endDateTime), // End time in UTC format
+    //   };
 
-  //   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&details=${encodeURIComponent(eventDetails.description)}&location=${encodeURIComponent(eventDetails.location)}&sf=true&output=xml`;
+    //   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&details=${encodeURIComponent(eventDetails.description)}&location=${encodeURIComponent(eventDetails.location)}&sf=true&output=xml`;
 
-  //   window.open(googleCalendarUrl, "_blank");
- 
-  // });
-  $("#openGoogle").on("click", function () {
-    const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
-    const eventTime = $("#eventTime").val(); // e.g., "10:00 AM"
-    const eventName = $("#eventName").val(); // e.g., "Team Meeting"
+    //   window.open(googleCalendarUrl, "_blank");
 
-    if (!eventDate || !eventTime) {
-        alert("Please provide both date and time for the event.");
-        return;
-    }
+    // });
 
-    // Convert the event time to a 24-hour format
-    const convertTo24HourFormat = (time) => {
-        const [hour, minuteWithPeriod] = time.split(":");
-        const [minute, period] = minuteWithPeriod.split(" ");
-        let newHour = parseInt(hour);
-        if (period.toLowerCase() === "pm" && newHour !== 12) {
-            newHour += 12;
-        }
-        if (period.toLowerCase() === "am" && newHour === 12) {
-            newHour = 0;
-        }
-        return `${newHour}:${minute}`;
-    };
-
-    // Convert the event time to 24-hour format
-    const formattedTime = convertTo24HourFormat(eventTime);
-
-    // Combine date and time for the start time (use UTC format)
-    const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
-
-    // Check if startDateTime is valid
-    if (isNaN(startDateTime)) {
-        alert("Invalid date or time value. Please check the input.");
-        return;
-    }
-
-    // Set the end time (e.g., 1 hour later)
-    const endDateTime = new Date(startDateTime);
-    endDateTime.setHours(endDateTime.getHours() + 1);
-
-    // Format the dates for Google Calendar
-    const formatToGoogleCalendar = (date) => {
-        return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
-    };
-
-    const eventDetails = {
-        title: eventName || "Meeting with Team", // Event title
-        start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-        end: formatToGoogleCalendar(endDateTime), // End time in UTC format
-    };
-
-    // Construct Google Calendar URL
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
-
-    // Open the URL in a new tab
-    window.open(googleCalendarUrl, "_blank");
-});
-
-
+    $("#openGoogle").on("click", function () {
+      const eventDate = $("#eventDate").val();  // e.g., "2025-01-10"
+      const eventTime = $("#eventTime").val();  // e.g., "10:00 AM"
+      const eventName = $("#eventName").val();  // e.g., "Team Meeting"
+  
+      if (!eventDate || !eventTime) {
+          alert("Please provide both date and time for the event.");
+          return;
+      }
+  
+      // Convert time to 24-hour format
+      const convertTo24HourFormat = (time) => {
+          const [hour, minuteWithPeriod] = time.split(":");
+          const [minute, period] = minuteWithPeriod.split(" ");
+          let newHour = parseInt(hour);
+          if (period.toLowerCase() === "pm" && newHour !== 12) {
+              newHour += 12;
+          }
+          if (period.toLowerCase() === "am" && newHour === 12) {
+              newHour = 0;
+          }
+          return `${newHour}:${minute}`;
+      };
+  
+      const formattedTime = convertTo24HourFormat(eventTime);
+  
+      // Combine event date and time into a valid ISO string
+      const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
+  
+      if (isNaN(startDateTime)) {
+          alert("Invalid date or time value. Please check the input.");
+          return;
+      }
+  
+      // Format the date to the Google Calendar-compatible format (YYYYMMDDTHHMMSSZ)
+      const formatToGoogleCalendar = (date) => {
+          const year = date.getUTCFullYear();
+          const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+          const day = String(date.getUTCDate()).padStart(2, "0");
+          const hours = String(date.getUTCHours()).padStart(2, "0");
+          const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+          const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+  
+          return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+      };
+  
+      const eventDetails = {
+          title: eventName || "Meeting with Team",
+          start: formatToGoogleCalendar(startDateTime),
+      };
+  
+      // Construct the Google Calendar URL
+      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+          eventDetails.title
+      )}&dates=${eventDetails.start}&sf=true&output=xml`;
+  
+      // Open the URL in a new tab
+      window.open(googleCalendarUrl, "_blank");
+  });
+  
     function toggleGuestCount() {
-        const isNoSelected = $('#no').is(':checked');
-        $('.rsvp_count_member input').prop('disabled', isNoSelected);
-        $('.qty-btn-minus, .qty-btn-plus').prop('disabled', isNoSelected);
-        $('.rsvp_count_member').css('opacity', isNoSelected ? '0.5' : '1');
+        const isNoSelected = $("#no").is(":checked");
+        $(".rsvp_count_member input").prop("disabled", isNoSelected);
+        $(".qty-btn-minus, .qty-btn-plus").prop("disabled", isNoSelected);
+        $(".rsvp_count_member").css("opacity", isNoSelected ? "0.5" : "1");
         if (isNoSelected) {
-            $('#adultsInput').val(0);
-            $('#kidsInput').val(0);
+            $("#adultsInput").val(0);
+            $("#kidsInput").val(0);
         }
     }
 
-    $('input[name="rsvp_status"]').change(function() {
+    $('input[name="rsvp_status"]').change(function () {
         toggleGuestCount();
     });
 
     toggleGuestCount();
 });
 
-$(document).on('click','.yes_rsvp_btn',function (e) {
+$(document).on("click", ".yes_rsvp_btn", function (e) {
     e.preventDefault();
-    var adultsCount = parseInt($('#adults').val()) || 0; 
-    var kidsCount = parseInt($('#kids').val()) || 0; 
+    var adultsCount = parseInt($("#adults").val()) || 0;
+    var kidsCount = parseInt($("#kids").val()) || 0;
 
     if (adultsCount == 0 && kidsCount == 0) {
         e.preventDefault();
-        toastr.error("Please add at least one adult or kid."); 
+        toastr.error("Please add at least one adult or kid.");
         return;
     }
 
-    $('#rsvpYesForm').submit();
-  });
+    $("#rsvpYesForm").submit();
+});
 
-  $(document).on('click','.no_rsvp_btn',function (e) {
+$(document).on("click", ".no_rsvp_btn", function (e) {
     e.preventDefault();
-    $('#rsvpNoForm').submit();
+    $("#rsvpNoForm").submit();
+});
 
-  })
-
-  $(document).ready(function () {
-    $('#rsvp-yes-modal').on('hidden.bs.modal', function () {
-        $('#adults').val('0');
-        $('#kids').val('0');
-        $('.message_to_host').val('');
-        $('.firstname').val('');
-        $('.lastname').val('');
+$(document).ready(function () {
+    $("#rsvp-yes-modal").on("hidden.bs.modal", function () {
+        $("#adults").val("0");
+        $("#kids").val("0");
+        $(".message_to_host").val("");
+        $(".firstname").val("");
+        $(".lastname").val("");
     });
 });
 $(document).ready(function () {
-  $('#rsvp-no-modal').on('hidden.bs.modal', function () {
-      $('#adults').val('0');
-      $('#kids').val('0');
-      $('.message_to_host').val('');
-      $('.firstname').val('');
-      $('.lastname').val('');
-  });
+    $("#rsvp-no-modal").on("hidden.bs.modal", function () {
+        $("#adults").val("0");
+        $("#kids").val("0");
+        $(".message_to_host").val("");
+        $(".firstname").val("");
+        $(".lastname").val("");
+    });
 });
 
 //   function checkRsvpStaus(event_id,user_id,callback){
@@ -176,169 +174,159 @@ $(document).ready(function () {
 //     });
 // }
 
-
-$("#rsvp-yes-modal").on('show.bs.modal', function (e) {
-    e.preventDefault();  
-});
-$("#rsvp-no-modal").on('show.bs.modal', function (e) {
-    e.preventDefault();  
-});
-  $(document).on('click','.check_rsvp_yes',function (e) {
+$("#rsvp-yes-modal").on("show.bs.modal", function (e) {
     e.preventDefault();
-    var user_id=$(this).data('user_id');
-    var event_id=$(this).data('event_id');
-    var sync_id=$(this).data('sync_id');
-    var modal = $(this).data('bs-target');
-
+});
+$("#rsvp-no-modal").on("show.bs.modal", function (e) {
+    e.preventDefault();
+});
+$(document).on("click", ".check_rsvp_yes", function (e) {
+    e.preventDefault();
+    var user_id = $(this).data("user_id");
+    var event_id = $(this).data("event_id");
+    var sync_id = $(this).data("sync_id");
+    var modal = $(this).data("bs-target");
 
     $.ajax({
         url: `${base_url}check_rsvp_status`,
-        type: 'GET',
-        data: {event_id:event_id,user_id:user_id,sync_id:sync_id},
+        type: "GET",
+        data: { event_id: event_id, user_id: user_id, sync_id: sync_id },
         success: function (response) {
-            var status=response.rsvp_status;
+            var status = response.rsvp_status;
             // console.log(status);
-            if(status=="1"){
-                toastr.success('You have already done RSVP YES');
-            }else if(status=="cohost"){
-                toastr.success('You have are a cohost');
+            if (status == "1") {
+                toastr.success("You have already done RSVP YES");
+            } else if (status == "cohost") {
+                toastr.success("You have are a cohost");
+            } else {
+                $(modal).off("show.bs.modal");
+                $(modal).modal("show");
             }
-                else{
-                        $(modal).off('show.bs.modal');  
-                        $(modal).modal('show');  
-         }
 
-    //      if(status=="cohost"){
-    //         toastr.success('You are a cohost');
-    //     }else{
-    //                 $(modal).off('show.bs.modal');  
-    //                 $(modal).modal('show');  
-    //  }
-
+            //      if(status=="cohost"){
+            //         toastr.success('You are a cohost');
+            //     }else{
+            //                 $(modal).off('show.bs.modal');
+            //                 $(modal).modal('show');
+            //  }
         },
-        error: function (xhr, status, error) {
-        },
-        complete: function () {
-        }
+        error: function (xhr, status, error) {},
+        complete: function () {},
     });
-    
-  })
+});
 
-  
-  $(document).on('click','.check_rsvp_no',function (e) {
+$(document).on("click", ".check_rsvp_no", function (e) {
     e.preventDefault();
-    var user_id=$(this).data('user_id');
-    var event_id=$(this).data('event_id');
-    var sync_id=$(this).data('sync_id');
-    var modal = $(this).data('bs-target');
+    var user_id = $(this).data("user_id");
+    var event_id = $(this).data("event_id");
+    var sync_id = $(this).data("sync_id");
+    var modal = $(this).data("bs-target");
     $.ajax({
         url: `${base_url}check_rsvp_status`,
-        type: 'GET',
-        data: {event_id:event_id,user_id:user_id,sync_id:sync_id},
+        type: "GET",
+        data: { event_id: event_id, user_id: user_id, sync_id: sync_id },
         success: function (response) {
-            var status=response.rsvp_status;
+            var status = response.rsvp_status;
             // console.log(status);
-            if(status=="0"){
-                toastr.error('You have already done RSVP NO');
-            }else{
-                        $(modal).off('show.bs.modal');  
-                        $(modal).modal('show');  
-         }
+            if (status == "0") {
+                toastr.error("You have already done RSVP NO");
+            } else {
+                $(modal).off("show.bs.modal");
+                $(modal).modal("show");
+            }
         },
-        error: function (xhr, status, error) {
-        },
-        complete: function () {
-        }
+        error: function (xhr, status, error) {},
+        complete: function () {},
     });
-  })
+});
 
 //   latitude
 //   logitude
-   
 
-const latitude=parseFloat(document.getElementById("event_latitude").value);
-const longitutde=parseFloat(document.getElementById("event_logitude").value);
-const address=document.getElementById("event_address").value;
+const latitude = parseFloat(document.getElementById("event_latitude").value);
+const longitutde = parseFloat(document.getElementById("event_logitude").value);
+const address = document.getElementById("event_address").value;
 
-  function initMap() {
+function initMap() {
     // Create the map
-    if ((latitude === 0.0 && longitutde === 0.0) || 
-    (latitude === 0 && longitutde === 0)) {
-    
-      console.log("Address to geocode: " + address);
-    
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ address: address }, function (results, status) {
-        if (status === "OK") {
-          const location = results[0].geometry.location;
-          const lat = location.lat();
-          const lng = location.lng();
-          
-          console.log("Latitude: " + lat);
-          console.log("Longitude: " + lng);
-           createMap(lat, lng );
-         } else {
-           alert("Geocode was not successful for the following reason: " + status);
-         }
-       });
-    }else{
-      const mapElement = document.getElementById("map");
-      mapElement.style.height = "198px";
-      mapElement.style.width = "100%";
-  
-          
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: latitude, lng: longitutde },
-        zoom: 15,
-      });
-  
-      // Create the marker
-      const marker = new google.maps.Marker({
-        position: {  lat: latitude, lng: longitutde},
-        map: map,
-        title: "test location", // Optional: adds a tooltip on hover
-      });
+    if (
+        (latitude === 0.0 && longitutde === 0.0) ||
+        (latitude === 0 && longitutde === 0)
+    ) {
+        console.log("Address to geocode: " + address);
+
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: address }, function (results, status) {
+            if (status === "OK") {
+                const location = results[0].geometry.location;
+                const lat = location.lat();
+                const lng = location.lng();
+
+                console.log("Latitude: " + lat);
+                console.log("Longitude: " + lng);
+                createMap(lat, lng);
+            } else {
+                alert(
+                    "Geocode was not successful for the following reason: " +
+                        status
+                );
+            }
+        });
+    } else {
+        const mapElement = document.getElementById("map");
+        mapElement.style.height = "198px";
+        mapElement.style.width = "100%";
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: latitude, lng: longitutde },
+            zoom: 15,
+        });
+
+        // Create the marker
+        const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitutde },
+            map: map,
+            title: "test location", // Optional: adds a tooltip on hover
+        });
     }
- 
-  }
+}
 
+function createMap(lat, lng) {
+    console.log(lat + "  " + lng);
 
-  function createMap(lat, lng) {
-    console.log(lat+'  '+lng);
-    
     const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: lat, lng: lng },
-      zoom: 15,
+        center: { lat: lat, lng: lng },
+        zoom: 15,
     });
-  
-    new google.maps.Marker({
-      position: { lat: lat, lng: lng },
-      map: map,
-      title: "Test Location",
-    });
-  }
 
-  $(document).on("click", ".direction-btn", function () {
+    new google.maps.Marker({
+        position: { lat: lat, lng: lng },
+        map: map,
+        title: "Test Location",
+    });
+}
+
+$(document).on("click", ".direction-btn", function () {
     const lat = $(this).data("lat");
     const long = $(this).data("long");
-  
+
     if (lat && long) {
-      const googleMapsUrl = `https://www.google.com/maps?q=${lat},${long}`;
-      window.open(googleMapsUrl, "_blank"); 
-    } 
-  });
-  
-  // $('#nav-messaging-tab').on("click", function () {
-  //   $('.rsvp-footer-btn-wrp').css('display','none');
-  // });
+        const googleMapsUrl = `https://www.google.com/maps?q=${lat},${long}`;
+        window.open(googleMapsUrl, "_blank");
+    }
+});
 
-  // $('#nav-invite-tab').on("click", function () {
-  //   $('.rsvp-footer-btn-wrp').css('display','block');
-  // });
+// $('#nav-messaging-tab').on("click", function () {
+//   $('.rsvp-footer-btn-wrp').css('display','none');
+// });
 
-  // $(document).on("click", ".nav-link", function () {
-  //   alert();
-  //   $('.rsvp-footer-btn-wrp').css('display','block');
-  // });
-  
+// $('#nav-invite-tab').on("click", function () {
+//   $('.rsvp-footer-btn-wrp').css('display','block');
+// });
+
+// $(document).on("click", ".nav-link", function () {
+//   alert();
+//   $('.rsvp-footer-btn-wrp').css('display','block');
+// });
+
 //   initMap();

@@ -549,8 +549,8 @@ setTimeout(() => {
 }, 3000);
 // Function to update the chat UI
 // $('.empty-massage').css('display','none');
-$('.msg-head').css('display','none');
-$('.msg-footer').css('display','none');
+$(".msg-head").css("display", "none");
+$(".msg-footer").css("display", "none");
 
 async function updateChat(user_id) {
     $(".msg-lists").html("");
@@ -560,7 +560,6 @@ async function updateChat(user_id) {
 
     var selected_user = await getUser(user_id);
     if (!selected_user) {
-
         // $('.msg-head').css('display','none');
         // $('.msg-footer').css('display','none');
         try {
@@ -576,12 +575,11 @@ async function updateChat(user_id) {
         }
 
         // $('.empty-massage').css('display','block');
-
     }
 
-        $('.empty-massage').css('display','none');
-        $('.msg-head').css('display','block');
-        $('.msg-footer').css('display','block');
+    $(".empty-massage").css("display", "none");
+    $(".msg-head").css("display", "block");
+    $(".msg-footer").css("display", "block");
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
@@ -788,7 +786,7 @@ async function updateChatfromGroup(conversationId) {
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
     loader.show();
-    $('.empty-massage').css('display','none');
+    $(".empty-massage").css("display", "none");
     removeSelectedMsg();
     closeMedia();
     $(this).addClass("active");
@@ -1274,7 +1272,15 @@ $(".send-message").on("keyup", async function (e) {
     }, 1000);
 });
 $("#preview").hide();
-
+let mediaRecorder;
+let recordedChunks = [];
+let stream;
+const startButton = document.getElementById("startRecording");
+const stopButton = document.getElementById("stopRecording");
+const playButton = document.getElementById("playRecording");
+const stopPlaybackButton = document.getElementById("stopPlayback");
+const audioElement = document.getElementById("recordedAudio");
+const close = document.getElementsByClassName("close-audio-btn");
 $(".send-message").on("keypress", async function (e) {
     const conversationId = $(".selected_id").val();
     var isGroup = $(".conversation-" + conversationId).attr("data-group");
@@ -1535,7 +1541,6 @@ $(".send-message").on("keypress", async function (e) {
             );
 
             if (
-                
                 receiverSnapshot.val().isMute == undefined ||
                 receiverSnapshot.val().isMute == 0 ||
                 receiverSnapshot.val().isMute == null
@@ -3224,16 +3229,6 @@ $("#choose-file").on("change", async function () {
     }, 500);
 });
 
-let mediaRecorder;
-let recordedChunks = [];
-let stream;
-const startButton = document.getElementById("startRecording");
-const stopButton = document.getElementById("stopRecording");
-const playButton = document.getElementById("playRecording");
-const stopPlaybackButton = document.getElementById("stopPlayback");
-const audioElement = document.getElementById("recordedAudio");
-const close = document.getElementsByClassName("close-audio-btn");
-
 async function startRecording() {
     recordedChunks = [];
     try {
@@ -3907,9 +3902,9 @@ function handleDelete() {
         $("#selected-user-lastseen").html("");
         $(".member-lists").html("");
         $(".selected-title").html("Start new chat");
-        $('.empty-massage').css('display','block');
-        $('.msg-head').css('display','none');
-        $('.msg-footer').css('display','none');
+        $(".empty-massage").css("display", "block");
+        $(".msg-head").css("display", "none");
+        $(".msg-footer").css("display", "none");
     }
 }
 
