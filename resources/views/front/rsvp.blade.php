@@ -108,6 +108,9 @@
                                              <div class="hosted-by-date-time-content">
                                                  <h6>Date</h6>
                                                  <h3>{{Carbon::parse($eventInfo['guest_view']['event_date'])->format('F j, Y')}}</h3>
+                                                 <input type="hidden" id="eventDate" name="eventDate" value="{{$eventInfo['guest_view']['event_date']}}">
+                                                 <input type="hidden" id="eventTime" name="eventTime" value="{{ $eventInfo['guest_view']['event_time'] }}">
+                                                 <input type="hidden" id="eventName" name="eventName" value="{{$eventInfo['guest_view']['event_name']}}">
                                              </div>
                                              </div>
                                              <div class="hosted-by-date-time-left">

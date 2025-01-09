@@ -20,10 +20,36 @@ $(document).ready(function() {
         
     });
 
-     $("#openGoogel").on("click",function(){
-      const googleCalendarUrl = "https://calendar.google.com";
+    //  $("#openGoogel").on("click",function(){
+    //  const eventDate= $("eventDate").val();
+    //  const eventTime= $("eventTime").val();
+    //  const eventName= $("eventName").val();
+     
+    //   const googleCalendarUrl = "https://calendar.google.com";
+    //   window.open(googleCalendarUrl, "_blank");
+    //  })
+
+    $("#openGoogle").on("click", function () {
+      const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
+      const eventTime = $("#eventTime").val(); // e.g., "10:00"
+      const eventName = $("#eventName").val(); // e.g., "Team Meeting"
+      
+      if (!eventDate || !eventTime || !eventName) {
+          alert("Please fill in all event details.");
+          return;
+      }
+  
+      // Convert the event date and time to Google Calendar format
+      const eventStart = new Date(`${eventDate}T${eventTime}`).toISOString().replace(/-|:|\.\d+/g, '');
+      const eventEnd = new Date(new Date(`${eventDate}T${eventTime}`).getTime() + 60 * 60 * 1000).toISOString().replace(/-|:|\.\d+/g, ''); // Add 1 hour to the start time
+  
+      // Google Calendar URL
+      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${eventStart}/${eventEnd}&details=&location=&sf=true&output=xml`;
+  
+      // Open Google Calendar with the pre-filled event
       window.open(googleCalendarUrl, "_blank");
-     })
+  });
+  
 
     function toggleGuestCount() {
         const isNoSelected = $('#no').is(':checked');
