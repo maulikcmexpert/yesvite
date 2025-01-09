@@ -208,9 +208,9 @@ ul.chat-list li:hover {
     background-color: #F8F9FD !important;
 }
 
-ul.chat-list li:last-child {
+/* ul.chat-list li:last-child {
     border-bottom: 0;
-}
+} */
 
 .chat-list .user-img .active {
     width: 14px;
