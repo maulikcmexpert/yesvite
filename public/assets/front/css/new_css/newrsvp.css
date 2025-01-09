@@ -1078,15 +1078,21 @@ display:none;}
     font-size: 16px !important;
 }
 
-.rsvp-yes-modal .modal .modal-dialog{
+.rsvp-yes-modal.modal .modal-dialog{
     margin-top: unset !important;
 }
-.rsvp-no-modal .modal .modal-dialog{
+.rsvp-no-modal.modal .modal-dialog{
     margin-top: unset !important;
     height: auto !important;
 }
 
-
+.rsvp-yes-modal.modal .modal-dialog{
+    margin-top: unset !important;
+}
+.rsvp-no-modal.modal .modal-dialog{
+    margin-top: unset !important;
+    height: auto !important;
+}
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
