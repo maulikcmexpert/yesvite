@@ -1080,6 +1080,7 @@ display:none;}
 
 .rsvp-yes-modal.modal .modal-dialog{
     margin-top: var(--bs-modal-margin) !important;
+    height: auto !important;
 }
 .rsvp-no-modal.modal .modal-dialog{
     margin-top: var(--bs-modal-margin) !important;
@@ -1088,10 +1089,16 @@ display:none;}
 
 .rsvp-yes-modal.modal .modal-dialog{
     margin-top: var(--bs-modal-margin) !important;
+    height: auto !important;
 }
 .rsvp-no-modal.modal .modal-dialog{
     margin-top: var(--bs-modal-margin) !important;
     height: auto !important;
+}
+
+.rsvp-msgbox svg{
+    width: 16px !important;
+    height: 16px !important;
 }
 
 /* ====== responsive ======= */
