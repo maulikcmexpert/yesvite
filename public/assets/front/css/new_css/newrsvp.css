@@ -647,10 +647,10 @@ display:none;}
 }
 
 .rsvp-location-wrp p{
-    font-family: var(--SFProDisplay-Regular);
-    font-size: 14px;
-    line-height: normal;
-    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Regular) !important;
+    font-size: 14px !important;
+    line-height: normal !important;
+    color: #64748B !important;
 }
 
 .rsvp-guest-user-list-wrp{
