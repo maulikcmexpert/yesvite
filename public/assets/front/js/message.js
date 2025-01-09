@@ -4099,17 +4099,22 @@ if (
         var hostId = $("#host_id").val();
         var hostName = $("#host_name").val();
         var hostImage = $("#host_profile").val();
-        sendMessageHost(hostId, hostName, hostImage);
+        sendMessageHost(hostId, hostName, hostImage, "host");
 
         var co_host_id = $("#co_host_id").val();
         var co_host_name = $("#co_host_name").val();
         var co_host_profile = $("#co_host_profile").val();
         if (co_host_id != "") {
-            sendMessageHost(co_host_id, co_host_name, co_host_profile);
+            sendMessageHost(
+                co_host_id,
+                co_host_name,
+                co_host_profile,
+                "co-host"
+            );
         }
     });
 }
-async function sendMessageHost(contactId, contactName, receiverProfile) {
+async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     const currentUserId = senderUser;
     const conversationId = await findOrCreateSingleConversation(
         currentUserId,
@@ -4145,6 +4150,16 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     $(".selected_id").val(conversationId);
     $(".selected_message").val(contactId);
     $(".selected_name").val(contactName);
+
+    var ele = $(
+        document.getElementsByClassName(`conversation-${conversationId}`)
+    );
+    console.log({ type });
+    console.log($(ele).find(".user-detail"));
+    console.log($(ele).find(".user-detail").children());
+    console.log($(ele).find(".user-detail").children().find(".host-type"));
+    $(ele).find(".user-detail").children().find(".host-type").text(type);
+
     await updateChat(contactId);
 }
 if ($(".msg-btn").length && $("#nav-messaging-tab").length) {
@@ -4169,7 +4184,8 @@ async function findOrCreateSingleConversation(
         ref(database, `overview/${currentUserId}/${newConversationId}`)
     );
     if (receiverSnapshot.val() != null) {
-        return;
+        console.log("no need to new ");
+        return newConversationId;
     }
     const newConversationData = {
         contactId: contactId,
