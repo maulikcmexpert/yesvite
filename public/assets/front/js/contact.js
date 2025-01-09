@@ -142,6 +142,8 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $("#loader").hide();
+                    $("#yesviteUser").html("No search result found")
+
                     return;
                 }
                 $("#loader").hide();
@@ -175,6 +177,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.html == " ") {
                     $("#loader").html("No more groups found");
+                    $("#yesviteGroups").html("No search result found");
                     return;
                 }
                 $("#loader").hide();
@@ -207,6 +210,7 @@ $(document).on("keyup", ".search_phone", function () {
                 if (data.status == "0") {
                     $("#loader").hide();
                     // busy2 = true; 
+                    $("#yesvitePhones").html("No search result found")
                     busy2 = false;
 
                     return;
