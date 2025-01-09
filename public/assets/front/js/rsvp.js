@@ -42,7 +42,7 @@ $(document).ready(function() {
       // Convert the event date and time to Google Calendar format
       // const eventStart = new Date(`${eventDate}T${eventTime}`).toISOString().replace(/-|:|\.\d+/g, '');
       // const eventEnd = new Date(new Date(`${eventDate}T${eventTime}`).getTime() + 60 * 60 * 1000).toISOString().replace(/-|:|\.\d+/g, ''); // Add 1 hour to the start time
-  alert(eventStart);
+  // alert(eventStart);
       // Google Calendar URL
       const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${eventDate}/${eventDate}&details=&location=&sf=true&output=xml`;
   
