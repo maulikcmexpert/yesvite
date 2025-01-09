@@ -4180,6 +4180,11 @@ async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     );
 
     $(ele).find(".user-detail").children().find(".host-type").text(type);
+    $(ele)
+        .find(".user-detail")
+        .children()
+        .find(".host-type")
+        .removeClass("d-none");
 
     await updateChat(contactId);
 }
