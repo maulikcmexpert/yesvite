@@ -4129,6 +4129,15 @@ if ($(".chost-msg").length) {
         }
     });
 }
+
+if ($(".host-msg").length) {
+    $(".host-msg").on("click", async function () {
+        var hostId = $("#host_id").val();
+        var hostName = $("#host_name").val();
+        var hostImage = $("#host_profile").val();
+        await sendMessageHost(hostId, hostName, hostImage, "host");
+    });
+}
 async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     const currentUserId = senderUser;
     const conversationId = await findOrCreateSingleConversation(
