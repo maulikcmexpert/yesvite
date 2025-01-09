@@ -1672,13 +1672,13 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="wall_post" id="flexCheckDefault1" checked>
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Wall Posts & Updates<br>
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="guest_rsvp" id="flexCheckDefault1" checked>
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Guests RSVP Responses <br>
                                             </label>
