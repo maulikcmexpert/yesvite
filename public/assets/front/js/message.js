@@ -4167,8 +4167,8 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
     // });
     await updateChat(contactId);
 }
-if ($("#msg-btn").length && $("#nav-messaging-tab").length) {
-    $("#msg-btn").on("click", function () {
+if ($(".msg-btn").length && $("#nav-messaging-tab").length) {
+    $(".msg-btn").on("click", function () {
         $("#nav-messaging-tab").click();
     });
 }
