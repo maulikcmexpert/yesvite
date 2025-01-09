@@ -20,6 +20,10 @@ $(document).ready(function() {
         
     });
 
+     $("#openGoogel").on("click",function(){
+      const googleCalendarUrl = "https://calendar.google.com";
+      window.open(googleCalendarUrl, "_blank");
+     })
 
     function toggleGuestCount() {
         const isNoSelected = $('#no').is(':checked');
