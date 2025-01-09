@@ -2099,6 +2099,7 @@ const createICSFile = (start, end, title, description, location) => {
     // Generate the ICS file content
     return calendar.toString();
 };
+alert("downloadLink")
 
 // Example event details
 const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
