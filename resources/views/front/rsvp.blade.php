@@ -8,11 +8,20 @@
             $co_host_id="";
             $co_host_name="";
             $co_host_profile="";
+
+            
             if(!empty($eventInfo['guest_view']['co_hosts'])){
                 $coHost = $eventInfo['guest_view']['co_hosts'][0];
                 $co_host_id=$coHost['id'];
                 $co_host_name=$coHost['name'];
                 $co_host_profile=$coHost['profile'];
+            }
+
+            $firstname="";
+            $lastname="";
+            if(Auth::guard('web')->check()){
+                    $userId = Auth::guard('web')->user();
+                    dd($userId);                
             }
     @endphp
 <x-front.advertise />
