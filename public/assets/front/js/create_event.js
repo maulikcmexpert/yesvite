@@ -569,9 +569,11 @@ $(function() {
 
 $(function () {
     var selectedDates = new Set();
-    
+    let ed = document.getElementById('event-date')
+     var oldDate = $(ed).attr('data-isDate')
     $("#event-date").daterangepicker(
         {
+           
             autoUpdateInput: false,
             locale: {
                 format: "MM/DD/YYYY",
@@ -584,9 +586,9 @@ $(function () {
             maxSpan: { days: 2 },
         },
         
-        function (start, end, label) {
-            
-            
+        function (start, end, label) {   
+            // const isDate = $(this)  // Get the data attribute inside the callback
+                    
             selectedDates.clear();
             // selectedDates.add(start.format("YYYY-MM-DD"));
             // selectedDates.add(end.format("YYYY-MM-DD"));
@@ -602,9 +604,14 @@ $(function () {
 
             $("#event-date").val(eventDate).trigger('change');
 
+            
             $(".activity_bar").children().not(".toggle-wrp").remove();
-            $('#schedule').prop("checked",false);
-            $('.add-activity-schedule').hide();
+            // $('#schedule').prop("checked",false);
+            // $('.add-activity-schedule').hide();
+            if(oldDate!=""){
+                $("#isnewdata").show();
+                $("#isolddata").hide();
+            }
             // alert();
             $("#end_time").prop("checked", false);
             $("#end-time").val("");

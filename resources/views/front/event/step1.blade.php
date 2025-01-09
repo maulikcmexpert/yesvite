@@ -1,4 +1,5 @@
 @php
+
     use Carbon\Carbon;
 @endphp
 <div class="step_1" style="display: none;">
@@ -64,8 +65,7 @@
                                 }
                             @endphp
                          
-                                <input type="text" class="form-control inputText" id="event-date"
-                                    name="event-date" onblur="clearError(this)" readonly>
+                                <input type="text" class="form-control inputText" id="event-date" data-isDate="{{$start_date}}" name="event-date" onblur="clearError(this)"  value="{{$start_date}}" readonly>
                         
                             <label for="birthday" class="form-label input-field floating-label select-label">Date of event</label>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="input-group time start-time">
                                 <input type="text" class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time"
                                  name="start-time" onblur="clearError(this)" readonly 
-                                 value="{{(isset($eventDetail['rsvp_start_time']) && $eventDetail['rsvp_start_time'] != '')?$eventDetail['rsvp_start_time']:''}}"/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 value="{{(isset($eventDetail['rsvp_start_time']) && $eventDetail['rsvp_start_time'] != '')?$eventDetail['rsvp_start_time']:'12:00 AM'}}"/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></span></span>
@@ -127,10 +127,11 @@
                         <div class="add-activity-schedule" style="{{$style}}">
                             <h5 class="step_1_activity">
                                 @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
-                                    {{count($eventDetail['events_schedule_list']->data)}} Activity       
+                                  <p id="isolddata">  {{count($eventDetail['events_schedule_list']->data)}} Activity    </p>   
                                 @else
                                     <span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule
                                 @endif
+                               <p id="isnewdata" style="display: none"> <span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule</p>
                             </h5>
                             <i class="fa-solid fa-angle-right"></i>
                         </div>
