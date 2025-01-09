@@ -348,15 +348,8 @@ class AccountSettingController extends Controller
             $percentageIncreaseByYear = round((($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins, 2);
         }
 
-        // return response()->json([
-        //     'status' => 1,
-        //     'message' => 'Coin Transactions',
-        //     'graph_data' => $result,
-        //     'last_month_balance' => (string)$lastMonthBalance,
-        //     'last_month_comparison_percentage' => (string)$percentageIncrease,
-        //     'last_year_comparison' => (string)$percentageIncreaseByYear,
-        //     'credit_use_this_year' => (string)$debitSums->current_year_coins
-        // ]);
+        $userSubscription = User::where('id', $id)->first();
+
         $data = [
             'status' => 1,
             'message' => 'Coin Transactions',
@@ -365,6 +358,7 @@ class AccountSettingController extends Controller
             'last_month_comparison_percentage' => (string)$percentageIncrease,
             'last_year_comparison' => (string)$percentageIncreaseByYear,
             'credit_use_this_year' => (string)$debitSums->current_year_coins,
+            'coins'=>(int)$userSubscription->coins
         ];
         
         
