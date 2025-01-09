@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coin_transactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -268,5 +269,106 @@ class AccountSettingController extends Controller
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
+    }
+
+    public function transactions(){
+        $title = 'Transaction';
+        $page = 'front.transaction';
+        $id = Auth::guard('web')->user()->id;
+
+        $user = User::with('user_profile_privacy')->withCount(
+            [
+                'event' => function ($query) {
+                    $query->where('is_draft_save', '0');
+                }, 'event_post' => function ($query) {
+                    $query->where('post_type', '1');
+                },
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
+
+
+            ]
+        )->findOrFail($id);
+
+        $transcation=Coin_transactions::where('user_id',$id)->get();
+
+
+
+        $lastSevenMonths = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $lastSevenMonths->push(Carbon::now()->subMonths($i)->format('M'));
+        }
+
+        $transactionData = Coin_transactions::selectRaw('
+                DATE_FORMAT(created_at, "%b") as month, 
+                current_balance
+            ')
+            ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+            ->where('user_id', $id)
+            ->whereIn('id', function ($query) use ($id) {
+                $query->select(DB::raw('MAX(id)'))
+                    ->from('coin_transactions')
+                    ->whereRaw('user_id = ?', [$id])
+                    ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+                    ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'));
+            })
+            ->pluck('current_balance', 'month');
+        $currentYear = Carbon::now()->year;
+        $lastYear = $currentYear - 1;
+
+        $debitSums = Coin_transactions::selectRaw("
+            SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as current_year_coins,
+            SUM(CASE WHEN YEAR(created_at) = ? AND type = 'debit' THEN coins ELSE 0 END) as last_year_coins
+        ", [$currentYear, $lastYear])->where('user_id', $id)->first();
+
+        $lastBalance = 0;
+        $result = $lastSevenMonths->map(function ($month) use ($transactionData, &$lastBalance) {
+            $currentBalance = $transactionData->get($month, $lastBalance);
+            $lastBalance = $currentBalance;
+            return [
+                'month' => strtoupper($month),
+                'current_balance' => $currentBalance,
+            ];
+        });
+
+        $lastTwoItems = $result->slice(-2)->values();
+        $lastMonthBalance = (isset($lastTwoItems[0]['current_balance']) && $lastTwoItems[0]['current_balance'] != '') ? $lastTwoItems[0]['current_balance'] : 0;
+        $thisMonthBalance = (isset($lastTwoItems[1]['current_balance']) && $lastTwoItems[1]['current_balance'] != '') ? $lastTwoItems[1]['current_balance'] : 0;
+        $percentageIncrease = 0;
+        if ($lastMonthBalance > 0) {
+            // $percentageIncrease = (($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance;
+            $percentageIncrease = round((($thisMonthBalance - $lastMonthBalance) * 100) / $lastMonthBalance, 2);
+        }
+
+        $percentageIncreaseByYear = 0;
+        if ($debitSums->last_year_coins > 0) {
+            // $percentageIncreaseByYear = (($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins;
+            $percentageIncreaseByYear = round((($debitSums->current_year_coins - $debitSums->last_year_coins) * 100) / $debitSums->last_year_coins, 2);
+        }
+
+        $userSubscription = User::where('id', $id)->first();
+
+        $data = [
+            'status' => 1,
+            'message' => 'Coin Transactions',
+            'graph_data' => $result,
+            'last_month_balance' => (string)$lastMonthBalance,
+            'last_month_comparison_percentage' => (string)$percentageIncrease,
+            'last_year_comparison' => (string)$percentageIncreaseByYear,
+            'credit_use_this_year' => (string)$debitSums->current_year_coins,
+            'coins'=>(int)$userSubscription->coins
+        ];
+        
+        
+
+        return view('layout', compact(
+            'title',
+            'page',
+            'user',
+            'transcation',
+            'data'
+        ));
     }
 }

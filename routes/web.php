@@ -128,6 +128,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('profile/profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
     Route::post('profile/update_profile_privacy',  [ProfileController::class, 'updateProfilePrivacy']);
     Route::get('account_settings',  [AccountSettingController::class, 'index'])->name('profile.account_settings');
+    Route::get('transactions',  [AccountSettingController::class, 'transactions'])->name('profile.transaction');
     Route::get('account_settings/notification_setting',  [AccountSettingController::class, 'notificationSetting'])->name('account_settings.notificationSetting');
     Route::post('update_account_setting',  [AccountSettingController::class, 'updateAccountSetting']);
     Route::get('delete_account',  [AccountSettingController::class, 'deleteAccount'])->name('account.delete');

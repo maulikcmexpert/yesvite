@@ -36,11 +36,8 @@ $("#product-scroll-phone").on("scroll", function () {
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
-        console.log({scrollTop,
-            scrollHeight,
-            elementHeight})
+     
             if (scrollTop + elementHeight >= scrollHeight) {
-                alert();
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
@@ -145,6 +142,8 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $("#loader").hide();
+                    $("#yesviteUser").html("No search result found")
+
                     return;
                 }
                 $("#loader").hide();
@@ -178,6 +177,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.html == " ") {
                     $("#loader").html("No more groups found");
+                    $("#yesviteGroups").html("No search result found");
                     return;
                 }
                 $("#loader").hide();
@@ -210,6 +210,7 @@ $(document).on("keyup", ".search_phone", function () {
                 if (data.status == "0") {
                     $("#loader").hide();
                     // busy2 = true; 
+                    $("#yesvitePhones").html("No search result found")
                     busy2 = false;
 
                     return;
@@ -353,22 +354,22 @@ $(document).on("keyup", ".search_phone", function () {
                 data: formData,
 
                 success: function (output) {
-                    console.log(output.status);
-                    $("#myModal1").modal("hide");
+                    console.log(output);
 
                     if (output.status == 1) {
-                        removeLoaderHandle("#save_contact", "Save Contact");
-                        $("#Fname").val(output.user.firstname);
-                        $("#Lname").val(output.user.lastname);
+                        // removeLoaderHandle("#save_contact", "Save Contact");
+                        // $("#Fname").val(output.user.firstname);
+                        // $("#Lname").val(output.user.lastname);
 
-                        $("#email").val(output.user.email);
+                        // $("#email").val(output.user.email);
                         
-                        $("#phone_number").val(output.user.phone_number);
+                        // $("#phone_number").val(output.user.phone_number);
 
                         toastr.success(output.message);
 
                         $("#add_contact")[0].reset();
                         $("#myModal1").modal("hide");
+                        window.location.reload();
                     } else {
                         removeLoaderHandle("#save_contact", "Save Contact");
                         toastr.error(output.message);
@@ -586,16 +587,20 @@ $(document).on("keyup", ".search_phone", function () {
             data: formData,
 
             success: function (output) {
-                console.log(output);
+                console.log(output.user);
 
                 if (output.status == 1) {
-                    removeLoaderHandle("#save_contact", "Save Contact");
-                    $("#Fname").val(output.user.firstname);
-                    $("#Lname").val(output.user.lastname);
+                    // removeLoadeerHandle("#save_contact", "Save Contact");
+                    // toastr.success(output.message);
 
-                    $("#email").val(output.user.email);
-                    $("#phone_number").val(output.user.phone_number);
-
+                    if(output.user!=""){
+                        $("#Fname").val(output.user.firstname);
+                        $("#Lname").val(output.user.lastname);
+    
+                        $("#email").val(output.user.email);
+                        $("#phone_number").val(output.user.phone_number);
+                    }
+               
                     toastr.success(output.message);
 
                     $("#edit_contact_form")[0].reset();

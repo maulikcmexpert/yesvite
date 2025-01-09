@@ -8,6 +8,7 @@
 @import url('./calender.css');
 @import url('./newrsvp.css');
 @import url('./about-rsvp.css');
+@import url('./transactionhistory.css');
 
 *{
     margin: 0;

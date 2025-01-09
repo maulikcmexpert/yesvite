@@ -10,10 +10,19 @@
        @php
             $initials = '';
             $fontColor = '';
+            if(!empty($value->firstname)){
+                $initials = strtoupper($value->firstname[0]);
+                $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
+            }
+            if(empty($value->firstname)&&!empty($value->lastname)){
+                $initials = "" . strtoupper($value->lastname[0]);
+                $fontColor = "fontcolor" . strtoupper($value->lastname[0]);
+            }
             if (!empty($value->firstname) && !empty($value->lastname)) {
                 $initials = strtoupper($value->firstname[0]) . strtoupper($value->lastname[0]);
                 $fontColor = "fontcolor" . strtoupper($value->firstname[0]);
             }
+           
             @endphp
 <div class="users-data">
     <div class="d-flex align-items-start">
