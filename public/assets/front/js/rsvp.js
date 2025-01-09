@@ -253,8 +253,8 @@ $(document).ready(function () {
         $("#adults").val("0");
         $("#kids").val("0");
         $(".message_to_host").val("");
-        $(".firstname").val("");
-        $(".lastname").val("");
+        // $(".firstname").val("");
+        // $(".lastname").val("");
     });
 });
 $(document).ready(function () {
@@ -262,8 +262,8 @@ $(document).ready(function () {
         $("#adults").val("0");
         $("#kids").val("0");
         $(".message_to_host").val("");
-        $(".firstname").val("");
-        $(".lastname").val("");
+        // $(".firstname").val("");
+        // $(".lastname").val("");
     });
 });
 

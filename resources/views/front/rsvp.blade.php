@@ -8,11 +8,23 @@
             $co_host_id="";
             $co_host_name="";
             $co_host_profile="";
+
+            
             if(!empty($eventInfo['guest_view']['co_hosts'])){
                 $coHost = $eventInfo['guest_view']['co_hosts'][0];
                 $co_host_id=$coHost['id'];
                 $co_host_name=$coHost['name'];
                 $co_host_profile=$coHost['profile'];
+            }
+
+            $firstname="";
+            $lastname="";
+            if(Auth::guard('web')->check()){
+                    $user = Auth::guard('web')->user();
+                    // dd($userId);
+                    $firstname= $user->firstname;   
+                    $lastname= $user->lastname;                
+             
             }
     @endphp
 <x-front.advertise />
@@ -1591,13 +1603,13 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
+                                                    <input type="text" name="firstname" value="{{$firstname}}" id="firstname" class="form-control inputText firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" id="lastname"  class="form-control inputText lastname" maxlength="50" >
+                                                    <input type="text"  name="lastname" value="{{$lastname}}" id="lastname"  class="form-control inputText lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                             </div>
@@ -1713,13 +1725,13 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" id="firstname" class="form-control inputText firstname" maxlength="50" >
+                                            <input type="text" name="firstname" value="{{$firstname}}" id="firstname" class="form-control inputText firstname" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" id="lastname" class="form-control inputText lastname" maxlength="50" >
+                                            <input type="text" name="lastname" value="{{$lastname}}" id="lastname" class="form-control inputText lastname" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
