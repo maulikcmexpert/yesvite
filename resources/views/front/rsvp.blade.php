@@ -118,10 +118,10 @@
                                                     $final_end_date="";
                                                      if($eventInfo['guest_view']['event_end_date']!=""){
                                                         $event_end_date=Carbon::parse($eventInfo['guest_view']['event_end_date'])->format('F j, Y');
-                                                        $final_end_date=' to'.$event_end_date;
+                                                        $final_end_date='to '.$event_end_date;
                                                      }
                                                  @endphp
-                                                 <h3>{{Carbon::parse($eventInfo['guest_view']['event_date'])->format('F j, Y')}}{{$final_end_date}}</h3>
+                                                 <h3>{{Carbon::parse($eventInfo['guest_view']['event_date'])->format('F j, Y')}} {{$final_end_date}}</h3>
                                                  <input type="hidden" id="eventDate" name="eventDate" value="{{$eventInfo['guest_view']['event_date']}}">
                                                  <input type="hidden" id="eventTime" name="eventTime" value="{{ $eventInfo['guest_view']['event_time'] }}">
                                                  <input type="hidden" id="eventName" name="eventName" value="{{$eventInfo['guest_view']['event_name']}}">
