@@ -1,4 +1,4 @@
-{{-- {{dd($transcation);}} --}}
+{{-- {{dd($data);}} --}}
 <x-front.advertise />
 <section class="transaction_history_wrp">
     <div class="container">
@@ -16,9 +16,9 @@
                         <div class="credits_balance_amout_wrp">
                             <h5>
                                 <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
-                                <span>1.200</span>
+                                <span>{{$data['last_month_balance']}}</span>
                             </h5>
-                            <h6><span><i class="fa-solid fa-arrow-up"></i> 20%</span>Compared to 400 credits last month</h6>
+                            <h6><span><i class="fa-solid fa-arrow-up"></i> {{$data['last_month_comparison_percentage']}}%</span>Compared to 400 credits last month</h6>
                         </div>
                         <canvas id="creditChart"></canvas>
                         <div class="credits_balance_used_wrp">
@@ -27,9 +27,9 @@
                         </div>
                         <div class="credits_balance_amout_wrp credits_balance_amout_after">
                             <h5>
-                                <span>300</span>
+                                <span>{{$data['credit_use_this_year']}}</span>
                             </h5>
-                            <h6><span><i class="fa-solid fa-arrow-up"></i> 20%</span>Compared to 400 credits last month</h6>
+                            <h6><span><i class="fa-solid fa-arrow-up"></i> {{$data['last_year_comparison']}}%</span>Over last year</h6>
                         </div>
                         <div class="transaction_detail_wrp">
                             <div class="transaction_detail_title">
