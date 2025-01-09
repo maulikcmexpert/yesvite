@@ -2052,6 +2052,21 @@
   </div>
 </div>
 </section>
+
+@if ($userId!=0)
+
+@push('scripts')
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script type="module" src="{{asset('assets/front/js/audio.js')}}"></script>
+    <script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
+    <script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
+  
+@endpush
+@endif
+@push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
 <script>
     const createICSFile = (
@@ -2167,20 +2182,8 @@
             const calendarLink = document.querySelector(".add-calender");
 
             // Set the href attribute to the URL of the .ics file
-            calendarLink.href = URL.createObjectURL(icsBlob);
+            calendarLink.ios-href = URL.createObjectURL(icsBlob);
             calendarLink.download = "event.ics";
 
 </script>
-@if ($userId!=0)
-
-@push('scripts')
-    
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-    <script type="module" src="{{asset('assets/front/js/audio.js')}}"></script>
-    <script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
-    <script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
-  
 @endpush
-@endif
