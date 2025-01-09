@@ -1652,7 +1652,7 @@
                                         <h5>Message</h5>
                                         <div class="input-form">
                                             <textarea class="form-control inputText message_to_host" id="message_to_host" name="message_to_host" message=""  maxlength="50"></textarea>
-                                            <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
+                                            <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <span class="d-flex align-items-center">
@@ -1674,7 +1674,19 @@
                                         <div class="form-check">
                                             <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
                                             <label class="form-check-label" for="flexCheckDefault1">
-                                                All event activity <br>
+                                                Wall Posts & Updates<br>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
+                                            <label class="form-check-label" for="flexCheckDefault1">
+                                                Guests RSVP Responses <br>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
+                                            <label class="form-check-label" for="flexCheckDefault1">
+                                                Special offers ( From Yesvite & partners) <br>
                                             </label>
                                         </div>
                                     </div>
@@ -1753,7 +1765,7 @@
                                 <h5>Message</h5>
                                 <div class="input-form">
                                     <textarea class="form-control inputText message_to_host" id="message_to_host" name="message_to_host" required=""  maxlength="50"></textarea>
-                                    <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
+                                    <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <span class="d-flex align-items-center">
@@ -1765,7 +1777,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary no_rsvp_btn" data-bs-dismiss="modal">RSVP</button>
+                            <button type="button" class="btn btn-secondary no_rsvp_btn" data-bs-dismiss="modal">Send RSVP</button>
                         </div>
                 </form>
             </div>
