@@ -16,20 +16,92 @@ $(document).ready(function () {
             return;
         }
     });
-  
+
+    // $("#openGoogle").on("click", function () {
+    //     const eventDate = $("#eventDate").val();
+    //     const eventEndDate = $("#eventEndDate").val();
+    //     const eventTime = $("#eventTime").val();
+    //     const eventEndTime = $("#eventEndTime").val() || "12:00 PM";
+    //     const eventName = $("#eventName").val();
+
+    //     if (!eventDate || !eventTime) {
+    //         alert("Please provide both date and time for the event.");
+    //         return;
+    //     }
+
+    //     const convertTo24HourFormat = (time) => {
+    //         const [hour, minuteWithPeriod] = time.split(":");
+    //         const [minute, period] = minuteWithPeriod.split(" ");
+    //         let newHour = parseInt(hour);
+    //         if (period.toLowerCase() === "pm" && newHour !== 12) {
+    //             newHour += 12;
+    //         }
+    //         if (period.toLowerCase() === "am" && newHour === 12) {
+    //             newHour = 0;
+    //         }
+    //         return `${newHour}:${minute}`;
+    //     };
+
+    //     const formattedTime = convertTo24HourFormat(eventTime);
+    //     const formattedEndTime = convertTo24HourFormat(eventEndTime);
+    //     const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
+
+    //     if (isNaN(startDateTime)) {
+    //         alert("Invalid start date or time value. Please check the input.");
+    //         return;
+    //     }
+
+    //     let endDateTime;
+    //     if (eventEndDate) {
+    //         console.log("eventEndDate:", eventEndDate);
+    //         console.log("formattedEndTime:", formattedEndTime);
+    //         console.log("formattedEndTime:", formattedEndTime);
+
+    //         const endDateString = `${eventEndDate}T${formattedEndTime}:00Z`;
+
+    //         const formattedEndDate = new Date(endDateString);
+
+    //         if (isNaN(formattedEndDate)) {
+    //             alert(
+    //                 "Invalid end date or time value. Please check the input."
+    //             );
+    //             return;
+    //         }
+
+    //         endDateTime = formattedEndDate;
+    //     } else {
+    //         endDateTime = new Date(startDateTime);
+    //         endDateTime.setHours(endDateTime.getHours() + 1);
+    //     }
+
+    //     const formatToGoogleCalendar = (date) => {
+    //         return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
+    //     };
+
+    //     const eventDetails = {
+    //         title: eventName || "Meeting with Team",
+    //         start: formatToGoogleCalendar(startDateTime),
+    //         end: formatToGoogleCalendar(endDateTime),
+    //     };
+
+    //     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+    //         eventDetails.title
+    //     )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
+
+    //     window.open(googleCalendarUrl, "_blank");
+    // });
     $("#openGoogle").on("click", function () {
-      const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
-      const eventEndDate = $("#eventEndDate").val(); // e.g., "2025-01-10"
-      const eventTime = $("#eventTime").val(); // e.g., "10:00 AM"
-      const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default to "12:00 PM" if not provided
-      const eventName = $("#eventName").val(); // e.g., "Team Meeting"
-  
+      const eventDate = $("#eventDate").val();
+      const eventEndDate = $("#eventEndDate").val();
+      const eventTime = $("#eventTime").val();
+      const eventEndTime = $("#eventEndTime").val() || "12:00 PM";
+      const eventName = $("#eventName").val();
+     
       if (!eventDate || !eventTime) {
           alert("Please provide both date and time for the event.");
           return;
       }
-  
-      // Convert the event time to a 24-hour format
+     
       const convertTo24HourFormat = (time) => {
           const [hour, minuteWithPeriod] = time.split(":");
           const [minute, period] = minuteWithPeriod.split(" ");
@@ -42,144 +114,85 @@ $(document).ready(function () {
           }
           return `${newHour}:${minute}`;
       };
-  
-      // Convert the event time to 24-hour format
+     
       const formattedTime = convertTo24HourFormat(eventTime);
       const formattedEndTime = convertTo24HourFormat(eventEndTime);
-  
-      // Combine date and time for the start time (use UTC format)
       const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
-  
-      // Check if startDateTime is valid
+     
       if (isNaN(startDateTime)) {
           alert("Invalid start date or time value. Please check the input.");
           return;
       }
-  
-      // Set the end time (if eventEndDate is provided, use it; otherwise, use eventEndTime)
+     
       let endDateTime;
       if (eventEndDate) {
-          // Check the provided end date and end time
-          console.log("eventEndDate:", eventEndDate);
-          console.log("formattedEndTime:", formattedEndTime);
-          console.log("formattedEndTime:", formattedEndTime);
-          
-          // Combine eventEndDate and eventEndTime to form the end date string
           const endDateString = `${eventEndDate}T${formattedEndTime}:00Z`;
-  
-          // Create a new Date object from the combined end date and time
           const formattedEndDate = new Date(endDateString);
-  
-          // Check if the formatted end date is valid
+     
           if (isNaN(formattedEndDate)) {
               alert("Invalid end date or time value. Please check the input.");
               return;
           }
-  
+     
           endDateTime = formattedEndDate;
       } else {
-          // Default end time logic if no end date is provided (1 hour after start time)
           endDateTime = new Date(startDateTime);
-          endDateTime.setHours(endDateTime.getHours() + 1); // Set default 1 hour after the start time
+          endDateTime.setHours(endDateTime.getHours() + 1);
       }
-  
-      // Format the dates for Google Calendar
+     
       const formatToGoogleCalendar = (date) => {
           return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
       };
-  
+     
       const eventDetails = {
-          title: eventName || "Meeting with Team", // Event title
-          start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-          end: formatToGoogleCalendar(endDateTime), // End time in UTC format
+          title: eventName || "Meeting with Team",
+          start: formatToGoogleCalendar(startDateTime),
+          end: formatToGoogleCalendar(endDateTime),
       };
-  
-      // Construct Google Calendar URL
-      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-          eventDetails.title
-      )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
-  
-      // Open the URL in a new tab
-      window.open(googleCalendarUrl, "_blank");
-  });
-  
-  
-
-  //   $("#openGoogle").on("click", function () {
-  //     const eventDate = $("#eventDate").val(); 
-  //     const eventEndDate = $("#eventEndDate").val();
-  //     const eventTime = $("#eventTime").val(); 
-  //     const eventEndTime = $("#eventEndTime").val(); 
-  //     const eventName = $("#eventName").val(); 
-
-  
-  //     if (!eventDate || !eventTime) {
-  //         alert("Please provide both date and time for the event.");
-  //         return;
-  //     }
-  
-  //     // Convert the event time to a 24-hour format
-  //     const convertTo24HourFormat = (time) => {
-  //         const [hour, minuteWithPeriod] = time.split(":");
-  //         const [minute, period] = minuteWithPeriod.split(" ");
-  //         let newHour = parseInt(hour);
-  //         if (period.toLowerCase() === "pm" && newHour !== 12) {
-  //             newHour += 12;
-  //         }
-  //         if (period.toLowerCase() === "am" && newHour === 12) {
-  //             newHour = 0;
-  //         }
-  //         return `${newHour}:${minute}`;
-  //     };
-  
-  //     // Convert the event time to 24-hour format
-  //     const formattedTime = convertTo24HourFormat(eventTime);
-  
-  //     // Combine date and time for the start time (use UTC format)
-  //     const startDateTime = new Date(`${eventDate}T${formattedTime}:00Z`);
-  
-  //     // Check if startDateTime is valid
-  //     if (isNaN(startDateTime)) {
-  //         alert("Invalid date or time value. Please check the input.");
-  //         return;
-  //     }
-  
-  //     // Set the end time (if eventEndDate is provided, use it; otherwise, set it 1 hour after start time)
-  //     let endDateTime;
-  //     if (eventEndDate) {
-  //         // Use the provided end date with the same time as the start time
-  //         const formattedEndDate = new Date(`${eventEndDate}T${formattedTime}:00Z`);
-  //         if (isNaN(formattedEndDate)) {
-  //             alert("Invalid end date or time value. Please check the input.");
-  //             return;
-  //         }
-  //         endDateTime = formattedEndDate;
-  //     } else {
-  //         // Default to 1 hour after the start time
-  //         endDateTime = new Date(startDateTime);
-  //         endDateTime.setHours(endDateTime.getHours() + 1);
-  //     }
-  
-  //     // Format the dates for Google Calendar
-  //     const formatToGoogleCalendar = (date) => {
-  //         return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
-  //     };
-  
-  //     const eventDetails = {
-  //         title: eventName || "Meeting with Team", // Event title
-  //         start: formatToGoogleCalendar(startDateTime), // Start time in UTC format
-  //         end: formatToGoogleCalendar(endDateTime), // End time in UTC format
-  //     };
-  
-  //     // Construct Google Calendar URL
-  //     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-  //         eventDetails.title
-  //     )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
-  
-  //     // Open the URL in a new tab
-  //     window.open(googleCalendarUrl, "_blank");
-  // });
-  
+     
+      // Platform-specific calendar opening code (Android / iOS)
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+     
+      if (isAndroid) {
+          // Android: Use intent to open default calendar
+          const androidCalendarUrl = `intent://com.android.calendar/time/${startDateTime.getTime()}#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;end=${endDateTime.getTime()};title=${encodeURIComponent(eventDetails.title)};description=;details=;eventLocation=;flag=0;endTime=${endDateTime.getTime()}#Intent;end`;
+          window.location = androidCalendarUrl;
+      } else if (isIOS) {
+          // iOS: Generate ICS file for the event
+          const generateICSFile = (start, end, title) => {
+              const startDate = start.toISOString().replace(/-|:|\.\d+/g, '');
+              const endDate = end.toISOString().replace(/-|:|\.\d+/g, '');
+              return `
+     BEGIN:VCALENDAR
+     VERSION:2.0
+     BEGIN:VEVENT
+     SUMMARY:${title}
+     DTSTART:${startDate}
+     DTEND:${endDate}
+     DESCRIPTION:Event description
+     LOCATION:Event location
+     END:VEVENT
+     END:VCALENDAR
+              `;
+          };
+     
+          const icsData = generateICSFile(startDateTime, endDateTime, eventDetails.title);
+          const icsBlob = new Blob([icsData], { type: 'text/calendar' });
+          const downloadLink = document.createElement('a');
+          downloadLink.href = URL.createObjectURL(icsBlob);
+          downloadLink.download = 'event.ics';
+          downloadLink.click();
+      } else {
+          // Default to Google Calendar URL
+          const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+              eventDetails.title
+          )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
+     
+          window.open(googleCalendarUrl, "_blank");
+      }
+     });
+   
     function toggleGuestCount() {
         const isNoSelected = $("#no").is(":checked");
         $(".rsvp_count_member input").prop("disabled", isNoSelected);
