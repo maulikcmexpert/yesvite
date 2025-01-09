@@ -20,9 +20,7 @@
                 $userId = 0;
                 $userName = "";
                 if(Auth::guard('web')->check()){
-                    $userId = Auth::guard('web')->user()->id;
-                    $userData = User::findOrFail($userId);       
-                    $userName =  $userData->firstname . ' ' . $userData->lastname;
+                    $userId = Auth::guard('web')->user()->id;                    
                 }
             @endphp
         </div>

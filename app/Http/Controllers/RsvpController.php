@@ -423,6 +423,7 @@ class RsvpController extends Controller
                 $rsvp = "1";
             }
             $messages = [];
+            $userName = "";
             if (auth()->id()) {
                 $userId = auth()->id();
                 $userData = User::findOrFail($userId);
@@ -530,7 +531,8 @@ class RsvpController extends Controller
                 'email',
                 'getInvitedusers',
                 'rsvp_status',
-                'messages'
+                'messages',
+                'userName'
             ));
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {
