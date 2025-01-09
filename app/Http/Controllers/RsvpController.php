@@ -717,6 +717,22 @@ class RsvpController extends Controller
                     }
                 }
             }
+            if($request->rsvp_status=="1"){      
+                if($sync_id!=""||$sync_id!=null){
+                    $updateUser = EventInvitedUser::where(['user_id' => $userId,'sync_id'=>$sync_id,'is_co_host'=>'0','event_id' => $eventId])->first();
+                    if ($updateUser != null) {
+                        $updateUser->notification_on_off = "1";
+                        $updateUser->save();
+                    }
+
+                }else{
+                    $updateUser = EventInvitedUser::where(['user_id' => $userId,'is_co_host'=>'0','event_id' => $eventId])->first();
+                    if ($updateUser != null) {
+                        $updateUser->notification_on_off = "1";
+                        $updateUser->save();
+                    }
+                }
+            }
 
                 $notificationParam = [
 
