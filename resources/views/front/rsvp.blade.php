@@ -979,7 +979,7 @@
                                                         <span class="active"></span>
                                                     </div>
                                                     <a href="javascript:" class="user-detail d-flex ms-3">
-                                                        <div class="d-flex align-items-start flex-column">
+                                                        <div class="d-flex align-items-start flex-column tp">
                                                             <h3>{{$message['contactName']}} <span class="host-type"></span></h3>
                                                             @php
                                                             $timestamp = $message['timeStamp'] ?? now()->timestamp;
