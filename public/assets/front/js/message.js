@@ -2346,7 +2346,8 @@ async function findOrCreateConversation(
         ref(database, `overview/${currentUserId}/${newConversationId}`),
         newConversationData
     );
-
+    console.log({ senderUserName });
+    console.log({ currentUserId });
     const receiverConversationData = {
         contactId: currentUserId,
         contactName: senderUserName,
@@ -4149,13 +4150,13 @@ async function sendMessageHost(contactId, contactName, receiverProfile) {
         timeStamp: Date.now(),
     });
 
-    // const receiverSnapshot = await get(
-    //     ref(database, `overview/${contactId}/${selectedMessageId}`)
-    // );
-    // await updateOverview(contactId, selectedMessageId, {
-    //     lastMessage: ``,
-    //     unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
-    //     timeStamp: Date.now(),
-    // });
+    const receiverSnapshot = await get(
+        ref(database, `overview/${contactId}/${selectedMessageId}`)
+    );
+    await updateOverview(contactId, selectedMessageId, {
+        lastMessage: ``,
+        unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+        timeStamp: Date.now(),
+    });
     await updateChat(contactId);
 }
