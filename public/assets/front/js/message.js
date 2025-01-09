@@ -4090,6 +4090,13 @@ if ($("#host_id").length) {
     var hostName = $("#host_name").val();
     var hostImage = $("#host_profile").val();
     sendMessageHost(hostId, hostName, hostImage);
+
+    var co_host_id = $("#co_host_id").val();
+    var co_host_name = $("#co_host_name").val();
+    var co_host_profile = $("#co_host_profile").val();
+    if (co_host_id != "") {
+        sendMessageHost(co_host_id, co_host_name, co_host_profile);
+    }
 }
 async function sendMessageHost(contactId, contactName, receiverProfile) {
     const currentUserId = senderUser;
