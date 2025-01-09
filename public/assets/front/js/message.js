@@ -4175,11 +4175,12 @@ async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     $(".selected_message").val(contactId);
     $(".selected_name").val(contactName);
 
-    var ele = $(`.conversation-${conversationId}`); // Select the element using jQuery
-
-    ele.find(".user-detail .tp h3").append(
-        `<span class="host-type">${type}</span>`
+    var ele = $(
+        document.getElementsByClassName(`conversation-${conversationId}`)
     );
+
+    $(ele).find(".user-detail").children().find(".host-type").text(type);
+
     await updateChat(contactId);
 }
 if ($(".msg-btn").length && $("#nav-messaging-tab").length) {
