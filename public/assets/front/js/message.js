@@ -4094,24 +4094,25 @@ if (
     $("#nav-messaging-tab").length &&
     hostCreated == false
 ) {
-    $("#nav-messaging-tab").on("click", function () {
+    $("#nav-messaging-tab").on("click", async function () {
         hostCreated = true;
-        var hostId = $("#host_id").val();
-        var hostName = $("#host_name").val();
-        var hostImage = $("#host_profile").val();
-        sendMessageHost(hostId, hostName, hostImage, "host");
 
         var co_host_id = $("#co_host_id").val();
         var co_host_name = $("#co_host_name").val();
         var co_host_profile = $("#co_host_profile").val();
         if (co_host_id != "") {
-            sendMessageHost(
+            await sendMessageHost(
                 co_host_id,
                 co_host_name,
                 co_host_profile,
                 "co-host"
             );
         }
+
+        var hostId = $("#host_id").val();
+        var hostName = $("#host_name").val();
+        var hostImage = $("#host_profile").val();
+        await sendMessageHost(hostId, hostName, hostImage, "host");
     });
 }
 async function sendMessageHost(contactId, contactName, receiverProfile, type) {
