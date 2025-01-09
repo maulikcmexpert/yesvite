@@ -160,7 +160,8 @@ $(document).ready(function () {
         eventDetails.title
     )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
 
-    window.open(googleCalendarUrl, "_blank");
+    window.open(googleCalendarUrl);
+
       } else if (isIOS) {
         alert();  
           // iOS: Generate ICS file for the event
@@ -193,7 +194,8 @@ $(document).ready(function () {
               eventDetails.title
           )}&dates=${eventDetails.start}/${eventDetails.end}&sf=true&output=xml`;
      
-          window.open(googleCalendarUrl, "_blank");
+          window.open(googleCalendarUrl);
+
       }
      });
    
