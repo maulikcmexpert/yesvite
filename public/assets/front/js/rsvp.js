@@ -218,12 +218,16 @@ $(document).ready(function () {
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(icsBlob);
             downloadLink.download = "event.ics";
-            downloadLink.textContent = "Download Event (.ics)";
+            downloadLink.textContent = "Download Event";
             downloadLink.style.display = "block";
             downloadLink.style.margin = "20px";
             downloadLink.style.color = "blue";
             downloadLink.style.textDecoration = "underline";
-            $(".author-title").html(downloadLink);
+            $(".author-title").append(
+                `<a href="${URL.createObjectURL(
+                    icsBlob
+                )} download="event.ics">Download Event</a>`
+            );
             // Append and click the download link
             document.body.appendChild(downloadLink);
             downloadLink.click();
