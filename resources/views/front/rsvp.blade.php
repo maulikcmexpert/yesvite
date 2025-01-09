@@ -136,9 +136,15 @@
                                                  </svg>
                                              </div>
                                              <div class="hosted-by-date-time-content">
+                                                @php
+                                                    $final_end_time="";
+                                                     if($eventInfo['guest_view']['event_end_time']!=""){
+                                                        $final_end_time='to '.$eventInfo['guest_view']['event_end_time'];
+                                                     }
+                                                 @endphp
                                                  <h6>Time</h6>
                                                  {{-- <h3>8:00 to 10:00PM</h3> --}}
-                                                 <h3>{{ $eventInfo['guest_view']['event_time'] }}</h3>
+                                                 <h3>{{ $eventInfo['guest_view']['event_time'] }} {{$final_end_time}}</h3>
                                              </div>
                                              </div>
                                          </div>
