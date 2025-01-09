@@ -50,6 +50,7 @@ $(document).ready(function () {
   
       // Check if startDateTime is valid
       if (isNaN(startDateTime)) {
+        alert(1)
           alert("Invalid date or time value. Please check the input.");
           return;
       }
@@ -60,6 +61,7 @@ $(document).ready(function () {
           // Use the provided end date with the end time
           const formattedEndDate = new Date(`${eventEndDate}T${formattedEndTime}:00Z`);
           if (isNaN(formattedEndDate)) {
+            alert(2)
               alert("Invalid end date or time value. Please check the input.");
               return;
           }
