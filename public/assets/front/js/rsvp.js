@@ -149,11 +149,11 @@ $(document).ready(function () {
           start: formatToGoogleCalendar(startDateTime),
           end: formatToGoogleCalendar(endDateTime),
       };
-     
+     alert(2);
       // Platform-specific calendar opening code (Android / iOS)
       const isAndroid = /Android/i.test(navigator.userAgent);
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-     
+ 
       if (isAndroid) {
           // Android: Use intent to open default calendar
           const androidCalendarUrl = `intent://com.android.calendar/time/${startDateTime.getTime()}#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;end=${endDateTime.getTime()};title=${encodeURIComponent(eventDetails.title)};description=;details=;eventLocation=;flag=0;endTime=${endDateTime.getTime()}#Intent;end`;
