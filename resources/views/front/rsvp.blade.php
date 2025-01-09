@@ -242,7 +242,7 @@
                                          <h5>{{$eventInfo['guest_view']['event_location_name']}}</h5>
                                          {{-- <p>2369 Graystone Lakes Maconey, CA 90210</p> --}}
                                          @if($eventInfo['guest_view']['address_1']!="")
-                                         <p>{{$eventInfo['guest_view']['address_1']}} {{$eventInfo['guest_view']['city']}}, {{$eventInfo['guest_view']['state']}} {{$eventInfo['guest_view']['zip_code']}}</p>
+                                         <p class="evnt-address">{{$eventInfo['guest_view']['address_1']}} {{$eventInfo['guest_view']['city']}}, {{$eventInfo['guest_view']['state']}} {{$eventInfo['guest_view']['zip_code']}}</p>
                                          <input type="hidden" id="event_latitude" value="{{$eventInfo['guest_view']['latitude']}}"/>
                                         <input type="hidden" id="event_logitude" value="{{$eventInfo['guest_view']['logitude']}}"/>
                                         <input type="hidden" id="event_address" value="{{$eventInfo['guest_view']['address_1']}}"/>
@@ -2144,11 +2144,22 @@
                 if (isNaN(endDateTime)) {
                     console.error("Invalid endDateTime");
                 }
+                const address1 = "{{ $eventInfo['guest_view']['address_1'] }}";
+                const city = "{{ $eventInfo['guest_view']['city'] }}";
+                const state = "{{ $eventInfo['guest_view']['state'] }}";
+                const zipCode = "{{ $eventInfo['guest_view']['zip_code'] }}";
+
+                // Check if address1 is not empty
+                let location = "";  // Default location if no address is provided
+
+                if (address1 && city && state && zipCode) {
+                    location = `${address1} ${city}, ${state} ${zipCode}`;  // Combine the address components
+                }
 
             const eventDetails = {
                 title: eventName,
-                description: `This is an event scheduled on ${eventDate}.\nIncludes multiple lines.`, // Customize the description if needed
-                location: "Event location goes here", // You can customize the location based on input or hardcode
+                description: `${eventName} is scheduled on ${eventDate}.`, // Customize the description if needed
+                location, // You can customize the location based on input or hardcode
             };
             console.log({eventDetails})
 
@@ -2179,7 +2190,7 @@
 
 
                         // Get the existing <a> tag with class .add-calendar
-            const calendarLink = document.querySelector(".add-calender");
+            const calendarLink = document.querySelector(".add-calender-ios");
 
             // Set the href attribute to the URL of the .ics file
             calendarLink.href = URL.createObjectURL(icsBlob);

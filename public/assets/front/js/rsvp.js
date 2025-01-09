@@ -118,6 +118,7 @@ $(document).ready(function () {
     //     window.open(googleCalendarUrl, "_blank");
     // });
     $("#openGoogle").on("click", function () {
+        return;
         const eventDate = $("#eventDate").val();
         const eventEndDate = $("#eventEndDate").val();
         const eventTime = $("#eventTime").val();
