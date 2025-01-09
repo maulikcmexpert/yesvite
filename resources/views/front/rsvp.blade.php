@@ -986,7 +986,7 @@
                                                     </div>
                                                     <a href="javascript:" class="user-detail d-flex ms-3">
                                                         <div class="d-flex align-items-start flex-column tp">
-                                                            <h3><span class="host-type"></span> </h3> 
+                                                            <h3>{{$message['contactName']}}</h3> <span class="host-type"></span>
                                                             @php
                                                             $timestamp = $message['timeStamp'] ?? now()->timestamp;
                                                             $timeAgo = Carbon::createFromTimestampMs($timestamp)->diffForHumans();
@@ -1672,13 +1672,13 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="wall_post" id="flexCheckDefault1" checked>
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Wall Posts & Updates<br>
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="guest_rsvp" id="flexCheckDefault1" checked>
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Guests RSVP Responses <br>
                                             </label>

@@ -4175,15 +4175,9 @@ async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     $(".selected_message").val(contactId);
     $(".selected_name").val(contactName);
 
-    var ele = $(
-        document.getElementsByClassName(`conversation-${conversationId}`)
-    );
-    console.log({ type });
-    console.log($(ele).find(".user-detail"));
-    console.log($(ele).find(".user-detail").children());
-    console.log($(ele).find(".user-detail").children().find(".host-type"));
-    $(ele).find(".user-detail").children().find(".host-type").text(type);
+    var ele = $(`.conversation-${conversationId}`); // Select the element using jQuery
 
+    ele.find(".user-detail .tp h3").append("<span>test</span>");
     await updateChat(contactId);
 }
 if ($(".msg-btn").length && $("#nav-messaging-tab").length) {
