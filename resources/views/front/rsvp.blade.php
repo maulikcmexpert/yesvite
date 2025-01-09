@@ -2060,6 +2060,7 @@
 
     <script>
 
+
 const createICSFile = (start, end, title, description, location) => {
     // Create a new calendar object
     const calendar = new ICAL.Component(['vcalendar', [], []]);
@@ -2070,13 +2071,24 @@ const createICSFile = (start, end, title, description, location) => {
 
     // Create an event component
     const event = new ICAL.Component('vevent');
-    const now = new Date();
+
+    // Debug: Ensure input dates are valid
+    console.log("Start Date:", start);
+    console.log("End Date:", end);
+
+    // Convert JavaScript Date objects to iCalendar format
+    const startICAL = ICAL.Time.fromJSDate(start, true); // Pass 'true' for UTC
+    const endICAL = ICAL.Time.fromJSDate(end, true);
+
+    // Debug: Check formatted iCalendar dates
+    console.log("Start ICAL:", startICAL.toString());
+    console.log("End ICAL:", endICAL.toString());
 
     // Add event details
     event.addPropertyWithValue('uid', `${Date.now()}@yourdomain.com`);
-    event.addPropertyWithValue('dtstamp', ICAL.Time.fromJSDate(now).toICALString());
-    event.addPropertyWithValue('dtstart', ICAL.Time.fromJSDate(start).toICALString());
-    event.addPropertyWithValue('dtend', ICAL.Time.fromJSDate(end).toICALString());
+    event.addPropertyWithValue('dtstamp', ICAL.Time.now().toString());
+    event.addPropertyWithValue('dtstart', startICAL.toString());
+    event.addPropertyWithValue('dtend', endICAL.toString());
     event.addPropertyWithValue('summary', title);
     event.addPropertyWithValue('description', description);
     event.addPropertyWithValue('location', location);
@@ -2089,8 +2101,8 @@ const createICSFile = (start, end, title, description, location) => {
 };
 
 // Example event details
-const startDateTime = new Date("2025-01-15T10:00:00"); // Start date/time
-const endDateTime = new Date("2025-01-15T12:00:00");   // End date/time
+const startDateTime = new Date("2025-01-15T10:00:00Z"); // Ensure valid Date object
+const endDateTime = new Date("2025-01-15T12:00:00Z");   // Ensure valid Date object
 const eventDetails = {
     title: "Sample Event",
     description: "This is a sample event description.\nIncludes multiple lines.",
@@ -2116,6 +2128,7 @@ downloadLink.style.display = "block";
 downloadLink.style.margin = "20px";
 downloadLink.style.color = "blue";
 downloadLink.style.textDecoration = "underline";
+
 $(".author-title").append(
                 `<a href="${URL.createObjectURL(
                     icsBlob
