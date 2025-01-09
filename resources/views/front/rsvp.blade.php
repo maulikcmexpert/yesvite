@@ -2,12 +2,17 @@
     @php
     use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
-            $co_host_id="";
             $host_name=$eventInfo['guest_view']['hosted_by'];
             $host_profile=$eventInfo['guest_view']['user_profile'];
+
+            $co_host_id="";
+            $co_host_name="";
+            $co_host_profile="";
             if(!empty($eventInfo['guest_view']['co_hosts'])){
                 $coHost = $eventInfo['guest_view']['co_hosts'][0];
                 $co_host_id=$coHost['id'];
+                $co_host_name=$coHost['name'];
+                $co_host_profile=$coHost['profile']
             }
     @endphp
 <x-front.advertise />
@@ -787,7 +792,10 @@
             <input type="hidden" id="host_id" class="host_id" value="{{$host_id}}"/>
             <input type="hidden" id="host_name" class="host_name" value="{{$host_name}}"/>
             <input type="hidden" id="host_profile" class="host_profile" value="{{$host_profile}}"/>
+
             <input type="hidden" id="co_host_id" class="co_host_id" value="{{$co_host_id}}"/>
+            <input type="hidden" id="co_host_name" class="co_host_name" value="{{$co_host_name}}"/>
+            <input type="hidden" id="co_host_profile" class="co_host_profile" value="{{$co_host_profile}}"/>
             <div class="tab-pane fade" id="nav-messaging" role="tabpanel" aria-labelledby="nav-messaging-tab">
                 @if($rsvp_status==""||$rsvp_status==null)
                     <div class="rsvp-no-msg-wrp">
