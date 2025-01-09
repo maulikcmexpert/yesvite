@@ -49,7 +49,9 @@
                     @endif
                 </div>
             </div>
-            <a href="#" class="btn edit-yesvite-contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a>
+            {{-- <a href="#" class="btn edit-yesvite-contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#myModal" data-id="{{$value->id}}">Edit Contact</a> --}}
+            <a href="#" class="btn edit-yesvite-contact" id="edit_contact" data-bs-toggle="modal" data-bs-target="#" data-id="{{$value->id}}">Edit Contact</a>
+
         </div>
         @endforeach
 @endif
