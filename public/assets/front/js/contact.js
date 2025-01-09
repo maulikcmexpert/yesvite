@@ -141,13 +141,13 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 if (data.status == "0") {
+                    $(".no-yesvite-data").css("display","block");
                     $("#loader").hide();
-                    $(".no-yesvite-data").css("display","block")
 
                     return;
                 }
+                $(".no-yesvite-data").css("display","none");
                 $("#loader").hide();
-                $(".no-yesvite-data").css("display","none")
 
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
