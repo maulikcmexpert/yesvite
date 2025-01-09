@@ -1295,6 +1295,9 @@ display:none;}
     overflow: hidden;
     overflow-y: scroll;
 }
+.rsvp-wrp .rsvp-slider{
+    border-radius: 10px;
+}
 }
 
 @media only screen and (max-width: 424px) {
