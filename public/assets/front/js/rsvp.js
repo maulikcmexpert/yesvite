@@ -218,11 +218,19 @@ $(document).ready(function () {
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(icsBlob);
             downloadLink.download = "event.ics";
-            $(".author-title").append(downloadLink);
+            downloadLink.textContent = "Download Event (.ics)";
+            downloadLink.style.display = "block";
+            downloadLink.style.margin = "20px";
+            downloadLink.style.color = "blue";
+            downloadLink.style.textDecoration = "underline";
+            $(".author-title").html(downloadLink);
             // Append and click the download link
             document.body.appendChild(downloadLink);
             downloadLink.click();
-            document.body.removeChild(downloadLink);
+            alert("no err");
+            alert(downloadLink);
+
+            // document.body.removeChild(downloadLink);
         } else {
             // Default to Google Calendar URL
             const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
