@@ -4178,11 +4178,13 @@ async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     var ele = $(
         document.getElementsByClassName(`conversation-${conversationId}`)
     );
-    console.log({ type });
-    console.log($(ele).find(".user-detail"));
-    console.log($(ele).find(".user-detail").children());
-    console.log($(ele).find(".user-detail").children().find(".host-type"));
-    $(ele).find(".user-detail").children().find(".host-type").text(type);
+
+    $(ele)
+        .find(".user-detail")
+        .children()
+        .find(".tp")
+        .find("h3")
+        .append("<span>test</span>");
 
     await updateChat(contactId);
 }
