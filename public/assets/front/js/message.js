@@ -1657,6 +1657,7 @@ function addMessageToList(key, messageData, conversationId) {
     }
 
     const messageElement = createMessageElement(key, messageData, isGroup);
+
     $(".msg-lists").append(messageElement);
 
     if (
@@ -4164,7 +4165,12 @@ async function findOrCreateSingleConversation(
         currentUserId,
         contactId,
     ]);
-
+    let receiverSnapshot = await get(
+        ref(database, `overview/${currentUserId}/${newConversationId}`)
+    );
+    if (receiverSnapshot.val() != null) {
+        return;
+    }
     const newConversationData = {
         contactId: contactId,
         contactName: contactName,
