@@ -178,12 +178,12 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 if (data.html == " ") {
+                    $(".no-group-data").css("display","block");
                     $("#loader").html("No more groups found");
-                    $("#yesviteGroups").html("No search result found");
                     return;
                 }
+                $(".no-group-data").css("display","none");
                 $("#loader").hide();
-                $("#yesviteGroups").html(data);
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
@@ -210,13 +210,15 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 if (data.status == "0") {
+                    $(".no-phone-data").css("display","block");
                     $("#loader").hide();
                     // busy2 = true; 
-                    $("#yesvitePhones").html("No search result found")
                     busy2 = false;
 
                     return;
                 }
+                $(".no-phone-data").css("display","none");
+
                 $("#loader").hide();
                 // $("#yesvitePhones").append(data);
 

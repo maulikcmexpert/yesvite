@@ -259,6 +259,11 @@
                                 </span>
                             </div>
                             <div class="product-scroll-phone" id="product-scroll-phone">
+                                <div class="users-data no-phone-data" style="display: none;">
+                                    <div class="md-5">
+                                        <h5>No search result found</h5>
+                                    </div>
+                                </div>
                                 <div class="user-contacts" id="yesvitePhones">
 
                                     {{-- <div class="mb-3 mt-2">
@@ -413,7 +418,11 @@
                                 @endforeach -->
 
                             <div class="product-scroll" id="product-scroll-groups">
-
+                                <div class="users-data no-group-data" style="display: none;">
+                                    <div class="md-5">
+                                        <h5>No search result found</h5>
+                                    </div>
+                                </div>
                                 <div class="user-contacts" id="yesviteGroups">
                                     @include('front.ajax_groups', ['yesviteGroups' => $yesviteGroups])
                                 </div>
