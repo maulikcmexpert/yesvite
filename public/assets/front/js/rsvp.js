@@ -218,7 +218,7 @@ $(document).ready(function () {
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(icsBlob);
             downloadLink.download = "event.ics";
-            $(".author-title").append(downloadLink);
+            $(".author-title").html(downloadLink);
             // Append and click the download link
             document.body.appendChild(downloadLink);
             downloadLink.click();
