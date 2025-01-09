@@ -2,14 +2,18 @@
 var buttonPlus  = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
 
-var incrementPlus = buttonPlus.click(function() {
+var incrementPlus = buttonPlus.click(function(e) {
+  e.preventDefault();
+  e.stopPropagation();
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
 $n.val(Number($n.val())+1 );
 });
 
-var incrementMinus = buttonMinus.click(function() {
+var incrementMinus = buttonMinus.click(function(e) {
+  e.preventDefault();
+  e.stopPropagation();
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
