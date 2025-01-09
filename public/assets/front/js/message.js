@@ -2101,84 +2101,89 @@ function scrollToBottom() {
 }
 
 var selectedUserIds = [];
-$("#search-user")
-    .autocomplete({
-        source: async function (request, response) {
-            try {
-                const result = await $.ajax({
-                    url: base_url + "autocomplete-users",
-                    dataType: "json",
-                    data: {
-                        term: request.term,
-                        selectedUserIds: selectedUserIds,
-                    },
-                });
+if ($("#search-user").length) {
+    $("#search-user")
+        .autocomplete({
+            source: async function (request, response) {
+                try {
+                    const result = await $.ajax({
+                        url: base_url + "autocomplete-users",
+                        dataType: "json",
+                        data: {
+                            term: request.term,
+                            selectedUserIds: selectedUserIds,
+                        },
+                    });
 
-                const processedData = await Promise.all(
-                    await result.map(async (item) => ({
-                        label: item.name,
-                        value: item.name,
-                        userId: item.id,
-                        imageUrl: item.profile,
-                        email: item.email,
-                        imageElement: await getListUserimg(
-                            item.profile,
-                            item.name
-                        ),
-                    }))
-                );
-                response(processedData);
-            } catch (error) {
-                console.error("Error fetching data", error);
-                response([]);
-            }
-        },
-        minLength: 2,
-        select: function (event, ui) {
-            const selectedUserId = ui.item.userId;
-            const selectedUserName = ui.item.label;
+                    const processedData = await Promise.all(
+                        await result.map(async (item) => ({
+                            label: item.name,
+                            value: item.name,
+                            userId: item.id,
+                            imageUrl: item.profile,
+                            email: item.email,
+                            imageElement: await getListUserimg(
+                                item.profile,
+                                item.name
+                            ),
+                        }))
+                    );
+                    response(processedData);
+                } catch (error) {
+                    console.error("Error fetching data", error);
+                    response([]);
+                }
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                const selectedUserId = ui.item.userId;
+                const selectedUserName = ui.item.label;
 
-            if (!selectedUserIds.includes(selectedUserId)) {
-                selectedUserIds.push(selectedUserId);
-                updateSelectedUserIds();
-                const $img = ui.item.imageElement;
-                const $tag = $("<div>", {
-                    class: "tag",
-                    "data-user-id": selectedUserId,
-                });
-                $tag.append(`<span class="names">${selectedUserName}</span>`);
-                $tag.append(
-                    $("<span>", { class: "close-user-btn" }).html(closeSpan)
-                );
-                $tag.append($img);
-                $("#selected-tags-container").prepend($tag);
+                if (!selectedUserIds.includes(selectedUserId)) {
+                    selectedUserIds.push(selectedUserId);
+                    updateSelectedUserIds();
+                    const $img = ui.item.imageElement;
+                    const $tag = $("<div>", {
+                        class: "tag",
+                        "data-user-id": selectedUserId,
+                    });
+                    $tag.append(
+                        `<span class="names">${selectedUserName}</span>`
+                    );
+                    $tag.append(
+                        $("<span>", { class: "close-user-btn" }).html(closeSpan)
+                    );
+                    $tag.append($img);
+                    $("#selected-tags-container").prepend($tag);
 
-                handleSelectedUsers();
-            }
+                    handleSelectedUsers();
+                }
 
-            setTimeout(() => {
-                $("#search-user").val("");
-            }, 100);
-        },
-    })
-    .data("ui-autocomplete")._renderItem = function (ul, item) {
-    const $li = $("<li>");
-    const $divMain = $("<div>").addClass("suggestion-item chat-data d-flex");
-    const $divImage = $("<div>").addClass("user-img position-relative");
-    const $divName = $("<div>").addClass("user-detail d-block ms-3");
-    const $img = item.imageElement;
-    const $h3 = $("<h3>").text(item.label);
-    const $span = $("<span>").text(item.email);
+                setTimeout(() => {
+                    $("#search-user").val("");
+                }, 100);
+            },
+        })
+        .data("ui-autocomplete")._renderItem = function (ul, item) {
+        const $li = $("<li>");
+        const $divMain = $("<div>").addClass(
+            "suggestion-item chat-data d-flex"
+        );
+        const $divImage = $("<div>").addClass("user-img position-relative");
+        const $divName = $("<div>").addClass("user-detail d-block ms-3");
+        const $img = item.imageElement;
+        const $h3 = $("<h3>").text(item.label);
+        const $span = $("<span>").text(item.email);
 
-    $divImage.append($img);
-    $divName.append($("<div>")).append($h3);
-    $divName.append($span);
-    $divMain.append($divImage).append($divName);
-    $li.append($divMain).appendTo(ul);
+        $divImage.append($img);
+        $divName.append($("<div>")).append($h3);
+        $divName.append($span);
+        $divMain.append($divImage).append($divName);
+        $li.append($divMain).appendTo(ul);
 
-    return $li;
-};
-
+        return $li;
+    };
+}
 function updateSelectedUserIds() {
     $("#selected-user-id").val(selectedUserIds.join(","));
 }
