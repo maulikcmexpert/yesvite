@@ -33,18 +33,18 @@ $(document).ready(function() {
       const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
       const eventTime = $("#eventTime").val(); // e.g., "10:00"
       const eventName = $("#eventName").val(); // e.g., "Team Meeting"
-      
+      console.log(eventDate,eventTime,eventName)
       if (!eventDate || !eventTime || !eventName) {
           alert("Please fill in all event details.");
           return;
       }
   
       // Convert the event date and time to Google Calendar format
-      const eventStart = new Date(`${eventDate}T${eventTime}`).toISOString().replace(/-|:|\.\d+/g, '');
-      const eventEnd = new Date(new Date(`${eventDate}T${eventTime}`).getTime() + 60 * 60 * 1000).toISOString().replace(/-|:|\.\d+/g, ''); // Add 1 hour to the start time
-  
+      // const eventStart = new Date(`${eventDate}T${eventTime}`).toISOString().replace(/-|:|\.\d+/g, '');
+      // const eventEnd = new Date(new Date(`${eventDate}T${eventTime}`).getTime() + 60 * 60 * 1000).toISOString().replace(/-|:|\.\d+/g, ''); // Add 1 hour to the start time
+  // alert(eventStart);
       // Google Calendar URL
-      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${eventStart}/${eventEnd}&details=&location=&sf=true&output=xml`;
+      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${eventDate}/${eventDate}&details=&location=&sf=true&output=xml`;
   
       // Open Google Calendar with the pre-filled event
       window.open(googleCalendarUrl, "_blank");
