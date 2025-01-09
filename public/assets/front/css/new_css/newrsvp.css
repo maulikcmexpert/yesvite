@@ -1063,12 +1063,13 @@ display:none;}
     transform: none;
 }
 
-body{
-    touch-action: manipulation;
-    -webkit-user-select: none;
-    -ms-touch-action: manipulation;
-}
 
+.rsvp-yes-modal input, .rsvp-yes-modal textarea, .rsvp-yes-modal select{
+    touch-action: manipulation !important;
+  -webkit-user-select: none !important;
+  -ms-touch-action: manipulation !important;
+
+}
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
