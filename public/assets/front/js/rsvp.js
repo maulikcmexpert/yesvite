@@ -29,11 +29,22 @@ $(document).ready(function() {
     //   window.open(googleCalendarUrl, "_blank");
     //  })
 
-  //   $("#openGoogle").on("click", function () {
+    $("#openGoogle").on("click", function () {
+      const eventDetails = {
+        title: "Meeting with Team", // Event title
+        location: "1234 Main St, Anytown, USA", // Event location
+        description: "Discuss project updates and next steps.", // Event description
+        start: "20250110T100000Z", // Start time in UTC format (YYYYMMDDTHHMMSSZ)
+        end: "20250110T110000Z", // End time in UTC format (YYYYMMDDTHHMMSSZ)
+    };
+
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.start}/${eventDetails.end}&details=${encodeURIComponent(eventDetails.description)}&location=${encodeURIComponent(eventDetails.location)}&sf=true&output=xml`;
+
+    window.open(googleCalendarUrl, "_blank");
   //     const eventDate = $("#eventDate").val(); // e.g., "2025-01-10"
   //     const eventTime = $("#eventTime").val(); // e.g., "10:00"
   //     const eventName = $("#eventName").val(); // e.g., "Team Meeting"
-  //     console.log(eventDate,eventTime,eventName)
+  //     // console.log()
   //     if (!eventDate || !eventTime || !eventName) {
   //         alert("Please fill in all event details.");
   //         return;
@@ -48,76 +59,7 @@ $(document).ready(function() {
   
   //     // Open Google Calendar with the pre-filled event
   //     window.open(googleCalendarUrl, "_blank");
-  // });
-
-  let gapiLoaded = false;
-
-    // Load the Google API client library
-    function loadGapiClient() {
-        gapi.load('client:auth2', () => {
-            gapi.client.init({
-                apiKey: 'YOUR_API_KEY', // Replace with your API key
-                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com', // Replace with your Client ID
-                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-                scope: 'https://www.googleapis.com/auth/calendar.events',
-            }).then(() => {
-                gapiLoaded = true;
-                console.log('Google API Client Loaded');
-            });
-        });
-    }
-
-    // Add event to Google Calendar
-    async function addEventToCalendar(eventName, eventDate, eventTime) {
-        if (!gapiLoaded) {
-            alert('Google API client not loaded.');
-            return;
-        }
-
-        const startDateTime = new Date(`${eventDate}T${eventTime}:00`);
-        const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000); // Add 1 hour
-
-        const event = {
-            summary: eventName,
-            start: {
-                dateTime: startDateTime.toISOString(),
-                timeZone: 'UTC',
-            },
-            end: {
-                dateTime: endDateTime.toISOString(),
-                timeZone: 'UTC',
-            },
-        };
-
-        try {
-            await gapi.client.calendar.events.insert({
-                calendarId: 'primary',
-                resource: event,
-            });
-            alert('Event added to Google Calendar!');
-        } catch (error) {
-            console.error('Error adding event:', error);
-            alert('Failed to add event to Google Calendar.');
-        }
-    }
-
-    // Attach click handler to the button
-    document.getElementById('openGoogle').addEventListener('click', () => {
-        alert();
-        const eventName = document.getElementById('eventName').value;
-        const eventDate = document.getElementById('eventDate').value;
-        const eventTime = document.getElementById('eventTime').value;
-
-        if (!eventName || !eventDate || !eventTime) {
-            alert('Please fill in all fields.');
-            return;
-        }
-
-        addEventToCalendar(eventName, eventDate, eventTime);
-    });
-
-    // Load the Google API client library
-    loadGapiClient();
+  });
   
 
     function toggleGuestCount() {
