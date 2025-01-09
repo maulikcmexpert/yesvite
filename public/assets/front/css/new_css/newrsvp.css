@@ -1074,10 +1074,13 @@ display:none;}
 .rsvp-yes-modal.about-rsvp .rsvp-msgbox .input-form textarea{
     font-size: 16px !important;
 }
-.rsvp-no-modal.about-rsvp .rsvp-msgbox .input-form textarea{
+.rsvp-yes-modal.about-rsvp .rsvp-msgbox .input-form textarea{
     font-size: 16px !important;
 }
 
+.rsvp-yes-modal .qty-container button{
+    font-size: 16px !important;
+}
 
 
 
