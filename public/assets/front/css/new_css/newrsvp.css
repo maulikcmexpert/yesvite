@@ -1063,10 +1063,11 @@ display:none;}
     transform: none;
 }
 
-
-body{
+.modal.cmn-modal .input-form input{
     font-size: 20px !important;
 }
+
+
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
