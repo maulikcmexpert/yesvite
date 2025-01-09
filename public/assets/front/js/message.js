@@ -1536,7 +1536,9 @@ $(".send-message").on("keypress", async function (e) {
                 lastMessage: `${senderUserName}: ${message}`,
                 timeStamp: Date.now(),
             });
-
+            let receiverSnapshot = await get(
+                ref(database, `overview/${receiverId}/${conversationId}`)
+            );
             if (receiverSnapshot.val() != null) {
                 await updateOverview(receiverId, conversationId, {
                     lastMessage: `${senderUserName}: ${message}`,
@@ -1570,10 +1572,9 @@ $(".send-message").on("keypress", async function (e) {
                 );
             }
 
-            const receiverSnapshot = await get(
+            receiverSnapshot = await get(
                 ref(database, `overview/${receiverId}/${conversationId}`)
             );
-
             if (
                 receiverSnapshot.val().isMute == undefined ||
                 receiverSnapshot.val().isMute == 0 ||
