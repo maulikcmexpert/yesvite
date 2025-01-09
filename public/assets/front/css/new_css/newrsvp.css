@@ -1101,6 +1101,16 @@ display:none;}
     height: 16px !important;
 }
 
+.host-type{
+    background-color: #EDFFED;
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 10px;
+    line-height: 18px;
+    color: var(--green);
+    border-radius: 100px;
+    padding: 5px 8px;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
