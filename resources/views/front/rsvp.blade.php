@@ -2062,7 +2062,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
 
 <script>
-
+alert(0);
 const createICSFile = (start, end, title, description, location) => {
 // Create a new calendar object
 const calendar = new ICAL.Component(['vcalendar', [], []]);
