@@ -513,10 +513,10 @@ class RsvpController extends Controller
                     });
                 }
                 // dd($messages);
-                $title = 'Home';
-                $page = 'front.chat.messages';
-                $css = 'message.css';
-                $css1 = 'audio.css';
+                // $title = 'Home';
+                // $page = 'front.chat.messages';
+                // $css = 'message.css';
+                // $css1 = 'audio.css';
             }
             return view('layout', compact(
                 'title',
