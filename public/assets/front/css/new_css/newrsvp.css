@@ -1079,18 +1079,18 @@ display:none;}
 }
 
 .rsvp-yes-modal.modal .modal-dialog{
-    margin-top: unset !important;
+    margin-top: auto !important;
 }
 .rsvp-no-modal.modal .modal-dialog{
-    margin-top: unset !important;
+    margin-top: auto !important;
     height: auto !important;
 }
 
 .rsvp-yes-modal.modal .modal-dialog{
-    margin-top: unset !important;
+    margin-top: auto !important;
 }
 .rsvp-no-modal.modal .modal-dialog{
-    margin-top: unset !important;
+    margin-top: auto !important;
     height: auto !important;
 }
 
