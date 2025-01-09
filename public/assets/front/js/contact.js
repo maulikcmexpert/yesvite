@@ -147,6 +147,8 @@ $(document).on("keyup", ".search_phone", function () {
                     return;
                 }
                 $("#loader").hide();
+                $(".no-yesvite-data").css("display","none")
+
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
                 }else{
