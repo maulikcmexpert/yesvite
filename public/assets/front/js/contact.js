@@ -178,11 +178,11 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 if (data.html == " ") {
-                    $(".no-phone-data").css("display","block");
+                    $(".no-group-data").css("display","block");
                     $("#loader").html("No more groups found");
                     return;
                 }
-                $(".no-phone-data").css("display","none");
+                $(".no-group-data").css("display","none");
                 $("#loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
@@ -210,14 +210,14 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 if (data.status == "0") {
-                    $(".no-group-data").css("display","block");
+                    $(".no-phone-data").css("display","block");
                     $("#loader").hide();
                     // busy2 = true; 
                     busy2 = false;
 
                     return;
                 }
-                $(".no-group-data").css("display","none");
+                $(".no-phone-data").css("display","none");
 
                 $("#loader").hide();
                 // $("#yesvitePhones").append(data);
