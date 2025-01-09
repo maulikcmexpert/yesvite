@@ -148,7 +148,7 @@ class RsvpController extends Controller
 
         $event_id =  decrypt($eventId);
         $user_id = decrypt($userId);
-        // dd($user_id, $event_id);
+        dd($user_id);
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
@@ -688,8 +688,8 @@ class RsvpController extends Controller
                 if(!empty($request->input('notifications'))){
                     foreach ($request->input('notifications') as $value) {
                         if ($value == "1") {
-                                $updateNotifications = UserNotificationType::where('user_id', $userId);
-                                $updateNotifications->update(['push' => '1']);
+                         $updateNotifications = UserNotificationType::where('user_id', $userId);
+                         $updateNotifications->update(['push' => '1']);
                         } elseif ($value == "wall_post") {
                             $updateNotification = UserNotificationType::where(['type' => 'wall_post', 'user_id' => $userId]);
                             $updateNotification->update(['push' => '1']);
