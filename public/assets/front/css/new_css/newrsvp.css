@@ -1078,6 +1078,13 @@ display:none;}
     font-size: 16px !important;
 }
 
+.rsvp-yes-modal .modal.show .modal-dialog{
+    margin-top: unset !important;
+}
+.rsvp-no-modal .modal.show .modal-dialog{
+    margin-top: unset !important;
+    height: unset !important;
+}
 
 
 
@@ -1317,7 +1324,7 @@ display:none;}
 
 
 .rsvp-yes-modal .modal-body{
-    max-height: 41.67vh;
+    max-height: 40.67vh;
     overflow: hidden;
     overflow-y: scroll;
 }
