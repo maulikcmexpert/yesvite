@@ -4114,8 +4114,8 @@ if ($("#host_id").length && $("#nav-messaging-tab").length) {
         await sendMessageHost(hostId, hostName, hostImage, "host");
     });
 }
-if ($("#chost-msg").length) {
-    $("#chost-msg").on("click", async function () {
+if ($(".chost-msg").length) {
+    $(".chost-msg").on("click", async function () {
         var co_host_id = $("#co_host_id").val();
         var co_host_name = $("#co_host_name").val();
         var co_host_profile = $("#co_host_profile").val();
