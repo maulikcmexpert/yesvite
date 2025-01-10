@@ -11,6 +11,7 @@
                     <div class="transaction_history_info_title">
                         <h4>Transaction History</h4>
                     </div>
+                    <input type="hidden" id="graph_data" value="{{$data['graph_data']}}"/>
                     <div class="credits_balance_wrp">
                         <h3 class="credits_balance_title">Credits Balance</h3>
                         <div class="credits_balance_amout_wrp">
@@ -45,10 +46,13 @@
 
                                                     $type=$transaction_data['type'];
                                                     $status="";
+                                                    $status_color="";
                                                     if($type="credit"){
                                                         $status="+";
+                                                        $status_color="amount-plus";
                                                     }else{
                                                         $status="-";
+                                                        $status_color="amount-minus";
                                                     }
                                                 @endphp
                                                 <li>
@@ -61,7 +65,7 @@
                                                         </ul>
                                                     </div>
                                                     <div class="transaction_detail_list_right">
-                                                        <div class="transaction_detail_amount amount-plus">
+                                                        <div class="transaction_detail_amount {{$status_color}}">
                                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                                             <p>{{$status}}{{$transaction_data['used_coins']}}</p>
                                                         </div>

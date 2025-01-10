@@ -925,14 +925,23 @@ patternContext.fillRect(0, 0, 6, 3);
 // Create a pattern from the canvas
 const pattern = ctx.createPattern(patternCanvas, "repeat");
 
+const hiddenData = $("#graph_data").val();
+const parsedData = JSON.parse(hiddenData);
+
+// Step 2: Generate labels and data for Chart.js
+const labels = parsedData.map(item => item.month); // Extract months
+const data = parsedData.map(item => item.current_balance);
+
 new Chart(ctx, {
     type: "line",
     data: {
-        labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        // labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: labels,
         datasets: [
             {
                 label: "Credit Balance",
-                data: [400, 650, 500, 480, 490, 470, 500],
+                data: data,
+                // data: [400, 650, 500, 480, 490, 470, 500],
                 borderColor: gradientBorder,
                 backgroundColor: pattern,
                 borderWidth: 4,
@@ -964,7 +973,10 @@ new Chart(ctx, {
             },
             y: {
                 beginAtZero: true,
-                max: 700,
+                max: 50,
+                ticks: {
+                    stepSize: 5, 
+                },
                 grid: {
                     color: "rgba(0, 0, 0, 0.05)",
                 },
