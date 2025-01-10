@@ -1,4 +1,4 @@
-{{dd($transcation);}}
+{{-- {{dd($transcation);}} --}}
 <x-front.advertise />
 <section class="transaction_history_wrp">
     <div class="container">
@@ -50,7 +50,7 @@
                                                     if($type="credit"){
                                                         $status="+";
                                                         $status_color="amount-plus";
-                                                    }else{
+                                                    }elseif($type="debit"){
                                                         $status="-";
                                                         $status_color="amount-minus";
                                                     }
