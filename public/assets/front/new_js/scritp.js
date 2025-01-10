@@ -948,7 +948,7 @@ new Chart(ctx, {
                 pointBackgroundColor: "#ffffff",
                 pointBorderColor: "#ff5ca5",
                 pointBorderWidth: 5,
-                pointRadius: [0, 5, 0, 0, 0, 0, 8],
+                pointRadius: [5, 0, 0, 0, 0, 0, 8],
                 pointHoverRadius: 5,
                 tension: 0,
                 fill: true,
