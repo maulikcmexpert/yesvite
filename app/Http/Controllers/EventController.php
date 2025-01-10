@@ -1607,7 +1607,8 @@ $user['coins']=$user->coins;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
-        $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')->get();
+        $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')  ->orderBy('firstname')
+        ->get();
         if($getAllContacts->isNotEmpty()){
             $emails = $getAllContacts->pluck('email')->toArray();
         }
@@ -1679,7 +1680,8 @@ $user['coins']=$user->coins;
                     $q->where('firstName', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
                 });
-            })
+            })  ->orderBy('firstname')
+
             ->get();
             
         $yesvite_user = [];
@@ -1722,7 +1724,8 @@ $user['coins']=$user->coins;
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
                 });
-            })
+            })  ->orderBy('firstname')
+
             ->get();
             
         $yesvite_user = [];
@@ -2115,7 +2118,8 @@ $user['coins']=$user->coins;
         $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
 
-        $getAllContacts = contact_sync::where('contact_id',$user_id)->where('email','!=','')->get();
+        $getAllContacts = contact_sync::where('contact_id',$user_id)->where('email','!=','')  ->orderBy('firstname')
+        ->get();
         if($getAllContacts->isNotEmpty()){
             $emails = $getAllContacts->pluck('email')->toArray();
         }
