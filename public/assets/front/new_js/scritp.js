@@ -987,7 +987,7 @@ new Chart(ctx, {
             y: {
                 // beginAtZero: true,
                 min:lowestValue,
-                max: highestValue,
+                max: round(highestValue),
                 ticks: {
                     stepSize: 4, 
                 },
