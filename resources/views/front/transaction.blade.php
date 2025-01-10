@@ -10,8 +10,10 @@
                 <div class="transaction_history-info">
                     <nav class="breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="https://yesvite.cmexpertiseinfotech.in/home">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{route('accoutn_setting')}}">Account Setting</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+
                         </ol>
                     </nav>
                     <div class="transaction_history_info_title">

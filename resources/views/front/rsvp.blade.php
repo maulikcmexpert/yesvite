@@ -399,7 +399,7 @@
                                                         <path d="M7.99969 8.57998C7.43969 8.57998 6.87302 8.40665 6.43969 8.05331L4.35302 6.38665C4.13969 6.21331 4.09969 5.89998 4.27302 5.68665C4.44636 5.47331 4.75968 5.43332 4.97302 5.60665L7.05969 7.27332C7.56635 7.67998 8.42635 7.67998 8.93302 7.27332L11.0197 5.60665C11.233 5.43332 11.553 5.46665 11.7197 5.68665C11.893 5.89998 11.8597 6.21998 11.6397 6.38665L9.55301 8.05331C9.12635 8.40665 8.55969 8.57998 7.99969 8.57998Z" fill="#23AA26"></path>
                                                         <path d="M5.3335 11.5H1.3335C1.06016 11.5 0.833496 11.2733 0.833496 11C0.833496 10.7267 1.06016 10.5 1.3335 10.5H5.3335C5.60683 10.5 5.8335 10.7267 5.8335 11C5.8335 11.2733 5.60683 11.5 5.3335 11.5Z" fill="#23AA26"></path>
                                                         <path d="M3.3335 8.83203H1.3335C1.06016 8.83203 0.833496 8.60536 0.833496 8.33203C0.833496 8.0587 1.06016 7.83203 1.3335 7.83203H3.3335C3.60683 7.83203 3.8335 8.0587 3.8335 8.33203C3.8335 8.60536 3.60683 8.83203 3.3335 8.83203Z" fill="#23AA26"></path>
-                                                        </svg> Succesful</h5>
+                                                        </svg> Successful</h5>
                                                         @php
                                                         $read="";
                                                         $rsvp="";
@@ -1844,7 +1844,22 @@
           <div class="modal-body">
             <div class="guest-user-list rsvp-guest-user-list-wrp">
                 @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
-
+                    @php
+                                            $yes_modal="";
+                                            $no_modal="";
+                                            if($user_id==$guest_data['id'])
+                                            {
+                                                    $yes_modal="#rsvp-yes-modal";
+                                                    $no_modal="#rsvp-no-modal"; 
+                                            }
+                                            if($guest_data['rsvp_status']=="1"){
+                                                $open_modal=$no_modal;
+                                            }elseif($guest_data['rsvp_status']=="0"){
+                                                $open_modal=$yes_modal;
+                                            }else{
+                                                $open_modal="";
+                                            }
+                    @endphp
                     <div class="guest-user-box">
                         <div class="guest-list-data">
                         <div class="guest-img">
@@ -1860,12 +1875,23 @@
                                  <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                         @endif                        </div>
                         <div class="w-100">
-                            <div class="d-flex flex-column">
-                                <a href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</a>
-                                <span class="guest-email">{{$guest_data['email']}}</span>
-                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex flex-column">
+                                  <p href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</p>
+                                  <span class="guest-email">{{$guest_data['email']}}</span>
+                                </div>
+                                @if($rsvp_status!="" &&($user_id==$guest_data['id']))
+                                    <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.16406 1.66602H7.4974C3.33073 1.66602 1.66406 3.33268 1.66406 7.49935V12.4993C1.66406 16.666 3.33073 18.3327 7.4974 18.3327H12.4974C16.6641 18.3327 18.3307 16.666 18.3307 12.4993V10.8327" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12.4219 3.45898C12.9802 5.45065 14.5385 7.00898 16.5385 7.57565" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                @endif
+                              </div>
                             @if($guest_data['rsvp_status']=="1")
-                            <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">
+                            <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_model}}">
                             <h5 class="green">RSVP'd YES</h5>
                             <div class="sucesss-cat ms-auto">
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1879,7 +1905,7 @@
                             </div>
                             </div>
                             @elseif ($guest_data['rsvp_status']=="0")
-                            <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">
+                            <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
                                 <h5>NO</h5>
                             </div>
                             @else
