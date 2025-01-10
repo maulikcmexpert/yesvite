@@ -1,4 +1,4 @@
-    {{dd($rsvp_status);}}
+    {{-- {{dd($rsvp_status);}} --}}
     @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
