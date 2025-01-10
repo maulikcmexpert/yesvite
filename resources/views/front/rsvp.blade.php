@@ -1850,7 +1850,7 @@
                             </div>
                             </div>
                             @elseif ($guest_data['rsvp_status']=="0")
-                            <div class="sucess-no">
+                            <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">
                                 <h5>NO</h5>
                             </div>
                             @else
