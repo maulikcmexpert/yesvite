@@ -1405,6 +1405,11 @@ display:none;}
 .rsvp-wrp .rsvp-slider{
     border-radius: 10px;
 }
+.rsvp-slider.slider-count.owl-carousel .owl-dots {
+    display: flex !important;
+    position: relative;
+    top: -10px;
+}
 }
 
 @media only screen and (max-width: 424px) {
