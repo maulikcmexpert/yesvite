@@ -978,9 +978,9 @@ new Chart(ctx, {
             },
             y: {
                 beginAtZero: true,
-                max: 50,
+                max: highestValue+8,
                 ticks: {
-                    stepSize: 5, 
+                    stepSize: 4, 
                 },
                 grid: {
                     color: "rgba(0, 0, 0, 0.05)",
