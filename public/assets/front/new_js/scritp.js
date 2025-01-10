@@ -944,7 +944,7 @@ highestValue = highestValue + (highestValue * 0.3);
 if (highestValue < 7) {
     highestValue += 2;
 }
-
+highestValue = Math.round(highestValue); 
 new Chart(ctx, {
     type: "line",
     data: {
@@ -987,7 +987,7 @@ new Chart(ctx, {
             y: {
                 // beginAtZero: true,
                 min:lowestValue,
-                max: round(highestValue),
+                max: highestValue,
                 ticks: {
                     stepSize: 4, 
                 },
