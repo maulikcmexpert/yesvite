@@ -945,6 +945,12 @@ if (highestValue < 7) {
     highestValue += 2;
 }
 highestValue = Math.round(highestValue); 
+
+let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
+if (stepSize % 2 !== 0) {
+    stepSize++; // Ensure stepSize is even for better readability
+}
+stepSize=Math.round(stepSize);
 new Chart(ctx, {
     type: "line",
     data: {
@@ -989,7 +995,7 @@ new Chart(ctx, {
                 min:lowestValue,
                 max: highestValue,
                 ticks: {
-                    stepSize: 4, 
+                    stepSize: stepSize, 
                 },
                 grid: {
                     color: "rgba(0, 0, 0, 0.05)",
