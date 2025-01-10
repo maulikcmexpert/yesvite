@@ -812,7 +812,7 @@
                         </div>
                     </div>
                 </section>
-                @if(isset($rsvp_status)&&$rsvp_status==null || isset($rsvp_status)&&$rsvp_status=="")
+                @if($rsvp_status==null || $rsvp_status=="")
                     <div class="rsvp-footer-btn-wrp">
                         <div class="container">
                             <div class="rsvp-footer-btn">
