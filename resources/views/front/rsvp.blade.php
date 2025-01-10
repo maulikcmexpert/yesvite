@@ -811,7 +811,7 @@
                         </div>
                     </div>
                 </section>
-                @if(isset($rsvp_status)&&$rsvp_status==null)
+                @if(isset($rsvp_status)&&$rsvp_status==null || isset($rsvp_status)&&$rsvp_status=="")
                     <div class="rsvp-footer-btn-wrp">
                         <div class="container">
                             <div class="rsvp-footer-btn">
@@ -1800,7 +1800,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary no_rsvp_btn" data-bs-dismiss="modal">Send RSVP</button>
+                            <button type="button" class="btn btn-secondary no_rsvp_btn" data-bs-dismiss="modal">Cancel RSVP</button>
                         </div>
                 </form>
             </div>
