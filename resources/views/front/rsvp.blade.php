@@ -1,4 +1,4 @@
-    {{dd($getInvitedusers['all_invited_users']);}}
+    {{-- {{dd($getInvitedusers['all_invited_users']);}} --}}
     @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
@@ -284,6 +284,14 @@
                                                     $yes_modal="#rsvp-yes-modal";
                                                     $no_modal="#rsvp-no-modal"; 
                                             }
+                                            if($guest_data['status']=="1"){
+                                                $open_modal=$no_modal;
+                                            }elseif($guest_data['status']=="0"){
+                                                $open_modal=$yes_modal;
+                                            }else{
+                                                $open_modal="";
+                                            }
+
                                             @endphp
                                                 
                                             <div class="guest-user-box">
@@ -308,7 +316,7 @@
                                                       <span class="guest-email">{{$guest_data['email']}}</span>
                                                     </div>
                                                     @if($rsvp_status!="" &&($user_id==$guest_data['id']))
-                                                        <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$no_modal}}>
+                                                        <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
                                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M9.16406 1.66602H7.4974C3.33073 1.66602 1.66406 3.33268 1.66406 7.49935V12.4993C1.66406 16.666 3.33073 18.3327 7.4974 18.3327H12.4974C16.6641 18.3327 18.3307 16.666 18.3307 12.4993V10.8327" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
