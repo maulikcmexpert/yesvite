@@ -1,4 +1,4 @@
-{{dd($transcation);}}
+{{-- {{dd($transcation);}} --}}
 <x-front.advertise />
 <section class="transaction_history_wrp">
     <div class="container">
@@ -64,7 +64,7 @@
                                                     <div class="transaction_detail_list_right">
                                                         <div class="transaction_detail_amount {{$status_color}}">
                                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
-                                                            <p>{{$status}}{{$transaction_data['used_coins']}}</p>
+                                                            <p>{{$status}}{{$transaction_data['coins']}}</p>
                                                         </div>
                                                     </div>
                                                 </li>                               
