@@ -93,8 +93,8 @@
                 <tr>
                     <td>
                         <div class="download-form-img" style="display: flex;align-items: center;gap: 10px;">
-                            <a href="https://drive.google.com/file/d/1_yQ5YEikdw7IMtHS6gZ5mNqP2glVrTNz/view?usp=sharing" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img src="{{ asset('public/storage/google-play.png')}}" alt="" style="width: 100%;height: 100%;"></a>
-                            <a href="https://web.getappbox.com/?url=/scl/fi/77gtqibhyq9gohainok43/appinfo.json?rlkey=3jkdl9mfizoob5bo5hzf3zr38" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img src="{{ asset('public/storage/app-store.png')}}" alt="" style="width: 100%;height: 100%;"></a>
+                            <a href="https://play.google.com/store/games?hl=en&pli=1" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img src="{{ asset('public/storage/google-play.png')}}" alt="" style="width: 100%;height: 100%;"></a>
+                            <a href="https://www.apple.com/in/app-store/" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img src="{{ asset('public/storage/app-store.png')}}" alt="" style="width: 100%;height: 100%;"></a>
                         </div>
                     </td>
                 </tr>
