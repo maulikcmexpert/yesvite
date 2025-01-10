@@ -32,7 +32,7 @@ $(document).on('click', '.edit-btn', function () {
 
 
             $('#editrsvp .save-btn').data('guest-update-id', guestId);
-            $('#editrsvp').modal('show'); // This will open the modal
+            $('#editrsvp').modal('show');  // This will open the modal
         },
         error: function (error) {
             console.error('Error fetching guest details:', error);

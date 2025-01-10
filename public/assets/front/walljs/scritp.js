@@ -1,3 +1,12 @@
+
+// fill-heart-icon
+$(".posts-card-like-btn").on("click", function() {
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-regular');
+    icon.classList.toggle('fa-solid');
+  });
+
+
 $(".notification-btn").on("click", function() {
   const icon = $(this).find("i");
 
@@ -10,14 +19,6 @@ $(".notification-btn").on("click", function() {
     $(this).html('<i class="fa-regular fa-bell"></i> Silence Notifications');
   }
 });
-
-// fill-heart-icon
-  $(".posts-card-like-btn").on("click", function() {
-  const icon = this.querySelector('i');
-  icon.classList.toggle('fa-regular');
-  icon.classList.toggle('fa-solid');
-});
-
 
 
 // ===header-drodpdown===

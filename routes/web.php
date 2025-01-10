@@ -247,6 +247,9 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::get('event_photo/{id}',  [EventPhotoController::class, 'index'])->name('event.event_photos');
     Route::post('event_photo/event_post', [EventPhotoController::class, 'createEventPost'])->name('event_photo.eventPost');
+    Route::post('event_photo/fetch-photo-details', [EventPhotoController::class, 'fetchPost']);
+    Route::post('event_photo/deletePost', [EventPhotoController::class, 'deletePost']);
+    Route::post('event_photo/userPostLikeDislike', [EventPhotoController::class, 'userPostLikeDislike'])->name('event_photo.userPostLikeDislike');
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
     Route::get('event_guest/fetch_guest/{id}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
     Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');

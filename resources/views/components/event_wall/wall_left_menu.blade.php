@@ -3,7 +3,24 @@
     <div class="hosted-by-title">
         <div class="hosted-by-info">
             <div class="hosted-by-info-img">
+                @if ($eventDetails['user_profile'] != '')
                 <img src="{{ $eventDetails['user_profile'] }}" alt="" />
+            @else
+                @php
+                    $name = $eventDetails['hosted_by'];
+                    // $parts = explode(" ", $name);
+                    $firstInitial = isset($eventDetails['hosted_by'][0])
+                        ? strtoupper($eventDetails['hosted_by'][0])
+                        : '';
+                    $secondInitial = isset($eventDetails['hosted_by'][5]) ? strtoupper($eventDetails['hosted_by'][5]) : '';
+                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                @endphp
+                <h5 class="{{ $fontColor }}">
+                    {{ $initials }}
+                </h5>
+            @endif
+
             </div>
             <div class="hosted-by-info-content">
                 <h3>Hosted by <span>{{ $eventDetails['hosted_by'] }}</span></h3>

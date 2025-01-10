@@ -268,8 +268,8 @@ class EventPhotoController extends Controller
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
             $eventInfo['guest_view'] = $eventDetails;
             $current_page = "photos";
-
-            return view('layout', compact('page', 'js','title', 'event', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
+            $login_user_id  = $user->id;
+            return view('layout', compact('page', 'js', 'title', 'event', 'login_user_id','eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => 'db error']);
@@ -356,4 +356,215 @@ class EventPhotoController extends Controller
 
         return redirect()->back()->with('success', 'Event Post created successfully!');
     }
+
+    public function fetchPost(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+        $photoId = $request->id;
+        $eventId = $request->event_id;
+
+        // Fetch photo details from the database
+        $getPhotoList = EventPost::query();
+        $getPhotoList->with(['user', 'event_post_reaction', 'post_image'])
+            ->withCount([
+                'event_post_reaction',
+                'post_image',
+                'event_post_comment' => function ($query) {
+                    $query->where('parent_comment_id', NULL);
+                }
+            ])
+            ->where(['event_id' => $eventId, 'post_type' => '1', 'id' => $photoId])
+            ->orderBy('id', 'desc');
+
+        $results = $getPhotoList->get();
+
+        if ($results->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Photo details not found.'
+            ]);
+        }
+
+        $postPhotoList = [];
+
+        foreach ($results as $value) {
+            $ischeckEventOwner = Event::where(['id' => $eventId, 'user_id' => $user->id])->exists();
+            $postControl = PostControl::where([
+                'user_id' => $user->id,
+                'event_id' => $eventId,
+                'event_post_id' => $value->id
+            ])->first();
+
+            // Skip hidden posts
+            if ($postControl && $postControl->post_control === 'hide_post') {
+                continue;
+            }
+
+            $postPhotoDetail = [
+                'user_id' => $value->user->id,
+                'is_own_post' => ($value->user->id == $user->id) ? "1" : "0",
+                'is_host' => $ischeckEventOwner ? 1 : 0,
+                'firstname' => $value->user->firstname,
+                'lastname' => $value->user->lastname,
+              'location' => $value->user->city . ', ' . $value->user->state,
+
+                'profile' => (!empty($value->user->profile)) ? asset('storage/profile/' . $value->user->profile) : "",
+                'is_reaction' => EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->exists() ? '1' : '0',
+                'self_reaction' => EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->value('reaction') ?? "",
+                'event_id' => $value->event_id,
+                'id' => $value->id,
+                'post_message' => $value->post_message ?? "",
+                'post_time' => $this->setpostTime($value->updated_at),
+                'is_in_photo_moudle' => $value->is_in_photo_moudle,
+                'mediaData' => [],
+                'total_media' => ($value->post_image_count > 1) ? "+" . ($value->post_image_count - 1) : "",
+                'reactionList' => getReaction($value->id)->pluck('reaction')->toArray(),
+                'total_likes' => $value->event_post_reaction_count,
+                'total_comments' => $value->event_post_comment_count
+            ];
+
+            if (!empty($value->post_image)) {
+                $photoVideoData = [];
+                foreach ($value->post_image as $val) {
+                    $photoVideoData[] = [
+                        'id' => $val->id,
+                        'event_post_id' => $val->event_post_id,
+                        'post_media' => (!empty($val->post_image)) ? asset('storage/post_image/' . $val->post_image) : "",
+                        'thumbnail' => (!empty($val->thumbnail)) ? asset('storage/thumbnails/' . $val->thumbnail) : "",
+                        'type' => $val->type
+                    ];
+                }
+                $postPhotoDetail['mediaData'] = $photoVideoData;
+            }
+
+            $postPhotoList[] = $postPhotoDetail;
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $postPhotoList
+        ]);
+    }
+
+    public function userPostLikeDislike(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+
+        // Check if user has already reacted to this post
+        $checkReaction = EventPostReaction::where([
+            'event_id' => $request['event_id'],
+            'event_post_id' => $request['event_post_id'],
+            'user_id' => $user->id
+        ])->first();
+
+        // Convert the emoji reaction to Unicode
+        $reaction_unicode = sprintf('\u{%X}', mb_ord($request['reaction'], 'UTF-8'));
+        $unicode = strtoupper(bin2hex(mb_convert_encoding($request['reaction'], 'UTF-32', 'UTF-8')));
+
+        if (!$checkReaction) {
+            // User has not reacted yet, insert the reaction
+            $event_post_reaction = new EventPostReaction;
+            $event_post_reaction->event_id = $request['event_id'];
+            $event_post_reaction->event_post_id = $request['event_post_id'];
+            $event_post_reaction->user_id = $user->id;
+            $event_post_reaction->reaction = $reaction_unicode;
+            $event_post_reaction->unicode = $unicode;
+            $event_post_reaction->save();
+
+            $message = "Post liked by you";
+            $isReaction = 1;
+        } else {
+            // User has already reacted
+            if ($checkReaction->unicode != $unicode) {
+                // Reaction is different from current, update it
+                $checkReaction->reaction = $reaction_unicode;
+                $checkReaction->unicode = $unicode;
+                $checkReaction->save();
+                $message = "Post liked by you";
+                $isReaction = 1;
+            } else {
+                // Same reaction, dislike the post
+                $checkReaction->delete();
+                $removeNotification = Notification::where([
+                    'event_id' => $request['event_id'],
+                    'sender_id' => $user->id,
+                    'post_id' => $request['event_post_id'],
+                    'notification_type' => 'like_post'
+                ])->first();
+
+                if ($removeNotification) {
+                    $removeNotification->delete();
+                }
+                $message = "Post Disliked by you";
+                $isReaction = 0;
+            }
+        }
+
+        // Get total count of reactions
+        $counts = EventPostReaction::where([
+            'event_id' => $request['event_id'],
+            'event_post_id' => $request['event_post_id']
+        ])->count();
+
+        // Get the top 3 most common reactions
+        $total_counts = EventPostReaction::where([
+            'event_id' => $request['event_id'],
+            'event_post_id' => $request['event_post_id']
+        ])
+        ->select('reaction', 'unicode', DB::raw('COUNT(*) as count'))
+        ->groupBy('reaction', 'unicode')
+        ->orderByDesc('count')
+        ->take(3)
+        ->pluck('reaction')
+        ->toArray();
+
+        // Get post reactions with user details
+        $postReactions = getReaction($request['event_post_id']);
+        $postReaction = [];
+
+        foreach ($postReactions as $reactionVal) {
+            $reactionInfo = [
+                'id' => $reactionVal->id,
+                'event_post_id' => $reactionVal->event_post_id,
+                'reaction' => $reactionVal->reaction,
+                'user_id' => $reactionVal->user_id,
+                'username' => $reactionVal->user->firstname . ' ' . $reactionVal->user->lastname,
+                'location' => $reactionVal->user->city ?? "",
+                'profile' => !empty($reactionVal->user->profile) ? asset('storage/profile/' . $reactionVal->user->profile) : ""
+            ];
+
+            $postReaction[] = $reactionInfo;
+        }
+
+        return response()->json([
+            'status' => 1,
+            'is_reaction' => $isReaction,
+            'message' => $message,
+            'count' => $counts,
+            'post_reaction' => $postReaction,
+            'reactionList' => $total_counts
+        ]);
+    }
+
+    public function deletePost(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+
+        $id = $request->input('event_post_id');
+        $record = EventPost::find($id);
+
+        if ($record) {
+            $record->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Event post deleted successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Event post not found or could not be deleted.'
+            ]);
+        }
+    }
+
 }
