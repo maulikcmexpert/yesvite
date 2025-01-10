@@ -5851,6 +5851,7 @@ $(document).on('click','.add_gift_registry',function(){
         $("#registry_list").append(data.view);
         console.log(eventData);
         if(eventData.gift_registry_data != undefined){
+            console.log({data:eventData.gift_registry_data});
             eventData.gift_registry_data.forEach((element, index) => {
                 console.log(element.gr_id);
                 $('input[name="gift_registry[]"]').each(function() {
