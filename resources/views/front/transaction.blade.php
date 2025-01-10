@@ -40,10 +40,7 @@
                                 @if(!empty($transcation))
                                         @foreach ($transcation as $transaction_data ) 
                                                 @php
-                                                    $dateTime = new DateTime($transaction_data['created_at']);
-                                                    $date = $dateTime->format('M d, Y'); // Aug 30, 2024
-                                                    $time = $dateTime->format('g:iA'); 
-
+                                        
                                                     $type=$transaction_data['type'];
                                                     $status="";
                                                     $status_color="";
@@ -60,8 +57,8 @@
                                                         <h3>{{$transaction_data['description']}}</h3>
                                                         <ul>
                                                             <li>{{$transaction_data['current_balance']}} balance</li>
-                                                            <li>{{$date}}</li>
-                                                            <li>{{$time}}</li>
+                                                            <li>{{$transaction_data['date']}}</li>
+                                                            <li>{{$transaction_data['time']}}</li>
                                                         </ul>
                                                     </div>
                                                     <div class="transaction_detail_list_right">
