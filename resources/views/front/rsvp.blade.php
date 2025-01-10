@@ -1,4 +1,4 @@
-    {{-- {{dd($rsvp_status);}} --}}
+    {{dd($getInvitedusers['all_invited_users']);}}
     @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
@@ -360,7 +360,7 @@
                                                       <h5 class="ms-auto">{{$read}}{{$rsvp}}</h5>
                                                     </div>
                                                 </div>
-                                                <div class="sucess-no">
+                                                <div class="sucess-no" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">
                                                     <h5>NO</h5>
                                                 </div>
                                                   @else
