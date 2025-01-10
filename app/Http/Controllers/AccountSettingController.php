@@ -292,8 +292,30 @@ class AccountSettingController extends Controller
             ]
         )->findOrFail($id);
 
-        $transcation=Coin_transactions::where('user_id',$id)->orderBy('id','desc')->get();
+        $groupCount = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
+        ->orderBy('id', 'DESC')
+        ->count();
+        //  $total_page = ceil($groupCount / 20);
 
+
+
+    $groupList = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
+        ->orderBy('id', 'DESC')
+        ->limit(20);
+    // dd($groupList);
+
+    $transcation = [];
+    foreach ($groupList as $value) {
+        $group['id'] = $value->id;
+        $group['type'] = $value->type;
+        $group['coins'] = $value->coins;
+        $group['current_balance'] = $value->current_balance;
+        $group['description'] = $value->description;
+        $group['event_name'] = (isset($value->event->event_name) && $value->event->event_name != '') ? $value->event->event_name : '';
+        $group['date'] = Carbon::parse($value->created_at)->format('M d, Y');
+        $group['time'] = Carbon::parse($value->created_at)->format('g:i A');
+        $transcation[] = $group;
+    }
 
 
         $lastSevenMonths = collect();
