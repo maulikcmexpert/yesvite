@@ -8,7 +8,7 @@ $(document).ready(function() {
         });
     });
     $('.open-event-images').click(function() {
-        var index = $('.ropen-event-images').index(this);
+        var index = $('.open-event-images').index(this);
         $.magnificPopup.open({
             items: galleryItems,    
             gallery: {
