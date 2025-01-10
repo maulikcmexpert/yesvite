@@ -16,6 +16,7 @@ var selected_dataId = '';
 var selected_profile_or_text = "";
 var selected_prefer_by = '';
 $(document).ready(function () {
+
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
         $('.user_choice').prop('checked',false);
@@ -2647,7 +2648,8 @@ $(document).on("click", "#close_createEvent", function () {
 
     $('#loader').css('display','block');
 
-    if (event_type != "" && event_name != "" && event_date != "") {
+    if (event_name != "" && event_date != "") {
+        // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
         if(firstLetter == '1'){
@@ -2893,58 +2895,58 @@ function savePage1Data(close = null) {
     } else {
         $("#event-start_time-error").css("display", "none");
     }
-    if (address1 == "") {
-        $("#event-address1-error")
-            .css("display", "block")
-            .css("color", "red")
-            .text("Please enter address1");
-            focus_timeOut('address1');
-        return;
-    } else {
-        $("#event-address1-error").css("display", "none");
-    }
-    if (city == "") {
-        $("#event-city-error")
-            .css("display", "block")
-            .css("color", "red")
-            .text("Please enter city");
-            focus_timeOut('city');
-        return;
-    } else {
-        $("#event-city-error").css("display", "none");
-    }
-    if (state == "") {
-        $("#event-state-error")
-            .css("display", "block")
-            .css("color", "red")
-            .text("Please enter state");
-            focus_timeOut('state');
-        return;
-    } else {
-        $("#event-state-error").css("display", "none");
-    }
-    if (zipcode == "") {
-        $("#event-zipcode-error")
-            .css("display", "block")
-            .css("color", "red")
-            .text("Please enter zipcode");
-            focus_timeOut('zipcode');
-        return;
-    } else {
-        $("#event-zipcode-error").css("display", "none");
-    }
+    // if (address1 == "") {
+    //     $("#event-address1-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter address1");
+    //         focus_timeOut('address1');
+    //     return;
+    // } else {
+    //     $("#event-address1-error").css("display", "none");
+    // }
+    // if (city == "") {
+    //     $("#event-city-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter city");
+    //         focus_timeOut('city');
+    //     return;
+    // } else {
+    //     $("#event-city-error").css("display", "none");
+    // }
+    // if (state == "") {
+    //     $("#event-state-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter state");
+    //         focus_timeOut('state');
+    //     return;
+    // } else {
+    //     $("#event-state-error").css("display", "none");
+    // }
+    // if (zipcode == "") {
+    //     $("#event-zipcode-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter zipcode");
+    //         focus_timeOut('zipcode');
+    //     return;
+    // } else {
+    //     $("#event-zipcode-error").css("display", "none");
+    // }
     
 
     if (
-        event_type != "" &&
+        // event_type != "" &&
         event_name != "" &&
         hostedby != "" &&
         event_date != "" &&
-        start_time != "" &&
-        address1 != "" &&
-        city != "" &&
-        state != "" &&
-        zipcode != ""
+        start_time != "" 
+        // address1 != "" &&
+        // city != "" &&
+        // state != "" &&
+        // zipcode != ""
     ) {
         if(rsvp_end_time_set == '1' && start_time_zone != end_time_zone){
             $('#end-time-zone').focus();
@@ -3237,6 +3239,7 @@ function convertTo12HourFormat(time) {
 }
 
 function clearError(input = null) {
+
     if (input == null) {
         return;
     }
@@ -5848,6 +5851,7 @@ $(document).on('click','.add_gift_registry',function(){
         $("#registry_list").append(data.view);
         console.log(eventData);
         if(eventData.gift_registry_data != undefined){
+            console.log({data:eventData.gift_registry_data});
             eventData.gift_registry_data.forEach((element, index) => {
                 console.log(element.gr_id);
                 $('input[name="gift_registry[]"]').each(function() {
@@ -6029,3 +6033,16 @@ $(document).on("click", ".edit_event_details", function () {
 
 
 });
+
+$("#isCheckAddress").on('click',function(){
+    if ($(this).is(":checked")) {
+        $(".ckeckedAddress").show();
+    }else{
+        $(".ckeckedAddress").hide();
+        $("#zipcode").val('');
+        $("#city").val('');
+        $("#state").val('');
+        $("#address2").val('');
+        $("#address1").val('');
+    }
+})
