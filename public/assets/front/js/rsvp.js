@@ -14,9 +14,6 @@ $(document).ready(function() {
             gallery: {
                 enabled: true       
             },
-            image:{
-                verticalFit: true
-            },
             type: 'image'           
         }, index);                  
     });
