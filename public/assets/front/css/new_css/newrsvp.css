@@ -1408,7 +1408,7 @@ display:none;}
 .rsvp-slider.slider-count.owl-carousel .owl-dots {
     display: flex !important;
     position: relative;
-    top: -10px;
+    margin-bottom: 10px !important;
 }
 }
 
