@@ -1618,13 +1618,13 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" value="{{$firstname}}" id="firstname" class="form-control inputText firstname" maxlength="50" >
+                                                    <input type="text" name="firstname" value="{{$firstname}}" id="firstname" autocomplete="off" class="form-control inputText firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" value="{{$lastname}}" id="lastname"  class="form-control inputText lastname" maxlength="50" >
+                                                    <input type="text"  name="lastname" value="{{$lastname}}" id="lastname" autocomplete="off" class="form-control inputText lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                             </div>
@@ -1643,7 +1643,7 @@
                                             <h6>Adults</h6>
                                             <div class="qty-container ms-auto">
                                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                            <input type="number" name="adults" id="adults" value="0" class="input-qty" readonly>
+                                            <input type="number" name="adults" id="adults" value="0" class="input-qty" autocomplete="off" readonly>
                                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
@@ -1660,7 +1660,7 @@
                                     <div class="rsvp-msgbox">
                                         <h5>Message</h5>
                                         <div class="input-form">
-                                            <textarea class="form-control inputText message_to_host" id="message_to_host" name="message_to_host" message=""  maxlength="50"></textarea>
+                                            <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" message=""  maxlength="50"></textarea>
                                             <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -1674,20 +1674,20 @@
                                     <div class="rsvp-yes-notification-wrp">
                                         <h5>Notifications</h5>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" type="checkbox" name="notifications[]"  value="1" id="flexCheckDefault" checked>
+                                            <input class="form-check-input notifications" type="checkbox" name="notifications[]"  value="1" autocomplete="off" id="flexCheckDefault" checked>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 All event activity <br>
                                                 (Wall posts, potluck activity,  photo uploads, event updates, messages)
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="wall_post" id="flexCheckDefault1" >
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="wall_post"  autocomplete="off" id="flexCheckDefault1" >
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Wall Posts & Updates<br>
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="guest_rsvp" id="flexCheckDefault1" >
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="guest_rsvp" autocomplete="off" id="flexCheckDefault1" >
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Guests RSVP Responses <br>
                                             </label>
@@ -1752,13 +1752,13 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" value="{{$firstname}}" id="firstname" class="form-control inputText firstname" maxlength="50" >
+                                            <input type="text" name="firstname" value="{{$firstname}}" id="firstname" class="form-control inputText firstname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" value="{{$lastname}}" id="lastname" class="form-control inputText lastname" maxlength="50" >
+                                            <input type="text" name="lastname" value="{{$lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
@@ -1773,7 +1773,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea class="form-control inputText message_to_host" id="message_to_host" name="message_to_host" required=""  maxlength="50"></textarea>
+                                    <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" required=""  maxlength="50"></textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">
