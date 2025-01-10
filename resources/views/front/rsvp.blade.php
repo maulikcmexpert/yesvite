@@ -1692,7 +1692,7 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1" checked>
+                                            <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1">
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Special offers ( From Yesvite & partners) <br>
                                             </label>
