@@ -932,11 +932,19 @@ const parsedData = JSON.parse(hiddenData);
 const labels = parsedData.map(item => item.month); // Extract months
 const data = parsedData.map(item => item.current_balance);
 
-const lowestValue = Math.min(...data);
-const highestValue = Math.max(...data);
+let lowestValue = Math.min(...data);
+let highestValue = Math.max(...data);
 
-console.log("Lowest Value:", lowestValue);
-console.log("Highest Value:", highestValue);
+if (lowestValue !== 0) {
+    lowestValue = 0;
+}
+
+highestValue = highestValue + (highestValue * 0.3);
+
+if (highestValue < 7) {
+    highestValue += 2;
+}
+
 new Chart(ctx, {
     type: "line",
     data: {
@@ -979,7 +987,7 @@ new Chart(ctx, {
             y: {
                 // beginAtZero: true,
                 min:lowestValue,
-                max: highestValue+8,
+                max: highestValue,
                 ticks: {
                     stepSize: 4, 
                 },
