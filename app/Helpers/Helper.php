@@ -1265,6 +1265,7 @@ function sendNotificationGuest($notificationType, $postData)
                 ->get();
             }
            
+            dd($invitedusers);
             foreach ($invitedusers as $value) {
 
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
