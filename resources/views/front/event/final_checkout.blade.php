@@ -61,7 +61,7 @@
                             </a>
                         </div>
                     </div>
-                    {{-- <div class="guest-wrp guest-wrap-respo">
+                    <div class="guest-wrp guest-wrap-respo">
                         <div class="guest-pro">
                             <div class="d-flex">
                                 <h5>Pro </h5>
@@ -84,7 +84,7 @@
                                 <p><strong>Invites | 1</strong> Left</p>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="order-desc order-desc-respo">
                         <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="#">Terms of service</a></p>
                     </div>
@@ -92,7 +92,7 @@
                 </div>
 
             </div>
-            {{-- <div class="total-order-wrp position-relative">
+            <div class="total-order-wrp position-relative">
                 <div class="order-content">
                     <h4>Order Total</h4>
                     <div class="guest-wrp">
@@ -127,7 +127,7 @@
                 <div class="new-event-btn">
                     <a href="#" id="final_create_event" class="cmn-btn">Purchase & Send Invites</a>
                 </div>
-            </div> --}}
+            </div>
         </div>
         <div class="new-event-btn new-event-respo">
             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>

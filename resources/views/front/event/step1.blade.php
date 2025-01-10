@@ -67,13 +67,13 @@
                          
                                 <input type="text" class="form-control inputText" id="event-date" data-isDate="{{$start_date}}" name="event-date" onblur="clearError(this)"  value="{{$start_date}}" readonly>
                         
-                            <label for="birthday" class="form-label input-field floating-label select-label">Date of event*</label>
+                            <label for="birthday" class="form-label input-field floating-label select-label">Date of event *</label>
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
                     </div>
                     <div class="col-6 mb-4">
                         <div class="form-group">
-                            <label>Start Time*</label>
+                            <label>Start Time *</label>
                             <div class="input-group time start-time">
                                 <input type="text" class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time"
                                  name="start-time" onblur="clearError(this)" readonly 
