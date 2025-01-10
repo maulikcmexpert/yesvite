@@ -146,7 +146,7 @@
                                             </div>
                                         </div>
                                         @foreach ($postPhotoList as $photo)
-                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 delete_post_container">
                                                 <div class="photos-card-wrp">
                                                     <div class="photo-card-head">
                                                         <div class="photo-card-head-left">
@@ -182,8 +182,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="photo-card-head-right">
-                                                            <button class="posts-card-like-btn" id="likeButton">
+                                                            <button class="posts-card-like-btn"  id="likeButton" data-event-id="{{$event}}" data-event-post-id="{{ $photo['id'] }} " data-user-id="{{ $login_user_id }}">
+                                                                @if($photo['self_reaction'] == '\u{2764}')
+                                                                <i class="fa-solid fa-heart"></i>
+                                                                @elseif($photo['self_reaction'] == '')
                                                                 <i class="fa-regular fa-heart"></i>
+                                                                @else
+                                                                <i class="fa-regular fa-heart"></i>
+                                                                @endif
                                                             </button>
 
                                                             <div class="photos-likes-options-wrp" id="emojiDropdown"
@@ -242,7 +248,7 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Download </button></li>
-                                                                    <li><button class="dropdown-item">
+                                                                    <li><button class="dropdown-item"  id="delete_post" data-event-post-id="{{$photo['id']}}" data-event-id="{{$event}}">
                                                                             <svg viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
@@ -292,15 +298,14 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="photo-card-photos-wrp">
-                                                        <div class="photo-card-photos-main-img">
+                                                    <div class="photo-card-photos-wrp imagePress">
+                                                        <div class="photo-card-photos-main-img open_photo_model"  data-bs-toggle="modal"
+                                                        data-bs-target="#detail-photo-modal"  data-post-id="{{ $photo['id'] }}"  data-event-id="{{ $photo['event_id'] }}" >
                                                             @if (isset($photo['mediaData']) && $photo['mediaData']['type'] === 'image')
                                                             <img src="{{ $photo['mediaData']['post_media'] }}" alt="Post Image">
                                                             @endif
                                                         </div>
-                                                        <button class="total-photos-count-btn" type="button"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#detail-photo-modal">+10</button>
+                                                        <button class="total-photos-count-btn photo_model" type="button" >+10</button>
                                                         <ul>
                                                             <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
                                                                     alt=""></li>
@@ -308,7 +313,7 @@
                                                                     alt=""></li>
                                                             <li><img src="{{ asset('assets/front/img/clap-icon.png') }}"
                                                                     alt=""></li>
-                                                            <p>105</p>
+                                                             <p id="likeCount_{{$photo['id']}}">{{$photo['total_likes']}} Likes</p>
                                                         </ul>
                                                         <h5>
                                                             <svg viewBox="0 0 14 14" fill="none"
@@ -317,9 +322,9 @@
                                                                     d="M9.91602 1.16669H4.08268C2.47268 1.16669 1.16602 2.46752 1.16602 4.07169V7.56002V8.14335C1.16602 9.74752 2.47268 11.0484 4.08268 11.0484H4.95768C5.11518 11.0484 5.32518 11.1534 5.42435 11.2817L6.29935 12.4425C6.68435 12.9559 7.31435 12.9559 7.69935 12.4425L8.57435 11.2817C8.68518 11.1359 8.86018 11.0484 9.04102 11.0484H9.91602C11.526 11.0484 12.8327 9.74752 12.8327 8.14335V4.07169C12.8327 2.46752 11.526 1.16669 9.91602 1.16669ZM7.58268 8.02085H4.08268C3.84352 8.02085 3.64518 7.82252 3.64518 7.58335C3.64518 7.34419 3.84352 7.14585 4.08268 7.14585H7.58268C7.82185 7.14585 8.02018 7.34419 8.02018 7.58335C8.02018 7.82252 7.82185 8.02085 7.58268 8.02085ZM9.91602 5.10419H4.08268C3.84352 5.10419 3.64518 4.90585 3.64518 4.66669C3.64518 4.42752 3.84352 4.22919 4.08268 4.22919H9.91602C10.1552 4.22919 10.3535 4.42752 10.3535 4.66669C10.3535 4.90585 10.1552 5.10419 9.91602 5.10419Z"
                                                                     fill="white" fill-opacity="0.5" />
                                                             </svg>
-                                                            24
+                                                            {{$photo['total_comments']}}
                                                         </h5>
-                                                        <button class="selected-photo-btn">
+                                                        <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input" type="checkbox"
                                                                 value="" id="flexCheckDefault">
                                                         </button>
@@ -638,8 +643,8 @@
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
-                                    <h3>Chance Curtis</h3>
-                                    <p>New York, NY</p>
+                                    <h3 id="post_name">Chance Curtis</h3>
+                                    <p id="location">New York, NY</p>
                                 </div>
                             </div>
                             <div class="posts-card-head-right">
@@ -708,13 +713,19 @@
                             </div>
                         </div>
                         <div class="posts-card-inner-wrp">
-                            <h3 class="posts-card-inner-questions">Join for some drinks upstairs? Anyone?</h3>
+                            <h3 class="posts-card-inner-questions " id="post_message">Join for some drinks upstairs? Anyone?</h3>
 
                             <div class="posts-card-show-post-wrp">
                                 <div class="swiper photo-detail-slider">
                                     <div class="swiper-wrapper">
                                         <!-- Slides -->
-                                        <div class="swiper-slide">
+                                        <div class="swiper-slide" id="media_post">
+                                            <div class="posts-card-show-post-img">
+                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
+                                                    alt="" />
+                                            </div>
+                                        </div>
+                                        {{-- <div class="swiper-slide">
                                             <div class="posts-card-show-post-img">
                                                 <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
                                                     alt="" />
@@ -731,13 +742,7 @@
                                                 <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
                                                     alt="" />
                                             </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="posts-card-show-post-img">
-                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="swiper-button-next">
                                         <i class="fa-solid fa-angle-right"></i>
@@ -757,12 +762,12 @@
                                             alt=""></li>
                                     <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="">
                                     </li>
-                                    <p>5k Likes</p>
+                                    <p id="likes">5k Likes</p>
                                 </ul>
-                                <h6>354 Comments</h6>
+                                <h6  id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right">
-                                <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                <button class="posts-card-like-btn" id="likeButton" data-event-id="{{$event}}" data-event-post-id="{{ $photo['id'] }} " data-user-id="{{ $login_user_id }}"><i class="fa-regular fa-heart"></i></button>
                                 <button class="posts-card-comm show-comments-btn">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -884,8 +889,8 @@
                                             </div>
                                             <div class="posts-card-like-comment-right">
                                                 <p>2h</p>
-                                                <button class="posts-card-like-btn"><i
-                                                        class="fa-regular fa-heart"></i></button>
+                                                <button class="posts-card-like-btn" >
+                                                    <i class="fa-regular fa-heart"></i></button>
                                             </div>
                                         </div>
                                         <div class="commented-user-content">

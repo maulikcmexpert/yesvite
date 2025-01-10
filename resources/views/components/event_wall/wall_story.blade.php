@@ -6,6 +6,26 @@
                 <li class="wall-main-story-item ">
                     <button>
                         <div class="wall-story-item-img">
+                            @if ($users->profile  != '')
+                            <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                            alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                            onclick="showStories( {{ $event }},{{ $users->id }})">
+                        @else
+                            @php
+                                $name = $users->firstname;
+                                // $parts = explode(" ", $name);
+                                $firstInitial = isset($users->firstname[0])
+                                    ? strtoupper($users->firstname[0])
+                                    : '';
+                                $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
+                                $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                            @endphp
+                            <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                onclick="showStories( {{ $event }},{{ $users->id }})">
+                                {{ $initials }}
+                            </h5>
+                        @endif
                             <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                 alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
                                 onclick="showStories( {{ $event }},{{ $users->id }})">
