@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile.account_settings')}}">Account Setting</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Message Privacy</li>
+                            <li class="breadcrumb-item active" aria-current="page">Transactions</li>
                         </ol>
                     </nav>
                     <div class="transaction_history_info_title">
