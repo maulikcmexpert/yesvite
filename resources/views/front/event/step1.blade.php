@@ -9,7 +9,7 @@
                 <h3>Detail Pages</h3>
                 <div class="row">
                     
-                    <div class="col-12 mb-4">
+                    {{-- <div class="col-12 mb-4">
                         <div class="input-form">
                             <select class="form-select" id="event-type" onchange="clearError(this)">
                                 <option value="">Select Event Type</option>
@@ -28,7 +28,7 @@
                                 Type</label>
                         </div>
                             <lable for="event-type" id="event-type-error" class="error"></lable>
-                    </div>
+                    </div> --}}
                     <div class="col-12 mb-4">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" value="{{(isset($eventDetail['event_name']) && $eventDetail['event_name'] != NULL)?$eventDetail['event_name']:''}}" 
@@ -226,7 +226,7 @@
                             <div class="toggle-button-cover ">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox">
+                                        <input type="checkbox" class="checkbox" id="isCheckAddress">
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-4 ckeckedAddress" style="display:none">
                         <div class="input-form location-icon">
                             <input type="text" class="form-control inputText" id="address1" name="address1"
                                 oninput="clearError(this)" value="{{(isset($eventDetail['address_1']) && $eventDetail['address_1'] != '')?$eventDetail['address_1']:''}}" required="">
@@ -256,7 +256,7 @@
                         </div>
                             <lable for="address1" id="event-address1-error" class="error"></lable>
                     </div>
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-4 ckeckedAddress" style="display:none">
                         <div class="input-form location-icon">
                             <input type="text" class="form-control inputText" id="address2" name="address2"
                                 required="" value="{{(isset($eventDetail['address_2']) && $eventDetail['address_2'] != '')?$eventDetail['address_2']:''}}">
@@ -273,7 +273,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-4 ckeckedAddress" style="display:none">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="city" name="city"
                                 oninput="clearError(this)" required="" value="{{(isset($eventDetail['city']) && $eventDetail['city'] != '')?$eventDetail['city']:''}}">
@@ -284,7 +284,7 @@
                             </div>
                             <lable for="city" id="event-city-error" class="error"></lable>
                     </div>
-                    <div class="col-6 mb-4">
+                    <div class="col-6 mb-4 ckeckedAddress" style="display:none">
                         <div class="input-form">
                             <input type="text" class="form-control inputText" id="state" name="state"
                                 oninput="clearError(this)" value="{{(isset($eventDetail['state']) && $eventDetail['state'] != '')?$eventDetail['state']:''}}" required="">
@@ -296,7 +296,7 @@
                             </div>
                             <lable for="city" id="event-state-error" class="error"></lable>
                     </div>
-                    <div class="col-6 mb-4">
+                    <div class="col-6 mb-4 ckeckedAddress" style="display:none">
                         <div class="input-form">
                             <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
                                 oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}">
