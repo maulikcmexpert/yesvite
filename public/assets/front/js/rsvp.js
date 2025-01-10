@@ -1,27 +1,24 @@
 
 $(document).ready(function() {
-    // Collect all images into an array for the gallery
     var galleryItems = [];
     $('.rsvp-zoom-btn').each(function() {
         galleryItems.push({
-            src: $(this).data('img'), // Get image URL from data-img attribute
-            type: 'image'            // Specify the type
+            src: $(this).data('img'), 
+            type: 'image'            
         });
     });
-
-    // Bind the click event to all buttons with class 'rsvp-zoom-btn'
     $('.rsvp-zoom-btn').click(function() {
-        // Find the index of the clicked button
         var index = $('.rsvp-zoom-btn').index(this);
-
-        // Open Magnific Popup as a gallery
         $.magnificPopup.open({
-            items: galleryItems,    // Pass the array of gallery items
+            items: galleryItems,    
             gallery: {
-                enabled: true       // Enable gallery mode
+                enabled: true       
             },
-            type: 'image'           // Specify the type for Magnific Popup
-        }, index);                  // Open at the index of the clicked item
+            image:{
+                verticalFit: true
+            },
+            type: 'image'           
+        }, index);                  
     });
 });
 
