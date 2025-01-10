@@ -19,6 +19,26 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    var galleryItems = [];
+    $('.rsvp-zoom-btn').each(function() {
+        galleryItems.push({
+            src: $(this).data('img'), 
+            type: 'image'            
+        });
+    });
+    $('.rsvp-zoom-btn').click(function() {
+        var index = $('.rsvp-zoom-btn').index(this);
+        $.magnificPopup.open({
+            items: galleryItems,    
+            gallery: {
+                enabled: true       
+            },
+            type: 'image'           
+        }, index);                  
+    });
+});
+
 // $('.rsvp-zoom-btn').click(function() {
 //     var imageUrl = $(this).data('img');
 //     console.log(imageUrl);  // Log the image URL
