@@ -1,15 +1,20 @@
 
 $(document).ready(function() {
-    $('.rsvp-zoom-btn').magnificPopup({
-        type: 'image',
-        items: {
-            src: function() {
-                // Dynamically fetch the image URL from the clicked button's data-img attribute
-                return $('.rsvp-zoom-btn').data('img');
-            }
-        }
+    // Bind the click event to all buttons with class 'rsvp-zoom-btn'
+    $('.rsvp-zoom-btn').click(function() {
+        // Get the image URL from the data-img attribute of the clicked button
+        var imageUrl = $(this).data('img');
+
+        // Open the image in Magnific Popup
+        $.magnificPopup.open({
+            items: {
+                src: imageUrl  // Use the image URL dynamically
+            },
+            type: 'image'
+        });
     });
 });
+
 // $('.rsvp-zoom-btn').click(function() {
 //     var imageUrl = $(this).data('img');
 //     console.log(imageUrl);  // Log the image URL
