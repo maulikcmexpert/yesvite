@@ -1,4 +1,6 @@
-
+@php
+$getSocialLink = getSocialLink();
+@endphp
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->

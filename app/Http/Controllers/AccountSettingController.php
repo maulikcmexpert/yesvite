@@ -301,7 +301,7 @@ class AccountSettingController extends Controller
 
     $groupList = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
         ->orderBy('id', 'DESC')
-        ->limit(20)
+        // ->limit(20)
         ->get();
     // dd($groupList);
 

@@ -11,9 +11,9 @@
                     <nav class="breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="{{route('accoutn_setting')}}">Account Setting</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Transactions</li>
-
+                            <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('profile.account_settings')}}">Account Setting</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Message Privacy</li>
                         </ol>
                     </nav>
                     <div class="transaction_history_info_title">
