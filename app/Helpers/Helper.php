@@ -156,7 +156,6 @@ function sendNotification($notificationType, $postData)
     // })
     ->where('event_id', $postData['event_id'])
     ->where('user_id','!=','')
-    ->whereNull('sync_id')
     ->get();
 
     if ($notificationType == 'invite') {
