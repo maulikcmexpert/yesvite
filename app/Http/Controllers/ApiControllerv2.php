@@ -5306,6 +5306,7 @@ class ApiControllerv2 extends Controller
                             'event_id' => $eventData['event_id'],
                             'newUser' => $newInviteGuest
                         ];
+                        dd($newInviteGuest);
                         sendNotificationGuest('invite', $notificationParam);
                     }
                     $total_count = count($filteredIds) + count($newInviteGuest);
