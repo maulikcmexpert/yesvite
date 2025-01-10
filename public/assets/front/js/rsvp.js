@@ -1,16 +1,20 @@
 
-$('.rsvp-zoom-btn').magnificPopup({
-    items: {
-        src: function() {
-            // Get the image URL from the data-img attribute of the clicked button
-            return $('.rsvp-zoom-btn').data('img');
-        },
-        type: 'image'
-    },
-    gallery: {
-        enabled: false // Disable gallery view if you don't need it
-    }
-});
+// $('.rsvp-zoom-btn').magnificPopup({
+//     items: {
+//         src: function() {
+//             // Get the image URL from the data-img attribute of the clicked button
+//             return $('.rsvp-zoom-btn').data('img');
+//         },
+//         type: 'image'
+//     },
+//     gallery: {
+//         enabled: false // Disable gallery view if you don't need it
+//     }
+// });
+$('.rsvp-zoom-btn').click(function() {
+    var imageUrl = $(this).data('img');
+    console.log(imageUrl);  // Log the image URL
+})
 
 function applyStyles() {
     if ($(window).width() <= 767) {
