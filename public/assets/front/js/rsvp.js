@@ -1,14 +1,14 @@
 
 $(document).ready(function() {
     var galleryItems = [];
-    $('.rsvp-zoom-btn').each(function() {
+    $('.open-event-images').each(function() {
         galleryItems.push({
             src: $(this).data('img'), 
             type: 'image'            
         });
     });
-    $('.rsvp-zoom-btn').click(function() {
-        var index = $('.rsvp-zoom-btn').index(this);
+    $('.open-event-images').click(function() {
+        var index = $('.ropen-event-images').index(this);
         $.magnificPopup.open({
             items: galleryItems,    
             gallery: {
