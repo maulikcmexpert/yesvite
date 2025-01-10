@@ -977,7 +977,8 @@ new Chart(ctx, {
                 },
             },
             y: {
-                beginAtZero: true,
+                // beginAtZero: true,
+                min:lowestValue,
                 max: highestValue+8,
                 ticks: {
                     stepSize: 4, 
