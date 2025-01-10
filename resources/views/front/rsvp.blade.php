@@ -61,6 +61,7 @@
                                     @if ($eventInfo['guest_view']['event_images']!="")
                                         @foreach($eventInfo['guest_view']['event_images'] as $value)
                                         <div class="item">
+                                            <button class="rsvp-zoom-btn" data-img="{{ asset($value)}}"><img src="{{asset('assets/front/image/rsvp-zoom-icon.svg')}}" alt=""></button>
                                             <div class="rsvp-img">
                                                 <img src="{{ asset($value)}}" alt="birth-card">
                                             </div>
@@ -749,7 +750,7 @@
                                          <div class="row">
                                             @foreach ($eventInfo['guest_view']['gift_registry'] as $gift )
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">
-                                                <a href="{{$gift['registry_link']}}">
+                                                <a href="{{$gift['registry_link']}}" target="_blank">
 
                                                 <div class="target d-flex gap-3 align-items-center">
 

@@ -1,3 +1,25 @@
+
+$(document).ready(function() {
+    // Bind the click event to all buttons with class 'rsvp-zoom-btn'
+    $('.rsvp-zoom-btn').click(function() {
+        // Get the image URL from the data-img attribute of the clicked button
+        var imageUrl = $(this).data('img');
+
+        // Open the image in Magnific Popup
+        $.magnificPopup.open({
+            items: {
+                src: imageUrl  // Use the image URL dynamically
+            },
+            type: 'image'
+        });
+    });
+});
+
+// $('.rsvp-zoom-btn').click(function() {
+//     var imageUrl = $(this).data('img');
+//     console.log(imageUrl);  // Log the image URL
+// })
+
 function applyStyles() {
     if ($(window).width() <= 767) {
         $(".message-view-box").css("display", "none");
