@@ -1,4 +1,3 @@
-    {{dd($user_id);}}
     @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
@@ -277,7 +276,13 @@
                                     @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
                                             @php
                                             $i++;
-                                         
+                                            $yes_modal="";
+                                            $no_modal="";
+                                            if($user_id==$guest_data['id'])
+                                            {
+                                            $yes_modal="#rsvp-yes-modal";
+                                            $no_modal="#rsvp-no-modal"; 
+                                            }
                                             @endphp
                                                 
                                             <div class="guest-user-box">
@@ -320,12 +325,7 @@
                                                             if($guest_data['rsvp_d']=="1"){
                                                                 $rsvp=", RSVP’d";
                                                             }
-                                                            $yes_modal="";
-                                                            $no_modal="";
-                                                            if($user_id==$guest_data['id']){
-                                                                $yes_modal="#rsvp-yes-modal";
-                                                                $no_modal="#rsvp-no-modal"; 
-                                                            }
+                                                           
                                                         @endphp
                                                       <h5 class="ms-auto">{{$read}}{{$rsvp}}</h5>
                                                     </div>
@@ -811,17 +811,19 @@
                         </div>
                     </div>
                 </section>
-                <div class="rsvp-footer-btn-wrp">
-                    <div class="container">
-                        <div class="rsvp-footer-btn">
-                            <h3>RSVP</h3>
-                            <div class="d-flex align-items-center justify-content-end gap-3 w-100">
-                                <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                                <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                @if(isset($rsvp_status)&&$rsvp_status!=null)
+                    <div class="rsvp-footer-btn-wrp">
+                        <div class="container">
+                            <div class="rsvp-footer-btn">
+                                <h3>RSVP</h3>
+                                <div class="d-flex align-items-center justify-content-end gap-3 w-100">
+                                    <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                    <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
             <input type="hidden" id="host_id" class="host_id" value="{{$host_id}}"/>
             <input type="hidden" id="host_name" class="host_name" value="{{$host_name}}"/>
