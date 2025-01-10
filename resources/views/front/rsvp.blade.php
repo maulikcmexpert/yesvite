@@ -790,9 +790,14 @@
                                      @endif
                                      @if($eventInfo['guest_view']['event_potluck']!="0")
                                      <div class="note-wrp rsvp-note-wrp">
-                                         <h5><span>Note:</span> This is a Potluck Event</h5>
-                                         <p>Sign Up on iOS or Android Apps to let them know what you will be brining.</p>
-                                     </div>
+                                         @if(Auth::guard('web')->check())
+                                            <h5><span>Note:</span> This is a Potluck Event</h5>
+                                        @else
+                                            <h5><span>Note:</span> This is a Potluck Event</h5>
+                                            <p>Sign Up on iOS or Android Apps to let them know what you will be brining.</p>
+                                        @endif
+
+                                        </div>
                                      @endif
                                  </div>
                             </div>
