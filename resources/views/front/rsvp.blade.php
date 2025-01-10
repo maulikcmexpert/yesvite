@@ -2255,7 +2255,10 @@
 
             // Set the href attribute to the URL of the .ics file
             calendarLink.href = URL.createObjectURL(icsBlob);
-            calendarLink.download = "event.ics";
+         
+            let down = eventName.replace(" ", "_");
+
+            calendarLink.download = down+".ics";
 
 </script>
 @endpush
