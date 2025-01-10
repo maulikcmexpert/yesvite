@@ -286,7 +286,7 @@
                                             }
                                             if($guest_data['rsvp_status']=="1"){
                                                 $open_modal=$no_modal;
-                                            }elseif($guest_data['status']=="0"){
+                                            }elseif($guest_data['rsvp_status']=="0"){
                                                 $open_modal=$yes_modal;
                                             }else{
                                                 $open_modal="";
