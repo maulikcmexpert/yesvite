@@ -44,10 +44,10 @@
                                                     $type=$transaction_data['type'];
                                                     $status="";
                                                     $status_color="";
-                                                    if($type="credit"){
+                                                    if($type=="credit"){
                                                         $status="+";
                                                         $status_color="amount-plus";
-                                                    }elseif($type="debit"){
+                                                    }elseif($type=="debit"){
                                                         $status="-";
                                                         $status_color="amount-minus";
                                                     }
