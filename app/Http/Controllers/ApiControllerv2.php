@@ -5287,6 +5287,9 @@ class ApiControllerv2 extends Controller
                         fn($guest) => $guest['id'],
                         array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
                     );
+
+                    if (isset($filteredIds)&&!empty($filteredIds)) {
+
                     $notificationParam = [
                         'sender_id' => $user->id,
                         'event_id' => $eventData['event_id'],
@@ -5295,7 +5298,7 @@ class ApiControllerv2 extends Controller
                         // dd($filteredIds);
 
                     sendNotification('invite', $notificationParam);
-
+                }
                     $newInviteGuest = array_map(
                         fn($guest) => $guest['id'],
                         array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
