@@ -1,3 +1,6 @@
+.transaction_history_wrp{
+    margin: 50px 0px;
+}
 .transaction_history_info_title h4{
     font-family: var(--SFProDisplay-Bold);
     font-size: 24px;
@@ -111,6 +114,9 @@
 .transaction_detail_list{
     padding: 0;
     margin: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 350px;
 }
 
 .transaction_detail_list_left h3{
