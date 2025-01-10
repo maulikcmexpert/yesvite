@@ -185,10 +185,13 @@
                 </tr>
                 <!-- -------------- -->
                 <tr>
+                    @php
+                      $getSocialLink = getSocialLink();
+                    @endphp
                     <td>
                         <div class="download-form-img" style="display: flex;align-items: center;gap: 10px;">
-                            <a href="#" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;margin-right: 15px"><img src="{{ asset('public/storage/google-play.png')}}" alt="" style="width: 100%;height: 100%;"></a>
-                            <a href="#" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img src="{{ asset('public/storage/app-store.png')}}" alt="" style="width: 100%;height: 100%;"></a>
+                            <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;margin-right: 15px"><img src="{{ asset('public/storage/google-play.png')}}" alt="" style="width: 100%;height: 100%;"></a>
+                            <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img src="{{ asset('public/storage/app-store.png')}}" alt="" style="width: 100%;height: 100%;"></a>
                         </div>
                     </td>
                 </tr>
