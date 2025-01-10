@@ -931,10 +931,9 @@ const parsedData = JSON.parse(hiddenData);
 // Step 2: Generate labels and data for Chart.js
 const labels = parsedData.map(item => item.month); // Extract months
 const data = parsedData.map(item => item.current_balance);
-const lowestValue ="";
-const highestValue="";
- lowestValue = Math.min(...data);
- highestValue = Math.max(...data);
+
+const lowestValue = Math.min(...data);
+const highestValue = Math.max(...data);
 
 console.log("Lowest Value:", lowestValue);
 console.log("Highest Value:", highestValue);
