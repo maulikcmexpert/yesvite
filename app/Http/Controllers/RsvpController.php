@@ -755,7 +755,7 @@ class RsvpController extends Controller
                 if($request->rsvp_status=="1"){
                     return redirect()->back()->with('success', 'You are going to this event');
                 }elseif($request->rsvp_status=="0"){
-                    return redirect()->back()->with('danger', 'You declined to go to this event');
+                    return redirect()->back()->with('success', 'You declined to go to this event');
                 }
 
             }
