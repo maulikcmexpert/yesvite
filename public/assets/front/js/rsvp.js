@@ -1,20 +1,19 @@
 
-// $('.rsvp-zoom-btn').magnificPopup({
-//     items: {
-//         src: function() {
-//             // Get the image URL from the data-img attribute of the clicked button
-//             return $('.rsvp-zoom-btn').data('img');
-//         },
-//         type: 'image'
-//     },
-//     gallery: {
-//         enabled: false // Disable gallery view if you don't need it
-//     }
-// });
-$('.rsvp-zoom-btn').click(function() {
-    var imageUrl = $(this).data('img');
-    console.log(imageUrl);  // Log the image URL
-})
+$(document).ready(function() {
+    $('.rsvp-zoom-btn').magnificPopup({
+        type: 'image',
+        items: {
+            src: function() {
+                // Dynamically fetch the image URL from the clicked button's data-img attribute
+                return $('.rsvp-zoom-btn').data('img');
+            }
+        }
+    });
+});
+// $('.rsvp-zoom-btn').click(function() {
+//     var imageUrl = $(this).data('img');
+//     console.log(imageUrl);  // Log the image URL
+// })
 
 function applyStyles() {
     if ($(window).width() <= 767) {
