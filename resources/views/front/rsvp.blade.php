@@ -1,4 +1,4 @@
-    {{dd($getInvitedusers['all_invited_users']);}}
+    {{-- {{dd($rsvp_status);}} --}}
     @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
@@ -320,11 +320,17 @@
                                                             if($guest_data['rsvp_d']=="1"){
                                                                 $rsvp=", RSVP’d";
                                                             }
+                                                            $yes_modal="";
+                                                            $no_modal="";
+                                                            if($user_id==$guest_data['id']){
+                                                                $yes_modal="#rsvp-yes-modal";
+                                                                $no_modal="#rsvp-no-modal"; 
+                                                            }
                                                         @endphp
                                                       <h5 class="ms-auto">{{$read}}{{$rsvp}}</h5>
                                                     </div>
                                                 </div>
-                                                  <div class="sucess-yes" data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">
+                                                  <div class="sucess-yes" data-bs-toggle="modal" data-bs-target={{$no_modal}}>
                                                     <h5 class="green">RSVP'd YES</h5>
                                                     <div class="sucesss-cat ms-auto">
                                                         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -356,11 +362,12 @@
                                                             if($guest_data['rsvp_d']=="1"){
                                                                 $rsvp=", RSVP’d";
                                                             }
+                                                           
                                                         @endphp
                                                       <h5 class="ms-auto">{{$read}}{{$rsvp}}</h5>
                                                     </div>
                                                 </div>
-                                                <div class="sucess-no" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">
+                                                <div class="sucess-no" data-bs-toggle="modal" data-bs-target={{$yes_modal}}>
                                                     <h5>NO</h5>
                                                 </div>
                                                   @else
