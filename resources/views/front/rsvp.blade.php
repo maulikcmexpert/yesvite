@@ -750,7 +750,7 @@
                                          <div class="row">
                                             @foreach ($eventInfo['guest_view']['gift_registry'] as $gift )
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">
-                                                <a href="{{$gift['registry_link']}}">
+                                                <a href="{{$gift['registry_link']}}" target="_blank">
 
                                                 <div class="target d-flex gap-3 align-items-center">
 
