@@ -302,9 +302,12 @@
                                                 @endif
                                                 </div>
                                                 <div class="w-100">
-                                                  <div class="d-flex flex-column">
+                                                  <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex flex-column">
                                                       <p href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</p>
                                                       <span class="guest-email">{{$guest_data['email']}}</span>
+                                                    </div>
+                                                    <button class="guest-list-edit-btn"></button>
                                                   </div>
                                                 
                                                   @if($guest_data['rsvp_status']=="1")
