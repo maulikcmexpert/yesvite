@@ -324,7 +324,7 @@
                                                       <h5 class="ms-auto">{{$read}}{{$rsvp}}</h5>
                                                     </div>
                                                 </div>
-                                                  <div class="sucess-yes">
+                                                  <div class="sucess-yes" data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">
                                                     <h5 class="green">RSVP'd YES</h5>
                                                     <div class="sucesss-cat ms-auto">
                                                         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
