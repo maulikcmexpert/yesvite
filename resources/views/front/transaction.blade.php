@@ -1,4 +1,4 @@
-{{-- {{dd($transcation);}} --}}
+{{dd($transcation);}}
 <x-front.advertise />
 <section class="transaction_history_wrp">
     <div class="container">
