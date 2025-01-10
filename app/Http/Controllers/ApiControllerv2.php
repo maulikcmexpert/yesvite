@@ -5292,7 +5292,7 @@ class ApiControllerv2 extends Controller
                         'event_id' => $eventData['event_id'],
                         'newUser' => $filteredIds
                     ];
-                        dd($filteredIds);
+                        // dd($filteredIds);
 
                     sendNotification('invite', $notificationParam);
 
