@@ -278,23 +278,31 @@ $(document).ready(function () {
 
 
 $('#rsvpYesForm').validate({
-    rules:{
-        firstname:{
-            required:true
+    rules: {
+        firstname: {
+            required: true
         },
-        lastname:{
-            required:true
+        lastname: {
+            required: true
         }
     },
-    messages:{
-        firstname:{
-            required:"Please enter firstname"
+    messages: {
+        firstname: {
+            required: "Please enter firstname"
         },
-        lastname:{
-            required:"Please enter lastname"
-        },
+        lastname: {
+            required: "Please enter lastname"
+        }
+    },
+    errorPlacement: function (error, element) {
+        if (element.attr("name") == "firstname") {
+            error.appendTo("#firstname-error");
+        } else if (element.attr("name") == "lastname") {
+            error.appendTo("#lastname-error");
+        }
     }
-})
+});
+
 
 $('#rsvpNoForm').validate({
     rules:{
