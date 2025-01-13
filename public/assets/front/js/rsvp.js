@@ -278,7 +278,7 @@ $(document).ready(function () {
 
 
 $('#rsvpYesForm').validate({
-    rule:{
+    rules:{
         firstname:{
             required:true
         },
