@@ -2379,8 +2379,8 @@ class EventController extends Controller
     public function getCategory(Request $request)
     {
         $search_user = $request->search_user;
-        $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
-            $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
+        $design_category = EventDesignCategory::with(['subcategory' => function ($query,$search_user) {
+            $query->select('*') ->where('subcategory_name', 'LIKE', "%$search_user%")->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
                 $que->select('*');
             }]);
         }])
@@ -2388,8 +2388,7 @@ class EventController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-      dd($design_category);
 
-        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
+        return response()->json(view('front.event.guest.get_category', compact('design_category'))->render());
     }
 }

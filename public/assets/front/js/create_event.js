@@ -6079,16 +6079,13 @@ function searchRecords(lim, off,type,search = null,) {
             if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
             }
-            if(type=="all"){
-                if(search != null){
-                    $("#YesviteUserAll").html(html);
-                }else{
-                    $("#YesviteUserAll").append(html);
-                }
-        }else{
-            $("#groupUsers").html(html);
-        }
-        busy = false;
+           
+            if(search != null){
+                $("#designCategory").html(html);
+            }else{
+                $("#designCategory").append(html);
+            }
+        
         setTimeout(function () {
             $('#loader').css('display','none');
         }, 1000);

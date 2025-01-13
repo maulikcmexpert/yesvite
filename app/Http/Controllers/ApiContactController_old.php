@@ -235,17 +235,41 @@ class ApiContactController extends Controller
         $updatedDuplicateContacts = array_filter($duplicateContacts, function ($contact) {
             return !is_null($contact['user_id']);
         });
+        $uniqContact = [];
+        $seenSyncIds = [];
 
-       // Prepare the response
-            $message = empty($updatedDuplicateContacts)
+        foreach ($duplicateContacts as $contact) {
+            if ($contact['isAppUser'] == "1") {
+                if(!in_array($contact['sync_id'], $seenSyncIds)){
+                    $uniqContact[] = $contact;
+                    $seenSyncIds[] = $contact['sync_id'];
+                }
+               
+            }else{
+                $uniqContact[] = $contact;
+            }
+        }
+
+
+        // $uniqContact = [];
+        // $seenSyncIds = []; 
+
+        // foreach ($duplicateContacts as $contact) {
+        //     if ($contact['isAppUser'] == "1" && !in_array($contact['sync_id'], $seenSyncIds)) {
+        //         $uniqContact[] = $contact; 
+        //         $seenSyncIds[] = $contact['sync_id'];
+        //     }
+        // }
+        // // Prepare the response
+        $message = empty($updatedDuplicateContacts)
             ? 'Contacts inserted successfully.'
             : 'Some contacts already exist.';
+        // $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
+        $allContacts = $insertedContacts ? $insertedContacts : $uniqContact;
 
-            $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
-
-            return response()->json([
+        return response()->json([
             'message' => $message,
             'all_contacts' => $allContacts,
-            ], 200);// Prepare the response
+        ], 200); // Prepare the response
     }
 }
