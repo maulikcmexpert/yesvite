@@ -205,7 +205,9 @@
                                                 <h5>{{ $eventInfo['guest_view']['hosted_by']}}</h5>
                                                 <span>Host</span>
                                                 @if (Auth::guard('web')->check()) 
-                                                <a href="javascript:;" class="msg-btn host-msg">Message</a>
+                                                    @if($is_host=="")
+                                                         <a href="javascript:;" class="msg-btn host-msg">Message</a>
+                                                    @endif
                                                 @endif
                                             </div>
                                             @if(!empty($eventInfo['guest_view']['co_hosts']))
