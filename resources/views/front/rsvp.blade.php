@@ -831,6 +831,7 @@
                         </div>
                     </div>
                 </section>
+            @if($is_host=="")    
                 @if($rsvp_status==null || $rsvp_status=="")
                     <div class="rsvp-footer-btn-wrp">
                         <div class="container">
@@ -844,6 +845,7 @@
                         </div>
                     </div>
                 @endif
+            @endif        
             </div>
             <input type="hidden" id="host_id" class="host_id" value="{{$host_id}}"/>
             <input type="hidden" id="host_name" class="host_name" value="{{$host_name}}"/>
