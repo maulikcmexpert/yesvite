@@ -515,7 +515,7 @@ class EventWallController extends Controller
                 $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                 $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
                     ->where('event_id', $eventDetail->id)
-                    ->where('user_id', '!=', $user->id)
+                    // ->where('user_id', '!=', $user->id)
                     ->get();
 
                 $eventData[] = "Number of guests : " . $numberOfGuest;
