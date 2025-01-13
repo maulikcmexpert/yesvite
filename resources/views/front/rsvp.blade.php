@@ -2265,9 +2265,18 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
 <script>
-     @if(session('success'))
-        toastr.success("{{ session('success') }}");
-    @endif
+$(document).ready(function () {
+            @if (session('msg'))
+            alert();
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "timeOut": "3000"
+                };
+                toastr.success("{{ session('msg') }}");
+            @endif
+        });
 
     const createICSFile = (
                 start,
