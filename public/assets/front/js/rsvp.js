@@ -316,8 +316,8 @@ $('#rsvpNoForm').validate({
 })
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
+        alert();
         e.preventDefault();
-        return;
     }
 });
 $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
