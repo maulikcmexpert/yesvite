@@ -348,14 +348,11 @@ $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
         e.preventDefault();
     }
 });
-// $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
-//     if (!$('#rsvpNoForm').valid()) {
-//         e.preventDefault();
-//     }else{
-//         $("#rsvpNoForm").submit();
-
-//     }
-// });
+$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
+    if (!$('#rsvpNoForm').valid()) {
+        return;
+    }
+});
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$('#rsvpYesForm').valid()) {
        return;
