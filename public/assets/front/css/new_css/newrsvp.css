@@ -816,7 +816,7 @@ display:none;}
     padding: 0px;
 }
 
-.cmn-no-btn{
+.rsvp-footer-btn .cmn-btn{
     border: 1px solid var(--border) !important;
     background-color: transparent !important;
     color: var(--secondary-black) !important;
