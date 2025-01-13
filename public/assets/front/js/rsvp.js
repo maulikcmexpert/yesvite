@@ -296,7 +296,7 @@ $('#rsvpYesForm').validate({
     }
 })
 
-$('#rsvpModal').on('hide.bs.modal', function (e) {
+$('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
         e.preventDefault();
     }
