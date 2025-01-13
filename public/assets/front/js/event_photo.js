@@ -476,7 +476,7 @@ let isLongPress = false;
 // Function to handle the long press action
 function handleLongPress(element) {
     console.log("Long press detected");
-
+    $('#detail-photo-modal').hide();
     // Show the button and check the checkbox
     const photoCard = element.closest('.photo-card-photos-wrp');
     photoCard.find('.selected-photo-btn').show();
@@ -488,14 +488,15 @@ function handleLongPress(element) {
 
 // Function to toggle visibility of the bulk-select-photo-wrp
 function toggleBulkSelectWrapper() {
-    const selectedCount = $('.form-check-input:checked').length; // Count selected checkboxes
+    const selectedCount = $('.selected_image:checked').length; // Count selected checkboxes
     const bulkSelectWrapper = $('.phototab-add-new-photos-wrp.bulk-select-photo-wrp');
+console.log( selectedCount);
 
-    if (selectedCount >= 1) {
+    if (selectedCount >= 2) {
         bulkSelectWrapper.removeClass('d-none'); // Show the div
         bulkSelectWrapper.find('.phototab-add-new-photos-img p').text(`${selectedCount} Photos Selected`); // Update the count
-    } else {
-        bulkSelectWrapper.addClass('d-none'); // Hide the div
+    }else if (selectedCount <= 1){
+        bulkSelectWrapper.addClass('d-none');
     }
 
     // Remove the div if more than 1 image is selected
@@ -537,16 +538,26 @@ $('.download_img').on('click', function () {
     }).get();
 
     console.log("Selected Images: ", selectedImages);
-    if (selectedImages.length > 0) {
-        selectedImages.forEach((imageSrc) => {
 
-            console.log("Downloading Image: ", imageSrc);
-            const link = document.createElement('a');
-            link.href = imageSrc;
-            link.download = imageSrc.split('/').pop(); // Use the file name from the URL
-            link.click();
-        });
+});
+$('.download_img_single').on('click', function () {
+    // $('.form-check-input:checked').each(function () {
+    //     console.log('Checkbox selected: ', $(this).data('image-src')); // Check if data-image-src exists
+    // });
+
+    // Get selected image URLs from the checkboxes
+    const imageSrc = $(this).data('image-src');
+
+    console.log("Selected Images: ", imageSrc);
+    if (imageSrc) {
+        // Create a temporary link element to trigger the download
+        const link = document.createElement('a');
+        link.href = imageSrc;
+        link.download = imageSrc.split('/').pop(); // Use the file name from the URL
+
+        // Trigger the download by programmatically clicking the link
+        link.click();
     } else {
-        alert('No images selected for download!');
+        alert('No image source found!');
     }
 });
