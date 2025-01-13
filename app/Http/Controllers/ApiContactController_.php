@@ -123,6 +123,7 @@ class ApiContactController extends Controller
         $user = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $contacts = json_decode($rawData, true);
+        dd($contacts);
         if (empty($contacts)) {
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
