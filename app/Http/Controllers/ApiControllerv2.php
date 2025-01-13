@@ -2938,7 +2938,7 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            if ($phone != "") {
+            if ($phone != "" && strlen($phone) > 5 ) {
                 $existingContact = contact_sync::where('phoneWithCode', $phone)->first();
                 if (isset($existingContact)) {
                     $existingContact->update([

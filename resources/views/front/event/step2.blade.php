@@ -9,7 +9,7 @@
                     <div class="col-12 mb-4">
                         <div class="choose-design-search-setting">
                             <div class="position-relative w-100">
-                                <input type="search" placeholder="Search name" class="form-control">
+                                <input type="search" class="searchCategory" placeholder="Search name" class="form-control">
                                 <span class="choose-design-seachicon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

@@ -110,221 +110,221 @@ class EventController extends Controller
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $eventDetail = [];
-        if(isset($request->id) && $request->id != ''){
+        if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
-                $getEventData = Event::with('event_schedule')->where('id',$request->id)->first();
-                // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
-                if ($getEventData != null) {
-                    $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
-                    // $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
-                    $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
-                    $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
-                    $eventDetail['start_date'] = (!empty($getEventData->start_date) && $getEventData->start_date != NULL) ? $getEventData->start_date : "";
-                    $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
-                    $eventDetail['rsvp_by_date_set'] =  $getEventData->rsvp_by_date_set;
-                    $eventDetail['rsvp_by_date'] = (!empty($getEventData->rsvp_by_date) && $getEventData->rsvp_by_date != NULL) ? $getEventData->rsvp_by_date : "";
-                    $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "";
-                    $eventDetail['rsvp_start_timezone'] = (!empty($getEventData->rsvp_start_timezone) && $getEventData->rsvp_start_timezone != NULL) ? $getEventData->rsvp_start_timezone : "";
-                    $eventDetail['rsvp_end_time_set'] = $getEventData->rsvp_end_time_set;
-                    $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "";
-                    $eventDetail['rsvp_end_timezone'] = (!empty($getEventData->rsvp_end_timezone) && $getEventData->rsvp_end_timezone != NULL) ? $getEventData->rsvp_end_timezone : "";
-                    $eventDetail['event_location_name'] = (!empty($getEventData->event_location_name) && $getEventData->event_location_name != NULL) ? $getEventData->event_location_name : "";
-                    $eventDetail['latitude'] = (!empty($getEventData->latitude) && $getEventData->latitude != NULL) ? $getEventData->latitude : "";
-                    $eventDetail['longitude'] = (!empty($getEventData->longitude) && $getEventData->longitude != NULL) ? $getEventData->longitude : "";
-                    $eventDetail['address_1'] = (!empty($getEventData->address_1) && $getEventData->address_1 != NULL) ? $getEventData->address_1 : "";
-                    $eventDetail['address_2'] = (!empty($getEventData->address_2) && $getEventData->address_2 != NULL) ? $getEventData->address_2 : "";
-                    $eventDetail['state'] = (!empty($getEventData->state) && $getEventData->state != NULL) ? $getEventData->state : "";
-                    $eventDetail['zip_code'] = (!empty($getEventData->zip_code) && $getEventData->zip_code != NULL) ? $getEventData->zip_code : "";
-                    $eventDetail['city'] = (!empty($getEventData->city) && $getEventData->city != NULL) ? $getEventData->city : "";
-                    $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) && $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
-                    $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
-                    $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
-                    $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
-                    $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
-                    $eventDetail['event_images'] = [];
-                    $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
-                    if (!empty($getEventImages)) {
-                        foreach ($getEventImages as $imgVal) {
-                            $eventImageData['id'] = $imgVal->id;
-                            $eventImageData['image'] = asset('public/storage/event_images/' . $imgVal->image);
-                            $eventDetail['event_images'][] = $eventImageData;
-                        }
+            $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
+            // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
+            if ($getEventData != null) {
+                $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
+                // $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
+                $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
+                $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
+                $eventDetail['start_date'] = (!empty($getEventData->start_date) && $getEventData->start_date != NULL) ? $getEventData->start_date : "";
+                $eventDetail['end_date'] = (!empty($getEventData->end_date) && $getEventData->end_date != NULL) ? $getEventData->end_date : "";
+                $eventDetail['rsvp_by_date_set'] =  $getEventData->rsvp_by_date_set;
+                $eventDetail['rsvp_by_date'] = (!empty($getEventData->rsvp_by_date) && $getEventData->rsvp_by_date != NULL) ? $getEventData->rsvp_by_date : "";
+                $eventDetail['rsvp_start_time'] = (!empty($getEventData->rsvp_start_time) && $getEventData->rsvp_start_time != NULL) ? $getEventData->rsvp_start_time : "";
+                $eventDetail['rsvp_start_timezone'] = (!empty($getEventData->rsvp_start_timezone) && $getEventData->rsvp_start_timezone != NULL) ? $getEventData->rsvp_start_timezone : "";
+                $eventDetail['rsvp_end_time_set'] = $getEventData->rsvp_end_time_set;
+                $eventDetail['rsvp_end_time'] = (!empty($getEventData->rsvp_end_time) && $getEventData->rsvp_end_time != NULL) ? $getEventData->rsvp_end_time : "";
+                $eventDetail['rsvp_end_timezone'] = (!empty($getEventData->rsvp_end_timezone) && $getEventData->rsvp_end_timezone != NULL) ? $getEventData->rsvp_end_timezone : "";
+                $eventDetail['event_location_name'] = (!empty($getEventData->event_location_name) && $getEventData->event_location_name != NULL) ? $getEventData->event_location_name : "";
+                $eventDetail['latitude'] = (!empty($getEventData->latitude) && $getEventData->latitude != NULL) ? $getEventData->latitude : "";
+                $eventDetail['longitude'] = (!empty($getEventData->longitude) && $getEventData->longitude != NULL) ? $getEventData->longitude : "";
+                $eventDetail['address_1'] = (!empty($getEventData->address_1) && $getEventData->address_1 != NULL) ? $getEventData->address_1 : "";
+                $eventDetail['address_2'] = (!empty($getEventData->address_2) && $getEventData->address_2 != NULL) ? $getEventData->address_2 : "";
+                $eventDetail['state'] = (!empty($getEventData->state) && $getEventData->state != NULL) ? $getEventData->state : "";
+                $eventDetail['zip_code'] = (!empty($getEventData->zip_code) && $getEventData->zip_code != NULL) ? $getEventData->zip_code : "";
+                $eventDetail['city'] = (!empty($getEventData->city) && $getEventData->city != NULL) ? $getEventData->city : "";
+                $eventDetail['message_to_guests'] = (!empty($getEventData->message_to_guests) && $getEventData->message_to_guests != NULL) ? $getEventData->message_to_guests : "";
+                $eventDetail['is_draft_save'] = $getEventData->is_draft_save;
+                $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
+                $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
+                $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
+                $eventDetail['event_images'] = [];
+                $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+                if (!empty($getEventImages)) {
+                    foreach ($getEventImages as $imgVal) {
+                        $eventImageData['id'] = $imgVal->id;
+                        $eventImageData['image'] = asset('public/storage/event_images/' . $imgVal->image);
+                        $eventDetail['event_images'][] = $eventImageData;
                     }
-                    $eventDetail['invited_user_id'] = [];
-                    $eventDetail['co_host_list'] = [];
-                    $eventDetail['invited_guests'] = [];
-                    $eventDetail['guest_co_host_list'] = [];
-        
-                    $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
-        
-                    if (!empty($invitedUser)) {
-                        foreach ($invitedUser as $guestVal) {
-                            if ($guestVal->is_co_host == '0') {
-                                if ($guestVal->user->is_user_phone_contact == '1') {
-                                    $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                                    $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                                    $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                                    $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                                    $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                                    $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                    $eventDetail['invited_guests'][] = $invitedGuestDetail;
-                                } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                                    $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                    $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                    $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
-                                }
-                            } else if ($guestVal->is_co_host == '1') {
-                                if ($guestVal->user->is_user_phone_contact == '1') {
-                                    $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                                    $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                                    $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                                    $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                                    $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                                    $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                    $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
-                                } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                                    $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                    $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                    $eventDetail['co_host_list'][] = $coHostDetail;
-                                }
-                            }
-                        }
-                        $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
-                    }
-                    // $eventDetail['events_schedule_list'] = [];
-                    $eventDetail['events_schedule_list'] = null;
-                    if ($getEventData->event_schedule->isNotEmpty()) {
-        
-                        $eventDetail['events_schedule_list'] = new stdClass();
-                        if ($getEventData->event_schedule->first()->type == '1') {
-        
-        
-                            $eventDetail['events_schedule_list']->start_time =  ($getEventData->event_schedule->first()->start_time != NULL) ? $getEventData->event_schedule->first()->start_time : "";
-        
-                            $eventDetail['events_schedule_list']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
-                        }
-        
-                        $eventDetail['events_schedule_list']->data = [];
-                        foreach ($getEventData->event_schedule as $eventsScheduleVal) {
-                            if ($eventsScheduleVal->type == '2') {
-        
-                                $eventscheduleData["id"] = $eventsScheduleVal->id;
-                                $eventscheduleData["activity_title"] = $eventsScheduleVal->activity_title;
-                                $eventscheduleData["start_time"] = ($eventsScheduleVal->start_time !== null) ? $eventsScheduleVal->start_time : "";
-                                $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
-                                $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
-                                $eventscheduleData["type"] = $eventsScheduleVal->type;
-                                $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
-                            }
-                        }
-                        if ($getEventData->event_schedule->last()->type == '3') {
-        
-                            $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
-                            $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
-                        }
-                    }
-                    $eventDetail['greeting_card_list'] = [];
-                    if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
-        
-        
-                        $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
-        
-                        $eventDetail['greeting_card_list'] = $greeting_card_ids;
-                    }
-        
-                    $eventDetail['gift_registry_list'] = [];
-                    if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
-        
-                        $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
-        
-                        $eventDetail['gift_registry_list'] = $gift_registry_ids;
-                    }
-        
-                    $eventDetail['event_setting'] = "";
-        
-                    $eventSettings = EventSetting::where('event_id', $getEventData->id)->first();
-        
-                    if ($eventSettings != NULL) {
-                        $eventDetail['event_setting'] = [
-        
-                            "allow_for_1_more" => $eventSettings->allow_for_1_more,
-                            "allow_limit" => strval($eventSettings->allow_limit),
-                            "adult_only_party" => $eventSettings->adult_only_party,
-        
-                            "rsvp_by_date" => $getEventData->rsvp_by_date,
-                            "thank_you_cards" => $eventSettings->thank_you_cards,
-                            "add_co_host" => $eventSettings->add_co_host,
-                            "gift_registry" => $eventSettings->gift_registry,
-                            "events_schedule" => $eventSettings->events_schedule,
-                            "event_wall" => $eventSettings->event_wall,
-                            "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
-                            "podluck" => $eventSettings->podluck,
-                            "rsvp_updates" => $eventSettings->rsvp_updates,
-                            "event_wall_post" => $eventSettings->event_wall_post,
-                            "send_event_dater_reminders" => $eventSettings->send_event_dater_reminders,
-                            "request_event_photos_from_guests" => $eventSettings->request_event_photos_from_guests
-                        ];
-                    }
-        
-        
-                    $eventDetail['podluck_category_list'] = [];
-        
-        
-        
-                    $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
-                        $query->with(['users', 'user_potluck_items' => function ($subquery) {
-                            $subquery->with('users')->sum('quantity');
-                        }]);
-                    }])->withCount('event_potluck_category_item')->where('event_id', $getEventData->id)->get();
-        
-                    if (!empty($eventpotluckData)) {
-                        $potluckCategoryData = [];
-                        $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $getEventData->id)->count();
-        
-                        foreach ($eventpotluckData as $value) {
-                            $potluckCategory['id'] = $value->id;
-                            $potluckCategory['category'] = $value->category;
-                            $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
-                            $potluckCategory['quantity'] = $value->quantity;
-                            $potluckCategory['items'] = [];
-                            if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
-        
-                                foreach ($value->event_potluck_category_item as $itemValue) {
-        
-                                    $potluckItem['id'] =  $itemValue->id;
-                                    $potluckItem['description'] =  $itemValue->description;
-                                    $potluckItem['is_host'] = ($itemValue->user_id == $userid) ? 1 : 0;
-                                    $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
-                                    $potluckItem['quantity'] =  $itemValue->quantity;
-                                    $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
-                                    $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
-                                    $potluckItem['spoken_quantity'] =  $spoken_for;
-                                    $potluckItem['item_carry_users'] = [];
-        
-                                    foreach ($itemValue->user_potluck_items as $itemcarryUser) {
-                                        $userPotluckItem['id'] = $itemcarryUser->id;
-                                        $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                        $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $userid) ? 1 : 0;
-                                        $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
-                                        $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
-                                        $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
-                                        $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
-                                        $potluckItem['item_carry_users'][] = $userPotluckItem;
-                                    }
-                                    $potluckCategory['items'][] = $potluckItem;
-                                }
-                            }
-                            $eventDetail['podluck_category_list'][] = $potluckCategory;
-                        }
-                    }
-                    // dd($eventDetail);
                 }
-        }else{
+                $eventDetail['invited_user_id'] = [];
+                $eventDetail['co_host_list'] = [];
+                $eventDetail['invited_guests'] = [];
+                $eventDetail['guest_co_host_list'] = [];
+
+                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
+
+                if (!empty($invitedUser)) {
+                    foreach ($invitedUser as $guestVal) {
+                        if ($guestVal->is_co_host == '0') {
+                            if ($guestVal->user->is_user_phone_contact == '1') {
+                                $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                                $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                                $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                                $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                                $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                                $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $eventDetail['invited_guests'][] = $invitedGuestDetail;
+                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                                $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                                $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
+                            }
+                        } else if ($guestVal->is_co_host == '1') {
+                            if ($guestVal->user->is_user_phone_contact == '1') {
+                                $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                                $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                                $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                                $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                                $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                                $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
+                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                                $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                                $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $eventDetail['co_host_list'][] = $coHostDetail;
+                            }
+                        }
+                    }
+                    $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
+                }
+                // $eventDetail['events_schedule_list'] = [];
+                $eventDetail['events_schedule_list'] = null;
+                if ($getEventData->event_schedule->isNotEmpty()) {
+
+                    $eventDetail['events_schedule_list'] = new stdClass();
+                    if ($getEventData->event_schedule->first()->type == '1') {
+
+
+                        $eventDetail['events_schedule_list']->start_time =  ($getEventData->event_schedule->first()->start_time != NULL) ? $getEventData->event_schedule->first()->start_time : "";
+
+                        $eventDetail['events_schedule_list']->event_start_date = ($getEventData->event_schedule->first()->event_date != null) ? $getEventData->event_schedule->first()->event_date : "";
+                    }
+
+                    $eventDetail['events_schedule_list']->data = [];
+                    foreach ($getEventData->event_schedule as $eventsScheduleVal) {
+                        if ($eventsScheduleVal->type == '2') {
+
+                            $eventscheduleData["id"] = $eventsScheduleVal->id;
+                            $eventscheduleData["activity_title"] = $eventsScheduleVal->activity_title;
+                            $eventscheduleData["start_time"] = ($eventsScheduleVal->start_time !== null) ? $eventsScheduleVal->start_time : "";
+                            $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
+                            $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
+                            $eventscheduleData["type"] = $eventsScheduleVal->type;
+                            $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
+                        }
+                    }
+                    if ($getEventData->event_schedule->last()->type == '3') {
+
+                        $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
+                        $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
+                    }
+                }
+                $eventDetail['greeting_card_list'] = [];
+                if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
+
+
+                    $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
+
+                    $eventDetail['greeting_card_list'] = $greeting_card_ids;
+                }
+
+                $eventDetail['gift_registry_list'] = [];
+                if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
+
+                    $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
+
+                    $eventDetail['gift_registry_list'] = $gift_registry_ids;
+                }
+
+                $eventDetail['event_setting'] = "";
+
+                $eventSettings = EventSetting::where('event_id', $getEventData->id)->first();
+
+                if ($eventSettings != NULL) {
+                    $eventDetail['event_setting'] = [
+
+                        "allow_for_1_more" => $eventSettings->allow_for_1_more,
+                        "allow_limit" => strval($eventSettings->allow_limit),
+                        "adult_only_party" => $eventSettings->adult_only_party,
+
+                        "rsvp_by_date" => $getEventData->rsvp_by_date,
+                        "thank_you_cards" => $eventSettings->thank_you_cards,
+                        "add_co_host" => $eventSettings->add_co_host,
+                        "gift_registry" => $eventSettings->gift_registry,
+                        "events_schedule" => $eventSettings->events_schedule,
+                        "event_wall" => $eventSettings->event_wall,
+                        "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
+                        "podluck" => $eventSettings->podluck,
+                        "rsvp_updates" => $eventSettings->rsvp_updates,
+                        "event_wall_post" => $eventSettings->event_wall_post,
+                        "send_event_dater_reminders" => $eventSettings->send_event_dater_reminders,
+                        "request_event_photos_from_guests" => $eventSettings->request_event_photos_from_guests
+                    ];
+                }
+
+
+                $eventDetail['podluck_category_list'] = [];
+
+
+
+                $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
+                    $query->with(['users', 'user_potluck_items' => function ($subquery) {
+                        $subquery->with('users')->sum('quantity');
+                    }]);
+                }])->withCount('event_potluck_category_item')->where('event_id', $getEventData->id)->get();
+
+                if (!empty($eventpotluckData)) {
+                    $potluckCategoryData = [];
+                    $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $getEventData->id)->count();
+
+                    foreach ($eventpotluckData as $value) {
+                        $potluckCategory['id'] = $value->id;
+                        $potluckCategory['category'] = $value->category;
+                        $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
+                        $potluckCategory['quantity'] = $value->quantity;
+                        $potluckCategory['items'] = [];
+                        if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
+
+                            foreach ($value->event_potluck_category_item as $itemValue) {
+
+                                $potluckItem['id'] =  $itemValue->id;
+                                $potluckItem['description'] =  $itemValue->description;
+                                $potluckItem['is_host'] = ($itemValue->user_id == $userid) ? 1 : 0;
+                                $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
+                                $potluckItem['quantity'] =  $itemValue->quantity;
+                                $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
+                                $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
+                                $potluckItem['spoken_quantity'] =  $spoken_for;
+                                $potluckItem['item_carry_users'] = [];
+
+                                foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                                    $userPotluckItem['id'] = $itemcarryUser->id;
+                                    $userPotluckItem['user_id'] = $itemcarryUser->user_id;
+                                    $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $userid) ? 1 : 0;
+                                    $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
+                                    $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
+                                    $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
+                                    $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
+                                    $potluckItem['item_carry_users'][] = $userPotluckItem;
+                                }
+                                $potluckCategory['items'][] = $potluckItem;
+                            }
+                        }
+                        $eventDetail['podluck_category_list'][] = $potluckCategory;
+                    }
+                }
+                // dd($eventDetail);
+            }
+        } else {
             $title = 'Create Event';
         }
         // dd($eventDetail);
         $page = 'front.create_event';
-       
+
 
         $js = ['create_event'];
 
@@ -364,7 +364,7 @@ class EventController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-$user['coins']=$user->coins;
+        $user['coins'] = $user->coins;
         $groups = Group::withCount('groupMembers')
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
@@ -386,7 +386,7 @@ $user['coins']=$user->coins;
 
     public function store(Request $request)
     {
-            // $potluck = session('category');
+        // $potluck = session('category');
         // dd(session()->get('gift_registry_data'));
 
         $user_id =  Auth::guard('web')->user()->id;
@@ -431,10 +431,10 @@ $user['coins']=$user->coins;
             }
         }
 
-       
-        if(isset($request->event_id) && $request->event_id != NULL){
-            $event_creation = Event::where('id',$request->event_id)->first();
-        }else{
+
+        if (isset($request->event_id) && $request->event_id != NULL) {
+            $event_creation = Event::where('id', $request->event_id)->first();
+        } else {
             $event_creation = new Event();
         }
         // $event_creation->event_type_id = (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "";
@@ -497,17 +497,17 @@ $user['coins']=$user->coins;
         //     'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15,
         // ]);
         $eventId = $event_creation->id;
-        $get_count_invited_user=0;
+        $get_count_invited_user = 0;
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
         debit_coins($user_id, $eventId, $get_count_invited_user);
-        if(isset($request->event_id) && $request->event_id != NULL){
+        if (isset($request->event_id) && $request->event_id != NULL) {
             $step = $event_creation->step;
-            if(isset($request->step) && $request->step != '' && $step < $request->step ){
+            if (isset($request->step) && $request->step != '' && $step < $request->step) {
                 $event_creation->step = $request->step;
             }
-        }else{
+        } else {
             $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
         }
         if (isset($request->shape_image) && $request->shape_image != '') {
@@ -606,12 +606,12 @@ $user['coins']=$user->coins;
                     // }
                 }
             }
-            
-            if (!empty($conatctId)) {            
+
+            if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
-               
+
                 foreach ($invitedGuestUsers as $value) {
-             
+
                     $checkContactExist = contact_sync::where('id', $value['sync_id'])->first();
                     if ($checkContactExist) {
                         $newUserId = NULL;
@@ -633,43 +633,43 @@ $user['coins']=$user->coins;
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
                 $prefer_by = $request->co_host_prefer_by;
-              
-            if(isset($request->isPhonecontact) && $request->isPhonecontact==1){
 
-                $checkContactExist = contact_sync::where('id',$invited_user)->first(); 
-                if ($checkContactExist) {
-                    $newUserId = NULL;
-                    if ($checkContactExist->email != '') {
-                        $newUserId = checkUserEmailExist($checkContactExist);
+                if (isset($request->isPhonecontact) && $request->isPhonecontact == 1) {
+
+                    $checkContactExist = contact_sync::where('id', $invited_user)->first();
+                    if ($checkContactExist) {
+                        $newUserId = NULL;
+                        if ($checkContactExist->email != '') {
+                            $newUserId = checkUserEmailExist($checkContactExist);
+                        }
+                        $eventInvite = new EventInvitedUser();
+                        $eventInvite->event_id = $eventId;
+                        $eventInvite->sync_id = $checkContactExist->id;
+                        $eventInvite->user_id = $newUserId;
+                        $eventInvite->prefer_by = $prefer_by;
+                        $eventInvite->is_co_host = $is_cohost;
+                        $eventInvite->save();
                     }
-                    $eventInvite = new EventInvitedUser();
-                    $eventInvite->event_id = $eventId;
-                    $eventInvite->sync_id = $checkContactExist->id;
-                    $eventInvite->user_id = $newUserId;
-                    $eventInvite->prefer_by = $prefer_by;
-                    $eventInvite->is_co_host=$is_cohost;
-                    $eventInvite->save();
+                } else {
+                    EventInvitedUser::create([
+                        'event_id' => $eventId,
+                        'prefer_by' => $prefer_by,
+                        'user_id' => $invited_user,
+                        'is_co_host' => $is_cohost,
+                    ]);
+                    $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('id', $eventId)->get();
+                    foreach ($invitedusers as $event_detail) {
+                        $eventData = [
+                            'event_name' => $event_detail->event_name,
+                            'hosted_by' => $event_detail->user->firstname . ' ' . $event_detail->user->lastname,
+                            'profileUser' => ($event_detail->user->profile != NULL || $event_detail->user->profile != "") ? $event_detail->user->profile : "no_profile.png",
+                            'event_image' => "no_image.png",
+                            'date' =>   date('l - M jS, Y', strtotime($event_detail->start_date)),
+                            'time' => $event_detail->rsvp_start_time,
+                            'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
+                        ];
+                    }
                 }
-            }else{
-                EventInvitedUser::create([
-                    'event_id' => $eventId,
-                    'prefer_by' => $prefer_by,
-                    'user_id' => $invited_user,
-                    'is_co_host' => $is_cohost,
-                ]);
-                $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('id', $eventId)->get();
-                foreach ($invitedusers as $event_detail) {
-                    $eventData = [
-                        'event_name' => $event_detail->event_name,
-                        'hosted_by' => $event_detail->user->firstname . ' ' . $event_detail->user->lastname,
-                        'profileUser' => ($event_detail->user->profile != NULL || $event_detail->user->profile != "") ? $event_detail->user->profile : "no_profile.png",
-                        'event_image' => "no_image.png",
-                        'date' =>   date('l - M jS, Y', strtotime($event_detail->start_date)),
-                        'time' => $event_detail->rsvp_start_time,
-                        'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
-                    ];
-                }
-            }
             }
 
             if (isset($request->eventSetting) && $request->eventSetting == "1") {
@@ -710,7 +710,7 @@ $user['coins']=$user->coins;
                     ]);
                 }
             }
-           
+
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 if (isset($potluck) && !empty($potluck)) {
@@ -746,14 +746,14 @@ $user['coins']=$user->coins;
                 }
             }
 
-            if(isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0'){
-                EventSchedule::where('event_id',$request->event_id)->delete();
+            if (isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0') {
+                EventSchedule::where('event_id', $request->event_id)->delete();
             }
-            
+
             if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
                 $activities = $request->activity;
-                if(isset($request->event_id) && $request->event_id != null){
-                    EventSchedule::where('event_id',$request->event_id)->delete();
+                if (isset($request->event_id) && $request->event_id != null) {
+                    EventSchedule::where('event_id', $request->event_id)->delete();
                 }
                 $addStartschedule =  new EventSchedule();
                 $addStartschedule->event_id = $eventId;
@@ -958,7 +958,7 @@ $user['coins']=$user->coins;
         $userId = $request->input('user_id');
         $is_contact = $request->input('is_contact');
         // dd($is_contact);
-        if($is_contact == '0'){
+        if ($is_contact == '0') {
             $user = User::where('id', $userId)->first();
             // $userimage = asset('storage/profile/' . $user->profile);
             $userimage = $user->profile;
@@ -967,8 +967,8 @@ $user['coins']=$user->coins;
             // dd($userProfile);
             $isChecked = $request->input('is_checked');
             $userIds = session()->get('user_ids', []);
-    
-    
+
+
             // if ($isChecked == true || $isChecked == "true") {
             //     if (!in_array($userId, $userIds)) {
             //         $userIds[] = ['id' => $userId, 'firstname' => $user->firstname, 'lastname' => $user->lastname, 'phonenumber' => ($user->phone_number != "") ? $user->phone_number : '', 'email' => $useremail, 'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''];
@@ -984,7 +984,7 @@ $user['coins']=$user->coins;
                 $user_invited_by = $user->phone_number;
                 $prefer_by = "phone";
             }
-    
+
             $userEntry = [
                 'id' => $userId,
                 'firstname' => $user->firstname,
@@ -995,34 +995,34 @@ $user['coins']=$user->coins;
                 'prefer_by' => $prefer_by,
                 'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
             ];
-    
+
             // if ($isChecked == true || $isChecked == "true") {
             //     // Remove any existing entry with the same user ID
             //     $userIds = array_filter($userIds, function ($entry) use ($userId) {
             //         return $entry['id'] !== $userId;
             //     });
-    
+
             //     // Add the latest user entry
             //     $userIds[] = $userEntry;
-    
+
             //     // Save updated array to session
             //     session()->put('user_ids', $userIds);
-    
-    
+
+
             //     // Return only the latest entry
             //     return response()->json(['success' => true, 'data' => $userEntry]);
             // }
             // dd($userIds);
-    
+
             if ($isChecked == true || $isChecked == "true") {
                 $userExists = array_filter($userIds, function ($entry) use ($userId) {
-                    if(isset($entry['id'])){
+                    if (isset($entry['id'])) {
                         return $entry['id'] === $userId;
                     }
                 });
-    
+
                 $userIds = array_filter($userIds, function ($entry) use ($userId) {
-                    if(isset($entry['id'])){
+                    if (isset($entry['id'])) {
                         return $entry['id'] !== $userId;
                     }
                 });
@@ -1034,12 +1034,12 @@ $user['coins']=$user->coins;
                 if (!empty($userExists)) {
                     // return response()->json(['success' => false, 'data' => $userEntry, 'is_duplicate' => 1]);
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                    return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1,"is_yesvite"=>1]);
+                    return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1, "is_yesvite" => 1]);
                 }
-                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0 ];
-                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0,"is_yesvite"=>1]);
+                $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
+                return response()->json(['view' => view('front.event.guest.addGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0, "is_yesvite" => 1]);
             }
-        }else{
+        } else {
             $user = contact_sync::where('id', $userId)->first();
             $userimage = $user->photo;
             $useremail = $request->input('email');
@@ -1047,8 +1047,8 @@ $user['coins']=$user->coins;
             $isChecked = $request->input('is_checked');
             // $userIds = session()->get('user_ids', []);
             $userIds = session()->get('contact_ids', []);
-           
-    
+
+
             if (isset($useremail) && $useremail != "") {
                 $user_invited_by = $useremail;
                 $prefer_by = "email";
@@ -1057,7 +1057,7 @@ $user['coins']=$user->coins;
                 $user_invited_by = $user->phoneWithCode;
                 $prefer_by = "phone";
             }
-    
+
             $userEntry = [
                 'sync_id' => $userId,
                 'firstname' => $user->firstName,
@@ -1066,16 +1066,16 @@ $user['coins']=$user->coins;
                 'prefer_by' => $prefer_by,
                 'profile' => ''
             ];
-    
+
             if ($isChecked == true || $isChecked == "true") {
                 $userExists = array_filter($userIds, function ($entry) use ($userId) {
-                    if(isset($entry['sync_id'])){
+                    if (isset($entry['sync_id'])) {
                         return $entry['sync_id'] === $userId;
                     }
                 });
-    
+
                 $userIds = array_filter($userIds, function ($entry) use ($userId) {
-                    if(isset($entry['sync_id'])){
+                    if (isset($entry['sync_id'])) {
                         return $entry['sync_id'] !== $userId;
                     }
                 });
@@ -1083,13 +1083,13 @@ $user['coins']=$user->coins;
                 session()->put('contact_ids', $userIds);
                 Session::save();
                 $user_list = Session::get('contact_ids');
-        
+
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                    return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1,"is_phone"=>1]);
+                    return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(),  'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'is_duplicate' => 1, "is_phone" => 1]);
                 }
                 $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
-                return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0,"is_phone"=>1]);
+                return response()->json(['view' => view('front.event.guest.addContactGuest', compact('data'))->render(), 'responsive_view' => view('front.event.guest.addcontact_responsive', compact('data', 'user_list'))->render(), 'success' => true, 'data' => $userEntry, 'is_duplicate' => 0, "is_phone" => 1]);
             }
         }
     }
@@ -1112,7 +1112,7 @@ $user['coins']=$user->coins;
     public function removeUserId(Request $request)
     {
         $is_contact = $request->input('is_contact');
-        if($is_contact == '1'){
+        if ($is_contact == '1') {
             $userIds = session()->get('contact_ids');
             $userId = $request->input('user_id');
             foreach ($userIds as $key => $value) {
@@ -1124,9 +1124,8 @@ $user['coins']=$user->coins;
             session()->put('contact_ids', $users);
             Session::save();
             $user_list = Session::get('contact_ids');
-            return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true,'is_phone'=>1]);
-
-        }else{
+            return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true, 'is_phone' => 1]);
+        } else {
             $userIds = session()->get('user_ids');
             $userId = $request->input('user_id');
             foreach ($userIds as $key => $value) {
@@ -1138,7 +1137,7 @@ $user['coins']=$user->coins;
             session()->put('user_ids', $users);
             Session::save();
             $user_list = Session::get('user_ids');
-            return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(),'is_yesvite'=>1]);
+            return response()->json(['success' => true, 'responsive_view' => view('front.event.guest.addguest_responsive', compact('user_list'))->render(), 'is_yesvite' => 1]);
         }
     }
 
@@ -1607,17 +1606,17 @@ $user['coins']=$user->coins;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
-        $getAllContacts = contact_sync::where('contact_id',$id)->where('email','!=','')  ->orderBy('firstname')
-        ->get();
-        if($getAllContacts->isNotEmpty()){
+        $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
+            ->get();
+        if ($getAllContacts->isNotEmpty()) {
             $emails = $getAllContacts->pluck('email')->toArray();
         }
-        
+
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->where('id', '!=', $id)
             ->where(['app_user' => '1'])
-            ->whereIn('email',$emails)
+            ->whereIn('email', $emails)
             ->orderBy('firstname')
             ->when($type != 'group', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
@@ -1659,16 +1658,16 @@ $user['coins']=$user->coins;
         // dd(count($selected_user));
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
-    
+
     public function getContacts(Request $request)
     {
-            
+
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
-       
-        $getAllContacts = contact_sync::where('contact_id',$id)
+
+        $getAllContacts = contact_sync::where('contact_id', $id)
             ->when($type != 'group', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
                     $q->limit($request->limit)
@@ -1680,10 +1679,10 @@ $user['coins']=$user->coins;
                     $q->where('firstName', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
                 });
-            })  ->orderBy('firstname')
+            })->orderBy('firstname')
 
             ->get();
-            
+
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
             $yesviteUserDetail = [
@@ -1702,17 +1701,17 @@ $user['coins']=$user->coins;
     }
     public function getPhoneContact(Request $request)
     {
-            
-        
+
+
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
-      
+
         $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
         $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
-        
-      
-        $getAllContacts = contact_sync::where('contact_id',$id)
+
+
+        $getAllContacts = contact_sync::where('contact_id', $id)
             ->when($type != 'group', function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
                     $q->limit($request->limit)
@@ -1724,10 +1723,10 @@ $user['coins']=$user->coins;
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
                 });
-            })  ->orderBy('firstname')
+            })->orderBy('firstname')
 
             ->get();
-            
+
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
             $yesviteUserDetail = [
@@ -1740,12 +1739,12 @@ $user['coins']=$user->coins;
             ];
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
-        
+
         $selected_user = Session::get('contact_ids');
         // dd($selected_co_host_prefer_by);
         // dd($selected_co_host_prefer_by);
-        
-        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user','selected_co_host','selected_co_host_prefer_by'))->render());
+
+        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
     }
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
@@ -2118,16 +2117,16 @@ $user['coins']=$user->coins;
         $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
 
-        $getAllContacts = contact_sync::where('contact_id',$user_id)->where('email','!=','')  ->orderBy('firstname')
-        ->get();
-        if($getAllContacts->isNotEmpty()){
+        $getAllContacts = contact_sync::where('contact_id', $user_id)->where('email', '!=', '')->orderBy('firstname')
+            ->get();
+        if ($getAllContacts->isNotEmpty()) {
             $emails = $getAllContacts->pluck('email')->toArray();
         }
 
 
         $users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             // ->whereNotIn('id', $alreadyselectedUser)
-            ->whereIn('email',$emails)
+            ->whereIn('email', $emails)
             ->where('id', '!=', $user_id)
             ->where(['app_user' => '1'])
             ->orderBy('firstname')
@@ -2255,24 +2254,25 @@ $user['coins']=$user->coins;
     }
     public function see_all(Request $request)
     {
-// dd()
-        if($request->is_contact != "1"){
+        // dd()
+        if ($request->is_contact != "1") {
             $data  = Session::get('user_ids');
             // $data[] = ['userdata' => $userEntry];
-    
+
             // dd($data);
             return response()->json(['view' => view('front.event.guest.sell_all_invited', compact('data'))->render()]);
         }
 
-       $data = Session::get('contact_ids');
-       return response()->json(['view' => view('front.event.guest.sell_all_invited_contact', compact('data'))->render()]);
-    //    dd($data);
+        $data = Session::get('contact_ids');
+        return response()->json(['view' => view('front.event.guest.sell_all_invited_contact', compact('data'))->render()]);
+        //    dd($data);
     }
 
-    public function CancelEvent(Request $request){
+    public function CancelEvent(Request $request)
+    {
         $user  = Auth::guard('web')->user();
-        $event_id=$request->input('event_id');
-        $reason=$request->input('reason');
+        $event_id = $request->input('event_id');
+        $reason = $request->input('reason');
         // $rawData = $request->getContent();
 
         // $input = json_decode($rawData, true);
@@ -2301,8 +2301,8 @@ $user['coins']=$user->coins;
             if (!empty($deleteEvent)) {
                 Notification::where('event_id', $event_id)->delete();
                 $deleteEvent->reason = $reason;
-                if ($deleteEvent->save()) {  
-                    if(isset($deleteEvent->design_image)&& $deleteEvent->design_image!=""){
+                if ($deleteEvent->save()) {
+                    if (isset($deleteEvent->design_image) && $deleteEvent->design_image != "") {
                         if (file_exists(public_path('storage/canvas') . $deleteEvent->design_image)) {
                             $design_imagedesign_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_image;
                             unlink($design_imagedesign_image_imagePath);
@@ -2316,55 +2316,54 @@ $user['coins']=$user->coins;
 
                     UserReportToPost::where('event_id', $event_id)->delete();
 
-                    $event_images=EventImage::where('event_id', $event_id)->get();
-                    if(isset($event_images)&&!empty($event_images)){
-                            foreach($event_images as $eventImage){
-                                if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
-                                    $imagePath = public_path('storage/event_images/') . $eventImage->image;
-                                    unlink($imagePath);
+                    $event_images = EventImage::where('event_id', $event_id)->get();
+                    if (isset($event_images) && !empty($event_images)) {
+                        foreach ($event_images as $eventImage) {
+                            if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
+                                $imagePath = public_path('storage/event_images/') . $eventImage->image;
+                                unlink($imagePath);
+                            }
+                        }
+                        EventImage::where('event_id', $event_id)->delete();
+                    }
+                    $event_post_image = EventPostImage::where('event_id', $event_id)->get();
+                    if (isset($event_post_image) && !empty($event_post_image)) {
+                        foreach ($event_post_image as $postImage) {
+                            if ($postImage->type == "video") {
+                                if (file_exists(public_path('storage/post_image/') . $postImage->post_image)) {
+                                    $videoPath = public_path('storage/post_image/') . $postImage->post_image;
+                                    unlink($videoPath);
+                                }
+                                if (file_exists(public_path('storage/thumbnails/') . $postImage->thumbnail)) {
+                                    $thumbnailPath = public_path('storage/thumbnails/') . $postImage->thumbnail;
+                                    unlink($thumbnailPath);
+                                }
+                            } elseif ($postImage->type == "audio") {
+                                if (file_exists(public_path('storage/event_post_recording') . $postImage->post_image)) {
+                                    $audioPath = public_path('storage/event_post_recording/') . $postImage->post_image;
+                                    unlink($audioPath);
+                                }
+                            } else {
+                                if (file_exists(public_path('storage/post_image') . $postImage->post_image)) {
+                                    $postImagePath = public_path('storage/post_image/') . $postImage->post_image;
+                                    unlink($postImagePath);
                                 }
                             }
-                            EventImage::where('event_id', $event_id)->delete();
-                    }
-                    $event_post_image=EventPostImage::where('event_id', $event_id)->get();
-                    if(isset($event_post_image)&&!empty($event_post_image)){
-                            foreach($event_post_image as $postImage){
-                                    if($postImage->type=="video")
-                                    {
-                                        if (file_exists(public_path('storage/post_image/') . $postImage->post_image)) {
-                                            $videoPath = public_path('storage/post_image/') . $postImage->post_image;
-                                            unlink($videoPath);
-                                        }
-                                        if (file_exists(public_path('storage/thumbnails/') . $postImage->thumbnail)) {
-                                            $thumbnailPath = public_path('storage/thumbnails/') . $postImage->thumbnail;
-                                            unlink($thumbnailPath);
-                                        }
-                                    }elseif($postImage->type=="audio"){
-                                        if (file_exists(public_path('storage/event_post_recording') . $postImage->post_image)) {
-                                            $audioPath = public_path('storage/event_post_recording/') . $postImage->post_image;
-                                            unlink($audioPath);
-                                        }
-                                    }else{
-                                        if (file_exists(public_path('storage/post_image') . $postImage->post_image)) {
-                                            $postImagePath = public_path('storage/post_image/') . $postImage->post_image;
-                                            unlink($postImagePath);
-                                        } 
-                                    }
-                            }
-                            EventPostImage::where('event_id', $event_id)->delete();
                         }
-                        EventPost::where('event_id', $event_id)->delete();
-                        EventInvitedUser::where('event_id', $event_id)->delete();
-                        EventSchedule::where('event_id', $event_id)->delete();
-                        EventSetting::where('event_id', $event_id)->delete();
-                        EventPotluckCategoryItem::where('event_id', $event_id)->delete();
-                        EventPotluckCategory::where('event_id', $event_id)->delete();
-                        EventPostComment::where('event_id', $event_id)->delete();
-                        EventPostPoll::where('event_id', $event_id)->delete();
-                        EventUserStory::where('event_id', $event_id)->delete();
+                        EventPostImage::where('event_id', $event_id)->delete();
+                    }
+                    EventPost::where('event_id', $event_id)->delete();
+                    EventInvitedUser::where('event_id', $event_id)->delete();
+                    EventSchedule::where('event_id', $event_id)->delete();
+                    EventSetting::where('event_id', $event_id)->delete();
+                    EventPotluckCategoryItem::where('event_id', $event_id)->delete();
+                    EventPotluckCategory::where('event_id', $event_id)->delete();
+                    EventPostComment::where('event_id', $event_id)->delete();
+                    EventPostPoll::where('event_id', $event_id)->delete();
+                    EventUserStory::where('event_id', $event_id)->delete();
                 }
                 DB::commit();
-                return response()->json(['status' => 1,'event_id'=>$event_id, 'message' => "Event deleted successfully"]);
+                return response()->json(['status' => 1, 'event_id' => $event_id, 'message' => "Event deleted successfully"]);
             } else {
                 return response()->json(['status' => 0, 'message' => "data is incorrect"]);
             }
@@ -2376,5 +2375,21 @@ $user['coins']=$user->coins;
             // dd($e);
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
         }
+    }
+    public function getCategory(Request $request)
+    {
+        $search_user = $request->search_user;
+        $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
+            $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
+                $que->select('*');
+            }]);
+        }])
+            ->where('category_name', 'LIKE', "%$search_user%")
+            ->orderBy('id', 'DESC')
+            ->get();
+
+      dd($design_category);
+
+        return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 }

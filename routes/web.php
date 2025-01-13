@@ -185,6 +185,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
     Route::post('event/list_group_memeber', [ControllersEventController::class, 'listGroupMember']);
     Route::get('event/get_user_ajax', [ControllersEventController::class, 'getUserAjax']);
+    Route::get('event/getCategory', [ControllersEventController::class, 'getCategory']);
     Route::get('event/get_contacts', [ControllersEventController::class, 'getContacts']);
     Route::get('event/getPhoneContact', [ControllersEventController::class, 'getPhoneContact']);
     Route::post('event/search_user_ajax', [ControllersEventController::class, 'searchUserAjax']);
