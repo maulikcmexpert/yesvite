@@ -1,7 +1,6 @@
 @if(isset($registry)&&!empty($registry))
 
 @foreach ($registry as $data )
-{{dd($data)}}
 <div class="d-flex align-items-center justify-content-center">
     <span class="me-2">
         @if (strpos($data['registry_link'], 'amazon.com') !== false) 
