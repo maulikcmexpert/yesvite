@@ -387,7 +387,7 @@ class ApiContactController extends Controller
                 $uniqContact[] = $contact;
             }
         }
-
+dd($seenSyncIds);
         // return response()->json([
         //     'message' => empty($updatedDuplicateContacts) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
         //     'all_contacts' => $updatedDuplicateContacts,
