@@ -311,55 +311,49 @@ $('#rsvpYesForm').validate({
 });
 
 
-// $('#rsvpNoForm').validate({
-//     rules: {
-//         firstname: {
-//             required: true
-//         },
-//         lastname: {
-//             required: true
-//         }
-//     },
-//     messages: {
-//         firstname: {
-//             required: "Please enter firstname"
-//         },
-//         lastname: {
-//             required: "Please enter lastname"
-//         }
-//     },
-//     errorPlacement: function (error, element) {
-//         if (element.attr("name") == "firstname") {
-//             $("#firstnameErrorLabel").html(error);
-//         } else if (element.attr("name") == "lastname") {
-//             $("#lastnameErrorLabel").html(error);
-//         }
-//     },
-//     // success: function (label, element) {
-//     //     if ($(element).attr("name") == "firstname") {
-//     //         $("#firstnameErrorLabel").html("");
-//     //     } else if ($(element).attr("name") == "lastname") {
-//     //         $("#lastnameErrorLabel").html("");
-//     //     }
-//     // }
-// });
-// $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
-//     if (!$('#rsvpYesForm').valid()) {
-//         e.preventDefault();
-//     }
-// });
-// $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
-//     if (!$('#rsvpNoForm').valid()) {
-//         e.preventDefault();
-//     }
-// });
-// $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
-//     if ($(e.relatedTarget).hasClass('yes_rsvp_btn')) {
-//         if (!$('#rsvpYesForm').valid()) {
-//             e.preventDefault();
-//         }
-//     }
-// })
+$('#rsvpNoForm').validate({
+    rules: {
+        firstname: {
+            required: true
+        },
+        lastname: {
+            required: true
+        }
+    },
+    messages: {
+        firstname: {
+            required: "Please enter firstname"
+        },
+        lastname: {
+            required: "Please enter lastname"
+        }
+    },
+    errorPlacement: function (error, element) {
+        if (element.attr("name") == "firstname") {
+            $("#firstnameErrorLabel").html(error);
+        } else if (element.attr("name") == "lastname") {
+            $("#lastnameErrorLabel").html(error);
+        }
+    },
+    // success: function (label, element) {
+    //     if ($(element).attr("name") == "firstname") {
+    //         $("#firstnameErrorLabel").html("");
+    //     } else if ($(element).attr("name") == "lastname") {
+    //         $("#lastnameErrorLabel").html("");
+    //     }
+    // }
+});
+$('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
+    if (!$('#rsvpYesForm').valid()) {
+        e.preventDefault();
+    }
+});
+$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
+    if (!$('#rsvpNoForm').valid()) {
+        e.preventDefault();
+    }
+});
+
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$('#rsvpYesForm').valid()) {
         e.preventDefault();
@@ -405,8 +399,14 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 });
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
+    if (!$('#rsvpYesForm').valid()) {
+        e.preventDefault();
+        return;
+    }
     e.preventDefault();
     $("#rsvpNoForm").submit();
+    $('#rsvp-no-modal').modal('hide');
+
 });
 
 $(document).ready(function () {
