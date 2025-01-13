@@ -330,16 +330,16 @@ $('#rsvpNoForm').validate({
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "firstname") {
-            $("#firstnameErrorLabel").html(error);
+            $("#firstnameErrorLabelno").html(error);
         } else if (element.attr("name") == "lastname") {
-            $("#lastnameErrorLabel").html(error);
+            $("#lastnameErrorLabelno").html(error);
         }
     },
     success: function (label, element) {
         if ($(element).attr("name") == "firstname") {
-            $("#firstnameErrorLabel").html("");
+            $("#firstnameErrorLabelno").html("");
         } else if ($(element).attr("name") == "lastname") {
-            $("#lastnameErrorLabel").html("");
+            $("#lastnameErrorLabelno").html("");
         }
     }
 });
@@ -403,7 +403,6 @@ $(document).on("click", ".no_rsvp_btn", function (e) {
         e.preventDefault();
         return;
     }
-    e.preventDefault();
     $("#rsvpNoForm").submit();
     $('#rsvp-no-modal').modal('hide');
 
