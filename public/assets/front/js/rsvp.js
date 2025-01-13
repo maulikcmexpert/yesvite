@@ -353,11 +353,18 @@ $('#rsvpYesForm').validate({
 //         e.preventDefault();
 //     }
 // });
-$(document).on("click", ".yes_rsvp_btn", function (e) {
-    if (!$('#rsvpYesForm').valid()) {
-        e.preventDefault();
-       return;
+$('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
+    if ($(e.relatedTarget).hasClass('yes_rsvp_btn')) {
+        if (!$('#rsvpYesForm').valid()) {
+            e.preventDefault();
+        }
     }
+})
+$(document).on("click", ".yes_rsvp_btn", function (e) {
+    // if (!$('#rsvpYesForm').valid()) {
+    //     e.preventDefault();
+    //    return;
+    // }
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
     var kidsCount = parseInt($("#kids").val()) || 0;
