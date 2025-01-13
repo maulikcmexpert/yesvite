@@ -1441,7 +1441,7 @@ label.error {
 }
 
 .rsvp-yes-modal .modal-content{
-    height: calc(100vh - 100px);
+    height: calc(100vh - 20px);
 }
 }
 
