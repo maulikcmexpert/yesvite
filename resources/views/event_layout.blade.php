@@ -83,7 +83,9 @@
    
 
    
-    <x-front.footer :js="$js ?? []" />
+    {{-- <x-front.footer :js="$js ?? []" /> --}}
+    <x-front.footer :js="$js ?? []" page="{{ $page }}" />
+
     <script src="{{ asset('assets/event/js/script.js') }}"></script>
     <script src="{{ asset('assets/event/js/common.js') }}"></script>
     <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
