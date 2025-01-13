@@ -382,28 +382,7 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
     var kidsCount = parseInt($("#kids").val()) || 0;
     var firstname=$('.yes_firstname').val();
     var lastname=$('.yes_lastname').val();
-    
-    // if(firstname==""&&lastname==""){
-        
-    //     $('#firstnameErrorLabel').text('Please enter firstname');
-    //     $('#lastnameErrorLabel').text('Please enter lastname');
-    //     return;
-    // }else{
-    //     $('#firstnameErrorLabel').text('');
-    //     $('#lastnameErrorLabel').text('');
-    // }
-    // if(firstname==""){
-    //     $('#firstnameErrorLabel').text('Please enter firstname');
-    //     return;
-    // }else{
-    //     $('#firstnameErrorLabel').text('');
-    // }
-    // if(lastname==""){
-    //     $('#lastnameErrorLabel').text('Please enter lastname');
-    //     return;
-    // }else{
-    //     $('#lastnameErrorLabel').text('');
-    // }
+
 
     if (adultsCount == 0 && kidsCount == 0) {
         e.preventDefault();
@@ -419,6 +398,7 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 $(document).on("click", ".no_rsvp_btn", function (e) {
     if (!$('#rsvpNoForm').valid()) {
         e.preventDefault();
+        return;
     }
     $("#rsvpNoForm").submit();
     $('#rsvp-no-modal').modal('hide');
