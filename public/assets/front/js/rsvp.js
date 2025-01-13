@@ -348,11 +348,11 @@ $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
         e.preventDefault();
     }
 });
-$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
-    if (!$('#rsvpNoForm').valid()) {
-        e.preventDefault();
-    }
-});
+// $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
+//     if (!$('#rsvpNoForm').valid()) {
+//         e.preventDefault();
+//     }
+// });
 
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$('#rsvpYesForm').valid()) {
@@ -399,7 +399,9 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 });
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
-   
+    if (!$('#rsvpNoForm').valid()) {
+        e.preventDefault();
+    }
     $("#rsvpNoForm").submit();
     $('#rsvp-no-modal').modal('hide');
 
