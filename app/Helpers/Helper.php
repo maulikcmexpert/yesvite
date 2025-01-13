@@ -1179,6 +1179,8 @@ function sendNotification($notificationType, $postData)
 
                         $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
                         $eventData = [
+                            'event_id'=>$postData['event_id'],
+                            'owner_id'=>$getPostOwnerId->user_id,
                             'event_name' => $getPostOwnerId->event_name,
                             'guest_name' => $senderData->firstname . ' '  . $senderData->lastname,
                             'profileUser' => ($senderData->profile != NULL || $senderData->profile != "") ? $senderData->profile : "no_profile.png",
