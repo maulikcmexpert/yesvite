@@ -1726,12 +1726,12 @@
                                                 Guests RSVP Responses <br>
                                             </label>
                                         </div>
-                                        <div class="form-check">
+                                        {{-- <div class="form-check">
                                             <input class="form-check-input notifications" name="notifications[]" type="checkbox" value="1" id="flexCheckDefault1">
                                             <label class="form-check-label" for="flexCheckDefault1">
                                                 Special offers ( From Yesvite & partners) <br>
                                             </label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                     </div>
                                 <div class="modal-footer">
