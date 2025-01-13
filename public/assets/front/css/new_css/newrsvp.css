@@ -878,7 +878,11 @@ display:none;}
 
 .rsvp-yes-modal .modal-body .rsvp-input-form .input-form{
     width: 100%;
-    margin-bottom: 24px !important;
+    margin-bottom: 0px !important;
+}
+
+.rsvp-input-form .col-lg-6{
+    margin-bottom: 20px !important;
 }
 
 .rsvp-yes-modal .modal-body .rsvp-input-form{
