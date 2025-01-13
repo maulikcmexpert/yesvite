@@ -296,6 +296,12 @@ $('#rsvpYesForm').validate({
     }
 })
 
+$('#rsvpModal').on('hide.bs.modal', function (e) {
+    if (!$('#rsvpYesForm').valid()) {
+        e.preventDefault();
+    }
+});
+
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
