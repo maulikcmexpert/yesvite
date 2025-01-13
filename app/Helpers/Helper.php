@@ -111,7 +111,6 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-    dd(1);
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $user  = Auth::guard('api')->user();
 
@@ -1120,6 +1119,7 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'sent_rsvp') {
+        dd(1);
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
 
