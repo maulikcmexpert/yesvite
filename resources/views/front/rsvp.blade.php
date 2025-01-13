@@ -1819,7 +1819,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" required=""  maxlength="200"></textarea>
+                                    <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host"  maxlength="200"></textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -1832,7 +1832,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary no_rsvp_btn" data-bs-dismiss="modal">Cancel RSVP</button>
+                            <button type="button" class="btn btn-secondary no_rsvp_btn">Cancel RSVP</button>
                         </div>
                 </form>
             </div>
