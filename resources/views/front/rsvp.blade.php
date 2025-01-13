@@ -327,7 +327,7 @@
                                                     @endif
                                                   </div>
                                                 
-                                                @if($rsvp_status=="1")
+                                                @if($is_host=="1")
                                                   @if($guest_data['rsvp_status']=="1")
                                                   <div class="sucess-rsvp-wrp">
                                                     <div class="d-flex align-items-center">
