@@ -312,23 +312,37 @@ $('#rsvpYesForm').validate({
 
 
 $('#rsvpNoForm').validate({
-    rules:{
-        firstname:{
-            required:true
+    rules: {
+        firstname: {
+            required: true
         },
-        lastname:{
-            required:true
+        lastname: {
+            required: true
         }
     },
-    messages:{
-        firstname:{
-            required:"Please enter firstname"
+    messages: {
+        firstname: {
+            required: "Please enter firstname"
         },
-        lastname:{
-            required:"Please enter lastname"
-        },
+        lastname: {
+            required: "Please enter lastname"
+        }
+    },
+    errorPlacement: function (error, element) {
+        if (element.attr("name") == "firstname") {
+            $("#firstnameErrorLabelno").html(error);
+        } else if (element.attr("name") == "lastname") {
+            $("#lastnameErrorLabelno").html(error);
+        }
+    },
+    success: function (label, element) {
+        if ($(element).attr("name") == "firstname") {
+            $("#firstnameErrorLabelno").html("");
+        } else if ($(element).attr("name") == "lastname") {
+            $("#lastnameErrorLabelno").html("");
+        }
     }
-})
+});
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
         e.preventDefault();

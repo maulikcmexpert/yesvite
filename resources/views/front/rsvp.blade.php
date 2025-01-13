@@ -1801,7 +1801,7 @@
                                             <input type="text" name="lastname" value="{{$user_lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
-                                        <label id="firstname-error" class="error" for="firstname"></label>
+                                        <label id="firstnameErrorLabelno" class="error" for="firstname"></label>
 
                                     </div>
                                     <div class="col-lg-12">
@@ -1809,7 +1809,7 @@
                                             <input type="email" name="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
                                             <label for="Fname" class="form-label input-field floating-label">Email Address</label>
                                         </div>
-                                        <label id="lastname-error" class="error" for="lastname"></label>
+                                        <label id="lastnameErrorLabelno" class="error" for="lastname"></label>
 
                                     </div>
                                 </div>
