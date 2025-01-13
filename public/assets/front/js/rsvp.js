@@ -399,10 +399,7 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 });
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
-    if (!$('#rsvpNoForm').valid()) {
-        e.preventDefault();
-        return;
-    }
+   
     $("#rsvpNoForm").submit();
     $('#rsvp-no-modal').modal('hide');
 
