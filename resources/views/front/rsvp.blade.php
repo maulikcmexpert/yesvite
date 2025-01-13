@@ -1795,7 +1795,7 @@
                                             <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" class="form-control inputText firstname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
-                                        <label id="firstnameErrorLabelno" class="error" for="firstname"></label>
+                                        <label id="firstnameErrorLabel" class="error" for="firstname"></label>
 
                                     </div>
                                     <div class="col-lg-6">
@@ -1803,7 +1803,7 @@
                                             <input type="text" name="lastname" value="{{$user_lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
-                                        <label id="lastnameErrorLabelno" class="error" for="lastname"></label>
+                                        <label id="lastnameErrorLabel" class="error" for="lastname"></label>
 
                                     </div>
                                     <div class="col-lg-12">

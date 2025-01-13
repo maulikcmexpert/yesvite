@@ -330,16 +330,16 @@ $('#rsvpNoForm').validate({
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "firstname") {
-            $("#firstnameErrorLabelno").html(error);
+            $("#firstnameErrorLabel").html(error);
         } else if (element.attr("name") == "lastname") {
-            $("#lastnameErrorLabelno").html(error);
+            $("#lastnameErrorLabel").html(error);
         }
     },
     success: function (label, element) {
         if ($(element).attr("name") == "firstname") {
-            $("#firstnameErrorLabelno").html("");
+            $("#firstnameErrorLabel").html("");
         } else if ($(element).attr("name") == "lastname") {
-            $("#lastnameErrorLabelno").html("");
+            $("#lastnameErrorLabel").html("");
         }
     }
 });
@@ -372,11 +372,6 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
     e.preventDefault();
-
-    if (!$('#rsvpNoForm').valid()) {
-        return;
-    }
-
     $("#rsvpNoForm").submit();
 });
 
