@@ -17,7 +17,7 @@
                                     <h5>Edit Invite</h5>
                                 </a>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <a href="#" class="d-flex align-items-center">
                                     <span class="me-2">
                                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
                                     </span>
                                     <h5>Preview invite</h5>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="setting-img">
@@ -47,7 +47,7 @@
                                 <h5>Edit Invite</h5>
                             </a>
                         </div>
-                        <div>
+                        {{-- <div>
                             <a href="#" class="d-flex align-items-center">
                                 <span class="me-2">
                                     <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@
                                 </span>
                                 <h5>Preview invite</h5>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="guest-wrp guest-wrap-respo">
                         <div class="guest-pro">
@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="order-desc order-desc-respo">
-                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="#">Terms of service</a></p>
+                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="{{route('term_and_condition')}}">Terms of service</a></p>
                     </div>
 
                 </div>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="order-desc">
-                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="#">Terms of service</a></p>
+                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="{{route('term_and_condition')}}">Terms of service</a></p>
                     </div>
 
                 </div>
