@@ -122,7 +122,7 @@ class ApiContactController extends Controller
         $user = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $contacts = json_decode($rawData, true);
-        // dd(count($contacts));
+        dd(count($contacts));
         if (empty($contacts)) {
             return response()->json(['message' => 'No contacts provided.'], 400);
         }
@@ -374,9 +374,27 @@ class ApiContactController extends Controller
             return $item;
         }, $updatedDuplicateContacts);
 
+        $uniqContact = [];
+        $seenSyncIds = [];
+
+        foreach ($updatedDuplicateContacts as $contact) {
+            if ($contact['isAppUser'] == "1") {
+                if (!in_array($contact['sync_id'], $seenSyncIds)) {
+                    $uniqContact[] = $contact;
+                    $seenSyncIds[] = $contact['sync_id'];
+                }
+            } else {
+                $uniqContact[] = $contact;
+            }
+        }
+
+        // return response()->json([
+        //     'message' => empty($updatedDuplicateContacts) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
+        //     'all_contacts' => $updatedDuplicateContacts,
+        // ], 200);
         return response()->json([
-            'message' => empty($updatedDuplicateContacts) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
-            'all_contacts' => $updatedDuplicateContacts,
+            'message' => empty($uniqContact) ? 'Contacts inserted successfully.' : 'Some contacts already exist.',
+            'all_contacts' => $uniqContact,
         ], 200);
     }
 

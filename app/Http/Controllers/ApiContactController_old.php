@@ -123,7 +123,7 @@ class ApiContactController extends Controller
         $user = Auth::guard('api')->user();
         $rawData = $request->getContent();
         $contacts = json_decode($rawData, true);
-        dd($contacts);
+        // dd($input);
         // $contacts = $request->input('contacts');
 
         if (empty($contacts)) {
@@ -235,44 +235,17 @@ class ApiContactController extends Controller
         $updatedDuplicateContacts = array_filter($duplicateContacts, function ($contact) {
             return !is_null($contact['user_id']);
         });
-        $uniqContact = [];
-        $seenSyncIds = [];
 
-        foreach ($duplicateContacts as $contact) {
-            if ($contact['isAppUser'] == "1") {
-                if (!in_array($contact['sync_id'], $seenSyncIds)) {
-                    $uniqContact[] = $contact;
-                    $seenSyncIds[] = $contact['sync_id'];
-                }
-            } else {
-                $uniqContact[] = $contact;
-            }
-        }
-
-
-        $inserteduniqContact = [];
-        $insertedseenSyncIds = [];
-
-        foreach ($insertedContacts as $contact) {
-            if ($contact['isAppUser'] == "1") {
-                if (!in_array($contact['sync_id'], $seenSyncIds)) {
-                    $inserteduniqContact[] = $contact;
-                    $insertedseenSyncIds[] = $contact['sync_id'];
-                }
-            } else {
-                $inserteduniqContact[] = $contact;
-            }
-        }
-        // // Prepare the response
-        $message = empty($updatedDuplicateContacts)
+       // Prepare the response
+            $message = empty($updatedDuplicateContacts)
             ? 'Contacts inserted successfully.'
             : 'Some contacts already exist.';
-        // $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
-        $allContacts = $inserteduniqContact ? $inserteduniqContact : $uniqContact;
 
-        return response()->json([
+            $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
+
+            return response()->json([
             'message' => $message,
             'all_contacts' => $allContacts,
-        ], 200); // Prepare the response
+            ], 200);// Prepare the response
     }
 }
