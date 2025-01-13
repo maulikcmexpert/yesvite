@@ -218,6 +218,7 @@
 
                                         </div>
                                         <div>
+                                       {{-- {{     dd($eventInfo)}} --}}
                                             @php
                                                 $host_id = $eventDetails['host_id'];
                                                 $userid = $login_user_id;

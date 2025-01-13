@@ -819,7 +819,78 @@
                                             </div>
                                             <button class="commented-user-reply-btn">Reply</button>
                                         </div>
-                                        <div class="posts-card-main-comment all-comments-textbox">
+
+                                        <ul>
+                                            <li class="reply-on-comment" data-comment-id="">
+                                                <div class="commented-user-head">
+                                                    <div class="commented-user-profile">
+                                                        <div class="commented-user-profile-img">
+                                                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="commented-user-profile-content">
+                                                            <h3>Angel Geidt</h3>
+                                                            <p>New York</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="posts-card-like-comment-right">
+                                                        <p>2h</p>
+                                                        <button class="posts-card-like-btn"><i
+                                                                class="fa-regular fa-heart"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="commented-user-content">
+                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa.
+                                                        Phasellus et odio a
+                                                        augue rutrum iaculis. Nulla id nisl in tortor accumsan auctor id
+                                                        vel elit.</p>
+                                                </div>
+                                                <div class="commented-user-reply-wrp">
+                                                    <div class="position-relative d-flex align-items-center gap-2">
+                                                        <button class="posts-card-like-btn"><i
+                                                                class="fa-regular fa-heart"></i></button>
+                                                        <p>121</p>
+                                                    </div>
+                                                    <button class="commented-user-reply-btn">Reply</button>
+                                                </div>
+                                            </li>
+                                            <li class="reply-on-comment">
+                                                <div class="commented-user-head">
+                                                    <div class="commented-user-profile">
+                                                        <div class="commented-user-profile-img">
+                                                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="commented-user-profile-content">
+                                                            <h3>Angel Geidt</h3>
+                                                            <p>New York</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="posts-card-like-comment-right">
+                                                        <p>2h</p>
+                                                        <button class="posts-card-like-btn"><i
+                                                                class="fa-regular fa-heart"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="commented-user-content">
+                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa.
+                                                        Phasellus et odio a
+                                                        augue rutrum iaculis. Nulla id nisl in tortor accumsan auctor id
+                                                        vel elit.</p>
+                                                </div>
+                                                <div class="commented-user-reply-wrp">
+                                                    <div class="position-relative d-flex align-items-center gap-2">
+                                                        <button class="posts-card-like-btn"><i
+                                                                class="fa-regular fa-heart"></i></button>
+                                                        <p>121</p>
+                                                    </div>
+                                                    <button class="commented-user-reply-btn">Reply</button>
+                                                </div>
+                                            </li>
+                                            <button class="show-comment-reply-btn">Show 3 reply</button>
+                                        </ul>
+
+                                        {{-- <div class="posts-card-main-comment all-comments-textbox">
                                             <input type="text" class="form-control" id="text"
                                                 placeholder="Add Comment">
                                             <span class="comment-send-icon">
@@ -874,7 +945,7 @@
                                                     </path>
                                                 </svg>
                                             </span>
-                                        </div>
+                                        </div> --}}
                                     </li>
                                     <li class="commented-user-wrp">
                                         <div class="commented-user-head">
@@ -908,7 +979,7 @@
                                             <button class="commented-user-reply-btn">Reply</button>
                                         </div>
                                         <ul>
-                                            <li class="reply-on-comment">
+                                            <li class="reply-on-comment" data-comment-id="">
                                                 <div class="commented-user-head">
                                                     <div class="commented-user-profile">
                                                         <div class="commented-user-profile-img">
