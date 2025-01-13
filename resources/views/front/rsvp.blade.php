@@ -1741,7 +1741,8 @@
                                     </div>
                     </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary yes_rsvp_btn" data-bs-dismiss="modal">RSVP</button>
+                                    {{-- <button type="button" class="btn btn-secondary yes_rsvp_btn" data-bs-dismiss="modal">RSVP</button> --}}
+                                    <button type="button" class="btn btn-secondary yes_rsvp_btn">RSVP</button>
                                 </div>
                         </form>
                 </div>
