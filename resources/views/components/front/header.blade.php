@@ -5,6 +5,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.png')}}">
 <!-- custom-style -->
+<link rel="stylesheet" href="{{asset('assets')}}/front/css/wallcss/main.css" />
 {{-- <link rel="stylesheet" href="{{ asset('assets/front/css/wallcss/main.css')}}" /> --}}
 <link href="{{asset('assets/front/css/style.css')}}" rel="stylesheet">
 
@@ -62,7 +63,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="{{asset('assets')}}/front/css/wallcss/main.css" />
+
 <link rel="stylesheet" href="{{asset('assets/front/css/wall.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
