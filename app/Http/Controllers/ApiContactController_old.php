@@ -240,32 +240,35 @@ class ApiContactController extends Controller
 
         foreach ($duplicateContacts as $contact) {
             if ($contact['isAppUser'] == "1") {
-                if(!in_array($contact['sync_id'], $seenSyncIds)){
+                if (!in_array($contact['sync_id'], $seenSyncIds)) {
                     $uniqContact[] = $contact;
                     $seenSyncIds[] = $contact['sync_id'];
                 }
-               
-            }else{
+            } else {
                 $uniqContact[] = $contact;
             }
         }
 
 
-        // $uniqContact = [];
-        // $seenSyncIds = []; 
+        $inserteduniqContact = [];
+        $insertedseenSyncIds = [];
 
-        // foreach ($duplicateContacts as $contact) {
-        //     if ($contact['isAppUser'] == "1" && !in_array($contact['sync_id'], $seenSyncIds)) {
-        //         $uniqContact[] = $contact; 
-        //         $seenSyncIds[] = $contact['sync_id'];
-        //     }
-        // }
+        foreach ($insertedContacts as $contact) {
+            if ($contact['isAppUser'] == "1") {
+                if (!in_array($contact['sync_id'], $seenSyncIds)) {
+                    $inserteduniqContact[] = $contact;
+                    $insertedseenSyncIds[] = $contact['sync_id'];
+                }
+            } else {
+                $inserteduniqContact[] = $contact;
+            }
+        }
         // // Prepare the response
         $message = empty($updatedDuplicateContacts)
             ? 'Contacts inserted successfully.'
             : 'Some contacts already exist.';
         // $allContacts = $insertedContacts ? $insertedContacts : $duplicateContacts;
-        $allContacts = $insertedContacts ? $insertedContacts : $uniqContact;
+        $allContacts = $inserteduniqContact ? $inserteduniqContact : $uniqContact;
 
         return response()->json([
             'message' => $message,
