@@ -1,4 +1,27 @@
-{{-- {{dd($eventDetails)}} --}}
+{{-- {{dd($eventInfo)}} --}}
+@php
+
+    $guestArray = $eventInfo['guest_view']['event_detail']['guests'] ?? null;
+    $totalAdults = 0;
+    $totalKids = 0;
+    // dd( $guestArray);
+
+    if ($guestArray) {
+        foreach ($guestArray as $guest) {
+            $totalAdults += $guest['adults'] ?? 0;
+            $totalKids += $guest['kids'] ?? 0; // Accessing related user data
+        }
+    } else {
+        echo 'No guests found.';
+    }
+
+    //  dd($guests,$host_id);
+    // Initialize totals
+
+    // Total attending
+    $totalAttending = $totalAdults + $totalKids;
+@endphp
+
 <div class="main-content-right">
     <div class="main-right-guests-wrp common-div-wrp">
         <div class="main-right-guests-head">
@@ -78,7 +101,7 @@ if ($hostView) {
         </div>
         <div class="guests-listing-wrp">
             <ul>
-                @foreach ($guests as $guest)
+                @foreach ($guestArray as $guest)
                     @if (isset($guest['user']))
                         @php
                             $user = $guest['user']; // Fetch user array
@@ -87,12 +110,37 @@ if ($hostView) {
                         <li class="guests-listing-info">
                             <div class="posts-card-head-left guests-listing-left">
                                 <div class="posts-card-head-left-img">
-                                    <img src="{{ asset('storage/profile/' . $user['profile']) }} " alt="">
+                                    @if ($user['profile'] != '')
+                                        <img src="{{ asset('storage/profile/' . $user['profile']) }} " alt="">
+                                    @else
+                                        @php
+
+                                            // $parts = explode(" ", $name);
+                                            $firstInitial = isset($user['firstname'][0])
+                                                ? strtoupper($user['firstname'][0])
+                                                : '';
+                                            $secondInitial = isset($user['lastname'][0])
+                                                ? strtoupper($user['lastname'][0])
+                                                : '';
+                                            $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                            $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                        @endphp
+                                        <h5 class="{{ $fontColor }}">
+                                            {{ $initials }}
+                                        </h5>
+                                    @endif
+
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
                                     <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
-                                    <p>{{ $user['city'] }},{{ $user['state'] }}</p>
+                                    @if (!empty($user['city']) || !empty($user['state']))
+                                        <p>
+                                            {{ $user['city'] ?? '' }}{{ !empty($user['city']) && !empty($user['state']) ? ',' : '' }}{{ $user['state'] ?? '' }}
+                                        </p>
+                                    @endif
+
+
                                 </div>
                             </div>
                             <div class="guests-listing-right">

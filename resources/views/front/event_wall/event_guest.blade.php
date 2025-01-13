@@ -61,17 +61,15 @@
                                                 // Sample guests array from the provided data
                                                 $hostView = $eventInfo['host_view'];
 
-
                                                 // Initialize totals
                                                 $totalAdults = 0;
                                                 $totalKids = 0;
 
                                                 // Sum up adults and kids
-                                                if ( $hostView ) {
-
-                                                        $totalAdults += $hostView['adults'] ?? 0;
-                                                        $totalKids += $hostView['kids'] ?? 0;
-                                                    }
+                                                if ($hostView) {
+                                                    $totalAdults += $hostView['adults'] ?? 0;
+                                                    $totalKids += $hostView['kids'] ?? 0;
+                                                }
 
                                                 // Total attending
                                                 $totalAttending = $totalAdults + $totalKids;
@@ -103,8 +101,9 @@
                                         </div>
 
                                         <div id="chartData" data-attending="{{ $hostView['attending'] }}"
-                                            data-no-reply="{{$hostView['pending'] }}" data-declined="{{ $hostView['not_attending'] }}"
-                                            data-invitation_sent="{{ $hostView['total_invite']}}">
+                                            data-no-reply="{{ $hostView['pending'] }}"
+                                            data-declined="{{ $hostView['not_attending'] }}"
+                                            data-invitation_sent="{{ $hostView['total_invite'] }}">
                                         </div>
                                         <div id="chart1" class=""></div>
 
@@ -123,7 +122,8 @@
                                                         <h6>Total RSVP Rate</h6>
                                                     </div>
                                                     <h3>{{ $eventInfo['host_view']['rsvp_rate_percent'] }}</h3>
-                                                    <h5>{{ $eventInfo['host_view']['rsvp_rate'] }}/{{ $eventInfo['host_view']['total_invite'] }}</h5>
+                                                    <h5>{{ $eventInfo['host_view']['rsvp_rate'] }}/{{ $eventInfo['host_view']['total_invite'] }}
+                                                    </h5>
 
                                                     <div class="d-flex align-items-center uptick">
                                                         <svg width="8" height="4" viewBox="0 0 8 4"
@@ -149,7 +149,7 @@
                                                         <h6>Invite view rate</h6>
                                                     </div>
                                                     <h3>{{ $eventInfo['host_view']['invite_view_percent'] }}</h3>
-                                                    <h5>{{$eventInfo['host_view']['invite_view_rate'] }}/{{$eventInfo['host_view']['total_invite'] }}
+                                                    <h5>{{ $eventInfo['host_view']['invite_view_rate'] }}/{{ $eventInfo['host_view']['total_invite'] }}
                                                     </h5>
                                                     <div class="d-flex align-items-center uptick">
                                                         <svg width="8" height="4" viewBox="0 0 8 4"
@@ -157,7 +157,8 @@
                                                             <path d="M7.5 3.875L3.75 0.125L0 3.875H7.5Z"
                                                                 fill="#00C222" />
                                                         </svg>
-                                                        <h4>{{$eventInfo['host_view']['today_invite_view_percent'] }}</h4>
+                                                        <h4>{{ $eventInfo['host_view']['today_invite_view_percent'] }}
+                                                        </h4>
                                                         <span>New views today</span>
                                                     </div>
                                                 </div>
@@ -218,39 +219,33 @@
 
                                         </div>
                                         <div>
-                                       {{-- {{     dd($eventDetails)}} --}}
+                                            {{-- {{ dd($eventDetails) }} --}}
                                             @php
                                                 $host_id = $eventDetails['host_id'];
                                                 $userid = $login_user_id;
                                                 //   dd($host_id);if ($guestString !== null) {
-                                                $guestString = $eventDetails['event_detail'][2] ?? null;
-                                                if ($guestString !== null) {
-                                                    $guestJson = trim(str_replace('guests : ', '', $guestString));
+                                                $guestArray = $eventDetails['event_detail']['guests'] ?? null;
+                                                $totalAdults = 0;
+                                                $totalKids = 0;
+// dd( $guestArray);
 
-                                                    $guests = json_decode($guestJson, true);
+                                                if ($guestArray) {
+                                                    foreach ($guestArray as $guest) {
+                                                        $totalAdults += $guest['adults'] ?? 0;
+                                                        $totalKids += $guest['kids'] ?? 0;; // Accessing related user data
+                                                    }
                                                 } else {
-                                                    $guests = [];
+                                                    echo 'No guests found.';
                                                 }
-
 
                                                 //  dd($guests,$host_id);
                                                 // Initialize totals
-                                                $totalAdults = 0;
-                                                $totalKids = 0;
 
-                                                // Sum up adults and kids
-                                                if (is_array($guests) && !empty($guests)) {
-                                                    // Sum up adults and kids
-                                                    foreach ($guests as $guest) {
-                                                        $totalAdults += $guest['adults'] ?? 0;
-                                                        $totalKids += $guest['kids'] ?? 0;
-                                                    }
-                                                }
                                                 // Total attending
                                                 $totalAttending = $totalAdults + $totalKids;
                                             @endphp
 
-                                            @foreach ($guests as $guest)
+                                            @foreach($guestArray as $guest)
                                                 @if (isset($guest['user']))
                                                     @php
                                                         $user = $guest['user']; // Fetch user array
@@ -261,8 +256,28 @@
                                                     <div class="guest-user-box {{ $isDisabled }}">
                                                         <div class="guest-list-data">
                                                             <a href="#" class="guest-img">
+                                                                @if ($user['profile'] != '')
                                                                 <img src="{{ $user['profile'] ? asset('storage/profile/' . $user['profile']) : asset('images/default-profile.png') }}"
                                                                     alt="guest-img">
+                                                            @else
+                                                                @php
+
+                                                                    // $parts = explode(" ", $name);
+                                                                    $firstInitial = isset($user['firstname'][0])
+                                                                        ? strtoupper($user['firstname'][0])
+                                                                        : '';
+                                                                    $secondInitial = isset($user['lastname'][0])
+                                                                        ? strtoupper($user['lastname'][0])
+                                                                        : '';
+                                                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                                                @endphp
+                                                                <h5 class="{{ $fontColor }}">
+                                                                    {{ $initials }}
+                                                                </h5>
+                                                            @endif
+
+
 
                                                             </a>
                                                             <div class="d-flex flex-column">
@@ -403,7 +418,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-0">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
             </div>
         </div>
     </div>

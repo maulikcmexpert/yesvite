@@ -51,6 +51,14 @@ $(document).ready(function () {
 
 
     $(document).on('click', '.open_photo_model', function () {
+        clearTimeout(pressTimer); // Clear the timer
+        console.log("Mouse up or leave detected");
+
+        if (!isLongPress) {
+            // If it wasn't a long press, open the modal (short press behavior)
+            console.log("Short press detected");
+            $('#detail-photo-modal').modal('show');
+        } // Open the modal
         // Fetch the post ID from the data attribute
         const postId = $(this).data('post-id');
         const eventId = $(this).data('event-id');
@@ -61,11 +69,11 @@ $(document).ready(function () {
         //     // If this is a reply button, get the parent ID from the closest .commented-user-wrp element
         //     parentId = $('.commented-user-wrp').data('parent-id');  // Assuming `data-parent-id` holds the parent_id
         // }
-// console.log(parentId);
+        // console.log(parentId);
         var url;
 
 
-            url = base_url + "event_photo/fetch-photo-details";
+        url = base_url + "event_photo/fetch-photo-details";
 
 
 
@@ -128,7 +136,7 @@ $(document).ready(function () {
                         data.latest_comment.forEach(comment => {
                             commentsWrapper.append(`
                                 <li class="commented-user-wrp" data-comment-id="${comment.id}">
-                                  <input type="hidden" id="parent_comment_id" value="${comment.id }">
+                                  <input type="hidden" id="parent_comment_id" value="${comment.id}">
                                     <div class="commented-user-head">
                                         <div class="commented-user-profile">
                                             <div class="commented-user-profile-img">
@@ -172,13 +180,7 @@ $(document).ready(function () {
     });
 
 
-    let pressTimer;
-    const longPressDelay = 5000; // 1 second long press duration
 
-
-    // }).on('mouseleave', function () {
-    //     clearTimeout(pressTimer);
-    // });
 
 
     $(".posts-card-like-btn").on("click", function () {
@@ -309,7 +311,8 @@ $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
     const commentId = $('.commented-user-wrp').data('comment-id');
-
+    const replyParentId = $('.reply-on-comment').data('comment-id');
+    alert(replyParentId);
     if (commentText === '') {
         alert('Please enter a comment');
         return;
@@ -372,12 +375,11 @@ $(document).on('click', '.comment-send-icon', function () {
                             </div>
                             <button class="commented-user-reply-btn">Reply</button>
                         </div>
-                        <ul class="comment-replies"></ul>
+                        <ul class="primary-comment-replies"></ul>
                     </li>
                 `;
-
                 if (commentId) {
-                    // Append reply to the specific parent comment's reply list
+                    // Append reply to the correct comment's reply list
                     $(`li[data-comment-id="${commentId}"] .comment-replies`).append(newCommentHTML);
                 } else {
                     // Append new comment to the top-level comment list
@@ -457,24 +459,94 @@ $(document).on('click', '.commented-user-reply-btn', function () {
 
     // Find the parent comment's id (assuming it’s stored in a data attribute)
     const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
-    const ReplyparentId = $(this).closest('.reply-on-comment').data('comment-id'); // Update this according to your HTML structure
-// console.log(ReplyparentId);
+    const replyParentId = $('.reply-on-comment').data('comment-id'); // Update this according to your HTML structure
+    console.log($(this).closest('.reply-on-comment'));
     // Insert the parent's name as @ParentName into the input box
     const commentBox = $('#post_comment'); // Replace with your input box ID or class
     commentBox.val(`@${parentName} `).focus(); // Add @Name and set focus to the input box
 
     // Set the parent comment ID in a hidden input or store it in a variable
-    $('#parent_comment_id').val(parentId);  // Assuming you have a hidden input with id 'parent_comment_id'
+    $('#parent_comment_id').val(parentId);
+    $('#reply_comment_id').val(replyParentId);// Assuming you have a hidden input with id 'parent_comment_id'
 });
-let longPressDelay = 3000;
-$('.img_click').on('mousedown', function () {
-    console.log("yes")
-    var that = $(this);
-    // $('#detail-photo-modal').modal('hide');
-    pressTimer = setTimeout(() => {
+const longPressDelay = 3000; // 3 seconds for long press
+let pressTimer;
+let isLongPress = false;
 
-        // Show the button and check the checkbox when long pressed
-        that.closest('.photo-card-photos-wrp').find('.selected-photo-btn').show();
-        that.closest('.photo-card-photos-wrp').find('.form-check-input').prop('checked', true);
-    },longPressDelay);
-})
+// Function to handle the long press action
+function handleLongPress(element) {
+    console.log("Long press detected");
+
+    // Show the button and check the checkbox
+    const photoCard = element.closest('.photo-card-photos-wrp');
+    photoCard.find('.selected-photo-btn').show();
+    photoCard.find('.form-check-input').prop('checked', true);
+
+    // Check if any checkboxes are selected and toggle the visibility of the bulk select wrapper
+    toggleBulkSelectWrapper();
+}
+
+// Function to toggle visibility of the bulk-select-photo-wrp
+function toggleBulkSelectWrapper() {
+    const selectedCount = $('.form-check-input:checked').length; // Count selected checkboxes
+    const bulkSelectWrapper = $('.phototab-add-new-photos-wrp.bulk-select-photo-wrp');
+
+    if (selectedCount >= 1) {
+        bulkSelectWrapper.removeClass('d-none'); // Show the div
+        bulkSelectWrapper.find('.phototab-add-new-photos-img p').text(`${selectedCount} Photos Selected`); // Update the count
+    } else {
+        bulkSelectWrapper.addClass('d-none'); // Hide the div
+    }
+
+    // Remove the div if more than 1 image is selected
+    // if (selectedCount > 1) {
+    //     bulkSelectWrapper.addClass('d-none'); // Hide the div when more than 1 image is selected
+    // }
+}
+
+
+// Mouse down event
+$('.img_click').on('mousedown', function (e) {
+    e.preventDefault();
+    console.log("Mouse down detected");
+    isLongPress = false;
+    const that = $(this);
+
+    // Start the timer for a long press
+    pressTimer = setTimeout(() => {
+        isLongPress = true; // Set the flag for a long press
+        handleLongPress(that); // Execute the long press action
+    }, longPressDelay);
+});
+
+
+
+// On checkbox change event, toggle the visibility of the bulk select wrapper
+$('.form-check-input').on('change', function () {
+    toggleBulkSelectWrapper();
+});
+
+$('.download_img').on('click', function () {
+    // $('.form-check-input:checked').each(function () {
+    //     console.log('Checkbox selected: ', $(this).data('image-src')); // Check if data-image-src exists
+    // });
+
+    // Get selected image URLs from the checkboxes
+    const selectedImages = $('.selected_image:checked').map(function () {
+        return $(this).data('image-src'); // Get image URLs
+    }).get();
+
+    console.log("Selected Images: ", selectedImages);
+    if (selectedImages.length > 0) {
+        selectedImages.forEach((imageSrc) => {
+
+            console.log("Downloading Image: ", imageSrc);
+            const link = document.createElement('a');
+            link.href = imageSrc;
+            link.download = imageSrc.split('/').pop(); // Use the file name from the URL
+            link.click();
+        });
+    } else {
+        alert('No images selected for download!');
+    }
+});

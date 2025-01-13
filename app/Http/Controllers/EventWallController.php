@@ -520,7 +520,7 @@ class EventWallController extends Controller
                     ->get();
 
                 $eventData[] = "Number of guests : " . $numberOfGuest;
-                $eventData[] = "guests : " . $guestData;
+                $eventData['guests'] = $guestData;
             }
             $eventDetails['event_detail'] = $eventData;
         }

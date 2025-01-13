@@ -177,12 +177,12 @@ class EventGuestController extends Controller
 
 
                     $eventData[] = "Number of guests : " . $numberOfGuest;
-                    $eventData[] = "guests : " . $guestData;
+                    $eventData['guests'] = $guestData;
                 }
                 $eventDetails['event_detail'] = $eventData;
 
             }
-            // dd($eventDetails['event_detail']);
+            //  dd($eventDetails['event_detail']);
 
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
             $eventInfo['guest_view'] = $eventDetails;

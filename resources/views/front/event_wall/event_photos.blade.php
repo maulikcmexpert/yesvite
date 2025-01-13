@@ -26,7 +26,7 @@
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Wall
+                                   Photos
                                 </li>
                             </ol>
                         </nav>
@@ -120,8 +120,7 @@
                                                             alt="">
                                                     </div>
                                                     <button class="total-photos-count-btn" type="button"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#detail-photo-modal">+10</button>
+                                                    >+10</button>
                                                     <ul>
                                                         <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
                                                                 alt=""></li>
@@ -325,10 +324,11 @@
                                                             {{$photo['total_comments']}}
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
-                                                            <input class="form-check-input" type="checkbox"
+                                                            <input class="form-check-input selected_image"  data-image-src="{{ $photo['mediaData']['post_media'] }}"  type="checkbox"
                                                                 value="" id="flexCheckDefault">
                                                         </button>
                                                     </div>
+
 
                                                 </div>
                                             </div>
@@ -367,8 +367,8 @@
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
                                         </div>
-                                        <button class="add-new-photos-btn cmn-btn" type="button"
-                                            data-bs-toggle="modal" data-bs-target="#add-new-photomodal"><svg
+                                        <button class="add-new-photos-btn cmn-btn download_img" type="button"
+                                          ><svg
                                                 viewBox="0 0 16 16" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -789,6 +789,7 @@
                                 <ul>
                                     <li class="commented-user-wrp" data-comment-id="" >
                                         <input type="hidden" id="parent_comment_id" value="">
+                                        <input type="hidden" id="reply_comment_id" value="">
                                         <div class="commented-user-head">
                                             <div class="commented-user-profile">
                                                 <div class="commented-user-profile-img">
@@ -820,7 +821,7 @@
                                             <button class="commented-user-reply-btn">Reply</button>
                                         </div>
 
-                                        <ul>
+                                        <ul class="comment-replies">
                                             <li class="reply-on-comment" data-comment-id="">
                                                 <div class="commented-user-head">
                                                     <div class="commented-user-profile">
@@ -854,39 +855,7 @@
                                                     <button class="commented-user-reply-btn">Reply</button>
                                                 </div>
                                             </li>
-                                            <li class="reply-on-comment">
-                                                <div class="commented-user-head">
-                                                    <div class="commented-user-profile">
-                                                        <div class="commented-user-profile-img">
-                                                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="commented-user-profile-content">
-                                                            <h3>Angel Geidt</h3>
-                                                            <p>New York</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="posts-card-like-comment-right">
-                                                        <p>2h</p>
-                                                        <button class="posts-card-like-btn"><i
-                                                                class="fa-regular fa-heart"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="commented-user-content">
-                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa.
-                                                        Phasellus et odio a
-                                                        augue rutrum iaculis. Nulla id nisl in tortor accumsan auctor id
-                                                        vel elit.</p>
-                                                </div>
-                                                <div class="commented-user-reply-wrp">
-                                                    <div class="position-relative d-flex align-items-center gap-2">
-                                                        <button class="posts-card-like-btn"><i
-                                                                class="fa-regular fa-heart"></i></button>
-                                                        <p>121</p>
-                                                    </div>
-                                                    <button class="commented-user-reply-btn">Reply</button>
-                                                </div>
-                                            </li>
+
                                             <button class="show-comment-reply-btn">Show 3 reply</button>
                                         </ul>
 
@@ -947,7 +916,7 @@
                                             </span>
                                         </div> --}}
                                     </li>
-                                    <li class="commented-user-wrp">
+                                    {{-- <li class="commented-user-wrp">
                                         <div class="commented-user-head">
                                             <div class="commented-user-profile">
                                                 <div class="commented-user-profile-img">
@@ -1048,7 +1017,7 @@
                                             <button class="show-comment-reply-btn">Show 3 reply</button>
                                         </ul>
 
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>
