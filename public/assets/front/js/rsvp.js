@@ -276,6 +276,26 @@ $(document).ready(function () {
     toggleGuestCount();
 });
 
+
+$('#rsvpYesForm').validate({
+    rule:{
+        firstname:{
+            required:true
+        },
+        lastname:{
+            required:true
+        }
+    },
+    messages:{
+        firstname:{
+            required:"Please enter firstname"
+        },
+        lastname:{
+            required:"Please enter lastname"
+        },
+    }
+})
+
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
