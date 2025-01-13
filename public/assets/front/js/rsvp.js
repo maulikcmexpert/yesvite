@@ -317,13 +317,13 @@ $('#rsvpNoForm').validate({
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
         e.preventDefault();
+        return;
     }
 });
 $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpNoForm').valid()) {
         e.preventDefault();
-        return;  
-
+        
     }
 });
 $(document).on("click", ".yes_rsvp_btn", function (e) {
