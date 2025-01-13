@@ -2265,6 +2265,10 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
 <script>
+     @if(session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+
     const createICSFile = (
                 start,
                 end,
