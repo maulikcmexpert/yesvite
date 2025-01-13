@@ -167,7 +167,7 @@ class EventGuestController extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if (empty($eventData)) {
+                if (!empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
@@ -180,7 +180,10 @@ class EventGuestController extends Controller
                     $eventData[] = "guests : " . $guestData;
                 }
                 $eventDetails['event_detail'] = $eventData;
+
             }
+            // dd($eventDetails['event_detail']);
+
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
             $eventInfo['guest_view'] = $eventDetails;
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
