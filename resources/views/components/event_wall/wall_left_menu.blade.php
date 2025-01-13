@@ -128,11 +128,15 @@
                 <h3>Details</h3>
                 <ul>
                     <li>RSVP By: {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}</li>
-                    {{-- @if ($eventDetails['podluck'] == 1)
+                    @if (!empty($eventDetails['podluck']))
+                    @if ($eventDetails['podluck'] == 1)
                         <li>Potluck Event</li>
-                    @endif --}}
+                    @endif
+                @endif
+                @if (!empty($eventDetails['adult_only_party']))
                     @if ($eventDetails['adult_only_party'] == 1)
                         <li>Adults Only</li>
+                    @endif
                     @endif
                     <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
                 </ul>
