@@ -343,11 +343,21 @@ $('#rsvpYesForm').validate({
 //         }
 //     }
 // });
+// $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
+//     if (!$('#rsvpYesForm').valid()) {
+//         e.preventDefault();
+//     }
+// });
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
-    if (!$('#rsvpYesForm').valid()) {
-        e.preventDefault();
+    if ($(e.relatedTarget).hasClass('yes_rsvp_btn')) {
+        if (!$('#rsvpYesForm').valid()) {
+            // Prevent the modal from closing if the form is invalid
+            e.preventDefault();
+            // toastr.error("Please correct the errors before proceeding.");
+        }
     }
 });
+
 // $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
 //     if (!$('#rsvpNoForm').valid()) {
 //         e.preventDefault();
