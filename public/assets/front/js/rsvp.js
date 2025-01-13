@@ -355,6 +355,7 @@ $('#rsvpYesForm').validate({
 // });
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$('#rsvpYesForm').valid()) {
+        e.preventDefault();
        return;
     }
     e.preventDefault();
