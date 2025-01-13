@@ -2266,6 +2266,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
 <script>
 $(document).ready(function () {
+    toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
             @if (session('msg'))
                 toastr.options = {
                     "closeButton": true,
