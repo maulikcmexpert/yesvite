@@ -360,10 +360,27 @@ $('#rsvp-yes-modal').on('show.bs.modal', function () {
   }
 });
 $('#rsvp-yes-modal').on('hidden.bs.modal', function () {
+    $('#lastnameErrorLabel').text('');
+    $('#firstnameErrorLabel').text('');
+
     $('#firstname').val(initialFormData['firstname']);
     $('#lastname').val(initialFormData['lastname']);
   });
-
+// Store initial data for firstname and lastname when modal is first opened
+$('#rsvp-no-modal').on('show.bs.modal', function () {
+    if ($.isEmptyObject(initialFormData)) {
+      initialFormData['firstname'] = $('.no_firstname').val();
+      initialFormData['lastname'] = $('.no_lastname').val();
+    }
+  });
+  $('#rsvp-no-modal').on('hidden.bs.modal', function () {
+      $('#lastnameErrorLabelno').text('');
+      $('#firstnameErrorLabelno').text('');
+  
+      $('.no_firstname').val(initialFormData['firstname']);
+      $('.no_lastname').val(initialFormData['lastname']);
+    });
+    
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if ($(e.relatedTarget).hasClass('yes_rsvp_btn')) {
         if (!$('#rsvpYesForm').valid()) {
