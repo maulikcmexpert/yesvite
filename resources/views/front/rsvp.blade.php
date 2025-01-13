@@ -858,7 +858,7 @@
             <input type="hidden" id="co_host_name" class="co_host_name" value="{{$co_host_name}}"/>
             <input type="hidden" id="co_host_profile" class="co_host_profile" value="{{$co_host_profile}}"/>
             <div class="tab-pane fade" id="nav-messaging" role="tabpanel" aria-labelledby="nav-messaging-tab">
-                @if($is_cohost=="")
+                @if($is_host=="")
                     @if($rsvp_status==""||$rsvp_status==null)
                             <div class="rsvp-no-msg-wrp">
                                 <h3>Messages</h3>
