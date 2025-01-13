@@ -370,10 +370,15 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
     $("#rsvpYesForm").submit();
 });
 
-    $(document).on("click", ".no_rsvp_btn", function (e) {
-        e.preventDefault();
-        $("#rsvpNoForm").submit();
-    });
+$(document).on("click", ".no_rsvp_btn", function (e) {
+    e.preventDefault();
+
+    if (!$('#rsvpNoForm').valid()) {
+        return;
+    }
+
+    $("#rsvpNoForm").submit();
+});
 
 $(document).ready(function () {
     $("#rsvp-yes-modal").on("hidden.bs.modal", function () {
