@@ -425,7 +425,7 @@ class RsvpController extends Controller
 
             $is_host="";
             if($user_id==$eventDetail->user_id){
-                $is_host=="1";
+                $is_host="1";
             }
 
             $rsvp_status="";
