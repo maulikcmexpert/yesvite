@@ -321,16 +321,21 @@ $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
 });
 $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpNoForm').valid()) {
-        var adultsCount = parseInt($("#adults").val()) || 0;
-        var kidsCount = parseInt($("#kids").val()) || 0;
-    
-        if (adultsCount == 0 && kidsCount == 0) {
-            e.preventDefault();
-            toastr.error("Please add at least one adult or kid.");
-            return;
-        }
+        
         e.preventDefault();
-        $("#rsvpNoForm").submit();
+        $(document).on("click", ".yes_rsvp_btn", function (e) {
+            e.preventDefault();
+            var adultsCount = parseInt($("#adults").val()) || 0;
+            var kidsCount = parseInt($("#kids").val()) || 0;
+        
+            if (adultsCount == 0 && kidsCount == 0) {
+                e.preventDefault();
+                toastr.error("Please add at least one adult or kid.");
+                return;
+            }
+        
+            $("#rsvpYesForm").submit();
+        });
     }
 });
 // $(document).on("click", ".yes_rsvp_btn", function (e) {
