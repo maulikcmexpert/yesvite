@@ -335,13 +335,13 @@ $('#rsvpNoForm').validate({
             $("#lastnameErrorLabel").html(error);
         }
     },
-    // success: function (label, element) {
-    //     if ($(element).attr("name") == "firstname") {
-    //         $("#firstnameErrorLabel").html("");
-    //     } else if ($(element).attr("name") == "lastname") {
-    //         $("#lastnameErrorLabel").html("");
-    //     }
-    // }
+    success: function (label, element) {
+        if ($(element).attr("name") == "firstname") {
+            $("#firstnameErrorLabel").html("");
+        } else if ($(element).attr("name") == "lastname") {
+            $("#lastnameErrorLabel").html("");
+        }
+    }
 });
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
@@ -399,7 +399,7 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 });
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
-    if (!$('#rsvpYesForm').valid()) {
+    if (!$('#rsvpNoForm').valid()) {
         e.preventDefault();
         return;
     }
