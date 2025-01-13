@@ -378,7 +378,7 @@ class ApiContactController extends Controller
         $seenSyncIds = [];
 
         foreach ($updatedDuplicateContacts as $contact) {
-            if ($contact['isAppUser'] == "1") {
+            if ($contact['isAppUser'] == "0") {
                 if (!in_array($contact['sync_id'], $seenSyncIds)) {
                     $uniqContact[] = $contact;
                     $seenSyncIds[] = $contact['sync_id'];
