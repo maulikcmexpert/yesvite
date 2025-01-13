@@ -316,7 +316,6 @@ $('#rsvpNoForm').validate({
 })
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
-        alert();
         e.preventDefault();
     }
 });
@@ -327,6 +326,9 @@ $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
     }
 });
 $(document).on("click", ".yes_rsvp_btn", function (e) {
+    if (!$('#rsvpYesForm').valid()) {
+       return;
+    }
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
     var kidsCount = parseInt($("#kids").val()) || 0;
