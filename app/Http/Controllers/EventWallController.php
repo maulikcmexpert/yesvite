@@ -406,8 +406,8 @@ class EventWallController extends Controller
         $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
 
-        $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
-        $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
+        $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit ?? 0;
+        $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party ?? 0;
         $eventDetails['event_date'] = $eventDetail->start_date;
         $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
         // if ($eventDetail->event_schedule->isNotEmpty()) {
