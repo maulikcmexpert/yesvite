@@ -360,6 +360,9 @@ $('#rsvp-yes-modal').on('show.bs.modal', function () {
   }
 });
 $('#rsvp-yes-modal').on('hidden.bs.modal', function () {
+    $('#firstname').val('').rules('remove');
+    $('#lastname').val('').rules('remove');
+    
     $('#firstname').val(initialFormData['firstname']);
     $('#lastname').val(initialFormData['lastname']);
   });
