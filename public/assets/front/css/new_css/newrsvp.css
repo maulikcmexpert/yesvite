@@ -822,11 +822,6 @@ display:none;}
     color: var(--secondary-black) !important;
 }
 
-.rsvp-footer-btn .cmn-btn:hover{
-    border: 1px solid var(--pink) !important;
-    background-color: var(--pink) !important;
-    color: var(--white) !important;
-}
 
 .rsvp-footer-btn-wrp{
     padding: 20px 10px;
