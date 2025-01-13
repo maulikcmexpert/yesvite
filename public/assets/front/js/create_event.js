@@ -6046,3 +6046,52 @@ $("#isCheckAddress").on('click',function(){
         $("#address1").val('');
     }
 })
+
+var search_user_ajax_timer = 0;
+$(document).on('keyup','.searchCategory',function(){
+    search_name = $(this).val();
+    offset = 0;
+    search_user_ajax_timer = setTimeout(function () {
+        // $('#loader').css('display','block');
+        searchRecords(limit,offset,'all',search_name);
+        // $('#loader').css('display','none');
+    }, 750);
+})
+
+function searchRecords(lim, off,type,search = null,) {
+    var search_name = '';
+    search_name = $('.searchCategory').val();
+        if(search_name !=''){
+            offset = 0;
+        }
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: base_url+'event/getCategory',
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
+        cache: false,
+        beforeSend: function () {
+
+        },
+        success: function (html) {
+            var currentInviteCount = parseInt($('#currentInviteCount').val())
+            const coins =  $("#coins").val();
+            if(currentInviteCount >= coins){
+                $('.user_choice').prop('disabled',true);
+            }
+            if(type=="all"){
+                if(search != null){
+                    $("#YesviteUserAll").html(html);
+                }else{
+                    $("#YesviteUserAll").append(html);
+                }
+        }else{
+            $("#groupUsers").html(html);
+        }
+        busy = false;
+        setTimeout(function () {
+            $('#loader').css('display','none');
+        }, 1000);
+    },
+    });
+}
