@@ -348,6 +348,22 @@ $('#rsvpNoForm').validate({
 //         e.preventDefault();
 //     }
 // });
+
+
+let initialFormData = {};
+
+// Store initial data for firstname and lastname when modal is first opened
+$('#rsvp-yes-modal').on('show.bs.modal', function () {
+  if ($.isEmptyObject(initialFormData)) {
+    initialFormData['firstname'] = $('#firstname').val();
+    initialFormData['lastname'] = $('#lastname').val();
+  }
+});
+$('#rsvp-yes-modal').on('hidden.bs.modal', function () {
+    $('#firstname').val(initialFormData['firstname']);
+    $('#lastname').val(initialFormData['lastname']);
+  });
+
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if ($(e.relatedTarget).hasClass('yes_rsvp_btn')) {
         if (!$('#rsvpYesForm').valid()) {
