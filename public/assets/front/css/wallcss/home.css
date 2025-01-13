@@ -333,6 +333,7 @@ main {
   border: none !important;
   border-bottom: 3px solid transparent !important;
   padding: 10px 16px !important;
+  text-align: center;
 }
 
 .event-center-tabs-main .nav-tabs .nav-link.active {
@@ -371,11 +372,25 @@ main {
 .wall-main-story-item .wall-story-item-img {
   width: 100%;
   max-width: 60px;
+  min-width: 60px;
   height: 60px;
   border-radius: 50%;
   border: 2px solid var(--border);
   margin: 0px auto;
   position: relative;
+}
+
+.wall-main-story-item .wall-story-item-img h5{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--SFProDisplay-Medium);
+  font-size: 18px;
+  line-height: 22.4px;
+  color: var(--white);
 }
 
 .wall-main-story-item .wall-story-item-img img {
@@ -404,6 +419,11 @@ main {
   left: 0px;
   opacity: 0;
   cursor: pointer;
+}
+
+.wall-add-story-btn i{
+  background: var(--white);
+  border-radius: 50%;
 }
 
 .wall-main-story-wrp ul {
@@ -478,6 +498,7 @@ main {
   line-height: normal;
   color: var(--secondary-black);
   width: 100%;
+  margin-bottom: 10px !important;
 }
 
 .wall-creat-photo-poll-wrp {
@@ -604,8 +625,9 @@ main {
 }
 
 .create-post-textcontent textarea:focus {
-  outline: none;
-  box-shadow: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 .create-post-textcontent textarea::placeholder {
   font-family: var(--SFProDisplay-Regular);
@@ -625,6 +647,7 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  padding: 0px !important;
 }
 
 .create-post-modal .modal-footer {
@@ -1165,10 +1188,10 @@ main {
 }
 
 .posts-card-head-right{
-  display: inline-flex;
-  justify-content: end;
-  flex-direction: column;
-  align-items: end;
+  display: inline-flex !important;
+  justify-content: end !important;
+  flex-direction: column !important;
+  align-items: end !important;
 }
 
 .post-card-dropdown.upcoming-card-dropdown .dropdown-menu{
@@ -1609,7 +1632,7 @@ main {
 
 .poll-click-wrp{
   border: 1px solid var(--border);
-  padding: 10px 20px;
+  padding: 10px 0px;
   height: 45px;
   border-radius: 10px;
   position: relative;
@@ -1665,6 +1688,13 @@ main {
   border-radius: 6px;
 }
 
+.poll-progress-one:nth-child(even){
+  border: 1px solid #FEA3B8 !important;
+}
+
+.poll-progress-one:nth-child(odd) .poll-click-progress {
+  background-color: var(--border) !important;
+}
 
 #reaction-modal .modal-content{
   max-width: 520px;
@@ -1675,7 +1705,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding: 10px 10px;
+  padding: 10px 10px !important;
 }
 
 .reactions-info-main .nav-tabs .nav-link img{
@@ -1724,6 +1754,7 @@ main {
   max-height: 400px;
   overflow: hidden;
   overflow-y: scroll;
+  padding-bottom: 50px;
 }
 
 
@@ -1979,7 +2010,7 @@ main {
   padding-bottom: 0px;
 }
 
-/* ===Responsive=== */
+/* ===Responsive===
 @media only screen and (max-width: 1399px) {
   .hosted-by-template-slider-img {
     width: 100%;
@@ -1990,8 +2021,8 @@ main {
     flex-basis: 100%;
   }
   .hosted-by-date-time{
-    flex-direction: column;
-    align-items: start  ;
+    flex-direction: column !important;
+    align-items: start  !important;
   }
   .hosted-by-date-time-left::before{
     display: none;
@@ -2260,7 +2291,7 @@ main {
     height: 600px;
   }
 
-}
+} */
 
 /* ===Gusets=== */
 .main-right-guests-head{
@@ -2789,6 +2820,10 @@ main {
     --bs-dropdown-link-active-bg: transparent !important;
   }
 
+  .cmn-modal .modal-dialog{
+    height: auto !important;
+    margin-top: auto !important;
+  }
 
   /* ===Responsive=== */
   @media only screen and (max-width: 1399px) {
@@ -2801,8 +2836,8 @@ main {
       flex-basis: 100%;
     }
     .hosted-by-date-time{
-      flex-direction: column;
-      align-items: start  ;
+      flex-direction: column !important;
+      align-items: start  !important;
     }
     .hosted-by-date-time-left::before{
       display: none;
@@ -2811,7 +2846,7 @@ main {
       flex-direction: column;
     }
     .hosted-by-event-stats-inner{
-      width: 100%;
+      width: 100% !important;
     }
     .guest-attending-wrp{
       flex-direction: column;
@@ -3091,8 +3126,8 @@ main {
 
   @media only screen and (max-width: 424px) {
     .event-center-tabs-main .nav-tabs .nav-link{
-      font-size: 14px;
-      padding: 10px 10px;
+      font-size: 14px !important;
+      padding: 10px 10px !important;
     }
     .event-center-title button{
       max-width: 24px;

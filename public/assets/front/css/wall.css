@@ -208,23 +208,25 @@
 
 /* Option Button */
 .option-button {
-    flex: 1;
-    padding: 10px;
+    border: none;
+    height: 100%;
+    padding: 0px 10px;
     border-radius: 10px;
-    background-color: #f1f5fb;
-    text-align: center;
-    color: #4a4a4a;
-    font-size: 14px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
+    width: 100%;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: 23.8px;
+    color: var(--secondary-black);
+    z-index: 10;
+    background-color: transparent;
 }
 
-.option-button:hover {
-    background-color: #e6ebf5;
+.option-button span{
+    line-height: normal;
 }
 
 /* Icons */
