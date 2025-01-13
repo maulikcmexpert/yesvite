@@ -1436,6 +1436,7 @@ label.error {
     position: fixed;
     bottom: 0;
     width: 100%;
+    background-color: var(--white);
 }
 
 .rsvp-wrp .rsvp-slider{
