@@ -1658,6 +1658,7 @@
                                                     <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" autocomplete="off" class="form-control inputText firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
+                                                <label id="firstname-error" class="error" for="firstname" style=""></label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
