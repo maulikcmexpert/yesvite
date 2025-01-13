@@ -423,6 +423,10 @@ class RsvpController extends Controller
                 $user_lastname=($user_email->lastname!=""||$user_email->lastname!=null)?$user_email->lastname:"";
             }
 
+            $is_host="";
+            if($user_id==$eventDetail->user_id){
+                $is_host=="1";
+            }
 
             $rsvp_status="";
             if($user_id!=$eventDetail->user_id){
@@ -547,7 +551,8 @@ class RsvpController extends Controller
                 'messages',
                 'userName',
                 'user_firstname',
-                'user_lastname'
+                'user_lastname',
+                'is_host'
             ));
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {
