@@ -299,7 +299,7 @@
                                                     </div>
 
                                                     <div class="photo-card-photos-wrp imagePress">
-                                                        <div class="photo-card-photos-main-img open_photo_model"  data-bs-toggle="modal"
+                                                        <div class="photo-card-photos-main-img open_photo_model img_click"  data-bs-toggle="modal"
                                                         data-bs-target="#detail-photo-modal"  data-post-id="{{ $photo['id'] }}"  data-event-id="{{ $photo['event_id'] }}" >
                                                             @if (isset($photo['mediaData']) && $photo['mediaData']['type'] === 'image')
                                                             <img src="{{ $photo['mediaData']['post_media'] }}" alt="Post Image">
@@ -767,7 +767,7 @@
                                 <h6  id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right">
-                                <button class="posts-card-like-btn" id="likeButton" data-event-id="{{$event}}" data-event-post-id="{{ $photo['id'] }} " data-user-id="{{ $login_user_id }}"><i class="fa-regular fa-heart"></i></button>
+                                <button class="posts-card-like-btn likeModel" id="likeButton" data-event-id="" data-parent-id=""  data-event-post-id="" data-user-id="{{ $login_user_id }}"><i class="fa-regular fa-heart"></i></button>
                                 <button class="posts-card-comm show-comments-btn">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -787,7 +787,8 @@
 
                             <div class="posts-card-show-all-comments-inner">
                                 <ul>
-                                    <li class="commented-user-wrp">
+                                    <li class="commented-user-wrp" data-comment-id="" >
+                                        <input type="hidden" id="parent_comment_id" value="">
                                         <div class="commented-user-head">
                                             <div class="commented-user-profile">
                                                 <div class="commented-user-profile-img">
@@ -985,8 +986,8 @@
             </div>
             <div class="modal-footer">
                 <div class="posts-card-main-comment all-comments-textbox">
-                    <input type="text" class="form-control" id="text" placeholder="Add Comment">
-                    <span class="comment-send-icon">
+                    <input type="text" class="form-control" id="post_comment" placeholder="Add Comment">
+                    <span class="comment-send-icon send_comment">
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
