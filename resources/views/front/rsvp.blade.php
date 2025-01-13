@@ -1652,13 +1652,13 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" value="{{$firstname}}" id="firstname" autocomplete="off" class="form-control inputText firstname" maxlength="50" >
+                                                    <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" autocomplete="off" class="form-control inputText firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" value="{{$lastname}}" id="lastname" autocomplete="off" class="form-control inputText lastname" maxlength="50" >
+                                                    <input type="text"  name="lastname" value="{{$user_lastname}}" id="lastname" autocomplete="off" class="form-control inputText lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                             </div>
@@ -1694,7 +1694,7 @@
                                     <div class="rsvp-msgbox">
                                         <h5>Message</h5>
                                         <div class="input-form">
-                                            <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" message=""  maxlength="50"></textarea>
+                                            <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" message=""  maxlength="200"></textarea>
                                             <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -1786,13 +1786,13 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" value="{{$firstname}}" id="firstname" class="form-control inputText firstname" autocomplete="off" maxlength="50" >
+                                            <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" class="form-control inputText firstname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" value="{{$lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
+                                            <input type="text" name="lastname" value="{{$user_lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
                                     </div>
@@ -1807,7 +1807,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" required=""  maxlength="50"></textarea>
+                                    <textarea class="form-control inputText message_to_host" id="message_to_host" autocomplete="off" name="message_to_host" required=""  maxlength="200"></textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message to send with your RSVP</label>
                                 </div>
                                 <div class="d-flex align-items-center">
