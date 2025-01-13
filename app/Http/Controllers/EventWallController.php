@@ -524,7 +524,7 @@ class EventWallController extends Controller
             }
             $eventDetails['event_detail'] = $eventData;
         }
-        $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
+        $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit ?? 0;
         $eventInfo['guest_view'] = $eventDetails;
         $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
 
