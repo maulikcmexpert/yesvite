@@ -327,6 +327,7 @@
                                                     @endif
                                                   </div>
                                                 
+                                                @if($rsvp_status=="1")
                                                   @if($guest_data['rsvp_status']=="1")
                                                   <div class="sucess-rsvp-wrp">
                                                     <div class="d-flex align-items-center">
@@ -417,9 +418,10 @@
                                                     </div>
                                                 </div>
                                                   <div class="no-reply">
-                                                    <h5>NO REPLY</h5>
+                                                    <h5>RSVP Not Received</h5>
                                                   </div>
                                                   @endif
+                                            @endif
                                                   <div class="rsvp-guest-user-replay">
                                                         @if($guest_data['message_to_host']!="")
                                                             <h6>“ {{$guest_data['message_to_host']}} “</h6>
@@ -545,7 +547,7 @@
                                                     </div>
                                                 </div>
                                                   <div class="no-reply">
-                                                    <h5>NO REPLY</h5>
+                                                    <h5>RSVP Not Received</h5>
                                                   </div>
                                                   @endif
 
@@ -1922,7 +1924,7 @@
                             </div>
                             @else
                             <div class="no-reply">
-                                <h5>NO REPLY</h5>
+                                <h5>RSVP Not Received</h5>
                               </div>
                             @endif
                             <div class="rsvp-guest-user-replay">
@@ -1977,7 +1979,7 @@
                         </div>
                         @else
                         <div class="no-reply">
-                            <h5>NO REPLY</h5>
+                            <h5>RSVP Not Received</h5>
                           </div>
                         @endif
                         <div class="rsvp-guest-user-replay">
