@@ -164,7 +164,7 @@ $(document).ready(function () {
     //     window.open(googleCalendarUrl, "_blank");
     // });
     $("#openGoogle").on("click", function () {
-        return;
+        // return;
         const eventDate = $("#eventDate").val();
         const eventEndDate = $("#eventEndDate").val();
         const eventTime = $("#eventTime").val();
@@ -233,7 +233,7 @@ $(document).ready(function () {
         const isAndroid = /Android/i.test(navigator.userAgent);
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-        if (isAndroid) {
+       
             // Default to Google Calendar URL
             const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
                 eventDetails.title
@@ -242,20 +242,6 @@ $(document).ready(function () {
             }&sf=true&output=xml`;
 
             window.open(googleCalendarUrl);
-        } else if (isIOS) {
-            document.querySelector(".author-title").appendChild(downloadLink);
-
-            // document.body.removeChild(downloadLink);
-        } else {
-            // Default to Google Calendar URL
-            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-                eventDetails.title
-            )}&dates=${eventDetails.start}/${
-                eventDetails.end
-            }&sf=true&output=xml`;
-
-            window.open(googleCalendarUrl);
-        }
     });
 
     function toggleGuestCount() {
