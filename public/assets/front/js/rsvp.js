@@ -296,9 +296,16 @@ $('#rsvpYesForm').validate({
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "firstname") {
-            error.appendTo("#firstname-error");
+            $("#firstnameErrorLabel").html(error);
         } else if (element.attr("name") == "lastname") {
-            error.appendTo("#lastname-error");
+            $("#lastnameErrorLabel").html(error);
+        }
+    },
+    success: function (label, element) {
+        if ($(element).attr("name") == "firstname") {
+            $("#firstnameErrorLabel").html("");
+        } else if ($(element).attr("name") == "lastname") {
+            $("#lastnameErrorLabel").html("");
         }
     }
 });
