@@ -1431,6 +1431,13 @@ label.error {
     overflow: hidden;
     overflow-y: scroll;
 }
+
+.rsvp-yes-modal .modal-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 .rsvp-wrp .rsvp-slider{
     border-radius: 10px;
 }
