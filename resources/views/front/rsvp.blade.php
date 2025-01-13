@@ -1665,6 +1665,8 @@
                                                     <input type="text"  name="lastname" value="{{$user_lastname}}" id="lastname" autocomplete="off" class="form-control inputText lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
+                                                <label id="lastname-error" class="error" for="lastname" style=""></label>
+
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="input-form">
@@ -1799,12 +1801,16 @@
                                             <input type="text" name="lastname" value="{{$user_lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
+                                        <label id="firstname-error" class="error" for="firstname" style=""></label>
+
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
                                             <input type="email" name="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
                                             <label for="Fname" class="form-label input-field floating-label">Email Address</label>
                                         </div>
+                                        <label id="lastname-error" class="error" for="lastname" style=""></label>
+
                                     </div>
                                 </div>
                             </div>

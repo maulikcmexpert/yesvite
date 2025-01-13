@@ -296,12 +296,34 @@ $('#rsvpYesForm').validate({
     }
 })
 
+$('#rsvpNoForm').validate({
+    rules:{
+        firstname:{
+            required:true
+        },
+        lastname:{
+            required:true
+        }
+    },
+    messages:{
+        firstname:{
+            required:"Please enter firstname"
+        },
+        lastname:{
+            required:"Please enter lastname"
+        },
+    }
+})
 $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpYesForm').valid()) {
         e.preventDefault();
     }
 });
-
+$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
+    if (!$('#rsvpNoForm').valid()) {
+        e.preventDefault();
+    }
+});
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
