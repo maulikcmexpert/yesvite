@@ -366,11 +366,11 @@ $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
         }
     }
 });
-$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
-    if (!$('#rsvpNoForm').valid()) {
-        e.preventDefault();
-    }
-});
+// $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
+//     if (!$('#rsvpNoForm').valid()) {
+//         e.preventDefault();
+//     }
+// });
 
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$('#rsvpYesForm').valid()) {
