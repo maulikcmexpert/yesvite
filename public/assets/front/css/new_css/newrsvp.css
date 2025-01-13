@@ -1156,6 +1156,11 @@ display:none;}
     justify-content: center;
 }
 
+label.error {
+    color: #ff0033 !important;
+    font-size: 14px !important;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
