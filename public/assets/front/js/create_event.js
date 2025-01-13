@@ -6058,37 +6058,24 @@ $(document).on('keyup','.searchCategory',function(){
     }, 750);
 })
 
-function searchRecords(lim, off,type,search = null,) {
-    var search_name = '';
-    search_name = $('.searchCategory').val();
-        if(search_name !=''){
-            offset = 0;
-        }
+function searchRecords(lim, off, type, search = null) {
+    var search_name = $('.searchCategory').val();
+    if (search_name !== '') {
+        off = 0;
+    }
     $.ajax({
         type: "GET",
-        async: false,
-        url: base_url+'event/getCategory',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
-        cache: false,
-        beforeSend: function () {
-
+        url: base_url + 'event/getCategory',
+        data: {
+            search_user: search_name,
         },
+        cache: false,
         success: function (html) {
-            var currentInviteCount = parseInt($('#currentInviteCount').val())
-            const coins =  $("#coins").val();
-            if(currentInviteCount >= coins){
-                $('.user_choice').prop('disabled',true);
-            }
-           
-            if(search != null){
-                $("#designCategory").html(html);
-            }else{
-                $("#designCategory").append(html);
-            }
-        
-        setTimeout(function () {
-            $('#loader').css('display','none');
-        }, 1000);
-    },
+            console.log(html);
+            $(".designCategory").html(html.view);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching data:", error)
+        }
     });
 }
