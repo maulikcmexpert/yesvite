@@ -277,38 +277,38 @@ $(document).ready(function () {
 });
 
 
-$('#rsvpYesForm').validate({
-    rules: {
-        firstname: {
-            required: true
-        },
-        lastname: {
-            required: true
-        }
-    },
-    messages: {
-        firstname: {
-            required: "Please enter firstname"
-        },
-        lastname: {
-            required: "Please enter lastname"
-        }
-    },
-    errorPlacement: function (error, element) {
-        if (element.attr("name") == "firstname") {
-            $("#firstnameErrorLabel").html(error);
-        } else if (element.attr("name") == "lastname") {
-            $("#lastnameErrorLabel").html(error);
-        }
-    },
-    success: function (label, element) {
-        if ($(element).attr("name") == "firstname") {
-            $("#firstnameErrorLabel").html("");
-        } else if ($(element).attr("name") == "lastname") {
-            $("#lastnameErrorLabel").html("");
-        }
-    }
-});
+// $('#rsvpYesForm').validate({
+//     rules: {
+//         firstname: {
+//             required: true
+//         },
+//         lastname: {
+//             required: true
+//         }
+//     },
+//     messages: {
+//         firstname: {
+//             required: "Please enter firstname"
+//         },
+//         lastname: {
+//             required: "Please enter lastname"
+//         }
+//     },
+//     errorPlacement: function (error, element) {
+//         if (element.attr("name") == "firstname") {
+//             $("#firstnameErrorLabel").html(error);
+//         } else if (element.attr("name") == "lastname") {
+//             $("#lastnameErrorLabel").html(error);
+//         }
+//     },
+//     success: function (label, element) {
+//         if ($(element).attr("name") == "firstname") {
+//             $("#firstnameErrorLabel").html("");
+//         } else if ($(element).attr("name") == "lastname") {
+//             $("#lastnameErrorLabel").html("");
+//         }
+//     }
+// });
 
 
 // $('#rsvpNoForm').validate({
@@ -360,12 +360,37 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
     var kidsCount = parseInt($("#kids").val()) || 0;
+    var firstname=$('.yes_firstname').val();
+    var lastname=$('.yes_lastname').val();
+    
+    if(firstname==""&&lastname==""){
+        
+        $('#firstnameErrorLabel').text('Please enter firstname');
+        $('#lastnameErrorLabel').text('Please enter lastname');
+        return;
+    }else{
+        $('#firstnameErrorLabel').text('');
+        $('#lastnameErrorLabel').text('');
+    }
+    if(firstname==""){
+        $('#firstnameErrorLabel').text('Please enter firstname');
+        return;
+    }else{
+        $('#firstnameErrorLabel').text('');
+    }
+    if(lastname==""){
+        $('#lastnameErrorLabel').text('Please enter lastname');
+        return;
+    }else{
+        $('#lastnameErrorLabel').text('');
+    }
 
     if (adultsCount == 0 && kidsCount == 0) {
         e.preventDefault();
         toastr.error("Please add at least one adult or kid.");
         return;
     }
+
 
     $("#rsvpYesForm").submit();
 });

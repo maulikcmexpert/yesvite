@@ -1655,14 +1655,14 @@
                                         <div class="rsvp-input-form row">
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" autocomplete="off" class="form-control inputText firstname" maxlength="50" >
+                                                    <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" autocomplete="off" class="form-control inputText firstname yes_firstname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                                 </div>
                                                 <label id="firstnameErrorLabel" class="error" for="firstname"></label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="input-form">
-                                                    <input type="text"  name="lastname" value="{{$user_lastname}}" id="lastname" autocomplete="off" class="form-control inputText lastname" maxlength="50" >
+                                                    <input type="text"  name="lastname" value="{{$user_lastname}}" id="lastname" autocomplete="off" class="form-control inputText lastname yes_lastname" maxlength="50" >
                                                     <label for="Fname" class="form-label input-field floating-label">Last Name</label>
                                                 </div>
                                                 <label id="lastnameErrorLabel" class="error" for="lastname"></label>
@@ -1792,18 +1792,18 @@
                                 <div class="rsvp-input-form row">
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" class="form-control inputText firstname" autocomplete="off" maxlength="50" >
+                                            <input type="text" name="firstname" value="{{$user_firstname}}" id="firstname" class="form-control inputText firstname no_firstname" autocomplete="off" maxlength="50" >
                                             <label for="Fname" class="form-label input-field floating-label">First Name</label>
                                         </div>
-                                        <label id="firstnameErrorLabel" class="error" for="firstname"></label>
+                                        <label id="firstnameErrorLabelno" class="error" for="firstname"></label>
 
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input-form">
-                                            <input type="text" name="lastname" value="{{$user_lastname}}" id="lastname" class="form-control inputText lastname" autocomplete="off" maxlength="50" >
+                                            <input type="text" name="lastname" value="{{$user_lastname}}" id="lastname" class="form-control inputText lastname no_lastname" autocomplete="off" maxlength="50" >
                                             <label for="Lname" class="form-label input-field floating-label">Last Name</label>
                                         </div>
-                                        <label id="lastnameErrorLabel" class="error" for="lastname"></label>
+                                        <label id="lastnameErrorLabelno" class="error" for="lastname"></label>
 
                                     </div>
                                     <div class="col-lg-12">
