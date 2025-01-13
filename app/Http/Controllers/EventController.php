@@ -2377,18 +2377,31 @@ class EventController extends Controller
         }
     }
     public function getCategory(Request $request)
-    {
-        $search_user = $request->search_user;
-        $design_category = EventDesignCategory::with(['subcategory' => function ($query,$search_user) {
-            $query->select('*') ->where('subcategory_name', 'LIKE', "%$search_user%")->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
-                $que->select('*');
-            }]);
-        }])
-            ->where('category_name', 'LIKE', "%$search_user%")
-            ->orderBy('id', 'DESC')
-            ->get();
+{
+    $search_user = $request->search_user;
 
+    $design_category = EventDesignCategory::with([
+        'subcategory' => function ($query) use ($search_user) {
+            $query->select('*')
+                ->where('subcategory_name', 'LIKE', "%$search_user%")
+                ->whereHas('textdatas', function ($ques) {})
+                ->with([
+                    'textdatas' => function ($que) {
+                        $que->select('*');
+                    }
+                ]);
+        }
+    ])
+    ->where('category_name', 'LIKE', "%$search_user%")
+    ->orderBy('id', 'DESC')
+    ->get();
 
-        return response()->json(view('front.event.guest.get_category', compact('design_category'))->render());
-    }
+//   dd($design_category);
+    return response()->json([
+        'view' => view('front.event.guest.get_category', compact('design_category'))->render(),
+        'success' => true
+    ]);
+   
+}
+
 }
