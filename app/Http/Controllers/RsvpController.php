@@ -553,6 +553,7 @@ class RsvpController extends Controller
 
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
+            dd($e);
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
