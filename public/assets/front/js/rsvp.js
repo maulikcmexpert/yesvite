@@ -350,7 +350,7 @@ $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
 });
 $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
     if (!$('#rsvpNoForm').valid()) {
-        return;
+        e.preventDefault();
     }
 });
 $(document).on("click", ".yes_rsvp_btn", function (e) {
