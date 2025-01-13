@@ -1119,7 +1119,6 @@ function sendNotification($notificationType, $postData)
     }
 
     if ($notificationType == 'sent_rsvp') {
-        dd(1);
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
 
@@ -1177,6 +1176,7 @@ function sendNotification($notificationType, $postData)
                         send_notification_FCM_and($deviceData->device_token, $notificationData);
                     }
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
+                        dd(1);
 
                         $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
                         $eventData = [
