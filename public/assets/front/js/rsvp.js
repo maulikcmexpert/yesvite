@@ -348,14 +348,14 @@ $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
         e.preventDefault();
     }
 });
-$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
-    if (!$('#rsvpNoForm').valid()) {
-        e.preventDefault();
-    }else{
-        $("#rsvpNoForm").submit();
+// $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
+//     if (!$('#rsvpNoForm').valid()) {
+//         e.preventDefault();
+//     }else{
+//         $("#rsvpNoForm").submit();
 
-    }
-});
+//     }
+// });
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$('#rsvpYesForm').valid()) {
        return;
@@ -373,10 +373,10 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
     $("#rsvpYesForm").submit();
 });
 
-// $(document).on("click", ".no_rsvp_btn", function (e) {
-//     e.preventDefault();
-//     $("#rsvpNoForm").submit();
-// });
+    $(document).on("click", ".no_rsvp_btn", function (e) {
+        e.preventDefault();
+        $("#rsvpNoForm").submit();
+    });
 
 $(document).ready(function () {
     $("#rsvp-yes-modal").on("hidden.bs.modal", function () {
