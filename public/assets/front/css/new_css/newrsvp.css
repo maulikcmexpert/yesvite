@@ -822,6 +822,25 @@ display:none;}
     color: var(--secondary-black) !important;
 }
 
+.rsvp-footer-btn .cmn-btn{
+    width: 100%;
+    max-width: 150px;
+    min-width: 150px;
+    height: 48px;
+    padding: 0px;
+}
+
+.rsvp-footer-btn .cmn-btn{
+    border: 1px solid var(--border) !important;
+    background-color: transparent !important;
+    color: var(--secondary-black) !important;
+}
+
+.rsvp-footer-btn .cmn-btn:hover{
+    border: 1px solid var(--pink) !important;
+    background-color: var(--pink) !important;
+    color: var(--white) !important;
+}
 
 .rsvp-footer-btn-wrp{
     padding: 20px 10px;
