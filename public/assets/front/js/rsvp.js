@@ -401,6 +401,7 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
 
 
     $("#rsvpYesForm").submit();
+    $('rsvp-yes-modal').modal('hide');
 });
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
