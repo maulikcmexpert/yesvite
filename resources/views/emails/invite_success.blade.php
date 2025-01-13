@@ -68,7 +68,7 @@
                 <tr>
                     <td>
                         <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <button style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px;width: 100%;max-width: 250px;text-transform: capitalize;">View Invitation</button>
+                            <a href="{{route('rsvp', ['userId' => encrypt($eventData['owner_id']), 'eventId' => encrypt($eventData['event_id'])])}}" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px;width: 100%;max-width: 250px;text-transform: capitalize;">View Invitation</a>
                         </div>
                     </td>
                 </tr>

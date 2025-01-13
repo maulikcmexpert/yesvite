@@ -138,6 +138,8 @@ function sendNotification($notificationType, $postData)
             $event_time =  $event->event_schedule->first()->start_time;
         }
         $eventData = [
+            'event_id'=>$postData['event_id'],
+            'owner_id'=>$event->user_id,
             'host_email' => $senderData->email,
             'event_name' => $event->event_name,
             'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
