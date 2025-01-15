@@ -1787,8 +1787,7 @@ class EventController extends Controller
     {
 
         $users = $request->users;
-        // dd($users);
-
+     
         $userIds = session()->get('user_ids', []);
         foreach ($users as $value) {
             $id = $value['id'];
