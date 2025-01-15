@@ -5157,13 +5157,18 @@ function displayRecords(lim, off,type,search = null,) {
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
+                    busyyesvite = false;
+
                 }else{
                     $("#YesviteUserAll").append(html);
+                    busyyesvite = false;
+
                 }
         }else{
             $("#groupUsers").html(html);
         }
         busyyesvite = false;
+        
         setTimeout(function () {
             $('#loader').css('display','none');
         }, 1000);
