@@ -1640,8 +1640,8 @@ class EventListController extends Controller
                     $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                     $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                     $eventDetail['host_name'] = $value->event->hosted_by;
-                    $eventDetail['host_firstname'] = $value->user->firstname;
-                    $eventDetail['host_lastname'] = $value->user->lastname;
+                    $eventDetail['host_firstname'] = $value->event->user->firstname;
+                    $eventDetail['host_lastname'] = $value->event->user->lastname;
                     $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
                     $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                     $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
@@ -1813,8 +1813,8 @@ class EventListController extends Controller
                     $eventDetail['event_potluck'] = $value->event->event_settings->podluck;
                     $eventDetail['adult_only_party'] = $value->event->event_settings->adult_only_party;
                     $eventDetail['host_name'] = $value->event->hosted_by;
-                    $eventDetail['host_firstname'] = $value->user->firstname;
-                    $eventDetail['host_lastname'] = $value->user->lastname;
+                    $eventDetail['host_firstname'] = $value->event->user->firstname;
+                    $eventDetail['host_lastname'] = $value->event->user->lastname;
                     $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
                     $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                     $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
