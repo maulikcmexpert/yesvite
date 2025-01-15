@@ -116,6 +116,7 @@
     padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100vh;
+    position: relative;
 }
 
 .new-event-sidebar-menu ul {
@@ -1248,6 +1249,15 @@
     cursor: pointer;
 }
 
+
+/* ======= sideguest-add ===== */
+.guest-wrp.side-guest-wrp{
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    bottom: 0;
+}
 
 
 /* ======Responsiveness===== */
