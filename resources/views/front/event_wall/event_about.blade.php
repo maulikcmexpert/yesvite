@@ -377,31 +377,31 @@
                                                 <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                     alt="schedule">
                                             </span>
-                                            @foreach ($eventDetails['event_schedule'] as $schedule)
-                                                @php
-                                                    $i = 0;
-                                                    $colorClass = $series[$colorIndex % count($series)];
-                                                    $colorIndex++;
-                                                @endphp
-                                                <div>
-                                                    <div class="shedule-manage-timing">
-                                                        <div class="shedule-timing">
-                                                            <h6>{{ $schedule['start_time'] }}</h6>
-                                                        </div>
-                                                        <div class="shedule-box {{ $colorClass }}">
-                                                            <div class="shedule-box-left">
-                                                                <h6>{{ $schedule['activity_title'] }}</h6>
-                                                                <span>{{ $schedule['start_time'] }} -
-                                                                    {{ $schedule['end_time'] }}</span>
+                                            <div>
+                                                @foreach ($eventDetails['event_schedule'] as $schedule)
+                                                    @php
+                                                        $i = 0;
+                                                        $colorClass = $series[$colorIndex % count($series)];
+                                                        $colorIndex++;
+                                                    @endphp
+                                                        <div class="shedule-manage-timing">
+                                                            <div class="shedule-timing">
+                                                                <h6>{{ $schedule['start_time'] }}</h6>
                                                             </div>
-                                                            <span class="hrs ms-auto">1h</span>
+                                                            <div class="shedule-box {{ $colorClass }}">
+                                                                <div class="shedule-box-left">
+                                                                    <h6>{{ $schedule['activity_title'] }}</h6>
+                                                                    <span>{{ $schedule['start_time'] }} -
+                                                                        {{ $schedule['end_time'] }}</span>
+                                                                </div>
+                                                                <span class="hrs ms-auto">1h</span>
+                                                            </div>
+                                                            <img src="{{ asset('assets/front/img/timing-line.svg') }}"
+                                                                alt="timing">
                                                         </div>
-                                                        <img src="{{ asset('assets/front/img/timing-line.svg') }}"
-                                                            alt="timing">
-                                                    </div>
+                                                @endforeach
+                                            </div>
 
-                                                </div>
-                                            @endforeach
                                     </div>
                                     @endif
 
@@ -1802,7 +1802,6 @@
                                 <div class="input-form">
                                     <input type="radio" id="option5" name="rsvp_status" value="1"
                                         {{ isset($rsvpSent['rsvp_status']) && $rsvpSent['rsvp_status'] == 1 ? 'checked' : '' }}>
-                                    <label for="option5">
                                         <label for="option5">
                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">

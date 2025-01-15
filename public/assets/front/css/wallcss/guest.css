@@ -100,8 +100,22 @@
 
 .guest-user-list .guest-img{
    width: 44px;
+   min-width: 44px;
    height: 44px;
    margin-right: 16px;
+}
+
+.guest-user-list .guest-img h5{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 15px !important;
+    line-height: normal !important;
+    border-radius: 50%;
 }
 
 .guest-user-list .guest-img img{
@@ -114,6 +128,7 @@
 .guest-list-data{
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .guest-list-data .guest-name{
@@ -126,6 +141,7 @@
     font-size: 16px;
     color: var(--lightgreay);
     font-family: var(--SFProDisplay-Regular);
+    word-break: break-all;
 }
 
 .guest-list-data .edit-btn{
@@ -133,6 +149,14 @@
     border: none;
     box-shadow: none;
     background-color: transparent;
+}
+
+.guest-list-data .edit-btn, .guest-list-data .msg-btn{
+    padding: 0px !important;
+    width: 100%;
+    max-width: 20px;
+    min-width: 20px;
+    height: 20px;
 }
 
 .sucess-rsvp-wrp{
@@ -285,8 +309,22 @@
 
 .guest-rsvp-head .rsvp-img{
     width: 56px;
+    min-width: 56px;
     height: 56px;
     margin: 0 auto 10px;
+}
+
+.guest-rsvp-head .rsvp-img h5{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 15px !important;
+    line-height: normal !important;
+    border-radius: 50%;
 }
 
 .guest-rsvp-head .rsvp-img img{

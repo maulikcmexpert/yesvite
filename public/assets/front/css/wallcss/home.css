@@ -21,6 +21,19 @@ main {
   border-radius: 50%;
 }
 
+.hosted-by-info-img h5{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: var(--SFProDisplay-Medium) !important;
+  font-size: 15px !important;
+  line-height: normal !important;
+}
+
 .hosted-by-info-content h3 {
   font-family: var(--SFProDisplay-Medium);
   font-size: 15px;
@@ -334,12 +347,14 @@ main {
   border-bottom: 3px solid transparent !important;
   padding: 10px 16px !important;
   text-align: center;
+  border-radius: 0px !important;
 }
 
 .event-center-tabs-main .nav-tabs .nav-link.active {
   border: none !important;
   border-bottom: 3px solid var(--pink) !important;
   color: var(--secondary-black) !important;
+  border-radius: 0px !important;
 }
 
 .wall-main-story-item {
@@ -1904,6 +1919,20 @@ main {
   max-width: 40px;
   min-width: 40px;
   height: 40px;
+  border-radius: 50%;
+}
+
+.guests-listing-left .posts-card-head-left-img h5{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: var(--SFProDisplay-Medium) !important;
+  font-size: 15px !important;
+  line-height: normal !important;
+  border-radius: 50%;
 }
 
 .guests-listing-left .posts-card-head-left-content h3 {
