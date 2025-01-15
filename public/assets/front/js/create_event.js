@@ -16,7 +16,48 @@ var selected_dataId = '';
 var selected_profile_or_text = "";
 var selected_prefer_by = '';
 $(document).ready(function () {
+   
 
+    function getTimeZoneAbbreviation() {
+        const date = new Date();
+        const offset = -date.getTimezoneOffset(); 
+        const hours = Math.floor(offset / 60);
+        const minutes = Math.abs(offset % 60);
+        const sign = offset >= 0 ? "+" : "-";
+
+        const gmtOffset = `GMT${sign}${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+        const options = { timeZoneName: 'short' };
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+        const parts = formatter.formatToParts(date);
+        const abbreviation = parts.find(part => part.type === 'timeZoneName');
+
+        return abbreviation ? abbreviation.value : gmtOffset;
+    }
+
+    const currentTimeZone = getTimeZoneAbbreviation();
+    let isOptionExists = false;
+
+    $('#start-time-zone option').each(function () {
+        if ($(this).val() === currentTimeZone) {
+            $(this).prop('selected', true);
+            isOptionExists = true;
+            return false; 
+        }
+    });
+    
+    if (!isOptionExists) {
+        const newOption = $('<option></option>')
+            .val(currentTimeZone)
+            .text(currentTimeZone)
+            .prop('selected', true);
+        $('#start-time-zone').append(newOption);
+    }
+    
+    
+    console.log(getTimeZoneAbbreviation()); 
+    
+    
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         //  alert(design);
         $('.user_choice').prop('checked',false);
@@ -4727,7 +4768,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
 });
 
 $(document).on("click",".remove_co_host",function(){
-    lengtUSer=0
+    lengtUSer=0;
     var hostId = $(this).data('id');
     eventData.co_host = '';
     eventData.co_host_prefer_by = '';
@@ -4741,7 +4782,7 @@ $(document).on("click",".remove_co_host",function(){
             </span>
             <h5>Select your co-host</h5>`);
     var delete_co_host = $('#remove_co_host_id').val();
-  
+  alert(delete_co_host);
     $('.'+delete_co_host).prop("checked", false);
 })
 

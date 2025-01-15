@@ -100,7 +100,7 @@ $phone_checked = 'checked';
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
         <div class="right-note ms-auto">
-            <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
+            <input class="form-check-input user-{{$user->id}} user_choice" type="checkbox"
                 name="guest_list[]" data-mobile="{{$user->phone_number}}" data-prefer_by="phone"
                 data-username="{{ $user->firstname }} {{ $user->lastname }}" data-initial="{{$initials}}"
                 data-profile_or_text="{{$photo_text}}" data-profile="{{ $profile_photo }}"
