@@ -1265,6 +1265,11 @@
 
 
 /* ======Responsiveness===== */
+@media only screen and (max-width:1135px){
+    .guest-wrp.side-guest-wrp .invite-pro{
+        flex-direction: column;
+    }
+}
 
 @media only screen and (max-width: 991px) {
     .main-content-sidebar {
