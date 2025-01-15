@@ -5938,6 +5938,8 @@ $(document).on('click','.brand-progress',function () {
 
 var limitcontact=10;
 var offsetcontact=0;
+var busycontact= false;
+
 $(document).on('click','#phone-tab',function () { 
     $('#loader').show();
     var search_name = $('#search_contacts').val();
@@ -5951,7 +5953,7 @@ $(document).on('keyup','#search_contacts',function(){
     var search_name = $(this).val();
     // console.log(search_name);
     
-    offset = 0;
+    offsetcontact = 0; 
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
         $('#loader').css('display','block');
@@ -5959,8 +5961,7 @@ $(document).on('keyup','#search_contacts',function(){
     }, 750);
 })
 
-var busycontact= false;
-$("#YesviteContactsAll").html(html.view);
+// $("#YesviteContactsAll").html(html.view);
 
 
 $("#YesviteContactsAll").on("scroll", function () {
