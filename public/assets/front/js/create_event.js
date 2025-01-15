@@ -5979,7 +5979,7 @@ $(document).on('click','#phone-tab',function () {
     $('#loader').show();
     var search_name = $('#search_contacts').val();
     offsetcontact=0;
-    displayPhoneContacts('all',10,'0',search_name,false);     
+    displayPhoneContacts('all',10,offsetcontact,search_name,false);     
 });
 
 
@@ -5989,10 +5989,11 @@ $(document).on('keyup','#search_contacts',function(){
     // console.log(search_name);
     
     offsetcontact = 0; 
+    limitcontact=10;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
         $('#loader').css('display','block');
-        displayPhoneContacts('all',10000,'0',search_name,false);
+        displayPhoneContacts('all',limitcontact,offsetcontact,search_name,false);
     }, 750);
 })
 
