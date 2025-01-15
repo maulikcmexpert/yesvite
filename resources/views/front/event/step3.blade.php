@@ -339,7 +339,7 @@
         <h4 id="event_guest_count">
             0 Guests
         </h4> 
-        <div class="guest-wrp">
+        <div class="guest-wrp d-none">
             <div class="guest-pro">
                 <div>
                     <h5>Free</h5>

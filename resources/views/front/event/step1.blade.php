@@ -94,11 +94,18 @@
                                         $start_time_zone = $eventDetail['rsvp_start_timezone'];
                                     }
                                 @endphp
-                                <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option>
+                                {{-- <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option> --}}
+                                <option value="PST" {{($start_time_zone == 'PST')?'selected':''}}>PST</option>
                                 <option value="MST" {{($start_time_zone == 'MST')?'selected':''}}>MST</option>
                                 <option value="CST" {{($start_time_zone == 'CST')?'selected':''}}>CST</option>
                                 <option value="EST" {{($start_time_zone == 'EST')?'selected':''}}>EST</option>
-                                <option value="EST" {{($start_time_zone == 'EST')?'selected':''}}>GMT+05:30</option>
+                                <option value="GMT+5:30" {{($start_time_zone == 'GMT+5:30')?'selected':''}}>GMT+5:30</option>
+
+                                {{-- <option value="PST">PST</option>
+                                <option value="MST">MST</option>
+                                <option value="CST">CST</option>
+                                <option value="EST">EST</option>
+                                <option value="GMT05:30">GMT+05:30</option> --}}
                             </select>
                             <label for="select-label"
                                 class="form-label input-field floating-label select-label floatingfocus">Time
