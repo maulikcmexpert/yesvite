@@ -5056,7 +5056,7 @@ function save_image_design(downloadImage,textData){
         });
 }
 var busyyesvite=false;
-var limityesvite=5;
+var limityesvite=10;
 var offsetyesvite=0;
 
 
