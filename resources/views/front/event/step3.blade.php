@@ -338,7 +338,7 @@
     <div class="guest-user-content">
         <h4 id="event_guest_count">
             0 Guests
-        </h4>
+        </h4> 
         <div class="guest-wrp">
             <div class="guest-pro">
                 <div>
