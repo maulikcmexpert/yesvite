@@ -61,7 +61,7 @@
                             </a>
                         </div> --}}
                     </div>
-                    <div class="guest-wrp guest-wrap-respo">
+                    <div class="guest-wrp guest-wrap-respo d-none">
                         <div class="guest-pro">
                             <div class="d-flex">
                                 <h5>Pro </h5>
