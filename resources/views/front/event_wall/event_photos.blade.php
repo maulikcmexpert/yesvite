@@ -214,7 +214,7 @@
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><button class="dropdown-item"><svg
+                                                                    <li><button class="dropdown-item download_img_single"  data-image-src="{{ $photo['mediaData']['post_media'] }}" ><svg
                                                                                 viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
