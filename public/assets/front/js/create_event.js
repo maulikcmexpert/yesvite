@@ -20,15 +20,13 @@ $(document).ready(function () {
 
     function getTimeZoneAbbreviation() {
         const date = new Date();
-        const offset = -date.getTimezoneOffset(); // Offset in minutes
+        const offset = -date.getTimezoneOffset(); 
         const hours = Math.floor(offset / 60);
         const minutes = Math.abs(offset % 60);
         const sign = offset >= 0 ? "+" : "-";
 
-        // Format GMT offset
         const gmtOffset = `GMT${sign}${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 
-        // Extract timezone abbreviation
         const options = { timeZoneName: 'short' };
         const formatter = new Intl.DateTimeFormat('en-US', options);
         const parts = formatter.formatToParts(date);
@@ -40,16 +38,14 @@ $(document).ready(function () {
     const currentTimeZone = getTimeZoneAbbreviation();
     let isOptionExists = false;
 
-    // Check if the current timezone exists in the dropdown
     $('#start-time-zone option').each(function () {
         if ($(this).val() === currentTimeZone) {
             $(this).prop('selected', true);
             isOptionExists = true;
-            return false; // Break the loop
+            return false; 
         }
     });
-
-    // If the timezone does not exist, add it as a new option
+    
     if (!isOptionExists) {
         const newOption = $('<option></option>')
             .val(currentTimeZone)
