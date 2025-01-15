@@ -5182,7 +5182,7 @@ $(document).on('keyup','.search_user_ajax',function(){
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','block');
-        displayRecords(limit,offsetyesvite,'all',search_name);
+        displayRecords(limityesvite,offsetyesvite,'all',search_name);
         // $('#loader').css('display','none');
     }, 750);
 })
