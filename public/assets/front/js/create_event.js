@@ -5055,12 +5055,14 @@ function save_image_design(downloadImage,textData){
             console.error("Error capturing image:", error);
         });
 }
-
+var busyyesvite=false;
+var limityesvite=5;
+var offsetyesvite=0;
 function get_user(type){
-    if (busy == false) {
-        busy = true;
+    if (busyyesvite == false) {
+        busyyesvite = true;
         page = 3;
-        displayRecords(limit, offset,type);
+        displayRecords(limityesvite, offsetyesvite,type);
     }
     
 }
@@ -5120,7 +5122,7 @@ function displayRecords(lim, off,type,search = null,) {
     if(type!='group'){
         search_name = $('.search_user').val();
         if(search_name !=''){
-            offset = 0;
+            offsetyesvite = 0;
         }
     }
     $.ajax({
@@ -5147,7 +5149,7 @@ function displayRecords(lim, off,type,search = null,) {
         }else{
             $("#groupUsers").html(html);
         }
-        busy = false;
+        busyyesvite = false;
         setTimeout(function () {
             $('#loader').css('display','none');
         }, 1000);
