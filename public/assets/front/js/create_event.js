@@ -5056,7 +5056,7 @@ function save_image_design(downloadImage,textData){
         });
 }
 var busyyesvite=false;
-var limityesvite=5;
+var limityesvite=10;
 var offsetyesvite=0;
 
 
@@ -5157,13 +5157,18 @@ function displayRecords(lim, off,type,search = null,) {
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
+                    busyyesvite = false;
+
                 }else{
                     $("#YesviteUserAll").append(html);
+                    busyyesvite = false;
+
                 }
         }else{
             $("#groupUsers").html(html);
         }
         busyyesvite = false;
+        
         setTimeout(function () {
             $('#loader').css('display','none');
         }, 1000);
@@ -5173,11 +5178,11 @@ function displayRecords(lim, off,type,search = null,) {
 var search_user_ajax_timer = 0;
 $(document).on('keyup','.search_user_ajax',function(){
     search_name = $(this).val();
-    offset = 0;
+    offsetyesvite = 0;
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','block');
-        displayRecords(limit,offset,'all',search_name);
+        displayRecords(limityesvite,offsetyesvite,'all',search_name);
         // $('#loader').css('display','none');
     }, 750);
 })
