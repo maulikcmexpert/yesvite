@@ -956,7 +956,7 @@
                 </div>
             </div>
 
-            <div class="footer-buttons d-none">
+            <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn save-btn">Save</button>
             </div>
