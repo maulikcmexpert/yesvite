@@ -4727,6 +4727,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
 });
 
 $(document).on("click",".remove_co_host",function(){
+    lengtUSer=0
     var hostId = $(this).data('id');
     eventData.co_host = '';
     eventData.co_host_prefer_by = '';
