@@ -2416,7 +2416,12 @@ class EventController extends Controller
     ->where('category_name', 'LIKE', "%$search_user%")
     ->orderBy('id', 'DESC')
     ->get();
-
+    if ($design_category->isEmpty()) {
+        return response()->json([
+            'view' => '<p>No result found matching your search.</p>',
+            'success' => false
+        ]);
+    }
 //   dd($design_category);
     return response()->json([
         'view' => view('front.event.guest.get_category', compact('design_category'))->render(),
