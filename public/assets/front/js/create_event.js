@@ -3689,6 +3689,9 @@ $(document).on("click", ".li_event_details", function () {
 $(document).on("click", ".li_event_detail", function () {
     var design = eventData.desgin_selected;
     $('.li_event_detail').find(".side-bar-list").addClass("active");
+    if(final_step <= 1){
+        $(".side-bar-list").removeClass("active");
+    }
     if( design == undefined || design == ''){
     
     }else{
