@@ -4727,7 +4727,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
 });
 
 $(document).on("click",".remove_co_host",function(){
-    lengtUSer=0
+    lengtUSer=0;
     var hostId = $(this).data('id');
     eventData.co_host = '';
     eventData.co_host_prefer_by = '';
@@ -4741,7 +4741,7 @@ $(document).on("click",".remove_co_host",function(){
             </span>
             <h5>Select your co-host</h5>`);
     var delete_co_host = $('#remove_co_host_id').val();
-  
+  alert(delete_co_host);
     $('.'+delete_co_host).prop("checked", false);
 })
 
