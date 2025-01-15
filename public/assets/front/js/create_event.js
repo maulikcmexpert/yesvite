@@ -5069,7 +5069,7 @@ $("#YesviteUserAll").on("scroll", function () {
             busyyesvite = true;
             offsetyesvite += limityesvite;
             // var type="yesvite";
-            displayRecords(limityesvite, offsetyesvite,type);
+            displayRecords(limityesvite, offsetyesvite,type="all");
         }
 });
 function get_user(type){
