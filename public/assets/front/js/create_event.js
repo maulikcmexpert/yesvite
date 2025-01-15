@@ -2611,7 +2611,7 @@ $(document).on("click", "#next_setting", function () {
 
 
 $(document).on('click','#next_design',function() {
-   
+   console.log(eventData);
     $(".step_1").hide();
     handleActiveClass('.li_design');
     $('.pick-card').addClass('active');
