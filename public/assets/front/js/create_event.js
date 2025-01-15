@@ -5252,11 +5252,24 @@ $(document).on("click", ".invite_group_member", function () {
                 invited_by=$(this).data('mobile');
             }
 
-            selectedValues.push({
-                id: $(this).val(),
-                preferby: perferby,
-                invited_by:invited_by
-            });
+            // selectedValues.push({
+            //     id: $(this).val(),
+            //     preferby: perferby,
+            //     invited_by:invited_by
+            // });
+         
+                const id = $(this).val();            
+                // Check if the ID is already in the array
+                const isIdExists = selectedValues.some(item => item.id === id);
+            
+                if (!isIdExists) {
+                    selectedValues.push({
+                        id: id,
+                        preferby: perferby,
+                        invited_by: invited_by
+                    });
+                }
+           
         }
     });
     $.ajax({
