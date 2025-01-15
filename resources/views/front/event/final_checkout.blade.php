@@ -94,7 +94,7 @@
             </div>
             <div class="total-order-wrp position-relative">
                 <div class="order-content">
-                    <h4>Order Total</h4>
+                    <!-- <h4>Order Total</h4> -->
                     <div class="guest-wrp d-none">
                         <div class="guest-pro">
                             <div class="d-flex">
