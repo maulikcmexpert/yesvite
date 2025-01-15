@@ -298,6 +298,10 @@ $(document).on('click','.filter_apply_btn',function(e){
     let page = getActiveTabPage();
     console.log(page);
 
+    if(hosting==0&&invited_to==0&&need_to_rsvp==0){
+         toastr.error('Please select any one');
+         return;
+    }
     $('.loader_filter').css('display','block');
     // console.log(hosting+','+invited_to+','+need_to_rsvp+','+past_event);
     $.ajax({

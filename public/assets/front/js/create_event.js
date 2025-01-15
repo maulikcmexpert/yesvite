@@ -45,7 +45,7 @@ $(document).ready(function () {
             return false; 
         }
     });
-    
+
     if (!isOptionExists) {
         const newOption = $('<option></option>')
             .val(currentTimeZone)
