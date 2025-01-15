@@ -5058,6 +5058,20 @@ function save_image_design(downloadImage,textData){
 var busyyesvite=false;
 var limityesvite=5;
 var offsetyesvite=0;
+
+
+$("#YesviteUserAll").on("scroll", function () {
+    if (busyyesvite) return; 
+    var scrollTop = $(this).scrollTop(); 
+    var scrollHeight = $(this)[0].scrollHeight; 
+    var elementHeight = $(this).height();
+        if (scrollTop + elementHeight >= scrollHeight) {
+            busyyesvite = true;
+            offsetyesvite += limityesvite;
+            // var type="yesvite";
+            displayRecords(limityesvite, offsetyesvite,type);
+        }
+});
 function get_user(type){
     if (busyyesvite == false) {
         busyyesvite = true;
