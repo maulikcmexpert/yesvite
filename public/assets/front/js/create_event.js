@@ -5934,9 +5934,12 @@ $(document).on('click','.brand-progress',function () {
     // window.location.href="event?id="+event_id;       
 });
 
+var limitcontact=10;
+var offsetcontact=0;
 $(document).on('click','#phone-tab',function () { 
     $('#loader').show();
     var search_name = $('#search_contacts').val();
+    offsetcontact=0;
     displayPhoneContacts('all',10,'0',search_name,false);     
 });
 
@@ -5955,8 +5958,8 @@ $(document).on('keyup','#search_contacts',function(){
 })
 
 var busycontact= false;
-var limitcontact=10;
-var offsetcontact=0;
+$("#YesviteContactsAll").html(html.view);
+
 
 $("#YesviteContactsAll").on("scroll", function () {
    
