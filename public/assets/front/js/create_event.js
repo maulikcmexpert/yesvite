@@ -5055,12 +5055,28 @@ function save_image_design(downloadImage,textData){
             console.error("Error capturing image:", error);
         });
 }
+var busyyesvite=false;
+var limityesvite=5;
+var offsetyesvite=0;
 
+
+$("#YesviteUserAll").on("scroll", function () {
+    if (busyyesvite) return; 
+    var scrollTop = $(this).scrollTop(); 
+    var scrollHeight = $(this)[0].scrollHeight; 
+    var elementHeight = $(this).height();
+        if (scrollTop + elementHeight >= scrollHeight) {
+            busyyesvite = true;
+            offsetyesvite += limityesvite;
+            // var type="yesvite";
+            displayRecords(limityesvite, offsetyesvite,type="all");
+        }
+});
 function get_user(type){
-    if (busy == false) {
-        busy = true;
+    if (busyyesvite == false) {
+        busyyesvite = true;
         page = 3;
-        displayRecords(limit, offset,type);
+        displayRecords(limityesvite, offsetyesvite,type);
     }
     
 }
@@ -5120,7 +5136,7 @@ function displayRecords(lim, off,type,search = null,) {
     if(type!='group'){
         search_name = $('.search_user').val();
         if(search_name !=''){
-            offset = 0;
+            offsetyesvite = 0;
         }
     }
     $.ajax({
@@ -5147,7 +5163,7 @@ function displayRecords(lim, off,type,search = null,) {
         }else{
             $("#groupUsers").html(html);
         }
-        busy = false;
+        busyyesvite = false;
         setTimeout(function () {
             $('#loader').css('display','none');
         }, 1000);
@@ -5949,9 +5965,14 @@ $(document).on('click','.brand-progress',function () {
     // window.location.href="event?id="+event_id;       
 });
 
+var limitcontact=10;
+var offsetcontact=0;
+var busycontact= false;
+
 $(document).on('click','#phone-tab',function () { 
     $('#loader').show();
     var search_name = $('#search_contacts').val();
+    offsetcontact=0;
     displayPhoneContacts('all',10,'0',search_name,false);     
 });
 
@@ -5961,7 +5982,7 @@ $(document).on('keyup','#search_contacts',function(){
     var search_name = $(this).val();
     // console.log(search_name);
     
-    offset = 0;
+    offsetcontact = 0; 
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
         $('#loader').css('display','block');
@@ -5969,9 +5990,8 @@ $(document).on('keyup','#search_contacts',function(){
     }, 750);
 })
 
-var busycontact= false;
-var limitcontact=10;
-var offsetcontact=0;
+// $("#YesviteContactsAll").html(html.view);
+
 
 $("#YesviteContactsAll").on("scroll", function () {
    

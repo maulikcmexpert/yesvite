@@ -1618,13 +1618,18 @@ class EventController extends Controller
             ->where(['app_user' => '1'])
             ->whereIn('email', $emails)
             ->orderBy('firstname')
-            ->when($type != 'group', function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->limit($request->limit)
-                        ->skip($request->offset);
-                });
+
+            ->when(!empty($request->limit) && $type != 'group' , function ($query) use ($request) {
+                $query->limit($request->limit)
+                      ->offset($request->offset);
             })
-            ->when($request->search_user != '', function ($query) use ($search_user) {
+            // ->when($type != 'group', function ($query) use ($request) {
+            //     $query->where(function ($q) use ($request) {
+            //         $q->limit($request->limit)
+            //             ->skip($request->offset);
+            //     });
+            // })
+            ->when(!empty($request->search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
