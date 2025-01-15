@@ -1259,6 +1259,10 @@
     bottom: 0;
 }
 
+.guest-wrp.side-guest-wrp .invite-pro{
+    margin-top: 5px;
+}
+
 
 /* ======Responsiveness===== */
 
