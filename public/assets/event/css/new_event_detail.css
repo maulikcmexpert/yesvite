@@ -116,6 +116,7 @@
     padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100vh;
+    position: relative;
 }
 
 .new-event-sidebar-menu ul {
@@ -1249,8 +1250,22 @@
 }
 
 
+/* ======= sideguest-add ===== */
+.guest-wrp.side-guest-wrp{
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    bottom: 0;
+}
+
+.guest-wrp.side-guest-wrp .invite-pro{
+    margin-top: 5px;
+}
+
 
 /* ======Responsiveness===== */
+
 
 @media only screen and (max-width: 991px) {
     .main-content-sidebar {
