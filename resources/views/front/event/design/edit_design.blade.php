@@ -900,7 +900,7 @@
                 </div>
             </div>
 
-            <div class="footer-buttons d-none">
+            <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn">Save</button>
             </div>
@@ -956,7 +956,7 @@
                 </div>
             </div>
 
-            <div class="footer-buttons d-none">
+            <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn save-btn">Save</button>
             </div>
@@ -1003,7 +1003,7 @@
             <!-- Color Picker -->
             <input id="color-picker" type="color" value="#276cb8" />
 
-            <div class="footer-buttons d-none">
+            <div class="footer-buttons ">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn">Save</button>
             </div>
@@ -1179,7 +1179,7 @@
                 </div>
             </div>
 
-            <div class="footer-buttons d-none">
+            <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn">Save</button>
             </div>
