@@ -1668,18 +1668,30 @@ class EventController extends Controller
         $emails = [];
 
         $getAllContacts = contact_sync::where('contact_id', $id)
-            ->when($type != 'group', function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->limit($request->limit)
-                        ->skip($request->offset);
-                });
+            // ->when($type != 'group', function ($query) use ($request) {
+            //     $query->where(function ($q) use ($request) {
+            //         $q->limit($request->limit)
+            //             ->skip($request->offset);
+            //     });
+            // })
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                      ->offset($request->offset);
             })
-            ->when($request->search_user != '', function ($query) use ($search_user) {
+            ->when(!empty($request->search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+                      ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
                 });
-            })->orderBy('firstname')
+            })
+            // ->when($request->search_user != ''&& $request->search_user!=null, function ($query) use ($search_user) {
+            //     $query->where(function ($q) use ($search_user) {
+            //         $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+            //             ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+            //     });
+            // })
+            
+            ->orderBy('firstname')
 
             ->get();
 
@@ -1697,7 +1709,12 @@ class EventController extends Controller
         }
         $selected_user = Session::get('contact_ids');
         // dd($yesvite_user);
-        return response()->json(view('front.event.guest.get_contacts', compact('yesvite_user', 'type', 'selected_user'))->render());
+        // return response()->json(view('front.event.guest.get_contacts', compact('yesvite_user', 'type', 'selected_user'))->render());
+
+        return response()->json([
+            'view' => view('front.event.guest.get_contacts', compact('yesvite_user', 'type', 'selected_user'))->render(),
+            'scroll' => $request->scroll,
+        ]);
     }
     public function getPhoneContact(Request $request)
     {

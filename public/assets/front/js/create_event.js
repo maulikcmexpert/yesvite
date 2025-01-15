@@ -5939,7 +5939,7 @@ $(document).on('click','.brand-progress',function () {
 $(document).on('click','#phone-tab',function () { 
     $('#loader').show();
     var search_name = $('#search_contacts').val();
-    displayPhoneContacts('all',10000,'0',search_name);     
+    displayPhoneContacts('all',10,'0',search_name,false);     
 });
 
 
@@ -5952,32 +5952,64 @@ $(document).on('keyup','#search_contacts',function(){
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
         $('#loader').css('display','block');
-        displayPhoneContacts('all',10000,'0',search_name);
+        displayPhoneContacts('all',10000,'0',search_name,false);
     }, 750);
 })
 
-function displayPhoneContacts(type ='all',lim = 10000,off = '0',search_name) {
+var busycontact= false;
+var limitcontact=10;
+var offsetcontact=0;
+
+$("#YesviteContactsAll").on("scroll", function () {
+   
+    // clearTimeout(debounceTimer);
+    // debounceTimer = setTimeout(() => {
+        if (busycontact) return; 
+
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+     
+            if (scrollTop + elementHeight >= scrollHeight) {
+                busycontact = true;
+                offsetcontact += limitcontact;
+                var type="phone";
+                // loadMorePhones(search_name=null,type,offset1,limit);
+                displayPhoneContacts('all',limitcontact,offsetcontact,search_name="",true);
+
+            // function loadMoreData(page, search_name)
+            // loadMoreGroups(page, search_group);
+            // loadMorePhones(page, search_phone);
+        }
+    // }, 200);
+});
+
+
+function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
     // console.log(search_name);
     $.ajax({
         type: "GET",
         async: false,
         url: base_url+'event/get_contacts',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name + "&scroll="+ scroll,
         cache: false,
         beforeSend: function () {
 
         },
         success: function (html) {
-            // console.log(html);
+            console.log(html);
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             const coins =  $("#coins").val();
             if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
             }
-            if(type=="all"){
-                $("#YesviteContactsAll").html(html);
+            if(type=="all"&&html.scroll=='false'){
+                $("#YesviteContactsAll").html(html.view);
             }
-            busy = false;
+            if(html.scroll=='true'){
+                $("#YesviteContactsAll").append(html.view);
+            }
+            busycontact = false;
             setTimeout(function () {
                 $('#loader').css('display','none');
             }, 1000);

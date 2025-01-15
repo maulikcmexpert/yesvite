@@ -1213,6 +1213,18 @@ label.error {
     background-image: url('../../../toater_success_icon.png') !important; 
 }
 
+.guest-user-list .no-reply h5{
+    text-transform: none !important;
+}
+
+/* .guest-user-list .sucess-no{
+    text-transform: none !important;
+
+}
+.rsvp-guest-user-list-wrp .sucess-yes{
+    text-transform: none !important;
+} */
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
