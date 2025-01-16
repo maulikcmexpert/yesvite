@@ -815,7 +815,7 @@
                         </div>
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
-                                <ul type="button" data-bs-toggle="modal" data-bs-target="#reaction-modal">
+                                <ul type="button" data-bs-toggle="modal"  data-bs-target="#reaction-modal">
                                     <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="">
                                     </li>
                                     <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
@@ -827,9 +827,30 @@
                                 <h6 id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right">
-                                <button class="posts-card-like-btn likeModel" id="likeButton" data-event-id=""
+                                <button class="posts-card-like-btn likeModel" id="likeButton" data-event-id="{{$event}}"
                                     data-parent-id="" data-event-post-id="" data-user-id="{{ $login_user_id }}"><i
-                                        class="fa-regular fa-heart"></i></button>
+                                        class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
+
+                                        <div class="photos-likes-options-wrp emoji-picker"
+                                        id="emojiDropdown1" style="display: none;">
+                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                            alt="Heart Emoji" class="emoji model_emoji" data-emoji="❤️"
+                                            data-unicode="\\u{2764}">
+                                        <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                            alt="Thumb Emoji" class="emoji  model_emoji" data-emoji="👍"
+                                            data-unicode="\\u{1F44D}">
+                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                            alt="Smiley Emoji" class="emoji model_emoji" data-emoji="😊"
+                                            data-unicode="\\u{1F604}">
+                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                            alt="Eye Heart Emoji" class="emoji model_emoji" data-emoji="😍"
+                                            data-unicode="\\u{1F60D}">
+                                        <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                            alt="Clap Emoji" class="emoji" data-emoji="👏"
+                                            data-unicode="\\u{1F44F}">
+                                    </div>
+
+
                                 <button class="posts-card-comm show-comments-btn">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path

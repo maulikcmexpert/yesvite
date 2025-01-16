@@ -10,10 +10,6 @@ $(document).ready(function () {
         $('.create_post').prop('disabled', !isValid);
     }
 
-
-
-
-
     // Submit form on button click
     $(document).on('click', '.create_post', function () {
         // Check if the poll form exists and is valid
@@ -50,134 +46,6 @@ $(document).ready(function () {
 
 
 
-    $(document).on('click', '.open_photo_model', function () {
-        clearTimeout(pressTimer); // Clear the timer
-        console.log("Mouse up or leave detected");
-
-        if (!isLongPress) {
-            // If it wasn't a long press, open the modal (short press behavior)
-            console.log("Short press detected");
-            $('#detail-photo-modal').modal('show');
-        } // Open the modal
-        // Fetch the post ID from the data attribute
-        const postId = $(this).data('post-id');
-        const eventId = $(this).data('event-id');
-        ;
-        //let parentId = null;  // Default to null, assuming no parent
-
-        // if ($('.commented-user-wrp').length > 0) {
-        //     // If this is a reply button, get the parent ID from the closest .commented-user-wrp element
-        //     parentId = $('.commented-user-wrp').data('parent-id');  // Assuming `data-parent-id` holds the parent_id
-        // }
-        // console.log(parentId);
-        var url;
-
-
-        url = base_url + "event_photo/fetch-photo-details";
-
-
-
-        $.ajax({
-            url: url, // Update with your server-side endpoint
-            type: 'POST', // Use GET or POST depending on your API
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: { id: postId, event_id: eventId },
-            success: function (response) {
-                const dataArray = response.data; // This is an array
-                console.log(dataArray);
-
-                if (Array.isArray(dataArray) && dataArray.length > 0) {
-                    const data = dataArray[0]; // Access the first object in the array
-
-                    // Profile Image
-                    const profileImage = data.profile || '{{ asset("assets/front/img/header-profile-img.png") }}';
-                    $('.posts-card-head-left-img img').attr('src', profileImage);
-                    $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
-                    // Name
-                    const fullName = `${data.firstname} ${data.lastname}`;
-                    $('#post_name').text(fullName);
-
-                    // Location
-                    const location = data.location.trim() !== '' ? data.location : '';
-                    $('#location').text(location);
-
-                    // Post Message
-                    $('#post_message').text(data.post_message);
-
-                    const swiperWrapper = $('#media_post');
-                    swiperWrapper.empty();
-                    if (data.mediaData && data.mediaData.length > 0) {
-                        data.mediaData.forEach((media) => {
-                            swiperWrapper.append(`
-                                <div class="swiper-slide">
-                                    <div class="posts-card-show-post-img">
-                                        <img src="${media.post_media}" alt="" />
-                                    </div>
-                                </div>
-                            `);
-                        });
-                    }
-                    $('#likes').text(data.total_likes + ' Likes');
-                    // Add 'Likes' after the number
-                    $('#comments').text(data.total_comments + ' Comments')
-                    const likeButton = $('.likeModel');
-                    console.log('Self Reaction:', data.self_reaction); // Debugging
-                    if (data.self_reaction === '\u{2764}') {
-                        likeButton.find('i').removeClass('fa-regular').addClass('fa-solid'); // Filled heart
-                    } else {
-                        likeButton.find('i').removeClass('fa-solid').addClass('fa-regular');; // Empty heart
-                    }
-                    const commentsWrapper = $('.posts-card-show-all-comments-inner ul');
-                    commentsWrapper.empty(); // Clear existing comments
-
-                    if (data.latest_comment && Array.isArray(data.latest_comment)) {
-                        data.latest_comment.forEach(comment => {
-                            commentsWrapper.append(`
-                                <li class="commented-user-wrp" data-comment-id="${comment.id}">
-                                  <input type="hidden" id="parent_comment_id" value="${comment.id}">
-                                    <div class="commented-user-head">
-                                        <div class="commented-user-profile">
-                                            <div class="commented-user-profile-img">
-                                                <img src="${comment.profile || '{{ asset("assets/front/img/header-profile-img.png") }}'}" alt="">
-                                            </div>
-                                            <div class="commented-user-profile-content">
-                                                <h3>${comment.username || ''}</h3>
-                                                <p>${comment.location || ''}</p>
-                                            </div>
-                                        </div>
-                                        <div class="posts-card-like-comment-right">
-                                            <p>${comment.posttime || ''}</p>
-                                            <button class="posts-card-like-btn">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="commented-user-content">
-                                        <p>${comment.comment || ''}</p>
-                                    </div>
-                                    <div class="commented-user-reply-wrp">
-                                        <div class="position-relative d-flex align-items-center gap-2">
-                                            <button class="posts-card-like-btn">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <p>${comment.comment_total_likes || 0}</p>
-                                        </div>
-                                        <button class="commented-user-reply-btn">Reply</button>
-                                    </div>
-
-                                </li>
-                            `);
-                        })
-                    }
-
-                } else {
-                    console.log('No data found in the array.');
-                }
-            }
-        });
-    });
 
 
 
@@ -241,7 +109,7 @@ $(document).on('click', '#likeButton', function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{1F90D}' : '\u{2764}'; // Toggle reaction: 💔 or ❤️
+    const reaction = isLiked ? '\u{2764}'  :'\u{1F90D}'; // Toggle reaction: 💔 or ❤️
 
     // Toggle like button appearance
     if (isLiked) {
@@ -637,4 +505,225 @@ $('.download_img_single').on('click', function () {
     } else {
         alert('No image source found!');
     }
+});
+$(document).on('click', '.open_photo_model', function () {
+    clearTimeout(pressTimer); // Clear the timer
+    console.log("Mouse up or leave detected");
+
+    if (!isLongPress) {
+        // If it wasn't a long press, open the modal (short press behavior)
+        console.log("Short press detected");
+        $('#detail-photo-modal').modal('show');
+    } // Open the modal
+    // Fetch the post ID from the data attribute
+    const postId = $(this).data('post-id');
+    const eventId = $(this).data('event-id');
+    ;
+    //let parentId = null;  // Default to null, assuming no parent
+
+    // if ($('.commented-user-wrp').length > 0) {
+    //     // If this is a reply button, get the parent ID from the closest .commented-user-wrp element
+    //     parentId = $('.commented-user-wrp').data('parent-id');  // Assuming `data-parent-id` holds the parent_id
+    // }
+    // console.log(parentId);
+    var url;
+
+
+    url = base_url + "event_photo/fetch-photo-details";
+
+
+
+    $.ajax({
+        url: url, // Update with your server-side endpoint
+        type: 'POST', // Use GET or POST depending on your API
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { id: postId, event_id: eventId },
+        success: function (response) {
+            const dataArray = response.data; // This is an array
+            console.log(dataArray);
+
+            if (Array.isArray(dataArray) && dataArray.length > 0) {
+                const data = dataArray[0]; // Access the first object in the array
+
+                // Profile Image
+                const profileImage = data.profile || '{{ asset("assets/front/img/header-profile-img.png") }}';
+                $('.posts-card-head-left-img img').attr('src', profileImage);
+                $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
+                // Name
+                const fullName = `${data.firstname} ${data.lastname}`;
+                $('#post_name').text(fullName);
+
+                // Location
+                const location = data.location.trim() !== '' ? data.location : '';
+                $('#location').text(location);
+
+                // Post Message
+                $('#post_message').text(data.post_message);
+
+                const swiperWrapper = $('#media_post');
+                swiperWrapper.empty();
+                if (data.mediaData && data.mediaData.length > 0) {
+                    data.mediaData.forEach((media) => {
+                        swiperWrapper.append(`
+                            <div class="swiper-slide">
+                                <div class="posts-card-show-post-img">
+                                    <img src="${media.post_media}" alt="" />
+                                </div>
+                            </div>
+                        `);
+                    });
+                }
+                $('#likes').text(data.total_likes + ' Likes');
+                // Add 'Likes' after the number
+                $('#comments').text(data.total_comments + ' Comments')
+                const likeButton = $('.likeModel');
+                console.log('Self Reaction:', data.self_reaction); // Debugging
+                if (data.self_reaction === '\u{2764}') {
+                    likeButton.find('i').removeClass('fa-regular').addClass('fa-solid'); // Filled heart
+                } else {
+                    likeButton.find('i').removeClass('fa-solid').addClass('fa-regular');; // Empty heart
+                }
+                const commentsWrapper = $('.posts-card-show-all-comments-inner ul');
+                commentsWrapper.empty(); // Clear existing comments
+
+                if (data.latest_comment && Array.isArray(data.latest_comment)) {
+                    data.latest_comment.forEach(comment => {
+                        commentsWrapper.append(`
+                            <li class="commented-user-wrp" data-comment-id="${comment.id}">
+                              <input type="hidden" id="parent_comment_id" value="${comment.id}">
+                                <div class="commented-user-head">
+                                    <div class="commented-user-profile">
+                                        <div class="commented-user-profile-img">
+                                            <img src="${comment.profile || '{{ asset("assets/front/img/header-profile-img.png") }}'}" alt="">
+                                        </div>
+                                        <div class="commented-user-profile-content">
+                                            <h3>${comment.username || ''}</h3>
+                                            <p>${comment.location || ''}</p>
+                                        </div>
+                                    </div>
+                                    <div class="posts-card-like-comment-right">
+                                        <p>${comment.posttime || ''}</p>
+                                        <button class="posts-card-like-btn">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="commented-user-content">
+                                    <p>${comment.comment || ''}</p>
+                                </div>
+                                <div class="commented-user-reply-wrp">
+                                    <div class="position-relative d-flex align-items-center gap-2">
+                                        <button class="posts-card-like-btn">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+                                        <p>${comment.comment_total_likes || 0}</p>
+                                    </div>
+                                    <button class="commented-user-reply-btn">Reply</button>
+                                </div>
+
+                            </li>
+                        `);
+                    })
+                }
+
+            } else {
+                console.log('No data found in the array.');
+            }
+        }
+    });
+});
+
+let longPressTimers;
+let isLong_press = false;
+
+$(document).on('mousedown', '.likeModel', function () {
+    isLong_press = false; // Reset the flag
+    const button = $(this);
+
+    // Start the long press timer
+    longPressTimer = setTimeout(() => {
+        isLong_press = true; // Mark as long press
+        const emojiDropdown = button.closest('.posts-card-like-comment-right').find('#emojiDropdown1');
+        emojiDropdown.show(); // Show the emoji picker
+        //button.find('i').text(''); // Clear the heart icon
+    }, 500); // 500ms for long press
+});
+$(document).on('click', '.likeModel', function () {
+    clearTimeout(longPressTimers); // Clear the long press timer
+
+    // If it's a long press, don't process the click event
+    if (isLong_press) return;
+
+    // Handle single tap like/unlike
+    const button = $(this);
+    const isLiked = button.hasClass('liked');
+    const reaction = isLiked ? '\u{2764}'  :'\u{1F90D}'; // Toggle reaction: 💔 or ❤️
+
+    // Toggle like button appearance
+    if (isLiked) {
+        button.removeClass('liked');
+        button.find('i').removeClass('fa-solid').addClass('fa-regular');
+    } else {
+        button.addClass('liked');
+        button.find('i').removeClass('fa-regular').addClass('fa-solid');
+    }
+
+    // AJAX call to update the like state
+    const eventId = button.data('event-id');
+    const eventPostId = button.data('event-post-id');
+    $.ajax({
+        url: base_url + "event_photo/userPostLikeDislike",
+        method: "POST",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        contentType: "application/json",
+        data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: reaction }),
+        success: function (response) {
+            if (response.status === 1) {
+                $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('An error occurred. Please try again.');
+        }
+    });
+});
+
+$(document).on('click', '#emojiDropdown1 .model_emoji', function () {
+    const selectedEmoji = $(this).data('emoji');
+    const button = $(this).closest('.posts-card-like-comment-right').find('#likeButton');
+    const emojiDisplay = button.find('#show_comment_emoji');
+
+    // Replace heart icon with selected emoji
+    emojiDisplay.removeClass();
+    emojiDisplay.text(selectedEmoji);
+
+    // AJAX call to update emoji reaction
+    const eventId = button.data('event-id');
+    const eventPostId = button.data('event-post-id');
+    $.ajax({
+        url: base_url + "event_photo/userPostLikeDislike",
+        method: "POST",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        contentType: "application/json",
+        data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: selectedEmoji }),
+        success: function (response) {
+            if (response.status === 1) {
+                $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('An error occurred. Please try again.');
+        }
+    });
+
+    // Hide emoji picker
+    $(this).closest('#emojiDropdown').hide();
 });
