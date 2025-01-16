@@ -605,6 +605,9 @@ class EventPhotoController extends Controller
         ]);
     }
 
+
+
+
     public function deletePost(Request $request)
     {
         $user = Auth::guard('web')->user();

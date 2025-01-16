@@ -26,7 +26,7 @@
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                   Photos
+                                    Photos
                                 </li>
                             </ol>
                         </nav>
@@ -57,7 +57,7 @@
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
                                     <div class="row">
-                                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                        {{-- <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                             <div class="photos-card-wrp">
                                                 <div class="photo-card-head">
                                                     <div class="photo-card-head-left">
@@ -143,7 +143,7 @@
                                                             class="fa-solid fa-check"></i></button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         @foreach ($postPhotoList as $photo)
                                             <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 delete_post_container">
                                                 <div class="photos-card-wrp">
@@ -181,40 +181,71 @@
                                                             </div>
                                                         </div>
                                                         <div class="photo-card-head-right">
-                                                            <button class="posts-card-like-btn"  id="likeButton" data-event-id="{{$event}}" data-event-post-id="{{ $photo['id'] }} " data-user-id="{{ $login_user_id }}">
-                                                                @if($photo['self_reaction'] == '\u{2764}')
-                                                                <i class="fa-solid fa-heart"></i>
-                                                                @elseif($photo['self_reaction'] == '')
-                                                                <i class="fa-regular fa-heart"></i>
+                                                            <button class="posts-card-like-btn like-btn" id="likeButton"
+                                                                data-event-id="{{ $event }}"
+                                                                data-event-post-id="{{ $photo['id'] }} "
+                                                                data-user-id="{{ $login_user_id }}">
+                                                                @if ($photo['self_reaction'] == '\u{2764}')
+                                                                    <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                @elseif($photo['self_reaction'] == '\u{1F494}')
+                                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                @elseif($photo['self_reaction'] == '\u{1F44D}')
+                                                                    <i id="show_Emoji"> <img
+                                                                            src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                            alt="Thumb Emoji" class="emoji"
+                                                                            data-emoji="👍"
+                                                                            data-unicode="\\u{1F44D}"></i>
+                                                                @elseif($photo['self_reaction'] == '\u{1F604}')
+                                                                    <i id="show_Emoji"> <img
+                                                                            src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                            alt="Smiley Emoji" class="emoji"
+                                                                            data-emoji="😊"
+                                                                            data-unicode="\\u{1F604}"></i>
+                                                                @elseif($photo['self_reaction'] == '\u{1F60D}')
+                                                                    <i id="show_Emoji"> <img
+                                                                            src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                            alt="Eye Heart Emoji" class="emoji"
+                                                                            data-emoji="😍"
+                                                                            data-unicode="\\u{1F60D}"></i>
+                                                                @elseif($photo['self_reaction'] == '\u{1F44F}')
+                                                                    <i id="show_Emoji"> <img
+                                                                            src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                            alt="Clap Emoji" class="emoji"
+                                                                            data-emoji="👏"
+                                                                            data-unicode="\\u{1F44F}"></i>
                                                                 @else
-                                                                <i class="fa-regular fa-heart"></i>
+                                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                 @endif
                                                             </button>
 
-                                                            <div class="photos-likes-options-wrp" id="emojiDropdown"
-                                                                style="display: none;">
+                                                            <div class="photos-likes-options-wrp emoji-picker"
+                                                                id="emojiDropdown" style="display: none;">
                                                                 <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                    alt="Heart Emoji" class="emoji" data-emoji="❤️">
+                                                                    alt="Heart Emoji" class="emoji" data-emoji="❤️"
+                                                                    data-unicode="\\u{2764}">
                                                                 <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                    alt="Thumb Emoji" class="emoji" data-emoji="👍">
+                                                                    alt="Thumb Emoji" class="emoji" data-emoji="👍"
+                                                                    data-unicode="\\u{1F44D}">
                                                                 <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                    alt="Smiley Emoji" class="emoji"
-                                                                    data-emoji="😊">
+                                                                    alt="Smiley Emoji" class="emoji" data-emoji="😊"
+                                                                    data-unicode="\\u{1F604}">
                                                                 <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                    alt="Eye Heart Emoji" class="emoji"
-                                                                    data-emoji="😍">
+                                                                    alt="Eye Heart Emoji" class="emoji" data-emoji="😍"
+                                                                    data-unicode="\\u{1F60D}">
                                                                 <img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                    alt="Clap Emoji" class="emoji" data-emoji="👏">
+                                                                    alt="Clap Emoji" class="emoji" data-emoji="👏"
+                                                                    data-unicode="\\u{1F44F}">
                                                             </div>
 
                                                             <div class="photos-card-dropdown dropdown">
-                                                                <button
-                                                                    class="photos-card-dropdown-btn dropdown-toggle"
+                                                                <button class="photos-card-dropdown-btn dropdown-toggle"
                                                                     type="button" data-bs-toggle="dropdown"
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><button class="dropdown-item download_img_single"  data-image-src="{{ $photo['mediaData']['post_media'] }}" ><svg
+                                                                    <li><button
+                                                                            class="dropdown-item download_img_single"
+                                                                            data-image-src="{{ $photo['mediaData']['post_media'] }}"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
@@ -247,7 +278,9 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Download </button></li>
-                                                                    <li><button class="dropdown-item"  id="delete_post" data-event-post-id="{{$photo['id']}}" data-event-id="{{$event}}">
+                                                                    <li><button class="dropdown-item" id="delete_post"
+                                                                            data-event-post-id="{{ $photo['id'] }}"
+                                                                            data-event-id="{{ $event }}">
                                                                             <svg viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
@@ -298,21 +331,47 @@
                                                     </div>
 
                                                     <div class="photo-card-photos-wrp imagePress">
-                                                        <div class="photo-card-photos-main-img open_photo_model img_click"  data-bs-toggle="modal"
-                                                        data-bs-target="#detail-photo-modal"  data-post-id="{{ $photo['id'] }}"  data-event-id="{{ $photo['event_id'] }}" >
+                                                        <div class="photo-card-photos-main-img open_photo_model img_click"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#detail-photo-modal"
+                                                            data-post-id="{{ $photo['id'] }}"
+                                                            data-event-id="{{ $photo['event_id'] }}">
                                                             @if (isset($photo['mediaData']) && $photo['mediaData']['type'] === 'image')
-                                                            <img src="{{ $photo['mediaData']['post_media'] }}" alt="Post Image">
+                                                                <img src="{{ $photo['mediaData']['post_media'] }}"
+                                                                    alt="Post Image">
                                                             @endif
                                                         </div>
-                                                        <button class="total-photos-count-btn photo_model" type="button" >+10</button>
+                                                        @if ($photo['total_media'] != '')
+                                                            <button class="total-photos-count-btn photo_model"
+                                                                type="button">{{ $photo['total_media'] }}</button>
+                                                        @endif
+{{-- {{dd($photo['reactionList'])}} --}}
                                                         <ul>
-                                                            <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                            @if (!empty($photo['reactionList']) && is_array($photo['reactionList']))
+                                                                @foreach ($photo['reactionList'] as $reaction)
+                                                                    <li>
+                                                                        <span class="reaction-emoji">
+                                                                            {{ preg_replace_callback(
+                                                                                '/\\\\u\{([0-9A-F]+)\}/',
+                                                                                function ($matches) {
+                                                                                    return mb_convert_encoding('&#x' . $matches[1] . ';', 'UTF-8', 'HTML-ENTITIES');
+                                                                                },
+                                                                                $reaction,
+                                                                            ) }}
+                                                                        </span>
+
+                                                                    </li>
+                                                                @endforeach
+                                                            @endif
+
+                                                            {{-- <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
                                                                     alt=""></li>
                                                             <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}"
                                                                     alt=""></li>
                                                             <li><img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                    alt=""></li>
-                                                             <p id="likeCount_{{$photo['id']}}">{{$photo['total_likes']}} Likes</p>
+                                                                    alt=""></li> --}}
+                                                            <p id="likeCount_{{ $photo['id'] }}">
+                                                                {{ $photo['total_likes'] }} Likes</p>
                                                         </ul>
                                                         <h5>
                                                             <svg viewBox="0 0 14 14" fill="none"
@@ -321,11 +380,12 @@
                                                                     d="M9.91602 1.16669H4.08268C2.47268 1.16669 1.16602 2.46752 1.16602 4.07169V7.56002V8.14335C1.16602 9.74752 2.47268 11.0484 4.08268 11.0484H4.95768C5.11518 11.0484 5.32518 11.1534 5.42435 11.2817L6.29935 12.4425C6.68435 12.9559 7.31435 12.9559 7.69935 12.4425L8.57435 11.2817C8.68518 11.1359 8.86018 11.0484 9.04102 11.0484H9.91602C11.526 11.0484 12.8327 9.74752 12.8327 8.14335V4.07169C12.8327 2.46752 11.526 1.16669 9.91602 1.16669ZM7.58268 8.02085H4.08268C3.84352 8.02085 3.64518 7.82252 3.64518 7.58335C3.64518 7.34419 3.84352 7.14585 4.08268 7.14585H7.58268C7.82185 7.14585 8.02018 7.34419 8.02018 7.58335C8.02018 7.82252 7.82185 8.02085 7.58268 8.02085ZM9.91602 5.10419H4.08268C3.84352 5.10419 3.64518 4.90585 3.64518 4.66669C3.64518 4.42752 3.84352 4.22919 4.08268 4.22919H9.91602C10.1552 4.22919 10.3535 4.42752 10.3535 4.66669C10.3535 4.90585 10.1552 5.10419 9.91602 5.10419Z"
                                                                     fill="white" fill-opacity="0.5" />
                                                             </svg>
-                                                            {{$photo['total_comments']}}
+                                                            {{ $photo['total_comments'] }}
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
-                                                            <input class="form-check-input selected_image"  data-image-src="{{ $photo['mediaData']['post_media'] }}"  type="checkbox"
-                                                                value="" id="flexCheckDefault">
+                                                            <input class="form-check-input selected_image"
+                                                                data-image-src="{{ $photo['mediaData']['post_media'] }}"
+                                                                type="checkbox" value="" id="flexCheckDefault">
                                                         </button>
                                                     </div>
 
@@ -367,8 +427,7 @@
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
                                         </div>
-                                        <button class="add-new-photos-btn cmn-btn download_img" type="button"
-                                          ><svg
+                                        <button class="add-new-photos-btn cmn-btn download_img" type="button"><svg
                                                 viewBox="0 0 16 16" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -713,7 +772,8 @@
                             </div>
                         </div>
                         <div class="posts-card-inner-wrp">
-                            <h3 class="posts-card-inner-questions " id="post_message">Join for some drinks upstairs? Anyone?</h3>
+                            <h3 class="posts-card-inner-questions " id="post_message">Join for some drinks upstairs?
+                                Anyone?</h3>
 
                             <div class="posts-card-show-post-wrp">
                                 <div class="swiper photo-detail-slider">
@@ -764,10 +824,12 @@
                                     </li>
                                     <p id="likes">5k Likes</p>
                                 </ul>
-                                <h6  id="comments">354 Comments</h6>
+                                <h6 id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right">
-                                <button class="posts-card-like-btn likeModel" id="likeButton" data-event-id="" data-parent-id=""  data-event-post-id="" data-user-id="{{ $login_user_id }}"><i class="fa-regular fa-heart"></i></button>
+                                <button class="posts-card-like-btn likeModel" id="likeButton" data-event-id=""
+                                    data-parent-id="" data-event-post-id="" data-user-id="{{ $login_user_id }}"><i
+                                        class="fa-regular fa-heart"></i></button>
                                 <button class="posts-card-comm show-comments-btn">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -787,7 +849,7 @@
 
                             <div class="posts-card-show-all-comments-inner">
                                 <ul>
-                                    <li class="commented-user-wrp" data-comment-id="" >
+                                    <li class="commented-user-wrp" data-comment-id="">
                                         <input type="hidden" id="parent_comment_id" value="">
                                         <input type="hidden" id="reply_comment_id" value="">
                                         <div class="commented-user-head">
@@ -1071,4 +1133,204 @@
             </div>
         </div>
     </div>
+</div>
+  <!-- Modal -->
+  <div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="reactions-info-main event-center-tabs-main">
+          <!-- ===tabs=== -->
+          <nav>
+            <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-all-reaction-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-all-reaction" type="button" role="tab" aria-controls="nav-all-reaction"
+                aria-selected="true">
+                All 106
+              </button>
+              <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-heart-reaction" type="button" role="tab" aria-controls="nav-heart-reaction"
+                aria-selected="false" tabindex="-1">
+                <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt=""> 50
+              </button>
+              <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-thumb-reaction" type="button" role="tab" aria-controls="nav-thumb-reaction"
+                aria-selected="false" tabindex="-1">
+                <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt=""> 50
+              </button>
+              <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-smily-reaction" type="button" role="tab" aria-controls="nav-smily-reaction"
+                aria-selected="false" tabindex="-1">
+                <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt=""> 50
+              </button>
+              <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-eye-heart-reaction" type="button" role="tab"
+                aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
+                <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt=""> 50
+              </button>
+              <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab"
+                data-bs-target="#nav-clap-reaction" type="button" role="tab" aria-controls="nav-clap-reaction"
+                aria-selected="false" tabindex="-1">
+                <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt=""> 50
+              </button>
+            </div>
+          </nav>
+          <!-- ===tabs=== -->
+
+          <!-- ===Tab-content=== -->
+          <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
+              aria-labelledby="nav-all-reaction-tab">
+              <ul>
+                <li class="reaction-info-wrp">
+                  <div class="commented-user-head">
+                    <div class="commented-user-profile">
+                      <div class="commented-user-profile-img">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                      </div>
+                      <div class="commented-user-profile-content">
+                        <h3>Angel Geidt</h3>
+                        <p>New York</p>
+                      </div>
+                    </div>
+                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="">
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
+              aria-labelledby="nav-heart-reaction-tab">
+              <ul>
+                <li class="reaction-info-wrp">
+                  <div class="commented-user-head">
+                    <div class="commented-user-profile">
+                      <div class="commented-user-profile-img">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                      </div>
+                      <div class="commented-user-profile-content">
+                        <h3>Angel Geidt</h3>
+                        <p>New York</p>
+                      </div>
+                    </div>
+                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="">
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel"
+              aria-labelledby="nav-thumb-reaction-tab">
+              <ul>
+                <li class="reaction-info-wrp">
+                  <div class="commented-user-head">
+                    <div class="commented-user-profile">
+                      <div class="commented-user-profile-img">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                      </div>
+                      <div class="commented-user-profile-content">
+                        <h3>Angel Geidt</h3>
+                        <p>New York</p>
+                      </div>
+                    </div>
+                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                      <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt="">
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel"
+              aria-labelledby="nav-smily-reaction-tab">
+              <ul>
+                <li class="reaction-info-wrp">
+                  <div class="commented-user-head">
+                    <div class="commented-user-profile">
+                      <div class="commented-user-profile-img">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                      </div>
+                      <div class="commented-user-profile-content">
+                        <h3>Angel Geidt</h3>
+                        <p>New York</p>
+                      </div>
+                    </div>
+                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                      <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt="">
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel"
+              aria-labelledby="nav-eye-heart-reaction-tab">
+              <ul>
+                <li class="reaction-info-wrp">
+                  <div class="commented-user-head">
+                    <div class="commented-user-profile">
+                      <div class="commented-user-profile-img">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                      </div>
+                      <div class="commented-user-profile-content">
+                        <h3>Angel Geidt</h3>
+                        <p>New York</p>
+                      </div>
+                    </div>
+                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                      <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt="">
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+
+            <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel"
+              aria-labelledby="nav-clap-reaction-tab">
+              <ul>
+                <li class="reaction-info-wrp">
+                  <div class="commented-user-head">
+                    <div class="commented-user-profile">
+                      <div class="commented-user-profile-img">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                      </div>
+                      <div class="commented-user-profile-content">
+                        <h3>Angel Geidt</h3>
+                        <p>New York</p>
+                      </div>
+                    </div>
+                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                      <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt="">
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+          <!-- ===Tab-content=== -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="cmn-btn reset-btn">Reset</button>
+        <button type="button" class="cmn-btn">Apply</button>
+      </div>
+    </div>
+  </div>
 </div>
