@@ -199,7 +199,7 @@ class EventController extends Controller
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
                 $eventDetail['inviteCount'] = EventInvitedUser::with('user')
-                    ->where('event_id', $request->id)
+                    ->where('event_id', $request->id)->where('is_co_host', '0')
                     ->count();
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
 
@@ -405,7 +405,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
-                // dd($eventDetail);
+                dd($eventDetail['event_setting']);
             }
         } else {
             $title = 'Create Event';
@@ -1863,17 +1863,13 @@ class EventController extends Controller
 
 
         $getAllContacts = contact_sync::where('contact_id', $id)
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
-            ->when(!empty($request->limit), function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
+            ->when($type != 'group', function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->limit($request->limit)
+                        ->skip($request->offset);
+                });
             })
-            ->when(!empty($search_user), function ($query) use ($search_user) {
+            ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
@@ -1899,12 +1895,7 @@ class EventController extends Controller
         // dd($selected_co_host_prefer_by);
         // dd($selected_co_host_prefer_by);
 
-        // return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
-    
-        return response()->json([
-            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
-            'scroll' => $request->scroll
-        ]);
+        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
     }
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
@@ -2289,13 +2280,7 @@ class EventController extends Controller
             ->where('id', '!=', $user_id)
             ->where(['app_user' => '1'])
             ->orderBy('firstname')
-            
-            ->when(!empty($request->limit), function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-
-            ->when(!empty($search_user) != '', function ($query) use ($search_user) {
+            ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
@@ -2305,9 +2290,7 @@ class EventController extends Controller
 
 
 
-        // return view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
-        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'))->render(), "scroll" => $request->scroll]);
-
+        return view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
     }
 
     public function get_gift_registry(Request $request)
@@ -2326,7 +2309,6 @@ class EventController extends Controller
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
         $thankuCardId = $request->thankuCardId;
-dd(sadsa);
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card','thankuCardId'))->render()]);
     }
 
