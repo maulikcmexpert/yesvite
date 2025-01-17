@@ -19,7 +19,7 @@
             $fontColor = 'fontcolor' . $firstInitial;
             @endphp
             <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-            @endif
+            @endif 
         </div>
         <div class="text-start">
             <h5>{{$guest_user['userdata']['firstname']}} {{$guest_user['userdata']['lastname']}}</h5>

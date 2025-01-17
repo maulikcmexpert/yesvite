@@ -2366,7 +2366,8 @@
 
 
 
-
+<input type="hidden" id="eventEditId" value="{{$eventDetail['eventeditId']}}">
+<input type="hidden" id="inviteTotalCount" value="{{$eventDetail['inviteCount']}}">
 
 
 

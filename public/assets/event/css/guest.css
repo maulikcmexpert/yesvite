@@ -338,6 +338,7 @@
     position: relative;
     /* max-height: 280px; */
     max-height: calc(100vh - 450px);
+    /* max-height: calc(100vh - 340px); */
 }
 
 .guest-content .design-seting {
