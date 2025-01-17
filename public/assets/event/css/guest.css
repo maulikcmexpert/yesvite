@@ -431,7 +431,7 @@
 #sidebar_add_co_host .list_all_invited_user {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 410px);
+    max-height: calc(100vh - 300px);
 }
 #sidebar_add_co_host .list_all_contact_user {
     overflow: hidden;
@@ -450,6 +450,7 @@
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 50px);
+    padding-bottom: 130px;
 }
 
 .change-your-plan-wrp {
