@@ -704,6 +704,8 @@
 
                 <div class="position-relative">
                     <input type="search" placeholder="Search name" class="form-control co_host_search">
+                    <input type="search" placeholder="Search name" class="form-control phone_co_host_search" style="display:none;">
+
                     <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -719,8 +721,10 @@
 
 
 
-                <div class="user-contacts list_all_invited_user">
+                <div class="user-contacts list_all_invited_user" id="select_event_cohost">
+                </div>
 
+                <div class="user-contacts list_all_contact_user" id="select_contact_event_cohost" style="display: none;">
                 </div>
             </div>
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
