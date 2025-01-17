@@ -264,6 +264,7 @@
 .range:focus {
     outline: none;
     box-shadow: none !important;
+    border: none !important;
 }
 
 /* WebKit (Chrome, Safari) */
