@@ -26,7 +26,7 @@
 
                             <!-- ======= guest-users mobile ======== -->
                             <div class="guest-contacts-wrp user-list-responsive_yesvite">
-                                @if (Session::get('user_ids')!=null && count(Session::get('user_ids')) > 0)
+                                @if (Session::get('user_ids') != null && count(Session::get('user_ids')) > 0)
                                     @php
                                         $counter = 0;
                                     @endphp
@@ -228,7 +228,7 @@
 
                             <!-- ======= guest-users mobile ======== -->
                             <div class="guest-contacts-wrp user-list-responsive_phone">
-                                @if (Session::get('contact_ids')!=null && count(Session::get('contact_ids')) > 0)
+                                @if (Session::get('contact_ids') != null && count(Session::get('contact_ids')) > 0)
                                     @php
                                         $counter = 0;
                                     @endphp
@@ -600,7 +600,7 @@
                     </div>
                 </div>
                 <div class="user-contacts inivted_user_list">
-                    @if (Session::get('user_ids')!=null&& count(Session::get('user_ids')) > 0)
+                    @if (Session::get('user_ids') != null && count(Session::get('user_ids')) > 0)
 
                         @foreach (Session::get('user_ids') as $guest_user)
                             @if ($guest_user['prefer_by'] == 'email')
@@ -720,7 +720,7 @@
                         @endforeach
                     @endif
 
-                    @if (Session::get('contact_ids')!=null && count(Session::get('contact_ids')) > 0)
+                    @if (Session::get('contact_ids') != null && count(Session::get('contact_ids')) > 0)
                         @foreach (Session::get('contact_ids') as $guest_user)
                             @if ($guest_user['prefer_by'] == 'email')
                                 <div class="users-data invited_user" data-id={{ 'sync_' . $guest_user['sync_id'] }}

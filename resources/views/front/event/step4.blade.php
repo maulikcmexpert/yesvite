@@ -33,15 +33,29 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="allow_for_1_more" name="allow_for_1_more" onchange="savePage4Data()" value="1" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="allow_for_1_more" name="allow_for_1_more" onchange="savePage4Data()" value="1" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more']=="1")?'checked':''}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit allow_limit_toggle"  style="display: none;">
+                                    <a href="#" class="add-limit allow_limit_toggle"  style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more']=="1") ? "":"display:none"}}>
                                         <div class="d-flex align-items-center justify-content-between w-100 allow_for_limit_count" >
+
+                                            @if (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more']=="1")
+                                            <div class="d-flex align-items-center add_new_limit">
+                                                <span class="me-3">
+                                                </span>
+                                                <h5>Limit set to {{$eventDetail['event_setting']['allow_limit']}}</h5>
+                                            </div>
+                                            <span>
+                                                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1.42505 14.6004L6.85838 9.16706C7.50005 8.52539 7.50005 7.47539 6.85838 6.83372L1.42505 1.40039" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                            @else
+                                 
                                             <div class="d-flex align-items-center add_new_limit">
                                                 <span class="me-3">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,6 +69,7 @@
                                                     <path d="M1.42505 14.6004L6.85838 9.16706C7.50005 8.52539 7.50005 7.47539 6.85838 6.83372L1.42505 1.40039" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                             </span>
+                                            @endif
                                         </div>
                                     </a>
                                 </div>
@@ -73,7 +88,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="only_adults" name="only_adults" value="1" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="only_adults" name="only_adults" value="1" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['adult_only_party']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>

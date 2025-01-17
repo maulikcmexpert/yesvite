@@ -19,6 +19,7 @@ var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
 var isSetSession = 0;
+eventData.allow_limit_count = $("#allow_limit_count").val();;
 $(document).ready(function () {
    
 

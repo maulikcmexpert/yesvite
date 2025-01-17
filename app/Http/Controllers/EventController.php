@@ -392,7 +392,7 @@ class EventController extends Controller
                                 foreach ($itemValue->user_potluck_items as $itemcarryUser) {
                                     $userPotluckItem['id'] = $itemcarryUser->id;
                                     $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                    $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $userid) ? 1 : 0;
+                                    $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $id) ? 1 : 0;
                                     $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
                                     $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
@@ -405,7 +405,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
-                // dd($eventDetail);
+                // dd($eventDetail['event_setting']);
             }
         } else {
             $title = 'Create Event';

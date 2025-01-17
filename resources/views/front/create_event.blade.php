@@ -500,7 +500,11 @@
             <div class="qty-container">
                 {{-- <button class="qty-btn-minus allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button> --}}
                 <button class="allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button>
-                <input type="number" name="qty" id="allow_limit_count" value="0" class="input-qty" readonly />
+                {{$value = (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more'] == "1") 
+                ? $eventDetail['event_setting']['allow_limit'] 
+                : 0;
+            }}
+                <input type="number" name="qty" id="allow_limit_count" value={{$value}} class="input-qty" readonly />
                 <button class="allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button>
                 {{-- <button class="qty-btn-plus allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button> --}}
             </div>
