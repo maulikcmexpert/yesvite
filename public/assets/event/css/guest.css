@@ -450,6 +450,7 @@
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 50px);
+    padding-bottom: 130px;
 }
 
 .change-your-plan-wrp {
