@@ -503,6 +503,22 @@ ul.nav-tabs .nav-link:focus {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#loader img:focus {
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#loader:focus {
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+    background-color: transparent; /* Optional: If you want to remove any background color */
 }
 
 #home_loader {

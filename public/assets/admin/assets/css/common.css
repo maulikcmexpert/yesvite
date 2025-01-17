@@ -1081,6 +1081,13 @@ margin: -43px 0px 0px 8px;
     user-select: none;
 }
 
+#loader:focus {
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+    background-color: transparent; /* Optional: If you want to remove any background color */
+}
+
 .nav-sidebar .nav-item>.nav-link{
     display: flex;
     align-items: start;
