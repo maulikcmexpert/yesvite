@@ -136,7 +136,7 @@
                                     </div>
                                 </a>
                             </div> --}}
-                                <div class="accordion-con">
+                                {{-- <div class="accordion-con">
                                     <div class="d-flex justify-content-between ">
                                         <div class="d-flex">
                                             <p><strong>Kid drop off event</strong></p>
@@ -158,7 +158,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="accordion-con">
                                     <div class="d-flex justify-content-between ">
                                         <div class="d-flex">
@@ -174,7 +174,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="thankyou_message" name="thankyou_message" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="thankyou_message" name="thankyou_message" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['thank_you_cards']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
