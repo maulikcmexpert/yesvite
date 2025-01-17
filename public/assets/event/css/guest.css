@@ -449,7 +449,7 @@
 #sidebar_potluck .potluck-category {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 50px);
 }
 
 .change-your-plan-wrp {
