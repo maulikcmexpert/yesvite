@@ -6,12 +6,14 @@ $phone_checked = '';
 $disabled = '';
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($user->id, array_column($selected_user, 'id'));
-
+   
     if ($foundKey !== false) {
+       
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';
         $phone_checked = '';
         if ($user->id === (int)$selected_user[$key]['id']) {
+            // dd($selected_user[$key]['prefer_by']);
             if($selected_user[$key]['prefer_by'] == 'email'){
                 $email_checked = 'checked';
             }elseif($selected_user[$key]['prefer_by'] == 'phone'){
@@ -19,6 +21,7 @@ if(isset($selected_user) && !empty($selected_user)){
             }
         }
     }
+   
 // if(count($selected_user) >= 15){
 // $disabled = 'disabled';
 // }

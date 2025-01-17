@@ -120,7 +120,7 @@ defer
         // alert(plan);
     }
     // eventData.plan_selected = 'Free';
-    window.location.href = "event";
+    window.location.href = "events";
 });
 </script>
 

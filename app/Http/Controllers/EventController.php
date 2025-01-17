@@ -73,6 +73,7 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
+
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
@@ -85,6 +86,7 @@ class EventController extends Controller
         $slider_image = Session::get('desgin_slider');
         $shape = Session::get('shape_image');
 
+        $useremail = Auth::user()->email;
         if (isset($shape) && $shape != "" || $shape != NULL) {
             if (file_exists(public_path('storage/canvas/') . $shape)) {
                 $shapePath = public_path('storage/canvas/') . $shape;
@@ -110,12 +112,97 @@ class EventController extends Controller
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $eventDetail = [];
+        $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
+        $eventDetail['inviteCount'] = 0;
+
+
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
+            if ($request->id != "") {
+
+
+                $userIds = session()->get('user_ids', []);
+
+                $invitedYesviteUsers = EventInvitedUser::with('user')
+                    ->where('event_id', $request->id)
+                    ->where('is_co_host', '0')
+                    ->whereNotNull('user_id')
+                    ->get();
+                if ($invitedYesviteUsers) {
+                    foreach ($invitedYesviteUsers as $user) {
+                        $userVal = User::select(
+                            'id',
+                            'firstname',
+                            'lastname',
+                            'profile',
+                            'email',
+                            'country_code',
+                            'phone_number',
+                            'app_user',
+                            'prefer_by',
+                            'email_verified_at',
+                            'parent_user_phone_contact',
+                            'visible',
+                            'message_privacy'
+                        )->where('id', $user['user_id'])->first();
+
+                        if ($userVal) {
+                            $userEntry = [
+                                'id' => $userVal->id,
+                                'firstname' => $userVal->firstname,
+                                'lastname' => $userVal->lastname,
+                                'prefer_by' => $userVal->prefer_by,
+                                'invited_by'=>$useremail,
+                                'profile' => $userVal->profile ?? ''
+                            ];
+                            $userIds[] = $userEntry;
+                        }
+                    }
+                    session()->put('user_ids', $userIds);
+                    Session::save();
+                }
+
+                $userIdsSession = session()->get('contact_ids', []);
+                $invitedContactUsers = EventInvitedUser::with('user')
+                    ->where('event_id', $request->id)
+                    ->where('is_co_host', '0')
+                    ->whereNull('user_id')
+                    ->get();
+                if ($invitedContactUsers) {
+                    foreach ($invitedContactUsers as $user) {
+                        $userVal = contact_sync::select(
+                            'id',
+                            'firstname',
+                            'lastname',
+                            'photo',
+                            'preferBy',
+
+
+                        )->where('id', $user['sync_id'])->first();
+                        if ($userVal) {
+                            $userEntry = [
+                                'sync_id' => $userVal->id,
+                                'firstname' => $userVal->firstname,
+                                'lastname' => $userVal->lastname,
+                                'prefer_by' => $userVal->preferBy,
+                                'invited_by'=>$useremail,
+                                'profile' => $userVal->photo ?? ''
+                            ];
+                            $userIdsSession[] = $userEntry;
+                        }
+                    }
+                    session()->put('contact_ids', $userIdsSession);
+                    Session::save();
+                }
+            }
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
+                $eventDetail['inviteCount'] = EventInvitedUser::with('user')
+                    ->where('event_id', $request->id)
+                    ->count();
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
+
                 // $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
                 $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
                 $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
@@ -155,42 +242,43 @@ class EventController extends Controller
                 $eventDetail['invited_guests'] = [];
                 $eventDetail['guest_co_host_list'] = [];
 
-                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
+                $invitedUser = EventInvitedUser::with('contact_sync')->where(['event_id' => $getEventData->id])->get();
 
-                if (!empty($invitedUser)) {
-                    foreach ($invitedUser as $guestVal) {
-                        if ($guestVal->is_co_host == '0') {
-                            if ($guestVal->user->is_user_phone_contact == '1') {
-                                $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                                $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                                $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                                $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                                $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                                $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['invited_guests'][] = $invitedGuestDetail;
-                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                                $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
-                            }
-                        } else if ($guestVal->is_co_host == '1') {
-                            if ($guestVal->user->is_user_phone_contact == '1') {
-                                $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                                $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                                $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                                $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                                $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                                $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
-                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                                $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                                $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                                $eventDetail['co_host_list'][] = $coHostDetail;
-                            }
-                        }
-                    }
-                    $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
-                }
+
+                // if (!empty($invitedUser)) {
+                //     foreach ($invitedUser as $guestVal) {
+                //         if ($guestVal->is_co_host == '0') {
+                //             if ($guestVal->user->is_user_phone_contact == '1') {
+                //                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                //                 $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                //                 $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                //                 $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                //                 $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                //                 $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                //                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
+                //             } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                //                 $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                //                 $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                //                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
+                //             }
+                //         } else if ($guestVal->is_co_host == '1') {
+                //             if ($guestVal->user->is_user_phone_contact == '1') {
+                //                 $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                //                 $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                //                 $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                //                 $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                //                 $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                //                 $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                //                 $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
+                //             } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                //                 $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                //                 $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                //                 $eventDetail['co_host_list'][] = $coHostDetail;
+                //             }
+                //         }
+                //     }
+                //     $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
+                // }
                 // $eventDetail['events_schedule_list'] = [];
                 $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
@@ -293,7 +381,7 @@ class EventController extends Controller
 
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
-                                $potluckItem['is_host'] = ($itemValue->user_id == $userid) ? 1 : 0;
+                                $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
                                 $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                                 $potluckItem['quantity'] =  $itemValue->quantity;
                                 $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
@@ -1155,15 +1243,16 @@ class EventController extends Controller
             }
         }
         // Session::forget('user_ids');
-        Session::put('user_ids', []);
-        Session::save();
-        if (is_array($sessionKeys)) {
-            foreach ($sessionKeys as $key) {
-                $request->session()->forget($key);
-            }
-            // dd(session('user_ids'));
-            return response()->json(['success' => true, 'message' => 'Sessions deleted successfully']);
-        }
+        // Session::put('user_ids', []);
+        // Session::save();
+        // if (is_array($sessionKeys)) {
+        //     dd($sessionKeys);
+        //     foreach ($sessionKeys as $key) {
+        //         $request->session()->forget($key);
+        //     }
+        //     // dd(session('user_ids'));
+        //     return response()->json(['success' => true, 'message' => 'Sessions deleted successfully']);
+        // }
         return response()->json(['success' => true, 'message' => 'Session deleted successfully']);
     }
 
@@ -1602,8 +1691,10 @@ class EventController extends Controller
 
     public function getUserAjax(Request $request)
     {
+     
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
+        // $invitedUser='';
         $type = $request->type;
         $emails = [];
         $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
@@ -1611,17 +1702,15 @@ class EventController extends Controller
         if ($getAllContacts->isNotEmpty()) {
             $emails = $getAllContacts->pluck('email')->toArray();
         }
-
-
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
             ->where('id', '!=', $id)
             ->where(['app_user' => '1'])
             ->whereIn('email', $emails)
             ->orderBy('firstname')
 
-            ->when(!empty($request->limit) && $type != 'group' , function ($query) use ($request) {
+            ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
-                      ->offset($request->offset);
+                    ->offset($request->offset);
             })
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
@@ -1652,6 +1741,7 @@ class EventController extends Controller
                 'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
                 'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
                 'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
+                // 'ischecked' => in_array($user->id, $invitedUserIds) ? "1" : "0",
             ];
             // $yesviteUserDetail['app_user']  = $user->app_user;
             // $yesviteUserDetail['visible'] =  $user->visible;
@@ -1659,8 +1749,8 @@ class EventController extends Controller
             // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
+
         $selected_user = Session::get('user_ids');
-        // dd(count($selected_user));
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 
@@ -1671,6 +1761,7 @@ class EventController extends Controller
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
+       
 
         $getAllContacts = contact_sync::where('contact_id', $id)
             // ->when($type != 'group', function ($query) use ($request) {
@@ -1681,12 +1772,12 @@ class EventController extends Controller
             // })
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
-                      ->offset($request->offset);
+                    ->offset($request->offset);
             })
             ->when(!empty($request->search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-                      ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+                        ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
                 });
             })
             // ->when($request->search_user != ''&& $request->search_user!=null, function ($query) use ($search_user) {
@@ -1695,7 +1786,7 @@ class EventController extends Controller
             //             ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
             //     });
             // })
-            
+
             ->orderBy('firstname')
 
             ->get();
@@ -1792,7 +1883,7 @@ class EventController extends Controller
     {
 
         $users = $request->users;
-     
+
         $userIds = session()->get('user_ids', []);
         foreach ($users as $value) {
             $id = $value['id'];
@@ -2398,36 +2489,34 @@ class EventController extends Controller
         }
     }
     public function getCategory(Request $request)
-{
-    $search_user = $request->search_user;
+    {
+        $search_user = $request->search_user;
 
-    $design_category = EventDesignCategory::with([
-        'subcategory' => function ($query) use ($search_user) {
-            $query->select('*')
-                ->where('subcategory_name', 'LIKE', "%$search_user%")
-                ->whereHas('textdatas', function ($ques) {})
-                ->with([
-                    'textdatas' => function ($que) {
-                        $que->select('*');
-                    }
-                ]);
+        $design_category = EventDesignCategory::with([
+            'subcategory' => function ($query) use ($search_user) {
+                $query->select('*')
+                    ->where('subcategory_name', 'LIKE', "%$search_user%")
+                    ->whereHas('textdatas', function ($ques) {})
+                    ->with([
+                        'textdatas' => function ($que) {
+                            $que->select('*');
+                        }
+                    ]);
+            }
+        ])
+            ->where('category_name', 'LIKE', "%$search_user%")
+            ->orderBy('id', 'DESC')
+            ->get();
+        if ($design_category->isEmpty()) {
+            return response()->json([
+                'view' => '<p>No result found matching your search.</p>',
+                'success' => false
+            ]);
         }
-    ])
-    ->where('category_name', 'LIKE', "%$search_user%")
-    ->orderBy('id', 'DESC')
-    ->get();
-    if ($design_category->isEmpty()) {
+        //   dd($design_category);
         return response()->json([
-            'view' => '<p>No result found matching your search.</p>',
-            'success' => false
+            'view' => view('front.event.guest.get_category', compact('design_category'))->render(),
+            'success' => true
         ]);
     }
-//   dd($design_category);
-    return response()->json([
-        'view' => view('front.event.guest.get_category', compact('design_category'))->render(),
-        'success' => true
-    ]);
-   
-}
-
 }

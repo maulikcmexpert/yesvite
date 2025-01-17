@@ -6,7 +6,6 @@ $phone_checked = '';
 $disabled = '';
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($user->id, array_column($selected_user, 'sync_id'));
-
     if ($foundKey !== false) {
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';

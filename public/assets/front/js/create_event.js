@@ -15,6 +15,10 @@ var selected_profilePhoto = "";
 var selected_dataId = '';
 var selected_profile_or_text = "";
 var selected_prefer_by = '';
+var eventEditId = $("#eventEditId").val();
+var inviteTotalCount = $("#inviteTotalCount").val();
+$(".invite-count").text(inviteTotalCount);
+var isSetSession = 0;
 $(document).ready(function () {
    
 
@@ -4782,7 +4786,7 @@ $(document).on("click",".remove_co_host",function(){
             </span>
             <h5>Select your co-host</h5>`);
     var delete_co_host = $('#remove_co_host_id').val();
-  alert(delete_co_host);
+//   alert(delete_co_host);
     $('.'+delete_co_host).prop("checked", false);
 })
 
@@ -5185,11 +5189,12 @@ function displayRecords(lim, off,type,search = null,) {
             offsetyesvite = 0;
         }
     }
+   
     $.ajax({
         type: "GET",
         async: false,
         url: base_url+'event/get_user_ajax',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name ,
         cache: false,
         beforeSend: function () {
 
@@ -6071,7 +6076,7 @@ $("#YesviteContactsAll").on("scroll", function () {
 
 
 function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
-    // console.log(search_name);
+    
     $.ajax({
         type: "GET",
         async: false,
@@ -6083,6 +6088,7 @@ function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
         },
         success: function (html) {
             console.log(html);
+            isSetSession=1;
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             const coins =  $("#coins").val();
             if(currentInviteCount >= coins){

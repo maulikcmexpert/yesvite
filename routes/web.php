@@ -164,8 +164,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
 
 
-    // Route::get('event/{id?}',  [ControllersEventController::class, 'index'])->name('event');
-    Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
+    Route::get('events/{id?}',  [ControllersEventController::class, 'index'])->name('event');
+    // Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
     Route::post('event/store',  [ControllersEventController::class, 'store'])->name('event.event_store');
     Route::post('event/store_user_id',  [ControllersEventController::class, 'storeUserId'])->name('event.store_user_id');
     Route::post('event/delete_user_id',  [ControllersEventController::class, 'removeUserId'])->name('event.delete_user_id');
