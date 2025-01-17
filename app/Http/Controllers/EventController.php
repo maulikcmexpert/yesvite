@@ -2280,6 +2280,10 @@ class EventController extends Controller
             ->where('id', '!=', $user_id)
             ->where(['app_user' => '1'])
             ->orderBy('firstname')
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset);
+            })
             ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
@@ -2290,7 +2294,8 @@ class EventController extends Controller
 
 
 
-        return view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
+        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),'scroll'=>$request->scroll]);
+
     }
 
     public function get_gift_registry(Request $request)
