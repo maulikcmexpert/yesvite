@@ -5208,7 +5208,7 @@ function get_user(type){
     if (busyyesvite == false) {
         busyyesvite = true;
         page = 3;
-        displayRecords(limityesvite, offsetyesvite,type,null);
+        displayRecords(limityesvite, offsetyesvite,type,type="all");
     }
     
 }
