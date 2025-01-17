@@ -425,7 +425,8 @@ ul.nav .nav-link:hover {
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
-    width:auto !important;
+    width:24px !important;
+    height: 24px !important;
 }
 
 .popular-list h5 {
