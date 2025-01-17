@@ -418,7 +418,8 @@ ul.nav .nav-link:hover {
 
 .contact-tab input[type="search"]~span {
     position: absolute;
-    right: 20px;
+    right: 20px !important;
+    left: auto !important;
     top: 50%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
@@ -427,6 +428,7 @@ ul.nav .nav-link:hover {
     -o-transform: translateY(-50%);
     width:24px !important;
     height: 24px !important;
+    padding: 0 !important;
 }
 
 .popular-list h5 {
