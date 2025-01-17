@@ -5,7 +5,7 @@
             <p>{{$data['member_count']}} Guests</p>
         </div>
        <span class="ms-auto me-3">
-            {{-- <svg width="16"  id="delete_group" data-id="{{$data['group_id']}}" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="16"  id="delete_group" data-id="{{$data['group_id']}}" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14 4.48665C11.78 4.26665 9.54667 4.15332 7.32 4.15332C6 4.15332 4.68 4.21999 3.36 4.35332L2 4.48665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 </path>
                 <path d="M5.66699 3.81301L5.81366 2.93967C5.92033 2.30634 6.00033 1.83301 7.12699 1.83301H8.87366C10.0003 1.83301 10.087 2.33301 10.187 2.94634L10.3337 3.81301" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -14,7 +14,7 @@
                 </path>
                 <path d="M6.88672 11.5H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M6.33301 8.83301H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg> --}}
+            </svg>
         </span> 
         <span>
             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
