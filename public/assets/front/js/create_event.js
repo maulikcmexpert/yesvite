@@ -311,6 +311,7 @@ $(document).on("click", ".add_new_group_member", function () {
                     swiper[2].update(); // Update Swiper after adding the new slide
 
                     toggleSidebar("sidebar_groups");
+                    groupToggleSearch('');
                 }
             },
             error: function (xhr, status, error) {
