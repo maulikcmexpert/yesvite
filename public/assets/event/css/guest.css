@@ -455,13 +455,13 @@
 #sidebar_potluck:has(.alert-box) .potluck-category {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 150px);
+    max-height: calc(100vh - 280px);
 }
 
 #sidebar_potluck .potluck-category{
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 150px);
+    max-height: calc(100vh - 200px);
 }
 
 .change-your-plan-wrp {
@@ -732,7 +732,13 @@
     }
 
     #sidebar_potluck:has(.alert-box) .potluck-category {
-        max-height: calc(100vh - 230px);
+        max-height: calc(100vh - 360px);
+    }
+
+    #sidebar_potluck .potluck-category{
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 300px);
     }
 
     .setting-content .accordion-item {
