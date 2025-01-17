@@ -357,6 +357,7 @@
 
 .location-icon input {
     background-color: transparent !important;
+    padding-right: 30px !important;
 }
 
 .location-icon svg {
