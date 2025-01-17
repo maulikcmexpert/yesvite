@@ -360,6 +360,7 @@
     flex-direction: column-reverse;
     width: 100%;
     box-shadow: none !important;
+    z-index: 0 !important;
 }
 
 .sp-picker-container {
