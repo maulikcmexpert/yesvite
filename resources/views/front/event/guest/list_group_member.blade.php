@@ -1,4 +1,3 @@
-
 @foreach ($groups as $data)
 
 <div class="users-data">
@@ -12,8 +11,6 @@
             $lastInitial = !empty($data->lastname) ? strtoupper($data->lastname[0]) : '';
             $initials = $firstInitial . $lastInitial;
             $fontColor = 'fontcolor' . $firstInitial;
-            $preferBy = $data->group_member_prefer_by;
-            
 
             @endphp
             <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
@@ -70,14 +67,14 @@
             @endif
             <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
-                value="{{ $data->id }}" {{($preferBy=="email")?'checked':""}}>
+                value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}>
         </div>
         @endif
         @if(isset($data->phone_number) && $data->phone_number!="")
         <div class="right-note ms-auto">
             <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
-                value="{{ $data->id }}"  {{($preferBy=="phone")?'checked':""}}>
+                value="{{ $data->id }}"  {{( $data->group_member_prefer_by=="phone")?'checked':""}}>
         </div>
         @endif
     </div>
