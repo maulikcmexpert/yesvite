@@ -428,10 +428,16 @@
     margin-bottom: 10px;
 }
 
-#sidebar_add_co_host .list_all_invited_user {
+#sidebar_add_co_host:has(.alert-box) .list_all_invited_user{
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 410px);
+}
+
+#sidebar_add_co_host .list_all_invited_user{
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 320px);
 }
 #sidebar_add_co_host .list_all_contact_user {
     overflow: hidden;
@@ -449,7 +455,8 @@
 #sidebar_potluck .potluck-category {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 50px);
+    padding-bottom: 130px;
 }
 
 .change-your-plan-wrp {
