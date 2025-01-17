@@ -46,7 +46,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <div class="invited-img" style="width: 100%;max-width: 300px;height: 430px;border-radius: 10px;">
+                        <div class="invited-img" style="width: 100%;max-width: 300px;height: 430px;border-radius: 10px;border: 1px solid lightgray;">
                             <img src="{{ asset('public/storage/event_images/'.$eventData['event_image'])}}" alt="" style="width: 100%;height: 100%;border-radius: 10px;">
                         </div>
                     </td>
