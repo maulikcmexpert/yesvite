@@ -5201,7 +5201,9 @@ $("#YesviteUserAll").on("scroll", function () {
             busyyesvite = true;
             offsetyesvite += limityesvite;
             // var type="yesvite";
-            displayRecords(limityesvite, offsetyesvite,type="all");
+            if(NoMoreDataYesviteAll==false ){
+                displayRecords(limityesvite, offsetyesvite,type="all");
+            }
         }
 });
 function get_user(type){
@@ -5289,7 +5291,9 @@ function displayRecords(lim, off,type,search = null) {
                 $('.user_choice').prop('disabled',true);
             }
             console.log(html);
-            
+            if(html==""){
+               NoMoreDataYesviteAll=true;
+            }
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
