@@ -306,7 +306,7 @@
     width: 15px;
     transform: translateY(calc(-50% + 8px));
     position: relative;
-    top: -5px;
+    top: 0px;
 }
 
 /* Standard for Edge */
