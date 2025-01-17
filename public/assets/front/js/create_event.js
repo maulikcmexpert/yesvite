@@ -5208,7 +5208,7 @@ function get_user(type){
     if (busyyesvite == false) {
         busyyesvite = true;
         page = 3;
-        displayRecords(limityesvite, offsetyesvite,type);
+        displayRecords(limityesvite, offsetyesvite,type,null);
     }
     
 }
@@ -5264,7 +5264,7 @@ $('#groupUsers').scroll(function () {
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,) {
+function displayRecords(lim, off,type,search = null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
