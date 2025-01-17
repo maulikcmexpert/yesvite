@@ -452,11 +452,16 @@
     padding: 0px 5px;
 }
 
-#sidebar_potluck .potluck-category {
+#sidebar_potluck:has(.alert-box) .potluck-category {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 50px);
-    padding-bottom: 130px;
+    max-height: calc(100vh - 150px);
+}
+
+#sidebar_potluck .potluck-category{
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 150px);
 }
 
 .change-your-plan-wrp {
@@ -726,8 +731,8 @@
         max-height: calc(100vh - 270px);
     }
 
-    #sidebar_potluck .potluck-category {
-        max-height: calc(100vh - 350px);
+    #sidebar_potluck:has(.alert-box) .potluck-category {
+        max-height: calc(100vh - 230px);
     }
 
     .setting-content .accordion-item {
