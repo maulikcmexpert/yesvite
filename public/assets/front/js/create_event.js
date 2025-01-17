@@ -59,6 +59,23 @@ $(document).ready(function () {
         $('#start-time-zone').append(newOption);
     }
     
+
+    let isOptionExistsend = false;
+    $('#end-time-zone option').each(function () {
+        if ($(this).val() === currentTimeZone) {
+            $(this).prop('selected', true);
+            isOptionExists = true;
+            return false; 
+        }
+    });
+
+    if (!isOptionExistsend) {
+        const newOption = $('<option></option>')
+            .val(currentTimeZone)
+            .text(currentTimeZone)
+            .prop('selected', true);
+        $('#end-time-zone').append(newOption);
+    }
     
     console.log(getTimeZoneAbbreviation()); 
     
@@ -627,8 +644,9 @@ $(function () {
             },
             showDropdowns: false,
             startDate: moment().startOf("month"),
-            endDate: moment().endOf("month"),
-            minDate: moment().add(1, 'days'),  
+            // endDate: moment().endOf("month"),
+            // minDate: moment().add(1, 'days'),  
+            minDate: moment(),  
             // alwaysShowCalendars: true, // Keep the calendar visible
             maxSpan: { days: 2 },
         },
@@ -648,6 +666,7 @@ $(function () {
                 eventDate = end.format("MM-DD-YYYY");
             }
             $("#event-date").val(eventDate);
+            $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
 
             $("#event-date").val(eventDate).trigger('change');
 
@@ -1164,6 +1183,20 @@ function loadMoreData(page, search_name) {
 // }
 
 // $(document).ready(function () {
+    $(document).on('change', 'input[name^="add_by_"]', function () {
+        var currentName = $(this).attr('name');
+        var userId = $(this).val();
+    
+        if ($(this).is(':checked')) {
+            $('input[name^="add_by_"]')
+                .filter(function () {
+                    return $(this).val() === userId && $(this).attr('name') !== currentName;
+                })
+                .prop('checked', false);
+        }
+    });
+    
+
 
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     
@@ -2809,9 +2842,33 @@ function focus_timeOut(type){
         $("#"+type).focus();
     }, 100);
 }
+// $('input[type="text"],textarea').on('keydown', function(e) {
+//     var event_name = $("#event-name").val();
+//     if(event_name==""){
+//         if (e.key === " " || e.keyCode === 32) {
+//             e.preventDefault(); // Prevent spacebar input
+//         }
+//     }
+// }); 
+
+$('input[type="text"], textarea').on('keydown', function(e) {
+    var currentValue = $(this).val(); // Get the value of the current input/textarea
+    if (currentValue === "") {
+        if (e.key === " " || e.keyCode === 32) {
+            e.preventDefault(); // Prevent spacebar input if empty
+        }
+    }
+});
+
+$('input[type="text"],textarea').on('paste', function(e) {
+    const clipboardData = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
+    if ($.trim(clipboardData) === "") {
+        e.preventDefault(); 
+    }
+});
 
 function savePage1Data(close = null) {
-
+ 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
@@ -2941,48 +2998,51 @@ function savePage1Data(close = null) {
     } else {
         $("#event-start_time-error").css("display", "none");
     }
-    // if (address1 == "") {
-    //     $("#event-address1-error")
-    //         .css("display", "block")
-    //         .css("color", "red")
-    //         .text("Please enter address1");
-    //         focus_timeOut('address1');
-    //     return;
-    // } else {
-    //     $("#event-address1-error").css("display", "none");
-    // }
-    // if (city == "") {
-    //     $("#event-city-error")
-    //         .css("display", "block")
-    //         .css("color", "red")
-    //         .text("Please enter city");
-    //         focus_timeOut('city');
-    //     return;
-    // } else {
-    //     $("#event-city-error").css("display", "none");
-    // }
-    // if (state == "") {
-    //     $("#event-state-error")
-    //         .css("display", "block")
-    //         .css("color", "red")
-    //         .text("Please enter state");
-    //         focus_timeOut('state');
-    //     return;
-    // } else {
-    //     $("#event-state-error").css("display", "none");
-    // }
-    // if (zipcode == "") {
-    //     $("#event-zipcode-error")
-    //         .css("display", "block")
-    //         .css("color", "red")
-    //         .text("Please enter zipcode");
-    //         focus_timeOut('zipcode');
-    //     return;
-    // } else {
-    //     $("#event-zipcode-error").css("display", "none");
-    // }
-    
+    if($('#isCheckAddress').is(':checked')){
 
+   
+    if (address1 == "") {
+        $("#event-address1-error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please enter address1");
+            focus_timeOut('address1');
+        return;
+    } else {
+        $("#event-address1-error").css("display", "none");
+    }
+    if (city == "") {
+        $("#event-city-error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please enter city");
+            focus_timeOut('city');
+        return;
+    } else {
+        $("#event-city-error").css("display", "none");
+    }
+    if (state == "") {
+        $("#event-state-error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please enter state");
+            focus_timeOut('state');
+        return;
+    } else {
+        $("#event-state-error").css("display", "none");
+    }
+    if (zipcode == "") {
+        $("#event-zipcode-error")
+            .css("display", "block")
+            .css("color", "red")
+            .text("Please enter zipcode");
+            focus_timeOut('zipcode');
+        return;
+    } else {
+        $("#event-zipcode-error").css("display", "none");
+    }
+    
+}
     if (
         // event_type != "" &&
         event_name != "" &&
@@ -4038,6 +4098,19 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 });
 
 $(document).on("change", "#YesviteUserAll .user_choice", function () {
+   
+    var groupId = $(this).closest(".user_choice_group").data("id");
+    if ($(this).is(":checked")) {
+        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+            .not(this)
+            .prop("checked", false);
+    } else {
+        var id = $(this).data("id");
+        $("#" + id).remove();
+    }
+});
+
+$(document).on("change", ".user_group_member  .user_choice", function () {
    
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
@@ -6283,6 +6356,50 @@ $(document).on("click", ".edit_event_details", function () {
 $("#isCheckAddress").on('click',function(){
     if ($(this).is(":checked")) {
         $(".ckeckedAddress").show();
+        var address1 = $("#address1").val();   
+        var city = $("#city").val();
+        var state = $("#state").val();
+        var zipcode = $("#zipcode").val();
+    // if (address1 == "") {
+    //     $("#event-address1-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter address1");
+    //         focus_timeOut('address1');
+    //     return;
+    // } else {
+    //     $("#event-address1-error").css("display", "none");
+    // }
+    // if (city == "") {
+    //     $("#event-city-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter city");
+    //         focus_timeOut('city');
+    //     return;
+    // } else {
+    //     $("#event-city-error").css("display", "none");
+    // }
+    // if (state == "") {
+    //     $("#event-state-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter state");
+    //         focus_timeOut('state');
+    //     return;
+    // } else {
+    //     $("#event-state-error").css("display", "none");
+    // }
+    // if (zipcode == "") {
+    //     $("#event-zipcode-error")
+    //         .css("display", "block")
+    //         .css("color", "red")
+    //         .text("Please enter zipcode");
+    //         focus_timeOut('zipcode');
+    //     return;
+    // } else {
+    //     $("#event-zipcode-error").css("display", "none");
+    // }
     }else{
         $(".ckeckedAddress").hide();
         $("#zipcode").val('');
