@@ -1,4 +1,4 @@
-
+{{dd($groups)}}
 @foreach ($groups as $data)
 
 <div class="users-data">
