@@ -1863,11 +1863,15 @@ class EventController extends Controller
 
 
         $getAllContacts = contact_sync::where('contact_id', $id)
-            ->when($type != 'group', function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->limit($request->limit)
-                        ->skip($request->offset);
-                });
+            // ->when($type != 'group', function ($query) use ($request) {
+            //     $query->where(function ($q) use ($request) {
+            //         $q->limit($request->limit)
+            //             ->skip($request->offset);
+            //     });
+            // })
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset);
             })
             ->when($search_user != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
@@ -1895,7 +1899,10 @@ class EventController extends Controller
         // dd($selected_co_host_prefer_by);
         // dd($selected_co_host_prefer_by);
 
-        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
+        return response()->json([
+            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
+            'scroll' => $request->scroll,
+        ]);
     }
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
