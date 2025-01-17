@@ -1675,9 +1675,27 @@ class EventController extends Controller
         $id = Auth::guard('web')->user()->id;
         $groupMember = GroupMember::where('group_id', $group_id)->pluck('user_id');
 
-        $groups = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')
-            ->where('id', '!=', $id)->whereIn('id', $groupMember)->orderBy('firstname')
-            ->get();
+        // $groups = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')
+        //     ->where('id', '!=', $id)->whereIn('id', $groupMember)
+        //     ->orderBy('firstname')
+        //     ->get();
+
+
+        $groups = User::with(['groupMembers' => function($query) use ($group_id) {
+            $query->where('group_id', $group_id); // Make sure we get the correct group
+        }])
+        ->where('id', '!=', $id)
+        ->whereIn('id', $groupMember)
+        ->orderBy('firstname')
+        ->get();
+
+        // $groups = User::select('users.id', 'users.firstname', 'users.profile', 'users.lastname', 'users.email', 'users.country_code', 'users.phone_number', 'users.app_user', 'users.email_verified_at', 'users.parent_user_phone_contact', 'group_members.prefer_by')
+        // ->where('users.id', '!=', $id)
+        // ->whereIn('users.id', $groupMember)
+        // ->leftJoin('group_members', 'group_members.user_id', '=', 'users.id')
+        // ->orderBy('users.firstname')
+        // ->get();
+        // dd($groups);
 
         // $groups = GroupMember::with(['user' => function ($query) {
         //     $query->select('id', 'lastname', 'firstname', 'email', 'phone_number')
@@ -1857,7 +1875,12 @@ class EventController extends Controller
         // dd($selected_co_host_prefer_by);
         // dd($selected_co_host_prefer_by);
 
-        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
+        // return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
+    
+        return response()->json([
+            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
+            'scroll' => $request->scroll
+        ]);
     }
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
@@ -2252,7 +2275,9 @@ class EventController extends Controller
 
 
 
-        return view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
+        // return view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'));
+        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'))->render(), "scroll" => $request->scroll]);
+
     }
 
     public function get_gift_registry(Request $request)
