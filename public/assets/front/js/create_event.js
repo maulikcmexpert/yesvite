@@ -5295,6 +5295,9 @@ function displayRecords(lim, off,type,search = null) {
             console.log(html);
             if(html==""){
                NoMoreDataYesviteAll=true;
+               $('#loader').css('display','none');
+            
+               return;
             }
             if(type=="all"){
                 if(search != null){
