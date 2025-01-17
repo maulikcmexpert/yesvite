@@ -1,5 +1,5 @@
 
-    <div class="group-card added_group{{$data['group_id']}} listgroups" data-id="{{$data['group_id']}}">
+    <div class="group-card added_group{{$data['group_id']}} listgroups view_members" data-id="{{$data['group_id']}}">
         <div class="view_members" data-id="{{$data['group_id']}}">
             <h4>{{$data['groupname']}}</h4>
             <p>{{$data['member_count']}} Guests</p>
