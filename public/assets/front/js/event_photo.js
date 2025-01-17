@@ -109,7 +109,7 @@ $(document).on('click', '#likeButton', function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{2764}'  :'\u{1F90D}'; // Toggle reaction: 💔 or ❤️
+    const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
 
     // Toggle like button appearance
     if (isLiked) {
@@ -659,7 +659,7 @@ $(document).on('click', '.likeModel', function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{2764}'  :'\u{1F90D}'; // Toggle reaction: 💔 or ❤️
+    const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
 
     // Toggle like button appearance
     if (isLiked) {
