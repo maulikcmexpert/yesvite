@@ -4944,6 +4944,8 @@ $(document).on("click", ".save_event_co_host", function () {
                 </svg>
             </span>
             <h5>Select your co-host</h5>`);
+            toggleSidebar();
+
     }
 });
 
