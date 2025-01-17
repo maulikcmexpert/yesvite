@@ -715,7 +715,7 @@
 
 
 
-                <div class="user-contacts list_all_invited_user">
+                <div class="user-contacts list_all_invited_user" id="select_event_cohost">
 
                 </div>
             </div>

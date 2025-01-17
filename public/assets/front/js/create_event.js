@@ -5720,6 +5720,10 @@ $(document).on('click','.see_all_group',function(){
     toggleSidebar('sidebar_groups');
 });
 
+
+var cohostbusy=false;
+var cohostlimit=7;
+var cohostoffset=0;
 $(document).on('click','.add_co_host',function(){
     isPhonecontact = 0;
     if(selected_co_host!=""){
@@ -5731,7 +5735,7 @@ $(document).on('click','.add_co_host',function(){
     $('.co_host_search').val('');
     $('.add_co_host').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
-    get_co_host_list();
+    get_co_host_list(null,cohostlimit,cohostoffset,false);
     
     setTimeout(() => {
         toggleSidebar('sidebar_add_co_host');
@@ -5747,11 +5751,18 @@ $(document).on('click','.add_co_host',function(){
 //         toggleSidebar('sidebar_add_co_host');
 //     }, 500);
 // });
-
+var cohostphoneOffset=0;
+var cohostphoneLimit=10;
 $(document).on('click','#phone-tab-cantact',function(){
-   
     isPhonecontact = 1;
-    get_phone_host_list();
+    $('#select_event_cohost').removeAttr("data-list");
+    $('#select_event_cohost').attr("data-list", 'phone_contact');
+
+    get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset);
+})
+
+$(document).on('click','#contact-tab',function(){
+    $('#select_event_cohost').attr("data-list", '');
 })
 
 $(document).on('click','.add_co_host_off',function(){
@@ -5783,7 +5794,7 @@ $(document).on('click','.overlay',function(){
     toggleSidebar();
 });
 
-function get_co_host_list(search_name=null){
+function get_co_host_list(search_name=null,limit,offset,scroll){
    
     if(search_name ==null){
         search_name = '';
@@ -5800,6 +5811,9 @@ function get_co_host_list(search_name=null){
         type: "POST",
         data: {
             search_name: search_name,
+            limit:limit,
+            offset:offset,
+            scroll:scroll,
             selected_co_host:selected_co_host,
             selected_co_host_prefer_by:selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
@@ -5810,18 +5824,24 @@ function get_co_host_list(search_name=null){
     })
     .done(function (data) {
         // console.log(data);
-        if (data == " ") {
+        if (data.view == " ") {
             $("#loader").html("No more contacts found");
             return;
         }
         $("#loader").hide();
-        $(".list_all_invited_user").html(data);
+        if(data.scroll=='true'){
+            $(".list_all_invited_user").append(data.view);
+        }else{
+            $(".list_all_invited_user").html(data.view);
+        }
+
+        cohostbusy=false;
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
     });
 }
-function get_phone_host_list(search_name=null){
+function get_phone_host_list(search_name=null,limit,offset){
     if(search_name ==null){
         search_name = '';
     }
@@ -5837,6 +5857,8 @@ function get_phone_host_list(search_name=null){
         data: {
             search_name: search_name,
             selected_co_host:selected_co_host,
+            limit:limit,
+            offset:offset,
             selected_co_host_prefer_by:selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -5852,11 +5874,45 @@ function get_phone_host_list(search_name=null){
         }
         $("#loader").hide();
         $(".list_all_invited_user").html(data);
+
+        cohostbusy=false;
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
     });
 }
+let previousScrollTop = 0;
+$("#select_event_cohost").on("scroll", function () {
+    // alert();
+    if (cohostbusy) return; 
+    var scrollTop = $(this).scrollTop(); 
+    var scrollHeight = $(this)[0].scrollHeight; 
+    var elementHeight = $(this).height();
+   
+    console.log({scrollTop,scrollHeight,elementHeight});
+    console.log($("#select_event_cohost").data('list'));
+
+        // if (scrollTop + elementHeight >= scrollHeight) {
+        //     alert();
+        //     cohostbusy = true;
+        //     cohostoffset += cohostlimit;
+        //     var type="yesvite";
+        //     var scroll=true;
+        //     get_co_host_list(search_name=null,cohostlimit,cohostoffset,scroll);
+        //     }
+        if (scrollTop > previousScrollTop) {
+        if (scrollTop + elementHeight >= scrollHeight - 1) { 
+           
+            
+            cohostbusy = true;
+            cohostoffset += cohostlimit;
+            var type = "yesvite";
+            var scroll = true;
+            get_co_host_list(search_name = null, cohostlimit, cohostoffset, scroll);
+        }
+    }
+    previousScrollTop = scrollTop;
+});
 $(document).on('keyup','.co_host_search',function(){
     
     search_name = $(this).val();
@@ -5864,9 +5920,9 @@ $(document).on('keyup','.co_host_search',function(){
     $(".list_all_invited_user").empty();
     setTimeout(function () {
         if(isPhonecontact == 0){
-            get_co_host_list(search_name);
+            get_co_host_list(search_name,10,0,false);
         } else{
-            get_phone_host_list(search_name)
+            get_phone_host_list(search_name,10,0,false)
         }
     }, 500);
 })
