@@ -304,7 +304,7 @@
     cursor: pointer;
     height: 15px;
     width: 15px;
-    transform: translateY(calc(-50% + 8px));
+    transform: translateY(calc(-50% + 0px));
     position: relative;
     top: 5px;
 }
