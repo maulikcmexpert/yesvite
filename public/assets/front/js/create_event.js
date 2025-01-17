@@ -5210,6 +5210,8 @@ function get_user(type){
     if (busyyesvite == false) {
         busyyesvite = true;
         page = 3;
+        limityesvite=10;
+        offsetyesvite=0;
         displayRecords(limityesvite, offsetyesvite,type,type="all");
     }
     
