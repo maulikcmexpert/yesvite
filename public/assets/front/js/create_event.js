@@ -5191,7 +5191,7 @@ var busyyesvite=false;
 var limityesvite=10;
 var offsetyesvite=0;
 
-
+var NoMoreDataYesviteAll=false;
 $("#YesviteUserAll").on("scroll", function () {
     if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); 
@@ -5288,6 +5288,8 @@ function displayRecords(lim, off,type,search = null) {
             if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
             }
+            console.log(html);
+            
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
