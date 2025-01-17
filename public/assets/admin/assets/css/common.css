@@ -1070,6 +1070,15 @@ margin: -43px 0px 0px 8px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#loader img:focus {
+    outline: none;
+    box-shadow: none;
+    user-select: none;
 }
 
 .nav-sidebar .nav-item>.nav-link{

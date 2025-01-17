@@ -3333,11 +3333,11 @@ function savePage4Data() {
         eventData.request_photo = "0";
     }
 
-    if ($("#kid_off_event").is(":checked")) {
-        eventData.kid_off_event = "1";
-    } else {
-        eventData.kid_off_event = "0";
-    }   
+    // if ($("#kid_off_event").is(":checked")) {
+    //     eventData.kid_off_event = "1";
+    // } else {
+    //     eventData.kid_off_event = "0";
+    // }   
 }
 
 
