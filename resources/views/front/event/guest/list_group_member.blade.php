@@ -12,8 +12,7 @@
             $lastInitial = !empty($data->lastname) ? strtoupper($data->lastname[0]) : '';
             $initials = $firstInitial . $lastInitial;
             $fontColor = 'fontcolor' . $firstInitial;
-            $groupMember = $data->groupMembers->first(); // Assuming one group member per user
-            $preferBy=$data->group_member_prefer_by;
+            $preferBy = $data->group_member_prefer_by;
             
 
             @endphp
