@@ -1835,7 +1835,7 @@ class EventController extends Controller
                 $query->limit($request->limit)
                       ->offset($request->offset);
             })
-            ->when($search_user != '', function ($query) use ($search_user) {
+            ->when(!empty($search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
@@ -1861,7 +1861,11 @@ class EventController extends Controller
         // dd($selected_co_host_prefer_by);
         // dd($selected_co_host_prefer_by);
 
-        return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
+        // return response()->json(view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render());
+        return response()->json([
+            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
+            'scroll' => $request->scroll,
+        ]);
     }
     // public function searchUserAjax(Request $request){
     //     $id = Auth::guard('web')->user()->id;
