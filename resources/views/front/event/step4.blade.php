@@ -420,7 +420,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="event_wall_post" name="event_wall_post" class="checkbox notification_checkbox" checked />
+                                                    <input type="checkbox" id="event_wall_post" name="event_wall_post" class="checkbox notification_checkbox" {{(isset($eventDetail['event_setting']))?($eventDetail['event_setting']['event_wall_post']=="1")?'checked':'' :'checked'}}/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -443,7 +443,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="rsvp_update" name="rsvp_update" class="checkbox notification_checkbox" checked />
+                                                    <input type="checkbox" id="rsvp_update" name="rsvp_update" class="checkbox notification_checkbox" {{(isset($eventDetail['event_setting']))?($eventDetail['event_setting']['rsvp_updates']=="1")?'checked':'' :'checked'}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -471,7 +471,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" checked />
+                                                    <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" {{(isset($eventDetail['event_setting']))?($eventDetail['event_setting']['request_event_photos_from_guests']=="1")?'checked':'' :'checked'}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -494,7 +494,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="rsvp_remainder" name="rsvp_remainder" class="checkbox notification_setting notification_checkbox" checked />
+                                                    <input type="checkbox" id="rsvp_remainder" name="rsvp_remainder" class="checkbox notification_setting notification_checkbox" {{(isset($eventDetail['event_setting']))?($eventDetail['event_setting']['send_event_dater_reminders']=="1")?'checked':'' :'checked'}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>

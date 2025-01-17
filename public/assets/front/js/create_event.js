@@ -6081,13 +6081,13 @@ $(document).on('click','.add-activity-schedule',function(){
 })
 
 $(document).on('click','.thank_you_card_toggle',function(){
-    $thankuCardId = $("#thankuCardId").val();
+    var thankuCardId = $("#thankuCardId").val();
     
     $.ajax({
         url: base_url + "event/get_thank_you_card",
         type: "POST",
         data: {
-            _token: $('meta[name="csrf-token"]').attr("content"),$thankuCardId:$thankuCardId
+            _token: $('meta[name="csrf-token"]').attr("content"),thankuCardId:thankuCardId,
         },
         beforeSend: function () {
             $("#loader").show();
