@@ -1395,8 +1395,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
-
     if (isChecked == true || isChecked == "true") {
+        $("#loader").css('display','block');
         $.ajax({
             url: base_url + "event/store_user_id",
             method: "POST",
@@ -1445,6 +1445,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             
                 }
                 guest_counter(0,max_guest);
+                $("#loader").css('display','none');
+
                 // var length = responsive_invite_user();
                 // if(length < 4){
                 //     $('.all_user_list').remove();
@@ -1498,6 +1500,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
                 }
                 $("#event_guest_left_count").val(remainingCount);
+                $("#loader").css('display','none');
+
                 console.log("User ID deleted successfully.");
             },
             error: function (xhr, status, error) {
@@ -5204,7 +5208,7 @@ function get_user(type){
     if (busyyesvite == false) {
         busyyesvite = true;
         page = 3;
-        displayRecords(limityesvite, offsetyesvite,type);
+        displayRecords(limityesvite, offsetyesvite,type,null);
     }
     
 }
@@ -5260,7 +5264,7 @@ $('#groupUsers').scroll(function () {
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,) {
+function displayRecords(lim, off,type,search = null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();

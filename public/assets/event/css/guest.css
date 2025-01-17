@@ -452,11 +452,16 @@
     padding: 0px 5px;
 }
 
-#sidebar_potluck .potluck-category {
+#sidebar_potluck:has(.alert-box) .potluck-category {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 50px);
-    padding-bottom: 130px;
+    max-height: calc(100vh - 280px);
+}
+
+#sidebar_potluck .potluck-category{
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 200px);
 }
 
 .change-your-plan-wrp {
@@ -537,6 +542,10 @@
 .users-data.invited_user a svg{
     min-width: 14px;
     height: auto;
+}
+
+.item-dishes-toggle{
+    margin-bottom: 10px !important;
 }
 
 /* ============ responsive ============ */
@@ -726,8 +735,14 @@
         max-height: calc(100vh - 270px);
     }
 
-    #sidebar_potluck .potluck-category {
-        max-height: calc(100vh - 350px);
+    #sidebar_potluck:has(.alert-box) .potluck-category {
+        max-height: calc(100vh - 360px);
+    }
+
+    #sidebar_potluck .potluck-category{
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 300px);
     }
 
     .setting-content .accordion-item {
@@ -754,8 +769,15 @@
     #sidebar_add_co_host .list_all_invited_user {
         overflow: hidden;
         overflow-y: scroll;
-        max-height: calc(100vh - 510px);
+        max-height: calc(100vh - 430px);
     }
+
+    #sidebar_add_co_host:has(.alert-box) .list_all_invited_user {
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 500px);
+    }
+
     #sidebar_add_co_host .list_all_contact_user {
         overflow: hidden;
         overflow-y: scroll;

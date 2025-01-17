@@ -1673,11 +1673,49 @@ class EventController extends Controller
     {
         $group_id = $request->input('group_id');
         $id = Auth::guard('web')->user()->id;
-        $groupMember = GroupMember::where('group_id', $group_id)->pluck('user_id');
+        // $groupMember = GroupMember::where('group_id', $group_id)->pluck('user_id');
 
-        $groups = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')
-            ->where('id', '!=', $id)->whereIn('id', $groupMember)->orderBy('firstname')
+        // $groups = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact')
+        //     ->where('id', '!=', $id)->whereIn('id', $groupMember)
+        //     ->orderBy('firstname')
+        //     ->get();
+
+
+            $groups = User::select(
+                'users.id',
+                'users.firstname',
+                'users.profile',
+                'users.lastname',
+                'users.email',
+                'users.country_code',
+                'users.phone_number',
+                'users.app_user',
+                'users.prefer_by',
+                'users.email_verified_at',
+                'users.parent_user_phone_contact',
+                'group_members.prefer_by as group_member_prefer_by'
+            )
+            ->join('group_members', 'users.id', '=', 'group_members.user_id') // Join with group_members table
+            ->where('group_members.group_id', $group_id)
+            ->where('users.id', '!=', $id)
+            ->orderBy('users.firstname')
             ->get();
+
+        // $groups = User::with(['groupMembers' => function($query) use ($groupMember) {
+        //     $query->whereIn('user_id', $groupMember); // Make sure we get the correct group
+        // }])
+        // ->where('id', '!=', $id)
+        // ->whereIn('id', $groupMember)
+        // ->orderBy('firstname')
+        // ->get();
+
+        // $groups = User::select('users.id', 'users.firstname', 'users.profile', 'users.lastname', 'users.email', 'users.country_code', 'users.phone_number', 'users.app_user', 'users.email_verified_at', 'users.parent_user_phone_contact', 'group_members.prefer_by')
+        // ->where('users.id', '!=', $id)
+        // ->whereIn('users.id', $groupMember)
+        // ->leftJoin('group_members', 'group_members.user_id', '=', 'users.id')
+        // ->orderBy('users.firstname')
+        // ->get();
+        // dd($groups);
 
         // $groups = GroupMember::with(['user' => function ($query) {
         //     $query->select('id', 'lastname', 'firstname', 'email', 'phone_number')
