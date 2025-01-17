@@ -2266,11 +2266,13 @@ class EventController extends Controller
 
     public function get_thank_you_card(Request $request)
     {
+        
         $user_id =  Auth::guard('web')->user()->id;
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
-
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
+        $thankuCardId = $request->thankuCardId;
+dd(sadsa);
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card','thankuCardId'))->render()]);
     }
 
     // public function saveSliderImg(Request $request)
