@@ -1843,13 +1843,17 @@ class EventController extends Controller
 
 
         $getAllContacts = contact_sync::where('contact_id', $id)
-            ->when($type != 'group', function ($query) use ($request) {
-                $query->where(function ($q) use ($request) {
-                    $q->limit($request->limit)
-                        ->skip($request->offset);
-                });
+            // ->when($type != 'group', function ($query) use ($request) {
+            //     $query->where(function ($q) use ($request) {
+            //         $q->limit($request->limit)
+            //             ->skip($request->offset);
+            //     });
+            // })
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset);
             })
-            ->when($search_user != '', function ($query) use ($search_user) {
+            ->when(!empty($search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
@@ -2265,7 +2269,13 @@ class EventController extends Controller
             ->where('id', '!=', $user_id)
             ->where(['app_user' => '1'])
             ->orderBy('firstname')
-            ->when($search_user != '', function ($query) use ($search_user) {
+            
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset);
+            })
+
+            ->when(!empty($search_user) != '', function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
