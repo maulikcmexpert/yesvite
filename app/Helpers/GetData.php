@@ -971,8 +971,7 @@ function getInvitedUsersList($eventId)
 
 function getInvitedCohostList($eventId)
 {
-    $eventDetail['invited_guests'] = [];
-    $eventDetail['invited_user_id'] = [];
+ 
 
     $invitedUsers = EventInvitedUser::query();
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'1']);
@@ -981,7 +980,7 @@ function getInvitedCohostList($eventId)
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            if ($guestVal->sync_id != '') {
+            if ($guestVal->sync_id != '' &&  $guestVal->user_id == null) {
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
                 $invitedGuestDetail['email'] = (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "";
@@ -998,7 +997,7 @@ function getInvitedCohostList($eventId)
                 $invitedGuestDetail['read']= $guestVal->read;
                 $invitedGuestDetail['rsvp_d']= $guestVal->rsvp_d;  
                 $invitedGuestDetail['message_to_host']= $guestVal->message_to_host;
-                $eventDetail['invited_guests'][] = $invitedGuestDetail;
+                $eventDetail[] = $invitedGuestDetail;
             } elseif ($guestVal->user->app_user == '1') {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
@@ -1017,13 +1016,11 @@ function getInvitedCohostList($eventId)
                 $invitedUserIdDetail['read']= $guestVal->read;
                 $invitedUserIdDetail['rsvp_d']= $guestVal->rsvp_d;
                 $invitedUserIdDetail['message_to_host']= $guestVal->message_to_host;
-                $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
+                $eventDetail[] = $invitedUserIdDetail;
             }
         }
     }
-    $eventDetail['all_invited_users'] = array_merge($eventDetail['invited_guests'], $eventDetail['invited_user_id']);
-
-    return $eventDetail;
+        return $eventDetail;
 }
 function getDeferentBetweenTime($time1, $time2)
 {

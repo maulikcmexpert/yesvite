@@ -5873,6 +5873,7 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
+   
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
@@ -5953,7 +5954,8 @@ $(document).on('click','.overlay',function(){
 });
 
 function get_co_host_list(search_name=null,limit,offset,scroll){
-   
+    var app_user = $("#app_user").val();
+    var cohostId = $("#cohostId").val();
     if(search_name ==null){
         search_name = '';
     }

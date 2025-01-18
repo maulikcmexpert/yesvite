@@ -215,7 +215,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['add_co_host']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
