@@ -1,5 +1,4 @@
 <?php
-ini_set('memory_limit', '1024M');
 
 use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
@@ -1729,7 +1728,7 @@ function sendSMSForApplication($receiverNumber, $message)
 
         return  true;
     } catch (Exception $e) {
-        print_r($e);
+        dd($e);
         return  false;
     }
 }
