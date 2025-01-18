@@ -3,12 +3,12 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = $("#cohostId").val();
-var selected_co_host_prefer_by = $("#cohostId").val();
+var selected_co_host = '';
+var selected_co_host_prefer_by = '';
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer= ($("#cohostId").val() !="")?1:0;
+var lengtUSer= 0;
 
 var selected_user_name = "";
 var selected_profilePhoto = "";        
@@ -775,7 +775,7 @@ function set_activity_html(selectedDates) {
         var formHtml = `
      <div class="activity-schedule-wrp">
         <div class="activity-schedule-head">
-            <h3>${startDate.format("dddd, MMMM D, YYYY")}</h3>
+            <h3>${startDate.format("dddd - MMMM D, YYYY")}</h3>
         </div>
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
@@ -2152,6 +2152,8 @@ e.preventDefault();
         blurExecutedEndTime = true;
 
         var newEndTime = convertTo24Hour($(this).val());
+        var newEndTime12=convertTo24Hour($(this).val());
+        var newEndtimeagain=convertTo12Hour(newEndTime12);
         var newStartTime = convertTo24Hour(
             $(this)
                 .closest(".activity-main-wrp")
@@ -2259,7 +2261,7 @@ e.preventDefault();
             .closest(".activity-main-wrp")
             .next()
             .find('input[name="activity-start-time[]"]')
-            .val(newEndTime);
+            .val(newEndtimeagain);
 
         setTimeout(function () {
             blurExecutedEndTime = false; // Reset after a delay
@@ -2716,6 +2718,7 @@ $(document).on('click','#next_design',function() {
 })
 
 $(document).on("click", "#close_createEvent", function () {
+    $('#loader').css('display','block');
 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
@@ -2735,7 +2738,7 @@ $(document).on("click", "#close_createEvent", function () {
         return;
     }
 
-    $('#loader').css('display','block');
+    // $('#loader').css('display','block');
 
     if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
@@ -2832,10 +2835,11 @@ $(document).on("click", "#close_createEvent", function () {
             data: eventData,
             success: function (response) {
                 if(response==1){ 
-                    window.location.href="profile";
-                    $('#loader').css('display','none');
+                    window.location.href="home";
                     toastr.success('Event Saved as Draft');
-                }
+                    setTimeout(function () {
+                        $('#loader').css('display', 'none');
+                    }, 4000);                }
 
             },
             error: function (xhr, status, error) {
@@ -4565,7 +4569,6 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
-                countGiftRegestry();
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
@@ -5591,10 +5594,7 @@ $(document).on('click','.free_plan',function () {
     });
     eventData.gift_registry_data=selected_gift;
     // console.log(eventData);
-    // if((selected.length <=2)){
-    //     $('.add_gift_registry_count').html(`<span class="me-3"></span>
-    //         <h5>${selected.length} Registry</h5>`);
-    // }
+
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
@@ -5687,9 +5687,6 @@ function countGiftRegestry(){
         }
         i++;
     });
-    console.log(i);
-    console.log(checkedCount);
-    
     if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_gift_registry_count').html(`<span class="me-3"></span>
@@ -5880,8 +5877,7 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   alert(selected_co_host);
-
+   
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
@@ -6528,3 +6524,147 @@ function searchRecords(lim, off, type, search = null) {
         }
     });
 }
+
+
+$(".slider_photo").on("change", function(event) {
+    var file = event.target.files[0]; // Get the first file (the selected image)
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $(".photo-slider-1").attr("src", e.target.result).show();
+        };
+        reader.readAsDataURL(file);
+        $(".design-sidebar").addClass("d-none");
+        $(".design-sidebar_7").removeClass("d-none");
+        $("#sidebar").addClass("design-sidebar_7");
+        $(".close-btn").attr("data-id", "design-sidebar_7");
+    }
+    setTimeout(() => {
+        getLengthofSliderImage();
+    }, 500);
+});
+
+$(".slider_photo_2").on("change", function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        $(".photo-slider-2").show();
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $(".photo-slider-2").attr("src", e.target.result).show();
+        };
+        reader.readAsDataURL(file);
+    }
+    setTimeout(() => {
+        getLengthofSliderImage();
+    }, 500);
+});
+$(".slider_photo_3").on("change", function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        $(".photo-slider-3").show();
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $(".photo-slider-3").attr("src", e.target.result).show();
+        };
+        reader.readAsDataURL(file);
+    }
+    setTimeout(() => {
+        getLengthofSliderImage();
+    }, 500);
+});
+
+function getLengthofSliderImage(){
+    var i = 0; 
+    $(".slider_img").each(function() {
+        var src = $(this).attr("src");
+        // console.log(src);
+        if (src !== "") {
+           i++;
+        }
+    });
+    $('.slider_image_count').text(i+'/3 Photos');
+}
+
+$(document).on("click", ".save-slider-image", function() {
+    var imageSources = [];
+    // $(".slider_img").each(function () {
+    //     imageSources.push($(this).attr("src"));
+    // });
+
+    $(".slider_img").each(function() {
+        var src = $(this).attr("src");
+        if (src !== "") {
+            imageSources.push({
+                src: $(this).attr("src"),
+                deleteId: $(this).data("delete")
+            });
+        }
+    });
+    //console.log(imageSources);
+    if(imageSources.length > 0){
+        $('#loader').css('display', 'block');
+        $.ajax({
+            url: base_url + "event/save_slider_img",
+            method: "POST",
+            data: {
+                imageSources: imageSources,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function(response) {
+                var savedImages = response.images;
+                eventData.slider_images = savedImages;
+                console.log(eventData);
+                $('#loader').css('display', 'none');
+                toastr.success('Slider Image saved Successfully');
+            },
+            error: function(xhr, status, error) {},
+        });
+    }
+});
+
+$(document).on("click", ".delete_silder", function(e) {
+    e.preventDefault();
+    var delete_id = $(this).parent().find('.slider_img').data("delete");
+    var src = $(this).parent().find('.slider_img').attr("src");
+    if (src != "") {
+        $('#loader').css('display', 'block');
+        var $this = $(this);
+        var check_slider_img = eventData.slider_images;
+        var matchFound = false;
+        $.each(check_slider_img, function(index, slider) {
+            if (slider.deleteId == delete_id) {
+                matchFound = true;
+                return false;
+            }
+        });
+        if (matchFound) {
+            $.ajax({
+                url: base_url + "event/delete_slider_img",
+                method: "POST",
+                data: {
+                    delete_id: delete_id,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function(response) {
+                    $this.parent().find('.slider_img').attr('src', '');
+                    $(".photo-slider-" + delete_id).hide();
+                    toastr.success('Slider Image Deleted Successfully')
+                    $('#loader').css('display', 'none');
+
+                },
+                error: function(xhr, status, error) {},
+            });
+        } else {
+            $(this).parent().find('.slider_img').attr('src', '');
+            $(".photo-slider-" + delete_id).hide();
+            $('#loader').css('display', 'none');
+            toastr.success('Slider Image Deleted Successfully')
+
+        }
+
+    }
+    setTimeout(() => {
+        getLengthofSliderImage();
+    }, 500);
+
+});
