@@ -3457,16 +3457,16 @@ function clearError(input = null) {
             break;
         
         case "item_name":
-            var groupname = input.value;
-            if (groupname === "") {
+            var itemname = input.value;
+            if (itemname === "") {
                 $("#item_name_error")
                     .text("Please enter description.")
                     .css("color", "red");
                 $('.sub-cat-pot').text('0/30');
             } else {
-                cateLength = groupname.length;
+                itemLength = itemname.length;
                 $("#item_name_error").text("");
-                $('.sub-cat-pot').text(cateLength+'/30');
+                $('.sub-cat-pot').text(itemLength+'/30');
             }
             break;
 
