@@ -2245,64 +2245,64 @@ function bindData(current_event_id) {
     })
 
 
-        $(".slider_photo").on("change", function(event) {
-            var file = event.target.files[0]; // Get the first file (the selected image)
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $(".photo-slider-1").attr("src", e.target.result).show();
-                };
-                reader.readAsDataURL(file);
-                $(".design-sidebar").addClass("d-none");
-                $(".design-sidebar_7").removeClass("d-none");
-                $("#sidebar").addClass("design-sidebar_7");
-                $(".close-btn").attr("data-id", "design-sidebar_7");
-            }
-            setTimeout(() => {
-                getLengthofSliderImage();
-            }, 500);
-        });
+        // $(".slider_photo").on("change", function(event) {
+        //     var file = event.target.files[0]; // Get the first file (the selected image)
+        //     if (file) {
+        //         var reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             $(".photo-slider-1").attr("src", e.target.result).show();
+        //         };
+        //         reader.readAsDataURL(file);
+        //         $(".design-sidebar").addClass("d-none");
+        //         $(".design-sidebar_7").removeClass("d-none");
+        //         $("#sidebar").addClass("design-sidebar_7");
+        //         $(".close-btn").attr("data-id", "design-sidebar_7");
+        //     }
+        //     setTimeout(() => {
+        //         getLengthofSliderImage();
+        //     }, 500);
+        // });
 
-        $(".slider_photo_2").on("change", function(event) {
-            var file = event.target.files[0];
-            if (file) {
-                $(".photo-slider-2").show();
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $(".photo-slider-2").attr("src", e.target.result).show();
-                };
-                reader.readAsDataURL(file);
-            }
-            setTimeout(() => {
-                getLengthofSliderImage();
-            }, 500);
-        });
-        $(".slider_photo_3").on("change", function(event) {
-            var file = event.target.files[0];
-            if (file) {
-                $(".photo-slider-3").show();
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $(".photo-slider-3").attr("src", e.target.result).show();
-                };
-                reader.readAsDataURL(file);
-            }
-            setTimeout(() => {
-                getLengthofSliderImage();
-            }, 500);
-        });
+        // $(".slider_photo_2").on("change", function(event) {
+        //     var file = event.target.files[0];
+        //     if (file) {
+        //         $(".photo-slider-2").show();
+        //         var reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             $(".photo-slider-2").attr("src", e.target.result).show();
+        //         };
+        //         reader.readAsDataURL(file);
+        //     }
+        //     setTimeout(() => {
+        //         getLengthofSliderImage();
+        //     }, 500);
+        // });
+        // $(".slider_photo_3").on("change", function(event) {
+        //     var file = event.target.files[0];
+        //     if (file) {
+        //         $(".photo-slider-3").show();
+        //         var reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             $(".photo-slider-3").attr("src", e.target.result).show();
+        //         };
+        //         reader.readAsDataURL(file);
+        //     }
+        //     setTimeout(() => {
+        //         getLengthofSliderImage();
+        //     }, 500);
+        // });
 
-        function getLengthofSliderImage(){
-            var i = 0; 
-            $(".slider_img").each(function() {
-                var src = $(this).attr("src");
-                // console.log(src);
-                if (src !== "") {
-                   i++;
-                }
-            });
-            $('.slider_image_count').text(i+'/3 Photos');
-        }
+        // function getLengthofSliderImage(){
+        //     var i = 0; 
+        //     $(".slider_img").each(function() {
+        //         var src = $(this).attr("src");
+        //         // console.log(src);
+        //         if (src !== "") {
+        //            i++;
+        //         }
+        //     });
+        //     $('.slider_image_count').text(i+'/3 Photos');
+        // }
         // $(document).on("click", ".delete-slider-1", function () {
         //     $(".photo-slider-1").hide();
         // });
@@ -2313,89 +2313,89 @@ function bindData(current_event_id) {
         //     $(".photo-slider-3").hide();
         // });
 
-        $(document).on("click", ".save-slider-image", function() {
-            var imageSources = [];
-            // $(".slider_img").each(function () {
-            //     imageSources.push($(this).attr("src"));
-            // });
+        // $(document).on("click", ".save-slider-image", function() {
+        //     var imageSources = [];
+        //     // $(".slider_img").each(function () {
+        //     //     imageSources.push($(this).attr("src"));
+        //     // });
 
-            $(".slider_img").each(function() {
-                var src = $(this).attr("src");
-                if (src !== "") {
-                    imageSources.push({
-                        src: $(this).attr("src"),
-                        deleteId: $(this).data("delete")
-                    });
-                }
-            });
-            //console.log(imageSources);
-            if(imageSources.length > 0){
-                $('#loader').css('display', 'block');
-                $.ajax({
-                    url: base_url + "event/save_slider_img",
-                    method: "POST",
-                    data: {
-                        imageSources: imageSources,
-                        _token: $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    success: function(response) {
-                        var savedImages = response.images;
-                        eventData.slider_images = savedImages;
-                        console.log(eventData);
-                        $('#loader').css('display', 'none');
-                        toastr.success('Slider Image saved Successfully');
-                    },
-                    error: function(xhr, status, error) {},
-                });
-            }
-        });
+        //     $(".slider_img").each(function() {
+        //         var src = $(this).attr("src");
+        //         if (src !== "") {
+        //             imageSources.push({
+        //                 src: $(this).attr("src"),
+        //                 deleteId: $(this).data("delete")
+        //             });
+        //         }
+        //     });
+        //     //console.log(imageSources);
+        //     if(imageSources.length > 0){
+        //         $('#loader').css('display', 'block');
+        //         $.ajax({
+        //             url: base_url + "event/save_slider_img",
+        //             method: "POST",
+        //             data: {
+        //                 imageSources: imageSources,
+        //                 _token: $('meta[name="csrf-token"]').attr("content"),
+        //             },
+        //             success: function(response) {
+        //                 var savedImages = response.images;
+        //                 eventData.slider_images = savedImages;
+        //                 console.log(eventData);
+        //                 $('#loader').css('display', 'none');
+        //                 toastr.success('Slider Image saved Successfully');
+        //             },
+        //             error: function(xhr, status, error) {},
+        //         });
+        //     }
+        // });
 
-        $(document).on("click", ".delete_silder", function(e) {
-            e.preventDefault();
-            var delete_id = $(this).parent().find('.slider_img').data("delete");
-            var src = $(this).parent().find('.slider_img').attr("src");
-            if (src != "") {
-                $('#loader').css('display', 'block');
-                var $this = $(this);
-                var check_slider_img = eventData.slider_images;
-                var matchFound = false;
-                $.each(check_slider_img, function(index, slider) {
-                    if (slider.deleteId == delete_id) {
-                        matchFound = true;
-                        return false;
-                    }
-                });
-                if (matchFound) {
-                    $.ajax({
-                        url: base_url + "event/delete_slider_img",
-                        method: "POST",
-                        data: {
-                            delete_id: delete_id,
-                            _token: $('meta[name="csrf-token"]').attr("content"),
-                        },
-                        success: function(response) {
-                            $this.parent().find('.slider_img').attr('src', '');
-                            $(".photo-slider-" + delete_id).hide();
-                            toastr.success('Slider Image Deleted Successfully')
-                            $('#loader').css('display', 'none');
+        // $(document).on("click", ".delete_silder", function(e) {
+        //     e.preventDefault();
+        //     var delete_id = $(this).parent().find('.slider_img').data("delete");
+        //     var src = $(this).parent().find('.slider_img').attr("src");
+        //     if (src != "") {
+        //         $('#loader').css('display', 'block');
+        //         var $this = $(this);
+        //         var check_slider_img = eventData.slider_images;
+        //         var matchFound = false;
+        //         $.each(check_slider_img, function(index, slider) {
+        //             if (slider.deleteId == delete_id) {
+        //                 matchFound = true;
+        //                 return false;
+        //             }
+        //         });
+        //         if (matchFound) {
+        //             $.ajax({
+        //                 url: base_url + "event/delete_slider_img",
+        //                 method: "POST",
+        //                 data: {
+        //                     delete_id: delete_id,
+        //                     _token: $('meta[name="csrf-token"]').attr("content"),
+        //                 },
+        //                 success: function(response) {
+        //                     $this.parent().find('.slider_img').attr('src', '');
+        //                     $(".photo-slider-" + delete_id).hide();
+        //                     toastr.success('Slider Image Deleted Successfully')
+        //                     $('#loader').css('display', 'none');
 
-                        },
-                        error: function(xhr, status, error) {},
-                    });
-                } else {
-                    $(this).parent().find('.slider_img').attr('src', '');
-                    $(".photo-slider-" + delete_id).hide();
-                    $('#loader').css('display', 'none');
-                    toastr.success('Slider Image Deleted Successfully')
+        //                 },
+        //                 error: function(xhr, status, error) {},
+        //             });
+        //         } else {
+        //             $(this).parent().find('.slider_img').attr('src', '');
+        //             $(".photo-slider-" + delete_id).hide();
+        //             $('#loader').css('display', 'none');
+        //             toastr.success('Slider Image Deleted Successfully')
 
-                }
+        //         }
 
-            }
-            setTimeout(() => {
-                getLengthofSliderImage();
-            }, 500);
+        //     }
+        //     setTimeout(() => {
+        //         getLengthofSliderImage();
+        //     }, 500);
 
-        });
+        // });
    
 
 
