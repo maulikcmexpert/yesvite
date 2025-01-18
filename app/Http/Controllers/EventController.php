@@ -391,7 +391,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
-                dd($eventDetail);
+                // dd($eventDetail);
             }
         } else {
             $title = 'Create Event';
@@ -1798,6 +1798,7 @@ class EventController extends Controller
     public function getContacts(Request $request)
     {
 
+       
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
@@ -1859,10 +1860,14 @@ class EventController extends Controller
 
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
-
+        $cohostId=$request->cohostId;
+        $app_user=$request->app_user;
+        $cohostpreferby=$request->cohostpreferby;
+        $isSelectCohost = ($app_user == 1)?$cohostId :"";
+        $isSelectpreferby = ($app_user == 1)?$cohostpreferby :"";
         $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
-        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
-        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : $isSelectCohost;
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : $isSelectpreferby;
 
 
         $getAllContacts = contact_sync::where('contact_id', $id)
@@ -2270,12 +2275,17 @@ class EventController extends Controller
 
     public function get_co_host_list(Request $request)
     {
+        $cohostId=$request->cohostId;
+        $app_user=$request->app_user;
+        $cohostpreferby=$request->cohostpreferby;
         $selected_user = session('user_ids');
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
         $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
-        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
-        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
+        $isSelectCohost = ($app_user == 1)?$cohostId :"";
+        $isSelectpreferby = ($app_user == 1)?$cohostpreferby :"";
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : $isSelectCohost;
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by :$isSelectpreferby;
 
         $getAllContacts = contact_sync::where('contact_id', $user_id)->where('email', '!=', '')->orderBy('firstname')
             ->get();

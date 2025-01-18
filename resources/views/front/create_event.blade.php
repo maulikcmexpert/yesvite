@@ -2377,13 +2377,13 @@
 
 <input type="hidden" id="eventEditId" value="{{$eventDetail['eventeditId']}}">
 @php
-    
-
     $thankuCardId =  (isset($eventDetail['greeting_card_list']) &&   count($eventDetail['greeting_card_list'])>0) ? $eventDetail['greeting_card_list'][0]:"";
     $cohostId =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['id']:"";
     $app_user =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['app_user']:"";
-    @endphp
-<input type="hidden" id="app_user" value="{{$cohostId}}">
+    $cohostpreferby =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['prefer_by']:"";
+@endphp
+<input type="hidden" id="cohostpreferby" value="{{$cohostpreferby}}">
+<input type="hidden" id="app_user" value="{{$app_user}}">
 <input type="hidden" id="cohostId" value="{{$cohostId}}">
 <input type="hidden" id="thankuCardId" value="{{$thankuCardId}}">
 <input type="hidden" id="inviteTotalCount" value="{{$eventDetail['inviteCount']}}">

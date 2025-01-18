@@ -1,6 +1,6 @@
 @foreach ($users as $user )
 @php
-if ($user->email_verified_at == NULL && $user->app_user == '1'){
+if ($user->email_verified_at == NULL && $user->app_user == '1' ){
 continue;
 }
 $email_checked = '';
