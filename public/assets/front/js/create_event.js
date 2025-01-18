@@ -3446,7 +3446,7 @@ function clearError(input = null) {
             var groupname = input.value;
             if (groupname === "") {
                 $("#categoryNameError")
-                    .text("Please enter group name")
+                    .text("Please enter category name")
                     .css("color", "red");
                 $('.pot-cate-name').text('0/30');
             } else {
@@ -3475,7 +3475,7 @@ function clearError(input = null) {
             var groupname = input.value;
             if (groupname === "") {
                 $("#item_name_error")
-                    .text("Please enter group name")
+                    .text("Please enter item name")
                     .css("color", "red");
                 $('.sub-cat-pot').text('0/30');
             } else {
@@ -4726,7 +4726,11 @@ $(document).on("click", ".delete_thankyou_card", function () {
         data: {
             thank_you_card_id: id,
         },
-        success: function (response) {},
+        success: function (response) {
+                
+            
+
+        },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
         },

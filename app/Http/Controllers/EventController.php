@@ -1282,18 +1282,32 @@ class EventController extends Controller
                 'quantity' => $itemQuantity,
             ];
         }
-         else {
+        else {
             $categories[$category_index] = [
-                'category_name' => $categories[$category_index]['category_name'],
-                'category_quantity' => $categories[$category_index]['category_quantity'],
+                'category_name' => $categoryName, // Use $categoryName from the request
+                'category_quantity' => $request->input('category_quantity', 0), // Provide a default value if not available
                 'item' => [
                     [
                         'name' => $itemName,
+                        // 'self_bring' => $selfBring,
+                        // 'self_bring_qty' => $selfBringQuantity,
                         'quantity' => $itemQuantity,
                     ]
                 ]
             ];
         }
+        //  else {
+        //     $categories[$category_index] = [
+        //         'category_name' => $categories[$category_index]['category_name'],
+        //         'category_quantity' => $categories[$category_index]['category_quantity'],
+        //         'item' => [
+        //             [
+        //                 'name' => $itemName,
+        //                 'quantity' => $itemQuantity,
+        //             ]
+        //         ]
+        //     ];
+        // }
 
         Session::put('category', $categories);
 
@@ -1431,6 +1445,7 @@ class EventController extends Controller
             }
             Session::put('category', $category);
         }
+
         Session::save();
         // $event_data_display = Session::get('event_date_display');
         // unset($event_data_display[$index]);
@@ -1533,7 +1548,8 @@ class EventController extends Controller
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render(), 'status' => $status]);
+        $thankuCardId='';
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card','thankuCardId'))->render(), 'status' => $status]);
     }
 
     public function removeThankyouCard(Request $request)
@@ -2308,6 +2324,7 @@ class EventController extends Controller
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
         $thankuCardId = $request->thankuCardId;
+        // dd($thankuCardId);
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card','thankuCardId'))->render()]);
     }
 
