@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '1024M');
 
 use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
