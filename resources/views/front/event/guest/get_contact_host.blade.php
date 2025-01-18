@@ -7,11 +7,13 @@ $disabled = '';
 $email_checked = '';
 $phone_checked = '';
 if($selected_co_host == $user->id){
+   
 if($selected_co_host_prefer_by == 'email'){
 $email_checked = 'checked';
 }elseif ($selected_co_host_prefer_by == 'phone') {
 $phone_checked = 'checked';
 }
+dD($selected_co_host_prefer_by);
 }
 @endphp
 <div class="users-data">
