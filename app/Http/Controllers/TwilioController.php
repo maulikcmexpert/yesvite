@@ -9,7 +9,7 @@ class TwilioController extends Controller
 {
     public function handleIncomingMessage(Request $request)
     {
-        sendSMSForApplication("+9123840340", 'Yesvite:Pratik has invited you to Test. Reply "YES" to view details, RSVP, and to receive future invites. Reply STOP to opt out.');
+        sendSMSForApplication("+919723840340", 'Yesvite:Pratik has invited you to Test. Reply "YES" to view details, RSVP, and to receive future invites. Reply STOP to opt out.');
         die;
         // Get the message details from Twilio's webhook
         $from = $request->input('From'); // Sender's phone number
