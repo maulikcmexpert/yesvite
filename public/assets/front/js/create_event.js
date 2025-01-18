@@ -805,7 +805,7 @@ function set_activity_html(selectedDates) {
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne${dateID}">
-                                <div>Activities <span class="total_activity-${dateID}">(0)</span></div>
+                                <div>Activities <span class="total_activity-${dateID} activity_total_count">(0)</span></div>
                                 <i class="fa-solid fa-angle-down"></i>
                             </button>
                             <div class="accordion-button-icons add_more_activity" data-activity="add_activity_${i}" data-id="${dateID}">
@@ -1966,6 +1966,11 @@ $(document).on("blur", "#start-time", function () {
             }
         }
     }
+    $('.new_activity').html('');
+    $('.activity_total_count').text(0);
+    $('#end-time').val('');
+    $('#ac-start-time').val('');
+
 });
 
 $(document).on("blur", "#ac-start-time", function () {
@@ -1999,6 +2004,12 @@ $(document).on("blur", "#ac-start-time", function () {
             $(this).val("");
         }
     }
+
+    $('.new_activity').html('');
+    $('#end-time').val('');
+    $('.activity_total_count').text(0);
+    $('#ac-end-time').val('');
+
 });
 
 $(document).on("blur", "#ac-end-time", function () {
