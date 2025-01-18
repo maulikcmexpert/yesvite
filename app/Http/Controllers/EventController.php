@@ -461,7 +461,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         // $potluck = session('category');
-        // dd(session()->get('gift_registry_data'));
+        dd($request);
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
@@ -939,6 +939,8 @@ class EventController extends Controller
 
 
         $registry = $request->gift_registry_data;
+
+        // dd($registry);
         if (!empty($registry)) {
             $gift = '1';
         }
