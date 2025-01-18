@@ -3456,17 +3456,32 @@ function clearError(input = null) {
             }
             break;
         
-        case "item_name":
-            var itemname = input.value;
-            if (itemname === "") {
+        // case "item_name":
+        //     var itemname = input.value;
+        //     if (itemname === "") {
+        //         $("#item_name_error")
+        //             .text("Please enter description.")
+        //             .css("color", "red");
+        //         $('.sub-cat-pot').text('0/30');
+        //     } else {
+        //         itemLength = itemname.length;
+        //         $("#item_name_error").text("");
+        //         // $('.sub-cat-pot').text(itemLength+'/30');
+        //     }
+        //     break;
+
+
+            case "item_name":
+            var groupname = input.value;
+            if (groupname === "") {
                 $("#item_name_error")
-                    .text("Please enter description.")
+                    .text("Please enter group name")
                     .css("color", "red");
                 $('.sub-cat-pot').text('0/30');
             } else {
-                itemLength = itemname.length;
+                cateLength = groupname.length;
                 $("#item_name_error").text("");
-                $('.sub-cat-pot').text(itemLength+'/30');
+                $('.sub-cat-pot').text(cateLength+'/30');
             }
             break;
 
