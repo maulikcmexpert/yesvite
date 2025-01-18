@@ -242,43 +242,27 @@ class EventController extends Controller
                 $eventDetail['invited_guests'] = [];
                 $eventDetail['guest_co_host_list'] = [];
 
-                $invitedUser = EventInvitedUser::with('contact_sync')->where(['event_id' => $getEventData->id])->get();
-
-
-                // if (!empty($invitedUser)) {
-                //     foreach ($invitedUser as $guestVal) {
-                //         if ($guestVal->is_co_host == '0') {
-                //             if ($guestVal->user->is_user_phone_contact == '1') {
-                //                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                //                 $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                //                 $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                //                 $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                //                 $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                //                 $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
-                //             } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                //                 $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                //                 $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
-                //             }
-                //         } else if ($guestVal->is_co_host == '1') {
-                //             if ($guestVal->user->is_user_phone_contact == '1') {
-                //                 $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                //                 $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                //                 $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                //                 $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                //                 $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                //                 $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
-                //             } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                //                 $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                //                 $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['co_host_list'][] = $coHostDetail;
-                //             }
-                //         }
-                //     }
-                //     $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
-                // }
+                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
+                if (!empty($invitedUser)) {
+                    foreach ($invitedUser as $guestVal) {
+                         if ($guestVal->is_co_host == '1') {
+                            
+                            if ($guestVal->user->is_user_phone_contact == '1') {
+                                $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
+                                $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
+                                $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
+                                $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
+                                $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
+                                $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
+                            } elseif ($guestVal->user->is_user_phone_contact == '0') {
+                                $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
+                                $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
+                                $eventDetail['co_host_list'][] = $coHostDetail;
+                            }
+                        }
+                    }
+                    }
                 // $eventDetail['events_schedule_list'] = [];
                 $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
@@ -405,7 +389,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
-                // dd($eventDetail['event_setting']);
+                dd($eventDetail);
             }
         } else {
             $title = 'Create Event';
