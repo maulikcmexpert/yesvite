@@ -255,14 +255,14 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="gift_registry" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="gift_registry" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['gift_registry']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit add_gift_registry" style="display: none;">
+                                    <a href="#" class="add-limit add_gift_registry" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['gift_registry']=="1") ? "":"display:none"}}>
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center add_gift_registry_count">
                                                 <span class="me-3">
@@ -295,7 +295,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" checked/>
+                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['guest_list_visible_to_guests']=="1") ? "checked":""}}/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -335,7 +335,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" checked/>
+                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_wall']=="1") ? "checked":""}}/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -358,14 +358,14 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" />
+                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" {{(isset($eventDetail['podluck'])&&$eventDetail['event_setting']['podluck']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit potluck" style="display: none" onclick="toggleSidebar('sidebar_potluck')">
+                                    <a href="#" class="add-limit potluck" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "":"display:none"}} onclick="toggleSidebar('sidebar_potluck')">
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center potluck_count">
                                                 <span class="me-3">
