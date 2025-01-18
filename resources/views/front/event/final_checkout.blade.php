@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="order-desc order-desc-respo">
-                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="{{route('term_and_condition')}}">Terms of service</a></p>
+                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="{{route('term_and_condition')}}" target="_blank">Terms of service</a></p>
                     </div>
 
                 </div>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="order-desc">
-                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="{{route('term_and_condition')}}">Terms of service</a></p>
+                        <p>By making this purchase you agree and accept our terms of service and aknowledge that your invite details and order are correct. Full details found here: <a href="{{route('term_and_condition')}}" target="_blank">Terms of service</a></p>
                     </div>
 
                 </div>
