@@ -5590,7 +5590,10 @@ $(document).on('click','.free_plan',function () {
     });
     eventData.gift_registry_data=selected_gift;
     // console.log(eventData);
-
+    if((selected.length <=2)){
+        $('.add_gift_registry_count').html(`<span class="me-3"></span>
+            <h5>${selected.length} Registry</h5>`);
+    }
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
