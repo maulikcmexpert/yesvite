@@ -4854,6 +4854,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             if ($("input[name='guest_list[]']:checked").length === 0) {
                 selected_co_host = '';
                 selected_co_host_prefer_by = '';
+                selected_dataId='';
                 lengtUSer=0
                 $('.guest-contacts-wrp').css('display', 'none');
                 
