@@ -3,12 +3,12 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = '';
-var selected_co_host_prefer_by = '';
+var selected_co_host = $("#cohostId").val();
+var selected_co_host_prefer_by = $("#cohostId").val();
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer= 0;
+var lengtUSer= ($("#cohostId").val() !="")?1:0;
 
 var selected_user_name = "";
 var selected_profilePhoto = "";        
@@ -5883,7 +5883,8 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   
+   alert(selected_co_host);
+
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;

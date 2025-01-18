@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ApiControllerv1 as ApiControllerv1;
 use App\Http\Controllers\ApiControllerv2 as ApiControllerv2;
 use App\Http\Controllers\ApiControllerv3 as ApiControllerv3;
+use App\Http\Controllers\TwilioController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,6 +20,8 @@ use App\Http\Controllers\ApiControllerv3 as ApiControllerv3;
 |
 */
 
+
+Route::post('/twilio-webhook', [TwilioController::class, 'handleIncomingMessage']);
 
 Route::post('/user/login', [ApiAuthController::class, 'login']);
 Route::post('/user/social_login', [ApiAuthController::class, 'socialLogin']);
