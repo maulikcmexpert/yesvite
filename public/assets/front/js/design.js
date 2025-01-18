@@ -2341,7 +2341,7 @@ function bindData(current_event_id) {
                     success: function(response) {
                         var savedImages = response.images;
                         eventData.slider_images = savedImages;
-                        //console.log(eventData);
+                        console.log(eventData);
                         $('#loader').css('display', 'none');
                         toastr.success('Slider Image saved Successfully');
                     },

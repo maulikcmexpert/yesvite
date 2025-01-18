@@ -215,14 +215,14 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" />
+                                                    <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['add_co_host']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit add_co_host" style="display:none;">
+                                    <a href="#" class="add-limit add_co_host" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['add_co_host']=="1") ? "":"display:none"}}>
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center add_new_co_host">
                                                 <span class="me-3">
@@ -587,7 +587,7 @@
         <div class="guest-group-name login-form-wrap no-border-css">
             <form action="" class="registry-form">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="item_name" name="text1" onkeyup="clearError(this)" placeholder="Description">
+                    <input class="form-control" type="text" id="item_name" name="text1" onkeyup="clearError(this)" placeholder="Description" maxlength="30">
                     <span class="sub-con sub-cat-pot">0/30</span>
                     <label for="item_name" id="item_name_error"></label>
                 </div>

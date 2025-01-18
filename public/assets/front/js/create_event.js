@@ -3,12 +3,12 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = '';
-var selected_co_host_prefer_by = '';
+var selected_co_host = $("#cohostId").val();
+var selected_co_host_prefer_by = $("#cohostId").val();
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer= 0;
+var lengtUSer= ($("#cohostId").val() !="")?1:0;
 
 var selected_user_name = "";
 var selected_profilePhoto = "";        
@@ -3446,7 +3446,7 @@ function clearError(input = null) {
             var groupname = input.value;
             if (groupname === "") {
                 $("#categoryNameError")
-                    .text("Please enter group name")
+                    .text("Please enter category name")
                     .css("color", "red");
                 $('.pot-cate-name').text('0/30');
             } else {
@@ -3456,11 +3456,26 @@ function clearError(input = null) {
             }
             break;
         
-        case "item_name":
+        // case "item_name":
+        //     var itemname = input.value;
+        //     if (itemname === "") {
+        //         $("#item_name_error")
+        //             .text("Please enter description.")
+        //             .css("color", "red");
+        //         $('.sub-cat-pot').text('0/30');
+        //     } else {
+        //         itemLength = itemname.length;
+        //         $("#item_name_error").text("");
+        //         // $('.sub-cat-pot').text(itemLength+'/30');
+        //     }
+        //     break;
+
+
+            case "item_name":
             var groupname = input.value;
             if (groupname === "") {
                 $("#item_name_error")
-                    .text("Please enter description.")
+                    .text("Please enter item name")
                     .css("color", "red");
                 $('.sub-cat-pot').text('0/30');
             } else {
@@ -4550,6 +4565,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
+                countGiftRegestry();
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
@@ -4711,7 +4727,20 @@ $(document).on("click", ".delete_thankyou_card", function () {
         data: {
             thank_you_card_id: id,
         },
-        success: function (response) {},
+        success: function (response) {
+                
+            var thankscardcount = $('.thank-you-card').length;
+            if(thankscardcount==0){
+                $('.add_new_thankyou_card').html(`<span class="me-3">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.1336 12.267L11.8002 2.66699C11.0836 1.37533 10.0919 0.666992 9.00023 0.666992C7.90856 0.666992 6.91689 1.37533 6.20023 2.66699L0.866892 12.267C0.191892 13.492 0.116892 14.667 0.658559 15.592C1.20023 16.517 2.26689 17.0253 3.66689 17.0253H14.3336C15.7336 17.0253 16.8002 16.517 17.3419 15.592C17.8836 14.667 17.8086 13.4837 17.1336 12.267ZM8.37523 6.50033C8.37523 6.15866 8.65856 5.87533 9.00023 5.87533C9.34189 5.87533 9.62523 6.15866 9.62523 6.50033V10.667C9.62523 11.0087 9.34189 11.292 9.00023 11.292C8.65856 11.292 8.37523 11.0087 8.37523 10.667V6.50033ZM9.59189 13.7587C9.55023 13.792 9.50856 13.8253 9.46689 13.8587C9.41689 13.892 9.36689 13.917 9.31689 13.9337C9.26689 13.9587 9.21689 13.9753 9.15856 13.9837C9.10856 13.992 9.05023 14.0003 9.00023 14.0003C8.95023 14.0003 8.89189 13.992 8.83356 13.9837C8.78356 13.9753 8.73356 13.9587 8.68356 13.9337C8.63356 13.917 8.58356 13.892 8.53356 13.8587C8.49189 13.8253 8.45023 13.792 8.40856 13.7587C8.25856 13.6003 8.16689 13.3837 8.16689 13.167C8.16689 12.9503 8.25856 12.7337 8.40856 12.5753C8.45023 12.542 8.49189 12.5087 8.53356 12.4753C8.58356 12.442 8.63356 12.417 8.68356 12.4003C8.73356 12.3753 8.78356 12.3587 8.83356 12.3503C8.94189 12.3253 9.05856 12.3253 9.15856 12.3503C9.21689 12.3587 9.26689 12.3753 9.31689 12.4003C9.36689 12.417 9.41689 12.442 9.46689 12.4753C9.50856 12.5087 9.55023 12.542 9.59189 12.5753C9.74189 12.7337 9.83356 12.9503 9.83356 13.167C9.83356 13.3837 9.74189 13.6003 9.59189 13.7587Z" fill="#E03137"></path>
+                    </svg>
+                </span><h5>Select thank you card</h5>`);
+            }else{
+                $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount}Templates available</h5>`);
+            }
+
+        },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
         },
@@ -4854,8 +4883,15 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             if ($("input[name='guest_list[]']:checked").length === 0) {
                 selected_co_host = '';
                 selected_co_host_prefer_by = '';
+                selected_dataId='';
                 lengtUSer=0
                 $('.guest-contacts-wrp').css('display', 'none');
+                $('.add_new_co_host').html(`<span class="me-3">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.1336 12.267L11.8002 2.66699C11.0836 1.37533 10.0919 0.666992 9.00023 0.666992C7.90856 0.666992 6.91689 1.37533 6.20023 2.66699L0.866892 12.267C0.191892 13.492 0.116892 14.667 0.658559 15.592C1.20023 16.517 2.26689 17.0253 3.66689 17.0253H14.3336C15.7336 17.0253 16.8002 16.517 17.3419 15.592C17.8836 14.667 17.8086 13.4837 17.1336 12.267ZM8.37523 6.50033C8.37523 6.15866 8.65856 5.87533 9.00023 5.87533C9.34189 5.87533 9.62523 6.15866 9.62523 6.50033V10.667C9.62523 11.0087 9.34189 11.292 9.00023 11.292C8.65856 11.292 8.37523 11.0087 8.37523 10.667V6.50033ZM9.59189 13.7587C9.55023 13.792 9.50856 13.8253 9.46689 13.8587C9.41689 13.892 9.36689 13.917 9.31689 13.9337C9.26689 13.9587 9.21689 13.9753 9.15856 13.9837C9.10856 13.992 9.05023 14.0003 9.00023 14.0003C8.95023 14.0003 8.89189 13.992 8.83356 13.9837C8.78356 13.9753 8.73356 13.9587 8.68356 13.9337C8.63356 13.917 8.58356 13.892 8.53356 13.8587C8.49189 13.8253 8.45023 13.792 8.40856 13.7587C8.25856 13.6003 8.16689 13.3837 8.16689 13.167C8.16689 12.9503 8.25856 12.7337 8.40856 12.5753C8.45023 12.542 8.49189 12.5087 8.53356 12.4753C8.58356 12.442 8.63356 12.417 8.68356 12.4003C8.73356 12.3753 8.78356 12.3587 8.83356 12.3503C8.94189 12.3253 9.05856 12.3253 9.15856 12.3503C9.21689 12.3587 9.26689 12.3753 9.31689 12.4003C9.36689 12.417 9.41689 12.442 9.46689 12.4753C9.50856 12.5087 9.55023 12.542 9.59189 12.5753C9.74189 12.7337 9.83356 12.9503 9.83356 13.167C9.83356 13.3837 9.74189 13.6003 9.59189 13.7587Z" fill="#E03137" />
+                    </svg>
+                    </span>
+                    <h5>Select your co-host</h5>`);
                 
             }
         }
@@ -5555,7 +5591,10 @@ $(document).on('click','.free_plan',function () {
     });
     eventData.gift_registry_data=selected_gift;
     // console.log(eventData);
-
+    // if((selected.length <=2)){
+    //     $('.add_gift_registry_count').html(`<span class="me-3"></span>
+    //         <h5>${selected.length} Registry</h5>`);
+    // }
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
@@ -5648,6 +5687,9 @@ function countGiftRegestry(){
         }
         i++;
     });
+    console.log(i);
+    console.log(checkedCount);
+    
     if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_gift_registry_count').html(`<span class="me-3"></span>
@@ -5838,6 +5880,8 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
+   alert(selected_co_host);
+
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
@@ -5918,7 +5962,9 @@ $(document).on('click','.overlay',function(){
 });
 
 function get_co_host_list(search_name=null,limit,offset,scroll){
-   
+    var app_user = $("#app_user").val();
+    var cohostId = $("#cohostId").val();
+    var cohostpreferby = $("#cohostpreferby").val();
     if(search_name ==null){
         search_name = '';
     }
@@ -5939,6 +5985,9 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             scroll:scroll,
             selected_co_host:selected_co_host,
             selected_co_host_prefer_by:selected_co_host_prefer_by,
+            app_user:app_user,
+            cohostId:cohostId,
+            cohostpreferby:cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
@@ -5969,7 +6018,9 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
     if(search_name ==null){
         search_name = '';
     }
-   
+    var app_user = $("#app_user").val();
+    var cohostId = $("#cohostId").val();
+    var cohostpreferby = $("#cohostpreferby").val();
     $('.list_all_invited_user').css('display','none');
     $('.list_all_contact_user').css('display','block');
 
@@ -5987,6 +6038,9 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
             limit:limit,
             offset:offset,
             scroll:scroll,
+            app_user:app_user,
+            cohostId:cohostId,
+            cohostpreferby:cohostpreferby,
             selected_co_host_prefer_by:selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -6303,12 +6357,11 @@ $("#YesviteContactsAll").on("scroll", function () {
 
 
 function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
-    
     $.ajax({
         type: "GET",
         async: false,
         url: base_url+'event/get_contacts',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name + "&scroll="+ scroll,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name + "&scroll="+ scroll + '&app_user=' + app_user + '&cohostId=' + cohostId  ,
         cache: false,
         beforeSend: function () {
 

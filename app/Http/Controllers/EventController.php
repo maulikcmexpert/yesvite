@@ -238,30 +238,17 @@ class EventController extends Controller
                     }
                 }
                 $eventDetail['invited_user_id'] = [];
-                $eventDetail['co_host_list'] = [];
+            
                 $eventDetail['invited_guests'] = [];
                 $eventDetail['guest_co_host_list'] = [];
 
-                $invitedUser = EventInvitedUser::with('contact_sync')->where(['event_id' => $getEventData->id])->get();
-
-
+                $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
+                // dd($eventDetail);
+                $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
                 // if (!empty($invitedUser)) {
                 //     foreach ($invitedUser as $guestVal) {
-                //         if ($guestVal->is_co_host == '0') {
-                //             if ($guestVal->user->is_user_phone_contact == '1') {
-                //                 $invitedGuestDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                //                 $invitedGuestDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                //                 $invitedGuestDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                //                 $invitedGuestDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                //                 $invitedGuestDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                //                 $invitedGuestDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
-                //             } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                //                 $invitedUserIdDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                //                 $invitedUserIdDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['invited_user_id'][] = $invitedUserIdDetail;
-                //             }
-                //         } else if ($guestVal->is_co_host == '1') {
+                //          if ($guestVal->is_co_host == '1') {
+                            
                 //             if ($guestVal->user->is_user_phone_contact == '1') {
                 //                 $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 //                 $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
@@ -277,8 +264,7 @@ class EventController extends Controller
                 //             }
                 //         }
                 //     }
-                //     $eventDetail['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventDetail['invited_user_id']) + count($eventDetail['invited_guests']))) : 0;
-                // }
+                //     }
                 // $eventDetail['events_schedule_list'] = [];
                 $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
@@ -405,7 +391,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
-                dd($eventDetail['event_setting']);
+                // dd($eventDetail);
             }
         } else {
             $title = 'Create Event';
@@ -475,7 +461,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         // $potluck = session('category');
-        // dd(session()->get('gift_registry_data'));
+        dd($request);
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
@@ -953,6 +939,8 @@ class EventController extends Controller
 
 
         $registry = $request->gift_registry_data;
+
+        // dd($registry);
         if (!empty($registry)) {
             $gift = '1';
         }
@@ -1295,18 +1283,33 @@ class EventController extends Controller
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
             ];
-        } else {
+        }
+        else {
             $categories[$category_index] = [
-                'category_name' => $categories[$category_index]['category_name'],
-                'category_quantity' => $categories[$category_index]['category_quantity'],
+                'category_name' => $categoryName, // Use $categoryName from the request
+                'category_quantity' => $request->input('category_quantity', 0), // Provide a default value if not available
                 'item' => [
                     [
                         'name' => $itemName,
+                        // 'self_bring' => $selfBring,
+                        // 'self_bring_qty' => $selfBringQuantity,
                         'quantity' => $itemQuantity,
                     ]
                 ]
             ];
         }
+        //  else {
+        //     $categories[$category_index] = [
+        //         'category_name' => $categories[$category_index]['category_name'],
+        //         'category_quantity' => $categories[$category_index]['category_quantity'],
+        //         'item' => [
+        //             [
+        //                 'name' => $itemName,
+        //                 'quantity' => $itemQuantity,
+        //             ]
+        //         ]
+        //     ];
+        // }
 
         Session::put('category', $categories);
 
@@ -1444,6 +1447,7 @@ class EventController extends Controller
             }
             Session::put('category', $category);
         }
+
         Session::save();
         // $event_data_display = Session::get('event_date_display');
         // unset($event_data_display[$index]);
@@ -1546,7 +1550,8 @@ class EventController extends Controller
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
         // $data = ['name' => $template_name, 'when_to_send' => $when_to_send, 'message' => $thankyou_message, 'thankyou_template_id' => $thankyou_template_id];
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render(), 'status' => $status]);
+        $thankuCardId='';
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card','thankuCardId'))->render(), 'status' => $status]);
     }
 
     public function removeThankyouCard(Request $request)
@@ -1795,6 +1800,7 @@ class EventController extends Controller
     public function getContacts(Request $request)
     {
 
+       
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
@@ -1856,10 +1862,15 @@ class EventController extends Controller
 
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
-
+        $cohostId=$request->cohostId;
+        $app_user=$request->app_user;
+        
+        $cohostpreferby=$request->cohostpreferby;
+        $isSelectCohost = ($app_user == 0)?$cohostId :"";
+        $isSelectpreferby = ($app_user == 0)?$cohostpreferby :"";
         $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
-        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
-        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : $isSelectCohost;
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : $isSelectpreferby;
 
 
         $getAllContacts = contact_sync::where('contact_id', $id)
@@ -1896,8 +1907,7 @@ class EventController extends Controller
         }
 
         $selected_user = Session::get('contact_ids');
-        // dd($selected_co_host_prefer_by);
-        // dd($selected_co_host_prefer_by);
+        
 
         return response()->json([
             'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
@@ -2267,12 +2277,17 @@ class EventController extends Controller
 
     public function get_co_host_list(Request $request)
     {
+        $cohostId=$request->cohostId;
+        $app_user=$request->app_user;
+        $cohostpreferby=$request->cohostpreferby;
         $selected_user = session('user_ids');
         $user_id =  Auth::guard('web')->user()->id;
         $alreadyselectedUser =  collect($selected_user)->pluck('id')->toArray();
         $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
-        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : '';
-        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : '';
+        $isSelectCohost = ($app_user == 1)?$cohostId :"";
+        $isSelectpreferby = ($app_user == 1)?$cohostpreferby :"";
+        $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : $isSelectCohost;
+        $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by :$isSelectpreferby;
 
         $getAllContacts = contact_sync::where('contact_id', $user_id)->where('email', '!=', '')->orderBy('firstname')
             ->get();
@@ -2321,6 +2336,7 @@ class EventController extends Controller
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
         $thankuCardId = $request->thankuCardId;
+        // dd($thankuCardId);
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card','thankuCardId'))->render()]);
     }
 
