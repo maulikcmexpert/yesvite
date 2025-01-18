@@ -939,7 +939,7 @@ class EventController extends Controller
 
         $registry = $request->gift_registry_data;
 
-        dd($registry);
+        // dd($registry);
         if (!empty($registry)) {
             $gift = '1';
         }
