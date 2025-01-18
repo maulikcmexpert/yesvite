@@ -1279,7 +1279,8 @@ class EventController extends Controller
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
             ];
-        } else {
+        }
+         else {
             $categories[$category_index] = [
                 'category_name' => $categories[$category_index]['category_name'],
                 'category_quantity' => $categories[$category_index]['category_quantity'],

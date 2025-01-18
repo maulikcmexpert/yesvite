@@ -587,7 +587,7 @@
         <div class="guest-group-name login-form-wrap no-border-css">
             <form action="" class="registry-form">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="item_name" name="text1" onkeyup="clearError(this)" placeholder="Description">
+                    <input class="form-control" type="text" id="item_name" name="text1" onkeyup="clearError(this)" placeholder="Description" maxlength="30">
                     <span class="sub-con sub-cat-pot">0/30</span>
                     <label for="item_name" id="item_name_error"></label>
                 </div>
