@@ -4565,6 +4565,7 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
+                countGiftRegestry();
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
@@ -5590,7 +5591,10 @@ $(document).on('click','.free_plan',function () {
     });
     eventData.gift_registry_data=selected_gift;
     // console.log(eventData);
-
+    // if((selected.length <=2)){
+    //     $('.add_gift_registry_count').html(`<span class="me-3"></span>
+    //         <h5>${selected.length} Registry</h5>`);
+    // }
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
@@ -5683,6 +5687,9 @@ function countGiftRegestry(){
         }
         i++;
     });
+    console.log(i);
+    console.log(checkedCount);
+    
     if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_gift_registry_count').html(`<span class="me-3"></span>
