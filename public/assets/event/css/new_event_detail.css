@@ -325,6 +325,7 @@
 .new_event_detail_header .dropdown-menu .dropdown-item svg {
     width: 100%;
     max-width: 20px;
+    min-width: 20px;
     height: 20px;
 }
 
@@ -356,6 +357,7 @@
 
 .location-icon input {
     background-color: transparent !important;
+    padding-right: 30px !important;
 }
 
 .location-icon svg {
