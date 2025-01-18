@@ -4855,6 +4855,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 selected_co_host = '';
                 selected_co_host_prefer_by = '';
                 selected_dataId='';
+                lengtUSer=0
                 $('.guest-contacts-wrp').css('display', 'none');
                 $('.add_new_co_host').html(`<span class="me-3">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -4862,9 +4863,6 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                     </svg>
                     </span>
                     <h5>Select your co-host</h5>`);
-            }
-                lengtUSer=0
-                $('.guest-contacts-wrp').css('display', 'none');
                 
             }
         }
