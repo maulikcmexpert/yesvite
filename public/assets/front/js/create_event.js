@@ -4861,6 +4861,7 @@ $(document).on("click",".remove_co_host",function(){
     eventData.co_host_prefer_by = '';
     selected_co_host = '';
     selected_co_host_prefer_by = '';
+    selected_dataId='';
     $('.guest-contacts-wrp').css('display','none');
     $('.add_new_co_host').html(`<span class="me-3">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -4934,6 +4935,9 @@ $(document).on("click", ".save_event_co_host", function () {
                 </svg>
             </span>
             <h5>Select your co-host</h5>`);
+
+            toggleSidebar();
+  
     }
 });
 
