@@ -3,12 +3,12 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = $("#cohostId").val();
-var selected_co_host_prefer_by = $("#cohostId").val();
+var selected_co_host = '';
+var selected_co_host_prefer_by = '';
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer= ($("#cohostId").val() !="")?1:0;
+var lengtUSer= 0;
 
 var selected_user_name = "";
 var selected_profilePhoto = "";        
@@ -4565,7 +4565,6 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
-                countGiftRegestry();
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
@@ -5591,10 +5590,7 @@ $(document).on('click','.free_plan',function () {
     });
     eventData.gift_registry_data=selected_gift;
     // console.log(eventData);
-    // if((selected.length <=2)){
-    //     $('.add_gift_registry_count').html(`<span class="me-3"></span>
-    //         <h5>${selected.length} Registry</h5>`);
-    // }
+
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
         $(this).prop('checked', false);
@@ -5687,9 +5683,6 @@ function countGiftRegestry(){
         }
         i++;
     });
-    console.log(i);
-    console.log(checkedCount);
-    
     if(i>=1 && checkedCount > 0){
         if(i==1){
             $('.add_gift_registry_count').html(`<span class="me-3"></span>
@@ -5880,8 +5873,7 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   alert(selected_co_host);
-
+   
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
