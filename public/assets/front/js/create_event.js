@@ -2837,8 +2837,9 @@ $(document).on("click", "#close_createEvent", function () {
                 if(response==1){ 
                     window.location.href="home";
                     toastr.success('Event Saved as Draft');
-                    $('#loader').css('display','none');
-                }
+                    setTimeout(function () {
+                        $('#loader').css('display', 'none');
+                    }, 4000);                }
 
             },
             error: function (xhr, status, error) {
