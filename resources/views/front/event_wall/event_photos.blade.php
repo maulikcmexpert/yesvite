@@ -41,7 +41,7 @@
                     <div class="event-center-tabs-main">
                         <!-- ====================navbar-============================= -->
                         {{-- <x-event_wall.wall_navbar :event="$event" :current_page="$current_page"/> --}}
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" />
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails"/>
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -335,7 +335,9 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#detail-photo-modal"
                                                             data-post-id="{{ $photo['id'] }}"
-                                                            data-event-id="{{ $photo['event_id'] }}">
+                                                            data-event-id="{{ $photo['event_id'] }}"
+
+                                                            >
                                                             @if (isset($photo['mediaData']) && $photo['mediaData']['type'] === 'image')
                                                                 <img src="{{ $photo['mediaData']['post_media'] }}"
                                                                     alt="Post Image">
@@ -412,8 +414,30 @@
                                         @endif
                                         <div class="phototab-add-new-photos-wrp">
                                             <div class="phototab-add-new-photos-img">
-                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                    alt="">
+                                                @if ($photo['profile'] != '')
+                                                <img src="{{ $photo['profile']}}"
+                                                alt="">
+                                            @else
+                                                @php
+                                                    $name = $photo['firstname'];
+                                                    // $parts = explode(" ", $name);
+                                                    $firstInitial = isset($photo['firstname'][0])
+                                                        ? strtoupper($photo['firstname'][0][0])
+                                                        : '';
+                                                    $secondInitial = isset($photo['lastname'][0])
+                                                        ? strtoupper($photo['lastname'][0][0])
+                                                        : '';
+                                                    $initials =
+                                                        strtoupper($firstInitial) .
+                                                        strtoupper($secondInitial);
+                                                    $fontColor =
+                                                        'fontcolor' . strtoupper($firstInitial);
+                                                @endphp
+                                                <h5 class="{{ $fontColor }}">
+                                                    {{ $initials }}
+                                                </h5>
+                                            @endif
+
                                                 <p>Let’s share a moment</p>
                                             </div>
                                             <button class="add-new-photos-btn cmn-btn" type="button"
@@ -826,10 +850,10 @@
                                 </ul>
                                 <h6 id="comments">354 Comments</h6>
                             </div>
-                            <div class="posts-card-like-comment-right">
-                                <button class="posts-card-like-btn likeModel" id="likeButton" data-event-id="{{$event}}"
-                                    data-parent-id="" data-event-post-id="" data-user-id="{{ $login_user_id }}"><i
-                                        class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
+                            <div class="posts-card-like-comment-right emoji_set">
+                                <button class="posts-card-like-btn likeModel " id="likeButtonModel" data-event-id="{{$event}}"
+                                    data-parent-id="" data-event-post-id="" data-user-id="{{ $login_user_id }}">
+                                    <i class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
 
                                         <div class="photos-likes-options-wrp emoji-picker"
                                         id="emojiDropdown1" style="display: none;">

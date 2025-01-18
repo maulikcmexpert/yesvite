@@ -196,7 +196,7 @@ class EventWallController extends Controller
             }
             $wallData['owner_stories'][] = $storiesDetaill;
         }
-
+///postlist
         $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
@@ -214,6 +214,7 @@ class EventWallController extends Controller
                 $query->where('user_id', $user->id)
                     ->where('post_control', 'hide_post');
             });
+            // dd($eventPostList);
         $checkEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
         if ($checkEventOwner == null) {
             $eventPostList->where(function ($query) use ($user, $event) {
@@ -246,19 +247,22 @@ class EventWallController extends Controller
                     });
             });
         }
-        $eventPostList->orderBy('id', 'DESC');
-
-        $totalPostWalls = $eventPostList->count();
-        $results = $eventPostList->paginate(10);
-        $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
-        $postList = [];
         // dd($eventPostList);
+        $eventPostList->orderBy('id', 'DESC')->get();
+
+        // $totalPostWalls = $eventPostList->count();
+        // $results = $eventPostList->paginate(10);
+        // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
+        $postList = [];
+
         if (!empty($checkEventOwner)) {
-            if (count($results) != 0) {
-                foreach ($results as  $value) {
+            // if (count($results) != 0) {
+                if ($eventPostList != "") {
+                foreach ($eventPostList as  $value) {
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event, 'event_post_id' => $value->id])->first();
+                    // dd($postControl);
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $event, 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                         ->first();
@@ -294,7 +298,7 @@ class EventWallController extends Controller
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
-                    $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus;
+                    $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus ?? "";
                     $postsNormalDetail['kids'] = (int)$kids;
                     $postsNormalDetail['adults'] = (int)$adults;
                     $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) . ($value->user->state != "" ? ', ' . $value->user->state : '') : "";
@@ -384,12 +388,13 @@ class EventWallController extends Controller
                     }
                     $postList[] = $postsNormalDetail;
                 }
+                // dd($postList);
             }
         }
 
         $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
             $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
-        },  'event_invited_user' => function ($query) {
+        },'event_invited_user' => function ($query) {
             $query->where('is_co_host', '0')->with('user');
         }])->where('id', $event)->first();
         $guestView = [];
@@ -626,6 +631,9 @@ class EventWallController extends Controller
         $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
         $eventInfo['host_view'] = $eventAboutHost;
+        $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            $query->where('app_user', '1');
+        })->where(['user_id' => $user->id, 'event_id' => $event])->first();
         $current_page = "wall";
 
         // return $wallData;
@@ -635,13 +643,16 @@ class EventWallController extends Controller
             'users',
             'event',
             'eventInfo',
+            'eventDetails',
             'storiesList',
             'pollsData',
             'wallData',
             'postList',
             'encrypt_event_id',
             'current_page',
-            'eventDetails'
+            'eventDetails',
+            'rsvpSent'
+
 
         ));
 
@@ -1112,6 +1123,7 @@ class EventWallController extends Controller
 
     public function createPost(Request $request)
     {
+        // dd($request);
         $user  = Auth::guard('api')->user();
         $input = $request->all();
         // $validator = Validator::make($input, [
@@ -1140,7 +1152,7 @@ class EventWallController extends Controller
             $record->move(public_path('storage/event_post_recording'), $recordingName);
             $creatEventPost->post_recording = $recordingName;
         }
-        $creatEventPost->post_privacy = $request->post_privacy;
+        $creatEventPost->post_privacy = $request->post_privacys;
         $creatEventPost->post_type = $request->post_type;
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = $request->is_in_photo_moudle;
@@ -1508,9 +1520,9 @@ class EventWallController extends Controller
             $record->move(public_path('storage/event_post_recording'), $recordingName);
             $creatEventPost->post_recording = $recordingName;
         }
-        $creatEventPost->post_privacy = "1";
+        $creatEventPost->post_privacy = $request->post_privacys;
         $creatEventPost->post_type = "2";
-        $creatEventPost->commenting_on_off = "0";
+        $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
         // Create the poll
@@ -1667,7 +1679,7 @@ class EventWallController extends Controller
     }
     public function createEventPost(Request $request)
     {
-        // dd($request);
+
         $user = Auth::guard('web')->user()->id;
 
         // Create new event post
@@ -1675,9 +1687,9 @@ class EventWallController extends Controller
         $createEventPost->event_id = $request->event_id;
         $createEventPost->user_id = $user;
         $createEventPost->post_message = $request->input('content'); // Placeholder, update as necessary
-        $createEventPost->post_privacy = "1"; // Example: public post
+        $createEventPost->post_privacy = $request->input('post_privacys'); // Example: public post
         $createEventPost->post_type = "1"; // Define post type
-        $createEventPost->commenting_on_off = "1"; // Comments allowed
+        $createEventPost->commenting_on_off = $request->input('commenting_on_off'); // Comments allowed
         $createEventPost->is_in_photo_moudle = "1"; // Whether the post contains photos
         $createEventPost->save();
 

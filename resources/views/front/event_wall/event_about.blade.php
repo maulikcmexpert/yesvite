@@ -41,7 +41,7 @@
                     <div class="event-center-tabs-main">
                         <!-- ====================navbar-============================= -->
                         {{-- <x-event_wall.wall_navbar :event="$event" :current_page="$current_page"/> --}}
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" />
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :rsvpSent="$rsvpSent" />
                         {{-- {{dd($page)}} --}}
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -98,7 +98,29 @@
                                         <div class="birth-details">
                                             <div class="d-flex align-items-center">
                                                 <div class="birth-img">
+                                                    @if ($eventDetails['user_profile'] != '')
                                                     <img src="{{ $eventDetails['user_profile'] }}" alt="birth-img">
+                                                @else
+                                                    @php
+
+                                                        // $parts = explode(" ", $name);
+                                                        $nameParts = explode(' ', $eventDetails['hosted_by']);
+                                                        $firstInitial = isset($nameParts[0][0])
+                                                            ? strtoupper($nameParts[0][0])
+                                                            : '';
+                                                        $secondInitial = isset($nameParts[1][0])
+                                                            ? strtoupper($nameParts[1][0])
+                                                            : '';
+                                                        $initials = $firstInitial . $secondInitial;
+
+                                                        // Generate a font color class based on the first initial
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                    @endphp
+                                                    <h5 class="{{ $fontColor }}">
+                                                        {{ $initials }}
+                                                    </h5>
+                                                @endif
+
                                                 </div>
                                                 <div class="birth-host">
                                                     <h5>{{ $eventDetails['event_name'] }}</h5>
@@ -111,13 +133,13 @@
                                                     <li>RSVP By:
                                                         {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
                                                     </li>
-                                                    @if($eventDetails['podluck'] == 1)
-                                                    <li>Potluck Event</li>
-                                                @endif
-                                                @if($eventDetails['adult_only_party'] == 1)
-                                                <li>Adults Only</li>
-                                            @endif
-                                                    <li>Can Bring Gursts ({{$eventDetails['allow_limit']}})</li>
+                                                    @if ($eventDetails['podluck'] == 1)
+                                                        <li>Potluck Event</li>
+                                                    @endif
+                                                    @if ($eventDetails['adult_only_party'] == 1)
+                                                        <li>Adults Only</li>
+                                                    @endif
+                                                    <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
                                                 </ul>
                                             </div>
                                             <div class="hosted-by-date-time">
@@ -292,14 +314,37 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{-- {{      dd($eventDetails)}} --}}
                                     <div class="host-users-detail cmn-card">
                                         <h4 class="title">Your hosts</h4>
                                         <div class="host-user-con-box">
                                             @if ($eventDetails['hosted_by'])
                                                 <div class="host-user-con">
                                                     <div class="img-wrp">
-                                                        <img src="{{ $eventDetails['user_profile'] }}"
-                                                            alt="host-img">
+                                                        @if ($eventDetails['user_profile'] != '')
+                                                            <img src="{{ $eventDetails['user_profile'] }}"
+                                                                alt="host-img">
+                                                        @else
+                                                            @php
+
+                                                                // $parts = explode(" ", $name);
+                                                                $nameParts = explode(' ', $eventDetails['hosted_by']);
+                                                                $firstInitial = isset($nameParts[0][0])
+                                                                    ? strtoupper($nameParts[0][0])
+                                                                    : '';
+                                                                $secondInitial = isset($nameParts[1][0])
+                                                                    ? strtoupper($nameParts[1][0])
+                                                                    : '';
+                                                                $initials = $firstInitial . $secondInitial;
+
+                                                                // Generate a font color class based on the first initial
+                                                                $fontColor = 'fontcolor' . $firstInitial;
+                                                            @endphp
+                                                            <h5 class="{{ $fontColor }}">
+                                                                {{ $initials }}
+                                                            </h5>
+                                                        @endif
+
                                                     </div>
                                                     <h5>{{ $eventDetails['hosted_by'] }}</h5>
                                                     <span>Host</span>
@@ -323,25 +368,28 @@
                                             “{{ $eventDetails['message_to_guests'] }}”
                                         </p>
                                     </div>
-                                    @if (!empty($eventDetails['event_location_name']) ||  !empty($eventDetails['address_1']) ||   !empty($eventDetails['address_2']))
-                                    <div class="location-wrp cmn-card">
-                                        <h4 class="title">Location</h4>
-                                        <h5>{{ $eventDetails['event_location_name'] ?: 'Tom’s House' }}</h5>
-                                        <p>{{ $eventDetails['address_1'] }}, {{ $eventDetails['city'] }},
-                                            {{ $eventDetails['state'] }} {{ $eventDetails['zip_code'] }}</p>
-                                        <div id="map">
+                                    @if (
+                                        !empty($eventDetails['event_location_name']) ||
+                                            !empty($eventDetails['address_1']) ||
+                                            !empty($eventDetails['address_2']))
+                                        <div class="location-wrp cmn-card">
+                                            <h4 class="title">Location</h4>
+                                            <h5>{{ $eventDetails['event_location_name'] ?: 'Tom’s House' }}</h5>
+                                            <p>{{ $eventDetails['address_1'] }}, {{ $eventDetails['city'] }},
+                                                {{ $eventDetails['state'] }} {{ $eventDetails['zip_code'] }}</p>
+                                            <div id="map">
 
-                                            <!-- Google Maps iframe with dynamic latitude and longitude -->
-                                            <iframe
-                                                src="https://www.google.com/maps/embed?q={{ $eventDetails['latitude'] ?? '' }},{{ $eventDetails['longitude'] ?? '' }}"
-                                                width="600" height="450" style="border:0;" allowfullscreen=""
-                                                loading="lazy"></iframe>
+                                                <!-- Google Maps iframe with dynamic latitude and longitude -->
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed?q={{ $eventDetails['latitude'] ?? '' }},{{ $eventDetails['longitude'] ?? '' }}"
+                                                    width="600" height="450" style="border:0;"
+                                                    allowfullscreen="" loading="lazy"></iframe>
 
-                                            <img src="{{ asset('assets/front/img/location-marker.svg') }}"
-                                                alt="marker" class="marker">
+                                                <img src="{{ asset('assets/front/img/location-marker.svg') }}"
+                                                    alt="marker" class="marker">
+                                            </div>
+                                            <a href="#" class="direction-btn">Directions</a>
                                         </div>
-                                        <a href="#" class="direction-btn">Directions</a>
-                                    </div>
                                     @endif
                                     {{-- {{dd($eventDetails['event_schedule']);}} --}}
                                     @php
@@ -369,6 +417,7 @@
                                                 }
                                             @endphp
                                         @endforeach
+                                        {{-- {{ dd($eventDetails['event_schedule']) }} --}}
                                         <div class="schedule-wrp cmn-card">
                                             <h4 class="title">Schedule</h4>
                                             <span class="timing"> {{ date('h:i A', $overallStartTime) }} -
@@ -380,63 +429,74 @@
                                             <div>
                                                 @foreach ($eventDetails['event_schedule'] as $schedule)
                                                     @php
+                                                        if (
+                                                            empty($schedule['start_time']) &&
+                                                            empty($schedule['end_time'])
+                                                        ) {
+                                                            continue; // Skip this iteration if times are missing
+                                                        }
                                                         $i = 0;
                                                         $colorClass = $series[$colorIndex % count($series)];
                                                         $colorIndex++;
+                                                        $startTime = \Carbon\Carbon::parse($schedule['start_time']);
+                                                        $endTime = \Carbon\Carbon::parse($schedule['end_time']);
+                                                        $duration = $startTime->diffInHours($endTime) . 'h';
                                                     @endphp
-                                                        <div class="shedule-manage-timing">
-                                                            <div class="shedule-timing">
-                                                                <h6>{{ $schedule['start_time'] }}</h6>
-                                                            </div>
-                                                            <div class="shedule-box {{ $colorClass }}">
-                                                                <div class="shedule-box-left">
-                                                                    <h6>{{ $schedule['activity_title'] }}</h6>
-                                                                    <span>{{ $schedule['start_time'] }} -
-                                                                        {{ $schedule['end_time'] }}</span>
-                                                                </div>
-                                                                <span class="hrs ms-auto">1h</span>
-                                                            </div>
-                                                            <img src="{{ asset('assets/front/img/timing-line.svg') }}"
-                                                                alt="timing">
+                                                    <div class="shedule-manage-timing">
+                                                        <div class="shedule-timing">
+                                                            <h6>{{ $schedule['start_time'] }}</h6>
                                                         </div>
+                                                        <div class="shedule-box {{ $colorClass }}">
+                                                            <div class="shedule-box-left">
+                                                                <h6>{{ $schedule['activity_title'] }}</h6>
+                                                                <span>{{ $schedule['start_time'] }} -
+                                                                    {{ $schedule['end_time'] }}</span>
+                                                            </div>
+                                                            <span class="hrs ms-auto">{{ $duration }}</span>
+                                                        </div>
+                                                        <img src="{{ asset('assets/front/img/timing-line.svg') }}"
+                                                            alt="timing">
+                                                    </div>
                                                 @endforeach
                                             </div>
 
-                                    </div>
+                                        </div>
                                     @endif
 
-                            @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
-                            @foreach ($eventDetails['gift_registry'] as $gift)
-                                <div class="gift-register cmn-card">
-                                    <h4 class="title">Sarah’s Gift Registries</h4>
-                                    <span>Buy them the gift of their choice.</span>
-                                    <div class="play-store">
-                                        <a href="#" class="play-store-btn target-btn">
-                                            <img src="{{ asset('assets/front/img/target.png') }}" alt="target">
-                                            <h6>Target</h6>
-                                        </a>
-                                        <a href="#" class="play-store-btn amazon-btn">
-                                            <img src="{{ asset('assets/front/img/amazon.png') }}" alt="amazon">
-                                        </a>
-                                    </div>
+                                    @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
+                                        @foreach ($eventDetails['gift_registry'] as $gift)
+                                            <div class="gift-register cmn-card">
+                                                <h4 class="title">Sarah’s Gift Registries</h4>
+                                                <span>Buy them the gift of their choice.</span>
+                                                <div class="play-store">
+                                                    <a href="#" class="play-store-btn target-btn">
+                                                        <img src="{{ asset('assets/front/img/target.png') }}"
+                                                            alt="target">
+                                                        <h6>Target</h6>
+                                                    </a>
+                                                    <a href="#" class="play-store-btn amazon-btn">
+                                                        <img src="{{ asset('assets/front/img/amazon.png') }}"
+                                                            alt="amazon">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
 
                         </div>
+                        <!-- ===tab-content-end=== -->
+
                     </div>
-
+                    <!-- ===event-center-tabs-main-end=== -->
                 </div>
-                <!-- ===tab-content-end=== -->
-
             </div>
-            <!-- ===event-center-tabs-main-end=== -->
+            <div class="col-xl-3 col-lg-0">
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" />
+            </div>
         </div>
-    </div>
-    <div class="col-xl-3 col-lg-0">
-        <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
-    </div>
-    </div>
     </div>
 
 
@@ -1802,18 +1862,18 @@
                                 <div class="input-form">
                                     <input type="radio" id="option5" name="rsvp_status" value="1"
                                         {{ isset($rsvpSent['rsvp_status']) && $rsvpSent['rsvp_status'] == 1 ? 'checked' : '' }}>
-                                        <label for="option5">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M10.0013 18.3346C14.5846 18.3346 18.3346 14.5846 18.3346 10.0013C18.3346 5.41797 14.5846 1.66797 10.0013 1.66797C5.41797 1.66797 1.66797 5.41797 1.66797 10.0013C1.66797 14.5846 5.41797 18.3346 10.0013 18.3346Z"
-                                                    stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M6.45703 9.99896L8.81536 12.3573L13.5404 7.64062"
-                                                    stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                            YES</label>
+                                    <label for="option5">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M10.0013 18.3346C14.5846 18.3346 18.3346 14.5846 18.3346 10.0013C18.3346 5.41797 14.5846 1.66797 10.0013 1.66797C5.41797 1.66797 1.66797 5.41797 1.66797 10.0013C1.66797 14.5846 5.41797 18.3346 10.0013 18.3346Z"
+                                                stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M6.45703 9.99896L8.81536 12.3573L13.5404 7.64062"
+                                                stroke="#23AA26" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                        YES</label>
                                 </div>
                                 <div class="input-form rsvp-no-checkbox">
                                     <input type="radio" id="option6" name="rsvp_status" value="0"

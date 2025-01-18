@@ -548,6 +548,7 @@ $(document).on('click', '.open_photo_model', function () {
                 const data = dataArray[0]; // Access the first object in the array
 
                 // Profile Image
+
                 const profileImage = data.profile || '{{ asset("assets/front/img/header-profile-img.png") }}';
                 $('.posts-card-head-left-img img').attr('src', profileImage);
                 $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
@@ -578,13 +579,73 @@ $(document).on('click', '.open_photo_model', function () {
                 $('#likes').text(data.total_likes + ' Likes');
                 // Add 'Likes' after the number
                 $('#comments').text(data.total_comments + ' Comments')
-                const likeButton = $('.likeModel');
+
                 console.log('Self Reaction:', data.self_reaction); // Debugging
-                if (data.self_reaction === '\u{2764}') {
-                    likeButton.find('i').removeClass('fa-regular').addClass('fa-solid'); // Filled heart
+                console.log(typeof data.self_reaction); // Output: string
+
+
+                var reaction_store = data.self_reaction.trim(); // Ensure no leading/trailing whitespace
+                console.log("Trimmed Reaction Store:", reaction_store); // Log trimmed reaction value
+                console.log("Reaction Unicode Code:", reaction_store.charCodeAt(0)); // Log the Unicode code of the first character
+
+
+                // var reaction_store = data.self_reaction.trim(); // Ensure no leading/trailing whitespace
+                console.log(reaction_store);
+
+
+
+
+                // Check and toggle the heart icon based on the reaction
+                const likeButton = $('#likeButtonModel').find('i'); // Ensure this targets the right button
+                console.log(likeButton);
+
+                var unicodeString = '\\u{2764}';  // This is the string as you want it: "\u{2764}"
+                console.log(unicodeString); // Will log the Unicode code as a hex string
+
+
+                if (reaction_store == unicodeString) {
+                    console.log("User has liked the post.");
+                    likeButton.removeClass('fa-regular').addClass('fa-solid'); // Add filled heart class
                 } else {
-                    likeButton.find('i').removeClass('fa-solid').addClass('fa-regular');; // Empty heart
+                    console.log("User has not liked the post.");
+                    likeButton.removeClass('fa-solid').addClass('fa-regular'); // Add empty heart class
                 }
+
+
+
+                // Update the emoji list based on the reaction
+                const reactionList = $('.posts-card-like-comment-left ul');
+                reactionList.find('li').each(function () {
+                    const img = $(this).find('img');
+                    if (img.length) {
+                        const emojiSrc = img.attr('src');
+                        console.log('Reaction Store:', reaction_store);
+                        console.log('Emoji Src:', emojiSrc);
+
+                        // Ensure we compare reaction_store to actual emoji unicode
+                        const heartUnicode = '\\u{2764}';
+                        const smileUnicode = '\\u{1F60D}';
+                        const clapUnicode = '\\u{1F44F}';
+
+                        // Reset all emojis: remove 'selected' class and show all emojis
+                        $(this).removeClass('selected').show();  // Remove 'selected' and show
+
+                        // Hide all emojis that don't match the reaction
+                        if (reaction_store === heartUnicode && emojiSrc.includes('heart-emoji.png')) {
+                            $(this).addClass('selected');
+                        } else if (reaction_store === smileUnicode && emojiSrc.includes('eye-heart-emoji.png')) {
+                            $(this).addClass('selected');
+                        } else if (reaction_store === clapUnicode && emojiSrc.includes('clap-icon.png')) {
+                            $(this).addClass('selected');
+                        } else {
+                            $(this).hide();
+                        }
+                    } else {
+                        console.log('No img tag found in this li element.');
+                    }
+                });
+                updateReactions(data.reactionList,data.firstname,data.lastname);
+
                 const commentsWrapper = $('.posts-card-show-all-comments-inner ul');
                 commentsWrapper.empty(); // Clear existing comments
 
@@ -633,12 +694,97 @@ $(document).on('click', '.open_photo_model', function () {
             }
         }
     });
+
+    function updateReactions(reactions, firstname, lastname) {
+        console.log(reactions); // Debug the reactions array
+        console.log(firstname);
+        console.log(lastname);
+
+
+        const allReactionsList = $('#nav-all-reaction-tab ul' );
+        const heartReactionsList = $('#nav-heart-reaction ul');
+        const thumbReactionsList = $('#nav-thumb-reaction ul');
+        const smilyReactionsList = $('#nav-smily-reaction ul');
+        const eyeHeartReactionsList = $('#nav-eye-heart-reaction ul');
+        const clapReactionsList = $('#nav-clap-reaction ul');
+
+        // Clear all reaction lists
+        allReactionsList.empty();
+        heartReactionsList.empty();
+        thumbReactionsList.empty();
+        smilyReactionsList.empty();
+        eyeHeartReactionsList.empty();
+        clapReactionsList.empty();
+
+        // Iterate through reactions array (e.g., ['\\u{2764}', '\\u{1F44D}'])
+        reactions.forEach(reaction => {
+            let reactionType = '';
+            let emojiSrc = '';
+
+            // Map each reaction to a type and corresponding emoji image source
+            if (reaction === '\\u{2764}') { // Heart
+                reactionType = 'heart';
+                emojiSrc = 'heart-emoji.png';
+            } else if (reaction) { // Heart
+                reactionType = 'all';
+                emojiSrc = 'heart-emoji.png ';
+            } else if (reaction === '\\u{1F44D}') { // Thumbs Up
+                reactionType = 'thumb';
+                emojiSrc = '{{ asset("assets/front/img/thumb.png")}}';
+            } else if (reaction === '\\u{1F604}') { // Smiley
+                reactionType = 'smily';
+                emojiSrc = '{{ asset("assets/front/img/smiley.png")}}';
+            } else if (reaction === '\\u{1F60D}') { // Eye-Heart
+                reactionType = 'eye-heart';
+                emojiSrc = '{{ asset("assets/front/img/eye-heart.png")}}';
+            } else if (reaction === '\\u{1F44F}') { // Clap
+                reactionType = 'clap';
+                emojiSrc = '{{ asset("assets/front/img/clap.png")}}';
+            }
+
+            if (reactionType !== '') {
+                const reactionItem = `<li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="{{ asset('assets/front/img/efault/profile.png')}}" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>${firstname} ${lastname}</h3>
+                                                    <p>Reacted with ${reactionType}</p>
+                                                </div>
+                                            </div>
+                                            <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="${emojiSrc}" alt="">
+                                            </div>
+                                        </div>
+                                      </li>`;
+
+                // Append to respective list based on type
+                if (reactionType === 'heart') {
+                    heartReactionsList.append(reactionItem);
+                } else if (reactionType === 'thumb') {
+                    thumbReactionsList.append(reactionItem);
+                } else if (reactionType === 'smily') {
+                    smilyReactionsList.append(reactionItem);
+                } else if (reactionType === 'eye-heart') {
+                    eyeHeartReactionsList.append(reactionItem);
+                } else if (reactionType === 'clap') {
+                    clapReactionsList.append(reactionItem);
+                }
+
+                // Add the same item to "All reactions" list
+                allReactionsList.append(reactionItem);
+            }
+        });
+    }
+
 });
 
 let longPressTimers;
 let isLong_press = false;
 
-$(document).on('mousedown', '.likeModel', function () {
+$(document).on('mousedown', '#likeButtonModel', function () {
     isLong_press = false; // Reset the flag
     const button = $(this);
 
@@ -650,7 +796,8 @@ $(document).on('mousedown', '.likeModel', function () {
         //button.find('i').text(''); // Clear the heart icon
     }, 500); // 500ms for long press
 });
-$(document).on('click', '.likeModel', function () {
+$(document).on('click', '#likeButtonModel', function () {
+    // alert();
     clearTimeout(longPressTimers); // Clear the long press timer
 
     // If it's a long press, don't process the click event
@@ -660,14 +807,15 @@ $(document).on('click', '.likeModel', function () {
     const button = $(this);
     const isLiked = button.hasClass('liked');
     const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
-
+    const likeButton = $(this);
     // Toggle like button appearance
-    if (isLiked) {
-        button.removeClass('liked');
-        button.find('i').removeClass('fa-solid').addClass('fa-regular');
+    const icon = $(this).find('i');
+
+    // Toggle the reaction locally
+    if (icon.hasClass('fa-regular')) {
+        icon.removeClass('fa-regular').addClass('fa-solid'); // Mark as liked
     } else {
-        button.addClass('liked');
-        button.find('i').removeClass('fa-regular').addClass('fa-solid');
+        icon.removeClass('fa-solid').addClass('fa-regular'); // Mark as not liked
     }
 
     // AJAX call to update the like state
@@ -681,6 +829,7 @@ $(document).on('click', '.likeModel', function () {
         data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: reaction }),
         success: function (response) {
             if (response.status === 1) {
+
                 $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
             } else {
                 alert(response.message);
@@ -695,7 +844,7 @@ $(document).on('click', '.likeModel', function () {
 
 $(document).on('click', '#emojiDropdown1 .model_emoji', function () {
     const selectedEmoji = $(this).data('emoji');
-    const button = $(this).closest('.posts-card-like-comment-right').find('#likeButton');
+    const button = $(this).closest('.emoji_set').find('#likeButton');
     const emojiDisplay = button.find('#show_comment_emoji');
 
     // Replace heart icon with selected emoji
@@ -705,6 +854,7 @@ $(document).on('click', '#emojiDropdown1 .model_emoji', function () {
     // AJAX call to update emoji reaction
     const eventId = button.data('event-id');
     const eventPostId = button.data('event-post-id');
+    console.log(eventPostId)
     $.ajax({
         url: base_url + "event_photo/userPostLikeDislike",
         method: "POST",
@@ -725,5 +875,5 @@ $(document).on('click', '#emojiDropdown1 .model_emoji', function () {
     });
 
     // Hide emoji picker
-    $(this).closest('#emojiDropdown').hide();
+    $(this).closest('#emojiDropdown1').hide();
 });

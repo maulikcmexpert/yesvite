@@ -26,9 +26,9 @@
                                 {{ $initials }}
                             </h5>
                         @endif
-                            <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                            {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                 alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                                onclick="showStories( {{ $event }},{{ $users->id }})">
+                                onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
 
                             <span class="wall-add-story-btn">
                                 <input type="file" id="story-upload-{{ $users->id }}" class="file-input"
@@ -87,7 +87,26 @@
     <div class="modal-content">
         <div class="story-seen-profile-wrp">
             <div class="story-seen-profile-img">
-                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}" />
+                @if ($users->profile  != '')
+                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                onclick="showStories( {{ $event }},{{ $users->id }})">
+            @else
+                @php
+                    $name = $users->firstname;
+                    // $parts = explode(" ", $name);
+                    $firstInitial = isset($users->firstname[0])
+                        ? strtoupper($users->firstname[0])
+                        : '';
+                    $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
+                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                @endphp
+                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                    onclick="showStories( {{ $event }},{{ $users->id }})">
+                    {{ $initials }}
+                </h5>
+            @endif
             </div>
             <div class="story-seen-profile-content">
                 <h3>you</h3>

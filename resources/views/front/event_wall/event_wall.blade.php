@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{-- {{dd($postList)}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -40,7 +40,7 @@
                     <div class="event-center-tabs-main">
                         {{-- {{dd($current_page)}} --}}
                         <!-- ====================navbar-============================= -->
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page"/>
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :rsvpSent="$rsvpSent"/>
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -51,7 +51,7 @@
                                     <!-- ================story================= -->
                                     <x-event_wall.wall_story :users="$users" :event="$event" :storiesList="$storiesList"
                                         :wallData="$wallData" />
-                                    <x-event_wall.wall_crate_poll_photo />
+                                    <x-event_wall.wall_crate_poll_photo :users="$users"  />
 
                                     <div class="event-posts-main-wrp common-div-wrp">
                                         <div class="posts-card-wrp">
@@ -865,15 +865,42 @@
                     <div class="modal-body">
                         <div class="create-post-profile">
                             <div class="create-post-profile-wrp">
-                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="">
-                                <h4>Everyone <i class="fa-solid fa-angle-down"></i></h4>
+                                @if ($users->profile  != '')
+                                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                onclick="showStories( {{ $event }},{{ $users->id }})">
+                            @else
+                                @php
+                                    $name = $users->firstname;
+                                    // $parts = explode(" ", $name);
+                                    $firstInitial = isset($users->firstname[0])
+                                        ? strtoupper($users->firstname[0])
+                                        : '';
+                                    $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
+                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                @endphp
+                                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                    onclick="showStories( {{ $event }},{{ $users->id }})">
+                                    {{ $initials }}
+                                </h5>
+                            @endif
+                                {{-- <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt=""> --}}
+                                <div id="savedSettingsDisplay">
+                                    <h4> <i class="fa-solid fa-angle-down"></i></h4>
+                                </div>
                             </div>
                         </div>
                         <form action="{{ route('event_wall.eventPost') }}" id="textform" method="POST"
                         enctype="multipart/form-data">
+                        <input type="hidden" name="event_id" id="event_id"
+                                            value="{{ $event }}">
+                        <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
+
+                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="">
                         @csrf
                         <div class="create-post-textcontent">
-                            <textarea class="form-control" rows="3" placeholder="What's on your mind?"  id="postContent"></textarea>
+                            <textarea class="form-control" rows="3"  name="postContent" placeholder="What's on your mind?"  id="postContent"></textarea>
                         </div>
                     </form>
                         <div class="create-post-upload-img-wrp d-none">
@@ -913,7 +940,10 @@
                                     <div class="create-post-upload-img-inner">
                                         <input type="hidden" name="event_id" id="event_id"
                                             value="{{ $event }}">
-                                            <input type="" name="content" id="photoContent">
+                                            <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
+
+                                             <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="1">
+                                            <input type="hidden" name="content" id="photoContent">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -981,7 +1011,9 @@
                                     @csrf
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
-                                        <input type="hidden" name="content" id="pollContent">
+                                        <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
+                                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="1">
+
                                     <div class="mb-3">
                                         <label for="yourquestion"
                                             class="form-label d-flex align-items-center justify-content-between">Your
@@ -1085,34 +1117,35 @@
                         <button type="button" class="btn-back"><i class="fa-solid fa-arrow-left"></i></button>
                         <h1 class="modal-title" id="exampleModalLabel">Post Settings</h1>
                     </div>
+                    <form action="" id="postSettingsForm">
                     <div class="modal-body">
                         <div class="create-post-setting-inner">
                             <h3>Who can see your post?</h3>
-                            <form action="">
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio"   name="post_privacy"
+                                        id="flexRadioDefault1" value="1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Everyone
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault2">
+                                    <input class="form-check-input" type="radio"   name="post_privacy"
+                                        id="flexRadioDefault2"  value="2">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         RSVP’d - Yes
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault3">
+                                    <input class="form-check-input" type="radio"   name="post_privacy"
+                                        id="flexRadioDefault3"  value="3">
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         RSVP’d - No
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault4">
+                                    <input class="form-check-input" type="radio"   name="post_privacy"
+                                        id="flexRadioDefault4"  value=" 4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         RSVP’d - No Reply
                                     </label>
@@ -1121,20 +1154,23 @@
                                 <div class="button-cover">
                                     <h3>Commenting</h3>
                                     <div class="button r" id="button-3">
-                                        <input type="checkbox" class="checkbox" />
+                                        <input type="checkbox"  id="allowComments" name="commenton"  value="1" class="checkbox" checked/>
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
                                 </div>
 
-                            </form>
+
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="cmn-btn">
-                            Save
-                        </button>
+                       <button   type="button" id="saveSettings" class="cmn-btn btn-back">
+                                        Save
+                                    </button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -1874,7 +1910,7 @@
     </div>
 
     <!-- ========= Add-guest ======== -->
-    <div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel"
+    {{-- <div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -2384,7 +2420,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 </main>
