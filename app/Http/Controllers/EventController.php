@@ -405,7 +405,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
-                dd($eventDetail['event_setting']);
+                // dd($eventDetail['event_setting']);
             }
         } else {
             $title = 'Create Event';
