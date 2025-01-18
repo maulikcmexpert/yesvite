@@ -13,7 +13,7 @@ $email_checked = 'checked';
 }elseif ($selected_co_host_prefer_by == 'phone') {
 $phone_checked = 'checked';
 }
-dD($selected_co_host_prefer_by);
+// dD($selected_co_host_prefer_by);
 }
 @endphp
 <div class="users-data">

@@ -391,6 +391,7 @@ class EventController extends Controller
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                 }
+                // dd($eventDetail);
             }
         } else {
             $title = 'Create Event';
@@ -1868,7 +1869,7 @@ class EventController extends Controller
         $search_user = (isset($request->search_name) && $request->search_name != '') ? $request->search_name : '';
         $selected_co_host = (isset($request->selected_co_host) && $request->selected_co_host != '') ? $request->selected_co_host : $isSelectCohost;
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : $isSelectpreferby;
-        dD($selected_co_host_prefer_by);
+
 
         $getAllContacts = contact_sync::where('contact_id', $id)
             // ->when($type != 'group', function ($query) use ($request) {
@@ -1904,8 +1905,7 @@ class EventController extends Controller
         }
 
         $selected_user = Session::get('contact_ids');
-        dd($selected_co_host_prefer_by);
-        dd($selected_co_host_prefer_by);
+        
 
         return response()->json([
             'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
