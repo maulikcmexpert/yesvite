@@ -5963,6 +5963,7 @@ $(document).on('click','.overlay',function(){
 function get_co_host_list(search_name=null,limit,offset,scroll){
     var app_user = $("#app_user").val();
     var cohostId = $("#cohostId").val();
+    var cohostpreferby = $("#cohostpreferby").val();
     if(search_name ==null){
         search_name = '';
     }
@@ -5983,6 +5984,9 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             scroll:scroll,
             selected_co_host:selected_co_host,
             selected_co_host_prefer_by:selected_co_host_prefer_by,
+            app_user:app_user,
+            cohostId:cohostId,
+            cohostpreferby:cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
@@ -6013,7 +6017,9 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
     if(search_name ==null){
         search_name = '';
     }
-   
+    var app_user = $("#app_user").val();
+    var cohostId = $("#cohostId").val();
+    var cohostpreferby = $("#cohostpreferby").val();
     $('.list_all_invited_user').css('display','none');
     $('.list_all_contact_user').css('display','block');
 
@@ -6031,6 +6037,9 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
             limit:limit,
             offset:offset,
             scroll:scroll,
+            app_user:app_user,
+            cohostId:cohostId,
+            cohostpreferby:cohostpreferby,
             selected_co_host_prefer_by:selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -6347,12 +6356,11 @@ $("#YesviteContactsAll").on("scroll", function () {
 
 
 function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
-    
     $.ajax({
         type: "GET",
         async: false,
         url: base_url+'event/get_contacts',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name + "&scroll="+ scroll,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name + "&scroll="+ scroll + '&app_user=' + app_user + '&cohostId=' + cohostId  ,
         cache: false,
         beforeSend: function () {
 
