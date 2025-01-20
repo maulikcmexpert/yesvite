@@ -5267,7 +5267,7 @@ $("#YesviteUserAll").on("scroll", function () {
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
                 var alluserscroll="1";
-                displayRecords(limityesvite, offsetyesvite,type="all");
+                displayRecords(limityesvite, offsetyesvite,type="all","1");
             }
         }
 });
@@ -5277,7 +5277,7 @@ function get_user(type){
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type,type="all");
+        displayRecords(limityesvite, offsetyesvite,type,type="all",null);
     }
     
 }
@@ -5326,13 +5326,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group');
+            displayRecords(limityesvite, offsetyesvite,'group',null);
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null) {
+function displayRecords(lim, off,type,search = null,scroll) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5345,7 +5345,7 @@ function displayRecords(lim, off,type,search = null) {
         type: "GET",
         async: false,
         url: base_url+'event/get_user_ajax',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name ,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name +"&scroll=" +scroll,
         cache: false,
         beforeSend: function () {
 
@@ -5373,11 +5373,11 @@ function displayRecords(lim, off,type,search = null) {
             // }
             if(type=="all"){
                 if(search != null){
-                    $("#YesviteUserAll").html(html);
+                    $("#YesviteUserAll").html(html.view);
                     busyyesvite = false;
 
                 }else{
-                    $("#YesviteUserAll").append(html);
+                    $("#YesviteUserAll").append(html.view);
                     busyyesvite = false;
 
                 }
@@ -5399,7 +5399,7 @@ $(document).on('keyup','.search_user_ajax',function(){
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','block');
-        displayRecords(limityesvite,offsetyesvite,'all',search_name);
+        displayRecords(limityesvite,offsetyesvite,'all',search_name,null);
         // $('#loader').css('display','none');
     }, 750);
 })
