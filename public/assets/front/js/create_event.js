@@ -6025,8 +6025,8 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-//    console.log(get_contact_status);
     var cur_status=$(this).data('contact');
+       console.log(cur_status);
    if(cur_status=="contacts"){
         $('#phone-tab-cantact').addClass('active');
         $('.add_co_host_tab').removeClass('active');
