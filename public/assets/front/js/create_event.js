@@ -6057,6 +6057,32 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
     }else{
+        if ($(this).is(':checked')) {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+            selected_co_host = $(this).val();
+            selected_user_name = user_name;
+            selected_profilePhoto = profilePhoto;        
+            selected_dataId = selected_co_host;
+            selected_profile_or_text = profile_or_text;
+            selected_prefer_by = prefer_by_email;
+            
+            // console.log(profile_or_text);
+            if(profile_or_text == '1'){
+                $('.selected-co-host-image').show();
+                $('.selected-co-host-image').attr('src',profilePhoto);
+                $('.selected-host-h5').css('display','none');
+            }else{
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display','none');
+                $('.selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+                $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+            }
+        } 
         $('.guest-contacts-wrp').css('display','flex');
         $('.guest-contacts-wrp').addClass('guest-contacts-test');
 
