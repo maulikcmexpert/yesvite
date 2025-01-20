@@ -6010,10 +6010,10 @@ $(document).on('click','.add_co_host',function(){
     get_co_host_list(null,cohostlimit,cohostoffset,false);
     $('#select_event_cohost').css('display','block');  
     $('.list_all_invited_user').css('display','block');
-        $('.list_all_contact_user').css('display','none');
-        cohostNoMoreData = false;
-        cohostphoneOffset=0;
-        cohostphoneLimit=10;
+    //     $('.list_all_contact_user').css('display','none');
+    //     cohostNoMoreData = false;
+    //     cohostphoneOffset=0;
+    //     cohostphoneLimit=10;
       if(co_host_is_selected_close==true){
                 $('.guest-contacts-wrp').css('display','none');
                 $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
