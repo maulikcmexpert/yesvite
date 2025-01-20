@@ -64,10 +64,23 @@
                                     }
                                 }
                             @endphp
-                         
-                                <input type="text" class="form-control inputText" id="event-date" data-isDate="{{$start_date}}" name="event-date" onblur="clearError(this)"  value="{{$start_date}}" readonly>
+                                <div class="position-relative z-2">
+                                    <input type="text" class="form-control inputText" style="background: transparent" id="event-date" data-isDate="{{$start_date}}" name="event-date" onblur="clearError(this)"  value="{{$start_date}}" readonly>
+                                    <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                        
+                                </div>
                         
-                            <label for="birthday" class="form-label input-field floating-label select-label">Date of event *</label>
+                            <label for="birthday" class="form-label input-field floating-label select-label">Date of event * </label>
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
                     </div>

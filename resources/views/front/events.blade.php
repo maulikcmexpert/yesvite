@@ -166,7 +166,7 @@
                     </div>
                     <div class="cancel-event-text text-center">
                       <h6>Event cancellation is not reversible.</h6>
-                      <p>Please confirm by typing <strong></strong> below.</p>
+                      <p>Please confirm by typing <strong>“CANCEL”</strong> below.</p>
                       <input type="text" placeholder="CANCEL" id="type_cancel" class="form-control">
                     </div>
                 </div>
