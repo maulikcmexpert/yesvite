@@ -27,7 +27,7 @@
 
                                                     @endphp
 
-            <a href="{{ $data['registry_link'] }}">
+            <a href="{{ $data['registry_link'] }}" target="_blank">
                 <img src="{{ $logo }}" alt="eventpic" style="max-width: 145px;">
             </a>                                          
     </span>
