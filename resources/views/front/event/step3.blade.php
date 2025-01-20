@@ -486,6 +486,9 @@
                                 </span>
                             </div>
                             <div class="user-contacts group_list group_search_list">
+                                @if(empty($groups))
+                                        No data found
+                                @endif
                                 @foreach ($groups as $group)
                                     <div class="group-card added_group{{ $group->id }} listgroups view_members"
                                         data-id="{{ $group->id }}">
