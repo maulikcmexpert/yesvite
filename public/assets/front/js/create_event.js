@@ -4910,11 +4910,13 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 $('.selected-host-h5').css('display','none');
             }else{
                 // $('.guest-img').html(profilePhoto);
-                $('.selected-host-h5').show();
+                // $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display','none');
-                $('.selected-host-h5').text(initial);
-                var firstinitial = initial.charAt(0);
-                $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+                $('.guest-img').html(profilePhoto);
+
+                // $('.selected-host-h5').text(initial);
+                // var firstinitial = initial.charAt(0);
+                // $('.selected-host-h5').addClass('fontcolor'+firstinitial);
             }
             $('.remove_co_host').attr('data-id',selected_co_host);
             $('#remove_co_host_id').val('user-'+selected_co_host);
