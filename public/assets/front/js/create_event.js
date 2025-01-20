@@ -4984,7 +4984,7 @@ $(document).on("click",".remove_co_host",function(){
     eventData.co_host_prefer_by = '';
     selected_co_host = '';
     selected_co_host_prefer_by = '';
-    selected_dataId="";
+    // selected_dataId="";
     $('.guest-contacts-wrp').css('display','none');
     $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
