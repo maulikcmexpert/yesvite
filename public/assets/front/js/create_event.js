@@ -5010,6 +5010,14 @@ $(document).on("click", ".save_event_co_host", function () {
             </svg>
         </span>
         <h5>Select your co-host</h5>`);
+
+        eventData.co_host = '';
+        eventData.co_host_prefer_by = '';
+        selected_co_host = '';
+        selected_co_host_prefer_by = '';
+        $('.guest-contacts-wrp').css('display','none');
+        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
+        
         toggleSidebar();
         return;
     }
