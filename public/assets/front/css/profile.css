@@ -628,13 +628,18 @@ input::-webkit-slider-thumb {
 .profile-details .user-location div p, .profile-details .user-location div a{
     font-size: 14px;
     display: inline-block;
+    word-break: break-all;
 }
 
 .profile-details .user-location div{
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 2px;
+}
+
+.profile-details .user-location div:first-child::after{
+    display: none;
 }
 
 .profile-details .user-location div:nth-child(2)::before{

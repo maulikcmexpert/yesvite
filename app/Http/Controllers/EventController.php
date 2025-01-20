@@ -474,16 +474,31 @@ class EventController extends Controller
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
+        // if (strpos($dateString, ' To ') !== false) {
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
+
+        // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
+        // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
         if (strpos($dateString, ' To ') !== false) {
             list($startDate, $endDate) = explode(' To ', $dateString);
         } else {
             $startDate = $dateString;
             $endDate = $dateString;
         }
-
-        $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
-        $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-
+        
+        $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
+        $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+        
+        $startDateFormat="";
+        $endDateFormat="";
+        if ($startDateObj && $endDateObj) {
+            $startDateFormat = $startDateObj->format('Y-m-d');
+            $endDateFormat = $endDateObj->format('Y-m-d');
+        }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
             $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
@@ -531,7 +546,7 @@ class EventController extends Controller
         $event_creation->rsvp_start_timezone = (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "";
         $event_creation->rsvp_end_time = (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "";
         $event_creation->rsvp_end_timezone = (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "";
-        $event_creation->rsvp_end_time_set = (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "";
+        $event_creation->rsvp_end_time_set = (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "0";
         $event_creation->event_location_name = (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "";
         $event_creation->address_1 = (isset($request->address1) && $request->address1 != "") ? $request->address1 : "";
         $event_creation->address_2 = (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "";
@@ -1802,6 +1817,7 @@ class EventController extends Controller
         }
 
         $selected_user = Session::get('user_ids');
+        
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 

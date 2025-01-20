@@ -4718,6 +4718,9 @@ $(document).on("click", ".add_thankyou_card", function () {
                 });
                 
             }
+            var thankscardcount = $('.thank-you-card').length;
+            $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount} Templates available</h5>`);
+
             $("#message_for_thankyou").val("");
             $("#thankyou_when_to_send").val("");
             $("#thankyou_templatename").val("");
@@ -4753,7 +4756,7 @@ $(document).on("click", ".delete_thankyou_card", function () {
                     </svg>
                 </span><h5>Select thank you card</h5>`);
             }else{
-                $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount}Templates available</h5>`);
+                $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount} Templates available</h5>`);
             }
 
         },
@@ -5266,18 +5269,19 @@ $("#YesviteUserAll").on("scroll", function () {
             offsetyesvite += limityesvite;
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
-                displayRecords(limityesvite, offsetyesvite,type="all");
+                
+                displayRecords(limityesvite, offsetyesvite,type="all",search=null,alluserscroll=1);
             }
         }
 });
 function get_user(type){
-    if (busyyesvite == false) {
+    // if (busyyesvite == false) {
         busyyesvite = true;
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type,type="all");
-    }
+        displayRecords(limityesvite, offsetyesvite,type,search=null,alluserscroll=null);
+    // }
     
 }
 // $('#YesviteUserAll').scroll(function () {
@@ -5317,8 +5321,7 @@ $('#groupUsers').scroll(function () {
     offsetyesvite=0;
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
-    var elementHeight = $(this).height(); // Visible height of the element
-
+    var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
     if (scrollTop + elementHeight >= scrollHeight) {
         busyyesvite = true;
@@ -5332,7 +5335,7 @@ $('#groupUsers').scroll(function () {
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5357,8 +5360,22 @@ function displayRecords(lim, off,type,search = null) {
                 $('.user_choice').prop('disabled',true);
             }
             console.log(html);
+            if(html=="" && alluserscroll==1){
+                // $("#YesviteUserAll").html('No data found');
+               NoMoreDataYesviteAll=true;
+               $('#loader').css('display','none');
+            
+               return;
+            }
             if(html==""){
                 $("#YesviteUserAll").html('No data found');
+               $('#loader').css('display','none');
+            
+               return;
+            }
+
+            if(html==""){
+                // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
                $('#loader').css('display','none');
             
