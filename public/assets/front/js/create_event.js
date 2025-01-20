@@ -5266,7 +5266,8 @@ $("#YesviteUserAll").on("scroll", function () {
             offsetyesvite += limityesvite;
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
-                displayRecords(limityesvite, offsetyesvite,type="all");
+                var alluserscroll="1";
+                displayRecords(limityesvite, offsetyesvite,type="all",alluserscroll);
             }
         }
 });
@@ -5317,8 +5318,7 @@ $('#groupUsers').scroll(function () {
     offsetyesvite=0;
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
-    var elementHeight = $(this).height(); // Visible height of the element
-
+    var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
     if (scrollTop + elementHeight >= scrollHeight) {
         busyyesvite = true;
@@ -5332,7 +5332,7 @@ $('#groupUsers').scroll(function () {
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5357,6 +5357,13 @@ function displayRecords(lim, off,type,search = null) {
                 $('.user_choice').prop('disabled',true);
             }
             console.log(html);
+            if(html==""){
+                // $("#YesviteUserAll").html('No data found');
+               NoMoreDataYesviteAll=true;
+               $('#loader').css('display','none');
+            
+               return;
+            }
             if(html==""){
                 // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
