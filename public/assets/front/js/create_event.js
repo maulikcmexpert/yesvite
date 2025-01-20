@@ -6003,12 +6003,7 @@ $(document).on('click','.add_co_host',function(){
     }else{
         lengtUSer= 0;
     }
- 
-            selected_user_name = "";
-            selected_profilePhoto = "";        
-            selected_dataId = "";
-            selected_profile_or_text = "";
-            selected_prefer_by = "";
+
     co_host_is_selected_close=false;
     $('.co_host_search').val('');
     $('.add_co_host_tab').addClass('active');
@@ -6128,112 +6123,6 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
  
      }
 
-     
-     $('input[name="guest_list[]"]:checked').each(function () {
-        var profilePhoto = $(this).data('profile');
-        var user_name = $(this).data('username');
-        var profile_or_text = $(this).data("profile_or_text");
-        var initial = $(this).data("initial");
-        var prefer_by_email = $(this).data('prefer_by');
-    
-        // Log or process the data
-        console.log("Profile Photo:", profilePhoto);
-        console.log("User Name:", user_name);
-        console.log("Profile or Text:", profile_or_text);
-        console.log("Initial:", initial);
-        console.log("Prefer By Email:", prefer_by_email);
-    
-        // Update UI based on the `profile_or_text` condition
-        if (profile_or_text == '1') {
-            $('.guest-img .selected-co-host-image').show();
-            $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
-            $('.guest-img .selected-host-h5').css('display', 'none');
-        } else {
-            // $('.guest-img').html(profilePhoto    );
-            $('.selected-host-h5').show();
-            $('.selected-co-host-image').css('display', 'none');
-            $('.guest-img .selected-host-h5').text(initial);
-            var firstinitial = initial.charAt(0);
-
-            // $('.selected-host-h5').removeClass(function (index, className) {
-            //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
-            // });
-            // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-
-            $('.guest-img .selected-host-h5').removeClass(function (index, className) {
-                return (className.match(/\bfontcolor\S+/g) || []).join(' ');
-            });
-        
-            // Add the new class
-            $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
-        }
-        $('.selected-host-name').text(user_name);
-    });
-    // if(selected_co_host == ''){
-    //    $('.guest-contacts-wrp').css('display','none');
-    //    $('.guest-contacts-wrp').removeClass('guest-contacts-test');
-
-    // }else{
-       
-    //     // if ($('input[name="guest_list[]"]').is(':checked')) {
-    //     //     var profilePhoto = $(this).data('profile');
-    //     //     var user_name = $(this).data('username');
-    //     //     var profile_or_text = $(this).data("profile_or_text");
-    //     //     var initial = $(this).data("initial");
-    //     //     var prefer_by_email = $(this).data('prefer_by');
-    //     //     // selected_co_host = $(this).val();
-    //     //     // selected_user_name = user_name;
-    //     //     // selected_profilePhoto = profilePhoto;        
-    //     //     // // selected_dataId = selected_co_host;
-    //     //     // selected_profile_or_text = profile_or_text;
-    //     //     // selected_prefer_by = prefer_by_email;
-            
-    //     //     // console.log(profile_or_text);
-    //     //     if(profile_or_text == '1'){
-    //     //         $('.selected-co-host-image').show();
-    //     //         $('.selected-co-host-image').attr('src',profilePhoto);
-    //     //         $('.selected-host-h5').css('display','none');
-    //     //     }else{
-    //     //         $('.selected-host-h5').show();
-    //     //         $('.selected-co-host-image').css('display','none');
-    //     //         $('.selected-host-h5').text(initial);
-    //     //         var firstinitial = initial.charAt(0);
-    //     //         $('.selected-host-h5').addClass('fontcolor'+firstinitial);
-    //     //     }
-    //     // } 
-
-    //     // $('input[name="guest_list[]"]:checked').each(function () {
-    //     //     var profilePhoto = $(this).data('profile');
-    //     //     var user_name = $(this).data('username');
-    //     //     var profile_or_text = $(this).data("profile_or_text");
-    //     //     var initial = $(this).data("initial");
-    //     //     var prefer_by_email = $(this).data('prefer_by');
-        
-    //     //     // Log or process the data
-    //     //     console.log("Profile Photo:", profilePhoto);
-    //     //     console.log("User Name:", user_name);
-    //     //     console.log("Profile or Text:", profile_or_text);
-    //     //     console.log("Initial:", initial);
-    //     //     console.log("Prefer By Email:", prefer_by_email);
-        
-    //     //     // Update UI based on the `profile_or_text` condition
-    //     //     if (profile_or_text == '1') {
-    //     //         $('.selected-co-host-image').show();
-    //     //         $('.selected-co-host-image').attr('src', profilePhoto);
-    //     //         $('.selected-host-h5').css('display', 'none');
-    //     //     } else {
-    //     //         $('.selected-host-h5').show();
-    //     //         $('.selected-co-host-image').css('display', 'none');
-    //     //         $('.selected-host-h5').text(initial);
-    //     //         var firstinitial = initial.charAt(0);
-    //     //         $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-    //     //     }
-    //     //     $('.selected-host-name').text(user_name);
-    //     // });
-    //     // $('.guest-contacts-wrp').css('display','flex');
-    //     // $('.guest-contacts-wrp').addClass('guest-contacts-test');
-
-    // }
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
@@ -6268,7 +6157,46 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
         }else{
             $(".list_all_invited_user").html(data.view);
         }
-
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
+            } else {
+                // $('.guest-img').html(profilePhoto    );
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+    
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+    
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                    return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                });
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
 
         // if(co_host_is_selected_close==true){
         //     $('.guest-contacts-wrp').css('display','none');
