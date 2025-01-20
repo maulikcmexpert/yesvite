@@ -6014,6 +6014,9 @@ $(document).on('click','.add_co_host',function(){
     $('#phone-tab-cantact').addClass('active');
     $('.add_co_host_tab').removeClass('active');
     get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
+    setTimeout(() => {
+        toggleSidebar('sidebar_add_co_host');
+    }, 500);
     return;
    }
     isPhonecontact = 0;
