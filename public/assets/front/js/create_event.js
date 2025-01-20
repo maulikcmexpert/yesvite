@@ -6020,16 +6020,16 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   console.log(get_contact_status);
-   if(isPhonecontact==1){
-        $('#phone-tab-cantact').addClass('active');
-        $('.add_co_host_tab').removeClass('active');
-        get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
-        setTimeout(() => {
-            toggleSidebar('sidebar_add_co_host');
-        }, 500);
-        return;
-   }
+//    console.log(get_contact_status);
+//    if(isPhonecontact==1){
+//         $('#phone-tab-cantact').addClass('active');
+//         $('.add_co_host_tab').removeClass('active');
+//         get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
+//         setTimeout(() => {
+//             toggleSidebar('sidebar_add_co_host');
+//         }, 500);
+//         return;
+//    }
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
