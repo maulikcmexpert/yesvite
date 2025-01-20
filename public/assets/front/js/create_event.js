@@ -6247,6 +6247,11 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         }
 
     }
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    }
     $.ajax({
         url: base_url+'event/getPhoneContact',
         type: "GET",
@@ -6279,6 +6284,48 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         }else{
             $(".list_all_contact_user").html(data.view);
         }
+
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
+            } else {
+                // $('.guest-img').html(profilePhoto    );
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+    
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+    
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                    return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                });
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
+
 
         cohostphonebusy=false;
     })
