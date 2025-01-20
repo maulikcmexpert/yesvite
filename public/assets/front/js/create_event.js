@@ -5996,7 +5996,7 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   console.log(1);
+   console.log(isPhonecontact);
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
@@ -6248,7 +6248,6 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
 
     }
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
- 
     if (checkedCheckbox.length > 0) {
         checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
     }
