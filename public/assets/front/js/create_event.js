@@ -4906,12 +4906,12 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
                 $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src',profilePhoto);
-                $('.selected-host-h5').css('display','none');
+                $('.guest-img .selected-co-host-image').attr('src',profilePhoto);
+                $('.guest-img .selected-host-h5').css('display','none');
             }else{
                 // $('.guest-img').html(profilePhoto);
-                $('.selected-host-h5').show();
-                $('.selected-co-host-image').css('display','none');
+                $('.guest-img .selected-host-h5').show();
+                $('.guest-img .selected-co-host-image').css('display','none');
                 // $('.guest-img').html(profilePhoto);
 
                 $('.guest-img .selected-host-h5').text(initial);
@@ -6177,9 +6177,9 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
         
             // Update UI based on the `profile_or_text` condition
             if (profile_or_text == '1') {
-                $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src', profilePhoto);
-                $('.selected-host-h5').css('display', 'none');
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
             } else {
                 // $('.guest-img').html(profilePhoto    );
                 $('.selected-host-h5').show();
