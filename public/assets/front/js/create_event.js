@@ -6110,6 +6110,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 var firstinitial = initial.charAt(0);
                 $('.selected-host-h5').addClass('fontcolor' + firstinitial);
             }
+            $('.selected-host-name').text(user_name);
         });
         $('.guest-contacts-wrp').css('display','flex');
         $('.guest-contacts-wrp').addClass('guest-contacts-test');
