@@ -6046,18 +6046,18 @@ $(document).on('click','#contact-tab',function(){
     cohostNoMoreData = false;
     cohostphoneOffset=0;
     cohostphoneLimit=10;
-  if(co_host_is_selected_close==true){
-            $('.guest-contacts-wrp').css('display','none');
-            $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
-            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+//   if(co_host_is_selected_close==true){
+//             $('.guest-contacts-wrp').css('display','none');
+//             $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
+//             var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
-            if (checkedCheckbox.length > 0) {
-                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-            }
-        }else{
-            $('.guest-contacts-wrp').css('display','flex');
-            $('.guest-contacts-wrp').addClass('guest-contacts-test');
-        }
+//             if (checkedCheckbox.length > 0) {
+//                 checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+//             }
+//         }else{
+//             $('.guest-contacts-wrp').css('display','flex');
+//             $('.guest-contacts-wrp').addClass('guest-contacts-test');
+//         }
 })
 
 $(document).on('click','.add_co_host_off',function(){
@@ -6098,20 +6098,21 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
     }
     console.log(selected_co_host);
     console.log(selected_co_host_prefer_by);
+    if(co_host_is_selected_close==true){
+        $('.guest-contacts-wrp').css('display','none');
+        $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
+        var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+
+        if (checkedCheckbox.length > 0) {
+            checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+        }   
+    }
     if(selected_co_host == ''){
        $('.guest-contacts-wrp').css('display','none');
        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
     }else{
-        if(co_host_is_selected_close==true){
-            $('.guest-contacts-wrp').css('display','none');
-            $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
-            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
-
-            if (checkedCheckbox.length > 0) {
-                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-            }   
-        }
+       
         // if ($('input[name="guest_list[]"]').is(':checked')) {
         //     var profilePhoto = $(this).data('profile');
         //     var user_name = $(this).data('username');
