@@ -13,16 +13,38 @@ var selected_gift=[];
 var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
-var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
-var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
-giftRegestryData.forEach(function (item) {
-    selected_gift.push({
-    gr_id: item,
-});
-});
-if(giftRegestryDataRaw!=null){
-    eventData.gift_registry_data=selected_gift;
+// var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
+// var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
+// giftRegestryData.forEach(function (item) {
+//     selected_gift.push({
+//     gr_id: item,
+// });
+// });
+// if(giftRegestryDataRaw!=null){
+//     eventData.gift_registry_data=selected_gift;
+// }
+
+// var selected_gift = [];
+// var eventData = {};
+
+var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').map(function () {
+    return $(this).val();
+}).get();
+
+if (giftRegestryDataRaw.length > 0) {
+    try {
+        var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+        giftRegestryData.forEach(function (item) {
+            selected_gift.push({
+                gr_id: item,
+            });
+        });
+        eventData.gift_registry_data = selected_gift;
+    } catch (e) {
+        console.error("Invalid JSON data:", e);
+    }
 }
+
 var selected_profile_or_text = "";
 var selected_prefer_by = '';
 var eventEditId = $("#eventEditId").val();
@@ -5993,7 +6015,7 @@ $(document).on('click','#contact-tab',function(){
 })
 
 $(document).on('click','.add_co_host_off',function(){
-    if(eventData.co_host !== undefined){
+    if(eventData.co_host != undefined){
         selected_co_host = eventData.co_host;
     }else{
         selected_co_host = '';
@@ -6035,6 +6057,61 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
     }else{
+        // if ($('input[name="guest_list[]"]').is(':checked')) {
+        //     var profilePhoto = $(this).data('profile');
+        //     var user_name = $(this).data('username');
+        //     var profile_or_text = $(this).data("profile_or_text");
+        //     var initial = $(this).data("initial");
+        //     var prefer_by_email = $(this).data('prefer_by');
+        //     // selected_co_host = $(this).val();
+        //     // selected_user_name = user_name;
+        //     // selected_profilePhoto = profilePhoto;        
+        //     // // selected_dataId = selected_co_host;
+        //     // selected_profile_or_text = profile_or_text;
+        //     // selected_prefer_by = prefer_by_email;
+            
+        //     // console.log(profile_or_text);
+        //     if(profile_or_text == '1'){
+        //         $('.selected-co-host-image').show();
+        //         $('.selected-co-host-image').attr('src',profilePhoto);
+        //         $('.selected-host-h5').css('display','none');
+        //     }else{
+        //         $('.selected-host-h5').show();
+        //         $('.selected-co-host-image').css('display','none');
+        //         $('.selected-host-h5').text(initial);
+        //         var firstinitial = initial.charAt(0);
+        //         $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+        //     }
+        // } 
+
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.selected-co-host-image').show();
+                $('.selected-co-host-image').attr('src', profilePhoto);
+                $('.selected-host-h5').css('display', 'none');
+            } else {
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                $('.selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+                $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
         $('.guest-contacts-wrp').css('display','flex');
         $('.guest-contacts-wrp').addClass('guest-contacts-test');
 
