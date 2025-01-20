@@ -6057,7 +6057,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
     }else{
-        if ($(this).is(':checked')) {
+        if ($('input[name="guest_list[]"]').is(':checked')) {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
