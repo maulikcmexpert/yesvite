@@ -6073,6 +6073,10 @@ $(document).on('click','.add_co_host_off',function(){
     }else{
         selected_co_host_prefer_by = '';
     }
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    }
     toggleSidebar();
 });
 
