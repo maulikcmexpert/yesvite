@@ -6196,7 +6196,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             return;
         }
         $("#loader").hide();
-        $('input[name="guest_list[]"]:checked').each(function () {
+        if ($('input[name="guest_list[]"]').is(':checked')) {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
@@ -6235,7 +6235,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
             $('.selected-host-name').text(user_name);
-        });
+        };
 
         if(data.scroll=='true'){
             $(".list_all_invited_user").append(data.view);
