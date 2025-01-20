@@ -9,7 +9,7 @@ var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer= 0;
-
+var selected_gift=[];
 var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
