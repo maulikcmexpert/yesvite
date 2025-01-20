@@ -2383,8 +2383,12 @@
     $cohostpreferby =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['prefer_by']:"";
     $cohostprofile =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['profile']:"";
     $cohostname =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['profile']:"";
+    $giftRegestryData = (isset($eventDetail['gift_registry_list']) && count($eventDetail['gift_registry_list']) > 0) 
+    ? $eventDetail['gift_registry_list'] 
+    : null;
 @endphp
 <input type="hidden" id="cohostpreferby" value="{{$cohostpreferby}}">
+<input type="hidden" name="giftRegestryData[]" value="{{ json_encode($giftRegestryData) }}">
 <input type="hidden" id="cohostprofile" value="{{$cohostprofile}}">
 <input type="hidden" id="app_user" value="{{$app_user}}">
 <input type="hidden" id="cohostId" value="{{$cohostId}}">

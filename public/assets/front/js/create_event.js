@@ -9,7 +9,17 @@ var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer= 0;
-
+var selected_gift = [];
+var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
+var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
+giftRegestryData.forEach(function (item) {
+    selected_gift.push({
+    gr_id: item,
+});
+});
+if(giftRegestryDataRaw!=null){
+    eventData.gift_registry_data=selected_gift;
+}
 var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
@@ -5582,7 +5592,7 @@ $(document).on('click','.free_plan',function () {
  });
  
  $(document).on('change', 'input[name="gift_registry[]"]',function() {
-    var selected_gift = [];
+    // var selected_gift = [];
     // if($(this).is(':checked')){
     //     var registry_name=$(this).data('item');
     //     var registry_link=$(this).data('registry');
@@ -6224,7 +6234,7 @@ $(document).on('click','.add_gift_registry',function(){
             $("#registry_item_id").val("");
         }
         $("#registry_list").append(data.view);
-        console.log(eventData);
+      
         if(eventData.gift_registry_data != undefined){
             console.log({data:eventData.gift_registry_data});
             eventData.gift_registry_data.forEach((element, index) => {
