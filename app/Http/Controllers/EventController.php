@@ -354,17 +354,24 @@ class EventController extends Controller
                 if (!empty($eventpotluckData)) {
                     $potluckCategoryData = [];
                     $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $getEventData->id)->count();
-
+                    $categories = session()->get('category', []);
+                    // dd($categories);
+                    $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     foreach ($eventpotluckData as $value) {
+                        
                         $potluckCategory['id'] = $value->id;
                         $potluckCategory['category'] = $value->category;
                         $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
-                        $potluckCategory['quantity'] = $value->quantity;
+                        $potluckCategoy['quantity'] = $value->quantity;
+                        $categories[] = ['category_name' => $value->category, 'category_quantity' => $value->quantity];
+                        session()->put('category', $categories);
+                        $status = '1';
+                        Session::save();
                         $potluckCategory['items'] = [];
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             foreach ($value->event_potluck_category_item as $itemValue) {
-
+                                
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
                                 $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
@@ -390,6 +397,7 @@ class EventController extends Controller
                         }
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
+                    // dd(Session::get('category'));
                 }
                 // dd($eventDetail);
             }
@@ -466,16 +474,31 @@ class EventController extends Controller
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
+        // if (strpos($dateString, ' To ') !== false) {
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
+
+        // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
+        // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
         if (strpos($dateString, ' To ') !== false) {
             list($startDate, $endDate) = explode(' To ', $dateString);
         } else {
             $startDate = $dateString;
             $endDate = $dateString;
         }
-
-        $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
-        $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-
+        
+        $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
+        $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+        
+        $startDateFormat="";
+        $endDateFormat="";
+        if ($startDateObj && $endDateObj) {
+            $startDateFormat = $startDateObj->format('Y-m-d');
+            $endDateFormat = $endDateObj->format('Y-m-d');
+        }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
             $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
@@ -523,7 +546,7 @@ class EventController extends Controller
         $event_creation->rsvp_start_timezone = (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "";
         $event_creation->rsvp_end_time = (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "";
         $event_creation->rsvp_end_timezone = (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "";
-        $event_creation->rsvp_end_time_set = (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "";
+        $event_creation->rsvp_end_time_set = (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "0";
         $event_creation->event_location_name = (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "";
         $event_creation->address_1 = (isset($request->address1) && $request->address1 != "") ? $request->address1 : "";
         $event_creation->address_2 = (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "";

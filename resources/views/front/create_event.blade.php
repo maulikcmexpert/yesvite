@@ -1234,6 +1234,7 @@
             <div class="potluck-category">
                 <h5>Potluck Categories</h5>
                 <input type="hidden" id="category_count" value="0">
+                
                 {{-- <div class="category-main-dishesh"> 
                 <div class="category-list">
                     <div class="list-header">
