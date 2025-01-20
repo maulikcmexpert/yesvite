@@ -5356,6 +5356,7 @@ function displayRecords(lim, off,type,search = null) {
             }
             console.log(html);
             if(html==""){
+                $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
                $('#loader').css('display','none');
             
