@@ -5996,7 +5996,13 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   console.log(isPhonecontact);
+//    console.log(isPhonecontact);
+   if(isPhonecontact==1){
+    $('#phone-tab-cantact').addClass('active');
+    $('.add_co_host_tab').removeClass('active');
+    get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
+    return;
+   }
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
