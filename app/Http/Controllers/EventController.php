@@ -354,17 +354,24 @@ class EventController extends Controller
                 if (!empty($eventpotluckData)) {
                     $potluckCategoryData = [];
                     $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $getEventData->id)->count();
-
+                    $categories = session()->get('category', []);
+                    // dd($categories);
+                    $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     foreach ($eventpotluckData as $value) {
+                        
                         $potluckCategory['id'] = $value->id;
                         $potluckCategory['category'] = $value->category;
                         $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
-                        $potluckCategory['quantity'] = $value->quantity;
+                        $potluckCategoy['quantity'] = $value->quantity;
+                        $categories[] = ['category_name' => $value->category, 'category_quantity' => $value->quantity];
+                        session()->put('category', $categories);
+                        $status = '1';
+                        Session::save();
                         $potluckCategory['items'] = [];
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             foreach ($value->event_potluck_category_item as $itemValue) {
-
+                                
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
                                 $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
@@ -390,6 +397,7 @@ class EventController extends Controller
                         }
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
+                    // dd(Session::get('category'));
                 }
                 // dd($eventDetail);
             }
