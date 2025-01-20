@@ -4906,20 +4906,26 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
                 $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src',profilePhoto);
-                $('.selected-host-h5').css('display','none');
+                $('.guest-img .selected-co-host-image').attr('src',profilePhoto);
+                $('.guest-img .selected-host-h5').css('display','none');
             }else{
                 // $('.guest-img').html(profilePhoto);
-                $('.selected-host-h5').show();
-                $('.selected-co-host-image').css('display','none');
+                $('.guest-img .selected-host-h5').show();
+                $('.guest-img .selected-co-host-image').css('display','none');
                 // $('.guest-img').html(profilePhoto);
 
-                $('.selected-host-h5').text(initial);
+                $('.guest-img .selected-host-h5').text(initial);
                 var firstinitial = initial.charAt(0);
-                $('.selected-host-h5').removeClass(function (index, className) {
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
                     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
                 });
-                $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
             $('.remove_co_host').attr('data-id',selected_co_host);
             $('#remove_co_host_id').val('user-'+selected_co_host);
@@ -6171,20 +6177,27 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
         
             // Update UI based on the `profile_or_text` condition
             if (profile_or_text == '1') {
-                $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src', profilePhoto);
-                $('.selected-host-h5').css('display', 'none');
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
             } else {
                 // $('.guest-img').html(profilePhoto    );
                 $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display', 'none');
-                $('.selected-host-h5').text(initial);
+                $('.guest-img .selected-host-h5').text(initial);
                 var firstinitial = initial.charAt(0);
 
-                $('.selected-host-h5').removeClass(function (index, className) {
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
                     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
                 });
-                $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
             $('.selected-host-name').text(user_name);
         });
