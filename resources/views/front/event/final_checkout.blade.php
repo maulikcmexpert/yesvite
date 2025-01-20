@@ -80,7 +80,7 @@
                         </div>
                         <div class="invite-pro">
                             <div class="invite-left">
-                                <h6>14</h6>
+                                <h6 class="invite-count"></h6>
                                 <p><strong>Invites | 1</strong> Left</p>
                             </div>
                         </div>
