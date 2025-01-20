@@ -5267,7 +5267,7 @@ $("#YesviteUserAll").on("scroll", function () {
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
                 
-                displayRecords(limityesvite, offsetyesvite,type="all",alluserscroll=1);
+                displayRecords(limityesvite, offsetyesvite,type="all",search=null,alluserscroll=1);
             }
         }
 });
