@@ -6007,7 +6007,7 @@ $(document).on('click','.add_co_host',function(){
     $('.co_host_search').val('');
     $('.add_co_host').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
-    // get_co_host_list(null,cohostlimit,cohostoffset,false);
+    get_co_host_list(null,cohostlimit,cohostoffset,false);
     $('#select_event_cohost').css('display','block');  
 
     setTimeout(() => {
