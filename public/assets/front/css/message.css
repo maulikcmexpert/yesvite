@@ -1705,6 +1705,16 @@ ul.chat-list li.setpink{
     display: block;
 }
 
+.message-area .massage-notification .cmn-btn{
+    background-color: transparent ;
+    border: 1px solid var(--borderColor);
+    color: var(--secondryColor);
+}
+
+.message-area .massage-notification .cmn-btn:hover{
+
+}
+
 
 /* ======= responsive ======== */
 
