@@ -4883,6 +4883,7 @@ $(document).on("click", ".save_allow_limit", function () {
 
 $(document).on("change", 'input[name="guest_list[]"]', function () {
     //    if ($("input[name='guest_list[]']:checked").length > 0) {
+    co_host_is_selected_close=false;
     const old_user_id = selected_co_host;
     const newUserID = $(this).val();
        if (lengtUSer> 0 && newUserID!=old_user_id) {
