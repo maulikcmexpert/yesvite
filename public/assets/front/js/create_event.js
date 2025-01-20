@@ -5358,14 +5358,14 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
             }
             console.log(html);
             if(html=="" && alluserscroll==1){
-                $("#YesviteUserAll").html('No data found');
-            //    NoMoreDataYesviteAll=true;
+                // $("#YesviteUserAll").html('No data found');
+               NoMoreDataYesviteAll=true;
                $('#loader').css('display','none');
             
                return;
             }
             if(html==""){
-               NoMoreDataYesviteAll=true;
+                $("#YesviteUserAll").html('No data found');
                $('#loader').css('display','none');
             
                return;
