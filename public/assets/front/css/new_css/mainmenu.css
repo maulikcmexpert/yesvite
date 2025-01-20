@@ -1705,7 +1705,7 @@
     }
 
     .home-center-content-head span{
-        display: none;
+        display: none !important;
     }
     #nav-upcoming-tab span, #nav-drafts-tab span, #nav-past-tab span{
         background-color: transparent;
