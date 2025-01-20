@@ -4719,7 +4719,7 @@ $(document).on("click", ".add_thankyou_card", function () {
                 
             }
             var thankscardcount = $('.thank-you-card').length;
-            $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount}Templates available</h5>`);
+            $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount} Templates available</h5>`);
 
             $("#message_for_thankyou").val("");
             $("#thankyou_when_to_send").val("");
@@ -4756,7 +4756,7 @@ $(document).on("click", ".delete_thankyou_card", function () {
                     </svg>
                 </span><h5>Select thank you card</h5>`);
             }else{
-                $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount}Templates available</h5>`);
+                $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount} Templates available</h5>`);
             }
 
         },
