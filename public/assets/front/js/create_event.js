@@ -6042,7 +6042,6 @@ $(document).on('click','.add_co_host',function(){
     $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
     get_co_host_list(null,cohostlimit,cohostoffset,false);
-    get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
     $('#select_event_cohost').css('display','block');  
 
     setTimeout(() => {
@@ -6072,6 +6071,7 @@ $(document).on('click','#phone-tab-cantact',function(){
     cohostphoneOffset=0;
     cohostphoneLimit=10;
     cohostNoMoreContactData=false;
+    get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
 })
 
 $(document).on('click','#contact-tab',function(){
@@ -6132,7 +6132,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
     var cohostId = $("#cohostId").val();
     var cohostpreferby = $("#cohostpreferby").val();
     if(search_name ==null){
-        search_name = '';   
+        search_name = '';
     }
     console.log(selected_co_host);
     console.log(selected_co_host_prefer_by);
