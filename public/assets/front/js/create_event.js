@@ -4718,6 +4718,9 @@ $(document).on("click", ".add_thankyou_card", function () {
                 });
                 
             }
+            var thankscardcount = $('.thank-you-card').length;
+            $('.add_new_thankyou_card').html(`<span class="me-3"></span><h5>${thankscardcount}Templates available</h5>`);
+
             $("#message_for_thankyou").val("");
             $("#thankyou_when_to_send").val("");
             $("#thankyou_templatename").val("");
