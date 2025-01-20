@@ -6058,9 +6058,6 @@ $(document).on('click','#contact-tab',function(){
             if (checkedCheckbox.length > 0) {
                 checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
             }
-        }else{
-            $('.guest-contacts-wrp').css('display','flex');
-            $('.guest-contacts-wrp').addClass('guest-contacts-test');
         }
 })
 
