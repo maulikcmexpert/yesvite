@@ -5266,7 +5266,7 @@ $("#YesviteUserAll").on("scroll", function () {
             offsetyesvite += limityesvite;
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
-                displayRecords(limityesvite, offsetyesvite,type="all");
+                displayRecords(limityesvite, offsetyesvite,type="all",scroll="1");
             }
         }
 });
@@ -5293,24 +5293,24 @@ function get_user(type){
 // });
 
 // After .user-contacts is dynamically added to the DOM
-$('#YesviteUserAll').scroll(function () {
+// $('#YesviteUserAll').scroll(function () {
 
-    var scrollTop = $(this).scrollTop(); // Current scroll position
-    var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
-    var elementHeight = $(this).height(); // Visible height of the element
+//     var scrollTop = $(this).scrollTop(); // Current scroll position
+//     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
+//     var elementHeight = $(this).height(); // Visible height of the element
 
-    // Check if the user has scrolled to the bottom
-    // if (scrollTop + elementHeight >= scrollHeight) {
-    //     busy = true;
-    //     offset = limit + offset;
-    //     console.log(offset);
-    //     $('#loader').css('display','block');
-    //     setTimeout(function () {
-    //         displayRecords(limit, offset,'all');
+//     // Check if the user has scrolled to the bottom
+//     // if (scrollTop + elementHeight >= scrollHeight) {
+//     //     busy = true;
+//     //     offset = limit + offset;
+//     //     console.log(offset);
+//     //     $('#loader').css('display','block');
+//     //     setTimeout(function () {
+//     //         displayRecords(limit, offset,'all');
 
-    //     }, 1000);
-    // }
-});
+//     //     }, 1000);
+//     // }
+// });
 
 $('#groupUsers').scroll(function () {
     limityesvite=10;
@@ -5358,7 +5358,7 @@ function displayRecords(lim, off,type,search = null) {
             }
             console.log(html);
             if(html==""){
-                $("#YesviteUserAll").html('No data found');
+                // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
                $('#loader').css('display','none');
             
