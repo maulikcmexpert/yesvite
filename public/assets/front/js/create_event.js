@@ -1980,6 +1980,8 @@ $(document).on("blur", "#start-time", function () {
     $('.activity_total_count').text(0);
     $('#end-time').val('');
     $('#ac-start-time').val('');
+    $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
+
 
 });
 
@@ -5366,6 +5368,7 @@ function displayRecords(lim, off,type,search = null) {
             }
             console.log(html);
             if(html==""){
+                $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
                $('#loader').css('display','none');
             
@@ -5832,8 +5835,9 @@ $(document).on('keyup','#group_search_ajax',function () {
     })
         .done(function (data) {
             console.log(data.html);
-            if (data.html == " ") {
-                $("#loader").html("No more contacts found");
+            if (data.html == "") {
+                $(".group_search_list").html("No data found");
+                $("#loader").hide();
                 return;
             }
             $("#loader").hide();
@@ -6388,8 +6392,15 @@ function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
             isSetSession=1;
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             const coins =  $("#coins").val();
+           
             if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
+            }
+            if(html.view==""){
+                $("#YesviteContactsAll").html("No data found");
+                $('#loader').css('display','none');
+                return;
+
             }
             if(type=="all"&&html.scroll=='false'){
                 $("#YesviteContactsAll").html(html.view);

@@ -486,6 +486,9 @@
                                 </span>
                             </div>
                             <div class="user-contacts group_list group_search_list">
+                                @if($groups->isEmpty())
+                                     No data found
+                                @else
                                 @foreach ($groups as $group)
                                     <div class="group-card added_group{{ $group->id }} listgroups view_members"
                                         data-id="{{ $group->id }}">
@@ -516,7 +519,7 @@
                                         </span>
                                     </div>
                                 @endforeach
-
+                            @endif
                             </div>
                             <div class="design-seting">
                                 <a href="#" class="d-flex">
