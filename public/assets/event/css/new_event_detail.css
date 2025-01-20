@@ -1279,6 +1279,7 @@
     width: 20px;
     min-width: 20px;
     height: 20px;
+    padding: 0px !important;
 }
 
 /* ======Responsiveness===== */

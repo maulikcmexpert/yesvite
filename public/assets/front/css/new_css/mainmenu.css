@@ -1496,7 +1496,7 @@
     .responsive-calender-months{
         overflow: hidden;
         overflow-y: scroll;
-        max-height: 600px;
+        max-height: calc(100% - 2%);
     }
 
     .responsive-calendar .month{
@@ -1510,7 +1510,7 @@
     .responsive-calender-month-wrp{
         display: block;
         position: fixed;
-        top: 146px;
+        top: 36px;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
@@ -1783,7 +1783,7 @@
     }
     .responsive-calender-month-wrp {
         max-width: 400px;
-        top: 135px;
+        top: 36px;
     }
     .responsive-calendar{
         padding: 40px 10px;
