@@ -5357,13 +5357,20 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
                 $('.user_choice').prop('disabled',true);
             }
             console.log(html);
+            if(html=="" && alluserscroll==1){
+                $("#YesviteUserAll").html('No data found');
+            //    NoMoreDataYesviteAll=true;
+               $('#loader').css('display','none');
+            
+               return;
+            }
             if(html==""){
-                // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
                $('#loader').css('display','none');
             
                return;
             }
+
             if(html==""){
                 // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
