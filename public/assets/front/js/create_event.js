@@ -5267,7 +5267,7 @@ $("#YesviteUserAll").on("scroll", function () {
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
                 var alluserscroll="1";
-                displayRecords(limityesvite, offsetyesvite,type="all","1");
+                displayRecords(limityesvite, offsetyesvite,type="all",alluserscroll);
             }
         }
 });
@@ -5277,7 +5277,7 @@ function get_user(type){
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type="all");
+        displayRecords(limityesvite, offsetyesvite,type,type="all");
     }
     
 }
@@ -5332,7 +5332,7 @@ $('#groupUsers').scroll(function () {
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,scroll=null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5345,7 +5345,7 @@ function displayRecords(lim, off,type,search = null,scroll=null) {
         type: "GET",
         async: false,
         url: base_url+'event/get_user_ajax',
-        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name +"&scroll=" +scroll,
+        data: "limit=" + lim + "&offset=" + off + "&type=" + type + "&search_user=" + search_name ,
         cache: false,
         beforeSend: function () {
 
@@ -5373,11 +5373,11 @@ function displayRecords(lim, off,type,search = null,scroll=null) {
             // }
             if(type=="all"){
                 if(search != null){
-                    $("#YesviteUserAll").html(html.view);
+                    $("#YesviteUserAll").html(html);
                     busyyesvite = false;
 
                 }else{
-                    $("#YesviteUserAll").append(html.view);
+                    $("#YesviteUserAll").append(html);
                     busyyesvite = false;
 
                 }
