@@ -5824,7 +5824,8 @@ $(document).on('keyup','#group_search_ajax',function () {
         .done(function (data) {
             console.log(data.html);
             if (data.html == " ") {
-                $("#loader").html("No more contacts found");
+                $(".group_search_list").html("No data found");
+                $("#loader").hide();
                 return;
             }
             $("#loader").hide();
