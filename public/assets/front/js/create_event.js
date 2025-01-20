@@ -13,16 +13,38 @@ var selected_gift=[];
 var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
-var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
-var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
-giftRegestryData.forEach(function (item) {
-    selected_gift.push({
-    gr_id: item,
-});
-});
-if(giftRegestryDataRaw!=null){
-    eventData.gift_registry_data=selected_gift;
+// var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
+// var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
+// giftRegestryData.forEach(function (item) {
+//     selected_gift.push({
+//     gr_id: item,
+// });
+// });
+// if(giftRegestryDataRaw!=null){
+//     eventData.gift_registry_data=selected_gift;
+// }
+
+// var selected_gift = [];
+// var eventData = {};
+
+var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').map(function () {
+    return $(this).val();
+}).get();
+
+if (giftRegestryDataRaw.length > 0) {
+    try {
+        var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+        giftRegestryData.forEach(function (item) {
+            selected_gift.push({
+                gr_id: item,
+            });
+        });
+        eventData.gift_registry_data = selected_gift;
+    } catch (e) {
+        console.error("Invalid JSON data:", e);
+    }
 }
+
 var selected_profile_or_text = "";
 var selected_prefer_by = '';
 var eventEditId = $("#eventEditId").val();
