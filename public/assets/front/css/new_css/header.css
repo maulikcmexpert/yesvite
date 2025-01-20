@@ -763,6 +763,13 @@ header{
     display: inline-block;
 }
 
+.li_event_detail svg{
+    width: 100% !important;
+    max-width: 16px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 1399px) {
