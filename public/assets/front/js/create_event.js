@@ -4883,7 +4883,7 @@ $(document).on("click", ".save_allow_limit", function () {
 
 $(document).on("change", 'input[name="guest_list[]"]', function () {
     //    if ($("input[name='guest_list[]']:checked").length > 0) {
-    // co_host_is_selected_close=false;
+    co_host_is_selected_close=false;
     const old_user_id = selected_co_host;
     const newUserID = $(this).val();
        if (lengtUSer> 0 && newUserID!=old_user_id) {
@@ -6004,6 +6004,11 @@ $(document).on('click','.add_co_host',function(){
         lengtUSer= 0;
     }
  
+            selected_user_name = "";
+            selected_profilePhoto = "";        
+            selected_dataId = "";
+            selected_profile_or_text = "";
+            selected_prefer_by = "";
     co_host_is_selected_close=false;
     $('.co_host_search').val('');
     $('.add_co_host_tab').addClass('active');
