@@ -4909,14 +4909,14 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 $('.selected-co-host-image').attr('src',profilePhoto);
                 $('.selected-host-h5').css('display','none');
             }else{
-                // $('.selected-host-h5').show();
+                // $('.guest-img').html(profilePhoto);
+                $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display','none');
-                $('.guest-img').html(profilePhoto);
                 // $('.guest-img').html(profilePhoto);
 
-                // $('.selected-host-h5').text(initial);
-                // var firstinitial = initial.charAt(0);
-                // $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+                $('.selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+                $('.selected-host-h5').addClass('fontcolor'+firstinitial);
             }
             $('.remove_co_host').attr('data-id',selected_co_host);
             $('#remove_co_host_id').val('user-'+selected_co_host);
@@ -6172,12 +6172,12 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 $('.selected-co-host-image').attr('src', profilePhoto);
                 $('.selected-host-h5').css('display', 'none');
             } else {
+                // $('.guest-img').html(profilePhoto    );
+                $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display', 'none');
-                $('.guest-img').html(profilePhoto);
-                // $('.selected-host-h5').show();
-                // $('.selected-host-h5').text(initial);
-                // var firstinitial = initial.charAt(0);
-                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+                $('.selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+                $('.selected-host-h5').addClass('fontcolor' + firstinitial);
             }
             $('.selected-host-name').text(user_name);
         });
