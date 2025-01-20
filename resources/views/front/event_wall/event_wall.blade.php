@@ -1,12 +1,11 @@
 {{-- {{dd($postList)}} --}}
 <main class="new-main-content">
-
     <div class="container">
         <div class="row">
             <div class="col-xl-3 col-lg-4">
                 <!-- =============mainleft-====================== -->
 
-                <x-event_wall.wall_left_menu :page="$current_page"  :eventDetails="$eventDetails"/>
+                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
             <div class="col-xl-6 col-lg-8">
                 <div class="main-content-center">
@@ -22,10 +21,11 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Events</a></li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('event.event_wall',  encrypt($eventDetails['id'])) }}">{{$eventDetails['event_name']}}</a>
+                                    <a
+                                        href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                   Wall
+                                    Wall
                                 </li>
                             </ol>
                         </nav>
@@ -40,7 +40,7 @@
                     <div class="event-center-tabs-main">
                         {{-- {{dd($current_page)}} --}}
                         <!-- ====================navbar-============================= -->
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :rsvpSent="$rsvpSent"/>
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :rsvpSent="$rsvpSent" />
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -51,102 +51,144 @@
                                     <!-- ================story================= -->
                                     <x-event_wall.wall_story :users="$users" :event="$event" :storiesList="$storiesList"
                                         :wallData="$wallData" />
-                                    <x-event_wall.wall_crate_poll_photo :users="$users"  />
+                                    <x-event_wall.wall_crate_poll_photo :users="$users" />
+                                    @foreach ($postList as $post)
+                                        <div class="event-posts-main-wrp common-div-wrp">
 
-                                    <div class="event-posts-main-wrp common-div-wrp">
-                                        <div class="posts-card-wrp">
-                                            <div class="posts-card-head">
-                                                <div class="posts-card-head-left">
-                                                    <div class="posts-card-head-left-img">
-                                                        <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                            alt="">
-                                                        <span class="active-dot"></span>
+                                            <div class="posts-card-wrp">
+                                                <div class="posts-card-head">
+                                                    <div class="posts-card-head-left">
+                                                        <div class="posts-card-head-left-img">
+                                                            @if ($post['profile'] != '')
+                                                                <img src="{{ $post['profile'] }}" alt="">
+                                                            @else
+                                                                @php
+
+                                                                    // $parts = explode(" ", $name);
+                                                                    $nameParts = explode(' ', $post['username']);
+                                                                    $firstInitial = isset($nameParts[0][0])
+                                                                        ? strtoupper($nameParts[0][0])
+                                                                        : '';
+                                                                    $secondInitial = isset($nameParts[1][0])
+                                                                        ? strtoupper($nameParts[1][0])
+                                                                        : '';
+                                                                    $initials = $firstInitial . $secondInitial;
+
+                                                                    // Generate a font color class based on the first initial
+                                                                    $fontColor = 'fontcolor' . $firstInitial;
+                                                                @endphp
+                                                                <h5 class="{{ $fontColor }}">
+                                                                    {{ $initials }}
+                                                                </h5>
+                                                            @endif
+
+                                                            <span class="active-dot"></span>
+                                                        </div>
+                                                        <div class="posts-card-head-left-content">
+                                                            <h3>{{ $post['username'] }}</h3>
+                                                            <p>{{ $post['location'] }}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="posts-card-head-left-content">
-                                                        <h3>Chance Curtis</h3>
-                                                        <p>New York, NY</p>
+                                                    <div class="posts-card-head-right">
+                                                        <div class="dropdown post-card-dropdown upcoming-card-dropdown">
+                                                            <button class="dropdown-toggle" type="button"
+                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                    class="fa-solid fa-ellipsis"></i></button>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <button class="dropdown-item hide-post-btn"
+                                                                        id="hidePostButton">
+                                                                        <svg id="icon" class="hide-post-svg-icon"
+                                                                            viewBox="0 0 20 20" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M9.99896 13.6084C8.00729 13.6084 6.39062 11.9917 6.39062 10.0001C6.39062 8.00839 8.00729 6.39172 9.99896 6.39172C11.9906 6.39172 13.6073 8.00839 13.6073 10.0001C13.6073 11.9917 11.9906 13.6084 9.99896 13.6084ZM9.99896 7.64172C8.69896 7.64172 7.64062 8.70006 7.64062 10.0001C7.64062 11.3001 8.69896 12.3584 9.99896 12.3584C11.299 12.3584 12.3573 11.3001 12.3573 10.0001C12.3573 8.70006 11.299 7.64172 9.99896 7.64172Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M9.99844 17.5166C6.8651 17.5166 3.90677 15.6833 1.87344 12.4999C0.990104 11.1249 0.990104 8.88328 1.87344 7.49994C3.9151 4.31661 6.87344 2.48328 9.99844 2.48328C13.1234 2.48328 16.0818 4.31661 18.1151 7.49994C18.9984 8.87494 18.9984 11.1166 18.1151 12.4999C16.0818 15.6833 13.1234 17.5166 9.99844 17.5166ZM9.99844 3.73328C7.30677 3.73328 4.73177 5.34994 2.93177 8.17494C2.30677 9.14994 2.30677 10.8499 2.93177 11.8249C4.73177 14.6499 7.30677 16.2666 9.99844 16.2666C12.6901 16.2666 15.2651 14.6499 17.0651 11.8249C17.6901 10.8499 17.6901 9.14994 17.0651 8.17494C15.2651 5.34994 12.6901 3.73328 9.99844 3.73328Z"
+                                                                                fill="#94A3B8" />
+                                                                        </svg>
+                                                                        Hide Post
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="dropdown-item mute-post-btn"
+                                                                        id="mutePostButton">
+                                                                        <svg id="muteIcon" class="muteIcon"
+                                                                            viewBox="0 0 20 20" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M5.83464 14.7916H4.16797C2.1513 14.7916 1.04297 13.6833 1.04297 11.6666V8.33331C1.04297 6.31664 2.1513 5.20831 4.16797 5.20831H5.35964C5.5513 5.20831 5.74297 5.14997 5.90964 5.04997L8.34297 3.52497C9.55964 2.76664 10.743 2.62497 11.6763 3.14164C12.6096 3.65831 13.118 4.73331 13.118 6.17497V6.97497C13.118 7.31664 12.8346 7.59997 12.493 7.59997C12.1513 7.59997 11.868 7.31664 11.868 6.97497V6.17497C11.868 5.22497 11.5763 4.51664 11.068 4.24164C10.5596 3.95831 9.80964 4.08331 9.0013 4.59164L6.56797 6.10831C6.20964 6.34164 5.78464 6.45831 5.35964 6.45831H4.16797C2.8513 6.45831 2.29297 7.01664 2.29297 8.33331V11.6666C2.29297 12.9833 2.8513 13.5416 4.16797 13.5416H5.83464C6.1763 13.5416 6.45964 13.825 6.45964 14.1666C6.45964 14.5083 6.1763 14.7916 5.83464 14.7916Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M10.4577 17.1583C9.79934 17.1583 9.07434 16.925 8.34934 16.4666C8.05767 16.2833 7.96601 15.9 8.14934 15.6083C8.33267 15.3166 8.71601 15.225 9.00767 15.4083C9.81601 15.9083 10.566 16.0416 11.0743 15.7583C11.5827 15.475 11.8743 14.7666 11.8743 13.825V10.7916C11.8743 10.45 12.1577 10.1666 12.4993 10.1666C12.841 10.1666 13.1243 10.45 13.1243 10.7916V13.825C13.1243 15.2583 12.6077 16.3416 11.6827 16.8583C11.3077 17.0583 10.891 17.1583 10.4577 17.1583Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M15.0002 13.9584C14.8669 13.9584 14.7419 13.9167 14.6252 13.8334C14.3502 13.625 14.2919 13.2334 14.5002 12.9584C15.5502 11.5584 15.7752 9.70002 15.1002 8.09169C14.9669 7.77502 15.1169 7.40835 15.4336 7.27502C15.7502 7.14169 16.1169 7.29169 16.2502 7.60835C17.1002 9.62502 16.8086 11.9667 15.5002 13.7167C15.3752 13.875 15.1919 13.9584 15.0002 13.9584Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M16.5237 16.0417C16.3903 16.0417 16.2653 16 16.1487 15.9167C15.8737 15.7084 15.8153 15.3167 16.0237 15.0417C17.807 12.6667 18.1987 9.48338 17.0487 6.74171C16.9153 6.42504 17.0653 6.05838 17.382 5.92504C17.707 5.79171 18.0653 5.94171 18.1987 6.25838C19.5237 9.40838 19.0737 13.0584 17.0237 15.7917C16.907 15.9584 16.7153 16.0417 16.5237 16.0417Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M1.66589 18.9583C1.50755 18.9583 1.34922 18.9 1.22422 18.775C0.982552 18.5333 0.982552 18.1333 1.22422 17.8916L17.8909 1.22495C18.1326 0.983285 18.5326 0.983285 18.7742 1.22495C19.0159 1.46662 19.0159 1.86662 18.7742 2.10828L2.10755 18.775C1.98255 18.9 1.82422 18.9583 1.66589 18.9583Z"
+                                                                                fill="#94A3B8" />
+                                                                        </svg>
+                                                                        Mute
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="dropdown-item" href="#">
+                                                                        <svg viewBox="0 0 20 20" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M10.0013 18.9583C5.05964 18.9583 1.04297 14.9416 1.04297 9.99996C1.04297 5.05829 5.05964 1.04163 10.0013 1.04163C14.943 1.04163 18.9596 5.05829 18.9596 9.99996C18.9596 14.9416 14.943 18.9583 10.0013 18.9583ZM10.0013 2.29163C5.7513 2.29163 2.29297 5.74996 2.29297 9.99996C2.29297 14.25 5.7513 17.7083 10.0013 17.7083C14.2513 17.7083 17.7096 14.25 17.7096 9.99996C17.7096 5.74996 14.2513 2.29163 10.0013 2.29163Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M10 11.4583C9.65833 11.4583 9.375 11.175 9.375 10.8333V6.66663C9.375 6.32496 9.65833 6.04163 10 6.04163C10.3417 6.04163 10.625 6.32496 10.625 6.66663V10.8333C10.625 11.175 10.3417 11.4583 10 11.4583Z"
+                                                                                fill="#94A3B8" />
+                                                                            <path
+                                                                                d="M10.0013 14.1667C9.89297 14.1667 9.78464 14.1417 9.68464 14.1C9.58464 14.0583 9.49297 14 9.40964 13.925C9.33464 13.8417 9.2763 13.7583 9.23464 13.65C9.19297 13.55 9.16797 13.4417 9.16797 13.3333C9.16797 13.225 9.19297 13.1167 9.23464 13.0167C9.2763 12.9167 9.33464 12.825 9.40964 12.7417C9.49297 12.6667 9.58464 12.6083 9.68464 12.5667C9.88464 12.4833 10.118 12.4833 10.318 12.5667C10.418 12.6083 10.5096 12.6667 10.593 12.7417C10.668 12.825 10.7263 12.9167 10.768 13.0167C10.8096 13.1167 10.8346 13.225 10.8346 13.3333C10.8346 13.4417 10.8096 13.55 10.768 13.65C10.7263 13.7583 10.668 13.8417 10.593 13.925C10.5096 14 10.418 14.0583 10.318 14.1C10.218 14.1417 10.1096 14.1667 10.0013 14.1667Z"
+                                                                                fill="#94A3B8" />
+                                                                        </svg>
+                                                                        Report
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <h5>
+                                                            @if ($post['rsvp_status'] == '1')
+                                                                <span class="positive-ans">
+                                                                    <i class="fa-solid fa-circle-check"></i>Yes</span>
+                                                            @elseif($post['rsvp_status'] == '0')
+                                                                <span class="positive-ans not-ans"><i
+                                                                        class="fa-solid fa-circle-question"></i>No
+                                                                    Answer</span>
+                                                            @elseif($post['rsvp_status'] == '2')
+                                                                <span class="positive-ans nagative-ans">
+                                                                    <i class="fa-solid fa-circle-xmark"></i>Not Coming
+                                                                </span>
+                                                            @endif
+
+                                                            {{ $post['posttime'] }}
+                                                        </h5>
                                                     </div>
                                                 </div>
-                                                <div class="posts-card-head-right">
-                                                    <div class="dropdown post-card-dropdown upcoming-card-dropdown">
-                                                        <button class="dropdown-toggle" type="button"
-                                                            data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                class="fa-solid fa-ellipsis"></i></button>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <button class="dropdown-item hide-post-btn" id="hidePostButton">
-                                                                    <svg id="icon" class="hide-post-svg-icon" viewBox="0 0 20 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M9.99896 13.6084C8.00729 13.6084 6.39062 11.9917 6.39062 10.0001C6.39062 8.00839 8.00729 6.39172 9.99896 6.39172C11.9906 6.39172 13.6073 8.00839 13.6073 10.0001C13.6073 11.9917 11.9906 13.6084 9.99896 13.6084ZM9.99896 7.64172C8.69896 7.64172 7.64062 8.70006 7.64062 10.0001C7.64062 11.3001 8.69896 12.3584 9.99896 12.3584C11.299 12.3584 12.3573 11.3001 12.3573 10.0001C12.3573 8.70006 11.299 7.64172 9.99896 7.64172Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M9.99844 17.5166C6.8651 17.5166 3.90677 15.6833 1.87344 12.4999C0.990104 11.1249 0.990104 8.88328 1.87344 7.49994C3.9151 4.31661 6.87344 2.48328 9.99844 2.48328C13.1234 2.48328 16.0818 4.31661 18.1151 7.49994C18.9984 8.87494 18.9984 11.1166 18.1151 12.4999C16.0818 15.6833 13.1234 17.5166 9.99844 17.5166ZM9.99844 3.73328C7.30677 3.73328 4.73177 5.34994 2.93177 8.17494C2.30677 9.14994 2.30677 10.8499 2.93177 11.8249C4.73177 14.6499 7.30677 16.2666 9.99844 16.2666C12.6901 16.2666 15.2651 14.6499 17.0651 11.8249C17.6901 10.8499 17.6901 9.14994 17.0651 8.17494C15.2651 5.34994 12.6901 3.73328 9.99844 3.73328Z"
-                                                                            fill="#94A3B8" />
-                                                                    </svg>
-                                                                    Hide Post
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button class="dropdown-item mute-post-btn" id="mutePostButton">
-                                                                    <svg id="muteIcon" class="muteIcon" viewBox="0 0 20 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M5.83464 14.7916H4.16797C2.1513 14.7916 1.04297 13.6833 1.04297 11.6666V8.33331C1.04297 6.31664 2.1513 5.20831 4.16797 5.20831H5.35964C5.5513 5.20831 5.74297 5.14997 5.90964 5.04997L8.34297 3.52497C9.55964 2.76664 10.743 2.62497 11.6763 3.14164C12.6096 3.65831 13.118 4.73331 13.118 6.17497V6.97497C13.118 7.31664 12.8346 7.59997 12.493 7.59997C12.1513 7.59997 11.868 7.31664 11.868 6.97497V6.17497C11.868 5.22497 11.5763 4.51664 11.068 4.24164C10.5596 3.95831 9.80964 4.08331 9.0013 4.59164L6.56797 6.10831C6.20964 6.34164 5.78464 6.45831 5.35964 6.45831H4.16797C2.8513 6.45831 2.29297 7.01664 2.29297 8.33331V11.6666C2.29297 12.9833 2.8513 13.5416 4.16797 13.5416H5.83464C6.1763 13.5416 6.45964 13.825 6.45964 14.1666C6.45964 14.5083 6.1763 14.7916 5.83464 14.7916Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M10.4577 17.1583C9.79934 17.1583 9.07434 16.925 8.34934 16.4666C8.05767 16.2833 7.96601 15.9 8.14934 15.6083C8.33267 15.3166 8.71601 15.225 9.00767 15.4083C9.81601 15.9083 10.566 16.0416 11.0743 15.7583C11.5827 15.475 11.8743 14.7666 11.8743 13.825V10.7916C11.8743 10.45 12.1577 10.1666 12.4993 10.1666C12.841 10.1666 13.1243 10.45 13.1243 10.7916V13.825C13.1243 15.2583 12.6077 16.3416 11.6827 16.8583C11.3077 17.0583 10.891 17.1583 10.4577 17.1583Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M15.0002 13.9584C14.8669 13.9584 14.7419 13.9167 14.6252 13.8334C14.3502 13.625 14.2919 13.2334 14.5002 12.9584C15.5502 11.5584 15.7752 9.70002 15.1002 8.09169C14.9669 7.77502 15.1169 7.40835 15.4336 7.27502C15.7502 7.14169 16.1169 7.29169 16.2502 7.60835C17.1002 9.62502 16.8086 11.9667 15.5002 13.7167C15.3752 13.875 15.1919 13.9584 15.0002 13.9584Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M16.5237 16.0417C16.3903 16.0417 16.2653 16 16.1487 15.9167C15.8737 15.7084 15.8153 15.3167 16.0237 15.0417C17.807 12.6667 18.1987 9.48338 17.0487 6.74171C16.9153 6.42504 17.0653 6.05838 17.382 5.92504C17.707 5.79171 18.0653 5.94171 18.1987 6.25838C19.5237 9.40838 19.0737 13.0584 17.0237 15.7917C16.907 15.9584 16.7153 16.0417 16.5237 16.0417Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M1.66589 18.9583C1.50755 18.9583 1.34922 18.9 1.22422 18.775C0.982552 18.5333 0.982552 18.1333 1.22422 17.8916L17.8909 1.22495C18.1326 0.983285 18.5326 0.983285 18.7742 1.22495C19.0159 1.46662 19.0159 1.86662 18.7742 2.10828L2.10755 18.775C1.98255 18.9 1.82422 18.9583 1.66589 18.9583Z"
-                                                                            fill="#94A3B8" />
-                                                                    </svg>
-                                                                    Mute
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button class="dropdown-item" href="#">
-                                                                    <svg viewBox="0 0 20 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M10.0013 18.9583C5.05964 18.9583 1.04297 14.9416 1.04297 9.99996C1.04297 5.05829 5.05964 1.04163 10.0013 1.04163C14.943 1.04163 18.9596 5.05829 18.9596 9.99996C18.9596 14.9416 14.943 18.9583 10.0013 18.9583ZM10.0013 2.29163C5.7513 2.29163 2.29297 5.74996 2.29297 9.99996C2.29297 14.25 5.7513 17.7083 10.0013 17.7083C14.2513 17.7083 17.7096 14.25 17.7096 9.99996C17.7096 5.74996 14.2513 2.29163 10.0013 2.29163Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M10 11.4583C9.65833 11.4583 9.375 11.175 9.375 10.8333V6.66663C9.375 6.32496 9.65833 6.04163 10 6.04163C10.3417 6.04163 10.625 6.32496 10.625 6.66663V10.8333C10.625 11.175 10.3417 11.4583 10 11.4583Z"
-                                                                            fill="#94A3B8" />
-                                                                        <path
-                                                                            d="M10.0013 14.1667C9.89297 14.1667 9.78464 14.1417 9.68464 14.1C9.58464 14.0583 9.49297 14 9.40964 13.925C9.33464 13.8417 9.2763 13.7583 9.23464 13.65C9.19297 13.55 9.16797 13.4417 9.16797 13.3333C9.16797 13.225 9.19297 13.1167 9.23464 13.0167C9.2763 12.9167 9.33464 12.825 9.40964 12.7417C9.49297 12.6667 9.58464 12.6083 9.68464 12.5667C9.88464 12.4833 10.118 12.4833 10.318 12.5667C10.418 12.6083 10.5096 12.6667 10.593 12.7417C10.668 12.825 10.7263 12.9167 10.768 13.0167C10.8096 13.1167 10.8346 13.225 10.8346 13.3333C10.8346 13.4417 10.8096 13.55 10.768 13.65C10.7263 13.7583 10.668 13.8417 10.593 13.925C10.5096 14 10.418 14.0583 10.318 14.1C10.218 14.1417 10.1096 14.1667 10.0013 14.1667Z"
-                                                                            fill="#94A3B8" />
-                                                                    </svg>
-                                                                    Report
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <h5><span class="positive-ans"><i
-                                                                class="fa-solid fa-circle-check"></i>Yes</span> 10m</h5>
-                                                </div>
-                                            </div>
-                                            <div class="posts-card-inner-wrp">
-                                                <h3 class="posts-card-inner-questions">Join for some drinks upstairs?
-                                                    Anyone?</h3>
-                                                <div class="posts-card-show-post-wrp">
-                                                    <div class="swiper posts-card-post">
-                                                        <div class="swiper-wrapper">
-                                                            <!-- Slides -->
-                                                            <div class="swiper-slide">
-                                                                <div class="posts-card-show-post-img">
-                                                                    <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                        alt="" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="swiper-slide">
+                                                <div class="posts-card-inner-wrp">
+                                                    <h3 class="posts-card-inner-questions">{{ $post['post_message'] }}
+                                                    </h3>
+                                                    @if (!empty($post['post_image']))
+                                                        @foreach ($post['post_image'] as $image)
+                                                            <div class="posts-card-show-post-wrp">
+                                                                <div class="swiper posts-card-post">
+                                                                    <div class="swiper-wrapper">
+                                                                        <!-- Slides -->
+                                                                        <div class="swiper-slide">
+                                                                            <div class="posts-card-show-post-img">
+                                                                                <img src="{{ $image['media_url'] }}"
+                                                                                    alt="" />
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- <div class="swiper-slide">
                                                                 <div class="posts-card-show-post-img">
                                                                     <video width="320" height="240">
                                                                         <source
@@ -157,85 +199,87 @@
                                                                             src="{{ asset('assets/front/img/video-play-icon.png') }}"
                                                                             alt=""></button>
                                                                 </div>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <div class="posts-card-show-post-img">
-                                                                    <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                        alt="" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <div class="posts-card-show-post-img">
-                                                                    <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                        alt="" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <div class="posts-card-show-post-img">
-                                                                    <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                        alt="" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            </div> --}}
 
-                                                        <!-- Custom Pagination -->
-                                                        <div class="custom-pagination"></div>
-                                                        <div class="custom-dots-container"></div>
+
+                                                                    </div>
+
+                                                                    <!-- Custom Pagination -->
+                                                                    <div class="custom-pagination"></div>
+                                                                    <div class="custom-dots-container"></div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                                <div class="posts-card-like-commnet-wrp">
+                                                    <div class="posts-card-like-comment-left">
+                                                        <ul type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#reaction-modal">
+                                                            <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                    alt=""></li>
+                                                            <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                    alt=""></li>
+                                                            <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                    alt=""></li>
+                                                            <p>{{ $post['total_likes'] }} Likes</p>
+                                                        </ul>
+                                                        <h6>{{ $post['total_comment'] }} Comments</h6>
+                                                    </div>
+                                                    <div class="posts-card-like-comment-right emoji_display_like">
+                                                        <button class="posts-card-like-btn" id="likeButton"
+                                                        data-event-id="{{ $event }}"
+                                                        data-event-post-id="{{ $post['id'] }} "
+                                                        data-user-id="{{ $login_user_id }}">
+                                                        @if ($post['self_reaction'] == '\u{2764}')
+                                                        <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                    @elseif($post['self_reaction'] == '\u{1F494}')
+                                                        <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                    @elseif($post['self_reaction'] == '\u{1F44D}')
+                                                        <i id="show_Emoji"> <img
+                                                                src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                alt="Thumb Emoji" class="emoji"
+                                                                data-emoji="👍"
+                                                                data-unicode="\\u{1F44D}"></i>
+                                                    @elseif($post['self_reaction'] == '\u{1F604}')
+                                                        <i id="show_Emoji"> <img
+                                                                src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                alt="Smiley Emoji" class="emoji"
+                                                                data-emoji="😊"
+                                                                data-unicode="\\u{1F604}"></i>
+                                                    @elseif($post['self_reaction'] == '\u{1F60D}')
+                                                        <i id="show_Emoji"> <img
+                                                                src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                alt="Eye Heart Emoji" class="emoji"
+                                                                data-emoji="😍"
+                                                                data-unicode="\\u{1F60D}"></i>
+                                                    @elseif($post['self_reaction'] == '\u{1F44F}')
+                                                        <i id="show_Emoji"> <img
+                                                                src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                alt="Clap Emoji" class="emoji"
+                                                                data-emoji="👏"
+                                                                data-unicode="\\u{1F44F}"></i>
+                                                    @else
+                                                        <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                    @endif</button>
+                                                        <button class="posts-card-comm show-comments-btn">
+                                                            <svg viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="posts-card-like-commnet-wrp">
-                                                <div class="posts-card-like-comment-left">
-                                                    <ul type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#reaction-modal">
-                                                        <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                alt=""></li>
-                                                        <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                alt=""></li>
-                                                        <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                alt=""></li>
-                                                        <p>5k Likes</p>
-                                                    </ul>
-                                                    <h6>354 Comments</h6>
-                                                </div>
-                                                <div class="posts-card-like-comment-right">
-                                                    <button class="posts-card-like-btn"><i
-                                                            class="fa-regular fa-heart"></i></button>
-                                                    <button class="posts-card-comm show-comments-btn">
-                                                        <svg viewBox="0 0 24 24" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-miterlimit="10" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
 
-                                            <div class="posts-card-main-comment">
-                                                <input type="text" class="form-control" id="text"
-                                                    placeholder="Add Comment">
-                                                <span class="comment-send-icon">
-                                                    <svg viewBox="0 0 20 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
-                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M4.5332 10H9.0332" stroke="#94A3B8"
-                                                            stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <div class="posts-card-show-all-comments-wrp d-none">
-                                                <div class="posts-card-main-comment all-comments-textbox">
+                                                <div class="posts-card-main-comment">
                                                     <input type="text" class="form-control" id="text"
                                                         placeholder="Add Comment">
                                                     <span class="comment-send-icon">
@@ -250,257 +294,286 @@
                                                                 stroke-linejoin="round" />
                                                         </svg>
                                                     </span>
-                                                    <span class="comment-microphone-icon">
-                                                        <svg viewBox="0 0 24 24" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6V11.5C8 13.71 9.79 15.5 12 15.5Z"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path
-                                                                d="M4.34961 9.65002V11.35C4.34961 15.57 7.77961 19 11.9996 19C16.2196 19 19.6496 15.57 19.6496 11.35V9.65002"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M10.6094 6.43C11.5094 6.1 12.4894 6.1 13.3894 6.43"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path
-                                                                d="M11.1992 8.55001C11.7292 8.41001 12.2792 8.41001 12.8092 8.55001"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M12 19V22" stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
-                                                    </span>
-                                                    <span class="comment-attech-icon">
-                                                        <svg viewBox="0 0 24 24" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M12.2009 11.8L10.7908 13.21C10.0108 13.99 10.0108 15.26 10.7908 16.04C11.5708 16.82 12.8408 16.82 13.6208 16.04L15.8409 13.82C17.4009 12.26 17.4009 9.72999 15.8409 8.15999C14.2809 6.59999 11.7508 6.59999 10.1808 8.15999L7.76086 10.58C6.42086 11.92 6.42086 14.09 7.76086 15.43"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path
-                                                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                                                stroke="#94A3B8" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
-                                                    </span>
                                                 </div>
-                                                <div class="posts-card-show-all-comments-inner">
-                                                    <ul>
-                                                        <li class="commented-user-wrp">
-                                                            <div class="commented-user-head">
-                                                                <div class="commented-user-profile">
-                                                                    <div class="commented-user-profile-img">
-                                                                        <img src="{{ asset('assets/front//img/header-profile-img.png') }}"
-                                                                            alt="">
+                                                <div class="posts-card-show-all-comments-wrp d-none">
+                                                    <div class="posts-card-main-comment all-comments-textbox">
+                                                        <input type="text" class="form-control" id="text"
+                                                            placeholder="Add Comment">
+                                                        <span class="comment-send-icon">
+                                                            <svg viewBox="0 0 20 20" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M4.5332 10H9.0332" stroke="#94A3B8"
+                                                                    stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="comment-microphone-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6V11.5C8 13.71 9.79 15.5 12 15.5Z"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M4.34961 9.65002V11.35C4.34961 15.57 7.77961 19 11.9996 19C16.2196 19 19.6496 15.57 19.6496 11.35V9.65002"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M10.6094 6.43C11.5094 6.1 12.4894 6.1 13.3894 6.43"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M11.1992 8.55001C11.7292 8.41001 12.2792 8.41001 12.8092 8.55001"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M12 19V22" stroke="#94A3B8"
+                                                                    stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="comment-attech-icon">
+                                                            <svg viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M12.2009 11.8L10.7908 13.21C10.0108 13.99 10.0108 15.26 10.7908 16.04C11.5708 16.82 12.8408 16.82 13.6208 16.04L15.8409 13.82C17.4009 12.26 17.4009 9.72999 15.8409 8.15999C14.2809 6.59999 11.7508 6.59999 10.1808 8.15999L7.76086 10.58C6.42086 11.92 6.42086 14.09 7.76086 15.43"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="posts-card-show-all-comments-inner">
+                                                        <ul>
+                                                            <li class="commented-user-wrp">
+                                                                <div class="commented-user-head">
+                                                                    <div class="commented-user-profile">
+                                                                        <div class="commented-user-profile-img">
+                                                                            <img src="{{ asset('assets/front//img/header-profile-img.png') }}"
+                                                                                alt="">
+                                                                        </div>
+                                                                        <div class="commented-user-profile-content">
+                                                                            <h3>Angel Geidt</h3>
+                                                                            <p>New York</p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="commented-user-profile-content">
-                                                                        <h3>Angel Geidt</h3>
-                                                                        <p>New York</p>
+                                                                    <div class="posts-card-like-comment-right">
+                                                                        <p>2h</p>
+                                                                        <button class="posts-card-like-btn"><i
+                                                                                class="fa-regular fa-heart"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="posts-card-like-comment-right">
-                                                                    <p>2h</p>
-                                                                    <button class="posts-card-like-btn"><i
-                                                                            class="fa-regular fa-heart"></i></button>
+                                                                <div class="commented-user-content">
+                                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor
+                                                                        iaculis massa. Phasellus et odio a
+                                                                        augue rutrum iaculis. Nulla id nisl in tortor
+                                                                        accumsan auctor id vel elit.</p>
                                                                 </div>
-                                                            </div>
-                                                            <div class="commented-user-content">
-                                                                <p>Quisque ipsum nisl, cursus non metus vel, auctor
-                                                                    iaculis massa. Phasellus et odio a
-                                                                    augue rutrum iaculis. Nulla id nisl in tortor
-                                                                    accumsan auctor id vel elit.</p>
-                                                            </div>
-                                                            <div class="commented-user-reply-wrp">
+                                                                <div class="commented-user-reply-wrp">
+                                                                    <div
+                                                                        class="position-relative d-flex align-items-center gap-2">
+                                                                        <button class="posts-card-like-btn"><i
+                                                                                class="fa-regular fa-heart"></i></button>
+                                                                        <p>121</p>
+                                                                    </div>
+                                                                    <button
+                                                                        class="commented-user-reply-btn">Reply</button>
+                                                                </div>
                                                                 <div
-                                                                    class="position-relative d-flex align-items-center gap-2">
-                                                                    <button class="posts-card-like-btn"><i
-                                                                            class="fa-regular fa-heart"></i></button>
-                                                                    <p>121</p>
+                                                                    class="posts-card-main-comment all-comments-textbox">
+                                                                    <input type="text" class="form-control"
+                                                                        id="text" placeholder="Add Comment">
+                                                                    <span class="comment-send-icon">
+                                                                        <svg viewBox="0 0 20 20" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path d="M4.5332 10H9.0332"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span class="comment-microphone-icon">
+                                                                        <svg viewBox="0 0 24 24" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6V11.5C8 13.71 9.79 15.5 12 15.5Z"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path
+                                                                                d="M4.34961 9.65002V11.35C4.34961 15.57 7.77961 19 11.9996 19C16.2196 19 19.6496 15.57 19.6496 11.35V9.65002"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path
+                                                                                d="M10.6094 6.43C11.5094 6.1 12.4894 6.1 13.3894 6.43"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path
+                                                                                d="M11.1992 8.55001C11.7292 8.41001 12.2792 8.41001 12.8092 8.55001"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path d="M12 19V22" stroke="#94A3B8"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span class="comment-attech-icon">
+                                                                        <svg viewBox="0 0 24 24" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M12.2009 11.8L10.7908 13.21C10.0108 13.99 10.0108 15.26 10.7908 16.04C11.5708 16.82 12.8408 16.82 13.6208 16.04L15.8409 13.82C17.4009 12.26 17.4009 9.72999 15.8409 8.15999C14.2809 6.59999 11.7508 6.59999 10.1808 8.15999L7.76086 10.58C6.42086 11.92 6.42086 14.09 7.76086 15.43"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path
+                                                                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </span>
                                                                 </div>
-                                                                <button class="commented-user-reply-btn">Reply</button>
-                                                            </div>
-                                                            <div class="posts-card-main-comment all-comments-textbox">
-                                                                <input type="text" class="form-control"
-                                                                    id="text" placeholder="Add Comment">
-                                                                <span class="comment-send-icon">
-                                                                    <svg viewBox="0 0 20 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path d="M4.5332 10H9.0332" stroke="#94A3B8"
-                                                                            stroke-width="1.5" stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
-                                                                <span class="comment-microphone-icon">
-                                                                    <svg viewBox="0 0 24 24" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6V11.5C8 13.71 9.79 15.5 12 15.5Z"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path
-                                                                            d="M4.34961 9.65002V11.35C4.34961 15.57 7.77961 19 11.9996 19C16.2196 19 19.6496 15.57 19.6496 11.35V9.65002"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path
-                                                                            d="M10.6094 6.43C11.5094 6.1 12.4894 6.1 13.3894 6.43"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path
-                                                                            d="M11.1992 8.55001C11.7292 8.41001 12.2792 8.41001 12.8092 8.55001"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path d="M12 19V22" stroke="#94A3B8"
-                                                                            stroke-width="1.5" stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
-                                                                <span class="comment-attech-icon">
-                                                                    <svg viewBox="0 0 24 24" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M12.2009 11.8L10.7908 13.21C10.0108 13.99 10.0108 15.26 10.7908 16.04C11.5708 16.82 12.8408 16.82 13.6208 16.04L15.8409 13.82C17.4009 12.26 17.4009 9.72999 15.8409 8.15999C14.2809 6.59999 11.7508 6.59999 10.1808 8.15999L7.76086 10.58C6.42086 11.92 6.42086 14.09 7.76086 15.43"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path
-                                                                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </div>
-                                                        </li>
-                                                        <li class="commented-user-wrp">
-                                                            <div class="commented-user-head">
-                                                                <div class="commented-user-profile">
-                                                                    <div class="commented-user-profile-img">
-                                                                        <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                                            alt="">
+                                                            </li>
+                                                            <li class="commented-user-wrp">
+                                                                <div class="commented-user-head">
+                                                                    <div class="commented-user-profile">
+                                                                        <div class="commented-user-profile-img">
+                                                                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                                                alt="">
+                                                                        </div>
+                                                                        <div class="commented-user-profile-content">
+                                                                            <h3>Angel Geidt</h3>
+                                                                            <p>New York</p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="commented-user-profile-content">
-                                                                        <h3>Angel Geidt</h3>
-                                                                        <p>New York</p>
+                                                                    <div class="posts-card-like-comment-right">
+                                                                        <p>2h</p>
+                                                                        <button class="posts-card-like-btn"><i
+                                                                                class="fa-regular fa-heart"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="posts-card-like-comment-right">
-                                                                    <p>2h</p>
-                                                                    <button class="posts-card-like-btn"><i
-                                                                            class="fa-regular fa-heart"></i></button>
+                                                                <div class="commented-user-content">
+                                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor
+                                                                        iaculis massa. Phasellus et odio a
+                                                                        augue rutrum iaculis. Nulla id nisl in tortor
+                                                                        accumsan auctor id vel elit.</p>
                                                                 </div>
-                                                            </div>
-                                                            <div class="commented-user-content">
-                                                                <p>Quisque ipsum nisl, cursus non metus vel, auctor
-                                                                    iaculis massa. Phasellus et odio a
-                                                                    augue rutrum iaculis. Nulla id nisl in tortor
-                                                                    accumsan auctor id vel elit.</p>
-                                                            </div>
-                                                            <div class="commented-user-reply-wrp">
-                                                                <div
-                                                                    class="position-relative d-flex align-items-center gap-2">
-                                                                    <button class="posts-card-like-btn"><i
-                                                                            class="fa-regular fa-heart"></i></button>
-                                                                    <p>121</p>
+                                                                <div class="commented-user-reply-wrp">
+                                                                    <div
+                                                                        class="position-relative d-flex align-items-center gap-2">
+                                                                        <button class="posts-card-like-btn"><i
+                                                                                class="fa-regular fa-heart"></i></button>
+                                                                        <p>121</p>
+                                                                    </div>
+                                                                    <button
+                                                                        class="commented-user-reply-btn">Reply</button>
                                                                 </div>
-                                                                <button class="commented-user-reply-btn">Reply</button>
-                                                            </div>
-                                                            <ul>
-                                                                <li class="reply-on-comment">
-                                                                    <div class="commented-user-head">
-                                                                        <div class="commented-user-profile">
-                                                                            <div class="commented-user-profile-img">
-                                                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                                                    alt="">
+                                                                <ul>
+                                                                    <li class="reply-on-comment">
+                                                                        <div class="commented-user-head">
+                                                                            <div class="commented-user-profile">
+                                                                                <div
+                                                                                    class="commented-user-profile-img">
+                                                                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="commented-user-profile-content">
+                                                                                    <h3>Angel Geidt</h3>
+                                                                                    <p>New York</p>
+                                                                                </div>
                                                                             </div>
+                                                                            <div class="posts-card-like-comment-right">
+                                                                                <p>2h</p>
+                                                                                <button class="posts-card-like-btn"><i
+                                                                                        class="fa-regular fa-heart"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="commented-user-content">
+                                                                            <p>Quisque ipsum nisl, cursus non metus vel,
+                                                                                auctor iaculis massa. Phasellus et
+                                                                                odio a augue rutrum iaculis. Nulla id
+                                                                                nisl
+                                                                                in tortor accumsan auctor id vel
+                                                                                elit.</p>
+                                                                        </div>
+                                                                        <div class="commented-user-reply-wrp">
                                                                             <div
-                                                                                class="commented-user-profile-content">
-                                                                                <h3>Angel Geidt</h3>
-                                                                                <p>New York</p>
+                                                                                class="position-relative d-flex align-items-center gap-2">
+                                                                                <button class="posts-card-like-btn"><i
+                                                                                        class="fa-regular fa-heart"></i></button>
+                                                                                <p>121</p>
+                                                                            </div>
+                                                                            <button
+                                                                                class="commented-user-reply-btn">Reply</button>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="reply-on-comment">
+                                                                        <div class="commented-user-head">
+                                                                            <div class="commented-user-profile">
+                                                                                <div
+                                                                                    class="commented-user-profile-img">
+                                                                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="commented-user-profile-content">
+                                                                                    <h3>Angel Geidt</h3>
+                                                                                    <p>New York</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="posts-card-like-comment-right">
+                                                                                <p>2h</p>
+                                                                                <button class="posts-card-like-btn"><i
+                                                                                        class="fa-regular fa-heart"></i></button>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="posts-card-like-comment-right">
-                                                                            <p>2h</p>
-                                                                            <button class="posts-card-like-btn"><i
-                                                                                    class="fa-regular fa-heart"></i></button>
+                                                                        <div class="commented-user-content">
+                                                                            <p>Quisque ipsum nisl, cursus non metus vel,
+                                                                                auctor iaculis massa. Phasellus et
+                                                                                odio a augue rutrum iaculis. Nulla id
+                                                                                nisl
+                                                                                in tortor accumsan auctor id vel
+                                                                                elit.</p>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="commented-user-content">
-                                                                        <p>Quisque ipsum nisl, cursus non metus vel,
-                                                                            auctor iaculis massa. Phasellus et
-                                                                            odio a augue rutrum iaculis. Nulla id nisl
-                                                                            in tortor accumsan auctor id vel
-                                                                            elit.</p>
-                                                                    </div>
-                                                                    <div class="commented-user-reply-wrp">
-                                                                        <div
-                                                                            class="position-relative d-flex align-items-center gap-2">
-                                                                            <button class="posts-card-like-btn"><i
-                                                                                    class="fa-regular fa-heart"></i></button>
-                                                                            <p>121</p>
-                                                                        </div>
-                                                                        <button
-                                                                            class="commented-user-reply-btn">Reply</button>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="reply-on-comment">
-                                                                    <div class="commented-user-head">
-                                                                        <div class="commented-user-profile">
-                                                                            <div class="commented-user-profile-img">
-                                                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                                                    alt="">
-                                                                            </div>
+                                                                        <div class="commented-user-reply-wrp">
                                                                             <div
-                                                                                class="commented-user-profile-content">
-                                                                                <h3>Angel Geidt</h3>
-                                                                                <p>New York</p>
+                                                                                class="position-relative d-flex align-items-center gap-2">
+                                                                                <button class="posts-card-like-btn"><i
+                                                                                        class="fa-regular fa-heart"></i></button>
+                                                                                <p>121</p>
                                                                             </div>
+                                                                            <button
+                                                                                class="commented-user-reply-btn">Reply</button>
                                                                         </div>
-                                                                        <div class="posts-card-like-comment-right">
-                                                                            <p>2h</p>
-                                                                            <button class="posts-card-like-btn"><i
-                                                                                    class="fa-regular fa-heart"></i></button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="commented-user-content">
-                                                                        <p>Quisque ipsum nisl, cursus non metus vel,
-                                                                            auctor iaculis massa. Phasellus et
-                                                                            odio a augue rutrum iaculis. Nulla id nisl
-                                                                            in tortor accumsan auctor id vel
-                                                                            elit.</p>
-                                                                    </div>
-                                                                    <div class="commented-user-reply-wrp">
-                                                                        <div
-                                                                            class="position-relative d-flex align-items-center gap-2">
-                                                                            <button class="posts-card-like-btn"><i
-                                                                                    class="fa-regular fa-heart"></i></button>
-                                                                            <p>121</p>
-                                                                        </div>
-                                                                        <button
-                                                                            class="commented-user-reply-btn">Reply</button>
-                                                                    </div>
-                                                                </li>
-                                                                <button class="show-comment-reply-btn">Show 3
-                                                                    reply</button>
-                                                            </ul>
+                                                                    </li>
+                                                                    <button class="show-comment-reply-btn">Show 3
+                                                                        reply</button>
+                                                                </ul>
 
-                                                        </li>
-                                                    </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
 
+                                        </div>
+                                    @endforeach
                                     <div class="event-posts-main-wrp common-div-wrp">
                                         <div class="posts-card-wrp">
                                             <div class="posts-card-head">
@@ -716,10 +789,29 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                        <h5><span class="positive-ans nagative-ans"><i
-                                                                    class="fa-solid fa-circle-xmark"></i>Not
-                                                                Coming</span> 10m</h5>
+
+                                                        <h5>
+                                                            @foreach ($postList as $post)
+                                                                @if ($post['rsvp_status'] == '1')
+                                                                    <span class="positive-ans">
+                                                                        <i
+                                                                            class="fa-solid fa-circle-check"></i>Yes</span>
+                                                                @elseif($post['rsvp_status'] == '0')
+                                                                    <span class="positive-ans not-ans"><i
+                                                                            class="fa-solid fa-circle-question"></i>No
+                                                                        Answer</span>
+                                                                @elseif($post['rsvp_status'] == '2')
+                                                                    <span class="positive-ans nagative-ans">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>Not
+                                                                        Coming
+                                                                    </span>
+                                                                @endif
+                                                            @endforeach
+                                                            {{ $poll['post_time'] }}
+                                                        </h5>
+
                                                     </div>
+
                                                 </div>
                                                 <div class="posts-card-inner-wrp">
                                                     <h3 class="posts-card-inner-questions">
@@ -844,7 +936,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-0">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" />
             </div>
         </div>
     </div>
@@ -865,26 +957,29 @@
                     <div class="modal-body">
                         <div class="create-post-profile">
                             <div class="create-post-profile-wrp">
-                                @if ($users->profile  != '')
-                                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
-                                alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                                onclick="showStories( {{ $event }},{{ $users->id }})">
-                            @else
-                                @php
-                                    $name = $users->firstname;
-                                    // $parts = explode(" ", $name);
-                                    $firstInitial = isset($users->firstname[0])
-                                        ? strtoupper($users->firstname[0])
-                                        : '';
-                                    $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
-                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                                @endphp
-                                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                                    onclick="showStories( {{ $event }},{{ $users->id }})">
-                                    {{ $initials }}
-                                </h5>
-                            @endif
+                                @if ($users->profile != '')
+                                    <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                        alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                        onclick="showStories( {{ $event }},{{ $users->id }})">
+                                @else
+                                    @php
+                                        $name = $users->firstname;
+                                        // $parts = explode(" ", $name);
+                                        $firstInitial = isset($users->firstname[0])
+                                            ? strtoupper($users->firstname[0])
+                                            : '';
+                                        $secondInitial = isset($users->lastname[0])
+                                            ? strtoupper($users->lastname[0])
+                                            : '';
+                                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                    @endphp
+                                    <h5 class="{{ $fontColor }}" class="profile-pic"
+                                        id="profile-pic-{{ $users->id }}"
+                                        onclick="showStories( {{ $event }},{{ $users->id }})">
+                                        {{ $initials }}
+                                    </h5>
+                                @endif
                                 {{-- <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt=""> --}}
                                 <div id="savedSettingsDisplay">
                                     <h4> <i class="fa-solid fa-angle-down"></i></h4>
@@ -892,17 +987,19 @@
                             </div>
                         </div>
                         <form action="{{ route('event_wall.eventPost') }}" id="textform" method="POST"
-                        enctype="multipart/form-data">
-                        <input type="hidden" name="event_id" id="event_id"
-                                            value="{{ $event }}">
-                        <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
+                            enctype="multipart/form-data">
+                            <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
+                            <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
 
-                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="">
-                        @csrf
-                        <div class="create-post-textcontent">
-                            <textarea class="form-control" rows="3"  name="postContent" placeholder="What's on your mind?"  id="postContent"></textarea>
-                        </div>
-                    </form>
+                            <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="">
+
+                            <input type="hidden" name="post_type" id="textPostType" value="0">
+                            @csrf
+                            <div class="create-post-textcontent">
+                                <textarea class="form-control" rows="3" name="postContent" placeholder="What's on your mind?"
+                                    id="postContent"></textarea>
+                            </div>
+                        </form>
                         <div class="create-post-upload-img-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
@@ -940,10 +1037,12 @@
                                     <div class="create-post-upload-img-inner">
                                         <input type="hidden" name="event_id" id="event_id"
                                             value="{{ $event }}">
-                                            <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
-
-                                             <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="1">
-                                            <input type="hidden" name="content" id="photoContent">
+                                        <input type="hidden" id="hiddenVisibility" name="post_privacys"
+                                            value="1">
+                                        <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
+                                            value="1">
+                                        <input type="hidden" name="content" id="photoContent">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1011,9 +1110,11 @@
                                     @csrf
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
-                                        <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
-                                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="1">
-
+                                    <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
+                                    <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
+                                        value="1">
+                                    {{-- <input type="hidden" name="post_type" id="pollPostType" value="2"> --}}
+                                    <input type="hidden" name="content" id="pollContent">
                                     <div class="mb-3">
                                         <label for="yourquestion"
                                             class="form-label d-flex align-items-center justify-content-between">Your
@@ -1118,34 +1219,34 @@
                         <h1 class="modal-title" id="exampleModalLabel">Post Settings</h1>
                     </div>
                     <form action="" id="postSettingsForm">
-                    <div class="modal-body">
-                        <div class="create-post-setting-inner">
-                            <h3>Who can see your post?</h3>
+                        <div class="modal-body">
+                            <div class="create-post-setting-inner">
+                                <h3>Who can see your post?</h3>
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"   name="post_privacy"
+                                    <input class="form-check-input" type="radio" name="post_privacy"
                                         id="flexRadioDefault1" value="1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Everyone
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"   name="post_privacy"
-                                        id="flexRadioDefault2"  value="2">
+                                    <input class="form-check-input" type="radio" name="post_privacy"
+                                        id="flexRadioDefault2" value="2">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         RSVP’d - Yes
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"   name="post_privacy"
-                                        id="flexRadioDefault3"  value="3">
+                                    <input class="form-check-input" type="radio" name="post_privacy"
+                                        id="flexRadioDefault3" value="3">
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         RSVP’d - No
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"   name="post_privacy"
-                                        id="flexRadioDefault4"  value=" 4">
+                                    <input class="form-check-input" type="radio" name="post_privacy"
+                                        id="flexRadioDefault4" value=" 4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         RSVP’d - No Reply
                                     </label>
@@ -1154,7 +1255,8 @@
                                 <div class="button-cover">
                                     <h3>Commenting</h3>
                                     <div class="button r" id="button-3">
-                                        <input type="checkbox"  id="allowComments" name="commenton"  value="1" class="checkbox" checked/>
+                                        <input type="checkbox" id="allowComments" name="commenton" value="1"
+                                            class="checkbox" checked />
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -1163,14 +1265,14 @@
 
 
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                       <button   type="button" id="saveSettings" class="cmn-btn btn-back">
-                                        Save
-                                    </button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" id="saveSettings" class="cmn-btn btn-back">
+                                Save
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

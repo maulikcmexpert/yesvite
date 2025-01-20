@@ -1,4 +1,4 @@
-{{-- {{dd($postPhotoList)}} --}}
+{{dd($postPhotoList)}}
 <main class="new-main-content">
 
     <div class="container">
@@ -245,7 +245,7 @@
                                                                 <ul class="dropdown-menu">
                                                                     <li><button
                                                                             class="dropdown-item download_img_single"
-                                                                            data-image-src="{{ $photo['mediaData']['post_media'] }}"><svg
+                                                                           ><svg
                                                                                 viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
@@ -329,7 +329,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+{{-- {{dd($photo['mediaData'])}} --}}
                                                     <div class="photo-card-photos-wrp imagePress">
                                                         <div class="photo-card-photos-main-img open_photo_model img_click"
                                                             data-bs-toggle="modal"
@@ -338,10 +338,13 @@
                                                             data-event-id="{{ $photo['event_id'] }}"
 
                                                             >
-                                                            @if (isset($photo['mediaData']) && $photo['mediaData']['type'] === 'image')
-                                                                <img src="{{ $photo['mediaData']['post_media'] }}"
-                                                                    alt="Post Image">
-                                                            @endif
+
+                                                            @if (!empty($photo['mediaData']) && isset($photo['mediaData']['type']) && $photo['mediaData']['type'] === 'image')
+                                                            <img src="{{ $photo['mediaData']['post_media'] }}" alt="Post Image">
+                                                        @else
+                                                            <p>No image available</p>
+                                                        @endif
+
                                                         </div>
                                                         @if ($photo['total_media'] != '')
                                                             <button class="total-photos-count-btn photo_model"
@@ -386,7 +389,7 @@
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
-                                                                data-image-src="{{ $photo['mediaData']['post_media'] }}"
+
                                                                 type="checkbox" value="" id="flexCheckDefault">
                                                         </button>
                                                     </div>

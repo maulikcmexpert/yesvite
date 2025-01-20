@@ -10,6 +10,7 @@ use App\Models\{
     Notification,
     EventImage,
     EventGiftRegistry,
+    UserReportToPost,
     EventPostImage,
     EventPotluckCategory,
     EventPotluckCategoryItem,
@@ -20,6 +21,7 @@ use App\Models\{
     UserSeenStory,
     EventPostPoll,
     EventPostPollOption,
+
     User,
     UserEventStory,
     UserEventPollData
@@ -35,7 +37,7 @@ use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Mail;
 
 class EventWallController extends Controller
 {
@@ -133,6 +135,7 @@ class EventWallController extends Controller
 
 
         foreach ($polls as $poll) {
+            $post_time = setpostTime($poll->created_at);
             // Get the poll duration and check if it is expired for each poll
             $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
             $isExpired = ($pollDuration == "");
@@ -144,6 +147,7 @@ class EventWallController extends Controller
                 'total_poll_duration' => $poll->poll_duration,
                 'poll_duration_left' => $pollDuration,
                 'is_expired' => $isExpired,
+                'post_time' =>$post_time,
                 'total_poll_vote' => $poll->user_poll_data_count,
                 'poll_options' => [],
             ];
@@ -197,6 +201,7 @@ class EventWallController extends Controller
             $wallData['owner_stories'][] = $storiesDetaill;
         }
 ///postlist
+$postList = [];
         $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
@@ -216,46 +221,52 @@ class EventWallController extends Controller
             });
             // dd($eventPostList);
         $checkEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
+        // dd($checkEventOwner);
         if ($checkEventOwner == null) {
-            $eventPostList->where(function ($query) use ($user, $event) {
+            // dd(1);
+            $eventPostList = $eventPostList->where(function ($query) use ($user, $event) {
                 $query->where('user_id', $user->id)
                     ->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $event) {
                         $subQuery->whereHas('user', function ($userQuery) {
-                            $userQuery->where('app_user', '1');
+                            $userQuery->where('app_user', '1'); // Only app users
                         })
-                            ->where('event_id', $event)
-                            ->where('user_id', $user->id)
-                            ->where(function ($privacyQuery) {
-                                $privacyQuery->where(function ($q) {
-                                    $q->where('rsvp_d', '1')
-                                        ->where('rsvp_status', '1')
-                                        ->where('post_privacy', '2');
-                                })
-                                    ->orWhere(function ($q) {
-                                        $q->where('rsvp_d', '1')
-                                            ->where('rsvp_status', '0')
-                                            ->where('post_privacy', '3');
-                                    })
-                                    ->orWhere(function ($q) {
-                                        $q->where('rsvp_d', '0')
-                                            ->where('post_privacy', '4');
-                                    })
-                                    ->orWhere(function ($q) {
-                                        $q->where('post_privacy', '1');
-                                    });
+                        ->where('event_id', $event)
+                        ->where('user_id', $user->id)
+                        ->where(function ($privacyQuery) {
+                            // Various privacy conditions
+                            $privacyQuery->where(function ($q) {
+                                $q->where('rsvp_d', '1')
+                                    ->where('rsvp_status', '1')
+                                    ->where('post_privacy', '2');
+                            })
+                            ->orWhere(function ($q) {
+                                $q->where('rsvp_d', '1')
+                                    ->where('rsvp_status', '0')
+                                    ->where('post_privacy', '3');
+                            })
+                            ->orWhere(function ($q) {
+                                $q->where('rsvp_d', '0')
+                                    ->where('post_privacy', '4');
+                            })
+                            ->orWhere(function ($q) {
+                                $q->where('post_privacy', '1');
                             });
+                        });
                     });
             });
-        }
-        // dd($eventPostList);
-        $eventPostList->orderBy('id', 'DESC')->get();
 
+        }
+
+        // Execute the query and get the results
+        $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
+        // dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
         // $results = $eventPostList->paginate(10);
         // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
-        $postList = [];
 
-        if (!empty($checkEventOwner)) {
+// dd($checkEventOwner);
+        //if (!empty($checkEventOwner)) {
+            //dd(1);
             // if (count($results) != 0) {
                 if ($eventPostList != "") {
                 foreach ($eventPostList as  $value) {
@@ -390,7 +401,7 @@ class EventWallController extends Controller
                 }
                 // dd($postList);
             }
-        }
+        //}
 
         $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
             $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
@@ -635,7 +646,7 @@ class EventWallController extends Controller
             $query->where('app_user', '1');
         })->where(['user_id' => $user->id, 'event_id' => $event])->first();
         $current_page = "wall";
-
+        $login_user_id  = $user->id;
         // return $wallData;
         return view('layout', compact(
             'title',
@@ -651,7 +662,8 @@ class EventWallController extends Controller
             'encrypt_event_id',
             'current_page',
             'eventDetails',
-            'rsvpSent'
+            'rsvpSent',
+            'login_user_id'
 
 
         ));
@@ -1124,7 +1136,7 @@ class EventWallController extends Controller
     public function createPost(Request $request)
     {
         // dd($request);
-        $user  = Auth::guard('api')->user();
+        $user  = Auth::guard('web')->user();
         $input = $request->all();
         // $validator = Validator::make($input, [
         //     'event_id' => ['required', 'exists:events,id'],
@@ -1144,7 +1156,7 @@ class EventWallController extends Controller
         $creatEventPost = new EventPost;
         $creatEventPost->event_id = $request->event_id;
         $creatEventPost->user_id = $user->id;
-        $creatEventPost->post_message = $request->post_message;
+        $creatEventPost->post_message = $request->postContent;
 
         if ($request->hasFile('post_recording')) {
             $record = $request->post_recording;
@@ -1166,9 +1178,14 @@ class EventWallController extends Controller
                     foreach ($postimages as $key => $postImgValue) {
                         $postImage = $postImgValue;
                         $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
+
+
+                        $postImage->move(public_path('storage/post_image'), $imageName);
+
                         $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
                         $duration = "";
                         $thumbName = "";
+
                         if ($checkIsimageOrVideo == 'video') {
                             $duration = getVideoDuration($postImage);
                             if (isset($request->thumbnail) && $request->thumbnail != Null) {
@@ -1182,19 +1199,20 @@ class EventWallController extends Controller
                                 unlink($imagePath);
                             }
                             $postImage->move(public_path('storage/post_image'), $imageName);
-                        } else {
+                       }
+                        // else {
 
-                            $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
-                            Image::load($postImgValue->getRealPath())
-                                ->width(500)
-                                ->optimize()
-                                ->save($temporaryThumbnailPath);
-                            $destinationPath = public_path('storage/post_image/');
-                            if (!file_exists($destinationPath)) {
-                                mkdir($destinationPath, 0755, true);
-                            }
-                            rename($temporaryThumbnailPath, $destinationPath . $imageName);
-                        }
+                        //     $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+                        //     Image::load($postImgValue->getRealPath())
+                        //         ->width(500)
+                        //         ->optimize()
+                        //         ->save($temporaryThumbnailPath);
+                        //     $destinationPath = public_path('storage/post_image/');
+                        //     if (!file_exists($destinationPath)) {
+                        //         mkdir($destinationPath, 0755, true);
+                        //     }
+                        //     rename($temporaryThumbnailPath,$destinationPath);
+                        // }
                         if ($checkIsimageOrVideo == 'video') {
                             $video++;
                         } else {
@@ -1643,6 +1661,7 @@ class EventWallController extends Controller
 
         foreach ($polls as $poll) {
             // Get the poll duration and check if it is expired for each poll
+            $post_time = setpostTime($poll->created_at);
             $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
             $isExpired = ($pollDuration == "");
 
@@ -1652,6 +1671,7 @@ class EventWallController extends Controller
                 'total_poll_duration' => $poll->poll_duration,
                 'poll_duration_left' => $pollDuration,
                 'is_expired' => $isExpired,
+                'post_time' =>$post_time,
                 'total_poll_vote' => $poll->user_poll_data_count,
                 'poll_options' => [],
             ];
@@ -1744,5 +1764,387 @@ class EventWallController extends Controller
         }
 
         return redirect()->back()->with('success', 'Event Post created successfully!');
+    }
+
+
+
+    public function userPostLikeDislike(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+
+        // Check if user has already reacted to this post
+        $checkReaction = EventPostReaction::where([
+            'event_id' => $request['event_id'],
+            'event_post_id' => $request['event_post_id'],
+            'user_id' => $user->id
+        ])->first();
+
+        // Convert the emoji reaction to Unicode
+        $reaction_unicode = sprintf('\u{%X}', mb_ord($request['reaction'], 'UTF-8'));
+        $unicode = strtoupper(bin2hex(mb_convert_encoding($request['reaction'], 'UTF-32', 'UTF-8')));
+
+        if (!$checkReaction) {
+            // User has not reacted yet, insert the reaction
+            $event_post_reaction = new EventPostReaction;
+            $event_post_reaction->event_id = $request['event_id'];
+            $event_post_reaction->event_post_id = $request['event_post_id'];
+            $event_post_reaction->user_id = $user->id;
+            $event_post_reaction->reaction = $reaction_unicode;
+            $event_post_reaction->unicode = $unicode;
+            $event_post_reaction->save();
+
+            $message = "Post liked by you";
+            $isReaction = 1;
+        } else {
+            // User has already reacted
+            if ($checkReaction->unicode != $unicode) {
+                // Reaction is different from current, update it
+                $checkReaction->reaction = $reaction_unicode;
+                $checkReaction->unicode = $unicode;
+                $checkReaction->save();
+                $message = "Post liked by you";
+                $isReaction = 1;
+            } else {
+                // Same reaction, dislike the post
+                $checkReaction->delete();
+                $removeNotification = Notification::where([
+                    'event_id' => $request['event_id'],
+                    'sender_id' => $user->id,
+                    'post_id' => $request['event_post_id'],
+                    'notification_type' => 'like_post'
+                ])->first();
+
+                if ($removeNotification) {
+                    $removeNotification->delete();
+                }
+                $message = "Post Disliked by you";
+                $isReaction = 0;
+            }
+        }
+
+        // Get total count of reactions
+        $counts = EventPostReaction::where([
+            'event_id' => $request['event_id'],
+            'event_post_id' => $request['event_post_id']
+        ])->count();
+
+        // Get the top 3 most common reactions
+        $total_counts = EventPostReaction::where([
+            'event_id' => $request['event_id'],
+            'event_post_id' => $request['event_post_id']
+        ])
+            ->select('reaction', 'unicode', DB::raw('COUNT(*) as count'))
+            ->groupBy('reaction', 'unicode')
+            ->orderByDesc('count')
+            ->take(3)
+            ->pluck('reaction')
+            ->toArray();
+
+        // Get post reactions with user details
+        $postReactions = getReaction($request['event_post_id']);
+        $postReaction = [];
+
+        foreach ($postReactions as $reactionVal) {
+            $reactionInfo = [
+                'id' => $reactionVal->id,
+                'event_post_id' => $reactionVal->event_post_id,
+                'reaction' => $reactionVal->reaction,
+                'user_id' => $reactionVal->user_id,
+                'username' => $reactionVal->user->firstname . ' ' . $reactionVal->user->lastname,
+                'location' => $reactionVal->user->city ?? "",
+                'profile' => !empty($reactionVal->user->profile) ? asset('storage/profile/' . $reactionVal->user->profile) : ""
+            ];
+
+            $postReaction[] = $reactionInfo;
+        }
+
+        return response()->json([
+            'status' => 1,
+            'is_reaction' => $isReaction,
+            'message' => $message,
+            'count' => $counts,
+            'post_reaction' => $postReaction,
+            'reactionList' => $total_counts
+        ]);
+    }
+    public function userPostComment(Request $request)
+
+    {
+        // dd($request);
+        $user  = Auth::guard('web')->user();
+        $rawData = $request->getContent();
+
+
+
+
+        EventPostComment::where(['event_id' => $request['event_id'], 'event_post_id' => $request['event_post_id'], 'user_id' => $user->id])->count();
+
+        $event_post_comment = new EventPostComment;
+
+        $event_post_comment->event_id = $request['event_id'];
+
+        $event_post_comment->event_post_id = $request['event_post_id'];
+
+        $event_post_comment->user_id = $user->id;
+
+        $event_post_comment->comment_text = $request['comment'];
+
+        if (isset($request['media']) && !empty($request['media'])) {
+            $image = $request['media'];
+
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('storage/comment_media'), $imageName);
+            $event_post_comment->media = $imageName;
+            $event_post_comment->type = $request['type'];
+        }
+
+        $event_post_comment->save();
+
+        // $notificationParam = [
+        //     'sender_id' => $user->id,
+        //     'event_id' => $request['event_id'],
+        //     'post_id' => $request['event_post_id'],
+        //     'comment_id' => $event_post_comment->id
+        // ];
+
+        // sendNotification('comment_post', $notificationParam);
+
+
+
+        $postComment = getComments($request['event_post_id']);
+
+        $letestComment =  EventPostComment::with('user')->withcount('post_comment_reaction', 'replies')->where(['event_post_id' => $request['event_post_id'], 'parent_comment_id' => NULL])->orderBy('id', 'DESC')->limit(1)->first();
+
+
+
+        $postCommentList = [
+            'id' => $letestComment->id,
+
+            'event_post_id' => $letestComment->event_post_id,
+
+            'comment' => $letestComment->comment_text,
+            'media' => (!empty($letestComment->media) && $letestComment->media != NULL) ? asset('storage/comment_media/' . $letestComment->media) : "",
+
+            'user_id' => $letestComment->user_id,
+
+            'username' => $letestComment->user->firstname . ' ' . $letestComment->user->lastname,
+
+            'profile' => (!empty($letestComment->user->profile)) ? asset('storage/profile/' . $letestComment->user->profile) : "",
+
+            'comment_total_likes' => $letestComment->post_comment_reaction_count,
+
+            'location' => $letestComment->user->city != "" ? trim($letestComment->user->city) . ($letestComment->user->state != "" ? ', ' . $letestComment->user->state : '') : "",
+            // 'is_like' => checkUserPhotoIsLike($letestComment->id, $user->id),
+            'is_like' => 0,
+
+            'created_at' => $letestComment->created_at,
+
+            'total_replies' => $letestComment->replies_count,
+
+            'posttime' => setpostTime($letestComment->created_at),
+            'comment_replies' => []
+        ];
+
+        return response()->json(['success' => true, 'total_comments' => count($postComment), 'data' => $postCommentList, 'message' => "Post commented by you"]);
+    }
+    public function userPostCommentReply(Request $request)
+
+    {
+        // dd(1);
+        $user  = Auth::guard('web')->user();
+
+
+
+            $parentCommentId =  $request['parent_comment_id'];
+            $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId);
+
+            $event_post_comment = new EventPostComment;
+            $event_post_comment->event_id = $request['event_id'];
+            $event_post_comment->event_post_id = $request['event_post_id'];
+            $event_post_comment->user_id = $user->id;
+            $event_post_comment->parent_comment_id = $request['parent_comment_id'];
+            $event_post_comment->main_parent_comment_id = $mainParentId;
+            $event_post_comment->comment_text = $request['comment'];
+            if (isset($request['media']) && !empty($request['media'])) {
+                $image = $request['media'];
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('storage/comment_media'), $imageName);
+                $event_post_comment->media = $imageName;
+                $event_post_comment->type = $request['type'];
+            }
+            $event_post_comment->save();
+
+
+            // $notificationParam = [
+            //     'sender_id' => $user->id,
+            //     'event_id' => $request['event_id'],
+            //     'post_id' => $request['event_post_id'],
+            //     'comment_id' => $event_post_comment->id
+            // ];
+            // sendNotification('reply_on_comment_post', $notificationParam);
+
+            $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
+                $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
+            }])->withcount('post_comment_reaction', 'replies')->where(['id' => $mainParentId, 'event_post_id' => $request['event_post_id']])->orderBy('id', 'DESC')->first();
+
+            $commentInfo['id'] = $replyList->id;
+            $commentInfo['event_post_id'] = $replyList->event_post_id;
+            $commentInfo['comment'] = $replyList->comment;
+            $commentInfo['user_id'] = $replyList->user_id;
+            $commentInfo['username'] = $replyList->user->firstname . ' ' . $replyList->user->lastname;
+            $commentInfo['location'] = $replyList->user->city != "" ? trim($replyList->user->city) . ($replyList->user->state != "" ? ', ' . $replyList->user->state : '') : "";
+            $commentInfo['profile'] = (!empty($replyList->user->profile)) ? asset('storage/profile/' . $replyList->user->profile) : "";
+            $commentInfo['comment_total_likes'] = $replyList->post_comment_reaction_count;
+            $commentInfo['is_like'] = checkUserIsLike($replyList->id, $user->id);
+            $commentInfo['created_at'] = $replyList->created_at;
+            $commentInfo['total_replies'] = $replyList->replies_count;
+            $commentInfo['posttime'] = setpostTime($replyList->created_at);
+            $commentInfo['comment_replies'] = [];
+
+            if (!empty($replyList->replies)) {
+                foreach ($replyList->replies as $replyVal) {
+                    $totalReply = EventPostComment::withcount('post_comment_reaction')->where("parent_comment_id", $replyVal->id)->count();
+                    $commentReply['id'] = $replyVal->id;
+                    $commentReply['event_post_id'] = $replyVal->event_post_id;
+                    $commentReply['comment'] = $replyVal->comment_text;
+                    $commentReply['user_id'] = $replyVal->user_id;
+                    $commentReply['username'] = $replyVal->user->firstname . ' ' . $replyVal->user->lastname;
+                    $commentReply['profile'] = (!empty($replyVal->user->profile)) ? asset('storage/profile/' . $replyVal->user->profile) : "";
+                    // $commentReply['location'] = (!empty($replyVal->user->city)) ? $replyVal->user->city : "";
+                    $commentReply['location'] = $replyVal->user->city != "" ? trim($replyVal->user->city) . ($replyVal->user->state != "" ? ', ' . $replyVal->user->state : '') : "";
+                    $commentReply['comment_total_likes'] = $replyVal->post_comment_reaction_count;
+                    $commentReply['main_comment_id'] = $replyVal->main_parent_comment_id;
+                    $commentReply['is_like'] = checkUserIsLike($replyVal->id, $user->id);
+                    $commentReply['total_replies'] = $totalReply;
+                    $commentReply['posttime'] = setpostTime($replyVal->created_at);
+                    $commentReply['created_at'] = $replyVal->created_at;
+                    $commentInfo['comment_replies'][] = $commentReply;
+                    $replyComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $request['event_post_id'], 'parent_comment_id' => $replyVal->id])->orderBy('id', 'DESC')->get();
+
+                    foreach ($replyComment as $childReplyVal) {
+                        if ($childReplyVal->parent_comment_id != $childReplyVal->main_parent_comment_id) {
+                            $totalReply = EventPostComment::withcount('post_comment_reaction')->where("parent_comment_id", $childReplyVal->id)->count();
+                            $commentChildReply['id'] = $childReplyVal->id;
+                            $commentChildReply['event_post_id'] = $childReplyVal->event_post_id;
+                            $commentChildReply['comment'] = $childReplyVal->comment_text;
+                            $commentChildReply['user_id'] = $childReplyVal->user_id;
+                            $commentChildReply['username'] = $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname;
+                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
+                            $commentChildReply['location'] = $childReplyVal->user->city != "" ? trim($childReplyVal->user->city) . ($childReplyVal->user->state != "" ? ', ' . $childReplyVal->user->state : '') : "";
+                            $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
+                            $commentReply['main_comment_id'] = $childReplyVal->main_parent_comment_id;
+                            $commentChildReply['is_like'] = checkUserIsLike($childReplyVal->id, $user->id);
+                            $commentChildReply['total_replies'] = $totalReply;
+                            $commentChildReply['posttime'] = setpostTime($childReplyVal->created_at);
+                            $commentChildReply['created_at'] = $childReplyVal->created_at;
+                            $commentInfo['comment_replies'][] = $commentChildReply;
+                            $replyChildComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $request['event_post_id'], 'parent_comment_id' => $childReplyVal->id])->orderBy('id', 'DESC')->get();
+
+                            foreach ($replyChildComment as $childInReplyVal) {
+                                if ($childInReplyVal->parent_comment_id != $childInReplyVal->main_parent_comment_id) {
+                                    $totalReply = EventPostComment::withcount('post_comment_reaction')->where("parent_comment_id", $childInReplyVal->id)->count();
+                                    $commentChildInReply['id'] = $childInReplyVal->id;
+                                    $commentChildInReply['event_post_id'] = $childInReplyVal->event_post_id;
+                                    $commentChildInReply['comment'] = $childInReplyVal->comment_text;
+                                    $commentChildInReply['user_id'] = $childInReplyVal->user_id;
+                                    $commentChildInReply['username'] = $childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname;
+                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
+                                    $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
+                                    $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
+                                    $commentReply['main_comment_id'] = $childInReplyVal->main_parent_comment_id;
+                                    $commentChildInReply['is_like'] = checkUserIsLike($childInReplyVal->id, $user->id);
+                                    $commentChildInReply['total_replies'] = $totalReply;
+                                    $commentChildInReply['posttime'] = setpostTime($childInReplyVal->created_at);
+                                    $commentChildInReply['created_at'] = $childInReplyVal->created_at;
+                                    $commentInfo['comment_replies'][] = $commentChildInReply;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return response()->json(['success' => true, 'total_comments' => 0, 'data' => $commentInfo, 'message' => "Post comment replied by you"]);
+
+    }
+
+    public function postControl(Request $request)
+    {
+
+        $user  = Auth::guard('api')->user();
+        $rawData = $request->getContent();
+        $input = json_decode($rawData, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        try {
+
+            DB::beginTransaction();
+
+            $checkIsPostControl = PostControl::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'event_post_id' => $input['event_post_id']])->first();
+            if ($checkIsPostControl == null) {
+                $setPostControl = new PostControl;
+
+                $setPostControl->event_id = $input['event_id'];
+                $setPostControl->user_id = $user->id;
+                $setPostControl->event_post_id = $input['event_post_id'];
+                $setPostControl->post_control = $input['post_control'];
+                $setPostControl->save();
+            } else {
+                $checkIsPostControl->post_control = $input['post_control'];
+                $checkIsPostControl->save();
+            }
+            DB::commit();
+            $message = "";
+            if ($input['post_control'] == 'hide_post') {
+                $message = "Post is hide from your wall";
+            } else if ($input['post_control'] == 'unhide_post') {
+                $message = "Post is unhide";
+            } else if ($input['post_control'] == 'mute') {
+                $message = "Mute every post from this user will post";
+            } else if ($input['post_control'] == 'unmute') {
+                $message = "Unmuted every post from this user will post";
+            } else if ($input['post_control'] == 'report') {
+                $reportCreate = new UserReportToPost;
+                $reportCreate->event_id = $input['event_id'];
+                $reportCreate->user_id =  $user->id;
+                $reportCreate->report_type = $input['report_type'];
+                $reportCreate->report_description = $input['report_description'];
+                $reportCreate->event_post_id = $input['event_post_id'];
+                $reportCreate->save();
+
+                $savedReportId =  $reportCreate->id;
+                $createdAt = $reportCreate->created_at;
+                $message = "Reported to admin for this post";
+
+                $support_email = env('SUPPORT_MAIL');
+
+                $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+                $data = [
+                    'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
+                    'event_name' => $getName->events->event_name,
+                    'report_type' => $getName->report_type,
+                    'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
+                    'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+                    'report_from' => "post"
+                ];
+
+                Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
+                    $messages->to($support_email)
+                        ->subject('Post Report Mail');
+                });
+            }
+            return response()->json(['status' => 1, 'type' => $input['post_control'], 'message' => $message]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        }
+        // catch (\Exception $e) {
+
+        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        // }
     }
 }

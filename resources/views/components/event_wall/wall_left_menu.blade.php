@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" >
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.3334 10.75V14.25C13.3334 17.1667 12.1667 18.3334 9.25002 18.3334H5.75002C2.83335 18.3334 1.66669 17.1667 1.66669 14.25V10.75C1.66669 7.83335 2.83335 6.66669 5.75002 6.66669H9.25002C12.1667 6.66669 13.3334 7.83335 13.3334 10.75Z"
@@ -234,4 +234,41 @@
             </div>
         </div>
     @endif
+</div>
+   <!-- ====== cancel event ======== -->
+   <div class="modal fade cmn-modal cancel-event" id="cancelevent" tabindex="-1"
+   aria-labelledby="canceleventLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+           <!-- <div class="modal-header">
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div> -->
+           <div class="modal-body">
+               <div class="delete-modal-head text-center">
+                   <div class="delete-icon">
+                       <img src="{{ asset('assets/front/img/deleteicon.svg') }}" alt="delete">
+                   </div>
+                   <h4>Cancel Event</h4>
+                   <p>Cancelling this event will delete everything in this event including but not limited to all
+                       comments,
+                       photos, and settings associated with this event for you and your guests.</p>
+               </div>
+               <div class="guest-msg">
+                   <h5>Message to guests</h5>
+                   <textarea name="" id="">*Let your guests know why you are cancelling event.......</textarea>
+               </div>
+               <div class="cancel-event-text text-center">
+                   <h6>Event cancellation is not reversible.</h6>
+                   <p>Please confirm by typing <strong></strong> below.</p>
+                   <input type="text" placeholder="CANCEL" class="form-control">
+               </div>
+           </div>
+           <div class="modal-footer cancel-confirm-btn">
+               <button type="button" class="btn btn-secondary cancel-btn"
+                   data-bs-dismiss="modal">Cancel</button>
+               <button type="button" class="btn btn-secondary confirm-btn"
+                   data-bs-dismiss="modal">Confirm</button>
+           </div>
+       </div>
+   </div>
 </div>

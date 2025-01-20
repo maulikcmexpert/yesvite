@@ -506,6 +506,7 @@ $('.download_img_single').on('click', function () {
         alert('No image source found!');
     }
 });
+
 $(document).on('click', '.open_photo_model', function () {
     clearTimeout(pressTimer); // Clear the timer
     console.log("Mouse up or leave detected");
@@ -549,8 +550,26 @@ $(document).on('click', '.open_photo_model', function () {
 
                 // Profile Image
 
-                const profileImage = data.profile || '{{ asset("assets/front/img/header-profile-img.png") }}';
-                $('.posts-card-head-left-img img').attr('src', profileImage);
+                const profileImage = data.profile || generateProfileImage(data.firstname, data.lastname);
+                console.log('Profile Image URL:', profileImage);
+                // Check if profileImage is an image URL or HTML content
+                if (profileImage) {
+                    // If it's a placeholder, insert initials inside a div
+                    $('.posts-card-head-left-img').html(profileImage);
+                } else {
+                    // Otherwise, update the img src
+                    $('.posts-card-head-left-img img').attr('src', profileImage);
+                }
+
+                function generateProfileImage(firstname, lastname) {
+                    const firstInitial = firstname ? firstname[0].toUpperCase() : '';
+                    const secondInitial = lastname ? lastname[0].toUpperCase() : '';
+                    const initials = `${firstInitial}${secondInitial}`;
+                    const fontColor = `fontcolor${firstInitial}`;
+
+                    // Return initials inside an h5 tag with dynamic styling
+                    return `<h5 class="${fontColor} font_name">${initials}</h5>`;
+                }
                 $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
                 // Name
                 const fullName = `${data.firstname} ${data.lastname}`;
@@ -644,7 +663,7 @@ $(document).on('click', '.open_photo_model', function () {
                         console.log('No img tag found in this li element.');
                     }
                 });
-                updateReactions(data.reactionList,data.firstname,data.lastname);
+                updateReactions(data.reactionList, data.firstname, data.lastname, data.profile,data.location);
 
                 const commentsWrapper = $('.posts-card-show-all-comments-inner ul');
                 commentsWrapper.empty(); // Clear existing comments
@@ -695,18 +714,33 @@ $(document).on('click', '.open_photo_model', function () {
         }
     });
 
-    function updateReactions(reactions, firstname, lastname) {
+    function updateReactions(reactions, firstname, lastname, profile,location) {
         console.log(reactions); // Debug the reactions array
         console.log(firstname);
         console.log(lastname);
 
+        const emojiPaths = {
+            'heart': '/assets/front/img/heart-emoji.png',
+            'thumb': '/assets/front/img/thumb-icon.png',
+            'smily': '/assets/front/img/smily-emoji.png',
+            'eye-heart': '/assets/front/img/eye-heart-emoji.png',
+            'clap': '/assets/front/img/clap-icon.png',
+        };
 
-        const allReactionsList = $('#nav-all-reaction-tab ul' );
+        const allReactionsList = $('#nav-all-reaction ul');
         const heartReactionsList = $('#nav-heart-reaction ul');
         const thumbReactionsList = $('#nav-thumb-reaction ul');
         const smilyReactionsList = $('#nav-smily-reaction ul');
         const eyeHeartReactionsList = $('#nav-eye-heart-reaction ul');
         const clapReactionsList = $('#nav-clap-reaction ul');
+
+        const reactionCounts = {
+            heart: 0,
+            thumb: 0,
+            smily: 0,
+            'eye-heart': 0,
+            clap: 0,
+        };
 
         // Clear all reaction lists
         allReactionsList.empty();
@@ -715,69 +749,109 @@ $(document).on('click', '.open_photo_model', function () {
         smilyReactionsList.empty();
         eyeHeartReactionsList.empty();
         clapReactionsList.empty();
-
-        // Iterate through reactions array (e.g., ['\\u{2764}', '\\u{1F44D}'])
+        const getProfileContent = () => {
+            if (profile && profile !== '') {
+                return `<img src="${profile}" alt="">`;
+            } else {
+                const firstInitial = firstname ? firstname[0].toUpperCase() : '';
+                const secondInitial = lastname ? lastname[0].toUpperCase() : '';
+                const initials = `${firstInitial}${secondInitial}`;
+                const fontColor = `fontcolor${firstInitial}`;
+                return `<h5 class="${fontColor}">${initials}</h5>`;
+            }
+        };
+        // Iterate through reactions array
         reactions.forEach(reaction => {
             let reactionType = '';
             let emojiSrc = '';
 
-            // Map each reaction to a type and corresponding emoji image source
-            if (reaction === '\\u{2764}') { // Heart
-                reactionType = 'heart';
-                emojiSrc = 'heart-emoji.png';
-            } else if (reaction) { // Heart
-                reactionType = 'all';
-                emojiSrc = 'heart-emoji.png ';
-            } else if (reaction === '\\u{1F44D}') { // Thumbs Up
-                reactionType = 'thumb';
-                emojiSrc = '{{ asset("assets/front/img/thumb.png")}}';
-            } else if (reaction === '\\u{1F604}') { // Smiley
-                reactionType = 'smily';
-                emojiSrc = '{{ asset("assets/front/img/smiley.png")}}';
-            } else if (reaction === '\\u{1F60D}') { // Eye-Heart
-                reactionType = 'eye-heart';
-                emojiSrc = '{{ asset("assets/front/img/eye-heart.png")}}';
-            } else if (reaction === '\\u{1F44F}') { // Clap
-                reactionType = 'clap';
-                emojiSrc = '{{ asset("assets/front/img/clap.png")}}';
+            // Map each reaction to a type
+            switch (reaction) {
+                case '\\u{2764}': // Heart
+                    reactionType = 'heart';
+                    break;
+                case '\\u{1F44D}': // Thumbs Up
+                    reactionType = 'thumb';
+                    break;
+                case '\\u{1F604}': // Smiley
+                    reactionType = 'smily';
+                    break;
+                case '\\u{1F60D}': // Eye-Heart
+                    reactionType = 'eye-heart';
+                    break;
+                case '\\u{1F44F}': // Clap
+                    reactionType = 'clap';
+                    break;
+                default:
+                    console.warn(`Unknown reaction: ${reaction}`);
+                    return; // Skip unknown reactions
             }
 
-            if (reactionType !== '') {
-                const reactionItem = `<li class="reaction-info-wrp">
-                                        <div class="commented-user-head">
-                                            <div class="commented-user-profile">
-                                                <div class="commented-user-profile-img">
-                                                    <img src="{{ asset('assets/front/img/efault/profile.png')}}" alt="">
-                                                </div>
-                                                <div class="commented-user-profile-content">
-                                                    <h3>${firstname} ${lastname}</h3>
-                                                    <p>Reacted with ${reactionType}</p>
-                                                </div>
+            // Increment the reaction count
+            reactionCounts[reactionType]++;
+
+            // Get the emoji image source
+            emojiSrc = emojiPaths[reactionType];
+            const profileContent = getProfileContent();
+            // Create reaction list item
+            const reactionItem = `<li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                            ${profileContent}
                                             </div>
-                                            <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                                <img src="${emojiSrc}" alt="">
+                                            <div class="commented-user-profile-content">
+                                                <h3>${firstname} ${lastname}</h3>
+                                                <p> ${location}</p>
                                             </div>
                                         </div>
-                                      </li>`;
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="${emojiSrc}" alt="">
+                                        </div>
+                                    </div>
+                                  </li>`;
 
-                // Append to respective list based on type
-                if (reactionType === 'heart') {
-                    heartReactionsList.append(reactionItem);
-                } else if (reactionType === 'thumb') {
-                    thumbReactionsList.append(reactionItem);
-                } else if (reactionType === 'smily') {
-                    smilyReactionsList.append(reactionItem);
-                } else if (reactionType === 'eye-heart') {
-                    eyeHeartReactionsList.append(reactionItem);
-                } else if (reactionType === 'clap') {
-                    clapReactionsList.append(reactionItem);
-                }
-
-                // Add the same item to "All reactions" list
-                allReactionsList.append(reactionItem);
+            // Append to specific reaction list
+            if (reactionType === 'heart') {
+                heartReactionsList.append(reactionItem);
+            } else if (reactionType === 'thumb') {
+                thumbReactionsList.append(reactionItem);
+            } else if (reactionType === 'smily') {
+                smilyReactionsList.append(reactionItem);
+            } else if (reactionType === 'eye-heart') {
+                eyeHeartReactionsList.append(reactionItem);
+            } else if (reactionType === 'clap') {
+                clapReactionsList.append(reactionItem);
             }
+
+            // Append the same item to "All Reactions" list
+            console.log('Appending to All Reactions:', reactionItem);
+            allReactionsList.append(reactionItem);
         });
+
+        // Update the counts in the navigation tabs
+        const totalReactions = Object.values(reactionCounts).reduce((sum, count) => sum + count, 0);
+        $('#nav-all-reaction-tab').html(`All ${totalReactions}`);
+        $('#nav-heart-reaction-tab').html(
+            `<img src="${emojiPaths['heart']}" alt=""> ${reactionCounts.heart}`
+        );
+        $('#nav-thumb-reaction-tab').html(
+            `<img src="${emojiPaths['thumb']}" alt=""> ${reactionCounts.thumb}`
+        );
+        $('#nav-smily-reaction-tab').html(
+            `<img src="${emojiPaths['smily']}" alt=""> ${reactionCounts.smily}`
+        );
+        $('#nav-eye-heart-reaction-tab').html(
+            `<img src="${emojiPaths['eye-heart']}" alt=""> ${reactionCounts['eye-heart']}`
+        );
+        $('#nav-clap-reaction-tab').html(
+            `<img src="${emojiPaths['clap']}" alt=""> ${reactionCounts.clap}`
+        );
     }
+
+
+
+
 
 });
 

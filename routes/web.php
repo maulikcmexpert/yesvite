@@ -262,7 +262,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
     Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
     Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
-
+    Route::post('event_wall/userPostCommentReply', [EventWallController::class, 'userPostCommentReply']);
+    Route::post('event_wall/userPostLikeDislike', [EventWallController::class, 'userPostLikeDislike'])->name('event_wall.userPostLikeDislike');
     Route::post('event_wall/event_post', [EventWallController::class, 'createEventPost'])->name('event_wall.eventPost');
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 
