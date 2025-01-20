@@ -1841,6 +1841,9 @@
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 165px;
     }
+    .home-upcoming-events-card-right img {
+        object-fit: contain;
+    }
     
 }
 
