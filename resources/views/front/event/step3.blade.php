@@ -485,7 +485,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            <div class="user-contacts group_list group_search_list">
+                            <div class="user-contacts group_list group_search_list fdfdfdf">
+
                                 @if(empty($groups))
                                         No data found
                                 @else
