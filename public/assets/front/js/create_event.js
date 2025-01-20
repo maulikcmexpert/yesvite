@@ -5364,13 +5364,13 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
             
                return;
             }
-            if(html==""){
-                // $("#YesviteUserAll").html('No data found');
-               NoMoreDataYesviteAll=true;
-               $('#loader').css('display','none');
+            // if(html==""){
+            //     // $("#YesviteUserAll").html('No data found');
+            //    NoMoreDataYesviteAll=true;
+            //    $('#loader').css('display','none');
             
-               return;
-            }
+            //    return;
+            // }
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
