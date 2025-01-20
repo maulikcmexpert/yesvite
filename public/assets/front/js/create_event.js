@@ -5024,6 +5024,15 @@ $(document).on("click",".remove_co_host",function(){
 
 $(document).on("click", ".save_event_co_host", function () {
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if($('#contact-tab').hasClass('active')){
+        get_contact_status='yesvite';
+    }
+
+    if($('#phone-tab-cantact').hasClass('active')){
+        get_contact_status='contacts';
+    }
+    $('.add_co_host').attr('data-contact', get_contact_status);
+
     if (checkedCheckbox.length === 0) {
         // alert();
         $('.add_new_co_host').html(`<span class="me-3">
@@ -5033,15 +5042,7 @@ $(document).on("click", ".save_event_co_host", function () {
         </span>
         <h5>Select your co-host</h5>`);
 
-        if($('#contact-tab').hasClass('active')){
-            get_contact_status='yesvite';
-        }
-
-        if($('#phone-tab-cantact').hasClass('active')){
-            get_contact_status='contacts';
-        }
-        $('.add_co_host').attr('data-contact', get_contact_status);
-
+      
         eventData.co_host = '';
         eventData.co_host_prefer_by = '';
         selected_co_host = '';
