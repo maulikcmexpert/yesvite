@@ -1,6 +1,6 @@
 @if(isset($registry)&&!empty($registry))
 
-{{dd($registry)}}
+<!-- {dd($registry)} -->
 @foreach ($registry as $data )
 <div class="d-flex align-items-center justify-content-center">
     <span class="me-2">
