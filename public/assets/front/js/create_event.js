@@ -6015,7 +6015,7 @@ $(document).on('click','#contact-tab',function(){
 })
 
 $(document).on('click','.add_co_host_off',function(){
-    if(eventData.co_host !== undefined){
+    if(eventData.co_host != undefined){
         selected_co_host = eventData.co_host;
     }else{
         selected_co_host = '';
