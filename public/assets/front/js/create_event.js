@@ -4314,26 +4314,34 @@ $(document).on("click", "#delete-self-bring", function () {
     $("#self_bring_qty").val(0);
 });
 
+$(".qty-btnplus").on("click",function () {
+    plusBTN($(this))
+});
+
 $(document).on("click", ".qty-btn-plus", function () {
-    var categoryItemKey = $(this).parent().find(".category-item-key").val();
-    var categoryIndexKey = $(this).parent().find(".category-index-key").val();
-    var categoryItemQuantity = $(this)
+    plusBTN($(this))
+});
+function plusBTN(that){
+    var categoryItemKey = that.parent().find(".category-item-key").val();
+    var categoryIndexKey = that.parent().find(".category-index-key").val();
+   
+    var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
         .val();
-    var itemQuantityMinus = $(this)
+    var itemQuantityMinus = that
         .parent()
         .find(".item-quantity-minus")
         .val();
-    var $input = $(this).siblings(".input-qty");
-    var value = parseInt($input.val());
-        $input.val(value + 1);
-    var quantity = parseInt($(this).parent().find(".input-qty").val());
-    console.log(quantity);
-    if(quantity > 0){
-        $(this).parent().find(".item-quantity-minus").val(1);
-    }
+    var input = that.siblings(".input-qty");
 
+    var value = parseInt(input.val());
+        input.val(value + 1);
+    var quantity = parseInt(that.parent().find(".input-qty").val());
+    if(quantity > 0){
+        that.parent().find(".item-quantity-minus").val(1);
+    }
+console.log({categoryItemQuantity,quantity})
     if (categoryItemQuantity >= quantity) {
 
         update_self_bring(
@@ -4345,29 +4353,35 @@ $(document).on("click", ".qty-btn-plus", function () {
         );
     } else {
         quantity--;
-        $(this).parent().find(".input-qty").val(quantity);
+        that.parent().find(".input-qty").val(quantity);
     }
+}
+$(".qty-btnminus").on("click",function () {
+    minusBTN($(this))
+})
+$(document).on("click", ".qty-btn-minus", function () {  
+    minusBTN($(this))  
 });
 
-$(document).on("click", ".qty-btn-minus", function () {
-    
-    var categoryItemKey = $(this).parent().find(".category-item-key").val();
-    var categoryIndexKey = $(this).parent().find(".category-index-key").val();
-    var categoryItemQuantity = $(this)
+function minusBTN(that){
+    var categoryItemKey = that.parent().find(".category-item-key").val();
+    var categoryIndexKey = that.parent().find(".category-index-key").val();
+    var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
         .val();
-    var itemQuantityMinus = $(this)
+    var itemQuantityMinus = that
         .parent()
         .find(".item-quantity-minus")
         .val();
-    var $input = $(this).siblings(".input-qty");
-    var value = parseInt($input.val());
+    var input = that.siblings(".input-qty");
+    var value = parseInt(input.val());
     if (value > 0) {
-        $input.val(value - 1);
+        input.val(value - 1);
     }
-    var quantity = parseInt($(this).parent().find(".input-qty").val());
-    console.log(quantity);
+    var quantity = parseInt(that.parent().find(".input-qty").val());
+    console.log({categoryItemQuantity,quantity})
+
     if (categoryItemQuantity >= quantity ) {
         if(itemQuantityMinus == 1){
             update_self_bring(
@@ -4378,16 +4392,15 @@ $(document).on("click", ".qty-btn-minus", function () {
                 'minus'
             );
             if(quantity == 0){
-                $(this).parent().find(".item-quantity-minus").val(0);
+                that.parent().find(".item-quantity-minus").val(0);
             }
         }
         
     } else {
        
-        $(this).parent().find(".input-qty").val(0);
+        that.parent().find(".input-qty").val(0);
     }
-    
-});
+}
 
 function update_self_bring(
     categoryItemKey,
