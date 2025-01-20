@@ -966,6 +966,10 @@
     width: 100%;
 }
 
+.all-events-searchbar-wrp input::placeholder{
+    text-transform: none !important;
+}
+
 .all-events-searchbar-wrp form{
     width: 100%;
 }
