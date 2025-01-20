@@ -222,7 +222,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit add_co_host" data-contact="" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['add_co_host']=="1") ? "":"display:none"}}>
+                                    <a href="#" class="add-limit add_co_host" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['add_co_host']=="1") ? "":"display:none"}}>
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center add_new_co_host">
                                                 <span class="me-3">
@@ -358,14 +358,14 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "checked":""}} />
+                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" {{(isset($eventDetail['podluck'])&&$eventDetail['event_setting']['podluck']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit potluck" onclick="toggleSidebar('sidebar_potluck')" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "":"display:none"}}>
+                                    <a href="#" class="add-limit potluck" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "":"display:none"}} onclick="toggleSidebar('sidebar_potluck')">
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center potluck_count">
                                                 <span class="me-3">
