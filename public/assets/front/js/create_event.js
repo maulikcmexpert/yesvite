@@ -4987,6 +4987,7 @@ $(document).on("click",".remove_co_host",function(){
     // selected_co_host_prefer_by = '';
     // selected_dataId="";
     co_host_is_selected_close=true;
+
     $('.guest-contacts-wrp').css('display','none');
     $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
@@ -6090,6 +6091,10 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
     }else{
+        if(co_host_is_selected_close==true){
+            $('.guest-contacts-wrp').css('display','none');
+            $('.guest-contacts-wrp').removeClass('guest-contacts-test');     
+        }
         // if ($('input[name="guest_list[]"]').is(':checked')) {
         //     var profilePhoto = $(this).data('profile');
         //     var user_name = $(this).data('username');
