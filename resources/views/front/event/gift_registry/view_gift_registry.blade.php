@@ -18,9 +18,9 @@
                                                     $url=$data['registry_link'];
                                                     $logo="";
                                                     if(strpos($url, 'amazon') !== false ||strpos($url, 'Amazon') !== false){
-                                                        $logo=asset('assets/amazon.png');
+                                                        $logo=asset('assets/create_amazon.png');
                                                     }elseif (strpos($url, 'target') !== false ||strpos($url, 'Target') !== false) {
-                                                        $logo=asset('assets/target.png');
+                                                        $logo=asset('assets/create_target.png');
                                                     }else{
                                                         $logo=asset('assets/other.png');
                                                     }

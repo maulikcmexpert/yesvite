@@ -1794,6 +1794,7 @@ class EventController extends Controller
         }
 
         $selected_user = Session::get('user_ids');
+        
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 
