@@ -13,6 +13,7 @@ var selected_gift=[];
 var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
+var co_host_is_selected_close=false;
 // var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
 // var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
 // giftRegestryData.forEach(function (item) {
@@ -4895,6 +4896,7 @@ $(document).on("click", ".save_allow_limit", function () {
 
 $(document).on("change", 'input[name="guest_list[]"]', function () {
     //    if ($("input[name='guest_list[]']:checked").length > 0) {
+    co_host_is_selected_close=false;
     const old_user_id = selected_co_host;
     const newUserID = $(this).val();
        if (lengtUSer> 0 && newUserID!=old_user_id) {
@@ -4919,14 +4921,26 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
                 $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src',profilePhoto);
-                $('.selected-host-h5').css('display','none');
+                $('.guest-img .selected-co-host-image').attr('src',profilePhoto);
+                $('.guest-img .selected-host-h5').css('display','none');
             }else{
-                $('.selected-host-h5').show();
-                $('.selected-co-host-image').css('display','none');
-                $('.selected-host-h5').text(initial);
+                // $('.guest-img').html(profilePhoto);
+                $('.guest-img .selected-host-h5').show();
+                $('.guest-img .selected-co-host-image').css('display','none');
+                // $('.guest-img').html(profilePhoto);
+
+                $('.guest-img .selected-host-h5').text(initial);
                 var firstinitial = initial.charAt(0);
-                $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                    return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                });
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
             $('.remove_co_host').attr('data-id',selected_co_host);
             $('#remove_co_host_id').val('user-'+selected_co_host);
@@ -4981,11 +4995,13 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
 $(document).on("click",".remove_co_host",function(){
     lengtUSer=0;
     var hostId = $(this).data('id');
-    eventData.co_host = '';
-    eventData.co_host_prefer_by = '';
-    selected_co_host = '';
-    selected_co_host_prefer_by = '';
-    selected_dataId="";
+    // eventData.co_host = '';
+    // eventData.co_host_prefer_by = '';
+    // selected_co_host = '';
+    // selected_co_host_prefer_by = '';
+    // selected_dataId="";
+    co_host_is_selected_close=true;
+
     $('.guest-contacts-wrp').css('display','none');
     $('.guest-contacts-wrp').removeClass('guest-contacts-test');
 
@@ -5003,7 +5019,25 @@ $(document).on("click",".remove_co_host",function(){
 
 $(document).on("click", ".save_event_co_host", function () {
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if (checkedCheckbox.length === 0) {
+        // alert();
+        $('.add_new_co_host').html(`<span class="me-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.1336 12.267L11.8002 2.66699C11.0836 1.37533 10.0919 0.666992 9.00023 0.666992C7.90856 0.666992 6.91689 1.37533 6.20023 2.66699L0.866892 12.267C0.191892 13.492 0.116892 14.667 0.658559 15.592C1.20023 16.517 2.26689 17.0253 3.66689 17.0253H14.3336C15.7336 17.0253 16.8002 16.517 17.3419 15.592C17.8836 14.667 17.8086 13.4837 17.1336 12.267ZM8.37523 6.50033C8.37523 6.15866 8.65856 5.87533 9.00023 5.87533C9.34189 5.87533 9.62523 6.15866 9.62523 6.50033V10.667C9.62523 11.0087 9.34189 11.292 9.00023 11.292C8.65856 11.292 8.37523 11.0087 8.37523 10.667V6.50033ZM9.59189 13.7587C9.55023 13.792 9.50856 13.8253 9.46689 13.8587C9.41689 13.892 9.36689 13.917 9.31689 13.9337C9.26689 13.9587 9.21689 13.9753 9.15856 13.9837C9.10856 13.992 9.05023 14.0003 9.00023 14.0003C8.95023 14.0003 8.89189 13.992 8.83356 13.9837C8.78356 13.9753 8.73356 13.9587 8.68356 13.9337C8.63356 13.917 8.58356 13.892 8.53356 13.8587C8.49189 13.8253 8.45023 13.792 8.40856 13.7587C8.25856 13.6003 8.16689 13.3837 8.16689 13.167C8.16689 12.9503 8.25856 12.7337 8.40856 12.5753C8.45023 12.542 8.49189 12.5087 8.53356 12.4753C8.58356 12.442 8.63356 12.417 8.68356 12.4003C8.73356 12.3753 8.78356 12.3587 8.83356 12.3503C8.94189 12.3253 9.05856 12.3253 9.15856 12.3503C9.21689 12.3587 9.26689 12.3753 9.31689 12.4003C9.36689 12.417 9.41689 12.442 9.46689 12.4753C9.50856 12.5087 9.55023 12.542 9.59189 12.5753C9.74189 12.7337 9.83356 12.9503 9.83356 13.167C9.83356 13.3837 9.74189 13.6003 9.59189 13.7587Z" fill="#E03137" />
+            </svg>
+        </span>
+        <h5>Select your co-host</h5>`);
 
+        eventData.co_host = '';
+        eventData.co_host_prefer_by = '';
+        selected_co_host = '';
+        selected_co_host_prefer_by = '';
+        $('.guest-contacts-wrp').css('display','none');
+        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
+
+        toggleSidebar();
+        return;
+    }
     if (selected_dataId!="") {
     
         // var profilePhoto = checkedCheckbox.data('profile');
@@ -5975,16 +6009,17 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   
+   console.log(isPhonecontact);
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
     }else{
         lengtUSer= 0;
     }
- 
+
+    co_host_is_selected_close=false;
     $('.co_host_search').val('');
-    $('.add_co_host').addClass('active');
+    $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
     get_co_host_list(null,cohostlimit,cohostoffset,false);
     $('#select_event_cohost').css('display','block');  
@@ -6025,6 +6060,18 @@ $(document).on('click','#contact-tab',function(){
     cohostNoMoreData = false;
     cohostphoneOffset=0;
     cohostphoneLimit=10;
+    $('#phone-tab-cantact').removeClass('active');
+    get_co_host_list(null,cohostlimit,cohostoffset,false);
+    $('#select_event_cohost').css('display','block');  
+  if(co_host_is_selected_close==true){
+            $('.guest-contacts-wrp').css('display','none');
+            $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
+            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+
+            if (checkedCheckbox.length > 0) {
+                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+            }
+        }
 })
 
 $(document).on('click','.add_co_host_off',function(){
@@ -6038,6 +6085,10 @@ $(document).on('click','.add_co_host_off',function(){
         selected_co_host_prefer_by = eventData.co_host_prefer_by;
     }else{
         selected_co_host_prefer_by = '';
+    }
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
     }
     toggleSidebar();
 });
@@ -6065,70 +6116,30 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
     }
     console.log(selected_co_host);
     console.log(selected_co_host_prefer_by);
+
     if(selected_co_host == ''){
-       $('.guest-contacts-wrp').css('display','none');
-       $('.guest-contacts-wrp').removeClass('guest-contacts-test');
-
-    }else{
-        // if ($('input[name="guest_list[]"]').is(':checked')) {
-        //     var profilePhoto = $(this).data('profile');
-        //     var user_name = $(this).data('username');
-        //     var profile_or_text = $(this).data("profile_or_text");
-        //     var initial = $(this).data("initial");
-        //     var prefer_by_email = $(this).data('prefer_by');
-        //     // selected_co_host = $(this).val();
-        //     // selected_user_name = user_name;
-        //     // selected_profilePhoto = profilePhoto;        
-        //     // // selected_dataId = selected_co_host;
-        //     // selected_profile_or_text = profile_or_text;
-        //     // selected_prefer_by = prefer_by_email;
-            
-        //     // console.log(profile_or_text);
-        //     if(profile_or_text == '1'){
-        //         $('.selected-co-host-image').show();
-        //         $('.selected-co-host-image').attr('src',profilePhoto);
-        //         $('.selected-host-h5').css('display','none');
-        //     }else{
-        //         $('.selected-host-h5').show();
-        //         $('.selected-co-host-image').css('display','none');
-        //         $('.selected-host-h5').text(initial);
-        //         var firstinitial = initial.charAt(0);
-        //         $('.selected-host-h5').addClass('fontcolor'+firstinitial);
-        //     }
-        // } 
-
-        $('input[name="guest_list[]"]:checked').each(function () {
-            var profilePhoto = $(this).data('profile');
-            var user_name = $(this).data('username');
-            var profile_or_text = $(this).data("profile_or_text");
-            var initial = $(this).data("initial");
-            var prefer_by_email = $(this).data('prefer_by');
-        
-            // Log or process the data
-            console.log("Profile Photo:", profilePhoto);
-            console.log("User Name:", user_name);
-            console.log("Profile or Text:", profile_or_text);
-            console.log("Initial:", initial);
-            console.log("Prefer By Email:", prefer_by_email);
-        
-            // Update UI based on the `profile_or_text` condition
-            if (profile_or_text == '1') {
-                $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src', profilePhoto);
-                $('.selected-host-h5').css('display', 'none');
-            } else {
-                $('.selected-host-h5').show();
-                $('.selected-co-host-image').css('display', 'none');
-                $('.selected-host-h5').text(initial);
-                var firstinitial = initial.charAt(0);
-                $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-            }
-            $('.selected-host-name').text(user_name);
-        });
-        $('.guest-contacts-wrp').css('display','flex');
-        $('.guest-contacts-wrp').addClass('guest-contacts-test');
-
-    }
+        $('.guest-contacts-wrp').css('display','none');
+        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
+     }else{
+         if(co_host_is_selected_close==true){
+             $('.guest-contacts-wrp').css('display','none');
+             $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
+             var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+             if (checkedCheckbox.length > 0) {
+                 checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+             }
+         }else{
+             $('.guest-contacts-wrp').css('display','flex');
+             $('.guest-contacts-wrp').addClass('guest-contacts-test');
+         }
+ 
+     }
+     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+     if (checkedCheckbox.length > 0) {
+         checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+     }
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
@@ -6156,12 +6167,65 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             return;
         }
         $("#loader").hide();
+
+
         if(data.scroll=='true'){
             $(".list_all_invited_user").append(data.view);
         }else{
             $(".list_all_invited_user").html(data.view);
         }
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
+            } else {
+                // $('.guest-img').html(profilePhoto    );
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+    
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+    
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                    return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                });
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
 
+        // if(co_host_is_selected_close==true){
+        //     $('.guest-contacts-wrp').css('display','none');
+        //     $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
+        //     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    
+        //     if (checkedCheckbox.length > 0) {
+        //         checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+        //     } 
+        //     return;  
+        // }
+      
         cohostbusy=false;
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
@@ -6181,11 +6245,24 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
     if(selected_co_host == ''){
        $('.guest-contacts-wrp').css('display','none');
        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
-
     }else{
-        $('.guest-contacts-wrp').css('display','flex');
-        $('.guest-contacts-wrp').addClass('guest-contacts-test');
+        if(co_host_is_selected_close==true){
+            $('.guest-contacts-wrp').css('display','none');
+            $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
+            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
+            if (checkedCheckbox.length > 0) {
+                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+            }
+        }else{
+            $('.guest-contacts-wrp').css('display','flex');
+            $('.guest-contacts-wrp').addClass('guest-contacts-test');
+        }
+
+    }
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
     }
     $.ajax({
         url: base_url+'event/getPhoneContact',
@@ -6219,6 +6296,48 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         }else{
             $(".list_all_contact_user").html(data.view);
         }
+
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
+            } else {
+                // $('.guest-img').html(profilePhoto    );
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+    
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+    
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                    return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                });
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
+
 
         cohostphonebusy=false;
     })

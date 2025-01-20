@@ -91,6 +91,26 @@
                                 <h3 class="text-left month_total_event_hosting">{{$profileData['hosting_count_current_month']}}</h3>
                               </div>
                             </div>
+                            <div class="calender-month-event-stats-inner">
+                              <h5>
+                                <span>
+                                  <svg viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M5.33301 1.58331V3.58331" stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M10.667 1.58331V3.58331" stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M2.33301 6.31H13.6663" stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M14 5.91665V11.5833C14 13.5833 13 14.9166 10.6667 14.9166H5.33333C3 14.9166 2 13.5833 2 11.5833V5.91665C2 3.91665 3 2.58331 5.33333 2.58331H10.6667C13 2.58331 14 3.91665 14 5.91665Z" stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M10.4635 9.38332H10.4694" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M10.4635 11.3833H10.4694" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M7.99666 9.38332H8.00265" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M7.99666 11.3833H8.00265" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M5.52987 9.38332H5.53585" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                  <path d="M5.52987 11.3833H5.53585" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                                </span>
+                                Total Events for 2024
+                              </h5>
+                               <h3 class="text-center">{{$profileData['total_events_of_year']}}</h3>
+                            </div>
                             
                         </div>
                     </div>
@@ -98,7 +118,7 @@
                 </div>
             </div>
           </div>
-          <div class="calender-month-event-stats-inner">
+          {{-- <div class="calender-month-event-stats-inner">
             <h5>
               <span>
                 <svg viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,6 +137,6 @@
               Total Events for 2024
             </h5>
              <h3 class="text-center">{{$profileData['total_events_of_year']}}</h3>
-          </div>
+          </div> --}}
     </div>
 </div>

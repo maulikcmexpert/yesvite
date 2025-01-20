@@ -719,9 +719,11 @@
         @endif
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active add_co_host" id="contact-tab" data-bs-toggle="tab"
-                    data-bs-target="#contact" type="button" role="tab" aria-controls="#contact"
-                    aria-selected="true">Yestive
+                <!-- <button class="nav-link active add_co_host" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                    type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive
+                    Contacts</button> -->
+                    <button class="nav-link add_co_host_tab active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                    type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive
                     Contacts</button>
             </li>
             <li class="nav-item" role="presentation">

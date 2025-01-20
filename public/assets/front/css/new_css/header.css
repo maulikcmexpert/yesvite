@@ -81,12 +81,13 @@ header{
     font-family: var(--SFProDisplay-Bold);
     font-size: 10px;
     line-height: normal;
-    padding: 5px;
+    padding: 3px 5px;
     border: 2px solid var(--white);
     color: var(--white);
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
+    min-width: 20px;
 }
 
 .header-profile-wrp button{
