@@ -6064,11 +6064,11 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             var initial = $(this).data("initial");
             var prefer_by_email = $(this).data('prefer_by');
             // selected_co_host = $(this).val();
-            selected_user_name = user_name;
-            selected_profilePhoto = profilePhoto;        
-            // selected_dataId = selected_co_host;
-            selected_profile_or_text = profile_or_text;
-            selected_prefer_by = prefer_by_email;
+            // selected_user_name = user_name;
+            // selected_profilePhoto = profilePhoto;        
+            // // selected_dataId = selected_co_host;
+            // selected_profile_or_text = profile_or_text;
+            // selected_prefer_by = prefer_by_email;
             
             // console.log(profile_or_text);
             if(profile_or_text == '1'){
