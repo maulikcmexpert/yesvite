@@ -1969,7 +1969,7 @@ $(document).on("blur", "#start-time", function () {
     $('.new_activity').html('');
     $('.activity_total_count').text(0);
     $('#end-time').val('');
-    $('#ac-start-time').val('');
+    $('#ac-end-time').val('');
     $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
 
 
@@ -2011,6 +2011,7 @@ $(document).on("blur", "#ac-start-time", function () {
     $('#end-time').val('');
     $('.activity_total_count').text(0);
     $('#ac-end-time').val('');
+    $('.step_1_activity').html('<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule');
 
 });
 
