@@ -5272,13 +5272,13 @@ $("#YesviteUserAll").on("scroll", function () {
         }
 });
 function get_user(type){
-    if (busyyesvite == false) {
+    // if (busyyesvite == false) {
         busyyesvite = true;
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type="all",search=null,alluserscroll=null);
-    }
+        displayRecords(limityesvite, offsetyesvite,type,search=null,alluserscroll=null);
+    // }
     
 }
 // $('#YesviteUserAll').scroll(function () {
