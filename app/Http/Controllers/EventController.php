@@ -363,7 +363,7 @@ class EventController extends Controller
                         $potluckCategory['id'] = $value->id;
                         $potluckCategory['category'] = $value->category;
                         $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
-                        $potluckCategoy['quantity'] = $value->quantity;
+                        $potluckCategory['quantity'] = $value->quantity;
                         $categories[] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
@@ -1348,7 +1348,6 @@ class EventController extends Controller
         Session::put('category_item', $categories_item);
         Session::save();
         $categories = Session::get('category', []);
-
         $category_quantity = $categories[$category_index]['category_quantity'];
         $category_item = count($categories[$category_index]['item']);
         $total_item = 0;

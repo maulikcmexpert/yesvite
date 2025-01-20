@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="event-detail-logo">
-                <a class="navbar-brand" href="{{(Auth::guard('web')->check())?route('profile'):route('front.home')}}">
+                <a class="navbar-brand" href="{{ Auth::guard('web')->check() ? route('profile') : route('front.home') }}">
                     {{-- <svg width="35" height="36" viewBox="0 0 35 36" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -59,44 +59,87 @@
                             fill="#EA555C" />
                     </svg> --}}
 
-                    <svg width="140" height="65" viewBox="0 0 140 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="128.118" height="36" fill="white"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M115.196 20.3691C115.196 24.4363 117.955 26.896 121.952 26.896C123.963 26.896 126.045 26.0264 127.337 24.1377L124.332 23.0484C123.858 23.593 123.015 23.9708 121.846 23.9708C120.458 23.9708 119.114 23.1274 118.991 21.3881H128.101C128.347 17.0397 125.843 13.9387 121.794 13.9387C118.192 13.9387 115.188 16.4423 115.188 20.3691H115.196ZM121.899 16.741C123.366 16.741 124.552 17.558 124.605 19.148H118.991C119.211 17.4614 120.485 16.741 121.899 16.741Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M105.517 17.1647H107.555V23.1207C107.555 26.0284 108.6 26.5994 111.622 26.5994H114.003V23.5248H112.913C111.701 23.5248 111.323 23.3052 111.323 22.1368V17.1735H114.003V14.2921H111.323V11.2175H107.546V14.2921H105.508V17.1735L105.517 17.1647Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M102.212 12.2452C103.45 12.2452 104.443 11.2262 104.443 10.0139C104.443 8.80161 103.45 7.78259 102.212 7.78259C100.973 7.78259 99.9805 8.77525 99.9805 10.0139C99.9805 11.2525 100.973 12.2452 102.212 12.2452Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M97.9688 17.1632H100.305V26.5979H104.1V14.2819H97.9688V17.1632Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M88.2907 26.5979H92.5337L96.9524 14.2819H93.0608L90.4254 22.6712L87.7988 14.2819H83.8984L88.2907 26.5979Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M77.1942 26.8979C80.4972 26.8979 83.2292 25.4836 83.2292 22.5759C83.2292 20.5115 81.8413 19.6506 78.8633 19.0972L76.5793 18.6755C75.49 18.4735 75.0683 18.1836 75.0683 17.6829C75.0683 17.0416 75.7623 16.6902 77.1064 16.6902C78.222 16.6902 79.1708 16.9362 79.4167 17.8322L82.5967 16.6638C81.6744 14.7312 79.4958 13.9318 77.1327 13.9318C74.0757 13.9318 71.4754 15.2495 71.4754 17.8322C71.4754 19.8966 73.1182 21.1089 75.4988 21.5042L77.7037 21.8731C79.118 22.1191 79.6188 22.4705 79.6188 22.9888C79.6188 23.7618 78.5031 24.1308 77.2821 24.1308C75.8677 24.1308 74.7521 23.63 74.3744 22.5935L71.168 23.7618C72.1079 25.8262 74.3216 26.8891 77.203 26.8891L77.1942 26.8979Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M57.1807 20.3691C57.1807 24.4363 59.939 26.896 63.936 26.896C65.9477 26.896 68.0297 26.0264 69.321 24.1377L66.3167 23.0484C65.8423 23.593 64.999 23.9708 63.8306 23.9708C62.4426 23.9708 61.0986 23.1274 60.9756 21.3881H70.0853C70.3312 17.0397 67.8276 13.9387 63.7779 13.9387C60.1762 13.9387 57.1719 16.4423 57.1719 20.3691H57.1807ZM63.8833 16.741C65.3504 16.741 66.5363 17.558 66.589 19.148H60.9756C61.1952 17.4614 62.469 16.741 63.8833 16.741Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M43.9766 14.2819L48.6939 26.5188L48.5709 26.8439C48.202 27.7838 47.9296 27.8629 46.3396 27.8629H45.5929V30.5949H46.8052C50.0116 30.5949 50.9252 29.7252 52.1199 26.5979L56.8372 14.2819H52.7875L50.4333 21.9772L48.0263 14.2819H43.9766Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.86739 6.81743H8.48087C8.25247 6.79986 8.3491 6.58024 8.3491 6.58024C8.49844 6.22886 8.61264 6.09709 8.42816 5.94775C8.09435 5.68421 7.81324 5.39432 7.58484 5.08686C6.42527 3.5232 6.71516 1.58179 7.79567 0.835103C8.41938 0.404657 9.33298 0.404657 9.95668 0.835103C11.0372 1.58179 11.3183 3.5232 10.1675 5.08686C9.93911 5.39432 9.66679 5.68421 9.32419 5.94775C9.13093 6.09709 9.25391 6.22007 9.40325 6.58024C9.40325 6.58024 9.49988 6.79107 9.27148 6.81743H8.88496H8.86739Z" fill="#ECB015"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9174 9.75155C25.9174 9.04878 26.1634 8.4075 26.5851 7.91557C27.1121 7.28307 27.9028 6.88777 28.79 6.88777C30.3712 6.88777 31.6626 8.17032 31.6626 9.76034H34.6581C34.6581 6.51881 32.0315 3.89221 28.79 3.89221C26.6993 3.89221 24.8721 4.9815 23.8267 6.62423C23.774 6.71207 23.7213 6.79992 23.6686 6.88777C23.1942 7.73987 22.9219 8.71497 22.9219 9.76034H25.9174V9.75155Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M30.3548 22.1554C29.7223 27.5492 25.1455 31.7307 19.5848 31.7307C14.0242 31.7307 9.30681 27.4262 8.78852 21.9182L12.0125 21.3472L11.2658 17.1482L0.00390625 19.1423L0.750599 23.3413L4.57191 22.6649C5.45037 30.1758 11.8368 36 19.5848 36C27.3328 36 34.0004 29.9122 34.6504 22.1554C34.6856 21.7338 34.7031 21.3121 34.7031 20.8817C34.7031 20.4512 34.6856 20.0471 34.6504 19.643H30.3548C30.3987 20.0471 30.425 20.46 30.425 20.8817C30.425 21.3033 30.3987 21.7338 30.3548 22.1554Z" fill="black"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.12968 9.63361C3.36687 9.67753 3.32294 9.83566 3.3493 10.2222C3.3493 10.2222 3.36687 10.4506 3.5777 10.3627L3.72704 10.2837L6.16038 15.2645H6.22187L6.27458 15.2382L3.83245 10.231L3.77975 10.2573L3.98179 10.1607C4.17505 10.0465 4.00814 9.89715 4.00814 9.89715C3.72704 9.64239 3.56891 9.5809 3.67433 9.36129C3.86759 8.98355 3.99936 8.60581 4.06964 8.24564C4.45616 6.36573 3.39322 4.74058 2.11067 4.52096C1.7505 4.45947 1.38154 4.50339 1.01259 4.68787C-0.91124 5.64539 -0.0327782 9.06261 3.12968 9.63361Z" fill="#3ABEEA"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.31286 9.63361C9.07568 9.67753 9.1196 9.83566 9.09325 10.2222C9.09325 10.2222 9.07568 10.4506 8.86485 10.3627L8.71551 10.2837L6.28217 15.2645H6.22068L6.16797 15.2382L8.61009 10.231L8.6628 10.2573L8.46075 10.1607C8.26749 10.0465 8.4344 9.89715 8.4344 9.89715C8.71551 9.64239 8.87363 9.5809 8.76821 9.36129C8.57495 8.98355 8.44318 8.60581 8.37291 8.24564C7.98638 6.36573 9.04932 4.74058 10.3319 4.52096C10.692 4.45947 11.061 4.50339 11.43 4.68787C13.3538 5.64539 12.4753 9.06261 9.31286 9.63361Z" fill="#27B076"/>
-                        <path opacity="0.21" fill-rule="evenodd" clip-rule="evenodd" d="M8.10188 3.07171C8.21608 2.97508 8.46205 3.0805 8.66409 3.3089C8.85735 3.5373 8.92763 3.80084 8.81343 3.89747C8.69923 3.9941 8.45326 3.88868 8.25122 3.66028C8.05795 3.43188 7.98768 3.16835 8.10188 3.07171Z" fill="white"/>
-                        <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M8.51696 4.21295C8.56967 4.16903 8.68387 4.21295 8.77171 4.31837C8.85956 4.42378 8.8947 4.54677 8.84199 4.59069C8.78928 4.63461 8.67508 4.59069 8.58724 4.48528C8.49939 4.37986 8.47304 4.25688 8.51696 4.21295Z" fill="white"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.02755 6.30516H5.64103C5.41263 6.28759 5.50926 6.06797 5.50926 6.06797C5.65859 5.71659 5.77279 5.58482 5.58832 5.43548C5.2545 5.17194 4.97339 4.88205 4.74499 4.57459C3.58543 3.01093 3.87532 1.06953 4.95583 0.322835C5.57953 -0.107612 6.49313 -0.107612 7.11684 0.322835C8.19735 1.06953 8.47846 3.01093 7.32767 4.57459C7.09927 4.88205 6.82695 5.17194 6.48435 5.43548C6.29109 5.58482 6.41407 5.7078 6.56341 6.06797C6.56341 6.06797 6.66004 6.2788 6.43164 6.30516H6.04512H6.02755Z" fill="#ECB015"/>
-                        <path d="M6.32807 10.9709H6.22266V15.2666H6.32807V10.9709Z" fill="#ECB015"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.28799 9.54683C4.88534 10.0476 5.47391 10.4868 5.92193 10.8118C6.17668 11.0051 6.02734 11.172 5.84286 11.6464C5.84286 11.6464 5.72866 11.9275 6.02734 11.9538H6.63348C6.94094 11.9362 6.81796 11.6464 6.81796 11.6464C6.6247 11.172 6.47536 11.0051 6.7389 10.8118C7.18691 10.4868 7.77548 10.0476 8.37283 9.54683C9.26886 8.78257 10.2527 7.86018 10.771 6.79725C12.1766 3.94225 9.48848 -0.0108312 6.3348 2.46643C3.18113 -0.0108312 0.484249 3.94225 1.88979 6.79725C2.40808 7.8514 3.40074 8.78257 4.29677 9.54683H4.28799Z" fill="#EA555C"/>
+                    <svg width="140" height="65" viewBox="0 0 140 65" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <rect width="128.118" height="36" fill="white" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M115.196 20.3691C115.196 24.4363 117.955 26.896 121.952 26.896C123.963 26.896 126.045 26.0264 127.337 24.1377L124.332 23.0484C123.858 23.593 123.015 23.9708 121.846 23.9708C120.458 23.9708 119.114 23.1274 118.991 21.3881H128.101C128.347 17.0397 125.843 13.9387 121.794 13.9387C118.192 13.9387 115.188 16.4423 115.188 20.3691H115.196ZM121.899 16.741C123.366 16.741 124.552 17.558 124.605 19.148H118.991C119.211 17.4614 120.485 16.741 121.899 16.741Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M105.517 17.1647H107.555V23.1207C107.555 26.0284 108.6 26.5994 111.622 26.5994H114.003V23.5248H112.913C111.701 23.5248 111.323 23.3052 111.323 22.1368V17.1735H114.003V14.2921H111.323V11.2175H107.546V14.2921H105.508V17.1735L105.517 17.1647Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M102.212 12.2452C103.45 12.2452 104.443 11.2262 104.443 10.0139C104.443 8.80161 103.45 7.78259 102.212 7.78259C100.973 7.78259 99.9805 8.77525 99.9805 10.0139C99.9805 11.2525 100.973 12.2452 102.212 12.2452Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M97.9688 17.1632H100.305V26.5979H104.1V14.2819H97.9688V17.1632Z" fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M88.2907 26.5979H92.5337L96.9524 14.2819H93.0608L90.4254 22.6712L87.7988 14.2819H83.8984L88.2907 26.5979Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M77.1942 26.8979C80.4972 26.8979 83.2292 25.4836 83.2292 22.5759C83.2292 20.5115 81.8413 19.6506 78.8633 19.0972L76.5793 18.6755C75.49 18.4735 75.0683 18.1836 75.0683 17.6829C75.0683 17.0416 75.7623 16.6902 77.1064 16.6902C78.222 16.6902 79.1708 16.9362 79.4167 17.8322L82.5967 16.6638C81.6744 14.7312 79.4958 13.9318 77.1327 13.9318C74.0757 13.9318 71.4754 15.2495 71.4754 17.8322C71.4754 19.8966 73.1182 21.1089 75.4988 21.5042L77.7037 21.8731C79.118 22.1191 79.6188 22.4705 79.6188 22.9888C79.6188 23.7618 78.5031 24.1308 77.2821 24.1308C75.8677 24.1308 74.7521 23.63 74.3744 22.5935L71.168 23.7618C72.1079 25.8262 74.3216 26.8891 77.203 26.8891L77.1942 26.8979Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M57.1807 20.3691C57.1807 24.4363 59.939 26.896 63.936 26.896C65.9477 26.896 68.0297 26.0264 69.321 24.1377L66.3167 23.0484C65.8423 23.593 64.999 23.9708 63.8306 23.9708C62.4426 23.9708 61.0986 23.1274 60.9756 21.3881H70.0853C70.3312 17.0397 67.8276 13.9387 63.7779 13.9387C60.1762 13.9387 57.1719 16.4423 57.1719 20.3691H57.1807ZM63.8833 16.741C65.3504 16.741 66.5363 17.558 66.589 19.148H60.9756C61.1952 17.4614 62.469 16.741 63.8833 16.741Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M43.9766 14.2819L48.6939 26.5188L48.5709 26.8439C48.202 27.7838 47.9296 27.8629 46.3396 27.8629H45.5929V30.5949H46.8052C50.0116 30.5949 50.9252 29.7252 52.1199 26.5979L56.8372 14.2819H52.7875L50.4333 21.9772L48.0263 14.2819H43.9766Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8.86739 6.81743H8.48087C8.25247 6.79986 8.3491 6.58024 8.3491 6.58024C8.49844 6.22886 8.61264 6.09709 8.42816 5.94775C8.09435 5.68421 7.81324 5.39432 7.58484 5.08686C6.42527 3.5232 6.71516 1.58179 7.79567 0.835103C8.41938 0.404657 9.33298 0.404657 9.95668 0.835103C11.0372 1.58179 11.3183 3.5232 10.1675 5.08686C9.93911 5.39432 9.66679 5.68421 9.32419 5.94775C9.13093 6.09709 9.25391 6.22007 9.40325 6.58024C9.40325 6.58024 9.49988 6.79107 9.27148 6.81743H8.88496H8.86739Z"
+                            fill="#ECB015" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M25.9174 9.75155C25.9174 9.04878 26.1634 8.4075 26.5851 7.91557C27.1121 7.28307 27.9028 6.88777 28.79 6.88777C30.3712 6.88777 31.6626 8.17032 31.6626 9.76034H34.6581C34.6581 6.51881 32.0315 3.89221 28.79 3.89221C26.6993 3.89221 24.8721 4.9815 23.8267 6.62423C23.774 6.71207 23.7213 6.79992 23.6686 6.88777C23.1942 7.73987 22.9219 8.71497 22.9219 9.76034H25.9174V9.75155Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M30.3548 22.1554C29.7223 27.5492 25.1455 31.7307 19.5848 31.7307C14.0242 31.7307 9.30681 27.4262 8.78852 21.9182L12.0125 21.3472L11.2658 17.1482L0.00390625 19.1423L0.750599 23.3413L4.57191 22.6649C5.45037 30.1758 11.8368 36 19.5848 36C27.3328 36 34.0004 29.9122 34.6504 22.1554C34.6856 21.7338 34.7031 21.3121 34.7031 20.8817C34.7031 20.4512 34.6856 20.0471 34.6504 19.643H30.3548C30.3987 20.0471 30.425 20.46 30.425 20.8817C30.425 21.3033 30.3987 21.7338 30.3548 22.1554Z"
+                            fill="black" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M3.12968 9.63361C3.36687 9.67753 3.32294 9.83566 3.3493 10.2222C3.3493 10.2222 3.36687 10.4506 3.5777 10.3627L3.72704 10.2837L6.16038 15.2645H6.22187L6.27458 15.2382L3.83245 10.231L3.77975 10.2573L3.98179 10.1607C4.17505 10.0465 4.00814 9.89715 4.00814 9.89715C3.72704 9.64239 3.56891 9.5809 3.67433 9.36129C3.86759 8.98355 3.99936 8.60581 4.06964 8.24564C4.45616 6.36573 3.39322 4.74058 2.11067 4.52096C1.7505 4.45947 1.38154 4.50339 1.01259 4.68787C-0.91124 5.64539 -0.0327782 9.06261 3.12968 9.63361Z"
+                            fill="#3ABEEA" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M9.31286 9.63361C9.07568 9.67753 9.1196 9.83566 9.09325 10.2222C9.09325 10.2222 9.07568 10.4506 8.86485 10.3627L8.71551 10.2837L6.28217 15.2645H6.22068L6.16797 15.2382L8.61009 10.231L8.6628 10.2573L8.46075 10.1607C8.26749 10.0465 8.4344 9.89715 8.4344 9.89715C8.71551 9.64239 8.87363 9.5809 8.76821 9.36129C8.57495 8.98355 8.44318 8.60581 8.37291 8.24564C7.98638 6.36573 9.04932 4.74058 10.3319 4.52096C10.692 4.45947 11.061 4.50339 11.43 4.68787C13.3538 5.64539 12.4753 9.06261 9.31286 9.63361Z"
+                            fill="#27B076" />
+                        <path opacity="0.21" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8.10188 3.07171C8.21608 2.97508 8.46205 3.0805 8.66409 3.3089C8.85735 3.5373 8.92763 3.80084 8.81343 3.89747C8.69923 3.9941 8.45326 3.88868 8.25122 3.66028C8.05795 3.43188 7.98768 3.16835 8.10188 3.07171Z"
+                            fill="white" />
+                        <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8.51696 4.21295C8.56967 4.16903 8.68387 4.21295 8.77171 4.31837C8.85956 4.42378 8.8947 4.54677 8.84199 4.59069C8.78928 4.63461 8.67508 4.59069 8.58724 4.48528C8.49939 4.37986 8.47304 4.25688 8.51696 4.21295Z"
+                            fill="white" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M6.02755 6.30516H5.64103C5.41263 6.28759 5.50926 6.06797 5.50926 6.06797C5.65859 5.71659 5.77279 5.58482 5.58832 5.43548C5.2545 5.17194 4.97339 4.88205 4.74499 4.57459C3.58543 3.01093 3.87532 1.06953 4.95583 0.322835C5.57953 -0.107612 6.49313 -0.107612 7.11684 0.322835C8.19735 1.06953 8.47846 3.01093 7.32767 4.57459C7.09927 4.88205 6.82695 5.17194 6.48435 5.43548C6.29109 5.58482 6.41407 5.7078 6.56341 6.06797C6.56341 6.06797 6.66004 6.2788 6.43164 6.30516H6.04512H6.02755Z"
+                            fill="#ECB015" />
+                        <path d="M6.32807 10.9709H6.22266V15.2666H6.32807V10.9709Z" fill="#ECB015" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M4.28799 9.54683C4.88534 10.0476 5.47391 10.4868 5.92193 10.8118C6.17668 11.0051 6.02734 11.172 5.84286 11.6464C5.84286 11.6464 5.72866 11.9275 6.02734 11.9538H6.63348C6.94094 11.9362 6.81796 11.6464 6.81796 11.6464C6.6247 11.172 6.47536 11.0051 6.7389 10.8118C7.18691 10.4868 7.77548 10.0476 8.37283 9.54683C9.26886 8.78257 10.2527 7.86018 10.771 6.79725C12.1766 3.94225 9.48848 -0.0108312 6.3348 2.46643C3.18113 -0.0108312 0.484249 3.94225 1.88979 6.79725C2.40808 7.8514 3.40074 8.78257 4.29677 9.54683H4.28799Z"
+                            fill="#EA555C" />
                         <g filter="url(#filter0_d_7906_43769)">
-                        <path d="M88 39.5C88 34.8056 91.8056 31 96.5 31H128V38C128 43.5228 123.523 48 118 48H96.5C91.8056 48 88 44.1944 88 39.5Z" fill="#FF4F84" shape-rendering="crispEdges"/>
-                        <path d="M95.5859 43V35.9541H98.6523C99.9805 35.9541 100.815 36.6377 100.815 37.7217V37.7314C100.815 38.5029 100.229 39.1621 99.4531 39.2646V39.2939C100.435 39.3672 101.143 40.0605 101.143 40.9834V40.9932C101.143 42.2285 100.21 43 98.7061 43H95.5859ZM98.2715 37.0479H97.0605V38.8984H98.0908C98.9209 38.8984 99.3652 38.5518 99.3652 37.9414V37.9316C99.3652 37.3701 98.96 37.0479 98.2715 37.0479ZM98.2666 39.8994H97.0605V41.9014H98.3301C99.1748 41.9014 99.6387 41.5547 99.6387 40.9004V40.8906C99.6387 40.2461 99.1699 39.8994 98.2666 39.8994ZM102.482 43V35.9541H107.15V37.1699H103.957V38.8594H106.97V40.0117H103.957V41.7842H107.15V43H102.482ZM110.399 43V37.1699H108.363V35.9541H113.915V37.1699H111.874V43H110.399ZM113.824 43L116.285 35.9541H118.019L120.475 43H118.927L118.395 41.291H115.904L115.372 43H113.824ZM117.135 37.3213L116.246 40.1875H118.053L117.164 37.3213H117.135Z" fill="white"/>
+                            <path
+                                d="M88 39.5C88 34.8056 91.8056 31 96.5 31H128V38C128 43.5228 123.523 48 118 48H96.5C91.8056 48 88 44.1944 88 39.5Z"
+                                fill="#FF4F84" shape-rendering="crispEdges" />
+                            <path
+                                d="M95.5859 43V35.9541H98.6523C99.9805 35.9541 100.815 36.6377 100.815 37.7217V37.7314C100.815 38.5029 100.229 39.1621 99.4531 39.2646V39.2939C100.435 39.3672 101.143 40.0605 101.143 40.9834V40.9932C101.143 42.2285 100.21 43 98.7061 43H95.5859ZM98.2715 37.0479H97.0605V38.8984H98.0908C98.9209 38.8984 99.3652 38.5518 99.3652 37.9414V37.9316C99.3652 37.3701 98.96 37.0479 98.2715 37.0479ZM98.2666 39.8994H97.0605V41.9014H98.3301C99.1748 41.9014 99.6387 41.5547 99.6387 40.9004V40.8906C99.6387 40.2461 99.1699 39.8994 98.2666 39.8994ZM102.482 43V35.9541H107.15V37.1699H103.957V38.8594H106.97V40.0117H103.957V41.7842H107.15V43H102.482ZM110.399 43V37.1699H108.363V35.9541H113.915V37.1699H111.874V43H110.399ZM113.824 43L116.285 35.9541H118.019L120.475 43H118.927L118.395 41.291H115.904L115.372 43H113.824ZM117.135 37.3213L116.246 40.1875H118.053L117.164 37.3213H117.135Z"
+                                fill="white" />
                         </g>
                         <defs>
-                        <filter id="filter0_d_7906_43769" x="76" y="24" width="64" height="41" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                        <feOffset dy="5"/>
-                        <feGaussianBlur stdDeviation="6"/>
-                        <feComposite in2="hardAlpha" operator="out"/>
-                        <feColorMatrix type="matrix" values="0 0 0 0 0.809701 0 0 0 0 0.14034 0 0 0 0 0.341909 0 0 0 0.24 0"/>
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_7906_43769"/>
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_7906_43769" result="shape"/>
-                        </filter>
+                            <filter id="filter0_d_7906_43769" x="76" y="24" width="64" height="41"
+                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                <feOffset dy="5" />
+                                <feGaussianBlur stdDeviation="6" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix type="matrix"
+                                    values="0 0 0 0 0.809701 0 0 0 0 0.14034 0 0 0 0 0.341909 0 0 0 0.24 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                    result="effect1_dropShadow_7906_43769" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_7906_43769"
+                                    result="shape" />
+                            </filter>
                         </defs>
                     </svg>
-    
+
                 </a>
                 <span>Create New Event</span>
             </div>
@@ -170,7 +213,7 @@
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                   
+
                     <li class="li_design">
                         <div class="dropdown-item drop-down-event-design ">
                             <span>
@@ -278,7 +321,7 @@
             <div class="new-event-sidebar-menu">
                 <ul>
                     <!-- ---for active menu add active class--- -->
-                   
+
                     <li class="li_design">
                         <div class="menu-circle-wrp side-bar-list ">
                             <span class="design-span active"></span>
@@ -319,44 +362,49 @@
             </div>
         </div>
         <div class="guest-wrp side-guest-wrp">
-                <div class="guest-pro">
-                    <div>
-                        <h5>Pro</h5>
-                        <h6>$15.00</h6>
-                    </div>
-                    <a href="#" class="edit-icon">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.05 4.66701L4.20829 11.9087C3.94996 12.1837 3.69996 12.7253 3.64996 13.1003L3.34162 15.8003C3.23329 16.7753 3.93329 17.442 4.89996 17.2753L7.58329 16.817C7.95829 16.7503 8.48329 16.4753 8.74162 16.192L15.5833 8.95034C16.7666 7.70034 17.3 6.27534 15.4583 4.53368C13.625 2.80868 12.2333 3.41701 11.05 4.66701Z"
-                                stroke="black" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667"
-                                stroke="black" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
+            <div class="guest-pro">
+                <div>
+                    <h5>Pro</h5>
+                    <h6>$15.00</h6>
                 </div>
-                <div class="invite-pro">
-                    <div class="invite-left">
-                        <h6 class="invite-count">0</h6>
-                        {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
-                        <input type="hidden" id="event_guest_left_count" />
-                        <p class="invite-left_d"><strong>Invites | {{$user->coins}}</strong> Left</p>
-                        <input type="hidden" id="currentInviteCount" value="0">
-                    </div>
-                    <div class="invite-right">
-                        <span><strong>15</strong>Guests or less</span>
-                    </div>
+                <a href="#" class="edit-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.05 4.66701L4.20829 11.9087C3.94996 12.1837 3.69996 12.7253 3.64996 13.1003L3.34162 15.8003C3.23329 16.7753 3.93329 17.442 4.89996 17.2753L7.58329 16.817C7.95829 16.7503 8.48329 16.4753 8.74162 16.192L15.5833 8.95034C16.7666 7.70034 17.3 6.27534 15.4583 4.53368C13.625 2.80868 12.2333 3.41701 11.05 4.66701Z"
+                            stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="black"
+                            stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+            <div class="invite-pro">
+                <div class="invite-left">
+                    <h6 class="invite-count">0</h6>
+                    {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
+                    <input type="hidden" id="event_guest_left_count" />
+                    <p class="invite-left_d"><strong>Invites | {{ $user->coins }}</strong> Left</p>
+                    <input type="hidden" id="currentInviteCount" value="0">
+                </div>
+                <div class="invite-right">
+                    <span><strong>15</strong>Guests or less</span>
                 </div>
             </div>
+        </div>
     </div>
     <input type="hidden" value="{{ $user->id }}" id="user_id">
     <input type="hidden" id="CheckCuurentStep" value="0">
     <input type="hidden" value="{{ $user->coins }}" id="coins">
-    <input type="hidden" value="{{(isset($eventDetail['id']) && $eventDetail['id'] != NULL)?$eventDetail['id']:''}}" id="event_id">
-    <input type="hidden" value="{{(isset($eventDetail['step']) && $eventDetail['step'] != NULL)?$eventDetail['step']:''}}" id="current_step">
-    <input type="hidden" value="{{(isset($eventDetail) && !empty($eventDetail))?json_encode($eventDetail):''}}" id="eventDetail" />
+    <input type="hidden"
+        value="{{ isset($eventDetail['id']) && $eventDetail['id'] != null ? $eventDetail['id'] : '' }}"
+        id="event_id">
+    <input type="hidden"
+        value="{{ isset($eventDetail['step']) && $eventDetail['step'] != null ? $eventDetail['step'] : '' }}"
+        id="current_step">
+    <input type="hidden" value="{{ isset($eventDetail) && !empty($eventDetail) ? json_encode($eventDetail) : '' }}"
+        id="eventDetail" />
     @include('front.event.step1')
 
     @include('front.event.step2')
@@ -381,41 +429,44 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round"></path>
-                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </button>
             </div>
             {{-- <h3>Create Custom Own Design</h3> --}}
 
             <div class="accordion" id="accordionExample">
-                @if(isset($design_category))
+                @if (isset($design_category))
                     @foreach ($design_category as $key => $category)
-                    @if(isset($category->subcategory) && $category->subcategory->isNotEmpty())    
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse{{$key}}" aria-expanded="false">
-                                <div>
-                                    {{$category->category_name}}
+                        @if (isset($category->subcategory) && $category->subcategory->isNotEmpty())
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse{{ $key }}"
+                                        aria-expanded="false">
+                                        <div>
+                                            {{ $category->category_name }}
+                                        </div>
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </button>
                                 </div>
-                                <i class="fa-solid fa-angle-down"></i>
-                            </button>
-                        </div>
-                        <div id="collapse{{$key}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
-                            style="">
-                            <div class="accordion-body">
-                                <ul>
-                                    @foreach ($category->subcategory as $k => $subcategory)
-                                    @if (isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
-                                    <li class="design-category" data-subcategory="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</li>
-                                    @endif
-                                    @endforeach
-                                </ul>
+                                <div id="collapse{{ $key }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample" style="">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            @foreach ($category->subcategory as $k => $subcategory)
+                                                @if (isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
+                                                    <li class="design-category"
+                                                        data-subcategory="{{ $subcategory->id }}">
+                                                        {{ $subcategory->subcategory_name }}</li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    @endif
+                        @endif
                     @endforeach
                 @endif
             </div>
@@ -433,27 +484,27 @@
                 <h5 class="modal-title" id="exampleModalLabel">Choose this design?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            @if(!session('design_closed'))
-            <div class="alert-box d-flex align-items-center" id="design_tip_bar">
-                <span class="me-3">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
-                            fill="#1C8B5C" />
-                    </svg>
-                </span>
-                <p>Tip: Click text box then move around,can also pinch to resize the font size.</p>
-                <span class="ms-3" id="design_tip_bar_close">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
-            </div>
+            @if (!session('design_closed'))
+                <div class="alert-box d-flex align-items-center" id="design_tip_bar">
+                    <span class="me-3">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
+                                fill="#1C8B5C" />
+                        </svg>
+                    </span>
+                    <p>Tip: Click text box then move around,can also pinch to resize the font size.</p>
+                    <span class="ms-3" id="design_tip_bar_close">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </div>
             @endif
             <div class="modal-body">
                 <div class="modal-choose-design-wrp" id="download_image">
@@ -464,7 +515,8 @@
                 </div>
                 <input type="file" id="image1" accept="image/*" style="display: none" />
                 <div id="imageWrapper2" style="position:fixed; display:none;">
-                    <img id="user_image2" src="" style="height: 100px; width: 100px; background-color: black;" />
+                    <img id="user_image2" src=""
+                        style="height: 100px; width: 100px; background-color: black;" />
                     <div class="resize-handle top-left"></div>
                     <div class="resize-handle top-right"></div>
                     <div class="resize-handle bottom-left"></div>
@@ -500,11 +552,12 @@
             <div class="qty-container">
                 {{-- <button class="qty-btn-minus allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button> --}}
                 <button class="allow_limit_btn_minus" type="button"><i class="fa fa-minus"></i></button>
-                {{$value = (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more'] == "1") 
-                ? $eventDetail['event_setting']['allow_limit'] 
-                : 0;
-            }}
-                <input type="number" name="qty" id="allow_limit_count" value={{$value}} class="input-qty" readonly />
+                {{ $value =
+                    isset($eventDetail['event_setting']) && $eventDetail['event_setting']['allow_for_1_more'] == '1'
+                        ? $eventDetail['event_setting']['allow_limit']
+                        : 0 }}
+                <input type="number" name="qty" id="allow_limit_count" value={{ $value }}
+                    class="input-qty" readonly />
                 <button class="allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button>
                 {{-- <button class="qty-btn-plus allow_limit_btn_plus" type="button"><i class="fa fa-plus"></i></button> --}}
             </div>
@@ -528,27 +581,27 @@
                 </svg>
             </button>
         </div>
-        @if(!session('thankyou_card_closed'))
-        <div class="alert-box d-flex align-items-center" id="thankyou_card_popup">
-            <span class="me-3">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
-                        fill="#1C8B5C" />
-                </svg>
-            </span>
-            <p>You can choose an existing template or create a new template.</p>
-            <span class="ms-3" id="close_thankyou_card_popup">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </span>
-        </div>
+        @if (!session('thankyou_card_closed'))
+            <div class="alert-box d-flex align-items-center" id="thankyou_card_popup">
+                <span class="me-3">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
+                            fill="#1C8B5C" />
+                    </svg>
+                </span>
+                <p>You can choose an existing template or create a new template.</p>
+                <span class="ms-3" id="close_thankyou_card_popup">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
         @endif
         <div class="list_thankyou_card">
 
@@ -642,37 +695,39 @@
             </button>
         </div>
 
-        @if(!session('co_host_closed'))
-        <div class="alert-box d-flex align-items-center" id="co_host_tip">
-            <span class="me-3">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
-                        fill="#1C8B5C" />
-                </svg>
-            </span>
-            <p>Co-Host will get an invite and if they agree they will get access to the event as a host.</p>
-            <span class="ms-3" id="co_host_tip_close">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </span>
-        </div>
+        @if (!session('co_host_closed'))
+            <div class="alert-box d-flex align-items-center" id="co_host_tip">
+                <span class="me-3">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
+                            fill="#1C8B5C" />
+                    </svg>
+                </span>
+                <p>Co-Host will get an invite and if they agree they will get access to the event as a host.</p>
+                <span class="ms-3" id="co_host_tip_close">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
         @endif
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active add_co_host" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                    type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive
+                <button class="nav-link active add_co_host" id="contact-tab" data-bs-toggle="tab"
+                    data-bs-target="#contact" type="button" role="tab" aria-controls="#contact"
+                    aria-selected="true">Yestive
                     Contacts</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="phone-tab-cantact" data-bs-toggle="tab" data-bs-target="#phone" type="button"
-                    role="tab" aria-controls="phone" aria-selected="false">Phone Contacts</button>
+                <button class="nav-link" id="phone-tab-cantact" data-bs-toggle="tab" data-bs-target="#phone"
+                    type="button" role="tab" aria-controls="phone" aria-selected="false">Phone
+                    Contacts</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -703,7 +758,8 @@
 
                 <div class="position-relative">
                     <input type="search" placeholder="Search name" class="form-control co_host_search">
-                    <input type="search" placeholder="Search name" class="form-control phone_co_host_search" style="display:none;">
+                    <input type="search" placeholder="Search name" class="form-control phone_co_host_search"
+                        style="display:none;">
 
                     <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -723,7 +779,8 @@
                 <div class="user-contacts list_all_invited_user" id="select_event_cohost">
                 </div>
 
-                <div class="user-contacts list_all_contact_user" id="select_contact_event_cohost" style="display: none;">
+                <div class="user-contacts list_all_contact_user" id="select_contact_event_cohost"
+                    style="display: none;">
                 </div>
             </div>
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
@@ -775,9 +832,8 @@
                             <div class="text-start">
                                 <h5>Silvia Alegra</h5>
                                 <div>
-                                    <a href="#"><svg class="me-1" width="14"
-                                            height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                    <a href="#"><svg class="me-1" width="14" height="14"
+                                            viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M9.91602 11.9582H4.08268C2.33268 11.9582 1.16602 11.0832 1.16602 9.0415V4.95817C1.16602 2.9165 2.33268 2.0415 4.08268 2.0415H9.91602C11.666 2.0415 12.8327 2.9165 12.8327 4.95817V9.0415C12.8327 11.0832 11.666 11.9582 9.91602 11.9582Z"
                                                 stroke="black" stroke-miterlimit="10" stroke-linecap="round"
@@ -1049,8 +1105,8 @@
         <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="recipient_name" maxlength="30" onkeyup="clearError(this)"
-                        name="recipient_name">
+                    <input class="form-control" type="text" id="recipient_name" maxlength="30"
+                        onkeyup="clearError(this)" name="recipient_name">
                     <label for="email" class="floating-label">Recipients name <span>*</span></label>
                     <span class="sub-con recipient-name-con">0/30</span>
                 </div>
@@ -1099,8 +1155,9 @@
         <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form ">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="categoryName" maxlength="30" onkeyup="clearError(this)"
-                        name="text1" placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
+                    <input class="form-control" type="text" id="categoryName" maxlength="30"
+                        onkeyup="clearError(this)" name="text1"
+                        placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
                     <span class="sub-con pot-cate-name">0/30</span>
                     <label for="categoryName" id="categoryNameError"></label>
                     <input type="hidden" id="hidden_category_name" />
@@ -1110,7 +1167,8 @@
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty" readonly>
+                    <input type="number" name="qty" id="category_quantity" value="1"
+                        class="input-qty" readonly>
                     <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-plus"></i></button>
                 </div>
@@ -1156,8 +1214,9 @@
         <div class="guest-group-name login-form-wrap add-category-new-wrp">
             <form action="" class="registry-form ">
                 <div class="input-form">
-                    <input class="form-control" type="text" id="categoryName" maxlength="30" onkeyup="clearError(this)"
-                        name="text1" placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
+                    <input class="form-control" type="text" id="categoryName" maxlength="30"
+                        onkeyup="clearError(this)" name="text1"
+                        placeholder="Categories: e.g., Appetizers, Salads, Drinks, etc">
                     <span class="sub-con pot-cate-name">0/30</span>
                     <label for="categoryName" id="categoryNameError"></label>
                     <input type="hidden" id="hidden_category_name" />
@@ -1166,7 +1225,8 @@
                 <div class="qty-container">
                     <button class="qty-btn-minus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="category_quantity" value="1" class="input-qty" readonly>
+                    <input type="number" name="qty" id="category_quantity" value="1"
+                        class="input-qty" readonly>
                     <button class="qty-btn-plus-qty" type="button" onclick="clearError()"><i
                             class="fa fa-plus"></i></button>
                 </div>
@@ -1209,32 +1269,298 @@
                     </svg>
                 </button>
             </div>
-            @if(!session('potluck_closed'))
-            <div class="alert-box d-flex align-items-center" id="potluck_tip_bar">
-                <span class="me-3">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
-                            fill="#1C8B5C" />
-                    </svg>
-                </span>
-                <p>First add categories then you can add individual items under those categories.</p>
-                <span class="ms-3" id="potluck_tip">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
-            </div>
+            @if (!session('potluck_closed'))
+                <div class="alert-box d-flex align-items-center" id="potluck_tip_bar">
+                    <span class="me-3">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.99984 0.666992C4.40817 0.666992 0.666504 4.40866 0.666504 9.00033C0.666504 13.592 4.40817 17.3337 8.99984 17.3337C13.5915 17.3337 17.3332 13.592 17.3332 9.00033C17.3332 4.40866 13.5915 0.666992 8.99984 0.666992ZM8.37484 5.66699C8.37484 5.32533 8.65817 5.04199 8.99984 5.04199C9.3415 5.04199 9.62484 5.32533 9.62484 5.66699V9.83366C9.62484 10.1753 9.3415 10.4587 8.99984 10.4587C8.65817 10.4587 8.37484 10.1753 8.37484 9.83366V5.66699ZM9.7665 12.6503C9.72484 12.7587 9.6665 12.842 9.5915 12.9253C9.50817 13.0003 9.4165 13.0587 9.3165 13.1003C9.2165 13.142 9.10817 13.167 8.99984 13.167C8.8915 13.167 8.78317 13.142 8.68317 13.1003C8.58317 13.0587 8.4915 13.0003 8.40817 12.9253C8.33317 12.842 8.27484 12.7587 8.23317 12.6503C8.1915 12.5503 8.1665 12.442 8.1665 12.3337C8.1665 12.2253 8.1915 12.117 8.23317 12.017C8.27484 11.917 8.33317 11.8253 8.40817 11.742C8.4915 11.667 8.58317 11.6087 8.68317 11.567C8.88317 11.4837 9.1165 11.4837 9.3165 11.567C9.4165 11.6087 9.50817 11.667 9.5915 11.742C9.6665 11.8253 9.72484 11.917 9.7665 12.017C9.80817 12.117 9.83317 12.2253 9.83317 12.3337C9.83317 12.442 9.80817 12.5503 9.7665 12.6503Z"
+                                fill="#1C8B5C" />
+                        </svg>
+                    </span>
+                    <p>First add categories then you can add individual items under those categories.</p>
+                    <span class="ms-3" id="potluck_tip">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.33398 1.33301L10.6667 10.6657" stroke="#1C8B5C" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M1.33331 10.6657L10.666 1.33301" stroke="#1C8B5C" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </div>
             @endif
             <div class="potluck-category">
                 <h5>Potluck Categories</h5>
                 <input type="hidden" id="category_count" value="0">
-                
+                @if (isset($eventDetail['podluck_category_list']) && count($eventDetail['podluck_category_list']) > 0)
+                    @foreach ($eventDetail['podluck_category_list'] as $index => $data)
+                        <div class="category-main-dishesh potluckmain-{{ $data['id'] }}">
+                            <div class="category-list">
+                                <div class="list-header">
+                                    <span class="me-1 list-sub-head total-self-bring-{{ $data['id'] }}">2</span>
+                                    <div>
+                                        <h5 class="category_name-{{ $data['id'] }}">{{$data['category']}}</h5>
+                                        <p>Total Commited</p>
+                                    </div>
+                                    <div class="ms-auto d-flex align-items-center ">
+                                        <span
+                                            class="me-2 missing-category-h6-{{ $data['id'] }} missing-category-svg-{{ $data['id'] }}"
+                                            style="color: rgb(52, 192, 92);"><svg width="14" height="14"
+                                                viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                    fill="#23AA26"></path>
+                                            </svg></span>
+                                        <h6 class="me-2 missing-category-h6{{ $data['id'] }}"
+                                            style="color: rgb(52, 192, 92);"><span
+                                                id="missing-category{{ $data['id'] }}">0</span> Missing</h6>
+                                        <input type="hidden" class="total-potluck-category{{ $data['id'] }}"
+                                            value="2">
+                                        <a href="#" class="me-3 add_potluck_item"
+                                            id="potluck{{ $data['id'] }}" data-id="{{ $data['id'] }}"
+                                            style="display: none;">
+                                            <svg width="22" height="22" viewBox="0 0 22 22"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M10.9998 0.166016C5.03067 0.166016 0.166504 5.03018 0.166504 10.9993C0.166504 16.9685 5.03067 21.8327 10.9998 21.8327C16.969 21.8327 21.8332 16.9685 21.8332 10.9993C21.8332 5.03018 16.969 0.166016 10.9998 0.166016ZM15.3332 11.8118H11.8123V15.3327C11.8123 15.7768 11.444 16.1452 10.9998 16.1452C10.5557 16.1452 10.1873 15.7768 10.1873 15.3327V11.8118H6.6665C6.22234 11.8118 5.854 11.4435 5.854 10.9993C5.854 10.5552 6.22234 10.1868 6.6665 10.1868H10.1873V6.66602C10.1873 6.22185 10.5557 5.85352 10.9998 5.85352C11.444 5.85352 11.8123 6.22185 11.8123 6.66602V10.1868H15.3332C15.7773 10.1868 16.1457 10.5552 16.1457 10.9993C16.1457 11.4435 15.7773 11.8118 15.3332 11.8118Z"
+                                                    fill="#F73C71"></path>
+                                            </svg>
+                                        </a>
+                                        <a href="#" type="button" class="delete_potluck_category"
+                                            data-id="{{ $data['id'] }}">
+                                            <svg width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.5 4.98307C14.725 4.70807 11.9333 4.56641 9.15 4.56641C7.5 4.56641 5.85 4.64974 4.2 4.81641L2.5 4.98307"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path
+                                                    d="M7.0835 4.14102L7.26683 3.04935C7.40016 2.25768 7.50016 1.66602 8.9085 1.66602L11.0918 1.66602C12.5002 1.66602 12.6085 2.29102 12.7335 3.05768L12.9168 4.14102"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path
+                                                    d="M15.7082 7.61719L15.1665 16.0089C15.0748 17.3172 14.9998 18.3339 12.6748 18.3339H7.32484C4.99984 18.3339 4.92484 17.3172 4.83317 16.0089L4.2915 7.61719"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path d="M8.6084 13.75H11.3834" stroke="#64748B" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M7.9165 10.416H12.0832" stroke="#64748B" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </a>
+                                        <div class="potlak-edit-wrp dropdown">
+                                            <i class="fa-solid fa-ellipsis-vertical dropdown-toggle" type="button"
+                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"></i>
+                                            <div class="potlak-edit-dropdown dropdown-menu"
+                                                aria-labelledby="dropdownMenuButton1">
+                                                <ul>
+                                                    <li class="edit_category edit_potluck_category-{{ $data['id'] }}"
+                                                        data-id="{{ $data['id'] }}" data-category_name="{{$data['category']}}"
+                                                        data-category_quantity="{{$data['quantity']}}">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M12.5001 18.9577L7.50008 18.9577C2.97508 18.9577 1.04175 17.0243 1.04175 12.4993L1.04175 7.49935C1.04175 2.97435 2.97508 1.04102 7.50008 1.04102L9.16675 1.04102C9.50842 1.04102 9.79175 1.32435 9.79175 1.66602C9.79175 2.00768 9.50842 2.29102 9.16675 2.29102L7.50008 2.29102C3.65841 2.29102 2.29175 3.65768 2.29175 7.49935L2.29175 12.4993C2.29175 16.341 3.65841 17.7077 7.50008 17.7077L12.5001 17.7077C16.3417 17.7077 17.7084 16.341 17.7084 12.4993L17.7084 10.8327C17.7084 10.491 17.9917 10.2077 18.3334 10.2077C18.6751 10.2077 18.9584 10.491 18.9584 10.8327L18.9584 12.4993C18.9584 17.0243 17.0251 18.9577 12.5001 18.9577Z"
+                                                                fill="#94A3B8"></path>
+                                                            <path
+                                                                d="M7.08336 14.7424C6.57503 14.7424 6.10836 14.5591 5.76669 14.2258C5.35836 13.8174 5.18336 13.2258 5.27503 12.6008L5.63336 10.0924C5.70003 9.60911 6.01669 8.98411 6.35836 8.64245L12.925 2.07578C14.5834 0.417448 16.2667 0.417448 17.925 2.07578C18.8334 2.98411 19.2417 3.90911 19.1584 4.83411C19.0834 5.58411 18.6834 6.31745 17.925 7.06745L11.3584 13.6341C11.0167 13.9758 10.3917 14.2924 9.90836 14.3591L7.40003 14.7174C7.29169 14.7424 7.18336 14.7424 7.08336 14.7424ZM13.8084 2.95911L7.24169 9.52578C7.08336 9.68411 6.90003 10.0508 6.86669 10.2674L6.50836 12.7758C6.47503 13.0174 6.52503 13.2174 6.65003 13.3424C6.77503 13.4674 6.97503 13.5174 7.21669 13.4841L9.72503 13.1258C9.94169 13.0924 10.3167 12.9091 10.4667 12.7508L17.0334 6.18411C17.575 5.64245 17.8584 5.15911 17.9 4.70911C17.95 4.16745 17.6667 3.59245 17.0334 2.95078C15.7 1.61745 14.7834 1.99245 13.8084 2.95911Z"
+                                                                fill="#94A3B8"></path>
+                                                            <path
+                                                                d="M16.5416 8.19124C16.4832 8.19124 16.4249 8.18291 16.3749 8.16624C14.1832 7.54957 12.4416 5.80791 11.8249 3.61624C11.7332 3.28291 11.9249 2.94124 12.2582 2.84124C12.5916 2.74957 12.9332 2.94124 13.0249 3.27457C13.5249 5.04957 14.9332 6.45791 16.7082 6.95791C17.0416 7.04957 17.2332 7.39957 17.1416 7.73291C17.0666 8.01624 16.8166 8.19124 16.5416 8.19124Z"
+                                                                fill="#94A3B8"></path>
+                                                        </svg>
+                                                        Edit
+                                                    </li>
+                                                    <li class="delete_potluck_category"
+                                                        data-id="{{ $data['id'] }}">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
+                                                                stroke="#F73C71" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                            </path>
+                                                            <path
+                                                                d="M5.6665 3.31398L5.81317 2.44065C5.91984 1.80732 5.99984 1.33398 7.1265 1.33398H8.87317C9.99984 1.33398 10.0865 1.83398 10.1865 2.44732L10.3332 3.31398"
+                                                                stroke="#F73C71" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                            </path>
+                                                            <path
+                                                                d="M12.5664 6.09375L12.1331 12.8071C12.0598 13.8537 11.9998 14.6671 10.1398 14.6671H5.85977C3.99977 14.6671 3.93977 13.8537 3.86644 12.8071L3.43311 6.09375"
+                                                                stroke="#F73C71" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                            </path>
+                                                            <path d="M6.88672 11H9.10672" stroke="#F73C71"
+                                                                stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                            <path d="M6.3335 8.33398H9.66683" stroke="#F73C71"
+                                                                stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                        </svg>
+                                                        Delete
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @foreach ($data['items'] as $items )     
+                                <div class="list-slide list-slide-{{ $data['id'] }}">
+                                    <div class="accordion accordion-flush" id="accordioncatList">
+                                        <div class="accordion-item green-border">
+                                            <h2 class="accordion-header" id="lumpia">
+                                                <button class="accordion-button">
+                                                    <div class="d-flex align-items-center">
+                                                        <span
+                                                            class="me-1 list-sub-head category-item-total-{{$items['id']}}-{{ $data['id'] }}">{{$items['quantity']}}</span>
+                                                        <div>
+                                                            <h5>{{$items['description']}}</h5>
+                                                            <p>Requested by: {{$items['requested_by']}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ms-auto">
+
+                                                    </div>
+                                                    <div class="ms-auto d-flex align-items-center gap-2">
+                                                        <span class="me-2" id="me-3">
+
+                                                            <svg style="" id="success-svg-{{$items['id']}}-{{ $data['id'] }}"
+                                                                width="14" height="14" viewBox="0 0 14 14"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                    fill="#23AA26"></path>
+                                                            </svg>
+                                                            <svg id="danger-svg-{{$items['id']}}-{{ $data['id'] }}" width="14" height="14"
+                                                                viewBox="0 0 14 14" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                style="display: none;">
+                                                                <path
+                                                                    d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
+                                                                    fill="#F73C71"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <h6 id="h6-{{$items['id']}}-{{ $data['id'] }}">1/1</h6>
+                                                        <span class="accordion-button add-user-list collapsed"
+                                                            data-listid="user-list-{{$items['id']}}-{{ $data['id'] }}" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#lumpia-collapseOne-{{$items['id']}}-{{ $data['id'] }}"
+                                                            aria-expanded="false"
+                                                            aria-controls="lumpia-collapseOne"><i
+                                                                class="fa-solid fa-plus"></i></span>
+                                                    </div>
+                                                </button>
+                                            </h2>
+                                            @foreach ($items['item_carry_users'] as $values )
+                                            <div id="lumpia-collapseOne-{{$items['id']}}-{{ $data['id'] }}"
+                                                class="accordion-collapse collapse show" aria-labelledby="lumpia"
+                                                data-bs-parent="#accordionFlushExample" style="">
+                                                <div class="accordion-body">
+                                                    <div class="accordion-body-content" style="display: none;">
+                                                        <img src="./assets/image/user-img.svg" alt="">
+                                                        <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}</h5>
+                                                        <span class="ms-auto">1</span>
+                                                    </div>
+                                                    <div class="accordion-body-content limits-count"
+                                                        id="user-list-{{$items['id']}}-{{ $data['id'] }}">
+
+                                                        <h5 class="fontcolorA add-item-under-text"> AW</h5>
+                                                        <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}</h5>
+                                                        <div class="qty-container ms-auto">
+                                                            <input type="hidden" class="category-item-key"
+                                                                value="{{$items['id']}}">
+                                                            <input type="hidden" class="category-index-key"
+                                                                value="{{ $data['id'] }}">
+                                                            <input type="hidden" class="category-item-quantity"
+                                                                value="{{$items['quantity']}}">
+                                                            <input type="hidden" class="item-quantity-minus"
+                                                                value="{{$values['quantity']}}">
+                                                            <button class="qty-btnminus" type="button"><i
+                                                                    class="fa fa-minus"></i></button>
+                                                            <input type="number" name="qty" value="{{$values['quantity']}}"
+                                                                class="input-qty" readonly="">
+                                                            <button class="qty-btnplus" type="button"><i
+                                                                    class="fa fa-plus"></i></button>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <a href="#" class="me-3">
+                                                                <svg width="16" height="16"
+                                                                    viewBox="0 0 16 16" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
+                                                                        stroke="#94A3B8" stroke-width="1.5"
+                                                                        stroke-miterlimit="10"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"></path>
+                                                                    <path
+                                                                        d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
+                                                                        stroke="#94A3B8" stroke-width="1.5"
+                                                                        stroke-miterlimit="10"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"></path>
+                                                                </svg>
+                                                            </a>
+                                                            <a href="#" class="delete-self-bring"
+                                                                data-categoryitem="0" data-categoryindex="0"
+                                                                data-itemquantity="1">
+                                                                <svg width="16" height="16"
+                                                                    viewBox="0 0 16 16" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
+                                                                        stroke="#F73C71" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
+                                                                        stroke="#F73C71" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path
+                                                                        d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
+                                                                        stroke="#F73C71" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
+                                                                    </path>
+                                                                    <path d="M6.88666 11H9.10666" stroke="#F73C71"
+                                                                        stroke-width="1.5" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></path>
+                                                                    <path d="M6.33331 8.33398H9.66665"
+                                                                        stroke="#F73C71" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"></path>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            <a href="#" class="listing-arrow">
+                                <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12.9401 1.71289L8.05006 6.60289C7.47256 7.18039 6.52756 7.18039 5.95006 6.60289L1.06006 1.71289"
+                                        stroke="#CBD5E1" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    @endforeach
+                @endif
+
+
                 {{-- <div class="category-main-dishesh"> 
                 <div class="category-list">
                     <div class="list-header">
@@ -1942,7 +2268,8 @@
             </button>
         </div>
         <div class="position-relative">
-            <input type="search" placeholder="Search group names" class="form-control" id="group_toggle_search">
+            <input type="search" placeholder="Search group names" class="form-control"
+                id="group_toggle_search">
             <span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -1957,45 +2284,46 @@
         </div>
         <div class="group_list group_search_list_toggle">
             @foreach ($groups as $group)
-            <div class="group-card added_group{{ $group->id }} listgroups view_members" data-id="{{ $group->id }}">
-                <div class="view_members" data-id="{{ $group->id }}">
-                    <h4>{{ $group->name }}</h4>
-                    <p>{{ $group->group_members_count }} Guests</p>
+                <div class="group-card added_group{{ $group->id }} listgroups view_members"
+                    data-id="{{ $group->id }}">
+                    <div class="view_members" data-id="{{ $group->id }}">
+                        <h4>{{ $group->name }}</h4>
+                        <p>{{ $group->group_members_count }} Guests</p>
+                    </div>
+                    <span class="ms-auto me-3">
+                        <svg width="16" id="delete_group" data-id="{{ $group->id }}" height="17"
+                            viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14 4.48665C11.78 4.26665 9.54667 4.15332 7.32 4.15332C6 4.15332 4.68 4.21999 3.36 4.35332L2 4.48665"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                            </path>
+                            <path
+                                d="M5.66699 3.81301L5.81366 2.93967C5.92033 2.30634 6.00033 1.83301 7.12699 1.83301H8.87366C10.0003 1.83301 10.087 2.33301 10.187 2.94634L10.3337 3.81301"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                            </path>
+                            <path
+                                d="M12.5669 6.59375L12.1336 13.3071C12.0603 14.3537 12.0003 15.1671 10.1403 15.1671H5.86026C4.00026 15.1671 3.94026 14.3537 3.86693 13.3071L3.43359 6.59375"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                            </path>
+                            <path d="M6.88672 11.5H9.10672" stroke="#94A3B8" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M6.33301 8.83301H9.66634" stroke="#94A3B8" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
+                    <span class="view_members" data-id="{{ $group->id }}">
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M5.94043 13.7797L10.2871 9.43306C10.8004 8.91973 10.8004 8.07973 10.2871 7.56639L5.94043 3.21973"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
                 </div>
-                <span class="ms-auto me-3">
-                    <svg width="16" id="delete_group" data-id="{{ $group->id }}" height="17"
-                        viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M14 4.48665C11.78 4.26665 9.54667 4.15332 7.32 4.15332C6 4.15332 4.68 4.21999 3.36 4.35332L2 4.48665"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round">
-                        </path>
-                        <path
-                            d="M5.66699 3.81301L5.81366 2.93967C5.92033 2.30634 6.00033 1.83301 7.12699 1.83301H8.87366C10.0003 1.83301 10.087 2.33301 10.187 2.94634L10.3337 3.81301"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round">
-                        </path>
-                        <path
-                            d="M12.5669 6.59375L12.1336 13.3071C12.0603 14.3537 12.0003 15.1671 10.1403 15.1671H5.86026C4.00026 15.1671 3.94026 14.3537 3.86693 13.3071L3.43359 6.59375"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round">
-                        </path>
-                        <path d="M6.88672 11.5H9.10672" stroke="#94A3B8" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M6.33301 8.83301H9.66634" stroke="#94A3B8" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-                <span class="view_members" data-id="{{ $group->id }}">
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M5.94043 13.7797L10.2871 9.43306C10.8004 8.91973 10.8004 8.07973 10.2871 7.56639L5.94043 3.21973"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-            </div>
             @endforeach
 
         </div>
@@ -2100,7 +2428,8 @@
         <div class="groupsidebar">
             <div class="d-flex align-items-center justify-content-between toggle-wrp">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="me-3 group_toggle_close_btn" onclick="toggleSidebar('sidebar_groups')">
+                    <a href="#" class="me-3 group_toggle_close_btn"
+                        onclick="toggleSidebar('sidebar_groups')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
@@ -2144,7 +2473,8 @@
         <div class="groupsidebar">
             <div class="d-flex align-items-center justify-content-between toggle-wrp">
                 <div class="d-flex align-items-center">
-                    <a href="#" class="me-3 group_toggle_close_btn" onclick="toggleSidebar('sidebar_groups')">
+                    <a href="#" class="me-3 group_toggle_close_btn"
+                        onclick="toggleSidebar('sidebar_groups')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
@@ -2243,13 +2573,13 @@
             </div>
         </div>
         @endforeach --}}
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-</div>
-<div class="new-event-btn">
-    <a href="#" class="cmn-btn add_new_group_member">Add group member</a>
-</div>
+    <div class="new-event-btn">
+        <a href="#" class="cmn-btn add_new_group_member">Add group member</a>
+    </div>
 </div>
 
 <div id="sidebar_list_group_member" class="sidebar setting-side-wrp">
@@ -2330,7 +2660,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myCustomModal" tabindex="-1" aria-labelledby="myCustomModalLabel" aria-hidden="true">
+<div class="modal fade" id="myCustomModal" tabindex="-1" aria-labelledby="myCustomModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -2376,25 +2707,44 @@
 
 
 
-<input type="hidden" id="eventEditId" value="{{$eventDetail['eventeditId']}}">
+<input type="hidden" id="eventEditId" value="{{ $eventDetail['eventeditId'] }}">
 @php
-    $thankuCardId =  (isset($eventDetail['greeting_card_list']) &&   count($eventDetail['greeting_card_list'])>0) ? $eventDetail['greeting_card_list'][0]:"";
-    $cohostId =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['id']:"";
-    $app_user =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['app_user']:"";
-    $cohostpreferby =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['prefer_by']:"";
-    $cohostprofile =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['profile']:"";
-    $cohostname =  (isset($eventDetail['co_host_list']) &&   count($eventDetail['co_host_list'])>0) ? $eventDetail['co_host_list'][0]['profile']:"";
-    $giftRegestryData = (isset($eventDetail['gift_registry_list']) && count($eventDetail['gift_registry_list']) > 0) 
-    ? $eventDetail['gift_registry_list'] 
-    : null;
+    $thankuCardId =
+        isset($eventDetail['greeting_card_list']) && count($eventDetail['greeting_card_list']) > 0
+            ? $eventDetail['greeting_card_list'][0]
+            : '';
+    $cohostId =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['id']
+            : '';
+    $app_user =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['app_user']
+            : '';
+    $cohostpreferby =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['prefer_by']
+            : '';
+    $cohostprofile =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['profile']
+            : '';
+    $cohostname =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['profile']
+            : '';
+    $giftRegestryData =
+        isset($eventDetail['gift_registry_list']) && count($eventDetail['gift_registry_list']) > 0
+            ? $eventDetail['gift_registry_list']
+            : null;
 @endphp
-<input type="hidden" id="cohostpreferby" value="{{$cohostpreferby}}">
+<input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">
 <input type="hidden" name="giftRegestryData[]" value="{{ json_encode($giftRegestryData) }}">
-<input type="hidden" id="cohostprofile" value="{{$cohostprofile}}">
-<input type="hidden" id="app_user" value="{{$app_user}}">
-<input type="hidden" id="cohostId" value="{{$cohostId}}">
-<input type="hidden" id="thankuCardId" value="{{$thankuCardId}}">
-<input type="hidden" id="inviteTotalCount" value="{{$eventDetail['inviteCount']}}">
+<input type="hidden" id="cohostprofile" value="{{ $cohostprofile }}">
+<input type="hidden" id="app_user" value="{{ $app_user }}">
+<input type="hidden" id="cohostId" value="{{ $cohostId }}">
+<input type="hidden" id="thankuCardId" value="{{ $thankuCardId }}">
+<input type="hidden" id="inviteTotalCount" value="{{ $eventDetail['inviteCount'] }}">
 
 
 
