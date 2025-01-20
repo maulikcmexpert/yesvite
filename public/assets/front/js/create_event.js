@@ -5277,7 +5277,7 @@ function get_user(type){
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type,type="all",null);
+        displayRecords(limityesvite, offsetyesvite,type="all");
     }
     
 }
@@ -5326,13 +5326,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group',null);
+            displayRecords(limityesvite, offsetyesvite,'group');
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,scroll) {
+function displayRecords(lim, off,type,search = null,scroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5399,7 +5399,7 @@ $(document).on('keyup','.search_user_ajax',function(){
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','block');
-        displayRecords(limityesvite,offsetyesvite,'all',search_name,null);
+        displayRecords(limityesvite,offsetyesvite,'all',search_name);
         // $('#loader').css('display','none');
     }, 750);
 })
