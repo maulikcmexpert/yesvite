@@ -6379,8 +6379,15 @@ function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
             isSetSession=1;
             var currentInviteCount = parseInt($('#currentInviteCount').val())
             const coins =  $("#coins").val();
+           
             if(currentInviteCount >= coins){
                 $('.user_choice').prop('disabled',true);
+            }
+            if(html.view==""){
+                $("#YesviteContactsAll").html("No Data Found");
+                $('#loader').css('display','none');
+                return;
+
             }
             if(type=="all"&&html.scroll=='false'){
                 $("#YesviteContactsAll").html(html.view);
