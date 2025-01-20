@@ -5277,7 +5277,7 @@ function get_user(type){
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type,type="all");
+        displayRecords(limityesvite, offsetyesvite,type="all",search=null,alluserscroll=null);
     }
     
 }
