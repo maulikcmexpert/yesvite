@@ -5996,7 +5996,7 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   
+   console.log(1);
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
