@@ -5257,7 +5257,6 @@ var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
 $("#YesviteUserAll").on("scroll", function () {
-    var alluserscroll="1";
     if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
@@ -5267,7 +5266,7 @@ $("#YesviteUserAll").on("scroll", function () {
             offsetyesvite += limityesvite;
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
-                displayRecords(limityesvite, offsetyesvite,type="all",alluserscroll);
+                displayRecords(limityesvite, offsetyesvite,type="all");
             }
         }
 });
@@ -5277,7 +5276,7 @@ function get_user(type){
         page = 3;
         limityesvite=10;
         offsetyesvite=0;
-        displayRecords(limityesvite, offsetyesvite,type,type="all","");
+        displayRecords(limityesvite, offsetyesvite,type,type="all");
     }
     
 }
@@ -5327,13 +5326,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group',"");
+            displayRecords(limityesvite, offsetyesvite,'group');
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll) {
+function displayRecords(lim, off,type,search = null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5358,13 +5357,6 @@ function displayRecords(lim, off,type,search = null,alluserscroll) {
                 $('.user_choice').prop('disabled',true);
             }
             console.log(html);
-            if(html==""&&alluserscroll==""){
-                $("#YesviteUserAll").html('No data found');
-            //    NoMoreDataYesviteAll=true;
-               $('#loader').css('display','none');
-            
-               return;
-            }
             if(html==""){
                 // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
@@ -5400,7 +5392,7 @@ $(document).on('keyup','.search_user_ajax',function(){
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','block');
-        displayRecords(limityesvite,offsetyesvite,'all',search_name,"");
+        displayRecords(limityesvite,offsetyesvite,'all',search_name);
         // $('#loader').css('display','none');
     }, 750);
 })
