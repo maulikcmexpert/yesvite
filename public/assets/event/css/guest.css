@@ -434,6 +434,10 @@
     max-height: calc(100vh - 410px);
 }
 
+#sidebar_add_co_host:has(.guest-contacts-wrp) .list_all_invited_user{
+    max-height: calc(100vh - 500px);
+}
+
 #sidebar_add_co_host .list_all_invited_user{
     overflow: hidden;
     overflow-y: scroll;
@@ -776,6 +780,12 @@
         overflow: hidden;
         overflow-y: scroll;
         max-height: calc(100vh - 500px);
+    }
+
+    #sidebar_add_co_host:has(.alert-box) .list_all_invited_user {
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 600px);
     }
 
     #sidebar_add_co_host .list_all_contact_user {
