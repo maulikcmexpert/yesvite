@@ -6196,23 +6196,6 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             return;
         }
         $("#loader").hide();
-        if(data.scroll=='true'){
-            $(".list_all_invited_user").append(data.view);
-        }else{
-            $(".list_all_invited_user").html(data.view);
-        }
-
-
-        if(co_host_is_selected_close==true){
-            $('.guest-contacts-wrp').css('display','none');
-            $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
-            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
-    
-            if (checkedCheckbox.length > 0) {
-                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-            } 
-            return;  
-        }
         $('input[name="guest_list[]"]:checked').each(function () {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
@@ -6254,6 +6237,24 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             $('.selected-host-name').text(user_name);
         });
 
+        if(data.scroll=='true'){
+            $(".list_all_invited_user").append(data.view);
+        }else{
+            $(".list_all_invited_user").html(data.view);
+        }
+
+
+        if(co_host_is_selected_close==true){
+            $('.guest-contacts-wrp').css('display','none');
+            $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
+            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    
+            if (checkedCheckbox.length > 0) {
+                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+            } 
+            return;  
+        }
+      
         cohostbusy=false;
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
