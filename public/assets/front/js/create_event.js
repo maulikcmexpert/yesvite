@@ -5267,7 +5267,7 @@ $("#YesviteUserAll").on("scroll", function () {
             // var type="yesvite";
             if(NoMoreDataYesviteAll==false ){
                 var alluserscroll="1";
-                displayRecords(limityesvite, offsetyesvite,type="all",alluserscroll);
+                displayRecords(limityesvite, offsetyesvite,type="all");
             }
         }
 });
@@ -5332,7 +5332,7 @@ $('#groupUsers').scroll(function () {
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll=null) {
+function displayRecords(lim, off,type,search = null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
