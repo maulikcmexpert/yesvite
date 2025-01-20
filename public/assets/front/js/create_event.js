@@ -5040,8 +5040,8 @@ $(document).on("click", ".save_event_co_host", function () {
         if($('#phone-tab-cantact').hasClass('active')){
             get_contact_status='contacts';
         }
-        $('.save_event_co_host').attr('data-contact',get_contact_status);
-        
+        $('.add_co_host').attr('data-contact', get_contact_status);
+
         eventData.co_host = '';
         eventData.co_host_prefer_by = '';
         selected_co_host = '';
