@@ -5823,7 +5823,7 @@ $(document).on('keyup','#group_search_ajax',function () {
     })
         .done(function (data) {
             console.log(data.html);
-            if (data.html == " ") {
+            if (data.html == "") {
                 $(".group_search_list").html("No data found");
                 $("#loader").hide();
                 return;
