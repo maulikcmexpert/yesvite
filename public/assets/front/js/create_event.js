@@ -4914,7 +4914,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 $('.selected-co-host-image').css('display','none');
                 // $('.guest-img').html(profilePhoto);
 
-                $('.selected-host-h5').text(initial);
+                $('.guest-img .selected-host-h5').text(initial);
                 var firstinitial = initial.charAt(0);
                 // $('.selected-host-h5').removeClass(function (index, className) {
                 //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
@@ -6184,7 +6184,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 // $('.guest-img').html(profilePhoto    );
                 $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display', 'none');
-                $('.selected-host-h5').text(initial);
+                $('.guest-img .selected-host-h5').text(initial);
                 var firstinitial = initial.charAt(0);
 
                 // $('.selected-host-h5').removeClass(function (index, className) {
