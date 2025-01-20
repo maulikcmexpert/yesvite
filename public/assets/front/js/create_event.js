@@ -6046,18 +6046,21 @@ $(document).on('click','#contact-tab',function(){
     cohostNoMoreData = false;
     cohostphoneOffset=0;
     cohostphoneLimit=10;
-//   if(co_host_is_selected_close==true){
-//             $('.guest-contacts-wrp').css('display','none');
-//             $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
-//             var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    $('#phone-tab-cantact').removeClass('active');
+    get_co_host_list(null,cohostlimit,cohostoffset,false);
+    $('#select_event_cohost').css('display','block');  
+  if(co_host_is_selected_close==true){
+            $('.guest-contacts-wrp').css('display','none');
+            $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
+            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
-//             if (checkedCheckbox.length > 0) {
-//                 checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-//             }
-//         }else{
-//             $('.guest-contacts-wrp').css('display','flex');
-//             $('.guest-contacts-wrp').addClass('guest-contacts-test');
-//         }
+            if (checkedCheckbox.length > 0) {
+                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+            }
+        }else{
+            $('.guest-contacts-wrp').css('display','flex');
+            $('.guest-contacts-wrp').addClass('guest-contacts-test');
+        }
 })
 
 $(document).on('click','.add_co_host_off',function(){
