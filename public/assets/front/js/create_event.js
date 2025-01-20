@@ -5633,7 +5633,7 @@ $(document).on('click','.free_plan',function () {
  });
  
  $(document).on('change', 'input[name="gift_registry[]"]',function() {
-    var selected_gift = [];
+
     // if($(this).is(':checked')){
     //     var registry_name=$(this).data('item');
     //     var registry_link=$(this).data('registry');
