@@ -5002,7 +5002,9 @@ $(document).on("click",".remove_co_host",function(){
 
 $(document).on("click", ".save_event_co_host", function () {
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
-
+    if (checkedCheckbox.length === 0) {
+        alert('Please select at least one guest.');
+    }
     if (selected_dataId!="") {
     
         // var profilePhoto = checkedCheckbox.data('profile');
