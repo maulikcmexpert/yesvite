@@ -13,6 +13,16 @@ var lengtUSer= 0;
 var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
+var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
+var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
+giftRegestryData.forEach(function (item) {
+    selected_gift.push({
+    gr_id: item,
+});
+});
+if(giftRegestryDataRaw!=null){
+    eventData.gift_registry_data=selected_gift;
+}
 var selected_profile_or_text = "";
 var selected_prefer_by = '';
 var eventEditId = $("#eventEditId").val();
