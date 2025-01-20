@@ -4909,11 +4909,12 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 $('.selected-co-host-image').attr('src',profilePhoto);
                 $('.selected-host-h5').css('display','none');
             }else{
+                $('.guest-img').html(profilePhoto);
                 $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display','none');
-                $('.selected-host-h5').text(initial);
-                var firstinitial = initial.charAt(0);
-                $('.selected-host-h5').addClass('fontcolor'+firstinitial);
+                // $('.selected-host-h5').text(initial);
+                // var firstinitial = initial.charAt(0);
+                // $('.selected-host-h5').addClass('fontcolor'+firstinitial);
             }
             $('.remove_co_host').attr('data-id',selected_co_host);
             $('#remove_co_host_id').val('user-'+selected_co_host);
@@ -6084,34 +6085,34 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
         //     }
         // } 
 
-        $('input[name="guest_list[]"]:checked').each(function () {
-            var profilePhoto = $(this).data('profile');
-            var user_name = $(this).data('username');
-            var profile_or_text = $(this).data("profile_or_text");
-            var initial = $(this).data("initial");
-            var prefer_by_email = $(this).data('prefer_by');
+        // $('input[name="guest_list[]"]:checked').each(function () {
+        //     var profilePhoto = $(this).data('profile');
+        //     var user_name = $(this).data('username');
+        //     var profile_or_text = $(this).data("profile_or_text");
+        //     var initial = $(this).data("initial");
+        //     var prefer_by_email = $(this).data('prefer_by');
         
-            // Log or process the data
-            console.log("Profile Photo:", profilePhoto);
-            console.log("User Name:", user_name);
-            console.log("Profile or Text:", profile_or_text);
-            console.log("Initial:", initial);
-            console.log("Prefer By Email:", prefer_by_email);
+        //     // Log or process the data
+        //     console.log("Profile Photo:", profilePhoto);
+        //     console.log("User Name:", user_name);
+        //     console.log("Profile or Text:", profile_or_text);
+        //     console.log("Initial:", initial);
+        //     console.log("Prefer By Email:", prefer_by_email);
         
-            // Update UI based on the `profile_or_text` condition
-            if (profile_or_text == '1') {
-                $('.selected-co-host-image').show();
-                $('.selected-co-host-image').attr('src', profilePhoto);
-                $('.selected-host-h5').css('display', 'none');
-            } else {
-                $('.selected-host-h5').show();
-                $('.selected-co-host-image').css('display', 'none');
-                $('.selected-host-h5').text(initial);
-                var firstinitial = initial.charAt(0);
-                $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-            }
-            $('.selected-host-name').text(user_name);
-        });
+        //     // Update UI based on the `profile_or_text` condition
+        //     if (profile_or_text == '1') {
+        //         $('.selected-co-host-image').show();
+        //         $('.selected-co-host-image').attr('src', profilePhoto);
+        //         $('.selected-host-h5').css('display', 'none');
+        //     } else {
+        //         $('.selected-host-h5').show();
+        //         $('.selected-co-host-image').css('display', 'none');
+        //         $('.selected-host-h5').text(initial);
+        //         var firstinitial = initial.charAt(0);
+        //         $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+        //     }
+        //     $('.selected-host-name').text(user_name);
+        // });
         $('.guest-contacts-wrp').css('display','flex');
         $('.guest-contacts-wrp').addClass('guest-contacts-test');
 
@@ -6148,6 +6149,36 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
         }else{
             $(".list_all_invited_user").html(data.view);
         }
+
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.selected-co-host-image').show();
+                $('.selected-co-host-image').attr('src', profilePhoto);
+                $('.selected-host-h5').css('display', 'none');
+            } else {
+                $('.guest-img').html(profilePhoto);
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                // $('.selected-host-h5').text(initial);
+                // var firstinitial = initial.charAt(0);
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
 
         cohostbusy=false;
     })
