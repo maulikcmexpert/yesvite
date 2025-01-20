@@ -6384,7 +6384,7 @@ function displayPhoneContacts(type ='all',lim,off,search_name,scroll) {
                 $('.user_choice').prop('disabled',true);
             }
             if(html.view==""){
-                $("#YesviteContactsAll").html("No Data Found");
+                $("#YesviteContactsAll").html("No data found");
                 $('#loader').css('display','none');
                 return;
 

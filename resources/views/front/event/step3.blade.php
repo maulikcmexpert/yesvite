@@ -486,7 +486,7 @@
                                 </span>
                             </div>
                             <div class="user-contacts group_list group_search_list">
-                                @if($groups==""||empty($groups))
+                                @if($groups->isEmpty())
                                      No data found
                                 @else
                                 @foreach ($groups as $group)
