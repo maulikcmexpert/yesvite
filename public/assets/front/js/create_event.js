@@ -4915,13 +4915,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             selected_co_host = $(this).val();
 
       
-            if($('#contact-tab').hasClass('active')){
-                get_contact_status='yesvite';
-            }
-
-            if($('#phone-tab-cantact').hasClass('active')){
-                get_contact_status='contacts';
-            }
+            
 
             selected_user_name = user_name;
             selected_profilePhoto = profilePhoto;        
@@ -5039,6 +5033,15 @@ $(document).on("click", ".save_event_co_host", function () {
         </span>
         <h5>Select your co-host</h5>`);
 
+        if($('#contact-tab').hasClass('active')){
+            get_contact_status='yesvite';
+        }
+
+        if($('#phone-tab-cantact').hasClass('active')){
+            get_contact_status='contacts';
+        }
+        $('.save_event_co_host').attr('data-contact',get_contact_status);
+        
         eventData.co_host = '';
         eventData.co_host_prefer_by = '';
         selected_co_host = '';
