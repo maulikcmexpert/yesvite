@@ -2926,6 +2926,27 @@ $(document).on("click", "#close_createEvent", function () {
                 console.log("AJAX error: " + error);
             },
         });
+    }else{
+        $.ajax({
+            url: base_url + "event/store",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: eventData,
+            success: function (response) {
+                if(response==1){ 
+                    window.location.href="home";
+                    toastr.success('Event Saved as Draft');
+                    setTimeout(function () {
+                        $('#loader').css('display', 'none');
+                    }, 4000);                }
+
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+            },
+        });
     }
 
    
