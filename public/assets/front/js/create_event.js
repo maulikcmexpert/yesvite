@@ -6065,10 +6065,16 @@ $('#phone-tab-cantact').removeClass('active');
     co_host_is_selected_close=false;
     $('.co_host_serach').val('');
     $('.phone_co_host_search').val('');
-        $('.add_co_host_tab').addClass('active');
+    $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
     get_co_host_list(null,cohostlimit,cohostoffset,false,1);
     $('#select_event_cohost').css('display','block');  
+    $('.list_all_contact_user').css('display','none');  
+    $('.list_all_yesvite_user').css('display','block');  
+
+    $('.co_host_serach').css('display','block');
+    $('.phone_co_host_search').css('display','none');
+
 
     setTimeout(() => {
         toggleSidebar('sidebar_add_co_host');
