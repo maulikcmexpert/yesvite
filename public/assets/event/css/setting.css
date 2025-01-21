@@ -187,7 +187,7 @@
     padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .limits-count h5 {
@@ -600,7 +600,7 @@
 }
 
 .list-slide .accordion-body-content:last-child {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 .list-slide .accordion-body-content .qty-container button {
