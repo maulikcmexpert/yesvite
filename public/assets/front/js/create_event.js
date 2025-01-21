@@ -6511,10 +6511,9 @@ $("#select_event_cohost").on("scroll", function () {
         //     var scroll=true;
         //     get_co_host_list(search_name=null,cohostlimit,cohostoffset,scroll);
         //     }
-        if (scrollTop > previousScrollTop) {
+        // if (scrollTop > previousScrollTop) {
         if (scrollTop + elementHeight >= scrollHeight + 2) { 
            
-            
             cohostbusy = true;
             cohostoffset += cohostlimit;
             var type = "yesvite";
@@ -6523,8 +6522,8 @@ $("#select_event_cohost").on("scroll", function () {
                 get_co_host_list(search_name = null, cohostlimit, cohostoffset, scroll);
             }
         }
-    }
-    previousScrollTop = scrollTop;
+    // }
+    // previousScrollTop = scrollTop;
 });
 
 // var cohostphoneOffset=0;
