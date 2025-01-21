@@ -3032,6 +3032,7 @@ function savePage1Data(close = null) {
                 .css("display", "block")
                 .css("color", "red")
                 .text("RSVP by Date : Please select RSVP date");
+                rsvp_by_date_set = '1';
             return;
         } else {
             $("#event-rsvpby-error").css("display", "none");
