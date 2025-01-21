@@ -90,7 +90,7 @@ class PaymentController extends Controller
             if (!$sessionId) {
                 echo "invalid1";
                 die;
-                return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
+                //return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
 
@@ -101,7 +101,7 @@ class PaymentController extends Controller
             if (!$coins) {
                 echo $coins;
                 die;
-                return redirect()->route('checkout')->withErrors(['error' => 'Invalid price ID']);
+                //return redirect()->route('checkout')->withErrors(['error' => 'Invalid price ID']);
             }
             // Fetch the session details from Stripe
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
@@ -162,11 +162,12 @@ class PaymentController extends Controller
                 return redirect()->route('checkout')->withErrors(['error' => 'Payment failed']);
             }
         } catch (\Exception $e) {
+            dd($e);
             // Log the error for debugging purposes
             //\Log::error('Payment success error: ' . $e->getMessage());
 
             // Redirect with an error message
-            return redirect()->route('checkout')->withErrors(['error' => 'An error occurred during payment processing']);
+            //return redirect()->route('checkout')->withErrors(['error' => 'An error occurred during payment processing']);
         }
     }
 
