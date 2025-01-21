@@ -5753,7 +5753,7 @@ $(document).on('click','.free_plan',function () {
         });
     });
     eventData.gift_registry_data=selected_gift;
-    // console.log(eventData);
+    console.log(eventData);
 
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
@@ -5774,6 +5774,8 @@ $(document).on('click','.free_plan',function () {
         });
         eventData.gift_registry_data = selected_gift;
     }
+    console.log(eventData);
+    
 });
 
 $(document).on('click','.brand-progress',function () { 
