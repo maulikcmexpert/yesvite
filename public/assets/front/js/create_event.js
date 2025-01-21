@@ -327,7 +327,9 @@ $(document).on("click", ".add_new_group_member", function () {
             success: function (response) {
                 if (response.status == "1") {
                     var grplth = $('.group_list .listgroups').length;
-                    console.log(grplth);
+                    if(grplth==0){
+                        $(".group_list").html('');    
+                    }
                     $(".group_list").append(response.view);
                  
                     
