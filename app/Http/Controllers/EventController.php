@@ -112,6 +112,7 @@ class EventController extends Controller
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $eventDetail = [];
+        $eventDetail['user_id'] = $id;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
         $eventDetail['inviteCount'] = 0;
 
@@ -358,19 +359,24 @@ class EventController extends Controller
                     // dd($categories);
                     $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     $categories_item = Session::get('category_item', []);
+                   
                     foreach ($eventpotluckData as  $key => $value) {
 
                         $potluckCategory['id'] = $value->id;
                         $potluckCategory['category'] = $value->category;
                         $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
                         $potluckCategory['quantity'] = $value->quantity;
+
                         $categories[] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
                         ];
                         // session()->put('category', $categories);
                         $potluckCategory['items'] = [];
+                        $categoryQuantity=0;
+                        $remainingQnt=0;
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
+                            
                             $itemData = [];
                             foreach ($value->event_potluck_category_item as $itemValue) {
                                 $itemData = [
@@ -379,7 +385,7 @@ class EventController extends Controller
                                     'self_bring_qty' => $itemValue->self_bring_item==1?$itemValue->quantity:0,
                                     'quantity' => $itemValue->quantity,
                                 ];
-                               
+                                $itmquantity = 0;
                                 $categories[$value->id]['item'][$itemValue->id]=$itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
@@ -392,6 +398,7 @@ class EventController extends Controller
                                 $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
                                 $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
                                 $potluckItem['spoken_quantity'] =  $spoken_for;
+                                
                                 $potluckItem['item_carry_users'] = [];
 
                                 foreach ($itemValue->user_potluck_items as $itemcarryUser) {
@@ -403,23 +410,30 @@ class EventController extends Controller
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
+                                    $itmquantity = $itmquantity +  $itemcarryUser->quantity;
+                                    $categoryQuantity = $categoryQuantity+$itemcarryUser->quantity;
                                 }
+                                $remainingQnt = $itemValue->quantity;
+                                $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckCategory['items'][] = $potluckItem;
                             }
                         }
+                        $remainingQnt= $remainingQnt - $categoryQuantity;
+                        $potluckCategory['remainingQnt']=$remainingQnt;
+                        $potluckCategory['categoryQuantity']=$categoryQuantity;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                     // Update session after the loop
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd(Session::get('category'));
+                    // dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {
             $title = 'Create Event';
         }
-        // dd($eventDetail);
+        
         $page = 'front.create_event';
 
 
@@ -516,9 +530,7 @@ class EventController extends Controller
         }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
-            $rsvp_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date);
-
-            $rsvp_by_date = $rsvp_date->format('Y-m-d');
+            $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
             // $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
             $rsvp_by_date_set = '1';
         } else {

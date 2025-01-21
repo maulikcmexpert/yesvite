@@ -285,6 +285,11 @@ $(document).on("click", "#delete_group", function () {
         success: function (response) {
             if (response.status == "1") {
                 $(".added_group" + group_id).remove();
+                
+                var grplth = $('.group_list .listgroups').length;
+                    if(grplth==0){
+                        $(".group_list").html('No data found');    
+                    }
                 var sliderIndex = $('.group-card.view_members[data-id="' + group_id + '"]')
                 .closest('.swiper-slide') // Find the nearest swiper-slide parent
                 .attr('data-swiper-slide-index'); // Get its data-swiper-slide-index attribute
@@ -326,8 +331,13 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             success: function (response) {
                 if (response.status == "1") {
+                    var grplth = $('.group_list .listgroups').length;
+                    if(grplth==0){
+                        $(".group_list").html('');    
+                    }
                     $(".group_list").append(response.view);
-
+                 
+                    
                     var newItem = `
                         <div class="swiper-slide">
                             <div class="group-card view_members" data-id="${response.data.group_id}">
@@ -1017,6 +1027,7 @@ $("#end_time").on("change", function () {
         $(".end_time").show();
         $(".ac-end-time").show();
     } else {
+        $('.end-time-create').val('');
         $(".end_time").hide();
         $(".ac-end-time").hide();
     }
@@ -1026,6 +1037,7 @@ $("#rsvp_by_date").on("change", function () {
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
     } else {
+        $('#rsvp-by-date').val('');
         $(".rsvp_by_date").hide();
     }
 });
@@ -2772,7 +2784,6 @@ $(document).on('click','#next_design',function() {
 })
 
 $(document).on("click", "#close_createEvent", function () {
-    $('#loader').css('display','block');
 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
@@ -2793,87 +2804,98 @@ $(document).on("click", "#close_createEvent", function () {
     }
 
     // $('#loader').css('display','block');
+    $('#loader').css('display','block');
 
     if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
-        if(firstLetter == '1'){
-            // savePage1Data('close');
-            var event_type = $("#event-type").val();
-            var event_name = $("#event-name").val();
-            var hostedby = $("#hostedby").val();
-            var event_date = $("#event-date").val();
-            var start_time = $("#start-time").val();
-            var start_time_zone =  $('#start-time-zone').val();
-            var schedule = $('#schedule').is(":checked");
-            var end_time = $("#end_time").is(":checked");
-            var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
-            var end_time_zone =  $('#end-time-zone').val();
-            var address_2 = $("#address2").val();
-            var address1 = $("#address1").val();
-            var city = $("#city").val();
-            var state = $("#state").val();
-            var zipcode = $("#zipcode").val();
-            var id = $("#id").val();
-            var rsvp_by_date = $("#rsvp-by-date").val();
-            var event_id = $("#event_id").val();
-            var description = $("#description").val();
-            var message_to_guests = $("#message_to_guests").val();
-            var latitude = $("#latitude").val();
-            var longitude = $("#longitude").val();
+        // if(firstLetter == '1'){
+        //     // savePage1Data('close');
+        //     var event_type = $("#event-type").val();
+        //     var event_name = $("#event-name").val();
+        //     var hostedby = $("#hostedby").val();
+        //     var event_date = $("#event-date").val();
+        //     var start_time = $("#start-time").val();
+        //     var start_time_zone =  $('#start-time-zone').val();
+        //     var schedule = $('#schedule').is(":checked");
+        //     var end_time = $("#end_time").is(":checked");
+        //     var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+        //     var end_time_zone =  $('#end-time-zone').val();
+        //     var address_2 = $("#address2").val();
+        //     var address1 = $("#address1").val();
+        //     var city = $("#city").val();
+        //     var state = $("#state").val();
+        //     var zipcode = $("#zipcode").val();
+        //     var id = $("#id").val();
+        //     var rsvp_by_date = $("#rsvp-by-date").val();
+        //     var event_id = $("#event_id").val();
+        //     var description = $("#description").val();
+        //     var message_to_guests = $("#message_to_guests").val();
+        //     var latitude = $("#latitude").val();
+        //     var longitude = $("#longitude").val();
             
-            var desgin_selected= eventData.desgin_selected;
+        //     var desgin_selected= eventData.desgin_selected;
 
-            var events_schedule = '0';
-            var rsvp_end_time_set = '0';
+        //     var events_schedule = '0';
+        //     var rsvp_end_time_set = '0';
 
-            if(rsvp_by_date_set){
-                rsvp_by_date_set = '1';
-            }else{
-                rsvp_by_date_set = '0';
-            }
-            if(schedule){
-                events_schedule = '1';
-            }
-            var rsvp_end_time = '';
-            if(end_time){
-                rsvp_end_time = $('#end-time').val();
-                rsvp_end_time_set = '1';
-            }
+        //     if(rsvp_by_date_set){
+        //         rsvp_by_date_set = '1';
+        //     }else{
+        //         rsvp_by_date_set = '0';
+        //     }
+        //     if(schedule){
+        //         events_schedule = '1';
+        //     }
+        //     var rsvp_end_time = '';
+        //     if(end_time){
+        //         rsvp_end_time = $('#end-time').val();
+        //         rsvp_end_time_set = '1';
+        //     }
 
-            // eventData = {
-                eventData.event_id = $('#event_id').val();
-                eventData.event_type = event_type;
-                eventData.event_name = event_name;
-                eventData.hosted_by = hostedby;
-                eventData.event_date = event_date;
-                eventData.start_time = start_time;
-                eventData.rsvp_start_timezone = start_time_zone;
-                eventData.events_schedule = events_schedule;
-                eventData.activity = activities;
-                eventData.rsvp_end_time_set = rsvp_end_time_set;
-                eventData.rsvp_end_time = rsvp_end_time;
-                eventData.rsvp_end_timezone = end_time_zone;
-                eventData.rsvp_by_date_set = rsvp_by_date_set;
-                eventData.rsvp_by_date = rsvp_by_date;
-                eventData.event_location = description;
-                eventData.address1 = address1;
-                eventData.address_2 = address_2;
-                eventData.city = city;
-                eventData.state= state;
-                eventData.zipcode= zipcode;
-                eventData.message_to_guests=message_to_guests;
-                eventData.event_id=event_id;
-                eventData.desgin_selected=desgin_selected;
-                eventData.latitude=latitude;
-                eventData.longitude=longitude;
-            // };
-            eventData.step = firstLetter;
-            $(".step_2").hide();
+        //     // eventData = {
+        //         eventData.event_id = $('#event_id').val();
+        //         eventData.event_type = event_type;
+        //         eventData.event_name = event_name;
+        //         eventData.hosted_by = hostedby;
+        //         eventData.event_date = event_date;
+        //         eventData.start_time = start_time;
+        //         eventData.rsvp_start_timezone = start_time_zone;
+        //         eventData.events_schedule = events_schedule;
+        //         eventData.activity = activities;
+        //         eventData.rsvp_end_time_set = rsvp_end_time_set;
+        //         eventData.rsvp_end_time = rsvp_end_time;
+        //         eventData.rsvp_end_timezone = end_time_zone;
+        //         eventData.rsvp_by_date_set = rsvp_by_date_set;
+        //         eventData.rsvp_by_date = rsvp_by_date;
+        //         eventData.event_location = description;
+        //         eventData.address1 = address1;
+        //         eventData.address_2 = address_2;
+        //         eventData.city = city;
+        //         eventData.state= state;
+        //         eventData.zipcode= zipcode;
+        //         eventData.message_to_guests=message_to_guests;
+        //         eventData.event_id=event_id;
+        //         eventData.desgin_selected=desgin_selected;
+        //         eventData.latitude=latitude;
+        //         eventData.longitude=longitude;
+        //     // };
+        //     eventData.step = firstLetter;
+        //     $(".step_2").hide();
+        // }
+        savePage1Data(1);
+      
+        if(final_step==3){
+            var savePage3Result =  savePage3Data(1);
+            console.log(savePage3Result);
+            
+            if (savePage3Result === false) {
+                $('#loader').css('display', 'none');
+                return; // Exit if savePage3Data returns a stopping condition
+            }
         }
 
-      
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
@@ -3191,29 +3213,54 @@ function savePage1Data(close = null) {
 
 
         // ---------------newcode-------------
-        $(".step_1").css("display", "none");
-        $(".step_2").css("display", "none");
-        $("#edit-design-temp").css("display", "none");
-        $(".step_4").css("display", "none");
-        $(".step_final_checkout").css("display", "none");
-        $(".step_3").show();
-        $('.pick-card').addClass('menu-success');
-        $('.edit-design').addClass('menu-success');
-        $('.event_create_percent').text('75%');
-        $('.current_step').text('3 of 4');
-        $('#sidebar_select_design_category').css('display','none');
-        active_responsive_dropdown('drop-down-event-guest');
-        handleActiveClass('.li_guest');
-        $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
-        var type="all"
-        const stepVal= $("#CheckCuurentStep").val();
-        // alert(stepVal);
-        if(stepVal=="0"){
-            get_user(type);
+        if(close==null||close==""){
+            $(".step_1").css("display", "none");
+            $(".step_2").css("display", "none");
+            $("#edit-design-temp").css("display", "none");
+            $(".step_4").css("display", "none");
+            $(".step_final_checkout").css("display", "none");
+            $(".step_3").show();
+            $('.pick-card').addClass('menu-success');
+            $('.edit-design').addClass('menu-success');
+            $('.event_create_percent').text('75%');
+            $('.current_step').text('3 of 4');
+            $('#sidebar_select_design_category').css('display','none');
+            active_responsive_dropdown('drop-down-event-guest');
+            handleActiveClass('.li_guest');
+            $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+            var type="all"
+            const stepVal= $("#CheckCuurentStep").val();
+            // alert(stepVal);
+            if(stepVal=="0"){
+                get_user(type);
+            }
+            $("#CheckCuurentStep").val("1");
+            
+            final_step = 3;
         }
-        $("#CheckCuurentStep").val("1");
+        // $(".step_1").css("display", "none");
+        // $(".step_2").css("display", "none");
+        // $("#edit-design-temp").css("display", "none");
+        // $(".step_4").css("display", "none");
+        // $(".step_final_checkout").css("display", "none");
+        // $(".step_3").show();
+        // $('.pick-card').addClass('menu-success');
+        // $('.edit-design').addClass('menu-success');
+        // $('.event_create_percent').text('75%');
+        // $('.current_step').text('3 of 4');
+        // $('#sidebar_select_design_category').css('display','none');
+        // active_responsive_dropdown('drop-down-event-guest');
+        // handleActiveClass('.li_guest');
+        // $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+        // var type="all"
+        // const stepVal= $("#CheckCuurentStep").val();
+        // // alert(stepVal);
+        // if(stepVal=="0"){
+        //     get_user(type);
+        // }
+        // $("#CheckCuurentStep").val("1");
         
-        final_step = 3;
+        // final_step = 3;
 
     }
 
@@ -3230,12 +3277,14 @@ function savePage1Data(close = null) {
     // window.location.href = '/create-event-page-2';
 }
 
-function savePage3Data() {
+function savePage3Data(close=null) {
     // let invited_user_ids = [];
     var checkedCheckbox = parseInt($('.invite-count').text());
 
     if (checkedCheckbox == 0) {
         toastr.error("please first select at list one guest to invite");
+        $('#loader').css('display', 'none');
+
         return;
     }
 
@@ -3255,19 +3304,34 @@ function savePage3Data() {
             
             $(".list_all_invited_user").empty();
             // $(".list_all_invited_user").append(response);
-            $("step_1").hide();
-            $(".step_2").hide();
-            $(".step_3").hide();
-            handleActiveClass('.li_setting');
-            $('.event_create_percent').text('99%');
-            $('.current_step').text('4 of 4');
-            $(".step_4").show();
-            $('.li_guest').find(".side-bar-list").addClass("menu-success");
-            active_responsive_dropdown('drop-down-event-setting');
-            if(final_step == 3){
-                final_step = 4;
+            if(close==null||close==""){
+                $("step_1").hide();
+                $(".step_2").hide();
+                $(".step_3").hide();
+                handleActiveClass('.li_setting');
+                $('.event_create_percent').text('99%');
+                $('.current_step').text('4 of 4');
+                $(".step_4").show();
+                $('.li_guest').find(".side-bar-list").addClass("menu-success");
+                active_responsive_dropdown('drop-down-event-setting');
+                if(final_step == 3){
+                    final_step = 4;
+                }
+                eventData.step = final_step;
             }
-            eventData.step = final_step;
+            // $("step_1").hide();
+            // $(".step_2").hide();
+            // $(".step_3").hide();
+            // handleActiveClass('.li_setting');
+            // $('.event_create_percent').text('99%');
+            // $('.current_step').text('4 of 4');
+            // $(".step_4").show();
+            // $('.li_guest').find(".side-bar-list").addClass("menu-success");
+            // active_responsive_dropdown('drop-down-event-setting');
+            // if(final_step == 3){
+            //     final_step = 4;
+            // }
+            // eventData.step = final_step;
     //     },
     //     error: function (xhr, status, error) {
     //         console.log("AJAX error: " + error);
@@ -3942,6 +4006,12 @@ $(document).on("click", ".li_guest", function () {
     // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
     //     var design = eventData.desgin_selected;
     // }else{
+
+    var event_name=$('#event-name').val();
+    if(event_name==""){
+        toastr.error('Please enter event name');
+        return;
+    }
         var design = eventData.desgin_selected;
     // }
     
@@ -3969,6 +4039,11 @@ $(document).on("click", ".li_guest", function () {
 });
 
 $(document).on("click", ".li_setting", function () {
+    var event_name=$('#event-name').val();
+    if(event_name==""){
+        toastr.error('Please enter event name');
+        return;
+    }
     var design = eventData.desgin_selected;
     var step3 = eventData.step;
     console.log(step3);
@@ -4555,9 +4630,11 @@ $(document).on("click", ".delete-self-bring", function () {
 });
 
 $(document).on("click", ".add-user-list", function () {
+    
     var listid = $(this).data("listid");
     var target = $(this).data("bs-target");
     $("#" + listid).show();
+    alert(listid);
     $(target).toggleClass("collapse show");
 });
 
@@ -4646,6 +4723,11 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
+
+                var giftCardCount = $('.trgistry-content').length;
+                $('.add_gift_registry_count').html(`<span class="me-3"></span>
+                    <h5>${giftCardCount} Registry</h5>`);
+    
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
@@ -5742,6 +5824,8 @@ $(document).on('click','.free_plan',function () {
     //         gr_id: gr_id,
     //     });
     // }
+    selected_gift = [];
+
     $('input[name="gift_registry[]"]:checked').each(function() {
         var registry_name = $(this).data('item');
         var registry_link = $(this).data('registry');
@@ -5753,7 +5837,7 @@ $(document).on('click','.free_plan',function () {
         });
     });
     eventData.gift_registry_data=selected_gift;
-    // console.log(eventData);
+    console.log(eventData);
 
     var selected = $('input[name="gift_registry[]"]:checked');
         if (selected.length > 2) {
@@ -5761,19 +5845,21 @@ $(document).on('click','.free_plan',function () {
         $(this).blur();
        toastr.error('Maximum two gift registry can select');
 
-       selected_gift = [];
-        $('input[name="gift_registry[]"]:checked').each(function() {
-            var registry_name = $(this).data('item');
-            var registry_link = $(this).data('registry');
-            var gr_id = $(this).val();
-            selected_gift.push({
-                registry_name: registry_name,
-                registry_link: registry_link,
-                gr_id: gr_id
-            });
-        });
-        eventData.gift_registry_data = selected_gift;
+    //    selected_gift = [];
+    //     $('input[name="gift_registry[]"]:checked').each(function() {
+    //         var registry_name = $(this).data('item');
+    //         var registry_link = $(this).data('registry');
+    //         var gr_id = $(this).val();
+    //         selected_gift.push({
+    //             registry_name: registry_name,
+    //             registry_link: registry_link,
+    //             gr_id: gr_id
+    //         });
+    //     });
+    //     eventData.gift_registry_data = selected_gift;
     }
+    console.log(eventData);
+    
 });
 
 $(document).on('click','.brand-progress',function () { 
@@ -6501,7 +6587,7 @@ $("#select_event_cohost").on("scroll", function () {
     var elementHeight = $(this).height();
    
     console.log({scrollTop,scrollHeight,elementHeight});
-    console.log($("#select_event_cohost").data('list'));
+    // console.log($("#select_event_cohost").data('list'));
 
         // if (scrollTop + elementHeight >= scrollHeight) {
         //     alert();
@@ -6511,10 +6597,9 @@ $("#select_event_cohost").on("scroll", function () {
         //     var scroll=true;
         //     get_co_host_list(search_name=null,cohostlimit,cohostoffset,scroll);
         //     }
-        if (scrollTop > previousScrollTop) {
-        if (scrollTop + elementHeight >= scrollHeight - 1) { 
+        // if (scrollTop > previousScrollTop) {
+        if (scrollTop + elementHeight >= scrollHeight - 2) { 
            
-            
             cohostbusy = true;
             cohostoffset += cohostlimit;
             var type = "yesvite";
@@ -6523,8 +6608,8 @@ $("#select_event_cohost").on("scroll", function () {
                 get_co_host_list(search_name = null, cohostlimit, cohostoffset, scroll);
             }
         }
-    }
-    previousScrollTop = scrollTop;
+    // }
+    // previousScrollTop = scrollTop;
 });
 
 // var cohostphoneOffset=0;

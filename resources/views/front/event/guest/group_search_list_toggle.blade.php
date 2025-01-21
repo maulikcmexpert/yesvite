@@ -1,5 +1,5 @@
 @foreach ($groups as $group)
-<div class="group-card added_group{{ $group->id }} listgroups" data-id="{{ $group->id }}">
+<div class="group-card added_group{{ $group->id }} listgroups view_members" data-id="{{ $group->id }}" >
     <div class="view_members" data-id="{{ $group->id }}">
         <h4>{{ $group->name }}</h4>
         <p>{{ $group->group_members_count }} Guests</p>
