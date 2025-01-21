@@ -3216,6 +3216,13 @@ main {
       margin-bottom: 20px;
     }
 
+    .all-events-filtermodal .modal-content{
+      max-width: 100% !important;
+    }
+    .hosted-by-template-slider-img {
+      height: 400px;
+    }
+
   }
 
   @media only screen and (max-width: 424px) {

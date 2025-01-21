@@ -340,7 +340,7 @@
                                                             >
 
                                                             @if (!empty($photo['mediaData']) && isset($photo['mediaData']['type']) && $photo['mediaData']['type'] === 'image')
-                                                            <img src="{{ $photo['mediaData']['post_media'] }}" alt="Post Image">
+                                                            <img src="{{ $photo['mediaData']['post_media'] }}"  loading="lazy" alt="Post Image">
                                                         @else
                                                             <p>No image available</p>
                                                         @endif
