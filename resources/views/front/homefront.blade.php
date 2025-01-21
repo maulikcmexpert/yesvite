@@ -42,7 +42,7 @@
     </section>
 
     <!-- ============ event-wrapper ============ -->
-    <section class="event-wrapper">
+    {{-- <section class="event-wrapper">
         <div class="container">
             <div class="event-content">
                 <div class="content">
@@ -80,7 +80,7 @@
             <div class="item"><span>Thank You Messages to Guests</span></div>
             <div class="item"><span>Event Activity Scheduler</span></div>
         </div>
-    </section>
+    </section> --}}
 
      <!-- ======= edit in event ======== -->
     <section class="event-wrapper pro-event-wrapper"> 
@@ -128,7 +128,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>15 Credits</h5>
                                 </div>
                                 <span>$1.35 per credit</span>
@@ -140,7 +140,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>30 Credits</h5>
                                 </div>
                                 <span>$1.30 per credit</span>
@@ -152,7 +152,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>50 Credits</h5>
                                 </div>
                                 <span>$1.20 per credit</span>
@@ -164,7 +164,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>100 Credits</h5>
                                 </div>
                                 <span>$1.00 per credit</span>
@@ -176,7 +176,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>200 Credits</h5>
                                 </div>
                                 <span>$0.75 per credit</span>
@@ -188,7 +188,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>500 Credits</h5>
                                 </div>
                                 <span>$0.40 per credit</span>
@@ -200,7 +200,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>750 Credits</h5>
                                 </div>
                                 <span>$0.40 per credit</span>
@@ -216,7 +216,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="./assets/image/coin.svg" alt="coin">
+                                    <img src="{{assets('assets')}}coin.svg" alt="coin">
                                     <h5>1000 Credits</h5>
                                 </div>
                                 <span>$0.25 per credit</span>
