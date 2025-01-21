@@ -176,6 +176,7 @@
                                                 <div class="posts-card-inner-wrp">
                                                     <h3 class="posts-card-inner-questions">{{ $post['post_message'] }}
                                                     </h3>
+                                                </div>
                                                     {{-- {{  dd($post['post_image'])}} --}}
                                                     @if (!empty($post['post_image']))
                                                         @foreach ($post['post_image'] as $image)
@@ -212,7 +213,7 @@
                                                             </div>
                                                         @endforeach
                                                     @endif
-                                                </div>
+
                                                 <div class="posts-card-like-commnet-wrp">
                                                     <div class="posts-card-like-comment-left">
                                                         <ul type="button" data-bs-toggle="modal"
@@ -276,6 +277,25 @@
                                                                 <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                             @endif
                                                         </button>
+                                                        <div class="photos-likes-options-wrp emoji-picker"
+                                                                id="emojiDropdown" style="display: none;">
+                                                                <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                    alt="Heart Emoji" class="emoji" data-emoji="❤️"
+                                                                    data-unicode="\\u{2764}">
+                                                                <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                    alt="Thumb Emoji" class="emoji" data-emoji="👍"
+                                                                    data-unicode="\\u{1F44D}">
+                                                                <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                    alt="Smiley Emoji" class="emoji" data-emoji="😊"
+                                                                    data-unicode="\\u{1F604}">
+                                                                <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                    alt="Eye Heart Emoji" class="emoji" data-emoji="😍"
+                                                                    data-unicode="\\u{1F60D}">
+                                                                <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                    alt="Clap Emoji" class="emoji" data-emoji="👏"
+                                                                    data-unicode="\\u{1F44F}">
+                                                            </div>
+
                                                         <button class="posts-card-comm show-comments-btn">
                                                             <svg viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">

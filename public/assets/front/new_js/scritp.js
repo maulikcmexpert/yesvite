@@ -177,6 +177,13 @@ $('#upcoming-card-dropdownButton').on('click', function(event) {
 //     $(upcomingdropdownMenu).removeClass("show");
 //   }
 // });
+// $(".show-comments-btn").click(function () {
+//     $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+//   });
+
+//   $(".show-comment-reply-btn").click(function () {
+//     $(".reply-on-comment").toggleClass("d-none");
+//   });
 
 // ===create-post-hide-show-setting===
 const createpostmainbody = document.querySelector(".create-post-main-body");

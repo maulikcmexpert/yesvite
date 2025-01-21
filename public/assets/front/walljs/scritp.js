@@ -55,124 +55,8 @@ $(document).ready(function () {
   });
 });
 
-// ===header-drodpdown===
-const upcomingdropdownButton = document.getElementById(
-  "upcoming-card-dropdownButton"
-);
-const upcomingdropdownMenu = document.querySelector(
-  ".upcoming-events-card-notification-info"
-);
 
-// Toggle dropdown when clicking the button
-$('#upcoming-card-dropdownButton').on('click', function(event) {
-  event.stopPropagation(); // Prevent the click event from bubbling up
-  $('#upcoming-events-card-notification-info').toggleClass('show');
-});
 
-// Close the dropdown when clicking outside
-$(document).on("click", function(event) {
-  if (!$(event.target).closest(upcomingdropdownMenu).length && !$(event.target).closest(upcomingdropdownButton).length) {
-    $(upcomingdropdownMenu).removeClass("show");
-  }
-});
-
-// ===create-post-hide-show-setting===
-const createpostmainbody = document.querySelector(".create-post-main-body");
-const createpostsettingmainbody = document.querySelector(
-  ".create-post-setting-main-body"
-);
-const createpostprofile = document.querySelector(".create-post-profile-wrp");
-const backbtn = document.querySelector(".btn-back");
-
-$(".create-post-profile-wrp").on("click", function () {
-  $(".create-post-main-body").addClass("d-none");
-  $(".create-post-setting-main-body").removeClass("d-none");
-});
-
-$(".btn-back").on("click", function () {
-  $(".create-post-setting-main-body").addClass("d-none");
-  $(".create-post-main-body").removeClass("d-none");
-});
-
-$(document).on("change", ".fileInputtype", function (event) {
-  console.log(event);
-
-  const files = Array.from(event.target.files);
-  const imagePreview = document.getElementById("imagePreview");
-  const uploadImgInner = document.querySelector(
-    ".create-post-upload-img-inner"
-  );
-  const uploadHeadButton = document.querySelector(
-    ".create-post-head-upload-btn"
-  );
-
-  const totalFiles = imagePreview.children.length + files.length;
-
-  // Toggle visibility based on file presence
-  if (files.length > 0) {
-    uploadImgInner.classList.add("d-none");
-    uploadHeadButton.classList.remove("d-none");
-  }
-
-  if (totalFiles > 1) {
-    for (const previewItem of imagePreview.children) {
-      previewItem.classList.remove("col-12");
-      previewItem.classList.add("col-6");
-    }
-  }
-
-  files.forEach((file) => {
-    const fileReader = new FileReader();
-    fileReader.onload = function (e) {
-      const previewDiv = document.createElement("div");
-      previewDiv.classList.add(totalFiles === 1 ? "col-12" : "col-6");
-      previewDiv.style.position = "relative";
-
-      // Create the delete icon
-      const deleteIcon = document.createElement("span");
-      deleteIcon.innerHTML = `
-        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `;
-      deleteIcon.classList.add("uploded-delete-icon");
-      // Delete image functionality
-      deleteIcon.addEventListener("click", function () {
-        imagePreview.removeChild(previewDiv);
-
-        // Show `create-post-upload-img-inner` and hide `create-post-head-upload-btn` if no images left
-        if (imagePreview.children.length === 0) {
-          uploadImgInner.classList.remove("d-none");
-          uploadHeadButton.classList.add("d-none");
-        }
-      });
-
-      previewDiv.appendChild(deleteIcon);
-
-      // Display image or video based on file type
-      if (file.type.startsWith("image/")) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        img.classList.add("preview-image");
-        previewDiv.appendChild(img);
-      } else if (file.type.startsWith("video/")) {
-        const video = document.createElement("video");
-        video.src = e.target.result;
-        video.controls = true;
-        video.classList.add("preview-video");
-        previewDiv.appendChild(video);
-      }
-
-      imagePreview.appendChild(previewDiv);
-    };
-
-    fileReader.readAsDataURL(file);
-  });
-});
 
 // Add new option on click
 // $(".option-add-btn").on("click", function () {
@@ -206,39 +90,39 @@ $(document).on("change", ".fileInputtype", function (event) {
 // });
 
 // ===add-photo-vidoe-div-onclick===
-const createphotobtn = document.getElementById("create-photo-btn");
-const createpollbtn = document.getElementById("create-poll-btn");
-const uploadphotodiv = document.querySelector(".create-post-upload-img-wrp");
-const uploadpolldiv = document.querySelector(".create-post-poll-wrp");
-const uploadimgdelete = document.querySelector(".upload-img-delete");
-const uploadpolldelete = document.querySelector(".upload-poll-delete");
+// const createphotobtn = document.getElementById("create-photo-btn");
+// const createpollbtn = document.getElementById("create-poll-btn");
+// const uploadphotodiv = document.querySelector(".create-post-upload-img-wrp");
+// const uploadpolldiv = document.querySelector(".create-post-poll-wrp");
+// const uploadimgdelete = document.querySelector(".upload-img-delete");
+// const uploadpolldelete = document.querySelector(".upload-poll-delete");
 
-$("#create-photo-btn").click(function () {
-  $(".create-post-upload-img-wrp").removeClass("d-none");
-  $(".create-post-poll-wrp").addClass("d-none");
-});
+// $("#create-photo-btn").click(function () {
+//   $(".create-post-upload-img-wrp").removeClass("d-none");
+//   $(".create-post-poll-wrp").addClass("d-none");
+// });
 
-$("#create-poll-btn").click(function () {
-  $(".create-post-poll-wrp").removeClass("d-none");
-  $(".create-post-upload-img-wrp").addClass("d-none");
-});
+// $("#create-poll-btn").click(function () {
+//   $(".create-post-poll-wrp").removeClass("d-none");
+//   $(".create-post-upload-img-wrp").addClass("d-none");
+// });
 
-$(".upload-img-delete").click(function () {
-  $(".create-post-upload-img-wrp").addClass("d-none");
-});
+// $(".upload-img-delete").click(function () {
+//   $(".create-post-upload-img-wrp").addClass("d-none");
+// });
 
-$(".upload-poll-delete").click(function () {
-  $(".create-post-poll-wrp").addClass("d-none");
-});
+// $(".upload-poll-delete").click(function () {
+//   $(".create-post-poll-wrp").addClass("d-none");
+// });
 
-$(".show-comments-btn").click(function () {
-    $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
-});
+// $(".show-comments-btn").click(function () {
+//     $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+// });
 
 
-$(".show-comment-reply-btn").click(function () {
-    $(".reply-on-comment").toggleClass("d-none");
-});
+// $(".show-comment-reply-btn").click(function () {
+//     $(".reply-on-comment").toggleClass("d-none");
+// });
 
 
 

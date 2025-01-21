@@ -688,7 +688,7 @@ class EventWallController extends Controller
         //     $creatEventPost->post_recording = $recordingName;
         // }
         $creatEventPost->post_privacy = $request->post_privacys;
-        $creatEventPost->post_message = $request->input('content');
+        // $creatEventPost->post_message = $request->input('content');
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = "1";
         $creatEventPost->save();
