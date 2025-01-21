@@ -1163,11 +1163,127 @@ $(document).ready(function () {
         // Hide emoji picker
         $(this).closest('#emojiDropdown').hide();
     });
-});
-$(".show-comments-btn").click(function () {
-    $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+
+  // Handle comment submission (first-time comment or reply)
+$(document).on('click', '.comment-send-icon', function () {
+    const commentInput = $('#post_comment');
+    const commentText = commentInput.val().trim();
+    const replyParentId = $('#reply_comment_id').val(); // Reply comment ID if replying
+    const parentCommentId = $('#parent_comment_id').val(); // Parent comment ID for top-level comments
+
+    // If comment text is empty, show alert and return
+    if (commentText === '') {
+        alert('Please enter a comment');
+        return;
+    }
+
+    console.log('Reply Parent ID:', replyParentId, 'Parent Comment ID:', parentCommentId);
+
+    var eventId = $(this).data('event-id'); // Get the event ID from button data attribute
+    var eventPostId = $(this).data('event-post-id'); // Get the event post ID from button data attribute
+
+    // Determine the correct URL based on whether it's a reply or a new comment
+    const url = replyParentId
+        ? base_url + "event_wall/userPostCommentReply"
+        : base_url + "event_wall/userPostComment";
+
+    // Example AJAX request to submit the comment or reply
+    $.ajax({
+        url: url,
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            comment: commentText,
+            event_id: eventId,
+            event_post_id: eventPostId,
+            parent_comment_id: parentCommentId // For top-level comment or parent of a reply
+        },
+        success: function (response) {
+            if (response.success) {
+                console.log(response.data);
+                $('#post_comment').val(''); // Clear the comment input field
+
+                const data = response.data;
+
+                const newCommentHTML = `
+                    <li class="commented-user-wrp" data-comment-id="${data.comment_id}">
+                        <div class="commented-user-head">
+                            <div class="commented-user-profile">
+                                <div class="commented-user-profile-img">
+                                    <img src="${data.profile}" alt="">
+                                </div>
+                                <div class="commented-user-profile-content">
+                                    <h3>${data.username}</h3>
+                                    <p>${data.location}</p>
+                                </div>
+                            </div>
+                            <div class="posts-card-like-comment-right">
+                                <p>${data.posttime}</p>
+                                <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="commented-user-content">
+                            <p>${data.comment}</p>
+                        </div>
+                        <div class="commented-user-reply-wrp">
+                            <div class="position-relative d-flex align-items-center gap-2">
+                                <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                <p>0</p>
+                            </div>
+                            <button class="commented-user-reply-btn">Reply</button>
+                        </div>
+                    </li>
+                `;
+
+                // If replying to a comment, append to the parent comment's replies
+                if (parentCommentId) {
+                    const parentComment = $(`li[data-comment-id="${parentCommentId}"]`); // Find the parent comment
+                    if (parentComment.length > 0) {
+                        // If the parent comment has no replies, create a new <ul> for replies
+                        let replyList = parentComment.find('ul');
+                        if (replyList.length === 0) {
+                            replyList = $('<ul></ul>').appendTo(parentComment); // Create <ul> if not exists
+                        }
+                        // Append the new reply under the parent comment's <ul>
+                        replyList.append(newCommentHTML);
+                    }
+                } else {
+                    // If it's a top-level comment, append it to the top-level comment list
+                    $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
+                }
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('An error occurred. Please try again.');
+        }
+    });
 });
 
-$(".show-comment-reply-btn").click(function () {
-    $(".reply-on-comment").toggleClass("d-none");
+// Handle reply button click (when replying to a comment)
+$(document).on('click', '.commented-user-reply-btn', function () {
+    const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
+    const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+
+    // Insert the parent username and focus on the comment input field
+    const commentBox = $('#post_comment');
+    commentBox.val(`@${parentName} `).focus();
+
+    // Set the parent comment ID for the reply and clear the reply ID for top-level replies
+    $('#parent_comment_id').val(parentId); // Set the parent comment ID
+
+})
+
 });
+// $(".show-btn-comment").click(function () {
+//     let event_p_id = $(this).attr('event_p_id')
+//     $(".show_"+event_p_id).toggleClass("d-none");
+// });
+
+// $(".show-comment-reply-btn").click(function () {
+//     $(".reply-on-comment").toggleClass("d-none");
+// });
+
+
