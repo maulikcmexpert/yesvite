@@ -2785,6 +2785,12 @@ $(document).on('click','#next_design',function() {
     eventData.step = final_step;
 })
 
+if($('.edit-design').hasClass('active')){
+    $('#close_createEvent').css('display','none');
+}
+$(document).on("click",'.edit-design',function(){
+    $('#close_createEvent').css('display','none');
+});
 $(document).on("click", "#close_createEvent", function () {
 
     var event_type = $("#event-type").val();
@@ -3870,6 +3876,7 @@ function edit_design_modal() {
 
 var design_inner_image = '';
 $(document).on("click", ".li_event_details", function () {
+    $('#close_createEvent').css('display','block');
     $('#sidebar_select_design_category').css('display','none');
     
     canvas.discardActiveObject();
