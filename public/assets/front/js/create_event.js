@@ -6180,11 +6180,11 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
          }
  
      }
-     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    //  var checkedCheckbox = $('input[name="guest_list[]"]:checked');
  
-     if (checkedCheckbox.length > 0) {
-         checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-     }
+    //  if (checkedCheckbox.length > 0) {
+    //      checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    //  }
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
