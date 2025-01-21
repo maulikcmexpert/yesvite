@@ -816,6 +816,8 @@
                                                         <div class="shedule-timing">
                                                             <h6>{{$schedule['end_time']}}</h6>
                                                         </div>
+                                                        @if($schedule['end_time'])
+
                                                         <div class="shedule-box red">
                                                             <div class="shedule-box-left">
                                                                 @if($schedule['end_time'])
@@ -825,6 +827,7 @@
                                                                                     </div>
                                                             <span class="hrs ms-auto">{{$schedule['total_time']}}</span>
                                                         </div>
+                                                        @endif
                                                         </div>
                                             @endif
                                              @endforeach
