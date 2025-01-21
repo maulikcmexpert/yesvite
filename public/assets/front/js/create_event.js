@@ -4015,8 +4015,24 @@ $(document).on("click", ".li_guest", function () {
     // }else{
 
     var event_name=$('#event-name').val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
     if(event_name==""){
         toastr.error('Please enter event name');
+        return;
+    }
+    if(event_name==""){
+        toastr.error('Please enter hosted by');
+        return;
+    } if(hostedby==""){
+        toastr.error('Please enter event name');
+        return;
+    } if(event_date==""){
+        toastr.error('Please enter start date');
+        return;
+    }if(start_time==""){
+        toastr.error('Please enter start time');
         return;
     }
         var design = eventData.desgin_selected;
@@ -4047,8 +4063,24 @@ $(document).on("click", ".li_guest", function () {
 
 $(document).on("click", ".li_setting", function () {
     var event_name=$('#event-name').val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
     if(event_name==""){
         toastr.error('Please enter event name');
+        return;
+    }
+    if(event_name==""){
+        toastr.error('Please enter hosted by');
+        return;
+    } if(hostedby==""){
+        toastr.error('Please enter event name');
+        return;
+    } if(event_date==""){
+        toastr.error('Please enter start date');
+        return;
+    }if(start_time==""){
+        toastr.error('Please enter start time');
         return;
     }
     var design = eventData.desgin_selected;
