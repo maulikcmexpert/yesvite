@@ -86,6 +86,7 @@ class PaymentController extends Controller
 
             // Get the session ID from the query parameter
             $sessionId = $request->query('paid_id');
+            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
             if (!$sessionId) {
                 echo "invalid1";
