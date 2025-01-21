@@ -1417,7 +1417,7 @@
                                                 <button class="accordion-button">
                                                     <div class="d-flex align-items-center">
                                                         <span
-                                                            class="me-1 list-sub-head category-item-total-{{$items['id']}}-{{ $data['id'] }}">{{$items['quantity']}}</span>
+                                                            class="me-1 list-sub-head category-item-total-{{$items['id']}}-{{ $data['id'] }}">{{$items['itmquantity']}}</span>
                                                         <div>
                                                             <h5>{{$items['description']}}</h5>
                                                             <p>Requested by: {{$items['requested_by']}}</p>
@@ -1445,7 +1445,7 @@
                                                                     fill="#F73C71"></path>
                                                             </svg>
                                                         </span>
-                                                        <h6 id="h6-{{$items['id']}}-{{ $data['id'] }}">1/1</h6>
+                                                        <h6 id="h6-{{$items['id']}}-{{ $data['id'] }}">{{$items['itmquantity']}}/{{$items['quantity']}}</h6>
                                                         <span class="accordion-button add-user-list collapsed"
                                                             data-listid="user-list-{{$items['id']}}-{{ $data['id'] }}" type="button"
                                                             data-bs-toggle="collapse"
@@ -1458,7 +1458,7 @@
                                             </h2>
                                             @foreach ($items['item_carry_users'] as $values )
                                             <div id="lumpia-collapseOne-{{$items['id']}}-{{ $data['id'] }}"
-                                                class="accordion-collapse collapse show" aria-labelledby="lumpia"
+                                                class="accordion-collapse" aria-labelledby="lumpia"
                                                 data-bs-parent="#accordionFlushExample" style="">
                                                 <div class="accordion-body">
                                                     <div class="accordion-body-content" style="display: none;">

@@ -4555,9 +4555,11 @@ $(document).on("click", ".delete-self-bring", function () {
 });
 
 $(document).on("click", ".add-user-list", function () {
+    
     var listid = $(this).data("listid");
     var target = $(this).data("bs-target");
     $("#" + listid).show();
+    alert(listid);
     $(target).toggleClass("collapse show");
 });
 
