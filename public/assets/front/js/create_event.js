@@ -328,7 +328,7 @@ $(document).on("click", ".add_new_group_member", function () {
                 if (response.status == "1") {
 
                     $(".group_list").append(response.view);
-                    var grplth = $('.listgroups .view_members').length;
+                    var grplth = $('.group_list .listgroups').length;
                     console.log(grplth);
                     
                     var newItem = `
