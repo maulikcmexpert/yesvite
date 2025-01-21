@@ -2989,6 +2989,10 @@ function savePage1Data(close = null) {
     // }else{
     //     rsvp_by_date_set = '0';
     // }
+
+    if(close==null||close==""){
+
+    
     if(schedule){
         events_schedule = '1';
     }
@@ -3134,6 +3138,7 @@ function savePage1Data(close = null) {
     }
     
 }
+    }
     if (
         // event_type != "" &&
         event_name != "" &&
