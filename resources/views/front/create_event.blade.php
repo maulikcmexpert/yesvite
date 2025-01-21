@@ -1301,7 +1301,7 @@
                         <div class="category-main-dishesh potluckmain-{{ $data['id'] }}">
                             <div class="category-list">
                                 <div class="list-header">
-                                    <span class="me-1 list-sub-head total-self-bring-{{ $data['id'] }}">2</span>
+                                    <span class="me-1 list-sub-head total-self-bring-{{ $data['id'] }}">{{$data['categoryQuantity']}}</span>
                                     <div>
                                         <h5 class="category_name-{{ $data['id'] }}">{{$data['category']}}</h5>
                                         <p>Total Commited</p>
@@ -1457,20 +1457,30 @@
                                                 </button>
                                             </h2>
                                             @foreach ($items['item_carry_users'] as $values )
+                                            @php
+                                                        $firstInitial = !empty($values['first_name']) ? strtoupper($values['first_name'][0]) : '';
+                                                        $lastInitial = !empty($values['last_name']) ? strtoupper($values['last_name'][0]) : '';
+                                                        $initials = $firstInitial . $lastInitial;
+                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                        @endphp
                                             <div id="lumpia-collapseOne-{{$items['id']}}-{{ $data['id'] }}"
                                                 class="accordion-collapse" aria-labelledby="lumpia"
                                                 data-bs-parent="#accordionFlushExample" style="">
                                                 <div class="accordion-body">
                                                     <div class="accordion-body-content" style="display: none;">
-                                                        <img src="./assets/image/user-img.svg" alt="">
+                                                        @if ($values["profile"] !="")
+                                                        <img src="{{$values["profile"]}}" alt="">
                                                         <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}</h5>
+                                                        @endif
                                                         <span class="ms-auto">1</span>
                                                     </div>
                                                     <div class="accordion-body-content limits-count"
                                                         id="user-list-{{$items['id']}}-{{ $data['id'] }}">
-
-                                                        <h5 class="fontcolorA add-item-under-text"> AW</h5>
+                                                        @if ($values["profile"] =="")
+                                                        <h5 class="{{$fontColor}} add-item-under-text"> {{$initials}}</h5>
                                                         <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}</h5>
+                                                        @endif
+                                                        @if ($values["user_id"] == $eventDetail['user_id'])
                                                         <div class="qty-container ms-auto">
                                                             <input type="hidden" class="category-item-key"
                                                                 value="{{$items['id']}}">
@@ -1487,6 +1497,7 @@
                                                             <button class="qty-btnplus" type="button"><i
                                                                     class="fa fa-plus"></i></button>
                                                         </div>
+                                                     
                                                         <div class="d-flex">
                                                             <a href="#" class="me-3">
                                                                 <svg width="16" height="16"
@@ -1540,6 +1551,7 @@
                                                                 </svg>
                                                             </a>
                                                         </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

@@ -112,6 +112,7 @@ class EventController extends Controller
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $eventDetail = [];
+        $eventDetail['user_id'] = $id;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
         $eventDetail['inviteCount'] = 0;
 
@@ -358,7 +359,7 @@ class EventController extends Controller
                     // dd($categories);
                     $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     $categories_item = Session::get('category_item', []);
-                    $quantity = 0;
+                   
                     foreach ($eventpotluckData as  $key => $value) {
 
                         $potluckCategory['id'] = $value->id;
@@ -372,6 +373,7 @@ class EventController extends Controller
                         ];
                         // session()->put('category', $categories);
                         $potluckCategory['items'] = [];
+                        $categoryQuantity=0;
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
                             
                             $itemData = [];
@@ -408,18 +410,20 @@ class EventController extends Controller
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
+                                    $categoryQuantity = $categoryQuantity+$itemcarryUser->quantity;
                                 }
                                 $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckCategory['items'][] = $potluckItem;
                             }
                         }
+                        $potluckCategory['categoryQuantity']=$categoryQuantity;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                     // Update session after the loop
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['podluck_category_list']);
+                    // dd($eventDetail);
                 }
             }
         } else {
