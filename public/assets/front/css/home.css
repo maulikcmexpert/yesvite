@@ -590,7 +590,7 @@
     border: 1px solid var(--borderColor) !important;
     box-shadow: 0px 0px 2px 0px #8A8F931F !important;
     padding: 0 !important;
-    width: 300px;
+    width: 300px !important;
     margin-top: 10px !important;
 }
 
