@@ -434,15 +434,17 @@ display:none;}
     align-items: center;
 }
 
+
+
 .guest-rsvp-attend{
     margin-top: 20px;
 }
 
-.guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked + label {
+.guest-rsvp-attend input[type=radio]:checked + label {
     border: 1px solid var(--pink) !important;
 }
 
-.guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked + label:after{
+.guest-rsvp-attend input[type=radio]:checked + label[for="option2"]:after{
     background-color: var(--pink) !important;
     padding: 0.3em;
     border-color: var(--pink) !important;
@@ -473,7 +475,7 @@ display:none;}
 
 
 
-.guest-rsvp-attend input[type=radio]:checked ~ label:after
+.guest-rsvp-attend input[type=radio]:checked ~ label[for="option1"]:after
 {
     background-color: var(--green) !important;
     padding: 0.3em ;
@@ -503,6 +505,15 @@ display:none;}
 
 .guest-rsvp-attend .input-form{
     margin-bottom: 16px;
+}
+
+.guest-rsvp-attend input[type=radio]:checked ~ label[for="option2"],
+.guest-rsvp-attend input[type=radio]:checked > label[for="option2"]
+{
+    border: 1px solid var(--pink) !important;
+}
+.guest-rsvp-attend input[type=radio]:checked ~ label[for="option2"] svg path{
+    stroke: var(--pink) !important;
 }
 
 .rsvp-button-wrp {
@@ -1331,6 +1342,7 @@ foreignObject{
 .apexcharts-inner {
     transform: translate(21%, 0);
 }
+
 
 
 /* ======= responsive ====== */

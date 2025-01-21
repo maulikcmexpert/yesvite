@@ -1,24 +1,26 @@
 <div class="wall-main-create-photo-poll-wrp common-div-wrp">
     <div class="wall-creat-photo-poll-inner">
         <div class="wall-creat-photo-poll-head ">
-            @if ($users->profile != '')
-                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}" alt="user-img"
-                    class="profile-pic" id="profile-pic">
-            @else
-                @php
-                    $name = $users->firstname;
-                    // $parts = explode(" ", $name);
-                    $firstInitial = isset($users->firstname[0]) ? strtoupper($users->firstname[0]) : '';
-                    $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
-                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                @endphp
-                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic">
-                    {{ $initials }}
-                </h5>
-            @endif
+            <div>
+                @if ($users->profile != '')
+                    <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}" alt="user-img"
+                        class="profile-pic" id="profile-pic">
+                @else
+                    @php
+                        $name = $users->firstname;
+                        // $parts = explode(" ", $name);
+                        $firstInitial = isset($users->firstname[0]) ? strtoupper($users->firstname[0]) : '';
+                        $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
+                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                    @endphp
+                    <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic">
+                        {{ $initials }}
+                    </h5>
+                @endif
+            </div>
 
-            <input type="text" class="form-control" id="text" placeholder="What’s on your mind?">
+                <input type="text" class="form-control" id="text" placeholder="What’s on your mind?">
         </div>
         <div class="wall-creat-photo-poll-wrp">
             <button type="button" data-bs-toggle="modal" data-bs-target="#creatpostmodal">
