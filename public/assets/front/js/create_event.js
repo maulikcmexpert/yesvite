@@ -326,10 +326,10 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             success: function (response) {
                 if (response.status == "1") {
-
-                    $(".group_list").append(response.view);
                     var grplth = $('.group_list .listgroups').length;
                     console.log(grplth);
+                    $(".group_list").append(response.view);
+                 
                     
                     var newItem = `
                         <div class="swiper-slide">
