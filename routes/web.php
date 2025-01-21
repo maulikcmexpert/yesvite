@@ -26,7 +26,8 @@ use App\Http\Controllers\{
     EventPhotoController,
     EventGuestController,
     EventWallController,
-    EventDetailsController
+    EventDetailsController,
+    PaymentController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,11 @@ use Illuminate\Support\Facades\Auth;
 
 //     return view('welcome');
 // });
+
+Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment-failed', [PaymentController::class, 'paymentFailed'])->name('payment.failed');
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
@@ -103,7 +109,7 @@ Route::post('contact-submit', [ContactUsController::class, 'submit'])->name('con
 
 
 Route::middleware('checkUserExist')->group(function () {
-    
+
     Route::get('/home1', [HomeController::class, 'home'])->name('home1');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notification_filter', [HomeController::class, 'notificationFilter'])->name('notification_filter');
@@ -207,7 +213,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
     Route::post('event/cancel_event', [ControllersEventController::class, 'CancelEvent']);
 
-   
+
     Route::get('event_drafts',  [EventDraftController::class, 'index'])->name('event.event_drafts');
     Route::get('event_lists',  [EventListController::class, 'index'])->name('event.event_lists');
     Route::get('fetch_past_event',  [EventListController::class, 'fetchPastEvents'])->name('fetch_past_event');
@@ -225,16 +231,16 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
 
 
-// //vrushali
-//     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
-//     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
-//     Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
-//     Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
-//     Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
+    // //vrushali
+    //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
+    //     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
+    //     Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
+    //     Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
+    //     Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
 
 
-//     Route::post('event_wall/event_post', [EventWallController::class, 'createEventPost'])->name('event_wall.eventPost');
-// //vrushali
+    //     Route::post('event_wall/event_post', [EventWallController::class, 'createEventPost'])->name('event_wall.eventPost');
+    // //vrushali
 
 
     Route::get('event_about/{id}',  [EventAboutController::class, 'index'])->name('event.event_about');
@@ -244,9 +250,6 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
 
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
-
-
-
 });
 
 
@@ -295,36 +298,36 @@ Route::controller(AuthController::class)->group(function () {
 
 
 
-    
+
     // Route::get('register', function () {
 
     //     $data['page'] = 'admin/auth/register';
-    
+
     //     $data['js'] = ['login'];
-    
+
     //     return view('admin/auth/main', $data);
     // });
-    
+
     Route::post('/checkEmail', 'checkEmail');
-    
+
     Route::post('/checkAdminEmail', 'checkAdminEmail');
 
     Route::post('/register', 'registerAdmin');
-    
-    
+
+
     Route::get('/forgotpassword', function () {
-        
+
         $data['js'] = ['login'];
-        
+
         $data['page'] = 'admin.auth.forgotpassword';
-        
+
         return view('admin.auth.main', $data);
     });
-    
+
     Route::post('/forgotpassword', 'forgotpassword');
-    
+
     Route::get('/updatePassword/{id}', 'checkToken');
-    
+
     Route::post('/updatePassword/{id}', 'updatePassword');
 
     Route::get('switch_account/{id}', 'switchAccount')->name('switchAccount');
@@ -355,9 +358,9 @@ Route::middleware(['web'])->group(function () {
 
 Route::fallback(function () {
     $title = "No Found";
-    
+
     $page = 'not_found';
-    
+
     return view('layout', compact(
         'title',
         'page',

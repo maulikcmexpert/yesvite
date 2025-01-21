@@ -922,6 +922,8 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
+    $('.step_1_activity').text(total_activity + ' Activity');
+
     console.log(total_activities);
     
 });
@@ -2794,10 +2796,10 @@ $(document).on("click", "#close_createEvent", function () {
         // confirm('Event type is empty. Are you sure you want to proceed?')
         return;
     }
-    if (event_name == "") {
-        $("#deleteModal").modal("show");
-        return;
-    }
+    // if (event_name == "") {
+    //     $("#deleteModal").modal("show");
+    //     return;
+    // }
     if (event_date == "") {
         $("#deleteModal").modal("show");
         return;
@@ -2805,8 +2807,9 @@ $(document).on("click", "#close_createEvent", function () {
 
     // $('#loader').css('display','block');
     $('#loader').css('display','block');
-
-    if (event_name != "" && event_date != "") {
+    
+    if (event_date != "") {
+    // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
@@ -2887,7 +2890,13 @@ $(document).on("click", "#close_createEvent", function () {
         savePage1Data(1);
       
         if(final_step==3){
-            savePage3Data();
+            var savePage3Result =  savePage3Data(1);
+            console.log(savePage3Result);
+            
+            if (savePage3Result === false) {
+                $('#loader').css('display', 'none');
+                return; // Exit if savePage3Data returns a stopping condition
+            }
         }
 
         eventData.step = final_step;
@@ -2982,6 +2991,18 @@ function savePage1Data(close = null) {
     // }else{
     //     rsvp_by_date_set = '0';
     // }
+
+    if(close==null||close==""){
+
+        var activity=$('.new_append_activity').length;
+        console.log(activity);
+        if($('#schedule').is(":checked")){
+            if(activity==0){
+                toastr.error('Event Schedule: Please set event schedule');
+                return;  
+            }
+        }
+    
     if(schedule){
         events_schedule = '1';
     }
@@ -3127,6 +3148,7 @@ function savePage1Data(close = null) {
     }
     
 }
+    }
     if (
         // event_type != "" &&
         event_name != "" &&
@@ -3273,15 +3295,7 @@ function savePage1Data(close = null) {
 
 function savePage3Data(close=null) {
     // let invited_user_ids = [];
-    var checkedCheckbox = parseInt($('.invite-count').text());
-
-    if (checkedCheckbox == 0) {
-        toastr.error("please first select at list one guest to invite");
-        $('#loader').css('display', 'none');
-
-        return;
-    }
-
+   
     // eventData.invited_user_ids = invited_user_ids;
 
     // console.log(eventData);
@@ -3295,7 +3309,16 @@ function savePage3Data(close=null) {
     //     },
 
     //     success: function (response) {
-            
+        if(close==null||close==""){
+            var checkedCheckbox = parseInt($('.invite-count').text());
+            if (checkedCheckbox == 0) {
+                toastr.error("please first select at list one guest to invite");
+                $('#loader').css('display', 'none');
+
+                return;
+            }
+        
+        }
             $(".list_all_invited_user").empty();
             // $(".list_all_invited_user").append(response);
             if(close==null||close==""){
@@ -4002,9 +4025,73 @@ $(document).on("click", ".li_guest", function () {
     // }else{
 
     var event_name=$('#event-name').val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+
+    var schedule = $('#schedule').is(":checked");
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
+    var address_2 = $("#address2").val();
+    var address1 = $("#address1").val();   
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipcode = $("#zipcode").val();
+
+    var activity=$('.new_append_activity').length;
+    console.log(activity);
+    if(schedule){
+        if(activity==0){
+            toastr.error('Event Schedule: Please set event schedule');
+            return;  
+        }
+    }
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
+    }
+    if(hostedby==""){
+        toastr.error('Please enter hosted by');
+        return;
+    } if(event_date==""){
+        toastr.error('Please enter start date');
+        return;
+    }if(start_time==""){
+        toastr.error('Please select start time');
+        return;
+    }
+    if(end_time){
+        rsvp_end_time = $('#end-time').val();
+        if(rsvp_end_time ==''){
+            toastr.error('Please select end time');
+            return;
+        }
+    }
+    if(rsvp_by_date_set){
+        rsvp_by_date = $('#rsvp-by-date').val();
+        if (rsvp_by_date == "") {
+           toastr.error("RSVP by Date : Please select RSVP date");
+           return;
+        } 
+    }
+
+    if($('#isCheckAddress').is(':checked')){
+        if (address1 == "") {
+           toastr.error("Please enter address1");
+            return;
+        }
+        if (city == "") {
+            toastr.error("Please enter city");
+            return;
+        } 
+        if (state == "") {
+            toastr.error("Please enter state");
+            return;
+        }
+        if (zipcode == "") {
+            toastr.error("Please enter zipcode");
+            return;
+        } 
     }
         var design = eventData.desgin_selected;
     // }
@@ -4034,9 +4121,64 @@ $(document).on("click", ".li_guest", function () {
 
 $(document).on("click", ".li_setting", function () {
     var event_name=$('#event-name').val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $('#rsvp_by_date').is(':checked');
+    var address1 = $("#address1").val();   
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipcode = $("#zipcode").val();
+
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
+    }
+    if(event_name==""){
+        toastr.error('Please enter hosted by');
+        return;
+    } if(hostedby==""){
+        toastr.error('Please enter event name');
+        return;
+    } if(event_date==""){
+        toastr.error('Please enter start date');
+        return;
+    }if(start_time==""){
+        toastr.error('Please enter start time');
+        return;
+    }
+    if(end_time){
+        rsvp_end_time = $('#end-time').val();
+        if(rsvp_end_time ==''){
+            toastr.error('Please select end time');
+            return;
+        }
+    }
+    if(rsvp_by_date_set){
+        rsvp_by_date = $('#rsvp-by-date').val();
+        if (rsvp_by_date == "") {
+           toastr.error("RSVP by Date : Please select RSVP date");
+           return;
+        } 
+    }
+    if($('#isCheckAddress').is(':checked')){
+        if (address1 == "") {
+           toastr.error("Please enter address1");
+            return;
+        }
+        if (city == "") {
+            toastr.error("Please enter city");
+            return;
+        } 
+        if (state == "") {
+            toastr.error("Please enter state");
+            return;
+        }
+        if (zipcode == "") {
+            toastr.error("Please enter zipcode");
+            return;
+        } 
     }
     var design = eventData.desgin_selected;
     var step3 = eventData.step;
