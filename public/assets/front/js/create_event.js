@@ -5742,6 +5742,8 @@ $(document).on('click','.free_plan',function () {
     //         gr_id: gr_id,
     //     });
     // }
+    selected_gift = [];
+
     $('input[name="gift_registry[]"]:checked').each(function() {
         var registry_name = $(this).data('item');
         var registry_link = $(this).data('registry');
