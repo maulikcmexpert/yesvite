@@ -979,6 +979,15 @@
     padding: 12px 12px !important;
 }
 
+.gift-registry-icons img{
+    object-fit: contain !important;
+}
+
+.gift-registry-icons a {
+    height: 35px !important;
+    display: block !important;
+    object-fit: contain !important;
+}
 
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
