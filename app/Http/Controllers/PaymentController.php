@@ -81,7 +81,8 @@ class PaymentController extends Controller
             if (!$user) {
                 return redirect()->route('login')->withErrors(['error' => 'User not authenticated']);
             }
-
+            echo 1;
+            die;
             // Get the session ID from the query parameter
             $sessionId = $request->query('paid_id');
             if (!$sessionId) {
