@@ -1017,7 +1017,8 @@ $("#end_time").on("change", function () {
         $(".end_time").show();
         $(".ac-end-time").show();
     } else {
-        $('#end_time').val('');
+        alert();
+        $('.end-time-create').val('');
         $(".end_time").hide();
         $(".ac-end-time").hide();
     }
