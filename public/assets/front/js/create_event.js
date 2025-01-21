@@ -3027,6 +3027,7 @@ function savePage1Data(close = null) {
     var rsvp_by_date = '';
     if(rsvp_by_date_set){
         rsvp_by_date = $('#rsvp-by-date').val();
+        rsvp_by_date_set='1';
         if (rsvp_by_date == "") {
             $("#event-rsvpby-error")
                 .css("display", "block")
