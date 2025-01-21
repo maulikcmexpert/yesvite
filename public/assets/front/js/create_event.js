@@ -6083,6 +6083,8 @@ var cohostphonebusy=false;
 var cohostNoMoreContactData = false; 
 
 $(document).on('click','#phone-tab-cantact',function(){
+    $('.co_host_serach').val('')
+
     isPhonecontact = 1;
     cohostoffset=0;
     cohostlimit=7;
@@ -6094,6 +6096,7 @@ $(document).on('click','#phone-tab-cantact',function(){
 })
 
 $(document).on('click','#contact-tab',function(){
+    $('.co_host_serach').val('')
     $('.list_all_invited_user').css('display','block');
     $('.list_all_contact_user').css('display','none');
     cohostNoMoreData = false;
