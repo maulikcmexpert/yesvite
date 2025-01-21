@@ -3954,6 +3954,12 @@ $(document).on("click", ".li_guest", function () {
     // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
     //     var design = eventData.desgin_selected;
     // }else{
+
+    var event_name=$('#event-name').val();
+    if(event_name==""){
+        toastr.error('Please enter event name');
+        return;
+    }
         var design = eventData.desgin_selected;
     // }
     
@@ -3981,6 +3987,11 @@ $(document).on("click", ".li_guest", function () {
 });
 
 $(document).on("click", ".li_setting", function () {
+    var event_name=$('#event-name').val();
+    if(event_name==""){
+        toastr.error('Please enter event name');
+        return;
+    }
     var design = eventData.desgin_selected;
     var step3 = eventData.step;
     console.log(step3);
