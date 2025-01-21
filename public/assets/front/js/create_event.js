@@ -6087,8 +6087,8 @@ $(document).on('click','#phone-tab-cantact',function(){
     $('.list_all_contact_user').css('display','block');
     $('.co_host_serach').val('')
 
-    $('.co_host_serach').css('display','none');
-    $('.co_host_serach').css('display','block');
+    $('.co_host_search').css('display','none');
+    $('.phone_co_host_search').css('display','block');
     isPhonecontact = 1;
     cohostoffset=0;
     cohostlimit=7;
@@ -6103,8 +6103,9 @@ $(document).on('click','#contact-tab',function(){
     $('.co_host_serach').val('')
     $('.list_all_invited_user').css('display','block');
     $('.list_all_contact_user').css('display','none');
-    $('.co_host_serach').css('display','block');
-    $('.co_host_serach').css('display','none');
+    $('.co_host_search').css('display','block');
+    $('.phone_co_host_search').css('display','none');
+    
     cohostNoMoreData = false;
     cohostphoneOffset=0;
     cohostphoneLimit=10;
