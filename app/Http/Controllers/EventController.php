@@ -1617,6 +1617,7 @@ class EventController extends Controller
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
+
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
@@ -1624,7 +1625,6 @@ class EventController extends Controller
         // dd($categories[$categoryIndexKey]['item']);
         $total_item = 0;
         $total_quantity = 0;
-        // dd($categories[$categoryIndexKey]['item']);
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
