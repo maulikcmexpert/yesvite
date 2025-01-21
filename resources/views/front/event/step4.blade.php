@@ -365,7 +365,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="add-limit potluck" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "":"display:none"}} onclick="toggleSidebar('sidebar_potluck')">
+                                    <a href="#" class="add-limit potluck" onclick="toggleSidebar('sidebar_potluck')" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "":"display:none"}} >
                                         <div class="d-flex align-items-center justify-content-between w-100">
                                             <div class="d-flex align-items-center potluck_count">
                                                 <span class="me-3">
