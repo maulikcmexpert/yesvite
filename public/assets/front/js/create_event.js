@@ -15,6 +15,13 @@ var selected_profilePhoto = "";
 var selected_dataId = '';
 var co_host_is_selected_close=false;
 var get_contact_status="";
+
+var final_profilePhoto ="";
+var final_user_name = ""
+var final_dataId = "";
+var final_profile_or_text ="" ;
+var final_prefer_by="";
+var final_initial="";
 // var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
 // var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
 // giftRegestryData.forEach(function (item) {
@@ -5056,11 +5063,12 @@ $(document).on("click", ".save_event_co_host", function () {
     }
     if (selected_dataId!="") {
     
-        // var profilePhoto = checkedCheckbox.data('profile');
-        // var user_name = checkedCheckbox.data('username');
-        // var dataId = checkedCheckbox.val();
-        // var profile_or_text = checkedCheckbox.data("profile_or_text");
-        // var prefer_by = checkedCheckbox.data("prefer_by");
+         final_profilePhoto = checkedCheckbox.data('profile');
+         final_user_name = checkedCheckbox.data('username');
+         final_dataId = checkedCheckbox.val();
+         final_initial = checkedCheckbox.data('initial');
+         final_profile_or_text = checkedCheckbox.data("profile_or_text");
+         final_prefer_by = checkedCheckbox.data("prefer_by");
         var profilePhoto = selected_profilePhoto;
         var user_name = selected_user_name
         var dataId = selected_dataId;
@@ -6200,7 +6208,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
         }else{
             $(".list_all_invited_user").html(data.view);
         }
-        $('input[name="guest_list[]"]:checked').each(function () {
+        // $('input[name="guest_list[]"]:checked').each(function () {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
@@ -6217,14 +6225,14 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             // Update UI based on the `profile_or_text` condition
             if (profile_or_text == '1') {
                 $('.guest-img .selected-co-host-image').show();
-                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
                 $('.guest-img .selected-host-h5').css('display', 'none');
             } else {
                 // $('.guest-img').html(profilePhoto    );
                 $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display', 'none');
-                $('.guest-img .selected-host-h5').text(initial);
-                var firstinitial = initial.charAt(0);
+                $('.guest-img .selected-host-h5').text(final_initial);
+                var firstinitial = final_initial.charAt(0);
     
                 // $('.selected-host-h5').removeClass(function (index, className) {
                 //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
@@ -6238,8 +6246,8 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 // Add the new class
                 $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
-            $('.selected-host-name').text(user_name);
-        });
+            $('.selected-host-name').text(final_user_name);
+        // });
 
         // if(co_host_is_selected_close==true){
         //     $('.guest-contacts-wrp').css('display','none');
