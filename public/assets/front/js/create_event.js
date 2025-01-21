@@ -5027,6 +5027,11 @@ $(document).on("click",".remove_co_host",function(){
 
 //   alert(delete_co_host);
     $('.'+delete_co_host).prop("checked", false);
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    }
 })
 
 $(document).on("click", ".save_event_co_host", function () {
