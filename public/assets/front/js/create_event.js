@@ -14,6 +14,14 @@ var selected_user_name = "";
 var selected_profilePhoto = "";        
 var selected_dataId = '';
 var co_host_is_selected_close=false;
+var get_contact_status="";
+
+var final_profilePhoto ="";
+var final_user_name = ""
+var final_dataId = "";
+var final_profile_or_text ="" ;
+var final_prefer_by="";
+var final_initial="";
 // var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
 // var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
 // giftRegestryData.forEach(function (item) {
@@ -4314,26 +4322,34 @@ $(document).on("click", "#delete-self-bring", function () {
     $("#self_bring_qty").val(0);
 });
 
+$(".qty-btnplus").on("click",function () {
+    plusBTN($(this))
+});
+
 $(document).on("click", ".qty-btn-plus", function () {
-    var categoryItemKey = $(this).parent().find(".category-item-key").val();
-    var categoryIndexKey = $(this).parent().find(".category-index-key").val();
-    var categoryItemQuantity = $(this)
+    plusBTN($(this))
+});
+function plusBTN(that){
+    var categoryItemKey = that.parent().find(".category-item-key").val();
+    var categoryIndexKey = that.parent().find(".category-index-key").val();
+   
+    var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
         .val();
-    var itemQuantityMinus = $(this)
+    var itemQuantityMinus = that
         .parent()
         .find(".item-quantity-minus")
         .val();
-    var $input = $(this).siblings(".input-qty");
-    var value = parseInt($input.val());
-        $input.val(value + 1);
-    var quantity = parseInt($(this).parent().find(".input-qty").val());
-    console.log(quantity);
-    if(quantity > 0){
-        $(this).parent().find(".item-quantity-minus").val(1);
-    }
+    var input = that.siblings(".input-qty");
 
+    var value = parseInt(input.val());
+        input.val(value + 1);
+    var quantity = parseInt(that.parent().find(".input-qty").val());
+    if(quantity > 0){
+        that.parent().find(".item-quantity-minus").val(1);
+    }
+console.log({categoryItemQuantity,quantity})
     if (categoryItemQuantity >= quantity) {
 
         update_self_bring(
@@ -4345,29 +4361,35 @@ $(document).on("click", ".qty-btn-plus", function () {
         );
     } else {
         quantity--;
-        $(this).parent().find(".input-qty").val(quantity);
+        that.parent().find(".input-qty").val(quantity);
     }
+}
+$(".qty-btnminus").on("click",function () {
+    minusBTN($(this))
+})
+$(document).on("click", ".qty-btn-minus", function () {  
+    minusBTN($(this))  
 });
 
-$(document).on("click", ".qty-btn-minus", function () {
-    
-    var categoryItemKey = $(this).parent().find(".category-item-key").val();
-    var categoryIndexKey = $(this).parent().find(".category-index-key").val();
-    var categoryItemQuantity = $(this)
+function minusBTN(that){
+    var categoryItemKey = that.parent().find(".category-item-key").val();
+    var categoryIndexKey = that.parent().find(".category-index-key").val();
+    var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
         .val();
-    var itemQuantityMinus = $(this)
+    var itemQuantityMinus = that
         .parent()
         .find(".item-quantity-minus")
         .val();
-    var $input = $(this).siblings(".input-qty");
-    var value = parseInt($input.val());
+    var input = that.siblings(".input-qty");
+    var value = parseInt(input.val());
     if (value > 0) {
-        $input.val(value - 1);
+        input.val(value - 1);
     }
-    var quantity = parseInt($(this).parent().find(".input-qty").val());
-    console.log(quantity);
+    var quantity = parseInt(that.parent().find(".input-qty").val());
+    console.log({categoryItemQuantity,quantity})
+
     if (categoryItemQuantity >= quantity ) {
         if(itemQuantityMinus == 1){
             update_self_bring(
@@ -4378,16 +4400,15 @@ $(document).on("click", ".qty-btn-minus", function () {
                 'minus'
             );
             if(quantity == 0){
-                $(this).parent().find(".item-quantity-minus").val(0);
+                that.parent().find(".item-quantity-minus").val(0);
             }
         }
         
     } else {
        
-        $(this).parent().find(".input-qty").val(0);
+        that.parent().find(".input-qty").val(0);
     }
-    
-});
+}
 
 function update_self_bring(
     categoryItemKey,
@@ -4883,6 +4904,7 @@ $(document).on("click", ".save_allow_limit", function () {
 
 $(document).on("change", 'input[name="guest_list[]"]', function () {
     //    if ($("input[name='guest_list[]']:checked").length > 0) {
+    co_host_is_selected_close=false;
     const old_user_id = selected_co_host;
     const newUserID = $(this).val();
        if (lengtUSer> 0 && newUserID!=old_user_id) {
@@ -4898,6 +4920,10 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             var initial = $(this).data("initial");
             var prefer_by_email = $(this).data('prefer_by');
             selected_co_host = $(this).val();
+
+      
+            
+
             selected_user_name = user_name;
             selected_profilePhoto = profilePhoto;        
             selected_dataId = selected_co_host;
@@ -4982,10 +5008,10 @@ $(document).on("click",".remove_co_host",function(){
     lengtUSer=0;
     var hostId = $(this).data('id');
     // eventData.co_host = '';
-    // eventData.co_host_prefer_by = '';
+    // eventData.co_host_prefer_by = '';                                                                                                                                                        
     // selected_co_host = '';
     // selected_co_host_prefer_by = '';
-    // selected_dataId="";
+    selected_dataId="";
     co_host_is_selected_close=true;
 
     $('.guest-contacts-wrp').css('display','none');
@@ -5001,10 +5027,25 @@ $(document).on("click",".remove_co_host",function(){
 
 //   alert(delete_co_host);
     $('.'+delete_co_host).prop("checked", false);
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    }
 })
 
 $(document).on("click", ".save_event_co_host", function () {
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if($('#contact-tab').hasClass('active')){
+        get_contact_status='yesvite';
+    }
+
+    if($('#phone-tab-cantact').hasClass('active')){
+        get_contact_status='contacts';
+    }
+    
+    $('.add_co_host').attr('data-contact', get_contact_status);
+
     if (checkedCheckbox.length === 0) {
         // alert();
         $('.add_new_co_host').html(`<span class="me-3">
@@ -5014,6 +5055,7 @@ $(document).on("click", ".save_event_co_host", function () {
         </span>
         <h5>Select your co-host</h5>`);
 
+      
         eventData.co_host = '';
         eventData.co_host_prefer_by = '';
         selected_co_host = '';
@@ -5026,11 +5068,12 @@ $(document).on("click", ".save_event_co_host", function () {
     }
     if (selected_dataId!="") {
     
-        // var profilePhoto = checkedCheckbox.data('profile');
-        // var user_name = checkedCheckbox.data('username');
-        // var dataId = checkedCheckbox.val();
-        // var profile_or_text = checkedCheckbox.data("profile_or_text");
-        // var prefer_by = checkedCheckbox.data("prefer_by");
+         final_profilePhoto = checkedCheckbox.data('profile');
+         final_user_name = checkedCheckbox.data('username');
+         final_dataId = checkedCheckbox.val();
+         final_initial = checkedCheckbox.data('initial');
+         final_profile_or_text = checkedCheckbox.data("profile_or_text");
+         final_prefer_by = checkedCheckbox.data("prefer_by");
         var profilePhoto = selected_profilePhoto;
         var user_name = selected_user_name
         var dataId = selected_dataId;
@@ -5995,19 +6038,29 @@ var cohostoffset=0;
 var cohostNoMoreData = false; 
 
 $(document).on('click','.add_co_host',function(){
-   
+//     var cur_status=$(this).data('contact');
+//        console.log(cur_status);
+//    if(cur_status=="contacts"){
+//         $('#phone-tab-cantact').addClass('active');
+//         $('.add_co_host_tab').removeClass('active');
+//         get_phone_host_list(null,cohostphoneLimit,cohostphoneOffset,false);
+//         setTimeout(() => {
+//             toggleSidebar('sidebar_add_co_host');
+//         }, 500);
+//         return;
+//    }
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
     }else{
         lengtUSer= 0;
     }
- 
+
     co_host_is_selected_close=false;
     $('.co_host_search').val('');
-    $('.add_co_host').addClass('active');
+    $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
-    get_co_host_list(null,cohostlimit,cohostoffset,false);
+    get_co_host_list(null,cohostlimit,cohostoffset,false,1);
     $('#select_event_cohost').css('display','block');  
 
     setTimeout(() => {
@@ -6057,9 +6110,6 @@ $(document).on('click','#contact-tab',function(){
             if (checkedCheckbox.length > 0) {
                 checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
             }
-        }else{
-            $('.guest-contacts-wrp').css('display','flex');
-            $('.guest-contacts-wrp').addClass('guest-contacts-test');
         }
 })
 
@@ -6074,6 +6124,10 @@ $(document).on('click','.add_co_host_off',function(){
         selected_co_host_prefer_by = eventData.co_host_prefer_by;
     }else{
         selected_co_host_prefer_by = '';
+    }
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
     }
     toggleSidebar();
 });
@@ -6092,7 +6146,7 @@ $(document).on('click','.overlay',function(){
     toggleSidebar();
 });
 
-function get_co_host_list(search_name=null,limit,offset,scroll){
+function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null){
     var app_user = $("#app_user").val();
     var cohostId = $("#cohostId").val();
     var cohostpreferby = $("#cohostpreferby").val();
@@ -6103,70 +6157,34 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
     console.log(selected_co_host_prefer_by);
 
     if(selected_co_host == ''){
-       $('.guest-contacts-wrp').css('display','none');
-       $('.guest-contacts-wrp').removeClass('guest-contacts-test');
-
-    }else{
-       
-        // if ($('input[name="guest_list[]"]').is(':checked')) {
-        //     var profilePhoto = $(this).data('profile');
-        //     var user_name = $(this).data('username');
-        //     var profile_or_text = $(this).data("profile_or_text");
-        //     var initial = $(this).data("initial");
-        //     var prefer_by_email = $(this).data('prefer_by');
-        //     // selected_co_host = $(this).val();
-        //     // selected_user_name = user_name;
-        //     // selected_profilePhoto = profilePhoto;        
-        //     // // selected_dataId = selected_co_host;
-        //     // selected_profile_or_text = profile_or_text;
-        //     // selected_prefer_by = prefer_by_email;
-            
-        //     // console.log(profile_or_text);
-        //     if(profile_or_text == '1'){
-        //         $('.selected-co-host-image').show();
-        //         $('.selected-co-host-image').attr('src',profilePhoto);
-        //         $('.selected-host-h5').css('display','none');
-        //     }else{
-        //         $('.selected-host-h5').show();
-        //         $('.selected-co-host-image').css('display','none');
-        //         $('.selected-host-h5').text(initial);
-        //         var firstinitial = initial.charAt(0);
-        //         $('.selected-host-h5').addClass('fontcolor'+firstinitial);
-        //     }
-        // } 
-
-        // $('input[name="guest_list[]"]:checked').each(function () {
-        //     var profilePhoto = $(this).data('profile');
-        //     var user_name = $(this).data('username');
-        //     var profile_or_text = $(this).data("profile_or_text");
-        //     var initial = $(this).data("initial");
-        //     var prefer_by_email = $(this).data('prefer_by');
-        
-        //     // Log or process the data
-        //     console.log("Profile Photo:", profilePhoto);
-        //     console.log("User Name:", user_name);
-        //     console.log("Profile or Text:", profile_or_text);
-        //     console.log("Initial:", initial);
-        //     console.log("Prefer By Email:", prefer_by_email);
-        
-        //     // Update UI based on the `profile_or_text` condition
-        //     if (profile_or_text == '1') {
-        //         $('.selected-co-host-image').show();
-        //         $('.selected-co-host-image').attr('src', profilePhoto);
-        //         $('.selected-host-h5').css('display', 'none');
-        //     } else {
-        //         $('.selected-host-h5').show();
-        //         $('.selected-co-host-image').css('display', 'none');
-        //         $('.selected-host-h5').text(initial);
-        //         var firstinitial = initial.charAt(0);
-        //         $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-        //     }
-        //     $('.selected-host-name').text(user_name);
-        // });
-        $('.guest-contacts-wrp').css('display','flex');
-        $('.guest-contacts-wrp').addClass('guest-contacts-test');
-
-    }
+        $('.guest-contacts-wrp').css('display','none');
+        $('.guest-contacts-wrp').removeClass('guest-contacts-test');
+        cohostId="";
+        var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+        if (checkedCheckbox.length > 0) {
+            checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+        }
+     }else{
+         if(co_host_is_selected_close==true){
+             $('.guest-contacts-wrp').css('display','none');
+             $('.guest-contacts-wrp').removeClass('guest-contacts-test');   
+             var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+             if (checkedCheckbox.length > 0) {
+                 checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+             }
+         }else{
+             $('.guest-contacts-wrp').css('display','flex');
+             $('.guest-contacts-wrp').addClass('guest-contacts-test');
+         }
+ 
+     }
+     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+     if (checkedCheckbox.length > 0) {
+         checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+     }
     $.ajax({
         url: base_url + "event/get_co_host_list",
         type: "POST",
@@ -6194,24 +6212,14 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             return;
         }
         $("#loader").hide();
+
+
         if(data.scroll=='true'){
             $(".list_all_invited_user").append(data.view);
         }else{
             $(".list_all_invited_user").html(data.view);
         }
-
-
-        if(co_host_is_selected_close==true){
-            $('.guest-contacts-wrp').css('display','none');
-            $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
-            var checkedCheckbox = $('input[name="guest_list[]"]:checked');
-    
-            if (checkedCheckbox.length > 0) {
-                checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-            } 
-            return;  
-        }
-        $('input[name="guest_list[]"]:checked').each(function () {
+        // $('input[name="guest_list[]"]:checked').each(function () {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
@@ -6226,6 +6234,39 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             console.log("Prefer By Email:", prefer_by_email);
         
             // Update UI based on the `profile_or_text` condition
+            if(add_co_host==1){
+                if (profile_or_text == '1') {
+                    $('.guest-img .selected-co-host-image').show();
+                    $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
+                    $('.guest-img .selected-host-h5').css('display', 'none');
+                } else {
+                    // $('.guest-img').html(profilePhoto    );
+                    $('.selected-host-h5').show();
+                    $('.selected-co-host-image').css('display', 'none');
+                    $('.guest-img .selected-host-h5').text(final_initial);
+                    var firstinitial = final_initial.charAt(0);
+        
+                    // $('.selected-host-h5').removeClass(function (index, className) {
+                    //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                    // });
+                    // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+        
+                    $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                        return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                    });
+                
+                    // Add the new class
+                    $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+                }
+                $('.selected-host-name').text(final_user_name);
+            }else{
+
+            $('input[name="guest_list[]"]:checked').each(function () {
+                var profilePhoto = $(this).data('profile');
+                var user_name = $(this).data('username');
+                var profile_or_text = $(this).data("profile_or_text");
+                var initial = $(this).data("initial");
+                var prefer_by_email = $(this).data('prefer_by');
             if (profile_or_text == '1') {
                 $('.guest-img .selected-co-host-image').show();
                 $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
@@ -6236,12 +6277,12 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 $('.selected-co-host-image').css('display', 'none');
                 $('.guest-img .selected-host-h5').text(initial);
                 var firstinitial = initial.charAt(0);
-
+    
                 // $('.selected-host-h5').removeClass(function (index, className) {
                 //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
                 // });
                 // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-
+    
                 $('.guest-img .selected-host-h5').removeClass(function (index, className) {
                     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
                 });
@@ -6251,7 +6292,19 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             }
             $('.selected-host-name').text(user_name);
         });
+            }
 
+        // if(co_host_is_selected_close==true){
+        //     $('.guest-contacts-wrp').css('display','none');
+        //     $('.guest-contacts-wrp').removeClass('guest-contacts-test');  
+        //     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    
+        //     if (checkedCheckbox.length > 0) {
+        //         checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+        //     } 
+        //     return;  
+        // }
+      
         cohostbusy=false;
     })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
@@ -6286,6 +6339,52 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         }
 
     }
+    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    if (checkedCheckbox.length > 0) {
+        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    }
+
+    // $('input[name="guest_list[]"]:checked').each(function () {
+    //     var profilePhoto = $(this).data('profile');
+    //     var user_name = $(this).data('username');
+    //     var profile_or_text = $(this).data("profile_or_text");
+    //     var initial = $(this).data("initial");
+    //     var prefer_by_email = $(this).data('prefer_by');
+    
+    //     // Log or process the data
+    //     console.log("Profile Photo:", profilePhoto);
+    //     console.log("User Name:", user_name);
+    //     console.log("Profile or Text:", profile_or_text);
+    //     console.log("Initial:", initial);
+    //     console.log("Prefer By Email:", prefer_by_email);
+    
+    //     // Update UI based on the `profile_or_text` condition
+    //     if (profile_or_text == '1') {
+    //         $('.guest-img .selected-co-host-image').show();
+    //         $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+    //         $('.guest-img .selected-host-h5').css('display', 'none');
+    //     } else {
+    //         // $('.guest-img').html(profilePhoto    );
+    //         $('.selected-host-h5').show();
+    //         $('.selected-co-host-image').css('display', 'none');
+    //         $('.guest-img .selected-host-h5').text(initial);
+    //         var firstinitial = initial.charAt(0);
+
+    //         // $('.selected-host-h5').removeClass(function (index, className) {
+    //         //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+    //         // });
+    //         // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+
+    //         $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+    //             return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+    //         });
+        
+    //         // Add the new class
+    //         $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+    //     }
+    //     $('.selected-host-name').text(user_name);
+    // });
+
     $.ajax({
         url: base_url+'event/getPhoneContact',
         type: "GET",
@@ -6318,6 +6417,48 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         }else{
             $(".list_all_contact_user").html(data.view);
         }
+
+        $('input[name="guest_list[]"]:checked').each(function () {
+            var profilePhoto = $(this).data('profile');
+            var user_name = $(this).data('username');
+            var profile_or_text = $(this).data("profile_or_text");
+            var initial = $(this).data("initial");
+            var prefer_by_email = $(this).data('prefer_by');
+        
+            // Log or process the data
+            console.log("Profile Photo:", profilePhoto);
+            console.log("User Name:", user_name);
+            console.log("Profile or Text:", profile_or_text);
+            console.log("Initial:", initial);
+            console.log("Prefer By Email:", prefer_by_email);
+        
+            // Update UI based on the `profile_or_text` condition
+            if (profile_or_text == '1') {
+                $('.guest-img .selected-co-host-image').show();
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
+                $('.guest-img .selected-host-h5').css('display', 'none');
+            } else {
+                // $('.guest-img').html(profilePhoto    );
+                $('.selected-host-h5').show();
+                $('.selected-co-host-image').css('display', 'none');
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
+    
+                // $('.selected-host-h5').removeClass(function (index, className) {
+                //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                // });
+                // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+    
+                $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                    return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                });
+            
+                // Add the new class
+                $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+            }
+            $('.selected-host-name').text(user_name);
+        });
+
 
         cohostphonebusy=false;
     })
