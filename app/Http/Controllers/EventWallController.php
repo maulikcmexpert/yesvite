@@ -51,7 +51,7 @@ class EventWallController extends Controller
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
-
+$js=['event_wall'];
 
         $event = decrypt($id);
         $encrypt_event_id = $id;
@@ -662,8 +662,8 @@ class EventWallController extends Controller
             'current_page',
             'eventDetails',
             'rsvpSent',
-            'login_user_id'
-
+            'login_user_id',
+'js'
 
         ));
 
@@ -688,7 +688,7 @@ class EventWallController extends Controller
         //     $creatEventPost->post_recording = $recordingName;
         // }
         $creatEventPost->post_privacy = $request->post_privacys;
-        $creatEventPost->post_message = $request->input('content');
+        // $creatEventPost->post_message = $request->input('content');
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = "1";
         $creatEventPost->save();

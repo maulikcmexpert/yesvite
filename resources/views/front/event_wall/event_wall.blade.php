@@ -176,7 +176,8 @@
                                                 <div class="posts-card-inner-wrp">
                                                     <h3 class="posts-card-inner-questions">{{ $post['post_message'] }}
                                                     </h3>
-                                                  {{-- {{  dd($post['post_image'])}} --}}
+                                                </div>
+                                                    {{-- {{  dd($post['post_image'])}} --}}
                                                     @if (!empty($post['post_image']))
                                                         @foreach ($post['post_image'] as $image)
                                                             <div class="posts-card-show-post-wrp">
@@ -212,57 +213,72 @@
                                                             </div>
                                                         @endforeach
                                                     @endif
-                                                </div>
+
                                                 <div class="posts-card-like-commnet-wrp">
                                                     <div class="posts-card-like-comment-left">
                                                         <ul type="button" data-bs-toggle="modal"
                                                             data-bs-target="#reaction-modal">
-                                                            <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                    alt=""></li>
-                                                            <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                    alt=""></li>
-                                                            <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                    alt=""></li>
-                                                            <p>{{ $post['total_likes'] }} Likes</p>
+
+                                                            <!-- Smiley Emoji -->
+                                                            @if ($post['self_reaction'] == '\u{1F604}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji">
+                                                                </li>
+
+                                                            <!-- Eye Heart Emoji -->
+                                                            @elseif ($post['self_reaction'] == '\u{1F60D}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji">
+                                                                </li>
+
+                                                            <!-- Heart Emoji -->
+                                                            @elseif ($post['self_reaction'] == '\u{2764}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                        alt="Heart Emoji">
+                                                                </li>
+                                                            @endif
+                                                            <p id="likeCount_{{ $post['id'] }}">{{ $post['total_likes'] }} Likes</p>
                                                         </ul>
                                                         <h6>{{ $post['total_comment'] }} Comments</h6>
                                                     </div>
                                                     <div class="posts-card-like-comment-right emoji_display_like">
                                                         <button class="posts-card-like-btn" id="likeButton"
-                                                        data-event-id="{{ $event }}"
-                                                        data-event-post-id="{{ $post['id'] }} "
-                                                        data-user-id="{{ $login_user_id }}">
-                                                        @if ($post['self_reaction'] == '\u{2764}')
-                                                        <i class="fa-solid fa-heart" id="show_Emoji"></i>
-                                                    @elseif($post['self_reaction'] == '\u{1F494}')
-                                                        <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                    @elseif($post['self_reaction'] == '\u{1F44D}')
-                                                        <i id="show_Emoji"> <img
-                                                                src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                alt="Thumb Emoji" class="emoji"
-                                                                data-emoji="👍"
-                                                                data-unicode="\\u{1F44D}"></i>
-                                                    @elseif($post['self_reaction'] == '\u{1F604}')
-                                                        <i id="show_Emoji"> <img
-                                                                src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                alt="Smiley Emoji" class="emoji"
-                                                                data-emoji="😊"
-                                                                data-unicode="\\u{1F604}"></i>
-                                                    @elseif($post['self_reaction'] == '\u{1F60D}')
-                                                        <i id="show_Emoji"> <img
-                                                                src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                alt="Eye Heart Emoji" class="emoji"
-                                                                data-emoji="😍"
-                                                                data-unicode="\\u{1F60D}"></i>
-                                                    @elseif($post['self_reaction'] == '\u{1F44F}')
-                                                        <i id="show_Emoji"> <img
-                                                                src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                alt="Clap Emoji" class="emoji"
-                                                                data-emoji="👏"
-                                                                data-unicode="\\u{1F44F}"></i>
-                                                    @else
-                                                        <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                    @endif</button>
+                                                            data-event-id="{{ $event }}"
+                                                            data-event-post-id="{{ $post['id'] }} "
+                                                            data-user-id="{{ $login_user_id }}">
+                                                            @if ($post['self_reaction'] == '\u{2764}')
+                                                                <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F494}')
+                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F44D}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                        alt="Thumb Emoji" class="emoji"
+                                                                        data-emoji="👍" data-unicode="\\u{1F44D}"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F604}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji" class="emoji"
+                                                                        data-emoji="😊" data-unicode="\\u{1F604}"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F60D}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji" class="emoji"
+                                                                        data-emoji="😍" data-unicode="\\u{1F60D}"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F44F}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                        alt="Clap Emoji" class="emoji"
+                                                                        data-emoji="👏" data-unicode="\\u{1F44F}"></i>
+                                                            @else
+                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                            @endif
+                                                        </button>
+
+
                                                         <button class="posts-card-comm show-comments-btn">
                                                             <svg viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -277,6 +293,24 @@
                                                                     stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
                                                         </button>
+                                                        <div class="photos-likes-options-wrp emoji-picker"
+                                                                id="emojiDropdown" style="display: none;">
+                                                                <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                    alt="Heart Emoji" class="emoji" data-emoji="❤️"
+                                                                    data-unicode="\\u{2764}">
+                                                                <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                    alt="Thumb Emoji" class="emoji" data-emoji="👍"
+                                                                    data-unicode="\\u{1F44D}">
+                                                                <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                    alt="Smiley Emoji" class="emoji" data-emoji="😊"
+                                                                    data-unicode="\\u{1F604}">
+                                                                <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                    alt="Eye Heart Emoji" class="emoji" data-emoji="😍"
+                                                                    data-unicode="\\u{1F60D}">
+                                                                <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                    alt="Clap Emoji" class="emoji" data-emoji="👏"
+                                                                    data-unicode="\\u{1F44F}">
+                                                            </div>
                                                     </div>
                                                 </div>
 
