@@ -358,7 +358,7 @@ class EventController extends Controller
                     // dd($categories);
                     $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     $categories_item = Session::get('category_item', []);
-                    foreach ($eventpotluckData as $value) {
+                    foreach ($eventpotluckData as  $key => $value) {
 
                         $potluckCategory['id'] = $value->id;
                         $potluckCategory['category'] = $value->category;
@@ -375,12 +375,15 @@ class EventController extends Controller
                             foreach ($value->event_potluck_category_item as $itemValue) {
                                 $itemData = [
                                     'item' => $itemValue->description,
-                                    'self_bring' => $itemValue->quantity,
-                                    'quantity' => $itemValue->self_bring_item,
+                                    'self_bring' => $itemValue->self_bring_item,
+                                    'self_bring_qty' => $itemValue->self_bring_item==1?$itemValue->quantity:0,
+                                    'quantity' => $itemValue->quantity,
                                 ];
-
+                               
+                                $categories[$value->id]['item'][$itemValue->id]=$itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
+                                
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
                                 $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
@@ -409,6 +412,8 @@ class EventController extends Controller
                     // Update session after the loop
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
+                    Session::save();
+                    // dd(Session::get('category'));
                 }
             }
         } else {
@@ -1604,11 +1609,14 @@ class EventController extends Controller
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
         $categories = session()->get('category', []);
+        // dd($categories[$categoryIndexKey]['item']);
         $total_item = 0;
         $total_quantity = 0;
+        // dd($categories[$categoryIndexKey]['item']);
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
+              
                 if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
                     $total_quantity = $total_quantity + $value['self_bring_qty'];
                 }

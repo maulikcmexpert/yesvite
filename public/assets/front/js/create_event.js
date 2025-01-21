@@ -6049,6 +6049,12 @@ $(document).on('click','.add_co_host',function(){
 //         }, 500);
 //         return;
 //    }
+cohostNoMoreData = false;
+cohostoffset=0;
+cohostlimit=7;
+// cohostphoneOffset=0;
+// cohostphoneLimit=10;
+$('#phone-tab-cantact').removeClass('active');
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
@@ -6058,10 +6064,19 @@ $(document).on('click','.add_co_host',function(){
 
     co_host_is_selected_close=false;
     $('.co_host_search').val('');
+    $('.phone_co_host_search').val('');
     $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
+
+    $('.list_all_contact_user').css('display','none');  
+    $('.list_all_yesvite_user').css('display','block');  
+
+    $('.co_host_search').css('display','block');
+    $('.phone_co_host_search').css('display','none');
+
     get_co_host_list(null,cohostlimit,cohostoffset,false,1);
     $('#select_event_cohost').css('display','block');  
+  
 
     setTimeout(() => {
         toggleSidebar('sidebar_add_co_host');
@@ -6083,8 +6098,12 @@ var cohostphonebusy=false;
 var cohostNoMoreContactData = false; 
 
 $(document).on('click','#phone-tab-cantact',function(){
-    $('.co_host_serach').val('')
-
+    // $('.list_all_invited_user').css('display','none');
+    // $('.list_all_contact_user').css('display','block');
+    $('.co_host_search').val('')
+    $('.phone_co_host_search').val('');
+    $('.co_host_search').css('display','none');
+    $('.phone_co_host_search').css('display','block');
     isPhonecontact = 1;
     cohostoffset=0;
     cohostlimit=7;
@@ -6096,9 +6115,13 @@ $(document).on('click','#phone-tab-cantact',function(){
 })
 
 $(document).on('click','#contact-tab',function(){
-    $('.co_host_serach').val('')
+    $('.co_host_search').val('');
+    $('.phone_co_host_search').val('');
     $('.list_all_invited_user').css('display','block');
     $('.list_all_contact_user').css('display','none');
+    $('.co_host_search').css('display','block');
+    $('.phone_co_host_search').css('display','none');
+
     cohostNoMoreData = false;
     cohostphoneOffset=0;
     cohostphoneLimit=10;
@@ -6238,7 +6261,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
         
             // Update UI based on the `profile_or_text` condition
             if(add_co_host==1){
-                if (profile_or_text == '1') {
+                if (final_profile_or_text == '1') {
                     $('.guest-img .selected-co-host-image').show();
                     $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
                     $('.guest-img .selected-host-h5').css('display', 'none');
@@ -6545,19 +6568,28 @@ $(document).on('keyup','.co_host_search',function(){
     $('#loader').css('display','block');
     // $(".list_all_invited_user").empty();
     setTimeout(function () {
-        if(isPhonecontact == 0){
             $(".list_all_invited_user").html('');
             // cohostoffset=0;
             // cohostlimit=7;
             get_co_host_list(search_name,null,null,false);
-        } else{
+     
+    }, 500);
+});
+
+$(document).on('keyup','.phone_co_host_search',function(){
+    
+    search_name = $(this).val();
+    $('#loader').css('display','block');
+    // $(".list_all_invited_user").empty();
+    setTimeout(function () {
+       
             $(".list_all_contact_user").html('');
             // cohostphoneOffset=0;
             // cohostphoneLimit=10;
             get_phone_host_list(search_name,null,null,false)
             // $(".list_all_invited_user").empty();
 
-        }
+        
     }, 500);
 })
 
