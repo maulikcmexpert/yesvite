@@ -3219,6 +3219,9 @@ main {
     .all-events-filtermodal .modal-content{
       max-width: 100% !important;
     }
+    .hosted-by-template-slider-img {
+      height: 400px;
+    }
 
   }
 
