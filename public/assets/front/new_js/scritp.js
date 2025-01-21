@@ -84,7 +84,7 @@ $(".notification-btn").on("click", function() {
     var is_owner=$(this).data('is_owner');
   }
 
-  
+
 
   $.ajax({
     url: `${base_url}event/notification_on_off`,
@@ -99,10 +99,10 @@ $(".notification-btn").on("click", function() {
     error: function (xhr, status, error) {
         console.error('Error fetching events:', error);
         busy = false;
-        // $('.loader').css('display','none');    
+        // $('.loader').css('display','none');
     },
     complete: function () {
-     $('.loader').css('display','none');    
+     $('.loader').css('display','none');
     }
 
 });
@@ -119,7 +119,7 @@ const dropdownMenu = document.querySelector(".notification-dropdown-menu");
 $("#dropdownButton").on("click", function (event) {
   event.stopPropagation(); // Prevent the click event from bubbling up
   $(".notification-dropdown-menu").toggleClass("show");
-  if($('.header-profile-dropdown').hasClass('show')){             
+  if($('.header-profile-dropdown').hasClass('show')){
     $('.header-profile-dropdown').removeClass('show');
   }
 });
@@ -167,7 +167,7 @@ const upcomingdropdownMenu = document.querySelector(
 // Toggle dropdown when clicking the button
 $('#upcoming-card-dropdownButton').on('click', function(event) {
   event.stopPropagation(); // Prevent the click event from bubbling up
-  
+
   $('#upcoming-events-card-notification-info').toggleClass('show');
 });
 
@@ -276,36 +276,36 @@ $(document).on("change", ".fileInputtype", function (event) {
   });
 });
 
-// Add new option on click
-$(".option-add-btn").on("click", function () {
-  const pollOptionsContainer = $(".poll-options");
-  const optionCount = pollOptionsContainer.children().length + 1;
+// // Add new option on click
+// $(".option-add-btn").on("click", function () {
+//   const pollOptionsContainer = $(".poll-options");
+//   const optionCount = pollOptionsContainer.children().length + 1;
 
-  const newOption = $(`
-    <div class="mb-3">
-      <label for="yourquestion" class="form-label d-flex align-items-center justify-content-between">Option ${optionCount}* <span>20/140</span></label>
-      <div class="position-relative">
-        <input type="text" class="form-control" id="yourquestion" placeholder="">
-        <span class="input-option-delete">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </div>
-    </div>
-  `);
+//   const newOption = $(`
+//     <div class="mb-3">
+//       <label for="yourquestion" class="form-label d-flex align-items-center justify-content-between">Option ${optionCount}* <span>20/140</span></label>
+//       <div class="position-relative">
+//         <input type="text" class="form-control" id="yourquestion" placeholder="">
+//         <span class="input-option-delete">
+//           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+//             <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//           </svg>
+//         </span>
+//       </div>
+//     </div>
+//   `);
 
-  pollOptionsContainer.append(newOption);
+//   pollOptionsContainer.append(newOption);
 
-  // Add delete functionality to the newly created delete button
-  newOption.find(".input-option-delete").on("click", function () {
-    newOption.remove();
-  });
-});
+//   // Add delete functionality to the newly created delete button
+//   newOption.find(".input-option-delete").on("click", function () {
+//     newOption.remove();
+//   });
+// });
 
 // ===add-photo-vidoe-div-onclick===
 const createphotobtn = document.getElementById("create-photo-btn");
@@ -430,18 +430,18 @@ if($('.notification-dropdown-menu').hasClass('show')){
 //       const container = document.getElementById("scrollStatus");
 //       const supports = container.getElementsByClassName("all-events-month-wise-support");
 //       let topMonth = null;
-  
+
 //       for (let support of supports) {
 //           const rect = support.getBoundingClientRect();
 //           const containerRect = container.getBoundingClientRect();
-  
+
 //           // Check if the element is at the top of the scroll
 //           if (rect.top >= containerRect.top && rect.bottom <= containerRect.bottom) {
 //               topMonth = support.getAttribute("data-month");
 //               break;
 //           }
 //       }
-  
+
 //       if (topMonth) {
 //           console.log("Month at the top of the scroll:", topMonth);
 
@@ -589,23 +589,23 @@ if($('.notification-dropdown-menu').hasClass('show')){
 //       const container = document.getElementById("scrollStatus2");
 //       const supports = container.getElementsByClassName("all-events-month-wise-support");
 //       let topMonth = null;
-      
+
 //       for (let support of supports) {
 //           const rect = support.getBoundingClientRect();
 //           const containerRect = container.getBoundingClientRect();
-      
+
 //           if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
 //               topMonth = support.getAttribute("data-month");
 //               break;
 //           }
 //       }
-      
+
 //       if (topMonth) {
 //           console.log("Month at the top of the scroll:", topMonth);
 //           $('#tabbtn1').text(topMonth);
 //       }
-      
-      
+
+
 
 //       lastScrollTop = currentScrollTop;
 //     });
@@ -630,27 +630,27 @@ if($('.notification-dropdown-menu').hasClass('show')){
 //         $(".all-events-month-show").removeClass("sticknew extra-stick");
 //       }
 
-    
+
 
 //       const container = document.getElementById("scrollStatus2");
 //       const supports = container.getElementsByClassName("all-events-month-wise-support");
 //       let topMonth = null;
-      
+
 //       for (let support of supports) {
 //           const rect = support.getBoundingClientRect();
 //           const containerRect = container.getBoundingClientRect();
-      
+
 //           if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
 //               topMonth = support.getAttribute("data-month");
 //               break;
 //           }
 //       }
-      
+
 //       if (topMonth) {
 //           console.log("Month at the top of the scroll:", topMonth);
 //           $('#tabbtn2').text(topMonth);
 //       }
-      
+
 
 //       lastScrollTop = currentScrollTop;
 //     });
@@ -676,21 +676,21 @@ if($('.notification-dropdown-menu').hasClass('show')){
 //       }
 
 
-      
+
 //       const container = document.getElementById("scrollStatus3");
 //       const supports = container.getElementsByClassName("all-events-month-wise-support");
 //       let topMonth = null;
-      
+
 //       for (let support of supports) {
 //           const rect = support.getBoundingClientRect();
 //           const containerRect = container.getBoundingClientRect();
-      
+
 //           if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
 //               topMonth = support.getAttribute("data-month");
 //               break;
 //           }
 //       }
-      
+
 //       if (topMonth) {
 //           console.log("Month at the top of the scroll:", topMonth);
 //           $('#tabbtn3').text(topMonth);
@@ -707,13 +707,13 @@ $("#scrollStatus").on("scroll", function () {
     const rect = this.getBoundingClientRect();
     const containerRect = container[0].getBoundingClientRect();
     if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
-      topMonth = $(this).data("month"); 
-      return false; 
+      topMonth = $(this).data("month");
+      return false;
     }
   });
   if (topMonth) {
     console.log("Month at the top of the scroll:", topMonth);
-    $("#tabbtn1").text(topMonth); 
+    $("#tabbtn1").text(topMonth);
   }
 });
 
@@ -725,13 +725,13 @@ $("#scrollStatus2").on("scroll", function () {
     const rect = this.getBoundingClientRect();
     const containerRect = container[0].getBoundingClientRect();
     if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
-      topMonth = $(this).data("month"); 
-      return false; 
+      topMonth = $(this).data("month");
+      return false;
     }
   });
   if (topMonth) {
     console.log("Month at the top of the scroll:", topMonth);
-    $("#tabbtn2").text(topMonth); 
+    $("#tabbtn2").text(topMonth);
   }
 });
 
@@ -743,13 +743,13 @@ $("#scrollStatus3").on("scroll", function () {
     const rect = this.getBoundingClientRect();
     const containerRect = container[0].getBoundingClientRect();
     if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
-      topMonth = $(this).data("month"); 
-      return false; 
+      topMonth = $(this).data("month");
+      return false;
     }
   });
   if (topMonth) {
     console.log("Month at the top of the scroll:", topMonth);
-    $("#tabbtn3").text(topMonth); 
+    $("#tabbtn3").text(topMonth);
   }
 });
 
@@ -819,10 +819,10 @@ $(document).on('click','.mobile-calender-btn',function(){
 
 
                         var $textSpan = $(this).find('.responsive-text');
-                        var $iconSpan = $(this).find('.responsive-icon');        
+                        var $iconSpan = $(this).find('.responsive-icon');
      console.log($(this).html());
       if(text=="Calendar"){
-        
+
           $textSpan.text("List View");
           $iconSpan.html(listSvg);
           $('.responsive-calendar').css('display','flex');
@@ -839,7 +839,7 @@ $(document).on('click','.mobile-calender-btn',function(){
 
 $(document).on('click','.profile-calender-view',function(){
   var $textSpan = $('.mobile-calender-btn').find('.responsive-text');
-  var $iconSpan = $('.mobile-calender-btn').find('.responsive-icon');   
+  var $iconSpan = $('.mobile-calender-btn').find('.responsive-icon');
   var listSvg=`<svg class="" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
   <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -869,8 +869,8 @@ $("#responsive-calender-months").on("scroll", function () {
     const rect = this.getBoundingClientRect();
     const containerRect = container[0].getBoundingClientRect();
     if (rect.bottom >= containerRect.top && rect.top <= containerRect.bottom) {
-      topMonth = $(this).data("month"); 
-      return false; 
+      topMonth = $(this).data("month");
+      return false;
     }
   });
   if (topMonth) {
@@ -892,7 +892,7 @@ $(document).on('click','.notification_read',function(){
     },
     error: function (xhr, status, error) {
         console.error('Error fetching events:', error);
-        // $('.loader').css('display','none');    
+        // $('.loader').css('display','none');
     },
     complete: function () {
     }

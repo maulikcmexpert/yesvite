@@ -66,20 +66,7 @@ $(document).ready(function () {
     $(".show-comment-reply-btn").click(function () {
         $(".reply-on-comment").toggleClass("d-none");
     });
-    $(".likeButton").each(function () {
-        const button = $(this);
-        const eventPostId = button.data('event-post-id');
-        const reaction = userReaction[eventPostId]; // Get the reaction for the current post
 
-        // Set the initial state based on the reaction
-        if (reaction === '❤') {
-            button.addClass('liked');
-            button.find('i').removeClass('fa-regular').addClass('fa-solid'); // Set heart icon to solid
-        } else {
-            button.removeClass('liked');
-            button.find('i').removeClass('fa-solid').addClass('fa-regular'); // Set heart icon to regular
-        }
-    });
 
     let longPressTimer;
     let isLongPresss = false;
