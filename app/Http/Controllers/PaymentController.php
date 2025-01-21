@@ -62,7 +62,7 @@ class PaymentController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => route('payment.success', ['session_id' => '{CHECKOUT_SESSION_ID}']), // Include session ID in success URL
+                'success_url' => route('payment.success') . '?session_id={CHECKOUT_SESSION_ID}', // Include session ID in success URL
                 'cancel_url' => route('payment.failed'),
             ]);
 
