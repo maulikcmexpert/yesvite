@@ -5009,7 +5009,7 @@ $(document).on("click",".remove_co_host",function(){
     var hostId = $(this).data('id');
     // eventData.co_host = '';
     // eventData.co_host_prefer_by = '';                                                                                                                                                        
-    // selected_co_host = '';
+    selected_co_host = '';
     // selected_co_host_prefer_by = '';
     selected_dataId="";
     co_host_is_selected_close=true;
@@ -6160,7 +6160,6 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
         $('.guest-contacts-wrp').css('display','none');
         $('.guest-contacts-wrp').removeClass('guest-contacts-test');
         cohostId="";
-        selected_co_host="";
         var checkedCheckbox = $('input[name="guest_list[]"]:checked');
  
         if (checkedCheckbox.length > 0) {
