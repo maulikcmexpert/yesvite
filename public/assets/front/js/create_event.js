@@ -2994,16 +2994,16 @@ function savePage1Data(close = null) {
 
     if(close==null||close==""){
 
-        var activity=$('.new_append_activity').length;
-        console.log(activity);
-        if($('#schedule').is(":checked")){
-            var activity=$('.new_append_activity').length;
-            console.log(activity);
-            if(activity==0){
-                toastr.error('Event Schedule: Please set event schedule');
-                return;  
-            }
-        }
+        // var activity=$('.new_append_activity').length;
+        // console.log(activity);
+        // if($('#schedule').is(":checked")){
+        //     var activity=$('.new_append_activity').length;
+        //     console.log(activity);
+        //     if(activity==0){
+        //         toastr.error('Event Schedule: Please set event schedule');
+        //         return;  
+        //     }
+        // }
     
     if(schedule){
         events_schedule = '1';
@@ -4042,12 +4042,12 @@ $(document).on("click", ".li_guest", function () {
 
     var activity=$('.new_append_activity').length;
     console.log(activity);
-    if(schedule){
-        if(activity==0){
-            toastr.error('Event Schedule: Please set event schedule');
-            return;  
-        }
-    }
+    // if(schedule){
+    //     if(activity==0){
+    //         toastr.error('Event Schedule: Please set event schedule');
+    //         return;  
+    //     }
+    // }
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
