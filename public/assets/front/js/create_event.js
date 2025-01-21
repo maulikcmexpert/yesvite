@@ -326,8 +326,11 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             success: function (response) {
                 if (response.status == "1") {
-                    $(".group_list").append(response.view);
 
+                    $(".group_list").append(response.view);
+                    var grplth = $('.listgroups').length;
+                    console.log(grplth);
+                    
                     var newItem = `
                         <div class="swiper-slide">
                             <div class="group-card view_members" data-id="${response.data.group_id}">
