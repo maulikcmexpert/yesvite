@@ -1320,9 +1320,9 @@
                                                         fill="#F73C71"></path>
                                                 </svg>
                                             </span>
-                                            <h6 class="me-2 missing-category-h6{{ $data['id'] }}"
+                                            <h6 class="me-2 missing-category-h6-{{ $data['id'] }}"
                                                 style="color: rgb(192, 52, 52);"><span
-                                                    id="missing-category{{ $data['id'] }}">{{$data['remainingQnt']}}</span> Missing</h6>
+                                                    id="missing-category-{{ $data['id'] }}">{{$data['remainingQnt']}}</span> Missing</h6>
                                         @else
                                             <span
                                                 class="me-2 missing-category-h6-{{ $data['id'] }} missing-category-svg-{{ $data['id'] }}"
@@ -1334,9 +1334,9 @@
                                                         fill="#23AA26"></path>
                                                 </svg>
                                             </span>
-                                            <h6 class="me-2 missing-category-h6{{ $data['id'] }}"
+                                            <h6 class="me-2 missing-category-h6-{{ $data['id'] }}"
                                                 style="color: rgb(52, 192, 92);"><span
-                                                    id="missing-category{{ $data['id'] }}">0</span> Missing</h6>
+                                                    id="missing-category-{{ $data['id'] }}">0</span> Missing</h6>
                                         @endif
                                         <input type="hidden" class="total-potluck-category{{ $data['id'] }}"
                                             value="2">
@@ -1481,6 +1481,123 @@
                                                         </div>
                                                     </button>
                                                 </h2>
+                                                @if (count($items['item_carry_users']) == 0)
+                                                    <div id="lumpia-collapseOne-{{ $items['id'] }}-{{ $data['id'] }}"
+                                                    class="accordion-collapse" aria-labelledby="lumpia"
+                                                    data-bs-parent="#accordionFlushExample" style="">
+                                                    <div class="accordion-body">
+                                                        <div class="accordion-body-content"
+                                                            style="display: none;">
+                                                            @if ($values['profile'] != '')
+                                                                <img src="{{ $values['profile'] }}"
+                                                                    alt="">
+                                                                <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                </h5>
+                                                            @endif
+                                                            <span class="ms-auto">1</span>
+                                                        </div>
+                                                        <div class="accordion-body-content limits-count"
+                                                            id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                                                            @if ($values['profile'] == '')
+                                                                <h5
+                                                                    class="{{ $fontColor }} add-item-under-text">
+                                                                    {{ $initials }}</h5>
+                                                                <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                </h5>
+                                                            @endif
+                                                            @if ($values['user_id'] == $eventDetail['user_id'])
+                                                                <div class="qty-container ms-auto">
+                                                                    <input type="hidden"
+                                                                        class="category-item-key"
+                                                                        value="{{ $items['id'] }}">
+                                                                    <input type="hidden"
+                                                                        class="category-index-key"
+                                                                        value="{{ $data['id'] }}">
+                                                                    <input type="hidden"
+                                                                        class="category-item-quantity"
+                                                                        value="{{ $items['quantity'] }}">
+                                                                    <input type="hidden"
+                                                                        class="item-quantity-minus"
+                                                                        value="{{ $values['quantity'] }}">
+                                                                    <button class="qty-btnminus"
+                                                                        type="button"><i
+                                                                            class="fa fa-minus"></i></button>
+                                                                    <input type="number" name="qty"
+                                                                        value="{{ $values['quantity'] }}"
+                                                                        class="input-qty" readonly="">
+                                                                    <button class="qty-btnplus"
+                                                                        type="button"><i
+                                                                            class="fa fa-plus"></i></button>
+                                                                </div>
+
+                                                                <div class="d-flex">
+                                                                    <a href="#" class="me-3">
+                                                                        <svg width="16" height="16"
+                                                                            viewBox="0 0 16 16" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
+                                                                                stroke="#94A3B8"
+                                                                                stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path
+                                                                                d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
+                                                                                stroke="#94A3B8"
+                                                                                stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </a>
+                                                                    <a href="#" class="delete-self-bring"
+                                                                        data-categoryitem="{{ $items['id'] }}"
+                                                                        data-categoryindex="{{ $data['id'] }}"
+                                                                        data-itemquantity="{{$items['quantity']}}">
+                                                                        <svg width="16" height="16"
+                                                                            viewBox="0 0 16 16" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                            </path>
+                                                                            <path d="M6.88666 11H9.10666"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path d="M6.33331 8.33398H9.66665"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                                                       
+                                                @endif
                                                 @foreach ($items['item_carry_users'] as $values)
                                                     @php
                                                         $firstInitial = !empty($values['first_name'])
@@ -1562,9 +1679,9 @@
                                                                             </svg>
                                                                         </a>
                                                                         <a href="#" class="delete-self-bring"
-                                                                            data-categoryitem="0"
-                                                                            data-categoryindex="0"
-                                                                            data-itemquantity="1">
+                                                                            data-categoryitem="{{ $items['id'] }}"
+                                                                            data-categoryindex="{{ $data['id'] }}"
+                                                                            data-itemquantity="{{$items['quantity']}}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1607,6 +1724,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+
                                             </div>
                                         </div>
                                     </div>

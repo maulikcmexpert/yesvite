@@ -4500,8 +4500,10 @@ function update_self_bring(
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 quantity + "/" + categoryItemQuantity
             );
+            alert(response);
+            alert(categoryIndexKey);
             $("#missing-category-" + categoryIndexKey).text(response);
-            
+            // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
                 var svg =
                     '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>';
@@ -4602,23 +4604,24 @@ $(document).on("click", ".delete-self-bring", function () {
     var itemquantity = $(this).data("itemquantity");
     $(this).parent().parent().hide();
     var self_bring_quantity =  $(this)
-        .parent()
-        .parent()
-        .find(".qty-container")
-        .children(".input-qty")
-        .val();
-
+    .parent()
+    .parent()
+    .find(".qty-container")
+    .children(".input-qty")
+    .val();
+    
     var total_category_count = parseInt($('.total-self-bring-'+categoryIndexKey).text());
-
+    
     total_category_count = total_category_count - parseInt(self_bring_quantity);
     $('.total-self-bring-'+categoryIndexKey).text(total_category_count);
     $(this)
-        .parent()
-        .parent()
-        .find(".qty-container")
-        .children(".input-qty")
-        .val(0);
-
+    .parent()
+    .parent()
+    .find(".qty-container")
+    .children(".input-qty")
+    .val(0);
+    
+    // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
     update_self_bring(categoryItemKey, categoryIndexKey, 0, itemquantity);
 });
