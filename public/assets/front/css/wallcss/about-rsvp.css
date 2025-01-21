@@ -21,7 +21,7 @@
     justify-content: center;
     color: var(--white);
     font-family: var(--SFProDisplay-Medium) !important;
-    font-size: 15px !important;
+    font-size: 20px !important;
     line-height: normal !important;
 }
 
@@ -149,6 +149,7 @@
 .birth-details .detail-btn-wrp{
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
 }
 
@@ -217,7 +218,14 @@
 .host-users-detail .img-wrp h5{
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 50% ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white) !important;
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 30px !important;
+    line-height: normal !important;
 }
 
 .host-users-detail .img-wrp img{
