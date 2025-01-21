@@ -6540,16 +6540,20 @@ $(document).on('keyup','.co_host_search',function(){
     
     search_name = $(this).val();
     $('#loader').css('display','block');
-    $(".list_all_invited_user").empty();
+    // $(".list_all_invited_user").empty();
     setTimeout(function () {
         if(isPhonecontact == 0){
+            $(".list_all_invited_user").html('');
             cohostoffset=0;
             cohostlimit=7;
             get_co_host_list(search_name,cohostlimit,cohostoffset,false);
         } else{
+            $(".list_all_invited_user").html('');
             cohostphoneOffset=0;
             cohostphoneLimit=10;
             get_phone_host_list(search_name,cohostphoneLimit,cohostphoneOffset,false)
+            $(".list_all_invited_user").empty();
+
         }
     }, 500);
 })
