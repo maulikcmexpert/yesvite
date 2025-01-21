@@ -70,7 +70,7 @@
    color: var(--secondary-black);
    font-size: 16px;
    font-family: var(--SFProDisplay-Semibold);
-   margin-right: 4px;
+   margin-right: 6px;
    margin-bottom: 0;
 }
 
@@ -100,6 +100,8 @@
     width: 100px;
     height: 100px;
     margin: 0 auto 16px;
+    border: 1px solid #f1efef;
+    border-radius: 100%;
 }
 
 .massage-host .massge-data .host-img img{
@@ -352,6 +354,7 @@
     margin-top: 8px;
     font-family: var(--SFProDisplay-Regular);
     display: block;
+    line-height: 20px;
 }
 
 .post-potluck-category .host{
@@ -363,6 +366,9 @@
     display: inline-block;
     border-radius: 100px;
     margin-top: 5px;
+    line-height: 10px;
+    height: 19px;
+    width: 40px;
 }
 
 .post-potluck-category  .list-slide .accordion-button h5, .list-slide .accordion-btn h5 {
@@ -393,7 +399,18 @@
     padding: 10px;
 }
 
-.post-potluck-category .list-slide .accordion-body img.slide-user-img {
+.post-potluck-category .list-slide .accordion-body h5.slide-user-img{
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    margin-right: 10px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.post-potluck-category .list-slide .accordion-body img.slide-user-img
+{
     width: 24px;
     height: 24px;
     border-radius: 100%;
@@ -443,8 +460,8 @@
 }
 
 .qty-custom.qty-container button {
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
     background-color: #CBD5E1;
     color: #fff;
     border: 1px solid transparent;
@@ -456,6 +473,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.qty-custom.qty-container button i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 20px !important;
+    text-align: center;
 }
 
 .qty-custom.qty-container input {
@@ -792,6 +817,8 @@
     border: none;
     width: 120px;
     border-radius: 16px;
+    max-width: 120px;
+    min-width: 120px;
 }
 
 .category-list .dropdown .dropdown-menu.show li{

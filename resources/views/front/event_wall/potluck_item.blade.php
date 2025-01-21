@@ -20,7 +20,7 @@
                             fill="#F73C71" />
                     </svg>
                 </span>
-                <div>
+                <div class="d-flex flex-column">
                     <h5>{{ $description }}</h5>
                     <span class="list-created">Requested by: {{ $user['first_name'] }}</span>
                     <span class="host">Host</span>
@@ -52,13 +52,13 @@
                             $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                             $fontColor = 'fontcolor' . strtoupper($firstInitial);
                         @endphp
-                        <h5 class="{{ $fontColor }}">
+                        <h5 class="{{ $fontColor }} slide-user-img">
                             {{ $initials }}
                         </h5>
                     @endif
                     <h5>{{ $user['first_name'] }} {{ $user['last_name'] }}</h5>
                     <div class="qty-container qty-custom ms-auto">
-                        <button class="qty-btn-minus minus" type="button"><i class="fa fa-minus"></i></button>
+                        <button class="qty-btn-minus minus m-0" type="button"><i class="fa fa-minus"></i></button>
                         <input type="number" name="qty" value="0" class="input-qty itemQty"
                             data-max="{{ $quantity }}" data-item-id="{{ $item_id }}" />
                         <button class="qty-btn-plus plus" type="button"><i class="fa fa-plus"></i></button>
