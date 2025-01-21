@@ -86,9 +86,10 @@ class PaymentController extends Controller
 
             // Get the session ID from the query parameter
             $sessionId = $request->query('paid_id');
-            echo $sessionId;
-            die;
+
             if (!$sessionId) {
+                echo "invalid1";
+                die;
                 return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
@@ -98,6 +99,8 @@ class PaymentController extends Controller
             $coins = $this->getCoinsForPriceId($priceId); // Get coins based on priceId
 
             if (!$coins) {
+                echo $coins;
+                die;
                 return redirect()->route('checkout')->withErrors(['error' => 'Invalid price ID']);
             }
             // Fetch the session details from Stripe
@@ -149,9 +152,13 @@ class PaymentController extends Controller
                     // Return success view
                     return view('payment-success', ['user' => $user, 'coins' => $total_coin]);
                 } else {
+                    echo "Failed";
+                    die;
                     return redirect()->route('checkout')->withErrors(['error' => 'Failed to create subscription']);
                 }
             } else {
+                echo "Pay Failed";
+                die;
                 return redirect()->route('checkout')->withErrors(['error' => 'Payment failed']);
             }
         } catch (\Exception $e) {
