@@ -94,7 +94,7 @@ class PaymentController extends Controller
                 //return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
-
+            dd($session);
             $priceId = $session->line_items->data[0]->price->id;
 
             $coins = $this->getCoinsForPriceId($priceId); // Get coins based on priceId
