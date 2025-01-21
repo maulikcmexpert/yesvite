@@ -2805,8 +2805,9 @@ $(document).on("click", "#close_createEvent", function () {
 
     // $('#loader').css('display','block');
     $('#loader').css('display','block');
-
-    if (event_name != "" && event_date != "") {
+    
+    if (event_date != "") {
+    // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $('.current_step').text();
         let firstLetter = text.split(' ')[0]; 
