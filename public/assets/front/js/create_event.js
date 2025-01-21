@@ -2791,7 +2791,6 @@ $(document).on("click", "#close_createEvent", function () {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    eventData.isdraft='1';
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
@@ -2928,6 +2927,8 @@ $(document).on("click", "#close_createEvent", function () {
             },
         });
     }else{
+        eventData.isdraft='1';
+        eventData.step='1';
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
