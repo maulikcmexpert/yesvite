@@ -2997,7 +2997,7 @@ function savePage1Data(close = null) {
         if($('#schedule').is(":checked")){
             if(activity==0){
                 toastr.error('Event Schedule: Please set event schedule');
-                // return;  
+                return;  
             }
         }
     
