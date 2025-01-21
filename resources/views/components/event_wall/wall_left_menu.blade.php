@@ -1,25 +1,26 @@
-
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
             <div class="hosted-by-info-img">
                 @if ($eventDetails['user_profile'] != '')
-                <img src="{{ $eventDetails['user_profile'] }}" alt="" />
-            @else
-                @php
-                    $name = $eventDetails['hosted_by'];
-                    // $parts = explode(" ", $name);
-                    $firstInitial = isset($eventDetails['hosted_by'][0])
-                        ? strtoupper($eventDetails['hosted_by'][0])
-                        : '';
-                    $secondInitial = isset($eventDetails['hosted_by'][5]) ? strtoupper($eventDetails['hosted_by'][5]) : '';
-                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                @endphp
-                <h5 class="{{ $fontColor }}">
-                    {{ $initials }}
-                </h5>
-            @endif
+                    <img src="{{ $eventDetails['user_profile'] }}" alt="" />
+                @else
+                    @php
+                        $name = $eventDetails['hosted_by'];
+                        // $parts = explode(" ", $name);
+                        $firstInitial = isset($eventDetails['hosted_by'][0])
+                            ? strtoupper($eventDetails['hosted_by'][0])
+                            : '';
+                        $secondInitial = isset($eventDetails['hosted_by'][5])
+                            ? strtoupper($eventDetails['hosted_by'][5])
+                            : '';
+                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                    @endphp
+                    <h5 class="{{ $fontColor }}">
+                        {{ $initials }}
+                    </h5>
+                @endif
 
             </div>
             <div class="hosted-by-info-content">
@@ -47,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#" >
+                    <a class="dropdown-item" href="#">
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.3334 10.75V14.25C13.3334 17.1667 12.1667 18.3334 9.25002 18.3334H5.75002C2.83335 18.3334 1.66669 17.1667 1.66669 14.25V10.75C1.66669 7.83335 2.83335 6.66669 5.75002 6.66669H9.25002C12.1667 6.66669 13.3334 7.83335 13.3334 10.75Z"
@@ -77,32 +78,20 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Slides -->
-
                 @if (!empty($eventDetails['event_images']) && count($eventDetails['event_images']) > 0)
-
                     @foreach ($eventDetails['event_images'] as $image)
-                        {{-- {{dd(1)}} --}}
-
                         <div class="swiper-slide">
                             <div class="hosted-by-template-slider-img">
-                            @if ($image != '')
-                            <img src="{{ $image }}" alt="" />
-                    @else
-                        @php
-                            $name = $eventDetails['hosted_by'];
-                            // $parts = explode(" ", $name);
-                            $firstInitial = isset( $eventDetails['hosted_by'][0])
-                                ? strtoupper( $eventDetails['hosted_by'][5])
-                                : '';
-                            $secondInitial = isset($eventDetails['hosted_by'][0]) ? strtoupper($eventDetails['hosted_by'][5]) : '';
-                            $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                            $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                        @endphp
-                        <h5 class="{{ $fontColor }}">
-                            {{ $initials }}
-                        </h5>
-                    @endif
-                                <!-- <img src="{{ $image }}" alt="" /> -->
+                                @php
+                                    // Check if the image file exists
+                                    $imagePath = public_path($image); // Adjust the path based on your folder structure
+                                @endphp
+
+                                @if (file_exists($imagePath))
+                                    <img src="{{ asset($image) }}" alt="Event Image" />
+                                @else
+                                    <img src="{{ asset('assets/front/img/host-by-template-img.png') }}" alt="Default Image" />
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -116,11 +105,11 @@
                 @endif
             </div>
 
-
             <!-- Custom Pagination -->
             <div class="custom-pagination"></div>
         </div>
     </div>
+
 
     @if ($page !== 'about')
         <div class="hosted-by-detail">
@@ -129,14 +118,14 @@
                 <ul>
                     <li>RSVP By: {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}</li>
                     @if (!empty($eventDetails['podluck']))
-                    @if ($eventDetails['podluck'] == 1)
-                        <li>Potluck Event</li>
+                        @if ($eventDetails['podluck'] == 1)
+                            <li>Potluck Event</li>
+                        @endif
                     @endif
-                @endif
-                @if (!empty($eventDetails['adult_only_party']))
-                    @if ($eventDetails['adult_only_party'] == 1)
-                        <li>Adults Only</li>
-                    @endif
+                    @if (!empty($eventDetails['adult_only_party']))
+                        @if ($eventDetails['adult_only_party'] == 1)
+                            <li>Adults Only</li>
+                        @endif
                     @endif
                     <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
                 </ul>
@@ -159,8 +148,8 @@
                                 stroke-linejoin="round" />
                             <path d="M13.0801 13.9167H13.0875" stroke="#64748B" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
-                            <path d="M9.99803 11.4167H10.0055" stroke="#64748B" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                            <path d="M9.99803 11.4167H10.0055" stroke="#64748B" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M9.99803 13.9167H10.0055" stroke="#64748B" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M6.91209 11.4167H6.91957" stroke="#64748B" stroke-width="2"
@@ -235,40 +224,38 @@
         </div>
     @endif
 </div>
-   <!-- ====== cancel event ======== -->
-   <div class="modal fade cmn-modal cancel-event" id="cancelevent" tabindex="-1"
-   aria-labelledby="canceleventLabel" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered">
-       <div class="modal-content">
-           <!-- <div class="modal-header">
+<!-- ====== cancel event ======== -->
+<div class="modal fade cmn-modal cancel-event" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
        </div> -->
-           <div class="modal-body">
-               <div class="delete-modal-head text-center">
-                   <div class="delete-icon">
-                       <img src="{{ asset('assets/front/img/deleteicon.svg') }}" alt="delete">
-                   </div>
-                   <h4>Cancel Event</h4>
-                   <p>Cancelling this event will delete everything in this event including but not limited to all
-                       comments,
-                       photos, and settings associated with this event for you and your guests.</p>
-               </div>
-               <div class="guest-msg">
-                   <h5>Message to guests</h5>
-                   <textarea name="" id="">*Let your guests know why you are cancelling event.......</textarea>
-               </div>
-               <div class="cancel-event-text text-center">
-                   <h6>Event cancellation is not reversible.</h6>
-                   <p>Please confirm by typing <strong></strong> below.</p>
-                   <input type="text" placeholder="CANCEL" class="form-control">
-               </div>
-           </div>
-           <div class="modal-footer cancel-confirm-btn">
-               <button type="button" class="btn btn-secondary cancel-btn"
-                   data-bs-dismiss="modal">Cancel</button>
-               <button type="button" class="btn btn-secondary confirm-btn"
-                   data-bs-dismiss="modal">Confirm</button>
-           </div>
-       </div>
-   </div>
+            <div class="modal-body">
+                <div class="delete-modal-head text-center">
+                    <div class="delete-icon">
+                        <img src="{{ asset('assets/front/img/deleteicon.svg') }}" alt="delete">
+                    </div>
+                    <h4>Cancel Event</h4>
+                    <p>Cancelling this event will delete everything in this event including but not limited to all
+                        comments,
+                        photos, and settings associated with this event for you and your guests.</p>
+                </div>
+                <div class="guest-msg">
+                    <h5>Message to guests</h5>
+                    <textarea name="" id="">*Let your guests know why you are cancelling event.......</textarea>
+                </div>
+                <div class="cancel-event-text text-center">
+                    <h6>Event cancellation is not reversible.</h6>
+                    <p>Please confirm by typing <strong></strong> below.</p>
+                    <input type="text" placeholder="CANCEL" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer cancel-confirm-btn">
+                <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary confirm-btn" data-bs-dismiss="modal">Confirm</button>
+            </div>
+        </div>
+    </div>
 </div>

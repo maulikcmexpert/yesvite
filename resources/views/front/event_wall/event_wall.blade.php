@@ -176,6 +176,7 @@
                                                 <div class="posts-card-inner-wrp">
                                                     <h3 class="posts-card-inner-questions">{{ $post['post_message'] }}
                                                     </h3>
+                                                  {{-- {{  dd($post['post_image'])}} --}}
                                                     @if (!empty($post['post_image']))
                                                         @foreach ($post['post_image'] as $image)
                                                             <div class="posts-card-show-post-wrp">
