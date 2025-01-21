@@ -6159,6 +6159,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
     if(selected_co_host == ''){
         $('.guest-contacts-wrp').css('display','none');
         $('.guest-contacts-wrp').removeClass('guest-contacts-test');
+        cohostId="";
         var checkedCheckbox = $('input[name="guest_list[]"]:checked');
  
         if (checkedCheckbox.length > 0) {
