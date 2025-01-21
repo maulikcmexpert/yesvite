@@ -2794,10 +2794,10 @@ $(document).on("click", "#close_createEvent", function () {
         // confirm('Event type is empty. Are you sure you want to proceed?')
         return;
     }
-    if (event_name == "") {
-        $("#deleteModal").modal("show");
-        return;
-    }
+    // if (event_name == "") {
+    //     $("#deleteModal").modal("show");
+    //     return;
+    // }
     if (event_date == "") {
         $("#deleteModal").modal("show");
         return;
@@ -3279,15 +3279,7 @@ function savePage1Data(close = null) {
 
 function savePage3Data(close=null) {
     // let invited_user_ids = [];
-    var checkedCheckbox = parseInt($('.invite-count').text());
-
-    if (checkedCheckbox == 0) {
-        toastr.error("please first select at list one guest to invite");
-        $('#loader').css('display', 'none');
-
-        return;
-    }
-
+   
     // eventData.invited_user_ids = invited_user_ids;
 
     // console.log(eventData);
@@ -3301,7 +3293,16 @@ function savePage3Data(close=null) {
     //     },
 
     //     success: function (response) {
-            
+        if(close==null||close==""){
+            var checkedCheckbox = parseInt($('.invite-count').text());
+            if (checkedCheckbox == 0) {
+                toastr.error("please first select at list one guest to invite");
+                $('#loader').css('display', 'none');
+
+                return;
+            }
+        
+        }
             $(".list_all_invited_user").empty();
             // $(".list_all_invited_user").append(response);
             if(close==null||close==""){
