@@ -5011,7 +5011,7 @@ $(document).on("click",".remove_co_host",function(){
     // eventData.co_host_prefer_by = '';
     // selected_co_host = '';
     // selected_co_host_prefer_by = '';
-    // selected_dataId="";
+    selected_dataId="";
     co_host_is_selected_close=true;
 
     $('.guest-contacts-wrp').css('display','none');
