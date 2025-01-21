@@ -2886,6 +2886,8 @@ $(document).on("click", "#close_createEvent", function () {
         // }
         savePage1Data(1);
       
+        savePage3Data();
+
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
@@ -3267,12 +3269,14 @@ function savePage1Data(close = null) {
     // window.location.href = '/create-event-page-2';
 }
 
-function savePage3Data() {
+function savePage3Data(close=null) {
     // let invited_user_ids = [];
     var checkedCheckbox = parseInt($('.invite-count').text());
 
     if (checkedCheckbox == 0) {
         toastr.error("please first select at list one guest to invite");
+        $('#loader').css('display', 'none');
+
         return;
     }
 
@@ -3292,19 +3296,34 @@ function savePage3Data() {
             
             $(".list_all_invited_user").empty();
             // $(".list_all_invited_user").append(response);
-            $("step_1").hide();
-            $(".step_2").hide();
-            $(".step_3").hide();
-            handleActiveClass('.li_setting');
-            $('.event_create_percent').text('99%');
-            $('.current_step').text('4 of 4');
-            $(".step_4").show();
-            $('.li_guest').find(".side-bar-list").addClass("menu-success");
-            active_responsive_dropdown('drop-down-event-setting');
-            if(final_step == 3){
-                final_step = 4;
+            if(close==null||close==""){
+                $("step_1").hide();
+                $(".step_2").hide();
+                $(".step_3").hide();
+                handleActiveClass('.li_setting');
+                $('.event_create_percent').text('99%');
+                $('.current_step').text('4 of 4');
+                $(".step_4").show();
+                $('.li_guest').find(".side-bar-list").addClass("menu-success");
+                active_responsive_dropdown('drop-down-event-setting');
+                if(final_step == 3){
+                    final_step = 4;
+                }
+                eventData.step = final_step;
             }
-            eventData.step = final_step;
+            // $("step_1").hide();
+            // $(".step_2").hide();
+            // $(".step_3").hide();
+            // handleActiveClass('.li_setting');
+            // $('.event_create_percent').text('99%');
+            // $('.current_step').text('4 of 4');
+            // $(".step_4").show();
+            // $('.li_guest').find(".side-bar-list").addClass("menu-success");
+            // active_responsive_dropdown('drop-down-event-setting');
+            // if(final_step == 3){
+            //     final_step = 4;
+            // }
+            // eventData.step = final_step;
     //     },
     //     error: function (xhr, status, error) {
     //         console.log("AJAX error: " + error);
