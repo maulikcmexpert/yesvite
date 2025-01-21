@@ -51,7 +51,7 @@ class EventWallController extends Controller
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
-
+$js=['event_wall'];
 
         $event = decrypt($id);
         $encrypt_event_id = $id;
@@ -662,8 +662,8 @@ class EventWallController extends Controller
             'current_page',
             'eventDetails',
             'rsvpSent',
-            'login_user_id'
-
+            'login_user_id',
+'js'
 
         ));
 

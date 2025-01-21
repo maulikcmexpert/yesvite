@@ -906,3 +906,46 @@ $(document).on('click','.notification_read',function(){
 
 });
 })
+// ===showmore-show-less===
+$(document).ready(function () {
+    var showChar = 150; // Maximum characters to show initially
+    var ellipsestext = "...";
+    var moretext = "See More";
+    var lesstext = "See Less";
+
+    $(".posts-card-inner-questions").each(function () {
+      var content = $(this).html();
+      if (content.length > showChar) {
+        var show_content = content.substr(0, showChar); // Content to show initially
+        var hide_content = content.substr(showChar); // Content to hide
+        var html =
+          show_content + // Show part
+          '<span class="moreelipses">' +
+          ellipsestext +
+          "</span>" + // Ellipses
+          '<span class="remaining-content" style="display:none;">' + // Hidden part
+          hide_content +
+          "</span>" +
+          '&nbsp;&nbsp;<a href="javascript:void(0);" class="morelink">' +
+          moretext +
+          "</a>";
+        $(this).html(html); // Set the HTML of the expandable content
+      }
+    });
+
+    $(".morelink").click(function () {
+      var remainingContent = $(this).prev(".remaining-content");
+      var moreLink = $(this);
+      if (moreLink.hasClass("less")) {
+        moreLink.removeClass("less");
+        moreLink.html(moretext);
+        remainingContent.slideUp(300); // Hide the rest of the content with animation
+      } else {
+        moreLink.addClass("less");
+        moreLink.html(lesstext);
+        remainingContent.slideDown(300); // Show the rest of the content with animation
+      }
+      $(this).prev(".moreelipses").toggle(); // Toggle ellipses
+      return false; // Prevent default link behavior
+    });
+  });

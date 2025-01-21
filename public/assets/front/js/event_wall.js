@@ -951,7 +951,7 @@ $(document).ready(function () {
         var photoForm = $('#photoForm');
         var textForm = $('#textform');
         var postContent = document.getElementById('postContent').value.trim();
-       // Fallback to empty string if #postContent does not exist
+        // Fallback to empty string if #postContent does not exist
         console.log('Poll Form:', pollForm.length > 0 ? 'Exists' : 'Does not exist');
         console.log('Photo Form:', photoForm.length > 0 ? 'Exists' : 'Does not exist');
         console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
@@ -1009,7 +1009,7 @@ $(document).ready(function () {
     let savedVisibility = localStorage.getItem('post_privacys') || '1'; // Default: Everyone
     let savedAllowComments = localStorage.getItem('commenting_on_off') === '1'; // Convert to boolean
     console.log('Saved Allow Comments:', savedAllowComments); // Debugging
-    if (!savedAllowComments ==  true) {
+    if (!savedAllowComments == true) {
         savedAllowComments = '1'; // Default to true
         localStorage.setItem('commenting_on_off', savedAllowComments);
     }
@@ -1023,7 +1023,7 @@ $(document).ready(function () {
         $('input[name="post_privacy"][value="1"]').prop('checked', true);
     }
 
-       $('#allowComments').prop('checked', savedAllowComments );
+    $('#allowComments').prop('checked', savedAllowComments);
 
     // Update hidden fields with initial values
     $('#hiddenVisibility').val(savedVisibility);
@@ -1069,63 +1069,105 @@ $(".posts-card-like-btn").on("click", function () {
     icon.classList.toggle('fa-solid');
 });
 
+$(document).ready(function () {
+    let longPressTimer;
+    let isLongPresss = false;
 
-let longPressTimer;
-let isLongPresss = false;
+    $(document).on('mousedown', '#likeButton', function () {
+        isLongPresss = false; // Reset the flag
+        const button = $(this);
 
-$(document).on('mousedown', '#likeButton', function () {
-    isLongPresss = false; // Reset the flag
-    const button = $(this);
+        // Start the long press timer
+        longPressTimer = setTimeout(() => {
+            isLongPresss = true; // Mark as long press
+            const emojiDropdown = button.closest('.posts-card-like-comment-right').find('#emojiDropdown');
+            emojiDropdown.show(); // Show the emoji picker
+            //button.find('i').text(''); // Clear the heart icon
+        }, 500); // 500ms for long press
+    });
 
-    // Start the long press timer
-    longPressTimer = setTimeout(() => {
-        isLongPresss = true; // Mark as long press
-        const emojiDropdown = button.closest('.emoji_display_like').find('#emojiDropdown');
-        emojiDropdown.show(); // Show the emoji picker
-        //button.find('i').text(''); // Clear the heart icon
-    }, 500); // 500ms for long press
-});
+    $(document).on('click', '#likeButton', function () {
+        clearTimeout(longPressTimer); // Clear the long press timer
 
-$(document).on('click', '#likeButton', function () {
-    clearTimeout(longPressTimer); // Clear the long press timer
+        // If it's a long press, don't process the click event
+        if (isLongPresss) return;
 
-    // If it's a long press, don't process the click event
-    if (isLongPresss) return;
+        // Handle single tap like/unlike
+        const button = $(this);
+        const isLiked = button.hasClass('liked');
+        const reaction = isLiked ? '\u{1F90D}' : '\u{2764}'; // Toggle reaction: 💔 or ❤️
 
-    // Handle single tap like/unlike
-    const button = $(this);
-    const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{1F90D}' : '\u{2764}'; // Toggle reaction: 💔 or ❤️
-
-    // Toggle like button appearance
-    if (isLiked) {
-        button.removeClass('liked');
-        button.find('i').removeClass('fa-solid').addClass('fa-regular');
-    } else {
-        button.addClass('liked');
-        button.find('i').removeClass('fa-regular').addClass('fa-solid');
-    }
-
-    // AJAX call to update the like state
-    const eventId = button.data('event-id');
-    const eventPostId = button.data('event-post-id');
-    $.ajax({
-        url: base_url + "event_wall/userPostLikeDislike",
-        method: "POST",
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        contentType: "application/json",
-        data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: reaction }),
-        success: function (response) {
-            if (response.status === 1) {
-                $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            alert('An error occurred. Please try again.');
+        // Toggle like button appearance
+        if (isLiked) {
+            button.removeClass('liked');
+            button.find('i').removeClass('fa-solid').addClass('fa-regular');
+        } else {
+            button.addClass('liked');
+            button.find('i').removeClass('fa-regular').addClass('fa-solid');
         }
+
+        // AJAX call to update the like state
+        const eventId = button.data('event-id');
+        const eventPostId = button.data('event-post-id');
+        $.ajax({
+            url: base_url + "event_wall/userPostLikeDislike",
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            contentType: "application/json",
+            data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: reaction }),
+            success: function (response) {
+                if (response.status === 1) {
+                    $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+
+    $(document).on('click', '#emojiDropdown .emoji', function () {
+        const selectedEmoji = $(this).data('emoji');
+        const button = $(this).closest('.photo-card-head-right').find('#likeButton');
+        const emojiDisplay = button.find('#show_Emoji');
+
+        // Replace heart icon with selected emoji
+        emojiDisplay.removeClass();
+        emojiDisplay.text(selectedEmoji);
+
+        // AJAX call to update emoji reaction
+        const eventId = button.data('event-id');
+        const eventPostId = button.data('event-post-id');
+        $.ajax({
+            url: base_url + "event_photo/userPostLikeDislike",
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            contentType: "application/json",
+            data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: selectedEmoji }),
+            success: function (response) {
+                if (response.status === 1) {
+                    $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        // Hide emoji picker
+        $(this).closest('#emojiDropdown').hide();
     });
 });
+$(".show-comments-btn").click(function () {
+    $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+});
 
+$(".show-comment-reply-btn").click(function () {
+    $(".reply-on-comment").toggleClass("d-none");
+});
