@@ -81,10 +81,13 @@ class PaymentController extends Controller
             if (!$user) {
                 return redirect()->route('login')->withErrors(['error' => 'User not authenticated']);
             }
-            echo 1;
-            die;
+
+            // https://yesvite.cmexpertiseinfotech.in/payment-success?paid_id=cs_test_a12WIk1XTlXXS9dsItyN7kPBvCsvETflnbIgjlIJRBZawweUXU9ODc1Mc2
+
             // Get the session ID from the query parameter
             $sessionId = $request->query('paid_id');
+            echo $sessionId;
+            die;
             if (!$sessionId) {
                 return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
