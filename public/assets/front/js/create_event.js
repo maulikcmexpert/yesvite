@@ -6378,7 +6378,7 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
             $(".list_all_contact_user").html(data.view);
         }
 
-        // $('input[name="guest_list[]"]:checked').each(function () {
+        $('input[name="guest_list[]"]:checked').each(function () {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
             var profile_or_text = $(this).data("profile_or_text");
@@ -6395,14 +6395,14 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
             // Update UI based on the `profile_or_text` condition
             if (profile_or_text == '1') {
                 $('.guest-img .selected-co-host-image').show();
-                $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
                 $('.guest-img .selected-host-h5').css('display', 'none');
             } else {
                 // $('.guest-img').html(profilePhoto    );
                 $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display', 'none');
-                $('.guest-img .selected-host-h5').text(final_initial);
-                var firstinitial = final_initial.charAt(0);
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
     
                 // $('.selected-host-h5').removeClass(function (index, className) {
                 //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
@@ -6416,12 +6416,12 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
                 // Add the new class
                 $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
-            $('.selected-host-name').text(final_user_name);
+            $('.selected-host-name').text(user_name);
         });
 
 
         cohostphonebusy=false;
-    // })
+    })
     .fail(function (jqXHR, ajaxOptions, thrownError) {
         alert("server not responding...");
     });
