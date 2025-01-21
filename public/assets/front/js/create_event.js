@@ -285,6 +285,11 @@ $(document).on("click", "#delete_group", function () {
         success: function (response) {
             if (response.status == "1") {
                 $(".added_group" + group_id).remove();
+                
+                var grplth = $('.group_list .listgroups').length;
+                    if(grplth==0){
+                        $(".group_list").html('No data found');    
+                    }
                 var sliderIndex = $('.group-card.view_members[data-id="' + group_id + '"]')
                 .closest('.swiper-slide') // Find the nearest swiper-slide parent
                 .attr('data-swiper-slide-index'); // Get its data-swiper-slide-index attribute
@@ -326,8 +331,13 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             success: function (response) {
                 if (response.status == "1") {
+                    var grplth = $('.group_list .listgroups').length;
+                    if(grplth==0){
+                        $(".group_list").html('');    
+                    }
                     $(".group_list").append(response.view);
-
+                 
+                    
                     var newItem = `
                         <div class="swiper-slide">
                             <div class="group-card view_members" data-id="${response.data.group_id}">
@@ -1017,7 +1027,7 @@ $("#end_time").on("change", function () {
         $(".end_time").show();
         $(".ac-end-time").show();
     } else {
-        $('#end_time').val('');
+        $('.end-time-create').val('');
         $(".end_time").hide();
         $(".ac-end-time").hide();
     }
@@ -1027,6 +1037,7 @@ $("#rsvp_by_date").on("change", function () {
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
     } else {
+        $('#rsvp-by-date').val('');
         $(".rsvp_by_date").hide();
     }
 });
@@ -4649,6 +4660,11 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
+
+                var giftCardCount = $('.trgistry-content').length;
+                $('.add_gift_registry_count').html(`<span class="me-3"></span>
+                    <h5>${giftCardCount} Registry</h5>`);
+    
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
