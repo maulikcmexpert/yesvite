@@ -62,7 +62,7 @@ class PaymentController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => route('payment.success', ['session_id' => '{CHECKOUT_SESSION_ID}']), // Include session ID in success URL
+                'success_url' => route('payment.success') . '?paid_id={CHECKOUT_SESSION_ID}', // Include session ID in success URL
                 'cancel_url' => route('payment.failed'),
             ]);
 
@@ -81,9 +81,10 @@ class PaymentController extends Controller
             if (!$user) {
                 return redirect()->route('login')->withErrors(['error' => 'User not authenticated']);
             }
-
+            echo 1;
+            die;
             // Get the session ID from the query parameter
-            $sessionId = $request->query('session_id');
+            $sessionId = $request->query('paid_id');
             if (!$sessionId) {
                 return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
