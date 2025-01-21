@@ -6060,7 +6060,7 @@ $(document).on('click','.add_co_host',function(){
     $('.co_host_search').val('');
     $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
-    get_co_host_list(null,cohostlimit,cohostoffset,false);
+    get_co_host_list(null,cohostlimit,cohostoffset,false,1);
     $('#select_event_cohost').css('display','block');  
 
     setTimeout(() => {
@@ -6146,7 +6146,7 @@ $(document).on('click','.overlay',function(){
     toggleSidebar();
 });
 
-function get_co_host_list(search_name=null,limit,offset,scroll){
+function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null){
     var app_user = $("#app_user").val();
     var cohostId = $("#cohostId").val();
     var cohostpreferby = $("#cohostpreferby").val();
@@ -6228,16 +6228,49 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
             console.log("Prefer By Email:", prefer_by_email);
         
             // Update UI based on the `profile_or_text` condition
+            if(add_co_host==1){
+                if (profile_or_text == '1') {
+                    $('.guest-img .selected-co-host-image').show();
+                    $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
+                    $('.guest-img .selected-host-h5').css('display', 'none');
+                } else {
+                    // $('.guest-img').html(profilePhoto    );
+                    $('.selected-host-h5').show();
+                    $('.selected-co-host-image').css('display', 'none');
+                    $('.guest-img .selected-host-h5').text(final_initial);
+                    var firstinitial = final_initial.charAt(0);
+        
+                    // $('.selected-host-h5').removeClass(function (index, className) {
+                    //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                    // });
+                    // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+        
+                    $('.guest-img .selected-host-h5').removeClass(function (index, className) {
+                        return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+                    });
+                
+                    // Add the new class
+                    $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
+                }
+                $('.selected-host-name').text(final_user_name);
+            }else{
+
+            $('input[name="guest_list[]"]:checked').each(function () {
+                var profilePhoto = $(this).data('profile');
+                var user_name = $(this).data('username');
+                var profile_or_text = $(this).data("profile_or_text");
+                var initial = $(this).data("initial");
+                var prefer_by_email = $(this).data('prefer_by');
             if (profile_or_text == '1') {
                 $('.guest-img .selected-co-host-image').show();
-                $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
+                $('.guest-img .selected-co-host-image').attr('src', profilePhoto);
                 $('.guest-img .selected-host-h5').css('display', 'none');
             } else {
                 // $('.guest-img').html(profilePhoto    );
                 $('.selected-host-h5').show();
                 $('.selected-co-host-image').css('display', 'none');
-                $('.guest-img .selected-host-h5').text(final_initial);
-                var firstinitial = final_initial.charAt(0);
+                $('.guest-img .selected-host-h5').text(initial);
+                var firstinitial = initial.charAt(0);
     
                 // $('.selected-host-h5').removeClass(function (index, className) {
                 //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
@@ -6251,8 +6284,9 @@ function get_co_host_list(search_name=null,limit,offset,scroll){
                 // Add the new class
                 $('.guest-img .selected-host-h5').addClass('fontcolor' + firstinitial);
             }
-            $('.selected-host-name').text(final_user_name);
-        // });
+            $('.selected-host-name').text(user_name);
+        });
+            }
 
         // if(co_host_is_selected_close==true){
         //     $('.guest-contacts-wrp').css('display','none');
