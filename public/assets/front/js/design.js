@@ -461,6 +461,7 @@ $(document).on("click", ".design-sidebar-action", function() {
 });
 
 $(document).on("click", ".edit_design_tem", function(e) {
+    $('#close_createEvent').css('display','none');
     e.preventDefault();
     var url = $(this).data("url");
     var template = $(this).data("template");
