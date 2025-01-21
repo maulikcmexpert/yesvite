@@ -6251,7 +6251,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
         
             // Update UI based on the `profile_or_text` condition
             if(add_co_host==1){
-                if (profile_or_text == '1') {
+                if (final_profile_or_text == '1') {
                     $('.guest-img .selected-co-host-image').show();
                     $('.guest-img .selected-co-host-image').attr('src', final_profilePhoto);
                     $('.guest-img .selected-host-h5').css('display', 'none');
