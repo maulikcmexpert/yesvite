@@ -816,14 +816,18 @@
                                                         <div class="shedule-timing">
                                                             <h6>{{$schedule['end_time']}}</h6>
                                                         </div>
+                                                        @if($schedule['end_time'])
+
                                                         <div class="shedule-box red">
                                                             <div class="shedule-box-left">
-                                                                <h6>{{$schedule['activity_title']}}</h6>
                                                                 @if($schedule['end_time'])
+                                                                <h6>{{$schedule['activity_title']}}</h6>
                                                                 <span>{{$schedule['end_time']}}</span>
-                                                                @endif                                                            </div>
+                                                                @endif                                    
+                                                                                    </div>
                                                             <span class="hrs ms-auto">{{$schedule['total_time']}}</span>
                                                         </div>
+                                                        @endif
                                                         </div>
                                             @endif
                                              @endforeach
