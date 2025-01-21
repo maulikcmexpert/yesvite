@@ -4660,6 +4660,11 @@ $(document).on("click", ".add_gift_item_btn", function () {
                     $("#registry_item_id").val("");
                 }
                 $("#registry_list").append(response.view);
+
+                var giftCardCount = $('.trgistry-content').length;
+                $('.add_gift_registry_count').html(`<span class="me-3"></span>
+                    <h5>${giftCardCount} Registry</h5>`);
+    
                 toggleSidebar("sidebar_gift_registry");
                 $("#recipient_name").val("");
                 $("#registry_link").val("");
