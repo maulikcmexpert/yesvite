@@ -76,6 +76,7 @@ class PaymentController extends Controller
     public function paymentSuccess(Request $request)
     {
         try {
+            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
             // Get the current authenticated user
             $user = Auth::guard('web')->user();
 
@@ -95,10 +96,16 @@ class PaymentController extends Controller
                 //return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
-            dd($session);
-            $priceId = $session->line_items->data[0]->price->id;
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
+            $lineItems = $stripe->checkout->sessions->allLineItems($sessionId, []);
 
-            $coins = $this->getCoinsForPriceId($priceId); // Get coins based on priceId
+
+
+            if (!empty($lineItems->data)) {
+                $priceId = $lineItems->data[0]->price->id; // Get the price ID
+                $coins = $this->getCoinsForPriceId($priceId); // Map price ID to credits (coins)
+
+            }
 
             if (!$coins) {
                 echo $coins;
@@ -106,7 +113,7 @@ class PaymentController extends Controller
                 //return redirect()->route('checkout')->withErrors(['error' => 'Invalid price ID']);
             }
             // Fetch the session details from Stripe
-            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
 
             if ($session->payment_status == 'paid') {
