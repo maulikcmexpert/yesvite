@@ -6501,7 +6501,7 @@ $("#select_event_cohost").on("scroll", function () {
     var elementHeight = $(this).height();
    
     console.log({scrollTop,scrollHeight,elementHeight});
-    console.log($("#select_event_cohost").data('list'));
+    // console.log($("#select_event_cohost").data('list'));
 
         // if (scrollTop + elementHeight >= scrollHeight) {
         //     alert();
@@ -6511,8 +6511,8 @@ $("#select_event_cohost").on("scroll", function () {
         //     var scroll=true;
         //     get_co_host_list(search_name=null,cohostlimit,cohostoffset,scroll);
         //     }
-        // if (scrollTop > previousScrollTop) {
-        if (scrollTop + elementHeight >= scrollHeight) { 
+        if (scrollTop > previousScrollTop) {
+        if (scrollTop + elementHeight >= scrollHeight + 2) { 
            
             
             cohostbusy = true;
