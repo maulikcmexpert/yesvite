@@ -6083,6 +6083,8 @@ var cohostphonebusy=false;
 var cohostNoMoreContactData = false; 
 
 $(document).on('click','#phone-tab-cantact',function(){
+    $('.list_all_invited_user').css('display','none');
+    $('.list_all_contact_user').css('display','block');
     $('.co_host_serach').val('')
 
     $('.co_host_serach').css('display','none');
