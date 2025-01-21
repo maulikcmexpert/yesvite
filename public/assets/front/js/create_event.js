@@ -2886,7 +2886,9 @@ $(document).on("click", "#close_createEvent", function () {
         // }
         savePage1Data(1);
       
-        savePage3Data();
+        if(eventData.step==3){
+            savePage3Data();
+        }
 
         eventData.step = final_step;
         eventData.isdraft = "1";
