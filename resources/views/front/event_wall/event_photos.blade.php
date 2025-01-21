@@ -406,7 +406,7 @@
 
                                                 <div class="no-photos-screen-img">
                                                     <img src="{{ asset('assets/front/img/no-photo-screen.png') }}"
-                                                        alt="">
+                                                        alt="" loading="lazy">
                                                 </div>
 
                                                 <div class="no-photos-screen-content">
@@ -419,7 +419,7 @@
                                             <div class="phototab-add-new-photos-img">
                                                 @if ($photo['profile'] != '')
                                                 <img src="{{ $photo['profile']}}"
-                                                alt="">
+                                                alt="" loading="lazy">
                                             @else
                                                 @php
                                                     $name = $photo['firstname'];
@@ -491,7 +491,7 @@
                 <div class="modal-body">
                     <div class="create-post-profile">
                         <div class="create-post-profile-wrp">
-                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="">
+                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="" loading="lazy">
                             <h4>Everyone <i class="fa-solid fa-angle-down"></i></h4>
                         </div>
                     </div>
@@ -725,7 +725,7 @@
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
                                 <div class="posts-card-head-left-img">
-                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="">
+                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="" loading="lazy">
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
@@ -809,7 +809,7 @@
                                         <div class="swiper-slide" id="media_post">
                                             <div class="posts-card-show-post-img">
                                                 <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt="" />
+                                                    alt=""  loading="lazy"/>
                                             </div>
                                         </div>
                                         {{-- <div class="swiper-slide">
@@ -843,11 +843,11 @@
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
                                 <ul type="button" data-bs-toggle="modal"  data-bs-target="#reaction-modal">
-                                    <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="">
+                                    <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="" loading="lazy">
                                     </li>
                                     <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                            alt=""></li>
-                                    <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="">
+                                            alt="" loading="lazy"></li>
+                                    <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="" loading="lazy">
                                     </li>
                                     <p id="likes">5k Likes</p>
                                 </ul>
@@ -897,7 +897,7 @@
 
                             <div class="posts-card-show-all-comments-inner">
                                 <ul>
-                                    <li class="commented-user-wrp" data-comment-id="">
+                                    <li class="commented-user-wrp" data-comment-id="" data-replay-comment-id="">
                                         <input type="hidden" id="parent_comment_id" value="">
                                         <input type="hidden" id="reply_comment_id" value="">
                                         <div class="commented-user-head">
@@ -918,154 +918,32 @@
                                             </div>
                                         </div>
                                         <div class="commented-user-content">
-                                            <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa. Phasellus
-                                                et odio a augue
-                                                rutrum iaculis. Nulla id nisl in tortor accumsan auctor id vel elit.</p>
+                                            <p>Quisque ipsum nisl, cursus non metus vel, auctor
+                                                iaculis massa. Phasellus et odio a
+                                                augue rutrum iaculis. Nulla id nisl in tortor
+                                                accumsan auctor id vel elit.</p>
                                         </div>
                                         <div class="commented-user-reply-wrp">
-                                            <div class="position-relative d-flex align-items-center gap-2">
+                                            <div
+                                                class="position-relative d-flex align-items-center gap-2">
                                                 <button class="posts-card-like-btn"><i
                                                         class="fa-regular fa-heart"></i></button>
                                                 <p>121</p>
                                             </div>
-                                            <button class="commented-user-reply-btn">Reply</button>
-                                        </div>
-
-                                        <ul class="comment-replies">
-                                            <li class="reply-on-comment" data-comment-id="">
-                                                <div class="commented-user-head">
-                                                    <div class="commented-user-profile">
-                                                        <div class="commented-user-profile-img">
-                                                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="commented-user-profile-content">
-                                                            <h3>Angel Geidt</h3>
-                                                            <p>New York</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="posts-card-like-comment-right">
-                                                        <p>2h</p>
-                                                        <button class="posts-card-like-btn"><i
-                                                                class="fa-regular fa-heart"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="commented-user-content">
-                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa.
-                                                        Phasellus et odio a
-                                                        augue rutrum iaculis. Nulla id nisl in tortor accumsan auctor id
-                                                        vel elit.</p>
-                                                </div>
-                                                <div class="commented-user-reply-wrp">
-                                                    <div class="position-relative d-flex align-items-center gap-2">
-                                                        <button class="posts-card-like-btn"><i
-                                                                class="fa-regular fa-heart"></i></button>
-                                                        <p>121</p>
-                                                    </div>
-                                                    <button class="commented-user-reply-btn">Reply</button>
-                                                </div>
-                                            </li>
-
-                                            <button class="show-comment-reply-btn">Show 3 reply</button>
-                                        </ul>
-
-                                        {{-- <div class="posts-card-main-comment all-comments-textbox">
-                                            <input type="text" class="form-control" id="text"
-                                                placeholder="Add Comment">
-                                            <span class="comment-send-icon">
-                                                <svg viewBox="0 0 20 20" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                    </path>
-                                                    <path d="M4.5332 10H9.0332" stroke="#94A3B8" stroke-width="1.5"
-                                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            <span class="comment-microphone-icon">
-                                                <svg viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6V11.5C8 13.71 9.79 15.5 12 15.5Z"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                    </path>
-                                                    <path
-                                                        d="M4.34961 9.65002V11.35C4.34961 15.57 7.77961 19 11.9996 19C16.2196 19 19.6496 15.57 19.6496 11.35V9.65002"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                    </path>
-                                                    <path d="M10.6094 6.43C11.5094 6.1 12.4894 6.1 13.3894 6.43"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round"></path>
-                                                    <path
-                                                        d="M11.1992 8.55001C11.7292 8.41001 12.2792 8.41001 12.8092 8.55001"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                    </path>
-                                                    <path d="M12 19V22" stroke="#94A3B8" stroke-width="1.5"
-                                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </span>
-                                            <span class="comment-attech-icon">
-                                                <svg viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12.2009 11.8L10.7908 13.21C10.0108 13.99 10.0108 15.26 10.7908 16.04C11.5708 16.82 12.8408 16.82 13.6208 16.04L15.8409 13.82C17.4009 12.26 17.4009 9.72999 15.8409 8.15999C14.2809 6.59999 11.7508 6.59999 10.1808 8.15999L7.76086 10.58C6.42086 11.92 6.42086 14.09 7.76086 15.43"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                    </path>
-                                                    <path
-                                                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </div> --}}
-                                    </li>
-                                    {{-- <li class="commented-user-wrp">
-                                        <div class="commented-user-head">
-                                            <div class="commented-user-profile">
-                                                <div class="commented-user-profile-img">
-                                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                        alt="">
-                                                </div>
-                                                <div class="commented-user-profile-content">
-                                                    <h3>Angel Geidt</h3>
-                                                    <p>New York</p>
-                                                </div>
-                                            </div>
-                                            <div class="posts-card-like-comment-right">
-                                                <p>2h</p>
-                                                <button class="posts-card-like-btn" >
-                                                    <i class="fa-regular fa-heart"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="commented-user-content">
-                                            <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa. Phasellus
-                                                et odio a augue
-                                                rutrum iaculis. Nulla id nisl in tortor accumsan auctor id vel elit.</p>
-                                        </div>
-                                        <div class="commented-user-reply-wrp">
-                                            <div class="position-relative d-flex align-items-center gap-2">
-                                                <button class="posts-card-like-btn"><i
-                                                        class="fa-regular fa-heart"></i></button>
-                                                <p>121</p>
-                                            </div>
-                                            <button class="commented-user-reply-btn">Reply</button>
+                                            <button
+                                                class="commented-user-reply-btn">Reply</button>
                                         </div>
                                         <ul>
                                             <li class="reply-on-comment" data-comment-id="">
                                                 <div class="commented-user-head">
                                                     <div class="commented-user-profile">
-                                                        <div class="commented-user-profile-img">
+                                                        <div
+                                                            class="commented-user-profile-img">
                                                             <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
                                                                 alt="">
                                                         </div>
-                                                        <div class="commented-user-profile-content">
+                                                        <div
+                                                            class="commented-user-profile-content">
                                                             <h3>Angel Geidt</h3>
                                                             <p>New York</p>
                                                         </div>
@@ -1077,57 +955,30 @@
                                                     </div>
                                                 </div>
                                                 <div class="commented-user-content">
-                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa.
-                                                        Phasellus et odio a
-                                                        augue rutrum iaculis. Nulla id nisl in tortor accumsan auctor id
-                                                        vel elit.</p>
+                                                    <p>Quisque ipsum nisl, cursus non metus vel,
+                                                        auctor iaculis massa. Phasellus et
+                                                        odio a augue rutrum iaculis. Nulla id
+                                                        nisl
+                                                        in tortor accumsan auctor id vel
+                                                        elit.</p>
                                                 </div>
                                                 <div class="commented-user-reply-wrp">
-                                                    <div class="position-relative d-flex align-items-center gap-2">
+                                                    <div
+                                                        class="position-relative d-flex align-items-center gap-2">
                                                         <button class="posts-card-like-btn"><i
                                                                 class="fa-regular fa-heart"></i></button>
                                                         <p>121</p>
                                                     </div>
-                                                    <button class="commented-user-reply-btn">Reply</button>
+                                                    <button
+                                                        class="commented-user-reply-btn">Reply</button>
                                                 </div>
                                             </li>
-                                            <li class="reply-on-comment">
-                                                <div class="commented-user-head">
-                                                    <div class="commented-user-profile">
-                                                        <div class="commented-user-profile-img">
-                                                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="commented-user-profile-content">
-                                                            <h3>Angel Geidt</h3>
-                                                            <p>New York</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="posts-card-like-comment-right">
-                                                        <p>2h</p>
-                                                        <button class="posts-card-like-btn"><i
-                                                                class="fa-regular fa-heart"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="commented-user-content">
-                                                    <p>Quisque ipsum nisl, cursus non metus vel, auctor iaculis massa.
-                                                        Phasellus et odio a
-                                                        augue rutrum iaculis. Nulla id nisl in tortor accumsan auctor id
-                                                        vel elit.</p>
-                                                </div>
-                                                <div class="commented-user-reply-wrp">
-                                                    <div class="position-relative d-flex align-items-center gap-2">
-                                                        <button class="posts-card-like-btn"><i
-                                                                class="fa-regular fa-heart"></i></button>
-                                                        <p>121</p>
-                                                    </div>
-                                                    <button class="commented-user-reply-btn">Reply</button>
-                                                </div>
-                                            </li>
-                                            <button class="show-comment-reply-btn">Show 3 reply</button>
+
+                                            <button class="show-comment-reply-btn">Show 3
+                                                reply</button>
                                         </ul>
 
-                                    </li> --}}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1204,27 +1055,27 @@
               <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab"
                 data-bs-target="#nav-heart-reaction" type="button" role="tab" aria-controls="nav-heart-reaction"
                 aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt=""> 50
+                <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="" loading="lazy"> 50
               </button>
               <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab"
                 data-bs-target="#nav-thumb-reaction" type="button" role="tab" aria-controls="nav-thumb-reaction"
                 aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt=""> 50
+                <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt="" loading="lazy"> 50
               </button>
               <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab"
                 data-bs-target="#nav-smily-reaction" type="button" role="tab" aria-controls="nav-smily-reaction"
                 aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt=""> 50
+                <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt="" loading="lazy"> 50
               </button>
               <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab"
                 data-bs-target="#nav-eye-heart-reaction" type="button" role="tab"
                 aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt=""> 50
+                <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt="" loading="lazy"> 50
               </button>
               <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab"
                 data-bs-target="#nav-clap-reaction" type="button" role="tab" aria-controls="nav-clap-reaction"
                 aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt=""> 50
+                <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt="" loading="lazy"> 50
               </button>
             </div>
           </nav>
@@ -1240,7 +1091,7 @@
                   <div class="commented-user-head">
                     <div class="commented-user-profile">
                       <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
                       </div>
                       <div class="commented-user-profile-content">
                         <h3>Angel Geidt</h3>
@@ -1248,7 +1099,7 @@
                       </div>
                     </div>
                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="">
+                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="" loading="lazy">
                     </div>
                   </div>
                 </li>
@@ -1263,7 +1114,7 @@
                   <div class="commented-user-head">
                     <div class="commented-user-profile">
                       <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
                       </div>
                       <div class="commented-user-profile-content">
                         <h3>Angel Geidt</h3>
@@ -1271,7 +1122,7 @@
                       </div>
                     </div>
                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="">
+                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="" loading="lazy">
                     </div>
                   </div>
                 </li>
@@ -1286,7 +1137,7 @@
                   <div class="commented-user-head">
                     <div class="commented-user-profile">
                       <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
                       </div>
                       <div class="commented-user-profile-content">
                         <h3>Angel Geidt</h3>
@@ -1294,7 +1145,7 @@
                       </div>
                     </div>
                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt="">
+                      <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt="" loading="lazy">
                     </div>
                   </div>
                 </li>
@@ -1309,7 +1160,7 @@
                   <div class="commented-user-head">
                     <div class="commented-user-profile">
                       <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
                       </div>
                       <div class="commented-user-profile-content">
                         <h3>Angel Geidt</h3>
@@ -1317,7 +1168,7 @@
                       </div>
                     </div>
                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt="">
+                      <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt="" loading="lazy">
                     </div>
                   </div>
                 </li>
@@ -1332,7 +1183,7 @@
                   <div class="commented-user-head">
                     <div class="commented-user-profile">
                       <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}"  loading="lazy">
                       </div>
                       <div class="commented-user-profile-content">
                         <h3>Angel Geidt</h3>
@@ -1340,7 +1191,7 @@
                       </div>
                     </div>
                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt="">
+                      <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt="" loading="lazy">
                     </div>
                   </div>
                 </li>
@@ -1356,7 +1207,7 @@
                   <div class="commented-user-head">
                     <div class="commented-user-profile">
                       <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="">
+                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
                       </div>
                       <div class="commented-user-profile-content">
                         <h3>Angel Geidt</h3>
@@ -1364,7 +1215,7 @@
                       </div>
                     </div>
                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt="">
+                      <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt="" loading="lazy">
                     </div>
                   </div>
                 </li>

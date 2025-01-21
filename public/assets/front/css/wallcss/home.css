@@ -1046,7 +1046,7 @@ main {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 .uploded-delete-icon{
@@ -1462,6 +1462,14 @@ main {
   padding-right: 40px
 }
 
+.posts-card-main-comment .comment-send-icon{
+    font-size: inherit !important;
+    padding: 0 !important;
+    left: auto !important;
+    right: 15px !important;
+    transform: translateY(-50%) !important;
+}
+
 .comment-send-icon, .comment-microphone-icon, .comment-attech-icon{
   width: 100%;
   max-width: 20px;
@@ -1470,10 +1478,11 @@ main {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: 50% !important;
   transform: translateY(-50%);
   right: 15px;
   cursor: pointer;
+
 }
 
 .comment-microphone-icon{

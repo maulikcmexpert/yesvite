@@ -751,7 +751,7 @@ class EventPhotoController extends Controller
 
             $commentInfo['id'] = $replyList->id;
             $commentInfo['event_post_id'] = $replyList->event_post_id;
-            $commentInfo['comment'] = $replyList->comment;
+            $commentInfo['comment'] = $replyList->comment_text;
             $commentInfo['user_id'] = $replyList->user_id;
             $commentInfo['username'] = $replyList->user->firstname . ' ' . $replyList->user->lastname;
             $commentInfo['location'] = $replyList->user->city != "" ? trim($replyList->user->city) . ($replyList->user->state != "" ? ', ' . $replyList->user->state : '') : "";

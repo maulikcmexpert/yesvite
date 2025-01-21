@@ -1169,21 +1169,23 @@ $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
     const replyParentId = $('#reply_comment_id').val(); // Reply comment ID if replying
-    const parentCommentId = $('#parent_comment_id').val(); // Parent comment ID for top-level comments
+    const parentCommentId =$('.commented-user-wrp').data('comment-id');; // Parent comment ID for top-level comments
 
     // If comment text is empty, show alert and return
     if (commentText === '') {
         alert('Please enter a comment');
         return;
     }
-
+    const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+    $('#parent_comment_id').val(parentId); // Set the parent comment ID for replying
     console.log('Reply Parent ID:', replyParentId, 'Parent Comment ID:', parentCommentId);
+
 
     var eventId = $(this).data('event-id'); // Get the event ID from button data attribute
     var eventPostId = $(this).data('event-post-id'); // Get the event post ID from button data attribute
 
     // Determine the correct URL based on whether it's a reply or a new comment
-    const url = replyParentId
+    const url = parentCommentId
         ? base_url + "event_wall/userPostCommentReply"
         : base_url + "event_wall/userPostComment";
 
@@ -1277,13 +1279,13 @@ $(document).on('click', '.commented-user-reply-btn', function () {
 })
 
 });
-// $(".show-btn-comment").click(function () {
-//     let event_p_id = $(this).attr('event_p_id')
-//     $(".show_"+event_p_id).toggleClass("d-none");
-// });
+$(".show-btn-comment").click(function () {
+    let event_p_id = $(this).attr('event_p_id')
+    $(".show_"+event_p_id).toggleClass("d-none");
+});
 
-// $(".show-comment-reply-btn").click(function () {
-//     $(".reply-on-comment").toggleClass("d-none");
-// });
+$(".show-comment-reply-btn").click(function () {
+    $(".reply-on-comment").toggleClass("d-none");
+});
 
 

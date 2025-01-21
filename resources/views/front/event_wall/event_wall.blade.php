@@ -618,8 +618,31 @@
                                                 <div class="posts-card-head">
                                                     <div class="posts-card-head-left">
                                                         <div class="posts-card-head-left-img">
+                                                            @if ($post['profile'] != '')
                                                             <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                                                 alt="">
+                                                        @else
+                                                            @php
+
+                                                                // $parts = explode(" ", $name);
+                                                                $nameParts = explode(' ', $users->firstname);
+                                                                $lastname = explode(' ', $users->lastname);
+                                                                $firstInitial = isset($nameParts[0][0])
+                                                                    ? strtoupper($nameParts[0][0])
+                                                                    : '';
+                                                                $secondInitial = isset($lastname[0][0])
+                                                                    ? strtoupper($lastname[0][0])
+                                                                    : '';
+                                                                $initials = $firstInitial . $secondInitial;
+
+                                                                // Generate a font color class based on the first initial
+                                                                $fontColor = 'fontcolor' . $firstInitial;
+                                                            @endphp
+                                                            <h5 class="{{ $fontColor }}">
+                                                                {{ $initials }}
+                                                            </h5>
+                                                        @endif
+
                                                             <span class="active-dot"></span>
                                                         </div>
                                                         <div class="posts-card-head-left-content">
