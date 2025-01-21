@@ -2997,6 +2997,8 @@ function savePage1Data(close = null) {
         var activity=$('.new_append_activity').length;
         console.log(activity);
         if($('#schedule').is(":checked")){
+            var activity=$('.new_append_activity').length;
+            console.log(activity);
             if(activity==0){
                 toastr.error('Event Schedule: Please set event schedule');
                 return;  
