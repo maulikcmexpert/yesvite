@@ -6067,14 +6067,16 @@ $('#phone-tab-cantact').removeClass('active');
     $('.phone_co_host_search').val('');
     $('.add_co_host_tab').addClass('active');
     $('#phone-tab-cantact').removeClass('active');
-    get_co_host_list(null,cohostlimit,cohostoffset,false,1);
-    $('#select_event_cohost').css('display','block');  
+
     $('.list_all_contact_user').css('display','none');  
     $('.list_all_yesvite_user').css('display','block');  
 
     $('.co_host_serach').css('display','block');
     $('.phone_co_host_search').css('display','none');
 
+    get_co_host_list(null,cohostlimit,cohostoffset,false,1);
+    $('#select_event_cohost').css('display','block');  
+  
 
     setTimeout(() => {
         toggleSidebar('sidebar_add_co_host');
