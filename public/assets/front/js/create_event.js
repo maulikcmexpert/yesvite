@@ -2784,7 +2784,6 @@ $(document).on('click','#next_design',function() {
 })
 
 $(document).on("click", "#close_createEvent", function () {
-    $('#loader').css('display','block');
 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
@@ -2805,6 +2804,7 @@ $(document).on("click", "#close_createEvent", function () {
     }
 
     // $('#loader').css('display','block');
+    $('#loader').css('display','block');
 
     if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
