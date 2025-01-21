@@ -2888,6 +2888,8 @@ $(document).on("click", "#close_createEvent", function () {
       
         if(final_step==3){
             var savePage3Result =  savePage3Data(1);
+            console.log(savePage3Result);
+            
             if (savePage3Result === false) {
                 $('#loader').css('display', 'none');
                 return; // Exit if savePage3Data returns a stopping condition
