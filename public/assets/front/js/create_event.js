@@ -6049,6 +6049,12 @@ $(document).on('click','.add_co_host',function(){
 //         }, 500);
 //         return;
 //    }
+cohostNoMoreData = false;
+cohostoffset=0;
+cohostlimit=7;
+// cohostphoneOffset=0;
+// cohostphoneLimit=10;
+$('#phone-tab-cantact').removeClass('active');
     isPhonecontact = 0;
     if(selected_co_host!=""){
         lengtUSer= 1;
