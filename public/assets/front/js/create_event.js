@@ -6339,10 +6339,10 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         }
 
     }
-    var checkedCheckbox = $('input[name="guest_list[]"]:checked');
-    if (checkedCheckbox.length > 0) {
-        checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
-    }
+    // var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+    // if (checkedCheckbox.length > 0) {
+    //     checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+    // }
 
     // $('input[name="guest_list[]"]:checked').each(function () {
     //     var profilePhoto = $(this).data('profile');
