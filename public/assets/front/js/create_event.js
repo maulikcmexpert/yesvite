@@ -6159,6 +6159,11 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
     if(selected_co_host == ''){
         $('.guest-contacts-wrp').css('display','none');
         $('.guest-contacts-wrp').removeClass('guest-contacts-test');
+        var checkedCheckbox = $('input[name="guest_list[]"]:checked');
+ 
+        if (checkedCheckbox.length > 0) {
+            checkedCheckbox.prop('checked', false);  // Uncheck all checked checkboxes
+        }
      }else{
          if(co_host_is_selected_close==true){
              $('.guest-contacts-wrp').css('display','none');
