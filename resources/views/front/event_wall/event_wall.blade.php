@@ -1269,7 +1269,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="saveSettings" class="cmn-btn btn-back">
+                            <button type="button" id="saveSettings" class="cmn-btn">
                                 Save
                             </button>
                         </div>

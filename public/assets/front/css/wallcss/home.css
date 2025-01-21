@@ -300,7 +300,7 @@ main {
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-  color: var(--light-color);
+  color: var(--light-color) !important;
 }
 
 .event-center-title {
@@ -476,6 +476,21 @@ main {
   border-radius: 50%;
 }
 
+.wall-creat-photo-poll-inner h5{
+  width: 100%;
+  max-width: 45px;
+  min-width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-family: var(--SFProDisplay-Medium);
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .wall-creat-photo-poll-head {
   display: flex;
   align-items: center;
@@ -615,6 +630,24 @@ main {
   border-radius: 50%;
 }
 
+
+.create-post-profile-wrp h5 {
+  width: 100%;
+  max-width: 45px;
+  min-width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-family: var(--SFProDisplay-Medium);
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 .create-post-profile-wrp h4 {
   font-family: var(--SFProDisplay-Semibold);
   font-size: 18px;
@@ -735,9 +768,10 @@ main {
 }
 
 .create-post-setting-inner .form-check-input[type="radio"] {
-  width: 100%;
-  max-width: 24px;
-  height: 24px;
+  width: 100% !important;
+  max-width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
 }
 .create-post-setting-inner .form-check-label {
   font-family: var(--SFProDisplay-Regular);
@@ -1012,6 +1046,7 @@ main {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .uploded-delete-icon{
@@ -1142,6 +1177,19 @@ main {
   height: 45px;
   border-radius: 50%;
   position: relative;
+}
+
+.posts-card-head-left-img h5{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  font-family: var(--SFProDisplay-Medium);
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .posts-card-head-left-img img{
@@ -1684,7 +1732,7 @@ main {
   background-color: #FFE4E9;
   max-width: calc(100% - 2%);
   position: absolute;
-  top: 50%;
+  top: 50.5%;
   transform: translateY(-50%);
   left: 5px;
   z-index: 0;
@@ -2938,6 +2986,23 @@ main {
       height: 40px;
       border-radius: 50%;
     }
+
+    .create-post-profile-wrp h5 {
+      width: 100%;
+      max-width: 40px;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-family: var(--SFProDisplay-Medium);
+      font-size: 16px;
+      line-height: 22.4px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
     .create-post-profile-wrp h4 {
       font-size: 16px;
       line-height: 22.4px;
