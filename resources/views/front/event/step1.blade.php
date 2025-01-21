@@ -234,7 +234,7 @@
                     <div class="col-lg-12 mb-4 rsvp_by_date" style="{{$style}}">
                         <div class="input-form">
                             
-                            <input type="text" class="form-control inputText" id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
+                            <input type="text" class="form-control inputText " id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
                             value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?Carbon::parse($eventDetail['rsvp_by_date'])->format('Y-m-d'):''}}" readonly autocomplete="off">
                             <label for="birthday" class="form-label input-field floating-label select-label">RSVP By Date</label>
                         </div>

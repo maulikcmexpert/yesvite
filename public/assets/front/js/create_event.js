@@ -1027,6 +1027,7 @@ $("#rsvp_by_date").on("change", function () {
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
     } else {
+        $('#rsvp-by-date').val('');
         $(".rsvp_by_date").hide();
     }
 });
