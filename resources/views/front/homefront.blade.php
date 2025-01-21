@@ -131,9 +131,9 @@
                                     <img src="{{asset('assets')}}/coin.svg" alt="coin">
                                     <h5>15 Credits</h5>
                                 </div>
-                                <span>$1.35 per credit</span>
+                                <span>$1.39 per credit</span>
                             </div>
-                            <h6 class="ms-auto">$22.50</h6>
+                            <h6 class="ms-auto">$21.00</h6>
                         </div>
                     </div>
                     <div class="pro-evnet-data">
@@ -143,9 +143,9 @@
                                     <img src="{{asset('assets')}}/coin.svg" alt="coin">
                                     <h5>30 Credits</h5>
                                 </div>
-                                <span>$1.30 per credit</span>
+                                <span>$1.29 per credit</span>
                             </div>
-                            <h6 class="ms-auto">$38.10</h6>
+                            <h6 class="ms-auto">$39.00</h6>
                         </div>
                     </div>
                     <div class="pro-evnet-data">
@@ -155,7 +155,7 @@
                                     <img src="{{asset('assets')}}/coin.svg" alt="coin">
                                     <h5>50 Credits</h5>
                                 </div>
-                                <span>$1.20 per credit</span>
+                                <span>$1.19 per credit</span>
                             </div>
                             <h6 class="ms-auto">$60.00</h6>
                         </div>
@@ -179,9 +179,9 @@
                                     <img src="{{asset('assets')}}/coin.svg" alt="coin">
                                     <h5>200 Credits</h5>
                                 </div>
-                                <span>$0.75 per credit</span>
+                                <span>$0.79 per credit</span>
                             </div>
-                            <h6 class="ms-auto">$150.00</h6>
+                            <h6 class="ms-auto">$159.00</h6>
                         </div>
                     </div>
                     <div class="pro-evnet-data">
@@ -203,9 +203,9 @@
                                     <img src="{{asset('assets')}}/coin.svg" alt="coin">
                                     <h5>750 Credits</h5>
                                 </div>
-                                <span>$0.40 per credit</span>
+                                <span>$0.30 per credit</span>
                             </div>
-                            <h6 class="ms-auto">$200.00</h6>
+                            <h6 class="ms-auto">$224.99</h6>
                         </div>
                     </div>
                     <div class="pro-evnet-data saving-pro">
