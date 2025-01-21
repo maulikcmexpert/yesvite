@@ -922,7 +922,7 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
-    $('.step_1_activity').text(total_activity + ' Activity');
+    $('.step_1_activity').text(i + ' Activity');
 
     console.log(total_activities);
     
