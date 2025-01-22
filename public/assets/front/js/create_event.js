@@ -1279,7 +1279,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     // }
 
     if (isChecked == true || isChecked == "true") {
-        $('input[name="email_invite[]"]').attr('disabled', true);
+        // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
         $.ajax({
             url: base_url + "event/store_user_id",
@@ -1326,7 +1326,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     // }
 
                     guest_counter(0,max_guest);
-                    $('input[name="email_invite[]"]').prop('disabled', false);
+                    // $('input[name="email_invite[]"]').prop('disabled', false);
                     // if(currentInviteCount >= 15){
                     //     $('.user_choice').prop('disabled',true);
                     // }
@@ -2787,10 +2787,12 @@ $(document).on('click','#next_design',function() {
 
 if($('.edit-design').hasClass('active')){
     $('#close_createEvent').css('display','none');
+}else{
+    $('#close_createEvent').css('display','block');
 }
-$(document).on("click",'.edit-design',function(){
-    $('#close_createEvent').css('display','none');
-});
+// $(document).on("click",'.edit-design',function(){
+//     $('#close_createEvent').css('display','none');
+// });
 $(document).on("click", "#close_createEvent", function () {
 
     var event_type = $("#event-type").val();
@@ -3026,14 +3028,14 @@ function savePage1Data(close = null) {
 
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
-        // if($('#schedule').is(":checked")){
-        //     var activity=$('.new_append_activity').length;
-        //     console.log(activity);
-        //     if(activity==0){
-        //         toastr.error('Event Schedule: Please set event schedule');
-        //         return;  
-        //     }
-        // }
+        if($('#schedule').is(":checked")){
+            var activity=$('.event_all_activity_list').length;
+            console.log(activity);
+            if(activity==0){
+                toastr.error('Event Schedule: Please set event schedule');
+                return;  
+            }
+        }
     
     if(schedule){
         events_schedule = '1';
@@ -3730,11 +3732,14 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    $('#close_createEvent').css('display','block');
+
     e.preventDefault();
     $('.subcategory-section').show();
     li_design_click();
 });
 $(document).on("click", ".li_design", function (e) {
+    $('#close_createEvent').css('display','block');
     e.preventDefault();
     $('.subcategory-section').show();
     li_design_click();
@@ -4001,6 +4006,8 @@ $(document).on("click", ".li_event_details", function () {
 });
 
 $(document).on("click", ".li_event_detail", function () {
+    $('#close_createEvent').css('display','block');
+
     var design = eventData.desgin_selected;
     $('.li_event_detail').find(".side-bar-list").addClass("active");
     if(final_step <= 1){
@@ -4052,6 +4059,7 @@ function active_responsive_dropdown(current_page,design_page = null){
 }
 
 $(document).on("click", ".li_guest", function () {
+    $('#close_createEvent').css('display','block');
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
     // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
@@ -4072,14 +4080,15 @@ $(document).on("click", ".li_guest", function () {
     var state = $("#state").val();
     var zipcode = $("#zipcode").val();
 
-    var activity=$('.new_append_activity').length;
-    console.log(activity);
-    // if(schedule){
+    // var activity=$('.event_all_activity_list').length;
+    // console.log(activity);
+    // if($('#schedule').is(":checked")){
     //     if(activity==0){
     //         toastr.error('Event Schedule: Please set event schedule');
     //         return;  
     //     }
     // }
+
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
@@ -4154,6 +4163,8 @@ $(document).on("click", ".li_guest", function () {
 });
 
 $(document).on("click", ".li_setting", function () {
+    $('#close_createEvent').css('display','block');
+
     var event_name=$('#event-name').val();
     var hostedby = $("#hostedby").val();
     var event_date = $("#event-date").val();
@@ -4165,6 +4176,7 @@ $(document).on("click", ".li_setting", function () {
     var state = $("#state").val();
     var zipcode = $("#zipcode").val();
 
+    
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
