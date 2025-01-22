@@ -425,7 +425,7 @@
 
                                                     // $parts = explode(" ", $name);
                                                     $firstInitial = isset($firstname[0])
-                                                        ? strtoupper($firstnam[0][0])
+                                                        ? strtoupper($firstname[0][0])
                                                         : '';
                                                     $secondInitial = isset($lastname[0])
                                                         ? strtoupper($lastname[0][0])
