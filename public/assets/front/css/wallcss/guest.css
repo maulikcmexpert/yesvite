@@ -103,6 +103,8 @@
    min-width: 44px;
    height: 44px;
    margin-right: 16px;
+   border: 1px solid #efefef;
+   border-radius: 100%;
 }
 
 .guest-user-list .guest-img h5{
@@ -124,7 +126,6 @@
     object-fit: cover;
     border-radius: 100%;
     display: block;
-    border: 1px solid #ccc;
 }
 
 .guest-list-data{
