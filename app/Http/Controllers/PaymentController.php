@@ -33,11 +33,16 @@ class PaymentController extends BaseController
         return null; // Return null if no matching priceId is found
     }
 
-    public function processPayment(Request $request)
+    public function processPayment($priceId)
     {
-        $validated = $request->validate([
-            'priceId' => 'required|string',
-        ]);
+        // $validated = $request->validate([
+        //     'priceId' => 'required|string',
+        // ]);
+        $user = Auth::guard('web')->user();
+
+        if (!$user) {
+            return redirect()->route('login')->withErrors(['error' => 'User not authenticated']);
+        }
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
@@ -45,7 +50,7 @@ class PaymentController extends BaseController
             $session = \Stripe\Checkout\Session::create([
                 'payment_method_types' => ['card'],
                 'line_items' => [[
-                    'price' => $validated['priceId'],
+                    'price' => $priceId,
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
@@ -60,16 +65,54 @@ class PaymentController extends BaseController
         }
     }
 
+    public function checkPayment(Request $request)
+    {
+        $validated = $request->validate([
+            'priceId' => 'required|string',
+        ]);
+        $user = Auth::guard('web')->user();
+        $sessionKey = 'payment_session_' . $user->id . '_' . $validated['priceId'];
+        // Check if the session already exists
+        if (session()->has($sessionKey)) {
+            $sessionData = session($sessionKey);
+            return response()->json([
+                'status' => $sessionData['status'],
+                'message' => 'Session already exists',
+            ]);
+        }
+        $startDate = Carbon::now();
+        $new_subscription = new UserSubscription();
+        $new_subscription->user_id = $user->id;
+        $new_subscription->device_type = 'web';
+        $new_subscription->startDate = $startDate;
+        $new_subscription->productId = $validated['priceId'];
+        $new_subscription->type = 'product';
+        $new_subscription->save();
+        // Create a new session with initial status 'idle'
+        session()->put($sessionKey, [
+            'user_id' => $user->id,
+            'price_id' => $validated['priceId'],
+            'status' => 'idle',
+            'created_at' => $startDate,
+        ]);
+
+        return response()->json([
+            'status' => 'idle',
+            'message' => 'New session created',
+        ]);
+    }
     public function paymentSuccess(Request $request)
     {
+        $user = Auth::guard('web')->user();
+
+        if (!$user) {
+            return redirect()->route('login')->withErrors(['error' => 'User not authenticated']);
+        }
+
         try {
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
             // Get the current authenticated user
-            $user = Auth::guard('web')->user();
 
-            if (!$user) {
-                return redirect()->route('login')->withErrors(['error' => 'User not authenticated']);
-            }
 
             // https://yesvite.cmexpertiseinfotech.in/payment-success?paid_id=cs_test_a12WIk1XTlXXS9dsItyN7kPBvCsvETflnbIgjlIJRBZawweUXU9ODc1Mc2
 
@@ -99,6 +142,8 @@ class PaymentController extends BaseController
                 die;
                 //return redirect()->route('checkout')->withErrors(['error' => 'Invalid price ID']);
             }
+
+
             // Fetch the session details from Stripe
 
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
@@ -108,8 +153,8 @@ class PaymentController extends BaseController
 
                 $input = [
                     'orderId' => $session->id,
-                    'coins' => 100,  // Example: You may pass dynamic data from the session or product
-                    'productId' => 'STRIPE',
+                    'coins' => $coins,
+                    'productId' => $priceId,
                     'packageName' => 'Standard Package',
                     'purchaseToken' => $session->payment_intent,  // Payment Intent ID as the purchase token
                     'regionCode' => $session->customer_address->country ?? '',  // Example: Extract region info
@@ -117,7 +162,16 @@ class PaymentController extends BaseController
 
                 // Prepare subscription data
                 $startDate = Carbon::now();
-                $new_subscription = new UserSubscription();
+                $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
+                if (session()->has($sessionKey)) {
+                    $sessionData = session($sessionKey);
+                    $new_subscription = UserSubscription::where(['user_id' => $user->id, 'type' => 'web', 'productId' => $priceId, 'startDate' => $sessionData['created_at']])->orderBy('id', 'DESC')->first();
+                    if (!$new_subscription) {
+                        $new_subscription = new UserSubscription();
+                    }
+                } else {
+                    $new_subscription = new UserSubscription();
+                }
                 $new_subscription->user_id = $user->id;
                 $new_subscription->orderId = $input['orderId'];
                 $new_subscription->packageName = $input['packageName'];
@@ -145,19 +199,35 @@ class PaymentController extends BaseController
                     $coin_transaction->endDate = Carbon::now()->addYears(5)->toDateString(); // Expiration date
                     $coin_transaction->save();
 
-                    // Return success view
+                    if (session()->has($sessionKey)) {
+                        session()->put($sessionKey . '.status', 'success');
+                    }
                     return view('payment-success', ['user' => $user, 'coins' => $total_coin]);
                 } else {
-                    echo "Failed";
-                    die;
+                    $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
+                    if (session()->has($sessionKey)) {
+                        session()->put($sessionKey . '.status', 'failed');
+                    }
                     return redirect()->route('checkout')->withErrors(['error' => 'Failed to create subscription']);
                 }
             } else {
-                echo "Pay Failed";
-                die;
+                $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
+                if (session()->has($sessionKey)) {
+                    session()->put($sessionKey . '.status', 'failed');
+                }
                 return redirect()->route('checkout')->withErrors(['error' => 'Payment failed']);
             }
         } catch (\Exception $e) {
+            $allSessions = session()->all();
+
+            $userPaymentSessions = collect($allSessions)
+                ->filter(function ($value, $key) use ($user) {
+                    return str_starts_with($key, 'payment_session_' . $user->id);
+                });
+            foreach ($userPaymentSessions as $key => $session) {
+                // Update session status to false
+                session()->put($key, array_merge($session, ['status' => 'failed']));
+            }
             dd($e);
             // Log the error for debugging purposes
             //\Log::error('Payment success error: ' . $e->getMessage());
