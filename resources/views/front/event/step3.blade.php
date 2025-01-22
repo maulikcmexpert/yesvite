@@ -683,7 +683,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+
+                                    {{-- <div>
                                         <a href="#" id="delete_invited_user"
                                             data-id="user-{{ $guest_user['id'] }}"
                                             data-userid="{{ $guest_user['id'] }}">
@@ -697,7 +698,7 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @elseif ($guest_user['prefer_by'] == 'phone')
                                 <div class="users-data invited_user" data-id={{ $guest_user['id'] }}
@@ -738,7 +739,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    {{-- <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="user_tel-{{ $guest_user['id'] }}"
                                             data-userid="{{ $guest_user['id'] }}">
@@ -752,7 +753,7 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @endif
                         @endforeach
@@ -801,7 +802,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    {{-- <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="contact-{{ $guest_user['sync_id'] }}" data-contact="1"
                                             data-userid="{{ $guest_user['sync_id'] }}">
@@ -815,7 +816,7 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @elseif ($guest_user['prefer_by'] == 'phone')
                                 <div class="users-data invited_user" data-id={{ 'sync_' . $guest_user['sync_id'] }}
@@ -855,7 +856,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    {{-- <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="contact_tel-{{ $guest_user['sync_id'] }}" data-contact="1"
                                             data-userid="{{ $guest_user['sync_id'] }}">
@@ -869,7 +870,7 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @endif
                         @endforeach
