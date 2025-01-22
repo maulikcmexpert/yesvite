@@ -7,7 +7,7 @@ $disabled = '';
 $emialAlredy = '';
 $phoneAlredy = '';
 if(isset($selected_user) && !empty($selected_user)){
-    $foundKey = array_search($user->id, array_column($selected_user, 'id'));
+    $foundKey = array_search($data->id, array_column($selected_user, 'id'));
    
     if ($foundKey !== false) {
        
@@ -16,7 +16,7 @@ if(isset($selected_user) && !empty($selected_user)){
         $phone_checked = '';
         $emialAlredy = '';
         $phoneAlredy = '';
-        if ($user->id === (int)$selected_user[$key]['id']) {
+        if ($data->id === (int)$selected_user[$key]['id']) {
             if($selected_user[$key]['prefer_by'] == 'email'){
                 $email_checked = 'checked';
                 $emialAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
