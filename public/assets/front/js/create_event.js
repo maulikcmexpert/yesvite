@@ -5751,6 +5751,10 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             offsetyesvite = 0;
         }
     }
+   console.log(lim);
+   console.log(off);
+   console.log(groupscroll);
+   
    
     $.ajax({
         type: "GET",
