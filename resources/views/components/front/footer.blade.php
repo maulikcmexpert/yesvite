@@ -337,10 +337,14 @@ defer
                                 clearInterval(testTimer); // Stop polling
                                 purchaseButton.textContent = `Purchase - $0.00`;
                                 const coinsSpans = document.querySelectorAll('.available-coins');
+                                const coinsInputs = document.querySelectorAll('.hidden-coins');
             
                                 // Update the text content for each element
                                 coinsSpans.forEach(span => {
                                     span.textContent = data.data;
+                                });
+                                coinsInputs.forEach(inp => {
+                                    inp.val = data.data;
                                 });
                                 $('#buycreditsmodal').modal('hide');
                                 setTimeout(() => {
