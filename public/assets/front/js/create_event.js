@@ -2790,9 +2790,9 @@ if($('.edit-design').hasClass('active')){
 }else{
     $('#close_createEvent').css('display','block');
 }
-$(document).on("click",'.edit-design',function(){
-    $('#close_createEvent').css('display','none');
-});
+// $(document).on("click",'.edit-design',function(){
+//     $('#close_createEvent').css('display','none');
+// });
 $(document).on("click", "#close_createEvent", function () {
 
     var event_type = $("#event-type").val();
