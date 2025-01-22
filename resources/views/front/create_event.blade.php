@@ -320,7 +320,46 @@
         <div class="new-event-sidebar-wrp">
             <div class="new-event-sidebar-menu">
                 @if (isset($eventDetail['id']) && $eventDetail['id']!="")
-                    
+                <ul>
+                    <!-- ---for active menu add active class--- -->
+
+                    <li class="li_design">
+                        <div class="menu-circle-wrp side-bar-list menu-success">
+                            <span class="design-span active"></span>
+                            <h3>Design</h3>
+                        </div>
+                        <ul class="new-event-sidebar-sub-menu">
+                            <li class="pick-card ">
+                                <div class="side-bar-sub-list menu-success">
+                                    <h3>Pick Design</h3>
+                                </div>
+                            </li>
+                            <li class="edit-design active">
+                                <div class="side-bar-sub-list menu-success">
+                                    <h3>Edit Design</h3>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="li_event_detail active">
+                        <div class="menu-circle-wrp side-bar-list menu-success ">
+                            <span></span>
+                            <h3>Event Details</h3>
+                        </div>
+                    </li>
+                    <li class="li_guest active">
+                        <div class="menu-circle-wrp side-bar-list menu-success">
+                            <span></span>
+                            <h3>Guests</h3>
+                        </div>
+                    </li>
+                    <li class="li_setting active">
+                        <div class="menu-circle-wrp side-bar-list menu-success">
+                            <span></span>
+                            <h3>Settings</h3>
+                        </div>
+                    </li>
+                </ul>
                 @else    
                 <ul>
                     <!-- ---for active menu add active class--- -->
@@ -1495,7 +1534,7 @@
                                                             @if ($values['profile'] != '')
                                                                 <img src="{{ $values['profile'] }}"
                                                                     alt="">
-                                                                <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                <h5 class="">{{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                                 </h5>
                                                             @endif
                                                             <span class="ms-auto">1</span>
@@ -1504,7 +1543,7 @@
                                                             id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
                                                             @if ($values['profile'] == '')
                                                                 <h5
-                                                                    class="{{ $fontColor }} add-item-under-text">
+                                                                    class="{{ $fontColor }} add-item-under-text me-auto">
                                                                     {{ $initials }}</h5>
                                                                 <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                                 </h5>
@@ -1622,7 +1661,7 @@
                                                                 @if ($values['profile'] != '')
                                                                     <img src="{{ $values['profile'] }}"
                                                                         alt="">
-                                                                    <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                    <h5 class="me-auto">{{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                                     </h5>
                                                                 @endif
                                                                 <span class="ms-auto">1</span>
@@ -1633,7 +1672,7 @@
                                                                     <h5
                                                                         class="{{ $fontColor }} add-item-under-text">
                                                                         {{ $initials }}</h5>
-                                                                    <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                    <h5 class="me-auto"> {{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                                     </h5>
                                                                 @endif
                                                                 @if ($values['user_id'] == $eventDetail['user_id'])
@@ -2924,6 +2963,15 @@
         isset($eventDetail['gift_registry_list']) && count($eventDetail['gift_registry_list']) > 0
             ? $eventDetail['gift_registry_list']
             : null;
+    $design_image =
+        isset($eventDetail['design_image'])? $eventDetail['design_image']
+            : null;
+    $static_information =
+        isset($eventDetail['static_information'])? $eventDetail['static_information']
+            : null;
+            $step =
+        isset($eventDetail['step'])? $eventDetail['step']
+            : null;
 @endphp
 <input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">
 <input type="hidden" name="giftRegestryData[]" value="{{ json_encode($giftRegestryData) }}">
@@ -2932,6 +2980,10 @@
 <input type="hidden" id="cohostId" value="{{ $cohostId }}">
 <input type="hidden" id="thankuCardId" value="{{ $thankuCardId }}">
 <input type="hidden" id="inviteTotalCount" value="{{ $eventDetail['inviteCount'] }}">
+<input type="hidden" id="design_image" value="{{ $design_image }}">
+<input type="hidden" id="static_information" value="{{ $static_information }}">
+<input type="hidden" id="step" value="{{  $step}}">
+
 
 
 
