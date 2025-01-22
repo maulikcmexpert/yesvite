@@ -5671,6 +5671,8 @@ var limityesvite=10;
 var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
+var NogroupDataYesviteAll=false;
+
 $("#YesviteUserAll").on("scroll", function () {
     // console.log(busyyesvite);
     
@@ -5678,7 +5680,6 @@ $("#YesviteUserAll").on("scroll", function () {
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-    console.log({scrollTop,elementHeight,scrollHeight});
         if (scrollTop + elementHeight >= scrollHeight-2) {
             busyyesvite = true;
             offsetyesvite += limityesvite;
@@ -5743,7 +5744,9 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
+            if(NogroupDataYesviteAll==false ){
             displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
+            }
         }, 1000);
     }
 });
@@ -5787,7 +5790,13 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             
                return;
             }
-
+            if(html=="" && groupscroll==1){
+                // $("#YesviteUserAll").html('No data found');
+               NogroupDataYesviteAll=true;
+               $('#loader').css('display','none');
+            
+               return;
+            }
             if(html==""){
                 // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
@@ -5795,6 +5804,7 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             
                return;
             }
+           
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
