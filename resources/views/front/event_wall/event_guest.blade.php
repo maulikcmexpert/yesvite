@@ -257,7 +257,7 @@
                                                         <div class="guest-list-data">
                                                             <a href="#" class="guest-img">
                                                                 @if ($user['profile'] != '')
-                                                                <img src="{{ $user['profile'] ? asset('storage/profile/' . $user['profile']) : asset('images/default-profile.png') }}"
+                                                                <img src="{{ $user['profile'] }}"
                                                                     alt="guest-img">
                                                             @else
                                                                 @php

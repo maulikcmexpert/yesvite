@@ -370,8 +370,8 @@
                                     </div>
                                     @if (
                                         !empty($eventDetails['event_location_name']) ||
-                                            !empty($eventDetails['address_1']) ||
-                                            !empty($eventDetails['address_2']))
+                                            !empty($eventDetails['address_1'])
+                                    )
                                         <div class="location-wrp cmn-card">
                                             <h4 class="title">Location</h4>
                                             <h5>{{ $eventDetails['event_location_name'] ?: 'Tom’s House' }}</h5>

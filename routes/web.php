@@ -266,6 +266,9 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/userPostCommentReply', [EventWallController::class, 'userPostCommentReply']);
     Route::post('event_wall/userPostLikeDislike', [EventWallController::class, 'userPostLikeDislike'])->name('event_wall.userPostLikeDislike');
     Route::post('event_wall/event_post', [EventWallController::class, 'createPost'])->name('event_wall.eventPost');
+
+    Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
+
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 
 

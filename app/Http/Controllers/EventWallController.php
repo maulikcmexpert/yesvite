@@ -115,61 +115,62 @@ $js=['event_wall'];
         }
 
 
-
-        // $eventPostId = 2844;
-
-        // Fetch multiple polls, with their options and user poll data count
         $polls = EventPostPoll::with('event_poll_option')
-            ->withCount('user_poll_data')
-            ->where(['event_id' => $event])
-            ->get();
+        ->withCount('user_poll_data')
+        ->where(['event_id' => $event])
+        ->get();
 
-        // dd($polls);
-        // Check if polls exist
-        // if ($polls->isEmpty()) {
-        //     return response()->json(['message' => 'Polls not found'], 404);
-        // }
+    $pollsData = [];
 
-        $pollsData = [];
+    foreach ($polls as $poll) {
 
+        $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
+        $post_time = setpostTime($poll->created_at);
 
+        // Get the poll duration and check if it is expired for each poll
+        $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
+        $isExpired = ($pollDuration == "");
 
-        foreach ($polls as $poll) {
-            $post_time = setpostTime($poll->created_at);
-            // Get the poll duration and check if it is expired for each poll
-            $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
-            $isExpired = ($pollDuration == "");
+        // Fetch reaction list for the post (poll)
+        $reactionList = getOnlyReaction($poll->event_post_id); // Corrected from $value->id to $poll->event_post_id
+        $totalComment = $poll->event_post_comment_count;  // Assuming this is available in the `EventPostPoll` model
+        $totalLikes = $poll->event_post_reaction_count;    // As
+        // Construct the poll data with the reaction list
+        $pollData = [
+            'poll_id' => $poll->id,
+            'event_post_id' => $poll->event_post_id,
+            'poll_question' => $poll->poll_question,
+            'total_poll_duration' => $poll->poll_duration,
+            'poll_duration_left' => $pollDuration,
+            'is_expired' => $isExpired,
+            'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
+            'reactionList' => $reactionList, // Include the reaction list under pollData
+            'post_time' => $post_time,
+            'total_comment' => $totalComment,  // Add total comment count
+            'total_likes' => $totalLikes,
+            'total_poll_vote' => $poll->user_poll_data_count,
+            'poll_options' => [],
 
-            $pollData = [
-                'poll_id' => $poll->id,
-                'event_post_id' => $poll->event_post_id,
-                'poll_question' => $poll->poll_question,
-                'total_poll_duration' => $poll->poll_duration,
-                'poll_duration_left' => $pollDuration,
-                'is_expired' => $isExpired,
-                'post_time' => $post_time,
-                'total_poll_vote' => $poll->user_poll_data_count,
-                'poll_options' => [],
+        ];
+
+        // Loop through each poll's options and calculate vote percentages
+        foreach ($poll->event_poll_option as $option) {
+            $totalVotes = getOptionAllTotalVote($poll->id);
+            $optionTotalVotes = getOptionTotalVote($option->id);
+
+            $pollData['poll_options'][] = [
+                'id' => $option->id,
+                'option' => $option->option,
+                'total_vote_percentage' => $totalVotes > 0
+                    ? round(($optionTotalVotes / $totalVotes) * 100) . '%'
+                    : '0%',
+                'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id), // This should return true/false based on whether the user has voted for this option
             ];
-
-            // Loop through each poll's options and calculate vote percentages
-            foreach ($poll->event_poll_option as $option) {
-                $totalVotes = getOptionAllTotalVote($poll->id);
-                $optionTotalVotes = getOptionTotalVote($option->id);
-
-                $pollData['poll_options'][] = [
-                    'id' => $option->id,
-                    'option' => $option->option,
-                    'total_vote_percentage' => $totalVotes > 0
-                        ? round(($optionTotalVotes / $totalVotes) * 100) . '%'
-                        : '0%',
-                    'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id), // This should return true/false based on whether the user has voted for this option
-                ];
-            }
-
-            // Add the poll data to the polls data array
-            $pollsData[] = $pollData;
         }
+
+        // Add the poll data to the polls data array
+        $pollsData[] = $pollData;
+    }
         $wallData['owner_stories'] = [];
 
         $eventLoginUserStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
@@ -1732,48 +1733,42 @@ $js=['event_wall'];
 
     public function postControl(Request $request)
     {
+        // dd($request);
 
-        $user  = Auth::guard('api')->user();
-        $rawData = $request->getContent();
-        $input = json_decode($rawData, true);
-        if ($input == null) {
-            return response()->json(['status' => 0, 'message' => "Json invalid"]);
-        }
+        $user  = Auth::guard('web')->user();
 
-        try {
 
-            DB::beginTransaction();
 
-            $checkIsPostControl = PostControl::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'event_post_id' => $input['event_post_id']])->first();
+            $checkIsPostControl = PostControl::where(['event_id' => $request['event_id'], 'user_id' => $user->id, 'event_post_id' => $request['event_post_id']])->first();
             if ($checkIsPostControl == null) {
                 $setPostControl = new PostControl;
 
-                $setPostControl->event_id = $input['event_id'];
+                $setPostControl->event_id = $request['event_id'];
                 $setPostControl->user_id = $user->id;
-                $setPostControl->event_post_id = $input['event_post_id'];
-                $setPostControl->post_control = $input['post_control'];
+                $setPostControl->event_post_id = $request['event_post_id'];
+                $setPostControl->post_control = $request['post_control'];
                 $setPostControl->save();
             } else {
-                $checkIsPostControl->post_control = $input['post_control'];
+                $checkIsPostControl->post_control = $request['post_control'];
                 $checkIsPostControl->save();
             }
-            DB::commit();
+
             $message = "";
-            if ($input['post_control'] == 'hide_post') {
+            if ($request['post_control'] == 'hide_post') {
                 $message = "Post is hide from your wall";
-            } else if ($input['post_control'] == 'unhide_post') {
+            } else if ($request['post_control'] == 'unhide_post') {
                 $message = "Post is unhide";
-            } else if ($input['post_control'] == 'mute') {
+            } else if ($request['post_control'] == 'mute') {
                 $message = "Mute every post from this user will post";
-            } else if ($input['post_control'] == 'unmute') {
+            } else if ($request['post_control'] == 'unmute') {
                 $message = "Unmuted every post from this user will post";
-            } else if ($input['post_control'] == 'report') {
+            } else if ($request['post_control'] == 'report') {
                 $reportCreate = new UserReportToPost;
-                $reportCreate->event_id = $input['event_id'];
+                $reportCreate->event_id = $request['event_id'];
                 $reportCreate->user_id =  $user->id;
-                $reportCreate->report_type = $input['report_type'];
-                $reportCreate->report_description = $input['report_description'];
-                $reportCreate->event_post_id = $input['event_post_id'];
+                $reportCreate->report_type = $request['report_type'];
+                $reportCreate->report_description = $request['report_description'];
+                $reportCreate->event_post_id = $request['event_post_id'];
                 $reportCreate->save();
 
                 $savedReportId =  $reportCreate->id;
@@ -1797,16 +1792,8 @@ $js=['event_wall'];
                         ->subject('Post Report Mail');
                 });
             }
-            return response()->json(['status' => 1, 'type' => $input['post_control'], 'message' => $message]);
-        } catch (QueryException $e) {
+            return response()->json(['status' => 1, 'type' => $request['post_control'], 'message' => $message]);
 
-            DB::rollBack();
 
-            return response()->json(['status' => 0, 'message' => "db error"]);
-        }
-        // catch (\Exception $e) {
-
-        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
-        // }
     }
 }

@@ -2911,6 +2911,10 @@ main {
     margin-top: auto !important;
   }
 
+  .upcoming-card-dropdown .dropdown-menu .dropdown-item svg.unmute-icon path{
+    fill: none !important;
+  }
+
   /* ===Responsive=== */
   @media only screen and (max-width: 1399px) {
     .hosted-by-template-slider-img {

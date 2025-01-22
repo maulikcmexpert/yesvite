@@ -1165,61 +1165,55 @@ $(document).ready(function () {
         $(this).closest('#emojiDropdown').hide();
     });
 
-  // Handle comment submission (first-time comment or reply)
-$(document).on('click', '.comment-send-icon', function () {
-    const commentInput = $('#post_comment');
-    const commentText = commentInput.val().trim();
-    const replyParentId = $('#reply_comment_id').val(); // Reply comment ID if replying
-    const parentCommentId =$('.commented-user-wrp').data('comment-id');; // Parent comment ID for top-level comments
+    // Handle comment submission (first-time comment or reply)
+    // Handle comment submission
+    $(document).on('click', '.comment-send-icon', function () {
+        const commentInput = $('#post_comment');
+        const commentText = commentInput.val().trim();
+        const parentCommentId = $('.commented-user-wrp.active').data('comment-id') || null; // Find active comment if replying
 
-    // If comment text is empty, show alert and return
-    if (commentText === '') {
-        alert('Please enter a comment');
-        return;
-    }
-    const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
-    $('#parent_comment_id').val(parentId); // Set the parent comment ID for replying
-    console.log('Reply Parent ID:', replyParentId, 'Parent Comment ID:', parentCommentId);
+        if (commentText === '') {
+            alert('Please enter a comment');
+            return;
+        }
 
+        const eventId = $(this).data('event-id');
+        const eventPostId = $(this).data('event-post-id');
 
-    var eventId = $(this).data('event-id'); // Get the event ID from button data attribute
-    var eventPostId = $(this).data('event-post-id'); // Get the event post ID from button data attribute
+        const url = parentCommentId
+            ? base_url + "event_photo/userPostCommentReply"
+            : base_url + "event_photo/userPostComment";
 
-    // Determine the correct URL based on whether it's a reply or a new comment
-    const url = parentCommentId
-        ? base_url + "event_wall/userPostCommentReply"
-        : base_url + "event_wall/userPostComment";
+        // AJAX request
+        $.ajax({
+            url: url,
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                comment: commentText,
+                event_id: eventId,
+                event_post_id: eventPostId,
+                parent_comment_id: parentCommentId
+            },
+            success: function (response) {
+                if (response.success) {
+                    console.log(response.data);
+                    $('#post_comment').val(''); // Clear the input field
 
-    // Example AJAX request to submit the comment or reply
-    $.ajax({
-        url: url,
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-            comment: commentText,
-            event_id: eventId,
-            event_post_id: eventPostId,
-            parent_comment_id: parentCommentId // For top-level comment or parent of a reply
-        },
-        success: function (response) {
-            if (response.success) {
-                console.log(response.data);
-                $('#post_comment').val(''); // Clear the comment input field
+                    const data = response.data;
 
-                const data = response.data;
-
-                const newCommentHTML = `
+                    const newCommentHTML = `
                     <li class="commented-user-wrp" data-comment-id="${data.comment_id}">
                         <div class="commented-user-head">
                             <div class="commented-user-profile">
                                 <div class="commented-user-profile-img">
-                                    <img src="${data.profile}" alt="">
+                                    <img src="${data.profile || 'default-profile.png'}" alt="">
                                 </div>
                                 <div class="commented-user-profile-content">
                                     <h3>${data.username}</h3>
-                                    <p>${data.location}</p>
+                                    <p>${data.location || ''}</p>
                                 </div>
                             </div>
                             <div class="posts-card-like-comment-right">
@@ -1237,52 +1231,61 @@ $(document).on('click', '.comment-send-icon', function () {
                             </div>
                             <button class="commented-user-reply-btn">Reply</button>
                         </div>
+                        <ul class="primary-comment-replies"></ul>
                     </li>
                 `;
 
-                // If replying to a comment, append to the parent comment's replies
-                if (parentCommentId) {
-                    const parentComment = $(`li[data-comment-id="${parentCommentId}"]`); // Find the parent comment
-                    if (parentComment.length > 0) {
-                        // If the parent comment has no replies, create a new <ul> for replies
-                        let replyList = parentComment.find('ul');
-                        if (replyList.length === 0) {
-                            replyList = $('<ul></ul>').appendTo(parentComment); // Create <ul> if not exists
-                        }
-                        // Append the new reply under the parent comment's <ul>
+                    if (parentCommentId) {
+                        // Append as a reply to the parent comment
+                        const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
+                        const replyList = parentComment.find('.primary-comment-replies');
                         replyList.append(newCommentHTML);
+                    } else {
+                        // Append as a new top-level comment
+                        $('.top-level-comments').append(newCommentHTML);
                     }
-                } else {
-                    // If it's a top-level comment, append it to the top-level comment list
-                    $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
                 }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('An error occurred. Please try again.');
             }
-        },
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            alert('An error occurred. Please try again.');
-        }
+        });
     });
-});
 
-// Handle reply button click (when replying to a comment)
-$(document).on('click', '.commented-user-reply-btn', function () {
-    const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
-    const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+    // Handle reply button click
+    $(document).on('click', '.commented-user-reply-btn', function () {
+        const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
+        const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
 
-    // Insert the parent username and focus on the comment input field
-    const commentBox = $('#post_comment');
-    commentBox.val(`@${parentName} `).focus();
+        // Set the active comment for reply
+        $('.commented-user-wrp').removeClass('active'); // Clear any previously active comments
+        $(this).closest('.commented-user-wrp').addClass('active');
 
-    // Set the parent comment ID for the reply and clear the reply ID for top-level replies
-    $('#parent_comment_id').val(parentId); // Set the parent comment ID
+        // Insert the parent username in the input field
+        const commentBox = $('#post_comment');
+        commentBox.val(`@${parentName} `).focus();
+    });
 
-})
+
+    // Handle reply button click (when replying to a comment)
+    $(document).on('click', '.commented-user-reply-btn', function () {
+        const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
+        const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+
+        // Set the active comment for reply
+        $('.commented-user-wrp').removeClass('active'); // Clear any previously active comments
+        $(this).closest('.commented-user-wrp').addClass('active');
+
+        // Insert the parent username in the input field
+        const commentBox = $('#post_comment');
+        commentBox.val(`@${parentName} `).focus();
+    });
 
 });
 $(".show-btn-comment").click(function () {
     let event_p_id = $(this).attr('event_p_id')
-    $(".show_"+event_p_id).toggleClass("d-none");
+    $(".show_" + event_p_id).toggleClass("d-none");
 });
 
 $(".show-comment-reply-btn").click(function () {
@@ -1290,3 +1293,69 @@ $(".show-comment-reply-btn").click(function () {
 });
 
 
+$(document).ready(function () {
+    // Handle Hide/Mute/Report Button Click
+    $('.postControlButton').on('click', function () {
+        // Retrieve necessary data attributes
+        var $button = $(this);
+        var eventId = $(this).data('event-id');
+        var postId = $(this).data('event-post-id');
+        var postControl = $(this).data('post-control'); // hide_post, unhide_post, mute, unmute, report
+
+
+        // AJAX request
+        $.ajax({
+            url: base_url + "event_wall/postControl", // Adjust the endpoint URL as needed
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                event_id: eventId,
+                event_post_id: postId,
+                post_control: postControl,
+
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    console.log(response.type)
+                    if (response.type == 'hide_post') {
+                        // Find and hide the post using the postId
+                        $('.hidden_post[data-post-id="' + postId + '"]').hide();
+                    }else if (response.type == "mute") {
+                        // Set button for unmuting
+                        $button.data('post-control', 'unmute');
+                        $button.text("Unmute");
+
+                        // Toggle icon visibility
+                        $button.find('#muteIcon').hide();  // Hide mute icon
+                        $button.find('#unmuteIcon').show(); // Show unmute icon
+                    } else if (response.type === "unmute") {
+                        // Set button for muting
+                        $button.data('post-control', 'mute');
+                        $button.text("Mute");
+
+                        // Toggle icon visibility
+                        $button.find('#muteIcon').show();  // Show mute icon
+                        $button.find('#unmuteIcon').hide(); // Hide unmute icon
+                    }
+
+
+
+                    toastr.success(response.message);
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+                alert('Failed to perform the action. Please try again later.');
+            }
+        });
+    });
+    function toggleMuteUnmuteButton($button, type) {
+        // Switch between mute and unmute icons and text
+
+    }
+
+});

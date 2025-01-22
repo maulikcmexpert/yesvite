@@ -36,6 +36,10 @@ class EventPhotoController extends Controller
         $title = 'event photos';
         $page = 'front.event_wall.event_photos';
         $user  = Auth::guard('web')->user();
+        $firstname = $user->first_name;
+        $lastname = $user->last_name;
+        $photos = $user->profile ;
+
         $js = ['event_photo'];
         // $rawData = $request->getContent();
         // $request = json_decode($rawData, true);
@@ -300,7 +304,7 @@ class EventPhotoController extends Controller
             $eventInfo['guest_view'] = $eventDetails;
             $current_page = "photos";
             $login_user_id  = $user->id;
-            return view('layout', compact('page', 'js', 'title', 'event', 'login_user_id', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
+            return view('layout', compact('page', 'js', 'title', 'event', 'login_user_id', 'photos','firstname','lastname','eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => 'db error']);

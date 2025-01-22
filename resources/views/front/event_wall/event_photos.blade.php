@@ -417,18 +417,18 @@
                                         @endif
                                         <div class="phototab-add-new-photos-wrp">
                                             <div class="phototab-add-new-photos-img">
-                                                @if ($photo['profile'] != '')
-                                                <img src="{{ $photo['profile']}}"
+                                                @if ($photos != '')
+                                                <img src="{{ $photos}}"
                                                 alt="" loading="lazy">
                                             @else
                                                 @php
-                                                    $name = $photo['firstname'];
+
                                                     // $parts = explode(" ", $name);
-                                                    $firstInitial = isset($photo['firstname'][0])
-                                                        ? strtoupper($photo['firstname'][0][0])
+                                                    $firstInitial = isset($firstname[0])
+                                                        ? strtoupper($firstnam[0][0])
                                                         : '';
-                                                    $secondInitial = isset($photo['lastname'][0])
-                                                        ? strtoupper($photo['lastname'][0][0])
+                                                    $secondInitial = isset($lastname[0])
+                                                        ? strtoupper($lastname[0][0])
                                                         : '';
                                                     $initials =
                                                         strtoupper($firstInitial) .
