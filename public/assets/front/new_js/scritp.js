@@ -14,6 +14,26 @@ var base_url=$('#base_url').val();
 //   });
 // });
 
+// Initial call to handle the default active tab
+handleTabChange();
+
+function handleTabChange() {
+  const $body = $(".new-main-content");
+  const $photosTab = $("#nav-photos-tab");
+  const $mainContentCenter = $("#main-content-center");
+  const $mainContentLeft = $("#main-content-left");
+  const $mainContentRight = $("#main-content-right");
+
+  const isPhotosTabActive = $photosTab.hasClass("active");
+
+  $body.toggleClass("photos-tab-active", isPhotosTabActive);
+  $mainContentCenter.toggleClass("col-xl-9", isPhotosTabActive);
+  $mainContentLeft.toggleClass("col-lg-3", isPhotosTabActive);
+  $mainContentCenter.toggleClass("col-xl-6", !isPhotosTabActive);
+  $mainContentRight.toggleClass("col-xl-3", !isPhotosTabActive);
+}
+
+
 // Reinitialize after AJAX success
 $(document).on("click", ".popup-videos", function () {
   $(this).magnificPopup({

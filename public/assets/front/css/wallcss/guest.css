@@ -676,8 +676,8 @@ display:none;}
 }
 
 .invite-contact-wrp .invite-contact .form-check-input.failed-checkout:checked{
-    background-color: #2DA9FC;
-    border-color: #2DA9FC;
+    background-color: #2DA9FC !important;
+    border-color: #2DA9FC !important;
 }
 
 #failed .faild-content svg path{
@@ -698,6 +698,8 @@ display:none;}
 
 #failed .faild-content h6{
     color: #E03137;
+    max-width: 300px;
+    word-break: break-word;
 }
 
 #failed .delete-btn{
@@ -1422,6 +1424,7 @@ foreignObject{
 
     .guest-tab .nav-tabs .nav-link{
         font-size: 13px;
+        padding: 8px 20px;
     }
 
     .guest-users-wrp{
@@ -1458,8 +1461,52 @@ foreignObject{
     margin-bottom: 10px;
 }
 
+.invite-contact-wrp .invite-mail-data div{
+    align-items: flex-start !important;
+}
+
+#failed .faild-content h6{
+    max-width: 220px;
+    word-break: break-all;
+}
+
+#failed .fix-updat{
+    margin-right: 10px;
+}
+
+.invite-contact-wrp .invite-mail-data h6{
+    max-width: 320px;
+    word-break: break-all;
+}
 
 }
 .d-none {
     display: none;
+}
+
+
+@media only screen and (max-width:424px){
+    #failed .faild-content h6{
+        max-width: 140px;
+        word-break: break-all;
+    }
+
+    .invite-contact-wrp .invite-mail-data h6{
+        max-width: 140px;
+        word-break: break-all;
+    }
+}
+
+@media only screen and (max-width:375px){
+    #failed .fix-updat{
+        margin-right: 6px;
+        font-size: 7px;
+    }
+
+    #failed .faild-content h6{
+        max-width: 100px;
+        word-break: break-all;
+    }
+
+
 }
