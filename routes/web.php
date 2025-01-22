@@ -178,6 +178,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('events/{id?}',  [ControllersEventController::class, 'index'])->name('event');
     // Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
     Route::post('event/store',  [ControllersEventController::class, 'store'])->name('event.event_store');
+    Route::post('event/editStore',  [ControllersEventController::class, 'editStore'])->name('event.event_edit');
     Route::post('event/store_user_id',  [ControllersEventController::class, 'storeUserId'])->name('event.store_user_id');
     Route::post('event/delete_user_id',  [ControllersEventController::class, 'removeUserId'])->name('event.delete_user_id');
     Route::post('event/delete-session', [ControllersEventController::class, 'deleteSession'])->name('delete.session');
