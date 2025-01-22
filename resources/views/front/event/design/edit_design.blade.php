@@ -302,7 +302,7 @@
                 </span>
             </button>
         </div>
-        @endif
+        {{-- @endif --}}
     </div>
 
     <div id="sidebar" class="sidebar choose-design-sidebar" style="right: -200%; width: 0px;">
