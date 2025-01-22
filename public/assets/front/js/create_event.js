@@ -5725,8 +5725,8 @@ $('#YesviteUserAll').scroll(function () {
 });
 
 $('#groupUsers').scroll(function () {
-    limityesvite=10;
-    offsetyesvite=0;
+    // limityesvite=10;
+    // offsetyesvite=0;
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
@@ -5751,10 +5751,6 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             offsetyesvite = 0;
         }
     }
-   console.log(lim);
-   console.log(off);
-   console.log(groupscroll);
-   
    
     $.ajax({
         type: "GET",
@@ -5808,6 +5804,7 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
                 $("#groupUsers").append(html);
             }else{
                 $("#groupUsers").html(html);
+
             }
             busyyesvite = false;
 
