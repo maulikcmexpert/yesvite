@@ -440,18 +440,20 @@ async function handleNewConversation(snapshot) {
             .replaceWith(userStatus);
 
         const badgeElement = $(conversationElement).find(
-            ".ms-auto .d-flex .badge"
+            ".ms-auto .d-flex .badge .g-badge"
         );
-        badgeElement.text(newConversation.unReadCount);
-        if (newConversation.unReadCount == 0) {
-            badgeElement.addClass("d-none");
-            $(conversationElement).removeClass("setpink");
-        } else {
-            badgeElement.removeClass("d-none");
-            badgeElement.show();
-            $(conversationElement).addClass("setpink");
-            console.log("here");
-        }
+        badgeElement.forEach((ele) => {
+            ele.text(newConversation.unReadCount);
+            if (parseInt(newConversation.unReadCount) == 0) {
+                ele.addClass("d-none");
+                $(conversationElement).removeClass("setpink");
+            } else {
+                ele.removeClass("d-none");
+                ele.show();
+                $(conversationElement).addClass("setpink");
+                console.log("here");
+            }
+        });
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
             return;
@@ -3536,15 +3538,19 @@ async function getTotalUnreadMessageCount() {
 // Function to update badge with unread message count
 async function updateUnreadMessageBadge(conversationId = null) {
     const totalUnreadCount = await getTotalUnreadMessageCount();
-    if (totalUnreadCount > 0) {
-        $(".badge").show();
-        $(".badge").text(totalUnreadCount);
-        // console.log(".conversation-"+conversationId);
+    const badgeEle = document.querySelectorAll(".badge .g-badge");
+    badgeEle.forEach((ele) => {
+        if (parseInt(totalUnreadCount) > 0) {
+            $(ele).show();
+            $(ele).text(totalUnreadCount);
+            // console.log(".conversation-"+conversationId);
 
-        // $(".conversation-"+conversationId).addClass('active');
-    } else {
-        $(".badge").hide();
-    }
+            // $(".conversation-"+conversationId).addClass('active');
+        } else {
+            $(ele).hide();
+        }
+    });
+
     $(".set-replay-msg").remove();
     replyMessageId = null;
 }
