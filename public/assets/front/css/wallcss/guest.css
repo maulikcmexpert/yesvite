@@ -594,6 +594,7 @@ display:none;}
 
 .invite-contact-wrp .invite-contact{
     display: flex;
+    align-items: baseline;
     padding-top: 17px;
     padding-bottom: 17px;
     border-bottom: 1px solid var(--border);
