@@ -89,6 +89,7 @@ if(isset($selected_user) && !empty($selected_user)){
 
         </div>
     </div>
+    @if($foundKey==false)
     <div class="d-flex flex-column user_choice_group" data-id="user-{{ $data->id }}">
         @if(isset($data->email) && $data->email!="")
         <div class="right-note d-flex mb-2">
@@ -99,42 +100,58 @@ if(isset($selected_user) && !empty($selected_user)){
                     alt="logo">
             </span>
             @endif
-
-            @if($foundKey==false)
             <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
                 value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}>
-            @else
-            <input class="form-check-input user_group_member user_choice" type="checkbox"
+                <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
-                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}>
-            @endif
-            <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
-                name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
-                value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}> -->
-            
+                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}> -->
         </div>
         @endif
         @if(isset($data->phone_number) && $data->phone_number!="")
         <div class="right-note ms-auto">
-            @if($foundKey==false)
             <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
-                value="{{ $data->id }}"  {{( $data->group_member_prefer_by=="phone")?'checked':""}}> 
-
-            @else
-            <input class="form-check-input user_group_member user_choice" type="checkbox"
+                value="{{ $data->id }}"  {{( $data->group_member_prefer_by=="phone")?'checked':""}}>
+<!-- 
+                <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
-                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
+                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}> -->
+                </div>
+                @endif
+    </div>
+    @else
+    <div class="d-flex flex-column user_choice_group" data-id="user-{{ $data->id }}">
+        @if(isset($data->email) && $data->email!="")
+        <div class="right-note d-flex mb-2">
+            @if(isset($data->app_user) && $data->app_user == '1')
+            <span>Member</span>
+            <span class="mx-3">
+                <img src="{{ asset('assets/event/image/small-logo.svg') }}"
+                    alt="logo">
+            </span>
             @endif
+            <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
+                name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
+                value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}> -->
+                <input class="form-check-input user_group_member user_choice" type="checkbox"
+                name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
+                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}>
+        </div>
+        @endif
+        @if(isset($data->phone_number) && $data->phone_number!="")
+        <div class="right-note ms-auto">
             <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
                 value="{{ $data->id }}"  {{( $data->group_member_prefer_by=="phone")?'checked':""}}> -->
 
-                
+                <input class="form-check-input user_group_member user_choice" type="checkbox"
+                name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
+                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
                 </div>
                 @endif
-            </div>
+    </div>
+    @endif
 </div>
 <!-- </div> -->
 @endforeach
