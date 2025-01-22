@@ -2807,19 +2807,19 @@ $(document).on("click", "#close_createEvent", function () {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    // if (event_type == "") {
-    //     $("#deleteModal").modal("show");
-    //     // confirm('Event type is empty. Are you sure you want to proceed?')
-    //     return;
-    // }
+    if (event_type == "") {
+        $("#deleteModal").modal("show");
+        // confirm('Event type is empty. Are you sure you want to proceed?')
+        return;
+    }
     // // if (event_name == "") {
     // //     $("#deleteModal").modal("show");
     // //     return;
     // // }
-    // if (event_date == "") {
-    //     $("#deleteModal").modal("show");
-    //     return;
-    // }
+    if (event_date == "") {
+        $("#deleteModal").modal("show");
+        return;
+    }
 
     // $('#loader').css('display','block');
     $('#loader').css('display','block');
