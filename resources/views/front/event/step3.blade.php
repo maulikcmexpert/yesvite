@@ -60,7 +60,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    <a href="#" class="close" id="delete_invited_user"
+                                                    {{-- <a href="#" class="close" id="delete_invited_user"
                                                         data-id="user-{{ $guest_user['id'] }}"
                                                         data-userid="{{ $guest_user['id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -74,7 +74,7 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -100,7 +100,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    <a href="#" class="close" id="delete_invited_user_tel"
+                                                    {{-- <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="user_tel-{{ $guest_user['id'] }}"
                                                         data-userid="{{ $guest_user['id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -114,7 +114,7 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -269,7 +269,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    <a href="#" class="close" id="delete_invited_user_tel"
+                                                    {{-- <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="sync_-{{ $guest_user['sync_id'] }}" data-contact="1"
                                                         data-userid="{{ $guest_user['sync_id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -283,7 +283,7 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -307,7 +307,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    <a href="#" class="close" id="delete_invited_user_tel"
+                                                    {{-- <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="sync_tel-{{ $guest_user['sync_id'] }}"
                                                         data-contact="1" data-userid="{{ $guest_user['sync_id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -321,7 +321,7 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
