@@ -24,6 +24,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 80%;
 }
 
 .photo-card-head-left-img{
@@ -36,6 +37,18 @@
 .photo-card-head-left-img img{
     border-radius: 50%;
     object-fit: cover;
+}
+
+.photo-card-head-left-img h5{
+    width: 100%;
+    max-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    margin-bottom: 0;
 }
 
 .photo-card-head-left-content h3{
@@ -336,6 +349,15 @@
     height: 36px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.phototab-add-new-photos-img h5{
+    width: 100%;
+    max-width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0;
 }
 
 .phototab-add-new-photos-img p{
