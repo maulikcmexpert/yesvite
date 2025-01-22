@@ -5668,11 +5668,14 @@ var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
 $("#YesviteUserAll").on("scroll", function () {
+    // console.log(busyyesvite);
+    
     if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-        if (scrollTop + elementHeight >= scrollHeight) {
+    console.log({scrollTop,elementHeight,scrollHeight});
+        if (scrollTop + elementHeight >= scrollHeight-2) {
             busyyesvite = true;
             offsetyesvite += limityesvite;
             // var type="yesvite";
@@ -5737,13 +5740,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group');
+            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll=null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5800,7 +5803,11 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
 
                 }
         }else{
-            $("#groupUsers").html(html);
+            if(groupscroll==1){
+                $("#groupUsers").append(html);
+            }else{
+                $("#groupUsers").html(html);
+            }
         }
         busyyesvite = false;
         
