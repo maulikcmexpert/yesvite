@@ -345,7 +345,7 @@ defer
                
                 if (selectedPriceId) {
                     // Use Laravel's route in a Blade directive to inject the base URL
-                    const url = `{{ url('start-payment') }}/${selectedPriceId}`;
+                    const url = `{{ url('payment-start') }}/${selectedPriceId}`;
                     
                     // Open the Stripe Checkout in a new tab
                     window.open(url, '_blank');
