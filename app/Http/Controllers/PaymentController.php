@@ -76,7 +76,7 @@ class PaymentController extends BaseController
         if (session()->has($sessionKey)) {
             $sessionData = session($sessionKey);
 
-            if ($sessionData['status'] !== 'ideal') {
+            if ($sessionData['status'] !== 'idle') {
                 session()->forget($sessionKey);
             }
             return response()->json([
