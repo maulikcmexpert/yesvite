@@ -1811,7 +1811,7 @@ class EventController extends BaseController
             ->whereIn('email', $emails)
             ->orderBy('firstname')
 
-            ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
+            ->when(!empty($request->limit) , function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
             })
