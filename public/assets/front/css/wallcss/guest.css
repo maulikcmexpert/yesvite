@@ -116,7 +116,6 @@
     font-size: 15px !important;
     line-height: normal !important;
     border-radius: 50%;
-    border: 1px solid #fefefe;
 }
 
 .guest-user-list .guest-img img{
@@ -125,6 +124,7 @@
     object-fit: cover;
     border-radius: 100%;
     display: block;
+    border: 1px solid #ccc;
 }
 
 .guest-list-data{
