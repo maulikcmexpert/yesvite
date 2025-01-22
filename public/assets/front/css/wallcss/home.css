@@ -355,6 +355,7 @@ main {
   border-bottom: 3px solid var(--pink) !important;
   color: var(--secondary-black) !important;
   border-radius: 0px !important;
+  box-shadow: none !important;
 }
 
 .wall-main-story-item {
