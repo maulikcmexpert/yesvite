@@ -1200,8 +1200,11 @@ $(document).on("click", ".archive-single1-conversation", function (e) {
 
 // Initial chat update
 if ($("#isGroup").val() == true) {
+    console.log("is group !!!!!!!!!!!!!");
     updateChatfromGroup($(".selected_id").val());
 } else {
+    console.log("not group !!!!!!!!!!!!!");
+
     updateChat($(".selected_message").val());
 }
 $(".archived-list").hide();
