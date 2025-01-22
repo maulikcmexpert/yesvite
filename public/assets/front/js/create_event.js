@@ -6569,6 +6569,7 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
         if (data.view == "") {
             cohostNoMoreData = true;
             $("#loader").hide();
+            $(".list_all_invited_user").html('No data found');
             return;
         }
         $("#loader").hide();
@@ -6769,7 +6770,7 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
         },
     })
     .done(function (data) {
-        // console.log(data);
+        console.log(data);
         if (data.view == "") {
             cohostNoMoreContactData = true;
             $(".list_all_contact_user").html('No data found');
