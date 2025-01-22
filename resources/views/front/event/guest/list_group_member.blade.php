@@ -114,9 +114,9 @@ if(isset($selected_user) && !empty($selected_user)){
                 <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
                 value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
-                </div>>
-        </div>
-        @endif
-    </div>
+                </div>
+                @endif
+            </div>
 </div>
+<!-- </div> -->
 @endforeach
