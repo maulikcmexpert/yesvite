@@ -1,4 +1,4 @@
-<div class="activity-main-wrp mb-3 new_append_activity {{ $newClass }}" data-id="{{ $dataid }}"
+<div class="activity-main-wrp mb-3 new_append_activity {{ $newClass }} event_all_activity_list" data-id="{{ $dataid }}"
     id="{{ $dataid }}">
     <h3>
         Activity <span class="activity-count-{{ $newClass }} activity-count">{{ $count }}</span>

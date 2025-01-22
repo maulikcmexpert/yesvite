@@ -491,7 +491,7 @@
                                                 @if (!empty($eventDetail['events_schedule_list']->data))
                                                     @foreach ($eventDetail['events_schedule_list']->data as $data)  
                                                     @if ($currentDate == $data['event_date'])
-                                                        <div class="activity-main-wrp mb-3 {{ Carbon::parse($currentDate)->format('Y-m-d') }}" data-id="{{$data['id']}}"
+                                                        <div class="activity-main-wrp mb-3 {{ Carbon::parse($currentDate)->format('Y-m-d') }} event_all_activity_list" data-id="{{$data['id']}}"
                                                             id="{{$data['id']}}">
                                                             <h3>Activity <span class="activity-count-{{ Carbon::parse($currentDate)->format('Y-m-d') }} activity-count">{{ $count }}</span>
                                                                 <span class="ms-auto">

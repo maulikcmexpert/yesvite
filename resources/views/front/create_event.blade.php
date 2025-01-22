@@ -364,10 +364,10 @@
         <div class="guest-wrp side-guest-wrp">
             <div class="guest-pro">
                 <div>
-                    <h5>Pro</h5>
-                    <h6>$15.00</h6>
+                    <!-- <h5>Pro</h5>
+                    <h6>$15.00</h6> -->
                 </div>
-                <a href="#" class="edit-icon">
+                <!-- <a href="#" class="edit-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -378,7 +378,7 @@
                             stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                </a>
+                </a> -->
             </div>
             <div class="invite-pro">
                 <div class="invite-left">
