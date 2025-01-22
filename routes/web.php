@@ -51,6 +51,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
 Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+Route::post('/check-payment', [PaymentController::class, 'checkPayment'])->name('payment.checkPay');
+Route::get('/payment-start/{priceId}', [PaymentController::class, 'processPayment'])->name('payment-start');
 Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 Route::get('/payment-failed', [PaymentController::class, 'paymentFailed'])->name('payment.failed');
 
