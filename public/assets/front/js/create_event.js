@@ -3732,11 +3732,14 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    $('#close_createEvent').css('display','block');
+
     e.preventDefault();
     $('.subcategory-section').show();
     li_design_click();
 });
 $(document).on("click", ".li_design", function (e) {
+    $('#close_createEvent').css('display','block');
     e.preventDefault();
     $('.subcategory-section').show();
     li_design_click();
@@ -3878,7 +3881,6 @@ function edit_design_modal() {
 
 var design_inner_image = '';
 $(document).on("click", ".li_event_details", function () {
-    $('#close_createEvent').css('display','block');
     $('#sidebar_select_design_category').css('display','none');
     
     canvas.discardActiveObject();
@@ -4003,6 +4005,8 @@ $(document).on("click", ".li_event_details", function () {
 });
 
 $(document).on("click", ".li_event_detail", function () {
+    $('#close_createEvent').css('display','block');
+
     var design = eventData.desgin_selected;
     $('.li_event_detail').find(".side-bar-list").addClass("active");
     if(final_step <= 1){
@@ -4054,6 +4058,7 @@ function active_responsive_dropdown(current_page,design_page = null){
 }
 
 $(document).on("click", ".li_guest", function () {
+    $('#close_createEvent').css('display','block');
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
     // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
@@ -4156,6 +4161,8 @@ $(document).on("click", ".li_guest", function () {
 });
 
 $(document).on("click", ".li_setting", function () {
+    $('#close_createEvent').css('display','block');
+
     var event_name=$('#event-name').val();
     var hostedby = $("#hostedby").val();
     var event_date = $("#event-date").val();
