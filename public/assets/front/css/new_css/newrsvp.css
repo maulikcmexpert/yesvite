@@ -734,6 +734,10 @@ display:none;}
     box-shadow: none;
 }
 
+.rsvp-schedule-wrp .shedule-manage-timing .shedule-timing{
+    width: 62px;
+}
+
 .rsvp-schedule-wrp h4.title{
     padding: 10px 0px;
     margin-bottom: 0px;
