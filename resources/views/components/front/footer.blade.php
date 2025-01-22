@@ -307,8 +307,9 @@ defer
                 purchaseButton.disabled = false;
             });
         });
-
-        purchaseButton.addEventListener('click', () => {
+        if(purchaseButton){           
+        
+            purchaseButton.addEventListener('click', () => {
                 const selectedPriceId = purchaseButton.getAttribute('data-price-id');
                
                 if (selectedPriceId) {
@@ -367,5 +368,6 @@ defer
                 const pollingInterval = setInterval(() => checkPaymentStatus(selectedPriceId), 5000);
                 }
             });
+        }
     });
     </script>

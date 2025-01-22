@@ -5737,13 +5737,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
+            displayRecords(limityesvite, offsetyesvite,'group');
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscroll=null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5751,10 +5751,6 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             offsetyesvite = 0;
         }
     }
-   console.log(lim);
-   console.log(off);
-   console.log(groupscroll);
-   
    
     $.ajax({
         type: "GET",
@@ -5804,13 +5800,7 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
 
                 }
         }else{
-            if(groupscroll==1){
-                $("#groupUsers").append(html);
-            }else{
-                $("#groupUsers").html(html);
-            }
-            busyyesvite = false;
-
+            $("#groupUsers").html(html);
         }
         busyyesvite = false;
         
