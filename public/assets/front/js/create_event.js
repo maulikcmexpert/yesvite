@@ -7426,31 +7426,31 @@ $(document).on("click", ".edit_checkout", function (e) {
     // handleActiveClass(this);
 
     
-    // $.ajax({
-    //     url: base_url + "event/store",
-    //     type: "POST",
-    //     headers: {
-    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    //     },
-    //     data: data,
-    //     success: function (response) {
-    //         console.log(response);
-    //         $("#loader").css('display','none');
-    //         $(".main-content-wrp").removeClass("blurred");
+    $.ajax({
+        url: base_url + "event/editStore",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: data,
+        success: function (response) {
+            console.log(response);
+            $("#loader").css('display','none');
+            $(".main-content-wrp").removeClass("blurred");
 
-    //         if(response.is_registry=="1"){
-    //             $('#gift_registry_logo').html(response.view);
-    //             // $('#eventModal').modal('show');         
-    //         }else{
-    //             toastr.success('Event Created Successfully');
-    //             // window.location.href="profile";
-    //         }
-    //         $('#eventModal').modal('show');           
+            if(response.is_registry=="1"){
+                // $('#gift_registry_logo').html(response.view);
+                // $('#eventModal').modal('show');         
+            }else{
+                toastr.success('Event Updated Successfully');
+                // window.location.href="profile";
+            }
+            $('#eventModal').modal('show');           
 
 
-    //     },
-    //     error: function (xhr, status, error) {
-    //         console.log("AJAX error: " + error);
-    //     },
-    // });
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+        },
+    });
 });

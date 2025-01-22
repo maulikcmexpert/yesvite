@@ -156,7 +156,7 @@ class EventController extends BaseController
                                 'prefer_by' => $userVal->prefer_by,
                                 'invited_by' => $useremail,
                                 'profile' => $userVal->profile ?? '',
-                                'isAlready'=>"1"
+                                'isAlready' => "1"
                             ];
                             $userIds[] = $userEntry;
                         }
@@ -190,7 +190,7 @@ class EventController extends BaseController
                                 'prefer_by' => $userVal->preferBy,
                                 'invited_by' => $useremail,
                                 'profile' => $userVal->photo ?? '',
-                                'isAlready'=>"1"
+                                'isAlready' => "1"
                             ];
                             $userIdsSession[] = $userEntry;
                         }
@@ -363,7 +363,7 @@ class EventController extends BaseController
                     // dd($categories);
                     $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     $categories_item = Session::get('category_item', []);
-                   
+
                     foreach ($eventpotluckData as  $key => $value) {
 
                         $potluckCategory['id'] = $value->id;
@@ -377,23 +377,23 @@ class EventController extends BaseController
                         ];
                         // session()->put('category', $categories);
                         $potluckCategory['items'] = [];
-                        $categoryQuantity=0;
-                        $remainingQnt=0;
+                        $categoryQuantity = 0;
+                        $remainingQnt = 0;
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
-                            
+
                             $itemData = [];
                             foreach ($value->event_potluck_category_item as $itemValue) {
                                 $itemData = [
                                     'item' => $itemValue->description,
                                     'self_bring' => $itemValue->self_bring_item,
-                                    'self_bring_qty' => $itemValue->self_bring_item==1?$itemValue->quantity:0,
+                                    'self_bring_qty' => $itemValue->self_bring_item == 1 ? $itemValue->quantity : 0,
                                     'quantity' => $itemValue->quantity,
                                 ];
                                 $itmquantity = 0;
-                                $categories[$value->id]['item'][$itemValue->id]=$itemData;
+                                $categories[$value->id]['item'][$itemValue->id] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
-                                
+
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
                                 $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
@@ -402,7 +402,7 @@ class EventController extends BaseController
                                 $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
                                 $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
                                 $potluckItem['spoken_quantity'] =  $spoken_for;
-                                
+
                                 $potluckItem['item_carry_users'] = [];
 
                                 foreach ($itemValue->user_potluck_items as $itemcarryUser) {
@@ -415,16 +415,16 @@ class EventController extends BaseController
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
-                                    $categoryQuantity = $categoryQuantity+$itemcarryUser->quantity;
+                                    $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                 }
                                 $remainingQnt = $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckCategory['items'][] = $potluckItem;
                             }
                         }
-                        $remainingQnt= $remainingQnt - $categoryQuantity;
-                        $potluckCategory['remainingQnt']=$remainingQnt;
-                        $potluckCategory['categoryQuantity']=$categoryQuantity;
+                        $remainingQnt = $remainingQnt - $categoryQuantity;
+                        $potluckCategory['remainingQnt'] = $remainingQnt;
+                        $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                     // Update session after the loop
@@ -437,7 +437,7 @@ class EventController extends BaseController
         } else {
             $title = 'Create Event';
         }
-        
+
         $page = 'front.create_event';
 
 
@@ -1632,7 +1632,7 @@ class EventController extends BaseController
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
-              
+
                 if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
                     $total_quantity = $total_quantity + $value['self_bring_qty'];
                 }
@@ -1787,7 +1787,7 @@ class EventController extends BaseController
         //     ->get();
         $selected_user = Session::get('user_ids');
 
-        return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups','selected_user'))->render(), "status" => "1"]);
+        return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups', 'selected_user'))->render(), "status" => "1"]);
     }
 
     public function getUserAjax(Request $request)
@@ -2475,10 +2475,10 @@ class EventController extends BaseController
     }
     public function get_design_edit_page(Request $request)
     {
-       
+
         $eventID = $request->eventID;
-        $isDraft =$request->isDraft;
-        return view('front.event.design.edit_design',compact('eventID','isDraft'))->render();
+        $isDraft = $request->isDraft;
+        return view('front.event.design.edit_design', compact('eventID', 'isDraft'))->render();
     }
 
     public function shape_image(Request $request)
@@ -2645,6 +2645,511 @@ class EventController extends BaseController
         return response()->json([
             'view' => view('front.event.guest.get_category', compact('design_category'))->render(),
             'success' => true
+        ]);
+    }
+
+
+    public function  editStore(Request $request)
+    {
+        // $potluck = session('category');
+        // dd($request);
+
+        $user_id =  Auth::guard('web')->user()->id;
+        $dateString = (isset($request->event_date)) ? $request->event_date : "";
+
+
+
+        // if (strpos($dateString, ' To ') !== false) {
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
+
+        // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
+        // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
+        if (strpos($dateString, ' To ') !== false) {
+            list($startDate, $endDate) = explode(' To ', $dateString);
+        } else {
+            $startDate = $dateString;
+            $endDate = $dateString;
+        }
+
+        $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
+        $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+
+        $startDateFormat = "";
+        $endDateFormat = "";
+        if ($startDateObj && $endDateObj) {
+            $startDateFormat = $startDateObj->format('Y-m-d');
+            $endDateFormat = $endDateObj->format('Y-m-d');
+        }
+
+        if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
+            // dd($request->rsvp_by_date);
+            $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
+            // $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            $rsvp_by_date_set = '1';
+        } else {
+            if ($startDateFormat) {
+
+                $start = new DateTime($startDateFormat);
+                $start->modify('-1 day');
+                $rsvp_by_date = $start->format('Y-m-d');
+            }
+        }
+
+
+        $greeting_card_id = "";
+        if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
+            if (isset($request->thank_you_card_id) && $request->thank_you_card_id != '') {
+                $greeting_card_id =  $request->thank_you_card_id;
+            }
+        }
+
+        $gift_registry_id = "";
+        if (isset($request->gift_registry) && $request->gift_registry == '1') {
+            if (!empty($request->gift_registry_data)) {
+                $gift_registry_data = collect($request->gift_registry_data)->pluck('gr_id')->toArray();
+                $gift_registry_id =  implode(',', $gift_registry_data);
+            }
+        }
+
+
+        if (isset($request->event_id) && $request->event_id != NULL) {
+            $event_creation = Event::where('id', $request->event_id)->first();
+        } else {
+            $event_creation = new Event();
+        }
+
+        $event_creation->user_id = $user_id;
+        $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
+        $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
+        $event_creation->start_date = (isset($startDate) && $startDate != "") ? $startDateFormat : null;
+        $event_creation->end_date = (isset($endDate) && $endDate != "") ? $endDateFormat : null;
+        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0";
+        $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
+        $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";
+        $event_creation->rsvp_start_timezone = (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "";
+        $event_creation->rsvp_end_time = (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "";
+        $event_creation->rsvp_end_timezone = (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "";
+        $event_creation->rsvp_end_time_set = (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "0";
+        $event_creation->event_location_name = (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "";
+        $event_creation->address_1 = (isset($request->address1) && $request->address1 != "") ? $request->address1 : "";
+        $event_creation->address_2 = (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "";
+        $event_creation->state = (isset($request->state) && $request->state != "") ? $request->state : "";
+        $event_creation->zip_code = (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "";
+        $event_creation->city = (isset($request->city) && $request->city != "") ? $request->city : "";
+        $event_creation->message_to_guests = (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "";
+        $event_creation->is_draft_save = (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0";
+        $event_creation->latitude = (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "";
+        $event_creation->longitude = (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "";
+        $event_creation->greeting_card_id = (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0";
+        $event_creation->gift_registry_id = (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0";
+        $event_creation->subscription_plan_name = (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro";
+        $event_creation->subscription_invite_count = (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15;
+
+        // $event_creation->save();
+
+
+
+        $eventId = $event_creation->id;
+        $get_count_invited_user = 0;
+        $conatctId = session('contact_ids');
+        $invitedCount = session('user_ids');
+        $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
+
+        // debit_coins($user_id, $eventId, $get_count_invited_user);
+        if (isset($request->event_id) && $request->event_id != NULL) {
+            $step = $event_creation->step;
+
+            if (isset($request->step) && $request->step != '' && $step < $request->step) {
+                $event_creation->step = $request->step;
+            }
+        } else {
+            $event_creation->step = (isset($request->step) && $request->step != '') ? $request->step : 0;
+        }
+        if (isset($request->shape_image) && $request->shape_image != '') {
+            $event_creation->design_inner_image = $request->shape_image;
+        }
+
+
+
+
+
+        // if (isset($request->textData) && json_encode($request->textData) != '') {
+        //     $tempData = TextData::where('id', $request->temp_id)->first();
+
+        //     if ($tempData) {
+        //         $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+        //         $destinationDirectory = public_path('storage/event_images/');
+        //         $destinationImagePath = $destinationDirectory . $tempData->image;
+        //         if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+        //             $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+        //             $destinationImagePath = $destinationDirectory . $newImageName;
+
+        //             File::copy($sourceImagePath, $destinationImagePath);
+        //             $event_creation->design_image = $tempData->image;
+        //         }
+        //     }
+
+        //     $textElemtents = $request->textData['textElements'];
+        //     foreach ($textElemtents as $key => $textJson) {
+        //         if ($textJson['fontSize'] != '') {
+        //             $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
+        //             $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
+        //             $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
+        //         }
+        //         if (isset($textJson['letterSpacing'])) {
+        //             $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+        //         }
+        //         if (isset($textJson['lineHeight'])) {
+        //             $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
+        //         }
+        //         if (isset($textJson['underline'])) {
+        //             $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true) ? true : false;
+        //         }
+        //     }
+
+
+        //     $static_data = [];
+        //     $static_data['textData'] = $textElemtents;
+        //     $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
+        //     $static_data['height'] = (int)$tempData->height;
+        //     $static_data['width'] = (int)$tempData->width;
+        //     $static_data['image'] = $tempData->image;
+        //     $static_data['template_url'] = $sourceImagePath;
+        //     $static_data['is_contain_image'] = false;
+        //     if (isset($request->textData['shapeImageData'])) {
+        //         $shapeImageData = [];
+        //         $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
+        //         $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
+        //         $shapeImageData['centerY'] = (float)$request->textData['shapeImageData']['centerY'];
+        //         $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
+        //         $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
+        //         $static_data['shapeImageData'] = $shapeImageData;
+        //         $static_data['is_contain_image'] = true;
+        //     }
+
+        //     $event_creation->static_information = json_encode($static_data);
+        // }
+
+
+
+
+
+        // $event_creation->save();
+
+
+
+
+
+        if ($eventId != "") {
+            $invitedUsers = $request->email_invite;
+            $invitedusersession = session('user_ids');
+            if (isset($invitedusersession) && !empty($invitedusersession)) {
+
+                foreach ($invitedusersession as $key => $value) {
+                    $is_cohost = '0';
+                    $invited_user = $value['id'];
+                    $prefer_by =  $value['prefer_by'];
+                    if(isset($value['isAlready'])&&$value['isAlready']=="1"){
+                        continue;
+                    }
+                    EventInvitedUser::create([
+                        'event_id' => $eventId,
+                        'prefer_by' => $prefer_by,
+                        'user_id' => $invited_user,
+                        'is_co_host' => $is_cohost,
+                    ]);
+                    $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('user_id', $user_id)->where('id', $eventId)->get();
+                    foreach ($invitedusers as $event_detail) {
+                        $eventData = [
+                            'event_name' => $event_detail->event_name,
+                            'hosted_by' => $event_detail->user->firstname . ' ' . $event_detail->user->lastname,
+                            'profileUser' => ($event_detail->user->profile != NULL || $event_detail->user->profile != "") ? $event_detail->user->profile : "no_profile.png",
+                            'event_image' => "no_image.png",
+                            'date' =>   date('l - M jS, Y', strtotime($event_detail->start_date)),
+                            'time' => $event_detail->rsvp_start_time,
+                            'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
+                        ];
+                    }
+                }
+            }
+
+            // dd($conatctId);
+            if (!empty($conatctId)) {
+                $invitedGuestUsers = $conatctId;
+
+                foreach ($invitedGuestUsers as $value) {
+                    if(isset($value['isAlready'])&&$value['isAlready']=="1"){
+                        continue;
+                    }
+                    $checkContactExist = contact_sync::where('id', $value['sync_id'])->first();
+                  
+                    if ($checkContactExist) {
+                        $newUserId = NULL;
+                        if ($checkContactExist->email != '') {
+                            $newUserId = checkUserEmailExist($checkContactExist);
+                        }
+                        $eventInvite = new EventInvitedUser();
+                        $eventInvite->event_id = $eventId;
+                        $eventInvite->sync_id = $checkContactExist->id;
+                        $eventInvite->user_id = $newUserId;
+                        $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        $eventInvite->save();
+                    }
+                    // }
+                }
+            }
+         
+            
+            if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
+                $is_cohost = '1';
+                $invited_user = $request->co_host;
+                $prefer_by = $request->co_host_prefer_by;
+
+                if (isset($request->isPhonecontact) && $request->isPhonecontact == 1) {
+
+                    $checkContactExist = contact_sync::where('id', $invited_user)->first();
+                    if ($checkContactExist) {
+                        $newUserId = NULL;
+                        if ($checkContactExist->email != '') {
+                            $newUserId = checkUserEmailExist($checkContactExist);
+                        }
+                        $eventInvite = new EventInvitedUser();
+                        $eventInvite->event_id = $eventId;
+                        $eventInvite->sync_id = $checkContactExist->id;
+                        $eventInvite->user_id = $newUserId;
+                        $eventInvite->prefer_by = $prefer_by;
+                        $eventInvite->is_co_host = $is_cohost;
+                        $eventInvite->save();
+                    }
+                } else {
+                    EventInvitedUser::create([
+                        'event_id' => $eventId,
+                        'prefer_by' => $prefer_by,
+                        'user_id' => $invited_user,
+                        'is_co_host' => $is_cohost,
+                    ]);
+                    $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('id', $eventId)->get();
+                    foreach ($invitedusers as $event_detail) {
+                        $eventData = [
+                            'event_name' => $event_detail->event_name,
+                            'hosted_by' => $event_detail->user->firstname . ' ' . $event_detail->user->lastname,
+                            'profileUser' => ($event_detail->user->profile != NULL || $event_detail->user->profile != "") ? $event_detail->user->profile : "no_profile.png",
+                            'event_image' => "no_image.png",
+                            'date' =>   date('l - M jS, Y', strtotime($event_detail->start_date)),
+                            'time' => $event_detail->rsvp_start_time,
+                            'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
+                        ];
+                    }
+                }
+            }
+            if (isset($request->eventSetting) && $request->eventSetting == "1") {
+                $eventSetting = EventSetting::where('event_id', $eventId)->first();
+             
+                if ($eventSetting != null) {
+                    $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
+                    $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
+                    $eventSetting->adult_only_party = (isset($request->only_adults)) ? $request->only_adults : "0";
+                    $eventSetting->thank_you_cards = (isset($request->thankyou_message)) ? $request->thankyou_message : "0";
+                    $eventSetting->add_co_host = (isset($request->add_co_host)) ? $request->add_co_host : "0";
+                    $eventSetting->gift_registry = (isset($request->gift_registry)) ? $request->gift_registry : "0";
+                    $eventSetting->events_schedule = (isset($request->events_schedule)) ? $request->events_schedule : "0";
+                    $eventSetting->event_wall = (isset($request->event_wall)) ? $request->event_wall : "0";
+                    $eventSetting->guest_list_visible_to_guests = (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0";
+                    $eventSetting->podluck = (isset($request->potluck)) ? $request->potluck : "0";
+                    $eventSetting->rsvp_updates = (isset($request->rsvp_update)) ? $request->rsvp_update : "0";
+                    $eventSetting->event_wall_post = (isset($request->event_wall_post)) ? $request->event_wall_post : "0";
+                    $eventSetting->send_event_dater_reminders = (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0";
+                    $eventSetting->request_event_photos_from_guests = (isset($request->request_photo)) ? $request->request_photo : "0";
+                    $eventSetting->save();
+                } else {
+                    EventSetting::create([
+                        'event_id' => $eventId,
+                        'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
+                        'allow_limit' => (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0,
+                        'adult_only_party' => (isset($request->only_adults)) ? $request->only_adults : "0",
+                        'thank_you_cards' => (isset($request->thankyou_message)) ? $request->thankyou_message : "0",
+                        'add_co_host' => (isset($request->add_co_host)) ? $request->add_co_host : "0",
+                        'gift_registry' => (isset($request->gift_registry)) ? $request->gift_registry : "0",
+                        'events_schedule' => (isset($request->events_schedule)) ? $request->events_schedule : "0",
+                        'event_wall' => (isset($request->event_wall)) ? $request->event_wall : "0",
+                        'guest_list_visible_to_guests' => (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0",
+                        'podluck' => (isset($request->potluck)) ? $request->potluck : "0",
+                        'rsvp_updates' => (isset($request->rsvp_update)) ? $request->rsvp_update : "0",
+                        'event_wall_post' => (isset($request->event_wall_post)) ? $request->event_wall_post : "0",
+                        'send_event_dater_reminders' => (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0",
+                        'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
+                    ]);
+                }
+            }
+
+            if (isset($request->potluck) && $request->potluck == "1") {
+                $potluck = session('category');
+                if (isset($potluck) && !empty($potluck)) {
+                    foreach ($potluck as $category) {
+                        $eventPodluck = EventPotluckCategory::create([
+                            'event_id' => $eventId,
+                            'user_id' => $user_id,
+                            'category' => $category['category_name'],
+                            'quantity' => $category['category_quantity'],
+                        ]);
+                        if (isset($category['item'])) {
+                            foreach ($category['item'] as $item) {
+                                $eventPodluckitem = EventPotluckCategoryItem::create([
+                                    'event_id' => $eventId,
+                                    'user_id' => $user_id,
+                                    'event_potluck_category_id' => $eventPodluck->id,
+                                    'self_bring_item' =>  $item['self_bring'],
+                                    'description' => $item['name'],
+                                    'quantity' => $item['quantity'],
+                                ]);
+                                if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+                                    UserPotluckItem::Create([
+                                        'event_id' => $eventId,
+                                        'user_id' => $user_id,
+                                        'event_potluck_category_id' => $eventPodluck->id,
+                                        'event_potluck_item_id' => $eventPodluckitem->id,
+                                        'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+                                    ]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0') {
+                EventSchedule::where('event_id', $request->event_id)->delete();
+            }
+
+            if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
+                $activities = $request->activity;
+                if (isset($request->event_id) && $request->event_id != null) {
+                    EventSchedule::where('event_id', $request->event_id)->delete();
+                }
+                $addStartschedule =  new EventSchedule();
+                $addStartschedule->event_id = $eventId;
+                $addStartschedule->start_time = isset($request->start_time) ? $request->start_time : '';
+                $addStartschedule->event_date = isset($startDate) ? $startDateFormat : '';
+                $addStartschedule->type = '1';
+                $addStartschedule->save();
+
+                foreach ($activities as $date => $activityList) {
+                    $schedule_date = date('Y-m-d', strtotime($date));
+                    foreach ($activityList as $activity) {
+                        $activity_data[] = [
+                            'event_id' => $eventId,
+                            'activity_title' => $activity['activity'],
+                            'start_time' => $activity['start-time'],
+                            'end_time' => $activity['end-time'],
+                            'event_date' => $schedule_date,
+                            'type' => '2'
+                        ];
+                    }
+                }
+
+                EventSchedule::insert($activity_data);
+
+                $addEndschedule =  new EventSchedule();
+                $addEndschedule->event_id = $eventId;
+                $addEndschedule->end_time = isset($request->end_time)  ? $request->end_time : '';
+                $addEndschedule->event_date = isset($endDate) ? $endDateFormat : '';
+                $addEndschedule->type = '3';
+                $addEndschedule->save();
+            }
+            $gift = "0";
+            if ($request->gift_registry == "1") {
+                $gift_registry = $request->gift_registry_data;
+                // $gift = "1";
+                //     if (isset($gift_registry) && !empty($gift_registry)) {
+                //         foreach ($gift_registry as $data) {
+                //             $gift_registry_data[] = [
+                //                 'user_id' => $user_id,
+                //                 'registry_recipient_name' => $data['registry_name'],
+                //                 'registry_link' => $data['registry_link'],
+                //                 'created_at' => now(),
+                //                 'updated_at' => now(),
+                //             ];
+                //         }
+                //         EventGiftRegistry::insert($gift_registry_data);
+                //     }
+            }
+
+            if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+                EventImage::create([
+                    'event_id' => $eventId,
+                    'image' => $request->desgin_selected
+                ]);
+            }
+
+            if (isset($request->slider_images) && !empty($request->slider_images)) {
+                foreach ($request->slider_images as $key => $value) {
+                    EventImage::create([
+                        'event_id' => $eventId,
+                        'image' => $value['fileName'],
+                    ]);
+                }
+            }
+
+
+
+
+            $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
+            if ($request->is_update_event == '0') {
+                if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'post_id' => ""
+                    ];
+
+                    sendNotification('invite', $notificationParam);
+                }
+                if ($checkUserInvited->is_draft_save == '0') {
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'post_id' => ""
+                    ];
+                    sendNotification('owner_notify', $notificationParam);
+                }
+            }
+
+            // if ($request->thankyou_message == "1") {
+            //     $thankyou_card = session('thankyou_card_data');
+            //     if (isset($thankyou_card) && !empty($thankyou_card)) {
+            //         // dd($gift_registry);
+            //         foreach ($thankyou_card as $data) {
+            //             $thankyou_card_data[] = [
+            //                 
+            //             ];
+            //         }
+            //         EventGiftRegistry::insert($thankyou_card_data);
+            //     }
+            // }     
+            // return  Redirect::to('event')->with('success', 'Event Created successfully');
+            Session::forget('desgin');
+            Session::forget('shape_image');
+        }
+        if ($event_creation && $request->isdraft == "1") {
+            return 1;
+        }
+
+
+        $registry = $request->gift_registry_data;
+
+        // dd($registry);
+        if (!empty($registry)) {
+            $gift = '1';
+        }
+        Session::save();
+        return response()->json([
+            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
+            'success' => true,
+            'is_registry' => $gift
         ]);
     }
 }
