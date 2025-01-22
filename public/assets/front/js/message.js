@@ -781,8 +781,8 @@ async function updateChatfromGroup(conversationId) {
     $("#selected-user-name").html(groupInfo.groupName);
     await updateProfileImg(
         groupInfo.groupProfile,
-        groupInfo.groupName,
-        conversationId
+        groupInfo.groupName
+        // conversationId
     );
 
     $(".selected_name").val(groupInfo.groupName);
