@@ -5671,7 +5671,7 @@ var limityesvite=10;
 var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
-var NogroupDataYesviteAll=false;
+var NogroupData=false;
 
 $("#YesviteUserAll").on("scroll", function () {
     // console.log(busyyesvite);
@@ -5733,19 +5733,24 @@ $('#YesviteUserAll').scroll(function () {
 });
 
 $('#groupUsers').scroll(function () {
- 
+  console.log(busyyesvite);
+    
+    if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
-    if (scrollTop + elementHeight >= scrollHeight-1) {
+    console.log({scrollTop,elementHeight,scrollHeight});
+    
+    if (scrollTop + elementHeight >= scrollHeight-2) {
         busyyesvite = true;
         offsetyesvite= limityesvite + offsetyesvite;
-        
-        $('#loader').css('display','block');
+        if(NogroupData==false){
+            $('#loader').css('display','block');
+        }
         setTimeout(function () {
-            if(NogroupDataYesviteAll==false ){
-            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
+            if(NogroupData==false){
+                displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
             }
         }, 1000);
     }
@@ -5784,27 +5789,21 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             
                return;
             }
-            if(html==""){
+            if(html=="" && groupscroll==null) {
                 $("#YesviteUserAll").html('No data found');
-               $('#loader').css('display','none');
-            
+                $('#loader').css('display','none');
                return;
             }
-            if(html=="" && groupscroll==1){
-                // $("#YesviteUserAll").html('No data found');
-               NogroupDataYesviteAll=true;
-               $('#loader').css('display','none');
-            
-               return;
-            }
-            if(html==""){
-                // $("#YesviteUserAll").html('No data found');
-               NoMoreDataYesviteAll=true;
-               $('#loader').css('display','none');
-            
-               return;
-            }
+
            
+           
+            // if(html==""){
+            //     // $("#YesviteUserAll").html('No data found');
+            //    NoMoreDataYesviteAll=true;
+            //    $('#loader').css('display','none');
+            
+            //    return;
+            // }
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
@@ -5816,6 +5815,13 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
 
                 }
         }else{
+            if(html=="" && groupscroll==1){
+                // $("#YesviteUserAll").html('No data found');
+                NogroupData=true;
+               $('#loader').css('display','none');
+            
+               return;
+            }
             if(groupscroll==1){
                 $("#groupUsers").append(html);
             }else{
