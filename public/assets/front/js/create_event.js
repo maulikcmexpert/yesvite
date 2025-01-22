@@ -596,6 +596,16 @@ if (/Mobi/.test(navigator.userAgent)) {
 //    datepicker();
 // })
 datepicker();
+function getClosest15MinuteTime() {
+    const now = moment(); // Get the current time using Moment.js
+    const minutes = now.minutes();
+    const remainder = minutes % 15;
+    if (remainder !== 0) {
+        now.add(15 - remainder, 'minutes'); // Round up to the nearest 15-minute mark
+    }
+    now.seconds(0); // Set seconds to 0
+    return now;
+}
 function datepicker() {
     $(".timepicker").datetimepicker({
         //  keepOpen: true,
@@ -606,7 +616,10 @@ function datepicker() {
         },
         useCurrent: false, 
         ignoreReadonly: true,
-        stepping: 15, // Set stepping to 15 minutes
+        stepping: 15, 
+        defaultDate: getClosest15MinuteTime() // Set the closest 15-minute time as the default
+
+        // Set stepping to 15 minutes
         // defaultDate: now
         //  debug: true
     });
