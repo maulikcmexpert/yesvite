@@ -6,6 +6,8 @@ $phone_checked = '';
 $disabled = '';
 $emialAlredy = '';
 $phoneAlredy = '';
+$foundKey=false;
+
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($data->id, array_column($selected_user, 'id'));
    
@@ -31,6 +33,7 @@ if(isset($selected_user) && !empty($selected_user)){
 // $disabled = 'disabled';
 // }
 }
+dd($foundKey);
 @endphp
 <div class="users-data">
     <div class="d-flex align-items-start">
