@@ -5739,11 +5739,11 @@ $('#groupUsers').scroll(function () {
     // Check if the user has scrolled to the bottom
     if (scrollTop + elementHeight >= scrollHeight-2) {
         busyyesvite = true;
-        offsetyesvite= limityesvites + offsetyesvite;
+        offsetyesvite= limityesvite + offsetyesvite;
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvites, offsetyesvite,'group',null,null,1);
+            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
         }, 1000);
     }
 });
