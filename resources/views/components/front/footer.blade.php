@@ -334,7 +334,7 @@ defer
                 const price = option.getAttribute('data-price');
                 const priceId = option.getAttribute('data-price-id');
 
-            console.log(${parseFloat(price).toFixed(2)})
+            console.log(parseFloat(price).toFixed(2))
             // Update the button with the selected price
                 purchaseButton.textContent = `Purchase - $${parseFloat(price).toFixed(2)}`;
                 purchaseButton.setAttribute('data-price-id', priceId);
