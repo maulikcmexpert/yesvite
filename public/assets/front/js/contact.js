@@ -178,12 +178,12 @@ $(document).on("keyup", ".search_phone", function () {
             },
             success: function (data) {
                 console.log(data);
-                if (data.html == "") {
+                // if (data.html == "") {
                     $(".no-group-data").css("display","block");
-                    $("#yesviteGroups").html("No more groups found");
-                    return;
-                }
-                $(".no-group-data").css("display","none");
+                    $("#yesviteGroups").html(data);
+                //     return;
+                // }
+                // $(".no-group-data").css("display","none");
                 $("#loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
