@@ -626,7 +626,7 @@
                                     <input type="text" class="phone_number border-0" name="countryCode" readonly>
                                     <input type="text" class="form-control addnew_contact" id="phone_number" name="phone_number">
                                     <label for="phone" class="floating-label">Phone
-                                        Number<span>*</span></label>
+                                        Number<span></span></label>
                                     <div class="label-error">
                                         <label id="phone_number-error" class="error" for="phone_number"></label>
                                     </div>
