@@ -5977,7 +5977,7 @@ $(document).on("click", ".view_members", function () {
         success: function (response) {
             if (response.status == "1") {
                 $(".user-contacts-sidebar").html("");
-                $(".user-contacts-sidebar").append(response.view);
+                $(".user-contacts-sidebar").html(response.view);
                 
                 toggleSidebar("sidebar_list_group_member");
                 $('#loader').css('display','none');
