@@ -371,9 +371,10 @@ class EventController extends BaseController
                         $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
                         $potluckCategory['quantity'] = $value->quantity;
 
-                        $categories[] = [
+                        $categories[$value->id] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
+                            'isAlready'=>"1",
                         ];
                         // session()->put('category', $categories);
                         $potluckCategory['items'] = [];
@@ -388,11 +389,13 @@ class EventController extends BaseController
                                     'self_bring' => $itemValue->self_bring_item,
                                     'self_bring_qty' => $itemValue->self_bring_item == 1 ? $itemValue->quantity : 0,
                                     'quantity' => $itemValue->quantity,
+                                    'isAlready'=>"1",
                                 ];
                                 $itmquantity = 0;
                                 $categories[$value->id]['item'][$itemValue->id] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
+                                
 
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
@@ -427,7 +430,7 @@ class EventController extends BaseController
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
-                    // Update session after the loop
+                    // Update session after the loop    
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
@@ -1312,7 +1315,6 @@ class EventController extends BaseController
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
         $category_index = $request->input('category_index');
-
         $categories_item = Session::get('category_item', []);
         $itemData = [
             'item' => $itemName,
@@ -2948,7 +2950,7 @@ class EventController extends BaseController
             }
             if (isset($request->eventSetting) && $request->eventSetting == "1") {
                 $eventSetting = EventSetting::where('event_id', $eventId)->first();
-             
+               
                 if ($eventSetting != null) {
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
                     $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
@@ -2988,7 +2990,9 @@ class EventController extends BaseController
 
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
+             
                 if (isset($potluck) && !empty($potluck)) {
+
                     foreach ($potluck as $category) {
                         $eventPodluck = EventPotluckCategory::create([
                             'event_id' => $eventId,
@@ -3020,11 +3024,10 @@ class EventController extends BaseController
                     }
                 }
             }
-
             if (isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0') {
                 EventSchedule::where('event_id', $request->event_id)->delete();
             }
-
+            
             if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
                 $activities = $request->activity;
                 if (isset($request->event_id) && $request->event_id != null) {
@@ -3063,36 +3066,24 @@ class EventController extends BaseController
             $gift = "0";
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
-                // $gift = "1";
-                //     if (isset($gift_registry) && !empty($gift_registry)) {
-                //         foreach ($gift_registry as $data) {
-                //             $gift_registry_data[] = [
-                //                 'user_id' => $user_id,
-                //                 'registry_recipient_name' => $data['registry_name'],
-                //                 'registry_link' => $data['registry_link'],
-                //                 'created_at' => now(),
-                //                 'updated_at' => now(),
-                //             ];
-                //         }
-                //         EventGiftRegistry::insert($gift_registry_data);
-                //     }
+                
+                
             }
+            // if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+            //     EventImage::create([
+            //         'event_id' => $eventId,
+            //         'image' => $request->desgin_selected
+            //     ]);
+            // }
 
-            if (isset($request->desgin_selected) && $request->desgin_selected != "") {
-                EventImage::create([
-                    'event_id' => $eventId,
-                    'image' => $request->desgin_selected
-                ]);
-            }
-
-            if (isset($request->slider_images) && !empty($request->slider_images)) {
-                foreach ($request->slider_images as $key => $value) {
-                    EventImage::create([
-                        'event_id' => $eventId,
-                        'image' => $value['fileName'],
-                    ]);
-                }
-            }
+            // if (isset($request->slider_images) && !empty($request->slider_images)) {
+            //     foreach ($request->slider_images as $key => $value) {
+            //         EventImage::create([
+            //             'event_id' => $eventId,
+            //             'image' => $value['fileName'],
+            //         ]);
+            //     }
+            // }
 
 
 
