@@ -3,22 +3,7 @@ $(document).ready(function () {
 
     // var page = 1;
   
-    $(document).on('keydown','input[type="text"], textarea', function(e) {
-        var currentValue = $(this).val(); // Get the value of the current input/textarea
-        if (currentValue === "") {
-            if (e.key === " " || e.keyCode === 32) {
-                e.preventDefault(); // Prevent spacebar input if empty
-            }
-        }
-    });
-    
-    $(document).on('paste','input[type="text"],textarea', function(e) {
-        const clipboardData = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
-        if ($.trim(clipboardData) === "") {
-            e.preventDefault(); 
-        }
-    });
-
+  
     var base_url=$('#base_url').val();
     var busy1 = false;
     var busy2=false;
