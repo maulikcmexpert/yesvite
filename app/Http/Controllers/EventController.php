@@ -385,7 +385,7 @@ class EventController extends BaseController
                             $itemData = [];
                             foreach ($value->event_potluck_category_item as $itemValue) {
                                 $itemData = [
-                                    'name' => $itemValue->description,
+                                    'item' => $itemValue->description,
                                     'self_bring' => $itemValue->self_bring_item,
                                     'self_bring_qty' => $itemValue->self_bring_item == 1 ? $itemValue->quantity : 0,
                                     'quantity' => $itemValue->quantity,
@@ -434,7 +434,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    
+                    // dd($eventDetail['is_draft_save']);
                 }
             }
         } else {
@@ -1811,7 +1811,7 @@ class EventController extends BaseController
             ->whereIn('email', $emails)
             ->orderBy('firstname')
 
-            ->when(!empty($request->limit) , function ($query) use ($request) {
+            ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
             })
@@ -2992,7 +2992,6 @@ class EventController extends BaseController
                 }
             }
 
-          
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
              
@@ -3143,7 +3142,7 @@ class EventController extends BaseController
         }
         Session::save();
         return response()->json([
-            // 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
+            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
             'success' => true,
             'is_registry' => $gift
         ]);
