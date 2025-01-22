@@ -1447,6 +1447,8 @@ function delete_invited_user(userId,is_contact= '0') {
             }
             $("#event_guest_left_count").val(remainingCount);
             console.log("User ID deleted successfully.");
+
+            $("#loader").css('display','none');
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
@@ -4288,11 +4290,19 @@ function downloadPhotoAndUpload() {
 }
 
 $(document).on("click", "#delete_invited_user", function () {
+
+    $('#loader').css('display','block');
     var id = $(this).data("id");
     var userId = $(this).data("userid");
     var total_guest = $(".users-data.invited_user").length;
     var re_total_guest = total_guest - 1;
 
+    var isDisabled = $(this).prop("disabled");
+    if (isDisabled) return;
+    $(this).prop("disabled", true);
+
+
+    $(this).prop("disabled", true);
     var remaining_count = parseInt($("#event_guest_left_count").val());
 
     var re_total_remaining_count = remaining_count + 1;
@@ -4322,8 +4332,16 @@ $(document).on("click", "#delete_invited_user", function () {
 });
 
 $(document).on("click", "#delete_invited_user_tel", function () {
+    $('#loader').css('display','block');
+
     var id = $(this).data("id");
     var is_contact = $(this).data('contact');
+
+    var isDisabled = $(this).prop("disabled");
+    if (isDisabled) return;
+    $(this).prop("disabled", true);
+
+
     $("#" + id).remove();
     var checkbox = $("." + id);
     var userId = $(this).data("userid");
