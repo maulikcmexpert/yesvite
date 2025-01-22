@@ -1,4 +1,7 @@
 <!--Buy-Credits-Modal -->
+@if(isset($prices)&&count($prices)>0)
+    
+
 <button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal">buycreditsmodal</button>
 <div class="modal fade cmn-modal buycreditsmodal" id="buycreditsmodal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -126,7 +129,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" stylesheet.crossOrigin = "anonymous"></script>
