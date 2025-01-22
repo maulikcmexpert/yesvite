@@ -352,6 +352,7 @@ $(document).on("click", ".add_new_group_member", function () {
                     swiper[2].appendSlide(newItem);
                     swiper[2].update(); // Update Swiper after adding the new slide
 
+                    $(".user_choice_group .user_choice").prop("checked", false);
                     toggleSidebar("sidebar_groups");
                     groupToggleSearch('');
                 }
@@ -5724,8 +5725,8 @@ $('#YesviteUserAll').scroll(function () {
 });
 
 $('#groupUsers').scroll(function () {
-    limityesvite=10;
-    offsetyesvite=0;
+    // limityesvite=10;
+    // offsetyesvite=0;
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
@@ -5736,13 +5737,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group');
+            displayRecords(limityesvite, offsetyesvite,'group',null,1);
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll=null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5799,7 +5800,13 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
 
                 }
         }else{
-            $("#groupUsers").html(html);
+            if(groupscroll==1){
+                $("#groupUsers").append(html);
+            }else{
+                $("#groupUsers").html(html);
+            }
+            busyyesvite = false;
+
         }
         busyyesvite = false;
         
@@ -5949,6 +5956,7 @@ $(document).on("click", ".invite_group_member", function () {
             // }
             // $(".inivted_user_list").html('');
                 guest_counter(0,max_guest);
+                $(".user_choice_group .user_choice").prop("checked", false);
 
                 toggleSidebar();
                 $("#YesviteUserAll").html('');
@@ -5967,6 +5975,7 @@ $(document).on("click", ".invite_group_member", function () {
 $(document).on("click", ".view_members", function () {
     var group_id = $(this).data("id");
     $('#loader').css('display','block');
+ 
     $.ajax({
         url: base_url + "event/list_group_memeber",
         type: "POST",

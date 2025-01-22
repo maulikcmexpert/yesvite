@@ -344,7 +344,7 @@ defer
                                     span.textContent = data.data;
                                 });
                                 coinsInputs.forEach(inp => {
-                                    inp.val = data.data;
+                                    inp.value = data.data; 
                                 });
                                 $('#buycreditsmodal').modal('hide');
                                 setTimeout(() => {

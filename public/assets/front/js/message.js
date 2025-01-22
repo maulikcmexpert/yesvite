@@ -147,12 +147,21 @@ $("#selected-user-profile").replaceWith(
 );
 
 async function updateProfileImg(profileImageUrl, userName, conversationId) {
+    console.log("coming here for update profile");
+    let profileIm = document.getElementById("profileIm");
+    let profileModel = document.getElementById("profileModel");
+
     if (await isValidImageUrl(profileImageUrl)) {
+        console.log("123");
+
         $("#selected-user-profile").replaceWith(
             `<img id="selected-user-profile" src="${profileImageUrl}" alt="user-img">`
         );
-        $("#profileIm").replaceWith(
+        $(profileIm).replaceWith(
             `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+        );
+        $(profileModel).replaceWith(
+            `<img id="profileModel" src="${profileImageUrl}" alt="cover-img" >`
         );
         if (conversationId != "") {
             $(".conversation-" + conversationId)
@@ -163,14 +172,19 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 );
         }
     } else {
+        console.log("456");
+
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
 
         $("#selected-user-profile").replaceWith(
             `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
         );
-        $("#profileIm").replaceWith(
+        $(profileIm).replaceWith(
             `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+        );
+        $(profileModel).replaceWith(
+            `<h5 id="profileModel" class="${fontColor}">${initials}</h5>`
         );
         if (conversationId != "") {
             $(".conversation-" + conversationId)
