@@ -12,12 +12,16 @@ class BaseController extends Controller
         // Share prices with all views globally
         View::share('prices', $this->getPrices());
         // Share coins globally with all views
-        $user = Auth::guard('web')->user();
+        $user = $this->getUser();
         $coins = $user ? $user->coins : 0;
-
+        echo $coins;
+        dd($user);
         View::share('coins', $coins);
     }
-
+    protected function getUser()
+    {
+        return Auth::guard('web')->user();
+    }
     protected function getPrices()
     {
         return [
