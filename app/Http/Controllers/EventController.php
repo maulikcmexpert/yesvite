@@ -155,7 +155,8 @@ class EventController extends Controller
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->prefer_by,
                                 'invited_by' => $useremail,
-                                'profile' => $userVal->profile ?? ''
+                                'profile' => $userVal->profile ?? '',
+                                'isAlready'=>"1"
                             ];
                             $userIds[] = $userEntry;
                         }
@@ -188,7 +189,8 @@ class EventController extends Controller
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->preferBy,
                                 'invited_by' => $useremail,
-                                'profile' => $userVal->photo ?? ''
+                                'profile' => $userVal->photo ?? '',
+                                'isAlready'=>"1"
                             ];
                             $userIdsSession[] = $userEntry;
                         }
@@ -427,7 +429,6 @@ class EventController extends Controller
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {
@@ -1847,7 +1848,7 @@ class EventController extends Controller
         }
 
         $selected_user = Session::get('user_ids');
-
+        // dd($selected_user);
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
 

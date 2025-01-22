@@ -1,6 +1,6 @@
 @foreach ($yesvite_user as $user)
 @php
-
+// dd(1);
 $email_checked = '';
 $phone_checked = '';
 $disabled = '';

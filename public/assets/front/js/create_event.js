@@ -1279,7 +1279,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     // }
 
     if (isChecked == true || isChecked == "true") {
-        $('input[name="email_invite[]"]').attr('disabled', true);
+        // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
         $.ajax({
             url: base_url + "event/store_user_id",
@@ -1326,7 +1326,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                     // }
 
                     guest_counter(0,max_guest);
-                    $('input[name="email_invite[]"]').prop('disabled', false);
+                    // $('input[name="email_invite[]"]').prop('disabled', false);
                     // if(currentInviteCount >= 15){
                     //     $('.user_choice').prop('disabled',true);
                     // }
