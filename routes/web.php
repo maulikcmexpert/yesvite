@@ -49,12 +49,7 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
-Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
-Route::post('/check-payment', [PaymentController::class, 'checkPayment'])->name('payment.checkPay');
-Route::get('/payment-start/{priceId}', [PaymentController::class, 'processPayment'])->name('payment-start');
-Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-Route::get('/payment-failed', [PaymentController::class, 'paymentFailed'])->name('payment.failed');
+
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
@@ -111,6 +106,14 @@ Route::post('contact-submit', [ContactUsController::class, 'submit'])->name('con
 
 
 Route::middleware('checkUserExist')->group(function () {
+
+    Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
+    Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+    Route::post('/check-payment', [PaymentController::class, 'checkPayment'])->name('payment.checkPay');
+    Route::get('/payment-start/{priceId}', [PaymentController::class, 'processPayment'])->name('payment-start');
+    Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/payment-failed', [PaymentController::class, 'paymentFailed'])->name('payment.failed');
+
 
     Route::get('/home1', [HomeController::class, 'home'])->name('home1');
     Route::get('/home', [HomeController::class, 'index'])->name('home');

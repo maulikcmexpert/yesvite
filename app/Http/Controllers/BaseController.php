@@ -14,8 +14,7 @@ class BaseController extends Controller
         // Share coins globally with all views
         $user = $this->getUser();
         $coins = $user ? $user->coins : 0;
-        echo $coins;
-        dd($user);
+
         View::share('coins', $coins);
     }
     protected function getUser()
