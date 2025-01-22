@@ -1503,6 +1503,7 @@ main {
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
+  border: 1px solid #fefefe;
 }
 
 .commented-user-profile-img h5{
@@ -1540,6 +1541,7 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 50%;
 }
 
 .commented-user-head .posts-card-like-comment-right{
