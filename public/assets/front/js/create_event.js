@@ -5668,12 +5668,13 @@ var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
 $("#YesviteUserAll").on("scroll", function () {
-    console.log(busyyesvite);
+    // console.log(busyyesvite);
     
     if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
+    console.log({scrollTop,elementHeight,scrollHeight});
         if (scrollTop + elementHeight >= scrollHeight) {
             busyyesvite = true;
             offsetyesvite += limityesvite;
