@@ -753,8 +753,8 @@ $(function () {
             }
             // alert();
             $("#end_time").prop("checked", false);
-            $("#end-time").val("");
-            $("#start-time").val("");
+            $(".end-time-create").val("");
+            $(".start-time-create").val("");
             $(".end_time").css("display", "none");
             if (selectedDates.size > 0) {
                 var activities = {};
