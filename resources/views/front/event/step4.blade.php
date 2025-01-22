@@ -511,6 +511,13 @@
                     </div>
                 </div>
             </div>
+            @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
+            <div class="guest-checkout">
+                <div>
+                    <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
+                </div>
+            </div>  
+            @else        
             <div class="guest-checkout">
                 <div class="d-flex align-items-center">
                     <span class="me-2"><svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -523,6 +530,7 @@
                     <a href="#" class="cmn-btn final_checkout" onclick="savePage4Data()">Final Checkout</a>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

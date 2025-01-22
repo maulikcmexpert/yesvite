@@ -6,6 +6,8 @@ $phone_checked = '';
 $disabled = '';
 $emialAlredy = '';
 $phoneAlredy = '';
+$foundKey=false;
+
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($data->id, array_column($selected_user, 'id'));
    
@@ -116,7 +118,7 @@ if(isset($selected_user) && !empty($selected_user)){
                 value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
                 </div>
                 @endif
-            </div>
+    </div>
 </div>
 <!-- </div> -->
 @endforeach
