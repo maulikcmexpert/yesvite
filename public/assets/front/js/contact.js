@@ -179,11 +179,27 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 console.log(data);
                 // if (data.html == "") {
-                    $(".no-group-data").css("display","block");
-                    $("#yesviteGroups").html(data);
+                    if (data.status == "0") {
+                        $(".no-group-data").css("display","block");
+                        $("#loader").hide();
+    
+                        return;
+                    }
+                    $(".no-group-data").css("display","none");
+                    // $("#loader").hide();
+                
+
+                    // $(".no-group-data").css("display","block");
+                    // $("#yesviteGroups").html(data);
                 //     return;
                 // }
                 // $(".no-group-data").css("display","none");
+                if(data.search=='1'){
+                    $("#yesviteGroups").html(data.view);
+                }else{
+                    $("#yesviteGroups").append(data.view);
+                }
+
                 $("#loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
