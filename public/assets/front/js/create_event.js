@@ -352,6 +352,7 @@ $(document).on("click", ".add_new_group_member", function () {
                     swiper[2].appendSlide(newItem);
                     swiper[2].update(); // Update Swiper after adding the new slide
 
+                    $(".user_choice_group .user_choice").prop("checked", false);
                     toggleSidebar("sidebar_groups");
                     groupToggleSearch('');
                 }
@@ -5949,6 +5950,7 @@ $(document).on("click", ".invite_group_member", function () {
             // }
             // $(".inivted_user_list").html('');
                 guest_counter(0,max_guest);
+                $(".user_choice_group .user_choice").prop("checked", false);
 
                 toggleSidebar();
                 $("#YesviteUserAll").html('');
@@ -5967,6 +5969,7 @@ $(document).on("click", ".invite_group_member", function () {
 $(document).on("click", ".view_members", function () {
     var group_id = $(this).data("id");
     $('#loader').css('display','block');
+ 
     $.ajax({
         url: base_url + "event/list_group_memeber",
         type: "POST",
