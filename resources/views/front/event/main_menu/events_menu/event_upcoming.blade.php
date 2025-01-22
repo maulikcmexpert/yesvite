@@ -51,11 +51,11 @@
                             <li><span>Hosting</span> {{$upcomingEvent['event_plan_name']}}</li>
                         @else
                                 @if($upcomingEvent['rsvp_status'] == '1')
-                                    <li><span>Guest : </span> : RSVP- Yes</li>
+                                    <li><span>Guest : </span> : RSVP - Yes</li>
                                 @elseif($upcomingEvent['rsvp_status'] == '2')
-                                    <li><span>Guest : </span> : RSVP- No</li>
+                                    <li><span>Guest : </span> : RSVP - No</li>
                                 @else
-                                    <li><span>Guest : </span> : RSVP- Pending</li>
+                                    <li><span>Guest : </span> : RSVP - Pending</li>
                                 @endif
                         @endif
                         <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
