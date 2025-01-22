@@ -69,7 +69,7 @@ use function PHPUnit\Framework\isFalse;
 use Illuminate\Support\Facades\File;
 
 
-class EventController extends Controller
+class EventController extends BaseController
 {
     public function index(Request $request)
     {

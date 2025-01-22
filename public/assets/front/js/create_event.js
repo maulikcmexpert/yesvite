@@ -4701,8 +4701,7 @@ function update_self_bring(
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 quantity + "/" + categoryItemQuantity
             );
-            alert(response);
-            alert(categoryIndexKey);
+
             $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
@@ -4832,8 +4831,8 @@ $(document).on("click", ".add-user-list", function () {
     var listid = $(this).data("listid");
     var target = $(this).data("bs-target");
     $("#" + listid).show();
-    alert(listid);
     $(target).toggleClass("collapse show");
+    $(target).removeClass('d-none');
 });
 
 function validateURL($input) {
