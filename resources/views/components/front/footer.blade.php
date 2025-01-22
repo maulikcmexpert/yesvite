@@ -317,9 +317,7 @@ defer
         // });
 
         // Close modal logic
-        // document.getElementById('close-modal').addEventListener('click', () => {
-        //     document.getElementById('success-modal').style.display = 'none';
-        // });
+        //  
 
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -343,12 +341,41 @@ defer
         });
 
         purchaseButton.addEventListener('click', () => {
-            const selectedPriceId = purchaseButton.getAttribute('data-price-id');
+                const selectedPriceId = purchaseButton.getAttribute('data-price-id');
+               
+                if (selectedPriceId) {
+                    // Use Laravel's route in a Blade directive to inject the base URL
+                    const url = `{{ url('start-payment') }}/${selectedPriceId}`;
+                    
+                    // Open the Stripe Checkout in a new tab
+                    window.open(url, '_blank');
 
-            // if (selectedPriceId) {
-            //     // Redirect to the server to create a Stripe session
-            //     window.location.href = `/start-payment/${selectedPriceId}`;
-            // }
-        });
+                    const checkPaymentStatus = (priceId) => {
+                    fetch("{{ route('payment.checkPay') }}", {
+                        method: 'POST',
+                        
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        },
+                        body: JSON.stringify({ priceId }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert('Payment Successful!');
+                                clearInterval(pollingInterval); // Stop polling
+                            } else if (data.status === 'failed') {
+                                alert('Payment Failed!');
+                                clearInterval(pollingInterval); // Stop polling
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                };
+
+                // Start polling every 5 seconds
+                const pollingInterval = setInterval(() => checkPaymentStatus(selectedPriceId), 5000);
+                }
+            });
     });
     </script>
