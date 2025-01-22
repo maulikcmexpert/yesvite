@@ -463,6 +463,9 @@ $(document).on("click", ".design-sidebar-action", function() {
 $(document).on("click", ".edit_design_tem", function(e) {
     $('#close_createEvent').css('display','none');
     e.preventDefault();
+    var eventID= $("#eventID").val();
+    var isDraft= $("#isDraft").val();
+   
     var url = $(this).data("url");
     var template = $(this).data("template");
     image = $(this).data("image");
@@ -501,7 +504,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
         method: "POST",
         dataType: 'html',
         data: {
-            _token: $('meta[name="csrf-token"]').attr("content"),
+            _token: $('meta[name="csrf-token"]').attr("content"),eventID,isDraft
         },
         success: function(response) {
             console.log(dbJson);

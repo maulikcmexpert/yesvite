@@ -2474,7 +2474,10 @@ class EventController extends BaseController
     }
     public function get_design_edit_page(Request $request)
     {
-        return view('front.event.design.edit_design')->render();
+       
+        $eventID = $request->eventID;
+        $isDraft =$request->isDraft;
+        return view('front.event.design.edit_design',compact('eventID','isDraft'))->render();
     }
 
     public function shape_image(Request $request)

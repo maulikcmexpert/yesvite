@@ -2969,8 +2969,14 @@
     $static_information =
         isset($eventDetail['static_information'])? $eventDetail['static_information']
             : null;
-            $step =
+    $step =
         isset($eventDetail['step'])? $eventDetail['step']
+            : null;
+    $eventID =
+        isset($eventDetail['id'])? $eventDetail['id']
+            : null;
+    $isDraft =
+        isset($eventDetail['is_draft_save'])? $eventDetail['is_draft_save']
             : null;
 @endphp
 <input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">
@@ -2983,6 +2989,8 @@
 <input type="hidden" id="design_image" value="{{ $design_image }}">
 <input type="hidden" id="static_information" value="{{ $static_information }}">
 <input type="hidden" id="step" value="{{  $step}}">
+<input type="hidden" id="isDraft" value="{{  $isDraft}}">
+<input type="hidden" id="eventID" value="{{  $eventID}}">
 
 
 

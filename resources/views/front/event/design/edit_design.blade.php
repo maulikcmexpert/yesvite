@@ -1,3 +1,4 @@
+
 <main class="main-content-wrp edit-imag-main-content-wrp edit_design_template">
     <div class="main-content-right edit-image-main-wrp">
         <div class="edit-image-main-top">
@@ -279,7 +280,8 @@
                     </svg>
                 </span>
             </a>
-        </div> --}}     
+        </div> --}}
+        @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" )    
         <div class="design-seting">
             <a href="#" class="d-flex">
                 {{-- <span>
@@ -302,7 +304,13 @@
                 </span>
             </button>
         </div>
-        {{-- @endif --}}
+        @else
+        <div class="guest-checkout">
+            <div>
+                <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
+            </div>
+        </div>
+        @endif
     </div>
 
     <div id="sidebar" class="sidebar choose-design-sidebar" style="right: -200%; width: 0px;">
@@ -1492,9 +1500,9 @@
                 </div>
             </div>
 
-             <div class="footer-buttons">
+            {{-- <div class="footer-buttons">
                 <button class="cmn-btn save-slider-image">Save</button>
-            </div> 
+            </div> --}}
         </div>
     </div>
 </main>
