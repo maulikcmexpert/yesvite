@@ -4473,6 +4473,7 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 
 $(document).on("change", ".user_group_member  .user_choice", function () {
    
+    alert();
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4481,6 +4482,7 @@ $(document).on("change", ".user_group_member  .user_choice", function () {
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
+
     }
 });
 
