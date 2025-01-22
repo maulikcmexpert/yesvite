@@ -9,7 +9,7 @@ $phoneAlredy = '';
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($data->id, array_column($selected_user, 'id'));
    
-    if ($foundKey !== false) {
+    if ($foundKey != false) {
        
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';
