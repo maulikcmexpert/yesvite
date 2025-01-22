@@ -364,8 +364,8 @@
         <div class="guest-wrp side-guest-wrp">
             <div class="guest-pro">
                 <div>
-                    <h5>Pro</h5>
-                    <h6>$15.00</h6>
+                    <!-- <h5>Pro</h5>
+                    <h6>$15.00</h6> -->
                 </div>
                 <a href="#" class="edit-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
