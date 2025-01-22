@@ -5737,7 +5737,7 @@ $('#groupUsers').scroll(function () {
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
-    if (scrollTop + elementHeight >= scrollHeight-2) {
+    if (scrollTop + elementHeight >= scrollHeight) {
         busyyesvite = true;
         offsetyesvite= limityesvite + offsetyesvite;
         
