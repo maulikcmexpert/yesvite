@@ -25,7 +25,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Carbon\Carbon;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
 
     protected $perPage;
@@ -39,8 +39,6 @@ class HomeController extends Controller
     {
 
         $this->perPage = 5;
-
-        
     }
     // public function index()
     // {
@@ -55,7 +53,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $page='1';
+        $page = '1';
         try {
             $user  = Auth::guard('web')->user();
             if ($user->is_first_login == '1') {
@@ -64,22 +62,22 @@ class HomeController extends Controller
                 $userIsLogin->save();
             }
             $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
-         
-            $totalEventOfYear=totalEventOfCurrentYear($user->id);
+
+            $totalEventOfYear = totalEventOfCurrentYear($user->id);
 
             $eventData = Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])
-            ->whereYear('start_date', date('Y'))
-            ->whereMonth('start_date', date('m'));
-        
+                ->whereYear('start_date', date('Y'))
+                ->whereMonth('start_date', date('m'));
+
             $invitedEvents = EventInvitedUser::where('user_id', $user->id)->get()->pluck('event_id');
-        
+
             $invitedEventsList = Event::whereIn('id', $invitedEvents)
                 ->where('is_draft_save', '0')
                 ->whereYear('start_date', date('Y'))
                 ->whereMonth('start_date', date('m'));
-        
+
             $totalEventOfCurrentMonth = $eventData->union($invitedEventsList)->get();
-        
+
 
             $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
             $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
@@ -91,7 +89,7 @@ class HomeController extends Controller
             $hostingCount = hostingCount($user->id);
             $hostingCountCurrentMonth = hostingCountCurrentMonth($user->id);
             $invitedToCount = invitedToCount($user->id);
-            $invitedToCountCurrentMonth= invitedToCountCurrentMonth($user->id);
+            $invitedToCountCurrentMonth = invitedToCountCurrentMonth($user->id);
             if (!empty($user)) {
                 $profileData = [
                     'id' =>  empty($user->id) ? "" : $user->id,
@@ -100,7 +98,7 @@ class HomeController extends Controller
                     'firstname' => empty($user->firstname) ? "" : $user->firstname,
                     'lastname' => empty($user->lastname) ? "" : $user->lastname,
                     'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
-                    'total_events' => $totalEvent+ $invitedToCount,
+                    'total_events' => $totalEvent + $invitedToCount,
                     'total_events_of_year' => $totalEventOfYear,
                     'total_events_of_current_month' => count($totalEventOfCurrentMonth),
                     'total_photos' => $totalEventPhotos,
@@ -111,7 +109,7 @@ class HomeController extends Controller
                     'invitedTo_count' => $invitedToCount,
                     'invitedTo_count_current_month' => $invitedToCountCurrentMonth,
                     'hosting_count' => $hostingCount,
-                    'hosting_count_current_month'=>$hostingCountCurrentMonth,
+                    'hosting_count_current_month' => $hostingCountCurrentMonth,
                     'total_draft_events' => $totalDraftEvent,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
 
@@ -142,23 +140,23 @@ class HomeController extends Controller
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
-                // ->orderBy('start_date', 'ASC')  
-                // ->get();
+            // ->orderBy('start_date', 'ASC')  
+            // ->get();
             $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
-            $query->where('app_user', '1');
+                $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
             $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
                 ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
                 ->where('is_draft_save', '0');
-                // ->orderBy('start_date', 'ASC')
-                // ->get();
+            // ->orderBy('start_date', 'ASC')
+            // ->get();
             $allEvents = $usercreatedList->union($invitedEventsList);
 
             $allEvent = $allEvents
-                        ->orderBy('start_date', 'asc')
-                        ->offset(0)
-                        ->limit(3) 
-                        ->get();
+                ->orderBy('start_date', 'asc')
+                ->offset(0)
+                ->limit(3)
+                ->get();
             // $page = $request->input('page');
             // $pages = ($page != "") ? $page : 1;
             // $offset = ($pages - 1) * $this->perPage;
@@ -166,7 +164,7 @@ class HomeController extends Controller
             // // Get paginated data using offset and take
             // $paginatedEvents = $allEvents->slice($offset)->take($this->perPage);
             $eventList = [];
-            $draftEventArray=[];
+            $draftEventArray = [];
             // dd($paginatedEvents);
             if (count($allEvent) != 0) {
                 foreach ($allEvent as $value) {
@@ -185,15 +183,15 @@ class HomeController extends Controller
                         $eventDetail['is_co_host'] = $isCoHost->is_co_host;
                     }
                     $eventDetail['message_to_guests'] = $value->message_to_guests;
-                    $eventDetail['event_wall'] = isset($value->event_settings->event_wall)?$value->event_settings->event_wall:"" ;
-                    $eventDetail['guest_list_visible_to_guests'] = isset($value->event_settings->guest_list_visible_to_guests)?$value->event_settings->guest_list_visible_to_guests:"";
-                    $eventDetail['event_potluck'] = isset($value->event_settings->podluck)?$value->event_settings->podluck:"";
+                    $eventDetail['event_wall'] = isset($value->event_settings->event_wall) ? $value->event_settings->event_wall : "";
+                    $eventDetail['guest_list_visible_to_guests'] = isset($value->event_settings->guest_list_visible_to_guests) ? $value->event_settings->guest_list_visible_to_guests : "";
+                    $eventDetail['event_potluck'] = isset($value->event_settings->podluck) ? $value->event_settings->podluck : "";
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
-                    $eventDetail['adult_only_party'] = isset($value->event_settings->adult_only_party)?$value->event_settings->adult_only_party:"";
+                    $eventDetail['adult_only_party'] = isset($value->event_settings->adult_only_party) ? $value->event_settings->adult_only_party : "";
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
                     $rsvp_status = "";
                     $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
-                    $query->where('app_user', '1');
+                        $query->where('app_user', '1');
                     })->where(['user_id' => $user->id, 'event_id' => $value->id])->first();
                     // if ($value->rsvp_by_date >= date('Y-m-d')) {
                     $rsvp_status = "";
@@ -266,7 +264,7 @@ class HomeController extends Controller
                         }
                         $eventDetail['event_detail'] = $eventData;
                     }
-                    $eventDetail['allow_limit'] = isset($value->event_settings->allow_limit)?$value->event_settings->allow_limit:"";
+                    $eventDetail['allow_limit'] = isset($value->event_settings->allow_limit) ? $value->event_settings->allow_limit : "";
                     $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
 
                     $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
@@ -298,7 +296,7 @@ class HomeController extends Controller
 
                     foreach ($draftEvents as $value) {
                         $eventdraft['id'] = $value->id;
-                        $eventdraft['event_name'] = ($value->event_name!="")?$value->event_name:"No name";;
+                        $eventdraft['event_name'] = ($value->event_name != "") ? $value->event_name : "No name";;
                         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
                         $eventdraft['saved_date'] = $formattedDate;
                         $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
@@ -308,11 +306,11 @@ class HomeController extends Controller
                     }
                 }
                 // return compact('draftEventArray','profileData');
-            } 
-            $event_calender_start=User::select('created_at')->where('id',$user->id)->get();
+            }
+            $event_calender_start = User::select('created_at')->where('id', $user->id)->get();
             // dd($event_calender_start);
             $currentYear = Carbon::now()->year;
-            $currentMonth = Carbon::now()->month;  
+            $currentMonth = Carbon::now()->month;
             $profileYear = Carbon::parse($event_calender_start[0]->created_at)->format('Y');
             $profileMonth =  Carbon::parse($event_calender_start[0]->created_at)->format('m');
             $diffYear = $currentYear - $profileYear;
@@ -324,13 +322,13 @@ class HomeController extends Controller
                 $numMonths = 24;
             }
             if ($diffYear != 0) {
-                $diffmonth = ($profileMonth - 1 );
+                $diffmonth = ($profileMonth - 1);
             } else {
                 $diffmonth = ($currentMonth - $profileMonth);
             }
 
-            $startMonth=Carbon::parse($event_calender_start[0]->created_at)->format('Y-m');
-            $startMonthCalender=Carbon::parse($event_calender_start[0]->created_at)->format('F Y');
+            $startMonth = Carbon::parse($event_calender_start[0]->created_at)->format('Y-m');
+            $startMonthCalender = Carbon::parse($event_calender_start[0]->created_at)->format('F Y');
 
 
             $eventcalender = Event::where(['is_draft_save' => '0', 'user_id' => $user->id]);
@@ -341,36 +339,41 @@ class HomeController extends Controller
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
             $events_calender = [];
-            $color=['blue','orange','green','yellow'];
+            $color = ['blue', 'orange', 'green', 'yellow'];
             $colorIndex = 0;
-          
+
             foreach ($eventcalenderdata as $event) {
                 $colorClass = $color[$colorIndex % count($color)];
                 $colorIndex++;
                 $events_calender[] = [
-                    'date' => $event->start_date, 
-                    'title' => $event->event_name,    
-                    'color' => $colorClass    
+                    'date' => $event->start_date,
+                    'title' => $event->event_name,
+                    'color' => $colorClass
                 ];
             }
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
-            $js=['event'];
+            $js = ['event'];
             $page = 'front.home';
             return view('layout', compact(
                 'title',
                 'page',
-                            'js',
-                            'profileData','eventList','draftEventArray','startMonth','numMonths','diffmonth','events_calender_json','startMonthCalender'
+                'js',
+                'profileData',
+                'eventList',
+                'draftEventArray',
+                'startMonth',
+                'numMonths',
+                'diffmonth',
+                'events_calender_json',
+                'startMonthCalender'
             ));
         } catch (QueryException $e) {
             return response()->json(['status' => 0, 'message' => "Db error"]);
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
-
-      
     }
     public function importCSV(Request $request, CSVImportService $importService)
     {
@@ -398,48 +401,48 @@ class HomeController extends Controller
 
     public function setpostTime($dateTime)
     {
-        $commentDateTime = $dateTime; 
+        $commentDateTime = $dateTime;
         $commentTime = Carbon::parse($commentDateTime);
-        $timeAgo = $commentTime->diffForHumans(); 
+        $timeAgo = $commentTime->diffForHumans();
         return $timeAgo;
     }
 
     function upcomingEventsCount($userId)
     {
         $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
-    
+
             ->where('user_id', $userId)
             ->where('is_draft_save', '0')
             ->orderBy('start_date', 'ASC')
-    
+
             ->get();
-    
+
         $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
-    
+
             $query->where('app_user', '1');
         })->where('user_id', $userId)->get()->pluck('event_id');
-    
-    
-    
+
+
+
         $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-    
+
             ->whereIn('id', $invitedEvents)->where('start_date', '>', date('Y-m-d'))
             ->where('is_draft_save', '0')
             ->orderBy('start_date', 'ASC')
             ->get();
-    
+
         $allEvents = $usercreatedList->merge($invitedEventsList)->sortBy('start_date');
-    
+
         return count($allEvents);
     }
-    
+
     function pendingRsvpCount($userId)
     {
         dd(1);
         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
         })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
-    
+
         $PendingRsvpEventId = "";
         if ($total_need_rsvp_event_count == 1) {
             $res = EventInvitedUser::select('event_id')->whereHas('event', function ($query) {
@@ -449,41 +452,40 @@ class HomeController extends Controller
         }
         return compact('total_need_rsvp_event_count', 'PendingRsvpEventId');
     }
-    
+
     function hostingCount($userId)
     {
-    
+
         $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $userId])->where('start_date', '>=', date('Y-m-d'))->count();
         return $totalHosting;
     }
-    
+
     function invitedToCount($userId)
     {
-    
+
         $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
         })->where('user_id', $userId)->count();
         return $totalInvited;
     }
- 
-    public function notificationFilter(Request $request){
-        $notfication_data=[];
+
+    public function notificationFilter(Request $request)
+    {
+        $notfication_data = [];
         $notificationTypes = $request->input('notificationTypes', []);
         $activityTypes = $request->input('activityTypes', []);
         $selectedEvents = $request->input('selectedEvents', []);
-        $filter=["notificationTypes"=>$notificationTypes,"activityTypes"=>$activityTypes,"selectedEvents"=>$selectedEvents];
-        $notfication_data=getNotificationList($filter);
+        $filter = ["notificationTypes" => $notificationTypes, "activityTypes" => $activityTypes, "selectedEvents" => $selectedEvents];
+        $notfication_data = getNotificationList($filter);
 
         return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
-
     }
 
-    public function notificationAll(Request $request){
- 
-        $notfication_data=getNotificationList();
+    public function notificationAll(Request $request)
+    {
+
+        $notfication_data = getNotificationList();
 
         return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
-
     }
 }
-

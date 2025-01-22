@@ -8,7 +8,7 @@ use App\Models\ServerKey;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
-class HomeFrontController extends Controller
+class HomeFrontController extends BaseController
 {
     public function index()
     {

@@ -14,7 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
 
-class AccountSettingController extends Controller
+class AccountSettingController extends BaseController
 {
 
 
@@ -28,7 +28,8 @@ class AccountSettingController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment',
@@ -144,7 +145,8 @@ class AccountSettingController extends Controller
                 [
                     'event' => function ($query) {
                         $query->where('is_draft_save', '0');
-                    }, 'event_post' => function ($query) {
+                    },
+                    'event_post' => function ($query) {
                         $query->where('post_type', '1');
                     },
                     'event_post_comment'
@@ -219,7 +221,8 @@ class AccountSettingController extends Controller
                 [
                     'event' => function ($query) {
                         $query->where('is_draft_save', '0');
-                    }, 'event_post' => function ($query) {
+                    },
+                    'event_post' => function ($query) {
                         $query->where('post_type', '1');
                     },
                     'event_post_comment'
@@ -271,7 +274,8 @@ class AccountSettingController extends Controller
         }
     }
 
-    public function transactions(){
+    public function transactions()
+    {
         $title = 'Transaction';
         $page = 'front.transaction';
         $id = Auth::guard('web')->user()->id;
@@ -280,7 +284,8 @@ class AccountSettingController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment',
@@ -293,30 +298,30 @@ class AccountSettingController extends Controller
         )->findOrFail($id);
 
         $groupCount = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
-        ->orderBy('id', 'DESC')
-        ->count();
+            ->orderBy('id', 'DESC')
+            ->count();
         //  $total_page = ceil($groupCount / 20);
 
 
 
-    $groupList = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
-        ->orderBy('id', 'DESC')
-        // ->limit(20)
-        ->get();
-    // dd($groupList);
+        $groupList = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
+            ->orderBy('id', 'DESC')
+            // ->limit(20)
+            ->get();
+        // dd($groupList);
 
-    $transcation = [];
-    foreach ($groupList as $value) {
-        $group['id'] = $value->id;
-        $group['type'] = $value->type;
-        $group['coins'] = $value->coins;
-        $group['current_balance'] = $value->current_balance;
-        $group['description'] = $value->description;
-        $group['event_name'] = (isset($value->event->event_name) && $value->event->event_name != '') ? $value->event->event_name : '';
-        $group['date'] = Carbon::parse($value->created_at)->format('M d, Y');
-        $group['time'] = Carbon::parse($value->created_at)->format('g:i A');
-        $transcation[] = $group;
-    }
+        $transcation = [];
+        foreach ($groupList as $value) {
+            $group['id'] = $value->id;
+            $group['type'] = $value->type;
+            $group['coins'] = $value->coins;
+            $group['current_balance'] = $value->current_balance;
+            $group['description'] = $value->description;
+            $group['event_name'] = (isset($value->event->event_name) && $value->event->event_name != '') ? $value->event->event_name : '';
+            $group['date'] = Carbon::parse($value->created_at)->format('M d, Y');
+            $group['time'] = Carbon::parse($value->created_at)->format('g:i A');
+            $transcation[] = $group;
+        }
 
 
         $lastSevenMonths = collect();
@@ -381,10 +386,10 @@ class AccountSettingController extends Controller
             'last_month_comparison_percentage' => (string)$percentageIncrease,
             'last_year_comparison' => (string)$percentageIncreaseByYear,
             'credit_use_this_year' => (string)$debitSums->current_year_coins,
-            'coins'=>(int)$userSubscription->coins
+            'coins' => (int)$userSubscription->coins
         ];
-        
-        
+
+
 
         return view('layout', compact(
             'title',

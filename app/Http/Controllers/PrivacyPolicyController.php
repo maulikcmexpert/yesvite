@@ -6,7 +6,7 @@ use App\Models\LegalAgreement;
 use App\Models\Privacy;
 use Illuminate\Http\Request;
 
-class PrivacyPolicyController extends Controller
+class PrivacyPolicyController extends BaseController
 {
     /**
      * Display a listing of the resource.

@@ -87,7 +87,7 @@
                     <div class="col-6 mb-4">
                         <div class="form-group">
                             <label>Start Time *</label>
-                            <div class="input-group time start-time timepicker">
+                            <div class="input-group time start-time timepicker start-time-create">
                                 <input type="text" class="form-control timepicker" placeholder="HH:MM AM/PM" id="start-time"
                                  name="start-time" onblur="clearError(this)" readonly 
                                  value="{{(isset($eventDetail['rsvp_start_time']) && $eventDetail['rsvp_start_time'] != '')?$eventDetail['rsvp_start_time']:'12:00 PM'}}"/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">

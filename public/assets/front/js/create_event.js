@@ -261,7 +261,8 @@ $(document).on("click", ".create-event-btn", function () {
 })
 
 // Delete Group functionality
-$(document).on("click", "#delete_group", function () {
+$(document).on("click", "#delete_group", function (e) {
+    e.stopPropagation();
     var group_id = $(this).data("id");
     $.ajax({
         url: base_url + "event/delete_group",
@@ -614,6 +615,9 @@ function datepicker() {
         //  debug: true
     });
 }
+$(".timepicker").on("dp.show", function () {
+    $(this).val(""); // Clear the input when the picker is shown
+})
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -740,8 +744,8 @@ $(function () {
             }
             // alert();
             $("#end_time").prop("checked", false);
-            $("#end-time").val("");
-            $("#start-time").val("");
+            $(".end-time-create").val("");
+            $(".start-time-create").val("");
             $(".end_time").css("display", "none");
             if (selectedDates.size > 0) {
                 var activities = {};
@@ -7249,7 +7253,8 @@ function searchRecords(lim, off, type, search = null) {
 }
 
 
-$(".slider_photo").on("change", function(event) {
+$(document).on("change", ".slider_photo",function(event) {
+    // alert();
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
         var reader = new FileReader();
@@ -7267,7 +7272,7 @@ $(".slider_photo").on("change", function(event) {
     }, 500);
 });
 
-$(".slider_photo_2").on("change", function(event) {
+$(document).on("change",".slider_photo_2", function(event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-2").show();
@@ -7281,7 +7286,7 @@ $(".slider_photo_2").on("change", function(event) {
         getLengthofSliderImage();
     }, 500);
 });
-$(".slider_photo_3").on("change", function(event) {
+$(document).on("change",".slider_photo_3", function(event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-3").show();

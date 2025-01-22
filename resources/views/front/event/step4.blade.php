@@ -295,7 +295,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['guest_list_visible_to_guests']=="1") ? "checked":""}}/>
+                                                    <input type="checkbox" id="guest_list_visible_to_guest" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['guest_list_visible_to_guests']=="1") ? "checked":"checked"}}/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -335,7 +335,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_wall']=="1") ? "checked":""}}/>
+                                                    <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_wall']=="1") ? "checked":"checked"}}/>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>

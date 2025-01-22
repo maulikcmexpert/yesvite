@@ -1492,9 +1492,9 @@
                 </div>
             </div>
 
-            {{-- <div class="footer-buttons">
+             <div class="footer-buttons">
                 <button class="cmn-btn save-slider-image">Save</button>
-            </div> --}}
+            </div> 
         </div>
     </div>
 </main>
