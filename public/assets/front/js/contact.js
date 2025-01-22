@@ -177,6 +177,7 @@ $(document).on("keyup", ".search_phone", function () {
                 $("#loader").show();
             },
             success: function (data) {
+                console.log(data);
                 if (data.html == "") {
                     $(".no-group-data").css("display","block");
                     $("#yesviteGroups").html("No more groups found");
