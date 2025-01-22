@@ -10,11 +10,15 @@ if(isset($selected_user) && !empty($selected_user)){
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';
         $phone_checked = '';
+        $emialAlredy = '';
+        $phoneAlredy = '';
         if ($user->id === (int)$selected_user[$key]['sync_id']) {
             if($selected_user[$key]['prefer_by'] == 'email'){
                 $email_checked = 'checked';
+                $emialAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
             }elseif($selected_user[$key]['prefer_by'] == 'phone'){
                 $phone_checked = 'checked';
+                $phoneAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
             }
         }
     }
@@ -85,13 +89,13 @@ if(isset($selected_user) && !empty($selected_user)){
         <div class="right-note d-flex">
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox"
                 name="email_invite[]" data-id="user-{{$user->id}}" data-email="{{ $user->email }}" data-contact = "1"
-                value="{{ $user->id }}" {{$email_checked}} {{$disabled}}>
+                value="{{ $user->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}>
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
         <div class="right-note ms-auto">
             <input class="form-check-input user_tel-{{$user->id}} user_choice" type="checkbox" data-contact = "1"
-                name="mobile[]" data-mobile="{{$user->phone_number}}" value="{{ $user->id }}" {{$phone_checked}} {{$disabled}}>
+                name="mobile[]" data-mobile="{{$user->phone_number}}" value="{{ $user->id }}" {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
         </div>
         @endif
     </div>
