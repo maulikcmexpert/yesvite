@@ -3534,19 +3534,20 @@ async function getTotalUnreadMessageCount() {
 
 // Function to update badge with unread message count
 async function updateUnreadMessageBadge(conversationId = null) {
+    console.log("updateUnreadMessageBadge");
     const totalUnreadCount = await getTotalUnreadMessageCount();
-    const badgeEle = document.querySelectorAll(".badge .g-badge");
-    badgeEle.forEach((ele) => {
-        if (parseInt(totalUnreadCount) > 0) {
-            $(ele).show();
-            $(ele).text(totalUnreadCount);
-            // console.log(".conversation-"+conversationId);
-
-            // $(".conversation-"+conversationId).addClass('active');
-        } else {
-            $(ele).hide();
-        }
-    });
+    console.log(totalUnreadCount);
+    if (parseInt(totalUnreadCount) > 0) {
+        $(".badge").show();
+        $(".g-badge").show();
+        $(".g-badge").html(parseInt(totalUnreadCount));
+        $(".badge").html(parseInt(totalUnreadCount));
+    } else {
+        $(".g-badge").hide();
+        $(".badge").hide();
+        $(".g-badge").html("");
+        $(".badge").html("");
+    }
 
     $(".set-replay-msg").remove();
     replyMessageId = null;

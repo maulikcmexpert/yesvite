@@ -32,6 +32,9 @@
             </div>
         </div>
     </div>
+    @if(isset($guest_user['isAlready']))
+        
+    @else     
     <div>
         <a href="#" id="delete_invited_user_tel"  data-id="sync_-{{$guest_user['sync_id']}}" data-contact="1" data-userid="{{$guest_user['sync_id']}}">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +43,7 @@
             </svg>
         </a>
     </div>
+    @endif
 </div>
 @elseif ($guest_user['prefer_by']=="phone")
 <div class="users-data invited_user_see_all sync_user_id_tel-{{$guest_user['sync_id']}}" data-id={{$guest_user['sync_id']}} id="user_tel-{{$guest_user['sync_id']}}">
@@ -72,6 +76,9 @@
             </div>
         </div>
     </div>
+    @if(isset($guest_user['isAlready']))
+        
+    @else  
     <div>
         <a href="#" id="delete_invited_user_tel" data-id="sync_tel-{{$guest_user['sync_id']}}" data-contact="1" data-userid="{{$guest_user['sync_id']}}">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,6 +87,7 @@
             </svg>
         </a>
     </div>
+    @endif
 </div>
 @endif
 @endforeach
