@@ -7278,7 +7278,7 @@ $(document).on("change", ".slider_photo",function(event) {
     }, 500);
 });
 
-$(".slider_photo_2").on("change", function(event) {
+$(document).on("change",".slider_photo_2", function(event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-2").show();
@@ -7292,7 +7292,7 @@ $(".slider_photo_2").on("change", function(event) {
         getLengthofSliderImage();
     }, 500);
 });
-$(".slider_photo_3").on("change", function(event) {
+$(document).on("change",".slider_photo_3", function(event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-3").show();
