@@ -36,6 +36,7 @@
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 8px;
+    
 }
 
 .birth-details .birth-host span{
@@ -68,6 +69,7 @@
     font-size: 15px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 5px;
+    line-height: 25.5px;
 }
 
 
@@ -248,7 +250,7 @@
 .host-users-detail .host-user-con span{
     color: #A0AEC0;
     font-size: 14px;
-    margin-bottom: 9px;
+    margin-bottom: 6px;
     font-family: var(--SFProDisplay-Medium);
     display: block;
 }
@@ -773,7 +775,7 @@
 
 @media only screen and (max-width:424px){
     .birth-details .hosted-by-date-time{
-        flex-direction: column;
+        flex-direction: column !important;
     }
 
     .birth-details .hosted-by-date-time-left:last-child{
