@@ -51,7 +51,7 @@ class EventWallController extends Controller
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
-$js=['event_wall'];
+$js=['event_wall','post_like_comment'];
 
         $event = decrypt($id);
         $encrypt_event_id = $id;

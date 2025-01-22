@@ -321,7 +321,7 @@
                                     </div>
 
                                     <div class="posts-card-main-comment">
-                                        <input type="text" class="form-control" id="post_comment"
+                                        <input type="text" class="form-control post_comment" id="post_comment"
                                             placeholder="Add Comment">
                                         <span class="comment-send-icon send_comment"
                                             data-event-id="{{ $event }}"
@@ -845,26 +845,28 @@
                                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                 @endif
                                             </button>
-                                                <button class="posts-card-comm show-comments-btn">
-                                                    <svg viewBox="0 0 24 24" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
-                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                            stroke-miterlimit="10" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </button>
+                                            <button class="posts-card-comm show-comments-btn show-btn-comment"
+                                            event_p_id="{{ $poll['event_post_id'] }}">
+                                            <svg viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
+                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
                                             </div>
                                         </div>
-                                        <div class="posts-card-main-comment">
-                                            <input type="text" class="form-control" id="text"
+                                            <div class="posts-card-main-comment">
+                                            <input type="text" class="form-control" id="comment"
                                                 placeholder="Add Comment">
-                                            <span class="comment-send-icon">
+                                            <span class="comment-send-icon send_comment poll-comment-send-icon"
+                                                data-event-id="{{ $event }}"
+                                                data-event-post-id="{{ $poll['event_post_id'] }}">
                                                 <svg viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
