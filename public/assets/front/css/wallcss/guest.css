@@ -367,7 +367,7 @@
     font-size: 16px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Regular);
-    margin-bottom: 12px;
+    margin-bottom: 6px !important;
 }
 
 .guest-edit-box .qty-container {
@@ -376,6 +376,7 @@
     align-items: center;
     border: none;
     padding: 0;
+    height: 32px;
 }
 
 .guest-edit-box .qty-container button {
