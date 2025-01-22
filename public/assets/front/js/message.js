@@ -3537,14 +3537,17 @@ async function updateUnreadMessageBadge(conversationId = null) {
     console.log("updateUnreadMessageBadge");
     const totalUnreadCount = await getTotalUnreadMessageCount();
     console.log(totalUnreadCount);
-
-    $(".badge .g-badge").each(function () {
-        if (parseInt(totalUnreadCount) > 0) {
-            $(this).show().text(totalUnreadCount);
-        } else {
-            $(this).hide();
-        }
-    });
+    if (parseInt(totalUnreadCount) > 0) {
+        $(".badge").show();
+        $(".g-badge").show();
+        $(".g-badge").html(parseInt(totalUnreadCount));
+        $(".badge").html(parseInt(totalUnreadCount));
+    } else {
+        $(".g-badge").hide();
+        $(".badge").hide();
+        $(".g-badge").html("");
+        $(".badge").html("");
+    }
 
     $(".set-replay-msg").remove();
     replyMessageId = null;
