@@ -11,7 +11,7 @@
                     <div><h4 class="modal-title" id="aboutsuccessLabel">Buy Credits</h4></div>
                     <div class="totle_credit_buy_wrp">
                         <img src="{{asset('assets')}}/coin.svg" alt="">
-                        <p>8</p>
+                        <span class="available-coins">{{$coins}}</span>
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -276,51 +276,9 @@ defer
     window.location.href = "events";
 });
 
-        // const stripe = Stripe('{{ config('services.stripe.public') }}'); // Replace with your public key
-
-        // document.getElementById('purchase-form').addEventListener('submit', async (event) => {
-        //     event.preventDefault();
-
-        //     const priceId = document.getElementById('credits').value;
-
-        //     try {
-        //         const response = await fetch('{{ route('process.payment') }}', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
-        //             },
-        //             body: JSON.stringify({ priceId }),
-        //         });
-
-        //         const data = await response.json();
-
-        //         if (data.url) {
-        //             // Open Stripe Checkout in a new tab
-        //             const stripeWindow = window.open(data.url, '_blank');
-
-        //             // Poll the Stripe window to detect if it's closed
-        //             const interval = setInterval(() => {
-        //                 if (stripeWindow.closed) {
-        //                     clearInterval(interval);
-        //                     // Show success modal when the Stripe window is closed
-        //                     document.getElementById('success-modal').style.display = 'block';
-        //                 }
-        //             }, 1000);
-        //         } else if (data.error) {
-        //             alert('Error: ' + data.error);
-        //         }
-        //     } catch (error) {
-        //         console.error('Error:', error);
-        //         alert('An error occurred. Please try again.');
-        //     }
-        // });
-
-        // Close modal logic
-        //  
-
+      
        
-        document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const priceOptions = document.querySelectorAll('.price-option');
         const purchaseButton = document.querySelector('.purchase-button');
         let dotCount = 0; // Start with no dots
@@ -354,7 +312,7 @@ defer
                 const selectedPriceId = purchaseButton.getAttribute('data-price-id');
                
                 if (selectedPriceId) {
-                    setInterval(updateButtonText, 1000);
+                    const testTimer = setInterval(updateButtonText, 1000);
 
                     // Use Laravel's route in a Blade directive to inject the base URL
                     const url = `{{ url('payment-start') }}/${selectedPriceId}`;
@@ -375,11 +333,16 @@ defer
                         .then(response => response.json())
                         .then(data => {
                             if (data.status === 'success') {
-                                alert('Payment Successful!');
                                 clearInterval(pollingInterval); // Stop polling
+                                clearInterval(testTimer); // Stop polling
+                                purchaseButton.textContent = `Purchase - $0.00`;
+                                toastr.success("Payment Successful!");
+                                
                             } else if (data.status === 'failed') {
-                                alert('Payment Failed!');
+                                purchaseButton.textContent = `Purchase - $0.00`;
                                 clearInterval(pollingInterval); // Stop polling
+                                clearInterval(testTimer); // Stop polling
+                                toastr.error("Payment Failed!");
                             }
                         })
                         .catch(error => console.error('Error:', error));

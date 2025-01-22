@@ -82,12 +82,13 @@ class PaymentController extends BaseController
             return response()->json([
                 'status' => $sessionData['status'],
                 'message' => 'Session already exists',
+                'data' => $user->coins,
             ]);
         }
         $startDate = Carbon::now();
         $new_subscription = new UserSubscription();
         $new_subscription->user_id = $user->id;
-        $new_subscription->device_type = 'web';
+        $new_subscription->device_type = 'WEB';
         $new_subscription->startDate = $startDate;
         $new_subscription->productId = $validated['priceId'];
         $new_subscription->type = 'product';
@@ -103,6 +104,7 @@ class PaymentController extends BaseController
         return response()->json([
             'status' => 'idle',
             'message' => 'New session created',
+            'data' => $user->coins,
         ]);
     }
     public function paymentSuccess(Request $request)
@@ -115,11 +117,6 @@ class PaymentController extends BaseController
 
         try {
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
-            // Get the current authenticated user
-
-
-            // https://yesvite.cmexpertiseinfotech.in/payment-success?paid_id=cs_test_a12WIk1XTlXXS9dsItyN7kPBvCsvETflnbIgjlIJRBZawweUXU9ODc1Mc2
-
             // Get the session ID from the query parameter
             $sessionId = $request->query('paid_id');
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
@@ -169,21 +166,39 @@ class PaymentController extends BaseController
                 $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
                 if (session()->has($sessionKey)) {
                     $sessionData = session($sessionKey);
-                    $new_subscription = UserSubscription::where(['user_id' => $user->id, 'device_type' => 'web', 'productId' => $priceId, 'startDate' => $sessionData['created_at']])->orderBy('id', 'DESC')->first();
+
+                    // Retrieve the most recent subscription if available
+                    $new_subscription = UserSubscription::where([
+                        'user_id' => $user->id,
+                        'device_type' => 'WEB',
+                        'productId' => $priceId,
+                        'startDate' => $sessionData['created_at']
+                    ])
+                        ->orderBy('id', 'DESC')
+                        ->first();
+
+                    // If no subscription found for the given details, create a new one
                     if (!$new_subscription) {
                         $new_subscription = new UserSubscription();
-                        $new_subscription->startDate = $startDate;
+                        $new_subscription->user_id = $user->id; // Add user ID if it's not already set
+                        $new_subscription->device_type = 'web'; // Device type should be 'web' for this case
+                        $new_subscription->productId = $priceId; // Add priceId as product ID
+                        $new_subscription->startDate = $startDate; // Set start date
                     }
                 } else {
+                    // If the session does not exist, create a new subscription
                     $new_subscription = new UserSubscription();
-                    $new_subscription->startDate = $startDate;
+                    $new_subscription->user_id = $user->id; // Ensure user ID is added
+                    $new_subscription->device_type = 'web'; // Set device type
+                    $new_subscription->productId = $priceId; // Set the priceId as product ID
+                    $new_subscription->startDate = $startDate; // Set the start date
                 }
-                $new_subscription->user_id = $user->id;
+
                 $new_subscription->price = $coins;
                 $new_subscription->orderId = $input['orderId'];
                 $new_subscription->packageName = $input['packageName'];
                 $new_subscription->countryCode = $input['regionCode'];
-                $new_subscription->productId = $input['productId'];
+
                 $new_subscription->type = 'product';
                 $new_subscription->purchaseToken = $input['purchaseToken'];
 
