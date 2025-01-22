@@ -75,6 +75,10 @@ class PaymentController extends BaseController
         // Check if the session already exists
         if (session()->has($sessionKey)) {
             $sessionData = session($sessionKey);
+
+            if ($sessionData['status'] !== 'ideal') {
+                session()->forget($sessionKey);
+            }
             return response()->json([
                 'status' => $sessionData['status'],
                 'message' => 'Session already exists',
@@ -165,18 +169,20 @@ class PaymentController extends BaseController
                 $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
                 if (session()->has($sessionKey)) {
                     $sessionData = session($sessionKey);
-                    $new_subscription = UserSubscription::where(['user_id' => $user->id, 'type' => 'web', 'productId' => $priceId, 'startDate' => $sessionData['created_at']])->orderBy('id', 'DESC')->first();
+                    $new_subscription = UserSubscription::where(['user_id' => $user->id, 'device_type' => 'web', 'productId' => $priceId, 'startDate' => $sessionData['created_at']])->orderBy('id', 'DESC')->first();
                     if (!$new_subscription) {
                         $new_subscription = new UserSubscription();
+                        $new_subscription->startDate = $startDate;
                     }
                 } else {
                     $new_subscription = new UserSubscription();
+                    $new_subscription->startDate = $startDate;
                 }
                 $new_subscription->user_id = $user->id;
+                $new_subscription->price = $coins;
                 $new_subscription->orderId = $input['orderId'];
                 $new_subscription->packageName = $input['packageName'];
                 $new_subscription->countryCode = $input['regionCode'];
-                $new_subscription->startDate = $startDate;
                 $new_subscription->productId = $input['productId'];
                 $new_subscription->type = 'product';
                 $new_subscription->purchaseToken = $input['purchaseToken'];
