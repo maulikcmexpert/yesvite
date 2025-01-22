@@ -13,7 +13,9 @@ class BaseController extends Controller
         View::share('prices', $this->getPrices());
         // Share coins globally with all views
         $user = Auth::guard('web')->user();
-        $coins = $user ? $user->coins : 0; // If user is not logged in, set coins to 0
+        $coins = $user ? $user->coins : 0;
+        echo $coins;
+        dd($user);
         View::share('coins', $coins);
     }
 
