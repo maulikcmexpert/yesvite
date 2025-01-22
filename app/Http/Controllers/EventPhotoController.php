@@ -36,8 +36,8 @@ class EventPhotoController extends Controller
         $title = 'event photos';
         $page = 'front.event_wall.event_photos';
         $user  = Auth::guard('web')->user();
-        $firstname = $user->first_name;
-        $lastname = $user->last_name;
+        $firstname = $user->firstname;
+        $lastname = $user->lastname;
         $photos = $user->profile ;
 
         $js = ['event_photo'];
