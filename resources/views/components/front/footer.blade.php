@@ -1,4 +1,5 @@
 <!--Buy-Credits-Modal -->
+<button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal">buycreditsmodal</button>
 <div class="modal fade cmn-modal buycreditsmodal" id="buycreditsmodal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -36,6 +37,7 @@
                                   <h5>1 Credit = 1 Invite</h5>
                                   <p>Unused credits can be applied to future events</p>
                               </div>
+                              
                               <div class="bulk-credit-options-listing">
                                   <ul>
 
