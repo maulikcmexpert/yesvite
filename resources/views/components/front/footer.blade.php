@@ -319,11 +319,21 @@ defer
         // Close modal logic
         //  
 
-
+       
         document.addEventListener('DOMContentLoaded', () => {
         const priceOptions = document.querySelectorAll('.price-option');
         const purchaseButton = document.querySelector('.purchase-button');
+        let dotCount = 0; // Start with no dots
+        const maxDots = 4; // Maximum dots (after 3 dots, reset)
 
+        function updateButtonText() {
+            // Update the button text based on the number of dots
+            let dots = '.'.repeat(dotCount); 
+            purchaseButton.textContent = `Payment Processing${dots}`;
+
+            // Increment dot count
+            dotCount = (dotCount + 1) % (maxDots + 1); // Reset after 3 dots
+        }
         priceOptions.forEach(option => {
             console.log("added")
             option.addEventListener('change', () => {
@@ -344,6 +354,8 @@ defer
                 const selectedPriceId = purchaseButton.getAttribute('data-price-id');
                
                 if (selectedPriceId) {
+                    setInterval(updateButtonText, 1000);
+
                     // Use Laravel's route in a Blade directive to inject the base URL
                     const url = `{{ url('payment-start') }}/${selectedPriceId}`;
                     
