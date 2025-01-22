@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
 {
@@ -10,8 +11,16 @@ class BaseController extends Controller
     {
         // Share prices with all views globally
         View::share('prices', $this->getPrices());
-    }
+        // Share coins globally with all views
+        $user = $this->getUser();
+        $coins = $user ? $user->coins : 0;
 
+        View::share('coins', $coins);
+    }
+    protected function getUser()
+    {
+        return Auth::guard('web')->user();
+    }
     protected function getPrices()
     {
         return [

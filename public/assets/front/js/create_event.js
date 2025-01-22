@@ -4471,8 +4471,9 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
     }
 });
 
-$(document).on("change", ".user_group_member  .user_choice", function () {
+$(document).on("change", ".user_group_member .user_choice", function () {
    
+    alert();
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4481,6 +4482,7 @@ $(document).on("change", ".user_group_member  .user_choice", function () {
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
+
     }
 });
 
@@ -5901,6 +5903,10 @@ $(document).on("click", ".invite_group_member", function () {
                         invited_by: invited_by
                     });
                 }
+
+                console.log(id);
+                console.log(selectedValues);
+                
            
         }
     });
@@ -5973,7 +5979,7 @@ $(document).on("click", ".view_members", function () {
         success: function (response) {
             if (response.status == "1") {
                 $(".user-contacts-sidebar").html("");
-                $(".user-contacts-sidebar").append(response.view);
+                $(".user-contacts-sidebar").html(response.view);
                 
                 toggleSidebar("sidebar_list_group_member");
                 $('#loader').css('display','none');
