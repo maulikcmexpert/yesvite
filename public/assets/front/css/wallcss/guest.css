@@ -600,6 +600,10 @@ display:none;}
     border-bottom: 1px solid var(--border);
 }
 
+.invite-contact-wrp .invite-contact button.edit-btn{
+    padding: 0;
+}
+
 .invite-contact-wrp .invite-contact button.edit-btn,
 .invite-contact-wrp .invite-contact button.delete-btn,
 .invite-contact-wrp .invite-contact button.danger-btn
@@ -666,6 +670,7 @@ display:none;}
     border-radius: 8px !important;
     border: 1px solid var(--border);
     box-shadow: none !important;
+    margin-right: 0 !important;
 }
 
 .invite-contact-wrp .invite-contact .form-check-input.failed-checkout:checked{
