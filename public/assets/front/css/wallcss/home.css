@@ -192,7 +192,7 @@ main {
   gap: 10px;
   border: 1px solid var(--pink);
   border-radius: 16px;
-  padding: 10px;
+  padding: 16px;
   margin-bottom: 20px;
 }
 
@@ -355,6 +355,7 @@ main {
   border-bottom: 3px solid var(--pink) !important;
   color: var(--secondary-black) !important;
   border-radius: 0px !important;
+  box-shadow: none !important;
 }
 
 .wall-main-story-item {
@@ -1503,6 +1504,17 @@ main {
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
+  border: 1px solid #fefefe;
+}
+
+.commented-user-profile-img h5{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 15px;
 }
 
 .commented-user-profile-img img{
@@ -1530,6 +1542,7 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 50%;
 }
 
 .commented-user-head .posts-card-like-comment-right{

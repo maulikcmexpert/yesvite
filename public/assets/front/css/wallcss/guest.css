@@ -103,6 +103,8 @@
    min-width: 44px;
    height: 44px;
    margin-right: 16px;
+   border: 1px solid #efefef;
+   border-radius: 100%;
 }
 
 .guest-user-list .guest-img h5{
@@ -123,6 +125,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 100%;
+    display: block;
 }
 
 .guest-list-data{
@@ -312,6 +315,8 @@
     min-width: 56px;
     height: 56px;
     margin: 0 auto 10px;
+    border: 1px solid #efefef;
+    border-radius: 100%;
 }
 
 .guest-rsvp-head .rsvp-img h5{
@@ -364,13 +369,16 @@
     font-size: 16px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Regular);
-    margin-bottom: 12px;
+    margin-bottom: 6px !important;
 }
 
 .guest-edit-box .qty-container {
     width: 100%;
     display: flex;
     align-items: center;
+    border: none;
+    padding: 0;
+    height: 32px;
 }
 
 .guest-edit-box .qty-container button {
@@ -586,9 +594,14 @@ display:none;}
 
 .invite-contact-wrp .invite-contact{
     display: flex;
+    align-items: baseline;
     padding-top: 17px;
     padding-bottom: 17px;
     border-bottom: 1px solid var(--border);
+}
+
+.invite-contact-wrp .invite-contact button.edit-btn{
+    padding: 0;
 }
 
 .invite-contact-wrp .invite-contact button.edit-btn,
@@ -625,6 +638,8 @@ display:none;}
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 7px !important;
+    margin-bottom: 7px;
 }
 
 .invite-contact-wrp .invite-call-data svg{
@@ -657,11 +672,12 @@ display:none;}
     border-radius: 8px !important;
     border: 1px solid var(--border);
     box-shadow: none !important;
+    margin-right: 0 !important;
 }
 
 .invite-contact-wrp .invite-contact .form-check-input.failed-checkout:checked{
-    background-color: #2DA9FC;
-    border-color: #2DA9FC;
+    background-color: #2DA9FC !important;
+    border-color: #2DA9FC !important;
 }
 
 #failed .faild-content svg path{
@@ -682,6 +698,8 @@ display:none;}
 
 #failed .faild-content h6{
     color: #E03137;
+    max-width: 300px;
+    word-break: break-word;
 }
 
 #failed .delete-btn{
@@ -746,6 +764,7 @@ display:none;}
     border-radius: 8px !important;
     border: 1px solid var(--border);
     box-shadow: none !important;
+    margin-right: 0;
 }
 
 #failed .success-checkout.form-check-input:checked{
@@ -1343,6 +1362,10 @@ foreignObject{
     transform: translate(21%, 0);
 }
 
+.guest-edit-incress-modal .rsvp-button-wrp .btn{
+    width: 50%;
+    max-width: 50%;
+}
 
 
 /* ======= responsive ====== */
@@ -1401,6 +1424,7 @@ foreignObject{
 
     .guest-tab .nav-tabs .nav-link{
         font-size: 13px;
+        padding: 8px 20px;
     }
 
     .guest-users-wrp{
@@ -1437,8 +1461,52 @@ foreignObject{
     margin-bottom: 10px;
 }
 
+.invite-contact-wrp .invite-mail-data div{
+    align-items: flex-start !important;
+}
+
+#failed .faild-content h6{
+    max-width: 220px;
+    word-break: break-all;
+}
+
+#failed .fix-updat{
+    margin-right: 10px;
+}
+
+.invite-contact-wrp .invite-mail-data h6{
+    max-width: 320px;
+    word-break: break-all;
+}
 
 }
 .d-none {
     display: none;
+}
+
+
+@media only screen and (max-width:424px){
+    #failed .faild-content h6{
+        max-width: 140px;
+        word-break: break-all;
+    }
+
+    .invite-contact-wrp .invite-mail-data h6{
+        max-width: 140px;
+        word-break: break-all;
+    }
+}
+
+@media only screen and (max-width:375px){
+    #failed .fix-updat{
+        margin-right: 6px;
+        font-size: 7px;
+    }
+
+    #failed .faild-content h6{
+        max-width: 100px;
+        word-break: break-all;
+    }
+
+
 }
