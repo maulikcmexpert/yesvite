@@ -179,7 +179,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.html == "") {
                     $(".no-group-data").css("display","block");
-                    $("#loader").html("No more groups found");
+                    $("#yesviteGroups").html("No more groups found");
                     return;
                 }
                 $(".no-group-data").css("display","none");
