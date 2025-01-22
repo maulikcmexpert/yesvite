@@ -336,8 +336,6 @@ defer
                                 clearInterval(pollingInterval); // Stop polling
                                 clearInterval(testTimer); // Stop polling
                                 purchaseButton.textContent = `Purchase - $0.00`;
-                                toastr.success("Payment Successful!");
-
                                 const coinsSpans = document.querySelectorAll('.available-coins');
             
                                 // Update the text content for each element
@@ -345,14 +343,17 @@ defer
                                     span.textContent = data.data;
                                 });
                                 $('#buycreditsmodal').modal('hide');
-
+                                setTimeout(() => {
+                                    toastr.success("Payment Successful!");                                    
+                                }, 1000);
                                 
                             } else if (data.status === 'failed') {
                                 purchaseButton.textContent = `Purchase - $0.00`;
                                 clearInterval(pollingInterval); // Stop polling
                                 clearInterval(testTimer); // Stop polling
-                                toastr.error("Payment Failed!");
+                                
                                 $('#buycreditsmodal').modal('hide');
+                                toastr.error("Payment Failed!");
                             }
                         })
                         .catch(error => console.error('Error:', error));
