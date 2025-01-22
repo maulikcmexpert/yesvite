@@ -81,8 +81,8 @@
                         <div class="invite-pro">
                             <div class="invite-left">
                                 <h6 class="invite-count"></h6>
-                                <p><strong>Invites | {{$user->coins}}</strong> Left</p>
-                            </div>
+                                <p class="invite-left_d"><strong>Invites | {{$user->coins}}</strong> Left</p>
+                            </div>  
                         </div>
                     </div>
                     <div class="order-desc order-desc-respo">
