@@ -161,6 +161,7 @@ main {
   line-height: normal;
   color: var(--pink);
   margin-bottom: 0px;
+  height: 29px;
 }
 
 .hosted-by-date-time-left {
@@ -168,13 +169,14 @@ main {
   align-items: center;
   gap: 10px;
   position: relative;
+  width: 50%;
 }
 
 .hosted-by-date-time-left::before {
   content: "";
   position: absolute;
   top: 50%;
-  right: -8px;
+  right: -3px;
   transform: translateY(-50%);
   width: 2px;
   height: 100%;

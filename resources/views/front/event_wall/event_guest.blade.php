@@ -95,8 +95,8 @@
                                                 <h4> {{ $totalAttending }} Attending</h4>
                                             </div>
                                             <div class="d-flex align-items-center">
-                                                <h5>{{ $totalAdults }} Adults</h5>
-                                                <h5>{{ $totalKids }} Kids</h5>
+                                                <h5>{{ $totalAdults }} <span>Adults</span></h5>
+                                                <h5>{{ $totalKids }} <span>Kids</span></h5>
                                             </div>
                                         </div>
 
