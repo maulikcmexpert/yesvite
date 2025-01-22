@@ -2500,11 +2500,14 @@ $("#new_message").on("keypress", async function (e) {
         const tagCount = $("#selected-tags-container .tag").length;
         const message = $(this).val();
         if (tagCount == 0) {
+            isSending = false;
             return toastr.error(
                 "Please select any user for start chat.",
                 "Error!"
             );
         } else if (message.trim() == "") {
+            isSending = false;
+
             return toastr.error(
                 "Please enter message for start chat.",
                 "Error!"
@@ -2519,6 +2522,8 @@ $("#new_message").on("keypress", async function (e) {
             const groupName = $("#group-name").html(); // Assuming you have an input for group name
             $("#group-name").html("");
             if (groupName.trim() == "") {
+                isSending = false;
+
                 return toastr.error(
                     "Please enter Group name for create group.",
                     "Error!"
@@ -2632,6 +2637,8 @@ $("#new_message").on("keypress", async function (e) {
 
             if (isBlockedByMe || isBlockedByUser) {
                 $("#msgBox").modal("hide");
+                isSending = false;
+
                 return;
             }
 
