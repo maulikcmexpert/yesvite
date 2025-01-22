@@ -231,6 +231,8 @@ class EventController extends BaseController
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : null;
+                $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : null;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
                 if (!empty($getEventImages)) {
@@ -429,6 +431,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
+                    // dd($eventDetail['is_draft_save']);
                 }
             }
         } else {

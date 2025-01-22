@@ -22,19 +22,9 @@ var final_dataId = "";
 var final_profile_or_text ="" ;
 var final_prefer_by="";
 var final_initial="";
-// var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').val();
-// var giftRegestryData = JSON.parse(giftRegestryDataRaw || '[]');
-// giftRegestryData.forEach(function (item) {
-//     selected_gift.push({
-//     gr_id: item,
-// });
-// });
-// if(giftRegestryDataRaw!=null){
-//     eventData.gift_registry_data=selected_gift;
-// }
-
-// var selected_gift = [];
-// var eventData = {};
+eventData.desgin_selected = $("#design_image").val() || undefined;
+eventData.textData = $("#static_information").val() || undefined;
+eventData.step = $("#step").val();
 
 var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]').map(function () {
     return $(this).val();
@@ -4022,12 +4012,13 @@ $(document).on("click", ".li_event_detail", function () {
     $('#close_createEvent').css('display','block');
 
     var design = eventData.desgin_selected;
+    console.log(design);
     $('.li_event_detail').find(".side-bar-list").addClass("active");
     if(final_step <= 1){
         $(".side-bar-list").removeClass("active");
     }
     if( design == undefined || design == ''){
-    
+     
     }else{
         $('#sidebar_select_design_category').css('display','none');
         $("#myCustomModal").modal("hide");
@@ -4171,7 +4162,11 @@ $(document).on("click", ".li_guest", function () {
         active_responsive_dropdown('drop-down-event-guest');
         handleActiveClass('.li_guest');
         var type="all"
-        // get_user(type);
+        const stepVal= $("#CheckCuurentStep").val();
+        // alert(stepVal);
+        if(stepVal=="0"){
+        get_user(type);
+        }
     }
 });
 
@@ -4241,7 +4236,6 @@ $(document).on("click", ".li_setting", function () {
     }
     var design = eventData.desgin_selected;
     var step3 = eventData.step;
-    console.log(step3);
     if(step3 > 3 ){
         $('#sidebar_select_design_category').css('display','none');
         $(".step_1").css("display", "none");
@@ -5610,7 +5604,6 @@ function save_image_design(downloadImage,textData){
                 success: function (response) {
                     let image = response.image;
                     eventData.desgin_selected = image;
-                    
                     
                     // if(eventData.step == '1'){
                     //     eventData.step = '2';

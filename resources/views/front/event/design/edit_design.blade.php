@@ -279,7 +279,7 @@
                     </svg>
                 </span>
             </a>
-        </div> --}}
+        </div> --}}     
         <div class="design-seting">
             <a href="#" class="d-flex">
                 {{-- <span>
@@ -302,6 +302,7 @@
                 </span>
             </button>
         </div>
+        @endif
     </div>
 
     <div id="sidebar" class="sidebar choose-design-sidebar" style="right: -200%; width: 0px;">
