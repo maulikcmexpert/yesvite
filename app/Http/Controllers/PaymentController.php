@@ -19,7 +19,7 @@ class PaymentController extends BaseController
     public function showCheckout()
     {
         $user = $this->getUser();
-        dd($user);
+        dd($user->coins);
         return view('checkout', ['stripePublicKey' => config('services.stripe.public')]);
     }
 
