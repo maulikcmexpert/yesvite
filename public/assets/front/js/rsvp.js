@@ -1,41 +1,46 @@
-
-$(document).ready(function() {
+$(document).ready(function () {
     var galleryItems = [];
-    $('.open-event-images').each(function() {
+    $(".open-event-images").each(function () {
         galleryItems.push({
-            src: $(this).data('img'), 
-            type: 'image'            
+            src: $(this).data("img"),
+            type: "image",
         });
     });
-    $('.open-event-images').click(function() {
-        var index = $('.open-event-images').index(this);
-        $.magnificPopup.open({
-            items: galleryItems,    
-            gallery: {
-                enabled: true       
+    $(".open-event-images").click(function () {
+        var index = $(".open-event-images").index(this);
+        $.magnificPopup.open(
+            {
+                items: galleryItems,
+                gallery: {
+                    enabled: true,
+                },
+                type: "image",
             },
-            type: 'image'           
-        }, index);                  
+            index
+        );
     });
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     var galleryItems = [];
-    $('.rsvp-zoom-btn').each(function() {
+    $(".rsvp-zoom-btn").each(function () {
         galleryItems.push({
-            src: $(this).data('img'), 
-            type: 'image'            
+            src: $(this).data("img"),
+            type: "image",
         });
     });
-    $('.rsvp-zoom-btn').click(function() {
-        var index = $('.rsvp-zoom-btn').index(this);
-        $.magnificPopup.open({
-            items: galleryItems,    
-            gallery: {
-                enabled: true       
+    $(".rsvp-zoom-btn").click(function () {
+        var index = $(".rsvp-zoom-btn").index(this);
+        $.magnificPopup.open(
+            {
+                items: galleryItems,
+                gallery: {
+                    enabled: true,
+                },
+                type: "image",
             },
-            type: 'image'           
-        }, index);                  
+            index
+        );
     });
 });
 
@@ -163,77 +168,83 @@ $(document).ready(function () {
 
     //     window.open(googleCalendarUrl, "_blank");
     // });
-    $("#openGoogle").on("click", function () {
-        // return;
-        const eventDate = $("#eventDate").val();
-        const eventEndDate = $("#eventEndDate").val();
-        const eventTime = $("#eventTime").val();
-        const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
-        const eventName = $("#eventName").val();
 
-        if (!eventDate || !eventTime) {
-            alert("Please provide both date and time for the event.");
-            return;
-        }
+    document
+        .getElementById("openGoogle")
+        .addEventListener("click", function () {
+            // return;
+            const eventDate = $("#eventDate").val();
+            const eventEndDate = $("#eventEndDate").val();
+            const eventTime = $("#eventTime").val();
+            const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
+            const eventName = $("#eventName").val();
 
-        const convertTo24HourFormat = (time) => {
-            const [hour, minuteWithPeriod] = time.split(":");
-            const [minute, period] = minuteWithPeriod.split(" ");
-            let newHour = parseInt(hour);
-            if (period.toLowerCase() === "pm" && newHour !== 12) {
-                newHour += 12; // Convert PM time to 24-hour format
+            if (!eventDate || !eventTime) {
+                alert("Please provide both date and time for the event.");
+                return;
             }
-            if (period.toLowerCase() === "am" && newHour === 12) {
-                newHour = 0; // Handle 12 AM as midnight
-            }
-            return `${newHour}:${minute}`;
-        };
 
-        const formattedTime = convertTo24HourFormat(eventTime);
-        const formattedEndTime = convertTo24HourFormat(eventEndTime);
-        const startDateTime = new Date(`${eventDate}T${formattedTime}:00`); // ISO format with correct time
+            const convertTo24HourFormat = (time) => {
+                const [hour, minuteWithPeriod] = time.split(":");
+                const [minute, period] = minuteWithPeriod.split(" ");
+                let newHour = parseInt(hour);
+                if (period.toLowerCase() === "pm" && newHour !== 12) {
+                    newHour += 12; // Convert PM time to 24-hour format
+                }
+                if (period.toLowerCase() === "am" && newHour === 12) {
+                    newHour = 0; // Handle 12 AM as midnight
+                }
+                return `${newHour}:${minute}`;
+            };
 
-        if (isNaN(startDateTime)) {
-            alert("Invalid start date or time value. Please check the input.");
-            return;
-        }
+            const formattedTime = convertTo24HourFormat(eventTime);
+            const formattedEndTime = convertTo24HourFormat(eventEndTime);
+            const startDateTime = new Date(`${eventDate}T${formattedTime}:00`); // ISO format with correct time
 
-        let endDateTime;
-        if (eventEndDate) {
-            const endDateString = `${eventEndDate}T${formattedEndTime}:00`;
-            const formattedEndDate = new Date(endDateString);
-
-            if (isNaN(formattedEndDate)) {
+            if (isNaN(startDateTime)) {
                 alert(
-                    "Invalid end date or time value. Please check the input."
+                    "Invalid start date or time value. Please check the input."
                 );
                 return;
             }
 
-            endDateTime = formattedEndDate;
-        } else {
-            endDateTime = new Date(startDateTime);
-            endDateTime.setHours(endDateTime.getHours() + 1); // Default to 1 hour duration if no end date is provided
-        }
+            let endDateTime;
+            if (eventEndDate) {
+                const endDateString = `${eventEndDate}T${formattedEndTime}:00`;
+                const formattedEndDate = new Date(endDateString);
 
-        // Convert to Google Calendar format (without dashes, colons, and milliseconds)
-        const formatToGoogleCalendar = (date) => {
-            return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
-        };
+                if (isNaN(formattedEndDate)) {
+                    alert(
+                        "Invalid end date or time value. Please check the input."
+                    );
+                    return;
+                }
 
-        const eventDetails = {
-            title: eventName || "Meeting with Team",
-            start: formatToGoogleCalendar(startDateTime),
-            end: formatToGoogleCalendar(endDateTime),
-        };
+                endDateTime = formattedEndDate;
+            } else {
+                endDateTime = new Date(startDateTime);
+                endDateTime.setHours(endDateTime.getHours() + 1); // Default to 1 hour duration if no end date is provided
+            }
 
-        console.log(eventDetails);
+            // Convert to Google Calendar format (without dashes, colons, and milliseconds)
+            const formatToGoogleCalendar = (date) => {
+                return (
+                    date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z"
+                );
+            };
 
-        // Platform-specific calendar opening code (Android / iOS)
-        const isAndroid = /Android/i.test(navigator.userAgent);
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const eventDetails = {
+                title: eventName || "Meeting with Team",
+                start: formatToGoogleCalendar(startDateTime),
+                end: formatToGoogleCalendar(endDateTime),
+            };
 
-       
+            console.log(eventDetails);
+
+            // Platform-specific calendar opening code (Android / iOS)
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
             // Default to Google Calendar URL
             const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
                 eventDetails.title
@@ -242,7 +253,7 @@ $(document).ready(function () {
             }&sf=true&output=xml`;
 
             window.open(googleCalendarUrl);
-    });
+        });
 
     function toggleGuestCount() {
         const isNoSelected = $("#no").is(":checked");
@@ -262,23 +273,22 @@ $(document).ready(function () {
     toggleGuestCount();
 });
 
-
-$('#rsvpYesForm').validate({
+$("#rsvpYesForm").validate({
     rules: {
         firstname: {
-            required: true
+            required: true,
         },
         lastname: {
-            required: true
-        }
+            required: true,
+        },
     },
     messages: {
         firstname: {
-            required: "Please enter firstname"
+            required: "Please enter firstname",
         },
         lastname: {
-            required: "Please enter lastname"
-        }
+            required: "Please enter lastname",
+        },
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "firstname") {
@@ -293,26 +303,25 @@ $('#rsvpYesForm').validate({
         } else if ($(element).attr("name") == "lastname") {
             $("#lastnameErrorLabel").html("");
         }
-    }
+    },
 });
 
-
-$('#rsvpNoForm').validate({
+$("#rsvpNoForm").validate({
     rules: {
         firstname: {
-            required: true
+            required: true,
         },
         lastname: {
-            required: true
-        }
+            required: true,
+        },
     },
     messages: {
         firstname: {
-            required: "Please enter firstname"
+            required: "Please enter firstname",
         },
         lastname: {
-            required: "Please enter lastname"
-        }
+            required: "Please enter lastname",
+        },
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "firstname") {
@@ -327,7 +336,7 @@ $('#rsvpNoForm').validate({
         } else if ($(element).attr("name") == "lastname") {
             $("#lastnameErrorLabelno").html("");
         }
-    }
+    },
 });
 // $('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
 //     if (!$('#rsvpYesForm').valid()) {
@@ -335,50 +344,49 @@ $('#rsvpNoForm').validate({
 //     }
 // });
 
-
 let initialFormData = {};
 
 // Store initial data for firstname and lastname when modal is first opened
-$('#rsvp-yes-modal').on('show.bs.modal', function () {
-  if ($.isEmptyObject(initialFormData)) {
-    initialFormData['firstname'] = $('#firstname').val();
-    initialFormData['lastname'] = $('#lastname').val();
-  }
-});
-$('#rsvp-yes-modal').on('hidden.bs.modal', function () {
-    $('#lastnameErrorLabel').text('');
-    $('#firstnameErrorLabel').text('');
-
-    $('#firstname').val(initialFormData['firstname']);
-    $('#lastname').val(initialFormData['lastname']);
-  });
-// Store initial data for firstname and lastname when modal is first opened
-$('#rsvp-no-modal').on('show.bs.modal', function () {
+$("#rsvp-yes-modal").on("show.bs.modal", function () {
     if ($.isEmptyObject(initialFormData)) {
-      initialFormData['firstname'] = $('.no_firstname').val();
-      initialFormData['lastname'] = $('.no_lastname').val();
+        initialFormData["firstname"] = $("#firstname").val();
+        initialFormData["lastname"] = $("#lastname").val();
     }
-  });
-  $('#rsvp-no-modal').on('hidden.bs.modal', function () {
-      $('#lastnameErrorLabelno').text('');
-      $('#firstnameErrorLabelno').text('');
-  
-      $('.no_firstname').val(initialFormData['firstname']);
-      $('.no_lastname').val(initialFormData['lastname']);
-    });
-    
-$('#rsvp-yes-modal').on('hide.bs.modal', function (e) {
-    if ($(e.relatedTarget).hasClass('yes_rsvp_btn')) {
-        if (!$('#rsvpYesForm').valid()) {
+});
+$("#rsvp-yes-modal").on("hidden.bs.modal", function () {
+    $("#lastnameErrorLabel").text("");
+    $("#firstnameErrorLabel").text("");
+
+    $("#firstname").val(initialFormData["firstname"]);
+    $("#lastname").val(initialFormData["lastname"]);
+});
+// Store initial data for firstname and lastname when modal is first opened
+$("#rsvp-no-modal").on("show.bs.modal", function () {
+    if ($.isEmptyObject(initialFormData)) {
+        initialFormData["firstname"] = $(".no_firstname").val();
+        initialFormData["lastname"] = $(".no_lastname").val();
+    }
+});
+$("#rsvp-no-modal").on("hidden.bs.modal", function () {
+    $("#lastnameErrorLabelno").text("");
+    $("#firstnameErrorLabelno").text("");
+
+    $(".no_firstname").val(initialFormData["firstname"]);
+    $(".no_lastname").val(initialFormData["lastname"]);
+});
+
+$("#rsvp-yes-modal").on("hide.bs.modal", function (e) {
+    if ($(e.relatedTarget).hasClass("yes_rsvp_btn")) {
+        if (!$("#rsvpYesForm").valid()) {
             // Prevent the modal from closing if the form is invalid
             e.preventDefault();
             // toastr.error("Please correct the errors before proceeding.");
         }
     }
 });
-$('#rsvp-no-modal').on('hide.bs.modal', function (e) {
-    if ($(e.relatedTarget).hasClass('no_rsvp_btn')) {
-        if (!$('#rsvpNoForm').valid()) {
+$("#rsvp-no-modal").on("hide.bs.modal", function (e) {
+    if ($(e.relatedTarget).hasClass("no_rsvp_btn")) {
+        if (!$("#rsvpNoForm").valid()) {
             // Prevent the modal from closing if the form is invalid
             e.preventDefault();
             // toastr.error("Please correct the errors before proceeding.");
@@ -392,16 +400,15 @@ $('#rsvp-no-modal').on('hide.bs.modal', function (e) {
 // });
 
 $(document).on("click", ".yes_rsvp_btn", function (e) {
-    if (!$('#rsvpYesForm').valid()) {
+    if (!$("#rsvpYesForm").valid()) {
         e.preventDefault();
-       return;
+        return;
     }
     e.preventDefault();
     var adultsCount = parseInt($("#adults").val()) || 0;
     var kidsCount = parseInt($("#kids").val()) || 0;
-    var firstname=$('.yes_firstname').val();
-    var lastname=$('.yes_lastname').val();
-
+    var firstname = $(".yes_firstname").val();
+    var lastname = $(".yes_lastname").val();
 
     if (adultsCount == 0 && kidsCount == 0) {
         e.preventDefault();
@@ -409,19 +416,17 @@ $(document).on("click", ".yes_rsvp_btn", function (e) {
         return;
     }
 
-
     $("#rsvpYesForm").submit();
-    $('#rsvp-yes-modal').modal('hide');
+    $("#rsvp-yes-modal").modal("hide");
 });
 
 $(document).on("click", ".no_rsvp_btn", function (e) {
-    if (!$('#rsvpNoForm').valid()) {
+    if (!$("#rsvpNoForm").valid()) {
         e.preventDefault();
         return;
     }
     $("#rsvpNoForm").submit();
-    $('#rsvp-no-modal').modal('hide');
-
+    $("#rsvp-no-modal").modal("hide");
 });
 
 $(document).ready(function () {

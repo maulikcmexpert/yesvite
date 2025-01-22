@@ -922,7 +922,7 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
-    $('.step_1_activity').text(total_activity + ' Activity');
+    $('.step_1_activity').text(i + ' Activity');
 
     console.log(total_activities);
     
@@ -2785,25 +2785,31 @@ $(document).on('click','#next_design',function() {
     eventData.step = final_step;
 })
 
+if($('.edit-design').hasClass('active')){
+    $('#close_createEvent').css('display','none');
+}
+$(document).on("click",'.edit-design',function(){
+    $('#close_createEvent').css('display','none');
+});
 $(document).on("click", "#close_createEvent", function () {
 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    if (event_type == "") {
-        $("#deleteModal").modal("show");
-        // confirm('Event type is empty. Are you sure you want to proceed?')
-        return;
-    }
-    // if (event_name == "") {
+    // if (event_type == "") {
+    //     $("#deleteModal").modal("show");
+    //     // confirm('Event type is empty. Are you sure you want to proceed?')
+    //     return;
+    // }
+    // // if (event_name == "") {
+    // //     $("#deleteModal").modal("show");
+    // //     return;
+    // // }
+    // if (event_date == "") {
     //     $("#deleteModal").modal("show");
     //     return;
     // }
-    if (event_date == "") {
-        $("#deleteModal").modal("show");
-        return;
-    }
 
     // $('#loader').css('display','block');
     $('#loader').css('display','block');
@@ -2887,8 +2893,9 @@ $(document).on("click", "#close_createEvent", function () {
         //     eventData.step = firstLetter;
         //     $(".step_2").hide();
         // }
-        savePage1Data(1);
-      
+        if(final_step==2){
+            savePage1Data(1);
+        }
         if(final_step==3){
             var savePage3Result =  savePage3Data(1);
             console.log(savePage3Result);
@@ -2905,6 +2912,29 @@ $(document).on("click", "#close_createEvent", function () {
        
         console.log(eventData);
 
+        $.ajax({
+            url: base_url + "event/store",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: eventData,
+            success: function (response) {
+                if(response==1){ 
+                    window.location.href="home";
+                    toastr.success('Event Saved as Draft');
+                    setTimeout(function () {
+                        $('#loader').css('display', 'none');
+                    }, 4000);                }
+
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+            },
+        });
+    }else{
+        eventData.isdraft='1';
+        eventData.step='1';
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
@@ -2994,14 +3024,16 @@ function savePage1Data(close = null) {
 
     if(close==null||close==""){
 
-        var activity=$('.new_append_activity').length;
-        console.log(activity);
-        if($('#schedule').is(":checked")){
-            if(activity==0){
-                toastr.error('Event Schedule: Please set event schedule');
-                return;  
-            }
-        }
+        // var activity=$('.new_append_activity').length;
+        // console.log(activity);
+        // if($('#schedule').is(":checked")){
+        //     var activity=$('.new_append_activity').length;
+        //     console.log(activity);
+        //     if(activity==0){
+        //         toastr.error('Event Schedule: Please set event schedule');
+        //         return;  
+        //     }
+        // }
     
     if(schedule){
         events_schedule = '1';
@@ -3025,6 +3057,7 @@ function savePage1Data(close = null) {
     var rsvp_by_date = '';
     if(rsvp_by_date_set){
         rsvp_by_date = $('#rsvp-by-date').val();
+        rsvp_by_date_set='1';
         if (rsvp_by_date == "") {
             $("#event-rsvpby-error")
                 .css("display", "block")
@@ -3843,6 +3876,7 @@ function edit_design_modal() {
 
 var design_inner_image = '';
 $(document).on("click", ".li_event_details", function () {
+    $('#close_createEvent').css('display','block');
     $('#sidebar_select_design_category').css('display','none');
     
     canvas.discardActiveObject();
@@ -4040,12 +4074,12 @@ $(document).on("click", ".li_guest", function () {
 
     var activity=$('.new_append_activity').length;
     console.log(activity);
-    if(schedule){
-        if(activity==0){
-            toastr.error('Event Schedule: Please set event schedule');
-            return;  
-        }
-    }
+    // if(schedule){
+    //     if(activity==0){
+    //         toastr.error('Event Schedule: Please set event schedule');
+    //         return;  
+    //     }
+    // }
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
