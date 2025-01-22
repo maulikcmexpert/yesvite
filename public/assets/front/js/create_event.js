@@ -5818,8 +5818,9 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             if(html=="" && groupscroll==1){
                 // $("#YesviteUserAll").html('No data found');
                 NogroupData=true;
+                busyyesvite = false;
                $('#loader').css('display','none');
-            
+
                return;
             }
             if(groupscroll==1){
