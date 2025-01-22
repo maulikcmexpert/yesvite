@@ -81,7 +81,7 @@
                         <div class="invite-pro">
                             <div class="invite-left">
                                 <h6 class="invite-count"></h6>
-                                <p class="invite-left_d"><strong>Invites | {{$user->coins}}</strong> Left</p>
+                                <p class="invite-left_d"><strong>Invites |  <span class="available-coins">{{$coins}}</span></strong> Left</p>
                             </div>  
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                         <div class="invite-pro">
                             <div class="invite-left">
                                 <h6 class="invite-count">0</h6>
-                                <p class="invite-left_d"><strong>Invites | {{$user->coins}}</strong> Left</p>
+                                <p class="invite-left_d"><strong>Invites |  <span class="available-coins">{{$coins}}</span></strong> Left</p>
                             </div>
                         </div>
                     </div>
@@ -855,7 +855,7 @@
             <div class="invite-link">
                 <div class="invite-left-side recomendat-plan">
                     <h6 class="invite-count">0</h6>
-                    <p class="invite-left_d"><strong>Invites | {{$user->coins}}</strong> Left</p>
+                    <p class="invite-left_d"><strong>Invites | <span class="available-coins">{{$coins}}</span></strong> Left</p>
                 </div>
                 <span>15 or less <strong>$15.99</strong></span>
             </div>
