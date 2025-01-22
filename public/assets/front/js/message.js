@@ -788,6 +788,9 @@ async function updateChatfromGroup(conversationId) {
 
     $(".selected_name").val(groupInfo.groupName);
 
+    $(".empty-massage").css("display", "none");
+    $(".msg-head").css("display", "block");
+    $(".msg-footer").css("display", "block");
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
