@@ -5733,11 +5733,15 @@ $('#YesviteUserAll').scroll(function () {
 });
 
 $('#groupUsers').scroll(function () {
- 
+  console.log(busyyesvite);
+    
+    if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
+    console.log({scrollTop,elementHeight,scrollHeight});
+    
     if (scrollTop + elementHeight >= scrollHeight-2) {
         busyyesvite = true;
         offsetyesvite= limityesvite + offsetyesvite;
