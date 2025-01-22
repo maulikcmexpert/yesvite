@@ -4080,14 +4080,15 @@ $(document).on("click", ".li_guest", function () {
     var state = $("#state").val();
     var zipcode = $("#zipcode").val();
 
-    var activity=$('.new_append_activity').length;
+    var activity=$('.event_all_activity_list').length;
     console.log(activity);
-    // if(schedule){
-    //     if(activity==0){
-    //         toastr.error('Event Schedule: Please set event schedule');
-    //         return;  
-    //     }
-    // }
+    if($('#schedule').is(":checked")){
+        if(activity==0){
+            toastr.error('Event Schedule: Please set event schedule');
+            return;  
+        }
+    }
+
     if(event_name==""){
         toastr.error('Please enter event name');
         return;
