@@ -25,7 +25,7 @@
                         <div class="credits_balance_amout_wrp">
                             <h5>
                                 <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
-                                <span>{{$data['coins']}}</span>
+                                <span class="available-coins">{{$coins}}</span>
                             </h5>
                             <h6><span><i class="fa-solid fa-arrow-up"></i> {{$data['last_month_comparison_percentage']}}%</span>Compared to {{$data['last_month_balance']}} credits last month</h6>
                         </div>
