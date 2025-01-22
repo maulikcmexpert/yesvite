@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     // var page = 1;
   
-    $('input[type="text"], textarea').on('keydown', function(e) {
+    $(document).on('keydown','input[type="text"], textarea', function(e) {
         var currentValue = $(this).val(); // Get the value of the current input/textarea
         if (currentValue === "") {
             if (e.key === " " || e.keyCode === 32) {
@@ -12,7 +12,7 @@ $(document).ready(function () {
         }
     });
     
-    $('input[type="text"],textarea').on('paste', function(e) {
+    $(document).on('paste','input[type="text"],textarea', function(e) {
         const clipboardData = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
         if ($.trim(clipboardData) === "") {
             e.preventDefault(); 
