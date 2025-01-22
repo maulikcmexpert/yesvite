@@ -6579,6 +6579,10 @@ function get_co_host_list(search_name=null,limit,offset,scroll,add_co_host=null)
         }else{
             $(".list_all_invited_user").html(data.view);
         }
+
+        if(data.view==""){
+            $(".list_all_invited_user").html('No data found');
+        }
         // $('input[name="guest_list[]"]:checked').each(function () {
             var profilePhoto = $(this).data('profile');
             var user_name = $(this).data('username');
@@ -6766,8 +6770,9 @@ function get_phone_host_list(search_name=null,limit,offset,scroll){
     })
     .done(function (data) {
         // console.log(data);
-        if (data == " ") {
+        if (data.view == "") {
             cohostNoMoreContactData = true;
+            $(".list_all_contact_user").html('No data found');
             $("#loader").hide();
             return;
         }
