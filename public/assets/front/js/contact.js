@@ -17,7 +17,7 @@ $("#product-scroll").on("scroll", function () {
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
-            if (scrollTop + elementHeight >= scrollHeight) {
+            if (scrollTop + elementHeight >= scrollHeight-2) {
                 busy1 = true;
                 offset += limit;
                 var type="yesvite";
