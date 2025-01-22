@@ -5737,7 +5737,7 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group',null,1);
+            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
         }, 1000);
     }
 });
