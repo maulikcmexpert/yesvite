@@ -475,6 +475,8 @@ function get_month_data(current_month){
 $(document).on('click','.cancel_event_option',function () {
     var event_id=$(this).data('event_id');
     console.log(event_id);
+    $('#reason_to_cancel_event').val('');
+    $('#type_cancel').val('');
     $('.confirm_cancel_event_btn').attr('data-event_id', event_id);
 });
 
