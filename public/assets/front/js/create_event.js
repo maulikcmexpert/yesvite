@@ -4481,7 +4481,6 @@ $(document).on("change", ".user_group_member  .user_choice", function () {
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
-        $(this).prop("checked", false);
 
     }
 });
