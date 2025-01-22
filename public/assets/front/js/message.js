@@ -438,22 +438,19 @@ async function handleNewConversation(snapshot) {
             .find(".user-img")
             .find("span")
             .replaceWith(userStatus);
-
         const badgeElement = $(conversationElement).find(
-            ".ms-auto .d-flex .badge .g-badge"
+            ".ms-auto .d-flex .badge"
         );
-        badgeElement.forEach((ele) => {
-            ele.text(newConversation.unReadCount);
-            if (parseInt(newConversation.unReadCount) == 0) {
-                ele.addClass("d-none");
-                $(conversationElement).removeClass("setpink");
-            } else {
-                ele.removeClass("d-none");
-                ele.show();
-                $(conversationElement).addClass("setpink");
-                console.log("here");
-            }
-        });
+        badgeElement.text(newConversation.unReadCount);
+        if (parseInt(newConversation.unReadCount) == 0) {
+            badgeElement.addClass("d-none");
+            $(conversationElement).removeClass("setpink");
+        } else {
+            badgeElement.removeClass("d-none");
+            badgeElement.show();
+            $(conversationElement).addClass("setpink");
+            console.log("here");
+        }
     } else {
         if (WaitNewConversation == newConversation.conversationId) {
             return;
