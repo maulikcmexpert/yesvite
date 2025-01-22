@@ -3262,7 +3262,7 @@ $("#choose-file").on("change", async function () {
                 await uploadBytes(fileRef, blob);
             }
             const downloadURL = await getDownloadURL(fileRef);
-
+            let profileModel = document.getElementById("profileModel");
             var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
             var groupInfoRef = ref(
                 database,
@@ -3270,6 +3270,9 @@ $("#choose-file").on("change", async function () {
             );
             $("#selected-user-profile").replaceWith(
                 `<img src="${downloadURL}" id="selected-user-profile"/>`
+            );
+            $(profileModel).replaceWith(
+                `<img src="${downloadURL}" id="profileModel"/>`
             );
             $(".conversation-" + conversationId)
                 .find(".chat-data")
