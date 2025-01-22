@@ -44,8 +44,37 @@
                               <div class="bulk-credit-options-listing">
                                 <ul>
                                     @foreach($prices as $key => $price)
-                                        @if(!$loop->last)
-                                            <li class="best-deal-item" >
+                                    @if(!$loop->last)
+                                        <li class="best-deal-item">
+                                            <div class="bulk-credit-options-listing-left">
+                                                <h3>
+                                                    <span><img src="{{ asset('assets') }}/coin.svg" alt=""></span>
+                                                    {{ $price['coins'] }} Credits
+                                                </h3>
+                                                <p>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</p>
+                                            </div>
+                                            <div class="bulk-credit-options-listing-right">
+                                                <h4>${{ number_format($price['price'], 2) }}</h4>
+                                                <div class="form-check">
+                                                    <input 
+                                                        class="form-check-input price-option" 
+                                                        type="radio" 
+                                                        name="priceId" 
+                                                        data-price="{{ $price['price'] }}" 
+                                                        data-price-id="{{ $price['priceId'] }}" 
+                                                        data-coins="{{ $price['coins'] }}" 
+                                                        id="price-{{ $key }}"
+                                                    >
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <div class="best-deal-wrp">
+                                            <div class="best-deal-title">
+                                                <h5>80% Saving over the 15 pack</h5>
+                                                <h4>BEST DEAL!</h4>
+                                            </div>
+                                            <li>
                                                 <div class="bulk-credit-options-listing-left">
                                                     <h3>
                                                         <span><img src="{{ asset('assets') }}/coin.svg" alt=""></span>
@@ -57,36 +86,20 @@
                                                     <h4>${{ number_format($price['price'], 2) }}</h4>
                                                     <div class="form-check">
                                                         <input 
-                                                            class="form-check-input" 
+                                                            class="form-check-input price-option" 
                                                             type="radio" 
                                                             name="priceId" 
-                                                            value="{{ $price['priceId'] }}" 
+                                                            data-price="{{ $price['price'] }}" 
+                                                            data-price-id="{{ $price['priceId'] }}" 
+                                                            data-coins="{{ $price['coins'] }}" 
                                                             id="price-{{ $key }}"
                                                         >
                                                     </div>
                                                 </div>
                                             </li>
-                                        @else
-                                            <div class="best-deal-wrp">
-                                                <div class="best-deal-title">
-                                                    <h5>80% Saving over the 15 pack</h5>
-                                                    <h4>BEST DEAL!</h4>
-                                                </div>
-                                                <li>
-                                                    <div class="bulk-credit-options-listing-left">
-                                                        <h3><span><img src="./assets/img/credit-coin-img.png" alt=""></span> {{ $price['coins'] }} Credits</h3>
-                                                        <p>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</p>
-                                                    </div>
-                                                    <div class="bulk-credit-options-listing-right">
-                                                        <h4>${{ number_format($price['price'], 2) }}</h4>
-                                                        <div class="form-check">
-                                                          <input class="form-check-input" type="radio"  name="priceId"  value="" id="price-{{ $key }}">
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                        </div>
+                                    @endif
+                                @endforeach
                                 </ul>
                               </div>
                           </div>
@@ -125,7 +138,15 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Purchase - $22.50</button>
+                <button 
+                    type="button" 
+                    class="btn btn-secondary purchase-button" 
+                    data-price-id="" 
+                    data-price="0" 
+                    disabled
+                >
+                    Purchase - $0.00
+                </button>
             </div>
         </div>
     </div>
@@ -299,4 +320,31 @@ defer
         document.getElementById('close-modal').addEventListener('click', () => {
             document.getElementById('success-modal').style.display = 'none';
         });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const priceOptions = document.querySelectorAll('.price-option');
+        const purchaseButton = document.querySelector('.purchase-button');
+
+        priceOptions.forEach(option => {
+            option.addEventListener('change', () => {
+                const price = option.getAttribute('data-price');
+                const priceId = option.getAttribute('data-price-id');
+
+                // Update the button with the selected price
+                purchaseButton.textContent = `Purchase - $${parseFloat(price).toFixed(2)}`;
+                purchaseButton.setAttribute('data-price-id', priceId);
+                purchaseButton.disabled = false;
+            });
+        });
+
+        purchaseButton.addEventListener('click', () => {
+            const selectedPriceId = purchaseButton.getAttribute('data-price-id');
+
+            // if (selectedPriceId) {
+            //     // Redirect to the server to create a Stripe session
+            //     window.location.href = `/start-payment/${selectedPriceId}`;
+            // }
+        });
+    });
     </script>
