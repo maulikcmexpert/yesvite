@@ -124,7 +124,7 @@
 
                                     @if ($counter > 4)
                                         @php
-                                            $counter = count($user_list) - 4;
+                                            $counter = count(Session::get('user_ids')) - 4;
                                         @endphp
                                         <div class="guest-contact all_user_list">
                                             <div class="guest-img">
@@ -331,7 +331,7 @@
 
                                     @if ($counter > 4)
                                         @php
-                                            $counter = count($user_list) - 4;
+                                            $counter = count(Session::get('contact_ids')) - 4;
                                         @endphp
                                         <div class="guest-contact all_user_list" data-contact="1">
                                             <div class="guest-img">

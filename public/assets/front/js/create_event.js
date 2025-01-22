@@ -5751,6 +5751,10 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             offsetyesvite = 0;
         }
     }
+   console.log(lim);
+   console.log(off);
+   console.log(groupscroll);
+   
    
     $.ajax({
         type: "GET",
@@ -5800,8 +5804,13 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
 
                 }
         }else{
+            if(groupscroll==1){
+                $("#groupUsers").append(html);
+            }else{
+                $("#groupUsers").html(html);
+            }
+            busyyesvite = false;
 
-            $("#groupUsers").append(html);
         }
         busyyesvite = false;
         
