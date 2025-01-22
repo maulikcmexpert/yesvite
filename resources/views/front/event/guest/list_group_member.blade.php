@@ -1,5 +1,37 @@
 @foreach ($groups as $data)
+@php
 
+$email_checked = '';
+$phone_checked = '';
+$disabled = '';
+$emialAlredy = '';
+$phoneAlredy = '';
+if(isset($selected_user) && !empty($selected_user)){
+    $foundKey = array_search($data->id, array_column($selected_user, 'id'));
+   
+    if ($foundKey !== false) {
+       
+        $key = array_keys($selected_user)[$foundKey];
+        $email_checked = '';
+        $phone_checked = '';
+        $emialAlredy = '';
+        $phoneAlredy = '';
+        if ($data->id === (int)$selected_user[$key]['id']) {
+            if($selected_user[$key]['prefer_by'] == 'email'){
+                $email_checked = 'checked';
+                $emialAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
+            }elseif($selected_user[$key]['prefer_by'] == 'phone'){
+                $phone_checked = 'checked';
+                $phoneAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
+            }
+        }
+    }
+   
+// if(count($selected_user) >= 15){
+// $disabled = 'disabled';
+// }
+}
+@endphp
 <div class="users-data">
     <div class="d-flex align-items-start">
         <div class="contact-img">
@@ -65,18 +97,26 @@
                     alt="logo">
             </span>
             @endif
-            <input class="form-check-input user_group_member user_choice" type="checkbox"
+            <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
-                value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}>
+                value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}> -->
+                <input class="form-check-input user_group_member user_choice" type="checkbox"
+                name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
+                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}>
         </div>
         @endif
         @if(isset($data->phone_number) && $data->phone_number!="")
         <div class="right-note ms-auto">
-            <input class="form-check-input user_group_member user_choice" type="checkbox"
+            <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
-                value="{{ $data->id }}"  {{( $data->group_member_prefer_by=="phone")?'checked':""}}>
-        </div>
-        @endif
-    </div>
+                value="{{ $data->id }}"  {{( $data->group_member_prefer_by=="phone")?'checked':""}}> -->
+
+                <input class="form-check-input user_group_member user_choice" type="checkbox"
+                name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
+                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
+                </div>
+                @endif
+            </div>
 </div>
+<!-- </div> -->
 @endforeach

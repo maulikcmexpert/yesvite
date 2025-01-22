@@ -1785,8 +1785,9 @@ class EventController extends BaseController
         // }])
         //     ->where('group_id', $group_id)
         //     ->get();
+        $selected_user = Session::get('user_ids');
 
-        return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups'))->render(), "status" => "1"]);
+        return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups','selected_user'))->render(), "status" => "1"]);
     }
 
     public function getUserAjax(Request $request)
