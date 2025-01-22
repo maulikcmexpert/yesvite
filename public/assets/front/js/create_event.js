@@ -5740,13 +5740,13 @@ $('#groupUsers').scroll(function () {
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group');
+            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll=null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5803,7 +5803,11 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
 
                 }
         }else{
-            $("#groupUsers").html(html);
+            if(groupscroll==1){
+                $("#groupUsers").append(html);
+            }else{
+                $("#groupUsers").html(html);
+            }
         }
         busyyesvite = false;
         
