@@ -1351,6 +1351,10 @@ foreignObject{
     transform: translate(21%, 0);
 }
 
+.guest-edit-incress-modal .rsvp-button-wrp .btn{
+    width: 50%;
+    max-width: 50%;
+}
 
 
 /* ======= responsive ====== */
