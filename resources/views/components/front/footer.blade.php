@@ -337,6 +337,14 @@ defer
                                 clearInterval(testTimer); // Stop polling
                                 purchaseButton.textContent = `Purchase - $0.00`;
                                 toastr.success("Payment Successful!");
+
+                                const coinsSpans = document.querySelectorAll('.available-coins');
+            
+                                // Update the text content for each element
+                                coinsSpans.forEach(span => {
+                                    span.textContent = data.data;
+                                });
+
                                 
                             } else if (data.status === 'failed') {
                                 purchaseButton.textContent = `Purchase - $0.00`;
