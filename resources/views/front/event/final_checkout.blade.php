@@ -64,24 +64,24 @@
                     <div class="guest-wrp guest-wrap-respo">
                         <div class="guest-pro">
                             <div class="d-flex">
-                                <h5>Pro </h5>
-                                <span>(Single Event)</span>
+                                <!-- <h5>Pro </h5>
+                                <span>(Single Event)</span> -->
                             </div>
-                            <a href="#" class="edit-icon" onclick="toggleSidebar()">
+                            <!-- <a href="#" class="edit-icon" onclick="toggleSidebar()">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.05 4.66701L4.20829 11.9087C3.94996 12.1837 3.69996 12.7253 3.64996 13.1003L3.34162 15.8003C3.23329 16.7753 3.93329 17.442 4.89996 17.2753L7.58329 16.817C7.95829 16.7503 8.48329 16.4753 8.74162 16.192L15.5833 8.95034C16.7666 7.70034 17.3 6.27534 15.4583 4.53368C13.625 2.80868 12.2333 3.41701 11.05 4.66701Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M9.9082 5.875C10.2665 8.175 12.1332 9.93333 14.4499 10.1667" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <div class="invite-guest">
                             <span>15 or less</span>
-                            <h5>$15.99</h5>
+                            <!-- <h5>$15.99</h5> -->
                         </div>
                         <div class="invite-pro">
                             <div class="invite-left">
                                 <h6 class="invite-count"></h6>
-                                <p><strong>Invites | 1</strong> Left</p>
+                                <p><strong>Invites | {{$user->coins}}</strong> Left</p>
                             </div>
                         </div>
                     </div>
