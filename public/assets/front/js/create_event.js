@@ -5746,7 +5746,7 @@ $('#groupUsers').scroll(function () {
         }
         setTimeout(function () {
             if(NogroupData==false){
-                displayRecords(limityesvite, offsetyesvite,'group',null,null,1);\
+                displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
             }
         }, 1000);
     }
