@@ -7260,6 +7260,7 @@ function searchRecords(lim, off, type, search = null) {
 
 
 $(".slider_photo").on("change", function(event) {
+    alert();
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
         var reader = new FileReader();
