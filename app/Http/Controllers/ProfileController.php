@@ -26,7 +26,7 @@ use App\Rules\PhoneNumberExists;
 use Illuminate\Validation\Rule;
 
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
 
     public function index()
@@ -59,7 +59,7 @@ class ProfileController extends Controller
         $user['join_date'] = $formatted_date;
         $draft_events =   Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])
             ->select('event_name', 'step', 'updated_at', 'id')
-            ->orderBy('id','DESC')
+            ->orderBy('id', 'DESC')
             ->get();
         if ($user->visible == 1) {
             $user['visible'] = 'Guests from events';
@@ -417,7 +417,7 @@ class ProfileController extends Controller
         $userUpdate = User::where('id', $id)->first();
         $userUpdate->password = Hash::make($request->new_password);
         $userUpdate->password_updated_date = date('Y-m-d');
-        if($userUpdate->isTemporary_password=="1"){
+        if ($userUpdate->isTemporary_password == "1") {
             $userUpdate->isTemporary_password = "0";
         }
         $userUpdate->save();
@@ -483,7 +483,7 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('web')->user();
         try {
-            if ($request->visible != null) {        
+            if ($request->visible != null) {
                 $user->visible = $request->visible;
                 $user->save();
             }
