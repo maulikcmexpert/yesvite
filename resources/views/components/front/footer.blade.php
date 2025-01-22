@@ -44,28 +44,29 @@
                               <div class="bulk-credit-options-listing">
                                 <ul>
                                     @foreach($prices as $key => $price)
-                                        <li @if($loop->last) class="best-deal-item" @endif>
-                                            <div class="bulk-credit-options-listing-left">
-                                                <h3>
-                                                    <span><img src="{{ asset('assets') }}/coin.svg" alt=""></span>
-                                                    {{ $price['coins'] }} Credits
-                                                </h3>
-                                                <p>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</p>
-                                            </div>
-                                            <div class="bulk-credit-options-listing-right">
-                                                <h4>${{ number_format($price['price'], 2) }}</h4>
-                                                <div class="form-check">
-                                                    <input 
-                                                        class="form-check-input" 
-                                                        type="radio" 
-                                                        name="priceId" 
-                                                        value="{{ $price['priceId'] }}" 
-                                                        id="price-{{ $key }}"
-                                                    >
+                                        @if(!$loop->last)
+                                            <li class="best-deal-item" >
+                                                <div class="bulk-credit-options-listing-left">
+                                                    <h3>
+                                                        <span><img src="{{ asset('assets') }}/coin.svg" alt=""></span>
+                                                        {{ $price['coins'] }} Credits
+                                                    </h3>
+                                                    <p>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</p>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        @if($loop->last)
+                                                <div class="bulk-credit-options-listing-right">
+                                                    <h4>${{ number_format($price['price'], 2) }}</h4>
+                                                    <div class="form-check">
+                                                        <input 
+                                                            class="form-check-input" 
+                                                            type="radio" 
+                                                            name="priceId" 
+                                                            value="{{ $price['priceId'] }}" 
+                                                            id="price-{{ $key }}"
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @else
                                             <div class="best-deal-wrp">
                                                 <div class="best-deal-title">
                                                     <h5>80% Saving over the 15 pack</h5>
