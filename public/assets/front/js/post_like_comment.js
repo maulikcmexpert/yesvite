@@ -140,36 +140,23 @@ $(document).ready(function () {
 
 
                     function generateProfileImage(username) {
-                        $nameParts = explode(
-                            ' ',
-                            $reply['username'],
-                        );
-                        $firstInitial = isset(
-                            $nameParts[0][0],
-                        )
-                            ? strtoupper(
-                                $nameParts[0][0],
-                            )
-                            : '';
-                        $secondInitial = isset(
-                            $nameParts[1][0],
-                        )
-                            ? strtoupper(
-                                $nameParts[1][0],
-                            )
-                            : '';
-                        $initials =
-                            $firstInitial.
-                                $secondInitial;
+                        if (!username) return ''; // Return an empty string if the username is undefined
 
-                        // Generate a font color class based on the first initial
-                        $fontColor =
-                            'fontcolor'.
-                                $firstInitial;
+                        // Split the username into parts
+                        const nameParts = username.split(' ');
+
+                        // Get the first and second initials
+                        const firstInitial = nameParts[0]?.[0]?.toUpperCase() || '';
+                        const secondInitial = nameParts[1]?.[0]?.toUpperCase() || '';
+                        const initials = `${firstInitial}${secondInitial}`;
+
+                        // Generate a font color class based on the first initial (optional)
+                        const fontColor = `fontcolor${firstInitial}`;
 
                         // Return initials inside an h5 tag with dynamic styling
                         return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                     }
+
                     const newCommentHTML = `
                     <li class="commented-user-wrp" data-comment-id="${data.comment_id}">
                         <div class="commented-user-head">
