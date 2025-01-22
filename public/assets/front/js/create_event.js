@@ -271,7 +271,8 @@ $(document).on("click", ".create-event-btn", function () {
 })
 
 // Delete Group functionality
-$(document).on("click", "#delete_group", function () {
+$(document).on("click", "#delete_group", function (e) {
+    e.stopPropagation();
     var group_id = $(this).data("id");
     $.ajax({
         url: base_url + "event/delete_group",
