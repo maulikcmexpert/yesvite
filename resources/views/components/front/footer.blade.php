@@ -344,6 +344,7 @@ defer
                                 coinsSpans.forEach(span => {
                                     span.textContent = data.data;
                                 });
+                                $('#buycreditsmodal').modal('hide');
 
                                 
                             } else if (data.status === 'failed') {
@@ -351,6 +352,7 @@ defer
                                 clearInterval(pollingInterval); // Stop polling
                                 clearInterval(testTimer); // Stop polling
                                 toastr.error("Payment Failed!");
+                                $('#buycreditsmodal').modal('hide');
                             }
                         })
                         .catch(error => console.error('Error:', error));
