@@ -2787,6 +2787,8 @@ $(document).on('click','#next_design',function() {
 
 if($('.edit-design').hasClass('active')){
     $('#close_createEvent').css('display','none');
+}else{
+    $('#close_createEvent').css('display','block');
 }
 $(document).on("click",'.edit-design',function(){
     $('#close_createEvent').css('display','none');
