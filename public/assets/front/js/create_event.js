@@ -3881,6 +3881,7 @@ function edit_design_modal() {
 
 var design_inner_image = '';
 $(document).on("click", ".li_event_details", function () {
+    $('#close_createEvent').css('display','block');
     $('#sidebar_select_design_category').css('display','none');
     
     canvas.discardActiveObject();
