@@ -327,11 +327,15 @@ defer
         const purchaseButton = document.querySelector('.purchase-button');
 
         priceOptions.forEach(option => {
+            console.log("added")
             option.addEventListener('change', () => {
+            console.log("change")
+
                 const price = option.getAttribute('data-price');
                 const priceId = option.getAttribute('data-price-id');
 
-                // Update the button with the selected price
+            console.log(${parseFloat(price).toFixed(2)})
+            // Update the button with the selected price
                 purchaseButton.textContent = `Purchase - $${parseFloat(price).toFixed(2)}`;
                 purchaseButton.setAttribute('data-price-id', priceId);
                 purchaseButton.disabled = false;
