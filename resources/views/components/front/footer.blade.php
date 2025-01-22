@@ -1,4 +1,7 @@
 <!--Buy-Credits-Modal -->
+@if(isset($prices)&&count($prices)>0)
+    
+
 <button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal">buycreditsmodal</button>
 <div class="modal fade cmn-modal buycreditsmodal" id="buycreditsmodal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -41,28 +44,29 @@
                               <div class="bulk-credit-options-listing">
                                 <ul>
                                     @foreach($prices as $key => $price)
-                                        <li @if($loop->last) class="best-deal-item" @endif>
-                                            <div class="bulk-credit-options-listing-left">
-                                                <h3>
-                                                    <span><img src="{{ asset('assets') }}/coin.svg" alt=""></span>
-                                                    {{ $price['coins'] }} Credits
-                                                </h3>
-                                                <p>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</p>
-                                            </div>
-                                            <div class="bulk-credit-options-listing-right">
-                                                <h4>${{ number_format($price['price'], 2) }}</h4>
-                                                <div class="form-check">
-                                                    <input 
-                                                        class="form-check-input" 
-                                                        type="radio" 
-                                                        name="priceId" 
-                                                        value="{{ $price['priceId'] }}" 
-                                                        id="price-{{ $key }}"
-                                                    >
+                                        @if(!$loop->last)
+                                            <li class="best-deal-item" >
+                                                <div class="bulk-credit-options-listing-left">
+                                                    <h3>
+                                                        <span><img src="{{ asset('assets') }}/coin.svg" alt=""></span>
+                                                        {{ $price['coins'] }} Credits
+                                                    </h3>
+                                                    <p>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</p>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        @if($loop->last)
+                                                <div class="bulk-credit-options-listing-right">
+                                                    <h4>${{ number_format($price['price'], 2) }}</h4>
+                                                    <div class="form-check">
+                                                        <input 
+                                                            class="form-check-input" 
+                                                            type="radio" 
+                                                            name="priceId" 
+                                                            value="{{ $price['priceId'] }}" 
+                                                            id="price-{{ $key }}"
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @else
                                             <div class="best-deal-wrp">
                                                 <div class="best-deal-title">
                                                     <h5>80% Saving over the 15 pack</h5>
@@ -126,7 +130,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" stylesheet.crossOrigin = "anonymous"></script>
