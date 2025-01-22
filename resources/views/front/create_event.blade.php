@@ -319,6 +319,9 @@
     <div class="main-content-sidebar">
         <div class="new-event-sidebar-wrp">
             <div class="new-event-sidebar-menu">
+                @if (isset($eventDetail['id']) && $eventDetail['id']!="")
+                    
+                @else    
                 <ul>
                     <!-- ---for active menu add active class--- -->
 
@@ -359,6 +362,7 @@
                         </div>
                     </li>
                 </ul>
+                @endif
             </div>
         </div>
         <div class="guest-wrp side-guest-wrp">
@@ -1483,8 +1487,8 @@
                                                 </h2>
                                                 @if (count($items['item_carry_users']) == 0)
                                                     <div id="lumpia-collapseOne-{{ $items['id'] }}-{{ $data['id'] }}"
-                                                    class="accordion-collapse" aria-labelledby="lumpia"
-                                                    data-bs-parent="#accordionFlushExample">
+                                                    class="accordion-collapse d-none" aria-labelledby="lumpia"
+                                                    data-bs-parent="#accordionFlushExample" >
                                                     <div class="accordion-body">
                                                         <div class="accordion-body-content"
                                                             style="display: none;">
