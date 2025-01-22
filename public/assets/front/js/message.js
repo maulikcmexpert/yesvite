@@ -3534,8 +3534,12 @@ async function getTotalUnreadMessageCount() {
 
 // Function to update badge with unread message count
 async function updateUnreadMessageBadge(conversationId = null) {
+    console.log("updateUnreadMessageBadge");
     const totalUnreadCount = await getTotalUnreadMessageCount();
+    console.log(totalUnreadCount);
     const badgeEle = document.querySelectorAll(".badge .g-badge");
+    console.log(badgeEle);
+
     badgeEle.forEach((ele) => {
         if (parseInt(totalUnreadCount) > 0) {
             $(ele).show();
