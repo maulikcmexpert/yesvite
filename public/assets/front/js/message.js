@@ -788,6 +788,9 @@ async function updateChatfromGroup(conversationId) {
 
     $(".selected_name").val(groupInfo.groupName);
 
+    $(".empty-massage").css("display", "none");
+    $(".msg-head").css("display", "block");
+    $(".msg-footer").css("display", "block");
     update(userRef, { userChatId: conversationId });
     await addListInMembers(SelecteGroupUser);
     $(".selected-title").html(groupInfo.groupName);
@@ -1200,11 +1203,8 @@ $(document).on("click", ".archive-single1-conversation", function (e) {
 
 // Initial chat update
 if ($("#isGroup").val() == true) {
-    console.log("is group !!!!!!!!!!!!!");
     updateChatfromGroup($(".selected_id").val());
 } else {
-    console.log("not group !!!!!!!!!!!!!");
-
     updateChat($(".selected_message").val());
 }
 $(".archived-list").hide();
@@ -1954,6 +1954,11 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
                                               )
                                             : ""
                                     }</span>
+                                    ${
+                                        isSender
+                                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                                            : ""
+                                    } 
                                     ${reaction}
                                 </div>
                             </div>`
@@ -1973,6 +1978,11 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
                                             : ""
                                     }
                                     }</span>
+                                    ${
+                                        isSender
+                                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                                            : ""
+                                    } 
                                     ${reaction}
                                 </div>
                             </div>`
@@ -1990,6 +2000,11 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
                                             : ""
                                     }
                                     }</span>
+                                    ${
+                                        isSender
+                                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                                            : ""
+                                    } 
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2009,6 +2024,11 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
                                             : ""
                                     }
                                     }</span>
+                                    ${
+                                        isSender
+                                            ? `<span class="seenStatus ${seenStatus}"></span>`
+                                            : ""
+                                    } 
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2016,6 +2036,11 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
                             <span> ${
                                 messageData?.data != "" ? messageData.data : ""
                             }</span>
+                            ${
+                                isSender
+                                    ? `<span class="seenStatus ${seenStatus}"></span>`
+                                    : ""
+                            } 
                                     ${reaction}
                              `
                     }
@@ -2475,11 +2500,14 @@ $("#new_message").on("keypress", async function (e) {
         const tagCount = $("#selected-tags-container .tag").length;
         const message = $(this).val();
         if (tagCount == 0) {
+            isSending = false;
             return toastr.error(
                 "Please select any user for start chat.",
                 "Error!"
             );
         } else if (message.trim() == "") {
+            isSending = false;
+
             return toastr.error(
                 "Please enter message for start chat.",
                 "Error!"
@@ -2494,6 +2522,8 @@ $("#new_message").on("keypress", async function (e) {
             const groupName = $("#group-name").html(); // Assuming you have an input for group name
             $("#group-name").html("");
             if (groupName.trim() == "") {
+                isSending = false;
+
                 return toastr.error(
                     "Please enter Group name for create group.",
                     "Error!"
@@ -2607,6 +2637,8 @@ $("#new_message").on("keypress", async function (e) {
 
             if (isBlockedByMe || isBlockedByUser) {
                 $("#msgBox").modal("hide");
+                isSending = false;
+
                 return;
             }
 

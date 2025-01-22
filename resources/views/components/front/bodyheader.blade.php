@@ -4,7 +4,7 @@
   <div class="mobile-menu-overlay"></div>
   <div class="container">
     <div class="header-wrp">
-      <a class="header-logo">
+      <a href="{{route('home')}}" class="header-logo">
         {{-- <img src="{{asset('assets/front/image/header_logo.png')}}" alt="logo">
         <span>beta</span> --}}
         <img src="{{asset('assets/front/image/yesvite_logo.png')}}" alt="logo">

@@ -22,6 +22,10 @@ var final_dataId = "";
 var final_profile_or_text ="" ;
 var final_prefer_by="";
 var final_initial="";
+
+var limityesvitesc=10;
+var offsetyesvitec=0;
+
 eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
 eventData.step = $("#step").val();
@@ -2807,19 +2811,19 @@ $(document).on("click", "#close_createEvent", function () {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    // if (event_type == "") {
-    //     $("#deleteModal").modal("show");
-    //     // confirm('Event type is empty. Are you sure you want to proceed?')
-    //     return;
-    // }
+    if (event_type == "") {
+        $("#deleteModal").modal("show");
+        // confirm('Event type is empty. Are you sure you want to proceed?')
+        return;
+    }
     // // if (event_name == "") {
     // //     $("#deleteModal").modal("show");
     // //     return;
     // // }
-    // if (event_date == "") {
-    //     $("#deleteModal").modal("show");
-    //     return;
-    // }
+    if (event_date == "") {
+        $("#deleteModal").modal("show");
+        return;
+    }
 
     // $('#loader').css('display','block');
     $('#loader').css('display','block');
@@ -5668,11 +5672,14 @@ var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
 $("#YesviteUserAll").on("scroll", function () {
+    // console.log(busyyesvite);
+    
     if (busyyesvite) return; 
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-        if (scrollTop + elementHeight >= scrollHeight) {
+    console.log({scrollTop,elementHeight,scrollHeight});
+        if (scrollTop + elementHeight >= scrollHeight-2) {
             busyyesvite = true;
             offsetyesvite += limityesvite;
             // var type="yesvite";
@@ -5725,25 +5732,24 @@ $('#YesviteUserAll').scroll(function () {
 });
 
 $('#groupUsers').scroll(function () {
-    limityesvite=10;
-    offsetyesvite=0;
+ 
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
-    if (scrollTop + elementHeight >= scrollHeight) {
+    if (scrollTop + elementHeight >= scrollHeight-1) {
         busyyesvite = true;
-        offsetyesvite = limityesvite + offsetyesvite;
+        offsetyesvite= limityesvite + offsetyesvite;
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvite, offsetyesvite,'group');
+            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
         }, 1000);
     }
 });
 // $("#loader").css('display','block');
 
-function displayRecords(lim, off,type,search = null,alluserscroll=null) {
+function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscroll=null) {
     var search_name = '';
     if(type!='group'){
         search_name = $('.search_user').val();
@@ -5800,7 +5806,11 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null) {
 
                 }
         }else{
-            $("#groupUsers").html(html);
+            if(groupscroll==1){
+                $("#groupUsers").append(html);
+            }else{
+                $("#groupUsers").html(html);
+            }
         }
         busyyesvite = false;
         
