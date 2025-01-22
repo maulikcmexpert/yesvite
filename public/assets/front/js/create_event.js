@@ -5726,7 +5726,7 @@ $('#YesviteUserAll').scroll(function () {
 
 $('#groupUsers').scroll(function () {
     // limityesvite=10;
-    // offsetyesvite=0;
+    offsetyesvite=10;
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
