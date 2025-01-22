@@ -317,9 +317,9 @@ defer
         // });
 
         // Close modal logic
-        document.getElementById('close-modal').addEventListener('click', () => {
-            document.getElementById('success-modal').style.display = 'none';
-        });
+        // document.getElementById('close-modal').addEventListener('click', () => {
+        //     document.getElementById('success-modal').style.display = 'none';
+        // });
 
 
         document.addEventListener('DOMContentLoaded', () => {
