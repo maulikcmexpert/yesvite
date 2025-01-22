@@ -7396,3 +7396,61 @@ $(document).on("click", ".delete_silder", function(e) {
     }, 500);
 
 });
+
+
+$(document).on("click", ".edit_checkout", function (e) {
+    eventData.is_update_event = '0';
+    savePage1Data(1)
+    savePage3Data(1)
+    savePage4Data(1)
+    eventData.isPhonecontact = isPhonecontact;
+    var data = eventData;
+    console.log(data);
+    // $("#loader").show();
+    $(".main-content-wrp").addClass("blurred");
+    e.stopPropagation(); 
+    e.preventDefault(); 
+    // var imagePath = '';
+
+    // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
+    //     $(".step_1").css("display", "none");
+    //     $(".step_2").css("display", "none");
+    //     $(".step_3").css("display", "none");
+    //     $(".step_4").css("display", "none");
+    //     $(".step_final_checkout").show();
+  
+
+
+  
+
+    // handleActiveClass(this);
+
+    
+    // $.ajax({
+    //     url: base_url + "event/store",
+    //     type: "POST",
+    //     headers: {
+    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //     },
+    //     data: data,
+    //     success: function (response) {
+    //         console.log(response);
+    //         $("#loader").css('display','none');
+    //         $(".main-content-wrp").removeClass("blurred");
+
+    //         if(response.is_registry=="1"){
+    //             $('#gift_registry_logo').html(response.view);
+    //             // $('#eventModal').modal('show');         
+    //         }else{
+    //             toastr.success('Event Created Successfully');
+    //             // window.location.href="profile";
+    //         }
+    //         $('#eventModal').modal('show');           
+
+
+    //     },
+    //     error: function (xhr, status, error) {
+    //         console.log("AJAX error: " + error);
+    //     },
+    // });
+});
