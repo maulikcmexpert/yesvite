@@ -276,45 +276,45 @@ defer
     window.location.href = "events";
 });
 
-        const stripe = Stripe('{{ config('services.stripe.public') }}'); // Replace with your public key
+        // const stripe = Stripe('{{ config('services.stripe.public') }}'); // Replace with your public key
 
-        document.getElementById('purchase-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
+        // document.getElementById('purchase-form').addEventListener('submit', async (event) => {
+        //     event.preventDefault();
 
-            const priceId = document.getElementById('credits').value;
+        //     const priceId = document.getElementById('credits').value;
 
-            try {
-                const response = await fetch('{{ route('process.payment') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                    body: JSON.stringify({ priceId }),
-                });
+        //     try {
+        //         const response = await fetch('{{ route('process.payment') }}', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        //             },
+        //             body: JSON.stringify({ priceId }),
+        //         });
 
-                const data = await response.json();
+        //         const data = await response.json();
 
-                if (data.url) {
-                    // Open Stripe Checkout in a new tab
-                    const stripeWindow = window.open(data.url, '_blank');
+        //         if (data.url) {
+        //             // Open Stripe Checkout in a new tab
+        //             const stripeWindow = window.open(data.url, '_blank');
 
-                    // Poll the Stripe window to detect if it's closed
-                    const interval = setInterval(() => {
-                        if (stripeWindow.closed) {
-                            clearInterval(interval);
-                            // Show success modal when the Stripe window is closed
-                            document.getElementById('success-modal').style.display = 'block';
-                        }
-                    }, 1000);
-                } else if (data.error) {
-                    alert('Error: ' + data.error);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            }
-        });
+        //             // Poll the Stripe window to detect if it's closed
+        //             const interval = setInterval(() => {
+        //                 if (stripeWindow.closed) {
+        //                     clearInterval(interval);
+        //                     // Show success modal when the Stripe window is closed
+        //                     document.getElementById('success-modal').style.display = 'block';
+        //                 }
+        //             }, 1000);
+        //         } else if (data.error) {
+        //             alert('Error: ' + data.error);
+        //         }
+        //     } catch (error) {
+        //         console.error('Error:', error);
+        //         alert('An error occurred. Please try again.');
+        //     }
+        // });
 
         // Close modal logic
         document.getElementById('close-modal').addEventListener('click', () => {
