@@ -23,6 +23,16 @@
     margin-bottom: 0;
     position: relative;
     border-right: 2px solid #CBD5E1;
+    font-weight: 700;
+}
+
+.attendence-data h5 span{
+    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 20px;
+    font-weight: 400;
+    display: inline-block;
+    margin-left: 3px;
 }
 
 .attendence-data h5:last-child{
