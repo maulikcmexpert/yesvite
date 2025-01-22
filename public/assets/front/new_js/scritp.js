@@ -14,6 +14,28 @@ var base_url=$('#base_url').val();
 //   });
 // });
 
+$(document).ready(function () {
+    // Add class to body on page load
+    $(".new-main-content").addClass("tab-wall-active");
+
+    // Listen for tab change
+    $(".nav-link").on("shown.bs.tab", function (e) {
+      // Remove any previous tab-related classes
+      $(".new-main-content").removeClass(function (index, className) {
+        return (className.match(/(^|\s)tab-\S+-active/g) || []).join(" ");
+      });
+
+      // Get the id of the newly activated tab
+      const activeTabId = $(e.target).attr("id");
+      const tabName = activeTabId.replace("nav-", "").replace("-tab", "");
+
+      // Add the new class to the body
+      $(".new-main-content").addClass(`tab-${tabName}-active`);
+    });
+  });
+document.querySelectorAll(".nav-link").forEach((tab) => {
+    tab.addEventListener("shown.bs.tab", handleTabChange);
+  });
 // Initial call to handle the default active tab
 handleTabChange();
 

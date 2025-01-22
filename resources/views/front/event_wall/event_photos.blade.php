@@ -8,7 +8,7 @@
 
                 <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
-            <div class="col-xl-6 col-lg-8">
+            <div class="col-xl-9 col-lg-8">
                 <div class="main-content-center">
                     <!-- ===event-breadcrumb-wrp-start=== -->
                     <div class="event-breadcrumb-wrp">
