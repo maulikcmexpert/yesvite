@@ -3537,18 +3537,18 @@ async function updateUnreadMessageBadge(conversationId = null) {
     console.log("updateUnreadMessageBadge");
     const totalUnreadCount = await getTotalUnreadMessageCount();
     console.log(totalUnreadCount);
+
     const badgeEle = document.querySelectorAll(".badge .g-badge");
-    console.log(badgeEle);
+    console.log(badgeEle); // Log the elements for debugging
 
+    // Loop through each badge element
     badgeEle.forEach((ele) => {
+        // Check if the totalUnreadCount is greater than 0
         if (parseInt(totalUnreadCount) > 0) {
-            $(ele).show();
-            $(ele).text(totalUnreadCount);
-            // console.log(".conversation-"+conversationId);
-
-            // $(".conversation-"+conversationId).addClass('active');
+            $(ele).show(); // Show the badge
+            $(ele).text(totalUnreadCount); // Update its text content with the unread count
         } else {
-            $(ele).hide();
+            $(ele).hide(); // Hide the badge if no unread count
         }
     });
 
