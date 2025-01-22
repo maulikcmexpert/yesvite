@@ -1818,7 +1818,7 @@ class EventController extends BaseController
             ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
-            })
+            })  
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
