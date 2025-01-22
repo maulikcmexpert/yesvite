@@ -22,6 +22,10 @@ var final_dataId = "";
 var final_profile_or_text ="" ;
 var final_prefer_by="";
 var final_initial="";
+
+var limityesvitesc=10;
+var offsetyesvitec=0;
+
 eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
 eventData.step = $("#step").val();
@@ -5667,6 +5671,8 @@ var limityesvite=10;
 var offsetyesvite=0;
 
 var NoMoreDataYesviteAll=false;
+var NogroupDataYesviteAll=false;
+
 $("#YesviteUserAll").on("scroll", function () {
     // console.log(busyyesvite);
     
@@ -5674,7 +5680,6 @@ $("#YesviteUserAll").on("scroll", function () {
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-    console.log({scrollTop,elementHeight,scrollHeight});
         if (scrollTop + elementHeight >= scrollHeight-2) {
             busyyesvite = true;
             offsetyesvite += limityesvite;
@@ -5726,21 +5731,22 @@ $('#YesviteUserAll').scroll(function () {
     //     }, 1000);
     // }
 });
-var limityesvitesc=10;
-var offsetyesvitec=0;
+
 $('#groupUsers').scroll(function () {
  
     var scrollTop = $(this).scrollTop(); // Current scroll position
     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
     var elementHeight = $(this).height(); // Visible height of the element=
     // Check if the user has scrolled to the bottom
-    if (scrollTop + elementHeight >= scrollHeight-2) {
+    if (scrollTop + elementHeight >= scrollHeight-1) {
         busyyesvite = true;
-        offsetyesvitec = limityesvitesc + offsetyesvitec;
+        offsetyesvite= limityesvite + offsetyesvite;
         
         $('#loader').css('display','block');
         setTimeout(function () {
-            displayRecords(limityesvitesc, offsetyesvitec,'group',null,null,1);
+            if(NogroupDataYesviteAll==false ){
+            displayRecords(limityesvite, offsetyesvite,'group',null,null,1);
+            }
         }, 1000);
     }
 });
@@ -5784,7 +5790,13 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             
                return;
             }
-
+            if(html=="" && groupscroll==1){
+                // $("#YesviteUserAll").html('No data found');
+               NogroupDataYesviteAll=true;
+               $('#loader').css('display','none');
+            
+               return;
+            }
             if(html==""){
                 // $("#YesviteUserAll").html('No data found');
                NoMoreDataYesviteAll=true;
@@ -5792,6 +5804,7 @@ function displayRecords(lim, off,type,search = null,alluserscroll=null,groupscro
             
                return;
             }
+           
             if(type=="all"){
                 if(search != null){
                     $("#YesviteUserAll").html(html);
