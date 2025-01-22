@@ -5876,7 +5876,7 @@ function loadSearchUser(search_name) {
 
 $(document).on("click", ".add_new_group", function () {
     var group_name = $("#new_group_name").val();
-
+    NogroupData=false;
     if (group_name == "") {
         $("#group_name_error")
             .css("display", "block")
