@@ -6,6 +6,7 @@
 <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.png')}}">
 <!-- custom-style -->
 <link href="{{asset('assets/front/css/style.css')}}" rel="stylesheet">
+<link href="{{asset('assets/front/css/transactionhistory.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('assets/front/css/new_css/bootstrap.min.css')}}" />
 
 {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}

@@ -11,27 +11,14 @@ use App\Models\{
     UserSubscription,
 };
 
-class PaymentController extends Controller
+class PaymentController extends BaseController
 {
-    protected function getPrices()
-    {
-        return [
-            '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15],
-            '30' => ['priceId' => 'price_1QjcKZEunmtSe18EC967NkmQ', 'coins' => 30],
-            '50' => ['priceId' => 'price_1QjcKZEunmtSe18EDqd3hc04', 'coins' => 50],
-            '100' => ['priceId' => 'price_1QjcKZEunmtSe18EWVn3qgKG', 'coins' => 100],
-            '200' => ['priceId' => 'price_1QjcKZEunmtSe18EKDO6nALE', 'coins' => 200],
-            '500' => ['priceId' => 'price_1QjcKZEunmtSe18EjIk3cpDe', 'coins' => 500],
-            '750' => ['priceId' => 'price_1QjcKZEunmtSe18El3iZy6nK', 'coins' => 750],
-            '1000' => ['priceId' => 'price_1QjcKZEunmtSe18EAzOBdf4p', 'coins' => 1000],
-        ];
-    }
+
 
     // Method to show the checkout page
     public function showCheckout()
     {
-        $prices = $this->getPrices();
-        return view('checkout', ['prices' => $prices, 'stripePublicKey' => config('services.stripe.public')]);
+        return view('checkout', ['stripePublicKey' => config('services.stripe.public')]);
     }
 
     // Method to get coins for a given priceId

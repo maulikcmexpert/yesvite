@@ -1535,6 +1535,18 @@
             </div> -->
         </div>
     </section>
+
+     <!-- ====== cookies ====== -->
+     <div class="cookies-track">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center gap-3 align-items-start">
+                <p>We use third-party cookies and tracking technologies that collect information about your use of the
+                    site. These third parties may use your information for their own purpose, as described in our <a
+                        href="#">Privacy Policy</a></p>
+                <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+    </div>
     @push('scripts')
     <script>
         document.querySelectorAll('.collection-menu').forEach((button) => {
@@ -1543,6 +1555,19 @@
             });
         });
 
+        $(document).ready(function () {
+            const $cookiesBox = $('.cookies-track');
 
+            if (!localStorage.getItem('cookiesBoxDismissed')) {
+                setTimeout(() => {
+                    $cookiesBox.addClass('active');
+                }, 500);
+            }
+
+            $('.close-btn').on('click', function () {
+                $cookiesBox.removeClass('active');
+                localStorage.setItem('cookiesBoxDismissed', 'true');
+            });
+        });
     </script>
     @endpush
