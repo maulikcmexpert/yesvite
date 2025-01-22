@@ -7460,9 +7460,9 @@ $(document).on("click", ".delete_silder", function(e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
     eventData.is_update_event = '0';
-    savePage1Data(1)
-    savePage3Data(1)
-    savePage4Data(1)
+    savePage1Data()
+    savePage3Data()
+    savePage4Data()
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
     console.log(data);
