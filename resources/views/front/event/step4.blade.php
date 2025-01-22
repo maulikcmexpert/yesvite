@@ -358,7 +358,7 @@
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button r" id="button-1">
-                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" {{(isset($eventDetail['podluck'])&&$eventDetail['event_setting']['podluck']=="1") ? "checked":""}} />
+                                                    <input type="checkbox" id="potluck" name="potluck" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['podluck']=="1") ? "checked":""}} />
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
