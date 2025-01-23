@@ -1619,7 +1619,7 @@ $js=['event_wall','post_like_comment'];
 
 
         $parentCommentId =  $request['parent_comment_id'];
-        $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId);
+        $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId) ?? "";
 
         $event_post_comment = new EventPostComment;
         $event_post_comment->event_id = $request['event_id'];
