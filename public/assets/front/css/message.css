@@ -1842,6 +1842,14 @@ ul.chat-list li.setpink{
     }
 } */
 
+
+@media only screen and (max-width: 767px) {
+    .chat-area .chatbox{
+        display: none;
+    }
+}
+
+
 @media only screen and (max-width:763px) {
     .chat-area .chat-header .dropdown-menu.show {
         transform: translate3d(0px, 43px, 0px) !important;
