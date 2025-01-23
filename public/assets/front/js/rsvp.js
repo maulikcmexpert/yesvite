@@ -176,7 +176,7 @@ $(document).ready(function () {
             const eventDate = $("#eventDate").val();
             const eventEndDate = $("#eventEndDate").val();
             const eventTime = $("#eventTime").val();
-            const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
+            const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val(); // Default value
             const eventName = $("#eventName").val();
 
             if (!eventDate || !eventTime) {

@@ -1214,9 +1214,7 @@ if ($("#isGroup").val() == true) {
 } else {
     updateChat($(".selected_message").val());
 }
-setTimeout(function () {
-    firstTime = false;
-}, 4500);
+
 $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
@@ -3609,6 +3607,14 @@ $(document).ready(function () {
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    )
+        .toArray()
+        .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const msgList = $(this).parent().parent();
     if (msgList.hasClass("pinned")) {
         $(".multi-pin").attr("changeWith", "0");
@@ -3645,6 +3651,14 @@ $(document).on("change", "input[name='checked_conversation[]']", function () {
     $(".check-counter").text(checkedCount);
 });
 $(".multi-pin").click(async function () {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    )
+        .toArray()
+        .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const pinChange = $(this).attr("changeWith");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
@@ -3654,14 +3668,7 @@ $(".multi-pin").click(async function () {
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
     }
-    const checkedConversations = $(
-        "input[name='checked_conversation[]']:checked"
-    )
-        .toArray()
-        .reverse();
-    if (checkedConversations.length <= 0) {
-        return;
-    }
+
     const promises = [];
     checkedConversations.forEach(function (element) {
         const conversationId = $(element).val();
@@ -4339,3 +4346,32 @@ async function findOrCreateSingleConversation(
 
     return newConversationId;
 }
+setTimeout(function () {
+    firstTime = false;
+}, 4500);
+
+function applyStyles() {
+    if ($(window).width() <= 767) {
+        $("#backtomsg-btn").show();
+
+        $(".chatbox").css("display", "none");
+        $(document).on("click", ".chat-data", function () {
+            $(".chatbox").css("display", "block");
+            $(".chat-lists").css("display", "none");
+        });
+        $(document).on("click", "#backtomsg-btn", function () {
+            $(".chatbox").css("display", "none");
+            $(".chat-lists").css("display", "block");
+        });
+        // $(document).on('click','.chat-data',function(){
+        //   $(".chatbox").css("display", "block");
+        //   $(".chat-lists").css("display", "none");
+        // })
+    } else {
+        $("#backtomsg-btn").hide();
+        // $(".chatbox").css("display", "block");
+    }
+}
+
+// Apply styles on page load
+applyStyles();
