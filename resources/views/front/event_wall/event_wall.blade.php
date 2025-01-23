@@ -801,15 +801,33 @@
 
                                         <div class="posts-card-like-commnet-wrp">
                                             <div class="posts-card-like-comment-left">
-                                                <ul>
-                                                    <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                            alt="" loading="lazy"></li>
-                                                    <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                            alt="" loading="lazy"></li>
-                                                    <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                            alt="" loading="lazy"></li>
-                                                    <p>5k Likes</p>
-                                                </ul>
+                                                <ul type="button" data-bs-toggle="modal"
+                                                data-bs-target="#reaction-modal-{{ $poll['event_post_id'] }}">
+
+                                                <!-- Smiley Emoji -->
+                                                @if ($poll['self_reaction'] == '\u{1F604}')
+                                                    <li>
+                                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                            alt="Smiley Emoji">
+                                                    </li>
+
+                                                    <!-- Eye Heart Emoji -->
+                                                @elseif ($poll['self_reaction'] == '\u{1F60D}')
+                                                    <li>
+                                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                            alt="Eye Heart Emoji">
+                                                    </li>
+
+                                                    <!-- Heart Emoji -->
+                                                @elseif ($poll['self_reaction'] == '\u{2764}')
+                                                    <li>
+                                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                            alt="Heart Emoji">
+                                                    </li>
+                                                @endif
+                                                <p id="likeCount_{{ $poll['event_post_id'] }}">
+                                                    {{ $poll['total_likes'] }} Likes</p>
+                                            </ul>
                                                 <h6>354 Comments</h6>
                                             </div>
                                             <div class="posts-card-like-comment-right">
@@ -1933,6 +1951,609 @@
             </div>
         </div>
     @endforeach
+    @foreach ($pollsData as $post)
+    {{-- {{dd($post);}} --}}
+    <div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal-{{ $post['event_post_id'] }}"
+        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="reactions-info-main event-center-tabs-main">
+                        <!-- ===tabs=== -->
+                        <nav>
+                            <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab-{{ $post['event_post_id'] }}"
+                                role="tablist">
+                                <!-- All Reactions Tab -->
+                                <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['event_post_id'] }}"
+                                    data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['event_post_id'] }}"
+                                    type="button" role="tab" aria-controls="nav-all-reaction"
+                                    aria-selected="true">
+                                    All {{ count($post['reactionList']) }}
+                                </button>
+
+                                <!-- Individual Reaction Tabs -->
+                                @php
+                                    // Define icons for reactions
+                                    $reactionIcons = [
+                                        "\\u{2764}" => asset('assets/front/img/heart-emoji.png'), // ❤️
+                                        "\\u{1F44D}" => asset('assets/front/img/thumb-icon.png'), // 👍
+                                        "\\u{1F604}" => asset('assets/front/img/smily-emoji.png'), // 😄
+                                        "\\u{1F60D}" => asset('assets/front/img/eye-heart-emoji.png'), // 😍
+                                        "\\u{1F44F}" => asset('assets/front/img/clap-icon.png'), // 👏
+                                    ];
+                                @endphp
+
+                                @foreach (array_count_values($post['reactionList']) as $reaction => $count)
+                                    <button class="nav-link"
+                                        id="nav-{{ $reaction }}-reaction-tab-{{ $post['event_post_id'] }}"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#nav-{{ $reaction }}-reaction-{{ $post['event_post_id'] }}"
+                                        type="button" role="tab"
+                                        aria-controls="nav-{{ $reaction }}-reaction" aria-selected="false">
+                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                            alt="{{ $reaction }}" loading="lazy">
+                                        {{ $count }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        </nav>
+
+                        <!-- ===tabs=== -->
+
+                        <!-- ===Tab-content=== -->
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
+                                aria-labelledby="nav-all-reaction-tab">
+                                <ul>
+                                    @php
+                                        // Define reaction icons mapping
+                                        $reactionIcons = [
+                                            "\\u{2764}" => asset('assets/front/img/heart-emoji.png'), // ❤️
+                                            "\\u{1F44D}" => asset('assets/front/img/thumb-icon.png'), // 👍
+                                            "\\u{1F604}" => asset('assets/front/img/smily-emoji.png'), // 😄
+                                            "\\u{1F60D}" => asset('assets/front/img/eye-heart-emoji.png'), // 😍
+                                            "\\u{1F44F}" => asset('assets/front/img/clap-icon.png'), // 👏
+                                        ];
+                                    @endphp
+                                    @foreach ($post['reactionList'] as $reaction)
+                                        <li class="reaction-info-wrp">
+                                            <div class="commented-user-head">
+                                                <!-- User Profile Section -->
+                                                <div class="commented-user-profile">
+                                                    <div class="commented-user-profile-img">
+                                                        @if ($users->profile != '')
+                                                        <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                                            alt="" loading="lazy">
+                                                    @else
+                                                        @php
+
+                                                            // $parts = explode(" ", $name);
+                                                            $nameParts = explode(' ', $users->firstname);
+                                                            $lastname = explode(' ', $users->lastname);
+                                                            $firstInitial = isset($nameParts[0][0])
+                                                                ? strtoupper($nameParts[0][0])
+                                                                : '';
+                                                            $secondInitial = isset($lastname[0][0])
+                                                                ? strtoupper($lastname[0][0])
+                                                                : '';
+                                                            $initials = $firstInitial . $secondInitial;
+
+                                                            // Generate a font color class based on the first initial
+                                                            $fontColor = 'fontcolor' . $firstInitial;
+                                                        @endphp
+                                                        <h5 class="{{ $fontColor }}">
+                                                            {{ $initials }}
+                                                        </h5>
+                                                    @endif
+
+
+                                                    </div>
+                                                    <div class="commented-user-profile-content">
+                                                        <h3>{{ $users->firstname }} {{ $users->lastname }}</h3>
+                                                        <p>{{ $users->city }},{{ $users->state }}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Reaction Emoji Section -->
+                                                <div
+                                                    class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                    <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                                        alt="{{ $reaction }}" loading="lazy">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
+                                </ul>
+                            </div>
+
+                            {{-- <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
+                                aria-labelledby="nav-heart-reaction-tab">
+                                <ul>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="" loading="lazy">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img" >
+                                                <img src="./assets/img/heart-emoji.png" alt="" loading="lazy">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="" loading="lazy">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/heart-emoji.png" alt="" loading="lazy">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="" loading="lazy">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/heart-emoji.png" alt="" loading="lazy">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="" loading="lazy">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel"
+                                aria-labelledby="nav-thumb-reaction-tab">
+                                <ul>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/thumb-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/thumb-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/thumb-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/thumb-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/thumb-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel"
+                                aria-labelledby="nav-smily-reaction-tab">
+                                <ul>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/smily-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/smily-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/smily-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/smily-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/smily-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel"
+                                aria-labelledby="nav-eye-heart-reaction-tab">
+                                <ul>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/eye-heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/eye-heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/eye-heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/eye-heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/eye-heart-emoji.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel"
+                                aria-labelledby="nav-clap-reaction-tab">
+                                <ul>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/clap-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/clap-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/clap-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/clap-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="reaction-info-wrp">
+                                        <div class="commented-user-head">
+                                            <div class="commented-user-profile">
+                                                <div class="commented-user-profile-img">
+                                                    <img src="./assets/img/header-profile-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="commented-user-profile-content">
+                                                    <h3>Angel Geidt</h3>
+                                                    <p>New York</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                <img src="./assets/img/clap-icon.png" alt="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> --}}
+                        </div>
+                        <!-- ===Tab-content=== -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cmn-btn reset-btn">Reset</button>
+                    <button type="button" class="cmn-btn">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
     <!-- ========= edit-rsvp ======== -->
     <div class="modal fade cmn-modal" id="editrsvp" tabindex="-1" aria-labelledby="editrsvpLabel"
         aria-hidden="true">
