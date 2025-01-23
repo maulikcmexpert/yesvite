@@ -3,8 +3,7 @@ $(document).ready(function () {
 
     // var page = 1;
   
-
-
+  
     var base_url=$('#base_url').val();
     var busy1 = false;
     var busy2=false;
@@ -17,7 +16,7 @@ $("#product-scroll").on("scroll", function () {
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
-            if (scrollTop + elementHeight >= scrollHeight) {
+            if (scrollTop + elementHeight >= scrollHeight-2) {
                 busy1 = true;
                 offset += limit;
                 var type="yesvite";
@@ -37,7 +36,7 @@ $("#product-scroll-phone").on("scroll", function () {
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
      
-            if (scrollTop + elementHeight >= scrollHeight) {
+            if (scrollTop + elementHeight >= scrollHeight-2) {
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
@@ -177,12 +176,29 @@ $(document).on("keyup", ".search_phone", function () {
                 $("#loader").show();
             },
             success: function (data) {
-                if (data.html == " ") {
-                    $(".no-group-data").css("display","block");
-                    $("#loader").html("No more groups found");
-                    return;
+                console.log(data);
+                // if (data.html == "") {
+                    if (data.status == "0") {
+                        $(".no-group-data").css("display","block");
+                        $("#loader").hide();
+    
+                        return;
+                    }
+                    $(".no-group-data").css("display","none");
+                    // $("#loader").hide();
+                
+
+                    // $(".no-group-data").css("display","block");
+                    // $("#yesviteGroups").html(data);
+                //     return;
+                // }
+                // $(".no-group-data").css("display","none");
+                if(data.search=='1'){
+                    $("#yesviteGroups").html(data.view);
+                }else{
+                    $("#yesviteGroups").append(data.view);
                 }
-                $(".no-group-data").css("display","none");
+
                 $("#loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {

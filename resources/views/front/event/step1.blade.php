@@ -376,7 +376,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn cancel-btn-createEvent"
-                                        data-bs-dismiss="modal" data-url="{{ route('profile') }}">Exit</button>
+                                        data-bs-dismiss="modal" data-url="{{ route('home') }}">Exit</button>
                                     <button type="button" class="btn continue-btn"
                                         data-bs-dismiss="modal">Continue Editing</button>
                                 </div>

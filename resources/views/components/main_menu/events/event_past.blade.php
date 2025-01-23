@@ -75,11 +75,11 @@
                             <li><span>Hosting</span></li>
                         @else
                                 @if($pastEvent['rsvp_status'] == '1')
-                                    <li><span>Guest : </span> RSVP’d - Yes</li>
+                                    <li><span>Guest : </span> RSVP - Yes</li>
                                 @elseif($pastEvent['rsvp_status'] == '2')
-                                    <li><span>Guest : </span> RSVP’d - No</li>
+                                    <li><span>Guest : </span> RSVP - No</li>
                                 @else
-                                    <li><span>Guest : </span> RSVP’d - Pending</li>
+                                    <li><span>Guest : </span> RSVP - Pending</li>
                                 @endif
                         @endif
                     <li><span>{{$pastEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$pastEvent['event_day']}}</span> {{$pastEvent['start_time']}}</li>

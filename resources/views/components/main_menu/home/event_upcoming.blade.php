@@ -39,14 +39,14 @@
               </a>
             <ul class="home-upcoming-events-card-left-detail">
                 @if($events['is_event_owner']==1)
-                    <li><span>Hosting</span> {{$events['event_plan_name']}}</li>
+                    <li><span>Hosting</span></li>
                 @else
                         @if($events['rsvp_status'] == '1')
-                             <li><span>Guest : </span> RSVP’d - Yes</li>
+                             <li><span>Guest : </span> RSVP - Yes</li>
                         @elseif($events['rsvp_status'] == '2')
-                             <li><span>Guest : </span> RSVP’d - No</li>
+                             <li><span>Guest : </span> RSVP - No</li>
                         @else
-                             <li><span>Guest : </span> RSVP’d - Pending</li>
+                             <li><span>Guest : </span> RSVP - Pending</li>
                         @endif
                 @endif
               <li><span>{{$events['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$events['event_day']}}</span> {{$events['start_time']}}</li>

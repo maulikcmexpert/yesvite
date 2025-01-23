@@ -238,7 +238,21 @@ class ContactController extends Controller
                 }
 
                 $yesviteGroups = $query->paginate(10);
-                return view('front.ajax_groups', compact('yesviteGroups'))->render();
+                // return view('front.ajax_groups', compact('yesviteGroups'))->render();
+
+                if($searchGroup!=''){
+                    return response()->json([
+                        'view' => view('front.ajax_groups', compact('yesviteGroups'))->render(),
+                        'search' =>'1',
+                        'status' => '1',
+                    ]);
+                }else{
+                    return response()->json([
+                        'view' => view('front.ajax_groups', compact('yesviteGroups'))->render(),
+                        'status' => '1',
+                    ]);
+                }
+    
             }
             return response()->json(['error' => 'Invalid request'], 400);
         } catch (\Exception $e) {
