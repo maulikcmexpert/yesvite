@@ -978,7 +978,6 @@ function getInvitedCohostList($eventId)
     $invitedUsers = EventInvitedUser::query();
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'1']);
     $result = $invitedUsers->get();
-
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
@@ -1000,6 +999,7 @@ function getInvitedCohostList($eventId)
                 $invitedGuestDetail['rsvp_d']= $guestVal->rsvp_d;  
                 $invitedGuestDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail[] = $invitedGuestDetail;
+                return $eventDetail;
             } elseif ($guestVal->user->app_user == '1') {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
@@ -1019,10 +1019,10 @@ function getInvitedCohostList($eventId)
                 $invitedUserIdDetail['rsvp_d']= $guestVal->rsvp_d;
                 $invitedUserIdDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail[] = $invitedUserIdDetail;
+                return $eventDetail;
             }
         }
     }
-        return $eventDetail;
 }
 function getDeferentBetweenTime($time1, $time2)
 {
