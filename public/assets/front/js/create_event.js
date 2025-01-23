@@ -5520,7 +5520,7 @@ $(document).on("click", ".final_checkout", function () {
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
     console.log(eventData.slider_images);
-    if(eventData.slider_images!=undefined||eventData.slider_images!=""){
+    if(eventData.slider_images!=undefined && eventData.slider_images!=""){
         eventData.slider_images.forEach((image) => {
             const imageHtml = `
                 <div class="item">
