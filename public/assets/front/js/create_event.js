@@ -5633,6 +5633,7 @@ $(document).on("click", ".final_checkout", function () {
         loop: true,
         margin: 10,
         nav: true,
+        dots: false,
         responsive: {
           0: {
             items: 1
@@ -5645,22 +5646,6 @@ $(document).on("click", ".final_checkout", function () {
           }
         }
       });
-    // $('.event_images_slider').owlCarousel({
-    //     loop:true,
-    //     margin:10,
-    //     nav:true,
-    //     responsive:{
-    //         0:{
-    //             items:1
-    //         },
-    //         600:{
-    //             items:3
-    //         },
-    //         1000:{
-    //             items:5
-    //         }
-    //     }
-    // })
    
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");
