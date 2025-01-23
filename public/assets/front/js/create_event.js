@@ -138,6 +138,8 @@ var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
+$('#activity-start-time').val('');
+$('#activity-end-time').val('');
 $(document).ready(function () {
     function getTimeZoneAbbreviation() {
         const date = new Date();
