@@ -1092,7 +1092,7 @@ class EventController extends BaseController
     {
         $userId = $request->input('user_id');
         $is_contact = $request->input('is_contact');
-        // dd($is_contact);
+        
         if ($is_contact == '0') {
             $user = User::where('id', $userId)->first();
             // $userimage = asset('storage/profile/' . $user->profile);
@@ -1182,6 +1182,7 @@ class EventController extends BaseController
             $isChecked = $request->input('is_checked');
             // $userIds = session()->get('user_ids', []);
             $userIds = session()->get('contact_ids', []);
+            
 
 
             if (isset($useremail) && $useremail != "") {
@@ -1217,7 +1218,10 @@ class EventController extends BaseController
                 $userIds[] = $userEntry;
                 session()->put('contact_ids', $userIds);
                 Session::save();
+               
                 $user_list = Session::get('contact_ids');
+
+                
 
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
