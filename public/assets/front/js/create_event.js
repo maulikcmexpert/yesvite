@@ -1401,8 +1401,10 @@ function add_user_counter() {
 
 function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
+    var Alreadyguest = $(".users-data.invited_users").length;
+   
     $("#event_guest_count").text(total_guest + " Guests");
-    $(".invite-count").text(total_guest);
+    $(".invite-count").text(total_guest+Alreadyguest);
     console.log(total_guest);
     console.log(max_guest);
 
@@ -1454,8 +1456,9 @@ function delete_invited_user(userId, is_contact = "0") {
                 $(".user_id_tel-" + userId).remove();
             }
             var total_guest = $(".users-data.invited_user").length;
+            var alreadyguest = $(".users-data.invited_users").length;
             $("#event_guest_count").text(total_guest + " Guests");
-            $(".invite-count").text(total_guest);
+            $(".invite-count").text(total_guest+alreadyguest);
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
@@ -1585,8 +1588,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 currentInviteCount--;
                 $("#currentInviteCount").val(currentInviteCount);
                 var total_guest = $(".users-data.invited_user").length;
+                var alreadyguest = $(".users-data.invited_users").length;
                 $("#event_guest_count").text(total_guest + " Guests");
-                $(".invite-count").text(total_guest);
+                $(".invite-count").text(total_guest+0);
 
                 var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
@@ -7620,10 +7624,43 @@ $(document).on("click", ".edit_checkout", function (e) {
 });
 
 
-$(document).on('click','.edit_design_tem',function(){
-
-    if(eventData.slider_images!=undefined && eventData.slider_images!=""){
-        $(".design-sidebar").removeClass("d-none");
-        $(".design-sidebar_7").addClass("d-none");
+$(document).on("click", ".design-sidebar-action", function() {
+    let designId = $(this).attr("design-id");
+    if (designId) {
+        if (designId == "6") {
+            
+            var imgSrc1 = $(".photo-slider-1").attr("src");
+            var imgSrc2 = $(".photo-slider-2").attr("src");
+            var imgSrc3 = $(".photo-slider-3").attr("src");
+            if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_7").removeClass("d-none");
+                $("#sidebar").addClass("design-sidebar_7");
+                $(".close-btn").attr("data-id", "design-sidebar_7");
+                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3']; // Slider class names
+                const sliderImages = eventData.slider_images; // Array of image objects
+                console.log(sliderImages);
+                
+                photoSliders.forEach((sliderClass, index) => {
+                    // Select the element by the class name
+                    const sliderElement = $(`.${sliderClass}`);
+                    if (sliderElement.length && sliderImages[index]) {
+                        // Set the `src` attribute dynamically
+                        sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                    }
+                });
+                
+            } else {
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_" + designId).removeClass("d-none");
+                $("#sidebar").addClass("design-sidebar_" + designId);
+                $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+            }
+        } else {
+            $(".design-sidebar").addClass("d-none");
+            $(".design-sidebar_" + designId).removeClass("d-none");
+            $("#sidebar").addClass("design-sidebar_" + designId);
+            $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+        }
     }
 });
