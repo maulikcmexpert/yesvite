@@ -3607,6 +3607,14 @@ $(document).ready(function () {
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    )
+        .toArray()
+        .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const msgList = $(this).parent().parent();
     if (msgList.hasClass("pinned")) {
         $(".multi-pin").attr("changeWith", "0");
