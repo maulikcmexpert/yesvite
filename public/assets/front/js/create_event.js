@@ -7636,6 +7636,8 @@ $(document).on("click", ".design-sidebar-action", function() {
                 $('.uploaded-img-card-edit').css('display','none');
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
+                $('.update-slider-image').css('display','block');
+                $('.save-slider-image').css('display','none');
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
                 const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3']; // Slider class names

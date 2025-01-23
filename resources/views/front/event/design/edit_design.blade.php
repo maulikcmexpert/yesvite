@@ -1502,7 +1502,10 @@
 
             <div class="footer-buttons">
                 <button class="cmn-btn save-slider-image">Save</button>
+                <button class="cmn-btn update-slider-image" style="display:none;">Save</button>
+
             </div> 
+            
         </div>
     </div>
 </main>
