@@ -9,6 +9,7 @@ $counter++;
 if($counter > 4){
 break;
 }
+$isDisplaynone  = (isset($guest_user['isAlready']) && $guest_user['isAlready']=="1")?'display:none':'';
 @endphp
 @if($guest_user['prefer_by']=="email")
 <div class="guest-contact invited_user user_id-{{$guest_user['id']}} responsive_invite_user" data-id={{$guest_user['id']}} id="">
@@ -25,7 +26,7 @@ break;
         @endphp
         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
         @endif
-        <a href="#" class="close" id="delete_invited_user" data-id="user-{{$guest_user['id']}}" data-userid="{{$guest_user['id']}}">
+        <a href="#" class="close" id="delete_invited_user" data-id="user-{{$guest_user['id']}}" data-userid="{{$guest_user['id']}}" style="{{$isDisplaynone}}">
             <svg width="19" height="18" viewBox="0 0 19 18"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.8999" y="1" width="16" height="16"
@@ -56,7 +57,7 @@ break;
         @endphp
         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
         @endif
-        <a href="#" class="close" id="delete_invited_user_tel" data-id="user_tel-{{$guest_user['id']}}" data-userid="{{$guest_user['id']}}">
+        <a href="#" class="close" id="delete_invited_user_tel" data-id="user_tel-{{$guest_user['id']}}" data-userid="{{$guest_user['id']}}" style="{{$isDisplaynone}}">
             <svg width="19" height="18" viewBox="0 0 19 18"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1.8999" y="1" width="16" height="16"
