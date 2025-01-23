@@ -5629,7 +5629,10 @@ $(document).on("click", ".final_checkout", function () {
                     });
     }
    
-    var swiper = new Swiper(".event_images_slider", {});
+    var swiper = new Swiper(".event_images_slider", {
+        slidesPerView: 1,
+        loop: false,
+    });
 
 // if (!$('.event_images_slider').data('owl.carousel')) { 
 
