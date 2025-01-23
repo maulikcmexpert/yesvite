@@ -3608,26 +3608,15 @@ $(document).ready(function () {
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
     event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
     const msgList = $(this).parent().parent();
-    if (!$(this).prop("checked")) {
-        if (msgList.hasClass("pinned")) {
-            $(".multi-pin").attr("changeWith", "1");
-            $(".pin-icn").removeClass("d-none");
-            $(".unpin-icn").addClass("d-none");
-        } else {
-            $(".multi-pin").attr("changeWith", "0");
-            $(".pin-icn").addClass("d-none");
-            $(".unpin-icn").removeClass("d-none");
-        }
+
+    if (msgList.hasClass("pinned") && $(this).prop("checked")) {
+        $(".multi-pin").attr("changeWith", "0");
+        $(".pin-icn").addClass("d-none");
+        $(".unpin-icn").removeClass("d-none");
     } else {
-        if (msgList.hasClass("pinned")) {
-            $(".multi-pin").attr("changeWith", "0");
-            $(".pin-icn").addClass("d-none");
-            $(".unpin-icn").removeClass("d-none");
-        } else {
-            $(".multi-pin").attr("changeWith", "1");
-            $(".pin-icn").removeClass("d-none");
-            $(".unpin-icn").addClass("d-none");
-        }
+        $(".multi-pin").attr("changeWith", "1");
+        $(".pin-icn").removeClass("d-none");
+        $(".unpin-icn").addClass("d-none");
     }
 });
 $(".bulk-edit").click(function () {
