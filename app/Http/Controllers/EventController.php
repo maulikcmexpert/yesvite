@@ -2441,6 +2441,7 @@ class EventController extends BaseController
         $imageSources = $request->imageSources;
         $savedFiles = [];
         $i = 0;
+        // dd($imageSources);
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
                 list($type, $data) = explode(';', $imageSource['src']);
