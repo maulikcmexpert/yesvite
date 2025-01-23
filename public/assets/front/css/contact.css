@@ -749,6 +749,14 @@ ul.listing li span {
     color: #0F172A !important;
 }
 
+#product-scroll-groups .users-data{
+    border: 1px solid var(--borderColor) !important;
+    border-radius: 16px !important;
+    padding: 10px 16px 10px 16px !important;
+    display: flex;
+    align-items: center;
+}
+
 
 
 /* ======= Responsive ======= */

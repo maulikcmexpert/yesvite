@@ -53,7 +53,8 @@
                                         :wallData="$wallData" />
                                     <x-event_wall.wall_crate_poll_photo :users="$users" />
                                     @foreach ($postList as $post)
-                                        <div class="event-posts-main-wrp common-div-wrp hidden_post" data-post-id="{{$post['id']}}">
+                                        <div class="event-posts-main-wrp common-div-wrp hidden_post"
+                                            data-post-id="{{ $post['id'] }}">
 
                                             <div class="posts-card-wrp">
                                                 <div class="posts-card-head">
@@ -96,8 +97,13 @@
                                                                     class="fa-solid fa-ellipsis"></i></button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <button class="dropdown-item hide-post-btn postControlButton"
-                                                                        id="hidePostButton " data-event-id="{{$event}}" data-event-post-id="{{$post['id']}}" data-user-id="{{$login_user_id}}"  data-post-control="hide_post">
+                                                                    <button
+                                                                        class="dropdown-item hide-post-btn postControlButton"
+                                                                        id="hidePostButton "
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-id="{{ $post['id'] }}"
+                                                                        data-user-id="{{ $login_user_id }}"
+                                                                        data-post-control="hide_post">
                                                                         <svg id="icon" class="hide-post-svg-icon"
                                                                             viewBox="0 0 20 20" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -112,10 +118,16 @@
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button class="dropdown-item mute-post-btn postControlButton"
-                                                                        id="mutePostButton" data-event-id="{{$event}}" data-event-post-id="{{$post['id']}}" data-user-id="{{$login_user_id}}"  data-post-control="mute">
-                                                                        <svg id="muteIcon" class="muteIcon" style="display: block;"
-                                                                            viewBox="0 0 20 20" fill="none"
+                                                                    <button
+                                                                        class="dropdown-item mute-post-btn postControlButton"
+                                                                        id="mutePostButton"
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-id="{{ $post['id'] }}"
+                                                                        data-user-id="{{ $login_user_id }}"
+                                                                        data-post-control="mute">
+                                                                        <svg id="muteIcon" class="muteIcon"
+                                                                            style="display: block;" viewBox="0 0 20 20"
+                                                                            fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
                                                                                 d="M5.83464 14.7916H4.16797C2.1513 14.7916 1.04297 13.6833 1.04297 11.6666V8.33331C1.04297 6.31664 2.1513 5.20831 4.16797 5.20831H5.35964C5.5513 5.20831 5.74297 5.14997 5.90964 5.04997L8.34297 3.52497C9.55964 2.76664 10.743 2.62497 11.6763 3.14164C12.6096 3.65831 13.118 4.73331 13.118 6.17497V6.97497C13.118 7.31664 12.8346 7.59997 12.493 7.59997C12.1513 7.59997 11.868 7.31664 11.868 6.97497V6.17497C11.868 5.22497 11.5763 4.51664 11.068 4.24164C10.5596 3.95831 9.80964 4.08331 9.0013 4.59164L6.56797 6.10831C6.20964 6.34164 5.78464 6.45831 5.35964 6.45831H4.16797C2.8513 6.45831 2.29297 7.01664 2.29297 8.33331V11.6666C2.29297 12.9833 2.8513 13.5416 4.16797 13.5416H5.83464C6.1763 13.5416 6.45964 13.825 6.45964 14.1666C6.45964 14.5083 6.1763 14.7916 5.83464 14.7916Z"
@@ -133,16 +145,35 @@
                                                                                 d="M1.66589 18.9583C1.50755 18.9583 1.34922 18.9 1.22422 18.775C0.982552 18.5333 0.982552 18.1333 1.22422 17.8916L17.8909 1.22495C18.1326 0.983285 18.5326 0.983285 18.7742 1.22495C19.0159 1.46662 19.0159 1.86662 18.7742 2.10828L2.10755 18.775C1.98255 18.9 1.82422 18.9583 1.66589 18.9583Z"
                                                                                 fill="#94A3B8" />
                                                                         </svg>
-                                                                        <svg id="unmuteIcon" class="unmute-icon" style="display: none;" width="29" height="21" viewBox="0 0 29 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M7.20731 15.7494C4.47457 15.7494 2.9046 15.1641 2.00923 14.3078C1.12413 13.4613 0.75 12.2067 0.75 10.5015C0.75 8.84742 1.22523 7.57593 2.18617 6.70634C3.15977 5.82528 4.75144 5.24768 7.20732 5.24768C8.60469 5.24768 9.64267 4.93873 10.4595 4.43239C11.2651 3.93308 11.7983 3.27536 12.2278 2.69506C12.3136 2.57923 12.3937 2.46892 12.4701 2.36383C12.7993 1.9111 13.0581 1.55507 13.3877 1.27035C13.7441 0.962547 14.1797 0.749998 14.8902 0.749998C15.6144 0.749998 16.1755 0.971438 16.6345 1.36555C17.1081 1.77229 17.5128 2.39853 17.8375 3.26305C18.4922 5.00592 18.75 7.51847 18.75 10.5015C18.75 13.4845 18.4922 15.9963 17.8376 17.7383C17.5129 18.6024 17.1082 19.2283 16.6346 19.6348C16.1757 20.0287 15.6146 20.25 14.8902 20.25C14.1828 20.25 13.7911 20.0401 13.4836 19.7507C13.206 19.4894 12.9995 19.1758 12.7298 18.7663C12.6405 18.6308 12.5444 18.4848 12.4365 18.3267C12.0307 17.7324 11.5088 17.0641 10.6659 16.5592C9.81957 16.0521 8.71825 15.7494 7.20731 15.7494Z" stroke="#94A3B8" stroke-width="1.5"/>
-                                                                            <path d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                            <path d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                            </svg>
+                                                                        <svg id="unmuteIcon" class="unmute-icon"
+                                                                            style="display: none;" width="29"
+                                                                            height="21" viewBox="0 0 29 21"
+                                                                            fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M7.20731 15.7494C4.47457 15.7494 2.9046 15.1641 2.00923 14.3078C1.12413 13.4613 0.75 12.2067 0.75 10.5015C0.75 8.84742 1.22523 7.57593 2.18617 6.70634C3.15977 5.82528 4.75144 5.24768 7.20732 5.24768C8.60469 5.24768 9.64267 4.93873 10.4595 4.43239C11.2651 3.93308 11.7983 3.27536 12.2278 2.69506C12.3136 2.57923 12.3937 2.46892 12.4701 2.36383C12.7993 1.9111 13.0581 1.55507 13.3877 1.27035C13.7441 0.962547 14.1797 0.749998 14.8902 0.749998C15.6144 0.749998 16.1755 0.971438 16.6345 1.36555C17.1081 1.77229 17.5128 2.39853 17.8375 3.26305C18.4922 5.00592 18.75 7.51847 18.75 10.5015C18.75 13.4845 18.4922 15.9963 17.8376 17.7383C17.5129 18.6024 17.1082 19.2283 16.6346 19.6348C16.1757 20.0287 15.6146 20.25 14.8902 20.25C14.1828 20.25 13.7911 20.0401 13.4836 19.7507C13.206 19.4894 12.9995 19.1758 12.7298 18.7663C12.6405 18.6308 12.5444 18.4848 12.4365 18.3267C12.0307 17.7324 11.5088 17.0641 10.6659 16.5592C9.81957 16.0521 8.71825 15.7494 7.20731 15.7494Z"
+                                                                                stroke="#94A3B8" stroke-width="1.5" />
+                                                                            <path
+                                                                                d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                            <path
+                                                                                d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                        </svg>
                                                                         Mute
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button class="dropdown-item postControlButton" href="#" data-event-id="{{$event}}" data-event-post-id="{{$post['id']}}" data-user-id="{{$login_user_id}}"  data-post-control="report" >
+                                                                    <button class="dropdown-item postControlButton"
+                                                                        href="#"
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-id="{{ $post['id'] }}"
+                                                                        data-user-id="{{ $login_user_id }}"
+                                                                        data-post-control="report">
                                                                         <svg viewBox="0 0 20 20" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
@@ -183,12 +214,13 @@
                                                     </h3>
                                                 </div>
                                                 {{-- {{  dd($post['post_image'])}} --}}
-                                                @if (!empty($post['post_image']))
-                                                    @foreach ($post['post_image'] as $image)
-                                                        <div class="posts-card-show-post-wrp">
-                                                            <div class="swiper posts-card-post">
-                                                                <div class="swiper-wrapper">
-                                                                    <!-- Slides -->
+
+                                                <div class="posts-card-show-post-wrp">
+                                                    <div class="swiper posts-card-post">
+                                                        <div class="swiper-wrapper">
+                                                            <!-- Slides -->
+                                                            @if (!empty($post['post_image']))
+                                                                @foreach ($post['post_image'] as $image)
                                                                     <div class="swiper-slide">
                                                                         <div class="posts-card-show-post-img">
                                                                             <img src="{{ $image['media_url'] }}"
@@ -207,296 +239,329 @@
                                                                             alt=""></button>
                                                                 </div>
                                                                 </div> --}}
+                                                                @endforeach
+                                                            @endif
 
-
-                                                            </div>
-
-                                                            <!-- Custom Pagination -->
-                                                            <div class="custom-pagination"></div>
-                                                            <div class="custom-dots-container"></div>
                                                         </div>
-                                            </div>
-                                    @endforeach
-                                    @endif
 
-                                    <div class="posts-card-like-commnet-wrp">
-                                        <div class="posts-card-like-comment-left">
-                                            <ul type="button" data-bs-toggle="modal"
-                                                data-bs-target="#reaction-modal-{{ $post['id'] }}">
-
-                                                <!-- Smiley Emoji -->
-                                                @if ($post['self_reaction'] == '\u{1F604}')
-                                                    <li>
-                                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                            alt="Smiley Emoji">
-                                                    </li>
-
-                                                    <!-- Eye Heart Emoji -->
-                                                @elseif ($post['self_reaction'] == '\u{1F60D}')
-                                                    <li>
-                                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                            alt="Eye Heart Emoji">
-                                                    </li>
-
-                                                    <!-- Heart Emoji -->
-                                                @elseif ($post['self_reaction'] == '\u{2764}')
-                                                    <li>
-                                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                            alt="Heart Emoji">
-                                                    </li>
-                                                @endif
-                                                <p id="likeCount_{{ $post['id'] }}">
-                                                    {{ $post['total_likes'] }} Likes</p>
-                                            </ul>
-                                            <h6>{{ $post['total_comment'] }} Comments</h6>
-                                        </div>
-                                        <div class="posts-card-like-comment-right emoji_display_like">
-                                            <button class="posts-card-like-btn" id="likeButton"
-                                                data-event-id="{{ $event }}"
-                                                data-event-post-id="{{ $post['id'] }} "
-                                                data-user-id="{{ $login_user_id }}">
-                                                @if ($post['self_reaction'] == '\u{2764}')
-                                                    <i class="fa-solid fa-heart" id="show_Emoji"></i>
-                                                @elseif($post['self_reaction'] == '\u{1F494}')
-                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                @elseif($post['self_reaction'] == '\u{1F44D}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                            loading="lazy" alt="Thumb Emoji" class="emoji"
-                                                            data-emoji="👍" data-unicode="\\u{1F44D}"></i>
-                                                @elseif($post['self_reaction'] == '\u{1F604}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                            loading="lazy" alt="Smiley Emoji" class="emoji"
-                                                            data-emoji="😊" data-unicode="\\u{1F604}"></i>
-                                                @elseif($post['self_reaction'] == '\u{1F60D}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                            loading="lazy" alt="Eye Heart Emoji" class="emoji"
-                                                            data-emoji="😍" data-unicode="\\u{1F60D}"></i>
-                                                @elseif($post['self_reaction'] == '\u{1F44F}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                            loading="lazy" alt="Clap Emoji" class="emoji"
-                                                            data-emoji="👏" data-unicode="\\u{1F44F}"></i>
-                                                @else
-                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                @endif
-                                            </button>
+                                                        <!-- Custom Pagination -->
+                                                        <div class="custom-pagination"></div>
+                                                        <div class="custom-dots-container"></div>
+                                                    </div>
+                                                </div>
 
 
-                                            <button class="posts-card-comm show-comments-btn show-btn-comment "
-                                                event_p_id="{{ $post['id'] }}">
-                                                <svg viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </button>
-                                            <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
-                                                style="display: none;">
-                                                <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                    loading="lazy" alt="Heart Emoji" class="emoji" data-emoji="❤️"
-                                                    data-unicode="\\u{2764}">
-                                                <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                    loading="lazy" alt="Thumb Emoji" class="emoji" data-emoji="👍"
-                                                    data-unicode="\\u{1F44D}">
-                                                <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                    loading="lazy" alt="Smiley Emoji" class="emoji" data-emoji="😊"
-                                                    data-unicode="\\u{1F604}">
-                                                <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                    loading="lazy" alt="Eye Heart Emoji" class="emoji"
-                                                    data-emoji="😍" data-unicode="\\u{1F60D}">
-                                                <img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                    loading="lazy" alt="Clap Emoji" class="emoji" data-emoji="👏"
-                                                    data-unicode="\\u{1F44F}">
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <div class="posts-card-like-commnet-wrp">
+                                                    <div class="posts-card-like-comment-left">
+                                                        <ul type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#reaction-modal-{{ $post['id'] }}">
 
-                                    <div class="posts-card-main-comment">
-                                        <input type="text" class="form-control post_comment" id="post_comment"
-                                            placeholder="Add Comment">
-                                        <span class="comment-send-icon send_comment"
-                                            data-event-id="{{ $event }}"
-                                            data-event-post-id="{{ $post['id'] }}">
-                                            <svg viewBox="0 0 20 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M4.5332 10H9.0332" stroke="#94A3B8" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div class="posts-card-show-all-comments-wrp d-none show_{{ $post['id'] }}">
+                                                            <!-- Smiley Emoji -->
+                                                            @if ($post['self_reaction'] == '\u{1F604}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji">
+                                                                </li>
 
-                                        <div class="posts-card-show-all-comments-inner">
-                                            <ul class="top-level-comments">
+                                                                <!-- Eye Heart Emoji -->
+                                                            @elseif ($post['self_reaction'] == '\u{1F60D}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji">
+                                                                </li>
 
-                                                @foreach ($post['post_comment'] as $comment)
-                                                    <li class="commented-user-wrp"
-                                                        data-comment-id="{{ $comment['id'] }}"
-                                                        >
-                                                        <input type="hidden" id="parent_comment_id" value="{{ $comment['id'] }}">
-                                                        <input type="hidden" id="reply_comment_id" value="">
-                                                        <div class="commented-user-head">
-                                                            <div class="commented-user-profile">
-                                                                <div class="commented-user-profile-img">
-                                                                    @if ($comment['profile'] != '')
-                                                                        <img src="{{ $comment['profile'] }}"
-                                                                            alt="" loading="lazy">
-                                                                    @else
-                                                                        @php
-                                                                            $nameParts = explode(
-                                                                                ' ',
-                                                                                $comment['username'],
-                                                                            );
-                                                                            $firstInitial = isset($nameParts[0][0])
-                                                                                ? strtoupper($nameParts[0][0])
-                                                                                : '';
-                                                                            $secondInitial = isset($nameParts[1][0])
-                                                                                ? strtoupper($nameParts[1][0])
-                                                                                : '';
-                                                                            $initials = $firstInitial . $secondInitial;
+                                                                <!-- Heart Emoji -->
+                                                            @elseif ($post['self_reaction'] == '\u{2764}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                        alt="Heart Emoji">
+                                                                </li>
+                                                            @endif
+                                                            <p id="likeCount_{{ $post['id'] }}">
+                                                                {{ $post['total_likes'] }} Likes</p>
+                                                        </ul>
+                                                        <h6>{{ $post['total_comment'] }} Comments</h6>
+                                                    </div>
+                                                    <div class="posts-card-like-comment-right emoji_display_like">
+                                                        <button class="posts-card-like-btn" id="likeButton"
+                                                            data-event-id="{{ $event }}"
+                                                            data-event-post-id="{{ $post['id'] }} "
+                                                            data-user-id="{{ $login_user_id }}">
+                                                            @if ($post['self_reaction'] == '\u{2764}')
+                                                                <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F494}')
+                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F44D}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                        loading="lazy" alt="Thumb Emoji"
+                                                                        class="emoji" data-emoji="👍"
+                                                                        data-unicode="\\u{1F44D}"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F604}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        loading="lazy" alt="Smiley Emoji"
+                                                                        class="emoji" data-emoji="😊"
+                                                                        data-unicode="\\u{1F604}"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F60D}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        loading="lazy" alt="Eye Heart Emoji"
+                                                                        class="emoji" data-emoji="😍"
+                                                                        data-unicode="\\u{1F60D}"></i>
+                                                            @elseif($post['self_reaction'] == '\u{1F44F}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                        loading="lazy" alt="Clap Emoji"
+                                                                        class="emoji" data-emoji="👏"
+                                                                        data-unicode="\\u{1F44F}"></i>
+                                                            @else
+                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                            @endif
+                                                        </button>
 
-                                                                            // Generate a font color class based on the first initial
-                                                                            $fontColor = 'fontcolor' . $firstInitial;
-                                                                        @endphp
 
-                                                                        <h5 class="{{ $fontColor }}">
-                                                                            {{ $initials }}</h5>
-                                                                    @endif
-
-                                                                </div>
-                                                                <div class="commented-user-profile-content">
-                                                                    <h3>{{ $comment['username'] }}</h3>
-                                                                    <p>{{ $comment['location'] ?? '' }}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="posts-card-like-comment-right">
-                                                                <p>{{ $comment['posttime'] }}</p>
-                                                                <button class="posts-card-like-btn"><i
-                                                                        class="fa-regular fa-heart"></i></button>
-                                                            </div>
+                                                        <button
+                                                            class="posts-card-comm show-comments-btn show-btn-comment "
+                                                            event_p_id="{{ $post['id'] }}">
+                                                            <svg viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </button>
+                                                        <div class="photos-likes-options-wrp emoji-picker"
+                                                            id="emojiDropdown" style="display: none;">
+                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                loading="lazy" alt="Heart Emoji" class="emoji"
+                                                                data-emoji="❤️" data-unicode="\\u{2764}">
+                                                            <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                loading="lazy" alt="Thumb Emoji" class="emoji"
+                                                                data-emoji="👍" data-unicode="\\u{1F44D}">
+                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                loading="lazy" alt="Smiley Emoji" class="emoji"
+                                                                data-emoji="😊" data-unicode="\\u{1F604}">
+                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                loading="lazy" alt="Eye Heart Emoji" class="emoji"
+                                                                data-emoji="😍" data-unicode="\\u{1F60D}">
+                                                            <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                loading="lazy" alt="Clap Emoji" class="emoji"
+                                                                data-emoji="👏" data-unicode="\\u{1F44F}">
                                                         </div>
-                                                        <div class="commented-user-content">
-                                                            <p>{{ $comment['comment'] }}</p>
-                                                        </div>
-                                                        <div class="commented-user-reply-wrp">
-                                                            <div
-                                                                class="position-relative d-flex align-items-center gap-2">
-                                                                <button class="posts-card-like-btn"><i
-                                                                        class="fa-regular fa-heart"></i></button>
-                                                                <p>{{ $comment['comment_total_likes'] }}
-                                                                </p>
-                                                            </div>
-                                                            <button class="commented-user-reply-btn">Reply</button>
-                                                        </div>
-                                                        @if ($comment['total_replies'] > 0)
-                                                            <ul>
-                                                                @foreach ($comment['comment_replies'] as $reply)
-                                                                    <li class="reply-on-comment" data-comment-id="{{$reply['id']}}">
-                                                                        <div class="commented-user-head">
-                                                                            <div class="commented-user-profile">
-                                                                                <div
-                                                                                    class="commented-user-profile-img">
-                                                                                    @if ($reply['profile'] != '')
-                                                                                        <img src="{{ $reply['profile'] }}"
-                                                                                            alt=""
-                                                                                            loading="lazy">
-                                                                                    @else
-                                                                                        @php
-                                                                                            $nameParts = explode(
-                                                                                                ' ',
-                                                                                                $reply['username'],
-                                                                                            );
-                                                                                            $firstInitial = isset(
+                                                    </div>
+                                                </div>
+
+                                                <div class="posts-card-main-comment">
+                                                    <input type="text" class="form-control post_comment"
+                                                        id="post_comment" placeholder="Add Comment">
+                                                    <span class="comment-send-icon send_comment"
+                                                        data-event-id="{{ $event }}"
+                                                        data-event-post-id="{{ $post['id'] }}">
+                                                        <svg viewBox="0 0 20 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
+                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M4.5332 10H9.0332" stroke="#94A3B8"
+                                                                stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    class="posts-card-show-all-comments-wrp d-none show_{{ $post['id'] }}">
+
+                                                    <div class="posts-card-show-all-comments-inner">
+                                                        <ul class="top-level-comments">
+
+                                                            @foreach ($post['post_comment'] as $comment)
+                                                                <li class="commented-user-wrp"
+                                                                    data-comment-id="{{ $comment['id'] }}">
+                                                                    <input type="hidden" id="parent_comment_id"
+                                                                        value="{{ $comment['id'] }}">
+                                                                    <input type="hidden" id="reply_comment_id"
+                                                                        value="">
+                                                                    <div class="commented-user-head">
+                                                                        <div class="commented-user-profile">
+                                                                            <div class="commented-user-profile-img">
+                                                                                @if ($comment['profile'] != '')
+                                                                                    <img src="{{ $comment['profile'] }}"
+                                                                                        alt="" loading="lazy">
+                                                                                @else
+                                                                                    @php
+                                                                                        $nameParts = explode(
+                                                                                            ' ',
+                                                                                            $comment['username'],
+                                                                                        );
+                                                                                        $firstInitial = isset(
+                                                                                            $nameParts[0][0],
+                                                                                        )
+                                                                                            ? strtoupper(
                                                                                                 $nameParts[0][0],
                                                                                             )
-                                                                                                ? strtoupper(
-                                                                                                    $nameParts[0][0],
-                                                                                                )
-                                                                                                : '';
-                                                                                            $secondInitial = isset(
+                                                                                            : '';
+                                                                                        $secondInitial = isset(
+                                                                                            $nameParts[1][0],
+                                                                                        )
+                                                                                            ? strtoupper(
                                                                                                 $nameParts[1][0],
                                                                                             )
-                                                                                                ? strtoupper(
-                                                                                                    $nameParts[1][0],
-                                                                                                )
-                                                                                                : '';
-                                                                                            $initials =
-                                                                                                $firstInitial .
-                                                                                                $secondInitial;
+                                                                                            : '';
+                                                                                        $initials =
+                                                                                            $firstInitial .
+                                                                                            $secondInitial;
 
-                                                                                            // Generate a font color class based on the first initial
-                                                                                            $fontColor =
-                                                                                                'fontcolor' .
-                                                                                                $firstInitial;
-                                                                                        @endphp
+                                                                                        // Generate a font color class based on the first initial
+                                                                                        $fontColor =
+                                                                                            'fontcolor' . $firstInitial;
+                                                                                    @endphp
 
-                                                                                        <h5
-                                                                                            class="{{ $fontColor }}">
-                                                                                            {{ $initials }}</h5>
-                                                                                    @endif
-                                                                                </div>
-                                                                                <div
-                                                                                    class="commented-user-profile-content">
-                                                                                    <h3>{{ $reply['username'] }}
-                                                                                    </h3>
-                                                                                    <p>{{ $reply['location'] ?? '' }}
-                                                                                    </p>
-                                                                                </div>
+                                                                                    <h5 class="{{ $fontColor }}">
+                                                                                        {{ $initials }}</h5>
+                                                                                @endif
+
                                                                             </div>
-                                                                            <div class="posts-card-like-comment-right">
-                                                                                <p>{{ $reply['posttime'] }}
-                                                                                </p>
-                                                                                <button class="posts-card-like-btn"><i
-                                                                                        class="fa-regular fa-heart"></i></button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="commented-user-content">
-                                                                            <p>{{ $reply['comment'] }}</p>
-                                                                        </div>
-                                                                        <div class="commented-user-reply-wrp">
                                                                             <div
-                                                                                class="position-relative d-flex align-items-center gap-2">
-                                                                                <button class="posts-card-like-btn"><i
-                                                                                        class="fa-regular fa-heart"></i></button>
-                                                                                <p>{{ $reply['comment_total_likes'] }}
-                                                                                </p>
+                                                                                class="commented-user-profile-content">
+                                                                                <h3>{{ $comment['username'] }}</h3>
+                                                                                <p>{{ $comment['location'] ?? '' }}</p>
                                                                             </div>
-                                                                            <button
-                                                                                class="commented-user-reply-btn">Reply</button>
                                                                         </div>
-                                                                    </li>
-                                                                @endforeach
+                                                                        <div class="posts-card-like-comment-right">
+                                                                            <p>{{ $comment['posttime'] }}</p>
+                                                                            <button class="posts-card-like-btn"><i
+                                                                                    class="fa-regular fa-heart"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="commented-user-content">
+                                                                        <p>{{ $comment['comment'] }}</p>
+                                                                    </div>
+                                                                    <div class="commented-user-reply-wrp">
+                                                                        <div
+                                                                            class="position-relative d-flex align-items-center gap-2">
+                                                                            <button class="posts-card-like-btn"><i
+                                                                                    class="fa-regular fa-heart"></i></button>
+                                                                            <p>{{ $comment['comment_total_likes'] }}
+                                                                            </p>
+                                                                        </div>
+                                                                        <button
+                                                                            class="commented-user-reply-btn">Reply</button>
+                                                                    </div>
+                                                                    @if ($comment['total_replies'] > 0)
+                                                                        <ul>
+                                                                            @foreach ($comment['comment_replies'] as $reply)
+                                                                                <li class="reply-on-comment"
+                                                                                    data-comment-id="{{ $reply['id'] }}">
+                                                                                    <div class="commented-user-head">
+                                                                                        <div
+                                                                                            class="commented-user-profile">
+                                                                                            <div
+                                                                                                class="commented-user-profile-img">
+                                                                                                @if ($reply['profile'] != '')
+                                                                                                    <img src="{{ $reply['profile'] }}"
+                                                                                                        alt=""
+                                                                                                        loading="lazy">
+                                                                                                @else
+                                                                                                    @php
+                                                                                                        $nameParts = explode(
+                                                                                                            ' ',
+                                                                                                            $reply[
+                                                                                                                'username'
+                                                                                                            ],
+                                                                                                        );
+                                                                                                        $firstInitial = isset(
+                                                                                                            $nameParts[0][0],
+                                                                                                        )
+                                                                                                            ? strtoupper(
+                                                                                                                $nameParts[0][0],
+                                                                                                            )
+                                                                                                            : '';
+                                                                                                        $secondInitial = isset(
+                                                                                                            $nameParts[1][0],
+                                                                                                        )
+                                                                                                            ? strtoupper(
+                                                                                                                $nameParts[1][0],
+                                                                                                            )
+                                                                                                            : '';
+                                                                                                        $initials =
+                                                                                                            $firstInitial .
+                                                                                                            $secondInitial;
 
-                                                                <!-- Button to show more replies if any -->
-                                                                <button class="show-comment-reply-btn">Show
-                                                                    {{ $comment['total_replies'] }} reply</button>
-                                                            </ul>
-                                                        @endif
+                                                                                                        // Generate a font color class based on the first initial
+                                                                                                        $fontColor =
+                                                                                                            'fontcolor' .
+                                                                                                            $firstInitial;
+                                                                                                    @endphp
+
+                                                                                                    <h5
+                                                                                                        class="{{ $fontColor }}">
+                                                                                                        {{ $initials }}
+                                                                                                    </h5>
+                                                                                                @endif
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="commented-user-profile-content">
+                                                                                                <h3>{{ $reply['username'] }}
+                                                                                                </h3>
+                                                                                                <p>{{ $reply['location'] ?? '' }}
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="posts-card-like-comment-right">
+                                                                                            <p>{{ $reply['posttime'] }}
+                                                                                            </p>
+                                                                                            <button
+                                                                                                class="posts-card-like-btn"><i
+                                                                                                    class="fa-regular fa-heart"></i></button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="commented-user-content">
+                                                                                        <p>{{ $reply['comment'] }}</p>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="commented-user-reply-wrp">
+                                                                                        <div
+                                                                                            class="position-relative d-flex align-items-center gap-2">
+                                                                                            <button
+                                                                                                class="posts-card-like-btn"><i
+                                                                                                    class="fa-regular fa-heart"></i></button>
+                                                                                            <p>{{ $reply['comment_total_likes'] }}
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <button
+                                                                                            class="commented-user-reply-btn">Reply</button>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endforeach
+
+                                                                            <!-- Button to show more replies if any -->
+                                                                            <button class="show-comment-reply-btn">Show
+                                                                                {{ $comment['total_replies'] }}
+                                                                                reply</button>
+                                                                        </ul>
+                                                                    @endif
 
 
-                                                    </li>
-                                                @endforeach
-                                            </ul>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            @endforeach
-                            {{-- <div class="event-posts-main-wrp common-div-wrp">
+                                    @endforeach
+                                    {{-- <div class="event-posts-main-wrp common-div-wrp">
                                         <div class="posts-card-wrp">
                                             <div class="posts-card-head">
                                                 <div class="posts-card-head-left">
@@ -632,54 +697,61 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                            {{-- {{dd($pollsData)}} --}}
-                            @foreach ($pollsData as $poll)
-                                <div class="event-posts-main-wrp common-div-wrp hidden_post" data-post-id="{{$poll['event_post_id']}}">
-                                    <div class="posts-card-wrp">
-                                        <div class="posts-card-head">
-                                            <div class="posts-card-head-left">
-                                                <div class="posts-card-head-left-img">
-                                                    @if ($post['profile'] != '')
-                                                        <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
-                                                            alt="" loading="lazy">
-                                                    @else
-                                                        @php
+                                    {{-- {{dd($pollsData)}} --}}
+                                    @foreach ($pollsData as $poll)
+                                        <div class="event-posts-main-wrp common-div-wrp hidden_post"
+                                            data-post-id="{{ $poll['event_post_id'] }}">
+                                            <div class="posts-card-wrp">
+                                                <div class="posts-card-head">
+                                                    <div class="posts-card-head-left">
+                                                        <div class="posts-card-head-left-img">
+                                                            @if ($post['profile'] != '')
+                                                                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                                                    alt="" loading="lazy">
+                                                            @else
+                                                                @php
 
-                                                            // $parts = explode(" ", $name);
-                                                            $nameParts = explode(' ', $users->firstname);
-                                                            $lastname = explode(' ', $users->lastname);
-                                                            $firstInitial = isset($nameParts[0][0])
-                                                                ? strtoupper($nameParts[0][0])
-                                                                : '';
-                                                            $secondInitial = isset($lastname[0][0])
-                                                                ? strtoupper($lastname[0][0])
-                                                                : '';
-                                                            $initials = $firstInitial . $secondInitial;
+                                                                    // $parts = explode(" ", $name);
+                                                                    $nameParts = explode(' ', $users->firstname);
+                                                                    $lastname = explode(' ', $users->lastname);
+                                                                    $firstInitial = isset($nameParts[0][0])
+                                                                        ? strtoupper($nameParts[0][0])
+                                                                        : '';
+                                                                    $secondInitial = isset($lastname[0][0])
+                                                                        ? strtoupper($lastname[0][0])
+                                                                        : '';
+                                                                    $initials = $firstInitial . $secondInitial;
 
-                                                            // Generate a font color class based on the first initial
-                                                            $fontColor = 'fontcolor' . $firstInitial;
-                                                        @endphp
-                                                        <h5 class="{{ $fontColor }}">
-                                                            {{ $initials }}
-                                                        </h5>
-                                                    @endif
+                                                                    // Generate a font color class based on the first initial
+                                                                    $fontColor = 'fontcolor' . $firstInitial;
+                                                                @endphp
+                                                                <h5 class="{{ $fontColor }}">
+                                                                    {{ $initials }}
+                                                                </h5>
+                                                            @endif
 
-                                                    <span class="active-dot"></span>
-                                                </div>
-                                                <div class="posts-card-head-left-content">
-                                                    <h3>{{ $users->firstname }} {{ $users->lastname }}</h3>
-                                                    <p>{{ $users->city }},{{ $users->state }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="posts-card-head-right">
-                                                <div class="dropdown post-card-dropdown upcoming-card-dropdown">
-                                                    <button class="dropdown-toggle" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                            class="fa-solid fa-ellipsis"></i></button>
+                                                            <span class="active-dot"></span>
+                                                        </div>
+                                                        <div class="posts-card-head-left-content">
+                                                            <h3>{{ $users->firstname }} {{ $users->lastname }}</h3>
+                                                            <p>{{ $users->city }},{{ $users->state }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="posts-card-head-right">
+                                                        <div
+                                                            class="dropdown post-card-dropdown upcoming-card-dropdown">
+                                                            <button class="dropdown-toggle" type="button"
+                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                    class="fa-solid fa-ellipsis"></i></button>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <button class="dropdown-item hide-post-btn postControlButton"
-                                                                        id="hidePostButton " data-event-id="{{$event}}" data-event-post-id="{{$poll['event_post_id']}}" data-user-id="{{$login_user_id}}"  data-post-control="hide_post">
+                                                                    <button
+                                                                        class="dropdown-item hide-post-btn postControlButton"
+                                                                        id="hidePostButton "
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-id="{{ $poll['event_post_id'] }}"
+                                                                        data-user-id="{{ $login_user_id }}"
+                                                                        data-post-control="hide_post">
                                                                         <svg id="icon" class="hide-post-svg-icon"
                                                                             viewBox="0 0 20 20" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -694,9 +766,15 @@
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button class="dropdown-item mute-post-btn postControlButton"
-                                                                        id="mutePostButton" data-event-id="{{$event}}" data-event-post-id="{{$poll['event_post_id']}}" data-user-id="{{$login_user_id}}"  data-post-control="mute">
-                                                                        <svg id="muteIcon" class="muteIcon" style="display: block;"
+                                                                    <button
+                                                                        class="dropdown-item mute-post-btn postControlButton"
+                                                                        id="mutePostButton"
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-id="{{ $poll['event_post_id'] }}"
+                                                                        data-user-id="{{ $login_user_id }}"
+                                                                        data-post-control="mute">
+                                                                        <svg id="muteIcon" class="muteIcon"
+                                                                            style="display: block;"
                                                                             viewBox="0 0 20 20" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
@@ -715,16 +793,35 @@
                                                                                 d="M1.66589 18.9583C1.50755 18.9583 1.34922 18.9 1.22422 18.775C0.982552 18.5333 0.982552 18.1333 1.22422 17.8916L17.8909 1.22495C18.1326 0.983285 18.5326 0.983285 18.7742 1.22495C19.0159 1.46662 19.0159 1.86662 18.7742 2.10828L2.10755 18.775C1.98255 18.9 1.82422 18.9583 1.66589 18.9583Z"
                                                                                 fill="#94A3B8" />
                                                                         </svg>
-                                                                        <svg id="unmuteIcon" class="unmute-icon" style="display: none;" width="29" height="21" viewBox="0 0 29 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M7.20731 15.7494C4.47457 15.7494 2.9046 15.1641 2.00923 14.3078C1.12413 13.4613 0.75 12.2067 0.75 10.5015C0.75 8.84742 1.22523 7.57593 2.18617 6.70634C3.15977 5.82528 4.75144 5.24768 7.20732 5.24768C8.60469 5.24768 9.64267 4.93873 10.4595 4.43239C11.2651 3.93308 11.7983 3.27536 12.2278 2.69506C12.3136 2.57923 12.3937 2.46892 12.4701 2.36383C12.7993 1.9111 13.0581 1.55507 13.3877 1.27035C13.7441 0.962547 14.1797 0.749998 14.8902 0.749998C15.6144 0.749998 16.1755 0.971438 16.6345 1.36555C17.1081 1.77229 17.5128 2.39853 17.8375 3.26305C18.4922 5.00592 18.75 7.51847 18.75 10.5015C18.75 13.4845 18.4922 15.9963 17.8376 17.7383C17.5129 18.6024 17.1082 19.2283 16.6346 19.6348C16.1757 20.0287 15.6146 20.25 14.8902 20.25C14.1828 20.25 13.7911 20.0401 13.4836 19.7507C13.206 19.4894 12.9995 19.1758 12.7298 18.7663C12.6405 18.6308 12.5444 18.4848 12.4365 18.3267C12.0307 17.7324 11.5088 17.0641 10.6659 16.5592C9.81957 16.0521 8.71825 15.7494 7.20731 15.7494Z" stroke="#94A3B8" stroke-width="1.5"/>
-                                                                            <path d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                            <path d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                            </svg>
+                                                                        <svg id="unmuteIcon" class="unmute-icon"
+                                                                            style="display: none;" width="29"
+                                                                            height="21" viewBox="0 0 29 21"
+                                                                            fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M7.20731 15.7494C4.47457 15.7494 2.9046 15.1641 2.00923 14.3078C1.12413 13.4613 0.75 12.2067 0.75 10.5015C0.75 8.84742 1.22523 7.57593 2.18617 6.70634C3.15977 5.82528 4.75144 5.24768 7.20732 5.24768C8.60469 5.24768 9.64267 4.93873 10.4595 4.43239C11.2651 3.93308 11.7983 3.27536 12.2278 2.69506C12.3136 2.57923 12.3937 2.46892 12.4701 2.36383C12.7993 1.9111 13.0581 1.55507 13.3877 1.27035C13.7441 0.962547 14.1797 0.749998 14.8902 0.749998C15.6144 0.749998 16.1755 0.971438 16.6345 1.36555C17.1081 1.77229 17.5128 2.39853 17.8375 3.26305C18.4922 5.00592 18.75 7.51847 18.75 10.5015C18.75 13.4845 18.4922 15.9963 17.8376 17.7383C17.5129 18.6024 17.1082 19.2283 16.6346 19.6348C16.1757 20.0287 15.6146 20.25 14.8902 20.25C14.1828 20.25 13.7911 20.0401 13.4836 19.7507C13.206 19.4894 12.9995 19.1758 12.7298 18.7663C12.6405 18.6308 12.5444 18.4848 12.4365 18.3267C12.0307 17.7324 11.5088 17.0641 10.6659 16.5592C9.81957 16.0521 8.71825 15.7494 7.20731 15.7494Z"
+                                                                                stroke="#94A3B8" stroke-width="1.5" />
+                                                                            <path
+                                                                                d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                            <path
+                                                                                d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                        </svg>
                                                                         Mute
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button class="dropdown-item postControlButton" href="#" data-event-id="{{$event}}" data-event-post-id="{{$poll['event_post_id']}}" data-user-id="{{$login_user_id}}"  data-post-control="report" >
+                                                                    <button class="dropdown-item postControlButton"
+                                                                        href="#"
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-id="{{ $poll['event_post_id'] }}"
+                                                                        data-user-id="{{ $login_user_id }}"
+                                                                        data-post-control="report">
                                                                         <svg viewBox="0 0 20 20" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
@@ -741,201 +838,213 @@
                                                                     </button>
                                                                 </li>
                                                             </ul>
-                                                </div>
+                                                        </div>
 
-                                                <h5>
-                                                    @foreach ($postList as $post)
-                                                        @if ($post['rsvp_status'] == '1')
-                                                            <span class="positive-ans">
-                                                                <i class="fa-solid fa-circle-check"></i>Yes</span>
-                                                        @elseif($post['rsvp_status'] == '0')
-                                                            <span class="positive-ans not-ans"><i
-                                                                    class="fa-solid fa-circle-question"></i>No
-                                                                Answer</span>
-                                                        @elseif($post['rsvp_status'] == '2')
-                                                            <span class="positive-ans nagative-ans">
-                                                                <i class="fa-solid fa-circle-xmark"></i>Not
-                                                                Coming
-                                                            </span>
-                                                        @endif
-                                                    @endforeach
-                                                    {{ $poll['post_time'] }}
-                                                </h5>
+                                                        <h5>
+                                                            @foreach ($postList as $post)
+                                                                @if ($post['rsvp_status'] == '1')
+                                                                    <span class="positive-ans">
+                                                                        <i
+                                                                            class="fa-solid fa-circle-check"></i>Yes</span>
+                                                                @elseif($post['rsvp_status'] == '0')
+                                                                    <span class="positive-ans not-ans"><i
+                                                                            class="fa-solid fa-circle-question"></i>No
+                                                                        Answer</span>
+                                                                @elseif($post['rsvp_status'] == '2')
+                                                                    <span class="positive-ans nagative-ans">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>Not
+                                                                        Coming
+                                                                    </span>
+                                                                @endif
+                                                            @endforeach
+                                                            {{ $poll['post_time'] }}
+                                                        </h5>
 
-                                            </div>
-
-                                        </div>
-                                        <div class="posts-card-inner-wrp">
-                                            <h3 class="posts-card-inner-questions">
-                                                {{ $poll['poll_question'] }}</h3>
-                                        </div>
-                                        <input type="hidden" name="event_post_id" id="event_post_id"
-                                            value="{{ $poll['event_post_id'] }}">
-                                        <div class="post-card-poll-wrp">
-                                            <div class="post-card-poll-inner">
-                                                <h5>{{ $poll['total_poll_vote'] }} Votes
-                                                    <span>{{ $poll['poll_duration_left'] }} left</span>
-                                                </h5>
-                                                @foreach ($poll['poll_options'] as $index => $option)
-                                                    <div class="poll-click-wrp poll-progress-one"
-                                                        data-poll-id ="{{ $poll['poll_id'] }}"
-                                                        data-option-id="{{ $option['id'] }}">
-                                                        <button class="option-button"
-                                                            data-poll-id="{{ $poll['poll_id'] }}"
-                                                            data-option-id="{{ $option['id'] }}">
-                                                            {{ $option['option'] }}
-                                                            <span>{{ $option['total_vote_percentage'] }}</span>
-                                                        </button>
-                                                        <span class="poll-click-progress"
-                                                            style="width: {{ rtrim($option['total_vote_percentage'], '%') }}%;"></span>
                                                     </div>
-                                                @endforeach
-                                                <div class="expired-message" style="color: red; display: none;"
-                                                    id="errorMessage-{{ $poll['poll_id'] }}"></div>
-                                                {{-- <div class="poll-click-wrp poll-progress-two">
+
+                                                </div>
+                                                <div class="posts-card-inner-wrp">
+                                                    <h3 class="posts-card-inner-questions">
+                                                        {{ $poll['poll_question'] }}</h3>
+                                                </div>
+                                                <input type="hidden" name="event_post_id" id="event_post_id"
+                                                    value="{{ $poll['event_post_id'] }}">
+                                                <div class="post-card-poll-wrp">
+                                                    <div class="post-card-poll-inner">
+                                                        <h5>{{ $poll['total_poll_vote'] }} Votes
+                                                            <span>{{ $poll['poll_duration_left'] }} left</span>
+                                                        </h5>
+                                                        @foreach ($poll['poll_options'] as $index => $option)
+                                                            <div class="poll-click-wrp poll-progress-one"
+                                                                data-poll-id ="{{ $poll['poll_id'] }}"
+                                                                data-option-id="{{ $option['id'] }}">
+                                                                <button class="option-button"
+                                                                    data-poll-id="{{ $poll['poll_id'] }}"
+                                                                    data-option-id="{{ $option['id'] }}">
+                                                                    {{ $option['option'] }}
+                                                                    <span>{{ $option['total_vote_percentage'] }}</span>
+                                                                </button>
+                                                                <span class="poll-click-progress"
+                                                                    style="width: {{ rtrim($option['total_vote_percentage'], '%') }}%;"></span>
+                                                            </div>
+                                                        @endforeach
+                                                        <div class="expired-message"
+                                                            style="color: red; display: none;"
+                                                            id="errorMessage-{{ $poll['poll_id'] }}"></div>
+                                                        {{-- <div class="poll-click-wrp poll-progress-two">
                                                         <h4>Yeah, Fine! 🙌 <span>80%</span></h4>
                                                         <span class="poll-click-progress" style="width: 50%;"></span>
                                                     </div> --}}
+                                                    </div>
+                                                </div>
+
+                                                <div class="posts-card-like-commnet-wrp">
+                                                    <div class="posts-card-like-comment-left">
+                                                        <ul type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#reaction-modal-{{ $poll['event_post_id'] }}">
+
+                                                            <!-- Smiley Emoji -->
+                                                            @if ($poll['self_reaction'] == '\u{1F604}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji">
+                                                                </li>
+
+                                                                <!-- Eye Heart Emoji -->
+                                                            @elseif ($poll['self_reaction'] == '\u{1F60D}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji">
+                                                                </li>
+
+                                                                <!-- Heart Emoji -->
+                                                            @elseif ($poll['self_reaction'] == '\u{2764}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                        alt="Heart Emoji">
+                                                                </li>
+                                                            @endif
+                                                            <p id="likeCount_{{ $poll['event_post_id'] }}">
+                                                                {{ $poll['total_likes'] }} Likes</p>
+                                                        </ul>
+                                                        <h6>354 Comments</h6>
+                                                    </div>
+                                                    <div class="posts-card-like-comment-right">
+                                                        <button class="posts-card-like-btn" id="likeButton"
+                                                            data-event-id="{{ $event }}"
+                                                            data-event-post-id="{{ $poll['event_post_id'] }} "
+                                                            data-user-id="{{ $login_user_id }}">
+                                                            @if ($poll['self_reaction'] == '\u{2764}')
+                                                                <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                            @elseif($poll['self_reaction'] == '\u{1F494}')
+                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                            @elseif($poll['self_reaction'] == '\u{1F44D}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                        loading="lazy" alt="Thumb Emoji"
+                                                                        class="emoji" data-emoji="👍"
+                                                                        data-unicode="\\u{1F44D}"></i>
+                                                            @elseif($poll['self_reaction'] == '\u{1F604}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        loading="lazy" alt="Smiley Emoji"
+                                                                        class="emoji" data-emoji="😊"
+                                                                        data-unicode="\\u{1F604}"></i>
+                                                            @elseif($poll['self_reaction'] == '\u{1F60D}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        loading="lazy" alt="Eye Heart Emoji"
+                                                                        class="emoji" data-emoji="😍"
+                                                                        data-unicode="\\u{1F60D}"></i>
+                                                            @elseif($poll['self_reaction'] == '\u{1F44F}')
+                                                                <i id="show_Emoji"> <img
+                                                                        src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                        loading="lazy" alt="Clap Emoji"
+                                                                        class="emoji" data-emoji="👏"
+                                                                        data-unicode="\\u{1F44F}"></i>
+                                                            @else
+                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                            @endif
+                                                        </button>
+                                                        <button
+                                                            class="posts-card-comm show-comments-btn show-btn-comment"
+                                                            event_p_id="{{ $poll['event_post_id'] }}">
+                                                            <svg viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
+                                                                    stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="posts-card-main-comment">
+                                                    <input type="text" class="form-control" id="post_comment"
+                                                        placeholder="Add Comment">
+                                                    <span class="comment-send-icon send_comment poll-comment-send-icon"
+                                                        data-event-id="{{ $event }}"
+                                                        data-event-post-id="{{ $poll['event_post_id'] }}">
+                                                        <svg viewBox="0 0 20 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
+                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M4.5332 10H9.0332" stroke="#94A3B8"
+                                                                stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="posts-card-like-commnet-wrp">
-                                            <div class="posts-card-like-comment-left">
-                                                <ul type="button" data-bs-toggle="modal"
-                                                data-bs-target="#reaction-modal-{{ $poll['event_post_id'] }}">
-
-                                                <!-- Smiley Emoji -->
-                                                @if ($poll['self_reaction'] == '\u{1F604}')
-                                                    <li>
-                                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                            alt="Smiley Emoji">
-                                                    </li>
-
-                                                    <!-- Eye Heart Emoji -->
-                                                @elseif ($poll['self_reaction'] == '\u{1F60D}')
-                                                    <li>
-                                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                            alt="Eye Heart Emoji">
-                                                    </li>
-
-                                                    <!-- Heart Emoji -->
-                                                @elseif ($poll['self_reaction'] == '\u{2764}')
-                                                    <li>
-                                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                            alt="Heart Emoji">
-                                                    </li>
-                                                @endif
-                                                <p id="likeCount_{{ $poll['event_post_id'] }}">
-                                                    {{ $poll['total_likes'] }} Likes</p>
-                                            </ul>
-                                                <h6>354 Comments</h6>
-                                            </div>
-                                            <div class="posts-card-like-comment-right">
-                                                <button class="posts-card-like-btn" id="likeButton"
-                                                data-event-id="{{ $event }}"
-                                                data-event-post-id="{{ $poll['event_post_id'] }} "
-                                                data-user-id="{{ $login_user_id }}">
-                                                @if ($poll['self_reaction'] == '\u{2764}')
-                                                    <i class="fa-solid fa-heart" id="show_Emoji"></i>
-                                                @elseif($poll['self_reaction'] == '\u{1F494}')
-                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                @elseif($poll['self_reaction'] == '\u{1F44D}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                            loading="lazy" alt="Thumb Emoji" class="emoji"
-                                                            data-emoji="👍" data-unicode="\\u{1F44D}"></i>
-                                                @elseif($poll['self_reaction'] == '\u{1F604}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                            loading="lazy" alt="Smiley Emoji" class="emoji"
-                                                            data-emoji="😊" data-unicode="\\u{1F604}"></i>
-                                                @elseif($poll['self_reaction'] == '\u{1F60D}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                            loading="lazy" alt="Eye Heart Emoji" class="emoji"
-                                                            data-emoji="😍" data-unicode="\\u{1F60D}"></i>
-                                                @elseif($poll['self_reaction'] == '\u{1F44F}')
-                                                    <i id="show_Emoji"> <img
-                                                            src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                            loading="lazy" alt="Clap Emoji" class="emoji"
-                                                            data-emoji="👏" data-unicode="\\u{1F44F}"></i>
-                                                @else
-                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                @endif
-                                            </button>
-                                            <button class="posts-card-comm show-comments-btn show-btn-comment"
-                                            event_p_id="{{ $poll['event_post_id'] }}">
-                                            <svg viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                            </div>
-                                        </div>
-                                            <div class="posts-card-main-comment">
-                                            <input type="text" class="form-control" id="post_comment"
-                                                placeholder="Add Comment">
-                                            <span class="comment-send-icon send_comment poll-comment-send-icon"
-                                                data-event-id="{{ $event }}"
-                                                data-event-post-id="{{ $poll['event_post_id'] }}">
-                                                <svg viewBox="0 0 20 20" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
-                                                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path d="M4.5332 10H9.0332" stroke="#94A3B8" stroke-width="1.5"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+                            </div>
+                            <!-- ===tab-1-end=== -->
+
+                            <!-- ===tab-2-start=== -->
+
+                            <!-- ===tab-2-end=== -->
+
+                            <!-- ===tab-3-start=== -->
+                            <div class="tab-pane fade" id="nav-guests" role="tabpanel"
+                                aria-labelledby="nav-guests-tab">
+                                guests
+                            </div>
+                            <!-- ===tab-3-end=== -->
+
+                            <!-- ===tab-4-start=== -->
+                            <div class="tab-pane fade" id="nav-photos" role="tabpanel"
+                                aria-labelledby="nav-photos-tab">
+                                photos
+                            </div>
+                            <!-- ===tab-4-end=== -->
+
+                            <!-- ===tab-5-start=== -->
+                            <div class="tab-pane fade" id="nav-potluck" role="tabpanel"
+                                aria-labelledby="nav-potluck-tab">
+                                potluck
+                            </div>
+                            <!-- ===tab-5-en=== -->
+
                         </div>
+                        <!-- ===tab-content-end=== -->
+
                     </div>
-                    <!-- ===tab-1-end=== -->
-
-                    <!-- ===tab-2-start=== -->
-
-                    <!-- ===tab-2-end=== -->
-
-                    <!-- ===tab-3-start=== -->
-                    <div class="tab-pane fade" id="nav-guests" role="tabpanel" aria-labelledby="nav-guests-tab">
-                        guests
-                    </div>
-                    <!-- ===tab-3-end=== -->
-
-                    <!-- ===tab-4-start=== -->
-                    <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
-                        photos
-                    </div>
-                    <!-- ===tab-4-end=== -->
-
-                    <!-- ===tab-5-start=== -->
-                    <div class="tab-pane fade" id="nav-potluck" role="tabpanel" aria-labelledby="nav-potluck-tab">
-                        potluck
-                    </div>
-                    <!-- ===tab-5-en=== -->
-
+                    <!-- ===event-center-tabs-main-end=== -->
                 </div>
-                <!-- ===tab-content-end=== -->
-
             </div>
-            <!-- ===event-center-tabs-main-end=== -->
+            <div class="col-xl-3 col-lg-0">
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" />
+            </div>
         </div>
-    </div>
-    <div class="col-xl-3 col-lg-0">
-        <x-event_wall.wall_right_menu :eventInfo="$eventInfo" />
-    </div>
-    </div>
     </div>
 
 
@@ -1952,67 +2061,35 @@
         </div>
     @endforeach
     @foreach ($pollsData as $post)
-    {{-- {{dd($post);}} --}}
-    <div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal-{{ $post['event_post_id'] }}"
-        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="reactions-info-main event-center-tabs-main">
-                        <!-- ===tabs=== -->
-                        <nav>
-                            <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab-{{ $post['event_post_id'] }}"
-                                role="tablist">
-                                <!-- All Reactions Tab -->
-                                <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['event_post_id'] }}"
-                                    data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['event_post_id'] }}"
-                                    type="button" role="tab" aria-controls="nav-all-reaction"
-                                    aria-selected="true">
-                                    All {{ count($post['reactionList']) }}
-                                </button>
-
-                                <!-- Individual Reaction Tabs -->
-                                @php
-                                    // Define icons for reactions
-                                    $reactionIcons = [
-                                        "\\u{2764}" => asset('assets/front/img/heart-emoji.png'), // ❤️
-                                        "\\u{1F44D}" => asset('assets/front/img/thumb-icon.png'), // 👍
-                                        "\\u{1F604}" => asset('assets/front/img/smily-emoji.png'), // 😄
-                                        "\\u{1F60D}" => asset('assets/front/img/eye-heart-emoji.png'), // 😍
-                                        "\\u{1F44F}" => asset('assets/front/img/clap-icon.png'), // 👏
-                                    ];
-                                @endphp
-
-                                @foreach (array_count_values($post['reactionList']) as $reaction => $count)
-                                    <button class="nav-link"
-                                        id="nav-{{ $reaction }}-reaction-tab-{{ $post['event_post_id'] }}"
-                                        data-bs-toggle="tab"
-                                        data-bs-target="#nav-{{ $reaction }}-reaction-{{ $post['event_post_id'] }}"
-                                        type="button" role="tab"
-                                        aria-controls="nav-{{ $reaction }}-reaction" aria-selected="false">
-                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
-                                            alt="{{ $reaction }}" loading="lazy">
-                                        {{ $count }}
+        {{-- {{dd($post);}} --}}
+        <div class="modal fade create-post-modal all-events-filtermodal"
+            id="reaction-modal-{{ $post['event_post_id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="reactions-info-main event-center-tabs-main">
+                            <!-- ===tabs=== -->
+                            <nav>
+                                <div class="nav nav-tabs reaction-nav-tabs"
+                                    id="nav-tab-{{ $post['event_post_id'] }}" role="tablist">
+                                    <!-- All Reactions Tab -->
+                                    <button class="nav-link active"
+                                        id="nav-all-reaction-tab-{{ $post['event_post_id'] }}" data-bs-toggle="tab"
+                                        data-bs-target="#nav-all-reaction-{{ $post['event_post_id'] }}"
+                                        type="button" role="tab" aria-controls="nav-all-reaction"
+                                        aria-selected="true">
+                                        All {{ count($post['reactionList']) }}
                                     </button>
-                                @endforeach
-                            </div>
-                        </nav>
 
-                        <!-- ===tabs=== -->
-
-                        <!-- ===Tab-content=== -->
-                        <div class="tab-content" id="myTabContent">
-
-                            <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
-                                aria-labelledby="nav-all-reaction-tab">
-                                <ul>
+                                    <!-- Individual Reaction Tabs -->
                                     @php
-                                        // Define reaction icons mapping
+                                        // Define icons for reactions
                                         $reactionIcons = [
                                             "\\u{2764}" => asset('assets/front/img/heart-emoji.png'), // ❤️
                                             "\\u{1F44D}" => asset('assets/front/img/thumb-icon.png'), // 👍
@@ -2021,58 +2098,93 @@
                                             "\\u{1F44F}" => asset('assets/front/img/clap-icon.png'), // 👏
                                         ];
                                     @endphp
-                                    @foreach ($post['reactionList'] as $reaction)
-                                        <li class="reaction-info-wrp">
-                                            <div class="commented-user-head">
-                                                <!-- User Profile Section -->
-                                                <div class="commented-user-profile">
-                                                    <div class="commented-user-profile-img">
-                                                        @if ($users->profile != '')
-                                                        <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
-                                                            alt="" loading="lazy">
-                                                    @else
-                                                        @php
 
-                                                            // $parts = explode(" ", $name);
-                                                            $nameParts = explode(' ', $users->firstname);
-                                                            $lastname = explode(' ', $users->lastname);
-                                                            $firstInitial = isset($nameParts[0][0])
-                                                                ? strtoupper($nameParts[0][0])
-                                                                : '';
-                                                            $secondInitial = isset($lastname[0][0])
-                                                                ? strtoupper($lastname[0][0])
-                                                                : '';
-                                                            $initials = $firstInitial . $secondInitial;
-
-                                                            // Generate a font color class based on the first initial
-                                                            $fontColor = 'fontcolor' . $firstInitial;
-                                                        @endphp
-                                                        <h5 class="{{ $fontColor }}">
-                                                            {{ $initials }}
-                                                        </h5>
-                                                    @endif
-
-
-                                                    </div>
-                                                    <div class="commented-user-profile-content">
-                                                        <h3>{{ $users->firstname }} {{ $users->lastname }}</h3>
-                                                        <p>{{ $users->city }},{{ $users->state }}</p>
-                                                    </div>
-                                                </div>
-                                                <!-- Reaction Emoji Section -->
-                                                <div
-                                                    class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                                    <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
-                                                        alt="{{ $reaction }}" loading="lazy">
-                                                </div>
-                                            </div>
-                                        </li>
+                                    @foreach (array_count_values($post['reactionList']) as $reaction => $count)
+                                        <button class="nav-link"
+                                            id="nav-{{ $reaction }}-reaction-tab-{{ $post['event_post_id'] }}"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#nav-{{ $reaction }}-reaction-{{ $post['event_post_id'] }}"
+                                            type="button" role="tab"
+                                            aria-controls="nav-{{ $reaction }}-reaction"
+                                            aria-selected="false">
+                                            <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                                alt="{{ $reaction }}" loading="lazy">
+                                            {{ $count }}
+                                        </button>
                                     @endforeach
+                                </div>
+                            </nav>
 
-                                </ul>
-                            </div>
+                            <!-- ===tabs=== -->
 
-                            {{-- <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
+                            <!-- ===Tab-content=== -->
+                            <div class="tab-content" id="myTabContent">
+
+                                <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
+                                    aria-labelledby="nav-all-reaction-tab">
+                                    <ul>
+                                        @php
+                                            // Define reaction icons mapping
+                                            $reactionIcons = [
+                                                "\\u{2764}" => asset('assets/front/img/heart-emoji.png'), // ❤️
+                                                "\\u{1F44D}" => asset('assets/front/img/thumb-icon.png'), // 👍
+                                                "\\u{1F604}" => asset('assets/front/img/smily-emoji.png'), // 😄
+                                                "\\u{1F60D}" => asset('assets/front/img/eye-heart-emoji.png'), // 😍
+                                                "\\u{1F44F}" => asset('assets/front/img/clap-icon.png'), // 👏
+                                            ];
+                                        @endphp
+                                        @foreach ($post['reactionList'] as $reaction)
+                                            <li class="reaction-info-wrp">
+                                                <div class="commented-user-head">
+                                                    <!-- User Profile Section -->
+                                                    <div class="commented-user-profile">
+                                                        <div class="commented-user-profile-img">
+                                                            @if ($users->profile != '')
+                                                                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                                                    alt="" loading="lazy">
+                                                            @else
+                                                                @php
+
+                                                                    // $parts = explode(" ", $name);
+                                                                    $nameParts = explode(' ', $users->firstname);
+                                                                    $lastname = explode(' ', $users->lastname);
+                                                                    $firstInitial = isset($nameParts[0][0])
+                                                                        ? strtoupper($nameParts[0][0])
+                                                                        : '';
+                                                                    $secondInitial = isset($lastname[0][0])
+                                                                        ? strtoupper($lastname[0][0])
+                                                                        : '';
+                                                                    $initials = $firstInitial . $secondInitial;
+
+                                                                    // Generate a font color class based on the first initial
+                                                                    $fontColor = 'fontcolor' . $firstInitial;
+                                                                @endphp
+                                                                <h5 class="{{ $fontColor }}">
+                                                                    {{ $initials }}
+                                                                </h5>
+                                                            @endif
+
+
+                                                        </div>
+                                                        <div class="commented-user-profile-content">
+                                                            <h3>{{ $users->firstname }} {{ $users->lastname }}</h3>
+                                                            <p>{{ $users->city }},{{ $users->state }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Reaction Emoji Section -->
+                                                    <div
+                                                        class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                                            alt="{{ $reaction }}" loading="lazy">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                </div>
+
+                                {{-- <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
                                 aria-labelledby="nav-heart-reaction-tab">
                                 <ul>
                                     <li class="reaction-info-wrp">
@@ -2542,18 +2654,18 @@
                                     </li>
                                 </ul>
                             </div> --}}
+                            </div>
+                            <!-- ===Tab-content=== -->
                         </div>
-                        <!-- ===Tab-content=== -->
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="cmn-btn reset-btn">Reset</button>
-                    <button type="button" class="cmn-btn">Apply</button>
+                    <div class="modal-footer">
+                        <button type="button" class="cmn-btn reset-btn">Reset</button>
+                        <button type="button" class="cmn-btn">Apply</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
     <!-- ========= edit-rsvp ======== -->
     <div class="modal fade cmn-modal" id="editrsvp" tabindex="-1" aria-labelledby="editrsvpLabel"
         aria-hidden="true">
@@ -2561,7 +2673,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="editrsvpLabel">Edit RSVP Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="guest-rsvp-head">
@@ -2576,17 +2689,21 @@
                             <div class="guest-edit-box">
                                 <p>Adults</p>
                                 <div class="qty-container ms-auto">
-                                    <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
+                                    <button class="qty-btn-minus" type="button"><i
+                                            class="fa fa-minus"></i></button>
                                     <input type="number" name="qty" value="0" class="input-qty" />
-                                    <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                                    <button class="qty-btn-plus" type="button"><i
+                                            class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="guest-edit-box">
                                 <p>Kids</p>
                                 <div class="qty-container ms-auto">
-                                    <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
+                                    <button class="qty-btn-minus" type="button"><i
+                                            class="fa fa-minus"></i></button>
                                     <input type="number" name="qty" value="0" class="input-qty" />
-                                    <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                                    <button class="qty-btn-plus" type="button"><i
+                                            class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>

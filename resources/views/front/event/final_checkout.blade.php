@@ -38,17 +38,17 @@
                                 <img id="eventImage" src="" />
                             </div>
                         </div>
-                        
-                        <div class="item">
+
+                        <!-- <div class="item">
                             <div class="setting-img">
-                                <img id="eventImage" src="" />
+                                <img id="sliderImages" src="" />
                             </div>
-                        </div>
+                        </div> -->
                        
                     </div>
-                    <div class="setting-img">
+                    <!-- <div class="setting-img">
                         <img id="eventImage" src="" />
-                    </div>
+                    </div> -->
                     <div class="align-items-center editable-links editable-responsive">
                         <div>
                             <a href="#" class="d-flex align-items-center li_guest">

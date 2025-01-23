@@ -4,8 +4,7 @@
 $email_checked = '';
 $phone_checked = '';
 $disabled = '';
-$emialAlredy = '';
-$phoneAlredy = '';
+$commonAlredy = '';
 $foundKey=false;
 
 if(isset($selected_user) && !empty($selected_user)){
@@ -16,15 +15,13 @@ if(isset($selected_user) && !empty($selected_user)){
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';
         $phone_checked = '';
-        $emialAlredy = '';
-        $phoneAlredy = '';
+        $commonAlredy = '';
         if ($data->id === (int)$selected_user[$key]['id']) {
+            $commonAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
             if($selected_user[$key]['prefer_by'] == 'email'){
                 $email_checked = 'checked';
-                $emialAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
             }elseif($selected_user[$key]['prefer_by'] == 'phone'){
                 $phone_checked = 'checked';
-                $phoneAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
             }
         }
     }
@@ -107,7 +104,7 @@ if(isset($selected_user) && !empty($selected_user)){
                 value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}> -->
                 <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
-                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}>
+                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$commonAlredy}}>
         </div>
         @endif
         @if(isset($data->phone_number) && $data->phone_number!="")
@@ -118,7 +115,7 @@ if(isset($selected_user) && !empty($selected_user)){
 
                 <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
-                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}>
+                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$commonAlredy}}>
                 </div>
                 @endif
     </div>
@@ -194,7 +191,7 @@ if(isset($selected_user) && !empty($selected_user)){
                 value="{{ $data->id }}" {{( $data->group_member_prefer_by=="email")?'checked':""}}>
                 <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_email[]" data-preferby="email" data-id="user-{{$data->id}}" data-email="{{ $data->email }}"
-                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$emialAlredy}}> -->
+                value="{{ $data->id }}" {{$email_checked}} {{$disabled}} {{$commonAlredy}}> -->
         </div>
         @endif
         @if(isset($data->phone_number) && $data->phone_number!="")
@@ -205,7 +202,7 @@ if(isset($selected_user) && !empty($selected_user)){
 
                 <!-- <input class="form-check-input user_group_member user_choice" type="checkbox"
                 name="add_by_mobile[]" data-preferby="phone" data-mobile="{{$data->phone_number}}"
-                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$phoneAlredy}}> -->
+                value="{{ $data->id }}"   {{$phone_checked}} {{$disabled}} {{$commonAlredy}}> -->
                 </div>
                 @endif
     </div>
