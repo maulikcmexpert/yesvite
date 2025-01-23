@@ -171,7 +171,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+                    `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="cover-img" >`
                 );
         }
     } else {
@@ -179,7 +179,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
 
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-        console.log(fontColor);
+
         $("#selected-user-profile").replaceWith(
             `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
         );
@@ -194,7 +194,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+                    `<h5 class="user-avatar img-fluid ${fontColor}">${initials}</h5>`
                 );
         }
     }
@@ -206,7 +206,7 @@ async function getSelectedUserimg(profileImageUrl, userName) {
     } else {
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-        console.log(fontColor);
+
         return `<h5 class="${fontColor} selected-user-img user-img"  src="">${initials}</h5>`;
     }
 }
@@ -218,7 +218,6 @@ async function getListUserimg(profileImageUrl, userName) {
 
     const initials = getInitials(userName);
     const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-    console.log(fontColor);
 
     return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
@@ -234,7 +233,6 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
         // console.log(initials);
 
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-        console.log(fontColor);
 
         return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
     }
@@ -802,8 +800,8 @@ async function updateChatfromGroup(conversationId) {
     $("#selected-user-name").html(groupInfo.groupName);
     await updateProfileImg(
         groupInfo.groupProfile,
-        groupInfo.groupName
-        // conversationId
+        groupInfo.groupName,
+        conversationId
     );
 
     $(".selected_name").val(groupInfo.groupName);
@@ -3313,10 +3311,11 @@ function generateReactionsAndReply() {
 generateReactionsAndReply();
 
 $("#choose-file").on("change", async function () {
+    let profileIm = document.getElementById("profileIm");
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        $("#profileIm").replaceWith(
+        $(profileIm).replaceWith(
             `<img id="profileIm" src="${e.target.result}" alt="user-img">`
         );
     };
@@ -3327,7 +3326,7 @@ $("#choose-file").on("change", async function () {
                 storage,
                 `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
             );
-            const previewImg = $("#profileIm");
+            const previewImg = $(profileIm);
             const imageUrl = previewImg.attr("src");
             if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
