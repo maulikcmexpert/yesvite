@@ -160,6 +160,8 @@
                     <h6>Color</h6>
                 </button>
             </div>
+
+            
             <div class="edit-images-button-inner format-edit-wrp">
                 <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar')">
                     <span>
