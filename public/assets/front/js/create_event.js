@@ -3,108 +3,25 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
-var selected_co_host_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
+var selected_co_host = "";
+var selected_co_host_prefer_by = "";
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer = ($("#cohostId").val() !== "")? 1: 0;
+var lengtUSer = 0;
 var selected_gift = [];
-var selected_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
-    ? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
-    : "";
-var selected_profile_or_text =($("#cohostprofile").val() !== "")? '1': "0";
-var selected_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var selected_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
-var selected_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
+var selected_user_name = "";
+var selected_profilePhoto = "";
+var selected_dataId = "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
 
-var final_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
-var final_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
-? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
-: "";
-var final_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
-var final_profile_or_text = ($("#cohostprofile").val() !== "")? '1': "0";
-var final_prefer_by =  ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var final_initial = final_user_name!=""? ($("#cohostFname").val().charAt(0) + $("#cohostLname").val().charAt(0)).toUpperCase() :"";
-if (final_profile_or_text == "1") {
-    $(".guest-img .selected-co-host-image").show();
-    $(".guest-img .selected-co-host-image").attr(
-        "src",
-        final_profilePhoto
-    );
-    $(".guest-img .selected-host-h5").css("display", "none");
-} else {
-    // $('.guest-img').html(profilePhoto    );
-    $(".selected-host-h5").show();
-    $(".selected-co-host-image").css("display", "none");
-    $(".guest-img .selected-host-h5").text(final_initial);
-    var firstinitial = final_initial.charAt(0);
-    // $('.selected-host-h5').removeClass(function (index, className) {
-    //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
-    // });
-    // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-
-    $(".guest-img .selected-host-h5").removeClass(function (
-        index,
-        className
-    ) {
-        return (className.match(/\bfontcolor\S+/g) || []).join(
-            " "
-        );
-    });
-
-    // Add the new class
-    $(".guest-img .selected-host-h5").addClass(
-        "fontcolor" + firstinitial
-    );
-}
-if (selected_dataId != "") {
-    var profilePhoto = selected_profilePhoto;
-    var user_name = selected_user_name;
-    var dataId = selected_dataId;
-    var profile_or_text = selected_profile_or_text;
-    var prefer_by = selected_prefer_by;
-    // console.log(prefer_by);
-    eventData.co_host = dataId;
-    selected_co_host = dataId;
-    selected_co_host_prefer_by = prefer_by;
-    var initial = final_initial
-   
-
-    if (profile_or_text == "1") {
-        $(".selected-co-host-image").show();
-        $(".selected-co-host-image").attr("src", profilePhoto);
-        $(".selected-host-h5").css("display", "none");
-    } else {
-        $(".selected-host-h5").show();
-        $(".selected-co-host-image").css("display", "none");
-        $(".selected-host-h5").text(initial);
-    }
-    $(".remove_co_host").attr("data-id", selected_co_host);
-    $(".selected-host-name").text(user_name);
-    $(".guest-contacts-wrp").css("display", "flex");
-    $(".guest-contacts-wrp").addClass("guest-contacts-test");
-
-    eventData.co_host_prefer_by = prefer_by;
-    if (profile_or_text == "1") {
-        $(".add_new_co_host")
-            .html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
-                <img src="${final_profilePhoto}"
-                    alt="logo">
-            </div></span>
-            <h5>${user_name}</h5>`);
-    } else {
-        $(".add_new_co_host")
-            .html(`<span class="mx-3"><div class="contact-img">
-               <h5 class="fontcolor${firstinitial} add-item-under-text">${initial}</h5>
-            </div></span>
-            <h5>${user_name}</h5>`);
-    }
-    toggleSidebar();
-}
-
+var final_profilePhoto = "";
+var final_user_name = "";
+var final_dataId = "";
+var final_profile_or_text = "";
+var final_prefer_by = "";
+var final_initial = "";
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -133,6 +50,9 @@ if (giftRegestryDataRaw.length > 0) {
         console.error("Invalid JSON data:", e);
     }
 }
+
+var selected_profile_or_text = "";
+var selected_prefer_by = "";
 var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
@@ -5541,7 +5461,6 @@ $(document).on("click", ".save_event_co_host", function () {
                 </div></span>
                 <h5>${user_name}</h5>`);
         } else {
-            alert(profilePhoto);
             $(".add_new_co_host")
                 .html(`<span class="mx-3"><div class="contact-img">
                     ${profilePhoto}
@@ -6285,7 +6204,6 @@ $(document).on("change", 'input[name="gift_registry[]"]', function () {
         //     });
         //     eventData.gift_registry_data = selected_gift;
     }
-    console.log(eventData);
 });
 
 $(document).on("click", ".brand-progress", function () {
@@ -6576,7 +6494,7 @@ $(document).on("click", ".add_co_host", function () {
     $(".co_host_search").css("display", "block");
     $(".phone_co_host_search").css("display", "none");
 
-    get_co_host_list(null, cohostlimit, cohostoffset, false, 1);
+    get_co_host_list('1',null, cohostlimit, cohostoffset, false, 1);
     $("#select_event_cohost").css("display", "block");
 
     setTimeout(() => {
@@ -6626,8 +6544,9 @@ $(document).on("click", "#contact-tab", function () {
     cohostNoMoreData = false;
     cohostphoneOffset = 0;
     cohostphoneLimit = 10;
+    var isHost =$(this).attr('data-isHost');
     $("#phone-tab-cantact").removeClass("active");
-    get_co_host_list(null, cohostlimit, cohostoffset, false);
+    get_co_host_list(isHost,null, cohostlimit, cohostoffset, false);
     $("#select_event_cohost").css("display", "block");
     
     if (co_host_is_selected_close == true) {
@@ -6675,6 +6594,7 @@ $(document).on("click", ".overlay", function () {
 });
 
 function get_co_host_list(
+    isHost,
     search_name = null,
     limit,
     offset,
@@ -6691,7 +6611,11 @@ function get_co_host_list(
     console.log(selected_co_host_prefer_by);
 
     if (selected_co_host == "") {
-        // $(".guest-contacts-wrp").css("display", "none");
+        if(isHost == '1'){
+            $(".guest-contacts-wrp").css("display", "none");
+        }else{
+            $(".guest-contacts-wrp").css("display", "flex");
+        }
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
         cohostId = "";
         var checkedCheckbox = $('input[name="guest_list[]"]:checked');
@@ -6783,8 +6707,8 @@ function get_co_host_list(
                     $(".selected-host-h5").show();
                     $(".selected-co-host-image").css("display", "none");
                     $(".guest-img .selected-host-h5").text(final_initial);
-                   
                     var firstinitial = final_initial.charAt(0);
+
                     // $('.selected-host-h5').removeClass(function (index, className) {
                     //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
                     // });
@@ -7059,7 +6983,7 @@ $("#select_event_cohost").on("scroll", function () {
         var type = "yesvite";
         var scroll = true;
         if (cohostNoMoreData == false) {
-            get_co_host_list(
+            get_co_host_list('0',
                 (search_name = null),
                 cohostlimit,
                 cohostoffset,
@@ -7099,6 +7023,7 @@ $("#select_contact_event_cohost").on("scroll", function () {
             // get_co_host_list(search_name = null, cohostlimit, cohostoffset, scroll);
             if (cohostNoMoreContactData == false) {
                 get_phone_host_list(
+                    '0',
                     null,
                     cohostphoneLimit,
                     cohostphoneOffset,
@@ -7117,7 +7042,7 @@ $(document).on("keyup", ".co_host_search", function () {
         $(".list_all_invited_user").html("");
         // cohostoffset=0;
         // cohostlimit=7;
-        get_co_host_list(search_name, null, null, false);
+        get_co_host_list('0',search_name, null, null, false);
     }, 500);
 });
 
@@ -7606,8 +7531,6 @@ $(document).on("click", ".save-slider-image", function () {
                 console.log(eventData);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
-                $(".design-sidebar_7").removeClass("d-none");
-
             },
             error: function (xhr, status, error) {},
         });
@@ -7639,7 +7562,6 @@ $(document).on("click", ".delete_silder", function (e) {
                 },
                 success: function (response) {
                     $this.parent().find(".slider_img").attr("src", "");
-                    $this.parent().find(".slider_img").attr("data-img", "");
                     $(".photo-slider-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
@@ -7708,37 +7630,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     });
 });
 
-$(document).on('click','.update-slider-image',function(){
-    const sliderImages = eventData.slider_images; 
-    const fileNames = sliderImages.map(img => img.fileName);
-    $('.slider_img').each(function () {
-        const dataImg = $(this).data('img');
-        const matchIndex = sliderImages.findIndex(img => img.fileName === dataImg);
-    
-        if (matchIndex !== -1) {
-            $(this).attr('data-filename', sliderImages[matchIndex].fileName);
-            $(this).attr('data-delete-id', sliderImages[matchIndex].deleteId);
-        } else {
-            $(this).remove();
-        }
-    });
-    
-    const updatedSliderImages = sliderImages.filter(img =>
-        $('.slider_img').filter((_, elem) => $(elem).data('img') === img.fileName).length > 0
-    );
-    
-    sliderImages.length = 0;
-    $.merge(sliderImages, updatedSliderImages);
-    
-    eventData.slider_images=sliderImages;
-    toastr.success("Slider Image saved Successfully");
 
-    $(".design-sidebar_7").addClass("d-none");
-
-    console.log(eventData);
-    console.log('Updated sliderImages:', sliderImages);
-
-});
 $(document).on("click", ".design-sidebar-action", function() {
     let designId = $(this).attr("design-id");
     if (designId) {
@@ -7747,43 +7639,21 @@ $(document).on("click", ".design-sidebar-action", function() {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
-            var temp_id=  $(this).data("temp_id");
+            if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_7").removeClass("d-none");
+                $("#sidebar").addClass("design-sidebar_7");
+                $(".close-btn").attr("data-id", "design-sidebar_7");
+                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
 
-            if(parseInt(temp_id)==eventData.temp_id){
-                if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
-                    $('.uploaded-img-card-edit').css('display','none');
-                    $(".design-sidebar").addClass("d-none");
-                    $(".design-sidebar_7").removeClass("d-none");
-                    $('.update-slider-image').css('display','block');
-                    $('.save-slider-image').css('display','none');
-                    $("#sidebar").addClass("design-sidebar_7");
-                    $(".close-btn").attr("data-id", "design-sidebar_7");
-                    const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
-                    const sliderImages = eventData.slider_images; 
-                    console.log(sliderImages);
-                    
-                    photoSliders.forEach((sliderClass, index) => {
-                        const sliderElement = $(`.${sliderClass}`);
-                        if (sliderElement.length) {
-                            if (sliderImages[index]) {
-                                sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
-                                sliderElement.attr('data-img',sliderImages[index].fileName);
-                                sliderElement.css('display','block');
-                            } else {
-                                sliderElement.css('display','none');
-    
-                            }
-                        }
-                    });
-                    
-                } else {
-                    $(".design-sidebar").addClass("d-none");
-                    $(".design-sidebar_" + designId).removeClass("d-none");
-                    $("#sidebar").addClass("design-sidebar_" + designId);
-                    $(".close-btn").attr("data-id", "design-sidebar_" + designId);
-                }
-            }
-             else {
+                const sliderImages=eventData.slider_images;
+                photoSliders.forEach((sliderId, index) => {
+                    const sliderElement = document.getElementsByClassName(sliderId); // Get the slider by ID
+                    if (sliderElement && sliderImages[index]) {
+                        sliderElement.src = `${base_url+'public/storage/event_images/'+sliderImages[index].fileName}`; // Set the image URL
+                    }
+                });
+            } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_" + designId);
