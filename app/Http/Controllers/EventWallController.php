@@ -832,14 +832,13 @@ $js=['event_wall','post_like_comment'];
         $creatEventPost->save();
 
         if ($creatEventPost->id  && $request->hasFile('files')) {
-
+            $postimages = $request->file('files');
 
             $video = 0;
             $image = 0;
-                    $postimages = $request->file('files');
+
                     // dd($postimages);
-                    foreach ($postimages as $key => $postImgValue) {
-                        $postImage = $postImgValue;
+                    foreach ($postimages as $key => $postImage) {
 
                         $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
 

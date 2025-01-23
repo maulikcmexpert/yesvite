@@ -98,151 +98,195 @@ $(document).ready(function () {
 
     // Handle comment submission (first-time comment or reply)
     // Handle comment submission
-    $(document).on('click', '.comment-send-icon', function () {
-        const parentWrapper = $(this).closest('.posts-card-main-comment'); // Find the closest comment wrapper
-        const commentInput = parentWrapper.find('#post_comment'); // Find the input within the current post
+// Handle comment submission
+// Handle comment submission
+$(document).on('click', '.comment-send-icon', function () {
+    const parentWrapper = $(this).closest('.posts-card-main-comment'); // Find the closest comment wrapper
+    const commentInput = parentWrapper.find('#post_comment'); // Find the input within the current post
 
-        const commentText = commentInput.val().trim();
-        const parentCommentId = $('.commented-user-wrp.active').data('comment-id') || null; // Find active comment if replying
+    const commentText = commentInput.val().trim();
+    const parentCommentId = $('.commented-user-wrp.active').data('comment-id') || null; // Find active comment if replying
 
-        if (commentText === '') {
-            alert('Please enter a comment');
-            return;
-        }
-        console.log(parentCommentId);
-        const eventId = $(this).data('event-id');
-        const eventPostId = $(this).data('event-post-id');
+    if (commentText === '') {
+        alert('Please enter a comment');
+        return;
+    }
 
-        const url = parentCommentId
-            ? base_url + "event_photo/userPostCommentReply"
-            : base_url + "event_photo/userPostComment";
+    const eventId = $(this).data('event-id');
+    const eventPostId = $(this).data('event-post-id');
 
-        // AJAX request
-        $.ajax({
-            url: url,
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                comment: commentText,
-                event_id: eventId,
-                event_post_id: eventPostId,
-                parent_comment_id: parentCommentId
-            },
-            success: function (response) {
-                if (response.success) {
-                    console.log(response.data);
-                    $('#post_comment').val(''); // Clear the input field
+    const url = parentCommentId
+        ? base_url + "event_photo/userPostCommentReply"
+        : base_url + "event_photo/userPostComment";
 
-                    const data = response.data;
+    // AJAX request
+    $.ajax({
+        url: url,
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            comment: commentText,
+            event_id: eventId,
+            event_post_id: eventPostId,
+            parent_comment_id: parentCommentId
+        },
+        success: function (response) {
+            if (response.success) {
+                const data = response.data;
 
-                    const profileImage = data.profile || generateProfileImage(data.username);
-                    console.log('Profile Image URL:', profileImage);
+                // Generate profile image or initials
+                const profileImage = data.profile || generateProfileImage(data.username);
 
+                function generateProfileImage(username) {
+                    if (!username) return ''; // Return an empty string if the username is undefined
 
-                    function generateProfileImage(username) {
-                        if (!username) return ''; // Return an empty string if the username is undefined
+                    // Split the username into parts
+                    const nameParts = username.split(' ');
+                    const firstInitial = nameParts[0]?.[0]?.toUpperCase() || '';
+                    const secondInitial = nameParts[1]?.[0]?.toUpperCase() || '';
+                    const initials = `${firstInitial}${secondInitial}`;
 
-                        // Split the username into parts
-                        const nameParts = username.split(' ');
+                    // Generate a font color class based on the first initial
+                    const fontColor = `fontcolor${firstInitial}`;
+                    return `<h5 class="${fontColor} font_name">${initials}</h5>`;
+                }
 
-                        // Get the first and second initials
-                        const firstInitial = nameParts[0]?.[0]?.toUpperCase() || '';
-                        const secondInitial = nameParts[1]?.[0]?.toUpperCase() || '';
-                        const initials = `${firstInitial}${secondInitial}`;
-
-                        // Generate a font color class based on the first initial (optional)
-                        const fontColor = `fontcolor${firstInitial}`;
-
-                        // Return initials inside an h5 tag with dynamic styling
-                        return `<h5 class="${fontColor} font_name">${initials}</h5>`;
-                    }
-
-                    const newCommentHTML = `
-                    <li class="commented-user-wrp" data-comment-id="${data.comment_id}">
-                        <div class="commented-user-head">
-                            <div class="commented-user-profile">
-                                <div class="commented-user-profile-img">
-                                     ${profileImage}
-                                </div>
-                                <div class="commented-user-profile-content">
-                                    <h3>${data.username}</h3>
-                                    <p>${data.location || ''}</p>
-                                </div>
+                const newCommentHTML = `
+                <li class="commented-user-wrp" data-comment-id="${data.comment_id}">
+                    <div class="commented-user-head">
+                        <div class="commented-user-profile">
+                            <div class="commented-user-profile-img">
+                                 ${profileImage}
                             </div>
-                            <div class="posts-card-like-comment-right">
-                                <p>${data.posttime}</p>
-                                <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                            <div class="commented-user-profile-content">
+                                <h3>${data.username}</h3>
+                                <p>${data.location || ''}</p>
                             </div>
                         </div>
-                        <div class="commented-user-content">
-                            <p>${data.comment}</p>
+                        <div class="posts-card-like-comment-right">
+                            <p>${data.posttime}</p>
+                            <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                         </div>
-                        <div class="commented-user-reply-wrp">
-                            <div class="position-relative d-flex align-items-center gap-2">
-                                <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
-                                <p>0</p>
-                            </div>
-                            <button class="commented-user-reply-btn">Reply</button>
+                    </div>
+                    <div class="commented-user-content">
+                        <p>${data.comment}</p>
+                    </div>
+                    <div class="commented-user-reply-wrp">
+                        <div class="position-relative d-flex align-items-center gap-2">
+                            <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                            <p>0</p>
                         </div>
-                        <ul class="primary-comment-replies"></ul>
-                    </li>
+                        <button class="commented-user-reply-btn">Reply</button>
+                    </div>
+                    <ul class="primary-comment-replies"></ul>
+                </li>
                 `;
 
-                    if (parentCommentId) {
-                        // Append as a reply to the parent comment
-                        const parentComment = $(`li[data-comment-id="${parentCommentId}"]`); // Find the parent comment
-                        if (parentComment.length > 0) {
-                            // If the parent comment has no replies, create a new <ul> for replies
-                            let replyList = parentComment.find('ul');
-                            if (replyList.length === 0) {
-                                replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment); // Create <ul> if not exists// Create <ul> if not exists
-                            }
-                            // Append the new reply under the parent comment's <ul>
+                if (parentCommentId) {
+                    // Append as a reply to the parent comment
+                    const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
+                    if (parentComment.length > 0) {
+                        let replyList = parentComment.find('ul.primary-comment-replies');
+                        if (replyList.length === 0) {
+                            replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
+                        }
+
+                        // Check if the reply is already appended
+                        const existingReply = replyList.find(`li[data-comment-id="${data.comment_id}"]`);
+                        if (existingReply.length === 0) {
                             replyList.append(newCommentHTML);
                         }
-                    } else {
-                        // Append as a new top-level comment
-                        $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
+                    }
+                } else {
+                    // Append as a new top-level comment
+                    const commentList = $(`.posts-card-show-all-comments-wrp.show_${eventPostId}`).find('.top-level-comments');
+
+                    // Check if the comment is already appended
+                    const existingComment = commentList.find(`li[data-comment-id="${data.comment_id}"]`);
+                    if (existingComment.length === 0) {
+                        commentList.append(newCommentHTML);
                     }
                 }
-            },
-            error: function (xhr) {
-                console.error(xhr.responseText);
-                alert('An error occurred. Please try again.');
+                // Clear input field
+                commentInput.val('');
+
+                // Handle replies if any are provided in the response
+                if (data.comment_replies && data.comment_replies.length > 0) {
+                    data.comment_replies.forEach(function (reply) {
+                        const replyHTML = `
+                        <li class="reply-on-comment" data-comment-id="${reply.id}">
+                            <div class="commented-user-head">
+                                <div class="commented-user-profile">
+                                    <div class="commented-user-profile-img">
+                                        <img src="${reply.profile || 'default-image.png'}" alt="">
+                                    </div>
+                                    <div class="commented-user-profile-content">
+                                        <h3>${reply.username}</h3>
+                                        <p>${reply.location || ''}</p>
+                                    </div>
+                                </div>
+                                <div class="posts-card-like-comment-right">
+                                    <p>${reply.posttime || 'Just now'}</p>
+                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="commented-user-content">
+                                <p>${reply.comment || 'No content'}</p>
+                            </div>
+                            <div class="commented-user-reply-wrp">
+                                <div class="position-relative d-flex align-items-center gap-2">
+                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <p>${reply.comment_total_likes || 0}</p>
+                                </div>
+                                <button class="commented-user-reply-btn">Reply</button>
+                            </div>
+                        </li>
+                        `;
+                        replyList.append(replyHTML);
+
+                    });
+                }
             }
-        });
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('An error occurred. Please try again.');
+        }
     });
-
-    // Handle reply button click
-    $(document).on('click', '.commented-user-reply-btn', function () {
-        const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
-        const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
-
-        // Set the active comment for reply
-        $('.commented-user-wrp').removeClass('active'); // Clear any previously active comments
-        $(this).closest('.commented-user-wrp').addClass('active');
-
-        // Insert the parent username in the input field
-        const commentBox = $('#post_comment');
-        commentBox.val(`@${parentName} `).focus();
-    });
+});
 
 
-    // Handle reply button click (when replying to a comment)
-    $(document).on('click', '.commented-user-reply-btn', function () {
-        const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
-        const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
 
-        // Set the active comment for reply
-        $('.commented-user-wrp').removeClass('active'); // Clear any previously active comments
-        $(this).closest('.commented-user-wrp').addClass('active');
-        $('#parent_comment_id').val(parentId);
-        // Insert the parent username in the input field
-        const commentBox = $('#post_comment');
-        commentBox.val(`@${parentName} `).focus();
-    });
+// Handle reply button click
+$(document).on('click', '.commented-user-reply-btn', function () {
+    const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
+    const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+
+    // Set the active comment for reply
+    $('.commented-user-wrp').removeClass('active'); // Clear any previously active comments
+    $(this).closest('.commented-user-wrp').addClass('active');
+
+    // Insert the parent username in the input field
+    const commentBox = $('#post_comment');
+    commentBox.val(`@${parentName} `).focus();
+});
+
+
+// Handle reply button click (when replying to a comment)
+$(document).on('click', '.commented-user-reply-btn', function () {
+    const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
+    const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+
+    // Set the active comment for reply
+    $('.commented-user-wrp').removeClass('active'); // Clear any previously active comments
+    $(this).closest('.commented-user-wrp').addClass('active');
+    $('#parent_comment_id').val(parentId);
+    // Insert the parent username in the input field
+    const commentBox = $('#post_comment');
+    commentBox.val(`@${parentName} `).focus();
+});
 
 
 
