@@ -7685,6 +7685,8 @@ $(document).on('click','.update-slider-image',function(){
     $.merge(sliderImages, updatedSliderImages);
     
     eventData.slider_images=sliderImages;
+    $(".design-sidebar_7").addClass("d-none");
+
     console.log(eventData);
     console.log('Updated sliderImages:', sliderImages);
 
