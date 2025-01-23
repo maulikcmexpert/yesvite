@@ -5519,16 +5519,20 @@ $(document).on("click", ".final_checkout", function () {
     // $("#loader").show();
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
-    eventData.slider_images.forEach((image) => {
-        const imageHtml = `
-            <div class="item">
-                <div class="setting-img">
-                    <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+    console.log(eventData.slider_images);
+    if(eventData.slider_images!=undefined && eventData.slider_images!=""){
+        eventData.slider_images.forEach((image) => {
+            const imageHtml = `
+                <div class="item">
+                    <div class="setting-img">
+                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+                    </div>
                 </div>
-            </div>
-        `;
-        $('.event_images_slider').append(imageHtml);
-    });
+            `;
+            $('.owl-stage').append(imageHtml);
+        });
+    }
+   
 
     $("#eventImage").attr(
         "src",
