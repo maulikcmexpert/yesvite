@@ -1135,7 +1135,7 @@ function addActivity(container, date) {
 function removeActivity(button) {
     button.parentElement.remove();
 }
-$(document).on("click","#end_time",function(){
+$(document).on("click","#end-time",function(){
     var start_time = $('#start-time').val(); 
         
     if (start_time) { 
