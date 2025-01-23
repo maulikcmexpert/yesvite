@@ -989,6 +989,11 @@
     object-fit: contain !important;
 }
 
+.event_images_slider{
+    width: 100%;
+    max-width: 500px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
