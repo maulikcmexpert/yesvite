@@ -5519,6 +5519,7 @@ $(document).on("click", ".final_checkout", function () {
     // $("#loader").show();
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
+    console.log(eventData.slider_images);
     eventData.slider_images.forEach((image) => {
         const imageHtml = `
             <div class="item">
