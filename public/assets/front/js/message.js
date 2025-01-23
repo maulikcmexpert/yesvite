@@ -2118,6 +2118,8 @@ function createMessageElement(
         `time_${messageRcvTime.replace(/\s/g, "")}`
     );
     let setTimeS = 1;
+    let setTimeR = 1;
+
     if (isSender) {
         if (msgLoop != 0) {
             Array.from(time).forEach((timeElement) => {
@@ -2134,7 +2136,6 @@ function createMessageElement(
         const Rtime = document.getElementsByClassName(
             `rtime_${messageRcvTime.replace(/\s/g, "")}`
         );
-        let setTimeR = 1;
         if (recMsgLoop != 0) {
             Array.from(Rtime).forEach((timeElement) => {
                 if ($(timeElement).data("Rloop") > recMsgLoop) {
