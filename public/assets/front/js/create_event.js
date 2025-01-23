@@ -5598,17 +5598,32 @@ $(document).on("click", ".final_checkout", function () {
             ""
     );
     console.log(eventData.slider_images);
+    const photoSliders = ['sliderImages-1', 'sliderImages-2', 'sliderImages-3'];
+    const sliderImages = eventData.slider_images; 
+    console.log(sliderImages);
     if(eventData.slider_images!=undefined && eventData.slider_images!=""){
-        eventData.slider_images.forEach((image) => {
-            const imageHtml = `
-                <div class="item">
-                    <div class="setting-img">
-                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
-                    </div>
-                </div>
-            `;
-            $('.event_images_slider').append(imageHtml);
-        });
+        // eventData.slider_images.forEach((image) => {
+        //     const imageHtml = `
+        //         <div class="item">
+        //             <div class="setting-img">
+        //                 <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+        //             </div>
+        //         </div>
+        //     `;
+        //     $('.event_images_slider').append(imageHtml);
+        // });
+
+     
+                    
+                    photoSliders.forEach((sliderClass, index) => {
+                        const sliderElement = $(`.${sliderClass}`);
+                        if (sliderElement.length) {
+                            if (sliderImages[index]) {
+                                sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                            } else {    
+                            }
+                        }
+                    });
     }
    
     $('.event_images_slider').owlCarousel({
