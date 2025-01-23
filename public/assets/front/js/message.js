@@ -48,6 +48,7 @@ document.getElementById("message-box").addEventListener("input", function () {
         textarea.style.overflowY = "hidden"; // Hide scroll if less than max height
     }
 });
+loader.show();
 function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
@@ -564,9 +565,7 @@ function updateUserInFirebase(user_id) {
         });
     });
 }
-setTimeout(() => {
-    loader.hide();
-}, 3000);
+
 // Function to update the chat UI
 // $('.empty-massage').css('display','none');
 $(".msg-head").css("display", "none");
@@ -2099,7 +2098,8 @@ function createMessageElement(
             chatSmallDay +
             ", " +
             msgDate +
-            "</span></h5>";
+            messageData.timeStamp;
+        ("</span></h5>");
     } else if (formattedDate[msgDate] === undefined) {
         // console.log(formattedDate);
         // console.log(msgDate);
@@ -2115,7 +2115,8 @@ function createMessageElement(
                 chatSmallDay +
                 ", " +
                 msgDate +
-                "</span></h5>";
+                messageData.timeStamp;
+            ("</span></h5>");
         }
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
@@ -4349,6 +4350,7 @@ async function findOrCreateSingleConversation(
 }
 setTimeout(function () {
     firstTime = false;
+    loader.hide();
 }, 5000);
 
 function applyStyles() {
