@@ -5629,10 +5629,26 @@ $(document).on("click", ".final_checkout", function () {
                     });
     }
    
-    var swiper = new Swiper(".event_images_slider", {
-        slidesPerView: 1,
-        loop: false,
-    });
+    $('.event_images_slider').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
+    // var swiper = new Swiper(".event_images_slider", {
+    //     slidesPerView: 1,
+    //     loop: false,
+    // });
 
 // if (!$('.event_images_slider').data('owl.carousel')) { 
 
