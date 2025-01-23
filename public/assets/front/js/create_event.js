@@ -7637,17 +7637,19 @@ $(document).on("click", ".design-sidebar-action", function() {
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
-                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
-
-                const sliderImages=eventData.slider_images;
+                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3']; // Slider class names
+                const sliderImages = eventData.slider_images; // Array of image objects
                 console.log(sliderImages);
                 
                 photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = $(`.${sliderClass}`); 
+                    // Select the element by the class name
+                    const sliderElement = $(`.${sliderClass}`);
                     if (sliderElement.length && sliderImages[index]) {
+                        // Set the `src` attribute dynamically
                         sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
                     }
                 });
+                
             } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");
