@@ -498,6 +498,7 @@ function moveToTopOrBelowPinned(element) {
     if (element.length <= 0) {
         return;
     }
+    console.log("moved====================");
 
     let $chatList = $(".chat-list"); // Get the chat list container
     let parentDiv = element.closest("div"); // Get the parent div of the li element
@@ -4341,7 +4342,7 @@ async function findOrCreateSingleConversation(
 }
 setTimeout(function () {
     firstTime = false;
-}, 4500);
+}, 5000);
 
 function applyStyles() {
     if ($(window).width() <= 767) {
