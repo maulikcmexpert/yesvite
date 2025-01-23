@@ -2118,32 +2118,34 @@ function createMessageElement(
         `time_${messageRcvTime.replace(/\s/g, "")}`
     );
     let setTimeS = 1;
-    if (msgLoop != 0) {
-        Array.from(time).forEach((timeElement) => {
-            if ($(timeElement).data("loop") > msgLoop) {
-                setTimeS = 0;
-            } else {
-                $(timeElement).text("");
-            }
-        });
+    if (isSender) {
+        if (msgLoop != 0) {
+            Array.from(time).forEach((timeElement) => {
+                if ($(timeElement).data("loop") > msgLoop) {
+                    setTimeS = 0;
+                } else {
+                    $(timeElement).text("");
+                }
+            });
+        } else {
+            $(time).text("");
+        }
     } else {
-        $(time).text("");
-    }
-
-    const Rtime = document.getElementsByClassName(
-        `rtime_${messageRcvTime.replace(/\s/g, "")}`
-    );
-    let setTimeR = 1;
-    if (recMsgLoop != 0) {
-        Array.from(Rtime).forEach((timeElement) => {
-            if ($(timeElement).data("Rloop") > recMsgLoop) {
-                setTimeR = 0;
-            } else {
-                $(timeElement).text("");
-            }
-        });
-    } else {
-        $(Rtime).text("");
+        const Rtime = document.getElementsByClassName(
+            `rtime_${messageRcvTime.replace(/\s/g, "")}`
+        );
+        let setTimeR = 1;
+        if (recMsgLoop != 0) {
+            Array.from(Rtime).forEach((timeElement) => {
+                if ($(timeElement).data("Rloop") > recMsgLoop) {
+                    setTimeR = 0;
+                } else {
+                    $(timeElement).text("");
+                }
+            });
+        } else {
+            $(Rtime).text("");
+        }
     }
 
     let Dataloop = msgLoop;
