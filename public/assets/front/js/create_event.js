@@ -2378,6 +2378,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
 
     if(check_start==""){
         toastr.error('First you need to to set Start Time of Event');
+        $(this).val("");
         return;
     }
   });
