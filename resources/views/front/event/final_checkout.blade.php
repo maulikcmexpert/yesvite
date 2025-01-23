@@ -88,17 +88,17 @@
                             <img id="eventImage" src="" />
                         </div>
                     </div>
-                <div class="item">  
+                <div class="item sliderImages-1" style="display:none;">  
                         <div class="setting-img">
                             <img id="sliderImages-1" src="" />
                         </div>
                     </div>
-                <div class="item">
+                <div class="item sliderImages-2" style="display:none;">
                 <div class="setting-img">
                             <img id="sliderImages-2" src="" />
                         </div>
                 </div>
-                <div class="item">
+                <div class="item sliderImages-3" style="display:none;">
                 <div class="setting-img">
                             <img id="sliderImages-3" src="" />
                         </div>
