@@ -2888,6 +2888,24 @@ $(".conversationId").click(function () {
     let isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true) {
         $(".updateGroup").show();
+        let senderIsAdmin = false;
+
+        // Check if the senderUser is an admin
+        SelecteGroupUser.forEach((user) => {
+            if (user.id == senderUser && user.isAdmin == "1") {
+                senderIsAdmin = true;
+            }
+        });
+        // console.log("check admin", senderIsAdmin);
+        if (senderIsAdmin) {
+            $(".new-member").removeClass("d-none");
+            $(".choosen-file").show();
+            $(".updateGroup").show();
+        } else {
+            $(".new-member").addClass("d-none");
+            $(".choosen-file").hide();
+            $(".updateGroup").hide();
+        }
     } else {
         $(".updateGroup").hide();
     }
