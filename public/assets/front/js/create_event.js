@@ -1135,7 +1135,17 @@ function addActivity(container, date) {
 function removeActivity(button) {
     button.parentElement.remove();
 }
-
+$(document).on("click","#end_time",function(){
+    var start_time = $('#start-time').val(); 
+        
+    if (start_time) { 
+        var startTime = moment(start_time, 'hh:mm A'); // Parse the start time string
+        var endTime = startTime.clone().add(1, 'hours'); 
+        $('#end-time').val(endTime.format('hh:mm A')); 
+    } else {
+        $('#end-time').val(''); // Clear end time if start time is empty
+    }
+});
 $("#end_time").on("change", function () {
     if ($(this).is(":checked")) {
         $(".end_time").show();
