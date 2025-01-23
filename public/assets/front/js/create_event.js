@@ -3,25 +3,109 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = "";
-var selected_co_host_prefer_by = "";
+var selected_co_host = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
+var selected_co_host_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer = 0;
+var lengtUSer = ($("#cohostId").val() !== "")? 1: 0;
 var selected_gift = [];
-var selected_user_name = "";
-var selected_profilePhoto = "";
-var selected_dataId = "";
+var selected_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
+    ? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
+    : "";
+var selected_profile_or_text =($("#cohostprofile").val() !== "")? '1': "0";
+var selected_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
+var selected_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
+var selected_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
 
-var final_profilePhoto = "";
-var final_user_name = "";
-var final_dataId = "";
-var final_profile_or_text = "";
-var final_prefer_by = "";
-var final_initial = "";
+var final_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
+var final_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
+? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
+: "";
+var final_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
+var final_profile_or_text = ($("#cohostprofile").val() !== "")? '1': "0";
+var final_prefer_by =  ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
+var final_initial = final_user_name!=""? ($("#cohostFname").val().charAt(0) + $("#cohostLname").val().charAt(0)).toUpperCase() :"";
+if (final_profile_or_text == "1") {
+    $(".guest-img .selected-co-host-image").show();
+    $(".guest-img .selected-co-host-image").attr(
+        "src",
+        final_profilePhoto
+    );
+    $(".guest-img .selected-host-h5").css("display", "none");
+} else {
+    // $('.guest-img').html(profilePhoto    );
+    // $(".selected-host-h5").show();
+    $(".selected-co-host-image").css("display", "none");
+    $(".guest-img .selected-host-h5").text(final_initial);
+    var firstinitial = final_initial.charAt(0);
+    // $('.selected-host-h5').removeClass(function (index, className) {
+    //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+    // });
+    // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+
+    $(".guest-img .selected-host-h5").removeClass(function (
+        index,
+        className
+    ) {
+        return (className.match(/\bfontcolor\S+/g) || []).join(
+            " "
+        );
+    });
+
+    // Add the new class
+    $(".guest-img .selected-host-h5").addClass(
+        "fontcolor" + firstinitial
+    );
+}
+if (selected_dataId != "") {
+    var profilePhoto = selected_profilePhoto;
+    var user_name = selected_user_name;
+    var dataId = selected_dataId;
+    var profile_or_text = selected_profile_or_text;
+    var prefer_by = selected_prefer_by;
+    // console.log(prefer_by);
+    eventData.co_host = dataId;
+    selected_co_host = dataId;
+    selected_co_host_prefer_by = prefer_by;
+    var initial = final_initial
+   
+
+    if (profile_or_text == "1") {
+        $(".selected-co-host-image").show();
+        $(".selected-co-host-image").attr("src", profilePhoto);
+        $(".selected-host-h5").css("display", "none");
+    } else {
+        // $(".selected-host-h5").show();
+        $(".selected-co-host-image").css("display", "none");
+        $(".selected-host-h5").text(initial);
+    }
+    $(".remove_co_host").attr("data-id", selected_co_host);
+    $("#remove_co_host_id").val("user-" + selected_co_host);
+    $(".selected-host-name").text(user_name);
+    // $(".guest-contacts-wrp").css("display", "flex");
+    $(".guest-contacts-wrp").addClass("guest-contacts-test");
+
+    eventData.co_host_prefer_by = prefer_by;
+    if (profile_or_text == "1") {
+        $(".add_new_co_host")
+            .html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
+                <img src="${final_profilePhoto}"
+                    alt="logo">
+            </div></span>
+            <h5>${user_name}</h5>`);
+    } else {
+        $(".add_new_co_host")
+            .html(`<span class="mx-3"><div class="contact-img">
+               <h5 class="fontcolor${firstinitial} add-item-under-text">${initial}</h5>
+            </div></span>
+            <h5>${user_name}</h5>`);
+    }
+    toggleSidebar();
+}
+
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -7049,7 +7133,6 @@ $("#select_contact_event_cohost").on("scroll", function () {
             // get_co_host_list(search_name = null, cohostlimit, cohostoffset, scroll);
             if (cohostNoMoreContactData == false) {
                 get_phone_host_list(
-                    '0',
                     null,
                     cohostphoneLimit,
                     cohostphoneOffset,
