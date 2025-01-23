@@ -1214,9 +1214,7 @@ if ($("#isGroup").val() == true) {
 } else {
     updateChat($(".selected_message").val());
 }
-setTimeout(function () {
-    firstTime = false;
-}, 4500);
+
 $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
@@ -4339,3 +4337,30 @@ async function findOrCreateSingleConversation(
 
     return newConversationId;
 }
+setTimeout(function () {
+    firstTime = false;
+}, 4500);
+
+function applyStyles() {
+    if ($(window).width() <= 767) {
+        $(".message-view-box").css("display", "none");
+        $(document).on("click", ".chat-data", function () {
+            $(".message-view-box").css("display", "block");
+            $(".message-chat-lists").css("display", "none");
+        });
+        $(document).on("click", "#backtomsg-btn", function () {
+            $(".message-view-box").css("display", "none");
+            $(".message-chat-lists").css("display", "block");
+        });
+        // $(document).on('click','.chat-data',function(){
+        //   $(".message-view-box").css("display", "block");
+        //   $(".message-chat-lists").css("display", "none");
+        // })
+    }
+    //  else {
+    //   // $(".message-view-box").css("display", "block");
+    // }
+}
+
+// Apply styles on page load
+applyStyles();
