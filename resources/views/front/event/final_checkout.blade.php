@@ -33,11 +33,11 @@
                         </div>
                     </div>
                     <div class="owl-carousel owl-theme event_images_slider">
-                        <div class="item">
+                        <!-- <div class="item">
                             <div class="setting-img">
                                 <img id="eventImage" src="" />
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="item">
                             <div class="setting-img">
