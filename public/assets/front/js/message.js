@@ -800,7 +800,7 @@ async function updateChatfromGroup(conversationId) {
     $("#selected-user-name").html(groupInfo.groupName);
     await updateProfileImg(
         groupInfo.groupProfile,
-        groupInfo.groupName
+        groupInfo.groupName,
         conversationId
     );
 
