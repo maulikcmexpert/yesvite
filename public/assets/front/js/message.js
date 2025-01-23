@@ -71,9 +71,11 @@ function formatDate(timestamp) {
         return "Today";
     } else if (diffDays < 2) {
         return "Yesterday";
-    } else if (diffDays < 7) {
-        return date.toLocaleDateString("en-US", { weekday: "long" }); // Returns day of the week
-    } else if (now.getFullYear() === date.getFullYear()) {
+    }
+    // else if (diffDays < 7) {
+    //     return date.toLocaleDateString("en-US", { weekday: "long" }); // Returns day of the week
+    // }
+    else if (now.getFullYear() === date.getFullYear()) {
         return date.toLocaleDateString("en-US", {
             day: "numeric",
             month: "long",
@@ -2092,17 +2094,12 @@ function createMessageElement(
             weekday: "short",
         });
     }
-    console.log(formattedDate.length);
+
     if (formattedDate.length == 0) {
         daychange =
-            "<h5 class='day-line'><span>" +
-            chatSmallDay +
-            ", " +
-            msgDate +
-            messageData.timeStamp;
+            "<h5 class='day-line'><span>" + chatSmallDay + ", " + msgDate;
         ("</span></h5>");
     } else if (formattedDate[msgDate] === undefined) {
-        console.log({ formattedDate });
         // console.log(msgDate);
         if (msgDate == "Yesterday") {
             daychange =
@@ -2112,11 +2109,7 @@ function createMessageElement(
                 "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
         } else {
             daychange =
-                "<h5 class='day-line'><span>" +
-                chatSmallDay +
-                ", " +
-                msgDate +
-                messageData.timeStamp;
+                "<h5 class='day-line'><span>" + chatSmallDay + ", " + msgDate;
             ("</span></h5>");
         }
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
