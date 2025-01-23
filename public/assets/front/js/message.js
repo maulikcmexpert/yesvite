@@ -181,20 +181,20 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
         console.log(fontColor);
         $("#selected-user-profile").replaceWith(
-            `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
+            `<h5 class="${fontColor} 987" id="selected-user-profile" >${initials}</h5>`
         );
         $(profileIm).replaceWith(
-            `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+            `<h5 id="profileIm" class="${fontColor} 123">${initials}</h5>`
         );
         $(profileModel).replaceWith(
-            `<h5 id="profileModel" class="${fontColor}">${initials}</h5>`
+            `<h5 id="profileModel" class="${fontColor} 456">${initials}</h5>`
         );
         if (conversationId != "") {
             $(".conversation-" + conversationId)
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+                    `<h5 id="profileIm" class="${fontColor} 963">${initials}</h5>`
                 );
         }
     }
