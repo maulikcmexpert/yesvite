@@ -6724,10 +6724,10 @@ function get_co_host_list(
 
     if (selected_co_host == "") {
         if(isHost == '1'){
-            $(".guest-contacts-wrp").css("display", "none");
         }else{
-            $(".guest-contacts-wrp").css("display", "flex");
+            // $(".guest-contacts-wrp").css("display", "block");
         }
+        // $(".guest-contacts-wrp").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
         cohostId = "";
         var checkedCheckbox = $('input[name="guest_list[]"]:checked');

@@ -112,10 +112,12 @@ class EventController extends BaseController
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
+        $gift_registry_count = EventGiftRegistry::where('user_id', $id)->count();
 
         $eventDetail = [];
         $eventDetail['user_id'] = $id;
         $eventDetail['thankyou_card_count'] = $thankyou_card_count;
+        $eventDetail['gift_registry_count'] = $gift_registry_count;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
         $eventDetail['inviteCount'] = 0;
 
