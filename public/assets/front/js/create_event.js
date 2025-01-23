@@ -7642,11 +7642,20 @@ $(document).on("click", ".design-sidebar-action", function() {
                 console.log(sliderImages);
                 
                 photoSliders.forEach((sliderClass, index) => {
-                    // Select the element by the class name
+                    // Select the element by class name
                     const sliderElement = $(`.${sliderClass}`);
-                    if (sliderElement.length && sliderImages[index]) {
-                        // Set the `src` attribute dynamically
-                        sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                    
+                    if (sliderElement.length) {
+                        if (sliderImages[index]) {
+                            // If image exists, set the src and show the element
+                            sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                            sliderElement.css('display','block'); // Show the image
+                        } else {
+                            // If no image exists for this index, hide the element
+                            // sliderElement.hide();
+                            sliderElement.css('display','none'); // Show the image
+
+                        }
                     }
                 });
                 
