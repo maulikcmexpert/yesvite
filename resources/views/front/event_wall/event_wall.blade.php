@@ -880,7 +880,7 @@
                                             </div>
                                         </div>
                                             <div class="posts-card-main-comment">
-                                            <input type="text" class="form-control" id="comment"
+                                            <input type="text" class="form-control" id="post_comment"
                                                 placeholder="Add Comment">
                                             <span class="comment-send-icon send_comment poll-comment-send-icon"
                                                 data-event-id="{{ $event }}"
