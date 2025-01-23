@@ -3643,6 +3643,14 @@ $(document).on("change", "input[name='checked_conversation[]']", function () {
     $(".check-counter").text(checkedCount);
 });
 $(".multi-pin").click(async function () {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    )
+        .toArray()
+        .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const pinChange = $(this).attr("changeWith");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
@@ -3652,14 +3660,7 @@ $(".multi-pin").click(async function () {
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
     }
-    const checkedConversations = $(
-        "input[name='checked_conversation[]']:checked"
-    )
-        .toArray()
-        .reverse();
-    if (checkedConversations.length <= 0) {
-        return;
-    }
+
     const promises = [];
     checkedConversations.forEach(function (element) {
         const conversationId = $(element).val();
