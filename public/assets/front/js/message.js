@@ -3331,6 +3331,7 @@ $("#choose-file").on("change", async function () {
             );
             const previewImg = $(profileModel);
             const imageUrl = previewImg.attr("src");
+            console.log(imageUrl);
             if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
             } else {
@@ -3368,7 +3369,7 @@ $("#choose-file").on("change", async function () {
                 update(groupUserInfoRef, { receiverProfile: downloadURL });
             });
         }
-    }, 500);
+    }, 800);
 });
 
 async function startRecording() {
