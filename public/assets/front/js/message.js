@@ -4343,23 +4343,25 @@ setTimeout(function () {
 
 function applyStyles() {
     if ($(window).width() <= 767) {
-        $(".message-view-box").css("display", "none");
+        $("#backtomsg-btn").show();
+
+        $(".chatbox").css("display", "none");
         $(document).on("click", ".chat-data", function () {
-            $(".message-view-box").css("display", "block");
-            $(".message-chat-lists").css("display", "none");
+            $(".chatbox").css("display", "block");
+            $(".chat-lists").css("display", "none");
         });
         $(document).on("click", "#backtomsg-btn", function () {
-            $(".message-view-box").css("display", "none");
-            $(".message-chat-lists").css("display", "block");
+            $(".chatbox").css("display", "none");
+            $(".chat-lists").css("display", "block");
         });
         // $(document).on('click','.chat-data',function(){
-        //   $(".message-view-box").css("display", "block");
-        //   $(".message-chat-lists").css("display", "none");
+        //   $(".chatbox").css("display", "block");
+        //   $(".chat-lists").css("display", "none");
         // })
+    } else {
+        $("#backtomsg-btn").hide();
+        // $(".chatbox").css("display", "block");
     }
-    //  else {
-    //   // $(".message-view-box").css("display", "block");
-    // }
 }
 
 // Apply styles on page load
