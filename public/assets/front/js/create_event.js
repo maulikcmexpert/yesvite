@@ -142,6 +142,8 @@ var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
+$('#activity-start-time').val('');
+$('#activity-end-time').val('');
 $(document).ready(function () {
     function getTimeZoneAbbreviation() {
         const date = new Date();
@@ -699,7 +701,7 @@ function datepicker() {
         useCurrent: false,
         ignoreReadonly: true,
         stepping: 15,
-        defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
         // Set stepping to 15 minutes
         // defaultDate: now
