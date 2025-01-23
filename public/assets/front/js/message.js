@@ -3329,6 +3329,7 @@ $("#choose-file").on("change", async function () {
                 storage,
                 `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
             );
+            let profileModel = document.getElementById("profileModel");
             const previewImg = $(profileModel);
             const imageUrl = previewImg.attr("src");
             console.log(imageUrl);
