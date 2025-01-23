@@ -7637,6 +7637,15 @@ $(document).on("click", ".design-sidebar-action", function() {
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
+                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
+
+                const sliderImages=eventData.slider_images;
+                photoSliders.forEach((sliderId, index) => {
+                    const sliderElement = document.getElementById(sliderId); // Get the slider by ID
+                    if (sliderElement && sliderImages[index]) {
+                        sliderElement.src = `${base_url+'public/storage/event_images/'+sliderImages[index].fileName}`; // Set the image URL
+                    }
+                });
             } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");
