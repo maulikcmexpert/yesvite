@@ -428,6 +428,17 @@
     margin-bottom: 10px;
 }
 
+#sidebar_add_co_host .list_all_invited_user{
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 320px);
+}
+#sidebar_add_co_host .list_all_contact_user {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 320px);
+}
+
 #sidebar_add_co_host:has(.alert-box) .list_all_invited_user{
     overflow: hidden;
     overflow-y: scroll;
@@ -448,16 +459,7 @@
     max-height: calc(100vh - 430px);
 }
 
-#sidebar_add_co_host .list_all_invited_user{
-    overflow: hidden;
-    overflow-y: scroll;
-    max-height: calc(100vh - 320px);
-}
-#sidebar_add_co_host .list_all_contact_user {
-    overflow: hidden;
-    overflow-y: scroll;
-    max-height: calc(100vh - 410px);
-}
+
 
 #sidebar_gift_registry #registry_list {
     overflow: hidden;

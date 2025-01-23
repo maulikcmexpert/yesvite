@@ -150,7 +150,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
     console.log("coming here for update profile");
     let profileIm = document.getElementById("profileIm");
     let profileModel = document.getElementById("profileModel");
-
+    console.log({ profileImageUrl });
     if (await isValidImageUrl(profileImageUrl)) {
         console.log("123");
 
@@ -2894,7 +2894,7 @@ $("#new-member").click(function () {
 });
 $(".close-group-modal").click(function () {
     $(".new-members-add").addClass("d-none");
-    // $(".new-member").addClass("d-none");
+    $(".new-member").removeClass("d-none");
 });
 
 var selectedgrpUserIds = [];
