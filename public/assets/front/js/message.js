@@ -3311,12 +3311,12 @@ function generateReactionsAndReply() {
 generateReactionsAndReply();
 
 $("#choose-file").on("change", async function () {
-    let profileIm = document.getElementById("profileIm");
+    let profileModel = document.getElementById("profileModel");
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        $(profileIm).replaceWith(
-            `<img id="profileIm" src="${e.target.result}" alt="user-img">`
+        $(profileModel).replaceWith(
+            `<img id="profileModel" src="${e.target.result}" alt="user-img">`
         );
     };
     reader.readAsDataURL(this.files[0]);
@@ -3326,7 +3326,7 @@ $("#choose-file").on("change", async function () {
                 storage,
                 `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
             );
-            const previewImg = $(profileIm);
+            const previewImg = $(profileModel);
             const imageUrl = previewImg.attr("src");
             if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
@@ -3336,7 +3336,6 @@ $("#choose-file").on("change", async function () {
                 await uploadBytes(fileRef, blob);
             }
             const downloadURL = await getDownloadURL(fileRef);
-            let profileModel = document.getElementById("profileModel");
             var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
             var groupInfoRef = ref(
                 database,
