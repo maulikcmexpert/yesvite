@@ -7641,7 +7641,7 @@ $(document).on("click", ".design-sidebar-action", function() {
 
                 const sliderImages=eventData.slider_images;
                 photoSliders.forEach((sliderId, index) => {
-                    const sliderElement = document.getElementById(sliderId); // Get the slider by ID
+                    const sliderElement = document.getElementsByClassName(sliderId); // Get the slider by ID
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url+'public/storage/event_images/'+sliderImages[index].fileName}`; // Set the image URL
                     }
