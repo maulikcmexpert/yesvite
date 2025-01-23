@@ -1,0 +1,591 @@
+/* General styling for the story container */
+.story-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    /* Space between each story container */
+}
+
+/* Profile container to display the profile picture */
+.profile-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Profile picture styling */
+/* .profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+} */
+
+/* Add highlight for profile picture */
+.profile-pic.highlighted {
+    border-color: #ff00ff !important;
+    /* Highlight with pink border */
+}
+
+/* Story display section to show each story */
+.story-display {
+    /* position: relative; */
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    overflow: hidden;
+    margin: 0px auto;
+}
+
+/* Styling for the preview images and videos inside the story display */
+.story-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensure the image/video covers the container */
+    border-radius: 10px;
+    margin-top: 10px;
+    /* Rounded corners for the preview */
+}
+
+/* Styling for the progress bar container */
+.progress-bar-container {
+    position: absolute;
+    top: 5px;
+    /* Position it above the story content */
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    padding: 0 10px;
+}
+
+/* Individual progress bar for each story */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    position: relative;
+    background-color: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Progress indicator (actual progress) */
+.progress {
+    height: 100%;
+    background-color: #ff00ff;
+    /* Pink color for progress */
+    width: 0;
+    /* Initial width will be 0 and expand */
+    transition: width 0.1s linear;
+}
+
+/* Styling for the "plus" icon (optional for adding stories) */
+.plus-icon {
+    position: absolute;
+    top: 40px;
+    /* Adjust position of the plus icon */
+    right: 0;
+    background-color: #1169ec;
+    /* Color of the plus icon */
+    color: white;
+    font-size: 24px;
+    font-weight: normal;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Style for images uploaded for preview */
+.preview img,
+.preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+/* Profile container for contacts */
+.contact-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title of contact list */
+.contact-title h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styling for the file input (hidden) */
+.file-input {
+    display: none;
+}
+
+/* Styling for upload status message */
+.upload-status {
+    font-size: 12px;
+    color: green;
+    margin-top: 5px;
+}
+
+/* Styling for the upload button */
+.upload-button {
+    padding: 5px 10px;
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Hover effect for upload button */
+.upload-button:hover {
+    background-color: #0088cc;
+}
+
+
+/* -------------------? */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.post-container {
+    width: 500px;
+    padding: 20px;
+    background-color: #f9fbfe;
+    border-radius: 20px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Profile Image */
+.profile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Text Input */
+.post-input {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+/* Options Container */
+.options {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Option Button */
+.option-button {
+    border: none;
+    height: 100%;
+    padding: 0px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: 23.8px;
+    color: var(--secondary-black);
+    z-index: 10;
+    background-color: transparent;
+}
+
+.option-button span{
+    line-height: normal;
+}
+
+/* Icons */
+.option-button i {
+    font-size: 18px;
+}
+
+.poll-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    margin-left: 450px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.poll-container {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+}
+
+.poll-question {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.poll-options {
+    list-style-type: none;
+    padding: 0;
+}
+
+.poll-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.option-text {
+    color: #555;
+    font-size: 14px;
+}
+
+.option-percentage {
+    color: #888;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.poll-expired-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.poll-container .selected button {
+    background-color: #FFB6C1;
+    /* Pink for selected (voted) option */
+    color: white !important;
+    /* Ensure text is white */
+}
+
+.selected {
+    background-color: pink !important;
+    /* Highlight selected option in pink */
+}
+
+#addOptionBtn {
+    float: right;
+    margin-left: 450px;
+
+    cursor: pointer;
+}
+
+#trush {
+    margin-left: 450px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Backdrop */
+    display: none;
+    /* Hidden by default */
+    z-index: 9999;
+    /* Ensure it's on top */
+}
+
+/* .modal-close {
+    position: absolute;
+    top: 10px;
+    margin-left: 900px;
+    background-color: transparent;
+    color: #111010;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+} */
+
+.modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+
+.user-profile1{
+    top:40px;
+}
+.gray-profile-pic {
+    border-color: #555; /* Gray border for owner stories */
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%; /* Assuming the profile pictures are circular */
+}
+.new-story .wall-story-item-img {
+    border: 2px solid red;
+}
+
+.viewed-story {
+    border: 2px solid gray;
+}
+
+.no-stories {
+    border: 2px dashed gray;
+}
+
+.story-unseen .wall-story-item-img {
+    border: 2px solid var(--pink) !important;
+}
+
+.story_seen_modal{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story_seen_modal .modal-content{
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    height: 550px;
+    padding: 30px 20px;
+    overflow: hidden;
+}
+
+.story_seen_modal .modal-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+}
+
+.story-content{
+    width: 100%;
+    height: 100%;
+}
+
+.story-seen-profile-img{
+    width: 100%;
+    max-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.story-seen-profile-img h5{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 16px;
+    line-height: 22.4px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.story-seen-profile-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.story-seen-profile-content h3{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 15px;
+    line-height: normal;
+    color: var(--secondary-black);
+    margin-bottom: 2px;
+}
+
+.story-seen-profile-content p{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 13px;
+    line-height: normal;
+    color: var(--secondary-black);
+    margin-bottom: 0px;
+}
+
+.story-seen-profile-wrp{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.story-preview-title{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 20px;
+    line-height: normal;
+    color: var(--secondary-black);
+    margin-bottom: 15px;
+}
+.story-preview-modal button{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 18px;
+    line-height: normal;
+    color: var(--secondary-black);
+    padding: 10px 20px;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-preview-modal .preview{
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    margin: 0px auto;
+    margin-bottom: 30px;
+}
+
+
+/* For mobile responsiveness, adjust button position */
+@media (max-width: 768px) {
+    .modal-close {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .story_seen_modal .modal-content{
+        width: 100%;
+        height: 100%;
+        border-radius: 0px;
+        border: none;
+        max-width: 100%;
+        margin: 0px !important;
+    }
+
+    .story-preview-modal .modal-content{
+        width: 100%;
+        height: 520px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        margin: 0px !important;
+    }
+
+    .story-preview{
+        object-fit: contain !important;
+    }
+    .story-display {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+    }
+}
+@media only screen and (max-width: 424px) {
+    .story-content {
+        width: 100%;
+        height: calc(100% - 10%);
+    }
+}
+/* .loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 6px solid #ccc;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+} */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

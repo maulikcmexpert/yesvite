@@ -14,6 +14,47 @@ var base_url = $("#base_url").val();
 //   });
 // });
 
+$(document).ready(function () {
+    // Add class to body on page load
+    $(".new-main-content").addClass("tab-wall-active");
+
+    // Listen for tab change
+    $(".nav-link").on("shown.bs.tab", function (e) {
+        // Remove any previous tab-related classes
+        $(".new-main-content").removeClass(function (index, className) {
+            return (className.match(/(^|\s)tab-\S+-active/g) || []).join(" ");
+        });
+
+        // Get the id of the newly activated tab
+        const activeTabId = $(e.target).attr("id");
+        const tabName = activeTabId.replace("nav-", "").replace("-tab", "");
+
+        // Add the new class to the body
+        $(".new-main-content").addClass(`tab-${tabName}-active`);
+    });
+});
+document.querySelectorAll(".nav-link").forEach((tab) => {
+    tab.addEventListener("shown.bs.tab", handleTabChange);
+});
+// Initial call to handle the default active tab
+handleTabChange();
+
+function handleTabChange() {
+    const $body = $(".new-main-content");
+    const $photosTab = $("#nav-photos-tab");
+    const $mainContentCenter = $("#main-content-center");
+    const $mainContentLeft = $("#main-content-left");
+    const $mainContentRight = $("#main-content-right");
+
+    const isPhotosTabActive = $photosTab.hasClass("active");
+
+    $body.toggleClass("photos-tab-active", isPhotosTabActive);
+    $mainContentCenter.toggleClass("col-xl-9", isPhotosTabActive);
+    $mainContentLeft.toggleClass("col-lg-3", isPhotosTabActive);
+    $mainContentCenter.toggleClass("col-xl-6", !isPhotosTabActive);
+    $mainContentRight.toggleClass("col-xl-3", !isPhotosTabActive);
+}
+
 // Reinitialize after AJAX success
 $(document).on("click", ".popup-videos", function () {
     $(this)
@@ -181,6 +222,13 @@ $("#upcoming-card-dropdownButton").on("click", function (event) {
 //     $(upcomingdropdownMenu).removeClass("show");
 //   }
 // });
+// $(".show-comments-btn").click(function () {
+//     $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+//   });
+
+//   $(".show-comment-reply-btn").click(function () {
+//     $(".reply-on-comment").toggleClass("d-none");
+//   });
 
 // ===create-post-hide-show-setting===
 const createpostmainbody = document.querySelector(".create-post-main-body");
@@ -831,6 +879,16 @@ $(document).on("click", ".mobile-calender-btn", function () {
         $(".responsive-calender-month-text").css("display", "inline-block");
     }
 
+    var $textSpan = $(this).find(".responsive-text");
+    var $iconSpan = $(this).find(".responsive-icon");
+    console.log($(this).html());
+    if (text == "Calendar") {
+        $textSpan.text("List View");
+        $iconSpan.html(listSvg);
+        $(".responsive-calendar").css("display", "flex");
+        $(".responsive-calender-month-text").css("display", "inline-block");
+    }
+
     if (text == "List View") {
         $textSpan.text("Calendar");
         $iconSpan.html(calendarSvg);
@@ -877,10 +935,6 @@ $("#responsive-calender-months").on("scroll", function () {
             return false;
         }
     });
-    if (topMonth) {
-        console.log("Month at the top of the scroll:", topMonth);
-        $(".responsive-calender-month-text").text(topMonth);
-    }
 });
 
 $(document).on("click", ".notification_read", function () {
@@ -929,8 +983,8 @@ const hiddenData = $("#graph_data").val();
 const parsedData = JSON.parse(hiddenData);
 
 // Step 2: Generate labels and data for Chart.js
-const labels = parsedData.map(item => item.month); // Extract months
-const data = parsedData.map(item => item.current_balance);
+const labels = parsedData.map((item) => item.month); // Extract months
+const data = parsedData.map((item) => item.current_balance);
 
 let lowestValue = Math.min(...data);
 let highestValue = Math.max(...data);
@@ -939,18 +993,18 @@ if (lowestValue !== 0) {
     lowestValue = 0;
 }
 
-highestValue = highestValue + (highestValue * 0.3);
+highestValue = highestValue + highestValue * 0.3;
 
 if (highestValue < 7) {
     highestValue += 2;
 }
-highestValue = Math.round(highestValue); 
+highestValue = Math.round(highestValue);
 
 let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
 if (stepSize % 2 !== 0) {
     stepSize++; // Ensure stepSize is even for better readability
 }
-stepSize=Math.round(stepSize);
+stepSize = Math.round(stepSize);
 new Chart(ctx, {
     type: "line",
     data: {
@@ -992,10 +1046,10 @@ new Chart(ctx, {
             },
             y: {
                 // beginAtZero: true,
-                min:lowestValue,
+                min: lowestValue,
                 max: highestValue,
                 ticks: {
-                    stepSize: stepSize, 
+                    stepSize: stepSize,
                 },
                 grid: {
                     color: "rgba(0, 0, 0, 0.05)",

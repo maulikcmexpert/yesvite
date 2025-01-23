@@ -11,10 +11,52 @@ var swiper = new Swiper(".mySwiper", {
   });
 
 
+// ===photo-detal-slider===
+var swiper = new Swiper(".photo-detail-slider", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+
+
 //   ===story-slider===
-  var swiper = new Swiper(".story-slide-slider", {
+//   ===story-slider===
+var swiper = new Swiper(".story-slide-slider", {
     slidesPerView: 7,
     spaceBetween: 0,
+    breakpoints: {
+      320: {
+        slidesPerView: 4,
+        spaceBetween: 0,
+      },
+      425: {
+        slidesPerView: 5,
+        spaceBetween: 0,
+      },
+      576: {
+        slidesPerView: 6,
+        spaceBetween: 0,
+      },
+      768: {
+        slidesPerView: 7,
+        spaceBetween: 20,
+      },
+      992: {
+        slidesPerView: 7,
+        spaceBetween: 20,
+      },
+      1200: {
+        slidesPerView: 6,
+        spaceBetween: 20,
+      },
+      1400: {
+        slidesPerView: 7,
+        spaceBetween: 0,
+      },
+    },
   });
 
 //   ===story-slider===
@@ -38,6 +80,24 @@ var swiper = new Swiper(".mySwiper", {
         slidesPerView: 2,
         spaceBetween: 20,
       },
+    },
+  });
+
+
+  var swiper = new Swiper(".posts-card-post", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    pagination: {
+        el: '.custom-pagination',
+        type: 'custom',
+        renderCustom: (swiper, current, total) => {
+            // Render number pagination only inside .custom-pagination
+            return `<span>${current} of ${total}</span>`;
+        },
+    },
+    on: {
+        init: () => updateDots(), // Update dots on initialization
+        slideChange: () => updateDots(), // Update dots on slide change
     },
   });
 

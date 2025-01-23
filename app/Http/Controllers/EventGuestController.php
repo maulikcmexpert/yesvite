@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\{
     Event,
     EventPost,
@@ -15,7 +16,6 @@ use App\Models\{
     UserPotluckItem,
     PostControl,
     EventPostReaction
-    
 };
 
 use Carbon\Carbon;
@@ -30,171 +30,327 @@ use Illuminate\Support\Facades\DB;
 
 class EventGuestController extends Controller
 {
-    public function index(string $id){
+    public function index(string $id)
+    {
+        $title = 'event guest';
+        $page = 'front.event_wall.event_guest';
         $user  = Auth::guard('web')->user();
-      
-        $event_id=$id;
-        if ($event_id == null) {
+        $js = ['event_guest'];
+        $event = decrypt($id);
+        if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
+
         try {
-            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {}])->where('id', $event_id)->first();
+            $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
+                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
+            }, 'event_invited_user' => function ($query) {
+                $query->where('is_co_host', '0')->with('user');
+            }])->where('id', $event)->first();
+        //   {{  dd($eventDetail);}}
+            $guestView = [];
+            $eventDetails['id'] = $eventDetail->id;
+            $eventDetails['event_images'] = [];
+            if (count($eventDetail->event_image) != 0) {
+                foreach ($eventDetail->event_image as $values) {
+                    $eventDetails['event_images'][] = asset('storage/event_images/' . $values->image);
+                }
+            }
+            $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
+            $eventDetails['event_name'] = $eventDetail->event_name;
+            $eventDetails['hosted_by'] = $eventDetail->hosted_by;
+            $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+            $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
+            $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
+            $eventDetails['host_id'] = $eventDetail->user_id;
+            $eventDetails['event_date'] = $eventDetail->start_date;
+            $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+            // if ($eventDetail->event_schedule->isNotEmpty()) {
+
+            //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
+            // }
+            $eventDetails['rsvp_by'] = (!empty($eventDetail->rsvp_by_date) || $eventDetail->rsvp_by_date != NULL) ? $eventDetail->rsvp_by_date : date('Y-m-d', strtotime($eventDetail->created_at));
+            $current_date = date('Y-m-d');
+            $eventDate = $eventDetail->start_date;
+            $datetime1 = Carbon::parse($eventDate);
+            $datetime2 =  Carbon::parse($current_date);
+            $till_days = strval($datetime1->diff($datetime2)->days);
+
+            if ($eventDate >= $current_date) {
+                if ($till_days == 0) {
+                    $till_days = "Today";
+                }
+                if ($till_days == 1) {
+                    $till_days = "Tomorrow";
+                }
+            } else {
+                $eventEndDate = $eventDetail->end_date;
+                $till_days = "On going";
+                if ($eventEndDate < $current_date) {
+                    $till_days = "Past";
+                }
+            }
+            $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
+            $eventDetails['days_till_event'] = $till_days;
+            $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
+            $eventDetails['message_to_guests'] = $eventDetail->message_to_guests;
+
+            $coHosts = [];
+            foreach ($eventDetail->event_invited_user as $hostValues) {
+                $coHostDetail['id'] = $hostValues->user_id;
+                $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
+                $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+                $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
+                $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
+                $coHosts[] = $coHostDetail;
+            }
+            $eventDetails['co_hosts'] = $coHosts;
+            $eventDetails['event_location_name'] = $eventDetail->event_location_name;
+            $eventDetails['address_1'] = $eventDetail->address_1;
+            $eventDetails['address_2'] = $eventDetail->address_2;
+            $eventDetails['state'] = $eventDetail->state;
+            $eventDetails['zip_code'] = $eventDetail->zip_code;
+            $eventDetails['city'] = $eventDetail->city;
+            $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
+            $eventDetails['logitude'] = (!empty($eventDetail->logitude) || $eventDetail->logitude != null) ? $eventDetail->logitude : "";
+
+            $eventsScheduleList = [];
+            foreach ($eventDetail->event_schedule as $key => $value) {
+                $event_name =  $value->activity_title;
+                if ($value->type == '1') {
+                    $event_name = "Start Event";
+                } elseif ($value->type == '3') {
+                    $event_name = "End Event";
+                }
+                $scheduleDetail['id'] = $value->id;
+                $scheduleDetail['activity_title'] = $event_name;
+                $scheduleDetail['start_time'] = ($value->start_time != null) ? $value->start_time : "";
+                $scheduleDetail['end_time'] = ($value->end_time != null) ? $value->end_time : "";
+                $scheduleDetail['type'] = $value->type;
+                $eventsScheduleList[] = $scheduleDetail;
+            }
+            $eventDetails['event_schedule'] = $eventsScheduleList;
+
+            $eventDetails['gift_registry'] = [];
+            if (!empty($eventDetail->gift_registry_id)) {
+                $giftregistry = explode(',', $eventDetail->gift_registry_id);
+                $giftregistryData = EventGiftRegistry::whereIn('id', $giftregistry)->get();
+                foreach ($giftregistryData as $value) {
+                    $giftRegistryDetail['id'] = $value->id;
+                    $giftRegistryDetail['registry_recipient_name'] = $value->registry_recipient_name;
+                    $giftRegistryDetail['registry_link'] = $value->registry_link;
+                    $eventDetails['gift_registry'][] = $giftRegistryDetail;
+                }
+            }
+            $eventDetails['event_detail'] = "";
+            if ($eventDetail->event_settings) {
+                $eventData = [];
+                if ($eventDetail->event_settings->allow_for_1_more == '1') {
+                    $eventData[] = "Can Bring Guests ( limit " . $eventDetail->event_settings->allow_limit . ")";
+                }
+                if ($eventDetail->event_settings->adult_only_party == '1') {
+                    $eventData[] = "Adults Only";
+                }
+                if ($eventDetail->rsvp_by_date_set == '1') {
+                    $eventData[] = date('F d, Y', strtotime($eventDetail->rsvp_by_date));
+                }
+                if ($eventDetail->event_settings->podluck == '1') {
+                    $eventData[] = "Event Potluck";
+                }
+                if ($eventDetail->event_settings->gift_registry == '1') {
+                    $eventData[] = "Gift Registry";
+                }
+                if ($eventDetail->event_settings->events_schedule == '1') {
+                    $eventData[] = "Event has Schedule";
+                }
+                if ($eventDetail->start_date != $eventDetail->end_date) {
+                    $eventData[] = "Multiple Day Event";
+                }
+                if (!empty($eventData)) {
+                    $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
+                    $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
+                    $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
+                        ->where('event_id', $eventDetail->id)
+                        ->get();
+
+
+
+                    $eventData[] = "Number of guests : " . $numberOfGuest;
+                    $eventData['guests'] = $guestData;
+                }
+                $eventDetails['event_detail'] = $eventData;
+
+            }
+            //  dd($eventDetails['event_detail']);
+
+            $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
+            $eventInfo['guest_view'] = $eventDetails;
+            $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
+
+                $query->where('app_user', '1');
+            })->where(['event_id' => $eventDetail->id])->count();
+
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
             })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
 
             $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
             })->where(['rsvp_d' => '1', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
+
+
+            $todayrsvprate = EventInvitedUser::whereHas('user', function ($query) {
+
+                $query->where('app_user', '1');
+            })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])
+
+                ->whereDate('created_at', '=', date('Y-m-d'))
+
+                ->count();
+
+
+
             $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0'])->count();
 
+
+
             $adults = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('adults');
+            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('adults');
 
             $kids = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->sum('kids');
+            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('kids');
 
-            $eventGuest['is_event_owner'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
-            $eventGuest['event_wall'] = $eventDetail->event_settings->event_wall;
-            $eventGuest['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests;
-            $eventGuest['attending'] = $adults + $kids;
-            $eventGuest['total_invitation'] =  count(getEventInvitedUser($event_id));
-            $eventGuest['adults'] = (int)$adults;
-            $eventGuest['kids'] =  (int)$kids;
-            $eventGuest['not_attending'] = $eventNotComing;
-            $eventGuest['pending'] = $pendingUser;
-            $eventGuest['allow_limit'] = $eventDetail->event_settings->allow_limit;
-            $eventGuest['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
-            $eventGuest['subscription_plan_name'] = ($eventDetail->subscription_plan_name != NULL) ? $eventDetail->subscription_plan_name : "";
-            $eventGuest['subscription_invite_count'] = ($eventDetail->subscription_invite_count != NULL) ? $eventDetail->subscription_invite_count : 0;
-            $eventGuest['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
 
-            $userRsvpStatusList = EventInvitedUser::query();
-            $userRsvpStatusList->whereHas('user', function ($query) {
-                $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'invitation_sent' => '1'])->get();
-            // $selectedFilters = $request->input('filters');
-            // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
+            $eventAboutHost['attending'] = $adults + $kids;
 
-            //     $userRsvpStatusList->where(function ($query) use ($selectedFilters) {
-            //         foreach ($selectedFilters as $filter) {
 
-            //             switch ($filter) {
-            //                 case 'attending':
-            //                     $query->orWhere('rsvp_status', '1');
-            //                     break;
-            //                 case 'not_attending':
-            //                     $query->orWhere(function ($qury) {
-            //                         $qury->where(['rsvp_status' => '0']);
-            //                     });
-            //                     break;
-            //                 case 'no_reply':
-            //                     $query->orWhere(function ($qury) {
-            //                         $qury->where(['rsvp_status' => NULL]);
-            //                     });
-            //                     break;
-            //             }
-            //         }
-            //     });
-            // }
-            $result = $userRsvpStatusList->get();
-            $eventGuest['rsvp_status_list'] = [];
-            if (count($result) != 0) {
-                foreach ($result as $value) {
-                    $rsvpUserStatus = [];
-                    $rsvpUserStatus['id'] = $value->id;
-                    $rsvpUserStatus['user_id'] = $value->user->id;
-                    $rsvpUserStatus['first_name'] = $value->user->firstname;
-                    $rsvpUserStatus['last_name'] = $value->user->lastname;
-                    $rsvpUserStatus['username'] = $value->user->firstname . ' ' . $value->user->lastname;
-                    $rsvpUserStatus['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-                    $rsvpUserStatus['email'] = ($value->user->email != '') ? $value->user->email : "";
-                    $rsvpUserStatus['phone_number'] = ($value->user->phone_number != '') ? $value->user->phone_number : "";
-                    $rsvpUserStatus['prefer_by'] =  $value->prefer_by;
-                    $rsvpUserStatus['kids'] = $value->kids;
-                    $rsvpUserStatus['adults'] = $value->adults;
-                    $rsvpUserStatus['rsvp_status'] =  ($value->rsvp_status != null) ? (int)$value->rsvp_status : NULL;
-                    if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
-                        $rsvpUserStatus['rsvp_status'] = 2; // no reply 
-                    }
-                    $rsvpUserStatus['read'] = $value->read;
-                    $rsvpUserStatus['rsvp_d'] = $value->rsvp_d;
-                    $rsvpUserStatus['invitation_sent'] = $value->invitation_sent;
-                    $totalEvent =  Event::where('user_id', $value->user->id)->count();
-                    $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
-                    $comments =  EventPostComment::where('user_id', $value->user->id)->count();
-                    $rsvpUserStatus['user_profile'] = [
-                        'id' => $value->user->id,
-                        'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
-                        'app_user' =>  $value->user->app_user,
-                        'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
-                        'first_name' => $value->user->firstname,
-                        'last_name' => $value->user->lastname,
-                        'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                        'location' => ($value->user->city != NULL) ? $value->user->city : "",
-                        'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
-                        'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
-                        'total_events' => $totalEvent,
-                        'visible' => $value->user->visible,
-                        'total_photos' => $totalEventPhotos,
-                        'comments' => $comments,
-                        'message_privacy' =>  $value->user->message_privacy
-                    ];
-                    $eventGuest['rsvp_status_list'][] = $rsvpUserStatus;
-                }
-            }
-            $getInvitedusers = getInvitedUsers($event_id);
-            $eventGuest['invited_user_id'] = $getInvitedusers['invited_user_id'];
-            $eventGuest['invited_guests'] = $getInvitedusers['invited_guests'];
-            //  event about view //
-            $getEventData = Event::with('event_schedule')->where('id', $event_id)->first();
-            $eventGuest['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventGuest['invited_user_id']) + count($eventGuest['invited_guests']))) : 0;
-           
-            $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
-                $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id])->count();
-           
-            $todayrsvprate = EventInvitedUser::whereHas('user', function ($query) {
-                $query->where('app_user', '1');
-            })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])
-                ->whereDate('created_at', '=', date('Y-m-d'))
-                ->count();
 
-            $eventGuest['total_invite'] =  count(getEventInvitedUser($event_id));
-            $eventGuest['invite_view_rate'] = EventInvitedUser::whereHas('user', function ($query) {
+            $eventAboutHost['adults'] = (int)$adults;
+
+            $eventAboutHost['kids'] = (int)$kids;
+
+
+
+            $eventAboutHost['not_attending'] = $eventNotComing;
+
+            $eventAboutHost['pending'] = $pendingUser;
+
+            $eventAboutHost['comment'] = EventPostComment::where(['event_id' => $eventDetail->id, 'user_id' => $user->id])->count();
+            $total_photos = EventPostImage::where(['event_id' => $eventDetail->id])->count();
+
+            $eventAboutHost['photo_uploaded'] = $total_photos;
+
+            $eventAboutHost['total_invite'] =  count(getEventInvitedUser($event));
+
+            $eventAboutHost['invite_view_rate'] = EventInvitedUser::whereHas('user', function ($query) {
+
                 $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'read' => '1'])->count();
 
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
+
                 $invite_view_percent = EventInvitedUser::whereHas('user', function ($query) {
+
                     $query->where('app_user', '1');
                 })->where(['event_id' => $eventDetail->id, 'read' => '1'])->count() / $totalEnvitedUser * 100;
             }
 
-            $eventGuest['invite_view_percent'] = round($invite_view_percent, 2) . "%";
+            $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
+
             $today_invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
                 $today_invite_view_percent =   EventInvitedUser::whereHas('user', function ($query) {
+
                     $query->where('app_user', '1');
                 })->where(['event_id' => $eventDetail->id, 'read' => '1', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
-            $eventGuest['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
-            $eventGuest['rsvp_rate'] = $eventattending;
-            $eventGuest['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
-            $eventGuest['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
-            
-            return compact('eventGuest'); 
+            $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
+
+            $eventAboutHost['rsvp_rate'] = $eventattending;
+
+            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0)
+            ? number_format($eventattending / $totalEnvitedUser * 100, 2) . "%"
+            : "0.00%";
+
+            $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
+
+            $eventInfo['host_view'] = $eventAboutHost;
+            $login_user_id  = $user->id;
+            $current_page = "guest";
+
+            return view('layout', compact('page', 'title', 'event', 'js', 'eventDetails', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
+
         } catch (QueryException $e) {
             DB::rollBack();
             return response()->json(['status' => 0, 'message' => "error"]);
         }
+    }
+
+    function fetch_guest($id)
+    {
+
+        $guest = EventInvitedUser::with('user')->findOrFail($id); // Eager load the related 'user' model
+
+        return response()->json([
+            'id' => $guest->id,
+            'firstname' => $guest->user->firstname,
+            'lastname' => $guest->user->lastname,
+            'email' => $guest->user->email,
+            'profile' => $guest->user->profile ? asset('storage/profile/' . $guest->user->profile) : asset('images/default-profile.png'),
+            'adults' => $guest->adults,
+            'kids' => $guest->kids,
+            'rsvp_status' => $guest->rsvp_status,
+        ]);
+    }
+
+    public function updateRsvp(Request $request, $id)
+    {
+        // Validate the data
+        $validated = $request->validate([
+            'adults' => 'required|integer|min:0',
+            'kids' => 'required|integer|min:0',
+            'rsvp_status' => 'nullable',
+        ]);
+
+        // Find the existing guest by ID
+        $guest = EventInvitedUser::find($id);
+        // dd($guest);
+        if ($guest) {
+            // Update the guest's RSVP details
+            $guest->adults = $validated['adults'];
+            $guest->kids = $validated['kids'];
+            $guest->rsvp_status = $validated['rsvp_status'];
+
+            // Save the updated data
+            $guest->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'RSVP updated successfully',
+                'adults' => $guest->adults,
+                'kids' => $guest->kids,
+                'guest_id' => $guest->id,
+                'rsvp_status' => $guest->rsvp_status,
+                'guest' =>   $guest
+            ]);
+
+            // Redirect back or return a success message
+
+        }
+
+        // Handle the case where guest is not found
+        return redirect()->back()->with('success', 'RSVP updated successfully.');
     }
 }
