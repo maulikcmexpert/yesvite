@@ -5630,10 +5630,11 @@ $(document).on("click", ".final_checkout", function () {
     }
    
     $('.event_images_slider').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: true,
         dots: false,
+        items: 1,
         responsive: {
           0: {
             items: 1
