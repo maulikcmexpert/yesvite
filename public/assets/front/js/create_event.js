@@ -5590,6 +5590,13 @@ $(document).on("click", ".final_checkout", function () {
     // $("#loader").show();
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
+    $("#eventImage").attr(
+        "src",
+        base_url +
+            "public/storage/event_images/" +
+            eventData.desgin_selected +
+            ""
+    );
     console.log(eventData.slider_images);
     if(eventData.slider_images!=undefined && eventData.slider_images!=""){
         eventData.slider_images.forEach((image) => {
@@ -5604,29 +5611,23 @@ $(document).on("click", ".final_checkout", function () {
         });
     }
    
-    $('.event_images_slider').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        responsive:{
-            0:{
-                items:1
-            },
-            600:{
-                items:3
-            },
-            1000:{
-                items:5
-            }
-        }
-    })
-    $("#eventImage").attr(
-        "src",
-        base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected +
-            ""
-    );
+    // $('.event_images_slider').owlCarousel({
+    //     loop:true,
+    //     margin:10,
+    //     nav:true,
+    //     responsive:{
+    //         0:{
+    //             items:1
+    //         },
+    //         600:{
+    //             items:3
+    //         },
+    //         1000:{
+    //             items:5
+    //         }
+    //     }
+    // })
+   
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");
     $(".step_3").css("display", "none");
