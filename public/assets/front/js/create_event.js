@@ -6015,7 +6015,7 @@ $(document).on("click", ".invite_group_member", function () {
     var userId = $(this).val();
     var selectedValues = [];
     $(".user_group_member").each(function () {
-        if ($(this).is(":checked")) {
+        if ($(this).is(":checked") && !$(this).is(":disabled")) {
             var perferby = $(this).data("preferby");
             var invited_by = "";
             if (perferby == "email") {
@@ -6023,7 +6023,6 @@ $(document).on("click", ".invite_group_member", function () {
             } else {
                 invited_by = $(this).data("mobile");
             }
-
             // selectedValues.push({
             //     id: $(this).val(),
             //     preferby: perferby,

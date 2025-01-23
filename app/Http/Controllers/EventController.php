@@ -130,7 +130,7 @@ class EventController extends BaseController
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
                     ->get();
-                if ($invitedYesviteUsers) {
+                    if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
                         $userVal = User::select(
                             'id',
@@ -154,7 +154,7 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->prefer_by,
-                                'invited_by' => $useremail,
+                                'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone_number,
                                 'profile' => $userVal->profile ?? '',
                                 'isAlready' => "1"
                             ];
@@ -179,7 +179,8 @@ class EventController extends BaseController
                             'lastname',
                             'photo',
                             'preferBy',
-
+                            'phone',
+                            'email'
 
                         )->where('id', $user['sync_id'])->first();
                         if ($userVal) {
@@ -188,7 +189,7 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->preferBy,
-                                'invited_by' => $useremail,
+                                'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone,
                                 'profile' => $userVal->photo ?? '',
                                 'isAlready' => "1"
                             ];
