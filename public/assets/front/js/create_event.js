@@ -5620,6 +5620,8 @@ $(document).on("click", ".final_checkout", function () {
                         if (sliderElement.length) {
                             if (sliderImages[index]) {
                                 sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                                sliderElement.css('display','block');
+
                             } else {    
                                 sliderElement.css('display','none');
                             }
