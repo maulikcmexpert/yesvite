@@ -1282,6 +1282,33 @@
     padding: 0px !important;
 }
 
+.sidebar-invite-top-text h3{
+    font-family: 'SF Pro Display';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23.87px;
+    color:#AE3BE4;
+}
+
+.sidebar-invite-top-text div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-invite-top-text button{
+    background-color: transparent;
+    border: none;
+}
+
+.sidebar-invite-top-text h4{
+    font-family: 'SF Pro Display';
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25.2px;
+    color: #1C8B5C;
+}
+
 /* ======Responsiveness===== */
 
 
