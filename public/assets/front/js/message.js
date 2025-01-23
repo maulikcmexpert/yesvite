@@ -2146,8 +2146,8 @@ function createMessageElement(
         $(Rtime).text("");
     }
 
-    let Dataloop = 0;
-    let DataRloop = 0;
+    let Dataloop = msgLoop;
+    let DataRloop = recMsgLoop;
     let msgTime;
     let timeClass;
     if (isSender) {
