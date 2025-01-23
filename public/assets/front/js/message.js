@@ -179,7 +179,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
 
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-
+        console.log(fontColor);
         $("#selected-user-profile").replaceWith(
             `<h5 class="${fontColor}" id="selected-user-profile" >${initials}</h5>`
         );
@@ -206,7 +206,7 @@ async function getSelectedUserimg(profileImageUrl, userName) {
     } else {
         const initials = getInitials(userName);
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
-
+        console.log(fontColor);
         return `<h5 class="${fontColor} selected-user-img user-img"  src="">${initials}</h5>`;
     }
 }
@@ -218,6 +218,7 @@ async function getListUserimg(profileImageUrl, userName) {
 
     const initials = getInitials(userName);
     const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+    console.log(fontColor);
 
     return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
 }
@@ -233,6 +234,7 @@ function getSelectedUserimggrp(profileImageUrl, userName) {
         // console.log(initials);
 
         const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+        console.log(fontColor);
 
         return `<h5 class="${fontColor} user-avatar img-fluid" src="">${initials}</h5>`;
     }
