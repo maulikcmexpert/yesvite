@@ -5611,6 +5611,7 @@ $(document).on("click", ".final_checkout", function () {
         });
     }
    
+
     // $('.event_images_slider').owlCarousel({
     //     loop:true,
     //     margin:10,
@@ -5655,6 +5656,23 @@ $(document).on("click", ".final_checkout", function () {
     //     },
     // });
 });
+
+$('.event_images_slider').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 3
+      },
+      1000: {
+        items: 5
+      }
+    }
+  });
 
 $(document).on("click", "#final_create_event", function (e) {
     eventData.is_update_event = "0";
