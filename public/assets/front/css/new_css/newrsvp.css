@@ -1259,6 +1259,14 @@ label.error {
     text-transform: none !important;
 } */
 
+.rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h6{
+    font-size: 20px !important;
+}
+
+.rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h3{
+    font-size: 20px !important;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
@@ -1303,6 +1311,13 @@ label.error {
     .rsvp-slider .rsvp-img {
         border-radius: 10px;
         height: 500px;
+    }
+    .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h6{
+        font-size: 18px !important;
+    }
+    
+    .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h3{
+        font-size: 18px !important;
     }
    
 }
@@ -1531,14 +1546,22 @@ label.error {
     margin-bottom: 10px !important;
 }
 
-.rsvp-yes-modal .modal-content{
-    height: calc(100vh - 40px);
-}
+    .rsvp-yes-modal .modal-content{
+        height: calc(100vh - 40px);
+    }
 
-.rsvp-footer-btn h3{
-    padding-right: 5px;
-    font-size: 16px;
-}
+    .rsvp-footer-btn h3{
+        padding-right: 5px;
+        font-size: 16px;
+    }
+
+    .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h6{
+        font-size: 16px !important;
+    }
+
+    .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h3{
+        font-size: 16px !important;
+    }
 }
 
 @media only screen and (max-width: 424px) {
