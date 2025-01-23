@@ -465,6 +465,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
     e.preventDefault();
     var eventID= $("#eventID").val();
     var isDraft= $("#isDraft").val();
+    
    
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -473,8 +474,8 @@ $(document).on("click", ".edit_design_tem", function(e) {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
+    
 
-    alert();
     $('.design-sidebar-action').attr('data-id',id);  
     if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
         dbJson = eventData.textData;
@@ -507,7 +508,7 @@ $(document).on("click", ".edit_design_tem", function(e) {
         method: "POST",
         dataType: 'html',
         data: {
-            _token: $('meta[name="csrf-token"]').attr("content"),eventID,isDraft
+            _token: $('meta[name="csrf-token"]').attr("content"),eventID,isDraft,id:id
         },
         success: function(response) {
             console.log(dbJson);
