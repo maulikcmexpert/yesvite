@@ -1401,8 +1401,10 @@ function add_user_counter() {
 
 function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
+    var Alreadyguest = $(".users-data.invited_users").length;
+   
     $("#event_guest_count").text(total_guest + " Guests");
-    $(".invite-count").text(total_guest);
+    $(".invite-count").text(total_guest+Alreadyguest);
     console.log(total_guest);
     console.log(max_guest);
 
@@ -1454,8 +1456,9 @@ function delete_invited_user(userId, is_contact = "0") {
                 $(".user_id_tel-" + userId).remove();
             }
             var total_guest = $(".users-data.invited_user").length;
+            var alreadyguest = $(".users-data.invited_users").length;
             $("#event_guest_count").text(total_guest + " Guests");
-            $(".invite-count").text(total_guest);
+            $(".invite-count").text(total_guest+alreadyguest);
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
@@ -1585,8 +1588,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 currentInviteCount--;
                 $("#currentInviteCount").val(currentInviteCount);
                 var total_guest = $(".users-data.invited_user").length;
+                var alreadyguest = $(".users-data.invited_users").length;
                 $("#event_guest_count").text(total_guest + " Guests");
-                $(".invite-count").text(total_guest);
+                $(".invite-count").text(total_guest+0);
 
                 var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
