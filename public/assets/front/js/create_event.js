@@ -13,6 +13,8 @@ var selected_gift = [];
 var selected_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
     ? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
     : "";
+var selected_profile_or_text =($("#cohostprofile").val() !== "")? '1': "0";
+var selected_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
 var selected_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
 var selected_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
 var co_host_is_selected_close = false;
@@ -58,6 +60,50 @@ if (final_profile_or_text == "1") {
         "fontcolor" + firstinitial
     );
 }
+if (selected_dataId != "") {
+    var profilePhoto = selected_profilePhoto;
+    var user_name = selected_user_name;
+    var dataId = selected_dataId;
+    var profile_or_text = selected_profile_or_text;
+    var prefer_by = selected_prefer_by;
+    // console.log(prefer_by);
+    eventData.co_host = dataId;
+    selected_co_host = dataId;
+    selected_co_host_prefer_by = prefer_by;
+    var initial = final_initial
+   
+
+    if (profile_or_text == "1") {
+        $(".selected-co-host-image").show();
+        $(".selected-co-host-image").attr("src", profilePhoto);
+        $(".selected-host-h5").css("display", "none");
+    } else {
+        $(".selected-host-h5").show();
+        $(".selected-co-host-image").css("display", "none");
+        $(".selected-host-h5").text(initial);
+    }
+    $(".remove_co_host").attr("data-id", selected_co_host);
+    $(".selected-host-name").text(user_name);
+    $(".guest-contacts-wrp").css("display", "flex");
+    $(".guest-contacts-wrp").addClass("guest-contacts-test");
+
+    eventData.co_host_prefer_by = prefer_by;
+    if (profile_or_text == "1") {
+        $(".add_new_co_host")
+            .html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
+                <img src="${final_profilePhoto}"
+                    alt="logo">
+            </div></span>
+            <h5>${user_name}</h5>`);
+    } else {
+        $(".add_new_co_host")
+            .html(`<span class="mx-3"><div class="contact-img">
+               <h5 class="fontcolor${firstinitial} add-item-under-text">${initial}</h5>
+            </div></span>
+            <h5>${user_name}</h5>`);
+    }
+    toggleSidebar();
+}
 
 
 var limityesvitesc = 10;
@@ -87,9 +133,6 @@ if (giftRegestryDataRaw.length > 0) {
         console.error("Invalid JSON data:", e);
     }
 }
-
-var selected_profile_or_text = "";
-var selected_prefer_by = "";
 var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
@@ -5498,6 +5541,7 @@ $(document).on("click", ".save_event_co_host", function () {
                 </div></span>
                 <h5>${user_name}</h5>`);
         } else {
+            alert(profilePhoto);
             $(".add_new_co_host")
                 .html(`<span class="mx-3"><div class="contact-img">
                     ${profilePhoto}
