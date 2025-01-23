@@ -5630,37 +5630,23 @@ $(document).on("click", ".final_checkout", function () {
     }
    
     $('.event_images_slider').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: true,
+        dots: false,
+        items: 1,
         responsive: {
           0: {
             items: 1
           },
           600: {
-            items: 3
+            items: 1
           },
           1000: {
-            items: 5
+            items: 1
           }
         }
       });
-    // $('.event_images_slider').owlCarousel({
-    //     loop:true,
-    //     margin:10,
-    //     nav:true,
-    //     responsive:{
-    //         0:{
-    //             items:1
-    //         },
-    //         600:{
-    //             items:3
-    //         },
-    //         1000:{
-    //             items:5
-    //         }
-    //     }
-    // })
    
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");
