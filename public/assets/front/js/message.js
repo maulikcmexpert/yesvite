@@ -596,6 +596,8 @@ async function updateChat(user_id) {
     $(".empty-massage").css("display", "none");
     $(".msg-head").css("display", "block");
     $(".msg-footer").css("display", "block");
+    $("#selected-user-lastseen").show();
+
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
@@ -652,7 +654,9 @@ async function updateChat(user_id) {
 
         if (isBlockedByMe || isBlockedByUser) {
             $(".msg-footer").hide();
+            $("#selected-user-lastseen").hide();
         } else {
+            $("#selected-user-lastseen").show();
             $(".msg-footer").show();
         }
 
