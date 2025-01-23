@@ -642,7 +642,7 @@
 
                         @foreach (Session::get('user_ids') as $guest_user)
                             @if ($guest_user['prefer_by'] == 'email')
-                                <div class="users-data invited_user" data-id={{ $guest_user['id'] }}
+                                <div class="users-data invited_users" data-id={{ $guest_user['id'] }}
                                     id="user-{{ $guest_user['id'] }}">
                                     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
                                     <div class="d-flex align-items-start">
@@ -701,7 +701,7 @@
                                     </div> --}}
                                 </div>
                             @elseif ($guest_user['prefer_by'] == 'phone')
-                                <div class="users-data invited_user" data-id={{ $guest_user['id'] }}
+                                <div class="users-data invited_users" data-id={{ $guest_user['id'] }}
                                     id="user_tel-{{ $guest_user['id'] }}">
                                     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
                                     <div class="d-flex align-items-start">
@@ -762,7 +762,7 @@
                     @if (Session::get('contact_ids') != null && count(Session::get('contact_ids')) > 0)
                         @foreach (Session::get('contact_ids') as $guest_user)
                             @if ($guest_user['prefer_by'] == 'email')
-                                <div class="users-data invited_user" data-id={{ 'sync_' . $guest_user['sync_id'] }}
+                                <div class="users-data invited_users" data-id={{ 'sync_' . $guest_user['sync_id'] }}
                                     id="contact_tel-{{ $guest_user['sync_id'] }}">
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
@@ -819,7 +819,7 @@
                                     </div> --}}
                                 </div>
                             @elseif ($guest_user['prefer_by'] == 'phone')
-                                <div class="users-data invited_user" data-id={{ 'sync_' . $guest_user['sync_id'] }}
+                                <div class="users-data invited_users" data-id={{ 'sync_' . $guest_user['sync_id'] }}
                                     id="contact_tel-{{ $guest_user['sync_id'] }}">
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
