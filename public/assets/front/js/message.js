@@ -766,8 +766,12 @@ async function updateChatfromGroup(conversationId) {
     onChildChanged(profileRef, async (snapshot) => {
         const profile = snapshot.val();
         const profileIndex = await setProfileIndexCache(conversationId);
-
-        if (snapshot.key != profileIndex && profile.userTypingStatus == true) {
+        const selectedConversationId = $(".selected_conversasion").val();
+        if (
+            selectedConversationId === conversationId &&
+            snapshot.key != profileIndex &&
+            profile.userTypingStatus == true
+        ) {
             $(".typing").html(profile.name + " is typing");
         } else {
             $(".typing").html("");
@@ -2885,6 +2889,7 @@ $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
     $(".change-group-name").addClass("d-none");
     $(".selected-title").show();
+    $("#group-selected-user-id").val("");
     let isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true) {
         $(".updateGroup").show();
