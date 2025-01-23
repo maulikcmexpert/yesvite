@@ -11,6 +11,17 @@ var swiper = new Swiper(".mySwiper", {
   });
 
 
+// ===photo-detal-slider===
+var swiper = new Swiper(".photo-detail-slider", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+
+
 //   ===story-slider===
 //   ===story-slider===
 var swiper = new Swiper(".story-slide-slider", {
