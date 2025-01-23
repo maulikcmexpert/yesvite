@@ -1142,6 +1142,14 @@ $("#end_time").on("change", function () {
         $(".ac-end-time").show();
         var start_time=$('#start-time').val();
         console.log(start_time);
+
+        if (start_time) { 
+            var startTime = moment(start_time, 'hh:mm A'); // Parse the start time string
+            var endTime = startTime.clone().add(1, 'hours'); 
+            $('#end-time').val(endTime.format('hh:mm A')); 
+        } else {
+            $('#end-time').val(''); // Clear end time if start time is empty
+        }
         
     } else {
         $(".end-time-create").val("");
