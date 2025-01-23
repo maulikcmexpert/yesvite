@@ -1030,6 +1030,12 @@
 
 .checkout-data .setting-img{
     border: 1px solid lightgray;
+    height: 800px;
+    object-fit: contain;
+}
+
+.checkout-data .setting-img img{
+    object-fit: contain;
 }
 
 /* ============ responsive ============ */
