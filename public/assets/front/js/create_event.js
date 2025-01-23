@@ -1273,14 +1273,14 @@ function loadMoreData(page, search_name) {
 
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     
-    alert();
+    // alert();
     var inviteCount = parseInt($('#currentInviteCount').val());
+    $("#loader").css('display','block');
 
     if ($(this).is(':disabled')) {
         e.preventDefault(); 
         return; 
     }
-    $("#loader").css('display','block');
     
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
