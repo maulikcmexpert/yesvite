@@ -7697,33 +7697,43 @@ $(document).on("click", ".design-sidebar-action", function() {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
-            if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
-                $('.uploaded-img-card-edit').css('display','none');
-                $(".design-sidebar").addClass("d-none");
-                $(".design-sidebar_7").removeClass("d-none");
-                $('.update-slider-image').css('display','block');
-                $('.save-slider-image').css('display','none');
-                $("#sidebar").addClass("design-sidebar_7");
-                $(".close-btn").attr("data-id", "design-sidebar_7");
-                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
-                const sliderImages = eventData.slider_images; 
-                console.log(sliderImages);
-                
-                photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = $(`.${sliderClass}`);
-                    if (sliderElement.length) {
-                        if (sliderImages[index]) {
-                            sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
-                            sliderElement.attr('data-img',sliderImages[index].fileName);
-                            sliderElement.css('display','block');
-                        } else {
-                            sliderElement.css('display','none');
+            var temp_id=  $(this).data("temp_id");
 
+            if(parseInt(temp_id)==eventData.temp_id){
+                if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
+                    $('.uploaded-img-card-edit').css('display','none');
+                    $(".design-sidebar").addClass("d-none");
+                    $(".design-sidebar_7").removeClass("d-none");
+                    $('.update-slider-image').css('display','block');
+                    $('.save-slider-image').css('display','none');
+                    $("#sidebar").addClass("design-sidebar_7");
+                    $(".close-btn").attr("data-id", "design-sidebar_7");
+                    const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
+                    const sliderImages = eventData.slider_images; 
+                    console.log(sliderImages);
+                    
+                    photoSliders.forEach((sliderClass, index) => {
+                        const sliderElement = $(`.${sliderClass}`);
+                        if (sliderElement.length) {
+                            if (sliderImages[index]) {
+                                sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                                sliderElement.attr('data-img',sliderImages[index].fileName);
+                                sliderElement.css('display','block');
+                            } else {
+                                sliderElement.css('display','none');
+    
+                            }
                         }
-                    }
-                });
-                
-            } else {
+                    });
+                    
+                } else {
+                    $(".design-sidebar").addClass("d-none");
+                    $(".design-sidebar_" + designId).removeClass("d-none");
+                    $("#sidebar").addClass("design-sidebar_" + designId);
+                    $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+                }
+            }
+             else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_" + designId);
