@@ -1,5 +1,4 @@
 
-{{dd($tempId);}}
 <main class="main-content-wrp edit-imag-main-content-wrp edit_design_template">
     <div class="main-content-right edit-image-main-wrp">
         <div class="edit-image-main-top">
