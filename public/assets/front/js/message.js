@@ -3312,6 +3312,9 @@ generateReactionsAndReply();
 
 $("#choose-file").on("change", async function () {
     let profileModel = document.getElementById("profileModel");
+    let selected_user_profile = document.getElementById(
+        "selected-user-profile"
+    );
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -3341,18 +3344,20 @@ $("#choose-file").on("change", async function () {
                 database,
                 `/Groups/${conversationId}/groupInfo/`
             );
-            $("#selected-user-profile").replaceWith(
+            $(selected_user_profile).replaceWith(
                 `<img src="${downloadURL}" id="selected-user-profile"/>`
             );
             $(profileModel).replaceWith(
                 `<img src="${downloadURL}" id="profileModel"/>`
             );
+
             $(".conversation-" + conversationId)
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img src="${downloadURL}" class="user-avatar img-fluid"/>`
+                    `<img class="user-avatar img-fluid" src="${downloadURL}" alt="cover-img" >`
                 );
+
             await update(groupInfoRef, { groupProfile: downloadURL });
             SelecteGroupUser.map((user) => {
                 var groupUserInfoRef = ref(
