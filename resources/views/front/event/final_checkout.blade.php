@@ -61,18 +61,24 @@
                     <div class="swiper-wrapper">
                     <div class="swiper-slide">
                          <div class="setting-img">
-                                <img id="eventImage" src="" />
+                            <img id="eventImage" src="" />
                         </div>
                     </div>
-                    <div class="swiper-slide"><div class="setting-img">
-                                <img id="sliderImages-1" src="" />
-                            </div></div>
-                    <div class="swiper-slide"><div class="setting-img">
-                                <img id="sliderImages-2" src="" />
-                            </div></div>
-                    <div class="swiper-slide"><div class="setting-img">
-                                <img id="sliderImages-3" src="" />
-                            </div></div>
+                    <div class="swiper-slide sliderImages-1" style="display:none;">
+                        <div class="setting-img">
+                            <img id="sliderImages-1" src="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide sliderImages-2" style="display:none;">
+                        <div class="setting-img">
+                            <img id="sliderImages-2" src="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide sliderImages-3" style="display:none;">
+                    <div class="setting-img">
+                            <img id="sliderImages-3" src="" />
+                        </div>    
+                    </div>
                  
                     </div>
              </div>
