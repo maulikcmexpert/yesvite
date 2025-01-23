@@ -1255,8 +1255,8 @@
 
 /* ======= sideguest-add ===== */
 .guest-wrp.side-guest-wrp{
-    border: none;
-    box-shadow: none;
+    /* border: none;
+    box-shadow: none; */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -1280,6 +1280,35 @@
     min-width: 20px;
     height: 20px;
     padding: 0px !important;
+}
+
+.sidebar-invite-top-text h3{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23.87px;
+    color:#AE3BE4;
+}
+
+.sidebar-invite-top-text div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-invite-top-text button{
+    background-color: transparent;
+    border: none;
+}
+
+.sidebar-invite-top-text h4{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25.2px;
+    color: #1C8B5C;
+}
+
+.guest-wrp.side-guest-wrp .invite-left p{
+    font-size: 13px !important;
 }
 
 /* ======Responsiveness===== */

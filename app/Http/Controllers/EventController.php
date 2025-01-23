@@ -111,8 +111,11 @@ class EventController extends BaseController
         Session::forget('desgin_slider');
         Session::save();
         $id = Auth::guard('web')->user()->id;
+        $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
+
         $eventDetail = [];
         $eventDetail['user_id'] = $id;
+        $eventDetail['thankyou_card_count'] = $thankyou_card_count;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
         $eventDetail['inviteCount'] = 0;
 
@@ -435,7 +438,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['is_draft_save']);
+                    // dd($eventDetail['co_host_list'][0]);
                 }
             }
         } else {
@@ -2404,9 +2407,9 @@ class EventController extends BaseController
         $user_id =  Auth::guard('web')->user()->id;
 
         $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
-        $thankuCardId = $request->thankuCardId;
+        // $thankuCardId = $request->thankuCardId;
         // dd($thankuCardId);
-        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card', 'thankuCardId'))->render()]);
+        return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
     }
 
     // public function saveSliderImg(Request $request)

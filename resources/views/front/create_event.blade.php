@@ -423,6 +423,18 @@
                     </svg>
                 </a> -->
             </div>
+            <div class="sidebar-invite-top-text">
+                <div>
+                    <h3>Pro</h3>
+                    <button class="">
+                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.5514 4.66603L4.70976 11.9077C4.45142 12.1827 4.20142 12.7244 4.15142 13.0994L3.84309 15.7994C3.73476 16.7744 4.43476 17.441 5.40142 17.2744L8.08476 16.816C8.45976 16.7494 8.98476 16.4744 9.24309 16.191L16.0848 8.94937C17.2681 7.69937 17.8014 6.27437 15.9598 4.5327C14.1264 2.8077 12.7348 3.41603 11.5514 4.66603Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.4102 5.875C10.7685 8.175 12.6352 9.93333 14.9518 10.1667" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <h4>$15.00</h4>
+            </div>
             <div class="invite-pro">
                 <div class="invite-left">
                     <h6 class="invite-count">0</h6>
@@ -2938,7 +2950,7 @@
     $thankuCardId =
         isset($eventDetail['greeting_card_list']) && count($eventDetail['greeting_card_list']) > 0
             ? $eventDetail['greeting_card_list'][0]
-            : '';
+            : null;
     $cohostId =
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
             ? $eventDetail['co_host_list'][0]['id']
@@ -2946,18 +2958,6 @@
     $app_user =
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
             ? $eventDetail['co_host_list'][0]['app_user']
-            : '';
-    $cohostpreferby =
-        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
-            ? $eventDetail['co_host_list'][0]['prefer_by']
-            : '';
-    $cohostprofile =
-        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
-            ? $eventDetail['co_host_list'][0]['profile']
-            : '';
-    $cohostname =
-        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
-            ? $eventDetail['co_host_list'][0]['profile']
             : '';
     $giftRegestryData =
         isset($eventDetail['gift_registry_list']) && count($eventDetail['gift_registry_list']) > 0
@@ -2978,12 +2978,34 @@
     $isDraft =
         isset($eventDetail['is_draft_save'])? $eventDetail['is_draft_save']
             : null;
+
+    $cohostpreferby =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['prefer_by']
+            : '';
+    $cohostprofile =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['profile']
+            : '';
+    $cohostFname =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['first_name']
+            : ''; 
+    $cohostLname =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['last_name']
+            : '';
+    $cohostemail =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['email']
+            : '';
+    $cohostphone_number =
+        isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
+            ? $eventDetail['co_host_list'][0]['phone_number']
+            : '';
 @endphp
-<input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">
 <input type="hidden" name="giftRegestryData[]" value="{{ json_encode($giftRegestryData) }}">
-<input type="hidden" id="cohostprofile" value="{{ $cohostprofile }}">
 <input type="hidden" id="app_user" value="{{ $app_user }}">
-<input type="hidden" id="cohostId" value="{{ $cohostId }}">
 <input type="hidden" id="thankuCardId" value="{{ $thankuCardId }}">
 <input type="hidden" id="inviteTotalCount" value="{{ $eventDetail['inviteCount'] }}">
 <input type="hidden" id="design_image" value="{{ $design_image }}">
@@ -2991,6 +3013,13 @@
 <input type="hidden" id="step" value="{{  $step}}">
 <input type="hidden" id="isDraft" value="{{  $isDraft}}">
 <input type="hidden" id="eventID" value="{{  $eventID}}">
+<input type="hidden" id="cohostId" value="{{ $cohostId }}">
+<input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">
+<input type="hidden" id="cohostprofile" value="{{ $cohostprofile }}">
+<input type="hidden" id="cohostFname" value="{{ $cohostFname }}">
+<input type="hidden" id="cohostLname" value="{{ $cohostLname }}">
+<input type="hidden" id="cohostemail" value="{{ $cohostemail }}">
+<input type="hidden" id="cohostphone_number" value="{{ $cohostphone_number }}">
 
 
 
