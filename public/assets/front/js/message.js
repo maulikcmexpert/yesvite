@@ -484,7 +484,6 @@ async function handleNewConversation(snapshot) {
             unReadCount: 0,
         });
         console.log("updateoverview");
-        isToMove = false;
     }
     updateUnreadMessageBadge();
     var ele = $(
@@ -695,7 +694,6 @@ async function updateChat(user_id) {
                 unReadCount: 0,
             });
             console.log("updateoverview");
-            isToMove = false;
         }
     });
 
@@ -790,7 +788,6 @@ async function updateChatfromGroup(conversationId) {
                 unReadCount: 0,
             });
             console.log("udpateoverview");
-            isToMove = false;
         }
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
