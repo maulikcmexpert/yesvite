@@ -5629,6 +5629,8 @@ $(document).on("click", ".final_checkout", function () {
                     });
     }
    
+if (!$('.event_images_slider').data('owl.carousel')) { 
+
     $('.event_images_slider').owlCarousel({
         loop: false,
         margin: 10,
@@ -5647,6 +5649,7 @@ $(document).on("click", ".final_checkout", function () {
           }
         }
       });
+    };
    
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");
