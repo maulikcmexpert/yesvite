@@ -1353,7 +1353,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
             is_contact=null
         }
         delete_invited_user(userId,is_contact);
-        $("#loader").css('display','none');
+        // $("#loader").css('display','none');
     }
 });
 
@@ -1402,6 +1402,8 @@ function guest_counter(total_guest,max_guest){
 function delete_invited_user(userId,is_contact= '0') {
 
     console.log("IS contact",is_contact);
+    $("#loader").css('display','block');
+
     $.ajax({
         url: base_url + "event/delete_user_id",
         method: "POST",
