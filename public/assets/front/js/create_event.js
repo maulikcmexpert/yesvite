@@ -5496,6 +5496,22 @@ $(document).on("click", ".save_event_co_host", function () {
 //         // toastr.error("There can be only one co host");
 //     }
 // });
+$('.event_images_slider').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
 
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
@@ -5503,6 +5519,16 @@ $(document).on("click", ".final_checkout", function () {
     // $("#loader").show();
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
+    eventData.slider_images.forEach((image) => {
+        const imageHtml = `
+            <div class="item">
+                <div class="setting-img">
+                    <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+                </div>
+            </div>
+        `;
+        $('.event_images_slider').append(imageHtml);
+    });
 
     $("#eventImage").attr(
         "src",
@@ -7590,19 +7616,3 @@ $(document).on("click", ".edit_checkout", function (e) {
     });
 });
 
-$('.event_images_slider').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
