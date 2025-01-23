@@ -443,6 +443,26 @@ $(document).on('click', '.plus_icon_user', function () {
         }
     });
 });
+$(document).on('click', '.according_toggel', function () {
+    // Get the data attributes of the clicked element
+    const categoryId = $(this).data('category-id');
+    const itemId = $(this).data('item-id');
+
+    // Find the target accordion panel using the data attributes
+    const targetPanel = $(`.accordion-collapse[data-category-id="${categoryId}"][data-item-id="${itemId}"]`);
+
+    // Check if the target panel exists
+    if (targetPanel.length) {
+        // Close all other accordion panels
+        $('.accordion-collapse').collapse('hide');
+
+        // Open the target panel
+        targetPanel.collapse('show');
+    } else {
+        console.error('Subcategory panel not found for the selected item.');
+    }
+});
+
 
 // $(document).on('click', '.deleteBtn', function () {
 

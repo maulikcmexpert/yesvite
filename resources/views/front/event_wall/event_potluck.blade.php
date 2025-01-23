@@ -402,7 +402,7 @@
                                                                     <input type="hidden" id="category_item_id"
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">
-                                                                    <h2 class="accordion-header" id="sprite">
+                                                                    <h2 class="accordion-header" id="sprite-{{ $item['id'] }}">
                                                                         <button class="accordion-btn accordion-button">
                                                                             <div class="d-flex align-items-center">
                                                                                 @php
@@ -471,9 +471,9 @@
                                                                                     data-login-user-id={{ $login_user_id }}
                                                                                     type="button"
                                                                                     data-bs-toggle="collapse"
-                                                                                    data-bs-target="#sprite-collapseOne"
+                                                                                    data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
                                                                                     aria-expanded="false"
-                                                                                    aria-controls="sprite-collapseOne"><i
+                                                                                    aria-controls="sprite-collapseOne-{{ $item['id'] }}">   <i
                                                                                         class="fa-solid fa-plus"></i></span>
                                                                             </div>
                                                                         </button>
@@ -481,9 +481,9 @@
 
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         @if ($login_user_id === $users['user_id'])
-                                                                            <div id="sprite-collapseOne"
-                                                                                class="accordion-collapse collapse show"
-                                                                                aria-labelledby="sprite"
+                                                                            <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
+                                                                                aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample">
                                                                                 <div class="accordion-body">
                                                                                     {{-- {{ dd($item['item_carry_users'])}} --}}
