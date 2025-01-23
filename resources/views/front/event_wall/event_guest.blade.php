@@ -25,7 +25,7 @@
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Wall
+                                    Guest
                                 </li>
                             </ol>
                         </nav>
@@ -253,7 +253,7 @@
                                                         $isDisabled =
                                                             $eventDetails['host_id'] == $user['id'] ? 'd-none' : '';
                                                     @endphp
-                                                    <div class="guest-user-box {{ $isDisabled }}">
+                                                    <div class="guest-user-box {{ $isDisabled }}" data-guest-id="{{ $guest['id'] }}">
                                                         <div class="guest-list-data">
                                                             <a href="#" class="guest-img">
                                                                 @if ($user['profile'] != '')
