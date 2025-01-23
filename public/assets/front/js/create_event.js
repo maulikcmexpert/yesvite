@@ -5582,22 +5582,7 @@ $(document).on("click", ".save_event_co_host", function () {
 //         // toastr.error("There can be only one co host");
 //     }
 // });
-$('.event_images_slider').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
+
 
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
@@ -5615,11 +5600,26 @@ $(document).on("click", ".final_checkout", function () {
                     </div>
                 </div>
             `;
-            $('.owl-item').append(imageHtml);
+            $('.event_images_slider').append(imageHtml);
         });
     }
    
-
+    $('.event_images_slider').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
     $("#eventImage").attr(
         "src",
         base_url +
