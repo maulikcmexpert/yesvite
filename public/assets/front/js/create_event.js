@@ -1399,6 +1399,8 @@ function guest_counter(total_guest,max_guest){
 }
 
 function delete_invited_user(userId,is_contact= '0') {
+    $("#loader").css('display','block');
+
     console.log("IS contact",is_contact);
     $.ajax({
         url: base_url + "event/delete_user_id",
