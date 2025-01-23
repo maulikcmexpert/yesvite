@@ -5629,27 +5629,29 @@ $(document).on("click", ".final_checkout", function () {
                     });
     }
    
-if (!$('.event_images_slider').data('owl.carousel')) { 
+    var swiper = new Swiper(".event_images_slider", {});
 
-    $('.event_images_slider').owlCarousel({
-        loop: false,
-        margin: 10,
-        nav: true,
-        dots: false,
-        items: 1,
-        responsive: {
-          0: {
-            items: 1
-          },
-          600: {
-            items: 1
-          },
-          1000: {
-            items: 1
-          }
-        }
-      });
-    };
+// if (!$('.event_images_slider').data('owl.carousel')) { 
+
+//     $('.event_images_slider').owlCarousel({
+//         loop: false,
+//         margin: 10,
+//         nav: true,
+//         dots: false,
+//         items: 1,
+//         responsive: {
+//           0: {
+//             items: 1
+//           },
+//           600: {
+//             items: 1
+//           },
+//           1000: {
+//             items: 1
+//           }
+//         }
+//       });
+//     };
    
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");
