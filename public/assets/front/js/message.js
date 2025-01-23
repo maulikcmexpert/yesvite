@@ -3311,10 +3311,11 @@ function generateReactionsAndReply() {
 generateReactionsAndReply();
 
 $("#choose-file").on("change", async function () {
+    let profileIm = document.getElementById("profileIm");
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        $("#profileIm").replaceWith(
+        $(profileIm).replaceWith(
             `<img id="profileIm" src="${e.target.result}" alt="user-img">`
         );
     };
@@ -3325,7 +3326,7 @@ $("#choose-file").on("change", async function () {
                 storage,
                 `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
             );
-            const previewImg = $("#profileIm");
+            const previewImg = $(profileIm);
             const imageUrl = previewImg.attr("src");
             if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
