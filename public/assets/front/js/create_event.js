@@ -1541,6 +1541,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             error: function (xhr, status, error) {},
         });
     } else {
+        $("#loader").css('display','block');
+
         $.ajax({
             url: base_url + "event/delete_user_id",
             method: "POST",
