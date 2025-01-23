@@ -827,7 +827,7 @@ ul.cost-list li span {
 .list_thankyou_card {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 190px) !important;
+    max-height: calc(100vh - 210px) !important;
 }
 
 #sidebar_thankyou_card:has(.alert-box) .list_thankyou_card{

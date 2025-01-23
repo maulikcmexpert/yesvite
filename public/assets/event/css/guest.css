@@ -839,6 +839,14 @@
     #sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
         max-height: calc(100vh - 600px);
     }
+
+    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_invited_user {
+        max-height: calc(100vh - 590px);
+    }
+
+    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_contact_user {
+        max-height: calc(100vh - 590px);
+    }
 }
 
 @media only screen and (max-width: 424px) {
