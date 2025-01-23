@@ -452,13 +452,16 @@
 }
 
 
-
-
-
 #sidebar_add_co_host:has(.guest-contacts-test) .list_all_invited_user{
     max-height: calc(100vh - 430px);
 }
+#sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
+    max-height: calc(100vh - 430px);
+}
 
+#sidebar_add_co_host:has(.alert-box) .list_all_invited_user:is(#sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user){
+    max-height: calc(100vh - 500px);
+}
 
 
 #sidebar_gift_registry #registry_list {
