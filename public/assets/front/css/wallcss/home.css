@@ -1008,7 +1008,7 @@ main {
     font-size: 14px;
     line-height: normal;
     color: var(--light-color);
-    margin-bottom: 15px;
+    margin-bottom: 15px !important;
 }
 
 .create-post-upload-img-main button{
