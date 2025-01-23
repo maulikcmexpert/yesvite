@@ -7620,8 +7620,11 @@ $(document).on("click", ".edit_checkout", function (e) {
 });
 
 
-$(document).on('click','.edit_design_tem',function(){
+$(document).on('click','.design-sidebar-action',function(){
 
+    alert();
+    console.log(eventData.slider_images);
+    
     if(eventData.slider_images!=undefined && eventData.slider_images!=""){
         $(".design-sidebar").removeClass("d-none");
         $(".design-sidebar_7").addClass("d-none");
