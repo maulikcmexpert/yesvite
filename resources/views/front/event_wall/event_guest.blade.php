@@ -246,6 +246,7 @@
                                             @endphp
 
                                             @foreach($guestArray as $guest)
+                                       {{-- {{     dd($guest['id'])}} --}}
                                                 @if (isset($guest['user']))
                                                     @php
                                                         $user = $guest['user']; // Fetch user array
@@ -364,7 +365,7 @@
                                                         </div>
 
                                                         @if ($guest['rsvp_status'] == '1')
-                                                            <div class="sucess-yes">
+                                                            <div class="sucess-yes" data-guest-id="{{ $guest['id'] }}">
                                                                 <h5 class="green">YES</h5>
                                                                 <div class="sucesss-cat ms-auto">
                                                                     <svg width="15" height="15"
@@ -391,11 +392,11 @@
                                                                 </div>
                                                             </div>
                                                         @elseif ($guest['rsvp_status'] == '0')
-                                                            <div class="sucess-no">
+                                                            <div class="sucess-no"  data-guest-id="{{ $guest['id'] }}">
                                                                 <h5>NO</h5>
                                                             </div>
                                                         @elseif ($guest['rsvp_status'] == null)
-                                                            <div class="no-reply">
+                                                            <div class="no-reply"  data-guest-id="{{ $guest['id'] }}">
                                                                 <h5>NO REPLY</h5>
                                                             </div>
                                                         @endif
