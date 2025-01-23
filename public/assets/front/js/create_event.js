@@ -7645,13 +7645,14 @@ $(document).on("click", ".design-sidebar-action", function() {
                 const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
                 const sliderImages = eventData.slider_images; 
                 console.log(sliderImages);
-                
+                var i=0;
                 photoSliders.forEach((sliderClass, index) => {
+                    i++;
                     const sliderElement = $(`.${sliderClass}`);
                     if (sliderElement.length) {
                         if (sliderImages[index]) {
                             sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
-                            sliderElement.attr('data-img',sliderImages[index].fileName);
+                            $(`.delete-slider-${i}`).attr('data-img',sliderImages[index].fileName);
                             sliderElement.css('display','block');
                         } else {
                             sliderElement.css('display','none');
