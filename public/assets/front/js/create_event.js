@@ -5598,51 +5598,58 @@ $(document).on("click", ".final_checkout", function () {
             ""
     );
     console.log(eventData.slider_images);
+    const photoSliders = ['sliderImages-1', 'sliderImages-2', 'sliderImages-3'];
+    const sliderImages = eventData.slider_images; 
+    console.log(sliderImages);
     if(eventData.slider_images!=undefined && eventData.slider_images!=""){
-        eventData.slider_images.forEach((image) => {
-            const imageHtml = `
-                <div class="item">
-                    <div class="setting-img">
-                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
-                    </div>
-                </div>
-            `;
-            $('.event_images_slider').append(imageHtml);
-        });
+        // eventData.slider_images.forEach((image) => {
+        //     const imageHtml = `
+        //         <div class="item">
+        //             <div class="setting-img">
+        //                 <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+        //             </div>
+        //         </div>
+        //     `;
+        //     $('.event_images_slider').append(imageHtml);
+        // });
+
+     
+                    
+                    photoSliders.forEach((sliderClass, index) => {
+                        const sliderElement = $(`#${sliderClass}`);
+                        if (sliderElement.length) {
+                            if (sliderImages[index]) {
+                                sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                                sliderElement.css('display','block');
+
+                            } else {    
+                                sliderElement.css('display','none');
+                            }
+                        }
+                    });
     }
    
+if (!$('.event_images_slider').data('owl.carousel')) { 
+
     $('.event_images_slider').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: true,
+        dots: false,
+        items: 1,
         responsive: {
           0: {
             items: 1
           },
           600: {
-            items: 3
+            items: 1
           },
           1000: {
-            items: 5
+            items: 1
           }
         }
       });
-    // $('.event_images_slider').owlCarousel({
-    //     loop:true,
-    //     margin:10,
-    //     nav:true,
-    //     responsive:{
-    //         0:{
-    //             items:1
-    //         },
-    //         600:{
-    //             items:3
-    //         },
-    //         1000:{
-    //             items:5
-    //         }
-    //     }
-    // })
+    };
    
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");

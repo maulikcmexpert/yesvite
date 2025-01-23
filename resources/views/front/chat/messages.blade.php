@@ -291,24 +291,26 @@ use Carbon\Carbon;
                         <div class="msg-head">
                             <div class="row">
                                 <div class="col-lg-8 col-7">
-                                    <button id="backtomsg-btn">
-                                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.07 5.92969L4 11.9997L10.07 18.0697" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.0019 12H4.17188" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                    <a href="javascript:;" class="d-flex conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
-                                        
-                                        <div class="user-img">
-                                            <img id="selected-user-profile" src="{{asset('assets/front')}}/image/user-img.svg" alt="user-img">
-                                            <!-- <h5 class="fontcolorS">ST</h5> -->
-                                        </div>
-                                        <div class="user-detail">
-                                            <h3 id="selected-user-name">Start new chat</h3>
-                                            <span id="selected-user-lastseen"></span>
-                                            <span class="typing"></span>
-                                        </div>
-                                    </a>
+                                    <div class="d-flex align-items-center">
+                                        <button id="backtomsg-btn">
+                                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.07 5.92969L4 11.9997L10.07 18.0697" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M21.0019 12H4.17188" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                        <a href="javascript:;" class="d-flex conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
+                                            
+                                            <div class="user-img">
+                                                <img id="selected-user-profile" src="{{asset('assets/front')}}/image/user-img.svg" alt="user-img">
+                                                <!-- <h5 class="fontcolorS">ST</h5> -->
+                                            </div>
+                                            <div class="user-detail">
+                                                <h3 id="selected-user-name">Start new chat</h3>
+                                                <span id="selected-user-lastseen"></span>
+                                                <span class="typing"></span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="col-lg-4 col-5">
                                     <div class="dropdown ms-auto text-end">
