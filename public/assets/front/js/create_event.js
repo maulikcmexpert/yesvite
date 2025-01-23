@@ -7620,33 +7620,30 @@ $(document).on("click", ".edit_checkout", function (e) {
 });
 
 
-$(document).on('click','.design-sidebar-action',function(){
-
+$(document).on("click", ".design-sidebar-action", function() {
+    let designId = $(this).attr("design-id");
     if (designId) {
         if (designId == "6") {
             
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
-            // if (imgSrc1 != "" || imgSrc2 != "" || imgSrc3 != "") {
-            //     $(".design-sidebar").addClass("d-none");
-            //     $(".design-sidebar_7").removeClass("d-none");
-            //     $("#sidebar").addClass("design-sidebar_7");
-            //     $(".close-btn").attr("data-id", "design-sidebar_7");
-            // } else {
-            //     $(".design-sidebar").addClass("d-none");
-            //     $(".design-sidebar_" + designId).removeClass("d-none");
-            //     $("#sidebar").addClass("design-sidebar_" + designId);
-            //     $(".close-btn").attr("data-id", "design-sidebar_" + designId);
-            // }
-
-            if(eventData.slider_images!=undefined && eventData.slider_images!=""){
+            if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
+            } else {
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_" + designId).removeClass("d-none");
+                $("#sidebar").addClass("design-sidebar_" + designId);
+                $(".close-btn").attr("data-id", "design-sidebar_" + designId);
             }
-        } 
+        } else {
+            $(".design-sidebar").addClass("d-none");
+            $(".design-sidebar_" + designId).removeClass("d-none");
+            $("#sidebar").addClass("design-sidebar_" + designId);
+            $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+        }
     }
-  
 });
