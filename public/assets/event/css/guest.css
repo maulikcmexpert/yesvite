@@ -825,12 +825,6 @@
     #sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
         max-height: calc(100vh - 600px);
     }
-
-    #sidebar_add_co_host .list_all_contact_user {
-        overflow: hidden;
-        overflow-y: scroll;
-        max-height: calc(100vh - 510px);
-    }
 }
 
 @media only screen and (max-width: 424px) {
