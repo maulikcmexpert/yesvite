@@ -7593,6 +7593,7 @@ $(document).on("click", ".delete_silder", function (e) {
                 },
                 success: function (response) {
                     $this.parent().find(".slider_img").attr("src", "");
+                    $this.parent().find(".slider_img").attr("data-img", "");
                     $(".photo-slider-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
@@ -7661,7 +7662,33 @@ $(document).on("click", ".edit_checkout", function (e) {
     });
 });
 
+$(document).on('click','.update-slider-image',function(){
+    const sliderImages = eventData.slider_images; 
+    const fileNames = sliderImages.map(img => img.fileName);
+    $('.slider_img').each(function () {
+        const dataImg = $(this).data('img');
+        const matchIndex = sliderImages.findIndex(img => img.fileName === dataImg);
+    
+        if (matchIndex !== -1) {
+            $(this).attr('data-filename', sliderImages[matchIndex].fileName);
+            $(this).attr('data-delete-id', sliderImages[matchIndex].deleteId);
+        } else {
+            $(this).remove();
+        }
+    });
+    
+    const updatedSliderImages = sliderImages.filter(img =>
+        $('.slider_img').filter((_, elem) => $(elem).data('img') === img.fileName).length > 0
+    );
+    
+    sliderImages.length = 0;
+    $.merge(sliderImages, updatedSliderImages);
+    
+    eventData.slider_images=sliderImages;
+    console.log(eventData);
+    console.log('Updated sliderImages:', sliderImages);
 
+});
 $(document).on("click", ".design-sidebar-action", function() {
     let designId = $(this).attr("design-id");
     if (designId) {
@@ -7671,19 +7698,31 @@ $(document).on("click", ".design-sidebar-action", function() {
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
             if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
+                $('.uploaded-img-card-edit').css('display','none');
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
+                $('.update-slider-image').css('display','block');
+                $('.save-slider-image').css('display','none');
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
                 const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
+                const sliderImages = eventData.slider_images; 
+                console.log(sliderImages);
+                
+                photoSliders.forEach((sliderClass, index) => {
+                    const sliderElement = $(`.${sliderClass}`);
+                    if (sliderElement.length) {
+                        if (sliderImages[index]) {
+                            sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
+                            sliderElement.attr('data-img',sliderImages[index].fileName);
+                            sliderElement.css('display','block');
+                        } else {
+                            sliderElement.css('display','none');
 
-                const sliderImages=eventData.slider_images;
-                photoSliders.forEach((sliderId, index) => {
-                    const sliderElement = document.getElementsByClassName(sliderId); // Get the slider by ID
-                    if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url+'public/storage/event_images/'+sliderImages[index].fileName}`; // Set the image URL
+                        }
                     }
                 });
+                
             } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");
