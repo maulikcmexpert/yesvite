@@ -5616,7 +5616,7 @@ $(document).on("click", ".final_checkout", function () {
      
                     
                     photoSliders.forEach((sliderClass, index) => {
-                        const sliderElement = $(`.${sliderClass}`);
+                        const sliderElement = $(`#${sliderClass}`);
                         if (sliderElement.length) {
                             if (sliderImages[index]) {
                                 sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
