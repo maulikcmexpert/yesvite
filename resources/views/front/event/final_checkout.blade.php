@@ -32,18 +32,28 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="owl-carousel owl-theme event_images_slider">
+                    <!-- <div class="owl-carousel owl-theme event_images_slider"> -->
+                    <div class="event_images_slider owl-carousel owl-theme">
                         <div class="item">
                             <div class="setting-img">
                                 <img id="eventImage" src="" />
                             </div>
                         </div>
-
-                        <!-- <div class="item">
+                        <div class="item">
                             <div class="setting-img">
-                                <img id="sliderImages" src="" />
+                                <img id="sliderImages-1" src="" />
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="item">
+                            <div class="setting-img">
+                                <img id="sliderImages-2" src="" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="setting-img">
+                                <img id="sliderImages-3" src="" />
+                            </div>
+                        </div>
                        
                     </div>
                     <!-- <div class="setting-img">
