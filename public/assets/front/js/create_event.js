@@ -7562,6 +7562,8 @@ $(document).on("click", ".save-slider-image", function () {
                 console.log(eventData);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
+                $(".design-sidebar_7").removeClass("d-none");
+
             },
             error: function (xhr, status, error) {},
         });
@@ -7685,6 +7687,8 @@ $(document).on('click','.update-slider-image',function(){
     $.merge(sliderImages, updatedSliderImages);
     
     eventData.slider_images=sliderImages;
+    toastr.success("Slider Image saved Successfully");
+
     $(".design-sidebar_7").addClass("d-none");
 
     console.log(eventData);
