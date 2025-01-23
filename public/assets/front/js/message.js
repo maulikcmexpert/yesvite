@@ -171,7 +171,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+                    `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="cover-img" >`
                 );
         }
     } else {
@@ -194,7 +194,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+                    `<h5 class="user-avatar img-fluid ${fontColor}">${initials}</h5>`
                 );
         }
     }
@@ -801,7 +801,7 @@ async function updateChatfromGroup(conversationId) {
     await updateProfileImg(
         groupInfo.groupProfile,
         groupInfo.groupName
-        // conversationId
+        conversationId
     );
 
     $(".selected_name").val(groupInfo.groupName);
