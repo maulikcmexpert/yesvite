@@ -48,7 +48,7 @@ document.getElementById("message-box").addEventListener("input", function () {
         textarea.style.overflowY = "hidden"; // Hide scroll if less than max height
     }
 });
-loader.show();
+
 function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
@@ -275,6 +275,7 @@ let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 let myProfile;
 const loader = $(".loader");
+loader.show();
 // Function to get messages between two users
 var firstTime = true;
 var isToMove = true;
