@@ -992,7 +992,26 @@
 .event_images_slider{
     width: 100%;
     max-width: 500px;
+    margin: 0px auto;
+    position: relative;
 }
+.event_images_slider .owl-dots{
+    display: none !important;
+}
+.event_images_slider .owl-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+
 
 .checkout-data .setting-img{
     border: 1px solid lightgray;
