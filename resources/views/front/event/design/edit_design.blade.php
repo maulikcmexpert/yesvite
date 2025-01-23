@@ -160,6 +160,8 @@
                     <h6>Color</h6>
                 </button>
             </div>
+
+            
             <div class="edit-images-button-inner format-edit-wrp">
                 <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar')">
                     <span>
@@ -179,7 +181,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner photo-slider-wrp">
-                <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar('sidebar')">
+                <button class="design-sidebar-action" design-id="6" data-temp_id="{{$tempId}}" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -232,7 +234,7 @@
                             </button>
                         </div>
                         <div class="edit-images-button-inner">
-                            <button class="design-sidebar-action" design-id="6" onclick="toggleSidebar('sidebar')">
+                            <button class="design-sidebar-action" design-id="6" data-temp_id="{{$tempId}}" onclick="toggleSidebar('sidebar')">
                                 <span>
                                     <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
