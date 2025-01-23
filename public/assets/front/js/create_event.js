@@ -1140,6 +1140,9 @@ $("#end_time").on("change", function () {
     if ($(this).is(":checked")) {
         $(".end_time").show();
         $(".ac-end-time").show();
+        var start_time=$('#start-time').val();
+        console.log(start_time);
+        
     } else {
         $(".end-time-create").val("");
         $(".end_time").hide();
