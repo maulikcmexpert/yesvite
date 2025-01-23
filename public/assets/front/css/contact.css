@@ -755,6 +755,7 @@ ul.listing li span {
     padding: 10px 16px 10px 16px !important;
     display: flex;
     align-items: center;
+    margin-bottom: 10px !important;
 }
 
 
