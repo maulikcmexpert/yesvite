@@ -428,6 +428,17 @@
     margin-bottom: 10px;
 }
 
+#sidebar_add_co_host .list_all_invited_user{
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 320px);
+}
+#sidebar_add_co_host .list_all_contact_user {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 320px);
+}
+
 #sidebar_add_co_host:has(.alert-box) .list_all_invited_user{
     overflow: hidden;
     overflow-y: scroll;
@@ -441,23 +452,22 @@
 }
 
 
-
-
-
 #sidebar_add_co_host:has(.guest-contacts-test) .list_all_invited_user{
     max-height: calc(100vh - 430px);
 }
 
-#sidebar_add_co_host .list_all_invited_user{
-    overflow: hidden;
-    overflow-y: scroll;
-    max-height: calc(100vh - 320px);
+#sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
+    max-height: calc(100vh - 430px);
 }
-#sidebar_add_co_host .list_all_contact_user {
-    overflow: hidden;
-    overflow-y: scroll;
-    max-height: calc(100vh - 410px);
+
+#sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_invited_user{
+    max-height: calc(100vh - 500px);
 }
+
+#sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_contact_user{
+    max-height: calc(100vh - 500px);
+}
+
 
 #sidebar_gift_registry #registry_list {
     overflow: hidden;
@@ -804,6 +814,12 @@
         max-height: calc(100vh - 430px);
     }
 
+    #sidebar_add_co_host .list_all_contact_user {
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 430px);
+    }
+
     #sidebar_add_co_host:has(.alert-box) .list_all_invited_user {
         overflow: hidden;
         overflow-y: scroll;
@@ -824,10 +840,12 @@
         max-height: calc(100vh - 600px);
     }
 
-    #sidebar_add_co_host .list_all_contact_user {
-        overflow: hidden;
-        overflow-y: scroll;
-        max-height: calc(100vh - 510px);
+    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_invited_user {
+        max-height: calc(100vh - 590px);
+    }
+
+    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_contact_user {
+        max-height: calc(100vh - 590px);
     }
 }
 
