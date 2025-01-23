@@ -2369,8 +2369,7 @@ function convertTimeToMinutes(timeStr) {
 // });
 
 let blurExecutedEndTime = false;
-
-$(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
+$(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
     e.preventDefault();
     var check_start=$(this)
     .closest(".activity-main-wrp")
@@ -2379,8 +2378,21 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
     if(check_start==""){
         toastr.error('First you need to to set Start Time of Event');
+        $(this).val("");
         return;
     }
+  });
+$(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
+    // e.preventDefault();
+    // var check_start=$(this)
+    // .closest(".activity-main-wrp")
+    // .find('input[name="activity-start-time[]"]')
+    // .val();
+
+    // if(check_start==""){
+    //     toastr.error('First you need to to set Start Time of Event');
+    //     return;
+    // }
     if (!blurExecutedEndTime) {
         blurExecutedEndTime = true;
 
