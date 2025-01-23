@@ -7623,7 +7623,9 @@ $(document).on("click", ".edit_checkout", function (e) {
     });
 });
 
+$(document).on('click','.update-slider-image',function(){
 
+});
 $(document).on("click", ".design-sidebar-action", function() {
     let designId = $(this).attr("design-id");
     if (designId) {
@@ -7640,23 +7642,19 @@ $(document).on("click", ".design-sidebar-action", function() {
                 $('.save-slider-image').css('display','none');
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
-                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3']; // Slider class names
-                const sliderImages = eventData.slider_images; // Array of image objects
+                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
+                const sliderImages = eventData.slider_images; 
                 console.log(sliderImages);
                 
                 photoSliders.forEach((sliderClass, index) => {
-                    // Select the element by class name
                     const sliderElement = $(`.${sliderClass}`);
-                    
                     if (sliderElement.length) {
                         if (sliderImages[index]) {
-                            // If image exists, set the src and show the element
                             sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
-                            sliderElement.css('display','block'); // Show the image
+                            sliderElement.attr('data-img',sliderImages[index].fileName);
+                            sliderElement.css('display','block');
                         } else {
-                            // If no image exists for this index, hide the element
-                            // sliderElement.hide();
-                            sliderElement.css('display','none'); // Show the image
+                            sliderElement.css('display','none');
 
                         }
                     }
