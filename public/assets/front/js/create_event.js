@@ -7633,6 +7633,7 @@ $(document).on("click", ".design-sidebar-action", function() {
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
             if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
+                $('.uploaded-img-card-edit').css('display','none');
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
