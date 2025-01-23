@@ -1273,6 +1273,7 @@ function loadMoreData(page, search_name) {
 
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     
+    alert();
     var inviteCount = parseInt($('#currentInviteCount').val());
 
     if ($(this).is(':disabled')) {
@@ -1399,7 +1400,6 @@ function guest_counter(total_guest,max_guest){
 }
 
 function delete_invited_user(userId,is_contact= '0') {
-    $("#loader").css('display','block');
 
     console.log("IS contact",is_contact);
     $.ajax({
