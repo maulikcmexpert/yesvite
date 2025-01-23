@@ -5621,6 +5621,7 @@ $(document).on("click", ".final_checkout", function () {
                             if (sliderImages[index]) {
                                 sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
                             } else {    
+                                sliderElement.css('display','none');
                             }
                         }
                     });
