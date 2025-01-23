@@ -48,6 +48,7 @@ document.getElementById("message-box").addEventListener("input", function () {
         textarea.style.overflowY = "hidden"; // Hide scroll if less than max height
     }
 });
+
 function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
@@ -274,8 +275,10 @@ let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 let myProfile;
 const loader = $(".loader");
+loader.show();
 // Function to get messages between two users
 var firstTime = true;
+var isToMove = true;
 let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>`;
 async function getMessages(userId1, userId2) {
@@ -482,6 +485,7 @@ async function handleNewConversation(snapshot) {
             unRead: false,
             unReadCount: 0,
         });
+        console.log("updateoverview");
     }
     updateUnreadMessageBadge();
     var ele = $(
@@ -492,7 +496,8 @@ async function handleNewConversation(snapshot) {
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
-    if (firstTime == true) {
+    if (firstTime == true || !isToMove) {
+        isToMove = true;
         return;
     }
     if (element.length <= 0) {
@@ -561,9 +566,7 @@ function updateUserInFirebase(user_id) {
         });
     });
 }
-setTimeout(() => {
-    loader.hide();
-}, 3000);
+
 // Function to update the chat UI
 // $('.empty-massage').css('display','none');
 $(".msg-head").css("display", "none");
@@ -690,6 +693,7 @@ async function updateChat(user_id) {
                 unRead: false,
                 unReadCount: 0,
             });
+            console.log("updateoverview");
         }
     });
 
@@ -783,6 +787,7 @@ async function updateChatfromGroup(conversationId) {
                 unRead: false,
                 unReadCount: 0,
             });
+            console.log("udpateoverview");
         }
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
@@ -843,6 +848,8 @@ $(document).on("click", ".msg-list", async function () {
             unRead: false,
             unReadCount: 0,
         });
+        isToMove = false;
+        console.log("updateoverview");
         await updateChat(userId);
         console.log({ conversationId });
     }
@@ -2092,7 +2099,8 @@ function createMessageElement(
             chatSmallDay +
             ", " +
             msgDate +
-            "</span></h5>";
+            messageData.timeStamp;
+        ("</span></h5>");
     } else if (formattedDate[msgDate] === undefined) {
         // console.log(formattedDate);
         // console.log(msgDate);
@@ -2108,7 +2116,8 @@ function createMessageElement(
                 chatSmallDay +
                 ", " +
                 msgDate +
-                "</span></h5>";
+                messageData.timeStamp;
+            ("</span></h5>");
         }
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
@@ -4342,6 +4351,7 @@ async function findOrCreateSingleConversation(
 }
 setTimeout(function () {
     firstTime = false;
+    loader.hide();
 }, 5000);
 
 function applyStyles() {
