@@ -7640,10 +7640,12 @@ $(document).on("click", ".design-sidebar-action", function() {
                 const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
 
                 const sliderImages=eventData.slider_images;
-                photoSliders.forEach((sliderId, index) => {
-                    const sliderElement = document.getElementsByClassName(sliderId); // Get the slider by ID
-                    if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url+'public/storage/event_images/'+sliderImages[index].fileName}`; // Set the image URL
+                console.log(sliderImages);
+                
+                photoSliders.forEach((sliderClass, index) => {
+                    const sliderElement = $(`.${sliderClass}`); 
+                    if (sliderElement.length && sliderImages[index]) {
+                        sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
                     }
                 });
             } else {
