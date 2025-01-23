@@ -803,10 +803,10 @@
                                 Anyone?</h3>
 
                             <div class="posts-card-show-post-wrp">
-                                <div class="swiper photo-detail-slider">
-                                    <div class="swiper-wrapper">
+                                <div class="swiper photo-detail-slider"  >
+                                    <div class="swiper-wrapper" id="media_post">
                                         <!-- Slides -->
-                                        <div class="swiper-slide" id="media_post">
+                                        <div class="swiper-slide">
                                             <div class="posts-card-show-post-img">
                                                 <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
                                                     alt=""  loading="lazy"/>
