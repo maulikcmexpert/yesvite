@@ -3,25 +3,62 @@ var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = "";
-var selected_co_host_prefer_by = "";
+var selected_co_host = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
+var selected_co_host_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
 var final_step = 1;
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer = 0;
+var lengtUSer = ($("#cohostId").val() !== "")? 1: 0;
 var selected_gift = [];
-var selected_user_name = "";
-var selected_profilePhoto = "";
-var selected_dataId = "";
+var selected_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
+    ? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
+    : "";
+var selected_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
+var selected_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
 
-var final_profilePhoto = "";
-var final_user_name = "";
-var final_dataId = "";
-var final_profile_or_text = "";
-var final_prefer_by = "";
-var final_initial = "";
+var final_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
+var final_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
+? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
+: "";
+var final_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
+var final_profile_or_text = ($("#cohostprofile").val() !== "")? '1': "0";
+var final_prefer_by =  ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
+var final_initial = final_user_name!=""? ($("#cohostFname").val().charAt(0) + $("#cohostLname").val().charAt(0)).toUpperCase() :"";
+if (final_profile_or_text == "1") {
+    $(".guest-img .selected-co-host-image").show();
+    $(".guest-img .selected-co-host-image").attr(
+        "src",
+        final_profilePhoto
+    );
+    $(".guest-img .selected-host-h5").css("display", "none");
+} else {
+    // $('.guest-img').html(profilePhoto    );
+    $(".selected-host-h5").show();
+    $(".selected-co-host-image").css("display", "none");
+    $(".guest-img .selected-host-h5").text(final_initial);
+    var firstinitial = final_initial.charAt(0);
+    // $('.selected-host-h5').removeClass(function (index, className) {
+    //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
+    // });
+    // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
+
+    $(".guest-img .selected-host-h5").removeClass(function (
+        index,
+        className
+    ) {
+        return (className.match(/\bfontcolor\S+/g) || []).join(
+            " "
+        );
+    });
+
+    // Add the new class
+    $(".guest-img .selected-host-h5").addClass(
+        "fontcolor" + firstinitial
+    );
+}
+
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -29,6 +66,7 @@ var offsetyesvitec = 0;
 eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
 eventData.step = $("#step").val();
+eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
 
 var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     .map(function () {
@@ -6701,8 +6739,8 @@ function get_co_host_list(
                     $(".selected-host-h5").show();
                     $(".selected-co-host-image").css("display", "none");
                     $(".guest-img .selected-host-h5").text(final_initial);
+                   
                     var firstinitial = final_initial.charAt(0);
-
                     // $('.selected-host-h5').removeClass(function (index, className) {
                     //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
                     // });
@@ -7057,14 +7095,14 @@ $(document).on("click", ".add-activity-schedule", function () {
 });
 
 $(document).on("click", ".thank_you_card_toggle", function () {
-    var thankuCardId = $("#thankuCardId").val();
+   
+
 
     $.ajax({
         url: base_url + "event/get_thank_you_card",
         type: "POST",
         data: {
             _token: $('meta[name="csrf-token"]').attr("content"),
-            thankuCardId: thankuCardId,
         },
         beforeSend: function () {
             $("#loader").show();
@@ -7077,7 +7115,7 @@ $(document).on("click", ".thank_you_card_toggle", function () {
                 $("#registry_item_id").val("");
             }
             $(".list_thankyou_card").html(data.view);
-            console.log(eventData.thank_you_card_id);
+           
             if (eventData.thank_you_card_id != undefined) {
                 $('input[name="select_thankyou[]"]').each(function () {
                     if ($(this).val() == eventData.thank_you_card_id) {
