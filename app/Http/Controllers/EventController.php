@@ -2493,8 +2493,9 @@ class EventController extends BaseController
     {
 
         $eventID = $request->eventID;
+        $tempId = $request->id;
         $isDraft = $request->isDraft;
-        return view('front.event.design.edit_design', compact('eventID', 'isDraft'))->render();
+        return view('front.event.design.edit_design', compact('eventID', 'isDraft','tempId'))->render();
     }
 
     public function shape_image(Request $request)
