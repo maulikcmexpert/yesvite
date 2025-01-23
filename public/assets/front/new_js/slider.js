@@ -101,6 +101,29 @@ var swiper = new Swiper(".story-slide-slider", {
     },
   });
 
+// Function to update dots for each Swiper instance
+function updateDots() {
+    const total = swiper.slides.length;
+    const current = swiper.realIndex + 1;
+    const $dotsContainer = $('.custom-dots-container');
+
+    // Generate dot HTML
+    let dotsHTML = '';
+    for (let i = 1; i <= total; i++) {
+        dotsHTML += `<span class="dot ${i === current ? 'active' : ''}" data-slide="${i}"></span>`;
+    }
+    $dotsContainer.html(dotsHTML);
+
+    // Add click event listener for dot navigation
+    $dotsContainer.find('.dot').on('click', function () {
+        const slideIndex = parseInt($(this).data('slide'), 10);
+        swiper.slideTo(slideIndex - 1); // Swiper index starts at 0
+    });
+  }
+
+  updateDots();
+
+
   $('.rsvp-slide').owlCarousel({
     loop:true,
     margin:10,
@@ -126,22 +149,3 @@ var swiper = new Swiper(".story-slide-slider", {
         }
     }
   })
-
-// Function to update dots for each Swiper instance
-function updateDots(swiper, $dotsContainer) {
-    const total = swiper.slides.length; // Total slides
-    const current = swiper.realIndex + 1; // Current active slide (1-based index)
-
-    // Generate dot HTML
-    let dotsHTML = '';
-    for (let i = 1; i <= total; i++) {
-        dotsHTML += `<span class="dot ${i === current ? 'active' : ''}" data-slide="${i}"></span>`;
-    }
-    $dotsContainer.html(dotsHTML); // Update the dots container
-
-    // Add click event for navigation
-    $dotsContainer.find('.dot').off('click').on('click', function () {
-        const slideIndex = parseInt($(this).data('slide'), 10) - 1; // Convert to zero-based index
-        swiper.slideTo(slideIndex);
-    });
-}

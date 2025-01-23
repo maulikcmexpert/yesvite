@@ -111,6 +111,19 @@
     border-radius: 100%;
 }
 
+.massage-host .massge-data .host-img h5{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 30px !important;
+    line-height: normal !important;
+    color: #fff;
+}
+
 .massage-host .massge-data h5{
     color: var(--secondary-black);
     font-size: 18px;
