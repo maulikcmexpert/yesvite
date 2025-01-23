@@ -7555,6 +7555,7 @@ $(document).on("click", ".delete_silder", function (e) {
                 },
                 success: function (response) {
                     $this.parent().find(".slider_img").attr("src", "");
+                    $this.parent().find(".slider_img").attr("data-img", "");
                     $(".photo-slider-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
