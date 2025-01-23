@@ -4,8 +4,8 @@
 $email_checked = '';
 $phone_checked = '';
 $disabled = '';
-$emialAlredy = '';
-$phoneAlredy = '';
+
+$commaoAlredy = '';
 if(isset($selected_user) && !empty($selected_user)){
     $foundKey = array_search($user->id, array_column($selected_user, 'id'));
    
@@ -14,8 +14,8 @@ if(isset($selected_user) && !empty($selected_user)){
         $key = array_keys($selected_user)[$foundKey];
         $email_checked = '';
         $phone_checked = '';
-        $emialAlredy = '';
-        $phoneAlredy = '';
+        
+        $commaoAlredy = '';
         if ($user->id === (int)$selected_user[$key]['id']) {
             $commaoAlredy =  (isset($selected_user[$key]['isAlready']) && $selected_user[$key]['isAlready'] =="1")?"disabled":"";
             if($selected_user[$key]['prefer_by'] == 'email'){
