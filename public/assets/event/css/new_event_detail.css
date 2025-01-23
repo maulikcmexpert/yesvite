@@ -1307,6 +1307,10 @@
     color: #1C8B5C;
 }
 
+.guest-wrp.side-guest-wrp .invite-left p{
+    font-size: 13px !important;
+}
+
 /* ======Responsiveness===== */
 
 

@@ -476,7 +476,8 @@ $(document).on("click", ".edit_design_tem", function(e) {
     var id = $(this).data("id");
     
 
-    $('.photo-slider-wrp').attr('data-id',id);
+    alert();
+    $('.design-sidebar-action').attr('data-id',id);  
     if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
         dbJson = eventData.textData;
     } else {

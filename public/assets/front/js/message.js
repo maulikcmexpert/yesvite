@@ -1216,7 +1216,7 @@ if ($("#isGroup").val() == true) {
 }
 setTimeout(function () {
     firstTime = false;
-}, 3500);
+}, 4500);
 $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
@@ -1658,11 +1658,13 @@ function UpdateMessageToList(key, messageData, conversationId) {
     const messageEle = document.getElementById(`message-${key}`);
     let isGroup = $("#isGroup").val();
     let msgloop = $(messageEle).data("loop");
+    let dataRloop = $(messageEle).data("data-Rloop");
     const messgeElement = createMessageElement(
         key,
         messageData,
         isGroup,
-        msgloop
+        msgloop,
+        dataRloop
     );
 
     $(messageEle).replaceWith(messgeElement);
@@ -1703,15 +1705,25 @@ function addMessageToList(key, messageData, conversationId) {
 var formattedDate = {};
 var messageRcvTime = "";
 let chatloop = 0;
-function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
+let recchatloop = 0;
+function createMessageElement(
+    key,
+    messageData,
+    isGroup,
+    msgLoop = 0,
+    recMsgLoop = 0
+) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
         hour12: true,
     });
-    chatloop = chatloop + 1;
+
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
+
+    chatloop = isSender ? chatloop + 1 : chatloop;
+    recchatloop = isReceiver ? recchatloop + 1 : recchatloop;
     if (
         (isGroup == "true" || isGroup == true) &&
         SelecteGroupUser[messageData.senderId] == undefined
@@ -2105,11 +2117,11 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
     const time = document.getElementsByClassName(
         `time_${messageRcvTime.replace(/\s/g, "")}`
     );
-    let setTime = 1;
+    let setTimeS = 1;
     if (msgLoop != 0) {
         Array.from(time).forEach((timeElement) => {
             if ($(timeElement).data("loop") > msgLoop) {
-                setTime = 0;
+                setTimeS = 0;
             } else {
                 $(timeElement).text("");
             }
@@ -2118,19 +2130,43 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
         $(time).text("");
     }
 
+    const Rtime = document.getElementsByClassName(
+        `rtime_${messageRcvTime.replace(/\s/g, "")}`
+    );
+    let setTimeR = 1;
+    if (recMsgLoop != 0) {
+        Array.from(Rtime).forEach((timeElement) => {
+            if ($(timeElement).data("Rloop") > recMsgLoop) {
+                setTimeR = 0;
+            } else {
+                $(timeElement).text("");
+            }
+        });
+    } else {
+        $(Rtime).text("");
+    }
+
+    let Dataloop = 0;
+    let DataRloop = 0;
+    let msgTime;
+    let timeClass;
+    if (isSender) {
+        timeClass = `stime_${messageRcvTime.replace(/\s/g, "")}`;
+        Dataloop = msgLoop == 0 ? chatloop : msgLoop;
+        msgTime = setTimeS == 1 ? messageRcvTime : "";
+    } else {
+        DataRloop = recMsgLoop == 0 ? recchatloop : recMsgLoop;
+        timeClass = `rtime_${messageRcvTime.replace(/\s/g, "")}`;
+        msgTime = setTimeR == 1 ? messageRcvTime : "";
+    }
+
     return `<div>
     ${daychange}
         <li class="${
             isSender ? "receiver" : "sender"
-        }" id="message-${key}" data-loop="${
-        msgLoop == 0 ? chatloop : msgLoop
-    }" >        
+        }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${
-                msgLoop == 0 ? chatloop : msgLoop
-            }" class="time time_${messageRcvTime.replace(/\s/g, "")}">${
-        setTime == 1 ? messageRcvTime : ""
-    }</span>            
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" class="time ${timeClass}">${msgTime}</span>            
         </li>
     </div>
     `;
