@@ -994,6 +994,10 @@
     max-width: 500px;
 }
 
+.checkout-data .setting-img{
+    border: 1px solid lightgray;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width:991px) {
     .guest-checkout-respo {
