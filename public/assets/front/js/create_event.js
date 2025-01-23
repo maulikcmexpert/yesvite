@@ -5527,7 +5527,7 @@ $(document).on("click", ".final_checkout", function () {
                 </div>
             </div>
         `;
-        $('.event_images_slider').append(imageHtml);
+        $('.owl-stage').append(imageHtml);
     });
 
     $("#eventImage").attr(
