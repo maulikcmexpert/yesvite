@@ -1,7 +1,8 @@
 
 @foreach ($thankyou_card as $thank)
 <div class="thank-you-card" id="thankyou{{$thank['id']}}">
-    <input class="form-check-input me-3" type="checkbox" name="select_thankyou[]" data-id="{{$thank['id']}}" value="{{$thank['id']}}"    {{ $thankuCardId == $thank['id'] ? 'checked' : '' }}>
+    <input class="form-check-input me-3" type="checkbox" name="select_thankyou[]" data-id="{{$thank['id']}}" value="{{$thank['id']}}" >
+    {{-- <input class="form-check-input me-3" type="checkbox" name="select_thankyou[]" data-id="{{$thank['id']}}" value="{{$thank['id']}}"    {{ $thankuCardId == $thank['id'] ? 'checked' : '' }}> --}}
     <div>
         <input type="hidden" id="edit_when_to_send" value="{{$thank['custom_hours_after_event']}}"/>
         <h5 id="edit_thankyou_template_name">{{$thank['template_name']}}</h5>
