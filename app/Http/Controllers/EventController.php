@@ -265,7 +265,7 @@ class EventController extends BaseController
                 $eventDetail['guest_co_host_list'] = [];
 
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
-                // dd($eventDetail);
+           
                 $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
                 // if (!empty($invitedUser)) {
                 //     foreach ($invitedUser as $guestVal) {
@@ -451,6 +451,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
+                    // dd();
                 }
             }
         } else {
