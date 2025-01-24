@@ -695,6 +695,7 @@ function getClosest15MinuteTime() {
     return now;
 }
 function datepicker() {
+    $('.timepicker').val('');
     $(".timepicker").datetimepicker({
         //  keepOpen: true,
         format: "LT",
