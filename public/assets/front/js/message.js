@@ -3661,10 +3661,16 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
     );
     let allPinned = true;
     let somePinned = false;
+    let allMuted = true;
+    let someMuted = false;
     if (checkedConversations.length <= 0) {
         $(".multi-pin").attr("changeWith", "1");
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
+
+        $(".multi-mute").attr("changeWith", "1");
+        $(".mute-icn").removeClass("d-none");
+        $(".unmute-icn").addClass("d-none");
         return;
     }
     checkedConversations.each(function () {
@@ -3674,17 +3680,31 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
         } else {
             allPinned = false;
         }
+
+        if (conversationElement.hasClass("muted")) {
+            someMuted = true;
+        } else {
+            allMuted = false;
+        }
     });
     if (allPinned) {
-        // If all checked conversations are pinned
         $(".multi-pin").attr("changeWith", "0");
         $(".pin-icn").addClass("d-none");
         $(".unpin-icn").removeClass("d-none");
     } else {
-        // If some or none are pinned
         $(".multi-pin").attr("changeWith", "1");
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
+    }
+
+    if (allMuted) {
+        $(".multi-mute").attr("changeWith", "0");
+        $(".mute-icn").addClass("d-none");
+        $(".unmute-icn").removeClass("d-none");
+    } else {
+        $$(".multi-mute").attr("changeWith", "1");
+        $(".mute-icn").removeClass("d-none");
+        $(".unmute-icn").addClass("d-none");
     }
 });
 $(".bulk-edit").click(function () {
@@ -3817,6 +3837,12 @@ $(".multi-mute").click(function () {
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
     checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        if (change == "1") {
+            $(".conversation-" + conversationId).addClass("muted");
+        } else {
+            $(".conversation-" + conversationId).removeClass("muted");
+        }
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".mute-single-conversation")
@@ -3828,7 +3854,6 @@ $(".multi-mute").click(function () {
             .find(".mute-single-conversation")
             .attr("changeWith", change == "1" ? "0" : "1");
 
-        const conversationId = $(this).val();
         const overviewRef = ref(
             database,
             `overview/${senderUser}/${conversationId}/isMute`

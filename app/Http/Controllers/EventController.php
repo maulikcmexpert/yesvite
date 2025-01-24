@@ -2703,10 +2703,10 @@ class EventController extends BaseController
             $startDate = $dateString;
             $endDate = $dateString;
         }
-
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
         
+        dD($startDateObj,$endDateObj);
         $startDateFormat = "";
         $endDateFormat = "";
         if ($startDateObj && $endDateObj) {
@@ -2728,7 +2728,7 @@ class EventController extends BaseController
             }
         }
         
-        dD($startDateFormat);
+     
         
         $greeting_card_id = "";
         if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
