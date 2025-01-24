@@ -7961,7 +7961,7 @@ $(document).on("click", "#close_editEvent", function (e) {
 });
 
 
-if(final_step == "2"){
+if(final_step == "2" && isCohost=="1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         stepOpen2()
@@ -7970,7 +7970,7 @@ if(final_step == "2"){
    
 }
 
-if(final_step == "3"){
+if(final_step == "3" && isCohost=="1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step3open()
@@ -7978,7 +7978,7 @@ if(final_step == "3"){
     },500)
 }
 
-if(final_step == "4"){
+if(final_step == "4" && isCohost=="1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step4open()
@@ -8023,8 +8023,12 @@ function stepOpen2(){
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
         handleActiveClass('.li_event_detail');
+       $(".pick-card").removeClass("menu-success");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
+        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
+        
     }
 }
 
@@ -8129,6 +8133,8 @@ function step3open(){
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
         handleActiveClass(".li_guest");
+       
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
         // alert(stepVal);
