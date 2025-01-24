@@ -755,7 +755,15 @@ async function updateChat(user_id) {
                 $("#selected-user-lastseen").text(selectedUserData.userStatus);
             }
         } else {
-            $("#selected-user-lastseen").text(selectedUserData.userStatus);
+            let lastseen =
+                selectedUserData.userStatus == "offline" ||
+                selectedUserData.userStatus == "Offline"
+                    ? `last seen at ${timeago.format(messageTime)}`
+                    : selectedUserData.userStatus == "Online" ||
+                      selectedUserData.userStatus == "online"
+                    ? "Online"
+                    : "";
+            $("#selected-user-lastseen").text(lastseen);
         }
     });
 
