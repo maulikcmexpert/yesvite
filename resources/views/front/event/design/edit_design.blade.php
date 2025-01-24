@@ -1041,7 +1041,7 @@
                 <div class="format-text-inner format-type-wrp">
                     <h3>Type</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="bold">
+                        <button class="bold-btn format-btn" data-command="bold">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -1054,7 +1054,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="italic">
+                        <button class="italic-btn format-btn" data-command="italic">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.62 3H18.87" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -1065,7 +1065,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="underline">
+                        <button class="underline-btn format-btn" data-command="underline">
                             <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68294)">
