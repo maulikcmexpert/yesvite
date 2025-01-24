@@ -7950,7 +7950,10 @@ $(document).on("click", "#close_editEvent", function (e) {
 
 if(final_step == "2"){
     alert("hiiii")
-    step2()
+    setTimeout(function(){
+        step2()
+
+    },5000)
 }
 
 if(final_step == "3"){
