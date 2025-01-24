@@ -86,13 +86,13 @@ class PaymentController extends BaseController
             ]);
         }
         $startDate = Carbon::now();
-        $new_subscription = new UserSubscription();
-        $new_subscription->user_id = $user->id;
-        $new_subscription->device_type = 'WEB';
-        $new_subscription->startDate = $startDate;
-        $new_subscription->productId = $validated['priceId'];
-        $new_subscription->type = 'product';
-        $new_subscription->save();
+        // $new_subscription = new UserSubscription();
+        // $new_subscription->user_id = $user->id;
+        // $new_subscription->device_type = 'WEB';
+        // $new_subscription->startDate = $startDate;
+        // $new_subscription->productId = $validated['priceId'];
+        // $new_subscription->type = 'product';
+        // $new_subscription->save();
         // Create a new session with initial status 'idle'
         session()->put($sessionKey, [
             'user_id' => $user->id,
@@ -164,36 +164,13 @@ class PaymentController extends BaseController
                 // Prepare subscription data
                 $startDate = Carbon::now();
                 $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
-                if (session()->has($sessionKey)) {
-                    $sessionData = session($sessionKey);
 
-                    // Retrieve the most recent subscription if available
-                    $new_subscription = UserSubscription::where([
-                        'user_id' => $user->id,
-                        'device_type' => 'WEB',
-                        'productId' => $priceId,
-                        'startDate' => $sessionData['created_at']
-                    ])
-                        ->orderBy('id', 'DESC')
-                        ->first();
-
-                    // If no subscription found for the given details, create a new one
-                    if (!$new_subscription) {
-                        $new_subscription = new UserSubscription();
-                        $new_subscription->user_id = $user->id; // Add user ID if it's not already set
-                        $new_subscription->device_type = 'web'; // Device type should be 'web' for this case
-                        $new_subscription->productId = $priceId; // Add priceId as product ID
-                        $new_subscription->startDate = $startDate; // Set start date
-                    }
-                } else {
-                    // If the session does not exist, create a new subscription
-                    $new_subscription = new UserSubscription();
-                    $new_subscription->user_id = $user->id; // Ensure user ID is added
-                    $new_subscription->device_type = 'web'; // Set device type
-                    $new_subscription->productId = $priceId; // Set the priceId as product ID
-                    $new_subscription->startDate = $startDate; // Set the start date
-                }
-
+                // If the session does not exist, create a new subscription
+                $new_subscription = new UserSubscription();
+                $new_subscription->user_id = $user->id; // Ensure user ID is added
+                $new_subscription->device_type = 'WEB'; // Set device type
+                $new_subscription->productId = $priceId; // Set the priceId as product ID
+                $new_subscription->startDate = $startDate; // Set the start date
                 $new_subscription->price = $coins;
                 $new_subscription->orderId = $input['orderId'];
                 $new_subscription->packageName = $input['packageName'];
@@ -229,14 +206,14 @@ class PaymentController extends BaseController
                     if (session()->has($sessionKey)) {
                         session()->put($sessionKey . '.status', 'failed');
                     }
-                    return redirect()->route('checkout')->withErrors(['error' => 'Failed to create subscription']);
+                    return redirect()->route('payment-failed')->withErrors(['error' => 'Failed to create subscription']);
                 }
             } else {
                 $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
                 if (session()->has($sessionKey)) {
                     session()->put($sessionKey . '.status', 'failed');
                 }
-                return redirect()->route('checkout')->withErrors(['error' => 'Payment failed']);
+                return redirect()->route('payment-failed')->withErrors(['error' => 'Payment failed']);
             }
         } catch (\Exception $e) {
             $allSessions = session()->all();
@@ -249,12 +226,12 @@ class PaymentController extends BaseController
                 // Update session status to false
                 session()->put($key, array_merge($session, ['status' => 'failed']));
             }
-            dd($e);
+
             // Log the error for debugging purposes
             //\Log::error('Payment success error: ' . $e->getMessage());
 
             // Redirect with an error message
-            //return redirect()->route('checkout')->withErrors(['error' => 'An error occurred during payment processing']);
+            return redirect()->route('payment-failed')->withErrors(['error' => 'An error occurred during payment processing']);
         }
     }
 
