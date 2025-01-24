@@ -7894,8 +7894,6 @@ $(document).on("click", "#close_editEvent", function (e) {
     }
     if (final_step == 3) {
         var savePage3Result = savePage3Data(1);
-        console.log(savePage3Result);
-
         if (savePage3Result === false) {
             $("#loader").css("display", "none");
             return; 

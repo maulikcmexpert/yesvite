@@ -2681,6 +2681,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
+        dD(1);
         // $potluck = session('category');
         
         $user_id =  Auth::guard('web')->user()->id;
