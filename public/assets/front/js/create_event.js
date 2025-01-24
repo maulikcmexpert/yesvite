@@ -121,6 +121,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
 if (giftRegestryDataRaw.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+        console.log(giftRegestryData);
         giftRegestryData.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
