@@ -2685,7 +2685,7 @@ class EventController extends BaseController
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
-        dd($get_count_invited_user);
+        dd($request);
         // $potluck = session('category');
 
         $user_id =  Auth::guard('web')->user()->id;

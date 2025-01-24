@@ -1115,7 +1115,7 @@
                 <div class="format-text-inner font-alignment-wrp">
                     <h3>Alignment</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="justifyLeft">
+                        <button class="justyfy-left-btn format-btn" data-command="justifyLeft">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 4.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -1128,7 +1128,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyCenter">
+                        <button class="justyfy-center-btn format-btn" data-command="justifyCenter">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -1141,7 +1141,7 @@
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyRight">
+                        <button class="justyfy-right-btn format-btn" data-command="justifyRight">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -1154,7 +1154,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyFull">
+                        <button class="justyfy-full-btn format-btn" data-command="justifyFull">
                             <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68315)">
