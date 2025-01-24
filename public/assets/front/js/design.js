@@ -1164,6 +1164,8 @@ function bindData(current_event_id) {
         }
         let targetFontFamily = target.fontFamily;
         $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
+        console.log(target.fontSize);
+        $("#fontSizeInput").val(target.fontSize);
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
