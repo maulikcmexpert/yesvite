@@ -53,6 +53,7 @@ class PaymentController extends BaseController
                     'price' => $priceId,
                     'quantity' => 1,
                 ]],
+                'customer_email' => $user->email, // User's email
                 'mode' => 'payment',
                 'success_url' => route('payment.success') . '?paid_id={CHECKOUT_SESSION_ID}', // Include session ID in success URL
                 'cancel_url' => route('payment.failed'),
