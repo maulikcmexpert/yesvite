@@ -578,7 +578,6 @@
 
 
 
-
 /* ============ responsive ============ */
 @media only screen and (max-width:1800px) {
     .guest-wrapper {
@@ -847,6 +846,10 @@
 
     #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_contact_user {
         max-height: calc(100vh - 590px);
+    }
+
+    .new-guest-content-wrp .user-contacts {
+        max-height: calc(100vh - 250px);
     }
 }
 
