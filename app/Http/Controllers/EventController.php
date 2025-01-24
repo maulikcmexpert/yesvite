@@ -153,7 +153,7 @@ class EventController extends BaseController
                             'visible',
                             'message_privacy'
                         )->where('id', $user['user_id'])->first();
-
+                   
                         if ($userVal) {
                             $userEntry = [
                                 'id' => $userVal->id,
@@ -161,9 +161,12 @@ class EventController extends BaseController
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->prefer_by,
                                 'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone_number,
-                                'profile' => $userVal->profile ?? '',
-                                'isAlready' => "1"
+                                'profile' => $userVal->profile ?? '',                               
                             ];
+                            if ($getEventData->is_draft_save == "1") {
+                                $userEntry['isAlready'] = "1";
+                            }
+                        
                             $userIds[] = $userEntry;
                         }
                     }
@@ -197,8 +200,12 @@ class EventController extends BaseController
                                 'prefer_by' => $userVal->preferBy,
                                 'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone,
                                 'profile' => $userVal->photo ?? '',
-                                'isAlready' => "1"
+                              
                             ];
+                            if ($getEventData->is_draft_save == "1") {
+                                $userEntry['isAlready'] = "1";
+                            }
+                        
                             $userIdsSession[] = $userEntry;
                         }
                     }
@@ -441,7 +448,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['co_host_list'][0]);
+                    dd(session('user_ids'));
                 }
             }
         } else {
