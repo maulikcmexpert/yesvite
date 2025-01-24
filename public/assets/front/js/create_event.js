@@ -716,9 +716,33 @@ function datepicker() {
     $(this).val("");
     $(this).val("");
 }
+
+function start_timepicker() {
+    $(".start_timepicker").datetimepicker({
+        //  keepOpen: true,
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+
+        // Set stepping to 15 minutes
+        // defaultDate: now
+        //  debug: true
+    })
+
+    // Ensure input field is clear when the page loads
+    $(this).val("");
+    $(this).val("");
+}
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
+start_timepicker();
 datepicker();
 
 // flatpickr(".event_time", {
