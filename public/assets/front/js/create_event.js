@@ -1090,7 +1090,6 @@ $(document).on("click", ".add_more_activity", function (e) {
         },
         success: function (response) {
             $("#" + id).append(response);
-            
             total_activities++;
             console.log(total_activities);
 
@@ -2405,6 +2404,8 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
          $(this).datetimepicker("hide"); // Hide time picker if open
          $(this).blur();
         return;
+    }else{
+        datepicker();
     }
   });
   $(document).on("click", 'input[name="activity-start-time[]"]', function (e) {
@@ -7886,15 +7887,23 @@ $(document).on("click", ".design-sidebar-action", function() {
     }
 });
 
-$(document).on("click", "#close_editEvent", function () {
-    eventData.is_update_event = "0";
-    savePage1Data();
-    savePage3Data();
-    savePage4Data();
-    eventData.isPhonecontact = isPhonecontact;
-    var data = eventData;
-    $("#loader").show();
+$(document).on("click", "#close_editEvent", function (e) {
+    if (final_step == 2) {
+        savePage1Data(1);
+    }
+    if (final_step == 3) {
+        var savePage3Result = savePage3Data(1);
+        console.log(savePage3Result);
+
+        if (savePage3Result === false) {
+            $("#loader").css("display", "none");
+            return; 
+        }
+    }
+
+    eventData.step = final_step;
     eventData.isdraft = "1";
+    savePage4Data();
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -7907,7 +7916,7 @@ $(document).on("click", "#close_editEvent", function () {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "home";
+                    window.location.href = "";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
@@ -7917,5 +7926,6 @@ $(document).on("click", "#close_editEvent", function () {
             error: function (xhr, status, error) {
                 console.log("AJAX error: " + error);
             },
+            
         });
 });
