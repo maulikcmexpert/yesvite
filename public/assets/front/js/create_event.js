@@ -704,10 +704,16 @@ function datepicker() {
         // Set stepping to 15 minutes
         // defaultDate: now
         //  debug: true
-    }).on('dp.show', function (e) {
-        // Dynamically set the default time on picker open, without affecting the input
-        $(this).val(""); // Set the closest 15-minute time
+    }).on('dp.show', function () {
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = getClosest15MinuteTime();
+
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime); 
     });
+
+    // Ensure input field is clear when the page loads
+    $(".timepicker").val("");
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
