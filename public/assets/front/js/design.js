@@ -556,23 +556,38 @@ function bindData(current_event_id) {
 
     function loadTextDataFromDatabase() {
         if (image) {
+            console.log("image");
             fabric.Image.fromURL(image, function (img) {
                 var canvasWidth = canvas.getWidth();
                 var canvasHeight = canvas.getHeight();
 
+                // Make sure the canvas dimensions are set to match the image resolution
+                canvas.setDimensions({
+                    width: img.width,
+                    height: img.height,
+                });
+
+                // Calculate the scale factor to fit the image within the canvas
                 var scaleFactor = Math.min(
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
+
                 img.set({
                     left: 0,
                     top: 0,
                     scaleX: scaleFactor,
                     scaleY: scaleFactor,
-                    selectable: false,
-                    hasControls: false,
+                    selectable: false, // Make the background image non-selectable
+                    hasControls: false, // Disable controls on background image
                 });
+
+                // Set the background image with proper scaling
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+                // For Retina or high-DPI displays
+                canvas.calcOffset(); // This ensures that the offsets are correctly calculated
+                canvas.setZoom(window.devicePixelRatio); // Apply device pixel ratio for higher quality rendering
             });
 
             if (dbJson) {
