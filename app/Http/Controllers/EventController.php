@@ -116,7 +116,7 @@ class EventController extends BaseController
 
         $eventDetail = [];
         $eventDetail['user_id'] = $id;
-        $eventDetail['id']='';
+        $eventDetail['id'] = '';
         $eventDetail['thankyou_card_count'] = $thankyou_card_count;
         $eventDetail['gift_registry_count'] = $gift_registry_count;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
@@ -677,7 +677,7 @@ class EventController extends BaseController
                 }
             }
             $textElemtents = $request->textData['textElements'];
-            
+
             foreach ($textElemtents as $key => $textJson) {
                 if ($textJson['fontSize'] != '') {
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
@@ -1997,7 +1997,7 @@ class EventController extends BaseController
 
 
         return response()->json([
-            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by','isCohost'))->render(),
+            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by', 'isCohost'))->render(),
             'scroll' => $request->scroll,
         ]);
     }
@@ -2402,7 +2402,7 @@ class EventController extends BaseController
             })
             ->get();
 
-        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host','isCohost', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
+        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'isCohost', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
     }
 
     public function get_gift_registry(Request $request)
@@ -2683,37 +2683,37 @@ class EventController extends BaseController
     {
         dD(1);
         // $potluck = session('category');
-        
+
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
-        
-     
+
+
         // if (strpos($dateString, ' To ') !== false) {
-            //     list($startDate, $endDate) = explode(' To ', $dateString);
-            // } else {
-                //     $startDate = $dateString;
-                //     $endDate = $dateString;
-                // }
-                
-                // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
-                // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-                if (strpos($dateString, ' To ') !== false) {
-                    list($startDate, $endDate) = explode(' To ', $dateString);
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
+
+        // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
+        // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
+        if (strpos($dateString, ' To ') !== false) {
+            list($startDate, $endDate) = explode(' To ', $dateString);
         } else {
             $startDate = $dateString;
             $endDate = $dateString;
         }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
-        
-       
-        $startDateFormat = "";
-        $endDateFormat = "";
+
+
+        $startDateFormat = $startDate;
+        $endDateFormat =  $endDate;
         if ($startDateObj && $endDateObj) {
             $startDateFormat = $startDateObj->format('Y-m-d');
             $endDateFormat = $endDateObj->format('Y-m-d');
         }
-        
+
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
             $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
@@ -2721,15 +2721,15 @@ class EventController extends BaseController
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
-                
+
                 $start = new DateTime($startDateFormat);
                 $start->modify('-1 day');
                 $rsvp_by_date = $start->format('Y-m-d');
             }
         }
-        
-     
-        
+
+
+
         $greeting_card_id = "";
         if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
             if (isset($request->thank_you_card_id) && $request->thank_you_card_id != '') {
@@ -2876,7 +2876,7 @@ class EventController extends BaseController
 
 
         if ($eventId != "") {
-            if($request->isdraft == "1"){
+            if ($request->isdraft == "1") {
                 EventInvitedUser::where('event_id', $request->event_id)->delete();
             }
             $invitedUsers = $request->email_invite;
@@ -3022,7 +3022,7 @@ class EventController extends BaseController
 
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
-                if($request->isdraft == "1"){
+                if ($request->isdraft == "1") {
                     EventPotluckCategory::where('event_id', $request->event_id)->delete();
                     EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
                     UserPotluckItem::where('event_id', $request->event_id)->delete();
