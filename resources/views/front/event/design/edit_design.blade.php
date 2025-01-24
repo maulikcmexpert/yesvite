@@ -8,7 +8,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M7.3335 1.33366C5.56683 1.33366 3.96683 1.99366 2.7335 3.06699L0.333496 0.666992V6.66699H6.3335L3.92016 4.25366C4.84683 3.48033 6.02683 3.00033 7.3335 3.00033C9.6935 3.00033 11.7002 4.54033 12.4002 6.66699L13.9802 6.14699C13.0535 3.35366 10.4335 1.33366 7.3335 1.33366Z"
-                            fill="#0F172A" />
+                            fill="#CBD5E1" />
                     </svg>
                 </button>
                 <button id="redoButton">
@@ -1041,7 +1041,7 @@
                 <div class="format-text-inner format-type-wrp">
                     <h3>Type</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="bold">
+                        <button class="bold-btn format-btn" data-command="bold">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -1054,7 +1054,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="italic">
+                        <button class="italic-btn format-btn" data-command="italic">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.62 3H18.87" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -1065,7 +1065,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="underline">
+                        <button class="underline-btn format-btn" data-command="underline">
                             <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68294)">

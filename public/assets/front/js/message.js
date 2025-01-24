@@ -444,7 +444,7 @@ async function handleNewConversation(snapshot) {
             .find("span")
             .replaceWith(userStatus);
         const badgeElement = $(conversationElement).find(
-            ".ms-auto .d-flex .badge"
+            ".ms-auto .d-flex .my-badge"
         );
         badgeElement.text(newConversation.unReadCount);
         if (parseInt(newConversation.unReadCount) == 0) {
@@ -755,7 +755,15 @@ async function updateChat(user_id) {
                 $("#selected-user-lastseen").text(selectedUserData.userStatus);
             }
         } else {
-            $("#selected-user-lastseen").text(selectedUserData.userStatus);
+            let lastseen =
+                selectedUserData.userStatus == "offline" ||
+                selectedUserData.userStatus == "Offline"
+                    ? `last seen at ${timeago.format(messageTime)}`
+                    : selectedUserData.userStatus == "Online" ||
+                      selectedUserData.userStatus == "online"
+                    ? "Online"
+                    : "";
+            $("#selected-user-lastseen").text(lastseen);
         }
     });
 
@@ -2839,8 +2847,13 @@ async function addListInMembers(SelecteGroupUser) {
     const promises = SelecteGroupUser.map(async (user) => {
         const userImageElement = await getListUserimg(user.image, user.name);
 
+        // const removeMember =
+        //     user.id != senderUser && senderIsAdmin
+        //         ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
+        //         : "";
+
         const removeMember =
-            user.id != senderUser && senderIsAdmin
+            user.id == senderUser
                 ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
                 : "";
 
@@ -2880,7 +2893,15 @@ $(document).on("click", ".remove-member", async function () {
     var conversationId = $(".conversationId").attr("conversationid");
 
     var overviewRef = ref(database, `overview/${userId}/${conversationId}`);
-    await remove(overviewRef);
+
+    let senderIsAdmin = false;
+
+    SelecteGroupUser.forEach((user) => {
+        console.log(user);
+        if (user.id == senderUser && user.isAdmin == "1") {
+            senderIsAdmin = true;
+        }
+    });
 
     var groupInfoProfileRef = ref(
         database,
@@ -2890,7 +2911,23 @@ $(document).on("click", ".remove-member", async function () {
     var groupInfoProfileData = groupInfoProfileSnap.val();
 
     if (groupInfoProfileData) {
+        let i = 0;
         for (var key in groupInfoProfileData) {
+            if (
+                i == 0 &&
+                senderIsAdmin &&
+                groupInfoProfileData[key].id != userId &&
+                groupInfoProfileData[key].leave == false
+            ) {
+                i++;
+                await update(
+                    ref(
+                        database,
+                        `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                    ),
+                    { isAdmin: "1" }
+                );
+            }
             if (groupInfoProfileData[key].id == userId) {
                 await update(
                     ref(
@@ -2899,10 +2936,10 @@ $(document).on("click", ".remove-member", async function () {
                     ),
                     { isAdmin: "0", leave: true }
                 );
-                break;
             }
         }
     }
+
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
@@ -2917,7 +2954,9 @@ $(document).on("click", ".remove-member", async function () {
             };
         }
     });
+    $("#listBox").modal("hide");
     await addListInMembers(SelecteGroupUser);
+    await remove(overviewRef);
 });
 
 $(".updateGroup").click(function () {
@@ -3635,18 +3674,16 @@ async function getTotalUnreadMessageCount() {
     const overviewRef = ref(database, `overview/${userId}`);
     const snapshot = await get(overviewRef);
     let totalUnreadCount = 0;
-
-    if (snapshot.exists()) {
-        const conversations = snapshot.val();
+    if (await snapshot.exists()) {
+        const conversations = await snapshot.val();
         for (let conversationId in conversations) {
             if (
                 conversations[conversationId].unReadCount &&
                 conversations[conversationId].contactName
             ) {
-                totalUnreadCount += parseInt(
-                    conversations[conversationId].unReadCount,
-                    10
-                );
+                totalUnreadCount =
+                    totalUnreadCount +
+                    parseInt(conversations[conversationId].unReadCount, 10);
 
                 // console.log(totalUnreadCount);
             }

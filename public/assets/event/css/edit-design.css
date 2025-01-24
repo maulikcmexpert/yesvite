@@ -3,7 +3,9 @@
     overflow: hidden;
     overflow-y: auto;
 }
-
+.activated{
+    background-color: var(--primaryColor);
+}
 .edit-imag-main-content-wrp {
     overflow: hidden;
 }

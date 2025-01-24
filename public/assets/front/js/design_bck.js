@@ -484,6 +484,34 @@ $(document).on("click", ".close-btn", function () {
     $("#sidebar").removeClass(id);
 });
 
+// $(document).on("click", ".design-sidebar-action", function() {
+//     let designId = $(this).attr("design-id");
+//     if (designId) {
+//         if (designId == "6") {
+
+//             var imgSrc1 = $(".photo-slider-1").attr("src");
+//             var imgSrc2 = $(".photo-slider-2").attr("src");
+//             var imgSrc3 = $(".photo-slider-3").attr("src");
+//             if (imgSrc1 != "" || imgSrc2 != "" || imgSrc3 != "") {
+//                 $(".design-sidebar").addClass("d-none");
+//                 $(".design-sidebar_7").removeClass("d-none");
+//                 $("#sidebar").addClass("design-sidebar_7");
+//                 $(".close-btn").attr("data-id", "design-sidebar_7");
+//             } else {
+//                 $(".design-sidebar").addClass("d-none");
+//                 $(".design-sidebar_" + designId).removeClass("d-none");
+//                 $("#sidebar").addClass("design-sidebar_" + designId);
+//                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+//             }
+//         } else {
+//             $(".design-sidebar").addClass("d-none");
+//             $(".design-sidebar_" + designId).removeClass("d-none");
+//             $("#sidebar").addClass("design-sidebar_" + designId);
+//             $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+//         }
+//     }
+// });
+
 $(document).on("click", ".edit_design_tem", function (e) {
     $("#close_createEvent").css("display", "none");
     e.preventDefault();
@@ -633,6 +661,121 @@ function bindData(current_event_id) {
                         ml: true, // Show middle left control
                         mr: true, // Show middle right control
                     });
+
+                    // if(current_event_id != '' && (eventData.desgin_selected =='')){
+                    // }else{
+                    //     switch (element.text.toLowerCase()) {
+                    //         case "event_name":
+                    //             if (eventData.event_name) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.event_name
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.event_name,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if event_name is empty
+                    //             }
+                    //             break;
+                    //         case "host_name":
+                    //             if (eventData.hosted_by) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.hosted_by
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.hosted_by,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if host_name is empty
+                    //             }
+                    //             break;
+                    //         case "location_description":
+                    //             if (eventData.event_location) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.event_location
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.event_location,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if event_location_name is empty
+                    //             }
+                    //             break;
+                    //         case "start_time":
+                    //             if (eventData.start_time) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.start_time
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.start_time,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if start_time is empty
+                    //             }
+                    //             break;
+                    //         case "end_time":
+                    //             if (eventData.rsvp_end_time) {
+                    //                 let textWidth = getWidth(
+                    //                     element,
+                    //                     eventData.rsvp_end_time
+                    //                 );
+                    //                 textElement.set({
+                    //                     text: eventData.rsvp_end_time,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if rsvp_end_time is empty
+                    //             }
+                    //             break;
+                    //         case "start_date":
+                    //             if (eventData.event_date) {
+                    //                 var start_date = "";
+                    //                 if (eventData.event_date.includes(" To ")) {
+                    //                     let [start, end] =
+                    //                     eventData.event_date.split(" To ");
+                    //                     start_date = start;
+                    //                 } else {
+                    //                     start_date = eventData.event_date;
+                    //                 }
+                    //                 let textWidth = getWidth(element, start_date);
+                    //                 textElement.set({
+                    //                     text: start_date,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if start_date is empty
+                    //             }
+                    //             break;
+                    //         case "end_date":
+                    //             if (eventData.event_date) {
+                    //                 var end_date = "";
+                    //                 if (eventData.event_date.includes(" To ")) {
+                    //                     let [start, end] =
+                    //                     eventData.event_date.split(" To ");
+                    //                     end_date = end;
+                    //                 } else {
+                    //                     end_date = eventData.event_date;
+                    //                 }
+                    //                 let textWidth = getWidth(element, end_date);
+                    //                 textElement.set({
+                    //                     text: end_date,
+                    //                     width: textWidth,
+                    //                 });
+                    //             } else {
+                    //                 return; // Skip adding the element if end_date is empty
+                    //             }
+                    //             break;
+                    //     }
+
+                    // }
 
                     canvas.add(textElement);
                 });
@@ -1121,28 +1264,7 @@ function bindData(current_event_id) {
         return textWidth;
     }
 
-    function addIconsToTextbox(target) {
-        console.log("add to here");
-        console.log(target);
-        if (target == undefined) {
-            return;
-        }
-        if (target.fontWeight == "bold") {
-            $(".bold-btn").addClass("activated");
-        } else {
-            $(".bold-btn").removeClass("activated");
-        }
-        if (target.fontStyle == "italic") {
-            $(".italic-btn").addClass("activated");
-        } else {
-            $(".italic-btn").removeClass("activated");
-        }
-        if (target.underline == true) {
-            $(".underline-btn").addClass("activated");
-        } else {
-            $(".underline-btn").removeClass("activated");
-        }
-    }
+    function addIconsToTextbox(textbox) {}
 
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
@@ -1515,6 +1637,7 @@ function bindData(current_event_id) {
         // Add the textbox to the canvas
         canvas.add(text);
 
+        addIconsToTextbox(text);
         canvas.renderAll();
 
         // Initial center calculation
@@ -1771,10 +1894,28 @@ function bindData(current_event_id) {
             });
             activeObject.setCoords(); // Update coordinates
 
+            // Log the updated properties
+            //console.log("Updated Font Size: " + activeObject.fontSize);
+            //console.log("Updated Font Color: " + activeObject.fill);
+
             canvas.renderAll();
             // Save state after updating properties
         }
     }
+
+    // document.getElementById('fontSize').addEventListener('change', updateSelectedTextProperties);
+    // document.getElementById('fontColor').addEventListener('input', updateSelectedTextProperties);
+
+    // canvas.on("mouse:down", function(options) {
+    //     if (options.target && options.target.type === "textbox") {
+    //         canvas.setActiveObject(options.target);
+    //     } else {
+    //         canvas.getObjects("textbox").forEach(function(tb) {
+    //             if (tb.trashIcon) tb.trashIcon.set("visible", false);
+    //             if (tb.copyIcon) tb.copyIcon.set("visible", false);
+    //         });
+    //     }
+    // });
 
     function discardIfMultipleObjects(options) {
         if (
@@ -1799,8 +1940,6 @@ function bindData(current_event_id) {
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
         if (options.target && options.target.type === "textbox") {
-            console.log("clicked on text box");
-
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
         } else {
@@ -1858,6 +1997,118 @@ function bindData(current_event_id) {
         canvas.renderAll();
     }
 
+    // document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+    //     loadAndUse("AbrilFatface-Regular");
+    // });
+    // document.getElementById('AdleryProButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("AdleryPro-Regular");
+
+    // });
+    // document.getElementById('AgencyFBButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("AgencyFB-Bold");
+
+    // });
+    // document.getElementById('AlexBrushButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("AlexBrush-Regular");
+
+    // });
+    // document.getElementById('AlluraButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Allura-Regular");
+
+    // });
+    // // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
+    // //     //console.log("fontname")
+
+    // //     loadAndUse("BotanicaScript-Regular");
+
+    // // });
+    // document.getElementById('ArcherButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("ArcherBold");
+
+    // });
+    // document.getElementById('Archer-BookButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-Book");
+
+    // });
+    // document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-BookItalic");
+
+    // });
+    // document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-ExtraLight");
+
+    // });
+    // document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Archer-Hairline");
+
+    // });
+    // document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Bebas-Regular");
+
+    // });
+    // document.getElementById('BookAntiquaButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("BookAntiqua");
+
+    // });
+    // document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CandyCaneUnregistered");
+
+    // });
+    // document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CarbonBl-Regular");
+
+    // });
+    // document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CarmenSans-ExtraBold");
+
+    // });
+    // document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("CarmenSans-Regular");
+
+    // });
+    // document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("ChristmasCookies");
+
+    // });
+    // document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
+    //     //console.log("fontname")
+
+    //     loadAndUse("Bungee-Regular");
+
+    // });
     document.querySelectorAll(".form-check-input").forEach(function (input) {
         input.addEventListener("click", function () {
             const font = this.getAttribute("data-font");
@@ -2039,7 +2290,7 @@ function bindData(current_event_id) {
                 activeObject.set("text", capitalizedText);
             },
         };
-        addIconsToTextbox(activeObject);
+
         // Execute the corresponding command
         if (commands[command]) {
             commands[command](font); // Pass font to fontName if needed
@@ -2228,6 +2479,502 @@ function bindData(current_event_id) {
     $("#redoButton").click(function () {
         redo();
     });
+
+    // $(".slider_photo").on("change", function(event) {
+    //     var file = event.target.files[0]; // Get the first file (the selected image)
+    //     if (file) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(".photo-slider-1").attr("src", e.target.result).show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //         $(".design-sidebar").addClass("d-none");
+    //         $(".design-sidebar_7").removeClass("d-none");
+    //         $("#sidebar").addClass("design-sidebar_7");
+    //         $(".close-btn").attr("data-id", "design-sidebar_7");
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+    // });
+
+    // $(".slider_photo_2").on("change", function(event) {
+    //     var file = event.target.files[0];
+    //     if (file) {
+    //         $(".photo-slider-2").show();
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(".photo-slider-2").attr("src", e.target.result).show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+    // });
+    // $(".slider_photo_3").on("change", function(event) {
+    //     var file = event.target.files[0];
+    //     if (file) {
+    //         $(".photo-slider-3").show();
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(".photo-slider-3").attr("src", e.target.result).show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+    // });
+
+    // function getLengthofSliderImage(){
+    //     var i = 0;
+    //     $(".slider_img").each(function() {
+    //         var src = $(this).attr("src");
+    //         // console.log(src);
+    //         if (src !== "") {
+    //            i++;
+    //         }
+    //     });
+    //     $('.slider_image_count').text(i+'/3 Photos');
+    // }
+    // $(document).on("click", ".delete-slider-1", function () {
+    //     $(".photo-slider-1").hide();
+    // });
+    // $(document).on("click", ".delete-slider-2", function () {
+    //     $(".photo-slider-2").hide();
+    // });
+    // $(document).on("click", ".delete-slider-3", function () {
+    //     $(".photo-slider-3").hide();
+    // });
+
+    // $(document).on("click", ".save-slider-image", function() {
+    //     var imageSources = [];
+    //     // $(".slider_img").each(function () {
+    //     //     imageSources.push($(this).attr("src"));
+    //     // });
+
+    //     $(".slider_img").each(function() {
+    //         var src = $(this).attr("src");
+    //         if (src !== "") {
+    //             imageSources.push({
+    //                 src: $(this).attr("src"),
+    //                 deleteId: $(this).data("delete")
+    //             });
+    //         }
+    //     });
+    //     //console.log(imageSources);
+    //     if(imageSources.length > 0){
+    //         $('#loader').css('display', 'block');
+    //         $.ajax({
+    //             url: base_url + "event/save_slider_img",
+    //             method: "POST",
+    //             data: {
+    //                 imageSources: imageSources,
+    //                 _token: $('meta[name="csrf-token"]').attr("content"),
+    //             },
+    //             success: function(response) {
+    //                 var savedImages = response.images;
+    //                 eventData.slider_images = savedImages;
+    //                 console.log(eventData);
+    //                 $('#loader').css('display', 'none');
+    //                 toastr.success('Slider Image saved Successfully');
+    //             },
+    //             error: function(xhr, status, error) {},
+    //         });
+    //     }
+    // });
+
+    // $(document).on("click", ".delete_silder", function(e) {
+    //     e.preventDefault();
+    //     var delete_id = $(this).parent().find('.slider_img').data("delete");
+    //     var src = $(this).parent().find('.slider_img').attr("src");
+    //     if (src != "") {
+    //         $('#loader').css('display', 'block');
+    //         var $this = $(this);
+    //         var check_slider_img = eventData.slider_images;
+    //         var matchFound = false;
+    //         $.each(check_slider_img, function(index, slider) {
+    //             if (slider.deleteId == delete_id) {
+    //                 matchFound = true;
+    //                 return false;
+    //             }
+    //         });
+    //         if (matchFound) {
+    //             $.ajax({
+    //                 url: base_url + "event/delete_slider_img",
+    //                 method: "POST",
+    //                 data: {
+    //                     delete_id: delete_id,
+    //                     _token: $('meta[name="csrf-token"]').attr("content"),
+    //                 },
+    //                 success: function(response) {
+    //                     $this.parent().find('.slider_img').attr('src', '');
+    //                     $(".photo-slider-" + delete_id).hide();
+    //                     toastr.success('Slider Image Deleted Successfully')
+    //                     $('#loader').css('display', 'none');
+
+    //                 },
+    //                 error: function(xhr, status, error) {},
+    //             });
+    //         } else {
+    //             $(this).parent().find('.slider_img').attr('src', '');
+    //             $(".photo-slider-" + delete_id).hide();
+    //             $('#loader').css('display', 'none');
+    //             toastr.success('Slider Image Deleted Successfully')
+
+    //         }
+
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+
+    // });
+
+    // var canvasElement = new fabric.Canvas('imageEditor', {
+    //     width: 500, // Canvas width
+    //     height: 500, // Canvas height
+    //     cornerSize: 6,
+    // });
+    //     function updateClipPath(imageUrl, element) {
+
+    //         const imageWrapper = document.getElementById('imageWrapper');
+    //         const imgElement = document.getElementById('user_image');
+    //         imgElement.src = imageUrl;
+    //         if(!canvasElement){
+    //         var canvasElement = new fabric.Canvas('imageEditor', {
+    //                     width: 500, // Canvas width
+    //                     height: 500, // Canvas height
+    //                     cornerSize: 6,
+    //         });
+    // }
+    //         //console.log(imageWrapper);
+    //         // If a current image exists on canvas, remove it
+    //         console.log(canvasElement)
+    //         if (currentImage) {
+    //             canvasElement.remove(currentImage);
+    //         }
+
+    //         // Handle previous image and trash icon
+    //         if (oldImage != null) {
+    //             canvasElement.remove(oldImage.trashIcon);
+    //             oldImage.trashIcon = null;
+    //             canvasElement.renderAll();
+    //         }
+
+    //         imageWrapper.style.display = 'block';
+    //         // imageWrapper.style.left = element.left;
+    //         // imageWrapper.style.top = element.top;
+
+    //         let canvasEL = document.getElementById('imageEditor1')
+    //         const canvasRect = canvasEL.getBoundingClientRect();
+
+    //         //console.log(canvasRect.left)
+    //         //console.log(canvasRect.top)
+    //         //console.log(element.centerX)
+    //         //console.log(element.centerY)
+    //         //console.log(element.height)
+    //         //console.log(element.height)
+
+    //         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
+    //         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+    //         //console.log({
+    //         //     left
+    //         // })
+    //         //console.log({
+    //         //     imageWrapper
+    //         // })
+
+    //         // Set the calculated position to imageWrapper
+    //         imageWrapper.style.left = left;
+    //         imageWrapper.style.top = top;
+
+    //         imgElement.onload = function() {
+    //             // Get image dimensions and scale it
+    //             const imgInstance = new fabric.Image(imgElement, {
+    //                 selectable: true,
+    //                 hasControls: true,
+    //                 hasBorders: true,
+
+    //                 borderColor: "#2DA9FC",
+    //                 cornerColor: "#fff",
+    //                 transparentCorners: false,
+    //                 lockUniScaling: true,
+    //                 scaleX: 600 / imgElement.width,
+    //                 scaleY: 600 / imgElement.height,
+    //                 cornerSize: 10,
+    //                 cornerStyle: 'circle',
+    //             });
+    //             shape = element.shape;
+    //             current_shape = shape;
+    //             canvasElement.add(imgInstance);
+    //             // addIconsToImage(imgInstance);
+    //             drawCanvas();
+
+    //             // Refresh canvas
+    //             canvasElement.renderAll();
+
+    //             // Update the image with the shape based on the provided element data
+    //             if (element.shape) {
+    //                 applyClipPath(imgInstance, element);
+    //             }
+
+    //             // Image mouseup event to change shape or update position
+    //             imgInstance.on('mouseup', function(options) {
+    //                 if (options.target) {
+    //                     // Change shape logic
+    //                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+    //                     const nextShape = shapes[currentShapeIndex];
+    //                     element.shape = nextShape;
+    //                     console.log(1)
+    //                     updateClipPath(data, element); // Update the image with the new shape
+    //                 }
+    //             });
+
+    //             // Update canvas on movement or scaling
+    //             imgInstance.on('moving', function() {
+    //                 isImageDragging = true;
+    //                 element.centerX = imgInstance.left;
+    //                 element.centerY = imgInstance.top;
+
+    //                 updatedOBJImage = {
+    //                     centerX: imgInstance.left,
+    //                     centerY: imgInstance.top,
+    //                 };
+    //             });
+
+    //             imgInstance.on('scaling', function() {
+    //                 element.width = imgInstance.width * imgInstance.scaleX;
+    //                 element.height = imgInstance.height * imgInstance.scaleY;
+
+    //                 updatedOBJImage = {
+    //                     width: imgInstance.width * imgInstance.scaleX,
+    //                     height: imgInstance.height * imgInstance.scaleY
+    //                 };
+    //             });
+
+    //             currentImage = imgInstance; // Track current image on canvas
+    //             oldImage = imgInstance;
+    //             // $('.photo-slider-wrp').hide()
+    //         };
+
+    //         imgElement.onerror = function(e) {
+    //             console.error("Failed to load image.", e);
+    //         };
+    //     }
+
+    // Helper function to apply clip path based on shape
+    // function applyClipPath(image, element) {
+    //     const containerWidth = 150;
+    //     const containerHeight = 200;
+
+    //     let clipPath;
+    //     switch (element.shape) {
+    //         case 'circle':
+    //             clipPath = new fabric.Circle({
+    //                 radius: Math.min(containerWidth, containerHeight) / 2,
+    //                 originX: 'center',
+    //                 originY: 'center'
+    //             });
+    //             break;
+    //         case 'star':
+    //             clipPath = new fabric.Path(
+    //                 'M 50,0 L 61,35 L 98,35 L 68,57 L 79,91 L 50,70 L 21,91 L 32,57 L 2,35 L 39,35 z', {
+    //                     scaleX: (image.width * image.scaleX) / 100,
+    //                     scaleY: (image.height * image.scaleY) / 100,
+    //                     originX: 'center',
+    //                     originY: 'center'
+    //                 }
+    //             );
+    //             break;
+    //         case 'heart':
+    //             const heartPath = [
+    //                 'M', 0, 0,
+    //                 'C', -containerWidth / 3, -containerHeight / 3, -containerWidth / 3, containerHeight / 6, 0, containerHeight / 5,
+    //                 'C', containerWidth / 3, containerHeight / 6, containerWidth / 3, -containerHeight / 3, 0, 0
+    //             ].join(' ');
+    //             clipPath = new fabric.Path(heartPath, {
+    //                 originX: 'center',
+    //                 originY: 'center'
+    //             });
+    //             break;
+    //         default:
+    //             break;
+    //     }
+
+    //     // Set clipping path for the image
+    //     image.set({
+    //         clipPath: clipPath
+    //     });
+
+    //     canvasElement.renderAll();
+    // }
+
+    // const imageWrapper = document.getElementById('imageWrapper');
+    // const canvasElement = new fabric.Canvas('imageEditor', {
+    //     width: 500, // Canvas width
+    //     height: 500, // Canvas height
+    // });
+
+    // const resizeHandles = {
+    //     topLeft: document.querySelector('.resize-handle.top-left'),
+    //     topRight: document.querySelector('.resize-handle.top-right'),
+    //     bottomLeft: document.querySelector('.resize-handle.bottom-left'),
+    //     bottomRight: document.querySelector('.resize-handle.bottom-right'),
+    //     topCenter: document.querySelector('.resize-handle.top-center'),
+    //     bottomCenter: document.querySelector('.resize-handle.bottom-center'),
+    //     leftCenter: document.querySelector('.resize-handle.left-center'),
+    //     rightCenter: document.querySelector('.resize-handle.right-center')
+    // };
+
+    // let isDragging = false;
+    // let isResizing = false;
+    // let startWidth, startHeight, startX, startY, activeHandle;
+    // let offsetX, offsetY;
+    // let shape = 'rectangle'; // Default shape
+    // current_shape = shape;
+    // let shapeChangedDuringDrag = false; // Flag to track shape change
+    // let imageUploaded = false; // Flag to track if image has been uploaded
+
+    // function startResize(event, handle) {
+    //     const userImageElement = document.getElementById('user_image');
+
+    //     isResizing = true;
+    //     startWidth = userImageElement.clientWidth;
+    //     startHeight = userImageElement.clientHeight;
+    //     startX = event.clientX;
+    //     startY = event.clientY;
+    //     activeHandle = handle;
+    //     event.stopPropagation();
+    // }
+
+    // function resize(event) {
+    //     if (isResizing) {
+    //     const userImageElement = document.getElementById('user_image');
+
+    //         let newWidth, newHeight;
+
+    //         if (activeHandle === resizeHandles.bottomRight) {
+    //             newWidth = startWidth + (event.clientX - startX);
+    //             newHeight = startHeight + (event.clientY - startY);
+    //         } else if (activeHandle === resizeHandles.bottomLeft) {
+    //             newWidth = startWidth - (event.clientX - startX);
+    //             newHeight = startHeight + (event.clientY - startY);
+    //             imageWrapper.style.left = `${event.clientX}px`;
+    //         } else if (activeHandle === resizeHandles.topRight) {
+    //             newWidth = startWidth + (event.clientX - startX);
+    //             newHeight = startHeight - (event.clientY - startY);
+    //             imageWrapper.style.top = `${event.clientY}px`;
+    //         } else if (activeHandle === resizeHandles.topLeft) {
+    //             newWidth = startWidth - (event.clientX - startX);
+    //             newHeight = startHeight - (event.clientY - startY);
+    //             imageWrapper.style.left = `${event.clientX}px`;
+    //             imageWrapper.style.top = `${event.clientY}px`;
+    //         } else if (activeHandle === resizeHandles.topCenter) {
+    //             newHeight = startHeight - (event.clientY - startY);
+    //             imageWrapper.style.top = `${event.clientY}px`;
+    //         } else if (activeHandle === resizeHandles.bottomCenter) {
+    //             newHeight = startHeight + (event.clientY - startY);
+    //         } else if (activeHandle === resizeHandles.leftCenter) {
+    //             newWidth = startWidth - (event.clientX - startX);
+    //             imageWrapper.style.left = `${event.clientX}px`;
+    //         } else if (activeHandle === resizeHandles.rightCenter) {
+    //             newWidth = startWidth + (event.clientX - startX);
+    //         }
+
+    //         if (newWidth) userImageElement.style.width = `${newWidth}px`;
+    //         if (newHeight) userImageElement.style.height = `${newHeight}px`;
+    //     }
+    // }
+
+    // function handleMouseDown(event) {
+    //     ////console.logevent);
+    //     const canvas = document.querySelector('.new');
+
+    //     canvasRect = canvas.getBoundingClientRect();
+
+    //     if (event.target.classList.contains('resize-handle')) {
+    //         startResize(event, event.target);
+    //     } else {
+    //         event.preventDefault(); // Prevent default behavior during dragging (text selection)
+    //         isDragging = true;
+    //         offsetX = event.clientX - imageWrapper.offsetLeft;
+    //         offsetY = event.clientY - imageWrapper.offsetTop;
+    //         shapeChangedDuringDrag = false; // Reset flag on new drag start
+    //     }
+    // }
+
+    // function handleMouseMove(event) {
+    //     ////console.logevent);
+    //     if (isDragging) {
+    //     const userImageElement = document.getElementById('user_image');
+
+    //         const canvas = document.querySelector('.new');
+    //         const canvasRect = canvas.getBoundingClientRect();
+    //         let newX = event.clientX - offsetX;
+    //         let newY = event.clientY - offsetY;
+
+    //         // Ensure the image stays within the canvas boundaries
+    //         if (newX < canvasRect.left) newX = canvasRect.left;
+    //         if (newX + userImageElement.clientWidth > canvasRect.right)
+    //             newX = canvasRect.right - userImageElement.clientWidth;
+    //         if (newY < canvasRect.top) newY = canvasRect.top;
+    //         if (newY + userImageElement.clientHeight > canvasRect.bottom)
+    //             newY = canvasRect.bottom - userImageElement.clientHeight;
+
+    //         imageWrapper.style.left = `${newX}px`;
+    //         imageWrapper.style.top = `${newY}px`;
+    //         shapeChangedDuringDrag = true; // Set flag if dragging occurs
+    //     } else if (isResizing) {
+    //         resize(event);
+    //     }
+    // }
+
+    // function handleMouseUp(event) {
+    //     const userImageElement = document.getElementById('user_image');
+
+    //     if (event.target === userImageElement && !shapeChangedDuringDrag) {
+    //         // Cycle through shapes
+    //         const shapes = ['rectangle', 'circle', 'star', 'rounded-border', 'heart'];
+    //         const currentIndex = shapes.indexOf(shape);
+    //         shape = shapes[(currentIndex + 1) % shapes.length];
+    //         current_shape = shape;
+    //         ////console.log`Shape changed to: ${shape}`); // Log shape change
+
+    //         drawCanvas();
+    //     }
+
+    //     isDragging = false;
+    //     isResizing = false;
+    // }
+
+    // function drawCanvas() {
+    //     const userImageElement = document.getElementById('user_image');
+
+    //     ////console.loguserImageElement);
+    //     userImageElement.style.clipPath = '';
+
+    //     switch (shape) {
+    //         case 'rectangle':
+    //             break;
+    //         case 'circle':
+    //             userImageElement.style.clipPath = 'circle(50% at 50% 50%)';
+    //             break;
+    //         case 'star':
+    //             userImageElement.style.clipPath =
+    //                 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+    //             break;
+    //         case 'rounded-border':
+    //             userImageElement.style.clipPath = 'inset(0 round 20px)';
+    //             break;
+    //         case 'heart':
+    //             userImageElement.style.clipPath = 'url(#heartClipPath)';
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 }
 
 function getTextDataFromCanvas() {
@@ -2273,6 +3020,28 @@ function getTextDataFromCanvas() {
             };
         }
     });
+    // const imageWrapper = document.getElementById('imageEditor1');
+    // const imgElement = document.getElementById('image');
+    // let canvasEL = document.getElementById('imageEditor1')
+    // const canvasRect = canvasEL.getBoundingClientRect();
+
+    // const imageWrapperRect = imageWrapper.getBoundingClientRect();
+    // const width = imgElement.clientWidth;
+    // const height = imgElement.clientHeight;
+    // const left = imageWrapperRect.left - canvasRect.left;
+    // const top = imageWrapperRect.top - canvasRect.top;
+    // const centerX = left + width / 2;
+    // const centerY = top + height / 2;
+
+    // var shapeImageData = [];
+
+    // shapeImageData ={
+    //     shape: current_shape,
+    //     centerX: centerX,
+    //     centerY: centerY,
+    //     width: width,
+    //     height: height,
+    // };
 
     dbJson = {
         textElements: textData,

@@ -6,7 +6,9 @@ var items = 0;
 var activities = {};
 var selected_co_host = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
 var selected_co_host_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var final_step = 1;
+var final_step = ($("#step").val()!="")?$("#step").val():1;
+var isDraftEvent = ($("#isDraft").val()!="")?$("#isDraft").val():"";
+
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer = ($("#cohostId").val() !== "")? 1: 0;
@@ -99,6 +101,7 @@ if (selected_dataId != "") {
     }
     toggleSidebar();
 }
+
 
 
 var limityesvitesc = 10;
@@ -674,20 +677,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 //    datepicker();
 // })
 // datepicker();
-function getClosest15MinuteTime() {
-    const now = new Date();
-    const minutes = now.getMinutes();
-    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
-    if (roundedMinutes === 60) {
-        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
-        now.setMinutes(0); // Reset minutes to 0
-    } else {
-        now.setMinutes(roundedMinutes);
-    }
-    now.setSeconds(0); // Reset seconds to 0
-    now.setMilliseconds(0); // Reset milliseconds to 0
-    return now;
-}
+
 function datepicker() {
     $(".timepicker").datetimepicker({
         //  keepOpen: true,
@@ -713,13 +703,62 @@ function datepicker() {
     });
 
     // Ensure input field is clear when the page loads
-    $(".activity_start_time").val("");
-    $(".activity_end_time").val("");
+    $(this).val("");
+    $(this).val("");
+}
+
+function start_timepicker() {
+    $(".start_timepicker").datetimepicker({
+        //  keepOpen: true,
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+
+        // Set stepping to 15 minutes
+        // defaultDate: now
+        //  debug: true
+    }).on('dp.show', function () {
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime); 
+        
+    }).on('dp.hide', function (e) {
+        // Automatically set the selected value in the input field when the picker closes
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime); // Set the formatted time value in the input field
+    });
+
+    // Ensure input field is clear when the page loads
+    $(".start_timepicker").val("");
+
+}
+function getClosest15MinuteTime() {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
+    if (roundedMinutes === 60) {
+        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
+        now.setMinutes(0); // Reset minutes to 0
+    } else {
+        now.setMinutes(roundedMinutes);
+    }
+    now.setSeconds(0); // Reset seconds to 0
+    now.setMilliseconds(0); // Reset milliseconds to 0
+    return now;
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
 datepicker();
+start_timepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -1099,7 +1138,6 @@ $(document).on("click", ".add_more_activity", function (e) {
             $("#" + id).append(response);
             total_activities++;
             console.log(total_activities);
-
             datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
@@ -2850,11 +2888,11 @@ $(document).on("click", "#save_activity_schedule", function () {
     });
     if (isValid == 0) {
         if (total_activities >= 1) {
-            if (total_activities == 1) {
-                $(".step_1_activity").text(total_activities + " Activity");
-            } else {
+            // if (total_activities == 1) {
+            //     $(".step_1_activity").text(total_activities + " Activity");
+            // } else {
                 $(".step_1_activity").text(total_activities + " Activities");
-            }
+            // }
         } else {
             $(".step_1_activity").html(
                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
@@ -4208,43 +4246,7 @@ $(document).on("click", ".li_event_details", function () {
 });
 
 $(document).on("click", ".li_event_detail", function () {
-    $("#close_createEvent").css("display", "block");
-
-    var design = eventData.desgin_selected;
-    console.log(design);
-    $(".li_event_detail").find(".side-bar-list").addClass("active");
-    if (final_step <= 1) {
-        $(".side-bar-list").removeClass("active");
-    }
-    if (design == undefined || design == "") {
-    } else {
-        $("#sidebar_select_design_category").css("display", "none");
-        $("#myCustomModal").modal("hide");
-        $("#exampleModal").modal("hide");
-        $("#loader").css("display", "none");
-        $(".store_desgin_temp").prop("disabled", false);
-        $(".btn-close").prop("disabled", false);
-        $(".main-content-wrp").removeClass("blurred");
-        $(".step_2").hide();
-        $(".step_4").hide();
-        $(".step_3").hide();
-        $(".step_final_checkout").hide();
-        $("#edit-design-temp").hide();
-        $(".pick-card").addClass("menu-success");
-        $(".edit-design").addClass("menu-success");
-        $(".edit-design").removeClass("active");
-        $(".li_design").find(".side-bar-list").addClass("menu-success");
-        $(".event_create_percent").text("50%");
-        $(".current_step").text("2 of 4");
-        console.log(eventData);
-        var type = "all";
-        // get_user(type);
-        $(".step_1").show();
-        active_responsive_dropdown("drop-down-event-detail");
-        handleActiveClass(this);
-        $(".pick-card").addClass("menu-success");
-        $(".edit-design").addClass("menu-success");
-    }
+    step2Open();
 });
 
 function active_responsive_dropdown(current_page, design_page = null) {
@@ -4261,202 +4263,11 @@ function active_responsive_dropdown(current_page, design_page = null) {
 }
 
 $(document).on("click", ".li_guest", function () {
-    $("#close_createEvent").css("display", "block");
-    // var eventDetail2 = $('#eventDetail').val();
-    // eventDetail2 = JSON.parse(eventDetail2);
-    // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
-    //     var design = eventData.desgin_selected;
-    // }else{
-
-    var event_name = $("#event-name").val();
-    var hostedby = $("#hostedby").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-
-    var schedule = $("#schedule").is(":checked");
-    var end_time = $("#end_time").is(":checked");
-    var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
-    var address_2 = $("#address2").val();
-    var address1 = $("#address1").val();
-    var city = $("#city").val();
-    var state = $("#state").val();
-    var zipcode = $("#zipcode").val();
-
-    // var activity=$('.event_all_activity_list').length;
-    // console.log(activity);
-    // if($('#schedule').is(":checked")){
-    //     if(activity==0){
-    //         toastr.error('Event Schedule: Please set event schedule');
-    //         return;
-    //     }
-    // }
-
-    if (event_name == "") {
-        toastr.error("Please enter event name");
-        return;
-    }
-    if (hostedby == "") {
-        toastr.error("Please enter hosted by");
-        return;
-    }
-    if (event_date == "") {
-        toastr.error("Please enter start date");
-        return;
-    }
-    if (start_time == "") {
-        toastr.error("Please select start time");
-        return;
-    }
-    if (end_time) {
-        rsvp_end_time = $("#end-time").val();
-        if (rsvp_end_time == "") {
-            toastr.error("Please select end time");
-            return;
-        }
-    }
-    if (rsvp_by_date_set) {
-        rsvp_by_date = $("#rsvp-by-date").val();
-        if (rsvp_by_date == "") {
-            toastr.error("RSVP by Date : Please select RSVP date");
-            return;
-        }
-    }
-
-    if ($("#isCheckAddress").is(":checked")) {
-        if (address1 == "") {
-            toastr.error("Please enter address1");
-            return;
-        }
-        if (city == "") {
-            toastr.error("Please enter city");
-            return;
-        }
-        if (state == "") {
-            toastr.error("Please enter state");
-            return;
-        }
-        if (zipcode == "") {
-            toastr.error("Please enter zipcode");
-            return;
-        }
-    }
-    var design = eventData.desgin_selected;
-    // }
-
-    // if( design == undefined || design == ''){
-    //     console.log(final_step);
-    if (final_step <= "2") {
-        return;
-    } else {
-        $(".step_1").css("display", "none");
-        $(".step_2").css("display", "none");
-        $("#edit-design-temp").css("display", "none");
-        $(".step_4").css("display", "none");
-        $(".step_final_checkout").css("display", "none");
-        $(".step_3").show();
-        $(".pick-card").addClass("menu-success");
-        $(".edit-design").addClass("menu-success");
-        $(".event_create_percent").text("75%");
-        $(".current_step").text("3 of 4");
-        $("#sidebar_select_design_category").css("display", "none");
-        active_responsive_dropdown("drop-down-event-guest");
-        handleActiveClass(".li_guest");
-        var type = "all";
-        const stepVal = $("#CheckCuurentStep").val();
-        // alert(stepVal);
-        if (stepVal == "0") {
-            get_user(type);
-        }
-    }
+    step3open();
 });
 
 $(document).on("click", ".li_setting", function () {
-    $("#close_createEvent").css("display", "block");
-
-    var event_name = $("#event-name").val();
-    var hostedby = $("#hostedby").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-    var end_time = $("#end_time").is(":checked");
-    var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
-    var address1 = $("#address1").val();
-    var city = $("#city").val();
-    var state = $("#state").val();
-    var zipcode = $("#zipcode").val();
-
-    if (event_name == "") {
-        toastr.error("Please enter event name");
-        return;
-    }
-    if (event_name == "") {
-        toastr.error("Please enter hosted by");
-        return;
-    }
-    if (hostedby == "") {
-        toastr.error("Please enter event name");
-        return;
-    }
-    if (event_date == "") {
-        toastr.error("Please enter start date");
-        return;
-    }
-    if (start_time == "") {
-        toastr.error("Please enter start time");
-        return;
-    }
-    if (end_time) {
-        rsvp_end_time = $("#end-time").val();
-        if (rsvp_end_time == "") {
-            toastr.error("Please select end time");
-            return;
-        }
-    }
-    if (rsvp_by_date_set) {
-        rsvp_by_date = $("#rsvp-by-date").val();
-        if (rsvp_by_date == "") {
-            toastr.error("RSVP by Date : Please select RSVP date");
-            return;
-        }
-    }
-    if ($("#isCheckAddress").is(":checked")) {
-        if (address1 == "") {
-            toastr.error("Please enter address1");
-            return;
-        }
-        if (city == "") {
-            toastr.error("Please enter city");
-            return;
-        }
-        if (state == "") {
-            toastr.error("Please enter state");
-            return;
-        }
-        if (zipcode == "") {
-            toastr.error("Please enter zipcode");
-            return;
-        }
-    }
-    var design = eventData.desgin_selected;
-    var step3 = eventData.step;
-    if (step3 > 3) {
-        $("#sidebar_select_design_category").css("display", "none");
-        $(".step_1").css("display", "none");
-        $(".step_2").css("display", "none");
-        $("#edit-design-temp").css("display", "none");
-        $(".step_3").css("display", "none");
-        $(".step_final_checkout").css("display", "none");
-        $(".step_4").show();
-        $(".event_create_percent").text("99%");
-        $(".current_step").text("4 of 4");
-
-        handleActiveClass(this);
-        active_responsive_dropdown("drop-down-event-setting");
-        if (design == undefined || design == "") {
-        } else {
-            $(".pick-card").addClass("menu-success");
-            $(".edit-design").addClass("menu-success");
-        }
-    }
+    step4open();
 });
 
 $(document).on("click", ".download", function () {
@@ -4579,6 +4390,8 @@ function enforceCheckboxLimit() {
 enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
+
+    document.body.classList.add("no-scroll"); // Disable background scrolling
     const allSidebars = document.querySelectorAll(".sidebar");
     const allOverlays = document.querySelectorAll(".overlay");
     // $(".floatingfocus").removeClass("floatingfocus");
@@ -4598,6 +4411,7 @@ function toggleSidebar(id = null) {
         }
     });
     if (id == null) {
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling  
         return;
     }
     const sidebar = document.getElementById(id);
@@ -7812,7 +7626,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-
+    eventData.isdraft = "0";
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -7825,14 +7639,12 @@ $(document).on("click", ".edit_checkout", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
-            if (response.is_registry == "1") {
-                // $('#gift_registry_logo').html(response.view);
-                // $('#eventModal').modal('show');
-            } else {
-                toastr.success("Event Updated Successfully");
-                // window.location.href="profile";
-            }
-            $("#eventModal").modal("show");
+           if(response.success == true){
+               toastr.success("Event Updated Successfully");
+               window.location.href=base_url+"home";
+           }
+         
+            // $("#eventModal").modal("show");
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
@@ -7905,7 +7717,7 @@ $(document).on("click", "#close_editEvent", function (e) {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "";
+                    window.location.href = base_url+"home";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
@@ -7918,3 +7730,270 @@ $(document).on("click", "#close_editEvent", function (e) {
             
         });
 });
+
+
+if(final_step == "2"){
+    $("#loader").css("display", "flex");
+    setTimeout(function(){
+        step2Open()
+        $("#loader").css("display", "none");
+    },100)
+   
+}
+
+if(final_step == "3"){
+    $("#loader").css("display", "flex");
+    setTimeout(function(){
+        step3open()
+        $("#loader").css("display", "none");
+    },100)
+}
+
+if(final_step == "4"){
+    $("#loader").css("display", "flex");
+    setTimeout(function(){
+        step4open()
+        $("#loader").css("display", "none");
+    },100) 
+}
+
+
+function step2Open(){
+    $("#close_createEvent").css("display", "block");
+
+    var design = eventData.desgin_selected;
+    console.log(design);
+ 
+    $(".li_event_detail").find(".side-bar-list").addClass("active");
+    if (final_step <= 1) {
+        $(".side-bar-list").removeClass("active");
+    }
+    if (design == undefined || design == "") {
+    } else {
+        $("#sidebar_select_design_category").css("display", "none");
+        $("#myCustomModal").modal("hide");
+        $("#exampleModal").modal("hide");
+        $("#loader").css("display", "none");
+        $(".store_desgin_temp").prop("disabled", false);
+        $(".btn-close").prop("disabled", false);
+        $(".main-content-wrp").removeClass("blurred");
+        $(".step_2").hide();
+        $(".step_4").hide();
+        $(".step_3").hide();
+        $(".step_final_checkout").hide();
+        $("#edit-design-temp").hide();
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design").addClass("menu-success");
+        $(".edit-design").removeClass("active");
+        $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(".event_create_percent").text("50%");
+        $(".current_step").text("2 of 4");
+        console.log(eventData);
+        var type = "all";
+        // get_user(type);
+        $(".step_1").show();
+        active_responsive_dropdown("drop-down-event-detail");
+        handleActiveClass('.li_event_detail');
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design").addClass("menu-success");
+    }
+}
+
+function step3open(){
+    $("#close_createEvent").css("display", "block");
+    // var eventDetail2 = $('#eventDetail').val();
+    // eventDetail2 = JSON.parse(eventDetail2);
+    // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
+    //     var design = eventData.desgin_selected;
+    // }else{
+
+    var event_name = $("#event-name").val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+
+    var schedule = $("#schedule").is(":checked");
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+    var address_2 = $("#address2").val();
+    var address1 = $("#address1").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipcode = $("#zipcode").val();
+
+    // var activity=$('.event_all_activity_list').length;
+    // console.log(activity);
+    // if($('#schedule').is(":checked")){
+    //     if(activity==0){
+    //         toastr.error('Event Schedule: Please set event schedule');
+    //         return;
+    //     }
+    // }
+
+    if (event_name == "") {
+        toastr.error("Please enter event name");
+        return;
+    }
+    if (hostedby == "") {
+        toastr.error("Please enter hosted by");
+        return;
+    }
+    if (event_date == "") {
+        toastr.error("Please enter start date");
+        return;
+    }
+    if (start_time == "") {
+        toastr.error("Please select start time");
+        return;
+    }
+    if (end_time) {
+        rsvp_end_time = $("#end-time").val();
+        if (rsvp_end_time == "") {
+            toastr.error("Please select end time");
+            return;
+        }
+    }
+    if (rsvp_by_date_set) {
+        rsvp_by_date = $("#rsvp-by-date").val();
+        if (rsvp_by_date == "") {
+            toastr.error("RSVP by Date : Please select RSVP date");
+            return;
+        }
+    }
+
+    if ($("#isCheckAddress").is(":checked")) {
+        if (address1 == "") {
+            toastr.error("Please enter address1");
+            return;
+        }
+        if (city == "") {
+            toastr.error("Please enter city");
+            return;
+        }
+        if (state == "") {
+            toastr.error("Please enter state");
+            return;
+        }
+        if (zipcode == "") {
+            toastr.error("Please enter zipcode");
+            return;
+        }
+    }
+    var design = eventData.desgin_selected;
+    // }
+
+    // if( design == undefined || design == ''){
+    //     console.log(final_step);
+    if (final_step <= "2") {
+        return;
+    } else {
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $("#edit-design-temp").css("display", "none");
+        $(".step_4").css("display", "none");
+        $(".step_final_checkout").css("display", "none");
+        $(".step_3").show();
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design").addClass("menu-success");
+        $(".event_create_percent").text("75%");
+        $(".current_step").text("3 of 4");
+        $("#sidebar_select_design_category").css("display", "none");
+        active_responsive_dropdown("drop-down-event-guest");
+        handleActiveClass(".li_guest");
+        var type = "all";
+        const stepVal = $("#CheckCuurentStep").val();
+        // alert(stepVal);
+        if (stepVal == "0") {
+            get_user(type);
+        }
+    }
+}
+
+function step4open(){
+    $("#close_createEvent").css("display", "block");
+
+    var event_name = $("#event-name").val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+    var address1 = $("#address1").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipcode = $("#zipcode").val();
+
+    if (event_name == "") {
+        toastr.error("Please enter event name");
+        return;
+    }
+    if (event_name == "") {
+        toastr.error("Please enter hosted by");
+        return;
+    }
+    if (hostedby == "") {
+        toastr.error("Please enter event name");
+        return;
+    }
+    if (event_date == "") {
+        toastr.error("Please enter start date");
+        return;
+    }
+    if (start_time == "") {
+        toastr.error("Please enter start time");
+        return;
+    }
+    if (end_time) {
+        rsvp_end_time = $("#end-time").val();
+        if (rsvp_end_time == "") {
+            toastr.error("Please select end time");
+            return;
+        }
+    }
+    if (rsvp_by_date_set) {
+        rsvp_by_date = $("#rsvp-by-date").val();
+        if (rsvp_by_date == "") {
+            toastr.error("RSVP by Date : Please select RSVP date");
+            return;
+        }
+    }
+    if ($("#isCheckAddress").is(":checked")) {
+        if (address1 == "") {
+            toastr.error("Please enter address1");
+            return;
+        }
+        if (city == "") {
+            toastr.error("Please enter city");
+            return;
+        }
+        if (state == "") {
+            toastr.error("Please enter state");
+            return;
+        }
+        if (zipcode == "") {
+            toastr.error("Please enter zipcode");
+            return;
+        }
+    }
+    var design = eventData.desgin_selected;
+    var step3 = eventData.step;
+    if (step3 > 3) {
+        $("#sidebar_select_design_category").css("display", "none");
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $("#edit-design-temp").css("display", "none");
+        $(".step_3").css("display", "none");
+        $(".step_final_checkout").css("display", "none");
+        $(".step_4").show();
+        $(".event_create_percent").text("99%");
+        $(".current_step").text("4 of 4");
+
+        handleActiveClass('.li_setting');
+        active_responsive_dropdown("drop-down-event-setting");
+        if (design == undefined || design == "") {
+        } else {
+            $(".pick-card").addClass("menu-success");
+            $(".edit-design").addClass("menu-success");
+        }
+    }
+}

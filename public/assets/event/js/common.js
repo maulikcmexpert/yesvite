@@ -122,6 +122,19 @@ $(".form-control").each(function() {
     }
 });
 
+
+$("#event-date").on("focus input blur", function () {
+    var text = $(this).val();
+    var label = $(this).closest(".position-relative").find(".floating-label"); // Find the label
+
+    if (text === "" && event.type === "blur") {
+        label.removeClass("floatingfocus"); // Remove focus when input is empty and loses focus
+    } else {
+        label.addClass("floatingfocus"); // Add focus if input is not empty or focused
+    }
+});
+
+
 // ========= show-password ===========
 
 
