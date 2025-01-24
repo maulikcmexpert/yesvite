@@ -1164,7 +1164,7 @@ function bindData(current_event_id) {
         }
     }
     $(".design-sidebar-action").click(function () {
-        $(".design-sidebar-action").removeClass(".activated");
+        $(".design-sidebar-action").removeClass("activated");
         $(this).addClass("activated");
     });
     canvas = new fabric.Canvas("imageEditor1", {
