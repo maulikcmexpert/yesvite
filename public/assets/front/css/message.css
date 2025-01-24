@@ -1530,7 +1530,7 @@ ul.chat-list li.setpink{
     left: -5px;
     display: flex;
     right: 60%;
-    justify-content: end;
+    justify-content: start;
 }
 
 .msg-lists .sender .simple-message .reaction-ul .reaction,
