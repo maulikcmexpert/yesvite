@@ -101,7 +101,7 @@ $ischeck = ($isCohost == "0") ? ' disabled' : '';
             @endif
             <input class="form-check-input user-{{$user->id}} user_choice emailCheck" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
-                value="{{ $user->id }}" data-prefer_by="email" data-initial="{{$initials}}" {{$email_checked}}     {{$ischeck }}>
+                value="{{ $user->id }}" data-prefer_by="email" data-initial="{{$initials}}" {{$email_checked}}     {{$ischeck}}>
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
