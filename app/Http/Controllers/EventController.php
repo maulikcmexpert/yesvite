@@ -2703,10 +2703,10 @@ class EventController extends BaseController
             $startDate = $dateString;
             $endDate = $dateString;
         }
-        dD($startDate,$endDate);
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
         
+        dD($startDateObj,$endDateObj);
         $startDateFormat = "";
         $endDateFormat = "";
         if ($startDateObj && $endDateObj) {
