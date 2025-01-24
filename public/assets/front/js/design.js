@@ -556,23 +556,32 @@ function bindData(current_event_id) {
 
     function loadTextDataFromDatabase() {
         if (image) {
+            console.log("image");
             fabric.Image.fromURL(image, function (img) {
-                var canvasWidth = canvas.getWidth();
-                var canvasHeight = canvas.getHeight();
+                var canvasWidth = canvas.getWidth(); // 345
+                var canvasHeight = canvas.getHeight(); // 490
 
+                // Calculate scale factor to fit the image within the fixed canvas size
                 var scaleFactor = Math.min(
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
+
+                // Set image properties
                 img.set({
                     left: 0,
                     top: 0,
                     scaleX: scaleFactor,
                     scaleY: scaleFactor,
-                    selectable: false,
-                    hasControls: false,
+                    selectable: false, // Make the background image non-selectable
+                    hasControls: false, // Disable controls on background image
                 });
+
+                // Set the background image
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+                // Ensuring that high resolution is kept when resizing the canvas
+                canvas.renderAll(); // Force re-render for the image to fit properly
             });
 
             if (dbJson) {
@@ -1162,6 +1171,15 @@ function bindData(current_event_id) {
         } else {
             $(".justyfy-full-btn").removeClass("activated");
         }
+        let targetFontFamily = target.fontFamily;
+        $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
+        console.log(target.fontSize);
+        $("#fontSizeInput").val(target.fontSize);
+        $("#fontSizeRange").val(target.fontSize);
+        $("#letterSpacingInput").val(target.charSpacing);
+        $("#letterSpacingRange").val(target.charSpacing);
+        $("#lineHeightInput").val(target.lineHeight);
+        $("#lineHeightRange").val(target.lineHeight);
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");

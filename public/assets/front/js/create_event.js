@@ -118,10 +118,9 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-if (giftRegestryDataRaw.length > 0 && giftRegestryDataRaw!=null) {
+if (giftRegestryDataRaw.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
-        console.log(giftRegestryData);
         giftRegestryData.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -678,39 +677,55 @@ if (/Mobi/.test(navigator.userAgent)) {
 //    datepicker();
 // })
 // datepicker();
+function getClosest15MinuteTime() {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
+    if (roundedMinutes === 60) {
+        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
+        now.setMinutes(0); // Reset minutes to 0
+    } else {
+        now.setMinutes(roundedMinutes);
+    }
+    now.setSeconds(0); // Reset seconds to 0
+    now.setMilliseconds(0); // Reset milliseconds to 0
+    return now;
+}
+$(".timepicker").on("dp.show", function () {
+    $(this).val(""); // Clear the input when the picker is shown
+});
+function datepicker() {
+    $(".timepicker").datetimepicker({
+        //  keepOpen: true,
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
-// function datepicker() {
-//     $(".timepicker").datetimepicker({
-//         //  keepOpen: true,
-//         format: "LT",
-//         icons: {
-//             up: "fa fa-chevron-up",
-//             down: "fa fa-chevron-down",
-//         },
-//         useCurrent: false,
-//         ignoreReadonly: true,
-//         stepping: 15,
-//         // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+        // Set stepping to 15 minutes
+        // defaultDate: now
+        //  debug: true
+    }).on('dp.show', function () {
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = getClosest15MinuteTime();
 
-//         // Set stepping to 15 minutes
-//         // defaultDate: now
-//         //  debug: true
-//     }).on('dp.show', function () {
-//         const picker = $(this).data("DateTimePicker");
-//         const closest15MinTime = getClosest15MinuteTime();
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime); 
+    }).on('dp.hide', function (e) {
+        // Automatically set the selected value in the input field when the picker closes
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime); // Set the formatted time value in the input field
+    });
 
-//         // Set the picker to the closest 15-minute time dynamically
-//         picker.date(closest15MinTime); 
-//     }).on('dp.hide', function (e) {
-//         // Automatically set the selected value in the input field when the picker closes
-//         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-//         $(this).val(selectedTime); // Set the formatted time value in the input field
-//     });
-
-//     // Ensure input field is clear when the page loads
-//     $(this).val("");
-//     $(this).val("");
-// }
+    // Ensure input field is clear when the page loads
+    $(this).val("");
+    $(this).val("");
+}
 
 // function start_timepicker() {
 //     $(".start_timepicker").datetimepicker({
@@ -750,89 +765,8 @@ if (/Mobi/.test(navigator.userAgent)) {
 //     $(".start_timepicker").val("");
 
 // }
-function initializePickers() {
-    // Initialize Start Time Picker
-    $(".start_timepicker").datetimepicker({
-        format: "LT", // "LT" for 12-hour time format with AM/PM
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-    }).on('dp.change', function (e) {
-        const startTime = e.date; // Get the selected start time
-        if (startTime) {
-            const endTime = startTime.clone().add(1, 'hour'); // Add 1 hour to the start time
-            const endPicker = $(".end_timepicker").data("DateTimePicker");
 
-            // Update the end time picker's constraints and value
-            endPicker.minDate(startTime); // Restrict end time to be >= start time
-            endPicker.date(endTime); // Set default end time
-
-            // Ensure the AM/PM is updated correctly
-            $(".end_timepicker").val(endTime.format("LT"));
-        }
-    }).on('dp.show', function () {
-        $(this).val(""); // Clear the input field when the picker is shown
-
-        const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
-
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime);
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
-    });
-
-    // Initialize End Time Picker
-    $(".end_timepicker").datetimepicker({
-        format: "LT", // 12-hour format with AM/PM
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-    }).on('dp.show', function () {
-        const picker = $(this).data("DateTimePicker");
-        const currentEndTime = picker.date(); // Get current end time
-        if (!currentEndTime) {
-            const startTime = $(".start_timepicker").data("DateTimePicker").date();
-            if (startTime) {
-                const endTime = startTime.clone().add(1, 'hour');
-                picker.date(endTime); // Set default end time when opening the picker
-            }
-        }
-    });
-}
-
-// Initialize the pickers
-initializePickers();
-
-
-// function getClosest15MinuteTime() {
-//     const now = new Date();
-//     const minutes = now.getMinutes();
-//     const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
-//     if (roundedMinutes === 60) {
-//         now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
-//         now.setMinutes(0); // Reset minutes to 0
-//     } else {
-//         now.setMinutes(roundedMinutes);
-//     }
-//     now.setSeconds(0); // Reset seconds to 0
-//     now.setMilliseconds(0); // Reset milliseconds to 0
-//     return now;
-// }
-// $(".timepicker").on("dp.show", function () {
-//     $(this).val(""); // Clear the input when the picker is shown
-// });
-// datepicker();
+datepicker();
 // start_timepicker();
 
 // flatpickr(".event_time", {
@@ -3119,7 +3053,7 @@ $(document).on("click", "#close_createEvent", function () {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    alert(final_step);
+ 
 
     if (event_type == "") {
         $("#deleteModal").modal("show");
@@ -7683,6 +7617,7 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
     eventData.is_update_event = "0";
+    eventData.isDraftEdit= $(this).attr('data-isDraftEdit');
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -7808,8 +7743,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         });
 });
 
-
-if(final_step == "2"){
+if(final_step == "2" && isCohost == "1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step2Open()
@@ -7820,7 +7754,7 @@ if(final_step == "2"){
    
 }
 
-if(final_step == "3"){
+if(final_step == "3" && isCohost == "1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step3open()
@@ -7829,7 +7763,7 @@ if(final_step == "3"){
     },1000)
 }
 
-if(final_step == "4"){
+if(final_step == "4" && isCohost == "1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step4open()
@@ -7874,7 +7808,6 @@ function step2Open(){
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
         handleActiveClass('.li_event_detail');
-        
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
@@ -7981,7 +7914,6 @@ function step3open(){
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
         handleActiveClass(".li_guest");
-      
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
         // alert(stepVal);

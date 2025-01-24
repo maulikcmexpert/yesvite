@@ -55,6 +55,13 @@
       title.innerText = month.format('MMMM YYYY');
       monthContainer.appendChild(title);
 
+      const currentMonthButton = document.getElementsByClassName('calender_current_month');
+    if (month.isSame(today, 'month')) {
+        currentMonthButton.style.display = 'block';  // Show the button
+    } else {
+        currentMonthButton.style.display = 'none';   // Hide the button
+    }
+
       // Weekdays
       const weekdays = document.createElement('div');
       weekdays.className = 'weekdays';
