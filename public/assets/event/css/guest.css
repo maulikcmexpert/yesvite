@@ -891,7 +891,7 @@
         max-height: calc(100vh - 200px);
     }
     .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
-        max-height: calc(100vh - 250px);
+        max-height: calc(100vh - 270px);
     }
 }
 
