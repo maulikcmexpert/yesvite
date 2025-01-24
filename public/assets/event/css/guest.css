@@ -893,6 +893,9 @@
     .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
         max-height: calc(100vh - 270px);
     }
+    #sidebar_thankyou_card:has(.alert-box) .list_thankyou_card {
+        max-height: calc(100vh - 490px) !important;
+    }
 }
 
 @media only screen and (max-width: 424px) {
