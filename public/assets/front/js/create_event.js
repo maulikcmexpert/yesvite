@@ -7953,7 +7953,7 @@ if(final_step == "2"){
     setTimeout(function(){
         $("#loader").css("display", "none");
         step2()
-    },3000)
+    },5000)
 }
 
 if(final_step == "3"){
