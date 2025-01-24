@@ -2728,7 +2728,7 @@ class EventController extends BaseController
             }
         }
         
-        dD($startDateObj,$endDateObj);
+        dD($startDateObj,$startDate,$endDate,$endDateObj);
         
         $greeting_card_id = "";
         if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
