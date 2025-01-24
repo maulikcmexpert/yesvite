@@ -3799,7 +3799,7 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
     }
-
+    console.log({ allMuted });
     if (allMuted) {
         $(".multi-mute").attr("changeWith", "0");
         $(".mute-icn").addClass("d-none");
