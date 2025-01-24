@@ -86,7 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -480,6 +480,16 @@
     border: 1px solid var(--headerBorder);
     background-color: transparent;
 }
+
+.format-text-inner-options button.activated {
+    border: 1px solid var(--primaryColor) !important;
+    background-color: transparent !important;
+}
+
+.format-text-inner-options button.activated svg path{
+    stroke: var(--secondryColor) !important;
+}
+
 
 .format-text-inner-options button svg {
     width: 24px;
