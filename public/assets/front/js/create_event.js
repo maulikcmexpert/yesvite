@@ -7748,7 +7748,7 @@ if(final_step == "2"){
     setTimeout(function(){
         step2Open()
         $("#loader").css("display", "none");
-    },400)
+    },700)
    
 }
 
@@ -7757,7 +7757,7 @@ if(final_step == "3"){
     setTimeout(function(){
         step3open()
         $("#loader").css("display", "none");
-    },400)
+    },700)
 }
 
 if(final_step == "4"){
@@ -7765,7 +7765,7 @@ if(final_step == "4"){
     setTimeout(function(){
         step4open()
         $("#loader").css("display", "none");
-    },400) 
+    },700) 
 }
 
 
