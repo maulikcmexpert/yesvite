@@ -2409,7 +2409,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
     }
   });
   $(document).on("click", '.activity_start_time', function (e) {
-    alert();
+    // alert();
     datepicker();
     // e.preventDefault();
     // var check_start=$(this)
