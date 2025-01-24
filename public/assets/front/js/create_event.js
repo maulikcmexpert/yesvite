@@ -3053,7 +3053,7 @@ $(document).on("click", "#close_createEvent", function () {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    alert(final_step);
+ 
 
     if (event_type == "") {
         $("#deleteModal").modal("show");
@@ -7742,13 +7742,14 @@ $(document).on("click", "#close_editEvent", function (e) {
         });
 });
 
-
 if(final_step == "2"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step2Open()
+        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
-    },100)
+    },1000)
    
 }
 
@@ -7756,8 +7757,9 @@ if(final_step == "3"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step3open()
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
-    },100)
+    },1000)
 }
 
 if(final_step == "4"){
@@ -7765,7 +7767,7 @@ if(final_step == "4"){
     setTimeout(function(){
         step4open()
         $("#loader").css("display", "none");
-    },100) 
+    },1000) 
 }
 
 

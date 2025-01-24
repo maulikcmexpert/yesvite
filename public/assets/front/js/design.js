@@ -1166,6 +1166,11 @@ function bindData(current_event_id) {
         $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
         console.log(target.fontSize);
         $("#fontSizeInput").val(target.fontSize);
+        $("#fontSizeRange").val(target.fontSize);
+        $("#letterSpacingInput").val(target.charSpacing);
+        $("#letterSpacingRange").val(target.charSpacing);
+        $("#lineHeightInput").val(target.lineHeight);
+        $("#lineHeightRange").val(target.lineHeight);
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
