@@ -3642,10 +3642,9 @@ async function getTotalUnreadMessageCount() {
                 conversations[conversationId].unReadCount &&
                 conversations[conversationId].contactName
             ) {
-                totalUnreadCount += parseInt(
-                    conversations[conversationId].unReadCount,
-                    10
-                );
+                totalUnreadCount =
+                    totalUnreadCount +
+                    parseInt(conversations[conversationId].unReadCount, 10);
 
                 // console.log(totalUnreadCount);
             }
