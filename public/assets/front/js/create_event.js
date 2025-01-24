@@ -4248,7 +4248,7 @@ $(document).on("click", ".li_event_details", function () {
 });
 
 $(document).on("click", ".li_event_detail", function () {
-    stepOpen2();
+    step2Open();
 });
 
 function active_responsive_dropdown(current_page, design_page = null) {
@@ -7737,7 +7737,7 @@ $(document).on("click", "#close_editEvent", function (e) {
 if(final_step == "2"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
-        stepOpen2()
+        step2Open()
         $("#loader").css("display", "none");
     },100)
    
@@ -7760,7 +7760,7 @@ if(final_step == "4"){
 }
 
 
-function stepOpen2(){
+function step2Open(){
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
