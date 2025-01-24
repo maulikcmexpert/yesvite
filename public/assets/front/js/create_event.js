@@ -731,12 +731,18 @@ function start_timepicker() {
         useCurrent: false,
         ignoreReadonly: true,
         stepping: 15,
-        defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
 
         // Set stepping to 15 minutes
         // defaultDate: now
         //  debug: true
-    })
+    }).on('dp.show', function () {
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime); 
+    });
 
     // Ensure input field is clear when the page loads
     $(this).val("");
