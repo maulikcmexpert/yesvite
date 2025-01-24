@@ -247,7 +247,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="li_event_detail li_event_details">
+                    <li class="li_event_detail">
                         <a class="dropdown-item drop-down-event-detail " href="#">
                             <span>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -341,7 +341,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="li_event_detail li_event_details active">
+                    <li class="li_event_detail active">
                         <div class="menu-circle-wrp side-bar-list menu-success ">
                             <span></span>
                             <h3>Event Details</h3>
@@ -382,7 +382,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="li_event_detail li_event_details">
+                    <li class="li_event_detail">
                         <div class="menu-circle-wrp side-bar-list  ">
                             <span></span>
                             <h3>Event Details</h3>
