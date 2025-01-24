@@ -7952,7 +7952,7 @@ if(final_step == "2"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step2()
-        $("#loader").css("display", "none");
+        // $("#loader").css("display", "none");
     },5000)
 }
 
