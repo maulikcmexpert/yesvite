@@ -2681,13 +2681,13 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-        dD(1);
+      
         // $potluck = session('category');
         
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
         
-     
+        dD($dateString);
         // if (strpos($dateString, ' To ') !== false) {
             //     list($startDate, $endDate) = explode(' To ', $dateString);
             // } else {
