@@ -2314,7 +2314,7 @@ function convertTimeToMinutes(timeStr) {
 //         var startDate = new Date();
 //         startDate.setHours(parseInt(timeParts[0]));
 //         startDate.setMinutes(parseInt(timeParts[1]));
-//         startDate.setMinutes(startDate.getMinutes() + 30);
+//         startDate.setMinutes(startDate.getMinutes() + 60);
 //         var hours = startDate.getHours().toString().padStart(2, "0");
 //         var minutes = startDate.getMinutes().toString().padStart(2, "0");
 //         var newEndTimeWith30Min = `${hours}:${minutes}`;
@@ -2440,7 +2440,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             // var startDate = new Date();
             // startDate.setHours(parseInt(timeParts[0]));
             // startDate.setMinutes(parseInt(timeParts[1]));
-            // startDate.setMinutes(startDate.getMinutes() + 30);
+            // startDate.setMinutes(startDate.getMinutes() + 60);
             // var hours = startDate.getHours().toString().padStart(2, "0");
             // var minutes = startDate.getMinutes().toString().padStart(2, "0");
             // var newEndTimeWith30Min = `${hours}:${minutes}`;
@@ -2451,7 +2451,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             var startDate = new Date();
             startDate.setHours(parseInt(timeParts[0]));
             startDate.setMinutes(parseInt(timeParts[1]));
-            startDate.setMinutes(startDate.getMinutes() + 30);
+            startDate.setMinutes(startDate.getMinutes() + 60);
             var hours = startDate.getHours();
             var minutes = startDate.getMinutes().toString().padStart(2, "0");
 
@@ -2639,7 +2639,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             var startDate = new Date();
             startDate.setHours(parseInt(timeParts[0]));
             startDate.setMinutes(parseInt(timeParts[1]));
-            startDate.setMinutes(startDate.getMinutes() + 30);
+            startDate.setMinutes(startDate.getMinutes() + 60);
             var hours = startDate.getHours();
             var minutes = startDate.getMinutes().toString().padStart(2, "0");
 
@@ -7254,7 +7254,12 @@ $(document).on("keyup", ".phone_co_host_search", function () {
 });
 
 $(document).on("click", ".add-activity-schedule", function () {
-    toggleSidebar("sidebar_activity_schedule");
+    if(eventData.activity!=undefined && eventData.activity!=""){
+        toggleSidebar("sidebar_activity_schedule");
+    }else{
+        
+        toggleSidebar("sidebar_activity_schedule");
+    }
 });
 
 $(document).on("click", ".thank_you_card_toggle", function () {
