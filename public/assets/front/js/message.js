@@ -1339,12 +1339,13 @@ $(".send-message").on("keypress", async function (e) {
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);
+        console.log({ profileIndex });
         if (profileIndex) {
             var groupRef = ref(
                 database,
                 `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
             );
-
+            console.log("userTypingStatus");
             await update(groupRef, {
                 userTypingStatus: true,
             });
