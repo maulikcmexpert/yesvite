@@ -819,6 +819,12 @@ ul.member-lists li:last-child {
     display: inherit;
 }
 
+.media-msg-inline div.media-msg img{
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+}
+
 .msg-body ul li.sender .media-msg-inline .reaction-icon {
     position: absolute;
     right: -30px;
