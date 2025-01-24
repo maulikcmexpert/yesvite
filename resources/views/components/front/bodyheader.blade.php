@@ -48,9 +48,9 @@
             @php
             $count = getTotalUnreadMessageCount();
             @endphp
-            @if ($count>0)
-            <span class="g-badge">{{$count}}</span>
-            @endif
+            
+            <span class="g-badge" style="display: {{$count>0 ? 'block':'none'}}">{{$count}}</span>
+           
             {{-- <span class="g-badge">10</span> --}}
           </a>
         </div>
@@ -81,7 +81,7 @@
             $notification = getTotalUnreadNotification($user->id);
         
             if ($notification != 0) {
-                echo '<span class="g-badge notification_count_display">' . $notification . '</span>';
+                echo '<span class="notification_count_display">' . $notification . '</span>';
             }
         @endphp
         
