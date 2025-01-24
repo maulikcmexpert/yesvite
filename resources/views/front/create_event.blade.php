@@ -1554,24 +1554,32 @@
                                                     <div class="accordion-body">
                                                         <div class="accordion-body-content"
                                                             style="display: none;">
-                                                            @if ($values['profile'] != '')
-                                                                <img src="{{ $values['profile'] }}"
+                                                            @if (Auth::guard('web')->user()->profile != '')
+                                                            @php
+    $user = Auth::guard('web')->user();
+@endphp
+                                                                <img src="{{ Auth::guard('web')->user()->profile }}"
                                                                     alt="">
-                                                                <h5 class="">{{ $values['first_name'] . ' ' . $values['last_name'] }}
-                                                                </h5>
+                                                                    <h5>{{ $user->firstname }} {{ $user->lastname }}
+
+                                                                    </h5>
                                                             @endif
                                                             <span class="ms-auto">1</span>
                                                         </div>
                                                         <div class="accordion-body-content limits-count"
                                                             id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
-                                                            @if ($values['profile'] == '')
+                                                            @if (Auth::guard('web')->user()->profile == '')
+                                                            @php
+    $user = Auth::guard('web')->user();
+@endphp
                                                                 <h5
                                                                     class="{{ $fontColor }} add-item-under-text me-auto">
                                                                     {{ $initials }}</h5>
-                                                                <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                <h5>{{ $user->firstname }} {{ $user->lastname }}
+
                                                                 </h5>
                                                             @endif
-                                                            @if ($values['user_id'] == $eventDetail['user_id'])
+                                                            @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
                                                                 <div class="qty-container ms-auto">
                                                                     <input type="hidden"
                                                                         class="category-item-key"
@@ -1584,12 +1592,12 @@
                                                                         value="{{ $items['quantity'] }}">
                                                                     <input type="hidden"
                                                                         class="item-quantity-minus"
-                                                                        value="{{ $values['quantity'] }}">
+                                                                        value="0">
                                                                     <button class="qty-btnminus"
                                                                         type="button"><i
                                                                             class="fa fa-minus"></i></button>
                                                                     <input type="number" name="qty"
-                                                                        value="{{ $values['quantity'] }}"
+                                                                        value="0"
                                                                         class="input-qty" readonly="">
                                                                     <button class="qty-btnplus"
                                                                         type="button"><i

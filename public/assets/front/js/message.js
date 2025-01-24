@@ -444,7 +444,7 @@ async function handleNewConversation(snapshot) {
             .find("span")
             .replaceWith(userStatus);
         const badgeElement = $(conversationElement).find(
-            ".ms-auto .d-flex .badge"
+            ".ms-auto .d-flex .my-badge"
         );
         badgeElement.text(newConversation.unReadCount);
         if (parseInt(newConversation.unReadCount) == 0) {
@@ -3629,24 +3629,22 @@ $(document).on("click", ".close-preview", function () {
     $(".preview_img").attr("src", "");
     $(".upload").val("");
 });
-
+let totalUnreadCount = 0;
 async function getTotalUnreadMessageCount() {
     const userId = senderUser; // Assuming senderUser is the ID of the current user
     const overviewRef = ref(database, `overview/${userId}`);
     const snapshot = await get(overviewRef);
-    let totalUnreadCount = 0;
 
-    if (snapshot.exists()) {
-        const conversations = snapshot.val();
+    if (await snapshot.exists()) {
+        const conversations = await snapshot.val();
         for (let conversationId in conversations) {
             if (
                 conversations[conversationId].unReadCount &&
                 conversations[conversationId].contactName
             ) {
-                totalUnreadCount += parseInt(
-                    conversations[conversationId].unReadCount,
-                    10
-                );
+                totalUnreadCount =
+                    totalUnreadCount +
+                    parseInt(conversations[conversationId].unReadCount, 10);
 
                 // console.log(totalUnreadCount);
             }
