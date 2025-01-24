@@ -2705,7 +2705,7 @@ class EventController extends BaseController
         }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
-        dD($startDateObj);
+        // dD($startDateObj);
        
         $startDateFormat = "";
         $endDateFormat = "";
