@@ -1162,9 +1162,15 @@ function bindData(current_event_id) {
         } else {
             $(".justyfy-full-btn").removeClass("activated");
         }
-        if ($(`#${target.fontFamily}Button`)) {
-            $(`#${target.fontFamily}Button`).prop("checked", true);
-        }
+        let targetFontFamily = target.fontFamily;
+        $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
+        console.log(target.fontSize);
+        $("#fontSizeInput").val(target.fontSize);
+        $("#fontSizeRange").val(target.fontSize);
+        $("#letterSpacingInput").val(target.charSpacing);
+        $("#letterSpacingRange").val(target.charSpacing);
+        $("#lineHeightInput").val(target.lineHeight);
+        $("#lineHeightRange").val(target.lineHeight);
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");

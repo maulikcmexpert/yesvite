@@ -118,10 +118,9 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-if (giftRegestryDataRaw.length > 0 && giftRegestryDataRaw!=null) {
+if (giftRegestryDataRaw.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
-        console.log(giftRegestryData);
         giftRegestryData.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -678,7 +677,23 @@ if (/Mobi/.test(navigator.userAgent)) {
 //    datepicker();
 // })
 // datepicker();
-
+function getClosest15MinuteTime() {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
+    if (roundedMinutes === 60) {
+        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
+        now.setMinutes(0); // Reset minutes to 0
+    } else {
+        now.setMinutes(roundedMinutes);
+    }
+    now.setSeconds(0); // Reset seconds to 0
+    now.setMilliseconds(0); // Reset milliseconds to 0
+    return now;
+}
+$(".timepicker").on("dp.show", function () {
+    $(this).val(""); // Clear the input when the picker is shown
+});
 function datepicker() {
     $(".timepicker").datetimepicker({
         //  keepOpen: true,
@@ -711,22 +726,6 @@ function datepicker() {
     $(this).val("");
     $(this).val("");
 }
-function getClosest15MinuteTime() {
-    const now = new Date();
-    const minutes = now.getMinutes();
-    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
-    if (roundedMinutes === 60) {
-        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
-        now.setMinutes(0); // Reset minutes to 0
-    } else {
-        now.setMinutes(roundedMinutes);
-    }
-    now.setSeconds(0); // Reset seconds to 0
-    now.setMilliseconds(0); // Reset milliseconds to 0
-    return now;
-}
-datepicker();
-
 
 // function start_timepicker() {
 //     $(".start_timepicker").datetimepicker({
@@ -766,72 +765,8 @@ datepicker();
 //     $(".start_timepicker").val("");
 
 // }
-function initializePickers() {
-    $(".start_timepicker").datetimepicker({
-        format: "LT", // 12-hour format with AM/PM
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-    }).on('dp.show', function () {
-        const picker = $(this).data("DateTimePicker");
-        const currentStartTime = picker.date(); 
 
-        if (!currentStartTime) {
-            const defaultTime = moment().hours(12).minutes(0).seconds(0);
-            picker.date(defaultTime);
-        }
-    }).on('dp.change', function (e) {
-        const startTime = e.date; 
-        if (startTime) {
-            const endTime = startTime.clone().add(1, 'hour'); 
-            const endPicker = $(".end_timepicker").data("DateTimePicker");
-            // endPicker.minDate(startTime); // Restrict end time to be >= start time
-            endPicker.date(endTime);
-        }
-    }).on('dp.hide', function (e) {
-        const selectedTime = e.date ? e.date.format("LT") : ""; 
-        $(this).val(selectedTime); 
-    });
-
-    $(".end_timepicker").datetimepicker({
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-    }).on('dp.show', function () {
-        const picker = $(this).data("DateTimePicker");
-        const currentEndTime = picker.date(); 
-
-        if (!currentEndTime) {
-            const startTime = $(".start_timepicker").data("DateTimePicker").date();
-            if (startTime) {
-                const endTime = startTime.clone().add(1, 'hour');
-                picker.date(endTime); 
-            }
-        }
-    }).on('dp.hide', function (e) {
-        const selectedTime = e.date ? e.date.format("LT") : ""; 
-        $(this).val(selectedTime);
-    });
-}
-// Initialize the pickers
-initializePickers();
-
-
-
-
-// $(".timepicker").on("dp.show", function () {
-//     $(this).val(""); // Clear the input when the picker is shown
-// });
-// datepicker();
+datepicker();
 // start_timepicker();
 
 // flatpickr(".event_time", {
@@ -7812,8 +7747,6 @@ if(final_step == "2"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step2Open()
-        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
-        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
     },3000)
    
@@ -7823,7 +7756,6 @@ if(final_step == "3"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step3open()
-        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
     },3000)
 }
@@ -7873,7 +7805,6 @@ function step2Open(){
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
         handleActiveClass('.li_event_detail');
-        
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
@@ -7980,7 +7911,6 @@ function step3open(){
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
         handleActiveClass(".li_guest");
-      
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
         // alert(stepVal);
