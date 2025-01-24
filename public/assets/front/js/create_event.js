@@ -7687,6 +7687,7 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
     eventData.is_update_event = "0";
+    eventData.isDraftEdit= $(this).attr('data-isDraftEdit');
     savePage1Data();
     savePage3Data();
     savePage4Data();
