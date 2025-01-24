@@ -450,10 +450,18 @@ async function handleNewConversation(snapshot) {
         if (parseInt(newConversation.unReadCount) == 0) {
             badgeElement.addClass("d-none");
             $(conversationElement).removeClass("setpink");
+            $(conversationElement).attr(
+                "data-msgTime",
+                newConversation.timeStamp
+            );
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
             $(conversationElement).addClass("setpink");
+            $(conversationElement).attr(
+                "data-msgTime",
+                newConversation.timeStamp
+            );
             console.log("here");
         }
     } else {
