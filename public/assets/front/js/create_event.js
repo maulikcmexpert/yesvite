@@ -715,9 +715,9 @@ function datepicker() {
         $(this).val(""); // Set the closest 15-minute time
     });
 }
-$(".timepicker").on("dp.show", function () {
-    $(this).val(""); // Clear the input when the picker is shown
-});
+// $(".timepicker").on("dp.show", function () {
+//     $(this).val(""); // Clear the input when the picker is shown
+// });
 datepicker();
 
 // flatpickr(".event_time", {
