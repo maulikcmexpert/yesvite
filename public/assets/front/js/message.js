@@ -755,10 +755,11 @@ async function updateChat(user_id) {
                 $("#selected-user-lastseen").text(selectedUserData.userStatus);
             }
         } else {
-            if (isGroup) {
+            let lastseen = "";
+            if (isGroup == true || isGroup == "true") {
                 lastseen = "";
             } else {
-                let lastseen =
+                lastseen =
                     selectedUserData.userStatus == "offline" ||
                     selectedUserData.userStatus == "Offline"
                         ? `last seen at ${timeago.format(messageTime)}`
