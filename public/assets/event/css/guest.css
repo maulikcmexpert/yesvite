@@ -699,7 +699,7 @@
         max-height: calc(100vh - 380px);    
     } 
 
-    .guest-main-content:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
         max-height: calc(100vh - 470px);
     }
 
