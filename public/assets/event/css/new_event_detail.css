@@ -631,7 +631,7 @@
     z-index: 3;
 }
 
-.new_event_detail_form .form-group input:focus + label {
+.new_event_detail_form .form-group:has(input:focus) label {
     color: var(--primaryColor) !important;
 }
 
