@@ -705,15 +705,14 @@ function datepicker() {
         useCurrent: false,
         ignoreReadonly: true,
         stepping: 15,
-        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+        defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
         // Set stepping to 15 minutes
         // defaultDate: now
         //  debug: true
     }).on('dp.show', function (e) {
         // Dynamically set the default time on picker open, without affecting the input
-        const picker = $(this).data("DateTimePicker");
-        picker.date(getClosest15MinuteTime()); // Set the closest 15-minute time
+        $(this).val(""); // Set the closest 15-minute time
     });
 }
 $(".timepicker").on("dp.show", function () {
