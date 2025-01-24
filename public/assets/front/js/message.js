@@ -2931,6 +2931,7 @@ $(document).on("click", ".remove-member", async function () {
             }
         }
     }
+
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
@@ -2947,6 +2948,7 @@ $(document).on("click", ".remove-member", async function () {
     });
     await addListInMembers(SelecteGroupUser);
     await remove(overviewRef);
+    $("#listBox").modal("hide");
 });
 
 $(".updateGroup").click(function () {
