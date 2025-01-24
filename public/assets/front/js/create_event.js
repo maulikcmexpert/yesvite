@@ -102,18 +102,7 @@ if (selected_dataId != "") {
     toggleSidebar();
 }
 
-if(final_step == "2"){
-    alert("hiiii")
-    step2()
-}
 
-if(final_step == "3"){
-    
-}
-
-if(final_step == "4"){
-    
-}
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -7957,6 +7946,21 @@ $(document).on("click", "#close_editEvent", function (e) {
             
         });
 });
+
+
+if(final_step == "2"){
+    alert("hiiii")
+    step2()
+}
+
+if(final_step == "3"){
+    
+}
+
+if(final_step == "4"){
+    
+}
+
 
 function step2(){
     $("#close_createEvent").css("display", "block");
