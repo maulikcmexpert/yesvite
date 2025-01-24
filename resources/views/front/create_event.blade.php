@@ -213,7 +213,7 @@
                     @if ($eventDetail['id']=="")
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                         
-                    @else
+                    @elseif ($eventDetail['id']=="1")
                     <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
                     @endif
                 </div>
