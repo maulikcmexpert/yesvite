@@ -712,7 +712,7 @@ function datepicker() {
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
-// datepicker();
+datepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -1093,7 +1093,7 @@ $(document).on("click", ".add_more_activity", function (e) {
             total_activities++;
             console.log(total_activities);
 
-            datepicker();
+            // datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
         },
@@ -2390,6 +2390,8 @@ function convertTimeToMinutes(timeStr) {
 
 let blurExecutedEndTime = false;
 $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
+    datepicker();
+
     e.preventDefault();
     var check_start=$(this)
     .closest(".activity-main-wrp")
@@ -2402,7 +2404,14 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
          $(this).datetimepicker("hide"); // Hide time picker if open
          $(this).blur();
         return;
+    }else{
+    $(this).data("DateTimePicker").show(); // Explicitly show the picker
     }
+  });
+  $(document).on("click", '.activity_start_time', function (e) {
+    // alert();
+    $(this).data("DateTimePicker").show(); // Explicitly show the picker
+    
   });
 $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
     // e.preventDefault();
@@ -7896,7 +7905,7 @@ $(document).on("click", "#close_editEvent", function (e) {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "home";
+                    window.location.href = "";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
@@ -7906,5 +7915,6 @@ $(document).on("click", "#close_editEvent", function (e) {
             error: function (xhr, status, error) {
                 console.log("AJAX error: " + error);
             },
+            
         });
 });
