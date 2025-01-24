@@ -57,9 +57,9 @@
 
       const currentMonthButton = document.getElementsByClassName('calender_current_month');
     if (month.isSame(today, 'month')) {
-        currentMonthButton.style.display = 'block';  // Show the button
+      $(currentMonthButton).show(); // Show the button
     } else {
-        currentMonthButton.style.display = 'none';   // Hide the button
+        $(currentMonthButton).hide(); // Show the button
     }
 
       // Weekdays
