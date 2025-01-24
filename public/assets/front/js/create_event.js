@@ -2402,6 +2402,8 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
          $(this).datetimepicker("hide"); // Hide time picker if open
          $(this).blur();
         return;
+    }else{
+        datepicker();
     }
   });
 $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
