@@ -712,7 +712,7 @@ function datepicker() {
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
-// datepicker();
+datepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -1010,7 +1010,7 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
-        datepicker();
+        // datepicker();
         startDate.add(1, "day");
     }
 
@@ -1093,7 +1093,7 @@ $(document).on("click", ".add_more_activity", function (e) {
             total_activities++;
             console.log(total_activities);
 
-            datepicker();
+            // datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
         },
