@@ -2685,7 +2685,6 @@ class EventController extends BaseController
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
-        dd($request);
         // $potluck = session('category');
 
         $user_id =  Auth::guard('web')->user()->id;
@@ -2878,9 +2877,10 @@ class EventController extends BaseController
 
 
         if ($eventId != "") {
-            if ($request->isdraft == "1") {
+            if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
                 EventInvitedUser::where('event_id', $request->event_id)->delete();
             }
+            
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
             if (isset($invitedusersession) && !empty($invitedusersession)) {
