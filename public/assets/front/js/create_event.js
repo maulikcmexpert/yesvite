@@ -4402,6 +4402,8 @@ enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
 
+    console.log(id);
+    
     document.body.classList.add("no-scroll"); // Disable background scrolling
     const allSidebars = document.querySelectorAll(".sidebar");
     const allOverlays = document.querySelectorAll(".overlay");
