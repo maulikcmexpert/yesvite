@@ -943,7 +943,7 @@ ul.member-lists li:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
-} 
+}
 
 .msg-footer input {
     width: 90%;
@@ -1184,7 +1184,7 @@ ul.chat-list li.setpink{
     display: flex;
     align-items: center;
     justify-content: center;
-    position: inherit !important;
+    /* position: inherit !important; */
 }
 
 .msg-body ul li.receiver .reply-section {
@@ -1526,7 +1526,7 @@ ul.chat-list li.setpink{
 
 .msg-lists .receiver .simple-message .reaction-ul {
     position: absolute;
-    bottom: 0px;
+    bottom: -10px;
     left: -5px;
     display: flex;
     right: 60%;
@@ -1834,9 +1834,9 @@ ul.chat-list li.setpink{
 
 /* @media only screen and (max-width: 767px) {
     .message-chat-lists{
-        
+
     }
-    
+
     .message-view-box{
         display: none;
     }

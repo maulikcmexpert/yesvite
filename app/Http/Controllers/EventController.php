@@ -2686,7 +2686,7 @@ class EventController extends BaseController
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
         
-        
+        dD($request->event_date);
         
         // if (strpos($dateString, ' To ') !== false) {
             //     list($startDate, $endDate) = explode(' To ', $dateString);
@@ -2703,10 +2703,10 @@ class EventController extends BaseController
             $startDate = $dateString;
             $endDate = $dateString;
         }
-
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
         
+       
         $startDateFormat = "";
         $endDateFormat = "";
         if ($startDateObj && $endDateObj) {
@@ -2728,7 +2728,7 @@ class EventController extends BaseController
             }
         }
         
-        dD($startDateObj,$startDate,$endDate,$endDateObj);
+     
         
         $greeting_card_id = "";
         if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
