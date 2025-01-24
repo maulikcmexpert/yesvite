@@ -16,7 +16,10 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
 @endif --}}
 {{-- @dd($message); --}}
 <div>
-<li data-msgTime="{{$message['timeStamp']}}" data-position="{{$i}}" class="{{$i == 0 ?'active':''}} msg-list conversation-{{$message['conversationId']}} {{@$message['isPin']=='1'?'pinned':''}}  unarchived-list" data-search="{{$message['contactName']}}" data-userId="{{@$message['contactId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}>
+<li data-msgTime="{{$message['timeStamp']}}" data-position="{{$i}}" class="{{$i == 0 ?'active':''}} msg-list 
+conversation-{{$message['conversationId']}} {{@$message['isPin']=='1'?'pinned':''}}   {{@$message['isMute']=='1'?'muted':''}} 
+unarchived-list" data-search="{{$message['contactName']}}" data-userId="{{@$message['contactId']}}" 
+data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}>
     <div class="me-2 d-none bulk-check">
         <input class="form-check-input" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
     </div>
@@ -26,20 +29,20 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
         </div> --}}
         <div class="user-img position-relative">
             @if($message['receiverProfile']!=="")
-            <img class="img-fluid user-image user-img-{{@$message['contactId']}}" data-id={{@$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
+                <img class="img-fluid user-image user-img-{{@$message['contactId']}}" data-id={{@$message['contactId']}} src="{{$message['receiverProfile']}}" alt="user img">
             @else
             @php
-            $contactName = $message['contactName'];
-            $words = explode(' ', $contactName);
-            $initials = '';
+                $contactName = $message['contactName'];
+                $words = explode(' ', $contactName);
+                $initials = '';
 
-            foreach ($words as $word) {
-            $initials .= strtoupper(substr($word, 0, 1));
-            }
-            $initials = substr($initials, 0, 2);
-            $fontColor = "fontcolor" . strtoupper($initials[0]);
+                foreach ($words as $word) {
+                    $initials .= strtoupper(substr($word, 0, 1));
+                }
+                $initials = substr($initials, 0, 2);
+                $fontColor = "fontcolor" . strtoupper($initials[0]);
             @endphp
-            <h5 class="{{$fontColor}} user-avatar img-fluid">{{$initials}}</h5>
+                <h5 class="{{$fontColor}} user-avatar img-fluid">{{$initials}}</h5>
             @endif
 
             <span class="active"></span>
@@ -146,7 +149,13 @@ $message['unReadCount'] = @$message['unRead']==true && @$message['unReadCount']=
                         <span>{{@$message['isPin']=='1'?'Unpin':'Pin'}}</span>
                     </a>
                 <li><a class="dropdown-item mute-single-conversation" changeWith="{{@$message['isMute']=='1'?'0':'1'}}" href="#" data-conversation="{{$message['conversationId']}}">
-                        <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="me-2 mute1-self-icn {{@$message['isMute']=='1'?'d-none':''}}" width="21" height="20" viewBox="0 0 29 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.20731 15.7494C4.47457 15.7494 2.9046 15.1641 2.00923 14.3078C1.12413 13.4613 0.75 12.2067 0.75 10.5015C0.75 8.84742 1.22523 7.57593 2.18617 6.70634C3.15977 5.82528 4.75144 5.24768 7.20732 5.24768C8.60469 5.24768 9.64267 4.93873 10.4595 4.43239C11.2651 3.93308 11.7983 3.27536 12.2278 2.69506C12.3136 2.57923 12.3937 2.46892 12.4701 2.36383C12.7993 1.9111 13.0581 1.55507 13.3877 1.27035C13.7441 0.962547 14.1797 0.749998 14.8902 0.749998C15.6144 0.749998 16.1755 0.971438 16.6345 1.36555C17.1081 1.77229 17.5128 2.39853 17.8375 3.26305C18.4922 5.00592 18.75 7.51847 18.75 10.5015C18.75 13.4845 18.4922 15.9963 17.8376 17.7383C17.5129 18.6024 17.1082 19.2283 16.6346 19.6348C16.1757 20.0287 15.6146 20.25 14.8902 20.25C14.1828 20.25 13.7911 20.0401 13.4836 19.7507C13.206 19.4894 12.9995 19.1758 12.7298 18.7663C12.6405 18.6308 12.5444 18.4848 12.4365 18.3267C12.0307 17.7324 11.5088 17.0641 10.6659 16.5592C9.81957 16.0521 8.71825 15.7494 7.20731 15.7494Z" stroke="black" stroke-width="1.5"/>
+                            <path d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+
+                        <svg class="me-2 unpin-single-conversation unmute1-self-icn {{@$message['isMute']=='1'?'':'d-none'}}"  width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6.33073 14.7926H4.66406C2.6474 14.7926 1.53906 13.6843 1.53906 11.6676V8.33428C1.53906 6.31762 2.6474 5.20928 4.66406 5.20928H5.85573C6.0474 5.20928 6.23906 5.15095 6.40573 5.05095L8.83906 3.52595C10.0557 2.76762 11.2391 2.62595 12.1724 3.14262C13.1057 3.65928 13.6141 4.73428 13.6141 6.17595V6.97595C13.6141 7.31762 13.3307 7.60095 12.9891 7.60095C12.6474 7.60095 12.3641 7.31762 12.3641 6.97595V6.17595C12.3641 5.22595 12.0724 4.51762 11.5641 4.24262C11.0557 3.95928 10.3057 4.08428 9.4974 4.59262L7.06406 6.10928C6.70573 6.34262 6.28073 6.45928 5.85573 6.45928H4.66406C3.3474 6.45928 2.78906 7.01762 2.78906 8.33428V11.6676C2.78906 12.9843 3.3474 13.5426 4.66406 13.5426H6.33073C6.6724 13.5426 6.95573 13.826 6.95573 14.1676C6.95573 14.5093 6.6724 14.7926 6.33073 14.7926Z" fill="#94A3B8" />
                             <path d="M10.9577 17.1577C10.2993 17.1577 9.57434 16.9244 8.84934 16.466C8.55767 16.2827 8.46601 15.8993 8.64934 15.6077C8.83267 15.316 9.21601 15.2243 9.50767 15.4077C10.316 15.9077 11.066 16.041 11.5743 15.7577C12.0827 15.4743 12.3743 14.766 12.3743 13.8243V10.791C12.3743 10.4493 12.6577 10.166 12.9993 10.166C13.341 10.166 13.6243 10.4493 13.6243 10.791V13.8243C13.6243 15.2577 13.1077 16.341 12.1827 16.8577C11.8077 17.0577 11.391 17.1577 10.9577 17.1577Z" fill="#94A3B8" />
                             <path d="M15.5002 13.9586C15.3669 13.9586 15.2419 13.9169 15.1252 13.8336C14.8502 13.6253 14.7919 13.2336 15.0002 12.9586C16.0502 11.5586 16.2752 9.70026 15.6002 8.09193C15.4669 7.77526 15.6169 7.4086 15.9336 7.27526C16.2502 7.14193 16.6169 7.29193 16.7502 7.6086C17.6002 9.62526 17.3086 11.9669 16.0002 13.7169C15.8752 13.8753 15.6919 13.9586 15.5002 13.9586Z" fill="#94A3B8" />

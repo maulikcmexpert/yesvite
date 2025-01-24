@@ -699,7 +699,7 @@ function datepicker() {
         useCurrent: false,
         ignoreReadonly: true,
         stepping: 15,
-        defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
         // Set stepping to 15 minutes
         // defaultDate: now
