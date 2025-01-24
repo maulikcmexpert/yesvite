@@ -518,6 +518,7 @@ ul.group-list {
 
 ul.group-list .user-detail h3 {
     margin-bottom: 0;
+    max-width: 270px !important;
 }
 
 ul.group-list .group-admin {

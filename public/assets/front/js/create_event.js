@@ -1016,7 +1016,7 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
-        datepicker();
+        // datepicker();
         startDate.add(1, "day");
     }
 
@@ -1099,7 +1099,7 @@ $(document).on("click", ".add_more_activity", function (e) {
             total_activities++;
             console.log(total_activities);
 
-            datepicker();
+            // datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
         },
