@@ -9,16 +9,20 @@ let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
 var current_shape;
-$(document).on("click", ".design-cards", function() {
+$(document).on("click", ".design-cards", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
-    shapeImageUrl = $(this).data('shape_image');
+    shapeImageUrl = $(this).data("shape_image");
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
     $(".edit_design_tem").attr("data-image", imageUrl);
-    if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
+    if (
+        eventData.textData != null &&
+        eventData.temp_id != null &&
+        eventData.temp_id == id
+    ) {
         dbJson = eventData.textData;
     } else {
         console.log(json);
@@ -58,12 +62,15 @@ $(document).on("click", ".design-cards", function() {
         lineHeight: 1.2,
     };
 
-    fabric.Image.fromURL(image, function(img) {
+    fabric.Image.fromURL(image, function (img) {
         var canvasWidth = canvas.getWidth();
         var canvasHeight = canvas.getHeight();
 
         // Calculate scale to maintain aspect ratio
-        var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
+        var scaleFactor = Math.min(
+            canvasWidth / img.width,
+            canvasHeight / img.height
+        );
         img.set({
             left: 0,
             top: 0,
@@ -110,13 +117,12 @@ $(document).on("click", ".design-cards", function() {
             cornerSize: 10,
             transparentCorners: false,
             isStatic: true,
-            angle: element?.rotation ? element?.rotation : 0
+            angle: element?.rotation ? element?.rotation : 0,
         });
 
         switch (element.text.toLowerCase()) {
             case "event_name":
                 if (eventData.event_name) {
-                   
                     textElement.set({
                         text: eventData.event_name,
                         width: textWidth1,
@@ -127,7 +133,6 @@ $(document).on("click", ".design-cards", function() {
                 break;
             case "host_name":
                 if (eventData.hosted_by) {
-                   
                     textElement.set({
                         text: eventData.hosted_by,
                         width: textWidth1,
@@ -138,7 +143,6 @@ $(document).on("click", ".design-cards", function() {
                 break;
             case "location_description":
                 if (eventData.event_location) {
-                   
                     textElement.set({
                         text: eventData.event_location,
                         width: textWidth1,
@@ -149,7 +153,6 @@ $(document).on("click", ".design-cards", function() {
                 break;
             case "start_time":
                 if (eventData.start_time) {
-                   
                     textElement.set({
                         text: eventData.start_time,
                         width: textWidth1,
@@ -160,7 +163,6 @@ $(document).on("click", ".design-cards", function() {
                 break;
             case "end_time":
                 if (eventData.rsvp_end_time) {
-                   
                     textElement.set({
                         text: eventData.rsvp_end_time,
                         width: textWidth1,
@@ -178,7 +180,7 @@ $(document).on("click", ".design-cards", function() {
                     } else {
                         start_date = eventData.event_date;
                     }
-                    
+
                     textElement.set({
                         text: start_date,
                     });
@@ -210,23 +212,27 @@ $(document).on("click", ".design-cards", function() {
         // });
         canvas.add(textElement);
     });
-    var shape = '';
+    var shape = "";
     if (dbJson) {
-       
     }
 
     // Load filed image (filedImagePath) as another image layer
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
-        if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-            
-            const imageInput = document.getElementById('image1');
-            const scaledWidth = element.width;  // Use element's width
+        if (
+            element.shape &&
+            element.centerX &&
+            element.centerY &&
+            element.height &&
+            element.width
+        ) {
+            const imageInput = document.getElementById("image1");
+            const scaledWidth = element.width; // Use element's width
             const scaledHeight = element.height;
 
-            imageInput.style.width = element.width + 'px';
-            imageInput.style.height = element.height + 'px';
-            
+            imageInput.style.width = element.width + "px";
+            imageInput.style.height = element.height + "px";
+
             let currentImage = null; // Variable to hold the current image
             let isScaling = false; // Flag to check if the image is scaling
             let currentShapeIndex = 0; // Index to track the current shape
@@ -236,10 +242,10 @@ $(document).on("click", ".design-cards", function() {
 
             // Create a mapping of shape names to their indices
             const shapeIndexMap = {
-                'rectangle': 0,
-                'circle': 1,
-                'triangle': 2,
-                'star': 3
+                rectangle: 0,
+                circle: 1,
+                triangle: 2,
+                star: 3,
             };
 
             function createShapes(img) {
@@ -258,21 +264,41 @@ $(document).on("click", ".design-cards", function() {
                     { x: -starScale * 0.58, y: starScale }, // Bottom-left
                     { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
                     { x: -starScale, y: -starScale * 0.31 }, // Left
-                    { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
+                    { x: -starScale * 0.23, y: -starScale * 0.31 }, // Top-left
                 ];
 
                 return [
-                    new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
+                    new fabric.Rect({
+                        width: imgWidth,
+                        height: imgHeight,
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                    new fabric.Circle({
+                        radius: Math.min(imgWidth, imgHeight) / 2,
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                    new fabric.Triangle({
+                        width: imgWidth,
+                        height: imgHeight,
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                    new fabric.Polygon(starPoints, {
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
                 ];
             }
 
             // Load the initial image
             fabric.Image.fromURL(shapeImageUrl, function (img) {
                 img.set({
-
                     selectable: false,
                     hasControls: false,
                     hasBorders: false,
@@ -280,12 +306,12 @@ $(document).on("click", ".design-cards", function() {
                     cornerColor: "#fff",
                     transparentCorners: false,
                     lockUniScaling: true,
-                    scaleX: scaledWidth / img.width,  // Scale based on element's width
+                    scaleX: scaledWidth / img.width, // Scale based on element's width
                     scaleY: scaledHeight / img.height, // Scale based on element's height
                     cornerSize: 10,
-                    cornerStyle: 'circle',
+                    cornerStyle: "circle",
                     left: element.centerX - scaledWidth / 2, // Center the image horizontally
-                    top: element.centerY - scaledHeight / 2  
+                    top: element.centerY - scaledHeight / 2,
                 });
 
                 let shapes = createShapes(img);
@@ -295,10 +321,14 @@ $(document).on("click", ".design-cards", function() {
                 img.set({ clipPath: shapes[currentShapeIndex] });
                 img.crossOrigin = "anonymous";
 
-                img.on('mouseup', function(event) {
+                img.on("mouseup", function (event) {
                     console.log(event);
-                    if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+                    if (
+                        event?.transform?.action === "drag" &&
+                        event.transform.actionPerformed === undefined
+                    ) {
+                        currentShapeIndex =
+                            (currentShapeIndex + 1) % shapes.length;
                         img.set({ clipPath: shapes[currentShapeIndex] });
                         canvas.renderAll();
                     }
@@ -309,7 +339,7 @@ $(document).on("click", ".design-cards", function() {
                     canvas.renderAll();
                 };
 
-                img.on('scaling', function (event) {
+                img.on("scaling", function (event) {
                     const target = event.target;
                     if (target && target.isControl) {
                         fixClipPath();
@@ -318,115 +348,137 @@ $(document).on("click", ".design-cards", function() {
 
                 canvas.add(img);
                 currentImage = img; // Store the image reference
-                $("#shape_img").attr("src",shapeImageUrl);
-                $("#first_shape_img").attr("src",shapeImageUrl);
+                $("#shape_img").attr("src", shapeImageUrl);
+                $("#first_shape_img").attr("src", shapeImageUrl);
 
                 // Custom control for the upload button (centered)
-                fabric.Object.prototype.controls.uploadControl = new fabric.Control({
-                    x: 0,
-                    y: 0,
-                    offsetX: 0,
-                    offsetY: 0,
-                    cursorStyle: 'pointer',
-                    mouseUpHandler: function () {
-                        imageInput.click();
-                    },
-                    render: function (ctx, left, top, styleOverride, fabricObject) {
-                        const imgIcon = document.createElement('img');
+                fabric.Object.prototype.controls.uploadControl =
+                    new fabric.Control({
+                        x: 0,
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: "pointer",
+                        mouseUpHandler: function () {
+                            imageInput.click();
+                        },
+                        render: function (
+                            ctx,
+                            left,
+                            top,
+                            styleOverride,
+                            fabricObject
+                        ) {
+                            const imgIcon = document.createElement("img");
 
-                        const svgString = `
+                            const svgString = `
                         <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="0.5" y="0.625" width="30" height="30" rx="15" fill="white"/>
                         <path d="M22 17.2502V21.5834C22 21.727 21.9429 21.8648 21.8414 21.9664C21.7398 22.0679 21.602 22.125 21.4583 22.125H9.54167C9.39801 22.125 9.26023 22.0679 9.15865 21.9664C9.05707 21.8648 9 21.727 9 21.5834V17.2502C9 17.1065 9.05707 16.9687 9.15865 16.8672C9.26023 16.7656 9.39801 16.7085 9.54167 16.7085C9.68533 16.7085 9.8231 16.7656 9.92468 16.8672C10.0263 16.9687 10.0833 17.1065 10.0833 17.2502V21.0417H20.9167V17.2502C20.9167 17.1065 20.9737 16.9687 21.0753 16.8672C21.1769 16.7656 21.3147 16.7085 21.4583 16.7085C21.602 16.7085 21.7398 16.7656 21.8414 16.8672C21.9429 16.9687 22 17.1065 22 17.2502ZM12.7917 12.917H14.9583V17.2502C14.9583 17.3938 15.0154 17.5316 15.117 17.6332C15.2186 17.7347 15.3563 17.7918 15.5 17.7918C15.6437 17.7918 15.7814 17.7347 15.883 17.6332C15.9846 17.5316 16.0417 17.3938 16.0417 17.2502V12.917H18.2083C18.3155 12.9171 18.4203 12.8853 18.5095 12.8258C18.5986 12.7663 18.6681 12.6817 18.7092 12.5827C18.7502 12.4836 18.7609 12.3747 18.74 12.2695C18.7191 12.1644 18.6674 12.0679 18.5916 11.9921L15.8832 9.28386C15.8329 9.2335 15.7732 9.19355 15.7074 9.16629C15.6417 9.13903 15.5712 9.125 15.5 9.125C15.4288 9.125 15.3583 9.13903 15.2926 9.16629C15.2268 9.19355 15.1671 9.2335 15.1168 9.28386L12.4084 11.9921C12.3326 12.0679 12.2809 12.1644 12.26 12.2695C12.2391 12.3747 12.2498 12.4836 12.2908 12.5827C12.3319 12.6817 12.4014 12.7663 12.4905 12.8258C12.5797 12.8853 12.6845 12.9171 12.7917 12.917Z" fill="black"/>
                         </svg>`;
-                        const encodedSvg = encodeURIComponent(svgString);
-                        const imgSrc = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
-                        imgIcon.src = imgSrc;
-                        imgIcon.crossOrigin = "anonymous";
-                        imgIcon.width = 24;
-                        imgIcon.height = 24;
+                            const encodedSvg = encodeURIComponent(svgString);
+                            const imgSrc = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+                            imgIcon.src = imgSrc;
+                            imgIcon.crossOrigin = "anonymous";
+                            imgIcon.width = 24;
+                            imgIcon.height = 24;
 
-                        ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
-                    }
-                });
+                            ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
+                        },
+                    });
 
                 // Event listener for image selection (file input)
-                imageInput.addEventListener('change', function (event) {
+                imageInput.addEventListener("change", function (event) {
                     const file = event.target.files[0];
                     if (file) {
                         const reader = new FileReader();
                         reader.onload = function () {
-
                             $("#shape_img").attr("src", reader.result);
 
-                            fabric.Image.fromURL(reader.result, function (newImg) {
-                                // Remove the old image if it exists
-                                const newWidth = img.width;
-                                const newHeight = img.height;
-                                if (currentImage) {
-                                    canvas.remove(currentImage);
-                                }
-            
-                                newImg.set({
-                                    selectable: false,
-                                    hasControls: false,
-                                    hasBorders: false,
-                                    borderColor: "#2DA9FC",
-                                    cornerColor: "#fff",
-                                    transparentCorners: false,
-                                    lockUniScaling: true,
-                                    scaleX: scaledWidth / newWidth,  // Scale based on element's width
-                                    scaleY: scaledHeight / newHeight, // Scale based on element's height
-                                    cornerSize: 10,
-                                    cornerStyle: 'circle',
-                                    left: element.centerX - scaledWidth / 2, // Center the image horizontally
-                                    top: element.centerY - scaledHeight / 2  
-                                });
-
-                                shapes = createShapes(newImg);
-                                canvas.add(newImg);
-                                currentImage = newImg; 
-                                // $("#shape_img").attr("src",shapeImageUrl);
-                                shapeImageUrl = $("#shape_img").attr("src");
-                                // Reset shape index for the new image based on the default shape
-                                currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
-                                newImg.set({ clipPath: shapes[currentShapeIndex] });
-                                newImg.crossOrigin = "anonymous";
-
-                                newImg.on('mouseup', function(event) {
-                                    console.log(event);
-                                    if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                        newImg.set({ clipPath: shapes[currentShapeIndex] });
-                                        canvas.renderAll();
+                            fabric.Image.fromURL(
+                                reader.result,
+                                function (newImg) {
+                                    // Remove the old image if it exists
+                                    const newWidth = img.width;
+                                    const newHeight = img.height;
+                                    if (currentImage) {
+                                        canvas.remove(currentImage);
                                     }
-                                });
 
-                                const fixClipPath = () => {
-                                    newImg.set({ clipPath: shapes[currentShapeIndex] });
-                                    canvas.renderAll();
-                                };
+                                    newImg.set({
+                                        selectable: false,
+                                        hasControls: false,
+                                        hasBorders: false,
+                                        borderColor: "#2DA9FC",
+                                        cornerColor: "#fff",
+                                        transparentCorners: false,
+                                        lockUniScaling: true,
+                                        scaleX: scaledWidth / newWidth, // Scale based on element's width
+                                        scaleY: scaledHeight / newHeight, // Scale based on element's height
+                                        cornerSize: 10,
+                                        cornerStyle: "circle",
+                                        left: element.centerX - scaledWidth / 2, // Center the image horizontally
+                                        top: element.centerY - scaledHeight / 2,
+                                    });
 
-                                newImg.on('scaling', function () {
-                                    // isScaling = true; // Set scaling flag
-                                    fixClipPath();
-                                });
-                            });
+                                    shapes = createShapes(newImg);
+                                    canvas.add(newImg);
+                                    currentImage = newImg;
+                                    // $("#shape_img").attr("src",shapeImageUrl);
+                                    shapeImageUrl = $("#shape_img").attr("src");
+                                    // Reset shape index for the new image based on the default shape
+                                    currentShapeIndex =
+                                        shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
+                                    newImg.set({
+                                        clipPath: shapes[currentShapeIndex],
+                                    });
+                                    newImg.crossOrigin = "anonymous";
+
+                                    newImg.on("mouseup", function (event) {
+                                        console.log(event);
+                                        if (
+                                            event?.transform?.action ===
+                                                "drag" &&
+                                            event.transform.actionPerformed ===
+                                                undefined
+                                        ) {
+                                            currentShapeIndex =
+                                                (currentShapeIndex + 1) %
+                                                shapes.length;
+                                            newImg.set({
+                                                clipPath:
+                                                    shapes[currentShapeIndex],
+                                            });
+                                            canvas.renderAll();
+                                        }
+                                    });
+
+                                    const fixClipPath = () => {
+                                        newImg.set({
+                                            clipPath: shapes[currentShapeIndex],
+                                        });
+                                        canvas.renderAll();
+                                    };
+
+                                    newImg.on("scaling", function () {
+                                        // isScaling = true; // Set scaling flag
+                                        fixClipPath();
+                                    });
+                                }
+                            );
                         };
                         reader.readAsDataURL(file);
                     }
                 });
             });
-           
         }
     }
-
 });
-$(document).on("click", ".modal-design-card", function(e) {
+$(document).on("click", ".modal-design-card", function (e) {
     e.stopPropagation();
 });
 
-$(document).on("click", ".close-btn", function() {
+$(document).on("click", ".close-btn", function () {
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
@@ -436,7 +488,7 @@ $(document).on("click", ".close-btn", function() {
 //     let designId = $(this).attr("design-id");
 //     if (designId) {
 //         if (designId == "6") {
-            
+
 //             var imgSrc1 = $(".photo-slider-1").attr("src");
 //             var imgSrc2 = $(".photo-slider-2").attr("src");
 //             var imgSrc3 = $(".photo-slider-3").attr("src");
@@ -460,24 +512,26 @@ $(document).on("click", ".close-btn", function() {
 //     }
 // });
 
-$(document).on("click", ".edit_design_tem", function(e) {
-    $('#close_createEvent').css('display','none');
+$(document).on("click", ".edit_design_tem", function (e) {
+    $("#close_createEvent").css("display", "none");
     e.preventDefault();
-    var eventID= $("#eventID").val();
-    var isDraft= $("#isDraft").val();
-    
-   
+    var eventID = $("#eventID").val();
+    var isDraft = $("#isDraft").val();
+
     var url = $(this).data("url");
     var template = $(this).data("template");
     image = $(this).data("image");
-    shapeImageUrl = $(this).data('shape_image');
+    shapeImageUrl = $(this).data("shape_image");
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
-    
 
-    $('.design-sidebar-action').attr('data-id',id);  
-    if (eventData.textData != null && eventData.temp_id != null && eventData.temp_id == id) {
+    $(".design-sidebar-action").attr("data-id", id);
+    if (
+        eventData.textData != null &&
+        eventData.temp_id != null &&
+        eventData.temp_id == id
+    ) {
         dbJson = eventData.textData;
     } else {
         console.log(json);
@@ -486,19 +540,22 @@ $(document).on("click", ".edit_design_tem", function(e) {
     }
     // //console.log(dbJson);
     // //console.log(image);
-    var current_event_id = $(this).data('event_id');
+    var current_event_id = $(this).data("event_id");
     $(".step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
-    $('.pick-card').removeClass('active');
-    $('.pick-card').addClass('menu-success');
-    $('.edit-design').removeClass('menu-success')
-    $('.edit-design').addClass('active');
+    $(".pick-card").removeClass("active");
+    $(".pick-card").addClass("menu-success");
+    $(".edit-design").removeClass("menu-success");
+    $(".edit-design").addClass("active");
     $(".event_create_percent").text("25%");
     $(".current_step").text("1 of 4");
-    $('#sidebar_select_design_category').css('display','none');
+    $("#sidebar_select_design_category").css("display", "none");
 
-    active_responsive_dropdown('drop-down-event-design','drop-down-edit-design');
+    active_responsive_dropdown(
+        "drop-down-event-design",
+        "drop-down-edit-design"
+    );
     $(".step_4").hide();
     $("#exampleModal").modal("hide");
     $(".edit_design_template").remove();
@@ -506,31 +563,35 @@ $(document).on("click", ".edit_design_tem", function(e) {
     $.ajax({
         url: base_url + "event/get_design_edit_page",
         method: "POST",
-        dataType: 'html',
+        dataType: "html",
         data: {
-            _token: $('meta[name="csrf-token"]').attr("content"),eventID,isDraft,id:id
+            _token: $('meta[name="csrf-token"]').attr("content"),
+            eventID,
+            isDraft,
+            id: id,
         },
-        success: function(response) {
+        success: function (response) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function(xhr, status, error) {},
+        error: function (xhr, status, error) {},
     });
-
 });
 
 function bindData(current_event_id) {
-
-    let iw = document.getElementById('imageWrapper')
+    let iw = document.getElementById("imageWrapper");
 
     function loadTextDataFromDatabase() {
         if (image) {
-            fabric.Image.fromURL(image, function(img) {
+            fabric.Image.fromURL(image, function (img) {
                 var canvasWidth = canvas.getWidth();
                 var canvasHeight = canvas.getHeight();
 
-                var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
+                var scaleFactor = Math.min(
+                    canvasWidth / img.width,
+                    canvasHeight / img.height
+                );
                 img.set({
                     left: 0,
                     top: 0,
@@ -541,13 +602,13 @@ function bindData(current_event_id) {
                 });
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
             });
-           
+
             if (dbJson) {
                 const staticInfo = {};
                 console.log(dbJson);
-                if(current_event_id != '' && (eventData.desgin_selected =='')){
+                if (current_event_id != "" && eventData.desgin_selected == "") {
                     staticInfo.textElements = dbJson;
-                }else{
+                } else {
                     staticInfo.textElements = dbJson.textElements;
                 }
                 console.log(staticInfo);
@@ -562,7 +623,7 @@ function bindData(current_event_id) {
                     });
 
                     const textWidth = textMeasurement.width;
-                    
+
                     console.log(element.underline);
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
@@ -582,12 +643,12 @@ function bindData(current_event_id) {
                         borderColor: "#2DA9FC",
                         cornerColor: "#fff",
                         cornerSize: 10,
-                        cornerStyle: 'circle',
+                        cornerStyle: "circle",
                         transparentCorners: false,
                         lockScalingFlip: true,
                         hasBorders: true,
                         centeredRotation: true,
-                        angle: element?.rotation ? element?.rotation : 0
+                        angle: element?.rotation ? element?.rotation : 0,
                     });
 
                     textElement.setControlsVisibility({
@@ -597,8 +658,8 @@ function bindData(current_event_id) {
                         br: true, // Hide bottom right control
                         tl: true, // Hide top left control
                         tr: true, // Hide top right control
-                        ml: true,  // Show middle left control
-                        mr: true   // Show middle right control
+                        ml: true, // Show middle left control
+                        mr: true, // Show middle right control
                     });
 
                     // if(current_event_id != '' && (eventData.desgin_selected =='')){
@@ -715,130 +776,158 @@ function bindData(current_event_id) {
                     //     }
 
                     // }
-                    
+
                     canvas.add(textElement);
                 });
 
-                var rotateIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
-                var img = document.createElement('img');
+                var rotateIcon =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
+                var img = document.createElement("img");
                 img.src = rotateIcon;
 
-
-                var deleteIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAX9SURBVHgB7ZxPiBtVHMe/Kz12N7kJFpfZk2Jduz3Ug1aILohlBRs9FCrYnAQF2e7NomhyEPdQWFewBT00Uix60N0FS0GoCbT10B5a3YrVS6Zb22uTtPfX329mXvZldiYzSea9ZJJ+4G2SmclM5ru/3+/93p95wGMimcCAEEJk6SVHxaKyj0rWe5/1HWorr7ep3OAyMTFhwxDGRPJEmaPyFpXDcAXpB5tKlcoGv5JodaQVEidHZYXKfaGXM3wtpAn6wQUqFWGeGl8bw4xwLacmBk9NDJtY9IMsMRjLiaJGxcKgoR+xKPTHnH75HIOALpylsibSw3XRg1X1nAJ4F6ug/6rcNDaVPKUMN+J+4Qn0AAnE+c51pE8gxqJSoXs4FvcLXVuSJxBbUBbpp0AW9X3UQV2JNGICSSKFii1SimNQFNycebVTjIol0ggLJGGh9oc1muMGbs4xLIwuHD7WwnZGikRWtEgvBYw+c3SvK0E7Orqb52Y1jBccn6rqhihLWsH4cca/IVQk4bagD2P84Ib6cXVDqLvRgexmFgxx+Y9r2LpzN3Df9NN7cPClAzAI13YzsrdzV9ARnhVZMMDWnXt48+1CqEASFuqH8teY3fssDMC1HVtTkT8EWpJJK3rhwOuRAklYqEsXf0ZmahIGaFnTDksSbj+xBQNs/v1vSyC+8YVD84HHnb/wOxrNpnPs5s1bplyPrYljcjnI3WK3jvtFtSC+8VOrXwQed2JqGae/O+u837z5j8n4xFoEimSsRrt85Wrr/fT0HrKsW2g0HjifM5lJsq4pdx+5mYStzyDcX59ti0m0gQVaQ0I0mg9w7sd1bP1/17l5thxpPRywe4XFy2R2t8TjV1fUSRw9kqfPTyFBlvwicSJVQEK8Mv+OYx0mYcH+uvYbEqTqd7ccDML/ebYAiepWbHkcrFXiWZ9Awsy1LEm4w9D3kSDsWud+WvfcY9IRYdtFencJdmPpvvI6UtSFN+Yx+3yyuZQqUg5un9FjfKhttzlohF3l3cJHWD75DZLi9LdnnWzdWNwjS/pKaOTjT78UmSefc8qlK1dFv9Trzdb5FvLHhE5US9oHjXAckcRthnTCZK3Z07jbuKGKZEEjam2WhCWp59Dd4N0FQ8gmBqO6HsMBOMp9Zvc+gw/efy/43Jkp6MScSErSKNtn8v2Jz5ZjnePgyy+2+pNUS0q4GbKDoYhJcW7Syc7N9CPtQLUkrRMz1SZHWzwhC/v1l7LTum80mqHf574mVSS1iaKeWweqSDY0JpRq3PCLoTZX4qLGNd0WprpbAxrJTO3evlDzIfpFFdpk4OYJA9p6JdtqtwC34m5Z2fvoZ+HQa07DdVD43U0bbbWbLwVgPlz8JDQNOH/hIm7/1y7SoGq32NPjeqVTrqSKuON7AfsajYfKfkPuxtNOuN0IjRO0uMtVdqSxy6kBl2s4HqAMIqh/SO2QM51x83MamuOSW3UHuVzcURA1GTVA1Z9MVqGRsKy7W1Qr0p0jERt+kdahMakMSyi7RU0h1NRCE+ttInkTBLQF8PaMuXeReICydU69Qdt5ri6ogVuCplETblrIXGj55CmnadFt9e2O5W20Ph89onUsdZX/GJ8wkeRYHAvMtaKmuGTDnWxaD+sFiJwA3is8fSaJsXzNAjGtpzHDLIlzJbYmbTkTN0M4L/IPQEbBaQTnTQYmTczIKcudZroVEDB/cEwokUBF+SFq9i0PVuYwXtjwYpHcENUzWcL4UfI/Gd5RJG8+8yrGhzLdc9m/Me6zJfxsm9Zh8CHAhjvR3fbviDsQkIfm/qYBI59UsoN2xhLJ+3IemgcLBshSp2U9Yg8pec+DLWH0KAXFob4Q7soRo0IRuhCjIVQRuqGL8PNhNZE+eJGHQjf32tfSQCJ9j53a6HJNAKavuQBcI1CZQToyc+7Z2N+tQIkihme1Gz81MWzrKtEPOi6GQyyOPUXhdvsMH8JdJoh/YE2YZ7jFCUKYW5GrIlwrTu/qF8K1rqQFqwjXaixoZJBLKObg9ixY6LyEYt0rtlf+xPYyikbako8ADsJE9Bg3pI8AAAAASUVORK5CYII=";
-                var img1 = document.createElement('img');
+                var deleteIcon =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAX9SURBVHgB7ZxPiBtVHMe/Kz12N7kJFpfZk2Jduz3Ug1aILohlBRs9FCrYnAQF2e7NomhyEPdQWFewBT00Uix60N0FS0GoCbT10B5a3YrVS6Zb22uTtPfX329mXvZldiYzSea9ZJJ+4G2SmclM5ru/3+/93p95wGMimcCAEEJk6SVHxaKyj0rWe5/1HWorr7ep3OAyMTFhwxDGRPJEmaPyFpXDcAXpB5tKlcoGv5JodaQVEidHZYXKfaGXM3wtpAn6wQUqFWGeGl8bw4xwLacmBk9NDJtY9IMsMRjLiaJGxcKgoR+xKPTHnH75HIOALpylsibSw3XRg1X1nAJ4F6ug/6rcNDaVPKUMN+J+4Qn0AAnE+c51pE8gxqJSoXs4FvcLXVuSJxBbUBbpp0AW9X3UQV2JNGICSSKFii1SimNQFNycebVTjIol0ggLJGGh9oc1muMGbs4xLIwuHD7WwnZGikRWtEgvBYw+c3SvK0E7Orqb52Y1jBccn6rqhihLWsH4cca/IVQk4bagD2P84Ib6cXVDqLvRgexmFgxx+Y9r2LpzN3Df9NN7cPClAzAI13YzsrdzV9ARnhVZMMDWnXt48+1CqEASFuqH8teY3fssDMC1HVtTkT8EWpJJK3rhwOuRAklYqEsXf0ZmahIGaFnTDksSbj+xBQNs/v1vSyC+8YVD84HHnb/wOxrNpnPs5s1bplyPrYljcjnI3WK3jvtFtSC+8VOrXwQed2JqGae/O+u837z5j8n4xFoEimSsRrt85Wrr/fT0HrKsW2g0HjifM5lJsq4pdx+5mYStzyDcX59ti0m0gQVaQ0I0mg9w7sd1bP1/17l5thxpPRywe4XFy2R2t8TjV1fUSRw9kqfPTyFBlvwicSJVQEK8Mv+OYx0mYcH+uvYbEqTqd7ccDML/ebYAiepWbHkcrFXiWZ9Awsy1LEm4w9D3kSDsWud+WvfcY9IRYdtFencJdmPpvvI6UtSFN+Yx+3yyuZQqUg5un9FjfKhttzlohF3l3cJHWD75DZLi9LdnnWzdWNwjS/pKaOTjT78UmSefc8qlK1dFv9Trzdb5FvLHhE5US9oHjXAckcRthnTCZK3Z07jbuKGKZEEjam2WhCWp59Dd4N0FQ8gmBqO6HsMBOMp9Zvc+gw/efy/43Jkp6MScSErSKNtn8v2Jz5ZjnePgyy+2+pNUS0q4GbKDoYhJcW7Syc7N9CPtQLUkrRMz1SZHWzwhC/v1l7LTum80mqHf574mVSS1iaKeWweqSDY0JpRq3PCLoTZX4qLGNd0WprpbAxrJTO3evlDzIfpFFdpk4OYJA9p6JdtqtwC34m5Z2fvoZ+HQa07DdVD43U0bbbWbLwVgPlz8JDQNOH/hIm7/1y7SoGq32NPjeqVTrqSKuON7AfsajYfKfkPuxtNOuN0IjRO0uMtVdqSxy6kBl2s4HqAMIqh/SO2QM51x83MamuOSW3UHuVzcURA1GTVA1Z9MVqGRsKy7W1Qr0p0jERt+kdahMakMSyi7RU0h1NRCE+ttInkTBLQF8PaMuXeReICydU69Qdt5ri6ogVuCplETblrIXGj55CmnadFt9e2O5W20Ph89onUsdZX/GJ8wkeRYHAvMtaKmuGTDnWxaD+sFiJwA3is8fSaJsXzNAjGtpzHDLIlzJbYmbTkTN0M4L/IPQEbBaQTnTQYmTczIKcudZroVEDB/cEwokUBF+SFq9i0PVuYwXtjwYpHcENUzWcL4UfI/Gd5RJG8+8yrGhzLdc9m/Me6zJfxsm9Zh8CHAhjvR3fbviDsQkIfm/qYBI59UsoN2xhLJ+3IemgcLBshSp2U9Yg8pec+DLWH0KAXFob4Q7soRo0IRuhCjIVQRuqGL8PNhNZE+eJGHQjf32tfSQCJ9j53a6HJNAKavuQBcI1CZQToyc+7Z2N+tQIkihme1Gz81MWzrKtEPOi6GQyyOPUXhdvsMH8JdJoh/YE2YZ7jFCUKYW5GrIlwrTu/qF8K1rqQFqwjXaixoZJBLKObg9ixY6LyEYt0rtlf+xPYyikbako8ADsJE9Bg3pI8AAAAASUVORK5CYII=";
+                var img1 = document.createElement("img");
                 img1.src = deleteIcon;
 
-                var copyIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMnSURBVHgB3Zq/axRBFMe/J7bm0gmKZtMFNRhBG1HYgHaCv0rRnIVCGqOdKYIGCyMIiY2CTQ6s1QgGLQwXMaTQIqeXkFjtoVibu/wBz/dud8ze5k5uZ2bv9vzAy/7I7t58982PN/M2g4QgIoc3vYEpNtnKmUxmExbJwAJcYCnoENt5NpfNQX3hoxTZymwf2eZYVBmdggvvsk2z/SYzVthyaCdB4QtkH4/tHpKEf6CX/DefNB7bBdiGHzoUPLyd2PMKP2yEzOu9LtJeHJggb4M6j0e6QvjGMUoPHvld+Q4y/xDg8qaAdFHkMeVY9OSuRleS77pZpA/pXKajJxt6gi8UD7hIL8PskUV1sMMT5I+cLtLNbLh9NKpOyY6YdnDYbquDuuoUeCFWW6hUt1Ba3UBcTp08AUMkEu6XiDgqwoOvsiXm3y/gSu4WdBg8MoBPH17CkDssYma3Ogq6VAcxePb8hV+gwwPIZve0fF9p9XvNe6W1jdq9Bkjovy2CGYEmDx/cjVU9zl3KYWn5CyqVLRgi0XRfuGG76BDiEQMu1kSwGpmVOegQ4xNTOH3mMjQ5qjzhoMOoNqKBq0QMIQVothEnNZ4wQYnIootRInrRxSgRVhez2o0SUUEX8194QoUdRRhQWluPdb2FcCPMppEIiZckBhqfeAQdDh7YBwsUlYgy/CoVq5cavXENMiVZWv4c5zZke3owevMqi9gPC3z9u0fJrK22xODxs5Tde4i+ra6TBm44FH8Dw0hWYp849b1SrdbmJD9+/qpVLY25heQ6FsMi8vDn19oD3/y7BUw9foq4iIC3r/LQYFH+RKenM7wZgwEiotU2Im1DpqnSPrI9rc8MQ8gcuxwV4fDGQ3eQZwHXZaduySZIOz1BdzCpdhqtO91H+kfwyXCer9kypmRpXiOdSI/UHz7RcEGZL5pDOquV1JDhWHdQBwfAJsTP45GfaFyhdJCDLpQOITnYgB80Q+3HI39NzB7yRqh9aeACNcnR2RDisOUpOTzyF7eTJwExBWr39x0RMbmgEHET9h75bc2FAVY+FQpD23kOsb7Iv2VVpRxY0dYnQn8AxkwzSD/FREQAAAAASUVORK5CYII=";
-                var img2 = document.createElement('img');
+                var copyIcon =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMnSURBVHgB3Zq/axRBFMe/J7bm0gmKZtMFNRhBG1HYgHaCv0rRnIVCGqOdKYIGCyMIiY2CTQ6s1QgGLQwXMaTQIqeXkFjtoVibu/wBz/dud8ze5k5uZ2bv9vzAy/7I7t58982PN/M2g4QgIoc3vYEpNtnKmUxmExbJwAJcYCnoENt5NpfNQX3hoxTZymwf2eZYVBmdggvvsk2z/SYzVthyaCdB4QtkH4/tHpKEf6CX/DefNB7bBdiGHzoUPLyd2PMKP2yEzOu9LtJeHJggb4M6j0e6QvjGMUoPHvld+Q4y/xDg8qaAdFHkMeVY9OSuRleS77pZpA/pXKajJxt6gi8UD7hIL8PskUV1sMMT5I+cLtLNbLh9NKpOyY6YdnDYbquDuuoUeCFWW6hUt1Ba3UBcTp08AUMkEu6XiDgqwoOvsiXm3y/gSu4WdBg8MoBPH17CkDssYma3Ogq6VAcxePb8hV+gwwPIZve0fF9p9XvNe6W1jdq9Bkjovy2CGYEmDx/cjVU9zl3KYWn5CyqVLRgi0XRfuGG76BDiEQMu1kSwGpmVOegQ4xNTOH3mMjQ5qjzhoMOoNqKBq0QMIQVothEnNZ4wQYnIootRInrRxSgRVhez2o0SUUEX8194QoUdRRhQWluPdb2FcCPMppEIiZckBhqfeAQdDh7YBwsUlYgy/CoVq5cavXENMiVZWv4c5zZke3owevMqi9gPC3z9u0fJrK22xODxs5Tde4i+ra6TBm44FH8Dw0hWYp849b1SrdbmJD9+/qpVLY25heQ6FsMi8vDn19oD3/y7BUw9foq4iIC3r/LQYFH+RKenM7wZgwEiotU2Im1DpqnSPrI9rc8MQ8gcuxwV4fDGQ3eQZwHXZaduySZIOz1BdzCpdhqtO91H+kfwyXCer9kypmRpXiOdSI/UHz7RcEGZL5pDOquV1JDhWHdQBwfAJsTP45GfaFyhdJCDLpQOITnYgB80Q+3HI39NzB7yRqh9aeACNcnR2RDisOUpOTzyF7eTJwExBWr39x0RMbmgEHET9h75bc2FAVY+FQpD23kOsb7Iv2VVpRxY0dYnQn8AxkwzSD/FREQAAAAASUVORK5CYII=";
+                var img2 = document.createElement("img");
                 img2.src = copyIcon;
-            
-                
+
                 fabric.Textbox.prototype.controls.mtr = new fabric.Control({
                     x: 0,
                     y: 0.5,
                     offsetY: 20,
-                    cursorStyle: 'pointer',
+                    cursorStyle: "pointer",
                     actionHandler: fabric.controlsUtils.rotationWithSnapping,
-                    actionName: 'rotate',
+                    actionName: "rotate",
                     render: renderIcon,
                     cornerSize: 28,
                 });
-                
-                fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
-                    x: 0.3,
-                    y: -0.5,
-                    offsetY: -20,
-                    cursorStyle: 'pointer',            
-                    actionHandler: (eventData, transform, x, y) => {
-                        console.log(eventData);
-                        const target = transform.target;
-                        canvas.remove(target); // Remove object on trash icon click
-                        canvas.requestRenderAll();
-                    },
-                    mouseUpHandler: deleteTextbox,
-                    render: renderDeleteIcon,
-                    cornerSize: 28,
-                    withConnection: false // Disable the line connection
-                });
 
+                fabric.Textbox.prototype.controls.deleteControl =
+                    new fabric.Control({
+                        x: 0.3,
+                        y: -0.5,
+                        offsetY: -20,
+                        cursorStyle: "pointer",
+                        actionHandler: (eventData, transform, x, y) => {
+                            console.log(eventData);
+                            const target = transform.target;
+                            canvas.remove(target); // Remove object on trash icon click
+                            canvas.requestRenderAll();
+                        },
+                        mouseUpHandler: deleteTextbox,
+                        render: renderDeleteIcon,
+                        cornerSize: 28,
+                        withConnection: false, // Disable the line connection
+                    });
 
-                fabric.Textbox.prototype.controls.copyControl = new fabric.Control({
-                    x: -0.3,
-                    y: -0.5,
-                    offsetY: -20,
-                    cursorStyle: 'pointer', 
-                    mouseUpHandler: cloneTextbox,
-                    render: renderCopyIcon,
-                    cornerSize: 28,
-                    withConnection: false // Disable the line connection
-                });
-                
-                
-                    // here's where the render action for the control is defined
-                function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+                fabric.Textbox.prototype.controls.copyControl =
+                    new fabric.Control({
+                        x: -0.3,
+                        y: -0.5,
+                        offsetY: -20,
+                        cursorStyle: "pointer",
+                        mouseUpHandler: cloneTextbox,
+                        render: renderCopyIcon,
+                        cornerSize: 28,
+                        withConnection: false, // Disable the line connection
+                    });
+
+                // here's where the render action for the control is defined
+                function renderIcon(
+                    ctx,
+                    left,
+                    top,
+                    styleOverride,
+                    fabricObject
+                ) {
                     var size = this.cornerSize;
                     ctx.save();
                     ctx.translate(left, top);
-                    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                    ctx.rotate(
+                        fabric.util.degreesToRadians(fabricObject.angle)
+                    );
                     ctx.drawImage(img, -size / 2, -size / 2, size, size);
                     ctx.restore();
                 }
 
-                function renderDeleteIcon(ctx, left, top, styleOverride, fabricObject) {
+                function renderDeleteIcon(
+                    ctx,
+                    left,
+                    top,
+                    styleOverride,
+                    fabricObject
+                ) {
                     var size = this.cornerSize;
                     ctx.save();
                     ctx.translate(left, top);
-                    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                    ctx.rotate(
+                        fabric.util.degreesToRadians(fabricObject.angle)
+                    );
                     ctx.drawImage(img1, -size / 2, -size / 2, size, size);
                     ctx.restore();
                 }
-                function renderCopyIcon(ctx, left, top, styleOverride, fabricObject) {
+                function renderCopyIcon(
+                    ctx,
+                    left,
+                    top,
+                    styleOverride,
+                    fabricObject
+                ) {
                     var size = this.cornerSize;
                     ctx.save();
                     ctx.translate(left, top);
-                    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+                    ctx.rotate(
+                        fabric.util.degreesToRadians(fabricObject.angle)
+                    );
                     ctx.drawImage(img2, -size / 2, -size / 2, size, size);
                     ctx.restore();
                 }
-
-
 
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
                 let isimageoncanvas = false;
                 let oldImage = null;
-                
+
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
-                    if (element.shape && element.centerX && element.centerY && element.height && element.width) {
-                        
-                        const imageInput = document.getElementById('image');
-                        const scaledWidth = element.width;  // Use element's width
+                    if (
+                        element.shape &&
+                        element.centerX &&
+                        element.centerY &&
+                        element.height &&
+                        element.width
+                    ) {
+                        const imageInput = document.getElementById("image");
+                        const scaledWidth = element.width; // Use element's width
                         const scaledHeight = element.height;
 
-                        imageInput.style.width = element.width + 'px';
-                        imageInput.style.height = element.height + 'px';
-                        
+                        imageInput.style.width = element.width + "px";
+                        imageInput.style.height = element.height + "px";
+
                         let currentImage = null; // Variable to hold the current image
                         let isScaling = false; // Flag to check if the image is scaling
                         let currentShapeIndex = 0; // Index to track the current shape
-            
+
                         // Define default shape variable (can be changed as needed)
                         const defaultShape = element.shape; // Set the desired default shape here
-            
+
                         // Create a mapping of shape names to their indices
                         const shapeIndexMap = {
-                            'rectangle': 0,
-                            'circle': 1,
-                            'triangle': 2,
-                            'star': 3
+                            rectangle: 0,
+                            circle: 1,
+                            triangle: 2,
+                            star: 3,
                         };
-            
+
                         function createShapes(img) {
                             const imgWidth = img.width;
                             const imgHeight = img.height;
                             const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
-            
+
                             // Proper 5-point star shape
                             const starPoints = [
                                 { x: 0, y: -starScale }, // Top point
@@ -850,21 +939,41 @@ function bindData(current_event_id) {
                                 { x: -starScale * 0.58, y: starScale }, // Bottom-left
                                 { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
                                 { x: -starScale, y: -starScale * 0.31 }, // Left
-                                { x: -starScale * 0.23, y: -starScale * 0.31 } // Top-left
+                                { x: -starScale * 0.23, y: -starScale * 0.31 }, // Top-left
                             ];
-            
+
                             return [
-                                new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                                new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
-                                new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                                new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
+                                new fabric.Rect({
+                                    width: imgWidth,
+                                    height: imgHeight,
+                                    originX: "center",
+                                    originY: "center",
+                                    angle: 0,
+                                }),
+                                new fabric.Circle({
+                                    radius: Math.min(imgWidth, imgHeight) / 2,
+                                    originX: "center",
+                                    originY: "center",
+                                    angle: 0,
+                                }),
+                                new fabric.Triangle({
+                                    width: imgWidth,
+                                    height: imgHeight,
+                                    originX: "center",
+                                    originY: "center",
+                                    angle: 0,
+                                }),
+                                new fabric.Polygon(starPoints, {
+                                    originX: "center",
+                                    originY: "center",
+                                    angle: 0,
+                                }),
                             ];
                         }
-            
+
                         // Load the initial image
                         fabric.Image.fromURL(shapeImageUrl, function (img) {
                             img.set({
-
                                 selectable: true,
                                 hasControls: true,
                                 hasBorders: true,
@@ -872,181 +981,274 @@ function bindData(current_event_id) {
                                 cornerColor: "#fff",
                                 transparentCorners: false,
                                 lockUniScaling: true,
-                                scaleX: scaledWidth / img.width,  // Scale based on element's width
+                                scaleX: scaledWidth / img.width, // Scale based on element's width
                                 scaleY: scaledHeight / img.height, // Scale based on element's height
                                 cornerSize: 10,
-                                cornerStyle: 'circle',
+                                cornerStyle: "circle",
                                 left: element.centerX - scaledWidth / 2, // Center the image horizontally
-                                top: element.centerY - scaledHeight / 2  
+                                top: element.centerY - scaledHeight / 2,
                             });
-            
+
                             let shapes = createShapes(img);
-            
-                            currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
-            
+
+                            currentShapeIndex =
+                                shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
+
                             img.set({ clipPath: shapes[currentShapeIndex] });
                             img.crossOrigin = "anonymous";
 
-                            img.on('mouseup', function(event) {
+                            img.on("mouseup", function (event) {
                                 console.log(event);
-                                if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                    img.set({ clipPath: shapes[currentShapeIndex] });
+                                if (
+                                    event?.transform?.action === "drag" &&
+                                    event.transform.actionPerformed ===
+                                        undefined
+                                ) {
+                                    currentShapeIndex =
+                                        (currentShapeIndex + 1) % shapes.length;
+                                    img.set({
+                                        clipPath: shapes[currentShapeIndex],
+                                    });
                                     canvas.renderAll();
                                 }
                             });
-            
+
                             const fixClipPath = () => {
-                                img.set({ clipPath: shapes[currentShapeIndex] });
+                                img.set({
+                                    clipPath: shapes[currentShapeIndex],
+                                });
                                 canvas.renderAll();
                             };
-            
-                            img.on('scaling', function (event) {
+
+                            img.on("scaling", function (event) {
                                 const target = event.target;
                                 if (target && target.isControl) {
                                     fixClipPath();
                                 }
                             });
-            
+
                             canvas.add(img);
                             currentImage = img; // Store the image reference
-                            $("#shape_img").attr("src",shapeImageUrl);
-                            $("#first_shape_img").attr("src",shapeImageUrl);
+                            $("#shape_img").attr("src", shapeImageUrl);
+                            $("#first_shape_img").attr("src", shapeImageUrl);
 
                             // Custom control for the upload button (centered)
-                            fabric.Object.prototype.controls.uploadControl = new fabric.Control({
-                                x: 0,
-                                y: 0,
-                                offsetX: 0,
-                                offsetY: 0,
-                                cursorStyle: 'pointer',
-                                mouseUpHandler: function () {
-                                    imageInput.click();
-                                },
-                                render: function (ctx, left, top, styleOverride, fabricObject) {
-                                    const imgIcon = document.createElement('img');
+                            fabric.Object.prototype.controls.uploadControl =
+                                new fabric.Control({
+                                    x: 0,
+                                    y: 0,
+                                    offsetX: 0,
+                                    offsetY: 0,
+                                    cursorStyle: "pointer",
+                                    mouseUpHandler: function () {
+                                        imageInput.click();
+                                    },
+                                    render: function (
+                                        ctx,
+                                        left,
+                                        top,
+                                        styleOverride,
+                                        fabricObject
+                                    ) {
+                                        const imgIcon =
+                                            document.createElement("img");
 
-                                    const svgString = `
+                                        const svgString = `
                                     <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="0.5" y="0.625" width="30" height="30" rx="15" fill="white"/>
                                     <path d="M22 17.2502V21.5834C22 21.727 21.9429 21.8648 21.8414 21.9664C21.7398 22.0679 21.602 22.125 21.4583 22.125H9.54167C9.39801 22.125 9.26023 22.0679 9.15865 21.9664C9.05707 21.8648 9 21.727 9 21.5834V17.2502C9 17.1065 9.05707 16.9687 9.15865 16.8672C9.26023 16.7656 9.39801 16.7085 9.54167 16.7085C9.68533 16.7085 9.8231 16.7656 9.92468 16.8672C10.0263 16.9687 10.0833 17.1065 10.0833 17.2502V21.0417H20.9167V17.2502C20.9167 17.1065 20.9737 16.9687 21.0753 16.8672C21.1769 16.7656 21.3147 16.7085 21.4583 16.7085C21.602 16.7085 21.7398 16.7656 21.8414 16.8672C21.9429 16.9687 22 17.1065 22 17.2502ZM12.7917 12.917H14.9583V17.2502C14.9583 17.3938 15.0154 17.5316 15.117 17.6332C15.2186 17.7347 15.3563 17.7918 15.5 17.7918C15.6437 17.7918 15.7814 17.7347 15.883 17.6332C15.9846 17.5316 16.0417 17.3938 16.0417 17.2502V12.917H18.2083C18.3155 12.9171 18.4203 12.8853 18.5095 12.8258C18.5986 12.7663 18.6681 12.6817 18.7092 12.5827C18.7502 12.4836 18.7609 12.3747 18.74 12.2695C18.7191 12.1644 18.6674 12.0679 18.5916 11.9921L15.8832 9.28386C15.8329 9.2335 15.7732 9.19355 15.7074 9.16629C15.6417 9.13903 15.5712 9.125 15.5 9.125C15.4288 9.125 15.3583 9.13903 15.2926 9.16629C15.2268 9.19355 15.1671 9.2335 15.1168 9.28386L12.4084 11.9921C12.3326 12.0679 12.2809 12.1644 12.26 12.2695C12.2391 12.3747 12.2498 12.4836 12.2908 12.5827C12.3319 12.6817 12.4014 12.7663 12.4905 12.8258C12.5797 12.8853 12.6845 12.9171 12.7917 12.917Z" fill="black"/>
                                     </svg>`;
-                                    const encodedSvg = encodeURIComponent(svgString);
-                                    const imgSrc = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
-                                    imgIcon.src = imgSrc;
-                                    imgIcon.crossOrigin = "anonymous";
-                                    imgIcon.width = 24;
-                                    imgIcon.height = 24;
-            
-                                    ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
-                                }
-                            });
-            
+                                        const encodedSvg =
+                                            encodeURIComponent(svgString);
+                                        const imgSrc = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+                                        imgIcon.src = imgSrc;
+                                        imgIcon.crossOrigin = "anonymous";
+                                        imgIcon.width = 24;
+                                        imgIcon.height = 24;
+
+                                        ctx.drawImage(
+                                            imgIcon,
+                                            left - 12,
+                                            top - 12,
+                                            24,
+                                            24
+                                        );
+                                    },
+                                });
+
                             // Event listener for image selection (file input)
-                            imageInput.addEventListener('change', function (event) {
-                                const file = event.target.files[0];
-                                if (file) {
-                                    const reader = new FileReader();
-                                    reader.onload = function () {
+                            imageInput.addEventListener(
+                                "change",
+                                function (event) {
+                                    const file = event.target.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = function () {
+                                            $("#shape_img").attr(
+                                                "src",
+                                                reader.result
+                                            );
 
-                                        $("#shape_img").attr("src", reader.result);
+                                            fabric.Image.fromURL(
+                                                reader.result,
+                                                function (newImg) {
+                                                    // Remove the old image if it exists
+                                                    const newWidth =
+                                                        newImg.width;
+                                                    const newHeight =
+                                                        newImg.height;
+                                                    let canvasState =
+                                                        canvas.toJSON();
 
-                                        fabric.Image.fromURL(reader.result, function (newImg) {
-                                            // Remove the old image if it exists
-                                            const newWidth = newImg.width;
-                                            const newHeight = newImg.height;
-                                            let canvasState = canvas.toJSON();
-    
-                                            canvasState.objects = canvasState.objects.filter(function (obj) {
-                                                // Check if the object is of type 'image'
-                                                if (obj.type === 'image') {
-                                                    // Find the corresponding Fabric.js image object on the canvas
-                                                    const fabricImage = canvas.getObjects().find(image => image.toObject().src === obj.src);
-                                                    // Remove the Fabric.js image from the canvas if found
-                                                    if (fabricImage) {
-                                                        canvas.remove(fabricImage);
-                                                    }
-                                                    return false; // Exclude this image object from the filtered array
-                                                }
-                                                return true; // Include other objects
-                                            });
-                                            
-                                            // Render the updated canvas state
-                                            canvas.renderAll();
-                        
-                                            newImg.set({
-                                                selectable: true,
-                                                hasControls: true,
-                                                hasBorders: true,
-                                                borderColor: "#2DA9FC",
-                                                cornerColor: "#fff",
-                                                transparentCorners: false,
-                                                lockUniScaling: true,
-                                                scaleX: scaledWidth / newWidth,  // Scale based on element's width
-                                                scaleY: scaledHeight / newHeight, // Scale based on element's height
-                                                cornerSize: 10,
-                                                cornerStyle: 'circle',
-                                                left: element.centerX - scaledWidth / 2, // Center the image horizontally
-                                                top: element.centerY - scaledHeight / 2  
-                                            });
-            
-                                            shapes = createShapes(newImg);
-                                            canvas.add(newImg);
-                                            currentImage = newImg; 
-                                            // $("#shape_img").attr("src",shapeImageUrl);
-                                            shapeImageUrl = $("#shape_img").attr("src");
-                                            // Reset shape index for the new image based on the default shape
-                                            currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
-                                            newImg.set({ clipPath: shapes[currentShapeIndex] });
-                                            newImg.crossOrigin = "anonymous";
+                                                    canvasState.objects =
+                                                        canvasState.objects.filter(
+                                                            function (obj) {
+                                                                // Check if the object is of type 'image'
+                                                                if (
+                                                                    obj.type ===
+                                                                    "image"
+                                                                ) {
+                                                                    // Find the corresponding Fabric.js image object on the canvas
+                                                                    const fabricImage =
+                                                                        canvas
+                                                                            .getObjects()
+                                                                            .find(
+                                                                                (
+                                                                                    image
+                                                                                ) =>
+                                                                                    image.toObject()
+                                                                                        .src ===
+                                                                                    obj.src
+                                                                            );
+                                                                    // Remove the Fabric.js image from the canvas if found
+                                                                    if (
+                                                                        fabricImage
+                                                                    ) {
+                                                                        canvas.remove(
+                                                                            fabricImage
+                                                                        );
+                                                                    }
+                                                                    return false; // Exclude this image object from the filtered array
+                                                                }
+                                                                return true; // Include other objects
+                                                            }
+                                                        );
 
-                                            newImg.on('mouseup', function(event) {
-                                                console.log(event);
-                                                if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                                                    currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-                                                    newImg.set({ clipPath: shapes[currentShapeIndex] });
+                                                    // Render the updated canvas state
                                                     canvas.renderAll();
+
+                                                    newImg.set({
+                                                        selectable: true,
+                                                        hasControls: true,
+                                                        hasBorders: true,
+                                                        borderColor: "#2DA9FC",
+                                                        cornerColor: "#fff",
+                                                        transparentCorners: false,
+                                                        lockUniScaling: true,
+                                                        scaleX:
+                                                            scaledWidth /
+                                                            newWidth, // Scale based on element's width
+                                                        scaleY:
+                                                            scaledHeight /
+                                                            newHeight, // Scale based on element's height
+                                                        cornerSize: 10,
+                                                        cornerStyle: "circle",
+                                                        left:
+                                                            element.centerX -
+                                                            scaledWidth / 2, // Center the image horizontally
+                                                        top:
+                                                            element.centerY -
+                                                            scaledHeight / 2,
+                                                    });
+
+                                                    shapes =
+                                                        createShapes(newImg);
+                                                    canvas.add(newImg);
+                                                    currentImage = newImg;
+                                                    // $("#shape_img").attr("src",shapeImageUrl);
+                                                    shapeImageUrl =
+                                                        $("#shape_img").attr(
+                                                            "src"
+                                                        );
+                                                    // Reset shape index for the new image based on the default shape
+                                                    currentShapeIndex =
+                                                        shapeIndexMap[
+                                                            defaultShape
+                                                        ] || 0; // Default to rectangle if not found
+                                                    newImg.set({
+                                                        clipPath:
+                                                            shapes[
+                                                                currentShapeIndex
+                                                            ],
+                                                    });
+                                                    newImg.crossOrigin =
+                                                        "anonymous";
+
+                                                    newImg.on(
+                                                        "mouseup",
+                                                        function (event) {
+                                                            console.log(event);
+                                                            if (
+                                                                event?.transform
+                                                                    ?.action ===
+                                                                    "drag" &&
+                                                                event.transform
+                                                                    .actionPerformed ===
+                                                                    undefined
+                                                            ) {
+                                                                currentShapeIndex =
+                                                                    (currentShapeIndex +
+                                                                        1) %
+                                                                    shapes.length;
+                                                                newImg.set({
+                                                                    clipPath:
+                                                                        shapes[
+                                                                            currentShapeIndex
+                                                                        ],
+                                                                });
+                                                                canvas.renderAll();
+                                                            }
+                                                        }
+                                                    );
+
+                                                    const fixClipPath = () => {
+                                                        newImg.set({
+                                                            clipPath:
+                                                                shapes[
+                                                                    currentShapeIndex
+                                                                ],
+                                                        });
+                                                        canvas.renderAll();
+                                                    };
+
+                                                    newImg.on(
+                                                        "scaling",
+                                                        function () {
+                                                            // isScaling = true; // Set scaling flag
+                                                            fixClipPath();
+                                                        }
+                                                    );
                                                 }
-                                            });
-            
-                                            const fixClipPath = () => {
-                                                newImg.set({ clipPath: shapes[currentShapeIndex] });
-                                                canvas.renderAll();
-                                            };
-            
-                                            newImg.on('scaling', function () {
-                                                // isScaling = true; // Set scaling flag
-                                                fixClipPath();
-                                            });
-                                        });
-                                    };
-                                    reader.readAsDataURL(file);
+                                            );
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
                                 }
-                            });
+                            );
                         });
-                       
                     }
                 }
-
-                
-
             } else {
                 showStaticTextElements();
             }
-
 
             // Set custom attribute with the fetched ID
             var canvasElement = document.getElementById("imageEditor1");
             canvasElement.setAttribute("data-canvas-id", temp_id);
 
             canvas.renderAll(); // Ensure all elements are rendered
-
-            
-
         }
     }
-
-
 
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
@@ -1062,8 +1264,7 @@ function bindData(current_event_id) {
         return textWidth;
     }
 
-    function addIconsToTextbox(textbox) {
-    }
+    function addIconsToTextbox(textbox) {}
 
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
@@ -1087,28 +1288,30 @@ function bindData(current_event_id) {
     const updateTextboxWidth = (textbox) => {
         const text = textbox.text || ""; // Get current text
         const fontSize = textbox.fontSize || defaultSettings.fontSize; // Get current font size
-        const fontFamily = textbox.fontFamily || 'Arial'; // Default font family
+        const fontFamily = textbox.fontFamily || "Arial"; // Default font family
         const charSpacing = textbox.charSpacing || 0;
 
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
         ctx.font = `${fontSize}px ${fontFamily}`;
 
         const measuredTextWidth = ctx.measureText(text).width;
-        const calculatedWidth = measuredTextWidth + (charSpacing / 1000 * fontSize * (text.length - 1));
+        const calculatedWidth =
+            measuredTextWidth +
+            (charSpacing / 1000) * fontSize * (text.length - 1);
 
         // Define a maximum width to avoid large textboxes
         const maxWidth = 400; // Adjust this value based on your layout
         const width = Math.min(calculatedWidth, maxWidth); // Cap the width
-        console.log(width)
+        console.log(width);
 
-            // Handle text wrapping for large texts
-            textbox.set('width', width);
-            textbox.set('textAlign', 'left'); // Ensure text wraps within the textbox
-            textbox.setCoords();
-            
-            // Set to 'clipTo' or 'overflow' if necessary based on design
-            textbox.set('noScaleCache', false); // Redraw the text after resizing
-            canvas.renderAll();
+        // Handle text wrapping for large texts
+        textbox.set("width", width);
+        textbox.set("textAlign", "left"); // Ensure text wraps within the textbox
+        textbox.setCoords();
+
+        // Set to 'clipTo' or 'overflow' if necessary based on design
+        textbox.set("noScaleCache", false); // Redraw the text after resizing
+        canvas.renderAll();
     };
 
     // Set font size function
@@ -1131,8 +1334,8 @@ function bindData(current_event_id) {
         letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
 
         const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'textbox') {
-            activeObject.set('charSpacing', newValue); // Update letter spacing
+        if (activeObject && activeObject.type === "textbox") {
+            activeObject.set("charSpacing", newValue); // Update letter spacing
 
             // Now call updateTextboxWidth to handle width adjustments
             updateTextboxWidth(activeObject);
@@ -1178,7 +1381,7 @@ function bindData(current_event_id) {
     });
 
     // Save button functionality
-    document.querySelector(".save-btn").addEventListener("click", function() {
+    document.querySelector(".save-btn").addEventListener("click", function () {
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             savedSettings.fontSize = activeObject.fontSize;
@@ -1200,7 +1403,7 @@ function bindData(current_event_id) {
         updateTextboxWidth(object);
     };
     // Reset button functionality
-    document.querySelector(".reset-btn").addEventListener("click", function() {
+    document.querySelector(".reset-btn").addEventListener("click", function () {
         //console.log("Reset button clicked!");
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
@@ -1234,41 +1437,41 @@ function bindData(current_event_id) {
     setLetterSpacing();
     setLineHeight();
 
-    let clrcanvas = {}
-    setTimeout(function(){
-        let spchoose = document.getElementsByClassName('sp-choose');
-        console.log({spchoose})
-            $(spchoose).click(function(){
+    let clrcanvas = {};
+    setTimeout(function () {
+        let spchoose = document.getElementsByClassName("sp-choose");
+        console.log({ spchoose });
+        $(spchoose).click(function () {
             // alert('clicked')
-            setTimeout(function(){
-                console.log({clrcanvas})
+            setTimeout(function () {
+                console.log({ clrcanvas });
                 undoStack.push(clrcanvas);
-      
-                if(undoStack.length > 0){
-                    $('#undoButton').find('svg path').attr('fill', '#0F172A');
+
+                if (undoStack.length > 0) {
+                    $("#undoButton").find("svg path").attr("fill", "#0F172A");
                 }
                 redoStack = []; // Clear redo stack on new action
-            },1000)
-        })
-    },1000)
+            }, 1000);
+        });
+    }, 1000);
 
     // Initialize the color picker
-    $('#color-picker').spectrum({
+    $("#color-picker").spectrum({
         type: "flat",
         color: "#000000", // Default font color
         showInput: true,
         allowEmpty: true, // Allows setting background to transparent
         showAlpha: true, // Allows transparency adjustment
         preferredFormat: "hex",
-        change: function(color) {
+        change: function (color) {
             if (color) {
                 //console.log("color")
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
                 //console.log("rgba")
-                changeColor('#000000'); // Handle transparency by default
+                changeColor("#000000"); // Handle transparency by default
             }
-        }
+        },
     });
 
     // Function to change font or background color
@@ -1324,7 +1527,7 @@ function bindData(current_event_id) {
                 ); // Set font color in picker
             } else if (selectedColorType === "background") {
                 const bgColor =
-                    activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
+                    activeObject.backgroundColor || "rgba(0, 0, 0, 0)"; // Default to transparent background
                 $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
@@ -1345,7 +1548,7 @@ function bindData(current_event_id) {
     canvas.on("selection:updated", updateColorPicker);
 
     // Update the color picker when the color type (font/background) changes
-    $(".colorTypeInp").click(function(e) {
+    $(".colorTypeInp").click(function (e) {
         e.stopPropagation();
         //console.log(123);
         const activeObject = canvas.getActiveObject();
@@ -1358,11 +1561,11 @@ function bindData(current_event_id) {
     // Load background image and make it non-draggable
     document
         .getElementById("image")
-        .addEventListener("change", function(event) {
+        .addEventListener("change", function (event) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function(e) {};
+                reader.onload = function (e) {};
                 reader.readAsDataURL(file);
             }
         });
@@ -1371,7 +1574,7 @@ function bindData(current_event_id) {
     loadTextDataFromDatabase();
 
     function hideStaticTextElements() {
-        canvas.getObjects("textbox").forEach(function(textbox) {
+        canvas.getObjects("textbox").forEach(function (textbox) {
             if (textbox.isStatic) {
                 textbox.set("visible", false);
                 if (textbox.copyIcon) {
@@ -1386,7 +1589,7 @@ function bindData(current_event_id) {
     }
 
     function showStaticTextElements() {
-        canvas.getObjects("textbox").forEach(function(textbox) {
+        canvas.getObjects("textbox").forEach(function (textbox) {
             if (textbox.isStatic) {
                 textbox.set("visible", true);
                 if (textbox.copyIcon) {
@@ -1405,7 +1608,7 @@ function bindData(current_event_id) {
             left: left,
             top: top,
             fontSize: 20,
-            backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
+            backgroundColor: "rgba(0, 0, 0, 0)", // Set background to transparent
             fill: "#000000", // Default text color (black)
             editable: true,
             selectable: true,
@@ -1418,7 +1621,7 @@ function bindData(current_event_id) {
         text.set("width", text.get("text").length * 10);
 
         // Event listener for scaling
-        text.on("scaling", function() {
+        text.on("scaling", function () {
             var updatedFontSize =
                 (text.fontSize * (text.scaleX + text.scaleY)) / 2;
             text.set("fontSize", updatedFontSize);
@@ -1427,7 +1630,7 @@ function bindData(current_event_id) {
         });
 
         // Event listener for moving
-        text.on("moving", function() {
+        text.on("moving", function () {
             findTextboxCenter(text); // Find center when moving
         });
 
@@ -1448,7 +1651,7 @@ function bindData(current_event_id) {
         var mtrControl = controlCoords.mtr; // 'mtr' control (rotate)
 
         // Log the untransformed mtr control position
-        console.log('Rotation control position (mtr):', mtrControl);
+        console.log("Rotation control position (mtr):", mtrControl);
 
         // Transform mtr control position to apply rotation and scaling
         var transformedMtr = fabric.util.transformPoint(
@@ -1456,20 +1659,19 @@ function bindData(current_event_id) {
             object.calcTransformMatrix() // apply object transformations (rotation, scaling)
         );
 
-     
         return transformedMtr;
-    } 
+    }
 
     function findTextboxCenter(textbox) {
         var centerX = textbox.left + textbox.width / 2;
         var centerY = textbox.top + textbox.height / 2;
         var centerPoint = textbox.getCenterPoint();
         //console.log(
-          //  `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
-       // );
+        //  `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
+        // );
         return {
             x: centerX,
-            y: centerY
+            y: centerY,
         };
     }
 
@@ -1480,8 +1682,14 @@ function bindData(current_event_id) {
         // Calculate the new position for the trash icon
         const trashOffsetX = +75; // Offset for the trash icon
         const trashOffsetY = -30; // Adjust icon's vertical position
-        const trashRotatedX = textbox.left + trashOffsetX * Math.cos(angle) - trashOffsetY * Math.sin(angle);
-        const trashRotatedY = textbox.top + trashOffsetX * Math.sin(angle) + trashOffsetY * Math.cos(angle);
+        const trashRotatedX =
+            textbox.left +
+            trashOffsetX * Math.cos(angle) -
+            trashOffsetY * Math.sin(angle);
+        const trashRotatedY =
+            textbox.top +
+            trashOffsetX * Math.sin(angle) +
+            trashOffsetY * Math.cos(angle);
 
         if (textbox.trashIcon) {
             textbox.trashIcon.left = trashRotatedX;
@@ -1492,8 +1700,14 @@ function bindData(current_event_id) {
         // Calculate the new position for the copy icon
         const copyOffsetX = -4; // Offset for the copy icon on the left
         const copyOffsetY = -25;
-        const copyRotatedX = textbox.left + copyOffsetX * Math.cos(angle) - copyOffsetY * Math.sin(angle);
-        const copyRotatedY = textbox.top + copyOffsetX * Math.sin(angle) + copyOffsetY * Math.cos(angle);
+        const copyRotatedX =
+            textbox.left +
+            copyOffsetX * Math.cos(angle) -
+            copyOffsetY * Math.sin(angle);
+        const copyRotatedY =
+            textbox.top +
+            copyOffsetX * Math.sin(angle) +
+            copyOffsetY * Math.cos(angle);
 
         if (textbox.copyIcon) {
             textbox.copyIcon.left = copyRotatedX;
@@ -1535,7 +1749,7 @@ function bindData(current_event_id) {
             </svg>`;
 
         // Load trash icon from SVG string and position
-        fabric.loadSVGFromString(trashIconSVG, function(objects, options) {
+        fabric.loadSVGFromString(trashIconSVG, function (objects, options) {
             const trashIcon = fabric.util.groupSVGElements(objects, options);
             trashIcon.set({
                 left: textbox.left + textbox.width * textbox.scaleX - 20,
@@ -1547,7 +1761,7 @@ function bindData(current_event_id) {
             textbox.trashIcon = trashIcon;
 
             // Attach delete functionality to trash icon
-            trashIcon.on("mousedown", function() {
+            trashIcon.on("mousedown", function () {
                 //console.log("Trash icon clicked! Deleting textbox.");
                 deleteTextbox(textbox);
             });
@@ -1558,7 +1772,7 @@ function bindData(current_event_id) {
         });
 
         // Load copy icon from SVG string and position
-        fabric.loadSVGFromString(copyIconSVG, function(objects, options) {
+        fabric.loadSVGFromString(copyIconSVG, function (objects, options) {
             const copyIcon = fabric.util.groupSVGElements(objects, options);
             copyIcon.set({
                 left: textbox.left - 25,
@@ -1570,7 +1784,7 @@ function bindData(current_event_id) {
             textbox.copyIcon = copyIcon;
 
             // Attach clone functionality to copy icon
-            copyIcon.on("mousedown", function() {
+            copyIcon.on("mousedown", function () {
                 //console.log("Copy icon clicked!");
                 cloneTextbox(textbox);
             });
@@ -1587,37 +1801,36 @@ function bindData(current_event_id) {
 
     // Function to add icons to a textbox
 
-    function deleteTextbox() {            
-        canvas.remove(canvas.getActiveObject());           
+    function deleteTextbox() {
+        canvas.remove(canvas.getActiveObject());
         canvas.renderAll();
     }
 
-    $(".removeShapImage").click(function(){
+    $(".removeShapImage").click(function () {
         // $('.resize-handle').hide();
         // $("#imageWrapper").hide();
         $(this).hide();
-        $('.uploadShapImage').show();
-        $("#image").attr("src",shapeImageUrl);
-    })
+        $(".uploadShapImage").show();
+        $("#image").attr("src", shapeImageUrl);
+    });
 
-    $(document).on('change','.uploadShapImage',function(event){
+    $(document).on("change", ".uploadShapImage", function (event) {
         event.preventDefault();
 
         var file = event.target.files[0]; // Get the first file (the selected image)
         if (file) {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 $("#user_image").attr("src", e.target.result).show();
             };
             reader.readAsDataURL(file);
-            $('.uploadShapImage').hide();
-            $('.removeShapImage').show();
-            
+            $(".uploadShapImage").hide();
+            $(".removeShapImage").show();
         }
-    })
+    });
 
     function cloneTextbox() {
-        let originalTextbox = canvas.getActiveObject()
+        let originalTextbox = canvas.getActiveObject();
         const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
             left: originalTextbox.left + 30, // Offset position
             top: originalTextbox.top + 30, // Offset position
@@ -1632,22 +1845,21 @@ function bindData(current_event_id) {
             hasBorders: true,
             lockScalingFlip: true,
             editable: true,
-            borderColor: '#2DA9FC',
+            borderColor: "#2DA9FC",
             // cornerColor: 'red',
-            cornerColor: '#fff',
+            cornerColor: "#fff",
             cornerSize: 10,
             transparentCorners: false,
             isStatic: true,
-            backgroundColor: 'rgba(0, 0, 0, 0)',
+            backgroundColor: "rgba(0, 0, 0, 0)",
         });
-
 
         canvas.add(clonedTextbox);
 
         // Add icons to the cloned textbox
 
         canvas.renderAll();
-        setControlVisibilityForAll()
+        setControlVisibilityForAll();
     }
 
     // Handle keyboard events for delete and copy
@@ -1687,7 +1899,7 @@ function bindData(current_event_id) {
             //console.log("Updated Font Color: " + activeObject.fill);
 
             canvas.renderAll();
-             // Save state after updating properties
+            // Save state after updating properties
         }
     }
 
@@ -1706,8 +1918,11 @@ function bindData(current_event_id) {
     // });
 
     function discardIfMultipleObjects(options) {
-
-        if (options.target !== undefined && options.target?._objects && options.target?._objects.length > 1) {
+        if (
+            options.target !== undefined &&
+            options.target?._objects &&
+            options.target?._objects.length > 1
+        ) {
             //console.log('Multiple objects selected:', options.target);
             canvas.discardActiveObject();
             canvas.renderAll(); // Ensure the canvas is refreshed
@@ -1720,69 +1935,67 @@ function bindData(current_event_id) {
             canvas.discardActiveObject(); // Discard active selection
             canvas.renderAll(); // Refresh the canvas
         }
-
     }
 
-    canvas.on('mouse:down', function(options) {
+    canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
-        if (options.target && options.target.type === 'textbox') {
+        if (options.target && options.target.type === "textbox") {
             canvas.setActiveObject(options.target);
-            addIconsToTextbox(options.target)
+            addIconsToTextbox(options.target);
         } else {
             // alert();
-            canvas.getObjects('textbox').forEach(function(tb) {
-                if (tb.trashIcon) tb.trashIcon.set('visible', false);
-                if (tb.copyIcon) tb.copyIcon.set('visible', false);
+            canvas.getObjects("textbox").forEach(function (tb) {
+                if (tb.trashIcon) tb.trashIcon.set("visible", false);
+                if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
         }
     });
 
-    canvas.on('mouse:up', function(options) {
+    canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
     });
 
     document
         .getElementById("addTextButton")
-        .addEventListener("click", function() {
+        .addEventListener("click", function () {
             addEditableTextbox(100, 100, "EditableText"); // You can set the initial position and default text
         });
 
-        function addEditableTextbox(left, top, textContent) {
+    function addEditableTextbox(left, top, textContent) {
+        var textbox = new fabric.Textbox(textContent, {
+            left: left,
+            top: top,
+            // width: 100,
+            fontSize: 20,
+            backgroundColor: "rgba(0, 0, 0, 0)", // Set background to transparent
+            textAlign: "center",
+            fill: "#0a0b0a",
+            editable: true,
+            selectable: true,
+            hasControls: true,
+            borderColor: "#2DA9FC",
+            cornerColor: "#fff",
+            cornerStyle: "circle",
+            cornerSize: 10,
+            transparentCorners: false,
+            textAlign: "center",
+        });
+        textbox.setControlsVisibility({
+            mt: false, // Hide middle top control
+            mb: false, // Hide middle bottom control
+            bl: true, // Hide bottom left control
+            br: true, // Hide bottom right control
+            tl: true, // Hide top left control
+            tr: true, // Hide top right control
+            ml: true, // Show middle left control
+            mr: true, // Show middle right control
+        });
 
-            var textbox = new fabric.Textbox(textContent, {
-                left: left,
-                top: top,
-                // width: 100,
-                fontSize: 20,
-                backgroundColor: 'rgba(0, 0, 0, 0)', // Set background to transparent
-                textAlign: 'center',
-                fill: '#0a0b0a',
-                editable: true,
-                selectable: true,
-                hasControls: true,
-                borderColor: '#2DA9FC',
-                cornerColor: '#fff',
-                cornerStyle:'circle',
-                cornerSize: 10,
-                transparentCorners: false,
-                textAlign:'center',
-            });
-            textbox.setControlsVisibility({
-                mt: false, // Hide middle top control
-                mb: false, // Hide middle bottom control
-                bl: true, // Hide bottom left control
-                br: true, // Hide bottom right control
-                tl: true, // Hide top left control
-                tr: true, // Hide top right control
-                ml: true,  // Show middle left control
-                mr: true   // Show middle right control
-            });
+        canvas.add(textbox);
+        canvas.setActiveObject(textbox);
 
-            canvas.add(textbox);
-            canvas.setActiveObject(textbox);
-            
-            canvas.renderAll();
-        }
+        canvas.renderAll();
+    }
 
     // document.getElementById('AbrilFatfaceButton').addEventListener('click', function() {
     //     //console.log("fontname")
@@ -1793,13 +2006,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("AdleryPro-Regular");
 
-
     // });
     // document.getElementById('AgencyFBButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("AgencyFB-Bold");
-
 
     // });
     // document.getElementById('AlexBrushButton').addEventListener('click', function() {
@@ -1807,13 +2018,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("AlexBrush-Regular");
 
-
     // });
     // document.getElementById('AlluraButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("Allura-Regular");
-
 
     // });
     // // document.getElementById('BotanicaScript-RegularButton').addEventListener('click', function() {
@@ -1821,13 +2030,11 @@ function bindData(current_event_id) {
 
     // //     loadAndUse("BotanicaScript-Regular");
 
-
     // // });
     // document.getElementById('ArcherButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("ArcherBold");
-
 
     // });
     // document.getElementById('Archer-BookButton').addEventListener('click', function() {
@@ -1835,13 +2042,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("Archer-Book");
 
-
     // });
     // document.getElementById('Archer-BookItalicButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("Archer-BookItalic");
-
 
     // });
     // document.getElementById('Archer-ExtraLightButton').addEventListener('click', function() {
@@ -1849,13 +2054,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("Archer-ExtraLight");
 
-
     // });
     // document.getElementById('Archer-HairlineButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("Archer-Hairline");
-
 
     // });
     // document.getElementById('Bebas-RegularButton').addEventListener('click', function() {
@@ -1863,13 +2066,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("Bebas-Regular");
 
-
     // });
     // document.getElementById('BookAntiquaButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("BookAntiqua");
-
 
     // });
     // document.getElementById('CandyCaneUnregisteredButton').addEventListener('click', function() {
@@ -1877,13 +2078,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("CandyCaneUnregistered");
 
-
     // });
     // document.getElementById('CarbonBl-RegularButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("CarbonBl-Regular");
-
 
     // });
     // document.getElementById('CarmenSans-ExtraBoldButton').addEventListener('click', function() {
@@ -1891,13 +2090,11 @@ function bindData(current_event_id) {
 
     //     loadAndUse("CarmenSans-ExtraBold");
 
-
     // });
     // document.getElementById('CarmenSans-RegularButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("CarmenSans-Regular");
-
 
     // });
     // document.getElementById('ChristmasCookiesButton').addEventListener('click', function() {
@@ -1905,27 +2102,25 @@ function bindData(current_event_id) {
 
     //     loadAndUse("ChristmasCookies");
 
-
     // });
     // document.getElementById('Bungee-RegularButton').addEventListener('click', function() {
     //     //console.log("fontname")
 
     //     loadAndUse("Bungee-Regular");
 
-
     // });
-    document.querySelectorAll('.form-check-input').forEach(function(input) {
-        input.addEventListener('click', function() {
-            const font = this.getAttribute('data-font');
+    document.querySelectorAll(".form-check-input").forEach(function (input) {
+        input.addEventListener("click", function () {
+            const font = this.getAttribute("data-font");
             console.log("Selected font:", font);
             loadAndUse(font); // Call loadAndUse function with the selected font
         });
     });
-    canvas.on('object:scaling', function (e) {
+    canvas.on("object:scaling", function (e) {
         var activeObject = e.target;
 
         // Check if the scaled object is the textbox
-        if (activeObject && activeObject.type === 'textbox') {
+        if (activeObject && activeObject.type === "textbox") {
             // Get the current font size
             var currentFontSize = activeObject.fontSize;
             console.log("Current font size: " + currentFontSize);
@@ -1945,9 +2140,9 @@ function bindData(current_event_id) {
             activeObject.set({
                 fontSize: newFontSize,
                 scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
-                scaleY: 1,  // Reset scaleY to 1 if you want to keep uniform scaling
+                scaleY: 1, // Reset scaleY to 1 if you want to keep uniform scaling
                 width: textWidth + 5,
-                textAlign:activeObject.textAlign,
+                textAlign: activeObject.textAlign,
             });
 
             // Re-render the canvas to apply the changes
@@ -1955,7 +2150,7 @@ function bindData(current_event_id) {
 
             console.log("Updated font size: " + newFontSize);
         }
-    }); 
+    });
     //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
     // });
     function loadAndUse(font) {
@@ -1963,7 +2158,7 @@ function bindData(current_event_id) {
         addToUndoStack(canvas);
         myfont
             .load()
-            .then(function() {
+            .then(function () {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
                 //console.log(activeObject.type);
@@ -1979,13 +2174,13 @@ function bindData(current_event_id) {
                     alert("No object selected");
                 }
             })
-            .catch(function(e) {
+            .catch(function (e) {
                 //console.log(e);
                 alert("Font loading failed: " + font);
             });
     }
 
-    function setControlVisibilityForAll() {  
+    function setControlVisibilityForAll() {
         canvas.getObjects().forEach((obj) => {
             console.log(obj);
             var currentFontSize = obj.fontSize;
@@ -2003,30 +2198,30 @@ function bindData(current_event_id) {
             });
             const textWidth = textMeasurement.width;
 
-            obj.set('width',textWidth);
-            obj.set('fontSize',newFontSize);
-          
+            obj.set("width", textWidth);
+            obj.set("fontSize", newFontSize);
+
             obj.setControlsVisibility({
-                mt: false, 
-                mb: false, 
-                bl: true,  
-                br: true,  
-                tl: true, 
-                tr: true, 
-                ml: true,  
-                mr: true   
+                mt: false,
+                mb: false,
+                bl: true,
+                br: true,
+                tl: true,
+                tr: true,
+                ml: true,
+                mr: true,
             });
-            
-            obj.set('transparentCorners', false);
-            obj.set('borderColor', "#2DA9FC");
-            obj.set('cornerSize', 10);
-            obj.set('cornerColor', "#fff");
+
+            obj.set("transparentCorners", false);
+            obj.set("borderColor", "#2DA9FC");
+            obj.set("cornerSize", 10);
+            obj.set("cornerColor", "#fff");
             // Set text alignment if the object is a text-based object
-            if (obj.type === 'textbox' || obj.type === 'text') {
-                obj.set('textAlign', 'center');  // Set text alignment to center
+            if (obj.type === "textbox" || obj.type === "text") {
+                obj.set("textAlign", "center"); // Set text alignment to center
             }
 
-            obj.on('rotating', function () {
+            obj.on("rotating", function () {
                 // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
                 var centerX = boundingRect.left + boundingRect.width / 2;
@@ -2034,69 +2229,87 @@ function bindData(current_event_id) {
                 var rotationAngle = obj.angle;
                 // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
             });
-        });    
+        });
         canvas.renderAll();
     }
 
     function executeCommand(command, font = null) {
         var activeObject = canvas.getActiveObject();
 
-        if (!activeObject || activeObject.type !== 'textbox') {
+        if (!activeObject || activeObject.type !== "textbox") {
             return; // No object or not a textbox, so do nothing
         }
-        console.log('add to undo')
+        console.log("add to undo");
         addToUndoStack(canvas); // Save state for undo/redo functionality
 
         // Commands object to handle various styles and operations
         const commands = {
-            bold: () => activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? '' : 'bold'),
-            italic: () => activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? '' : 'italic'),
-            underline: () => activeObject.set('underline', !activeObject.underline),
-            setLineHeight: (value) => activeObject.set('lineHeight', value),
-            strikeThrough: () => activeObject.set('linethrough', !activeObject.linethrough),
+            bold: () =>
+                activeObject.set(
+                    "fontWeight",
+                    activeObject.fontWeight === "bold" ? "" : "bold"
+                ),
+            italic: () =>
+                activeObject.set(
+                    "fontStyle",
+                    activeObject.fontStyle === "italic" ? "" : "italic"
+                ),
+            underline: () =>
+                activeObject.set("underline", !activeObject.underline),
+            setLineHeight: (value) => activeObject.set("lineHeight", value),
+            strikeThrough: () =>
+                activeObject.set("linethrough", !activeObject.linethrough),
             removeFormat: () => {
                 activeObject.set({
-                    fontWeight: '',
-                    fontStyle: '',
+                    fontWeight: "",
+                    fontStyle: "",
                     underline: false,
                     linethrough: false,
-                    fontFamily: 'Arial'
+                    fontFamily: "Arial",
                 });
             },
             fontName: (font) => {
                 if (font) {
-                    console.log('load and use command')
+                    console.log("load and use command");
                     // loadAndUse(font);
                 }
             },
-            justifyLeft: () => activeObject.set('textAlign', 'left'),
-            justifyCenter: () => activeObject.set('textAlign', 'center'),
-            justifyRight: () => activeObject.set('textAlign', 'right'),
-            justifyFull: () => activeObject.set('textAlign', 'justify'),
-            uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-            lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+            justifyLeft: () => activeObject.set("textAlign", "left"),
+            justifyCenter: () => activeObject.set("textAlign", "center"),
+            justifyRight: () => activeObject.set("textAlign", "right"),
+            justifyFull: () => activeObject.set("textAlign", "justify"),
+            uppercase: () =>
+                activeObject.set("text", activeObject.text.toUpperCase()),
+            lowercase: () =>
+                activeObject.set("text", activeObject.text.toLowerCase()),
             capitalize: () => {
-                const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                activeObject.set('text', capitalizedText);
-            }
+                const capitalizedText = activeObject.text.replace(
+                    /\b\w/g,
+                    (char) => char.toUpperCase()
+                );
+                activeObject.set("text", capitalizedText);
+            },
         };
 
         // Execute the corresponding command
         if (commands[command]) {
             commands[command](font); // Pass font to fontName if needed
-           
 
             canvas.renderAll(); // Re-render canvas after change
         }
     }
 
-    document.querySelectorAll('[data-command]').forEach(function(button) {
-        button.addEventListener('click', function() {
-            const command = button.getAttribute('data-command');
-            if(command=="fontName" || command=="undo" || command=="redo"){
+    document.querySelectorAll("[data-command]").forEach(function (button) {
+        button.addEventListener("click", function () {
+            const command = button.getAttribute("data-command");
+            if (
+                command == "fontName" ||
+                command == "undo" ||
+                command == "redo"
+            ) {
                 return;
             }
-            executeCommand(this.getAttribute('data-command'));
+            executeCommand(this.getAttribute("data-command"));
         });
     });
 
@@ -2104,80 +2317,104 @@ function bindData(current_event_id) {
     let redoStack = [];
     let isAddingToUndoStack = 0;
     function createShapes(img) {
-                const imgWidth = img.width;
-                const imgHeight = img.height;
-                const starScale = Math.min(imgWidth, imgHeight) / 2;
-                const starPoints = [
-                    { x: 0, y: -starScale },
-                    { x: starScale * 0.23, y: -starScale * 0.31 }, 
-                    { x: starScale, y: -starScale * 0.31 }, 
-                    { x: starScale * 0.38, y: starScale * 0.12 }, 
-                    { x: starScale * 0.58, y: starScale }, 
-                    { x: 0, y: starScale * 0.5 }, 
-                    { x: -starScale * 0.58, y: starScale }, 
-                    { x: -starScale * 0.38, y: starScale * 0.12 }, 
-                    { x: -starScale, y: -starScale * 0.31 }, 
-                    { x: -starScale * 0.23, y: -starScale * 0.31 } 
-                ];
+        const imgWidth = img.width;
+        const imgHeight = img.height;
+        const starScale = Math.min(imgWidth, imgHeight) / 2;
+        const starPoints = [
+            { x: 0, y: -starScale },
+            { x: starScale * 0.23, y: -starScale * 0.31 },
+            { x: starScale, y: -starScale * 0.31 },
+            { x: starScale * 0.38, y: starScale * 0.12 },
+            { x: starScale * 0.58, y: starScale },
+            { x: 0, y: starScale * 0.5 },
+            { x: -starScale * 0.58, y: starScale },
+            { x: -starScale * 0.38, y: starScale * 0.12 },
+            { x: -starScale, y: -starScale * 0.31 },
+            { x: -starScale * 0.23, y: -starScale * 0.31 },
+        ];
 
-                return [
-                    new fabric.Rect({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Circle({ radius: Math.min(imgWidth, imgHeight) / 2, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Triangle({ width: imgWidth, height: imgHeight, originX: 'center', originY: 'center', angle: 0 }),
-                    new fabric.Polygon(starPoints, { originX: 'center', originY: 'center', angle: 0 })
-                ];
-            }
-    function setControlVisibilityForAll() {  
+        return [
+            new fabric.Rect({
+                width: imgWidth,
+                height: imgHeight,
+                originX: "center",
+                originY: "center",
+                angle: 0,
+            }),
+            new fabric.Circle({
+                radius: Math.min(imgWidth, imgHeight) / 2,
+                originX: "center",
+                originY: "center",
+                angle: 0,
+            }),
+            new fabric.Triangle({
+                width: imgWidth,
+                height: imgHeight,
+                originX: "center",
+                originY: "center",
+                angle: 0,
+            }),
+            new fabric.Polygon(starPoints, {
+                originX: "center",
+                originY: "center",
+                angle: 0,
+            }),
+        ];
+    }
+    function setControlVisibilityForAll() {
         canvas.getObjects().forEach((obj) => {
             obj.setControlsVisibility({
-                mt: false, 
-                mb: false, 
-                bl: true,  
-                br: true,  
-                tl: true, 
-                tr: true, 
-                ml: true,  
-                mr: true   
+                mt: false,
+                mb: false,
+                bl: true,
+                br: true,
+                tl: true,
+                tr: true,
+                ml: true,
+                mr: true,
             });
-            
-            obj.set('transparentCorners', false);
-            obj.set('borderColor', "#2DA9FC");
-            obj.set('cornerSize', 10);
-            obj.set('cornerColor', "#fff");
-            obj.set('cornerStyle', "circle");
-            // Set text alignment if the object is a text-based object
-            if (obj.type === 'textbox' || obj.type === 'text') {
-                obj.set('textAlign', 'center');  // Set text alignment to center
-            }
-            if (obj.type === 'image') {
-                console.log(obj);
-                        let currentShapeIndex = 0;
-                        obj.crossOrigin = "anonymous";
 
-                        let defaultShape = obj.clipPath.type; 
-                        if (defaultShape === 'polygon') {
-                            defaultShape = 'star'; 
-                        }
-                        const shapeIndexMap = {
-                            'rectangle': 0,
-                            'circle': 1,
-                            'triangle': 2,
-                            'star': 3
-                        };
-                    currentShapeIndex = shapeIndexMap[defaultShape] || 0; 
-                    shapes = createShapes(obj);
-                    obj.set({ clipPath: shapes[currentShapeIndex] });
-                    obj.on('mouseup', function(event) {
-                    if(event?.transform?.action === 'drag' && event.transform.actionPerformed === undefined){
-                        currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+            obj.set("transparentCorners", false);
+            obj.set("borderColor", "#2DA9FC");
+            obj.set("cornerSize", 10);
+            obj.set("cornerColor", "#fff");
+            obj.set("cornerStyle", "circle");
+            // Set text alignment if the object is a text-based object
+            if (obj.type === "textbox" || obj.type === "text") {
+                obj.set("textAlign", "center"); // Set text alignment to center
+            }
+            if (obj.type === "image") {
+                console.log(obj);
+                let currentShapeIndex = 0;
+                obj.crossOrigin = "anonymous";
+
+                let defaultShape = obj.clipPath.type;
+                if (defaultShape === "polygon") {
+                    defaultShape = "star";
+                }
+                const shapeIndexMap = {
+                    rectangle: 0,
+                    circle: 1,
+                    triangle: 2,
+                    star: 3,
+                };
+                currentShapeIndex = shapeIndexMap[defaultShape] || 0;
+                shapes = createShapes(obj);
+                obj.set({ clipPath: shapes[currentShapeIndex] });
+                obj.on("mouseup", function (event) {
+                    if (
+                        event?.transform?.action === "drag" &&
+                        event.transform.actionPerformed === undefined
+                    ) {
+                        currentShapeIndex =
+                            (currentShapeIndex + 1) % shapes.length;
                         obj.set({ clipPath: shapes[currentShapeIndex] });
                         canvas.renderAll();
                     }
                 });
-
             }
 
-            obj.on('rotating', function () {
+            obj.on("rotating", function () {
                 // Get the bounding rectangle of the textboxbox
                 var boundingRect = obj.getBoundingRect();
                 var centerX = boundingRect.left + boundingRect.width / 2;
@@ -2185,360 +2422,347 @@ function bindData(current_event_id) {
                 var rotationAngle = obj.angle;
                 // console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
             });
-
-            
-        });    
+        });
         canvas.renderAll();
     }
 
-  
-    function addToUndoStack(canvas) {          
-        undoStack.push(canvas.toJSON());          
-        if(undoStack.length > 0){
-            $('#undoButton').find('svg path').attr('fill', '#0F172A');
+    function addToUndoStack(canvas) {
+        undoStack.push(canvas.toJSON());
+        if (undoStack.length > 0) {
+            $("#undoButton").find("svg path").attr("fill", "#0F172A");
         }
-        redoStack = [];        
+        redoStack = [];
     }
 
-    function undo() {        
-        if (undoStack.length > 0) {  // Ensure at least one previous state exists
-           
+    function undo() {
+        if (undoStack.length > 0) {
+            // Ensure at least one previous state exists
+
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
-
                 canvas.renderAll(); // Render the canvas after loading state
-              
-            });            
-            if(redoStack.length > 0){
-                $('#redoButton').find('svg path').attr('fill', '#0F172A');  
+            });
+            if (redoStack.length > 0) {
+                $("#redoButton").find("svg path").attr("fill", "#0F172A");
             }
-            setTimeout(function(){
-                setControlVisibilityForAll()
-            },1000)
-        }else{
-            $('#undoButton').find('svg path').attr('fill', '#CBD5E1');  
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
+        } else {
+            $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
         }
     }
 
     function redo() {
         if (redoStack.length > 0) {
-          
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
             canvas.loadFromJSON(nextState, function () {
-                
                 canvas.renderAll(); // Render the canvas after loading state
-               
             });
-            if(undoStack.length > 0 ){
-                $('#undoButton').find('svg path').attr('fill', '#0F172A');
+            if (undoStack.length > 0) {
+                $("#undoButton").find("svg path").attr("fill", "#0F172A");
             }
-            $('#redoButton').find('svg path').attr('fill', '#0F172A');  
-            setTimeout(function(){
-                setControlVisibilityForAll()
-            },1000)
-        }else{
-            $('#redoButton').find('svg path').attr('fill', '#CBD5E1');  
+            $("#redoButton").find("svg path").attr("fill", "#0F172A");
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
+        } else {
+            $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
         }
     }
 
-
- 
-    $("#undoButton").click(function(){
+    $("#undoButton").click(function () {
         undo();
-    })
-    $("#redoButton").click(function(){
+    });
+    $("#redoButton").click(function () {
         redo();
-    })
+    });
 
+    // $(".slider_photo").on("change", function(event) {
+    //     var file = event.target.files[0]; // Get the first file (the selected image)
+    //     if (file) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(".photo-slider-1").attr("src", e.target.result).show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //         $(".design-sidebar").addClass("d-none");
+    //         $(".design-sidebar_7").removeClass("d-none");
+    //         $("#sidebar").addClass("design-sidebar_7");
+    //         $(".close-btn").attr("data-id", "design-sidebar_7");
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+    // });
 
-        // $(".slider_photo").on("change", function(event) {
-        //     var file = event.target.files[0]; // Get the first file (the selected image)
-        //     if (file) {
-        //         var reader = new FileReader();
-        //         reader.onload = function(e) {
-        //             $(".photo-slider-1").attr("src", e.target.result).show();
-        //         };
-        //         reader.readAsDataURL(file);
-        //         $(".design-sidebar").addClass("d-none");
-        //         $(".design-sidebar_7").removeClass("d-none");
-        //         $("#sidebar").addClass("design-sidebar_7");
-        //         $(".close-btn").attr("data-id", "design-sidebar_7");
-        //     }
-        //     setTimeout(() => {
-        //         getLengthofSliderImage();
-        //     }, 500);
-        // });
+    // $(".slider_photo_2").on("change", function(event) {
+    //     var file = event.target.files[0];
+    //     if (file) {
+    //         $(".photo-slider-2").show();
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(".photo-slider-2").attr("src", e.target.result).show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+    // });
+    // $(".slider_photo_3").on("change", function(event) {
+    //     var file = event.target.files[0];
+    //     if (file) {
+    //         $(".photo-slider-3").show();
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(".photo-slider-3").attr("src", e.target.result).show();
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
+    // });
 
-        // $(".slider_photo_2").on("change", function(event) {
-        //     var file = event.target.files[0];
-        //     if (file) {
-        //         $(".photo-slider-2").show();
-        //         var reader = new FileReader();
-        //         reader.onload = function(e) {
-        //             $(".photo-slider-2").attr("src", e.target.result).show();
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        //     setTimeout(() => {
-        //         getLengthofSliderImage();
-        //     }, 500);
-        // });
-        // $(".slider_photo_3").on("change", function(event) {
-        //     var file = event.target.files[0];
-        //     if (file) {
-        //         $(".photo-slider-3").show();
-        //         var reader = new FileReader();
-        //         reader.onload = function(e) {
-        //             $(".photo-slider-3").attr("src", e.target.result).show();
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        //     setTimeout(() => {
-        //         getLengthofSliderImage();
-        //     }, 500);
-        // });
+    // function getLengthofSliderImage(){
+    //     var i = 0;
+    //     $(".slider_img").each(function() {
+    //         var src = $(this).attr("src");
+    //         // console.log(src);
+    //         if (src !== "") {
+    //            i++;
+    //         }
+    //     });
+    //     $('.slider_image_count').text(i+'/3 Photos');
+    // }
+    // $(document).on("click", ".delete-slider-1", function () {
+    //     $(".photo-slider-1").hide();
+    // });
+    // $(document).on("click", ".delete-slider-2", function () {
+    //     $(".photo-slider-2").hide();
+    // });
+    // $(document).on("click", ".delete-slider-3", function () {
+    //     $(".photo-slider-3").hide();
+    // });
 
-        // function getLengthofSliderImage(){
-        //     var i = 0; 
-        //     $(".slider_img").each(function() {
-        //         var src = $(this).attr("src");
-        //         // console.log(src);
-        //         if (src !== "") {
-        //            i++;
-        //         }
-        //     });
-        //     $('.slider_image_count').text(i+'/3 Photos');
-        // }
-        // $(document).on("click", ".delete-slider-1", function () {
-        //     $(".photo-slider-1").hide();
-        // });
-        // $(document).on("click", ".delete-slider-2", function () {
-        //     $(".photo-slider-2").hide();
-        // });
-        // $(document).on("click", ".delete-slider-3", function () {
-        //     $(".photo-slider-3").hide();
-        // });
+    // $(document).on("click", ".save-slider-image", function() {
+    //     var imageSources = [];
+    //     // $(".slider_img").each(function () {
+    //     //     imageSources.push($(this).attr("src"));
+    //     // });
 
-        // $(document).on("click", ".save-slider-image", function() {
-        //     var imageSources = [];
-        //     // $(".slider_img").each(function () {
-        //     //     imageSources.push($(this).attr("src"));
-        //     // });
+    //     $(".slider_img").each(function() {
+    //         var src = $(this).attr("src");
+    //         if (src !== "") {
+    //             imageSources.push({
+    //                 src: $(this).attr("src"),
+    //                 deleteId: $(this).data("delete")
+    //             });
+    //         }
+    //     });
+    //     //console.log(imageSources);
+    //     if(imageSources.length > 0){
+    //         $('#loader').css('display', 'block');
+    //         $.ajax({
+    //             url: base_url + "event/save_slider_img",
+    //             method: "POST",
+    //             data: {
+    //                 imageSources: imageSources,
+    //                 _token: $('meta[name="csrf-token"]').attr("content"),
+    //             },
+    //             success: function(response) {
+    //                 var savedImages = response.images;
+    //                 eventData.slider_images = savedImages;
+    //                 console.log(eventData);
+    //                 $('#loader').css('display', 'none');
+    //                 toastr.success('Slider Image saved Successfully');
+    //             },
+    //             error: function(xhr, status, error) {},
+    //         });
+    //     }
+    // });
 
-        //     $(".slider_img").each(function() {
-        //         var src = $(this).attr("src");
-        //         if (src !== "") {
-        //             imageSources.push({
-        //                 src: $(this).attr("src"),
-        //                 deleteId: $(this).data("delete")
-        //             });
-        //         }
-        //     });
-        //     //console.log(imageSources);
-        //     if(imageSources.length > 0){
-        //         $('#loader').css('display', 'block');
-        //         $.ajax({
-        //             url: base_url + "event/save_slider_img",
-        //             method: "POST",
-        //             data: {
-        //                 imageSources: imageSources,
-        //                 _token: $('meta[name="csrf-token"]').attr("content"),
-        //             },
-        //             success: function(response) {
-        //                 var savedImages = response.images;
-        //                 eventData.slider_images = savedImages;
-        //                 console.log(eventData);
-        //                 $('#loader').css('display', 'none');
-        //                 toastr.success('Slider Image saved Successfully');
-        //             },
-        //             error: function(xhr, status, error) {},
-        //         });
-        //     }
-        // });
+    // $(document).on("click", ".delete_silder", function(e) {
+    //     e.preventDefault();
+    //     var delete_id = $(this).parent().find('.slider_img').data("delete");
+    //     var src = $(this).parent().find('.slider_img').attr("src");
+    //     if (src != "") {
+    //         $('#loader').css('display', 'block');
+    //         var $this = $(this);
+    //         var check_slider_img = eventData.slider_images;
+    //         var matchFound = false;
+    //         $.each(check_slider_img, function(index, slider) {
+    //             if (slider.deleteId == delete_id) {
+    //                 matchFound = true;
+    //                 return false;
+    //             }
+    //         });
+    //         if (matchFound) {
+    //             $.ajax({
+    //                 url: base_url + "event/delete_slider_img",
+    //                 method: "POST",
+    //                 data: {
+    //                     delete_id: delete_id,
+    //                     _token: $('meta[name="csrf-token"]').attr("content"),
+    //                 },
+    //                 success: function(response) {
+    //                     $this.parent().find('.slider_img').attr('src', '');
+    //                     $(".photo-slider-" + delete_id).hide();
+    //                     toastr.success('Slider Image Deleted Successfully')
+    //                     $('#loader').css('display', 'none');
 
-        // $(document).on("click", ".delete_silder", function(e) {
-        //     e.preventDefault();
-        //     var delete_id = $(this).parent().find('.slider_img').data("delete");
-        //     var src = $(this).parent().find('.slider_img').attr("src");
-        //     if (src != "") {
-        //         $('#loader').css('display', 'block');
-        //         var $this = $(this);
-        //         var check_slider_img = eventData.slider_images;
-        //         var matchFound = false;
-        //         $.each(check_slider_img, function(index, slider) {
-        //             if (slider.deleteId == delete_id) {
-        //                 matchFound = true;
-        //                 return false;
-        //             }
-        //         });
-        //         if (matchFound) {
-        //             $.ajax({
-        //                 url: base_url + "event/delete_slider_img",
-        //                 method: "POST",
-        //                 data: {
-        //                     delete_id: delete_id,
-        //                     _token: $('meta[name="csrf-token"]').attr("content"),
-        //                 },
-        //                 success: function(response) {
-        //                     $this.parent().find('.slider_img').attr('src', '');
-        //                     $(".photo-slider-" + delete_id).hide();
-        //                     toastr.success('Slider Image Deleted Successfully')
-        //                     $('#loader').css('display', 'none');
+    //                 },
+    //                 error: function(xhr, status, error) {},
+    //             });
+    //         } else {
+    //             $(this).parent().find('.slider_img').attr('src', '');
+    //             $(".photo-slider-" + delete_id).hide();
+    //             $('#loader').css('display', 'none');
+    //             toastr.success('Slider Image Deleted Successfully')
 
-        //                 },
-        //                 error: function(xhr, status, error) {},
-        //             });
-        //         } else {
-        //             $(this).parent().find('.slider_img').attr('src', '');
-        //             $(".photo-slider-" + delete_id).hide();
-        //             $('#loader').css('display', 'none');
-        //             toastr.success('Slider Image Deleted Successfully')
+    //         }
 
-        //         }
+    //     }
+    //     setTimeout(() => {
+    //         getLengthofSliderImage();
+    //     }, 500);
 
-        //     }
-        //     setTimeout(() => {
-        //         getLengthofSliderImage();
-        //     }, 500);
+    // });
 
-        // });
-   
+    // var canvasElement = new fabric.Canvas('imageEditor', {
+    //     width: 500, // Canvas width
+    //     height: 500, // Canvas height
+    //     cornerSize: 6,
+    // });
+    //     function updateClipPath(imageUrl, element) {
 
+    //         const imageWrapper = document.getElementById('imageWrapper');
+    //         const imgElement = document.getElementById('user_image');
+    //         imgElement.src = imageUrl;
+    //         if(!canvasElement){
+    //         var canvasElement = new fabric.Canvas('imageEditor', {
+    //                     width: 500, // Canvas width
+    //                     height: 500, // Canvas height
+    //                     cornerSize: 6,
+    //         });
+    // }
+    //         //console.log(imageWrapper);
+    //         // If a current image exists on canvas, remove it
+    //         console.log(canvasElement)
+    //         if (currentImage) {
+    //             canvasElement.remove(currentImage);
+    //         }
 
-   
-        // var canvasElement = new fabric.Canvas('imageEditor', {
-        //     width: 500, // Canvas width
-        //     height: 500, // Canvas height
-        //     cornerSize: 6,
-        // });
-//     function updateClipPath(imageUrl, element) {
+    //         // Handle previous image and trash icon
+    //         if (oldImage != null) {
+    //             canvasElement.remove(oldImage.trashIcon);
+    //             oldImage.trashIcon = null;
+    //             canvasElement.renderAll();
+    //         }
 
-//         const imageWrapper = document.getElementById('imageWrapper');
-//         const imgElement = document.getElementById('user_image');
-//         imgElement.src = imageUrl;
-//         if(!canvasElement){
-//         var canvasElement = new fabric.Canvas('imageEditor', {
-//                     width: 500, // Canvas width
-//                     height: 500, // Canvas height
-//                     cornerSize: 6,
-//         });
-// }
-//         //console.log(imageWrapper);
-//         // If a current image exists on canvas, remove it
-//         console.log(canvasElement)
-//         if (currentImage) {
-//             canvasElement.remove(currentImage);
-//         }
+    //         imageWrapper.style.display = 'block';
+    //         // imageWrapper.style.left = element.left;
+    //         // imageWrapper.style.top = element.top;
 
-//         // Handle previous image and trash icon
-//         if (oldImage != null) {
-//             canvasElement.remove(oldImage.trashIcon);
-//             oldImage.trashIcon = null;
-//             canvasElement.renderAll();
-//         }
+    //         let canvasEL = document.getElementById('imageEditor1')
+    //         const canvasRect = canvasEL.getBoundingClientRect();
 
-//         imageWrapper.style.display = 'block';
-//         // imageWrapper.style.left = element.left;
-//         // imageWrapper.style.top = element.top;
+    //         //console.log(canvasRect.left)
+    //         //console.log(canvasRect.top)
+    //         //console.log(element.centerX)
+    //         //console.log(element.centerY)
+    //         //console.log(element.height)
+    //         //console.log(element.height)
 
-//         let canvasEL = document.getElementById('imageEditor1')
-//         const canvasRect = canvasEL.getBoundingClientRect();
+    //         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
+    //         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
+    //         //console.log({
+    //         //     left
+    //         // })
+    //         //console.log({
+    //         //     imageWrapper
+    //         // })
 
-//         //console.log(canvasRect.left)
-//         //console.log(canvasRect.top)
-//         //console.log(element.centerX)
-//         //console.log(element.centerY)
-//         //console.log(element.height)
-//         //console.log(element.height)
+    //         // Set the calculated position to imageWrapper
+    //         imageWrapper.style.left = left;
+    //         imageWrapper.style.top = top;
 
-//         let left = element.centerX !== undefined ? `${element.centerX  + canvasRect.left}px` : '50%';
-//         let top = element.centerY !== undefined ? `${element.centerY + canvasRect.top}px` : '50%';
-//         //console.log({
-//         //     left
-//         // })
-//         //console.log({
-//         //     imageWrapper
-//         // })
+    //         imgElement.onload = function() {
+    //             // Get image dimensions and scale it
+    //             const imgInstance = new fabric.Image(imgElement, {
+    //                 selectable: true,
+    //                 hasControls: true,
+    //                 hasBorders: true,
 
-//         // Set the calculated position to imageWrapper
-//         imageWrapper.style.left = left;
-//         imageWrapper.style.top = top;
+    //                 borderColor: "#2DA9FC",
+    //                 cornerColor: "#fff",
+    //                 transparentCorners: false,
+    //                 lockUniScaling: true,
+    //                 scaleX: 600 / imgElement.width,
+    //                 scaleY: 600 / imgElement.height,
+    //                 cornerSize: 10,
+    //                 cornerStyle: 'circle',
+    //             });
+    //             shape = element.shape;
+    //             current_shape = shape;
+    //             canvasElement.add(imgInstance);
+    //             // addIconsToImage(imgInstance);
+    //             drawCanvas();
 
-//         imgElement.onload = function() {
-//             // Get image dimensions and scale it
-//             const imgInstance = new fabric.Image(imgElement, {
-//                 selectable: true,
-//                 hasControls: true,
-//                 hasBorders: true,
+    //             // Refresh canvas
+    //             canvasElement.renderAll();
 
-//                 borderColor: "#2DA9FC",
-//                 cornerColor: "#fff",
-//                 transparentCorners: false,
-//                 lockUniScaling: true,
-//                 scaleX: 600 / imgElement.width,
-//                 scaleY: 600 / imgElement.height,
-//                 cornerSize: 10,
-//                 cornerStyle: 'circle',
-//             });
-//             shape = element.shape;
-//             current_shape = shape;
-//             canvasElement.add(imgInstance);
-//             // addIconsToImage(imgInstance);
-//             drawCanvas();
+    //             // Update the image with the shape based on the provided element data
+    //             if (element.shape) {
+    //                 applyClipPath(imgInstance, element);
+    //             }
 
-//             // Refresh canvas
-//             canvasElement.renderAll();
+    //             // Image mouseup event to change shape or update position
+    //             imgInstance.on('mouseup', function(options) {
+    //                 if (options.target) {
+    //                     // Change shape logic
+    //                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+    //                     const nextShape = shapes[currentShapeIndex];
+    //                     element.shape = nextShape;
+    //                     console.log(1)
+    //                     updateClipPath(data, element); // Update the image with the new shape
+    //                 }
+    //             });
 
-//             // Update the image with the shape based on the provided element data
-//             if (element.shape) {
-//                 applyClipPath(imgInstance, element);
-//             }
+    //             // Update canvas on movement or scaling
+    //             imgInstance.on('moving', function() {
+    //                 isImageDragging = true;
+    //                 element.centerX = imgInstance.left;
+    //                 element.centerY = imgInstance.top;
 
-//             // Image mouseup event to change shape or update position
-//             imgInstance.on('mouseup', function(options) {
-//                 if (options.target) {
-//                     // Change shape logic
-//                     currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
-//                     const nextShape = shapes[currentShapeIndex];
-//                     element.shape = nextShape;
-//                     console.log(1)
-//                     updateClipPath(data, element); // Update the image with the new shape
-//                 }
-//             });
+    //                 updatedOBJImage = {
+    //                     centerX: imgInstance.left,
+    //                     centerY: imgInstance.top,
+    //                 };
+    //             });
 
-//             // Update canvas on movement or scaling
-//             imgInstance.on('moving', function() {
-//                 isImageDragging = true;
-//                 element.centerX = imgInstance.left;
-//                 element.centerY = imgInstance.top;
+    //             imgInstance.on('scaling', function() {
+    //                 element.width = imgInstance.width * imgInstance.scaleX;
+    //                 element.height = imgInstance.height * imgInstance.scaleY;
 
-//                 updatedOBJImage = {
-//                     centerX: imgInstance.left,
-//                     centerY: imgInstance.top,
-//                 };
-//             });
+    //                 updatedOBJImage = {
+    //                     width: imgInstance.width * imgInstance.scaleX,
+    //                     height: imgInstance.height * imgInstance.scaleY
+    //                 };
+    //             });
 
-//             imgInstance.on('scaling', function() {
-//                 element.width = imgInstance.width * imgInstance.scaleX;
-//                 element.height = imgInstance.height * imgInstance.scaleY;
+    //             currentImage = imgInstance; // Track current image on canvas
+    //             oldImage = imgInstance;
+    //             // $('.photo-slider-wrp').hide()
+    //         };
 
-//                 updatedOBJImage = {
-//                     width: imgInstance.width * imgInstance.scaleX,
-//                     height: imgInstance.height * imgInstance.scaleY
-//                 };
-//             });
-
-//             currentImage = imgInstance; // Track current image on canvas
-//             oldImage = imgInstance;
-//             // $('.photo-slider-wrp').hide()
-//         };
-
-//         imgElement.onerror = function(e) {
-//             console.error("Failed to load image.", e);
-//         };
-//     }
+    //         imgElement.onerror = function(e) {
+    //             console.error("Failed to load image.", e);
+    //         };
+    //     }
 
     // Helper function to apply clip path based on shape
     // function applyClipPath(image, element) {
@@ -2586,7 +2810,6 @@ function bindData(current_event_id) {
 
     //     canvasElement.renderAll();
     // }
-
 
     // const imageWrapper = document.getElementById('imageWrapper');
     // const canvasElement = new fabric.Canvas('imageEditor', {
@@ -2666,7 +2889,7 @@ function bindData(current_event_id) {
     // }
 
     // function handleMouseDown(event) {
-    //     ////console.logevent);  
+    //     ////console.logevent);
     //     const canvas = document.querySelector('.new');
 
     //     canvasRect = canvas.getBoundingClientRect();
@@ -2707,7 +2930,6 @@ function bindData(current_event_id) {
     //         resize(event);
     //     }
     // }
-
 
     // function handleMouseUp(event) {
     //     const userImageElement = document.getElementById('user_image');
@@ -2753,21 +2975,17 @@ function bindData(current_event_id) {
     //             break;
     //     }
     // }
-
 }
-
-
-
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
     console.log(objects);
     var textData = [];
     var shapeImageData = [];
-    objects.forEach(function(obj) {
+    objects.forEach(function (obj) {
         if (obj.type === "textbox") {
             console.log(obj.underline);
-            var centerPoint = obj.getCenterPoint();     
+            var centerPoint = obj.getCenterPoint();
             textData.push({
                 text: obj.text,
                 left: obj.left,
@@ -2786,8 +3004,7 @@ function getTextDataFromCanvas() {
                 underline: obj.underline,
                 linethrough: obj.linethrough,
                 date_formate: obj.date_formate, // Include date_formate if set
-                rotation: obj.angle
-
+                rotation: obj.angle,
             });
         }
         if (obj.type === "image") {
@@ -2795,7 +3012,7 @@ function getTextDataFromCanvas() {
             var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
 
             shapeImageData = {
-                shape: obj.clipPath ? obj.clipPath.type : 'none', // Handle case when clipPath is null
+                shape: obj.clipPath ? obj.clipPath.type : "none", // Handle case when clipPath is null
                 centerX: centerX,
                 centerY: centerY,
                 width: obj.getScaledWidth(), // Get the scaled width
@@ -2828,7 +3045,7 @@ function getTextDataFromCanvas() {
 
     dbJson = {
         textElements: textData,
-        shapeImageData : shapeImageData
+        shapeImageData: shapeImageData,
     };
     console.log(dbJson);
 
