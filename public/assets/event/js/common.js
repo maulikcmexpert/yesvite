@@ -122,7 +122,9 @@ $(".form-control").each(function() {
     }
 });
 
+
 $("#event-date").on("input blur", function () {
+    alert();
     var text = $(this).val(); // Get the input value
     if (text === "") {
         // Remove 'floatingfocus' class if input is empty
