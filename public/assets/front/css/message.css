@@ -1526,7 +1526,7 @@ ul.chat-list li.setpink{
 
 .msg-lists .receiver .simple-message .reaction-ul {
     position: absolute;
-    bottom: 0px;
+    bottom: -10px;
     left: -5px;
     display: flex;
     right: 60%;
