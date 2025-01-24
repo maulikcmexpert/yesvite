@@ -753,7 +753,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 function initializePickers() {
     // Initialize Start Time Picker
     $(".start_timepicker").datetimepicker({
-        format: "LT", // "LT" for 12-hour time format with AM/PM
+        format: "LT", // 12-hour format with AM/PM
         icons: {
             up: "fa fa-chevron-up",
             down: "fa fa-chevron-down",
@@ -771,26 +771,14 @@ function initializePickers() {
             endPicker.minDate(startTime); // Restrict end time to be >= start time
             endPicker.date(endTime); // Set default end time
 
-            // Ensure the AM/PM is updated correctly
+            // Update the input with formatted time
             $(".end_timepicker").val(endTime.format("LT"));
         }
-    }).on('dp.show', function () {
-        $(this).val(""); // Clear the input field when the picker is shown
-
-        const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
-
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime);
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
     });
 
     // Initialize End Time Picker
     $(".end_timepicker").datetimepicker({
-        format: "LT", // "LT" for 12-hour time format with AM/PM
+        format: "LT", // 12-hour format with AM/PM
         icons: {
             up: "fa fa-chevron-up",
             down: "fa fa-chevron-down",
@@ -808,10 +796,6 @@ function initializePickers() {
                 picker.date(endTime); // Set default end time when opening the picker
             }
         }
-    }).on('dp.hide', function (e) {
-        // Ensure the input reflects the selected value when the picker is closed
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime);
     });
 }
 
