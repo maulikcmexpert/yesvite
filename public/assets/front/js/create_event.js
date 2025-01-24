@@ -777,7 +777,7 @@ function initializePickers() {
             const endPicker = $(".end_timepicker").data("DateTimePicker");
 
             // Update the end time picker's constraints and value
-            endPicker.minDate(startTime); // Restrict end time to be >= start time
+            // endPicker.minDate(startTime); // Restrict end time to be >= start time
             endPicker.date(endTime); // Set default end time
         }
     }).on('dp.hide', function (e) {
