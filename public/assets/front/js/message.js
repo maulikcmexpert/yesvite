@@ -611,9 +611,9 @@ async function updateChat(user_id) {
     console.log(messageTime);
 
     let lastseen =
-        selected_user.userStatus == "offline"
-            ? // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
-              `last seen at ${timeago.format(messageTime)}`
+        selected_user.userStatus == "offline" ||
+        selected_user.userStatus == "Offline"
+            ? `last seen at ${timeago.format(messageTime)}`
             : selected_user.userStatus == "Online" ||
               selected_user.userStatus == "online"
             ? "Online"
