@@ -677,7 +677,23 @@ if (/Mobi/.test(navigator.userAgent)) {
 //    datepicker();
 // })
 // datepicker();
-
+function getClosest15MinuteTime() {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
+    if (roundedMinutes === 60) {
+        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
+        now.setMinutes(0); // Reset minutes to 0
+    } else {
+        now.setMinutes(roundedMinutes);
+    }
+    now.setSeconds(0); // Reset seconds to 0
+    now.setMilliseconds(0); // Reset milliseconds to 0
+    return now;
+}
+$(".timepicker").on("dp.show", function () {
+    $(this).val(""); // Clear the input when the picker is shown
+});
 function datepicker() {
     $(".timepicker").datetimepicker({
         //  keepOpen: true,
@@ -711,63 +727,47 @@ function datepicker() {
     $(this).val("");
 }
 
-function start_timepicker() {
-    $(".start_timepicker").datetimepicker({
-        //  keepOpen: true,
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+// function start_timepicker() {
+//     $(".start_timepicker").datetimepicker({
+//         //  keepOpen: true,
+//         format: "LT",
+//         icons: {
+//             up: "fa fa-chevron-up",
+//             down: "fa fa-chevron-down",
+//         },
+//         useCurrent: false,
+//         ignoreReadonly: true,
+//         stepping: 15,
+//         // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
 
-        // Set stepping to 15 minutes
-        // defaultDate: now
-        //  debug: true
-    }).on('dp.show', function () {
-        $(this).val(""); // Set the formatted time value in the input field
+//         // Set stepping to 15 minutes
+//         // defaultDate: now
+//         //  debug: true
+//     }).on('dp.show', function () {
+//         $(this).val(""); // Set the formatted time value in the input field
 
-        const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+//         const picker = $(this).data("DateTimePicker");
+//         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime); 
+//         // Set the picker to the closest 15-minute time dynamically
+//         picker.date(closest15MinTime); 
 
-        $(".start_timepicker").val("");
+//         $(".start_timepicker").val("");
 
         
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
-    });
+//     }).on('dp.hide', function (e) {
+//         // Automatically set the selected value in the input field when the picker closes
+//         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+//         $(this).val(selectedTime); // Set the formatted time value in the input field
+//     });
 
-    // Ensure input field is clear when the page loads
-    $(".start_timepicker").val("");
+//     // Ensure input field is clear when the page loads
+//     $(".start_timepicker").val("");
 
-}
-function getClosest15MinuteTime() {
-    const now = new Date();
-    const minutes = now.getMinutes();
-    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
-    if (roundedMinutes === 60) {
-        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
-        now.setMinutes(0); // Reset minutes to 0
-    } else {
-        now.setMinutes(roundedMinutes);
-    }
-    now.setSeconds(0); // Reset seconds to 0
-    now.setMilliseconds(0); // Reset milliseconds to 0
-    return now;
-}
-// $(".timepicker").on("dp.show", function () {
-//     $(this).val(""); // Clear the input when the picker is shown
-// });
+// }
+
 datepicker();
-start_timepicker();
+// start_timepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
