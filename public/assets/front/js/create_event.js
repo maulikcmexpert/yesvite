@@ -7827,10 +7827,11 @@ $(document).on("click", ".edit_checkout", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
-            if (response == 1) {
-                toastr.success("Event Updated Successfully");
-                window.location.href="home";
-            }
+           if(response.success == true){
+               toastr.success("Event Updated Successfully");
+               window.location.href=base_url+"home";
+           }
+         
             // $("#eventModal").modal("show");
         },
         error: function (xhr, status, error) {
@@ -7904,7 +7905,7 @@ $(document).on("click", "#close_editEvent", function (e) {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "";
+                    window.location.href = base_url+"home";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");

@@ -755,7 +755,15 @@ async function updateChat(user_id) {
                 $("#selected-user-lastseen").text(selectedUserData.userStatus);
             }
         } else {
-            $("#selected-user-lastseen").text(selectedUserData.userStatus);
+            let lastseen =
+                selectedUserData.userStatus == "offline" ||
+                selectedUserData.userStatus == "Offline"
+                    ? `last seen at ${timeago.format(messageTime)}`
+                    : selectedUserData.userStatus == "Online" ||
+                      selectedUserData.userStatus == "online"
+                    ? "Online"
+                    : "";
+            $("#selected-user-lastseen").text(lastseen);
         }
     });
 
@@ -2885,14 +2893,16 @@ $(document).on("click", ".remove-member", async function () {
     var conversationId = $(".conversationId").attr("conversationid");
 
     var overviewRef = ref(database, `overview/${userId}/${conversationId}`);
-    await remove(overviewRef);
+
     let senderIsAdmin = false;
+
     SelecteGroupUser.forEach((user) => {
+        console.log(user);
         if (user.id == senderUser && user.isAdmin == "1") {
             senderIsAdmin = true;
         }
     });
-    console.log({ senderIsAdmin });
+
     var groupInfoProfileRef = ref(
         database,
         `/Groups/${conversationId}/groupInfo/profiles`
@@ -2929,6 +2939,7 @@ $(document).on("click", ".remove-member", async function () {
             }
         }
     }
+
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
@@ -2943,7 +2954,9 @@ $(document).on("click", ".remove-member", async function () {
             };
         }
     });
+    $("#listBox").modal("hide");
     await addListInMembers(SelecteGroupUser);
+    await remove(overviewRef);
 });
 
 $(".updateGroup").click(function () {
