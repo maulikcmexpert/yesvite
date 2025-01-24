@@ -32,7 +32,7 @@
                 aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <ul class="dropdown-menu">
+            {{-- <ul class="dropdown-menu">
                 <li>
                     <a class="dropdown-item" href="#">
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
                         Cancel Event
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
     </div>
     {{-- {{    dd($eventDetails)}} --}}
