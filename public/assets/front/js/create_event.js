@@ -7949,11 +7949,11 @@ $(document).on("click", "#close_editEvent", function (e) {
 
 
 if(final_step == "2"){
-    alert("hiiii")
+    $("#loader").css("display", "flex");
     setTimeout(function(){
         step2()
-
-    },5000)
+        $("#loader").css("display", "none");
+    },1000)
 }
 
 if(final_step == "3"){
@@ -7965,7 +7965,7 @@ if(final_step == "4"){
 }
 
 
-function step2(){
+function stepOpen2(){
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
