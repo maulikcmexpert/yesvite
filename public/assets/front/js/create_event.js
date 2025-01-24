@@ -142,6 +142,8 @@ var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
+$('#activity-start-time').val('');
+$('#activity-end-time').val('');
 $(document).ready(function () {
     function getTimeZoneAbbreviation() {
         const date = new Date();
@@ -699,7 +701,7 @@ function datepicker() {
         useCurrent: false,
         ignoreReadonly: true,
         stepping: 15,
-        defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
         // Set stepping to 15 minutes
         // defaultDate: now
@@ -1133,11 +1135,32 @@ function addActivity(container, date) {
 function removeActivity(button) {
     button.parentElement.remove();
 }
-
+$(document).on("click","#end-time",function(){
+    var start_time = $('#start-time').val(); 
+        
+    if (start_time) { 
+        var startTime = moment(start_time, 'hh:mm A'); // Parse the start time string
+        var endTime = startTime.clone().add(1, 'hours'); 
+        $('#end-time').val(endTime.format('hh:mm A')); 
+    } else {
+        $('#end-time').val(''); // Clear end time if start time is empty
+    }
+});
 $("#end_time").on("change", function () {
     if ($(this).is(":checked")) {
         $(".end_time").show();
         $(".ac-end-time").show();
+        var start_time=$('#start-time').val();
+        console.log(start_time);
+
+        if (start_time) { 
+            var startTime = moment(start_time, 'hh:mm A'); // Parse the start time string
+            var endTime = startTime.clone().add(1, 'hours'); 
+            $('#end-time').val(endTime.format('hh:mm A')); 
+        } else {
+            $('#end-time').val(''); // Clear end time if start time is empty
+        }
+        
     } else {
         $(".end-time-create").val("");
         $(".end_time").hide();
@@ -2364,9 +2387,30 @@ function convertTimeToMinutes(timeStr) {
 // });
 
 let blurExecutedEndTime = false;
-
-$(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
+$(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
     e.preventDefault();
+    var check_start=$(this)
+    .closest(".activity-main-wrp")
+    .find('input[name="activity-start-time[]"]')
+    .val();
+
+    if(check_start==""){
+        toastr.error('First you need to to set Start Time of Event');
+        $(this).val("");
+        return;
+    }
+  });
+$(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
+    // e.preventDefault();
+    // var check_start=$(this)
+    // .closest(".activity-main-wrp")
+    // .find('input[name="activity-start-time[]"]')
+    // .val();
+
+    // if(check_start==""){
+    //     toastr.error('First you need to to set Start Time of Event');
+    //     return;
+    // }
     if (!blurExecutedEndTime) {
         blurExecutedEndTime = true;
 

@@ -171,7 +171,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+                    `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="cover-img" >`
                 );
         }
     } else {
@@ -194,7 +194,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+                    `<h5 class="user-avatar img-fluid ${fontColor}">${initials}</h5>`
                 );
         }
     }
@@ -766,8 +766,12 @@ async function updateChatfromGroup(conversationId) {
     onChildChanged(profileRef, async (snapshot) => {
         const profile = snapshot.val();
         const profileIndex = await setProfileIndexCache(conversationId);
-
-        if (snapshot.key != profileIndex && profile.userTypingStatus == true) {
+        const selectedConversationId = $(".selected_conversasion").val();
+        if (
+            selectedConversationId === conversationId &&
+            snapshot.key != profileIndex &&
+            profile.userTypingStatus == true
+        ) {
             $(".typing").html(profile.name + " is typing");
         } else {
             $(".typing").html("");
@@ -796,8 +800,8 @@ async function updateChatfromGroup(conversationId) {
     $("#selected-user-name").html(groupInfo.groupName);
     await updateProfileImg(
         groupInfo.groupProfile,
-        groupInfo.groupName
-        // conversationId
+        groupInfo.groupName,
+        conversationId
     );
 
     $(".selected_name").val(groupInfo.groupName);
@@ -2885,9 +2889,28 @@ $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
     $(".change-group-name").addClass("d-none");
     $(".selected-title").show();
+    $("#group-selected-user-id").val("");
     let isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true) {
         $(".updateGroup").show();
+        let senderIsAdmin = false;
+
+        // Check if the senderUser is an admin
+        SelecteGroupUser.forEach((user) => {
+            if (user.id == senderUser && user.isAdmin == "1") {
+                senderIsAdmin = true;
+            }
+        });
+        // console.log("check admin", senderIsAdmin);
+        if (senderIsAdmin) {
+            $(".new-member").removeClass("d-none");
+            $(".choosen-file").show();
+            $(".updateGroup").show();
+        } else {
+            $(".new-member").addClass("d-none");
+            $(".choosen-file").hide();
+            $(".updateGroup").hide();
+        }
     } else {
         $(".updateGroup").hide();
     }
@@ -3288,11 +3311,15 @@ function generateReactionsAndReply() {
 generateReactionsAndReply();
 
 $("#choose-file").on("change", async function () {
+    let profileModel = document.getElementById("profileModel");
+    let selected_user_profile = document.getElementById(
+        "selected-user-profile"
+    );
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        $("#profileIm").replaceWith(
-            `<img id="profileIm" src="${e.target.result}" alt="user-img">`
+        $(profileModel).replaceWith(
+            `<img id="profileModel" src="${e.target.result}" alt="user-img">`
         );
     };
     reader.readAsDataURL(this.files[0]);
@@ -3302,8 +3329,10 @@ $("#choose-file").on("change", async function () {
                 storage,
                 `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
             );
-            const previewImg = $("#profileIm");
+            let profileModel = document.getElementById("profileModel");
+            const previewImg = $(profileModel);
             const imageUrl = previewImg.attr("src");
+            console.log(imageUrl);
             if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
             } else {
@@ -3312,24 +3341,25 @@ $("#choose-file").on("change", async function () {
                 await uploadBytes(fileRef, blob);
             }
             const downloadURL = await getDownloadURL(fileRef);
-            let profileModel = document.getElementById("profileModel");
             var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
             var groupInfoRef = ref(
                 database,
                 `/Groups/${conversationId}/groupInfo/`
             );
-            $("#selected-user-profile").replaceWith(
+            $(selected_user_profile).replaceWith(
                 `<img src="${downloadURL}" id="selected-user-profile"/>`
             );
             $(profileModel).replaceWith(
                 `<img src="${downloadURL}" id="profileModel"/>`
             );
+
             $(".conversation-" + conversationId)
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img src="${downloadURL}" class="user-avatar img-fluid"/>`
+                    `<img class="user-avatar img-fluid" src="${downloadURL}" alt="cover-img" >`
                 );
+
             await update(groupInfoRef, { groupProfile: downloadURL });
             SelecteGroupUser.map((user) => {
                 var groupUserInfoRef = ref(
@@ -3340,7 +3370,7 @@ $("#choose-file").on("change", async function () {
                 update(groupUserInfoRef, { receiverProfile: downloadURL });
             });
         }
-    }, 500);
+    }, 800);
 });
 
 async function startRecording() {

@@ -150,7 +150,7 @@ use Carbon\Carbon;
                                             $initials = substr($initials, 0, 2);
                                             $fontColor = "fontcolor" . strtoupper($initials[0]);
                                             @endphp
-                                            <h5 class="{{$fontColor}}">{{$initials}}</h5>
+                                            <h5 class="{{$fontColor}} user-avatar img-fluid">{{$initials}}</h5>
                                             @endif
                                             <span class="active"></span>
                                         </div>
