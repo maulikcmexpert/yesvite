@@ -4,8 +4,13 @@
     overflow-y: auto;
 }
 .activated{
-    background-color: var(--primaryColor);
+    background-color: var(--primaryColor) !important;
 }
+
+.activated svg path{
+    stroke: #fff !important;
+}
+
 .edit-imag-main-content-wrp {
     overflow: hidden;
 }

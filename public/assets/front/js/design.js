@@ -2039,13 +2039,14 @@ function bindData(current_event_id) {
                 activeObject.set("text", capitalizedText);
             },
         };
-        addIconsToTextbox(activeObject);
+
         // Execute the corresponding command
         if (commands[command]) {
             commands[command](font); // Pass font to fontName if needed
 
             canvas.renderAll(); // Re-render canvas after change
         }
+        addIconsToTextbox(activeObject);
     }
 
     document.querySelectorAll("[data-command]").forEach(function (button) {

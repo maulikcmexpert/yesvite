@@ -724,11 +724,16 @@ function start_timepicker() {
         // defaultDate: now
         //  debug: true
     }).on('dp.show', function () {
+        $(this).val(""); // Set the formatted time value in the input field
+
         const picker = $(this).data("DateTimePicker");
         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
         // Set the picker to the closest 15-minute time dynamically
         picker.date(closest15MinTime); 
+
+        $(".start_timepicker").val("");
+
         
     }).on('dp.hide', function (e) {
         // Automatically set the selected value in the input field when the picker closes
@@ -2223,7 +2228,9 @@ $(".decrease").click(function () {
 //         })
 //         .appendTo("#create_eventForm");
 // });
-
+$(document).on("click", "#start-time", function () {
+    $(this).val('');
+});
 $(document).on("blur", "#start-time", function () {
     var s_t = $(this).val();
     var start_time = convertTo24Hour($(this).val());
