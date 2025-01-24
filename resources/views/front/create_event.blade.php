@@ -1554,11 +1554,11 @@
                                                     <div class="accordion-body">
                                                         <div class="accordion-body-content"
                                                             style="display: none;">
-                                                            @if (Auth::guard('web')->user()->('profile') != '')
+                                                            @if (Auth::guard('web')->user()->profile != '')
                                                             @php
     $user = Auth::guard('web')->user();
 @endphp
-                                                                <img src="{{ $values['profile'] }}"
+                                                                <img src="{{ Auth::guard('web')->user()->profile }}"
                                                                     alt="">
                                                                     <h5>{{ $user->firstname }} {{ $user->lastname }}
 
@@ -1568,7 +1568,7 @@
                                                         </div>
                                                         <div class="accordion-body-content limits-count"
                                                             id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
-                                                            @if ($values['profile'] == '')
+                                                            @if (Auth::guard('web')->user()->profile == '')
                                                             @php
     $user = Auth::guard('web')->user();
 @endphp
@@ -1579,7 +1579,7 @@
 
                                                                 </h5>
                                                             @endif
-                                                            @if (Auth::guard('web')->user()->('id') == $eventDetail['user_id'])
+                                                            @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
                                                                 <div class="qty-container ms-auto">
                                                                     <input type="hidden"
                                                                         class="category-item-key"
