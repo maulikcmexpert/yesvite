@@ -1283,12 +1283,14 @@ async function setProfileIndexCache(conversationId) {
             // Find the profile with the matching user ID
             for (let i = 0; i < profiles.length; i++) {
                 if (profiles[i].id === senderUser) {
+                    console.log({ i });
                     profileIndexCache[conversationId] = i;
                     break;
                 }
             }
         }
     }
+    console.log(profileIndexCache[conversationId]);
     return profileIndexCache[conversationId];
 }
 
@@ -1301,7 +1303,7 @@ $(".send-message").on("keyup", async function (e) {
         if (isGroup == "true" || isGroup == true) {
             var profileIndex = await setProfileIndexCache(conversationId);
             // If profileIndex is cached, update the userTypingStatus
-            if (profileIndex) {
+            if (profileIndex != undefined) {
                 var groupRef = ref(
                     database,
                     `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
@@ -1339,12 +1341,13 @@ $(".send-message").on("keypress", async function (e) {
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);
-        if (profileIndex) {
+
+        if (profileIndex != undefined) {
             var groupRef = ref(
                 database,
                 `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
             );
-
+            console.log("userTypingStatus");
             await update(groupRef, {
                 userTypingStatus: true,
             });
