@@ -1554,22 +1554,28 @@
                                                     <div class="accordion-body">
                                                         <div class="accordion-body-content"
                                                             style="display: none;">
-                                                            @if (Auth::guard('web')->user()->(profile) != '')
+                                                            @if (Auth::guard('web')->user()->('profile') != '')
+                                                            @php
+    $user = Auth::guard('web')->user();
+@endphp
                                                                 <img src="{{ $values['profile'] }}"
                                                                     alt="">
-                                                                <h5 class="">{{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }}
+                                                                    <h5>{{ $user->firstname }} {{ $user->lastname }}
 
-                                                                </h5>
+                                                                    </h5>
                                                             @endif
                                                             <span class="ms-auto">1</span>
                                                         </div>
                                                         <div class="accordion-body-content limits-count"
                                                             id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
                                                             @if ($values['profile'] == '')
+                                                            @php
+    $user = Auth::guard('web')->user();
+@endphp
                                                                 <h5
                                                                     class="{{ $fontColor }} add-item-under-text me-auto">
                                                                     {{ $initials }}</h5>
-                                                                <h5>{{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }}
+                                                                <h5>{{ $user->firstname }} {{ $user->lastname }}
 
                                                                 </h5>
                                                             @endif
