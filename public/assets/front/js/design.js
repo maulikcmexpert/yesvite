@@ -1779,6 +1779,7 @@ function bindData(current_event_id) {
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
         if (options.target && options.target.type === "textbox") {
+            console.log("clicked on text box");
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
         } else {
