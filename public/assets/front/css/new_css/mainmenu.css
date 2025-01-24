@@ -1428,7 +1428,7 @@
 
 .calendar-wrp .accordion-header span{
     border: 1px solid var(--border);
-    padding: 15px 20px;
+    padding: 10px 15px;
     border-radius: 10px;
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
