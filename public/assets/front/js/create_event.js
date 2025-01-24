@@ -7951,9 +7951,10 @@ $(document).on("click", "#close_editEvent", function (e) {
 if(final_step == "2"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
-        step2()
+        stepOpen2()
         $("#loader").css("display", "none");
-    },1000)
+    },2000)
+   
 }
 
 if(final_step == "3"){
