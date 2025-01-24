@@ -1557,7 +1557,8 @@
                                                             @if (Auth::guard('web')->user()->(profile) != '')
                                                                 <img src="{{ $values['profile'] }}"
                                                                     alt="">
-                                                                <h5 class="">{{ Auth::guard('web')->user()->('firstname')}}. ' ' . {{Auth::guard('web')->user()->('lastname') }}
+                                                                <h5 class="">{{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }}
+
                                                                 </h5>
                                                             @endif
                                                             <span class="ms-auto">1</span>
@@ -1568,7 +1569,8 @@
                                                                 <h5
                                                                     class="{{ $fontColor }} add-item-under-text me-auto">
                                                                     {{ $initials }}</h5>
-                                                                <h5>{{ Auth::guard('web')->user()->('firstname')}} . ' ' . {{Auth::guard('web')->user()->('lastname') }}
+                                                                <h5>{{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }}
+
                                                                 </h5>
                                                             @endif
                                                             @if (Auth::guard('web')->user()->('id') == $eventDetail['user_id'])
