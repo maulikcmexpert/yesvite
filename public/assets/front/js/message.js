@@ -1283,12 +1283,14 @@ async function setProfileIndexCache(conversationId) {
             // Find the profile with the matching user ID
             for (let i = 0; i < profiles.length; i++) {
                 if (profiles[i].id === senderUser) {
+                    console.log({ i });
                     profileIndexCache[conversationId] = i;
                     break;
                 }
             }
         }
     }
+    console.log(profileIndexCache[conversationId]);
     return profileIndexCache[conversationId];
 }
 
