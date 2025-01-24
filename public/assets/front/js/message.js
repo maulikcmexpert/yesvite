@@ -498,7 +498,7 @@ async function handleNewConversation(snapshot) {
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
-    if (firstTime === true || !isToMove) {
+    if (firstTime == true || !isToMove) {
         isToMove = true;
         return;
     }
@@ -510,57 +510,39 @@ function moveToTopOrBelowPinned(element) {
     let $chatList = $(".chat-list"); // Get the chat list container
     let parentDiv = element.closest("div"); // Get the parent div of the li element
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
+    let elementMsgTime = parseInt(element.attr("data-msgtime")); // Get the message time of the element
 
     // If the element is pinned, move it to the very top
     if (isPinned) {
-        console.log("pinned on top");
+        console.log("Pinned element moved to the top");
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
-        // If not pinned, sort it based on data-msgtime below the last pinned element
+        // If not pinned, move it after the last pinned element, or based on `data-msgtime`
         let lastPinnedDiv = $chatList.find("div:has(.pinned)").last();
+        let nonPinnedDivs = $chatList.find("div:not(:has(.pinned))");
+
         if (lastPinnedDiv.length > 0) {
-            // Find the correct position based on data-msgtime
-            let nonPinnedDivs = $chatList
-                .find("div:not(:has(.pinned))")
-                .toArray();
-            let currentMsgTime = parseInt(element.attr("data-msgtime"), 10);
-
-            let inserted = false;
-            for (let i = 0; i < nonPinnedDivs.length; i++) {
-                let currentDiv = $(nonPinnedDivs[i]);
-                let currentDivMsgTime = parseInt(
-                    currentDiv.find("li").attr("data-msgtime"),
-                    10
-                );
-
-                if (currentMsgTime > currentDivMsgTime) {
-                    currentDiv.before(parentDiv);
-                    inserted = true;
-                    break;
-                }
-            }
-
-            if (!inserted) {
-                $chatList.append(parentDiv); // Add to the end if no larger `data-msgtime` is found
-            }
+            // Place after the last pinned element
+            console.log("Placed after the last pinned element");
+            lastPinnedDiv.after(parentDiv);
         } else {
-            // If no pinned elements exist, sort among all non-pinned by data-msgtime
-            let sorted = $chatList
-                .find("div")
-                .toArray()
-                .sort((a, b) => {
-                    let timeA = parseInt(
-                        $(a).find("li").attr("data-msgtime"),
-                        10
-                    );
-                    let timeB = parseInt(
-                        $(b).find("li").attr("data-msgtime"),
-                        10
-                    );
-                    return timeB - timeA; // Descending order
-                });
+            // Sort by `data-msgtime` if there are no pinned elements
+            let inserted = false;
+            nonPinnedDivs.each(function () {
+                let currentLi = $(this).find("li");
+                let currentMsgTime = parseInt(currentLi.attr("data-msgtime"));
 
-            $chatList.empty().append(sorted);
+                if (elementMsgTime > currentMsgTime) {
+                    $(this).before(parentDiv);
+                    inserted = true;
+                    return false; // Break the loop
+                }
+            });
+
+            // If not inserted, append it at the end
+            if (!inserted) {
+                $chatList.append(parentDiv);
+            }
         }
     }
 }
