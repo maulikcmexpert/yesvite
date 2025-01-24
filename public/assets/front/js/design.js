@@ -1121,7 +1121,25 @@ function bindData(current_event_id) {
         return textWidth;
     }
 
-    function addIconsToTextbox(textbox) {}
+    function addIconsToTextbox(target) {
+        console.log("add to here");
+        console.log(target);
+        if (target.fontWeight == "bold") {
+            $(".bold-btn").addClass("activated");
+        } else {
+            $(".bold-btn").removeClass("activated");
+        }
+        if (target.fontStyle == "italic") {
+            $(".italic-btn").addClass("activated");
+        } else {
+            $(".italic-btn").removeClass("activated");
+        }
+        if (target.underline == true) {
+            $(".underline-btn").addClass("activated");
+        } else {
+            $(".underline-btn").removeClass("activated");
+        }
+    }
 
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
@@ -1494,7 +1512,6 @@ function bindData(current_event_id) {
         // Add the textbox to the canvas
         canvas.add(text);
 
-        addIconsToTextbox(text);
         canvas.renderAll();
 
         // Initial center calculation
@@ -1780,6 +1797,7 @@ function bindData(current_event_id) {
         discardIfMultipleObjects(options);
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
+
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
         } else {
@@ -2018,7 +2036,7 @@ function bindData(current_event_id) {
                 activeObject.set("text", capitalizedText);
             },
         };
-
+        addIconsToTextbox(activeObject.target);
         // Execute the corresponding command
         if (commands[command]) {
             commands[command](font); // Pass font to fontName if needed
