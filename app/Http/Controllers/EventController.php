@@ -163,7 +163,7 @@ class EventController extends BaseController
                                 'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone_number,
                                 'profile' => $userVal->profile ?? '',                               
                             ];
-                            if ($getEventData->is_draft_save == "1") {
+                            if ($getEventData->is_draft_save == "0") {
                                 $userEntry['isAlready'] = "1";
                             }
                         
@@ -202,7 +202,7 @@ class EventController extends BaseController
                                 'profile' => $userVal->photo ?? '',
                               
                             ];
-                            if ($getEventData->is_draft_save == "1") {
+                            if ($getEventData->is_draft_save == "0") {
                                 $userEntry['isAlready'] = "1";
                             }
                         
@@ -448,7 +448,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd(session('user_ids'));
+                    
                 }
             }
         } else {
