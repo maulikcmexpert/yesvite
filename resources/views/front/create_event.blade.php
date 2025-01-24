@@ -1554,10 +1554,11 @@
                                                     <div class="accordion-body">
                                                         <div class="accordion-body-content"
                                                             style="display: none;">
-                                                            @if ($values['profile'] != '')
+                                                            @if (Auth::guard('web')->user()->(profile) != '')
                                                                 <img src="{{ $values['profile'] }}"
                                                                     alt="">
-                                                                <h5 class="">{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                <h5 class="">{{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }}
+
                                                                 </h5>
                                                             @endif
                                                             <span class="ms-auto">1</span>
@@ -1568,10 +1569,11 @@
                                                                 <h5
                                                                     class="{{ $fontColor }} add-item-under-text me-auto">
                                                                     {{ $initials }}</h5>
-                                                                <h5>{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                <h5>{{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }}
+
                                                                 </h5>
                                                             @endif
-                                                            @if ($values['user_id'] == $eventDetail['user_id'])
+                                                            @if (Auth::guard('web')->user()->('id') == $eventDetail['user_id'])
                                                                 <div class="qty-container ms-auto">
                                                                     <input type="hidden"
                                                                         class="category-item-key"
@@ -1584,12 +1586,12 @@
                                                                         value="{{ $items['quantity'] }}">
                                                                     <input type="hidden"
                                                                         class="item-quantity-minus"
-                                                                        value="{{ $values['quantity'] }}">
+                                                                        value="0">
                                                                     <button class="qty-btnminus"
                                                                         type="button"><i
                                                                             class="fa fa-minus"></i></button>
                                                                     <input type="number" name="qty"
-                                                                        value="{{ $values['quantity'] }}"
+                                                                        value="0"
                                                                         class="input-qty" readonly="">
                                                                     <button class="qty-btnplus"
                                                                         type="button"><i

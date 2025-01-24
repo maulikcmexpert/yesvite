@@ -81,7 +81,7 @@
             $notification = getTotalUnreadNotification($user->id);
         
             if ($notification != 0) {
-                echo '<span class="notification_count_display">' . $notification . '</span>';
+                echo '<span class="n-badge notification_count_display">' . $notification . '</span>';
             }
         @endphp
         
