@@ -1251,6 +1251,14 @@
     background-color: var(--primaryColor) !important;
 }
 
+.edit-images-button-inner button.activated h6{
+    color: #fff !important;
+}
+
+.edit-images-button-inner button{
+    padding: 10px !important;
+}
+
 .edit-images-button-inner [type="file"] {
     display: block;
     width: 100% !important;
