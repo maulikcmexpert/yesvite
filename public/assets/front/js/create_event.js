@@ -7959,7 +7959,7 @@ if(final_step == "2"){
     setTimeout(function(){
         stepOpen2()
         $("#loader").css("display", "none");
-    },2000)
+    },1000)
    
 }
 
@@ -7968,7 +7968,7 @@ if(final_step == "3"){
     setTimeout(function(){
         step3open()
         $("#loader").css("display", "none");
-    },2000)
+    },1000)
 }
 
 if(final_step == "4"){
@@ -7976,7 +7976,7 @@ if(final_step == "4"){
     setTimeout(function(){
         step4open()
         $("#loader").css("display", "none");
-    },2000) 
+    },1000) 
 }
 
 
