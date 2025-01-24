@@ -699,7 +699,7 @@ function datepicker() {
         const startTime = e.date; // Get the selected start time
         if (startTime) {
             const endTime = startTime.clone().add(1, 'hour'); // Add 1 hour to the start time
-            $(".timepicker").data("DateTimePicker").minDate(startTime); // Set the minimum time for end time
+            // $(".timepicker").data("DateTimePicker").minDate(startTime); // Set the minimum time for end time
             $(".timepicker").data("DateTimePicker").date(endTime); // Set the default end time
         }
     }).on('dp.show', function () {
