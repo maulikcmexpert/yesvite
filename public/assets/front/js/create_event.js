@@ -753,7 +753,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 function initializePickers() {
     // Initialize Start Time Picker
     $(".start_timepicker").datetimepicker({
-        format: "LT",
+        format: "LT", // "LT" for 12-hour time format with AM/PM
         icons: {
             up: "fa fa-chevron-up",
             down: "fa fa-chevron-down",
@@ -762,34 +762,35 @@ function initializePickers() {
         ignoreReadonly: true,
         stepping: 15,
     }).on('dp.change', function (e) {
-        // When the start time changes, update the end time picker
         const startTime = e.date; // Get the selected start time
         if (startTime) {
             const endTime = startTime.clone().add(1, 'hour'); // Add 1 hour to the start time
-            $(".end_timepicker").data("DateTimePicker").minDate(startTime); // Restrict end time to be >= start time
-            $(".end_timepicker").data("DateTimePicker").date(endTime); // Set default end time
+            const endPicker = $(".end_timepicker").data("DateTimePicker");
+
+            // Update the end time picker's constraints and value
+            endPicker.minDate(startTime); // Restrict end time to be >= start time
+            endPicker.date(endTime); // Set default end time
+
+            // Ensure the AM/PM is updated correctly
+            $(".end_timepicker").val(endTime.format("LT"));
         }
     }).on('dp.show', function () {
-                $(this).val(""); // Set the formatted time value in the input field
-        
-                const picker = $(this).data("DateTimePicker");
-                const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
-        
-                // Set the picker to the closest 15-minute time dynamically
-                picker.date(closest15MinTime); 
-        
-                $(".start_timepicker").val("");
-        
-                
+        $(this).val(""); // Clear the input field when the picker is shown
+
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime);
     }).on('dp.hide', function (e) {
-                // Automatically set the selected value in the input field when the picker closes
-                const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-                $(this).val(selectedTime); // Set the formatted time value in the input field
-            });
+        // Automatically set the selected value in the input field when the picker closes
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime); // Set the formatted time value in the input field
+    });
 
     // Initialize End Time Picker
     $(".end_timepicker").datetimepicker({
-        format: "LT",
+        format: "LT", // "LT" for 12-hour time format with AM/PM
         icons: {
             up: "fa fa-chevron-up",
             down: "fa fa-chevron-down",
@@ -807,11 +808,16 @@ function initializePickers() {
                 picker.date(endTime); // Set default end time when opening the picker
             }
         }
+    }).on('dp.hide', function (e) {
+        // Ensure the input reflects the selected value when the picker is closed
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime);
     });
 }
 
-// Call the function to initialize the pickers
+// Initialize the pickers
 initializePickers();
+
 
 // function getClosest15MinuteTime() {
 //     const now = new Date();
@@ -7681,6 +7687,7 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
     eventData.is_update_event = "0";
+    eventData.isDraftEdit= $(this).attr('data-isDraftEdit');
     savePage1Data();
     savePage3Data();
     savePage4Data();
