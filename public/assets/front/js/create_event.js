@@ -694,14 +694,6 @@ function datepicker() {
         // Set stepping to 15 minutes
         // defaultDate: now
         //  debug: true
-    }).on('dp.change', function (e) {
-        // When the start time changes, update the end time picker with +1 hour
-        const startTime = e.date; // Get the selected start time
-        if (startTime) {
-            const endTime = startTime.clone().add(1, 'hour'); // Add 1 hour to the start time
-            // $(".timepicker").data("DateTimePicker").minDate(startTime); // Set the minimum time for end time
-            $(".timepicker").data("DateTimePicker").date(endTime); // Set the default end time
-        }
     }).on('dp.show', function () {
         const picker = $(this).data("DateTimePicker");
         const closest15MinTime = getClosest15MinuteTime();
@@ -7756,7 +7748,7 @@ if(final_step == "2"){
     setTimeout(function(){
         step2Open()
         $("#loader").css("display", "none");
-    },700)
+    },100)
    
 }
 
@@ -7765,7 +7757,7 @@ if(final_step == "3"){
     setTimeout(function(){
         step3open()
         $("#loader").css("display", "none");
-    },700)
+    },100)
 }
 
 if(final_step == "4"){
@@ -7773,7 +7765,7 @@ if(final_step == "4"){
     setTimeout(function(){
         step4open()
         $("#loader").css("display", "none");
-    },700) 
+    },100) 
 }
 
 
@@ -7813,8 +7805,6 @@ function step2Open(){
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
         handleActiveClass('.li_event_detail');
-        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
-        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
@@ -7921,7 +7911,6 @@ function step3open(){
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
         handleActiveClass(".li_guest");
-        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
         // alert(stepVal);
