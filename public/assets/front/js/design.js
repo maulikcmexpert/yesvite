@@ -1142,6 +1142,26 @@ function bindData(current_event_id) {
         } else {
             $(".underline-btn").removeClass("activated");
         }
+        if (target.textAlign == "left") {
+            $(".justyfy-left-btn").addClass("activated");
+        } else {
+            $(".justyfy-left-btn").removeClass("activated");
+        }
+        if (target.textAlign == "center") {
+            $(".justyfy-center-btn").addClass("activated");
+        } else {
+            $(".justyfy-center-btn").removeClass("activated");
+        }
+        if (target.textAlign == "right") {
+            $(".justyfy-right-btn").addClass("activated");
+        } else {
+            $(".justyfy-right-btn").removeClass("activated");
+        }
+        if (target.textAlign == "justify") {
+            $(".justyfy-full-btn").addClass("activated");
+        } else {
+            $(".justyfy-full-btn").removeClass("activated");
+        }
     }
 
     canvas = new fabric.Canvas("imageEditor1", {
