@@ -2708,7 +2708,7 @@ class EventController extends BaseController
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
 
 
-        $startDateFormat = $startDate;
+        $startDateFormat = "";
         $endDateFormat =  $endDate;
         if ($startDateObj && $endDateObj) {
             $startDateFormat = $startDateObj->format('Y-m-d');
@@ -2756,8 +2756,8 @@ class EventController extends BaseController
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
-        $event_creation->start_date = (isset($startDate) && $startDate != "") ? $startDateFormat : null;
-        $event_creation->end_date = (isset($endDate) && $endDate != "") ? $endDateFormat : null;
+        $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj!=false) ? $startDateFormat : $startDate;
+        $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj !=false) ? $endDateFormat : $endDate;
         $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         // dd($request->rsvp_by_date_set,$event_creation->rsvp_by_date_set);
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;

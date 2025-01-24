@@ -210,11 +210,10 @@
                         <h4 class="event_create_percent">25%</h4>
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
-                    @if ($eventDetail['id']=="")
-                    <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
-                        
-                    @elseif ($eventDetail['isCohost']=="1")
-                    <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
+                    @if ($eventDetail['id'] == '')
+                        <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
+                    @elseif ($eventDetail['isCohost'] == '1')
+                        <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
                     @endif
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -324,88 +323,88 @@
     <div class="main-content-sidebar">
         <div class="new-event-sidebar-wrp">
             <div class="new-event-sidebar-menu">
-                @if (isset($eventDetail['id']) && $eventDetail['id']!="")
-                <ul>
-                    <!-- ---for active menu add active class--- -->
+                @if (isset($eventDetail['id']) && $eventDetail['id'] != '')
+                    <ul>
+                        <!-- ---for active menu add active class--- -->
 
-                    <li class="li_design">
-                        <div class="menu-circle-wrp side-bar-list menu-success">
-                            <span class="design-span active"></span>
-                            <h3>Design</h3>
-                        </div>
-                        <ul class="new-event-sidebar-sub-menu">
-                            <li class="pick-card ">
-                                <div class="side-bar-sub-list menu-success">
-                                    <h3>Pick Design</h3>
-                                </div>
-                            </li>
-                            <li class="edit-design active">
-                                <div class="side-bar-sub-list menu-success">
-                                    <h3>Edit Design</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="li_event_detail active">
-                        <div class="menu-circle-wrp side-bar-list menu-success ">
-                            <span></span>
-                            <h3>Event Details</h3>
-                        </div>
-                    </li>
-                    <li class="li_guest active">
-                        <div class="menu-circle-wrp side-bar-list menu-success">
-                            <span></span>
-                            <h3>Guests</h3>
-                        </div>
-                    </li>
-                    <li class="li_setting active">
-                        <div class="menu-circle-wrp side-bar-list menu-success">
-                            <span></span>
-                            <h3>Settings</h3>
-                        </div>
-                    </li>
-                </ul>
-                @else    
-                <ul>
-                    <!-- ---for active menu add active class--- -->
+                        <li class="li_design">
+                            <div class="menu-circle-wrp side-bar-list menu-success">
+                                <span class="design-span active"></span>
+                                <h3>Design</h3>
+                            </div>
+                            <ul class="new-event-sidebar-sub-menu">
+                                <li class="pick-card ">
+                                    <div class="side-bar-sub-list menu-success">
+                                        <h3>Pick Design</h3>
+                                    </div>
+                                </li>
+                                <li class="edit-design active">
+                                    <div class="side-bar-sub-list menu-success">
+                                        <h3>Edit Design</h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="li_event_detail active">
+                            <div class="menu-circle-wrp side-bar-list menu-success ">
+                                <span></span>
+                                <h3>Event Details</h3>
+                            </div>
+                        </li>
+                        <li class="li_guest active">
+                            <div class="menu-circle-wrp side-bar-list menu-success">
+                                <span></span>
+                                <h3>Guests</h3>
+                            </div>
+                        </li>
+                        <li class="li_setting active">
+                            <div class="menu-circle-wrp side-bar-list menu-success">
+                                <span></span>
+                                <h3>Settings</h3>
+                            </div>
+                        </li>
+                    </ul>
+                @else
+                    <ul>
+                        <!-- ---for active menu add active class--- -->
 
-                    <li class="li_design">
-                        <div class="menu-circle-wrp side-bar-list ">
-                            <span class="design-span active"></span>
-                            <h3>Design</h3>
-                        </div>
-                        <ul class="new-event-sidebar-sub-menu">
-                            <li class="pick-card active">
-                                <div class="side-bar-sub-list">
-                                    <h3>Pick Design</h3>
-                                </div>
-                            </li>
-                            <li class="edit-design">
-                                <div class="side-bar-sub-list">
-                                    <h3>Edit Design</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="li_event_detail">
-                        <div class="menu-circle-wrp side-bar-list  ">
-                            <span></span>
-                            <h3>Event Details</h3>
-                        </div>
-                    </li>
-                    <li class="li_guest">
-                        <div class="menu-circle-wrp side-bar-list">
-                            <span></span>
-                            <h3>Guests</h3>
-                        </div>
-                    </li>
-                    <li class="li_setting">
-                        <div class="menu-circle-wrp side-bar-list">
-                            <span></span>
-                            <h3>Settings</h3>
-                        </div>
-                    </li>
-                </ul>
+                        <li class="li_design">
+                            <div class="menu-circle-wrp side-bar-list ">
+                                <span class="design-span active"></span>
+                                <h3>Design</h3>
+                            </div>
+                            <ul class="new-event-sidebar-sub-menu">
+                                <li class="pick-card active">
+                                    <div class="side-bar-sub-list">
+                                        <h3>Pick Design</h3>
+                                    </div>
+                                </li>
+                                <li class="edit-design">
+                                    <div class="side-bar-sub-list">
+                                        <h3>Edit Design</h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="li_event_detail">
+                            <div class="menu-circle-wrp side-bar-list  ">
+                                <span></span>
+                                <h3>Event Details</h3>
+                            </div>
+                        </li>
+                        <li class="li_guest">
+                            <div class="menu-circle-wrp side-bar-list">
+                                <span></span>
+                                <h3>Guests</h3>
+                            </div>
+                        </li>
+                        <li class="li_setting">
+                            <div class="menu-circle-wrp side-bar-list">
+                                <span></span>
+                                <h3>Settings</h3>
+                            </div>
+                        </li>
+                    </ul>
                 @endif
             </div>
         </div>
@@ -432,9 +431,15 @@
                 <div>
                     <h3>Pro</h3>
                     <button class="">
-                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5514 4.66603L4.70976 11.9077C4.45142 12.1827 4.20142 12.7244 4.15142 13.0994L3.84309 15.7994C3.73476 16.7744 4.43476 17.441 5.40142 17.2744L8.08476 16.816C8.45976 16.7494 8.98476 16.4744 9.24309 16.191L16.0848 8.94937C17.2681 7.69937 17.8014 6.27437 15.9598 4.5327C14.1264 2.8077 12.7348 3.41603 11.5514 4.66603Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10.4102 5.875C10.7685 8.175 12.6352 9.93333 14.9518 10.1667" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11.5514 4.66603L4.70976 11.9077C4.45142 12.1827 4.20142 12.7244 4.15142 13.0994L3.84309 15.7994C3.73476 16.7744 4.43476 17.441 5.40142 17.2744L8.08476 16.816C8.45976 16.7494 8.98476 16.4744 9.24309 16.191L16.0848 8.94937C17.2681 7.69937 17.8014 6.27437 15.9598 4.5327C14.1264 2.8077 12.7348 3.41603 11.5514 4.66603Z"
+                                stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M10.4102 5.875C10.7685 8.175 12.6352 9.93333 14.9518 10.1667" stroke="black"
+                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </button>
                 </div>
@@ -445,7 +450,8 @@
                     <h6 class="invite-count">0</h6>
                     {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
                     <input type="hidden" id="event_guest_left_count" />
-                    <p class="invite-left_d"><strong>Invites | <span class="available-coins">{{$coins}}</span></strong> Left</p>
+                    <p class="invite-left_d"><strong>Invites | <span
+                                class="available-coins">{{ $coins }}</span></strong> Left</p>
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 <div class="invite-right">
@@ -782,9 +788,9 @@
                 <!-- <button class="nav-link active add_co_host" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
                     type="button" role="tab" aria-controls="#contact" aria-selected="true">Yestive
                     Contacts</button> -->
-                <button class="nav-link add_co_host_tab active" data-isHost="1" id="contact-tab" data-bs-toggle="tab"
-                    data-bs-target="#contact" type="button" role="tab" aria-controls="#contact"
-                    aria-selected="true">Yestive
+                <button class="nav-link add_co_host_tab active" data-isHost="1" id="contact-tab"
+                    data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab"
+                    aria-controls="#contact" aria-selected="true">Yestive
                     Contacts</button>
             </li>
             <li class="nav-item" role="presentation">
@@ -800,20 +806,20 @@
                         <div class="guest-img">
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
                             <h5 class="add-item-under-text selected-host-h5"></h5>
-                            @if ($eventDetail['isCohost'] == "1")
-                            <a href="#" class="close remove_co_host">
-                                <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="1.8999" y="1" width="16" height="16" rx="8"
-                                        fill="#F73C71" />
-                                    <rect x="1.8999" y="1" width="16" height="16" rx="8"
-                                        stroke="white" stroke-width="2" />
-                                    <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
+                            @if ($eventDetail['isCohost'] == '1')
+                                <a href="#" class="close remove_co_host">
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1.8999" y="1" width="16" height="16" rx="8"
+                                            fill="#F73C71" />
+                                        <rect x="1.8999" y="1" width="16" height="16" rx="8"
+                                            stroke="white" stroke-width="2" />
+                                        <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
                             @endif
                             <input type="hidden" id="remove_co_host_id">
                         </div>
@@ -855,22 +861,20 @@
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img src="./assets/image/user-img.svg" alt="guest-img">
-                            @if ($eventDetail['isCohost'] == "1")
-                                
-                           
-                            <a href="#" class="close">
-                                <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="1.8999" y="1" width="16" height="16" rx="8"
-                                        fill="#F73C71" />
-                                    <rect x="1.8999" y="1" width="16" height="16" rx="8"
-                                        stroke="white" stroke-width="2" />
-                                    <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
+                            @if ($eventDetail['isCohost'] == '1')
+                                <a href="#" class="close">
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1.8999" y="1" width="16" height="16" rx="8"
+                                            fill="#F73C71" />
+                                        <rect x="1.8999" y="1" width="16" height="16" rx="8"
+                                            stroke="white" stroke-width="2" />
+                                        <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
                             @endif
                         </div>
                         <h6 class="guest-name">Silvia Alegra</h6>
@@ -1388,7 +1392,8 @@
                                             </span>
                                             <h6 class="me-2 missing-category-h6-{{ $data['id'] }}"
                                                 style="color: rgb(192, 52, 52);"><span
-                                                    id="missing-category-{{ $data['id'] }}">{{$data['remainingQnt']}}</span> Missing</h6>
+                                                    id="missing-category-{{ $data['id'] }}">{{ $data['remainingQnt'] }}</span>
+                                                Missing</h6>
                                         @else
                                             <span
                                                 class="me-2 missing-category-h6-{{ $data['id'] }} missing-category-svg-{{ $data['id'] }}"
@@ -1549,128 +1554,127 @@
                                                 </h2>
                                                 @if (count($items['item_carry_users']) == 0)
                                                     <div id="lumpia-collapseOne-{{ $items['id'] }}-{{ $data['id'] }}"
-                                                    class="accordion-collapse d-none" aria-labelledby="lumpia"
-                                                    data-bs-parent="#accordionFlushExample" >
-                                                    <div class="accordion-body">
-                                                        <div class="accordion-body-content"
-                                                            style="display: none;">
-                                                            @if (Auth::guard('web')->user()->profile != '')
-                                                            @php
-    $user = Auth::guard('web')->user();
-@endphp
-                                                                <img src="{{ Auth::guard('web')->user()->profile }}"
-                                                                    alt="">
+                                                        class="accordion-collapse d-none" aria-labelledby="lumpia"
+                                                        data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <div class="accordion-body-content"
+                                                                style="display: none;">
+                                                                @if (Auth::guard('web')->user()->profile != '')
+                                                                    @php
+                                                                        $user = Auth::guard('web')->user();
+                                                                    @endphp
+                                                                    <img src="{{ Auth::guard('web')->user()->profile }}"
+                                                                        alt="">
                                                                     <h5>{{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
-                                                            @endif
-                                                            <span class="ms-auto">1</span>
-                                                        </div>
-                                                        <div class="accordion-body-content limits-count"
-                                                            id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
-                                                            @if (Auth::guard('web')->user()->profile == '')
-                                                            @php
-    $user = Auth::guard('web')->user();
-@endphp
-                                                                <h5
-                                                                    class="{{ $fontColor }} add-item-under-text me-auto">
-                                                                    {{ $initials }}</h5>
-                                                                <h5>{{ $user->firstname }} {{ $user->lastname }}
+                                                                @endif
+                                                                <span class="ms-auto">1</span>
+                                                            </div>
+                                                            <div class="accordion-body-content limits-count"
+                                                                id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                                                                @if (Auth::guard('web')->user()->profile == '')
+                                                                    @php
+                                                                        $user = Auth::guard('web')->user();
+                                                                    @endphp
+                                                                    <h5
+                                                                        class="{{ $fontColor }} add-item-under-text me-auto">
+                                                                        {{ $initials }}</h5>
+                                                                    <h5>{{ $user->firstname }} {{ $user->lastname }}
 
-                                                                </h5>
-                                                            @endif
-                                                            @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
-                                                                <div class="qty-container ms-auto">
-                                                                    <input type="hidden"
-                                                                        class="category-item-key"
-                                                                        value="{{ $items['id'] }}">
-                                                                    <input type="hidden"
-                                                                        class="category-index-key"
-                                                                        value="{{ $data['id'] }}">
-                                                                    <input type="hidden"
-                                                                        class="category-item-quantity"
-                                                                        value="{{ $items['quantity'] }}">
-                                                                    <input type="hidden"
-                                                                        class="item-quantity-minus"
-                                                                        value="0">
-                                                                    <button class="qty-btnminus"
-                                                                        type="button"><i
-                                                                            class="fa fa-minus"></i></button>
-                                                                    <input type="number" name="qty"
-                                                                        value="0"
-                                                                        class="input-qty" readonly="">
-                                                                    <button class="qty-btnplus"
-                                                                        type="button"><i
-                                                                            class="fa fa-plus"></i></button>
-                                                                </div>
+                                                                    </h5>
+                                                                @endif
+                                                                @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
+                                                                    <div class="qty-container ms-auto">
+                                                                        <input type="hidden"
+                                                                            class="category-item-key"
+                                                                            value="{{ $items['id'] }}">
+                                                                        <input type="hidden"
+                                                                            class="category-index-key"
+                                                                            value="{{ $data['id'] }}">
+                                                                        <input type="hidden"
+                                                                            class="category-item-quantity"
+                                                                            value="{{ $items['quantity'] }}">
+                                                                        <input type="hidden"
+                                                                            class="item-quantity-minus"
+                                                                            value="0">
+                                                                        <button class="qty-btnminus"
+                                                                            type="button"><i
+                                                                                class="fa fa-minus"></i></button>
+                                                                        <input type="number" name="qty"
+                                                                            value="0" class="input-qty"
+                                                                            readonly="">
+                                                                        <button class="qty-btnplus"
+                                                                            type="button"><i
+                                                                                class="fa fa-plus"></i></button>
+                                                                    </div>
 
-                                                                <div class="d-flex">
-                                                                    <a href="#" class="me-3">
-                                                                        <svg width="16" height="16"
-                                                                            viewBox="0 0 16 16" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
-                                                                                stroke="#94A3B8"
-                                                                                stroke-width="1.5"
-                                                                                stroke-miterlimit="10"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"></path>
-                                                                            <path
-                                                                                d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
-                                                                                stroke="#94A3B8"
-                                                                                stroke-width="1.5"
-                                                                                stroke-miterlimit="10"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"></path>
-                                                                        </svg>
-                                                                    </a>
-                                                                    <a href="#" class="delete-self-bring"
-                                                                        data-categoryitem="{{ $items['id'] }}"
-                                                                        data-categoryindex="{{ $data['id'] }}"
-                                                                        data-itemquantity="{{$items['quantity']}}">
-                                                                        <svg width="16" height="16"
-                                                                            viewBox="0 0 16 16" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
-                                                                                stroke="#F73C71"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round">
-                                                                            </path>
-                                                                            <path
-                                                                                d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
-                                                                                stroke="#F73C71"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round">
-                                                                            </path>
-                                                                            <path
-                                                                                d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
-                                                                                stroke="#F73C71"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round">
-                                                                            </path>
-                                                                            <path d="M6.88666 11H9.10666"
-                                                                                stroke="#F73C71"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"></path>
-                                                                            <path d="M6.33331 8.33398H9.66665"
-                                                                                stroke="#F73C71"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"></path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            @endif
+                                                                    <div class="d-flex">
+                                                                        <a href="#" class="me-3">
+                                                                            <svg width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
+                                                                                    stroke="#94A3B8"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-miterlimit="10"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"></path>
+                                                                                <path
+                                                                                    d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
+                                                                                    stroke="#94A3B8"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-miterlimit="10"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"></path>
+                                                                            </svg>
+                                                                        </a>
+                                                                        <a href="#" class="delete-self-bring"
+                                                                            data-categoryitem="{{ $items['id'] }}"
+                                                                            data-categoryindex="{{ $data['id'] }}"
+                                                                            data-itemquantity="{{ $items['quantity'] }}">
+                                                                            <svg width="16" height="16"
+                                                                                viewBox="0 0 16 16" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
+                                                                                    stroke="#F73C71"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
+                                                                                    stroke="#F73C71"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
+                                                                                    stroke="#F73C71"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round">
+                                                                                </path>
+                                                                                <path d="M6.88666 11H9.10666"
+                                                                                    stroke="#F73C71"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"></path>
+                                                                                <path d="M6.33331 8.33398H9.66665"
+                                                                                    stroke="#F73C71"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"></path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                                                       
                                                 @endif
                                                 @foreach ($items['item_carry_users'] as $values)
                                                     @php
@@ -1692,7 +1696,8 @@
                                                                 @if ($values['profile'] != '')
                                                                     <img src="{{ $values['profile'] }}"
                                                                         alt="">
-                                                                    <h5 class="me-auto">{{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                    <h5 class="me-auto">
+                                                                        {{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                                     </h5>
                                                                 @endif
                                                                 <span class="ms-auto">1</span>
@@ -1703,7 +1708,8 @@
                                                                     <h5
                                                                         class="{{ $fontColor }} add-item-under-text">
                                                                         {{ $initials }}</h5>
-                                                                    <h5 class="me-auto"> {{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                                    <h5 class="me-auto">
+                                                                        {{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                                     </h5>
                                                                 @endif
                                                                 @if ($values['user_id'] == $eventDetail['user_id'])
@@ -1755,7 +1761,7 @@
                                                                         <a href="#" class="delete-self-bring"
                                                                             data-categoryitem="{{ $items['id'] }}"
                                                                             data-categoryindex="{{ $data['id'] }}"
-                                                                            data-itemquantity="{{$items['quantity']}}">
+                                                                            data-itemquantity="{{ $items['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -2982,21 +2988,11 @@
         isset($eventDetail['gift_registry_list']) && count($eventDetail['gift_registry_list']) > 0
             ? $eventDetail['gift_registry_list']
             : null;
-    $design_image =
-        isset($eventDetail['design_image'])? $eventDetail['design_image']
-            : null;
-    $static_information =
-        isset($eventDetail['static_information'])? $eventDetail['static_information']
-            : null;
-    $step =
-        isset($eventDetail['step'])? $eventDetail['step']
-            : null;
-    $eventID =
-        isset($eventDetail['id'])? $eventDetail['id']
-            : null;
-    $isDraft =
-        isset($eventDetail['is_draft_save'])? $eventDetail['is_draft_save']
-            : null;
+    $design_image = isset($eventDetail['design_image']) ? $eventDetail['design_image'] : null;
+    $static_information = isset($eventDetail['static_information']) ? $eventDetail['static_information'] : null;
+    $step = isset($eventDetail['step']) ? $eventDetail['step'] : null;
+    $eventID = isset($eventDetail['id']) ? $eventDetail['id'] : null;
+    $isDraft = isset($eventDetail['is_draft_save']) ? $eventDetail['is_draft_save'] : null;
 
     $cohostpreferby =
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
@@ -3009,7 +3005,7 @@
     $cohostFname =
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
             ? $eventDetail['co_host_list'][0]['first_name']
-            : ''; 
+            : '';
     $cohostLname =
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
             ? $eventDetail['co_host_list'][0]['last_name']
@@ -3030,9 +3026,9 @@
 <input type="hidden" id="isCohost" value="{{ $eventDetail['isCohost'] }}">
 <input type="hidden" id="design_image" value="{{ $design_image }}">
 <input type="hidden" id="static_information" value="{{ $static_information }}">
-<input type="hidden" id="step" value="{{  $step}}">
-<input type="hidden" id="isDraft" value="{{  $isDraft}}">
-<input type="hidden" id="eventID" value="{{  $eventID}}">
+<input type="hidden" id="step" value="{{ $step }}">
+<input type="hidden" id="isDraft" value="{{ $isDraft }}">
+<input type="hidden" id="eventID" value="{{ $eventID }}">
 <input type="hidden" id="cohostId" value="{{ $cohostId }}">
 <input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">
 <input type="hidden" id="cohostprofile" value="{{ $cohostprofile }}">
