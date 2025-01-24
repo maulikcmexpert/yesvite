@@ -713,7 +713,8 @@ function datepicker() {
     });
 
     // Ensure input field is clear when the page loads
-    $(".timepicker").val("");
+    $(".activity_start_time").val("");
+    $(".activity_end_time").val("");
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
@@ -1016,7 +1017,7 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
-        datepicker();
+        // datepicker();
         startDate.add(1, "day");
     }
 
