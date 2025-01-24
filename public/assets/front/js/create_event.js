@@ -7966,7 +7966,11 @@ if(final_step == "3"){
 }
 
 if(final_step == "4"){
-    
+    $("#loader").css("display", "flex");
+    setTimeout(function(){
+        step4open()
+        $("#loader").css("display", "none");
+    },2000) 
 }
 
 
@@ -8117,6 +8121,95 @@ function step3open(){
         // alert(stepVal);
         if (stepVal == "0") {
             get_user(type);
+        }
+    }
+}
+
+function step4open(){
+    $("#close_createEvent").css("display", "block");
+
+    var event_name = $("#event-name").val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+    var address1 = $("#address1").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipcode = $("#zipcode").val();
+
+    if (event_name == "") {
+        toastr.error("Please enter event name");
+        return;
+    }
+    if (event_name == "") {
+        toastr.error("Please enter hosted by");
+        return;
+    }
+    if (hostedby == "") {
+        toastr.error("Please enter event name");
+        return;
+    }
+    if (event_date == "") {
+        toastr.error("Please enter start date");
+        return;
+    }
+    if (start_time == "") {
+        toastr.error("Please enter start time");
+        return;
+    }
+    if (end_time) {
+        rsvp_end_time = $("#end-time").val();
+        if (rsvp_end_time == "") {
+            toastr.error("Please select end time");
+            return;
+        }
+    }
+    if (rsvp_by_date_set) {
+        rsvp_by_date = $("#rsvp-by-date").val();
+        if (rsvp_by_date == "") {
+            toastr.error("RSVP by Date : Please select RSVP date");
+            return;
+        }
+    }
+    if ($("#isCheckAddress").is(":checked")) {
+        if (address1 == "") {
+            toastr.error("Please enter address1");
+            return;
+        }
+        if (city == "") {
+            toastr.error("Please enter city");
+            return;
+        }
+        if (state == "") {
+            toastr.error("Please enter state");
+            return;
+        }
+        if (zipcode == "") {
+            toastr.error("Please enter zipcode");
+            return;
+        }
+    }
+    var design = eventData.desgin_selected;
+    var step3 = eventData.step;
+    if (step3 > 3) {
+        $("#sidebar_select_design_category").css("display", "none");
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $("#edit-design-temp").css("display", "none");
+        $(".step_3").css("display", "none");
+        $(".step_final_checkout").css("display", "none");
+        $(".step_4").show();
+        $(".event_create_percent").text("99%");
+        $(".current_step").text("4 of 4");
+
+        handleActiveClass('.li_setting');
+        active_responsive_dropdown("drop-down-event-setting");
+        if (design == undefined || design == "") {
+        } else {
+            $(".pick-card").addClass("menu-success");
+            $(".edit-design").addClass("menu-success");
         }
     }
 }
