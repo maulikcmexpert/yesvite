@@ -7861,3 +7861,59 @@ $(document).on("click", ".design-sidebar-action", function() {
         }
     }
 });
+
+$(document).on("click", "#close_editEvent", function () {
+    var event_type = $("#event-type").val();
+    var event_name = $("#event-name").val();
+    var event_date = $("#event-date").val();
+    if (event_type == "") {
+        $("#deleteModal").modal("show");
+        return;
+    }
+ 
+    if (event_date == "") {
+        $("#deleteModal").modal("show");
+        return;
+    }
+    $("#loader").css("display", "block");
+
+        let text = $(".current_step").text();
+        let firstLetter = text.split(" ")[0];
+       
+        if (final_step == 2) {
+            savePage1Data(1);
+        }
+        if (final_step == 3) {
+            var savePage3Result = savePage3Data(1);
+            console.log(savePage3Result);
+
+            if (savePage3Result === false) {
+                $("#loader").css("display", "none");
+                return; 
+            }
+        }
+
+        eventData.step = final_step;
+        eventData.isdraft = "1";
+        savePage4Data();
+        $.ajax({
+            url: base_url + "event/editStore",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: eventData,
+            success: function (response) {
+                if (response == 1) {
+                    window.location.href = "home";
+                    toastr.success("Event Saved as Draft");
+                    setTimeout(function () {
+                        $("#loader").css("display", "none");
+                    }, 4000);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+            },
+        });
+});
