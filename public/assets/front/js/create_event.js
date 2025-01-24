@@ -102,18 +102,7 @@ if (selected_dataId != "") {
     toggleSidebar();
 }
 
-if(final_step == "2"){
-    alert("hiiii")
-    step2()
-}
 
-if(final_step == "3"){
-    
-}
-
-if(final_step == "4"){
-    
-}
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -756,8 +745,8 @@ function start_timepicker() {
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
+datepicker(); 
 start_timepicker();
-datepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -7957,6 +7946,24 @@ $(document).on("click", "#close_editEvent", function (e) {
             
         });
 });
+
+
+if(final_step == "2"){
+    alert("hiiii")
+    setTimeout(function(){
+        step2()
+
+    },5000)
+}
+
+if(final_step == "3"){
+    
+}
+
+if(final_step == "4"){
+    
+}
+
 
 function step2(){
     $("#close_createEvent").css("display", "block");
