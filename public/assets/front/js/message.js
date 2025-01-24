@@ -3702,7 +3702,7 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
         $(".mute-icn").addClass("d-none");
         $(".unmute-icn").removeClass("d-none");
     } else {
-        $$(".multi-mute").attr("changeWith", "1");
+        $(".multi-mute").attr("changeWith", "1");
         $(".mute-icn").removeClass("d-none");
         $(".unmute-icn").addClass("d-none");
     }
