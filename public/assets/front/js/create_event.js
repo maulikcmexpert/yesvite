@@ -4404,6 +4404,9 @@ function toggleSidebar(id = null) {
 
     console.log(id);
     
+    if(id=="sidebar_add_co_host"){
+        alert();
+    }
     document.body.classList.add("no-scroll"); // Disable background scrolling
     const allSidebars = document.querySelectorAll(".sidebar");
     const allOverlays = document.querySelectorAll(".overlay");
