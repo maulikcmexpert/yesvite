@@ -742,11 +742,14 @@ function start_timepicker() {
 
         // Set the picker to the closest 15-minute time dynamically
         picker.date(closest15MinTime); 
-    });
+    }).on('dp.hide', function (e) {
+        // Automatically set the selected value in the input field when the picker closes
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime); // Set the formatted time value in the input field
+    });;
 
     // Ensure input field is clear when the page loads
-    $(this).val("");
-    $(this).val("");
+
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
