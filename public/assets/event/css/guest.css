@@ -723,6 +723,12 @@
     .responsive_invite_user {
         min-width: 47px;
     }
+
+    .list_thankyou_card {
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 210px) !important;
+    }
 }
 
 @media only screen and (max-width:768px) {
@@ -895,6 +901,11 @@
     }
     #sidebar_thankyou_card:has(.alert-box) .list_thankyou_card {
         max-height: calc(100vh - 490px) !important;
+    }
+    .list_thankyou_card {
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 440px) !important;
     }
 }
 
