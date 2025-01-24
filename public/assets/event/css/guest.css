@@ -696,8 +696,8 @@
     }
 
     .guest-main-content:has(.group-card.view_members) .user-contacts{
-        max-height: calc(100vh - 380px);    
-    } 
+        max-height: calc(100vh - 380px);
+    }
 
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
         max-height: calc(100vh - 440px);
@@ -710,10 +710,14 @@
     }
 
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user) .user-contacts{
-        max-height: calc(100vh - 365px);
+        max-height: calc(100vh - 320px);
     }
     .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user) .user-contacts{
-        max-height: calc(100vh - 365px);
+        max-height: calc(100vh - 320px);
+    }
+
+    .new-guest-content-wrp .user-contacts{
+        max-height: calc(100vh - 260px);
     }
 
 
@@ -874,6 +878,14 @@
     }
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
         max-height: calc(100vh - 380px);
+    }
+
+
+    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user) .user-contacts{
+        max-height: calc(100vh - 265px);
+    }
+    .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user) .user-contacts{
+        max-height: calc(100vh - 265px);
     }
 }
 

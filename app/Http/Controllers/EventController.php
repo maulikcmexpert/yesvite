@@ -116,6 +116,7 @@ class EventController extends BaseController
 
         $eventDetail = [];
         $eventDetail['user_id'] = $id;
+        $eventDetail['id']='';
         $eventDetail['thankyou_card_count'] = $thankyou_card_count;
         $eventDetail['gift_registry_count'] = $gift_registry_count;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
