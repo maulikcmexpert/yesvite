@@ -2946,9 +2946,9 @@ $(document).on("click", ".remove-member", async function () {
             };
         }
     });
+    $("#listBox").modal("hide");
     await addListInMembers(SelecteGroupUser);
     await remove(overviewRef);
-    $("#listBox").modal("hide");
 });
 
 $(".updateGroup").click(function () {
