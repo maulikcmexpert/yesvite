@@ -1163,7 +1163,10 @@ function bindData(current_event_id) {
             $(".justyfy-full-btn").removeClass("activated");
         }
     }
-
+    $(".design-sidebar-action").click(function () {
+        $(".design-sidebar-action").removeClass(".activated");
+        $(this).addClass("activated");
+    });
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
         height: 490, // Canvas height
