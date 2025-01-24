@@ -486,6 +486,10 @@
     background-color: transparent !important;
 }
 
+.format-text-inner-options button.activated svg path{
+    stroke: var(--secondryColor) !important;
+}
+
 
 .format-text-inner-options button svg {
     width: 24px;
