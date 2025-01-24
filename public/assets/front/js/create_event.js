@@ -7896,7 +7896,7 @@ $(document).on("click", "#close_editEvent", function (e) {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "home";
+                    // window.location.href = "home";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
@@ -7906,5 +7906,6 @@ $(document).on("click", "#close_editEvent", function (e) {
             error: function (xhr, status, error) {
                 console.log("AJAX error: " + error);
             },
+            
         });
 });
