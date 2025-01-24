@@ -349,40 +349,7 @@
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade deleteModal" id="deleteModal" tabindex="-1"
-                        aria-labelledby="deleteModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-center">
-                                    <div class="delete-img">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                                                stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M12 8V13" stroke="white" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M11.9946 16H12.0036" stroke="white" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                                </div>
-                                <div class="modal-body">
-                                    <h5>Draft Not Saved</h5>
-                                    <p>Please fill in data all the way to " Date of Event " for draft to be
-                                        saved. exit will delete event</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn cancel-btn-createEvent"
-                                        data-bs-dismiss="modal" data-url="{{ route('home') }}">Exit</button>
-                                    <button type="button" class="btn continue-btn"
-                                        data-bs-dismiss="modal">Continue Editing</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
 
 
 
@@ -775,3 +742,38 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade deleteModal" id="deleteModal" tabindex="-1"
+                        aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <div class="delete-img">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                                                stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M12 8V13" stroke="white" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M11.9946 16H12.0036" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                </div>
+                                <div class="modal-body">
+                                    <h5>Draft Not Saved</h5>
+                                    <p>Please fill in data all the way to " Date of Event " for draft to be
+                                        saved. exit will delete event</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn cancel-btn-createEvent"
+                                        data-bs-dismiss="modal" data-url="{{ route('home') }}">Exit</button>
+                                    <button type="button" class="btn continue-btn"
+                                        data-bs-dismiss="modal">Continue Editing</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
