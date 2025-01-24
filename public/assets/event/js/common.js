@@ -122,6 +122,18 @@ $(".form-control").each(function() {
     }
 });
 
+$("#event-date").on("input blur", function () {
+    var text = $(this).val(); // Get the input value
+    if (text === "") {
+        // Remove 'floatingfocus' class if input is empty
+        $(this).siblings(".input-calender-icon").removeClass("floatingfocus");
+    } else {
+        // Add 'floatingfocus' class if input has a value
+        $(this).siblings(".input-calender-icon").addClass("floatingfocus");
+    }
+});
+
+
 // ========= show-password ===========
 
 
