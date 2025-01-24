@@ -696,13 +696,13 @@
     } */
 
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
-        max-height: calc(100vh - 440px);
+        max-height: calc(100vh - 390px);
     }
     .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
-        max-height: calc(100vh - 440px);
+        max-height: calc(100vh - 390px);
     }
     .new-guest-content-wrp .tab-content #group:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
-        max-height: calc(100vh - 440px);
+        max-height: calc(100vh - 390px);
     }
 
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user) .user-contacts{
