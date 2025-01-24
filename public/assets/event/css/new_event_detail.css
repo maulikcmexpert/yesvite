@@ -1484,6 +1484,9 @@
     .timepicker::placeholder {
         font-size: 11px !important;
     }
+    .edit-images-button-inner button {
+        padding: 5px !important;
+    }
 }
 
 @media only screen and (max-width: 360px) {
