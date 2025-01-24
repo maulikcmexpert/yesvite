@@ -745,6 +745,19 @@ async function updateChat(user_id) {
         const selectedUserData = Selectedsnapshot.val();
         const conversationId = $(".selected_id").val();
         const isGroup = $("#isGroup").val();
+        let lastseen = "";
+        if (isGroup == true || isGroup == "true") {
+            lastseen = "";
+        } else {
+            lastseen =
+                selectedUserData.userStatus == "offline" ||
+                selectedUserData.userStatus == "Offline"
+                    ? `last seen at ${timeago.format(messageTime)}`
+                    : selectedUserData.userStatus == "Online" ||
+                      selectedUserData.userStatus == "online"
+                    ? "Online"
+                    : "";
+        }
         if (
             snapshot.key === "userTypingStatus" &&
             snapshot.val() == "Typing..."
@@ -752,22 +765,9 @@ async function updateChat(user_id) {
             if (selectedUserData.userChatId == conversationId) {
                 $("#selected-user-lastseen").text("Typing...");
             } else {
-                $("#selected-user-lastseen").text(selectedUserData.userStatus);
+                $("#selected-user-lastseen").text(lastseen);
             }
         } else {
-            let lastseen = "";
-            if (isGroup == true || isGroup == "true") {
-                lastseen = "";
-            } else {
-                lastseen =
-                    selectedUserData.userStatus == "offline" ||
-                    selectedUserData.userStatus == "Offline"
-                        ? `last seen at ${timeago.format(messageTime)}`
-                        : selectedUserData.userStatus == "Online" ||
-                          selectedUserData.userStatus == "online"
-                        ? "Online"
-                        : "";
-            }
             $("#selected-user-lastseen").text(lastseen);
         }
     });
