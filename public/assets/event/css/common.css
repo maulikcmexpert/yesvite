@@ -117,7 +117,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .input:focus + .floatingfocus {
-    color: var(--primaryColor);
+    color: var(--primaryColor) !important;
 }
 
 select.form-select {
