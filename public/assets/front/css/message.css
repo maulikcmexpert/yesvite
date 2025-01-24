@@ -328,7 +328,7 @@ ul.chat-list > div:last-child li {
     height: 19px !important;
 }
 
-.chat-list .badge {
+.chat-list .my-badge {
     width: 20px !important;
     height: 20px !important;
     background-color: var(--primaryColor);
