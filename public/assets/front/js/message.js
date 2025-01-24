@@ -3661,7 +3661,12 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
     );
     let allPinned = true;
     let somePinned = false;
-
+    if (checkedConversations.length <= 0) {
+        $(".multi-pin").attr("changeWith", "1");
+        $(".pin-icn").removeClass("d-none");
+        $(".unpin-icn").addClass("d-none");
+        return;
+    }
     checkedConversations.each(function () {
         const conversationElement = $(this).parent().parent();
         if (conversationElement.hasClass("pinned")) {
