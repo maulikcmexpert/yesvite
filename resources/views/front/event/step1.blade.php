@@ -66,6 +66,7 @@
                             @endphp
                                 <div class="position-relative z-2">
                                     <input type="text" class="form-control inputText" style="background: transparent" id="event-date" data-isDate="{{$start_date}}" name="event-date" onblur="clearError(this)"  value="{{$start_date}}" readonly>
+                                    <label for="birthday" class="form-label input-field floating-label select-label">Date of event * </label>
                                     <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -80,7 +81,6 @@
                                     </svg>                                        
                                 </div>
                         
-                            <label for="birthday" class="form-label input-field floating-label select-label">Date of event * </label>
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
                     </div>
