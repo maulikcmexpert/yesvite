@@ -1058,6 +1058,7 @@
     font-weight: 400;
     line-height: 23.8px;
     padding: 6px 16px;
+    width: max-content;
 
 }
 .setting-accordion-wrp .accordion-con button:hover {
@@ -1090,13 +1091,13 @@
     bottom: 5px;
 }
 .setting-accordion-wrp .accordion-con button[data-position = "bottom"] span {
-    bottom: -45px;
-    left: -10px;
+    bottom: -50px;
+    left: -20px;
 }
 .setting-accordion-wrp .accordion-con button[data-position = "bottom"] span::after {
     border-bottom-color: black;
-    left: 50px;
-    top: -20px;
+    left: 20px;
+    top: -19px;
 }
 .setting-accordion-wrp .accordion-con button[data-position = "right"] span {
     top: 10px;
