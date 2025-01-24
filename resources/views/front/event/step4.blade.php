@@ -85,7 +85,7 @@
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            <span>
+                                            </button>
                                             <!-- </a> -->
                                         </div>
                                         <div class="toggle-button-cover">
