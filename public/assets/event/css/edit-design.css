@@ -481,6 +481,16 @@
     background-color: transparent;
 }
 
+.format-text-inner-options button.activated {
+    border: 1px solid var(--primaryColor) !important;
+    background-color: transparent !important;
+}
+
+.format-text-inner-options button.activated svg path{
+    stroke: var(--secondryColor) !important;
+}
+
+
 .format-text-inner-options button svg {
     width: 24px;
     height: 24px;
