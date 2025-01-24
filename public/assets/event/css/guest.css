@@ -716,6 +716,10 @@
         max-height: calc(100vh - 320px);
     }
 
+    .new-guest-content-wrp .user-contacts{
+        max-height: calc(100vh - 260px);
+    }
+
 
     .responsive_invite_user {
         min-width: 47px;
