@@ -2839,8 +2839,13 @@ async function addListInMembers(SelecteGroupUser) {
     const promises = SelecteGroupUser.map(async (user) => {
         const userImageElement = await getListUserimg(user.image, user.name);
 
+        // const removeMember =
+        //     user.id != senderUser && senderIsAdmin
+        //         ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
+        //         : "";
+
         const removeMember =
-            user.id != senderUser && senderIsAdmin
+            user.id == senderUser
                 ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
                 : "";
 
@@ -2881,7 +2886,13 @@ $(document).on("click", ".remove-member", async function () {
 
     var overviewRef = ref(database, `overview/${userId}/${conversationId}`);
     await remove(overviewRef);
-
+    let senderIsAdmin = false;
+    SelecteGroupUser.forEach((user) => {
+        if (user.id == senderUser && user.isAdmin == "1") {
+            senderIsAdmin = true;
+        }
+    });
+    console.log({ senderIsAdmin });
     var groupInfoProfileRef = ref(
         database,
         `/Groups/${conversationId}/groupInfo/profiles`
@@ -2890,7 +2901,23 @@ $(document).on("click", ".remove-member", async function () {
     var groupInfoProfileData = groupInfoProfileSnap.val();
 
     if (groupInfoProfileData) {
+        let i = 0;
         for (var key in groupInfoProfileData) {
+            if (
+                i == 0 &&
+                senderIsAdmin &&
+                groupInfoProfileData[key].id != userId &&
+                groupInfoProfileData[key].leave == false
+            ) {
+                i++;
+                await update(
+                    ref(
+                        database,
+                        `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                    ),
+                    { isAdmin: "1" }
+                );
+            }
             if (groupInfoProfileData[key].id == userId) {
                 await update(
                     ref(
@@ -2899,7 +2926,6 @@ $(document).on("click", ".remove-member", async function () {
                     ),
                     { isAdmin: "0", leave: true }
                 );
-                break;
             }
         }
     }
