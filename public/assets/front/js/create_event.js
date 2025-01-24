@@ -769,7 +769,23 @@ function initializePickers() {
             $(".end_timepicker").data("DateTimePicker").minDate(startTime); // Restrict end time to be >= start time
             $(".end_timepicker").data("DateTimePicker").date(endTime); // Set default end time
         }
-    });
+    }).on('dp.show', function () {
+                $(this).val(""); // Set the formatted time value in the input field
+        
+                const picker = $(this).data("DateTimePicker");
+                const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+        
+                // Set the picker to the closest 15-minute time dynamically
+                picker.date(closest15MinTime); 
+        
+                $(".start_timepicker").val("");
+        
+                
+    }).on('dp.hide', function (e) {
+                // Automatically set the selected value in the input field when the picker closes
+                const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+                $(this).val(selectedTime); // Set the formatted time value in the input field
+            });
 
     // Initialize End Time Picker
     $(".end_timepicker").datetimepicker({
