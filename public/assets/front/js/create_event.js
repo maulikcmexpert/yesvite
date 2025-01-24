@@ -7962,7 +7962,7 @@ if(final_step == "2" && isCohost=="1"){
     setTimeout(function(){
         stepOpen2()
         $("#loader").css("display", "none");
-    },500)
+    },100)
    
 }
 
@@ -7971,7 +7971,7 @@ if(final_step == "3" && isCohost=="1"){
     setTimeout(function(){
         step3open()
         $("#loader").css("display", "none");
-    },500)
+    },100)
 }
 
 if(final_step == "4" && isCohost=="1"){
@@ -7979,7 +7979,7 @@ if(final_step == "4" && isCohost=="1"){
     setTimeout(function(){
         step4open()
         $("#loader").css("display", "none");
-    },500) 
+    },100) 
 }
 
 
