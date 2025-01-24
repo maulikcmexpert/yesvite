@@ -6,7 +6,9 @@ var items = 0;
 var activities = {};
 var selected_co_host = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
 var selected_co_host_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var final_step = 1;
+var final_step = ($("#step").val()!="")?$("#step").val():1;
+var isDraftEvent = ($("#isDraft").val()!="")?$("#isDraft").val():"";
+
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer = ($("#cohostId").val() !== "")? 1: 0;
@@ -100,6 +102,18 @@ if (selected_dataId != "") {
     toggleSidebar();
 }
 
+if(final_step == "2"){
+    alert("hiiii")
+    step2()
+}
+
+if(final_step == "3"){
+    
+}
+
+if(final_step == "4"){
+    
+}
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -716,9 +730,33 @@ function datepicker() {
     $(this).val("");
     $(this).val("");
 }
+
+function start_timepicker() {
+    $(".start_timepicker").datetimepicker({
+        //  keepOpen: true,
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+
+        // Set stepping to 15 minutes
+        // defaultDate: now
+        //  debug: true
+    })
+
+    // Ensure input field is clear when the page loads
+    $(this).val("");
+    $(this).val("");
+}
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
+start_timepicker();
 datepicker();
 
 // flatpickr(".event_time", {
@@ -4211,6 +4249,7 @@ $(document).on("click", ".li_event_detail", function () {
 
     var design = eventData.desgin_selected;
     console.log(design);
+ 
     $(".li_event_detail").find(".side-bar-list").addClass("active");
     if (final_step <= 1) {
         $(".side-bar-list").removeClass("active");
@@ -7918,3 +7957,44 @@ $(document).on("click", "#close_editEvent", function (e) {
             
         });
 });
+
+function step2(){
+    $("#close_createEvent").css("display", "block");
+
+    var design = eventData.desgin_selected;
+    console.log(design);
+ 
+    $(".li_event_detail").find(".side-bar-list").addClass("active");
+    if (final_step <= 1) {
+        $(".side-bar-list").removeClass("active");
+    }
+    if (design == undefined || design == "") {
+    } else {
+        $("#sidebar_select_design_category").css("display", "none");
+        $("#myCustomModal").modal("hide");
+        $("#exampleModal").modal("hide");
+        $("#loader").css("display", "none");
+        $(".store_desgin_temp").prop("disabled", false);
+        $(".btn-close").prop("disabled", false);
+        $(".main-content-wrp").removeClass("blurred");
+        $(".step_2").hide();
+        $(".step_4").hide();
+        $(".step_3").hide();
+        $(".step_final_checkout").hide();
+        $("#edit-design-temp").hide();
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design").addClass("menu-success");
+        $(".edit-design").removeClass("active");
+        $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(".event_create_percent").text("50%");
+        $(".current_step").text("2 of 4");
+        console.log(eventData);
+        var type = "all";
+        // get_user(type);
+        $(".step_1").show();
+        active_responsive_dropdown("drop-down-event-detail");
+        handleActiveClass(this);
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design").addClass("menu-success");
+    }
+}
