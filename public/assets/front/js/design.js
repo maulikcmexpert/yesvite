@@ -1181,6 +1181,7 @@ function bindData(current_event_id) {
         $("#lineHeightInput").val(target.lineHeight);
         $("#lineHeightRange").val(target.lineHeight);
     }
+
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
         $(this).addClass("activated");
