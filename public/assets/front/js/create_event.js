@@ -694,14 +694,6 @@ function datepicker() {
         // Set stepping to 15 minutes
         // defaultDate: now
         //  debug: true
-    }).on('dp.change', function (e) {
-        // When the start time changes, update the end time picker with +1 hour
-        const startTime = e.date; // Get the selected start time
-        if (startTime) {
-            const endTime = startTime.clone().add(1, 'hour'); // Add 1 hour to the start time
-            // $(".timepicker").data("DateTimePicker").minDate(startTime); // Set the minimum time for end time
-            $(".timepicker").data("DateTimePicker").date(endTime); // Set the default end time
-        }
     }).on('dp.show', function () {
         const picker = $(this).data("DateTimePicker");
         const closest15MinTime = getClosest15MinuteTime();
