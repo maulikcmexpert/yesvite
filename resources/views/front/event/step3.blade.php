@@ -60,7 +60,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                                    @if (!isset($guest_user['isAlready']))
                                                     <a href="#" class="close" id="delete_invited_user"
                                                         data-id="user-{{ $guest_user['id'] }}"
                                                         data-userid="{{ $guest_user['id'] }}">
@@ -102,7 +102,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                                    @if (!isset($guest_user['isAlready']))
                                                     <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="user_tel-{{ $guest_user['id'] }}"
                                                         data-userid="{{ $guest_user['id'] }}">
@@ -273,7 +273,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                                    @if (!isset($guest_user['isAlready']))
                                                         <a href="#" class="close" id="delete_invited_user_tel"
                                                             data-id="sync_-{{ $guest_user['sync_id'] }}" data-contact="1"
                                                             data-userid="{{ $guest_user['sync_id'] }}">
@@ -313,7 +313,7 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                                    @if (!isset($guest_user['isAlready']))
                                                     <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="sync_tel-{{ $guest_user['sync_id'] }}"
                                                         data-contact="1" data-userid="{{ $guest_user['sync_id'] }}">
@@ -692,7 +692,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                    @if (!isset($guest_user['isAlready']))
                                     <div>
                                         <a href="#" id="delete_invited_user"
                                             data-id="user-{{ $guest_user['id'] }}"
@@ -749,7 +749,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                    @if (!isset($guest_user['isAlready']))
                                     <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="user_tel-{{ $guest_user['id'] }}"
@@ -814,7 +814,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                    @if (!isset($guest_user['isAlready']))
                                     <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="contact-{{ $guest_user['sync_id'] }}" data-contact="1"
@@ -870,7 +870,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if (isset($guest_user['isAlready']) && $guest_user['isAlready'] =="1")
+                                    @if (!isset($guest_user['isAlready']))
                                     <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="contact_tel-{{ $guest_user['sync_id'] }}" data-contact="1"
