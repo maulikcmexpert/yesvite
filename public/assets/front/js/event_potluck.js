@@ -139,7 +139,7 @@ $(document).ready(function () {
                     console.log(response.data);
 
                     // Append the new accordion item into the correct container
-                    const categoryList = $('div[data-category-id="' + categoryId + '"] .accordion');
+                   const categoryList = $('div[data-category-id="' + categoryId + '"] .accordion');
                     categoryList.append(response.data);
 
 

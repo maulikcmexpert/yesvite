@@ -247,7 +247,10 @@ $(".btn-back").on("click", function () {
     $(".create-post-setting-main-body").addClass("d-none");
     $(".create-post-main-body").removeClass("d-none");
 });
-
+$(".back-btn").on("click", function () {
+    $(".create-post-setting-main-body").addClass("d-none");
+    $(".create-post-main-body").removeClass("d-none");
+});
 $(document).on("change", ".fileInputtype", function (event) {
     console.log(event);
 

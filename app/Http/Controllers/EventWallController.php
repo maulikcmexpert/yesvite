@@ -21,7 +21,7 @@ use App\Models\{
     UserSeenStory,
     EventPostPoll,
     EventPostPollOption,
-
+    contact_sync,
     User,
     UserEventStory,
     UserEventPollData
@@ -51,7 +51,7 @@ class EventWallController extends Controller
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
-$js=['event_wall','post_like_comment'];
+        $js = ['event_wall', 'post_like_comment'];
 
         $event = decrypt($id);
         $encrypt_event_id = $id;
@@ -116,61 +116,61 @@ $js=['event_wall','post_like_comment'];
 
 
         $polls = EventPostPoll::with('event_poll_option')
-        ->withCount('user_poll_data')
-        ->where(['event_id' => $event])
-        ->get();
+            ->withCount('user_poll_data')
+            ->where(['event_id' => $event])
+            ->get();
 
-    $pollsData = [];
+        $pollsData = [];
 
-    foreach ($polls as $poll) {
+        foreach ($polls as $poll) {
 
-        $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
-        $post_time = setpostTime($poll->created_at);
+            $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
+            $post_time = setpostTime($poll->created_at);
 
-        // Get the poll duration and check if it is expired for each poll
-        $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
-        $isExpired = ($pollDuration == "");
+            // Get the poll duration and check if it is expired for each poll
+            $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
+            $isExpired = ($pollDuration == "");
 
-        // Fetch reaction list for the post (poll)
-        $reactionList = getOnlyReaction($poll->event_post_id); // Corrected from $value->id to $poll->event_post_id
-        $totalComment = $poll->event_post_comment_count;  // Assuming this is available in the `EventPostPoll` model
-        $totalLikes = $poll->event_post_reaction_count;    // As
-        // Construct the poll data with the reaction list
-        $pollData = [
-            'poll_id' => $poll->id,
-            'event_post_id' => $poll->event_post_id,
-            'poll_question' => $poll->poll_question,
-            'total_poll_duration' => $poll->poll_duration,
-            'poll_duration_left' => $pollDuration,
-            'is_expired' => $isExpired,
-            'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
-            'reactionList' => $reactionList, // Include the reaction list under pollData
-            'post_time' => $post_time,
-            'total_comment' => $totalComment,  // Add total comment count
-            'total_likes' => $totalLikes,
-            'total_poll_vote' => $poll->user_poll_data_count,
-            'poll_options' => [],
+            // Fetch reaction list for the post (poll)
+            $reactionList = getOnlyReaction($poll->event_post_id); // Corrected from $value->id to $poll->event_post_id
+            $totalComment = $poll->event_post_comment_count;  // Assuming this is available in the `EventPostPoll` model
+            $totalLikes = $poll->event_post_reaction_count;    // As
+            // Construct the poll data with the reaction list
+            $pollData = [
+                'poll_id' => $poll->id,
+                'event_post_id' => $poll->event_post_id,
+                'poll_question' => $poll->poll_question,
+                'total_poll_duration' => $poll->poll_duration,
+                'poll_duration_left' => $pollDuration,
+                'is_expired' => $isExpired,
+                'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
+                'reactionList' => $reactionList, // Include the reaction list under pollData
+                'post_time' => $post_time,
+                'total_comment' => $totalComment,  // Add total comment count
+                'total_likes' => $totalLikes,
+                'total_poll_vote' => $poll->user_poll_data_count,
+                'poll_options' => [],
 
-        ];
-
-        // Loop through each poll's options and calculate vote percentages
-        foreach ($poll->event_poll_option as $option) {
-            $totalVotes = getOptionAllTotalVote($poll->id);
-            $optionTotalVotes = getOptionTotalVote($option->id);
-
-            $pollData['poll_options'][] = [
-                'id' => $option->id,
-                'option' => $option->option,
-                'total_vote_percentage' => $totalVotes > 0
-                    ? round(($optionTotalVotes / $totalVotes) * 100) . '%'
-                    : '0%',
-                'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id), // This should return true/false based on whether the user has voted for this option
             ];
-        }
 
-        // Add the poll data to the polls data array
-        $pollsData[] = $pollData;
-    }
+            // Loop through each poll's options and calculate vote percentages
+            foreach ($poll->event_poll_option as $option) {
+                $totalVotes = getOptionAllTotalVote($poll->id);
+                $optionTotalVotes = getOptionTotalVote($option->id);
+
+                $pollData['poll_options'][] = [
+                    'id' => $option->id,
+                    'option' => $option->option,
+                    'total_vote_percentage' => $totalVotes > 0
+                        ? round(($optionTotalVotes / $totalVotes) * 100) . '%'
+                        : '0%',
+                    'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id), // This should return true/false based on whether the user has voted for this option
+                ];
+            }
+
+            // Add the poll data to the polls data array
+            $pollsData[] = $pollData;
+        }
         $wallData['owner_stories'] = [];
 
         $eventLoginUserStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
@@ -534,7 +534,6 @@ $js=['event_wall','post_like_comment'];
 
                 $postsNormalDetail['post_comment'] = $postCommentList;
                 $postList[] = $postsNormalDetail;
-
             }
             // dd($postList);
         }
@@ -801,11 +800,9 @@ $js=['event_wall','post_like_comment'];
             'eventDetails',
             'rsvpSent',
             'login_user_id',
-'js'
+            'js'
 
         ));
-
-
     }
 
     public function createPost(Request $request)
@@ -818,7 +815,7 @@ $js=['event_wall','post_like_comment'];
         $creatEventPost->event_id = $request->event_id;
         $creatEventPost->user_id = $user->id;
         $creatEventPost->post_message = $request->postContent;
-        $creatEventPost->post_type =$request->post_type;
+        $creatEventPost->post_type = $request->post_type;
         // if ($request->hasFile('post_recording')) {
         //     $record = $request->post_recording;
         //     $recordingName = time() . '_' . $record->getClientOriginalName();
@@ -837,59 +834,59 @@ $js=['event_wall','post_like_comment'];
             $video = 0;
             $image = 0;
 
-                    // dd($postimages);
-                    foreach ($postimages as $key => $postImage) {
+            // dd($postimages);
+            foreach ($postimages as $key => $postImage) {
 
-                        $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
+                $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
 
 
-                        $postImage->move(public_path('storage/post_image'), $imageName);
+                $postImage->move(public_path('storage/post_image'), $imageName);
 
-                        $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
-                        $duration = "";
-                        $thumbName = "";
+                $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
+                $duration = "";
+                $thumbName = "";
 
-                        if ($checkIsimageOrVideo == 'video') {
-                            $duration = getVideoDuration($postImage);
-                            if (isset($request->thumbnail) && $request->thumbnail != Null) {
-                                $thumbimage = $request->thumbnail[$key];
-                                $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
-                                // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
-                                $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
-                            }
-                            if (file_exists(public_path('storage/post_image/') . $imageName)) {
-                                $imagePath = public_path('storage/post_image/') . $imageName;
-                                unlink($imagePath);
-                            }
-                            $postImage->move(public_path('storage/post_image'), $imageName);
-                        }
-                        // else {
-
-                        //     $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
-                        //     Image::load($postImgValue->getRealPath())
-                        //         ->width(500)
-                        //         ->optimize()
-                        //         ->save($temporaryThumbnailPath);
-                        //     $destinationPath = public_path('storage/post_image/');
-                        //     if (!file_exists($destinationPath)) {
-                        //         mkdir($destinationPath, 0755, true);
-                        //     }
-                        //     rename($temporaryThumbnailPath,$destinationPath);
-                        // }
-                        if ($checkIsimageOrVideo == 'video') {
-                            $video++;
-                        } else {
-                            $image++;
-                        }
-                        $eventPostImage = new EventPostImage();
-                        $eventPostImage->event_id = $request->event_id;
-                        $eventPostImage->event_post_id = $creatEventPost->id;
-                        $eventPostImage->post_image = $imageName;
-                        $eventPostImage->duration = $duration;
-                        $eventPostImage->type = $checkIsimageOrVideo;
-                        $eventPostImage->thumbnail = $thumbName;
-                        $eventPostImage->save();
+                if ($checkIsimageOrVideo == 'video') {
+                    $duration = getVideoDuration($postImage);
+                    if (isset($request->thumbnail) && $request->thumbnail != Null) {
+                        $thumbimage = $request->thumbnail[$key];
+                        $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
+                        // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
+                        $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
                     }
+                    if (file_exists(public_path('storage/post_image/') . $imageName)) {
+                        $imagePath = public_path('storage/post_image/') . $imageName;
+                        unlink($imagePath);
+                    }
+                    $postImage->move(public_path('storage/post_image'), $imageName);
+                }
+                // else {
+
+                //     $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+                //     Image::load($postImgValue->getRealPath())
+                //         ->width(500)
+                //         ->optimize()
+                //         ->save($temporaryThumbnailPath);
+                //     $destinationPath = public_path('storage/post_image/');
+                //     if (!file_exists($destinationPath)) {
+                //         mkdir($destinationPath, 0755, true);
+                //     }
+                //     rename($temporaryThumbnailPath,$destinationPath);
+                // }
+                if ($checkIsimageOrVideo == 'video') {
+                    $video++;
+                } else {
+                    $image++;
+                }
+                $eventPostImage = new EventPostImage();
+                $eventPostImage->event_id = $request->event_id;
+                $eventPostImage->event_post_id = $creatEventPost->id;
+                $eventPostImage->post_image = $imageName;
+                $eventPostImage->duration = $duration;
+                $eventPostImage->type = $checkIsimageOrVideo;
+                $eventPostImage->thumbnail = $thumbName;
+                $eventPostImage->save();
+            }
 
 
 
@@ -1738,61 +1735,152 @@ $js=['event_wall','post_like_comment'];
 
 
 
-            $checkIsPostControl = PostControl::where(['event_id' => $request['event_id'], 'user_id' => $user->id, 'event_post_id' => $request['event_post_id']])->first();
-            if ($checkIsPostControl == null) {
-                $setPostControl = new PostControl;
+        $checkIsPostControl = PostControl::where(['event_id' => $request['event_id'], 'user_id' => $user->id, 'event_post_id' => $request['event_post_id']])->first();
+        if ($checkIsPostControl == null) {
+            $setPostControl = new PostControl;
 
-                $setPostControl->event_id = $request['event_id'];
-                $setPostControl->user_id = $user->id;
-                $setPostControl->event_post_id = $request['event_post_id'];
-                $setPostControl->post_control = $request['post_control'];
-                $setPostControl->save();
-            } else {
-                $checkIsPostControl->post_control = $request['post_control'];
-                $checkIsPostControl->save();
-            }
+            $setPostControl->event_id = $request['event_id'];
+            $setPostControl->user_id = $user->id;
+            $setPostControl->event_post_id = $request['event_post_id'];
+            $setPostControl->post_control = $request['post_control'];
+            $setPostControl->save();
+        } else {
+            $checkIsPostControl->post_control = $request['post_control'];
+            $checkIsPostControl->save();
+        }
 
-            $message = "";
-            if ($request['post_control'] == 'hide_post') {
-                $message = "Post is hide from your wall";
-            } else if ($request['post_control'] == 'unhide_post') {
-                $message = "Post is unhide";
-            } else if ($request['post_control'] == 'mute') {
-                $message = "Mute every post from this user will post";
-            } else if ($request['post_control'] == 'unmute') {
-                $message = "Unmuted every post from this user will post";
-            } else if ($request['post_control'] == 'report') {
-                $reportCreate = new UserReportToPost;
-                $reportCreate->event_id = $request['event_id'];
-                $reportCreate->user_id =  $user->id;
-                $reportCreate->report_type = $request['report_type'];
-                $reportCreate->report_description = $request['report_description'];
-                $reportCreate->event_post_id = $request['event_post_id'];
-                $reportCreate->save();
+        $message = "";
+        if ($request['post_control'] == 'hide_post') {
+            $message = "Post is hide from your wall";
+        } else if ($request['post_control'] == 'unhide_post') {
+            $message = "Post is unhide";
+        } else if ($request['post_control'] == 'mute') {
+            $message = "Mute every post from this user will post";
+        } else if ($request['post_control'] == 'unmute') {
+            $message = "Unmuted every post from this user will post";
+        } else if ($request['post_control'] == 'report') {
+            $reportCreate = new UserReportToPost;
+            $reportCreate->event_id = $request['event_id'];
+            $reportCreate->user_id =  $user->id;
+            $reportCreate->report_type = $request['report_type'];
+            $reportCreate->report_description = $request['report_description'];
+            $reportCreate->event_post_id = $request['event_post_id'];
+            $reportCreate->save();
 
-                $savedReportId =  $reportCreate->id;
-                $createdAt = $reportCreate->created_at;
-                $message = "Reported to admin for this post";
+            $savedReportId =  $reportCreate->id;
+            $createdAt = $reportCreate->created_at;
+            $message = "Reported to admin for this post";
 
-                $support_email = env('SUPPORT_MAIL');
+            $support_email = env('SUPPORT_MAIL');
 
-                $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
-                $data = [
-                    'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
-                    'event_name' => $getName->events->event_name,
-                    'report_type' => $getName->report_type,
-                    'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
-                    'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
-                    'report_from' => "post"
-                ];
+            $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+            $data = [
+                'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
+                'event_name' => $getName->events->event_name,
+                'report_type' => $getName->report_type,
+                'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
+                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+                'report_from' => "post"
+            ];
 
-                Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
-                    $messages->to($support_email)
-                        ->subject('Post Report Mail');
+            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
+                $messages->to($support_email)
+                    ->subject('Post Report Mail');
+            });
+        }
+        return response()->json(['status' => 1, 'type' => $request['post_control'], 'message' => $message]);
+    }
+    public function get_phoneContact(Request $request)
+    {
+        // Authenticated user ID
+        $id = Auth::guard('web')->user()->id;
+
+        // Request variables
+        $type = $request->type; // Optional filtering by type
+        $search_user = $request->search_name ?? ''; // Search query, default empty
+
+        // Query phone contacts
+        $phone_contact = contact_sync::where('userId', $id)
+            ->when(!empty($type), function ($query) use ($type) {
+                $query->where('type', $type); // Apply type filter if provided
+            })
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset); // Pagination with limit and offset
+            })
+            ->when(!empty($search_user), function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastName', 'LIKE', '%' . $search_user . '%'); // Search by first or last name
                 });
-            }
-            return response()->json(['status' => 1, 'type' => $request['post_control'], 'message' => $message]);
+            })
+            ->orderBy('firstName', 'asc') // Order by first name
+            ->get();
+            // dd($phone_contact);
+            $phoneContact = view('front.event_wall.guest_phoneContact', [
+                'contacts' => $phone_contact
+            ])->render();
+        // Return response in JSON format
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Phone contacts retrieved successfully',
+            'contacts' => $phoneContact
+        ]);
+    }
 
 
+    public function get_yesviteContact(Request $request)
+    {
+        // Authenticated user ID
+        $id = Auth::guard('web')->user()->id;
+
+        // Request variables
+        $type = $request->type;
+        $search_user = $request->search_name ?? ''; // Search query, default empty
+        $emails = $request->emails ?? []; // Ensure `emails` is populated if provided
+
+        // Query yesvite users
+        $yesvite_users = User::select(
+            'id',
+            'firstname',
+            'profile',
+            'lastname',
+            'email',
+            'country_code',
+            'phone_number',
+            'app_user',
+            'prefer_by',
+            'email_verified_at',
+            'parent_user_phone_contact',
+            'visible',
+            'message_privacy'
+        )
+            ->where('id', '!=', $id) // Exclude the authenticated user
+            ->where(['app_user' => '1']) // Filter by app users
+            ->when(!empty($emails), function ($query) use ($emails) {
+                $query->whereIn('email', $emails); // Filter by emails if provided
+            })
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset); // Pagination
+            })
+            ->when(!empty($search_user), function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%'); // Search by first or last name
+                });
+            })
+            ->orderBy('firstname', 'asc') // Order by first name
+            ->get();
+
+            $yesviteContact = view('front.event_wall.guest_yesviteContact', [
+                'contacts' => $yesvite_users
+            ])->render();
+        // Return response in JSON format
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Yesvite contacts retrieved successfully',
+            'contacts' => $yesviteContact
+        ]);
     }
 }

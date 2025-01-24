@@ -957,7 +957,7 @@ $(document).ready(function () {
         console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
         console.log('Post Content:', postContent);
         // If a poll form exists and is visible, submit it
-        if (pollForm.is(':visible') && pollForm.length > 0) {
+        if (pollForm.is(':visible') && pollForm.length > 0 &&  pollForm !== '') {
             // if (postContent === '') {
             //     alert('Please enter some content for the poll.');
             //     return;
@@ -968,17 +968,26 @@ $(document).ready(function () {
         }
         // If a photo form exists and is visible, submit it
         else if (photoForm.is(':visible') && photoForm.length > 0) {
-            // if (postContent === '') {
-            //     alert('Please enter some content for the photo post.');
-            //     return;
-            // }
+            // Check if there's a valid photo (adjust this to your actual field for photo upload)
+            var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
+            if (photoInput && photoInput.files.length === 0) {
+                toastr.danger('Please upload a photo for the photo post.');
+            }
+
+
             // Set the value of the hidden input in the photo form
             document.getElementById('photoContent').value = postContent;
-            document.getElementById('photoPostType').value = 1; //
+            document.getElementById('photoPostType').value = 1;
+
+            // Submit the form
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
         else if (textForm.length > 0 && postContent !== '') {
+            if (postContent === '') {
+                alert('Please enter some content for the photo post.');
+                return;
+            }
             document.getElementById('photoPostType').value = 0; //
             textForm.submit();
         }
@@ -1055,7 +1064,7 @@ $(document).ready(function () {
         const visibilityName = visibilityOptions[visibility];
         $('#savedSettingsDisplay').html(`
             <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-            <p>${allowComments === '1' ? "Comments Enabled" : "Comments Disabled"}</p>
+            <p>${allowComments === '1' ? "" : ""}</p>
         `);
 
         console.log('Saved Settings:', { visibility, allowComments });

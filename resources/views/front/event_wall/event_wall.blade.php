@@ -1222,7 +1222,7 @@
                                         <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
                                             value="1">
-                                        <input type="hidden" name="content" id="photoContent">
+                                        <input type="hidden" name="postContent" id="photoContent">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1448,7 +1448,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="saveSettings" class="cmn-btn">
+                            <button type="button" id="saveSettings" class="cmn-btn back-btn">
                                 Save
                             </button>
                         </div>

@@ -179,7 +179,7 @@ if ($hostView) {
             </ul>
             <div class="guests-listing-buttons">
                 <a href="" class="cmn-btn see-all-btn">See All</a>
-                <button class="cmn-btn" type="button" data-bs-toggle="modal" data-bs-target="#addguest"><i
+                <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal" data-bs-target="#addguest"><i
                         class="fa-solid fa-plus"></i> Add Guest</button>
             </div>
         </div>
@@ -260,7 +260,7 @@ if ($hostView) {
     </div>
 </div> --}}
 <!-- ========= Add-guest ======== -->
-<div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
+<div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -283,7 +283,7 @@ if ($hostView) {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel"
                         aria-labelledby="home-tab">
-                        <div class="guest-users-wrp">
+                        <div class="guest-users-wrp selected-contacts-list">
                             <div class="guest-user">
                                 <div class="guest-user-img">
                                     <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="guest-img">
@@ -382,7 +382,7 @@ if ($hostView) {
                                 </svg>
                             </span>
                         </div>
-                        <div class="guest-user-list-wrp invite-contact-wrp">
+                        <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact">
                             <div class="invite-contact">
                                 <a href="#" class="invite-img">
                                     <img src="{{ asset('assets/front/img/event-story-img-1.png') }}"
@@ -526,7 +526,7 @@ if ($hostView) {
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="guest-users-wrp">
+                        <div class="guest-users-wrp" id="selected-contacts-list">
                             <div class="guest-user">
                                 <div class="guest-user-img">
                                     <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="guest-img">
@@ -625,7 +625,7 @@ if ($hostView) {
                                 </svg>
                             </span>
                         </div>
-                        <div class="guest-user-list-wrp invite-contact-wrp">
+                        <div class="guest-user-list-wrp invite-contact-wrp phone_contact">
                             <div class="invite-contact">
                                 <a href="#" class="invite-img">
                                     <img src="{{ asset('assets/front/img/event-story-img-1.png') }}"
