@@ -8,11 +8,11 @@ $phone_checked = '';
 $ischeck= '';
 if($selected_co_host == $user->id){
 if($selected_co_host_prefer_by == 'email'){
-$email_checked = 'checked';
+$email_checked = 'checked  ';
 $ischeck = ($isCohost == "0") ? ' disabled' : '';
 
 }elseif ($selected_co_host_prefer_by == 'phone') {
-$phone_checked = 'checked';
+$phone_checked = 'checked   ';
 $ischeck = ($isCohost == "0") ? ' disabled' : '';
 
 
