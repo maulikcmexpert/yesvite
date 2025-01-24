@@ -2397,6 +2397,8 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
     if(check_start==""){
         toastr.error('First you need to to set Start Time of Event');
         $(this).val("");
+         $(this).datetimepicker("hide"); // Hide time picker if open
+         $(this).blur();
         return;
     }
   });
@@ -2412,6 +2414,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
     //     return;
     // }
     if (!blurExecutedEndTime) {
+     
         blurExecutedEndTime = true;
 
         var newEndTime = convertTo24Hour($(this).val());
