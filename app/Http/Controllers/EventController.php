@@ -675,6 +675,7 @@ class EventController extends BaseController
                 }
             }
             $textElemtents = $request->textData['textElements'];
+            
             foreach ($textElemtents as $key => $textJson) {
                 if ($textJson['fontSize'] != '') {
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
