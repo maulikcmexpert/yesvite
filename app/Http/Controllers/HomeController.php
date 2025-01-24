@@ -188,7 +188,7 @@ class HomeController extends BaseController
                     $eventDetail['event_potluck'] = isset($value->event_settings->podluck) ? $value->event_settings->podluck : "";
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
                     $eventDetail['adult_only_party'] = isset($value->event_settings->adult_only_party) ? $value->event_settings->adult_only_party : "";
-                    $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                    $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                     $rsvp_status = "";
                     $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                         $query->where('app_user', '1');
@@ -399,13 +399,39 @@ class HomeController extends BaseController
     }
 
 
-    public function setpostTime($dateTime)
-    {
-        $commentDateTime = $dateTime;
-        $commentTime = Carbon::parse($commentDateTime);
-        $timeAgo = $commentTime->diffForHumans();
-        return $timeAgo;
+    // public function setpostTime($dateTime)
+    // {
+    //     $commentDateTime = $dateTime;
+    //     $commentTime = Carbon::parse($commentDateTime);
+    //     $timeAgo = $commentTime->diffForHumans();
+    //     return $timeAgo;
+    // }
+
+     function setupcomingpostTime($updatedAt)
+{
+    $now = Carbon::now(); // Current time
+    $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
+
+    $diffInDays = $updatedTime->diffInDays($now);
+
+    if ($diffInDays > 0) {
+        return $diffInDays . 'd'; // Return in 'Xd' format
     }
+
+    $diffInHours = $updatedTime->diffInHours($now);
+
+    if ($diffInHours > 0) {
+        return $diffInHours . 'h'; // Return in 'Xh' format
+    }
+
+    $diffInMinutes = $updatedTime->diffInMinutes($now);
+
+    if ($diffInMinutes > 0) {
+        return $diffInMinutes . 'm'; // Return in 'Xm' format
+    }
+
+    return 'just now'; // For moments less than a minute
+}
 
     function upcomingEventsCount($userId)
     {
