@@ -123,15 +123,14 @@ $(".form-control").each(function() {
 });
 
 
-$("#event-date").on("input blur", function () {
-    alert();
-    var text = $(this).val(); // Get the input value
-    if (text === "") {
-        // Remove 'floatingfocus' class if input is empty
-        $(this).siblings(".input-calender-icon").removeClass("floatingfocus");
+$("#event-date").on("focus input blur", function () {
+    var text = $(this).val();
+    var label = $(this).closest(".position-relative").find(".floating-label"); // Find the label
+
+    if (text === "" && event.type === "blur") {
+        label.removeClass("floatingfocus"); // Remove focus when input is empty and loses focus
     } else {
-        // Add 'floatingfocus' class if input has a value
-        $(this).siblings(".input-calender-icon").addClass("floatingfocus");
+        label.addClass("floatingfocus"); // Add focus if input is not empty or focused
     }
 });
 
