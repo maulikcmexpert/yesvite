@@ -2106,8 +2106,11 @@ function createMessageElement(
 
     if (formattedDate.length == 0) {
         daychange =
-            "<h5 class='day-line'><span>" + chatSmallDay + ", " + msgDate;
-        ("</span></h5>");
+            "<h5 class='day-line'><span>" +
+            chatSmallDay +
+            ", " +
+            msgDate +
+            "</span></h5>";
     } else if (formattedDate[msgDate] === undefined) {
         // console.log(msgDate);
         if (msgDate == "Yesterday") {
@@ -2118,8 +2121,11 @@ function createMessageElement(
                 "<h5 class='day-line'><span>" + msgDate + "</span></h5>";
         } else {
             daychange =
-                "<h5 class='day-line'><span>" + chatSmallDay + ", " + msgDate;
-            ("</span></h5>");
+                "<h5 class='day-line'><span>" +
+                chatSmallDay +
+                ", " +
+                msgDate +
+                "</span></h5>";
         }
         // daychange = "<h5 class='day-line'><span>" + chatSmallDay +" "+ msgDate + "</span></h5>";
     }
