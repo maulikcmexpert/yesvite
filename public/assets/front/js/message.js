@@ -2892,6 +2892,7 @@ $(document).on("click", ".remove-member", async function () {
             senderIsAdmin = true;
         }
     });
+    console.log({ senderIsAdmin });
     var groupInfoProfileRef = ref(
         database,
         `/Groups/${conversationId}/groupInfo/profiles`
@@ -2925,7 +2926,6 @@ $(document).on("click", ".remove-member", async function () {
                     ),
                     { isAdmin: "0", leave: true }
                 );
-                break;
             }
         }
     }
