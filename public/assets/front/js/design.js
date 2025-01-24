@@ -1124,6 +1124,9 @@ function bindData(current_event_id) {
     function addIconsToTextbox(target) {
         console.log("add to here");
         console.log(target);
+        if (target == undefined) {
+            return;
+        }
         if (target.fontWeight == "bold") {
             $(".bold-btn").addClass("activated");
         } else {
@@ -2036,7 +2039,7 @@ function bindData(current_event_id) {
                 activeObject.set("text", capitalizedText);
             },
         };
-        addIconsToTextbox(activeObject.target);
+        addIconsToTextbox(activeObject);
         // Execute the corresponding command
         if (commands[command]) {
             commands[command](font); // Pass font to fontName if needed

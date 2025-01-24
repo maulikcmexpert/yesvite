@@ -12,7 +12,9 @@
     align-items: center;
     gap: 20px;
 }
-
+.activated{
+    background-color: var(--primaryColor);
+}
 .event-detail-logo .navbar-brand {
     margin-right: 0px !important;
 }
@@ -620,7 +622,7 @@
 
 .new_event_detail_form .form-group label {
     font-size: 12px;
-    color: var(--primaryColor);
+    /* color: var(--primaryColor); */
     top: -8px;
     left: 10px;
     background: #ffffff;
