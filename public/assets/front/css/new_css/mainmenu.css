@@ -1431,8 +1431,8 @@
     padding: 15px 20px;
     border-radius: 10px;
     font-family: var(--SFProDisplay-Medium);
-    font-size: 12px;
-    line-height: 20.4px;
+    font-size: 14px;
+    line-height: normal;
     color: var(--secondary-black);
     display: inline-block;
 }
