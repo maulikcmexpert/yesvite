@@ -724,6 +724,8 @@ function start_timepicker() {
         // defaultDate: now
         //  debug: true
     }).on('dp.show', function () {
+        $(this).val(""); // Set the formatted time value in the input field
+
         const picker = $(this).data("DateTimePicker");
         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
