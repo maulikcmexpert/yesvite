@@ -2685,7 +2685,7 @@ class EventController extends BaseController
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
-        dd($request);
+       
         // $potluck = session('category');
 
         $user_id =  Auth::guard('web')->user()->id;
@@ -2784,7 +2784,7 @@ class EventController extends BaseController
         $event_creation->subscription_plan_name = (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro";
         $event_creation->subscription_invite_count = (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15;
 
-        // $event_creation->save();
+        $event_creation->save();
 
 
 
