@@ -3910,8 +3910,24 @@ $(".multi-mute").click(function () {
         const conversationId = $(this).val();
         if (change == "1") {
             $(".conversation-" + conversationId).addClass("muted");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".mute1-self-icn")
+                .addClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unmute1-self-icn")
+                .removeClass("d-none");
         } else {
             $(".conversation-" + conversationId).removeClass("muted");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".mute1-self-icn")
+                .removeClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unmute1-self-icn")
+                .addClass("d-none");
         }
         $(".conversation-" + conversationId)
             .find(".chat-data")
