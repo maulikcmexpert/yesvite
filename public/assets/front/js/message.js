@@ -1347,7 +1347,7 @@ $(".send-message").on("keypress", async function (e) {
                 database,
                 `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
             );
-            console.log("userTypingStatus");
+
             await update(groupRef, {
                 userTypingStatus: true,
             });
