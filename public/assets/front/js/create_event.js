@@ -7951,8 +7951,8 @@ $(document).on("click", "#close_editEvent", function (e) {
 if(final_step == "2"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
-        $("#loader").css("display", "none");
         step2()
+        $("#loader").css("display", "none");
     },5000)
 }
 
