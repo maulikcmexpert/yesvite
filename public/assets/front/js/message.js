@@ -1344,7 +1344,7 @@ $(".send-message").on("keyup", async function (e) {
         } else {
             update(userRef, { userTypingStatus: "Not typing..." });
         }
-    }, 1000);
+    }, 500);
 });
 $("#preview").hide();
 let mediaRecorder;
