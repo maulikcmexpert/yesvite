@@ -1043,16 +1043,22 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    height: fit-content;
 }
 .setting-accordion-wrp .accordion-con button span {
     position: absolute;
     color: white;
     background-color: black;
-    width: 120px;
+    /* width: 120px; */
     font-size: 18px;
-    padding: 5px;
     transition: 0.3s;
     opacity: 0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 23.8px;
+    padding: 6px 16px;
+
 }
 .setting-accordion-wrp .accordion-con button:hover {
     overflow: visible;
