@@ -2850,11 +2850,11 @@ $(document).on("click", "#save_activity_schedule", function () {
     });
     if (isValid == 0) {
         if (total_activities >= 1) {
-            if (total_activities == 1) {
-                $(".step_1_activity").text(total_activities + " Activity");
-            } else {
+            // if (total_activities == 1) {
+            //     $(".step_1_activity").text(total_activities + " Activity");
+            // } else {
                 $(".step_1_activity").text(total_activities + " Activities");
-            }
+            // }
         } else {
             $(".step_1_activity").html(
                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
