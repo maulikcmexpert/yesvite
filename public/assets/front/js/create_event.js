@@ -101,8 +101,9 @@ if (selected_dataId != "") {
     }
     toggleSidebar();
 }
-alert(final_step);
+
 if(final_step == "2"){
+    alert("hiiii")
     step2()
 }
 
