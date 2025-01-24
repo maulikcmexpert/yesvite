@@ -611,9 +611,9 @@ async function updateChat(user_id) {
     console.log(messageTime);
 
     let lastseen =
-        selected_user.userStatus == "offline"
-            ? // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
-              `last seen at ${timeago.format(messageTime)}`
+        selected_user.userStatus == "offline" ||
+        selected_user.userStatus == "Offline"
+            ? `last seen at ${timeago.format(messageTime)}`
             : selected_user.userStatus == "Online" ||
               selected_user.userStatus == "online"
             ? "Online"
@@ -770,6 +770,7 @@ async function updateChatfromGroup(conversationId) {
     });
     onChildChanged(profileRef, async (snapshot) => {
         const profile = snapshot.val();
+        console.log({ profile });
         const profileIndex = await setProfileIndexCache(conversationId);
         const selectedConversationId = $(".selected_conversasion").val();
         if (
@@ -1282,12 +1283,14 @@ async function setProfileIndexCache(conversationId) {
             // Find the profile with the matching user ID
             for (let i = 0; i < profiles.length; i++) {
                 if (profiles[i].id === senderUser) {
+                    console.log({ i });
                     profileIndexCache[conversationId] = i;
                     break;
                 }
             }
         }
     }
+    console.log(profileIndexCache[conversationId]);
     return profileIndexCache[conversationId];
 }
 
@@ -1300,7 +1303,7 @@ $(".send-message").on("keyup", async function (e) {
         if (isGroup == "true" || isGroup == true) {
             var profileIndex = await setProfileIndexCache(conversationId);
             // If profileIndex is cached, update the userTypingStatus
-            if (profileIndex) {
+            if (profileIndex != undefined) {
                 var groupRef = ref(
                     database,
                     `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
@@ -1338,7 +1341,8 @@ $(".send-message").on("keypress", async function (e) {
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);
-        if (profileIndex) {
+
+        if (profileIndex != undefined) {
             var groupRef = ref(
                 database,
                 `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`

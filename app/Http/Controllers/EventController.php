@@ -116,6 +116,7 @@ class EventController extends BaseController
 
         $eventDetail = [];
         $eventDetail['user_id'] = $id;
+        $eventDetail['id']='';
         $eventDetail['thankyou_card_count'] = $thankyou_card_count;
         $eventDetail['gift_registry_count'] = $gift_registry_count;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
@@ -675,6 +676,7 @@ class EventController extends BaseController
                 }
             }
             $textElemtents = $request->textData['textElements'];
+            
             foreach ($textElemtents as $key => $textJson) {
                 if ($textJson['fontSize'] != '') {
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
@@ -1945,6 +1947,7 @@ class EventController extends BaseController
 
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
+        $isCohost = $request->isCohost;
         $cohostId = $request->cohostId;
         $app_user = $request->app_user;
 
@@ -1993,7 +1996,7 @@ class EventController extends BaseController
 
 
         return response()->json([
-            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
+            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by','isCohost'))->render(),
             'scroll' => $request->scroll,
         ]);
     }
@@ -2678,7 +2681,7 @@ class EventController extends BaseController
     public function  editStore(Request $request)
     {
         // $potluck = session('category');
-        // dd($request);
+        dd($request);
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
