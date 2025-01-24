@@ -1311,6 +1311,12 @@
     font-size: 13px !important;
 }
 
+
+.no-scroll {
+    overflow: hidden; /* Prevent scrolling */
+    position: fixed; /* Lock the body in place */
+    width: 100%; /* Prevent layout shifts */
+}
 /* ======Responsiveness===== */
 
 

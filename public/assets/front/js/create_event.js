@@ -4592,6 +4592,8 @@ function enforceCheckboxLimit() {
 enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
+
+    document.body.classList.add("no-scroll"); // Disable background scrolling
     const allSidebars = document.querySelectorAll(".sidebar");
     const allOverlays = document.querySelectorAll(".overlay");
     // $(".floatingfocus").removeClass("floatingfocus");
@@ -4611,6 +4613,7 @@ function toggleSidebar(id = null) {
         }
     });
     if (id == null) {
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling  
         return;
     }
     const sidebar = document.getElementById(id);
