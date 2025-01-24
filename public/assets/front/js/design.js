@@ -1142,8 +1142,31 @@ function bindData(current_event_id) {
         } else {
             $(".underline-btn").removeClass("activated");
         }
+        if (target.textAlign == "left") {
+            $(".justyfy-left-btn").addClass("activated");
+        } else {
+            $(".justyfy-left-btn").removeClass("activated");
+        }
+        if (target.textAlign == "center") {
+            $(".justyfy-center-btn").addClass("activated");
+        } else {
+            $(".justyfy-center-btn").removeClass("activated");
+        }
+        if (target.textAlign == "right") {
+            $(".justyfy-right-btn").addClass("activated");
+        } else {
+            $(".justyfy-right-btn").removeClass("activated");
+        }
+        if (target.textAlign == "justify") {
+            $(".justyfy-full-btn").addClass("activated");
+        } else {
+            $(".justyfy-full-btn").removeClass("activated");
+        }
     }
-
+    $(".design-sidebar-action").click(function () {
+        $(".design-sidebar-action").removeClass(".activated");
+        $(this).addClass("activated");
+    });
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
         height: 490, // Canvas height
