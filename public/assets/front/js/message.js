@@ -854,11 +854,11 @@ $(document).on("click", ".msg-list", async function () {
             unRead: false,
             unReadCount: 0,
         });
-        isToMove = false;
         console.log("updateoverview");
         await updateChat(userId);
         console.log({ conversationId });
     }
+    isToMove = false;
 });
 async function updateMore(conversationId) {
     const overviewSnapshot = await get(

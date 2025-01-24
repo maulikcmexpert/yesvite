@@ -85,7 +85,7 @@ if (selected_dataId != "") {
     $(".remove_co_host").attr("data-id", selected_co_host);
     $("#remove_co_host_id").val("user-" + selected_co_host);
     $(".selected-host-name").text(user_name);
-    // $(".guest-contacts-wrp").css("display", "flex");
+    // $(".contactData").css("display", "flex");
     $(".guest-contacts-wrp").addClass("guest-contacts-test");
 
     eventData.co_host_prefer_by = prefer_by;
@@ -3617,13 +3617,13 @@ function savePage4Data() {
     console.log(eventData.thank_you_card_id);
 
     if ($("#add_co_host").is(":checked")) {
-        $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
         eventData.add_co_host = "1";
         $(".add_co_host").show();
     } else {
-        $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
         eventData.co_host = "";
@@ -5446,7 +5446,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
             $(".remove_co_host").attr("data-id", selected_co_host);
             $("#remove_co_host_id").val("user-" + selected_co_host);
             $(".selected-host-name").text(user_name);
-            $(".guest-contacts-wrp").css("display", "flex");
+            $(".contactData").css("display", "flex");
             $(".guest-contacts-wrp").addClass("guest-contacts-test");
 
             if (prefer_by_email) {
@@ -5458,7 +5458,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 selected_co_host_prefer_by = prefer_by_email;
             } else {
                 if ($("input[name='guest_list[]']:checked").length === 0) {
-                    $(".guest-contacts-wrp").css("display", "none");
+                    $(".contactData").css("display", "none");
                     $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
                     // $('.add_new_co_host').html(`<span class="me-3">
@@ -5476,7 +5476,7 @@ $(document).on("change", 'input[name="guest_list[]"]', function () {
                 selected_co_host_prefer_by = "";
                 selected_dataId = "";
                 lengtUSer = 0;
-                $(".guest-contacts-wrp").css("display", "none");
+                $(".contactData").css("display", "none");
                 $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
                 // $('.add_new_co_host').html(`<span class="me-3">
@@ -5500,7 +5500,7 @@ $(document).on("click", ".remove_co_host", function () {
     selected_dataId = "";
     co_host_is_selected_close = true;
 
-    $(".guest-contacts-wrp").css("display", "none");
+    $(".contactData").css("display", "none");
     $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
     // $('.add_new_co_host').html(`<span class="me-3">
@@ -5545,7 +5545,7 @@ $(document).on("click", ".save_event_co_host", function () {
         eventData.co_host_prefer_by = "";
         selected_co_host = "";
         selected_co_host_prefer_by = "";
-        $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
         toggleSidebar();
@@ -5580,7 +5580,7 @@ $(document).on("click", ".save_event_co_host", function () {
         }
         $(".remove_co_host").attr("data-id", selected_co_host);
         $(".selected-host-name").text(user_name);
-        $(".guest-contacts-wrp").css("display", "flex");
+        $(".contactData").css("display", "flex");
         $(".guest-contacts-wrp").addClass("guest-contacts-test");
 
         eventData.co_host_prefer_by = prefer_by;
@@ -5604,7 +5604,7 @@ $(document).on("click", ".save_event_co_host", function () {
         eventData.co_host_prefer_by = "";
         selected_co_host = "";
         selected_co_host_prefer_by = "";
-        $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
 
         $(".add_new_co_host").html(`<span class="me-3">
@@ -6737,7 +6737,7 @@ $(document).on("click", "#contact-tab", function () {
     $("#select_event_cohost").css("display", "block");
     
     if (co_host_is_selected_close == true) {
-        $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
         var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
@@ -6800,9 +6800,9 @@ function get_co_host_list(
     if (selected_co_host == "") {
         if(isHost == '1'){
         }else{
-            // $(".guest-contacts-wrp").css("display", "block");
+            // $(".contactData").css("display", "block");
         }
-        // $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
         cohostId = "";
         var checkedCheckbox = $('input[name="guest_list[]"]:checked');
@@ -6812,7 +6812,7 @@ function get_co_host_list(
         }
     } else {
         if (co_host_is_selected_close == true) {
-            $(".guest-contacts-wrp").css("display", "none");
+            $(".contactData").css("display", "none");
             $(".guest-contacts-wrp").removeClass("guest-contacts-test");
             var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
@@ -6820,7 +6820,8 @@ function get_co_host_list(
                 checkedCheckbox.prop("checked", false); // Uncheck all checked checkboxes
             }
         } else {
-            $(".guest-contacts-wrp").css("display", "flex");
+            $(".contactData").css("display", "flex");
+            // $(".contactData").css("display", "flex");
             $(".guest-contacts-wrp").addClass("guest-contacts-test");
         }
     }
@@ -6991,11 +6992,11 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
     $(".list_all_contact_user").css("display", "block");
 
     if (selected_co_host == "") {
-        $(".guest-contacts-wrp").css("display", "none");
+        $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
     } else {
         if (co_host_is_selected_close == true) {
-            $(".guest-contacts-wrp").css("display", "none");
+            $(".contactData").css("display", "none");
             $(".guest-contacts-wrp").removeClass("guest-contacts-test");
             var checkedCheckbox = $('input[name="guest_list[]"]:checked');
 
@@ -7003,7 +7004,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
                 checkedCheckbox.prop("checked", false); // Uncheck all checked checkboxes
             }
         } else {
-            $(".guest-contacts-wrp").css("display", "flex");
+            $(".contactData").css("display", "flex");
             $(".guest-contacts-wrp").addClass("guest-contacts-test");
         }
     }
