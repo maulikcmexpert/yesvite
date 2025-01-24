@@ -1166,6 +1166,19 @@ $(document).on("click", ".mute-single-conversation", function (e) {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    if (change == "1") {
+        console.log("mute here");
+        $(".conversation-" + conversationId).addClass("muted");
+
+        $(this).children(".mute1-self-icn").addClass("d-none");
+        $(this).children(".unmute1-self-icn").removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("muted");
+
+        $(this).children(".mute1-self-icn").removeClass("d-none");
+        $(this).children(".unmute1-self-icn").addClass("d-none");
+    }
 });
 
 $(document).on("click", ".block-conversation", async function () {
