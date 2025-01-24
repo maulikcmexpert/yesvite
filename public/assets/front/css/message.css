@@ -1186,7 +1186,7 @@ ul.chat-list li.setpink{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* position: inherit !important; */
+    position: initial !important;
 }
 
 .msg-body ul li.receiver .reply-section {
