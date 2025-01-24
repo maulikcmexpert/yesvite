@@ -1148,7 +1148,7 @@ $(document).on("click", ".mute-single-conversation", function (e) {
     e.stopPropagation();
 
     const change = $(this).attr("changeWith");
-    let conversationId = $(".conversationId").attr("conversationId");
+    let conversationId = $(this).data("conversation");
     const overviewRef = ref(
         database,
         `overview/${senderUser}/${conversationId}/isMute`
