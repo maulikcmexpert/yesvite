@@ -3629,12 +3629,12 @@ $(document).on("click", ".close-preview", function () {
     $(".preview_img").attr("src", "");
     $(".upload").val("");
 });
-let totalUnreadCount = 0;
+
 async function getTotalUnreadMessageCount() {
     const userId = senderUser; // Assuming senderUser is the ID of the current user
     const overviewRef = ref(database, `overview/${userId}`);
     const snapshot = await get(overviewRef);
-
+    let totalUnreadCount = 0;
     if (await snapshot.exists()) {
         const conversations = await snapshot.val();
         for (let conversationId in conversations) {
