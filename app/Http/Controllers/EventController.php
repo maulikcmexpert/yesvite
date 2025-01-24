@@ -2682,7 +2682,10 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-        
+        $conatctId = session('contact_ids');
+        $invitedCount = session('user_ids');
+        $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
+        dd($get_count_invited_user);
         // $potluck = session('category');
 
         $user_id =  Auth::guard('web')->user()->id;
@@ -2787,9 +2790,7 @@ class EventController extends BaseController
 
         $eventId = $event_creation->id;
         $get_count_invited_user = 0;
-        $conatctId = session('contact_ids');
-        $invitedCount = session('user_ids');
-        $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
+      
 
         // debit_coins($user_id, $eventId, $get_count_invited_user);
         if (isset($request->event_id) && $request->event_id != NULL) {

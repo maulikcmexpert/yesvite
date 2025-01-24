@@ -704,7 +704,7 @@ function datepicker() {
         // Automatically set the selected value in the input field when the picker closes
         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
         $(this).val(selectedTime); // Set the formatted time value in the input field
-    });;
+    });
 
     // Ensure input field is clear when the page loads
     $(this).val("");
@@ -7748,7 +7748,7 @@ if(final_step == "2"){
     setTimeout(function(){
         step2Open()
         $("#loader").css("display", "none");
-    },100)
+    },700)
    
 }
 
@@ -7757,7 +7757,7 @@ if(final_step == "3"){
     setTimeout(function(){
         step3open()
         $("#loader").css("display", "none");
-    },100)
+    },700)
 }
 
 if(final_step == "4"){
@@ -7765,7 +7765,7 @@ if(final_step == "4"){
     setTimeout(function(){
         step4open()
         $("#loader").css("display", "none");
-    },100) 
+    },700) 
 }
 
 
@@ -7805,6 +7805,8 @@ function step2Open(){
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
         handleActiveClass('.li_event_detail');
+        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
@@ -7911,6 +7913,7 @@ function step3open(){
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
         handleActiveClass(".li_guest");
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
         // alert(stepVal);
