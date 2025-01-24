@@ -1100,6 +1100,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
 });
 
 $(document).on("click", ".mute-conversation", function () {
+    const selectedConversationId = $(".selected_conversasion").val();
     const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
@@ -1111,7 +1112,27 @@ $(document).on("click", ".mute-conversation", function () {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        console.log("here");
 
+        $(".conversation-" + conversationId).addClass("muted");
+
+        if (selectedConversationId === conversationId) {
+            $(".unmute-self-icn").show();
+            $(".mute-self-icn").hide();
+        }
+        $(this).children(".mute1-self-icn").addClass("d-none");
+        $(this).children(".unmute1-self-icn").removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("muted");
+
+        $(this).children(".mute1-self-icn").removeClass("d-none");
+        $(this).children(".unmute1-self-icn").addClass("d-none");
+        if (selectedConversationId === conversationId) {
+            $(".mute-self-icn").show();
+            $(".unmute-self-icn").hide();
+        }
+    }
     $(".conversation-" + conversationId)
         .find(".chat-data")
         .find(".mute-single-conversation")
