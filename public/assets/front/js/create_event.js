@@ -2228,7 +2228,7 @@ $(".decrease").click(function () {
 //         })
 //         .appendTo("#create_eventForm");
 // });
-$(document).on("blur", "#start-time", function () {
+$(document).on("click", "#start-time", function () {
     $(this).val('');
 });
 $(document).on("blur", "#start-time", function () {
