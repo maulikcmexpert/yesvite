@@ -3661,7 +3661,9 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
     );
     let allPinned = true;
     let somePinned = false;
-
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     checkedConversations.each(function () {
         const conversationElement = $(this).closest(".conversation");
         if (conversationElement.hasClass("pinned")) {
