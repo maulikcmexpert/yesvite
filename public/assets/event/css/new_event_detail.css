@@ -1247,6 +1247,10 @@
     z-index: 2;
 }
 
+.edit-images-button-inner button.activated{
+    background-color: var(--primaryColor) !important;
+}
+
 .edit-images-button-inner [type="file"] {
     display: block;
     width: 100% !important;
