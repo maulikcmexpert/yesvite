@@ -406,7 +406,7 @@
 .group_search_list_toggle {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100% - 200px);
+    max-height: calc(100% - 180px);
     padding-bottom: 10px;
 }
 
@@ -572,9 +572,13 @@
     margin-bottom: 10px !important;
 }
 
-.guest-main-content:has(.group-card.view_members) .user-contacts{
+/* .guest-main-content:has(.group-card.view_members) .user-contacts{
     max-height: calc(100vh - 440px);
-} 
+}  */
+
+.new-guest-content-wrp:has(.group-card.view_members) .user-contacts{
+    max-height: calc(100vh - 440px);
+}
 
 
 
