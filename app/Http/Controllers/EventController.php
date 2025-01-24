@@ -125,7 +125,7 @@ class EventController extends BaseController
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
-            dd($getEventData);
+           
             if ($request->id != "") {
 
 
