@@ -211,7 +211,7 @@
                                         <div class="d-flex">
                                             <p><strong>Add Co-Host</strong></p>
                                             <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Add Co-Host"> -->
-                                            <button data-position="top">
+                                            <button data-position="bottom">
                                                          
                                                         <span>My Tooltip</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
