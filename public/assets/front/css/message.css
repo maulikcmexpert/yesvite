@@ -587,6 +587,7 @@ ul.member-lists li:last-child {
 
 .msg-body ul li.sender {
     max-width: 700px;
+    margin-bottom: 20px;
 }
 
 .msg-body ul li.receiver {
@@ -596,6 +597,7 @@ ul.member-lists li:last-child {
     position: relative;
     max-width: 700px;
     margin-left: auto;
+    margin-bottom: 20px;
 }
 
 .msg-body ul li.receiver p,
@@ -1530,7 +1532,7 @@ ul.chat-list li.setpink{
     left: -5px;
     display: flex;
     right: 60%;
-    justify-content: end;
+    justify-content: start;
 }
 
 .msg-lists .sender .simple-message .reaction-ul .reaction,
