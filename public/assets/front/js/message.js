@@ -4482,3 +4482,34 @@ function applyStyles() {
 
 // Apply styles on page load
 applyStyles();
+
+//backup code for moveToTopOrBelowPinned
+// function moveToTopOrBelowPinned(element) {
+//     if (firstTime == true || !isToMove) {
+//         isToMove = true;
+//         return;
+//     }
+//     if (element.length <= 0) {
+//         return;
+//     }
+//     console.log("moved====================");
+
+//     let $chatList = $(".chat-list"); // Get the chat list container
+//     let parentDiv = element.closest("div"); // Get the parent div of the li element
+//     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
+
+//     // If the element is pinned, move it to the very top
+//     if (isPinned) {
+//         console.log("pinned on top");
+//         $chatList.prepend(parentDiv); // Move pinned element to the top
+//     } else {
+//         // If not pinned, move it after the last pinned element
+//         let lastPinnedDiv = $chatList.find("div:has(.pinned)").last();
+//         console.log(lastPinnedDiv);
+//         if (lastPinnedDiv.length > 0) {
+//             lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
+//         } else {
+//             $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
+//         }
+//     }
+// }
