@@ -713,8 +713,8 @@ function datepicker() {
     });
 
     // Ensure input field is clear when the page loads
-    $(".activity_start_time").val("");
-    $(".activity_end_time").val("");
+    $(this).val("");
+    $(this).val("");
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
@@ -1099,7 +1099,6 @@ $(document).on("click", ".add_more_activity", function (e) {
             $("#" + id).append(response);
             total_activities++;
             console.log(total_activities);
-
             datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
