@@ -3661,18 +3661,15 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
     );
     let allPinned = true;
     let somePinned = false;
-    if (checkedConversations.length <= 0) {
-        return;
-    }
+
     checkedConversations.each(function () {
-        const conversationElement = $(this).closest(".conversation");
+        const conversationElement = $(this).parent().parent();
         if (conversationElement.hasClass("pinned")) {
             somePinned = true;
         } else {
             allPinned = false;
         }
     });
-
     if (allPinned) {
         // If all checked conversations are pinned
         $(".multi-pin").attr("changeWith", "0");
