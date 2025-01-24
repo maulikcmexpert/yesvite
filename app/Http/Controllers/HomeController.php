@@ -399,15 +399,15 @@ class HomeController extends BaseController
     }
 
 
-    public function setpostTime($dateTime)
-    {
-        $commentDateTime = $dateTime;
-        $commentTime = Carbon::parse($commentDateTime);
-        $timeAgo = $commentTime->diffForHumans();
-        return $timeAgo;
-    }
+    // public function setpostTime($dateTime)
+    // {
+    //     $commentDateTime = $dateTime;
+    //     $commentTime = Carbon::parse($commentDateTime);
+    //     $timeAgo = $commentTime->diffForHumans();
+    //     return $timeAgo;
+    // }
 
-    private function setupcomingpostTime($updatedAt)
+     function setupcomingpostTime($updatedAt)
 {
     $now = Carbon::now(); // Current time
     $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
