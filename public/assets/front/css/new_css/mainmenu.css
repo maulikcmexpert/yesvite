@@ -1422,6 +1422,21 @@
     box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.4);  
 }
 
+.calendar-wrp .accordion-header{
+    position: relative;
+}
+
+.calendar-wrp .accordion-header span{
+    border: 1px solid var(--border);
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 12px;
+    line-height: 20.4px;
+    color: var(--secondary-black);
+    display: inline-block;
+}
+
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {

@@ -5,7 +5,7 @@
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsecalender" aria-expanded="true" aria-controls="collapsecalender">
               Calendar
             </button>
-
+            <span>Today</span>
           </h2>
           <div id="collapsecalender" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
             <div class="accordion-body">
