@@ -7867,7 +7867,7 @@ $(document).on("click", ".design-sidebar-action", function() {
     }
 });
 
-$(document).on("click", "#close_editEvent", function () {
+$(document).on("click", "#close_editEvent", function (e) {
     if (final_step == 2) {
         savePage1Data(1);
     }
