@@ -257,9 +257,9 @@ const asset_path = $("#asset_path").val();
 const reactionImageMap = {
     "1F60D": `${asset_path}/ic_heart_eyes.png`, // Heart Eyes
     "1F604": `${asset_path}/ic_smile.png`, // Smile
-    "2764}": `${asset_path}/ic_like_reaction.png`, // Heart
+    2764: `${asset_path}/ic_like_reaction.png`, // Heart
     "1F44D": `${asset_path}/ic_thumsup.png`, // Thumbs Up
-    "1F44F}": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
+    "1F44F": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
 };
 
 const response = await fetch("/firebase_js.json");
@@ -622,7 +622,6 @@ async function updateChat(user_id) {
     $("#selected-user-name").html(selected_user.userName);
 
     const profileImageUrl = selected_user.userProfile;
-    await updateProfileImg(profileImageUrl, selected_user.userName);
 
     $(".selected_name").val(selected_user.userName);
     $(".selected-title").html(selected_user.userName);
@@ -630,6 +629,12 @@ async function updateChat(user_id) {
     $(".selected_conversasion").val($(".selected_id").val());
     const conversationId = $(".selected_id").val();
     $(".conversationId").attr("conversationId", conversationId);
+    await updateProfileImg(
+        profileImageUrl,
+        selected_user.userName,
+        conversationId
+    );
+
     update(userRef, { userChatId: conversationId });
 
     const messagesRef = ref(database, `Messages/${conversationId}/message`);
@@ -3209,9 +3214,9 @@ function generateReactionsAndReply() {
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
             <span class="reaction-option" data-reaction="\\u{1F60D}"><img src="${asset_path}/ic_heart_eyes.png"/></span>
             <span class="reaction-option" data-reaction="\\u{1F604}"><img src="${asset_path}/ic_smile.png"/></span>
-            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}"><img src="${asset_path}/ic_like_reaction.png"/></span>
+            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}"><img src="${asset_path}/ic_like_reaction.png"/></span>
             <span class="reaction-option" data-reaction="\\u{1F44D}"><img src="${asset_path}/ic_thumsup.png"/></span>
-            <span class="reaction-option" data-reaction="\\u{1F44F}}"><img src="${asset_path}/ic_clapping_hand.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F44F}"><img src="${asset_path}/ic_clapping_hand.png"/></span>
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
