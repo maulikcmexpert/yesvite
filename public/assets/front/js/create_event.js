@@ -725,6 +725,8 @@ function getClosest15MinuteTime() {
     now.setMilliseconds(0); // Reset milliseconds to 0
     return now;
 }
+datepicker();
+
 
 // function start_timepicker() {
 //     $(".start_timepicker").datetimepicker({
