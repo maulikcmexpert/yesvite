@@ -1,4 +1,5 @@
 let eventData = {};
+let isCohost =$("#isCohost").val();
 var total_activities = 0;
 var category = 0;
 var items = 0;
@@ -6808,6 +6809,7 @@ function get_co_host_list(
             checkedCheckbox.prop("checked", false); // Uncheck all checked checkboxes
         }
     } else {
+      
         if (co_host_is_selected_close == true) {
             $(".contactData").css("display", "none");
             $(".guest-contacts-wrp").removeClass("guest-contacts-test");
@@ -6839,6 +6841,7 @@ function get_co_host_list(
             selected_co_host_prefer_by: selected_co_host_prefer_by,
             app_user: app_user,
             cohostId: cohostId,
+            isCohost:isCohost,
             cohostpreferby: cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },

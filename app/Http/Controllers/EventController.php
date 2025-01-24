@@ -120,14 +120,15 @@ class EventController extends BaseController
         $eventDetail['gift_registry_count'] = $gift_registry_count;
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
         $eventDetail['inviteCount'] = 0;
-
+        $eventDetail['isCohost'] = "1";
 
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
-           
-            if ($request->id != "") {
 
+
+            if ($request->id != "") {
+                $eventDetail['isCohost'] = $getEventData->is_draft_save;
 
                 $userIds = session()->get('user_ids', []);
 
@@ -136,7 +137,7 @@ class EventController extends BaseController
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
                     ->get();
-                    if ($invitedYesviteUsers) {
+                if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
                         $userVal = User::select(
                             'id',
@@ -153,20 +154,20 @@ class EventController extends BaseController
                             'visible',
                             'message_privacy'
                         )->where('id', $user['user_id'])->first();
-                   
+
                         if ($userVal) {
                             $userEntry = [
                                 'id' => $userVal->id,
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->prefer_by,
-                                'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone_number,
-                                'profile' => $userVal->profile ?? '',                               
+                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
+                                'profile' => $userVal->profile ?? '',
                             ];
                             if ($getEventData->is_draft_save == "0") {
                                 $userEntry['isAlready'] = "1";
                             }
-                        
+
                             $userIds[] = $userEntry;
                         }
                     }
@@ -198,14 +199,14 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->preferBy,
-                                'invited_by' => $userVal->prefer_by =='email'?$userVal->email:$userVal->phone,
+                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
                                 'profile' => $userVal->photo ?? '',
-                              
+
                             ];
                             if ($getEventData->is_draft_save == "0") {
                                 $userEntry['isAlready'] = "1";
                             }
-                        
+
                             $userIdsSession[] = $userEntry;
                         }
                     }
@@ -388,7 +389,7 @@ class EventController extends BaseController
                         $categories[$value->id] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
-                            'isAlready'=>"1",
+                            'isAlready' => "1",
                         ];
                         // session()->put('category', $categories);
                         $potluckCategory['items'] = [];
@@ -403,13 +404,13 @@ class EventController extends BaseController
                                     'self_bring' => $itemValue->self_bring_item,
                                     'self_bring_qty' => $itemValue->self_bring_item == 1 ? $itemValue->quantity : 0,
                                     'quantity' => $itemValue->quantity,
-                                    'isAlready'=>"1",
+                                    'isAlready' => "1",
                                 ];
                                 $itmquantity = 0;
                                 $categories[$value->id]['item'][$itemValue->id] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
-                                
+
 
                                 $potluckItem['id'] =  $itemValue->id;
                                 $potluckItem['description'] =  $itemValue->description;
@@ -448,7 +449,6 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    
                 }
             }
         } else {
@@ -590,7 +590,7 @@ class EventController extends BaseController
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
         $event_creation->start_date = (isset($startDate) && $startDate != "") ? $startDateFormat : null;
         $event_creation->end_date = (isset($endDate) && $endDate != "") ? $endDateFormat : null;
-        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set!='false') ? "1" : "0";
+        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
         $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";
         $event_creation->rsvp_start_timezone = (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "";
@@ -1106,7 +1106,7 @@ class EventController extends BaseController
     {
         $userId = $request->input('user_id');
         $is_contact = $request->input('is_contact');
-        
+
         if ($is_contact == '0') {
             $user = User::where('id', $userId)->first();
             // $userimage = asset('storage/profile/' . $user->profile);
@@ -1196,7 +1196,7 @@ class EventController extends BaseController
             $isChecked = $request->input('is_checked');
             // $userIds = session()->get('user_ids', []);
             $userIds = session()->get('contact_ids', []);
-            
+
 
 
             if (isset($useremail) && $useremail != "") {
@@ -1232,10 +1232,10 @@ class EventController extends BaseController
                 $userIds[] = $userEntry;
                 session()->put('contact_ids', $userIds);
                 Session::save();
-               
+
                 $user_list = Session::get('contact_ids');
 
-                
+
 
                 if (!empty($userExists)) {
                     $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
@@ -1836,7 +1836,7 @@ class EventController extends BaseController
             ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
-            })  
+            })
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
@@ -2361,6 +2361,7 @@ class EventController extends BaseController
     public function get_co_host_list(Request $request)
     {
         $cohostId = $request->cohostId;
+        $isCohost = $request->isCohost;
         $app_user = $request->app_user;
         $cohostpreferby = $request->cohostpreferby;
         $selected_user = session('user_ids');
@@ -2397,9 +2398,9 @@ class EventController extends BaseController
             })
             ->get();
 
+dd(1);
 
-
-        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
+        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host','isCohost', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
     }
 
     public function get_gift_registry(Request $request)
@@ -2505,7 +2506,7 @@ class EventController extends BaseController
         $eventID = $request->eventID;
         $tempId = $request->id;
         $isDraft = $request->isDraft;
-        return view('front.event.design.edit_design', compact('eventID', 'isDraft','tempId'))->render();
+        return view('front.event.design.edit_design', compact('eventID', 'isDraft', 'tempId'))->render();
     }
 
     public function shape_image(Request $request)
@@ -2754,7 +2755,7 @@ class EventController extends BaseController
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
         $event_creation->start_date = (isset($startDate) && $startDate != "") ? $startDateFormat : null;
         $event_creation->end_date = (isset($endDate) && $endDate != "") ? $endDateFormat : null;
-        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set!='false') ? "1" : "0";
+        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         // dd($request->rsvp_by_date_set,$event_creation->rsvp_by_date_set);
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
         $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";
@@ -2881,7 +2882,7 @@ class EventController extends BaseController
                     $is_cohost = '0';
                     $invited_user = $value['id'];
                     $prefer_by =  $value['prefer_by'];
-                    if(isset($value['isAlready'])&&$value['isAlready']=="1"){
+                    if (isset($value['isAlready']) && $value['isAlready'] == "1") {
                         continue;
                     }
                     EventInvitedUser::create([
@@ -2910,11 +2911,11 @@ class EventController extends BaseController
                 $invitedGuestUsers = $conatctId;
 
                 foreach ($invitedGuestUsers as $value) {
-                    if(isset($value['isAlready'])&&$value['isAlready']=="1"){
+                    if (isset($value['isAlready']) && $value['isAlready'] == "1") {
                         continue;
                     }
                     $checkContactExist = contact_sync::where('id', $value['sync_id'])->first();
-                  
+
                     if ($checkContactExist) {
                         $newUserId = NULL;
                         if ($checkContactExist->email != '') {
@@ -2930,8 +2931,8 @@ class EventController extends BaseController
                     // }
                 }
             }
-         
-            
+
+
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 $is_cohost = '1';
                 $invited_user = $request->co_host;
@@ -2976,7 +2977,7 @@ class EventController extends BaseController
             }
             if (isset($request->eventSetting) && $request->eventSetting == "1") {
                 $eventSetting = EventSetting::where('event_id', $eventId)->first();
-               
+
                 if ($eventSetting != null) {
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
                     $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
@@ -3016,7 +3017,7 @@ class EventController extends BaseController
 
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
-             
+
                 if (isset($potluck) && !empty($potluck)) {
 
                     foreach ($potluck as $category) {
@@ -3053,7 +3054,7 @@ class EventController extends BaseController
             if (isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0') {
                 EventSchedule::where('event_id', $request->event_id)->delete();
             }
-            
+
             if (isset($request->events_schedule) && $request->events_schedule == '1' && isset($request->activity) && !empty($request->activity)) {
                 $activities = $request->activity;
                 if (isset($request->event_id) && $request->event_id != null) {
@@ -3092,8 +3093,6 @@ class EventController extends BaseController
             $gift = "0";
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
-                
-                
             }
             // if (isset($request->desgin_selected) && $request->desgin_selected != "") {
             //     EventImage::create([

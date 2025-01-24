@@ -3008,6 +3008,7 @@
 <input type="hidden" id="app_user" value="{{ $app_user }}">
 <input type="hidden" id="thankuCardId" value="{{ $thankuCardId }}">
 <input type="hidden" id="inviteTotalCount" value="{{ $eventDetail['inviteCount'] }}">
+<input type="hidden" id="isCohost" value="{{ $eventDetail['isCohost'] }}">
 <input type="hidden" id="design_image" value="{{ $design_image }}">
 <input type="hidden" id="static_information" value="{{ $static_information }}">
 <input type="hidden" id="step" value="{{  $step}}">
