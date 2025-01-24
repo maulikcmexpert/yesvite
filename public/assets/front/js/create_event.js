@@ -7898,7 +7898,7 @@ $(document).on("click", "#close_editEvent", function (e) {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    // window.location.href = "home";
+                    window.location.href = "";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
