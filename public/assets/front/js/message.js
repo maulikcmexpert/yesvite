@@ -743,26 +743,30 @@ async function updateChat(user_id) {
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         const Selectedsnapshot = await get(selecteduserTypeRef);
         const selectedUserData = Selectedsnapshot.val();
+        const conversationId = $(".selected_id").val();
+        const isGroup = $("#isGroup").val();
         if (
             snapshot.key === "userTypingStatus" &&
             snapshot.val() == "Typing..."
         ) {
-            const conversationId = $(".selected_id").val();
-
             if (selectedUserData.userChatId == conversationId) {
                 $("#selected-user-lastseen").text("Typing...");
             } else {
                 $("#selected-user-lastseen").text(selectedUserData.userStatus);
             }
         } else {
-            let lastseen =
-                selectedUserData.userStatus == "offline" ||
-                selectedUserData.userStatus == "Offline"
-                    ? `last seen at ${timeago.format(messageTime)}`
-                    : selectedUserData.userStatus == "Online" ||
-                      selectedUserData.userStatus == "online"
-                    ? "Online"
-                    : "";
+            if (isGroup) {
+                lastseen = "";
+            } else {
+                let lastseen =
+                    selectedUserData.userStatus == "offline" ||
+                    selectedUserData.userStatus == "Offline"
+                        ? `last seen at ${timeago.format(messageTime)}`
+                        : selectedUserData.userStatus == "Online" ||
+                          selectedUserData.userStatus == "online"
+                        ? "Online"
+                        : "";
+            }
             $("#selected-user-lastseen").text(lastseen);
         }
     });
