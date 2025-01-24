@@ -510,19 +510,39 @@ function moveToTopOrBelowPinned(element) {
     let $chatList = $(".chat-list"); // Get the chat list container
     let parentDiv = element.closest("div"); // Get the parent div of the li element
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
+    let elementMsgTime = parseInt(element.attr("data-msgtime")); // Get the message time of the element
 
     // If the element is pinned, move it to the very top
     if (isPinned) {
-        console.log("pinned on top");
+        console.log("Pinned element moved to the top");
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
-        // If not pinned, move it after the last pinned element
+        // If not pinned, move it after the last pinned element, or based on `data-msgtime`
         let lastPinnedDiv = $chatList.find("div:has(.pinned)").last();
-        console.log(lastPinnedDiv);
+        let nonPinnedDivs = $chatList.find("div:not(:has(.pinned))");
+
         if (lastPinnedDiv.length > 0) {
-            lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
+            // Place after the last pinned element
+            console.log("Placed after the last pinned element");
+            lastPinnedDiv.after(parentDiv);
         } else {
-            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
+            // Sort by `data-msgtime` if there are no pinned elements
+            let inserted = false;
+            nonPinnedDivs.each(function () {
+                let currentLi = $(this).find("li");
+                let currentMsgTime = parseInt(currentLi.attr("data-msgtime"));
+
+                if (elementMsgTime > currentMsgTime) {
+                    $(this).before(parentDiv);
+                    inserted = true;
+                    return false; // Break the loop
+                }
+            });
+
+            // If not inserted, append it at the end
+            if (!inserted) {
+                $chatList.append(parentDiv);
+            }
         }
     }
 }
