@@ -498,7 +498,7 @@ async function handleNewConversation(snapshot) {
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
-    if (firstTime == true || !isToMove) {
+    if (firstTime === true || !isToMove) {
         isToMove = true;
         return;
     }
@@ -516,13 +516,51 @@ function moveToTopOrBelowPinned(element) {
         console.log("pinned on top");
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
-        // If not pinned, move it after the last pinned element
+        // If not pinned, sort it based on data-msgtime below the last pinned element
         let lastPinnedDiv = $chatList.find("div:has(.pinned)").last();
-        console.log(lastPinnedDiv);
         if (lastPinnedDiv.length > 0) {
-            lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
+            // Find the correct position based on data-msgtime
+            let nonPinnedDivs = $chatList
+                .find("div:not(:has(.pinned))")
+                .toArray();
+            let currentMsgTime = parseInt(element.attr("data-msgtime"), 10);
+
+            let inserted = false;
+            for (let i = 0; i < nonPinnedDivs.length; i++) {
+                let currentDiv = $(nonPinnedDivs[i]);
+                let currentDivMsgTime = parseInt(
+                    currentDiv.find("li").attr("data-msgtime"),
+                    10
+                );
+
+                if (currentMsgTime > currentDivMsgTime) {
+                    currentDiv.before(parentDiv);
+                    inserted = true;
+                    break;
+                }
+            }
+
+            if (!inserted) {
+                $chatList.append(parentDiv); // Add to the end if no larger `data-msgtime` is found
+            }
         } else {
-            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
+            // If no pinned elements exist, sort among all non-pinned by data-msgtime
+            let sorted = $chatList
+                .find("div")
+                .toArray()
+                .sort((a, b) => {
+                    let timeA = parseInt(
+                        $(a).find("li").attr("data-msgtime"),
+                        10
+                    );
+                    let timeB = parseInt(
+                        $(b).find("li").attr("data-msgtime"),
+                        10
+                    );
+                    return timeB - timeA; // Descending order
+                });
+
+            $chatList.empty().append(sorted);
         }
     }
 }
