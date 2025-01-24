@@ -7954,6 +7954,9 @@ if(final_step == "2"){
         step2()
         // $("#loader").css("display", "none");
     },5000)
+    setTimeout(function() {
+        $("#loader").css("display", "none");
+    }, 5000);
 }
 
 if(final_step == "3"){
