@@ -37,16 +37,9 @@ if (final_profile_or_text == "1") {
     );
     $(".guest-img .selected-host-h5").css("display", "none");
 } else {
-    // $('.guest-img').html(profilePhoto    );
-    // $(".selected-host-h5").show();
     $(".selected-co-host-image").css("display", "none");
     $(".guest-img .selected-host-h5").text(final_initial);
     var firstinitial = final_initial.charAt(0);
-    // $('.selected-host-h5').removeClass(function (index, className) {
-    //     return (className.match(/\bfontcolor\S+/g) || []).join(' ');
-    // });
-    // $('.selected-host-h5').addClass('fontcolor' + firstinitial);
-
     $(".guest-img .selected-host-h5").removeClass(function (
         index,
         className
@@ -7077,6 +7070,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
             app_user: app_user,
             cohostId: cohostId,
             cohostpreferby: cohostpreferby,
+            isCohost : isCohost,
             selected_co_host_prefer_by: selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },

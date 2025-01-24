@@ -1945,6 +1945,7 @@ class EventController extends BaseController
 
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
+        $isCohost = $request->isCohost;
         $cohostId = $request->cohostId;
         $app_user = $request->app_user;
 
@@ -1993,7 +1994,7 @@ class EventController extends BaseController
 
 
         return response()->json([
-            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by'))->render(),
+            'view' => view('front.event.guest.get_contact_host', compact('yesvite_user', 'type', 'selected_user', 'selected_co_host', 'selected_co_host_prefer_by','isCohost'))->render(),
             'scroll' => $request->scroll,
         ]);
     }
