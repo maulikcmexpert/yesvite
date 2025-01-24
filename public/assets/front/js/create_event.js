@@ -8022,8 +8022,9 @@ function stepOpen2(){
        $(".pick-card").removeClass("menu-success");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
-        $('.li_guest').find(".side-bar-list").removeClass("menu-success");
-        $('.li_setting').find(".side-bar-list").removeClass("menu-success");
+        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
+        
     }
 }
 
@@ -8128,7 +8129,8 @@ function step3open(){
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
         handleActiveClass(".li_guest");
-        $('.li_setting').find(".side-bar-list").removeClass("menu-success");
+       
+        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
         // alert(stepVal);
