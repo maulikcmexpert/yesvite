@@ -677,20 +677,7 @@ if (/Mobi/.test(navigator.userAgent)) {
 //    datepicker();
 // })
 // datepicker();
-function getClosest15MinuteTime() {
-    const now = new Date();
-    const minutes = now.getMinutes();
-    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
-    if (roundedMinutes === 60) {
-        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
-        now.setMinutes(0); // Reset minutes to 0
-    } else {
-        now.setMinutes(roundedMinutes);
-    }
-    now.setSeconds(0); // Reset seconds to 0
-    now.setMilliseconds(0); // Reset milliseconds to 0
-    return now;
-}
+
 function datepicker() {
     $(".timepicker").datetimepicker({
         //  keepOpen: true,
@@ -742,6 +729,9 @@ function start_timepicker() {
 
         // Set the picker to the closest 15-minute time dynamically
         picker.date(closest15MinTime); 
+        setTimeout(() => {
+            picker.hide();
+        }, 300); 
     }).on('dp.hide', function (e) {
         // Automatically set the selected value in the input field when the picker closes
         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
@@ -750,6 +740,20 @@ function start_timepicker() {
 
     // Ensure input field is clear when the page loads
 
+}
+function getClosest15MinuteTime() {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
+    if (roundedMinutes === 60) {
+        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
+        now.setMinutes(0); // Reset minutes to 0
+    } else {
+        now.setMinutes(roundedMinutes);
+    }
+    now.setSeconds(0); // Reset seconds to 0
+    now.setMilliseconds(0); // Reset milliseconds to 0
+    return now;
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
