@@ -129,7 +129,7 @@ class EventController extends BaseController
 
 
             if ($request->id != "") {
-                dD($request->id);
+                // dD();
                 $eventDetail['isCohost'] = $getEventData->is_draft_save;
 
                 $userIds = session()->get('user_ids', []);
@@ -2683,23 +2683,22 @@ class EventController extends BaseController
     {
         // $potluck = session('category');
         
-
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
-
-
-
+        
+        
+        
         // if (strpos($dateString, ' To ') !== false) {
-        //     list($startDate, $endDate) = explode(' To ', $dateString);
-        // } else {
-        //     $startDate = $dateString;
-        //     $endDate = $dateString;
-        // }
-
-        // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
-        // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-        if (strpos($dateString, ' To ') !== false) {
-            list($startDate, $endDate) = explode(' To ', $dateString);
+            //     list($startDate, $endDate) = explode(' To ', $dateString);
+            // } else {
+                //     $startDate = $dateString;
+                //     $endDate = $dateString;
+                // }
+                
+                // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
+                // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
+                if (strpos($dateString, ' To ') !== false) {
+                    list($startDate, $endDate) = explode(' To ', $dateString);
         } else {
             $startDate = $dateString;
             $endDate = $dateString;
@@ -2707,14 +2706,14 @@ class EventController extends BaseController
 
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
-
+        
         $startDateFormat = "";
         $endDateFormat = "";
         if ($startDateObj && $endDateObj) {
             $startDateFormat = $startDateObj->format('Y-m-d');
             $endDateFormat = $endDateObj->format('Y-m-d');
         }
-
+        
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
             $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
@@ -2722,14 +2721,15 @@ class EventController extends BaseController
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
-
+                
                 $start = new DateTime($startDateFormat);
                 $start->modify('-1 day');
                 $rsvp_by_date = $start->format('Y-m-d');
             }
         }
-
-
+        
+        dD($startDateObj,$startDate,$endDate,$endDateObj);
+        
         $greeting_card_id = "";
         if (isset($request->thankyou_message) && $request->thankyou_message == '1') {
             if (isset($request->thank_you_card_id) && $request->thank_you_card_id != '') {
