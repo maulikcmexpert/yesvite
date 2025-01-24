@@ -1090,10 +1090,10 @@ $(document).on("click", ".add_more_activity", function (e) {
         },
         success: function (response) {
             $("#" + id).append(response);
+
             total_activities++;
             console.log(total_activities);
 
-            datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
         },
@@ -2539,6 +2539,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
 let blurExecuted = false;
 $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
+    datepicker();
     if (!blurExecuted) {
         blurExecuted = true;
 
@@ -7867,23 +7868,15 @@ $(document).on("click", ".design-sidebar-action", function() {
     }
 });
 
-$(document).on("click", "#close_editEvent", function (e) {
-    if (final_step == 2) {
-        savePage1Data(1);
-    }
-    if (final_step == 3) {
-        var savePage3Result = savePage3Data(1);
-        console.log(savePage3Result);
-
-        if (savePage3Result === false) {
-            $("#loader").css("display", "none");
-            return; 
-        }
-    }
-
-    eventData.step = final_step;
-    eventData.isdraft = "1";
+$(document).on("click", "#close_editEvent", function () {
+    eventData.is_update_event = "0";
+    savePage1Data();
+    savePage3Data();
     savePage4Data();
+    eventData.isPhonecontact = isPhonecontact;
+    var data = eventData;
+    $("#loader").show();
+    eventData.isdraft = "1";
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
