@@ -93,7 +93,7 @@ if ($hostView) {
         </div>
         <div class="guests-listing-wrp">
             <ul>
-                @if (!empty($guestArray) && is_array($guestArray))
+                @if (!empty($guestArray))
                 @foreach ($guestArray as $guest)
                     @if (!empty($guest['user']))
                         @php
