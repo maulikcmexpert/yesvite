@@ -197,14 +197,27 @@
                     </div>
 
                 </div>
+                @if ($eventDetail['id'] == '')
                 <div class="new-event-btn">
                     <a href="#" id="final_create_event" class="cmn-btn">Purchase & Send Invites</a>
                 </div>
+                
+            @else    
+            <div class="new-event-btn">
+                <a href="#" class="cmn-btn edit_checkout">Purchase & Send Invites</a>
+            </div>
+            @endif
             </div>
         </div>
+        @if ($eventDetail['id'] == '')
         <div class="new-event-btn new-event-respo">
             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
         </div>
+        @else    
+        <div class="new-event-btn new-event-respo">
+            <a href="#" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
+        </div>
+        @endif
     </div>
 </div>
 

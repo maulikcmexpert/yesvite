@@ -7812,7 +7812,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-
+    eventData.isdraft = "0";
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -7825,14 +7825,11 @@ $(document).on("click", ".edit_checkout", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
-            if (response.is_registry == "1") {
-                // $('#gift_registry_logo').html(response.view);
-                // $('#eventModal').modal('show');
-            } else {
+            if (response == 1) {
                 toastr.success("Event Updated Successfully");
-                // window.location.href="profile";
+                window.location.href="home";
             }
-            $("#eventModal").modal("show");
+            // $("#eventModal").modal("show");
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
