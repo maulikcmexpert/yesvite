@@ -795,6 +795,7 @@
                         <div class="guest-img">
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
                             <h5 class="add-item-under-text selected-host-h5"></h5>
+                            @if ($eventDetail['isCohost'] == "1")
                             <a href="#" class="close remove_co_host">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -808,6 +809,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </a>
+                            @endif
                             <input type="hidden" id="remove_co_host_id">
                         </div>
                         <h6 class="guest-name selected-host-name">Silvia Alegra</h6>
@@ -848,6 +850,9 @@
                     <div class="guest-contact">
                         <div class="guest-img">
                             <img src="./assets/image/user-img.svg" alt="guest-img">
+                            @if ($eventDetail['isCohost'] == "1")
+                                
+                           
                             <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -861,6 +866,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </a>
+                            @endif
                         </div>
                         <h6 class="guest-name">Silvia Alegra</h6>
                     </div>
@@ -3008,6 +3014,7 @@
 <input type="hidden" id="app_user" value="{{ $app_user }}">
 <input type="hidden" id="thankuCardId" value="{{ $thankuCardId }}">
 <input type="hidden" id="inviteTotalCount" value="{{ $eventDetail['inviteCount'] }}">
+<input type="hidden" id="isCohost" value="{{ $eventDetail['isCohost'] }}">
 <input type="hidden" id="design_image" value="{{ $design_image }}">
 <input type="hidden" id="static_information" value="{{ $static_information }}">
 <input type="hidden" id="step" value="{{  $step}}">
