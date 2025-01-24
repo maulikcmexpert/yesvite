@@ -2885,14 +2885,16 @@ $(document).on("click", ".remove-member", async function () {
     var conversationId = $(".conversationId").attr("conversationid");
 
     var overviewRef = ref(database, `overview/${userId}/${conversationId}`);
-    await remove(overviewRef);
+
     let senderIsAdmin = false;
+
     SelecteGroupUser.forEach((user) => {
+        console.log(user);
         if (user.id == senderUser && user.isAdmin == "1") {
             senderIsAdmin = true;
         }
     });
-    console.log({ senderIsAdmin });
+
     var groupInfoProfileRef = ref(
         database,
         `/Groups/${conversationId}/groupInfo/profiles`
@@ -2944,6 +2946,7 @@ $(document).on("click", ".remove-member", async function () {
         }
     });
     await addListInMembers(SelecteGroupUser);
+    await remove(overviewRef);
 });
 
 $(".updateGroup").click(function () {
