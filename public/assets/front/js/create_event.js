@@ -737,6 +737,7 @@ function start_timepicker() {
     });
 
     // Ensure input field is clear when the page loads
+    $(".start_timepicker").val("");
 
 }
 function getClosest15MinuteTime() {
@@ -756,7 +757,7 @@ function getClosest15MinuteTime() {
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
-datepicker(); 
+datepicker();
 start_timepicker();
 
 // flatpickr(".event_time", {
