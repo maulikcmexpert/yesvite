@@ -2681,7 +2681,7 @@ class EventController extends BaseController
     public function  editStore(Request $request)
     {
         // $potluck = session('category');
-        dd($request);
+        
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
@@ -2875,6 +2875,9 @@ class EventController extends BaseController
 
 
         if ($eventId != "") {
+            if($request->isdraft == "1"){
+                EventInvitedUser::where('event_id', $request->event_id)->delete();
+            }
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
             if (isset($invitedusersession) && !empty($invitedusersession)) {
@@ -3018,7 +3021,11 @@ class EventController extends BaseController
 
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
-
+                if($request->isdraft == "1"){
+                    EventPotluckCategory::where('event_id', $request->event_id)->delete();
+                    EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+                    UserPotluckItem::where('event_id', $request->event_id)->delete();
+                }
                 if (isset($potluck) && !empty($potluck)) {
 
                     foreach ($potluck as $category) {
