@@ -770,6 +770,7 @@ async function updateChatfromGroup(conversationId) {
     });
     onChildChanged(profileRef, async (snapshot) => {
         const profile = snapshot.val();
+        console.log({ profile });
         const profileIndex = await setProfileIndexCache(conversationId);
         const selectedConversationId = $(".selected_conversasion").val();
         if (
