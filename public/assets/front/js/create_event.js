@@ -2405,25 +2405,13 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
          $(this).blur();
         return;
     }else{
-        datepicker();
+    $(this).data("DateTimePicker").show(); // Explicitly show the picker
     }
   });
   $(document).on("click", '.activity_start_time', function (e) {
     // alert();
-    datepicker();
-    // e.preventDefault();
-    // var check_start=$(this)
-    // .closest(".activity-main-wrp")
-    // .find('input[name="activity-start-time[]"]')
-    // .val();
-
-    // if(check_start==""){
-    //     toastr.error('First you need to to set Start Time of Event');
-    //     $(this).val("");
-    //      $(this).datetimepicker("hide"); // Hide time picker if open
-    //      $(this).blur();
-    //     return;
-    // }
+    $(this).data("DateTimePicker").show(); // Explicitly show the picker
+    
   });
 $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
     // e.preventDefault();
