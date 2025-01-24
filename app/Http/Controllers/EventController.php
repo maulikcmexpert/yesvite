@@ -129,6 +129,7 @@ class EventController extends BaseController
 
 
             if ($request->id != "") {
+                dD($getEventData);
                 $eventDetail['isCohost'] = $getEventData->is_draft_save;
 
                 $userIds = session()->get('user_ids', []);
