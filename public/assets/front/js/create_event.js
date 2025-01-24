@@ -1,60 +1,63 @@
 let eventData = {};
-let isCohost =$("#isCohost").val();
+let isCohost = $("#isCohost").val();
 var total_activities = 0;
 var category = 0;
 var items = 0;
 var activities = {};
-var selected_co_host = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
-var selected_co_host_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var final_step = ($("#step").val()!="")?$("#step").val():1;
-var isDraftEvent = ($("#isDraft").val()!="")?$("#isDraft").val():"";
+var selected_co_host = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
+var selected_co_host_prefer_by =
+    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+var final_step = $("#step").val() != "" ? $("#step").val() : 1;
+var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 
 var swiper;
 var isPhonecontact = 0;
-var lengtUSer = ($("#cohostId").val() !== "")? 1: 0;
+var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
 var selected_gift = [];
-var selected_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
-    ? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
-    : "";
-var selected_profile_or_text =($("#cohostprofile").val() !== "")? '1': "0";
-var selected_prefer_by = ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var selected_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
-var selected_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
+var selected_user_name =
+    $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
+        ? $("#cohostFname").val() + " " + $("#cohostLname").val()
+        : "";
+var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+var selected_prefer_by =
+    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+var selected_profilePhoto =
+    $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+var selected_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
 
-var final_profilePhoto = ($("#cohostprofile").val() !== "")? $("#cohostprofile").val(): "";
-var final_user_name = ($("#cohostFname").val() !== "" && $("#cohostLname").val() !== "") 
-? $("#cohostFname").val() + ' ' + $("#cohostLname").val() 
-: "";
-var final_dataId = ($("#cohostId").val() !== "")? $("#cohostId").val(): "";
-var final_profile_or_text = ($("#cohostprofile").val() !== "")? '1': "0";
-var final_prefer_by =  ($("#cohostpreferby").val() !== "")? $("#cohostpreferby").val(): "";
-var final_initial = final_user_name!=""? ($("#cohostFname").val().charAt(0) + $("#cohostLname").val().charAt(0)).toUpperCase() :"";
+var final_profilePhoto =
+    $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+var final_user_name =
+    $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
+        ? $("#cohostFname").val() + " " + $("#cohostLname").val()
+        : "";
+var final_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
+var final_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+var final_prefer_by =
+    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+var final_initial =
+    final_user_name != ""
+        ? (
+              $("#cohostFname").val().charAt(0) +
+              $("#cohostLname").val().charAt(0)
+          ).toUpperCase()
+        : "";
 if (final_profile_or_text == "1") {
     $(".guest-img .selected-co-host-image").show();
-    $(".guest-img .selected-co-host-image").attr(
-        "src",
-        final_profilePhoto
-    );
+    $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
     $(".guest-img .selected-host-h5").css("display", "none");
 } else {
     $(".selected-co-host-image").css("display", "none");
     $(".guest-img .selected-host-h5").text(final_initial);
     var firstinitial = final_initial.charAt(0);
-    $(".guest-img .selected-host-h5").removeClass(function (
-        index,
-        className
-    ) {
-        return (className.match(/\bfontcolor\S+/g) || []).join(
-            " "
-        );
+    $(".guest-img .selected-host-h5").removeClass(function (index, className) {
+        return (className.match(/\bfontcolor\S+/g) || []).join(" ");
     });
 
     // Add the new class
-    $(".guest-img .selected-host-h5").addClass(
-        "fontcolor" + firstinitial
-    );
+    $(".guest-img .selected-host-h5").addClass("fontcolor" + firstinitial);
 }
 if (selected_dataId != "") {
     var profilePhoto = selected_profilePhoto;
@@ -66,8 +69,7 @@ if (selected_dataId != "") {
     eventData.co_host = dataId;
     selected_co_host = dataId;
     selected_co_host_prefer_by = prefer_by;
-    var initial = final_initial
-   
+    var initial = final_initial;
 
     if (profile_or_text == "1") {
         $(".selected-co-host-image").show();
@@ -93,16 +95,13 @@ if (selected_dataId != "") {
             </div></span>
             <h5>${user_name}</h5>`);
     } else {
-        $(".add_new_co_host")
-            .html(`<span class="mx-3"><div class="contact-img">
+        $(".add_new_co_host").html(`<span class="mx-3"><div class="contact-img">
                <h5 class="fontcolor${firstinitial} add-item-under-text">${initial}</h5>
             </div></span>
             <h5>${user_name}</h5>`);
     }
     toggleSidebar();
 }
-
-
 
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
@@ -139,8 +138,8 @@ var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
-$('#activity-start-time').val('');
-$('#activity-end-time').val('');
+$("#activity-start-time").val("");
+$("#activity-end-time").val("");
 $(document).ready(function () {
     function getTimeZoneAbbreviation() {
         const date = new Date();
@@ -695,32 +694,35 @@ $(".timepicker").on("dp.show", function () {
     $(this).val(""); // Clear the input when the picker is shown
 });
 function datepicker() {
-    $(".timepicker").datetimepicker({
-        //  keepOpen: true,
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+    $(".timepicker")
+        .datetimepicker({
+            //  keepOpen: true,
+            format: "LT",
+            icons: {
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+            },
+            useCurrent: false,
+            ignoreReadonly: true,
+            stepping: 15,
+            // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
-        // Set stepping to 15 minutes
-        // defaultDate: now
-        //  debug: true
-    }).on('dp.show', function () {
-        const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = getClosest15MinuteTime();
+            // Set stepping to 15 minutes
+            // defaultDate: now
+            //  debug: true
+        })
+        .on("dp.show", function () {
+            const picker = $(this).data("DateTimePicker");
+            const closest15MinTime = getClosest15MinuteTime();
 
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime); 
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
-    });
+            // Set the picker to the closest 15-minute time dynamically
+            picker.date(closest15MinTime);
+        })
+        .on("dp.hide", function (e) {
+            // Automatically set the selected value in the input field when the picker closes
+            const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+            $(this).val(selectedTime); // Set the formatted time value in the input field
+        });
 
     // Ensure input field is clear when the page loads
     $(this).val("");
@@ -750,11 +752,10 @@ function datepicker() {
 //         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
 //         // Set the picker to the closest 15-minute time dynamically
-//         picker.date(closest15MinTime); 
+//         picker.date(closest15MinTime);
 
 //         $(".start_timepicker").val("");
 
-        
 //     }).on('dp.hide', function (e) {
 //         // Automatically set the selected value in the input field when the picker closes
 //         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
@@ -1191,32 +1192,31 @@ function addActivity(container, date) {
 function removeActivity(button) {
     button.parentElement.remove();
 }
-$(document).on("click","#end-time",function(){
-    var start_time = $('#start-time').val(); 
-        
-    if (start_time) { 
-        var startTime = moment(start_time, 'hh:mm A'); // Parse the start time string
-        var endTime = startTime.clone().add(1, 'hours'); 
-        $('#end-time').val(endTime.format('hh:mm A')); 
+$(document).on("click", "#end-time", function () {
+    var start_time = $("#start-time").val();
+
+    if (start_time) {
+        var startTime = moment(start_time, "hh:mm A"); // Parse the start time string
+        var endTime = startTime.clone().add(1, "hours");
+        $("#end-time").val(endTime.format("hh:mm A"));
     } else {
-        $('#end-time').val(''); // Clear end time if start time is empty
+        $("#end-time").val(""); // Clear end time if start time is empty
     }
 });
 $("#end_time").on("change", function () {
     if ($(this).is(":checked")) {
         $(".end_time").show();
         $(".ac-end-time").show();
-        var start_time=$('#start-time').val();
+        var start_time = $("#start-time").val();
         console.log(start_time);
 
-        if (start_time) { 
-            var startTime = moment(start_time, 'hh:mm A'); // Parse the start time string
-            var endTime = startTime.clone().add(1, 'hours'); 
-            $('#end-time').val(endTime.format('hh:mm A')); 
+        if (start_time) {
+            var startTime = moment(start_time, "hh:mm A"); // Parse the start time string
+            var endTime = startTime.clone().add(1, "hours");
+            $("#end-time").val(endTime.format("hh:mm A"));
         } else {
-            $('#end-time').val(''); // Clear end time if start time is empty
+            $("#end-time").val(""); // Clear end time if start time is empty
         }
-        
     } else {
         $(".end-time-create").val("");
         $(".end_time").hide();
@@ -1566,9 +1566,9 @@ function add_user_counter() {
 function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
     var Alreadyguest = $(".users-data.invited_users").length;
-   
+
     $("#event_guest_count").text(total_guest + " Guests");
-    $(".invite-count").text(total_guest+Alreadyguest);
+    $(".invite-count").text(total_guest + Alreadyguest);
     console.log(total_guest);
     console.log(max_guest);
 
@@ -1622,7 +1622,7 @@ function delete_invited_user(userId, is_contact = "0") {
             var total_guest = $(".users-data.invited_user").length;
             var alreadyguest = $(".users-data.invited_users").length;
             $("#event_guest_count").text(total_guest + " Guests");
-            $(".invite-count").text(total_guest+alreadyguest);
+            $(".invite-count").text(total_guest + alreadyguest);
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
@@ -1730,7 +1730,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             error: function (xhr, status, error) {},
         });
     } else {
-        $("#loader").css('display','block');
+        $("#loader").css("display", "block");
 
         $.ajax({
             url: base_url + "event/delete_user_id",
@@ -1754,7 +1754,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 var total_guest = $(".users-data.invited_user").length;
                 var alreadyguest = $(".users-data.invited_users").length;
                 $("#event_guest_count").text(total_guest + " Guests");
-                $(".invite-count").text(total_guest+0);
+                $(".invite-count").text(total_guest + 0);
 
                 var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
@@ -2233,7 +2233,7 @@ $(".decrease").click(function () {
 //         .appendTo("#create_eventForm");
 // });
 $(document).on("click", "#start-time", function () {
-    $(this).val('');
+    $(this).val("");
 });
 $(document).on("blur", "#start-time", function () {
     var s_t = $(this).val();
@@ -2446,23 +2446,22 @@ function convertTimeToMinutes(timeStr) {
 
 let blurExecutedEndTime = false;
 $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
-
     e.preventDefault();
-    var check_start=$(this)
-    .closest(".activity-main-wrp")
-    .find('input[name="activity-start-time[]"]')
-    .val();
+    var check_start = $(this)
+        .closest(".activity-main-wrp")
+        .find('input[name="activity-start-time[]"]')
+        .val();
 
-    if(check_start==""){
-        toastr.error('First you need to to set Start Time of Event');
+    if (check_start == "") {
+        toastr.error("First you need to to set Start Time of Event");
         $(this).val("");
-         $(this).datetimepicker("hide"); // Hide time picker if open
-         $(this).blur();
+        $(this).datetimepicker("hide"); // Hide time picker if open
+        $(this).blur();
         return;
-    }else{
+    } else {
         datepicker();
     }
-  });
+});
 
 $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
     // e.preventDefault();
@@ -2476,7 +2475,6 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
     //     return;
     // }
     if (!blurExecutedEndTime) {
-     
         blurExecutedEndTime = true;
 
         var newEndTime = convertTo24Hour($(this).val());
@@ -2902,7 +2900,7 @@ $(document).on("click", "#save_activity_schedule", function () {
             // if (total_activities == 1) {
             //     $(".step_1_activity").text(total_activities + " Activity");
             // } else {
-                $(".step_1_activity").text(total_activities + " Activities");
+            $(".step_1_activity").text(total_activities + " Activities");
             // }
         } else {
             $(".step_1_activity").html(
@@ -3052,8 +3050,6 @@ $(document).on("click", "#close_createEvent", function () {
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
-
- 
 
     if (event_type == "") {
         $("#deleteModal").modal("show");
@@ -4131,6 +4127,7 @@ function edit_design_modal() {
 
 var design_inner_image = "";
 $(document).on("click", ".li_event_details", function () {
+    console.log("here for save image");
     $("#close_createEvent").css("display", "block");
     $("#sidebar_select_design_category").css("display", "none");
 
@@ -4142,6 +4139,8 @@ $(document).on("click", ".li_event_details", function () {
     });
     canvas.renderAll();
     setTimeout(() => {
+        console.log("here for save image2");
+
         var downloadImage = document.getElementById("imageEditor1");
         $("#loader").show();
         // eventData.desgin_selected = 'dom_to_image_not_working_in_server';
@@ -4157,6 +4156,7 @@ $(document).on("click", ".li_event_details", function () {
             design_inner_image = $("#shape_img").attr("src");
         }
         var old_shape_url = $("#first_shape_img").attr("src");
+        console.log("here for save image3");
 
         domtoimage
             .toBlob(downloadImage)
@@ -4179,6 +4179,7 @@ $(document).on("click", ".li_event_details", function () {
                     success: function (response) {
                         let image = response.image;
                         eventData.desgin_selected = image;
+                        console.log("here for save image4");
 
                         // if(eventData.step == '1'){
                         //     eventData.step = '2';
@@ -4401,10 +4402,9 @@ function enforceCheckboxLimit() {
 enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
-
     console.log(id);
-    
-    if(id=="sidebar_add_co_host"){
+
+    if (id == "sidebar_add_co_host") {
         document.body.classList.add("no-scroll"); // Disable background scrolling
     }
     const allSidebars = document.querySelectorAll(".sidebar");
@@ -4426,7 +4426,7 @@ function toggleSidebar(id = null) {
         }
     });
     if (id == null) {
-        document.body.classList.remove("no-scroll"); // Re-enable background scrolling  
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
         return;
     }
     const sidebar = document.getElementById(id);
@@ -5477,7 +5477,6 @@ $(document).on("click", ".save_event_co_host", function () {
 //     }
 // });
 
-
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
     // console.log(data);
@@ -5492,10 +5491,10 @@ $(document).on("click", ".final_checkout", function () {
             ""
     );
     console.log(eventData.slider_images);
-    const photoSliders = ['sliderImages-1', 'sliderImages-2', 'sliderImages-3'];
-    const sliderImages = eventData.slider_images; 
+    const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
+    const sliderImages = eventData.slider_images;
     console.log(sliderImages);
-    if(eventData.slider_images!=undefined && eventData.slider_images!=""){
+    if (eventData.slider_images != undefined && eventData.slider_images != "") {
         // eventData.slider_images.forEach((image) => {
         //     const imageHtml = `
         //         <div class="item">
@@ -5507,26 +5506,26 @@ $(document).on("click", ".final_checkout", function () {
         //     $('.event_images_slider').append(imageHtml);
         // });
 
-     
-                    
-                    photoSliders.forEach((sliderClass, index) => {
-                        const sliderElement = $(`#${sliderClass}`);
-                        if (sliderElement.length) {
-                            if (sliderImages[index]) {
-                                sliderElement.attr('src', `${base_url}public/storage/event_images/${sliderImages[index].fileName}`);
-                                $(`.${sliderClass}`).css('display','block');
-
-                            } else {    
-                                sliderElement.css('display','none');
-                            }
-                        }
-                    });
+        photoSliders.forEach((sliderClass, index) => {
+            const sliderElement = $(`#${sliderClass}`);
+            if (sliderElement.length) {
+                if (sliderImages[index]) {
+                    sliderElement.attr(
+                        "src",
+                        `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
+                    );
+                    $(`.${sliderClass}`).css("display", "block");
+                } else {
+                    sliderElement.css("display", "none");
+                }
+            }
+        });
     }
-   
-    $('.event_images_slider').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
+
+    $(".event_images_slider").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
         navText: [
             `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -5534,47 +5533,47 @@ $(document).on("click", ".final_checkout", function () {
         `,
             `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`
-          ],
-        responsive:{
-            0:{
-                items:1
+        </svg>`,
+        ],
+        responsive: {
+            0: {
+                items: 1,
             },
-            600:{
-                items:3
+            600: {
+                items: 3,
             },
-            1000:{
-                items:5
-            }
-        }
-    })
+            1000: {
+                items: 5,
+            },
+        },
+    });
     // var swiper = new Swiper(".event_images_slider", {
     //     slidesPerView: 1,
     //     loop: false,
     // });
 
-// if (!$('.event_images_slider').data('owl.carousel')) { 
+    // if (!$('.event_images_slider').data('owl.carousel')) {
 
-//     $('.event_images_slider').owlCarousel({
-//         loop: false,
-//         margin: 10,
-//         nav: true,
-//         dots: false,
-//         items: 1,
-//         responsive: {
-//           0: {
-//             items: 1
-//           },
-//           600: {
-//             items: 1
-//           },
-//           1000: {
-//             items: 1
-//           }
-//         }
-//       });
-//     };
-   
+    //     $('.event_images_slider').owlCarousel({
+    //         loop: false,
+    //         margin: 10,
+    //         nav: true,
+    //         dots: false,
+    //         items: 1,
+    //         responsive: {
+    //           0: {
+    //             items: 1
+    //           },
+    //           600: {
+    //             items: 1
+    //           },
+    //           1000: {
+    //             items: 1
+    //           }
+    //         }
+    //       });
+    //     };
+
     $(".step_1").css("display", "none");
     $(".step_2").css("display", "none");
     $(".step_3").css("display", "none");
@@ -5602,8 +5601,6 @@ $(document).on("click", ".final_checkout", function () {
     //     },
     // });
 });
-
-
 
 $(document).on("click", "#final_create_event", function (e) {
     eventData.is_update_event = "0";
@@ -6525,7 +6522,7 @@ $(document).on("click", ".add_co_host", function () {
     $(".co_host_search").css("display", "block");
     $(".phone_co_host_search").css("display", "none");
 
-    get_co_host_list('1',null, cohostlimit, cohostoffset, false, 1);
+    get_co_host_list("1", null, cohostlimit, cohostoffset, false, 1);
     $("#select_event_cohost").css("display", "block");
 
     setTimeout(() => {
@@ -6575,11 +6572,11 @@ $(document).on("click", "#contact-tab", function () {
     cohostNoMoreData = false;
     cohostphoneOffset = 0;
     cohostphoneLimit = 10;
-    var isHost =$(this).attr('data-isHost');
+    var isHost = $(this).attr("data-isHost");
     $("#phone-tab-cantact").removeClass("active");
-    get_co_host_list(isHost,null, cohostlimit, cohostoffset, false);
+    get_co_host_list(isHost, null, cohostlimit, cohostoffset, false);
     $("#select_event_cohost").css("display", "block");
-    
+
     if (co_host_is_selected_close == true) {
         $(".contactData").css("display", "none");
         $(".guest-contacts-wrp").removeClass("guest-contacts-test");
@@ -6642,8 +6639,8 @@ function get_co_host_list(
     console.log(selected_co_host_prefer_by);
 
     if (selected_co_host == "") {
-        if(isHost == '1'){
-        }else{
+        if (isHost == "1") {
+        } else {
             // $(".contactData").css("display", "block");
         }
         $(".contactData").css("display", "none");
@@ -6655,7 +6652,6 @@ function get_co_host_list(
             checkedCheckbox.prop("checked", false); // Uncheck all checked checkboxes
         }
     } else {
-      
         if (co_host_is_selected_close == true) {
             $(".contactData").css("display", "none");
             $(".guest-contacts-wrp").removeClass("guest-contacts-test");
@@ -6687,7 +6683,7 @@ function get_co_host_list(
             selected_co_host_prefer_by: selected_co_host_prefer_by,
             app_user: app_user,
             cohostId: cohostId,
-            isCohost:isCohost,
+            isCohost: isCohost,
             cohostpreferby: cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -6912,7 +6908,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
             app_user: app_user,
             cohostId: cohostId,
             cohostpreferby: cohostpreferby,
-            isCohost : isCohost,
+            isCohost: isCohost,
             selected_co_host_prefer_by: selected_co_host_prefer_by,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -7018,7 +7014,8 @@ $("#select_event_cohost").on("scroll", function () {
         var type = "yesvite";
         var scroll = true;
         if (cohostNoMoreData == false) {
-            get_co_host_list('0',
+            get_co_host_list(
+                "0",
                 (search_name = null),
                 cohostlimit,
                 cohostoffset,
@@ -7076,7 +7073,7 @@ $(document).on("keyup", ".co_host_search", function () {
         $(".list_all_invited_user").html("");
         // cohostoffset=0;
         // cohostlimit=7;
-        get_co_host_list('0',search_name, null, null, false);
+        get_co_host_list("0", search_name, null, null, false);
     }, 500);
 });
 
@@ -7094,18 +7091,14 @@ $(document).on("keyup", ".phone_co_host_search", function () {
 });
 
 $(document).on("click", ".add-activity-schedule", function () {
-    if(eventData.activity!=undefined && eventData.activity!=""){
+    if (eventData.activity != undefined && eventData.activity != "") {
         toggleSidebar("sidebar_activity_schedule");
-    }else{
-        
+    } else {
         toggleSidebar("sidebar_activity_schedule");
     }
 });
 
 $(document).on("click", ".thank_you_card_toggle", function () {
-   
-
-
     $.ajax({
         url: base_url + "event/get_thank_you_card",
         type: "POST",
@@ -7123,7 +7116,7 @@ $(document).on("click", ".thank_you_card_toggle", function () {
                 $("#registry_item_id").val("");
             }
             $(".list_thankyou_card").html(data.view);
-           
+
             if (eventData.thank_you_card_id != undefined) {
                 $('input[name="select_thankyou[]"]').each(function () {
                     if ($(this).val() == eventData.thank_you_card_id) {
@@ -7621,7 +7614,7 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
     eventData.is_update_event = "0";
-    eventData.isDraftEdit= $(this).attr('data-isDraftEdit');
+    eventData.isDraftEdit = $(this).attr("data-isDraftEdit");
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -7655,11 +7648,11 @@ $(document).on("click", ".edit_checkout", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
-           if(response.success == true){
-               toastr.success("Event Updated Successfully");
-               window.location.href=base_url+"home";
-           }
-         
+            if (response.success == true) {
+                toastr.success("Event Updated Successfully");
+                window.location.href = base_url + "home";
+            }
+
             // $("#eventModal").modal("show");
         },
         error: function (xhr, status, error) {
@@ -7668,27 +7661,37 @@ $(document).on("click", ".edit_checkout", function (e) {
     });
 });
 
-
-$(document).on("click", ".design-sidebar-action", function() {
+$(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
     if (designId) {
         if (designId == "6") {
-            
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
-            if (eventData.slider_images != undefined && eventData.slider_images != "" ) {
+            if (
+                eventData.slider_images != undefined &&
+                eventData.slider_images != ""
+            ) {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
-                const photoSliders = ['photo-slider-1', 'photo-slider-2', 'photo-slider-3'];
+                const photoSliders = [
+                    "photo-slider-1",
+                    "photo-slider-2",
+                    "photo-slider-3",
+                ];
 
-                const sliderImages=eventData.slider_images;
+                const sliderImages = eventData.slider_images;
                 photoSliders.forEach((sliderId, index) => {
-                    const sliderElement = document.getElementsByClassName(sliderId); // Get the slider by ID
+                    const sliderElement =
+                        document.getElementsByClassName(sliderId); // Get the slider by ID
                     if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url+'public/storage/event_images/'+sliderImages[index].fileName}`; // Set the image URL
+                        sliderElement.src = `${
+                            base_url +
+                            "public/storage/event_images/" +
+                            sliderImages[index].fileName
+                        }`; // Set the image URL
                     }
                 });
             } else {
@@ -7714,7 +7717,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         var savePage3Result = savePage3Data(1);
         if (savePage3Result === false) {
             $("#loader").css("display", "none");
-            return; 
+            return;
         }
     }
 
@@ -7724,64 +7727,61 @@ $(document).on("click", "#close_editEvent", function (e) {
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
-        $.ajax({
-            url: base_url + "event/editStore",
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: eventData,
-            success: function (response) {
-                if (response == 1) {
-                    window.location.href = base_url+"home";
-                    toastr.success("Event Saved as Draft");
-                    setTimeout(function () {
-                        $("#loader").css("display", "none");
-                    }, 4000);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("AJAX error: " + error);
-            },
-            
-        });
+    $.ajax({
+        url: base_url + "event/editStore",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: eventData,
+        success: function (response) {
+            if (response == 1) {
+                window.location.href = base_url + "home";
+                toastr.success("Event Saved as Draft");
+                setTimeout(function () {
+                    $("#loader").css("display", "none");
+                }, 4000);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+        },
+    });
 });
 
-if(final_step == "2" && isCohost == "1"){
+if (final_step == "2" && isCohost == "1") {
     $("#loader").css("display", "flex");
-    setTimeout(function(){
-        step2Open()
+    setTimeout(function () {
+        step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
-    },1000)
-   
+    }, 1000);
 }
 
-if(final_step == "3" && isCohost == "1"){
+if (final_step == "3" && isCohost == "1") {
     $("#loader").css("display", "flex");
-    setTimeout(function(){
-        step3open()
+    setTimeout(function () {
+        step3open();
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
-    },1000)
+    }, 1000);
 }
 
-if(final_step == "4" && isCohost == "1"){
+if (final_step == "4" && isCohost == "1") {
     $("#loader").css("display", "flex");
-    setTimeout(function(){
-        step4open()
+    setTimeout(function () {
+        step4open();
         $("#loader").css("display", "none");
-    },1000) 
+    }, 1000);
 }
 
-
-function step2Open(){
+function step2Open() {
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
     console.log(design);
- 
+
     $(".li_event_detail").find(".side-bar-list").addClass("active");
     if (final_step <= 1) {
         $(".side-bar-list").removeClass("active");
@@ -7811,13 +7811,13 @@ function step2Open(){
         // get_user(type);
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
-        handleActiveClass('.li_event_detail');
+        handleActiveClass(".li_event_detail");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
 }
 
-function step3open(){
+function step3open() {
     $("#close_createEvent").css("display", "block");
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
@@ -7927,7 +7927,7 @@ function step3open(){
     }
 }
 
-function step4open(){
+function step4open() {
     $("#close_createEvent").css("display", "block");
 
     var event_name = $("#event-name").val();
@@ -8006,7 +8006,7 @@ function step4open(){
         $(".event_create_percent").text("99%");
         $(".current_step").text("4 of 4");
 
-        handleActiveClass('.li_setting');
+        handleActiveClass(".li_setting");
         active_responsive_dropdown("drop-down-event-setting");
         if (design == undefined || design == "") {
         } else {
