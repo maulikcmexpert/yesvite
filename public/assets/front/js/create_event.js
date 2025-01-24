@@ -1016,7 +1016,7 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
-        datepicker();
+        // datepicker();
         startDate.add(1, "day");
     }
 
@@ -1099,7 +1099,7 @@ $(document).on("click", ".add_more_activity", function (e) {
             total_activities++;
             console.log(total_activities);
 
-            // datepicker();
+            datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
         },
@@ -2396,7 +2396,6 @@ function convertTimeToMinutes(timeStr) {
 
 let blurExecutedEndTime = false;
 $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
-    datepicker();
 
     e.preventDefault();
     var check_start=$(this)
@@ -2414,23 +2413,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         datepicker();
     }
   });
-  $(document).on("click", '.activity_start_time', function (e) {
-    // alert();
-    datepicker();
-    // e.preventDefault();
-    // var check_start=$(this)
-    // .closest(".activity-main-wrp")
-    // .find('input[name="activity-start-time[]"]')
-    // .val();
 
-    // if(check_start==""){
-    //     toastr.error('First you need to to set Start Time of Event');
-    //     $(this).val("");
-    //      $(this).datetimepicker("hide"); // Hide time picker if open
-    //      $(this).blur();
-    //     return;
-    // }
-  });
 $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
     // e.preventDefault();
     // var check_start=$(this)
@@ -7900,8 +7883,6 @@ $(document).on("click", "#close_editEvent", function (e) {
     }
     if (final_step == 3) {
         var savePage3Result = savePage3Data(1);
-        console.log(savePage3Result);
-
         if (savePage3Result === false) {
             $("#loader").css("display", "none");
             return; 
