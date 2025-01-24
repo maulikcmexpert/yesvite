@@ -2686,7 +2686,7 @@ class EventController extends BaseController
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
         
-        
+        dD($request->event_date);
         
         // if (strpos($dateString, ' To ') !== false) {
             //     list($startDate, $endDate) = explode(' To ', $dateString);
@@ -2706,7 +2706,7 @@ class EventController extends BaseController
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
         
-        dD($startDateObj,$endDateObj);
+       
         $startDateFormat = "";
         $endDateFormat = "";
         if ($startDateObj && $endDateObj) {
