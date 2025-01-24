@@ -7957,7 +7957,7 @@ $(document).on("click", "#close_editEvent", function (e) {
 });
 
 
-if(final_step == "2"){
+if(final_step == "2" && isCohost=="1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         stepOpen2()
@@ -7966,7 +7966,7 @@ if(final_step == "2"){
    
 }
 
-if(final_step == "3"){
+if(final_step == "3" && isCohost=="1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step3open()
@@ -7974,7 +7974,7 @@ if(final_step == "3"){
     },500)
 }
 
-if(final_step == "4"){
+if(final_step == "4" && isCohost=="1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step4open()
