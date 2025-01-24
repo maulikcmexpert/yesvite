@@ -758,8 +758,8 @@ function getClosest15MinuteTime() {
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
-datepicker(); 
 start_timepicker();
+datepicker(); 
 
 // flatpickr(".event_time", {
 //     enableTime: true,
