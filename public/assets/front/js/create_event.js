@@ -7949,11 +7949,12 @@ $(document).on("click", "#close_editEvent", function (e) {
 
 
 if(final_step == "2"){
-    alert("hiiii")
+    $("#loader").css("display", "flex");
     setTimeout(function(){
-        step2()
-
-    },5000)
+        stepOpen2()
+        $("#loader").css("display", "none");
+    },2000)
+   
 }
 
 if(final_step == "3"){
@@ -7965,7 +7966,7 @@ if(final_step == "4"){
 }
 
 
-function step2(){
+function stepOpen2(){
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
@@ -8000,7 +8001,7 @@ function step2(){
         // get_user(type);
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
-        handleActiveClass(this);
+        handleActiveClass('.li_event_detail');
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
