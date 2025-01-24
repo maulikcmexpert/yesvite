@@ -8001,7 +8001,7 @@ function stepOpen2(){
         // get_user(type);
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
-        handleActiveClass(this);
+        handleActiveClass('.li_event_detail');
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
     }
