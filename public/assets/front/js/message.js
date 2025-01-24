@@ -1303,7 +1303,7 @@ $(".send-message").on("keyup", async function (e) {
         if (isGroup == "true" || isGroup == true) {
             var profileIndex = await setProfileIndexCache(conversationId);
             // If profileIndex is cached, update the userTypingStatus
-            if (profileIndex) {
+            if (profileIndex != undefined) {
                 var groupRef = ref(
                     database,
                     `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
@@ -1341,8 +1341,8 @@ $(".send-message").on("keypress", async function (e) {
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);
-        console.log({ profileIndex });
-        if (profileIndex) {
+
+        if (profileIndex != undefined) {
             var groupRef = ref(
                 database,
                 `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
