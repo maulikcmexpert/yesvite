@@ -1162,9 +1162,8 @@ function bindData(current_event_id) {
         } else {
             $(".justyfy-full-btn").removeClass("activated");
         }
-        if ($(`#${target.fontFamily}Button`)) {
-            $(`#${target.fontFamily}Button`).prop("checked", true);
-        }
+        let targetFontFamily = target.fontFamily;
+        $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
