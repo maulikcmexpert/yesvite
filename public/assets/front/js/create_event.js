@@ -713,8 +713,8 @@ function datepicker() {
     });
 
     // Ensure input field is clear when the page loads
-    $(".activity_start_time").val("");
-    $(".activity_end_time").val("");
+    $(this).val("");
+    $(this).val("");
 }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
@@ -1099,7 +1099,6 @@ $(document).on("click", ".add_more_activity", function (e) {
             $("#" + id).append(response);
             total_activities++;
             console.log(total_activities);
-
             datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
@@ -7812,7 +7811,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-
+    eventData.isdraft = "0";
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -7825,14 +7824,11 @@ $(document).on("click", ".edit_checkout", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
-            if (response.is_registry == "1") {
-                // $('#gift_registry_logo').html(response.view);
-                // $('#eventModal').modal('show');
-            } else {
+            if (response == 1) {
                 toastr.success("Event Updated Successfully");
-                // window.location.href="profile";
+                window.location.href="home";
             }
-            $("#eventModal").modal("show");
+            // $("#eventModal").modal("show");
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
