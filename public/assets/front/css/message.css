@@ -1934,6 +1934,10 @@ ul.chat-list li.setpink{
     .msg-body ul li.sender .media-msg-inline {
         max-width: 220px;
     }
+    .message-area .massage-notification {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 @media only screen and (max-width:420px) {
