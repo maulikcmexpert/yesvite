@@ -7958,7 +7958,11 @@ if(final_step == "2"){
 }
 
 if(final_step == "3"){
-    
+    $("#loader").css("display", "flex");
+    setTimeout(function(){
+        step3open()
+        $("#loader").css("display", "none");
+    },2000)
 }
 
 if(final_step == "4"){
@@ -8004,5 +8008,115 @@ function stepOpen2(){
         handleActiveClass('.li_event_detail');
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
+    }
+}
+
+function step3open(){
+    $("#close_createEvent").css("display", "block");
+    // var eventDetail2 = $('#eventDetail').val();
+    // eventDetail2 = JSON.parse(eventDetail2);
+    // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
+    //     var design = eventData.desgin_selected;
+    // }else{
+
+    var event_name = $("#event-name").val();
+    var hostedby = $("#hostedby").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+
+    var schedule = $("#schedule").is(":checked");
+    var end_time = $("#end_time").is(":checked");
+    var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
+    var address_2 = $("#address2").val();
+    var address1 = $("#address1").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipcode = $("#zipcode").val();
+
+    // var activity=$('.event_all_activity_list').length;
+    // console.log(activity);
+    // if($('#schedule').is(":checked")){
+    //     if(activity==0){
+    //         toastr.error('Event Schedule: Please set event schedule');
+    //         return;
+    //     }
+    // }
+
+    if (event_name == "") {
+        toastr.error("Please enter event name");
+        return;
+    }
+    if (hostedby == "") {
+        toastr.error("Please enter hosted by");
+        return;
+    }
+    if (event_date == "") {
+        toastr.error("Please enter start date");
+        return;
+    }
+    if (start_time == "") {
+        toastr.error("Please select start time");
+        return;
+    }
+    if (end_time) {
+        rsvp_end_time = $("#end-time").val();
+        if (rsvp_end_time == "") {
+            toastr.error("Please select end time");
+            return;
+        }
+    }
+    if (rsvp_by_date_set) {
+        rsvp_by_date = $("#rsvp-by-date").val();
+        if (rsvp_by_date == "") {
+            toastr.error("RSVP by Date : Please select RSVP date");
+            return;
+        }
+    }
+
+    if ($("#isCheckAddress").is(":checked")) {
+        if (address1 == "") {
+            toastr.error("Please enter address1");
+            return;
+        }
+        if (city == "") {
+            toastr.error("Please enter city");
+            return;
+        }
+        if (state == "") {
+            toastr.error("Please enter state");
+            return;
+        }
+        if (zipcode == "") {
+            toastr.error("Please enter zipcode");
+            return;
+        }
+    }
+    var design = eventData.desgin_selected;
+    // }
+
+    // if( design == undefined || design == ''){
+    //     console.log(final_step);
+    if (final_step <= "2") {
+        return;
+    } else {
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $("#edit-design-temp").css("display", "none");
+        $(".step_4").css("display", "none");
+        $(".step_final_checkout").css("display", "none");
+        $(".step_3").show();
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design").addClass("menu-success");
+        $(".event_create_percent").text("75%");
+        $(".current_step").text("3 of 4");
+        $("#sidebar_select_design_category").css("display", "none");
+        active_responsive_dropdown("drop-down-event-guest");
+        handleActiveClass(".li_guest");
+        var type = "all";
+        const stepVal = $("#CheckCuurentStep").val();
+        // alert(stepVal);
+        if (stepVal == "0") {
+            get_user(type);
+        }
     }
 }
