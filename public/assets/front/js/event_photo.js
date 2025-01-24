@@ -603,6 +603,17 @@ $(document).on('click', '.open_photo_model', function () {
                         `);
                     });
                 }
+                swiper.destroy(true, true);
+
+                // Reinitialize Swiper
+                swiper = new Swiper(".photo-detail-slider", {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                });
                 $('#likes').text(data.total_likes + ' Likes');
                 // Add 'Likes' after the number
                 $('#comments').text(data.total_comments + ' Comments')
