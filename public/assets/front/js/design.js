@@ -558,21 +558,16 @@ function bindData(current_event_id) {
         if (image) {
             console.log("image");
             fabric.Image.fromURL(image, function (img) {
-                var canvasWidth = canvas.getWidth();
-                var canvasHeight = canvas.getHeight();
+                var canvasWidth = canvas.getWidth(); // 345
+                var canvasHeight = canvas.getHeight(); // 490
 
-                // Make sure the canvas dimensions are set to match the image resolution
-                canvas.setDimensions({
-                    width: img.width,
-                    height: img.height,
-                });
-
-                // Calculate the scale factor to fit the image within the canvas
+                // Calculate scale factor to fit the image within the fixed canvas size
                 var scaleFactor = Math.min(
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
 
+                // Set image properties
                 img.set({
                     left: 0,
                     top: 0,
@@ -582,12 +577,11 @@ function bindData(current_event_id) {
                     hasControls: false, // Disable controls on background image
                 });
 
-                // Set the background image with proper scaling
+                // Set the background image
                 canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
 
-                // For Retina or high-DPI displays
-                canvas.calcOffset(); // This ensures that the offsets are correctly calculated
-                canvas.setZoom(window.devicePixelRatio); // Apply device pixel ratio for higher quality rendering
+                // Ensuring that high resolution is kept when resizing the canvas
+                canvas.renderAll(); // Force re-render for the image to fit properly
             });
 
             if (dbJson) {
