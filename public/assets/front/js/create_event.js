@@ -7617,6 +7617,7 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
     eventData.is_update_event = "0";
+    eventData.isDraftEdit= $(this).attr('data-isDraftEdit');
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -7742,7 +7743,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         });
 });
 
-if(final_step == "2"){
+if(final_step == "2" && isCohost == "1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step2Open()
@@ -7753,7 +7754,7 @@ if(final_step == "2"){
    
 }
 
-if(final_step == "3"){
+if(final_step == "3" && isCohost == "1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step3open()
@@ -7762,7 +7763,7 @@ if(final_step == "3"){
     },1000)
 }
 
-if(final_step == "4"){
+if(final_step == "4" && isCohost == "1"){
     $("#loader").css("display", "flex");
     setTimeout(function(){
         step4open()
