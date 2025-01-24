@@ -3654,14 +3654,32 @@ $(document).ready(function () {
     updateUnreadMessageBadge();
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
-    event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
-    const msgList = $(this).parent().parent();
+    event.stopPropagation(); // Prevent event propagation to .msg-list
 
-    if (msgList.hasClass("pinned") && $(this).prop("checked")) {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    let allPinned = true;
+    let somePinned = false;
+    if (checkedConversations.length <= 0) {
+        return;
+    }
+    checkedConversations.each(function () {
+        const conversationElement = $(this).closest(".conversation");
+        if (conversationElement.hasClass("pinned")) {
+            somePinned = true;
+        } else {
+            allPinned = false;
+        }
+    });
+
+    if (allPinned) {
+        // If all checked conversations are pinned
         $(".multi-pin").attr("changeWith", "0");
         $(".pin-icn").addClass("d-none");
         $(".unpin-icn").removeClass("d-none");
     } else {
+        // If some or none are pinned
         $(".multi-pin").attr("changeWith", "1");
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");

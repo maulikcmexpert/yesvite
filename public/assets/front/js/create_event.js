@@ -712,7 +712,7 @@ function datepicker() {
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
-datepicker();
+// datepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -7867,40 +7867,26 @@ $(document).on("click", ".design-sidebar-action", function() {
     }
 });
 
-$(document).on("click", "#close_editEvent", function () {
-    var event_type = $("#event-type").val();
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    if (event_type == "") {
-        $("#deleteModal").modal("show");
-        return;
+$(document).on("click", "#close_editEvent", function (e) {
+    if (final_step == 2) {
+        savePage1Data(1);
     }
- 
-    if (event_date == "") {
-        $("#deleteModal").modal("show");
-        return;
+    if (final_step == 3) {
+        var savePage3Result = savePage3Data(1);
+        console.log(savePage3Result);
+
+        if (savePage3Result === false) {
+            $("#loader").css("display", "none");
+            return; 
+        }
     }
-    $("#loader").css("display", "block");
 
-        let text = $(".current_step").text();
-        let firstLetter = text.split(" ")[0];
-       
-        if (final_step == 2) {
-            savePage1Data(1);
-        }
-        if (final_step == 3) {
-            var savePage3Result = savePage3Data(1);
-            console.log(savePage3Result);
-
-            if (savePage3Result === false) {
-                $("#loader").css("display", "none");
-                return; 
-            }
-        }
-
-        eventData.step = final_step;
-        eventData.isdraft = "1";
-        savePage4Data();
+    eventData.step = final_step;
+    eventData.isdraft = "1";
+    savePage4Data();
+    $(".main-content-wrp").addClass("blurred");
+    e.stopPropagation();
+    e.preventDefault();
         $.ajax({
             url: base_url + "event/editStore",
             type: "POST",
