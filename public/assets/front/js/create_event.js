@@ -679,38 +679,38 @@ if (/Mobi/.test(navigator.userAgent)) {
 // })
 // datepicker();
 
-function datepicker() {
-    $(".timepicker").datetimepicker({
-        //  keepOpen: true,
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-        // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
+// function datepicker() {
+//     $(".timepicker").datetimepicker({
+//         //  keepOpen: true,
+//         format: "LT",
+//         icons: {
+//             up: "fa fa-chevron-up",
+//             down: "fa fa-chevron-down",
+//         },
+//         useCurrent: false,
+//         ignoreReadonly: true,
+//         stepping: 15,
+//         // defaultDate: getClosest15MinuteTime(), // Set the closest 15-minute time as the default
 
-        // Set stepping to 15 minutes
-        // defaultDate: now
-        //  debug: true
-    }).on('dp.show', function () {
-        const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = getClosest15MinuteTime();
+//         // Set stepping to 15 minutes
+//         // defaultDate: now
+//         //  debug: true
+//     }).on('dp.show', function () {
+//         const picker = $(this).data("DateTimePicker");
+//         const closest15MinTime = getClosest15MinuteTime();
 
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime); 
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
-    });
+//         // Set the picker to the closest 15-minute time dynamically
+//         picker.date(closest15MinTime); 
+//     }).on('dp.hide', function (e) {
+//         // Automatically set the selected value in the input field when the picker closes
+//         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+//         $(this).val(selectedTime); // Set the formatted time value in the input field
+//     });
 
-    // Ensure input field is clear when the page loads
-    $(this).val("");
-    $(this).val("");
-}
+//     // Ensure input field is clear when the page loads
+//     $(this).val("");
+//     $(this).val("");
+// }
 
 // function start_timepicker() {
 //     $(".start_timepicker").datetimepicker({
@@ -813,24 +813,24 @@ function initializePickers() {
 // Call the function to initialize the pickers
 initializePickers();
 
-function getClosest15MinuteTime() {
-    const now = new Date();
-    const minutes = now.getMinutes();
-    const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
-    if (roundedMinutes === 60) {
-        now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
-        now.setMinutes(0); // Reset minutes to 0
-    } else {
-        now.setMinutes(roundedMinutes);
-    }
-    now.setSeconds(0); // Reset seconds to 0
-    now.setMilliseconds(0); // Reset milliseconds to 0
-    return now;
-}
+// function getClosest15MinuteTime() {
+//     const now = new Date();
+//     const minutes = now.getMinutes();
+//     const roundedMinutes = Math.ceil(minutes / 15) * 15; // Round up to the nearest 15 minutes
+//     if (roundedMinutes === 60) {
+//         now.setHours(now.getHours() + 1); // Increment the hour if rounded to 60
+//         now.setMinutes(0); // Reset minutes to 0
+//     } else {
+//         now.setMinutes(roundedMinutes);
+//     }
+//     now.setSeconds(0); // Reset seconds to 0
+//     now.setMilliseconds(0); // Reset milliseconds to 0
+//     return now;
+// }
 // $(".timepicker").on("dp.show", function () {
 //     $(this).val(""); // Clear the input when the picker is shown
 // });
-datepicker();
+// datepicker();
 // start_timepicker();
 
 // flatpickr(".event_time", {

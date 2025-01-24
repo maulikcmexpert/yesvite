@@ -1249,6 +1249,15 @@
 
 .edit-images-button-inner button.activated{
     background-color: var(--primaryColor) !important;
+    border-radius: 10px !important;
+}
+
+.edit-images-button-inner button.activated h6{
+    color: #fff !important;
+}
+
+.edit-images-button-inner button{
+    padding: 10px !important;
 }
 
 .edit-images-button-inner [type="file"] {
