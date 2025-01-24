@@ -746,7 +746,7 @@ function start_timepicker() {
         // Automatically set the selected value in the input field when the picker closes
         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
         $(this).val(selectedTime); // Set the formatted time value in the input field
-    });;
+    });
 
     // Ensure input field is clear when the page loads
 
