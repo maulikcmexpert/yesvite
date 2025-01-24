@@ -210,7 +210,12 @@
                         <h4 class="event_create_percent">25%</h4>
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
+                    @if ($eventDetail['id']=="")
                     <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
+                        
+                    @else
+                    <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
+                    @endif
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
