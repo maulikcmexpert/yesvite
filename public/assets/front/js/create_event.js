@@ -1016,7 +1016,7 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
-        datepicker();
+        // datepicker();
         startDate.add(1, "day");
     }
 
