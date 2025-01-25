@@ -1592,9 +1592,12 @@
                                                                         <input type="hidden"
                                                                             class="category-index-key"
                                                                             value="{{ $index }}">
-                                                                        <input type="hidden"
+                                                                        {{-- <input type="hidden"
                                                                             class="category-item-quantity"
-                                                                            value="{{ $items['quantity'] }}">
+                                                                            value="{{ $items['quantity'] }}"> --}}
+                                                                            <input type="hidden"
+                                                                            class="category-item-quantity"
+                                                                            value="{{ $items['itmquantity'] }}">
                                                                         <input type="hidden"
                                                                             class="item-quantity-minus"
                                                                             value="0">
