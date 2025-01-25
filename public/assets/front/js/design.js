@@ -1171,6 +1171,38 @@ function bindData(current_event_id) {
         $("#letterSpacingRange").val(target.charSpacing);
         $("#lineHeightInput").val(target.lineHeight);
         $("#lineHeightRange").val(target.lineHeight);
+        $(".size-btn").removeClass("activated");
+        const textCase = target.textCase || "none"; // Default to "none"
+
+        $(".uppercase-btn").toggleClass("activated", textCase === "uppercase");
+        $(".lowercase-btn").toggleClass("activated", textCase === "lowercase");
+        $(".capitalize-btn").toggleClass(
+            "activated",
+            textCase === "capitalize"
+        );
+
+        const text = target.text.trim();
+        console.log({ text });
+        // Helper functions to determine the case
+        const isUpperCase = (str) => str === str.toUpperCase();
+        const isLowerCase = (str) => str === str.toLowerCase();
+        const isCapitalized = (str) =>
+            str
+                .split(" ")
+                .every(
+                    (word) =>
+                        word.charAt(0).toUpperCase() +
+                            word.slice(1).toLowerCase() ===
+                        word
+                );
+
+        if (isUpperCase(text)) {
+            $(".uppercase-btn").addClass("activated");
+        } else if (isLowerCase(text)) {
+            $(".lowercase-btn").addClass("activated");
+        } else if (isCapitalized(text)) {
+            $(".capitalize-btn").addClass("activated");
+        }
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
@@ -1839,7 +1871,6 @@ function bindData(current_event_id) {
 
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
-            $(".size-btn").removeClass("activated");
         } else {
             // alert();
             canvas.getObjects("textbox").forEach(function (tb) {
@@ -2064,16 +2095,21 @@ function bindData(current_event_id) {
             justifyCenter: () => activeObject.set("textAlign", "center"),
             justifyRight: () => activeObject.set("textAlign", "right"),
             justifyFull: () => activeObject.set("textAlign", "justify"),
-            uppercase: () =>
-                activeObject.set("text", activeObject.text.toUpperCase()),
-            lowercase: () =>
-                activeObject.set("text", activeObject.text.toLowerCase()),
+            uppercase: () => {
+                activeObject.set("text", activeObject.text.toUpperCase());
+                activeObject.set("textCase", "uppercase"); // Add custom property
+            },
+            lowercase: () => {
+                activeObject.set("text", activeObject.text.toLowerCase());
+                activeObject.set("textCase", "lowercase"); // Add custom property
+            },
             capitalize: () => {
                 const capitalizedText = activeObject.text.replace(
                     /\b\w/g,
                     (char) => char.toUpperCase()
                 );
                 activeObject.set("text", capitalizedText);
+                activeObject.set("textCase", "capitalize"); // Add custom property
             },
         };
 
