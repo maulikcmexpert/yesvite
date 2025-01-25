@@ -354,28 +354,28 @@ class HomeController extends BaseController
             //         'color' => $colorClass
             //     ];
             // }
-            $colorIndex = 0; // Index for color
-            $lastDate = null; // To track the last processed date
             
-            foreach ($eventcalenderdata as $event) {
-                $currentDate = date('Y-m-d', strtotime($event->start_date)); // Extract date only
-            
-                if ($lastDate !== $currentDate) {
-                    // Reset the color index for a new date
-                    $colorIndex = 0;
-                    $lastDate = $currentDate;
-                }
-            
-                $colorClass = $color[$colorIndex % count($color)];
-                $colorIndex++;
-            
-                $events_calender[] = [
-                    'date' => $currentDate, // Use date without time
-                    'title' => $event->event_name,
-                    'color' => $colorClass
-                ];
-            }
-            
+$groupedEvents = [];
+
+// Group events by their date
+foreach ($eventcalenderdata as $event) {
+    $groupedEvents[$event->start_date][] = $event;
+}
+
+foreach ($groupedEvents as $date => $eventsOnDate) {
+    $colorIndex = 0; // Reset color index for each date
+
+    foreach ($eventsOnDate as $event) {
+        $colorClass = $color[$colorIndex % count($color)];
+        $colorIndex++;
+
+        $events_calender[] = [
+            'date' => $event->start_date,
+            'title' => $event->event_name,
+            'color' => $colorClass
+        ];
+    }
+}
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
