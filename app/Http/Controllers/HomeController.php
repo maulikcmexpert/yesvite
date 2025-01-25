@@ -341,27 +341,19 @@ class HomeController extends BaseController
             $color = ['blue', 'green', 'yellow', 'orange'];
             $events_calender = [];
             
-            // Group events by their start_date
             $groupedEvents = [];
             foreach ($eventcalenderdata as $event) {
                 $groupedEvents[$event->start_date][] = $event;
             }
-            
-            // Assign colors in order for each date
             foreach ($groupedEvents as $date => $eventsOnDate) {
-                $colorIndex = 0; // Reset color index for each new date
-            
-                // Ensure that the events on the same date are processed in the same order every time
-                // Sort events by event name or any field if needed
+                $colorIndex = 0; 
                 usort($eventsOnDate, function ($a, $b) {
-                    return strcmp($a->event_name, $b->event_name);  // Sort by event name as an example, adjust as needed
+                    return strcmp($a->event_name, $b->event_name); 
                 });
             
                 foreach ($eventsOnDate as $event) {
-                    // Assign colors in the exact order: blue, green, yellow, orange
                     $colorClass = $color[$colorIndex % count($color)];
-                    $colorIndex++; // Increment color index for the next event
-            
+                    $colorIndex++; 
                     $events_calender[] = [
                         'date' => $event->start_date,
                         'title' => $event->event_name,
