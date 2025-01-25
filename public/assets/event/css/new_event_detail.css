@@ -1335,8 +1335,12 @@
     width: 100%; /* Prevent layout shifts */
 }
 
+.new-event-sidebar-menu ul li{
+    position: relative;
+}
 
-.new-event-sidebar-menu ul li span::after{
+
+.new-event-sidebar-menu ul li::after{
     content: "";
     position: absolute;
     bottom: 0;
