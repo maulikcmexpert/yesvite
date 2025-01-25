@@ -8049,8 +8049,8 @@ function update_self_bring(
                 response=0;
                 $("#missing-category-" + categoryIndexKey).text(0);
             }else{
-
-                $("#missing-category-" + categoryIndexKey).text(response);
+                let quantity = response - innerUserQnt;
+                $("#missing-category-" + categoryIndexKey).text(quantity);
             }
             // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);

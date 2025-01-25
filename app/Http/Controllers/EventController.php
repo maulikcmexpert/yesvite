@@ -428,7 +428,7 @@ class EventController extends BaseController
 
                                 $potluckItem['item_carry_users'] = [];
 
-                                foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                                foreach ($itemValue->user_potluck_items as $userKey => $itemcarryUser) {
                                     $userPotluckItem['id'] = $itemcarryUser->id;
                                     $userPotluckItem['user_id'] = $itemcarryUser->user_id;
                                     $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $id) ? 1 : 0;
@@ -437,6 +437,8 @@ class EventController extends BaseController
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
+                                    $categories[$key]['item'][$itemkey]['item_carry_users']= $userPotluckItem;
+
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                     if($itemcarryUser->user_id != $id){
@@ -463,7 +465,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['podluck_category_list']);
+                    dd(session('categories'));
                 }
             }
         } else {
