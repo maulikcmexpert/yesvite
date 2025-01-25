@@ -594,7 +594,7 @@ class RsvpController extends BaseController
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
 
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
@@ -783,18 +783,17 @@ class RsvpController extends BaseController
 
                 DB::commit();
 
-                sendNotification('sent_rsvp', $notificationParam);
-                $url = route('rsvp', [
-                    'event_invited_user_id' => $request->event_invited_user_id,
-                    'eventId' => $request->event_id,
-                ]);
+                dd($notificationParam);
+                sendNotification('sent_rsvp', $notificationParam);   
+
+
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
-                    // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
-                    return redirect()->to($url)->with('msg', 'You are going to this event');
+                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
+                    // return redirect()->to($url)->with('msg', 'You are going to this event');
                 } elseif ($request->rsvp_status == "0") {
-                    // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
-                    return redirect()->to($url)->with('msg', 'You are going to this event');
+                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
+                    // return redirect()->to($url)->with('msg', 'You are going to this event');
 
                 }
             }

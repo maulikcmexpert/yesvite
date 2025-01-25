@@ -1633,6 +1633,7 @@
                                                                         <a href="#" class="delete-self-bring"
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
+                                                                            data-innerUserQnt="{{ $items['innerUserQnt'] }}"
                                                                             data-itemquantity="{{ $items['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
@@ -1725,6 +1726,9 @@
                                                                         <input type="hidden"
                                                                             class="item-quantity-minus"
                                                                             value="{{ $values['quantity'] }}">
+                                                                        <input type="hidden"
+                                                                            class="innerUserQnt"
+                                                                            value="{{ $items['innerUserQnt'] }}">
                                                                         <button class="qty-btnminus"
                                                                             type="button"><i
                                                                                 class="fa fa-minus"></i></button>
@@ -1761,6 +1765,7 @@
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
                                                                             data-itemquantity="{{ $items['quantity'] }}"
+                                                                            data-innerUserQnt="{{ $items['innerUserQnt'] }}"
                                                                             data-userquantity="{{ $values['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
