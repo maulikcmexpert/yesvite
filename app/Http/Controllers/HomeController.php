@@ -338,19 +338,44 @@ class HomeController extends BaseController
 
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
+            $color = ['blue','green', 'yellow', 'orange', ];
             $events_calender = [];
-            $color = ['blue', 'orange', 'green', 'yellow'];
-            $colorIndex = 0;
+            // $colorCount = count($color); // Get total number of colors
 
+            // foreach ($eventcalenderdata as $index=> $event) {
+            //     // $colorClass = $color[$colorIndex % count($color)];
+            //     $colorClass = $color[$index % $colorCount];
+
+            //     // dd(1);
+            //     // $colorIndex++;
+            //     $events_calender[] = [
+            //         'date' => $event->start_date,
+            //         'title' => $event->event_name,
+            //         'color' => $colorClass
+            //     ];
+            // }
+            $colorIndex = 0; // Index for color
+            $lastDate = null; // To track the last processed date
+            
             foreach ($eventcalenderdata as $event) {
+                $currentDate = date('Y-m-d', strtotime($event->start_date)); // Extract date only
+            
+                if ($lastDate !== $currentDate) {
+                    // Reset the color index for a new date
+                    $colorIndex = 0;
+                    $lastDate = $currentDate;
+                }
+            
                 $colorClass = $color[$colorIndex % count($color)];
                 $colorIndex++;
+            
                 $events_calender[] = [
-                    'date' => $event->start_date,
+                    'date' => $currentDate, // Use date without time
                     'title' => $event->event_name,
                     'color' => $colorClass
                 ];
             }
+            
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
