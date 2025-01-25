@@ -418,8 +418,8 @@ class RsvpController extends BaseController
 
             $sync_contact_user_id = "";
             $user_email="";
-            dd($user_id);
-            if($user_id==null || $user_id=""){
+            // dd($user_id);
+            if($user_id!=null){
                 $user_email = User::where('id', $user_id)->first();
             }
             if ($user_email == "") {
