@@ -4778,7 +4778,7 @@ function update_self_bring(
                 current_item = current_item - 1;
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
-            let updatedQty = innerUserQnt;
+            let updatedQty = innerUserQnt+quantity;
             if (updatedQty <= categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
