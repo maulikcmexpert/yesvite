@@ -4693,11 +4693,13 @@ function minusBTN(that) {
         input.val(value - 1);
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
+    var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     console.log({ categoryItemQuantity, quantity });
 
     if (categoryItemQuantity >= quantity) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
+                innerUserQnt,
                 categoryItemKey,
                 categoryIndexKey,
                 quantity,
