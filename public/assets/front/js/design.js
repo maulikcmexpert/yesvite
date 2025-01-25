@@ -1176,6 +1176,10 @@ function bindData(current_event_id) {
         $(".design-sidebar-action").removeClass("activated");
         $(this).addClass("activated");
     });
+    $(".size-btn").click(function () {
+        $(".size-btn").removeClass("activated");
+        $(this).addClass("activated");
+    });
     canvas = new fabric.Canvas("imageEditor1", {
         width: 345, // Canvas width
         height: 490, // Canvas height
@@ -1835,6 +1839,7 @@ function bindData(current_event_id) {
 
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
+            $(".size-btn").removeClass("activated");
         } else {
             // alert();
             canvas.getObjects("textbox").forEach(function (tb) {
