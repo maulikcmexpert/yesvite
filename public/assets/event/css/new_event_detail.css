@@ -1360,10 +1360,6 @@
     display: none;
 }
 
-.menu-success .new-event-sidebar-menu ul:has(li::after) {
-    border: 1px dashed var(--green);
-}
-
 .new-event-sidebar-menu > ul > li.menu-success::after {
     border: 1px dashed var(--green);
 }
