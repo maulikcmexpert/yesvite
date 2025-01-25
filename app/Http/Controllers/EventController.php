@@ -1695,11 +1695,11 @@ class EventController extends BaseController
         }
 
         session()->put('category', $categories);
+        dd($total_item,$total_quantity,$quantity);
         if($request->type == "minus"){
             $total_quantity= $total_quantity - $quantity;
         }else{
-            $total_quantity= $total_quantity + $quantity;
-            
+            $total_quantity= $total_quantity + $quantity;   
         }
         $total_item = $total_item - $total_quantity ;
         return $total_item;
