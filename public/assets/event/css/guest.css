@@ -876,34 +876,32 @@
     }
 
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
-        max-height: calc(100vh - 340px);
+        max-height: calc(100vh - 42.5vh);
     }
     .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
-        max-height: calc(100vh - 340px);
+        max-height: calc(100vh - 42.5vh);
     }
-    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts {
-        max-height: calc(100vh - 500px);
+    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+        max-height: calc(100vh - 42.5vh);
     }
-
 
     .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user) .user-contacts{
-        max-height: calc(100vh - 265px);
+        max-height: calc(100vh - 33.125vh);
     }
     .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user) .user-contacts{
-        max-height: calc(100vh - 265px);
+        max-height: calc(100vh - 33.125vh);
     }
-
-    .new-guest-content-wrp .user-contacts {
-        max-height: calc(100vh - 350px);
+    .new-guest-content-wrp .user-contacts{
+        max-height: calc(100vh - 25vh);
     }
     .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
-        max-height: calc(100vh - 420px);
+        max-height: calc(100vh - 33.75vh);
     }
+
 
     #sidebar_thankyou_card:has(.alert-box) .list_thankyou_card {
         max-height: calc(100vh - 490px) !important;
     }
-
     .list_thankyou_card {
         overflow: hidden;
         overflow-y: scroll;
