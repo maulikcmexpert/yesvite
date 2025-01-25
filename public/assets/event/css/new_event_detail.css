@@ -1360,6 +1360,10 @@
     display: none;
 }
 
+.new-event-sidebar-menu ul li .menu-success .new-event-sidebar-menu ul:has(li::after){
+    border: 1px dashed var(--green);
+}
+
 /* ======Responsiveness===== */
 
 
