@@ -17,6 +17,8 @@ class UserOpt extends Model
     protected $fillable = [
         'phone',
         'opt_in_status',
+        'event_invited_user_id',
+        'event_id'
     ];
 
     /**
