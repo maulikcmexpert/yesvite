@@ -127,7 +127,7 @@
 }
 
 .new-event-sidebar-menu ul li {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     cursor: pointer;
 }
 
@@ -1334,6 +1334,22 @@
     position: fixed; /* Lock the body in place */
     width: 100%; /* Prevent layout shifts */
 }
+
+.new-event-sidebar-menu ul li{
+    position: relative;
+}
+
+
+.new-event-sidebar-menu > ul > li::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: red;
+    width: 2px;
+    height: 100%;
+}
+
 /* ======Responsiveness===== */
 
 
