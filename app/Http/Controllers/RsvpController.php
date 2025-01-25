@@ -550,7 +550,7 @@ class RsvpController extends BaseController
                 // $css = 'message.css';
                 // $css1 = 'audio.css';
             }
-            dd($user_id,$sync_contact_user_id);
+            // dd($user_id,$sync_contact_user_id);
             return view('layout', compact(
                 'title',
                 'page',
@@ -596,7 +596,7 @@ class RsvpController extends BaseController
     public function store(Request $request)
     {
 
-        // dd($request);
+        dd($request);
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
         $event_invited_user_id = decrypt($request->event_invited_user_id);
