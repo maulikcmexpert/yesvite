@@ -619,7 +619,7 @@ class RsvpController extends BaseController
             } else {
                 // dd(1);
                 $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                    $query->where('app_user', '1');
+                    // $query->where('app_user', '1');
                 })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
             }
 
