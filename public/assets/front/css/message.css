@@ -1725,10 +1725,10 @@ ul.chat-list li.setpink{
 }
 
 .ui-widget-content.ui-autocomplete .suggestion-item .user-detail h3{
-    max-width: 100%;
+    max-width: calc(100% - 20px);
 }
 .ui-widget-content.ui-autocomplete .suggestion-item .user-detail span{
-    max-width: 100%;
+    max-width: calc(100% - 20px);
 }
 
 /* ======= responsive ======== */
