@@ -125,12 +125,8 @@ $("#dropdownButton").on("click", function (event) {
     $(".notification-dropdown-menu").toggleClass("show");
     if ($(".header-profile-dropdown").hasClass("show")) {
         $(".header-profile-dropdown").removeClass("show");
-        $(".line").removeClass("active");
     }
-    if ($(".mobile-menu-wrp").hasClass("active")) {
-        $(".mobile-menu-wrp").removeClass("active");
-        $(".line").removeClass("active");
-    }
+    
 });
 
 
@@ -138,6 +134,13 @@ $(".moblie-menu-bar").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
     if ($(".notification-dropdown-menu").hasClass("show")) {
         $(".notification-dropdown-menu").removeClass("show");
+    }
+});
+$(".header-notification-wrp").on("click", function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    if ($(".mobile-menu-wrp").hasClass("active")) {
+        $(".mobile-menu-wrp").removeClass("active");
+        $(".line").removeClass("active");
     }
 });
 
