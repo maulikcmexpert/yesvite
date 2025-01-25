@@ -1645,7 +1645,6 @@ class EventController extends BaseController
 
     public function updateSelfBring(Request $request)
     {
-        dd($categories = Session::get('category'));
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
