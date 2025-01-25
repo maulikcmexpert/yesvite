@@ -148,6 +148,7 @@ class RsvpController extends BaseController
 
         $event_id =  decrypt($eventId);
         $event_invited_user_id = decrypt($event_invited_user_id);
+        dd($event_invited_user_id);
         // $user_id = decrypt($event_invited_user_id);
 
         $user_id= EventInvitedUser::where(['id',$event_invited_user_id])->first()->user_id;
