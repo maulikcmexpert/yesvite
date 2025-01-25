@@ -1557,8 +1557,9 @@
                                                         class="accordion-collapse d-none" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample">
                                                         <div class="accordion-body">
-                                                            <div class="accordion-body-content"
-                                                                style="display: none;">
+                                                            <div class="accordion-body-content limits-count"
+                                                            id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                        
                                                                 @if (Auth::guard('web')->user()->profile != '')
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
@@ -1570,9 +1571,7 @@
                                                                     </h5>
                                                                 @endif
                                                                 <span class="ms-auto">1</span>
-                                                            </div>
-                                                            <div class="accordion-body-content limits-count"
-                                                                id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                                                            
                                                                 @if (Auth::guard('web')->user()->profile == '')
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
