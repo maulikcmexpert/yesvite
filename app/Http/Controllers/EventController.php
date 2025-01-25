@@ -397,6 +397,7 @@ class EventController extends BaseController
                         $potluckCategory['items'] = [];
                         $categoryQuantity = 0;
                         $remainingQnt = 0;
+                        $totalItem=0;
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             $itemData = [];
@@ -437,6 +438,7 @@ class EventController extends BaseController
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                 }
+                                $totalItem = $totalItem +1; 
                                 $remainingQnt = $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckCategory['items'][] = $potluckItem;
@@ -445,13 +447,15 @@ class EventController extends BaseController
                         $remainingQnt = $remainingQnt - $categoryQuantity;
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
+                        $potluckCategory['totalItem'] = $totalItem;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
+
                     }
                     // Update session after the loop    
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd();
+                    // dd( $eventDetail['podluck_category_list']);
                 }
             }
         } else {
@@ -2568,7 +2572,7 @@ class EventController extends BaseController
         try {
             DB::beginTransaction();
             $deleteEvent = Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
-            // dd($event_id,$user->id);
+            dd($event_id,$user->id);
             if (!empty($event_id)) {
                 Notification::where('event_id', $event_id)->delete();
                 $deleteEvent->reason = $reason;

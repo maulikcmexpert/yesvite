@@ -1410,10 +1410,10 @@
                                                     id="missing-category-{{ $data['id'] }}">0</span> Missing</h6>
                                         @endif
                                         <input type="hidden" class="total-potluck-category{{ $data['id'] }}"
-                                            value="2">
+                                            value="{{$data['totalItem']}}">
                                         <a href="#" class="me-3 add_potluck_item"
                                             id="potluck{{ $data['id'] }}" data-id="{{ $data['id'] }}"
-                                            style="display: none;">
+                                            style="{{($data['quantity'] > $data['totalItem']) ? '' : 'display:none'}}">
                                             <svg width="22" height="22" viewBox="0 0 22 22"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
