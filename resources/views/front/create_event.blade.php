@@ -1412,7 +1412,7 @@
                                         <input type="hidden" class="total-potluck-category{{ $data['id'] }}"
                                             value="{{$data['totalItem']}}">
                                         <a href="#" class="me-3 add_potluck_item"
-                                            id="potluck{{ $data['id'] }}" data-id="{{ $data['id'] }}"
+                                            id="potluck-{{ $data['id'] }}" data-id="{{ $data['id'] }}"
                                             style="{{($data['quantity'] > $data['totalItem']) ? '' : 'display:none'}}">
                                             <svg width="22" height="22" viewBox="0 0 22 22"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1557,8 +1557,9 @@
                                                         class="accordion-collapse d-none" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample">
                                                         <div class="accordion-body">
-                                                            <div class="accordion-body-content"
-                                                                style="display: none;">
+                                                            <div class="accordion-body-content limits-count"
+                                                            id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                        
                                                                 @if (Auth::guard('web')->user()->profile != '')
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
@@ -1568,12 +1569,8 @@
                                                                     <h5>{{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
-                                                                @endif
-                                                                <span class="ms-auto">1</span>
-                                                            </div>
-                                                            <div class="accordion-body-content limits-count"
-                                                                id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
-                                                                @if (Auth::guard('web')->user()->profile == '')
+                                                                @else
+                                                                {{-- <span class="ms-auto">1</span> --}}
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp

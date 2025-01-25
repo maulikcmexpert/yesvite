@@ -455,7 +455,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd( $eventDetail['podluck_category_list']);
+                    dd( $eventDetail['podluck_category_list']);
                 }
             }
         } else {
@@ -1649,7 +1649,7 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-
+        dd($categories,$categoryItemKey,$categoryIndexKey);
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
