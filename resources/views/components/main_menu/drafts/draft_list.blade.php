@@ -90,44 +90,36 @@
     </div>
   </div>
   <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const saveDates = document.querySelectorAll('.last-save');
-  
-  saveDates.forEach(function(saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date');
-    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
-    
-    // Format the date according to the required format
-    const options = {
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric', 
-      hour: 'numeric', 
-      minute: 'numeric', 
-      hour12: true
-    };
+    document.addEventListener("DOMContentLoaded", function () {
+      const saveDates = document.querySelectorAll('.last-save');
 
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
-    
-    // Debugging: Log the formattedDate to understand its structure
-    console.log('Formatted Date:', formattedDate);
-    
-    // Split the date and time
-    const dateParts = formattedDate.split(', ');
-    
-    if (dateParts.length === 2) {
-      const [monthDay, yearAndTime] = dateParts; // Split "December 23" and "2022, 8:31 PM"
-      const [year, time] = yearAndTime.split(' '); // Separate "2022" and "8:31 PM"
+      saveDates.forEach(function (saveDateElement) {
+        const savedDate = saveDateElement.getAttribute('data-save-date');
+        const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Adjusting for LA timezone
+        
+        // Format the date according to the required format
+        const options = {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        };
 
-      // Final date formatting: "December 23, 2022 - 8:31 PM"
-      const finalDate = `${monthDay}, ${year} - ${time.toUpperCase()}`;
-      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-    } else {
-      console.error('Date format issue:', formattedDate);
-    }
-  });
-});
+        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
+
+        if (formattedDate) {
+          // Format the final string as "Month Day, Year - Time AM/PM"
+          const finalDate = formattedDate.replace(/, (\d+:\d+ [APM]+)/, ' - $1').toUpperCase();
+          saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+        } else {
+          console.error('Date formatting failed:', savedDate);
+        }
+      });
+    }); 
 </script>
+
 
 
 
