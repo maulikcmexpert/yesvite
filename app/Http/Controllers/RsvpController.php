@@ -658,7 +658,12 @@ class RsvpController extends BaseController
 
                 $rsvpSent->event_id = $eventId;
 
-                $rsvpSent->user_id = $userId;
+                // $rsvpSent->user_id = $userId;
+                if ($request->input('user_id') != "") {
+                    $rsvpSent->user_id = $userId;
+                } else {
+                    $rsvpSent->sync_id = $userId;
+                }
 
                 $rsvpSent->rsvp_status = $request->rsvp_status;
 
