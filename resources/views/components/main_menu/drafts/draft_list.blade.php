@@ -90,49 +90,50 @@
     </div>
   </div>
   <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          const saveDates = document.querySelectorAll('.last-save');
-          
-          saveDates.forEach(function(saveDateElement) {
-            const savedDate = saveDateElement.getAttribute('data-save-date');
-            const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
-            
-            // Format the date according to the required format
-            const options = {
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric', 
-              hour: 'numeric', 
-              minute: 'numeric', 
-              hour12: true
-            };
+document.addEventListener("DOMContentLoaded", function() {
+  const saveDates = document.querySelectorAll('.last-save');
+  
+  saveDates.forEach(function(saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
+    
+    // Format the date according to the required format
+    const options = {
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: 'numeric', 
+      minute: 'numeric', 
+      hour12: true
+    };
 
-            const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
-            
-            // Debugging: Log the formattedDate to understand its structure
-            console.log('Formatted Date:', formattedDate);
-            
-            // Split based on 'at' to separate date and time
-            const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
-            
-            if (dateParts.length === 2) {
-              const datePart = dateParts[0];  // "25 January 2025"
-              let timePart = dateParts[1];    // "9:57 am"
-              
-              // Replace the comma in the date part to get "25 January, 2025"
-              const dateWithComma = datePart.replace(' ', ', ');
-              
-              // Convert AM/PM to uppercase
-              timePart = timePart.toUpperCase();
-              
-              // Final date formatting: "25 January, 2025 - 9:57 AM"
-              const finalDate = `${dateWithComma} - ${timePart}`;
-              saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-            } else {
-              console.error('Date format issue:', formattedDate);
-            }
-          });
-        });
+    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+    
+    // Debugging: Log the formattedDate to understand its structure
+    console.log('Formatted Date:', formattedDate);
+    
+    // Split based on 'at' to separate date and time
+    const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
+    
+    if (dateParts.length === 2) {
+      const datePart = dateParts[0];  // "25 January 2025"
+      let timePart = dateParts[1];    // "9:57 am"
+      
+      // Ensure the correct date format: "25 January, 2025"
+      const dateWithComma = datePart.replace(' ', ' January, ');  // Add comma after January
+      
+      // Convert AM/PM to uppercase
+      timePart = timePart.toUpperCase();
+      
+      // Final date formatting: "25 January, 2025 - 9:57 AM"
+      const finalDate = `${dateWithComma} - ${timePart}`;
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+    } else {
+      console.error('Date format issue:', formattedDate);
+    }
+  });
+});
 </script>
+
 
 
