@@ -128,13 +128,6 @@ $("#dropdownButton").on("click", function (event) {
     }
 });
 
-$("#dropdownButton").on("click", function (event) {
-    event.stopPropagation(); // Prevent the click event from bubbling up
-    $(".notification-dropdown-menu").toggleClass("show");
-    if ($(".header-profile-dropdown").hasClass("show")) {
-        $(".header-profile-dropdown").removeClass("show");
-    }
-});
 
 $("#moblie-menu-bar").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
