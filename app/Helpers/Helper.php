@@ -124,6 +124,8 @@ function sendNotification($notificationType, $postData)
     }else{
         $senderData = contact_sync::where('id', $postData['sync_id'])->first();
     }
+
+    dd($senderData);
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
