@@ -4739,7 +4739,9 @@ function update_self_bring(
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 (updatedQty) + "/" + categoryItemQuantity
             );
-
+            if(updatedQty >= categoryItemQuantity){
+                response = 0;
+            }
             $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {

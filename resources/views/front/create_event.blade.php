@@ -1596,6 +1596,9 @@
                                                                             class="category-item-quantity"
                                                                             value="{{ $items['quantity'] }}">
                                                                         <input type="hidden"
+                                                                            class="innerUserQnt"
+                                                                            value="{{ $items['innerUserQnt'] }}">
+                                                                        <input type="hidden"
                                                                             class="item-quantity-minus"
                                                                             value="0">
                                                                         <button class="qty-btnminus"
