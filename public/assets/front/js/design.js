@@ -1189,10 +1189,14 @@ function bindData(current_event_id) {
                 seted = 1;
                 console.log(element.fill);
                 let selectedColor = element.fill || "#000000";
+                $("#color-picker").spectrum("set", selectedColor || "#000000");
+
                 activeObject.set("fill", selectedColor);
             }
         });
         if (seted == 0) {
+            $("#color-picker").spectrum("set", selectedColor || "#000000");
+
             activeObject.set({
                 fill: "#000000",
             });
@@ -1525,7 +1529,6 @@ function bindData(current_event_id) {
             canvas.renderAll(); // Re-render the canvas after color change
         }
 
-        const activeObjec = canvas.getActiveObject();
         //console.log("ater update");
 
         //console.log(activeObjec);
