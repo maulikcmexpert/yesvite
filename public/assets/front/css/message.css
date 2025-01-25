@@ -1724,10 +1724,12 @@ ul.chat-list li.setpink{
     color: var(--secondryColor);
 }
 
-.message-area .massage-notification .cmn-btn:hover{
-
+.ui-widget-content.ui-autocomplete .suggestion-item .user-detail h3{
+    max-width: calc(100% - 20px);
 }
-
+.ui-widget-content.ui-autocomplete .suggestion-item .user-detail span{
+    max-width: calc(100% - 20px);
+}
 
 /* ======= responsive ======== */
 
