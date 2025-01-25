@@ -945,7 +945,7 @@ function getInvitedUsersList($eventId)
                 $invitedGuestDetail['rsvp_d']= $guestVal->rsvp_d;  
                 $invitedGuestDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
-            } elseif ($guestVal->user->app_user == '1') {
+            } else {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
                 $invitedUserIdDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
