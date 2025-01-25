@@ -472,12 +472,12 @@ function get_month_data(current_month){
 
 }
 
-$(document).on('click','#cancel_event_option',function () {
+$(document).on('click','.cancel_event_option',function () {
     var event_id=$(this).data('event_id');
     console.log(event_id);
     $('#reason_to_cancel_event').val('');
     $('#type_cancel').val('');
-    $(this).attr('data-event_id', event_id);    
+    $(this).attr('data-event_id', event_id);
 });
 
 $(document).on('input', '#type_cancel', function () {
@@ -490,7 +490,7 @@ $(document).on('input', '#type_cancel', function () {
 });
 
 
-$(document).on('click','#confirm_cancel_event_btn',function () {
+$(document).on('click','.confirm_cancel_event_btn',function () {
     var event_id=$(this).data('event_id');
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
