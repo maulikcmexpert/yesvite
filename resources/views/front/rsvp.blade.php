@@ -286,6 +286,11 @@
                                                     $yes_modal="#rsvp-yes-modal";
                                                     $no_modal="#rsvp-no-modal"; 
                                             }
+                                            if(empty($user_id) && !empty($sync_contact_user_id) && $sync_contact_user_id == $guest_data['id'])
+                                            {
+                                                    $yes_modal="#rsvp-yes-modal";
+                                                    $no_modal="#rsvp-no-modal"; 
+                                            }
                                             if($guest_data['rsvp_status']=="1"){
                                                 $open_modal=$no_modal;
                                             }elseif($guest_data['rsvp_status']=="0"){
