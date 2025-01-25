@@ -338,41 +338,32 @@ class HomeController extends BaseController
 
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
-            $color = ['blue','green', 'yellow', 'orange', ];
+            $color = ['blue', 'green', 'yellow', 'orange'];
             $events_calender = [];
-            // $colorCount = count($color); // Get total number of colors
-
-            // foreach ($eventcalenderdata as $index=> $event) {
-            //     // $colorClass = $color[$colorIndex % count($color)];
-            //     $colorClass = $color[$index % $colorCount];
-
-            //     // dd(1);
-            //     // $colorIndex++;
-            //     $events_calender[] = [
-            //         'date' => $event->start_date,
-            //         'title' => $event->event_name,
-            //         'color' => $colorClass
-            //     ];
-            // }
-                    $groupedEvents = [];
-                    foreach ($eventcalenderdata as $event) {
-                        $groupedEvents[$event->start_date][] = $event;
-                    }
-
-                    foreach ($groupedEvents as $date => $eventsOnDate) {
-                        $colorIndex = 0; 
-
-                        foreach ($eventsOnDate as $event) {
-                            $colorClass = $color[$colorIndex % count($color)];
-                            $colorIndex++;
-
-                            $events_calender[] = [
-                                'date' => $event->start_date,
-                                'title' => $event->event_name,
-                                'color' => $colorClass
-                            ];
-                        }
-                    }
+            
+            // Group events by their start_date
+            $groupedEvents = [];
+            foreach ($eventcalenderdata as $event) {
+                $groupedEvents[$event->start_date][] = $event;
+            }
+            
+            // Assign colors in order for each date
+            foreach ($groupedEvents as $date => $eventsOnDate) {
+                $colorIndex = 0; // Reset color index for each new date
+            
+                foreach ($eventsOnDate as $event) {
+                    // Assign colors in the exact order: blue, green, yellow, orange
+                    $colorClass = $color[$colorIndex % count($color)];
+                    $colorIndex++; // Increment color index for the next event
+            
+                    $events_calender[] = [
+                        'date' => $event->start_date,
+                        'title' => $event->event_name,
+                        'color' => $colorClass
+                    ];
+                }
+            }
+            
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
