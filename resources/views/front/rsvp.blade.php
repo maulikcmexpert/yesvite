@@ -326,7 +326,7 @@
                                                             </svg>
                                                         </button>
                                                     @endif
-                                                    @if($rsvp_status!="" &&(($user_id=="" && $sync_contact_user_id!="") && $sync_contact_user_id==$guest_data['id']))
+                                                    @if(!empty($rsvp_status) && empty($user_id) && !empty($sync_contact_user_id) && $sync_contact_user_id == $guest_data['id'])
                                                         <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
                                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M9.16406 1.66602H7.4974C3.33073 1.66602 1.66406 3.33268 1.66406 7.49935V12.4993C1.66406 16.666 3.33073 18.3327 7.4974 18.3327H12.4974C16.6641 18.3327 18.3307 16.666 18.3307 12.4993V10.8327" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
