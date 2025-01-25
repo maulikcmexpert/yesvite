@@ -2,7 +2,6 @@
 
 use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
-use App\Models\contact_sync;
 use App\Models\EventPost;
 use App\Models\Event;
 use App\Models\Device;
@@ -115,15 +114,10 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-    dd($postData);
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $user  = Auth::guard('api')->user();
 
-    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
-        $senderData = User::where('id',  $postData['sender_id'])->first();
-    }else{
-        $senderData = contact_sync::where('id', $postData['sync_id'])->first();
-    }
+    $senderData = User::where('id', $postData['sender_id'])->first();
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
@@ -1145,18 +1139,10 @@ function sendNotification($notificationType, $postData)
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
 
-
-        if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
-            $firstname=$senderData->firstName;
-            $lastname=$senderData->lastnName;
-        }else{
-            $firstname=$senderData->firstname;
-            $lastname=$senderData->lastname;
-        }
         if ($postData['rsvp_status'] == '1') {
-            $notification_message = $firstname . ' '  . $lastname . " RSVP'd Yes for " . $getPostOwnerId->event_name;
+            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd Yes for " . $getPostOwnerId->event_name;
         } elseif ($postData['rsvp_status'] == '0') {
-            $notification_message = $firstname . ' '  . $lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
+            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
         if ($getPostOwnerId->user_id != $postData['sender_id']) {
 

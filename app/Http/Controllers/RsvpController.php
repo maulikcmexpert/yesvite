@@ -683,7 +683,15 @@ class RsvpController extends BaseController
 
                 if ($rsvpSent->save()) {
                     EventPost::where('event_id', $eventId)
-                        ->where('user_id', $userId)
+                        // ->where('user_id', $userId)
+                        ->where(function ($query) use ($sync_id, $userId) {
+                            if (!empty($sync_id)&&$userId==null) {
+                                $query->where('sync_id', $sync_id);
+                            } else {
+                                $query->where('user_id', $userId);
+                            }
+                        })
+                    
                         ->where('post_type', '4')->delete();
                     $postMessage = [];
                     $postMessage = [
@@ -793,7 +801,7 @@ class RsvpController extends BaseController
                 }
 
                 $notificationParam = [
-
+                    'sync_id'=>$sync_id,
                     'sender_id' => $userId,
                     'event_id' => $eventId,
                     'rsvp_status' => $request->rsvp_status,

@@ -1139,31 +1139,66 @@ function bindData(current_event_id) {
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
                 seted = 1;
-                // Match the active object's ID with dbJson
-                // Reset properties
                 activeObject.set({
-                    fontWeight: element.fontWeight || "", // Default to normal if not defined
-                    fontStyle: element.fontStyle || "", // Default to normal if not defined
+                    fontWeight: element.fontWeight || "",
+                    fontStyle: element.fontStyle || "",
                     underline: element.underline || false,
                     linethrough: element.linethrough || false,
-                    fontFamily: element.fontFamily || "Arial", // Default font
-                    fontSize: element.fontSize || 16, // Default size
-                    textAlign: element.textAlign || "left", // Default alignment
-                    lineHeight: element.lineHeight || 1, // Default line height
-                    text: element.text || activeObject.text, // Reset to original text
+                    fontFamily: element.fontFamily || "Times New Roman",
+                    fontSize: element.fontSize || 20,
+                    textAlign: element.textAlign || "left",
+                    lineHeight: element.lineHeight || 1,
+                    text: element.text || activeObject.text,
                 });
             }
         });
         if (seted == 0) {
             activeObject.set({
-                fontWeight: "", // Default to normal if not defined
-                fontStyle: "", // Default to normal if not defined
+                fontWeight: "",
+                fontStyle: "",
                 underline: false,
                 linethrough: false,
-                fontFamily: "Arial", // Default font
-                fontSize: 16, // Default size
-                textAlign: "left", // Default alignment
-                lineHeight: 1, // Default line height
+                fontFamily: "Times New Roman",
+                fontSize: 20,
+                textAlign: "left",
+                lineHeight: 1,
+                text: activeObject.text.toLowerCase(),
+            });
+        }
+        // Re-render the canvas after resetting
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    $(document).on("click", ".color-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+
+        // Check if there's an active object and it's a textbox
+        if (!activeObject || activeObject.type !== "textbox") {
+            return; // Exit if no object or not a textbox
+        }
+
+        console.log(dbJson);
+
+        // Iterate over the textElements in dbJson
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                console.log(element.fill);
+                let selectedColor = element.fill || "#000000";
+                $("#color-picker").spectrum("set", selectedColor || "#000000");
+
+                activeObject.set("fill", selectedColor);
+            }
+        });
+        if (seted == 0) {
+            $("#color-picker").spectrum("set", selectedColor || "#000000");
+
+            activeObject.set({
+                fill: "#000000",
             });
         }
         // Re-render the canvas after resetting
@@ -1391,34 +1426,34 @@ function bindData(current_event_id) {
         updateTextboxWidth(object);
     };
     // Reset button functionality
-    document.querySelector(".reset-btn").addEventListener("click", function () {
-        //console.log("Reset button clicked!");
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            resetTextboxProperties(activeObject); // Use the reset function
-            canvas.renderAll(); // Re-render the canvas
+    // document.querySelector(".reset-btn").addEventListener("click", function () {
+    //     //console.log("Reset button clicked!");
+    //     const activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === "textbox") {
+    //         resetTextboxProperties(activeObject); // Use the reset function
+    //         canvas.renderAll(); // Re-render the canvas
 
-            // Reset input fields and tooltips to default values
-            fontSizeInput.value = defaultSettings.fontSize;
-            fontSizeRange.value = defaultSettings.fontSize;
-            fontSizeTooltip.innerHTML = `<span>${defaultSettings.fontSize}px</span>`;
+    //         // Reset input fields and tooltips to default values
+    //         fontSizeInput.value = defaultSettings.fontSize;
+    //         fontSizeRange.value = defaultSettings.fontSize;
+    //         fontSizeTooltip.innerHTML = `<span>${defaultSettings.fontSize}px</span>`;
 
-            letterSpacingInput.value = defaultSettings.letterSpacing;
-            letterSpacingRange.value = defaultSettings.letterSpacing;
-            letterSpacingTooltip.innerHTML = `<span>${defaultSettings.letterSpacing}</span>`;
+    //         letterSpacingInput.value = defaultSettings.letterSpacing;
+    //         letterSpacingRange.value = defaultSettings.letterSpacing;
+    //         letterSpacingTooltip.innerHTML = `<span>${defaultSettings.letterSpacing}</span>`;
 
-            lineHeightInput.value = defaultSettings.lineHeight;
-            lineHeightRange.value = defaultSettings.lineHeight;
-            lineHeightTooltip.innerHTML = `<span>${defaultSettings.lineHeight}</span>`;
+    //         lineHeightInput.value = defaultSettings.lineHeight;
+    //         lineHeightRange.value = defaultSettings.lineHeight;
+    //         lineHeightTooltip.innerHTML = `<span>${defaultSettings.lineHeight}</span>`;
 
-            updateTextboxWidth(activeObject); // Update the textbox width to fit the default settings
-            canvas.renderAll(); // Refresh the canvas to apply changes
+    //         updateTextboxWidth(activeObject); // Update the textbox width to fit the default settings
+    //         canvas.renderAll(); // Refresh the canvas to apply changes
 
-            alert("Settings have been reset to default.");
-        } else {
-            alert("Please select a textbox to reset the settings.");
-        }
-    });
+    //         alert("Settings have been reset to default.");
+    //     } else {
+    //         alert("Please select a textbox to reset the settings.");
+    //     }
+    // });
 
     // Initialize tooltips and values on page load
     setFontSize();
@@ -1494,11 +1529,13 @@ function bindData(current_event_id) {
             canvas.renderAll(); // Re-render the canvas after color change
         }
 
-        const activeObjec = canvas.getActiveObject();
         //console.log("ater update");
 
         //console.log(activeObjec);
     }
+    $(document).on("click", ".color-reset", function (e) {
+        updateColorPicker();
+    });
 
     // Update color picker based on the selected object's current font or background color
     function updateColorPicker() {
