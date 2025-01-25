@@ -96,8 +96,9 @@
     saveDates.forEach(function(saveDateElement) {
       const savedDate = saveDateElement.getAttribute('data-save-date');
       
-      const losAngelesTime = new Date(savedDate + ' GMT-0800');
+      const date = new Date(savedDate);
       
+      // Format the date according to the device's local timezone
       const options = {
         weekday: 'long', // "Monday"
         year: 'numeric', // "2022"
@@ -108,7 +109,7 @@
         hour12: true      // "AM/PM"
       };
       
-      const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+      const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(date);
       const finalDate = formattedDate.replace(',', ' -');
       saveDateElement.innerHTML = `Last Save: ${finalDate}`;
     });
