@@ -120,9 +120,9 @@ function sendNotification($notificationType, $postData)
     $user  = Auth::guard('api')->user();
 
     if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
-        $senderData = User::where('id',  $postData['sender_id'])->first();
-    }else{
         $senderData = contact_sync::where('id', $postData['sync_id'])->first();
+    }else{
+        $senderData = User::where('id',  $postData['sender_id'])->first();
     }
 
     dd($senderData);
