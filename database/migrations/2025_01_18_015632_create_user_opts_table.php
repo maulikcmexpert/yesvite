@@ -20,6 +20,7 @@ class CreateUserOptsTable extends Migration
     {
         Schema::create('user_opts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id')->nullable();
             $table->string('phone')->unique(); // Phone number of the user
             $table->boolean('opt_in_status')->default(false); // Opt-in status
             $table->timestamps(); // Created at and updated at timestamps

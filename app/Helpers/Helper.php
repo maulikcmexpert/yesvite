@@ -303,7 +303,7 @@ function sendNotification($notificationType, $postData)
 
                     if ($value->prefer_by == 'phone') {
                         $eventLink = route('rsvp', ['userId' => encrypt($value->user->id), 'eventId' => encrypt($postData['event_id'])]);
-                        $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $eventLink);
+                        $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $eventLink, $postData['event_id']);
                         // $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
                         if ($sent == true) {
                             $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
@@ -1732,61 +1732,63 @@ function sendSMSForApplication($receiverNumber, $message)
         return  false;
     }
 }
-function handleSMSInvite($receiverNumber, $hostName, $eventName, $eventLink)
+function handleSMSInvite($receiverNumber, $hostName, $eventName, $eventLink, $event_id)
 {
-    $user = Useropt::where('phone', $receiverNumber)->first();
-
-    if (!$user) {
-        // If user doesn't exist, create them with default 'not opted in' status
-        $user = Useropt::create([
-            'phone' => $receiverNumber,
-            'opt_in_status' => false
-        ]);
-    }
+    $user = Useropt::firstOrCreate(
+        ['phone' => $receiverNumber, 'event_id' => $event_id],
+        ['opt_in_status' => false]
+    );
 
     if (!$user->opt_in_status) {
-        // User not opted in, send opt-in message
-        $optInMessage = "Yesvite: \"$hostName\" has invited you to \"$eventName\". Reply \"YES\" to view details, RSVP, and to receive future invites. Reply STOP to opt out.";
-        sendSMSForApplication($receiverNumber, $optInMessage);
+        // Opt-in message
+        $message = "Yesvite: You have been invited to an event by \"$hostName\". To View the invite/Event details and opt in to receive future invites/messages please reply \"YES\" to this message. Reply STOP to opt out.";
     } else {
-        // User opted in, send event invite
-        $inviteMessage = "Yesvite: \"$hostName\" has invited you to \"$eventName\". View invite, RSVP to event: \"$eventLink\". Reply STOP to opt out.";
-        sendSMSForApplication($receiverNumber, $inviteMessage);
+        // Event invite message
+        $message = "Yesvite: You have been subscribed to receive messages. You have been invited by \"$hostName\" to \"$eventName\" View invite, RSVP and message the host here: \"$eventLink\". Reply STOP to opt out.";
     }
+
+    sendSMSForApplication($receiverNumber, $message);
 }
+
+
 
 function handleIncomingMessage($receiverNumber, $message)
 {
-    $user = UserOpt::where('phone', $receiverNumber)->first();
-    if (!$user) {
-        // If user doesn't exist, create them with default 'not opted in' status
-        $user = Useropt::create([
-            'phone' => $receiverNumber,
-            'opt_in_status' => false
-        ]);
-    }
     if (strtolower($message) == 'yes') {
-        // Opt-in logic
-        if ($user) {
-            $user->opt_in_status = true;
-            $user->save();
+        $users = UserOpt::where(['phone' => $receiverNumber, 'opt_in_status' => false])->get();
 
-            // Confirmation message
-            $confirmationMessage = "Yesvite: You have been subscribed to receive future invites. \"Name of Host\" has invited you to \"Name of Event\". View invite, RSVP to event: \"Link to event\". Reply STOP to opt out.";
-            sendSMSForApplication($receiverNumber, $confirmationMessage);
+        foreach ($users as $user) {
+            $user->update(['opt_in_status' => true]);
+
+            // Get event details dynamically
+            $event = EventInvitedUser::with(['event', 'event.user'])
+                ->where('event_id', $user->event_id)
+                ->first();
+
+            if ($event) {
+                $eventLink = route('rsvp', ['userId' => encrypt($event->user->id), 'eventId' => encrypt($user->event_id)]);
+                $confirmationMessage = "Yesvite: You have been subscribed to receive messages. You have been invited by \"{$event->event->user->firstname} {$event->event->user->lastname}\" to \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
+                try {
+                    sendSMSForApplication($receiverNumber, $confirmationMessage);
+                } catch (Exception $e) {
+                    // Log::error("Failed to send confirmation SMS to {$receiverNumber}: " . $e->getMessage());
+                }
+            } else {
+                // Log::warning("Event details not found for event_id: {$user->event_id}");
+            }
         }
     } elseif (strtolower($message) == 'stop') {
-        // Opt-out logic
-        if ($user) {
-            $user->opt_in_status = false;
-            $user->save();
-
-            // Unsubscribe confirmation
-            $unsubscribeMessage = "You have successfully been unsubscribed from Yesvite via SMS invites. You will not receive any more messages from this number. Reply START to resubscribe.";
-            sendSMSForApplication($receiverNumber, $unsubscribeMessage);
+        $users = UserOpt::where('phone', $receiverNumber)->get();
+        foreach ($users as $user) {
+            $user->update(['opt_in_status' => false]);
         }
+
+        // Unsubscribe confirmation
+        $unsubscribeMessage = "You have successfully been unsubscribed from Yesvite via SMS invites. You will not receive any more messages from this number. Reply START to resubscribe.";
+        //sendSMSForApplication($receiverNumber, $unsubscribeMessage);
     }
 }
+
 function dateDiffer($dateTime)
 {
     $createdDateTime = Carbon::parse($dateTime);
