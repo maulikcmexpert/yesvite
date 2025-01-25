@@ -215,7 +215,7 @@ $(document).on("keyup", ".search_phone", function () {
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
 
-        console.log({search_name,type,offset,limit,scroll});
+        console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
             url: base_url + "contacts/loadphones",
             type: "POST",
