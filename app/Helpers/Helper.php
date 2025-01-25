@@ -1722,7 +1722,8 @@ function sendSMSForApplication($receiverNumber, $message)
         $serverKeys = ServerKey::first();
         $client = new Client($serverKeys->twilio_account_sid, $serverKeys->twilio_auth_token);
         $client->messages->create($formattedNumber, [
-            'from' => $serverKeys->twilio_number,
+            // 'from' => $serverKeys->twilio_number,
+            'messagingServiceSid' => 'MGcebfc07e4d04619be31576c5ad1f906d', // Use Messaging Service SID
             'body' => $message
         ]);
 
