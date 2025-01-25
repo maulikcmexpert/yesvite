@@ -8047,8 +8047,11 @@ function update_self_bring(
 
             if((innerUserQnt+quantity) >=categoryItemQuantity){
                 response=0;
+                $("#missing-category-" + categoryIndexKey).text(0);
+            }else{
+
+                $("#missing-category-" + categoryIndexKey).text(response);
             }
-            $("#missing-category-" + categoryIndexKey).text(quantity);
             // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
