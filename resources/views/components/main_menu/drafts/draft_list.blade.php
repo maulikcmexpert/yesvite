@@ -90,22 +90,26 @@
     </div>
   </div>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const saveDates = document.querySelectorAll('.last-save');
-    saveDates.forEach(function(saveDateElement) {
-      const savedDate = saveDateElement.getAttribute('data-save-date');
-      const losAngelesTime = new Date(savedDate + ' GMT-0800');
-      const formattedDate = new Intl.DateTimeFormat(navigator.language, {
-        weekday: 'short', 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric', 
-        hour: 'numeric', 
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true
-      }).format(losAngelesTime);
-      saveDateElement.innerHTML = `Last Save: ${formattedDate}`;
-    });
+ document.addEventListener("DOMContentLoaded", function() {
+  const saveDates = document.querySelectorAll('.last-save');
+
+  saveDates.forEach(function(saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or specific format
+    
+    const options = {
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: 'numeric', 
+      minute: 'numeric', 
+      hour12: true
+    };
+
+    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+        const finalDate = formattedDate.replace(',', ' -');
+    saveDateElement.innerHTML = `Last Save: ${finalDate}`;
   });
+});
+
 </script>
