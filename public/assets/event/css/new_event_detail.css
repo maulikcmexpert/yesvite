@@ -1345,7 +1345,7 @@
 }
 
 
-.new-event-sidebar-menu > ul > li::after{
+/* .new-event-sidebar-menu > ul > li::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -1353,7 +1353,7 @@
     background: red;
     width: 2px;
     height: 100%;
-}
+} */
 
 /* ======Responsiveness===== */
 
