@@ -1569,10 +1569,8 @@
                                                                     <h5>{{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
-                                                                @endif
-                                                                <span class="ms-auto">1</span>
-                                                            
-                                                                @if (Auth::guard('web')->user()->profile == '')
+                                                                @else
+                                                                {{-- <span class="ms-auto">1</span> --}}
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp
