@@ -598,7 +598,7 @@ class RsvpController extends BaseController
 
         // dd($request);
         // $userId = decrypt($request->user_id);
-        if ($request->input('sync_id') != "") {
+        if ($request->input('user_id') != "") {
             $userId = decrypt($request->user_id);
         } else {
             $userId = "";
