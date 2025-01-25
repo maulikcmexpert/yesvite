@@ -338,7 +338,7 @@ class HomeController extends BaseController
 
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
-            $color = ['blue', 'green', 'yellow', 'orange'];
+            $color = ['blue','orange','green', 'yellow'];
             $events_calender = [];
             
             // Group events by their start_date
