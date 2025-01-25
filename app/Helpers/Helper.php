@@ -1778,33 +1778,39 @@ function sendSMSForApplication($receiverNumber, $message)
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     try {
-        // Sanitize and format phone number
         $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
         if (strpos($receiverNumber, '+') === 0) {
             $cleanedNumber = '+' . $cleanedNumber;
         }
-
-        $user = Useropt::firstOrCreate(
-            ['phone' => $cleanedNumber, 'event_id' => $event_id, 'event_invited_user_id' => $event_invited_user_id],
-            [
-                'opt_in_status' => false,
-                'event_id' => $event_id,  // Ensure event_id is included
-                'event_invited_user_id' => $event_invited_user_id  // Ensure event_invited_user_id is included
-            ]
-        );
-
-        $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
-
-        // Create the message
-        if (!$user->opt_in_status) {
-            // Opt-in message
-            $message = "Yesvite: You have been invited to an event by \"$hostName\". To View the invite/Event details and opt in to receive future invites/messages please reply \"YES\" to this message. Reply STOP to opt out.";
+        $user = Useropt::where('phone', $cleanedNumber)->first();
+        if (!$user) {
+            $user = Useropt::create([
+                'phone' => $cleanedNumber,
+                'event_id' => $event_id,
+                'event_invited_user_id' => $event_invited_user_id,
+                'opt_in_status' => false, // Default opt-in status is false
+            ]);
         } else {
-            // Event invite message
-            $message = "Yesvite: You have been subscribed to receive messages. You have been invited by \"$hostName\" to \"$eventName\" View invite, RSVP and message the host here: \"$eventLink\". Reply STOP to opt out.";
+            $existingEventUser = Useropt::where('phone', $cleanedNumber)
+                ->where('event_id', $event_id)
+                ->first();
+            if (!$existingEventUser) {
+                Useropt::create([
+                    'phone' => $cleanedNumber,
+                    'event_id' => $event_id,
+                    'event_invited_user_id' => $event_invited_user_id,
+                    'opt_in_status' => $user->opt_in_status, // Maintain opt_in_status across events
+                ]);
+            } else {
+                $user = $existingEventUser;
+            }
         }
-
-        // Send the message
+        $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
+        if (!$user->opt_in_status) {
+            $message = 'Yesvite: ' . $hostName . ' has invited you to an event. To View the invite/Event details a ONE TIME opt in is required by new sms regulations to receive future invites/messages. Please reply "Yes" to opt in. Reply STOP to opt out.';
+        } else {
+            $message = "Yesvite: You have received a new RSVP for \"$eventName\" .View the invite/Event details here: \"$eventLink\". Reply STOP to opt out.";
+        }
         return sendSMSForApplication($receiverNumber, $message);
     } catch (\Exception $e) {
         // Log the error for debugging
@@ -1840,8 +1846,9 @@ function handleIncomingMessage($receiverNumber, $message)
             if ($event) {
 
                 $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($user->event_invited_user_id), 'eventId' => encrypt($user->event_id)]);
-                $confirmationMessage = "Yesvite: You have been subscribed to receive messages. You have been invited by \"{$event->event->user->firstname} {$event->event->user->lastname}\" to \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
+                $confirmationMessage = "Yesvite:  \"{$event->event->user->firstname} {$event->event->user->lastname}\" has invited you to  \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
                 try {
+                    sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
                     sendSMSForApplication($cleanedNumber, $confirmationMessage);
                 } catch (Exception $e) {
                     // Log::error("Failed to send confirmation SMS to {$receiverNumber}: " . $e->getMessage());
