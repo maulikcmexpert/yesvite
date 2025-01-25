@@ -921,6 +921,7 @@ function getInvitedUsersList($eventId)
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0']);
     $result = $invitedUsers->get();
 
+    dd($result);
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
