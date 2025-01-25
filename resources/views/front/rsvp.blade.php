@@ -315,7 +315,7 @@
                                                   <div class="d-flex align-items-center justify-content-between">
                                                     <div class="d-flex flex-column">
                                                       <p href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</p>
-                                                      <span class="guest-email">{{$guest_data['email']}}</span>
+                                                      <span class="guest-email">{{($guest_data['email']!="")?$guest_data['email']:$guest_data['phone_number']}}</span>
                                                     </div>
                                                     @if($rsvp_status!="" &&($user_id==$guest_data['id']))
                                                         <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
