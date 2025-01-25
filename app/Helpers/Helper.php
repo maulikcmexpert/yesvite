@@ -1205,7 +1205,8 @@ function sendNotification($notificationType, $postData)
                             'adults' => $postData['adults'],
                             'host_email' => $senderData->email,
                             'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
-                        ];
+                        ]; 
+                        // dd($eventData);
                         $invitation_email = new NewRsvpsEmailNotify($eventData);
                         Mail::to($getPostOwnerId->user->email)->send($invitation_email);
                     }
