@@ -8051,7 +8051,7 @@ function update_self_bring(
                 $("#missing-category-" + categoryIndexKey).text(0);
             }else{
                 let quantity = response - innerUserQnt;
-                $("#missing-category-" + categoryIndexKey).text(quantity);
+                $("#missing-category-" + categoryIndexKey).text(response);
             }
             // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
