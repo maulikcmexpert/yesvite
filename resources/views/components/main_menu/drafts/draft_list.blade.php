@@ -90,51 +90,38 @@
     </div>
   </div>
  
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const saveDates = document.querySelectorAll('.last-save');
+      document.addEventListener("DOMContentLoaded", function() {
+        const saveDates = document.querySelectorAll('.last-save');
 
-  saveDates.forEach(function(saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date'); 
+        saveDates.forEach(function(saveDateElement) {
+          const savedDate = saveDateElement.getAttribute('data-save-date'); 
 
-    // Parse the ISO 8601 date string with timezone offset
-    const losAngelesTime = new Date(savedDate); 
+          // Parse the ISO 8601 date string with timezone offset
+          const losAngelesTime = new Date(savedDate); 
 
-    // Format the date according to the required format
-    const options = {
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric', 
-      hour: 'numeric', 
-      minute: 'numeric', 
-      hour12: true 
-    };
+          // Format the date according to the required format
+          const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          };
+          const datePart = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
 
-    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+          const timeOptions = { 
+            hour: 'numeric', 
+            minute: 'numeric', 
+            hour12: true 
+          };
+          const timePart = new Intl.DateTimeFormat(navigator.language, timeOptions).format(losAngelesTime);
 
-    // Split based on 'at' to separate date and time
-    const dateParts = formattedDate.split(' at '); 
-
-    if (dateParts.length === 2) {
-      const datePart = dateParts[0]; 
-      let timePart = dateParts[1]; 
-
-      // Ensure the correct format by adding a comma between the month and year
-      const dateWithComma = datePart.replace(' ', ' ,'); 
-
-      // Convert AM/PM to uppercase
-      timePart = timePart.toUpperCase();
-
-      // Final date formatting: "December 23, 2022 - 8:31 PM"
-      const finalDate = `${dateWithComma} - ${timePart}`;
-      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-    } else {
-      console.error('Date format issue:', formattedDate);
-    }
-  });
-});
+          // Final date formatting: "December 23, 2022 - 8:31 PM"
+          const finalDate = `${datePart} - ${timePart.toUpperCase()}`;
+          saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+        });
+      });
 </script>
-
 
 
 
