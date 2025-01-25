@@ -783,7 +783,7 @@ class RsvpController extends BaseController
 
                 DB::commit();
 
-                dd($notificationParam);
+                // dd($notificationParam);
                 sendNotification('sent_rsvp', $notificationParam);   
 
 
