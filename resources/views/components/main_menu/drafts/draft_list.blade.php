@@ -93,32 +93,27 @@
 
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const saveDates = document.querySelectorAll('.last-save');
+// Get the date from the HTML element
+const saveDate = document.querySelector('.last-save').getAttribute('data-save-date');
 
-  saveDates.forEach(function(saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date'); 
+// Convert the date string to a Date object
+const dateObj = new Date(saveDate);
 
-    // Parse the ISO 8601 date string with timezone offset
-    const losAngelesTime = new Date(savedDate); 
+// Format the date to the device's local time zone
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true
+}).format(dateObj);
 
-    // Get individual date components
-    const year = losAngelesTime.getFullYear();
-    const month = losAngelesTime.toLocaleString('en-US', { month: 'long' });
-    const day = losAngelesTime.getDate();
+// Display the formatted date in the desired format
+const formattedString = `Last Save: ${formattedDate}`;
+console.log(formattedString);  // Output: Last Save: December 23, 2022 - 8:31 PM
 
-    // Get individual time components
-    const hours = losAngelesTime.getHours();
-    const minutes = String(losAngelesTime.getMinutes()).padStart(2, '0');
-    const amPm = hours >= 12 ? 'PM' : 'AM';
-    const displayHours = hours > 12 ? hours - 12 : hours; 
-
-    // Construct the formatted date string
-    const formattedDate = `${month} ${day}, ${year} - ${displayHours}:${minutes} ${amPm}`;
-
-    saveDateElement.innerHTML = `Last Save: ${formattedDate}`;
-  });
-});
 </script>
 
 
