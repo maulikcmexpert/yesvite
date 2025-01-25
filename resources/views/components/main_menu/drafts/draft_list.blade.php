@@ -90,14 +90,13 @@
     </div>
   </div>
   <script>
- document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
   const saveDates = document.querySelectorAll('.last-save');
   
   saveDates.forEach(function(saveDateElement) {
     const savedDate = saveDateElement.getAttribute('data-save-date');
-    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or specific format
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
     
-    // Format the date according to the required format
     const options = {
       year: 'numeric', 
       month: 'long', 
@@ -108,13 +107,11 @@
     };
 
     const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
-    
-    // Replace comma with a dash to match the desired format: December 23, 2022 - 8:31 PM
-    const finalDate = formattedDate.replace(',', ' -');
-    
+    const dateParts = formattedDate.split(' ');
+    const monthDayYear = `${dateParts[0]} ${dateParts[1]}, ${dateParts[2]}`;
+    const time = `${dateParts[3]} ${dateParts[4]}`;
+    const finalDate = `${monthDayYear} - ${time}`;
     saveDateElement.innerHTML = `Last Save: ${finalDate}`;
   });
 });
-
-
 </script>
