@@ -91,36 +91,34 @@
   </div>
  
 
+
 <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const saveDates = document.querySelectorAll('.last-save');
+document.addEventListener("DOMContentLoaded", function() {
+  const saveDates = document.querySelectorAll('.last-save');
 
-        saveDates.forEach(function(saveDateElement) {
-          const savedDate = saveDateElement.getAttribute('data-save-date'); 
+  saveDates.forEach(function(saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date'); 
 
-          // Parse the ISO 8601 date string with timezone offset
-          const losAngelesTime = new Date(savedDate); 
+    // Parse the ISO 8601 date string with timezone offset
+    const losAngelesTime = new Date(savedDate); 
 
-          // Format the date according to the required format
-          const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          };
-          const datePart = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+    // Get individual date components
+    const year = losAngelesTime.getFullYear();
+    const month = losAngelesTime.toLocaleString('en-US', { month: 'long' });
+    const day = losAngelesTime.getDate();
 
-          const timeOptions = { 
-            hour: 'numeric', 
-            minute: 'numeric', 
-            hour12: true 
-          };
-          const timePart = new Intl.DateTimeFormat(navigator.language, timeOptions).format(losAngelesTime);
+    // Get individual time components
+    const hours = losAngelesTime.getHours();
+    const minutes = String(losAngelesTime.getMinutes()).padStart(2, '0');
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours > 12 ? hours - 12 : hours; 
 
-          // Final date formatting: "December 23, 2022 - 8:31 PM"
-          const finalDate = `${datePart} - ${timePart.toUpperCase()}`;
-          saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-        });
-      });
+    // Construct the formatted date string
+    const formattedDate = `${month} ${day}, ${year} - ${displayHours}:${minutes} ${amPm}`;
+
+    saveDateElement.innerHTML = `Last Save: ${formattedDate}`;
+  });
+});
 </script>
 
 
