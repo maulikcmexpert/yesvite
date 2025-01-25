@@ -117,11 +117,7 @@ function sendNotification($notificationType, $postData)
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $user  = Auth::guard('api')->user();
 
-    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
-        $senderData = User::where('id',  $postData['sender_id'])->first();
-    }else{
-        $senderData = User::where('id', $postData['sync_id'])->first();
-    }
+    $senderData = User::where('id', $postData['sender_id'])->first();
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
