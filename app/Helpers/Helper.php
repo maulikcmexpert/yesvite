@@ -243,6 +243,7 @@ function sendNotification($notificationType, $postData)
                             // }
 
                             $eventData = [
+                                'event_invited_user_id' => (int)$value->id,
                                 'event_id' => (int)$postData['event_id'],
                                 'user_id' => $value->user->id,
                                 'event_name' => $value->event->event_name,
@@ -275,6 +276,7 @@ function sendNotification($notificationType, $postData)
                             // }
 
                             $eventData = [
+                                'event_invited_user_id' => (int)$value->id,
                                 'event_id' => (int)$postData['event_id'],
                                 'user_id' => $value->user->id,
                                 'event_name' => $value->event->event_name,

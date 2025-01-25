@@ -147,7 +147,7 @@ class RsvpController extends BaseController
         $css = 'message.css';
 
         $event_id =  decrypt($eventId);
-        $user_id = decrypt($userId);
+        $user_id = decrypt($event_invited_user_id);
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
