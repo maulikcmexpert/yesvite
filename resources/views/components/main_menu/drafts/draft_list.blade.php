@@ -105,7 +105,7 @@ saveDates.forEach(function (element) {
   const dateObj = new Date(saveDate);
 
   // Format the date to the local time zone
-  const formattedDate = new Intl.DateTimeFormat('en-US', {
+  const formattedDate = new Intl.DateTimeFormat(navigator.language, {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
