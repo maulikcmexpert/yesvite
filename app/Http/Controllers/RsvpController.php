@@ -632,6 +632,8 @@ class RsvpController extends BaseController
 
             // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
+
+            dd($event_invited_user_id,$rsvpSent);
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
                 if ($rsvpSentAttempt == NULL) {
