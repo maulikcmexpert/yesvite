@@ -1942,7 +1942,7 @@ $(document).on("click", ".edit_category", function () {
 
 $(document).on("click", ".add_potluck_item", function () {
     var potluckkey = $(this).data("id");
-    
+
     var categoryName = $(".category_name-" + potluckkey).text();
     setPotluckActivekey(potluckkey, categoryName);
     toggleSidebar("sidebar_addcategoryitem");
@@ -4513,7 +4513,7 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 });
 
 $(document).on("change", ".user_group_member .user_choice", function () {
-    alert();
+  
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4643,8 +4643,6 @@ $(document).on("click", ".qty-btn-plus", function () {
 function plusBTN(that) {
     var categoryItemKey = that.parent().find(".category-item-key").val();
     var categoryIndexKey = that.parent().find(".category-index-key").val();
-alert(categoryItemKey);
-alert(categoryIndexKey);
     var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
