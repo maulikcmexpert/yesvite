@@ -28,6 +28,36 @@ $("#forgetpassword").validate({
     },
 });
 
+$("#forgetpasswordemail").validate({
+    rules: {
+        email: {
+            required: true,
+            email: true,
+            remote: {
+                type: "post",
+                url: base_url + "check_mail",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: {
+                    email: function () {
+                        return $("#email").val();
+                    },
+                },
+            },
+        },
+    },
+    messages: {
+        email: {
+            required: "Email is required",
+            email: "Please enter a valid email",
+            remote: "This email is not registered.",
+        },
+    },
+});
+
 // $("#otpform").validate({
 //     rules: {
 //         otp: {

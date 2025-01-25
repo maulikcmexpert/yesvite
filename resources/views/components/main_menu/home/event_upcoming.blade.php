@@ -1,3 +1,4 @@
+@if(!empty($eventList))
 <div class="home-center-upcoming-events-wrp">
     <div class="home-center-upcoming-events-title">
       <h3>Upcoming Events</h3>
@@ -128,3 +129,4 @@
     </div>
     @endforeach
   </div>
+  @endif

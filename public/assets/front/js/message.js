@@ -1100,6 +1100,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
 });
 
 $(document).on("click", ".mute-conversation", function () {
+    const selectedConversationId = $(".selected_conversasion").val();
     const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
@@ -1111,24 +1112,43 @@ $(document).on("click", ".mute-conversation", function () {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        console.log("mute here");
+        $(".conversation-" + conversationId).addClass("muted");
 
-    $(".conversation-" + conversationId)
-        .find(".chat-data")
-        .find(".mute-single-conversation")
-        .find("span")
-        .text(change == "1" ? "Unmute" : "Mute");
+        if (selectedConversationId === conversationId) {
+            $(".unmute-self-icn").show();
+            $(".mute-self-icn").hide();
+        }
+        $(this).children(".mute1-self-icn").addClass("d-none");
+        $(this).children(".unmute1-self-icn").removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("muted");
 
-    $(".conversation-" + conversationId)
-        .find(".chat-data")
-        .find(".mute-single-conversation")
-        .attr("changeWith", change == "1" ? "0" : "1");
+        $(this).children(".mute1-self-icn").removeClass("d-none");
+        $(this).children(".unmute1-self-icn").addClass("d-none");
+        if (selectedConversationId === conversationId) {
+            $(".mute-self-icn").show();
+            $(".unmute-self-icn").hide();
+        }
+    }
+    // $(".conversation-" + conversationId)
+    //     .find(".chat-data")
+    //     .find(".mute-single-conversation")
+    //     .find("span")
+    //     .text(change == "1" ? "Unmute" : "Mute");
+
+    // $(".conversation-" + conversationId)
+    //     .find(".chat-data")
+    //     .find(".mute-single-conversation")
+    //     .attr("changeWith", change == "1" ? "0" : "1");
 });
 
 $(document).on("click", ".mute-single-conversation", function (e) {
     e.stopPropagation();
 
     const change = $(this).attr("changeWith");
-    let conversationId = $(".conversationId").attr("conversationId");
+    let conversationId = $(this).data("conversation");
     const overviewRef = ref(
         database,
         `overview/${senderUser}/${conversationId}/isMute`
@@ -1146,6 +1166,19 @@ $(document).on("click", ".mute-single-conversation", function (e) {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    if (change == "1") {
+        console.log("mute here");
+        $(".conversation-" + conversationId).addClass("muted");
+
+        $(this).children(".mute1-self-icn").addClass("d-none");
+        $(this).children(".unmute1-self-icn").removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("muted");
+
+        $(this).children(".mute1-self-icn").removeClass("d-none");
+        $(this).children(".unmute1-self-icn").addClass("d-none");
+    }
 });
 
 $(document).on("click", ".block-conversation", async function () {
@@ -3766,7 +3799,7 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
     }
-
+    console.log({ allMuted });
     if (allMuted) {
         $(".multi-mute").attr("changeWith", "0");
         $(".mute-icn").addClass("d-none");
@@ -3910,8 +3943,24 @@ $(".multi-mute").click(function () {
         const conversationId = $(this).val();
         if (change == "1") {
             $(".conversation-" + conversationId).addClass("muted");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".mute1-self-icn")
+                .addClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unmute1-self-icn")
+                .removeClass("d-none");
         } else {
             $(".conversation-" + conversationId).removeClass("muted");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".mute1-self-icn")
+                .removeClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unmute1-self-icn")
+                .addClass("d-none");
         }
         $(".conversation-" + conversationId)
             .find(".chat-data")

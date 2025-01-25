@@ -146,7 +146,7 @@ use Carbon\Carbon;
                                     <div class="ms-1 d-none bulk-check">
                                         <input class="form-check-input m-0" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
                                     </div>
-
+                                    <input type="hidden" name="muted" value="{{@$message['isMute']}}" >
                                     <div class="chat-data d-flex align-items-start">
                                         <div class="user-img position-relative">
                                             @if($message['receiverProfile']!=="")

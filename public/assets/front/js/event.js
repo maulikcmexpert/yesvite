@@ -477,7 +477,7 @@ $(document).on('click','.cancel_event_option',function () {
     console.log(event_id);
     $('#reason_to_cancel_event').val('');
     $('#type_cancel').val('');
-    $('.confirm_cancel_event_btn').attr('data-event_id', event_id);
+    $(this).attr('data-event_id', event_id);
 });
 
 $(document).on('input', '#type_cancel', function () {

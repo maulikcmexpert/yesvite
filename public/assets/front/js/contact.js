@@ -19,8 +19,13 @@ $("#product-scroll").on("scroll", function () {
             if (scrollTop + elementHeight >= scrollHeight-2) {
                 busy1 = true;
                 offset += limit;
+                
                 var type="yesvite";
-            loadMoreData(search_name=null,type,offset,limit);
+                var search_name = $('.search_name').val();
+                if(search_name!=""){
+                    offset=null;
+                }
+            loadMoreData(search_name,type,offset,limit,1);
         }
 });
 
@@ -40,7 +45,12 @@ $("#product-scroll-phone").on("scroll", function () {
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
-                loadMorePhones(search_name=null,type,offset1,limit);
+                var search_phone = $('.search_phone').val();
+                if(search_phone!=""){
+                    offset1=null;
+                }
+
+                loadMorePhones(search_phone,type,offset1,limit,1);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
@@ -123,8 +133,8 @@ $(document).on("keyup", ".search_phone", function () {
         loadMorePhones(search_phone,type=null,offset1,limit);
 });
 
-    function loadMoreData(search_name,type,offset,limit) {
-        console.log({search_name,type,offset,limit});
+    function loadMoreData(search_name,type,offset,limit,scroll=null) {
+        console.log({search_name,type,offset,limit,scroll});
         $.ajax({
             url: base_url + "contacts/load",
             type: "POST",
@@ -136,25 +146,29 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $("#loader").show();
+                $("#home_loader").show();
             },
             success: function (data) {
+                if (data.status == "0" && scroll==1) {
+                    $(".no-yesvite-data").css("display","none");
+                    $("#home_loader").hide();
+                    return;
+                }
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
-                    $("#loader").hide();
-
+                    $("#home_loader").hide();
                     return;
                 }
                 $(".no-yesvite-data").css("display","none");
-                $("#loader").hide();
-
+                
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
                 }else{
                     $("#yesviteUser").append(data.view);
                 }
-
+                
                 busy1 = false;
+                $("#home_loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
@@ -173,14 +187,14 @@ $(document).on("keyup", ".search_phone", function () {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             beforeSend: function () {
-                $("#loader").show();
+                $("#home_loader").show();
             },
             success: function (data) {
                 console.log(data);
                 // if (data.html == "") {
                     if (data.status == "0") {
                         $(".no-group-data").css("display","block");
-                        $("#loader").hide();
+                        $("#home_loader").hide();
     
                         return;
                     }
@@ -199,7 +213,7 @@ $(document).on("keyup", ".search_phone", function () {
                     $("#yesviteGroups").append(data.view);
                 }
 
-                $("#loader").hide();
+                $("#home_loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
@@ -209,8 +223,9 @@ $(document).on("keyup", ".search_phone", function () {
         });
     }
 
-    function loadMorePhones(search_phone,type,offset1,limit) {
-        console.log({search_phone,type,offset1,limit});
+    function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
+
+        console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
             url: base_url + "contacts/loadphones",
             type: "POST",
@@ -222,12 +237,20 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $("#loader").show();
+                $("#home_loader").show();
             },
             success: function (data) {
+                console.log(data);
+                if (data.status == "0" && scroll==1) {
+                    $(".no-phone-data").css("display","none");
+                    $("#home_loader").hide();
+                    // busy2 = true; 
+                    busy2 = false;
+                    return;
+                }
                 if (data.status == "0") {
                     $(".no-phone-data").css("display","block");
-                    $("#loader").hide();
+                    $("#home_loader").hide();
                     // busy2 = true; 
                     busy2 = false;
 
@@ -235,7 +258,6 @@ $(document).on("keyup", ".search_phone", function () {
                 }
                 $(".no-phone-data").css("display","none");
 
-                $("#loader").hide();
                 // $("#yesvitePhones").append(data);
 
 
@@ -247,6 +269,8 @@ $(document).on("keyup", ".search_phone", function () {
 
 
                 busy2 = false;
+                $("#home_loader").hide();
+
 
             },
             error: function (jqXHR, ajaxOptions, thrownError) {

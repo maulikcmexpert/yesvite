@@ -172,7 +172,7 @@
                 </div>
                 <div class="modal-footer cancel-confirm-btn">
                   <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-secondary confirm-btn confirm_cancel_event_btn" >Confirm</button>
+                  <button type="button" class="btn btn-secondary confirm-btn confirm_cancel_event_btn" id="confirm_cancel_event_btn">Confirm</button>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+@if(!empty($draftEventArray))
 <div class="home-latest-draf-wrp">
     <div class="home-center-upcoming-events-title">
       <h3>Latest Drafts</h3>
@@ -49,3 +50,4 @@
       </a>
       @endforeach
   </div>
+  @endif

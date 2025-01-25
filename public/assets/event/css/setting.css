@@ -1038,7 +1038,77 @@
 
 
 
+.setting-accordion-wrp .accordion-con button {
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    height: fit-content;
+    background: transparent;
+}
+.setting-accordion-wrp .accordion-con button span {
+    position: absolute;
+    color: white;
+    background-color: black;
+    /* width: 120px; */
+    font-size: 18px;
+    transition: 0.3s;
+    opacity: 0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 23.8px;
+    padding: 6px 16px;
+    width: max-content;
 
+}
+.setting-accordion-wrp .accordion-con button:hover {
+    overflow: visible;
+}
+.setting-accordion-wrp .accordion-con button:hover span {
+    opacity: 1;
+}
+.setting-accordion-wrp .accordion-con button span::after {
+    content: "";
+    position: absolute;
+    border: 10px solid transparent;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "top"] span {
+    top: -45px;
+    left: -10px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "top"] span::after {
+    border-top-color: black;
+    left: 50px;
+    bottom: -20px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "left"] span {
+    top: 10px;
+    left: -150px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "left"] span::after {
+    border-left-color: black;
+    right: -20px;
+    bottom: 5px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "bottom"] span {
+    bottom: -50px;
+    left: -20px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "bottom"] span::after {
+    border-bottom-color: black;
+    left: 20px;
+    top: -19px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "right"] span {
+    top: 10px;
+    right: -150px;
+}
+.setting-accordion-wrp .accordion-con button[data-position = "right"] span::after {
+    border-right-color: black;
+    left: -20px;
+    bottom: 5px;
+}
 
 
 /* ============ responsive ============ */

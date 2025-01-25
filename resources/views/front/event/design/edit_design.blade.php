@@ -403,6 +403,7 @@
                 "NeueHaasGroteskText-Medium" => "NeueHaasGroteskText-Medium",
                 "NeueHaasGroteskText-Regular" => "NeueHaasGroteskText-Regular",
                 "PTSansPro-Regular" => "PTSansPro-Regular",
+                "Times New Roman" => "Times-New-Romon",
             ];
         @endphp
         <div class="used-fonts-wrp common-font-wrp">
