@@ -195,19 +195,19 @@ console.log(monthEventCount);
     this.el.innerHTML = ''; // Clear previous content
 
     // Add the heading "ALL Events"
-    const heading = document.createElement('h2');
-    heading.className = 'calendar-heading'; // Optional: Add a class for styling
-    heading.innerText = 'All Events';
-    this.el.appendChild(heading);
-    const weekdays = document.createElement('div');
-    weekdays.className = 'weekdays';
-    ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
-        const weekday = document.createElement('div');
-        weekday.className = 'day';
-        weekday.innerText = day;
-        weekdays.appendChild(weekday);
-    });
-    this.el.appendChild(weekdays);
+    // const heading = document.createElement('h2');
+    // heading.className = 'calendar-heading'; // Optional: Add a class for styling
+    // heading.innerText = 'All Events';
+    // this.el.appendChild(heading);
+    // const weekdays = document.createElement('div');
+    // weekdays.className = 'weekdays';
+    // ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
+    //     const weekday = document.createElement('div');
+    //     weekday.className = 'day';
+    //     weekday.innerText = day;
+    //     weekdays.appendChild(weekday);
+    // });
+    // this.el.appendChild(weekdays);
     for (let i = 0; i < this.totalMonths; i++) {
         const currentMonth = this.startMonth.clone().add(i, 'months');
         this.drawMonth(currentMonth);
