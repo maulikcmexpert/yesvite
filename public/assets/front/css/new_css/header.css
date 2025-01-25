@@ -795,9 +795,9 @@ header{
     .moblie-menu-bar{
         display: block;
         width: 100%;
-        max-width: 40px;
-        min-width: 40px;
-        height: 40px;
+        max-width: 30px;
+        min-width: 30px;
+        height: 30px;
         background-color: transparent;
         border: none;
         font-size: 20px;
