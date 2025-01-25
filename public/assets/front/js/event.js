@@ -531,6 +531,7 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
         },
         complete: function () {
          $('.loader').css('display','none');    
+         window.location.reload();
         }
 
     });
