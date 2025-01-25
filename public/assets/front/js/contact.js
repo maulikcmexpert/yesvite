@@ -45,7 +45,7 @@ $("#product-scroll-phone").on("scroll", function () {
                     offset1=null;
                 }
 
-                loadMorePhones(search_name=null,type,offset1,limit,1);
+                loadMorePhones(search_phone,type,offset1,limit,1);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
             // loadMorePhones(page, search_phone);
