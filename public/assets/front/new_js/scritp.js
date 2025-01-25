@@ -127,6 +127,10 @@ $("#dropdownButton").on("click", function (event) {
         $(".header-profile-dropdown").removeClass("show");
         $(".line").removeClass("active");
     }
+    if ($(".mobile-menu-wrp").hasClass("active")) {
+        $(".mobile-menu-wrp").removeClass("active");
+        $(".line").removeClass("active");
+    }
 });
 
 
