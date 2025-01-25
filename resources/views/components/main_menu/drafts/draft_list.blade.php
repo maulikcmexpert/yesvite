@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (formattedDate) {
       // Ensure AM/PM is uppercase by replacing only the AM/PM part
+      const finalDate = formattedDate.replace(' at ', ' - ');
       const finalDate = formattedDate.replace(/\b(am|pm)\b/i, match => match.toUpperCase());
       saveDateElement.innerHTML = `Last Save: ${finalDate}`;
     } else {
