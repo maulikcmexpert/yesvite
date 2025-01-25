@@ -109,12 +109,15 @@
 
           const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
           
-          // Ensure we get the correct time format with AM/PM
-          const dateParts = formattedDate.split(', ');  // Split the date and time parts
+          // Debugging: Log the formattedDate to understand its structure
+          console.log('Formatted Date:', formattedDate);
+          
+          // Try splitting based on space and comma or try a more lenient method
+          const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
           
           if (dateParts.length === 2) {
             const datePart = dateParts[0];  // "January 25, 2025"
-            const timePart = dateParts[1];  // "9:57 AM" (with AM/PM)
+            const timePart = dateParts[1];  // "9:57 AM"
             
             // Final date formatting: "January 25, 2025 - 9:57 AM"
             const finalDate = `${datePart} - ${timePart}`;
@@ -125,5 +128,4 @@
         });
       });
 </script>
-
 
