@@ -1533,6 +1533,9 @@ function bindData(current_event_id) {
 
         //console.log(activeObjec);
     }
+    $(document).on("click", ".color-reset", function (e) {
+        updateColorPicker();
+    });
 
     // Update color picker based on the selected object's current font or background color
     function updateColorPicker() {

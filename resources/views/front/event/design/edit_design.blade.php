@@ -505,7 +505,7 @@
 
             <div class="footer-buttons ">
                 <button class="cmn-btn reset-btn color-reset">Reset</button>
-                <button class="cmn-btn color-save">Save</button>
+                <button class="cmn-btn color-save color-save">Save</button>
             </div>
         </div>
 
