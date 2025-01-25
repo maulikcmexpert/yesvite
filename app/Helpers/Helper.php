@@ -120,9 +120,9 @@ function sendNotification($notificationType, $postData)
 
     $senderData = User::where('id', $postData['sender_id'])->first();
 
-    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
+    if ((isset($postData['sync_id']) && $postData['sync_id'] != "") && $postData['sender_id'] == null || $postData['sender_id'] == "") {
         $senderData = contact_sync::where('id', $postData['sync_id'])->first();
-    }else{
+    } else {
         $senderData = User::where('id',  $postData['sender_id'])->first();
     }
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
@@ -1145,19 +1145,19 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'sent_rsvp') {
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
-        if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
-            $firstname=$senderData->firstName;
-            $lastname=$senderData->lastName;
-        }else{
-            $firstname=$senderData->firstname;
-            $lastname=$senderData->lastname;
+        if ((isset($postData['sync_id']) && $postData['sync_id'] != "") && $postData['sender_id'] == null || $postData['sender_id'] == "") {
+            $firstname = $senderData->firstName;
+            $lastname = $senderData->lastName;
+        } else {
+            $firstname = $senderData->firstname;
+            $lastname = $senderData->lastname;
         }
         if ($postData['rsvp_status'] == '1') {
             $notification_message = $firstname . ' '  . $lastname . " RSVP'd Yes for " . $getPostOwnerId->event_name;
         } elseif ($postData['rsvp_status'] == '0') {
             $notification_message = $firstname . ' '  . $lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
-        if($postData['sync_id']=="" ||$postData['sync_id']==null){
+        if ($postData['sync_id'] == "" || $postData['sync_id'] == null) {
             if ($getPostOwnerId->user_id != $postData['sender_id']) {
 
                 Notification::where([
@@ -1220,7 +1220,7 @@ function sendNotification($notificationType, $postData)
                                 'adults' => $postData['adults'],
                                 'host_email' => $senderData->email,
                                 'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
-                            ]; 
+                            ];
                             // dd($eventData);
                             $invitation_email = new NewRsvpsEmailNotify($eventData);
                             Mail::to($getPostOwnerId->user->email)->send($invitation_email);
@@ -1228,7 +1228,7 @@ function sendNotification($notificationType, $postData)
                     }
                 }
             }
-    }
+        }
     }
 
     if ($notificationType == 'potluck_bring') {
@@ -1783,9 +1783,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
         if (strpos($receiverNumber, '+') === 0) {
             $cleanedNumber = '+' . $cleanedNumber;
         }
-        // DB::enableQueryLog();
 
-        // Use the sanitized number in your query
         $user = Useropt::firstOrCreate(
             ['phone' => $cleanedNumber, 'event_id' => $event_id, 'event_invited_user_id' => $event_invited_user_id],
             [
@@ -1794,9 +1792,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
                 'event_invited_user_id' => $event_invited_user_id  // Ensure event_invited_user_id is included
             ]
         );
-        // dd(DB::getQueryLog());
 
-        // Generate the event link dynamically
         $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
 
         // Create the message
