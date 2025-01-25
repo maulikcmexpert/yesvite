@@ -783,7 +783,7 @@ class RsvpController extends BaseController
 
                 DB::commit();
 
-                // sendNotification('sent_rsvp', $notificationParam);
+                // sendNotification('sent_rsvp', $notificationParam);   
 
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
