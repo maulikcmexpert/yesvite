@@ -1134,10 +1134,9 @@ function bindData(current_event_id) {
 
         // Iterate over the textElements in dbJson
         dbJson.textElements.forEach(function (element) {
-            // if (
-            //     element.text.toLowerCase() === activeObject.text.toLowerCase()
-            // ) {
-            if (element.id === activeObject.id) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
                 // Match the active object's ID with dbJson
                 // Reset properties
                 activeObject.set({
