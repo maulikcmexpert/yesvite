@@ -693,7 +693,12 @@ class RsvpController extends BaseController
                     ];
                     $creatEventPost = new EventPost();
                     $creatEventPost->event_id = $eventId;
-                    $creatEventPost->user_id =  $userId;
+
+                    if ($request->input('user_id') != "") {
+                        $creatEventPost->user_id =  $userId;
+                    } else {
+                        $creatEventPost->user_id =  $sync_id;
+                    }
                     $creatEventPost->post_message = json_encode($postMessage);
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
