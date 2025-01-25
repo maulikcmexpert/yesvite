@@ -4852,6 +4852,8 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryItemKey = $(this).data("categoryitem");
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
+    var userquantity = $(this).data("userquantity");
+
     $(this).parent().parent().hide();
     var self_bring_quantity = $(this)
         .parent()
@@ -4875,7 +4877,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(categoryItemKey, categoryIndexKey, 0, itemquantity);
+    update_self_bring(categoryItemKey, categoryIndexKey, userquantity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
