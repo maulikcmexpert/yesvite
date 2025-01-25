@@ -19,8 +19,13 @@ $("#product-scroll").on("scroll", function () {
             if (scrollTop + elementHeight >= scrollHeight-2) {
                 busy1 = true;
                 offset += limit;
+                
                 var type="yesvite";
-            loadMoreData(search_name=null,type,offset,limit,1);
+                var search_name = $('.search_name').val();
+                if(search_name!=""){
+                    offset=null;
+                }
+            loadMoreData(search_name,type,offset,limit,1);
         }
 });
 
