@@ -4783,7 +4783,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
             
-            if (updatedQty <= categoryItemQuantity) {
+            if(updatedQty >= categoryItemQuantity){
                 $(
                     "#lumpia-collapseOne" +
                         "-" +
