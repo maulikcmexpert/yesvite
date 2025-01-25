@@ -465,7 +465,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd(session('categories'));
+                    dd(session('category'));
                 }
             }
         } else {
