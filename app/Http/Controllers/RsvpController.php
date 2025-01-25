@@ -550,7 +550,7 @@ class RsvpController extends BaseController
                 // $css = 'message.css';
                 // $css1 = 'audio.css';
             }
-            dd($user_id,$sync_contact_user_id);
+            // dd($user_id,$sync_contact_user_id);
             return view('layout', compact(
                 'title',
                 'page',
@@ -597,7 +597,12 @@ class RsvpController extends BaseController
     {
 
         // dd($request);
-        $userId = decrypt($request->user_id);
+        // $userId = decrypt($request->user_id);
+        if ($request->input('user_id') != "") {
+            $userId = decrypt($request->user_id);
+        } else {
+            $userId = "";
+        }
         $eventId = decrypt($request->event_id);
         $event_invited_user_id = decrypt($request->event_invited_user_id);
         if ($request->input('sync_id') != "") {
@@ -626,15 +631,21 @@ class RsvpController extends BaseController
                 //     // $query->where('app_user', '1');
                 // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
-                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                    // $query->where('app_user', '1');
-                })->where(['id' => $event_invited_user_id])->first();
+
+                if($sync_id!=""&&$userId==null){
+                    $rsvpSent = EventInvitedUser::whereHas('contact_sync', function ($query) {
+                        // $query->where('app_user', '1');
+                    })->where(['id' => $event_invited_user_id])->first(); 
+                }else{
+                    $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                        // $query->where('app_user', '1');
+                    })->where(['id' => $event_invited_user_id])->first();
+                }
             // }
 
             // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 
-            dd($event_invited_user_id,$rsvpSent);
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
                 if ($rsvpSentAttempt == NULL) {
@@ -802,6 +813,7 @@ class RsvpController extends BaseController
             }
             return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
         } catch (QueryException $e) {
+            dd($e);
             return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'DB error');
             DB::rollBack();
         } catch (\Exception $e) {
