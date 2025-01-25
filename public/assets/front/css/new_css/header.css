@@ -822,6 +822,10 @@ header{
         transition: 0.3s;
     }
 
+    .moblie-menu-bar svg path{
+        stroke: var(--secondary-black);
+    }
+
     .active.mobile-menu-wrp{
         height: 310px;
         padding: 10px 0px !important;
