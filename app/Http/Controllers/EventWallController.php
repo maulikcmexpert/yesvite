@@ -1883,4 +1883,109 @@ class EventWallController extends Controller
             'contacts' => $yesviteContact
         ]);
     }
+
+    public function sendInvitation(Request $request)
+    {
+        // dd($request);
+        $user  = Auth::guard('web')->user();
+
+
+
+        // try {
+        if (!empty($request['guest_list'])) {
+          dd(1);
+            $id = 0;
+            $ids = [];
+            $newInvite = [];
+            $newInviteGuest = [];
+            foreach ($request['guest_list'] as $value) {
+
+                if ($value['app_user'] == "0") {
+
+                    $checkUserInvitation = EventInvitedUser::with(['contact_sync'])->where(['event_id' => $request['event_id'], 'user_id' => ''])->where('sync_id', '!=', '')->get()->pluck('sync_id')->toArray();
+                    $id = $value['id'];
+                    if (!in_array($value['id'], $checkUserInvitation)) {
+                        $checkUserExist = contact_sync::where('id', $value['id'])->first();
+                        $newUserId = NULL;
+                        if ($checkUserExist) {
+                            if ($checkUserExist->email != '') {
+                                $newUserId = checkUserEmailExist($checkUserExist);
+                            }
+                        }
+                        EventInvitedUser::create([
+                            'event_id' => $request['event_id'],
+                            'prefer_by' => $value['prefer_by'],
+                            'sync_id' => $value['id'],
+                            'user_id' => $newUserId
+                        ]);
+                    } else {
+                        $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $request['event_id'], 'sync_id' => $id])->first();
+                        $updateUser->prefer_by = $value['prefer_by'];
+                        $updateUser->save();
+                    }
+                    $newInviteGuest[] = ['id' => $id];
+                } else {
+
+                    $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $request['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
+                    $id = $value['id'];
+                    if (!in_array($value['id'], $checkUserInvitation)) {
+                        EventInvitedUser::create([
+                            'event_id' => $request['event_id'],
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id']
+                        ]);
+                    } else {
+                        $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $request['event_id'], 'user_id' => $id])->first();
+                        $updateUser->prefer_by = $value['prefer_by'];
+                        $updateUser->save();
+                    }
+                    $newInvite[] = ['id' => $id];
+                }
+
+                $ids[] = $id;
+            }
+
+
+            if (isset($newInvite) && !empty($newInvite)) {
+
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $request['event_id'],
+                    'newUser' => $newInvite
+                ];
+                // dd($newInvite);
+                // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+                sendNotification('invite', $notificationParam);
+            }
+            if (isset($newInviteGuest) && !empty($newInviteGuest)) {
+                $notificationParam = [
+                    'sender_id' => $user->id,
+                    'event_id' => $request['event_id'],
+                    'newUser' => $newInviteGuest
+                ];
+                sendNotificationGuest('invite', $notificationParam);
+            }
+
+            debit_coins($user->id, $request['event_id'], count($ids));
+        }
+
+
+
+
+
+        return response()->json(['status' => 1, 'message' => "invites sent sucessfully"]);
+        // }
+        // catch (QueryException $e) {
+
+        //     DB::rollBack();
+
+        //     return response()->json(['status' => 0, 'message' => "db error"]);
+        // }
+        //  catch (\Exception $e) {
+
+        //     DB::rollBack();
+
+        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        // }
+    }
 }

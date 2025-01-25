@@ -286,7 +286,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/get_phoneContact', [EventWallController::class, 'get_PhoneContact'])->name('event_wall.get_phoneContact');
     Route::post('event_wall/get_yesviteContact', [EventWallController::class, 'get_yesviteContact'])->name('event_wall.get_yesviteContact');
     Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
-
+    Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 });
 

@@ -318,7 +318,9 @@ $(document).ready(function () {
                 // container.empty(); // Clear previous contacts
 
                 container.html(contacts);
-
+                selectedContacts.forEach(contact => {
+                    $(`.contact-checkbox[data-id="${contact.id}"]`).prop('checked', true);
+                });
 
             },
             error: function () {
@@ -343,7 +345,9 @@ $(document).ready(function () {
                 // container.empty(); // Clear previous contacts
 
                 container.html(contacts);
-
+                selectedPhoneContacts.forEach(contact => {
+                    $(`.phoneContact-checkbox[data-id="${contact.id}"]`).prop('checked', true);
+                });
 
             },
             error: function () {
@@ -379,111 +383,399 @@ $(document).ready(function () {
 });
 
 
-let selectedContacts = [];
+// let selectedContacts = [];
+// let selectedPhoneContacts = [];
 
-// Event listener for checkboxes
+// // Load selected contacts from local storage on page load
+// $(document).ready(function () {
+//     const savedContacts = JSON.parse(localStorage.getItem('selectedContacts')) || [];
+//     selectedContacts = savedContacts;
+//     updateModalContent();
+
+//     const savedPhoneContacts = JSON.parse(localStorage.getItem('selectedPhoneContacts')) || [];
+//     selectedPhoneContacts = savedPhoneContacts;
+//     updateContent();
+//     savedContacts.forEach(contact => {
+//         $(`.contact-checkbox[data-id="${contact.id}"]`).prop('checked', true);
+//     });
+
+//     // Update the checkbox state for phone contacts
+//     savedPhoneContacts.forEach(contact => {
+//         $(`.phoneContact-checkbox[data-id="${contact.id}"]`).prop('checked', true);
+//     });
+// });
+
+// // Event listener for checkboxes
+// $(document).on('change', '.contact-checkbox', function () {
+//     const $checkbox = $(this);
+//     const contactData = {
+//         id: $checkbox.data('id'),
+//         name: $checkbox.data('name'),
+//         lastname: $checkbox.data('last'),
+//         email: $checkbox.data('email'),
+//         phone: $checkbox.data('phone'),
+//     };
+
+//     if ($checkbox.is(':checked')) {
+//         // Add contact to selected list
+//         selectedContacts.push(contactData);
+//     } else {
+//         // Remove contact from selected list
+//         selectedContacts = selectedContacts.filter(contact => contact.id !== contactData.id);
+//     }
+
+//     // Save updated list to local storage
+//     localStorage.setItem('selectedContacts', JSON.stringify(selectedContacts));
+//     updateModalContent();
+// });
+
+// // Function to update modal content
+// function updateModalContent() {
+//     const $modalBody = $('.selected-contacts-list');
+//     $modalBody.empty();
+
+//     function generateProfileImage(firstname, lastname) {
+//         firstname = firstname ? String(firstname).trim() : '';
+//         lastname = lastname ? String(lastname).trim() : '';
+//         const firstInitial = firstname[0] ? firstname[0].toUpperCase() : '';
+//         const secondInitial = lastname[0] ? lastname[0].toUpperCase() : '';
+//         const initials = `${firstInitial}${secondInitial}`;
+//         const fontColor = `fontcolor${firstInitial}`;
+//         return `<h5 class="${fontColor} font_name">${initials || 'NA'}</h5>`;
+//     }
+
+//     selectedContacts.forEach((contact, index) => {
+//         const profileImage = contact.profile || generateProfileImage(contact.name, contact.lastname);
+
+//         const contactHtml = `
+//             <div class="guest-user" data-id="${index}">
+//                 <div class="guest-user-img">
+//                     ${profileImage}
+//                     <a href="#" class="close">
+//                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                             <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+//                             <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+//                             <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+//                             <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+//                         </svg>
+//                     </a>
+//                 </div>
+//                 <h6>${contact.name} ${contact.lastname}</h6>
+//             </div>
+//         `;
+
+//         $modalBody.append(contactHtml);
+//     });
+
+//     $modalBody.on('click', '.close', function (e) {
+//         e.preventDefault();
+//         const contactId = $(this).closest('.guest-user').data('id');
+//         selectedContacts.splice(contactId, 1);
+//         localStorage.setItem('selectedContacts', JSON.stringify(selectedContacts));
+//         updateModalContent();
+//     });
+// }
+
+// // Phone contacts handling
+// $(document).on('change', '.phoneContact-checkbox', function () {
+//     const $checkbox = $(this);
+//     const contactData = {
+//         id: $checkbox.data('id'),
+//         name: $checkbox.data('name'),
+//         lastname: $checkbox.data('last'),
+//         email: $checkbox.data('email'),
+//         phone: $checkbox.data('phone'),
+//     };
+
+//     if ($checkbox.is(':checked')) {
+//         selectedPhoneContacts.push(contactData);
+//     } else {
+//         selectedPhoneContacts = selectedPhoneContacts.filter(contact => contact.id !== contactData.id);
+//     }
+
+//     localStorage.setItem('selectedPhoneContacts', JSON.stringify(selectedPhoneContacts));
+//     updateContent();
+// });
+
+// function updateContent() {
+//     const $modalBody = $('.selected-phone-list');
+//     $modalBody.empty();
+
+//     function generateProfileImage(firstname, lastname) {
+//         firstname = firstname ? String(firstname).trim() : '';
+//         lastname = lastname ? String(lastname).trim() : '';
+//         const firstInitial = firstname[0] ? firstname[0].toUpperCase() : '';
+//         const secondInitial = lastname[0] ? lastname[0].toUpperCase() : '';
+//         const initials = `${firstInitial}${secondInitial}`;
+//         const fontColor = `fontcolor${firstInitial}`;
+//         return `<h5 class="${fontColor} font_name">${initials || 'NA'}</h5>`;
+//     }
+
+//     selectedPhoneContacts.forEach((contact, index) => {
+//         const profileImage = contact.profile || generateProfileImage(contact.name, contact.lastname);
+
+//         const contactHtml = `
+//             <div class="guest-user" data-id="${index}">
+//                 <div class="guest-user-img">
+//                     ${profileImage}
+//                     <a href="#" class="close">
+//                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                             <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+//                             <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+//                             <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+//                             <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+//                         </svg>
+//                     </a>
+//                 </div>
+//                 <h6>${contact.name} ${contact.lastname}</h6>
+//             </div>
+//         `;
+
+//         $modalBody.append(contactHtml);
+//     });
+
+//     $modalBody.on('click', '.close', function (e) {
+//         e.preventDefault();
+//         const contactId = $(this).closest('.guest-user').data('id');
+//         selectedPhoneContacts.splice(contactId, 1);
+//         localStorage.setItem('selectedPhoneContacts', JSON.stringify(selectedPhoneContacts));
+//         updateContent();
+//     });
+// }
+
+
+let selectedContacts = [];
+let selectedPhoneContacts = [];
+
+// Load selected contacts from local storage on page load
+$(document).ready(function () {
+    loadSavedContacts();
+    loadSavedPhoneContacts();
+});
+
+// Load saved contacts
+function loadSavedContacts() {
+    selectedContacts = JSON.parse(localStorage.getItem('selectedContacts')) || [];
+    updateModalContent();
+
+    selectedContacts.forEach(contact => {
+        handleCheckboxState(contact, '.contact-checkbox');
+    });
+}
+
+// Load saved phone contacts
+function loadSavedPhoneContacts() {
+    selectedPhoneContacts = JSON.parse(localStorage.getItem('selectedPhoneContacts')) || [];
+    updatePhoneModalContent();
+
+    selectedPhoneContacts.forEach(contact => {
+        handleCheckboxState(contact, '.phoneContact-checkbox');
+    });
+}
+
+// Handle checkbox states
+function handleCheckboxState(contact, checkboxSelector) {
+    if (contact.selectedEmail) {
+        $(`${checkboxSelector}[data-id="${contact.id}"][data-type="email"]`).prop('checked', true);
+        $(`${checkboxSelector}[data-id="${contact.id}"][data-type="phone"]`).prop('checked', false);
+    }
+    if (contact.selectedPhone) {
+        $(`${checkboxSelector}[data-id="${contact.id}"][data-type="phone"]`).prop('checked', true);
+        $(`${checkboxSelector}[data-id="${contact.id}"][data-type="email"]`).prop('checked', false);
+    }
+}
+
+// Event listener for contact checkboxes
 $(document).on('change', '.contact-checkbox', function () {
-    const $checkbox = $(this);
+    handleCheckboxChange($(this), selectedContacts, 'selectedContacts', updateModalContent);
+});
+
+// Event listener for phone contact checkboxes
+$(document).on('change', '.phoneContact-checkbox', function () {
+    handleCheckboxChange($(this), selectedPhoneContacts, 'selectedPhoneContacts', updatePhoneModalContent);
+});
+
+// Handle checkbox change for both contact types
+function handleCheckboxChange($checkbox, contactList, localStorageKey, updateFunction) {
     const contactData = {
         id: $checkbox.data('id'),
         name: $checkbox.data('name'),
         lastname: $checkbox.data('last'),
         email: $checkbox.data('email'),
         phone: $checkbox.data('phone'),
+        selectedEmail: false,
+        selectedPhone: false
     };
-console.log(contactData);
-    if ($checkbox.is(':checked')) {
-        // Add contact to selected list
-        console.log(1);
 
-        selectedContacts.push(contactData);
-    } else {
-        // Remove contact from selected list
-        console.log(2);
-        selectedContacts = selectedContacts.filter(contact => contact.id !== contactData.id);
+    if ($checkbox.data('type') === 'email') {
+        contactData.selectedEmail = $checkbox.is(':checked');
+        $(`[data-id="${contactData.id}"][data-type="phone"]`).prop('checked', false);
+    } else if ($checkbox.data('type') === 'phone') {
+        contactData.selectedPhone = $checkbox.is(':checked');
+        $(`[data-id="${contactData.id}"][data-type="email"]`).prop('checked', false);
     }
 
-    updateModalContent();
-});
+    // Update the contact list
+    const existingIndex = contactList.findIndex(c => c.id === contactData.id);
+    if (existingIndex !== -1) {
+        contactList.splice(existingIndex, 1); // Remove the existing entry
+    }
+    if (contactData.selectedEmail || contactData.selectedPhone) {
+        contactList.push(contactData); // Add updated entry
+    }
 
-// Function to update modal content
-// Function to update modal content
+    // Save to local storage and update UI
+    localStorage.setItem(localStorageKey, JSON.stringify(contactList));
+    updateFunction();
+}
+
+// Update modal content for email contacts
 function updateModalContent() {
-    const $modalBody = $('.selected-contacts-list');
+    updateModal('.selected-contacts-list', selectedContacts, 'selectedContacts', updateModalContent);
+}
+
+// Update modal content for phone contacts
+function updatePhoneModalContent() {
+    updateModal('.selected-phone-list', selectedPhoneContacts, 'selectedPhoneContacts', updatePhoneModalContent);
+}
+
+// General modal update function
+function updateModal(modalSelector, contactList, localStorageKey, updateFunction) {
+    const $modalBody = $(modalSelector);
     $modalBody.empty();
-
-    function generateProfileImage(firstname, lastname) {
-        const firstInitial = firstname ? firstname[0].toUpperCase() : ''; // Ensures the first letter is uppercase
-        const secondInitial = lastname ? lastname[0].toUpperCase() : ''; // Ensures the first letter is uppercase
-        const initials = `${firstInitial}${secondInitial}`; // Combine initials
-        const fontColor = `fontcolor${firstInitial.toUpperCase()}`; // Ensure consistent fontColor class
-
-        // Return initials inside an h5 tag with dynamic styling
-        return `<h5 class="${fontColor} font_name">${initials}</h5>`;
-    }
-
-
-    selectedContacts.forEach(contact => {
-        const profileImage = contact.profile || generateProfileImage(contact.name,contact.lastname);
-
+    contactList.forEach((contact, index) => {
+        const profileImage = contact.profile || generateProfileImage(contact.name, contact.lastname);
         const contactHtml = `
-            <div class="guest-user">
-            <div class="guest-user-img">
-                    ${profileImage}
-
-                                        <a href="#" class="close">
-                                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="1.20312" y="1" width="16" height="16" rx="8"
-                                                fill="#F73C71" />
-                                            <rect x="1.20312" y="1" width="16" height="16" rx="8"
-                                                stroke="white" stroke-width="2" />
-                                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </a>
-                                    </div>
-                    <h6>${contact.name} ${contact.lastname}</h6>
-
-
+            <div class="guest-user" data-id="${index}">
+                <div class="guest-user-img">
+                   ${profileImage}
+                    <a href="#" class="close">
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+                <h6>${contact.name} ${contact.lastname}</h6>
             </div>
         `;
-
         $modalBody.append(contactHtml);
     });
-    $('.selected-contacts-list').on('click', '.close', function (e) {
+
+    // Handle removal of contacts
+    $modalBody.off('click').on('click', '.close', function (e) {
         e.preventDefault();
-
-        // Get the index of the contact to remove
-        const $guestUser = $(this).closest('.guest-user');
-        const index = $guestUser.data('index');
-
-        // Remove the contact from the array
-        selectedContacts.splice(index, 1);
-
-        // Update the modal content
-        updateModalContent();
+        const contactId = $(this).closest('.guest-user').data('id');
+        contactList.splice(contactId, 1);
+        localStorage.setItem(localStorageKey, JSON.stringify(contactList));
+        updateFunction();
     });
 }
 
-// Example usage of the above function
-// Add the modal body where selected contacts will be displayed
-$('.modal').on('show.bs.modal', function () {
-    updateModalContent();
+
+
+// Function to generate profile image
+function generateProfileImage(firstname, lastname) {
+    firstname = firstname ? String(firstname).trim() : '';
+    lastname = lastname ? String(lastname).trim() : '';
+    const firstInitial = firstname[0] ? firstname[0].toUpperCase() : '';
+    const secondInitial = lastname[0] ? lastname[0].toUpperCase() : '';
+    const initials = `${firstInitial}${secondInitial}`;
+    const fontColor = `fontcolor${firstInitial}`;
+    return `<h5 class="${fontColor} font_name">${initials || 'NA'}</h5>`;
+}
+// Event listener for contact checkboxes
+$(document).ready(function () {
+    // Event listener for contact checkboxes
+    $(document).on('change', '.contact-checkbox', function () {
+        const id = $(this).data('id');
+        const isEmailSelected = $(this).data('type') === 'email' && $(this).is(':checked');
+        const isPhoneSelected = $(this).data('type') === 'phone' && $(this).is(':checked');
+
+        // Add to the guest list if either email or phone is selected
+
+        console.log(`Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`);
+        // Add to the guest list, prefer email if selected, else prefer phone
+        addToGuestList(id, isEmailSelected ? 'email' : 'phone', 1); // App user = 1 for email (app user)
+
+    });
+
+    // Event listener for phone contact checkboxes
+    $(document).on('change', '.phoneContact-checkbox', function () {
+        const id = $(this).data('id');
+        const isEmailSelected = $(this).data('type') === 'email' && $(this).is(':checked');
+        const isPhoneSelected = $(this).data('type') === 'phone' && $(this).is(':checked');
+
+        // Add to the guest list if either email or phone is selected
+
+        console.log(`Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`);
+        // Add to the guest list, prefer email if selected, else prefer phone
+        addToGuestList(id, isEmailSelected ? 'email' : 'phone', 0); // App user = 0 for phone (non-app user)
+
+    });
+
+
+
+    // Declare guestList outside so it's globally accessible
+    let guestList = [];
+
+    function addToGuestList(id, preferBy, appUser) {
+        // Check if the contact is already in the guest list to avoid duplicates
+        console.log('Adding to guest list:', { id, preferBy, appUser });
+
+        // Check if contact is already in guestList to prevent adding duplicates
+        const exists = guestList.some(contact => contact.id === id);
+        if (!exists) {
+            guestList.push({
+                id: id,
+                prefer_by: preferBy,
+                app_user: appUser
+            });
+            console.log('Contact added to guest list:', { id, preferBy, appUser });
+        } else {
+            console.log('Contact already in guest list:', { id });
+        }
+
+        console.log('Updated guest list:', guestList); // Check the updated guest list
+    }
+
+
+    // Event listener for Add Guest button click
+    $(document).on('click', '.add_guest', function (e) {
+        e.preventDefault();
+
+        console.log('Guest list before submit:', guestList);
+        // Check if there are any guests to send
+
+
+
+
+
+        // Log guestList before sending the request
+        console.log('Sending guest list:', guestList);
+
+        // Send data to the server via AJAX
+        $.ajax({
+            url: base_url + 'event_wall/send-invitation', // Your Laravel route
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: {
+                event_id: $('#event_id').val(), // Event ID from a hidden input
+                guest_list: guestList
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    alert(response.message); // Show success message
+                    guestList = []; // Clear guest list after successful submission
+                } else {
+                    alert(response.message); // Show error message
+                }
+            },
+            error: function (xhr) {
+                alert('Something went wrong. Please try again.'); // Handle AJAX errors
+            }
+        });
+    });
 });
-
-
-// Event listener for removing contacts
-$(document).on('click', '.remove-contact', function (e) {
-    e.preventDefault();
-
-    const contactId = $(this).data('id');
-    selectedContacts = selectedContacts.filter(contact => contact.id !== contactId);
-    updateModalContent();
-
-    // Uncheck the corresponding checkbox
-    $(`.contact-checkbox[data-id="${contactId}"]`).prop('checked', false);
-});
-

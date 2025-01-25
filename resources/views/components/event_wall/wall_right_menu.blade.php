@@ -526,7 +526,7 @@ if ($hostView) {
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="guest-users-wrp" id="selected-contacts-list">
+                        <div class="guest-users-wrp selected-phone-list" >
                             <div class="guest-user">
                                 <div class="guest-user-img">
                                     <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="guest-img">
@@ -768,8 +768,9 @@ if ($hostView) {
                     </div>
                 </div>
             </div>
+            {{-- <input type="hidden" id="event_id" value=""> --}}
             <div class="modal-footer rsvp-button-wrp">
-                <button type="button" class="btn btn-secondary success-btn" data-bs-dismiss="modal">Re-send</button>
+                <button type="button" class="btn btn-secondary success-btn add_guest" data-bs-dismiss="modal">Re-send</button>
             </div>
         </div>
     </div>
