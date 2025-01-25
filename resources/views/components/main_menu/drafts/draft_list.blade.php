@@ -92,26 +92,20 @@
   <script>
   document.addEventListener("DOMContentLoaded", function() {
     const saveDates = document.querySelectorAll('.last-save');
-    
     saveDates.forEach(function(saveDateElement) {
       const savedDate = saveDateElement.getAttribute('data-save-date');
-      
-      const date = new Date(savedDate);
-      
-      // Format the date according to the device's local timezone
-      const options = {
-        weekday: 'long', // "Monday"
-        year: 'numeric', // "2022"
-        month: 'long',   // "December"
-        day: 'numeric',  // "23"
-        hour: 'numeric', // "8"
-        minute: 'numeric', // "31"
-        hour12: true      // "AM/PM"
-      };
-      
-      const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(date);
-      const finalDate = formattedDate.replace(',', ' -');
-      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+      const losAngelesTime = new Date(savedDate + ' GMT-0800');
+      const formattedDate = new Intl.DateTimeFormat(navigator.language, {
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+      }).format(losAngelesTime);
+      saveDateElement.innerHTML = `Last Save: ${formattedDate}`;
     });
   });
 </script>
