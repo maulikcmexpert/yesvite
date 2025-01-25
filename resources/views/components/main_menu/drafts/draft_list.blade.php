@@ -90,35 +90,40 @@
     </div>
   </div>
   <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const saveDates = document.querySelectorAll('.last-save');
-  
-  saveDates.forEach(function(saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date');
-    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
-    
-    // Format the date according to the required format
-    const options = {
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric', 
-      hour: 'numeric', 
-      minute: 'numeric', 
-      hour12: true
-    };
+      document.addEventListener("DOMContentLoaded", function() {
+        const saveDates = document.querySelectorAll('.last-save');
+        
+        saveDates.forEach(function(saveDateElement) {
+          const savedDate = saveDateElement.getAttribute('data-save-date');
+          const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
+          
+          // Format the date according to the required format
+          const options = {
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: 'numeric', 
+            minute: 'numeric', 
+            hour12: true
+          };
 
-    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
-    
-    // Now, ensure the AM/PM is correctly placed at the end
-    const dateParts = formattedDate.split(', ');  // Split the date from the time
-    
-    const datePart = dateParts[0];  // "December 23, 2022"
-    const timePart = dateParts[1];  // "8:31 AM"
-    
-    const finalDate = `${datePart} - ${timePart}`;
-    
-    saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-  });
-});
+          const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+          
+          // Ensure we get the correct time format with AM/PM
+          const dateParts = formattedDate.split(', ');  // Split the date and time parts
+          
+          if (dateParts.length === 2) {
+            const datePart = dateParts[0];  // "January 25, 2025"
+            const timePart = dateParts[1];  // "9:57 AM" (with AM/PM)
+            
+            // Final date formatting: "January 25, 2025 - 9:57 AM"
+            const finalDate = `${datePart} - ${timePart}`;
+            saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+          } else {
+            console.error('Date format issue:', formattedDate);
+          }
+        });
+      });
 </script>
+
 
