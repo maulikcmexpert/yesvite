@@ -1871,7 +1871,6 @@ function bindData(current_event_id) {
 
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
-            $(".size-btn").removeClass("activated");
         } else {
             // alert();
             canvas.getObjects("textbox").forEach(function (tb) {
