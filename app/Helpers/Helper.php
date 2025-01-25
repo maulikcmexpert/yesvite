@@ -1785,7 +1785,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
         }
 
         // Send the message
-        sendSMSForApplication($receiverNumber, $message);
+        return sendSMSForApplication($receiverNumber, $message);
     } catch (\Exception $e) {
         // Log the error for debugging
         Log::error('Error sending SMS invite: ' . $e->getMessage(), [
