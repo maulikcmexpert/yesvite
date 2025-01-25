@@ -1341,7 +1341,7 @@ class EventController extends BaseController
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
         $category_index = $request->input('category_index');
-        dd($category_index);
+        
         $categories_item = Session::get('category_item', []);
         $itemData = [
             'item' => $itemName,
@@ -1353,7 +1353,7 @@ class EventController extends BaseController
         } else {
             $categories_item[$categoryName] = [$itemData];
         }
-
+dD($categories_item);
 
         $categories = Session::get('category', []);
 
