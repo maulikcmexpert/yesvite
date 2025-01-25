@@ -1146,8 +1146,8 @@
     margin: 0 auto 16px !important;
 }
 .cancel-event .delete-icon img {
-    width: 100%;
-    height: 100%;
+    width: 24px;
+    height: 24px;
     border-radius: 100%;
 }
 .cancel-event .delete-modal-head h4 {
