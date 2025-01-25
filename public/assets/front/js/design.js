@@ -1125,10 +1125,36 @@ function bindData(current_event_id) {
     $(document).on("click", ".formate-text-reset", function (e) {
         var activeObject = canvas.getActiveObject();
 
+        // Check if there's an active object and it's a textbox
         if (!activeObject || activeObject.type !== "textbox") {
-            return; // No object or not a textbox, so do nothing
+            return; // Exit if no object or not a textbox
         }
+
         console.log(dbJson);
+
+        // Iterate over the textElements in dbJson
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                // Match the active object's ID with dbJson
+                // Reset properties
+                activeObject.set({
+                    fontWeight: element.fontWeight || "", // Default to normal if not defined
+                    fontStyle: element.fontStyle || "", // Default to normal if not defined
+                    underline: element.underline || false,
+                    linethrough: element.linethrough || false,
+                    fontFamily: element.fontFamily || "Arial", // Default font
+                    fontSize: element.fontSize || 16, // Default size
+                    textAlign: element.textAlign || "left", // Default alignment
+                    lineHeight: element.lineHeight || 1, // Default line height
+                    text: element.text || activeObject.text, // Reset to original text
+                });
+            }
+        });
+        // Re-render the canvas after resetting
+        canvas.renderAll();
+        addIconsToTextbox(activeObject);
     });
 
     function addIconsToTextbox(target) {

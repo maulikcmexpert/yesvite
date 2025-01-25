@@ -662,7 +662,7 @@ class RsvpController extends BaseController
                 if ($request->input('user_id') != "") {
                     $rsvpSent->user_id = $userId;
                 } else {
-                    $rsvpSent->sync_id = $userId;
+                    $rsvpSent->sync_id = $sync_id;
                 }
 
                 $rsvpSent->rsvp_status = $request->rsvp_status;
@@ -693,7 +693,12 @@ class RsvpController extends BaseController
                     ];
                     $creatEventPost = new EventPost();
                     $creatEventPost->event_id = $eventId;
-                    $creatEventPost->user_id =  $userId;
+
+                    if ($request->input('user_id') != "") {
+                        $creatEventPost->user_id =  $userId;
+                    } else {
+                        $creatEventPost->user_id =  $sync_id;
+                    }
                     $creatEventPost->post_message = json_encode($postMessage);
                     $creatEventPost->post_privacy = "1";
                     $creatEventPost->post_type = "4";
