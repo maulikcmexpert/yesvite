@@ -157,6 +157,7 @@
                       <div class="delete-icon">
                           <img src="{{asset('assets/front/image/info-circle.png')}}" alt="delete">
                       </div>
+                      <input type="hidden" id="cancel_event_id"/>
                       <h4>Cancel Event</h4>
                       <p>Cancelling this event will delete everything in this event including but not limited to all comments, photos, and settings associated with this event for you and your guests.</p>
                     </div>
