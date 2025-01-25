@@ -39,7 +39,9 @@
                             </div>
                             <div class="home-latest-draf-card-head-content">
                               <h3>{{$draft['event_name']}}</h3>
-                              <p>Last Save:  {{$draft['saved_date']}}</p>
+                              <!-- <p>Last Save:  {{$draft['saved_date']}}</p> -->
+                              <p class="last-save" data-save-date=" {{$draft['saved_date']}}">Last Save:   {{$draft['saved_date']}}2</p>
+
                             </div>
                             
                         </div>
@@ -87,3 +89,24 @@
         </div>
     </div>
   </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const saveDates = document.querySelectorAll('.last-save');
+    
+    saveDates.forEach(function(saveDateElement) {
+      const savedDate = saveDateElement.getAttribute('data-save-date');
+      const formattedDate = new Intl.DateTimeFormat(navigator.language, {
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+      }).format(new Date(savedDate));
+      
+      saveDateElement.innerHTML = `Last Save: ${formattedDate}`;
+    });
+  });
+</script>

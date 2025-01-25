@@ -52,11 +52,13 @@ class EventDraftController extends Controller
                     $eventDetail['event_name'] = ($value->event_name!="")?$value->event_name:"No name";
                     // $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
                     // $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
+
+                    // dd($deviceTimezone);
                     $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)
                     ->setTimezone('Asia/Kolkata') // Set your desired timezone here
                     ->format('F j, Y - g:i A');
 
-                    $eventDetail['saved_date'] = $formattedDate;
+                    $eventDetail['saved_date'] = $value->updated_at;
                     $eventDetail['step'] = ($value->step != NULL) ? $value->step : 0;
                     $eventDetail['event_plan_name'] = $value->subscription_plan_name;
 
