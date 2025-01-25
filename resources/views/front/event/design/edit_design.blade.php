@@ -476,8 +476,8 @@
             </div>
 
             <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn save-btn">Save</button>
+                <button class="cmn-btn edit-text-reset reset-btn">Reset</button>
+                <button class="cmn-btn edit-text-save save-btn">Save</button>
             </div>
         </div>
 

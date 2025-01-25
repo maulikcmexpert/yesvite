@@ -1124,15 +1124,11 @@ function bindData(current_event_id) {
 
     $(document).on("click", ".formate-text-reset", function (e) {
         var activeObject = canvas.getActiveObject();
-
-        // Check if there's an active object and it's a textbox
         if (!activeObject || activeObject.type !== "textbox") {
-            return; // Exit if no object or not a textbox
+            return;
         }
 
         console.log(dbJson);
-
-        // Iterate over the textElements in dbJson
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
@@ -1165,22 +1161,15 @@ function bindData(current_event_id) {
                 text: activeObject.text.toLowerCase(),
             });
         }
-        // Re-render the canvas after resetting
         canvas.renderAll();
         addIconsToTextbox(canvas.getActiveObject());
     });
 
     $(document).on("click", ".color-reset", function (e) {
         var activeObject = canvas.getActiveObject();
-
-        // Check if there's an active object and it's a textbox
         if (!activeObject || activeObject.type !== "textbox") {
-            return; // Exit if no object or not a textbox
+            return;
         }
-
-        console.log(dbJson);
-
-        // Iterate over the textElements in dbJson
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
@@ -1197,11 +1186,52 @@ function bindData(current_event_id) {
         if (seted == 0) {
             $("#color-picker").spectrum("set", selectedColor || "#000000");
 
-            activeObject.set({
-                fill: "#000000",
-            });
+            activeObject.set("fill", "#000000");
         }
-        // Re-render the canvas after resetting
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    $(document).on("click", ".edit-text-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+
+                activeObject.set({
+                    fontSize: element.fontSize || "20",
+                    charSpacing: element.charSpacing || "0",
+                    lineHeight: element.lineHeight || "1.16",
+                });
+
+                $("#fontSizeInput").val(element.fontSize || "20");
+                $("#fontSizeRange").val(element.fontSize || "20");
+                $("#letterSpacingInput").val(element.charSpacing || "0");
+                $("#letterSpacingRange").val(element.charSpacing || "0");
+                $("#lineHeightInput").val(element.lineHeight || "1.16");
+                $("#lineHeightRange").val(element.lineHeight || "1.16");
+            }
+        });
+        if (seted == 0) {
+            activeObject.set({
+                fontSize: "20",
+                charSpacing: "0",
+                lineHeight: "1.16",
+            });
+
+            $("#fontSizeInput").val("20");
+            $("#fontSizeRange").val("20");
+            $("#letterSpacingInput").val("0");
+            $("#letterSpacingRange").val("0");
+            $("#lineHeightInput").val("1.16");
+            $("#lineHeightRange").val("1.16");
+        }
         canvas.renderAll();
         addIconsToTextbox(canvas.getActiveObject());
     });
