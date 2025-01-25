@@ -90,35 +90,36 @@
     </div>
   </div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const saveDates = document.querySelectorAll('.last-save');
+document.addEventListener("DOMContentLoaded", function () {
+  const saveDates = document.querySelectorAll('.last-save');
 
-      saveDates.forEach(function (saveDateElement) {
-        const savedDate = saveDateElement.getAttribute('data-save-date');
-        const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Adjusting for LA timezone
-        
-        // Format the date according to the required format
-        const options = {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true
-        };
+  saveDates.forEach(function (saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Adjusting for LA timezone
 
-        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
+    // Format the date according to the required format
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
 
-        if (formattedDate) {
-          // Format the final string as "Month Day, Year - Time AM/PM"
-          const finalDate = formattedDate.replace(/, (\d+:\d+ [APM]+)/, ' - $1').toUpperCase();
-          saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-        } else {
-          console.error('Date formatting failed:', savedDate);
-        }
-      });
-    }); 
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
+
+    if (formattedDate) {
+      // Ensure AM/PM is uppercase by replacing only the AM/PM part
+      const finalDate = formattedDate.replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+    } else {
+      console.error('Date formatting failed:', savedDate);
+    }
+  });
+});
 </script>
+
 
 
 
