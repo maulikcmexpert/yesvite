@@ -474,6 +474,7 @@ $(document).on("click", ".design-cards", function () {
         }
     }
 });
+
 $(document).on("click", ".modal-design-card", function (e) {
     e.stopPropagation();
 });
@@ -1121,6 +1122,15 @@ function bindData(current_event_id) {
         return textWidth;
     }
 
+    $(document).on("click", ".formate-text-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+
+        if (!activeObject || activeObject.type !== "textbox") {
+            return; // No object or not a textbox, so do nothing
+        }
+        console.log(dbJson);
+    });
+
     function addIconsToTextbox(target) {
         console.log("add to here");
         console.log(target);
@@ -1172,12 +1182,37 @@ function bindData(current_event_id) {
         $("#lineHeightInput").val(target.lineHeight);
         $("#lineHeightRange").val(target.lineHeight);
         $(".size-btn").removeClass("activated");
+        const textCase = target.textCase || "none"; // Default to "none"
+
         $(".uppercase-btn").toggleClass("activated", textCase === "uppercase");
         $(".lowercase-btn").toggleClass("activated", textCase === "lowercase");
         $(".capitalize-btn").toggleClass(
             "activated",
             textCase === "capitalize"
         );
+
+        const text = target.text.trim();
+        console.log({ text });
+        // Helper functions to determine the case
+        const isUpperCase = (str) => str === str.toUpperCase();
+        const isLowerCase = (str) => str === str.toLowerCase();
+        const isCapitalized = (str) =>
+            str
+                .split(" ")
+                .every(
+                    (word) =>
+                        word.charAt(0).toUpperCase() +
+                            word.slice(1).toLowerCase() ===
+                        word
+                );
+
+        if (isUpperCase(text)) {
+            $(".uppercase-btn").addClass("activated");
+        } else if (isLowerCase(text)) {
+            $(".lowercase-btn").addClass("activated");
+        } else if (isCapitalized(text)) {
+            $(".capitalize-btn").addClass("activated");
+        }
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
@@ -1846,7 +1881,6 @@ function bindData(current_event_id) {
 
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
-            $(".size-btn").removeClass("activated");
         } else {
             // alert();
             canvas.getObjects("textbox").forEach(function (tb) {

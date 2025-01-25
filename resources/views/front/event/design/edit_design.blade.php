@@ -699,8 +699,8 @@
             </div>
 
             <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
+                <button class="cmn-btn reset-btn formate-text-reset">Reset</button>
+                <button class="cmn-btn formate-text-save">Save</button>
             </div>
         </div>
 

@@ -398,7 +398,7 @@ class EventController extends BaseController
                         $categoryQuantity = 0;
                         $remainingQnt = 0;
                         $totalItem=0;
-                        $innnerUserItem=0;
+                       
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             $itemData = [];
@@ -411,6 +411,7 @@ class EventController extends BaseController
                                     'isAlready' => "1",
                                 ];
                                 $itmquantity = 0;
+                                $innnerUserItem=0;
                                 $categories[$key]['item'][$itemkey] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
@@ -438,13 +439,14 @@ class EventController extends BaseController
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
-                                    if($itemcarryUser->id !=$id){
+                                    if($itemcarryUser->user_id == $id){
                                         $innnerUserItem =$innnerUserItem + $itemcarryUser->quantity;
                                     }
                                 }
                                 $totalItem = $totalItem +1; 
                                 $remainingQnt = $remainingQnt + $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
+                                $potluckItem['innerUserQnt'] =  $innnerUserItem;
                                 
                                 $potluckCategory['items'][] = $potluckItem;
                             }
@@ -461,7 +463,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['podluck_category_list']);
+                    dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {
