@@ -40,6 +40,7 @@ use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 function getVideoDuration($filePath)
 {
@@ -1765,6 +1766,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
         if (strpos($receiverNumber, '+') === 0) {
             $cleanedNumber = '+' . $cleanedNumber;
         }
+        DB::enableQueryLog();
 
         // Use the sanitized number in your query
         $user = Useropt::firstOrCreate(
@@ -1775,6 +1777,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
                 'event_invited_user_id' => $event_invited_user_id  // Ensure event_invited_user_id is included
             ]
         );
+        dd(DB::getQueryLog());
 
         // Generate the event link dynamically
         $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
