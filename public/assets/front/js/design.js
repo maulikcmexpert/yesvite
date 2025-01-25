@@ -1133,25 +1133,70 @@ function bindData(current_event_id) {
         console.log(dbJson);
 
         // Iterate over the textElements in dbJson
+        let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
-                // Match the active object's ID with dbJson
-                // Reset properties
+                seted = 1;
                 activeObject.set({
-                    fontWeight: element.fontWeight || "", // Default to normal if not defined
-                    fontStyle: element.fontStyle || "", // Default to normal if not defined
+                    fontWeight: element.fontWeight || "",
+                    fontStyle: element.fontStyle || "",
                     underline: element.underline || false,
                     linethrough: element.linethrough || false,
-                    fontFamily: element.fontFamily || "Arial", // Default font
-                    fontSize: element.fontSize || 16, // Default size
-                    textAlign: element.textAlign || "left", // Default alignment
-                    lineHeight: element.lineHeight || 1, // Default line height
-                    text: element.text || activeObject.text, // Reset to original text
+                    fontFamily: element.fontFamily || "Times New Roman",
+                    fontSize: element.fontSize || 20,
+                    textAlign: element.textAlign || "left",
+                    lineHeight: element.lineHeight || 1,
+                    text: element.text || activeObject.text,
                 });
             }
         });
+        if (seted == 0) {
+            activeObject.set({
+                fontWeight: "",
+                fontStyle: "",
+                underline: false,
+                linethrough: false,
+                fontFamily: "Times New Roman",
+                fontSize: 20,
+                textAlign: "left",
+                lineHeight: 1,
+                text: activeObject.text.toLowerCase(),
+            });
+        }
+        // Re-render the canvas after resetting
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    $(document).on("click", ".color-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+
+        // Check if there's an active object and it's a textbox
+        if (!activeObject || activeObject.type !== "textbox") {
+            return; // Exit if no object or not a textbox
+        }
+
+        console.log(dbJson);
+
+        // Iterate over the textElements in dbJson
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                activeObject.set({
+                    fill: element.fill || "#000000",
+                });
+            }
+        });
+        if (seted == 0) {
+            activeObject.set({
+                fill: "#000000",
+            });
+        }
         // Re-render the canvas after resetting
         canvas.renderAll();
         addIconsToTextbox(canvas.getActiveObject());

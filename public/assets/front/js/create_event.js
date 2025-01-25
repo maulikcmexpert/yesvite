@@ -4653,15 +4653,12 @@ function plusBTN(that) {
     var value = parseInt(input.val());
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
-    var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
-    // console.log({ categoryItemQuantity, quantity });
-    
-    if (categoryItemQuantity >= (quantity+innerUserQnt)) {
+    console.log({ categoryItemQuantity, quantity });
+    if (categoryItemQuantity >= quantity) {
         update_self_bring(
-            innerUserQnt,
             categoryItemKey,
             categoryIndexKey,
             quantity,
@@ -4694,13 +4691,11 @@ function minusBTN(that) {
         input.val(value - 1);
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
-    var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= (quantity + innerUserQnt)) {
+    if (categoryItemQuantity >= quantity) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
-                innerUserQnt,
                 categoryItemKey,
                 categoryIndexKey,
                 quantity,
@@ -4717,7 +4712,6 @@ function minusBTN(that) {
 }
 
 function update_self_bring(
-    innerUserQnt,
     categoryItemKey,
     categoryIndexKey,
     quantity,
@@ -4735,14 +4729,10 @@ function update_self_bring(
         },
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
-
-            let updatedQty = innerUserQnt+quantity;
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                (updatedQty) + "/" + categoryItemQuantity
+                quantity + "/" + categoryItemQuantity
             );
-            if(updatedQty >= categoryItemQuantity){
-                response = 0;
-            }
+
             $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
@@ -4768,7 +4758,7 @@ function update_self_bring(
                     categoryItemKey +
                     "-" +
                     categoryIndexKey
-            ).text(updatedQty);
+            ).text(quantity);
 
             if (type == "plus") {
                 var current_item = parseInt(
@@ -4783,8 +4773,8 @@ function update_self_bring(
                 current_item = current_item - 1;
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
-            
-            if(updatedQty >= categoryItemQuantity){
+
+            if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
                         "-" +
@@ -4863,9 +4853,6 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
     var userquantity = $(this).data("userquantity");
-    var innerUserQnt = $(this).data("innerUserQnt");
-
-
 
     $(this).parent().parent().hide();
     var self_bring_quantity = $(this)
@@ -4890,7 +4877,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(innerUserQnt,categoryItemKey, categoryIndexKey, userquantity, itemquantity);
+    update_self_bring(categoryItemKey, categoryIndexKey, userquantity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
