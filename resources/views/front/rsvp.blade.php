@@ -1,4 +1,4 @@
-   {{dd($getInvitedusers);}}
+   <!-- {{dd($getInvitedusers);}} -->
    @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
