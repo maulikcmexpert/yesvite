@@ -4696,7 +4696,7 @@ function minusBTN(that) {
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= (quantity+innerUserQnt)) {
+    if (categoryItemQuantity <= (quantity+innerUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 innerUserQnt,
