@@ -265,7 +265,7 @@ class EventController extends BaseController
                 $eventDetail['guest_co_host_list'] = [];
 
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
-           
+
                 $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
                 // if (!empty($invitedUser)) {
                 //     foreach ($invitedUser as $guestVal) {
@@ -397,12 +397,12 @@ class EventController extends BaseController
                         $potluckCategory['items'] = [];
                         $categoryQuantity = 0;
                         $remainingQnt = 0;
-                        $totalItem=0;
-                       
+                        $totalItem = 0;
+
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             $itemData = [];
-                            foreach ($value->event_potluck_category_item as $itemkey=> $itemValue) {
+                            foreach ($value->event_potluck_category_item as $itemkey => $itemValue) {
                                 $itemData = [
                                     'name' => $itemValue->description,
                                     'self_bring' => $itemValue->self_bring_item,
@@ -411,7 +411,7 @@ class EventController extends BaseController
                                     'isAlready' => "1",
                                 ];
                                 $itmquantity = 0;
-                                $innnerUserItem=0;
+                                $innnerUserItem = 0;
                                 $categories[$key]['item'][$itemkey] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
@@ -447,25 +447,24 @@ class EventController extends BaseController
 
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
-                                    if($itemcarryUser->user_id != $id){
-                                        $innnerUserItem =$innnerUserItem + $itemcarryUser->quantity;
+                                    if ($itemcarryUser->user_id != $id) {
+                                        $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
                                     }
                                 }
-                                $totalItem = $totalItem +1; 
+                                $totalItem = $totalItem + 1;
                                 $remainingQnt = $remainingQnt + $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckItem['innerUserQnt'] =  $innnerUserItem;
-                                
+
                                 $potluckCategory['items'][] = $potluckItem;
                             }
                         }
-                       
+
                         $remainingQnt = $remainingQnt - $categoryQuantity;
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $potluckCategory['totalItem'] = $totalItem;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
-
                     }
                     // Update session after the loop    
                     session()->put('category', $categories);
@@ -1356,7 +1355,7 @@ class EventController extends BaseController
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
         $category_index = $request->input('category_index');
-        
+
         $categories_item = Session::get('category_item', []);
         $itemData = [
             'item' => $itemName,
@@ -1397,7 +1396,7 @@ class EventController extends BaseController
                 ]
             ];
         }
-        
+
         //  else {
         //     $categories[$category_index] = [
         //         'category_name' => $categories[$category_index]['category_name'],
@@ -1460,11 +1459,11 @@ class EventController extends BaseController
         $potluckkey = $request->input('potluckkey');
         $edit_category_id = $request->input('edit_category_id');
         $categories = session()->get('category', []);
-        
-        
+
+
         $lastItemIndex = count($categories) > 0 && end($categories) === null ? 0 : count($categories);
-      
-        
+
+
         $categoryNames =  collect($categories)->pluck('category_name')->toArray();
 
         if (isset($edit_category_id) && $edit_category_id != '') {
@@ -1517,7 +1516,7 @@ class EventController extends BaseController
             session()->put('category', $categories);
             $status = '1';
             Session::save();
-            return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey, 'lastItemIndex'=>$lastItemIndex])->render(), 'status' => $status]);
+            return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey, 'lastItemIndex' => $lastItemIndex])->render(), 'status' => $status]);
         }
 
         // return $categoryName;
@@ -1675,15 +1674,15 @@ class EventController extends BaseController
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
         $categories = session()->get('category', []);
-       
+
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
 
-                foreach($value['item_carry_users'] as $userkey=> $userVal){
-                    if($id == $userVal['user_id']){
-                        $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] =$quantity;
+                foreach ($value['item_carry_users'] as $userkey => $userVal) {
+                    if ($id == $userVal['user_id']) {
+                        $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] = $quantity;
                     }
                     $total_quantity =  $total_quantity + $userVal['quantity'];
                 }
@@ -1694,9 +1693,15 @@ class EventController extends BaseController
                 // }
             }
         }
-       
+
         session()->put('category', $categories);
-        $total_item = $total_item - ($total_quantity+$quantity);
+        if($request->type == "minus"){
+            $total_quantity= $total_quantity - $quantity;
+        }else{
+            $total_quantity= $total_quantity + $quantity;
+            
+        }
+        $total_item = $total_item - $total_quantity ;
         return $total_item;
     }
 
@@ -2794,8 +2799,8 @@ class EventController extends BaseController
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
-        $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj!=false) ? $startDateFormat : $startDate;
-        $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj !=false) ? $endDateFormat : $endDate;
+        $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
+        $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
         $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         // dd($request->rsvp_by_date_set,$event_creation->rsvp_by_date_set);
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
@@ -2825,7 +2830,7 @@ class EventController extends BaseController
 
         $eventId = $event_creation->id;
         $get_count_invited_user = 0;
-      
+
 
         // debit_coins($user_id, $eventId, $get_count_invited_user);
         if (isset($request->event_id) && $request->event_id != NULL) {
@@ -2916,7 +2921,7 @@ class EventController extends BaseController
             if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
                 EventInvitedUser::where('event_id', $request->event_id)->delete();
             }
-            
+
             $invitedUsers = $request->email_invite;
             $invitedusersession = session('user_ids');
             if (isset($invitedusersession) && !empty($invitedusersession)) {

@@ -8037,6 +8037,7 @@ function update_self_bring(
             categoryItemKey: categoryItemKey,
             categoryIndexKey: categoryIndexKey,
             quantity: quantity,
+            type:type,
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
