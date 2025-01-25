@@ -2,6 +2,7 @@
 
 use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
+use App\Models\contact_sync;
 use App\Models\EventPost;
 use App\Models\Event;
 use App\Models\Device;
@@ -120,7 +121,7 @@ function sendNotification($notificationType, $postData)
     if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
         $senderData = User::where('id',  $postData['sender_id'])->first();
     }else{
-        $senderData = User::where('id', $postData['sync_id'])->first();
+        $senderData = contact_sync::where('id', $postData['sync_id'])->first();
     }
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
@@ -1143,10 +1144,18 @@ function sendNotification($notificationType, $postData)
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
 
+
+        if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
+            $firstname=$senderData->firstName;
+            $lastname=$senderData->lastnName;
+        }else{
+            $firstname=$senderData->firstname;
+            $lastname=$senderData->lastname;
+        }
         if ($postData['rsvp_status'] == '1') {
-            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd Yes for " . $getPostOwnerId->event_name;
+            $notification_message = $firstname . ' '  . $lastname . " RSVP'd Yes for " . $getPostOwnerId->event_name;
         } elseif ($postData['rsvp_status'] == '0') {
-            $notification_message = $senderData->firstname . ' '  . $senderData->lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
+            $notification_message = $firstname . ' '  . $lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
         if ($getPostOwnerId->user_id != $postData['sender_id']) {
 
