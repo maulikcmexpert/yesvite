@@ -1382,7 +1382,7 @@ class EventController extends BaseController
                 ]
             ];
         }
-        dD($categories,$categories[$category_index]);
+        
         //  else {
         //     $categories[$category_index] = [
         //         'category_name' => $categories[$category_index]['category_name'],
