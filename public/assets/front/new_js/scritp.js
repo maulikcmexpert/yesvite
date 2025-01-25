@@ -138,9 +138,8 @@ $("#dropdownButton").on("click", function (event) {
 
 $("#moblie-menu-bar").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
-    $(".notification-dropdown-menu").toggleClass("hide");
-    if ($(".header-profile-dropdown").hasClass("show")) {
-        $(".header-profile-dropdown").removeClass("show");
+    if ($(".notification-dropdown-menu").hasClass("show")) {
+        $(".notification-dropdown-menu").removeClass("show");
     }
 });
 
