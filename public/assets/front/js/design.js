@@ -1171,6 +1171,13 @@ function bindData(current_event_id) {
         $("#letterSpacingRange").val(target.charSpacing);
         $("#lineHeightInput").val(target.lineHeight);
         $("#lineHeightRange").val(target.lineHeight);
+        $(".size-btn").removeClass("activated");
+        $(".uppercase-btn").toggleClass("activated", textCase === "uppercase");
+        $(".lowercase-btn").toggleClass("activated", textCase === "lowercase");
+        $(".capitalize-btn").toggleClass(
+            "activated",
+            textCase === "capitalize"
+        );
     }
     $(".design-sidebar-action").click(function () {
         $(".design-sidebar-action").removeClass("activated");
@@ -2064,16 +2071,21 @@ function bindData(current_event_id) {
             justifyCenter: () => activeObject.set("textAlign", "center"),
             justifyRight: () => activeObject.set("textAlign", "right"),
             justifyFull: () => activeObject.set("textAlign", "justify"),
-            uppercase: () =>
-                activeObject.set("text", activeObject.text.toUpperCase()),
-            lowercase: () =>
-                activeObject.set("text", activeObject.text.toLowerCase()),
+            uppercase: () => {
+                activeObject.set("text", activeObject.text.toUpperCase());
+                activeObject.set("textCase", "uppercase"); // Add custom property
+            },
+            lowercase: () => {
+                activeObject.set("text", activeObject.text.toLowerCase());
+                activeObject.set("textCase", "lowercase"); // Add custom property
+            },
             capitalize: () => {
                 const capitalizedText = activeObject.text.replace(
                     /\b\w/g,
                     (char) => char.toUpperCase()
                 );
                 activeObject.set("text", capitalizedText);
+                activeObject.set("textCase", "capitalize"); // Add custom property
             },
         };
 
