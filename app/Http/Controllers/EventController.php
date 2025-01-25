@@ -439,7 +439,7 @@ class EventController extends BaseController
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                 }
                                 $totalItem = $totalItem +1; 
-                                $remainingQnt = $itemValue->quantity;
+                                $remainingQnt = $remainingQnt + $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckCategory['items'][] = $potluckItem;
                             }
@@ -455,7 +455,6 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                
                 }
             }
         } else {

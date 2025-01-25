@@ -100,7 +100,7 @@ header{
     height: 40px;
     border-radius: 50%;
     background-color: transparent;
-    border: none;   
+    border: none;
 }
 
 .header-profile-wrp .profile-drop-down-menu img{
@@ -202,7 +202,7 @@ header{
 
 .notification-dropdown-content .accordion{
     margin-bottom: 20px;
-    max-height: 500px;    
+    max-height: 500px;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -776,7 +776,7 @@ header{
 @media only screen and (max-width: 1399px) {
     .notification-dropdown-content .accordion{
         margin-bottom: 20px;
-        max-height: 400px;    
+        max-height: 400px;
         overflow: hidden;
         overflow-y: scroll;
     }
@@ -814,12 +814,16 @@ header{
         left: 0;
         width: 100%;
         background-color: var(--white);
-        z-index: 2;   
+        z-index: 2;
         overflow: hidden;
-        height: 0; 
+        height: 0;
         padding: 0px !important;
         border: none !important;
-        transition: 0.3s;    
+        transition: 0.3s;
+    }
+
+    .moblie-menu-bar svg path{
+        stroke: var(--secondary-black);
     }
 
     .active.mobile-menu-wrp{
@@ -947,4 +951,4 @@ header{
         padding-right: 5px !important;
     }
 
-}   
+}

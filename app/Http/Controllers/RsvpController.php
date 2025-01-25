@@ -441,13 +441,15 @@ class RsvpController extends BaseController
             }
 
             $rsvp_status = "";
-            if ($user_id != $eventDetail->user_id) {
-                $rsvp_status = EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user_id, 'is_co_host' => '0'])->first()->rsvp_status;
-            }
-            $rsvp = "";
-            if ($rsvp_status != "" || !empty($rsvp_status)) {
-                $rsvp = "1";
-            }
+            // if ($user_id != $eventDetail->user_id) {
+            //     $rsvp_status = EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user_id, 'is_co_host' => '0'])->first()->rsvp_status;
+            // }
+            // $rsvp = "";
+            // if ($rsvp_status != "" || !empty($rsvp_status)) {
+            //     $rsvp = "1";
+            // }
+                            $rsvp_status = EventInvitedUser::where(['id' => $event_invited_user_id])->first()->rsvp_status;
+
             $messages = [];
             $userName = "";
             if (auth()->id()) {
@@ -596,6 +598,7 @@ class RsvpController extends BaseController
 
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
+        $event_invited_user_id = decrypt($request->event_invited_user_id);
         if ($request->input('sync_id') != "") {
             $sync_id = decrypt($request->input('sync_id'));
         } else {
@@ -612,17 +615,22 @@ class RsvpController extends BaseController
             if ($checkEvent->end_date < date('Y-m-d')) {
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
             }
-            dd($sync_id,$userId);
+            // dd($sync_id,$userId);
             DB::beginTransaction();
-            if ($sync_id != "" || $sync_id != null) {
-                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
-            } else {
-                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                    $query->where('app_user', '1');
-                })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
-            }
+            // if ($sync_id != "" || $sync_id != null) {
+            //     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+            // } else {
+                // dd(1);
+                // $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                //     // $query->where('app_user', '1');
+                // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
-            dd($rsvpSent);
+                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                    // $query->where('app_user', '1');
+                })->where(['id' => $event_invited_user_id])->first();
+            // }
+
+            // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
@@ -779,9 +787,12 @@ class RsvpController extends BaseController
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
-                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
+                    // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
+                    return redirect()->back()->with('msg', 'You are going to this event');
                 } elseif ($request->rsvp_status == "0") {
-                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
+                    // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
+                    return redirect()->back()->with('msg', 'You are going to this event');
+
                 }
             }
             return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
