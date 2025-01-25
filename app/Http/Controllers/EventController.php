@@ -1670,17 +1670,23 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-        
+        $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
         $categories = session()->get('category', []);
-        dd($categories[$categoryIndexKey]['item']);
+       
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
-               
+
+                foreach($value['item_carry_users'] as $userkey=> $userVal){
+                    if($id == $userVal['user_id']){
+                        $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] =$quantity;
+                    }
+
+                }
                 $total_item = $total_item + $value['quantity'];
 
                 if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
@@ -1688,6 +1694,8 @@ class EventController extends BaseController
                 }
             }
         }
+        session()->put('category', $categories);
+        dd(session('category'));
         $total_item = $total_item - $total_quantity;
         return $total_item;
     }
