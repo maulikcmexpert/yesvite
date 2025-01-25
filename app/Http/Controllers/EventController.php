@@ -445,6 +445,7 @@ class EventController extends BaseController
                                 $totalItem = $totalItem +1; 
                                 $remainingQnt = $remainingQnt + $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
+                                $potluckItem['innerUserQnt'] =  $innnerUserItem;
                                 
                                 $potluckCategory['items'][] = $potluckItem;
                             }
