@@ -521,6 +521,7 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
                 });
                 toastr.success("Event Cancelled successfully");
                 $('#cancelevent').modal('hide');
+                window.location.reload();
 
             }
         },
