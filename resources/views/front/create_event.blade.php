@@ -1693,17 +1693,17 @@
                                                         <div class="accordion-body">
                                                             <div class="accordion-body-content"
                                                                 style="display: none;">
-                                                                @if ($values['profile'] != '')
-                                                                    <img src="{{ $values['profile'] }}"
-                                                                        alt="">
-                                                                    <h5 class="me-auto">
-                                                                        {{ $values['first_name'] . ' ' . $values['last_name'] }}
-                                                                    </h5>
-                                                                @endif
-                                                                <span class="ms-auto">1</span>
                                                             </div>
                                                             <div class="accordion-body-content limits-count"
-                                                                id="user-list-{{ $itemkey }}-{{ $index }}">
+                                                            id="user-list-{{ $itemkey }}-{{ $index }}">
+                                                            @if ($values['profile'] != '')
+                                                            <img src="{{ $values['profile'] }}"
+                                                            alt="">
+                                                            <h5 class="me-auto">
+                                                                {{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                            </h5>
+                                                            <span class="ms-auto">1</span>
+                                                            @endif
                                                                 @if ($values['profile'] == '')
                                                                     <h5
                                                                         class="{{ $fontColor }} add-item-under-text">
