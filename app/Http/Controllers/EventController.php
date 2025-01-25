@@ -2568,7 +2568,7 @@ class EventController extends BaseController
         try {
             DB::beginTransaction();
             $deleteEvent = Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
-            // dd($event_id,$user->id);
+            dd($deleteEvent);
             if (!empty($deleteEvent)) {
                 Notification::where('event_id', $event_id)->delete();
                 $deleteEvent->reason = $reason;
