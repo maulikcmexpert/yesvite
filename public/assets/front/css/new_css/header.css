@@ -822,8 +822,8 @@ header{
         transition: 0.3s;
     }
 
-    .moblie-menu-bar svg{
-        fill: var(--secondary-black);
+    .moblie-menu-bar svg path{
+        stroke: var(--secondary-black);
     }
 
     .active.mobile-menu-wrp{
