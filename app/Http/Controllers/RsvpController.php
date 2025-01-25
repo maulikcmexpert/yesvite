@@ -139,7 +139,7 @@ class RsvpController extends BaseController
 
 
 
-    public function index($userId, $eventId)
+    public function index($event_invited_user_id, $eventId)
     {
         $title = 'RSVP';
         $page = 'front.rsvp';
@@ -147,8 +147,13 @@ class RsvpController extends BaseController
         $css = 'message.css';
 
         $event_id =  decrypt($eventId);
-        $user_id = decrypt($userId);
+        $event_invited_user_id = decrypt($event_invited_user_id);
 
+        $user_id= EventInvitedUser::where(['id',$event_invited_user_id])->first()->user_id;
+        $sync_id="";
+        if($user_id==null||$user_id==""){
+            $user_id= EventInvitedUser::where(['id',$event_invited_user_id])->first()->sync_id;
+        }
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
