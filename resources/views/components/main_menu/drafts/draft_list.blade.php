@@ -92,29 +92,32 @@
  
 
 
-<script>
-// Get the date from the HTML element
-const saveDate = document.querySelector('.last-save').getAttribute('data-save-date');
+  <script>
+// Select all elements with the 'last-save' class
+const saveDates = document.querySelectorAll('.last-save');
 
-// Convert the date string to a Date object
-const dateObj = new Date(saveDate);
+// Loop through each element and format the date
+saveDates.forEach(function (element) {
+  // Get the date string from the data attribute
+  const saveDate = element.getAttribute('data-save-date');
 
-// Format the date to the device's local time zone
-const formattedDate = new Intl.DateTimeFormat('en-US', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  hour12: true
-}).format(dateObj);
+  // Convert to a Date object
+  const dateObj = new Date(saveDate);
 
-// Display the formatted date in the desired format
-const formattedString = `Last Save: ${formattedDate}`;
-console.log(formattedString);  // Output: Last Save: December 23, 2022 - 8:31 PM
+  // Format the date to the local time zone
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  }).format(dateObj);
 
+  // Update the element's text content with the formatted date
+  element.textContent = `Last Save: ${formattedDate}`;
+});
 </script>
-
 
 
