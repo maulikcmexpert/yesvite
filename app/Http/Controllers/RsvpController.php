@@ -615,9 +615,9 @@ class RsvpController extends BaseController
             }
             // dd($sync_id,$userId);
             DB::beginTransaction();
-            if ($sync_id != "" || $sync_id != null) {
-                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
-            } else {
+            // if ($sync_id != "" || $sync_id != null) {
+            //     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+            // } else {
                 // dd(1);
                 // $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                 //     // $query->where('app_user', '1');
@@ -626,7 +626,7 @@ class RsvpController extends BaseController
                 $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                     // $query->where('app_user', '1');
                 })->where(['id' => $event_invited_user_id])->first();
-            }
+            // }
 
             // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
