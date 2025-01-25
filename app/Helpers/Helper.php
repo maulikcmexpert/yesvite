@@ -1766,6 +1766,9 @@ function handleIncomingMessage($receiverNumber, $message)
                 ->first();
 
             if ($event) {
+                print_r($event->user->id);
+                print_r($user->event_id);
+                die;
                 $eventLink = route('rsvp', ['userId' => encrypt($event->user->id), 'eventId' => encrypt($user->event_id)]);
                 $confirmationMessage = "Yesvite: You have been subscribed to receive messages. You have been invited by \"{$event->event->user->firstname} {$event->event->user->lastname}\" to \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
                 try {
