@@ -136,7 +136,7 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $("#loader").show();
+                $("#home_loader").show();
             },
             success: function (data) {
                 if (data.status == "0") {
@@ -146,15 +146,15 @@ $(document).on("keyup", ".search_phone", function () {
                     return;
                 }
                 $(".no-yesvite-data").css("display","none");
-                $("#loader").hide();
-
+                
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
                 }else{
                     $("#yesviteUser").append(data.view);
                 }
-
+                
                 busy1 = false;
+                $("#home_loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
@@ -173,14 +173,14 @@ $(document).on("keyup", ".search_phone", function () {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             beforeSend: function () {
-                $("#loader").show();
+                $("#home_loader").show();
             },
             success: function (data) {
                 console.log(data);
                 // if (data.html == "") {
                     if (data.status == "0") {
                         $(".no-group-data").css("display","block");
-                        $("#loader").hide();
+                        $("#home_loader").hide();
     
                         return;
                     }
@@ -199,7 +199,7 @@ $(document).on("keyup", ".search_phone", function () {
                     $("#yesviteGroups").append(data.view);
                 }
 
-                $("#loader").hide();
+                $("#home_loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
@@ -210,6 +210,7 @@ $(document).on("keyup", ".search_phone", function () {
     }
 
     function loadMorePhones(search_phone,type,offset1,limit) {
+
         console.log({search_phone,type,offset1,limit});
         $.ajax({
             url: base_url + "contacts/loadphones",
@@ -222,7 +223,7 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $("#loader").show();
+                $("#home_loader").show();
             },
             success: function (data) {
                 if (data.status == "0") {
@@ -235,7 +236,6 @@ $(document).on("keyup", ".search_phone", function () {
                 }
                 $(".no-phone-data").css("display","none");
 
-                $("#loader").hide();
                 // $("#yesvitePhones").append(data);
 
 
@@ -247,6 +247,8 @@ $(document).on("keyup", ".search_phone", function () {
 
 
                 busy2 = false;
+                $("#home_loader").hide();
+
 
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
