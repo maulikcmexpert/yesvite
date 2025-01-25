@@ -1340,7 +1340,7 @@
 }
 
 
-.new-event-sidebar-menu ul > li::after{
+.new-event-sidebar-menu > ul > li::after{
     content: "";
     position: absolute;
     bottom: 0;
