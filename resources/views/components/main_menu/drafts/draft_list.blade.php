@@ -109,23 +109,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
     
-    // Debugging: Log the formattedDate to understand its structure
-    console.log('Formatted Date:', formattedDate);
-    
     // Split based on 'at' to separate date and time
     const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
     
     if (dateParts.length === 2) {
-      const datePart = dateParts[0];  // "25 January 2025"
-      let timePart = dateParts[1];    // "9:57 am"
+      const datePart = dateParts[0];  // "December 23, 2022"
+      let timePart = dateParts[1];    // "8:31 PM"
       
-      // Ensure the correct format by dynamically placing a comma after the month
-      const dateWithComma = datePart.replace(/(\w+ \d{1,2})( \d{4})$/, '$1,$2'); // Add comma after the month
+      // Ensure the correct format by adding a comma between the month and year
+      const dateWithComma = datePart.replace(' ', ' ,');  // Fix comma placement after the month
       
-      // Convert AM/PM to uppercase
+      // Convert AM/PM to uppercase (it's already in uppercase, but we'll ensure it)
       timePart = timePart.toUpperCase();
       
-      // Final date formatting: "25 January, 2025 - 9:57 AM"
+      // Final date formatting: "December 23, 2022 - 8:31 PM"
       const finalDate = `${dateWithComma} - ${timePart}`;
       saveDateElement.innerHTML = `Last Save: ${finalDate}`;
     } else {
