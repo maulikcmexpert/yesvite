@@ -4657,8 +4657,9 @@ function plusBTN(that) {
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
-    console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity) {
+    // console.log({ categoryItemQuantity, quantity });
+    
+    if (categoryItemQuantity >= (quantity+innerUserQnt)) {
         update_self_bring(
             innerUserQnt,
             categoryItemKey,
@@ -4696,7 +4697,7 @@ function minusBTN(that) {
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity) {
+    if (categoryItemQuantity >= (quantity + innerUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 innerUserQnt,
