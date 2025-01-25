@@ -1348,11 +1348,15 @@
 .new-event-sidebar-menu > ul > li::after{
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -8px;
     left: 11px;
     border: 1px dashed red;
     width: 2px;
     height: 100%;
+}
+
+.new-event-sidebar-menu > ul > li:last-child::after {
+    display: none;
 }
 
 /* ======Responsiveness===== */
