@@ -302,8 +302,7 @@ function sendNotification($notificationType, $postData)
 
 
                     if ($value->prefer_by == 'phone') {
-                        $eventLink = route('rsvp', ['userId' => encrypt($value->user->id), 'eventId' => encrypt($postData['event_id'])]);
-                        $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $eventLink, $postData['event_id']);
+                        $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $postData['event_id'], $value->id);
                         // $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
                         if ($sent == true) {
                             $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'phone'])->first();
@@ -1732,13 +1731,13 @@ function sendSMSForApplication($receiverNumber, $message)
         return  false;
     }
 }
-function handleSMSInvite($receiverNumber, $hostName, $eventName, $eventLink, $event_id)
+function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     $user = Useropt::firstOrCreate(
-        ['phone' => $receiverNumber, 'event_id' => $event_id],
+        ['phone' => $receiverNumber, 'event_id' => $event_id, 'event_invited_user_id' => $event_invited_user_id],
         ['opt_in_status' => false]
     );
-
+    $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
     if (!$user->opt_in_status) {
         // Opt-in message
         $message = "Yesvite: You have been invited to an event by \"$hostName\". To View the invite/Event details and opt in to receive future invites/messages please reply \"YES\" to this message. Reply STOP to opt out.";
@@ -1762,14 +1761,12 @@ function handleIncomingMessage($receiverNumber, $message)
 
             // Get event details dynamically
             $event = EventInvitedUser::with(['event', 'event.user'])
-                ->where('event_id', $user->event_id)
+                ->where('id', $user->event_invited_user_id)
                 ->first();
 
             if ($event) {
-                dd($event);
-                print_r($user->event_id);
-                die;
-                $eventLink = route('rsvp', ['userId' => encrypt($event->user->id), 'eventId' => encrypt($user->event_id)]);
+
+                $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($user->event_invited_user_id), 'eventId' => encrypt($user->event_id)]);
                 $confirmationMessage = "Yesvite: You have been subscribed to receive messages. You have been invited by \"{$event->event->user->firstname} {$event->event->user->lastname}\" to \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
                 try {
                     sendSMSForApplication($receiverNumber, $confirmationMessage);
