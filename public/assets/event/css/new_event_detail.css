@@ -127,7 +127,7 @@
 }
 
 .new-event-sidebar-menu ul li {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     cursor: pointer;
 }
 
