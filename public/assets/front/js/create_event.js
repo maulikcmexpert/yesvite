@@ -4760,19 +4760,19 @@ function update_self_bring(
                     categoryIndexKey
             ).text(quantity);
 
-            // if (type == "plus") {
-            //     var current_item = parseInt(
-            //         $(".total-self-bring-" + categoryIndexKey).text()
-            //     );
-            //     current_item = current_item + 1;
-            //     $(".total-self-bring-" + categoryIndexKey).text(current_item);
-            // } else if (type == "minus") {
-            //     var current_item = parseInt(
-            //         $(".total-self-bring-" + categoryIndexKey).text()
-            //     );
-            //     current_item = current_item - 1;
-            //     $(".total-self-bring-" + categoryIndexKey).text(current_item);
-            // }
+            if (type == "plus") {
+                var current_item = parseInt(
+                    $(".total-self-bring-" + categoryIndexKey).text()
+                );
+                current_item = current_item + 1;
+                $(".total-self-bring-" + categoryIndexKey).text(current_item);
+            } else if (type == "minus") {
+                var current_item = parseInt(
+                    $(".total-self-bring-" + categoryIndexKey).text()
+                );
+                current_item = current_item - 1;
+                $(".total-self-bring-" + categoryIndexKey).text(current_item);
+            }
 
             if (quantity == categoryItemQuantity) {
                 $(

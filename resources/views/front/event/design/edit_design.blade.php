@@ -609,13 +609,13 @@
                 <div class="format-text-inner font-tranform-wrp">
                     <h3>Font Size</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="uppercase">
+                        <button class="size-upper-btn size-btn format-btn" data-command="uppercase">
                             AA
                         </button>
-                        <button data-command="lowercase">
+                        <button class="size-lower-btn size-btn format-btn" data-command="lowercase">
                             aa
                         </button>
-                        <button data-command="capitalize">
+                        <button class="size-capital-btn size-btn format-btn" data-command="capitalize">
                             Aa
                         </button>
                     </div>
