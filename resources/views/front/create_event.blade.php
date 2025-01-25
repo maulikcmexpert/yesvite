@@ -1702,7 +1702,6 @@
                                                             <h5 class="me-auto">
                                                                 {{ $values['first_name'] . ' ' . $values['last_name'] }}
                                                             </h5>
-                                                            <span class="ms-auto">1</span>
                                                             @endif
                                                                 @if ($values['profile'] == '')
                                                                     <h5
@@ -1761,7 +1760,7 @@
                                                                         <a href="#" class="delete-self-bring"
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
-                                                                            data-itemquantity="{{ $items['quantity'] }}">
+                                                                            data-itemquantity="{{ $values['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1799,6 +1798,8 @@
                                                                             </svg>
                                                                         </a>
                                                                     </div>
+                                                                @else
+                                                                <span class="ms-auto">{{ $values['quantity'] }}</span>
                                                                 @endif
                                                             </div>
                                                         </div>
