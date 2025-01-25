@@ -785,10 +785,7 @@ class RsvpController extends BaseController
 
                 sendNotification('sent_rsvp', $notificationParam);
 
-
-                $event_invited_user_id=$request->event_invited_user_id;
-                $eventId=$request->event_id;
-                $url = route('rsvp', [$event_invited_user_id,$eventId]);
+                $url = route('rsvp');
 
                 dd($url);
 
