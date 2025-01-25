@@ -125,7 +125,7 @@ function sendNotification($notificationType, $postData)
         $senderData = User::where('id',  $postData['sender_id'])->first();
     }
 
-    dd($senderData);
+    // dd($senderData);
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
