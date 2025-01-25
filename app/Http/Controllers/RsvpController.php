@@ -594,7 +594,7 @@ class RsvpController extends BaseController
      */
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
 
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
@@ -625,13 +625,15 @@ class RsvpController extends BaseController
                 //     // $query->where('app_user', '1');
                 // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
-                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                $rsvpSent = EventInvitedUser::whereHas('user','contact', function ($query) {
                     // $query->where('app_user', '1');
                 })->where(['id' => $event_invited_user_id])->first();
             // }
 
             // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
+
+            dd($event_invited_user_id,$rsvpSent);
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
                 if ($rsvpSentAttempt == NULL) {
