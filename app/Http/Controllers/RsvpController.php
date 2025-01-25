@@ -596,6 +596,7 @@ class RsvpController extends BaseController
 
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
+        $event_invited_user_id = decrypt($request->event_invited_user_id);
         if ($request->input('sync_id') != "") {
             $sync_id = decrypt($request->input('sync_id'));
         } else {
@@ -620,7 +621,7 @@ class RsvpController extends BaseController
                 // dd(1);
                 $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                     // $query->where('app_user', '1');
-                })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+                })->where(['id' => $event_invited_user_id])->first();
             }
 
             dd($rsvpSent);
