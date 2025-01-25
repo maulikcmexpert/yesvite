@@ -1353,6 +1353,7 @@
     border: 1px dashed red;
     width: 2px;
     height: 100%;
+    z-index: -1;
 }
 
 .new-event-sidebar-menu > ul > li:last-child::after {
