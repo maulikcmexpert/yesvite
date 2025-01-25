@@ -146,12 +146,10 @@
 
 
       <!-- ====== cancel event ======== -->
-      <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel">
+      <!-- <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <!-- <div class="modal-header">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> -->
+              
                 <div class="modal-body">
                     <div class="delete-modal-head text-center">
                       <div class="delete-icon">
@@ -177,4 +175,4 @@
                 </div>
             </div>
         </div>
-      </div>
+      </div> -->
