@@ -477,7 +477,7 @@ $(document).on('click','.cancel_event_option',function () {
     console.log(event_id);
     $('#reason_to_cancel_event').val('');
     $('#type_cancel').val('');
-    $('.confirm_cancel_event_btn').attr('data-event_id', event_id);
+    $('#cancel_event_id').val(event_id);
 });
 
 $(document).on('input', '#type_cancel', function () {
@@ -491,10 +491,10 @@ $(document).on('input', '#type_cancel', function () {
 
 
 $(document).on('click','#confirm_cancel_event_btn',function () {
-    var event_id=$(this).data('event_id');
+    var event=parseInt($('#cancel_event_id').val());
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
-    
+
 
     if(reason==""){
         toastr.error("Please Enter Reason");
@@ -505,13 +505,12 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
         toastr.error("Please Enter CANCEL");
         return;
     }
-
-
-    console.log(event_id);
+    $('#home_loader').css('display','block');
+    console.log(event);
     $.ajax({
         url: `${base_url}event/cancel_event`,
         type: 'POST',
-        data: { event_id: event_id,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
+        data: { event_id: event,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
         success: function (response) {
             console.log(response)
             if(response.status==1){
@@ -521,6 +520,9 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
                 });
                 toastr.success("Event Cancelled successfully");
                 $('#cancelevent').modal('hide');
+                window.location.reload();
+                $('#home_loader').css('display','none');
+
 
             }
         },
@@ -530,7 +532,7 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
             // $('.loader').css('display','none');    
         },
         complete: function () {
-         $('.loader').css('display','none');    
+         $('#home_loader').css('display','none');    
         }
 
     });

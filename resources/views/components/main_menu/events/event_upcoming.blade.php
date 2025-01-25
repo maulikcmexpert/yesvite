@@ -151,7 +151,7 @@
                                         </a>
                                         </li>
                                         <li>
-                                        <button class="dropdown-item cancel_event_option" id="#cancel_event_option" data-event_id="{{$upcomingEvent['id']}}" type="button" data-bs-toggle="modal" data-bs-target="#cancelevent">
+                                        <button class="dropdown-item cancel_event_option" id="cancel_event_option" data-event_id="{{$upcomingEvent['id']}}" type="button" data-bs-toggle="modal" data-bs-target="#cancelevent">
                                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.9974 18.9577C5.05573 18.9577 1.03906 14.941 1.03906 9.99935C1.03906 5.05768 5.05573 1.04102 9.9974 1.04102C14.9391 1.04102 18.9557 5.05768 18.9557 9.99935C18.9557 14.941 14.9391 18.9577 9.9974 18.9577ZM9.9974 2.29102C5.7474 2.29102 2.28906 5.74935 2.28906 9.99935C2.28906 14.2493 5.7474 17.7077 9.9974 17.7077C14.2474 17.7077 17.7057 14.2493 17.7057 9.99935C17.7057 5.74935 14.2474 2.29102 9.9974 2.29102Z" fill="#F73C71"></path>
                                             <path d="M10 11.4577C9.65833 11.4577 9.375 11.1743 9.375 10.8327V6.66602C9.375 6.32435 9.65833 6.04102 10 6.04102C10.3417 6.04102 10.625 6.32435 10.625 6.66602V10.8327C10.625 11.1743 10.3417 11.4577 10 11.4577Z" fill="#F73C71"></path>
