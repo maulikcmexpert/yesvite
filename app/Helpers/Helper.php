@@ -115,15 +115,17 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-    dd($postData);
+    // dd($postData);
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $user  = Auth::guard('api')->user();
 
-    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
-        $senderData = User::where('id',  $postData['sender_id'])->first();
-    }else{
+    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
         $senderData = contact_sync::where('id', $postData['sync_id'])->first();
+    }else{
+        $senderData = User::where('id',  $postData['sender_id'])->first();
     }
+
+    // dd($senderData);
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
