@@ -439,7 +439,7 @@ class EventController extends BaseController
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
-                                    if($itemcarryUser->id !=$id){
+                                    if($itemcarryUser->user_id == $id){
                                         $innnerUserItem =$innnerUserItem + $itemcarryUser->quantity;
                                     }
                                 }
