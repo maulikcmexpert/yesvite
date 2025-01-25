@@ -1760,7 +1760,8 @@
                                                                         <a href="#" class="delete-self-bring"
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
-                                                                            data-itemquantity="{{ $values['quantity'] }}">
+                                                                            data-itemquantity="{{ $items['quantity'] }}"
+                                                                            data-userquantity="{{ $values['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
