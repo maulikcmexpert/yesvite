@@ -338,22 +338,43 @@ class HomeController extends BaseController
 
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
-            $events_calender = [];
             $color = ['blue','green', 'yellow', 'orange', ];
-            $colorCount = count($color); // Get total number of colors
+            $events_calender = [];
+            // $colorCount = count($color); // Get total number of colors
 
-            foreach ($eventcalenderdata as $index=> $event) {
-                // $colorClass = $color[$colorIndex % count($color)];
-                $colorClass = $color[$index % $colorCount];
+            // foreach ($eventcalenderdata as $index=> $event) {
+            //     // $colorClass = $color[$colorIndex % count($color)];
+            //     $colorClass = $color[$index % $colorCount];
 
-                dd(1);
-                // $colorIndex++;
+            //     // dd(1);
+            //     // $colorIndex++;
+            //     $events_calender[] = [
+            //         'date' => $event->start_date,
+            //         'title' => $event->event_name,
+            //         'color' => $colorClass
+            //     ];
+            // }
+            $groupedEvents = [];
+
+// Group events by their date
+        foreach ($eventcalenderdata as $event) {
+            $groupedEvents[$event->start_date][] = $event;
+        }
+
+        foreach ($groupedEvents as $date => $eventsOnDate) {
+            $colorIndex = 0; // Reset color index for each date
+
+            foreach ($eventsOnDate as $event) {
+                $colorClass = $color[$colorIndex % count($color)];
+                $colorIndex++;
+
                 $events_calender[] = [
                     'date' => $event->start_date,
                     'title' => $event->event_name,
                     'color' => $colorClass
                 ];
             }
+        }
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
