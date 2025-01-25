@@ -437,7 +437,13 @@ class EventController extends BaseController
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
-                                    $categories[$key]['item'][$itemkey]['item_carry_users'][]= $userPotluckItem;
+                                    if ($itemcarryUser->user_id == $id) {
+                                        // Set the user's item at index 0
+                                        $categories[$key]['item'][$itemkey]['item_carry_users'][0] = $userPotluckItem;
+                                    } else {
+                                        // Otherwise, add the other user's item to the array normally
+                                        $categories[$key]['item'][$itemkey]['item_carry_users'][] = $userPotluckItem;
+                                    }
 
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
