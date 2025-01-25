@@ -490,7 +490,7 @@ $(document).on('input', '#type_cancel', function () {
 });
 
 
-$(document).on('click','.confirm_cancel_event_btn',function () {
+$(document).on('click','#confirm_cancel_event_btn',function () {
     var event_id=$(this).data('event_id');
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
