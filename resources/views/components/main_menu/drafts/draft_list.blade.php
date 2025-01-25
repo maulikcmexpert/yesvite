@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const savedDate = saveDateElement.getAttribute('data-save-date');
     const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
     
+    // Format the date according to the required format
     const options = {
       year: 'numeric', 
       month: 'long', 
@@ -107,11 +108,17 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
-    const dateParts = formattedDate.split(' ');
-    const monthDayYear = `${dateParts[0]} ${dateParts[1]}, ${dateParts[2]}`;
-    const time = `${dateParts[3]} ${dateParts[4]}`;
-    const finalDate = `${monthDayYear} - ${time}`;
+    
+    // Now, ensure the AM/PM is correctly placed at the end
+    const dateParts = formattedDate.split(', ');  // Split the date from the time
+    
+    const datePart = dateParts[0];  // "December 23, 2022"
+    const timePart = dateParts[1];  // "8:31 AM"
+    
+    const finalDate = `${datePart} - ${timePart}`;
+    
     saveDateElement.innerHTML = `Last Save: ${finalDate}`;
   });
 });
 </script>
+
