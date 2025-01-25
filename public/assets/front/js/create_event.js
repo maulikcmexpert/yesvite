@@ -8046,6 +8046,9 @@ function update_self_bring(
             );
 
             $("#missing-category-" + categoryIndexKey).text(response);
+            if((innerUserQnt+quantity) >=categoryItemQuantity){
+                response=0;
+            }
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
                 var svg =
