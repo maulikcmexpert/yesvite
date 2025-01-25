@@ -152,7 +152,7 @@ class RsvpController extends BaseController
         $user_id= EventInvitedUser::where(['id',$event_invited_user_id])->first()->user_id;
         $sync_id="";
         if($user_id==null||$user_id==""){
-            $user_id= EventInvitedUser::where(['id',$event_invited_user_id])->first()->sync_id;
+            $sync_id= EventInvitedUser::where(['id',$event_invited_user_id])->first()->sync_id;
         }
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
