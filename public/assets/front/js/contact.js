@@ -141,7 +141,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
-                    $("#loader").hide();
+                    $("#home_loader").hide();
 
                     return;
                 }
@@ -228,7 +228,7 @@ $(document).on("keyup", ".search_phone", function () {
             success: function (data) {
                 if (data.status == "0") {
                     $(".no-phone-data").css("display","block");
-                    $("#loader").hide();
+                    $("#home_loader").hide();
                     // busy2 = true; 
                     busy2 = false;
 
