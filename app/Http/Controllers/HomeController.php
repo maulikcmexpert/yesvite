@@ -339,12 +339,14 @@ class HomeController extends BaseController
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
             $events_calender = [];
-            $color = ['blue', 'orange', 'green', 'yellow'];
-            $colorIndex = 0;
+            $color = ['blue','green', 'yellow', 'orange', ];
+            $colorCount = count($color); // Get total number of colors
 
-            foreach ($eventcalenderdata as $event) {
-                $colorClass = $color[$colorIndex % count($color)];
-                $colorIndex++;
+            foreach ($eventcalenderdata as $index=> $event) {
+                // $colorClass = $color[$colorIndex % count($color)];
+                $colorClass = $color[$index % $colorCount];
+
+                // $colorIndex++;
                 $events_calender[] = [
                     'date' => $event->start_date,
                     'title' => $event->event_name,
