@@ -794,9 +794,13 @@ class RsvpController extends BaseController
                     return redirect()->route('rsvp', ['event_invited_user_id' => $event_invited_user_id,'eventId' => $eventId,])->with('msg', 'You declined to go to this event');
 
             }
-            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
+            // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
+            return redirect()->route('rsvp', ['event_invited_user_id' => $event_invited_user_id,'eventId' => $eventId,])->with('error', 'Rsvp not sent');
+
         } catch (QueryException $e) {
-            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'DB error');
+            // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'DB error');
+            return redirect()->route('rsvp', ['event_invited_user_id' => $event_invited_user_id,'eventId' => $eventId,])->with('error', 'DB error');
+
             DB::rollBack();
         } catch (\Exception $e) {
             dd($e);
