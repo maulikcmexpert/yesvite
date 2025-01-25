@@ -1134,10 +1134,9 @@ function bindData(current_event_id) {
 
         // Iterate over the textElements in dbJson
         dbJson.textElements.forEach(function (element) {
-            // if (
-            //     element.text.toLowerCase() === activeObject.text.toLowerCase()
-            // ) {
-            if (element.id === activeObject.id) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
                 // Match the active object's ID with dbJson
                 // Reset properties
                 activeObject.set({
@@ -1155,7 +1154,7 @@ function bindData(current_event_id) {
         });
         // Re-render the canvas after resetting
         canvas.renderAll();
-        addIconsToTextbox(activeObject);
+        addIconsToTextbox(canvas.getActiveObject());
     });
 
     function addIconsToTextbox(target) {
@@ -1209,14 +1208,6 @@ function bindData(current_event_id) {
         $("#lineHeightInput").val(target.lineHeight);
         $("#lineHeightRange").val(target.lineHeight);
         $(".size-btn").removeClass("activated");
-        const textCase = target.textCase || "none"; // Default to "none"
-
-        $(".uppercase-btn").toggleClass("activated", textCase === "uppercase");
-        $(".lowercase-btn").toggleClass("activated", textCase === "lowercase");
-        $(".capitalize-btn").toggleClass(
-            "activated",
-            textCase === "capitalize"
-        );
 
         const text = target.text.trim();
         console.log({ text });
