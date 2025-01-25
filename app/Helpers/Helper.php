@@ -1195,6 +1195,7 @@ function sendNotification($notificationType, $postData)
                     if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
                         $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
                         $eventData = [
+                            'event_invited_user_id' => (int)$invitedUserRsvpMsg->id,
                             'event_id' => $postData['event_id'],
                             'owner_id' => $getPostOwnerId->user_id,
                             'event_name' => $getPostOwnerId->event_name,
@@ -1205,7 +1206,8 @@ function sendNotification($notificationType, $postData)
                             'adults' => $postData['adults'],
                             'host_email' => $senderData->email,
                             'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
-                        ];
+                        ]; 
+                        // dd($eventData);
                         $invitation_email = new NewRsvpsEmailNotify($eventData);
                         Mail::to($getPostOwnerId->user->email)->send($invitation_email);
                     }

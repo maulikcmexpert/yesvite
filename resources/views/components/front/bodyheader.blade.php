@@ -1,4 +1,4 @@
-@if (Auth::guard('web')->check()) 
+@if (Auth::guard('web')->check())
 
 <header>
   <div class="mobile-menu-overlay"></div>
@@ -9,7 +9,7 @@
         <span>beta</span> --}}
         <img src="{{asset('assets/front/image/yesvite_logo.png')}}" alt="logo">
       </a>
-      @if (Auth::guard('web')->check()) 
+      @if (Auth::guard('web')->check())
       <div class="header-right">
         <a href="#" class="add_new_event_btn create_event_with_plan"
           ><i class="fa-solid fa-plus"></i> New Event</a
@@ -48,9 +48,9 @@
             @php
             $count = getTotalUnreadMessageCount();
             @endphp
-            
+
             <span class="g-badge" style="display: {{$count>0 ? 'block':'none'}}">{{$count}}</span>
-           
+
             {{-- <span class="g-badge">10</span> --}}
           </a>
         </div>
@@ -79,12 +79,12 @@
             @php
             $user = Auth::guard('web')->user();
             $notification = getTotalUnreadNotification($user->id);
-        
+
             if ($notification != 0) {
                 echo '<span class="n-badge notification_count_display">' . $notification . '</span>';
             }
         @endphp
-        
+
 
           </button>
           <ul
@@ -92,7 +92,7 @@
             aria-labelledby="dropdownButton"
           >
             <div class="notification-dropdown-header">
-   
+
               <h3>Notifications <span class="notification_count_display">{{$notification}}</span></h3>
               <h5 class="notification_read" data-user_id="{{$user->id}}"style="cursor: pointer;">
                 Mark All Read
@@ -157,7 +157,7 @@
               </h5>
             </div>
             <div class="notification-dropdown-content">
-       
+
               <div class="accordion notification_div" id="accordionExample">
               @php
                   $notification_list=getNotificationList();
@@ -191,16 +191,16 @@
                           <p>{{$value[0]['event_date']}}</p>
                         </div>
                       </div>
-                      
+
                     </button>
                   </h2>
                   <div
                     id="collapseOne{{$i}}"
                     class="accordion-collapse collapse"
                     data-bs-parent="#accordionExample">
-                    
+
                     @foreach ($value as $inner_data )
-                      
+
                           <div class="accordion-body">
                             @if($inner_data['notification_type']=="invite")
                                   <div class="notification-drodown-body-inner">
@@ -215,13 +215,13 @@
                                       <span class="active-dot"></span>
 
                                      @else
-                                       {!! $userProfile !!}         
+                                       {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
                                       <div>
-                                        
+
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
@@ -256,7 +256,7 @@
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                      @else
-                                       {!! $userProfile !!}         
+                                       {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
                                       {{-- <span class="active-dot"></span> --}}
@@ -335,7 +335,7 @@
                                           <span class="active-dot"></span>
 
                                       @else
-                                          {!! $userProfile !!}         
+                                          {!! $userProfile !!}
                                         <span class="active-dot"></span>
                                       @endif
                                     </div>
@@ -395,7 +395,7 @@
                                         <span class="active-dot"></span>
 
                                     @else
-                                        {!! $userProfile !!}         
+                                        {!! $userProfile !!}
                                       <span class="active-dot"></span>
                                     @endif
                                   </div>
@@ -419,7 +419,7 @@
                                     <div>
                                       <p>
                                         {{$inner_data['event_name']}}
-                                        
+
                                         <span><strong>Wall</strong></span>
                                       </p>
                                       <h6 class="notification-read-dot"></h6>
@@ -439,7 +439,7 @@
                                                   src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
                                                   alt=""
                                                   loading="lazy"
-              
+
                                               /></span>
                                             </a>
                                               @endif
@@ -515,7 +515,7 @@
                                       </div>
                                     </div>
                                   </div>
-                            @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="1" ) 
+                            @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="1" )
                               <div class="notification-drodown-body-inner">
                                 <div class="notification-drodown-body-inner-img">
                                   @php
@@ -526,7 +526,7 @@
                                   @if($inner_data['profile']!="")
                                   <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                 @else
-                                  {!! $userProfile !!}         
+                                  {!! $userProfile !!}
                                 <span class="active-dot"></span>
                                 @endif
                                   <span class="active-dot"></span>
@@ -551,7 +551,7 @@
                                   </div>
                                 </div>
                               </div>
-                            @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="0" ) 
+                            @elseif($inner_data['notification_type']=="sent_rsvp" && $inner_data['rsvp_detail']['rsvpd_status']=="0" )
                               <div class="notification-drodown-body-inner">
                                 <div class="notification-drodown-body-inner-img">
                                   @php
@@ -563,7 +563,7 @@
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                       <span class="active-dot"></span>
                                 @else
-                                        {!! $userProfile !!}         
+                                        {!! $userProfile !!}
                                       <span class="active-dot"></span>
                                 @endif
                                 </div>
@@ -622,7 +622,7 @@
                                   </div>
                                 </div>
                               </div>
-                            @elseif($inner_data['notification_type']=="photos")   
+                            @elseif($inner_data['notification_type']=="photos")
                                 <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
                                       @php
@@ -635,13 +635,13 @@
                                       <span class="active-dot"></span>
 
                                     @else
-                                      {!! $userProfile !!}         
+                                      {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
                                       <div>
-                                        
+
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
@@ -677,7 +677,7 @@
                                       </div> --}}
                                     </div>
                                   </div>
-                           
+
                             @elseif($inner_data['notification_type']=="accept_reject_co_host")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
@@ -691,7 +691,7 @@
                                           <span class="active-dot"></span>
 
                                       @else
-                                          {!! $userProfile !!}         
+                                          {!! $userProfile !!}
                                         <span class="active-dot"></span>
                                       @endif
                                     </div>
@@ -737,11 +737,11 @@
                                         </div>
                                       </div> --}}
                                     </div>
-                                  </div> 
+                                  </div>
                         @endif
-                            
 
-                            
+
+
                                   {{-- <div class="notification-drodown-body-inner">
                               <div class="notification-drodown-body-inner-img">
                                 <img
@@ -925,7 +925,7 @@
                           <p>August 31, 2023</p>
                         </div>
                       </div>
-                      
+
                     </button>
                   </h2>
                   <div
@@ -1128,8 +1128,8 @@
                 </div> --}}
                 @endforeach
               </div>
-              
-              
+
+
               <div class="notification-dropdown-footer">
                 <a href="#" class="notification-showall-btn">Show All</a>
               </div>
@@ -1152,12 +1152,12 @@
                     }
             }
           @endphp
-          {!! $userProfile !!}         
+          {!! $userProfile !!}
         </button>
           <ul class="dropdown-menu header-profile-dropdown">
             <div class="home-center-profile-head">
               <div class="home-center-profile-img">
-                {!! $userProfile !!}                
+                {!! $userProfile !!}
               </div>
               <div class="home-center-profile-content">
                 <h3>{{$userprofile->firstname.' '.$userprofile->lastname}}</h3>
@@ -1198,7 +1198,7 @@
 
         <button class="moblie-menu-bar">
           <!-- <i class="fa-solid fa-bars"></i> -->
-          <svg viewBox="0 0 100 100"><path class="false line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"></path><path class="false line line2" d="M 20,50 H 80"></path><path class="false line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"></path></svg>
+          <svg width="30" height="30" viewBox="0 0 100 100"><path class="false line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"></path><path class="false line line2" d="M 20,50 H 80"></path><path class="false line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"></path></svg>
         </button>
       </div>
       @endif
@@ -1249,7 +1249,7 @@
                       <path d="M8.85286 20.2916H8.33203C4.16536 20.2916 2.08203 19.25 2.08203 14.0416L2.08203 8.83331C2.08203 4.66665 4.16536 2.58331 8.33203 2.58331L16.6654 2.58331C20.832 2.58331 22.9154 4.66665 22.9154 8.83331L22.9154 14.0416C22.9154 18.2083 20.832 20.2916 16.6654 20.2916H16.1445C15.8216 20.2916 15.5091 20.4479 15.3112 20.7083L13.7487 22.7916C13.0612 23.7083 11.9362 23.7083 11.2487 22.7916L9.6862 20.7083C9.51953 20.4791 9.13411 20.2916 8.85286 20.2916Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M7.29297 8.83331L17.7096 8.83331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M7.29297 14.0417L13.543 14.0417" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>                    
+                    </svg>
                     @php
                     $count = getTotalUnreadMessageCount();
                     @endphp
@@ -1305,7 +1305,7 @@
                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_7906_43769" result="shape"/>
                  </filter>
                  </defs>
-                 </svg>    
+                 </svg>
                  </a>
 
 
@@ -1334,7 +1334,7 @@
                          @endif
 
 
-                 
+
                              <div class="collapse navbar-collapse" id="mynavbar">
                                  <ul class="navbar-nav align-items-center ms-auto">
                                      <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
@@ -1357,7 +1357,7 @@
                                             </a>
                                         </li> --}}
                                      @endif
-                                    
+
                                  </ul>
                              </div>
 
@@ -1386,7 +1386,7 @@
                     <span>All Events</span> --}}
                   </div>
                 </div>
-                
+
                 <div class="notification-filter-sub">
                   <h3>Notification Type</h3>
                   <div class="form-check">
@@ -1421,7 +1421,7 @@
                     <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
                       Comments
                     </label>
-                  </div> 
+                  </div>
                   <div class="form-check">
                     <input class="form-check-input invited_to_chk" data-name="rsvp" name="activityTypes[]" type="checkbox" value="" id="flexCheckDefault2">
                     <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
@@ -1460,8 +1460,8 @@
             <div class="all-events-filter-wrp">
               <form action="" id="event_filter">
                   <div class="notification-filter-sub">
-                    
-                    @if (Auth::guard('web')->check()) 
+
+                    @if (Auth::guard('web')->check())
 
                     @php
                       $user  = Auth::guard('web')->user()->id;
