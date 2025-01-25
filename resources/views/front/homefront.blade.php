@@ -83,7 +83,7 @@
     </section> --}}
 
      <!-- ======= edit in event ======== -->
-    <section class="event-wrapper pro-event-wrapper"> 
+    <section class="event-wrapper pro-event-wrapper">
         <div class="owl-carousel owl-theme events-tab  simple">
             <div class="item"><span>500 Invite Limit</span></div>
             <div class="item"><span>Potluck</span></div>
@@ -233,7 +233,7 @@
     <!-- <section class="features-wrapper">
         <div class="container">
 
-            
+
             <div id="demo" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
@@ -246,10 +246,10 @@
                     <button type="button" data-bs-target="#demo" data-bs-slide-to="7"></button>
                     <button type="button" data-bs-target="#demo" data-bs-slide-to="8"></button>
                 </div>
-                
-                
+
+
                 <div class="carousel-inner">
-                    
+
                     <div class="carousel-item active">
                         <div class="feature-slide slide-green d-block">
                             <div class="row">
@@ -404,15 +404,15 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
                 <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
                 </button>
-            </div>      
+            </div>
         </div>
     </section> -->
 
@@ -654,6 +654,7 @@
                 <h2>Find the Perfect <br> Design in Our Collection</h2>
                 <p>Customizable Designs to Reflect Your Unique Event</p>
             </div>
+            {{-- {{$getDesignData}} --}}
             <div class="filter-main-wrp">
                 <div class="filters-drp">
                     <h5>Filter By</h5>
@@ -673,51 +674,36 @@
                                         <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="" id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample">
+                                        @foreach($categories as $category)
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingOne">
+                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne" aria-expanded="true"
-                                                    aria-controls="collapseOne">
-                                                    Holidays
+                                                data-bs-target="#collapse{{ $category->id }}"aria-expanded="true"
+                                                aria-controls="collapse{{ $category->id }}">
+                                                    {{ $category->category_name }}
                                                 </button>
                                             </h2>
-                                            <div id="collapseOne" class="accordion-collapse collapse show"
-                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div id="collapse{{ $category->id }}" class="accordion-collapse collapse show"
+                                                aria-labelledby="heading{{ $category->id }}" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
                                                     <ul>
+                                                        @foreach($category->subcategory as $subcategory)
                                                         <li>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                                <label class="form-check-label" for="allbirth">{{ $subcategory->subcategory_name }}</label>
+                                                                <input class="form-check-input" type="checkbox" id="subcategory{{ $subcategory->id }}"
+                                                                data-category-id="{{ $category->id }}"
+                                                                data-subcategory-id="{{ $subcategory->id }}">
                                                             </div>
                                                         </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth">Mans Birthday</label>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth">Womans Birthday</label>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth" checked="">
-                                                            </div>
-                                                        </li>
+                                                        @endforeach
+
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="accordion-item">
+                                        @endforeach
+                                        {{-- <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingTwo">
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseTwo"
@@ -804,7 +790,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -1266,15 +1252,23 @@
                 </div>
                 <h5 class="total-items ms-auto">55 Items</h5>
             </div>
+           {{-- {{ dd($categories);}} --}}
             <div class="row ">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                @foreach($categories as $category)
+                @foreach($category->subcategory as $subcategory)
+                @foreach($subcategory->textdatas as $image)
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item" data-wow-duration="2s"
+                 data-wow-delay="0" data-wow-offset="0"   data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
                     <a href="#" class="collection-card card-blue">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card1.png')}}" alt="shower-card">
+                            <img src="{{ asset('uploads/images/' . $image->filled_image) }}" alt="shower-card">
                         </div>
-                        <h4>Baby Showers</h4>
+                        <h4>{{ $category->category_name }}</h4>
                     </a>
                 </div>
+                @endforeach
+                @endforeach
+                @endforeach
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
@@ -1569,5 +1563,40 @@
                 localStorage.setItem('cookiesBoxDismissed', 'true');
             });
         });
+
+
+        // Listen to checkbox changes to filter images
+$(document).on('change', 'input[type="checkbox"]', function () {
+    const categoryId = $(this).data('category-id');
+    const subcategoryId = $(this).data('subcategory-id');
+    const isChecked = $(this).is(':checked');
+
+    // Filter images based on category and subcategory selection
+    $('.image-item').each(function () {
+        const itemCategoryId = $(this).data('category-id');
+        const itemSubcategoryId = $(this).data('subcategory-id');
+
+        // If the image's category and subcategory match the selected checkboxes, show it
+        if (categoryId == itemCategoryId && subcategoryId == itemSubcategoryId) {
+            if (isChecked) {
+                $(this).show();  // Show image
+            } else {
+                $(this).hide();  // Hide image
+            }
+        }
+    });
+});
+
+// Optionally, you can show all images when a category is checked or unchecked
+$(document).on('change', 'input[type="checkbox"]:checked', function () {
+    // Show all images when the checkbox is checked
+    if ($(this).is(':checked')) {
+        $('.image-item').show();
+    }
+});
+
+// Hide images by default when not selected
+$('.image-item').hide();
+
     </script>
     @endpush

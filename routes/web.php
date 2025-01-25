@@ -57,6 +57,7 @@ Route::post('/run-queue-work', function () {
 });
 
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
+Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
