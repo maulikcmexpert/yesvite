@@ -125,6 +125,7 @@ $("#dropdownButton").on("click", function (event) {
     $(".notification-dropdown-menu").toggleClass("show");
     if ($(".header-profile-dropdown").hasClass("show")) {
         $(".header-profile-dropdown").removeClass("show");
+        $(".line").removeClass("active");
     }
 });
 
