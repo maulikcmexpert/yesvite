@@ -1648,6 +1648,7 @@ class EventController extends BaseController
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
+        dD(session('category'));
         $categories = session()->get('category', []);
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
