@@ -1133,10 +1133,12 @@ function bindData(current_event_id) {
         console.log(dbJson);
 
         // Iterate over the textElements in dbJson
+        let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
+                seted = 1;
                 // Match the active object's ID with dbJson
                 // Reset properties
                 activeObject.set({
@@ -1152,6 +1154,18 @@ function bindData(current_event_id) {
                 });
             }
         });
+        if (seted == 0) {
+            activeObject.set({
+                fontWeight: "", // Default to normal if not defined
+                fontStyle: "", // Default to normal if not defined
+                underline: false,
+                linethrough: false,
+                fontFamily: "Arial", // Default font
+                fontSize: 16, // Default size
+                textAlign: "left", // Default alignment
+                lineHeight: 1, // Default line height
+            });
+        }
         // Re-render the canvas after resetting
         canvas.renderAll();
         addIconsToTextbox(canvas.getActiveObject());
