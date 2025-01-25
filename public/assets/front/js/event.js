@@ -477,7 +477,7 @@ $(document).on('click','.cancel_event_option',function () {
     console.log(event_id);
     $('#reason_to_cancel_event').val('');
     $('#type_cancel').val('');
-    $('.confirm_cancel_event_btn').attr('data-event_id', event_id);
+    $('#confirm_cancel_event_btn').attr('data-event_id', event_id);
 });
 
 $(document).on('input', '#type_cancel', function () {
@@ -494,7 +494,7 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
     var event_id=$(this).data('event_id');
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
-    
+
 
     if(reason==""){
         toastr.error("Please Enter Reason");
