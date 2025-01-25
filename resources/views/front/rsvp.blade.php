@@ -1730,7 +1730,7 @@
                         <input type="hidden" value="{{encrypt($user_id)}}" name="user_id" id="user_id"/>
                         <input type="hidden" value="{{encrypt($event_id)}}" name="event_id" id="event_id"/>
                         <input type="hidden" value="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" name="sync_id" id="sync_id"/>
-                        <input type="hidden" value="{{($event_invited_user_id!="")?encrypt($event_invited_user_id):""}}" name="event_invited_user_id" id="event_invited_user_id"/>
+                        <input type="hidden" value="{{($event_invited_user_id!="")?$event_invited_user_id:""}}" name="event_invited_user_id" id="event_invited_user_id"/>
 
                         <input type="hidden" value="1" name="rsvp_status" id="rsvp_status"/>
                     <div class="modal-body">
