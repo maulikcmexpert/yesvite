@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let timePart = dateParts[1];    // "9:57 am"
       
       // Ensure the correct date format: "25 January, 2025"
-      const dateWithComma = datePart.replace(' ', ' , ');  // Add comma after January
+      const dateWithComma = datePart.replace(' January', ',January ');  // Add comma after January
       
       // Convert AM/PM to uppercase
       timePart = timePart.toUpperCase();
