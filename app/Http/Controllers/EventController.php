@@ -403,7 +403,7 @@ class EventController extends BaseController
                             $itemData = [];
                             foreach ($value->event_potluck_category_item as $itemValue) {
                                 $itemData = [
-                                    'item' => $itemValue->description,
+                                    'name' => $itemValue->description,
                                     'self_bring' => $itemValue->self_bring_item,
                                     'self_bring_qty' => $itemValue->self_bring_item == 1 ? $itemValue->quantity : 0,
                                     'quantity' => $itemValue->quantity,
@@ -2688,6 +2688,7 @@ class EventController extends BaseController
     public function  editStore(Request $request)
     {
         $conatctId = session('contact_ids');
+        $potluck = session('category');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
         // $potluck = session('category');
