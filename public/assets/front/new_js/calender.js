@@ -156,7 +156,9 @@
 }();
 
 
-  
+
+
+
 !function () {
   var today = moment();
 
@@ -231,15 +233,15 @@ console.log(monthEventCount);
       monthContainer.appendChild(eventscount);
 
       // Weekdays
-    //   const weekdays = document.createElement('div');
-    //   weekdays.className = 'weekdays';
-    //   ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
-    //       const weekday = document.createElement('div');
-    //       weekday.className = 'day';
-    //       weekday.innerText = day;
-    //       weekdays.appendChild(weekday);
-    //   });
-    //   monthContainer.appendChild(weekdays);
+      // const weekdays = document.createElement('div');
+      // weekdays.className = 'weekdays';
+      // ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
+      //     const weekday = document.createElement('div');
+      //     weekday.className = 'day';
+      //     weekday.innerText = day;
+      //     weekdays.appendChild(weekday);
+      // });
+      // monthContainer.appendChild(weekdays);
 
       // Days
       const startDay = month.clone().startOf('month').day(); // Starting weekday

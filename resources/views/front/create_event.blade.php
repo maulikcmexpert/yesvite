@@ -1369,19 +1369,19 @@
                 <input type="hidden" id="category_count" value="0">
                 @if (isset($eventDetail['podluck_category_list']) && count($eventDetail['podluck_category_list']) > 0)
                     @foreach ($eventDetail['podluck_category_list'] as $index => $data)
-                        <div class="category-main-dishesh potluckmain-{{ $data['id'] }}">
+                        <div class="category-main-dishesh potluckmain-{{ $index }}">
                             <div class="category-list">
                                 <div class="list-header">
                                     <span
-                                        class="me-1 list-sub-head total-self-bring-{{ $data['id'] }}">{{ $data['categoryQuantity'] }}</span>
+                                        class="me-1 list-sub-head total-self-bring-{{ $index }}">{{ $data['categoryQuantity'] }}</span>
                                     <div>
-                                        <h5 class="category_name-{{ $data['id'] }}">{{ $data['category'] }}</h5>
+                                        <h5 class="category_name-{{ $index }}">{{ $data['category'] }}</h5>
                                         <p>Total Commited</p>
                                     </div>
                                     <div class="ms-auto d-flex align-items-center ">
                                         @if ($data['remainingQnt'] > 0)
                                             <span
-                                                class="me-2 missing-category-h6-{{ $data['id'] }} missing-category-svg-{{ $data['id'] }}"
+                                                class="me-2 missing-category-h6-{{ $index }} missing-category-svg-{{ $index }}"
                                                 style="color: rgb(192, 52, 52);">
                                                 <svg width="14" height="14" viewBox="0 0 14 14"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1390,13 +1390,13 @@
                                                         fill="#F73C71"></path>
                                                 </svg>
                                             </span>
-                                            <h6 class="me-2 missing-category-h6-{{ $data['id'] }}"
+                                            <h6 class="me-2 missing-category-h6-{{ $index }}"
                                                 style="color: rgb(192, 52, 52);"><span
-                                                    id="missing-category-{{ $data['id'] }}">{{ $data['remainingQnt'] }}</span>
+                                                    id="missing-category-{{ $index }}">{{ $data['remainingQnt'] }}</span>
                                                 Missing</h6>
                                         @else
                                             <span
-                                                class="me-2 missing-category-h6-{{ $data['id'] }} missing-category-svg-{{ $data['id'] }}"
+                                                class="me-2 missing-category-h6-{{ $index }} missing-category-svg-{{ $index }}"
                                                 style="color: rgb(52, 192, 92);">
                                                 <svg width="14" height="14" viewBox="0 0 14 14"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1405,14 +1405,14 @@
                                                         fill="#23AA26"></path>
                                                 </svg>
                                             </span>
-                                            <h6 class="me-2 missing-category-h6-{{ $data['id'] }}"
+                                            <h6 class="me-2 missing-category-h6-{{ $index }}"
                                                 style="color: rgb(52, 192, 92);"><span
-                                                    id="missing-category-{{ $data['id'] }}">0</span> Missing</h6>
+                                                    id="missing-category-{{ $index }}">0</span> Missing</h6>
                                         @endif
-                                        <input type="hidden" class="total-potluck-category{{ $data['id'] }}"
+                                        <input type="hidden" class="total-potluck-category{{ $index }}"
                                             value="{{$data['totalItem']}}">
                                         <a href="#" class="me-3 add_potluck_item"
-                                            id="potluck-{{ $data['id'] }}" data-id="{{ $data['id'] }}"
+                                            id="potluck-{{ $index }}" data-id="{{ $index }}"
                                             style="{{($data['quantity'] > $data['totalItem']) ? '' : 'display:none'}}">
                                             <svg width="22" height="22" viewBox="0 0 22 22"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1422,7 +1422,7 @@
                                             </svg>
                                         </a>
                                         <a href="#" type="button" class="delete_potluck_category"
-                                            data-id="{{ $data['id'] }}">
+                                            data-id="{{ $index }}">
                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -1449,8 +1449,8 @@
                                             <div class="potlak-edit-dropdown dropdown-menu"
                                                 aria-labelledby="dropdownMenuButton1">
                                                 <ul>
-                                                    <li class="edit_category edit_potluck_category-{{ $data['id'] }}"
-                                                        data-id="{{ $data['id'] }}"
+                                                    <li class="edit_category edit_potluck_category-{{ $index }}"
+                                                        data-id="{{ $index }}"
                                                         data-category_name="{{ $data['category'] }}"
                                                         data-category_quantity="{{ $data['quantity'] }}">
                                                         <svg width="20" height="20" viewBox="0 0 20 20"
@@ -1468,7 +1468,7 @@
                                                         Edit
                                                     </li>
                                                     <li class="delete_potluck_category"
-                                                        data-id="{{ $data['id'] }}">
+                                                        data-id="{{ $index }}">
                                                         <svg width="16" height="16" viewBox="0 0 16 16"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -1500,15 +1500,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                @foreach ($data['items'] as $items)
-                                    <div class="list-slide list-slide-{{ $data['id'] }}">
+                                @foreach ($data['items'] as $itemkey=> $items)
+                                    <div class="list-slide list-slide-{{ $index }}">
                                         <div class="accordion accordion-flush" id="accordioncatList">
                                             <div class="accordion-item green-border">
                                                 <h2 class="accordion-header" id="lumpia">
                                                     <button class="accordion-button">
                                                         <div class="d-flex align-items-center">
                                                             <span
-                                                                class="me-1 list-sub-head category-item-total-{{ $items['id'] }}-{{ $data['id'] }}">{{ $items['itmquantity'] }}</span>
+                                                                class="me-1 list-sub-head category-item-total-{{ $itemkey }}-{{ $index }}">{{ $items['itmquantity'] }}</span>
                                                             <div>
                                                                 <h5>{{ $items['description'] }}</h5>
                                                                 <p>Requested by: {{ $items['requested_by'] }}</p>
@@ -1519,9 +1519,19 @@
                                                         </div>
                                                         <div class="ms-auto d-flex align-items-center gap-2">
                                                             <span class="me-2" id="me-3">
-
+                                                                @if ($items['itmquantity'] < $items['quantity'])
+                                                                <svg id="danger-svg-{{ $itemkey }}-{{ $index }}"
+                                                                width="14" height="14"
+                                                                viewBox="0 0 14 14" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                style="">
+                                                                <path
+                                                                    d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
+                                                                    fill="#F73C71"></path>
+                                                            </svg>
+                                                                @else    
                                                                 <svg style=""
-                                                                    id="success-svg-{{ $items['id'] }}-{{ $data['id'] }}"
+                                                                    id="success-svg-{{ $itemkey }}-{{ $index }}"
                                                                     width="14" height="14"
                                                                     viewBox="0 0 14 14" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg">
@@ -1529,23 +1539,16 @@
                                                                         d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
                                                                         fill="#23AA26"></path>
                                                                 </svg>
-                                                                <svg id="danger-svg-{{ $items['id'] }}-{{ $data['id'] }}"
-                                                                    width="14" height="14"
-                                                                    viewBox="0 0 14 14" fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    style="display: none;">
-                                                                    <path
-                                                                        d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
-                                                                        fill="#F73C71"></path>
-                                                                </svg>
+                                                                @endif
+                                                                
                                                             </span>
-                                                            <h6 id="h6-{{ $items['id'] }}-{{ $data['id'] }}">
+                                                            <h6 id="h6-{{ $itemkey }}-{{ $index }}">
                                                                 {{ $items['itmquantity'] }}/{{ $items['quantity'] }}
                                                             </h6>
                                                             <span class="accordion-button add-user-list collapsed"
-                                                                data-listid="user-list-{{ $items['id'] }}-{{ $data['id'] }}"
+                                                                data-listid="user-list-{{ $itemkey }}-{{ $index }}"
                                                                 type="button" data-bs-toggle="collapse"
-                                                                data-bs-target="#lumpia-collapseOne-{{ $items['id'] }}-{{ $data['id'] }}"
+                                                                data-bs-target="#lumpia-collapseOne-{{ $itemkey }}-{{ $index }}"
                                                                 aria-expanded="false"
                                                                 aria-controls="lumpia-collapseOne"><i
                                                                     class="fa-solid fa-plus"></i></span>
@@ -1553,19 +1556,19 @@
                                                     </button>
                                                 </h2>
                                                 @if (count($items['item_carry_users']) == 0)
-                                                    <div id="lumpia-collapseOne-{{ $items['id'] }}-{{ $data['id'] }}"
+                                                    <div id="lumpia-collapseOne-{{ $itemkey }}-{{ $index }}"
                                                         class="accordion-collapse d-none" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample">
                                                         <div class="accordion-body">
                                                             <div class="accordion-body-content limits-count"
-                                                            id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                                                            id="user-list-{{ $itemkey }}-{{ $index }}">
                         
                                                                 @if (Auth::guard('web')->user()->profile != '')
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp
-                                                                    <img src="{{ Auth::guard('web')->user()->profile }}"
-                                                                        alt="">
+                                                                   <img src="{{ url('storage/profile/' . Auth::guard('web')->user()->profile) }}" alt="">
+
                                                                     <h5>{{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
@@ -1585,10 +1588,10 @@
                                                                     <div class="qty-container ms-auto">
                                                                         <input type="hidden"
                                                                             class="category-item-key"
-                                                                            value="{{ $items['id'] }}">
+                                                                            value="{{ $itemkey }}">
                                                                         <input type="hidden"
                                                                             class="category-index-key"
-                                                                            value="{{ $data['id'] }}">
+                                                                            value="{{ $index }}">
                                                                         <input type="hidden"
                                                                             class="category-item-quantity"
                                                                             value="{{ $items['quantity'] }}">
@@ -1628,8 +1631,8 @@
                                                                             </svg>
                                                                         </a>
                                                                         <a href="#" class="delete-self-bring"
-                                                                            data-categoryitem="{{ $items['id'] }}"
-                                                                            data-categoryindex="{{ $data['id'] }}"
+                                                                            data-categoryitem="{{ $itemkey }}"
+                                                                            data-categoryindex="{{ $index }}"
                                                                             data-itemquantity="{{ $items['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
@@ -1684,23 +1687,22 @@
                                                         $initials = $firstInitial . $lastInitial;
                                                         $fontColor = 'fontcolor' . $firstInitial;
                                                     @endphp
-                                                    <div id="lumpia-collapseOne-{{ $items['id'] }}-{{ $data['id'] }}"
+                                                    <div id="lumpia-collapseOne-{{ $itemkey }}-{{ $index }}"
                                                         class="accordion-collapse" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample" style="">
                                                         <div class="accordion-body">
                                                             <div class="accordion-body-content"
                                                                 style="display: none;">
-                                                                @if ($values['profile'] != '')
-                                                                    <img src="{{ $values['profile'] }}"
-                                                                        alt="">
-                                                                    <h5 class="me-auto">
-                                                                        {{ $values['first_name'] . ' ' . $values['last_name'] }}
-                                                                    </h5>
-                                                                @endif
-                                                                <span class="ms-auto">1</span>
                                                             </div>
                                                             <div class="accordion-body-content limits-count"
-                                                                id="user-list-{{ $items['id'] }}-{{ $data['id'] }}">
+                                                            id="user-list-{{ $itemkey }}-{{ $index }}">
+                                                            @if ($values['profile'] != '')
+                                                            <img src="{{ $values['profile'] }}"
+                                                            alt="">
+                                                            <h5 class="me-auto">
+                                                                {{ $values['first_name'] . ' ' . $values['last_name'] }}
+                                                            </h5>
+                                                            @endif
                                                                 @if ($values['profile'] == '')
                                                                     <h5
                                                                         class="{{ $fontColor }} add-item-under-text">
@@ -1713,10 +1715,10 @@
                                                                     <div class="qty-container ms-auto">
                                                                         <input type="hidden"
                                                                             class="category-item-key"
-                                                                            value="{{ $items['id'] }}">
+                                                                            value="{{ $itemkey }}">
                                                                         <input type="hidden"
                                                                             class="category-index-key"
-                                                                            value="{{ $data['id'] }}">
+                                                                            value="{{ $index }}">
                                                                         <input type="hidden"
                                                                             class="category-item-quantity"
                                                                             value="{{ $items['quantity'] }}">
@@ -1756,9 +1758,10 @@
                                                                             </svg>
                                                                         </a>
                                                                         <a href="#" class="delete-self-bring"
-                                                                            data-categoryitem="{{ $items['id'] }}"
-                                                                            data-categoryindex="{{ $data['id'] }}"
-                                                                            data-itemquantity="{{ $items['quantity'] }}">
+                                                                            data-categoryitem="{{ $itemkey }}"
+                                                                            data-categoryindex="{{ $index }}"
+                                                                            data-itemquantity="{{ $items['quantity'] }}"
+                                                                            data-userquantity="{{ $values['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1796,6 +1799,8 @@
                                                                             </svg>
                                                                         </a>
                                                                     </div>
+                                                                @else
+                                                                <span class="ms-auto">{{ $values['quantity'] }}</span>
                                                                 @endif
                                                             </div>
                                                         </div>

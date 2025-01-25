@@ -64,7 +64,7 @@ Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
 Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])->name('term_and_condition');
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
-Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
+Route::get('rsvp/{event_invited_user_id}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('check_rsvp_status', [RsvpController::class, 'CheckRsvpStatus'])->name('check_rsvp_status');
 

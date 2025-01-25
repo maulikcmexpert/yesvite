@@ -388,7 +388,7 @@ class EventController extends BaseController
                         $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
                         $potluckCategory['quantity'] = $value->quantity;
 
-                        $categories[$value->id] = [
+                        $categories[$key] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
                             'isAlready' => "1",
@@ -401,7 +401,7 @@ class EventController extends BaseController
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             $itemData = [];
-                            foreach ($value->event_potluck_category_item as $itemValue) {
+                            foreach ($value->event_potluck_category_item as $itemkey=> $itemValue) {
                                 $itemData = [
                                     'name' => $itemValue->description,
                                     'self_bring' => $itemValue->self_bring_item,
@@ -410,7 +410,7 @@ class EventController extends BaseController
                                     'isAlready' => "1",
                                 ];
                                 $itmquantity = 0;
-                                $categories[$value->id]['item'][$itemValue->id] = $itemData;
+                                $categories[$key]['item'][$itemkey] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
 
@@ -439,7 +439,7 @@ class EventController extends BaseController
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                 }
                                 $totalItem = $totalItem +1; 
-                                $remainingQnt = $itemValue->quantity;
+                                $remainingQnt = $remainingQnt + $itemValue->quantity;
                                 $potluckItem['itmquantity'] =  $itmquantity;
                                 $potluckCategory['items'][] = $potluckItem;
                             }
@@ -455,7 +455,6 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd(session('category'));
                 }
             }
         } else {
@@ -1341,6 +1340,7 @@ class EventController extends BaseController
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
         $category_index = $request->input('category_index');
+        
         $categories_item = Session::get('category_item', []);
         $itemData = [
             'item' => $itemName,
@@ -1381,6 +1381,7 @@ class EventController extends BaseController
                 ]
             ];
         }
+        
         //  else {
         //     $categories[$category_index] = [
         //         'category_name' => $categories[$category_index]['category_name'],
@@ -1649,7 +1650,7 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-        dd($categories,$categoryItemKey,$categoryIndexKey);
+        
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);

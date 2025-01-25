@@ -126,6 +126,22 @@ $("#dropdownButton").on("click", function (event) {
     if ($(".header-profile-dropdown").hasClass("show")) {
         $(".header-profile-dropdown").removeClass("show");
     }
+    
+});
+
+
+$(".moblie-menu-bar").on("click", function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    if ($(".notification-dropdown-menu").hasClass("show")) {
+        $(".notification-dropdown-menu").removeClass("show");
+    }
+});
+$(".notification-toggle-menu").on("click", function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    if ($(".mobile-menu-wrp").hasClass("active")) {
+        $(".mobile-menu-wrp").removeClass("active");
+        $(".line").removeClass("active");
+    }
 });
 
 // document.addEventListener("click", (event) => {
@@ -802,6 +818,8 @@ $(function () {
 });
 
 $(document).on("click", ".mobile-calender-btn", function () {
+    $('.mobile-menu-wrp').removeClass('active');
+    $('.line').removeClass('active');
     var text = this.innerText;
     var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>

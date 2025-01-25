@@ -1942,6 +1942,7 @@ $(document).on("click", ".edit_category", function () {
 
 $(document).on("click", ".add_potluck_item", function () {
     var potluckkey = $(this).data("id");
+
     var categoryName = $(".category_name-" + potluckkey).text();
     setPotluckActivekey(potluckkey, categoryName);
     toggleSidebar("sidebar_addcategoryitem");
@@ -4512,7 +4513,7 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 });
 
 $(document).on("change", ".user_group_member .user_choice", function () {
-    alert();
+  
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4642,8 +4643,6 @@ $(document).on("click", ".qty-btn-plus", function () {
 function plusBTN(that) {
     var categoryItemKey = that.parent().find(".category-item-key").val();
     var categoryIndexKey = that.parent().find(".category-index-key").val();
-alert(categoryItemKey);
-alert(categoryIndexKey);
     var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
@@ -4761,19 +4760,19 @@ function update_self_bring(
                     categoryIndexKey
             ).text(quantity);
 
-            if (type == "plus") {
-                var current_item = parseInt(
-                    $(".total-self-bring-" + categoryIndexKey).text()
-                );
-                current_item = current_item + 1;
-                $(".total-self-bring-" + categoryIndexKey).text(current_item);
-            } else if (type == "minus") {
-                var current_item = parseInt(
-                    $(".total-self-bring-" + categoryIndexKey).text()
-                );
-                current_item = current_item - 1;
-                $(".total-self-bring-" + categoryIndexKey).text(current_item);
-            }
+            // if (type == "plus") {
+            //     var current_item = parseInt(
+            //         $(".total-self-bring-" + categoryIndexKey).text()
+            //     );
+            //     current_item = current_item + 1;
+            //     $(".total-self-bring-" + categoryIndexKey).text(current_item);
+            // } else if (type == "minus") {
+            //     var current_item = parseInt(
+            //         $(".total-self-bring-" + categoryIndexKey).text()
+            //     );
+            //     current_item = current_item - 1;
+            //     $(".total-self-bring-" + categoryIndexKey).text(current_item);
+            // }
 
             if (quantity == categoryItemQuantity) {
                 $(
@@ -4853,6 +4852,8 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryItemKey = $(this).data("categoryitem");
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
+    var userquantity = $(this).data("userquantity");
+
     $(this).parent().parent().hide();
     var self_bring_quantity = $(this)
         .parent()
@@ -4876,7 +4877,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(categoryItemKey, categoryIndexKey, 0, itemquantity);
+    update_self_bring(categoryItemKey, categoryIndexKey, userquantity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
