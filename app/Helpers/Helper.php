@@ -115,17 +115,16 @@ function getGuestPendingRsvpCount($eventId)
 
 function sendNotification($notificationType, $postData)
 {
-    // dd($postData);
     //'invite', 'upload_post', 'like_post', 'comment', 'reply', 'poll', 'rsvp'
     $user  = Auth::guard('api')->user();
 
-    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
-        $senderData = User::where('id',  $postData['sender_id'])->first();
-    }else{
-        $senderData = contact_sync::where('id', $postData['sync_id'])->first();
-    }
+    $senderData = User::where('id', $postData['sender_id'])->first();
 
-    dd($senderData);
+    if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
+        $senderData = contact_sync::where('id', $postData['sync_id'])->first();
+    }else{
+        $senderData = User::where('id',  $postData['sender_id'])->first();
+    }
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
@@ -1146,11 +1145,9 @@ function sendNotification($notificationType, $postData)
     if ($notificationType == 'sent_rsvp') {
 
         $getPostOwnerId = Event::with(['event_settings', 'user'])->where('id', $postData['event_id'])->first();
-
-
-        if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null){
+        if((isset($postData['sync_id'])&&$postData['sync_id']!="")&&$postData['sender_id']==null||$postData['sender_id']==""){
             $firstname=$senderData->firstName;
-            $lastname=$senderData->lastnName;
+            $lastname=$senderData->lastName;
         }else{
             $firstname=$senderData->firstname;
             $lastname=$senderData->lastname;
@@ -1160,76 +1157,78 @@ function sendNotification($notificationType, $postData)
         } elseif ($postData['rsvp_status'] == '0') {
             $notification_message = $firstname . ' '  . $lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
-        if ($getPostOwnerId->user_id != $postData['sender_id']) {
+        if($postData['sync_id']=="" ||$postData['sync_id']==null){
+            if ($getPostOwnerId->user_id != $postData['sender_id']) {
 
-            Notification::where([
-                'event_id' => $postData['event_id'],
-                'user_id' => $getPostOwnerId->user_id,
-                'sender_id' => $postData['sender_id'],
-                'notification_type' => $notificationType
-            ])->delete();
+                Notification::where([
+                    'event_id' => $postData['event_id'],
+                    'user_id' => $getPostOwnerId->user_id,
+                    'sender_id' => $postData['sender_id'],
+                    'notification_type' => $notificationType
+                ])->delete();
 
-            $notification = new Notification;
-            $notification->event_id = $postData['event_id'];
-            $notification->user_id =  $getPostOwnerId->user_id;
-            $notification->notification_type = $notificationType;
-            $notification->sender_id = $postData['sender_id'];
-            $notification->notification_message = $notification_message;
-            $notification->kids = $postData['kids'];
-            $notification->adults = $postData['adults'];
-            $notification->rsvp_status = $postData['rsvp_status'];
-            $notification->rsvp_video = $postData['rsvp_video'];
-            $notification->rsvp_message = $postData['rsvp_message'];
-            $notification->rsvp_attempt = $postData['rsvp_attempt'];
+                $notification = new Notification;
+                $notification->event_id = $postData['event_id'];
+                $notification->user_id =  $getPostOwnerId->user_id;
+                $notification->notification_type = $notificationType;
+                $notification->sender_id = $postData['sender_id'];
+                $notification->notification_message = $notification_message;
+                $notification->kids = $postData['kids'];
+                $notification->adults = $postData['adults'];
+                $notification->rsvp_status = $postData['rsvp_status'];
+                $notification->rsvp_video = $postData['rsvp_video'];
+                $notification->rsvp_message = $postData['rsvp_message'];
+                $notification->rsvp_attempt = $postData['rsvp_attempt'];
 
-            if ($notification->save()) {
-                $deviceData = Device::where('user_id', $getPostOwnerId->user_id)->first();
-                if (!empty($deviceData)) {
-                    $notification_image = "";
-                    if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
-                        $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
-                    }
+                if ($notification->save()) {
+                    $deviceData = Device::where('user_id', $getPostOwnerId->user_id)->first();
+                    if (!empty($deviceData)) {
+                        $notification_image = "";
+                        if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
+                            $notification_image = asset('public/storage/event_images/' . $notificationImage->image);
+                        }
 
-                    $notificationData = [
-                        'message' => $notification_message,
-                        'type' => (string)$notificationType,
-                        'notification_image' => $notification_image,
-                        'post_id' => "",
-                        'event_id' => (string)$postData['event_id'],
-                        'event_name' => (string)$getPostOwnerId->event_name,
-                        'event_wall' => (string)$getPostOwnerId->event_settings->event_wall,
-                        'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
-                        'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
-                        'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
-                    ];
+                        $notificationData = [
+                            'message' => $notification_message,
+                            'type' => (string)$notificationType,
+                            'notification_image' => $notification_image,
+                            'post_id' => "",
+                            'event_id' => (string)$postData['event_id'],
+                            'event_name' => (string)$getPostOwnerId->event_name,
+                            'event_wall' => (string)$getPostOwnerId->event_settings->event_wall,
+                            'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
+                            'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
+                            'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
+                        ];
 
-                    $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
+                        $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);
 
-                    if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
-                        send_notification_FCM_and($deviceData->device_token, $notificationData);
-                    }
-                    if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
-                        $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
-                        $eventData = [
-                            'event_invited_user_id' => (int)$invitedUserRsvpMsg->id,
-                            'event_id' => $postData['event_id'],
-                            'owner_id' => $getPostOwnerId->user_id,
-                            'event_name' => $getPostOwnerId->event_name,
-                            'guest_name' => $senderData->firstname . ' '  . $senderData->lastname,
-                            'profileUser' => ($senderData->profile != NULL || $senderData->profile != "") ? $senderData->profile : "no_profile.png",
-                            'rsvp_status' =>  $postData['rsvp_status'],
-                            'kids' => $postData['kids'],
-                            'adults' => $postData['adults'],
-                            'host_email' => $senderData->email,
-                            'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
-                        ]; 
-                        // dd($eventData);
-                        $invitation_email = new NewRsvpsEmailNotify($eventData);
-                        Mail::to($getPostOwnerId->user->email)->send($invitation_email);
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['push'] == '1') && $getPostOwnerId->notification_on_off == '1') {
+                            send_notification_FCM_and($deviceData->device_token, $notificationData);
+                        }
+                        if ((count($checkNotificationSetting) && $checkNotificationSetting['guest_rsvp']['email'] == '1') && $getPostOwnerId->notification_on_off == '1') {
+                            $invitedUserRsvpMsg = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $senderData->id])->first();
+                            $eventData = [
+                                'event_invited_user_id' => (int)$invitedUserRsvpMsg->id,
+                                'event_id' => $postData['event_id'],
+                                'owner_id' => $getPostOwnerId->user_id,
+                                'event_name' => $getPostOwnerId->event_name,
+                                'guest_name' => $senderData->firstname . ' '  . $senderData->lastname,
+                                'profileUser' => ($senderData->profile != NULL || $senderData->profile != "") ? $senderData->profile : "no_profile.png",
+                                'rsvp_status' =>  $postData['rsvp_status'],
+                                'kids' => $postData['kids'],
+                                'adults' => $postData['adults'],
+                                'host_email' => $senderData->email,
+                                'rsvp_message' => ($invitedUserRsvpMsg->message_to_host != NULL || $invitedUserRsvpMsg->message_to_host != "") ? $invitedUserRsvpMsg->message_to_host : ""
+                            ]; 
+                            // dd($eventData);
+                            $invitation_email = new NewRsvpsEmailNotify($eventData);
+                            Mail::to($getPostOwnerId->user->email)->send($invitation_email);
+                        }
                     }
                 }
             }
-        }
+    }
     }
 
     if ($notificationType == 'potluck_bring') {
