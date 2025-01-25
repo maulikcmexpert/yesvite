@@ -4657,8 +4657,7 @@ function plusBTN(that) {
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
-    // console.log({ categoryItemQuantity, quantity });
-    
+    console.log({ categoryItemQuantity, quantity });
     if (categoryItemQuantity >= (quantity+innerUserQnt)) {
         update_self_bring(
             innerUserQnt,
@@ -4697,7 +4696,7 @@ function minusBTN(that) {
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= (quantity + innerUserQnt)) {
+    if (categoryItemQuantity >= (quantity+innerUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 innerUserQnt,
@@ -4734,16 +4733,16 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(quantity + "/" + categoryItemQuantity);
-
             let updatedQty = innerUserQnt+quantity;
+            
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 (updatedQty) + "/" + categoryItemQuantity
             );
-            if(updatedQty >= categoryItemQuantity){
-                response = 0;
-            }
+
             $("#missing-category-" + categoryIndexKey).text(response);
+            if (updatedQty <= categoryItemQuantity) {
+                response =0;
+            }
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
                 var svg =
@@ -4768,7 +4767,7 @@ function update_self_bring(
                     categoryItemKey +
                     "-" +
                     categoryIndexKey
-            ).text(updatedQty);
+            ).text(quantity);
 
             if (type == "plus") {
                 var current_item = parseInt(
@@ -4784,7 +4783,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
             
-            if(updatedQty >= categoryItemQuantity){
+            if (updatedQty <= categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
                         "-" +
