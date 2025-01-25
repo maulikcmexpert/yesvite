@@ -1170,6 +1170,38 @@ function bindData(current_event_id) {
         addIconsToTextbox(canvas.getActiveObject());
     });
 
+    $(document).on("click", ".color-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+
+        // Check if there's an active object and it's a textbox
+        if (!activeObject || activeObject.type !== "textbox") {
+            return; // Exit if no object or not a textbox
+        }
+
+        console.log(dbJson);
+
+        // Iterate over the textElements in dbJson
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                activeObject.set({
+                    fill: element.fill || "#000000",
+                });
+            }
+        });
+        if (seted == 0) {
+            activeObject.set({
+                fill: "#000000",
+            });
+        }
+        // Re-render the canvas after resetting
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
     function addIconsToTextbox(target) {
         console.log("add to here");
         console.log(target);
