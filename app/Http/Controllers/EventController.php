@@ -403,7 +403,7 @@ class EventController extends BaseController
                             $itemData = [];
                             foreach ($value->event_potluck_category_item as $itemValue) {
                                 $itemData = [
-                                    'name' => $itemValue->description,
+                                    'item' => $itemValue->description,
                                     'self_bring' => $itemValue->self_bring_item,
                                     'self_bring_qty' => $itemValue->self_bring_item == 1 ? $itemValue->quantity : 0,
                                     'quantity' => $itemValue->quantity,
