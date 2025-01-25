@@ -76,7 +76,7 @@
     width: 100%;
     max-width: 400px;
     margin: 0px auto;
-    height: auto;
+    height: 100px;
     padding: 10px 16px;
     background-color: var(--white);
     border-radius: 16px;
@@ -1018,7 +1018,7 @@
     .design-sidebar_6.design-sidebar_7 {
         height: 55vh !important;
     }
-    
+
     .design-sidebar_4{
         height: 70vh !important;
     }
