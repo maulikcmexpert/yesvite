@@ -557,6 +557,20 @@ class EventListController extends Controller
                     }
                 }
 
+                // $events_calender = [];
+                // $color=['blue','orange','green','yellow'];
+                // $colorIndex = 0;
+              
+                // foreach ($eventcalenderdata as $event) {
+                //     $colorClass = $color[$colorIndex % count($color)];
+                //     $colorIndex++;
+                //     $events_calender[] = [
+                //         'date' => $event->start_date, 
+                //         'title' => $event->event_name,    
+                //         'color' => $colorClass    
+                //     ];
+                // }
+
                 $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
 
                 // dd($eventList);

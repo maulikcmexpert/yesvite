@@ -139,7 +139,7 @@ class RsvpController extends BaseController
 
 
 
-    public function index($userId, $eventId)
+    public function index($event_invited_user_id, $eventId)
     {
         $title = 'RSVP';
         $page = 'front.rsvp';
@@ -147,8 +147,15 @@ class RsvpController extends BaseController
         $css = 'message.css';
 
         $event_id =  decrypt($eventId);
-        $user_id = decrypt($event_invited_user_id);
+        $event_invited_user_id = decrypt($event_invited_user_id);
+        // dd($event_invited_user_id);
+        // $user_id = decrypt($event_invited_user_id);
 
+        $user_id= EventInvitedUser::where('id',$event_invited_user_id)->first()->user_id;
+        $sync_id="";
+        if($user_id==null || $user_id==""){
+            $sync_id= EventInvitedUser::where('id',$event_invited_user_id)->first()->sync_id;
+        }
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
@@ -409,9 +416,12 @@ class RsvpController extends BaseController
             $getInvitedusers = getInvitedUsersList($event_id);
 
             $sync_contact_user_id = "";
-            $user_email = User::where('id', $user_id)->first();
+            $user_email="";
+            if($user_id==null || $user_id=""){
+                $user_email = User::where('id', $user_id)->first();
+            }
             if ($user_email == "") {
-                $user_sync_email = contact_sync::where('id', $user_id)->first();
+                $user_sync_email = contact_sync::where('id', $sync_id)->first();
                 $email = $user_sync_email->email;
                 $sync_contact_user_id = $user_id;
                 $user_firstname = ($user_sync_email->firstName != "" || $user_sync_email->firstName != null) ? $user_sync_email->firstName : "";
