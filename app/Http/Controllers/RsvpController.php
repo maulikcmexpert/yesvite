@@ -787,10 +787,12 @@ class RsvpController extends BaseController
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
-                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
+                    // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
+                    return redirect()->route('rsvp', ['event_invited_user_id' => $event_invited_user_id,'eventId' => $eventId,])->with('msg', 'You are going to this event');
                 } elseif ($request->rsvp_status == "0") {
-                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
-                }
+                    // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
+                    return redirect()->route('rsvp', ['event_invited_user_id' => $event_invited_user_id,'eventId' => $eventId,])->with('msg', 'You declined to go to this event');
+
             }
             return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
         } catch (QueryException $e) {
