@@ -1564,8 +1564,8 @@
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp
-                                                                    <img src=" <? base_url().'storage/profile/ '.Auth::guard('web')->user()->profile"
-                                                                        alt="">
+                                                                   <img src="{{ url('storage/profile/' . Auth::guard('web')->user()->profile) }}" alt="">
+
                                                                     <h5>{{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
