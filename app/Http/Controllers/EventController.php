@@ -2688,6 +2688,8 @@ class EventController extends BaseController
     public function  editStore(Request $request)
     {
         $conatctId = session('contact_ids');
+        $potluck = session('category');
+        dD($potluck);
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
         // $potluck = session('category');
