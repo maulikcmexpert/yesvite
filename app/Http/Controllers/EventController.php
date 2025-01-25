@@ -455,7 +455,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd( session('category'));
+                
                 }
             }
         } else {
@@ -1645,6 +1645,7 @@ class EventController extends BaseController
 
     public function updateSelfBring(Request $request)
     {
+        dd($categories = Session::get('category'));
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
