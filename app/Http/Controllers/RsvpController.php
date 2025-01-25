@@ -425,7 +425,7 @@ class RsvpController extends BaseController
             if ($user_email == "") {
                 $user_sync_email = contact_sync::where('id', $sync_id)->first();
                 $email = $user_sync_email->email;
-                $sync_contact_user_id = $user_id;
+                $sync_contact_user_id = $sync_id;
                 $user_firstname = ($user_sync_email->firstName != "" || $user_sync_email->firstName != null) ? $user_sync_email->firstName : "";
                 $user_lastname = ($user_sync_email->lastName != "" || $user_sync_email->lastName != null) ? $user_sync_email->lastName : "";
                 // $user_id = User::where('email', $email)->first()->id;
@@ -550,6 +550,7 @@ class RsvpController extends BaseController
                 // $css = 'message.css';
                 // $css1 = 'audio.css';
             }
+            dd($user_id,$sync_contact_user_id);
             return view('layout', compact(
                 'title',
                 'page',
@@ -594,8 +595,8 @@ class RsvpController extends BaseController
      */
     public function store(Request $request)
     {
-        dd($request);
 
+        // dd($request);
         $userId = decrypt($request->user_id);
         $eventId = decrypt($request->event_id);
         $event_invited_user_id = decrypt($request->event_invited_user_id);
@@ -625,7 +626,7 @@ class RsvpController extends BaseController
                 //     // $query->where('app_user', '1');
                 // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
-                $rsvpSent = EventInvitedUser::whereHas('user','contact', function ($query) {
+                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                     // $query->where('app_user', '1');
                 })->where(['id' => $event_invited_user_id])->first();
             // }
