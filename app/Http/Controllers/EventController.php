@@ -1683,6 +1683,7 @@ class EventController extends BaseController
                 foreach ($value['item_carry_users'] as $userkey => $userVal) {
                     if ($id == $userVal['user_id']) {
                         $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] = $quantity;
+                        session()->put('category', $categories);
                     }
                     $total_quantity =  $total_quantity + $userVal['quantity'];
                 }
@@ -1690,16 +1691,18 @@ class EventController extends BaseController
 
                 // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
                 //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+                // }else{
+                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
                 // }
             }
         }
 
-        session()->put('category', $categories);
-        if($request->type == "minus"){
-            $total_quantity= $total_quantity - $quantity;
-        }else{
-            $total_quantity= $total_quantity + $quantity;   
-        }
+       
+        // if($request->type == "minus"){
+        //     $total_quantity= $total_quantity - $quantity;
+        // }else{
+        //     $total_quantity= $total_quantity + $quantity;   
+        // }
         $total_item = $total_item - $total_quantity ;
         return $total_item;
     }
