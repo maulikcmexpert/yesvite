@@ -107,26 +107,20 @@ document.addEventListener("DOMContentLoaded", function() {
       hour12: true
     };
 
-    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
     
     // Debugging: Log the formattedDate to understand its structure
     console.log('Formatted Date:', formattedDate);
     
-    // Split based on 'at' to separate date and time
-    const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
+    // Split the date and time
+    const dateParts = formattedDate.split(', ');
     
     if (dateParts.length === 2) {
-      const datePart = dateParts[0];  // "25 January 2025"
-      let timePart = dateParts[1];    // "9:57 am"
-      
-      // Ensure the correct format by dynamically placing a comma after the month
-      const dateWithComma = datePart.replace(/(\w+ \d{1,2})( \d{4})$/, '$1,$2'); // Add comma after the month
-      
-      // Convert AM/PM to uppercase
-      timePart = timePart.toUpperCase();
-      
-      // Final date formatting: "25 January, 2025 - 9:57 AM"
-      const finalDate = `${dateWithComma} - ${timePart}`;
+      const [monthDay, yearAndTime] = dateParts; // Split "December 23" and "2022, 8:31 PM"
+      const [year, time] = yearAndTime.split(' '); // Separate "2022" and "8:31 PM"
+
+      // Final date formatting: "December 23, 2022 - 8:31 PM"
+      const finalDate = `${monthDay}, ${year} - ${time.toUpperCase()}`;
       saveDateElement.innerHTML = `Last Save: ${finalDate}`;
     } else {
       console.error('Date format issue:', formattedDate);
@@ -134,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
+
 
 
 
