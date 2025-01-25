@@ -471,7 +471,6 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd(session('category'));
                 }
             }
         } else {
@@ -1676,11 +1675,12 @@ class EventController extends BaseController
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
         $categories = session()->get('category', []);
-        // dd($categories[$categoryIndexKey]['item']);
+        dd($categories[$categoryIndexKey]['item']);
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
+               
                 $total_item = $total_item + $value['quantity'];
 
                 if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
