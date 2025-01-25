@@ -130,7 +130,7 @@ $("#dropdownButton").on("click", function (event) {
 });
 
 
-$("#moblie-menu-bar").on("click", function (event) {
+$(".moblie-menu-bar").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
     if ($(".notification-dropdown-menu").hasClass("show")) {
         $(".notification-dropdown-menu").removeClass("show");
