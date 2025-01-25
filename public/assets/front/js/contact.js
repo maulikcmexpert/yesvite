@@ -40,6 +40,11 @@ $("#product-scroll-phone").on("scroll", function () {
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
+                var search_phone = $('.search_phone').val();
+                if(search_phone!=""){
+                    offset1=null;
+                }
+
                 loadMorePhones(search_name=null,type,offset1,limit,1);
             // function loadMoreData(page, search_name)
             // loadMoreGroups(page, search_group);
