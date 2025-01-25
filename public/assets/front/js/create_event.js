@@ -4734,8 +4734,10 @@ function update_self_bring(
         },
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
+
+            let updatedQty = innerUserQnt+quantity;
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                (quantity) + "/" + categoryItemQuantity
+                (updatedQty) + "/" + categoryItemQuantity
             );
 
             $("#missing-category-" + categoryIndexKey).text(response);
@@ -4763,7 +4765,7 @@ function update_self_bring(
                     categoryItemKey +
                     "-" +
                     categoryIndexKey
-            ).text(quantity);
+            ).text(updatedQty);
 
             if (type == "plus") {
                 var current_item = parseInt(
@@ -4778,7 +4780,7 @@ function update_self_bring(
                 current_item = current_item - 1;
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
-            let updatedQty = innerUserQnt+quantity;
+            
             if (updatedQty <= categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
