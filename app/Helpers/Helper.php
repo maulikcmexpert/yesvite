@@ -304,6 +304,7 @@ function sendNotification($notificationType, $postData)
 
 
                     if ($value->prefer_by == 'phone') {
+
                         $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $postData['event_id'], $value->id);
                         // $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
                         if ($sent == true) {
@@ -1736,8 +1737,12 @@ function sendSMSForApplication($receiverNumber, $message)
 }
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
+    $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
+    $cleanedNumber = '+' . $cleanedNumber;
+
+    // Use the sanitized number in your query
     $user = Useropt::firstOrCreate(
-        ['phone' => $receiverNumber, 'event_id' => $event_id, 'event_invited_user_id' => $event_invited_user_id],
+        ['phone' => $cleanedNumber, 'event_id' => $event_id, 'event_invited_user_id' => $event_invited_user_id],
         ['opt_in_status' => false]
     );
     $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
@@ -1756,8 +1761,11 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
 
 function handleIncomingMessage($receiverNumber, $message)
 {
+    $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
+    $cleanedNumber = '+' . $cleanedNumber;
     if (strtolower($message) == 'yes') {
-        $users = UserOpt::where(['phone' => $receiverNumber, 'opt_in_status' => false])->get();
+
+        $users = UserOpt::where(['phone' => $cleanedNumber, 'opt_in_status' => false])->get();
 
         foreach ($users as $user) {
             $user->update(['opt_in_status' => true]);
@@ -1772,7 +1780,7 @@ function handleIncomingMessage($receiverNumber, $message)
                 $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($user->event_invited_user_id), 'eventId' => encrypt($user->event_id)]);
                 $confirmationMessage = "Yesvite: You have been subscribed to receive messages. You have been invited by \"{$event->event->user->firstname} {$event->event->user->lastname}\" to \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
                 try {
-                    sendSMSForApplication($receiverNumber, $confirmationMessage);
+                    sendSMSForApplication($cleanedNumber, $confirmationMessage);
                 } catch (Exception $e) {
                     // Log::error("Failed to send confirmation SMS to {$receiverNumber}: " . $e->getMessage());
                 }
@@ -1781,7 +1789,7 @@ function handleIncomingMessage($receiverNumber, $message)
             }
         }
     } elseif (strtolower($message) == 'stop') {
-        $users = UserOpt::where('phone', $receiverNumber)->get();
+        $users = UserOpt::where('phone', $cleanedNumber)->get();
         foreach ($users as $user) {
             $user->update(['opt_in_status' => false]);
         }
