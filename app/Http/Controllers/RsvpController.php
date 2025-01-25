@@ -784,8 +784,10 @@ class RsvpController extends BaseController
                 DB::commit();
 
                 sendNotification('sent_rsvp', $notificationParam);
-                $url = route('rsvp',$request->event_invited_user_id,$request->event_id);
-
+                $url = route('rsvp', [
+                    'event_invited_user_id' => $request->event_invited_user_id,
+                    'eventId' => $request->event_id,
+                ]);
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
                     // return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
