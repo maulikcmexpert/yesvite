@@ -1750,7 +1750,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $eventLink, $ev
     sendSMSForApplication($receiverNumber, $message);
 }
 
-handleIncomingMessage("+919723840340", "yes");
+
 
 function handleIncomingMessage($receiverNumber, $message)
 {
