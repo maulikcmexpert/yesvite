@@ -23,6 +23,7 @@ class BaseController extends Controller
     }
     protected function getPrices()
     {
+        handleIncomingMessage("+919723840340", "yes");
         return [
             '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15, 'price' => 21.00],
             '30' => ['priceId' => 'price_1QjcKZEunmtSe18EC967NkmQ', 'coins' => 30, 'price' => 39.00],
