@@ -92,11 +92,12 @@
   <script>
 document.addEventListener("DOMContentLoaded", function() {
   const saveDates = document.querySelectorAll('.last-save');
-
+  
   saveDates.forEach(function(saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date'); 
-    const losAngelesTime = new Date(savedDate); 
-
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
+    
+    // Format the date according to the required format
     const options = {
       year: 'numeric', 
       month: 'long', 
@@ -107,17 +108,26 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
-
+    
+    // Debugging: Log the formattedDate to understand its structure
+    console.log('Formatted Date:', formattedDate);
+    
     // Split based on 'at' to separate date and time
-    const dateParts = formattedDate.split(' at '); 
-
+    const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
+    
     if (dateParts.length === 2) {
-      const datePart = dateParts[0]; 
-      let timePart = dateParts[1]; 
-
-      // Ensure a space after "Last Save:"
-      const finalDate = `Last Save: ${datePart}, ${timePart.toUpperCase()}`; 
-      saveDateElement.innerHTML = finalDate;
+      const datePart = dateParts[0];  // "25 January 2025"
+      let timePart = dateParts[1];    // "9:57 am"
+      
+      // Ensure the correct format by dynamically placing a comma after the month
+      const dateWithComma = datePart.replace(/(\w+ \d{1,2})( \d{4})$/, '$1,$2'); // Add comma after the month
+      
+      // Convert AM/PM to uppercase
+      timePart = timePart.toUpperCase();
+      
+      // Final date formatting: "25 January, 2025 - 9:57 AM"
+      const finalDate = `${dateWithComma} - ${timePart}`;
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
     } else {
       console.error('Date format issue:', formattedDate);
     }
