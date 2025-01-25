@@ -921,10 +921,11 @@ function getInvitedUsersList($eventId)
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0']);
     $result = $invitedUsers->get();
 
+    dd($result);
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            if ($guestVal->sync_id != '') {
+            if ($guestVal->user_id==""||$guestVal->sync_id != '') {
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
                 $invitedGuestDetail['email'] = (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "";
