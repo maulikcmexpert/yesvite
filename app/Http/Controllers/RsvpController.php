@@ -415,9 +415,12 @@ class RsvpController extends BaseController
             $getInvitedusers = getInvitedUsersList($event_id);
 
             $sync_contact_user_id = "";
-            $user_email = User::where('id', $user_id)->first();
+            $user_email="";
+            if($user_id==null&&$user_id=""){
+                $user_email = User::where('id', $user_id)->first();
+            }
             if ($user_email == "") {
-                $user_sync_email = contact_sync::where('id', $user_id)->first();
+                $user_sync_email = contact_sync::where('id', $sync_id)->first();
                 $email = $user_sync_email->email;
                 $sync_contact_user_id = $user_id;
                 $user_firstname = ($user_sync_email->firstName != "" || $user_sync_email->firstName != null) ? $user_sync_email->firstName : "";
