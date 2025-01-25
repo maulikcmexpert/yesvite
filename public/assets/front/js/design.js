@@ -474,6 +474,7 @@ $(document).on("click", ".design-cards", function () {
         }
     }
 });
+
 $(document).on("click", ".modal-design-card", function (e) {
     e.stopPropagation();
 });
@@ -1120,6 +1121,15 @@ function bindData(current_event_id) {
         //console.log(`Width of '${text}':`, textWidth);
         return textWidth;
     }
+
+    $(document).on("click", ".formate-text-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+
+        if (!activeObject || activeObject.type !== "textbox") {
+            return; // No object or not a textbox, so do nothing
+        }
+        console.log(dbJson);
+    });
 
     function addIconsToTextbox(target) {
         console.log("add to here");
