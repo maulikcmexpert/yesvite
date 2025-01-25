@@ -1139,31 +1139,30 @@ function bindData(current_event_id) {
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
                 seted = 1;
-                // Match the active object's ID with dbJson
-                // Reset properties
                 activeObject.set({
-                    fontWeight: element.fontWeight || "", // Default to normal if not defined
-                    fontStyle: element.fontStyle || "", // Default to normal if not defined
+                    fontWeight: element.fontWeight || "",
+                    fontStyle: element.fontStyle || "",
                     underline: element.underline || false,
                     linethrough: element.linethrough || false,
-                    fontFamily: element.fontFamily || "Arial", // Default font
-                    fontSize: element.fontSize || 16, // Default size
-                    textAlign: element.textAlign || "left", // Default alignment
-                    lineHeight: element.lineHeight || 1, // Default line height
-                    text: element.text || activeObject.text, // Reset to original text
+                    fontFamily: element.fontFamily || "Times New Roman",
+                    fontSize: element.fontSize || 20,
+                    textAlign: element.textAlign || "left",
+                    lineHeight: element.lineHeight || 1,
+                    text: element.text || activeObject.text,
                 });
             }
         });
         if (seted == 0) {
             activeObject.set({
-                fontWeight: "", // Default to normal if not defined
-                fontStyle: "", // Default to normal if not defined
+                fontWeight: "",
+                fontStyle: "",
                 underline: false,
                 linethrough: false,
-                fontFamily: "Arial", // Default font
-                fontSize: 16, // Default size
-                textAlign: "left", // Default alignment
-                lineHeight: 1, // Default line height
+                fontFamily: "Times New Roman",
+                fontSize: 20,
+                textAlign: "left",
+                lineHeight: 1,
+                text: activeObject.text.toLowerCase(),
             });
         }
         // Re-render the canvas after resetting
