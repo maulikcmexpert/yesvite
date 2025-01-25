@@ -2583,7 +2583,6 @@ class EventController extends BaseController
                     //     $design_inner_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_inner_image;
                     //     unlink($design_inner_image_imagePath);
                     // }
-                    $deleteEvent->delete();
 
                     UserReportToPost::where('event_id', $event_id)->delete();
 
@@ -2633,6 +2632,8 @@ class EventController extends BaseController
                     EventPostPoll::where('event_id', $event_id)->delete();
                     EventUserStory::where('event_id', $event_id)->delete();
                 }
+                $deleteEvent->delete();
+
                 DB::commit();
                 return response()->json(['status' => 1, 'event_id' => $event_id, 'message' => "Event deleted successfully"]);
             } else {
