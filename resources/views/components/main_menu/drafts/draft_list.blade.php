@@ -39,7 +39,9 @@
                             </div>
                             <div class="home-latest-draf-card-head-content">
                               <h3>{{$draft['event_name']}}</h3>
-                              <p>Last Save:  {{$draft['saved_date']}}</p>
+                              <!-- <p>Last Save:  {{$draft['saved_date']}}</p> -->
+                              <p class="last-save" data-save-date="{{$draft['saved_date']}}"></p>
+
                             </div>
                             
                         </div>
@@ -87,3 +89,43 @@
         </div>
     </div>
   </div>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const saveDates = document.querySelectorAll('.last-save');
+        
+        saveDates.forEach(function(saveDateElement) {
+          const savedDate = saveDateElement.getAttribute('data-save-date');
+          const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Assuming savedDate is in UTC or a specific format
+          
+          // Format the date according to the required format
+          const options = {
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: 'numeric', 
+            minute: 'numeric', 
+            hour12: true
+          };
+
+          const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+          
+          // Debugging: Log the formattedDate to understand its structure
+          console.log('Formatted Date:', formattedDate);
+          
+          // Try splitting based on space and comma or try a more lenient method
+          const dateParts = formattedDate.split(' at ');  // Look for the "at" separator
+          
+          if (dateParts.length === 2) {
+            const datePart = dateParts[0];  // "January 25, 2025"
+            const timePart = dateParts[1];  // "9:57 AM"
+            
+            // Final date formatting: "January 25, 2025 - 9:57 AM"
+            const finalDate = `${datePart} - ${timePart}`;
+            saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+          } else {
+            console.error('Date format issue:', formattedDate);
+          }
+        });
+      });
+</script>
+

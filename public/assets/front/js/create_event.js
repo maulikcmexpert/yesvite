@@ -8045,10 +8045,14 @@ function update_self_bring(
                 (innerUserQnt+quantity) + "/" + categoryItemQuantity
             );
 
-            $("#missing-category-" + categoryIndexKey).text(response);
             if((innerUserQnt+quantity) >=categoryItemQuantity){
                 response=0;
+                $("#missing-category-" + categoryIndexKey).text(0);
+            }else{
+                let quantity = response - innerUserQnt;
+                $("#missing-category-" + categoryIndexKey).text(quantity);
             }
+            // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
                 var svg =
@@ -8089,7 +8093,8 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if (quantity == categoryItemQuantity) {
+            if((innerUserQnt+quantity) >=categoryItemQuantity){
+                // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
                         "-" +

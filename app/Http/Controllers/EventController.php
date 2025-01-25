@@ -428,7 +428,7 @@ class EventController extends BaseController
 
                                 $potluckItem['item_carry_users'] = [];
 
-                                foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                                foreach ($itemValue->user_potluck_items as $userKey => $itemcarryUser) {
                                     $userPotluckItem['id'] = $itemcarryUser->id;
                                     $userPotluckItem['user_id'] = $itemcarryUser->user_id;
                                     $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $id) ? 1 : 0;
@@ -437,6 +437,14 @@ class EventController extends BaseController
                                     $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                     $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                     $potluckItem['item_carry_users'][] = $userPotluckItem;
+                                    if ($itemcarryUser->user_id == $id) {
+                                        // Set the user's item at index 0
+                                        $categories[$key]['item'][$itemkey]['item_carry_users'][0] = $userPotluckItem;
+                                    } else {
+                                        // Otherwise, add the other user's item to the array normally
+                                        $categories[$key]['item'][$itemkey]['item_carry_users'][] = $userPotluckItem;
+                                    }
+
                                     $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                     if($itemcarryUser->user_id != $id){
@@ -463,7 +471,6 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {
@@ -1663,24 +1670,33 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-        
+        $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
         $categories = session()->get('category', []);
-        // dd($categories[$categoryIndexKey]['item']);
+       
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
+
+                foreach($value['item_carry_users'] as $userkey=> $userVal){
+                    if($id == $userVal['user_id']){
+                        $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] =$quantity;
+                    }
+                    $total_quantity =  $total_quantity + $userVal['quantity'];
+                }
                 $total_item = $total_item + $value['quantity'];
 
-                if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-                    $total_quantity = $total_quantity + $value['self_bring_qty'];
-                }
+                // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+                // }
             }
         }
-        $total_item = $total_item - $total_quantity;
+       
+        session()->put('category', $categories);
+        $total_item = $total_item - ($total_quantity+$quantity);
         return $total_item;
     }
 
