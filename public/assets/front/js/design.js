@@ -1235,6 +1235,23 @@ function bindData(current_event_id) {
         canvas.renderAll();
         addIconsToTextbox(canvas.getActiveObject());
     });
+    $(document).on("click", ".edit-text-save", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let fontSize = $("#fontSizeInput").val();
+        let letterSize = $("#letterSpacingInput").val();
+        let lineHeight = $("#lineHeightInput").val();
+        activeObject.set({
+            fontSize: fontSize,
+            charSpacing: letterSize,
+            lineHeight: lineHeight,
+        });
+
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
 
     function addIconsToTextbox(target) {
         console.log("add to here");
