@@ -137,7 +137,6 @@ $(".moblie-menu-bar").on("click", function (event) {
     }
 });
 $(".notification-toggle-menu").on("click", function (event) {
-    alert();
     event.stopPropagation(); // Prevent the click event from bubbling up
     if ($(".mobile-menu-wrp").hasClass("active")) {
         $(".mobile-menu-wrp").removeClass("active");
