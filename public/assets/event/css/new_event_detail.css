@@ -1348,11 +1348,20 @@
 .new-event-sidebar-menu > ul > li::after{
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -8px;
     left: 11px;
-    border: 1px dashed red;
+    border: 1px dashed var(--border);
     width: 2px;
     height: 100%;
+    z-index: -1;
+}
+
+.new-event-sidebar-menu > ul > li:last-child::after {
+    display: none;
+}
+
+.new-event-sidebar-menu ul:has(li::after) .menu-success{
+    border: 1px dashed var(--green);
 }
 
 /* ======Responsiveness===== */
