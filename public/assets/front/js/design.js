@@ -1187,12 +1187,16 @@ function bindData(current_event_id) {
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
                 seted = 1;
-                activeObject.set({
-                    fill: element.fill || "#000000",
-                });
+                console.log(element.fill);
+                let selectedColor = element.fill || "#000000";
+                $("#color-picker").spectrum("set", selectedColor || "#000000");
+
+                activeObject.set("fill", selectedColor);
             }
         });
         if (seted == 0) {
+            $("#color-picker").spectrum("set", selectedColor || "#000000");
+
             activeObject.set({
                 fill: "#000000",
             });
@@ -1422,34 +1426,34 @@ function bindData(current_event_id) {
         updateTextboxWidth(object);
     };
     // Reset button functionality
-    document.querySelector(".reset-btn").addEventListener("click", function () {
-        //console.log("Reset button clicked!");
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            resetTextboxProperties(activeObject); // Use the reset function
-            canvas.renderAll(); // Re-render the canvas
+    // document.querySelector(".reset-btn").addEventListener("click", function () {
+    //     //console.log("Reset button clicked!");
+    //     const activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === "textbox") {
+    //         resetTextboxProperties(activeObject); // Use the reset function
+    //         canvas.renderAll(); // Re-render the canvas
 
-            // Reset input fields and tooltips to default values
-            fontSizeInput.value = defaultSettings.fontSize;
-            fontSizeRange.value = defaultSettings.fontSize;
-            fontSizeTooltip.innerHTML = `<span>${defaultSettings.fontSize}px</span>`;
+    //         // Reset input fields and tooltips to default values
+    //         fontSizeInput.value = defaultSettings.fontSize;
+    //         fontSizeRange.value = defaultSettings.fontSize;
+    //         fontSizeTooltip.innerHTML = `<span>${defaultSettings.fontSize}px</span>`;
 
-            letterSpacingInput.value = defaultSettings.letterSpacing;
-            letterSpacingRange.value = defaultSettings.letterSpacing;
-            letterSpacingTooltip.innerHTML = `<span>${defaultSettings.letterSpacing}</span>`;
+    //         letterSpacingInput.value = defaultSettings.letterSpacing;
+    //         letterSpacingRange.value = defaultSettings.letterSpacing;
+    //         letterSpacingTooltip.innerHTML = `<span>${defaultSettings.letterSpacing}</span>`;
 
-            lineHeightInput.value = defaultSettings.lineHeight;
-            lineHeightRange.value = defaultSettings.lineHeight;
-            lineHeightTooltip.innerHTML = `<span>${defaultSettings.lineHeight}</span>`;
+    //         lineHeightInput.value = defaultSettings.lineHeight;
+    //         lineHeightRange.value = defaultSettings.lineHeight;
+    //         lineHeightTooltip.innerHTML = `<span>${defaultSettings.lineHeight}</span>`;
 
-            updateTextboxWidth(activeObject); // Update the textbox width to fit the default settings
-            canvas.renderAll(); // Refresh the canvas to apply changes
+    //         updateTextboxWidth(activeObject); // Update the textbox width to fit the default settings
+    //         canvas.renderAll(); // Refresh the canvas to apply changes
 
-            alert("Settings have been reset to default.");
-        } else {
-            alert("Please select a textbox to reset the settings.");
-        }
-    });
+    //         alert("Settings have been reset to default.");
+    //     } else {
+    //         alert("Please select a textbox to reset the settings.");
+    //     }
+    // });
 
     // Initialize tooltips and values on page load
     setFontSize();
@@ -1525,7 +1529,6 @@ function bindData(current_event_id) {
             canvas.renderAll(); // Re-render the canvas after color change
         }
 
-        const activeObjec = canvas.getActiveObject();
         //console.log("ater update");
 
         //console.log(activeObjec);
