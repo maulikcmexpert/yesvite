@@ -505,8 +505,7 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
         toastr.error("Please Enter CANCEL");
         return;
     }
-
-
+    ('#loader').css('display','block');
     console.log(event);
     $.ajax({
         url: `${base_url}event/cancel_event`,
@@ -522,6 +521,8 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
                 toastr.success("Event Cancelled successfully");
                 $('#cancelevent').modal('hide');
                 window.location.reload();
+                ('#loader').css('display','block');
+
 
             }
         },
@@ -532,7 +533,6 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
         },
         complete: function () {
          $('.loader').css('display','none');    
-         window.location.reload();
         }
 
     });
