@@ -1766,7 +1766,7 @@ function handleIncomingMessage($receiverNumber, $message)
                 ->first();
 
             if ($event) {
-                print_r($event->user->id);
+                dd($event);
                 print_r($user->event_id);
                 die;
                 $eventLink = route('rsvp', ['userId' => encrypt($event->user->id), 'eventId' => encrypt($user->event_id)]);
