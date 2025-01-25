@@ -95,6 +95,11 @@
     
     saveDates.forEach(function(saveDateElement) {
       const savedDate = saveDateElement.getAttribute('data-save-date');
+      
+      // Convert the given Los Angeles time (UTC-8 or UTC-7 during daylight savings)
+      const losAngelesTime = new Date(savedDate + ' GMT-0800');
+      
+      // Format the date according to the device's local timezone
       const formattedDate = new Intl.DateTimeFormat(navigator.language, {
         weekday: 'short', 
         year: 'numeric', 
@@ -104,7 +109,7 @@
         minute: 'numeric',
         second: 'numeric',
         hour12: true
-      }).format(new Date(savedDate));
+      }).format(losAngelesTime);
       
       saveDateElement.innerHTML = `Last Save: ${formattedDate}`;
     });
