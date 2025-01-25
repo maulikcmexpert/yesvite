@@ -4642,7 +4642,8 @@ $(document).on("click", ".qty-btn-plus", function () {
 function plusBTN(that) {
     var categoryItemKey = that.parent().find(".category-item-key").val();
     var categoryIndexKey = that.parent().find(".category-index-key").val();
-
+alert(categoryItemKey);
+alert(categoryIndexKey);
     var categoryItemQuantity = that
         .parent()
         .find(".category-item-quantity")
