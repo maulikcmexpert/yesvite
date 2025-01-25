@@ -91,37 +91,33 @@
   </div>
  
 
-<script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const saveDates = document.querySelectorAll('.last-save');
 
-        saveDates.forEach(function(saveDateElement) {
-          const savedDate = saveDateElement.getAttribute('data-save-date'); 
+  <script>
+// Select all elements with the 'last-save' class
+const saveDates = document.querySelectorAll('.last-save');
 
-          // Parse the ISO 8601 date string with timezone offset
-          const losAngelesTime = new Date(savedDate); 
+// Loop through each element and format the date
+saveDates.forEach(function (element) {
+  // Get the date string from the data attribute
+  const saveDate = element.getAttribute('data-save-date');
 
-          // Format the date according to the required format
-          const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          };
-          const datePart = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesTime);
+  // Convert to a Date object
+  const dateObj = new Date(saveDate);
 
-          const timeOptions = { 
-            hour: 'numeric', 
-            minute: 'numeric', 
-            hour12: true 
-          };
-          const timePart = new Intl.DateTimeFormat(navigator.language, timeOptions).format(losAngelesTime);
+  // Format the date to the local time zone
+  const formattedDate = new Intl.DateTimeFormat(navigator.language, {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  }).format(dateObj);
 
-          // Final date formatting: "December 23, 2022 - 8:31 PM"
-          const finalDate = `${datePart} - ${timePart.toUpperCase()}`;
-          saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-        });
-      });
+  // Update the element's text content with the formatted date
+  element.textContent = `Last Save: ${formattedDate}`;
+});
 </script>
-
 
 
