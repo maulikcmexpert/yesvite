@@ -346,6 +346,7 @@ class HomeController extends BaseController
                 // $colorClass = $color[$colorIndex % count($color)];
                 $colorClass = $color[$index % $colorCount];
 
+                dd(1);
                 // $colorIndex++;
                 $events_calender[] = [
                     'date' => $event->start_date,
