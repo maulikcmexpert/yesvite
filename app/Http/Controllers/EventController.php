@@ -455,7 +455,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd(session('category'));
+                
                 }
             }
         } else {
@@ -1341,6 +1341,7 @@ class EventController extends BaseController
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
         $category_index = $request->input('category_index');
+        
         $categories_item = Session::get('category_item', []);
         $itemData = [
             'item' => $itemName,
@@ -1381,6 +1382,7 @@ class EventController extends BaseController
                 ]
             ];
         }
+        dD($categories,$categories[$category_index]);
         //  else {
         //     $categories[$category_index] = [
         //         'category_name' => $categories[$category_index]['category_name'],
@@ -1649,7 +1651,7 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-        dd($categories,$categoryItemKey,$categoryIndexKey);
+dd($categories);
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
