@@ -1685,7 +1685,7 @@ class EventController extends BaseController
                     if($id == $userVal['user_id']){
                         $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] =$quantity;
                     }
-                    $total_quantity =  $total_quantity + $userkey['quantity'];
+                    $total_quantity =  $total_quantity + $userVal['quantity'];
                 }
                 $total_item = $total_item + $value['quantity'];
 
