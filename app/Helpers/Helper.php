@@ -1738,7 +1738,9 @@ function sendSMSForApplication($receiverNumber, $message)
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
-    $cleanedNumber = '+' . $cleanedNumber;
+    if (strpos($receiverNumber, '+') === 0) {
+        $cleanedNumber = '+' . $cleanedNumber;
+    }
 
     // Use the sanitized number in your query
     $user = Useropt::firstOrCreate(
@@ -1762,7 +1764,9 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
 function handleIncomingMessage($receiverNumber, $message)
 {
     $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
-    $cleanedNumber = '+' . $cleanedNumber;
+    if (strpos($receiverNumber, '+') === 0) {
+        $cleanedNumber = '+' . $cleanedNumber;
+    }
     if (strtolower($message) == 'yes') {
 
         $users = UserOpt::where(['phone' => $cleanedNumber, 'opt_in_status' => false])->get();
