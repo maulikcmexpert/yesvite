@@ -1334,6 +1334,18 @@
     position: fixed; /* Lock the body in place */
     width: 100%; /* Prevent layout shifts */
 }
+
+
+.new-event-sidebar-menu ul li span::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: red;
+    width: 2px;
+    height: 100%;
+}
+
 /* ======Responsiveness===== */
 
 
