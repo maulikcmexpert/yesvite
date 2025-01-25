@@ -20,7 +20,7 @@ $("#product-scroll").on("scroll", function () {
                 busy1 = true;
                 offset += limit;
                 var type="yesvite";
-            loadMoreData(search_name=null,type,offset,limit);
+            loadMoreData(search_name=null,type,offset,limit,1);
         }
 });
 
@@ -139,10 +139,14 @@ $(document).on("keyup", ".search_phone", function () {
                 $("#home_loader").show();
             },
             success: function (data) {
+                if (data.status == "0" && scroll==1) {
+                    $(".no-yesvite-data").css("display","none");
+                    $("#home_loader").hide();
+                    return;
+                }
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
                     $("#home_loader").hide();
-
                     return;
                 }
                 $(".no-yesvite-data").css("display","none");
