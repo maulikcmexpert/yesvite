@@ -8089,7 +8089,8 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if (quantity == categoryItemQuantity) {
+            if((innerUserQnt+quantity) >=categoryItemQuantity){
+                // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
                         "-" +
