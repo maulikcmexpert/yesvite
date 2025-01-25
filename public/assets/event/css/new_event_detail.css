@@ -1350,7 +1350,7 @@
     position: absolute;
     bottom: -8px;
     left: 11px;
-    border: 1px dashed red;
+    border: 1px dashed var(--border);
     width: 2px;
     height: 100%;
     z-index: -1;
