@@ -491,7 +491,7 @@ $(document).on('input', '#type_cancel', function () {
 
 
 $(document).on('click','#confirm_cancel_event_btn',function () {
-    var event=$('#cancel_event_id').val();
+    var event=parseInt($('#cancel_event_id').val());
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
 
