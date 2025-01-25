@@ -1192,6 +1192,32 @@ function bindData(current_event_id) {
         addIconsToTextbox(canvas.getActiveObject());
     });
 
+    $(document).on("click", ".font-reset-btn", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                console.log(element.fill);
+
+                activeObject.set(
+                    "fontFamily",
+                    element.fontFamily || "Times New Roman"
+                );
+            }
+        });
+        if (seted == 0) {
+            activeObject.set("fontFamily", "Times New Roman");
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
     $(document).on("click", ".edit-text-reset", function (e) {
         var activeObject = canvas.getActiveObject();
         if (!activeObject || activeObject.type !== "textbox") {
