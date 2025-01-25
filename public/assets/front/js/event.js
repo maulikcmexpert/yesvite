@@ -491,7 +491,7 @@ $(document).on('input', '#type_cancel', function () {
 
 
 $(document).on('click','#confirm_cancel_event_btn',function () {
-    var event_id=$('#confirm_cancel_event_btn').data('event_id');
+    var event=$('#confirm_cancel_event_btn').data('event_id');
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
 
@@ -507,11 +507,11 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
     }
 
 
-    console.log(event_id);
+    console.log(event);
     $.ajax({
         url: `${base_url}event/cancel_event`,
         type: 'POST',
-        data: { event_id: event_id,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
+        data: { event_id: event,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
         success: function (response) {
             console.log(response)
             if(response.status==1){
