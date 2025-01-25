@@ -1738,7 +1738,7 @@ function cleanPhoneNumber(string $phoneNumber): string
 
 function sendSMSForApplication($receiverNumber, $message)
 {
-
+    return true;
     // dd($message);
     try {
         // $cleanedNumber = cleanPhoneNumber($phoneNumber);
@@ -1769,7 +1769,11 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
         // Use the sanitized number in your query
         $user = Useropt::firstOrCreate(
             ['phone' => $cleanedNumber, 'event_id' => $event_id, 'event_invited_user_id' => $event_invited_user_id],
-            ['opt_in_status' => false]
+            [
+                'opt_in_status' => false,
+                'event_id' => $event_id,  // Ensure event_id is included
+                'event_invited_user_id' => $event_invited_user_id  // Ensure event_invited_user_id is included
+            ]
         );
 
         // Generate the event link dynamically
