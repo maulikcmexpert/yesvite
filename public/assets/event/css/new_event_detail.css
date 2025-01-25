@@ -127,8 +127,13 @@
 }
 
 .new-event-sidebar-menu ul li {
-    /* margin-bottom: 20px; */
+    /* margin-bottom: 20px;  */
+    padding-bottom: 20px;
     cursor: pointer;
+}
+
+.new-event-sidebar-menu ul li:last-child{
+    padding-bottom: 0px;
 }
 
 .new-event-sidebar-menu ul li span {
