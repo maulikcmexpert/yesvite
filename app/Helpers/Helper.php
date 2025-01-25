@@ -1739,7 +1739,7 @@ function cleanPhoneNumber(string $phoneNumber): string
 
 function sendSMSForApplication($receiverNumber, $message)
 {
-    return true;
+    // return true;
     // dd($message);
     try {
         // $cleanedNumber = cleanPhoneNumber($phoneNumber);
