@@ -1353,7 +1353,7 @@ class EventController extends BaseController
         } else {
             $categories_item[$categoryName] = [$itemData];
         }
-dD($categories_item);
+
 
         $categories = Session::get('category', []);
 
@@ -1382,6 +1382,7 @@ dD($categories_item);
                 ]
             ];
         }
+        dD($categories);
         //  else {
         //     $categories[$category_index] = [
         //         'category_name' => $categories[$category_index]['category_name'],
