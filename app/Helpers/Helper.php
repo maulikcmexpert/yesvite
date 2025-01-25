@@ -1310,7 +1310,7 @@ function sendNotificationGuest($notificationType, $postData)
                     }
                 }
                 if ($value->prefer_by == 'phone') {
-                    $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $postData['event_id'], $value->id);
+                    $sent = handleSMSInvite($value->contact_sync->phoneWithCode,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $postData['event_id'], $value->id);
                     // $sent = sendSMSForApplication($value->contact_sync->phoneWithCode, $notification_message);
                     if ($sent == true) {
                         $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'sync_id' => $value->sync_id, 'prefer_by' => 'phone'])->first();
