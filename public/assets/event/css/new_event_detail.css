@@ -1349,8 +1349,8 @@
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
-    background: red;
+    left: 11px;
+    border: 1px dashed red;
     width: 2px;
     height: 100%;
 }
