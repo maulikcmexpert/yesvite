@@ -252,9 +252,11 @@
 
                                       
                                       </div>
-                                      <div>
+                                      @if($inner_data['co_host_notification']=="1")
+                                        <div>
                                             <button class="notification-rsvp-btn" type="button">RSVP</button>
                                         </div>
+                                      @endif  
                                      <div>
                                         <!-- <p>{{$inner_data['event_name']}}</p>
                                           @if($inner_data['read']=="0")
