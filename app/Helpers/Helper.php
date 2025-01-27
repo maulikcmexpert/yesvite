@@ -148,6 +148,7 @@ function sendNotification($notificationType, $postData)
             $event_time =  $event->event_schedule->first()->start_time;
         }
         $eventData = [
+            'event_invited_user_id' => $postData['event_id'],
             'event_id' => $postData['event_id'],
             'owner_id' => $event->user_id,
             'host_email' => $senderData->email,
