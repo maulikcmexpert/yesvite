@@ -5005,7 +5005,7 @@ $(document).on("click", ".delete-self-bring", function () {
     var userquantity = parseInt($(this).parent().parent().find('.input-qty').val());
     var innerUserQnt = $(this).data("innerUserQnt");
 
-    $(this).parent().parent().hide();
+    $(this).parent().parent().hide(); 
     var self_bring_quantity = $(this)
         .parent()
         .parent()
