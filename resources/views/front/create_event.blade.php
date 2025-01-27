@@ -1378,6 +1378,7 @@
                                         <h5 class="category_name-{{ $index }}">{{ $data['category'] }}</h5>
                                         <p>Total Commited</p>
                                     </div>
+                                    <input type="hidden" class="total-potluck-category-{{ $index }}" value="{{$data['categoryQuantity']}}" />
                                     <div class="ms-auto d-flex align-items-center ">
                                         @if ($data['remainingQnt'] > 0)
                                             <span
