@@ -3629,6 +3629,7 @@ function savePage3Data(close = null) {
         $(".current_step").text("4 of 4");
         $(".step_4").show();
         $(".li_guest").find(".side-bar-list").addClass("menu-success");
+        $(".li_guest").addClass("menu-success");
         active_responsive_dropdown("drop-down-event-setting");
         if (final_step == 3) {
             final_step = 4;
@@ -7774,6 +7775,8 @@ if (final_step == "2" && isCohost == "1") {
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_guest").addClass("menu-success");
+
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
     }, 1000);
