@@ -8076,6 +8076,7 @@ function update_self_bring(
     categoryItemQuantity,
     type
 ) {
+    
     $.ajax({
         url: base_url + "event/update_self_bring",
         method: "POST",
@@ -8092,17 +8093,21 @@ function update_self_bring(
                 innerUserQnt + quantity + "/" + categoryItemQuantity
             );
 
-            if (innerUserQnt + quantity >= categoryItemQuantity) {
-                let quantity = response - innerUserQnt;
-                $("#missing-category-" + categoryIndexKey).text(quantity);
-                // response=0;
-                // $("#missing-category-" + categoryIndexKey).text(0);
-            } else {
-                $("#missing-category-" + categoryIndexKey).text(response);
+            var categoryItem = parseInt(
+                $(".missing-category-h6-" + categoryIndexKey).text()
+            );
+            let remainingCategoryCount=0;
+            if (type == "plus") {
+                remainingCategoryCount = categoryItem -1
+            }else{
+                remainingCategoryCount = categoryItem + 1
+                
             }
+                $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
             
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
-            if (response == 0) {
+            if (remainingCategoryCount ==0 ) {
+                // if (response == 0) {
                 var svg =
                     '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>';
                 $(".missing-category-svg-" + categoryIndexKey).html(svg);
