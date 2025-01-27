@@ -308,6 +308,7 @@
       <div class="modal fade cmn-modal about-rsvp" id="aboutsuccess" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <form id="notification_rsvp"action="{{route('store_rsvp')}}" method="POST">
                 <div class="modal-header">
                       <div class="d-flex align-items-center">
                         <img src="" alt="rs-img" class="about-rs-img" id="notification_rsvp_profile">
@@ -366,7 +367,7 @@
                   <div class="rsvp-msgbox">
                       <h5>Message</h5>
                       <div class="input-form">
-                        <textarea name="" id="rsvp_notification_message" class="form-control inputText" id="Fname" name="Fname" required="">Sorry I can’t make it!  Next time!</textarea>
+                        <textarea name="" id="rsvp_notification_message" class="form-control inputText" id="Fname" name="Fname" required=""></textarea>
                         <label for="Fname" class="form-label input-field floating-label">Message with your RSVP</label>
                       </div>
                       <div class="d-flex align-items-center">
@@ -379,8 +380,9 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
                 </div>
+                </form>
             </div>
         </div>
       </div>

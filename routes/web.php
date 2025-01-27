@@ -237,6 +237,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
 
     Route::get('get_user_info_rsvp',  [EventListController::class, 'get_user_info_rsvp'])->name('get_user_info_rsvp');
+    Route::post('store_rsvp',  [EventListController::class, 'store_rsvp'])->name('store_rsvp');
 
 
     // //vrushali

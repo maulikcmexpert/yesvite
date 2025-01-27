@@ -2527,6 +2527,14 @@ class EventListController extends Controller
  
     }
 
+    public function store_rsvp(Request $request)
+    {
+       dd($request);
+
+        return response()->json(['status' => 1, 'event_data' => $event_data]);
+ 
+    }
+
 }
 
 
