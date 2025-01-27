@@ -1381,7 +1381,7 @@ class EventController extends BaseController
                 'self_bring' => $selfBring,
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
-                'item_carry_users' => [
+                'item_carry_users'[0] => [
                     'user_id' => $user->id,  // Use => for key-value pairs
                     'quantity' => $itemQuantity,
                 ]
@@ -1396,6 +1396,10 @@ class EventController extends BaseController
                         // 'self_bring' => $selfBring,
                         // 'self_bring_qty' => $selfBringQuantity,
                         'quantity' => $itemQuantity,
+                        'item_carry_users'[0] => [
+                            'user_id' => $user->id,  // Use => for key-value pairs
+                            'quantity' => $itemQuantity,
+                        ]
                     ]
                 ]
             ];
@@ -1419,7 +1423,7 @@ class EventController extends BaseController
         Session::put('category_item', $categories_item);
         Session::save();
         $categories = Session::get('category', []);
-        dD($categories);
+        // dD($categories);
         $category_quantity = $categories[$category_index]['category_quantity'];
         $category_item = count($categories[$category_index]['item']);
         $total_item = 0;
@@ -1428,7 +1432,7 @@ class EventController extends BaseController
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
                 if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
-                    
+
                     foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
                         $total_quantity = $total_quantity + $userVal['quantity'];
                     }
