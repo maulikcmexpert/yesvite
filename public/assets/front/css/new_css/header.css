@@ -801,6 +801,13 @@ header{
     justify-content: start !important;
 }
 
+.noification-simple-text-wrp{
+    border: 1px solid var(--border);
+    background-color: var(--lightgreay);
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 1399px) {

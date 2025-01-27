@@ -716,7 +716,7 @@
                                             </p>
                                           </div>
                                         @elseif($inner_data['media_type']=="")
-                                            <div>
+                                            <div class="noification-simple-text-wrp">
                                               <p>See post details</p>
                                             </div>
                                         @endif
