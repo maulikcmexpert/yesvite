@@ -469,13 +469,42 @@ function getNotificationList($filter = []){
         // dd($notificationInfo);
         return $final_data;
 }
+// function setposttTime($dateTime)
+// {
+//     $commentDateTime = $dateTime; 
+//     $commentTime = Carbon::parse($commentDateTime);
+//     $timeAgo = $commentTime->diffForHumans();
+//     return $timeAgo;
+// }
+
 function setposttTime($dateTime)
 {
-    $commentDateTime = $dateTime; 
-    $commentTime = Carbon::parse($commentDateTime);
-    $timeAgo = $commentTime->diffForHumans();
-    return $timeAgo;
+    $now = Carbon::now(); // Current time
+    $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
+
+    $diffInDays = $updatedTime->diffInDays($now);
+
+    if ($diffInDays > 0) {
+        return $diffInDays . 'd'; // Return in 'Xd' format
+    }
+
+    $diffInHours = $updatedTime->diffInHours($now);
+
+    if ($diffInHours > 0) {
+        return $diffInHours . 'h'; // Return in 'Xh' format
+    }
+
+    $diffInMinutes = $updatedTime->diffInMinutes($now);
+
+    if ($diffInMinutes > 0) {
+        return $diffInMinutes . 'm'; // Return in 'Xm' format
+    }
+
+    return 'just now'; // For moments less than a minute
 }
+
+
+
 function getUser($id)
 {
     return User::where('id', $id)->first();
