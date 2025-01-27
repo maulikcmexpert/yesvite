@@ -1,4 +1,3 @@
-alert(1)
 let eventData = {};
 let isCohost = $("#isCohost").val();
 var total_activities = 0;
