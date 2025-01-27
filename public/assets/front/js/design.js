@@ -2428,6 +2428,9 @@ function bindData(current_event_id) {
             setTimeout(function () {
                 setControlVisibilityForAll();
             }, 1000);
+            if (undoStack.length == 1) {
+                $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
         } else {
             $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
         }
@@ -2447,6 +2450,10 @@ function bindData(current_event_id) {
             setTimeout(function () {
                 setControlVisibilityForAll();
             }, 1000);
+
+            if (redoStack.length == 1) {
+                $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
         } else {
             $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
         }
