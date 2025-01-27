@@ -4801,8 +4801,7 @@ function plusBTN(that) {
     } else {
         quantity--;
 
-        console.log(that.parent().find(".inputs-qty").val());
-       that.parent().find(".inputs-qty").val('5');
+        that.parent().children(".input-qty").val(quantity);
     }
 }
 $(".qty-btnminus").on("click", function () {
