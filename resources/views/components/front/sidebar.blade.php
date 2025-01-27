@@ -307,8 +307,9 @@
 
       <div class="modal fade cmn-modal about-rsvp" id="aboutsuccess" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form id="notification_rsvp"action="{{route('store_rsvp')}}" method="POST">
+            <div class="modal-content"> 
+                <form id="notification_rsvp" action="{{route('store_rsvp')}}" method="POST">
+                    @csrf
                 <div class="modal-header">
                       <div class="d-flex align-items-center">
                         <img src="" alt="rs-img" class="about-rs-img" id="notification_rsvp_profile">
