@@ -2518,7 +2518,7 @@ class EventListController extends Controller
         $event_data=[
             'name'=>$event->event_name,
             'host'=>$event->hosted_by,
-            'profile_image'=>$user->profile,
+            'profile' => empty($user->profile) ? "" : asset('storage/profile/' . $user->profile),
             'firstname'=>$user->firstname,
             'lastname'=>$user->lastname
         ];
