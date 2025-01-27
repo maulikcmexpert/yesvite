@@ -269,7 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");    
+            $(".li_event_detail").addClass("menu-success");
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -298,7 +298,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-                $(".li_event_detail").addClass("menu-success");    
+            $(".li_event_detail").addClass("menu-success");
 
             $(".li_design").find(".side-bar-list").addClass("menu-success");
             $(".li_design").addClass("menu-success");
@@ -2637,6 +2637,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
+           
             console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
             var schedule_start_time=$("#" + firstActivityTime).children().find(".activity_start_time");
             schedule_start_time.prop('readonly',false);
@@ -3053,7 +3054,7 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
-    $(".li_event_detail").addClass("menu-success");    
+    $(".li_event_detail").addClass("menu-success");
 
     $(".step_2").show();
     $(".event_create_percent").text("25%");
@@ -3558,7 +3559,7 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-                $(".li_event_detail").addClass("menu-success");    
+            $(".li_event_detail").addClass("menu-success");
 
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
@@ -4238,7 +4239,7 @@ $(document).on("click", ".li_event_details", function () {
                         $(".li_design")
                             .find(".side-bar-list")
                             .addClass("menu-success");
-                            $(".li_design").addClass("menu-success");
+                        $(".li_design").addClass("menu-success");
 
                         // active_responsive_dropdown('drop-down-event-guest');
 
@@ -4541,7 +4542,6 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 });
 
 $(document).on("change", ".user_group_member .user_choice", function () {
-  
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4682,12 +4682,12 @@ function plusBTN(that) {
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
+    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
+    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
         update_self_bring(
             isvalidUserQnt,
             categoryItemKey,
@@ -4723,10 +4723,10 @@ function minusBTN(that) {
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
+    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
+    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 isvalidUserQnt,
@@ -4911,7 +4911,12 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(categoryItemKey, categoryIndexKey, userquantity, itemquantity);
+    update_self_bring(
+        categoryItemKey,
+        categoryIndexKey,
+        userquantity,
+        itemquantity
+    );
 });
 
 $(document).on("click", ".add-user-list", function () {
@@ -5817,7 +5822,7 @@ function save_image_design(downloadImage, textData) {
                     $(".li_design")
                         .find(".side-bar-list")
                         .addClass("menu-success");
-                        $(".li_design").addClass("menu-success");
+                    $(".li_design").addClass("menu-success");
 
                     active_responsive_dropdown("drop-down-event-guest");
 
@@ -8089,25 +8094,24 @@ function update_self_bring(
             categoryItemKey: categoryItemKey,
             categoryIndexKey: categoryIndexKey,
             quantity: quantity,
-            type:type,
+            type: type,
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                (innerUserQnt+quantity) + "/" + categoryItemQuantity
+                innerUserQnt + quantity + "/" + categoryItemQuantity
             );
 
-            if((innerUserQnt+quantity) >=categoryItemQuantity){
+            if (innerUserQnt + quantity >= categoryItemQuantity) {
                 let quantity = response - innerUserQnt;
                 $("#missing-category-" + categoryIndexKey).text(quantity);
                 // response=0;
                 // $("#missing-category-" + categoryIndexKey).text(0);
+            } else {
+                $("#missing-category-" + categoryIndexKey).text(response);
             }
-            // else{
-                // 
-            // }
-            // $("#missing-category-" + categoryIndexKey).text(response);
+            
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
                 var svg =
@@ -8148,7 +8152,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if((innerUserQnt+quantity) >=categoryItemQuantity){
+            if (innerUserQnt + quantity >= categoryItemQuantity) {
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
