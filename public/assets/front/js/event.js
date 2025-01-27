@@ -843,7 +843,13 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 $(document).on('click','.notification-rsvp-btn', function () {
     const eventId = $(this).data('event_id');
     const userId = $(this).data('user_id');
-console.log(`${base_url}get_user_info_rsvp`);
+    console.log(`${base_url}get_user_info_rsvp`);
+    $('#notification_rsvp_profile').attr('src', "").show();
+    $('#notification_rsvp_eventName').text("");
+    $('#notification_rsvp_host').text("");
+    $('#rsvp_user_id').val("");
+    $('#rsvp_event_id').val("");
+    $('.rsvp_initials').remove(); // Remove any previously added initials
 
     $.ajax({
         url: `${base_url}get_user_info_rsvp`,
@@ -857,6 +863,7 @@ console.log(`${base_url}get_user_info_rsvp`);
             const hosted_by = response.event_data.host;
             const event_name = response.event_data.name;
 
+
             if (profile) {
                 $('#notification_rsvp_profile').attr('src', profile).show();
             } else {
@@ -867,7 +874,7 @@ console.log(`${base_url}get_user_info_rsvp`);
             
                 $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
                 $('#notification_rsvp_profile').after(
-                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor}" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
+                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor} rsvp_initials" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
                         ${initials}
                     </h4>`
                 );
