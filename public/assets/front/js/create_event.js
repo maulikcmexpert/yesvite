@@ -8247,7 +8247,7 @@ function update_self_bring(
             );
             let remainingCategoryCount = 0;
             if (type == undefined) {
-                remainingCategoryCount = categoryItemQuantity + innerUserQnt;
+                remainingCategoryCount = categoryItemQuantity - innerUserQnt;
             } else if (type == "plus") {
                 remainingCategoryCount = categoryItem - 1;
             } else {
