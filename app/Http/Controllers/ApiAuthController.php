@@ -122,6 +122,7 @@ class ApiAuthController extends Controller
 
                 DB::rollBack();
                 Log::error('Error to register user ' . $e);
+                print_r($e);
                 return response()->json(['status' => 0, 'message' => "Something went wrong"]);
             }
         }
