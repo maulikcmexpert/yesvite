@@ -236,7 +236,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('update_notification_read',  [EventListController::class, 'UpdateNotificationRead'])->name('update_notification_read');
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
 
-    Route::get('get_user_info_rsvp',  [EventListController::class, 'get_user_info_rsvp'])->name('get_user_info_rsvp');
+    Route::post('get_user_info_rsvp',  [EventListController::class, 'get_user_info_rsvp'])->name('get_user_info_rsvp');
 
 
     // //vrushali
