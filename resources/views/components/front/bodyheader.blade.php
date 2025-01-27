@@ -331,8 +331,8 @@
                                         <!-- <p>{{$inner_data['event_name']}}</p> -->
                                       </div>
                                       <div class="d-block">
-                                        <h3>Date from : <span style="font-family: var(--SFProDisplay-Regular);"> 2025-01-27</span></h3>
-                                        <h3>Date To : <span style="font-family: var(--SFProDisplay-Regular);"> 2025-01-27 to 2025-01-29</span></h3>
+                                        <h3 class="mb-1">Date from : <span style="font-family: var(--SFProDisplay-Regular);"> {{$inner_data['old_start_end_date']}}</span></h3>
+                                        <h3>Date To : <span style="font-family: var(--SFProDisplay-Regular);"> {{$inner_data['new_start_end_date']}}</span></h3>
                                       </div>
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">

@@ -352,8 +352,29 @@ function getNotificationList($filter = []){
                     $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
                     $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
                     $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
-                    $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
-                    $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
+                    
+                    
+                    $old_start_end_date =($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
+                    $new_start_end_date = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
+
+                    $old_date_result="";
+                    $new_date_result="";
+                    // Split the old date range
+                    if($old_start_end_date!=""){
+                        list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
+                        $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
+                    }
+                    if($new_start_end_date!=""){
+                        list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
+                        $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    }
+                    // Split the new date range
+                   
+
+                    
+                    
+                    $notificationDetail['old_start_end_date'] = $old_date_result;
+                    $notificationDetail['new_start_end_date'] = $new_date_result;
                     $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
                     $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
                     $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
