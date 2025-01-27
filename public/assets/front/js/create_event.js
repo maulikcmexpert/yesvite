@@ -4799,8 +4799,9 @@ function plusBTN(that) {
             "plus"
         );
     } else {
+        quantity = parseInt(quantity, 10);
         quantity--;
-        that.parent().find(".input-qty").val(quantity);
+        that.parent().find(".input-qty").val(0);
     }
 }
 $(".qty-btnminus").on("click", function () {
@@ -4840,6 +4841,7 @@ function minusBTN(that) {
             );
             if (quantity == 0) {
                 that.parent().find(".item-quantity-minus").val(0);
+                that.parent().find(".input-qty").val(0);
             }
         }
     } else {
