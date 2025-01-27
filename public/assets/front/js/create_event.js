@@ -269,6 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+            $(".li_event_detail").addClass("menu-success");    
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -297,7 +298,10 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
+
             $(".li_design").find(".side-bar-list").addClass("menu-success");
+            $(".li_design").addClass("menu-success");
             active_responsive_dropdown("drop-down-event-guest");
             $(".event_create_percent").text("75%");
             $(".current_step").text("3 of 4");
@@ -720,8 +724,8 @@ function datepicker() {
         })
         .on("dp.hide", function (e) {
             // Automatically set the selected value in the input field when the picker closes
-            const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-            $(this).val(selectedTime); // Set the formatted time value in the input field
+            // const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+            // $(this).val(selectedTime); // Set the formatted time value in the input field
         });
 
     // Ensure input field is clear when the page loads
@@ -730,40 +734,40 @@ function datepicker() {
 }
 
 // function start_timepicker() {
-//     $(".start_timepicker").datetimepicker({
-//         //  keepOpen: true,
-//         format: "LT",
-//         icons: {
-//             up: "fa fa-chevron-up",
-//             down: "fa fa-chevron-down",
-//         },
-//         useCurrent: false,
-//         ignoreReadonly: true,
-//         stepping: 15,
-//         // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+    $(".start_timepicker").datetimepicker({
+        //  keepOpen: true,
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
 
-//         // Set stepping to 15 minutes
-//         // defaultDate: now
-//         //  debug: true
-//     }).on('dp.show', function () {
-//         $(this).val(""); // Set the formatted time value in the input field
+        // Set stepping to 15 minutes
+        // defaultDate: now
+        //  debug: true
+    }).on('dp.show', function () {
+        $(this).val(""); // Set the formatted time value in the input field
 
-//         const picker = $(this).data("DateTimePicker");
-//         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
-//         // Set the picker to the closest 15-minute time dynamically
-//         picker.date(closest15MinTime);
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime);
 
-//         $(".start_timepicker").val("");
+        $(".start_timepicker").val("");
 
-//     }).on('dp.hide', function (e) {
-//         // Automatically set the selected value in the input field when the picker closes
-//         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-//         $(this).val(selectedTime); // Set the formatted time value in the input field
-//     });
+    }).on('dp.hide', function (e) {
+        // Automatically set the selected value in the input field when the picker closes
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime); // Set the formatted time value in the input field
+    });
 
-//     // Ensure input field is clear when the page loads
-//     $(".start_timepicker").val("");
+    // Ensure input field is clear when the page loads
+    $(".start_timepicker").val("");
 
 // }
 
@@ -2622,11 +2626,19 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
+            console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
+            var schedule_start_time=$("#" + firstActivityTime).children().find(".activity_start_time");
+            schedule_start_time.prop('readonly',false);
+            schedule_start_time.val("45555985sdsddsd");
+            schedule_start_time.prop('readonly',true);
+
             toastr.error("activity can not start before event");
             $("#" + firstActivityTime)
                 .children()
                 .find(".activity_start_time")
                 .val("");
+
+            // return;
         }
 
         var preEndTime = $(this)
@@ -3030,6 +3042,8 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");    
+
     $(".step_2").show();
     $(".event_create_percent").text("25%");
     $(".current_step").text("1 of 4");
@@ -3533,6 +3547,8 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
+
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
             // alert(stepVal);
@@ -3617,6 +3633,7 @@ function savePage3Data(close = null) {
         $(".current_step").text("4 of 4");
         $(".step_4").show();
         $(".li_guest").find(".side-bar-list").addClass("menu-success");
+        $(".li_guest").addClass("menu-success");
         active_responsive_dropdown("drop-down-event-setting");
         if (final_step == 3) {
             final_step = 4;
@@ -4210,6 +4227,7 @@ $(document).on("click", ".li_event_details", function () {
                         $(".li_design")
                             .find(".side-bar-list")
                             .addClass("menu-success");
+                            $(".li_design").addClass("menu-success");
 
                         // active_responsive_dropdown('drop-down-event-guest');
 
@@ -4404,7 +4422,6 @@ enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
     console.log(id);
-
     if (id == "sidebar_add_co_host") {
         document.body.classList.add("no-scroll"); // Disable background scrolling
     }
@@ -4654,13 +4671,14 @@ function plusBTN(that) {
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= (quantity+innerUserQnt)) {
+    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
         update_self_bring(
-            innerUserQnt,
+            isvalidUserQnt,
             categoryItemKey,
             categoryIndexKey,
             quantity,
@@ -4694,12 +4712,13 @@ function minusBTN(that) {
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity) {
+    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
-                innerUserQnt,
+                isvalidUserQnt,
                 categoryItemKey,
                 categoryIndexKey,
                 quantity,
@@ -5496,11 +5515,20 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected +
             ""
     );
+    $("#eventTempImage").attr(
+        "src",
+        base_url +
+            "public/storage/event_images/" +
+            eventData.desgin_selected +
+            ""
+    );
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
+        $('.event_images_slider').css('display','block');
+        $('.event_images_template').css('display','none');
         // eventData.slider_images.forEach((image) => {
         //     const imageHtml = `
         //         <div class="item">
@@ -5526,7 +5554,7 @@ $(document).on("click", ".final_checkout", function () {
                 }
             }
         });
-    }
+   
 
     $(".event_images_slider").owlCarousel({
         loop: true,
@@ -5553,6 +5581,14 @@ $(document).on("click", ".final_checkout", function () {
             },
         },
     });
+}else{
+    alert();
+    $('.event_images_slider').css('display','none');
+    $('.event_images_template').css('display','block');
+    // $('.event_images_slider').removeClass('owl-carousel');
+    // $('.event_images_slider').removeClass('owl-theme');
+} 
+
     // var swiper = new Swiper(".event_images_slider", {
     //     slidesPerView: 1,
     //     loop: false,
@@ -5770,6 +5806,7 @@ function save_image_design(downloadImage, textData) {
                     $(".li_design")
                         .find(".side-bar-list")
                         .addClass("menu-success");
+                        $(".li_design").addClass("menu-success");
 
                     active_responsive_dropdown("drop-down-event-guest");
 
@@ -7760,6 +7797,8 @@ if (final_step == "2" && isCohost == "1") {
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_guest").addClass("menu-success");
+
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
     }, 1000);
@@ -7810,6 +7849,8 @@ function step2Open() {
         $(".edit-design").addClass("menu-success");
         $(".edit-design").removeClass("active");
         $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(".li_design").addClass("menu-success");
+
         $(".event_create_percent").text("50%");
         $(".current_step").text("2 of 4");
         console.log(eventData);
@@ -8047,12 +8088,14 @@ function update_self_bring(
             );
 
             if((innerUserQnt+quantity) >=categoryItemQuantity){
-                response=0;
-                $("#missing-category-" + categoryIndexKey).text(0);
-            }else{
-                // let quantity = response - innerUserQnt;
+                let quantity = response - innerUserQnt;
                 $("#missing-category-" + categoryIndexKey).text(quantity);
+                // response=0;
+                // $("#missing-category-" + categoryIndexKey).text(0);
             }
+            // else{
+                // 
+            // }
             // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
