@@ -244,7 +244,7 @@
                                                 // Total attending
                                                 $totalAttending = $totalAdults + $totalKids;
                                             @endphp
-
+@if (!empty($guestArray))
                                             @foreach($guestArray as $guest)
                                        {{-- {{     dd($guest['id'])}} --}}
                                                 @if (isset($guest['user']))
@@ -403,6 +403,7 @@
                                                     </div>
                                                 @endif
                                             @endforeach
+                                            @endif
 
 
                                         </div>
