@@ -717,7 +717,7 @@
                                           </div>
                                         @elseif($inner_data['media_type']=="")
                                             <div class="noification-simple-text-wrp">
-                                              <p>See post details</p>
+                                              <p>{{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}</p>
                                             </div>
                                         @endif
                                       </div>
