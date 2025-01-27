@@ -73,7 +73,7 @@
                     </td> --}}
                     <td>
                         <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
-                            <a href="{{route('rsvp', ['userId' => encrypt($eventData['owner_id']), 'eventId' => encrypt($eventData['event_id'])])}}" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">View Invitation</a>
+                            <a href="{{route('rsvp', ['event_invited_user_id' => encrypt($eventData['event_invited_user_id']),'eventId' => encrypt($eventData['event_id'])])}}" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">View Invitation</a>
                         </div>
                     </td>
                 </tr>

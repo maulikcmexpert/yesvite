@@ -694,9 +694,9 @@ function getClosest15MinuteTime() {
     now.setMilliseconds(0); // Reset milliseconds to 0
     return now;
 }
-$(".timepicker").on("dp.show", function () {
-    $(this).val(""); // Clear the input when the picker is shown
-});
+// $(".timepicker").on("dp.show", function () {
+//     $(this).val(""); // Clear the input when the picker is shown
+// });
 function datepicker() {
     $(".timepicker")
         .datetimepicker({
@@ -717,15 +717,25 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const closest15MinTime = getClosest15MinuteTime();
-
-            // Set the picker to the closest 15-minute time dynamically
-            picker.date(closest15MinTime);
+            const currentValue = $(this).val(); 
+            console.log(currentValue);
+            
+            if (currentValue) {
+                // If input has a value, use it to set the picker
+                const currentMoment = moment(currentValue, "LT"); // Parse input as moment object
+                if (currentMoment.isValid()) {
+                    picker.date(currentMoment); // Set the picker to the input value
+                }
+            } else {
+                // If input is empty, set picker to the nearest 15-minute interval
+                const closest15MinTime = getClosest15MinuteTime();
+                picker.date(closest15MinTime);
+            }
         })
         .on("dp.hide", function (e) {
             // Automatically set the selected value in the input field when the picker closes
-            // const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-            // $(this).val(selectedTime); // Set the formatted time value in the input field
+            const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+            $(this).val(selectedTime); // Set the formatted time value in the input field
         });
 
     // Ensure input field is clear when the page loads
@@ -764,6 +774,14 @@ function datepicker() {
         // Automatically set the selected value in the input field when the picker closes
         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
         $(this).val(selectedTime); // Set the formatted time value in the input field
+
+        if (e.date) {
+            const endTime = e.date.clone().add(1, 'hours'); // Add 1 hour to the selected time
+            const picker = $('#end-time').data("DateTimePicker");
+            picker.date(endTime);
+
+
+        }
     });
 
     // Ensure input field is clear when the page loads
@@ -1216,8 +1234,8 @@ $("#end_time").on("change", function () {
 
         if (start_time) {
             var startTime = moment(start_time, "hh:mm A"); // Parse the start time string
-            var endTime = startTime.clone().add(1, "hours");
-            $("#end-time").val(endTime.format("hh:mm A"));
+            // var endTime = startTime.clone().add(1, "hours");
+            // $("#end-time").val(endTime.format("hh:mm A"));
         } else {
             $("#end-time").val(""); // Clear end time if start time is empty
         }
