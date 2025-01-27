@@ -1902,7 +1902,6 @@ function bindData(current_event_id) {
 
     function deleteTextbox() {
         addToUndoStack(canvas);
-        alert(0);
         canvas.remove(canvas.getActiveObject());
         canvas.renderAll();
     }
