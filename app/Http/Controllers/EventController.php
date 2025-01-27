@@ -1428,7 +1428,7 @@ class EventController extends BaseController
                 $total_item = $total_item + $value['quantity'];
                 if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
                     foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
-                        $total_quantity = $total_quantity + $userkey['quantity'];
+                        $total_quantity = $total_quantity + $userVal['quantity'];
                     }
                     if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
                         $total_quantity = $total_quantity + $value['self_bring_qty'];
