@@ -252,7 +252,7 @@
 
                                       
                                       </div>
-                                        @if($inner_data['co_host_notification']=="1")
+                                        @if($inner_data['co_host_notification']!="1")
                                           <div>
                                               <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
                                           </div>
