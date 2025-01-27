@@ -2622,7 +2622,8 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
-            console.log($("#" + firstActivityTime).children().html());
+            console.log($("#" + firstActivityTime).closest(".row").find(".activity_start_time").val());
+            
             toastr.error("activity can not start before event");
             $("#" + firstActivityTime)
                 .children()
