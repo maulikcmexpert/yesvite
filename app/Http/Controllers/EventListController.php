@@ -2512,8 +2512,17 @@ class EventListController extends Controller
     public function get_user_info_rsvp(Request $request)
     {
         $event  = Event::where('id',$request->eventId)->first();
-        dd($event);
-        // dd($user);
+        $user_id=$event->user_id;
+
+        $user =User::where('id',$user_id)->first();
+        $event_data=[
+            'name'=>$event->event_name,
+            'host'=>$event->hosted_by,
+            'profile_image'=>$user->profile,
+            'firstname'=>$user->firstname,
+            'lastname'=>$user->lastname
+        ];
+        dd($event_data);
     }
 
 }
