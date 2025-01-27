@@ -3,7 +3,7 @@
                   $notification_list=getNotificationList();
                   $i=0;
               @endphp
-              {{$$notification_list}}
+              {{$notification_list}}
 @if (Auth::guard('web')->check())
 
 <header>
