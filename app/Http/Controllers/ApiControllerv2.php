@@ -2938,7 +2938,7 @@ class ApiControllerv2 extends Controller
                 }
             }
 
-            if ($phone != "" && strlen($phone) > 5 ) {
+            if ($phone != "" && strlen($phone) > 5) {
                 $existingContact = contact_sync::where('phoneWithCode', $phone)->first();
                 if (isset($existingContact)) {
                     $existingContact->update([
@@ -5289,15 +5289,15 @@ class ApiControllerv2 extends Controller
                     );
                     if (isset($filteredIds) && count($filteredIds) != 0) {
 
-                    $notificationParam = [
-                        'sender_id' => $user->id,
-                        'event_id' => $eventData['event_id'],
-                        'newUser' => $filteredIds
-                    ];
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'newUser' => $filteredIds
+                        ];
                         // dd($newInviteGuest);
 
-                    sendNotification('invite', $notificationParam);
-                }
+                        sendNotification('invite', $notificationParam);
+                    }
 
                     $newInviteGuest = array_map(
                         fn($guest) => $guest['id'],
@@ -7586,7 +7586,7 @@ class ApiControllerv2 extends Controller
 
                 $coHostDetail1['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
 
-                $coHostDetail1['message_privacy'] =  (empty($hostValues->user->message_privacy)||$hostValues->user->message_privacy==NULL)?"":$hostValues->user->message_privacy;
+                $coHostDetail1['message_privacy'] =  (empty($hostValues->user->message_privacy) || $hostValues->user->message_privacy == NULL) ? "" : $hostValues->user->message_privacy;
 
                 $coHostDetail1['visible'] = (empty($hostValues->user->visible) || $hostValues->user->visible == NULL) ? "" : $hostValues->user->visible;
 
