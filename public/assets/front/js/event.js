@@ -843,6 +843,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 $(document).on('click','.notification-rsvp-btn', function () {
     const eventId = $(this).data('event_id');
     const userId = $(this).data('user_id');
+console.log(`${base_url}get_user_info_rsvp`);
 
     $.ajax({
         url: `${base_url}get_user_info_rsvp`,
