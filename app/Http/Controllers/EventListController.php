@@ -2629,9 +2629,14 @@ if ($rsvpSent != null) {
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
  
-    }
+  
 }
 
+} catch (QueryException $e) {
+    dd($e);
+    DB::rollBack();
+} catch (\Exception $e) {
+    dd($e);
 }
 
 
