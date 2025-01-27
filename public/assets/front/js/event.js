@@ -874,7 +874,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
             
                 $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
                 $('#notification_rsvp_profile').after(
-                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor} rsvp_initials" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
+                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor} rsvp_initials" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;color: white">
                         ${initials}
                     </h4>`
                 );
