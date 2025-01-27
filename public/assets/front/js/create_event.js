@@ -718,14 +718,16 @@ function datepicker() {
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
             const currentValue = $(this).val(); 
-            if (!currentValue) {
-                // If the input is empty, set the picker to the closest 15-minute interval
+            if (currentValue) {
+                // If input has a value, use it to set the picker
+                const currentMoment = moment(currentValue, "LT"); // Parse input as moment object
+                if (currentMoment.isValid()) {
+                    picker.date(currentMoment); // Set the picker to the input value
+                }
+            } else {
+                // If input is empty, set picker to the nearest 15-minute interval
                 const closest15MinTime = getClosest15MinuteTime();
                 picker.date(closest15MinTime);
-            } else {
-                // If the input has a value, set the picker to that value
-                const currentMoment = moment(currentValue, "LT"); // Parse the input value as a moment object
-                picker.date(currentMoment.isValid() ? currentMoment : null);
             }
         })
         .on("dp.hide", function (e) {
