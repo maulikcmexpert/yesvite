@@ -775,11 +775,11 @@ function start_timepicker() {
         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
         $(this).val(selectedTime); // Set the formatted time value in the input field
 
-        if ( $('#end-time').val()=="") {
-            const endTime = e.date.clone().add(1, "hours");
-            const timePicker = $(".timepicker").data("DateTimePicker");
-            timePicker.date(endTime);
-        }
+        // if ( $('#end-time').val()=="") {
+        //     const endTime = e.date.clone().add(1, "hours");
+        //     const timePicker = $(".timepicker").data("DateTimePicker");
+        //     timePicker.date(endTime);
+        // }
     });
 
     // Ensure input field is clear when the page loads
