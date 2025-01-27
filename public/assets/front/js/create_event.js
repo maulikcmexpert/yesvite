@@ -717,7 +717,9 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const closest15MinTime = getClosest15MinuteTime();
+            // const closest15MinTime = getClosest15MinuteTime();
+            const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+
 
             // Set the picker to the closest 15-minute time dynamically
             picker.date(closest15MinTime);  
