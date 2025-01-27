@@ -1,3 +1,5 @@
+{{dd($notification_list);}}
+
 @if (Auth::guard('web')->check())
 
 <header>
