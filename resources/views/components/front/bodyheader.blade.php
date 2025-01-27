@@ -369,9 +369,7 @@
                                       </div>
                                       <div>
                                         <!-- <p>{{$inner_data['event_name']}} Potluck</p> -->
-                                        <!-- @if($inner_data['read']=="0") -->
                                             <h6 class="notification-read-dot"></h6>
-                                          <!-- @endif -->
                                       </div>
                                       <div class="d-flex align-items-center justify-content-between">
                                         <h3>Item</h3>
