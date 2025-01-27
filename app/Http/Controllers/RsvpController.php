@@ -453,7 +453,7 @@ class RsvpController extends BaseController
             //     $rsvp = "1";
             // }
             if($event_invited_user_id!=""){
-                $rsvp_status = EventInvitedUser::where(['id' => $event_invited_user_id])->first()->rsvp_status;
+                $rsvp_status = EventInvitedUser::where(['id' => $event_invited_user_id,'user_id'=>$user_id])->first()->rsvp_status;
             }
 
             $messages = [];
