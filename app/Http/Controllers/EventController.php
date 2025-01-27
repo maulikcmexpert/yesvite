@@ -1443,9 +1443,9 @@ class EventController extends BaseController
                 }
             }
         }
-        if($selfBring !="" && $selfBringQuantity!="" ){
-            $total_item=0;
-        }else{
+        if ($selfBring != "" && $selfBringQuantity != "") {
+            $total_item = $totalmissing + 0;
+        } else {
 
             $total_item = $totalmissing + $itemQuantity;
         }
