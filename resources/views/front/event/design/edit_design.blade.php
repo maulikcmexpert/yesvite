@@ -434,7 +434,7 @@
                     </div>
                     <div class="range-slider">
                         <div id="letterSpacingTooltip" class="tooltip"></div>
-                        <input id="letterSpacingRange" type="range" step="1" class="range" value="0" min="0" max="100">
+                        <input id="letterSpacingRange" type="range" step="1" class="range" value="0" min="0" max="500">
                     </div>
                 </div>
 
