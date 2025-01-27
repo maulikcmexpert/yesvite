@@ -1,3 +1,4 @@
+alert(1)
 let eventData = {};
 let isCohost = $("#isCohost").val();
 var total_activities = 0;
@@ -4785,7 +4786,7 @@ function plusBTN(that) {
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
-    if (quantity > 0) {
+    if (quantity > 0) { 
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
@@ -4799,9 +4800,10 @@ function plusBTN(that) {
             "plus"
         );
     } else {
-        quantity = parseInt(quantity, 10);
         quantity--;
-        that.parent().find(".input-qty").val(0);
+
+        console.log(that.parent().find(".inputs-qty").val());
+       that.parent().find(".inputs-qty").val('5');
     }
 }
 $(".qty-btnminus").on("click", function () {
