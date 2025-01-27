@@ -124,7 +124,7 @@ class EventListController extends Controller
                         $eventDetail['allow_limit'] =(isset($value->event_settings->allow_limit)&& $value->event_settings->allow_limit)? $value->event_settings->allow_limit:"";
                         $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                        $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                        $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
 
@@ -330,7 +330,7 @@ class EventListController extends Controller
                         $eventPastDetail['allow_limit'] =isset($value->event_settings->allow_limit)? $value->event_settings->allow_limit:'';
                         $eventPastDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                         $eventPastDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                        $eventPastDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                        $eventPastDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                         $eventPastDetail['kids'] = 0;
                         $eventPastDetail['adults'] = 0;
                         $eventPastDetail['event_plan_name'] = $value->subscription_plan_name;
@@ -533,19 +533,43 @@ class EventListController extends Controller
 
                 $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
+                $color = ['blue', 'green', 'yellow', 'orange'];
                 $events_calender = [];
-                $color=['blue','orange','green','yellow'];
-                $colorIndex = 0;
-              
+                
+                $groupedEvents = [];
                 foreach ($eventcalenderdata as $event) {
-                    $colorClass = $color[$colorIndex % count($color)];
-                    $colorIndex++;
-                    $events_calender[] = [
-                        'date' => $event->start_date, 
-                        'title' => $event->event_name,    
-                        'color' => $colorClass    
-                    ];
+                    $groupedEvents[$event->start_date][] = $event;
                 }
+                foreach ($groupedEvents as $date => $eventsOnDate) {
+                    $colorIndex = 0; 
+                    usort($eventsOnDate, function ($a, $b) {
+                        return strcmp($a->event_name, $b->event_name); 
+                    });
+                
+                    foreach ($eventsOnDate as $event) {
+                        $colorClass = $color[$colorIndex % count($color)];
+                        $colorIndex++; 
+                        $events_calender[] = [
+                            'date' => $event->start_date,
+                            'title' => $event->event_name,
+                            'color' => $colorClass
+                        ];
+                    }
+                }
+
+                // $events_calender = [];
+                // $color=['blue','orange','green','yellow'];
+                // $colorIndex = 0;
+              
+                // foreach ($eventcalenderdata as $event) {
+                //     $colorClass = $color[$colorIndex % count($color)];
+                //     $colorIndex++;
+                //     $events_calender[] = [
+                //         'date' => $event->start_date, 
+                //         'title' => $event->event_name,    
+                //         'color' => $colorClass    
+                //     ];
+                // }
 
                 $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
 
@@ -566,15 +590,39 @@ class EventListController extends Controller
         return $hoursElapsed;
     }
 
-    function setpostTime($dateTime)
+    // function setpostTime($dateTime)
+    // {
+    //     $commentDateTime = $dateTime; 
+    //     $commentTime = Carbon::parse($commentDateTime);
+    //     $timeAgo = $commentTime->diffForHumans();
+    //     return $timeAgo;
+    // }
+
+    function setupcomingpostTime($updatedAt)
     {
-        $commentDateTime = $dateTime; 
-        $commentTime = Carbon::parse($commentDateTime);
-        $timeAgo = $commentTime->diffForHumans();
-        return $timeAgo;
+        $now = Carbon::now(); // Current time
+        $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
+    
+        $diffInDays = $updatedTime->diffInDays($now);
+    
+        if ($diffInDays > 0) {
+            return $diffInDays . 'd'; // Return in 'Xd' format
+        }
+    
+        $diffInHours = $updatedTime->diffInHours($now);
+    
+        if ($diffInHours > 0) {
+            return $diffInHours . 'h'; // Return in 'Xh' format
+        }
+    
+        $diffInMinutes = $updatedTime->diffInMinutes($now);
+    
+        if ($diffInMinutes > 0) {
+            return $diffInMinutes . 'm'; // Return in 'Xm' format
+        }
+    
+        return 'just now'; // For moments less than a minute
     }
-
-
     public function fetchPastEvents(Request $request) {
         // dd(100);
         $limit = $request->input('limit'); // Default limit
@@ -642,7 +690,7 @@ class EventListController extends Controller
                 $eventPastDetail['allow_limit'] = $value->event_settings->allow_limit;
                 $eventPastDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                 $eventPastDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                $eventPastDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                $eventPastDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                 $eventPastDetail['kids'] = 0;
                 $eventPastDetail['adults'] = 0;
                 $eventPastDetail['event_plan_name'] = $value->subscription_plan_name;
@@ -848,7 +896,7 @@ class EventListController extends Controller
                 $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
                 $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                 $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                 $eventDetail['kids'] = 0;
                 $eventDetail['adults'] = 0;
 
@@ -1053,7 +1101,7 @@ class EventListController extends Controller
                 $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
                 $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                 $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                 $eventDetail['kids'] = 0;
                 $eventDetail['adults'] = 0;
 
@@ -1328,7 +1376,7 @@ class EventListController extends Controller
                 $eventPastDetail['allow_limit'] = $value->event_settings->allow_limit;
                 $eventPastDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                 $eventPastDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
-                $eventPastDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                $eventPastDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                 $eventPastDetail['kids'] = 0;
                 $eventPastDetail['adults'] = 0;
                 $eventPastDetail['event_plan_name'] = $value->subscription_plan_name;
@@ -1490,7 +1538,7 @@ class EventListController extends Controller
                 $eventDetail['adult_only_party'] = (isset($value->event_settings->adult_only_party)&&$value->event_settings->podluck!="")?$value->event_settings->podluck:"";
                 $eventDetail['host_name'] = $value->hosted_by;
                 $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
-                $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                 $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                 $eventDetail['allow_limit'] = (isset($value->event_settings->allow_limit)&&$value->event_settings->allow_limit!="")?$value->event_settings->allow_limit:"";
                 $eventDetail['kids'] = 0;
@@ -1643,7 +1691,7 @@ class EventListController extends Controller
                     $eventDetail['host_firstname'] = $value->event->user->firstname;
                     $eventDetail['host_lastname'] = $value->event->user->lastname;
                     $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
-                    $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
+                    $eventDetail['post_time'] =  $this->setupcomingpostTime($value->event->updated_at);
                     $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
                     $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit)&&$value->event->event_settings->allow_limit!="")?$value->event->event_settings->allow_limit:"";
                     $images = EventImage::where('event_id', $value->event->id)->first();
@@ -1816,7 +1864,7 @@ class EventListController extends Controller
                     $eventDetail['host_firstname'] = $value->event->user->firstname;
                     $eventDetail['host_lastname'] = $value->event->user->lastname;
                     $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
-                    $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
+                    $eventDetail['post_time'] =  $this->setupcomingpostTime($value->event->updated_at);
                     $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
                     $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit)&&$value->event->event_settings->allow_limit!="")?$value->event->event_settings->allow_limit:"";
                     $images = EventImage::where('event_id', $value->event->id)->first();
@@ -2000,7 +2048,7 @@ class EventListController extends Controller
                             $eventDetail['host_firstname'] = $value->user->firstname;
                             $eventDetail['host_lastname'] = $value->user->lastname;
                             $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
-                            $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                            $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                             $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                             $eventDetail['allow_limit'] = (isset($value->event_settings->allow_limit)&&$value->event_settings->allow_limit!="")?$value->event_settings->allow_limit:"";
                             $eventDetail['kids'] = 0;
@@ -2410,7 +2458,7 @@ class EventListController extends Controller
                     $notificationDetail['post_message'] = (!empty($values->post->post_message)) ? $values->post->post_message : "";
                     $notificationDetail['notification_message'] = $values->notification_message;
                     $notificationDetail['read'] = $values->read;
-                    $notificationDetail['post_time'] = $this->setpostTime($values->created_at);
+                    $notificationDetail['post_time'] = $this->setupcomingpostTime($values->created_at);
                     $notificationDetail['created_at'] = $values->created_at;
                     $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
                     if (!empty($checkrsvp)) {

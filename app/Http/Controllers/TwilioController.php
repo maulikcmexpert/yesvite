@@ -4,48 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserOpt;
+use Illuminate\Support\Facades\Log;
 
 class TwilioController extends Controller
 {
     public function handleIncomingMessage(Request $request)
     {
-        // sendSMSForApplication("+919723840340", 'Yesvite:Pratik has invited you to Test. Reply "YES" to view details, RSVP, and to receive future invites. Reply STOP to opt out.');
-        // die;
-        // Get the message details from Twilio's webhook
-        $from = $request->input('From'); // Sender's phone number
-        $body = $request->input('Body'); // Message content (case insensitive)
+        Log::info('Webhook triggered: Incoming message data', [
+            'request_payload' => $request->all()
+        ]);
+        $from = $request->input('From');
+        $body = $request->input('Body');
+        Log::info('Extracted data from webhook', [
+            'from' => $from,
+            'body' => $body
+        ]);
 
-        // Sanitize and process the message
         $body = strtolower(trim($body));
+        Log::info('Normalized body for processing', ['normalized_body' => $body]);
 
         handleIncomingMessage($from, $body);
 
-        // $user = UserOpt::where('phone', $from)->first();
+
 
         if ($body == 'yes') {
-            // // Opt-in logic
-            // if ($user) {
-            //     $user->opt_in_status = true;
-            //     $user->save();
-            // } else {
-            //     // Create a new user if not found
-            //     UserOpt::create([
-            //         'phone' => $from,
-            //         'opt_in_status' => true,
-            //     ]);
-            // }
+            Log::info('User subscribed', ['from' => $from]);
 
             return response("You've been subscribed. Thank you!", 200);
         } elseif ($body == 'stop') {
-            // // Opt-out logic
-            // if ($user) {
-            //     $user->opt_in_status = false;
-            //     $user->save();
-            // }
+            Log::info('User unsubscribed', ['from' => $from]);
 
             return response("You've been unsubscribed. Reply START to resubscribe.", 200);
         } else {
-            // Handle unknown messages
+            Log::info('Invalid response received', ['from' => $from, 'body' => $body]);
+
             return response("Invalid response. Reply YES to subscribe or STOP to unsubscribe.", 200);
         }
     }

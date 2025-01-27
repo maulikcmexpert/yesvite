@@ -676,6 +676,10 @@ class AuthController extends Controller
 
         $userDetails = User::where('email', $request->email)->first();
 
+        if($userDetails==null){
+           return redirect()->back()->with('msg', 'You have not entered existing email');
+        }
+
         $user_id = $userDetails->id;
 
         $digit1 = substr($token, 0, 1);

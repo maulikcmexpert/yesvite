@@ -7,8 +7,8 @@
 
 .media-msg .reaction {
   position: absolute; 
-  bottom: 0;
-  right: 0;
+  bottom: -4px;
+  left: -3px;
   width: 22px;
   height: 22px;
   background: #fff;
