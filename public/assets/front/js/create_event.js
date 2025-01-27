@@ -269,6 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+            $(".li_event_detail").addClass("menu-success");    
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -297,7 +298,10 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
+
             $(".li_design").find(".side-bar-list").addClass("menu-success");
+            $(".li_design").addClass("menu-success");
             active_responsive_dropdown("drop-down-event-guest");
             $(".event_create_percent").text("75%");
             $(".current_step").text("3 of 4");
@@ -2622,12 +2626,15 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
-            console.log($("#" + firstActivityTime).children().html());
+            console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
+            
             toastr.error("activity can not start before event");
             $("#" + firstActivityTime)
                 .children()
                 .find(".activity_start_time")
                 .val("");
+
+            return;
         }
 
         var preEndTime = $(this)
@@ -3031,6 +3038,8 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");    
+
     $(".step_2").show();
     $(".event_create_percent").text("25%");
     $(".current_step").text("1 of 4");
@@ -3534,6 +3543,8 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
+
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
             // alert(stepVal);
@@ -3618,6 +3629,7 @@ function savePage3Data(close = null) {
         $(".current_step").text("4 of 4");
         $(".step_4").show();
         $(".li_guest").find(".side-bar-list").addClass("menu-success");
+        $(".li_guest").addClass("menu-success");
         active_responsive_dropdown("drop-down-event-setting");
         if (final_step == 3) {
             final_step = 4;
@@ -4211,6 +4223,7 @@ $(document).on("click", ".li_event_details", function () {
                         $(".li_design")
                             .find(".side-bar-list")
                             .addClass("menu-success");
+                            $(".li_design").addClass("menu-success");
 
                         // active_responsive_dropdown('drop-down-event-guest');
 
@@ -5772,6 +5785,7 @@ function save_image_design(downloadImage, textData) {
                     $(".li_design")
                         .find(".side-bar-list")
                         .addClass("menu-success");
+                        $(".li_design").addClass("menu-success");
 
                     active_responsive_dropdown("drop-down-event-guest");
 
@@ -7762,6 +7776,8 @@ if (final_step == "2" && isCohost == "1") {
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_guest").addClass("menu-success");
+
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
     }, 1000);
@@ -7812,6 +7828,8 @@ function step2Open() {
         $(".edit-design").addClass("menu-success");
         $(".edit-design").removeClass("active");
         $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(".li_design").addClass("menu-success");
+
         $(".event_create_percent").text("50%");
         $(".current_step").text("2 of 4");
         console.log(eventData);
