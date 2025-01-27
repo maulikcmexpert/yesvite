@@ -367,7 +367,7 @@
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                                          <h6 class="notification-read-dot mt-1 text-right ml-auto"></h6>
+                                          <h6 class="notification-read-dot mt-1 text-right"></h6>
                                         </div>
                                       </div>
                                       <div>
