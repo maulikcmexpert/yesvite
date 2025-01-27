@@ -1,6 +1,13 @@
 <script type="text/javascript">
     $(function() {
-
+        
+$("#credit_coin").on('input', function(event) {
+    const inputVal = $(this).val();
+    // Check if the input contains any numbers
+    if (/\d/.test(inputVal)) {
+        $(this).val(inputVal.replace(/\d/g, '')); // Remove numbers
+    }
+});
 $("#addCoin_form").validate({
     rules: {
         credit_coin: {
