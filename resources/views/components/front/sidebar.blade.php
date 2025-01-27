@@ -316,7 +316,7 @@
                         <div>
                           <h4 class="modal-title" id="notification_rsvp_eventName"></h4>
                           <span>Hosted by: <span id="notification_rsvp_host"></span></span>
-                          <input type="hidden" id="rsvp_user_id" />
+                          <input type="hidden" name="rsvp_user_id" id="rsvp_user_id" />
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
