@@ -211,7 +211,7 @@
                                             : '';
 
                                         $l = isset($inner_data['last_name']) && !empty($inner_data['last_name'])
-                                            ? strtoupper($inner_data['last_name'][0])
+                                             ? strtoupper($inner_data['last_name'][0])
                                             : '';
 
                                         $initials = $f . $l;
@@ -1367,7 +1367,7 @@
                                             </a>
                                         </li> --}}
                                      @endif
-                                    
+
                                  </ul>
                              </div>
 
