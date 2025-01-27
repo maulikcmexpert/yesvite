@@ -8047,12 +8047,14 @@ function update_self_bring(
             );
 
             if((innerUserQnt+quantity) >=categoryItemQuantity){
-                response=0;
-                $("#missing-category-" + categoryIndexKey).text(0);
-            }else{
-                // let quantity = response - innerUserQnt;
+                let quantity = response - innerUserQnt;
                 $("#missing-category-" + categoryIndexKey).text(quantity);
+                // response=0;
+                // $("#missing-category-" + categoryIndexKey).text(0);
             }
+            // else{
+                // 
+            // }
             // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
