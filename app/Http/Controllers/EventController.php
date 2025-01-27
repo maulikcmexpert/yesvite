@@ -1381,6 +1381,10 @@ class EventController extends BaseController
                 'self_bring' => $selfBring,
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
+                'item_carry_users' => [
+                    'user_id' => $user->id,  // Use => for key-value pairs
+                    'quantity' => $itemQuantity,
+                ]
             ];
         } else {
             $categories[$category_index] = [
@@ -1422,8 +1426,13 @@ class EventController extends BaseController
         if (isset($categories[$category_index]['item']) && !empty($categories[$category_index]['item'])) {
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
-                if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-                    $total_quantity = $total_quantity + $value['self_bring_qty'];
+                if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
+                    foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
+                        $total_quantity = $total_quantity + $userkey['quantity'];
+                    }
+                    if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+                        $total_quantity = $total_quantity + $value['self_bring_qty'];
+                    }
                 }
             }
         }
@@ -1446,7 +1455,7 @@ class EventController extends BaseController
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-// Dd($data)
+        // Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
         return response()->json(['view' => view('front.event.potluck.potluckCategoryItem', $data)->render(), 'qty' => $qty, 'total_item' => $total_item]);
@@ -1462,9 +1471,9 @@ class EventController extends BaseController
 
 
         $lastItemIndex = count($categories) > 0 && end($categories) === null ? 0 : count($categories);
-        
+
         $categoryNames =  collect($categories)->pluck('category_name')->toArray();
-        
+
 
         if (isset($edit_category_id) && $edit_category_id != '') {
             $status = '2';
@@ -1669,59 +1678,58 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-        
+
         $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
-       
+
         session()->put('category', $categories);
-        
-        
+
+
         $categories = session()->get('category', []);
         // Session::save();
-        
+
 
 
         $total_item = 0;
         $total_quantity = 0;
-        
+
         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
-        // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
+            // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
             // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
-               if(isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])){
-                   foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
-                       if ($id == $userVal['user_id']) {
-                         
-                           $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type))?0:$quantity;
-                           session()->put('category', $categories);
-                         
-                        }
-                        $total_quantity =  $total_quantity + $userVal['quantity'];
+            if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
+                foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
+                    if ($id == $userVal['user_id']) {
+
+                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type)) ? 0 : $quantity;
+                        session()->put('category', $categories);
                     }
-                    // dd(1,$categories);
-               }else{
-               
+                    $total_quantity =  $total_quantity + $userVal['quantity'];
+                }
+                // dd(1,$categories);
+            } else {
+
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
                 session()->put('category', $categories);
 
                 // dd(2,$categories);
                 $total_quantity =  1;
-               }
+            }
 
-             
-                // $total_item = $total_item + $value['quantity'];
 
-                // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-                // }else{
-                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-                // }
+            // $total_item = $total_item + $value['quantity'];
+
+            // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+            //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+            // }else{
+            //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+            // }
             // }
         }
         Session::save();
-       
+
         // dd($categories);       
         // $total_item = $total_item - $total_quantity ;
 
