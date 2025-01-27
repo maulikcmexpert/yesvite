@@ -347,6 +347,7 @@ function getNotificationList($filter = []){
                     $notificationDetail['message_to_host'] = "";
                     $notificationDetail['rsvp_attempt'] = "";
                     $notificationDetail['is_co_host'] = "";
+                    $notificationDetail['co_host_notification'] = ($values->is_co_host!=null || $values->is_co_host!="")?$values->is_co_host:"";
                     $notificationDetail['accept_as_co_host'] = "";
                     $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
                     $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
