@@ -4894,6 +4894,11 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
     var userquantity = $(this).data("userquantity");
+    var inputField = $(this).parent('.d-flex').find('.input-qty');
+    var quantity =inputField.val();
+    alert(inputField);
+    alert(quantity);
+    var innerUserQnt = $(this).data("innerUserQnt");
 
     $(this).parent().parent().hide();
     var self_bring_quantity = $(this)
@@ -4909,6 +4914,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     total_category_count = total_category_count - parseInt(self_bring_quantity);
     $(".total-self-bring-" + categoryIndexKey).text(total_category_count);
+    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     $(this)
         .parent()
         .parent()
@@ -4919,6 +4925,7 @@ $(document).on("click", ".delete-self-bring", function () {
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
     update_self_bring(
+        isvalidUserQnt,
         categoryItemKey,
         categoryIndexKey,
         userquantity,
@@ -8108,14 +8115,16 @@ function update_self_bring(
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                innerUserQnt + quantity + "/" + categoryItemQuantity
+                (innerUserQnt + quantity) + "/" + categoryItemQuantity
             );
 
             var categoryItem = parseInt(
                 $(".missing-category-h6-" + categoryIndexKey).text()
             );
             let remainingCategoryCount=0;
-            if (type == "plus") {
+            if (type == undefined){
+                remainingCategoryCount = categoryItem + 1
+            }else if(type == "plus") {
                 remainingCategoryCount = categoryItem -1
             }else{
                 remainingCategoryCount = categoryItem + 1
