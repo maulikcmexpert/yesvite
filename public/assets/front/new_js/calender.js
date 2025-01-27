@@ -145,9 +145,11 @@
         this.draw(); // Redraw the calendar with the updated month
     };
 
-    // Create a calendar starting from a specific month
-    const events = JSON.parse($("#calender_json").val());
-    console.log(events);
+    let calender_json = $("#calender_json").val();
+    if (calender_json == undefined || calender_json == "") {
+        return;
+    }
+    const events = JSON.parse(calender_json);
     var startmonths = $("#startmonths").val();
     var diffmonth = parseInt($("#diffmonth").val());
     var totalmonths = parseInt($("#totalmonths").val()) + diffmonth;
