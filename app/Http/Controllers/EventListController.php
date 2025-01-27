@@ -2511,7 +2511,8 @@ class EventListController extends Controller
 
     public function get_user_info_rsvp(Request $request)
     {
-        dd(1);
+        $user  = Auth::guard('web')->user();
+        dd($user);
     }
 
 }
