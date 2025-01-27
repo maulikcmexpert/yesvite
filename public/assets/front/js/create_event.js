@@ -762,14 +762,7 @@ function startTimePicker() {
         $(this).val(selectedTime);
         const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
         const endTimePicker = $(".end_timepicker").data("DateTimePicker");
-        endTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
-
-        const activityTimePicker = $(".timepicker").data("DateTimePicker");
-        if (activityTimePicker) {
-            activityTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
-        } else {
-            console.log("Timepicker not found or initialized");
-        }
+        endTimePicker.date(selectedStartTime.clone().add(1, 'hours'));      
     });
 }
 function endTimePicker() {
