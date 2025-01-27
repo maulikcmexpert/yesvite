@@ -1,4 +1,4 @@
-{{-- {{dd($postList)}} --}}
+{{-- {{dd($eventDetails  )}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -40,7 +40,7 @@
                     <div class="event-center-tabs-main">
                         {{-- {{dd($current_page)}} --}}
                         <!-- ====================navbar-============================= -->
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :rsvpSent="$rsvpSent" />
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails" />
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
