@@ -269,7 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+            $(".li_event_detail").addClass("menu-success");    
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -298,7 +298,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
 
             $(".li_design").find(".side-bar-list").addClass("menu-success");
             $(".li_design").addClass("menu-success");
@@ -720,8 +720,9 @@ function getClosest15MinuteTime() {
 //             // const closest15MinTime = getClosest15MinuteTime();
 //             //         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
+
 //             // // Set the picker to the closest 15-minute time dynamically
-//             // picker.date(closest15MinTime);
+//             // picker.date(closest15MinTime);  
 //             const startTime = $(".start_timepicker").val();
 //             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 //             const closest15MinTime = startMoment.clone().add(1, 'hours');
@@ -741,93 +742,73 @@ function getClosest15MinuteTime() {
 
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
-        const startPicker = $(this)
-            .datetimepicker({
-                format: "LT",
-                icons: {
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                },
-                useCurrent: false,
-                ignoreReadonly: true,
-                stepping: 15,
-            })
-            .on("dp.show", function () {
-                const picker = $(this).data("DateTimePicker");
-                const previousEndTime =
-                    index > 0
-                        ? $(".activity_end_time")
-                              .eq(index - 1)
-                              .val()
-                        : "";
+        const startPicker = $(this).datetimepicker({
+            format: "LT",
+            icons: {
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+            },
+            useCurrent: false,
+            ignoreReadonly: true,
+            stepping: 15,
+        })
+        .on("dp.show", function () {
+            const picker = $(this).data("DateTimePicker");
+            const previousEndTime = index > 0 ? $(".activity_end_time").eq(index - 1).val() : ""; 
 
-                // If previous end time exists, set current start time 1 hour after it
-                if (previousEndTime) {
-                    const previousEndMoment = moment(previousEndTime, "LT");
-                    picker.date(previousEndMoment.add(1, "hours"));
-                } else {
-                    // Default to current time or a specific default time
-                    picker.date(moment().hours(12).minutes(0).seconds(0));
-                }
-            })
-            .on("dp.change", function (e) {
-                const selectedStartTime = e.date
-                    ? e.date
-                    : moment().hours(12).minutes(0).seconds(0);
-                const endTimePicker = $(".activity_end_time")
-                    .eq(index)
-                    .data("DateTimePicker");
+            // If previous end time exists, set current start time 1 hour after it
+            if (previousEndTime) {
+                const previousEndMoment = moment(previousEndTime, "LT");
+                picker.date(previousEndMoment.add(1, 'hours'));
+            } else {
+                // Default to current time or a specific default time
+                picker.date(moment().hours(12).minutes(0).seconds(0));
+            }
+        })
+        .on("dp.change", function (e) {
+            const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
+            const endTimePicker = $(".activity_end_time").eq(index).data("DateTimePicker");
 
-                // Set the end time picker to one hour after the selected start time
-                const endTime = selectedStartTime.clone().add(1, "hours");
-                endTimePicker.date(endTime);
-            });
+            // Set the end time picker to one hour after the selected start time
+            const endTime = selectedStartTime.clone().add(1, 'hours');
+            endTimePicker.date(endTime);
+        });
 
         // Ensure input field is clear when the page loads
         $(this).val("");
     });
 
     $(".timepicker.activity_end_time").each(function (index) {
-        const endPicker = $(this)
-            .datetimepicker({
-                format: "LT",
-                icons: {
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                },
-                useCurrent: false,
-                ignoreReadonly: true,
-                stepping: 15,
-            })
-            .on("dp.show", function () {
-                const picker = $(this).data("DateTimePicker");
-                const startTime = $(this)
-                    .closest("div")
-                    .find(".activity_start_time")
-                    .val();
-                const startMoment = startTime
-                    ? moment(startTime, "LT")
-                    : moment().hours(12).minutes(0).seconds(0);
+        const endPicker = $(this).datetimepicker({
+            format: "LT",
+            icons: {
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+            },
+            useCurrent: false,
+            ignoreReadonly: true,
+            stepping: 15,
+        })
+        .on("dp.show", function () {
+            const picker = $(this).data("DateTimePicker");
+            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            
+            // Set end time to 1 hour after start time if it's empty
+            picker.date(startMoment.clone().add(1, 'hours'));
+        })
+        .on("dp.change", function (e) {
+            const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
+            $(this).val(selectedEndTime.format("LT"));
 
-                // Set end time to 1 hour after start time if it's empty
-                picker.date(startMoment.clone().add(1, "hours"));
-            })
-            .on("dp.change", function (e) {
-                const selectedEndTime = e.date
-                    ? e.date
-                    : moment().hours(12).minutes(0).seconds(0);
-                $(this).val(selectedEndTime.format("LT"));
-
-                // Set the next start time based on the selected end time
-                const nextStartTime = $(".activity_start_time").eq(index + 1);
-                if (nextStartTime.length) {
-                    const startPicker = nextStartTime.data("DateTimePicker");
-                    const newStartTime = selectedEndTime
-                        .clone()
-                        .add(1, "hours");
-                    startPicker.date(newStartTime);
-                }
-            });
+            // Set the next start time based on the selected end time
+            const nextStartTime = $(".activity_start_time").eq(index + 1);
+            if (nextStartTime.length) {
+                const startPicker = nextStartTime.data("DateTimePicker");
+                const newStartTime = selectedEndTime.clone().add(1, 'hours');
+                startPicker.date(newStartTime);
+            }
+        });
 
         // Ensure input field is clear when the page loads
         $(this).val("");
@@ -836,80 +817,72 @@ function datepicker() {
 
 datepicker();
 
-function startTimePicker() {
-    $(".start_timepicker")
-        .datetimepicker({
-            format: "LT",
-            useCurrent: false,
-            ignoreReadonly: true,
-            stepping: 15,
-            icons: {
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-            },
-        })
-        .on("dp.show", function () {
-            const picker = $(this).data("DateTimePicker");
-            const currentValue = $(this).val();
 
-            if (currentValue) {
-                const currentMoment = moment(currentValue, "LT");
-                if (currentMoment.isValid()) {
-                    picker.date(currentMoment);
-                }
-            } else {
-                picker.date(moment().hours(12).minutes(0).seconds(0));
+function startTimePicker() {
+    $(".start_timepicker").datetimepicker({
+        format: "LT",
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+        }
+    }).on("dp.show", function () {
+        const picker = $(this).data("DateTimePicker");
+        const currentValue = $(this).val();
+        
+        if (currentValue) {
+            const currentMoment = moment(currentValue, "LT");
+            if (currentMoment.isValid()) {
+                picker.date(currentMoment);
             }
-        })
-        .on("dp.hide", function (e) {
-            const selectedTime = e.date ? e.date.format("LT") : "";
-            $(this).val(selectedTime);
-            const selectedStartTime = e.date
-                ? e.date
-                : moment().hours(12).minutes(0).seconds(0);
-            const endTimePicker = $(".end_timepicker").data("DateTimePicker");
-            endTimePicker.date(selectedStartTime.clone().add(1, "hours"));
-        });
+        } else {
+            picker.date(moment().hours(12).minutes(0).seconds(0));
+        }
+    }).on("dp.hide", function (e) {
+        const selectedTime = e.date ? e.date.format("LT") : "";
+        $(this).val(selectedTime);
+        const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
+        const endTimePicker = $(".end_timepicker").data("DateTimePicker");
+        endTimePicker.date(selectedStartTime.clone().add(1, 'hours'));      
+    });
 }
 function endTimePicker() {
-    $(".end_timepicker")
-        .datetimepicker({
-            format: "LT",
-            useCurrent: false,
-            ignoreReadonly: true,
-            stepping: 15,
-            icons: {
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-            },
-        })
-        .on("dp.show", function () {
-            const picker = $(this).data("DateTimePicker");
-            const currentValue = $(this).val();
+    $(".end_timepicker").datetimepicker({
+        format: "LT", 
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+        }
+    }).on("dp.show", function () {
+        const picker = $(this).data("DateTimePicker");
+        const currentValue = $(this).val();
 
-            if (currentValue) {
-                const currentMoment = moment(currentValue, "LT");
-                if (currentMoment.isValid()) {
-                    picker.date(currentMoment);
-                }
-            } else {
-                const startTime = $(".start_timepicker").val();
-                const startMoment = startTime
-                    ? moment(startTime, "LT")
-                    : moment().hours(12).minutes(0).seconds(0);
-                picker.date(startMoment.clone().add(1, "hours"));
+        if (currentValue) {
+            const currentMoment = moment(currentValue, "LT");
+            if (currentMoment.isValid()) {
+                picker.date(currentMoment);
             }
-        })
-        .on("dp.hide", function (e) {
-            const selectedTime = e.date ? e.date.format("LT") : "";
-            $(this).val(selectedTime);
-        });
+        } else {
+            const startTime = $(".start_timepicker").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            picker.date(startMoment.clone().add(1, 'hours'));
+        }
+    }).on("dp.hide", function (e) {
+        const selectedTime = e.date ? e.date.format("LT") : "";
+        $(this).val(selectedTime);
+    });
 }
 
 $(document).ready(function () {
     startTimePicker();
     endTimePicker();
 });
+
 
 // datepicker();
 // start_timepicker();
@@ -2766,18 +2739,11 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
-            console.log(
-                $("#" + firstActivityTime)
-                    .children()
-                    .find(".activity_start_time")
-                    .val()
-            );
-            var schedule_start_time = $("#" + firstActivityTime)
-                .children()
-                .find(".activity_start_time");
-            schedule_start_time.prop("readonly", false);
+            console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
+            var schedule_start_time=$("#" + firstActivityTime).children().find(".activity_start_time");
+            schedule_start_time.prop('readonly',false);
             schedule_start_time.val("45555985sdsddsd");
-            schedule_start_time.prop("readonly", true);
+            schedule_start_time.prop('readonly',true);
 
             toastr.error("activity can not start before event");
             $("#" + firstActivityTime)
@@ -3189,7 +3155,7 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
-    $(".li_event_detail").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");    
 
     $(".step_2").show();
     $(".event_create_percent").text("25%");
@@ -3694,7 +3660,7 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
 
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
@@ -4374,7 +4340,7 @@ $(document).on("click", ".li_event_details", function () {
                         $(".li_design")
                             .find(".side-bar-list")
                             .addClass("menu-success");
-                        $(".li_design").addClass("menu-success");
+                            $(".li_design").addClass("menu-success");
 
                         // active_responsive_dropdown('drop-down-event-guest');
 
@@ -4677,6 +4643,7 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 });
 
 $(document).on("change", ".user_group_member .user_choice", function () {
+  
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4817,12 +4784,12 @@ function plusBTN(that) {
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
-    if (quantity > 0) {
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
+    if (quantity > 0) { 
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
         update_self_bring(
             isvalidUserQnt,
             categoryItemKey,
@@ -4859,10 +4826,10 @@ function minusBTN(that) {
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 isvalidUserQnt,
@@ -5024,10 +4991,10 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
     // var userquantity = $(this).data("userquantity");
-    var userquantity =0;
+    var userquantity = parseInt($(this).parent().parent().find('.input-qty').val());
     var innerUserQnt = $(this).data("inneruserqnt");
 
-    $(this).parent().parent().hide();
+    $(this).parent().parent().hide(); 
     var self_bring_quantity = $(this)
         .parent()
         .parent()
@@ -5050,13 +5017,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(
-        innerUserQnt,
-        categoryItemKey,
-        categoryIndexKey,
-        userquantity,
-        itemquantity
-    );
+    update_self_bring(innerUserQnt,categoryItemKey, categoryIndexKey, userquantity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
@@ -5683,8 +5644,8 @@ $(document).on("click", ".final_checkout", function () {
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
-        $(".event_images_slider").css("display", "block");
-        $(".event_images_template").css("display", "none");
+        $('.event_images_slider').css('display','block');
+        $('.event_images_template').css('display','none');
         // eventData.slider_images.forEach((image) => {
         //     const imageHtml = `
         //         <div class="item">
@@ -5710,39 +5671,40 @@ $(document).on("click", ".final_checkout", function () {
                 }
             }
         });
+   
 
-        $(".event_images_slider").owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            navText: [
-                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    $(".event_images_slider").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        navText: [
+            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         `,
-                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`,
-            ],
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                600: {
-                    items: 3,
-                },
-                1000: {
-                    items: 5,
-                },
+        ],
+        responsive: {
+            0: {
+                items: 1,
             },
-        });
-    } else {
-        alert();
-        $(".event_images_slider").css("display", "none");
-        $(".event_images_template").css("display", "block");
-        // $('.event_images_slider').removeClass('owl-carousel');
-        // $('.event_images_slider').removeClass('owl-theme');
-    }
+            600: {
+                items: 3,
+            },
+            1000: {
+                items: 5,
+            },
+        },
+    });
+}else{
+    alert();
+    $('.event_images_slider').css('display','none');
+    $('.event_images_template').css('display','block');
+    // $('.event_images_slider').removeClass('owl-carousel');
+    // $('.event_images_slider').removeClass('owl-theme');
+} 
 
     // var swiper = new Swiper(".event_images_slider", {
     //     slidesPerView: 1,
@@ -5961,7 +5923,7 @@ function save_image_design(downloadImage, textData) {
                     $(".li_design")
                         .find(".side-bar-list")
                         .addClass("menu-success");
-                    $(".li_design").addClass("menu-success");
+                        $(".li_design").addClass("menu-success");
 
                     active_responsive_dropdown("drop-down-event-guest");
 
@@ -8226,6 +8188,7 @@ function update_self_bring(
     categoryItemQuantity,
     type
 ) {
+    
     $.ajax({
         url: base_url + "event/update_self_bring",
         method: "POST",
@@ -8239,26 +8202,25 @@ function update_self_bring(
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                innerUserQnt + quantity + "/" + categoryItemQuantity
+                (innerUserQnt + quantity) + "/" + categoryItemQuantity
             );
 
             var categoryItem = parseInt(
                 $(".missing-category-h6-" + categoryIndexKey).text()
             );
-            let remainingCategoryCount = 0;
-            if (type == undefined) {
-                remainingCategoryCount = categoryItemQuantity - innerUserQnt;
-            } else if (type == "plus") {
-                remainingCategoryCount = categoryItem - 1;
-            } else {
-                remainingCategoryCount = categoryItem + 1;
+            let remainingCategoryCount=0;
+            if (type == undefined){
+                remainingCategoryCount = categoryItem + quantity
+            }else if(type == "plus") {
+                remainingCategoryCount = categoryItem -1
+            }else{
+                remainingCategoryCount = categoryItem + 1
+                
             }
-            $("#missing-category-" + categoryIndexKey).text(
-                remainingCategoryCount
-            );
-
+                $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
+            
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
-            if (remainingCategoryCount == 0) {
+            if (remainingCategoryCount ==0 ) {
                 // if (response == 0) {
                 var svg =
                     '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>';
