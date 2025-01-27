@@ -8202,9 +8202,15 @@ function update_self_bring(
         },
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
-            $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                (innerUserQnt + quantity) + "/" + categoryItemQuantity
-            );
+            if (type == undefined){
+                $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
+                    (innerUserQnt + 0) + "/" + categoryItemQuantity
+                );
+            }else{
+                $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
+                    (innerUserQnt + quantity) + "/" + categoryItemQuantity
+                );
+            }
 
             var categoryItem = parseInt(
                 $(".missing-category-h6-" + categoryIndexKey).text()
