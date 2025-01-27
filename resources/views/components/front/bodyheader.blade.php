@@ -324,9 +324,13 @@
                                             <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                             <h6 class="notification-read-dot"></h6>
                                       </div>
-                                      <!-- <div>
-                                        <p>{{$inner_data['event_name']}}</p>
-                                                                              </div> -->
+                                      <div>
+                                        <!-- <p>{{$inner_data['event_name']}}</p> -->
+                                      </div>
+                                      <div class="">
+                                        <h3>Date from : 2025-01-27</h3>
+                                        <h3>Date To : 2025-01-27 to 2025-01-29</h3>
+                                      </div>
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
@@ -365,7 +369,7 @@
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                                          @if($$inner_data['read']=="0")
+                                          @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot mt-1 text-right"></h6>
                                           @endif
                                         </div>
