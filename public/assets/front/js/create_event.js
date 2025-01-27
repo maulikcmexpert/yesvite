@@ -4912,11 +4912,8 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryItemKey = $(this).data("categoryitem");
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
-    var userquantity = $(this).data("userquantity");
-    var inputField = $(this).parent('.d-flex').find('.input-qty');
-    var quantity =inputField.val();
-    alert(inputField);
-    alert(quantity);
+    // var userquantity = $(this).data("userquantity");
+    var userquantity = parseInt($(this).parent().parent().find('.input-qty').val());
     var innerUserQnt = $(this).data("innerUserQnt");
 
     $(this).parent().parent().hide();
@@ -5631,7 +5628,7 @@ $(document).on("click", ".final_checkout", function () {
         },
     });
 }else{
-    alert();
+  
     $('.event_images_slider').css('display','none');
     $('.event_images_template').css('display','block');
     // $('.event_images_slider').removeClass('owl-carousel');
