@@ -4799,9 +4799,10 @@ function plusBTN(that) {
             "plus"
         );
     } else {
-        quantity = parseInt(quantity, 10);
         quantity--;
-        that.parent().find(".input-qty").val(0);
+
+        console.log(that.parent().find(".input-qty").val());
+       that.parent().find(".input-qty").val('0');
     }
 }
 $(".qty-btnminus").on("click", function () {
