@@ -4992,7 +4992,8 @@ $(document).on("click", ".delete-self-bring", function () {
     var itemquantity = $(this).data("itemquantity");
     // var userquantity = $(this).data("userquantity");
     var userquantity = parseInt($(this).parent().parent().find('.input-qty').val());
-    var innerUserQnt = $(this).data("inneruserqnt");
+    var innerUserQnt = parseInt($(this).data("inneruserqnt"));
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
 
     $(this).parent().parent().hide(); 
     var self_bring_quantity = $(this)
