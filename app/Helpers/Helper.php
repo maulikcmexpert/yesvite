@@ -142,14 +142,14 @@ function sendNotification($notificationType, $postData)
 
     if ($notificationType == 'owner_notify') {
         $event = Event::with('event_image','event_invited_user', 'event_schedule')->where('id', $postData['event_id'])->first();
-        $event_host=EventInvitedUser::where('event_id', $postData['event_id'])->where('is_co_host','1')->first()->id;
+        // $event_host=EventInvitedUser::where('event_id', $postData['event_id']);
         $event_time = "";
         if ($event->event_schedule->isNotEmpty()) {
 
             $event_time =  $event->event_schedule->first()->start_time;
         }
         $eventData = [
-            'event_invited_user_id' => $event_host,
+            'event_invited_user_id' => "",
             'event_id' => $postData['event_id'],
             'owner_id' => $event->user_id,
             'host_email' => $senderData->email,
