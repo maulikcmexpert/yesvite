@@ -2594,7 +2594,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        datepicker();
+        // datepicker();
     }
 });
 
