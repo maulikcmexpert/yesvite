@@ -269,6 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+            $(".li_event_detail").addClass("menu-success");    
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -297,6 +298,8 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
+
             $(".li_design").find(".side-bar-list").addClass("menu-success");
             $(".li_design").addClass("menu-success");
             active_responsive_dropdown("drop-down-event-guest");
@@ -3035,6 +3038,8 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");    
+
     $(".step_2").show();
     $(".event_create_percent").text("25%");
     $(".current_step").text("1 of 4");
@@ -3538,6 +3543,8 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
+
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
             // alert(stepVal);
