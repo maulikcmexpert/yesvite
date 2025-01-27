@@ -743,7 +743,7 @@ function datepicker() {
     $(this).val("");
 }
 
-function start_timepicker() {
+// function start_timepicker() {
     $(".start_timepicker").datetimepicker({
         //  keepOpen: true,
         format: "LT",
@@ -785,10 +785,10 @@ function start_timepicker() {
     // Ensure input field is clear when the page loads
     $(".start_timepicker").val("");
 
-}
+// }
 
 datepicker();
-start_timepicker();
+// start_timepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
