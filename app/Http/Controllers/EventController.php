@@ -1417,7 +1417,6 @@ class EventController extends BaseController
         $categories = Session::get('category', []);
         $category_quantity = $categories[$category_index]['category_quantity'];
         $category_item = count($categories[$category_index]['item']);
-        DD($category_item);
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$category_index]['item']) && !empty($categories[$category_index]['item'])) {
@@ -1445,7 +1444,7 @@ class EventController extends BaseController
             'self_bring' => $selfBring,
             'self_bring_qty' => $selfBringQuantity,
             'category_index' => $category_index,
-            'category_item' => --$category_item,
+            'category_item' => $category_item +1,
         ];
 
         // return view('front.event.potluck.potluckCategoryItem', $data);
