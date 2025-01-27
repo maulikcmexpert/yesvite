@@ -766,7 +766,6 @@ function startTimePicker() {
 
         const activityTimePicker = $(".timepicker").data("DateTimePicker");
         activityTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
-
     });
 }
 function endTimePicker() {
@@ -805,7 +804,7 @@ $(document).ready(function () {
 });
 
 
-datepicker();
+// datepicker();
 // start_timepicker();
 
 // flatpickr(".event_time", {
