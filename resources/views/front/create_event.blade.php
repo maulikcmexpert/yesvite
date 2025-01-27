@@ -1378,8 +1378,7 @@
                                         <h5 class="category_name-{{ $index }}">{{ $data['category'] }}</h5>
                                         <p>Total Commited</p>
                                     </div>
-                                    <input type="hidden" class="total-potluck-category-{{ $index }}"
-                                    value="{{$data['categoryQuantity']}}">
+                                    
                                     <div class="ms-auto d-flex align-items-center ">
                                         @if ($data['remainingQnt'] > 0)
                                             <span
@@ -1411,9 +1410,11 @@
                                                 style="color: rgb(52, 192, 92);"><span
                                                     id="missing-category-{{ $index }}">0</span> Missing</h6>
                                         @endif
+                                        <input type="hidden" class="total-potluck-category-{{ $index }}"
+                                            value="{{ $data['quantity'] }}">
                                         <a href="#" class="me-3 add_potluck_item"
                                             id="potluck-{{ $index }}" data-id="{{ $index }}"
-                                            style="{{($data['quantity'] > $data['categoryQuantity']) ? '' : 'display:none'}}">
+                                            style="{{($data['quantity'] > $data['totalItem']) ? '' : 'display:none'}}">
                                             <svg width="22" height="22" viewBox="0 0 22 22"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
