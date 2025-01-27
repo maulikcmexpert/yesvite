@@ -254,7 +254,7 @@
                                       </div>
                                         @if($inner_data['co_host_notification']=="1")
                                           <div>
-                                              <button class="notification-rsvp-btn" type="button">RSVP</button>
+                                              <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess">RSVP</button>
                                           </div>
                                         @endif  
                                      <div>
