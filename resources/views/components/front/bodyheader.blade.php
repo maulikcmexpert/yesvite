@@ -691,6 +691,7 @@
                                     {{-- <div class="notification-video-comment-wrp"> --}}
                                       {{-- <h6>That’s was great! love it ❤️</h6> --}}
                                       <div class="notification-video-wrp">
+                                        <div class="notification-video">
                                               @if($inner_data['media_type']=="photo")
                                                 <img src="{{$inner_data['post_image']}}" alt=""/>
                                               @elseif($inner_data['media_type']=="video")
@@ -707,6 +708,7 @@
                                               /></span>
                                             </a>
                                               @endif
+                                        </div>
                                         <div class="notification-video-content">
                                           <p>
                                             {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
