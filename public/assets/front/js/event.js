@@ -857,7 +857,21 @@ console.log(`${base_url}get_user_info_rsvp`);
             const hosted_by = response.event_data.host;
             const event_name = response.event_data.name;
 
-            $('#notification_rsvp_profile').attr('src',profile);
+            if (profile) {
+                $('#notification_rsvp_profile').attr('src', profile).show();
+            } else {
+                const firstInitial = firstName && firstName[0] ? firstName[0].toUpperCase() : '';
+                const secondInitial = lastName && lastName[0] ? lastName[0].toUpperCase() : '';
+                const initials = firstInitial + secondInitial;
+                const fontColor = `fontcolor${firstInitial}`;
+            
+                $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
+                $('#notification_rsvp_profile').after(
+                    `<h4 class="modal-title text-uppercase font-weight-bold text-center initials" style="width: 50px; height: 50px; background-color: #f2f2f2; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
+                        ${initials}
+                    </h4>`
+                );
+            }
             $('#notification_rsvp_eventName').text(event_name);
             $('#notification_rsvp_host').text(hosted_by);
             $('#rsvp_user_id').val(userId);
