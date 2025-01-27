@@ -814,6 +814,22 @@ header{
     color: var(--secondary-black) !important;
 }
 
+.notification-rsvp-btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 15px;
+    line-height: normal;
+    color: var(--pink);
+    padding: 15px 20px;
+    border-radius: 10px;
+    background-color: transparent;
+    margin-top: 20px;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 1399px) {

@@ -253,7 +253,7 @@
                                       
                                       </div>
                                       <div>
-                                            <button type="button">RSVP</button>
+                                            <button class="notification-rsvp-btn" type="button">RSVP</button>
                                         </div>
                                      <div>
                                         <!-- <p>{{$inner_data['event_name']}}</p>
