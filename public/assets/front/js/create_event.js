@@ -718,6 +718,8 @@ function datepicker() {
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
             const currentValue = $(this).val(); 
+            console.log(currentValue);
+            
             if (currentValue) {
                 // If input has a value, use it to set the picker
                 const currentMoment = moment(currentValue, "LT"); // Parse input as moment object
