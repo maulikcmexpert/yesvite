@@ -2511,7 +2511,7 @@ class EventListController extends Controller
 
     public function get_user_info_rsvp(Request $request)
     {
-        dd($request);
+        dd(1);
     }
 
 }
