@@ -2627,14 +2627,18 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(acStartTime)
         ) {
             console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
-            
+            var schedule_start_time=$("#" + firstActivityTime).children().find(".activity_start_time");
+            schedule_start_time.prop('readonly',false);
+            schedule_start_time.val("");
+            schedule_start_time.prop('readonly',true);
+
             toastr.error("activity can not start before event");
             $("#" + firstActivityTime)
                 .children()
                 .find(".activity_start_time")
                 .val("");
 
-            return;
+            // return;
         }
 
         var preEndTime = $(this)
