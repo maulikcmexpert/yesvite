@@ -2533,10 +2533,10 @@ class EventListController extends Controller
         try {
             DB::beginTransaction();
 
-        $userId= $request->rsvp_user_id;
-       $eventId= $request->rsvp_event_id;
-              $adults= $request->rsvp_notification_adult;
-              $kids= $request->rsvp_notification_kid;
+            $userId = $request->rsvp_user_id;
+              $eventId = $request->rsvp_event_id;
+              $adults = $request->rsvp_notification_adult;
+              $kids = $request->rsvp_notification_kid;
      
     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');s
@@ -2643,4 +2643,4 @@ if ($rsvpSent != null) {
 //     foreach($c as $d){
 
 //     }
-// }
+}
