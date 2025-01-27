@@ -365,11 +365,14 @@
                                           <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>Potluck
                                           </span>
                                         </h3>
-                                        <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                                        <div>
+                                          <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                                          <h6 class="notification-read-dot mt-2 text-right"></h6>
+                                        </div>
                                       </div>
                                       <div>
                                         <!-- <p>{{$inner_data['event_name']}} Potluck</p> -->
-                                            <h6 class="notification-read-dot"></h6>
+                                            
                                       </div>
                                       <div class="d-flex align-items-center justify-content-between">
                                         <h3>Item</h3>
