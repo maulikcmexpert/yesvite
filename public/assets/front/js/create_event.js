@@ -777,7 +777,10 @@ function datepicker() {
 
         if (e.date) {
             const endTime = e.date.clone().add(1, 'hours'); // Add 1 hour to the selected time
-            $(".end_timepicker").val(endTime.format("LT")); // Format and set the time in end_timepicker
+            const picker = $('#end-time').data("DateTimePicker");
+            picker.date(endTime);
+
+
         }
     });
 
@@ -1231,8 +1234,8 @@ $("#end_time").on("change", function () {
 
         if (start_time) {
             var startTime = moment(start_time, "hh:mm A"); // Parse the start time string
-            var endTime = startTime.clone().add(1, "hours");
-            $("#end-time").val(endTime.format("hh:mm A"));
+            // var endTime = startTime.clone().add(1, "hours");
+            // $("#end-time").val(endTime.format("hh:mm A"));
         } else {
             $("#end-time").val(""); // Clear end time if start time is empty
         }
