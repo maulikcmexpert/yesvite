@@ -691,29 +691,35 @@
                                     {{-- <div class="notification-video-comment-wrp"> --}}
                                       {{-- <h6>That’s was great! love it ❤️</h6> --}}
                                       <div class="notification-video-wrp">
-                                        <div class="notification-video">
-                                              @if($inner_data['media_type']=="photo")
-                                                <img src="{{$inner_data['post_image']}}" alt=""/>
-                                              @elseif($inner_data['media_type']=="video")
-                                              <a href="{{$inner_data['post_image']}}" class="notification-video popup-videos">
-                                              <video>
-                                                <source src="{{$inner_data['post_image']}}" type="video/mp4" />
-                                              </video>
-                                              <span class="notification-video_play-icon"
-                                                ><img
-                                                  src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
-                                                  alt=""
-                                                  loading="lazy"
+                                        @if($inner_data['media_type']!="")
+                                          <div class="notification-video">
+                                                @if($inner_data['media_type']=="photo")
+                                                  <img src="{{$inner_data['post_image']}}" alt=""/>
+                                                @elseif($inner_data['media_type']=="video")
+                                                  <a href="{{$inner_data['post_image']}}" class="notification-video popup-videos">
+                                                  <video>
+                                                    <source src="{{$inner_data['post_image']}}" type="video/mp4" />
+                                                  </video>
+                                                  <span class="notification-video_play-icon"
+                                                    ><img
+                                                      src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
+                                                      alt=""
+                                                      loading="lazy"
 
-                                              /></span>
-                                            </a>
+                                                  /></span>
+                                                </a>
                                               @endif
-                                        </div>
-                                        <div class="notification-video-content">
-                                          <p>
-                                            {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
-                                          </p>
-                                        </div>
+                                          </div>
+                                          <div class="notification-video-content">
+                                            <p>
+                                              {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
+                                            </p>
+                                          </div>
+                                        @elseif($inner_data['media_type']=="")
+                                            <div class="noification-simple-text-wrp">
+                                              <p>See post details</p>
+                                            </div>
+                                        @endif
                                       </div>
                                     {{-- </div> --}}
                                   </div>
