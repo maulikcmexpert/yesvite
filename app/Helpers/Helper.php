@@ -41,7 +41,7 @@ use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
-use DB;
+// use DB;
 
 function getVideoDuration($filePath)
 {
@@ -141,14 +141,15 @@ function sendNotification($notificationType, $postData)
 
 
     if ($notificationType == 'owner_notify') {
-        $event = Event::with('event_image','event_invited_user', 'event_schedule')->where('id', $postData['event_id'])->first();
+        $event = Event::with('event_image', 'event_invited_user', 'event_schedule')->where('id', $postData['event_id'])->first();
+        // $event_host=EventInvitedUser::where('event_id', $postData['event_id']);
         $event_time = "";
         if ($event->event_schedule->isNotEmpty()) {
 
             $event_time =  $event->event_schedule->first()->start_time;
         }
         $eventData = [
-            'event_invited_user_id' => $event->event_invited_user->first()->id,
+            'event_invited_user_id' => "",
             'event_id' => $postData['event_id'],
             'owner_id' => $event->user_id,
             'host_email' => $senderData->email,
@@ -1779,9 +1780,12 @@ function sendSMSForApplication($receiverNumber, $message)
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     try {
-        $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
-        if (strpos($receiverNumber, '+') === 0) {
-            $cleanedNumber = '+' . $cleanedNumber;
+        $cleanedNumber = preg_replace('/[^0-9]/', '', $receiverNumber);
+        if (strpos($cleanedNumber, '1') === 0 && strlen($cleanedNumber) > 10) {
+            $cleanedNumber = substr($cleanedNumber, 1);
+        }
+        if (strlen($cleanedNumber) < 10) {
+            $cleanedNumber = $receiverNumber;
         }
         $user = Useropt::where('phone', $cleanedNumber)->first();
         if (!$user) {
@@ -1828,9 +1832,12 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
 
 function handleIncomingMessage($receiverNumber, $message)
 {
-    $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
-    if (strpos($receiverNumber, '+') === 0) {
-        $cleanedNumber = '+' . $cleanedNumber;
+    $cleanedNumber = preg_replace('/[^0-9]/', '', $receiverNumber);
+    if (strpos($cleanedNumber, '1') === 0 && strlen($cleanedNumber) > 10) {
+        $cleanedNumber = substr($cleanedNumber, 1);
+    }
+    if (strlen($cleanedNumber) < 10) {
+        $cleanedNumber = $receiverNumber;
     }
     if (strtolower($message) == 'yes') {
 

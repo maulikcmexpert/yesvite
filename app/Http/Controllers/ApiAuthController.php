@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -120,6 +121,8 @@ class ApiAuthController extends Controller
             } catch (QueryException $e) {
 
                 DB::rollBack();
+                Log::error('Error to register user ' . $e);
+                print_r($e);
                 return response()->json(['status' => 0, 'message' => "Something went wrong"]);
             }
         }
@@ -227,6 +230,8 @@ class ApiAuthController extends Controller
         } catch (QueryException $e) {
 
             DB::rollBack();
+            Log::error('Error to register user ' . $e);
+            print_r($e);
             return response()->json(['status' => 0, 'message' => "Something went wrong"]);
         }
     }
@@ -262,9 +267,9 @@ class ApiAuthController extends Controller
                 ],
             );
         }
-        $getUser = User::where('email',$input['email'])->first();
-        if($getUser){
-            if($getUser->password == NULL){
+        $getUser = User::where('email', $input['email'])->first();
+        if ($getUser) {
+            if ($getUser->password == NULL) {
                 return response()->json(['status' => 0, 'message' => 'Invalid login method']);
             }
         }
@@ -741,7 +746,7 @@ class ApiAuthController extends Controller
             }
 
             if ($verifyUser->email_verified_at == NULL) {
-                $faild="verified";
+                $faild = "verified";
                 $verifyUser->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;

@@ -269,7 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+            $(".li_event_detail").addClass("menu-success");    
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -298,7 +298,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
 
             $(".li_design").find(".side-bar-list").addClass("menu-success");
             $(".li_design").addClass("menu-success");
@@ -717,79 +717,98 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const currentValue = $(this).val(); 
-            console.log(currentValue);
-            
-            if (currentValue) {
-                // If input has a value, use it to set the picker
-                const currentMoment = moment(currentValue, "LT"); // Parse input as moment object
-                if (currentMoment.isValid()) {
-                    picker.date(currentMoment); // Set the picker to the input value
-                }
-            } else {
-                // If input is empty, set picker to the nearest 15-minute interval
-                const closest15MinTime = getClosest15MinuteTime();
-                picker.date(closest15MinTime);
-            }
+            // const closest15MinTime = getClosest15MinuteTime();
+                    const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+
+
+            // Set the picker to the closest 15-minute time dynamically
+            picker.date(closest15MinTime);  
         })
         .on("dp.hide", function (e) {
             // Automatically set the selected value in the input field when the picker closes
-            const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-            $(this).val(selectedTime); // Set the formatted time value in the input field
+            // const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+            // $(this).val(selectedTime); // Set the formatted time value in the input field
         });
 
     // Ensure input field is clear when the page loads
     $(this).val("");
     $(this).val("");
 }
-
-// function start_timepicker() {
+datepicker();
+function startTimePicker() {
     $(".start_timepicker").datetimepicker({
-        //  keepOpen: true,
         format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
         useCurrent: false,
         ignoreReadonly: true,
         stepping: 15,
-        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
-
-        // Set stepping to 15 minutes
-        // defaultDate: now
-        //  debug: true
-    }).on('dp.show', function () {
-        $(this).val(""); // Set the formatted time value in the input field
-
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+        }
+    }).on("dp.show", function () {
         const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+        const currentValue = $(this).val();
+        
+        if (currentValue) {
+            const currentMoment = moment(currentValue, "LT");
+            if (currentMoment.isValid()) {
+                picker.date(currentMoment);
+            }
+        } else {
+            picker.date(moment().hours(12).minutes(0).seconds(0));
+        }
+    }).on("dp.hide", function (e) {
+        const selectedTime = e.date ? e.date.format("LT") : "";
+        $(this).val(selectedTime);
+        const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
+        const endTimePicker = $(".end_timepicker").data("DateTimePicker");
+        endTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
 
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime);
-
-        $(".start_timepicker").val("");
-
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
-
-        if (e.date) {
-            const endTime = e.date.clone().add(1, 'hours'); // Add 1 hour to the selected time
-            const picker = $('#end-time').data("DateTimePicker");
-            picker.date(endTime);
-
-
+        const activityTimePicker = $(".timepicker").data("DateTimePicker");
+        if (activityTimePicker) {
+            activityTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
+        } else {
+            console.log("Timepicker not found or initialized");
         }
     });
+}
+function endTimePicker() {
+    $(".end_timepicker").datetimepicker({
+        format: "LT", 
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down"
+        }
+    }).on("dp.show", function () {
+        const picker = $(this).data("DateTimePicker");
+        const currentValue = $(this).val();
 
-    // Ensure input field is clear when the page loads
-    $(".start_timepicker").val("");
+        if (currentValue) {
+            const currentMoment = moment(currentValue, "LT");
+            if (currentMoment.isValid()) {
+                picker.date(currentMoment);
+            }
+        } else {
+            const startTime = $(".start_timepicker").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            picker.date(startMoment.clone().add(1, 'hours'));
+        }
+    }).on("dp.hide", function (e) {
+        const selectedTime = e.date ? e.date.format("LT") : "";
+        $(this).val(selectedTime);
+    });
+}
 
-// }
+$(document).ready(function () {
+    startTimePicker();
+    endTimePicker();
+});
 
-datepicker();
+
+// datepicker();
 // start_timepicker();
 
 // flatpickr(".event_time", {
@@ -2644,7 +2663,6 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
-           
             console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
             var schedule_start_time=$("#" + firstActivityTime).children().find(".activity_start_time");
             schedule_start_time.prop('readonly',false);
@@ -3061,7 +3079,7 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
-    $(".li_event_detail").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");    
 
     $(".step_2").show();
     $(".event_create_percent").text("25%");
@@ -3566,7 +3584,7 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
 
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
@@ -4246,7 +4264,7 @@ $(document).on("click", ".li_event_details", function () {
                         $(".li_design")
                             .find(".side-bar-list")
                             .addClass("menu-success");
-                        $(".li_design").addClass("menu-success");
+                            $(".li_design").addClass("menu-success");
 
                         // active_responsive_dropdown('drop-down-event-guest');
 
@@ -4549,6 +4567,7 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 });
 
 $(document).on("change", ".user_group_member .user_choice", function () {
+  
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4689,12 +4708,12 @@ function plusBTN(that) {
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
         update_self_bring(
             isvalidUserQnt,
             categoryItemKey,
@@ -4730,10 +4749,10 @@ function minusBTN(that) {
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 isvalidUserQnt,
@@ -5836,7 +5855,7 @@ function save_image_design(downloadImage, textData) {
                     $(".li_design")
                         .find(".side-bar-list")
                         .addClass("menu-success");
-                    $(".li_design").addClass("menu-success");
+                        $(".li_design").addClass("menu-success");
 
                     active_responsive_dropdown("drop-down-event-guest");
 
