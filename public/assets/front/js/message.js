@@ -48,6 +48,7 @@ document.getElementById("message-box").addEventListener("input", function () {
         textarea.style.overflowY = "hidden"; // Hide scroll if less than max height
     }
 });
+
 function formatDate(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
@@ -70,9 +71,11 @@ function formatDate(timestamp) {
         return "Today";
     } else if (diffDays < 2) {
         return "Yesterday";
-    } else if (diffDays < 7) {
-        return date.toLocaleDateString("en-US", { weekday: "long" }); // Returns day of the week
-    } else if (now.getFullYear() === date.getFullYear()) {
+    }
+    // else if (diffDays < 7) {
+    //     return date.toLocaleDateString("en-US", { weekday: "long" }); // Returns day of the week
+    // }
+    else if (now.getFullYear() === date.getFullYear()) {
         return date.toLocaleDateString("en-US", {
             day: "numeric",
             month: "long",
@@ -150,7 +153,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
     console.log("coming here for update profile");
     let profileIm = document.getElementById("profileIm");
     let profileModel = document.getElementById("profileModel");
-
+    console.log({ profileImageUrl });
     if (await isValidImageUrl(profileImageUrl)) {
         console.log("123");
 
@@ -168,7 +171,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img id="profileIm" src="${profileImageUrl}" alt="cover-img" >`
+                    `<img class="user-avatar img-fluid" src="${profileImageUrl}" alt="cover-img" >`
                 );
         }
     } else {
@@ -191,7 +194,7 @@ async function updateProfileImg(profileImageUrl, userName, conversationId) {
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<h5 id="profileIm" class="${fontColor}">${initials}</h5>`
+                    `<h5 class="user-avatar img-fluid ${fontColor}">${initials}</h5>`
                 );
         }
     }
@@ -254,9 +257,9 @@ const asset_path = $("#asset_path").val();
 const reactionImageMap = {
     "1F60D": `${asset_path}/ic_heart_eyes.png`, // Heart Eyes
     "1F604": `${asset_path}/ic_smile.png`, // Smile
-    "2764}": `${asset_path}/ic_like_reaction.png`, // Heart
+    2764: `${asset_path}/ic_like_reaction.png`, // Heart
     "1F44D": `${asset_path}/ic_thumsup.png`, // Thumbs Up
-    "1F44F}": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
+    "1F44F": `${asset_path}/ic_clapping_hand.png`, // Clapping Hands
 };
 
 const response = await fetch("/firebase_js.json");
@@ -274,8 +277,10 @@ let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 let myProfile;
 const loader = $(".loader");
+loader.show();
 // Function to get messages between two users
-
+var firstTime = true;
+var isToMove = true;
 let closeSpan = `<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.4974 0.666016C3.90573 0.666016 0.164062 4.40768 0.164062 8.99935C0.164062 13.591 3.90573 17.3327 8.4974 17.3327C13.0891 17.3327 16.8307 13.591 16.8307 8.99935C16.8307 4.40768 13.0891 0.666016 8.4974 0.666016ZM11.2974 10.916C11.5391 11.1577 11.5391 11.5577 11.2974 11.7993C11.1724 11.9243 11.0141 11.9827 10.8557 11.9827C10.6974 11.9827 10.5391 11.9243 10.4141 11.7993L8.4974 9.88268L6.58073 11.7993C6.45573 11.9243 6.2974 11.9827 6.13906 11.9827C5.98073 11.9827 5.8224 11.9243 5.6974 11.7993C5.45573 11.5577 5.45573 11.1577 5.6974 10.916L7.61406 8.99935L5.6974 7.08268C5.45573 6.84102 5.45573 6.44102 5.6974 6.19935C5.93906 5.95768 6.33906 5.95768 6.58073 6.19935L8.4974 8.11602L10.4141 6.19935C10.6557 5.95768 11.0557 5.95768 11.2974 6.19935C11.5391 6.44102 11.5391 6.84102 11.2974 7.08268L9.38073 8.99935L11.2974 10.916Z" fill="#F73C71"/>`;
 async function getMessages(userId1, userId2) {
@@ -439,16 +444,24 @@ async function handleNewConversation(snapshot) {
             .find("span")
             .replaceWith(userStatus);
         const badgeElement = $(conversationElement).find(
-            ".ms-auto .d-flex .badge"
+            ".ms-auto .d-flex .my-badge"
         );
         badgeElement.text(newConversation.unReadCount);
         if (parseInt(newConversation.unReadCount) == 0) {
             badgeElement.addClass("d-none");
             $(conversationElement).removeClass("setpink");
+            $(conversationElement).attr(
+                "data-msgTime",
+                newConversation.timeStamp
+            );
         } else {
             badgeElement.removeClass("d-none");
             badgeElement.show();
             $(conversationElement).addClass("setpink");
+            $(conversationElement).attr(
+                "data-msgTime",
+                newConversation.timeStamp
+            );
             console.log("here");
         }
     } else {
@@ -482,6 +495,7 @@ async function handleNewConversation(snapshot) {
             unRead: false,
             unReadCount: 0,
         });
+        console.log("updateoverview");
     }
     updateUnreadMessageBadge();
     var ele = $(
@@ -492,26 +506,51 @@ async function handleNewConversation(snapshot) {
     moveToTopOrBelowPinned(ele);
 }
 function moveToTopOrBelowPinned(element) {
+    if (firstTime == true || !isToMove) {
+        isToMove = true;
+        return;
+    }
     if (element.length <= 0) {
         return;
     }
+    console.log("moved====================");
 
     let $chatList = $(".chat-list"); // Get the chat list container
     let parentDiv = element.closest("div"); // Get the parent div of the li element
     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
+    let elementMsgTime = parseInt(element.attr("data-msgtime")); // Get the message time of the element
 
     // If the element is pinned, move it to the very top
     if (isPinned) {
-        console.log("pinned on top");
+        console.log("Pinned element moved to the top");
         $chatList.prepend(parentDiv); // Move pinned element to the top
     } else {
-        // If not pinned, move it after the last pinned element
+        // If not pinned, move it after the last pinned element, or based on `data-msgtime`
         let lastPinnedDiv = $chatList.find("div:has(.pinned)").last();
-        console.log(lastPinnedDiv);
+        let nonPinnedDivs = $chatList.find("div:not(:has(.pinned))");
+
         if (lastPinnedDiv.length > 0) {
-            lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
+            // Place after the last pinned element
+            console.log("Placed after the last pinned element");
+            lastPinnedDiv.after(parentDiv);
         } else {
-            $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
+            // Sort by `data-msgtime` if there are no pinned elements
+            let inserted = false;
+            nonPinnedDivs.each(function () {
+                let currentLi = $(this).find("li");
+                let currentMsgTime = parseInt(currentLi.attr("data-msgtime"));
+
+                if (elementMsgTime > currentMsgTime) {
+                    $(this).before(parentDiv);
+                    inserted = true;
+                    return false; // Break the loop
+                }
+            });
+
+            // If not inserted, append it at the end
+            if (!inserted) {
+                $chatList.append(parentDiv);
+            }
         }
     }
 }
@@ -557,9 +596,7 @@ function updateUserInFirebase(user_id) {
         });
     });
 }
-setTimeout(() => {
-    loader.hide();
-}, 3000);
+
 // Function to update the chat UI
 // $('.empty-massage').css('display','none');
 $(".msg-head").css("display", "none");
@@ -593,6 +630,8 @@ async function updateChat(user_id) {
     $(".empty-massage").css("display", "none");
     $(".msg-head").css("display", "block");
     $(".msg-footer").css("display", "block");
+    $("#selected-user-lastseen").show();
+
     const messageTime = selected_user.userLastSeen
         ? new Date(selected_user.userLastSeen)
         : new Date();
@@ -600,9 +639,9 @@ async function updateChat(user_id) {
     console.log(messageTime);
 
     let lastseen =
-        selected_user.userStatus == "offline"
-            ? // ? timeago.format(messageTime)`last seen at ${timeago.format(messageTime)}`
-              `last seen at ${timeago.format(messageTime)}`
+        selected_user.userStatus == "offline" ||
+        selected_user.userStatus == "Offline"
+            ? `last seen at ${timeago.format(messageTime)}`
             : selected_user.userStatus == "Online" ||
               selected_user.userStatus == "online"
             ? "Online"
@@ -611,7 +650,6 @@ async function updateChat(user_id) {
     $("#selected-user-name").html(selected_user.userName);
 
     const profileImageUrl = selected_user.userProfile;
-    await updateProfileImg(profileImageUrl, selected_user.userName);
 
     $(".selected_name").val(selected_user.userName);
     $(".selected-title").html(selected_user.userName);
@@ -619,6 +657,12 @@ async function updateChat(user_id) {
     $(".selected_conversasion").val($(".selected_id").val());
     const conversationId = $(".selected_id").val();
     $(".conversationId").attr("conversationId", conversationId);
+    await updateProfileImg(
+        profileImageUrl,
+        selected_user.userName,
+        conversationId
+    );
+
     update(userRef, { userChatId: conversationId });
 
     const messagesRef = ref(database, `Messages/${conversationId}/message`);
@@ -649,7 +693,9 @@ async function updateChat(user_id) {
 
         if (isBlockedByMe || isBlockedByUser) {
             $(".msg-footer").hide();
+            $("#selected-user-lastseen").hide();
         } else {
+            $("#selected-user-lastseen").show();
             $(".msg-footer").show();
         }
 
@@ -682,6 +728,7 @@ async function updateChat(user_id) {
                 unRead: false,
                 unReadCount: 0,
             });
+            console.log("updateoverview");
         }
     });
 
@@ -696,19 +743,32 @@ async function updateChat(user_id) {
     onChildChanged(selecteduserTypeRef, async (snapshot) => {
         const Selectedsnapshot = await get(selecteduserTypeRef);
         const selectedUserData = Selectedsnapshot.val();
+        const conversationId = $(".selected_id").val();
+        const isGroup = $("#isGroup").val();
+        let lastseen = "";
+        if (isGroup == true || isGroup == "true") {
+            lastseen = "";
+        } else {
+            lastseen =
+                selectedUserData.userStatus == "offline" ||
+                selectedUserData.userStatus == "Offline"
+                    ? `last seen at ${timeago.format(messageTime)}`
+                    : selectedUserData.userStatus == "Online" ||
+                      selectedUserData.userStatus == "online"
+                    ? "Online"
+                    : "";
+        }
         if (
             snapshot.key === "userTypingStatus" &&
             snapshot.val() == "Typing..."
         ) {
-            const conversationId = $(".selected_id").val();
-
             if (selectedUserData.userChatId == conversationId) {
                 $("#selected-user-lastseen").text("Typing...");
             } else {
-                $("#selected-user-lastseen").text(selectedUserData.userStatus);
+                $("#selected-user-lastseen").text(lastseen);
             }
         } else {
-            $("#selected-user-lastseen").text(selectedUserData.userStatus);
+            $("#selected-user-lastseen").text(lastseen);
         }
     });
 
@@ -751,9 +811,14 @@ async function updateChatfromGroup(conversationId) {
     });
     onChildChanged(profileRef, async (snapshot) => {
         const profile = snapshot.val();
+        console.log({ profile });
         const profileIndex = await setProfileIndexCache(conversationId);
-
-        if (snapshot.key != profileIndex && profile.userTypingStatus == true) {
+        const selectedConversationId = $(".selected_conversasion").val();
+        if (
+            selectedConversationId === conversationId &&
+            snapshot.key != profileIndex &&
+            profile.userTypingStatus == true
+        ) {
             $(".typing").html(profile.name + " is typing");
         } else {
             $(".typing").html("");
@@ -775,14 +840,15 @@ async function updateChatfromGroup(conversationId) {
                 unRead: false,
                 unReadCount: 0,
             });
+            console.log("udpateoverview");
         }
     });
     $("#selected-user-lastseen").html(""); // Group doesn't have a last seen
     $("#selected-user-name").html(groupInfo.groupName);
     await updateProfileImg(
         groupInfo.groupProfile,
-        groupInfo.groupName
-        // conversationId
+        groupInfo.groupName,
+        conversationId
     );
 
     $(".selected_name").val(groupInfo.groupName);
@@ -822,9 +888,10 @@ $(document).on("click", ".msg-list", async function () {
         await updateChatfromGroup(conversationId);
         console.log({ conversationId });
 
-        //  $(".new-member").removeClass("d-none");
+        $(".new-member").removeClass("d-none");
     } else {
         $(".new-member").addClass("d-none");
+        $(".new-members-add").addClass("d-none");
 
         const userId = $(this).attr("data-userid");
         $(".selected_message").val(userId);
@@ -834,9 +901,11 @@ $(document).on("click", ".msg-list", async function () {
             unRead: false,
             unReadCount: 0,
         });
+        console.log("updateoverview");
         await updateChat(userId);
         console.log({ conversationId });
     }
+    isToMove = false;
 });
 async function updateMore(conversationId) {
     const overviewSnapshot = await get(
@@ -1031,6 +1100,7 @@ $(document).on("click", ".pin-single-conversation", function (e) {
 });
 
 $(document).on("click", ".mute-conversation", function () {
+    const selectedConversationId = $(".selected_conversasion").val();
     const change = $(this).attr("changeWith");
     let conversationId = $(".conversationId").attr("conversationId");
     const overviewRef = ref(
@@ -1042,24 +1112,43 @@ $(document).on("click", ".mute-conversation", function () {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+    if (change == "1") {
+        console.log("mute here");
+        $(".conversation-" + conversationId).addClass("muted");
 
-    $(".conversation-" + conversationId)
-        .find(".chat-data")
-        .find(".mute-single-conversation")
-        .find("span")
-        .text(change == "1" ? "Unmute" : "Mute");
+        if (selectedConversationId === conversationId) {
+            $(".unmute-self-icn").show();
+            $(".mute-self-icn").hide();
+        }
+        $(this).children(".mute1-self-icn").addClass("d-none");
+        $(this).children(".unmute1-self-icn").removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("muted");
 
-    $(".conversation-" + conversationId)
-        .find(".chat-data")
-        .find(".mute-single-conversation")
-        .attr("changeWith", change == "1" ? "0" : "1");
+        $(this).children(".mute1-self-icn").removeClass("d-none");
+        $(this).children(".unmute1-self-icn").addClass("d-none");
+        if (selectedConversationId === conversationId) {
+            $(".mute-self-icn").show();
+            $(".unmute-self-icn").hide();
+        }
+    }
+    // $(".conversation-" + conversationId)
+    //     .find(".chat-data")
+    //     .find(".mute-single-conversation")
+    //     .find("span")
+    //     .text(change == "1" ? "Unmute" : "Mute");
+
+    // $(".conversation-" + conversationId)
+    //     .find(".chat-data")
+    //     .find(".mute-single-conversation")
+    //     .attr("changeWith", change == "1" ? "0" : "1");
 });
 
 $(document).on("click", ".mute-single-conversation", function (e) {
     e.stopPropagation();
 
     const change = $(this).attr("changeWith");
-    let conversationId = $(".conversationId").attr("conversationId");
+    let conversationId = $(this).data("conversation");
     const overviewRef = ref(
         database,
         `overview/${senderUser}/${conversationId}/isMute`
@@ -1077,6 +1166,19 @@ $(document).on("click", ".mute-single-conversation", function (e) {
         .find("span")
         .text(change == "1" ? "Unmute" : "Mute");
     $(this).attr("changeWith", change == "1" ? "0" : "1");
+
+    if (change == "1") {
+        console.log("mute here");
+        $(".conversation-" + conversationId).addClass("muted");
+
+        $(this).children(".mute1-self-icn").addClass("d-none");
+        $(this).children(".unmute1-self-icn").removeClass("d-none");
+    } else {
+        $(".conversation-" + conversationId).removeClass("muted");
+
+        $(this).children(".mute1-self-icn").removeClass("d-none");
+        $(this).children(".unmute1-self-icn").addClass("d-none");
+    }
 });
 
 $(document).on("click", ".block-conversation", async function () {
@@ -1206,6 +1308,7 @@ if ($("#isGroup").val() == true) {
 } else {
     updateChat($(".selected_message").val());
 }
+
 $(".archived-list").hide();
 $("#archive-list").click(function () {
     var msgLists = [];
@@ -1254,12 +1357,14 @@ async function setProfileIndexCache(conversationId) {
             // Find the profile with the matching user ID
             for (let i = 0; i < profiles.length; i++) {
                 if (profiles[i].id === senderUser) {
+                    console.log({ i });
                     profileIndexCache[conversationId] = i;
                     break;
                 }
             }
         }
     }
+    console.log(profileIndexCache[conversationId]);
     return profileIndexCache[conversationId];
 }
 
@@ -1272,7 +1377,7 @@ $(".send-message").on("keyup", async function (e) {
         if (isGroup == "true" || isGroup == true) {
             var profileIndex = await setProfileIndexCache(conversationId);
             // If profileIndex is cached, update the userTypingStatus
-            if (profileIndex) {
+            if (profileIndex != undefined) {
                 var groupRef = ref(
                     database,
                     `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
@@ -1285,7 +1390,7 @@ $(".send-message").on("keyup", async function (e) {
         } else {
             update(userRef, { userTypingStatus: "Not typing..." });
         }
-    }, 1000);
+    }, 500);
 });
 $("#preview").hide();
 let mediaRecorder;
@@ -1310,7 +1415,8 @@ $(".send-message").on("keypress", async function (e) {
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
         var profileIndex = await setProfileIndexCache(conversationId);
-        if (profileIndex) {
+
+        if (profileIndex != undefined) {
             var groupRef = ref(
                 database,
                 `Groups/${conversationId}/groupInfo/profiles/${profileIndex}`
@@ -1647,11 +1753,13 @@ function UpdateMessageToList(key, messageData, conversationId) {
     const messageEle = document.getElementById(`message-${key}`);
     let isGroup = $("#isGroup").val();
     let msgloop = $(messageEle).data("loop");
+    let dataRloop = $(messageEle).data("data-Rloop");
     const messgeElement = createMessageElement(
         key,
         messageData,
         isGroup,
-        msgloop
+        msgloop,
+        dataRloop
     );
 
     $(messageEle).replaceWith(messgeElement);
@@ -1692,15 +1800,25 @@ function addMessageToList(key, messageData, conversationId) {
 var formattedDate = {};
 var messageRcvTime = "";
 let chatloop = 0;
-function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
+let recchatloop = 0;
+function createMessageElement(
+    key,
+    messageData,
+    isGroup,
+    msgLoop = 0,
+    recMsgLoop = 0
+) {
     messageRcvTime = new Date(messageData.timeStamp).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
         hour12: true,
     });
-    chatloop = chatloop + 1;
+
     const isSender = senderUser == messageData.senderId;
     const isReceiver = senderUser != messageData.senderId;
+
+    chatloop = isSender ? chatloop + 1 : chatloop;
+    recchatloop = isReceiver ? recchatloop + 1 : recchatloop;
     if (
         (isGroup == "true" || isGroup == true) &&
         SelecteGroupUser[messageData.senderId] == undefined
@@ -2072,7 +2190,6 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
             msgDate +
             "</span></h5>";
     } else if (formattedDate[msgDate] === undefined) {
-        // console.log(formattedDate);
         // console.log(msgDate);
         if (msgDate == "Yesterday") {
             daychange =
@@ -2094,32 +2211,59 @@ function createMessageElement(key, messageData, isGroup, msgLoop = 0) {
     const time = document.getElementsByClassName(
         `time_${messageRcvTime.replace(/\s/g, "")}`
     );
-    let setTime = 1;
-    if (msgLoop != 0) {
-        Array.from(time).forEach((timeElement) => {
-            if ($(timeElement).data("loop") > msgLoop) {
-                setTime = 0;
-            } else {
-                $(timeElement).text("");
-            }
-        });
+    let setTimeS = 1;
+    let setTimeR = 1;
+
+    if (isSender) {
+        if (msgLoop != 0) {
+            Array.from(time).forEach((timeElement) => {
+                if ($(timeElement).data("loop") > msgLoop) {
+                    setTimeS = 0;
+                } else {
+                    $(timeElement).text("");
+                }
+            });
+        } else {
+            $(time).text("");
+        }
     } else {
-        $(time).text("");
+        const Rtime = document.getElementsByClassName(
+            `rtime_${messageRcvTime.replace(/\s/g, "")}`
+        );
+        if (recMsgLoop != 0) {
+            Array.from(Rtime).forEach((timeElement) => {
+                if ($(timeElement).data("Rloop") > recMsgLoop) {
+                    setTimeR = 0;
+                } else {
+                    $(timeElement).text("");
+                }
+            });
+        } else {
+            $(Rtime).text("");
+        }
+    }
+
+    let Dataloop = msgLoop;
+    let DataRloop = recMsgLoop;
+    let msgTime;
+    let timeClass;
+    if (isSender) {
+        timeClass = `stime_${messageRcvTime.replace(/\s/g, "")}`;
+        Dataloop = msgLoop == 0 ? chatloop : msgLoop;
+        msgTime = setTimeS == 1 ? messageRcvTime : "";
+    } else {
+        DataRloop = recMsgLoop == 0 ? recchatloop : recMsgLoop;
+        timeClass = `rtime_${messageRcvTime.replace(/\s/g, "")}`;
+        msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
 
     return `<div>
     ${daychange}
         <li class="${
             isSender ? "receiver" : "sender"
-        }" id="message-${key}" data-loop="${
-        msgLoop == 0 ? chatloop : msgLoop
-    }" >        
+        }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${
-                msgLoop == 0 ? chatloop : msgLoop
-            }" class="time time_${messageRcvTime.replace(/\s/g, "")}">${
-        setTime == 1 ? messageRcvTime : ""
-    }</span>            
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" class="time ${timeClass}">${msgTime}</span>            
         </li>
     </div>
     `;
@@ -2741,8 +2885,13 @@ async function addListInMembers(SelecteGroupUser) {
     const promises = SelecteGroupUser.map(async (user) => {
         const userImageElement = await getListUserimg(user.image, user.name);
 
+        // const removeMember =
+        //     user.id != senderUser && senderIsAdmin
+        //         ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
+        //         : "";
+
         const removeMember =
-            user.id != senderUser && senderIsAdmin
+            user.id == senderUser
                 ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
                 : "";
 
@@ -2782,7 +2931,15 @@ $(document).on("click", ".remove-member", async function () {
     var conversationId = $(".conversationId").attr("conversationid");
 
     var overviewRef = ref(database, `overview/${userId}/${conversationId}`);
-    await remove(overviewRef);
+
+    let senderIsAdmin = false;
+
+    SelecteGroupUser.forEach((user) => {
+        console.log(user);
+        if (user.id == senderUser && user.isAdmin == "1") {
+            senderIsAdmin = true;
+        }
+    });
 
     var groupInfoProfileRef = ref(
         database,
@@ -2792,7 +2949,23 @@ $(document).on("click", ".remove-member", async function () {
     var groupInfoProfileData = groupInfoProfileSnap.val();
 
     if (groupInfoProfileData) {
+        let i = 0;
         for (var key in groupInfoProfileData) {
+            if (
+                i == 0 &&
+                senderIsAdmin &&
+                groupInfoProfileData[key].id != userId &&
+                groupInfoProfileData[key].leave == false
+            ) {
+                i++;
+                await update(
+                    ref(
+                        database,
+                        `/Groups/${conversationId}/groupInfo/profiles/${key}`
+                    ),
+                    { isAdmin: "1" }
+                );
+            }
             if (groupInfoProfileData[key].id == userId) {
                 await update(
                     ref(
@@ -2801,10 +2974,10 @@ $(document).on("click", ".remove-member", async function () {
                     ),
                     { isAdmin: "0", leave: true }
                 );
-                break;
             }
         }
     }
+
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
     const groupInfo = snapshot.val();
@@ -2819,7 +2992,9 @@ $(document).on("click", ".remove-member", async function () {
             };
         }
     });
+    $("#listBox").modal("hide");
     await addListInMembers(SelecteGroupUser);
+    await remove(overviewRef);
 });
 
 $(".updateGroup").click(function () {
@@ -2834,9 +3009,28 @@ $(".conversationId").click(function () {
     let conversationId = $(this).attr("conversationId");
     $(".change-group-name").addClass("d-none");
     $(".selected-title").show();
+    $("#group-selected-user-id").val("");
     let isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true) {
         $(".updateGroup").show();
+        let senderIsAdmin = false;
+
+        // Check if the senderUser is an admin
+        SelecteGroupUser.forEach((user) => {
+            if (user.id == senderUser && user.isAdmin == "1") {
+                senderIsAdmin = true;
+            }
+        });
+        // console.log("check admin", senderIsAdmin);
+        if (senderIsAdmin) {
+            $(".new-member").removeClass("d-none");
+            $(".choosen-file").show();
+            $(".updateGroup").show();
+        } else {
+            $(".new-member").addClass("d-none");
+            $(".choosen-file").hide();
+            $(".updateGroup").hide();
+        }
     } else {
         $(".updateGroup").hide();
     }
@@ -2887,7 +3081,7 @@ $("#new-member").click(function () {
 });
 $(".close-group-modal").click(function () {
     $(".new-members-add").addClass("d-none");
-    // $(".new-member").addClass("d-none");
+    $(".new-member").removeClass("d-none");
 });
 
 var selectedgrpUserIds = [];
@@ -3135,9 +3329,9 @@ function generateReactionsAndReply() {
         <div class="reaction-dialog" id="reaction-dialog-${messageId}">
             <span class="reaction-option" data-reaction="\\u{1F60D}"><img src="${asset_path}/ic_heart_eyes.png"/></span>
             <span class="reaction-option" data-reaction="\\u{1F604}"><img src="${asset_path}/ic_smile.png"/></span>
-            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}}"><img src="${asset_path}/ic_like_reaction.png"/></span>
+            <span class="reaction-option heart_reaction" data-reaction="\\u{2764}"><img src="${asset_path}/ic_like_reaction.png"/></span>
             <span class="reaction-option" data-reaction="\\u{1F44D}"><img src="${asset_path}/ic_thumsup.png"/></span>
-            <span class="reaction-option" data-reaction="\\u{1F44F}}"><img src="${asset_path}/ic_clapping_hand.png"/></span>
+            <span class="reaction-option" data-reaction="\\u{1F44F}"><img src="${asset_path}/ic_clapping_hand.png"/></span>
         </div>
     `;
         $(".reaction-dialog").remove(); // Remove any existing reaction dialogs
@@ -3237,11 +3431,15 @@ function generateReactionsAndReply() {
 generateReactionsAndReply();
 
 $("#choose-file").on("change", async function () {
+    let profileModel = document.getElementById("profileModel");
+    let selected_user_profile = document.getElementById(
+        "selected-user-profile"
+    );
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        $("#profileIm").replaceWith(
-            `<img id="profileIm" src="${e.target.result}" alt="user-img">`
+        $(profileModel).replaceWith(
+            `<img id="profileModel" src="${e.target.result}" alt="user-img">`
         );
     };
     reader.readAsDataURL(this.files[0]);
@@ -3251,8 +3449,10 @@ $("#choose-file").on("change", async function () {
                 storage,
                 `/GroupProfile/${senderUser}/${Date.now()}_${file.name}`
             );
-            const previewImg = $("#profileIm");
+            let profileModel = document.getElementById("profileModel");
+            const previewImg = $(profileModel);
             const imageUrl = previewImg.attr("src");
+            console.log(imageUrl);
             if (imageUrl?.startsWith("data:image/")) {
                 await uploadString(fileRef, imageUrl, "data_url");
             } else {
@@ -3261,24 +3461,25 @@ $("#choose-file").on("change", async function () {
                 await uploadBytes(fileRef, blob);
             }
             const downloadURL = await getDownloadURL(fileRef);
-            let profileModel = document.getElementById("profileModel");
             var conversationId = $(".conversationId").attr("conversationid"); // Replace with actual conversation ID
             var groupInfoRef = ref(
                 database,
                 `/Groups/${conversationId}/groupInfo/`
             );
-            $("#selected-user-profile").replaceWith(
+            $(selected_user_profile).replaceWith(
                 `<img src="${downloadURL}" id="selected-user-profile"/>`
             );
             $(profileModel).replaceWith(
                 `<img src="${downloadURL}" id="profileModel"/>`
             );
+
             $(".conversation-" + conversationId)
                 .find(".chat-data")
                 .find(".user-img")
                 .html(
-                    `<img src="${downloadURL}" class="user-avatar img-fluid"/>`
+                    `<img class="user-avatar img-fluid" src="${downloadURL}" alt="cover-img" >`
                 );
+
             await update(groupInfoRef, { groupProfile: downloadURL });
             SelecteGroupUser.map((user) => {
                 var groupUserInfoRef = ref(
@@ -3289,7 +3490,7 @@ $("#choose-file").on("change", async function () {
                 update(groupUserInfoRef, { receiverProfile: downloadURL });
             });
         }
-    }, 500);
+    }, 800);
 });
 
 async function startRecording() {
@@ -3511,18 +3712,16 @@ async function getTotalUnreadMessageCount() {
     const overviewRef = ref(database, `overview/${userId}`);
     const snapshot = await get(overviewRef);
     let totalUnreadCount = 0;
-
-    if (snapshot.exists()) {
-        const conversations = snapshot.val();
+    if (await snapshot.exists()) {
+        const conversations = await snapshot.val();
         for (let conversationId in conversations) {
             if (
                 conversations[conversationId].unReadCount &&
                 conversations[conversationId].contactName
             ) {
-                totalUnreadCount += parseInt(
-                    conversations[conversationId].unReadCount,
-                    10
-                );
+                totalUnreadCount =
+                    totalUnreadCount +
+                    parseInt(conversations[conversationId].unReadCount, 10);
 
                 // console.log(totalUnreadCount);
             }
@@ -3558,9 +3757,40 @@ $(document).ready(function () {
     updateUnreadMessageBadge();
 });
 $(document).on("click", ".bulk-check .form-check-input", function (event) {
-    event.stopPropagation(); // Prevent the event from bubbling up to .msg-list
-    const msgList = $(this).parent().parent();
-    if (msgList.hasClass("pinned")) {
+    event.stopPropagation(); // Prevent event propagation to .msg-list
+
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    );
+    let allPinned = true;
+    let somePinned = false;
+    let allMuted = true;
+    let someMuted = false;
+    if (checkedConversations.length <= 0) {
+        $(".multi-pin").attr("changeWith", "1");
+        $(".pin-icn").removeClass("d-none");
+        $(".unpin-icn").addClass("d-none");
+
+        $(".multi-mute").attr("changeWith", "1");
+        $(".mute-icn").removeClass("d-none");
+        $(".unmute-icn").addClass("d-none");
+        return;
+    }
+    checkedConversations.each(function () {
+        const conversationElement = $(this).parent().parent();
+        if (conversationElement.hasClass("pinned")) {
+            somePinned = true;
+        } else {
+            allPinned = false;
+        }
+
+        if (conversationElement.hasClass("muted")) {
+            someMuted = true;
+        } else {
+            allMuted = false;
+        }
+    });
+    if (allPinned) {
         $(".multi-pin").attr("changeWith", "0");
         $(".pin-icn").addClass("d-none");
         $(".unpin-icn").removeClass("d-none");
@@ -3568,6 +3798,16 @@ $(document).on("click", ".bulk-check .form-check-input", function (event) {
         $(".multi-pin").attr("changeWith", "1");
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
+    }
+    console.log({ allMuted });
+    if (allMuted) {
+        $(".multi-mute").attr("changeWith", "0");
+        $(".mute-icn").addClass("d-none");
+        $(".unmute-icn").removeClass("d-none");
+    } else {
+        $(".multi-mute").attr("changeWith", "1");
+        $(".mute-icn").removeClass("d-none");
+        $(".unmute-icn").addClass("d-none");
     }
 });
 $(".bulk-edit").click(function () {
@@ -3595,6 +3835,14 @@ $(document).on("change", "input[name='checked_conversation[]']", function () {
     $(".check-counter").text(checkedCount);
 });
 $(".multi-pin").click(async function () {
+    const checkedConversations = $(
+        "input[name='checked_conversation[]']:checked"
+    )
+        .toArray()
+        .reverse();
+    if (checkedConversations.length <= 0) {
+        return;
+    }
     const pinChange = $(this).attr("changeWith");
     $(this).attr("changeWith", pinChange == "1" ? "0" : "1");
     if (pinChange == "1") {
@@ -3604,14 +3852,7 @@ $(".multi-pin").click(async function () {
         $(".pin-icn").removeClass("d-none");
         $(".unpin-icn").addClass("d-none");
     }
-    const checkedConversations = $(
-        "input[name='checked_conversation[]']:checked"
-    )
-        .toArray()
-        .reverse();
-    if (checkedConversations.length <= 0) {
-        return;
-    }
+
     const promises = [];
     checkedConversations.forEach(function (element) {
         const conversationId = $(element).val();
@@ -3699,6 +3940,28 @@ $(".multi-mute").click(function () {
     $(this).attr("changeWith", change == "1" ? "0" : "1");
 
     checkedConversations.each(function () {
+        const conversationId = $(this).val();
+        if (change == "1") {
+            $(".conversation-" + conversationId).addClass("muted");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".mute1-self-icn")
+                .addClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unmute1-self-icn")
+                .removeClass("d-none");
+        } else {
+            $(".conversation-" + conversationId).removeClass("muted");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".mute1-self-icn")
+                .removeClass("d-none");
+            $(".conversation-" + conversationId)
+                .children()
+                .find(".unmute1-self-icn")
+                .addClass("d-none");
+        }
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".mute-single-conversation")
@@ -3710,7 +3973,6 @@ $(".multi-mute").click(function () {
             .find(".mute-single-conversation")
             .attr("changeWith", change == "1" ? "0" : "1");
 
-        const conversationId = $(this).val();
         const overviewRef = ref(
             database,
             `overview/${senderUser}/${conversationId}/isMute`
@@ -4289,3 +4551,64 @@ async function findOrCreateSingleConversation(
 
     return newConversationId;
 }
+setTimeout(function () {
+    firstTime = false;
+    loader.hide();
+}, 5000);
+
+function applyStyles() {
+    if ($(window).width() <= 767) {
+        $("#backtomsg-btn").show();
+
+        $(".chatbox").css("display", "none");
+        $(document).on("click", ".chat-data", function () {
+            $(".chatbox").css("display", "block");
+            $(".chat-lists").css("display", "none");
+        });
+        $(document).on("click", "#backtomsg-btn", function () {
+            $(".chatbox").css("display", "none");
+            $(".chat-lists").css("display", "block");
+        });
+        // $(document).on('click','.chat-data',function(){
+        //   $(".chatbox").css("display", "block");
+        //   $(".chat-lists").css("display", "none");
+        // })
+    } else {
+        $("#backtomsg-btn").hide();
+        // $(".chatbox").css("display", "block");
+    }
+}
+
+// Apply styles on page load
+applyStyles();
+
+//backup code for moveToTopOrBelowPinned
+// function moveToTopOrBelowPinned(element) {
+//     if (firstTime == true || !isToMove) {
+//         isToMove = true;
+//         return;
+//     }
+//     if (element.length <= 0) {
+//         return;
+//     }
+//     console.log("moved====================");
+
+//     let $chatList = $(".chat-list"); // Get the chat list container
+//     let parentDiv = element.closest("div"); // Get the parent div of the li element
+//     let isPinned = element.hasClass("pinned"); // Check if the element is pinned
+
+//     // If the element is pinned, move it to the very top
+//     if (isPinned) {
+//         console.log("pinned on top");
+//         $chatList.prepend(parentDiv); // Move pinned element to the top
+//     } else {
+//         // If not pinned, move it after the last pinned element
+//         let lastPinnedDiv = $chatList.find("div:has(.pinned)").last();
+//         console.log(lastPinnedDiv);
+//         if (lastPinnedDiv.length > 0) {
+//             lastPinnedDiv.after(parentDiv); // Place after the last pinned parent div
+//         } else {
+//             $chatList.prepend(parentDiv); // If no pinned elements exist, prepend the parent div to the very top
+//         }
+//     }
+// }

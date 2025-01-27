@@ -22,13 +22,16 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p>Allow For +1</p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Allow For +1"> -->
+                                            <button data-position="bottom">  
+                                            <span>Allow For +1</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            </button>
+                                            <!-- </a> -->
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -77,13 +80,16 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p>Adults only party</p>
-                                            <a href="#">
+                                            <!-- <a href="#"  data-toggle="tooltip" data-placement="bottom" title="Children are not permitted to attend the event"> -->
+                                            <button data-position="bottom">  
+                                            <span>Children are not permitted to attend the event</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            </button>
+                                            <!-- </a> -->
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -163,13 +169,16 @@
                                     <div class="d-flex justify-content-between ">
                                         <div class="d-flex">
                                             <p><strong>Thank you messages</strong></p>
-                                            <a href="#" onclick="toggleSidebar()">
+                                            <!-- <a href="#" onclick="toggleSidebar()" data-toggle="tooltip" data-placement="bottom" title="Thank you messages"> -->
+                                            <button onclick="toggleSidebar()" data-position="bottom">  
+                                            <span>Thank you messages</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            </button>
+                                            <!-- </a> -->
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -184,6 +193,10 @@
                                     
                                     <a href="#" class="add-limit thankyou_card thank_you_card_toggle"  style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['thank_you_cards']=="1") ? "":"display:none"}}>
                                         <div class="d-flex align-items-center justify-content-between w-100">
+                                            @if (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['thank_you_cards']=="1")
+                                            <div class="d-flex align-items-center add_new_thankyou_card"><span class="me-3"></span>
+                                                <h5>{{$eventDetail['thankyou_card_count']}} Template available</h5></div>
+                                            @else     
                                             <div class="d-flex align-items-center add_new_thankyou_card">
                                                 <span class="me-3">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -192,6 +205,8 @@
                                                 </span>
                                                 <h5>Select thank you card</h5>
                                             </div>
+                                            @endif
+                                            
                                             <span>
                                                 <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1.42505 14.6004L6.85838 9.16706C7.50005 8.52539 7.50005 7.47539 6.85838 6.83372L1.42505 1.40039" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -204,13 +219,17 @@
                                     <div class="d-flex justify-content-between ">
                                         <div class="d-flex">
                                             <p><strong>Add Co-Host</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Add Co-Host"> -->
+                                            <button data-position="bottom">  
+                                                <span>Add Co-Host</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            </button>
+
+                                            <!-- </a> -->
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -244,13 +263,17 @@
                                     <div class="d-flex justify-content-between ">
                                         <div class="d-flex">
                                             <p><strong>Gift Registry</strong></p>
-                                            <a href="#" onclick="toggleSidebar()">
+                                            <!-- <a href="#" onclick="toggleSidebar()" data-toggle="tooltip" data-placement="bottom" title="Gift Registry"> -->
+                                            <button onclick="toggleSidebar()" data-position="bottom">  
+                                            <span>Gift Registry</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            </button>
+
+                                            <!-- </a> -->
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -264,6 +287,10 @@
                                     </div>
                                     <a href="#" class="add-limit add_gift_registry" style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['gift_registry']=="1") ? "":"display:none"}}>
                                         <div class="d-flex align-items-center justify-content-between w-100">
+                                            @if (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['gift_registry']=="1")
+                                            <div class="d-flex align-items-center add_gift_registry_count"><span class="me-3"></span>
+                                                <h5>{{$eventDetail['gift_registry_count']}} Registries</h5></div>
+                                            @else   
                                             <div class="d-flex align-items-center add_gift_registry_count">
                                                 <span class="me-3">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -272,6 +299,7 @@
                                                 </span>
                                                 <h5>Add gift registry</h5>
                                             </div>
+                                            @endif
                                             <span>
                                                 <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1.42505 14.6004L6.85838 9.16706C7.50005 8.52539 7.50005 7.47539 6.85838 6.83372L1.42505 1.40039" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -284,13 +312,15 @@
                                     <div class="d-flex justify-content-between ">
                                         <div class="d-flex">
                                             <p><strong>Guest list visible to guests</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#"data-toggle="tooltip" data-placement="bottom" title="Turning this off will also auto turn off the Event Wall"> -->
+                                            <button data-position="bottom">  
+                                            <span>Turning this off will also auto turn off the Event Wall</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                        </button>
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -324,13 +354,17 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p><strong>Event Wall</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Where you can chat with other guests,upload photos,post/reply to polls and see RSVP updates/responses"> -->
+                                            <button data-position="bottom">  
+                                            <span>Where you can chat with other guests,upload photos,post/reply to polls and see RSVP updates/responses</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            <!-- </a> -->
+                                             </button>
+
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -347,13 +381,17 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p><strong>Potluck</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Potluck"> -->
+                                            <button data-position="bottom">  
+                                            <span>Potluck</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            <!-- </a> -->
+                                             </button>
+
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -409,13 +447,16 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p><strong>Event wall posts</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Event wall posts"> -->
+                                            <button data-position="bottom">  
+                                            <span>Event wall posts</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            <!-- </a> -->
+                                             </button>
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -432,13 +473,16 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p><strong>RSVP updates</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="RSVP updates"> -->
+                                            <button data-position="bottom">  
+                                            <span>RSVP updates</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            <!-- </a> -->
+                                             </button>
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -460,13 +504,16 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p><strong>Request event photos from guests</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Request event photos from guests"> -->
+                                            <button data-position="bottom">  
+                                            <span>Request event photos from guests</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            <!-- </a> -->
+                                             </button>
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
@@ -483,13 +530,17 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <p><strong>RSVP reminder</strong></p>
-                                            <a href="#">
+                                            <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="RSVP reminder for 'No Response' guests" > -->
+                                            <button data-position="bottom">  
+                                            <span>RSVP reminder for 'No Response' guests</span>
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </a>
+                                            <!-- </a> -->
+                                             </button>
+                                             
                                         </div>
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">

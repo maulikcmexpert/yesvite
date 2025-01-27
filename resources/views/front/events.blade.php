@@ -146,17 +146,16 @@
 
 
       <!-- ====== cancel event ======== -->
-      <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel">
+      <!-- <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <!-- <div class="modal-header">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> -->
+              
                 <div class="modal-body">
                     <div class="delete-modal-head text-center">
                       <div class="delete-icon">
                           <img src="{{asset('assets/front/image/info-circle.png')}}" alt="delete">
                       </div>
+                      <input type="hidden" id="cancel_event_id"/>
                       <h4>Cancel Event</h4>
                       <p>Cancelling this event will delete everything in this event including but not limited to all comments, photos, and settings associated with this event for you and your guests.</p>
                     </div>
@@ -172,8 +171,8 @@
                 </div>
                 <div class="modal-footer cancel-confirm-btn">
                   <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-secondary confirm-btn confirm_cancel_event_btn" >Confirm</button>
+                  <button type="button" class="btn btn-secondary confirm-btn confirm_cancel_event_btn" id="confirm_cancel_event_btn">Confirm</button>
                 </div>
             </div>
         </div>
-      </div>
+      </div> -->

@@ -74,7 +74,7 @@ header{
     height: 100%;
 }
 
-.g-badge{
+.g-badge,.n-badge{
     display: inline-block;
     background-color: var(--pink);
     border-radius: 100px;
@@ -98,6 +98,10 @@ header{
     border-radius: 50%;
     background-color: transparent;
     border: none;
+}
+
+.header-profile-wrp .profile-drop-down-menu img{
+    border-radius: 50%;
 }
 
 .header-profile-wrp h5{
@@ -800,6 +804,10 @@ header{
         padding: 0px !important;
         border: none !important;
         transition: 0.3s;
+    }
+
+    .moblie-menu-bar svg path{
+        stroke: var(--secondary-black);
     }
 
     .active.mobile-menu-wrp{

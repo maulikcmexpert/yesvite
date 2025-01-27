@@ -3,6 +3,13 @@
     overflow: hidden;
     overflow-y: auto;
 }
+.activated{
+    background-color: var(--primaryColor) !important;
+}
+
+.activated svg path{
+    stroke: #fff !important;
+}
 
 .edit-imag-main-content-wrp {
     overflow: hidden;
@@ -69,7 +76,7 @@
     width: 100%;
     max-width: 400px;
     margin: 0px auto;
-    height: auto;
+    height: 100px;
     padding: 10px 16px;
     background-color: var(--white);
     border-radius: 16px;
@@ -79,7 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -473,6 +480,16 @@
     border: 1px solid var(--headerBorder);
     background-color: transparent;
 }
+
+.format-text-inner-options button.activated {
+    border: 1px solid var(--primaryColor) !important;
+    background-color: transparent !important;
+}
+
+.format-text-inner-options button.activated svg path{
+    stroke: var(--secondryColor) !important;
+}
+
 
 .format-text-inner-options button svg {
     width: 24px;
@@ -1001,7 +1018,7 @@
     .design-sidebar_6.design-sidebar_7 {
         height: 55vh !important;
     }
-    
+
     .design-sidebar_4{
         height: 70vh !important;
     }

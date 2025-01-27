@@ -106,14 +106,12 @@ WebFontConfig = {
             "NeueHaasGroteskText-Bold",
             "NeueHaasGroteskText-Medium",
             "NeueHaasGroteskText-Regular",
-            "PTSansPro-Regular"
-
-
+            "PTSansPro-Regular",
+            "Times new roman",
         ],
         urls: [
             "https://yesvite.cmexpertiseinfotech.in/assets/event/css/stylesheet.css",
             // "http://18.190.81.164/assets/event/css/stylesheet.css",
-
         ],
     },
     loading: function () {

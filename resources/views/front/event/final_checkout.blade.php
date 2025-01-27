@@ -32,20 +32,102 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="owl-carousel owl-theme event_images_slider">
+                    <!-- <div class="owl-carousel owl-theme event_images_slider"> -->
+                <!-- <div class="event_images_slider owl-carousel owl-theme">
                         <div class="item">
                             <div class="setting-img">
                                 <img id="eventImage" src="" />
                             </div>
                         </div>
-
-                        <!-- <div class="item">
+                        <div class="item">
                             <div class="setting-img">
-                                <img id="sliderImages" src="" />
+                                <img id="sliderImages-1" src="" />
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="item">
+                            <div class="setting-img">
+                                <img id="sliderImages-2" src="" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="setting-img">
+                                <img id="sliderImages-3" src="" />
+                            </div>
+                        </div>
                        
+                </div> -->
+
+                <!-- <div class="swiper mySwiper event_images_slider">
+                    <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                         <div class="setting-img">
+                            <img id="eventImage" src="" />
+                        </div>
                     </div>
+                    <div class="swiper-slide sliderImages-1" style="display:none;">
+                        <div class="setting-img">
+                            <img id="sliderImages-1" src="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide sliderImages-2" style="display:none;">
+                        <div class="setting-img">
+                            <img id="sliderImages-2" src="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide sliderImages-3" style="display:none;">
+                    <div class="setting-img">
+                            <img id="sliderImages-3" src="" />
+                        </div>    
+                    </div>
+                 
+                    </div>
+             </div> -->
+             <div class="owl-carousel owl-theme event_images_slider">
+                    <div class="item">
+                        <div class="setting-img">
+                                <img id="eventImage" src="" />
+                            </div>
+                        </div>
+                    <div class="item sliderImages-1" style="display:none;">  
+                            <div class="setting-img">
+                                <img id="sliderImages-1" src="" />
+                            </div>
+                        </div>
+                    <div class="item sliderImages-2" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-2" src="" />
+                            </div>
+                    </div>
+                    <div class="item sliderImages-3" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-3" src="" />
+                            </div>
+                    </div>
+              
+            </div>
+            <div class="event_images_template" style="display:none;">
+                    <!-- <div class="item"> -->
+                        <div class="setting-img">
+                                <img id="eventTempImage" src="" />
+                            </div>
+                        <!-- </div> -->
+                    <!-- <div class="item sliderImages-1" style="display:none;">  
+                            <div class="setting-img">
+                                <img id="sliderImages-1" src="" />
+                            </div>
+                        </div>
+                    <div class="item sliderImages-2" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-2" src="" />
+                            </div>
+                    </div>
+                    <div class="item sliderImages-3" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-3" src="" />
+                            </div> -->
+                    </div>
+              
+            </div>
                     <!-- <div class="setting-img">
                         <img id="eventImage" src="" />
                     </div> -->
@@ -138,14 +220,27 @@
                     </div>
 
                 </div>
+                @if ($eventDetail['id'] == '')
                 <div class="new-event-btn">
                     <a href="#" id="final_create_event" class="cmn-btn">Purchase & Send Invites</a>
                 </div>
+                
+            @else    
+            <div class="new-event-btn">
+                <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout">Purchase & Send Invites</a>
+            </div>
+            @endif
             </div>
         </div>
+        @if ($eventDetail['id'] == '')
         <div class="new-event-btn new-event-respo">
             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
         </div>
+        @else    
+        <div class="new-event-btn new-event-respo">
+            <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
+        </div>
+        @endif
     </div>
 </div>
 

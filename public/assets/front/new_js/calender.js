@@ -55,6 +55,13 @@
       title.innerText = month.format('MMMM YYYY');
       monthContainer.appendChild(title);
 
+      const currentMonthButton = document.getElementsByClassName('calender_current_month');
+    if (month.isSame(today, 'month')) {
+      $(currentMonthButton).show(); // Show the button
+    } else {
+        $(currentMonthButton).hide(); // Show the button
+    }
+
       // Weekdays
       const weekdays = document.createElement('div');
       weekdays.className = 'weekdays';
@@ -149,7 +156,9 @@
 }();
 
 
-  
+
+
+
 !function () {
   var today = moment();
 
@@ -224,15 +233,15 @@ console.log(monthEventCount);
       monthContainer.appendChild(eventscount);
 
       // Weekdays
-    //   const weekdays = document.createElement('div');
-    //   weekdays.className = 'weekdays';
-    //   ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
-    //       const weekday = document.createElement('div');
-    //       weekday.className = 'day';
-    //       weekday.innerText = day;
-    //       weekdays.appendChild(weekday);
-    //   });
-    //   monthContainer.appendChild(weekdays);
+      // const weekdays = document.createElement('div');
+      // weekdays.className = 'weekdays';
+      // ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
+      //     const weekday = document.createElement('div');
+      //     weekday.className = 'day';
+      //     weekday.innerText = day;
+      //     weekdays.appendChild(weekday);
+      // });
+      // monthContainer.appendChild(weekdays);
 
       // Days
       const startDay = month.clone().startOf('month').day(); // Starting weekday
