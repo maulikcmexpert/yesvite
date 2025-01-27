@@ -41,7 +41,7 @@ use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
-use DB;
+// use DB;
 
 function getVideoDuration($filePath)
 {
