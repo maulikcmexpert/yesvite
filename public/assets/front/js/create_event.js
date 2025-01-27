@@ -734,40 +734,40 @@ function datepicker() {
 }
 
 // function start_timepicker() {
-//     $(".start_timepicker").datetimepicker({
-//         //  keepOpen: true,
-//         format: "LT",
-//         icons: {
-//             up: "fa fa-chevron-up",
-//             down: "fa fa-chevron-down",
-//         },
-//         useCurrent: false,
-//         ignoreReadonly: true,
-//         stepping: 15,
-//         // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+    $(".start_timepicker").datetimepicker({
+        //  keepOpen: true,
+        format: "LT",
+        icons: {
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+        },
+        useCurrent: false,
+        ignoreReadonly: true,
+        stepping: 15,
+        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
 
-//         // Set stepping to 15 minutes
-//         // defaultDate: now
-//         //  debug: true
-//     }).on('dp.show', function () {
-//         $(this).val(""); // Set the formatted time value in the input field
+        // Set stepping to 15 minutes
+        // defaultDate: now
+        //  debug: true
+    }).on('dp.show', function () {
+        $(this).val(""); // Set the formatted time value in the input field
 
-//         const picker = $(this).data("DateTimePicker");
-//         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+        const picker = $(this).data("DateTimePicker");
+        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
-//         // Set the picker to the closest 15-minute time dynamically
-//         picker.date(closest15MinTime);
+        // Set the picker to the closest 15-minute time dynamically
+        picker.date(closest15MinTime);
 
-//         $(".start_timepicker").val("");
+        $(".start_timepicker").val("");
 
-//     }).on('dp.hide', function (e) {
-//         // Automatically set the selected value in the input field when the picker closes
-//         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-//         $(this).val(selectedTime); // Set the formatted time value in the input field
-//     });
+    }).on('dp.hide', function (e) {
+        // Automatically set the selected value in the input field when the picker closes
+        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+        $(this).val(selectedTime); // Set the formatted time value in the input field
+    });
 
-//     // Ensure input field is clear when the page loads
-//     $(".start_timepicker").val("");
+    // Ensure input field is clear when the page loads
+    $(".start_timepicker").val("");
 
 // }
 
