@@ -41,4 +41,10 @@ class TwilioController extends Controller
             return response("Invalid response. Reply YES to subscribe or STOP to unsubscribe.", 200);
         }
     }
+    public function deliverystatus(Request $request)
+    {
+        Log::info('Webhook triggered: deliverystatus', [
+            'request_payload' => $request->all()
+        ]);
+    }
 }

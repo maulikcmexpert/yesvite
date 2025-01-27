@@ -1462,9 +1462,9 @@ class EventController extends BaseController
 
 
         $lastItemIndex = count($categories) > 0 && end($categories) === null ? 0 : count($categories);
-
-
+        
         $categoryNames =  collect($categories)->pluck('category_name')->toArray();
+        
 
         if (isset($edit_category_id) && $edit_category_id != '') {
             $status = '2';
@@ -1673,11 +1673,11 @@ class EventController extends BaseController
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
         session()->put('category', $categories);
+     
         $categories = session()->get('category', []);
 
         $total_item = 0;
         $total_quantity = 0;
-        $isCarryuser = 0;
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
                if(isset($value['item_carry_users'])){
@@ -1689,7 +1689,7 @@ class EventController extends BaseController
                        $total_quantity =  $total_quantity + $userVal['quantity'];
                    }
                }else{
-                $isCarryuser = 1;
+               
                 $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][0]['quantity'] = $quantity;
                 $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][0]['user_id'] = $id;
                 session()->put('category', $categories);
@@ -1705,25 +1705,11 @@ class EventController extends BaseController
                 // }
             }
         }
-        
-        if($request->type == "minus"){
-            $total_quantity= $total_quantity - 1;
-            if ($total_quantity == -1) {
-                $total_quantity = 1;
-            }
-        }else{
-            if($isCarryuser  == 1){
-                $total_quantity= $total_quantity;
-                
-            }else{
-                $total_quantity= $total_quantity + 1;
-                
-            }
-        }
-        // dd($total_quantity,$total_item);
-        // dD($total_item,$total_quantity);
-    
+       
+        session()->put('category', $categories);
+       
         $total_item = $total_item - $total_quantity ;
+
         return $total_item;
     }
 
