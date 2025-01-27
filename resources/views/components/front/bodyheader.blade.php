@@ -362,7 +362,7 @@
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> will bring the item below for <span>{{$inner_data['event_name']}} </span>Potluck
+                                          <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>Potluck
                                           </span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
