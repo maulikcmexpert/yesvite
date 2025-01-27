@@ -708,11 +708,7 @@
 
                                                   /></span>
                                                 </a>
-                                                <!-- @elseif
-                                                <p>
-                                                    {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
-                                                </p>
-                                                @endif -->
+                                              
                                           </div>
                                           <div class="notification-video-content">
                                             <p>
