@@ -7452,7 +7452,7 @@ $("#YesviteContactsAll").on("scroll", function () {
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
 
-    if (scrollTop + elementHeight >= scrollHeight) {
+    if (scrollTop + elementHeight >= scrollHeight-2) {
         busycontact = true;
         offsetcontact += limitcontact;
         var type = "phone";
