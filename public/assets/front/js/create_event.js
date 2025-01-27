@@ -4840,6 +4840,7 @@ function minusBTN(that) {
             );
             if (quantity == 0) {
                 that.parent().find(".item-quantity-minus").val(0);
+                that.parent().find(".input-qty").val(0);
             }
         }
     } else {
