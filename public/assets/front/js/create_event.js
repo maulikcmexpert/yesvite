@@ -717,15 +717,21 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const closest15MinTime = getClosest15MinuteTime();
-
-            // Set the picker to the closest 15-minute time dynamically
-            picker.date(closest15MinTime);
+            const currentValue = $(this).val(); 
+            if (!currentValue) {
+                // If the input is empty, set the picker to the closest 15-minute interval
+                const closest15MinTime = getClosest15MinuteTime();
+                picker.date(closest15MinTime);
+            } else {
+                // If the input has a value, set the picker to that value
+                const currentMoment = moment(currentValue, "LT"); // Parse the input value as a moment object
+                picker.date(currentMoment.isValid() ? currentMoment : null);
+            }
         })
         .on("dp.hide", function (e) {
             // Automatically set the selected value in the input field when the picker closes
-            // const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-            // $(this).val(selectedTime); // Set the formatted time value in the input field
+            const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+            $(this).val(selectedTime); // Set the formatted time value in the input field
         });
 
     // Ensure input field is clear when the page loads
@@ -764,6 +770,11 @@ function datepicker() {
         // Automatically set the selected value in the input field when the picker closes
         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
         $(this).val(selectedTime); // Set the formatted time value in the input field
+
+        if (e.date) {
+            const endTime = e.date.clone().add(1, 'hours'); // Add 1 hour to the selected time
+            $(".end_timepicker").val(endTime.format("LT")); // Format and set the time in end_timepicker
+        }
     });
 
     // Ensure input field is clear when the page loads
