@@ -1,26 +1,32 @@
     <!-- ============= banner-wrapper ======== -->
-@php
-    $getSocialLink = getSocialLink();
-@endphp
+    @php
+        $getSocialLink = getSocialLink();
+    @endphp
     <section class="banner-wrapper">
-        <img src="{{asset('assets/front/image/left-banner.png')}}" alt="left-banner" class="left-img wow fadeInLeft" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
-        <img src="{{asset('assets/front/image/right-banner.png')}}" alt="right-banner" class="right-img wow fadeInRight" data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
+        <img src="{{ asset('assets/front/image/left-banner.png') }}" alt="left-banner" class="left-img wow fadeInLeft"
+            data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
+        <img src="{{ asset('assets/front/image/right-banner.png') }}" alt="right-banner" class="right-img wow fadeInRight"
+            data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
         <div class="container">
             <div class="banner-content">
-                <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celebrate Every Moment with Ease!</h1>
-                <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly app handles everything from invites to
+                <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celebrate Every
+                    Moment with Ease!</h1>
+                <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free
+                    event planning starts here! Our user-friendly app handles everything from invites to
                     decorations, so you can relax and enjoy your celebration</p>
                 <div class="app-store d-flex justify-content-center gap-2">
-                    <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
-                        <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
+                    <a href="{{ isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : '#' }}"
+                        class="google-app">
+                        <img src="{{ asset('assets/front/image/google-app.png') }}" alt="google-app">
                     </a>
-                    <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app">
-                        <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
+                    <a href="{{ isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link != null ? $getSocialLink->appstore_link : '#' }}"
+                        class="mobile-app">
+                        <img src="{{ asset('assets/front/image/mobile-app.png') }}" alt="mobile-app">
                     </a>
                 </div>
             </div>
             <div class="banner-img">
-                <img src="{{asset('assets/front/image/birthday-card.png')}}" alt="birthday-card">
+                <img src="{{ asset('assets/front/image/birthday-card.png') }}" alt="birthday-card">
             </div>
         </div>
     </section>
@@ -82,7 +88,7 @@
         </div>
     </section> --}}
 
-     <!-- ======= edit in event ======== -->
+    <!-- ======= edit in event ======== -->
     <section class="event-wrapper pro-event-wrapper">
         <div class="owl-carousel owl-theme events-tab  simple">
             <div class="item"><span>500 Invite Limit</span></div>
@@ -100,8 +106,10 @@
         <div class="container">
             <div class="event-content">
                 <div class="content">
-                    <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Straightforward transparent prices <span>All features included.</span></h2>
-                    <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">No hidden fees or features to unlock.  All invites include all the features below:</p>
+                    <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                        Straightforward transparent prices <span>All features included.</span></h2>
+                    <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">No hidden
+                        fees or features to unlock. All invites include all the features below:</p>
                 </div>
                 <div class="events-tab">
                     <span>500 Guest Limit</span>
@@ -128,7 +136,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>15 Credits</h5>
                                 </div>
                                 <span>$1.39 per credit</span>
@@ -140,7 +148,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>30 Credits</h5>
                                 </div>
                                 <span>$1.29 per credit</span>
@@ -152,7 +160,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>50 Credits</h5>
                                 </div>
                                 <span>$1.19 per credit</span>
@@ -164,7 +172,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>100 Credits</h5>
                                 </div>
                                 <span>$1.00 per credit</span>
@@ -176,7 +184,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>200 Credits</h5>
                                 </div>
                                 <span>$0.79 per credit</span>
@@ -188,7 +196,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>500 Credits</h5>
                                 </div>
                                 <span>$0.40 per credit</span>
@@ -200,7 +208,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>750 Credits</h5>
                                 </div>
                                 <span>$0.30 per credit</span>
@@ -216,7 +224,7 @@
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('assets')}}/coin.svg" alt="coin">
+                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
                                     <h5>1000 Credits</h5>
                                 </div>
                                 <span>$0.25 per credit</span>
@@ -261,7 +269,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="gallery-img">
                                     </div>
                                 </div>
                             </div>
@@ -278,7 +286,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +303,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +320,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -329,7 +337,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +354,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -363,7 +371,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -380,7 +388,7 @@
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -397,7 +405,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="feature-img">
-                                        <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="">
+                                        <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -434,7 +442,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -454,7 +462,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img1.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img1.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -474,7 +482,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img2.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img2.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -492,7 +500,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img3.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img3.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -511,7 +519,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img4.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img4.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -529,7 +537,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img5.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img5.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -547,7 +555,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img6.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img6.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -565,7 +573,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img7.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img7.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -583,7 +591,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img8.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img8.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -601,7 +609,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img9.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img9.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -619,7 +627,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img10.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img10.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -637,7 +645,7 @@
                             </div>
                             <div class="col-lg-6 p-0">
                                 <div class="feature-img">
-                                    <img src="{{asset('assets/front/image/gallery-img11.png')}}" alt="gallery-img">
+                                    <img src="{{ asset('assets/front/image/gallery-img11.png') }}" alt="gallery-img">
                                 </div>
                             </div>
                         </div>
@@ -663,134 +671,55 @@
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                                 Categories
                             </button>
-                            <div class="dropdown-menu collection-menu" >
+                            <div class="dropdown-menu collection-menu">
                                 <div class="filter-head">
                                     <h5>Categories</h5>
-                                    <a href="#" class="reset-btn">Reset</a>
+                                    <a href="#" class="reset-btn" id="resetCategories">Reset</a>
                                 </div>
                                 <div class="filter-categories">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <label class="form-check-label" for="Allcat">All Categories</label>
-                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="" id="Allcat">
+                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s"
+                                            id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample">
-                                        @foreach($categories as $category)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse{{ $category->id }}"aria-expanded="true"
-                                                aria-controls="collapse{{ $category->id }}">
-                                                    {{ $category->category_name }}
-                                                </button>
-                                            </h2>
-                                            <div id="collapse{{ $category->id }}" class="accordion-collapse collapse show"
-                                                aria-labelledby="heading{{ $category->id }}" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        @foreach($category->subcategory as $subcategory)
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth">{{ $subcategory->subcategory_name }}</label>
-                                                                <input class="form-check-input" type="checkbox" id="subcategory{{ $subcategory->id }}"
-                                                                data-category-id="{{ $category->id }}"
-                                                                data-subcategory-id="{{ $subcategory->id }}">
-                                                            </div>
-                                                        </li>
-                                                        @endforeach
+                                        @foreach ($categories as $category)
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                                    <button class="accordion-button" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse{{ $category->id }}"aria-expanded="true"
+                                                        aria-controls="collapse{{ $category->id }}">
+                                                        {{ $category->category_name }}
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse{{ $category->id }}"
+                                                    class="accordion-collapse collapse show"
+                                                    aria-labelledby="heading{{ $category->id }}"
+                                                    data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <ul>
+                                                            @foreach ($category->subcategory as $subcategory)
+                                                                <li>
+                                                                    <div
+                                                                        class="d-flex align-items-center justify-content-between">
+                                                                        <label class="form-check-label"
+                                                                            for="allbirth">{{ $subcategory->subcategory_name }}</label>
+                                                                        <input class="form-check-input"
+                                                                            type="checkbox"
+                                                                            id="subcategory{{ $subcategory->id }}"
+                                                                            data-category-id="{{ $category->id }}"
+                                                                            data-subcategory-id="{{ $subcategory->id }}">
+                                                                    </div>
+                                                                </li>
+                                                            @endforeach
 
-                                                    </ul>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         @endforeach
-                                        {{-- <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingTwo">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                    Wedding
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse"
-                                                aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth1">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth1">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth1">Mans Birthday</label>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth1" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth1">Womans Birthday</label>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth1" checked="">
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingThree">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                    aria-expanded="false" aria-controls="collapseThree">
-                                                    Birthdays
-                                                </button>
-                                            </h2>
-                                            <div id="collapseThree" class="accordion-collapse collapse"
-                                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth2">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth2">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth2">Mans Birthday</label>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth2" checked="">
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth2">Womans Birthday</label>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth2" checked="">
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div> --}}
+
                                     </div>
                                 </div>
                             </div>
@@ -807,14 +736,15 @@
                                 <div class="filter-categories">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <label class="form-check-label" for="Allcat">All Categories</label>
-                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="" id="Allcat">
+                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s"
+                                            checked="" id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample1">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingOne1">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne1" aria-expanded="true"
-                                                    aria-controls="collapseOne1">
+                                                <button class="accordion-button" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne1"
+                                                    aria-expanded="true" aria-controls="collapseOne1">
                                                     Holidays
                                                 </button>
                                             </h2>
@@ -823,31 +753,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -867,31 +809,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth1">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth1">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth1"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth1">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth1">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth1"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth1">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth1">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth1" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth1"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth1">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth1">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth1" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth1"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -911,31 +865,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth2">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth2">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth2"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth2">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth2">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth2"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth2">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth2">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth2" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth2"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth2">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth2">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth2" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth2"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -958,14 +924,15 @@
                                 <div class="filter-categories">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <label class="form-check-label" for="Allcat">All Categories</label>
-                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="" id="Allcat">
+                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s"
+                                            checked="" id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample2">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingOne1">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne1" aria-expanded="true"
-                                                    aria-controls="collapseOne1">
+                                                <button class="accordion-button" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne1"
+                                                    aria-expanded="true" aria-controls="collapseOne1">
                                                     Holidays
                                                 </button>
                                             </h2>
@@ -974,31 +941,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1018,31 +997,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth1">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth1">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth1"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth1">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth1">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth1"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth1">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth1">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth1" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth1"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth1">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth1">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth1" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth1"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1062,31 +1053,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth2">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth2">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth2"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth2">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth2">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth2"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth2">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth2">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth2" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth2"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth2">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth2">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth2" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth2"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1109,14 +1112,15 @@
                                 <div class="filter-categories">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <label class="form-check-label" for="Allcat">All Categories</label>
-                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s" checked="" id="Allcat">
+                                        <input class="form-check-input" type="checkbox" name="Guest RSVP’s"
+                                            checked="" id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample3">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingOne1">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne1" aria-expanded="true"
-                                                    aria-controls="collapseOne1">
+                                                <button class="accordion-button" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne1"
+                                                    aria-expanded="true" aria-controls="collapseOne1">
                                                     Holidays
                                                 </button>
                                             </h2>
@@ -1125,31 +1129,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1169,31 +1185,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth1">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth1">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth1"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth1">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth1" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth1">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth1"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth1">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth1">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth1" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth1"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth1">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth1">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth1" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth1"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1213,31 +1241,43 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="allbirth2">All Birthdays Kids Birthday</label>
-                                                                <input class="form-check-input" id="allbirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="allbirth2">All
+                                                                    Birthdays Kids Birthday</label>
+                                                                <input class="form-check-input" id="allbirth2"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="babybirth2">Baby Birthday </label>
-                                                                <input class="form-check-input" id="babybirth2" type="checkbox"
-                                                                    name="Guest RSVP’s" checked="">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="babybirth2">Baby
+                                                                    Birthday </label>
+                                                                <input class="form-check-input" id="babybirth2"
+                                                                    type="checkbox" name="Guest RSVP’s"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="manbirth2">Mans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="manbirth2">Mans
+                                                                    Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="manbirth2" checked="">
+                                                                    name="Guest RSVP’s" id="manbirth2"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <label class="form-check-label" for="womanbirth2">Womans Birthday</label>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label"
+                                                                    for="womanbirth2">Womans Birthday</label>
                                                                 <input class="form-check-input" type="checkbox"
-                                                                    name="Guest RSVP’s" id="womanbirth2" checked="">
+                                                                    name="Guest RSVP’s" id="womanbirth2"
+                                                                    checked="">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1252,75 +1292,84 @@
                 </div>
                 <h5 class="total-items ms-auto">55 Items</h5>
             </div>
-           {{-- {{ dd($categories);}} --}}
+            {{-- {{ dd($categories);}} --}}
             <div class="row ">
-                @foreach($categories as $category)
-                @foreach($category->subcategory as $subcategory)
-                @foreach($subcategory->textdatas as $image)
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item" data-wow-duration="2s"
-                 data-wow-delay="0" data-wow-offset="0"   data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
-                    <a href="#" class="collection-card card-blue">
-                        <div class="card-img">
-                            <img src="{{ asset('uploads/images/' . $image->filled_image) }}" alt="shower-card">
-                        </div>
-                        <h4>{{ $category->category_name }}</h4>
-                    </a>
-                </div>
+                @foreach ($categories as $category)
+                    @foreach ($category->subcategory as $subcategory)
+                        @foreach ($subcategory->textdatas as $image)
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
+                                <a href="#" class="collection-card card-blue">
+                                    <div class="card-img">
+                                        <img src="{{ asset('uploads/images/' . $image->filled_image) }}"
+                                            alt="shower-card">
+                                    </div>
+                                    <h4>{{ $category->category_name }}</h4>
+                                </a>
+                            </div>
+                        @endforeach
+                    @endforeach
                 @endforeach
-                @endforeach
-                @endforeach
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card2.png')}}" alt="kids-card">
+                            <img src="{{ asset('assets/front/image/collect-card2.png') }}" alt="kids-card">
                         </div>
                         <h4>Kids Birthdays</h4>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-red">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card3.png')}}" alt="collect-card">
+                            <img src="{{ asset('assets/front/image/collect-card3.png') }}" alt="collect-card">
                         </div>
                         <h4>Simple Designs</h4>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card4.png')}}" alt="collect-card">
+                            <img src="{{ asset('assets/front/image/collect-card4.png') }}" alt="collect-card">
                         </div>
                         <h4>Floral Delight</h4>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-yellow">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card5.png')}}" alt="collect-card">
+                            <img src="{{ asset('assets/front/image/collect-card5.png') }}" alt="collect-card">
                         </div>
                         <h4>Weddings</h4>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-red">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card6.png')}}" alt="collect-card">
+                            <img src="{{ asset('assets/front/image/collect-card6.png') }}" alt="collect-card">
                         </div>
                         <h4>Baby Announcements</h4>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card7.png')}}" alt="collect-card">
+                            <img src="{{ asset('assets/front/image/collect-card7.png') }}" alt="collect-card">
                         </div>
                         <h4>Minimalist Bliss</h4>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown" data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
+                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-blue">
                         <div class="card-img">
-                            <img src="{{asset('assets/front/image/collect-card8.png')}}" alt="collect-card">
+                            <img src="{{ asset('assets/front/image/collect-card8.png') }}" alt="collect-card">
                         </div>
                         <h4>Vintage Romance</h4>
                     </a>
@@ -1346,7 +1395,7 @@
                                 analytics you get”</h5>
                             <div class="author-wrapper">
                                 <div class="author-img">
-                                    <img src="{{asset('assets/front/image/author-img.png')}}" alt="author-img">
+                                    <img src="{{ asset('assets/front/image/author-img.png') }}" alt="author-img">
                                 </div>
                                 <div class="author-name">
                                     <h6>Sophia Korhonen</h6>
@@ -1354,28 +1403,43 @@
                                 </div>
                                 <div class="stars-points ms-auto">
                                     <span>
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z"
+                                                fill="#FF4F84" />
                                         </svg>
                                     </span>
                                     <span>
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z"
+                                                fill="#FF4F84" />
                                         </svg>
                                     </span>
                                     <span>
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z"
+                                                fill="#FF4F84" />
                                         </svg>
                                     </span>
                                     <span>
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z"
+                                                fill="#FF4F84" />
                                         </svg>
                                     </span>
                                     <span>
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z" fill="#FF4F84" />
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.24325 6.48543L0.863254 7.41043L0.750254 7.43343C0.579193 7.47884 0.423249 7.56884 0.298346 7.69423C0.173444 7.81962 0.0840577 7.97592 0.0393163 8.14716C-0.00542499 8.31839 -0.00391854 8.49844 0.0436818 8.6689C0.0912821 8.83937 0.183271 8.99415 0.310254 9.11743L4.93225 13.6164L3.84225 19.9714L3.82925 20.0814C3.81878 20.2584 3.85552 20.4349 3.9357 20.5929C4.01589 20.751 4.13664 20.8849 4.28559 20.9809C4.43454 21.077 4.60634 21.1317 4.7834 21.1395C4.96046 21.1474 5.13642 21.108 5.29325 21.0254L10.9993 18.0254L16.6923 21.0254L16.7923 21.0714C16.9573 21.1364 17.1367 21.1564 17.312 21.1292C17.4873 21.102 17.6522 21.0287 17.7898 20.9167C17.9275 20.8047 18.0328 20.6582 18.0951 20.4921C18.1574 20.326 18.1743 20.1463 18.1443 19.9714L17.0533 13.6164L21.6773 9.11643L21.7553 9.03143C21.8667 8.8942 21.9397 8.72988 21.967 8.55523C21.9942 8.38057 21.9747 8.20181 21.9103 8.03716C21.846 7.87251 21.7392 7.72786 21.6007 7.61794C21.4623 7.50803 21.2972 7.43677 21.1223 7.41143L14.7423 6.48543L11.8903 0.70543C11.8077 0.537965 11.68 0.396945 11.5214 0.298335C11.3629 0.199724 11.1799 0.147461 10.9933 0.147461C10.8066 0.147461 10.6236 0.199724 10.4651 0.298335C10.3065 0.396945 10.1788 0.537965 10.0963 0.70543L7.24325 6.48543Z"
+                                                fill="#FF4F84" />
                                         </svg>
                                     </span>
                                 </div>
@@ -1385,7 +1449,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="diff-img">
-                        <img class="wow fadeInRight" src="{{asset('assets/front/image/diff-img.png')}}" alt="diff-img" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                        <img class="wow fadeInRight" src="{{ asset('assets/front/image/diff-img.png') }}"
+                            alt="diff-img" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     </div>
                 </div>
             </div>
@@ -1402,11 +1467,13 @@
                             <h2>The best platform to manage all your events</h2>
                             <p>Customizable Designs to Reflect Your Unique Event</p>
                             <div class="app-store d-flex gap-2">
-                                <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app">
-                                    <img src="{{asset('assets/front/image/google-app.png')}}" alt="google-app">
+                                <a href="{{ isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : '#' }}"
+                                    class="google-app">
+                                    <img src="{{ asset('assets/front/image/google-app.png') }}" alt="google-app">
                                 </a>
-                                <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app">
-                                    <img src="{{asset('assets/front/image/mobile-app.png')}}" alt="mobile-app">
+                                <a href="{{ isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link != null ? $getSocialLink->appstore_link : '#' }}"
+                                    class="mobile-app">
+                                    <img src="{{ asset('assets/front/image/mobile-app.png') }}" alt="mobile-app">
                                 </a>
                             </div>
                         </div>
@@ -1415,12 +1482,13 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="platform-img">
-                                    <img src="{{asset('assets/front/image/platform-img1.png')}}" alt="platform-img">
+                                    <img src="{{ asset('assets/front/image/platform-img1.png') }}"
+                                        alt="platform-img">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="platform-img"></div>
-                                <img src="{{asset('assets/front/image/platform-img2.png')}}" alt="platform-img">
+                                <img src="{{ asset('assets/front/image/platform-img2.png') }}" alt="platform-img">
                             </div>
                         </div>
                     </div>
@@ -1530,8 +1598,8 @@
         </div>
     </section>
 
-     <!-- ====== cookies ====== -->
-     <div class="cookies-track">
+    <!-- ====== cookies ====== -->
+    <div class="cookies-track">
         <div class="container-fluid">
             <div class="d-flex justify-content-center gap-3 align-items-start">
                 <p>We use third-party cookies and tracking technologies that collect information about your use of the
@@ -1542,61 +1610,80 @@
         </div>
     </div>
     @push('scripts')
-    <script>
-        document.querySelectorAll('.collection-menu').forEach((button) => {
-            button.addEventListener('click', (event) => {
-                event.stopPropagation();
+        <script>
+            document.querySelectorAll('.collection-menu').forEach((button) => {
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
             });
-        });
 
-        $(document).ready(function () {
-            const $cookiesBox = $('.cookies-track');
+            $(document).ready(function() {
+                const $cookiesBox = $('.cookies-track');
 
-            if (!localStorage.getItem('cookiesBoxDismissed')) {
-                setTimeout(() => {
-                    $cookiesBox.addClass('active');
-                }, 500);
-            }
+                if (!localStorage.getItem('cookiesBoxDismissed')) {
+                    setTimeout(() => {
+                        $cookiesBox.addClass('active');
+                    }, 500);
+                }
 
-            $('.close-btn').on('click', function () {
-                $cookiesBox.removeClass('active');
-                localStorage.setItem('cookiesBoxDismissed', 'true');
+                $('.close-btn').on('click', function() {
+                    $cookiesBox.removeClass('active');
+                    localStorage.setItem('cookiesBoxDismissed', 'true');
+                });
             });
-        });
+            $(document).ready(function() {
+                // Handle the "All Categories" checkbox click
+                $('#Allcat').on('change', function() {
+                    if ($(this).is(':checked')) {
+                        // Check all individual category checkboxes
+                        $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+                        // Show all images
+                        $('.image-item').show();
+                    } else {
+                        // Uncheck all individual category checkboxes
+                        $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
+                        // Hide all images
+                        $('.image-item').hide();
+                    }
+                });
 
+                // Handle individual category checkboxes
+                $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
+                    // If all individual checkboxes are checked, check "All Categories"
+                    const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
+                    const checkedCheckboxes = $('input[type="checkbox"]:not(#Allcat):checked').length;
 
-        // Listen to checkbox changes to filter images
-$(document).on('change', 'input[type="checkbox"]', function () {
-    const categoryId = $(this).data('category-id');
-    const subcategoryId = $(this).data('subcategory-id');
-    const isChecked = $(this).is(':checked');
+                    if (checkedCheckboxes === totalCheckboxes) {
+                        $('#Allcat').prop('checked', true);
+                    } else {
+                        $('#Allcat').prop('checked', false);
+                    }
 
-    // Filter images based on category and subcategory selection
-    $('.image-item').each(function () {
-        const itemCategoryId = $(this).data('category-id');
-        const itemSubcategoryId = $(this).data('subcategory-id');
+                    // Filter images based on checked categories
+                    if (checkedCheckboxes > 0) {
+                        $('.image-item').hide(); // Hide all images first
+                        $('input[type="checkbox"]:not(#Allcat):checked').each(function() {
+                            const categoryId = $(this).data('category-id');
+                            const subcategoryId = $(this).data('subcategory-id');
 
-        // If the image's category and subcategory match the selected checkboxes, show it
-        if (categoryId == itemCategoryId && subcategoryId == itemSubcategoryId) {
-            if (isChecked) {
-                $(this).show();  // Show image
-            } else {
-                $(this).hide();  // Hide image
-            }
-        }
-    });
-});
+                            // Show images matching the selected categories and subcategories
+                            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                                .show();
+                        });
+                    } else {
+                        $('.image-item').hide(); // Hide all images if no checkboxes are checked
+                    }
+                });
+                $('#resetCategories').on('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
 
-// Optionally, you can show all images when a category is checked or unchecked
-$(document).on('change', 'input[type="checkbox"]:checked', function () {
-    // Show all images when the checkbox is checked
-    if ($(this).is(':checked')) {
-        $('.image-item').show();
-    }
-});
+                    // Uncheck all checkboxes
+                    $('#Allcat').prop('checked', false);
+                    $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
 
-// Hide images by default when not selected
-$('.image-item').hide();
-
-    </script>
+                    // Hide all images
+                    $('.image-item').hide();
+                });
+            });
+        </script>
     @endpush
