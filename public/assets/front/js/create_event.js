@@ -269,7 +269,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+            $(".li_event_detail").addClass("menu-success");    
             $(".step_2").show();
             $(".event_create_percent").text("50%");
             $(".current_step").text("2 of 4");
@@ -298,7 +298,7 @@ $(document).ready(function () {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
 
             $(".li_design").find(".side-bar-list").addClass("menu-success");
             $(".li_design").addClass("menu-success");
@@ -717,20 +717,12 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const currentValue = $(this).val(); 
-            console.log(currentValue);
-            
-            if (currentValue) {
-                // If input has a value, use it to set the picker
-                const currentMoment = moment(currentValue, "LT"); // Parse input as moment object
-                if (currentMoment.isValid()) {
-                    picker.date(currentMoment); // Set the picker to the input value
-                }
-            } else {
-                // If input is empty, set picker to the nearest 15-minute interval
-                const closest15MinTime = getClosest15MinuteTime();
-                picker.date(closest15MinTime);
-            }
+            // const closest15MinTime = getClosest15MinuteTime();
+            const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+
+
+            // Set the picker to the closest 15-minute time dynamically
+            picker.date(closest15MinTime);  
         })
         .on("dp.hide", function (e) {
             // Automatically set the selected value in the input field when the picker closes
@@ -743,52 +735,46 @@ function datepicker() {
     $(this).val("");
 }
 
-function start_timepicker() {
-    $(".start_timepicker").datetimepicker({
-        //  keepOpen: true,
-        format: "LT",
-        icons: {
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-        },
-        useCurrent: false,
-        ignoreReadonly: true,
-        stepping: 15,
-        // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
+// function start_timepicker() {
+//     $(".start_timepicker").datetimepicker({
+//         //  keepOpen: true,
+//         format: "LT",
+//         icons: {
+//             up: "fa fa-chevron-up",
+//             down: "fa fa-chevron-down",
+//         },
+//         useCurrent: false,
+//         ignoreReadonly: true,
+//         stepping: 15,
+//         // defaultDate: moment().hours(12).minutes(0).seconds(0), // Set default time to 12:00 PM
 
-        // Set stepping to 15 minutes
-        // defaultDate: now
-        //  debug: true
-    }).on('dp.show', function () {
-        $(this).val(""); // Set the formatted time value in the input field
+//         // Set stepping to 15 minutes
+//         // defaultDate: now
+//         //  debug: true
+//     }).on('dp.show', function () {
+//         $(this).val(""); // Set the formatted time value in the input field
 
-        const picker = $(this).data("DateTimePicker");
-        const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+//         const picker = $(this).data("DateTimePicker");
+//         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
-        // Set the picker to the closest 15-minute time dynamically
-        picker.date(closest15MinTime);
+//         // Set the picker to the closest 15-minute time dynamically
+//         picker.date(closest15MinTime);
 
-        $(".start_timepicker").val("");
+//         $(".start_timepicker").val("");
 
-    }).on('dp.hide', function (e) {
-        // Automatically set the selected value in the input field when the picker closes
-        const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
-        $(this).val(selectedTime); // Set the formatted time value in the input field
+//     }).on('dp.hide', function (e) {
+//         // Automatically set the selected value in the input field when the picker closes
+//         const selectedTime = e.date ? e.date.format("LT") : ""; // Format the selected time
+//         $(this).val(selectedTime); // Set the formatted time value in the input field
+//     });
 
-        // if ( $('#end-time').val()=="") {
-        //     const endTime = e.date.clone().add(1, "hours");
-        //     const timePicker = $(".timepicker").data("DateTimePicker");
-        //     timePicker.date(endTime);
-        // }
-    });
+//     // Ensure input field is clear when the page loads
+//     $(".start_timepicker").val("");
 
-    // Ensure input field is clear when the page loads
-    $(".start_timepicker").val("");
-
-}
+// }
 
 datepicker();
-start_timepicker();
+// start_timepicker();
 
 // flatpickr(".event_time", {
 //     enableTime: true,
@@ -1232,8 +1218,8 @@ $("#end_time").on("change", function () {
 
         if (start_time) {
             var startTime = moment(start_time, "hh:mm A"); // Parse the start time string
-            // var endTime = startTime.clone().add(1, "hours");
-            // $("#end-time").val(endTime.format("hh:mm A"));
+            var endTime = startTime.clone().add(1, "hours");
+            $("#end-time").val(endTime.format("hh:mm A"));
         } else {
             $("#end-time").val(""); // Clear end time if start time is empty
         }
@@ -2642,7 +2628,6 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
-           
             console.log($("#" + firstActivityTime).children().find(".activity_start_time").val());
             var schedule_start_time=$("#" + firstActivityTime).children().find(".activity_start_time");
             schedule_start_time.prop('readonly',false);
@@ -3059,7 +3044,7 @@ $(document).on("click", "#next_design", function () {
     $(".pick-card").addClass("active");
     $(".design-span").addClass("active");
     $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
-    $(".li_event_detail").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");    
 
     $(".step_2").show();
     $(".event_create_percent").text("25%");
@@ -3564,7 +3549,7 @@ function savePage1Data(close = null) {
             $(".li_event_detail")
                 .find(".side-bar-list")
                 .addClass("menu-success");
-            $(".li_event_detail").addClass("menu-success");
+                $(".li_event_detail").addClass("menu-success");    
 
             var type = "all";
             const stepVal = $("#CheckCuurentStep").val();
@@ -4244,7 +4229,7 @@ $(document).on("click", ".li_event_details", function () {
                         $(".li_design")
                             .find(".side-bar-list")
                             .addClass("menu-success");
-                        $(".li_design").addClass("menu-success");
+                            $(".li_design").addClass("menu-success");
 
                         // active_responsive_dropdown('drop-down-event-guest');
 
@@ -4547,6 +4532,7 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
 });
 
 $(document).on("change", ".user_group_member .user_choice", function () {
+  
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
@@ -4687,12 +4673,12 @@ function plusBTN(that) {
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
         update_self_bring(
             isvalidUserQnt,
             categoryItemKey,
@@ -4728,10 +4714,10 @@ function minusBTN(that) {
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 isvalidUserQnt,
@@ -4916,12 +4902,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(
-        categoryItemKey,
-        categoryIndexKey,
-        userquantity,
-        itemquantity
-    );
+    update_self_bring(categoryItemKey, categoryIndexKey, userquantity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
@@ -5827,7 +5808,7 @@ function save_image_design(downloadImage, textData) {
                     $(".li_design")
                         .find(".side-bar-list")
                         .addClass("menu-success");
-                    $(".li_design").addClass("menu-success");
+                        $(".li_design").addClass("menu-success");
 
                     active_responsive_dropdown("drop-down-event-guest");
 
@@ -8099,24 +8080,25 @@ function update_self_bring(
             categoryItemKey: categoryItemKey,
             categoryIndexKey: categoryIndexKey,
             quantity: quantity,
-            type: type,
+            type:type,
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
             console.log(quantity + "/" + categoryItemQuantity);
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                innerUserQnt + quantity + "/" + categoryItemQuantity
+                (innerUserQnt+quantity) + "/" + categoryItemQuantity
             );
 
-            if (innerUserQnt + quantity >= categoryItemQuantity) {
+            if((innerUserQnt+quantity) >=categoryItemQuantity){
                 let quantity = response - innerUserQnt;
                 $("#missing-category-" + categoryIndexKey).text(quantity);
                 // response=0;
                 // $("#missing-category-" + categoryIndexKey).text(0);
-            } else {
-                $("#missing-category-" + categoryIndexKey).text(response);
             }
-            
+            // else{
+                // 
+            // }
+            // $("#missing-category-" + categoryIndexKey).text(response);
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
             if (response == 0) {
                 var svg =
@@ -8157,7 +8139,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if (innerUserQnt + quantity >= categoryItemQuantity) {
+            if((innerUserQnt+quantity) >=categoryItemQuantity){
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
