@@ -117,7 +117,6 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-    alert(giftRegestryDataRaw);
 if (giftRegestryDataRaw.length > 0 && giftRegestryDataRaw!='null' && giftRegestryDataRaw!=undefined) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
