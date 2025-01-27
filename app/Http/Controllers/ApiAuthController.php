@@ -37,6 +37,8 @@ class ApiAuthController extends Controller
 {
     public function signup(Request $request)
     {
+        echo env('DEFAULT_COIN');
+        die;
         $rawData = $request->getContent();
         $input = json_decode($rawData, true);
         if ($input == null) {
