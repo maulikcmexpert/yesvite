@@ -375,8 +375,8 @@
                                             
                                       </div>
                                       <div class="d-flex align-items-center justify-content-between">
-                                        <h3>Item</h3>
-                                        <h3>Count:</h3>
+                                        <h3>{{$inner_data['potluck_item']}}</h3>
+                                        <h3>Count: {{$$inner_data['count']}}</h3>
                                       </div>
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
