@@ -739,7 +739,6 @@ function getClosest15MinuteTime() {
 //     $(this).val("");
 // }
 // datepicker();
-
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
         const startPicker = $(this).datetimepicker({
@@ -769,9 +768,11 @@ function datepicker() {
             const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             const endTimePicker = $(".activity_end_time").eq(index).data("DateTimePicker");
 
-            // Set the end time picker to one hour after the selected start time
-            const endTime = selectedStartTime.clone().add(1, 'hours');
-            endTimePicker.date(endTime);
+            if (endTimePicker) {
+                // Set the end time picker to one hour after the selected start time
+                const endTime = selectedStartTime.clone().add(1, 'hours');
+                endTimePicker.date(endTime);
+            }
         });
 
         // Ensure input field is clear when the page loads
@@ -801,12 +802,14 @@ function datepicker() {
             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             $(this).val(selectedEndTime.format("LT"));
 
-            // Set the next start time based on the selected end time
+            // Check if there's a next start time, and update it if it exists
             const nextStartTime = $(".activity_start_time").eq(index + 1);
             if (nextStartTime.length) {
                 const startPicker = nextStartTime.data("DateTimePicker");
-                const newStartTime = selectedEndTime.clone().add(1, 'hours');
-                startPicker.date(newStartTime);
+                if (startPicker) {
+                    const newStartTime = selectedEndTime.clone().add(1, 'hours');
+                    startPicker.date(newStartTime);
+                }
             }
         });
 
@@ -814,6 +817,7 @@ function datepicker() {
         $(this).val("");
     });
 }
+
 
 datepicker();
 
