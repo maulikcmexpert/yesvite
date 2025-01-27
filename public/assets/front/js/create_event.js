@@ -2622,6 +2622,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             convertTimeToMinutes(firstStartTime) <
             convertTimeToMinutes(acStartTime)
         ) {
+            console.log($("#" + firstActivityTime).children().html());
             toastr.error("activity can not start before event");
             $("#" + firstActivityTime)
                 .children()
@@ -4404,7 +4405,6 @@ enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
     console.log(id);
-
     if (id == "sidebar_add_co_host") {
         document.body.classList.add("no-scroll"); // Disable background scrolling
     }
