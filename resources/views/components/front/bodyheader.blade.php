@@ -1,9 +1,3 @@
-@php
-                  $notification_list=getNotificationList();
-                  $i=0;
-              @endphp
-
-              {{dd($notification_list);}}
 @if (Auth::guard('web')->check())
 
 <header>
@@ -170,7 +164,7 @@
                   $i=0;
               @endphp
 
-              {{dd($notification_list);}}
+              <!-- {{dd($notification_list)}} -->
               @foreach ($notification_list as $key=>$value)
               @php
                 $i++;
@@ -245,7 +239,9 @@
                                       </div>
                                      <div>
                                         <p>{{$inner_data['event_name']}}</p>
-                                        <h6 class="notification-read-dot"></h6>
+                                          @if($inner_data['read']=="0")
+                                            <h6 class="notification-read-dot"></h6>
+                                          @endif
                                       </div>
                                       {{--  <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
