@@ -1419,6 +1419,7 @@ class EventController extends BaseController
         Session::put('category_item', $categories_item);
         Session::save();
         $categories = Session::get('category', []);
+        dD($categories);
         $category_quantity = $categories[$category_index]['category_quantity'];
         $category_item = count($categories[$category_index]['item']);
         $total_item = 0;
@@ -1427,7 +1428,7 @@ class EventController extends BaseController
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
                 if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
-                    dd($categories[$category_index]['item'][$key]['item_carry_users']);
+                    
                     foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
                         $total_quantity = $total_quantity + $userVal['quantity'];
                     }
