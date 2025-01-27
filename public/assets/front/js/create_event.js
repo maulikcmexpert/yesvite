@@ -5568,6 +5568,10 @@ $(document).on("click", ".final_checkout", function () {
             },
         },
     });
+}else{
+    alert();
+    $('.event_images_slider').removeClass('owl-carousel');
+    $('.event_images_slider').removeClass('owl-theme');
 } 
 
     // var swiper = new Swiper(".event_images_slider", {
