@@ -371,7 +371,11 @@
                                         @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
-                                                                              </div>
+                                      </div>
+                                      <div class="d-flex align-items-center justify-content-between">
+                                        <h3>Item</h3>
+                                        <h3>Count:</h3>
+                                      </div>
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
