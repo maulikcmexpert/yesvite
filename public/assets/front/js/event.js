@@ -861,6 +861,7 @@ console.log(`${base_url}get_user_info_rsvp`);
             $('#notification_rsvp_eventName').text(event_name);
             $('#notification_rsvp_host').text(hosted_by);
             $('#rsvp_user_id').val(userId);
+            $('#rsvp_event_id').val(eventId);
         },
         error: function (xhr, status, error) {
     
