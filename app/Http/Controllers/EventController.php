@@ -1351,6 +1351,7 @@ class EventController extends BaseController
         $categoryName = $request->input('category_name');
         // $category_quantity = $request->input('category_quantity');
         $itemName = $request->input('itemName');
+        $totalmissing = $request->input('totalmissing');
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
@@ -1442,7 +1443,12 @@ class EventController extends BaseController
                 }
             }
         }
-        $total_item = $total_item - $total_quantity;
+        if($selfBring !="" && $selfBringQuantity!="" ){
+            $total_item=0;
+        }else{
+
+            $total_item = $totalmissing + $itemQuantity;
+        }
         $qty = 0;
         if ($category_quantity == $category_item) {
             $qty = 1;
