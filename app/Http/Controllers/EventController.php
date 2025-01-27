@@ -1679,14 +1679,21 @@ class EventController extends BaseController
         $total_quantity = 0;
         if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
+               if(isset($value['item_carry_users'])){
+                   foreach ($value['item_carry_users'] as $userkey => $userVal) {
+                       if ($id == $userVal['user_id']) {
+                           $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] = $quantity;
+                           session()->put('category', $categories);
+                       }
+                       $total_quantity =  $total_quantity + $userVal['quantity'];
+                   }
+               }else{
+                $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][0]['quantity'] = $quantity;
+                $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][0]['user_id'] = $id;
+                session()->put('category', $categories);
+                $total_quantity =  $total_quantity + $quantity;
+               }
 
-                foreach ($value['item_carry_users'] as $userkey => $userVal) {
-                    if ($id == $userVal['user_id']) {
-                        $categories[$categoryIndexKey]['item'][$key]['item_carry_users'][$userkey]['quantity'] = $quantity;
-                        session()->put('category', $categories);
-                    }
-                    $total_quantity =  $total_quantity + $userVal['quantity'];
-                }
                 $total_item = $total_item + $value['quantity'];
 
                 // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
@@ -1703,6 +1710,7 @@ class EventController extends BaseController
         // }else{
         //     $total_quantity= $total_quantity + $quantity;   
         // }
+        dd(session('category'));
         $total_item = $total_item - $total_quantity ;
         return $total_item;
     }
