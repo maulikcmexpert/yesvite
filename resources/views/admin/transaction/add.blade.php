@@ -34,7 +34,7 @@
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="firstname">Credit Coins</label>
-                            <input type="number" class="form-control firstname" id="credit_coin"name="credit_coin" placeholder="Credit coin here"  value="1" min="1">
+                            <input type="text" class="form-control firstname" id="credit_coin"name="credit_coin" placeholder="Credit coin here"  value="" oninput="this.value = this.value.replace(/[^0-9]/g, ''); clearError(this)" >
                             <span class="text-danger">{{ $errors->first('credit_coin') }}</span>
                         </div>
                     </div>
