@@ -779,7 +779,7 @@ function datepicker() {
     });
 
     $(".timepicker.activity_end_time").each(function (index) {
-        $(this).datetimepicker({
+        const endPicker = $(this).datetimepicker({
             format: "LT",
             icons: {
                 up: "fa fa-chevron-up",
@@ -798,7 +798,6 @@ function datepicker() {
             picker.date(startMoment.clone().add(1, 'hours'));
         })
         .on("dp.change", function (e) {
-            // Change only the current end time without affecting previous start times
             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             $(this).val(selectedEndTime.format("LT"));
 
@@ -810,8 +809,12 @@ function datepicker() {
                 startPicker.date(newStartTime);
             }
         });
+
+        // Ensure input field is clear when the page loads
+        $(this).val("");
     });
 }
+
 datepicker();
 
 
