@@ -715,7 +715,7 @@
                                               {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
                                             </p>
                                           </div>
-                                        @elseif($$inner_data['media_type']=="")
+                                        @elseif($inner_data['media_type']=="")
                                           <div>
                                             <p>See post details</p>
                                           </div>
