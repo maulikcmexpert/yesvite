@@ -83,26 +83,49 @@
                     </div>
              </div> -->
              <div class="owl-carousel owl-theme event_images_slider">
-                <div class="item">
-                     <div class="setting-img">
-                            <img id="eventImage" src="" />
-                        </div>
-                    </div>
-                <div class="item sliderImages-1" style="display:none;">  
+                    <div class="item">
                         <div class="setting-img">
-                            <img id="sliderImages-1" src="" />
+                                <img id="eventImage" src="" />
+                            </div>
                         </div>
+                    <div class="item sliderImages-1" style="display:none;">  
+                            <div class="setting-img">
+                                <img id="sliderImages-1" src="" />
+                            </div>
+                        </div>
+                    <div class="item sliderImages-2" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-2" src="" />
+                            </div>
                     </div>
-                <div class="item sliderImages-2" style="display:none;">
-                <div class="setting-img">
-                            <img id="sliderImages-2" src="" />
+                    <div class="item sliderImages-3" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-3" src="" />
+                            </div>
+                    </div>
+              
+            </div>
+            <div class="event_images_template" style="display:none;">
+                    <!-- <div class="item"> -->
+                        <div class="setting-img">
+                                <img id="eventTempImage" src="" />
+                            </div>
+                        <!-- </div> -->
+                    <!-- <div class="item sliderImages-1" style="display:none;">  
+                            <div class="setting-img">
+                                <img id="sliderImages-1" src="" />
+                            </div>
                         </div>
-                </div>
-                <div class="item sliderImages-3" style="display:none;">
-                <div class="setting-img">
-                            <img id="sliderImages-3" src="" />
-                        </div>
-                </div>
+                    <div class="item sliderImages-2" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-2" src="" />
+                            </div>
+                    </div>
+                    <div class="item sliderImages-3" style="display:none;">
+                    <div class="setting-img">
+                                <img id="sliderImages-3" src="" />
+                            </div> -->
+                    </div>
               
             </div>
                     <!-- <div class="setting-img">
