@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{-- {{ dd($eventDetails) }} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -99,27 +99,27 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="birth-img">
                                                     @if ($eventDetails['user_profile'] != '')
-                                                    <img src="{{ $eventDetails['user_profile'] }}" alt="birth-img">
-                                                @else
-                                                    @php
+                                                        <img src="{{ $eventDetails['user_profile'] }}" alt="birth-img">
+                                                    @else
+                                                        @php
 
-                                                        // $parts = explode(" ", $name);
-                                                        $nameParts = explode(' ', $eventDetails['hosted_by']);
-                                                        $firstInitial = isset($nameParts[0][0])
-                                                            ? strtoupper($nameParts[0][0])
-                                                            : '';
-                                                        $secondInitial = isset($nameParts[1][0])
-                                                            ? strtoupper($nameParts[1][0])
-                                                            : '';
-                                                        $initials = $firstInitial . $secondInitial;
+                                                            // $parts = explode(" ", $name);
+                                                            $nameParts = explode(' ', $eventDetails['hosted_by']);
+                                                            $firstInitial = isset($nameParts[0][0])
+                                                                ? strtoupper($nameParts[0][0])
+                                                                : '';
+                                                            $secondInitial = isset($nameParts[1][0])
+                                                                ? strtoupper($nameParts[1][0])
+                                                                : '';
+                                                            $initials = $firstInitial . $secondInitial;
 
-                                                        // Generate a font color class based on the first initial
-                                                        $fontColor = 'fontcolor' . $firstInitial;
-                                                    @endphp
-                                                    <h5 class="{{ $fontColor }}">
-                                                        {{ $initials }}
-                                                    </h5>
-                                                @endif
+                                                            // Generate a font color class based on the first initial
+                                                            $fontColor = 'fontcolor' . $firstInitial;
+                                                        @endphp
+                                                        <h5 class="{{ $fontColor }}">
+                                                            {{ $initials }}
+                                                        </h5>
+                                                    @endif
 
                                                 </div>
                                                 <div class="birth-host">
@@ -368,10 +368,7 @@
                                             “{{ $eventDetails['message_to_guests'] }}”
                                         </p>
                                     </div>
-                                    @if (
-                                        !empty($eventDetails['event_location_name']) ||
-                                            !empty($eventDetails['address_1'])
-                                    )
+                                    @if (!empty($eventDetails['event_location_name']) || !empty($eventDetails['address_1']))
                                         <div class="location-wrp cmn-card">
                                             <h4 class="title">Location</h4>
                                             <h5>{{ $eventDetails['event_location_name'] ?: 'Tom’s House' }}</h5>
@@ -469,15 +466,26 @@
                                                 <h4 class="title">Sarah’s Gift Registries</h4>
                                                 <span>Buy them the gift of their choice.</span>
                                                 <div class="play-store">
-                                                    <a href="#" class="play-store-btn target-btn">
-                                                        <img src="{{ asset('assets/front/img/target.png') }}"
-                                                            alt="target">
-                                                        <h6>Target</h6>
-                                                    </a>
-                                                    <a href="#" class="play-store-btn amazon-btn">
-                                                        <img src="{{ asset('assets/front/img/amazon.png') }}"
-                                                            alt="amazon">
-                                                    </a>
+                                                    @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
+                                                        <a href="{{ $gift['registry_link'] }}"
+                                                            class="play-store-btn target-btn" target="_blank">
+                                                            <img src="{{ asset('assets/front/img/target.png') }}"
+                                                                alt="target">
+                                                            <h6>Target</h6>
+                                                        </a>
+                                                    @elseif (str_contains(strtolower($gift['registry_recipient_name']), 'amzon'))
+                                                        <a href="{{ $gift['registry_link'] }}"
+                                                            class="play-store-btn amazon-btn" target="_blank">
+                                                            <img src="{{ asset('assets/front/img/amazon.png') }}"
+                                                                alt="amazon">
+                                                            {{-- <h6>Amazon</h6> --}}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ $gift['registry_link'] }}"
+                                                            class="play-store-btn other-btn" target="_blank">
+                                                            <h6>{{ $gift['registry_recipient_name'] }}</h6>
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @endforeach
