@@ -5511,6 +5511,13 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected +
             ""
     );
+    $("#eventTempImage").attr(
+        "src",
+        base_url +
+            "public/storage/event_images/" +
+            eventData.desgin_selected +
+            ""
+    );
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
@@ -5570,8 +5577,10 @@ $(document).on("click", ".final_checkout", function () {
     });
 }else{
     alert();
-    $('.event_images_slider').removeClass('owl-carousel');
-    $('.event_images_slider').removeClass('owl-theme');
+    $('.event_images_slider').css('display','none');
+    $('.event_images_template').css('display','block');
+    // $('.event_images_slider').removeClass('owl-carousel');
+    // $('.event_images_slider').removeClass('owl-theme');
 } 
 
     // var swiper = new Swiper(".event_images_slider", {
