@@ -117,7 +117,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-if (giftRegestryDataRaw.length > 0 && giftRegestryDataRaw!='null' && giftRegestryDataRaw!=undefined) {
+if (giftRegestryDataRaw.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
         giftRegestryData.forEach(function (item) {
@@ -739,6 +739,7 @@ function getClosest15MinuteTime() {
 //     $(this).val("");
 // }
 // datepicker();
+
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
         const startPicker = $(this).datetimepicker({
@@ -753,7 +754,7 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const previousEndTime = index+1 > 0 ? $(".activity_end_time").eq(index - 1).val() : ""; 
+            const previousEndTime = index > 0 ? $(".activity_end_time").eq(index - 1).val() : ""; 
 
             // If previous end time exists, set current start time 1 hour after it
             if (previousEndTime) {
@@ -768,11 +769,9 @@ function datepicker() {
             const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             const endTimePicker = $(".activity_end_time").eq(index).data("DateTimePicker");
 
-            if (endTimePicker) {
-                // Set the end time picker to one hour after the selected start time
-                const endTime = selectedStartTime.clone().add(1, 'hours');
-                endTimePicker.date(endTime);
-            }
+            // Set the end time picker to one hour after the selected start time
+            const endTime = selectedStartTime.clone().add(1, 'hours');
+            endTimePicker.date(endTime);
         });
 
         // Ensure input field is clear when the page loads
@@ -802,22 +801,21 @@ function datepicker() {
             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             $(this).val(selectedEndTime.format("LT"));
 
-            const nextStartTime = $(".activity_start_time").eq(index + 2);
+            // Set the next start time based on the selected end time
+            const nextStartTime = $(".activity_start_time").eq(index + 1);
             if (nextStartTime.length) {
                 const startPicker = nextStartTime.data("DateTimePicker");
-                if (startPicker) {
-                    const newStartTime = selectedEndTime.clone().add(1, 'hours');
-                    startPicker.date(newStartTime);
-                }
+                const newStartTime = selectedEndTime.clone().add(1, 'hours');
+                startPicker.date(newStartTime);
             }
         });
 
-    //     // Ensure input field is clear when the page loads
-    //     $(this).val("");
+        // Ensure input field is clear when the page loads
+        $(this).val("");
     });
 }
 
-
+datepicker();
 
 
 function startTimePicker() {
@@ -883,23 +881,8 @@ function endTimePicker() {
 $(document).ready(function () {
     startTimePicker();
     endTimePicker();
-    datepicker();
-
 });
 
-// $(".activity_end_time").on("change", function () {
-//     // Get the current activity ID
-//     var activityId = $(this).closest('.activity-main-wrp').data('id');
-    
-//     // Find the corresponding start_time and end_time fields for this activity
-//     var startTimeField = $("div[data-id='" + activityId + "'] .activity_start_time");
-//     var endTimeField = $("div[data-id='" + activityId + "'] .activity_end_time");
-    
-//     // Update the current start_time and end_time
-//     // This part can be adjusted based on how you want to set the new times
-//     startTimeField.val("09:00 AM"); // Example value, adjust accordingly
-//     endTimeField.val("05:00 PM"); // Example value, adjust accordingly
-// });
 
 // datepicker();
 // start_timepicker();
@@ -2594,7 +2577,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        // datepicker();
+        datepicker();
     }
 });
 
@@ -4802,7 +4785,7 @@ function plusBTN(that) {
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
     var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
-    if (quantity > 0) {
+    if (quantity > 0) { 
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
@@ -4817,7 +4800,9 @@ function plusBTN(that) {
         );
     } else {
         quantity--;
-        that.parent().find(".input-qty").val(quantity);
+
+        console.log(that.parent().find(".inputs-qty").val());
+       that.parent().find(".inputs-qty").val('5');
     }
 }
 $(".qty-btnminus").on("click", function () {
@@ -4857,6 +4842,7 @@ function minusBTN(that) {
             );
             if (quantity == 0) {
                 that.parent().find(".item-quantity-minus").val(0);
+                that.parent().find(".input-qty").val(0);
             }
         }
     } else {
@@ -5007,9 +4993,9 @@ $(document).on("click", ".delete-self-bring", function () {
     var itemquantity = $(this).data("itemquantity");
     // var userquantity = $(this).data("userquantity");
     var userquantity = parseInt($(this).parent().parent().find('.input-qty').val());
-    var innerUserQnt = $(this).data("innerUserQnt");
+    var innerUserQnt = $(this).data("inneruserqnt");
 
-    $(this).parent().parent().hide();
+    $(this).parent().parent().hide(); 
     var self_bring_quantity = $(this)
         .parent()
         .parent()
@@ -5023,7 +5009,6 @@ $(document).on("click", ".delete-self-bring", function () {
 
     total_category_count = total_category_count - parseInt(self_bring_quantity);
     $(".total-self-bring-" + categoryIndexKey).text(total_category_count);
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     $(this)
         .parent()
         .parent()
@@ -5033,13 +5018,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(
-        isvalidUserQnt,
-        categoryItemKey,
-        categoryIndexKey,
-        userquantity,
-        itemquantity
-    );
+    update_self_bring(innerUserQnt,categoryItemKey, categoryIndexKey, userquantity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
@@ -5721,7 +5700,7 @@ $(document).on("click", ".final_checkout", function () {
         },
     });
 }else{
-  
+    alert();
     $('.event_images_slider').css('display','none');
     $('.event_images_template').css('display','block');
     // $('.event_images_slider').removeClass('owl-carousel');
@@ -7452,7 +7431,7 @@ $("#YesviteContactsAll").on("scroll", function () {
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
 
-    if (scrollTop + elementHeight >= scrollHeight-2) {
+    if (scrollTop + elementHeight >= scrollHeight) {
         busycontact = true;
         offsetcontact += limitcontact;
         var type = "phone";
@@ -8232,7 +8211,7 @@ function update_self_bring(
             );
             let remainingCategoryCount=0;
             if (type == undefined){
-                remainingCategoryCount = categoryItem + 1
+                remainingCategoryCount = categoryItem + quantity
             }else if(type == "plus") {
                 remainingCategoryCount = categoryItem -1
             }else{
