@@ -164,6 +164,7 @@
                   $i=0;
               @endphp
 
+              {{dd($notification_list);}}
               @foreach ($notification_list as $key=>$value)
               @php
                 $i++;
