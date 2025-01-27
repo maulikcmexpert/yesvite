@@ -5523,6 +5523,8 @@ $(document).on("click", ".final_checkout", function () {
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
+        $('.event_images_slider').css('display','block');
+        $('.event_images_template').css('display','none');
         // eventData.slider_images.forEach((image) => {
         //     const imageHtml = `
         //         <div class="item">
