@@ -777,7 +777,7 @@ function datepicker() {
 
         if (e.date) {
             const endTime = e.date.clone().add(1, 'hours'); // Add 1 hour to the selected time
-            const picker = $(this).data("DateTimePicker");
+            const picker = $('.timepicker').data("DateTimePicker");
             picker.date(endTime);
 
 
