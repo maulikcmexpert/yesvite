@@ -1446,7 +1446,7 @@ class EventController extends BaseController
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-Dd($data);
+// Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
         return response()->json(['view' => view('front.event.potluck.potluckCategoryItem', $data)->render(), 'qty' => $qty, 'total_item' => $total_item]);
