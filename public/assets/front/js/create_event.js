@@ -5540,7 +5540,7 @@ $(document).on("click", ".final_checkout", function () {
                 }
             }
         });
-    }
+   
 
     $(".event_images_slider").owlCarousel({
         loop: true,
@@ -5567,6 +5567,8 @@ $(document).on("click", ".final_checkout", function () {
             },
         },
     });
+} 
+
     // var swiper = new Swiper(".event_images_slider", {
     //     slidesPerView: 1,
     //     loop: false,
