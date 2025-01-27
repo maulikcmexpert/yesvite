@@ -157,8 +157,8 @@ $(".notification-btn").on("click", function () {
 });
 
 // ===header-drodpdown===
-const dropdownButton = document.getElementById("dropdownButton");
-const dropdownMenu = document.querySelector(".notification-dropdown-menu");
+// const dropdownButton = document.getElementById("dropdownButton");
+// const dropdownMenu = document.querySelector(".notification-dropdown-menu");
 
 // Toggle dropdown when clicking the button
 $("#dropdownButton").on("click", function (event) {
@@ -167,9 +167,7 @@ $("#dropdownButton").on("click", function (event) {
     if ($(".header-profile-dropdown").hasClass("show")) {
         $(".header-profile-dropdown").removeClass("show");
     }
-    
 });
-
 
 $(".moblie-menu-bar").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
@@ -869,8 +867,8 @@ $(function () {
 });
 
 $(document).on("click", ".mobile-calender-btn", function () {
-    $('.mobile-menu-wrp').removeClass('active');
-    $('.line').removeClass('active');
+    $(".mobile-menu-wrp").removeClass("active");
+    $(".line").removeClass("active");
     var text = this.innerText;
     var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -978,116 +976,118 @@ $(document).on("click", ".notification_read", function () {
 });
 
 // ==transaction-history==
-const ctx = document.getElementById("creditChart").getContext("2d");
+let creditChart = document.getElementById("creditChart");
+if (creditChart) {
+    const ctx = document.getElementById("creditChart").getContext("2d");
+    // Create a gradient for the border color
+    const gradientBorder = ctx.createLinearGradient(0, 0, 1, 0);
+    gradientBorder.addColorStop(0, "#FF31A6");
 
-// Create a gradient for the border color
-const gradientBorder = ctx.createLinearGradient(0, 0, 1, 0);
-gradientBorder.addColorStop(0, "#FF31A6");
+    // Create a pattern canvas
+    const patternCanvas = document.createElement("canvas");
+    const patternContext = patternCanvas.getContext("2d");
+    patternCanvas.width = 18;
+    patternCanvas.height = 7;
 
-// Create a pattern canvas
-const patternCanvas = document.createElement("canvas");
-const patternContext = patternCanvas.getContext("2d");
-patternCanvas.width = 18;
-patternCanvas.height = 7;
+    // Draw dots on the pattern canvas
+    patternContext.fillStyle = "#FFC8DC"; // Dot color
+    patternContext.fillRect(0, 0, 6, 3);
+    patternContext.fillStyle = "#FFC8DC"; // Background color
+    patternContext.fillRect(0, 0, 6, 3);
+    patternContext.fillRect(0, 0, 6, 3);
 
-// Draw dots on the pattern canvas
-patternContext.fillStyle = "#FFC8DC"; // Dot color
-patternContext.fillRect(0, 0, 6, 3);
-patternContext.fillStyle = "#FFC8DC"; // Background color
-patternContext.fillRect(0, 0, 6, 3);
-patternContext.fillRect(0, 0, 6, 3);
+    // Create a pattern from the canvas
+    const pattern = ctx.createPattern(patternCanvas, "repeat");
 
-// Create a pattern from the canvas
-const pattern = ctx.createPattern(patternCanvas, "repeat");
+    const hiddenData = $("#graph_data").val();
+    const parsedData = JSON.parse(hiddenData);
 
-const hiddenData = $("#graph_data").val();
-const parsedData = JSON.parse(hiddenData);
+    // Step 2: Generate labels and data for Chart.js
+    const labels = parsedData.map((item) => item.month); // Extract months
+    const data = parsedData.map((item) => item.current_balance);
 
-// Step 2: Generate labels and data for Chart.js
-const labels = parsedData.map((item) => item.month); // Extract months
-const data = parsedData.map((item) => item.current_balance);
+    let lowestValue = Math.min(...data);
+    let highestValue = Math.max(...data);
 
-let lowestValue = Math.min(...data);
-let highestValue = Math.max(...data);
+    if (lowestValue !== 0) {
+        lowestValue = 0;
+    }
 
-if (lowestValue !== 0) {
-    lowestValue = 0;
-}
+    highestValue = highestValue + highestValue * 0.3;
 
-highestValue = highestValue + highestValue * 0.3;
+    if (highestValue < 7) {
+        highestValue += 2;
+    }
+    highestValue = Math.round(highestValue);
 
-if (highestValue < 7) {
-    highestValue += 2;
-}
-highestValue = Math.round(highestValue);
-
-let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
-if (stepSize % 2 !== 0) {
-    stepSize++; // Ensure stepSize is even for better readability
-}
-stepSize = Math.round(stepSize);
-new Chart(ctx, {
-    type: "line",
-    data: {
-        // labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        labels: labels,
-        datasets: [
-            {
-                label: "Credit Balance",
-                data: data,
-                // data: [400, 650, 500, 480, 490, 470, 500],
-                borderColor: gradientBorder,
-                backgroundColor: pattern,
-                borderWidth: 4,
-                pointBackgroundColor: "#ffffff",
-                pointBorderColor: "#ff5ca5",
-                pointBorderWidth: 5,
-                pointRadius: [0, 0, 0, 0, 0, 0, 8],
-                pointHoverRadius: 5,
-                tension: 0,
-                fill: true,
-            },
-        ],
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-            tooltip: {
-                enabled: true,
-            },
+    let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
+    if (stepSize % 2 !== 0) {
+        stepSize++; // Ensure stepSize is even for better readability
+    }
+    stepSize = Math.round(stepSize);
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            // labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: labels,
+            datasets: [
+                {
+                    label: "Credit Balance",
+                    data: data,
+                    // data: [400, 650, 500, 480, 490, 470, 500],
+                    borderColor: gradientBorder,
+                    backgroundColor: pattern,
+                    borderWidth: 4,
+                    pointBackgroundColor: "#ffffff",
+                    pointBorderColor: "#ff5ca5",
+                    pointBorderWidth: 5,
+                    pointRadius: [0, 0, 0, 0, 0, 0, 8],
+                    pointHoverRadius: 5,
+                    tension: 0,
+                    fill: true,
+                },
+            ],
         },
-        scales: {
-            x: {
-                grid: {
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
                     display: false,
                 },
-            },
-            y: {
-                // beginAtZero: true,
-                min: lowestValue,
-                max: highestValue,
-                ticks: {
-                    stepSize: stepSize,
-                },
-                grid: {
-                    color: "rgba(0, 0, 0, 0.05)",
+                tooltip: {
+                    enabled: true,
                 },
             },
-        },
-        layout: {
-            padding: 20,
-        },
-        elements: {
-            line: {
-                tension: 0,
-                borderWidth: 4,
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                    },
+                },
+                y: {
+                    // beginAtZero: true,
+                    min: lowestValue,
+                    max: highestValue,
+                    ticks: {
+                        stepSize: stepSize,
+                    },
+                    grid: {
+                        color: "rgba(0, 0, 0, 0.05)",
+                    },
+                },
             },
-            point: {
-                radius: 5,
+            layout: {
+                padding: 20,
+            },
+            elements: {
+                line: {
+                    tension: 0,
+                    borderWidth: 4,
+                },
+                point: {
+                    radius: 5,
+                },
             },
         },
-    },
-});
+    });
+}
