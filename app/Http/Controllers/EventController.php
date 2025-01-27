@@ -1417,6 +1417,7 @@ class EventController extends BaseController
         $categories = Session::get('category', []);
         $category_quantity = $categories[$category_index]['category_quantity'];
         $category_item = count($categories[$category_index]['item']);
+        DD($category_item);
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$category_index]['item']) && !empty($categories[$category_index]['item'])) {
