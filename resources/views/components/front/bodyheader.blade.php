@@ -323,8 +323,9 @@
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                                            <h6 class="notification-read-dot mt-1 text-right"></h6>
-                                        
+                                          @if($inner_data=="0")
+                                          <h6 class="notification-read-dot mt-1 text-right"></h6>
+                                          @endphp                                        
                                         </div>
                                       </div>
                                       <div>
@@ -345,7 +346,54 @@
                                         </button>
                                       </div> --}}
                                     </div>
+                                  </div>  
+                            @elseif($inner_data['notification_type']=="update_potluck")
+                                  <div class="notification-drodown-body-inner">
+                                    <div class="notification-drodown-body-inner-img">
+                                      @php
+                                                  $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                                  $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                      @endphp
+                                      @if($inner_data['profile']!="")
+                                      <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                     @else
+                                       {!! $userProfile !!}
+                                    <span class="active-dot"></span>
+                                    @endif
+                                      {{-- <span class="active-dot"></span> --}}
+                                    </div>
+                                    <div class="notification-drodown-body-inner-content">
+                                      <div>
+                                        <h3>
+                                          {{-- {{$inner_data['notification_message']}} --}}
+                                          {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                          <span> Has updated the event potluck for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                        </h3>
+                                        <div>
+                                          <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                                          @if($inner_data=="0")
+                                          <h6 class="notification-read-dot mt-1 text-right"></h6>
+                                          @endphp
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <!-- <p>{{$inner_data['event_name']}}</p> -->
+                                      </div>
+                                      
+                                      {{-- <div class="notification-accept-invite-btn-wrp">
+                                        <button class="accept-btn">
+                                          <i class="fa-regular fa-circle-check"></i>
+                                          Accept
+                                        </button>
+                                        <button class="decline-btn">
+                                          <i class="fa-regular fa-circle-xmark"></i>
+                                          Decline
+                                        </button>
+                                      </div> --}}
+                                    </div>
                                   </div>    
+                                        
                             @elseif($inner_data['notification_type']=="potluck_bring")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">

@@ -2416,7 +2416,9 @@ function bindData(current_event_id) {
         console.log("undoStack", undoStack.length);
         if (undoStack.length > 0) {
             // Ensure at least one previous state exists
-
+            if (undoStack.length == 1) {
+                $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
@@ -2440,6 +2442,9 @@ function bindData(current_event_id) {
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
             });
+            if (redoStack.length == 1) {
+                $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
             if (undoStack.length > 0) {
                 $("#undoButton").find("svg path").attr("fill", "#0F172A");
             }
