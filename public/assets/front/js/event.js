@@ -840,6 +840,24 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 
 });
 
+$(document).on('click','.notification-rsvp-btn', function () {
+    const eventId = $(this).data('event_id');
+    const userId = $(this).data('user_id');
+
+    $.ajax({
+        url: `${base_url}get_user_info_rsvp`,
+        type: 'POST',
+        data: {eventId:eventId,userId:userId},
+        success: function (response) {
+       
+        },
+        error: function (xhr, status, error) {
+    
+        },
+        complete: function () {
+        }
+    });
+});
 
 
 

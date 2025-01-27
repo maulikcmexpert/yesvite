@@ -2508,7 +2508,15 @@ class EventListController extends Controller
         return response()->json(['status' => 1, 'unread_count' => $unreadCount,'data' => $final_data, 'message' => "Notification list"]);
     }
 
+
+    public function get_user_info_rsvp(Request $request)
+    {
+        dd($request);
+    }
+
 }
+
+
 
 // foreach($a as $b){
 
