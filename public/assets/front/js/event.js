@@ -851,6 +851,12 @@ console.log(`${base_url}get_user_info_rsvp`);
         data: {eventId:eventId,userId:userId},
         success: function (response) {
             console.log(response);
+            const profile = response.event_data.profile;
+            const firstName = response.event_data.firstname;
+            const lastName = response.event_data.lastname;
+            const hosted_by = response.event_data.host;
+
+            $('#notification_rsvp_profile').attr('src',profile);
         },
         error: function (xhr, status, error) {
     
