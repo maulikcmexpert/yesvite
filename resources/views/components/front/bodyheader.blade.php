@@ -246,7 +246,7 @@
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                           @if($inner_data['read']=="0")
-                                            <h6 class="notification-read-dot"></h6>
+                                            <h6 class="notification-read-dot mt-1 text-right"></h6>
                                           @endif
                                         </div>
                                       </div>
