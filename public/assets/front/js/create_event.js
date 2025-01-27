@@ -694,9 +694,9 @@ function getClosest15MinuteTime() {
     now.setMilliseconds(0); // Reset milliseconds to 0
     return now;
 }
-$(".timepicker").on("dp.show", function () {
-    $(this).val(""); // Clear the input when the picker is shown
-});
+// $(".timepicker").on("dp.show", function () {
+//     $(this).val(""); // Clear the input when the picker is shown
+// });
 function datepicker() {
     $(".timepicker")
         .datetimepicker({
