@@ -803,9 +803,14 @@ header{
 
 .noification-simple-text-wrp{
     border: 1px solid var(--border);
-    background-color: var(--lightgreay);
+    background-color: var(--border);
     padding: 5px 5px;
     border-radius: 5px;
+    width: 100%;
+}
+
+.noification-simple-text-wrp p{
+    color: var(--secondary-black) !important;
 }
 
 /* ===Responsive=== */
