@@ -298,7 +298,7 @@ class HomeController extends BaseController
                         $eventdraft['id'] = $value->id;
                         $eventdraft['event_name'] = ($value->event_name != "") ? $value->event_name : "No name";;
                         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
-                        $eventdraft['saved_date'] = $formattedDate;
+                        $eventdraft['saved_date'] = $value->updated_at;
                         $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
                         $eventdraft['event_plan_name'] = $value->subscription_plan_name;
 

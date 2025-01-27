@@ -1184,7 +1184,7 @@ function bindData(current_event_id) {
             }
         });
         if (seted == 0) {
-            $("#color-picker").spectrum("set", selectedColor || "#000000");
+            $("#color-picker").spectrum("set", "#000000");
 
             activeObject.set("fill", "#000000");
         }
@@ -1542,7 +1542,9 @@ function bindData(current_event_id) {
             setTimeout(function () {
                 console.log({ clrcanvas });
                 undoStack.push(clrcanvas);
-
+                if ($(".sp-input").val() === "#000000") {
+                    changeColor("#000000");
+                }
                 if (undoStack.length > 0) {
                     $("#undoButton").find("svg path").attr("fill", "#0F172A");
                 }
@@ -1561,7 +1563,7 @@ function bindData(current_event_id) {
         preferredFormat: "hex",
         change: function (color) {
             if (color) {
-                //console.log("color")
+                console.log("color");
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
                 //console.log("rgba")
@@ -1589,7 +1591,7 @@ function bindData(current_event_id) {
             //console.log(activeObject.type);
             //console.log(activeObject.fill);
             if (selectedColorType == "font") {
-                //console.log("update fill");
+                console.log("update fill");
                 //console.log(activeObject.fill);
                 //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color

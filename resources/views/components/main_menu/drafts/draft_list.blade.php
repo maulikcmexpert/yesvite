@@ -89,35 +89,42 @@
         </div>
     </div>
   </div>
- 
-
-
   <script>
-// Select all elements with the 'last-save' class
-const saveDates = document.querySelectorAll('.last-save');
+document.addEventListener("DOMContentLoaded", function () {
+  const saveDates = document.querySelectorAll('.last-save');
 
-// Loop through each element and format the date
-saveDates.forEach(function (element) {
-  // Get the date string from the data attribute
-  const saveDate = element.getAttribute('data-save-date');
+  saveDates.forEach(function (saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Adjusting for LA timezone
 
-  // Convert to a Date object
-  const dateObj = new Date(saveDate);
+    // Format the date according to the required format
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
 
-  // Format the date to the local time zone
-  const formattedDate = new Intl.DateTimeFormat(navigator.language, {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true
-  }).format(dateObj);
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
 
-  // Update the element's text content with the formatted date
-  element.textContent = `Last Save: ${formattedDate}`;
+    if (formattedDate) {
+      // Ensure AM/PM is uppercase by replacing only the AM/PM part
+      // const finalDate = formattedDate.replace(' at ', ' - ');
+      // const finalDate = formattedDate.replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+      const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+    } else {
+      console.error('Date formatting failed:', savedDate);
+    }
+  });
 });
 </script>
+
+
+
+
+
 
 
