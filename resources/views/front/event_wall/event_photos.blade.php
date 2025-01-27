@@ -330,14 +330,21 @@
                                                         </div>
                                                     </div>
 {{-- {{dd($photo['mediaData'])}} --}}
+
+@php
+// Ensure post_media is an array, if it's not, make it an array
+$postMedia = is_array($photo['mediaData']['post_media'])
+    ? $photo['mediaData']['post_media']
+    : [$photo['mediaData']['post_media']];
+@endphp
                                                     <div class="photo-card-photos-wrp imagePress">
                                                         <div class="photo-card-photos-main-img open_photo_model img_click"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#detail-photo-modal"
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
+                                                            data-image="{{ json_encode($postMedia) }}">
 
-                                                            >
 
                                                             @if (!empty($photo['mediaData']) && isset($photo['mediaData']['type']) && $photo['mediaData']['type'] === 'image')
                                                             <img src="{{ $photo['mediaData']['post_media'] }}"  loading="lazy" alt="Post Image">
@@ -491,7 +498,30 @@
                 <div class="modal-body">
                     <div class="create-post-profile">
                         <div class="create-post-profile-wrp">
+
+                            @if ($photos != '')
                             <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="" loading="lazy">
+                        @else
+                            @php
+
+                                // $parts = explode(" ", $name);
+                                $firstInitial = isset($firstname[0])
+                                    ? strtoupper($firstname[0][0])
+                                    : '';
+                                $secondInitial = isset($lastname[0])
+                                    ? strtoupper($lastname[0][0])
+                                    : '';
+                                $initials =
+                                    strtoupper($firstInitial) .
+                                    strtoupper($secondInitial);
+                                $fontColor =
+                                    'fontcolor' . strtoupper($firstInitial);
+                            @endphp
+                            <h5 class="{{ $fontColor }}">
+                                {{ $initials }}
+                            </h5>
+                        @endif
+
                             <h4>Everyone <i class="fa-solid fa-angle-down"></i></h4>
                         </div>
                     </div>

@@ -61,6 +61,23 @@ class EventGuestController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $rsvp_status = "";
+            $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+                // $query->where('app_user', '1');
+            })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+            // dd($checkUserrsvp);
+            // if ($value->rsvp_by_date >= date('Y-m-d')) {
+
+            if ($checkUserrsvp != null) {
+
+                if ($checkUserrsvp->rsvp_status == '1') {
+                    $rsvp_status = '1'; // rsvp you'r going
+                } else if ($checkUserrsvp->rsvp_status == '0') {
+                    $rsvp_status = '0'; // rsvp you'r not going
+                }
+
+            }
+            $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventDetails['host_id'] = $eventDetail->user_id;

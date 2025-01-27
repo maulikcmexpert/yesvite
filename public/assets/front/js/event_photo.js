@@ -528,6 +528,8 @@ $(document).on('click', '.open_photo_model', function () {
     const postId = $(this).data('post-id');
     const eventId = $(this).data('event-id');
     ;
+    var imageUrl = $(this).data('image');
+    console.log(imageUrl)
     //let parentId = null;  // Default to null, assuming no parent
 
     // if ($('.commented-user-wrp').length > 0) {

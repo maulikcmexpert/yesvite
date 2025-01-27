@@ -41,7 +41,7 @@
                     <div class="event-center-tabs-main">
                         <!-- ====================navbar-============================= -->
                         {{-- <x-event_wall.wall_navbar :event="$event" :current_page="$current_page"/> --}}
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :rsvpSent="$rsvpSent" />
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails" />
                         {{-- {{dd($page)}} --}}
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -266,7 +266,7 @@
 
                                             </div>
                                             <div class="detail-btn-wrp">
-                                                <a href="#" class="add-calender btn">Add to calendar
+                                                <a href="#" class="add-calender btn" id="openGoogle">Add to calendar
                                                     <svg width="16" height="16" viewBox="0 0 16 16"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -281,7 +281,11 @@
                                                             stroke-linejoin="round" />
                                                     </svg>
                                                 </a>
-
+<input type="hidden" id="eventDate" value="{{$eventDetails['event_date']}}">
+<input type="hidden" id="eventEndDate" value="{{$eventDetails['end_date']}}">
+<input type="hidden" id="eventTime" value="{{$eventDetails['event_time']}}">
+<input type="hidden" id="eventEndTime" value="{{$eventDetails['end_time']}}">
+<input type="hidden" id="eventName" value="{{$eventDetails['event_name']}}">
 
 
                                                 @php
