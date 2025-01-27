@@ -41,7 +41,7 @@ use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
-use DB;
+// use DB;
 
 function getVideoDuration($filePath)
 {
@@ -141,13 +141,15 @@ function sendNotification($notificationType, $postData)
 
 
     if ($notificationType == 'owner_notify') {
-        $event = Event::with('event_image', 'event_schedule')->where('id', $postData['event_id'])->first();
+        $event = Event::with('event_image','event_invited_user', 'event_schedule')->where('id', $postData['event_id'])->first();
+        $event_host=EventInvitedUser::where('event_id', $postData['event_id'])->where('is_co_host','1')->first()->id;
         $event_time = "";
         if ($event->event_schedule->isNotEmpty()) {
 
             $event_time =  $event->event_schedule->first()->start_time;
         }
         $eventData = [
+            'event_invited_user_id' => $event_host,
             'event_id' => $postData['event_id'],
             'owner_id' => $event->user_id,
             'host_email' => $senderData->email,
