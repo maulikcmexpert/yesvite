@@ -802,6 +802,7 @@ function datepicker() {
             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             $(this).val(selectedEndTime.format("LT"));
 
+            // Check if there's a next start time, and update it if it exists
             const nextStartTime = $(".activity_start_time").eq(index + 1);
             if (nextStartTime.length) {
                 const startPicker = nextStartTime.data("DateTimePicker");
@@ -812,8 +813,8 @@ function datepicker() {
             }
         });
 
-    //     // Ensure input field is clear when the page loads
-    //     $(this).val("");
+        // Ensure input field is clear when the page loads
+        $(this).val("");
     });
 }
 
