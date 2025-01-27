@@ -171,6 +171,8 @@
 
 .choose-design-search-setting svg {
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 .choose-design-sidebar .accordion-button .fa-angle-down {
