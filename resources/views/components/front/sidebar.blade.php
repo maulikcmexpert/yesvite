@@ -312,8 +312,8 @@
                       <div class="d-flex align-items-center">
                         <img src="" alt="rs-img" class="about-rs-img" id="notification_rsvp_profile">
                         <div>
-                          <h4 class="modal-title" id="aboutsuccessLabel">Aaron Loeb’s 5th Birthday</h4>
-                          <span>Hosted by: <span>The Walton Family</span></span>
+                          <h4 class="modal-title" id="notification_rsvp_eventName"></h4>
+                          <span>Hosted by: <span id="notification_rsvp_host"></span></span>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
