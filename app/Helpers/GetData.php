@@ -480,7 +480,7 @@ function getNotificationList($filter = []){
 function setposttTime($dateTime)
 {
     $now = Carbon::now(); // Current time
-    $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
+    $updatedTime =Carbon::parse($dateTime); // Parse the updated_at value
 
     $diffInDays = $updatedTime->diffInDays($now);
 
