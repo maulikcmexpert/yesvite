@@ -2529,11 +2529,108 @@ class EventListController extends Controller
 
     public function store_rsvp(Request $request)
     {
-       dd($request);
 
-        return response()->json(['status' => 1, 'event_data' => $event_data]);
+        try {
+            DB::beginTransaction();
+
+        $userId= $request->rsvp_user_id;
+       $eventId= $request->rsvp_event_id;
+              $adults= $request->rsvp_notification_adult;
+              $kids= $request->rsvp_notification_kid;
+     
+    $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            // $query->where('app_user', '1');s
+        })->where(['id' => $request->rsvp_event_id,'user_id',$request->rsvp_user_id])->first();
+
+
+$rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
+
+if ($rsvpSent != null) {
+    $rsvp_attempt = "";
+    if ($rsvpSentAttempt == NULL) {
+        $rsvp_attempt =  'first';
+    } else if ($rsvpSentAttempt == '0' && $request->rsvp_status == '1') {
+        $rsvp_attempt =  'no_to_yes';
+    } else if ($rsvpSentAttempt == '1' && $request->rsvp_status == '0') {
+        $rsvp_attempt =  'yes_to_no';
+    }
+
+    $rsvpSent->event_id = $request->rsvp_event_id;
+
+    $rsvpSent->user_id = $request->rsvp_user_id;
+  
+    $rsvpSent->rsvp_status = $request->rsvp_status;
+
+    $rsvpSent->adults = $request->rsvp_notification_adult;
+
+    $rsvpSent->kids = $request->rsvp_notification_kids;
+
+    $rsvpSent->message_to_host = $request->rsvp_notification_message;
+    $rsvpSent->rsvp_attempt = $rsvp_attempt;
+
+    $rsvpSent->read = '1';
+    $rsvpSent->rsvp_d = '1';
+
+    $rsvpSent->event_view_date = date('Y-m-d');
+
+    $rsvpSent->save();
+
+    if ($rsvpSent->save()) {
+        EventPost::where('event_id', $eventId)
+            // ->where('user_id', $userId)
+            ->where(function ($query) use ($userId) {
+            
+                    $query->where('user_id', $userId);
+              
+            })
+        
+            ->where('post_type', '4')->delete();
+        $postMessage = [];
+        $postMessage = [
+            'status' => ($request->rsvp_status == '0') ? '2' : '1',
+            'adults' =>  $adults,
+            'kids' => $kids,
+        ];
+        $creatEventPost = new EventPost();
+        $creatEventPost->event_id = $eventId;
+        $creatEventPost->user_id =  $userId;
+        $creatEventPost->post_message = json_encode($postMessage);
+        $creatEventPost->post_privacy = "1";
+        $creatEventPost->post_type = "4";
+        $creatEventPost->commenting_on_off = "0";
+        $creatEventPost->is_in_photo_moudle = "0";
+        $creatEventPost->save();
+        // dd($creatEventPost);
+    }
+    $notificationParam = [
+        'sync_id'=>"",
+        'sender_id' => $userId,
+        'event_id' => $eventId,
+        'rsvp_status' => $request->rsvp_status,
+        'kids' =>  $kids,
+        'adults' => $adults,
+        'rsvp_video' => "",
+        'rsvp_message' => $request->rsvp_notification_message,
+        'post_id' => "",
+        'rsvp_attempt' => $rsvp_attempt
+    ];
+
+    DB::commit();
+
+    // dd($notificationParam);
+    sendNotification('sent_rsvp', $notificationParam);   
+
+
+    if ($request->rsvp_status == "1") {
+        return redirect(route('home'))->with('msg', 'You are going to this event');
+        // return redirect()->to($url)->with('msg', 'You are going to this event');
+    } elseif ($request->rsvp_status == "0") {
+        return redirect(route('home'))->with('msg', 'You declined to go to this event');
+        // return redirect()->to($url)->with('msg', 'You are going to this event');
+    }
  
     }
+}
 
 }
 

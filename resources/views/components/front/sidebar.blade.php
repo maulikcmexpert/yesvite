@@ -327,7 +327,7 @@
                     <h6>RSVP</h6>
                     <div class="rsvp-input-form">
                       <div class="input-form">
-                        <input type="radio" id="rsvp_yes" name="rsvp_yes" value="1"  name="foo">
+                        <input type="radio" id="rsvp_yes" name="rsvp_status" value="1"  name="foo">
                         <label for="option5">
                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M10.0013 18.3346C14.5846 18.3346 18.3346 14.5846 18.3346 10.0013C18.3346 5.41797 14.5846 1.66797 10.0013 1.66797C5.41797 1.66797 1.66797 5.41797 1.66797 10.0013C1.66797 14.5846 5.41797 18.3346 10.0013 18.3346Z" stroke="#23AA26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -336,7 +336,7 @@
                           YES</label>
                       </div>
                       <div class="input-form rsvp-no-checkbox">
-                          <input type="radio" id="rsvp_no" name="rsvp_yes" value="0" name="foo">
+                          <input type="radio" id="rsvp_no" name="rsvp_status" value="0" name="foo">
                           <label for="option6"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M10.4974 18.3346C15.0807 18.3346 18.8307 14.5846 18.8307 10.0013C18.8307 5.41797 15.0807 1.66797 10.4974 1.66797C5.91406 1.66797 2.16406 5.41797 2.16406 10.0013C2.16406 14.5846 5.91406 18.3346 10.4974 18.3346Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                           <path d="M8.14062 12.3573L12.8573 7.64062" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
