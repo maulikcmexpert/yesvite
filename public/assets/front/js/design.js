@@ -1901,6 +1901,8 @@ function bindData(current_event_id) {
     // Function to add icons to a textbox
 
     function deleteTextbox() {
+        addToUndoStack(canvas);
+        alert(0);
         canvas.remove(canvas.getActiveObject());
         canvas.renderAll();
     }
