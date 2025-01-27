@@ -1,14 +1,18 @@
 <script type="text/javascript">
     $(function() {
 
-        function allowOnlyNumbers(event) {
+function allowOnlyNumbers(event) {
     let inputVal = event.target.value;
 
+    // Remove any non-numeric characters
     inputVal = inputVal.replace(/[^0-9]/g, '');
 
+    // Update the input field with the cleaned value
     event.target.value = inputVal;
 }
-$(document).on("keyup","#creditcoins", allowOnlyNumbersOnKeyUp);
+
+// Attach the event handler to the 'keyup' event of the input with id 'creditcoins'
+$(document).on("keyup", "#creditcoins", allowOnlyNumbers);
 
 $("#addCoin_form").validate({
     rules: {
