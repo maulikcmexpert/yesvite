@@ -1,9 +1,5 @@
 
-@php
-                  $notification_list=getNotificationList();
-                  $i=0;
-                  dd($notification_list);
-              @endphp
+
 @if (Auth::guard('web')->check())
 
 <header>
