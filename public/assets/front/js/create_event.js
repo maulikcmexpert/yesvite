@@ -778,7 +778,7 @@ function datepicker() {
         $(this).val("");
     });
 
-    $(".timepicker.activity_end_time").each(function () {
+    $(".timepicker.activity_end_time").each(function (index) {
         $(this).datetimepicker({
             format: "LT",
             icons: {
@@ -798,13 +798,22 @@ function datepicker() {
             picker.date(startMoment.clone().add(1, 'hours'));
         })
         .on("dp.change", function (e) {
+            // Change only the current end time without affecting previous start times
             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             $(this).val(selectedEndTime.format("LT"));
+
+            // Set the next start time based on the selected end time
+            const nextStartTime = $(".activity_start_time").eq(index + 1);
+            if (nextStartTime.length) {
+                const startPicker = nextStartTime.data("DateTimePicker");
+                const newStartTime = selectedEndTime.clone().add(1, 'hours');
+                startPicker.date(newStartTime);
+            }
         });
     });
 }
-
 datepicker();
+
 
 function startTimePicker() {
     $(".start_timepicker").datetimepicker({
