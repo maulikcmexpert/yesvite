@@ -243,6 +243,19 @@ header{
     height: 40px;
 }
 
+.accordion-button-img-wrp h5{
+    font-family: var(--SFProDisplay-Semibold);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+
+}
+
 .accordion-button-content-wrp h3{
     font-family: var(--SFProDisplay-Bold);
     font-size: 15px;
@@ -303,6 +316,18 @@ header{
     height: 40px;
     border-radius: 50%;
     position: relative;
+}
+
+.notification-drodown-body-inner-img h5{
+    font-family: var(--SFProDisplay-Semibold);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
 }
 
 .notification-drodown-body-inner-img img{
