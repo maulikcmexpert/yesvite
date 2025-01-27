@@ -867,7 +867,7 @@ console.log(`${base_url}get_user_info_rsvp`);
             
                 $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
                 $('#notification_rsvp_profile').after(
-                    `<h4 class="modal-title text-uppercase font-weight-bold text-center initials" style="width: 50px; height: 50px; background-color: #f2f2f2; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
+                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor}" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
                         ${initials}
                     </h4>`
                 );
