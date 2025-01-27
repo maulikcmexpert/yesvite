@@ -2648,4 +2648,5 @@ if ($rsvpSent != null) {
 //     foreach($c as $d){
 
 //     }
+    }
 }
