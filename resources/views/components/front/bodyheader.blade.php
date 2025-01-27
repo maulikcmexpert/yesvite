@@ -207,8 +207,7 @@
                                     <div class="notification-drodown-body-inner-img">
                                       @php
 
-                                                        $name = $events['host_name'];
-                                                        $parts = explode(" ", $name); 
+                                             
                                                         $firstInitial = isset($inner_data['first_name'][0]) ? strtoupper($inner_data['first_name'][0]) : '';
                                                         $secondInitial = isset($inner_data['last_name'][1]) ? strtoupper($inner_data['last_name'][0]) : '';
                                                         $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
