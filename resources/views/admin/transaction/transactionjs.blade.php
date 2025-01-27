@@ -1,18 +1,18 @@
 <script type="text/javascript">
     $(function() {
 
-function allowOnlyNumbers(event) {
-    let inputVal = event.target.value;
+// function allowOnlyNumbers(event) {
+//     let inputVal = event.target.value;
 
-    // Remove any non-numeric characters
-    inputVal = inputVal.replace(/[^0-9]/g, '');
+//     // Remove any non-numeric characters
+//     inputVal = inputVal.replace(/[^0-9]/g, '');
 
-    // Update the input field with the cleaned value
-    event.target.value = inputVal;
-}
+//     // Update the input field with the cleaned value
+//     event.target.value = inputVal;
+// }
 
-// Attach the event handler to the 'keyup' event of the input with id 'creditcoins'
-$(document).on("keyup", "#creditcoins", allowOnlyNumbers);
+// // Attach the event handler to the 'keyup' event of the input with id 'creditcoins'
+// $(document).on("keyup", "#creditcoins", allowOnlyNumbers);
 
 $("#addCoin_form").validate({
     rules: {
