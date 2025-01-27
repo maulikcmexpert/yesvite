@@ -804,12 +804,13 @@ header{
 .noification-simple-text-wrp{
     border: 1px solid var(--border);
     background-color: var(--border);
-    padding: 5px 5px;
-    border-radius: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
     width: 100%;
 }
 
 .noification-simple-text-wrp p{
+    font-family: var(--SFProDisplay-Regular) !important;
     color: var(--secondary-black) !important;
 }
 
