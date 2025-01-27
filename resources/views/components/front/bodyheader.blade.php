@@ -250,10 +250,11 @@
                                           @endif
                                         </div>
 
-                                        <div>
+                                      
+                                      </div>
+                                      <div>
                                             <button type="button">RSVP</button>
                                         </div>
-                                      </div>
                                      <div>
                                         <!-- <p>{{$inner_data['event_name']}}</p>
                                           @if($inner_data['read']=="0")
