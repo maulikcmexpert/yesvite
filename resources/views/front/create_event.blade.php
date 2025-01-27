@@ -1501,8 +1501,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="list-slide list-slide-{{ $index }}">
                                 @foreach ($data['items'] as $itemkey=> $items)
-                                    <div class="list-slide list-slide-{{ $index }}">
                                         <div class="accordion accordion-flush" id="accordioncatList">
                                             <div class="accordion-item green-border">
                                                 <h2 class="accordion-header" id="lumpia">
@@ -1818,8 +1818,8 @@
 
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
                             </div>
                             <a href="#" class="listing-arrow">
                                 <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
