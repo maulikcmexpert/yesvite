@@ -4659,13 +4659,14 @@ function plusBTN(that) {
     input.val(value + 1);
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     if (quantity > 0) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= (quantity+innerUserQnt)) {
+    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
         update_self_bring(
-            innerUserQnt,
+            isvalidUserQnt,
             categoryItemKey,
             categoryIndexKey,
             quantity,
