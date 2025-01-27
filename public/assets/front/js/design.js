@@ -2413,6 +2413,7 @@ function bindData(current_event_id) {
     }
 
     function undo() {
+        console.log("undoStack", undoStack.length);
         if (undoStack.length > 0) {
             // Ensure at least one previous state exists
 
