@@ -5024,14 +5024,7 @@ $(document).on("click", ".delete-self-bring", function () {
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
     // var userquantity = $(this).data("userquantity");
-    var userquantity = parseInt(
-        $(this)
-            .parent()
-            .parent()
-            .find(".qty-container")
-            .children(".input-qty")
-            .val()
-    );
+    var userquantity =0;
     var innerUserQnt = $(this).data("inneruserqnt");
 
     $(this).parent().parent().hide();
