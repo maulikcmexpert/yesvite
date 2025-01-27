@@ -764,9 +764,9 @@ function startTimePicker() {
         const endTimePicker = $(".end_timepicker").data("DateTimePicker");
         endTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
 
-        const timePicker = $(".timepicker").data("DateTimePicker");
-        const oneHourLater = selectedStartTime.clone().add(1, 'hours');
-        timePicker.date(oneHourLater); 
+        const activityTimePicker = $(".timepicker").data("DateTimePicker");
+        activityTimePicker.date(selectedStartTime.clone().add(1, 'hours'));
+
     });
 }
 function endTimePicker() {
