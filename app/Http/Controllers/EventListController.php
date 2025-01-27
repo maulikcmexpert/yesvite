@@ -2522,7 +2522,9 @@ class EventListController extends Controller
             'firstname'=>$user->firstname,
             'lastname'=>$user->lastname
         ];
-        dd($event_data);
+
+        return response()->json(['status' => 1, 'event_data' => $event_data]);
+ 
     }
 
 }

@@ -850,7 +850,7 @@ console.log(`${base_url}get_user_info_rsvp`);
         type: 'GET',
         data: {eventId:eventId,userId:userId},
         success: function (response) {
-       
+            console.log(response);
         },
         error: function (xhr, status, error) {
     

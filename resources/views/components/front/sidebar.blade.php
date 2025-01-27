@@ -310,7 +310,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                       <div class="d-flex align-items-center">
-                        <img src="./assets/img/birth-img.png" alt="rs-img" class="about-rs-img">
+                        <img src="" alt="rs-img" class="about-rs-img" id="notification_rsvp_profile">
                         <div>
                           <h4 class="modal-title" id="aboutsuccessLabel">Aaron Loeb’s 5th Birthday</h4>
                           <span>Hosted by: <span>The Walton Family</span></span>
