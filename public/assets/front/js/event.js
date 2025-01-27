@@ -847,7 +847,7 @@ console.log(`${base_url}get_user_info_rsvp`);
 
     $.ajax({
         url: `${base_url}get_user_info_rsvp`,
-        type: 'POST',
+        type: 'GET',
         data: {eventId:eventId,userId:userId},
         success: function (response) {
        
