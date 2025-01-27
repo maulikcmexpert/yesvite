@@ -753,7 +753,7 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const previousEndTime = index > 0 ? $(".activity_end_time").eq(index - 1).val() : ""; 
+            const previousEndTime = index+1 > 0 ? $(".activity_end_time").eq(index - 1).val() : ""; 
 
             // If previous end time exists, set current start time 1 hour after it
             if (previousEndTime) {
@@ -887,19 +887,19 @@ $(document).ready(function () {
 
 });
 
-$(".activity_end_time").on("change", function () {
-    // Get the current activity ID
-    var activityId = $(this).closest('.activity-main-wrp').data('id');
+// $(".activity_end_time").on("change", function () {
+//     // Get the current activity ID
+//     var activityId = $(this).closest('.activity-main-wrp').data('id');
     
-    // Find the corresponding start_time and end_time fields for this activity
-    var startTimeField = $("div[data-id='" + activityId + "'] .activity_start_time");
-    var endTimeField = $("div[data-id='" + activityId + "'] .activity_end_time");
+//     // Find the corresponding start_time and end_time fields for this activity
+//     var startTimeField = $("div[data-id='" + activityId + "'] .activity_start_time");
+//     var endTimeField = $("div[data-id='" + activityId + "'] .activity_end_time");
     
-    // Update the current start_time and end_time
-    // This part can be adjusted based on how you want to set the new times
-    startTimeField.val("09:00 AM"); // Example value, adjust accordingly
-    endTimeField.val("05:00 PM"); // Example value, adjust accordingly
-});
+//     // Update the current start_time and end_time
+//     // This part can be adjusted based on how you want to set the new times
+//     startTimeField.val("09:00 AM"); // Example value, adjust accordingly
+//     endTimeField.val("05:00 PM"); // Example value, adjust accordingly
+// });
 
 // datepicker();
 // start_timepicker();
