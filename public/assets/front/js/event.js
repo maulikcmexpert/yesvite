@@ -860,6 +860,7 @@ console.log(`${base_url}get_user_info_rsvp`);
             $('#notification_rsvp_profile').attr('src',profile);
             $('#notification_rsvp_eventName').text(event_name);
             $('#notification_rsvp_host').text(hosted_by);
+            $('#rsvp_user_id').val(userId);
         },
         error: function (xhr, status, error) {
     
