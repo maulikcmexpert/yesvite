@@ -2068,7 +2068,7 @@ alert(potluckkey)
 $(document).on("click", ".add_category_item_btn", function () {
     var category_index = $("#category_index").val();
     var category_name = $("#hidden_category_name").val();
-    var totalmissing = $("#missing-category-"+activePotluck).val();
+    var totalmissing = $("#missing-category-"+activePotluck).text();
     alert(totalmissing);
     var category_quantity = $("#hidden_category_quantity").val();
     var itemName = $("#item_name").val();
