@@ -1,11 +1,17 @@
 <script type="text/javascript">
     $(function() {
-        
+
 $("#credit_coin").on('input', function(event) {
     const inputVal = $(this).val();
-    // Check if the input contains any numbers
     if (/\d/.test(inputVal)) {
         $(this).val(inputVal.replace(/\d/g, '')); // Remove numbers
+    }
+});
+$("#credit_coin").on('keypress', function(event) {
+    const keyCode = event.which || event.keyCode;
+
+    if ((keyCode < 48 || keyCode > 57) && keyCode !== 8 && keyCode !== 46) {
+        event.preventDefault();  // Prevent non-numeric characters
     }
 });
 $("#addCoin_form").validate({
