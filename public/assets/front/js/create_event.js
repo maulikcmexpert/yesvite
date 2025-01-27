@@ -4708,12 +4708,13 @@ function minusBTN(that) {
     }
     var quantity = parseInt(that.parent().find(".input-qty").val());
     var innerUserQnt = parseInt(that.parent().find(".innerUserQnt").val());
+    var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity) {
+    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
-                innerUserQnt,
+                isvalidUserQnt,
                 categoryItemKey,
                 categoryIndexKey,
                 quantity,
