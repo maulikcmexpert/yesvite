@@ -802,6 +802,7 @@ function datepicker() {
     //         const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
     //         $(this).val(selectedEndTime.format("LT"));
 
+<<<<<<< HEAD
             // Check if there's a next start time, and update it if it exists
             const nextStartTime = $(".activity_start_time").eq(index + 1);
             if (nextStartTime.length) {
@@ -812,6 +813,7 @@ function datepicker() {
                 }
             }
         });
+=======
     //         // Set the next start time based on the selected end time
     //         const nextStartTime = $(".activity_start_time").eq(index + 1);
     //         if (nextStartTime.length) {
@@ -820,6 +822,7 @@ function datepicker() {
     //             startPicker.date(newStartTime);
     //         }
     //     });
+>>>>>>> f127075a0f39987e39a7c48ad5fe439ae30ffcc2
 
     //     // Ensure input field is clear when the page loads
     //     $(this).val("");
