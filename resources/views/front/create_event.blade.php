@@ -1411,7 +1411,7 @@
                                                     id="missing-category-{{ $index }}">0</span> Missing</h6>
                                         @endif
                                         <input type="hidden" class="total-potluck-category-{{ $index }}"
-                                            value="{{$data['quantity']}}">
+                                            value="{{ $data['quantity'] }}">
                                         <a href="#" class="me-3 add_potluck_item"
                                             id="potluck-{{ $index }}" data-id="{{ $index }}"
                                             style="{{($data['quantity'] > $data['totalItem']) ? '' : 'display:none'}}">
