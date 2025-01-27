@@ -1,7 +1,15 @@
 <script type="text/javascript">
     $(function() {
 
-        
+        function allowOnlyNumbers(event) {
+    let inputVal = event.target.value;
+
+    inputVal = inputVal.replace(/[^0-9]/g, '');
+
+    event.target.value = inputVal;
+}
+$(document).on("keyup","#creditcoins", allowOnlyNumbersOnKeyUp);
+
 $("#addCoin_form").validate({
     rules: {
         credit_coin: {
