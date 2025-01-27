@@ -718,11 +718,15 @@ function datepicker() {
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
             // const closest15MinTime = getClosest15MinuteTime();
-                    const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
+            //         const closest15MinTime = moment().hours(12).minutes(0).seconds(0);
 
 
-            // Set the picker to the closest 15-minute time dynamically
-            picker.date(closest15MinTime);  
+            // // Set the picker to the closest 15-minute time dynamically
+            // picker.date(closest15MinTime);  
+            const startTime = $(".start_timepicker").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            const closest15MinTime = startMoment.clone().add(1, 'hours');
+             picker.date(closest15MinTime);
         })
         .on("dp.hide", function (e) {
             // Automatically set the selected value in the input field when the picker closes
