@@ -802,7 +802,7 @@ function datepicker() {
             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
             $(this).val(selectedEndTime.format("LT"));
 
-            const nextStartTime = $(".activity_start_time").eq(index + 1);
+            const nextStartTime = $(".activity_start_time").eq(index + 2);
             if (nextStartTime.length) {
                 const startPicker = nextStartTime.data("DateTimePicker");
                 if (startPicker) {
