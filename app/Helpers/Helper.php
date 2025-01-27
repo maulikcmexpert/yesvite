@@ -141,7 +141,7 @@ function sendNotification($notificationType, $postData)
 
 
     if ($notificationType == 'owner_notify') {
-        $event = Event::with('event_image','event_invited_user', 'event_schedule')->where('id', $postData['event_id'])->first();
+        $event = Event::with('event_image', 'event_invited_user', 'event_schedule')->where('id', $postData['event_id'])->first();
         // $event_host=EventInvitedUser::where('event_id', $postData['event_id']);
         $event_time = "";
         if ($event->event_schedule->isNotEmpty()) {
@@ -1780,9 +1780,12 @@ function sendSMSForApplication($receiverNumber, $message)
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     try {
-        $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
-        if (strpos($receiverNumber, '+') === 0) {
-            $cleanedNumber = '+' . $cleanedNumber;
+        $cleanedNumber = preg_replace('/[^0-9]/', '', $receiverNumber);
+        if (strpos($cleanedNumber, '1') === 0 && strlen($cleanedNumber) > 10) {
+            $cleanedNumber = substr($cleanedNumber, 1);
+        }
+        if (strlen($cleanedNumber) < 10) {
+            $cleanedNumber = $receiverNumber;
         }
         $user = Useropt::where('phone', $cleanedNumber)->first();
         if (!$user) {
@@ -1829,9 +1832,12 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
 
 function handleIncomingMessage($receiverNumber, $message)
 {
-    $cleanedNumber = preg_replace('/[^0-9]/', '', ltrim($receiverNumber, '+'));
-    if (strpos($receiverNumber, '+') === 0) {
-        $cleanedNumber = '+' . $cleanedNumber;
+    $cleanedNumber = preg_replace('/[^0-9]/', '', $receiverNumber);
+    if (strpos($cleanedNumber, '1') === 0 && strlen($cleanedNumber) > 10) {
+        $cleanedNumber = substr($cleanedNumber, 1);
+    }
+    if (strlen($cleanedNumber) < 10) {
+        $cleanedNumber = $receiverNumber;
     }
     if (strtolower($message) == 'yes') {
 
