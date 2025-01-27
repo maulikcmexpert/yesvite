@@ -708,7 +708,7 @@
 
                                                   /></span>
                                                 </a>
-                                              
+                                              @endif
                                           </div>
                                           <div class="notification-video-content">
                                             <p>
@@ -716,9 +716,9 @@
                                             </p>
                                           </div>
                                         @elseif($inner_data['media_type']=="")
-                                          <div>
-                                            <p>See post details</p>
-                                          </div>
+                                            <div>
+                                              <p>See post details</p>
+                                            </div>
                                         @endif
                                       </div>
                                     {{-- </div> --}}
