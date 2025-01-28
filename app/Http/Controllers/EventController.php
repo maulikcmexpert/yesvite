@@ -1014,6 +1014,7 @@ class EventController extends BaseController
                 }
             }
 
+            
             // if ($request->thankyou_message == "1") {
             //     $thankyou_card = session('thankyou_card_data');
             //     if (isset($thankyou_card) && !empty($thankyou_card)) {
@@ -3206,14 +3207,14 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
-            if ($request->is_update_event == '0') {
+            if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
-
+                    sendNotificationGuest('invite', $notificationParam);
                     sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
