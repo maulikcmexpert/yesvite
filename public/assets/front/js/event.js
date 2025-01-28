@@ -896,7 +896,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
 
-    const formData = $(this).serialize();
+    const formData = $('#notification_rsvp').serialize();
 
     $.ajax({
       url: $('#notification_rsvp').attr('action'), 
