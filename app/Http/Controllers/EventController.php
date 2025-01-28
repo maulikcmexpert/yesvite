@@ -1357,6 +1357,7 @@ class EventController extends BaseController
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
+        dd($totalmissing,$itemQuantity)
         // dd($itemQuantity);
         $category_index = $request->input('category_index');
 
