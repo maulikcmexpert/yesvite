@@ -3257,7 +3257,7 @@ class EventController extends BaseController
                 if ($isaddress != 0 && $request->address1 != "") {
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
-                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                        array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
                     );
 
                     $notificationParam = [
@@ -3275,7 +3275,7 @@ class EventController extends BaseController
 
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
-                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                        array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
                     );
                     $notificationParam = [
                         'sender_id' => $user_id,
@@ -3293,7 +3293,7 @@ class EventController extends BaseController
 
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
-                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                        array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
                     );
 
                     $notificationParam = [
@@ -3306,7 +3306,62 @@ class EventController extends BaseController
 
                     sendNotification('update_date', $notificationParam);
                 }
+
+                if (isset($istime) && $istime == 0 && isset($isupdatedate) && $isupdatedate == 0 && $isaddress == 0) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_time' => $oldstart_time,
+                        'to_time' =>  $newstart_time,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_event', $notificationParam);
+                }
+                if (isset($invitedusersession)) {
+    
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
+                    );
+                    if (isset($filteredIds) && count($filteredIds) != 0) {
+    
+                        
+                        $notificationParam = [
+                            'sender_id' => $user_id,
+                            'event_id' => $eventId,
+                            'newUser' => $filteredIds
+                        ];
+                        // dd($newInviteGuest);
+    
+                        sendNotification('invite', $notificationParam);
+                    }
+    
+                    $newInviteGuest = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
+                    );
+    
+                    if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'newUser' => $newInviteGuest
+                        ];
+                        // dd($newInviteGuest);
+                        sendNotificationGuest('invite', $notificationParam);
+                    }
+                    $total_count = count($filteredIds) + count($newInviteGuest);
+                    debit_coins($user->id, $eventData['event_id'], $total_count);
+                }
             }
+
 
             // if ($request->thankyou_message == "1") {
             //     $thankyou_card = session('thankyou_card_data');
