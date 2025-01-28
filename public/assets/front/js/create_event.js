@@ -880,26 +880,12 @@ function datepicker() {
         //     picker.date(startMoment.clone().add(1, "hours"));
         // })
         .on("dp.show", function () {
-            const picker = $(this).data("DateTimePicker");
+            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             
-            // Find the closest previous activity_start_time within the same .activity-main-wrp container
-            const closestPreviousStartTime = $(this).closest(".activity-main-wrp")
-                .prev(".activity-main-wrp")
-                .find(".activity_start_time")
-                .val();
-            
-            let startMoment;
-            
-            // If a previous start time is found, set the end time to 1 hour after that
-            if (closestPreviousStartTime) {
-                startMoment = moment(closestPreviousStartTime, "LT").add(1, "hours");
-            } else {
-                // If no previous start time, default to the current time + 1 hour
-                startMoment = moment().hours(12).minutes(0).seconds(0).add(1, "hours");
-            }
-        
+            picker.date(startMoment.clone().add(1, "hours"));
             // Set the picker date to 1 hour after the closest previous start time or the default time
-            picker.date(startMoment);
+            // picker.date(startMoment);
         })
         
         .on("dp.close", function () {
