@@ -2531,7 +2531,6 @@ class EventListController extends Controller
     public function store_rsvp(Request $request)
     {
 
-        dd(1);
         try {
             $userId = $request->rsvp_user_id;
               $eventId = $request->rsvp_event_id;
@@ -2621,10 +2620,10 @@ if ($rsvpSent != null) {
 
 
     if ($request->rsvp_status == "1") {
-        return redirect(route('home'))->with('msg', 'You are going to this event');
+        return response()->json(['status' => 1, 'msg' => 'You are going to this event']);
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     } elseif ($request->rsvp_status == "0") {
-        return redirect(route('home'))->with('msg', 'You declined to go to this event');
+        return response()->json(['status' => 0, 'msg' => 'You are not going to this event']);
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
  

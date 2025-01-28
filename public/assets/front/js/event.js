@@ -906,13 +906,15 @@ $('#notification_rsvp_btn').on('click', function (e) {
     },           
       data: formData,          
       success: function (response) {
-        toastr.success('RSVP submitted successfully!');
+        if(response.status==1){
+            toastr.success(response.msg);
+        }
+        if(response.status==0){
+            toastr.success(response.msg);
+        }
       },
       error: function (error) {
-        toastr.error('Something went wrong. Please try again!', 'Error', {
-          closeButton: true,
-          progressBar: true,
-        });
+        toastr.error('Something went wrong. Please try again!');
       },
     });
 
