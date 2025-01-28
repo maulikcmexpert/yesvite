@@ -2838,11 +2838,11 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         //     }
         // }
 
-        $(this)
-            .closest(".activity-main-wrp")
-            .next()
-            .find('input[name="activity-start-time[]"]')
-            .val(newEndtimeagain);
+        // $(this)
+        //     .closest(".activity-main-wrp")
+        //     .next()
+        //     .find('input[name="activity-start-time[]"]')
+        //     .val(newEndtimeagain);
 
         setTimeout(function () {
             blurExecutedEndTime = false; // Reset after a delay
