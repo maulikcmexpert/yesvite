@@ -973,3 +973,8 @@ $('#notification_rsvp_btn').on('click', function (e) {
 });
 
 
+$(document).on('click','.main-notification-div-list',function(){
+    const event_id=$(this).data('event_id');
+    console.log();
+    
+});

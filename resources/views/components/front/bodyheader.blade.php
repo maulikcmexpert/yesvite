@@ -169,10 +169,10 @@
               @php
                 $i++;
               @endphp
-                <div class="accordion-item main-notification-div-list">
+                <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button
-                      class="accordion-button collapsed"
+                      class="accordion-button collapsed main-notification-div-list"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne{{$i}}"
