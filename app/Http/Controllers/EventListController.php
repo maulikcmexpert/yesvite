@@ -2616,7 +2616,6 @@ if ($rsvpSent != null) {
     ];
 
 
-    dd($notificationParam);
     sendNotification('sent_rsvp', $notificationParam);   
 
 
