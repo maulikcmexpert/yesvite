@@ -2957,15 +2957,7 @@ class EventController extends BaseController
         //     $event_creation->static_information = json_encode($static_data);
         // }
 
-
-
-
-
         $event_creation->save();
-
-
-
-
 
         if ($eventId != "") {
             if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
@@ -3003,8 +2995,6 @@ class EventController extends BaseController
                     }
                 }
             }
-
-            // dd($conatctId);
             if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
 
