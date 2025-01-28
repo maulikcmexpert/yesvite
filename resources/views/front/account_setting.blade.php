@@ -4,6 +4,8 @@
 <section class="contact-details">
     <div class="container">
         <div class="row">
+        {{dd($user);}}
+
             <x-front.sidebar1 :profileData="$user" />
             <div class="col-xxl-9 col-xl-8 col-lg-8 col-md-7">
                 <div class="contact-list">
