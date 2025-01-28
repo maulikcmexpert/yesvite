@@ -101,7 +101,7 @@ class TransactionDataTable extends DataTable
             
             
 
-            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance', 'used_coins','transcation_date']);
+            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance', 'used_coins','transcation_date','endDate']);
     }
 
     /**
