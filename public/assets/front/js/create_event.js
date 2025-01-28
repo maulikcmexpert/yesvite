@@ -4790,8 +4790,9 @@ function plusBTN(that) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
+    // if (categoryItemQuantity >= (quantity+isvalidUserQnt)) {
         update_self_bring(
+            that,
             isvalidUserQnt,
             categoryItemKey,
             categoryIndexKey,
@@ -4799,11 +4800,11 @@ function plusBTN(that) {
             categoryItemQuantity,
             "plus"
         );
-    } else {
-        quantity--;
+    // } else {
+    //     quantity--;
 
-        that.parent().children(".input-qty").val(quantity);
-    }
+    //     that.parent().children(".input-qty").val(quantity);
+    // }
 }
 $(".qty-btnminus").on("click", function () {
     minusBTN($(this));
@@ -4830,9 +4831,10 @@ function minusBTN(that) {
     var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
+    // if (categoryItemQuantity >= (quantity + isvalidUserQnt)) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
+                that,
                 isvalidUserQnt,
                 categoryItemKey,
                 categoryIndexKey,
@@ -4845,9 +4847,9 @@ function minusBTN(that) {
                 that.parent().children(".input-qty").val(0);
             }
         }
-    } else {
-        that.parent().find(".input-qty").val(0);
-    }
+    // } else {
+    //     // that.parent().find(".input-qty").val(0);
+    // }
 }
 
 function update_self_bring_bck(
@@ -5018,10 +5020,10 @@ $(document).on("click", ".delete-self-bring", function () {
         .find(".qty-container")
         .children(".input-qty")
         .val(0);
-
+    var that =$(this);
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(isvalidUserQnt,categoryItemKey, categoryIndexKey, 0, itemquantity);
+    update_self_bring(that,isvalidUserQnt,categoryItemKey, categoryIndexKey, 0, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
@@ -8182,8 +8184,10 @@ function step4open() {
         }
     }
 }
-
+var remainingCategoryCount=0;
+var remainingCategoryCountn=0;
 function update_self_bring(
+    that,
     innerUserQnt,
     categoryItemKey,
     categoryIndexKey,
@@ -8217,18 +8221,82 @@ function update_self_bring(
             var categoryItem = parseInt(
                 $(".missing-category-h6-" + categoryIndexKey).text()
             );
-            let remainingCategoryCount=0;
-            if (type == undefined){
-                remainingCategoryCount = categoryItem + categoryItemQuantity -  innerUserQnt
-            }else if(type == "plus") {
-                remainingCategoryCount = categoryItem -1
+           
+            $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey).data('extraquantity');
+            if( categoryItemQuantity < quantity || categoryItem == 0 ){
+                var element = $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey);
+                $(".extra-category-h6-" + categoryIndexKey).show();
+                $("#extra-category-" + categoryIndexKey).show();
+                var categoryItemextra = parseInt(
+                    $(".extra-category-h6-" + categoryIndexKey).text()
+                );
+                if (type == undefined){
+                    var extraQuantity =0;
+                    if (element.length) {
+                        extraQuantity = element.data('extraquantity');
+                    }
+                    remainingCategoryCount = categoryItem + categoryItemQuantity -  innerUserQnt
+                    $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
+                    remainingCategoryCountn = remainingCategoryCountn - extraQuantity
+                    $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
+                    
+                }else if(type == "plus") {
+                    remainingCategoryCountn = categoryItemextra + 1
+                }else{
+                    remainingCategoryCountn = categoryItemextra - 1;
+                }
+                if (element.length) {
+                    element.data('extraquantity', remainingCategoryCountn);
+                }
+                if(remainingCategoryCountn == 0){
+                    $(".extra-category-h6-" + categoryIndexKey).hide();
+                    $("#extra-category-" + categoryIndexKey).hide();
+                }
+                if(remainingCategoryCountn >=0){
+                    $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
+                }
+                if(remainingCategoryCountn < 0){
+                    $("#missing-category-" + categoryIndexKey).text(1); 
+                    var svg =
+                    '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" /></svg>';
+                    $(".missing-category-svg-" + categoryIndexKey).html(svg);
+                    $(".missing-category-h6-" + categoryIndexKey).css(
+                        "color",
+                        "#E20B0B"
+                    );                      
+                }
             }else{
-                remainingCategoryCount = categoryItem + 1
+                var element = $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey);
+
+                if (type == undefined){
+                    var extraQuantity =0;
+                    if (element.length) {
+                        extraQuantity = element.data('extraquantity');
+                    }
+                    remainingCategoryCount = categoryItem + categoryItemQuantity -  innerUserQnt
+                    remainingCategoryCountn = remainingCategoryCountn - extraQuantity
+                    $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
+                }else if(type == "plus") {
+                    remainingCategoryCount = categoryItem -1
+                }else{
+                    remainingCategoryCount = categoryItem + 1
+                    
+                }
+                if(remainingCategoryCountn == 0){
+                    $(".extra-category-h6-" + categoryIndexKey).hide();
+                    $("#extra-category-" + categoryIndexKey).hide();
+                }
+                $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
+
                 
             }
-                $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
+            // if(remainingCategoryCount <0){
+            //     $("#extra-category-" + categoryIndexKey).text(remainingCategoryCount);
+            // }else{
+            // }
             
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
+            
             if (remainingCategoryCount ==0 ) {
                 // if (response == 0) {
                 var svg =
@@ -8247,7 +8315,9 @@ function update_self_bring(
                     "color",
                     "#E20B0B"
                 );
+                
             }
+
             $(
                 ".category-item-total-" +
                     categoryItemKey +
