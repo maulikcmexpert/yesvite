@@ -1445,7 +1445,7 @@ class EventController extends BaseController
                 }
             }
         }
-        if ($selfBring != "" && $selfBringQuantity != "") {
+        if ($selfBring != "0" && $selfBringQuantity != "0") {
             $total_item = $totalmissing + 0;
         } else {
 
@@ -1470,7 +1470,7 @@ class EventController extends BaseController
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-        dd($selfBring,$selfBringQuantity);
+        dd($selfBring,$selfBringQuantity,$total_item);
         // Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
