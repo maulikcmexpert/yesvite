@@ -843,6 +843,12 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 $(document).on('click','.notification-rsvp-btn', function () {
     const eventId = $(this).data('event_id');
     const userId = $(this).data('user_id');
+    
+    $('#rsvp_notification_adult').val("0");
+     $('#rsvp_notification_kids').val("0");
+     $('#rsvp_notification_message').val('');
+     $('#rsvp_notification_message').val('');
+     $('#rsvp_yes').prop('checked',true)
     console.log(`${base_url}get_user_info_rsvp`);
     $('#notification_rsvp_profile').attr('src', "").show();
     $('#notification_rsvp_eventName').text("");
