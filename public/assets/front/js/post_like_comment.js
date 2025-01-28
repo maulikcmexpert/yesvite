@@ -104,7 +104,7 @@ $(document).ready(function () {
         const parentWrapper = $(this).closest('.posts-card-main-comment'); // Find the closest comment wrapper
         const commentInput = parentWrapper.find('#post_comment'); // Find the input within the current post
         const comment_on_of = $('#comment_on_of').val();
-        alert(comment_on_of);
+        //alert(comment_on_of);
         if (comment_on_of !== '1') {
             toastr.error(' yor are not able Commenting.');
             return;// Exit the function if commenting is off
