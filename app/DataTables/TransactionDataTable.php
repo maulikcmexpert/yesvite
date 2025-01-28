@@ -25,7 +25,6 @@ class TransactionDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         $counter = 1;
-        dd( $row);
 
         return datatables()
             ->eloquent($query)
