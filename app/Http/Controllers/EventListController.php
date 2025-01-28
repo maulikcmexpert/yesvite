@@ -2540,7 +2540,7 @@ class EventListController extends Controller
             //   dd($userId,$eventId,$adults,$kids);
     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');s
-        })->where(['event_id' => $eventId,'user_id',$userId])->first();
+        })->where(['event_id' => $eventId,'user_id'=>$userId])->first();
 
       dd($rsvpSent);  
 
