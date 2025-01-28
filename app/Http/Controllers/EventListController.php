@@ -2555,11 +2555,11 @@ if ($rsvpSent != null) {
     }
 
     if($rsvpSentAttempt=="1"&&$rsvp_status=="1"){
-        return response()->json(['status' => "", 'msg' => 'You have already done rsvp yes']);
+        return response()->json(['status' => 3, 'text' => 'You have already done rsvp yes']);
     }
 
     if($rsvpSentAttempt=="0"&&$rsvp_status=="0"){
-        return response()->json(['status' => "", 'msg' => 'You have already done rsvp No']);
+        return response()->json(['status' => 3, 'text' => 'You have already done rsvp No']);
     }
     $rsvpSent->event_id = $request->rsvp_event_id;
 
@@ -2626,10 +2626,10 @@ if ($rsvpSent != null) {
 
 
     if ($request->rsvp_status == "1") {
-        return response()->json(['status' => 1, 'msg' => 'You are going to this event']);
+        return response()->json(['status' => 1, 'text' => 'You are going to this event']);
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     } elseif ($request->rsvp_status == "0") {
-        return response()->json(['status' => 0, 'msg' => 'You are not going to this event']);
+        return response()->json(['status' => 0, 'text' => 'You are not going to this event']);
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
  

@@ -955,9 +955,8 @@ $('#notification_rsvp_btn').on('click', function (e) {
     },           
       data: formData,          
       success: function (response) { 
-        if(response.status==""){
+        if(response.status==3){
             toastr.error(response.msg);
-            return;
         }       
         if(response.status==1){
             toastr.success(response.msg);
