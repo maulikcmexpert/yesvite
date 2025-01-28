@@ -525,8 +525,9 @@
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                      @else
                                        {!! $userProfile !!}
-                                    <span class="active-dot"></span>
                                     @endif
+                                    <span class="active-dot"></span>
+
                                       {{-- <span class="active-dot"></span> --}}
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
