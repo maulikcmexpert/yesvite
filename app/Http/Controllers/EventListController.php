@@ -2632,7 +2632,7 @@ if ($rsvpSent != null) {
         return response()->json(['status' => 0, 'text' => 'You are not going to this event']);
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
- 
+    
   
 }
 
