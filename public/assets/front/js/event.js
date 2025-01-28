@@ -849,6 +849,9 @@ $(document).on('click','.notification-rsvp-btn', function () {
      $('#rsvp_notification_message').val('');
      $('#rsvp_notification_message').val('');
      $('#rsvp_yes').prop('checked',true)
+     $('.rsvp_minus_notify').prop('disabled',false);
+     $('.rsvp_plus_notify').prop('disabled',false);
+     
     console.log(`${base_url}get_user_info_rsvp`);
     $('#notification_rsvp_profile').attr('src', "").show();
     $('#notification_rsvp_eventName').text("");
