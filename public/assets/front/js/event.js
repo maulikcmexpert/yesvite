@@ -839,20 +839,17 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
-
-            $('.all-events-filter-info').removeClass('d-none');
-            $('.notification-all-event-wrp').addClass('d-none');
-            $('.notification-back').addClass('d-none');
-
             $('#search_filter_event').val("");
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
 
-
-
            }
+           
+           $('.all-events-filter-info').removeClass('d-none');
+           $('.notification-all-event-wrp').addClass('d-none');
+           $('.notification-back').addClass('d-none');
 
         },
         error: function (xhr, status, error) {
