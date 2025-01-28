@@ -2575,7 +2575,6 @@ if ($rsvpSent != null) {
 
     $rsvpSent->save();
 
-    dd(1111);
     if ($rsvpSent->save()) {
         EventPost::where('event_id', $eventId)
             // ->where('user_id', $userId)
