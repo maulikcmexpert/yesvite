@@ -2514,6 +2514,7 @@ class EventListController extends Controller
     {
         $eventId=$request->event_id;
         $user = Auth::guard('web')->user();
+        dd($eventId,$user->id);
         Notification::where(['event_id' => $eventId, 'user_id' => $user->id])->update(['read' => 1]);
  
     }
