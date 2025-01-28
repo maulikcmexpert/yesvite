@@ -2510,21 +2510,11 @@ class EventListController extends Controller
     }
 
 
-    public function get_user_info_rsvp(Request $request)
+    public function mark_as_read(Request $request)
     {
-        $event  = Event::where('id',$request->eventId)->first();
-        $user_id=$event->user_id;
-
-        $user =User::where('id',$user_id)->first();
-        $event_data=[
-            'name'=>$event->event_name,
-            'host'=>$event->hosted_by,
-            'profile' => empty($user->profile) ? "" : asset('storage/profile/' . $user->profile),
-            'firstname'=>$user->firstname,
-            'lastname'=>$user->lastname
-        ];
-
-        return response()->json(['status' => 1, 'event_data' => $event_data]);
+        $eventId=$request->event_id;
+        $user = Auth::guard('web')->user();
+        Notification::where(['event_id' => $eventId, 'user_id' => $user->id])->update(['read' => 1]);
  
     }
 
