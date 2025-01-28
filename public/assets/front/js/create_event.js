@@ -1265,7 +1265,7 @@ $(document).on("click", ".add_more_activity", function (e) {
             $("#" + id).append(response);
             total_activities++;
             console.log(total_activities);
-            datepicker();
+            // datepicker();
             $(".total_activity-" + id).text("(" + count + ")");
             $(".add_more_activity").prop("disabled", false);
         },
