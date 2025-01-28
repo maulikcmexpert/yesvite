@@ -923,7 +923,7 @@ function startTimePicker() {
             down: "fa fa-chevron-down"
         }
     }).on("dp.show", function () {
-        const picker = $(this).data("DateTimePicker");
+        // const picker = $(this).data("DateTimePicker");
         // const currentValue = $(this).val();
         
         // if (currentValue) {
@@ -932,7 +932,7 @@ function startTimePicker() {
         //         picker.date(currentMoment);
         //     }
         // } else {
-            picker.date(moment().hours(12).minutes(0).seconds(0));
+            $(this).date(moment().hours(12).minutes(0).seconds(0));
         // }
     }).on("dp.hide", function (e) {
         const selectedTime = e.date ? e.date.format("LT") : "";
