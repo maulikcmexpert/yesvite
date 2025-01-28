@@ -64,7 +64,7 @@ class TransactionDataTable extends DataTable
                         ->orWhere('coins', 'LIKE', "%{$keyword}%")
                         ->orWhere('coins', 'LIKE', "%{$keyword}%")
                         ->orWhere('current_balance', 'LIKE', "%{$keyword}%")
-                        ->orWhere('used_coins', 'LIKE', "%{$keyword}%")
+                        // ->orWhere('used_coins', 'LIKE', "%{$keyword}%")
                         ->orWhere('description', 'LIKE', "%{$keyword}%")
                         ->orWhere('created_at', 'LIKE', "%{$keyword}%")
                         ->orWhere('endDate', 'LIKE', "%{$keyword}%");
@@ -90,9 +90,9 @@ class TransactionDataTable extends DataTable
             ->addColumn('current_balance', function ($row) {
                 return $row->current_balance;
             })
-            ->addColumn('used_coins', function ($row) {
-                return $row->used_coins;
-            })
+            // ->addColumn('used_coins', function ($row) {
+            //     return $row->used_coins;
+            // })
             ->addColumn('transcation_date', function ($row) {
                 return $row->created_at;
             })
@@ -102,7 +102,7 @@ class TransactionDataTable extends DataTable
             
             
 
-            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance', 'used_coins','transcation_date','endDate']);
+            ->rawColumns(['user', 'event', 'type','description', 'coins','current_balance','transcation_date','endDate']);
     }
 
     /**
@@ -131,11 +131,13 @@ class TransactionDataTable extends DataTable
                 $column = 'coins';
             }else if ($request->order[0]['column'] == '6'){
                 $column = 'current_balance';
-            }else if ($request->order[0]['column'] == '7'){
-                $column = 'used_coins';
-            }else if ($request->order[0]['column'] == '8'){
+            }
+            // else if ($request->order[0]['column'] == '7'){
+            //     $column = 'used_coins';
+            // }
+            else if ($request->order[0]['column'] == '7'){
                 $column = 'created_at';
-            }else if ($request->order[0]['column'] == '9'){
+            }else if ($request->order[0]['column'] == '8'){
                 $column = 'endDate';
             }
 
@@ -189,7 +191,7 @@ class TransactionDataTable extends DataTable
             Column::make('description')->orderable(true),
             Column::make('coins')->orderable(true),
             Column::make('current_balance')->title('Current Balance')->orderable(true),
-            Column::make('used_coins')->title('Used Coins')->orderable(true),
+            // Column::make('used_coins')->title('Used Coins')->orderable(true),
             Column::make('transcation_date')->title('Transcation Date')->orderable(true),
             Column::make('endDate')->title('Expiry Date')->orderable(true),
         ];
