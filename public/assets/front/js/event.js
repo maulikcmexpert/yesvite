@@ -135,7 +135,9 @@ $('#scrollStatus2').scroll(function () {
 });
 
 $('#scrollStatus3').scroll(function () {
-    if (busy3) return; 
+    // if (busy3) return; 
+    if (busy3 || window.isDateClicked) return; // Add this check to prevent the scroll ajax call after a date click.
+
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
@@ -596,6 +598,8 @@ $(document).on('click',".day",function () {
     $('.latest_month').each(function () { 
         current_month=$(this).val();
     });
+
+    window.isDateClicked = true; // Set this flag when a date is clicked.
     clearTimeout(search_user_ajax_timer);
     if(page=="upcoming"){
         var ajax_base_url=`${base_url}search_upcoming_event`;
