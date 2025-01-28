@@ -90,7 +90,7 @@
                                 <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
-                        <a href="#" class="delete-self-bring" data-categoryitem="{{$category_item}}" data-categoryindex="{{$category_index}}" data-itemquantity="{{$itemdata['quantity']}}">
+                        <a href="#" class="delete-self-bring" id="deleteBring-{{ $category_item }}-{{ $category_index }}" data-categoryitem="{{$category_item}}" data-categoryindex="{{$category_index}}"    data-extraquantity="0" data-itemquantity="{{$itemdata['quantity']}}">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
