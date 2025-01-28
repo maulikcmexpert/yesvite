@@ -2530,7 +2530,6 @@ class EventListController extends Controller
 
     public function store_rsvp(Request $request)
     {
-        dd($request);
         try {
             $userId = $request->rsvp_user_id;
               $eventId = $request->rsvp_event_id;
