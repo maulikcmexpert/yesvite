@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails  )}} --}}
+{{-- {{dd($postList  )}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -361,6 +361,7 @@
                                                 <div class="posts-card-main-comment">
                                                     <input type="text" class="form-control post_comment"
                                                         id="post_comment" placeholder="Add Comment">
+                                                        <input type="hidden" id="comment_on_of" value="{{$post['commenting_on_off']}}">
                                                     <span class="comment-send-icon send_comment"
                                                         data-event-id="{{ $event }}"
                                                         data-event-post-id="{{ $post['id'] }}">
@@ -1219,9 +1220,9 @@
                                             value="{{ $event }}">
                                         <input type="hidden" id="hiddenVisibility" name="post_privacys"
                                             value="1">
-                                        <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                        <input type="hidden" name="post_type" id="photoPostType" value="">
                                         <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
-                                            value="1">
+                                            value="">
                                         <input type="hidden" name="postContent" id="photoContent">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
@@ -1290,9 +1291,9 @@
                                     @csrf
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
-                                    <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
+                                    <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
                                     <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
-                                        value="1">
+                                        value="">
                                     {{-- <input type="hidden" name="post_type" id="pollPostType" value="2"> --}}
                                     <input type="hidden" name="content" id="pollContent">
                                     <div class="mb-3">

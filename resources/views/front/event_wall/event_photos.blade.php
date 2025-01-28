@@ -41,7 +41,7 @@
                     <div class="event-center-tabs-main">
                         <!-- ====================navbar-============================= -->
                         {{-- <x-event_wall.wall_navbar :event="$event" :current_page="$current_page"/> --}}
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails"/>
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails" />
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -244,8 +244,7 @@
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
                                                                     <li><button
-                                                                            class="dropdown-item download_img_single"
-                                                                           ><svg
+                                                                            class="dropdown-item download_img_single"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
@@ -329,25 +328,29 @@
                                                             </div>
                                                         </div>
                                                     </div>
-{{-- {{dd($photo['mediaData'])}} --}}
 
-@php
-// Ensure post_media is an array, if it's not, make it an array
-$postMedia = is_array($photo['mediaData']['post_media'])
-    ? $photo['mediaData']['post_media']
-    : [$photo['mediaData']['post_media']];
-@endphp
+
+                                                    @php
+                                                    $postMedia = [];
+                                                        foreach($photo['mediaData'] as $k =>$v){
+
+
+                                                                $postMedia[] = $photo['mediaData'][$k]['post_media'];
+
+                                                        }
+                                                    @endphp
+
                                                     <div class="photo-card-photos-wrp imagePress">
                                                         <div class="photo-card-photos-main-img open_photo_model img_click"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#detail-photo-modal"
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
-                                                            data-image="{{ json_encode($postMedia) }}">
+                                                            data-image="{{ json_encode($postMedia ) }}">
 
 
-                                                            @if (!empty($photo['mediaData']) && isset($photo['mediaData']['type']) && $photo['mediaData']['type'] === 'image')
-                                                            <img src="{{ $photo['mediaData']['post_media'] }}"  loading="lazy" alt="Post Image">
+                                                            @if (!empty($photo['mediaData']) && isset($photo['mediaData'][0]['type']) && $photo['mediaData'][0]['type'] === 'image')
+                                                            <img src="{{ $photo['mediaData'][0]['post_media'] }}" loading="lazy" alt="Post Image">
                                                         @else
                                                             <p>No image available</p>
                                                         @endif
@@ -357,7 +360,7 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                                                             <button class="total-photos-count-btn photo_model"
                                                                 type="button">{{ $photo['total_media'] }}</button>
                                                         @endif
-{{-- {{dd($photo['reactionList'])}} --}}
+                                                        {{-- {{dd($photo['reactionList'])}} --}}
                                                         <ul>
                                                             @if (!empty($photo['reactionList']) && is_array($photo['reactionList']))
                                                                 @foreach ($photo['reactionList'] as $reaction)
@@ -396,7 +399,6 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
-
                                                                 type="checkbox" value="" id="flexCheckDefault">
                                                         </button>
                                                     </div>
@@ -425,28 +427,25 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                                         <div class="phototab-add-new-photos-wrp">
                                             <div class="phototab-add-new-photos-img">
                                                 @if ($photos != '')
-                                                <img src="{{ $photos}}"
-                                                alt="" loading="lazy">
-                                            @else
-                                                @php
+                                                    <img src="{{ $photos }}" alt="" loading="lazy">
+                                                @else
+                                                    @php
 
-                                                    // $parts = explode(" ", $name);
-                                                    $firstInitial = isset($firstname[0])
-                                                        ? strtoupper($firstname[0][0])
-                                                        : '';
-                                                    $secondInitial = isset($lastname[0])
-                                                        ? strtoupper($lastname[0][0])
-                                                        : '';
-                                                    $initials =
-                                                        strtoupper($firstInitial) .
-                                                        strtoupper($secondInitial);
-                                                    $fontColor =
-                                                        'fontcolor' . strtoupper($firstInitial);
-                                                @endphp
-                                                <h5 class="{{ $fontColor }}">
-                                                    {{ $initials }}
-                                                </h5>
-                                            @endif
+                                                        // $parts = explode(" ", $name);
+                                                        $firstInitial = isset($firstname[0])
+                                                            ? strtoupper($firstname[0][0])
+                                                            : '';
+                                                        $secondInitial = isset($lastname[0])
+                                                            ? strtoupper($lastname[0][0])
+                                                            : '';
+                                                        $initials =
+                                                            strtoupper($firstInitial) . strtoupper($secondInitial);
+                                                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                                    @endphp
+                                                    <h5 class="{{ $fontColor }}">
+                                                        {{ $initials }}
+                                                    </h5>
+                                                @endif
 
                                                 <p>Let’s share a moment</p>
                                             </div>
@@ -500,33 +499,34 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                         <div class="create-post-profile-wrp">
 
                             @if ($photos != '')
-                            <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="" loading="lazy">
-                        @else
-                            @php
+                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt=""
+                                    loading="lazy">
+                            @else
+                                @php
 
-                                // $parts = explode(" ", $name);
-                                $firstInitial = isset($firstname[0])
-                                    ? strtoupper($firstname[0][0])
-                                    : '';
-                                $secondInitial = isset($lastname[0])
-                                    ? strtoupper($lastname[0][0])
-                                    : '';
-                                $initials =
-                                    strtoupper($firstInitial) .
-                                    strtoupper($secondInitial);
-                                $fontColor =
-                                    'fontcolor' . strtoupper($firstInitial);
-                            @endphp
-                            <h5 class="{{ $fontColor }}">
-                                {{ $initials }}
-                            </h5>
-                        @endif
+                                    // $parts = explode(" ", $name);
+                                    $firstInitial = isset($firstname[0]) ? strtoupper($firstname[0][0]) : '';
+                                    $secondInitial = isset($lastname[0]) ? strtoupper($lastname[0][0]) : '';
+                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                @endphp
+                                <h5 class="{{ $fontColor }}">
+                                    {{ $initials }}
+                                </h5>
+                            @endif
 
-                            <h4>Everyone <i class="fa-solid fa-angle-down"></i></h4>
+                            <div id="savedSettingsDisplay">
+                                <h4> <i class="fa-solid fa-angle-down"></i></h4>
+                            </div>
                         </div>
                     </div>
                     <form action="{{ route('event_photo.eventPost') }}" id="textform" method="POST"
                         enctype="multipart/form-data">
+                        <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
+
+                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="">
+
+                        <input type="hidden" name="post_type" id="textPostType" value="0">
                         @csrf
                         <div class="create-post-textcontent">
                             <textarea class="form-control" rows="3" placeholder="What's on your mind?" id="postContent"></textarea>
@@ -565,11 +565,17 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                         <div class="create-post-upload-img-main">
                             <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
                                 enctype="multipart/form-data">
+
                                 @csrf
                                 <div class="create-post-upload-img-inner">
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
                                     <input type="hidden" name="content" id="photoContent">
+                                    <input type="hidden" id="hiddenVisibility" name="post_privacys"
+                                    value="1">
+                                <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
+                                    value="1">
                                     <span>
                                         <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -685,34 +691,35 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                     <button type="button" class="btn-back"><i class="fa-solid fa-arrow-left"></i></button>
                     <h1 class="modal-title" id="exampleModalLabel">Post Settings</h1>
                 </div>
-                <div class="modal-body">
-                    <div class="create-post-setting-inner">
-                        <h3>Who can see your post?</h3>
-                        <form action="">
+                <form action="" id="postSettingsForm">
+                    <div class="modal-body">
+                        <div class="create-post-setting-inner">
+                            <h3>Who can see your post?</h3>
+
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="post_privacy"
+                                    id="flexRadioDefault1" value="1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Everyone
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="post_privacy"
+                                    id="flexRadioDefault2" value="2">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     RSVP’d - Yes
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault3">
+                                <input class="form-check-input" type="radio" name="post_privacy"
+                                    id="flexRadioDefault3" value="3">
                                 <label class="form-check-label" for="flexRadioDefault3">
                                     RSVP’d - No
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault4">
+                                <input class="form-check-input" type="radio" name="post_privacy"
+                                    id="flexRadioDefault4" value=" 4">
                                 <label class="form-check-label" for="flexRadioDefault4">
                                     RSVP’d - No Reply
                                 </label>
@@ -721,20 +728,24 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                             <div class="button-cover">
                                 <h3>Commenting</h3>
                                 <div class="button r" id="button-3">
-                                    <input type="checkbox" class="checkbox" />
+                                    <input type="checkbox" id="allowComments" name="commenton" value="1"
+                                        class="checkbox" checked />
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
                             </div>
 
-                        </form>
+
+
+
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="cmn-btn">
-                        Save
-                    </button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" id="saveSettings" class="cmn-btn back-btn">
+                            Save
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -755,7 +766,8 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
                                 <div class="posts-card-head-left-img">
-                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt="" loading="lazy">
+                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt=""
+                                        loading="lazy">
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
@@ -833,13 +845,13 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                                 Anyone?</h3>
 
                             <div class="posts-card-show-post-wrp">
-                                <div class="swiper photo-detail-slider"  >
+                                <div class="swiper photo-detail-slider">
                                     <div class="swiper-wrapper" id="media_post">
                                         <!-- Slides -->
                                         <div class="swiper-slide">
                                             <div class="posts-card-show-post-img">
                                                 <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt=""  loading="lazy"/>
+                                                    alt="" loading="lazy" />
                                             </div>
                                         </div>
                                         {{-- <div class="swiper-slide">
@@ -872,40 +884,39 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                         </div>
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
-                                <ul type="button" data-bs-toggle="modal"  data-bs-target="#reaction-modal">
-                                    <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="" loading="lazy">
+                                <ul type="button" data-bs-toggle="modal" data-bs-target="#reaction-modal">
+                                    <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
+                                            loading="lazy">
                                     </li>
-                                    <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                            alt="" loading="lazy"></li>
-                                    <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="" loading="lazy">
+                                    <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt=""
+                                            loading="lazy"></li>
+                                    <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
+                                            loading="lazy">
                                     </li>
                                     <p id="likes">5k Likes</p>
                                 </ul>
                                 <h6 id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right emoji_set">
-                                <button class="posts-card-like-btn likeModel " id="likeButtonModel" data-event-id="{{$event}}"
-                                    data-parent-id="" data-event-post-id="" data-user-id="{{ $login_user_id }}">
+                                <button class="posts-card-like-btn likeModel " id="likeButtonModel"
+                                    data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
+                                    data-user-id="{{ $login_user_id }}">
                                     <i class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
 
-                                        <div class="photos-likes-options-wrp emoji-picker"
-                                        id="emojiDropdown1" style="display: none;">
-                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                            alt="Heart Emoji" class="emoji model_emoji" data-emoji="❤️"
-                                            data-unicode="\\u{2764}">
-                                        <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                            alt="Thumb Emoji" class="emoji  model_emoji" data-emoji="👍"
-                                            data-unicode="\\u{1F44D}">
-                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                            alt="Smiley Emoji" class="emoji model_emoji" data-emoji="😊"
-                                            data-unicode="\\u{1F604}">
-                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                            alt="Eye Heart Emoji" class="emoji model_emoji" data-emoji="😍"
-                                            data-unicode="\\u{1F60D}">
-                                        <img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                            alt="Clap Emoji" class="emoji" data-emoji="👏"
-                                            data-unicode="\\u{1F44F}">
-                                    </div>
+                                <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown1"
+                                    style="display: none;">
+                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji"
+                                        class="emoji model_emoji" data-emoji="❤️" data-unicode="\\u{2764}">
+                                    <img src="{{ asset('assets/front/img/thumb-icon.png') }}" alt="Thumb Emoji"
+                                        class="emoji  model_emoji" data-emoji="👍" data-unicode="\\u{1F44D}">
+                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="Smiley Emoji"
+                                        class="emoji model_emoji" data-emoji="😊" data-unicode="\\u{1F604}">
+                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                        alt="Eye Heart Emoji" class="emoji model_emoji" data-emoji="😍"
+                                        data-unicode="\\u{1F60D}">
+                                    <img src="{{ asset('assets/front/img/clap-icon.png') }}" alt="Clap Emoji"
+                                        class="emoji" data-emoji="👏" data-unicode="\\u{1F44F}">
+                                </div>
 
 
                                 <button class="posts-card-comm show-comments-btn">
@@ -954,26 +965,22 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                                                 accumsan auctor id vel elit.</p>
                                         </div>
                                         <div class="commented-user-reply-wrp">
-                                            <div
-                                                class="position-relative d-flex align-items-center gap-2">
+                                            <div class="position-relative d-flex align-items-center gap-2">
                                                 <button class="posts-card-like-btn"><i
                                                         class="fa-regular fa-heart"></i></button>
                                                 <p>121</p>
                                             </div>
-                                            <button
-                                                class="commented-user-reply-btn">Reply</button>
+                                            <button class="commented-user-reply-btn">Reply</button>
                                         </div>
                                         <ul>
                                             <li class="reply-on-comment" data-comment-id="">
                                                 <div class="commented-user-head">
                                                     <div class="commented-user-profile">
-                                                        <div
-                                                            class="commented-user-profile-img">
+                                                        <div class="commented-user-profile-img">
                                                             <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
                                                                 alt="">
                                                         </div>
-                                                        <div
-                                                            class="commented-user-profile-content">
+                                                        <div class="commented-user-profile-content">
                                                             <h3>Angel Geidt</h3>
                                                             <p>New York</p>
                                                         </div>
@@ -993,14 +1000,12 @@ $postMedia = is_array($photo['mediaData']['post_media'])
                                                         elit.</p>
                                                 </div>
                                                 <div class="commented-user-reply-wrp">
-                                                    <div
-                                                        class="position-relative d-flex align-items-center gap-2">
+                                                    <div class="position-relative d-flex align-items-center gap-2">
                                                         <button class="posts-card-like-btn"><i
                                                                 class="fa-regular fa-heart"></i></button>
                                                         <p>121</p>
                                                     </div>
-                                                    <button
-                                                        class="commented-user-reply-btn">Reply</button>
+                                                    <button class="commented-user-reply-btn">Reply</button>
                                                 </div>
                                             </li>
 
@@ -1063,203 +1068,220 @@ $postMedia = is_array($photo['mediaData']['post_media'])
         </div>
     </div>
 </div>
-  <!-- Modal -->
-  <div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal" tabindex="-1"
-  aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="reactions-info-main event-center-tabs-main">
-          <!-- ===tabs=== -->
-          <nav>
-            <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-all-reaction-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-all-reaction" type="button" role="tab" aria-controls="nav-all-reaction"
-                aria-selected="true">
-                All 106
-              </button>
-              <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-heart-reaction" type="button" role="tab" aria-controls="nav-heart-reaction"
-                aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="" loading="lazy"> 50
-              </button>
-              <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-thumb-reaction" type="button" role="tab" aria-controls="nav-thumb-reaction"
-                aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt="" loading="lazy"> 50
-              </button>
-              <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-smily-reaction" type="button" role="tab" aria-controls="nav-smily-reaction"
-                aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt="" loading="lazy"> 50
-              </button>
-              <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-eye-heart-reaction" type="button" role="tab"
-                aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt="" loading="lazy"> 50
-              </button>
-              <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-clap-reaction" type="button" role="tab" aria-controls="nav-clap-reaction"
-                aria-selected="false" tabindex="-1">
-                <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt="" loading="lazy"> 50
-              </button>
+<!-- Modal -->
+<div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </nav>
-          <!-- ===tabs=== -->
+            <div class="modal-body">
+                <div class="reactions-info-main event-center-tabs-main">
+                    <!-- ===tabs=== -->
+                    <nav>
+                        <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-all-reaction-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-all-reaction" type="button" role="tab"
+                                aria-controls="nav-all-reaction" aria-selected="true">
+                                All 106
+                            </button>
+                            <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-heart-reaction" type="button" role="tab"
+                                aria-controls="nav-heart-reaction" aria-selected="false" tabindex="-1">
+                                <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
+                                    loading="lazy"> 50
+                            </button>
+                            <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-thumb-reaction" type="button" role="tab"
+                                aria-controls="nav-thumb-reaction" aria-selected="false" tabindex="-1">
+                                <img src="{{ asset('assets/front/img/thumb-icon.png') }}" alt=""
+                                    loading="lazy"> 50
+                            </button>
+                            <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-smily-reaction" type="button" role="tab"
+                                aria-controls="nav-smily-reaction" aria-selected="false" tabindex="-1">
+                                <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
+                                    loading="lazy"> 50
+                            </button>
+                            <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-eye-heart-reaction" type="button" role="tab"
+                                aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
+                                <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt=""
+                                    loading="lazy"> 50
+                            </button>
+                            <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-clap-reaction" type="button" role="tab"
+                                aria-controls="nav-clap-reaction" aria-selected="false" tabindex="-1">
+                                <img src="{{ asset('assets/front/img/clap-icon.png') }}" alt=""
+                                    loading="lazy"> 50
+                            </button>
+                        </div>
+                    </nav>
+                    <!-- ===tabs=== -->
 
-          <!-- ===Tab-content=== -->
-          <div class="tab-content" id="myTabContent">
+                    <!-- ===Tab-content=== -->
+                    <div class="tab-content" id="myTabContent">
 
-            <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
-              aria-labelledby="nav-all-reaction-tab">
-              <ul>
-                <li class="reaction-info-wrp">
-                  <div class="commented-user-head">
-                    <div class="commented-user-profile">
-                      <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
-                      </div>
-                      <div class="commented-user-profile-content">
-                        <h3>Angel Geidt</h3>
-                        <p>New York</p>
-                      </div>
+                        <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
+                            aria-labelledby="nav-all-reaction-tab">
+                            <ul>
+                                <li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    alt="" loading="lazy">
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                <h3>Angel Geidt</h3>
+                                                <p>New York</p>
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
+                                                loading="lazy">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
+                            aria-labelledby="nav-heart-reaction-tab">
+                            <ul>
+                                <li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    alt="" loading="lazy">
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                <h3>Angel Geidt</h3>
+                                                <p>New York</p>
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
+                                                loading="lazy">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel"
+                            aria-labelledby="nav-thumb-reaction-tab">
+                            <ul>
+                                <li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    alt="" loading="lazy">
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                <h3>Angel Geidt</h3>
+                                                <p>New York</p>
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="{{ asset('assets/front/img/thumb-icon.png') }}" alt=""
+                                                loading="lazy">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel"
+                            aria-labelledby="nav-smily-reaction-tab">
+                            <ul>
+                                <li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    alt="" loading="lazy">
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                <h3>Angel Geidt</h3>
+                                                <p>New York</p>
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
+                                                loading="lazy">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel"
+                            aria-labelledby="nav-eye-heart-reaction-tab">
+                            <ul>
+                                <li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    loading="lazy">
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                <h3>Angel Geidt</h3>
+                                                <p>New York</p>
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                alt="" loading="lazy">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel"
+                            aria-labelledby="nav-clap-reaction-tab">
+                            <ul>
+                                <li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                                <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    alt="" loading="lazy">
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                <h3>Angel Geidt</h3>
+                                                <p>New York</p>
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="{{ asset('assets/front/img/clap-icon.png') }}" alt=""
+                                                loading="lazy">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
                     </div>
-                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="" loading="lazy">
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
+                    <!-- ===Tab-content=== -->
+                </div>
             </div>
-
-            <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
-              aria-labelledby="nav-heart-reaction-tab">
-              <ul>
-                <li class="reaction-info-wrp">
-                  <div class="commented-user-head">
-                    <div class="commented-user-profile">
-                      <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
-                      </div>
-                      <div class="commented-user-profile-content">
-                        <h3>Angel Geidt</h3>
-                        <p>New York</p>
-                      </div>
-                    </div>
-                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/heart-emoji.png')}}" alt="" loading="lazy">
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
+            <div class="modal-footer">
+                <button type="button" class="cmn-btn reset-btn">Reset</button>
+                <button type="button" class="cmn-btn">Apply</button>
             </div>
-
-            <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel"
-              aria-labelledby="nav-thumb-reaction-tab">
-              <ul>
-                <li class="reaction-info-wrp">
-                  <div class="commented-user-head">
-                    <div class="commented-user-profile">
-                      <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
-                      </div>
-                      <div class="commented-user-profile-content">
-                        <h3>Angel Geidt</h3>
-                        <p>New York</p>
-                      </div>
-                    </div>
-                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/thumb-icon.png')}}" alt="" loading="lazy">
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-
-            <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel"
-              aria-labelledby="nav-smily-reaction-tab">
-              <ul>
-                <li class="reaction-info-wrp">
-                  <div class="commented-user-head">
-                    <div class="commented-user-profile">
-                      <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
-                      </div>
-                      <div class="commented-user-profile-content">
-                        <h3>Angel Geidt</h3>
-                        <p>New York</p>
-                      </div>
-                    </div>
-                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/smily-emoji.png')}}" alt="" loading="lazy">
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-
-            <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel"
-              aria-labelledby="nav-eye-heart-reaction-tab">
-              <ul>
-                <li class="reaction-info-wrp">
-                  <div class="commented-user-head">
-                    <div class="commented-user-profile">
-                      <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}"  loading="lazy">
-                      </div>
-                      <div class="commented-user-profile-content">
-                        <h3>Angel Geidt</h3>
-                        <p>New York</p>
-                      </div>
-                    </div>
-                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/eye-heart-emoji.png')}}" alt="" loading="lazy">
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-
-
-            <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel"
-              aria-labelledby="nav-clap-reaction-tab">
-              <ul>
-                <li class="reaction-info-wrp">
-                  <div class="commented-user-head">
-                    <div class="commented-user-profile">
-                      <div class="commented-user-profile-img">
-                        <img src="{{ asset('assets/front/img/header-profile-img.png')}}" alt="" loading="lazy">
-                      </div>
-                      <div class="commented-user-profile-content">
-                        <h3>Angel Geidt</h3>
-                        <p>New York</p>
-                      </div>
-                    </div>
-                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                      <img src="{{ asset('assets/front/img/clap-icon.png')}}" alt="" loading="lazy">
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-          </div>
-          <!-- ===Tab-content=== -->
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="cmn-btn reset-btn">Reset</button>
-        <button type="button" class="cmn-btn">Apply</button>
-      </div>
     </div>
-  </div>
 </div>

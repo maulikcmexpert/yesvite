@@ -54,34 +54,11 @@ class EventPhotoController extends Controller
                 $query->where('parent_comment_id', NULL);
             }])->where(['event_id' => $event, 'post_type' => '1']);
             $eventCreator = Event::where('id', $event)->first();
-            // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
-            //     $getPhotoList->where(function ($query) use ($selectedFilters, $eventCreator) {
-            //         foreach ($selectedFilters as $filter) {
-            //             switch ($filter) {
-            //                 case 'time_posted':
-            //                     $query->orderBy('id', 'desc');
-            //                     break;
-            //                 case 'guest':
-            //                     $query->orWhere('user_id', '!=', $eventCreator->user_id);
 
-            //                     break;
-            //                 case 'photos':
-            //                     $query->orWhereHas('post_image', function ($subQuery) {
-            //                         $subQuery->where('type', 'image');
-            //                     });
-            //                     break;
-            //                 case 'videos':
-            //                     $query->orWhereHas('post_image', function ($subQuery) {
-            //                         $subQuery->where('type', 'video');
-            //                     });
-            //                     break;
-            //                     // Add more cases for other filters if needed
-            //             }
-            //         }
-            //     });
-            // }
             $getPhotoList->orderBy('id', 'desc');
+
             $results = $getPhotoList->get();
+            // dd($results);
             $postPhotoList = [];
             foreach ($results as $value) {
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
@@ -106,21 +83,24 @@ class EventPhotoController extends Controller
                 $postPhotoDetail['post_message'] = (!empty($value->post_message) || $value->post_message != NULL) ? $value->post_message : "";
                 $postPhotoDetail['post_time'] = $this->setpostTime($value->updated_at);
                 $postPhotoDetail['is_in_photo_moudle'] = $value->is_in_photo_moudle;
-                $photoVideoData = "";
+                $photoVideoData = []; // Initialize as an array
                 if (!empty($value->post_image)) {
                     $photData = $value->post_image;
                     foreach ($photData as $val) {
+                        $photoVideoDetail = []; // Reset for each image
                         $photoVideoDetail['id'] = $val->id;
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
                         $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
                         $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('storage/thumbnails/' . $val->thumbnail) : "";
                         $photoVideoDetail['type'] = $val->type;
-                        $photoVideoData = $photoVideoDetail;
+
+                        // Add to the array of media
+                        $photoVideoData[] = $photoVideoDetail;
                     }
                 }
 
                 $postPhotoDetail['mediaData'] = $photoVideoData;
-                $postPhotoDetail['total_media'] = ($value->post_image_count - 1 != 0 && $value->post_image_count - 1 != -1)  ? "+" . $value->post_image_count - 1 : "";
+                $postPhotoDetail['total_media'] = (count($photoVideoData) > 1) ? "+" . (count($photoVideoData) - 1) : "";
                 $getPhotoReaction = getReaction($value->id);
                 $reactionList = [];
                 foreach ($getPhotoReaction as $values) {

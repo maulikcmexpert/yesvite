@@ -103,7 +103,8 @@ $(document).ready(function () {
     $(document).on('click', '.comment-send-icon', function () {
         const parentWrapper = $(this).closest('.posts-card-main-comment'); // Find the closest comment wrapper
         const commentInput = parentWrapper.find('#post_comment'); // Find the input within the current post
-
+const comment_on_of = $('#comment_on_of').val();
+alert(comment_on_of);
         const commentText = commentInput.val().trim();
         const parentCommentId = $('.commented-user-wrp.active').data('comment-id') || null; // Find active comment if replying
 

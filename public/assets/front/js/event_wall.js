@@ -1022,6 +1022,7 @@ $(document).ready(function () {
         savedAllowComments = '1'; // Default to true
         localStorage.setItem('commenting_on_off', savedAllowComments);
     }
+
     // Apply settings to the form
     const visibilityRadio = $('input[name="post_privacy"][value="' + savedVisibility + '"]');
     if (visibilityRadio.length > 0) {
@@ -1037,13 +1038,6 @@ $(document).ready(function () {
     // Update hidden fields with initial values
     $('#hiddenVisibility').val(savedVisibility);
     $('#hiddenAllowComments').val(savedAllowComments ? '1' : '0');
-
-    // Display initial settings
-    const visibilityName = visibilityOptions[savedVisibility];
-    $('#savedSettingsDisplay').html(`
-        <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-        <p>${savedAllowComments === '1' ? "" : ""}</p>
-    `);
 
     // Save Button Click Handler
     $('#saveSettings').on('click', function () {
@@ -1070,6 +1064,8 @@ $(document).ready(function () {
         console.log('Saved Settings:', { visibility, allowComments });
     });
 });
+
+
 
 
 $(".posts-card-like-btn").on("click", function () {
