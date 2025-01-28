@@ -5020,7 +5020,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(innerUserQnt,categoryItemKey, categoryIndexKey, userquantity, itemquantity);
+    update_self_bring(innerUserQnt,categoryItemKey, categoryIndexKey, innerUserQnt, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
