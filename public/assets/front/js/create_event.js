@@ -4996,6 +4996,8 @@ $(document).on("click", ".delete-self-bring", function () {
     var userquantity = parseInt($(this).parent().parent().find('.input-qty').val());
     var innerUserQnt = parseInt($(this).data("inneruserqnt"));
     var isvalidUserQnt =isNaN(innerUserQnt) ? 0 : innerUserQnt
+    var userqnt = parseInt($(this).data("userqnt"));
+    var isvalidUserQntity =isNaN(userqnt) ? 0 : userqnt
 
     $(this).parent().parent().hide(); 
     var self_bring_quantity = $(this)
@@ -5020,7 +5022,7 @@ $(document).on("click", ".delete-self-bring", function () {
 
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
-    update_self_bring(innerUserQnt,categoryItemKey, categoryIndexKey, innerUserQnt, itemquantity);
+    update_self_bring(isvalidUserQnt,categoryItemKey, categoryIndexKey, isvalidUserQntity, itemquantity);
 });
 
 $(document).on("click", ".add-user-list", function () {
