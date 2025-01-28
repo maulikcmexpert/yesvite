@@ -871,14 +871,43 @@ function datepicker() {
             ignoreReadonly: true,
             stepping: 15,
         })
+        // .on("dp.show", function () {
+        //     const picker = $(this).data("DateTimePicker");
+        //     const startTime = $(this).closest("div").find(".activity_start_time").val();
+        //     const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+
+        //     // Set end time to 1 hour after start time if it's empty (only in picker)
+        //     picker.date(startMoment.clone().add(1, "hours"));
+        // })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
-            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
-
-            // Set end time to 1 hour after start time if it's empty (only in picker)
-            picker.date(startMoment.clone().add(1, "hours"));
+            const currentValue = $(this).val();
+        
+            // If there's a current value in the end time picker, keep it
+            if (currentValue) {
+                const currentMoment = moment(currentValue, "LT");
+                if (currentMoment.isValid()) {
+                    picker.date(currentMoment);
+                }
+            } else {
+                // Find the closest previous start time
+                const previousStartTime = $(this).closest(".activity-main-wrp").prev(".activity-main-wrp").find(".activity_start_time").val();
+                
+                let startMoment;
+                
+                // If previous start time exists, set the end time to 1 hour after it
+                if (previousStartTime) {
+                    startMoment = moment(previousStartTime, "LT").add(1, 'hours');
+                } else {
+                    // If no previous start time, default to current time + 1 hour
+                    startMoment = moment().hours(12).minutes(0).seconds(0).add(1, 'hours');
+                }
+                
+                // Set the picker date to the calculated time
+                picker.date(startMoment);
+            }
         })
+        
         .on("dp.close", function () {
             const picker = $(this).data("DateTimePicker");
             const startTime = $(this).closest("div").find(".activity_start_time").val();
