@@ -1451,7 +1451,7 @@ class EventController extends BaseController
             $total_item = $totalmissing + 0;
         } else {
             $total_item = $totalmissing + intval($itemQuantity);
-            dd($total_item);
+            // dd(total_item);
 
         }
         $qty = 0;
