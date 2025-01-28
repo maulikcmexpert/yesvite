@@ -351,17 +351,17 @@
                       <div>
                         <h6>Adults</h6>
                         <div class="qty-container ms-auto">
-                          <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                          <input type="number" name="rsvp_notification_adult" id="rsvp_notification_adult" value="" class="input-qty">
-                          <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                          <button class="qty-btn-minus rsvp_minus_notify" type="button"><i class="fa fa-minus"></i></button>
+                          <input type="number" name="rsvp_notification_adult" id="rsvp_notification_adult" value="" class="input-qty" readonly>
+                          <button class="qty-btn-plus rsvp_plus_notify" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                       </div>
                       <div>
                         <h6>Kids</h6>
                         <div class="qty-container ms-auto">
-                          <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                          <input type="number" name="rsvp_notification_kids" id="rsvp_notification_kids"value="" class="input-qty">
-                          <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                          <button class="qty-btn-minus rsvp_minus_notify" type="button"><i class="fa fa-minus"></i></button>
+                          <input type="number" name="rsvp_notification_kids" id="rsvp_notification_kids"value="" class="input-qty" readonly>
+                          <button class="qty-btn-plus rsvp_plus_notify" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                       </div>
                     </div>

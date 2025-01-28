@@ -892,17 +892,25 @@ $(document).on('click','.notification-rsvp-btn', function () {
     });
 });
 
-$('#notification_rsvp_btn').validate({
-    rule:{
 
-    },
-    messages:{
-        
-    }
-})
 
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
+    const selectedValue = $('input[name="rsvp_status"]:checked').val();
+    const adults = $('#rsvp_notification_adult').val();
+    const kids = $('#rsvp_notification_kids').val();
+    if(selectedValue=="1"){
+        if(adults=="0" && kids=="0"){
+            toastr.error('Please select atleast one kid or adult');
+            return;
+        }
+    }else{
+        $('#rsvp_notification_adult').prop('disabled',true);
+       $('#rsvp_notification_kids').prop('disabled',true);
+       $('.rsvp_minus_notify').prop('disabled',true);
+       $('.rsvp_plus_notify').prop('disabled',true);
+    }
+
     const formData = $('#notification_rsvp').serialize();
     $.ajax({
       url: $('#notification_rsvp').attr('action'), 
