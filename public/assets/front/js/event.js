@@ -340,7 +340,7 @@ $(document).on('click','.filter_apply_btn',function(e){
             console.log(response);
             if(response.page=="upcoming"){
                 if (response.view) {
-                    $('.all-events-month-show-wrp').css('display','block');
+                    $('.all-events-month-show-wrp').css('display','flex');
                     $('#scrollStatus').html('');
                     $('#scrollStatus').html(response.view);
                     $('#tabbtn2').text(response.last_month);
@@ -358,7 +358,7 @@ $(document).on('click','.filter_apply_btn',function(e){
             }
             if(response.page=="past"){
                 if (response.view) {
-                    $('.all-events-month-show-wrp').css('display','block');
+                    $('.all-events-month-show-wrp').css('display','flex');
                     $('#scrollStatus3').html('');
                     $('#scrollStatus3').html(response.view);
                     $('#tabbtn3').text(response.last_month);
