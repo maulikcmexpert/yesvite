@@ -2542,7 +2542,6 @@ class EventListController extends Controller
             // $query->where('app_user', '1');s
         })->where(['event_id' => $eventId,'user_id'=>$userId])->first();
 
-      dd($rsvpSent);  
 
 $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 
