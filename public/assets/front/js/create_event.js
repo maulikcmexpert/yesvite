@@ -8100,6 +8100,7 @@ function step3open() {
         if (stepVal == "0") {
             get_user(type);
         }
+        $("#CheckCuurentStep").val("1");
     }
 }
 
