@@ -843,6 +843,11 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 $(document).on('click','.notification-rsvp-btn', function () {
     const eventId = $(this).data('event_id');
     const userId = $(this).data('user_id');
+    const profile = $(this).data('profile');
+    const firstName = $(this).data('firstname');
+    const lastName = $(this).data('lastname');
+    const hosted_by = firstName + ' ' + lastName; 
+    const event_name = $(this).data('event_name');
     
     $('#rsvp_notification_adult').val("0");
      $('#rsvp_notification_kids').val("0");
@@ -851,8 +856,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
      $('#rsvp_yes').prop('checked',true)
      $('.rsvp_minus_notify').prop('disabled',false);
      $('.rsvp_plus_notify').prop('disabled',false);
-     
-    console.log(`${base_url}get_user_info_rsvp`);
+
     $('#notification_rsvp_profile').attr('src', "").show();
     $('#notification_rsvp_eventName').text("");
     $('#notification_rsvp_host').text("");
@@ -860,17 +864,17 @@ $(document).on('click','.notification-rsvp-btn', function () {
     $('#rsvp_event_id').val("");
     $('.rsvp_initials').remove(); // Remove any previously added initials
 
-    $.ajax({
-        url: `${base_url}get_user_info_rsvp`,
-        type: 'GET',
-        data: {eventId:eventId,userId:userId},
-        success: function (response) {
-            console.log(response);
-            const profile = response.event_data.profile;
-            const firstName = response.event_data.firstname;
-            const lastName = response.event_data.lastname;
-            const hosted_by = response.event_data.host;
-            const event_name = response.event_data.name;
+    // $.ajax({
+    //     url: `${base_url}get_user_info_rsvp`,
+    //     type: 'GET',
+    //     data: {eventId:eventId,userId:userId},
+    //     success: function (response) {
+    //         console.log(response);
+    //         const profile = response.event_data.profile;
+    //         const firstName = response.event_data.firstname;
+    //         const lastName = response.event_data.lastname;
+    //         const hosted_by = response.event_data.host;
+    //         const event_name = response.event_data.name;
 
 
             if (profile) {
@@ -892,13 +896,13 @@ $(document).on('click','.notification-rsvp-btn', function () {
             $('#notification_rsvp_host').text(hosted_by);
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
-        },
-        error: function (xhr, status, error) {
+//         },
+//         error: function (xhr, status, error) {
     
-        },
-        complete: function () {
-        }
-    });
+//         },
+//         complete: function () {
+//         }
+//     });
 });
 
     $('.rsvp_minus_notify').prop('disabled',false);
