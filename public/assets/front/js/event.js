@@ -825,7 +825,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='notificationTypes[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
-    $('.notification-selected-events-wrp').html('');
+    // $('.notification-selected-events-wrp').html('');
 
     $('#home_loader').css('display','block');
 
