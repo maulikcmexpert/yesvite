@@ -7779,9 +7779,10 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".edit_checkout", function (e) {
    
-    eventData.isDraftEdit = $(this).attr("data-isDraftEdit");
+    var isDraftEdit = $(this).attr("data-isDraftEdit");
     if(isDraftEdit){
         eventData.is_update_event = "0";
+        eventData.isDraftEdit= isDraftEdit;
     }else{
         eventData.is_update_event = "1";
     }
