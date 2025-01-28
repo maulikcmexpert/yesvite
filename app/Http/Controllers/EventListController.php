@@ -2647,15 +2647,21 @@ if ($rsvpSent != null) {
         $eventList = [];
         $user  = Auth::guard('web')->user()->id;
 
-        $eventListdata = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])->where('user_id',$user)
-        ->where('event_name', 'LIKE', '%' . $eventName . '%')->get(); 
-        foreach ($eventListdata as $vals) {
-            $eventDetail['id'] = $vals->id;
-            $eventDetail['event_name'] = $vals->event_name;
-            $eventList[] = $eventDetail;
+        $eventData = EventInvitedUser::where(['user_id' => $user_id])->get();
+
+        $eventList = [];
+    
+        foreach ($eventData as $val) {
+    
+            $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
+            foreach ($eventDatas as $vals) {
+                $eventDetail['id'] = $vals->id;
+                $eventDetail['event_name'] = $vals->event_name;
+                $eventList[] = $eventDetail;
+            }
         }
         if(empty($eventList)){
-            return response()->json(['view' => view( 'No Data Found')->render()]);
+            return response()->json(['view' => 'No Data Found']);
         }
         return response()->json(['view' => view( 'front.notification.search_filter_event', compact('eventList'))->render()]);
 
