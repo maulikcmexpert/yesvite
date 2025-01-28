@@ -2533,6 +2533,7 @@ class EventListController extends Controller
 
         try {
 
+            dd($request);
             $userId = $request->rsvp_user_id;
               $eventId = $request->rsvp_event_id;
               $adults = $request->rsvp_notification_adult;
