@@ -957,10 +957,10 @@ $('#notification_rsvp_btn').on('click', function (e) {
       success: function (response) { 
         if(response.status==""){
             toastr.error(response.msg);
+            return;
         }       
         if(response.status==1){
             toastr.success(response.msg);
-            
         }
         if(response.status==0){
             toastr.success(response.msg);
