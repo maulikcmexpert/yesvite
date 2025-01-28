@@ -2555,7 +2555,6 @@ if ($rsvpSent != null) {
         $rsvp_attempt =  'yes_to_no';
     }
 
-    dd($rsvp_attempt);
     $rsvpSent->event_id = $request->rsvp_event_id;
 
     $rsvpSent->user_id = $request->rsvp_user_id;
