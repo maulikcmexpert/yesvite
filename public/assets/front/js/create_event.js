@@ -894,7 +894,7 @@ function datepicker() {
     });
 }
 
-// datepicker();
+datepicker();
 
 
 function startTimePicker() {
