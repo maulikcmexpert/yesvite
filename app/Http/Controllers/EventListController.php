@@ -2615,14 +2615,17 @@ if ($rsvpSent != null) {
     ];
 
 
-    // dd($notificationParam);
+    dd($notificationParam);
     sendNotification('sent_rsvp', $notificationParam);   
 
 
     if ($request->rsvp_status == "1") {
+        dd(1);
         return redirect(route('home'))->with('msg', 'You are going to this event');
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     } elseif ($request->rsvp_status == "0") {
+        dd(0);
+
         return redirect(route('home'))->with('msg', 'You declined to go to this event');
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
