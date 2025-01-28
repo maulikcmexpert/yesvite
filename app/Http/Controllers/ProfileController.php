@@ -73,11 +73,12 @@ class ProfileController extends BaseController
         }
         $user['subscribe_status'] = checkSubscription($user->id);
 
-
+        $user_privacy=UserProfilePrivacy::where('user_id',$user->id)->get();
         return view('layout', compact(
             'title',
             'page',
             'user',
+            'user_privacy',
             'draft_events',
             'js'
 
