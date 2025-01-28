@@ -1,9 +1,4 @@
 
-@php
-                  $notification_list=getNotificationList();
-                  $i=0;
-                  dd($notification_list);
-              @endphp
 @if (Auth::guard('web')->check())
 
 <header>
@@ -259,7 +254,7 @@
                                       </div>
                                         @if($inner_data['co_host_notification']!="1")
                                           <div>
-                                              <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess" data-profile="{{$inner_data['profile']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
+                                              <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-firstname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
                                           </div>
                                         @endif  
                                      <div>
