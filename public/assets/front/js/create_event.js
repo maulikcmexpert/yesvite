@@ -2447,9 +2447,9 @@ $(".decrease").click(function () {
 //         })
 //         .appendTo("#create_eventForm");
 // });
-$(document).on("click", "#start-time", function () {
-    $(this).val("");
-});
+// $(document).on("click", "#start-time", function () {
+//     $(this).val("");
+// });
 $(document).on("blur", "#start-time", function () {
     var s_t = $(this).val();
     var start_time = convertTo24Hour($(this).val());
