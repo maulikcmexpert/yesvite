@@ -20,6 +20,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Throwable;
+
 use Illuminate\Http\Request;
 
 class EventListController extends Controller
@@ -2531,12 +2532,10 @@ class EventListController extends Controller
     {
 
         try {
-            DB::beginTransaction();
-
             $userId = $request->rsvp_user_id;
               $eventId = $request->rsvp_event_id;
-              $adults = $request->rsvp_notification_adult;
-              $kids = $request->rsvp_notification_kid;
+              $adults =($request->rsvp_notification_adult!=null)?intval($request->rsvp_notification_adult) :0;
+              $kids =  ($request->rsvp_notification_kids!=null)?intval($request->rsvp_notification_kids) :0;
      
     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');s
@@ -2561,9 +2560,9 @@ if ($rsvpSent != null) {
   
     $rsvpSent->rsvp_status = $request->rsvp_status;
 
-    $rsvpSent->adults = $request->rsvp_notification_adult;
+    $rsvpSent->adults = $adults;
 
-    $rsvpSent->kids = $request->rsvp_notification_kids;
+    $rsvpSent->kids = $kids;
 
     $rsvpSent->message_to_host = $request->rsvp_notification_message;
     $rsvpSent->rsvp_attempt = $rsvp_attempt;
@@ -2615,16 +2614,18 @@ if ($rsvpSent != null) {
         'rsvp_attempt' => $rsvp_attempt
     ];
 
-    DB::commit();
 
-    // dd($notificationParam);
+    dd($notificationParam);
     sendNotification('sent_rsvp', $notificationParam);   
 
 
     if ($request->rsvp_status == "1") {
+        dd(1);
         return redirect(route('home'))->with('msg', 'You are going to this event');
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     } elseif ($request->rsvp_status == "0") {
+        dd(0);
+
         return redirect(route('home'))->with('msg', 'You declined to go to this event');
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
@@ -2633,10 +2634,7 @@ if ($rsvpSent != null) {
 }
 
 } catch (QueryException $e) {
-    dd($e);
-    DB::rollBack();
 } catch (\Exception $e) {
-    dd($e);
 }
 
 
