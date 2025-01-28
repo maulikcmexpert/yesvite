@@ -2536,7 +2536,7 @@ class EventListController extends Controller
               $eventId = $request->rsvp_event_id;
               $adults =($request->rsvp_notification_adult!=null)?intval($request->rsvp_notification_adult) :0;
               $kids =  ($request->rsvp_notification_kids!=null)?intval($request->rsvp_notification_kids) :0;
-     
+             $rsvp_status= $request->rsvp_status;
             //   dd($userId,$eventId,$adults,$kids);
     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');s
@@ -2544,7 +2544,7 @@ class EventListController extends Controller
 
 
 $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
-dd($rsvpSentAttempt);
+dd($rsvpSentAttempt,$rsvp_status);
 if ($rsvpSent != null) {
     $rsvp_attempt = "";
     if ($rsvpSentAttempt == NULL) {
