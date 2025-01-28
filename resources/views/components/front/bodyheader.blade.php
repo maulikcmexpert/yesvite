@@ -1774,7 +1774,7 @@
             </div>
             <div class="all-events-filter-wrp">
               <form action="" id="event_filter">
-                  <div class="notification-filter-sub">
+                  <div class="notification-filter-sub event-search-filter">
 
                     @if (Auth::guard('web')->check())
 
