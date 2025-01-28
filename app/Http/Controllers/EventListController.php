@@ -2641,4 +2641,11 @@ if ($rsvpSent != null) {
 
 //     }
     }
+
+    public function filter_search_event(Request $request){
+        $eventName=$request->search_event;
+        $eventList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])->where('event_name', 'LIKE', '%' . $eventName . '%'); 
+        
+        dd($eventList);
+    }
 }

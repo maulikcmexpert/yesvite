@@ -1005,5 +1005,19 @@ $(document).on('click','.main-notification-div-list',function(){
 });
 
 $(document).on('input','#search_filter_event',function(){
-alert();
+
+    var search_event=$(this).val();
+
+                    $.ajax({
+                        url: `${base_url}filter_search_event`,
+                        type: 'GET',        
+                        data: {search_event:search_event},          
+                        success: function (response) { 
+                         
+                        },
+                        error: function (error) {
+                          toastr.error('Something went wrong. Please try again!');
+                        },
+                      });
+
 });
