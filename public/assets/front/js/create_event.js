@@ -7854,6 +7854,8 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
+                console.log(sliderImages);
+                
                 photoSliders.forEach((sliderId, index) => {
                     const sliderElement =
                         document.getElementsByClassName(sliderId); // Get the slider by ID
