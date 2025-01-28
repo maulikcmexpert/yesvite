@@ -60,6 +60,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use DateTime;
+use Faker\Core\Number;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -470,6 +471,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
+                    // dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {
@@ -572,8 +574,8 @@ class EventController extends BaseController
         }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
-            $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
-            // $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
+            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
@@ -1012,6 +1014,7 @@ class EventController extends BaseController
                 }
             }
 
+
             // if ($request->thankyou_message == "1") {
             //     $thankyou_card = session('thankyou_card_data');
             //     if (isset($thankyou_card) && !empty($thankyou_card)) {
@@ -1351,9 +1354,12 @@ class EventController extends BaseController
         $categoryName = $request->input('category_name');
         // $category_quantity = $request->input('category_quantity');
         $itemName = $request->input('itemName');
+        $totalmissing = $request->input('totalmissing');
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
+        // dd($totalmissing,$itemQuantity);
+        // dd($itemQuantity);
         $category_index = $request->input('category_index');
 
         $categories_item = Session::get('category_item', []);
@@ -1381,6 +1387,10 @@ class EventController extends BaseController
                 'self_bring' => $selfBring,
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
+                'item_carry_users'[0] => [
+                    'user_id' => $user->id,  // Use => for key-value pairs
+                    'quantity' => $itemQuantity,
+                ]
             ];
         } else {
             $categories[$category_index] = [
@@ -1392,6 +1402,10 @@ class EventController extends BaseController
                         // 'self_bring' => $selfBring,
                         // 'self_bring_qty' => $selfBringQuantity,
                         'quantity' => $itemQuantity,
+                        'item_carry_users'[0] => [
+                            'user_id' => $user->id,  // Use => for key-value pairs
+                            'quantity' => $itemQuantity,
+                        ]
                     ]
                 ]
             ];
@@ -1415,6 +1429,7 @@ class EventController extends BaseController
         Session::put('category_item', $categories_item);
         Session::save();
         $categories = Session::get('category', []);
+        // dD($categories);
         $category_quantity = $categories[$category_index]['category_quantity'];
         $category_item = count($categories[$category_index]['item']);
         $total_item = 0;
@@ -1422,12 +1437,24 @@ class EventController extends BaseController
         if (isset($categories[$category_index]['item']) && !empty($categories[$category_index]['item'])) {
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
-                if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-                    $total_quantity = $total_quantity + $value['self_bring_qty'];
+                if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
+
+                    foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
+                        $total_quantity = $total_quantity + $userVal['quantity'];
+                    }
+                    // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+                    //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+                    // }
                 }
             }
         }
-        $total_item = $total_item - $total_quantity;
+        if ($selfBring != "0" && $selfBringQuantity != "0") {
+            $total_item = $totalmissing + 0;
+        } else {
+            $total_item = $totalmissing + intval($itemQuantity);
+            // dd(total_item);
+
+        }
         $qty = 0;
         if ($category_quantity == $category_item) {
             $qty = 1;
@@ -1447,6 +1474,7 @@ class EventController extends BaseController
             'category_item' => --$category_item,
         ];
 
+        // Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
         return response()->json(['view' => view('front.event.potluck.potluckCategoryItem', $data)->render(), 'qty' => $qty, 'total_item' => $total_item]);
@@ -1462,9 +1490,9 @@ class EventController extends BaseController
 
 
         $lastItemIndex = count($categories) > 0 && end($categories) === null ? 0 : count($categories);
-        
+
         $categoryNames =  collect($categories)->pluck('category_name')->toArray();
-        
+
 
         if (isset($edit_category_id) && $edit_category_id != '') {
             $status = '2';
@@ -1516,7 +1544,8 @@ class EventController extends BaseController
             session()->put('category', $categories);
             $status = '1';
             Session::save();
-            return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey, 'lastItemIndex' => $lastItemIndex])->render(), 'status' => $status]);
+            return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => 0, 'potluckkey' => $potluckkey, 'lastItemIndex' => $lastItemIndex])->render(), 'status' => $status]);
+            // return response()->json(['view' => view('front.event.potluck.potluckCategory', ['categoryName' => $categoryName, 'categoryQuantity' => $categoryQuantity, 'potluckkey' => $potluckkey, 'lastItemIndex' => $lastItemIndex])->render(), 'status' => $status]);
         }
 
         // return $categoryName;
@@ -1669,59 +1698,58 @@ class EventController extends BaseController
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
         $categories = session()->get('category', []);
-        
+
         $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
-       
+
         session()->put('category', $categories);
-        
-        
+
+
         $categories = session()->get('category', []);
         // Session::save();
-        
+
 
 
         $total_item = 0;
         $total_quantity = 0;
-        
+
         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
-        // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
+            // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
             // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
-               if(isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])){
-                   foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
-                       if ($id == $userVal['user_id']) {
-                         
-                           $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type))?0:$quantity;
-                           session()->put('category', $categories);
-                         
-                        }
-                        $total_quantity =  $total_quantity + $userVal['quantity'];
+            if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
+                foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
+                    if ($id == $userVal['user_id']) {
+
+                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type)) ? 0 : $quantity;
+                        session()->put('category', $categories);
                     }
-                    // dd(1,$categories);
-               }else{
-               
+                    $total_quantity =  $total_quantity + $userVal['quantity'];
+                }
+                // dd(1,$categories);
+            } else {
+
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
                 session()->put('category', $categories);
 
                 // dd(2,$categories);
                 $total_quantity =  1;
-               }
+            }
 
-             
-                // $total_item = $total_item + $value['quantity'];
 
-                // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-                // }else{
-                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-                // }
+            // $total_item = $total_item + $value['quantity'];
+
+            // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+            //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+            // }else{
+            //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+            // }
             // }
         }
         Session::save();
-       
+
         // dd($categories);       
         // $total_item = $total_item - $total_quantity ;
 
@@ -2818,6 +2846,33 @@ class EventController extends BaseController
         } else {
             $event_creation = new Event();
         }
+        
+        
+        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state . ' ' . $event_creation->zipcode . ' ' . $event_creation->city;
+        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state . ' ' . $request->zipcode . ' ' . $request->city;
+        $isaddress = 0;
+        if ($oldAddress !== $newAddress) {
+            $isaddress = 1;
+        }
+        
+        
+        $newstart_time = $request->start_time;
+        $oldstart_time = $event_creation->rsvp_start_time;
+        $istime = 0;
+        
+        if ($oldstart_time !== $newstart_time) {
+            $istime = 1;
+        }
+
+
+        $newstart_date = $request->start_date;
+        $oldstart_date = $event_creation->start_date;
+        $isupdatedate = 0;
+        
+        if ($oldstart_time !== $newstart_time) {
+            $isupdatedate = 1;
+        }
+
 
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
@@ -2930,15 +2985,7 @@ class EventController extends BaseController
         //     $event_creation->static_information = json_encode($static_data);
         // }
 
-
-
-
-
         $event_creation->save();
-
-
-
-
 
         if ($eventId != "") {
             if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
@@ -2976,8 +3023,6 @@ class EventController extends BaseController
                     }
                 }
             }
-
-            // dd($conatctId);
             if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
 
@@ -3189,14 +3234,14 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
-            if ($request->is_update_event == '0') {
+            if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
-
+                    sendNotificationGuest('invite', $notificationParam);
                     sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
@@ -3206,6 +3251,60 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                }
+            }
+            if ($request->is_update_event == '1') {
+                if ($isaddress != 0 && $request->address1 != "") {
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_addr' => $oldAddress,
+                        'to_addr' => $newAddress,
+                        'newUser' => $filteredIds,
+                    ];
+
+                    sendNotification('update_address', $notificationParam);
+                }
+
+                if (isset($istime) && $istime == 1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_time' => $oldstart_time,
+                        'to_time' =>  $newstart_time,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_time', $notificationParam);
+                }
+
+
+                if (isset($isupdatedate) && $isupdatedate == 1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'old_start_end_date' => $oldstart_date,
+                        'new_start_end_date' => $newstart_date,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_date', $notificationParam);
                 }
             }
 

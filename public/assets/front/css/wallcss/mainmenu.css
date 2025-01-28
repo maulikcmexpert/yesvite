@@ -2835,6 +2835,10 @@
     right: 40px;
 }
 
+.rsvp_minus_notify:disabled, .rsvp_plus_notify:disabled{
+    background-color: gray !important;
+}
+
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {

@@ -27,7 +27,8 @@ use App\Http\Controllers\{
     EventGuestController,
     EventWallController,
     EventDetailsController,
-    PaymentController
+    PaymentController,
+    UrlController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +56,8 @@ Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
     return response()->json(['message' => 'Queue worker started successfully']);
 });
-
+Route::get('/rsvp/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
+    ->name('short.url');
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
@@ -236,6 +238,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('get_event_list_data',  [EventListController::class, 'getEventDateList'])->name('get_event_list_data');
     Route::get('update_notification_read',  [EventListController::class, 'UpdateNotificationRead'])->name('update_notification_read');
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
+
+    Route::get('mark_as_read',  [EventListController::class, 'mark_as_read'])->name('mark_as_read');
+    Route::post('store_rsvp',  [EventListController::class, 'store_rsvp'])->name('store_rsvp');
+    Route::get('filter_search_event',  [EventListController::class, 'filter_search_event'])->name('filter_search_event');
 
 
     // //vrushali

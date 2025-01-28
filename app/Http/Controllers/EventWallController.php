@@ -51,7 +51,7 @@ class EventWallController extends Controller
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
-        $js = ['event_wall', 'post_like_comment','guest_rsvp'];
+        $js = ['event_wall', 'post_like_comment', 'guest_rsvp'];
 
         $event = decrypt($id);
         $encrypt_event_id = $id;
@@ -571,7 +571,6 @@ class EventWallController extends Controller
             } else if ($checkUserrsvp->rsvp_status == '0') {
                 $rsvp_status = '0'; // rsvp you'r not going
             }
-
         }
         $eventDetails['rsvp_status'] = $rsvp_status;
         $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit ?? 0;
@@ -1816,7 +1815,7 @@ class EventWallController extends Controller
         $search_user = $request->search_name ?? ''; // Search query, default empty
 
         // Query phone contacts
-        $phone_contact = contact_sync::where('userId', $id)
+        $phone_contact = contact_sync::where('contact_id', $id)
             ->when(!empty($type), function ($query) use ($type) {
                 $query->where('type', $type); // Apply type filter if provided
             })
@@ -1832,10 +1831,10 @@ class EventWallController extends Controller
             })
             ->orderBy('firstName', 'asc') // Order by first name
             ->get();
-            // dd($phone_contact);
-            $phoneContact = view('front.event_wall.guest_phoneContact', [
-                'contacts' => $phone_contact
-            ])->render();
+        // dd($phone_contact);
+        $phoneContact = view('front.event_wall.guest_phoneContact', [
+            'contacts' => $phone_contact
+        ])->render();
         // Return response in JSON format
         return response()->json([
             'status' => 'success',
@@ -1889,9 +1888,9 @@ class EventWallController extends Controller
             ->orderBy('firstname', 'asc') // Order by first name
             ->get();
 
-            $yesviteContact = view('front.event_wall.guest_yesviteContact', [
-                'contacts' => $yesvite_users
-            ])->render();
+        $yesviteContact = view('front.event_wall.guest_yesviteContact', [
+            'contacts' => $yesvite_users
+        ])->render();
         // Return response in JSON format
         return response()->json([
             'status' => 'success',
@@ -1909,7 +1908,7 @@ class EventWallController extends Controller
 
         // try {
         if (!empty($request['guest_list'])) {
-          dd(1);
+            dd(1);
             $id = 0;
             $ids = [];
             $newInvite = [];
