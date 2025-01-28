@@ -7855,14 +7855,18 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
                 
                 const sliderImages = eventData.slider_images;
-                console.log(sliderImages);
                 
                 photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = document.querySelector(`.${sliderClass}`); // Select the slider by class
+                    const sliderElement = document.querySelector(`.${sliderClass}`);
+                    
                     if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`; // Set the image URL
+                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`;
+                        console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
+                    } else {
+                        console.log(`No element found for class: ${sliderClass} or missing image data.`);
                     }
-                });                
+                });
+                               
             } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");

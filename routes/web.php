@@ -27,7 +27,8 @@ use App\Http\Controllers\{
     EventGuestController,
     EventWallController,
     EventDetailsController,
-    PaymentController
+    PaymentController,
+    UrlController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +56,8 @@ Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
     return response()->json(['message' => 'Queue worker started successfully']);
 });
-
+Route::get('/rsvp/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
+    ->name('short.url');
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
