@@ -2555,6 +2555,7 @@ if ($rsvpSent != null) {
         $rsvp_attempt =  'yes_to_no';
     }
 
+    dd($rsvp_attempt);
     $rsvpSent->event_id = $request->rsvp_event_id;
 
     $rsvpSent->user_id = $request->rsvp_user_id;
@@ -2616,16 +2617,13 @@ if ($rsvpSent != null) {
     ];
 
 
-    sendNotification('sent_rsvp', $notificationParam);   
+        sendNotification('sent_rsvp', $notificationParam);   
 
 
     if ($request->rsvp_status == "1") {
-        dd(1);
         return redirect(route('home'))->with('msg', 'You are going to this event');
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     } elseif ($request->rsvp_status == "0") {
-        dd(0);
-
         return redirect(route('home'))->with('msg', 'You declined to go to this event');
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
