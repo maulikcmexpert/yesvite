@@ -872,7 +872,10 @@ function datepicker() {
             stepping: 15,
         }).on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            // const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startTime = $(this).closest("div").prev().find(".activity_start_time").val();
+
+            console.log(startTime);
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
         
             // Set the end time to 1 hour after the start time whenever the end time picker is shown
