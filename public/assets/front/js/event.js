@@ -1013,7 +1013,8 @@ $(document).on('input','#search_filter_event',function(){
                         type: 'GET',        
                         data: {search_event:search_event},          
                         success: function (response) { 
-                         
+                            console.log(response.view);
+                            
                         },
                         error: function (error) {
                           toastr.error('Something went wrong. Please try again!');
