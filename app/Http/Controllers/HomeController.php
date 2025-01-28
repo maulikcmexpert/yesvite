@@ -475,7 +475,6 @@ class HomeController extends BaseController
 
     function pendingRsvpCount($userId)
     {
-        dd(1);
         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
         })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
@@ -521,8 +520,12 @@ class HomeController extends BaseController
     public function notificationAll(Request $request)
     {
 
-        $notfication_data = getNotificationList();
+        $user  = Auth::guard(name: 'web')->user();
 
-        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
+
+        $notfication_data = getNotificationList();
+        $eventList= getAllEventList($user_id->id);
+
+        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render(),"event_list"=>view('front.notification.search_filter_event', compact('eventList'))->render()]);
     }
 }

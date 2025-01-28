@@ -840,6 +840,8 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
             $('#search_filter_event').val("");
+            $('.event-search-filter').html("");
+            $('.event-search-filter').html(response.event_list);
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
