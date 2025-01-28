@@ -956,13 +956,13 @@ $('#notification_rsvp_btn').on('click', function (e) {
       data: formData,          
       success: function (response) { 
         if(response.status==3){
-            toastr.error(response.msg);
+            toastr.error(response.text);
         }       
         if(response.status==1){
-            toastr.success(response.msg);
+            toastr.success(response.text);
         }
         if(response.status==0){
-            toastr.success(response.msg);
+            toastr.success(response.text);
         }
       },
       error: function (error) {
