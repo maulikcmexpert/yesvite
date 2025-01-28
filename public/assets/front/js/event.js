@@ -893,4 +893,29 @@ $(document).on('click','.notification-rsvp-btn', function () {
 });
 
 
+$('#notification_rsvp').on('click', function (e) {
+    e.preventDefault(); 
+
+    const formData = $(this).serialize();
+
+    $.ajax({
+      url: $(this).attr('action'), 
+      method: 'POST', 
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },           
+      data: formData,          
+      success: function (response) {
+        toastr.success('RSVP submitted successfully!');
+      },
+      error: function (error) {
+        toastr.error('Something went wrong. Please try again!', 'Error', {
+          closeButton: true,
+          progressBar: true,
+        });
+      },
+    });
+
+});
+
 

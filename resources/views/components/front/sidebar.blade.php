@@ -382,7 +382,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
+                    <button type="button"id="notification_rsvp" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
                 </div>
                 </form>
             </div>
