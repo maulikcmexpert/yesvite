@@ -185,7 +185,7 @@ class EventGuestController extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if (empty($eventData)) {
+                if (!empty($eventData) || empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
@@ -390,7 +390,7 @@ class EventGuestController extends Controller
                 }
 
                 $getGuest->delete();
-                return response()->json(['success', 'message' => "Guest removed successfully"]);
+                return response()->json(['success' => true, 'message' => "Guest removed successfully"]);
             }
 
     }

@@ -1218,7 +1218,7 @@
 
                 </div>
                 <div class="modal-footer rsvp-button-wrp">
-                    <button type="button" class="btn btn-secondary remove-btn" data-bs-dismiss="modal" data-event-id="{{$event}}" >Remove
+                    <button type="button" class="btn btn-secondary remove-btn remove_guest_page" data-bs-dismiss="modal" data-event-id="{{$event}}" >Remove
                         Guest</button>
                     <button type="button" class="btn btn-secondary save-btn" data-bs-dismiss="modal">Update</button>
 

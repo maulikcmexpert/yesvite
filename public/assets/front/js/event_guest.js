@@ -27,8 +27,9 @@ $(document).on('click', '.edit-btn', function () {
 
             // Store guest ID in the save button data attribute
             $('#editrsvp .save-btn').data('guest-update-id', guestId);
-            $('#editrsvp .remove-btn').data('user-id', response.user_id);
-            $('#editrsvp .remove-btn').data('event-id', response.event_id);
+            $('#editrsvp .remove_guest_page').data('guest-update-id', guestId);
+            $('#editrsvp .remove_guest_page').data('user-id', response.user_id);
+            $('#editrsvp .remove_guest_page').data('event-id', response.event_id);
             $('#editrsvp').modal('show'); // Show the modal
         },
         error: function (error) {
@@ -121,7 +122,8 @@ $(document).on('click', '.save-btn', function () {
     });
 });
 
-$(document).on('click', '.remove-btn', function () {
+$(document).on('click', '.remove_guest_page', function () {
+    const guestId = $(this).data('guest-update-id');
     const eventId = $(this).data('event-id');
     const userId = $(this).data('user-id');
 
@@ -140,8 +142,7 @@ $(document).on('click', '.remove-btn', function () {
                 // // Find the guest container by guestId and remove it from the DOM
                 $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
 
-                // Optionally, you can display a success message or update the UI
-                alert('Guest successfully removed from the invite.');
+
 
                 // Hide the modal if it's open
                 $('#editrsvp').modal('hide');

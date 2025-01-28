@@ -1037,8 +1037,8 @@ $(document).ready(function () {
     $('#allowComments').prop('checked', savedAllowComments);
 
     // Update the hidden input fields dynamically
-    $('#hiddenVisibility').val(savedVisibility);
-    $('#hiddenAllowComments').val(savedAllowComments ? '1' : '0');
+    $('.hiddenVisibility').val(savedVisibility);
+    $('.hiddenAllowComments').val(savedAllowComments ? '1' : '0');
 
     // Update the display area to show the current saved visibility and commenting status
     const visibilityName = visibilityOptions[savedVisibility];
@@ -1059,8 +1059,8 @@ $(document).ready(function () {
         localStorage.setItem('commenting_on_off', allowComments);
 
         // Update the hidden input fields dynamically for all forms
-        $('#hiddenVisibility').val(visibility);
-        $('#hiddenAllowComments').val(allowComments);
+        $('.hiddenVisibility').val(visibility);
+        $('.hiddenAllowComments').val(allowComments);
 
         // Update display area
         const visibilityName = visibilityOptions[visibility];

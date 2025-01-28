@@ -27,6 +27,7 @@ $(document).on('click', '.edit_rsvp_guest', function () {
 
             // Store guest ID in the save button data attribute
             $('#editrsvp3 .save-rsvp').data('guest-update-id', guestId);
+            $('#editrsvp .remove-Rsvp-btn').data('guest-update-id', guestId);
             $('#editrsvp .remove-Rsvp-btn').data('user-id', response.user_id);
             $('#editrsvp .remove-Rsvp-btn').data('event-id', response.event_id);
 
@@ -80,7 +81,7 @@ $(document).on('click', '.save-rsvp', function () {
                 const guestContainer = $('.guests-listing-right[data-guest-id="' + guestId + '"]');
 
                 // // Remove existing status icon
-                // guestContainer.find('span').remove();
+                guestContainer.find('span').remove();
 
                 // Append new RSVP status based on the response
                 if (response.rsvp_status == '1') {
@@ -125,10 +126,10 @@ $(document).on('click', '.save-rsvp', function () {
         }
     });
 });
-$(document).on('click', '.remove-btn', function () {
+$(document).on('click', '.remove-Rsvp-btn', function () {
     const eventId = $(this).data('event-id');
     const userId = $(this).data('user-id');
-
+    const guestId = $(this).data('guest-update-id');
     // Make the AJAX request to remove the guest from the invite
     $.ajax({
         url: base_url + "event_guest/removeGuestFromInvite", // Endpoint to remove guest
@@ -142,13 +143,11 @@ $(document).on('click', '.remove-btn', function () {
 
             if (response.success) {
                 // // Find the guest container by guestId and remove it from the DOM
-                $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
+                $('.guests-listing-info[data-guest-id="' + guestId + '"]').remove();
 
-                // Optionally, you can display a success message or update the UI
-                alert('Guest successfully removed from the invite.');
 
                 // Hide the modal if it's open
-                $('#editrsvp').modal('hide');
+                $('#editrsvp3').modal('hide');
             } else {
                 alert('Failed to remove guest. Please try again.');
             }

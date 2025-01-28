@@ -259,7 +259,7 @@ class EventPotluckController extends Controller
                     if ($eventDetail->start_date != $eventDetail->end_date) {
                         $eventData[] = "Multiple Day Event";
                     }
-                    if (empty($eventData)) {
+                    if (!empty($eventData) || empty($eventData)) {
                         $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                         $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                         $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
@@ -410,14 +410,14 @@ class EventPotluckController extends Controller
         //}
 
 
-        DB::beginTransaction();
+
         EventPotluckCategory::Create([
             'event_id' => $request->event_id,
             'user_id' => $user->id,
             'category' => $request->category,
-            'quantity' => $request->quantity
+            'quantity' => $request->category_quantity
         ]);
-        DB::commit();
+
         return redirect()->back()->with('Potluck category created');
     }
     public function getCategory($id)

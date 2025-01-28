@@ -40,7 +40,7 @@
                     <div class="event-center-tabs-main">
                         {{-- {{dd($current_page)}} --}}
                         <!-- ====================navbar-============================= -->
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" />
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails" />
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -220,7 +220,7 @@
                                                                 $missing = '';
                                                                 if ($total_missing_quantity == 0) {
                                                                     $display_icon = '';
-                                                                    $missing = 'color:green';
+                                                                    $missing = 'color:red';
                                                                     $hide_button = 'd-none'; // Hides the button
                                                                 }
                                                             @endphp
@@ -1331,7 +1331,7 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantity" name="quantity "value="0" class="input-qty" />
+                            <input type="number" id="quantity" name="category_quantity" value="0" class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                         <span class="error_message_quantity" style="color: red; font-size: 12px;"></span>
@@ -1422,7 +1422,7 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantitys" name="quantity"value="0" class="input-qty" />
+                            <input type="number" id="quantitys" name="quantity" value="" class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                         <span class="error_message_quantity" style="color: red; font-size: 12px;"></span>

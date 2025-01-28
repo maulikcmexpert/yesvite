@@ -91,7 +91,7 @@ if ($hostView) {
                 </div>
             </form>
         </div>
-        <div class="guests-listing-wrp">
+        <div class="guests-listing-wrp" >
             <ul>
                 @if (!empty($guestArray))
                     @foreach ($guestArray as $guest)
@@ -103,7 +103,7 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info">
+                            <li class="guests-listing-info"  data-guest-id="{{ $guest['id'] }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
