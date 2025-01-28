@@ -574,8 +574,8 @@ class EventController extends BaseController
         }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
-            $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
-            // $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
+            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
@@ -1013,6 +1013,7 @@ class EventController extends BaseController
                     sendNotification('owner_notify', $notificationParam);
                 }
             }
+
 
             // if ($request->thankyou_message == "1") {
             //     $thankyou_card = session('thankyou_card_data');
@@ -1472,7 +1473,7 @@ class EventController extends BaseController
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-       
+
         // Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
@@ -2845,6 +2846,33 @@ class EventController extends BaseController
         } else {
             $event_creation = new Event();
         }
+        
+        
+        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state . ' ' . $event_creation->zipcode . ' ' . $event_creation->city;
+        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state . ' ' . $request->zipcode . ' ' . $request->city;
+        $isaddress = 0;
+        if ($oldAddress !== $newAddress) {
+            $isaddress = 1;
+        }
+        
+        
+        $newstart_time = $request->start_time;
+        $oldstart_time = $event_creation->rsvp_start_time;
+        $istime = 0;
+        
+        if ($oldstart_time !== $newstart_time) {
+            $istime = 1;
+        }
+
+
+        $newstart_date = $request->start_date;
+        $oldstart_date = $event_creation->start_date;
+        $isupdatedate = 0;
+        
+        if ($oldstart_time !== $newstart_time) {
+            $isupdatedate = 1;
+        }
+
 
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
@@ -2957,15 +2985,7 @@ class EventController extends BaseController
         //     $event_creation->static_information = json_encode($static_data);
         // }
 
-
-
-
-
         $event_creation->save();
-
-
-
-
 
         if ($eventId != "") {
             if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
@@ -3003,8 +3023,6 @@ class EventController extends BaseController
                     }
                 }
             }
-
-            // dd($conatctId);
             if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
 
@@ -3216,14 +3234,14 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
-            if ($request->is_update_event == '0') {
+            if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
-
+                    sendNotificationGuest('invite', $notificationParam);
                     sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
@@ -3233,6 +3251,60 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                }
+            }
+            if ($request->is_update_event == '1') {
+                if ($isaddress != 0 && $request->address1 != "") {
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_addr' => $oldAddress,
+                        'to_addr' => $newAddress,
+                        'newUser' => $filteredIds,
+                    ];
+
+                    sendNotification('update_address', $notificationParam);
+                }
+
+                if (isset($istime) && $istime == 1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_time' => $oldstart_time,
+                        'to_time' =>  $newstart_time,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_time', $notificationParam);
+                }
+
+
+                if (isset($isupdatedate) && $isupdatedate == 1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'old_start_end_date' => $oldstart_date,
+                        'new_start_end_date' => $newstart_date,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_date', $notificationParam);
                 }
             }
 

@@ -1,3 +1,6 @@
+var date_upcoming=false;
+var date_past=false;
+var date_draft=false;
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 // Create a request object
@@ -49,7 +52,9 @@ $(document).on('paste','input[type="text"],textarea', function(e) {
 });
 
 $('#scrollStatus').scroll(function () {
-    if (busy1) return; 
+    // if (busy1) return; 
+    if (busy1 || date_upcoming) return; // Add this check to prevent the scroll ajax call after a date click.
+
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
@@ -96,7 +101,9 @@ $('#scrollStatus').scroll(function () {
 });
 
 $('#scrollStatus2').scroll(function () {
-    if (busy2) return; 
+    // if (busy2) return; 
+    if (busy2 || date_draft) return; // Add this check to prevent the scroll ajax call after a date click.
+
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
@@ -135,7 +142,9 @@ $('#scrollStatus2').scroll(function () {
 });
 
 $('#scrollStatus3').scroll(function () {
-    if (busy3) return; 
+    // if (busy3) return; 
+    if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
+
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
@@ -285,7 +294,7 @@ $(document).on('input','#search_past_event',function(e){
                 
                 $('#scrollStatus3').html('');
                 $('#scrollStatus3').html(response.view);
-                $('#tabbtn3').css('display','block');
+                $('#tabbtn3').css('display','flex');
                 $('#tabbtn3').text(response.last_month);
                 
                 // $('.loader').css('display','none');    
@@ -340,7 +349,7 @@ $(document).on('click','.filter_apply_btn',function(e){
             console.log(response);
             if(response.page=="upcoming"){
                 if (response.view) {
-                    $('.all-events-month-show-wrp').css('display','block');
+                    $('.all-events-month-show-wrp').css('display','flex');
                     $('#scrollStatus').html('');
                     $('#scrollStatus').html(response.view);
                     $('#tabbtn2').text(response.last_month);
@@ -358,7 +367,7 @@ $(document).on('click','.filter_apply_btn',function(e){
             }
             if(response.page=="past"){
                 if (response.view) {
-                    $('.all-events-month-show-wrp').css('display','block');
+                    $('.all-events-month-show-wrp').css('display','flex');
                     $('#scrollStatus3').html('');
                     $('#scrollStatus3').html(response.view);
                     $('#tabbtn3').text(response.last_month);
@@ -596,21 +605,27 @@ $(document).on('click',".day",function () {
     $('.latest_month').each(function () { 
         current_month=$(this).val();
     });
+
+    // window.isDateClicked = true; // Set this flag when a date is clicked.
     clearTimeout(search_user_ajax_timer);
     if(page=="upcoming"){
         var ajax_base_url=`${base_url}search_upcoming_event`;
         var scrollStatus="#scrollStatus";
         var tabbtn="#tabbtn1";
+        date_upcoming=true;
     }
     if(page=="draft"){
         var ajax_base_url=`${base_url}search_draft_event`;
         var scrollStatus="#scrollStatus2";
         var tabbtn="#tabbtn2";
+        date_draft=true;
     }
     if(page=="past"){
         var ajax_base_url=`${base_url}search_past_event`;
         var scrollStatus="#scrollStatus3";
         var tabbtn="#tabbtn3";
+        date_past=true;
+
     }
     search_user_ajax_timer = setTimeout(function () {
         $('.loader_up').css('display','block');    
@@ -628,7 +643,7 @@ $(document).on('click',".day",function () {
             if (response.view) {
                 $(scrollStatus).html('');
                 $(scrollStatus).html(response.view);
-                $('#tabbtn3').css('display','block');
+                $('#tabbtn3').css('display','flex');
                 $(tabbtn).text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
 
@@ -800,6 +815,7 @@ $(document).on('change', 'input[name="selectedEvents[]"]', function () {
     }   
 });
 $(document).on('click', '.all-event-notification-filter-reset', function () {
+
     $("input[name='selectedEvents[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
@@ -809,7 +825,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='notificationTypes[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
-    $('.notification-selected-events-wrp').html('');
+    // $('.notification-selected-events-wrp').html('');
 
     $('#home_loader').css('display','block');
 
@@ -818,18 +834,27 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
         type: 'GET',
         data: {},
         success: function (response) {
+            console.log(response);
            if(response.view!=""){
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
+            $('#search_filter_event').val("");
+        
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
 
            }
-
+           
+           $('.all-events-filter-info').removeClass('d-none');
+           $('.notification-all-event-wrp').addClass('d-none');
+           $('.notification-back').addClass('d-none');
+           $('.event-search-filter').html("");
+           $('.event-search-filter').html(response.event_list);
+           $('.notification-selected-events-wrp').html('');
         },
         error: function (xhr, status, error) {
     
@@ -843,6 +868,11 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
 $(document).on('click','.notification-rsvp-btn', function () {
     const eventId = $(this).data('event_id');
     const userId = $(this).data('user_id');
+    const profile = $(this).data('profile');
+    const firstName = $(this).data('firstname');
+    const lastName = $(this).data('lastname');
+    const hosted_by = firstName + ' ' + lastName; 
+    const event_name = $(this).data('event_name');
     
     $('#rsvp_notification_adult').val("0");
      $('#rsvp_notification_kids').val("0");
@@ -851,8 +881,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
      $('#rsvp_yes').prop('checked',true)
      $('.rsvp_minus_notify').prop('disabled',false);
      $('.rsvp_plus_notify').prop('disabled',false);
-     
-    console.log(`${base_url}get_user_info_rsvp`);
+
     $('#notification_rsvp_profile').attr('src', "").show();
     $('#notification_rsvp_eventName').text("");
     $('#notification_rsvp_host').text("");
@@ -860,17 +889,17 @@ $(document).on('click','.notification-rsvp-btn', function () {
     $('#rsvp_event_id').val("");
     $('.rsvp_initials').remove(); // Remove any previously added initials
 
-    $.ajax({
-        url: `${base_url}get_user_info_rsvp`,
-        type: 'GET',
-        data: {eventId:eventId,userId:userId},
-        success: function (response) {
-            console.log(response);
-            const profile = response.event_data.profile;
-            const firstName = response.event_data.firstname;
-            const lastName = response.event_data.lastname;
-            const hosted_by = response.event_data.host;
-            const event_name = response.event_data.name;
+    // $.ajax({
+    //     url: `${base_url}get_user_info_rsvp`,
+    //     type: 'GET',
+    //     data: {eventId:eventId,userId:userId},
+    //     success: function (response) {
+    //         console.log(response);
+    //         const profile = response.event_data.profile;
+    //         const firstName = response.event_data.firstname;
+    //         const lastName = response.event_data.lastname;
+    //         const hosted_by = response.event_data.host;
+    //         const event_name = response.event_data.name;
 
 
             if (profile) {
@@ -892,13 +921,13 @@ $(document).on('click','.notification-rsvp-btn', function () {
             $('#notification_rsvp_host').text(hosted_by);
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
-        },
-        error: function (xhr, status, error) {
+//         },
+//         error: function (xhr, status, error) {
     
-        },
-        complete: function () {
-        }
-    });
+//         },
+//         complete: function () {
+//         }
+//     });
 });
 
     $('.rsvp_minus_notify').prop('disabled',false);
@@ -950,13 +979,15 @@ $('#notification_rsvp_btn').on('click', function (e) {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },           
       data: formData,          
-      success: function (response) {        
+      success: function (response) { 
+        if(response.status==3){
+            toastr.error(response.text);
+        }       
         if(response.status==1){
-            toastr.success(response.msg);
-            
+            toastr.success(response.text);
         }
         if(response.status==0){
-            toastr.success(response.msg);
+            toastr.success(response.text);
         }
       },
       error: function (error) {
@@ -967,3 +998,40 @@ $('#notification_rsvp_btn').on('click', function (e) {
 });
 
 
+$(document).on('click','.main-notification-div-list',function(){
+    const event_id=$(this).data('event_id');
+    console.log(event_id);
+    $.ajax({
+        url: `${base_url}mark_as_read`,
+        type: 'GET',        
+        data: {event_id:event_id},          
+        success: function (response) { 
+         
+        },
+        error: function (error) {
+          toastr.error('Something went wrong. Please try again!');
+        },
+      });
+});
+
+$(document).on('input','#search_filter_event',function(){
+
+    var search_event=$(this).val();
+    $('#home_loader').css('display','block');
+
+                    $.ajax({
+                        url: `${base_url}filter_search_event`,
+                        type: 'GET',        
+                        data: {search_event:search_event},          
+                        success: function (response) { 
+                            $('.event-search-filter').html();  
+                            $('.event-search-filter').html(response.view);   
+                            $('#home_loader').css('display','none');
+                      
+                        },
+                        error: function (error) {
+                          toastr.error('Something went wrong. Please try again!');
+                        },
+                      });
+
+});

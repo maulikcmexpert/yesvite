@@ -172,12 +172,13 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button
-                      class="accordion-button collapsed"
+                      class="accordion-button collapsed main-notification-div-list"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne{{$i}}"
                       aria-expanded="true"
                       aria-controls="collapseOne"
+                      data-event_id="{{$value[0]['event_id']}}"
                     >
                       <div class="accordion-button-wrp">
                         <div class="accordion-button-img-wrp">
@@ -254,7 +255,7 @@
                                       </div>
                                         @if($inner_data['co_host_notification']!="1")
                                           <div>
-                                              <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
+                                              <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-lastname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
                                           </div>
                                         @endif  
                                      <div>
@@ -285,7 +286,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -296,12 +299,12 @@
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Has updated the event details for</span>
+                                          <span> Has updated the event details for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
-                                        <p>{{$inner_data['event_name']}}</p>
+                                        <!-- <p>{{$inner_data['event_name']}}</p> -->
                                         @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
@@ -328,7 +331,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -377,7 +382,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -423,7 +430,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -472,7 +481,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -525,8 +536,9 @@
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                      @else
                                        {!! $userProfile !!}
-                                    <span class="active-dot"></span>
                                     @endif
+                                    <span class="active-dot"></span>
+
                                       {{-- <span class="active-dot"></span> --}}
                                     </div>
                                     <div class="notification-drodown-body-inner-content">
@@ -625,13 +637,13 @@
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> commented on your post on </span>
+                                          <span> commented on your post on <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
                                         <p>
-                                          {{$inner_data['event_name']}}
+                                          <!-- {{$inner_data['event_name']}} -->
                                           <span><strong>Wall</strong></span>
                                         </p>
                                         @if($inner_data['read']=="0")
@@ -691,18 +703,18 @@
                                         @if($inner_data['media_type']=="photo")
                                             <span> posted new photo on wall at </span>
                                         @elseif($inner_data['media_type']=="video")
-                                          <span> posted video on wall at </span>
+                                          <span> posted video on wall at <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span><strong>Wall</strong></span>
                                         @else
-                                        <span> posted on wall at </span>
+                                        <span> posted on wall at <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span><strong>Wall</strong></span>
                                         @endif
                                       </h3>
                                       <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                     </div>
                                     <div>
                                       <p>
-                                        {{$inner_data['event_name']}}
+                                        <!-- {{$inner_data['event_name']}} -->
 
-                                        <span><strong>Wall</strong></span>
+                                        <!-- <span><strong>Wall</strong></span> -->
                                       </p>
                                       @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
@@ -819,11 +831,12 @@
                                   @endphp
                                   @if($inner_data['profile']!="")
                                   <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                  <span class="active-dot"></span>
+
                                 @else
                                   {!! $userProfile !!}
                                 <span class="active-dot"></span>
                                 @endif
-                                  <span class="active-dot"></span>
                                 </div>
                                 <div class="notification-drodown-body-inner-content">
                                   <div>
@@ -943,12 +956,12 @@
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> posted new photo on photos for</span>
+                                          <span> posted new photo on photos for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                     <div>
-                                        <p>{{$inner_data['event_name']}}</p>
+                                        <!-- <p>{{$inner_data['event_name']}}</p> -->
                                         @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
@@ -1001,13 +1014,13 @@
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Accepted your invitation to co-host</span>
+                                          <span> Accepted your invitation to co-host <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
                                         <p>
-                                          {{$inner_data['event_name']}}
+                                          <!-- {{$inner_data['event_name']}} -->
                                           <span><strong>Wall</strong></span>
                                         </p>
                                         @if($inner_data['read']=="0")
@@ -1749,7 +1762,7 @@
             <div class="all-events-searchbar-wrp mb-2">
               <form>
                 <div class="position-relative">
-                  <input type="text" class="form-control" id="search_upcoming_event" placeholder="Search event name">
+                  <input type="text" class="form-control" id="search_filter_event" placeholder="Search event name">
                   <span class="search-icon">
                     <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.58366 17.5C13.9559 17.5 17.5003 13.9555 17.5003 9.58329C17.5003 5.21104 13.9559 1.66663 9.58366 1.66663C5.2114 1.66663 1.66699 5.21104 1.66699 9.58329C1.66699 13.9555 5.2114 17.5 9.58366 17.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1761,7 +1774,7 @@
             </div>
             <div class="all-events-filter-wrp">
               <form action="" id="event_filter">
-                  <div class="notification-filter-sub">
+                  <div class="notification-filter-sub event-search-filter">
 
                     @if (Auth::guard('web')->check())
 

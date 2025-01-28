@@ -238,8 +238,9 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('update_notification_read',  [EventListController::class, 'UpdateNotificationRead'])->name('update_notification_read');
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
 
-    Route::get('get_user_info_rsvp',  [EventListController::class, 'get_user_info_rsvp'])->name('get_user_info_rsvp');
+    Route::get('mark_as_read',  [EventListController::class, 'mark_as_read'])->name('mark_as_read');
     Route::post('store_rsvp',  [EventListController::class, 'store_rsvp'])->name('store_rsvp');
+    Route::get('filter_search_event',  [EventListController::class, 'filter_search_event'])->name('filter_search_event');
 
 
     // //vrushali
