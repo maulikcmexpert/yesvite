@@ -815,6 +815,7 @@ $(document).on('change', 'input[name="selectedEvents[]"]', function () {
     }   
 });
 $(document).on('click', '.all-event-notification-filter-reset', function () {
+
     $("input[name='selectedEvents[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
@@ -838,10 +839,16 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
+
+            $('.all-events-filter-info').removeClass('d-none');
+            $('.notification-all-event-wrp').addClass('d-none');
+            $('.notification-back').addClass('d-none');
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
+
+
 
            }
 
