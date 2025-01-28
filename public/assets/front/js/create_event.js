@@ -7838,6 +7838,7 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
+            console.log(eventData.slider_images);
             if (
                 eventData.slider_images != undefined &&
                 eventData.slider_images != ""
@@ -7851,19 +7852,16 @@ $(document).on("click", ".design-sidebar-action", function () {
                     "photo-slider-2",
                     "photo-slider-3",
                 ];
-
+                
                 const sliderImages = eventData.slider_images;
-                photoSliders.forEach((sliderId, index) => {
-                    const sliderElement =
-                        document.getElementsByClassName(sliderId); // Get the slider by ID
+                console.log(sliderImages);
+                
+                photoSliders.forEach((sliderClass, index) => {
+                    const sliderElement = document.querySelector(`.${sliderClass}`); // Select the slider by class
                     if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${
-                            base_url +
-                            "public/storage/event_images/" +
-                            sliderImages[index].fileName
-                        }`; // Set the image URL
+                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`; // Set the image URL
                     }
-                });
+                });                
             } else {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_" + designId).removeClass("d-none");

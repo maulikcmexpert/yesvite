@@ -732,7 +732,7 @@
     .all-user-contacts-sidebar{
         overflow: hidden;
         overflow-y: scroll;
-        max-height: calc(100vh - 25vh);
+        max-height: calc(100vh - 17vh);
       }      
 }
 
