@@ -838,6 +838,13 @@ function datepicker() {
                 // Default to current time or a specific default time (only in picker)
                 picker.date(moment().hours(12).minutes(0).seconds(0));
             }
+        }).on("dp.close", function (e) {
+            const picker = $(this).data("DateTimePicker");
+            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+
+            // Set end time to 1 hour after start time if it's empty (only in picker)
+            $(this).val(startMoment);
         })
         .on("dp.change", function (e) {
             const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
