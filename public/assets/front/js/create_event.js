@@ -906,9 +906,10 @@ function datepicker() {
         // })
        
         .on("dp.close", function () {
-            const picker = $(this).data("DateTimePicker");
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
-            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            // const picker = $(this).data("DateTimePicker");
+            // const startTime = $(this).closest("div").find(".activity_start_time").val();
+            // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            const startMoment = moment(startTime, "LT") ;
             
             picker.date(startMoment.clone().add(1, "hours"));
 
