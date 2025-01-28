@@ -910,6 +910,7 @@ $(document).on("click", ".notification_read", function () {
         success: function (response) {
             if (response.count == 0) {
                 $(".notification_count_display").css("display", "none");
+                $(".notification-read-dot").css('display','none');
             }
         },
         error: function (xhr, status, error) {
