@@ -954,7 +954,10 @@ $('#notification_rsvp_btn').on('click', function (e) {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },           
       data: formData,          
-      success: function (response) {        
+      success: function (response) { 
+        if(response.status==""){
+            toastr.error(response.msg);
+        }       
         if(response.status==1){
             toastr.success(response.msg);
             

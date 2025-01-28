@@ -2555,9 +2555,12 @@ if ($rsvpSent != null) {
     }
 
     if($rsvpSentAttempt=="1"&&$rsvp_status=="1"){
-        return response()->json(['status' => 1, 'msg' => 'You have already done rsvp yes']);
+        return response()->json(['status' => "", 'msg' => 'You have already done rsvp yes']);
     }
 
+    if($rsvpSentAttempt=="0"&&$rsvp_status=="0"){
+        return response()->json(['status' => "", 'msg' => 'You have already done rsvp No']);
+    }
     $rsvpSent->event_id = $request->rsvp_event_id;
 
     $rsvpSent->user_id = $request->rsvp_user_id;
