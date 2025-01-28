@@ -1470,7 +1470,7 @@ class EventController extends BaseController
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-        dd($total_item);
+        dd($selfBring,$selfBringQuantity);
         // Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
