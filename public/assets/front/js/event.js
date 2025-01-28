@@ -834,14 +834,14 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
         type: 'GET',
         data: {},
         success: function (response) {
+            console.log(response);
            if(response.view!=""){
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
             $('#search_filter_event').val("");
-            $('.event-search-filter').html("");
-            $('.event-search-filter').html(response.event_list);
+        
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
@@ -852,6 +852,8 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
            $('.all-events-filter-info').removeClass('d-none');
            $('.notification-all-event-wrp').addClass('d-none');
            $('.notification-back').addClass('d-none');
+           $('.event-search-filter').html("");
+           $('.event-search-filter').html(response.event_list);
 
         },
         error: function (xhr, status, error) {
