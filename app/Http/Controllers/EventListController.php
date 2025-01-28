@@ -2539,7 +2539,7 @@ class EventListController extends Controller
      
     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');s
-        })->where(['id' => $request->rsvp_event_id,'user_id',$request->rsvp_user_id])->first();
+        })->where(['event_id' => $request->rsvp_event_id,'user_id',$request->rsvp_user_id])->first();
 
 
 $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
