@@ -943,6 +943,9 @@ function datepicker() {
                 const startMoment = moment(startTime, "LT");
                 $(this).val(startMoment.clone().add(1, "hours").format("LT"));
             }
+
+            console.log(selectedEndTime);
+            console.log(startMoment);
         });
     });
 }
