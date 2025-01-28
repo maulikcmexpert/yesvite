@@ -893,13 +893,13 @@ $(document).on('click','.notification-rsvp-btn', function () {
 });
 
 
-$('#notification_rsvp').on('click', function (e) {
+$('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
 
     const formData = $(this).serialize();
 
     $.ajax({
-      url: $(this).attr('action'), 
+      url: $('#notification_rsvp').attr('action'), 
       method: 'POST', 
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
