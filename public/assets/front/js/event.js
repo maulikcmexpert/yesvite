@@ -978,21 +978,10 @@ $(document).on('click','.main-notification-div-list',function(){
     console.log(event_id);
     $.ajax({
         url: `${base_url}mark_as_read`,
-        method: 'POST', 
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },           
+        type: 'GET',        
         data: {event_id:event_id},          
         success: function (response) { 
-          if(response.status==3){
-              toastr.error(response.text);
-          }       
-          if(response.status==1){
-              toastr.success(response.text);
-          }
-          if(response.status==0){
-              toastr.success(response.text);
-          }
+         
         },
         error: function (error) {
           toastr.error('Something went wrong. Please try again!');
