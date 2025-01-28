@@ -452,7 +452,9 @@ class ProfileController extends BaseController
         $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
-
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;
         if ($user->user_profile_privacy->isNotEmpty()) {
 
             foreach ($user->user_profile_privacy as $value) {
