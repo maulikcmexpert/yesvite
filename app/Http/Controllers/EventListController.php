@@ -2645,12 +2645,12 @@ if ($rsvpSent != null) {
     public function filter_search_event(Request $request){
         $eventName=$request->search_event;
         $eventList = [];
-        $user  = Auth::guard('web')->user()->id;
+        $user_id  = Auth::guard('web')->user()->id;
 
         $eventData = EventInvitedUser::where(['user_id' => $user_id])->get();
 
         $eventList = [];
-    
+        
         foreach ($eventData as $val) {
     
             $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
