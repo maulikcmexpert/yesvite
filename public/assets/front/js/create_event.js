@@ -881,31 +881,25 @@ function datepicker() {
         // })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const currentValue = $(this).val();
-        
-            // If there's a current value in the end time picker, keep it
-            if (currentValue) {
-                const currentMoment = moment(currentValue, "LT");
-                if (currentMoment.isValid()) {
-                    picker.date(currentMoment);
-                }
+            
+            // Find the closest previous activity_start_time within the same .activity-main-wrp container
+            const closestPreviousStartTime = $(this).closest(".activity-main-wrp")
+                .prev(".activity-main-wrp")
+                .find(".activity_start_time")
+                .val();
+            
+            let startMoment;
+            
+            // If a previous start time is found, set the end time to 1 hour after that
+            if (closestPreviousStartTime) {
+                startMoment = moment(closestPreviousStartTime, "LT").add(1, "hours");
             } else {
-                // Find the closest previous start time
-                const previousStartTime = $(this).closest(".activity-main-wrp").prev(".activity-main-wrp").find(".activity_start_time").val();
-                
-                let startMoment;
-                
-                // If previous start time exists, set the end time to 1 hour after it
-                if (previousStartTime) {
-                    startMoment = moment(previousStartTime, "LT").add(1, 'hours');
-                } else {
-                    // If no previous start time, default to current time + 1 hour
-                    startMoment = moment().hours(12).minutes(0).seconds(0).add(1, 'hours');
-                }
-                
-                // Set the picker date to the calculated time
-                picker.date(startMoment);
+                // If no previous start time, default to the current time + 1 hour
+                startMoment = moment().hours(12).minutes(0).seconds(0).add(1, "hours");
             }
+        
+            // Set the picker date to 1 hour after the closest previous start time or the default time
+            picker.date(startMoment);
         })
         
         .on("dp.close", function () {
