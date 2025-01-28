@@ -3083,42 +3083,42 @@ function convertTo12Hour(time) {
     return `${hours}:${minutes} ${modifier}`;
 }
 // Function to check end times
-function checkEndTimes() {
-    const scheduleWrapper = document.querySelector('.activity-schedule-wrp');
-    const endTimes = scheduleWrapper.querySelectorAll('.activity_end_time');
+// function checkEndTimes() {
+//     const scheduleWrapper = document.querySelector('.activity-schedule-wrp');
+//     const endTimes = scheduleWrapper.querySelectorAll('.activity_end_time');
     
-    let exceedsTime = false;
+//     let exceedsTime = false;
 
-    endTimes.forEach((endTimeInput) => {
-        const endTime = endTimeInput.value.trim();
+//     endTimes.forEach((endTimeInput) => {
+//         const endTime = endTimeInput.value.trim();
 
-        if (endTime) {
-            const [time, period] = endTime.split(' '); // Split into time and AM/PM
-            const [hours, minutes] = time.split(':'); // Split time into hours and minutes
+//         if (endTime) {
+//             const [time, period] = endTime.split(' '); // Split into time and AM/PM
+//             const [hours, minutes] = time.split(':'); // Split time into hours and minutes
 
-            let endHour = parseInt(hours);
-            let endMinute = parseInt(minutes);
+//             let endHour = parseInt(hours);
+//             let endMinute = parseInt(minutes);
 
-            // Convert to 24-hour format based on AM/PM
-            if (period === 'PM' && endHour !== 12) {
-                endHour += 12;
-            } else if (period === 'AM' && endHour === 12) {
-                endHour = 0;
-            }
+//             // Convert to 24-hour format based on AM/PM
+//             if (period === 'PM' && endHour !== 12) {
+//                 endHour += 12;
+//             } else if (period === 'AM' && endHour === 12) {
+//                 endHour = 0;
+//             }
 
-            // Check if time exceeds 11:00 PM (23:00)
-            if (endHour > 23 || (endHour === 23 && endMinute > 0)) {
-                exceedsTime = true;
-            }
-        }
-    });
+//             // Check if time exceeds 11:00 PM (23:00)
+//             if (endHour > 23 || (endHour === 23 && endMinute > 0)) {
+//                 exceedsTime = true;
+//             }
+//         }
+//     });
 
-    if (exceedsTime) {
-        alert("One or more activities exceed the end time of 11:00 PM.");
-    } else {
-        alert("All activities are within the valid time range.");
-    }
-}
+//     if (exceedsTime) {
+//         alert("One or more activities exceed the end time of 11:00 PM.");
+//     } else {
+//         alert("All activities are within the valid time range.");
+//     }
+// }
 
 // Trigger the function on save button click
 
