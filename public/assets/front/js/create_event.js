@@ -7838,6 +7838,7 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
+            console.log(eventData.slider_images);
             if (
                 eventData.slider_images != undefined &&
                 eventData.slider_images != ""
