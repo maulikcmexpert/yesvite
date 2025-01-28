@@ -399,6 +399,14 @@ $(".upload-img-delete").click(function () {
 });
 
 $(".upload-poll-delete").click(function () {
+    $("#pollForm")[0].reset(); // Resets the form inputs to their default values
+
+    // Clear hidden input values (if needed)
+    $("#pollContent").val('');
+    $("#event_id").val('');
+    $("#hiddenVisibility").val('');
+    $("#hiddenAllowComments").val('');
+    $(".char-count").text("0/140");
     $(".create-post-poll-wrp").addClass("d-none");
 });
 

@@ -33,7 +33,7 @@ class EventAboutController extends Controller
         $title = 'event about';
         $page = 'front.event_wall.event_about';
         $user  = Auth::guard('web')->user();
-        $js = ['event_about_rsvp'];
+        $js = ['event_about_rsvp','guest_rsvp'];
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);

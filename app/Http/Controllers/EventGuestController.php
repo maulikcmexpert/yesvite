@@ -35,7 +35,7 @@ class EventGuestController extends Controller
         $title = 'event guest';
         $page = 'front.event_wall.event_guest';
         $user  = Auth::guard('web')->user();
-        $js = ['event_guest'];
+        $js = ['event_guest','guest_rsvp'];
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -324,6 +324,8 @@ class EventGuestController extends Controller
 
         return response()->json([
             'id' => $guest->id,
+            'user_id' => $guest->user_id,
+            'event_id'=> $guest->event_id,
             'firstname' => $guest->user->firstname,
             'lastname' => $guest->user->lastname,
             'email' => $guest->user->email,
@@ -370,5 +372,26 @@ class EventGuestController extends Controller
 
         // Handle the case where guest is not found
         return redirect()->back()->with('success', 'RSVP updated successfully.');
+    }
+
+
+    public function removeGuestFromInvite(Request $request)
+    {
+
+        $user  = Auth::guard('web')->user();
+
+
+            $getGuest = EventInvitedUser::where(['event_id' => $request['event_id'], 'user_id' => $request['user_id']])->first();
+            if ($getGuest != null) {
+
+                $checkNotificationdata = Notification::where(['event_id' => $request['event_id'], 'user_id' => $request['user_id']])->first();
+                if ($checkNotificationdata != null) {
+                    $checkNotificationdata->delete();
+                }
+
+                $getGuest->delete();
+                return response()->json(['success', 'message' => "Guest removed successfully"]);
+            }
+
     }
 }

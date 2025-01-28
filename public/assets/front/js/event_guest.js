@@ -27,6 +27,8 @@ $(document).on('click', '.edit-btn', function () {
 
             // Store guest ID in the save button data attribute
             $('#editrsvp .save-btn').data('guest-update-id', guestId);
+            $('#editrsvp .remove-btn').data('user-id', response.user_id);
+            $('#editrsvp .remove-btn').data('event-id', response.event_id);
             $('#editrsvp').modal('show'); // Show the modal
         },
         error: function (error) {
@@ -115,6 +117,41 @@ $(document).on('click', '.save-btn', function () {
         },
         error: function (error) {
             console.error('Error updating guest details:', error);
+        }
+    });
+});
+
+$(document).on('click', '.remove-btn', function () {
+    const eventId = $(this).data('event-id');
+    const userId = $(this).data('user-id');
+
+    // Make the AJAX request to remove the guest from the invite
+    $.ajax({
+        url: base_url + "event_guest/removeGuestFromInvite", // Endpoint to remove guest
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+        },
+        data: { event_id: eventId ,user_id:userId}, // Pass guestId to the server
+        success: function (response) {
+            console.log("Remove successful: ", response);
+
+            if (response.success) {
+                // // Find the guest container by guestId and remove it from the DOM
+                $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
+
+                // Optionally, you can display a success message or update the UI
+                alert('Guest successfully removed from the invite.');
+
+                // Hide the modal if it's open
+                $('#editrsvp').modal('hide');
+            } else {
+                alert('Failed to remove guest. Please try again.');
+            }
+        },
+        error: function (error) {
+            console.error('Error removing guest:', error);
+            alert('An error occurred while removing the guest.');
         }
     });
 });

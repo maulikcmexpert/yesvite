@@ -273,6 +273,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_photo/userPostLikeDislike', [EventPhotoController::class, 'userPostLikeDislike'])->name('event_photo.userPostLikeDislike');
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
     Route::get('event_guest/fetch_guest/{id}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
+    Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
     Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
     Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');

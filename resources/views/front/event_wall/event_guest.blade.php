@@ -278,7 +278,8 @@
                                                                 </h5>
                                                             @endif
 
-
+<input type="hidden" id="eventID" value="{{$guest['event_id']}}">
+<input type="hidden" id="user_id" value="{{$guest['user_id']}}">
 
                                                             </a>
                                                             <div class="d-flex flex-column">
@@ -420,7 +421,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-0">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :login_user_id="$login_user_id" />
             </div>
         </div>
     </div>
@@ -1217,7 +1218,7 @@
 
                 </div>
                 <div class="modal-footer rsvp-button-wrp">
-                    <button type="button" class="btn btn-secondary remove-btn" data-bs-dismiss="modal">Remove
+                    <button type="button" class="btn btn-secondary remove-btn" data-bs-dismiss="modal" data-event-id="{{$event}}" >Remove
                         Guest</button>
                     <button type="button" class="btn btn-secondary save-btn" data-bs-dismiss="modal">Update</button>
 

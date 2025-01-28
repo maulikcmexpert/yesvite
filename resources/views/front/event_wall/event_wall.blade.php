@@ -1001,7 +1001,7 @@
                                                             <p id="likeCount_{{ $poll['event_post_id'] }}">
                                                                 {{ $poll['total_likes'] }} Likes</p>
                                                         </ul>
-                                                        <h6>354 Comments</h6>
+                                                        <h6>0 Comments</h6>
                                                     </div>
                                                     <div class="posts-card-like-comment-right">
                                                         <button class="posts-card-like-btn" id="likeButton"
@@ -1220,9 +1220,9 @@
                                             value="{{ $event }}">
                                         <input type="hidden" id="hiddenVisibility" name="post_privacys"
                                             value="1">
-                                        <input type="hidden" name="post_type" id="photoPostType" value="">
+                                        <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
-                                            value="">
+                                            value="1">
                                         <input type="hidden" name="postContent" id="photoContent">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
@@ -1291,9 +1291,9 @@
                                     @csrf
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
-                                    <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
+                                    <input type="hidden" id="hiddenVisibility" name="post_privacys" value="1">
                                     <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
-                                        value="">
+                                        value="1">
                                     {{-- <input type="hidden" name="post_type" id="pollPostType" value="2"> --}}
                                     <input type="hidden" name="content" id="pollContent">
                                     <div class="mb-3">

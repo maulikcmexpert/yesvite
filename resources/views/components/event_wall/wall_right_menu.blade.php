@@ -94,84 +94,89 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul>
                 @if (!empty($guestArray))
-                @foreach ($guestArray as $guest)
-                    @if (!empty($guest['user']))
-                        @php
-                            $user = $guest['user']; // Fetch user array
-                            $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
-                            $secondInitial = isset($user['lastname'][0]) ? strtoupper($user['lastname'][0]) : '';
-                            $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                            $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                        @endphp
-                        <li class="guests-listing-info">
-                            <div class="posts-card-head-left guests-listing-left">
-                                <div class="posts-card-head-left-img">
-                                    @if (!empty($user['profile']))
-                                        <img src="{{ asset('storage/profile/' . $user['profile']) }}" alt="">
+                    @foreach ($guestArray as $guest)
+                        @if (!empty($guest['user']))
+                            @php
+                                $user = $guest['user']; // Fetch user array
+                                $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
+                                $secondInitial = isset($user['lastname'][0]) ? strtoupper($user['lastname'][0]) : '';
+                                $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                            @endphp
+                            <li class="guests-listing-info">
+                                <div class="posts-card-head-left guests-listing-left">
+                                    <div class="posts-card-head-left-img">
+                                        @if (!empty($user['profile']))
+                                            <img src="{{ asset('storage/profile/' . $user['profile']) }}"
+                                                alt="">
+                                        @else
+                                            <h5 class="{{ $fontColor }}">
+                                                {{ $initials }}
+                                            </h5>
+                                        @endif
+                                        <span class="active-dot"></span>
+                                    </div>
+                                    <div class="posts-card-head-left-content">
+                                        <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
+                                        @if (!empty($user['city']) || !empty($user['state']))
+                                            <p>
+                                                {{ $user['city'] ?? '' }}{{ !empty($user['city']) && !empty($user['state']) ? ',' : '' }}{{ $user['state'] ?? '' }}
+                                            </p>
+                                        @endif
+
+
+                                        <input type="hidden" id="eventID" value="{{ $guest['event_id'] }}">
+                                        <input type="hidden" id="user_id" value="{{ $guest['user_id'] }}">
+                                    </div>
+                                </div>
+
+                                <div class="guests-listing-right" data-guest-id="{{ $guest['id'] }}">
+                                    @if ($guest['rsvp_status'] == '1')
+                                        <!-- Approved -->
+                                        <span id="approve" data-guest-id="{{ $guest['id'] }}">
+                                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M10.0013 18.4583C5.33578 18.4583 1.54297 14.6655 1.54297 9.99996C1.54297 5.33444 5.33578 1.54163 10.0013 1.54163C14.6668 1.54163 18.4596 5.33444 18.4596 9.99996C18.4596 14.6655 14.6668 18.4583 10.0013 18.4583ZM10.0013 1.79163C5.47516 1.79163 1.79297 5.47382 1.79297 9.99996C1.79297 14.5261 5.47516 18.2083 10.0013 18.2083C14.5274 18.2083 18.2096 14.5261 18.2096 9.99996C18.2096 5.47382 14.5274 1.79163 10.0013 1.79163Z"
+                                                    fill="#23AA26" stroke="#23AA26" />
+                                                <path
+                                                    d="M8.46363 11.8285L8.81719 12.1821L9.17074 11.8285L13.4541 7.54518C13.4756 7.52365 13.5063 7.51038 13.5422 7.51038C13.578 7.51038 13.6088 7.52365 13.6303 7.54518C13.6518 7.56671 13.6651 7.59744 13.6651 7.63329C13.6651 7.66914 13.6518 7.69988 13.6303 7.72141L8.9053 12.4464C8.88133 12.4704 8.84974 12.4833 8.81719 12.4833C8.78464 12.4833 8.75304 12.4704 8.72907 12.4464L6.37074 10.0881C6.34921 10.0665 6.33594 10.0358 6.33594 9.99996C6.33594 9.96411 6.34921 9.93337 6.37074 9.91185C6.39227 9.89032 6.423 9.87704 6.45885 9.87704C6.49471 9.87704 6.52544 9.89032 6.54697 9.91185L8.46363 11.8285Z"
+                                                    fill="#23AA26" stroke="#23AA26" />
+                                            </svg>
+                                        </span>
+                                    @elseif ($guest['rsvp_status'] == '0')
+                                        <!-- Cancelled -->
+                                        <span id="cancel" data-guest-id="{{ $guest['id'] }}">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="20" height="20" rx="10" fill="#E03137" />
+                                                <path d="M5.91797 5.91663L14.0841 14.0827" stroke="white"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M5.91787 14.0827L14.084 5.91663" stroke="white"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
                                     @else
-                                        <h5 class="{{ $fontColor }}">
-                                            {{ $initials }}
-                                        </h5>
+                                        <!-- Pending -->
+                                        <span id="pending" data-guest-id="{{ $guest['id'] }}">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="20" height="20" rx="10" fill="#94A3B8" />
+                                                <path
+                                                    d="M15.8327 10C15.8327 13.22 13.2193 15.8334 9.99935 15.8334C6.77935 15.8334 4.16602 13.22 4.16602 10C4.16602 6.78002 6.77935 4.16669 9.99935 4.16669C13.2193 4.16669 15.8327 6.78002 15.8327 10Z"
+                                                    stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M12.1632 11.855L10.3549 10.7759C10.0399 10.5892 9.7832 10.14 9.7832 9.77253V7.38086"
+                                                    stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
                                     @endif
-                                    <span class="active-dot"></span>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
+                                            class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
+                                            data-guest-id="{{ $guest['id'] }}"></i></button>
                                 </div>
-                                <div class="posts-card-head-left-content">
-                                    <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
-                                    @if (!empty($user['city']) || !empty($user['state']))
-                                        <p>
-                                            {{ $user['city'] ?? '' }}{{ !empty($user['city']) && !empty($user['state']) ? ',' : '' }}{{ $user['state'] ?? '' }}
-                                        </p>
-                                    @endif
-
-
-                                </div>
-                            </div>
-                            <div class="guests-listing-right">
-                                @if ($guest['rsvp_status'] == '1')
-                                    <!-- Approved -->
-                                    <span id="approve">
-                                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M10.0013 18.4583C5.33578 18.4583 1.54297 14.6655 1.54297 9.99996C1.54297 5.33444 5.33578 1.54163 10.0013 1.54163C14.6668 1.54163 18.4596 5.33444 18.4596 9.99996C18.4596 14.6655 14.6668 18.4583 10.0013 18.4583ZM10.0013 1.79163C5.47516 1.79163 1.79297 5.47382 1.79297 9.99996C1.79297 14.5261 5.47516 18.2083 10.0013 18.2083C14.5274 18.2083 18.2096 14.5261 18.2096 9.99996C18.2096 5.47382 14.5274 1.79163 10.0013 1.79163Z"
-                                                fill="#23AA26" stroke="#23AA26" />
-                                            <path
-                                                d="M8.46363 11.8285L8.81719 12.1821L9.17074 11.8285L13.4541 7.54518C13.4756 7.52365 13.5063 7.51038 13.5422 7.51038C13.578 7.51038 13.6088 7.52365 13.6303 7.54518C13.6518 7.56671 13.6651 7.59744 13.6651 7.63329C13.6651 7.66914 13.6518 7.69988 13.6303 7.72141L8.9053 12.4464C8.88133 12.4704 8.84974 12.4833 8.81719 12.4833C8.78464 12.4833 8.75304 12.4704 8.72907 12.4464L6.37074 10.0881C6.34921 10.0665 6.33594 10.0358 6.33594 9.99996C6.33594 9.96411 6.34921 9.93337 6.37074 9.91185C6.39227 9.89032 6.423 9.87704 6.45885 9.87704C6.49471 9.87704 6.52544 9.89032 6.54697 9.91185L8.46363 11.8285Z"
-                                                fill="#23AA26" stroke="#23AA26" />
-                                        </svg>
-                                    </span>
-                                @elseif ($guest['rsvp_status'] == '0')
-                                    <!-- Cancelled -->
-                                    <span id="cancel">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="20" height="20" rx="10" fill="#E03137" />
-                                            <path d="M5.91797 5.91663L14.0841 14.0827" stroke="white"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M5.91787 14.0827L14.084 5.91663" stroke="white"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
-                                @else
-                                    <!-- Pending -->
-                                    <span id="pending">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="20" height="20" rx="10" fill="#94A3B8" />
-                                            <path
-                                                d="M15.8327 10C15.8327 13.22 13.2193 15.8334 9.99935 15.8334C6.77935 15.8334 4.16602 13.22 4.16602 10C4.16602 6.78002 6.77935 4.16669 9.99935 4.16669C13.2193 4.16669 15.8327 6.78002 15.8327 10Z"
-                                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path
-                                                d="M12.1632 11.855L10.3549 10.7759C10.0399 10.5892 9.7832 10.14 9.7832 9.77253V7.38086"
-                                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
-                                @endif
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp"><i
-                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                            </div>
-                        </li>
-                    @endif
-                @endforeach
+                            </li>
+                        @endif
+                    @endforeach
                 @endif
 
 
@@ -179,14 +184,14 @@ if ($hostView) {
             </ul>
             <div class="guests-listing-buttons">
                 <a href="" class="cmn-btn see-all-btn">See All</a>
-                <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal" data-bs-target="#addguest"><i
-                        class="fa-solid fa-plus"></i> Add Guest</button>
+                <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal"
+                    data-bs-target="#addguest"><i class="fa-solid fa-plus"></i> Add Guest</button>
             </div>
         </div>
     </div>
 
 </div>
-{{-- <div class="modal fade cmn-modal" id="editrsvp" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
+<div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -207,7 +212,7 @@ if ($hostView) {
                             <p>Adults</p>
                             <div class="qty-container ms-auto">
                                 <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                <input type="number" name="qty" value="0" class="input-qty" />
+                                <input type="number" name="adults" value="0" class="input-qty adultcount" />
                                 <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -215,7 +220,7 @@ if ($hostView) {
                             <p>Kids</p>
                             <div class="qty-container ms-auto">
                                 <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                                <input type="number" name="qty" value="0" class="input-qty" />
+                                <input type="number" name="kids" value="0" class="input-qty kidcount" />
                                 <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -224,7 +229,7 @@ if ($hostView) {
                 <div class="guest-rsvp-attend">
                     <h6>RSVP</h6>
                     <div class="input-form">
-                        <input type="radio" id="option1" name="foo" checked />
+                        <input type="radio" id="option1" name="rsvp_status" class="rsvp_yes" value="1" />
                         <label for="option1"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -236,7 +241,7 @@ if ($hostView) {
                             </svg>Attending</label>
                     </div>
                     <div class="input-form">
-                        <input type="radio" id="option2" name="foo" />
+                        <input type="radio" id="option2" name="rsvp_status" value="0" class="rsvp_no" />
                         <label for="option2"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -252,15 +257,16 @@ if ($hostView) {
                 </div>
             </div>
             <div class="modal-footer rsvp-button-wrp">
-                <button type="button" class="btn btn-secondary remove-btn" data-bs-dismiss="modal">Remove
+                <button type="button" class="btn btn-secondary remove-btn remove-Rsvp-btn"
+                    data-bs-dismiss="modal">Remove
                     Guest</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+                <button type="button" class="btn btn-secondary save-rsvp" data-bs-dismiss="modal">Update</button>
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 <!-- ========= Add-guest ======== -->
-<div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true" >
+<div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -526,7 +532,7 @@ if ($hostView) {
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="guest-users-wrp selected-phone-list" >
+                        <div class="guest-users-wrp selected-phone-list">
                             <div class="guest-user">
                                 <div class="guest-user-img">
                                     <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="guest-img">
@@ -770,7 +776,8 @@ if ($hostView) {
             </div>
             {{-- <input type="hidden" id="event_id" value=""> --}}
             <div class="modal-footer rsvp-button-wrp">
-                <button type="button" class="btn btn-secondary success-btn add_guest" data-bs-dismiss="modal">Re-send</button>
+                <button type="button" class="btn btn-secondary success-btn add_guest"
+                    data-bs-dismiss="modal">Re-send</button>
             </div>
         </div>
     </div>
