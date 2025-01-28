@@ -169,7 +169,7 @@
               @php
                 $i++;
               @endphp
-                <div class="accordion-item main-notification-div-list" data-event_id="{{$value[0]['event_id']}}">
+                <div class="accordion-item main-notification-div-list">
                   <h2 class="accordion-header">
                     <button
                       class="accordion-button collapsed"
@@ -178,6 +178,7 @@
                       data-bs-target="#collapseOne{{$i}}"
                       aria-expanded="true"
                       aria-controls="collapseOne"
+                      data-event_id="{{$value[0]['event_id']}}"
                     >
                       <div class="accordion-button-wrp">
                         <div class="accordion-button-img-wrp">
@@ -285,7 +286,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -328,7 +331,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -377,7 +382,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -423,7 +430,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -472,7 +481,9 @@
                                       @endphp
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                                     @else
+                                      <span class="active-dot"></span>
+
+                                      @else
                                        {!! $userProfile !!}
                                     <span class="active-dot"></span>
                                     @endif
@@ -820,11 +831,12 @@
                                   @endphp
                                   @if($inner_data['profile']!="")
                                   <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                  <span class="active-dot"></span>
+
                                 @else
                                   {!! $userProfile !!}
                                 <span class="active-dot"></span>
                                 @endif
-                                  <span class="active-dot"></span>
                                 </div>
                                 <div class="notification-drodown-body-inner-content">
                                   <div>
