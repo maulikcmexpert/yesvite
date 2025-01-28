@@ -520,11 +520,11 @@ class HomeController extends BaseController
     public function notificationAll(Request $request)
     {
 
-        $user  = Auth::guard(name: 'web')->user();
+        $user  = Auth::guard( 'web')->user()->id;
 
 
         $notfication_data = getNotificationList();
-        $eventList= getAllEventList($user_id->id);
+        $eventList= getAllEventList($user);
 
         return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render(),"event_list"=>view('front.notification.search_filter_event', compact('eventList'))->render()]);
     }

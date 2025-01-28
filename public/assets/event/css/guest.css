@@ -729,6 +729,11 @@
         overflow-y: scroll;
         max-height: calc(100vh - 210px) !important;
     }
+    .all-user-contacts-sidebar{
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 25vh);
+      }      
 }
 
 @media only screen and (max-width:768px) {
