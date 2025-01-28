@@ -1985,27 +1985,27 @@ class EventWallController extends Controller
             }
 
 
-            if (isset($newInvite) && !empty($newInvite)) {
+            // if (isset($newInvite) && !empty($newInvite)) {
 
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $request['event_id'],
-                    'newUser' => $newInvite
-                ];
-                // dd($newInvite);
-                // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
-                sendNotification('invite', $notificationParam);
-            }
-            if (isset($newInviteGuest) && !empty($newInviteGuest)) {
-                $notificationParam = [
-                    'sender_id' => $user->id,
-                    'event_id' => $request['event_id'],
-                    'newUser' => $newInviteGuest
-                ];
-                sendNotificationGuest('invite', $notificationParam);
-            }
+            //     $notificationParam = [
+            //         'sender_id' => $user->id,
+            //         'event_id' => $request['event_id'],
+            //         'newUser' => $newInvite
+            //     ];
+            //     // dd($newInvite);
+            //     // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
+            //     sendNotification('invite', $notificationParam);
+            // }
+            // if (isset($newInviteGuest) && !empty($newInviteGuest)) {
+            //     $notificationParam = [
+            //         'sender_id' => $user->id,
+            //         'event_id' => $request['event_id'],
+            //         'newUser' => $newInviteGuest
+            //     ];
+            //     sendNotificationGuest('invite', $notificationParam);
+            // }
 
-            debit_coins($user->id, $request['event_id'], count($ids));
+            // debit_coins($user->id, $request['event_id'], count($ids));
         }
 
 
