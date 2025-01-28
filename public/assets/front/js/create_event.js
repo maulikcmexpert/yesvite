@@ -909,9 +909,9 @@ function datepicker() {
             // const picker = $(this).data("DateTimePicker");
             // const startTime = $(this).closest("div").find(".activity_start_time").val();
             // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
-            const startMoment = moment(startTime, "LT") ;
+            // const startMoment = moment(startTime, "LT") ;
             
-            picker.date(startMoment.clone().add(1, "hours"));
+            // picker.date(startMoment.clone().add(1, "hours"));
 
             // const currentActivity = $(this).closest(".activity-main-wrp");
             // const nextActivity = currentActivity.next(".activity-main-wrp"); // Find the next activity
@@ -925,7 +925,24 @@ function datepicker() {
 
             
             // Set end time to 1 hour after start time if it's empty (only in picker)
-            $(this).val(startMoment);
+            // $(this).val(startMoment);
+            const picker = $(this).data("DateTimePicker");
+    
+            // Get the selected end time directly from the picker
+            const selectedEndTime = picker.date();
+            
+            if (selectedEndTime) {
+                // If a time is selected, update the input field with the selected time
+                $(this).val(selectedEndTime.format("LT"));
+            } else {
+                // If no time is selected, set it to 1 hour after start time
+                const startTime = $(this)
+                    .closest(".activity-main-wrp")
+                    .find('input[name="activity-start-time[]"]')
+                    .val();
+                const startMoment = moment(startTime, "LT");
+                $(this).val(startMoment.clone().add(1, "hours").format("LT"));
+            }
         });
     });
 }
