@@ -71,6 +71,7 @@ class TransactionDataTable extends DataTable
                     });
                 }
             })
+            dd($row);
             ->addColumn('user', function ($row) {
                 return $row->users->firstname . ' ' . $row->users->lastname;
             })
