@@ -1014,7 +1014,7 @@ class EventController extends BaseController
                 }
             }
 
-            
+
             // if ($request->thankyou_message == "1") {
             //     $thankyou_card = session('thankyou_card_data');
             //     if (isset($thankyou_card) && !empty($thankyou_card)) {
@@ -1473,7 +1473,7 @@ class EventController extends BaseController
             'category_index' => $category_index,
             'category_item' => --$category_item,
         ];
-       
+
         // Dd($data)
         // return view('front.event.potluck.potluckCategoryItem', $data);
 
@@ -2846,6 +2846,33 @@ class EventController extends BaseController
         } else {
             $event_creation = new Event();
         }
+        
+        
+        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state . ' ' . $event_creation->zipcode . ' ' . $event_creation->city;
+        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state . ' ' . $request->zipcode . ' ' . $request->city;
+        $isaddress = 0;
+        if ($oldAddress !== $newAddress) {
+            $isaddress = 1;
+        }
+        
+        
+        $newstart_time = $request->start_time;
+        $oldstart_time = $event_creation->rsvp_start_time;
+        $istime = 0;
+        
+        if ($oldstart_time !== $newstart_time) {
+            $istime = 1;
+        }
+
+
+        $newstart_date = $request->start_date;
+        $oldstart_date = $event_creation->start_date;
+        $isupdatedate = 0;
+        
+        if ($oldstart_time !== $newstart_time) {
+            $isupdatedate = 1;
+        }
+
 
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
@@ -3224,6 +3251,60 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                }
+            }
+            if ($request->is_update_event == '1') {
+                if ($isaddress != 0 && $request->address1 != "") {
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_addr' => $oldAddress,
+                        'to_addr' => $newAddress,
+                        'newUser' => $filteredIds,
+                    ];
+
+                    sendNotification('update_address', $notificationParam);
+                }
+
+                if (isset($istime) && $istime == 1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_time' => $oldstart_time,
+                        'to_time' =>  $newstart_time,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_time', $notificationParam);
+                }
+
+
+                if (isset($isupdatedate) && $isupdatedate == 1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => $guest['isAlready'] != "1")
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'old_start_end_date' => $oldstart_date,
+                        'new_start_end_date' => $newstart_date,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_date', $notificationParam);
                 }
             }
 
