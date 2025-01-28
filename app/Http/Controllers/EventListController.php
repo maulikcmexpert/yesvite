@@ -20,6 +20,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Throwable;
+
 use Illuminate\Http\Request;
 
 class EventListController extends Controller
@@ -681,7 +682,7 @@ class EventListController extends Controller
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;
-                $eventPastDetail['event_wall'] = $value->event_settings->event_wall;
+                $eventPastDetail['event_wall'] =(isset($value->event_settings->event_wall)&&$value->event_settings->event_wall!="")?$value->event_settings->event_wall:"";
                 $eventPastDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                 $eventPastDetail['event_potluck'] = $value->event_settings->podluck;
                 $eventPastDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
@@ -885,7 +886,7 @@ class EventListController extends Controller
                 $eventDetail['user_id'] = $value->user->id;
                 $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventDetail['message_to_guests'] = $value->message_to_guests;
-                $eventDetail['event_wall'] = $value->event_settings->event_wall;
+                $eventDetail['event_wall'] = (isset($value->event_settings->event_wall)&&$value->event_settings->event_wall!="")?$value->event_settings->event_wall:"";
                 $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                 $eventDetail['event_potluck'] = $value->event_settings->podluck;
                 $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
@@ -1090,7 +1091,7 @@ class EventListController extends Controller
                 $eventDetail['user_id'] = $value->user->id;
                 $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventDetail['message_to_guests'] = $value->message_to_guests;
-                $eventDetail['event_wall'] = $value->event_settings->event_wall;
+                $eventDetail['event_wall'] = (isset($value->event_settings->event_wall)&&$value->event_settings->event_wall!="")?$value->event_settings->event_wall:"";;
                 $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                 $eventDetail['event_potluck'] = $value->event_settings->podluck;
                 $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
@@ -1367,7 +1368,7 @@ class EventListController extends Controller
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;
-                $eventPastDetail['event_wall'] = $value->event_settings->event_wall;
+                $eventPastDetail['event_wall'] = (isset($value->event_settings->event_wall)&&$value->event_settings->event_wall!="")?$value->event_settings->event_wall:"";;
                 $eventPastDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
                 $eventPastDetail['event_potluck'] = $value->event_settings->podluck;
                 $eventPastDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
@@ -1855,7 +1856,7 @@ class EventListController extends Controller
                     }
                     $eventDetail['message_to_guests'] = $value->event->message_to_guests;
                     $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
-                    $eventDetail['event_wall'] = (isset($value->event->event_settings->event_wall)&&$value->event_settings->allow_limit!="")?$value->event_settings->allow_limit:"";
+                    $eventDetail['event_wall'] = (isset($value->event->event_settings->event_wall)&&$value->event->event_settings->event_wall!="")?$value->event->event_settings->event_wall:"";
                     $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
                     $eventDetail['event_potluck'] = (isset($value->event->event_settings->podluck)&&$value->event->event_settings->podluck!="")?$value->event->event_settings->podluck:"";
@@ -2397,7 +2398,7 @@ class EventListController extends Controller
                     $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
                     $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
                     $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
-                    $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
+                    $notificationDetail['event_wall'] = (isset($values->event->event_settings->event_wall)&&$values->event->event_settings->event_wall!="")?$values->event->event_settings->event_wall:"";
                     $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
                     $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
                     $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
@@ -2508,7 +2509,129 @@ class EventListController extends Controller
         return response()->json(['status' => 1, 'unread_count' => $unreadCount,'data' => $final_data, 'message' => "Notification list"]);
     }
 
+
+    public function mark_as_read(Request $request)
+    {
+        $eventId=$request->event_id;
+        $user = Auth::guard('web')->user();
+        $notify=Notification::where(['event_id' => $eventId, 'user_id' => $user->id])->update(['read' => '1']);
+
+ 
+    }
+
+    public function store_rsvp(Request $request)
+    {
+        try {
+            $userId = $request->rsvp_user_id;
+              $eventId = $request->rsvp_event_id;
+              $adults =($request->rsvp_notification_adult!=null)?intval($request->rsvp_notification_adult) :0;
+              $kids =  ($request->rsvp_notification_kids!=null)?intval($request->rsvp_notification_kids) :0;
+             $rsvp_status= $request->rsvp_status;
+            //   dd($userId,$eventId,$adults,$kids);
+    $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            // $query->where('app_user', '1');s
+        })->where(['event_id' => $eventId,'user_id'=>$userId])->first();
+
+
+$rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
+// dd($rsvpSentAttempt,$rsvp_status);
+if ($rsvpSent != null) {
+    $rsvp_attempt = "";
+    if ($rsvpSentAttempt == NULL) { 
+        $rsvp_attempt =  'first';
+    } else if ($rsvpSentAttempt == '0' && $rsvp_status == '1') {
+        $rsvp_attempt =  'no_to_yes';
+    } else if ($rsvpSentAttempt == '1' && $rsvp_status == '0') {
+        $rsvp_attempt =  'yes_to_no';
+    }
+
+    if($rsvpSentAttempt=="1"&&$rsvp_status=="1"){
+        return response()->json(['status' => 3, 'text' => 'You have already done rsvp yes']);
+    }
+
+    if($rsvpSentAttempt=="0"&&$rsvp_status=="0"){
+        return response()->json(['status' => 3, 'text' => 'You have already done rsvp No']);
+    }
+    $rsvpSent->event_id = $request->rsvp_event_id;
+
+    $rsvpSent->user_id = $request->rsvp_user_id;
+  
+    $rsvpSent->rsvp_status = $request->rsvp_status;
+
+    $rsvpSent->adults = $adults;
+
+    $rsvpSent->kids = $kids;
+
+    $rsvpSent->message_to_host = $request->rsvp_notification_message;
+    $rsvpSent->rsvp_attempt = $rsvp_attempt;
+
+    $rsvpSent->read = '1';
+    $rsvpSent->rsvp_d = '1';
+
+    $rsvpSent->event_view_date = date('Y-m-d');
+
+    $rsvpSent->save();
+
+    if ($rsvpSent->save()) {
+        EventPost::where('event_id', $eventId)
+            // ->where('user_id', $userId)
+            ->where(function ($query) use ($userId) {
+            
+                    $query->where('user_id', $userId);
+              
+            })
+        
+            ->where('post_type', '4')->delete();
+        $postMessage = [];
+        $postMessage = [
+            'status' => ($request->rsvp_status == '0') ? '2' : '1',
+            'adults' =>  $adults,
+            'kids' => $kids,
+        ];
+        $creatEventPost = new EventPost();
+        $creatEventPost->event_id = $eventId;
+        $creatEventPost->user_id =  $userId;
+        $creatEventPost->post_message = json_encode($postMessage);
+        $creatEventPost->post_privacy = "1";
+        $creatEventPost->post_type = "4";
+        $creatEventPost->commenting_on_off = "0";
+        $creatEventPost->is_in_photo_moudle = "0";
+        $creatEventPost->save();
+        // dd($creatEventPost);
+    }
+    $notificationParam = [
+        'sync_id'=>"",
+        'sender_id' => $userId,
+        'event_id' => $eventId,
+        'rsvp_status' => $request->rsvp_status,
+        'kids' =>  $kids,
+        'adults' => $adults,
+        'rsvp_video' => "",
+        'rsvp_message' => $request->rsvp_notification_message,
+        'post_id' => "",
+        'rsvp_attempt' => $rsvp_attempt
+    ];
+
+
+        sendNotification('sent_rsvp', $notificationParam);   
+
+
+    if ($request->rsvp_status == "1") {
+        return response()->json(['status' => 1, 'text' => 'You are going to this event']);
+        // return redirect()->to($url)->with('msg', 'You are going to this event');
+    } elseif ($request->rsvp_status == "0") {
+        return response()->json(['status' => 0, 'text' => 'You are not going to this event']);
+        // return redirect()->to($url)->with('msg', 'You are going to this event');
+    }
+    
+  
 }
+
+} catch (QueryException $e) {
+} catch (\Exception $e) {
+}
+
+
 
 // foreach($a as $b){
 
@@ -2517,4 +2640,31 @@ class EventListController extends Controller
 //     foreach($c as $d){
 
 //     }
-// }
+    }
+
+    public function filter_search_event(Request $request){
+        $eventName=$request->search_event;
+        $eventList = [];
+        $user_id  = Auth::guard('web')->user()->id;
+
+        $eventData = EventInvitedUser::where(['user_id' => $user_id])->get();
+
+        $eventList = [];
+        
+        foreach ($eventData as $val) {
+    
+            $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
+            foreach ($eventDatas as $vals) {
+                $eventDetail['id'] = $vals->id;
+                $eventDetail['event_name'] = $vals->event_name;
+                $eventList[] = $eventDetail;
+            }
+        }
+        if(empty($eventList)){
+            return response()->json(['view' => 'No Data Found']);
+        }
+        return response()->json(['view' => view( 'front.notification.search_filter_event', compact('eventList'))->render()]);
+
+
+    }
+}

@@ -7085,7 +7085,7 @@ class ApiControllerv2 extends Controller
                 }
                 if ($user->id == $request->user_id) {
                     $notificationParam = [
-
+                        'sync_id'=>"",
                         'sender_id' => $user->id,
                         'event_id' => $request->event_id,
                         'rsvp_status' => $request->rsvp_status,

@@ -1322,11 +1322,20 @@ function bindData(current_event_id) {
         }
         let targetFontFamily = target.fontFamily;
         $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
-        console.log(target.fontSize);
+
+        const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
+        const percentageValue = (charSpacing / 500) * 100; // Normalize to percentage
+
+        // Update the input box with the percentage value
+        $("#letterSpacingInput").val(`${percentageValue.toFixed(0)}%`);
+
+        // Update the range slider with the original value
+        $("#letterSpacingRange").val(charSpacing);
+
         $("#fontSizeInput").val(target.fontSize);
         $("#fontSizeRange").val(target.fontSize);
-        $("#letterSpacingInput").val(target.charSpacing);
-        $("#letterSpacingRange").val(target.charSpacing);
+        // $("#letterSpacingInput").val(target.charSpacing);
+        // $("#letterSpacingRange").val(target.charSpacing);
         $("#lineHeightInput").val(target.lineHeight);
         $("#lineHeightRange").val(target.lineHeight);
         $(".size-btn").removeClass("activated");
@@ -1425,15 +1434,29 @@ function bindData(current_event_id) {
 
     // Set letter spacing function
     const setLetterSpacing = () => {
-        const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
-        letterSpacingInput.value = newValue;
-        letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
+        const sliderValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
+        const percentageValue = (sliderValue / 500) * 100; // Normalize to percentage
 
+        // Update the input with the percentage value
+        letterSpacingInput.value = `${percentageValue.toFixed(0)}%`;
+        letterSpacingTooltip.innerHTML = `<span>${percentageValue.toFixed(
+            0
+        )}%</span>`;
+
+        // Log the slider value and percentage for debugging
+        console.log(
+            `Slider Value: ${sliderValue}, Percentage: ${percentageValue.toFixed(
+                0
+            )}%`
+        );
+
+        // Update the canvas object
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
-            activeObject.set("charSpacing", newValue); // Update letter spacing
+            // Convert slider value directly to character spacing
+            activeObject.set("charSpacing", sliderValue);
 
-            // Now call updateTextboxWidth to handle width adjustments
+            // Adjust textbox width accordingly
             updateTextboxWidth(activeObject);
         }
     };
@@ -1460,12 +1483,24 @@ function bindData(current_event_id) {
         }, 500);
     });
 
+    // Attach event listeners
     letterSpacingRange.addEventListener("input", setLetterSpacing);
     letterSpacingInput.addEventListener("input", () => {
-        letterSpacingRange.value = letterSpacingInput.value;
-        setTimeout(() => {
-            setLetterSpacing();
-        }, 500);
+        // Remove the "%" symbol before synchronizing with the range slider
+        const inputValue = parseFloat(
+            letterSpacingInput.value.replace("%", "")
+        );
+        if (!isNaN(inputValue) && inputValue <= 100) {
+            const sliderValue = Math.round((inputValue / 100) * 500); // Map percentage to slider value
+            letterSpacingRange.value = sliderValue;
+            setTimeout(() => {
+                setLetterSpacing();
+            }, 500);
+        } else {
+            console.log(
+                "Invalid input: Please enter a value between 0% and 100%"
+            );
+        }
     });
 
     lineHeightRange.addEventListener("input", setLineHeight);
@@ -2413,9 +2448,12 @@ function bindData(current_event_id) {
     }
 
     function undo() {
+        console.log("undoStack", undoStack.length);
         if (undoStack.length > 0) {
             // Ensure at least one previous state exists
-
+            if (undoStack.length == 1) {
+                $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
             canvas.loadFromJSON(lastState, function () {
@@ -2439,6 +2477,9 @@ function bindData(current_event_id) {
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll(); // Render the canvas after loading state
             });
+            if (redoStack.length == 1) {
+                $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
             if (undoStack.length > 0) {
                 $("#undoButton").find("svg path").attr("fill", "#0F172A");
             }

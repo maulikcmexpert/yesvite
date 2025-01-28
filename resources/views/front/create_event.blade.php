@@ -1378,6 +1378,7 @@
                                         <h5 class="category_name-{{ $index }}">{{ $data['category'] }}</h5>
                                         <p>Total Commited</p>
                                     </div>
+                                    
                                     <div class="ms-auto d-flex align-items-center ">
                                         @if ($data['remainingQnt'] > 0)
                                             <span
@@ -1409,8 +1410,8 @@
                                                 style="color: rgb(52, 192, 92);"><span
                                                     id="missing-category-{{ $index }}">0</span> Missing</h6>
                                         @endif
-                                        <input type="hidden" class="total-potluck-category{{ $index }}"
-                                            value="{{$data['totalItem']}}">
+                                        <input type="hidden" class="total-potluck-category-{{ $index }}"
+                                            value="{{ $data['quantity'] }}">
                                         <a href="#" class="me-3 add_potluck_item"
                                             id="potluck-{{ $index }}" data-id="{{ $index }}"
                                             style="{{($data['quantity'] > $data['totalItem']) ? '' : 'display:none'}}">
@@ -1500,8 +1501,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="list-slide list-slide-{{ $index }}">
                                 @foreach ($data['items'] as $itemkey=> $items)
-                                    <div class="list-slide list-slide-{{ $index }}">
                                         <div class="accordion accordion-flush" id="accordioncatList">
                                             <div class="accordion-item green-border">
                                                 <h2 class="accordion-header" id="lumpia">
@@ -1633,10 +1634,12 @@
                                                                                     stroke-linejoin="round"></path>
                                                                             </svg>
                                                                         </a>
-                                                                        <a href="#" class="delete-self-bring"
+                                                                        <a href="#" class="delete-self-bring" id="deleteBring-{{ $itemkey }}-{{ $index }}"
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
                                                                             data-innerUserQnt="{{ $items['innerUserQnt'] }}"
+                                                                            data-userqnt="{{ $values['quantity'] }}",
+                                                                            data-extraquantity="0"
                                                                             data-itemquantity="{{ $items['quantity'] }}">
                                                                             <svg width="16" height="16"
                                                                                 viewBox="0 0 16 16" fill="none"
@@ -1764,10 +1767,11 @@
                                                                                     stroke-linejoin="round"></path>
                                                                             </svg>
                                                                         </a>
-                                                                        <a href="#" class="delete-self-bring"
+                                                                        <a href="#" class="delete-self-bring" id="deleteBring-{{ $itemkey }}-{{ $index }}"
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
                                                                             data-itemquantity="{{ $items['quantity'] }}"
+                                                                            data-extraquantity="0"
                                                                             data-inneruserqnt="{{ $items['innerUserQnt'] }}"
                                                                             data-userquantity="{{ $values['quantity'] }}">
                                                                             <svg width="16" height="16"
@@ -1817,8 +1821,8 @@
 
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
                             </div>
                             <a href="#" class="listing-arrow">
                                 <svg width="14" height="8" viewBox="0 0 14 8" fill="none"

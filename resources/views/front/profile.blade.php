@@ -19,8 +19,8 @@
                                 Edit Profile</a> -->
                         <a href="{{route('profile.edit')}}" class="cmn-btn edit-btn">
                             Edit Profile</a>
-                        <a href="#" class="cmn-btn edit-btn sidebar-btn create-event-btn" >
-                            Create Event</a>
+                        <!-- <a href="#" class="cmn-btn edit-btn sidebar-btn create-event-btn" >
+                            Create Event</a> -->
                     </div>
                     <div class="profile-wrapper">
                         <div class="profile-img">
@@ -72,6 +72,7 @@
                                 <h6>{{$user->about_me}} </h6>
                                 <p>Member Since:{{$user->join_date}}</p>
                             </div>
+                       
                             <div class="user-contact-data">
                                 @if($user->gender != NULL)
                                 <div>

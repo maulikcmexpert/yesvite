@@ -117,11 +117,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-if (
-    giftRegestryDataRaw.length > 0 &&
-    giftRegestryDataRaw != "null" &&
-    giftRegestryDataRaw != undefined
-) {
+if (giftRegestryDataRaw.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
         giftRegestryData.forEach(function (item) {
@@ -742,6 +738,7 @@ function getClosest15MinuteTime() {
 //     $(this).val("");
 // }
 // datepicker();
+
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
         const startPicker = $(this)
@@ -758,7 +755,7 @@ function datepicker() {
             .on("dp.show", function () {
                 const picker = $(this).data("DateTimePicker");
                 const previousEndTime =
-                    index + 1 > 0
+                    index > 0
                         ? $(".activity_end_time")
                               .eq(index - 1)
                               .val()
@@ -781,11 +778,9 @@ function datepicker() {
                     .eq(index)
                     .data("DateTimePicker");
 
-                if (endTimePicker) {
-                    // Set the end time picker to one hour after the selected start time
-                    const endTime = selectedStartTime.clone().add(1, "hours");
-                    endTimePicker.date(endTime);
-                }
+                // Set the end time picker to one hour after the selected start time
+                const endTime = selectedStartTime.clone().add(1, "hours");
+                endTimePicker.date(endTime);
             });
 
         // Ensure input field is clear when the page loads
@@ -823,22 +818,23 @@ function datepicker() {
                     : moment().hours(12).minutes(0).seconds(0);
                 $(this).val(selectedEndTime.format("LT"));
 
-                const nextStartTime = $(".activity_start_time").eq(index + 2);
+                // Set the next start time based on the selected end time
+                const nextStartTime = $(".activity_start_time").eq(index + 1);
                 if (nextStartTime.length) {
                     const startPicker = nextStartTime.data("DateTimePicker");
-                    if (startPicker) {
-                        const newStartTime = selectedEndTime
-                            .clone()
-                            .add(1, "hours");
-                        startPicker.date(newStartTime);
-                    }
+                    const newStartTime = selectedEndTime
+                        .clone()
+                        .add(1, "hours");
+                    startPicker.date(newStartTime);
                 }
             });
 
-        //     // Ensure input field is clear when the page loads
-        //     $(this).val("");
+        // Ensure input field is clear when the page loads
+        $(this).val("");
     });
 }
+
+datepicker();
 
 function startTimePicker() {
     $(".start_timepicker")
@@ -913,22 +909,7 @@ function endTimePicker() {
 $(document).ready(function () {
     startTimePicker();
     endTimePicker();
-    datepicker();
 });
-
-// $(".activity_end_time").on("change", function () {
-//     // Get the current activity ID
-//     var activityId = $(this).closest('.activity-main-wrp').data('id');
-
-//     // Find the corresponding start_time and end_time fields for this activity
-//     var startTimeField = $("div[data-id='" + activityId + "'] .activity_start_time");
-//     var endTimeField = $("div[data-id='" + activityId + "'] .activity_end_time");
-
-//     // Update the current start_time and end_time
-//     // This part can be adjusted based on how you want to set the new times
-//     startTimeField.val("09:00 AM"); // Example value, adjust accordingly
-//     endTimeField.val("05:00 PM"); // Example value, adjust accordingly
-// });
 
 // datepicker();
 // start_timepicker();
@@ -2105,7 +2086,6 @@ $(document).on("click", ".edit_category", function () {
 
 $(document).on("click", ".add_potluck_item", function () {
     var potluckkey = $(this).data("id");
-
     var categoryName = $(".category_name-" + potluckkey).text();
     setPotluckActivekey(potluckkey, categoryName);
     toggleSidebar("sidebar_addcategoryitem");
@@ -2114,6 +2094,7 @@ $(document).on("click", ".add_potluck_item", function () {
 $(document).on("click", ".add_category_item_btn", function () {
     var category_index = $("#category_index").val();
     var category_name = $("#hidden_category_name").val();
+    var totalmissing = $("#missing-category-" + activePotluck).text();
     var category_quantity = $("#hidden_category_quantity").val();
     var itemName = $("#item_name").val();
     if (itemName == "") {
@@ -2151,6 +2132,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             selfbring: self_bring,
             self_bringQuantity: self_bringQuantity,
             itemQuantity: itemQuantity,
+            totalmissing: totalmissing,
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
@@ -2623,7 +2605,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        // datepicker();
+        datepicker();
     }
 });
 
@@ -4843,6 +4825,7 @@ function plusBTN(that) {
     console.log({ categoryItemQuantity, quantity });
     if (categoryItemQuantity >= quantity + isvalidUserQnt) {
         update_self_bring(
+            that,
             isvalidUserQnt,
             categoryItemKey,
             categoryIndexKey,
@@ -4853,8 +4836,7 @@ function plusBTN(that) {
     } else {
         quantity--;
 
-        console.log(that.parent().find(".inputs-qty").val());
-        that.parent().find(".inputs-qty").val("5");
+        that.parent().children(".input-qty").val(quantity);
     }
 }
 $(".qty-btnminus").on("click", function () {
@@ -4885,6 +4867,7 @@ function minusBTN(that) {
     if (categoryItemQuantity >= quantity + isvalidUserQnt) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
+                that,
                 isvalidUserQnt,
                 categoryItemKey,
                 categoryIndexKey,
@@ -4894,11 +4877,11 @@ function minusBTN(that) {
             );
             if (quantity == 0) {
                 that.parent().find(".item-quantity-minus").val(0);
-                that.parent().find(".input-qty").val(0);
+                that.parent().children(".input-qty").val(0);
             }
         }
     } else {
-        that.parent().find(".input-qty").val(0);
+        // that.parent().find(".input-qty").val(0);
     }
 }
 
@@ -5047,7 +5030,10 @@ $(document).on("click", ".delete-self-bring", function () {
     var userquantity = parseInt(
         $(this).parent().parent().find(".input-qty").val()
     );
-    var innerUserQnt = $(this).data("inneruserqnt");
+    var innerUserQnt = parseInt($(this).data("inneruserqnt"));
+    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
+    var userqnt = parseInt($(this).data("userqnt"));
+    var isvalidUserQntity = isNaN(userqnt) ? 0 : userqnt;
 
     $(this).parent().parent().hide();
     var self_bring_quantity = $(this)
@@ -5063,21 +5049,21 @@ $(document).on("click", ".delete-self-bring", function () {
 
     total_category_count = total_category_count - parseInt(self_bring_quantity);
     $(".total-self-bring-" + categoryIndexKey).text(total_category_count);
-    var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     $(this)
         .parent()
         .parent()
         .find(".qty-container")
         .children(".input-qty")
         .val(0);
-
+    var that = $(this);
     // console.log({categoryItemKey,categoryIndexKey, itemquantity,self_bring_quantity})
     // $(this).parent().closest('.qty-container').find('.input-qty').val(0);
     update_self_bring(
-        innerUserQnt,
+        that,
+        isvalidUserQnt,
         categoryItemKey,
         categoryIndexKey,
-        userquantity,
+        0,
         itemquantity
     );
 });
@@ -7490,7 +7476,7 @@ $("#YesviteContactsAll").on("scroll", function () {
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
 
-    if (scrollTop + elementHeight >= scrollHeight - 2) {
+    if (scrollTop + elementHeight >= scrollHeight) {
         busycontact = true;
         offsetcontact += limitcontact;
         var type = "phone";
@@ -7833,8 +7819,12 @@ $(document).on("click", ".delete_silder", function (e) {
 });
 
 $(document).on("click", ".edit_checkout", function (e) {
-    eventData.is_update_event = "0";
     eventData.isDraftEdit = $(this).attr("data-isDraftEdit");
+    if (isDraftEdit) {
+        eventData.is_update_event = "0";
+    } else {
+        eventData.is_update_event = "1";
+    }
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -7888,6 +7878,7 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
+            console.log(eventData.slider_images);
             if (
                 eventData.slider_images != undefined &&
                 eventData.slider_images != ""
@@ -7903,15 +7894,14 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-                photoSliders.forEach((sliderId, index) => {
-                    const sliderElement =
-                        document.getElementsByClassName(sliderId); // Get the slider by ID
+                console.log(sliderImages);
+
+                photoSliders.forEach((sliderClass, index) => {
+                    const sliderElement = document.querySelector(
+                        `.${sliderClass}`
+                    ); // Select the slider by class
                     if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${
-                            base_url +
-                            "public/storage/event_images/" +
-                            sliderImages[index].fileName
-                        }`; // Set the image URL
+                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`; // Set the image URL
                     }
                 });
             } else {
@@ -8148,6 +8138,7 @@ function step3open() {
         if (stepVal == "0") {
             get_user(type);
         }
+        $("#CheckCuurentStep").val("1");
     }
 }
 
@@ -8239,8 +8230,10 @@ function step4open() {
         }
     }
 }
-
+var remainingCategoryCount = 0;
+var remainingCategoryCountn = 0;
 function update_self_bring(
+    that,
     innerUserQnt,
     categoryItemKey,
     categoryIndexKey,
@@ -8259,27 +8252,92 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            // var newdata = $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text();
+            // var parts = newdata.split('/');
+            // var remain = parseInt(parts[0], 10);
             console.log(quantity + "/" + categoryItemQuantity);
-            $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                innerUserQnt + quantity + "/" + categoryItemQuantity
-            );
-
+            if (type == undefined) {
+                $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
+                    innerUserQnt + 0 + "/" + categoryItemQuantity
+                );
+            } else {
+                $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
+                    innerUserQnt + quantity + "/" + categoryItemQuantity
+                );
+            }
+            // let remaining_count  = remain -  categoryItemQuantity
             var categoryItem = parseInt(
                 $(".missing-category-h6-" + categoryIndexKey).text()
             );
-            let remainingCategoryCount = 0;
+
+            // $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey).data('extraquantity');
+            // if( categoryItemQuantity < quantity || categoryItem == 0 ){
+            //     $(".extra-category-h6-" + categoryIndexKey).show();
+            //     $("#extra-category-" + categoryIndexKey).show();
+            //     var categoryItemextra = parseInt(
+            //         $(".extra-category-h6-" + categoryIndexKey).text()
+            //     );
+            //     if (type == undefined){
+            //         if(remaining_count  > 0){
+            //             remainingCategoryCountn = remainingCategoryCountn - remaining_count;
+            //             $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
+            //         }
+            //         remainingCategoryCount = categoryItem + categoryItemQuantity -  innerUserQnt;
+            //         $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
+            //     }else if(type == "plus") {
+            //         remainingCategoryCountn = categoryItemextra + 1
+            //     }else{
+            //         remainingCategoryCountn = categoryItemextra - 1;
+            //     }
+            //     if(remainingCategoryCountn == 0){
+            //         $(".extra-category-h6-" + categoryIndexKey).hide();
+            //         $("#extra-category-" + categoryIndexKey).hide();
+            //     }
+            //     if(remainingCategoryCountn >=0){
+            //         $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
+            //     }
+            //     if(remaining_count  > 0){
+            //         $("#missing-category-" + categoryIndexKey).text(1);
+            //         var svg =
+            //         '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" /></svg>';
+            //         $(".missing-category-svg-" + categoryIndexKey).html(svg);
+            //         $(".missing-category-h6-" + categoryIndexKey).css(
+            //             "color",
+            //             "#E20B0B"
+            //         );
+            //     }
+            // }else{
             if (type == undefined) {
-                remainingCategoryCount = categoryItem + quantity;
+                if (remaining_count > 0) {
+                    remainingCategoryCountn =
+                        remainingCategoryCountn - remaining_count;
+                    $("#extra-category-" + categoryIndexKey).text(
+                        remainingCategoryCountn
+                    );
+                }
+                remainingCategoryCount =
+                    categoryItem + categoryItemQuantity - innerUserQnt;
             } else if (type == "plus") {
                 remainingCategoryCount = categoryItem - 1;
             } else {
                 remainingCategoryCount = categoryItem + 1;
             }
+            // if(remainingCategoryCountn == 0){
+            //     $(".extra-category-h6-" + categoryIndexKey).hide();
+            //     $("#extra-category-" + categoryIndexKey).hide();
+            // }
             $("#missing-category-" + categoryIndexKey).text(
                 remainingCategoryCount
             );
 
+            // }
+            // if(remainingCategoryCount <0){
+            //     $("#extra-category-" + categoryIndexKey).text(remainingCategoryCount);
+            // }else{
+            // }
+
             // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
+
             if (remainingCategoryCount == 0) {
                 // if (response == 0) {
                 var svg =
@@ -8299,6 +8357,7 @@ function update_self_bring(
                     "#E20B0B"
                 );
             }
+
             $(
                 ".category-item-total-" +
                     categoryItemKey +
