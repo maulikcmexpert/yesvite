@@ -916,6 +916,9 @@ $('#notification_rsvp_btn').on('click', function (e) {
     if(selectedValue=="1"){
         if(adults=="0" && kids=="0"){
             toastr.error('Please select atleast one kid or adult');
+            $('#aboutsuccess').on('hide.bs.modal', function (e) {
+                e.preventDefault(); // Stop the modal from closing
+            });
             return;
         }
     }else{
