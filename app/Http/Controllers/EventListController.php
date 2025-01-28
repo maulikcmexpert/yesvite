@@ -2537,6 +2537,7 @@ class EventListController extends Controller
               $adults =($request->rsvp_notification_adult!=null)?intval($request->rsvp_notification_adult) :0;
               $kids =  ($request->rsvp_notification_kids!=null)?intval($request->rsvp_notification_kids) :0;
      
+              dd($userId,$eventId,$adults,$kids);
     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');s
         })->where(['event_id' => $request->rsvp_event_id,'user_id',$request->rsvp_user_id])->first();
