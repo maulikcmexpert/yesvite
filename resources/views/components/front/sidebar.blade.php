@@ -326,7 +326,7 @@
                   <div class="rsvp-custom-radio guest-rsvp-attend">
                     <h6>RSVP</h6>
                     <div class="rsvp-input-form">
-                      <div class="input-form">
+                      <div class="input-form rsvp-yes-checkbox">
                         <input type="radio" id="rsvp_yes" name="rsvp_status" value="1"  name="foo" checked>
                         <label for="rsvp_yes">
                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

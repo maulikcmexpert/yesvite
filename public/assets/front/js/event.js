@@ -892,8 +892,17 @@ $(document).on('click','.notification-rsvp-btn', function () {
     });
 });
 
+    $('.rsvp_minus_notify').prop('disabled',false);
+    $('.rsvp_plus_notify').prop('disabled',false);
 
-
+$(document).on('click','.rsvp-no-checkbox',function(){
+    $('.rsvp_minus_notify').prop('disabled',true);
+    $('.rsvp_plus_notify').prop('disabled',true);
+});
+$(document).on('click','.rsvp-yes-checkbox',function(){
+    $('.rsvp_minus_notify').prop('disabled',false);
+    $('.rsvp_plus_notify').prop('disabled',false);
+});
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
     const selectedValue = $('input[name="rsvp_status"]:checked').val();
