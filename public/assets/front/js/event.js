@@ -285,7 +285,7 @@ $(document).on('input','#search_past_event',function(e){
                 
                 $('#scrollStatus3').html('');
                 $('#scrollStatus3').html(response.view);
-                $('#tabbtn3').css('display','block');
+                $('#tabbtn3').css('display','flex');
                 $('#tabbtn3').text(response.last_month);
                 
                 // $('.loader').css('display','none');    
@@ -628,7 +628,7 @@ $(document).on('click',".day",function () {
             if (response.view) {
                 $(scrollStatus).html('');
                 $(scrollStatus).html(response.view);
-                $('#tabbtn3').css('display','block');
+                $('#tabbtn3').css('display','flex');
                 $(tabbtn).text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
 
