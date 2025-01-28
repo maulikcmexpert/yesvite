@@ -910,7 +910,6 @@ function datepicker() {
     });
 }
 
-datepicker();
 
 
 function startTimePicker() {
@@ -975,6 +974,7 @@ function endTimePicker() {
 
 $(document).ready(function () {
     startTimePicker();
+    datepicker();
     endTimePicker();
 });
 
