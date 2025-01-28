@@ -1843,19 +1843,20 @@ class EventWallController extends Controller
         ]);
     }
 
-
     public function get_yesviteContact(Request $request)
     {
         // Authenticated user ID
-        $id = Auth::guard('web')->user()->id;
+        $userId = Auth::guard('web')->user()->id;
 
-        // Request variables
-        $type = $request->type;
-        $search_user = $request->search_name ?? ''; // Search query, default empty
-        $emails = $request->emails ?? []; // Ensure `emails` is populated if provided
+        // Request parameters
+        $type = $request->input('type');
+        $searchUser = $request->input('search_name', ''); // Default to empty string
+        $emails = $request->input('emails', []); // Default to empty array
+        $limit = $request->input('limit');
+        $offset = $request->input('offset');
 
         // Query yesvite users
-        $yesvite_users = User::select(
+        $yesviteUsers = User::select(
             'id',
             'firstname',
             'profile',
@@ -1870,34 +1871,57 @@ class EventWallController extends Controller
             'visible',
             'message_privacy'
         )
-            ->where('id', '!=', $id) // Exclude the authenticated user
-            ->where(['app_user' => '1']) // Filter by app users
+            ->where('id', '!=', $userId) // Exclude authenticated user
+            ->where('app_user', '1') // Filter by app users
             ->when(!empty($emails), function ($query) use ($emails) {
-                $query->whereIn('email', $emails); // Filter by emails if provided
+                $query->whereIn('email', $emails); // Filter by provided emails
             })
-            ->when(!empty($request->limit), function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset); // Pagination
+            ->when(!empty($limit), function ($query) use ($limit, $offset) {
+                $query->limit($limit)
+                    ->offset($offset); // Pagination
             })
-            ->when(!empty($search_user), function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
-                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%'); // Search by first or last name
+            ->when(!empty($searchUser), function ($query) use ($searchUser) {
+                $query->where(function ($q) use ($searchUser) {
+                    $q->where('firstname', 'LIKE', "%{$searchUser}%")
+                        ->orWhere('lastname', 'LIKE', "%{$searchUser}%"); // Search by name
                 });
             })
-            ->orderBy('firstname', 'asc') // Order by first name
+            ->orderBy('firstname', 'asc') // Order results by first name
             ->get();
 
-        $yesviteContact = view('front.event_wall.guest_yesviteContact', [
-            'contacts' => $yesvite_users
+        // Query phone contacts
+        $phoneContacts = contact_sync::where('contact_id', $userId)
+            ->when(!empty($type), function ($query) use ($type) {
+                $query->where('type', $type); // Apply type filter
+            })
+            ->when(!empty($limit), function ($query) use ($limit, $offset) {
+                $query->limit($limit)
+                    ->offset($offset); // Pagination
+            })
+            ->when(!empty($searchUser), function ($query) use ($searchUser) {
+                $query->where(function ($q) use ($searchUser) {
+                    $q->where('firstName', 'LIKE', "%{$searchUser}%")
+                        ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
+                });
+            })
+            ->orderBy('firstName', 'asc') // Order results by first name
+            ->get();
+
+        // Render the yesvite contacts view
+        $yesviteContactHtml = view('front.event_wall.guest_yesviteContact', [
+            'yesviteUsers' => $yesviteUsers,
+            'phone_contact' => $phoneContacts,
         ])->render();
+
         // Return response in JSON format
         return response()->json([
             'status' => 'success',
-            'message' => 'Yesvite contacts retrieved successfully',
-            'contacts' => $yesviteContact
+            'message' => 'Contacts retrieved successfully',
+            'yesvite_contacts' => $yesviteContactHtml,
+
         ]);
     }
+
 
     public function sendInvitation(Request $request)
     {
@@ -1908,7 +1932,7 @@ class EventWallController extends Controller
 
         // try {
         if (!empty($request['guest_list'])) {
-            dd(1);
+
             $id = 0;
             $ids = [];
             $newInvite = [];
