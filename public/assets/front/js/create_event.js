@@ -945,7 +945,7 @@ function datepicker() {
             }
 
             console.log(selectedEndTime);
-            console.log(startMoment);
+            console.log(selectedEndTime);
         });
     });
 }
@@ -2714,141 +2714,141 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        datepicker();
+        // datepicker();
     }
 });
 
-$(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
-    // e.preventDefault();
-    // var check_start=$(this)
-    // .closest(".activity-main-wrp")
-    // .find('input[name="activity-start-time[]"]')
-    // .val();
+// $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
+//     // e.preventDefault();
+//     // var check_start=$(this)
+//     // .closest(".activity-main-wrp")
+//     // .find('input[name="activity-start-time[]"]')
+//     // .val();
 
-    // if(check_start==""){
-    //     toastr.error('First you need to to set Start Time of Event');
-    //     return;
-    // }
-    if (!blurExecutedEndTime) {
-        blurExecutedEndTime = true;
+//     // if(check_start==""){
+//     //     toastr.error('First you need to to set Start Time of Event');
+//     //     return;
+//     // }
+//     if (!blurExecutedEndTime) {
+//         blurExecutedEndTime = true;
 
-        var newEndTime = convertTo24Hour($(this).val());
-        var newEndTime12 = convertTo24Hour($(this).val());
-        var newEndtimeagain = convertTo12Hour(newEndTime12);
-        var newStartTime = convertTo24Hour(
-            $(this)
-                .closest(".activity-main-wrp")
-                .find('input[name="activity-start-time[]"]')
-                .val()
-        );
-        console.log(newStartTime);
-        if (
-            newEndTime != "" &&
-            newStartTime != "" &&
-            convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newStartTime)
-        ) {
-            // alert();
-            // var timeParts = newStartTime.split(":");
-            // var startDate = new Date();
-            // startDate.setHours(parseInt(timeParts[0]));
-            // startDate.setMinutes(parseInt(timeParts[1]));
-            // startDate.setMinutes(startDate.getMinutes() + 60);
-            // var hours = startDate.getHours().toString().padStart(2, "0");
-            // var minutes = startDate.getMinutes().toString().padStart(2, "0");
-            // var newEndTimeWith30Min = `${hours}:${minutes}`;
+//         var newEndTime = convertTo24Hour($(this).val());
+//         var newEndTime12 = convertTo24Hour($(this).val());
+//         var newEndtimeagain = convertTo12Hour(newEndTime12);
+//         var newStartTime = convertTo24Hour(
+//             $(this)
+//                 .closest(".activity-main-wrp")
+//                 .find('input[name="activity-start-time[]"]')
+//                 .val()
+//         );
+//         console.log(newStartTime);
+//         if (
+//             newEndTime != "" &&
+//             newStartTime != "" &&
+//             convertTimeToMinutes(newEndTime) <=
+//                 convertTimeToMinutes(newStartTime)
+//         ) {
+//             // alert();
+//             // var timeParts = newStartTime.split(":");
+//             // var startDate = new Date();
+//             // startDate.setHours(parseInt(timeParts[0]));
+//             // startDate.setMinutes(parseInt(timeParts[1]));
+//             // startDate.setMinutes(startDate.getMinutes() + 60);
+//             // var hours = startDate.getHours().toString().padStart(2, "0");
+//             // var minutes = startDate.getMinutes().toString().padStart(2, "0");
+//             // var newEndTimeWith30Min = `${hours}:${minutes}`;
 
-            // $(this).val(newEndTimeWith30Min);
+//             // $(this).val(newEndTimeWith30Min);
 
-            var timeParts = newStartTime.split(":");
-            var startDate = new Date();
-            startDate.setHours(parseInt(timeParts[0]));
-            startDate.setMinutes(parseInt(timeParts[1]));
-            startDate.setMinutes(startDate.getMinutes() + 60);
-            var hours = startDate.getHours();
-            var minutes = startDate.getMinutes().toString().padStart(2, "0");
+//             var timeParts = newStartTime.split(":");
+//             var startDate = new Date();
+//             startDate.setHours(parseInt(timeParts[0]));
+//             startDate.setMinutes(parseInt(timeParts[1]));
+//             startDate.setMinutes(startDate.getMinutes() + 60);
+//             var hours = startDate.getHours();
+//             var minutes = startDate.getMinutes().toString().padStart(2, "0");
 
-            // Convert to 12-hour format
-            var period = hours >= 12 ? "PM" : "AM";
-            hours = hours % 12 || 12; // Convert hour '0' to '12' in 12-hour format
-            hours = hours.toString().padStart(2, "0");
-            var newEndTimeWith30Min = `${hours}:${minutes} ${period}`;
-            $(this).val(newEndTimeWith30Min);
-            newEndTime = convertTo24Hour(newEndTimeWith30Min);
+//             // Convert to 12-hour format
+//             var period = hours >= 12 ? "PM" : "AM";
+//             hours = hours % 12 || 12; // Convert hour '0' to '12' in 12-hour format
+//             hours = hours.toString().padStart(2, "0");
+//             var newEndTimeWith30Min = `${hours}:${minutes} ${period}`;
+//             $(this).val(newEndTimeWith30Min);
+//             newEndTime = convertTo24Hour(newEndTimeWith30Min);
 
-            // return;
-        }
+//             // return;
+//         }
 
-        var lastActivityTime = $("#LastEndTime").val();
-        var eventEndTime = convertTo24Hour($("#ac-end-time").val());
+//         var lastActivityTime = $("#LastEndTime").val();
+//         var eventEndTime = convertTo24Hour($("#ac-end-time").val());
 
-        var lastEndTime = "";
-        var startEndTime = "";
-        $("#" + lastActivityTime)
-            .children()
-            .find(".activity_end_time")
-            .each(function () {
-                lastEndTime = convertTo24Hour($(this).val());
-            });
-        $("#" + lastActivityTime)
-            .children()
-            .find(".activity_start_time")
-            .each(function () {
-                startEndTime = $(this).val();
-            });
+//         var lastEndTime = "";
+//         var startEndTime = "";
+//         $("#" + lastActivityTime)
+//             .children()
+//             .find(".activity_end_time")
+//             .each(function () {
+//                 lastEndTime = convertTo24Hour($(this).val());
+//             });
+//         $("#" + lastActivityTime)
+//             .children()
+//             .find(".activity_start_time")
+//             .each(function () {
+//                 startEndTime = $(this).val();
+//             });
 
-        console.log(lastEndTime);
-        console.log(eventEndTime);
-        if (lastEndTime != "") {
-            if (
-                convertTimeToMinutes(lastEndTime) >
-                convertTimeToMinutes(eventEndTime)
-            ) {
-                // alert()
-                toastr.error("activity can not finish after events end");
-                var lastActivityNode = $("#" + lastActivityTime)
-                    .parent()
-                    .find(".activity_end_time").length;
+//         console.log(lastEndTime);
+//         console.log(eventEndTime);
+//         if (lastEndTime != "") {
+//             if (
+//                 convertTimeToMinutes(lastEndTime) >
+//                 convertTimeToMinutes(eventEndTime)
+//             ) {
+//                 // alert()
+//                 toastr.error("activity can not finish after events end");
+//                 var lastActivityNode = $("#" + lastActivityTime)
+//                     .parent()
+//                     .find(".activity_end_time").length;
 
-                $("#" + lastActivityTime)
-                    .children()
-                    .find(".activity_end_time")
-                    .each(function (index) {
-                        if (lastActivityNode - 1 == index) {
-                            $(this).val("");
-                        }
-                    });
-            }
-        }
-        // if (startEndTime != "") {
-        //     if (startEndTime > eventEndTime) {
-        //         toastr.error("activity can not finish after events end");
-        //         var lastActivityNode = $("#" + lastActivityTime)
-        //             .parent()
-        //             .find(".activity_end_time").length;
+//                 $("#" + lastActivityTime)
+//                     .children()
+//                     .find(".activity_end_time")
+//                     .each(function (index) {
+//                         if (lastActivityNode - 1 == index) {
+//                             $(this).val("");
+//                         }
+//                     });
+//             }
+//         }
+//         // if (startEndTime != "") {
+//         //     if (startEndTime > eventEndTime) {
+//         //         toastr.error("activity can not finish after events end");
+//         //         var lastActivityNode = $("#" + lastActivityTime)
+//         //             .parent()
+//         //             .find(".activity_end_time").length;
 
-        //         $("#" + lastActivityTime)
-        //             .children()
-        //             .find(".activity_start_time")
-        //             .each(function (index) {
-        //                 if (lastActivityNode - 1 == index) {
-        //                     $(this).val("");
-        //                 }
-        //             });
-        //     }
-        // }
+//         //         $("#" + lastActivityTime)
+//         //             .children()
+//         //             .find(".activity_start_time")
+//         //             .each(function (index) {
+//         //                 if (lastActivityNode - 1 == index) {
+//         //                     $(this).val("");
+//         //                 }
+//         //             });
+//         //     }
+//         // }
 
-        $(this)
-            .closest(".activity-main-wrp")
-            .next()
-            .find('input[name="activity-start-time[]"]')
-            .val(newEndtimeagain);
+//         $(this)
+//             .closest(".activity-main-wrp")
+//             .next()
+//             .find('input[name="activity-start-time[]"]')
+//             .val(newEndtimeagain);
 
-        setTimeout(function () {
-            blurExecutedEndTime = false; // Reset after a delay
-        }, 500); // Adjust the delay as needed
-    }
-});
+//         setTimeout(function () {
+//             blurExecutedEndTime = false; // Reset after a delay
+//         }, 500); // Adjust the delay as needed
+//     }
+// });
 
 let blurExecuted = false;
 $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
