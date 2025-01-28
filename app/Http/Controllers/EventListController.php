@@ -2544,7 +2544,7 @@ class EventListController extends Controller
 
 
 $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
-
+dd($rsvpSentAttempt);
 if ($rsvpSent != null) {
     $rsvp_attempt = "";
     if ($rsvpSentAttempt == NULL) {
