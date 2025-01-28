@@ -2059,7 +2059,6 @@ $(document).on("click", ".edit_category", function () {
 
 $(document).on("click", ".add_potluck_item", function () {
     var potluckkey = $(this).data("id");
-alert(potluckkey)
     var categoryName = $(".category_name-" + potluckkey).text();
     setPotluckActivekey(potluckkey, categoryName);
     toggleSidebar("sidebar_addcategoryitem");
@@ -5704,7 +5703,6 @@ $(document).on("click", ".final_checkout", function () {
         },
     });
 }else{
-    alert();
     $('.event_images_slider').css('display','none');
     $('.event_images_template').css('display','block');
     // $('.event_images_slider').removeClass('owl-carousel');
@@ -8221,7 +8219,7 @@ function update_self_bring(
             );
             let remainingCategoryCount=0;
             if (type == undefined){
-                remainingCategoryCount = categoryItem + quantity
+                remainingCategoryCount = categoryItem + categoryItemQuantity -  innerUserQnt
             }else if(type == "plus") {
                 remainingCategoryCount = categoryItem -1
             }else{
