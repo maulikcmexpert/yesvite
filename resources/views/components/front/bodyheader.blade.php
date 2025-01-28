@@ -169,7 +169,7 @@
               @php
                 $i++;
               @endphp
-                <div class="accordion-item">
+                <div class="accordion-item main-notification-div-list" data-event_id="{{$value[0]['event_id']}}">
                   <h2 class="accordion-header">
                     <button
                       class="accordion-button collapsed"
