@@ -60,6 +60,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Jobs\SendInvitationMailJob as sendInvitation;
 use DateTime;
+use Faker\Core\Number;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -1355,7 +1356,7 @@ class EventController extends BaseController
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
-        dd($itemQuantity);
+        // dd($itemQuantity);
         $category_index = $request->input('category_index');
 
         $categories_item = Session::get('category_item', []);
@@ -1448,7 +1449,8 @@ class EventController extends BaseController
             $total_item = $totalmissing + 0;
         } else {
 
-            $total_item = $totalmissing + $itemQuantity;
+            $total_item = $totalmissing + intval($itemQuantity);
+
         }
         $qty = 0;
         if ($category_quantity == $category_item) {
