@@ -2773,7 +2773,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             hours = hours % 12 || 12; // Convert hour '0' to '12' in 12-hour format
             hours = hours.toString().padStart(2, "0");
             var newEndTimeWith30Min = `${hours}:${minutes} ${period}`;
-            $(this).val(newEndTimeWith30Min);
+            // $(this).val(newEndTimeWith30Min);
             newEndTime = convertTo24Hour(newEndTimeWith30Min);
 
             // return;
