@@ -843,6 +843,8 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
             $('.all-events-filter-info').removeClass('d-none');
             $('.notification-all-event-wrp').addClass('d-none');
             $('.notification-back').addClass('d-none');
+
+            $('#search_filter_event').val("");
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
