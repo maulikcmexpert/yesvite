@@ -854,7 +854,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
            $('.notification-back').addClass('d-none');
            $('.event-search-filter').html("");
            $('.event-search-filter').html(response.event_list);
-
+           $('.notification-selected-events-wrp').html('');
         },
         error: function (xhr, status, error) {
     
