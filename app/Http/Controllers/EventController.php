@@ -1357,7 +1357,7 @@ class EventController extends BaseController
         $selfBring = $request->input('selfbring');
         $selfBringQuantity = $request->input('self_bringQuantity');
         $itemQuantity = $request->input('itemQuantity');
-        dd($totalmissing,$itemQuantity);
+        // dd($totalmissing,$itemQuantity);
         // dd($itemQuantity);
         $category_index = $request->input('category_index');
 
@@ -1450,8 +1450,8 @@ class EventController extends BaseController
         if ($selfBring != "0" && $selfBringQuantity != "0") {
             $total_item = $totalmissing + 0;
         } else {
-
             $total_item = $totalmissing + intval($itemQuantity);
+            dd($total_item);
 
         }
         $qty = 0;
