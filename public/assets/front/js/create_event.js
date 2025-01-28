@@ -873,7 +873,11 @@ function datepicker() {
         }).on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
             // const startTime = $(this).closest("div").find(".activity_start_time").val();
-            const startTime = $(this).closest("div").prev().find(".activity_start_time").val();
+            const startTime =   $(this)
+            .closest(".activity-main-wrp")
+            .find('input[name="activity-start-time[]"]')
+            .val();
+    
 
             console.log(startTime);
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
