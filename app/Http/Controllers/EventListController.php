@@ -2645,7 +2645,12 @@ if ($rsvpSent != null) {
     public function filter_search_event(Request $request){
         $eventName=$request->search_event;
         $eventList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])->where('event_name', 'LIKE', '%' . $eventName . '%')->get(); 
-        
-        dd($eventList);
+       
+        if(empty($eventList)){
+            return response()->json(['view' => view( 'No Data Found')->render()]);
+        }
+        return response()->json(['view' => view( 'front.notification.search_filter_event', compact('eventList'))->render()]);
+
+
     }
 }
