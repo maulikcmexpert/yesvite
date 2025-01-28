@@ -816,7 +816,7 @@ function getClosest15MinuteTime() {
 // }
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
-        const startPicker = $(this).datetimepicker({
+        const endPicker = $(this).datetimepicker({
             format: "LT",
             icons: {
                 up: "fa fa-chevron-up",
@@ -828,17 +828,13 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const previousEndTime = index > 0 ? $(".activity_end_time").eq(index - 1).val() : "";
+            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 
-            // If previous end time exists, set current start time 1 hour after it (only in picker)
-            if (previousEndTime) {
-                const previousEndMoment = moment(previousEndTime, "LT");
-                picker.date(previousEndMoment.add(1, "hours"));
-            } else {
-                // Default to current time or a specific default time (only in picker)
-                picker.date(moment().hours(12).minutes(0).seconds(0));
-            }
-        }).on("dp.close", function (e) {
+            // Set end time to 1 hour after start time if it's empty (only in picker)
+            picker.date(startMoment.clone().add(1, "hours"));
+        })
+        .on("dp.close", function () {
             const picker = $(this).data("DateTimePicker");
             const startTime = $(this).closest("div").find(".activity_start_time").val();
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
@@ -846,20 +842,6 @@ function datepicker() {
             // Set end time to 1 hour after start time if it's empty (only in picker)
             $(this).val(startMoment);
         })
-        .on("dp.change", function (e) {
-            const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
-            const endTimePicker = $(".activity_end_time").eq(index).data("DateTimePicker");
-
-            // Set the end time picker to one hour after the selected start time (only in picker)
-            const endTime = selectedStartTime.clone().add(1, "hours");
-            endTimePicker.date(endTime);
-
-            // Ensure input field value is not updated
-            $(this).val("");
-        });
-
-        // Ensure input field value is clear when the page loads
-        $(this).val("");
     });
 
     $(".timepicker.activity_end_time").each(function (index) {
@@ -888,24 +870,7 @@ function datepicker() {
 
             // Set end time to 1 hour after start time if it's empty (only in picker)
             $(this).val(startMoment);
-        })
-        .on("dp.change", function (e) {
-            const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
-
-            // Set the next start time based on the selected end time (only in picker)
-            const nextStartTime = $(".activity_start_time").eq(index + 1);
-            if (nextStartTime.length) {
-                const startPicker = nextStartTime.data("DateTimePicker");
-                const newStartTime = selectedEndTime.clone().add(1, "hours");
-                startPicker.date(newStartTime);
-            }
-
-            // Ensure input field value is not updated
-            $(this).val("");
         });
-
-        // Ensure input field value is clear when the page loads
-        $(this).val("");
     });
 }
 
