@@ -872,19 +872,38 @@ function datepicker() {
             stepping: 15,
         }).on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            // const startTime = $(this).closest("div").find(".activity_start_time").val();
-            const startTime =   $(this)
-            .closest(".activity-main-wrp")
-            .find('input[name="activity-start-time[]"]')
-            .val();
+            
+            // Get the start time from the related input field
+            const startTime = $(this)
+                .closest(".activity-main-wrp")
+                .find('input[name="activity-start-time[]"]')
+                .val();
+            
+            console.log("Start time:", startTime);
+            
+            // If start time exists, use it; otherwise, default to 12:00 PM
+            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            
+            // Set the end time to 1 hour after the start time, only when picker is first shown
+            if (!picker.date()) {  // Check if the picker date is empty (first time showing)
+                picker.date(startMoment.clone().add(1, "hours"));
+            }
+        })
+        // .on("dp.show", function () {
+        //     const picker = $(this).data("DateTimePicker");
+        //     // const startTime = $(this).closest("div").find(".activity_start_time").val();
+        //     const startTime =   $(this)
+        //     .closest(".activity-main-wrp")
+        //     .find('input[name="activity-start-time[]"]')
+        //     .val();
     
 
-            console.log(startTime);
-            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+        //     console.log(startTime);
+        //     const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
         
-            // Set the end time to 1 hour after the start time whenever the end time picker is shown
-            picker.date(startMoment.clone().add(1, "hours"));
-        })
+        //     // Set the end time to 1 hour after the start time whenever the end time picker is shown
+        //     picker.date(startMoment.clone().add(1, "hours"));
+        // })
        
         .on("dp.close", function () {
             const picker = $(this).data("DateTimePicker");
