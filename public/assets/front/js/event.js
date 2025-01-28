@@ -895,9 +895,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
 
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
-
     const formData = $('#notification_rsvp').serialize();
-
     $.ajax({
       url: $('#notification_rsvp').attr('action'), 
       method: 'POST', 
@@ -905,9 +903,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },           
       data: formData,          
-      success: function (response) {
-        console.log(response);
-        
+      success: function (response) {        
         if(response.status==1){
             toastr.success(response.msg);
         }
