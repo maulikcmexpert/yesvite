@@ -925,16 +925,16 @@ function startTimePicker() {
         }
     }).on("dp.show", function () {
         const picker = $(this).data("DateTimePicker");
-        const currentValue = $(this).val();
+        // const currentValue = $(this).val();
         
-        if (currentValue) {
-            const currentMoment = moment(currentValue, "LT");
-            if (currentMoment.isValid()) {
-                picker.date(currentMoment);
-            }
-        } else {
+        // if (currentValue) {
+        //     const currentMoment = moment(currentValue, "LT");
+        //     if (currentMoment.isValid()) {
+        //         picker.date(currentMoment);
+        //     }
+        // } else {
             picker.date(moment().hours(12).minutes(0).seconds(0));
-        }
+        // }
     }).on("dp.hide", function (e) {
         const selectedTime = e.date ? e.date.format("LT") : "";
         $(this).val(selectedTime);
