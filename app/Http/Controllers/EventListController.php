@@ -2544,14 +2544,14 @@ class EventListController extends Controller
 
 
 $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
-dd($rsvpSentAttempt,$rsvp_status);
+// dd($rsvpSentAttempt,$rsvp_status);
 if ($rsvpSent != null) {
     $rsvp_attempt = "";
-    if ($rsvpSentAttempt == NULL) {
+    if ($rsvpSentAttempt == NULL) { 
         $rsvp_attempt =  'first';
-    } else if ($rsvpSentAttempt == '0' && $request->rsvp_status == '1') {
+    } else if ($rsvpSentAttempt == '0' && $rsvp_status == '1') {
         $rsvp_attempt =  'no_to_yes';
-    } else if ($rsvpSentAttempt == '1' && $request->rsvp_status == '0') {
+    } else if ($rsvpSentAttempt == '1' && $rsvp_status == '0') {
         $rsvp_attempt =  'yes_to_no';
     }
 
