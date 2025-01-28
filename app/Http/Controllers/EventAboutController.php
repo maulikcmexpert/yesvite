@@ -33,7 +33,9 @@ class EventAboutController extends Controller
         $title = 'event about';
         $page = 'front.event_wall.event_about';
         $user  = Auth::guard('web')->user();
-        $js = ['event_about_rsvp','guest_rsvp'];
+        $js = ['event_about_rsvp', 'guest_rsvp'];
+        $current_page = "about";
+        $login_user_id  = $user->id;
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -58,7 +60,7 @@ class EventAboutController extends Controller
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
-            $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $eventDetails['podluck'] = ($eventDetail->event_settings != null && $eventDetail->event_settings->podluck != null) ? $eventDetail->event_settings->podluck : "0";
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
@@ -73,7 +75,6 @@ class EventAboutController extends Controller
                 } else if ($checkUserrsvp->rsvp_status == '0') {
                     $rsvp_status = '0'; // rsvp you'r not going
                 }
-
             }
             $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
@@ -318,10 +319,9 @@ class EventAboutController extends Controller
             //         $rsvp_attempt =  'yes_to_no';
             //     }
             // }
-            $login_user_id  = $user->id;
-            $current_page = "about";
 
-            return view('layout', compact('page', 'title', 'js', 'login_user_id','eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
+
+            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {
@@ -330,7 +330,8 @@ class EventAboutController extends Controller
 
             // return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+            // dd($e);
+            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'current_page'));
         }
     }
 

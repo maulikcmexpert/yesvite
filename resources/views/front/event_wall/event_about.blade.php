@@ -1,4 +1,7 @@
-{{-- {{ dd($eventDetails) }} --}}
+@php
+    use Carbon\Carbon;
+@endphp
+@isset($eventDetails)
 <main class="new-main-content">
 
     <div class="container">
@@ -222,7 +225,7 @@
                                                     <h5>Countdown till event</h5>
                                                 </div>
                                                 @php
-                                                    use Carbon\Carbon;
+                                                    
 
                                                     // Parse the event date and time
                                                     $eventDateTime = Carbon::parse(
@@ -1971,3 +1974,4 @@
 
 
 </main>
+@endisset
