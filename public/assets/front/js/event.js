@@ -815,6 +815,7 @@ $(document).on('change', 'input[name="selectedEvents[]"]', function () {
     }   
 });
 $(document).on('click', '.all-event-notification-filter-reset', function () {
+
     $("input[name='selectedEvents[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
@@ -824,7 +825,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     $("input[name='notificationTypes[]']:checked").each(function () {
         $(this).prop('checked', false);
     });
-    $('.notification-selected-events-wrp').html('');
+    // $('.notification-selected-events-wrp').html('');
 
     $('#home_loader').css('display','block');
 
@@ -833,17 +834,26 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
         type: 'GET',
         data: {},
         success: function (response) {
+            console.log(response);
            if(response.view!=""){
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
+            $('#search_filter_event').val("");
+        
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
             $('#home_loader').css('display','none');
 
            }
+           
+           $('.all-events-filter-info').removeClass('d-none');
+           $('.notification-all-event-wrp').addClass('d-none');
+           $('.notification-back').addClass('d-none');
+           $('.event-search-filter').html("");
+           $('.event-search-filter').html(response.event_list);
 
         },
         error: function (xhr, status, error) {
@@ -1005,5 +1015,20 @@ $(document).on('click','.main-notification-div-list',function(){
 });
 
 $(document).on('input','#search_filter_event',function(){
-alert();
+
+    var search_event=$(this).val();
+
+                    $.ajax({
+                        url: `${base_url}filter_search_event`,
+                        type: 'GET',        
+                        data: {search_event:search_event},          
+                        success: function (response) { 
+                            $('.event-search-filter').html();  
+                            $('.event-search-filter').html(response.view);                         
+                        },
+                        error: function (error) {
+                          toastr.error('Something went wrong. Please try again!');
+                        },
+                      });
+
 });
