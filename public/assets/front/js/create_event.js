@@ -830,10 +830,8 @@ function datepicker() {
             const picker = $(this).data("DateTimePicker");
             const currentActivity = $(this).closest(".activity-main-wrp");
 
-            const startTime = "";
-            // const startTime = "$(this).closest("div").find(".activity_start_time").val()";
+            const startTime = $(this).closest("div").find(".activity_start_time").val();
             // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
-            // picker.date(startMoment.clone().add(1, "hours"));
             let startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             const previousActivity = currentActivity.prev(".activity-main-wrp");
             
@@ -843,12 +841,15 @@ function datepicker() {
                     // If previous end time exists, use it as the new start time
                     // startMoment = moment(previousEndTime, "LT");
                     startMoment = moment(previousEndTime, "LT").add(1, "hours");
+                    picker.date(startMoment);
 
                 }
+            }else{
+                        picker.date(startMoment.clone().add(1, "hours"));
             }
+
         
             // Set the picker date to the adjusted start time (if any)
-            picker.date(startMoment);
         })
         .on("dp.close", function () {
             const picker = $(this).data("DateTimePicker");
