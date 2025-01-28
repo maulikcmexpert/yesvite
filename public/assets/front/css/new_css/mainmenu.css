@@ -1440,7 +1440,7 @@
     right: 40px;
 }
 
-.rsvp_minus_notify, .rsvp_plus_notify{
+.rsvp_minus_notify:disabled, .rsvp_plus_notify:disabled{
     background-color: gray !important;
 }
 
