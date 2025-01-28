@@ -439,7 +439,11 @@ class ProfileController extends BaseController
                 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
+
 
             ]
         )->findOrFail($id);
