@@ -892,6 +892,14 @@ $(document).on('click','.notification-rsvp-btn', function () {
     });
 });
 
+$('#notification_rsvp_btn').validate({
+    rule:{
+
+    },
+    messages:{
+        
+    }
+})
 
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 

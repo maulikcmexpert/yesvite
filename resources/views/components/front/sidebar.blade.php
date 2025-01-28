@@ -327,7 +327,7 @@
                     <h6>RSVP</h6>
                     <div class="rsvp-input-form">
                       <div class="input-form">
-                        <input type="radio" id="rsvp_yes" name="rsvp_status" value="1"  name="foo">
+                        <input type="radio" id="rsvp_yes" name="rsvp_status" value="1"  name="foo" checked>
                         <label for="rsvp_yes">
                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M10.0013 18.3346C14.5846 18.3346 18.3346 14.5846 18.3346 10.0013C18.3346 5.41797 14.5846 1.66797 10.0013 1.66797C5.41797 1.66797 1.66797 5.41797 1.66797 10.0013C1.66797 14.5846 5.41797 18.3346 10.0013 18.3346Z" stroke="#23AA26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
