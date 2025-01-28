@@ -1,3 +1,6 @@
+var date_upcoming=false;
+var date_past=false;
+var date_draft=false;
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 // Create a request object
@@ -49,7 +52,9 @@ $(document).on('paste','input[type="text"],textarea', function(e) {
 });
 
 $('#scrollStatus').scroll(function () {
-    if (busy1) return; 
+    // if (busy1) return; 
+    if (busy1 || date_upcoming) return; // Add this check to prevent the scroll ajax call after a date click.
+
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
@@ -96,7 +101,9 @@ $('#scrollStatus').scroll(function () {
 });
 
 $('#scrollStatus2').scroll(function () {
-    if (busy2) return; 
+    // if (busy2) return; 
+    if (busy2 || date_draft) return; // Add this check to prevent the scroll ajax call after a date click.
+
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
@@ -136,7 +143,7 @@ $('#scrollStatus2').scroll(function () {
 
 $('#scrollStatus3').scroll(function () {
     // if (busy3) return; 
-    if (busy3 || window.isDateClicked) return; // Add this check to prevent the scroll ajax call after a date click.
+    if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
 
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
@@ -599,22 +606,26 @@ $(document).on('click',".day",function () {
         current_month=$(this).val();
     });
 
-    window.isDateClicked = true; // Set this flag when a date is clicked.
+    // window.isDateClicked = true; // Set this flag when a date is clicked.
     clearTimeout(search_user_ajax_timer);
     if(page=="upcoming"){
         var ajax_base_url=`${base_url}search_upcoming_event`;
         var scrollStatus="#scrollStatus";
         var tabbtn="#tabbtn1";
+        date_upcoming=true;
     }
     if(page=="draft"){
         var ajax_base_url=`${base_url}search_draft_event`;
         var scrollStatus="#scrollStatus2";
         var tabbtn="#tabbtn2";
+        date_draft=true;
     }
     if(page=="past"){
         var ajax_base_url=`${base_url}search_past_event`;
         var scrollStatus="#scrollStatus3";
         var tabbtn="#tabbtn3";
+        date_past=true;
+
     }
     search_user_ajax_timer = setTimeout(function () {
         $('.loader_up').css('display','block');    
