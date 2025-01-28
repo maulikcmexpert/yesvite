@@ -932,6 +932,7 @@ function startTimePicker() {
         //         picker.date(currentMoment);
         //     }
         // } else {
+            $(this).val("");
             $(this).data("DateTimePicker").date(moment().hours(12).minutes(0).seconds(0).add(12, 'hours'));
             // }
     }).on("dp.hide", function (e) {
