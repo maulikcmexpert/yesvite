@@ -25,6 +25,8 @@ class TransactionDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         $counter = 1;
+        dd( $row);
+
         return datatables()
             ->eloquent($query)
             ->addColumn('no', function () use (&$counter) {
@@ -71,7 +73,6 @@ class TransactionDataTable extends DataTable
                     });
                 }
             })
-            dd($row);
             ->addColumn('user', function ($row) {
                 return $row->users->firstname . ' ' . $row->users->lastname;
             })
