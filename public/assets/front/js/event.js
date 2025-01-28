@@ -1003,3 +1003,7 @@ $(document).on('click','.main-notification-div-list',function(){
         },
       });
 });
+
+$(document).on('input','#search_filter_event',function(){
+alert();
+});

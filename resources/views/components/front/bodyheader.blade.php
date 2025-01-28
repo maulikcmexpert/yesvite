@@ -1762,7 +1762,7 @@
             <div class="all-events-searchbar-wrp mb-2">
               <form>
                 <div class="position-relative">
-                  <input type="text" class="form-control" id="search_upcoming_event" placeholder="Search event name">
+                  <input type="text" class="form-control" id="search_filter_event" placeholder="Search event name">
                   <span class="search-icon">
                     <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.58366 17.5C13.9559 17.5 17.5003 13.9555 17.5003 9.58329C17.5003 5.21104 13.9559 1.66663 9.58366 1.66663C5.2114 1.66663 1.66699 5.21104 1.66699 9.58329C1.66699 13.9555 5.2114 17.5 9.58366 17.5Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
