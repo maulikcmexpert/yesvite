@@ -20,6 +20,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Throwable;
+
 use Illuminate\Http\Request;
 
 class EventListController extends Controller
@@ -2531,7 +2532,6 @@ class EventListController extends Controller
     {
 
         try {
-            DB::beginTransaction();
 
             $userId = $request->rsvp_user_id;
               $eventId = $request->rsvp_event_id;
@@ -2615,7 +2615,6 @@ if ($rsvpSent != null) {
         'rsvp_attempt' => $rsvp_attempt
     ];
 
-    DB::commit();
 
     // dd($notificationParam);
     sendNotification('sent_rsvp', $notificationParam);   
@@ -2633,10 +2632,7 @@ if ($rsvpSent != null) {
 }
 
 } catch (QueryException $e) {
-    dd($e);
-    DB::rollBack();
 } catch (\Exception $e) {
-    dd($e);
 }
 
 
