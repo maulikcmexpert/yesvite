@@ -883,7 +883,7 @@ function datepicker() {
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
     
             // Set the end time to 1 hour after the start time whenever the end time picker is shown
-            picker.date(startMoment.clone().add(1, "hours"));
+            picker.date(startMoment.clone().add(2, "hours"));
         })
         .on("dp.close", function () {
             const picker = $(this).data("DateTimePicker");
