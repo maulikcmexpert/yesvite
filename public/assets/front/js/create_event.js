@@ -3334,8 +3334,8 @@ $(document).on("click", "#save_activity_schedule", function () {
         }
         console.log({ activityendtime });
 
-    let lastendtime=convertTo24Hour(end_time)
-    let lastScheduleEndtime=convertTo24Hour(activityendtime)
+    let lastendtime = convertTo24Hour(end_time);
+    let lastScheduleEndtime = convertTo24Hour(activityendtime);
 
     console.log(lastendtime);
     console.log(lastScheduleEndtime);
@@ -3344,10 +3344,6 @@ $(document).on("click", "#save_activity_schedule", function () {
         toastr.error("Please enter proper time");
         return;
     }
-    
-    
-
-
 
     if (isValid == 0) {
         if (total_activities >= 1) {
@@ -3479,6 +3475,7 @@ $(document).on("click", "#next_setting", function () {
 
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
+    console.log(dbJson);
     $(".step_1").hide();
     handleActiveClass(".li_design");
     $(".pick-card").addClass("active");
