@@ -74,7 +74,7 @@ class EventController extends BaseController
 {
     public function index(Request $request)
     {
-        dd($request->isCopy);
+        dd($request->iscopy);
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
