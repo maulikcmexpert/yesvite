@@ -930,12 +930,7 @@ function datepicker() {
             //     }
             // }
 
-            const startTime = $(this)
-            .closest(".activity-main-wrp")
-            .find('input[name="activity-start-time[]"]')
-            .val();
-            alert();
-            console.log(startTime);
+            
             // Set end time to 1 hour after start time if it's empty (only in picker)
             // $(this).val(startMoment);
             const picker = $(this).data("DateTimePicker");
@@ -954,23 +949,6 @@ function datepicker() {
                     .val();
                 const startMoment = moment(startTime, "LT");
                 $(this).val(startMoment.clone().add(1, "hours").format("LT"));
-            }
-
-
-            const sTime =$(this)
-            .closest(".activity-main-wrp")
-            .find('input[name="activity-start-time[]"]')
-            .val()
-    
-
-            console.log(sTime);
-            const sMoment = moment(sTime, "LT");
-
-            console.log(sMoment);
-            if(endTime!=""){
-                if(sMoment==$(this).val()){
-                    alert('start time and end time can not be safe');
-                }
             }
 
             console.log(selectedEndTime);
