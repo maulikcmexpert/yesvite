@@ -5,6 +5,9 @@
         <div class="new_event_detail_form choose-design-form">
             <form action="">
                 <h3>Choose Design</h3>
+
+                <input type="file" name="custom_template" id="custom_template"/>
+                
                 <div class="row">
                     <div class="col-12 mb-4">
                         <div class="choose-design-search-setting">

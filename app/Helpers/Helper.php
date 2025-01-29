@@ -1814,7 +1814,7 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
         if (!$user->opt_in_status) {
             $message = 'Yesvite: ' . $hostName . ' has invited you to an event. To View the invite/Event details a ONE TIME opt in is required by new sms regulations to receive future invites/messages. Please reply "Yes" to opt in. Reply STOP to opt out.';
         } else {
-            $message = "Yesvite: You have received a new RSVP for \"$eventName\" .View the invite/Event details here: \"$eventLink\". Reply STOP to opt out.";
+            $message = "Yesvite: ' . $hostName . ' has invited you to  \"$eventName\" View invite, RSVP and message the host here: \"$eventLink\". Reply STOP to opt out.";
         }
         return sendSMSForApplication($receiverNumber, $message);
     } catch (\Exception $e) {
@@ -1841,8 +1841,8 @@ function handleIncomingMessage($receiverNumber, $message)
     }
     if (strtolower($message) == 'yes') {
 
-        $users = UserOpt::where(['phone' => $cleanedNumber, 'opt_in_status' => false])->get();
-
+        $users = UserOpt::where(['phone' => $cleanedNumber, 'opt_in_status' => false])->groupBy('event_id')->get();
+        sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
         foreach ($users as $user) {
             $user->update(['opt_in_status' => true]);
 
@@ -1856,7 +1856,7 @@ function handleIncomingMessage($receiverNumber, $message)
                 $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($user->event_invited_user_id), 'eventId' => encrypt($user->event_id)]);
                 $confirmationMessage = "Yesvite:  \"{$event->event->user->firstname} {$event->event->user->lastname}\" has invited you to  \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
                 try {
-                    sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
+
                     sendSMSForApplication($cleanedNumber, $confirmationMessage);
                 } catch (Exception $e) {
                     // Log::error("Failed to send confirmation SMS to {$receiverNumber}: " . $e->getMessage());
