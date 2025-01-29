@@ -13,6 +13,41 @@ var current_shape;
 let undoStack = [];
 let redoStack = [];
 let event_id = null;
+$(document).ready(function () {
+    $("#custom_template").change(function () {
+        var file = this.files[0];
+
+        if (!file) return;
+
+        var validExtensions = ["image/jpeg", "image/png"];
+        if (!validExtensions.includes(file.type)) {
+            toastr.error("Only JPG and PNG images are allowed.");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("custom_template", file);
+
+        $.ajax({
+            url: base_url + "event/uploadCustomImage",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.imageUrl) {
+                    $("#preview").attr("src", response.imageUrl).show();
+                } else {
+                    alert("Upload failed.");
+                }
+            },
+            error: function () {
+                alert("Error uploading image.");
+            },
+        });
+    });
+});
+
 $(document).on("click", ".design-cards", function () {
     alert(0);
     var url = $(this).data("url");

@@ -6,7 +6,7 @@
             <form action="">
                 <h3>Choose Design</h3>
 
-                <input type="file" name="custom_template" id="custom_template"/>
+               
                 
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -48,6 +48,7 @@
                         </div>
                     </div>
                     <div class="designCategory">
+                        <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png"/>
                         @if (isset($design_category))
                             @foreach ($design_category as $category)
                                 @foreach ($category->subcategory as $subcategory)
