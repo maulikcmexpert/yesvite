@@ -891,7 +891,9 @@ function datepicker() {
             // If start time exists, use it; otherwise, default to 12:00 PM
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             
-            picker.minDate(startMoment.clone().add(1, "minutes"));
+            // picker.minDate(startMoment.clone().add(1, "minutes"));
+            picker.disabledTimeIntervals([[startMoment, startMoment.clone().add(14, "minutes")]]);
+
             
             // Set the end time to 1 hour after the start time, only when picker is first shown
             if (!picker.date()) {  // Check if the picker date is empty (first time showing)
