@@ -3365,7 +3365,7 @@ class EventController extends BaseController
                     //     sendNotificationGuest('invite', $notificationParam);
                     // }
                     // $total_count = count($filteredIds) + count($newInviteGuest);
-                    debit_coins($user->id, $eventData['event_id'], $total_count);
+                    // debit_coins($user->id, $eventData['event_id'], $total_count);
                 }
             }
 
