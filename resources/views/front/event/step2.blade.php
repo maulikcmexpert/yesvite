@@ -6,7 +6,7 @@
             <form action="">
                 <h3>Choose Design</h3>
 
-                <input type="file" name="custom_template" id="custom_template"/>
+                <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png"/>
                 
                 <div class="row">
                     <div class="col-12 mb-4">
