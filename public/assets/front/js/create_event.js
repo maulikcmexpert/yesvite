@@ -859,19 +859,7 @@ function datepicker() {
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 
 
-            const endTime = $(this)
-            .closest(".activity-main-wrp")
-            .find('input[name="activity-start-time[]"]')
-            .val();
-
-            const emdtMoment = moment(endTime, "LT");
-
-
-            if(endTime!=""){
-                if(emdtMoment==startMoment){
-                    alert('start time and end time can not be safe');
-                }
-            }
+      
 
 
             $(this).val(startMoment);
@@ -925,6 +913,7 @@ function datepicker() {
         // })
        
         .on("dp.close", function () {
+            alert();
             // const picker = $(this).data("DateTimePicker");
             // const startTime = $(this).closest("div").find(".activity_start_time").val();
             // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
