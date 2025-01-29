@@ -33,7 +33,7 @@ class EventAboutController extends Controller
         $title = 'event about';
         $page = 'front.event_wall.event_about';
         $user  = Auth::guard('web')->user();
-        $js = ['event_about_rsvp', 'guest_rsvp','post_like_comment'];
+        $js = ['event_about_rsvp','guest_rsvp','post_like_comment'];
         $current_page = "about";
         $login_user_id  = $user->id;
         $event = decrypt($id);

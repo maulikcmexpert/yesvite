@@ -32,7 +32,7 @@
                 aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-         
+
         </div>
     </div>
     {{-- {{    dd($eventDetails)}} --}}
@@ -40,7 +40,7 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                @if (!empty($eventDetails['event_images']) && count($eventDetails['event_images']) > 0)
+                @if (!empty($eventDetails['event_images']) )
                     @foreach ($eventDetails['event_images'] as $image)
                         <div class="swiper-slide">
                             <div class="hosted-by-template-slider-img">
@@ -58,7 +58,7 @@
                         </div>
                     @endforeach
                 @else
-                   
+
                     <div class="swiper-slide">
                         <div class="hosted-by-template-slider-img">
                             <img src="{{ asset('assets/front/img/host-by-template-img.png') }}" alt="No Event Image" />
@@ -67,7 +67,7 @@
                 @endif
             </div>
 
-          
+
             <div class="custom-pagination"></div>
         </div>
     </div>
@@ -78,18 +78,33 @@
             <div class="hosted-by-detail-inner">
                 <h3>Details</h3>
                 <ul>
-                    <li>RSVP By: {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}</li>
-                    @if (!empty($eventDetails['podluck']))
-                        @if ($eventDetails['podluck'] == 1)
-                            <li>Potluck Event</li>
-                        @endif
+                    @if (!empty($eventDetails['rsvp_by']))
+                    <li>RSVP By:
+                        {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                    </li>
                     @endif
-                    @if (!empty($eventDetails['adult_only_party']))
-                        @if ($eventDetails['adult_only_party'] == 1)
-                            <li>Adults Only</li>
-                        @endif
+                    @if ($eventDetails['podluck'] == 1)
+                        <li>Potluck Event</li>
                     @endif
+                    @if ($eventDetails['adult_only_party'] == 1)
+                        <li>Adults Only</li>
+                    @endif
+                    @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
+                    <li>Multiple Day Event</li>
+                @endif
+
+                    @if (!empty($eventDetails['co_host']))
+                        <li>Co-Host</li>
+                    @endif
+                    @if (!empty($eventDetails['gift_registry']))
+                    <li>Gift Registry</li>
+                @endif
+                @if (!empty($eventDetails['event_schedule']))
+                    <li>Event has schedule</li>
+                @endif
+                @if (!empty($eventDetails['allow_limit'] ))
                     <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
+                    @endif
                 </ul>
             </div>
             <div class="hosted-by-date-time">
