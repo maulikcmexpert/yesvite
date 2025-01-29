@@ -828,10 +828,28 @@ function datepicker() {
         })
         .on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
-            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            const currentActivity = $(this).closest(".activity-main-wrp");
 
-            picker.date(startMoment.clone().add(1, "hours"));
+            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            let startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            const previousActivity = currentActivity.prev(".activity-main-wrp");
+            
+            if (previousActivity.length > 0) {
+                const previousEndTime = previousActivity.find(".activity_end_time").val();
+                if (previousEndTime) {
+                    // If previous end time exists, use it as the new start time
+                    // startMoment = moment(previousEndTime, "LT");
+                    startMoment = moment(previousEndTime, "LT").add(1, "hours");
+                    picker.date(startMoment);
+
+                }
+            }else{
+                        picker.date(startMoment.clone().add(1, "hours"));
+            }
+
+        
+            // Set the picker date to the adjusted start time (if any)
         })
         .on("dp.close", function () {
             const picker = $(this).data("DateTimePicker");
@@ -852,40 +870,86 @@ function datepicker() {
             useCurrent: false,
             ignoreReadonly: true,
             stepping: 15,
-        })
-        .on("dp.show", function () {
+        }).on("dp.show", function () {
             const picker = $(this).data("DateTimePicker");
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
-            const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
-
-            // Set end time to 1 hour after start time if it's empty (only in picker)
-            picker.date(startMoment.clone().add(1, "hours"));
-        })
-        .on("dp.close", function () {
-            const picker = $(this).data("DateTimePicker");
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            
+            // Get the start time from the related input field
+            const startTime = $(this)
+                .closest(".activity-main-wrp")
+                .find('input[name="activity-start-time[]"]')
+                .val();
+            
+            console.log("Start time:", startTime);
+            
+            // If start time exists, use it; otherwise, default to 12:00 PM
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             
-            picker.date(startMoment.clone().add(1, "hours"));
+            // Set the end time to 1 hour after the start time, only when picker is first shown
+            if (!picker.date()) {  // Check if the picker date is empty (first time showing)
+                picker.date(startMoment.clone().add(1, "hours"));
+            }
+        })
+        // .on("dp.show", function () {
+        //     const picker = $(this).data("DateTimePicker");
+        //     // const startTime = $(this).closest("div").find(".activity_start_time").val();
+        //     const startTime =   $(this)
+        //     .closest(".activity-main-wrp")
+        //     .find('input[name="activity-start-time[]"]')
+        //     .val();
+    
 
-            const currentActivity = $(this).closest(".activity-main-wrp");
-            const nextActivity = currentActivity.next(".activity-main-wrp"); // Find the next activity
-            if (nextActivity.length > 0) {
-                const nextStartPicker = nextActivity.find(".activity_start_time");
-                if (nextStartPicker.length > 0) {
-                    const nextStartMoment = startMoment.clone().add(1, "hours");
-                    nextStartPicker.val(nextStartMoment.format("LT")); // Update next activity's start_time
-                }
+        //     console.log(startTime);
+        //     const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+        
+        //     // Set the end time to 1 hour after the start time whenever the end time picker is shown
+        //     picker.date(startMoment.clone().add(1, "hours"));
+        // })
+       
+        .on("dp.close", function () {
+            // const picker = $(this).data("DateTimePicker");
+            // const startTime = $(this).closest("div").find(".activity_start_time").val();
+            // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            // const startMoment = moment(startTime, "LT") ;
+            
+            // picker.date(startMoment.clone().add(1, "hours"));
+
+            // const currentActivity = $(this).closest(".activity-main-wrp");
+            // const nextActivity = currentActivity.next(".activity-main-wrp"); // Find the next activity
+            // if (nextActivity.length > 0) {
+            //     const nextStartPicker = nextActivity.find(".activity_start_time");
+            //     if (nextStartPicker.length > 0) {
+            //         const nextStartMoment = startMoment.clone().add(1, "hours");
+            //         nextStartPicker.val(nextStartMoment.format("LT")); // Update next activity's start_time
+            //     }
+            // }
+
+            
+            // Set end time to 1 hour after start time if it's empty (only in picker)
+            // $(this).val(startMoment);
+            const picker = $(this).data("DateTimePicker");
+    
+            // Get the selected end time directly from the picker
+            const selectedEndTime = picker.date();
+            
+            if (selectedEndTime) {
+                // If a time is selected, update the input field with the selected time
+                $(this).val(selectedEndTime.format("LT"));
+            } else {
+                // If no time is selected, set it to 1 hour after start time
+                const startTime = $(this)
+                    .closest(".activity-main-wrp")
+                    .find('input[name="activity-start-time[]"]')
+                    .val();
+                const startMoment = moment(startTime, "LT");
+                $(this).val(startMoment.clone().add(1, "hours").format("LT"));
             }
 
-            
-            // Set end time to 1 hour after start time if it's empty (only in picker)
-            $(this).val(startMoment);
+            console.log(selectedEndTime);
+            console.log(selectedEndTime);
         });
     });
 }
 
-datepicker();
 
 
 function startTimePicker() {
@@ -899,17 +963,18 @@ function startTimePicker() {
             down: "fa fa-chevron-down"
         }
     }).on("dp.show", function () {
-        const picker = $(this).data("DateTimePicker");
-        const currentValue = $(this).val();
+        // const picker = $(this).data("DateTimePicker");
+        // const currentValue = $(this).val();
         
-        if (currentValue) {
-            const currentMoment = moment(currentValue, "LT");
-            if (currentMoment.isValid()) {
-                picker.date(currentMoment);
-            }
-        } else {
-            picker.date(moment().hours(12).minutes(0).seconds(0));
-        }
+        // if (currentValue) {
+        //     const currentMoment = moment(currentValue, "LT");
+        //     if (currentMoment.isValid()) {
+        //         picker.date(currentMoment);
+        //     }
+        // } else {
+            $(this).val("");
+            $(this).data("DateTimePicker").date(moment().hours(12).minutes(0).seconds(0));
+            // }
     }).on("dp.hide", function (e) {
         const selectedTime = e.date ? e.date.format("LT") : "";
         $(this).val(selectedTime);
@@ -950,6 +1015,7 @@ function endTimePicker() {
 
 $(document).ready(function () {
     startTimePicker();
+    datepicker();
     endTimePicker();
 });
 
@@ -2421,9 +2487,9 @@ $(".decrease").click(function () {
 //         })
 //         .appendTo("#create_eventForm");
 // });
-$(document).on("click", "#start-time", function () {
-    $(this).val("");
-});
+// $(document).on("click", "#start-time", function () {
+//     $(this).val("");
+// });
 $(document).on("blur", "#start-time", function () {
     var s_t = $(this).val();
     var start_time = convertTo24Hour($(this).val());
@@ -2648,7 +2714,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        datepicker();
+        // datepicker();
     }
 });
 
@@ -2707,7 +2773,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             hours = hours % 12 || 12; // Convert hour '0' to '12' in 12-hour format
             hours = hours.toString().padStart(2, "0");
             var newEndTimeWith30Min = `${hours}:${minutes} ${period}`;
-            $(this).val(newEndTimeWith30Min);
+            // $(this).val(newEndTimeWith30Min);
             newEndTime = convertTo24Hour(newEndTimeWith30Min);
 
             // return;
@@ -2718,18 +2784,18 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
         var lastEndTime = "";
         var startEndTime = "";
-        $("#" + lastActivityTime)
-            .children()
-            .find(".activity_end_time")
-            .each(function () {
-                lastEndTime = convertTo24Hour($(this).val());
-            });
-        $("#" + lastActivityTime)
-            .children()
-            .find(".activity_start_time")
-            .each(function () {
-                startEndTime = $(this).val();
-            });
+        // $("#" + lastActivityTime)
+        //     .children()
+        //     .find(".activity_end_time")
+        //     .each(function () {
+        //         lastEndTime = convertTo24Hour($(this).val());
+        //     });
+        // $("#" + lastActivityTime)
+        //     .children()
+        //     .find(".activity_start_time")
+        //     .each(function () {
+        //         startEndTime = $(this).val();
+        //     });
 
         console.log(lastEndTime);
         console.log(eventEndTime);
@@ -2772,11 +2838,11 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         //     }
         // }
 
-        $(this)
-            .closest(".activity-main-wrp")
-            .next()
-            .find('input[name="activity-start-time[]"]')
-            .val(newEndtimeagain);
+        // $(this)
+        //     .closest(".activity-main-wrp")
+        //     .next()
+        //     .find('input[name="activity-start-time[]"]')
+        //     .val(newEndtimeagain);
 
         setTimeout(function () {
             blurExecutedEndTime = false; // Reset after a delay
@@ -3016,11 +3082,51 @@ function convertTo12Hour(time) {
     }
     return `${hours}:${minutes} ${modifier}`;
 }
+// Function to check end times
+// function checkEndTimes() {
+//     const scheduleWrapper = document.querySelector('.activity-schedule-wrp');
+//     const endTimes = scheduleWrapper.querySelectorAll('.activity_end_time');
+    
+//     let exceedsTime = false;
+
+//     endTimes.forEach((endTimeInput) => {
+//         const endTime = endTimeInput.value.trim();
+
+//         if (endTime) {
+//             const [time, period] = endTime.split(' '); // Split into time and AM/PM
+//             const [hours, minutes] = time.split(':'); // Split time into hours and minutes
+
+//             let endHour = parseInt(hours);
+//             let endMinute = parseInt(minutes);
+
+//             // Convert to 24-hour format based on AM/PM
+//             if (period === 'PM' && endHour !== 12) {
+//                 endHour += 12;
+//             } else if (period === 'AM' && endHour === 12) {
+//                 endHour = 0;
+//             }
+
+//             // Check if time exceeds 11:00 PM (23:00)
+//             if (endHour > 23 || (endHour === 23 && endMinute > 0)) {
+//                 exceedsTime = true;
+//             }
+//         }
+//     });
+
+//     if (exceedsTime) {
+//         alert("One or more activities exceed the end time of 11:00 PM.");
+//     } else {
+//         alert("All activities are within the valid time range.");
+//     }
+// }
+
+// Trigger the function on save button click
+
 
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
     var end_time = $("#ac-end-time").val();
-
+    checkEndTimes();
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
@@ -3109,6 +3215,8 @@ $(document).on("click", "#save_activity_schedule", function () {
         eventData.activity = activities;
     }
 });
+
+
 
 $("#saveGiftRegistryButton").click(function () {
     // e.preventDefault();
