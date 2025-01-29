@@ -2749,8 +2749,14 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                 .find('input[name="activity-start-time[]"]')
                 .val()
         );
+        var endtimelatesr = convertTo24Hour(
+            $(this).val()
+        );
         console.log(newStartTime);
         console.log($(this).val());
+        if(newStartTime==endtimelatesr){
+            alert();
+        }
         if (
             newEndTime != "" &&
             newStartTime != "" &&
