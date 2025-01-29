@@ -40,20 +40,11 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                @if (!empty($eventDetails['event_images']) )
+                @if ($eventDetails['event_images'])
                     @foreach ($eventDetails['event_images'] as $image)
                         <div class="swiper-slide">
                             <div class="hosted-by-template-slider-img">
-                                @php
-                                    // Check if the image file exists
-                                    $imagePath = public_path($image); // Adjust the path based on your folder structure
-                                @endphp
-
-                                @if (file_exists($imagePath))
-                                    <img src="{{ asset($image) }}" alt="Event Image" />
-                                @else
-                                    <img src="{{ asset('assets/front/img/host-by-template-img.png') }}" alt="Default Image" />
-                                @endif
+                                <img src="{{ $image }}" alt="Event Image" />
                             </div>
                         </div>
                     @endforeach

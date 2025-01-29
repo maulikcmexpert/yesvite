@@ -3,7 +3,7 @@ $(document).ready(function () {
     let isLongPresss = false;
     let selectedContacts = [];
     let selectedPhoneContacts = [];
-    
+
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -428,11 +428,11 @@ const event_id = $('#event_id').val();
                 const container = $(".GuestTabContent");
                 container.html(contacts);
                 allContactsSuccess = true;
-                
+
                 const invitedUsers = response.invited_users;
-                selectedContacts = response.selected_yesvite_user;
-                selectedPhoneContacts = response.selected_phone_user;
-                console.log({selectedContacts,selectedPhoneContacts})
+                // selectedContacts = response.selected_yesvite_user;
+                // selectedPhoneContacts = response.selected_phone_user;
+                // console.log({selectedContacts,selectedPhoneContacts})
             },
             error: function () {
                 toastr.error("No Contacts Found");
@@ -465,7 +465,7 @@ function loadSavedPhoneContacts() {
     selectedPhoneContacts =
         JSON.parse(localStorage.getItem("selectedPhoneContacts")) || [];
     updatePhoneModalContent();
-    
+
     selectedPhoneContacts.forEach((contact) => {
         handleCheckboxState(contact, ".phoneContact-checkbox");
     });

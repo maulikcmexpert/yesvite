@@ -454,9 +454,10 @@
 
                                                     <!-- Google Maps iframe with dynamic latitude and longitude -->
                                                     <iframe
-                                                        src="https://www.google.com/maps/embed?q={{ $eventDetails['latitude'] ?? '' }},{{ $eventDetails['longitude'] ?? '' }}"
-                                                        width="600" height="450" style="border:0;"
-                                                        allowfullscreen="" loading="lazy"></iframe>
+    src="https://www.google.com/maps?q={{ $eventDetails['latitude'] ?? '0' }},{{ $eventDetails['longitude'] ?? '0' }}&hl=es;z=14&output=embed"
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+</iframe>
+
 
                                                     <img src="{{ asset('assets/front/img/location-marker.svg') }}"
                                                         alt="marker" class="marker">

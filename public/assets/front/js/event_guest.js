@@ -95,21 +95,21 @@ $(document).on('click', '.save-btn', function () {
                                 <h5 id="kids${response.guest_id}">${response.kids} Kids</h5>
                             </div>
                         </div>`;
-                    guestContainer.find('.sucess-rsvp-wrp').append(successYesHtml); // Append to the right section
+                    guestContainer.find('.check_status').append(successYesHtml); // Append to the right section
                 } else if (response.rsvp_status == '0') {
                     // If the guest's RSVP is "NO"
                     const successNoHtml = `
                         <div class="sucess-no" data-guest-id="${response.guest_id}">
                             <h5>NO</h5>
                         </div>`;
-                    guestContainer.find('.sucess-rsvp-wrp').append(successNoHtml); // Append to the right section
+                    guestContainer.find('.check_status').append(successNoHtml); // Append to the right section
                 } else if (response.rsvp_status == null) {
                     // If the guest has no reply
                     const noReplyHtml = `
                         <div class="no-reply" data-guest-id="${response.guest_id}">
                             <h5>NO REPLY</h5>
                         </div>`;
-                    guestContainer.find('.sucess-rsvp-wrp').append(noReplyHtml); // Append to the right section
+                    guestContainer.find('.check_status').append(noReplyHtml); // Append to the right section
                 }
 
                 // Hide the modal after updating

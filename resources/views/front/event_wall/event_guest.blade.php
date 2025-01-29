@@ -227,12 +227,12 @@
                                                 $guestArray = $eventDetails['event_detail']['guests'] ?? null;
                                                 $totalAdults = 0;
                                                 $totalKids = 0;
-// dd( $guestArray);
+                                                // dd( $guestArray);
 
                                                 if ($guestArray) {
                                                     foreach ($guestArray as $guest) {
                                                         $totalAdults += $guest['adults'] ?? 0;
-                                                        $totalKids += $guest['kids'] ?? 0;; // Accessing related user data
+                                                        $totalKids += $guest['kids'] ?? 0; // Accessing related user data
                                                     }
                                                 } else {
                                                     echo 'No guests found.';
@@ -244,166 +244,183 @@
                                                 // Total attending
                                                 $totalAttending = $totalAdults + $totalKids;
                                             @endphp
-@if (!empty($guestArray))
-                                            @foreach($guestArray as $guest)
-                                       {{-- {{     dd($guest['id'])}} --}}
-                                                @if (isset($guest['user']))
-                                                    @php
-                                                        $user = $guest['user']; // Fetch user array
-                                                        // dd($user['id']);
-                                                        $isDisabled =
-                                                            $eventDetails['host_id'] == $user['id'] ? 'd-none' : '';
-                                                    @endphp
-                                                    <div class="guest-user-box {{ $isDisabled }}" data-guest-id="{{ $guest['id'] }}">
-                                                        <div class="guest-list-data">
-                                                            <a href="#" class="guest-img">
-                                                                @if ($user['profile'] != '')
-                                                                <img src="{{ $user['profile'] }}"
-                                                                    alt="guest-img">
-                                                            @else
-                                                                @php
+                                            @if (!empty($guestArray))
+                                                @foreach ($guestArray as $guest)
+                                                    {{-- {{     dd($guest['id'])}} --}}
+                                                    @if (isset($guest['user']))
+                                                        @php
+                                                            $user = $guest['user']; // Fetch user array
+                                                            // dd($user['id']);
+                                                            $isDisabled =
+                                                                $eventDetails['host_id'] == $user['id'] ? 'd-none' : '';
+                                                        @endphp
+                                                        <div class="guest-user-box {{ $isDisabled }}"
+                                                            data-guest-id="{{ $guest['id'] }}">
+                                                            <div class="guest-list-data">
+                                                                <a href="#" class="guest-img">
+                                                                    @if ($user['profile'] != '')
+                                                                        <img src="{{ $user['profile'] }}"
+                                                                            alt="guest-img">
+                                                                    @else
+                                                                        @php
 
-                                                                    // $parts = explode(" ", $name);
-                                                                    $firstInitial = isset($user['firstname'][0])
-                                                                        ? strtoupper($user['firstname'][0])
-                                                                        : '';
-                                                                    $secondInitial = isset($user['lastname'][0])
-                                                                        ? strtoupper($user['lastname'][0])
-                                                                        : '';
-                                                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                                                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                                                                @endphp
-                                                                <h5 class="{{ $fontColor }}">
-                                                                    {{ $initials }}
-                                                                </h5>
-                                                            @endif
+                                                                            // $parts = explode(" ", $name);
+                                                                            $firstInitial = isset($user['firstname'][0])
+                                                                                ? strtoupper($user['firstname'][0])
+                                                                                : '';
+                                                                            $secondInitial = isset($user['lastname'][0])
+                                                                                ? strtoupper($user['lastname'][0])
+                                                                                : '';
+                                                                            $initials =
+                                                                                strtoupper($firstInitial) .
+                                                                                strtoupper($secondInitial);
+                                                                            $fontColor =
+                                                                                'fontcolor' . strtoupper($firstInitial);
+                                                                        @endphp
+                                                                        <h5 class="{{ $fontColor }}">
+                                                                            {{ $initials }}
+                                                                        </h5>
+                                                                    @endif
 
-<input type="hidden" id="eventID" value="{{$guest['event_id']}}">
-<input type="hidden" id="user_id" value="{{$guest['user_id']}}">
+                                                                    <input type="hidden" id="eventID"
+                                                                        value="{{ $guest['event_id'] }}">
+                                                                    <input type="hidden" id="user_id"
+                                                                        value="{{ $guest['user_id'] }}">
 
-                                                            </a>
-                                                            <div class="d-flex flex-column">
-                                                                <a href="#"
-                                                                    class="guest-name">{{ $user['firstname'] }}
-                                                                    {{ $user['lastname'] }}</a>
-                                                                <span class="guest-email">{{ $user['email'] }}</span>
-                                                            </div>
-                                                            <div class="d-flex align-items-center ms-auto">
-                                                                @php
-                                                                    $isDisabled =
-                                                                        $eventDetails['host_id'] != $login_user_id
-                                                                            ? 'd-none'
-                                                                            : '';
-                                                                    // dd($login_user_id);
-                                                                @endphp
-                                                                <button class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
-                                                                    data-bs-toggle="modal" data-bs-target="#editrsvp"
-                                                                    data-guest-id="{{ $guest['id'] }}">
-                                                                    <svg width="20" height="20"
-                                                                        viewBox="0 0 20 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M9.16797 1.66699H7.5013C3.33464 1.66699 1.66797 3.33366 1.66797 7.50033V12.5003C1.66797 16.667 3.33464 18.3337 7.5013 18.3337H12.5013C16.668 18.3337 18.3346 16.667 18.3346 12.5003V10.8337"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                        <path
-                                                                            d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-miterlimit="10"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                        <path
-                                                                            d="M12.4258 3.45801C12.9841 5.44967 14.5424 7.00801 16.5424 7.57467"
-                                                                            stroke="#94A3B8" stroke-width="1.5"
-                                                                            stroke-miterlimit="10"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                    </svg>
-                                                                </button>
-                                                                <a href="#" class="msg-btn">
-                                                                    <svg width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z"
-                                                                            stroke="#F73C71" stroke-width="1.5"
-                                                                            stroke-miterlimit="10"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                        <path
-                                                                            d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9"
-                                                                            stroke="#F73C71" stroke-width="1.5"
-                                                                            stroke-miterlimit="10"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                    </svg>
                                                                 </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sucess-rsvp-wrp">
-                                                            <div class="d-flex align-items-center">
-                                                                <h5 class="green d-flex align-items-center">
-                                                                    <svg width="16" height="16"
-                                                                        viewBox="0 0 16 16" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M11.3335 14.1654H4.66683C4.3935 14.1654 4.16683 13.9387 4.16683 13.6654C4.16683 13.392 4.3935 13.1654 4.66683 13.1654H11.3335C13.2402 13.1654 14.1668 12.2387 14.1668 10.332V5.66536C14.1668 3.7587 13.2402 2.83203 11.3335 2.83203H4.66683C2.76016 2.83203 1.8335 3.7587 1.8335 5.66536C1.8335 5.9387 1.60683 6.16536 1.3335 6.16536C1.06016 6.16536 0.833496 5.9387 0.833496 5.66536C0.833496 3.23203 2.2335 1.83203 4.66683 1.83203H11.3335C13.7668 1.83203 15.1668 3.23203 15.1668 5.66536V10.332C15.1668 12.7654 13.7668 14.1654 11.3335 14.1654Z"
-                                                                            fill="#23AA26" />
-                                                                        <path
-                                                                            d="M7.99969 8.57998C7.43969 8.57998 6.87302 8.40665 6.43969 8.05331L4.35302 6.38665C4.13969 6.21331 4.09969 5.89998 4.27302 5.68665C4.44636 5.47331 4.75968 5.43332 4.97302 5.60665L7.05969 7.27332C7.56635 7.67998 8.42635 7.67998 8.93302 7.27332L11.0197 5.60665C11.233 5.43332 11.553 5.46665 11.7197 5.68665C11.893 5.89998 11.8597 6.21998 11.6397 6.38665L9.55301 8.05331C9.12635 8.40665 8.55969 8.57998 7.99969 8.57998Z"
-                                                                            fill="#23AA26" />
-                                                                        <path
-                                                                            d="M5.3335 11.5H1.3335C1.06016 11.5 0.833496 11.2733 0.833496 11C0.833496 10.7267 1.06016 10.5 1.3335 10.5H5.3335C5.60683 10.5 5.8335 10.7267 5.8335 11C5.8335 11.2733 5.60683 11.5 5.3335 11.5Z"
-                                                                            fill="#23AA26" />
-                                                                        <path
-                                                                            d="M3.3335 8.83203H1.3335C1.06016 8.83203 0.833496 8.60536 0.833496 8.33203C0.833496 8.0587 1.06016 7.83203 1.3335 7.83203H3.3335C3.60683 7.83203 3.8335 8.0587 3.8335 8.33203C3.8335 8.60536 3.60683 8.83203 3.3335 8.83203Z"
-                                                                            fill="#23AA26" />
-                                                                    </svg> Succesful
-                                                                </h5>
-                                                                <h5 class="ms-auto">Read</h5>
-                                                            </div>
-                                                        </div>
-
-                                                        @if ($guest['rsvp_status'] == '1')
-                                                            <div class="sucess-yes" data-guest-id="{{ $guest['id'] }}">
-                                                                <h5 class="green">YES</h5>
-                                                                <div class="sucesss-cat ms-auto">
-                                                                    <svg width="15" height="15"
-                                                                        viewBox="0 0 15 15" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z"
-                                                                            fill="black" fill-opacity="0.2" />
-                                                                        <path
-                                                                            d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z"
-                                                                            fill="black" fill-opacity="0.2" />
-                                                                        <path
-                                                                            d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z"
-                                                                            fill="black" fill-opacity="0.2" />
-                                                                        <path
-                                                                            d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z"
-                                                                            fill="black" fill-opacity="0.2" />
-                                                                    </svg>
-                                                                    <h5 id="adults{{ $guest['id'] }}">
-                                                                        {{ $guest['adults'] }}Adults
-                                                                    </h5>
-                                                                    <h5 id="kids{{ $guest['id'] }}">
-                                                                        {{ $guest['kids'] }} Kids</h5>
+                                                                <div class="d-flex flex-column">
+                                                                    <a href="#"
+                                                                        class="guest-name">{{ $user['firstname'] }}
+                                                                        {{ $user['lastname'] }}</a>
+                                                                    <span
+                                                                        class="guest-email">{{ $user['email'] }}</span>
+                                                                </div>
+                                                                <div class="d-flex align-items-center ms-auto">
+                                                                    @php
+                                                                        $isDisabled =
+                                                                            $eventDetails['host_id'] != $login_user_id
+                                                                                ? 'd-none'
+                                                                                : '';
+                                                                        // dd($login_user_id);
+                                                                    @endphp
+                                                                    <button
+                                                                        class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editrsvp"
+                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        <svg width="20" height="20"
+                                                                            viewBox="0 0 20 20" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M9.16797 1.66699H7.5013C3.33464 1.66699 1.66797 3.33366 1.66797 7.50033V12.5003C1.66797 16.667 3.33464 18.3337 7.5013 18.3337H12.5013C16.668 18.3337 18.3346 16.667 18.3346 12.5003V10.8337"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                            <path
+                                                                                d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                            <path
+                                                                                d="M12.4258 3.45801C12.9841 5.44967 14.5424 7.00801 16.5424 7.57467"
+                                                                                stroke="#94A3B8" stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                        </svg>
+                                                                    </button>
+                                                                    <a href="#" class="msg-btn">
+                                                                        <svg width="24" height="24"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z"
+                                                                                stroke="#F73C71" stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                            <path
+                                                                                d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9"
+                                                                                stroke="#F73C71" stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" />
+                                                                        </svg>
+                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                        @elseif ($guest['rsvp_status'] == '0')
-                                                            <div class="sucess-no"  data-guest-id="{{ $guest['id'] }}">
-                                                                <h5>NO</h5>
+                                                            <div class="sucess-rsvp-wrp">
+                                                                <div class="d-flex align-items-center">
+                                                                    <h5 class="green d-flex align-items-center">
+                                                                        <svg width="16" height="16"
+                                                                            viewBox="0 0 16 16" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M11.3335 14.1654H4.66683C4.3935 14.1654 4.16683 13.9387 4.16683 13.6654C4.16683 13.392 4.3935 13.1654 4.66683 13.1654H11.3335C13.2402 13.1654 14.1668 12.2387 14.1668 10.332V5.66536C14.1668 3.7587 13.2402 2.83203 11.3335 2.83203H4.66683C2.76016 2.83203 1.8335 3.7587 1.8335 5.66536C1.8335 5.9387 1.60683 6.16536 1.3335 6.16536C1.06016 6.16536 0.833496 5.9387 0.833496 5.66536C0.833496 3.23203 2.2335 1.83203 4.66683 1.83203H11.3335C13.7668 1.83203 15.1668 3.23203 15.1668 5.66536V10.332C15.1668 12.7654 13.7668 14.1654 11.3335 14.1654Z"
+                                                                                fill="#23AA26" />
+                                                                            <path
+                                                                                d="M7.99969 8.57998C7.43969 8.57998 6.87302 8.40665 6.43969 8.05331L4.35302 6.38665C4.13969 6.21331 4.09969 5.89998 4.27302 5.68665C4.44636 5.47331 4.75968 5.43332 4.97302 5.60665L7.05969 7.27332C7.56635 7.67998 8.42635 7.67998 8.93302 7.27332L11.0197 5.60665C11.233 5.43332 11.553 5.46665 11.7197 5.68665C11.893 5.89998 11.8597 6.21998 11.6397 6.38665L9.55301 8.05331C9.12635 8.40665 8.55969 8.57998 7.99969 8.57998Z"
+                                                                                fill="#23AA26" />
+                                                                            <path
+                                                                                d="M5.3335 11.5H1.3335C1.06016 11.5 0.833496 11.2733 0.833496 11C0.833496 10.7267 1.06016 10.5 1.3335 10.5H5.3335C5.60683 10.5 5.8335 10.7267 5.8335 11C5.8335 11.2733 5.60683 11.5 5.3335 11.5Z"
+                                                                                fill="#23AA26" />
+                                                                            <path
+                                                                                d="M3.3335 8.83203H1.3335C1.06016 8.83203 0.833496 8.60536 0.833496 8.33203C0.833496 8.0587 1.06016 7.83203 1.3335 7.83203H3.3335C3.60683 7.83203 3.8335 8.0587 3.8335 8.33203C3.8335 8.60536 3.60683 8.83203 3.3335 8.83203Z"
+                                                                                fill="#23AA26" />
+                                                                        </svg> Succesful
+                                                                    </h5>
+                                                                    <h5 class="ms-auto">Read</h5>
+                                                                </div>
                                                             </div>
-                                                        @elseif ($guest['rsvp_status'] == null)
-                                                            <div class="no-reply"  data-guest-id="{{ $guest['id'] }}">
-                                                                <h5>NO REPLY</h5>
+                                                            <div class="check_status">
+                                                                @if ($guest['rsvp_status'] == '1')
+                                                                    <div class="sucess-yes"
+                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        <h5 class="green">YES</h5>
+                                                                        <div class="sucesss-cat ms-auto">
+                                                                            <svg width="15" height="15"
+                                                                                viewBox="0 0 15 15" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z"
+                                                                                    fill="black"
+                                                                                    fill-opacity="0.2" />
+                                                                                <path
+                                                                                    d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z"
+                                                                                    fill="black"
+                                                                                    fill-opacity="0.2" />
+                                                                                <path
+                                                                                    d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z"
+                                                                                    fill="black"
+                                                                                    fill-opacity="0.2" />
+                                                                                <path
+                                                                                    d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z"
+                                                                                    fill="black"
+                                                                                    fill-opacity="0.2" />
+                                                                            </svg>
+                                                                            <h5 id="adults{{ $guest['id'] }}">
+                                                                                {{ $guest['adults'] }}Adults
+                                                                            </h5>
+                                                                            <h5 id="kids{{ $guest['id'] }}">
+                                                                                {{ $guest['kids'] }} Kids</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                @elseif ($guest['rsvp_status'] == '0')
+                                                                    <div class="sucess-no"
+                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        <h5>NO</h5>
+                                                                    </div>
+                                                                @elseif ($guest['rsvp_status'] == null)
+                                                                    <div class="no-reply"
+                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        <h5>NO REPLY</h5>
+                                                                    </div>
+                                                                @endif
                                                             </div>
-                                                        @endif
-                                                    </div>
-                                                @endif
-                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             @endif
 
 
@@ -1143,8 +1160,8 @@
     </div>
     {{-- {{      dd($eventDetails['event_detail'][2]);}} --}}
     <!-- ========= edit-rsvp ======== -->
-    <div class="modal fade cmn-modal guest-edit-incress-modal" id="editrsvp" tabindex="-1" aria-labelledby="editrsvpLabel"
-        aria-hidden="true">
+    <div class="modal fade cmn-modal guest-edit-incress-modal" id="editrsvp" tabindex="-1"
+        aria-labelledby="editrsvpLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -1218,7 +1235,8 @@
 
                 </div>
                 <div class="modal-footer rsvp-button-wrp">
-                    <button type="button" class="btn btn-secondary remove-btn remove_guest_page" data-bs-dismiss="modal" data-event-id="{{$event}}" >Remove
+                    <button type="button" class="btn btn-secondary remove-btn remove_guest_page"
+                        data-bs-dismiss="modal" data-event-id="{{ $event }}">Remove
                         Guest</button>
                     <button type="button" class="btn btn-secondary save-btn" data-bs-dismiss="modal">Update</button>
 
@@ -1436,8 +1454,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any

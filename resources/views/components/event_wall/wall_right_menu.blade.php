@@ -233,8 +233,8 @@ if ($hostView) {
                 <div class="guest-rsvp-attend">
                     <h6>RSVP</h6>
                     <div class="input-form">
-                        <input type="radio" id="option1" name="rsvp_Guest_status" class="rsvp_yes" value="1" />
-                        <label for="option1"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
+                        <input type="radio" id="option4" name="rsvp_status" class="rsvp_yes" value="1" />
+                        <label for="option4"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M10.5001 18.3334C15.0834 18.3334 18.8334 14.5834 18.8334 10.0001C18.8334 5.41675 15.0834 1.66675 10.5001 1.66675C5.91675 1.66675 2.16675 5.41675 2.16675 10.0001C2.16675 14.5834 5.91675 18.3334 10.5001 18.3334Z"
@@ -245,8 +245,8 @@ if ($hostView) {
                             </svg>Attending</label>
                     </div>
                     <div class="input-form">
-                        <input type="radio" id="option2" name="rsvp_Guest_status" value="0" class="rsvp_no" />
-                        <label for="option2"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
+                        <input type="radio" id="option3" name="rsvp_status" value="0" class="rsvp_no" />
+                        <label for="option3"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M10.4974 18.3346C15.0807 18.3346 18.8307 14.5846 18.8307 10.0013C18.8307 5.41797 15.0807 1.66797 10.4974 1.66797C5.91406 1.66797 2.16406 5.41797 2.16406 10.0013C2.16406 14.5846 5.91406 18.3346 10.4974 18.3346Z"
