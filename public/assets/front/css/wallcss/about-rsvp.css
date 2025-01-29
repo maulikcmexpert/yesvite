@@ -15,7 +15,7 @@
 .birth-details .birth-img h5{
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +36,7 @@
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 8px;
-    
+
 }
 
 .birth-details .birth-host span{
