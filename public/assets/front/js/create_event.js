@@ -2792,18 +2792,18 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
         var lastEndTime = "";
         var startEndTime = "";
-        // $("#" + lastActivityTime)
-        //     .children()
-        //     .find(".activity_end_time")
-        //     .each(function () {
-        //         lastEndTime = convertTo24Hour($(this).val());
-        //     });
-        // $("#" + lastActivityTime)
-        //     .children()
-        //     .find(".activity_start_time")
-        //     .each(function () {
-        //         startEndTime = $(this).val();
-        //     });
+        $("#" + lastActivityTime)
+            .children()
+            .find(".activity_end_time")
+            .each(function () {
+                lastEndTime = convertTo24Hour($(this).val());
+            });
+        $("#" + lastActivityTime)
+            .children()
+            .find(".activity_start_time")
+            .each(function () {
+                startEndTime = $(this).val();
+            });
 
         console.log(lastEndTime);
         console.log(eventEndTime);
