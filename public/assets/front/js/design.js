@@ -2587,6 +2587,7 @@ $(".edit-design-sidebar").on("click", function () {
 });
 function loadAgain() {
     $(".side-bar-list").removeClass("active");
+    $(".edit-design-sidebar").addClass("active");
     $("#close_createEvent").css("display", "none");
     // e.preventDefault();
     var eventID = $("#eventID").val();
