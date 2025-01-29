@@ -2007,7 +2007,9 @@ class EventWallController extends Controller
             'status' => 'success',
             'message' => 'Contacts retrieved successfully',
             'yesvite_contacts' => $yesviteContactHtml,
-            'invited_users' => $invitedUsers
+            'invited_users' => $invitedUsers,
+            'selected_yesvite_user'=>$selected_yesvite_user,
+            'selected_phone_user'=>$selected_phone_user,
         ]);
     }
 
