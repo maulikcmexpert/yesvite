@@ -133,8 +133,8 @@ if (giftRegestryDataRaw.length > 0) {
     }
 }
 
-var selected_profile_or_text = "";
-var selected_prefer_by = "";
+// var selected_profile_or_text = "";
+// var selected_prefer_by = "";
 var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
