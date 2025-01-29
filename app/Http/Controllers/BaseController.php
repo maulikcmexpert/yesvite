@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+// use DB;
+use App\Models\UserOpt;
 
 class BaseController extends Controller
 {
@@ -23,6 +25,11 @@ class BaseController extends Controller
     }
     protected function getPrices()
     {
+
+        $users = UserOpt::select('id', 'event_id', 'event_invited_user_id')
+            ->groupBy('event_id')
+            ->get();
+        dd($users);
         // handleIncomingMessage("5103005587", "yes");
         // handleSMSInvite("+91 97238 40340", "yesvite web", "srryghhhggguvj", 814, 2787);
         return [
