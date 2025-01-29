@@ -97,8 +97,15 @@ $notification_list=getNotificationList();
             aria-labelledby="dropdownButton"
           >
             <div class="notification-dropdown-header">
+              @php
+                    $notification = getTotalUnreadNotification($user->id);
+              @endphp
 
+              @if($notification!=0)
               <h3>Notifications <span class="notification_count_display">{{$notification}}</span></h3>
+              @else
+              <h3>Notifications </h3>
+              @endif
               <h5 class="notification_read" data-user_id="{{$user->id}}"style="cursor: pointer;">
                 Mark All Read
                 {{-- <span type="button" data-bs-toggle="modal" data-bs-target="#"> --}}
