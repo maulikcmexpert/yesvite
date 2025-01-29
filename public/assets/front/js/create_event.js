@@ -4429,8 +4429,12 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");
+    $(".edit-design-sidebar").removeClass("active");
     $(".edit-design").removeClass("active");
-    if (target == ".li_design") {
+    if (target == ".li_design .edit-design-sidebar") {
+        $(".edit-design-sidebar").addClass("active");
+        $(".pick-card").addClass("menu-success");
+    } else if (target == ".li_design .pick-card") {
         $(".pick-card").addClass("active");
         $(".pick-card").removeClass("menu-success");
     } else {
@@ -4470,7 +4474,7 @@ $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     $(".step_4").css("display", "none");
 
     $(".step_final_checkout").css("display", "none");
-   // active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
+    // active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
     $(".event_create_percent").text("25%");
     $(".current_step").text("1 of 4");
 
