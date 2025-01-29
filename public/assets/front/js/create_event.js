@@ -4459,11 +4459,26 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
-$(document).on("click", ".li_design", function (e) {
+$(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     $("#close_createEvent").css("display", "block");
     e.preventDefault();
-    $(".subcategory-section").show();
-    li_design_click();
+    $(".subcategory-section").hide();
+    $(".design-span").addClass("active");
+    $(".step_1").css("display", "none");
+    $(".step_2").css("display", "none");
+    $(".step_3").css("display", "none");
+    $(".step_4").css("display", "none");
+
+    $(".step_final_checkout").css("display", "none");
+   // active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
+    $(".event_create_percent").text("25%");
+    $(".current_step").text("1 of 4");
+
+    // edit_design_modal();
+
+    var subclass = ".side-bar-sub-list";
+    console.log("handleActiveClass");
+    handleActiveClass(".li_design .edit-design-sidebar");
 });
 
 function li_design_click() {
@@ -4504,7 +4519,7 @@ function li_design_click() {
 
     var subclass = ".side-bar-sub-list";
     console.log("handleActiveClass");
-    handleActiveClass(".li_design");
+    handleActiveClass(".li_design .pick-card");
     // }
 }
 
