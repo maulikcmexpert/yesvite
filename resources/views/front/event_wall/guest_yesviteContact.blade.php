@@ -1,6 +1,6 @@
 <div class="tab-pane fade show active" id="home" role="tabpanel"
    aria-labelledby="home-tab">
-   <div class="guest-users-wrp selected-contacts-list"  id="selected-contacts">
+   <div class="guest-users-wrp selected-contacts-list "  id="selected-contacts">
       {{-- <a href="#" class="guest-user d-block">
          <div class="guest-user-img guest-total">
             <span class="number" id="total-selected">0</span>

@@ -779,7 +779,7 @@
                                                 <div class="posts-card-head">
                                                     <div class="posts-card-head-left">
                                                         <div class="posts-card-head-left-img">
-                                                            @if ($post['profile'] != '')
+                                                            @if ( $users->profile != '')
                                                                 <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                                                     alt="" loading="lazy">
                                                             @else

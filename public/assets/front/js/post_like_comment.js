@@ -556,7 +556,7 @@ function updateModalContent() {
         updateModalContent
     );
     // Update total count for selected contacts
-    $(".guest-user-img .number").text(selectedContacts.length);
+    $(".yesvite .number").text(selectedContacts.length);
 }
 
 // Update modal content for phone contacts
@@ -568,7 +568,7 @@ function updatePhoneModalContent() {
         updatePhoneModalContent
     );
     // Update total count for selected phone contacts
-    $(".guest-user-img .number").text(selectedPhoneContacts.length);
+    $(".phone .number").text(selectedPhoneContacts.length);
 }
 
 // General modal update function
@@ -599,16 +599,20 @@ function updateModal(
                 </div>
                 <h6>${contact.name} ${contact.lastname}</h6>
             </div>
-             <a href="#" class="guest-user d-block">
-         <div class="guest-user-img guest-total">
-            <span class="number" id="total-selected">0</span>
-            <span class="content">Total</span>
-         </div>
-         <h6>Sell all</h6>
-      </a>
+
         `;
         $modalBody.append(contactHtml);
     });
+    const totalHtml = `
+        <a href="#" class="guest-user d-block yesvite">
+            <div class="guest-user-img guest-total">
+                <span class="number" id="total-selected">${contactList.length}</span>
+                <span class="content">Total</span>
+            </div>
+            <h6>Sell all</h6>
+        </a>
+    `;
+    $modalBody.append(totalHtml);
 
     // Handle removal of contacts
     $modalBody.off("click").on("click", ".close", function (e) {
@@ -619,7 +623,7 @@ function updateModal(
         updateFunction();
     });
       // Update total count for selected contacts
-      $(".guest-user-img .number").text(contactList.length)
+      $(".guest-user-img .number").text(contactList.length);
 }
 
 // Function to generate profile image
