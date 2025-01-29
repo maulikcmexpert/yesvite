@@ -952,10 +952,11 @@ function datepicker() {
             }
 
 
-            const sTime = $(this)
+            const sTime =$(this)
             .closest(".activity-main-wrp")
             .find('input[name="activity-start-time[]"]')
-            .val();
+            .val()
+    
 
             console.log(sTime);
             const sMoment = moment(sTime, "LT");
