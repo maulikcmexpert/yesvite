@@ -264,6 +264,8 @@ $(document).ready(function () {
         // console.log(eventDetail);
         if (current_step == "2") {
             $(".step_1").hide();
+            console.log("handleActiveClass");
+
             handleActiveClass(".li_design");
             $(".pick-card").addClass("active");
             $(".design-span").addClass("active");
@@ -292,6 +294,8 @@ $(document).ready(function () {
             $(".step_1").hide();
             $(".step_2").hide();
             $("#edit-design-temp").hide();
+            console.log("handleActiveClass");
+
             handleActiveClass(".li_guest");
             $(".pick-card").addClass("menu-success");
             $(".edit-design").addClass("menu-success");
@@ -3998,6 +4002,8 @@ function savePage1Data(close = null) {
             $(".current_step").text("3 of 4");
             $("#sidebar_select_design_category").css("display", "none");
             active_responsive_dropdown("drop-down-event-guest");
+            console.log("handleActiveClass");
+
             handleActiveClass(".li_guest");
             $(".li_event_detail")
                 .find(".side-bar-list")
@@ -4083,6 +4089,8 @@ function savePage3Data(close = null) {
         $("step_1").hide();
         $(".step_2").hide();
         $(".step_3").hide();
+        console.log("handleActiveClass");
+
         handleActiveClass(".li_setting");
         $(".event_create_percent").text("99%");
         $(".current_step").text("4 of 4");
@@ -4495,6 +4503,7 @@ function li_design_click() {
     // edit_design_modal();
 
     var subclass = ".side-bar-sub-list";
+    console.log("handleActiveClass");
     handleActiveClass(".li_design");
     // }
 }
@@ -4704,6 +4713,7 @@ $(document).on("click", ".li_event_details", function () {
 
                         // $('.event_create_percent').text('50%');
                         // $('.current_step').text('2 of 4');
+                        console.log("handleActiveClass");
 
                         handleActiveClass(this);
                         var design = eventData.desgin_selected;
@@ -6269,6 +6279,8 @@ function save_image_design(downloadImage, textData) {
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
                     $("#edit-design-temp").hide();
+                    console.log("handleActiveClass");
+
                     handleActiveClass(".li_guest");
                     $(".pick-card").addClass("menu-success");
                     $(".edit-design").addClass("menu-success");
@@ -7890,6 +7902,8 @@ $(document).on("click", ".edit_event_details", function () {
     $(".current_step").text("2 of 4");
     $(".step_1").show();
     active_responsive_dropdown("drop-down-event-detail");
+    console.log("handleActiveClass");
+
     handleActiveClass(this);
     $(".li_event_detail").find(".side-bar-list").addClass("active");
     $(".main-content-wrp").addClass("blurred");
@@ -8340,6 +8354,8 @@ function step2Open() {
         // get_user(type);
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
+        console.log("handleActiveClass");
+
         handleActiveClass(".li_event_detail");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
@@ -8446,6 +8462,8 @@ function step3open() {
         $(".current_step").text("3 of 4");
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
+        console.log("handleActiveClass");
+
         handleActiveClass(".li_guest");
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
@@ -8535,6 +8553,7 @@ function step4open() {
         $(".step_4").show();
         $(".event_create_percent").text("99%");
         $(".current_step").text("4 of 4");
+        console.log("handleActiveClass");
 
         handleActiveClass(".li_setting");
         active_responsive_dropdown("drop-down-event-setting");

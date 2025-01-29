@@ -505,7 +505,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
-
+    imageId = id;
     $(".design-sidebar-action").attr("data-id", id);
     if (
         eventData.textData != null &&
@@ -2578,9 +2578,16 @@ function getTextDataFromCanvas() {
 
     return dbJson;
 }
-
+$(".edit-design-sidebar").on("click", function () {
+    if (imageId != null && imageId != "") {
+        $(".step_2").css("display", "none");
+        $(".main-content-right").css("display", "none");
+        loadAgain();
+    }
+});
 function loadAgain() {
     $(".side-bar-list").removeClass("active");
+    $(".edit-design-sidebar").addClass("active");
     $("#close_createEvent").css("display", "none");
     // e.preventDefault();
     var eventID = $("#eventID").val();
