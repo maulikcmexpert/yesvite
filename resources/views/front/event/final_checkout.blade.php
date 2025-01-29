@@ -238,7 +238,7 @@
         </div>
         @else    
         <div class="new-event-btn new-event-respo">
-            <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
+            <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
         </div>
         @endif
     </div>

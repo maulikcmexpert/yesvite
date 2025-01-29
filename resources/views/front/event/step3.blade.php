@@ -202,9 +202,9 @@
 
                             </div>
                             @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
-                            <div class="guest-checkout">
+                            <div class="guest-checkout new-edit-save-btn">
                                 <div>
-                                    <a href="#" class="cmn-btn edit_checkout new-edit-save-btn" onclick="savePage4Data()">Save Changes</a>
+                                    <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
                                 </div>
                             </div>
                             @else
@@ -415,9 +415,9 @@
                             </div>
 
                             @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
-                            <div class="guest-checkout">
+                            <div class="guest-checkout new-edit-save-btn">
                                 <div>
-                                    <a href="#" class="cmn-btn edit_checkout new-edit-save-btn" onclick="savePage4Data()">Save Changes</a>
+                                    <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
                                 </div>
                             </div> 
                             @else      
@@ -548,9 +548,9 @@
                             @endif
                             </div>
                             @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
-                            <div class="guest-checkout">
+                            <div class="guest-checkout new-edit-save-btn">
                                 <div>
-                                    <a href="#" class="cmn-btn edit_checkout new-edit-save-btn" onclick="savePage4Data()">Save Changes</a>
+                                    <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
                                 </div>
                             </div>
                             @else
