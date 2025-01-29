@@ -2578,7 +2578,11 @@ function getTextDataFromCanvas() {
 
     return dbJson;
 }
-
+$(".edit-design-sidebar").on("click", function () {
+    if (imageId != null && imageId != "") {
+        loadAgain();
+    }
+});
 function loadAgain() {
     $(".side-bar-list").removeClass("active");
     $("#close_createEvent").css("display", "none");
