@@ -195,7 +195,7 @@ if ($hostView) {
     </div>
 
 </div>
-<div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
+{{-- <div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -268,7 +268,7 @@ if ($hostView) {
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- ========= Add-guest ======== -->
 <div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

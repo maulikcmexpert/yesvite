@@ -35,7 +35,7 @@ class EventGuestController extends Controller
         $title = 'event guest';
         $page = 'front.event_wall.event_guest';
         $user  = Auth::guard('web')->user();
-        $js = ['event_guest','guest_rsvp','post_like_comment'];
+        $js = ['event_guest','post_like_comment'];
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
