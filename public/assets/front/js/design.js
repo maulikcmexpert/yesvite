@@ -591,6 +591,10 @@ function bindData(current_event_id) {
                     staticInfo.textElements = dbJson;
                 } else {
                     staticInfo.textElements = dbJson.textElements;
+                    if (staticInfo.textElements == undefined) {
+                        staticInfo.textElements =
+                            jQuery.parseJSON(dbJson).textData;
+                    }
                 }
                 console.log(staticInfo);
                 staticInfo.textElements.forEach((element) => {
@@ -2580,6 +2584,8 @@ function getTextDataFromCanvas() {
 }
 $(".edit-design-sidebar").on("click", function () {
     if (imageId != null && imageId != "") {
+        loadAgain();
+    } else if (image != "") {
         loadAgain();
     }
 });
