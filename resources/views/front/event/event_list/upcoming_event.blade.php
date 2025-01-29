@@ -79,7 +79,10 @@
                                         </defs>
                                     </svg>
                                 @endif
-                            <span class="g-badge">{{$upcomingEvent['total_notification']}}</span>
+                            <!-- <span class="g-badge">{{$upcomingEvent['total_notification']}}</span> -->
+                            @if($upcomingEvent['total_notification']!=0&&$upcomingEvent['total_notification']!="")
+                                        <span class="g-badge">{{$upcomingEvent['total_notification']}}</span>
+                                    @endif
                         </button>
                         @if($upcomingEvent['is_notification_on_off']=='1')
                             <ul class="upcoming-events-card-notification-info dropdown-menu">
