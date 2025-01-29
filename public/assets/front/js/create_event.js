@@ -2750,6 +2750,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                 .val()
         );
         console.log(newStartTime);
+        console.log($(this).val());
         if (
             newEndTime != "" &&
             newStartTime != "" &&
