@@ -290,6 +290,7 @@ function getNotificationList($filter = []){
             $selectedEvents = $filter['selectedEvents'];
             $notificationTypes = $filter['notificationTypes'];
             $activityTypes = $filter['activityTypes'];
+            // dd($selectedEvents,$notificationTypes,$activityTypes);
 
             $notificationData->where(function ($query) use ($selectedEvents, $notificationTypes, $activityTypes) {
                 if (!empty($selectedEvents)) {
@@ -306,7 +307,8 @@ function getNotificationList($filter = []){
                 }
             });
         }
-
+        // $result = $notificationData->get(); 
+        // dd($result);
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
         // $result = $notificationData->get();
