@@ -246,9 +246,11 @@
 }
 
 .size-spacing-inner-top input {
-    width: 58px !important;
+    width: 65px !important;
     height: 36px !important;
     border-radius: 10px !important;
+    padding-left: 0px !important;
+    text-align: center !important;
 }
 
 .range-slider {

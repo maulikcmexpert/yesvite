@@ -323,7 +323,7 @@
     <div class="main-content-sidebar">
         <div class="new-event-sidebar-wrp">
             <div class="new-event-sidebar-menu">
-                @if (isset($eventDetail['id']) && $eventDetail['id'] != '')
+                @if ((isset($eventDetail['id']) && $eventDetail['id'] != '') || (isset($eventDetail['iscopy']) && $eventDetail['iscopy'] != null && $eventDetail['iscopy']=='1'))
                     <ul>
                         <!-- ---for active menu add active class--- -->
 
