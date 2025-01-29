@@ -2534,14 +2534,14 @@ $(document).on("blur", "#start-time", function () {
     var activity_start = $("#firstActivityTime").val();
     var activity_end = $("#LastEndTime").val();
 
-    if (activity_start == activity_end) {
-        if (end_time != "") {
-            if (start_time > end_time) {
-                toastr.error("please select start time before end time");
-                $(this).val("");
-            }
-        }
-    }
+    // if (activity_start == activity_end) {
+    //     if (end_time != "") {
+    //         if (start_time > end_time) {
+    //             toastr.error("please select start time before end time");
+    //             $(this).val("");
+    //         }
+    //     }
+    // }
     $(".new_activity").html("");
     $(".activity_total_count").text(0);
     $("#end-time").val("");
