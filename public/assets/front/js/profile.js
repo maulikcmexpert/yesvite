@@ -320,13 +320,13 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
-    // $(document).on('change','#visible2"]', function() {
-    //     if ($(this).is(':checked')) {
-    //         $('.profile_privacy_check').prop('checked', true);
-    //     }
-    // });
+    $(document).on('change','#visible2"]', function() {
+        if ($(this).is(':checked')) {
+            $('.profile_privacy_check').prop('checked', true);
+        }
+    });
     $("#profilePrivacySave").on("click", function () {
-        alert();
+        // alert();
         loaderHandle("#profilePrivacySave", "Saving");
 
         // Serialize the form data
@@ -349,9 +349,9 @@ $(document).ready(function () {
                 } else {
                     toastr.error(response.message);
                 }
-                // if(response.visible=="2"){
-                //     $('.profile_privacy_check').prop('checked', true);
-                // }
+                if(response.visible=="2"){
+                    $('.profile_privacy_check').prop('checked', true);
+                }
 
             },
             error: function (xhr, status, error) {
