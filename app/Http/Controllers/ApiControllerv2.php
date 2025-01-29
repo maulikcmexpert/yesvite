@@ -5299,22 +5299,22 @@ class ApiControllerv2 extends Controller
                         sendNotification('invite', $notificationParam);
                     }
 
-                    // $newInviteGuest = array_map(
-                    //     fn($guest) => $guest['id'],
-                    //     array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
-                    // );
+                    $newInviteGuest = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
+                    );
 
-                    // if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
-                    //     $notificationParam = [
-                    //         'sender_id' => $user->id,
-                    //         'event_id' => $eventData['event_id'],
-                    //         'newUser' => $filteredIds
-                    //     ];
-                    //     // dd($newInviteGuest);
-                    //     sendNotificationGuest('invite', $notificationParam);
-                    // }
-                    // $total_count = count($filteredIds) + count($newInviteGuest);
-                    // debit_coins($user->id, $eventData['event_id'], $total_count);
+                    if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
+                        $notificationParam = [
+                            'sender_id' => $user->id,
+                            'event_id' => $eventData['event_id'],
+                            'newUser' => $filteredIds
+                        ];
+                        // dd($newInviteGuest);
+                        sendNotificationGuest('invite', $notificationParam);
+                    }
+                    $total_count = count($filteredIds) + count($newInviteGuest);
+                    debit_coins($user->id, $eventData['event_id'], $total_count);
                 }
 
                 DB::commit();
