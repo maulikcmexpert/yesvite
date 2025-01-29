@@ -333,6 +333,7 @@ $(document).ready(function () {
 
     $("#visible2").on('change',function() {
         if ($(this).is(':checked')) {
+            alert();
             $('.profile_privacy_check').prop('checked', true);
         }
     });
