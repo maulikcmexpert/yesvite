@@ -1513,15 +1513,15 @@ function bindData(current_event_id) {
     });
 
     // Save button functionality
-    document.querySelector(".save-btn").addEventListener("click", function () {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            savedSettings.fontSize = activeObject.fontSize;
-            savedSettings.letterSpacing = activeObject.charSpacing / 10; // Convert back to user scale
-            savedSettings.lineHeight = activeObject.lineHeight;
-            alert("Settings have been saved!");
-        }
-    });
+    // document.querySelector(".save-btn").addEventListener("click", function () {
+    //     const activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === "textbox") {
+    //         savedSettings.fontSize = activeObject.fontSize;
+    //         savedSettings.letterSpacing = activeObject.charSpacing / 10; // Convert back to user scale
+    //         savedSettings.lineHeight = activeObject.lineHeight;
+    //         alert("Settings have been saved!");
+    //     }
+    // });
     const resetTextboxProperties = (object) => {
         object.set({
             fontSize: defaultSettings.fontSize,
