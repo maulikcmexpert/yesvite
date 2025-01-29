@@ -908,6 +908,8 @@ $(document).on("click", ".notification_read", function () {
         type: "GET",
         data: { user_id: user_id },
         success: function (response) {
+            console.log(response);
+            
             if (response.count == 0) {
                 $(".notification_count_display").css("display", "none");
                 $(".notification-read-dot").css('display','none');
