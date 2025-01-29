@@ -270,6 +270,10 @@ function getNotificationList($filter = []){
         // if ($input == null) {
         //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
         // }
+    if (Auth::guard('web')->check()){
+
+    
+
         $page = '1';
         $final_data=[];
         $pages = ($page != "") ? $page : 1;
@@ -286,6 +290,7 @@ function getNotificationList($filter = []){
             $selectedEvents = $filter['selectedEvents'];
             $notificationTypes = $filter['notificationTypes'];
             $activityTypes = $filter['activityTypes'];
+            // dd($selectedEvents,$notificationTypes,$activityTypes);
 
             $notificationData->where(function ($query) use ($selectedEvents, $notificationTypes, $activityTypes) {
                 if (!empty($selectedEvents)) {
@@ -302,15 +307,16 @@ function getNotificationList($filter = []){
                 }
             });
         }
-
+        // $result = $notificationData->get(); 
+        // dd($result);
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
         // $result = $notificationData->get();
-        $result = $notificationData->get();
+        $result = $notificationData->get(); 
         $notificationInfo = [];
             foreach ($result as $values) {
                 if ($values->user_id == $user->id) {
-                    $notificationDetail['event_name'] = $values->event->event_name;
+                    $notificationDetail['event_name'] = ($values->event->event_name!=null&&$values->event->event_name!="")?$values->event->event_name:"";
                     $images = EventImage::where('event_id', $values->event->id)->first();
 
                     $notificationDetail['event_image'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
@@ -361,13 +367,31 @@ function getNotificationList($filter = []){
                     $old_date_result="";
                     $new_date_result="";
                     // Split the old date range
+                    // dd($old_start_end_date);
                     if($old_start_end_date!=""){
-                        list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
-                        $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
+                        if (strpos($old_start_end_date, ' to ') !== false) {
+                            list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
+                            $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;
+                        } else {
+                            // If there's no ' to ' in the string, just use the whole string as the date
+                            $old_date_result = $old_start_end_date;
+                        }
+                        // list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
+                        // $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
                     }
-                    if($new_start_end_date!=""){
-                        list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
-                        $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    // if($new_start_end_date!=""){
+                    //     list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
+                    //     $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    // }
+                    if ($new_start_end_date != "") {
+                        // Check if the date contains ' to ' before exploding
+                        if (strpos($new_start_end_date, ' to ') !== false) {
+                            list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
+                            $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;
+                        } else {
+                            // If there's no ' to ' in the string, just use the whole string as the date
+                            $new_date_result = $new_start_end_date;
+                        }
                     }
                     // Split the new date range
                    
@@ -490,6 +514,8 @@ function getNotificationList($filter = []){
         $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
         // dd($notificationInfo);
         return $final_data;
+
+    }
 }
 // function setposttTime($dateTime)
 // {

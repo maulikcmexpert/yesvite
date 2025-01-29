@@ -1735,6 +1735,11 @@ ul.chat-list li.setpink{
     width: 100%;
 }
 
+ul.group-list .chat-data:has(.remove-member) .group-admin{
+    right: 30px;
+}
+
+
 /* ======= responsive ======== */
 
 

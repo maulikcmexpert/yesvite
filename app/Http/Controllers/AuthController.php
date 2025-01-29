@@ -240,12 +240,12 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:8'],
+            'password' => ['required', 'min:6'],
         ], [
             'email.required' => 'Please enter Email',
             'email.email' => 'Please enter a valid Email',
             'password.required' => 'Please enter a Password',
-            'password.min' => 'Password must be at least 8 characters',
+            'password.min' => 'Password must be at least 6 characters',
         ]);
 
 

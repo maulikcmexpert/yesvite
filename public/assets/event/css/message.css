@@ -651,6 +651,7 @@ ul.chat-list li:last-child{
 }
 
 
+
 /* ======= responsive ======== */
 @media only screen and (max-width:1500px){
     .chat-area .msg-head .dropdown-menu.show{

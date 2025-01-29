@@ -1,4 +1,8 @@
 
+@php
+$notification_list=getNotificationList();
+
+@endphp
 @if (Auth::guard('web')->check())
 
 <header>
@@ -93,8 +97,16 @@
             aria-labelledby="dropdownButton"
           >
             <div class="notification-dropdown-header">
+              @php
+                    $user = Auth::guard('web')->user();
+                    $notification = getTotalUnreadNotification($user->id);
+              @endphp
 
+              @if($notification!=0)
               <h3>Notifications <span class="notification_count_display">{{$notification}}</span></h3>
+              @else
+              <h3>Notifications </h3>
+              @endif
               <h5 class="notification_read" data-user_id="{{$user->id}}"style="cursor: pointer;">
                 Mark All Read
                 {{-- <span type="button" data-bs-toggle="modal" data-bs-target="#"> --}}
@@ -1735,13 +1747,13 @@
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input invited_to_chk" data-name="comments" name="activityTypes[]" type="checkbox" value="" id="flexCheckDefault2">
+                    <input class="form-check-input invited_to_chk" data-name="comment_post" name="activityTypes[]" type="checkbox" value="" id="flexCheckDefault2">
                     <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
                       Comments
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input invited_to_chk" data-name="rsvp" name="activityTypes[]" type="checkbox" value="" id="flexCheckDefault2">
+                    <input class="form-check-input invited_to_chk" data-name="sent_rsvp" name="activityTypes[]" type="checkbox" value="" id="flexCheckDefault2">
                     <label class="form-check-label invited_to_chk_lbl" for="flexCheckDefault2">
                       RSVP's
                     </label>

@@ -25,7 +25,7 @@
               <div class="row all_drafts_list">
                     @foreach ($eventDraftdata as $draft )
                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12">
-                      <a href="" class="home-latest-draf-card">
+                      <a href="{{ route('event', $draft['id']) }}" class="home-latest-draf-card">
                         <div class="home-latest-draf-card-head">
                             <div class="home-latest-draf-card-head-img">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

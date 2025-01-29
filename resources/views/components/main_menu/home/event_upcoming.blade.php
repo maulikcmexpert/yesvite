@@ -1,5 +1,4 @@
 
-{{-- {{dd($eventList)}} --}}
 @if(!empty($eventList))
 <div class="home-center-upcoming-events-wrp">
     <div class="home-center-upcoming-events-title">
@@ -74,7 +73,10 @@
                         <path d="M15 1L1 19" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
                         </svg>
                     @endif
-                    <span class="g-badge">{{$events['total_notification']}}</span>
+
+                    @if($events['total_notification']!=0&&$events['total_notification']!="")
+                        <span class="g-badge">{{$events['total_notification']}}</span>
+                    @endif
                   </button>
                   @if($events['is_notification_on_off']=='1')
                   <ul class="upcoming-events-card-notification-info dropdown-menu">

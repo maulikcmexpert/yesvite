@@ -157,9 +157,17 @@ $(".notification-btn").on("click", function () {
 });
 
 // ===header-drodpdown===
-// const dropdownButton = document.getElementById("dropdownButton");
-// const dropdownMenu = document.querySelector(".notification-dropdown-menu");
+const dropdownButton = document.getElementById("dropdownButton");
+const dropdownMenu = document.querySelector(".notification-dropdown-menu");
+const modal = document.getElementById("all-notification-filter-modal");
 
+// document.addEventListener('click', function(event) {
+//     // Check if the clicked element is outside the dropdown
+//     if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+//         // Hide the dropdown menu
+//         dropdownMenu.classList.remove('show');
+//     }
+// });
 // Toggle dropdown when clicking the button
 $("#dropdownButton").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
@@ -182,7 +190,15 @@ $(".notification-toggle-menu").on("click", function (event) {
         $(".line").removeClass("active");
     }
 });
-
+document.addEventListener("click", (event) => {
+    if (
+        !dropdownMenu.contains(event.target) &&
+        !dropdownButton.contains(event.target) &&
+        !modal.contains(event.target) // Close the dropdown if clicked inside the modal
+    ) {
+        dropdownMenu.classList.remove("show");
+    }
+});
 // document.addEventListener("click", (event) => {
 //   if (
 //     !dropdownMenu.contains(event.target) &&
@@ -402,10 +418,10 @@ $(".upload-poll-delete").click(function () {
     $("#pollForm")[0].reset(); // Resets the form inputs to their default values
 
     // Clear hidden input values (if needed)
-    $("#pollContent").val('');
-    $("#event_id").val('');
-    $("#hiddenVisibility").val('');
-    $("#hiddenAllowComments").val('');
+    $("#pollContent").val("");
+    $("#event_id").val("");
+    $("#hiddenVisibility").val("");
+    $("#hiddenAllowComments").val("");
     $(".char-count").text("0/140");
     $(".create-post-poll-wrp").addClass("d-none");
 });
@@ -971,9 +987,11 @@ $(document).on("click", ".notification_read", function () {
         type: "GET",
         data: { user_id: user_id },
         success: function (response) {
+            console.log(response);
+
             if (response.count == 0) {
                 $(".notification_count_display").css("display", "none");
-                $(".notification-read-dot").css('display','none');
+                $(".notification-read-dot").css("display", "none");
             }
         },
         error: function (xhr, status, error) {

@@ -73,12 +73,10 @@ class ProfileController extends BaseController
         }
         $user['subscribe_status'] = checkSubscription($user->id);
 
-        $user_privacy=UserProfilePrivacy::where('user_id',$user->id)->get();
         return view('layout', compact(
             'title',
             'page',
             'user',
-            'user_privacy',
             'draft_events',
             'js'
 
@@ -115,10 +113,13 @@ class ProfileController extends BaseController
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
+
+        $user_privacy=UserProfilePrivacy::where('user_id',$user->id)->get();
         return view('layout', compact(
             'title',
             'page',
             'user',
+            'user_privacy'
         ));
     }
 
@@ -488,6 +489,7 @@ class ProfileController extends BaseController
 
     public function updateProfilePrivacy(Request $request)
     {
+        // dd($request);
         $user = Auth::guard('web')->user();
         try {
             if ($request->visible != null) {
@@ -521,7 +523,7 @@ class ProfileController extends BaseController
             return response()->json([
                 'status' => 1,
                 'message' => "Profile Privacy updated successfully",
-
+                'visible'=>$request->visible
             ]);
         } catch (QueryException $e) {
             DB::Rollback();

@@ -1,6 +1,6 @@
-var dbJson = null;
+var dbJson = $("#static_information").val() || null;
 var temp_id = null;
-var image = null;
+var image = $("#design_image").val() || null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
@@ -8,8 +8,13 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
+let imageId = null;
 var current_shape;
+let undoStack = [];
+let redoStack = [];
+let event_id = null;
 $(document).on("click", ".design-cards", function () {
+    alert(0);
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
@@ -17,6 +22,7 @@ $(document).on("click", ".design-cards", function () {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
+    imageId = id;
     $(".edit_design_tem").attr("data-image", imageUrl);
     if (
         eventData.textData != null &&
@@ -220,11 +226,12 @@ $(document).on("click", ".design-cards", function () {
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
         if (
-            element.shape &&
-            element.centerX &&
-            element.centerY &&
-            element.height &&
-            element.width
+            element != undefined &&
+            element?.shape &&
+            element?.centerX &&
+            element?.centerY &&
+            element?.height &&
+            element?.width
         ) {
             const imageInput = document.getElementById("image1");
             const scaledWidth = element.width; // Use element's width
@@ -498,7 +505,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
-
+    imageId = id;
     $(".design-sidebar-action").attr("data-id", id);
     if (
         eventData.textData != null &&
@@ -514,6 +521,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // //console.log(dbJson);
     // //console.log(image);
     var current_event_id = $(this).data("event_id");
+    event_id = current_event_id;
     $(".step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
@@ -578,11 +586,15 @@ function bindData(current_event_id) {
 
             if (dbJson) {
                 const staticInfo = {};
-                console.log(dbJson);
+
                 if (current_event_id != "" && eventData.desgin_selected == "") {
                     staticInfo.textElements = dbJson;
                 } else {
                     staticInfo.textElements = dbJson.textElements;
+                    if (staticInfo.textElements == undefined) {
+                        staticInfo.textElements =
+                            jQuery.parseJSON(dbJson).textData;
+                    }
                 }
                 console.log(staticInfo);
                 staticInfo.textElements.forEach((element) => {
@@ -592,24 +604,35 @@ function bindData(current_event_id) {
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
-                        linethrough: element.linethrough,
+                        linethrough:
+                            element.linethrough == true ||
+                            element.linethrough == "true" ||
+                            element.linethrough == "True"
+                                ? true
+                                : false,
                     });
 
                     const textWidth = textMeasurement.width;
 
-                    console.log(element.underline);
+                    console.log(element.text);
+
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
-                        left: element.left,
-                        top: element.top,
+                        left: parseFloat(element.left),
+                        top: parseFloat(element.top),
                         width: element.width || textWidth, // Default width if not provided
-                        fontSize: element.fontSize,
+                        fontSize: parseFloat(element.fontSize),
                         fill: element.fill,
                         fontFamily: element.fontFamily,
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
-                        linethrough: element.linethrough,
+                        linethrough:
+                            element.linethrough == true ||
+                            element.linethrough == "true" ||
+                            element.linethrough == "True"
+                                ? true
+                                : false,
                         backgroundColor: element.backgroundColor,
                         textAlign: element.textAlign,
                         hasControls: true,
@@ -753,6 +776,7 @@ function bindData(current_event_id) {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (
+                        element != undefined &&
                         element.shape &&
                         element.centerX &&
                         element.centerY &&
@@ -1178,6 +1202,7 @@ function bindData(current_event_id) {
                 seted = 1;
                 console.log(element.fill);
                 let selectedColor = element.fill || "#000000";
+                console.log("color-picker");
                 $("#color-picker").spectrum("set", selectedColor || "#000000");
 
                 activeObject.set("fill", selectedColor);
@@ -1266,6 +1291,7 @@ function bindData(current_event_id) {
         if (!activeObject || activeObject.type !== "textbox") {
             return;
         }
+        addToUndoStack(canvas);
         let fontSize = $("#fontSizeInput").val();
         let letterSize = $("#letterSpacingInput").val();
         let lineHeight = $("#lineHeightInput").val();
@@ -1390,10 +1416,11 @@ function bindData(current_event_id) {
     };
 
     // Function to update textbox width dynamically
+    var updateTextBoxTime = 0;
     const updateTextboxWidth = (textbox) => {
         const text = textbox.text || ""; // Get current text
         const fontSize = textbox.fontSize || defaultSettings.fontSize; // Get current font size
-        const fontFamily = textbox.fontFamily || "Arial"; // Default font family
+        const fontFamily = textbox.fontFamily || "Times New Roman"; // Default font family
         const charSpacing = textbox.charSpacing || 0;
 
         const ctx = canvas.getContext("2d");
@@ -1427,8 +1454,12 @@ function bindData(current_event_id) {
 
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
-            activeObject.set("fontSize", newValue);
-            updateTextboxWidth(activeObject);
+            clearTimeout(updateTextBoxTime);
+            updateTextBoxTime = setTimeout(function () {
+                addToUndoStack(canvas);
+                activeObject.set("fontSize", newValue);
+                updateTextboxWidth(activeObject);
+            }, 800);
         }
     };
 
@@ -1453,11 +1484,12 @@ function bindData(current_event_id) {
         // Update the canvas object
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
-            // Convert slider value directly to character spacing
-            activeObject.set("charSpacing", sliderValue);
-
-            // Adjust textbox width accordingly
-            updateTextboxWidth(activeObject);
+            clearTimeout(updateTextBoxTime);
+            updateTextBoxTime = setTimeout(function () {
+                addToUndoStack(canvas);
+                activeObject.set("charSpacing", sliderValue);
+                updateTextboxWidth(activeObject);
+            }, 800);
         }
     };
 
@@ -1486,17 +1518,24 @@ function bindData(current_event_id) {
     // Attach event listeners
     letterSpacingRange.addEventListener("input", setLetterSpacing);
     letterSpacingInput.addEventListener("input", () => {
-        // Remove the "%" symbol before synchronizing with the range slider
-        const inputValue = parseFloat(
-            letterSpacingInput.value.replace("%", "")
+        letterSpacingInput.value = letterSpacingInput.value.replace(
+            /[^0-9.]/g,
+            ""
         );
-        if (!isNaN(inputValue) && inputValue <= 100) {
+
+        // Parse the numeric value from the input
+        const inputValue = parseFloat(letterSpacingInput.value);
+
+        if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 100) {
             const sliderValue = Math.round((inputValue / 100) * 500); // Map percentage to slider value
             letterSpacingRange.value = sliderValue;
             setTimeout(() => {
                 setLetterSpacing();
             }, 500);
         } else {
+            if (inputValue >= 100) {
+                letterSpacingInput.value = 100;
+            }
             console.log(
                 "Invalid input: Please enter a value between 0% and 100%"
             );
@@ -1512,15 +1551,15 @@ function bindData(current_event_id) {
     });
 
     // Save button functionality
-    document.querySelector(".save-btn").addEventListener("click", function () {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            savedSettings.fontSize = activeObject.fontSize;
-            savedSettings.letterSpacing = activeObject.charSpacing / 10; // Convert back to user scale
-            savedSettings.lineHeight = activeObject.lineHeight;
-            alert("Settings have been saved!");
-        }
-    });
+    // document.querySelector(".save-btn").addEventListener("click", function () {
+    //     const activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === "textbox") {
+    //         savedSettings.fontSize = activeObject.fontSize;
+    //         savedSettings.letterSpacing = activeObject.charSpacing / 10; // Convert back to user scale
+    //         savedSettings.lineHeight = activeObject.lineHeight;
+    //         alert("Settings have been saved!");
+    //     }
+    // });
     const resetTextboxProperties = (object) => {
         object.set({
             fontSize: defaultSettings.fontSize,
@@ -1626,7 +1665,9 @@ function bindData(current_event_id) {
             //console.log(activeObject.type);
             //console.log(activeObject.fill);
             if (selectedColorType == "font") {
-                console.log("update fill");
+                if (selectedColor != $(".sp-input").val()) {
+                    return;
+                }
                 //console.log(activeObject.fill);
                 //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color
@@ -1656,6 +1697,7 @@ function bindData(current_event_id) {
 
         if (activeObject && activeObject.type === "textbox") {
             if (selectedColorType === "font") {
+                console.log("colorpicker update");
                 $("#color-picker").spectrum(
                     "set",
                     activeObject.fill || "#000000"
@@ -2129,11 +2171,12 @@ function bindData(current_event_id) {
         // Check if the scaled object is the textbox
         if (activeObject && activeObject.type === "textbox") {
             // Get the current font size
-            var currentFontSize = activeObject.fontSize;
+            var currentFontSize = Math.round(activeObject.fontSize);
+
             console.log("Current font size: " + currentFontSize);
 
             // Calculate new font size based on scale factor
-            var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
+            var newFontSize = Math.round(currentFontSize * activeObject.scaleX); // Adjust the font size based on the horizontal scaling factor
             const textMeasurement = new fabric.Text(activeObject.text, {
                 fontSize: newFontSize,
                 fontFamily: activeObject.fontFamily,
@@ -2182,8 +2225,8 @@ function bindData(current_event_id) {
                 }
             })
             .catch(function (e) {
-                //console.log(e);
-                alert("Font loading failed: " + font);
+                console.log(e);
+                console.warn("Font loading failed: " + font);
             });
     }
 
@@ -2326,8 +2369,6 @@ function bindData(current_event_id) {
         });
     });
 
-    let undoStack = [];
-    let redoStack = [];
     let isAddingToUndoStack = 0;
     function createShapes(img) {
         const imgWidth = img.width;
@@ -2551,4 +2592,75 @@ function getTextDataFromCanvas() {
     console.log(dbJson);
 
     return dbJson;
+}
+$(".edit-design-sidebar").on("click", function () {
+    if (imageId != null && imageId != "") {
+        loadAgain();
+    } else if (image != "") {
+        loadAgain();
+    }
+});
+function loadAgain() {
+    //  $(".side-bar-list").removeClass("active");
+    $(".edit-design-sidebar").addClass("active");
+    $("#close_createEvent").css("display", "none");
+    // e.preventDefault();
+    var eventID = $("#eventID").val();
+    var isDraft = $("#isDraft").val();
+
+    var json = dbJson;
+    //console.log(json);
+    var id = imageId;
+
+    $(".design-sidebar-action").attr("data-id", id);
+    if (
+        eventData.textData != null &&
+        eventData.temp_id != null &&
+        eventData.temp_id == id
+    ) {
+        dbJson = eventData.textData;
+    } else {
+        console.log(json);
+        dbJson = json;
+        temp_id = id;
+    }
+
+    var current_event_id = current_event_id;
+    $(".step_1").hide();
+    $(".step_2").hide();
+    $(".step_3").hide();
+    $(".pick-card").removeClass("active");
+    $(".pick-card").addClass("menu-success");
+    $(".edit-design").removeClass("menu-success");
+    $(".edit-design").addClass("active");
+    $(".event_create_percent").text("25%");
+    $(".current_step").text("1 of 4");
+    $("#sidebar_select_design_category").css("display", "none");
+
+    active_responsive_dropdown(
+        "drop-down-event-design",
+        "drop-down-edit-design"
+    );
+    $(".step_4").hide();
+    $("#exampleModal").modal("hide");
+    $(".edit_design_template").remove();
+
+    $.ajax({
+        url: base_url + "event/get_design_edit_page",
+        method: "POST",
+        dataType: "html",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr("content"),
+            eventID,
+            isDraft,
+            id: id,
+            image,
+        },
+        success: function (response) {
+            console.log(dbJson);
+            $("#edit-design-temp").html(response).show();
+            bindData(current_event_id);
+        },
+        error: function (xhr, status, error) {},
+    });
 }

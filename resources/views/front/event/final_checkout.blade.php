@@ -81,8 +81,8 @@
                     </div>
                  
                     </div>
-             </div> -->
-             <div class="owl-carousel owl-theme event_images_slider">
+                </div> -->
+                <div class="owl-carousel owl-theme event_images_slider">
                     <div class="item">
                         <div class="setting-img">
                                 <img id="eventImage" src="" />
@@ -104,8 +104,8 @@
                             </div>
                     </div>
               
-            </div>
-            <div class="event_images_template" style="display:none;">
+                </div>
+                <div class="event_images_template" style="display:none;">
                     <!-- <div class="item"> -->
                         <div class="setting-img">
                                 <img id="eventTempImage" src="" />
@@ -124,10 +124,10 @@
                     <div class="item sliderImages-3" style="display:none;">
                     <div class="setting-img">
                                 <img id="sliderImages-3" src="" />
-                            </div> -->
-                    </div>
+                            </div> 
+                    </div>-->
               
-            </div>
+                </div>
                     <!-- <div class="setting-img">
                         <img id="eventImage" src="" />
                     </div> -->
@@ -227,7 +227,7 @@
                 
             @else    
             <div class="new-event-btn">
-                <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout">Purchase & Send Invites</a>
+                <button  data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn">Purchase & Send Invites</button>
             </div>
             @endif
             </div>

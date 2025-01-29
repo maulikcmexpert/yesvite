@@ -2889,11 +2889,12 @@ async function addListInMembers(SelecteGroupUser) {
         //     user.id != senderUser && senderIsAdmin
         //         ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
         //         : "";
-
-        const removeMember =
-            user.id == senderUser
-                ? `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`
-                : "";
+        let removeMember = "";
+        if (senderIsAdmin) {
+            removeMember = `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`;
+        } else if (user.id == senderUser) {
+            removeMember = `<button class="remove-member" data-id="${user.id}">${closeSpan}</button>`;
+        }
 
         messageElement +=
             user.leave == false
@@ -2950,8 +2951,13 @@ $(document).on("click", ".remove-member", async function () {
 
     if (groupInfoProfileData) {
         let i = 0;
+        console.log({ senderIsAdmin });
+        console.log({ senderUser });
+        console.log({ userId });
+
         for (var key in groupInfoProfileData) {
             if (
+                userId == senderUser &&
                 i == 0 &&
                 senderIsAdmin &&
                 groupInfoProfileData[key].id != userId &&
@@ -2995,6 +3001,7 @@ $(document).on("click", ".remove-member", async function () {
     $("#listBox").modal("hide");
     await addListInMembers(SelecteGroupUser);
     await remove(overviewRef);
+    $(".conversation-" + conversationId).click();
 });
 
 $(".updateGroup").click(function () {
@@ -3640,6 +3647,8 @@ $(".upload-box").change(function () {
         }
         $(".file_info").val(fileExtension);
         $("#file_name").text(file.name);
+
+        $(".send-message").focus();
     } else {
         alert("Please select a file.");
         $(".preview_img").hide();

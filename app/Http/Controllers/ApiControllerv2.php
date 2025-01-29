@@ -5308,7 +5308,7 @@ class ApiControllerv2 extends Controller
                         $notificationParam = [
                             'sender_id' => $user->id,
                             'event_id' => $eventData['event_id'],
-                            'newUser' => $newInviteGuest
+                            'newUser' => $filteredIds
                         ];
                         // dd($newInviteGuest);
                         sendNotificationGuest('invite', $notificationParam);

@@ -1,14 +1,24 @@
 $(document).ready(function () {
     var base_url = $("#base_url").val();
     // Initialize jQuery validation
+    $.validator.addMethod("phoneUS", function (phone_number, element) {
+        phone_number = phone_number.replace(/\D/g, ""); // Remove non-digits for validation
+        return (
+            this.optional(element) ||
+            (phone_number.length === 10 && phone_number.match(/^\d{10}$/))
+        );
+    }, "Please enter a valid US phone number (e.g., 123-456-7890)");
+
     $("#updateUserForm").validate({
         rules: {
             firstname: "required",
             lastname: "required",
             phone_number: {
-                digits: true,
-                minlength: 10,
-                maxlength: 15,
+                    // required: true,
+                    // digits: true,
+                    phoneUS: true,
+                    minlength: 10,
+                    maxlength: 15,
                 remote: {
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -39,7 +49,7 @@ $(document).ready(function () {
             lastname: "Please enter your Last name",
             phone_number: {
                 // required: true,
-                digits: "Please enter a valid Phone Number",
+                phoneUS: "Please enter a valid phone number in the format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
                 remote: "Phone Number is already exsits",
@@ -320,8 +330,13 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
-
+    $(document).on('change',"#visible2", function() {
+        if ($(this).is(':checked')) {
+            $('.profile_privacy_check').prop('checked', true);
+        }
+    });
     $("#profilePrivacySave").on("click", function () {
+        // alert();
         loaderHandle("#profilePrivacySave", "Saving");
 
         // Serialize the form data
@@ -338,11 +353,16 @@ $(document).ready(function () {
             contentType: "application/x-www-form-urlencoded; charset=UTF-8", // Default content type for form data
             success: function (response) {
                 removeLoaderHandle("#profilePrivacySave", "Save Changes");
+               
                 if (response.status == 1) {
                     toastr.success(response.message);
                 } else {
                     toastr.error(response.message);
                 }
+                if(response.visible=="2"){
+                    $('.profile_privacy_check').prop('checked', true);
+                }
+
             },
             error: function (xhr, status, error) {
                 removeLoaderHandle("#profilePrivacySave", "Save Changes");
