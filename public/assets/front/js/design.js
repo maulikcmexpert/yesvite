@@ -2637,6 +2637,7 @@ function loadAgain() {
             eventID,
             isDraft,
             id: id,
+            image,
         },
         success: function (response) {
             console.log(dbJson);
