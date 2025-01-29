@@ -320,7 +320,11 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
-
+    $(document).on('change','#visible2"]', function() {
+        if ($(this).is(':checked')) {
+            $('.profile_privacy_check').prop('checked', true);
+        }
+    });
     $("#profilePrivacySave").on("click", function () {
         loaderHandle("#profilePrivacySave", "Saving");
 
@@ -338,11 +342,15 @@ $(document).ready(function () {
             contentType: "application/x-www-form-urlencoded; charset=UTF-8", // Default content type for form data
             success: function (response) {
                 removeLoaderHandle("#profilePrivacySave", "Save Changes");
+                if(response.visible=="2"){
+                    $('.profile_privacy_check').prop('checked', true);
+                }
                 if (response.status == 1) {
                     toastr.success(response.message);
                 } else {
                     toastr.error(response.message);
                 }
+
             },
             error: function (xhr, status, error) {
                 removeLoaderHandle("#profilePrivacySave", "Save Changes");
