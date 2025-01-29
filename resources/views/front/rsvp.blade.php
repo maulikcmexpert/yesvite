@@ -1,4 +1,4 @@
-   
+   {{dd($sync_contact_user_id,$user_id)}}
    @php
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
