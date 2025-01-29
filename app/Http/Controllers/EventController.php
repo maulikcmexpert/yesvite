@@ -3320,7 +3320,7 @@ class EventController extends BaseController
                         fn($guest) => $guest['id'],
                         array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
                     );
-
+// dd($filteredIds)
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
