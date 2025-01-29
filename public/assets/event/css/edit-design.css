@@ -250,6 +250,7 @@
     height: 36px !important;
     border-radius: 10px !important;
     padding-left: 0px !important;
+    text-align: center !important;
 }
 
 .range-slider {
