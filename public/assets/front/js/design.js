@@ -8,10 +8,12 @@ let currentImage = null;
 let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
+let imageId = null;
 var current_shape;
 let undoStack = [];
 let redoStack = [];
 $(document).on("click", ".design-cards", function () {
+    alert(0);
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
@@ -19,6 +21,7 @@ $(document).on("click", ".design-cards", function () {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
+    imageId = id;
     $(".edit_design_tem").attr("data-image", imageUrl);
     if (
         eventData.textData != null &&
@@ -2572,4 +2575,378 @@ function getTextDataFromCanvas() {
     console.log(dbJson);
 
     return dbJson;
+}
+
+function loadAgain() {
+    var imageUrl = image;
+    var json = dbJson;
+    //console.log(json);
+    var id = imageId;
+    $(".edit_design_tem").attr("data-image", imageUrl);
+    if (
+        eventData.textData != null &&
+        eventData.temp_id != null &&
+        eventData.temp_id == id
+    ) {
+        dbJson = eventData.textData;
+    } else {
+        console.log(json);
+        dbJson = json;
+        temp_id = id;
+    }
+
+    // Set the image URL in the modal's image tag
+    $("#modalImage").attr("src", imageUrl);
+    image = imageUrl;
+
+    // Remove the old canvas if it exists
+    $("#imageEditor2").remove();
+
+    // Create a new canvas element
+    var newCanvas = $("<canvas>", {
+        id: "imageEditor2",
+        width: 345,
+        height: 490,
+    });
+
+    // Append the new canvas to the modal-design-card
+    $(".modal-design-card").html(newCanvas);
+
+    // Show the modal
+    $("#exampleModal").modal("show");
+
+    canvas = new fabric.Canvas("imageEditor2", {
+        width: 345,
+        height: 490,
+        position: "relative",
+    });
+
+    const defaultSettings = {
+        fontSize: 20,
+        letterSpacing: 0,
+        lineHeight: 1.2,
+    };
+
+    fabric.Image.fromURL(image, function (img) {
+        var canvasWidth = canvas.getWidth();
+        var canvasHeight = canvas.getHeight();
+
+        // Calculate scale to maintain aspect ratio
+        var scaleFactor = Math.min(
+            canvasWidth / img.width,
+            canvasHeight / img.height
+        );
+        img.set({
+            left: 0,
+            top: 0,
+            scaleX: scaleFactor,
+            scaleY: scaleFactor,
+            selectable: false,
+            hasControls: false,
+        });
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+    });
+
+    const staticInfo = dbJson;
+
+    staticInfo.textElements.forEach((element) => {
+        //console.log(element);
+        const textMeasurement = new fabric.Text(element.text, {
+            fontSize: element.fontSize,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+        });
+        const textWidth1 = textMeasurement.width;
+
+        let textElement = new fabric.Textbox(element.text, {
+            left: element.left,
+            top: element.top,
+            width: textWidth1,
+            fontSize: element.fontSize,
+            fill: element.fill,
+            fontFamily: element.fontFamily,
+            fontWeight: element.fontWeight,
+            fontStyle: element.fontStyle,
+            underline: element.underline,
+            linethrough: element.linethrough,
+            backgroundColor: element.backgroundColor,
+            textAlign: element.textAlign,
+            editable: false,
+            selectable: false,
+            hasControls: false,
+            borderColor: "#2DA9FC",
+            cornerColor: "#fff",
+            cornerSize: 10,
+            transparentCorners: false,
+            isStatic: true,
+            angle: element?.rotation ? element?.rotation : 0,
+        });
+
+        canvas.add(textElement);
+    });
+    var shape = "";
+    if (dbJson) {
+    }
+
+    // Load filed image (filedImagePath) as another image layer
+    if (shapeImageUrl) {
+        let element = staticInfo?.shapeImageData;
+        if (
+            element != undefined &&
+            element?.shape &&
+            element?.centerX &&
+            element?.centerY &&
+            element?.height &&
+            element?.width
+        ) {
+            const imageInput = document.getElementById("image1");
+            const scaledWidth = element.width; // Use element's width
+            const scaledHeight = element.height;
+
+            imageInput.style.width = element.width + "px";
+            imageInput.style.height = element.height + "px";
+
+            let currentImage = null; // Variable to hold the current image
+            let isScaling = false; // Flag to check if the image is scaling
+            let currentShapeIndex = 0; // Index to track the current shape
+
+            // Define default shape variable (can be changed as needed)
+            const defaultShape = element.shape; // Set the desired default shape here
+
+            // Create a mapping of shape names to their indices
+            const shapeIndexMap = {
+                rectangle: 0,
+                circle: 1,
+                triangle: 2,
+                star: 3,
+            };
+
+            function createShapes(img) {
+                const imgWidth = img.width;
+                const imgHeight = img.height;
+                const starScale = Math.min(imgWidth, imgHeight) / 2; // Adjust the star size based on the image
+
+                // Proper 5-point star shape
+                const starPoints = [
+                    { x: 0, y: -starScale }, // Top point
+                    { x: starScale * 0.23, y: -starScale * 0.31 }, // Top-right
+                    { x: starScale, y: -starScale * 0.31 }, // Right
+                    { x: starScale * 0.38, y: starScale * 0.12 }, // Bottom-right
+                    { x: starScale * 0.58, y: starScale }, // Bottom
+                    { x: 0, y: starScale * 0.5 }, // Center-bottom
+                    { x: -starScale * 0.58, y: starScale }, // Bottom-left
+                    { x: -starScale * 0.38, y: starScale * 0.12 }, // Top-left
+                    { x: -starScale, y: -starScale * 0.31 }, // Left
+                    { x: -starScale * 0.23, y: -starScale * 0.31 }, // Top-left
+                ];
+
+                return [
+                    new fabric.Rect({
+                        width: imgWidth,
+                        height: imgHeight,
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                    new fabric.Circle({
+                        radius: Math.min(imgWidth, imgHeight) / 2,
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                    new fabric.Triangle({
+                        width: imgWidth,
+                        height: imgHeight,
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                    new fabric.Polygon(starPoints, {
+                        originX: "center",
+                        originY: "center",
+                        angle: 0,
+                    }),
+                ];
+            }
+
+            // Load the initial image
+            fabric.Image.fromURL(shapeImageUrl, function (img) {
+                img.set({
+                    selectable: false,
+                    hasControls: false,
+                    hasBorders: false,
+                    borderColor: "#2DA9FC",
+                    cornerColor: "#fff",
+                    transparentCorners: false,
+                    lockUniScaling: true,
+                    scaleX: scaledWidth / img.width, // Scale based on element's width
+                    scaleY: scaledHeight / img.height, // Scale based on element's height
+                    cornerSize: 10,
+                    cornerStyle: "circle",
+                    left: element.centerX - scaledWidth / 2, // Center the image horizontally
+                    top: element.centerY - scaledHeight / 2,
+                });
+
+                let shapes = createShapes(img);
+
+                currentShapeIndex = shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
+
+                img.set({ clipPath: shapes[currentShapeIndex] });
+                img.crossOrigin = "anonymous";
+
+                img.on("mouseup", function (event) {
+                    console.log(event);
+                    if (
+                        event?.transform?.action === "drag" &&
+                        event.transform.actionPerformed === undefined
+                    ) {
+                        currentShapeIndex =
+                            (currentShapeIndex + 1) % shapes.length;
+                        img.set({ clipPath: shapes[currentShapeIndex] });
+                        canvas.renderAll();
+                    }
+                });
+
+                const fixClipPath = () => {
+                    img.set({ clipPath: shapes[currentShapeIndex] });
+                    canvas.renderAll();
+                };
+
+                img.on("scaling", function (event) {
+                    const target = event.target;
+                    if (target && target.isControl) {
+                        fixClipPath();
+                    }
+                });
+
+                canvas.add(img);
+                currentImage = img; // Store the image reference
+                $("#shape_img").attr("src", shapeImageUrl);
+                $("#first_shape_img").attr("src", shapeImageUrl);
+
+                // Custom control for the upload button (centered)
+                fabric.Object.prototype.controls.uploadControl =
+                    new fabric.Control({
+                        x: 0,
+                        y: 0,
+                        offsetX: 0,
+                        offsetY: 0,
+                        cursorStyle: "pointer",
+                        mouseUpHandler: function () {
+                            imageInput.click();
+                        },
+                        render: function (
+                            ctx,
+                            left,
+                            top,
+                            styleOverride,
+                            fabricObject
+                        ) {
+                            const imgIcon = document.createElement("img");
+
+                            const svgString = `
+                        <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.625" width="30" height="30" rx="15" fill="white"/>
+                        <path d="M22 17.2502V21.5834C22 21.727 21.9429 21.8648 21.8414 21.9664C21.7398 22.0679 21.602 22.125 21.4583 22.125H9.54167C9.39801 22.125 9.26023 22.0679 9.15865 21.9664C9.05707 21.8648 9 21.727 9 21.5834V17.2502C9 17.1065 9.05707 16.9687 9.15865 16.8672C9.26023 16.7656 9.39801 16.7085 9.54167 16.7085C9.68533 16.7085 9.8231 16.7656 9.92468 16.8672C10.0263 16.9687 10.0833 17.1065 10.0833 17.2502V21.0417H20.9167V17.2502C20.9167 17.1065 20.9737 16.9687 21.0753 16.8672C21.1769 16.7656 21.3147 16.7085 21.4583 16.7085C21.602 16.7085 21.7398 16.7656 21.8414 16.8672C21.9429 16.9687 22 17.1065 22 17.2502ZM12.7917 12.917H14.9583V17.2502C14.9583 17.3938 15.0154 17.5316 15.117 17.6332C15.2186 17.7347 15.3563 17.7918 15.5 17.7918C15.6437 17.7918 15.7814 17.7347 15.883 17.6332C15.9846 17.5316 16.0417 17.3938 16.0417 17.2502V12.917H18.2083C18.3155 12.9171 18.4203 12.8853 18.5095 12.8258C18.5986 12.7663 18.6681 12.6817 18.7092 12.5827C18.7502 12.4836 18.7609 12.3747 18.74 12.2695C18.7191 12.1644 18.6674 12.0679 18.5916 11.9921L15.8832 9.28386C15.8329 9.2335 15.7732 9.19355 15.7074 9.16629C15.6417 9.13903 15.5712 9.125 15.5 9.125C15.4288 9.125 15.3583 9.13903 15.2926 9.16629C15.2268 9.19355 15.1671 9.2335 15.1168 9.28386L12.4084 11.9921C12.3326 12.0679 12.2809 12.1644 12.26 12.2695C12.2391 12.3747 12.2498 12.4836 12.2908 12.5827C12.3319 12.6817 12.4014 12.7663 12.4905 12.8258C12.5797 12.8853 12.6845 12.9171 12.7917 12.917Z" fill="black"/>
+                        </svg>`;
+                            const encodedSvg = encodeURIComponent(svgString);
+                            const imgSrc = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+                            imgIcon.src = imgSrc;
+                            imgIcon.crossOrigin = "anonymous";
+                            imgIcon.width = 24;
+                            imgIcon.height = 24;
+
+                            ctx.drawImage(imgIcon, left - 12, top - 12, 24, 24);
+                        },
+                    });
+
+                // Event listener for image selection (file input)
+                imageInput.addEventListener("change", function (event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function () {
+                            $("#shape_img").attr("src", reader.result);
+
+                            fabric.Image.fromURL(
+                                reader.result,
+                                function (newImg) {
+                                    // Remove the old image if it exists
+                                    const newWidth = img.width;
+                                    const newHeight = img.height;
+                                    if (currentImage) {
+                                        canvas.remove(currentImage);
+                                    }
+
+                                    newImg.set({
+                                        selectable: false,
+                                        hasControls: false,
+                                        hasBorders: false,
+                                        borderColor: "#2DA9FC",
+                                        cornerColor: "#fff",
+                                        transparentCorners: false,
+                                        lockUniScaling: true,
+                                        scaleX: scaledWidth / newWidth, // Scale based on element's width
+                                        scaleY: scaledHeight / newHeight, // Scale based on element's height
+                                        cornerSize: 10,
+                                        cornerStyle: "circle",
+                                        left: element.centerX - scaledWidth / 2, // Center the image horizontally
+                                        top: element.centerY - scaledHeight / 2,
+                                    });
+
+                                    shapes = createShapes(newImg);
+                                    canvas.add(newImg);
+                                    currentImage = newImg;
+                                    // $("#shape_img").attr("src",shapeImageUrl);
+                                    shapeImageUrl = $("#shape_img").attr("src");
+                                    // Reset shape index for the new image based on the default shape
+                                    currentShapeIndex =
+                                        shapeIndexMap[defaultShape] || 0; // Default to rectangle if not found
+                                    newImg.set({
+                                        clipPath: shapes[currentShapeIndex],
+                                    });
+                                    newImg.crossOrigin = "anonymous";
+
+                                    newImg.on("mouseup", function (event) {
+                                        console.log(event);
+                                        if (
+                                            event?.transform?.action ===
+                                                "drag" &&
+                                            event.transform.actionPerformed ===
+                                                undefined
+                                        ) {
+                                            currentShapeIndex =
+                                                (currentShapeIndex + 1) %
+                                                shapes.length;
+                                            newImg.set({
+                                                clipPath:
+                                                    shapes[currentShapeIndex],
+                                            });
+                                            canvas.renderAll();
+                                        }
+                                    });
+
+                                    const fixClipPath = () => {
+                                        newImg.set({
+                                            clipPath: shapes[currentShapeIndex],
+                                        });
+                                        canvas.renderAll();
+                                    };
+
+                                    newImg.on("scaling", function () {
+                                        // isScaling = true; // Set scaling flag
+                                        fixClipPath();
+                                    });
+                                }
+                            );
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        }
+    }
 }
