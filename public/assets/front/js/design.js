@@ -505,7 +505,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     var json = $(this).data("json");
     //console.log(json);
     var id = $(this).data("id");
-
+    imageId = id;
     $(".design-sidebar-action").attr("data-id", id);
     if (
         eventData.textData != null &&
