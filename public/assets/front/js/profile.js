@@ -336,7 +336,7 @@ $(document).ready(function () {
             $('.profile_privacy_check').prop('checked', true);
         }
     });
-    
+ 
 
     $("#profilePrivacySave").on("click", function () {
         // alert();
@@ -344,7 +344,9 @@ $(document).ready(function () {
 
         // Serialize the form data
         var formData = $("#profile_privacy").serialize();
-
+        if ($('#visible2').is(':checked')) {
+            $('.profile_privacy_check').prop('checked', true);
+        }
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
