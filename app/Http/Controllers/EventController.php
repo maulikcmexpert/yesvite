@@ -74,7 +74,7 @@ class EventController extends BaseController
 {
     public function index(Request $request)
     {
-
+        dd($request->id);
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
@@ -2872,11 +2872,13 @@ class EventController extends BaseController
         }
 
 
-        $newstart_date = $request->start_date;
+        $newstart_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
+        $newend_date =(isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
         $oldstart_date = $event_creation->start_date;
+        $oldend_date = $event_creation->end_date;
         $isupdatedate = 0;
         
-        if ($newstart_date !== $oldstart_date) {
+        if ($newstart_date !== $oldstart_date || $newend_date !==$oldend_date) {
             $isupdatedate = 1;
         }
 

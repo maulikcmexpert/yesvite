@@ -2755,7 +2755,9 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         console.log(newStartTime);
         console.log($(this).val());
         if(newStartTime>=endtimelatesr){
-            datepicker();
+            var newEndTime = moment(newStartTime, "HH:mm").add(1, "hours").format("HH:mm");
+            var newEndTime12 = convertTo12Hour(newEndTime);
+            $(this).val(newEndTime12);  
         }
         if (
             newEndTime != "" &&
@@ -3139,6 +3141,7 @@ function convertTo12Hour(time) {
 
 
 $(document).on("click", "#save_activity_schedule", function () {
+    
     var start_time = $("#ac-start-time").val();
     var end_time = $("#ac-end-time").val();
     // checkEndTimes();
