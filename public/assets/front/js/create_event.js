@@ -891,18 +891,6 @@ function datepicker() {
             // If start time exists, use it; otherwise, default to 12:00 PM
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             
-            // picker.minDate(startMoment.clone().add(1, "minutes"));
-            picker.options({
-                stepping: 15, // step time in minutes
-                enabledHours: function () {
-                    let disabledTimes = [startMoment.hours()];
-                    return Array.from({ length: 24 }, (v, i) => {
-                        if (!disabledTimes.includes(i)) {
-                            return i;
-                        }
-                    }).filter(Boolean); // Removes undefined values (the disabled ones)
-                }
-            });
             // Set the end time to 1 hour after the start time, only when picker is first shown
             if (!picker.date()) {  // Check if the picker date is empty (first time showing)
                 picker.date(startMoment.clone().add(1, "hours"));
@@ -3490,6 +3478,9 @@ $(document).on("click", "#close_createEvent", function () {
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
+
+        console.log(eventData);
+
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
