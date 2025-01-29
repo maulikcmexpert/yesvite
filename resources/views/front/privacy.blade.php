@@ -38,12 +38,17 @@
                                         </label>
                                         <input class="form-check-input" type="radio" name="visible" value="1" id="flexRadioDefault1" {{($user->visible == '1')?'checked':''}}>
                                     </div>
-                                    <div class="border-bottom d-flex align-items-center">
-                                        <p>Choose what to show on your profile</p>
-                                        <svg class="ms-auto" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.6004 1.4585L9.16706 6.89183C8.52539 7.5335 7.47539 7.5335 6.83372 6.89183L1.40039 1.4585" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                                <div class="border-bottom d-flex align-items-center">
+                                                    <p>Choose what to show on your profile</p>
+                                                    <svg class="ms-auto" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M14.6004 1.4585L9.16706 6.89183C8.52539 7.5335 7.47539 7.5335 6.83372 6.89183L1.40039 1.4585" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                        </div>
                                     </div>
+                                    
                                     <div>
                                         <div class="d-flex align-items-center justify-content-between border-bottom">
                                             <h6>Gender</h6>
