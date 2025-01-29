@@ -19,10 +19,13 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+alert(selected_profile_or_text);
+
 var selected_prefer_by =
-    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+$("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
 var selected_profilePhoto =
-    $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+$("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+alert(selected_profilePhoto);
 var selected_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
@@ -856,6 +859,17 @@ function datepicker() {
             const startTime = $(this).closest("div").find(".activity_start_time").val();
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 
+
+            const endTime = $(this)
+            .closest(".activity-main-wrp")
+            .find('input[name="activity-start-time[]"]')
+            .val();
+
+            // if(endTime!=""){
+            //     if()
+            // }
+
+
             $(this).val(startMoment);
         })
     });
@@ -878,7 +892,8 @@ function datepicker() {
                 .closest(".activity-main-wrp")
                 .find('input[name="activity-start-time[]"]')
                 .val();
-            
+                const emdtMoment = moment(startTime, "LT");
+
             console.log("Start time:", startTime);
             
             // If start time exists, use it; otherwise, default to 12:00 PM

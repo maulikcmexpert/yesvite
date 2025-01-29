@@ -650,9 +650,6 @@ ul.chat-list li:last-child{
     stroke: #fff;
 }
 
-ul.group-list .chat-data:has(.remove-member) .group-admin{
-    right: 30px;
-}
 
 
 /* ======= responsive ======== */
