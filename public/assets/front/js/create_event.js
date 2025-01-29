@@ -19,13 +19,12 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
-alert(selected_profile_or_text);
+
 
 var selected_prefer_by =
 $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
 var selected_profilePhoto =
-$("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
-alert(selected_profilePhoto);
+$("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";;
 var selected_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
@@ -5759,6 +5758,8 @@ $(document).on("click", ".save_event_co_host", function () {
         var user_name = selected_user_name;
         var dataId = selected_dataId;
         var profile_or_text = selected_profile_or_text;
+        alert(profile_or_text);
+        alert(profilePhoto);
         var prefer_by = selected_prefer_by;
         // console.log(prefer_by);
         eventData.co_host = dataId;
