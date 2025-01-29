@@ -2581,6 +2581,7 @@ function getTextDataFromCanvas() {
 $(".edit-design-sidebar").on("click", function () {
     if (imageId != null && imageId != "") {
         loadAgain();
+        $(".step_2").css("display", "none");
     }
 });
 function loadAgain() {
