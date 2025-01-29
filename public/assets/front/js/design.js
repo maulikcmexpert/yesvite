@@ -9,6 +9,8 @@ let isImageDragging = false; // Track if the image is being dragged
 let isimageoncanvas = false;
 let oldImage = null;
 var current_shape;
+let undoStack = [];
+let redoStack = [];
 $(document).on("click", ".design-cards", function () {
     var url = $(this).data("url");
     var template = $(this).data("template");
@@ -220,11 +222,12 @@ $(document).on("click", ".design-cards", function () {
     if (shapeImageUrl) {
         let element = staticInfo?.shapeImageData;
         if (
-            element.shape &&
-            element.centerX &&
-            element.centerY &&
-            element.height &&
-            element.width
+            element != undefined &&
+            element?.shape &&
+            element?.centerX &&
+            element?.centerY &&
+            element?.height &&
+            element?.width
         ) {
             const imageInput = document.getElementById("image1");
             const scaledWidth = element.width; // Use element's width
@@ -2333,8 +2336,6 @@ function bindData(current_event_id) {
         });
     });
 
-    let undoStack = [];
-    let redoStack = [];
     let isAddingToUndoStack = 0;
     function createShapes(img) {
         const imgWidth = img.width;
