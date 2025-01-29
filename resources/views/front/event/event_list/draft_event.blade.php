@@ -11,7 +11,7 @@
              
 @endphp
 <div class="all-events-month-wise-support" data-month="{{$draftEvent['event_month']}}">
-  <a href="" class="home-latest-draf-card">
+  <a href="{{ route('event', $draftEvent['id']) }}" class="home-latest-draf-card">
     <div class="home-latest-draf-card-head">
         <div class="home-latest-draf-card-head-img">
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
