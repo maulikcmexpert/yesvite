@@ -270,16 +270,15 @@
 
                                                     @php
 
+                                                        // Parse the event date and time
+                                                        // $eventDateTime = Carbon::createFromFormat('Y-m-d h:i A', $eventDetails['event_date'] . ' ' . $eventDetails['event_time']);
 
-                                                    // Parse the event date and time
-                                                    // $eventDateTime = Carbon::createFromFormat('Y-m-d h:i A', $eventDetails['event_date'] . ' ' . $eventDetails['event_time']);
-
-                                                    // Get the event timestamp
-                                                    // $eventTimestamp = $eventDetails['event_time'];
-                                                    $startdate =$eventDetails['event_date'];
-                                                    $starttime =$eventDetails['event_time'];
-                                                    // dd($eventDetails['event_date'])// Convert to milliseconds for JavaScript
-                                                @endphp
+                                                        // Get the event timestamp
+                                                        // $eventTimestamp = $eventDetails['event_time'];
+                                                        $startdate = $eventDetails['event_date'];
+                                                        $starttime = $eventDetails['event_time'];
+                                                        // dd($eventDetails['event_date'])// Convert to milliseconds for JavaScript
+                                                    @endphp
 
                                                     {{-- <div class="countevent-counter-box">
                                                         @if ($days >= 0 && $hours >= 0 && $minutes >= 0)
@@ -312,17 +311,20 @@
                                                         <div class="countevent-counter">
                                                             <h4 id="countdownDays">00</h4>
                                                             <span>Days</span>
-                                                            <img src="{{ asset('assets/front/img/colon.svg') }}" alt="" class="colon-img">
+                                                            <img src="{{ asset('assets/front/img/colon.svg') }}"
+                                                                alt="" class="colon-img">
                                                         </div>
                                                         <div class="countevent-counter">
                                                             <h4 id="countdownHours">00</h4>
                                                             <span>Hours</span>
-                                                            <img src="{{ asset('assets/front/img/colon.svg') }}" alt="" class="colon-img">
+                                                            <img src="{{ asset('assets/front/img/colon.svg') }}"
+                                                                alt="" class="colon-img">
                                                         </div>
                                                         <div class="countevent-counter">
                                                             <h4 id="countdownMinutes">00</h4>
                                                             <span>Minutes</span>
-                                                            <img src="{{ asset('assets/front/img/colon.svg') }}" alt="" class="colon-img">
+                                                            <img src="{{ asset('assets/front/img/colon.svg') }}"
+                                                                alt="" class="colon-img">
                                                         </div>
 
                                                     </div>
@@ -375,15 +377,15 @@
                                                     </a>
 
                                                     <!-- <a href="#" class="rsvp-btn noattending-btn btn" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
-                                                                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                          <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                          </svg>
-                                                                        </a> -->
+                                                                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                              <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                              </svg>
+                                                                            </a> -->
                                                     <!-- <a href="#" class="rsvp-btn attending-btn btn">Attending
-                                                                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                          <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                          </svg>
-                                                                        </a> -->
+                                                                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                              <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                              </svg>
+                                                                            </a> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -453,16 +455,33 @@
                                                 <div id="map">
 
                                                     <!-- Google Maps iframe with dynamic latitude and longitude -->
-                                                    <iframe
-    src="https://www.google.com/maps?q={{ $eventDetails['latitude'] ?? '0' }},{{ $eventDetails['longitude'] ?? '0' }}&hl=es;z=14&output=embed"
-    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
-</iframe>
+
 
 
                                                     <img src="{{ asset('assets/front/img/location-marker.svg') }}"
                                                         alt="marker" class="marker">
                                                 </div>
-                                                <a href="#" class="direction-btn">Directions</a>
+
+
+                                                @php
+                                                $latitude = !empty($eventDetails['latitude']) ? $eventDetails['latitude'] : '23.020474099698593'; // Default latitude (Ahmedabad)
+                                                $longitude = !empty($eventDetails['logitude']) ? $eventDetails['logitude'] : '72.41493076529625'; // Default longitude (Ahmedabad)
+                                            @endphp
+
+                                            <iframe
+                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74843221347!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sus!4v1738165607121!5m2!1sen!2sus"
+                                                width="600"
+                                                height="450"
+                                                style="border:0;"
+                                                allowfullscreen=""
+                                                loading="lazy"
+                                                referrerpolicy="no-referrer-when-downgrade">
+                                            </iframe>
+                                            <a href="https://www.google.com/maps/dir/?api=1&destination={{ $latitude }},{{ $longitude }}"
+                                            target="_blank"
+                                            class="direction-btn">
+                                             Directions
+                                         </a>
                                             </div>
                                         @endif
                                         {{-- {{dd($eventDetails['event_schedule']);}} --}}
@@ -2058,9 +2077,9 @@
 
     function updateCountdown() {
         const currentDate = new Date();
-        const currentTime = currentDate.getTime();  // Use currentDate.getTime() to get current time in milliseconds
+        const currentTime = currentDate.getTime(); // Use currentDate.getTime() to get current time in milliseconds
 
-        const remainingTime = eventTimestamp - currentTime;  // Subtract current time from event timestamp
+        const remainingTime = eventTimestamp - currentTime; // Subtract current time from event timestamp
 
         if (remainingTime > 0) {
             // Calculate days, hours, minutes, and seconds
@@ -2087,4 +2106,3 @@
     setInterval(updateCountdown, 1000);
     updateCountdown(); // Initial call to set the countdown immediately
 </script>
-
