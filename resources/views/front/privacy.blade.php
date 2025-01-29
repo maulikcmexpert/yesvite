@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div id="collapseOne" class="accordion-collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="d-flex align-items-center justify-content-between border-bottom">
                                             <h6>Gender</h6>
                                             <div class="toggle-button-cover ">
