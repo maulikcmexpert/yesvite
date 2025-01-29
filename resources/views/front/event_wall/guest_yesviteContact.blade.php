@@ -95,13 +95,13 @@
 </div>
 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
    <div class="guest-users-wrp selected-phone-list">
-      <a href="#" class="guest-user d-block">
+      {{-- <a href="#" class="guest-user d-block">
          <div class="guest-user-img guest-total">
             <span class="number">10</span>
             <span class="content">Total</span>
          </div>
          <h6>Sell all</h6>
-      </a>
+      </a> --}}
    </div>
    <div class="position-relative">
       <input type="search" placeholder="Search name" class="form-control search-phone">

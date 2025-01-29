@@ -1856,7 +1856,7 @@ class EventWallController extends Controller
         $emails = $request->input('emails', []); // Default to empty array
         $limit = $request->input('limit');
         $offset = $request->input('offset');
-
+        $eventId = $request->input('event_id'); // Ma
         // Query yesvite users
         $yesviteUsers = User::select(
             'id',
@@ -1908,11 +1908,18 @@ class EventWallController extends Controller
             })
             ->orderBy('firstName', 'asc') // Order results by first name
             ->get();
+        $invitedUsers = [];
+        if (!empty($eventId)) {
+            $invitedUsers = EventInvitedUser::with('user')
+                ->where('event_id', $eventId) // Correct usage
+                ->get();
+        }
 
         // Render the yesvite contacts view
         $yesviteContactHtml = view('front.event_wall.guest_yesviteContact', [
             'yesviteUsers' => $yesviteUsers,
             'phone_contact' => $phoneContacts,
+            'invitedUsers' => $invitedUsers
         ])->render();
 
         // Return response in JSON format
@@ -1920,7 +1927,7 @@ class EventWallController extends Controller
             'status' => 'success',
             'message' => 'Contacts retrieved successfully',
             'yesvite_contacts' => $yesviteContactHtml,
-
+            'invited_users' => $invitedUsers
         ]);
     }
 

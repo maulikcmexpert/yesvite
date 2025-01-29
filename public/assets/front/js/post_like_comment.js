@@ -403,7 +403,7 @@ var allContactsSuccess = false;
 $(document).ready(function () {
     const yesviteUrl = base_url + "event_wall/get_yesviteContact"; // URL for yesvite contacts
     //const phoneUrl = base_url + "event_wall/get_phoneContact"; // URL for phone contacts
-
+const event_id = $('event_id').val();
     $("#allcontact").on("click", function () {
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
@@ -416,12 +416,19 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
+            data: {
+                event_id: event_id // Pass event_id in request data
+            },
             dataType: "json",
             success: function (response) {
                 const contacts = response.yesvite_contacts;
                 const container = $(".GuestTabContent");
                 container.html(contacts);
                 allContactsSuccess = true;
+
+                const invitedUsers = response.invited_users;
+                console.log(invited_users);
+
             },
             error: function () {
                 toastr.error("No Contacts Found");
@@ -557,6 +564,7 @@ function updateModalContent() {
     );
     // Update total count for selected contacts
     $(".yesvite .number").text(selectedContacts.length);
+
 }
 
 // Update modal content for phone contacts
@@ -569,6 +577,7 @@ function updatePhoneModalContent() {
     );
     // Update total count for selected phone contacts
     $(".phone .number").text(selectedPhoneContacts.length);
+
 }
 
 // General modal update function
@@ -604,14 +613,16 @@ function updateModal(
         $modalBody.append(contactHtml);
     });
     const totalHtml = `
-        <a href="#" class="guest-user d-block yesvite">
+        <a href="#" class="guest-user d-block yesvite ">
             <div class="guest-user-img guest-total">
-                <span class="number" id="total-selected">${contactList.length}</span>
+                <span class="number" id="total-selected-email">${selectedContacts.length}</span>
                 <span class="content">Total</span>
-            </div>
-            <h6>Sell all</h6>
+         </div>
+         <h6>Sell all</h6>
         </a>
+
     `;
+
     $modalBody.append(totalHtml);
 
     // Handle removal of contacts
@@ -623,7 +634,7 @@ function updateModal(
         updateFunction();
     });
       // Update total count for selected contacts
-      $(".guest-user-img .number").text(contactList.length);
+
 }
 
 // Function to generate profile image
