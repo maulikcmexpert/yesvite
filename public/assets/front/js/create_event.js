@@ -832,7 +832,7 @@ function datepicker() {
             const picker = $(this).data("DateTimePicker");
             const currentActivity = $(this).closest(".activity-main-wrp");
 
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startTime = $(this).closest("div").find("#ac-start-time").val();
             // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             let startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             const previousActivity = currentActivity.prev(".activity-main-wrp");
