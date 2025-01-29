@@ -1,3 +1,6 @@
+
+
+
 <div class="tab-pane fade show active" id="home" role="tabpanel"
    aria-labelledby="home-tab">
    <div class="guest-users-wrp selected-contacts-list "  id="selected-contacts">
@@ -25,7 +28,40 @@
    </div>
    <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact">
       @foreach ($yesviteUsers as $contact)
+      @php
 
+$email_checked = '';
+$phone_checked = '';
+$disabled = '';
+
+$commaoAlredy = '';
+if(isset($selected_yesvite_user) && !empty($selected_yesvite_user)){
+   $foundKey = array_search($contact->id, array_column($selected_yesvite_user, 'id'));
+   
+   if ($foundKey !== false) {
+      
+      $key = array_keys($selected_yesvite_user)[$foundKey];
+     
+        $email_checked = '';
+        $phone_checked = '';
+        
+        $commaoAlredy = '';
+        if ($contact->id === (int)$selected_yesvite_user[$key]['id']) {
+           $commaoAlredy =  (isset($selected_yesvite_user[$key]['isAlready']) && $selected_yesvite_user[$key]['isAlready'] =="1")?"disabled":"";
+           if($selected_yesvite_user[$key]['prefer_by'] == 'email'){
+              $email_checked = 'checked';
+            }elseif($selected_yesvite_user[$key]['prefer_by'] == 'phone'){
+               $phone_checked = 'checked';
+            }
+          
+        }
+    }
+   
+// if(count($selected_user) >= 15){
+// $disabled = 'disabled';
+// }
+}
+@endphp
       <div class="invite-contact yes-contact">
          <a href="#" class="invite-img">
             @if (!empty($contact->profile))
@@ -68,7 +104,7 @@
                   <input class="form-check-input failed-checkout contact-checkbox email-checkbox" type="checkbox"
                      data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}"
                      data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
-                     data-phone="{{ $contact->phone_number }}" data-type="email">
+                     data-phone="{{ $contact->phone_number }}" data-type="email" {{$email_checked}}>
                </div>
             </div>
             @if (!empty($contact->phone_number))
@@ -85,7 +121,7 @@
                <input class="form-check-input failed-checkout contact-checkbox phone-checkbox" type="checkbox"
                   data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}"
                   data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
-                  data-phone="{{ $contact->phone_number }}" data-type="phone">
+                  data-phone="{{ $contact->phone_number }}" data-type="phone"  {{$phone_checked}}>
             </div>
             @endif
          </div>
@@ -119,7 +155,36 @@
    </div>
    <div class="guest-user-list-wrp invite-contact-wrp phone_contact">
       @foreach($phone_contact as $contact)
-
+      @php
+      // dd(1);
+      $email_cont_checked = '';
+      $phone_cont_checked = '';
+      $disabled = '';
+      $emialAlredy = '';
+      $phoneAlredy = '';
+      if (isset($selected_phone_user) && !empty($selected_phone_user)) {
+          $foundKey = array_search($contact->id, array_column($selected_phone_user, 'sync_id'));
+          if ($foundKey !== false) {
+              $key = array_keys($selected_phone_user)[$foundKey];
+              $email_cont_checked = '';
+              $phone_cont_checked = '';
+              $emialAlredy = '';
+              $phoneAlredy = '';
+              if ($contact->id === (int) $selected_phone_user[$key]['sync_id']) {
+                  if ($selected_phone_user[$key]['prefer_by'] == 'email') {
+                      $email_cont_checked = 'checked';
+                     
+                  } elseif ($selected_phone_user[$key]['prefer_by'] == 'phone') {
+                      $phone_cont_checked = 'checked';
+                  
+                  }
+              }
+          }
+          // if(count($selected_phone_user) >= 15){
+          // $disabled = 'disabled';
+          // }
+      }
+  @endphp
       <div class="invite-contact phone-contact">
          <a href="#" class="invite-img">
             @if (!empty($contact->photo))
@@ -166,7 +231,7 @@
                      data-id="{{ $contact->id }}"  data-name="{{  $contact->firstName  }}"
                      data-last="{{ $contact->lastName }}"
                      data-email="{{ $contact->email }}"
-                     data-phone="{{ $contact->phoneWithCode }}"  data-type="email">
+                     data-phone="{{ $contact->phoneWithCode }}"  data-type="email" {{$email_cont_checked}}>
                </div>
             </div>
             @endif
@@ -185,7 +250,7 @@
                   data-id="{{ $contact->id }}"  data-name="{{   $contact->firstName  }}"
                   data-last="{{ $contact->lastName}}"
                   data-email="{{ $contact->email }}"
-                  data-phone="{{ $contact->phoneWithCode }}"  data-type="phone">
+                  data-phone="{{ $contact->phoneWithCode }}"  data-type="phone" {{$phone_cont_checked}}>
             </div>
             @endif
          </div>

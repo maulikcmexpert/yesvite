@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Throwable;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -1847,6 +1848,8 @@ class EventWallController extends Controller
 
     public function get_yesviteContact(Request $request)
     {
+        Session::forget('contactwall_ids');
+        Session::forget('userwall_ids');
         // Authenticated user ID
         $userId = Auth::guard('web')->user()->id;
 
@@ -1910,16 +1913,93 @@ class EventWallController extends Controller
             ->get();
         $invitedUsers = [];
         if (!empty($eventId)) {
-            $invitedUsers = EventInvitedUser::with('user')
-                ->where('event_id', $eventId) // Correct usage
-                ->get();
-        }
+                $userIds = session()->get('userwall_ids', []);
 
+                $invitedYesviteUsers = EventInvitedUser::with('user')
+                    ->where('event_id', $eventId)
+                    ->where('is_co_host', '0')
+                    ->whereNotNull('user_id')
+                    ->get();
+                if ($invitedYesviteUsers) {
+                    foreach ($invitedYesviteUsers as $user) {
+                        $userVal = User::select(
+                            'id',
+                            'firstname',
+                            'lastname',
+                            'profile',
+                            'email',
+                            'country_code',
+                            'phone_number',
+                            'app_user',
+                            'prefer_by',
+                            'email_verified_at',
+                            'parent_user_phone_contact',
+                            'visible',
+                            'message_privacy'
+                        )->where('id', $user['user_id'])->first();
+
+                        if ($userVal) {
+                            $userEntry = [
+                                'id' => $userVal->id,
+                                'firstname' => $userVal->firstname,
+                                'lastname' => $userVal->lastname,
+                                'prefer_by' => $userVal->prefer_by,
+                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
+                                'profile' => $userVal->profile ?? '',
+                            ];
+                            $userIds[] = $userEntry;
+                        }
+                    }
+                    session()->put('userwall_ids', $userIds);
+                    Session::save();
+                }
+
+                $userIdsSession = session()->get('contactwall_ids', []);
+                $invitedContactUsers = EventInvitedUser::with('user')
+                    ->where('event_id', $eventId)
+                    ->where('is_co_host', '0')
+                    ->whereNull('user_id')
+                    ->get();
+                if ($invitedContactUsers) {
+                    foreach ($invitedContactUsers as $user) {
+                        $userVal = contact_sync::select(
+                            'id',
+                            'firstname',
+                            'lastname',
+                            'photo',
+                            'preferBy',
+                            'phone',
+                            'email'
+
+                        )->where('id', $user['sync_id'])->first();
+                        if ($userVal) {
+                            $userEntry = [
+                                'sync_id' => $userVal->id,
+                                'firstname' => $userVal->firstname,
+                                'lastname' => $userVal->lastname,
+                                'prefer_by' => $userVal->preferBy,
+                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
+                                'profile' => $userVal->photo ?? '',
+
+                            ];
+                            $userIdsSession[] = $userEntry;
+                        }
+                    }
+                    session()->put('contactwall_ids', $userIdsSession);
+                    Session::save();
+                }
+            
+        }
+        $selected_yesvite_user = Session::get('userwall_ids');
+        $selected_phone_user = Session::get('contactwall_ids');
+        // dd(session('contactwall_ids'),session('userwall_ids'));
         // Render the yesvite contacts view
         $yesviteContactHtml = view('front.event_wall.guest_yesviteContact', [
             'yesviteUsers' => $yesviteUsers,
             'phone_contact' => $phoneContacts,
-            'invitedUsers' => $invitedUsers
+            'invitedUsers' => $invitedUsers,
+            'selected_yesvite_user'=>$selected_yesvite_user,
+            'selected_phone_user'=>$selected_phone_user,
         ])->render();
 
         // Return response in JSON format
