@@ -2,8 +2,7 @@
 
     use Carbon\Carbon;
 @endphp
-<input type="hidden" id="design_image" value="{{(isset($eventDetail['design_image']) && $eventDetail['design_image'] != NULL)?$eventDetail['design_image']:''}}">
-<input type="hidden" id="static_information" value="{{(isset($eventDetail['static_information']) && $eventDetail['static_information'] != NULL)?$eventDetail['static_information']:''}}">
+
 <div class="step_1" style="display: none;">
     <div class="main-content-right">
         <div class="new_event_detail_form">
