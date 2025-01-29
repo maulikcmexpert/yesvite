@@ -3319,7 +3319,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                     activities[dataId].push(activity);
         
                     if (previousEndTime && previousEndTime > startTime && !showAlert) {
-                        toastr.error("Please enter proper time 1");
+                        toastr.error("Please enter proper time");
                         showAlert = true;  
                         // return;
                     }else{
