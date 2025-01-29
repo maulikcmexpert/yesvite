@@ -266,6 +266,7 @@
     font-weight: 500;
     line-height: 22.4px;
     color: var(--secondryColor) !important;
+    top: 10px;
 }
 
 .custome-designcategory input{
