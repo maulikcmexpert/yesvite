@@ -859,19 +859,7 @@ function datepicker() {
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 
 
-            const endTime = $(this)
-            .closest(".activity-main-wrp")
-            .find('input[name="activity-start-time[]"]')
-            .val();
-
-            const emdtMoment = moment(endTime, "LT");
-
-
-            if(endTime!=""){
-                if(emdtMoment==startMoment){
-                    alert('start time and end time can not be safe');
-                }
-            }
+      
 
 
             $(this).val(startMoment);
@@ -961,6 +949,21 @@ function datepicker() {
                     .val();
                 const startMoment = moment(startTime, "LT");
                 $(this).val(startMoment.clone().add(1, "hours").format("LT"));
+            }
+
+
+            const sTime = $(this)
+            .closest(".activity-main-wrp")
+            .find('input[name="activity-start-time[]"]')
+            .val();
+
+            const sMoment = moment(sTime, "LT");
+
+
+            if(endTime!=""){
+                if(sMoment==$(this).val()){
+                    alert('start time and end time can not be safe');
+                }
             }
 
             console.log(selectedEndTime);
