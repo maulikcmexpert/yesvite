@@ -2754,7 +2754,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         );
         console.log(newStartTime);
         console.log($(this).val());
-        if(newStartTime==endtimelatesr){
+        if(newStartTime<=endtimelatesr){
             alert();
         }
         if (
