@@ -469,7 +469,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="used-fonts-wrp common-font-wrp">
+            <div class="used-fonts-wrp common-font-wrp d-none">
                 <div class="form-check">
                     <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults" />
                     <label class="form-check-label" for="flexRadioDefaults">
