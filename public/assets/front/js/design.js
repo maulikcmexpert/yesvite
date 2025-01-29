@@ -1266,6 +1266,7 @@ function bindData(current_event_id) {
         if (!activeObject || activeObject.type !== "textbox") {
             return;
         }
+        addToUndoStack(canvas);
         let fontSize = $("#fontSizeInput").val();
         let letterSize = $("#letterSpacingInput").val();
         let lineHeight = $("#lineHeightInput").val();
