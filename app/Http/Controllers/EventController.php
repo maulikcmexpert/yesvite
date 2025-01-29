@@ -2876,7 +2876,7 @@ class EventController extends BaseController
         $oldstart_date = $event_creation->start_date;
         $isupdatedate = 0;
         
-        if ($oldstart_time !== $newstart_time) {
+        if ($newstart_date !== $oldstart_date) {
             $isupdatedate = 1;
         }
 
