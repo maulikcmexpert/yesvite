@@ -118,6 +118,8 @@ $(".notification-btn").on("click", function () {
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
 const dropdownMenu = document.querySelector(".notification-dropdown-menu");
+const modal = document.getElementById('all-notification-filter-modal');
+
 
 // document.addEventListener('click', function(event) {
 //     // Check if the clicked element is outside the dropdown
@@ -150,15 +152,23 @@ $(".notification-toggle-menu").on("click", function (event) {
         $(".line").removeClass("active");
     }
 });
-
 document.addEventListener("click", (event) => {
-  if (
-    !dropdownMenu.contains(event.target) &&
-    !dropdownButton.contains(event.target)
-  ) {
-    dropdownMenu.classList.remove("show");
-  }
-});
+    if (
+      !dropdownMenu.contains(event.target) && 
+      !dropdownButton.contains(event.target) &&
+      !modal.contains(event.target) // Close the dropdown if clicked inside the modal
+    ) {
+      dropdownMenu.classList.remove("show");
+    }
+  });
+// document.addEventListener("click", (event) => {
+//   if (
+//     !dropdownMenu.contains(event.target) &&
+//     !dropdownButton.contains(event.target)
+//   ) {
+//     dropdownMenu.classList.remove("show");
+//   }
+// });
 // Close the dropdown when clicking outside
 // document.addEventListener("click", (event) => {
 //   if (
