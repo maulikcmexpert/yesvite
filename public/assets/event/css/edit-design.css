@@ -1,4 +1,4 @@
-{.edit-imag-main-content-wrp .setting-category-wrp {
+.edit-imag-main-content-wrp .setting-category-wrp {
     padding: 16px 24px 90px 24px;
     overflow: hidden;
     overflow-y: auto;
@@ -894,7 +894,6 @@
     justify-content: center !important;
 }
 
-
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;
@@ -1120,5 +1119,4 @@
         bottom: -15px;
         right: 8px;
     }
-}
 }
