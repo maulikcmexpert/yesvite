@@ -41,7 +41,7 @@ use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
-use DB;
+// use DB;
 
 function getVideoDuration($filePath)
 {
@@ -1832,8 +1832,8 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
 
 function handleIncomingMessage($receiverNumber, $message)
 {
-    DB::enableQueryLog();
-    echo $cleanedNumber = preg_replace('/[^0-9]/', '', $receiverNumber);
+
+    $cleanedNumber = preg_replace('/[^0-9]/', '', $receiverNumber);
     if (strpos($cleanedNumber, '1') === 0 && strlen($cleanedNumber) > 10) {
         $cleanedNumber = substr($cleanedNumber, 1);
     }
@@ -1879,8 +1879,6 @@ function handleIncomingMessage($receiverNumber, $message)
         $unsubscribeMessage = "You have successfully been unsubscribed from Yesvite via SMS invites. You will not receive any more messages from this number. Reply START to resubscribe.";
         //sendSMSForApplication($receiverNumber, $unsubscribeMessage);
     }
-    dd(DB::getQueryLog()); // Show results of log
-
 }
 
 function dateDiffer($dateTime)
