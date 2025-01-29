@@ -1512,6 +1512,7 @@ function bindData(current_event_id) {
                 setLetterSpacing();
             }, 500);
         } else {
+            letterSpacingInput.value = 100;
             console.log(
                 "Invalid input: Please enter a value between 0% and 100%"
             );
