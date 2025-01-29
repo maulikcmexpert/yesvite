@@ -184,8 +184,10 @@ if ($hostView) {
             </ul>
             <div class="guests-listing-buttons">
                 <a href="" class="cmn-btn see-all-btn">See All</a>
+@if($eventInfo['guest_view']['is_host'] == 1)
                 <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal"
                     data-bs-target="#addguest"><i class="fa-solid fa-plus"></i> Add Guest</button>
+                    @endif
             </div>
         </div>
     </div>
@@ -287,7 +289,7 @@ if ($hostView) {
                     </li>
                 </ul>
                 <div class="tab-content GuestTabContent" id="myTabContent">
-                   
+
                 </div>
             </div>
             {{-- <input type="hidden" id="event_id" value=""> --}}
