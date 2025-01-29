@@ -6,8 +6,8 @@
             <form action="">
                 <h3>Choose Design</h3>
 
-               
-                
+
+
                 <div class="row">
                     <div class="col-12 mb-4">
                         <div class="choose-design-search-setting">
@@ -48,7 +48,10 @@
                         </div>
                     </div>
                     <div class="designCategory">
-                        <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png"/>
+                        <label for="" class="custome-designcategory">
+                            Upload own design/card
+                            <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png"/>
+                        </label>
                         @if (isset($design_category))
                             @foreach ($design_category as $category)
                                 @foreach ($category->subcategory as $subcategory)
