@@ -733,9 +733,9 @@ class EventController extends BaseController
             $static_data = [];
             $static_data['textData'] = $textElemtents;
             $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
-            $static_data['height'] = (int)$tempData->height;
-            $static_data['width'] = (int)$tempData->width;
-            $static_data['image'] = $tempData->image;
+            $static_data['height'] = (int)490;
+            $static_data['width'] = (int)345;
+            $static_data['image'] = $event_creation->design_image;
             $static_data['template_url'] = $sourceImagePath;
             $static_data['is_contain_image'] = false;
             if (isset($request->textData['shapeImageData'])) {

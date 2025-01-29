@@ -40,7 +40,8 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.image) {
                     image = base_url + "storage/event_images/" + response.image;
-                    eventData.cutome_image = image;
+                    eventData.cutome_image = response.image;
+                    eventData.image = response.image;
                     dbJson = null;
                     loadAgain();
                 } else {
