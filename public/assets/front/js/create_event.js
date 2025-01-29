@@ -3591,6 +3591,8 @@ function savePage1Data(close = null) {
     if (rsvp_by_date_set) {
         // rsvp_by_date = $("#rsvp-by-date").val();
         rsvp_by_date_set = "1";
+    }else{
+        rsvp_by_date_set = "0";
     }
     if (close == null || close == "") {
         // var activity=$('.new_append_activity').length;
