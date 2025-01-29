@@ -2637,7 +2637,7 @@ class EventController extends BaseController
 
     public function CancelEvent(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user  = Auth::guard('web')->user();
         $event_id = $request->input('event_id');
         $reason = $request->input('reason');
