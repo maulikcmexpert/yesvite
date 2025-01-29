@@ -3247,6 +3247,21 @@ $(document).on("click", "#save_activity_schedule", function () {
         // toggleSidebar();
     });
     console.log({ activityendtime });
+
+    let lastendtime=convertTo24Hour(end_time)
+    let lastScheduleEndtime=convertTo24Hour(activityendtime)
+
+    console.log(lastendtime);
+    console.log(lastScheduleEndtime);
+
+    if(lastScheduleEndtime>lastendtime){
+        alert();
+    }
+    
+    
+
+
+
     if (isValid == 0) {
         if (total_activities >= 1) {
             // if (total_activities == 1) {
