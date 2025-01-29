@@ -39,7 +39,7 @@ $(document).ready(function () {
             contentType: false,
             success: function (response) {
                 if (response.image) {
-                    image = base_url + "storage/event_images" + response.image;
+                    image = base_url + "storage/event_images/" + response.image;
                     loadAgain();
                 } else {
                     alert("Upload failed.");
@@ -604,6 +604,7 @@ function bindData(current_event_id) {
 
     function loadTextDataFromDatabase() {
         if (image) {
+            console.log(image);
             fabric.Image.fromURL(image, function (img) {
                 var canvasWidth = canvas.getWidth();
                 var canvasHeight = canvas.getHeight();
