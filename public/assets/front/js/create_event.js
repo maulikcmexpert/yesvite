@@ -3255,7 +3255,8 @@ $(document).on("click", "#save_activity_schedule", function () {
     console.log(lastScheduleEndtime);
 
     if(lastScheduleEndtime>lastendtime){
-        alert();
+        toastr.error("activity can not end after end time");
+        return;
     }
     
     
