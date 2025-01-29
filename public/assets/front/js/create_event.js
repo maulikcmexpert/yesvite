@@ -3484,9 +3484,6 @@ $(document).on("click", "#close_createEvent", function () {
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
-
-        console.log(eventData);
-
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
