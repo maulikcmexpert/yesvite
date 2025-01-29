@@ -7997,7 +7997,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     var data = eventData;
     
     $("#loader").css("display", "flex");
-    $(".main-content-wrp").addClass("blurred");
+    // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
     // var imagePath = '';
@@ -8021,7 +8021,7 @@ $(document).on("click", ".edit_checkout", function (e) {
         success: function (response) {
             console.log(response);
             // $("#loader").css("display", "none");
-            $(".main-content-wrp").removeClass("blurred");
+            // $(".main-content-wrp").removeClass("blurred");
 
             if (response.success == true) {
                 toastr.success("Event Updated Successfully");
