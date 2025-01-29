@@ -892,8 +892,10 @@ function datepicker() {
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             
             // picker.minDate(startMoment.clone().add(1, "minutes"));
-            picker.disabledTimeIntervals([[startMoment, startMoment.clone().add(14, "minutes")]]);
-
+            const minSelectableTime = startMoment.clone().subtract(15, "minutes");
+            const maxSelectableTime = startMoment.clone().add(15, "minutes");
+            picker.minDate(minSelectableTime);
+            picker.maxDate(maxSelectableTime);
             
             // Set the end time to 1 hour after the start time, only when picker is first shown
             if (!picker.date()) {  // Check if the picker date is empty (first time showing)
