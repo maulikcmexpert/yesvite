@@ -246,7 +246,7 @@
                             <li class="pick-card active">
                                 <a href="" class="dropdown-item drop-down-pick-card ">Pick Card</a>
                             </li>
-                            <li class="edit-design">
+                            <li class="edit-design edit-design-sidebar">
                                 <a href="" class="dropdown-item drop-down-edit-design">Edit Design</a>
                             </li>
                         </ul>
@@ -338,7 +338,7 @@
                                         <h3>Pick Design</h3>
                                     </div>
                                 </li>
-                                <li class="edit-design active">
+                                <li class="edit-design edit-design-sidebar active">
                                     <div class="side-bar-sub-list menu-success">
                                         <h3>Edit Design</h3>
                                     </div>
@@ -379,7 +379,7 @@
                                         <h3>Pick Design</h3>
                                     </div>
                                 </li>
-                                <li class="edit-design">
+                                <li class="edit-design edit-design-sidebar">
                                     <div class="side-bar-sub-list">
                                         <h3>Edit Design</h3>
                                     </div>
