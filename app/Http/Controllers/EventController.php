@@ -2810,9 +2810,14 @@ class EventController extends BaseController
         }
 
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
-            dd($request->rsvp_by_date);
+            $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
+            if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
+                $rsvp_by_date = $request->rsvp_by_date;
+            } else {
+                $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            }
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
-            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+           
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
