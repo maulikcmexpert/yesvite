@@ -263,6 +263,7 @@ class EventController extends BaseController
                 }
                 if($request->iscopy != null &&$request->iscopy ){
                     $eventDetail['id'] ='';
+                    $eventDetail['iscopy'] =$request->iscopy;
                     $eventDetail['is_draft_save'] ='';
                 }
                 $eventDetail['invited_user_id'] = [];
