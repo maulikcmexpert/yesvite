@@ -65,7 +65,7 @@
                                 }
                             @endphp
                                 <div class="position-relative z-2">
-                                    <input type="text" class="form-control inputText" style="background: transparent" id="event-date" data-isDate="{{$start_date}}" name="event-date" onblur="clearError(this)"  value="{{$start_date}}" readonly>
+                                    <input type="text" class="form-control inputText" style="background: transparent" id="event-date" data-isDate="{{$event_date}}" name="event-date" onblur="clearError(this)"  value="{{$event_date}}" readonly>
                                     <label for="birthday" class="form-label input-field floating-label select-label">Date of event * </label>
                                     <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -235,7 +235,7 @@
                         <div class="input-form">
                             
                             <input type="text" class="form-control inputText " id="rsvp-by-date" name="rsvp-by-date" onblur="clearError(this)" 
-                            value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?Carbon::parse($eventDetail['rsvp_by_date'])->format('Y-m-d'):''}}" readonly autocomplete="off">
+                            value="{{(isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '')?Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y'):''}}" readonly autocomplete="off">
                             <label for="birthday" class="form-label input-field floating-label select-label">RSVP By Date</label>
                         </div>
                         <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
