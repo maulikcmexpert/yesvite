@@ -40,6 +40,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.image) {
                     image = base_url + "storage/event_images" + response.image;
+                    loadAgain();
                 } else {
                     alert("Upload failed.");
                 }
