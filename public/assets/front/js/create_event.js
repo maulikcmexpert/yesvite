@@ -2756,7 +2756,8 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         console.log($(this).val());
         if(newStartTime>=endtimelatesr){
             var newEndTime = moment(newStartTime, "HH:mm").add(1, "hours").format("HH:mm");
-            $(this).val(newEndTime);  
+            var newEndTime12 = convertTo12Hour(newEndTime);
+            $(this).val(newEndTime12);  
         }
         if (
             newEndTime != "" &&
