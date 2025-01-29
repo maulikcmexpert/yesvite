@@ -320,7 +320,7 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
-    $(document).on('change','#visible2"]', function() {
+    $(document).on('change',"#visible2", function() {
         if ($(this).is(':checked')) {
             $('.profile_privacy_check').prop('checked', true);
         }
