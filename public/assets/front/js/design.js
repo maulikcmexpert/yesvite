@@ -1182,6 +1182,7 @@ function bindData(current_event_id) {
                 seted = 1;
                 console.log(element.fill);
                 let selectedColor = element.fill || "#000000";
+                console.log("color-picker");
                 $("#color-picker").spectrum("set", selectedColor || "#000000");
 
                 activeObject.set("fill", selectedColor);
@@ -1674,6 +1675,7 @@ function bindData(current_event_id) {
 
         if (activeObject && activeObject.type === "textbox") {
             if (selectedColorType === "font") {
+                console.log("colorpicker update");
                 $("#color-picker").spectrum(
                     "set",
                     activeObject.fill || "#000000"
