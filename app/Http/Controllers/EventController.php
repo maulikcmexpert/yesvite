@@ -261,7 +261,7 @@ class EventController extends BaseController
                         $eventDetail['event_images'][] = $eventImageData;
                     }
                 }
-                if($request->iscopy == null &&$request->iscopy ){
+                if($request->iscopy != null &&$request->iscopy ){
                     $eventDetail['id'] ='';
                     $eventDetail['is_draft_save'] ='';
                 }
