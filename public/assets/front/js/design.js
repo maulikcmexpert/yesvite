@@ -1645,7 +1645,9 @@ function bindData(current_event_id) {
             //console.log(activeObject.type);
             //console.log(activeObject.fill);
             if (selectedColorType == "font") {
-                console.log("update fill");
+                if (selectedColor != $(".sp-input").val()) {
+                    return;
+                }
                 //console.log(activeObject.fill);
                 //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color
