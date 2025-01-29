@@ -19,10 +19,12 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+
+
 var selected_prefer_by =
-    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+$("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
 var selected_profilePhoto =
-    $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+$("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";;
 var selected_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
 var co_host_is_selected_close = false;
 var get_contact_status = "";
@@ -131,8 +133,8 @@ if (giftRegestryDataRaw.length > 0) {
     }
 }
 
-var selected_profile_or_text = "";
-var selected_prefer_by = "";
+// var selected_profile_or_text = "";
+// var selected_prefer_by = "";
 var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
@@ -856,6 +858,17 @@ function datepicker() {
             const startTime = $(this).closest("div").find(".activity_start_time").val();
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 
+
+            const endTime = $(this)
+            .closest(".activity-main-wrp")
+            .find('input[name="activity-start-time[]"]')
+            .val();
+
+            // if(endTime!=""){
+            //     if()
+            // }
+
+
             $(this).val(startMoment);
         })
     });
@@ -878,7 +891,8 @@ function datepicker() {
                 .closest(".activity-main-wrp")
                 .find('input[name="activity-start-time[]"]')
                 .val();
-            
+                const emdtMoment = moment(startTime, "LT");
+
             console.log("Start time:", startTime);
             
             // If start time exists, use it; otherwise, default to 12:00 PM
@@ -3083,42 +3097,42 @@ function convertTo12Hour(time) {
     return `${hours}:${minutes} ${modifier}`;
 }
 // Function to check end times
-function checkEndTimes() {
-    const scheduleWrapper = document.querySelector('.activity-schedule-wrp');
-    const endTimes = scheduleWrapper.querySelectorAll('.activity_end_time');
+// function checkEndTimes() {
+//     const scheduleWrapper = document.querySelector('.activity-schedule-wrp');
+//     const endTimes = scheduleWrapper.querySelectorAll('.activity_end_time');
     
-    let exceedsTime = false;
+//     let exceedsTime = false;
 
-    endTimes.forEach((endTimeInput) => {
-        const endTime = endTimeInput.value.trim();
+//     endTimes.forEach((endTimeInput) => {
+//         const endTime = endTimeInput.value.trim();
 
-        if (endTime) {
-            const [time, period] = endTime.split(' '); // Split into time and AM/PM
-            const [hours, minutes] = time.split(':'); // Split time into hours and minutes
+//         if (endTime) {
+//             const [time, period] = endTime.split(' '); // Split into time and AM/PM
+//             const [hours, minutes] = time.split(':'); // Split time into hours and minutes
 
-            let endHour = parseInt(hours);
-            let endMinute = parseInt(minutes);
+//             let endHour = parseInt(hours);
+//             let endMinute = parseInt(minutes);
 
-            // Convert to 24-hour format based on AM/PM
-            if (period === 'PM' && endHour !== 12) {
-                endHour += 12;
-            } else if (period === 'AM' && endHour === 12) {
-                endHour = 0;
-            }
+//             // Convert to 24-hour format based on AM/PM
+//             if (period === 'PM' && endHour !== 12) {
+//                 endHour += 12;
+//             } else if (period === 'AM' && endHour === 12) {
+//                 endHour = 0;
+//             }
 
-            // Check if time exceeds 11:00 PM (23:00)
-            if (endHour > 23 || (endHour === 23 && endMinute > 0)) {
-                exceedsTime = true;
-            }
-        }
-    });
+//             // Check if time exceeds 11:00 PM (23:00)
+//             if (endHour > 23 || (endHour === 23 && endMinute > 0)) {
+//                 exceedsTime = true;
+//             }
+//         }
+//     });
 
-    if (exceedsTime) {
-        alert("One or more activities exceed the end time of 11:00 PM.");
-    } else {
-        alert("All activities are within the valid time range.");
-    }
-}
+//     if (exceedsTime) {
+//         alert("One or more activities exceed the end time of 11:00 PM.");
+//     } else {
+//         alert("All activities are within the valid time range.");
+//     }
+// }
 
 // Trigger the function on save button click
 
@@ -3126,7 +3140,7 @@ function checkEndTimes() {
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
     var end_time = $("#ac-end-time").val();
-    checkEndTimes();
+    // checkEndTimes();
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
@@ -3561,6 +3575,9 @@ function savePage1Data(close = null) {
     var end_time_zone = $("#end-time-zone").val();
     var schedule = $("#schedule").is(":checked");
     var end_time = $("#end_time").is(":checked");
+    // var rsvp_end_time = $("#end_time").is(":checked");
+    var rsvp_end_time = $("#end-time").val();
+
     var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
     var address_2 = $("#address2").val();
     var address1 = $("#address1").val();
@@ -3581,7 +3598,7 @@ function savePage1Data(close = null) {
     // }else{
     //     rsvp_by_date_set = '0';
     // }
-
+  
     if (close == null || close == "") {
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
@@ -3597,10 +3614,9 @@ function savePage1Data(close = null) {
         if (schedule) {
             events_schedule = "1";
         }
-        var rsvp_end_time = "";
+        // var rsvp_end_time = "";
         if (end_time) {
-            rsvp_end_time = $("#end-time").val();
-            rsvp_end_time_set = "1";
+            // rsvp_end_time_set = "1";
             if (rsvp_end_time == "") {
                 $("#end-time-error")
                     .css("display", "block")
@@ -3762,6 +3778,16 @@ function savePage1Data(close = null) {
             return;
         }
         // eventData = {
+            if (end_time) {
+                rsvp_end_time_set = "1";
+            }
+        
+            if (rsvp_by_date_set) {
+                rsvp_by_date_set = "1";
+            }else{
+                rsvp_by_date_set = "0";
+            }
+
 
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
@@ -7969,9 +7995,9 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage4Data();
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
-    console.log(data);
-    // $("#loader").show();
-    $(".main-content-wrp").addClass("blurred");
+    
+    $("#loader").css("display", "flex");
+    // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
     // var imagePath = '';
@@ -7994,8 +8020,8 @@ $(document).on("click", ".edit_checkout", function (e) {
         data: data,
         success: function (response) {
             console.log(response);
-            $("#loader").css("display", "none");
-            $(".main-content-wrp").removeClass("blurred");
+            // $("#loader").css("display", "none");
+            // $(".main-content-wrp").removeClass("blurred");
 
             if (response.success == true) {
                 toastr.success("Event Updated Successfully");
@@ -8061,17 +8087,17 @@ $(document).on("click", ".design-sidebar-action", function () {
 });
 
 $(document).on("click", "#close_editEvent", function (e) {
-    if (final_step == 2) {
+    // if (final_step == 2) {
         savePage1Data(1);
-    }
-    if (final_step == 3) {
+    // }
+    // if (final_step == 3) {
         var savePage3Result = savePage3Data(1);
         if (savePage3Result === false) {
             $("#loader").css("display", "none");
             return;
         }
-    }
-
+    // }
+    $("#loader").css("display", "flex");
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
@@ -8089,9 +8115,9 @@ $(document).on("click", "#close_editEvent", function (e) {
             if (response == 1) {
                 window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
-                setTimeout(function () {
-                    $("#loader").css("display", "none");
-                }, 4000);
+                // setTimeout(function () {
+                //     $("#loader").css("display", "none");
+                // }, 4000);
             }
         },
         error: function (xhr, status, error) {
