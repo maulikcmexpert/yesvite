@@ -1266,6 +1266,7 @@ function bindData(current_event_id) {
         if (!activeObject || activeObject.type !== "textbox") {
             return;
         }
+        addToUndoStack(canvas);
         let fontSize = $("#fontSizeInput").val();
         let letterSize = $("#letterSpacingInput").val();
         let lineHeight = $("#lineHeightInput").val();
@@ -1390,33 +1391,38 @@ function bindData(current_event_id) {
     };
 
     // Function to update textbox width dynamically
+    var updateTextBoxTime = 0;
     const updateTextboxWidth = (textbox) => {
-        const text = textbox.text || ""; // Get current text
-        const fontSize = textbox.fontSize || defaultSettings.fontSize; // Get current font size
-        const fontFamily = textbox.fontFamily || "Arial"; // Default font family
-        const charSpacing = textbox.charSpacing || 0;
+        clearTimeout(updateTextBoxTime);
+        updateTextBoxTime = setTimeout(function () {
+            addToUndoStack(canvas);
+            const text = textbox.text || ""; // Get current text
+            const fontSize = textbox.fontSize || defaultSettings.fontSize; // Get current font size
+            const fontFamily = textbox.fontFamily || "Arial"; // Default font family
+            const charSpacing = textbox.charSpacing || 0;
 
-        const ctx = canvas.getContext("2d");
-        ctx.font = `${fontSize}px ${fontFamily}`;
+            const ctx = canvas.getContext("2d");
+            ctx.font = `${fontSize}px ${fontFamily}`;
 
-        const measuredTextWidth = ctx.measureText(text).width;
-        const calculatedWidth =
-            measuredTextWidth +
-            (charSpacing / 1000) * fontSize * (text.length - 1);
+            const measuredTextWidth = ctx.measureText(text).width;
+            const calculatedWidth =
+                measuredTextWidth +
+                (charSpacing / 1000) * fontSize * (text.length - 1);
 
-        // Define a maximum width to avoid large textboxes
-        const maxWidth = 400; // Adjust this value based on your layout
-        const width = Math.min(calculatedWidth, maxWidth); // Cap the width
-        console.log(width);
+            // Define a maximum width to avoid large textboxes
+            const maxWidth = 400; // Adjust this value based on your layout
+            const width = Math.min(calculatedWidth, maxWidth); // Cap the width
+            console.log(width);
 
-        // Handle text wrapping for large texts
-        textbox.set("width", width);
-        textbox.set("textAlign", "left"); // Ensure text wraps within the textbox
-        textbox.setCoords();
+            // Handle text wrapping for large texts
+            textbox.set("width", width);
+            textbox.set("textAlign", "left"); // Ensure text wraps within the textbox
+            textbox.setCoords();
 
-        // Set to 'clipTo' or 'overflow' if necessary based on design
-        textbox.set("noScaleCache", false); // Redraw the text after resizing
-        canvas.renderAll();
+            // Set to 'clipTo' or 'overflow' if necessary based on design
+            textbox.set("noScaleCache", false); // Redraw the text after resizing
+            canvas.renderAll();
+        }, 800);
     };
 
     // Set font size function
@@ -1512,15 +1518,15 @@ function bindData(current_event_id) {
     });
 
     // Save button functionality
-    document.querySelector(".save-btn").addEventListener("click", function () {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            savedSettings.fontSize = activeObject.fontSize;
-            savedSettings.letterSpacing = activeObject.charSpacing / 10; // Convert back to user scale
-            savedSettings.lineHeight = activeObject.lineHeight;
-            alert("Settings have been saved!");
-        }
-    });
+    // document.querySelector(".save-btn").addEventListener("click", function () {
+    //     const activeObject = canvas.getActiveObject();
+    //     if (activeObject && activeObject.type === "textbox") {
+    //         savedSettings.fontSize = activeObject.fontSize;
+    //         savedSettings.letterSpacing = activeObject.charSpacing / 10; // Convert back to user scale
+    //         savedSettings.lineHeight = activeObject.lineHeight;
+    //         alert("Settings have been saved!");
+    //     }
+    // });
     const resetTextboxProperties = (object) => {
         object.set({
             fontSize: defaultSettings.fontSize,

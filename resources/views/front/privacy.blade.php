@@ -38,13 +38,20 @@
                                         </label>
                                         <input class="form-check-input" type="radio" name="visible" value="1" id="flexRadioDefault1" {{($user->visible == '1')?'checked':''}}>
                                     </div>
-                                    <div class="border-bottom d-flex align-items-center">
-                                        <p>Choose what to show on your profile</p>
-                                        <svg class="ms-auto" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.6004 1.4585L9.16706 6.89183C8.52539 7.5335 7.47539 7.5335 6.83372 6.89183L1.40039 1.4585" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                        <div class="accordion-header" id="headingOne">
+                                                <div class="border-bottom  accordion-button collapsed" style="padding-left: 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    <p style="font-size:14px;">Choose what to show on your profile</p>
+                                                    <!-- <svg class="ms-auto" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M14.6004 1.4585L9.16706 6.89183C8.52539 7.5335 7.47539 7.5335 6.83372 6.89183L1.40039 1.4585" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg> -->
+                                                </div>
+                                        </div>       
+                                        </div>
                                     </div>
-                                    <div>
+                                    
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="d-flex align-items-center justify-content-between border-bottom">
                                             <h6>Gender</h6>
                                             <div class="toggle-button-cover ">
@@ -118,9 +125,9 @@
                                     </div>
                                     <a href="{{route('profile.public_profile')}}" class="d-flex align-items-center public-view">
                                         <h6>Public Profile View</h6>
-                                        <svg class="ms-auto" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.6004 1.4585L9.16706 6.89183C8.52539 7.5335 7.47539 7.5335 6.83372 6.89183L1.40039 1.4585" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                            <svg style="margin-left:auto;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M5.94365 13.781C5.81698 13.781 5.69031 13.7343 5.59031 13.6343C5.39698 13.441 5.39698 13.121 5.59031 12.9277L9.93698 8.58099C10.257 8.26099 10.257 7.74099 9.93698 7.42099L5.59031 3.07432C5.39698 2.88099 5.39698 2.56099 5.59031 2.36766C5.78365 2.17432 6.10365 2.17432 6.29698 2.36766L10.6436 6.71432C10.9836 7.05432 11.177 7.51432 11.177 8.00099C11.177 8.48766 10.9903 8.94766 10.6436 9.28766L6.29698 13.6343C6.19698 13.7277 6.07031 13.781 5.94365 13.781Z" fill="#94A3B8"/>
+                                            </svg>
                                     </a>
                                 </div>
                             </div>
