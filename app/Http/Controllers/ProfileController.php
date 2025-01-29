@@ -489,7 +489,7 @@ class ProfileController extends BaseController
 
     public function updateProfilePrivacy(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = Auth::guard('web')->user();
         try {
             if ($request->visible != null) {
@@ -523,6 +523,7 @@ class ProfileController extends BaseController
             return response()->json([
                 'status' => 1,
                 'message' => "Profile Privacy updated successfully",
+                'visible'=>$request->visible
 
             ]);
         } catch (QueryException $e) {
