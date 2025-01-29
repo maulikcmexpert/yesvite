@@ -2944,62 +2944,62 @@ class EventController extends BaseController
 
 
 
-        // if (isset($request->textData) && json_encode($request->textData) != '') {
-        //     $tempData = TextData::where('id', $request->temp_id)->first();
+        if (isset($request->textData) && json_encode($request->textData) != '') {
+            $tempData = TextData::where('id', $request->temp_id)->first();
 
-        //     if ($tempData) {
-        //         $sourceImagePath = asset('storage/canvas/' . $tempData->image);
-        //         $destinationDirectory = public_path('storage/event_images/');
-        //         $destinationImagePath = $destinationDirectory . $tempData->image;
-        //         if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
-        //             $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
-        //             $destinationImagePath = $destinationDirectory . $newImageName;
+            if ($tempData) {
+                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+                $destinationDirectory = public_path('storage/event_images/');
+                $destinationImagePath = $destinationDirectory . $tempData->image;
+                if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+                    $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                    $destinationImagePath = $destinationDirectory . $newImageName;
 
-        //             File::copy($sourceImagePath, $destinationImagePath);
-        //             $event_creation->design_image = $tempData->image;
-        //         }
-        //     }
+                    File::copy($sourceImagePath, $destinationImagePath);
+                    $event_creation->design_image = $tempData->image;
+                }
+            }
 
-        //     $textElemtents = $request->textData['textElements'];
-        //     foreach ($textElemtents as $key => $textJson) {
-        //         if ($textJson['fontSize'] != '') {
-        //             $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
-        //             $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
-        //             $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
-        //         }
-        //         if (isset($textJson['letterSpacing'])) {
-        //             $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
-        //         }
-        //         if (isset($textJson['lineHeight'])) {
-        //             $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
-        //         }
-        //         if (isset($textJson['underline'])) {
-        //             $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true) ? true : false;
-        //         }
-        //     }
+            $textElemtents = $request->textData['textElements'];
+            foreach ($textElemtents as $key => $textJson) {
+                if ($textJson['fontSize'] != '') {
+                    $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
+                    $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
+                    $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
+                }
+                if (isset($textJson['letterSpacing'])) {
+                    $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+                }
+                if (isset($textJson['lineHeight'])) {
+                    $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
+                }
+                if (isset($textJson['underline'])) {
+                    $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true) ? true : false;
+                }
+            }
 
 
-        //     $static_data = [];
-        //     $static_data['textData'] = $textElemtents;
-        //     $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
-        //     $static_data['height'] = (int)$tempData->height;
-        //     $static_data['width'] = (int)$tempData->width;
-        //     $static_data['image'] = $tempData->image;
-        //     $static_data['template_url'] = $sourceImagePath;
-        //     $static_data['is_contain_image'] = false;
-        //     if (isset($request->textData['shapeImageData'])) {
-        //         $shapeImageData = [];
-        //         $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
-        //         $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
-        //         $shapeImageData['centerY'] = (float)$request->textData['shapeImageData']['centerY'];
-        //         $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
-        //         $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
-        //         $static_data['shapeImageData'] = $shapeImageData;
-        //         $static_data['is_contain_image'] = true;
-        //     }
+            $static_data = [];
+            $static_data['textData'] = $textElemtents;
+            $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
+            $static_data['height'] = (int)$tempData->height;
+            $static_data['width'] = (int)$tempData->width;
+            $static_data['image'] = $tempData->image;
+            $static_data['template_url'] = $sourceImagePath;
+            $static_data['is_contain_image'] = false;
+            if (isset($request->textData['shapeImageData'])) {
+                $shapeImageData = [];
+                $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
+                $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
+                $shapeImageData['centerY'] = (float)$request->textData['shapeImageData']['centerY'];
+                $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
+                $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
+                $static_data['shapeImageData'] = $shapeImageData;
+                $static_data['is_contain_image'] = true;
+            }
 
-        //     $event_creation->static_information = json_encode($static_data);
-        // }
+            $event_creation->static_information = json_encode($static_data);
+        }
 
         $event_creation->save();
 
