@@ -629,6 +629,7 @@ input::-webkit-slider-thumb {
     font-size: 14px;
     display: inline-block;
     word-break: break-all;
+    line-height: normal;
 }
 
 .profile-details .user-location div{
