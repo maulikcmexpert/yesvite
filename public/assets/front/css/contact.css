@@ -180,6 +180,12 @@ ul.nav .nav-link:hover {
     width: 18px;
     height: 18px;
 }
+ .user-location div {
+    position: relative;
+    display: flex;
+    align-items: start;
+    gap: 2px;
+}
 
 .user-location svg {
     margin-right: 3px;
