@@ -957,9 +957,10 @@ function datepicker() {
             .find('input[name="activity-start-time[]"]')
             .val();
 
+            console.log(sTime);
             const sMoment = moment(sTime, "LT");
 
-
+            console.log(sMoment);
             if(endTime!=""){
                 if(sMoment==$(this).val()){
                     alert('start time and end time can not be safe');
