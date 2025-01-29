@@ -602,7 +602,7 @@ class RsvpController extends BaseController
     public function store(Request $request)
     {
 
-        // dd($request);
+        dd($request);
         // $userId = decrypt($request->user_id);
         if ($request->input('user_id') != "") {
             $userId = decrypt($request->user_id);
@@ -610,6 +610,7 @@ class RsvpController extends BaseController
             $userId = "";
         }
         $eventId = decrypt($request->event_id);
+        $email = $request->email;
         $event_invited_user_id = decrypt($request->event_invited_user_id);
         if ($request->input('sync_id') != "") {
             $sync_id = decrypt($request->input('sync_id'));
@@ -639,6 +640,8 @@ class RsvpController extends BaseController
 
 
                 if($sync_id!=""&&$userId==null){
+                    contact_sync::where('id',$sync_id)->update(['email'=>$email]);
+
                     $rsvpSent = EventInvitedUser::whereHas('contact_sync', function ($query) {
                         // $query->where('app_user', '1');
                     })->where(['id' => $event_invited_user_id])->first(); 
