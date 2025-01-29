@@ -2855,13 +2855,13 @@ class EventController extends BaseController
         }
         
         
-        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state . ' ' . $event_creation->zipcode . ' ' . $event_creation->city;
-        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state . ' ' . $request->zipcode . ' ' . $request->city;
+        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state  . ' ' . $event_creation->city . ' ' . $event_creation->zipcode;
+        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state  . ' ' . $request->city . ' ' . $request->zipcode;  
         $isaddress = 0;
         if ($oldAddress !== $newAddress) {
             $isaddress = 1;
         }
-        
+        dd($oldAddress,$newAddress)
         
         $newstart_time = $request->start_time;
         $oldstart_time = $event_creation->rsvp_start_time;
@@ -3057,44 +3057,46 @@ class EventController extends BaseController
 
 
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
-                $is_cohost = '1';
-                $invited_user = $request->co_host;
-                $prefer_by = $request->co_host_prefer_by;
-
-                if (isset($request->isPhonecontact) && $request->isPhonecontact == 1) {
-
-                    $checkContactExist = contact_sync::where('id', $invited_user)->first();
-                    if ($checkContactExist) {
-                        $newUserId = NULL;
-                        if ($checkContactExist->email != '') {
-                            $newUserId = checkUserEmailExist($checkContactExist);
+                if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {     
+                    $is_cohost = '1';
+                    $invited_user = $request->co_host;
+                    $prefer_by = $request->co_host_prefer_by;
+    
+                    if (isset($request->isPhonecontact) && $request->isPhonecontact == 1) {
+    
+                        $checkContactExist = contact_sync::where('id', $invited_user)->first();
+                        if ($checkContactExist) {
+                            $newUserId = NULL;
+                            if ($checkContactExist->email != '') {
+                                $newUserId = checkUserEmailExist($checkContactExist);
+                            }
+                            $eventInvite = new EventInvitedUser();
+                            $eventInvite->event_id = $eventId;
+                            $eventInvite->sync_id = $checkContactExist->id;
+                            $eventInvite->user_id = $newUserId;
+                            $eventInvite->prefer_by = $prefer_by;
+                            $eventInvite->is_co_host = $is_cohost;
+                            $eventInvite->save();
                         }
-                        $eventInvite = new EventInvitedUser();
-                        $eventInvite->event_id = $eventId;
-                        $eventInvite->sync_id = $checkContactExist->id;
-                        $eventInvite->user_id = $newUserId;
-                        $eventInvite->prefer_by = $prefer_by;
-                        $eventInvite->is_co_host = $is_cohost;
-                        $eventInvite->save();
-                    }
-                } else {
-                    EventInvitedUser::create([
-                        'event_id' => $eventId,
-                        'prefer_by' => $prefer_by,
-                        'user_id' => $invited_user,
-                        'is_co_host' => $is_cohost,
-                    ]);
-                    $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('id', $eventId)->get();
-                    foreach ($invitedusers as $event_detail) {
-                        $eventData = [
-                            'event_name' => $event_detail->event_name,
-                            'hosted_by' => $event_detail->user->firstname . ' ' . $event_detail->user->lastname,
-                            'profileUser' => ($event_detail->user->profile != NULL || $event_detail->user->profile != "") ? $event_detail->user->profile : "no_profile.png",
-                            'event_image' => "no_image.png",
-                            'date' =>   date('l - M jS, Y', strtotime($event_detail->start_date)),
-                            'time' => $event_detail->rsvp_start_time,
-                            'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
-                        ];
+                    } else {
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $prefer_by,
+                            'user_id' => $invited_user,
+                            'is_co_host' => $is_cohost,
+                        ]);
+                        $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('id', $eventId)->get();
+                        foreach ($invitedusers as $event_detail) {
+                            $eventData = [
+                                'event_name' => $event_detail->event_name,
+                                'hosted_by' => $event_detail->user->firstname . ' ' . $event_detail->user->lastname,
+                                'profileUser' => ($event_detail->user->profile != NULL || $event_detail->user->profile != "") ? $event_detail->user->profile : "no_profile.png",
+                                'event_image' => "no_image.png",
+                                'date' =>   date('l - M jS, Y', strtotime($event_detail->start_date)),
+                                'time' => $event_detail->rsvp_start_time,
+                                'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
+                            ];
+                        }
                     }
                 }
             }
