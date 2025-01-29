@@ -223,6 +223,7 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)->where('is_co_host', '0')
                     ->count();
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
+                
 
                 // $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
                 $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
@@ -259,6 +260,10 @@ class EventController extends BaseController
                         $eventImageData['image'] = asset('public/storage/event_images/' . $imgVal->image);
                         $eventDetail['event_images'][] = $eventImageData;
                     }
+                }
+                if($request->iscopy == null &&$request->iscopy ){
+                    $eventDetail['id'] ='';
+                    $eventDetail['is_draft_save'] ='';
                 }
                 $eventDetail['invited_user_id'] = [];
 
