@@ -322,7 +322,7 @@ $(document).ready(function () {
     });
     $(document).on('change',"#visible2", function() {
         if ($(this).is(':checked')) {
-            $('.profile_privacy_check').prop('checked', true);
+            $('.profile_privacy_check').prop('checked', false);
         }
     });
     $("#profilePrivacySave").on("click", function () {
@@ -350,7 +350,7 @@ $(document).ready(function () {
                     toastr.error(response.message);
                 }
                 if(response.visible=="2"){
-                    $('.profile_privacy_check').prop('checked', true);
+                    $('.profile_privacy_check').prop('checked', false);
                 }
 
             },
