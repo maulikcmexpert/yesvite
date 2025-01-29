@@ -361,7 +361,7 @@ function getNotificationList($filter = []){
                     $old_date_result="";
                     $new_date_result="";
                     // Split the old date range
-                    dd($old_start_end_date);
+                    // dd($old_start_end_date);
                     if($old_start_end_date!=""){
                         list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
                         $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
