@@ -167,6 +167,12 @@ ul.nav .nav-link:hover {
     gap: 15px;
 }
 
+.user-location div a, .user-location div p{
+    font-size: 14px;
+    display: inline-block;
+    word-break: break-all;
+}
+
 .user-location svg {
     margin-right: 3px;
 }
