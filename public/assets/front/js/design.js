@@ -40,6 +40,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.image) {
                     image = base_url + "storage/event_images/" + response.image;
+                    dbJson = null;
                     loadAgain();
                 } else {
                     alert("Upload failed.");
@@ -1161,7 +1162,7 @@ function bindData(current_event_id) {
                     }
                 }
             } else {
-                showStaticTextElements();
+                //showStaticTextElements();
             }
 
             // Set custom attribute with the fetched ID
