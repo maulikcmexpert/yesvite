@@ -864,9 +864,14 @@ function datepicker() {
             .find('input[name="activity-start-time[]"]')
             .val();
 
-            // if(endTime!=""){
-            //     if()
-            // }
+            const emdtMoment = moment(endTime, "LT");
+
+
+            if(endTime!=""){
+                if(emdtMoment==startMoment){
+                    alert('start time and end time can not be safe');
+                }
+            }
 
 
             $(this).val(startMoment);
