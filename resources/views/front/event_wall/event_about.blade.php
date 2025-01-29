@@ -272,10 +272,13 @@
 
 
                                                     // Parse the event date and time
-                                                    $eventDateTime = Carbon::createFromFormat('Y-m-d h:i A', $eventDetails['event_date'] . ' ' . $eventDetails['event_time']);
+                                                    // $eventDateTime = Carbon::createFromFormat('Y-m-d h:i A', $eventDetails['event_date'] . ' ' . $eventDetails['event_time']);
 
                                                     // Get the event timestamp
-                                                    $eventTimestamp = $eventDateTime->timestamp * 1000; // Convert to milliseconds for JavaScript
+                                                    // $eventTimestamp = $eventDetails['event_time']; 
+                                                    $startdate =$eventDetails['event_date'];
+                                                    $starttime =$eventDetails['event_time'];
+                                                    // dd($eventDetails['event_date'])// Convert to milliseconds for JavaScript
                                                 @endphp
 
                                                     {{-- <div class="countevent-counter-box">
@@ -2048,12 +2051,18 @@
     </main>
 @endisset
 <script>
-    // Get event timestamp from PHP
-    const eventTimestamp = {{ $eventTimestamp }};
+    // Get event date and time from PHP
+    const startdate = "{{ $startdate }}"; // '2025-01-30' format
+    const starttime = "{{ $starttime }}"; // '9:30 PM' format
+
+    // Convert start date and time into a timestamp
+    const eventTimestamp = new Date(`${startdate} ${starttime}`).getTime();
 
     function updateCountdown() {
-        const now = new Date().getTime(); // Get current time in milliseconds
-        const remainingTime = eventTimestamp - now;
+        const currentDate = new Date();
+        const currentTime = currentDate.getTime();  // Use currentDate.getTime() to get current time in milliseconds
+
+        const remainingTime = eventTimestamp - currentTime;  // Subtract current time from event timestamp
 
         if (remainingTime > 0) {
             // Calculate days, hours, minutes, and seconds
@@ -2080,3 +2089,4 @@
     setInterval(updateCountdown, 1000);
     updateCountdown(); // Initial call to set the countdown immediately
 </script>
+
