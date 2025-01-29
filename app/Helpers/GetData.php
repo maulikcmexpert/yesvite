@@ -270,6 +270,10 @@ function getNotificationList($filter = []){
         // if ($input == null) {
         //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
         // }
+    if (Auth::guard('web')->check()){
+
+    
+
         $page = '1';
         $final_data=[];
         $pages = ($page != "") ? $page : 1;
@@ -306,11 +310,11 @@ function getNotificationList($filter = []){
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
         // $result = $notificationData->get();
-        $result = $notificationData->get();
+        $result = $notificationData->get(); 
         $notificationInfo = [];
             foreach ($result as $values) {
                 if ($values->user_id == $user->id) {
-                    $notificationDetail['event_name'] = $values->event->event_name;
+                    $notificationDetail['event_name'] = ($values->event->event_name!=null&&$values->event->event_name!="")?$values->event->event_name:"";
                     $images = EventImage::where('event_id', $values->event->id)->first();
 
                     $notificationDetail['event_image'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
@@ -508,6 +512,8 @@ function getNotificationList($filter = []){
         $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
         // dd($notificationInfo);
         return $final_data;
+
+    }
 }
 // function setposttTime($dateTime)
 // {

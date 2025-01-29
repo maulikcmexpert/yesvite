@@ -2850,14 +2850,14 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                     .parent()
                     .find(".activity_end_time").length;
 
-                $("#" + lastActivityTime)
-                    .children()
-                    .find(".activity_end_time")
-                    .each(function (index) {
-                        if (lastActivityNode - 1 == index) {
-                            $(this).val("");
-                        }
-                    });
+                // $("#" + lastActivityTime)
+                //     .children()
+                //     .find(".activity_end_time")
+                //     .each(function (index) {
+                //         if (lastActivityNode - 1 == index) {
+                //             $(this).val("");
+                //         }
+                //     });
             }
         }
         // if (startEndTime != "") {
@@ -3178,75 +3178,161 @@ $(document).on("click", "#save_activity_schedule", function () {
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
-    $(".accordion-body.new_activity").each(function () {
-        var dataId = $(this).data("id");
-        activities[dataId] = [];
-        $(this)
-            .find(".activity-main-wrp")
-            .each(function (index) {
-                var id = $(this).data("id");
-                var description = $(this)
-                    .find('input[name="description[]"]')
-                    .val();
-                var startTime = $(this)
-                    .find('input[name="activity-start-time[]"]')
-                    .val();
-                var endTime = $(this)
-                    .find('input[name="activity-end-time[]"]')
-                    .val();
-                activityendtime = endTime;
-                $("#desc-error-" + id).text("");
-                $("#start-error-" + id).text("");
-                $("#end-error-" + id).text("");
+        // $(".accordion-body.new_activity").each(function () {
+        //     var dataId = $(this).data("id");
+        //     activities[dataId] = [];
+        //     $(this)
+        //         .find(".activity-main-wrp")
+        //         .each(function (index) {
+        //             var id = $(this).data("id");
+        //             var description = $(this)
+        //                 .find('input[name="description[]"]')
+        //                 .val();
+        //             var startTime = $(this)
+        //                 .find('input[name="activity-start-time[]"]')
+        //                 .val();
+        //             var endTime = $(this)
+        //                 .find('input[name="activity-end-time[]"]')
+        //                 .val();
+        //             activityendtime = endTime;
+        //             $("#desc-error-" + id).text("");
+        //             $("#start-error-" + id).text("");
+        //             $("#end-error-" + id).text("");
 
-                if (description == "") {
-                    $("#desc-error-" + id)
-                        .text("Description is required")
-                        .css("color", "red");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="description[]"]')
-                    .on("input", function () {
-                        if ($(this).val() != "") {
-                            $("#desc-error-" + id).text("");
-                        }
-                    });
+        //             if (description == "") {
+        //                 $("#desc-error-" + id)
+        //                     .text("Description is required")
+        //                     .css("color", "red");
+        //                 isValid++;
+        //             }
+        //             $(this)
+        //                 .find('input[name="description[]"]')
+        //                 .on("input", function () {
+        //                     if ($(this).val() != "") {
+        //                         $("#desc-error-" + id).text("");
+        //                     }
+        //                 });
 
-                if (startTime == "") {
-                    $("#start-error-" + id).text("Start time is required");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="activity-start-time[]"]')
-                    .on("change", function () {
-                        if ($(this).val() != "") {
-                            $("#start-error-" + id).text("");
-                        }
-                    });
+        //             if (startTime == "") {
+        //                 $("#start-error-" + id).text("Start time is required");
+        //                 isValid++;
+        //             }
+        //             $(this)
+        //                 .find('input[name="activity-start-time[]"]')
+        //                 .on("change", function () {
+        //                     if ($(this).val() != "") {
+        //                         $("#start-error-" + id).text("");
+        //                     }
+        //                 });
 
-                if (endTime == "") {
-                    $("#end-error-" + id).text("End time is required");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="activity-end-time[]"]')
-                    .on("change", function () {
-                        if ($(this).val() != "") {
-                            $("#end-error-" + id).text("");
-                        }
-                    });
+        //             if (endTime == "") {
+        //                 $("#end-error-" + id).text("End time is required");
+        //                 isValid++;
+        //             }
+        //             $(this)
+        //                 .find('input[name="activity-end-time[]"]')
+        //                 .on("change", function () {
+        //                     if ($(this).val() != "") {
+        //                         $("#end-error-" + id).text("");
+        //                     }
+        //                 });
 
-                var activity = {
-                    activity: description,
-                    "start-time": startTime,
-                    "end-time": endTime,
-                };
-                activities[dataId].push(activity);
-            });
-        // toggleSidebar();
-    });
-    console.log({ activityendtime });
+        //             var activity = {
+        //                 activity: description,
+        //                 "start-time": startTime,
+        //                 "end-time": endTime,
+        //             };
+        //             activities[dataId].push(activity);
+        //         });
+        //     // toggleSidebar();
+        // });
+        var showAlert = false;  // Move showAlert outside of the loop so it can be checked globally
+        $(".accordion-body.new_activity").each(function () {
+            var dataId = $(this).data("id");
+            activities[dataId] = [];
+            var previousEndTime = null;
+            // showAlert = false;
+        
+            $(this)
+                .find(".activity-main-wrp")
+                .each(function (index) {
+                    var id = $(this).data("id");
+                    var description = $(this)
+                        .find('input[name="description[]"]')
+                        .val();
+                    var startTime = $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .val();
+                    var endTime = $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .val();
+                    
+                 activityendtime = endTime;
+
+                    $("#desc-error-" + id).text("");
+                    $("#start-error-" + id).text("");
+                    $("#end-error-" + id).text("");
+        
+                    if (description == "") {
+                        $("#desc-error-" + id)
+                            .text("Description is required")
+                            .css("color", "red");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="description[]"]')
+                        .on("input", function () {
+                            if ($(this).val() != "") {
+                                $("#desc-error-" + id).text("");
+                            }
+                        });
+        
+                    if (startTime == "") {
+                        $("#start-error-" + id).text("Start time is required");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .on("change", function () {
+                            if ($(this).val() != "") {
+                                $("#start-error-" + id).text("");
+                            }
+                        });
+        
+                    if (endTime == "") {
+                        $("#end-error-" + id).text("End time is required");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .on("change", function () {
+                            if ($(this).val() != "") {
+                                $("#end-error-" + id).text("");
+                            }
+                        });
+        
+                    var activity = {
+                        activity: description,
+                        "start-time": startTime,
+                        "end-time": endTime,
+                    };
+                    activities[dataId].push(activity);
+        
+                    if (previousEndTime && previousEndTime > startTime && !showAlert) {
+                        toastr.error("Please enter proper time 1");
+                        showAlert = true;  
+                        // return;
+                    }else{
+                        showAlert =false;
+                    }
+                            previousEndTime = endTime;
+                });
+        });
+        
+        if(showAlert==true){
+            return;
+        }
+        console.log({ activityendtime });
 
     let lastendtime=convertTo24Hour(end_time)
     let lastScheduleEndtime=convertTo24Hour(activityendtime)
@@ -3255,7 +3341,7 @@ $(document).on("click", "#save_activity_schedule", function () {
     console.log(lastScheduleEndtime);
 
     if(lastScheduleEndtime>lastendtime){
-        toastr.error("activity can not end after end time");
+        toastr.error("Please enter proper time");
         return;
     }
     
@@ -3275,6 +3361,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
             );
         }
+
         toggleSidebar();
         console.log(activities);
         eventData.activity = activities;

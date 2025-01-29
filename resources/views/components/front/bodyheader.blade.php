@@ -1,4 +1,8 @@
 
+@php
+$notification_list=getNotificationList();
+
+@endphp
 @if (Auth::guard('web')->check())
 
 <header>
