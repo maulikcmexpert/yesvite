@@ -3584,16 +3584,7 @@ function savePage1Data(close = null) {
     // }else{
     //     rsvp_by_date_set = '0';
     // }
-    if (end_time) {
-        rsvp_end_time_set = "1";
-    }
-
-    if (rsvp_by_date_set) {
-        // rsvp_by_date = $("#rsvp-by-date").val();
-        rsvp_by_date_set = "1";
-    }else{
-        rsvp_by_date_set = "0";
-    }
+  
     if (close == null || close == "") {
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
@@ -3773,7 +3764,17 @@ function savePage1Data(close = null) {
             return;
         }
         // eventData = {
+            if (end_time) {
+                rsvp_end_time_set = "1";
+            }
+        
+            if (rsvp_by_date_set) {
+                rsvp_by_date_set = "1";
+            }else{
+                rsvp_by_date_set = "0";
+            }
 
+            
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
         eventData.event_name = event_name;
