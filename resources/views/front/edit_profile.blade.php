@@ -153,7 +153,7 @@
                                     <div class="col-lg-6">
                                         <div class="input-form">
                                             <input type="text" class="phone_number border-0" name="countryCode" readonly>
-                                            <input type="text" class="form-control " id="phone_number" name="phone_number" value="{{ $user->phone_number}}">
+                                            <input type="text" class="form-control " id="phone_number" name="phone_number" value="{{ $user->phone_number}}"oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                             <label for="phone" class="floating-label">Phone Number</label>
                                             <input type="hidden" name="country_code" id="country_code" value="{{ $user->country_code}}">
                                             <div class="label-error">
