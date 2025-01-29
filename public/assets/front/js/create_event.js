@@ -19,6 +19,8 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+alert(selected_profile_or_text);
+
 var selected_prefer_by =
 $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
 var selected_profilePhoto =
