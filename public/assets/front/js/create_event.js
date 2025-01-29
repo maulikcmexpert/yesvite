@@ -832,7 +832,7 @@ function datepicker() {
             const picker = $(this).data("DateTimePicker");
             const currentActivity = $(this).closest(".activity-main-wrp");
 
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startTime = $(this).closest("div").find("#ac-start-time").val();
             // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             let startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             const previousActivity = currentActivity.prev(".activity-main-wrp");
@@ -2749,7 +2749,15 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                 .find('input[name="activity-start-time[]"]')
                 .val()
         );
+        var endtimelatesr = convertTo24Hour(
+            $(this).val()
+        );
         console.log(newStartTime);
+        console.log($(this).val());
+        if(newStartTime>=endtimelatesr){
+            var newEndTime = moment(newStartTime, "HH:mm").add(1, "hours").format("HH:mm");
+            $(this).val(newEndTime);  
+        }
         if (
             newEndTime != "" &&
             newStartTime != "" &&

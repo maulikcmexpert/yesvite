@@ -430,7 +430,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Letter Spacing</h3>
-                        <input type="number" id="letterSpacingInput" value="0">
+                        <input type="text" id="letterSpacingInput" value="0">
                     </div>
                     <div class="range-slider">
                         <div id="letterSpacingTooltip" class="tooltip"></div>

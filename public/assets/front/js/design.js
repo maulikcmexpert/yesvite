@@ -1497,11 +1497,15 @@ function bindData(current_event_id) {
     // Attach event listeners
     letterSpacingRange.addEventListener("input", setLetterSpacing);
     letterSpacingInput.addEventListener("input", () => {
-        // Remove the "%" symbol before synchronizing with the range slider
-        const inputValue = parseFloat(
-            letterSpacingInput.value.replace("%", "")
+        letterSpacingInput.value = letterSpacingInput.value.replace(
+            /[^0-9.]/g,
+            ""
         );
-        if (!isNaN(inputValue) && inputValue <= 100) {
+
+        // Parse the numeric value from the input
+        const inputValue = parseFloat(letterSpacingInput.value);
+
+        if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 100) {
             const sliderValue = Math.round((inputValue / 100) * 500); // Map percentage to slider value
             letterSpacingRange.value = sliderValue;
             setTimeout(() => {
