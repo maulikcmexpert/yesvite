@@ -58,7 +58,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[gender]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[gender]" value="1" class="checkbox" {{($user->gender == '1')?'checked':''}} />
+                                                        <input class="profile_privacy_check" type="checkbox" name="profile_privacy[gender]" value="1" class="checkbox" {{($user->gender == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -71,7 +71,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[photo]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[photo]" value="1" class="checkbox" {{($user->photo == '1')?'checked':''}} />
+                                                        <input class="profile_privacy_check" type="checkbox" name="profile_privacy[photo]" value="1" class="checkbox" {{($user->photo == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -84,7 +84,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[location]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[location]" value="1" class="checkbox" {{($user->location == '1')?'checked':''}} />
+                                                        <input class="profile_privacy_check" type="checkbox"  name="profile_privacy[location]" value="1" class="checkbox" {{($user->location == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -97,7 +97,7 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="hidden" name="profile_privacy[event_stat]" value="0" />
-                                                        <input type="checkbox" name="profile_privacy[event_stat]" value="1" class="checkbox" {{($user->event_stat == '1')?'checked':''}} />
+                                                        <input class="profile_privacy_check" type="checkbox" name="profile_privacy[event_stat]" value="1" class="checkbox" {{($user->event_stat == '1')?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -121,7 +121,7 @@
                                                 <span>Your profile will be private to everyone</span>
                                             </div>
                                         </label>
-                                        <input class="form-check-input" type="radio" value="2" name="visible" id="flexRadioDefault2" {{($user->visible == '2')?'checked':''}}>
+                                        <input class="form-check-input" type="radio" value="2" name="visible" id="visible2" {{($user->visible == '2')?'checked':''}}>
                                     </div>
                                     <a href="{{route('profile.public_profile')}}" class="d-flex align-items-center public-view">
                                         <h6>Public Profile View</h6>
