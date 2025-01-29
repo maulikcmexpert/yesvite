@@ -2811,8 +2811,8 @@ class EventController extends BaseController
         }
 
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
-            dd($request->rsvp_by_date);
             $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
+            dd($carbonDate);
             if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
                 $rsvp_by_date = $request->rsvp_by_date;
             } else {
