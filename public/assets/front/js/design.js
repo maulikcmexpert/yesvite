@@ -2151,11 +2151,12 @@ function bindData(current_event_id) {
         // Check if the scaled object is the textbox
         if (activeObject && activeObject.type === "textbox") {
             // Get the current font size
-            var currentFontSize = activeObject.fontSize;
+            var currentFontSize = Math.round(activeObject.fontSize);
+
             console.log("Current font size: " + currentFontSize);
 
             // Calculate new font size based on scale factor
-            var newFontSize = currentFontSize * activeObject.scaleX; // Adjust the font size based on the horizontal scaling factor
+            var newFontSize = Math.round(currentFontSize * activeObject.scaleX); // Adjust the font size based on the horizontal scaling factor
             const textMeasurement = new fabric.Text(activeObject.text, {
                 fontSize: newFontSize,
                 fontFamily: activeObject.fontFamily,
