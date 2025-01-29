@@ -5758,8 +5758,6 @@ $(document).on("click", ".save_event_co_host", function () {
         var user_name = selected_user_name;
         var dataId = selected_dataId;
         var profile_or_text = selected_profile_or_text;
-        alert(profile_or_text);
-        alert(profilePhoto);
         var prefer_by = selected_prefer_by;
         // console.log(prefer_by);
         eventData.co_host = dataId;
@@ -7997,8 +7995,8 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage4Data();
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
-    console.log(data);
-    // $("#loader").show();
+    
+    $("#loader").show();
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -8099,7 +8097,7 @@ $(document).on("click", "#close_editEvent", function (e) {
             return;
         }
     // }
-
+    $("#loader").css("display", "flex");
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
