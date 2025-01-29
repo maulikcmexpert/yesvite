@@ -74,7 +74,7 @@ class EventController extends BaseController
 {
     public function index(Request $request)
     {
-       
+
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
@@ -167,7 +167,7 @@ class EventController extends BaseController
                                 'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
                                 'profile' => $userVal->profile ?? '',
                             ];
-                            if ($getEventData->is_draft_save == "0" && $request->iscopy ==null) {
+                            if ($getEventData->is_draft_save == "0" && $request->iscopy == null) {
                                 $userEntry['isAlready'] = "1";
                             }
 
@@ -206,7 +206,7 @@ class EventController extends BaseController
                                 'profile' => $userVal->photo ?? '',
 
                             ];
-                            if ($getEventData->is_draft_save == "0" && $request->iscopy ==null) {
+                            if ($getEventData->is_draft_save == "0" && $request->iscopy == null) {
                                 $userEntry['isAlready'] = "1";
                             }
 
@@ -223,7 +223,7 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)->where('is_co_host', '0')
                     ->count();
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
-                
+
 
                 // $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
                 $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
@@ -250,7 +250,7 @@ class EventController extends BaseController
                 $eventDetail['step'] = ($getEventData->step != NULL) ? $getEventData->step : 0;
                 $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
                 $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
-                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? $getEventData->design_image : null;
+                $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('public/storage/event_images/' . $getEventData->design_image) : null;
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : null;
                 $eventDetail['event_images'] = [];
                 $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
@@ -261,10 +261,10 @@ class EventController extends BaseController
                         $eventDetail['event_images'][] = $eventImageData;
                     }
                 }
-                if($request->iscopy != null &&$request->iscopy ){
-                    $eventDetail['id'] ='';
-                    $eventDetail['iscopy'] =$request->iscopy;
-                    $eventDetail['is_draft_save'] ='';
+                if ($request->iscopy != null && $request->iscopy) {
+                    $eventDetail['id'] = '';
+                    $eventDetail['iscopy'] = $request->iscopy;
+                    $eventDetail['is_draft_save'] = '';
                 }
                 $eventDetail['invited_user_id'] = [];
 
@@ -2822,10 +2822,10 @@ class EventController extends BaseController
             // if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
             //     $rsvp_by_date = $request->rsvp_by_date;
             // } else {
-                $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
             // }
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
-           
+
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
@@ -2859,32 +2859,32 @@ class EventController extends BaseController
         } else {
             $event_creation = new Event();
         }
-        
-        
+
+
         $oldAddress = $event_creation->address_1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state  . ' ' . $event_creation->city . ' ' . $event_creation->zip_code;
-        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state  . ' ' . $request->city . ' ' . $request->zipcode;  
+        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state  . ' ' . $request->city . ' ' . $request->zipcode;
         $isaddress = 0;
         if ($oldAddress !== $newAddress) {
             $isaddress = 1;
         }
-           
-        
+
+
         $newstart_time = $request->start_time;
         $oldstart_time = $event_creation->rsvp_start_time;
         $istime = 0;
-        
+
         if ($oldstart_time !== $newstart_time) {
             $istime = 1;
         }
 
 
         $newstart_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
-        $newend_date =(isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
+        $newend_date = (isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
         $oldstart_date = $event_creation->start_date;
         $oldend_date = $event_creation->end_date;
         $isupdatedate = 0;
-        
-        if ($newstart_date !== $oldstart_date || $newend_date !==$oldend_date) {
+
+        if ($newstart_date !== $oldstart_date || $newend_date !== $oldend_date) {
             $isupdatedate = 1;
         }
 
@@ -3065,13 +3065,13 @@ class EventController extends BaseController
 
 
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
-                if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {     
+                if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                     $is_cohost = '1';
                     $invited_user = $request->co_host;
                     $prefer_by = $request->co_host_prefer_by;
-    
+
                     if (isset($request->isPhonecontact) && $request->isPhonecontact == 1) {
-    
+
                         $checkContactExist = contact_sync::where('id', $invited_user)->first();
                         if ($checkContactExist) {
                             $newUserId = NULL;
@@ -3330,7 +3330,7 @@ class EventController extends BaseController
                         fn($guest) => $guest['id'],
                         array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
                     );
-// dd($filteredIds)
+                    // dd($filteredIds)
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
@@ -3342,29 +3342,29 @@ class EventController extends BaseController
                     sendNotification('update_event', $notificationParam);
                 }
                 if (isset($invitedusersession)) {
-    
+
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
                         array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
                     );
                     if (isset($filteredIds) && count($filteredIds) != 0) {
-    
-                        
+
+
                         $notificationParam = [
                             'sender_id' => $user_id,
                             'event_id' => $eventId,
                             'newUser' => $filteredIds
                         ];
                         // dd($newInviteGuest);
-    
+
                         sendNotification('invite', $notificationParam);
                     }
-    
+
                     // $newInviteGuest = array_map(
                     //     fn($guest) => $guest['id'],
                     //     array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
                     // );
-    
+
                     // if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
                     //     $notificationParam = [
                     //         'sender_id' => $user->id,

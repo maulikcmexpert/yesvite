@@ -1,6 +1,6 @@
-var dbJson = null;
+var dbJson = $("#static_information").val() || null;
 var temp_id = null;
-var image = null;
+var image = $("#design_image").val() || null;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
