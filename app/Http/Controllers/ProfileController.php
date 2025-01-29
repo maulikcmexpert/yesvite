@@ -524,7 +524,6 @@ class ProfileController extends BaseController
                 'status' => 1,
                 'message' => "Profile Privacy updated successfully",
                 'visible'=>$request->visible
-
             ]);
         } catch (QueryException $e) {
             DB::Rollback();
