@@ -913,6 +913,7 @@ function datepicker() {
         // })
        
         .on("dp.close", function () {
+            alert();
             // const picker = $(this).data("DateTimePicker");
             // const startTime = $(this).closest("div").find(".activity_start_time").val();
             // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
