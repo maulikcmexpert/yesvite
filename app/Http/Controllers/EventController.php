@@ -545,6 +545,8 @@ class EventController extends BaseController
         ));
     }
 
+    public function uploadCustomImage(Request $request) {}
+
     public function store(Request $request)
     {
         // $potluck = session('category');

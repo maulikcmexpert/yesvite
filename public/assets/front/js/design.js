@@ -26,17 +26,22 @@ $(document).ready(function () {
         }
 
         var formData = new FormData();
-        formData.append("custom_template", file);
+        formData.append("image", file, "design.png");
+        formData.append("design_inner_image", design_inner_image);
+        formData.append("shapeImageUrl", old_shape_url);
 
         $.ajax({
-            url: base_url + "event/uploadCustomImage",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: base_url + "event/store_temp_design",
             type: "POST",
             data: formData,
-            contentType: false,
             processData: false,
+            contentType: false,
             success: function (response) {
-                if (response.imageUrl) {
-                    $("#preview").attr("src", response.imageUrl).show();
+                if (response.image) {
+                    $("#preview").attr("src", response.image).show();
                 } else {
                     alert("Upload failed.");
                 }
