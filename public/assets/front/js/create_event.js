@@ -8073,16 +8073,16 @@ $(document).on("click", ".design-sidebar-action", function () {
 });
 
 $(document).on("click", "#close_editEvent", function (e) {
-    if (final_step == 2) {
+    // if (final_step == 2) {
         savePage1Data(1);
-    }
-    if (final_step == 3) {
+    // }
+    // if (final_step == 3) {
         var savePage3Result = savePage3Data(1);
         if (savePage3Result === false) {
             $("#loader").css("display", "none");
             return;
         }
-    }
+    // }
 
     eventData.step = final_step;
     eventData.isdraft = "1";
