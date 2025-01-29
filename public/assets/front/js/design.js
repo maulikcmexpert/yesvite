@@ -627,7 +627,12 @@ function bindData(current_event_id) {
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
-                        linethrough: element.linethrough,
+                        linethrough:
+                            element.linethrough == true ||
+                            element.linethrough == "true" ||
+                            element.linethrough == "True"
+                                ? true
+                                : false,
                         backgroundColor: element.backgroundColor,
                         textAlign: element.textAlign,
                         hasControls: true,
