@@ -930,7 +930,12 @@ function datepicker() {
             //     }
             // }
 
-            
+            const startTime = $(this)
+            .closest(".activity-main-wrp")
+            .find('input[name="activity-start-time[]"]')
+            .val();
+            alert();
+            console.log(startTime);
             // Set end time to 1 hour after start time if it's empty (only in picker)
             // $(this).val(startMoment);
             const picker = $(this).data("DateTimePicker");
