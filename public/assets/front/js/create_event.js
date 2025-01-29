@@ -4434,6 +4434,7 @@ function handleActiveClass(target) {
     if (target == ".li_design .edit-design-sidebar") {
         $(".edit-design-sidebar").addClass("active");
         $(".pick-card").addClass("menu-success");
+        $(".edit-design-sidebar").removeClass("menu-success");
     } else if (target == ".li_design .pick-card") {
         $(".pick-card").addClass("active");
         $(".pick-card").removeClass("menu-success");
