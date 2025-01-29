@@ -405,6 +405,9 @@ ul.nav .nav-link:hover {
     padding-left: 20px;
     width: 100% !important;
     outline: 0;
+    -webkit-appearance: none !important; /* Disable the appearance of the input */
+    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
 .contact-tab input[type="search"]:focus {
@@ -414,8 +417,15 @@ ul.nav .nav-link:hover {
 .contact-tab input[type="search"]::placeholder {
     color: var(--searchColor) !important;
     font-size: 14px;
+
+}
+.contact-tab input[type="search"]::-webkit-search-cancel-button {
+    display: none !important ; /* For Webkit browsers (Chrome, Safari) */
 }
 
+.contact-tab input[type="search"]::-moz-search-cancel-button {
+    display: none !important ; /* For Firefox */
+}
 .contact-tab input[type="search"]~span {
     position: absolute;
     right: 20px !important;
