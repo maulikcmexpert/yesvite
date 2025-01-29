@@ -39,7 +39,8 @@ $(document).ready(function () {
             contentType: false,
             success: function (response) {
                 if (response.image) {
-                    $("#preview").attr("src", response.image).show();
+                    image = base_url + "storage/event_images" + response.image;
+                    loadAgain();
                 } else {
                     alert("Upload failed.");
                 }
