@@ -756,6 +756,7 @@ function bindData(current_event_id) {
                 if (shapeImageUrl) {
                     let element = staticInfo?.shapeImageData;
                     if (
+                        element != undefined &&
                         element.shape &&
                         element.centerX &&
                         element.centerY &&
