@@ -275,7 +275,7 @@
                                                     // $eventDateTime = Carbon::createFromFormat('Y-m-d h:i A', $eventDetails['event_date'] . ' ' . $eventDetails['event_time']);
 
                                                     // Get the event timestamp
-                                                    // $eventTimestamp = $eventDetails['event_time']; 
+                                                    // $eventTimestamp = $eventDetails['event_time'];
                                                     $startdate =$eventDetails['event_date'];
                                                     $starttime =$eventDetails['event_time'];
                                                     // dd($eventDetails['event_date'])// Convert to milliseconds for JavaScript
@@ -324,10 +324,7 @@
                                                             <span>Minutes</span>
                                                             <img src="{{ asset('assets/front/img/colon.svg') }}" alt="" class="colon-img">
                                                         </div>
-                                                        <div class="countevent-counter">
-                                                            <h4 id="countdownSeconds">00</h4>
-                                                            <span>Seconds</span>
-                                                        </div>
+
                                                     </div>
 
                                                 </div>

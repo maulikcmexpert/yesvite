@@ -1,4 +1,4 @@
-$(document).on('click', '.edit-btn', function () {
+$(document).on('click', '.edit_guest_rsvp', function () {
     // Reset the radio buttons to ensure a clean state for each modal interaction
     $('.rsvp_status_yes').prop('checked', false); // Attending
     $('.rsvp_status_no').prop('checked', false); // Not attending

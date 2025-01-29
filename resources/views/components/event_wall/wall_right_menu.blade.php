@@ -195,7 +195,7 @@ if ($hostView) {
     </div>
 
 </div>
-{{-- <div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
+<div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -233,7 +233,7 @@ if ($hostView) {
                 <div class="guest-rsvp-attend">
                     <h6>RSVP</h6>
                     <div class="input-form">
-                        <input type="radio" id="option1" name="rsvp_status" class="rsvp_yes" value="1" />
+                        <input type="radio" id="option1" name="rsvp_Guest_status" class="rsvp_yes" value="1" />
                         <label for="option1"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -245,7 +245,7 @@ if ($hostView) {
                             </svg>Attending</label>
                     </div>
                     <div class="input-form">
-                        <input type="radio" id="option2" name="rsvp_status" value="0" class="rsvp_no" />
+                        <input type="radio" id="option2" name="rsvp_Guest_status" value="0" class="rsvp_no" />
                         <label for="option2"><svg class="me-2" width="21" height="20" viewBox="0 0 21 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -268,7 +268,7 @@ if ($hostView) {
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 <!-- ========= Add-guest ======== -->
 <div class="modal fade cmn-modal" id="addguest" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

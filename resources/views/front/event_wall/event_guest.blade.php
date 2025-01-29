@@ -296,7 +296,7 @@
                                                                             : '';
                                                                     // dd($login_user_id);
                                                                 @endphp
-                                                                <button class="edit-btn {{ $isDisabled }}"
+                                                                <button class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
                                                                     data-bs-toggle="modal" data-bs-target="#editrsvp"
                                                                     data-guest-id="{{ $guest['id'] }}">
                                                                     <svg width="20" height="20"
