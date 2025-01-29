@@ -2580,6 +2580,7 @@ function getTextDataFromCanvas() {
 }
 
 function loadAgain() {
+    $(".side-bar-list").removeClass("active");
     $("#close_createEvent").css("display", "none");
     // e.preventDefault();
     var eventID = $("#eventID").val();
