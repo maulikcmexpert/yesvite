@@ -602,7 +602,6 @@ class RsvpController extends BaseController
     public function store(Request $request)
     {
 
-        dd($decrypt($request->user_id));
         // $userId = decrypt($request->user_id);
         if ($request->input('user_id') != "") {
             $userId = decrypt($request->user_id);
@@ -617,6 +616,9 @@ class RsvpController extends BaseController
         } else {
             $sync_id = "";
         }
+
+        dd($sync_id);
+
 
 
         $kids = (isset($request->kids) && $request->kids) ? (int)$request->kids : 0;
