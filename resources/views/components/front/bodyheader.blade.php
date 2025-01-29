@@ -98,6 +98,7 @@ $notification_list=getNotificationList();
           >
             <div class="notification-dropdown-header">
               @php
+                    $user = Auth::guard('web')->user();
                     $notification = getTotalUnreadNotification($user->id);
               @endphp
 
