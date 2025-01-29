@@ -1881,9 +1881,9 @@
                                             <div class="col-lg-12">
                                                 <div class="input-form">
                                                     @if($sync_contact_user_id!="" && ($user_id=="" && $user_id==null))
-                                                        <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
+                                                    <input type="email"  name="email" id="email" value="" class="form-control inputText">
                                                     @else   
-                                                        <input type="email"  name="email" id="email" value="" class="form-control inputText">
+                                                    <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
                                                     @endif
                                                     <label for="Fname" class="form-label input-field floating-label">Email Address</label>
                                                 </div>
