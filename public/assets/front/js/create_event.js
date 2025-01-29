@@ -3600,7 +3600,7 @@ function savePage1Data(close = null) {
         if (schedule) {
             events_schedule = "1";
         }
-        var rsvp_end_time = "";
+        // var rsvp_end_time = "";
         if (end_time) {
             // rsvp_end_time_set = "1";
             if (rsvp_end_time == "") {
@@ -3774,7 +3774,7 @@ function savePage1Data(close = null) {
                 rsvp_by_date_set = "0";
             }
 
-            
+
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
         eventData.event_name = event_name;
