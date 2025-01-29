@@ -7996,7 +7996,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
     
-    $("#loader").show();
+    $("#loader").css("display", "flex");
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
