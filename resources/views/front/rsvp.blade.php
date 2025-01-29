@@ -2025,7 +2025,12 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="input-form">
-                                            <input type="email" name="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
+                                                                @if($email!="")
+                                                                    <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
+                                                                 @else
+                                                                    <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText">
+                                                                @endif
+                                            <!-- <input type="email" name="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly> -->
                                             <label for="email" class="form-label input-field floating-label">Email Address</label>
                                         </div>
 
