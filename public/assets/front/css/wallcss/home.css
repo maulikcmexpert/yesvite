@@ -1145,17 +1145,17 @@ main {
 }
 
 .input-option-delete{
-  width: 100%;
-  max-width: 18px;
-  height: 18px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  width: 100% !important;
+  max-width: 18px !important;
+  height: 18px !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: 10px !important;
+  display:flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  cursor: pointer !important;
 }
 
 .poll-options .position-relative input{
