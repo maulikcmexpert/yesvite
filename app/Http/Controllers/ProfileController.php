@@ -77,7 +77,6 @@ class ProfileController extends BaseController
             'title',
             'page',
             'user',
-            'user_privacy',
             'draft_events',
             'js'
 
