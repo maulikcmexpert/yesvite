@@ -489,6 +489,7 @@ class ProfileController extends BaseController
 
     public function updateProfilePrivacy(Request $request)
     {
+        dd($request);
         $user = Auth::guard('web')->user();
         try {
             if ($request->visible != null) {
