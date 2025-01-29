@@ -1,3 +1,4 @@
+{{dd($user_privacy);}}
 <x-front.advertise />
 
 <section class="contact-details profile-details public-wrp">
