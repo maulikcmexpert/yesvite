@@ -4438,6 +4438,7 @@ function handleActiveClass(target) {
     } else if (target == ".li_design .pick-card") {
         $(".pick-card").addClass("active");
         $(".pick-card").removeClass("menu-success");
+        $(".edit-design-sidebar").removeClass("menu-success");
     } else {
         $(target).find(".side-bar-list").addClass("active");
     }
