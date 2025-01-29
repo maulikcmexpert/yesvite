@@ -2580,8 +2580,9 @@ function getTextDataFromCanvas() {
 }
 $(".edit-design-sidebar").on("click", function () {
     if (imageId != null && imageId != "") {
-        loadAgain();
         $(".step_2").css("display", "none");
+        $(".main-content-right").css("display", "none");
+        loadAgain();
     }
 });
 function loadAgain() {
