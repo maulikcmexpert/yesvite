@@ -1,4 +1,3 @@
-{{dd($user_privacy);}}
 <x-front.advertise />
 
 <section class="contact-details profile-details public-wrp">
@@ -69,30 +68,41 @@
                                     <p>Member Since: {{$user->join_date}}</p>
                                 </div>
                                 <div class="user-gallery">
-                                    <div>
-                                        <h4>{{formatNumber($user->event_count)}}</h4>
-                                        <p>Events</p>
-                                    </div>
-                                    <div>
-                                        <h4>{{formatNumber($user->event_post_count)}}</h4>
-                                        <p>Photos</p>
-                                    </div>
+                                    @foreach ($user_privacy as $privacy)
+                                        @if($privacy['profile_privacy']=="event_stat"&&$privacy['status']=="1")
+                                            <div>
+                                                <h4>{{formatNumber($user->event_count)}}</h4>
+                                                <p>Events</p>
+                                            </div>
+                                        @elseif($privacy['profile_privacy']=="photo" &&$privacy['status']=="1")    
+                                            <div>
+                                                <h4>{{formatNumber($user->event_post_count)}}</h4>
+                                                <p>Photos</p>
+                                            </div>
+                                        @endif    
+                                    @endforeach
                                     <div>
                                         <h4>{{formatNumber($user->event_post_comment_count)}}</h4>
                                         <p>Comments</p>
                                     </div>
                                 </div>
-                                @if($user->gender != NULL)
-                                <div class="user-contact-data">
-                                    <div>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.99984 8.00016C9.84079 8.00016 11.3332 6.50778 11.3332 4.66683C11.3332 2.82588 9.84079 1.3335 7.99984 1.3335C6.15889 1.3335 4.6665 2.82588 4.6665 4.66683C4.6665 6.50778 6.15889 8.00016 7.99984 8.00016Z" fill="#CBD5E1" />
-                                            <path d="M7.99994 9.6665C4.65994 9.6665 1.93994 11.9065 1.93994 14.6665C1.93994 14.8532 2.08661 14.9998 2.27327 14.9998H13.7266C13.9133 14.9998 14.0599 14.8532 14.0599 14.6665C14.0599 11.9065 11.3399 9.6665 7.99994 9.6665Z" fill="#CBD5E1" />
-                                        </svg>
-                                        <span>{{$user->gender}}</span>
-                                    </div>
-                                </div>
-                                @endif
+                                @foreach ($user_privacy as $privacy)
+                                        @if($privacy['profile_privacy']=="gender"&&$privacy['status']=="1")
+                                        
+                                                @if($user->gender != NULL)
+                                                        <div class="user-contact-data">
+                                                            <div>
+                                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M7.99984 8.00016C9.84079 8.00016 11.3332 6.50778 11.3332 4.66683C11.3332 2.82588 9.84079 1.3335 7.99984 1.3335C6.15889 1.3335 4.6665 2.82588 4.6665 4.66683C4.6665 6.50778 6.15889 8.00016 7.99984 8.00016Z" fill="#CBD5E1" />
+                                                                    <path d="M7.99994 9.6665C4.65994 9.6665 1.93994 11.9065 1.93994 14.6665C1.93994 14.8532 2.08661 14.9998 2.27327 14.9998H13.7266C13.9133 14.9998 14.0599 14.8532 14.0599 14.6665C14.0599 11.9065 11.3399 9.6665 7.99994 9.6665Z" fill="#CBD5E1" />
+                                                                </svg>
+                                                                <span>{{$user->gender}}</span>
+                                                            </div>
+                                                        </div>
+                                                @endif
+                                        @endif  
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
