@@ -832,7 +832,7 @@ function datepicker() {
             const picker = $(this).data("DateTimePicker");
             const currentActivity = $(this).closest(".activity-main-wrp");
 
-            const startTime = $(this).closest("div").find(".activity_start_time").val();
+            const startTime = $(this).closest("div").find("#ac-start-time").val();
             // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             let startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             const previousActivity = currentActivity.prev(".activity-main-wrp");
@@ -890,8 +890,6 @@ function datepicker() {
             
             // If start time exists, use it; otherwise, default to 12:00 PM
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
-            
-            picker.minDate(startMoment.clone().add(1, "minutes"));
             
             // Set the end time to 1 hour after the start time, only when picker is first shown
             if (!picker.date()) {  // Check if the picker date is empty (first time showing)
@@ -2751,7 +2749,14 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                 .find('input[name="activity-start-time[]"]')
                 .val()
         );
+        var endtimelatesr = convertTo24Hour(
+            $(this).val()
+        );
         console.log(newStartTime);
+        console.log($(this).val());
+        if(newStartTime==endtimelatesr){
+            alert();
+        }
         if (
             newEndTime != "" &&
             newStartTime != "" &&
