@@ -859,14 +859,7 @@ function datepicker() {
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
 
 
-            const endTime = $(this)
-            .closest(".activity-main-wrp")
-            .find('input[name="activity-start-time[]"]')
-            .val();
-
-            // if(endTime!=""){
-            //     if()
-            // }
+      
 
 
             $(this).val(startMoment);
@@ -898,6 +891,10 @@ function datepicker() {
             // If start time exists, use it; otherwise, default to 12:00 PM
             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
             
+            // picker.minDate(startMoment.clone().add(1, "minutes"));
+            picker.disabledTimeIntervals([[startMoment, startMoment.clone().add(14, "minutes")]]);
+
+            
             // Set the end time to 1 hour after the start time, only when picker is first shown
             if (!picker.date()) {  // Check if the picker date is empty (first time showing)
                 picker.date(startMoment.clone().add(1, "hours"));
@@ -920,6 +917,7 @@ function datepicker() {
         // })
        
         .on("dp.close", function () {
+            alert();
             // const picker = $(this).data("DateTimePicker");
             // const startTime = $(this).closest("div").find(".activity_start_time").val();
             // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
@@ -2798,18 +2796,18 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
         var lastEndTime = "";
         var startEndTime = "";
-        // $("#" + lastActivityTime)
-        //     .children()
-        //     .find(".activity_end_time")
-        //     .each(function () {
-        //         lastEndTime = convertTo24Hour($(this).val());
-        //     });
-        // $("#" + lastActivityTime)
-        //     .children()
-        //     .find(".activity_start_time")
-        //     .each(function () {
-        //         startEndTime = $(this).val();
-        //     });
+        $("#" + lastActivityTime)
+            .children()
+            .find(".activity_end_time")
+            .each(function () {
+                lastEndTime = convertTo24Hour($(this).val());
+            });
+        $("#" + lastActivityTime)
+            .children()
+            .find(".activity_start_time")
+            .each(function () {
+                startEndTime = $(this).val();
+            });
 
         console.log(lastEndTime);
         console.log(eventEndTime);
