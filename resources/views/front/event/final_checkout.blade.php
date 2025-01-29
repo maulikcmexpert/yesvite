@@ -227,7 +227,7 @@
                 
             @else    
             <div class="new-event-btn">
-                <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout">Purchase & Send Invites</a>
+                <button  data-isDraftEdit="1" class="cmn-btn edit_checkout">Purchase & Send Invites</button>
             </div>
             @endif
             </div>
