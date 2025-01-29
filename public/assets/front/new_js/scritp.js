@@ -119,6 +119,13 @@ $(".notification-btn").on("click", function () {
 const dropdownButton = document.getElementById("dropdownButton");
 const dropdownMenu = document.querySelector(".notification-dropdown-menu");
 
+// document.addEventListener('click', function(event) {
+//     // Check if the clicked element is outside the dropdown
+//     if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+//         // Hide the dropdown menu
+//         dropdownMenu.classList.remove('show');
+//     }
+// });
 // Toggle dropdown when clicking the button
 $("#dropdownButton").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
@@ -144,14 +151,14 @@ $(".notification-toggle-menu").on("click", function (event) {
     }
 });
 
-// document.addEventListener("click", (event) => {
-//   if (
-//     !dropdownMenu.contains(event.target) &&
-//     !dropdownButton.contains(event.target)
-//   ) {
-//     dropdownMenu.classList.remove("show");
-//   }
-// });
+document.addEventListener("click", (event) => {
+  if (
+    !dropdownMenu.contains(event.target) &&
+    !dropdownButton.contains(event.target)
+  ) {
+    dropdownMenu.classList.remove("show");
+  }
+});
 // Close the dropdown when clicking outside
 // document.addEventListener("click", (event) => {
 //   if (
