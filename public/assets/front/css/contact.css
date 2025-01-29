@@ -173,6 +173,14 @@ ul.nav .nav-link:hover {
     word-break: break-all;
 }
 
+.user-location div span{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
 .user-location svg {
     margin-right: 3px;
 }
