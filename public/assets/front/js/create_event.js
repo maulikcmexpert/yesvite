@@ -3141,6 +3141,7 @@ function convertTo12Hour(time) {
 
 
 $(document).on("click", "#save_activity_schedule", function () {
+    
     var start_time = $("#ac-start-time").val();
     var end_time = $("#ac-end-time").val();
     // checkEndTimes();
