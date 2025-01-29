@@ -3647,6 +3647,8 @@ $(".upload-box").change(function () {
         }
         $(".file_info").val(fileExtension);
         $("#file_name").text(file.name);
+
+        $(".send-message").focus();
     } else {
         alert("Please select a file.");
         $(".preview_img").hide();
