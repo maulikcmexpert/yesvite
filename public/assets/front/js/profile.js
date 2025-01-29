@@ -330,11 +330,14 @@ $(document).ready(function () {
             $("#updateUserPassword").submit();
         }
     });
-    $(document).on('change',"#visible2", function() {
+
+    $("#visible2").on('change',function() {
         if ($(this).is(':checked')) {
             $('.profile_privacy_check').prop('checked', true);
         }
     });
+    
+
     $("#profilePrivacySave").on("click", function () {
         // alert();
         loaderHandle("#profilePrivacySave", "Saving");
