@@ -586,7 +586,7 @@ function bindData(current_event_id) {
 
             if (dbJson) {
                 const staticInfo = {};
-                console.log(dbJson);
+
                 if (current_event_id != "" && eventData.desgin_selected == "") {
                     staticInfo.textElements = dbJson;
                 } else {
@@ -604,24 +604,35 @@ function bindData(current_event_id) {
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
-                        linethrough: element.linethrough,
+                        linethrough:
+                            element.linethrough == true ||
+                            element.linethrough == "true" ||
+                            element.linethrough == "True"
+                                ? true
+                                : false,
                     });
 
                     const textWidth = textMeasurement.width;
 
-                    console.log(element.underline);
+                    console.log(element.text);
+
                     let textElement = new fabric.Textbox(element.text, {
                         // Use Textbox for editable text
-                        left: element.left,
-                        top: element.top,
+                        left: parseFloat(element.left),
+                        top: parseFloat(element.top),
                         width: element.width || textWidth, // Default width if not provided
-                        fontSize: element.fontSize,
+                        fontSize: parseFloat(element.fontSize),
                         fill: element.fill,
                         fontFamily: element.fontFamily,
                         fontWeight: element.fontWeight,
                         fontStyle: element.fontStyle,
                         underline: element.underline,
-                        linethrough: element.linethrough,
+                        linethrough:
+                            element.linethrough == true ||
+                            element.linethrough == "true" ||
+                            element.linethrough == "True"
+                                ? true
+                                : false,
                         backgroundColor: element.backgroundColor,
                         textAlign: element.textAlign,
                         hasControls: true,
