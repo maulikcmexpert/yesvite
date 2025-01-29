@@ -1289,7 +1289,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-0">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" />
             </div>
         </div>
     </div>

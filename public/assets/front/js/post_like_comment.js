@@ -555,6 +555,8 @@ function updateModalContent() {
         "selectedContacts",
         updateModalContent
     );
+    // Update total count for selected contacts
+    $(".guest-user-img .number").text(selectedContacts.length);
 }
 
 // Update modal content for phone contacts
@@ -565,6 +567,8 @@ function updatePhoneModalContent() {
         "selectedPhoneContacts",
         updatePhoneModalContent
     );
+    // Update total count for selected phone contacts
+    $(".guest-user-img .number").text(selectedPhoneContacts.length);
 }
 
 // General modal update function
@@ -595,6 +599,13 @@ function updateModal(
                 </div>
                 <h6>${contact.name} ${contact.lastname}</h6>
             </div>
+             <a href="#" class="guest-user d-block">
+         <div class="guest-user-img guest-total">
+            <span class="number" id="total-selected">0</span>
+            <span class="content">Total</span>
+         </div>
+         <h6>Sell all</h6>
+      </a>
         `;
         $modalBody.append(contactHtml);
     });
@@ -607,6 +618,8 @@ function updateModal(
         localStorage.setItem(localStorageKey, JSON.stringify(contactList));
         updateFunction();
     });
+      // Update total count for selected contacts
+      $(".guest-user-img .number").text(contactList.length)
 }
 
 // Function to generate profile image
@@ -716,4 +729,28 @@ $(document).ready(function () {
             },
         });
     });
+});
+$(document).on("keyup", ".search_contact", function () {
+    console.log($(this).val())
+    var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
+
+    // If search is empty, show all contacts
+    if (searchQuery === "") {
+        $(".contact").show(); // Show all contacts
+    } else {
+        // Iterate through each invite-contact
+        $(".contactslist").each(function () {
+            var contactName = $(this)
+                .find(".contact_search")
+                .data("search")
+                .toLowerCase(); // Get the data-search attribute
+
+            // If the search query matches part of the contact name, show the contact
+            if (contactName.indexOf(searchQuery) !== -1) {
+                $(this).show(); // Show this contact
+            } else {
+                $(this).hide(); // Hide this contact
+            }
+        });
+    }
 });

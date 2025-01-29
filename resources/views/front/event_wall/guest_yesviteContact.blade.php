@@ -1,13 +1,13 @@
 <div class="tab-pane fade show active" id="home" role="tabpanel"
    aria-labelledby="home-tab">
-   <div class="guest-users-wrp selected-contacts-list">
-      <a href="#" class="guest-user d-block">
+   <div class="guest-users-wrp selected-contacts-list"  id="selected-contacts">
+      {{-- <a href="#" class="guest-user d-block">
          <div class="guest-user-img guest-total">
-            <span class="number">10</span>
+            <span class="number" id="total-selected">0</span>
             <span class="content">Total</span>
          </div>
          <h6>Sell all</h6>
-      </a>
+      </a> --}}
    </div>
    <div class="position-relative">
       <input type="search" placeholder="Search name" class="form-control search-yesvite">
@@ -25,13 +25,13 @@
    </div>
    <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact">
       @foreach ($yesviteUsers as $contact)
-      
+
       <div class="invite-contact yes-contact">
          <a href="#" class="invite-img">
             @if (!empty($contact->profile))
             <img src="{{ $contact->profile }}" alt="invite-img">
             @else
-                @php        
+                @php
                 $firstInitial = isset($contact->firstname[0]) ? strtoupper($contact->firstname[0]) : '';
                 $secondInitial = isset($contact->lastname[0]) ? strtoupper($contact->lastname[0]) : '';
                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
@@ -119,7 +119,7 @@
    </div>
    <div class="guest-user-list-wrp invite-contact-wrp phone_contact">
       @foreach($phone_contact as $contact)
-      
+
       <div class="invite-contact phone-contact">
          <a href="#" class="invite-img">
             @if (!empty($contact->photo))
@@ -127,7 +127,7 @@
                alt="invite-img">
             @else
             @php
-      
+
                 $firstInitial = isset($contact->firstName[0]) ? strtoupper($contact->firstName[0]) : '';
                 $secondInitial = isset($contact->lastName[0]) ? strtoupper($contact->lastName[0]) : '';
                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);

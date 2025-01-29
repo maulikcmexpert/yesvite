@@ -77,7 +77,7 @@ if ($hostView) {
         <div class="all-events-searchbar-wrp">
             <form>
                 <div class="position-relative">
-                    <input type="text" class="form-control" id="text" placeholder="Search name">
+                    <input type="text" class="form-control search_contact" id="text" placeholder="Search name">
                     <span class="search-icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ if ($hostView) {
                 </div>
             </form>
         </div>
-        <div class="guests-listing-wrp" >
+        <div class="guests-listing-wrp ">
             <ul>
                 @if (!empty($guestArray))
                     @foreach ($guestArray as $guest)
@@ -103,7 +103,7 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info"  data-guest-id="{{ $guest['id'] }}">
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}" >
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -116,7 +116,7 @@ if ($hostView) {
                                         @endif
                                         <span class="active-dot"></span>
                                     </div>
-                                    <div class="posts-card-head-left-content">
+                                    <div class="posts-card-head-left-content contact_search" data-search = "{{ $user['firstname'] }} {{ $user['lastname'] }}">
                                         <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
                                         @if (!empty($user['city']) || !empty($user['state']))
                                             <p>
@@ -170,9 +170,11 @@ if ($hostView) {
                                             </svg>
                                         </span>
                                     @endif
+                                    @if ($eventInfo['guest_view']['is_host'] == 1)
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
                                             class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
                                             data-guest-id="{{ $guest['id'] }}"></i></button>
+                                            @endif
                                 </div>
                             </li>
                         @endif
@@ -184,10 +186,10 @@ if ($hostView) {
             </ul>
             <div class="guests-listing-buttons">
                 <a href="" class="cmn-btn see-all-btn">See All</a>
-@if($eventInfo['guest_view']['is_host'] == 1)
-                <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal"
-                    data-bs-target="#addguest"><i class="fa-solid fa-plus"></i> Add Guest</button>
-                    @endif
+                @if ($eventInfo['guest_view']['is_host'] == 1)
+                    <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal"
+                        data-bs-target="#addguest"><i class="fa-solid fa-plus"></i> Add Guest</button>
+                @endif
             </div>
         </div>
     </div>
