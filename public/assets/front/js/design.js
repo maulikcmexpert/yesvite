@@ -1182,6 +1182,7 @@ function bindData(current_event_id) {
                 seted = 1;
                 console.log(element.fill);
                 let selectedColor = element.fill || "#000000";
+                console.log("color-picker");
                 $("#color-picker").spectrum("set", selectedColor || "#000000");
 
                 activeObject.set("fill", selectedColor);
@@ -1644,7 +1645,9 @@ function bindData(current_event_id) {
             //console.log(activeObject.type);
             //console.log(activeObject.fill);
             if (selectedColorType == "font") {
-                console.log("update fill");
+                if (selectedColor != $(".sp-input").val()) {
+                    return;
+                }
                 //console.log(activeObject.fill);
                 //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color
@@ -1674,6 +1677,7 @@ function bindData(current_event_id) {
 
         if (activeObject && activeObject.type === "textbox") {
             if (selectedColorType === "font") {
+                console.log("colorpicker update");
                 $("#color-picker").spectrum(
                     "set",
                     activeObject.fill || "#000000"
