@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
 <main class="new-main-content">
-
+{{-- {{dd($eventDetails)}} --}}
     <div class="container">
         <div class="row">
             <div class="col-xl-3 col-lg-4">
@@ -185,7 +185,9 @@
                                                     </div>
                                                     <div class="hosted-by-date-time-content">
                                                         <h6>Date</h6>
-                                                        <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('F d, Y') }}
+                                                        <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('M d, Y') }}  to
+                                                            {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('M d, Y') }}
+
                                                         </h3>
                                                     </div>
                                                 </div>
