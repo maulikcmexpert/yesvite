@@ -1,7 +1,9 @@
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
-
+    let selectedContacts = [];
+    let selectedPhoneContacts = [];
+    
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -426,10 +428,11 @@ const event_id = $('#event_id').val();
                 const container = $(".GuestTabContent");
                 container.html(contacts);
                 allContactsSuccess = true;
-
-                const invitedUsers = response.invited_users;
                 
-
+                const invitedUsers = response.invited_users;
+                selectedContacts = response.selected_yesvite_user;
+                selectedPhoneContacts = response.selected_phone_user;
+                console.log({selectedContacts,selectedPhoneContacts})
             },
             error: function () {
                 toastr.error("No Contacts Found");
@@ -439,8 +442,6 @@ const event_id = $('#event_id').val();
     });
 });
 
-let selectedContacts = [];
-let selectedPhoneContacts = [];
 
 // Load selected contacts from local storage on page load
 $(document).ready(function () {
@@ -464,11 +465,12 @@ function loadSavedPhoneContacts() {
     selectedPhoneContacts =
         JSON.parse(localStorage.getItem("selectedPhoneContacts")) || [];
     updatePhoneModalContent();
-
+    
     selectedPhoneContacts.forEach((contact) => {
         handleCheckboxState(contact, ".phoneContact-checkbox");
     });
 }
+console.log({selectedContacts,selectedPhoneContacts})
 
 // Handle checkbox states
 function handleCheckboxState(contact, checkboxSelector) {
