@@ -8020,7 +8020,7 @@ $(document).on("click", ".edit_checkout", function (e) {
         data: data,
         success: function (response) {
             console.log(response);
-            $("#loader").css("display", "none");
+            // $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
             if (response.success == true) {
@@ -8115,9 +8115,9 @@ $(document).on("click", "#close_editEvent", function (e) {
             if (response == 1) {
                 window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
-                setTimeout(function () {
-                    $("#loader").css("display", "none");
-                }, 4000);
+                // setTimeout(function () {
+                //     $("#loader").css("display", "none");
+                // }, 4000);
             }
         },
         error: function (xhr, status, error) {
