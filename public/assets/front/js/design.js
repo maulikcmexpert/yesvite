@@ -2193,8 +2193,8 @@ function bindData(current_event_id) {
                 }
             })
             .catch(function (e) {
-                //console.log(e);
-                alert("Font loading failed: " + font);
+                console.log(e);
+                console.warn("Font loading failed: " + font);
             });
     }
 
