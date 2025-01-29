@@ -125,9 +125,9 @@
                                     </div>
                                     <a href="{{route('profile.public_profile')}}" class="d-flex align-items-center public-view">
                                         <h6>Public Profile View</h6>
-                                        <svg class="ms-auto" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.6004 1.4585L9.16706 6.89183C8.52539 7.5335 7.47539 7.5335 6.83372 6.89183L1.40039 1.4585" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M5.94365 13.781C5.81698 13.781 5.69031 13.7343 5.59031 13.6343C5.39698 13.441 5.39698 13.121 5.59031 12.9277L9.93698 8.58099C10.257 8.26099 10.257 7.74099 9.93698 7.42099L5.59031 3.07432C5.39698 2.88099 5.39698 2.56099 5.59031 2.36766C5.78365 2.17432 6.10365 2.17432 6.29698 2.36766L10.6436 6.71432C10.9836 7.05432 11.177 7.51432 11.177 8.00099C11.177 8.48766 10.9903 8.94766 10.6436 9.28766L6.29698 13.6343C6.19698 13.7277 6.07031 13.781 5.94365 13.781Z" fill="#94A3B8"/>
+                                            </svg>
                                     </a>
                                 </div>
                             </div>
