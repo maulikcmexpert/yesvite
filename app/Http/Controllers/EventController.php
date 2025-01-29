@@ -2773,6 +2773,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
+        dd($request);
         $conatctId = session('contact_ids');
         $potluck = session('category');
         $invitedCount = session('user_ids');
@@ -2810,9 +2811,14 @@ class EventController extends BaseController
         }
 
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
-            // dd($request->rsvp_by_date);
-            $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
-            // $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
+            if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
+                $rsvp_by_date = $request->rsvp_by_date;
+            } else {
+                $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            }
+            // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
+           
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
@@ -3343,21 +3349,21 @@ class EventController extends BaseController
                         sendNotification('invite', $notificationParam);
                     }
     
-                    $newInviteGuest = array_map(
-                        fn($guest) => $guest['id'],
-                        array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
-                    );
+                    // $newInviteGuest = array_map(
+                    //     fn($guest) => $guest['id'],
+                    //     array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
+                    // );
     
-                    if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
-                        $notificationParam = [
-                            'sender_id' => $user->id,
-                            'event_id' => $eventData['event_id'],
-                            'newUser' => $newInviteGuest
-                        ];
-                        // dd($newInviteGuest);
-                        sendNotificationGuest('invite', $notificationParam);
-                    }
-                    $total_count = count($filteredIds) + count($newInviteGuest);
+                    // if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
+                    //     $notificationParam = [
+                    //         'sender_id' => $user->id,
+                    //         'event_id' => $eventData['event_id'],
+                    //         'newUser' => $newInviteGuest
+                    //     ];
+                    //     // dd($newInviteGuest);
+                    //     sendNotificationGuest('invite', $notificationParam);
+                    // }
+                    // $total_count = count($filteredIds) + count($newInviteGuest);
                     debit_coins($user->id, $eventData['event_id'], $total_count);
                 }
             }
