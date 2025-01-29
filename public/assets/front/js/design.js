@@ -2581,7 +2581,7 @@ function getTextDataFromCanvas() {
 
 function loadAgain() {
     $("#close_createEvent").css("display", "none");
-    e.preventDefault();
+    // e.preventDefault();
     var eventID = $("#eventID").val();
     var isDraft = $("#isDraft").val();
 

@@ -3178,161 +3178,165 @@ $(document).on("click", "#save_activity_schedule", function () {
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
-        // $(".accordion-body.new_activity").each(function () {
-        //     var dataId = $(this).data("id");
-        //     activities[dataId] = [];
-        //     $(this)
-        //         .find(".activity-main-wrp")
-        //         .each(function (index) {
-        //             var id = $(this).data("id");
-        //             var description = $(this)
-        //                 .find('input[name="description[]"]')
-        //                 .val();
-        //             var startTime = $(this)
-        //                 .find('input[name="activity-start-time[]"]')
-        //                 .val();
-        //             var endTime = $(this)
-        //                 .find('input[name="activity-end-time[]"]')
-        //                 .val();
-        //             activityendtime = endTime;
-        //             $("#desc-error-" + id).text("");
-        //             $("#start-error-" + id).text("");
-        //             $("#end-error-" + id).text("");
+    // $(".accordion-body.new_activity").each(function () {
+    //     var dataId = $(this).data("id");
+    //     activities[dataId] = [];
+    //     $(this)
+    //         .find(".activity-main-wrp")
+    //         .each(function (index) {
+    //             var id = $(this).data("id");
+    //             var description = $(this)
+    //                 .find('input[name="description[]"]')
+    //                 .val();
+    //             var startTime = $(this)
+    //                 .find('input[name="activity-start-time[]"]')
+    //                 .val();
+    //             var endTime = $(this)
+    //                 .find('input[name="activity-end-time[]"]')
+    //                 .val();
+    //             activityendtime = endTime;
+    //             $("#desc-error-" + id).text("");
+    //             $("#start-error-" + id).text("");
+    //             $("#end-error-" + id).text("");
 
-        //             if (description == "") {
-        //                 $("#desc-error-" + id)
-        //                     .text("Description is required")
-        //                     .css("color", "red");
-        //                 isValid++;
-        //             }
-        //             $(this)
-        //                 .find('input[name="description[]"]')
-        //                 .on("input", function () {
-        //                     if ($(this).val() != "") {
-        //                         $("#desc-error-" + id).text("");
-        //                     }
-        //                 });
+    //             if (description == "") {
+    //                 $("#desc-error-" + id)
+    //                     .text("Description is required")
+    //                     .css("color", "red");
+    //                 isValid++;
+    //             }
+    //             $(this)
+    //                 .find('input[name="description[]"]')
+    //                 .on("input", function () {
+    //                     if ($(this).val() != "") {
+    //                         $("#desc-error-" + id).text("");
+    //                     }
+    //                 });
 
-        //             if (startTime == "") {
-        //                 $("#start-error-" + id).text("Start time is required");
-        //                 isValid++;
-        //             }
-        //             $(this)
-        //                 .find('input[name="activity-start-time[]"]')
-        //                 .on("change", function () {
-        //                     if ($(this).val() != "") {
-        //                         $("#start-error-" + id).text("");
-        //                     }
-        //                 });
+    //             if (startTime == "") {
+    //                 $("#start-error-" + id).text("Start time is required");
+    //                 isValid++;
+    //             }
+    //             $(this)
+    //                 .find('input[name="activity-start-time[]"]')
+    //                 .on("change", function () {
+    //                     if ($(this).val() != "") {
+    //                         $("#start-error-" + id).text("");
+    //                     }
+    //                 });
 
-        //             if (endTime == "") {
-        //                 $("#end-error-" + id).text("End time is required");
-        //                 isValid++;
-        //             }
-        //             $(this)
-        //                 .find('input[name="activity-end-time[]"]')
-        //                 .on("change", function () {
-        //                     if ($(this).val() != "") {
-        //                         $("#end-error-" + id).text("");
-        //                     }
-        //                 });
+    //             if (endTime == "") {
+    //                 $("#end-error-" + id).text("End time is required");
+    //                 isValid++;
+    //             }
+    //             $(this)
+    //                 .find('input[name="activity-end-time[]"]')
+    //                 .on("change", function () {
+    //                     if ($(this).val() != "") {
+    //                         $("#end-error-" + id).text("");
+    //                     }
+    //                 });
 
-        //             var activity = {
-        //                 activity: description,
-        //                 "start-time": startTime,
-        //                 "end-time": endTime,
-        //             };
-        //             activities[dataId].push(activity);
-        //         });
-        //     // toggleSidebar();
-        // });
-        var showAlert = false;  // Move showAlert outside of the loop so it can be checked globally
-        $(".accordion-body.new_activity").each(function () {
-            var dataId = $(this).data("id");
-            activities[dataId] = [];
-            var previousEndTime = null;
-            // showAlert = false;
-        
-            $(this)
-                .find(".activity-main-wrp")
-                .each(function (index) {
-                    var id = $(this).data("id");
-                    var description = $(this)
-                        .find('input[name="description[]"]')
-                        .val();
-                    var startTime = $(this)
-                        .find('input[name="activity-start-time[]"]')
-                        .val();
-                    var endTime = $(this)
-                        .find('input[name="activity-end-time[]"]')
-                        .val();
-                    
-                 activityendtime = endTime;
+    //             var activity = {
+    //                 activity: description,
+    //                 "start-time": startTime,
+    //                 "end-time": endTime,
+    //             };
+    //             activities[dataId].push(activity);
+    //         });
+    //     // toggleSidebar();
+    // });
+    var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    $(".accordion-body.new_activity").each(function () {
+        var dataId = $(this).data("id");
+        activities[dataId] = [];
+        var previousEndTime = null;
+        // showAlert = false;
 
-                    $("#desc-error-" + id).text("");
-                    $("#start-error-" + id).text("");
-                    $("#end-error-" + id).text("");
-        
-                    if (description == "") {
-                        $("#desc-error-" + id)
-                            .text("Description is required")
-                            .css("color", "red");
-                        isValid++;
-                    }
-                    $(this)
-                        .find('input[name="description[]"]')
-                        .on("input", function () {
-                            if ($(this).val() != "") {
-                                $("#desc-error-" + id).text("");
-                            }
-                        });
-        
-                    if (startTime == "") {
-                        $("#start-error-" + id).text("Start time is required");
-                        isValid++;
-                    }
-                    $(this)
-                        .find('input[name="activity-start-time[]"]')
-                        .on("change", function () {
-                            if ($(this).val() != "") {
-                                $("#start-error-" + id).text("");
-                            }
-                        });
-        
-                    if (endTime == "") {
-                        $("#end-error-" + id).text("End time is required");
-                        isValid++;
-                    }
-                    $(this)
-                        .find('input[name="activity-end-time[]"]')
-                        .on("change", function () {
-                            if ($(this).val() != "") {
-                                $("#end-error-" + id).text("");
-                            }
-                        });
-        
-                    var activity = {
-                        activity: description,
-                        "start-time": startTime,
-                        "end-time": endTime,
-                    };
-                    activities[dataId].push(activity);
-        
-                    if (previousEndTime && previousEndTime > startTime && !showAlert) {
-                        toastr.error("Please enter proper time");
-                        showAlert = true;  
-                        // return;
-                    }else{
-                        showAlert =false;
-                    }
-                            previousEndTime = endTime;
-                });
-        });
-        
-        if(showAlert==true){
-            return;
-        }
-        console.log({ activityendtime });
+        $(this)
+            .find(".activity-main-wrp")
+            .each(function (index) {
+                var id = $(this).data("id");
+                var description = $(this)
+                    .find('input[name="description[]"]')
+                    .val();
+                var startTime = $(this)
+                    .find('input[name="activity-start-time[]"]')
+                    .val();
+                var endTime = $(this)
+                    .find('input[name="activity-end-time[]"]')
+                    .val();
+
+                activityendtime = endTime;
+
+                $("#desc-error-" + id).text("");
+                $("#start-error-" + id).text("");
+                $("#end-error-" + id).text("");
+
+                if (description == "") {
+                    $("#desc-error-" + id)
+                        .text("Description is required")
+                        .css("color", "red");
+                    isValid++;
+                }
+                $(this)
+                    .find('input[name="description[]"]')
+                    .on("input", function () {
+                        if ($(this).val() != "") {
+                            $("#desc-error-" + id).text("");
+                        }
+                    });
+
+                if (startTime == "") {
+                    $("#start-error-" + id).text("Start time is required");
+                    isValid++;
+                }
+                $(this)
+                    .find('input[name="activity-start-time[]"]')
+                    .on("change", function () {
+                        if ($(this).val() != "") {
+                            $("#start-error-" + id).text("");
+                        }
+                    });
+
+                if (endTime == "") {
+                    $("#end-error-" + id).text("End time is required");
+                    isValid++;
+                }
+                $(this)
+                    .find('input[name="activity-end-time[]"]')
+                    .on("change", function () {
+                        if ($(this).val() != "") {
+                            $("#end-error-" + id).text("");
+                        }
+                    });
+
+                var activity = {
+                    activity: description,
+                    "start-time": startTime,
+                    "end-time": endTime,
+                };
+                activities[dataId].push(activity);
+
+                if (
+                    previousEndTime &&
+                    previousEndTime > startTime &&
+                    !showAlert
+                ) {
+                    toastr.error("Please enter proper time");
+                    showAlert = true;
+                    // return;
+                } else {
+                    showAlert = false;
+                }
+                previousEndTime = endTime;
+            });
+    });
+
+    if (showAlert == true) {
+        return;
+    }
+    console.log({ activityendtime });
 
     let lastendtime = convertTo24Hour(end_time);
     let lastScheduleEndtime = convertTo24Hour(activityendtime);
@@ -3340,7 +3344,7 @@ $(document).on("click", "#save_activity_schedule", function () {
     console.log(lastendtime);
     console.log(lastScheduleEndtime);
 
-    if(lastScheduleEndtime>lastendtime){
+    if (lastScheduleEndtime > lastendtime) {
         toastr.error("Please enter proper time");
         return;
     }
@@ -3476,20 +3480,21 @@ $(document).on("click", "#next_setting", function () {
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
     console.log(dbJson);
-    $(".step_1").hide();
-    handleActiveClass(".li_design");
-    $(".pick-card").addClass("active");
-    $(".design-span").addClass("active");
-    $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
-    $(".li_event_detail").addClass("menu-success");
+    loadAgain();
+    // $(".step_1").hide();
+    // handleActiveClass(".li_design");
+    // $(".pick-card").addClass("active");
+    // $(".design-span").addClass("active");
+    // $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
+    // $(".li_event_detail").addClass("menu-success");
 
-    $(".step_2").show();
-    $(".event_create_percent").text("25%");
-    $(".current_step").text("1 of 4");
-    active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
+    // $(".step_2").show();
+    // $(".event_create_percent").text("25%");
+    // $(".current_step").text("1 of 4");
+    // active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
 
-    final_step = 2;
-    eventData.step = final_step;
+    // final_step = 2;
+    // eventData.step = final_step;
 });
 
 if ($(".edit-design").hasClass("active")) {
