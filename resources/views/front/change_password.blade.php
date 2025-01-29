@@ -27,7 +27,7 @@
                         <h6>{{$user->firstname}} | {{ $user->email}}</h6>
                         <p>For security purposes you’ll be logged out of all sessions except this one if you change
                             your password.</p>
-                        <p>Your password must be 8 characters long and must contain at least one number and one
+                        <p>Your password must be 6 characters long and must contain at least one number and one
                             special character</p>
                     </div>
                     <div class="login-form-wrap">
