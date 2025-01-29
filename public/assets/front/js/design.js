@@ -40,6 +40,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.image) {
                     image = base_url + "storage/event_images/" + response.image;
+                    eventData.cutome_image = image;
                     dbJson = null;
                     loadAgain();
                 } else {
@@ -632,75 +633,76 @@ function bindData(current_event_id) {
                     staticInfo.textElements = dbJson;
                 } else {
                     staticInfo.textElements = dbJson.textElements;
-                    if (staticInfo.textElements == undefined) {
-                        staticInfo.textElements =
-                            jQuery.parseJSON(dbJson).textData;
-                    }
                 }
-                console.log(staticInfo);
-                staticInfo.textElements.forEach((element) => {
-                    const textMeasurement = new fabric.Text(element.text, {
-                        fontSize: element.fontSize,
-                        fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough:
-                            element.linethrough == true ||
-                            element.linethrough == "true" ||
-                            element.linethrough == "True"
-                                ? true
-                                : false,
+                if (staticInfo.textElements == undefined) {
+                    staticInfo.textElements = jQuery.parseJSON(dbJson).textData;
+                }
+                if (staticInfo.textElements == undefined) {
+                    console.log(staticInfo);
+                    staticInfo.textElements.forEach((element) => {
+                        const textMeasurement = new fabric.Text(element.text, {
+                            fontSize: element.fontSize,
+                            fontFamily: element.fontFamily,
+                            fontWeight: element.fontWeight,
+                            fontStyle: element.fontStyle,
+                            underline: element.underline,
+                            linethrough:
+                                element.linethrough == true ||
+                                element.linethrough == "true" ||
+                                element.linethrough == "True"
+                                    ? true
+                                    : false,
+                        });
+
+                        const textWidth = textMeasurement.width;
+
+                        console.log(element.text);
+
+                        let textElement = new fabric.Textbox(element.text, {
+                            // Use Textbox for editable text
+                            left: parseFloat(element.left),
+                            top: parseFloat(element.top),
+                            width: element.width || textWidth, // Default width if not provided
+                            fontSize: parseFloat(element.fontSize),
+                            fill: element.fill,
+                            fontFamily: element.fontFamily,
+                            fontWeight: element.fontWeight,
+                            fontStyle: element.fontStyle,
+                            underline: element.underline,
+                            linethrough:
+                                element.linethrough == true ||
+                                element.linethrough == "true" ||
+                                element.linethrough == "True"
+                                    ? true
+                                    : false,
+                            backgroundColor: element.backgroundColor,
+                            textAlign: element.textAlign,
+                            hasControls: true,
+                            borderColor: "#2DA9FC",
+                            cornerColor: "#fff",
+                            cornerSize: 10,
+                            cornerStyle: "circle",
+                            transparentCorners: false,
+                            lockScalingFlip: true,
+                            hasBorders: true,
+                            centeredRotation: true,
+                            angle: element?.rotation ? element?.rotation : 0,
+                        });
+
+                        textElement.setControlsVisibility({
+                            mt: false, // Hide middle top control
+                            mb: false, // Hide middle bottom control
+                            bl: true, // Hide bottom left control
+                            br: true, // Hide bottom right control
+                            tl: true, // Hide top left control
+                            tr: true, // Hide top right control
+                            ml: true, // Show middle left control
+                            mr: true, // Show middle right control
+                        });
+
+                        canvas.add(textElement);
                     });
-
-                    const textWidth = textMeasurement.width;
-
-                    console.log(element.text);
-
-                    let textElement = new fabric.Textbox(element.text, {
-                        // Use Textbox for editable text
-                        left: parseFloat(element.left),
-                        top: parseFloat(element.top),
-                        width: element.width || textWidth, // Default width if not provided
-                        fontSize: parseFloat(element.fontSize),
-                        fill: element.fill,
-                        fontFamily: element.fontFamily,
-                        fontWeight: element.fontWeight,
-                        fontStyle: element.fontStyle,
-                        underline: element.underline,
-                        linethrough:
-                            element.linethrough == true ||
-                            element.linethrough == "true" ||
-                            element.linethrough == "True"
-                                ? true
-                                : false,
-                        backgroundColor: element.backgroundColor,
-                        textAlign: element.textAlign,
-                        hasControls: true,
-                        borderColor: "#2DA9FC",
-                        cornerColor: "#fff",
-                        cornerSize: 10,
-                        cornerStyle: "circle",
-                        transparentCorners: false,
-                        lockScalingFlip: true,
-                        hasBorders: true,
-                        centeredRotation: true,
-                        angle: element?.rotation ? element?.rotation : 0,
-                    });
-
-                    textElement.setControlsVisibility({
-                        mt: false, // Hide middle top control
-                        mb: false, // Hide middle bottom control
-                        bl: true, // Hide bottom left control
-                        br: true, // Hide bottom right control
-                        tl: true, // Hide top left control
-                        tr: true, // Hide top right control
-                        ml: true, // Show middle left control
-                        mr: true, // Show middle right control
-                    });
-
-                    canvas.add(textElement);
-                });
+                }
 
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged

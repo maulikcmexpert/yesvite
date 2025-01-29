@@ -4630,6 +4630,7 @@ function edit_design_modal() {
 
 var design_inner_image = "";
 $(document).on("click", ".li_event_details", function () {
+    console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
     $("#sidebar_select_design_category").css("display", "none");
