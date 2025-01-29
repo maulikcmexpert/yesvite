@@ -27,8 +27,6 @@ $(document).ready(function () {
 
         var formData = new FormData();
         formData.append("image", file, "design.png");
-        formData.append("design_inner_image", design_inner_image);
-        formData.append("shapeImageUrl", old_shape_url);
 
         $.ajax({
             headers: {
