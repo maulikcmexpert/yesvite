@@ -363,12 +363,29 @@ function getNotificationList($filter = []){
                     // Split the old date range
                     // dd($old_start_end_date);
                     if($old_start_end_date!=""){
-                        list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
-                        $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
+                        if (strpos($old_start_end_date, ' to ') !== false) {
+                            list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
+                            $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;
+                        } else {
+                            // If there's no ' to ' in the string, just use the whole string as the date
+                            $old_date_result = $old_start_end_date;
+                        }
+                        // list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
+                        // $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
                     }
-                    if($new_start_end_date!=""){
-                        list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
-                        $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    // if($new_start_end_date!=""){
+                    //     list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
+                    //     $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    // }
+                    if ($new_start_end_date != "") {
+                        // Check if the date contains ' to ' before exploding
+                        if (strpos($new_start_end_date, ' to ') !== false) {
+                            list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
+                            $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;
+                        } else {
+                            // If there's no ' to ' in the string, just use the whole string as the date
+                            $new_date_result = $new_start_end_date;
+                        }
                     }
                     // Split the new date range
                    
