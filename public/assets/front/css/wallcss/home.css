@@ -1156,6 +1156,8 @@ main {
   justify-content: center !important;
   align-items: center !important;
   cursor: pointer !important;
+  left: auto !important;
+  padding: 0px !important;
 }
 
 .poll-options .position-relative input{
