@@ -40,7 +40,7 @@
                     <div class="event-center-tabs-main">
                         {{-- {{dd($current_page)}} --}}
                         <!-- ====================navbar-============================= -->
-                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" />
+                        <x-event_wall.wall_navbar :event="$event" :page="$current_page" :eventDetails="$eventDetails" />
 
                         <!-- ===tab-content-start=== -->
                         <div class="tab-content" id="nav-tabContent">
@@ -220,7 +220,7 @@
                                                                 $missing = '';
                                                                 if ($total_missing_quantity == 0) {
                                                                     $display_icon = '';
-                                                                    $missing = 'color:green';
+                                                                    $missing = 'color:red';
                                                                     $hide_button = 'd-none'; // Hides the button
                                                                 }
                                                             @endphp
@@ -402,7 +402,7 @@
                                                                     <input type="hidden" id="category_item_id"
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">
-                                                                    <h2 class="accordion-header" id="sprite">
+                                                                    <h2 class="accordion-header" id="sprite-{{ $item['id'] }}">
                                                                         <button class="accordion-btn accordion-button">
                                                                             <div class="d-flex align-items-center">
                                                                                 @php
@@ -471,9 +471,9 @@
                                                                                     data-login-user-id={{ $login_user_id }}
                                                                                     type="button"
                                                                                     data-bs-toggle="collapse"
-                                                                                    data-bs-target="#sprite-collapseOne"
+                                                                                    data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
                                                                                     aria-expanded="false"
-                                                                                    aria-controls="sprite-collapseOne"><i
+                                                                                    aria-controls="sprite-collapseOne-{{ $item['id'] }}">   <i
                                                                                         class="fa-solid fa-plus"></i></span>
                                                                             </div>
                                                                         </button>
@@ -481,9 +481,9 @@
 
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         @if ($login_user_id === $users['user_id'])
-                                                                            <div id="sprite-collapseOne"
-                                                                                class="accordion-collapse collapse show"
-                                                                                aria-labelledby="sprite"
+                                                                            <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
+                                                                                aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample">
                                                                                 <div class="accordion-body">
                                                                                     {{-- {{ dd($item['item_carry_users'])}} --}}
@@ -1289,7 +1289,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-0">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" />
             </div>
         </div>
     </div>
@@ -1331,7 +1331,7 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantity" name="quantity "value="0" class="input-qty" />
+                            <input type="number" id="quantity" name="category_quantity" value="0" class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                         <span class="error_message_quantity" style="color: red; font-size: 12px;"></span>
@@ -1422,7 +1422,7 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantitys" name="quantity"value="0" class="input-qty" />
+                            <input type="number" id="quantitys" name="quantity" value="" class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                         <span class="error_message_quantity" style="color: red; font-size: 12px;"></span>

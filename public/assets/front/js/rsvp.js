@@ -176,7 +176,7 @@ $(document).ready(function () {
             const eventDate = $("#eventDate").val();
             const eventEndDate = $("#eventEndDate").val();
             const eventTime = $("#eventTime").val();
-            const eventEndTime = $("#eventEndTime").val() || "12:00 PM"; // Default value
+            const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val(); // Default value
             const eventName = $("#eventName").val();
 
             if (!eventDate || !eventTime) {
@@ -477,32 +477,32 @@ $(document).on("click", ".check_rsvp_yes", function (e) {
     var sync_id = $(this).data("sync_id");
     var modal = $(this).data("bs-target");
 
-    $.ajax({
-        url: `${base_url}check_rsvp_status`,
-        type: "GET",
-        data: { event_id: event_id, user_id: user_id, sync_id: sync_id },
-        success: function (response) {
-            var status = response.rsvp_status;
-            // console.log(status);
-            if (status == "1") {
-                toastr.success("You have already done RSVP YES");
-            } else if (status == "cohost") {
-                toastr.success("You have are a cohost");
-            } else {
-                $(modal).off("show.bs.modal");
-                $(modal).modal("show");
-            }
+    // $.ajax({
+    //     url: `${base_url}check_rsvp_status`,
+    //     type: "GET",
+    //     data: { event_id: event_id, user_id: user_id, sync_id: sync_id },
+    //     success: function (response) {
+    //         var status = response.rsvp_status;
+    //         // console.log(status);
+    //         if (status == "1") {
+    //             toastr.success("You have already done RSVP YES");
+    //         } else if (status == "cohost") {
+    //             // toastr.success("You have are a cohost");
+    //         } else {
+    //             $(modal).off("show.bs.modal");
+    //             $(modal).modal("show");
+    //         }
 
-            //      if(status=="cohost"){
-            //         toastr.success('You are a cohost');
-            //     }else{
-            //                 $(modal).off('show.bs.modal');
-            //                 $(modal).modal('show');
-            //  }
-        },
-        error: function (xhr, status, error) {},
-        complete: function () {},
-    });
+    //         //      if(status=="cohost"){
+    //         //         toastr.success('You are a cohost');
+    //         //     }else{
+    //         //                 $(modal).off('show.bs.modal');
+    //         //                 $(modal).modal('show');
+    //         //  }
+    //     },
+    //     error: function (xhr, status, error) {},
+    //     complete: function () {},
+    // });
 });
 
 $(document).on("click", ".check_rsvp_no", function (e) {

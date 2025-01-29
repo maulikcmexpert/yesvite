@@ -32,45 +32,7 @@
                 aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.0501 4.66664L4.20841 11.9083C3.95008 12.1833 3.70008 12.725 3.65008 13.1L3.34175 15.8C3.23341 16.775 3.93341 17.4416 4.90008 17.275L7.58341 16.8166C7.95841 16.75 8.48341 16.475 8.74175 16.1916L15.5834 8.94998C16.7667 7.69998 17.3001 6.27498 15.4584 4.53331C13.6251 2.80831 12.2334 3.41664 11.0501 4.66664Z"
-                                stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M9.90826 5.875C10.2666 8.175 12.1333 9.93333 14.4499 10.1667" stroke="black"
-                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        Edit Event
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M13.3334 10.75V14.25C13.3334 17.1667 12.1667 18.3334 9.25002 18.3334H5.75002C2.83335 18.3334 1.66669 17.1667 1.66669 14.25V10.75C1.66669 7.83335 2.83335 6.66669 5.75002 6.66669H9.25002C12.1667 6.66669 13.3334 7.83335 13.3334 10.75Z"
-                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M18.3334 5.75002V9.25002C18.3334 12.1667 17.1667 13.3334 14.25 13.3334H13.3334V10.75C13.3334 7.83335 12.1667 6.66669 9.25002 6.66669H6.66669V5.75002C6.66669 2.83335 7.83335 1.66669 10.75 1.66669H14.25C17.1667 1.66669 18.3334 2.83335 18.3334 5.75002Z"
-                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Copy Event
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M7.81 2H16.19C19.83 2 22 4.17 21.99 7.81V16.19C21.99 19.83 19.82 22 16.18 22H7.81C4.17 22 2 19.83 2 16.18V7.81C2 4.17 4.17 2 7.81 2ZM15.7123 16.7729L12 13.0606L8.28769 16.7729C7.99778 17.0628 7.51694 17.0628 7.22703 16.7729C6.93711 16.483 6.93711 16.0021 7.22703 15.7122L10.9393 11.9999L7.22703 8.28761C6.93712 7.9977 6.93712 7.51686 7.22703 7.22695C7.51694 6.93704 7.99778 6.93704 8.28769 7.22695L12 10.9393L15.7123 7.22695C16.0022 6.93704 16.4831 6.93704 16.773 7.22695C17.0629 7.51686 17.0629 7.9977 16.773 8.28761L13.0607 11.9999L16.773 15.7122C17.0629 16.0021 17.0629 16.483 16.773 16.7729C16.4831 17.0628 16.0022 17.0628 15.7123 16.7729Z"
-                                fill="#EA4335" />
-                        </svg>
-                        Cancel Event
-                    </a>
-                </li>
-            </ul>
+
         </div>
     </div>
     {{-- {{    dd($eventDetails)}} --}}
@@ -78,7 +40,7 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                @if (!empty($eventDetails['event_images']) && count($eventDetails['event_images']) > 0)
+                @if (!empty($eventDetails['event_images']) )
                     @foreach ($eventDetails['event_images'] as $image)
                         <div class="swiper-slide">
                             <div class="hosted-by-template-slider-img">
@@ -96,7 +58,7 @@
                         </div>
                     @endforeach
                 @else
-                    <!-- Fallback message or a default image if no event images exist -->
+
                     <div class="swiper-slide">
                         <div class="hosted-by-template-slider-img">
                             <img src="{{ asset('assets/front/img/host-by-template-img.png') }}" alt="No Event Image" />
@@ -105,7 +67,7 @@
                 @endif
             </div>
 
-            <!-- Custom Pagination -->
+
             <div class="custom-pagination"></div>
         </div>
     </div>
@@ -116,18 +78,33 @@
             <div class="hosted-by-detail-inner">
                 <h3>Details</h3>
                 <ul>
-                    <li>RSVP By: {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}</li>
-                    @if (!empty($eventDetails['podluck']))
-                        @if ($eventDetails['podluck'] == 1)
-                            <li>Potluck Event</li>
-                        @endif
+                    @if (!empty($eventDetails['rsvp_by']))
+                    <li>RSVP By:
+                        {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                    </li>
                     @endif
-                    @if (!empty($eventDetails['adult_only_party']))
-                        @if ($eventDetails['adult_only_party'] == 1)
-                            <li>Adults Only</li>
-                        @endif
+                    @if ($eventDetails['podluck'] == 1)
+                        <li>Potluck Event</li>
                     @endif
+                    @if ($eventDetails['adult_only_party'] == 1)
+                        <li>Adults Only</li>
+                    @endif
+                    @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
+                    <li>Multiple Day Event</li>
+                @endif
+
+                    @if (!empty($eventDetails['co_host']))
+                        <li>Co-Host</li>
+                    @endif
+                    @if (!empty($eventDetails['gift_registry']))
+                    <li>Gift Registry</li>
+                @endif
+                @if (!empty($eventDetails['event_schedule']))
+                    <li>Event has schedule</li>
+                @endif
+                @if (!empty($eventDetails['allow_limit'] ))
                     <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
+                    @endif
                 </ul>
             </div>
             <div class="hosted-by-date-time">

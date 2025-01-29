@@ -39,7 +39,9 @@
                             </div>
                             <div class="home-latest-draf-card-head-content">
                               <h3>{{$draft['event_name']}}</h3>
-                              <p>Last Save:  {{$draft['saved_date']}}</p>
+                              <!-- <p>Last Save:  {{$draft['saved_date']}}</p> -->
+                              <p class="last-save" data-save-date="{{$draft['saved_date']}}"></p>
+
                             </div>
                             
                         </div>
@@ -87,3 +89,42 @@
         </div>
     </div>
   </div>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const saveDates = document.querySelectorAll('.last-save');
+
+  saveDates.forEach(function (saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Adjusting for LA timezone
+
+    // Format the date according to the required format
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
+
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
+
+    if (formattedDate) {
+      // Ensure AM/PM is uppercase by replacing only the AM/PM part
+      // const finalDate = formattedDate.replace(' at ', ' - ');
+      // const finalDate = formattedDate.replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+      const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+    } else {
+      console.error('Date formatting failed:', savedDate);
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+

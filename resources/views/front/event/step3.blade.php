@@ -6,7 +6,7 @@
                 <div class="contact-tab contact-user">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="contact-tab" data-bs-toggle="tab"
+                            <button class="nav-link active" data-isHost="0" id="contact-tab" data-bs-toggle="tab"
                                 data-bs-target="#contact" type="button" role="tab" aria-controls="#contact"
                                 aria-selected="true">Yestive</button>
                         </li>
@@ -60,7 +60,8 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    {{-- <a href="#" class="close" id="delete_invited_user"
+                                                    @if (!isset($guest_user['isAlready']))
+                                                    <a href="#" class="close" id="delete_invited_user"
                                                         data-id="user-{{ $guest_user['id'] }}"
                                                         data-userid="{{ $guest_user['id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -74,7 +75,8 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a> --}}
+                                                    </a>
+                                                    @endif
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -100,7 +102,8 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    {{-- <a href="#" class="close" id="delete_invited_user_tel"
+                                                    @if (!isset($guest_user['isAlready']))
+                                                    <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="user_tel-{{ $guest_user['id'] }}"
                                                         data-userid="{{ $guest_user['id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -114,7 +117,8 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a> --}}
+                                                    </a>
+                                                    @endif
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -269,21 +273,23 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    {{-- <a href="#" class="close" id="delete_invited_user_tel"
-                                                        data-id="sync_-{{ $guest_user['sync_id'] }}" data-contact="1"
-                                                        data-userid="{{ $guest_user['sync_id'] }}">
-                                                        <svg width="19" height="18" viewBox="0 0 19 18"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <rect x="1.8999" y="1" width="16" height="16"
-                                                                rx="8" fill="#F73C71" />
-                                                            <rect x="1.8999" y="1" width="16" height="16"
-                                                                rx="8" stroke="white" stroke-width="2" />
-                                                            <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
-                                                    </a> --}}
+                                                    @if (!isset($guest_user['isAlready']))
+                                                        <a href="#" class="close" id="delete_invited_user_tel"
+                                                            data-id="sync_-{{ $guest_user['sync_id'] }}" data-contact="1"
+                                                            data-userid="{{ $guest_user['sync_id'] }}">
+                                                            <svg width="19" height="18" viewBox="0 0 19 18"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="1.8999" y="1" width="16" height="16"
+                                                                    rx="8" fill="#F73C71" />
+                                                                <rect x="1.8999" y="1" width="16" height="16"
+                                                                    rx="8" stroke="white" stroke-width="2" />
+                                                                <path d="M7.56689 6.66699L12.2332 11.3333" stroke="white"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>  
+                                                    @endif
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -307,7 +313,8 @@
                                                         @endphp
                                                         <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                                                     @endif
-                                                    {{-- <a href="#" class="close" id="delete_invited_user_tel"
+                                                    @if (!isset($guest_user['isAlready']))
+                                                    <a href="#" class="close" id="delete_invited_user_tel"
                                                         data-id="sync_tel-{{ $guest_user['sync_id'] }}"
                                                         data-contact="1" data-userid="{{ $guest_user['sync_id'] }}">
                                                         <svg width="19" height="18" viewBox="0 0 19 18"
@@ -321,7 +328,9 @@
                                                             <path d="M7.56656 11.3333L12.2329 6.66699" stroke="white"
                                                                 stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
-                                                    </a> --}}
+                                                    </a>
+
+                                                    @endif
                                                 </div>
                                                 <h6 class="guest-name">{{ $guest_user['firstname'] }}
                                                     {{ $guest_user['lastname'] }}</h6>
@@ -642,7 +651,7 @@
 
                         @foreach (Session::get('user_ids') as $guest_user)
                             @if ($guest_user['prefer_by'] == 'email')
-                                <div class="users-data invited_user" data-id={{ $guest_user['id'] }}
+                                <div class="users-data invited_users" data-id={{ $guest_user['id'] }}
                                     id="user-{{ $guest_user['id'] }}">
                                     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
                                     <div class="d-flex align-items-start">
@@ -683,8 +692,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    {{-- <div>
+                                    @if (!isset($guest_user['isAlready']))
+                                    <div>
                                         <a href="#" id="delete_invited_user"
                                             data-id="user-{{ $guest_user['id'] }}"
                                             data-userid="{{ $guest_user['id'] }}">
@@ -698,10 +707,11 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div> --}}
+                                    </div>
+                                    @endif
                                 </div>
                             @elseif ($guest_user['prefer_by'] == 'phone')
-                                <div class="users-data invited_user" data-id={{ $guest_user['id'] }}
+                                <div class="users-data invited_users" data-id={{ $guest_user['id'] }}
                                     id="user_tel-{{ $guest_user['id'] }}">
                                     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
                                     <div class="d-flex align-items-start">
@@ -739,7 +749,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div>
+                                    @if (!isset($guest_user['isAlready']))
+                                    <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="user_tel-{{ $guest_user['id'] }}"
                                             data-userid="{{ $guest_user['id'] }}">
@@ -753,7 +764,8 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div> --}}
+                                    </div>
+                                    @endif
                                 </div>
                             @endif
                         @endforeach
@@ -762,7 +774,7 @@
                     @if (Session::get('contact_ids') != null && count(Session::get('contact_ids')) > 0)
                         @foreach (Session::get('contact_ids') as $guest_user)
                             @if ($guest_user['prefer_by'] == 'email')
-                                <div class="users-data invited_user" data-id={{ 'sync_' . $guest_user['sync_id'] }}
+                                <div class="users-data invited_users" data-id={{ 'sync_' . $guest_user['sync_id'] }}
                                     id="contact_tel-{{ $guest_user['sync_id'] }}">
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
@@ -802,7 +814,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div>
+                                    @if (!isset($guest_user['isAlready']))
+                                    <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="contact-{{ $guest_user['sync_id'] }}" data-contact="1"
                                             data-userid="{{ $guest_user['sync_id'] }}">
@@ -816,10 +829,11 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div> --}}
+                                    </div>
+                                    @endif
                                 </div>
                             @elseif ($guest_user['prefer_by'] == 'phone')
-                                <div class="users-data invited_user" data-id={{ 'sync_' . $guest_user['sync_id'] }}
+                                <div class="users-data invited_users" data-id={{ 'sync_' . $guest_user['sync_id'] }}
                                     id="contact_tel-{{ $guest_user['sync_id'] }}">
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
@@ -856,7 +870,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div>
+                                    @if (!isset($guest_user['isAlready']))
+                                    <div>
                                         <a href="#" id="delete_invited_user_tel"
                                             data-id="contact_tel-{{ $guest_user['sync_id'] }}" data-contact="1"
                                             data-userid="{{ $guest_user['sync_id'] }}">
@@ -870,7 +885,8 @@
                                                     fill="#F73C71"></path>
                                             </svg>
                                         </a>
-                                    </div> --}}
+                                    </div>
+                                    @endif
                                 </div>
                             @endif
                         @endforeach

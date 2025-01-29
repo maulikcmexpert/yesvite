@@ -347,13 +347,35 @@ function getNotificationList($filter = []){
                     $notificationDetail['message_to_host'] = "";
                     $notificationDetail['rsvp_attempt'] = "";
                     $notificationDetail['is_co_host'] = "";
+                    $notificationDetail['co_host_notification'] = ($values->is_co_host!=null || $values->is_co_host!="")?$values->is_co_host:"";
                     $notificationDetail['accept_as_co_host'] = "";
                     $notificationDetail['from_addr'] = ($values->from_addr != null || $values->from_addr != "") ? $values->from_addr : "";
                     $notificationDetail['to_addr'] = ($values->to_addr != null || $values->to_addr != "") ? $values->to_addr : "";
                     $notificationDetail['from_time'] = ($values->from_time != null || $values->from_time != "") ? $values->from_time : "";
                     $notificationDetail['to_time'] = ($values->to_time != null || $values->to_time != "") ? $values->to_time : "";
-                    $notificationDetail['old_start_end_date'] = ($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
-                    $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
+                    
+                    
+                    $old_start_end_date =($values->old_start_end_date != null || $values->old_start_end_date != "") ? $values->old_start_end_date : "";
+                    $new_start_end_date = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
+
+                    $old_date_result="";
+                    $new_date_result="";
+                    // Split the old date range
+                    if($old_start_end_date!=""){
+                        list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
+                        $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
+                    }
+                    if($new_start_end_date!=""){
+                        list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
+                        $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    }
+                    // Split the new date range
+                   
+
+                    
+                    
+                    $notificationDetail['old_start_end_date'] = $old_date_result;
+                    $notificationDetail['new_start_end_date'] = $new_date_result;
                     $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
                     $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
                     $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
@@ -469,13 +491,42 @@ function getNotificationList($filter = []){
         // dd($notificationInfo);
         return $final_data;
 }
+// function setposttTime($dateTime)
+// {
+//     $commentDateTime = $dateTime; 
+//     $commentTime = Carbon::parse($commentDateTime);
+//     $timeAgo = $commentTime->diffForHumans();
+//     return $timeAgo;
+// }
+
 function setposttTime($dateTime)
 {
-    $commentDateTime = $dateTime; 
-    $commentTime = Carbon::parse($commentDateTime);
-    $timeAgo = $commentTime->diffForHumans();
-    return $timeAgo;
+    $now = Carbon::now(); // Current time
+    $updatedTime =Carbon::parse($dateTime); // Parse the updated_at value
+
+    $diffInDays = $updatedTime->diffInDays($now);
+
+    if ($diffInDays > 0) {
+        return $diffInDays . 'd'; // Return in 'Xd' format
+    }
+
+    $diffInHours = $updatedTime->diffInHours($now);
+
+    if ($diffInHours > 0) {
+        return $diffInHours . 'h'; // Return in 'Xh' format
+    }
+
+    $diffInMinutes = $updatedTime->diffInMinutes($now);
+
+    if ($diffInMinutes > 0) {
+        return $diffInMinutes . 'm'; // Return in 'Xm' format
+    }
+
+    return 'just now'; // For moments less than a minute
 }
+
+
+
 function getUser($id)
 {
     return User::where('id', $id)->first();
@@ -921,10 +972,11 @@ function getInvitedUsersList($eventId)
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0']);
     $result = $invitedUsers->get();
 
+    // dd($result);
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            if ($guestVal->sync_id != '') {
+            if ($guestVal->user_id==null&&$guestVal->sync_id != '') {
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
                 $invitedGuestDetail['email'] = (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "";
@@ -944,7 +996,7 @@ function getInvitedUsersList($eventId)
                 $invitedGuestDetail['rsvp_d']= $guestVal->rsvp_d;  
                 $invitedGuestDetail['message_to_host']= $guestVal->message_to_host;
                 $eventDetail['invited_guests'][] = $invitedGuestDetail;
-            } elseif ($guestVal->user->app_user == '1') {
+            } else {
                 $invitedUserIdDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
                 $invitedUserIdDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
                 $invitedUserIdDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";

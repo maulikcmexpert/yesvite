@@ -188,7 +188,7 @@ class HomeController extends BaseController
                     $eventDetail['event_potluck'] = isset($value->event_settings->podluck) ? $value->event_settings->podluck : "";
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
                     $eventDetail['adult_only_party'] = isset($value->event_settings->adult_only_party) ? $value->event_settings->adult_only_party : "";
-                    $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
+                    $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);
                     $rsvp_status = "";
                     $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                         $query->where('app_user', '1');
@@ -298,7 +298,7 @@ class HomeController extends BaseController
                         $eventdraft['id'] = $value->id;
                         $eventdraft['event_name'] = ($value->event_name != "") ? $value->event_name : "No name";;
                         $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
-                        $eventdraft['saved_date'] = $formattedDate;
+                        $eventdraft['saved_date'] = $value->updated_at;
                         $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
                         $eventdraft['event_plan_name'] = $value->subscription_plan_name;
 
@@ -338,19 +338,30 @@ class HomeController extends BaseController
 
             $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
+            $color = ['blue', 'green', 'yellow', 'orange'];
             $events_calender = [];
-            $color = ['blue', 'orange', 'green', 'yellow'];
-            $colorIndex = 0;
-
+            
+            $groupedEvents = [];
             foreach ($eventcalenderdata as $event) {
-                $colorClass = $color[$colorIndex % count($color)];
-                $colorIndex++;
-                $events_calender[] = [
-                    'date' => $event->start_date,
-                    'title' => $event->event_name,
-                    'color' => $colorClass
-                ];
+                $groupedEvents[$event->start_date][] = $event;
             }
+            foreach ($groupedEvents as $date => $eventsOnDate) {
+                $colorIndex = 0; 
+                usort($eventsOnDate, function ($a, $b) {
+                    return strcmp($a->event_name, $b->event_name); 
+                });
+            
+                foreach ($eventsOnDate as $event) {
+                    $colorClass = $color[$colorIndex % count($color)];
+                    $colorIndex++; 
+                    $events_calender[] = [
+                        'date' => $event->start_date,
+                        'title' => $event->event_name,
+                        'color' => $colorClass
+                    ];
+                }
+            }
+            
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
@@ -399,13 +410,39 @@ class HomeController extends BaseController
     }
 
 
-    public function setpostTime($dateTime)
-    {
-        $commentDateTime = $dateTime;
-        $commentTime = Carbon::parse($commentDateTime);
-        $timeAgo = $commentTime->diffForHumans();
-        return $timeAgo;
+    // public function setpostTime($dateTime)
+    // {
+    //     $commentDateTime = $dateTime;
+    //     $commentTime = Carbon::parse($commentDateTime);
+    //     $timeAgo = $commentTime->diffForHumans();
+    //     return $timeAgo;
+    // }
+
+     function setupcomingpostTime($updatedAt)
+{
+    $now = Carbon::now(); // Current time
+    $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
+
+    $diffInDays = $updatedTime->diffInDays($now);
+
+    if ($diffInDays > 0) {
+        return $diffInDays . 'd'; // Return in 'Xd' format
     }
+
+    $diffInHours = $updatedTime->diffInHours($now);
+
+    if ($diffInHours > 0) {
+        return $diffInHours . 'h'; // Return in 'Xh' format
+    }
+
+    $diffInMinutes = $updatedTime->diffInMinutes($now);
+
+    if ($diffInMinutes > 0) {
+        return $diffInMinutes . 'm'; // Return in 'Xm' format
+    }
+
+    return 'just now'; // For moments less than a minute
+}
 
     function upcomingEventsCount($userId)
     {
@@ -438,7 +475,6 @@ class HomeController extends BaseController
 
     function pendingRsvpCount($userId)
     {
-        dd(1);
         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
         })->where(['user_id' => $userId, 'rsvp_status' => NULL])->count();
@@ -484,8 +520,12 @@ class HomeController extends BaseController
     public function notificationAll(Request $request)
     {
 
-        $notfication_data = getNotificationList();
+        $user  = Auth::guard( 'web')->user()->id;
 
-        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render()]);
+
+        $notfication_data = getNotificationList();
+        $eventList= getAllEventList($user);
+
+        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render(),"event_list"=>view('front.notification.search_filter_event', compact('eventList'))->render()]);
     }
 }

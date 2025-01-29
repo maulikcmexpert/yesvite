@@ -957,7 +957,7 @@ $(document).ready(function () {
         console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
         console.log('Post Content:', postContent);
         // If a poll form exists and is visible, submit it
-        if (pollForm.is(':visible') && pollForm.length > 0) {
+        if (pollForm.is(':visible') && pollForm.length > 0 &&  pollForm !== '') {
             // if (postContent === '') {
             //     alert('Please enter some content for the poll.');
             //     return;
@@ -968,17 +968,26 @@ $(document).ready(function () {
         }
         // If a photo form exists and is visible, submit it
         else if (photoForm.is(':visible') && photoForm.length > 0) {
-            // if (postContent === '') {
-            //     alert('Please enter some content for the photo post.');
-            //     return;
-            // }
+            // Check if there's a valid photo (adjust this to your actual field for photo upload)
+            var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
+            if (photoInput && photoInput.files.length === 0) {
+                toastr.danger('Please upload a photo for the photo post.');
+            }
+
+
             // Set the value of the hidden input in the photo form
             document.getElementById('photoContent').value = postContent;
-            document.getElementById('photoPostType').value = 1; //
+            document.getElementById('photoPostType').value = 1;
+
+            // Submit the form
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
         else if (textForm.length > 0 && postContent !== '') {
+            if (postContent === '') {
+                alert('Please enter some content for the photo post.');
+                return;
+            }
             document.getElementById('photoPostType').value = 0; //
             textForm.submit();
         }
@@ -1008,11 +1017,13 @@ $(document).ready(function () {
     // Load saved settings or set defaults
     let savedVisibility = localStorage.getItem('post_privacys') || '1'; // Default: Everyone
     let savedAllowComments = localStorage.getItem('commenting_on_off') === '1'; // Convert to boolean
-    console.log('Saved Allow Comments:', savedAllowComments); // Debugging
-    if (!savedAllowComments == true) {
+
+    // Ensure the default value is set if no saved value exists for comments
+    if (savedAllowComments !== true) {
         savedAllowComments = '1'; // Default to true
         localStorage.setItem('commenting_on_off', savedAllowComments);
     }
+
     // Apply settings to the form
     const visibilityRadio = $('input[name="post_privacy"][value="' + savedVisibility + '"]');
     if (visibilityRadio.length > 0) {
@@ -1025,11 +1036,11 @@ $(document).ready(function () {
 
     $('#allowComments').prop('checked', savedAllowComments);
 
-    // Update hidden fields with initial values
-    $('#hiddenVisibility').val(savedVisibility);
-    $('#hiddenAllowComments').val(savedAllowComments ? '1' : '0');
+    // Update the hidden input fields dynamically
+    $('.hiddenVisibility').val(savedVisibility);
+    $('.hiddenAllowComments').val(savedAllowComments ? '1' : '0');
 
-    // Display initial settings
+    // Update the display area to show the current saved visibility and commenting status
     const visibilityName = visibilityOptions[savedVisibility];
     $('#savedSettingsDisplay').html(`
         <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
@@ -1045,22 +1056,38 @@ $(document).ready(function () {
 
         // Save settings to localStorage
         localStorage.setItem('post_privacys', visibility);
-        localStorage.setItem('commenting_on_off', 1);
+        localStorage.setItem('commenting_on_off', allowComments);
 
-        // Update hidden fields
-        $('#hiddenVisibility').val(visibility);
-        $('#hiddenAllowComments').val(allowComments);
+        // Update the hidden input fields dynamically for all forms
+        $('.hiddenVisibility').val(visibility);
+        $('.hiddenAllowComments').val(allowComments);
 
         // Update display area
         const visibilityName = visibilityOptions[visibility];
         $('#savedSettingsDisplay').html(`
             <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-            <p>${allowComments === '1' ? "Comments Enabled" : "Comments Disabled"}</p>
+            <p>${allowComments === '1' ? "" : ""}</p>
         `);
 
         console.log('Saved Settings:', { visibility, allowComments });
     });
+
+    // Dynamically set the hidden values in the forms
+    $('form').on('submit', function () {
+        // Fetch the visibility and commenting status to update the form's hidden inputs before submission
+        const visibility = $('input[name="post_privacy"]:checked').val() || '1'; // Default to Everyone if null
+        const allowComments = $('#allowComments').is(':checked') ? '1' : '0';
+
+        // Dynamically update hidden inputs in the respective forms
+        $('#hiddenVisibility').val(visibility);
+        $('#hiddenAllowComments').val(allowComments);
+    });
 });
+
+
+
+
+
 
 
 $(".posts-card-like-btn").on("click", function () {

@@ -528,6 +528,32 @@ $(document).on('click', '.open_photo_model', function () {
     const postId = $(this).data('post-id');
     const eventId = $(this).data('event-id');
     ;
+    const rawData = $(this).data('image'); // Get raw data
+    console.log('Raw Data:', rawData); // Debug the raw data
+    const swiperWrapper = $('#media_post');
+    swiperWrapper.empty();
+    if (rawData && rawData.length > 0) {
+        rawData.forEach((media) => {
+            swiperWrapper.append(`
+                <div class="swiper-slide">
+                    <div class="posts-card-show-post-img">
+                        <img src="${media}" alt="" />
+                    </div>
+                </div>
+            `);
+        });
+    }
+    swiper.destroy(true, true);
+
+    // Reinitialize Swiper
+    swiper = new Swiper(".photo-detail-slider", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
     //let parentId = null;  // Default to null, assuming no parent
 
     // if ($('.commented-user-wrp').length > 0) {
@@ -590,19 +616,7 @@ $(document).on('click', '.open_photo_model', function () {
                 // Post Message
                 $('#post_message').text(data.post_message);
 
-                const swiperWrapper = $('#media_post');
-                swiperWrapper.empty();
-                if (data.mediaData && data.mediaData.length > 0) {
-                    data.mediaData.forEach((media) => {
-                        swiperWrapper.append(`
-                            <div class="swiper-slide">
-                                <div class="posts-card-show-post-img">
-                                    <img src="${media.post_media}" alt="" />
-                                </div>
-                            </div>
-                        `);
-                    });
-                }
+
                 $('#likes').text(data.total_likes + ' Likes');
                 // Add 'Likes' after the number
                 $('#comments').text(data.total_comments + ' Comments')
@@ -958,4 +972,69 @@ $(document).on('click', '#emojiDropdown1 .model_emoji', function () {
 
     // Hide emoji picker
     $(this).closest('#emojiDropdown1').hide();
+});
+$(document).ready(function () {
+    // Define visibility options
+    const visibilityOptions = {
+        1: "Everyone",
+        2: "RSVP’d - Yes",
+        3: "RSVP’d - No",
+        4: "RSVP’d - No Reply",
+    };
+
+    // Load saved settings or set defaults
+    let savedVisibility = localStorage.getItem('post_privacys') || '1'; // Default: Everyone
+    let savedAllowComments = localStorage.getItem('commenting_on_off') === '1'; // Convert to boolean
+    console.log('Saved Allow Comments:', savedAllowComments); // Debugging
+    if (!savedAllowComments == true) {
+        savedAllowComments = '1'; // Default to true
+        localStorage.setItem('commenting_on_off', savedAllowComments);
+    }
+    // Apply settings to the form
+    const visibilityRadio = $('input[name="post_privacy"][value="' + savedVisibility + '"]');
+    if (visibilityRadio.length > 0) {
+        visibilityRadio.prop('checked', true);
+    } else {
+        // Fallback to default visibility if saved value is invalid
+        savedVisibility = '1';
+        $('input[name="post_privacy"][value="1"]').prop('checked', true);
+    }
+
+    $('#allowComments').prop('checked', savedAllowComments);
+
+    // Update hidden fields with initial values
+    $('#hiddenVisibility').val(savedVisibility);
+    $('#hiddenAllowComments').val(savedAllowComments ? '1' : '0');
+
+    // Display initial settings
+    const visibilityName = visibilityOptions[savedVisibility];
+    $('#savedSettingsDisplay').html(`
+        <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+        <p>${savedAllowComments === '1' ? "" : ""}</p>
+    `);
+
+    // Save Button Click Handler
+    $('#saveSettings').on('click', function () {
+        // Fetch selected visibility
+        const visibility = $('input[name="post_privacy"]:checked').val() || '1'; // Default to Everyone if null
+        // Fetch commenting status
+        const allowComments = $('#allowComments').is(':checked') ? '1' : '0';
+
+        // Save settings to localStorage
+        localStorage.setItem('post_privacys', visibility);
+        localStorage.setItem('commenting_on_off', 1);
+
+        // Update hidden fields
+        $('#hiddenVisibility').val(visibility);
+        $('#hiddenAllowComments').val(allowComments);
+
+        // Update display area
+        const visibilityName = visibilityOptions[visibility];
+        $('#savedSettingsDisplay').html(`
+            <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+            <p>${allowComments === '1' ? "" : ""}</p>
+        `);
+
+        console.log('Saved Settings:', { visibility, allowComments });
+    });
 });

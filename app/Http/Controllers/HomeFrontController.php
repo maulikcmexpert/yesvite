@@ -7,7 +7,9 @@ use App\Mail\NotifyPendingInvitation;
 use App\Models\ServerKey;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\TextData;
+use App\Models\EventDesignCategory;
+use App\Models\EventDesignSubCategory;
 class HomeFrontController extends BaseController
 {
     public function index()
@@ -16,9 +18,18 @@ class HomeFrontController extends BaseController
 
         $title = 'Yesvite-Home';
         $page = 'front.homefront';
+
+        $images = TextData::all();
+        $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
+        $getDesignData =  EventDesignCategory::with('subcategory')->get();
+        $getDesignData = EventDesignCategory::all();
+        $getsubcatData = EventDesignSubCategory::all();
         return view('layout', compact(
             'title',
             'page',
+            'images',
+            'getDesignData',
+            'categories'
         ));
     }
 
@@ -79,4 +90,13 @@ class HomeFrontController extends BaseController
             return response()->json(['response' => $response]);
         }
     }
+    public function viewAllImages()
+    {
+
+        $images = TextData::all();
+
+        return view('front.homefront', compact('images'));
+    }
+
+
 }

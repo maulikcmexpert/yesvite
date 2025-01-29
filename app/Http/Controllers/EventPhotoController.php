@@ -54,34 +54,11 @@ class EventPhotoController extends Controller
                 $query->where('parent_comment_id', NULL);
             }])->where(['event_id' => $event, 'post_type' => '1']);
             $eventCreator = Event::where('id', $event)->first();
-            // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
-            //     $getPhotoList->where(function ($query) use ($selectedFilters, $eventCreator) {
-            //         foreach ($selectedFilters as $filter) {
-            //             switch ($filter) {
-            //                 case 'time_posted':
-            //                     $query->orderBy('id', 'desc');
-            //                     break;
-            //                 case 'guest':
-            //                     $query->orWhere('user_id', '!=', $eventCreator->user_id);
 
-            //                     break;
-            //                 case 'photos':
-            //                     $query->orWhereHas('post_image', function ($subQuery) {
-            //                         $subQuery->where('type', 'image');
-            //                     });
-            //                     break;
-            //                 case 'videos':
-            //                     $query->orWhereHas('post_image', function ($subQuery) {
-            //                         $subQuery->where('type', 'video');
-            //                     });
-            //                     break;
-            //                     // Add more cases for other filters if needed
-            //             }
-            //         }
-            //     });
-            // }
             $getPhotoList->orderBy('id', 'desc');
+
             $results = $getPhotoList->get();
+            // dd($results);
             $postPhotoList = [];
             foreach ($results as $value) {
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
@@ -106,21 +83,24 @@ class EventPhotoController extends Controller
                 $postPhotoDetail['post_message'] = (!empty($value->post_message) || $value->post_message != NULL) ? $value->post_message : "";
                 $postPhotoDetail['post_time'] = $this->setpostTime($value->updated_at);
                 $postPhotoDetail['is_in_photo_moudle'] = $value->is_in_photo_moudle;
-                $photoVideoData = "";
+                $photoVideoData = []; // Initialize as an array
                 if (!empty($value->post_image)) {
                     $photData = $value->post_image;
                     foreach ($photData as $val) {
+                        $photoVideoDetail = []; // Reset for each image
                         $photoVideoDetail['id'] = $val->id;
                         $photoVideoDetail['event_post_id'] = $val->event_post_id;
                         $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
                         $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('storage/thumbnails/' . $val->thumbnail) : "";
                         $photoVideoDetail['type'] = $val->type;
-                        $photoVideoData = $photoVideoDetail;
+
+                        // Add to the array of media
+                        $photoVideoData[] = $photoVideoDetail;
                     }
                 }
 
                 $postPhotoDetail['mediaData'] = $photoVideoData;
-                $postPhotoDetail['total_media'] = ($value->post_image_count - 1 != 0 && $value->post_image_count - 1 != -1)  ? "+" . $value->post_image_count - 1 : "";
+                $postPhotoDetail['total_media'] = (count($photoVideoData) > 1) ? "+" . (count($photoVideoData) - 1) : "";
                 $getPhotoReaction = getReaction($value->id);
                 $reactionList = [];
                 foreach ($getPhotoReaction as $values) {
@@ -188,6 +168,23 @@ class EventPhotoController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $rsvp_status = "";
+            $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+                // $query->where('app_user', '1');
+            })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+            // dd($checkUserrsvp);
+            // if ($value->rsvp_by_date >= date('Y-m-d')) {
+
+            if ($checkUserrsvp != null) {
+
+                if ($checkUserrsvp->rsvp_status == '1') {
+                    $rsvp_status = '1'; // rsvp you'r going
+                } else if ($checkUserrsvp->rsvp_status == '0') {
+                    $rsvp_status = '0'; // rsvp you'r not going
+                }
+
+            }
+            $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventDetails['event_date'] = $eventDetail->start_date;
@@ -226,7 +223,8 @@ class EventPhotoController extends Controller
             foreach ($eventDetail->event_invited_user as $hostValues) {
                 $coHostDetail['id'] = $hostValues->user_id;
                 $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
-                $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+                $fullName = trim(($hostValues->user->firstname ?? '') . ' ' . ($hostValues->user->lastname ?? ''));
+                $coHostDetail['name'] = !empty($fullName) ? $fullName : null;
                 $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
                 $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
                 $coHosts[] = $coHostDetail;
@@ -293,7 +291,7 @@ class EventPhotoController extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if (!empty($eventData)) {
+                if (!empty($eventData) || empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $eventData[] = "Number of guests : " . $numberOfGuest;

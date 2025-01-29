@@ -27,7 +27,8 @@ use App\Http\Controllers\{
     EventGuestController,
     EventWallController,
     EventDetailsController,
-    PaymentController
+    PaymentController,
+    UrlController
 };
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -55,8 +56,10 @@ Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
     return response()->json(['message' => 'Queue worker started successfully']);
 });
-
+Route::get('/rsvp/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
+    ->name('short.url');
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
+Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
@@ -64,7 +67,7 @@ Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
 Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])->name('term_and_condition');
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
-Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
+Route::get('rsvp/{event_invited_user_id}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('check_rsvp_status', [RsvpController::class, 'CheckRsvpStatus'])->name('check_rsvp_status');
 
@@ -236,6 +239,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('update_notification_read',  [EventListController::class, 'UpdateNotificationRead'])->name('update_notification_read');
     Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
 
+    Route::get('mark_as_read',  [EventListController::class, 'mark_as_read'])->name('mark_as_read');
+    Route::post('store_rsvp',  [EventListController::class, 'store_rsvp'])->name('store_rsvp');
+    Route::get('filter_search_event',  [EventListController::class, 'filter_search_event'])->name('filter_search_event');
+
 
     // //vrushali
     //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
@@ -272,6 +279,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_photo/userPostLikeDislike', [EventPhotoController::class, 'userPostLikeDislike'])->name('event_photo.userPostLikeDislike');
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
     Route::get('event_guest/fetch_guest/{id}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
+    Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
     Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
     Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
@@ -283,9 +291,10 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/userPostCommentReply', [EventWallController::class, 'userPostCommentReply']);
     Route::post('event_wall/userPostLikeDislike', [EventWallController::class, 'userPostLikeDislike'])->name('event_wall.userPostLikeDislike');
     Route::post('event_wall/event_post', [EventWallController::class, 'createPost'])->name('event_wall.eventPost');
-
+    Route::post('event_wall/get_phoneContact', [EventWallController::class, 'get_PhoneContact'])->name('event_wall.get_phoneContact');
+    Route::post('event_wall/get_yesviteContact', [EventWallController::class, 'get_yesviteContact'])->name('event_wall.get_yesviteContact');
     Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
-
+    Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 });
 

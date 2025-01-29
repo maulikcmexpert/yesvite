@@ -23,6 +23,8 @@ class BaseController extends Controller
     }
     protected function getPrices()
     {
+        // handleIncomingMessage("1 (510) 300-5587", "yes");
+        // handleSMSInvite("+91 97238 40340", "yesvite web", "srryghhhggguvj", 814, 2787);
         return [
             '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15, 'price' => 21.00],
             '30' => ['priceId' => 'price_1QjcKZEunmtSe18EC967NkmQ', 'coins' => 30, 'price' => 39.00],

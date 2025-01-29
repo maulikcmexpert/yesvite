@@ -157,8 +157,8 @@ $(".notification-btn").on("click", function () {
 });
 
 // ===header-drodpdown===
-const dropdownButton = document.getElementById("dropdownButton");
-const dropdownMenu = document.querySelector(".notification-dropdown-menu");
+// const dropdownButton = document.getElementById("dropdownButton");
+// const dropdownMenu = document.querySelector(".notification-dropdown-menu");
 
 // Toggle dropdown when clicking the button
 $("#dropdownButton").on("click", function (event) {
@@ -166,6 +166,20 @@ $("#dropdownButton").on("click", function (event) {
     $(".notification-dropdown-menu").toggleClass("show");
     if ($(".header-profile-dropdown").hasClass("show")) {
         $(".header-profile-dropdown").removeClass("show");
+    }
+});
+
+$(".moblie-menu-bar").on("click", function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    if ($(".notification-dropdown-menu").hasClass("show")) {
+        $(".notification-dropdown-menu").removeClass("show");
+    }
+});
+$(".notification-toggle-menu").on("click", function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    if ($(".mobile-menu-wrp").hasClass("active")) {
+        $(".mobile-menu-wrp").removeClass("active");
+        $(".line").removeClass("active");
     }
 });
 
@@ -247,7 +261,10 @@ $(".btn-back").on("click", function () {
     $(".create-post-setting-main-body").addClass("d-none");
     $(".create-post-main-body").removeClass("d-none");
 });
-
+$(".back-btn").on("click", function () {
+    $(".create-post-setting-main-body").addClass("d-none");
+    $(".create-post-main-body").removeClass("d-none");
+});
 $(document).on("change", ".fileInputtype", function (event) {
     console.log(event);
 
@@ -329,35 +346,35 @@ $(document).on("change", ".fileInputtype", function (event) {
 });
 
 // Add new option on click
-$(".option-add-btn").on("click", function () {
-    const pollOptionsContainer = $(".poll-options");
-    const optionCount = pollOptionsContainer.children().length + 1;
+// $(".option-add-btn").on("click", function () {
+//     const pollOptionsContainer = $(".poll-options");
+//     const optionCount = pollOptionsContainer.children().length + 1;
 
-    const newOption = $(`
-    <div class="mb-3">
-      <label for="yourquestion" class="form-label d-flex align-items-center justify-content-between">Option ${optionCount}* <span>20/140</span></label>
-      <div class="position-relative">
-        <input type="text" class="form-control" id="yourquestion" placeholder="">
-        <span class="input-option-delete">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </div>
-    </div>
-  `);
+//     const newOption = $(`
+//     <div class="mb-3">
+//       <label for="yourquestion" class="form-label d-flex align-items-center justify-content-between">Option ${optionCount}* <span>20/140</span></label>
+//       <div class="position-relative">
+//         <input type="text" class="form-control" id="yourquestion" placeholder="">
+//         <span class="input-option-delete">
+//           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+//             <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//             <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+//           </svg>
+//         </span>
+//       </div>
+//     </div>
+//   `);
 
-    pollOptionsContainer.append(newOption);
+//     pollOptionsContainer.append(newOption);
 
-    // Add delete functionality to the newly created delete button
-    newOption.find(".input-option-delete").on("click", function () {
-        newOption.remove();
-    });
-});
+//     // Add delete functionality to the newly created delete button
+//     newOption.find(".input-option-delete").on("click", function () {
+//         newOption.remove();
+//     });
+// });
 
 // ===add-photo-vidoe-div-onclick===
 const createphotobtn = document.getElementById("create-photo-btn");
@@ -382,6 +399,14 @@ $(".upload-img-delete").click(function () {
 });
 
 $(".upload-poll-delete").click(function () {
+    $("#pollForm")[0].reset(); // Resets the form inputs to their default values
+
+    // Clear hidden input values (if needed)
+    $("#pollContent").val('');
+    $("#event_id").val('');
+    $("#hiddenVisibility").val('');
+    $("#hiddenAllowComments").val('');
+    $(".char-count").text("0/140");
     $(".create-post-poll-wrp").addClass("d-none");
 });
 
@@ -850,6 +875,8 @@ $(function () {
 });
 
 $(document).on("click", ".mobile-calender-btn", function () {
+    $(".mobile-menu-wrp").removeClass("active");
+    $(".line").removeClass("active");
     var text = this.innerText;
     var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -946,6 +973,7 @@ $(document).on("click", ".notification_read", function () {
         success: function (response) {
             if (response.count == 0) {
                 $(".notification_count_display").css("display", "none");
+                $(".notification-read-dot").css('display','none');
             }
         },
         error: function (xhr, status, error) {
@@ -957,116 +985,118 @@ $(document).on("click", ".notification_read", function () {
 });
 
 // ==transaction-history==
-const ctx = document.getElementById("creditChart").getContext("2d");
+let creditChart = document.getElementById("creditChart");
+if (creditChart) {
+    const ctx = document.getElementById("creditChart").getContext("2d");
+    // Create a gradient for the border color
+    const gradientBorder = ctx.createLinearGradient(0, 0, 1, 0);
+    gradientBorder.addColorStop(0, "#FF31A6");
 
-// Create a gradient for the border color
-const gradientBorder = ctx.createLinearGradient(0, 0, 1, 0);
-gradientBorder.addColorStop(0, "#FF31A6");
+    // Create a pattern canvas
+    const patternCanvas = document.createElement("canvas");
+    const patternContext = patternCanvas.getContext("2d");
+    patternCanvas.width = 18;
+    patternCanvas.height = 7;
 
-// Create a pattern canvas
-const patternCanvas = document.createElement("canvas");
-const patternContext = patternCanvas.getContext("2d");
-patternCanvas.width = 18;
-patternCanvas.height = 7;
+    // Draw dots on the pattern canvas
+    patternContext.fillStyle = "#FFC8DC"; // Dot color
+    patternContext.fillRect(0, 0, 6, 3);
+    patternContext.fillStyle = "#FFC8DC"; // Background color
+    patternContext.fillRect(0, 0, 6, 3);
+    patternContext.fillRect(0, 0, 6, 3);
 
-// Draw dots on the pattern canvas
-patternContext.fillStyle = "#FFC8DC"; // Dot color
-patternContext.fillRect(0, 0, 6, 3);
-patternContext.fillStyle = "#FFC8DC"; // Background color
-patternContext.fillRect(0, 0, 6, 3);
-patternContext.fillRect(0, 0, 6, 3);
+    // Create a pattern from the canvas
+    const pattern = ctx.createPattern(patternCanvas, "repeat");
 
-// Create a pattern from the canvas
-const pattern = ctx.createPattern(patternCanvas, "repeat");
+    const hiddenData = $("#graph_data").val();
+    const parsedData = JSON.parse(hiddenData);
 
-const hiddenData = $("#graph_data").val();
-const parsedData = JSON.parse(hiddenData);
+    // Step 2: Generate labels and data for Chart.js
+    const labels = parsedData.map((item) => item.month); // Extract months
+    const data = parsedData.map((item) => item.current_balance);
 
-// Step 2: Generate labels and data for Chart.js
-const labels = parsedData.map((item) => item.month); // Extract months
-const data = parsedData.map((item) => item.current_balance);
+    let lowestValue = Math.min(...data);
+    let highestValue = Math.max(...data);
 
-let lowestValue = Math.min(...data);
-let highestValue = Math.max(...data);
+    if (lowestValue !== 0) {
+        lowestValue = 0;
+    }
 
-if (lowestValue !== 0) {
-    lowestValue = 0;
-}
+    highestValue = highestValue + highestValue * 0.3;
 
-highestValue = highestValue + highestValue * 0.3;
+    if (highestValue < 7) {
+        highestValue += 2;
+    }
+    highestValue = Math.round(highestValue);
 
-if (highestValue < 7) {
-    highestValue += 2;
-}
-highestValue = Math.round(highestValue);
-
-let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
-if (stepSize % 2 !== 0) {
-    stepSize++; // Ensure stepSize is even for better readability
-}
-stepSize = Math.round(stepSize);
-new Chart(ctx, {
-    type: "line",
-    data: {
-        // labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        labels: labels,
-        datasets: [
-            {
-                label: "Credit Balance",
-                data: data,
-                // data: [400, 650, 500, 480, 490, 470, 500],
-                borderColor: gradientBorder,
-                backgroundColor: pattern,
-                borderWidth: 4,
-                pointBackgroundColor: "#ffffff",
-                pointBorderColor: "#ff5ca5",
-                pointBorderWidth: 5,
-                pointRadius: [0, 0, 0, 0, 0, 0, 8],
-                pointHoverRadius: 5,
-                tension: 0,
-                fill: true,
-            },
-        ],
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-            tooltip: {
-                enabled: true,
-            },
+    let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
+    if (stepSize % 2 !== 0) {
+        stepSize++; // Ensure stepSize is even for better readability
+    }
+    stepSize = Math.round(stepSize);
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            // labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: labels,
+            datasets: [
+                {
+                    label: "Credit Balance",
+                    data: data,
+                    // data: [400, 650, 500, 480, 490, 470, 500],
+                    borderColor: gradientBorder,
+                    backgroundColor: pattern,
+                    borderWidth: 4,
+                    pointBackgroundColor: "#ffffff",
+                    pointBorderColor: "#ff5ca5",
+                    pointBorderWidth: 5,
+                    pointRadius: [0, 0, 0, 0, 0, 0, 8],
+                    pointHoverRadius: 5,
+                    tension: 0,
+                    fill: true,
+                },
+            ],
         },
-        scales: {
-            x: {
-                grid: {
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
                     display: false,
                 },
-            },
-            y: {
-                // beginAtZero: true,
-                min: lowestValue,
-                max: highestValue,
-                ticks: {
-                    stepSize: stepSize,
-                },
-                grid: {
-                    color: "rgba(0, 0, 0, 0.05)",
+                tooltip: {
+                    enabled: true,
                 },
             },
-        },
-        layout: {
-            padding: 20,
-        },
-        elements: {
-            line: {
-                tension: 0,
-                borderWidth: 4,
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                    },
+                },
+                y: {
+                    // beginAtZero: true,
+                    min: lowestValue,
+                    max: highestValue,
+                    ticks: {
+                        stepSize: stepSize,
+                    },
+                    grid: {
+                        color: "rgba(0, 0, 0, 0.05)",
+                    },
+                },
             },
-            point: {
-                radius: 5,
+            layout: {
+                padding: 20,
+            },
+            elements: {
+                line: {
+                    tension: 0,
+                    borderWidth: 4,
+                },
+                point: {
+                    radius: 5,
+                },
             },
         },
-    },
-});
+    });
+}

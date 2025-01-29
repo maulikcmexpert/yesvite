@@ -36,7 +36,7 @@ class EventPotluckController extends Controller
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
         $event = decrypt($id);
-        $js = ['event_potluck'];
+        $js = ['event_potluck','guest_rsvp','post_like_comment'];
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -137,6 +137,22 @@ class EventPotluckController extends Controller
                 $eventDetails['event_name'] = $eventDetail->event_name;
                 $eventDetails['hosted_by'] = $eventDetail->hosted_by;
                 $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+                $rsvp_status = "";
+                $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+                    // $query->where('app_user', '1');
+                })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+                // dd($checkUserrsvp);
+                // if ($value->rsvp_by_date >= date('Y-m-d')) {
+
+                if ($checkUserrsvp != null) {
+
+                    if ($checkUserrsvp->rsvp_status == '1') {
+                        $rsvp_status = '1'; // rsvp you'r going
+                    } else if ($checkUserrsvp->rsvp_status == '0') {
+                        $rsvp_status = '0'; // rsvp you'r not going
+                    }
+
+                }
                 $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
                 $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
                 $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
@@ -176,7 +192,8 @@ class EventPotluckController extends Controller
                 foreach ($eventDetail->event_invited_user as $hostValues) {
                     $coHostDetail['id'] = $hostValues->user_id;
                     $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
-                    $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+                    $fullName = trim(($hostValues->user->firstname ?? '') . ' ' . ($hostValues->user->lastname ?? ''));
+                    $coHostDetail['name'] = !empty($fullName) ? $fullName : null;
                     $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
                     $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
                     $coHosts[] = $coHostDetail;
@@ -243,7 +260,7 @@ class EventPotluckController extends Controller
                     if ($eventDetail->start_date != $eventDetail->end_date) {
                         $eventData[] = "Multiple Day Event";
                     }
-                    if (!empty($eventData)) {
+                    if (!empty($eventData) || empty($eventData)) {
                         $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                         $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                         $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
@@ -394,14 +411,14 @@ class EventPotluckController extends Controller
         //}
 
 
-        DB::beginTransaction();
+
         EventPotluckCategory::Create([
             'event_id' => $request->event_id,
             'user_id' => $user->id,
             'category' => $request->category,
-            'quantity' => $request->quantity
+            'quantity' => $request->category_quantity
         ]);
-        DB::commit();
+
         return redirect()->back()->with('Potluck category created');
     }
     public function getCategory($id)

@@ -1,4 +1,4 @@
-{{-- {{dd($rsvpSent)}} --}}
+{{-- {{dd($eventDetails)}} --}}
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
@@ -40,7 +40,10 @@
            aria-selected="{{ $page == 'photos' ? 'true' : 'false' }}">
             Photos
         </a>
-
+        @if (
+            ($eventDetails['is_host'] == 1 && $eventDetails['podluck'] == 1) ||  // Host and Potluck enabled
+            ($eventDetails['is_host'] == 0 && $eventDetails['rsvp_status'] == '1' ) // Not host but RSVP confirmed
+        )
         <!-- Potluck Tab -->
         <a href="{{ route('event.event_potluck', ['id' => encrypt($event)]) }}"
            class="nav-link {{ $page == 'potluck' ? 'active' : '' }}"
@@ -50,5 +53,6 @@
            aria-selected="{{ $page == 'potluck' ? 'true' : 'false' }}">
             Potluck
         </a>
+        @endif
     </div>
 </nav>

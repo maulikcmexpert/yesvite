@@ -74,7 +74,7 @@ header{
     height: 100%;
 }
 
-.g-badge{
+.g-badge,.n-badge{
     display: inline-block;
     background-color: var(--pink);
     border-radius: 100px;
@@ -98,6 +98,10 @@ header{
     border-radius: 50%;
     background-color: transparent;
     border: none;
+}
+
+.header-profile-wrp .profile-drop-down-menu img{
+    border-radius: 50%;
 }
 
 .header-profile-wrp h5{
@@ -239,6 +243,19 @@ header{
     height: 40px;
 }
 
+.accordion-button-img-wrp h5{
+    font-family: var(--SFProDisplay-Semibold);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+
+}
+
 .accordion-button-content-wrp h3{
     font-family: var(--SFProDisplay-Bold);
     font-size: 15px;
@@ -299,6 +316,18 @@ header{
     height: 40px;
     border-radius: 50%;
     position: relative;
+}
+
+.notification-drodown-body-inner-img h5{
+    font-family: var(--SFProDisplay-Semibold);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
 }
 
 .notification-drodown-body-inner-img img{
@@ -367,6 +396,7 @@ header{
     background-color: var(--pink);
     border-radius: 50%;
     margin-bottom: 0px;
+    margin-left: auto;
 }
 
 .notification-drodown-body-inner{
@@ -752,6 +782,39 @@ header{
     height: 16px !important;
 }
 
+.notification-video-wrp{
+    justify-content: start !important;
+}
+
+.noification-simple-text-wrp{
+    border: 1px solid var(--border);
+    background-color: var(--border);
+    padding: 5px 10px;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.noification-simple-text-wrp p{
+    font-family: var(--SFProDisplay-Regular) !important;
+    color: var(--secondary-black) !important;
+}
+
+.notification-rsvp-btn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 15px;
+    line-height: normal;
+    color: var(--pink);
+    padding: 15px 20px;
+    border-radius: 10px;
+    background-color: transparent;
+    margin-top: 20px;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 1399px) {
@@ -800,6 +863,10 @@ header{
         padding: 0px !important;
         border: none !important;
         transition: 0.3s;
+    }
+
+    .moblie-menu-bar svg path{
+        stroke: var(--secondary-black);
     }
 
     .active.mobile-menu-wrp{

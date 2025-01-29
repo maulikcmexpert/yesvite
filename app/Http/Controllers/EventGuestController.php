@@ -35,7 +35,7 @@ class EventGuestController extends Controller
         $title = 'event guest';
         $page = 'front.event_wall.event_guest';
         $user  = Auth::guard('web')->user();
-        $js = ['event_guest'];
+        $js = ['event_guest','post_like_comment'];
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -61,6 +61,23 @@ class EventGuestController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $rsvp_status = "";
+            $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+                // $query->where('app_user', '1');
+            })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+            // dd($checkUserrsvp);
+            // if ($value->rsvp_by_date >= date('Y-m-d')) {
+
+            if ($checkUserrsvp != null) {
+
+                if ($checkUserrsvp->rsvp_status == '1') {
+                    $rsvp_status = '1'; // rsvp you'r going
+                } else if ($checkUserrsvp->rsvp_status == '0') {
+                    $rsvp_status = '0'; // rsvp you'r not going
+                }
+
+            }
+            $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventDetails['host_id'] = $eventDetail->user_id;
@@ -100,7 +117,8 @@ class EventGuestController extends Controller
             foreach ($eventDetail->event_invited_user as $hostValues) {
                 $coHostDetail['id'] = $hostValues->user_id;
                 $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
-                $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+                $fullName = trim(($hostValues->user->firstname ?? '') . ' ' . ($hostValues->user->lastname ?? ''));
+            $coHostDetail['name'] = !empty($fullName) ? $fullName : null;
                 $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
                 $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
                 $coHosts[] = $coHostDetail;
@@ -145,6 +163,7 @@ class EventGuestController extends Controller
             }
             $eventDetails['event_detail'] = "";
             if ($eventDetail->event_settings) {
+                // dd(1);
                 $eventData = [];
                 if ($eventDetail->event_settings->allow_for_1_more == '1') {
                     $eventData[] = "Can Bring Guests ( limit " . $eventDetail->event_settings->allow_limit . ")";
@@ -167,7 +186,7 @@ class EventGuestController extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if (!empty($eventData)) {
+                if (!empty($eventData) || empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
@@ -306,6 +325,8 @@ class EventGuestController extends Controller
 
         return response()->json([
             'id' => $guest->id,
+            'user_id' => $guest->user_id,
+            'event_id'=> $guest->event_id,
             'firstname' => $guest->user->firstname,
             'lastname' => $guest->user->lastname,
             'email' => $guest->user->email,
@@ -352,5 +373,26 @@ class EventGuestController extends Controller
 
         // Handle the case where guest is not found
         return redirect()->back()->with('success', 'RSVP updated successfully.');
+    }
+
+
+    public function removeGuestFromInvite(Request $request)
+    {
+
+        $user  = Auth::guard('web')->user();
+
+
+            $getGuest = EventInvitedUser::where(['event_id' => $request['event_id'], 'user_id' => $request['user_id']])->first();
+            if ($getGuest != null) {
+
+                $checkNotificationdata = Notification::where(['event_id' => $request['event_id'], 'user_id' => $request['user_id']])->first();
+                if ($checkNotificationdata != null) {
+                    $checkNotificationdata->delete();
+                }
+
+                $getGuest->delete();
+                return response()->json(['success' => true, 'message' => "Guest removed successfully"]);
+            }
+
     }
 }

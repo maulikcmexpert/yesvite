@@ -2545,8 +2545,8 @@
     margin: 0 auto 16px !important;
 }
 .cancel-event .delete-icon img {
-    width: 100%;
-    height: 100%;
+    width: 24px !important; 
+    height: 24px !important;
     border-radius: 100%;
 }
 .cancel-event .delete-modal-head h4 {
@@ -2819,6 +2819,28 @@
     width: 100%;
     text-align: center;
     box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.4);
+}
+
+.calendar-wrp .accordion-header{
+    position: relative;
+}
+
+.calendar-wrp .accordion-header span{
+    border: 1px solid var(--border);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: normal;
+    color: var(--secondary-black);
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
+
+.rsvp_minus_notify:disabled, .rsvp_plus_notify:disabled{
+    background-color: gray !important;
 }
 
 /* ===Responsive=== */
@@ -3232,7 +3254,7 @@
     }
     .home-upcoming-events-card-right {
         max-width: 145px;
-        height: 120px;
+        height: 140px;
     }
     .home-upcoming-events-card-left {
         flex-basis: 80%;

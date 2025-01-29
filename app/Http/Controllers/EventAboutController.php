@@ -33,7 +33,9 @@ class EventAboutController extends Controller
         $title = 'event about';
         $page = 'front.event_wall.event_about';
         $user  = Auth::guard('web')->user();
-        $js = ['event_about_rsvp'];
+        $js = ['event_about_rsvp','guest_rsvp','post_like_comment'];
+        $current_page = "about";
+        $login_user_id  = $user->id;
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -58,12 +60,31 @@ class EventAboutController extends Controller
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
-            $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $eventDetails['podluck'] = ($eventDetail->event_settings != null && $eventDetail->event_settings->podluck != null) ? $eventDetail->event_settings->podluck : "0";
+            $rsvp_status = "";
+            $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+                // $query->where('app_user', '1');
+            })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+            // dd($checkUserrsvp);
+            // if ($value->rsvp_by_date >= date('Y-m-d')) {
+
+            if ($checkUserrsvp != null) {
+
+                if ($checkUserrsvp->rsvp_status == '1') {
+                    $rsvp_status = '1'; // rsvp you'r going
+                } else if ($checkUserrsvp->rsvp_status == '0') {
+                    $rsvp_status = '0'; // rsvp you'r not going
+                }
+            }
+            $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventDetails['host_id'] = $eventDetail->user_id;
             $eventDetails['event_date'] = $eventDetail->start_date;
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+            $eventDetails['end_date'] = $eventDetail->end_date;
+            $eventDetails['end_time'] = $eventDetail->rsvp_end_time;
+
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 
             //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
@@ -98,7 +119,8 @@ class EventAboutController extends Controller
             foreach ($eventDetail->event_invited_user as $hostValues) {
                 $coHostDetail['id'] = $hostValues->user_id;
                 $coHostDetail['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
-                $coHostDetail['name'] = $hostValues->user->firstname . ' ' . $hostValues->user->lastname;
+                $fullName = trim(($hostValues->user->firstname ?? '') . ' ' . ($hostValues->user->lastname ?? ''));
+                $coHostDetail['name'] = !empty($fullName) ? $fullName : null;
                 $coHostDetail['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
                 $coHostDetail['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
                 $coHosts[] = $coHostDetail;
@@ -165,7 +187,7 @@ class EventAboutController extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
-                if (!empty($eventData)) {
+                if (!empty($eventData) || empty($eventData)) {
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
@@ -298,10 +320,9 @@ class EventAboutController extends Controller
             //         $rsvp_attempt =  'yes_to_no';
             //     }
             // }
-            $login_user_id  = $user->id;
-            $current_page = "about";
 
-            return view('layout', compact('page', 'title', 'js', 'login_user_id','eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
+
+            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {
@@ -310,7 +331,8 @@ class EventAboutController extends Controller
 
             // return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+            // dd($e);
+            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'current_page'));
         }
     }
 

@@ -1,4 +1,4 @@
-{{-- {{dd( $eventInfo  )}} --}}
+{{-- {{dd( $eventDetails  )}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -25,7 +25,7 @@
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Wall
+                                    Guest
                                 </li>
                             </ol>
                         </nav>
@@ -163,7 +163,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            {{-- <div class="col-lg-12">
                                                 <div class="failed-invite">
                                                     <a type="button" class="faild-data" data-bs-toggle="modal"
                                                         data-bs-target="#failed">
@@ -210,7 +210,7 @@
                                                 <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#uploadcsv">upload
                                                     csv</button>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="guest-user-list cmn-card">
@@ -244,8 +244,9 @@
                                                 // Total attending
                                                 $totalAttending = $totalAdults + $totalKids;
                                             @endphp
-
+@if (!empty($guestArray))
                                             @foreach($guestArray as $guest)
+                                       {{-- {{     dd($guest['id'])}} --}}
                                                 @if (isset($guest['user']))
                                                     @php
                                                         $user = $guest['user']; // Fetch user array
@@ -253,7 +254,7 @@
                                                         $isDisabled =
                                                             $eventDetails['host_id'] == $user['id'] ? 'd-none' : '';
                                                     @endphp
-                                                    <div class="guest-user-box {{ $isDisabled }}">
+                                                    <div class="guest-user-box {{ $isDisabled }}" data-guest-id="{{ $guest['id'] }}">
                                                         <div class="guest-list-data">
                                                             <a href="#" class="guest-img">
                                                                 @if ($user['profile'] != '')
@@ -277,7 +278,8 @@
                                                                 </h5>
                                                             @endif
 
-
+<input type="hidden" id="eventID" value="{{$guest['event_id']}}">
+<input type="hidden" id="user_id" value="{{$guest['user_id']}}">
 
                                                             </a>
                                                             <div class="d-flex flex-column">
@@ -294,7 +296,7 @@
                                                                             : '';
                                                                     // dd($login_user_id);
                                                                 @endphp
-                                                                <button class="edit-btn {{ $isDisabled }}"
+                                                                <button class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
                                                                     data-bs-toggle="modal" data-bs-target="#editrsvp"
                                                                     data-guest-id="{{ $guest['id'] }}">
                                                                     <svg width="20" height="20"
@@ -364,7 +366,7 @@
                                                         </div>
 
                                                         @if ($guest['rsvp_status'] == '1')
-                                                            <div class="sucess-yes">
+                                                            <div class="sucess-yes" data-guest-id="{{ $guest['id'] }}">
                                                                 <h5 class="green">YES</h5>
                                                                 <div class="sucesss-cat ms-auto">
                                                                     <svg width="15" height="15"
@@ -391,17 +393,18 @@
                                                                 </div>
                                                             </div>
                                                         @elseif ($guest['rsvp_status'] == '0')
-                                                            <div class="sucess-no">
+                                                            <div class="sucess-no"  data-guest-id="{{ $guest['id'] }}">
                                                                 <h5>NO</h5>
                                                             </div>
                                                         @elseif ($guest['rsvp_status'] == null)
-                                                            <div class="no-reply">
+                                                            <div class="no-reply"  data-guest-id="{{ $guest['id'] }}">
                                                                 <h5>NO REPLY</h5>
                                                             </div>
                                                         @endif
                                                     </div>
                                                 @endif
                                             @endforeach
+                                            @endif
 
 
                                         </div>
@@ -418,7 +421,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-0">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo"  />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" />
             </div>
         </div>
     </div>
@@ -1215,7 +1218,7 @@
 
                 </div>
                 <div class="modal-footer rsvp-button-wrp">
-                    <button type="button" class="btn btn-secondary remove-btn" data-bs-dismiss="modal">Remove
+                    <button type="button" class="btn btn-secondary remove-btn remove_guest_page" data-bs-dismiss="modal" data-event-id="{{$event}}" >Remove
                         Guest</button>
                     <button type="button" class="btn btn-secondary save-btn" data-bs-dismiss="modal">Update</button>
 

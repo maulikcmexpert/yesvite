@@ -1,25 +1,35 @@
-<div class="category-main-dishesh potluckmain-{{$potluckkey}}">
+<div class="category-main-dishesh potluckmain-{{$lastItemIndex}}">
     <div class="category-list">
         <div class="list-header">
-            <span class="me-1 list-sub-head total-self-bring-{{$potluckkey}}">0</span>
+            <span class="me-1 list-sub-head total-self-bring-{{$lastItemIndex}}">0</span>
             <div>
-                <h5 class="category_name-{{$potluckkey}}">{{$categoryName}}</h5>
+                <h5 class="category_name-{{$lastItemIndex}}">{{$categoryName}}</h5>
                 <p>Total Commited</p>
             </div>
             <div class="ms-auto d-flex align-items-center ">
-                <span class="me-2 missing-category-h6-{{$potluckkey}} missing-category-svg-{{$potluckkey}}" style="display: none;">
+                <span class="me-2 missing-category-h6-{{$lastItemIndex}} missing-category-svg-{{$lastItemIndex}}" style="display: none;">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" />
                     </svg>
                 </span>
-                <h6 class="me-2 missing-category-h6-{{$potluckkey}}" style="display: none;"><span id="missing-category-{{$potluckkey}}">{{$categoryQuantity}}</span> Missing</h6>
-                <input type="hidden" class="total-potluck-category-{{$potluckkey}}" value="{{$categoryQuantity}}" />
-                <a href="#" class="me-3 add_potluck_item" id="potluck-{{$potluckkey}}" data-id="{{$potluckkey}}">
+                <h6 class="me-2 missing-category-h6-{{$lastItemIndex}}" style="display: none;"><span id="missing-category-{{$lastItemIndex}}">{{$categoryQuantity}}</span> Missing</h6>
+
+                {{-- NEW CODE --}}
+                <span class="me-2 extra-category-h6-{{$lastItemIndex}} extra-category-svg-{{$lastItemIndex}}" style="display: none;">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>
+                </span>
+                <h6 class="me-2 extra-category-h6-{{$lastItemIndex}}" style="display: none;color:#34C05C"><span id="extra-category-{{$lastItemIndex}}">{{$categoryQuantity}}</span> Item Over</h6>
+
+
+                {{-- END CODE --}}
+
+                <input type="hidden" class="total-potluck-category-{{$lastItemIndex}}" value="{{$categoryQuantity}}" />
+                <a href="#" class="me-3 add_potluck_item" id="potluck-{{$lastItemIndex}}" data-id="{{$lastItemIndex}}">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.9998 0.166016C5.03067 0.166016 0.166504 5.03018 0.166504 10.9993C0.166504 16.9685 5.03067 21.8327 10.9998 21.8327C16.969 21.8327 21.8332 16.9685 21.8332 10.9993C21.8332 5.03018 16.969 0.166016 10.9998 0.166016ZM15.3332 11.8118H11.8123V15.3327C11.8123 15.7768 11.444 16.1452 10.9998 16.1452C10.5557 16.1452 10.1873 15.7768 10.1873 15.3327V11.8118H6.6665C6.22234 11.8118 5.854 11.4435 5.854 10.9993C5.854 10.5552 6.22234 10.1868 6.6665 10.1868H10.1873V6.66602C10.1873 6.22185 10.5557 5.85352 10.9998 5.85352C11.444 5.85352 11.8123 6.22185 11.8123 6.66602V10.1868H15.3332C15.7773 10.1868 16.1457 10.5552 16.1457 10.9993C16.1457 11.4435 15.7773 11.8118 15.3332 11.8118Z" fill="#F73C71" />
                     </svg>
                 </a>
-                <a href="#" type="button" class="delete_potluck_category" data-id="{{$potluckkey}}">
+                <a href="#" type="button" class="delete_potluck_category" data-id="{{$lastItemIndex}}">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.5 4.98307C14.725 4.70807 11.9333 4.56641 9.15 4.56641C7.5 4.56641 5.85 4.64974 4.2 4.81641L2.5 4.98307" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M7.0835 4.14102L7.26683 3.04935C7.40016 2.25768 7.50016 1.66602 8.9085 1.66602L11.0918 1.66602C12.5002 1.66602 12.6085 2.29102 12.7335 3.05768L12.9168 4.14102" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -32,7 +42,7 @@
                     <i class="fa-solid fa-ellipsis-vertical dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"></i>
                     <div class="potlak-edit-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <ul>
-                            <li class="edit_category edit_potluck_category-{{$potluckkey}}" data-id="{{$potluckkey}}" data-category_name="{{$categoryName}}" data-category_quantity="{{$categoryQuantity}}">
+                            <li class="edit_category edit_potluck_category-{{$lastItemIndex}}" data-id="{{$lastItemIndex}}" data-category_name="{{$categoryName}}" data-category_quantity="{{$categoryQuantity}}">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5001 18.9577L7.50008 18.9577C2.97508 18.9577 1.04175 17.0243 1.04175 12.4993L1.04175 7.49935C1.04175 2.97435 2.97508 1.04102 7.50008 1.04102L9.16675 1.04102C9.50842 1.04102 9.79175 1.32435 9.79175 1.66602C9.79175 2.00768 9.50842 2.29102 9.16675 2.29102L7.50008 2.29102C3.65841 2.29102 2.29175 3.65768 2.29175 7.49935L2.29175 12.4993C2.29175 16.341 3.65841 17.7077 7.50008 17.7077L12.5001 17.7077C16.3417 17.7077 17.7084 16.341 17.7084 12.4993L17.7084 10.8327C17.7084 10.491 17.9917 10.2077 18.3334 10.2077C18.6751 10.2077 18.9584 10.491 18.9584 10.8327L18.9584 12.4993C18.9584 17.0243 17.0251 18.9577 12.5001 18.9577Z" fill="#94A3B8"/>
                                 <path d="M7.08336 14.7424C6.57503 14.7424 6.10836 14.5591 5.76669 14.2258C5.35836 13.8174 5.18336 13.2258 5.27503 12.6008L5.63336 10.0924C5.70003 9.60911 6.01669 8.98411 6.35836 8.64245L12.925 2.07578C14.5834 0.417448 16.2667 0.417448 17.925 2.07578C18.8334 2.98411 19.2417 3.90911 19.1584 4.83411C19.0834 5.58411 18.6834 6.31745 17.925 7.06745L11.3584 13.6341C11.0167 13.9758 10.3917 14.2924 9.90836 14.3591L7.40003 14.7174C7.29169 14.7424 7.18336 14.7424 7.08336 14.7424ZM13.8084 2.95911L7.24169 9.52578C7.08336 9.68411 6.90003 10.0508 6.86669 10.2674L6.50836 12.7758C6.47503 13.0174 6.52503 13.2174 6.65003 13.3424C6.77503 13.4674 6.97503 13.5174 7.21669 13.4841L9.72503 13.1258C9.94169 13.0924 10.3167 12.9091 10.4667 12.7508L17.0334 6.18411C17.575 5.64245 17.8584 5.15911 17.9 4.70911C17.95 4.16745 17.6667 3.59245 17.0334 2.95078C15.7 1.61745 14.7834 1.99245 13.8084 2.95911Z" fill="#94A3B8"/>
@@ -40,7 +50,7 @@
                                 </svg>
                                 Edit
                             </li>
-                            <li class="delete_potluck_category" data-id="{{$potluckkey}}">
+                            <li class="delete_potluck_category" data-id="{{$lastItemIndex}}">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M5.6665 3.31398L5.81317 2.44065C5.91984 1.80732 5.99984 1.33398 7.1265 1.33398H8.87317C9.99984 1.33398 10.0865 1.83398 10.1865 2.44732L10.3332 3.31398" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -63,7 +73,7 @@
             </span>
             <p>Nobody has added anything yet</h5>
         </div>
-        <div class="list-slide list-slide-{{$potluckkey}}">
+        <div class="list-slide list-slide-{{$lastItemIndex}}">
         </div>
     </div>
     <a href="#" class="listing-arrow">

@@ -1,3 +1,4 @@
+{{-- {{dd($eventList)}} --}}
 @php
 $getSocialLink = getSocialLink();
 @endphp
@@ -12,7 +13,7 @@ $getSocialLink = getSocialLink();
                 <div class="home-center-main">
                     <div class="home-center-content">
                         <x-main_menu.home.profile :profileData="$profileData" />
-            
+
                         <x-main_menu.home.event_upcoming :eventList="$eventList" />
                     </div>
                     <button type="button" class="mobile-calender-btn">
@@ -30,7 +31,7 @@ $getSocialLink = getSocialLink();
                         <path d="M7.41209 11.4167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M7.41209 13.9167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        
+
                         {{-- <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                           <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -52,6 +53,8 @@ $getSocialLink = getSocialLink();
                       <x-main_menu.home.event_drafts :draftEventArray="$draftEventArray" />
                   </div>
                   <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
+                        <h2 class="calendar-heading">All Events</h2>
+                    <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
                     <div id="responsive-calender-months" class="responsive-calender-months"></div>
                   </div>
                   <div class="responsive-calender-month-wrp">

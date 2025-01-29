@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -87,7 +88,7 @@ class ApiAuthController extends Controller
                     'remember_token' =>  $randomString,
                     'register_type' => 'API Normal register',
                     'app_user' => '1',
-                    'coins' => env('DEFAULT_COIN'),
+                    'coins' => env('DEFAULT_COIN') ?? 30,
                 ]);
 
                 DB::commit();
@@ -105,8 +106,8 @@ class ApiAuthController extends Controller
                 $coin_transaction->user_id = $existUser->id;
                 $coin_transaction->status = '0';
                 $coin_transaction->type = 'credit';
-                $coin_transaction->coins = env('DEFAULT_COIN');
-                $coin_transaction->current_balance = env('DEFAULT_COIN');
+                $coin_transaction->coins = env('DEFAULT_COIN') ?? 30;
+                $coin_transaction->current_balance = env('DEFAULT_COIN') ?? 30;
                 $coin_transaction->description = 'Signup Bonus';
                 $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
                 $coin_transaction->save();
@@ -120,6 +121,8 @@ class ApiAuthController extends Controller
             } catch (QueryException $e) {
 
                 DB::rollBack();
+                Log::error('Error to register user ' . $e);
+                print_r($e);
                 return response()->json(['status' => 0, 'message' => "Something went wrong"]);
             }
         }
@@ -168,7 +171,7 @@ class ApiAuthController extends Controller
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
                 $checkUser->register_type =  'API Normal register';
-                $checkUser->coins =  env('DEFAULT_COIN');
+                $checkUser->coins =  env('DEFAULT_COIN') ?? 30;
                 $checkUser->save();
             } else {
                 $checkUser = new User();
@@ -181,7 +184,7 @@ class ApiAuthController extends Controller
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
                 $checkUser->register_type =  'API Normal register';
-                $checkUser->coins =  env('DEFAULT_COIN');
+                $checkUser->coins =  env('DEFAULT_COIN') ?? 30;
                 $checkUser->save();
 
                 // $usersignup =  User::create([
@@ -212,8 +215,8 @@ class ApiAuthController extends Controller
             $coin_transaction->user_id = $checkUser->id;
             $coin_transaction->status = '0';
             $coin_transaction->type = 'credit';
-            $coin_transaction->coins = env('DEFAULT_COIN');
-            $coin_transaction->current_balance = env('DEFAULT_COIN');
+            $coin_transaction->coins = env('DEFAULT_COIN') ?? 30;
+            $coin_transaction->current_balance = env('DEFAULT_COIN') ?? 30;
             $coin_transaction->description = 'Signup Bonus';
             $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
             $coin_transaction->save();
@@ -227,6 +230,8 @@ class ApiAuthController extends Controller
         } catch (QueryException $e) {
 
             DB::rollBack();
+            Log::error('Error to register user ' . $e);
+            print_r($e);
             return response()->json(['status' => 0, 'message' => "Something went wrong"]);
         }
     }
@@ -262,9 +267,9 @@ class ApiAuthController extends Controller
                 ],
             );
         }
-        $getUser = User::where('email',$input['email'])->first();
-        if($getUser){
-            if($getUser->password == NULL){
+        $getUser = User::where('email', $input['email'])->first();
+        if ($getUser) {
+            if ($getUser->password == NULL) {
                 return response()->json(['status' => 0, 'message' => 'Invalid login method']);
             }
         }
@@ -491,7 +496,7 @@ class ApiAuthController extends Controller
             }
             $usersignup->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
             $usersignup->register_type = 'API Social signup';
-            $usersignup->coins = env('DEFAULT_COIN');
+            $usersignup->coins = env('DEFAULT_COIN') ?? 30;
             $usersignup->save();
 
             $userId = $usersignup->id;
@@ -510,8 +515,8 @@ class ApiAuthController extends Controller
             $coin_transaction->user_id = $userId;
             $coin_transaction->status = '0';
             $coin_transaction->type = 'credit';
-            $coin_transaction->coins = env('DEFAULT_COIN');
-            $coin_transaction->current_balance = env('DEFAULT_COIN');
+            $coin_transaction->coins = env('DEFAULT_COIN') ?? 30;
+            $coin_transaction->current_balance = env('DEFAULT_COIN') ?? 30;
             $coin_transaction->description = 'Signup Bonus';
             $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
             $coin_transaction->save();
@@ -741,7 +746,7 @@ class ApiAuthController extends Controller
             }
 
             if ($verifyUser->email_verified_at == NULL) {
-                $faild="verified";
+                $faild = "verified";
                 $verifyUser->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;

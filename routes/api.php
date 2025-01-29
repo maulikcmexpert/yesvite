@@ -22,6 +22,8 @@ use App\Http\Controllers\TwilioController;
 
 
 Route::post('/twilio-webhook', [TwilioController::class, 'handleIncomingMessage']);
+Route::get('/twilio-deliverystatus', [TwilioController::class, 'deliverystatus']);
+Route::post('/twilio-deliverystatus', [TwilioController::class, 'deliverystatus']);
 
 Route::post('/user/login', [ApiAuthController::class, 'login']);
 Route::post('/user/social_login', [ApiAuthController::class, 'socialLogin']);

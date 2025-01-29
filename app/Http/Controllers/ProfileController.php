@@ -73,11 +73,12 @@ class ProfileController extends BaseController
         }
         $user['subscribe_status'] = checkSubscription($user->id);
 
-
+        $user_privacy=UserProfilePrivacy::where('user_id',$user->id)->get();
         return view('layout', compact(
             'title',
             'page',
             'user',
+            'user_privacy',
             'draft_events',
             'js'
 
@@ -439,7 +440,11 @@ class ProfileController extends BaseController
                 'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
+
 
             ]
         )->findOrFail($id);
@@ -448,7 +453,9 @@ class ProfileController extends BaseController
         $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
-
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;
         if ($user->user_profile_privacy->isNotEmpty()) {
 
             foreach ($user->user_profile_privacy as $value) {
