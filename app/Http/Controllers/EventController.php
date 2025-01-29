@@ -2855,13 +2855,13 @@ class EventController extends BaseController
         }
         
         
-        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state . ' ' . $event_creation->zipcode . ' ' . $event_creation->city;
-        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state . ' ' . $request->zipcode . ' ' . $request->city;
+        $oldAddress = $event_creation->address1 . ' ' . $event_creation->address_2 . ' ' . $event_creation->state  . ' ' . $event_creation->city . ' ' . $event_creation->zipcode;
+        $newAddress = $request->address1 . ' ' . $request->address_2 . ' ' . $request->state  . ' ' . $request->city . ' ' . $request->zipcode;  
         $isaddress = 0;
         if ($oldAddress !== $newAddress) {
             $isaddress = 1;
         }
-        
+        dd($oldAddress,$newAddress)
         
         $newstart_time = $request->start_time;
         $oldstart_time = $event_creation->rsvp_start_time;
