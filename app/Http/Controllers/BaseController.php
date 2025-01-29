@@ -26,11 +26,11 @@ class BaseController extends Controller
     protected function getPrices()
     {
 
-        $users = UserOpt::select('id', 'event_id', 'event_invited_user_id')
-            ->groupBy('event_id')
-            ->get();
-        dd($users);
-        // handleIncomingMessage("5103005587", "yes");
+        // $users = UserOpt::select('id', 'event_id', 'event_invited_user_id')
+        //     ->groupBy('event_id')
+        //     ->get();
+        // dd($users);
+        // handleIncomingMessage("9723840340", "yes");
         // handleSMSInvite("+91 97238 40340", "yesvite web", "srryghhhggguvj", 814, 2787);
         return [
             '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15, 'price' => 21.00],
