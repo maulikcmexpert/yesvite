@@ -1,7 +1,9 @@
 
 @php
 $notification_list=getNotificationList();
+$notification = getTotalUnreadNotification($user->id);
 
+dd($notification);
 @endphp
 @if (Auth::guard('web')->check())
 
