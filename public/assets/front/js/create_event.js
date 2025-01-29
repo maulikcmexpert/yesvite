@@ -2755,7 +2755,8 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         console.log(newStartTime);
         console.log($(this).val());
         if(newStartTime>=endtimelatesr){
-            datepicker();
+            var newEndTime = moment(newStartTime, "HH:mm").add(1, "hours").format("HH:mm");
+            $(this).val(newEndTime);  
         }
         if (
             newEndTime != "" &&
