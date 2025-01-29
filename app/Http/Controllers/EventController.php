@@ -2861,7 +2861,7 @@ class EventController extends BaseController
         if ($oldAddress !== $newAddress) {
             $isaddress = 1;
         }
-        dd($oldAddress,$newAddress);
+        dd($event_creation,$oldAddress,$newAddress);    
         
         $newstart_time = $request->start_time;
         $oldstart_time = $event_creation->rsvp_start_time;
