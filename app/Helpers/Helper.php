@@ -1843,7 +1843,7 @@ function handleIncomingMessage($receiverNumber, $message)
     if (strtolower($message) == 'yes') {
 
         $users = UserOpt::where(['phone' => $cleanedNumber, 'opt_in_status' => false])
-            ->select('event_id', 'event_invited_user_id')
+            ->select('id', 'event_id', 'event_invited_user_id')
             ->groupBy('event_id', 'event_invited_user_id')
             ->get();
         sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
