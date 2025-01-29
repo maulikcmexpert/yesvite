@@ -3584,7 +3584,14 @@ function savePage1Data(close = null) {
     // }else{
     //     rsvp_by_date_set = '0';
     // }
+    if (end_time) {
+        rsvp_end_time_set = "1";
+    }
 
+    if (rsvp_by_date_set) {
+        // rsvp_by_date = $("#rsvp-by-date").val();
+        rsvp_by_date_set = "1";
+    }
     if (close == null || close == "") {
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
@@ -3602,7 +3609,7 @@ function savePage1Data(close = null) {
         }
         var rsvp_end_time = "";
         if (end_time) {
-            rsvp_end_time_set = "1";
+            // rsvp_end_time_set = "1";
             if (rsvp_end_time == "") {
                 $("#end-time-error")
                     .css("display", "block")
