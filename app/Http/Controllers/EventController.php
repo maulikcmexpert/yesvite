@@ -693,7 +693,7 @@ class EventController extends BaseController
         }
         if (isset($request->textData) && json_encode($request->textData) != '') {
             if ($request->temp_id != '' && $request->temp_id != null) {
-                dd($request->temp_id);
+                // dd($request->temp_id);
                 $tempData = TextData::where('id', $request->temp_id)->first();
                 if ($tempData) {
                     $sourceImagePath = asset('storage/canvas/' . $tempData->image);
