@@ -171,15 +171,6 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mb-2">
-                                        <div class="input-form mb-0">
-                                            <textarea name="about_me" class="" id="about_me">{{ $user->about_me}}</textarea>
-                                            <label for="code" class="floating-label about-label">About Me</label>
-                                            <div class="label-error">
-                                                <label id="about_me-error" class="error" for="about_me"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 mb-2">
                                         <div class="input-form  mb-0">
                                             <input type="text" class="form-control" id="city" name="city" value="{{ $user->city}}">
                                             <label for="city" class="floating-label ">City <span>*</span></label>
@@ -197,6 +188,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-12 mb-2">
+                                        <div class="input-form mb-0">
+                                            <textarea name="about_me" class="" id="about_me">{{ $user->about_me}}</textarea>
+                                            <label for="code" class="floating-label about-label">About Me</label>
+                                            <div class="label-error">
+                                                <label id="about_me-error" class="error" for="about_me"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
