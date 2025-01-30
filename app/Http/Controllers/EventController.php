@@ -2594,8 +2594,29 @@ class EventController extends BaseController
 
     public function saveSliderImg(Request $request)
     {
-        $imageSources = $request->imageSources;
+
+        $event_id = $request->eventId;
+
         $savedFiles = [];
+        if(isset($event_id) && $event_id!=''){
+            $getEventImages = EventImage::where('event_id', $event_id)->get();
+    
+            if (!empty($getEventImages)) {
+                foreach ($getEventImages as $key => $imgVal) {
+                    if ($key == 0) {
+                        continue;
+                    }
+                    $fileName =   $imgVal->image;
+                    $savedFiles[] = [
+                        'fileName' => $fileName,
+                        'deleteId' => $imgVal->id,
+                    ];
+                }
+            }
+        }
+
+        $imageSources = $request->imageSources;
+       
         $i = 0;
 
         // Check if there are existing images in the session and unlink them

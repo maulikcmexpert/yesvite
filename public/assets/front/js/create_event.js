@@ -8168,6 +8168,7 @@ $(document).on("click", ".save-slider-image", function () {
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
+                eventId:eventId,
                 imageSources: imageSources,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
