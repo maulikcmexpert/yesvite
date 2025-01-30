@@ -708,11 +708,18 @@ class EventController extends BaseController
                         $event_creation->design_image = $tempData->image;
                     }
                 }
-            } else {
-                $event_creation->design_image = $request->cutome_image;
+            } else if (isset($request->cutome_image)) {
+
+
+                if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
+                    $pathParts = explode('/', $request->cutome_image);
+                    $event_creation->design_image = end($pathParts);
+                } else {
+                    $event_creation->design_image = $request->cutome_image;
+                }
                 $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
-
+            // dd($event_creation->design_image);
             $textElemtents = $request->textData['textElements'];
 
             foreach ($textElemtents as $key => $textJson) {
@@ -991,6 +998,8 @@ class EventController extends BaseController
             }
 
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+                EventImage::where('event_id', $eventId)->where('type', 0)->delete();
+
                 EventImage::create([
                     'event_id' => $eventId,
                     'image' => $request->desgin_selected,
@@ -999,6 +1008,8 @@ class EventController extends BaseController
             }
 
             if (isset($request->slider_images) && !empty($request->slider_images)) {
+                EventImage::where('event_id', $eventId)->where('type', 1)->delete();
+
                 foreach ($request->slider_images as $key => $value) {
                     EventImage::create([
                         'event_id' => $eventId,
@@ -3273,6 +3284,7 @@ class EventController extends BaseController
                 $gift_registry = $request->gift_registry_data;
             }
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+                EventImage::where('event_id', $eventId)->where('type', 0)->delete();
                 EventImage::create([
                     'event_id' => $eventId,
                     'image' => $request->desgin_selected,
@@ -3281,6 +3293,7 @@ class EventController extends BaseController
             }
 
             if (isset($request->slider_images) && !empty($request->slider_images)) {
+                EventImage::where('event_id', $eventId)->where('type', 1)->delete();
                 foreach ($request->slider_images as $key => $value) {
                     EventImage::create([
                         'event_id' => $eventId,
