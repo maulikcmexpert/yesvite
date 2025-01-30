@@ -1183,63 +1183,6 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var oldDate = $(ed).attr("data-isDate");
-    // $("#event-date").daterangepicker(
-    //     {
-    //         autoUpdateInput: false,
-    //         locale: {
-    //             format: "MM/DD/YYYY",
-    //         },
-    //         showDropdowns: false,
-    //         startDate: moment().startOf("month"),
-    //         // endDate: moment().endOf("month"),
-    //         // minDate: moment().add(1, 'days'),
-    //         minDate: moment(),
-    //         // alwaysShowCalendars: true, // Keep the calendar visible
-    //         maxSpan: { days: 2 },
-    //     },
-
-    //     function (start, end, label) {
-    //         // const isDate = $(this)  // Get the data attribute inside the callback
-
-    //         selectedDates.clear();
-    //         // selectedDates.add(start.format("YYYY-MM-DD"));
-    //         // selectedDates.add(end.format("YYYY-MM-DD"));
-    //         // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
-    //         selectedDates.add(start.format("MM-DD-YYYY"));
-    //         selectedDates.add(end.format("MM-DD-YYYY"));
-    //         var eventDate =
-    //             start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
-    //         rsvp_by_date(start.format("MM-DD-YYYY"));
-    //         if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
-    //             eventDate = end.format("MM-DD-YYYY");
-    //         }
-    //         $("#event-date").val(eventDate);
-    //         $(".step_1_activity").html(
-    //             '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
-    //         );
-
-    //         $("#event-date").val(eventDate).trigger("change");
-
-    //         $(".activity_bar").children().not(".toggle-wrp").remove();
-    //         // $('#schedule').prop("checked",false);
-    //         // $('.add-activity-schedule').hide();
-    //         if (oldDate != "") {
-    //             $("#isnewdata").show();
-    //             $("#isolddata").hide();
-    //         }
-    //         // alert();
-    //         $("#end_time").prop("checked", false);
-    //         $(".end-time-create").val("");
-    //         $(".start-time-create").val("");
-    //         $(".end_time").css("display", "none");
-    //         if (selectedDates.size > 0) {
-    //             var activities = {};
-    //             eventData.activity = {};
-    //             var total_activities = 0;
-    //             set_activity_html(selectedDates);
-    //         }
-    //     }
-    // );
     $("#event-date").daterangepicker(
         {
             autoUpdateInput: false,
@@ -1248,34 +1191,47 @@ $(function () {
             },
             showDropdowns: false,
             startDate: moment().startOf("month"),
+            // endDate: moment().endOf("month"),
+            // minDate: moment().add(1, 'days'),
             minDate: moment(),
+            // alwaysShowCalendars: true, // Keep the calendar visible
             maxSpan: { days: 2 },
-            autoApply: false, // Ensures Apply button stays active
         },
+
         function (start, end, label) {
+            // const isDate = $(this)  // Get the data attribute inside the callback
+
             selectedDates.clear();
+            // selectedDates.add(start.format("YYYY-MM-DD"));
+            // selectedDates.add(end.format("YYYY-MM-DD"));
+            // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
             selectedDates.add(start.format("MM-DD-YYYY"));
             selectedDates.add(end.format("MM-DD-YYYY"));
-            
             var eventDate =
                 start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
             rsvp_by_date(start.format("MM-DD-YYYY"));
-    
-            if (start.format("MM-DD-YYYY") === end.format("MM-DD-YYYY")) {
+            if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
                 eventDate = end.format("MM-DD-YYYY");
             }
-    
-            $("#event-date").val(eventDate).trigger("change");
+            $("#event-date").val(eventDate);
             $(".step_1_activity").html(
                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
             );
-    
+
+            $("#event-date").val(eventDate).trigger("change");
+
             $(".activity_bar").children().not(".toggle-wrp").remove();
+            // $('#schedule').prop("checked",false);
+            // $('.add-activity-schedule').hide();
+            if (oldDate != "") {
+                $("#isnewdata").show();
+                $("#isolddata").hide();
+            }
+            // alert();
             $("#end_time").prop("checked", false);
             $(".end-time-create").val("");
             $(".start-time-create").val("");
             $(".end_time").css("display", "none");
-    
             if (selectedDates.size > 0) {
                 var activities = {};
                 eventData.activity = {};
@@ -1284,6 +1240,7 @@ $(function () {
             }
         }
     );
+
     $("#event-date").on("apply.daterangepicker", function (ev, picker) {
         picker.hide();
         $("#event-date").next().addClass("floatingfocus");
@@ -1292,12 +1249,7 @@ $(function () {
         picker.show();
         $("#event-date").next().addClass("floatingfocus");
     });
-    
-    $("#event-date").on("show.daterangepicker", function (ev, picker) {
-        $(".drp-buttons .applyBtn").removeAttr("disabled"); // Enable Apply button
-    });
 });
-
 // $(document).on('click',,function(){
 
 $(document).on("change", "#schedule", function () {
