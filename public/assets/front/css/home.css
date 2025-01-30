@@ -375,6 +375,8 @@
     margin: 0 auto;
     text-align: center;
     display: block;
+    height: 100%;
+
 }
 
 .collection-card.card-blue {
@@ -699,20 +701,29 @@
     margin-bottom: 0;
 }
 
-.collection-wrapper .accordion-button::after{
+/* .collection-wrapper .accordion-button::after{
     background-image: none !important;
     content: '\f078';
     font-family: 'fontAwesome';
-    /* width: 10px;
-    height: 10px; */
+    width: 10px;
+    height: 10px;
     position: absolute;
     right: 0px;
-    /* top: 39%; */
-    /* transform: translateY(-50%); */
+    top: 39%;
+    transform: translateY(-50%);
     color: var(--lightColor);
     pointer-events: none;
     font-size: 16px;
+} */
+
+/* .collection-wrapper .accordion-button::after{
+    filter: brightness(0) saturate(100%) invert(74%) sepia(7%) saturate(239%) hue-rotate(186deg) brightness(92%) contrast(91%);
+} */
+
+.collection-wrapper .accordion-button::after path{
+    stroke: #94A3B8;
 }
+
 
 
 

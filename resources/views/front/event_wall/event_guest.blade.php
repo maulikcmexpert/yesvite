@@ -163,7 +163,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-lg-12">
+                                            <div class="col-lg-12">
                                                 <div class="failed-invite">
                                                     <a type="button" class="faild-data" data-bs-toggle="modal"
                                                         data-bs-target="#failed">
@@ -210,7 +210,7 @@
                                                 <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#uploadcsv">upload
                                                     csv</button>
-                                            </div> --}}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="guest-user-list cmn-card">

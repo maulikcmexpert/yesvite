@@ -1682,6 +1682,9 @@ function logoutFromWeb($userId)
 function sendSMS($receiverNumber, $message)
 {
     try {
+        if (config('app.env', 'local') == 'local') {
+            return false;
+        }
 
         $account_sid = env('ACCOUNT_SID');
         $auth_token = env("AUTH_TOKEN");
