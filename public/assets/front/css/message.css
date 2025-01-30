@@ -1958,6 +1958,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
         width: 100%;
         margin-top: 10px;
     }
+    .user-detail h3#selected-user-name {
+        max-width: 115px;
+
+    }
 }
 
 @media only screen and (max-width:420px) {

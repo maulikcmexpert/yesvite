@@ -1793,6 +1793,14 @@ class EventController extends BaseController
         $fileName = '';
         $i = 0;
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
+            if (session()->has('shape_image')) {
+                $oldShapeImage = session('shape_image');
+                $oldShapeImagePath = public_path('storage/canvas/') . $oldShapeImage;
+                if (file_exists($oldShapeImagePath)) {
+                    unlink($oldShapeImagePath);
+                }
+                session()->forget('shape_image');
+            }
             if ($request->shapeImageUrl == $request->design_inner_image) {
                 $sourceImagePath = $request->shapeImageUrl;
                 $destinationDirectory = public_path('storage/canvas/');
@@ -1817,6 +1825,14 @@ class EventController extends BaseController
             }
         }
         if ($request->hasFile('image')) {
+            if (session()->has('desgin')) {
+                $oldDesignImage = session('desgin');
+                $oldDesignImagePath = public_path('storage/event_images/') . $oldDesignImage;
+                if (file_exists($oldDesignImagePath)) {
+                    unlink($oldDesignImagePath);
+                }
+                session()->forget('desgin');
+            }
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->move(public_path('storage/event_images'), $fileName);
