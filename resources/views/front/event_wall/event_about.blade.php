@@ -2114,13 +2114,13 @@
             document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
             document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
             document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
+            // document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
         } else {
             // Event has passed, set everything to "00"
             document.getElementById('countdownDays').innerText = "00";
             document.getElementById('countdownHours').innerText = "00";
             document.getElementById('countdownMinutes').innerText = "00";
-            document.getElementById('countdownSeconds').innerText = "00";
+            // document.getElementById('countdownSeconds').innerText = "00";
         }
     }
 
