@@ -2056,7 +2056,7 @@ class EventWallController extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    $newInviteGuest[] = [$id];
+                    $newInviteGuest[] = $id;
                    
                     // $newInviteGuest[] = ['id' => $id];
                 } else {
@@ -2075,7 +2075,7 @@ class EventWallController extends Controller
                         $updateUser->save();
                     }
                     // $newInvite[] = ['id' => $id];
-                    $newInvite[] = [$id];
+                    $newInvite[] = $id;
                 }
 
                 $ids[] = $id;
