@@ -8083,7 +8083,7 @@ $(document).on("change", ".slider_photo_2", function (event) {
     if (file) {
         $(".photo-slider-2").show();
         var reader = new FileReader();
-        $('.photo-edit-delete-1').show();
+        $('.photo-edit-delete-2').show();
         reader.onload = function (e) {
             $(".photo-slider-2").attr("src", e.target.result).show();
         };
@@ -8097,7 +8097,7 @@ $(document).on("change", ".slider_photo_3", function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-3").show();
-        $('.photo-edit-delete-1').show();
+        $('.photo-edit-delete-3').show();
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-3").attr("src", e.target.result).show();
