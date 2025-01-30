@@ -188,7 +188,7 @@
                                                         </span>
                                                     </a>
                                                 </div>
-                                                <button class="add-guest" data-bs-toggle="modal"
+                                                {{-- <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#addguest">Add Guest</button>
                                                 <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#cancelevent">Cancel
@@ -209,7 +209,7 @@
                                                     Report</button>
                                                 <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#uploadcsv">upload
-                                                    csv</button>
+                                                    csv</button> --}}
                                             </div>
                                         </div>
                                     </div>
