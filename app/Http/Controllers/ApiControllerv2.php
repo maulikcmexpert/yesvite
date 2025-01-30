@@ -5858,14 +5858,20 @@ class ApiControllerv2 extends Controller
                     }
                 }
                 $a = 0;
-                foreach ($images as $value) {
+                foreach ($images as $key=> $value) {
                     $image = $value;
                     $imageName = time() . $a . '_' . str_replace(' ', '_', $image->getClientOriginalName());
                     $a++;
                     $image->move(public_path('storage/event_images'), $imageName);
+                    $i=1;
+                    if($key == 0){
+                        $i=0;
+                    }
+                   
                     EventImage::create([
                         'event_id' => $request->event_id,
-                        'image' => $imageName
+                        'image' => $imageName,
+                        'type'=> $i
                     ]);
                 }
             }

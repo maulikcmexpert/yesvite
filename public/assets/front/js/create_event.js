@@ -348,7 +348,7 @@ $(document).ready(function () {
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3.5,
     spaceBetween: 20,
-    loop: false,
+    loop: true,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -3276,15 +3276,18 @@ $(document).on("click", "#save_activity_schedule", function () {
     //     // toggleSidebar();
     // });
     var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    let isendtime =0;
+    let istrue =0;
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
         // showAlert = false;
-
+        isendtime=isendtime +1;
         $(this)
             .find(".activity-main-wrp")
             .each(function (index) {
+                istrue = istrue+1;
                 var id = $(this).data("id");
                 var description = $(this)
                     .find('input[name="description[]"]')
@@ -3295,7 +3298,6 @@ $(document).on("click", "#save_activity_schedule", function () {
                 var endTime = $(this)
                     .find('input[name="activity-end-time[]"]')
                     .val();
-
                 activityendtime = endTime;
 
                 $("#desc-error-" + id).text("");
@@ -3365,18 +3367,24 @@ $(document).on("click", "#save_activity_schedule", function () {
     if (showAlert == true) {
         return;
     }
-    console.log({ activityendtime });
-
-    let lastendtime = convertTo24Hour(end_time);
-    let lastScheduleEndtime = convertTo24Hour(activityendtime);
-
-    console.log(lastendtime);
-    console.log(lastScheduleEndtime);
-
-    if (lastScheduleEndtime > lastendtime) {
-        toastr.error("Please enter proper time");
-        return;
+    if(istrue != isendtime ){
+        activityendtime =null;
     }
+    console.log({ activityendtime });
+    
+    if(activityendtime!=null){
+        let lastendtime = convertTo24Hour(end_time);
+        let lastScheduleEndtime = convertTo24Hour(activityendtime);
+    
+        console.log(lastendtime);
+        console.log(lastScheduleEndtime);
+        
+        if (lastScheduleEndtime > lastendtime) {
+            toastr.error("Please enter proper time");
+            return;
+        }
+    }
+   
 
     if (isValid == 0) {
         if (total_activities >= 1) {
@@ -4695,6 +4703,7 @@ $(document).on("click", ".li_event_details", function () {
                 formData.append("image", blob, "design.png");
                 formData.append("design_inner_image", design_inner_image);
                 formData.append("shapeImageUrl", old_shape_url);
+                formData.append("eventId", eventId);
                 $.ajax({
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -7272,10 +7281,10 @@ function get_co_host_list(
         .done(function (data) {
             console.log(data);
 
-            if (search_name == "") {
-                create_co_event_yesvite_scroll = false;
-            } else {
-                create_co_event_yesvite_scroll = true;
+            if(search_name==""){
+                create_co_event_yesvite_scroll=false
+            }else{
+                create_co_event_yesvite_scroll=true
             }
             if (data.view == "" && data.scroll == "false") {
                 $(".list_all_invited_user").html("No Data Found");
@@ -7591,7 +7600,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
 let previousScrollTop = 0;
 $("#select_event_cohost").on("scroll", function () {
     // alert();
-    if (cohostbusy || create_co_event_yesvite_scroll) return;
+    if (cohostbusy||create_co_event_yesvite_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
@@ -8168,7 +8177,7 @@ $(document).on("click", ".save-slider-image", function () {
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
-                eventId: eventId,
+                eventId:eventId,
                 imageSources: imageSources,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
@@ -8319,7 +8328,6 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.style.display = "block";
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
@@ -9005,7 +9013,3 @@ if (eventId != "") {
     // alert(eventId);
     sliderImages(eventId);
 }
-
-$(document).on('click','.swiper-button-disabled',function(e){
-    e.stopPropagation();
-});
