@@ -1566,7 +1566,30 @@
                     <div class="invite-contact-wrp">
                         <div class="invite-contact">
                             <a href="#" class="invite-img">
+                                @if ( $invite['profile']!= '')
                                 <img src="{{ $invite['profile'] }}" alt="invite-img">
+                            @else
+                                @php
+
+                                    // $parts = explode(" ", $name);
+                                    $firstInitial = isset($invite['first_name'][0])
+                                        ? strtoupper($invite['first_name'][0])
+                                        : '';
+                                    $secondInitial = isset($invite['last_name'][0])
+                                        ? strtoupper($invite['last_name'][0])
+                                        : '';
+                                    $initials =
+                                        strtoupper($firstInitial) .
+                                        strtoupper($secondInitial);
+                                    $fontColor =
+                                        'fontcolor' . strtoupper($firstInitial);
+                                @endphp
+                                <h5 class="{{ $fontColor }}">
+                                    {{ $initials }}
+                                </h5>
+                            @endif
+
+
                             </a>
                             <div class="w-100">
                                 <div class="d-flex justify-content-between align-items-center">
