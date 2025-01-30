@@ -1196,6 +1196,7 @@ $(function () {
             minDate: moment(),
             // alwaysShowCalendars: true, // Keep the calendar visible
             maxSpan: { days: 2 },
+            minSpan: { days: 1 },
         },
 
         function (start, end, label) {
