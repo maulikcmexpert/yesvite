@@ -2977,7 +2977,7 @@ class EventController extends BaseController
                 $event_creation->design_image = str_replace("https://yesvite.cmexpertiseinfotech.in/storage/canvas/", "", $request->desgin_selected);
                 $sourceImagePath = asset('storage/canvas/' . $event_creation->design_image);
             }
-
+            dd($event_creation->design_image);
             $textElemtents = $request->textData['textElements'];
 
             foreach ($textElemtents as $key => $textJson) {
