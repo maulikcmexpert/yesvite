@@ -340,7 +340,9 @@
     width: 100%;
     max-width: 550px;
     margin: 0px auto;
-    position: sticky;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 0;
     z-index: 2;
     margin-top: auto;
