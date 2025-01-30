@@ -7242,11 +7242,11 @@ function get_co_host_list(
             console.log(data);
 
             if (data.view == "" && data.scroll=="false") {
-                $(".list_all_invited_user_no_data").css('display','block');
+                $(".list_all_invited_user").html('No Data Found');
                 $("#loader").hide();
                 return;
             }else{
-                $(".list_all_invited_user_no_data").css('display','none');
+                // $(".list_all_invited_user").html('No Data Found');
             }
 
             if (data.view == "") {
