@@ -581,8 +581,9 @@
 
                                                     <h4 class="title">Sarah’s Gift Registries</h4>
                                                     <span>Buy them the gift of their choice.</span>
-                                                    @foreach ($eventDetails['gift_registry'] as $gift)
+
                                                     <div class="play-store">
+                                                        @foreach ($eventDetails['gift_registry'] as $gift)
                                                         @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn target-btn" target="_blank">
@@ -603,8 +604,9 @@
                                                                 <h6>{{ $gift['registry_recipient_name'] }}</h6>
                                                             </a>
                                                         @endif
+                                                        @endforeach
                                                     </div>
-                                                    @endforeach
+
 
                                                 </div>
 
