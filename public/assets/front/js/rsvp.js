@@ -176,22 +176,25 @@ $(document).ready(function () {
             const eventDate = $("#eventDate").val();
             const eventEndDate = $("#eventEndDate").val();
             const eventTime = $("#eventTime").val();
-            const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val(); // Default value
+            const eventEndTime =
+                $("#eventEndTime").val() || $("#eventTime").val(); // Default value
             const eventName = $("#eventName").val();
 
             if (!eventDate || !eventTime) {
-                alert("Please provide both date and time for the event.");
+                toastr.error(
+                    "Please provide both date and time for the event."
+                );
                 return;
             }
 
             const convertTo24HourFormat = (time) => {
                 const [hour, minuteWithPeriod] = time.split(":");
-                const [minute, period] = minuteWithPeriod.split(" ");
+                const [minute, period] = minuteWithPeriod.split(" ");
                 let newHour = parseInt(hour);
-                if (period.toLowerCase() === "pm" && newHour !== 12) {
+                if (period?.toLowerCase() === "pm" && newHour !== 12) {
                     newHour += 12; // Convert PM time to 24-hour format
                 }
-                if (period.toLowerCase() === "am" && newHour === 12) {
+                if (period?.toLowerCase() === "am" && newHour === 12) {
                     newHour = 0; // Handle 12 AM as midnight
                 }
                 return `${newHour}:${minute}`;
@@ -202,7 +205,7 @@ $(document).ready(function () {
             const startDateTime = new Date(`${eventDate}T${formattedTime}:00`); // ISO format with correct time
 
             if (isNaN(startDateTime)) {
-                alert(
+                toastr.error(
                     "Invalid start date or time value. Please check the input."
                 );
                 return;
@@ -214,7 +217,7 @@ $(document).ready(function () {
                 const formattedEndDate = new Date(endDateString);
 
                 if (isNaN(formattedEndDate)) {
-                    alert(
+                    toastr.error(
                         "Invalid end date or time value. Please check the input."
                     );
                     return;
@@ -533,14 +536,14 @@ $(document).on("click", ".check_rsvp_no", function (e) {
 //   latitude
 //   logitude
 
-const latitude = parseFloat(document.getElementById("event_latitude").value);
-const longitutde = parseFloat(document.getElementById("event_logitude").value);
+const latitude = parseFloat(document.getElementById("event_latitude")?.value);
+const longitutde = parseFloat(document.getElementById("event_logitude")?.value);
 const address = document.getElementById("event_address").value;
 
 function initMap() {
     // Create the map
     if (
-        (latitude === 0.0 && longitutde === 0.0) ||
+        (latitude != undefined && latitude === 0.0 && longitutde === 0.0) ||
         (latitude === 0 && longitutde === 0)
     ) {
         console.log("Address to geocode: " + address);
@@ -556,7 +559,7 @@ function initMap() {
                 console.log("Longitude: " + lng);
                 createMap(lat, lng);
             } else {
-                alert(
+                toastr.error(
                     "Geocode was not successful for the following reason: " +
                         status
                 );
