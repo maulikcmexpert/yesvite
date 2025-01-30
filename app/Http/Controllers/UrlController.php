@@ -14,7 +14,7 @@ class UrlController extends Controller
         try {
             do {
                 // Generate a random 15-character key
-                $shortUrlKey = Str::random(10);
+                $shortUrlKey = Str::random(13);
             } while (Url::where('short_url_key', $shortUrlKey)->exists()); // Ensure uniqueness
 
             // Insert into the database
