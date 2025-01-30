@@ -49,7 +49,7 @@ $(document).ready(function () {
             lastname: "Please enter your Last name",
             phone_number: {
                 // required: true,
-                phoneUS: "Please enter a valid phone number in the format 123-456-7890",
+                phoneUS: "Please enter valid format 123-456-7890",
                 minlength: "Phone Number must be minimum 10 digit",
                 maxlength: "Phone Number must be maxmimum 15 digit",
                 remote: "Phone Number is already exsits",
