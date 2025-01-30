@@ -707,8 +707,8 @@
     height: 10px;
     position: absolute;
     right: 4px;
-    top: 39%;
-    transform: translateY(-50%);
+    /* top: 39%; */
+    /* transform: translateY(-50%); */
     color: var(--lightColor);
     pointer-events: none;
     font-size: 16px;
