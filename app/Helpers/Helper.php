@@ -1308,7 +1308,7 @@ function sendNotificationGuest($notificationType, $postData)
 
             // dd($invitedusers);
             foreach ($invitedusers as $value) {
-                dd($value->event);
+                // dd($value->event);
                 $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " has invited you to " . $value->event->event_name;
                 if ($value->is_co_host == '1') {
                     $notification_message = $senderData->firstname . ' ' . $senderData->lastname . " invited you to be co-host in " . $value->event->event_name . ' Accept?';
