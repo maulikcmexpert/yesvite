@@ -8977,9 +8977,9 @@ function sliderImages(id) {
         success: function (response) {
             var savedImages = response.images;
             eventData.slider_images = savedImages;
-            console.log(eventData);
-            $("#loader").css("display", "none");
-            toastr.success("Slider Image saved Successfully");
+            // console.log(eventData);
+            //$("#loader").css("display", "none");
+            //toastr.success("Slider Image saved Successfully");
         },
         error: function (xhr, status, error) {},
     });

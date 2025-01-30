@@ -993,7 +993,8 @@ class EventController extends BaseController
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
                 EventImage::create([
                     'event_id' => $eventId,
-                    'image' => $request->desgin_selected
+                    'image' => $request->desgin_selected,
+                    'type' => 0
                 ]);
             }
 
@@ -1002,6 +1003,8 @@ class EventController extends BaseController
                     EventImage::create([
                         'event_id' => $eventId,
                         'image' => $value['fileName'],
+                        'type' => 1
+
                     ]);
                 }
             }
@@ -3272,7 +3275,8 @@ class EventController extends BaseController
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
                 EventImage::create([
                     'event_id' => $eventId,
-                    'image' => $request->desgin_selected
+                    'image' => $request->desgin_selected,
+                    'type' => 0
                 ]);
             }
 
@@ -3281,6 +3285,7 @@ class EventController extends BaseController
                     EventImage::create([
                         'event_id' => $eventId,
                         'image' => $value['fileName'],
+                        'type' => 1
                     ]);
                 }
             }
@@ -3463,42 +3468,22 @@ class EventController extends BaseController
         }
     }
 
-    public function getSliderImage(Request $request){
-
+    public function getSliderImage(Request $request)
+    {
         $event_id = $request->id;
-
         $getEventImages = EventImage::where('event_id', $event_id)->get();
-                if (!empty($getEventImages)) {
-                    foreach ($getEventImages as $imgVal) {
-                        $fileName =   $imgVal->image;
-                        $savedFiles[] = [
-                                        'fileName' => $fileName,
-                                        'deleteId' => $imgVal->id,
-                                    ];
-                    }
-        // foreach ($imageSources as $imageSource) {
-        //     if (!empty($imageSource['src'])) {
-
-        //         list($type, $data) = explode(';', $imageSource['src']);
-        //         list(, $data) = explode(',', $data);
-        //         $imageData = base64_decode($data);
-        //         $fileName = time() . $i . '-' . uniqid() . '.jpg';
-        //         $i++;
-
-        //         $path = public_path('storage/event_images/') . $fileName;
-
-        //         file_put_contents($path, $imageData);
-        //         $savedFiles[] = [
-        //             'fileName' => $fileName,
-        //             'deleteId' => $imageSource['deleteId']
-        //         ];
-        //     }
-        // }
-        if (empty($savedFiles)) {
-            return response()->json(['status' => 'No valid images to save'], 400);
+        if (!empty($getEventImages)) {
+            foreach ($getEventImages as $imgVal) {
+                $fileName =   $imgVal->image;
+                $savedFiles[] = [
+                    'fileName' => $fileName,
+                    'deleteId' => $imgVal->id,
+                ];
+            }
+            if (empty($savedFiles)) {
+                return response()->json(['status' => 'No valid images to save'], 400);
+            }
+            return response()->json(['success' => true, 'images' => $savedFiles]);
         }
-        // session(['desgin_slider' => $savedFiles]);
-        return response()->json(['success' => true, 'images' => $savedFiles]);
     }
-}
 }
