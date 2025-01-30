@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="col-lg-12 mb-2">
                                         <div class="input-form">
-                                            <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ $user->zip_code}}">
+                                            <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ $user->zip_code}}"  oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                             <label for="code" class="floating-label ">Zip Code <span>*</span></label>
                                             <div class="label-error">
                                                 <label id="zip_code-error" class="error" for="zip_code"></label>

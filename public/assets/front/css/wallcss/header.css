@@ -241,6 +241,7 @@ header{
 .accordion-button-img-wrp{
     width: 100%;
     max-width: 40px;
+    min-width: 40px;
     height: 40px;
 }
 
