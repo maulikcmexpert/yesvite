@@ -708,11 +708,18 @@ class EventController extends BaseController
                         $event_creation->design_image = $tempData->image;
                     }
                 }
-            } else {
-                $event_creation->design_image = $request->cutome_image;
+            } else if (isset($request->cutome_image)) {
+
+
+                if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
+                    $pathParts = explode('/', $request->cutome_image);
+                    $event_creation->design_image = end($pathParts);
+                } else {
+                    $event_creation->design_image = $request->cutome_image;
+                }
                 $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
-
+            // dd($event_creation->design_image);
             $textElemtents = $request->textData['textElements'];
 
             foreach ($textElemtents as $key => $textJson) {
@@ -991,17 +998,24 @@ class EventController extends BaseController
             }
 
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+                EventImage::where('event_id', $eventId)->where('type', 0)->delete();
+
                 EventImage::create([
                     'event_id' => $eventId,
-                    'image' => $request->desgin_selected
+                    'image' => $request->desgin_selected,
+                    'type' => 0
                 ]);
             }
 
             if (isset($request->slider_images) && !empty($request->slider_images)) {
+                EventImage::where('event_id', $eventId)->where('type', 1)->delete();
+
                 foreach ($request->slider_images as $key => $value) {
                     EventImage::create([
                         'event_id' => $eventId,
                         'image' => $value['fileName'],
+                        'type' => 1
+
                     ]);
                 }
             }
@@ -1779,6 +1793,14 @@ class EventController extends BaseController
         $fileName = '';
         $i = 0;
         if (isset($request->design_inner_image) && isset($request->shapeImageUrl)) {
+            if (session()->has('shape_image')) {
+                $oldShapeImage = session('shape_image');
+                $oldShapeImagePath = public_path('storage/canvas/') . $oldShapeImage;
+                if (file_exists($oldShapeImagePath)) {
+                    unlink($oldShapeImagePath);
+                }
+                session()->forget('shape_image');
+            }
             if ($request->shapeImageUrl == $request->design_inner_image) {
                 $sourceImagePath = $request->shapeImageUrl;
                 $destinationDirectory = public_path('storage/canvas/');
@@ -1803,6 +1825,14 @@ class EventController extends BaseController
             }
         }
         if ($request->hasFile('image')) {
+            if (session()->has('desgin')) {
+                $oldDesignImage = session('desgin');
+                $oldDesignImagePath = public_path('storage/event_images/') . $oldDesignImage;
+                if (file_exists($oldDesignImagePath)) {
+                    unlink($oldDesignImagePath);
+                }
+                session()->forget('desgin');
+            }
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->move(public_path('storage/event_images'), $fileName);
@@ -3270,17 +3300,21 @@ class EventController extends BaseController
                 $gift_registry = $request->gift_registry_data;
             }
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+                EventImage::where('event_id', $eventId)->where('type', 0)->delete();
                 EventImage::create([
                     'event_id' => $eventId,
-                    'image' => $request->desgin_selected
+                    'image' => $request->desgin_selected,
+                    'type' => 0
                 ]);
             }
 
             if (isset($request->slider_images) && !empty($request->slider_images)) {
+                EventImage::where('event_id', $eventId)->where('type', 1)->delete();
                 foreach ($request->slider_images as $key => $value) {
                     EventImage::create([
                         'event_id' => $eventId,
                         'image' => $value['fileName'],
+                        'type' => 1
                     ]);
                 }
             }
@@ -3463,29 +3497,28 @@ class EventController extends BaseController
         }
     }
 
-    public function getSliderImage(Request $request){
-
+    public function getSliderImage(Request $request)
+    {
         $event_id = $request->id;
-
         $getEventImages = EventImage::where('event_id', $event_id)->get();
 
-                if (!empty($getEventImages)) {
-                    foreach ($getEventImages as $key => $imgVal) {
-                        if($key== 0){
-                            continue;
-                        }
-                        $fileName =   $imgVal->image;
-                        $savedFiles[] = [
-                                        'fileName' => $fileName,
-                                        'deleteId' => $imgVal->id,
-                                    ];
-                    }
-       
-        if (empty($savedFiles)) {
-            return response()->json(['status' => 'No valid images to save'], 400);
+        if (!empty($getEventImages)) {
+            foreach ($getEventImages as $key => $imgVal) {
+                if ($key == 0) {
+                    continue;
+                }
+                $fileName =   $imgVal->image;
+                $savedFiles[] = [
+                    'fileName' => $fileName,
+                    'deleteId' => $imgVal->id,
+                ];
+            }
+
+            if (empty($savedFiles)) {
+                return response()->json(['status' => 'No valid images to save'], 400);
+            }
+
+            return response()->json(['success' => true, 'images' => $savedFiles]);
         }
-        
-        return response()->json(['success' => true, 'images' => $savedFiles]);
     }
-}
 }
