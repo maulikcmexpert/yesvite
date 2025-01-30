@@ -848,6 +848,7 @@
 
 
                 <div class="user-contacts list_all_invited_user" id="select_event_cohost">
+                    <p class="list_all_invited_user_no_data"  style="color:black;text-align:center;display:none;">No Data Found</p>
                 </div>
 
                 <div class="user-contacts list_all_contact_user" id="select_contact_event_cohost"
