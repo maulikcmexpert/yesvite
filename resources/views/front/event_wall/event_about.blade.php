@@ -558,8 +558,11 @@
                                                             <div class="shedule-box {{ $colorClass }}">
                                                                 <div class="shedule-box-left">
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
-                                                                    <span>{{ $schedule['start_time'] }} -
-                                                                        {{ $schedule['end_time'] }}</span>
+                                                                    <span>{{ $schedule['start_time'] }}
+                                                                       @if(!empty($schedule['start_time']))
+                                                                        -
+                                                                        {{ $schedule['end_time'] }}
+                                                                        @endif</span>
                                                                 </div>
                                                                 <span class="hrs ms-auto">{{ $duration }}</span>
                                                             </div>
@@ -573,8 +576,9 @@
                                         @endif
 
                                         @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
-                                            @foreach ($eventDetails['gift_registry'] as $gift)
+
                                                 <div class="gift-register cmn-card">
+                                                    @foreach ($eventDetails['gift_registry'] as $gift)
                                                     <h4 class="title">Sarah’s Gift Registries</h4>
                                                     <span>Buy them the gift of their choice.</span>
                                                     <div class="play-store">
@@ -599,8 +603,9 @@
                                                             </a>
                                                         @endif
                                                     </div>
+                                                    @endforeach
                                                 </div>
-                                            @endforeach
+
                                         @endif
 
                                     </div>
