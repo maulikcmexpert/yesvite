@@ -7705,6 +7705,8 @@ $(document).on("keyup", ".phone_co_host_search", function () {
 });
 
 $(document).on("click", ".add-activity-schedule", function () {
+    startTimePicker();
+    endTimePicker();
     if (eventData.activity != undefined && eventData.activity != "") {
         toggleSidebar("sidebar_activity_schedule");
     } else {
@@ -8309,6 +8311,17 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
+            if(imgSrc1!=""){
+                $(".photo-edit-delete-1").show();
+              
+            }
+            if(imgSrc2!=""){
+                $(".photo-edit-delete-2").show();
+                
+            }
+            if(imgSrc3!=""){
+                $(".photo-edit-delete-3").show();
+            }
             console.log(eventData.slider_images);
             if (
                 eventData.slider_images != undefined &&

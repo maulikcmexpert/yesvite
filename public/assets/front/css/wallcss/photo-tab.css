@@ -75,6 +75,7 @@
     overflow: hidden;
     overflow-y: scroll;
     padding: 40px 10px;
+    position: relative;
 }
 
 .photos-main-wrp .col-lg-4,.photos-main-wrp .col-lg-6, .photos-main-wrp .col-md-4, .photos-main-wrp .col-sm-6{
@@ -340,8 +341,10 @@
     width: 100%;
     max-width: 550px;
     margin: 0px auto;
-    position: sticky;
-    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
     z-index: 2;
     margin-top: auto;
 }
@@ -503,7 +506,7 @@
     border-bottom: 1px solid var(--border);
 }
 
-.photos-main-wrp > .row{
+.photos-main-wrp:has(.photos-card-wrp) > .row{
     height: calc(100% - 10%);
 }
 
