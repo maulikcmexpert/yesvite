@@ -1796,7 +1796,7 @@ function createShortUrl($longUrl)
             'expires_at' => now()->addDays(90) // Expire after 90 days
         ]);
 
-        return "https://yesvite.com/rsvp/{$shortUrlKey}";
+        return "https://yesvite.com/invite/{$shortUrlKey}";
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
     }

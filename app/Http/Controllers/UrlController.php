@@ -32,9 +32,7 @@ class UrlController extends Controller
 
     public function handleShortUrl($shortUrlKey)
     {
-        dd($shortUrlKey);
-        DB::enableQueryLog();
-        // Look up the short URL in the database
+
         $url = Url::where('short_url_key', $shortUrlKey)
             ->where('expires_at', '>', now()) // Ensure it's not expired
             ->first();
@@ -42,7 +40,7 @@ class UrlController extends Controller
         if ($url) {
             return redirect($url->long_url); // Redirect to the long URL
         }
-        dd(DB::getQueryLog()); // Dump and die with query log
+
 
         return response()->json(['error' => 'URL not found or expired'], 404);
     }

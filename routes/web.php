@@ -56,7 +56,7 @@ Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
     return response()->json(['message' => 'Queue worker started successfully']);
 });
-Route::get('/rsvp/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
+Route::get('/invite/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
     ->name('short.url');
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
