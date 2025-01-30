@@ -2971,13 +2971,17 @@ class EventController extends BaseController
                     }
                 }
             } else if (isset($request->cutome_image)) {
-                $event_creation->design_image = $request->cutome_image;
+
+
+                if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
+                    $pathParts = explode('/', $request->cutome_image);
+                    $event_creation->design_image = end($pathParts);
+                } else {
+                    $event_creation->design_image = $request->cutome_image;
+                }
                 $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
-            } else {
-                $event_creation->design_image = str_replace("https://yesvite.cmexpertiseinfotech.in/storage/canvas/", "", $request->desgin_selected);
-                $sourceImagePath = asset('storage/canvas/' . $event_creation->design_image);
             }
-            dd($event_creation->design_image);
+            // dd($event_creation->design_image);
             $textElemtents = $request->textData['textElements'];
 
             foreach ($textElemtents as $key => $textJson) {

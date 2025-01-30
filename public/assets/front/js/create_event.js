@@ -107,7 +107,7 @@ if (selected_dataId != "") {
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
 
-eventData.desgin_selected = $("#design_image").val() || undefined;
+eventData.cutome_image = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
 
 // Ensure eventData.textData is parsed into an object before accessing properties
@@ -6278,7 +6278,7 @@ function save_image_design(downloadImage, textData) {
         design_inner_image = $("#shape_img").attr("src");
     }
     var old_shape_url = $("#first_shape_img").attr("src");
-
+    eventData.cutome_image = image;
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
