@@ -40,21 +40,24 @@ $i++;
   @foreach ($value as $inner_data )
     
         <div class="accordion-body">
-        @if($inner_data['notification_type']=="invite")
+                            @if($inner_data['notification_type']=="invite")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      @php
+                                        @php
+                                        $f = isset($inner_data['first_name']) && !empty($inner_data['first_name'])
+                                            ? strtoupper($inner_data['first_name'][0])
+                                            : '';
 
-                                             
-                                                        $firstInitial = isset($inner_data['first_name'][0]) ? strtoupper($inner_data['first_name'][0]) : '';
-                                                        $secondInitial = isset($inner_data['last_name'][1]) ? strtoupper($inner_data['last_name'][0]) : '';
-                                                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                                                        $fontColor = "fontcolor" . strtoupper($firstInitial);
+                                        $l = isset($inner_data['last_name']) && !empty($inner_data['last_name'])
+                                             ? strtoupper($inner_data['last_name'][0])
+                                            : '';
 
-                                                  //$initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                                                  //$fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                                                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                                      @endphp
+                                        $initials = $f . $l;
+
+                                        $fontColor = !empty($f) ? "fontcolor" . $f : 'defaultFontColor';
+                                        $userProfile = "<h5 class='" . $fontColor . "'>" . $initials . "</h5>";
+                                    @endphp
+
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                       <span class="active-dot"></span>
@@ -135,12 +138,12 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Has updated the event details for</span>
+                                          <span> Has updated the event details for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
-                                        <p>{{$inner_data['event_name']}}</p>
+                                        <!-- <p>{{$inner_data['event_name']}}</p> -->
                                         @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
@@ -382,7 +385,8 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>Potluck
+                                          <!-- <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>Potluck -->
+                                          <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>
                                           </span>
                                         </h3>
                                         <div>
@@ -473,13 +477,13 @@ $i++;
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> commented on your post on </span>
+                                          <span> commented on your post on <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
                                         <p>
-                                          {{$inner_data['event_name']}}
+                                          <!-- {{$inner_data['event_name']}} -->
                                           <span><strong>Wall</strong></span>
                                         </p>
                                         @if($inner_data['read']=="0")
@@ -539,18 +543,18 @@ $i++;
                                         @if($inner_data['media_type']=="photo")
                                             <span> posted new photo on wall at </span>
                                         @elseif($inner_data['media_type']=="video")
-                                          <span> posted video on wall at </span>
+                                          <span> posted video on wall at <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span><strong></strong></span>
                                         @else
-                                        <span> posted on wall at </span>
+                                        <span> posted on wall at <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span><strong></strong></span>
                                         @endif
                                       </h3>
                                       <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                     </div>
                                     <div>
                                       <p>
-                                        {{$inner_data['event_name']}}
+                                        <!-- {{$inner_data['event_name']}} -->
 
-                                        <span><strong>Wall</strong></span>
+                                        <!-- <span><strong>Wall</strong></span> -->
                                       </p>
                                       @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
@@ -792,12 +796,12 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> posted new photo on photos for</span>
+                                          <span> posted new photo on photos for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                     <div>
-                                        <p>{{$inner_data['event_name']}}</p>
+                                        <!-- <p>{{$inner_data['event_name']}}</p> -->
                                         @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
@@ -850,13 +854,13 @@ $i++;
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Accepted your invitation to co-host</span>
+                                          <span> Accepted your invitation to co-host <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
                                       <div>
                                         <p>
-                                          {{$inner_data['event_name']}}
+                                          <!-- {{$inner_data['event_name']}} -->
                                           <span><strong>Wall</strong></span>
                                         </p>
                                         @if($inner_data['read']=="0")
