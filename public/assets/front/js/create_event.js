@@ -1032,6 +1032,8 @@ function startTimePicker() {
         .on("dp.hide", function (e) {
             const selectedTime = e.date ? e.date.format("LT") : "";
             $(this).val(selectedTime);
+            $(this)
+            .data(selectedTime)
             const selectedStartTime = e.date
                 ? e.date
                 : moment().hours(12).minutes(0).seconds(0);

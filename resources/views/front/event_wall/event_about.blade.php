@@ -1965,6 +1965,7 @@
 
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
+
                     <form action="{{ route('event.sentRsvpData') }}" method="POST">
                         @csrf
                         <div class="modal-header">
@@ -1980,7 +1981,15 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
+                            <div class="host-detail">
+                                <h5>Event Details</h5>
+                                <ul>
+                                    <li>RSVP By Sept 20</li>
+                                    <li>+1 (Limit 5)</li>
+                                    <li>Adult Only Event</li>
+                                    <li>Potluck Event</li>
+                                </ul>
+                            </div>
                             <input type ="hidden" id="event_id" name="event_id"
                                 value="{{ $eventDetails['id'] }}">
                             <div class="rsvp-custom-radio guest-rsvp-attend">
