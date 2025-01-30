@@ -691,6 +691,7 @@ class EventController extends BaseController
         if (isset($request->shape_image) && $request->shape_image != '') {
             $event_creation->design_inner_image = $request->shape_image;
         }
+
         if (isset($request->textData) && json_encode($request->textData) != '') {
             if ($request->temp_id != '' && $request->temp_id != null) {
                 // dd($request->temp_id);
@@ -2954,22 +2955,28 @@ class EventController extends BaseController
 
 
         if (isset($request->textData) && json_encode($request->textData) != '') {
-            $tempData = TextData::where('id', $request->temp_id)->first();
+            if ($request->temp_id != '' && $request->temp_id != null) {
+                // dd($request->temp_id);
+                $tempData = TextData::where('id', $request->temp_id)->first();
+                if ($tempData) {
+                    $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+                    $destinationDirectory = public_path('storage/event_images/');
+                    $destinationImagePath = $destinationDirectory . $tempData->image;
+                    if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+                        $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                        $destinationImagePath = $destinationDirectory . $newImageName;
 
-            if ($tempData) {
-                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
-                $destinationDirectory = public_path('storage/event_images/');
-                $destinationImagePath = $destinationDirectory . $tempData->image;
-                if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
-                    $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
-                    $destinationImagePath = $destinationDirectory . $newImageName;
-
-                    File::copy($sourceImagePath, $destinationImagePath);
-                    $event_creation->design_image = $tempData->image;
+                        File::copy($sourceImagePath, $destinationImagePath);
+                        $event_creation->design_image = $tempData->image;
+                    }
                 }
+            } else {
+                $event_creation->design_image = $request->cutome_image;
+                $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
 
             $textElemtents = $request->textData['textElements'];
+
             foreach ($textElemtents as $key => $textJson) {
                 if ($textJson['fontSize'] != '') {
                     $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
@@ -2991,9 +2998,9 @@ class EventController extends BaseController
             $static_data = [];
             $static_data['textData'] = $textElemtents;
             $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
-            $static_data['height'] = (int)$tempData->height;
-            $static_data['width'] = (int)$tempData->width;
-            $static_data['image'] = $tempData->image;
+            $static_data['height'] = (int)490;
+            $static_data['width'] = (int)345;
+            $static_data['image'] = $event_creation->design_image;
             $static_data['template_url'] = $sourceImagePath;
             $static_data['is_contain_image'] = false;
             if (isset($request->textData['shapeImageData'])) {
@@ -3009,7 +3016,6 @@ class EventController extends BaseController
 
             $event_creation->static_information = json_encode($static_data);
         }
-
         $event_creation->save();
 
         if ($eventId != "") {
@@ -3418,18 +3424,18 @@ class EventController extends BaseController
             $gift = '1';
         }
         Session::save();
-        if($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1"){
+        if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
             return response()->json([
                 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
-                'isupadte' =>false,
+                'isupadte' => false,
                 'is_registry' => $gift
             ]);
-        }else{
+        } else {
             return response()->json([
                 // 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
-                'isupadte' =>true,
+                'isupadte' => true,
                 'is_registry' => $gift
             ]);
         }
