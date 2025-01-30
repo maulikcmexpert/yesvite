@@ -1871,7 +1871,9 @@ function handleIncomingMessage($receiverNumber, $message)
             ->select('id', 'event_id', 'event_invited_user_id')
             ->groupBy('id', 'event_id', 'event_invited_user_id')
             ->get();
-        sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
+        if ($users->isNotEmpty()) { // Corrected check
+            sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
+        }
         foreach ($users as $user) {
             $user->update(['opt_in_status' => true]);
 
