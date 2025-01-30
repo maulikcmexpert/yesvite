@@ -592,6 +592,7 @@
     padding: 0 !important;
     width: 300px !important;
     margin-top: 10px !important;
+    border-radius: 12px !important;
 }
 
 .collection-wrapper .dropdown-menu .filter-head{
@@ -808,7 +809,7 @@
 }
 .cookies-track {
     position: fixed;
-    bottom: -130px; 
+    bottom: -130px;
     left: 0;
     width: 100%;
     background-color: #f9f9f9;
@@ -836,7 +837,7 @@
     border: none;
     background-color: transparent;
     box-shadow: none;
-    
+
 }
 
 .cookies-track button i{
