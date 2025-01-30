@@ -7240,6 +7240,11 @@ function get_co_host_list(
     })
         .done(function (data) {
             console.log(data);
+
+            if (data.view == "" && scroll=="false") {
+                $(".list_all_invited_user").html("No data found");
+            }
+            
             if (data.view == "") {
                 cohostNoMoreData = true;
                 $("#loader").hide();
@@ -7253,9 +7258,7 @@ function get_co_host_list(
                 $(".list_all_invited_user").html(data.view);
             }
 
-            if (data.view == "") {
-                $(".list_all_invited_user").html("No data found");
-            }
+           
             // $('input[name="guest_list[]"]:checked').each(function () {
             var profilePhoto = $(this).data("profile");
             var user_name = $(this).data("username");
