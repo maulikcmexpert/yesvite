@@ -283,7 +283,7 @@
             </button>
         </div>
         @else
-        <div class="guest-checkout">
+        <div class="guest-checkout new-edit-save-btn">
             <div>
                 <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
             </div>
@@ -418,7 +418,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Font Size</h3>
-                        <input type="text" id="fontSizeInput" value="20">
+                        <input type="number" id="fontSizeInput" value="20">
                     </div>
                     <div class="range-slider">
                         <div id="fontSizeTooltip" class="tooltip"></div>
@@ -442,7 +442,7 @@
                 <div class="size-spacing-inner font-size-wrp">
                     <div class="size-spacing-inner-top">
                         <h3>Line Height</h3>
-                        <input type="text" id="lineHeightInput" value="0">
+                        <input type="number" id="lineHeightInput" value="0">
                     </div>
                     <div class="range-slider">
                         <div id="lineHeightTooltip" class="tooltip"></div>
@@ -469,7 +469,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="used-fonts-wrp common-font-wrp">
+            <div class="used-fonts-wrp common-font-wrp d-none">
                 <div class="form-check">
                     <input type="radio" name="colorType" value="font" checked class="form-check-input colorTypeInp" id="flexRadioDefaults" />
                     <label class="form-check-label" for="flexRadioDefaults">

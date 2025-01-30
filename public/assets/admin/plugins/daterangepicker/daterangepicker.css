@@ -235,10 +235,14 @@
 .daterangepicker select.monthselect {
   margin-right: 2%;
   width: 56%;
+  padding-left: 0px !important;
+  text-align: center;  
 }
 
 .daterangepicker select.yearselect {
   width: 40%;
+  padding-left: 0px !important;
+  text-align: center;
 }
 
 .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {

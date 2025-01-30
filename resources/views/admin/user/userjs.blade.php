@@ -364,7 +364,7 @@
                     },
                     messages: {
                             required:"Please enter Password",
-                            minlength:"The password must be at least 8 characters long",
+                            minlength:"The password must be at least 6 characters long",
                             maxlength:"The password must not exceed 20 characters",
                     }
         });

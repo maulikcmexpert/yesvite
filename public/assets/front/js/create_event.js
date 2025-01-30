@@ -19,6 +19,7 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+
 var selected_prefer_by =
     $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
 var selected_profilePhoto =
@@ -131,8 +132,8 @@ if (giftRegestryDataRaw.length > 0) {
     }
 }
 
-var selected_profile_or_text = "";
-var selected_prefer_by = "";
+// var selected_profile_or_text = "";
+// var selected_prefer_by = "";
 var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
@@ -263,6 +264,8 @@ $(document).ready(function () {
         // console.log(eventDetail);
         if (current_step == "2") {
             $(".step_1").hide();
+            console.log("handleActiveClass");
+
             handleActiveClass(".li_design");
             $(".pick-card").addClass("active");
             $(".design-span").addClass("active");
@@ -291,6 +294,8 @@ $(document).ready(function () {
             $(".step_1").hide();
             $(".step_2").hide();
             $("#edit-design-temp").hide();
+            console.log("handleActiveClass");
+
             handleActiveClass(".li_guest");
             $(".pick-card").addClass("menu-success");
             $(".edit-design").addClass("menu-success");
@@ -739,9 +744,83 @@ function getClosest15MinuteTime() {
 // }
 // datepicker();
 
+// function datepicker() {
+//     $(".timepicker.activity_start_time").each(function (index) {
+//         const startPicker = $(this).datetimepicker({
+//             format: "LT",
+//             icons: {
+//                 up: "fa fa-chevron-up",
+//                 down: "fa fa-chevron-down",
+//             },
+//             useCurrent: false,
+//             ignoreReadonly: true,
+//             stepping: 15,
+//         })
+//         .on("dp.show", function () {
+//             const picker = $(this).data("DateTimePicker");
+//             const previousEndTime = index > 0 ? $(".activity_end_time").eq(index - 1).val() : "";
+
+//             // If previous end time exists, set current start time 1 hour after it
+//             if (previousEndTime) {
+//                 const previousEndMoment = moment(previousEndTime, "LT");
+//                 picker.date(previousEndMoment.add(1, 'hours'));
+//             } else {
+//                 // Default to current time or a specific default time
+//                 picker.date(moment().hours(12).minutes(0).seconds(0));
+//             }
+//         })
+//         .on("dp.change", function (e) {
+//             const selectedStartTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
+//             const endTimePicker = $(".activity_end_time").eq(index).data("DateTimePicker");
+
+//             // Set the end time picker to one hour after the selected start time
+//             const endTime = selectedStartTime.clone().add(1, 'hours');
+//             endTimePicker.date(endTime);
+//         });
+
+//         // Ensure input field is clear when the page loads
+//         $(this).val("");
+//     });
+
+//     $(".timepicker.activity_end_time").each(function (index) {
+//         const endPicker = $(this).datetimepicker({
+//             format: "LT",
+//             icons: {
+//                 up: "fa fa-chevron-up",
+//                 down: "fa fa-chevron-down",
+//             },
+//             useCurrent: false,
+//             ignoreReadonly: true,
+//             stepping: 15,
+//         })
+//         .on("dp.show", function () {
+//             const picker = $(this).data("DateTimePicker");
+//             const startTime = $(this).closest("div").find(".activity_start_time").val();
+//             const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+
+//             // Set end time to 1 hour after start time if it's empty
+//             picker.date(startMoment.clone().add(1, 'hours'));
+//         })
+//         .on("dp.change", function (e) {
+//             const selectedEndTime = e.date ? e.date : moment().hours(12).minutes(0).seconds(0);
+//             $(this).val(selectedEndTime.format("LT"));
+
+//             // Set the next start time based on the selected end time
+//             const nextStartTime = $(".activity_start_time").eq(index + 1);
+//             if (nextStartTime.length) {
+//                 const startPicker = nextStartTime.data("DateTimePicker");
+//                 const newStartTime = selectedEndTime.clone().add(1, 'hours');
+//                 startPicker.date(newStartTime);
+//             }
+//         });
+
+//         // Ensure input field is clear when the page loads
+//         $(this).val("");
+//     });
+// }
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
-        const startPicker = $(this)
+        const endPicker = $(this)
             .datetimepicker({
                 format: "LT",
                 icons: {
@@ -754,37 +833,50 @@ function datepicker() {
             })
             .on("dp.show", function () {
                 const picker = $(this).data("DateTimePicker");
-                const previousEndTime =
-                    index > 0
-                        ? $(".activity_end_time")
-                              .eq(index - 1)
-                              .val()
-                        : "";
+                const currentActivity = $(this).closest(".activity-main-wrp");
 
-                // If previous end time exists, set current start time 1 hour after it
-                if (previousEndTime) {
-                    const previousEndMoment = moment(previousEndTime, "LT");
-                    picker.date(previousEndMoment.add(1, "hours"));
-                } else {
-                    // Default to current time or a specific default time
-                    picker.date(moment().hours(12).minutes(0).seconds(0));
-                }
-            })
-            .on("dp.change", function (e) {
-                const selectedStartTime = e.date
-                    ? e.date
+                const startTime = $(this)
+                    .closest("div")
+                    .find("#ac-start-time")
+                    .val();
+                // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+                let startMoment = startTime
+                    ? moment(startTime, "LT")
                     : moment().hours(12).minutes(0).seconds(0);
-                const endTimePicker = $(".activity_end_time")
-                    .eq(index)
-                    .data("DateTimePicker");
+                const previousActivity =
+                    currentActivity.prev(".activity-main-wrp");
 
-                // Set the end time picker to one hour after the selected start time
-                const endTime = selectedStartTime.clone().add(1, "hours");
-                endTimePicker.date(endTime);
+                if (previousActivity.length > 0) {
+                    const previousEndTime = previousActivity
+                        .find(".activity_end_time")
+                        .val();
+                    if (previousEndTime) {
+                        // If previous end time exists, use it as the new start time
+                        // startMoment = moment(previousEndTime, "LT");
+                        startMoment = moment(previousEndTime, "LT").add(
+                            1,
+                            "hours"
+                        );
+                        picker.date(startMoment);
+                    }
+                } else {
+                    picker.date(startMoment.clone().add(1, "hours"));
+                }
+
+                // Set the picker date to the adjusted start time (if any)
+            })
+            .on("dp.close", function () {
+                const picker = $(this).data("DateTimePicker");
+                const startTime = $(this)
+                    .closest("div")
+                    .find(".activity_start_time")
+                    .val();
+                const startMoment = startTime
+                    ? moment(startTime, "LT")
+                    : moment().hours(12).minutes(0).seconds(0);
+
+                $(this).val(startMoment);
             });
-
-        // Ensure input field is clear when the page loads
-        $(this).val("");
     });
 
     $(".timepicker.activity_end_time").each(function (index) {
@@ -801,40 +893,88 @@ function datepicker() {
             })
             .on("dp.show", function () {
                 const picker = $(this).data("DateTimePicker");
+
+                // Get the start time from the related input field
                 const startTime = $(this)
-                    .closest("div")
-                    .find(".activity_start_time")
+                    .closest(".activity-main-wrp")
+                    .find('input[name="activity-start-time[]"]')
                     .val();
+                const emdtMoment = moment(startTime, "LT");
+
+                console.log("Start time:", startTime);
+
+                // If start time exists, use it; otherwise, default to 12:00 PM
                 const startMoment = startTime
                     ? moment(startTime, "LT")
                     : moment().hours(12).minutes(0).seconds(0);
 
-                // Set end time to 1 hour after start time if it's empty
-                picker.date(startMoment.clone().add(1, "hours"));
-            })
-            .on("dp.change", function (e) {
-                const selectedEndTime = e.date
-                    ? e.date
-                    : moment().hours(12).minutes(0).seconds(0);
-                $(this).val(selectedEndTime.format("LT"));
-
-                // Set the next start time based on the selected end time
-                const nextStartTime = $(".activity_start_time").eq(index + 1);
-                if (nextStartTime.length) {
-                    const startPicker = nextStartTime.data("DateTimePicker");
-                    const newStartTime = selectedEndTime
-                        .clone()
-                        .add(1, "hours");
-                    startPicker.date(newStartTime);
+                // Set the end time to 1 hour after the start time, only when picker is first shown
+                if (!picker.date()) {
+                    // Check if the picker date is empty (first time showing)
+                    picker.date(startMoment.clone().add(1, "hours"));
                 }
-            });
+            })
+            // .on("dp.show", function () {
+            //     const picker = $(this).data("DateTimePicker");
+            //     // const startTime = $(this).closest("div").find(".activity_start_time").val();
+            //     const startTime =   $(this)
+            //     .closest(".activity-main-wrp")
+            //     .find('input[name="activity-start-time[]"]')
+            //     .val();
 
-        // Ensure input field is clear when the page loads
-        $(this).val("");
+            //     console.log(startTime);
+            //     const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+
+            //     // Set the end time to 1 hour after the start time whenever the end time picker is shown
+            //     picker.date(startMoment.clone().add(1, "hours"));
+            // })
+
+            .on("dp.close", function () {
+                alert();
+                // const picker = $(this).data("DateTimePicker");
+                // const startTime = $(this).closest("div").find(".activity_start_time").val();
+                // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+                // const startMoment = moment(startTime, "LT") ;
+
+                // picker.date(startMoment.clone().add(1, "hours"));
+
+                // const currentActivity = $(this).closest(".activity-main-wrp");
+                // const nextActivity = currentActivity.next(".activity-main-wrp"); // Find the next activity
+                // if (nextActivity.length > 0) {
+                //     const nextStartPicker = nextActivity.find(".activity_start_time");
+                //     if (nextStartPicker.length > 0) {
+                //         const nextStartMoment = startMoment.clone().add(1, "hours");
+                //         nextStartPicker.val(nextStartMoment.format("LT")); // Update next activity's start_time
+                //     }
+                // }
+
+                // Set end time to 1 hour after start time if it's empty (only in picker)
+                // $(this).val(startMoment);
+                const picker = $(this).data("DateTimePicker");
+
+                // Get the selected end time directly from the picker
+                const selectedEndTime = picker.date();
+
+                if (selectedEndTime) {
+                    // If a time is selected, update the input field with the selected time
+                    $(this).val(selectedEndTime.format("LT"));
+                } else {
+                    // If no time is selected, set it to 1 hour after start time
+                    const startTime = $(this)
+                        .closest(".activity-main-wrp")
+                        .find('input[name="activity-start-time[]"]')
+                        .val();
+                    const startMoment = moment(startTime, "LT");
+                    $(this).val(
+                        startMoment.clone().add(1, "hours").format("LT")
+                    );
+                }
+
+                console.log(selectedEndTime);
+                console.log(selectedEndTime);
+            });
     });
 }
-
-datepicker();
 
 function startTimePicker() {
     $(".start_timepicker")
@@ -849,17 +989,20 @@ function startTimePicker() {
             },
         })
         .on("dp.show", function () {
-            const picker = $(this).data("DateTimePicker");
-            const currentValue = $(this).val();
+            // const picker = $(this).data("DateTimePicker");
+            // const currentValue = $(this).val();
 
-            if (currentValue) {
-                const currentMoment = moment(currentValue, "LT");
-                if (currentMoment.isValid()) {
-                    picker.date(currentMoment);
-                }
-            } else {
-                picker.date(moment().hours(12).minutes(0).seconds(0));
-            }
+            // if (currentValue) {
+            //     const currentMoment = moment(currentValue, "LT");
+            //     if (currentMoment.isValid()) {
+            //         picker.date(currentMoment);
+            //     }
+            // } else {
+            $(this).val("");
+            $(this)
+                .data("DateTimePicker")
+                .date(moment().hours(12).minutes(0).seconds(0));
+            // }
         })
         .on("dp.hide", function (e) {
             const selectedTime = e.date ? e.date.format("LT") : "";
@@ -908,6 +1051,7 @@ function endTimePicker() {
 
 $(document).ready(function () {
     startTimePicker();
+    datepicker();
     endTimePicker();
 });
 
@@ -2378,9 +2522,9 @@ $(".decrease").click(function () {
 //         })
 //         .appendTo("#create_eventForm");
 // });
-$(document).on("click", "#start-time", function () {
-    $(this).val("");
-});
+// $(document).on("click", "#start-time", function () {
+//     $(this).val("");
+// });
 $(document).on("blur", "#start-time", function () {
     var s_t = $(this).val();
     var start_time = convertTo24Hour($(this).val());
@@ -2605,7 +2749,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        datepicker();
+        // datepicker();
     }
 });
 
@@ -2632,7 +2776,16 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                 .find('input[name="activity-start-time[]"]')
                 .val()
         );
+        var endtimelatesr = convertTo24Hour($(this).val());
         console.log(newStartTime);
+        console.log($(this).val());
+        if (newStartTime >= endtimelatesr) {
+            var newEndTime = moment(newStartTime, "HH:mm")
+                .add(1, "hours")
+                .format("HH:mm");
+            var newEndTime12 = convertTo12Hour(newEndTime);
+            $(this).val(newEndTime12);
+        }
         if (
             newEndTime != "" &&
             newStartTime != "" &&
@@ -2664,7 +2817,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             hours = hours % 12 || 12; // Convert hour '0' to '12' in 12-hour format
             hours = hours.toString().padStart(2, "0");
             var newEndTimeWith30Min = `${hours}:${minutes} ${period}`;
-            $(this).val(newEndTimeWith30Min);
+            // $(this).val(newEndTimeWith30Min);
             newEndTime = convertTo24Hour(newEndTimeWith30Min);
 
             // return;
@@ -2701,14 +2854,14 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
                     .parent()
                     .find(".activity_end_time").length;
 
-                $("#" + lastActivityTime)
-                    .children()
-                    .find(".activity_end_time")
-                    .each(function (index) {
-                        if (lastActivityNode - 1 == index) {
-                            $(this).val("");
-                        }
-                    });
+                // $("#" + lastActivityTime)
+                //     .children()
+                //     .find(".activity_end_time")
+                //     .each(function (index) {
+                //         if (lastActivityNode - 1 == index) {
+                //             $(this).val("");
+                //         }
+                //     });
             }
         }
         // if (startEndTime != "") {
@@ -2729,11 +2882,11 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         //     }
         // }
 
-        $(this)
-            .closest(".activity-main-wrp")
-            .next()
-            .find('input[name="activity-start-time[]"]')
-            .val(newEndtimeagain);
+        // $(this)
+        //     .closest(".activity-main-wrp")
+        //     .next()
+        //     .find('input[name="activity-start-time[]"]')
+        //     .val(newEndtimeagain);
 
         setTimeout(function () {
             blurExecutedEndTime = false; // Reset after a delay
@@ -2980,17 +3133,130 @@ function convertTo12Hour(time) {
     }
     return `${hours}:${minutes} ${modifier}`;
 }
+// Function to check end times
+// function checkEndTimes() {
+//     const scheduleWrapper = document.querySelector('.activity-schedule-wrp');
+//     const endTimes = scheduleWrapper.querySelectorAll('.activity_end_time');
+
+//     let exceedsTime = false;
+
+//     endTimes.forEach((endTimeInput) => {
+//         const endTime = endTimeInput.value.trim();
+
+//         if (endTime) {
+//             const [time, period] = endTime.split(' '); // Split into time and AM/PM
+//             const [hours, minutes] = time.split(':'); // Split time into hours and minutes
+
+//             let endHour = parseInt(hours);
+//             let endMinute = parseInt(minutes);
+
+//             // Convert to 24-hour format based on AM/PM
+//             if (period === 'PM' && endHour !== 12) {
+//                 endHour += 12;
+//             } else if (period === 'AM' && endHour === 12) {
+//                 endHour = 0;
+//             }
+
+//             // Check if time exceeds 11:00 PM (23:00)
+//             if (endHour > 23 || (endHour === 23 && endMinute > 0)) {
+//                 exceedsTime = true;
+//             }
+//         }
+//     });
+
+//     if (exceedsTime) {
+//         alert("One or more activities exceed the end time of 11:00 PM.");
+//     } else {
+//         alert("All activities are within the valid time range.");
+//     }
+// }
+
+// Trigger the function on save button click
 
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
     var end_time = $("#ac-end-time").val();
 
+    let activityendtime;
+    // checkEndTimes();
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
+    // $(".accordion-body.new_activity").each(function () {
+    //     var dataId = $(this).data("id");
+    //     activities[dataId] = [];
+    //     $(this)
+    //         .find(".activity-main-wrp")
+    //         .each(function (index) {
+    //             var id = $(this).data("id");
+    //             var description = $(this)
+    //                 .find('input[name="description[]"]')
+    //                 .val();
+    //             var startTime = $(this)
+    //                 .find('input[name="activity-start-time[]"]')
+    //                 .val();
+    //             var endTime = $(this)
+    //                 .find('input[name="activity-end-time[]"]')
+    //                 .val();
+    //             activityendtime = endTime;
+    //             $("#desc-error-" + id).text("");
+    //             $("#start-error-" + id).text("");
+    //             $("#end-error-" + id).text("");
+
+    //             if (description == "") {
+    //                 $("#desc-error-" + id)
+    //                     .text("Description is required")
+    //                     .css("color", "red");
+    //                 isValid++;
+    //             }
+    //             $(this)
+    //                 .find('input[name="description[]"]')
+    //                 .on("input", function () {
+    //                     if ($(this).val() != "") {
+    //                         $("#desc-error-" + id).text("");
+    //                     }
+    //                 });
+
+    //             if (startTime == "") {
+    //                 $("#start-error-" + id).text("Start time is required");
+    //                 isValid++;
+    //             }
+    //             $(this)
+    //                 .find('input[name="activity-start-time[]"]')
+    //                 .on("change", function () {
+    //                     if ($(this).val() != "") {
+    //                         $("#start-error-" + id).text("");
+    //                     }
+    //                 });
+
+    //             if (endTime == "") {
+    //                 $("#end-error-" + id).text("End time is required");
+    //                 isValid++;
+    //             }
+    //             $(this)
+    //                 .find('input[name="activity-end-time[]"]')
+    //                 .on("change", function () {
+    //                     if ($(this).val() != "") {
+    //                         $("#end-error-" + id).text("");
+    //                     }
+    //                 });
+
+    //             var activity = {
+    //                 activity: description,
+    //                 "start-time": startTime,
+    //                 "end-time": endTime,
+    //             };
+    //             activities[dataId].push(activity);
+    //         });
+    //     // toggleSidebar();
+    // });
+    var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
+        var previousEndTime = null;
+        // showAlert = false;
+
         $(this)
             .find(".activity-main-wrp")
             .each(function (index) {
@@ -3004,6 +3270,8 @@ $(document).on("click", "#save_activity_schedule", function () {
                 var endTime = $(this)
                     .find('input[name="activity-end-time[]"]')
                     .val();
+
+                activityendtime = endTime;
 
                 $("#desc-error-" + id).text("");
                 $("#start-error-" + id).text("");
@@ -3053,9 +3321,38 @@ $(document).on("click", "#save_activity_schedule", function () {
                     "end-time": endTime,
                 };
                 activities[dataId].push(activity);
+
+                if (
+                    previousEndTime &&
+                    previousEndTime > startTime &&
+                    !showAlert
+                ) {
+                    toastr.error("Please enter proper time");
+                    showAlert = true;
+                    // return;
+                } else {
+                    showAlert = false;
+                }
+                previousEndTime = endTime;
             });
-        // toggleSidebar();
     });
+
+    if (showAlert == true) {
+        return;
+    }
+    console.log({ activityendtime });
+
+    let lastendtime = convertTo24Hour(end_time);
+    let lastScheduleEndtime = convertTo24Hour(activityendtime);
+
+    console.log(lastendtime);
+    console.log(lastScheduleEndtime);
+
+    if (lastScheduleEndtime > lastendtime) {
+        toastr.error("Please enter proper time");
+        return;
+    }
+
     if (isValid == 0) {
         if (total_activities >= 1) {
             // if (total_activities == 1) {
@@ -3068,6 +3365,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
             );
         }
+
         toggleSidebar();
         console.log(activities);
         eventData.activity = activities;
@@ -3185,20 +3483,22 @@ $(document).on("click", "#next_setting", function () {
 
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
-    $(".step_1").hide();
-    handleActiveClass(".li_design");
-    $(".pick-card").addClass("active");
-    $(".design-span").addClass("active");
-    $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
-    $(".li_event_detail").addClass("menu-success");
+    console.log(dbJson);
+    loadAgain();
+    // $(".step_1").hide();
+    // handleActiveClass(".li_design");
+    // $(".pick-card").addClass("active");
+    // $(".design-span").addClass("active");
+    // $(".li_event_detail").find(".side-bar-list").addClass("menu-success");
+    // $(".li_event_detail").addClass("menu-success");
 
-    $(".step_2").show();
-    $(".event_create_percent").text("25%");
-    $(".current_step").text("1 of 4");
-    active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
+    // $(".step_2").show();
+    // $(".event_create_percent").text("25%");
+    // $(".current_step").text("1 of 4");
+    // active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
 
-    final_step = 2;
-    eventData.step = final_step;
+    // final_step = 2;
+    // eventData.step = final_step;
 });
 
 if ($(".edit-design").hasClass("active")) {
@@ -3417,6 +3717,9 @@ function savePage1Data(close = null) {
     var end_time_zone = $("#end-time-zone").val();
     var schedule = $("#schedule").is(":checked");
     var end_time = $("#end_time").is(":checked");
+    // var rsvp_end_time = $("#end_time").is(":checked");
+    var rsvp_end_time = $("#end-time").val();
+
     var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
     var address_2 = $("#address2").val();
     var address1 = $("#address1").val();
@@ -3453,10 +3756,9 @@ function savePage1Data(close = null) {
         if (schedule) {
             events_schedule = "1";
         }
-        var rsvp_end_time = "";
+        // var rsvp_end_time = "";
         if (end_time) {
-            rsvp_end_time = $("#end-time").val();
-            rsvp_end_time_set = "1";
+            // rsvp_end_time_set = "1";
             if (rsvp_end_time == "") {
                 $("#end-time-error")
                     .css("display", "block")
@@ -3618,6 +3920,15 @@ function savePage1Data(close = null) {
             return;
         }
         // eventData = {
+        if (end_time) {
+            rsvp_end_time_set = "1";
+        }
+
+        if (rsvp_by_date_set) {
+            rsvp_by_date_set = "1";
+        } else {
+            rsvp_by_date_set = "0";
+        }
 
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
@@ -3691,6 +4002,8 @@ function savePage1Data(close = null) {
             $(".current_step").text("3 of 4");
             $("#sidebar_select_design_category").css("display", "none");
             active_responsive_dropdown("drop-down-event-guest");
+            console.log("handleActiveClass");
+
             handleActiveClass(".li_guest");
             $(".li_event_detail")
                 .find(".side-bar-list")
@@ -3776,6 +4089,8 @@ function savePage3Data(close = null) {
         $("step_1").hide();
         $(".step_2").hide();
         $(".step_3").hide();
+        console.log("handleActiveClass");
+
         handleActiveClass(".li_setting");
         $(".event_create_percent").text("99%");
         $(".current_step").text("4 of 4");
@@ -4114,10 +4429,16 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");
+    $(".edit-design-sidebar").removeClass("active");
     $(".edit-design").removeClass("active");
-    if (target == ".li_design") {
+    if (target == ".li_design .edit-design-sidebar") {
+        $(".edit-design-sidebar").addClass("active");
+        $(".pick-card").addClass("menu-success");
+        $(".edit-design-sidebar").removeClass("menu-success");
+    } else if (target == ".li_design .pick-card") {
         $(".pick-card").addClass("active");
         $(".pick-card").removeClass("menu-success");
+        $(".edit-design-sidebar").removeClass("menu-success");
     } else {
         $(target).find(".side-bar-list").addClass("active");
     }
@@ -4144,11 +4465,26 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
-$(document).on("click", ".li_design", function (e) {
+$(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     $("#close_createEvent").css("display", "block");
     e.preventDefault();
-    $(".subcategory-section").show();
-    li_design_click();
+    $(".subcategory-section").hide();
+    $(".design-span").addClass("active");
+    $(".step_1").css("display", "none");
+    $(".step_2").css("display", "none");
+    $(".step_3").css("display", "none");
+    $(".step_4").css("display", "none");
+
+    $(".step_final_checkout").css("display", "none");
+    // active_responsive_dropdown("drop-down-event-design", "drop-down-pick-card");
+    $(".event_create_percent").text("25%");
+    $(".current_step").text("1 of 4");
+
+    // edit_design_modal();
+
+    var subclass = ".side-bar-sub-list";
+    console.log("handleActiveClass");
+    handleActiveClass(".li_design .edit-design-sidebar");
 });
 
 function li_design_click() {
@@ -4188,7 +4524,8 @@ function li_design_click() {
     // edit_design_modal();
 
     var subclass = ".side-bar-sub-list";
-    handleActiveClass(".li_design");
+    console.log("handleActiveClass");
+    handleActiveClass(".li_design .pick-card");
     // }
 }
 
@@ -4397,6 +4734,7 @@ $(document).on("click", ".li_event_details", function () {
 
                         // $('.event_create_percent').text('50%');
                         // $('.current_step').text('2 of 4');
+                        console.log("handleActiveClass");
 
                         handleActiveClass(this);
                         var design = eventData.desgin_selected;
@@ -5962,6 +6300,8 @@ function save_image_design(downloadImage, textData) {
                     $(".main-content-wrp").removeClass("blurred");
                     $(".step_2").hide();
                     $("#edit-design-temp").hide();
+                    console.log("handleActiveClass");
+
                     handleActiveClass(".li_guest");
                     $(".pick-card").addClass("menu-success");
                     $(".edit-design").addClass("menu-success");
@@ -7583,6 +7923,8 @@ $(document).on("click", ".edit_event_details", function () {
     $(".current_step").text("2 of 4");
     $(".step_1").show();
     active_responsive_dropdown("drop-down-event-detail");
+    console.log("handleActiveClass");
+
     handleActiveClass(this);
     $(".li_event_detail").find(".side-bar-list").addClass("active");
     $(".main-content-wrp").addClass("blurred");
@@ -7819,9 +8161,10 @@ $(document).on("click", ".delete_silder", function (e) {
 });
 
 $(document).on("click", ".edit_checkout", function (e) {
-    eventData.isDraftEdit = $(this).attr("data-isDraftEdit");
+    var isDraftEdit = $(this).attr("data-isDraftEdit");
     if (isDraftEdit) {
         eventData.is_update_event = "0";
+        eventData.isDraftEdit = isDraftEdit;
     } else {
         eventData.is_update_event = "1";
     }
@@ -7830,9 +8173,9 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage4Data();
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
-    console.log(data);
-    // $("#loader").show();
-    $(".main-content-wrp").addClass("blurred");
+
+    $("#loader").css("display", "flex");
+    // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
     // var imagePath = '';
@@ -7855,7 +8198,7 @@ $(document).on("click", ".edit_checkout", function (e) {
         data: data,
         success: function (response) {
             console.log(response);
-            $("#loader").css("display", "none");
+            // $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
             if (response.success == true) {
@@ -7894,14 +8237,21 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-                console.log(sliderImages);
 
                 photoSliders.forEach((sliderClass, index) => {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
-                    ); // Select the slider by class
+                    );
+
                     if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`; // Set the image URL
+                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`;
+                        console.log(
+                            `Set src for ${sliderClass}: ${sliderElement.src}`
+                        );
+                    } else {
+                        console.log(
+                            `No element found for class: ${sliderClass} or missing image data.`
+                        );
                     }
                 });
             } else {
@@ -7920,17 +8270,17 @@ $(document).on("click", ".design-sidebar-action", function () {
 });
 
 $(document).on("click", "#close_editEvent", function (e) {
-    if (final_step == 2) {
-        savePage1Data(1);
+    // if (final_step == 2) {
+    savePage1Data(1);
+    // }
+    // if (final_step == 3) {
+    var savePage3Result = savePage3Data(1);
+    if (savePage3Result === false) {
+        $("#loader").css("display", "none");
+        return;
     }
-    if (final_step == 3) {
-        var savePage3Result = savePage3Data(1);
-        if (savePage3Result === false) {
-            $("#loader").css("display", "none");
-            return;
-        }
-    }
-
+    // }
+    $("#loader").css("display", "flex");
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
@@ -7948,9 +8298,9 @@ $(document).on("click", "#close_editEvent", function (e) {
             if (response == 1) {
                 window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
-                setTimeout(function () {
-                    $("#loader").css("display", "none");
-                }, 4000);
+                // setTimeout(function () {
+                //     $("#loader").css("display", "none");
+                // }, 4000);
             }
         },
         error: function (xhr, status, error) {
@@ -8025,6 +8375,8 @@ function step2Open() {
         // get_user(type);
         $(".step_1").show();
         active_responsive_dropdown("drop-down-event-detail");
+        console.log("handleActiveClass");
+
         handleActiveClass(".li_event_detail");
         $(".pick-card").addClass("menu-success");
         $(".edit-design").addClass("menu-success");
@@ -8131,6 +8483,8 @@ function step3open() {
         $(".current_step").text("3 of 4");
         $("#sidebar_select_design_category").css("display", "none");
         active_responsive_dropdown("drop-down-event-guest");
+        console.log("handleActiveClass");
+
         handleActiveClass(".li_guest");
         var type = "all";
         const stepVal = $("#CheckCuurentStep").val();
@@ -8220,6 +8574,7 @@ function step4open() {
         $(".step_4").show();
         $(".event_create_percent").text("99%");
         $(".current_step").text("4 of 4");
+        console.log("handleActiveClass");
 
         handleActiveClass(".li_setting");
         active_responsive_dropdown("drop-down-event-setting");

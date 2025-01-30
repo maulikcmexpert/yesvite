@@ -74,7 +74,7 @@
 
 .edit-images-button-wrp {
     width: 100%;
-    max-width: 400px;
+    max-width: 440px;
     margin: 0px auto;
     height: 100px;
     padding: 10px 16px;
@@ -246,9 +246,11 @@
 }
 
 .size-spacing-inner-top input {
-    width: 58px !important;
+    width: 65px !important;
     height: 36px !important;
     border-radius: 10px !important;
+    padding-left: 0px !important;
+    text-align: center !important;
 }
 
 .range-slider {
@@ -888,6 +890,9 @@
     justify-content: space-between;
 }
 
+.new-edit-save-btn{
+    justify-content: center !important;
+}
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {

@@ -139,7 +139,9 @@ class AccountSettingController extends BaseController
     public function notificationSetting()
     {
         try {
-            $id = decrypt(session()->get('user')['id']);
+            // $id = decrypt(session()->get('user')['id']);
+            $id = Auth::guard('web')->user()->id;
+
             $user = User::with(['user_profile_privacy', 'user_notification_type'])->withCount(
 
                 [
