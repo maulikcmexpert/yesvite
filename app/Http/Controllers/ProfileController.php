@@ -199,14 +199,14 @@ class ProfileController extends BaseController
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
+                'phone_number' => ['present', 'nullable', 'regex:/^\d{3}-\d{3}-\d{4}$/', Rule::unique('users')->ignore(decrypt($request->id))],
                 'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
                 'firstname.required' => 'Please enter First Name',
                 'lastname.required' => 'Please enter Last Name',
 
-                'phone_number.numeric' => 'Please enter Phone Number in digit',
+                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
                 'phone_number.regex' => 'Phone Number format is invalid.',
 
                 'zip_code.required' => 'Please enter Zip Code',
