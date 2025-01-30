@@ -1,4 +1,4 @@
-{{-- {{dd( $eventDetails  )}} --}}
+{{dd( $eventDetails  )}}
 <main class="new-main-content">
 
     <div class="container">
@@ -108,6 +108,7 @@
                                         <div id="chart1" class=""></div>
 
                                     </div>
+                                    <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
                                     <div class="total-item-cat total-rate cmn-card">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 mb-sm-0 mb-3">

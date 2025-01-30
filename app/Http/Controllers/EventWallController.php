@@ -2020,10 +2020,6 @@ class EventWallController extends Controller
     {
         // dd($request);
         $user  = Auth::guard('web')->user();
-
-
-
-        dd($request['event_id']);
         // try {
         if (!empty($request['guest_list'])) {
 
