@@ -428,43 +428,30 @@
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>
                                                     @endif
-                                                @if (!empty($eventDetails['co_hosts']))
-                                                    <div class="host-user-con">
-                                                        <div class="img-wrp">
-                                                            @if ($eventDetails['co_hosts']['profile'] != '')
-                                                            <img src="{{ $eventDetails['co_hosts']['profile'] }}"
-                                                            alt="cohost-img">
-
-                                                        @else
-                                                            @php
-
-                                                                // $parts = explode(" ", $name);
-                                                                $nameParts = explode(
-                                                                    ' ',
-                                                                    $eventDetails['co_hosts']['name'],
-                                                                );
-                                                                $firstInitial = isset($nameParts[0][0])
-                                                                    ? strtoupper($nameParts[0][0])
-                                                                    : '';
-                                                                $secondInitial = isset($nameParts[1][0])
-                                                                    ? strtoupper($nameParts[1][0])
-                                                                    : '';
-                                                                $initials = $firstInitial . $secondInitial;
-
-                                                                // Generate a font color class based on the first initial
-                                                                $fontColor = 'fontcolor' . $firstInitial;
-                                                            @endphp
-                                                            <h5 class="{{ $fontColor }}">
-                                                                {{ $initials }}
-                                                            </h5>
-                                                        @endif
-
+                                                    @if (!empty($eventDetails['co_hosts']))
+                                                    @foreach ($eventDetails['co_hosts'] as $co_host)
+                                                        <div class="host-user-con">
+                                                            <div class="img-wrp">
+                                                                @if (!empty($co_host['profile']))
+                                                                    <img src="{{ $co_host['profile'] }}" alt="cohost-img">
+                                                                @else
+                                                                    @php
+                                                                        $nameParts = explode(' ', $co_host['name']);
+                                                                        $firstInitial = isset($nameParts[0][0]) ? strtoupper($nameParts[0][0]) : '';
+                                                                        $secondInitial = isset($nameParts[1][0]) ? strtoupper($nameParts[1][0]) : '';
+                                                                        $initials = $firstInitial . $secondInitial;
+                                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                                    @endphp
+                                                                    <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
+                                                                @endif
+                                                            </div>
+                                                            <h5>{{ $co_host['name'] }}</h5>
+                                                            <span>Co-host</span>
+                                                            <a href="#" class="msg-btn">Message</a>
                                                         </div>
-                                                        <h5>{{ $eventDetails['co_hosts']['name'] }}</h5>
-                                                        <span>Co-host</span>
-                                                        <a href="#" class="msg-btn">Message</a>
-                                                    </div>
+                                                    @endforeach
                                                 @endif
+
                                             </div>
 
                                             <p
