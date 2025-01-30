@@ -182,16 +182,16 @@
                                     <div class="col-lg-12 mb-2">
                                         <div class="input-form  mb-0">
                                             <input type="text" class="form-control" id="city" name="city" value="{{ $user->city}}">
-                                            <label for="code" class="floating-label ">City <span>*</span></label>
+                                            <label for="city" class="floating-label ">City <span>*</span></label>
                                             <div class="label-error">
                                                 <label id="city-error" class="error" for="city"></label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mb-2">
-                                        <div class="input-form mb-0">
+                                        <div class="input-form">
                                             <input name="state" class="form-control" id="state" value="{{ $user->state}}">
-                                            <label for="code" class="floating-label about-label">State</label>
+                                            <label for="state" class="floating-label about-label">State</label>
                                             <div class="label-error">
                                                 <label id="state-error" class="error" for="state"></label>
                                             </div>
