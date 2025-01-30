@@ -281,6 +281,9 @@ $("#rsvpYesForm").validate({
         firstname: {
             required: true,
         },
+        email: {
+            email: true,
+        },
         lastname: {
             required: true,
         },
@@ -404,6 +407,7 @@ $("#rsvp-no-modal").on("hide.bs.modal", function (e) {
 
 $(document).on("click", ".yes_rsvp_btn", function (e) {
     if (!$("#rsvpYesForm").valid()) {
+        toastr.error("Please fill proper data.");
         e.preventDefault();
         return;
     }
