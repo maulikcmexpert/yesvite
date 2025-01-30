@@ -463,7 +463,7 @@
     color: var(--white);
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .story-seen-profile-img img{
@@ -523,6 +523,10 @@
     height: 300px;
     margin: 0px auto;
     margin-bottom: 30px;
+}
+
+.aboutsuccess{
+    padding: 0px !important;
 }
 
 
