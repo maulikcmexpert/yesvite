@@ -110,7 +110,10 @@ var offsetyesvitec = 0;
 eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
 if (eventData.textData.textElements == undefined) {
+    alert("updated");
     eventData.textData.textElements = eventData.textData.textData;
+    console.log(eventData.textData.textElements);
+    console.log(eventData.textData);
 }
 eventData.step = $("#step").val();
 eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
@@ -4655,7 +4658,7 @@ $(document).on("click", ".li_event_details", function () {
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
-        console.log(dbJson);
+        console.log({ dbJson });
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
         console.log(downloadImage);
