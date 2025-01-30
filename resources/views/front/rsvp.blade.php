@@ -1879,15 +1879,12 @@
 
                                             </div>
                                             <div class="col-lg-12">
-                                                <div class="input-form">
-                                                                 @if($email!="")
-                                                                    <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" readonly>
-                                                                 @else
-                                                                    <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText">
-                                                                @endif
-                                                
+                                                <div class="input-form">                                                                
+                                                    <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" {{$email!=""?"readonly":''}}>
                                                     <label for="Fname" class="form-label input-field floating-label">Email Address</label>
+                                                    
                                                 </div>
+                                                <label id="emailErrorLabel" class="error" for="email"></label>
                                             </div>
                                         </div>
                                     </div>
