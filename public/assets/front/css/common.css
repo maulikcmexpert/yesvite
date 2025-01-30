@@ -1005,6 +1005,7 @@ ul.nav-tabs .nav-link:focus {
     .radio-wrapper .form-check .form-check-input {
         width: 20px !important;
         height: 20px !important;
+        padding-left: 0px !important;
     }
 
     #sidebar_create_event {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{
     Event,
+    User,
     EventPost,
     EventPostComment,
     EventInvitedUser,
@@ -424,5 +425,117 @@ class EventGuestController extends Controller
                 return response()->json(['success' => true, 'message' => "Guest removed successfully"]);
             }
 
+    }
+
+    public function editContact(Request $request)
+    {
+
+        $user  = Auth::guard('api')->user();
+
+        $rawData = $request->getContent();
+
+        $input = json_decode($rawData, true);
+        if ($input == null) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        if ($input['prefer_by'] == 'email') {
+
+            $validator = Validator::make($input, [
+
+                'id' => ['required'],
+
+                'firstname' => ['required'],
+
+
+                'email' => ['required', Rule::unique("users")->ignore($input["id"])],
+
+            ]);
+        } elseif ($input['prefer_by'] == 'phone') {
+            $validator = Validator::make($input, [
+
+                'id' => ['required'],
+
+                'firstname' => ['required'],
+
+
+                'country_code' => ['required'],
+
+                'phone_number' => ['required', Rule::unique("users")->ignore($input["id"])]
+
+            ]);
+        }
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+        try {
+
+            DB::beginTransaction();
+
+            $user = User::where('id', $input['id'])->first();
+
+            if ($user != null) {
+
+                $user->firstname = $input['firstname'];
+                $user->lastname = $input['lastname'];
+                $user->email = $input['email'];
+                $user->country_code = ($input['country_code'] != "") ? $input['country_code'] : 0;
+
+                $user->phone_number = $input['phone_number'];
+                $user->prefer_by = $input['prefer_by'];
+                $user->save();
+
+                DB::commit();
+                $updateUser = User::where('id', $input['id'])->select('id', 'firstname', 'lastname', 'profile', 'country_code', 'phone_number', 'email', 'app_user', 'prefer_by')->first();
+                $useData = [
+                    'id' =>  $updateUser->id,
+                    'first_name' =>  $updateUser->firstname,
+                    'last_name' =>  $updateUser->lastname,
+                    'profile' => (isset($updateUser->profile) && $updateUser->profile != NULL) ? asset('storage/profile/' . $updateUser->profile) : "",
+                    'country_code' =>  (string)$updateUser->country_code,
+                    'phone_number' =>  $updateUser->phone_number,
+                    'email' =>  $updateUser->email,
+                    'app_user' =>  $updateUser->app_user,
+                    'prefer_by' => $updateUser->prefer_by
+                ];
+
+                return response()->json(['status' => 1, 'data' => $useData, 'message' => "Contact updated sucessfully"]);
+            } else {
+                return response()->json(['status' => 0, 'message' => "user not found"]);
+            }
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => 'db error']);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
+
+    public function deleteContact(Request $request)
+    {
+        $user  = Auth::guard('web')->user();
+
+
+        try {
+            $deleteUser = User::where(['id' => $request['user_id']])->first();
+            if ($deleteUser != null) {
+
+                $deleteUser->delete();
+                return response()->json(['status' => 1, 'message' => "User deleted successfully"]);
+            } else {
+                return response()->json(['status' => 0, 'message' => "User is not removed"]);
+            }
+        } catch (QueryException $e) {
+
+            return response()->json(['status' => 0, 'message' => 'db error']);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 }
