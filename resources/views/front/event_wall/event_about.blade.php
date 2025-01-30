@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
-        {{-- {{ dd($eventDetails) }} --}}
+        {{ dd($eventDetails) }}
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
@@ -374,16 +374,16 @@
                                                         </svg>
                                                     </a>
 
-                                                    <!-- <a href="#" class="rsvp-btn noattending-btn btn" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
+                                                   <a href="#" class="rsvp-btn noattending-btn btn {{ $isDisabled }}" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
                                                                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                               <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                                               </svg>
-                                                                            </a> -->
-                                                    <!-- <a href="#" class="rsvp-btn attending-btn btn">Attending
+                                                                            </a>
+                                                  {{-- <a href="#" class="rsvp-btn attending-btn btn {{ $isDisabled }}">Attending
                                                                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                               <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                                               </svg>
-                                                                            </a> -->
+                                                                            </a> --}}
                                                 </div>
                                             </div>
                                         </div>
