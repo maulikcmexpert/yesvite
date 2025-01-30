@@ -3276,15 +3276,18 @@ $(document).on("click", "#save_activity_schedule", function () {
     //     // toggleSidebar();
     // });
     var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    let isendtime =0;
+    let istrue =0;
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
         // showAlert = false;
-
+        isendtime=isendtime +1;
         $(this)
             .find(".activity-main-wrp")
             .each(function (index) {
+                istrue = istrue+1;
                 var id = $(this).data("id");
                 var description = $(this)
                     .find('input[name="description[]"]')
@@ -3295,7 +3298,6 @@ $(document).on("click", "#save_activity_schedule", function () {
                 var endTime = $(this)
                     .find('input[name="activity-end-time[]"]')
                     .val();
-
                 activityendtime = endTime;
 
                 $("#desc-error-" + id).text("");
@@ -3364,6 +3366,9 @@ $(document).on("click", "#save_activity_schedule", function () {
 
     if (showAlert == true) {
         return;
+    }
+    if(istrue != isendtime ){
+        activityendtime =null;
     }
     console.log({ activityendtime });
 
