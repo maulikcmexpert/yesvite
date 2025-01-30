@@ -173,7 +173,7 @@
                                     <div class="col-lg-12 mb-2">
                                         <div class="input-form">
                                             <input type="text" class="form-control" id="city" name="city" value="{{ $user->city}}">
-                                            <label for="city" class="floating-label ">City <span>*</span></label>
+                                            <label for="city" class="floating-label ">City</label>
                                             <div class="label-error">
                                                 <label id="city-error" class="error" for="city"></label>
                                             </div>
