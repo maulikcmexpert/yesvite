@@ -1700,7 +1700,7 @@
                                     </div>
                                     @endif
 
-                                    @if(!empty($invite['prefer_by'] && $invite['prefer_by']=="email"))
+                                    @if(!empty($invite['prefer_by'] && $invite['prefer_by'] =="email"))
                                     <div class="ms-auto">
                                         <span class="fix-updat">Fix/update needed</span>
                                         <button type="button" class="danger-btn">
