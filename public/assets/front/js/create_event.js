@@ -109,6 +109,9 @@ var offsetyesvitec = 0;
 
 eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
+if (eventData.textData.textElements == undefined) {
+    eventData.textData.textElements = eventData.textData.textData;
+}
 eventData.step = $("#step").val();
 eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
 
