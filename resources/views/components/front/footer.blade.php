@@ -273,7 +273,7 @@ defer
         // alert(plan);
     }
     // eventData.plan_selected = 'Free';
-    window.location.href = "events";
+    // window.location.href = "events";
 });
 
       

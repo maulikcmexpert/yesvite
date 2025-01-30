@@ -16,7 +16,7 @@ $notification_list=getNotificationList();
       </a>
       @if (Auth::guard('web')->check())
       <div class="header-right">
-        <a href="#" class="add_new_event_btn create_event_with_plan"
+        <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan"
           ><i class="fa-solid fa-plus"></i> New Event</a
         >
 
