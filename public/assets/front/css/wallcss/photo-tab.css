@@ -70,10 +70,7 @@
 
 .photos-main-wrp{
     margin-top: 0px;
-    max-height: 800px;
     height: 800px;
-    overflow: hidden;
-    overflow-y: scroll;
     padding: 40px 10px;
     position: relative;
 }
@@ -508,6 +505,9 @@
 
 .photos-main-wrp:has(.photos-card-wrp) > .row{
     height: calc(100% - 10%);
+    max-height: calc(100% - 1%);
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 /* ===Responsive=== */
