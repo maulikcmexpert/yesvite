@@ -703,12 +703,12 @@
     background-image: none !important;
     content: '\f078';
     font-family: 'fontAwesome';
-    width: 10px;
-    height: 10px;
+    /* width: 10px;
+    height: 10px; */
     position: absolute;
-    right: 4px;
-    top: 39%;
-    transform: translateY(-50%);
+    right: 0px;
+    /* top: 39%; */
+    /* transform: translateY(-50%); */
     color: var(--lightColor);
     pointer-events: none;
     font-size: 16px;
@@ -717,7 +717,7 @@
 
 
 .collection-wrapper .accordion-button:not(.collapsed)::after{
-    right: 4px;
+    right: 0px;
 }
 
 /* ====== pro-event ======= */
