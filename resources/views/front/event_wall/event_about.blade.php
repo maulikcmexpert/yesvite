@@ -558,8 +558,11 @@
                                                             <div class="shedule-box {{ $colorClass }}">
                                                                 <div class="shedule-box-left">
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
-                                                                    <span>{{ $schedule['start_time'] }} -
-                                                                        {{ $schedule['end_time'] }}</span>
+                                                                    <span>{{ $schedule['start_time'] }}
+                                                                       @if(!empty($schedule['start_time']))
+                                                                        -
+                                                                        {{ $schedule['end_time'] }}
+                                                                        @endif</span>
                                                                 </div>
                                                                 <span class="hrs ms-auto">{{ $duration }}</span>
                                                             </div>
@@ -573,11 +576,14 @@
                                         @endif
 
                                         @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
-                                            @foreach ($eventDetails['gift_registry'] as $gift)
+
                                                 <div class="gift-register cmn-card">
+
                                                     <h4 class="title">Sarah’s Gift Registries</h4>
                                                     <span>Buy them the gift of their choice.</span>
+
                                                     <div class="play-store">
+                                                        @foreach ($eventDetails['gift_registry'] as $gift)
                                                         @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn target-btn" target="_blank">
@@ -598,9 +604,12 @@
                                                                 <h6>{{ $gift['registry_recipient_name'] }}</h6>
                                                             </a>
                                                         @endif
+                                                        @endforeach
                                                     </div>
+
+
                                                 </div>
-                                            @endforeach
+
                                         @endif
 
                                     </div>
@@ -2105,13 +2114,13 @@
             document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
             document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
             document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
+            // document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
         } else {
             // Event has passed, set everything to "00"
             document.getElementById('countdownDays').innerText = "00";
             document.getElementById('countdownHours').innerText = "00";
             document.getElementById('countdownMinutes').innerText = "00";
-            document.getElementById('countdownSeconds').innerText = "00";
+            // document.getElementById('countdownSeconds').innerText = "00";
         }
     }
 

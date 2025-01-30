@@ -1791,6 +1791,11 @@ class EventController extends BaseController
 
     public function saveTempDesign(Request $request)
     {
+
+        $eventID = $request->eventId;
+        if(isset($eventID) && $eventID!=""){
+            EventImage::where('event_id', $eventID)->where('type', 0)->delete();
+        }
         $newImageName = '';
         $fileName = '';
         $i = 0;
@@ -3532,7 +3537,7 @@ class EventController extends BaseController
         if (!empty($getEventImages)) {
             foreach ($getEventImages as $key => $imgVal) {
                 if ($key == 0) {
-                    continue;
+                   $designImg =   $imgVal->image;
                 }
                 $fileName =   $imgVal->image;
                 $savedFiles[] = [
@@ -3545,7 +3550,7 @@ class EventController extends BaseController
                 return response()->json(['status' => 'No valid images to save'], 400);
             }
 
-            return response()->json(['success' => true, 'images' => $savedFiles]);
+            return response()->json(['success' => true, 'images' => $savedFiles,'designImg'=>$designImg]);
         }
     }
 }
