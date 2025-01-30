@@ -7253,7 +7253,7 @@ function get_co_host_list(
                 $(".list_all_invited_user").html(data.view);
             }
 
-            if (data.view == "") {
+            if (data.view == "" && scroll=="false") {
                 $(".list_all_invited_user").html("No data found");
             }
             // $('input[name="guest_list[]"]:checked').each(function () {
