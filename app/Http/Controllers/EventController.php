@@ -2610,8 +2610,9 @@ class EventController extends BaseController
             if (!empty($imageSource['src'])) {
                 $parts = explode(';', $imageSource['src']);
                 $type = $parts[0];
-                print_r($parts);
-                continue;
+                if (!isset($parts[1])) {
+                    continue;
+                }
                 $dataParts = explode(',', $parts[1]);
                 $data = $dataParts[1];
                 $imageData = base64_decode($data);
