@@ -578,9 +578,10 @@
                                         @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
 
                                                 <div class="gift-register cmn-card">
-                                                    @foreach ($eventDetails['gift_registry'] as $gift)
+
                                                     <h4 class="title">Sarah’s Gift Registries</h4>
                                                     <span>Buy them the gift of their choice.</span>
+                                                    @foreach ($eventDetails['gift_registry'] as $gift)
                                                     <div class="play-store">
                                                         @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
                                                             <a href="{{ $gift['registry_link'] }}"
@@ -604,6 +605,7 @@
                                                         @endif
                                                     </div>
                                                     @endforeach
+
                                                 </div>
 
                                         @endif
