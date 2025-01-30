@@ -3472,18 +3472,23 @@ class EventController extends BaseController
     {
         $event_id = $request->id;
         $getEventImages = EventImage::where('event_id', $event_id)->get();
-        if (!empty($getEventImages)) {
-            foreach ($getEventImages as $imgVal) {
-                $fileName =   $imgVal->image;
-                $savedFiles[] = [
-                    'fileName' => $fileName,
-                    'deleteId' => $imgVal->id,
-                ];
-            }
-            if (empty($savedFiles)) {
-                return response()->json(['status' => 'No valid images to save'], 400);
-            }
-            return response()->json(['success' => true, 'images' => $savedFiles]);
+
+                if (!empty($getEventImages)) {
+                    foreach ($getEventImages as $key => $imgVal) {
+                        if($key== 0){
+                            continue;
+                        }
+                        $fileName =   $imgVal->image;
+                        $savedFiles[] = [
+                                        'fileName' => $fileName,
+                                        'deleteId' => $imgVal->id,
+                                    ];
+                    }
+       
+        if (empty($savedFiles)) {
+            return response()->json(['status' => 'No valid images to save'], 400);
         }
+        
+        return response()->json(['success' => true, 'images' => $savedFiles]);
     }
 }
