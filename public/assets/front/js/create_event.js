@@ -8991,6 +8991,7 @@ function sliderImages(id) {
         success: function (response) {
             var savedImages = response.images;
             eventData.slider_images = savedImages;
+            eventData.desgin_selected = response.designImg;
             // console.log(eventData);
             //$("#loader").css("display", "none");
             //toastr.success("Slider Image saved Successfully");
