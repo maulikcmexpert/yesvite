@@ -2055,10 +2055,8 @@ class EventWallController extends Controller
                         $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $request['event_id'], 'sync_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
-                    }
-                    $newInviteGuest[] = $id;
-                   
-                    // $newInviteGuest[] = ['id' => $id];
+                    }                   
+                    $newInviteGuest[] = ['id' => $id];
                 } else {
 
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $request['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
@@ -2074,30 +2072,36 @@ class EventWallController extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    // $newInvite[] = ['id' => $id];
-                    $newInvite[] = $id;
+                    $newInvite[] = ['id' => $id];
+                
                 }
 
                 $ids[] = $id;
             }
-            dd($newInvite,$newInviteGuest);
-
+           
             if (isset($newInvite) && !empty($newInvite)) {
-
+                $filteredIds = array_map(
+                    fn($guest) => $guest['id'],
+                    $newInvite // This is the array you're operating on
+                );
                 $notificationParam = [
                     'sender_id' => $user->id,
                     'event_id' => $request['event_id'],
-                    'newUser' => $newInvite
+                    'newUser' => $filteredIds
                 ];
                 
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
             }
             if (isset($newInviteGuest) && !empty($newInviteGuest)) {
+                $filteredIds = array_map(
+                    fn($guest) => $guest['id'],
+                    $newInviteGuest // This is the array you're operating on
+                );
                 $notificationParam = [
                     'sender_id' => $user->id,
                     'event_id' => $request['event_id'],
-                    'newUser' => $newInviteGuest
+                    'newUser' => $filteredIds
                 ];
                 sendNotificationGuest('invite', $notificationParam);
             }
