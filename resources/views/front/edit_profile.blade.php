@@ -171,7 +171,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mb-2">
-                                        <div class="input-form  mb-0">
+                                        <div class="input-form mb-0">
                                             <input type="text" class="form-control" id="city" name="city" value="{{ $user->city}}">
                                             <label for="city" class="floating-label ">City <span>*</span></label>
                                             <div class="label-error">
@@ -180,7 +180,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mb-2">
-                                        <div class="input-form">
+                                        <div class="input-form mb-0">
                                             <input name="state" class="form-control" id="state" value="{{ $user->state}}">
                                             <label for="state" class="floating-label ">State</label>
                                             <div class="label-error">
