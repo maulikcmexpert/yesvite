@@ -7242,6 +7242,7 @@ function get_co_host_list(
             console.log(data);
 
             if (data.view == "" && scroll=="false") {
+                alert();
                 $(".list_all_invited_user").html("No data found");
                 $("#loader").hide();
                 return;
