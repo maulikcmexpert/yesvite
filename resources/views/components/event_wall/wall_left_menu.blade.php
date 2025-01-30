@@ -85,7 +85,7 @@
                     <li>Multiple Day Event</li>
                 @endif
 
-                    @if (!empty($eventDetails['co_host']))
+                    @if (!empty($eventDetails['co_hosts']))
                         <li>Co-Host</li>
                     @endif
                     @if (!empty($eventDetails['gift_registry']))
