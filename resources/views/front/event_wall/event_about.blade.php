@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
-        {{ dd($eventDetails) }}
+        {{-- {{ dd($eventDetails) }} --}}
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
@@ -147,7 +147,7 @@
                                                         @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
                                                             <li>Multiple Day Event</li>
                                                         @endif
-                                                        @if (!empty($eventDetails['co_host']))
+                                                        @if (!empty($eventDetails['co_hosts']))
                                                             <li>Co-Host</li>
                                                         @endif
                                                         @if (!empty($eventDetails['gift_registry']))
@@ -331,7 +331,7 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if($eventDetails['host_id'] == $login_user_id  || $eventDetails['is_host'] ==  1 || $eventDetails['co_hosts'])
+                                                    @if($eventDetails['host_id'] == $login_user_id  || $eventDetails['is_host'] ==  1 || (!empty($eventDetails['co_hosts'])))
                                                     <a href="#" class="add-calender btn" id="openGoogle">Add to
                                                         calendar
                                                         <svg width="16" height="16" viewBox="0 0 16 16"

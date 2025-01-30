@@ -48,6 +48,9 @@ var final_initial =
         : "";
 var create_event_phone_scroll = false;
 var create_event_yesvite_scroll = false;
+var create_co_event_phone_scroll = false;
+var create_co_event_yesvite_scroll = false;
+
 if (final_profile_or_text == "1") {
     $(".guest-img .selected-co-host-image").show();
     $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
@@ -7499,6 +7502,11 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
     })
         .done(function (data) {
             // console.log(data);
+            if(search_name==""){
+                create_co_event_phone_scroll=true;
+            }else{
+                create_co_event_phone_scroll=false;
+            }
             if (data.view == "" && data.scroll == "false") {
                 // cohostNoMoreContactData = true;
                 $(".list_all_contact_user").html("No Data Found");
@@ -7618,7 +7626,7 @@ $("#select_event_cohost").on("scroll", function () {
 // var cohostphoneLimit=10;
 $("#select_contact_event_cohost").on("scroll", function () {
     // alert();
-    if (cohostphonebusy) return;
+    if (cohostphonebusy || create_co_event_phone_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
