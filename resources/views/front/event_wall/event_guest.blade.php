@@ -1563,7 +1563,7 @@
                         <h5>All clear, invites ready to be re-sent!</h5>
                     </div>
                     @foreach ($eventDetails['failed_invites'] as $key => $invite)
-                    <div class="invite-contact-wrp">
+                    <div class="invite-contact-wrp" data-user-id="{{ $invite['id']}}">
                         <div class="invite-contact">
                             <a href="#" class="invite-img">
                                 @if ( $invite['profile']!= '')

@@ -206,12 +206,12 @@ $(document).ready(function () {
 });
 $(document).on('click', '.delete_failed_contact', function () {
     let userId = $(this).data('user-id');
-
+let event_id = $('#event_id').val();
 
         $.ajax({
-            url: base_url + "event_guest/deleteContact",  // Ensure this route is defined in web.php/api.php
+            url: base_url + "event_guest/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
             type: "POST",
-            data: JSON.stringify({ user_id: userId }),
+            data: JSON.stringify({ user_id: userId ,event_id:event_id }),
             contentType: "application/json",
             headers: {
                 'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
@@ -220,7 +220,8 @@ $(document).on('click', '.delete_failed_contact', function () {
             success: function (response) {
                 if (response.status === 1) {
                     toastr.success(response.message);
-                    location.reload(); // Reload the page to update the UI
+  // // Find the guest container by guestId and remove it from the DOM
+  $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
                 } else {
                     toastr.error(response.message);
                 }
