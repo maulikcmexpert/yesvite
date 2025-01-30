@@ -71,6 +71,7 @@
 .photos-main-wrp{
     margin-top: 0px;
     max-height: 800px;
+    height: 800px;
     overflow: hidden;
     overflow-y: scroll;
     padding: 40px 10px;
@@ -294,9 +295,9 @@
     object-fit: contain;
 }
 
-.no-photos-screen{
+/* .no-photos-screen{
     height: 100%;
-}
+} */
 
 .no-photos-screen-inner{
     height: 650px;

@@ -3276,15 +3276,22 @@ $(document).on("click", "#save_activity_schedule", function () {
     //     // toggleSidebar();
     // });
     var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    let isendtime =0;
+    let istrue =0;
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
         // showAlert = false;
-
+        isendtime=isendtime +1;
+        var activityWrappers = $(this).find(".activity-main-wrp");
+        if (activityWrappers.length === 0) {
+            activityendtime = null; // Set to null if no .activity-main-wrp found
+        } else {
         $(this)
             .find(".activity-main-wrp")
             .each(function (index) {
+                istrue = istrue+1;
                 var id = $(this).data("id");
                 var description = $(this)
                     .find('input[name="description[]"]')
@@ -3295,7 +3302,6 @@ $(document).on("click", "#save_activity_schedule", function () {
                 var endTime = $(this)
                     .find('input[name="activity-end-time[]"]')
                     .val();
-
                 activityendtime = endTime;
 
                 $("#desc-error-" + id).text("");
@@ -3360,23 +3366,30 @@ $(document).on("click", "#save_activity_schedule", function () {
                 }
                 previousEndTime = endTime;
             });
+        }
     });
 
     if (showAlert == true) {
         return;
     }
+    // if(istrue != isendtime ){
+    //     activityendtime =null;
+    // }
     console.log({ activityendtime });
 
-    let lastendtime = convertTo24Hour(end_time);
-    let lastScheduleEndtime = convertTo24Hour(activityendtime);
-
-    console.log(lastendtime);
-    console.log(lastScheduleEndtime);
-
-    if (lastScheduleEndtime > lastendtime) {
-        toastr.error("Please enter proper time");
-        return;
+    if(activityendtime!=null){
+        let lastendtime = convertTo24Hour(end_time);
+        let lastScheduleEndtime = convertTo24Hour(activityendtime);
+    
+        console.log(lastendtime);
+        console.log(lastScheduleEndtime);
+        
+        if (lastScheduleEndtime > lastendtime) {
+            toastr.error("Please enter proper time");
+            return;
+        }
     }
+   
 
     if (isValid == 0) {
         if (total_activities >= 1) {
