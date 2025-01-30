@@ -555,6 +555,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         eventData.temp_id == id
     ) {
         dbJson = eventData.textData;
+        console.log({ dbJson });
     } else {
         console.log(json);
         dbJson = json;
@@ -2649,6 +2650,7 @@ function loadAgain() {
         eventData.temp_id == id
     ) {
         dbJson = eventData.textData;
+        console.log({ dbJson });
     } else {
         console.log(json);
         dbJson = json;
