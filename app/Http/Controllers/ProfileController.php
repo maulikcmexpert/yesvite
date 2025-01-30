@@ -236,7 +236,7 @@ class ProfileController extends BaseController
             $userUpdate->country_code = ($request->country_code != "" || $request->country_code != NULL) ? $request->country_code : $userUpdate->country_code;
             $userUpdate->phone_number = ($request->phone_number != ""  || $request->phone_number != NULL)  ? $request->phone_number : "";
             $userUpdate->about_me = ($request->about_me != "" || $request->about_me != NULL) ? $request->about_me : "";
-            $userUpdate->zip_code = ($request->zip_code != "" || $request->zip_code != NULL) ? $request->zip_code : $userUpdate->zip_code;
+            $userUpdate->zip_code = ($request->zip_code != "" || $request->zip_code != NULL) ? $request->zip_code : "";
             // if ($userUpdate->account_type == '1') {
             //     $validator = Validator::make($request, [
             //         'company_name' => 'required',
@@ -245,8 +245,8 @@ class ProfileController extends BaseController
             // }
             $userUpdate->address = ($request->address != "") ? $request->address : $userUpdate->address;
             $userUpdate->address_2 = (isset($request->address_2)  && $request->address_2 != "" || $request->address_2 != NULL) ? $request->address_2 : $userUpdate->address_2;
-            $userUpdate->city = ($request->city != "" || $request->city != NULL) ? $request->city : $userUpdate->city;
-            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state : $userUpdate->state;
+            $userUpdate->city = ($request->city != "" || $request->city != NULL) ? $request->city : "";
+            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state :"";
             $userUpdate->save();
             DB::commit();
 
@@ -404,9 +404,9 @@ class ProfileController extends BaseController
     {
 
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|min:8',
-            'new_password' => 'required|min:8',
-            'conform_password' => 'required|min:8|same:new_password',
+            'current_password' => 'required|min:6',
+            'new_password' => 'required|min:6',
+            'conform_password' => 'required|min:6|same:new_password',
         ]);
 
         if ($validator->fails()) {

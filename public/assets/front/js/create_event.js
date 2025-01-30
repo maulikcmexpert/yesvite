@@ -107,12 +107,26 @@ if (selected_dataId != "") {
 var limityesvitesc = 10;
 var offsetyesvitec = 0;
 
-eventData.desgin_selected = $("#design_image").val() || undefined;
+eventData.cutome_image = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
-if (eventData.textData.textElements == undefined) {
-    alert("updated");
-    eventData.textData.textElements = eventData.textData.textData;
-    console.log(eventData.textData);
+
+// Ensure eventData.textData is parsed into an object before accessing properties
+if (eventData.textData) {
+    try {
+        eventData.textData = JSON.parse(eventData.textData); // Convert string to object
+    } catch (error) {
+        console.error("Error parsing textData:", error);
+        eventData.textData = {}; // Fallback to empty object if parsing fails
+    }
+}
+
+// Now safely check if textElements exists
+if (eventData.textData != undefined && !eventData?.textData?.textElements) {
+    // alert("updated");
+    eventData.textData.textElements = eventData?.textData?.textData; // Correct assignment
+
+    console.log(eventData.textData.textElements); // Should now log correct data
+    console.log(eventData.textData); // Should log parsed object
 }
 eventData.step = $("#step").val();
 eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
@@ -6264,7 +6278,7 @@ function save_image_design(downloadImage, textData) {
         design_inner_image = $("#shape_img").attr("src");
     }
     var old_shape_url = $("#first_shape_img").attr("src");
-
+    eventData.cutome_image = image;
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
