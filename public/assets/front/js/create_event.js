@@ -8313,6 +8313,17 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
+            if(imgSrc1!=""){
+                $(".photo-edit-delete-1").show();
+              
+            }
+            if(imgSrc2!=""){
+                $(".photo-edit-delete-2").show();
+                
+            }
+            if(imgSrc3!=""){
+                $(".photo-edit-delete-3").show();
+            }
             console.log(eventData.slider_images);
             if (
                 eventData.slider_images != undefined &&
