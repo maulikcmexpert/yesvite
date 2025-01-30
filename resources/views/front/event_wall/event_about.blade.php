@@ -202,8 +202,10 @@
                                                         <div class="hosted-by-date-time-content">
                                                             <h6>Date</h6>
                                                             <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('M d, Y') }}
+                                                                @if(!empty($eventDetails['end_date']))
                                                                 to
                                                                 {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('M d, Y') }}
+                                                                @endif
 
                                                             </h3>
                                                         </div>
@@ -333,24 +335,17 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if($eventDetails['host_id'] == $login_user_id  || $eventDetails['is_host'] ==  1 || (!empty($eventDetails['co_hosts'])))
-                                                    <a href="#" class="add-calender btn" id="openGoogle">Add to
-                                                        calendar
-                                                        <svg width="16" height="16" viewBox="0 0 16 16"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M7.9987 14.6668C11.6654 14.6668 14.6654 11.6668 14.6654 8.00016C14.6654 4.3335 11.6654 1.3335 7.9987 1.3335C4.33203 1.3335 1.33203 4.3335 1.33203 8.00016C1.33203 11.6668 4.33203 14.6668 7.9987 14.6668Z"
-                                                                stroke="#0F172A" stroke-width="1.5"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M5.33203 8H10.6654" stroke="#0F172A"
-                                                                stroke-width="1.5" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path d="M8 10.6668V5.3335" stroke="#0F172A"
-                                                                stroke-width="1.5" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </svg>
-                                                    </a>
-                                                    @endif
+                                                    @if(!($eventDetails['host_id'] == $login_user_id && $eventDetails['is_host'] == 1 && !empty($eventDetails['co_hosts'])))
+    <a href="#" class="add-calender btn" id="openGoogle">Add to calendar
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.9987 14.6668C11.6654 14.6668 14.6654 11.6668 14.6654 8.00016C14.6654 4.3335 11.6654 1.3335 7.9987 1.3335C4.33203 1.3335 1.33203 4.3335 1.33203 8.00016C1.33203 11.6668 4.33203 14.6668 7.9987 14.6668Z"
+                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5.33203 8H10.6654" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 10.6668V5.3335" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+@endif
+
                                                     <input type="hidden" id="eventDate"
                                                         value="{{ $eventDetails['event_date'] }}">
                                                     <input type="hidden" id="eventEndDate"
@@ -432,13 +427,40 @@
                                                         <span>Host</span>
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>
-                                                @elseif (!empty($eventDetails['co_hosts']))
+                                                    @endif
+                                                @if (!empty($eventDetails['co_hosts']))
                                                     <div class="host-user-con">
                                                         <div class="img-wrp">
-                                                            <img src="{{ $eventDetails['user_profile'] }}"
-                                                                alt="cohost-img">
+                                                            @if ($eventDetails['co_hosts']['profile'] != '')
+                                                            <img src="{{ $eventDetails['co_hosts']['profile'] }}"
+                                                            alt="cohost-img">
+
+                                                        @else
+                                                            @php
+
+                                                                // $parts = explode(" ", $name);
+                                                                $nameParts = explode(
+                                                                    ' ',
+                                                                    $eventDetails['co_hosts']['name'],
+                                                                );
+                                                                $firstInitial = isset($nameParts[0][0])
+                                                                    ? strtoupper($nameParts[0][0])
+                                                                    : '';
+                                                                $secondInitial = isset($nameParts[1][0])
+                                                                    ? strtoupper($nameParts[1][0])
+                                                                    : '';
+                                                                $initials = $firstInitial . $secondInitial;
+
+                                                                // Generate a font color class based on the first initial
+                                                                $fontColor = 'fontcolor' . $firstInitial;
+                                                            @endphp
+                                                            <h5 class="{{ $fontColor }}">
+                                                                {{ $initials }}
+                                                            </h5>
+                                                        @endif
+
                                                         </div>
-                                                        <h5>{{ $eventDetails['co_hosts'][0] }}</h5>
+                                                        <h5>{{ $eventDetails['co_hosts']['name'] }}</h5>
                                                         <span>Co-host</span>
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>

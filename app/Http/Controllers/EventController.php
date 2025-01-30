@@ -551,7 +551,9 @@ class EventController extends BaseController
     {
         // $potluck = session('category');
         // dd($request);
-
+        Session::forget('desgin');
+        Session::forget('shape_image');
+        Session::forget('desgin_slider');
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
 
@@ -2592,8 +2594,29 @@ class EventController extends BaseController
 
     public function saveSliderImg(Request $request)
     {
-        $imageSources = $request->imageSources;
+
+        $event_id = $request->eventId;
+
         $savedFiles = [];
+        if(isset($event_id) && $event_id!=''){
+            $getEventImages = EventImage::where('event_id', $event_id)->get();
+    
+            if (!empty($getEventImages)) {
+                foreach ($getEventImages as $key => $imgVal) {
+                    if ($key == 0) {
+                        continue;
+                    }
+                    $fileName =   $imgVal->image;
+                    $savedFiles[] = [
+                        'fileName' => $fileName,
+                        'deleteId' => $imgVal->id,
+                    ];
+                }
+            }
+        }
+
+        $imageSources = $request->imageSources;
+       
         $i = 0;
 
         // Check if there are existing images in the session and unlink them
@@ -2835,6 +2858,10 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
+        Session::forget('desgin');
+        Session::forget('shape_image');
+        Session::forget('desgin_slider');
+
         // dd(session('user_ids'),session('contact_ids'));
         $conatctId = session('contact_ids');
         $potluck = session('category');
