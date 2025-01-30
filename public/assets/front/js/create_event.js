@@ -3,6 +3,7 @@ let isCohost = $("#isCohost").val();
 var total_activities = 0;
 var category = 0;
 var items = 0;
+var $eventId = $("#eventID").val();
 var activities = {};
 var selected_co_host = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
 var selected_co_host_prefer_by =
@@ -8957,4 +8958,27 @@ function update_self_bring(
             console.error("An error occurred while storing the User ID.");
         },
     });
+
+    function sliderImages($id){
+        $.ajax({
+            url: base_url + "event/getSliderImage",
+            method: "POST",
+            data: {
+                id: id,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                var savedImages = response.images;
+                eventData.slider_images = savedImages;
+                console.log(eventData);
+                $("#loader").css("display", "none");
+                toastr.success("Slider Image saved Successfully");
+            },
+            error: function (xhr, status, error) {},
+        });
+    }
+
+    if($eventId!=''){
+        sliderImages($eventId)
+    }
 }

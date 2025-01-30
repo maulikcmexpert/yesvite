@@ -215,6 +215,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
     Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+    Route::post('event/getSliderImage', [ControllersEventController::class, 'getSliderImage']);
     Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
 
     Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
