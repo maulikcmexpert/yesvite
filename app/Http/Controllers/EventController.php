@@ -3468,36 +3468,23 @@ class EventController extends BaseController
         $event_id = $request->id;
 
         $getEventImages = EventImage::where('event_id', $event_id)->get();
+
                 if (!empty($getEventImages)) {
-                    foreach ($getEventImages as $imgVal) {
+                    foreach ($getEventImages as $key => $imgVal) {
+                        if($key== 0){
+                            continue;
+                        }
                         $fileName =   $imgVal->image;
                         $savedFiles[] = [
                                         'fileName' => $fileName,
                                         'deleteId' => $imgVal->id,
                                     ];
                     }
-        // foreach ($imageSources as $imageSource) {
-        //     if (!empty($imageSource['src'])) {
-
-        //         list($type, $data) = explode(';', $imageSource['src']);
-        //         list(, $data) = explode(',', $data);
-        //         $imageData = base64_decode($data);
-        //         $fileName = time() . $i . '-' . uniqid() . '.jpg';
-        //         $i++;
-
-        //         $path = public_path('storage/event_images/') . $fileName;
-
-        //         file_put_contents($path, $imageData);
-        //         $savedFiles[] = [
-        //             'fileName' => $fileName,
-        //             'deleteId' => $imageSource['deleteId']
-        //         ];
-        //     }
-        // }
+       
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-        // session(['desgin_slider' => $savedFiles]);
+        
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
 }
