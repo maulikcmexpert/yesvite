@@ -225,7 +225,7 @@
                                                         <div class="hosted-by-date-time-content">
                                                             <h6>Time</h6>
                                                             <h3>{{ $eventDetails['event_time'] }}
-                                                                {{ !empty($eventDetails['end_time']) }}</h3>
+                                                               @if {{ !empty($eventDetails['end_time']) }} to {{ $eventDetails['end_time']}}  @endif</h3>
                                                         </div>
                                                     </div>
                                                 </div>
