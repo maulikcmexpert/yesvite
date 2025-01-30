@@ -706,7 +706,7 @@
     /* width: 10px;
     height: 10px; */
     position: absolute;
-    right: 4px;
+    right: 0px;
     /* top: 39%; */
     /* transform: translateY(-50%); */
     color: var(--lightColor);
@@ -717,7 +717,7 @@
 
 
 .collection-wrapper .accordion-button:not(.collapsed)::after{
-    right: 4px;
+    right: 0px;
 }
 
 /* ====== pro-event ======= */
