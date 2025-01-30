@@ -1882,8 +1882,9 @@
                                                 <div class="input-form">                                                                
                                                     <input type="email"  name="email" id="email" value="{{(isset($email)&&$email!="")?$email:""}}" class="form-control inputText" {{$email!=""?"readonly":''}}>
                                                     <label for="Fname" class="form-label input-field floating-label">Email Address</label>
-                                                    <label id="emailErrorLabel" class="error" for="email"></label>
+                                                    
                                                 </div>
+                                                <label id="emailErrorLabel" class="error" for="email"></label>
                                             </div>
                                         </div>
                                     </div>
