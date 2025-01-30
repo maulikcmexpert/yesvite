@@ -797,6 +797,7 @@
 
                     <div class="uploaded-images-detail">
                         <div class="uploaded-img-card ">
+                            <input type="file" class="slider_photo" accept="image/png, image/jpeg">
                             <svg class="upload-img-cart-extra-img" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -852,6 +853,7 @@
                             </button>
                         </div>
                         <div class="uploaded-img-card">
+                            <input type="file" class="slider_photo_2 " accept="image/png, image/jpeg">
                             <svg class="upload-img-cart-extra-img" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -909,6 +911,7 @@
                             </button>
                         </div>
                         <div class="uploaded-img-card">
+                            <input type="file" class="slider_photo_3 " accept="image/png, image/jpeg">
                             <svg class="upload-img-cart-extra-img" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
