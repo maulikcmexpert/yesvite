@@ -2023,6 +2023,7 @@ class EventWallController extends Controller
 
 
 
+        
         // try {
         if (!empty($request['guest_list'])) {
 
@@ -2084,6 +2085,7 @@ class EventWallController extends Controller
                     fn($guest) => $guest['id'],
                     $newInvite // This is the array you're operating on
                 );
+                // dd($filteredIds);
                 $notificationParam = [
                     'sender_id' => $user->id,
                     'event_id' => $request['event_id'],
