@@ -6174,7 +6174,6 @@ $(document).on("click", "#final_create_event", function (e) {
         },
         data: data,
         success: function (response) {
-            console.log(response);
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
 
@@ -8216,16 +8215,22 @@ $(document).on("click", ".edit_checkout", function (e) {
         },
         data: data,
         success: function (response) {
-            console.log(response);
-            // $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
-
-            if (response.success == true) {
-                toastr.success("Event Updated Successfully");
-                window.location.href = base_url + "home";
+            if(response.isupadte==true){
+                if (response.success == true) {
+                    toastr.success("Event Updated Successfully");
+                    window.location.href = base_url + "home";
+                } 
+            }else{
+                if (response.is_registry == "1") {
+                    $("#gift_registry_logo").html(response.view);
+                    // $('#eventModal').modal('show');
+                } else {
+                    toastr.success("Event Created Successfully");
+                    // window.location.href="profile";
+                }
+                $("#eventModal").modal("show");
             }
-
-            // $("#eventModal").modal("show");
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
