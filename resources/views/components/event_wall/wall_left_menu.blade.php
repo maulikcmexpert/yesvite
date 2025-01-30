@@ -1,3 +1,4 @@
+{{-- {{dd($eventDetails)}} --}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -146,7 +147,12 @@
                     </div>
                     <div class="hosted-by-date-time-content">
                         <h6>Time</h6>
-                        <h3>{{ $eventDetails['event_time'] }}</h3>
+                        <h3>{{ $eventDetails['event_time'] }}
+                            @if (!empty($eventDetails['end_time'] ))
+                            to
+                            {{ $eventDetails['end_time'] }}
+                        @endif
+                        </h3>
                     </div>
                 </div>
             </div>

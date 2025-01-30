@@ -84,6 +84,7 @@ class EventAboutController extends Controller
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
             $eventDetails['end_date'] = $eventDetail->end_date;
             $eventDetails['end_time'] = $eventDetail->rsvp_end_time;
+            $eventDetails['is_co_host'] = ($eventDetail->user_id != $user->id) ? 1 : 0;;
 
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 

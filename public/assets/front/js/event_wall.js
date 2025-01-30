@@ -869,10 +869,12 @@ $(document).ready(function () {
 
         // Disable the input field if the maximum length is reached
         if (charCount >= maxLength) {
-            $(inputField).prop('disabled', true);
-        } else {
-            $(inputField).prop('disabled', false);
+            $(inputField).val($(inputField).val().substring(0, maxLength));
+            charCount = maxLength; // Adjust count after trimming
         }
+        // } else {
+        //     $(inputField).prop('disabled', false);
+        // }
     }
 
     // Function to validate form fields
@@ -971,7 +973,7 @@ $(document).ready(function () {
             // Check if there's a valid photo (adjust this to your actual field for photo upload)
             var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
-                toastr.danger('Please upload a photo for the photo post.');
+                toastr.error('Please upload a photo for the photo post.');
             }
 
 

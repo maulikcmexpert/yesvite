@@ -320,9 +320,9 @@
                                                             @endif
                                                         </button>
 
-
+                                                   @if($post['commenting_on_off'] == "1")
                                                         <button
-                                                            class="posts-card-comm show-comments-btn show-btn-comment "
+                                                            class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
                                                             event_p_id="{{ $post['id'] }}">
                                                             <svg viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -337,6 +337,7 @@
                                                                     stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
                                                         </button>
+                                                        @endif
                                                         <div class="photos-likes-options-wrp emoji-picker"
                                                             id="emojiDropdown" style="display: none;">
                                                             <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
@@ -359,8 +360,11 @@
                                                 </div>
 
                                                 <div class="posts-card-main-comment">
-                                                    <input type="text" class="form-control post_comment"
-                                                        id="post_comment" placeholder="Add Comment">
+                                                    @if($post['commenting_on_off'] == "1")
+                                                    <input type="text" class="form-control post_comment" id="post_comment" placeholder="Add Comment">
+                                                @else
+                                                    <input type="text" class="form-control post_comment" id="post_comment" placeholder="Add Comment" style="display:none;">
+                                                @endif
                                                         <input type="hidden" id="comment_on_of" value="{{$post['commenting_on_off']}}">
                                                     <span class="comment-send-icon send_comment"
                                                         data-event-id="{{ $event }}"

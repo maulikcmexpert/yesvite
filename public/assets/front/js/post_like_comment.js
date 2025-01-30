@@ -1,8 +1,7 @@
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
-    let selectedContacts = [];
-    let selectedPhoneContacts = [];
+
 
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
@@ -125,9 +124,22 @@ $(document).ready(function () {
         const comment_on_of = $("#comment_on_of").val();
         alert(comment_on_of);
         if (comment_on_of !== "1") {
-            toastr.error(" yor are not able Commenting.");
+            // Disable the input field
+            commentInput.prop("disabled", true);
+
+            // Find and remove the button inside the same parent wrapper
+            parentWrapper.find(".posts-card-comm").remove();
+
+            // Show an error message using toastr
+            toastr.error("You are not able to comment.");
+
             return; // Exit the function if commenting is off
         }
+
+        // Enable the input and show the button if commenting is allowed
+        commentInput.prop("disabled", false);
+        parentWrapper.find(".posts-card-comm").show();
+
         const commentText = commentInput.val().trim();
         const parentCommentId =
             $(".commented-user-wrp.active").data("comment-id") || null; // Find active comment if replying
@@ -402,6 +414,8 @@ $(document).on("keyup", ".search-phone", function () {
 });
 
 var allContactsSuccess = false;
+let selectedContacts = [];
+let selectedPhoneContacts = [];
 $(document).ready(function () {
     const yesviteUrl = base_url + "event_wall/get_yesviteContact"; // URL for yesvite contacts
     //const phoneUrl = base_url + "event_wall/get_phoneContact"; // URL for phone contacts
@@ -528,6 +542,7 @@ function handleCheckboxChange(
         selectedEmail: false,
         selectedPhone: false,
     };
+    console.log(contactData);
 
     if ($checkbox.data("type") === "email") {
         contactData.selectedEmail = $checkbox.is(":checked");

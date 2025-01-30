@@ -543,7 +543,7 @@ class EventWallController extends Controller
         $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
             $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
         }, 'event_invited_user' => function ($query) {
-            $query->where('is_co_host', '0')->with('user');
+            $query->where('is_co_host', '1')->with('user');
         }])->where('id', $event)->first();
         $guestView = [];
         $eventDetails['id'] = $eventDetail->id;
@@ -578,6 +578,8 @@ class EventWallController extends Controller
         $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party ?? 0;
         $eventDetails['event_date'] = $eventDetail->start_date;
         $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+        $eventDetails['end_date'] = $eventDetail->end_date;
+        $eventDetails['end_time'] = $eventDetail->rsvp_end_time;
         // if ($eventDetail->event_schedule->isNotEmpty()) {
 
         //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
@@ -1988,7 +1990,7 @@ class EventWallController extends Controller
                     session()->put('contactwall_ids', $userIdsSession);
                     Session::save();
                 }
-            
+
         }
         $selected_yesvite_user = Session::get('userwall_ids');
         $selected_phone_user = Session::get('contactwall_ids');

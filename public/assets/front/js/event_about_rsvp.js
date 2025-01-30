@@ -97,7 +97,7 @@ $(document).ready(function() {
         const eventName = $("#eventName").val();
 
         if (!eventDate || !eventTime) {
-            alert("Please provide both date and time for the event.");
+            toastr.error("Please provide both date and time for the event.");
             return;
         }
 
