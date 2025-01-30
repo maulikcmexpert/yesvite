@@ -709,6 +709,7 @@ class EventController extends BaseController
                 }
             } else {
                 $event_creation->design_image = $request->cutome_image;
+                $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
 
             $textElemtents = $request->textData['textElements'];
