@@ -567,13 +567,15 @@ function initMap() {
         });
     } else {
         const mapElement = document.getElementById("map");
-        mapElement.style.height = "198px";
-        mapElement.style.width = "100%";
+        if (mapElement) {
+            mapElement.style.height = "198px";
+            mapElement.style.width = "100%";
 
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: latitude, lng: longitutde },
-            zoom: 15,
-        });
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: latitude, lng: longitutde },
+                zoom: 15,
+            });
+        }
 
         // Create the marker
         const marker = new google.maps.Marker({
