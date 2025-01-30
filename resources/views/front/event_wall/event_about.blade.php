@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
-        {{ dd($eventDetails) }}
+        {{-- {{ dd($eventDetails) }} --}}
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
@@ -147,7 +147,7 @@
                                                         @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
                                                             <li>Multiple Day Event</li>
                                                         @endif
-                                                        @if (!empty($eventDetails['co_host']))
+                                                        @if (!empty($eventDetails['co_hosts']))
                                                             <li>Co-Host</li>
                                                         @endif
                                                         @if (!empty($eventDetails['gift_registry']))
