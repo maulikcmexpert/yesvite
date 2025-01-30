@@ -5162,21 +5162,21 @@ function plusBTN(that) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
-        update_self_bring(
-            that,
-            isvalidUserQnt,
-            categoryItemKey,
-            categoryIndexKey,
-            quantity,
-            categoryItemQuantity,
-            "plus"
-        );
-    } else {
-        quantity--;
+    // if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    update_self_bring(
+        that,
+        isvalidUserQnt,
+        categoryItemKey,
+        categoryIndexKey,
+        quantity,
+        categoryItemQuantity,
+        "plus"
+    );
+    // } else {
+    //     quantity--;
 
-        that.parent().children(".input-qty").val(quantity);
-    }
+    //     that.parent().children(".input-qty").val(quantity);
+    // }
 }
 $(".qty-btnminus").on("click", function () {
     minusBTN($(this));
@@ -5203,25 +5203,25 @@ function minusBTN(that) {
     var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
-        if (itemQuantityMinus == 1) {
-            update_self_bring(
-                that,
-                isvalidUserQnt,
-                categoryItemKey,
-                categoryIndexKey,
-                quantity,
-                categoryItemQuantity,
-                "minus"
-            );
-            if (quantity == 0) {
-                that.parent().find(".item-quantity-minus").val(0);
-                that.parent().children(".input-qty").val(0);
-            }
+    // if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (itemQuantityMinus == 1) {
+        update_self_bring(
+            that,
+            isvalidUserQnt,
+            categoryItemKey,
+            categoryIndexKey,
+            quantity,
+            categoryItemQuantity,
+            "minus"
+        );
+        if (quantity == 0) {
+            that.parent().find(".item-quantity-minus").val(0);
+            // that.parent().children(".input-qty").val(0);
         }
-    } else {
-        // that.parent().find(".input-qty").val(0);
     }
+    // } else {
+    //     // that.parent().find(".input-qty").val(0);
+    // }
 }
 
 function update_self_bring_bck(
@@ -8218,7 +8218,7 @@ $(document).on("click", ".edit_checkout", function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    //  window.location.href = base_url + "home";
+                    window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
@@ -8319,7 +8319,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         data: eventData,
         success: function (response) {
             if (response == 1) {
-                window.location.href = base_url + "home";
+                // window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
                 // setTimeout(function () {
                 //     $("#loader").css("display", "none");

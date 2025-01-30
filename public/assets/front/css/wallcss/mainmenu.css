@@ -1476,6 +1476,7 @@
 .home-center-profile-img h5{
     width: 100%;
     height: 100%;
+    max-width: 100%;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -2545,7 +2546,7 @@
     margin: 0 auto 16px !important;
 }
 .cancel-event .delete-icon img {
-    width: 24px !important; 
+    width: 24px !important;
     height: 24px !important;
     border-radius: 100%;
 }
