@@ -3371,17 +3371,19 @@ $(document).on("click", "#save_activity_schedule", function () {
         activityendtime =null;
     }
     console.log({ activityendtime });
-
-    let lastendtime = convertTo24Hour(end_time);
-    let lastScheduleEndtime = convertTo24Hour(activityendtime);
-
-    console.log(lastendtime);
-    console.log(lastScheduleEndtime);
-
-    if (lastScheduleEndtime > lastendtime) {
-        toastr.error("Please enter proper time");
-        return;
+    if(activityendtime!=null){
+        let lastendtime = convertTo24Hour(end_time);
+        let lastScheduleEndtime = convertTo24Hour(activityendtime);
+    
+        console.log(lastendtime);
+        console.log(lastScheduleEndtime);
+        
+        if (lastScheduleEndtime > lastendtime) {
+            toastr.error("Please enter proper time");
+            return;
+        }
     }
+   
 
     if (isValid == 0) {
         if (total_activities >= 1) {
