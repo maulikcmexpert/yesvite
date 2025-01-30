@@ -2039,6 +2039,7 @@ class EventWallController extends Controller
                     if (!in_array($value['id'], $checkUserInvitation)) {
                         $checkUserExist = contact_sync::where('id', $value['id'])->first();
                         $newUserId = NULL;
+                        
                         if ($checkUserExist) {
                             if ($checkUserExist->email != '') {
                                 $newUserId = checkUserEmailExist($checkUserExist);
@@ -2055,7 +2056,9 @@ class EventWallController extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    $newInviteGuest[] = ['id' => $id];
+                    $newInviteGuest[] = [$id];
+                   
+                    // $newInviteGuest[] = ['id' => $id];
                 } else {
 
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $request['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
@@ -2071,12 +2074,13 @@ class EventWallController extends Controller
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
-                    $newInvite[] = ['id' => $id];
+                    // $newInvite[] = ['id' => $id];
+                    $newInvite[] = [$id];
                 }
 
                 $ids[] = $id;
             }
-
+            dd($newInvite,$newInviteGuest);
 
             if (isset($newInvite) && !empty($newInvite)) {
 
@@ -2085,7 +2089,7 @@ class EventWallController extends Controller
                     'event_id' => $request['event_id'],
                     'newUser' => $newInvite
                 ];
-                 dd($newInvite);
+                
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
             }
