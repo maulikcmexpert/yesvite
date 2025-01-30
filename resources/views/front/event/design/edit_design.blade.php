@@ -816,7 +816,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             <img class="photo-slider-1 slider_img" data-delete="1" src="" alt="">
-                            <button class="uploaded-img-card-edit">
+                            <button style="display: none" class="uploaded-img-card-edit photo-edit-delete-1">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -829,7 +829,7 @@
                                 </svg>
                                 <input type="file" class="slider_photo" accept="image/png, image/jpeg">
                             </button>
-                            <button class="uploaded-img-card-delete delete-slider-1 delete_silder">
+                            <button style="display: none" class="uploaded-img-card-delete delete-slider-1 delete_silder photo-edit-delete-1">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -872,7 +872,7 @@
                             </svg>
 
                             <img class="photo-slider-2 slider_img" data-delete="2" src="" alt="" style="display: none">
-                            <button class="uploaded-img-card-edit">
+                            <button style="display: none" class="uploaded-img-card-edit photo-edit-delete-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -886,7 +886,7 @@
                                 <input type="file" class="slider_photo_2 " accept="image/png, image/jpeg">
 
                             </button>
-                            <button class="uploaded-img-card-delete delete-slider-2 delete_silder">
+                            <button style="display: none" class="uploaded-img-card-delete delete-slider-2 delete_silder photo-edit-delete-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -928,7 +928,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             <img class="photo-slider-3 slider_img" data-delete="3" src="" alt="" style="display: none">
-                            <button class="uploaded-img-card-edit">
+                            <button style="display: none" class="uploaded-img-card-edit photo-edit-delete-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -941,7 +941,7 @@
                                 </svg>
                                 <input type="file" class="slider_photo_3" accept="image/png, image/jpeg">
                             </button>
-                            <button class="uploaded-img-card-delete delete-slider-3 delete_silder">
+                            <button style="display: none" class="uploaded-img-card-delete delete-slider-3 delete_silder photo-edit-delete-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
