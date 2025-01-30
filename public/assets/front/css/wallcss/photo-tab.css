@@ -506,7 +506,7 @@
     border-bottom: 1px solid var(--border);
 }
 
-.photos-main-wrp > .row{
+.photos-main-wrp:has(.photos-card-wrp) > .row{
     height: calc(100% - 10%);
 }
 
