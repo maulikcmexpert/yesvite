@@ -103,7 +103,7 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}" >
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -116,7 +116,8 @@ if ($hostView) {
                                         @endif
                                         <span class="active-dot"></span>
                                     </div>
-                                    <div class="posts-card-head-left-content contact_search" data-search = "{{ $user['firstname'] }} {{ $user['lastname'] }}">
+                                    <div class="posts-card-head-left-content contact_search"
+                                        data-search = "{{ $user['firstname'] }} {{ $user['lastname'] }}">
                                         <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
                                         @if (!empty($user['city']) || !empty($user['state']))
                                             <p>
@@ -171,10 +172,10 @@ if ($hostView) {
                                         </span>
                                     @endif
                                     @if ($eventInfo['guest_view']['is_host'] == 1)
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
-                                            class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
-                                            data-guest-id="{{ $guest['id'] }}"></i></button>
-                                            @endif
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
+                                                class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
+                                                data-guest-id="{{ $guest['id'] }}"></i></button>
+                                    @endif
                                 </div>
                             </li>
                         @endif

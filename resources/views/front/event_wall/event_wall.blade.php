@@ -241,9 +241,9 @@
                                                                 </div> --}}
                                                                 @endforeach
                                                             @endif
-                                                            <div class="custom-pagination"></div>
-                                                        </div>
 
+                                                        </div>
+                                                        <div class="custom-pagination"></div>
                                                         <!-- Custom Pagination -->
 
                                                         <div class="custom-dots-container"></div>
