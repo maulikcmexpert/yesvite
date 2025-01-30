@@ -4540,6 +4540,7 @@ function edit_design_modal() {
             eventDetail2.static_information
         );
         dbJson = static_information_json.textData;
+        console.log({ dbJson });
         $("#modalImage").attr("src", static_information_json.template_url);
         image = static_information_json.template_url;
         $("#imageEditor2").remove();
@@ -4651,7 +4652,7 @@ $(document).on("click", ".li_event_details", function () {
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
-
+        console.log(dbJson);
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
         console.log(downloadImage);
@@ -5162,21 +5163,21 @@ function plusBTN(that) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
-        update_self_bring(
-            that,
-            isvalidUserQnt,
-            categoryItemKey,
-            categoryIndexKey,
-            quantity,
-            categoryItemQuantity,
-            "plus"
-        );
-    } else {
-        quantity--;
+    // if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    update_self_bring(
+        that,
+        isvalidUserQnt,
+        categoryItemKey,
+        categoryIndexKey,
+        quantity,
+        categoryItemQuantity,
+        "plus"
+    );
+    // } else {
+    //     quantity--;
 
-        that.parent().children(".input-qty").val(quantity);
-    }
+    //     that.parent().children(".input-qty").val(quantity);
+    // }
 }
 $(".qty-btnminus").on("click", function () {
     minusBTN($(this));
@@ -5203,25 +5204,25 @@ function minusBTN(that) {
     var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
-        if (itemQuantityMinus == 1) {
-            update_self_bring(
-                that,
-                isvalidUserQnt,
-                categoryItemKey,
-                categoryIndexKey,
-                quantity,
-                categoryItemQuantity,
-                "minus"
-            );
-            if (quantity == 0) {
-                that.parent().find(".item-quantity-minus").val(0);
-                that.parent().children(".input-qty").val(0);
-            }
+    // if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    if (itemQuantityMinus == 1) {
+        update_self_bring(
+            that,
+            isvalidUserQnt,
+            categoryItemKey,
+            categoryIndexKey,
+            quantity,
+            categoryItemQuantity,
+            "minus"
+        );
+        if (quantity == 0) {
+            that.parent().find(".item-quantity-minus").val(0);
+            // that.parent().children(".input-qty").val(0);
         }
-    } else {
-        // that.parent().find(".input-qty").val(0);
     }
+    // } else {
+    //     // that.parent().find(".input-qty").val(0);
+    // }
 }
 
 function update_self_bring_bck(
@@ -6213,6 +6214,7 @@ $(document).on("click", ".store_desgin_temp", function () {
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
+        console.log(dbJson);
         // dbJson = {
         //     textElements: textData
         // };
@@ -8218,7 +8220,7 @@ $(document).on("click", ".edit_checkout", function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    //  window.location.href = base_url + "home";
+                    window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
@@ -8319,7 +8321,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         data: eventData,
         success: function (response) {
             if (response == 1) {
-                window.location.href = base_url + "home";
+                // window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
                 // setTimeout(function () {
                 //     $("#loader").css("display", "none");

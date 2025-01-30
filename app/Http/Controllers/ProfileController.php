@@ -206,7 +206,7 @@ class ProfileController extends BaseController
                 'firstname.required' => 'Please enter First Name',
                 'lastname.required' => 'Please enter Last Name',
 
-                'phone_number.numeric' => 'Please enter Phone Number in digit',
+                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
                 'phone_number.regex' => 'Phone Number format is invalid.',
 
                 'zip_code.required' => 'Please enter Zip Code',
