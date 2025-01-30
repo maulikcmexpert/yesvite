@@ -538,7 +538,7 @@ $(document).on("click", ".check_rsvp_no", function (e) {
 
 const latitude = parseFloat(document.getElementById("event_latitude")?.value);
 const longitutde = parseFloat(document.getElementById("event_logitude")?.value);
-const address = document.getElementById("event_address").value;
+const address = document.getElementById("event_address")?.value;
 
 function initMap() {
     // Create the map
