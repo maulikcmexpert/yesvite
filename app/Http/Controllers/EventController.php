@@ -1062,7 +1062,8 @@ class EventController extends BaseController
         return response()->json([
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
             'success' => true,
-            'is_registry' => $gift
+            'is_registry' => $gift,
+            'event_id'=>$eventId
         ]);
     }
 
@@ -3254,12 +3255,12 @@ class EventController extends BaseController
             if ($request->gift_registry == "1") {
                 $gift_registry = $request->gift_registry_data;
             }
-            // if (isset($request->desgin_selected) && $request->desgin_selected != "") {
-            //     EventImage::create([
-            //         'event_id' => $eventId,
-            //         'image' => $request->desgin_selected
-            //     ]);
-            // }
+            if (isset($request->desgin_selected) && $request->desgin_selected != "") {
+                EventImage::create([
+                    'event_id' => $eventId,
+                    'image' => $request->desgin_selected
+                ]);
+            }
 
             // if (isset($request->slider_images) && !empty($request->slider_images)) {
             //     foreach ($request->slider_images as $key => $value) {
