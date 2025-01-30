@@ -9,7 +9,12 @@ use App\Models\{EventPostPollOption, EventPostPoll, User};
 class UserEventPollData extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'event_post_poll_id',
+        'event_poll_option_id',
+        'user_id'
 
+    ];
     public function event_post_poll()
     {
         return $this->belongsTo(EventPostPoll::class);

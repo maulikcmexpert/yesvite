@@ -152,8 +152,12 @@
     </div>
 </div>
 @endif
-<script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
 
+<script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
+
+<script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
+<script src="{{ asset('assets/front/js/contact_us.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" stylesheet.crossOrigin = "anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -166,9 +170,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <!-- custom-js -->
-<script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
-<script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
 
 
 
@@ -193,7 +195,7 @@
 
 <script src="{{ asset('assets/front/js/map.js') }}"></script>
 {{-- <script src="{{ asset('assets/front/js/map.js') }}"></script> --}}
-<script src="{{ asset('assets/front/js/contact_us.js') }}"></script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
@@ -236,11 +238,20 @@ defer
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
-<script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
 <script src="{{ asset('assets/front/new_js/scritp.js')}}"></script>
+<script src="{{ asset('assets/front/walljs/scritp.js')}}"></script>
+<script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
+
 <script src="{{ asset('assets/front/new_js/calender.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+{{-- <script src="{{ asset('assets/front/js/event_wall.js')}}"></script > --}}
+<script src="{{ asset('assets/front/walljs/slider.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/4.0.0/apexcharts.min.js" crossorigin="anonymous"></script>
+<script src="{{ asset('assets/front/walljs/guest.js')}}"></script>
+<script src="{{ asset('assets/front/walljs/potluck.js')}}"></script>
 
 <script>
     new WOW().init()

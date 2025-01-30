@@ -59,6 +59,7 @@ Route::post('/run-queue-work', function () {
 Route::get('/rsvp/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
     ->name('short.url');
 Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
+Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
@@ -256,11 +257,44 @@ Route::middleware('checkUserExist')->group(function () {
 
 
     Route::get('event_about/{id}',  [EventAboutController::class, 'index'])->name('event.event_about');
+    Route::post('event_about/sentRsvpData',  [EventAboutController::class, 'sentRsvpData'])->name('event.sentRsvpData');
     Route::get('event_potluck/{id}',  [EventPotluckController::class, 'index'])->name('event.event_potluck');
-    Route::get('event_photo/{id}',  [EventPhotoController::class, 'index'])->name('event.event_photo');
-    Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
-    Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
+    Route::post('event_potluck/createCategory',  [EventPotluckController::class, 'addPotluckCategory'])->name('event_potluck.addCategory');
+    Route::post('event_potluck/updateCategory/{id}', [EventPotluckController::class, 'updateCategory'])->name('event_potluck.updateCategory');
+    Route::get('event_potluck/getCategory/{id}', [EventPotluckController::class, 'getCategory'])->name('event_potluck.getCategory');
+    Route::post('event_potluck/delete-category', [EventPotluckController::class, 'deleteCategory']);
+    Route::post('event_potluck/add-potluck-category-item', [EventPotluckController::class, 'addPotluckCategoryItem']);
+    Route::post('event_potluck/editPotluckCategoryItem', [EventPotluckController::class, 'editPotluckCategoryItem']);
+    Route::post('event_potluck/fetch-user', [EventPotluckController::class, 'fetchUserDetails']);
+    Route::post('event_potluck/editUserPotluckItem', [EventPotluckController::class, 'editUserPotluckItem']);
+    Route::post('event_potluck/deleteUserPotluckItem', [EventPotluckController::class, 'deleteUserPotluckItem']);
 
+    Route::get('event_photo/{id}',  [EventPhotoController::class, 'index'])->name('event.event_photos');
+    Route::post('event_photo/event_post', [EventPhotoController::class, 'createEventPost'])->name('event_photo.eventPost');
+    Route::post('event_photo/fetch-photo-details', [EventPhotoController::class, 'fetchPost']);
+    Route::post('event_photo/deletePost', [EventPhotoController::class, 'deletePost']);
+    Route::post('event_photo/userPostComment', [EventPhotoController::class, 'userPostComment']);
+    Route::post('event_photo/postControl', [EventPhotoController::class, 'postControl']);
+    Route::post('event_photo/userPostCommentReply', [EventPhotoController::class, 'userPostCommentReply']);
+    Route::post('event_photo/userPostLikeDislike', [EventPhotoController::class, 'userPostLikeDislike'])->name('event_photo.userPostLikeDislike');
+    Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
+    Route::get('event_guest/fetch_guest/{id}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
+    Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
+    Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
+    Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
+    Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
+    Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
+    Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
+    Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
+    Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
+    Route::post('event_wall/userPostComment', [EventWallController::class, 'userPostComment']);
+    Route::post('event_wall/userPostCommentReply', [EventWallController::class, 'userPostCommentReply']);
+    Route::post('event_wall/userPostLikeDislike', [EventWallController::class, 'userPostLikeDislike'])->name('event_wall.userPostLikeDislike');
+    Route::post('event_wall/event_post', [EventWallController::class, 'createPost'])->name('event_wall.eventPost');
+    Route::post('event_wall/get_phoneContact', [EventWallController::class, 'get_PhoneContact'])->name('event_wall.get_phoneContact');
+    Route::post('event_wall/get_yesviteContact', [EventWallController::class, 'get_yesviteContact'])->name('event_wall.get_yesviteContact');
+    Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
+    Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 });
 

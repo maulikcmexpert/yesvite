@@ -70,7 +70,7 @@
    color: var(--secondary-black);
    font-size: 16px;
    font-family: var(--SFProDisplay-Semibold);
-   margin-right: 4px;
+   margin-right: 6px;
    margin-bottom: 0;
 }
 
@@ -100,6 +100,8 @@
     width: 100px;
     height: 100px;
     margin: 0 auto 16px;
+    border: 1px solid #f1efef;
+    border-radius: 100%;
 }
 
 .massage-host .massge-data .host-img img{
@@ -107,6 +109,19 @@
     height: 100%;
     object-fit: contain;
     border-radius: 100%;
+}
+
+.massage-host .massge-data .host-img h5{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 30px !important;
+    line-height: normal !important;
+    color: #fff;
 }
 
 .massage-host .massge-data h5{
@@ -352,6 +367,7 @@
     margin-top: 8px;
     font-family: var(--SFProDisplay-Regular);
     display: block;
+    line-height: 20px;
 }
 
 .post-potluck-category .host{
@@ -363,6 +379,9 @@
     display: inline-block;
     border-radius: 100px;
     margin-top: 5px;
+    line-height: 10px;
+    height: 19px;
+    width: 40px;
 }
 
 .post-potluck-category  .list-slide .accordion-button h5, .list-slide .accordion-btn h5 {
@@ -393,7 +412,18 @@
     padding: 10px;
 }
 
-.post-potluck-category .list-slide .accordion-body img.slide-user-img {
+.post-potluck-category .list-slide .accordion-body h5.slide-user-img{
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    margin-right: 10px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.post-potluck-category .list-slide .accordion-body img.slide-user-img
+{
     width: 24px;
     height: 24px;
     border-radius: 100%;
@@ -425,7 +455,7 @@
 .post-potluck-category  .list-slide .accordion-body{
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll; 
+    overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
@@ -443,8 +473,8 @@
 }
 
 .qty-custom.qty-container button {
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
     background-color: #CBD5E1;
     color: #fff;
     border: 1px solid transparent;
@@ -456,6 +486,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.qty-custom.qty-container button i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 20px !important;
+    text-align: center;
 }
 
 .qty-custom.qty-container input {
@@ -571,7 +609,7 @@
     border: 1px solid var(--pink);
     display: inline-block;
     transition: 0.5s;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
@@ -664,7 +702,7 @@
     -ms-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     -o-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
-  
+
 .toggle-custom #button-1 .checkbox:checked + .knobs:before {
     content: "\f00c";
     right: 4px;
@@ -674,12 +712,12 @@
     transform: translateY(-50%);
     color: #2DA9FC;
 }
-  
+
 
 .toggle-custom #button-1 .checkbox:checked ~ .layer {
     background-color: #2DA9FC;
 }
-  
+
 .toggle-custom #button-1 .knobs,
 .toggle-custom #button-1 .knobs:before,
 .toggle-custom #button-1 .layer {
@@ -779,28 +817,31 @@
    text-align: center;
 }
 
-.dropdown-item h6{
+.category-list .dropdown-item h6{
     color: var(--secondary-black) !important;
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium);
     margin-bottom: 0;
 }
 
-.dropdown .dropdown-menu.show{
+.category-list .dropdown .dropdown-menu.show{
     background-color: #fff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border: none;
     width: 120px;
     border-radius: 16px;
+    max-width: 120px;
+    min-width: 120px;
 }
 
-.dropdown .dropdown-menu.show li{
+.category-list .dropdown .dropdown-menu.show li{
     margin-bottom: 10px;
 }
 
-.dropdown .dropdown-menu.show li:last-child{
+.category-list .dropdown .dropdown-menu.show li:last-child{
     margin-bottom: 0;
 }
+
 
 /* ======== responsive ======= */
 @media only screen and (max-width:575px){
@@ -818,6 +859,7 @@
         width: 100%;
         max-width: 100%;
         border: none;
+        margin: 0;
     }
 }
 
@@ -864,4 +906,12 @@
     .edit-modal-btn{
         margin-right: 5px !important;
     }
+}
+
+.invalid {
+    border: 2px solid red;
+}
+
+.is-invalid {
+    border: 1px solid red;
 }

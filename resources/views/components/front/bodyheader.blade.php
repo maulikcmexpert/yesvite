@@ -219,18 +219,21 @@ $notification_list=getNotificationList();
                             @if($inner_data['notification_type']=="invite")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
-                                      @php
+                                        @php
+                                        $f = isset($inner_data['first_name']) && !empty($inner_data['first_name'])
+                                            ? strtoupper($inner_data['first_name'][0])
+                                            : '';
 
-                                             
-                                                        $firstInitial = isset($inner_data['first_name'][0]) ? strtoupper($inner_data['first_name'][0]) : '';
-                                                        $secondInitial = isset($inner_data['last_name'][1]) ? strtoupper($inner_data['last_name'][0]) : '';
-                                                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                                                        $fontColor = "fontcolor" . strtoupper($firstInitial);
+                                        $l = isset($inner_data['last_name']) && !empty($inner_data['last_name'])
+                                             ? strtoupper($inner_data['last_name'][0])
+                                            : '';
 
-                                                  //$initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                                                  //$fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                                                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                                      @endphp
+                                        $initials = $f . $l;
+
+                                        $fontColor = !empty($f) ? "fontcolor" . $f : 'defaultFontColor';
+                                        $userProfile = "<h5 class='" . $fontColor . "'>" . $initials . "</h5>";
+                                    @endphp
+
                                       @if($inner_data['profile']!="")
                                       <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
                                       <span class="active-dot"></span>

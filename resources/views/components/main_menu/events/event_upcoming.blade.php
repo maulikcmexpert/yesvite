@@ -36,29 +36,29 @@
         @foreach ( $eventList as $key=>$upcomingEvent)
             @php
             $i=0;
-            
+
             if($key==0){
                 $month=$upcomingEvent['event_month'];
                 $month_change = $month;
             }
-            
+
             $current_month = $upcomingEvent['event_month'];
-            
-            
+
+
             $colorClass = $series[$colorIndex % count($series)];
             $colorIndex++;
             @endphp
             <div class="all-events-month-wise-support upcoming_event_{{$upcomingEvent['id']}}" data-month="{{$upcomingEvent['event_month']}}">
                 <div class="home-center-upcoming-events-card all-event-{{ $colorClass }} mb-3">
                     <div class="home-upcoming-events-card-left">
-                        <a href="" class="home-upcoming-events-card-left-profile">
+                        <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-left-profile">
                             <div class="home-upcoming-events-card-left-profile-img">
                                 @if($upcomingEvent['host_profile'] != "")
                                     <img src="{{$upcomingEvent['host_profile']}}" loading="lazy" alt="">
                                 @else
-                                @php 
+                                @php
                                     $name = $upcomingEvent['host_name'];
-                                    $parts = explode(" ", $name); 
+                                    $parts = explode(" ", $name);
                                     $firstInitial = isset($upcomingEvent['host_firstname'][0]) ? strtoupper($upcomingEvent['host_firstname'][0][0]) : '';
                                     $secondInitial = isset($upcomingEvent['host_lastname'][1]) ? strtoupper($upcomingEvent['host_lastname'][1][0]) : '';
                                     $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
@@ -191,9 +191,8 @@
       </div>
         <div class="all-events-month-show-wrp" id="all-months-upcoming">
         @if ($month!="")
-        <h6 class="all-events-month-show" id="tabbtn1">{{$month}}</h6> 
+        <h6 class="all-events-month-show" id="tabbtn1">{{$month}}</h6>
         @endif
         </div>
-    </div> 
+    </div>
   </div>
-  

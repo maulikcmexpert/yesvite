@@ -588,10 +588,11 @@
 
 .collection-wrapper .dropdown-menu{
     border: 1px solid var(--borderColor) !important;
-    box-shadow: 0px 0px 2px 0px #8A8F931F !important;
     padding: 0 !important;
     width: 300px !important;
     margin-top: 10px !important;
+    border-radius: 12px !important;
+    box-shadow: 0px 12px 24px 0px rgba(138, 143, 147, 0.12);
 }
 
 .collection-wrapper .dropdown-menu .filter-head{
@@ -705,13 +706,15 @@
     width: 10px;
     height: 10px;
     position: absolute;
-    right: 10px;
+    right: 4px;
     top: 39%;
     transform: translateY(-50%);
     color: var(--lightColor);
     pointer-events: none;
     font-size: 16px;
 }
+
+
 
 .collection-wrapper .accordion-button:not(.collapsed)::after{
     right: 4px;
@@ -808,7 +811,7 @@
 }
 .cookies-track {
     position: fixed;
-    bottom: -130px; 
+    bottom: -130px;
     left: 0;
     width: 100%;
     background-color: #f9f9f9;
@@ -836,7 +839,7 @@
     border: none;
     background-color: transparent;
     box-shadow: none;
-    
+
 }
 
 .cookies-track button i{

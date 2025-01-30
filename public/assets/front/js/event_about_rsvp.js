@@ -1,0 +1,177 @@
+$(document).ready(function() {
+    // Initially disable the submit button
+    $('button[type="submit"]').prop('disabled', true);
+
+    // Listen for changes in RSVP status (YES/NO)
+    $('input[name="rsvp_status"]').change(function() {
+        var rsvpStatus = $(this).val()
+        if (rsvpStatus == "0") {
+            $('input[name="adults"]').val(0);
+            $('input[name="kids"]').val(0);
+        }
+        validateForm();
+    });
+
+    // Listen for changes in the number of adults and kids
+    $('input[name="adults"], input[name="kids"]').on('input', function() {
+        validateForm();
+    });
+
+    // Listen for the click event on the "+" button for adults
+    $('.btn-plus').click(function () {
+        // Find the closest input field and increment its value
+        let input = $(this).closest('.qty-container').find('input.input-qty');
+        let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
+        input.val(currentValue + 1); // Increment by 1
+
+        // Trigger validation if needed
+        validateForm();
+    });
+
+    // Listen for the click event on the "-" button
+    $('.btn-minus').click(function () {
+        // Find the closest input field and decrement its value
+        let input = $(this).closest('.qty-container').find('input.input-qty');
+        let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
+        if (currentValue > 0) {
+            input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
+        }
+
+        // Trigger validation if needed
+        validateForm();
+    });
+
+    // Submit form validation
+    $('form').submit(function(e) {
+        // Clear any previous error message
+        $('#error-message').text('');
+
+        // Get the value of RSVP status
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+
+        // If RSVP status is "YES"
+        if (rsvpStatus == 1) {
+            // Get the current values of adults and kids
+            var adults = parseInt($('input[name="adults"]').val()) || 0;  // Default to 0 if not valid
+            var kids = parseInt($('input[name="kids"]').val()) || 0;  // Default to 0 if not valid
+
+            // Check if neither adults nor kids is selected
+            if (adults <= 0 && kids <= 0) {
+                // Show error message inside the div
+                $('#error-message').text('Please select at least one Adult or Kid.')
+                                     .css('color', 'red');
+
+                // Prevent form submission
+                e.preventDefault();
+            }
+        }
+        else {
+            $('button[type="submit"]').prop('disabled', false);  // Disable submit button
+        }
+    });
+
+    // Function to validate form and enable/disable submit button
+    function validateForm() {
+        // Get the value of RSVP status
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        var adults = parseInt($('input[name="adults"]').val()) || 0;
+        var kids = parseInt($('input[name="kids"]').val()) || 0;
+
+        // If RSVP is selected (YES) and either adults or kids is selected, enable submit button
+        if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
+            $('button[type="submit"]').prop('disabled', false);  // Enable submit button
+            $('#error-message').text('');  // Clear error message
+        } if(rsvpStatus == "0" && (adults ==  0 || kids == 0)) {
+            $('button[type="submit"]').prop('disabled', false);  // Disable submit button
+        }
+    }
+
+    document
+    .getElementById("openGoogle")
+    .addEventListener("click", function () {
+        // return;
+        const eventDate = $("#eventDate").val();
+        const eventEndDate = $("#eventEndDate").val();
+        const eventTime = $("#eventTime").val();
+        const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val(); // Default value
+        const eventName = $("#eventName").val();
+
+        if (!eventDate || !eventTime) {
+            toastr.error("Please provide both date and time for the event.");
+            return;
+        }
+
+        const convertTo24HourFormat = (time) => {
+            const [hour, minuteWithPeriod] = time.split(":");
+            const [minute, period] = minuteWithPeriod.split(" ");
+            let newHour = parseInt(hour);
+            if (period.toLowerCase() === "pm" && newHour !== 12) {
+                newHour += 12; // Convert PM time to 24-hour format
+            }
+            if (period.toLowerCase() === "am" && newHour === 12) {
+                newHour = 0; // Handle 12 AM as midnight
+            }
+            return `${newHour}:${minute}`;
+        };
+
+        const formattedTime = convertTo24HourFormat(eventTime);
+        const formattedEndTime = convertTo24HourFormat(eventEndTime);
+        const startDateTime = new Date(`${eventDate}T${formattedTime}:00`); // ISO format with correct time
+
+        if (isNaN(startDateTime)) {
+            alert(
+                "Invalid start date or time value. Please check the input."
+            );
+            return;
+        }
+
+        let endDateTime;
+        if (eventEndDate) {
+            const endDateString = `${eventEndDate}T${formattedEndTime}:00`;
+            const formattedEndDate = new Date(endDateString);
+
+            if (isNaN(formattedEndDate)) {
+                alert(
+                    "Invalid end date or time value. Please check the input."
+                );
+                return;
+            }
+
+            endDateTime = formattedEndDate;
+        } else {
+            endDateTime = new Date(startDateTime);
+            endDateTime.setHours(endDateTime.getHours() + 1); // Default to 1 hour duration if no end date is provided
+        }
+
+        // Convert to Google Calendar format (without dashes, colons, and milliseconds)
+        const formatToGoogleCalendar = (date) => {
+            return (
+                date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z"
+            );
+        };
+
+        const eventDetails = {
+            title: eventName || "Meeting with Team",
+            start: formatToGoogleCalendar(startDateTime),
+            end: formatToGoogleCalendar(endDateTime),
+        };
+
+        console.log(eventDetails);
+
+        // Platform-specific calendar opening code (Android / iOS)
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        // Default to Google Calendar URL
+        const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+            eventDetails.title
+        )}&dates=${eventDetails.start}/${
+            eventDetails.end
+        }&sf=true&output=xml`;
+
+        window.open(googleCalendarUrl);
+    });
+
+
+
+});

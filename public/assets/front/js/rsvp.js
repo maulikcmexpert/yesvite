@@ -476,12 +476,12 @@ $(document).ready(function () {
 //     });
 // }
 
-// $("#rsvp-yes-modal").on("show.bs.modal", function (e) {
-//     e.preventDefault();
-// });
-// $("#rsvp-no-modal").on("show.bs.modal", function (e) {
-//     e.preventDefault();
-// });
+$("#rsvp-yes-modal").on("show.bs.modal", function (e) {
+    e.preventDefault();
+});
+$("#rsvp-no-modal").on("show.bs.modal", function (e) {
+    e.preventDefault();
+});
 $(document).on("click", ".check_rsvp_yes", function (e) {
     e.preventDefault();
     var user_id = $(this).data("user_id");

@@ -7,8 +7,22 @@
 
 .birth-details .birth-img{
   width: 67px;
+  min-width: 67px;
   height: 66px;
   margin-right: 16px;
+}
+
+.birth-details .birth-img h5{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 22px !important;
+    line-height: normal !important;
 }
 
 .birth-details .birth-img img{
@@ -22,6 +36,7 @@
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 8px;
+
 }
 
 .birth-details .birth-host span{
@@ -54,6 +69,7 @@
     font-size: 15px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 5px;
+    line-height: 25.5px;
 }
 
 
@@ -89,6 +105,10 @@
     margin-left: 10px;
     margin-bottom: 0;
     font-family: var(--SFProDisplay-Semibold);
+}
+
+.birth-details .hosted-by-date-time{
+    flex-direction: row !important;
 }
 
 .countdown-event .countevent-head{
@@ -131,6 +151,7 @@
 .birth-details .detail-btn-wrp{
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
 }
 
@@ -187,6 +208,7 @@
     align-items: center;
     justify-content: center;
     gap: 27px;
+    flex-wrap: wrap;
 }
 
 .host-users-detail .img-wrp{
@@ -198,12 +220,14 @@
 .host-users-detail .img-wrp h5{
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 50% ;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white) !important;
+    font-family: var(--SFProDisplay-Medium) !important;
     font-size: 30px !important;
+    line-height: normal !important;
 }
 
 .host-users-detail .img-wrp img{
@@ -226,7 +250,7 @@
 .host-users-detail .host-user-con span{
     color: #A0AEC0;
     font-size: 14px;
-    margin-bottom: 9px;
+    margin-bottom: 6px;
     font-family: var(--SFProDisplay-Medium);
     display: block;
 }
@@ -271,11 +295,10 @@
     font-family: var(--SFProDisplay-Regular);
 }
 
-.location-wrp #map{
+.location-wrp #map iframe{
     width: 100%;
     height: 198px;
     border-radius: 16px;
-    margin-top: 15px;
 }
 
 .location-wrp .direction-btn{
@@ -295,8 +318,7 @@
 }
 
 .location-wrp #map{
-    /* position: relative; */
-    overflow: hidden !important;
+    position: relative;
 }
 
 .location-wrp #map img.marker{
@@ -348,16 +370,11 @@
     align-items: center;
     margin-left: 10px;
     width: 90%;
-    min-height: 67px;
-
 }
 
 .schedule-wrp .shedule-box.green{
     background-color: #F3FFFA;
-    border-left: 4px solid #2EB67D !important;
-    border-top: 1px solid #2EB67D !important;
-    border-right: 1px solid #2EB67D !important;
-    border-bottom: 1px solid #2EB67D !important;
+    border-left: 4px solid #2EB67D;
 }
 
 .schedule-wrp .shedule-timing h6{
@@ -366,6 +383,8 @@
     font-size: 14px;
     font-family: var(--SFProDisplay-Semibold);
     width: max-content;
+    min-width: 63px;
+    text-align: center;
 }
 
 .schedule-wrp .shedule-box h6{
@@ -389,40 +408,28 @@
 
 .schedule-wrp .shedule-box.yellow{
     background-color: #FFFCF0;
-    border-left: 4px solid #FCCD1E !important;
-    border-top: 1px solid #FCCD1E !important;
-    border-right: 1px solid #FCCD1E !important;
-    border-bottom: 1px solid #FCCD1E !important;
+    border-left: 4px solid #FCCD1E;
 }
 
 .schedule-wrp .shedule-box.pink{
     background-color: #FFF6FD;
-    border-left: 4px solid #C837AB !important;
-    border-top: 1px solid #C837AB !important;
-    border-right: 1px solid #C837AB !important;
-    border-bottom: 1px solid #C837AB !important;
+    border-left: 4px solid #C837AB;
 }
 
 .schedule-wrp .shedule-box.blue{
     background-color: #EFFBFF;
-    border-left: 4px solid #3ABEEA !important;
-    border-top: 1px solid #3ABEEA !important;
-    border-right: 1px solid #3ABEEA !important;
-    border-bottom: 1px solid #3ABEEA !important;
+    border-left: 4px solid #3ABEEA;
 }
 
 .schedule-wrp .shedule-box.red{
     background-color: #FFF8FA;
-    border-left: 4px solid #FF4F84 !important;
-    border-top: 1px solid #FF4F84 !important;
-    border-right: 1px solid #FF4F84 !important;
-    border-bottom: 1px solid #FF4F84 !important;
+    border-left: 4px solid #FF4F84;
 }
 
 .schedule-wrp .shedule-manage-timing img{
     position: absolute;
     bottom: -25px;
-    left: 25px;
+    left: 27px;
     width: 5px;
     height: 38px;
 }
@@ -461,7 +468,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 .gift-register .target-btn img{
@@ -571,7 +578,6 @@
     box-shadow: none;
     outline: 0;
     padding-top: 13px;
-    resize: none;
 }
 
 .about-rsvp .rsvp-msgbox label{
@@ -635,13 +641,17 @@
     font-family: var(--SFProDisplay-Bold);
     color: var(--secondary-black);
     margin-bottom: 8px;
-} 
+}
 
 .rsvp-guest .rsvp-guest-count{
     display: flex;
     align-items: center;
     gap: 16px;
     margin-bottom: 22px;
+}
+
+.rsvp-guest .rsvp-guest-count > div{
+    width: 100%;
 }
 
 .rsvp-guest .rsvp-guest-count .qty-container{
@@ -701,14 +711,6 @@
     stroke: #000;
 }
 
-.guest-user-list .no-reply h5{
-    line-height: normal !important;
-}
-
-.guest-user-list .sucess-no h5{
-    line-height: normal !important;
-}
-
 
 /* ========= responsive =========== */
 @media only screen and (max-width:1399px){
@@ -716,7 +718,7 @@
         flex-direction: row;
     }
 
-    
+
     .apexcharts-inner {
         transform: translate(16%, 0);
     }
@@ -745,7 +747,7 @@
     .apexcharts-inner {
         transform: translate(14%, 0);
     }
-    
+
 }
 
 @media only screen and (max-width:575px){
@@ -768,12 +770,12 @@
     .about-details .about-slider{
         display: block;
     }
-    
+
 }
 
 @media only screen and (max-width:424px){
     .birth-details .hosted-by-date-time{
-        flex-direction: column;
+        flex-direction: column !important;
     }
 
     .birth-details .hosted-by-date-time-left:last-child{
@@ -791,7 +793,7 @@
 
     .birth-details .detail-btn-wrp .btn{
         padding: 12px 10px;
-        font-size: 12px;    
+        font-size: 12px;
     }
 
     .host-user-con-box{
@@ -825,3 +827,7 @@
       transform: translate(5%, 0);
     }
   }
+
+  .d-none {
+    display: none;
+}
