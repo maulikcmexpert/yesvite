@@ -8986,6 +8986,6 @@ function sliderImages(id) {
 }
 
 if (eventId != "") {
-    alert(eventId);
+    // alert(eventId);
     sliderImages(eventId);
 }
