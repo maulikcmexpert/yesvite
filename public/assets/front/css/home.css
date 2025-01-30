@@ -714,6 +714,8 @@
     font-size: 16px;
 }
 
+
+
 .collection-wrapper .accordion-button:not(.collapsed)::after{
     right: 4px;
 }
