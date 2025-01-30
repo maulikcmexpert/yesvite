@@ -122,7 +122,7 @@ if (eventData.textData) {
 
 // Now safely check if textElements exists
 if (!eventData.textData.textElements) {
-    alert("updated");
+    // alert("updated");
     eventData.textData.textElements = eventData.textData.textData; // Correct assignment
 
     console.log(eventData.textData.textElements); // Should now log correct data
