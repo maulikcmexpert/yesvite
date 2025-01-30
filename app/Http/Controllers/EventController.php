@@ -1063,7 +1063,7 @@ class EventController extends BaseController
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
             'success' => true,
             'is_registry' => $gift,
-            'event_id'=>$eventId
+            'event_id' => $eventId
         ]);
     }
 
@@ -3262,14 +3262,14 @@ class EventController extends BaseController
                 ]);
             }
 
-            // if (isset($request->slider_images) && !empty($request->slider_images)) {
-            //     foreach ($request->slider_images as $key => $value) {
-            //         EventImage::create([
-            //             'event_id' => $eventId,
-            //             'image' => $value['fileName'],
-            //         ]);
-            //     }
-            // }
+            if (isset($request->slider_images) && !empty($request->slider_images)) {
+                foreach ($request->slider_images as $key => $value) {
+                    EventImage::create([
+                        'event_id' => $eventId,
+                        'image' => $value['fileName'],
+                    ]);
+                }
+            }
 
 
 

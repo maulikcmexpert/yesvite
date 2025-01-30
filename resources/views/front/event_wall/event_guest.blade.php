@@ -1657,8 +1657,27 @@
                                         </svg>
                                         <h6>{{ $invite['phone_number'] }}</h6>
                                     </div>
+                                    @if(!empty($invite['prefer_by'] && $invite['prefer_by']=="phone"))
+                                    <div class="ms-auto">
+                                        <span class="fix-updat">Fix/update needed</span>
+                                        <button type="button" class="danger-btn">
+                                            <svg width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 7.5V11.6667" stroke="#FB1C11" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M10.0008 17.8414H4.95084C2.05917 17.8414 0.850839 15.7747 2.25084 13.2497L4.85084 8.56641L7.30084 4.16641C8.78417 1.49141 11.2175 1.49141 12.7008 4.16641L15.1508 8.57474L17.7508 13.2581C19.1508 15.7831 17.9342 17.8497 15.0508 17.8497H10.0008V17.8414Z"
+                                                    stroke="#FB1C11" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M9.99609 14.166H10.0036" stroke="#FB1C11" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    @else
                                     <input class="form-check-input failed-checkout" type="checkbox" value=""
                                         id="coming">
+                                        @endif
                                 </div>
                                 @endif
                                 <div class="d-flex align-items-center mt-1">
@@ -1681,6 +1700,7 @@
                                     </div>
                                     @endif
 
+                                    @if(!empty($invite['prefer_by'] && $invite['prefer_by']=="email"))
                                     <div class="ms-auto">
                                         <span class="fix-updat">Fix/update needed</span>
                                         <button type="button" class="danger-btn">
@@ -1697,6 +1717,10 @@
                                             </svg>
                                         </button>
                                     </div>
+                                    @else
+                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
+                                        id="coming">
+                                        @endif
                                 </div>
                             </div>
                         </div>
