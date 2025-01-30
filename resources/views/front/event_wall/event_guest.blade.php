@@ -1622,7 +1622,7 @@
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </button>
-                                        <button class="delete-btn">
+                                        <button class="delete-btn delete_failed_contact" data-user-id="{{$invite['id']}}">
                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
