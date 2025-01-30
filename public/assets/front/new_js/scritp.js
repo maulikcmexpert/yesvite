@@ -118,8 +118,7 @@ $(".notification-btn").on("click", function () {
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
 const dropdownMenu = document.querySelector(".notification-dropdown-menu");
-const modal = document.getElementById('all-notification-filter-modal');
-
+const modal = document.getElementById("all-notification-filter-modal");
 
 // document.addEventListener('click', function(event) {
 //     // Check if the clicked element is outside the dropdown
@@ -135,9 +134,7 @@ $("#dropdownButton").on("click", function (event) {
     if ($(".header-profile-dropdown").hasClass("show")) {
         $(".header-profile-dropdown").removeClass("show");
     }
-    
 });
-
 
 $(".moblie-menu-bar").on("click", function (event) {
     event.stopPropagation(); // Prevent the click event from bubbling up
@@ -154,13 +151,13 @@ $(".notification-toggle-menu").on("click", function (event) {
 });
 document.addEventListener("click", (event) => {
     if (
-      !dropdownMenu.contains(event.target) && 
-      !dropdownButton.contains(event.target) &&
-      !modal.contains(event.target) // Close the dropdown if clicked inside the modal
+        !dropdownMenu?.contains(event.target) &&
+        !dropdownButton?.contains(event.target) &&
+        !modal?.contains(event.target) // Close the dropdown if clicked inside the modal
     ) {
-      dropdownMenu.classList.remove("show");
+        dropdownMenu?.classList?.remove("show");
     }
-  });
+});
 // document.addEventListener("click", (event) => {
 //   if (
 //     !dropdownMenu.contains(event.target) &&
@@ -835,8 +832,8 @@ $(function () {
 });
 
 $(document).on("click", ".mobile-calender-btn", function () {
-    $('.mobile-menu-wrp').removeClass('active');
-    $('.line').removeClass('active');
+    $(".mobile-menu-wrp").removeClass("active");
+    $(".line").removeClass("active");
     var text = this.innerText;
     var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -926,10 +923,10 @@ $(document).on("click", ".notification_read", function () {
         data: { user_id: user_id },
         success: function (response) {
             console.log(response);
-            
+
             if (response.count == 0) {
                 $(".notification_count_display").css("display", "none");
-                $(".notification-read-dot").css('display','none');
+                $(".notification-read-dot").css("display", "none");
             }
         },
         error: function (xhr, status, error) {
@@ -967,8 +964,8 @@ const hiddenData = $("#graph_data").val();
 const parsedData = JSON.parse(hiddenData);
 
 // Step 2: Generate labels and data for Chart.js
-const labels = parsedData.map(item => item.month); // Extract months
-const data = parsedData.map(item => item.current_balance);
+const labels = parsedData.map((item) => item.month); // Extract months
+const data = parsedData.map((item) => item.current_balance);
 
 let lowestValue = Math.min(...data);
 let highestValue = Math.max(...data);
@@ -977,18 +974,18 @@ if (lowestValue !== 0) {
     lowestValue = 0;
 }
 
-highestValue = highestValue + (highestValue * 0.3);
+highestValue = highestValue + highestValue * 0.3;
 
 if (highestValue < 7) {
     highestValue += 2;
 }
-highestValue = Math.round(highestValue); 
+highestValue = Math.round(highestValue);
 
 let stepSize = Math.max(Math.floor((highestValue - lowestValue) / 7), 1); // Minimum stepSize of 1
 if (stepSize % 2 !== 0) {
     stepSize++; // Ensure stepSize is even for better readability
 }
-stepSize=Math.round(stepSize);
+stepSize = Math.round(stepSize);
 new Chart(ctx, {
     type: "line",
     data: {
@@ -1030,10 +1027,10 @@ new Chart(ctx, {
             },
             y: {
                 // beginAtZero: true,
-                min:lowestValue,
+                min: lowestValue,
                 max: highestValue,
                 ticks: {
-                    stepSize: stepSize, 
+                    stepSize: stepSize,
                 },
                 grid: {
                     color: "rgba(0, 0, 0, 0.05)",
