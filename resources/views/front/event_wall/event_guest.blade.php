@@ -1595,7 +1595,17 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="#" class="invite-user-name">{{ $invite['first_name'] }}{{ $invite['last_name'] }}</a>
                                     <div class="ms-auto">
-                                        <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editguest">
+                                        <button class="edit-btn failed_contact_edit" data-bs-toggle="modal" data-bs-target="#editguest"
+                                        data-id="{{ $invite['id'] }}"
+                                        data-first_name="{{ $invite['first_name'] }}"
+                                        data-last_name="{{ $invite['last_name'] }}"
+                                        data-email="{{ $invite['email'] }}"
+                                        data-phone_number="{{ $invite['phone_number'] }}"
+                                        data-prefer_by="{{ $invite['prefer_by'] }}"
+                                        data-country-code="{{ $invite['country_code'] }}"
+                                         data-app-user="{{ $invite['app_user'] }}"
+
+                                        >
                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -1647,8 +1657,27 @@
                                         </svg>
                                         <h6>{{ $invite['phone_number'] }}</h6>
                                     </div>
+                                    @if(!empty($invite['prefer_by'] && $invite['prefer_by']=="phone"))
+                                    <div class="ms-auto">
+                                        <span class="fix-updat">Fix/update needed</span>
+                                        <button type="button" class="danger-btn">
+                                            <svg width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 7.5V11.6667" stroke="#FB1C11" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M10.0008 17.8414H4.95084C2.05917 17.8414 0.850839 15.7747 2.25084 13.2497L4.85084 8.56641L7.30084 4.16641C8.78417 1.49141 11.2175 1.49141 12.7008 4.16641L15.1508 8.57474L17.7508 13.2581C19.1508 15.7831 17.9342 17.8497 15.0508 17.8497H10.0008V17.8414Z"
+                                                    stroke="#FB1C11" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M9.99609 14.166H10.0036" stroke="#FB1C11" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    @else
                                     <input class="form-check-input failed-checkout" type="checkbox" value=""
                                         id="coming">
+                                        @endif
                                 </div>
                                 @endif
                                 <div class="d-flex align-items-center mt-1">
@@ -1671,6 +1700,7 @@
                                     </div>
                                     @endif
 
+                                    @if(!empty($invite['prefer_by'] && $invite['prefer_by']=="email"))
                                     <div class="ms-auto">
                                         <span class="fix-updat">Fix/update needed</span>
                                         <button type="button" class="danger-btn">
@@ -1687,6 +1717,10 @@
                                             </svg>
                                         </button>
                                     </div>
+                                    @else
+                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
+                                        id="coming">
+                                        @endif
                                 </div>
                             </div>
                         </div>
@@ -1821,12 +1855,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
+                <form action="" id="editGuestForm">
                 <div class="modal-body">
-                    <form action="">
+
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="Fname"
+                                    <input type="text" class="form-control inputText" id="edit_first_name"
                                         name="Fname" required="">
                                     <label for="Fname" class="form-label input-field floating-label">First
                                         Name<span class="required">*</span></label>
@@ -1834,7 +1869,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                 <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="Lname"
+                                    <input type="text" class="form-control inputText" id="edit_last_name"
                                         name="Lname" required="">
                                     <label for="Lname" class="form-label input-field floating-label">Last
                                         Name<span class="required">*</span></label>
@@ -1842,7 +1877,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-                                    <input type="tel" class="form-control inputText" id="phone"
+                                    <input type="tel" class="form-control inputText"  id="edit_phone_number"
                                         name="phone" required="">
                                     <label for="phone" class="form-label input-field floating-label">Phone
                                         Number<span class="required">*</span></label>
@@ -1850,7 +1885,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
-                                    <input type="email" class="form-control inputText" id="email"
+                                    <input type="email" class="form-control inputText" id="edit_email"
                                         name="email" required="">
                                     <label for="email" class="form-label input-field floating-label">Email
                                         Address<span class="required">*</span></label>
@@ -1869,11 +1904,12 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer rsvp-button-wrp">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
