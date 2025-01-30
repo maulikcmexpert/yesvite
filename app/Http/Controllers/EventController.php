@@ -2608,6 +2608,8 @@ class EventController extends BaseController
         }
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
+                print_r($imageSource['src']);
+                die;
                 list($type, $data) = explode(';', $imageSource['src']);
                 list(, $data) = explode(',', $data);
                 $imageData = base64_decode($data);
