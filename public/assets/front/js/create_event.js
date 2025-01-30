@@ -112,6 +112,7 @@ eventData.textData = $("#static_information").val() || undefined;
 if (eventData.textData.textElements == undefined) {
     alert("updated");
     eventData.textData.textElements = eventData.textData.textData;
+    console.log(eventData.textData.textElements);
     console.log(eventData.textData);
 }
 eventData.step = $("#step").val();
