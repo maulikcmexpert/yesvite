@@ -427,7 +427,8 @@
                                                         <span>Host</span>
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>
-                                                @elseif (!empty($eventDetails['co_hosts']))
+                                                    @endif
+                                                @if (!empty($eventDetails['co_hosts']))
                                                     <div class="host-user-con">
                                                         <div class="img-wrp">
                                                             @if ($eventDetails['profile'] != '')
