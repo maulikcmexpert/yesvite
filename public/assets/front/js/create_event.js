@@ -7705,6 +7705,8 @@ $(document).on("keyup", ".phone_co_host_search", function () {
 });
 
 $(document).on("click", ".add-activity-schedule", function () {
+    startTimePicker();
+    endTimePicker();
     if (eventData.activity != undefined && eventData.activity != "") {
         toggleSidebar("sidebar_activity_schedule");
     } else {
