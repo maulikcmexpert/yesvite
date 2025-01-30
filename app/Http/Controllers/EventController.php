@@ -1791,6 +1791,11 @@ class EventController extends BaseController
 
     public function saveTempDesign(Request $request)
     {
+
+        $eventID = $request->eventId;
+        if(isset($eventID) && $eventID!=""){
+            EventImage::where('event_id', $eventID)->where('type', 0)->delete();
+        }
         $newImageName = '';
         $fileName = '';
         $i = 0;
