@@ -431,8 +431,8 @@
                                                 @if (!empty($eventDetails['co_hosts']))
                                                     <div class="host-user-con">
                                                         <div class="img-wrp">
-                                                            @if ($eventDetails['profile'] != '')
-                                                            <img src="{{ $eventDetails['profile'] }}"
+                                                            @if ($eventDetails['co_hosts']['profile'] != '')
+                                                            <img src="{{ $eventDetails['co_hosts']['profile'] }}"
                                                             alt="cohost-img">
 
                                                         @else
@@ -441,7 +441,7 @@
                                                                 // $parts = explode(" ", $name);
                                                                 $nameParts = explode(
                                                                     ' ',
-                                                                    $eventDetails['name'],
+                                                                    $eventDetails['co_hosts']['name'],
                                                                 );
                                                                 $firstInitial = isset($nameParts[0][0])
                                                                     ? strtoupper($nameParts[0][0])
@@ -460,7 +460,7 @@
                                                         @endif
 
                                                         </div>
-                                                        <h5>{{ $eventDetails['name'] }}</h5>
+                                                        <h5>{{ $eventDetails['co_hosts']['name'] }}</h5>
                                                         <span>Co-host</span>
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>
