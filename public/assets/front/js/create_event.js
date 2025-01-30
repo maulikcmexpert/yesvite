@@ -109,11 +109,24 @@ var offsetyesvitec = 0;
 
 eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
-if (eventData.textData.textElements == undefined) {
+
+// Ensure eventData.textData is parsed into an object before accessing properties
+if (eventData.textData) {
+    try {
+        eventData.textData = JSON.parse(eventData.textData); // Convert string to object
+    } catch (error) {
+        console.error("Error parsing textData:", error);
+        eventData.textData = {}; // Fallback to empty object if parsing fails
+    }
+}
+
+// Now safely check if textElements exists
+if (!eventData.textData.textElements) {
     alert("updated");
-    eventData.textData.textElements = JSON.parse(eventData.textData).textData;
-    console.log(eventData.textData.textElements);
-    console.log(eventData.textData);
+    eventData.textData.textElements = eventData.textData.textData; // Correct assignment
+
+    console.log(eventData.textData.textElements); // Should now log correct data
+    console.log(eventData.textData); // Should log parsed object
 }
 eventData.step = $("#step").val();
 eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
