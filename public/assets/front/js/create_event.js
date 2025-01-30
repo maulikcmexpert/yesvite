@@ -9003,3 +9003,7 @@ if (eventId != "") {
     // alert(eventId);
     sliderImages(eventId);
 }
+
+$(document).on('click','.swiper-button-disabled',function(e){
+    e.stopPropagation();
+});
