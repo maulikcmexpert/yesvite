@@ -4540,6 +4540,7 @@ function edit_design_modal() {
             eventDetail2.static_information
         );
         dbJson = static_information_json.textData;
+        console.log({ dbJson });
         $("#modalImage").attr("src", static_information_json.template_url);
         image = static_information_json.template_url;
         $("#imageEditor2").remove();
@@ -4651,7 +4652,7 @@ $(document).on("click", ".li_event_details", function () {
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
-
+        console.log(dbJson);
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
         console.log(downloadImage);
@@ -6213,6 +6214,7 @@ $(document).on("click", ".store_desgin_temp", function () {
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
+        console.log(dbJson);
         // dbJson = {
         //     textElements: textData
         // };
