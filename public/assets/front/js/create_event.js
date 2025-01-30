@@ -7472,9 +7472,15 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
     })
         .done(function (data) {
             // console.log(data);
+            if (data.view == "" && data.scroll=="false") {
+                // cohostNoMoreContactData = true;
+                $(".list_all_contact_user").html("No Data Found");
+                $("#loader").hide();
+                return;
+            }
             if (data.view == "") {
                 cohostNoMoreContactData = true;
-                $(".list_all_contact_user").html("No data found");
+                // $(".list_all_contact_user").html("No data found");
                 $("#loader").hide();
                 return;
             }

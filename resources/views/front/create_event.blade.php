@@ -851,7 +851,7 @@
                 </div>
 
                 <div class="user-contacts list_all_contact_user" id="select_contact_event_cohost"
-                    style="display: none;">
+                    style="display: none;color:black;text-align:center;">
                 </div>
             </div>
             <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
