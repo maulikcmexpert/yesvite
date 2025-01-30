@@ -575,14 +575,12 @@ function initMap() {
                 center: { lat: latitude, lng: longitutde },
                 zoom: 15,
             });
+            const marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitutde },
+                map: map,
+                title: "test location", // Optional: adds a tooltip on hover
+            });
         }
-
-        // Create the marker
-        const marker = new google.maps.Marker({
-            position: { lat: latitude, lng: longitutde },
-            map: map,
-            title: "test location", // Optional: adds a tooltip on hover
-        });
     }
 }
 
