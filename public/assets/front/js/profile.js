@@ -93,6 +93,7 @@ $(document).ready(function () {
         submitHandler: function (form) {
             var formActionURL = $("#updateUserForm").attr("action");
             var formData = $("#updateUserForm").serialize();
+            console.log(formData);
             $.ajax({
                 method: "POST",
                 url: formActionURL,
