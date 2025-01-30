@@ -2975,7 +2975,7 @@ class EventController extends BaseController
                 $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
 
-            $textElemtents = $request->textData['textElements'];
+            $textElemtents = $request->textData['textData'];
 
             foreach ($textElemtents as $key => $textJson) {
                 if ($textJson['fontSize'] != '') {
