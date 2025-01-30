@@ -522,7 +522,7 @@ class EventGuestController extends Controller
         $user  = Auth::guard('web')->user();
 
 
-        try {
+
             $deleteUser = User::where(['id' => $request['user_id']])->first();
             if ($deleteUser != null) {
 
@@ -531,11 +531,6 @@ class EventGuestController extends Controller
             } else {
                 return response()->json(['status' => 0, 'message' => "User is not removed"]);
             }
-        } catch (QueryException $e) {
 
-            return response()->json(['status' => 0, 'message' => 'db error']);
-        } catch (Exception  $e) {
-            return response()->json(['status' => 0, 'message' => 'something went wrong']);
-        }
     }
 }
