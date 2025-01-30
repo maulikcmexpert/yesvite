@@ -667,8 +667,10 @@ function imageExists(url) {
 // Function to extract initials from a name
 function getInitials(name) {
     if (!name) return "";
+
     return name
         .split(" ")
-        .map((part) => part.charAt(0).toUpperCase())
-        .join("");
+        .map((part) => part.charAt(0).toUpperCase()) // Get first letter of each word
+        .join("")
+        .slice(0, 2); // Ensure max 2 characters
 }
