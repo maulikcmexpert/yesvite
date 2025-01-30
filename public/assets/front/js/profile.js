@@ -1,6 +1,35 @@
 $(document).ready(function () {
     var base_url = $("#base_url").val();
     // Initialize jQuery validation
+
+    $(".phone_number").intlTelInput({
+        initialCountry: "US",
+        separateDialCode: true,
+        // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+    });
+
+    $("[name=phone_number]").on("blur", function () {
+        var instance = $("[name=phone_number]");
+        var phoneNumber = instance.intlTelInput(
+            "getSelectedCountryData"
+        ).dialCode;
+        $("#country_code").val(phoneNumber);
+    });
+
+    $(document).on("input","#phone_number", function () {
+        let input = $(this).val().replace(/\D/g, '');
+        let formattedNumber = '';
+        if (input.length <= 3) {
+            formattedNumber = input;
+        } else if (input.length <= 6) {
+            formattedNumber = `${input.slice(0, 3)}-${input.slice(3)}`;
+        } else {
+            formattedNumber = `${input.slice(0, 3)}-${input.slice(3, 6)}-${input.slice(6, 15)}`;
+        }
+    
+        $(this).val(formattedNumber);
+    });
+
     $.validator.addMethod("phoneUS", function (phone_number, element) {
         phone_number = phone_number.replace(/\D/g, ""); // Remove non-digits for validation
         return (
