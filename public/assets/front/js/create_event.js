@@ -3284,6 +3284,10 @@ $(document).on("click", "#save_activity_schedule", function () {
         var previousEndTime = null;
         // showAlert = false;
         isendtime=isendtime +1;
+        var activityWrappers = $(this).find(".activity-main-wrp");
+        if (activityWrappers.length === 0) {
+            activityendtime = null; // Set to null if no .activity-main-wrp found
+        } else {
         $(this)
             .find(".activity-main-wrp")
             .each(function (index) {
@@ -3362,16 +3366,17 @@ $(document).on("click", "#save_activity_schedule", function () {
                 }
                 previousEndTime = endTime;
             });
+        }
     });
 
     if (showAlert == true) {
         return;
     }
-    if(istrue != isendtime ){
-        activityendtime =null;
-    }
+    // if(istrue != isendtime ){
+    //     activityendtime =null;
+    // }
     console.log({ activityendtime });
-    
+
     if(activityendtime!=null){
         let lastendtime = convertTo24Hour(end_time);
         let lastScheduleEndtime = convertTo24Hour(activityendtime);
