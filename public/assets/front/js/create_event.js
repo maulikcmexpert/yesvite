@@ -111,9 +111,9 @@ eventData.desgin_selected = $("#design_image").val() || undefined;
 eventData.textData = $("#static_information").val() || undefined;
 if (eventData.textData.textElements == undefined) {
     alert("updated");
-    eventData.textData.textElements = eventData.textData.textData;
+    eventData.textData.textElements = JSON.parse(eventData.textData).textData;
     console.log(eventData.textData.textElements);
-    console.log(eventData.textData);
+    console.log(JSON.parse(eventData.textData));
 }
 eventData.step = $("#step").val();
 eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
