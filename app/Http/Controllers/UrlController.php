@@ -32,6 +32,7 @@ class UrlController extends Controller
 
     public function handleShortUrl($shortUrlKey)
     {
+        dd($shortUrlKey);
         DB::enableQueryLog();
         // Look up the short URL in the database
         $url = Url::where('short_url_key', $shortUrlKey)
