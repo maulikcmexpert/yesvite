@@ -121,7 +121,7 @@ if (eventData.textData) {
 }
 
 // Now safely check if textElements exists
-if (!eventData.textData.textElements) {
+if (!eventData?.textData?.textElements) {
     // alert("updated");
     eventData.textData.textElements = eventData.textData.textData; // Correct assignment
 
