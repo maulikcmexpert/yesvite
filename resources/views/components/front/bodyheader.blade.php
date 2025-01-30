@@ -249,13 +249,13 @@ $notification_list=getNotificationList();
                                       @if($inner_data['co_host_notification']=="1")
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
-                                          <span>You have been made a co-host for <a href="{{route('event.event_about',decrypt($inner_data['event_id']))}}" style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                                          <span>You have been made a co-host for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}" style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                        @else
                                         <h3>
                                             {{-- {{$inner_data['notification_message']}} --}}
                                             {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                            <span> has invited you to <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                            <span> has invited you to <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"  style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                           </h3>
                                        @endif 
 

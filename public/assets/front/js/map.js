@@ -66,10 +66,10 @@ function initMap() {
         
                     // Capture street_number and route separately
                     if (type === 'street_number') {
-                        streetNumber = component.long_name;
+                        streetNumber = component.address_components.long_name;
                     }
                     if (type === 'route') {
-                        route = component.long_name;
+                        route = component.address_components.long_name;
                     }
                 });
             });
