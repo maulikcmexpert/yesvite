@@ -963,8 +963,9 @@ if (patternContext) {
 const pattern = ctx?.createPattern(patternCanvas, "repeat");
 
 const hiddenData = $("#graph_data").val();
-const parsedData = JSON?.parse(hiddenData);
-if (parsedData) {
+if (hiddenData != undefined) {
+    const parsedData = JSON?.parse(hiddenData);
+
     // Step 2: Generate labels and data for Chart.js
     const labels = parsedData.map((item) => item.month); // Extract months
     const data = parsedData.map((item) => item.current_balance);
