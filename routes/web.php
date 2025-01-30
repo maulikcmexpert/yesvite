@@ -215,6 +215,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
     Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+    Route::post('event/getSliderImage', [ControllersEventController::class, 'getSliderImage']);
     Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
 
     Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
@@ -280,6 +281,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
     Route::get('event_guest/fetch_guest/{id}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
     Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
+    Route::post('event_guest/editContact',  [EventGuestController::class, 'editContact']);
+    Route::post('event_guest/deleteContact',  [EventGuestController::class, 'deleteContact']);
     Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
     Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');

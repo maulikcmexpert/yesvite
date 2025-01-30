@@ -257,7 +257,7 @@ $notification_list=getNotificationList();
                                             {{$inner_data['first_name']}} {{$inner_data['last_name']}}
                                             <span> has invited you to <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"  style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                           </h3>
-                                       @endif 
+                                       @endif
 
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
@@ -266,13 +266,13 @@ $notification_list=getNotificationList();
                                           @endif
                                         </div>
 
-                                      
+
                                       </div>
                                         @if($inner_data['co_host_notification']!="1")
                                           <div>
                                               <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutsuccess" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-lastname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
                                           </div>
-                                        @endif  
+                                        @endif
                                      <div>
                                         <!-- <p>{{$inner_data['event_name']}}</p>
                                           @if($inner_data['read']=="0")
@@ -363,7 +363,7 @@ $notification_list=getNotificationList();
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                                          @if($inner_data['read']=="0")  
+                                          @if($inner_data['read']=="0")
                                           <h6 class="notification-read-dot mt-1 text-right"></h6>
                                           @endif
                                         </div>
@@ -386,7 +386,7 @@ $notification_list=getNotificationList();
                                         </button>
                                       </div> --}}
                                     </div>
-                                  </div>  
+                                  </div>
                             @elseif($inner_data['notification_type']=="update_potluck")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
@@ -422,7 +422,7 @@ $notification_list=getNotificationList();
                                       <div>
                                         <!-- <p>{{$inner_data['event_name']}}</p> -->
                                       </div>
-                                      
+
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
@@ -434,7 +434,7 @@ $notification_list=getNotificationList();
                                         </button>
                                       </div> --}}
                                     </div>
-                                  </div> 
+                                  </div>
                             @elseif($inner_data['notification_type']=="update_time")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
@@ -473,7 +473,7 @@ $notification_list=getNotificationList();
                                       <div class="d-block">
                                         <h3 class="mb-1">Time : <span style="font-family: var(--SFProDisplay-Regular);">From {{$inner_data['from_time']}} To {{$inner_data['to_time']}}</span></h3>
                                       </div>
-                                      
+
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
@@ -485,7 +485,7 @@ $notification_list=getNotificationList();
                                         </button>
                                       </div> --}}
                                     </div>
-                                  </div>  
+                                  </div>
                             @elseif($inner_data['notification_type']=="update_address")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
@@ -526,7 +526,7 @@ $notification_list=getNotificationList();
                                         <h3 class="mb-1">From : <span style="font-family: var(--SFProDisplay-Regular);">{{$inner_data['from_addr']}}</span></h3>
                                         <h3 class="mb-1">To: <span style="font-family: var(--SFProDisplay-Regular);">{{$inner_data['to_addr']}}</span></h3>
                                       </div>
-                                      
+
                                       {{-- <div class="notification-accept-invite-btn-wrp">
                                         <button class="accept-btn">
                                           <i class="fa-regular fa-circle-check"></i>
@@ -538,7 +538,7 @@ $notification_list=getNotificationList();
                                         </button>
                                       </div> --}}
                                     </div>
-                                  </div>                       
+                                  </div>
                             @elseif($inner_data['notification_type']=="potluck_bring")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
@@ -574,7 +574,7 @@ $notification_list=getNotificationList();
                                       </div>
                                       <div>
                                         <!-- <p>{{$inner_data['event_name']}} Potluck</p> -->
-                                            
+
                                       </div>
                                       <div class="d-flex align-items-center justify-content-between">
                                         <h3>{{$inner_data['potluck_item']}}</h3>
@@ -591,7 +591,7 @@ $notification_list=getNotificationList();
                                         </button>
                                       </div> --}}
                                     </div>
-                                  </div>            
+                                  </div>
                             @elseif($inner_data['notification_type']=="update_event"&& $inner_data['is_co_host']=="1"&&$inner_data['accept_as_co_host']=="0")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
@@ -1573,7 +1573,7 @@ $notification_list=getNotificationList();
             <li><a href="{{route('profile')}}">Profile</a>
             </li>
             <div class="mobile-menu-inner-btns">
-                <a href="#" class="add_new_event_btn create_event_with_plan"><i class="fa-solid fa-plus"></i> New Event</a>
+                <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan"><i class="fa-solid fa-plus"></i> New Event</a>
                 <div class="header-msg-wrp">
                   <a href="{{route('message.list')}}">
                     <svg viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">

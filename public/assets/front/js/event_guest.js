@@ -204,3 +204,31 @@ $(document).ready(function () {
         });
     });
 });
+$(document).on('click', '.delete_failed_contact', function () {
+    let userId = $(this).data('user-id');
+
+
+        $.ajax({
+            url: base_url + "event_guest/deleteContact",  // Ensure this route is defined in web.php/api.php
+            type: "POST",
+            data: JSON.stringify({ user_id: userId }),
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    toastr.success(response.message);
+                    location.reload(); // Reload the page to update the UI
+                } else {
+                    toastr.danger(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                toastr.danger("Something went wrong!");
+                console.error(xhr.responseText);
+            }
+        });
+
+});
