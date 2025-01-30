@@ -30,7 +30,7 @@ class BaseController extends Controller
         //     ->groupBy('event_id')
         //     ->get();
         // dd($users);
-        // handleIncomingMessage("+919723840340", "yes");
+        // handleIncomingMessage("+918200120722", "yes");
         // handleSMSInvite("+91 97238 40340", "yesvite web", "srryghhhggguvj", 814, 2787);
         return [
             '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15, 'price' => 21.00],

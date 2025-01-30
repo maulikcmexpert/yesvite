@@ -327,8 +327,7 @@
                                                         <div class="countevent-counter">
                                                             <h4 id="countdownMinutes">00</h4>
                                                             <span>Minutes</span>
-                                                            <img src="{{ asset('assets/front/img/colon.svg') }}"
-                                                                alt="" class="colon-img">
+
                                                         </div>
 
                                                     </div>
@@ -375,16 +374,16 @@
                                                         </svg>
                                                     </a>
 
-                                                    <!-- <a href="#" class="rsvp-btn noattending-btn btn" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
+                                                   <a href="#" class="rsvp-btn noattending-btn btn {{ $isDisabled }}" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
                                                                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                               <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                                               </svg>
-                                                                            </a> -->
-                                                    <!-- <a href="#" class="rsvp-btn attending-btn btn">Attending
+                                                                            </a>
+                                                  {{-- <a href="#" class="rsvp-btn attending-btn btn {{ $isDisabled }}">Attending
                                                                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                               <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                                               </svg>
-                                                                            </a> -->
+                                                                            </a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -578,10 +577,12 @@
                                         @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
 
                                                 <div class="gift-register cmn-card">
-                                                    @foreach ($eventDetails['gift_registry'] as $gift)
+
                                                     <h4 class="title">Sarah’s Gift Registries</h4>
                                                     <span>Buy them the gift of their choice.</span>
+
                                                     <div class="play-store">
+                                                        @foreach ($eventDetails['gift_registry'] as $gift)
                                                         @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn target-btn" target="_blank">
@@ -602,8 +603,10 @@
                                                                 <h6>{{ $gift['registry_recipient_name'] }}</h6>
                                                             </a>
                                                         @endif
+                                                        @endforeach
                                                     </div>
-                                                    @endforeach
+
+
                                                 </div>
 
                                         @endif
@@ -2104,19 +2107,19 @@
             const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
             const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+            // const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
             // Update HTML elements
             document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
             document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
             document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
+            // document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
         } else {
             // Event has passed, set everything to "00"
             document.getElementById('countdownDays').innerText = "00";
             document.getElementById('countdownHours').innerText = "00";
             document.getElementById('countdownMinutes').innerText = "00";
-            document.getElementById('countdownSeconds').innerText = "00";
+            // document.getElementById('countdownSeconds').innerText = "00";
         }
     }
 

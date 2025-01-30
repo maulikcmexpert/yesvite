@@ -348,7 +348,7 @@ $(document).ready(function () {
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3.5,
     spaceBetween: 20,
-    loop: false,
+    loop: true,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -1315,7 +1315,7 @@ function set_activity_html(selectedDates) {
                                    <div class="form-group">
                                         <label>Start Time</label>
                                         <div class="input-group time ">
-                                            <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" value="${start_time}" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <input class="form-control start_timepicker" placeholder="HH:MM AM/PM" id="ac-start-time" name="ac-start-time" oninput="clearError()" value="${start_time}" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg></span></span>
@@ -1364,7 +1364,7 @@ function set_activity_html(selectedDates) {
                             <div class="form-group">
                                 <label>End Time</label>
                                 <div class="input-group time ">
-                                    <input class="form-control timepicker" placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time" oninput="clearError()" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <input class="form-control end_timepicker" placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time" oninput="clearError()" required="" readonly/><span class="input-group-append input-group-addon"><span class="input-group-text"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg></span></span>
@@ -3276,15 +3276,22 @@ $(document).on("click", "#save_activity_schedule", function () {
     //     // toggleSidebar();
     // });
     var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    let isendtime =0;
+    let istrue =0;
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
         // showAlert = false;
-
+        isendtime=isendtime +1;
+        var activityWrappers = $(this).find(".activity-main-wrp");
+        if (activityWrappers.length === 0) {
+            activityendtime = null; // Set to null if no .activity-main-wrp found
+        } else {
         $(this)
             .find(".activity-main-wrp")
             .each(function (index) {
+                istrue = istrue+1;
                 var id = $(this).data("id");
                 var description = $(this)
                     .find('input[name="description[]"]')
@@ -3295,7 +3302,6 @@ $(document).on("click", "#save_activity_schedule", function () {
                 var endTime = $(this)
                     .find('input[name="activity-end-time[]"]')
                     .val();
-
                 activityendtime = endTime;
 
                 $("#desc-error-" + id).text("");
@@ -3360,23 +3366,30 @@ $(document).on("click", "#save_activity_schedule", function () {
                 }
                 previousEndTime = endTime;
             });
+        }
     });
 
     if (showAlert == true) {
         return;
     }
+    // if(istrue != isendtime ){
+    //     activityendtime =null;
+    // }
     console.log({ activityendtime });
 
-    let lastendtime = convertTo24Hour(end_time);
-    let lastScheduleEndtime = convertTo24Hour(activityendtime);
-
-    console.log(lastendtime);
-    console.log(lastScheduleEndtime);
-
-    if (lastScheduleEndtime > lastendtime) {
-        toastr.error("Please enter proper time");
-        return;
+    if(activityendtime!=null){
+        let lastendtime = convertTo24Hour(end_time);
+        let lastScheduleEndtime = convertTo24Hour(activityendtime);
+    
+        console.log(lastendtime);
+        console.log(lastScheduleEndtime);
+        
+        if (lastScheduleEndtime > lastendtime) {
+            toastr.error("Please enter proper time");
+            return;
+        }
     }
+   
 
     if (isValid == 0) {
         if (total_activities >= 1) {
@@ -7273,10 +7286,10 @@ function get_co_host_list(
         .done(function (data) {
             console.log(data);
 
-            if (search_name == "") {
-                create_co_event_yesvite_scroll = false;
-            } else {
-                create_co_event_yesvite_scroll = true;
+            if(search_name==""){
+                create_co_event_yesvite_scroll=false
+            }else{
+                create_co_event_yesvite_scroll=true
             }
             if (data.view == "" && data.scroll == "false") {
                 $(".list_all_invited_user").html("No Data Found");
@@ -7592,7 +7605,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
 let previousScrollTop = 0;
 $("#select_event_cohost").on("scroll", function () {
     // alert();
-    if (cohostbusy || create_co_event_yesvite_scroll) return;
+    if (cohostbusy||create_co_event_yesvite_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
@@ -7692,6 +7705,8 @@ $(document).on("keyup", ".phone_co_host_search", function () {
 });
 
 $(document).on("click", ".add-activity-schedule", function () {
+    startTimePicker();
+    endTimePicker();
     if (eventData.activity != undefined && eventData.activity != "") {
         toggleSidebar("sidebar_activity_schedule");
     } else {
@@ -8169,7 +8184,7 @@ $(document).on("click", ".save-slider-image", function () {
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
-                eventId: eventId,
+                eventId:eventId,
                 imageSources: imageSources,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
@@ -8331,7 +8346,6 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.style.display = "block";
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
@@ -9017,7 +9031,3 @@ if (eventId != "") {
     // alert(eventId);
     sliderImages(eventId);
 }
-
-$(document).on('click','.swiper-button-disabled',function(e){
-    e.stopPropagation();
-});
