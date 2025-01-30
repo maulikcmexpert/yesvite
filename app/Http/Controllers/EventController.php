@@ -2565,10 +2565,20 @@ class EventController extends BaseController
         $imageSources = $request->imageSources;
         $savedFiles = [];
         $i = 0;
-        // dd($imageSources);
+
+        // Check if there are existing images in the session and unlink them
+        if (session()->has('desgin_slider')) {
+            $existingImages = session('desgin_slider');
+            foreach ($existingImages as $file) {
+                $filePath = public_path('storage/event_images/') . $file['fileName'];
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+        }
+
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
-
                 list($type, $data) = explode(';', $imageSource['src']);
                 list(, $data) = explode(',', $data);
                 $imageData = base64_decode($data);
@@ -2576,18 +2586,22 @@ class EventController extends BaseController
                 $i++;
 
                 $path = public_path('storage/event_images/') . $fileName;
-
                 file_put_contents($path, $imageData);
+
                 $savedFiles[] = [
                     'fileName' => $fileName,
                     'deleteId' => $imageSource['deleteId']
                 ];
             }
         }
+
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
+
+        // Store the new images in the session
         session(['desgin_slider' => $savedFiles]);
+
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
 
