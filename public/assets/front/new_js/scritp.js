@@ -960,7 +960,7 @@ if (patternContext) {
 }
 
 // Create a pattern from the canvas
-const pattern = ctx.createPattern(patternCanvas, "repeat");
+const pattern = ctx?.createPattern(patternCanvas, "repeat");
 
 const hiddenData = $("#graph_data").val();
 const parsedData = JSON.parse(hiddenData);
