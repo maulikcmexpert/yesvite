@@ -4695,6 +4695,7 @@ $(document).on("click", ".li_event_details", function () {
                 formData.append("image", blob, "design.png");
                 formData.append("design_inner_image", design_inner_image);
                 formData.append("shapeImageUrl", old_shape_url);
+                formData.append("eventId", eventId);
                 $.ajax({
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -7272,10 +7273,10 @@ function get_co_host_list(
         .done(function (data) {
             console.log(data);
 
-            if(search_name==""){
-                create_co_event_yesvite_scroll=false
-            }else{
-                create_co_event_yesvite_scroll=true
+            if (search_name == "") {
+                create_co_event_yesvite_scroll = false;
+            } else {
+                create_co_event_yesvite_scroll = true;
             }
             if (data.view == "" && data.scroll == "false") {
                 $(".list_all_invited_user").html("No Data Found");
@@ -7591,7 +7592,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
 let previousScrollTop = 0;
 $("#select_event_cohost").on("scroll", function () {
     // alert();
-    if (cohostbusy||create_co_event_yesvite_scroll) return;
+    if (cohostbusy || create_co_event_yesvite_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
@@ -8168,7 +8169,7 @@ $(document).on("click", ".save-slider-image", function () {
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
-                eventId:eventId,
+                eventId: eventId,
                 imageSources: imageSources,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
@@ -8319,6 +8320,7 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.style.display = "block";
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
@@ -8991,6 +8993,7 @@ function sliderImages(id) {
         success: function (response) {
             var savedImages = response.images;
             eventData.slider_images = savedImages;
+            eventData.desgin_selected = response.designImg;
             // console.log(eventData);
             //$("#loader").css("display", "none");
             //toastr.success("Slider Image saved Successfully");
@@ -9003,3 +9006,7 @@ if (eventId != "") {
     // alert(eventId);
     sliderImages(eventId);
 }
+
+$(document).on('click','.swiper-button-disabled',function(e){
+    e.stopPropagation();
+});
