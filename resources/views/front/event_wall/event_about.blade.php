@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
-        {{ dd($eventDetails) }}
+        {{-- {{ dd($eventDetails) }} --}}
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
@@ -430,10 +430,36 @@
                                                 @elseif (!empty($eventDetails['co_hosts']))
                                                     <div class="host-user-con">
                                                         <div class="img-wrp">
-                                                            <img src="{{ $eventDetails['user_profile'] }}"
-                                                                alt="cohost-img">
+                                                            @if ($eventDetails['profile'] != '')
+                                                            <img src="{{ $eventDetails['profile'] }}"
+                                                            alt="cohost-img">
+
+                                                        @else
+                                                            @php
+
+                                                                // $parts = explode(" ", $name);
+                                                                $nameParts = explode(
+                                                                    ' ',
+                                                                    $eventDetails['name'],
+                                                                );
+                                                                $firstInitial = isset($nameParts[0][0])
+                                                                    ? strtoupper($nameParts[0][0])
+                                                                    : '';
+                                                                $secondInitial = isset($nameParts[1][0])
+                                                                    ? strtoupper($nameParts[1][0])
+                                                                    : '';
+                                                                $initials = $firstInitial . $secondInitial;
+
+                                                                // Generate a font color class based on the first initial
+                                                                $fontColor = 'fontcolor' . $firstInitial;
+                                                            @endphp
+                                                            <h5 class="{{ $fontColor }}">
+                                                                {{ $initials }}
+                                                            </h5>
+                                                        @endif
+
                                                         </div>
-                                                        <h5>{{ $eventDetails['co_hosts'][0] }}</h5>
+                                                        <h5>{{ $eventDetails['name'] }}</h5>
                                                         <span>Co-host</span>
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>
