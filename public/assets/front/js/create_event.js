@@ -5162,7 +5162,7 @@ function plusBTN(that) {
         that.parent().find(".item-quantity-minus").val(1);
     }
     console.log({ categoryItemQuantity, quantity });
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    // if (categoryItemQuantity >= quantity + isvalidUserQnt) {
         update_self_bring(
             that,
             isvalidUserQnt,
@@ -5172,11 +5172,11 @@ function plusBTN(that) {
             categoryItemQuantity,
             "plus"
         );
-    } else {
-        quantity--;
+    // } else {
+    //     quantity--;
 
-        that.parent().children(".input-qty").val(quantity);
-    }
+    //     that.parent().children(".input-qty").val(quantity);
+    // }
 }
 $(".qty-btnminus").on("click", function () {
     minusBTN($(this));
@@ -5203,7 +5203,7 @@ function minusBTN(that) {
     var isvalidUserQnt = isNaN(innerUserQnt) ? 0 : innerUserQnt;
     console.log({ categoryItemQuantity, quantity });
 
-    if (categoryItemQuantity >= quantity + isvalidUserQnt) {
+    // if (categoryItemQuantity >= quantity + isvalidUserQnt) {
         if (itemQuantityMinus == 1) {
             update_self_bring(
                 that,
@@ -5216,12 +5216,12 @@ function minusBTN(that) {
             );
             if (quantity == 0) {
                 that.parent().find(".item-quantity-minus").val(0);
-                that.parent().children(".input-qty").val(0);
+                // that.parent().children(".input-qty").val(0);
             }
         }
-    } else {
-        // that.parent().find(".input-qty").val(0);
-    }
+    // } else {
+    //     // that.parent().find(".input-qty").val(0);
+    // }
 }
 
 function update_self_bring_bck(
