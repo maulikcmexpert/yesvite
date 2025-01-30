@@ -1023,11 +1023,23 @@ function startTimePicker() {
             //         picker.date(currentMoment);
             //     }
             // } else {
-            $(this).val("");
-            $(this)
-                .data("DateTimePicker")
-                .date(moment().hours(12).minutes(0).seconds(0));
+            // $(this).val("");
+            // $(this)
+            //     .data("DateTimePicker")
+            //     .date(moment().hours(12).minutes(0).seconds(0));
             // }
+            var picker = $(this).data("DateTimePicker");
+            var currentValue = $(this).val();
+    
+            if (currentValue) {
+                var currentMoment = moment(currentValue, "LT");
+                if (currentMoment.isValid()) {
+                    picker.date(currentMoment); // Keep the existing valid value
+                }
+            } else {
+                $(this).val("");
+                picker.date(moment().hours(12).minutes(0).seconds(0)); // Set default value
+            }
         })
         .on("dp.hide", function (e) {
             const selectedTime = e.date ? e.date.format("LT") : "";
