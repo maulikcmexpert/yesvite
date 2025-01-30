@@ -87,7 +87,7 @@
                                 @csrf
                                 <input type="hidden" name="id" id="userId" value="{{encrypt($user->id)}}">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 mb-2">
                                         <div class="input-form">
                                             <input type="text" class="form-control" id="firstname" name="firstname" value="{{$user->firstname}}">
                                             <label for="text" class="floating-label">First Name <span class="">*</span></label>
@@ -97,7 +97,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 mb-2">
                                         <div class="input-form ">
                                             <input type="text" class="form-control" id="lastname" name="lastname" value="{{$user->lastname}}">
                                             <label for="text" class="floating-label">Last Name</label>
@@ -106,7 +106,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 mb-2">
                                         <div class="main-radio input-form">
                                             <label for="Gender" class="form-label radio-label">Gender</label>
                                             <div class="radio-wrapper">
@@ -131,7 +131,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 mb-2">
                                         <div class="input-form">
                                       
                                             <input type="text" class="form-control" id="birth_date" name="birth_date" value="{{$user_birth_date}}">
@@ -141,7 +141,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 mb-2">
                                         <div class="input-form">
                                             <input type="email" class="form-control" id="email" name="email" value="{{ $user->email}}">
                                             <label for="email" class="floating-label">Email Address</label>
@@ -150,7 +150,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 mb-2">
                                         <div class="input-form">
                                             <input type="text" class="phone_number border-0" name="countryCode" readonly>
                                             <input type="text" class="form-control " id="phone_number" name="phone_number" value="{{ $user->phone_number}}"oninput="this.value = this.value.replace(/[^0-9]/g, '');">
@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 mb-2">
                                         <div class="input-form">
                                             <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ $user->zip_code}}">
                                             <label for="code" class="floating-label ">Zip Code <span>*</span></label>
@@ -170,7 +170,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 mb-2">
+                                        <div class="input-form">
+                                            <input type="text" class="form-control" id="city" name="city" value="{{ $user->city}}">
+                                            <label for="city" class="floating-label ">City <span>*</span></label>
+                                            <div class="label-error">
+                                                <label id="city-error" class="error" for="city"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mb-2">
+                                        <div class="input-form">
+                                            <input name="state" class="form-control" id="state" value="{{ $user->state}}">
+                                            <label for="state" class="floating-label ">State</label>
+                                            <div class="label-error">
+                                                <label id="state-error" class="error" for="state"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mb-2">
                                         <div class="input-form mb-0">
                                             <textarea name="about_me" class="" id="about_me">{{ $user->about_me}}</textarea>
                                             <label for="code" class="floating-label about-label">About Me</label>
@@ -179,6 +197,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </form>
                         </div>
