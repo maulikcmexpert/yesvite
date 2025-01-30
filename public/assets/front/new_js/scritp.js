@@ -938,24 +938,24 @@ $(document).on("click", ".notification_read", function () {
 });
 
 // ==transaction-history==
-const ctx = document.getElementById("creditChart").getContext("2d");
+const ctx = document.getElementById("creditChart")?.getContext("2d");
 
 // Create a gradient for the border color
-const gradientBorder = ctx.createLinearGradient(0, 0, 1, 0);
-gradientBorder.addColorStop(0, "#FF31A6");
+const gradientBorder = ctx?.createLinearGradient(0, 0, 1, 0);
+gradientBorder?.addColorStop(0, "#FF31A6");
 
 // Create a pattern canvas
 const patternCanvas = document.createElement("canvas");
-const patternContext = patternCanvas.getContext("2d");
-patternCanvas.width = 18;
-patternCanvas.height = 7;
+const patternContext = patternCanvas?.getContext("2d");
+patternCanvas?.width = 18;
+patternCanvas?.height = 7;
 
 // Draw dots on the pattern canvas
-patternContext.fillStyle = "#FFC8DC"; // Dot color
-patternContext.fillRect(0, 0, 6, 3);
-patternContext.fillStyle = "#FFC8DC"; // Background color
-patternContext.fillRect(0, 0, 6, 3);
-patternContext.fillRect(0, 0, 6, 3);
+patternContext?.fillStyle = "#FFC8DC"; // Dot color
+patternContext?.fillRect(0, 0, 6, 3);
+patternContext?.fillStyle = "#FFC8DC"; // Background color
+patternContext?.fillRect(0, 0, 6, 3);
+patternContext?.fillRect(0, 0, 6, 3);
 
 // Create a pattern from the canvas
 const pattern = ctx.createPattern(patternCanvas, "repeat");
