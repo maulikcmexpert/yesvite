@@ -404,9 +404,9 @@ class ProfileController extends BaseController
     {
 
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|min:8',
-            'new_password' => 'required|min:8',
-            'conform_password' => 'required|min:8|same:new_password',
+            'current_password' => 'required|min:6',
+            'new_password' => 'required|min:6',
+            'conform_password' => 'required|min:6|same:new_password',
         ]);
 
         if ($validator->fails()) {
