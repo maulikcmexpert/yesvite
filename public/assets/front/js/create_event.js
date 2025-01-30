@@ -7868,7 +7868,12 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             if (currentInviteCount >= coins) {
                 $(".user_choice").prop("disabled", true);
             }
-            if (html.view == "") {
+            if (html.view == "" && html.scroll== "true") {
+                // $("#YesviteContactsAll").html("No data found");
+                $("#loader").css("display", "none");
+                return;
+            }
+            if (html.view == "" && html.scroll== "false") {
                 $("#YesviteContactsAll").html("No data found");
                 $("#loader").css("display", "none");
                 return;
