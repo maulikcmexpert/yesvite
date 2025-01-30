@@ -2080,7 +2080,7 @@ class EventWallController extends Controller
 
                 $ids[] = $id;
             }
-            dd($newInvite,$newInviteGuest);
+            // dd($newInvite,$newInviteGuest);
 
             if (isset($newInvite) && !empty($newInvite)) {
 
