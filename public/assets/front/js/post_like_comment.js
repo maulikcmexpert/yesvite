@@ -419,7 +419,7 @@ let selectedPhoneContacts = [];
 $(document).ready(function () {
     const yesviteUrl = base_url + "event_wall/get_yesviteContact"; // URL for yesvite contacts
     //const phoneUrl = base_url + "event_wall/get_phoneContact"; // URL for phone contacts
-const event_id = $('#event_id').val();
+    const event_id = $('#event_id').val();
 
     $("#allcontact").on("click", function () {
         localStorage.removeItem("selectedContacts");

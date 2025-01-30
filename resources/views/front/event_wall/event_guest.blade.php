@@ -163,7 +163,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-lg-12">
+                                            <div class="col-lg-12">
                                                 <div class="failed-invite">
                                                     <a type="button" class="faild-data" data-bs-toggle="modal"
                                                         data-bs-target="#failed">
@@ -188,7 +188,7 @@
                                                         </span>
                                                     </a>
                                                 </div>
-                                                <button class="add-guest" data-bs-toggle="modal"
+                                                {{-- <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#addguest">Add Guest</button>
                                                 <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#cancelevent">Cancel
@@ -209,8 +209,8 @@
                                                     Report</button>
                                                 <button class="add-guest" data-bs-toggle="modal"
                                                     data-bs-target="#uploadcsv">upload
-                                                    csv</button>
-                                            </div> --}}
+                                                    csv</button> --}}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="guest-user-list cmn-card">
