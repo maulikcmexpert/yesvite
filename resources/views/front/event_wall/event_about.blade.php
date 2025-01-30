@@ -327,8 +327,7 @@
                                                         <div class="countevent-counter">
                                                             <h4 id="countdownMinutes">00</h4>
                                                             <span>Minutes</span>
-                                                            <img src="{{ asset('assets/front/img/colon.svg') }}"
-                                                                alt="" class="colon-img">
+
                                                         </div>
 
                                                     </div>
@@ -2108,7 +2107,7 @@
             const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
             const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+            // const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
             // Update HTML elements
             document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
