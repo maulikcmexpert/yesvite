@@ -1,6 +1,6 @@
+let calender_json = $("#calender_json").val();
 !(function () {
     var today = moment();
-    let calender_json = $("#calender_json").val();
 
     function Calendar(selector, events, startMonth, totalMonths) {
         this.el = document.querySelector(selector);
