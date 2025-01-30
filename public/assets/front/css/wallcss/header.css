@@ -380,6 +380,8 @@ header{
     line-height: normal;
     color: var(--lightgreay);
     margin-bottom: 0px;
+    width: 100%;
+    max-width: max-content;
 }
 
 .notification-drodown-body-inner-content > div{
