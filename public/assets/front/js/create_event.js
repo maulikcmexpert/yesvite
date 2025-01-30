@@ -1197,11 +1197,15 @@ $(function () {
             // alwaysShowCalendars: true, // Keep the calendar visible
             maxSpan: { days: 2 },
             minSpan: { days: 1 },
+            singleDatePicker: false, // We will enforce single selection manually
+
         },
 
         function (start, end, label) {
             // const isDate = $(this)  // Get the data attribute inside the callback
-
+            if (start.diff(end, "days") === 0) {
+                end = start;
+            }
             selectedDates.clear();
             // selectedDates.add(start.format("YYYY-MM-DD"));
             // selectedDates.add(end.format("YYYY-MM-DD"));
@@ -1244,6 +1248,8 @@ $(function () {
 
     $("#event-date").on("apply.daterangepicker", function (ev, picker) {
         picker.hide();
+        picker.endDate = picker.startDate; // Ensure both dates are the same
+        $(this).val(picker.startDate.format("MM-DD-YYYY")); // Display selected date
         $("#event-date").next().addClass("floatingfocus");
     });
     $("#event-date").on("hide.daterangepicker", function (ev, picker) {
