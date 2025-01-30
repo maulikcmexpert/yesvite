@@ -894,6 +894,11 @@
     justify-content: center !important;
 }
 
+.daterangepicker td.active, .daterangepicker td.active:hover{
+    background-color: var(--primaryColor) !important;
+}
+
+
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;
