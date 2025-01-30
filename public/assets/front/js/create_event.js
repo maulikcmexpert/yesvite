@@ -7503,9 +7503,9 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
         .done(function (data) {
             // console.log(data);
             if(search_name==""){
-                create_co_event_phone_scroll=true;
-            }else{
                 create_co_event_phone_scroll=false;
+            }else{
+                create_co_event_phone_scroll=true;
             }
             if (data.view == "" && data.scroll == "false") {
                 // cohostNoMoreContactData = true;
