@@ -362,10 +362,6 @@
                                                 <div class="posts-card-main-comment">
                                                     @if($post['commenting_on_off'] == "1")
                                                     <input type="text" class="form-control post_comment" id="post_comment" placeholder="Add Comment">
-                                                @else
-                                                    <input type="text" class="form-control post_comment" id="post_comment" placeholder="Add Comment" style="display:none;">
-                                                @endif
-                                                        <input type="hidden" id="comment_on_of" value="{{$post['commenting_on_off']}}">
                                                     <span class="comment-send-icon send_comment"
                                                         data-event-id="{{ $event }}"
                                                         data-event-post-id="{{ $post['id'] }}">
@@ -380,6 +376,25 @@
                                                                 stroke-linejoin="round" />
                                                         </svg>
                                                     </span>
+                                                @else
+                                                    <input type="text" class="form-control post_comment" id="post_comment" placeholder="Add Comment" style="display:none;">
+                                                    <span class="comment-send-icon send_comment"  style="display:none;"
+                                                    data-event-id="{{ $event }}"
+                                                    data-event-post-id="{{ $post['id'] }}">
+                                                    <svg viewBox="0 0 20 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.92473 3.52499L15.0581 7.09166C18.2581 8.69166 18.2581 11.3083 15.0581 12.9083L7.92473 16.475C3.12473 18.875 1.1664 16.9083 3.5664 12.1167L4.2914 10.675C4.47473 10.3083 4.47473 9.69999 4.2914 9.33332L3.5664 7.88332C1.1664 3.09166 3.13306 1.12499 7.92473 3.52499Z"
+                                                            stroke="#94A3B8" stroke-width="1.5"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M4.5332 10H9.0332" stroke="#94A3B8"
+                                                            stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </span>
+                                                @endif
+                                                        <input type="hidden" id="comment_on_of" value="{{$post['commenting_on_off']}}">
+
                                                 </div>
                                                 {{-- {{dd($post['post_comment'] )}} --}}
                                                 <div
