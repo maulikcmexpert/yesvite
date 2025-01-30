@@ -503,6 +503,10 @@
     border-bottom: 1px solid var(--border);
 }
 
+.photos-main-wrp > .row{
+    height: calc(100% - 10%);
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 991px) {
