@@ -7243,8 +7243,10 @@ function get_co_host_list(
 
             if (data.view == "" && scroll=="false") {
                 $(".list_all_invited_user").html("No data found");
+                $("#loader").hide();
+                return;
             }
-            
+
             if (data.view == "") {
                 cohostNoMoreData = true;
                 $("#loader").hide();
