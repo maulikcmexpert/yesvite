@@ -584,6 +584,12 @@
     .photos-tab-active .event-center-title {
         display: flex;
     }
+    .photos-main-wrp:has(.photos-card-wrp) > .row{
+        height: calc(100% - 1%);
+        max-height: calc(100% - 1%);
+        overflow: hidden;
+        overflow-y: scroll;
+    }
 }
 
 @media only screen and (max-width: 424px) {
