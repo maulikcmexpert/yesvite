@@ -283,6 +283,7 @@ $("#rsvpYesForm").validate({
         },
         email: {
             email: true,
+            required: true,
         },
         lastname: {
             required: true,
@@ -294,6 +295,10 @@ $("#rsvpYesForm").validate({
         },
         lastname: {
             required: "Please enter lastname",
+        },
+        email: {
+            required: "Please enter email",
+            email: "Please valid enter email",
         },
     },
     errorPlacement: function (error, element) {
