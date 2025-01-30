@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Url;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use DB;
 
 class UrlController extends Controller
 {
@@ -13,7 +14,7 @@ class UrlController extends Controller
         try {
             do {
                 // Generate a random 15-character key
-                $shortUrlKey = Str::random(10);
+                $shortUrlKey = Str::random(13);
             } while (Url::where('short_url_key', $shortUrlKey)->exists()); // Ensure uniqueness
 
             // Insert into the database
@@ -31,7 +32,7 @@ class UrlController extends Controller
 
     public function handleShortUrl($shortUrlKey)
     {
-        // Look up the short URL in the database
+
         $url = Url::where('short_url_key', $shortUrlKey)
             ->where('expires_at', '>', now()) // Ensure it's not expired
             ->first();
@@ -39,6 +40,7 @@ class UrlController extends Controller
         if ($url) {
             return redirect($url->long_url); // Redirect to the long URL
         }
+
 
         return response()->json(['error' => 'URL not found or expired'], 404);
     }

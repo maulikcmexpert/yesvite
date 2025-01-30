@@ -39,8 +39,11 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use App\Mail\BulkEmail;
 use App\Models\Coin_transactions;
+use App\Models\Url;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+
 // use DB;
 
 function getVideoDuration($filePath)
@@ -1780,6 +1783,27 @@ function sendSMSForApplication($receiverNumber, $message)
         return  false;
     }
 }
+
+function createShortUrl($longUrl)
+{
+    try {
+        do {
+            // Generate a random 15-character key
+            $shortUrlKey = Str::random(10);
+        } while (Url::where('short_url_key', $shortUrlKey)->exists()); // Ensure uniqueness
+
+        // Insert into the database
+        $url = Url::create([
+            'long_url' => $longUrl,
+            'short_url_key' => $shortUrlKey,
+            'expires_at' => now()->addDays(90) // Expire after 90 days
+        ]);
+
+        return "https://yesvite.com/invite/{$shortUrlKey}";
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     try {
@@ -1814,10 +1838,11 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
             }
         }
         $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($event_invited_user_id), 'eventId' => encrypt($event_id)]);
+        $shortLink = createShortUrl($eventLink);
         if (!$user->opt_in_status) {
             $message = 'Yesvite: ' . $hostName . ' has invited you to an event. To View the invite/Event details a ONE TIME opt in is required by new sms regulations to receive future invites/messages. Please reply "Yes" to opt in. Reply STOP to opt out.';
         } else {
-            $message = "Yesvite:  \" $hostName \" has invited you to  \"$eventName\" View invite, RSVP and message the host here: \"$eventLink\". Reply STOP to opt out.";
+            $message = "Yesvite:  \" $hostName \" has invited you to  \"$eventName\" View invite, RSVP and message the host here: \"$shortLink\". Reply STOP to opt out.";
         }
         return sendSMSForApplication($receiverNumber, $message);
     } catch (\Exception $e) {
@@ -1849,7 +1874,9 @@ function handleIncomingMessage($receiverNumber, $message)
             ->select('id', 'event_id', 'event_invited_user_id')
             ->groupBy('id', 'event_id', 'event_invited_user_id')
             ->get();
-        sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
+        if ($users->isNotEmpty()) { // Corrected check
+            sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
+        }
         foreach ($users as $user) {
             $user->update(['opt_in_status' => true]);
 
@@ -1861,7 +1888,8 @@ function handleIncomingMessage($receiverNumber, $message)
             if ($event) {
 
                 $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($user->event_invited_user_id), 'eventId' => encrypt($user->event_id)]);
-                $confirmationMessage = "Yesvite:  \"{$event->event->user->firstname} {$event->event->user->lastname}\" has invited you to  \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$eventLink}\". Reply STOP to opt out.";
+                $shortLink = createShortUrl($eventLink);
+                $confirmationMessage = "Yesvite:  \"{$event->event->user->firstname} {$event->event->user->lastname}\" has invited you to  \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$shortLink}\". Reply STOP to opt out.";
                 try {
 
                     sendSMSForApplication($cleanedNumber, $confirmationMessage);
