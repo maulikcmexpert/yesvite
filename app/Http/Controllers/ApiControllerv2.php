@@ -5865,7 +5865,7 @@ class ApiControllerv2 extends Controller
                     $image->move(public_path('storage/event_images'), $imageName);
                     $i=1;
                     if($key == 0){
-                        $i=1;
+                        $i=0;
                     }
                    
                     EventImage::create([
