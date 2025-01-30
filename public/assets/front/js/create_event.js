@@ -7502,10 +7502,10 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
     })
         .done(function (data) {
             // console.log(data);
-            if(search_name==""){
-                create_co_event_phone_scroll=false;
-            }else{
-                create_co_event_phone_scroll=true;
+            if (search_name == "") {
+                create_co_event_phone_scroll = false;
+            } else {
+                create_co_event_phone_scroll = true;
             }
             if (data.view == "" && data.scroll == "false") {
                 // cohostNoMoreContactData = true;
@@ -8312,7 +8312,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                     );
 
                     if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url}public/storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
