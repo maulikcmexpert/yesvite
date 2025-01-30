@@ -1595,7 +1595,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="#" class="invite-user-name">{{ $invite['first_name'] }}{{ $invite['last_name'] }}</a>
                                     <div class="ms-auto">
-                                        <button class="edit-btn">
+                                        <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editguest">
                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -1636,6 +1636,7 @@
                                         </button>
                                     </div>
                                 </div>
+                                @if(!empty($invite['phone_number']))
                                 <div class="invite-call-data mt-1">
                                     <div class="d-flex align-items-center">
                                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -1649,7 +1650,9 @@
                                     <input class="form-check-input failed-checkout" type="checkbox" value=""
                                         id="coming">
                                 </div>
+                                @endif
                                 <div class="d-flex align-items-center mt-1">
+                                    @if(!empty($invite['email'] ))
                                     <div class="invite-mail-data faild-content">
                                         <div class="d-flex align-items-center">
                                             <svg width="14" height="14" viewBox="0 0 14 14"
@@ -1666,6 +1669,8 @@
                                             <h6>{{ $invite['email'] }}</h6>
                                         </div>
                                     </div>
+                                    @endif
+
                                     <div class="ms-auto">
                                         <span class="fix-updat">Fix/update needed</span>
                                         <button type="button" class="danger-btn">
