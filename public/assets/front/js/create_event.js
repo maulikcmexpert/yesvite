@@ -3,7 +3,7 @@ let isCohost = $("#isCohost").val();
 var total_activities = 0;
 var category = 0;
 var items = 0;
-var $eventId = $("#eventID").val();
+var eventId = $("#eventID").val();
 var activities = {};
 var selected_co_host = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
 var selected_co_host_prefer_by =
@@ -8959,7 +8959,7 @@ function update_self_bring(
         },
     });
 
-    function sliderImages($id){
+    function sliderImages(id){
         $.ajax({
             url: base_url + "event/getSliderImage",
             method: "POST",
@@ -8978,7 +8978,7 @@ function update_self_bring(
         });
     }
 
-    if($eventId!=''){
-        sliderImages($eventId)
+    if(eventId!=''){
+        sliderImages(eventId)
     }
 }
