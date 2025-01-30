@@ -487,7 +487,7 @@ display:none;}
     background-clip: content-box; /* support: IE9+ */
     border-radius:50%;
     transition:0.3s;
-    padding:0.5em;
+    padding:3px;
     margin-left: auto;
 }
 
