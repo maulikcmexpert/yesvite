@@ -222,11 +222,11 @@ $(document).on('click', '.delete_failed_contact', function () {
                     toastr.success(response.message);
                     location.reload(); // Reload the page to update the UI
                 } else {
-                    toastr.danger(response.message);
+                    toastr.error(response.message);
                 }
             },
             error: function (xhr, status, error) {
-                toastr.danger("Something went wrong!");
+                toastr.error("Something went wrong!");
                 console.error(xhr.responseText);
             }
         });
