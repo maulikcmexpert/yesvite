@@ -253,6 +253,8 @@ defer
 <script src="{{ asset('assets/front/walljs/guest.js')}}"></script>
 <script src="{{ asset('assets/front/walljs/potluck.js')}}"></script>
 
+<script src="{{asset('assets/front/js/event.js') }}"></script>
+
 <script>
     new WOW().init()
 </script>
