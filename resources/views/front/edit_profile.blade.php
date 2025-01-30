@@ -182,7 +182,7 @@
                                     <div class="col-lg-12 mb-2">
                                         <div class="input-form">
                                             <input name="state" class="form-control" id="state" value="{{ $user->state}}">
-                                            <label for="state" class="floating-label about-label">State</label>
+                                            <label for="state" class="floating-label ">State</label>
                                             <div class="label-error">
                                                 <label id="state-error" class="error" for="state"></label>
                                             </div>
