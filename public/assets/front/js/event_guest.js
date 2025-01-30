@@ -157,3 +157,50 @@ $(document).on('click', '.remove_guest_page', function () {
     });
 });
 
+$(document).ready(function () {
+    $(".failed_contact_edit").on("click", function () {
+        // Get data attributes
+        let id = $(this).data("id");
+        let first_name = $(this).data("first_name");
+        let last_name = $(this).data("last_name");
+        let email = $(this).data("email");
+        let phone_number = $(this).data("phone_number");
+        let prefer_by = $(this).data("prefer_by");
+
+        // Populate modal fields
+        $("#edit_id").val(id);
+        $("#edit_first_name").val(first_name);
+        $("#edit_last_name").val(last_name);
+        $("#edit_email").val(email);
+        $("#edit_phone_number").val(phone_number);
+        $("#edit_prefer_by").val(prefer_by);
+    });
+
+    $("#editGuestForm").on("submit", function (e) {
+        e.preventDefault();
+
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: "{{ route('update_guest') }}",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert("Guest updated successfully!");
+                    location.reload();
+                } else {
+                    alert("Error updating guest.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+});
