@@ -1963,6 +1963,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
         max-width: 115px;
 
     }
+    .reaction-option img{
+        min-width: 30px;
+        max-width: 30px;
+    }
 }
 
 @media only screen and (max-width:420px) {
