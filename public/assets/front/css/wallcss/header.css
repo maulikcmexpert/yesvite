@@ -831,12 +831,21 @@ header{
 }
 
 @media only screen and (max-width: 767px) {
-    /* .add_new_event_btn{
+    .add_new_event_btn{
         display: none;
     }
     .header-msg-wrp{
         display: none;
-    } */
+    }
+
+    .mobile-menu-inner-btns .add_new_event_btn {
+        display: block;
+    }
+
+    .mobile-menu-inner-btns .header-msg-wrp {
+        display: block;
+    }
+
     .header-profile-wrp{
         display: none;
     }
@@ -874,7 +883,7 @@ header{
     }
 
     .active.mobile-menu-wrp{
-        height: 210px;
+        height: 320px;
         padding: 10px 0px !important;
         box-shadow: 0px 0px 5px rgba(0,0,0,0.2) !important;
     }
