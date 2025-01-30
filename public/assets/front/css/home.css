@@ -714,8 +714,12 @@
     font-size: 16px;
 } */
 
-.collection-wrapper .accordion-button::after{
+/* .collection-wrapper .accordion-button::after{
     filter: brightness(0) saturate(100%) invert(74%) sepia(7%) saturate(239%) hue-rotate(186deg) brightness(92%) contrast(91%);
+} */
+
+.collection-wrapper .accordion-button::after path{
+    stroke: #94A3B8;
 }
 
 
