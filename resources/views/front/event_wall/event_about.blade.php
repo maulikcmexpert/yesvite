@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
-        {{-- {{ dd($eventDetails) }} --}}
+        {{ dd($eventDetails) }}
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
@@ -331,6 +331,7 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
+                                                    @if($eventDetails['host_id'] == $login_user_id  || $eventDetails['is_host'] ==  1 || $eventDetails['co_hosts'])
                                                     <a href="#" class="add-calender btn" id="openGoogle">Add to
                                                         calendar
                                                         <svg width="16" height="16" viewBox="0 0 16 16"
@@ -347,6 +348,7 @@
                                                                 stroke-linejoin="round" />
                                                         </svg>
                                                     </a>
+                                                    @endif
                                                     <input type="hidden" id="eventDate"
                                                         value="{{ $eventDetails['event_date'] }}">
                                                     <input type="hidden" id="eventEndDate"
