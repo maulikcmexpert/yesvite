@@ -1,4 +1,4 @@
-{{dd( $eventDetails  )}}
+{{-- {{dd( $eventDetails  )}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -164,7 +164,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            @if(!empty($eventDetails['failed_invites']))
+                                             <div class="col-lg-12">
                                                 <div class="failed-invite">
                                                     <a type="button" class="faild-data" data-bs-toggle="modal"
                                                         data-bs-target="#failed">
@@ -175,7 +176,7 @@
                                                                     d="M18.134 13.267L12.8007 3.66699C12.084 2.37533 11.0924 1.66699 10.0007 1.66699C8.90905 1.66699 7.91738 2.37533 7.20071 3.66699L1.86738 13.267C1.19238 14.492 1.11738 15.667 1.65905 16.592C2.20071 17.517 3.26738 18.0253 4.66738 18.0253H15.334C16.734 18.0253 17.8007 17.517 18.3424 16.592C18.884 15.667 18.809 14.4837 18.134 13.267ZM9.37571 7.50033C9.37571 7.15866 9.65905 6.87533 10.0007 6.87533C10.3424 6.87533 10.6257 7.15866 10.6257 7.50033V11.667C10.6257 12.0087 10.3424 12.292 10.0007 12.292C9.65905 12.292 9.37571 12.0087 9.37571 11.667V7.50033ZM10.5924 14.7587C10.5507 14.792 10.509 14.8253 10.4674 14.8587C10.4174 14.892 10.3674 14.917 10.3174 14.9337C10.2674 14.9587 10.2174 14.9753 10.159 14.9837C10.109 14.992 10.0507 15.0003 10.0007 15.0003C9.95071 15.0003 9.89238 14.992 9.83405 14.9837C9.78405 14.9753 9.73405 14.9587 9.68405 14.9337C9.63405 14.917 9.58405 14.892 9.53405 14.8587C9.49238 14.8253 9.45071 14.792 9.40905 14.7587C9.25905 14.6003 9.16738 14.3837 9.16738 14.167C9.16738 13.9503 9.25905 13.7337 9.40905 13.5753C9.45071 13.542 9.49238 13.5087 9.53405 13.4753C9.58405 13.442 9.63405 13.417 9.68405 13.4003C9.73405 13.3753 9.78405 13.3587 9.83405 13.3503C9.94238 13.3253 10.059 13.3253 10.159 13.3503C10.2174 13.3587 10.2674 13.3753 10.3174 13.4003C10.3674 13.417 10.4174 13.442 10.4674 13.4753C10.509 13.5087 10.5507 13.542 10.5924 13.5753C10.7424 13.7337 10.834 13.9503 10.834 14.167C10.834 14.3837 10.7424 14.6003 10.5924 14.7587Z"
                                                                     fill="#E03137" />
                                                             </svg>
-                                                            <h5>Failed Invites (5)</h5>
+                                                            <h5>Failed Invites ({{ count($eventDetails['failed_invites']) }})</h5>
                                                         </div>
                                                         <span class="arrow d-flex align-items-center">
                                                             <svg width="15" height="16" viewBox="0 0 9 16"
@@ -212,6 +213,7 @@
                                                     data-bs-target="#uploadcsv">upload
                                                     csv</button> --}}
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="guest-user-list cmn-card">
@@ -1528,7 +1530,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="failedLabel">Failed Invites (5)</h4>
+                    <h4 class="modal-title" id="failedLabel">Failed Invites ({{ count($eventDetails['failed_invites']) }})</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -1560,14 +1562,15 @@
                         </span>
                         <h5>All clear, invites ready to be re-sent!</h5>
                     </div>
+                    @foreach ($eventDetails['failed_invites'] as $key => $invite)
                     <div class="invite-contact-wrp">
                         <div class="invite-contact">
                             <a href="#" class="invite-img">
-                                <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="invite-img">
+                                <img src="{{ $invite['profile'] }}" alt="invite-img">
                             </a>
                             <div class="w-100">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="invite-user-name">Silvia Alegra</a>
+                                    <a href="#" class="invite-user-name">{{ $invite['first_name'] }}{{ $invite['last_name'] }}</a>
                                     <div class="ms-auto">
                                         <button class="edit-btn">
                                             <svg width="20" height="20" viewBox="0 0 20 20"
@@ -1618,7 +1621,7 @@
                                                 d="M12.8171 10.6918C12.8171 10.9018 12.7705 11.1177 12.6713 11.3277C12.5721 11.5377 12.4438 11.736 12.2746 11.9227C11.9888 12.2377 11.6738 12.4652 11.318 12.611C10.968 12.7568 10.5888 12.8327 10.1805 12.8327C9.58547 12.8327 8.94963 12.6927 8.2788 12.4068C7.60797 12.121 6.93714 11.736 6.27214 11.2518C5.6013 10.7618 4.96547 10.2193 4.3588 9.61852C3.75797 9.01185 3.21547 8.37602 2.7313 7.71102C2.25297 7.04602 1.86797 6.38102 1.58797 5.72185C1.30797 5.05685 1.16797 4.42102 1.16797 3.81435C1.16797 3.41768 1.23797 3.03852 1.37797 2.68852C1.51797 2.33268 1.73964 2.00602 2.0488 1.71435C2.42214 1.34685 2.83047 1.16602 3.26214 1.16602C3.42547 1.16602 3.5888 1.20102 3.73464 1.27102C3.8863 1.34102 4.02047 1.44602 4.12547 1.59768L5.4788 3.50518C5.5838 3.65102 5.65964 3.78518 5.71214 3.91352C5.76464 4.03602 5.7938 4.15852 5.7938 4.26935C5.7938 4.40935 5.75297 4.54935 5.6713 4.68352C5.59547 4.81768 5.48464 4.95768 5.34464 5.09768L4.9013 5.55852C4.83714 5.62268 4.80797 5.69852 4.80797 5.79185C4.80797 5.83852 4.8138 5.87935 4.82547 5.92602C4.84297 5.97268 4.86047 6.00768 4.87214 6.04268C4.97714 6.23518 5.15797 6.48602 5.41464 6.78935C5.67714 7.09268 5.95713 7.40185 6.26047 7.71102C6.57547 8.02018 6.8788 8.30602 7.18797 8.56852C7.4913 8.82518 7.74213 9.00018 7.94047 9.10518C7.96963 9.11685 8.00464 9.13435 8.04547 9.15185C8.09214 9.16935 8.1388 9.17518 8.1913 9.17518C8.29047 9.17518 8.3663 9.14018 8.43047 9.07602L8.8738 8.63852C9.01964 8.49268 9.15964 8.38185 9.2938 8.31185C9.42797 8.23018 9.56213 8.18935 9.70797 8.18935C9.8188 8.18935 9.93547 8.21268 10.0638 8.26518C10.1921 8.31768 10.3263 8.39352 10.4721 8.49268L12.403 9.86352C12.5546 9.96852 12.6596 10.091 12.7238 10.2368C12.7821 10.3827 12.8171 10.5285 12.8171 10.6918Z"
                                                 stroke="#0F172A" stroke-miterlimit="10" />
                                         </svg>
-                                        <h6>1-800-5587</h6>
+                                        <h6>{{ $invite['phone_number'] }}</h6>
                                     </div>
                                     <input class="form-check-input failed-checkout" type="checkbox" value=""
                                         id="coming">
@@ -1637,7 +1640,7 @@
                                                     stroke="black" stroke-miterlimit="10" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                             </svg>
-                                            <h6>silvia@gmail.com</h6>
+                                            <h6>{{ $invite['email'] }}</h6>
                                         </div>
                                     </div>
                                     <div class="ms-auto">
@@ -1659,334 +1662,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="invite-contact">
-                            <a href="#" class="invite-img">
-                                <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="invite-img">
-                            </a>
-                            <div class="w-100">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="invite-user-name">Alena Geidt</a>
-                                    <div class="ms-auto">
-                                        <button class="edit-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.16797 1.66602H7.5013C3.33464 1.66602 1.66797 3.33268 1.66797 7.49935V12.4993C1.66797 16.666 3.33464 18.3327 7.5013 18.3327H12.5013C16.668 18.3327 18.3346 16.666 18.3346 12.4993V10.8327"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M12.4258 3.45898C12.9841 5.45065 14.5424 7.00898 16.5424 7.57565"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                        <button class="delete-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17.5 4.98307C14.725 4.70807 11.9333 4.56641 9.15 4.56641C7.5 4.56641 5.85 4.64974 4.2 4.81641L2.5 4.98307"
-                                                    stroke="#F73C71" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M7.08203 4.14102L7.26536 3.04935C7.3987 2.25768 7.4987 1.66602 8.90703 1.66602H11.0904C12.4987 1.66602 12.607 2.29102 12.732 3.05768L12.9154 4.14102"
-                                                    stroke="#F73C71" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M15.7096 7.61719L15.168 16.0089C15.0763 17.3172 15.0013 18.3339 12.6763 18.3339H7.3263C5.0013 18.3339 4.9263 17.3172 4.83464 16.0089L4.29297 7.61719"
-                                                    stroke="#F73C71" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M8.60938 13.75H11.3844" stroke="#F73C71" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.91797 10.416H12.0846" stroke="#F73C71"
-                                                    stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mt-1">
-                                    <div class="invite-mail-data ">
-                                        <div class="d-flex align-items-center">
-                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.91797 11.9577H4.08464C2.33464 11.9577 1.16797 11.0827 1.16797 9.04102V4.95768C1.16797 2.91602 2.33464 2.04102 4.08464 2.04102H9.91797C11.668 2.04102 12.8346 2.91602 12.8346 4.95768V9.04102C12.8346 11.0827 11.668 11.9577 9.91797 11.9577Z"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                            <h6>silvia@gmail.com</h6>
-                                        </div>
 
-                                    </div>
-                                    <input class="form-check-input failed-checkout ms-auto" type="checkbox"
-                                        value="" id="coming">
-                                </div>
-                                <div class="invite-call-data mt-1">
-                                    <div class="d-flex align-items-center faild-content">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M12.8171 10.6918C12.8171 10.9018 12.7705 11.1177 12.6713 11.3277C12.5721 11.5377 12.4438 11.736 12.2746 11.9227C11.9888 12.2377 11.6738 12.4652 11.318 12.611C10.968 12.7568 10.5888 12.8327 10.1805 12.8327C9.58547 12.8327 8.94963 12.6927 8.2788 12.4068C7.60797 12.121 6.93714 11.736 6.27214 11.2518C5.6013 10.7618 4.96547 10.2193 4.3588 9.61852C3.75797 9.01185 3.21547 8.37602 2.7313 7.71102C2.25297 7.04602 1.86797 6.38102 1.58797 5.72185C1.30797 5.05685 1.16797 4.42102 1.16797 3.81435C1.16797 3.41768 1.23797 3.03852 1.37797 2.68852C1.51797 2.33268 1.73964 2.00602 2.0488 1.71435C2.42214 1.34685 2.83047 1.16602 3.26214 1.16602C3.42547 1.16602 3.5888 1.20102 3.73464 1.27102C3.8863 1.34102 4.02047 1.44602 4.12547 1.59768L5.4788 3.50518C5.5838 3.65102 5.65964 3.78518 5.71214 3.91352C5.76464 4.03602 5.7938 4.15852 5.7938 4.26935C5.7938 4.40935 5.75297 4.54935 5.6713 4.68352C5.59547 4.81768 5.48464 4.95768 5.34464 5.09768L4.9013 5.55852C4.83714 5.62268 4.80797 5.69852 4.80797 5.79185C4.80797 5.83852 4.8138 5.87935 4.82547 5.92602C4.84297 5.97268 4.86047 6.00768 4.87214 6.04268C4.97714 6.23518 5.15797 6.48602 5.41464 6.78935C5.67714 7.09268 5.95713 7.40185 6.26047 7.71102C6.57547 8.02018 6.8788 8.30602 7.18797 8.56852C7.4913 8.82518 7.74213 9.00018 7.94047 9.10518C7.96963 9.11685 8.00464 9.13435 8.04547 9.15185C8.09214 9.16935 8.1388 9.17518 8.1913 9.17518C8.29047 9.17518 8.3663 9.14018 8.43047 9.07602L8.8738 8.63852C9.01964 8.49268 9.15964 8.38185 9.2938 8.31185C9.42797 8.23018 9.56213 8.18935 9.70797 8.18935C9.8188 8.18935 9.93547 8.21268 10.0638 8.26518C10.1921 8.31768 10.3263 8.39352 10.4721 8.49268L12.403 9.86352C12.5546 9.96852 12.6596 10.091 12.7238 10.2368C12.7821 10.3827 12.8171 10.5285 12.8171 10.6918Z"
-                                                stroke="#0F172A" stroke-miterlimit="10" />
-                                        </svg>
-                                        <h6>1-800-5587</h6>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="fix-updat">Fix/update needed</span>
-                                        <button type="button" class="danger-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 7.5V11.6667" stroke="#FB1C11" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M10.0008 17.8414H4.95084C2.05917 17.8414 0.850839 15.7747 2.25084 13.2497L4.85084 8.56641L7.30084 4.16641C8.78417 1.49141 11.2175 1.49141 12.7008 4.16641L15.1508 8.57474L17.7508 13.2581C19.1508 15.7831 17.9342 17.8497 15.0508 17.8497H10.0008V17.8414Z"
-                                                    stroke="#FB1C11" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M9.99609 14.166H10.0036" stroke="#FB1C11" stroke-width="2"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="invite-contact">
-                            <a href="#" class="invite-img">
-                                <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="invite-img">
-                            </a>
-                            <div class="w-100">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="invite-user-name">Alena Geidt</a>
-                                    <div class="ms-auto">
-                                        <button class="edit-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.16797 1.66602H7.5013C3.33464 1.66602 1.66797 3.33268 1.66797 7.49935V12.4993C1.66797 16.666 3.33464 18.3327 7.5013 18.3327H12.5013C16.668 18.3327 18.3346 16.666 18.3346 12.4993V10.8327"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M12.4258 3.45898C12.9841 5.45065 14.5424 7.00898 16.5424 7.57565"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                        <button class="delete-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17.5 4.98307C14.725 4.70807 11.9333 4.56641 9.15 4.56641C7.5 4.56641 5.85 4.64974 4.2 4.81641L2.5 4.98307"
-                                                    stroke="#F73C71" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M7.08203 4.14102L7.26536 3.04935C7.3987 2.25768 7.4987 1.66602 8.90703 1.66602H11.0904C12.4987 1.66602 12.607 2.29102 12.732 3.05768L12.9154 4.14102"
-                                                    stroke="#F73C71" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M15.7096 7.61719L15.168 16.0089C15.0763 17.3172 15.0013 18.3339 12.6763 18.3339H7.3263C5.0013 18.3339 4.9263 17.3172 4.83464 16.0089L4.29297 7.61719"
-                                                    stroke="#F73C71" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M8.60938 13.75H11.3844" stroke="#F73C71" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.91797 10.416H12.0846" stroke="#F73C71"
-                                                    stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mt-1">
-                                    <div class="invite-mail-data ">
-                                        <div class="d-flex align-items-center">
-                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.91797 11.9577H4.08464C2.33464 11.9577 1.16797 11.0827 1.16797 9.04102V4.95768C1.16797 2.91602 2.33464 2.04102 4.08464 2.04102H9.91797C11.668 2.04102 12.8346 2.91602 12.8346 4.95768V9.04102C12.8346 11.0827 11.668 11.9577 9.91797 11.9577Z"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                            <h6>silvia@gmail.com</h6>
-                                        </div>
-
-                                    </div>
-                                    <input class="form-check-input failed-checkout ms-auto" type="checkbox"
-                                        value="" id="coming">
-                                </div>
-                                <div class="invite-call-data mt-1">
-                                    <div class="d-flex align-items-center faild-content">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M12.8171 10.6918C12.8171 10.9018 12.7705 11.1177 12.6713 11.3277C12.5721 11.5377 12.4438 11.736 12.2746 11.9227C11.9888 12.2377 11.6738 12.4652 11.318 12.611C10.968 12.7568 10.5888 12.8327 10.1805 12.8327C9.58547 12.8327 8.94963 12.6927 8.2788 12.4068C7.60797 12.121 6.93714 11.736 6.27214 11.2518C5.6013 10.7618 4.96547 10.2193 4.3588 9.61852C3.75797 9.01185 3.21547 8.37602 2.7313 7.71102C2.25297 7.04602 1.86797 6.38102 1.58797 5.72185C1.30797 5.05685 1.16797 4.42102 1.16797 3.81435C1.16797 3.41768 1.23797 3.03852 1.37797 2.68852C1.51797 2.33268 1.73964 2.00602 2.0488 1.71435C2.42214 1.34685 2.83047 1.16602 3.26214 1.16602C3.42547 1.16602 3.5888 1.20102 3.73464 1.27102C3.8863 1.34102 4.02047 1.44602 4.12547 1.59768L5.4788 3.50518C5.5838 3.65102 5.65964 3.78518 5.71214 3.91352C5.76464 4.03602 5.7938 4.15852 5.7938 4.26935C5.7938 4.40935 5.75297 4.54935 5.6713 4.68352C5.59547 4.81768 5.48464 4.95768 5.34464 5.09768L4.9013 5.55852C4.83714 5.62268 4.80797 5.69852 4.80797 5.79185C4.80797 5.83852 4.8138 5.87935 4.82547 5.92602C4.84297 5.97268 4.86047 6.00768 4.87214 6.04268C4.97714 6.23518 5.15797 6.48602 5.41464 6.78935C5.67714 7.09268 5.95713 7.40185 6.26047 7.71102C6.57547 8.02018 6.8788 8.30602 7.18797 8.56852C7.4913 8.82518 7.74213 9.00018 7.94047 9.10518C7.96963 9.11685 8.00464 9.13435 8.04547 9.15185C8.09214 9.16935 8.1388 9.17518 8.1913 9.17518C8.29047 9.17518 8.3663 9.14018 8.43047 9.07602L8.8738 8.63852C9.01964 8.49268 9.15964 8.38185 9.2938 8.31185C9.42797 8.23018 9.56213 8.18935 9.70797 8.18935C9.8188 8.18935 9.93547 8.21268 10.0638 8.26518C10.1921 8.31768 10.3263 8.39352 10.4721 8.49268L12.403 9.86352C12.5546 9.96852 12.6596 10.091 12.7238 10.2368C12.7821 10.3827 12.8171 10.5285 12.8171 10.6918Z"
-                                                stroke="#0F172A" stroke-miterlimit="10" />
-                                        </svg>
-                                        <h6>1-800-5587</h6>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span class="fix-updat">Fix/update needed</span>
-                                        <button type="button" class="danger-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 7.5V11.6667" stroke="#FB1C11" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M10.0008 17.8414H4.95084C2.05917 17.8414 0.850839 15.7747 2.25084 13.2497L4.85084 8.56641L7.30084 4.16641C8.78417 1.49141 11.2175 1.49141 12.7008 4.16641L15.1508 8.57474L17.7508 13.2581C19.1508 15.7831 17.9342 17.8497 15.0508 17.8497H10.0008V17.8414Z"
-                                                    stroke="#FB1C11" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M9.99609 14.166H10.0036" stroke="#FB1C11" stroke-width="2"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="invite-contact">
-                            <a href="#" class="invite-img">
-                                <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="invite-img">
-                            </a>
-                            <div class="w-100">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="invite-user-name">Alena Geidt</a>
-                                    <div class="ms-auto">
-                                        <button class="edit-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.16797 1.66602H7.5013C3.33464 1.66602 1.66797 3.33268 1.66797 7.49935V12.4993C1.66797 16.666 3.33464 18.3327 7.5013 18.3327H12.5013C16.668 18.3327 18.3346 16.666 18.3346 12.4993V10.8327"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M12.4258 3.45898C12.9841 5.45065 14.5424 7.00898 16.5424 7.57565"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mt-1">
-                                    <div class="invite-mail-data ">
-                                        <div class="d-flex align-items-center">
-                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.91797 11.9577H4.08464C2.33464 11.9577 1.16797 11.0827 1.16797 9.04102V4.95768C1.16797 2.91602 2.33464 2.04102 4.08464 2.04102H9.91797C11.668 2.04102 12.8346 2.91602 12.8346 4.95768V9.04102C12.8346 11.0827 11.668 11.9577 9.91797 11.9577Z"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                            <h6>silvia@gmail.com</h6>
-                                        </div>
-
-                                    </div>
-                                    <input class="form-check-input success-checkout ms-auto" type="checkbox"
-                                        value="" id="coming">
-                                </div>
-                                <div class="invite-call-data mt-1">
-                                    <div class="d-flex align-items-center">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M12.8171 10.6918C12.8171 10.9018 12.7705 11.1177 12.6713 11.3277C12.5721 11.5377 12.4438 11.736 12.2746 11.9227C11.9888 12.2377 11.6738 12.4652 11.318 12.611C10.968 12.7568 10.5888 12.8327 10.1805 12.8327C9.58547 12.8327 8.94963 12.6927 8.2788 12.4068C7.60797 12.121 6.93714 11.736 6.27214 11.2518C5.6013 10.7618 4.96547 10.2193 4.3588 9.61852C3.75797 9.01185 3.21547 8.37602 2.7313 7.71102C2.25297 7.04602 1.86797 6.38102 1.58797 5.72185C1.30797 5.05685 1.16797 4.42102 1.16797 3.81435C1.16797 3.41768 1.23797 3.03852 1.37797 2.68852C1.51797 2.33268 1.73964 2.00602 2.0488 1.71435C2.42214 1.34685 2.83047 1.16602 3.26214 1.16602C3.42547 1.16602 3.5888 1.20102 3.73464 1.27102C3.8863 1.34102 4.02047 1.44602 4.12547 1.59768L5.4788 3.50518C5.5838 3.65102 5.65964 3.78518 5.71214 3.91352C5.76464 4.03602 5.7938 4.15852 5.7938 4.26935C5.7938 4.40935 5.75297 4.54935 5.6713 4.68352C5.59547 4.81768 5.48464 4.95768 5.34464 5.09768L4.9013 5.55852C4.83714 5.62268 4.80797 5.69852 4.80797 5.79185C4.80797 5.83852 4.8138 5.87935 4.82547 5.92602C4.84297 5.97268 4.86047 6.00768 4.87214 6.04268C4.97714 6.23518 5.15797 6.48602 5.41464 6.78935C5.67714 7.09268 5.95713 7.40185 6.26047 7.71102C6.57547 8.02018 6.8788 8.30602 7.18797 8.56852C7.4913 8.82518 7.74213 9.00018 7.94047 9.10518C7.96963 9.11685 8.00464 9.13435 8.04547 9.15185C8.09214 9.16935 8.1388 9.17518 8.1913 9.17518C8.29047 9.17518 8.3663 9.14018 8.43047 9.07602L8.8738 8.63852C9.01964 8.49268 9.15964 8.38185 9.2938 8.31185C9.42797 8.23018 9.56213 8.18935 9.70797 8.18935C9.8188 8.18935 9.93547 8.21268 10.0638 8.26518C10.1921 8.31768 10.3263 8.39352 10.4721 8.49268L12.403 9.86352C12.5546 9.96852 12.6596 10.091 12.7238 10.2368C12.7821 10.3827 12.8171 10.5285 12.8171 10.6918Z"
-                                                stroke="#0F172A" stroke-miterlimit="10" />
-                                        </svg>
-                                        <h6>1-800-5587</h6>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <input class="form-check-input success-checkout ms-auto" type="checkbox"
-                                            value="" id="coming">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="invite-contact">
-                            <a href="#" class="invite-img">
-                                <img src="{{ asset('assets/front/img/event-story-img-1.png') }}" alt="invite-img">
-                            </a>
-                            <div class="w-100">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="invite-user-name">Alena Geidt</a>
-                                    <div class="ms-auto">
-                                        <button class="edit-btn">
-                                            <svg width="20" height="20" viewBox="0 0 20 20"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.16797 1.66602H7.5013C3.33464 1.66602 1.66797 3.33268 1.66797 7.49935V12.4993C1.66797 16.666 3.33464 18.3327 7.5013 18.3327H12.5013C16.668 18.3327 18.3346 16.666 18.3346 12.4993V10.8327"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M12.4258 3.45898C12.9841 5.45065 14.5424 7.00898 16.5424 7.57565"
-                                                    stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mt-1">
-                                    <div class="invite-mail-data ">
-                                        <div class="d-flex align-items-center">
-                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.91797 11.9577H4.08464C2.33464 11.9577 1.16797 11.0827 1.16797 9.04102V4.95768C1.16797 2.91602 2.33464 2.04102 4.08464 2.04102H9.91797C11.668 2.04102 12.8346 2.91602 12.8346 4.95768V9.04102C12.8346 11.0827 11.668 11.9577 9.91797 11.9577Z"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25"
-                                                    stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                            <h6>silvia@gmail.com</h6>
-                                        </div>
-                                    </div>
-                                    <input class="form-check-input success-checkout ms-auto" type="checkbox"
-                                        value="" id="coming">
-                                </div>
-                                <div class="invite-call-data mt-1">
-                                    <div class="d-flex align-items-center faild-content">
-                                        <span class="d-flex align-items-center faild-serve">
-                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M12.6934 9.28602L8.96011 2.56602C8.45844 1.66185 7.76428 1.16602 7.00011 1.16602C6.23594 1.16602 5.54178 1.66185 5.04011 2.56602L1.30678 9.28602C0.834276 10.1435 0.781776 10.966 1.16094 11.6135C1.54011 12.261 2.28678 12.6168 3.26678 12.6168H10.7334C11.7134 12.6168 12.4601 12.261 12.8393 11.6135C13.2184 10.966 13.1659 10.1377 12.6934 9.28602ZM6.56261 5.24935C6.56261 5.01018 6.76094 4.81185 7.00011 4.81185C7.23928 4.81185 7.43761 5.01018 7.43761 5.24935V8.16602C7.43761 8.40518 7.23928 8.60352 7.00011 8.60352C6.76094 8.60352 6.56261 8.40518 6.56261 8.16602V5.24935ZM7.41428 10.3302C7.38511 10.3535 7.35594 10.3768 7.32678 10.4002C7.29178 10.4235 7.25678 10.441 7.22178 10.4527C7.18678 10.4702 7.15177 10.4818 7.11094 10.4877C7.07594 10.4935 7.03511 10.4993 7.00011 10.4993C6.96511 10.4993 6.92428 10.4935 6.88344 10.4877C6.84844 10.4818 6.81344 10.4702 6.77844 10.4527C6.74344 10.441 6.70844 10.4235 6.67344 10.4002C6.64427 10.3768 6.61511 10.3535 6.58594 10.3302C6.48094 10.2193 6.41678 10.0677 6.41678 9.91602C6.41678 9.76435 6.48094 9.61268 6.58594 9.50185C6.61511 9.47852 6.64427 9.45518 6.67344 9.43185C6.70844 9.40852 6.74344 9.39102 6.77844 9.37935C6.81344 9.36185 6.84844 9.35018 6.88344 9.34435C6.95928 9.32685 7.04094 9.32685 7.11094 9.34435C7.15177 9.35018 7.18678 9.36185 7.22178 9.37935C7.25678 9.39102 7.29178 9.40852 7.32678 9.43185C7.35594 9.45518 7.38511 9.47852 7.41428 9.50185C7.51928 9.61268 7.58344 9.76435 7.58344 9.91602C7.58344 10.0677 7.51928 10.2193 7.41428 10.3302Z"
-                                                    fill="#E03137" />
-                                            </svg>
-                                        </span>
-                                        <h6>1-800-5587</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary failed-btn"
