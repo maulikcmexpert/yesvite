@@ -2606,7 +2606,6 @@ class EventController extends BaseController
                 }
             }
         }
-
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
                 list($type, $data) = explode(';', $imageSource['src']);
@@ -2616,22 +2615,18 @@ class EventController extends BaseController
                 $i++;
 
                 $path = public_path('storage/event_images/') . $fileName;
-                file_put_contents($path, $imageData);
 
+                file_put_contents($path, $imageData);
                 $savedFiles[] = [
                     'fileName' => $fileName,
                     'deleteId' => $imageSource['deleteId']
                 ];
             }
         }
-
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-
-        // Store the new images in the session
         session(['desgin_slider' => $savedFiles]);
-
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
 
