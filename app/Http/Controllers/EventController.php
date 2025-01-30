@@ -693,7 +693,7 @@ class EventController extends BaseController
         }
         if (isset($request->textData) && json_encode($request->textData) != '') {
             if ($request->temp_id != '' && $request->temp_id != null) {
-                dd($request->temp_id);
+                // dd($request->temp_id);
                 $tempData = TextData::where('id', $request->temp_id)->first();
                 if ($tempData) {
                     $sourceImagePath = asset('storage/canvas/' . $tempData->image);
@@ -3418,10 +3418,20 @@ class EventController extends BaseController
             $gift = '1';
         }
         Session::save();
-        return response()->json([
-            // 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
-            'success' => true,
-            'is_registry' => $gift
-        ]);
+        if($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1"){
+            return response()->json([
+                'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
+                'success' => true,
+                'isupadte' =>false,
+                'is_registry' => $gift
+            ]);
+        }else{
+            return response()->json([
+                // 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
+                'success' => true,
+                'isupadte' =>true,
+                'is_registry' => $gift
+            ]);
+        }
     }
 }
