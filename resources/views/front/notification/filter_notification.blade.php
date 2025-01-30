@@ -73,13 +73,13 @@ $i++;
                                       @if($inner_data['co_host_notification']=="1")
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
-                                          <span>You have been made a co-host for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span>You have been made a co-host for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}" style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                        @else
                                         <h3>
                                             {{-- {{$inner_data['notification_message']}} --}}
                                             {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                            <span> has invited you to <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                            <span> has invited you to <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"  style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                           </h3>
                                        @endif 
 
@@ -138,7 +138,7 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Has updated the event details for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> Has updated the event details for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
@@ -183,7 +183,7 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Has updated the event date for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> Has updated the event date for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
@@ -234,7 +234,7 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Has updated the event potluck for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> Has updated the event potluck for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
@@ -282,7 +282,7 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> has updated the event time for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> has updated the event time for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
@@ -333,7 +333,7 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> has updated the event address for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> has updated the event address for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <div>
                                           <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
@@ -386,7 +386,7 @@ $i++;
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
                                           <!-- <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>Potluck -->
-                                          <span> will bring the item below for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span>
+                                          <span> will bring the item below for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a>
                                           </span>
                                         </h3>
                                         <div>
@@ -477,7 +477,7 @@ $i++;
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> commented on your post on <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> commented on your post on <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
@@ -543,9 +543,9 @@ $i++;
                                         @if($inner_data['media_type']=="photo")
                                             <span> posted new photo on wall at </span>
                                         @elseif($inner_data['media_type']=="video")
-                                          <span> posted video on wall at <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span><strong></strong></span>
+                                          <span> posted video on wall at <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @else
-                                        <span> posted on wall at <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span><strong></strong></span>
+                                        <span> posted on wall at <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @endif
                                       </h3>
                                       <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
@@ -692,7 +692,7 @@ $i++;
                                   <div>
                                     <p>
                                       {{$inner_data['event_name']}}
-                                      <span><strong>Wall</strong></span>
+                                      <!-- <span><strong>Wall</strong></span> -->
                                     </p>
                                     @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
@@ -732,7 +732,7 @@ $i++;
                                   <div>
                                     <p>
                                       {{$inner_data['event_name']}}
-                                      <span><strong>Wall</strong></span>
+                                      <!-- <span><strong>Wall</strong></span> -->
                                     </p>
                                     @if($inner_data['read']=="0")
                                             <h6 class="notification-read-dot"></h6>
@@ -796,7 +796,7 @@ $i++;
                                         <h3>
                                           {{-- {{$inner_data['notification_message']}} --}}
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> posted new photo on photos for <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> posted new photo on photos for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
