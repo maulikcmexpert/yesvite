@@ -847,7 +847,7 @@
 
 
 
-                <div class="user-contacts list_all_invited_user" id="select_event_cohost">
+                <div class="user-contacts list_all_invited_user" id="select_event_cohost"  style="color:black;text-align:center;">
                 </div>
 
                 <div class="user-contacts list_all_contact_user" id="select_contact_event_cohost"
