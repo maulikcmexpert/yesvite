@@ -538,7 +538,7 @@ $(document).on("click", ".check_rsvp_no", function (e) {
 
 const latitude = parseFloat(document.getElementById("event_latitude")?.value);
 const longitutde = parseFloat(document.getElementById("event_logitude")?.value);
-const address = document.getElementById("event_address").value;
+const address = document.getElementById("event_address")?.value;
 
 function initMap() {
     // Create the map
@@ -623,3 +623,52 @@ $(document).on("click", ".direction-btn", function () {
 // });
 
 //   initMap();
+$(document).ready(function () {
+    $(".guest-list-data").each(async function (index, element) {
+        let $ele = $(element);
+        let imgElement = $ele.find(".guest-img img");
+        let imgSrc = imgElement.attr("src");
+
+        if (!(await isValidImageUrl(imgSrc))) {
+            let userName = $ele.find(".guest-name").text().trim();
+            const initials = getInitials(userName);
+            const fontColor = "fontcolor" + initials[0]?.toUpperCase();
+
+            // Replace image with initials
+            $ele.find(".guest-img").html(
+                `<h5 class="${fontColor}">${initials}</h5>`
+            );
+        }
+    });
+});
+
+// Function to check if the image URL is valid
+async function isValidImageUrl(url) {
+    if (!url) return false;
+
+    const validExtensions = [".jpg", ".jpeg", ".png"];
+    const hasValidExtension = validExtensions.some((ext) =>
+        url.toLowerCase().includes(ext)
+    );
+
+    return hasValidExtension && (await imageExists(url));
+}
+
+// Function to check if the image actually exists
+function imageExists(url) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+    });
+}
+
+// Function to extract initials from a name
+function getInitials(name) {
+    if (!name) return "";
+    return name
+        .split(" ")
+        .map((part) => part.charAt(0).toUpperCase())
+        .join("");
+}

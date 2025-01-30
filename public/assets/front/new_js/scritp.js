@@ -947,15 +947,17 @@ gradientBorder?.addColorStop(0, "#FF31A6");
 // Create a pattern canvas
 const patternCanvas = document.createElement("canvas");
 const patternContext = patternCanvas?.getContext("2d");
-patternCanvas?.width = 18;
-patternCanvas?.height = 7;
+if (patternContext) {
+    patternCanvas.width = 18;
+    patternCanvas.height = 7;
 
-// Draw dots on the pattern canvas
-patternContext?.fillStyle = "#FFC8DC"; // Dot color
-patternContext?.fillRect(0, 0, 6, 3);
-patternContext?.fillStyle = "#FFC8DC"; // Background color
-patternContext?.fillRect(0, 0, 6, 3);
-patternContext?.fillRect(0, 0, 6, 3);
+    // Draw dots on the pattern canvas
+    patternContext.fillStyle = "#FFC8DC"; // Dot color
+    patternContext.fillRect(0, 0, 6, 3);
+    patternContext.fillStyle = "#FFC8DC"; // Background color
+    patternContext.fillRect(0, 0, 6, 3);
+    patternContext.fillRect(0, 0, 6, 3);
+}
 
 // Create a pattern from the canvas
 const pattern = ctx.createPattern(patternCanvas, "repeat");
