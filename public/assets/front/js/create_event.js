@@ -46,6 +46,7 @@ var final_initial =
           ).toUpperCase()
         : "";
 var create_event_phone_scroll=false;                
+var create_event_yesvite_scroll=false;                
 if (final_profile_or_text == "1") {
     $(".guest-img .selected-co-host-image").show();
     $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
@@ -6369,7 +6370,7 @@ var NogroupData = false;
 $("#YesviteUserAll").on("scroll", function () {
     // console.log(busyyesvite);
 
-    if (busyyesvite) return;
+    if (busyyesvite||create_event_yesvite_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
@@ -6500,6 +6501,11 @@ function displayRecords(
         success: function (html) {
             var currentInviteCount = parseInt($("#currentInviteCount").val());
             const coins = $("#coins").val();
+            if(search==""){
+                create_event_yesvite_scroll=false
+            }else{
+                create_event_yesvite_scroll=true
+            }
             if (currentInviteCount >= coins) {
                 $(".user_choice").prop("disabled", true);
             }
