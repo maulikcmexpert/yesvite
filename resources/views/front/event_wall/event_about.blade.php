@@ -590,7 +590,7 @@
                                                             if($schedule['start_time']==null || $schedule['start_time']==null){
                                                                 $start
                                                             }elseif ($schedule['end_time']==null || $schedule['end_time']==null) {
-                                                                
+
                                                             }else{
                                                                 $duration = $startTime->diffInHours($endTime) . 'h';
                                                             }
@@ -602,7 +602,7 @@
                                                                 if (empty($schedule['start_time']) && empty($schedule['end_time'])) {
                                                                     continue;
                                                                 }
-
+                                                                $duration='';
                                                                 $i = 0;
                                                                 $colorClass = $series[$colorIndex % count($series)];
                                                                 $colorIndex++;
@@ -616,23 +616,23 @@
                                                                     $endTime = strtotime($schedule['end_time']);
                                                                 }
 
-                                                                
+
                                                                 if (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
                                                                     $nextSchedule = $eventDetails['event_schedule'][$key + 1];
                                                                     if (!empty($nextSchedule['start_time'])) {
                                                                         $nextStartTime = strtotime($nextSchedule['start_time']);
-                                                                        $duration = round(($nextStartTime - $startTime) / 3600) . 'h'; 
+                                                                        $duration = round(($nextStartTime - $startTime) / 3600) . 'h';
                                                                     }
                                                                 }
-                                                                
+
                                                                 elseif (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key - 1])) {
                                                                     $prevSchedule = $eventDetails['event_schedule'][$key - 1];
                                                                     if (!empty($prevSchedule['end_time'])) {
                                                                         $prevEndTime = strtotime($prevSchedule['end_time']);
-                                                                        $duration = round(($endTime - $prevEndTime) / 3600) . 'h'; 
+                                                                        $duration = round(($endTime - $prevEndTime) / 3600) . 'h';
                                                                     }
                                                                 }
-                                                          
+
                                                                 elseif (!empty($schedule['start_time']) && !empty($schedule['end_time'])) {
                                                                     $duration = round(($endTime - $startTime) / 3600) . 'h';
                                                                 }
