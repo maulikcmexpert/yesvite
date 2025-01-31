@@ -1,13 +1,23 @@
 $(document).ready(function() {
-    // Initially disable the submit button
-    $('button[type="submit"]').prop('disabled', true);
+    // // Initially disable the submit button
+     $('#rsvp_yes_no_btn').prop('disabled', true);
 
     // Listen for changes in RSVP status (YES/NO)
-    $('input[name="rsvp_status"]').change(function() {
-        var rsvpStatus = $(this).val()
+    $('input[name="rsvp_status"]').change(function () {
+        var rsvpStatus = $(this).val();
+        console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
+            $('input[name="adults"]').val();
+            $('input[name="kids"]').val();
+            $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
+            $('#rsvp_yes_no_btn').prop('disabled', false); // Allow submission if RSVP is No
+        }  if (rsvpStatus == "1") {
+            $('input[name="adults"]').val();
+            $('input[name="kids"]').val();
+            console.log($('input[name="adults"]').val());
+            console.log($('input[name="kids"]').val());
+            $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
+            $('#rsvp_yes_no_btn').prop('disabled', true); // Disable submit initially
         }
         validateForm();
     });
@@ -25,7 +35,7 @@ $(document).ready(function() {
         input.val(currentValue + 1); // Increment by 1
 
         // Trigger validation if needed
-        validateForm();
+        // validateForm();
     });
 
     // Listen for the click event on the "-" button
@@ -36,55 +46,43 @@ $(document).ready(function() {
         if (currentValue > 0) {
             input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }
+            $('#rsvp_yes_no_btn').prop('disabled', false);
 
         // Trigger validation if needed
-        validateForm();
+        // validateForm();
     });
 
     // Submit form validation
-    $('form').submit(function(e) {
-        // Clear any previous error message
+    $('form').submit(function (e) {
         $('#error-message').text('');
 
-        // Get the value of RSVP status
-        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
-
-        // If RSVP status is "YES"
-        if (rsvpStatus == 1) {
-            // Get the current values of adults and kids
-            var adults = parseInt($('input[name="adults"]').val()) || 0;  // Default to 0 if not valid
-            var kids = parseInt($('input[name="kids"]').val()) || 0;  // Default to 0 if not valid
-
-            // Check if neither adults nor kids is selected
-            if (adults <= 0 && kids <= 0) {
-                // Show error message inside the div
-                $('#error-message').text('Please select at least one Adult or Kid.')
-                                     .css('color', 'red');
-
-                // Prevent form submission
-                e.preventDefault();
-            }
-        }
-        else {
-            $('button[type="submit"]').prop('disabled', false);  // Disable submit button
-        }
-    });
-
-    // Function to validate form and enable/disable submit button
-    function validateForm() {
-        // Get the value of RSVP status
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
         var adults = parseInt($('input[name="adults"]').val()) || 0;
         var kids = parseInt($('input[name="kids"]').val()) || 0;
 
-        // If RSVP is selected (YES) and either adults or kids is selected, enable submit button
-        if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
-            $('button[type="submit"]').prop('disabled', false);  // Enable submit button
-            $('#error-message').text('');  // Clear error message
-        } if(rsvpStatus == "0" && (adults ==  0 || kids == 0)) {
-            $('button[type="submit"]').prop('disabled', false);  // Disable submit button
+        if (rsvpStatus == "1" && adults <= 0 && kids <= 0) {
+            $('#error-message').text('Please select at least one Adult or Kid.').css('color', 'red');
+            e.preventDefault();
         }
+    });
+
+   // Function to validate form and enable/disable submit button
+   function validateForm() {
+    var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+    var adults = parseInt($('input[name="adults"]').val()) || 0;
+    var kids = parseInt($('input[name="kids"]').val()) || 0;
+// console.log(adults,kids);
+    if (rsvpStatus == "0") {
+        $('#rsvp_yes_no_btn').prop('disabled', false);
+    } else if (rsvpStatus == "1" && (adults != 0 || kids != 0)) {
+        alert();
+        $('#rsvp_yes_no_btn').prop('disabled', false);
+    } else {
+        $('#rsvp_yes_no_btn').prop('disabled', true);
     }
+}
+
+    // Function to validate form and enable/disable submit button
 
     document
     .getElementById("openGoogle")
@@ -172,6 +170,15 @@ $(document).ready(function() {
         window.open(googleCalendarUrl);
     });
 
+    // $(document).on('click','.rsvp_status_btn',function(){
 
+    //     var kids=parseInt($('#rsvp_status_kids').val());
+    //     var adults=parseInt($('#rsvp_status_adults').val());
+
+    //     if(kids==0 && adults==0){
+    //         alert();
+    //         $('#rsvp_yes_no_btn').prop('disabled', true);
+    //     }
+    // })
 
 });

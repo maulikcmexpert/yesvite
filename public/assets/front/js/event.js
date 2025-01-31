@@ -1,17 +1,7 @@
 var date_upcoming=false;
 var date_past=false;
 var date_draft=false;
-const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-// Create a request object
-const request = new XMLHttpRequest();
-request.open('GET', '/your-api-endpoint', true);
-
-// Set the X-User-Timezone header
-request.setRequestHeader('X-User-Timezone', userTimezone);
-
-// Send the request
-request.send();
 function getActiveTabPage() {
     let activeTab = $(".event_nav.active");
     let activePage = activeTab.data("page");
@@ -806,14 +796,31 @@ $(document).on('change', 'input[data-name="all"]', function () {
     var isChecked = $(this).is(':checked');
     $("input[name='activityTypes[]']").prop('checked', isChecked);
 });
-$(document).on('change', 'input[name="selectedEvents[]"]', function () {
+$(document).on('change', '.selectedEvents', function () {
     var eventname=$(this).data('event_name');
+    var event_id=$(this).data('event_id');
+
     if ($(this).is(':checked')) {
+        storeFilterData(1,event_id);
         $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
     } else {
+        storeFilterData(0,event_id);
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
+function storeFilterData(status,event_id){
+    $.ajax({
+        url: `${base_url}event/store_notification_filter`,
+        type: 'GET',        
+        data: {status:status,event_id:event_id},          
+        success: function (response) { 
+         
+        },
+        error: function (error) {
+          toastr.error('Something went wrong. Please try again!');
+        },
+      });
+}
 $(document).on('click', '.all-event-notification-filter-reset', function () {
 
     $("input[name='selectedEvents[]']:checked").each(function () {

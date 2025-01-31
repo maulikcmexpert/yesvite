@@ -1023,15 +1023,29 @@ function startTimePicker() {
             //         picker.date(currentMoment);
             //     }
             // } else {
-            $(this).val("");
-            $(this)
-                .data("DateTimePicker")
-                .date(moment().hours(12).minutes(0).seconds(0));
+            // $(this).val("");
+            // $(this)
+            //     .data("DateTimePicker")
+            //     .date(moment().hours(12).minutes(0).seconds(0));
             // }
+            var picker = $(this).data("DateTimePicker");
+            var currentValue = $(this).val();
+    
+            if (currentValue) {
+                var currentMoment = moment(currentValue, "LT");
+                if (currentMoment.isValid()) {
+                    picker.date(currentMoment); // Keep the existing valid value
+                }
+            } else {
+                $(this).val("");
+                picker.date(moment().hours(12).minutes(0).seconds(0)); // Set default value
+            }
         })
         .on("dp.hide", function (e) {
             const selectedTime = e.date ? e.date.format("LT") : "";
             $(this).val(selectedTime);
+            $(this)
+            .data(selectedTime)
             const selectedStartTime = e.date
                 ? e.date
                 : moment().hours(12).minutes(0).seconds(0);
@@ -1182,11 +1196,16 @@ $(function () {
             minDate: moment(),
             // alwaysShowCalendars: true, // Keep the calendar visible
             maxSpan: { days: 2 },
+            minSpan: { days: 1 },
+            singleDatePicker: false, // We will enforce single selection manually
+
         },
 
         function (start, end, label) {
             // const isDate = $(this)  // Get the data attribute inside the callback
-
+            if (start.diff(end, "days") === 0) {
+                end = start;
+            }
             selectedDates.clear();
             // selectedDates.add(start.format("YYYY-MM-DD"));
             // selectedDates.add(end.format("YYYY-MM-DD"));
@@ -1229,6 +1248,8 @@ $(function () {
 
     $("#event-date").on("apply.daterangepicker", function (ev, picker) {
         picker.hide();
+        picker.endDate = picker.startDate; // Ensure both dates are the same
+        $(this).val(picker.startDate.format("MM-DD-YYYY")); // Display selected date
         $("#event-date").next().addClass("floatingfocus");
     });
     $("#event-date").on("hide.daterangepicker", function (ev, picker) {

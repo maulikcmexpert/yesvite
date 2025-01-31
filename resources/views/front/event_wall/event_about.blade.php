@@ -202,9 +202,9 @@
                                                         <div class="hosted-by-date-time-content">
                                                             <h6>Date</h6>
                                                             <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('M d, Y') }}
-                                                                @if(!empty($eventDetails['end_date']))
-                                                                to
-                                                                {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('M d, Y') }}
+                                                                @if (!empty($eventDetails['end_date']))
+                                                                    to
+                                                                    {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('M d, Y') }}
                                                                 @endif
 
                                                             </h3>
@@ -227,9 +227,10 @@
                                                         <div class="hosted-by-date-time-content">
                                                             <h6>Time</h6>
                                                             <h3>{{ $eventDetails['event_time'] }}
-                                                               @if(!empty($eventDetails['end_time']))
-                                                               to {{ $eventDetails['end_time']}}
-                                                                @endif</h3>
+                                                                @if (!empty($eventDetails['end_time']))
+                                                                    to {{ $eventDetails['end_time'] }}
+                                                                @endif
+                                                            </h3>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -334,16 +335,24 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if(!($eventDetails['host_id'] == $login_user_id && $eventDetails['is_host'] == 1 && !empty($eventDetails['co_hosts'])))
-    <a href="#" class="add-calender btn" id="openGoogle">Add to calendar
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.9987 14.6668C11.6654 14.6668 14.6654 11.6668 14.6654 8.00016C14.6654 4.3335 11.6654 1.3335 7.9987 1.3335C4.33203 1.3335 1.33203 4.3335 1.33203 8.00016C1.33203 11.6668 4.33203 14.6668 7.9987 14.6668Z"
-                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M5.33203 8H10.6654" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M8 10.6668V5.3335" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-    </a>
-@endif
+                                                    @if (!($eventDetails['host_id'] == $login_user_id && $eventDetails['is_host'] == 1 && !empty($eventDetails['co_hosts'])))
+                                                        <a href="#" class="add-calender btn" id="openGoogle">Add to
+                                                            calendar
+                                                            <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M7.9987 14.6668C11.6654 14.6668 14.6654 11.6668 14.6654 8.00016C14.6654 4.3335 11.6654 1.3335 7.9987 1.3335C4.33203 1.3335 1.33203 4.3335 1.33203 8.00016C1.33203 11.6668 4.33203 14.6668 7.9987 14.6668Z"
+                                                                    stroke="#0F172A" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M5.33203 8H10.6654" stroke="#0F172A"
+                                                                    stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M8 10.6668V5.3335" stroke="#0F172A"
+                                                                    stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
 
                                                     <input type="hidden" id="eventDate"
                                                         value="{{ $eventDetails['event_date'] }}">
@@ -361,29 +370,51 @@
                                                         $isDisabled =
                                                             $eventDetails['host_id'] == $login_user_id ? 'd-none' : ''; // Using 'd-none' to hide the link
                                                     @endphp
+                                                    {{-- {{ dd($rsvpSent)}} --}}
 
-                                                    <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
-                                                        data-bs-toggle="modal" data-bs-target="#aboutsuccess">
-                                                        RSVP
-                                                        <svg width="16" height="16" viewBox="0 0 16 16"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
-                                                                stroke="white" stroke-width="1.5" stroke-miterlimit="10"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
-                                                    </a>
-
-                                                   <a href="#" class="rsvp-btn noattending-btn btn {{ $isDisabled }}" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
-                                                                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                              <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                              </svg>
-                                                                            </a>
-                                                  {{-- <a href="#" class="rsvp-btn attending-btn btn {{ $isDisabled }}">Attending
-                                                                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                              <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                              </svg>
-                                                                            </a> --}}
+                                                    @if (!empty($rsvpSent) &&  $rsvpSent['rsvp_status'] == null)
+                                                        <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
+                                                            data-bs-toggle="modal" data-bs-target="#aboutsuccess">
+                                                            RSVP
+                                                            <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
+                                                                    stroke="white" stroke-width="1.5"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == "0")
+                                                        <a href="#"
+                                                            class="rsvp-btn noattending-btn btn {{ $isDisabled }}"data-bs-toggle="modal"
+                                                            data-bs-target="#aboutsuccess">Not Attending
+                                                            <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
+                                                                    stroke="white" stroke-width="1.5"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                    @if ( !empty($rsvpSent) && $rsvpSent['rsvp_status'] == "1")
+                                                        <a href="#"
+                                                            class="rsvp-btn attending-btn btn {{ $isDisabled }}"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#aboutsuccess">Attending
+                                                            <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
+                                                                    stroke="white" stroke-width="1.5"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -426,22 +457,28 @@
                                                         <span>Host</span>
                                                         <a href="#" class="msg-btn">Message</a>
                                                     </div>
-                                                    @endif
-                                                    @if (!empty($eventDetails['co_hosts']))
+                                                @endif
+                                                @if (!empty($eventDetails['co_hosts']))
                                                     @foreach ($eventDetails['co_hosts'] as $co_host)
                                                         <div class="host-user-con">
                                                             <div class="img-wrp">
                                                                 @if (!empty($co_host['profile']))
-                                                                    <img src="{{ $co_host['profile'] }}" alt="cohost-img">
+                                                                    <img src="{{ $co_host['profile'] }}"
+                                                                        alt="cohost-img">
                                                                 @else
                                                                     @php
                                                                         $nameParts = explode(' ', $co_host['name']);
-                                                                        $firstInitial = isset($nameParts[0][0]) ? strtoupper($nameParts[0][0]) : '';
-                                                                        $secondInitial = isset($nameParts[1][0]) ? strtoupper($nameParts[1][0]) : '';
+                                                                        $firstInitial = isset($nameParts[0][0])
+                                                                            ? strtoupper($nameParts[0][0])
+                                                                            : '';
+                                                                        $secondInitial = isset($nameParts[1][0])
+                                                                            ? strtoupper($nameParts[1][0])
+                                                                            : '';
                                                                         $initials = $firstInitial . $secondInitial;
                                                                         $fontColor = 'fontcolor' . $firstInitial;
                                                                     @endphp
-                                                                    <h5 class="{{ $fontColor }}">{{ $initials }}</h5>
+                                                                    <h5 class="{{ $fontColor }}">{{ $initials }}
+                                                                    </h5>
                                                                 @endif
                                                             </div>
                                                             <h5>{{ $co_host['name'] }}</h5>
@@ -476,24 +513,23 @@
 
 
                                                 @php
-                                                $latitude = !empty($eventDetails['latitude']) ? $eventDetails['latitude'] : '23.020474099698593'; // Default latitude (Ahmedabad)
-                                                $longitude = !empty($eventDetails['logitude']) ? $eventDetails['logitude'] : '72.41493076529625'; // Default longitude (Ahmedabad)
-                                            @endphp
+                                                    $latitude = !empty($eventDetails['latitude'])
+                                                        ? $eventDetails['latitude']
+                                                        : '23.020474099698593'; // Default latitude (Ahmedabad)
+                                                    $longitude = !empty($eventDetails['logitude'])
+                                                        ? $eventDetails['logitude']
+                                                        : '72.41493076529625'; // Default longitude (Ahmedabad)
+                                                @endphp
 
-                                            <iframe
-                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74843221347!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sus!4v1738165607121!5m2!1sen!2sus"
-                                                width="600"
-                                                height="450"
-                                                style="border:0;"
-                                                allowfullscreen=""
-                                                loading="lazy"
-                                                referrerpolicy="no-referrer-when-downgrade">
-                                            </iframe>
-                                            <a href="https://www.google.com/maps/dir/?api=1&destination={{ $latitude }},{{ $longitude }}"
-                                            target="_blank"
-                                            class="direction-btn">
-                                             Directions
-                                         </a>
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74843221347!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sus!4v1738165607121!5m2!1sen!2sus"
+                                                    width="600" height="450" style="border:0;" allowfullscreen=""
+                                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                                </iframe>
+                                                <a href="https://www.google.com/maps/dir/?api=1&destination={{ $latitude }},{{ $longitude }}"
+                                                    target="_blank" class="direction-btn">
+                                                    Directions
+                                                </a>
                                             </div>
                                         @endif
                                         {{-- {{dd($eventDetails['event_schedule']);}} --}}
@@ -558,10 +594,13 @@
                                                                 <div class="shedule-box-left">
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
                                                                     <span>{{ $schedule['start_time'] }}
-                                                                       @if(!empty($schedule['start_time']))
-                                                                        -
-                                                                        {{ $schedule['end_time'] }}
-                                                                        @endif</span>
+                                                                        @if (!empty($schedule['start_time']))
+                                                                          @endif
+                                                                            @if (!empty($schedule['end_time']))
+                                                                            -
+                                                                            {{ $schedule['end_time'] }}
+                                                                        @endif
+                                                                    </span>
                                                                 </div>
                                                                 <span class="hrs ms-auto">{{ $duration }}</span>
                                                             </div>
@@ -575,14 +614,13 @@
                                         @endif
 
                                         @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
+                                            <div class="gift-register cmn-card">
 
-                                                <div class="gift-register cmn-card">
+                                                <h4 class="title">Sarah’s Gift Registries</h4>
+                                                <span>Buy them the gift of their choice.</span>
 
-                                                    <h4 class="title">Sarah’s Gift Registries</h4>
-                                                    <span>Buy them the gift of their choice.</span>
-
-                                                    <div class="play-store">
-                                                        @foreach ($eventDetails['gift_registry'] as $gift)
+                                                <div class="play-store">
+                                                    @foreach ($eventDetails['gift_registry'] as $gift)
                                                         @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn target-btn" target="_blank">
@@ -603,12 +641,11 @@
                                                                 <h6>{{ $gift['registry_recipient_name'] }}</h6>
                                                             </a>
                                                         @endif
-                                                        @endforeach
-                                                    </div>
-
-
+                                                    @endforeach
                                                 </div>
 
+
+                                            </div>
                                         @endif
 
                                     </div>
@@ -1965,6 +2002,7 @@
 
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
+
                     <form action="{{ route('event.sentRsvpData') }}" method="POST">
                         @csrf
                         <div class="modal-header">
@@ -1980,7 +2018,37 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
+                            <div class="host-detail">
+                                <h5>Event Details</h5>
+                                <ul>
+                                    @if (!empty($eventDetails['rsvp_by']))
+                                        <li>RSVP By:
+                                            {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                                        </li>
+                                    @endif
+                                    @if ($eventDetails['podluck'] == 1)
+                                        <li>Potluck Event</li>
+                                    @endif
+                                    @if ($eventDetails['adult_only_party'] == 1)
+                                        <li>Adults Only</li>
+                                    @endif
+                                    @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
+                                        <li>Multiple Day Event</li>
+                                    @endif
+                                    @if (!empty($eventDetails['co_hosts']))
+                                        <li>Co-Host</li>
+                                    @endif
+                                    @if (!empty($eventDetails['gift_registry']))
+                                        <li>Gift Registry</li>
+                                    @endif
+                                    @if (!empty($eventDetails['event_schedule']))
+                                        <li>Event has schedule</li>
+                                    @endif
+                                    @if (!empty($eventDetails['allow_limit']))
+                                        <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
+                                    @endif
+                                </ul>
+                            </div>
                             <input type ="hidden" id="event_id" name="event_id"
                                 value="{{ $eventDetails['id'] }}">
                             <div class="rsvp-custom-radio guest-rsvp-attend">
@@ -2028,22 +2096,22 @@
                                     <div>
                                         <h6>Adults</h6>
                                         <div class="qty-container ms-auto">
-                                            <button class="btn-minus" type="button"><i
+                                            <button class="btn-minus rsvp_status_btn" type="button"><i
                                                     class="fa fa-minus"></i></button>
-                                            <input type="number" name="adults"
+                                            <input type="number" id="rsvp_status_adults" name="adults"
                                                 value="{{ $rsvpSent['adults'] ?? 0 }}" class="input-qty">
-                                            <button class="btn-plus" type="button"><i
+                                            <button class="btn-plus rsvp_plus" type="button"><i
                                                     class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div>
                                         <h6>Kids</h6>
                                         <div class="qty-container ms-auto">
-                                            <button class="btn-minus" type="button"><i
+                                            <button class="btn-minus rsvp_status_btn" type="button"><i
                                                     class="fa fa-minus"></i></button>
-                                            <input type="number" name="kids"
+                                            <input type="number" id="rsvp_status_kids" name="kids"
                                                 value="{{ $rsvpSent['kids'] ?? 0 }}" class="input-qty">
-                                            <button class="btn-plus" type="button"><i
+                                            <button class="btn-plus rsvp_plus" type="button"><i
                                                     class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
@@ -2077,7 +2145,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
+                            <button type="submit" id="rsvp_yes_no_btn" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
                         </div>
                     </form>
                 </div>

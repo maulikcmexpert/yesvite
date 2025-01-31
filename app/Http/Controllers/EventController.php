@@ -3553,4 +3553,27 @@ class EventController extends BaseController
             return response()->json(['success' => true, 'images' => $savedFiles,'designImg'=>$designImg]);
         }
     }
+
+    public function store_notification_filter(Request $request){
+        $status=$request->status;
+        $event_id=$request->event_id;
+        dd(session()->get('notification_event_ids'));
+        if ($status == 1) {
+            $eventIds = session('notification_event_ids', []);
+            if (!in_array($event_id, $eventIds)) {
+                $eventIds[] = $event_id;
+            }
+            session(['notification_event_ids' => $eventIds]);
+        } else {
+            $eventIds = session('notification_event_ids', []);
+            $eventIds = array_filter($eventIds, function ($id) use ($event_id) {
+                return $id != $event_id;
+            });
+            if (!empty($eventIds)) {
+                session(['notification_event_ids' => $eventIds]);
+            } else {
+                session()->forget('notification_event_ids');
+            }
+        }
+    }
 }
