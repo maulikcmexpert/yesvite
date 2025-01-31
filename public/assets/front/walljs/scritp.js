@@ -23,7 +23,7 @@ $(".notification-btn").on("click", function () {
 });
 
 // ===header-drodpdown===
-const dropdownButton = document.getElementById("dropdownButton");
+// const dropdownButton = document.getElementById("dropdownButton");
 const dropdownMenu = document.querySelector(".notification-dropdown-menu");
 
 // Toggle dropdown when clicking the button
@@ -36,7 +36,9 @@ $("#dropdownButton").on("click", function (event) {
 document.addEventListener("click", (event) => {
     if (
         !dropdownMenu.contains(event.target) &&
-        !dropdownButton.contains(event.target)
+        !document.getElementById("dropdownButton").contains(event.target) // Use this instead of redeclaring
+
+        // !dropdownButton.contains(event.target)
     ) {
         dropdownMenu.classList.remove("show");
     }
