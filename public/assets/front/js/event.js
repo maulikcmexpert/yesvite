@@ -801,11 +801,14 @@ $(document).on('change', '.selectedEvents', function () {
     var event_id=$(this).data('event_id');
     // console.log(1);
     if ($(this).is(':checked')) {
-        $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+        
         storeFilterData(1,event_id);
+        if ($('.notification-selected-events-wrp .selected-event').text().indexOf(eventname) === -1) {
+            $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+        }
     } else {
-        $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
         storeFilterData(0,event_id);
+        $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
 $(document).on('click', '#notification-filter-modal', function () {
