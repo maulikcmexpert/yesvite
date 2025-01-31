@@ -1633,8 +1633,8 @@
                                                                     @endphp
                                                                     <h5
                                                                         class="{{ $fontColorUser }} add-item-under-text me-auto">
-                                                                        {{ $initialsUser }}
-                                                                    {{ $user->firstname }} {{ $user->lastname }}
+                                                                        {{ $initialsUser }} </h5>
+                                                                   <h5> {{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
                                                                 @endif
@@ -1767,12 +1767,12 @@
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp
-                                                                    <h5
-                                                                        class="{{ $fontColorUser }} add-item-under-text me-auto">
-                                                                        {{ $initialsUser }}
-                                                                        {{ $user->firstname }} {{ $user->lastname }}
+                                                                     <h5
+                                                                     class="{{ $fontColorUser }} add-item-under-text me-auto">
+                                                                     {{ $initialsUser }} </h5>
+                                                                <h5> {{ $user->firstname }} {{ $user->lastname }}
 
-                                                                    </h5>
+                                                                 </h5>
                                                                 @endif
                                                                 @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
                                                                     <div class="qty-container ms-auto">
