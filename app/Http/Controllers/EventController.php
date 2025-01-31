@@ -1731,7 +1731,7 @@ class EventController extends BaseController
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
-        dd($quantity);
+        
         $categories = session()->get('category', []);
 
         $id = Auth::guard('web')->user()->id;
@@ -1758,8 +1758,8 @@ class EventController extends BaseController
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
                     
                     if ($id == $userVal['user_id']) {
-dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]);
                         $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type)) ? 0 : $quantity;
+                        dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]);
                         
                         session()->put('category', $categories);
                     }
