@@ -72,11 +72,9 @@ $(document).ready(function() {
     var kids = parseInt($('input[name="kids"]').val()) || 0;
 console.log(adults,kids);
     if (rsvpStatus == "0") {
-        $('button[type="submit"]').prop('disabled', true);
+        $('button[type="submit"]').prop('disabled', false);
     } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
         $('button[type="submit"]').prop('disabled', false);
-    } else {
-        $('button[type="submit"]').prop('disabled', true);
     }
 }
 
