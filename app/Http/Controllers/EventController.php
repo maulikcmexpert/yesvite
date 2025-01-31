@@ -1077,7 +1077,7 @@ class EventController extends BaseController
         }
         Session::save();
         return response()->json([
-            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry','eventId'))->render(),
+            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry', 'eventId'))->render(),
             'success' => true,
             'is_registry' => $gift,
             'event_id' => encrypt($eventId)
@@ -1731,7 +1731,7 @@ class EventController extends BaseController
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
-        
+
         $categories = session()->get('category', []);
 
         $id = Auth::guard('web')->user()->id;
@@ -1750,17 +1750,17 @@ class EventController extends BaseController
         $total_quantity = 0;
 
         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
-        
+
             // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
             // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
             if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
-                    
+
                     if ($id == $userVal['user_id']) {
-                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type!='minus' && $request->type !="plus") ? 0 : $quantity;
-                      
-                        
+                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
+
+
                         session()->put('category', $categories);
                         Session::save();
                     }
@@ -1787,7 +1787,7 @@ class EventController extends BaseController
             // }
             // }
         }
-       
+
 
         // dd(session('category'));       
         // $total_item = $total_item - $total_quantity ;
@@ -1799,7 +1799,7 @@ class EventController extends BaseController
     {
 
         $eventID = $request->eventId;
-        if(isset($eventID) && $eventID!=""){
+        if (isset($eventID) && $eventID != "") {
             EventImage::where('event_id', $eventID)->where('type', 0)->delete();
         }
         $newImageName = '';
@@ -2609,9 +2609,9 @@ class EventController extends BaseController
         $event_id = $request->eventId;
 
         $savedFiles = [];
-        if(isset($event_id) && $event_id!=''){
+        if (isset($event_id) && $event_id != '') {
             $getEventImages = EventImage::where('event_id', $event_id)->get();
-    
+
             if (!empty($getEventImages)) {
                 foreach ($getEventImages as $key => $imgVal) {
                     if ($key == 0) {
@@ -2627,7 +2627,7 @@ class EventController extends BaseController
         }
 
         $imageSources = $request->imageSources;
-       
+
         $i = 0;
 
         // Check if there are existing images in the session and unlink them
@@ -2872,7 +2872,7 @@ class EventController extends BaseController
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('desgin_slider');
-        dd(session('category'));
+
         // dd(session('user_ids'),session('contact_ids'));
         $conatctId = session('contact_ids');
         $potluck = session('category');
@@ -3256,11 +3256,11 @@ class EventController extends BaseController
 
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
-                if ($request->isdraft == "1") {
+                // if ($request->isdraft == "1") {
                     EventPotluckCategory::where('event_id', $request->event_id)->delete();
                     EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
                     UserPotluckItem::where('event_id', $request->event_id)->delete();
-                }
+                // }
                 if (isset($potluck) && !empty($potluck)) {
 
                     foreach ($potluck as $category) {
@@ -3280,15 +3280,29 @@ class EventController extends BaseController
                                     'description' => $item['name'],
                                     'quantity' => $item['quantity'],
                                 ]);
-                                if (isset($item['self_bring']) && $item['self_bring'] == '1') {
-                                    UserPotluckItem::Create([
-                                        'event_id' => $eventId,
-                                        'user_id' => $user_id,
-                                        'event_potluck_category_id' => $eventPodluck->id,
-                                        'event_potluck_item_id' => $eventPodluckitem->id,
-                                        'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
-                                    ]);
+                                if (isset($item['item_carry_users'])) {
+                                    foreach ($item['item_carry_users'] as $user) {
+                                        UserPotluckItem::Create([
+                                            'event_id' => $eventId,
+                                            'user_id' => $user->user_id,
+                                            'event_potluck_category_id' => $eventPodluck->id,
+                                            'event_potluck_item_id' => $eventPodluckitem->id,
+                                            'quantity' => $user->quantity
+                                        ]);
+                                    }
                                 }
+                                // else{
+                                //     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+                                //         UserPotluckItem::Create([
+                                //             'event_id' => $eventId,
+                                //             'user_id' => $user_id,
+                                //             'event_potluck_category_id' => $eventPodluck->id,
+                                //             'event_potluck_item_id' => $eventPodluckitem->id,
+                                //             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+                                //         ]);
+                                //     }
+                                // }
+
                             }
                         }
                     }
@@ -3539,14 +3553,14 @@ class EventController extends BaseController
     {
         $event_id = $request->id;
         $getEventImages = EventImage::where('event_id', $event_id)->get();
-        $savedFiles=[];
-        $designImg='';
+        $savedFiles = [];
+        $designImg = '';
         // dd($getEventImages)
         if (!empty($getEventImages)) {
             foreach ($getEventImages as $key => $imgVal) {
                 if ($key == 0) {
-                   $designImg =   $imgVal->image;
-                   continue;
+                    $designImg =   $imgVal->image;
+                    continue;
                 }
                 $fileName =   $imgVal->image;
                 $savedFiles[] = [
@@ -3555,17 +3569,18 @@ class EventController extends BaseController
                 ];
             }
 
-                // if (empty($savedFiles)) {
-                //     return response()->json(['status' => 'No valid images to save'], 400);
-                // }
+            // if (empty($savedFiles)) {
+            //     return response()->json(['status' => 'No valid images to save'], 400);
+            // }
 
-            return response()->json(['success' => true, 'images' => $savedFiles,'designImg'=>$designImg]);
+            return response()->json(['success' => true, 'images' => $savedFiles, 'designImg' => $designImg]);
         }
     }
 
-    public function store_notification_filter(Request $request){
-        $status=$request->status;
-        $event_id=$request->event_id;
+    public function store_notification_filter(Request $request)
+    {
+        $status = $request->status;
+        $event_id = $request->event_id;
         if ($status == 1) {
             $eventIds = session('notification_event_ids', []);
             if (!in_array($event_id, $eventIds)) {
@@ -3584,7 +3599,7 @@ class EventController extends BaseController
             }
         }
 
-        if($status==null&&$event_id==null){
+        if ($status == null && $event_id == null) {
             Session::forget('notification_event_ids');
         }
     }
