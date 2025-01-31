@@ -52,7 +52,7 @@
                                 </div>
                                 <span>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</span>
                             </div>
-                            <h6 class="ms-auto">${{ $price['price'] }}</h6>
+                            <h6 class="ms-auto">${{ number_format($price['price'], 2) }}</h6>
                         </div>
                     </div>
                     @else
@@ -69,7 +69,7 @@
                                 </div>
                                 <span>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</span>
                             </div>
-                            <h6 class="ms-auto">${{ $price['price'] }}</h6>
+                            <h6 class="ms-auto">${{ number_format($price['price'], 2) }}</h6>
                         </div>
                     </div>
                     @endif
