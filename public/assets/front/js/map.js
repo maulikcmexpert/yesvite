@@ -74,8 +74,13 @@ function initMap() {
             var typeField = [],
                 typeValLong = [];
             console.log(place.name);
-            $("#address1").val(place.name);
-            $("#address1").next().addClass("floatingfocus");
+            if (place.formatted_address != undefined) {
+                $("#address1").val(place.formatted_address);
+                $("#address1").next().addClass("floatingfocus");
+            } else {
+                $("#address1").val(place.name);
+                $("#address1").next().addClass("floatingfocus");
+            }
 
             // Initialize variables to empty string
             let locationName = "";
@@ -105,15 +110,23 @@ function initMap() {
             if (city != "") {
                 $("#city").val(city);
                 $("#city").next().addClass("floatingfocus");
+            } else {
+                $("#city").val("");
+                $("#city").next().removeClass("floatingfocus");
             }
-
             if (state != "") {
-                $("#state").val(city);
+                $("#state").val(place);
                 $("#state").next().addClass("floatingfocus");
+            } else {
+                $("#state").val("");
+                $("#state").next().removeClass("floatingfocus");
             }
             if (zipcode != "") {
-                $("#zipcode").val(city);
+                $("#zipcode").val(zipcode);
                 $("#zipcode").next().addClass("floatingfocus");
+            } else {
+                $("#zipcode").val("");
+                $("#zipcode").next().removeClass("floatingfocus");
             }
 
             $("#latitude").val(latitude);
