@@ -3711,6 +3711,7 @@ $(document).on("click", "#close_createEvent", function () {
     } else {
         eventData.isdraft = "1";
         eventData.step = "1";
+        savePage1Data(1);
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
@@ -4116,7 +4117,7 @@ function savePage1Data(close = null) {
 
         // final_step = 3;
     }else{
-        eventData.event_name = event_name;
+              eventData.event_name = event_name;
               eventData.hosted_by = hostedby;
               eventData.event_date = event_date
     }
