@@ -798,12 +798,27 @@ $(document).on('change', 'input[data-name="all"]', function () {
 });
 $(document).on('change', 'input[name="selectedEvents[]"]', function () {
     var eventname=$(this).data('event_name');
+    var eventid=$(this).data('event_id');
     if ($(this).is(':checked')) {
+        storefilterdata(1,eventid);
         $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
     } else {
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
+function storefilterdata(status,event_id){
+    $.ajax({
+        url: `${base_url}event/store_notification_filter`,
+        type: 'GET',        
+        data: {status:status,event_id:event_id},          
+        success: function (response) { 
+         
+        },
+        error: function (error) {
+          toastr.error('Something went wrong. Please try again!');
+        },
+      });
+}
 $(document).on('click', '.all-event-notification-filter-reset', function () {
 
     $("input[name='selectedEvents[]']:checked").each(function () {
