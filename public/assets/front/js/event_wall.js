@@ -915,36 +915,45 @@ $(document).ready(function () {
         const optionCount = pollOptionsContainer.children().length + 1;
 
         const newOption = $(`
-                <div class="mb-3">
-                    <label class="form-label d-flex align-items-center justify-content-between">
-                        Option ${optionCount}*
-                        <span class="char-count">0/140</span>
-                    </label>
-                    <div class="position-relative">
-                        <input type="text" class="form-control poll-option-input" name="options[]" required>
-                        <span class="input-option-delete">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                    </div>
+            <div class="mb-3 poll-option">
+                <label class="form-label d-flex align-items-center justify-content-between">
+                    Option <span class="option-number">${optionCount}</span>*
+                    <span class="char-count">0/140</span>
+                </label>
+                <div class="position-relative">
+                    <input type="text" class="form-control poll-option-input" name="options[]" required>
+                    <span class="input-option-delete">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
                 </div>
-            `);
+            </div>
+        `);
 
         pollOptionsContainer.append(newOption);
 
-        // Bind delete functionality to the new option
+        // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
+            renumberOptions(); // Call function to renumber options after deletion
             validateForm();
         });
 
-        validateForm(); // Revalidate after adding an option
+        validateForm();
     });
+
+    // Function to renumber options correctly after deletion
+    function renumberOptions() {
+        $(".poll-options .poll-option").each(function (index) {
+            $(this).find(".option-number").text(index + 1);
+        });
+    }
+
 
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
