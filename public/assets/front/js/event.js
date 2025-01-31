@@ -1,17 +1,7 @@
 var date_upcoming=false;
 var date_past=false;
 var date_draft=false;
-const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-// Create a request object
-const request = new XMLHttpRequest();
-request.open('GET', '/your-api-endpoint', true);
-
-// Set the X-User-Timezone header
-request.setRequestHeader('X-User-Timezone', userTimezone);
-
-// Send the request
-request.send();
 function getActiveTabPage() {
     let activeTab = $(".event_nav.active");
     let activePage = activeTab.data("page");
