@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+    let  adults = 0;
+    let  kids = 0;
     // // Initially disable the submit button
      $('button[type="submit"]').prop('disabled', true);
 
@@ -12,8 +15,8 @@ $(document).ready(function() {
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         }  if (rsvpStatus == "1") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
+            adults=  $('input[name="adults"]').val();
+            kids= $('input[name="adults"]').val();
             console.log($('input[name="adults"]').val(0));
             console.log($('input[name="kids"]').val(0));
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
@@ -35,6 +38,8 @@ $(document).ready(function() {
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
         if(rsvpStatus=='1'){
+            adults=  currentValue + 1;
+            kids= currentValue + 1;
             if((currentValue+1) > 0){
                 $('button[type="submit"]').prop('disabled', false);
            }else{
@@ -56,6 +61,8 @@ $(document).ready(function() {
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
         if (currentValue > 0) {
             if(rsvpStatus=='1'){
+                adults=  currentValue - 1;
+                kids= currentValue - 1;
                 if((currentValue-1) > 0){
                     $('button[type="submit"]').prop('disabled', false);
                }else{
@@ -74,8 +81,8 @@ $(document).ready(function() {
         $('#error-message').text('');
 
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
-        var adults = parseInt($('input[name="adults"]').val()) || 0;
-        var kids = parseInt($('input[name="kids"]').val()) || 0;
+        // var adults = parseInt($('input[name="adults"]').val()) || 0;
+        // var kids = parseInt($('input[name="kids"]').val()) || 0;
 
         if (rsvpStatus == "1" && adults <= 0 && kids <= 0) {
             $('#error-message').text('Please select at least one Adult or Kid.').css('color', 'red');
