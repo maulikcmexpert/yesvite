@@ -165,7 +165,7 @@ main {
   line-height: normal;
   color: var(--pink);
   margin-bottom: 0px;
-  height: 29px;
+  /* height: 29px; */
 }
 
 .hosted-by-date-time-left {
