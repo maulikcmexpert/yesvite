@@ -6276,7 +6276,7 @@ $(document).on("click", "#final_create_event", function (e) {
         success: function (response) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
-
+            $('#created_event_id').val(response.event_id);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
                 // $('#eventModal').modal('show');
@@ -8992,3 +8992,12 @@ if (eventId != "") {
     // alert(eventId);
     sliderImages(eventId);
 }
+
+$(document).on("click",'#final_see_invite_btn', function (event) {
+    event.preventDefault(); // Prevent default redirection
+    
+    let eventId = $('#created_event_id').val(); // Replace with dynamic event ID
+    let url = base_url + `event_wall/${eventId}`; // Laravel route format
+    console.log(base_url + `event_wall/${eventId}`);
+    window.location.href = url; // Redirect dynamically
+});
