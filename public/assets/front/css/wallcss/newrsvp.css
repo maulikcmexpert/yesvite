@@ -42,7 +42,7 @@
     justify-content: center;
     height: 26px;
 }
- 
+
 .rsvp-slider.owl-carousel .owl-dots button{
     width: 6px;
     height: 6px;
@@ -193,7 +193,7 @@
     padding: 16px;
     margin: 20px 24px;
     border: 1px solid #F1F5F9;
-   
+
 }
 
 .rsvp-form .thank-card p{
@@ -343,7 +343,7 @@ display:none;}
     .quantity__plus:hover {
         background: #575b71;
         color: #fff;
-    } 
+    }
     .quantity__minus {
         border-radius: 3px 0 0 3px;
     }
@@ -366,7 +366,7 @@ display:none;}
     .quantity__minus:link,
     .quantity__plus:link {
         color: #8184a1;
-    } 
+    }
     .quantity__minus:visited,
     .quantity__plus:visited {
         color: #fff;
@@ -426,7 +426,7 @@ display:none;}
 .massage-box{
     padding: 20px 24px;
 }
- 
+
 .rsvp-form textarea{
     width: 100%;
     border: 1px solid var(--border);
@@ -789,7 +789,7 @@ display:none;}
 }
 
 .rsvp-tab-wrp .nav-tabs{
-    justify-content: center;
+    justify-content: center !important;
 }
 
 .rsvp-tab-wrp .nav-tabs .nav-link{
@@ -1222,13 +1222,13 @@ label.error {
     padding: 14px !important;
     padding-left: 50px !important;
     font-family: var(--SFProDisplay-Bold) !important;
-    font-size: 15px !important; 
+    font-size: 15px !important;
     color: var(--white) !important;
     line-height: normal !important;
 }
 
 #toast-container>.toast-error {
-    background-image: url('../../../toaster_error_icon.png') !important; 
+    background-image: url('../../../toaster_error_icon.png') !important;
 }
 
 .toast.toast-success{
@@ -1238,13 +1238,13 @@ label.error {
     padding: 14px !important;
     padding-left: 50px !important;
     font-family: var(--SFProDisplay-Bold) !important;
-    font-size: 15px !important; 
+    font-size: 15px !important;
     color: var(--white) !important;
     line-height: normal !important;
 }
 
 #toast-container>.toast-success {
-    background-image: url('../../../toater_success_icon.png') !important; 
+    background-image: url('../../../toater_success_icon.png') !important;
 }
 
 .guest-user-list .no-reply h5{
@@ -1272,7 +1272,7 @@ label.error {
     .qty-container input{
         width: 130px;
     }
-    
+
 }
 
 @media only screen and (max-width: 1399px) {
@@ -1315,11 +1315,11 @@ label.error {
     .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h6{
         font-size: 18px !important;
     }
-    
+
     .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h3{
         font-size: 18px !important;
     }
-   
+
 }
 
 @media only screen and (max-width:767px){
@@ -1463,7 +1463,7 @@ label.error {
 
     .rsvp-app{
         padding: 20px 16px;
-    }   
+    }
 
     .note-wrp h5{
         font-size: 18px;
