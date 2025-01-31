@@ -129,7 +129,12 @@
                     </div>
                     <div class="hosted-by-date-time-content">
                         <h6>Date</h6>
-                        <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('F d, Y') }}</h3>
+                        <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('F d, Y') }}
+                            @if (!empty($eventDetails['end_date'] ))
+                            to
+                            {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('F d, Y') }}
+                            @endif
+                        </h3>
                     </div>
                 </div>
                 <div class="hosted-by-date-time-left">
