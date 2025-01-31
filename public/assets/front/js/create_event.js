@@ -6276,7 +6276,7 @@ $(document).on("click", "#final_create_event", function (e) {
         success: function (response) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
-            $("#created_event_id").val(response.event_id);
+            $('#created_event_id').val(response.event_id);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
                 // $('#eventModal').modal('show');
@@ -6581,8 +6581,8 @@ function displayRecords(
             const coins = $("#coins").val();
             if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
-                busyyesvite = false;
-                NoMoreDataYesviteAll = false;
+                busyyesvite=false;
+                NoMoreDataYesviteAll=false;
             } else {
                 create_event_yesvite_scroll = true;
             }
@@ -6734,6 +6734,11 @@ $(document).on("click", ".invite_group_member", function () {
 
             console.log(id);
             console.log(selectedValues);
+        }else{
+            const id = $(this).val();
+            delete_invited_user(id, '0');
+            $("#user-" + id).remove();
+            $(".user_id-" + id).remove();
         }
     });
     $.ajax({
@@ -8768,7 +8773,7 @@ function updateTOP(categoryIndex) {
 
         // Get the required quantity
         let requiredQtyInput = categoryItem.querySelector(
-            `.lumpia-collapseOne-${categoryIndex}-${i} .category-item-quantity`
+            ".category-item-quantity"
         );
         let requiredQty = requiredQtyInput
             ? parseInt(requiredQtyInput.value)
@@ -8993,10 +8998,10 @@ if (eventId != "") {
     sliderImages(eventId);
 }
 
-$(document).on("click", "#final_see_invite_btn", function (event) {
+$(document).on("click",'#final_see_invite_btn', function (event) {
     event.preventDefault(); // Prevent default redirection
-
-    let eventId = $("#created_event_id").val(); // Replace with dynamic event ID
+    
+    let eventId = $('#created_event_id').val(); // Replace with dynamic event ID
     let url = base_url + `event_wall/${eventId}`; // Laravel route format
     console.log(base_url + `event_wall/${eventId}`);
     window.location.href = url; // Redirect dynamically

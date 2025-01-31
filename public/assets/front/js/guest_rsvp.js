@@ -167,3 +167,6 @@ $(document).on('click', '.remove-Rsvp-btn', function () {
     });
 });
 
+$(".modal").on("hidden.bs.modal", function(){
+    $("#message_to_host").val('');
+});

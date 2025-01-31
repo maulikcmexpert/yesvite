@@ -511,14 +511,14 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&&$eventDetails['logitude']!='')
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
                                                         : '39.8283';
 
-                                                    $longitude = !empty($eventDetails['longitude'])
-                                                        ? $eventDetails['longitude']
+                                                    $longitude = !empty($eventDetails['logitude'])
+                                                        ? $eventDetails['logitude']
                                                         : '-98.5795';
                                                 @endphp
 
@@ -531,6 +531,7 @@
                                                     target="_blank" class="direction-btn">
                                                     Directions
                                                 </a>
+                                                @endif
                                             </div>
                                         @endif
                                         {{-- {{dd($eventDetails['event_schedule']);}} --}}
@@ -2178,7 +2179,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea name="message_to_host" id="" class="form-control inputText" id="Fname" name="Fname"
+                                    <textarea name="message_to_host" id="message_to_host" class="form-control inputText" id="Fname" name="Fname"
                                         required=""> {{ $rsvpSent['message_to_host'] ?? '' }}</textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message with
                                         your

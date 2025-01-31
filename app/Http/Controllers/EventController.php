@@ -2176,8 +2176,8 @@ class EventController extends BaseController
     {
 
         $users = $request->users;
-
         $userIds = session()->get('user_ids', []);
+        dd($userIds);
         foreach ($users as $value) {
             $id = $value['id'];
             $user_detail = User::where('id', $value['id'])->first();
