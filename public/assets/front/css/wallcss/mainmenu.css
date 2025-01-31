@@ -2846,6 +2846,7 @@
 
 #all-notification-filter-modal #event_filter .form-check label{
     padding-right: 30px;
+    word-break: break-all;
 }
 
 /* ===Responsive=== */
