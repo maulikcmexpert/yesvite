@@ -1052,7 +1052,7 @@ $(document).on('input','#search_filter_event',function(){
 
 });
 
-$(document).on('input','.upcoming-events-card-notification-wrp',function(e){
+$(document).on('click','.upcoming-events-card-notification-wrp',function(e){
     e.stopPropagation();
 });
 // $(document).on('click','.notification-toggle-menu',function(){
