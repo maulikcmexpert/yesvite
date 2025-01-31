@@ -3749,19 +3749,19 @@ function savePage1Data(close = null) {
     // }
 
     if (close == null || close == "") {
-        if (event_type == "") {
-            $("#deleteModal").modal("show");
-            // confirm('Event type is empty. Are you sure you want to proceed?')
-            return;
-        }
-        // // if (event_name == "") {
-        // //     $("#deleteModal").modal("show");
-        // //     return;
-        // // }
-        if (event_date == "") {
-            $("#deleteModal").modal("show");
-            return;
-        }
+        // if (event_type == "") {
+        //     $("#deleteModal").modal("show");
+        //     // confirm('Event type is empty. Are you sure you want to proceed?')
+        //     return;
+        // }
+        // // // if (event_name == "") {
+        // // //     $("#deleteModal").modal("show");
+        // // //     return;
+        // // // }
+        // if (event_date == "") {
+        //     $("#deleteModal").modal("show");
+        //     return;
+        // }
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
         if ($("#schedule").is(":checked")) {
@@ -8244,7 +8244,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
 
-    $("#loader").css("display", "flex");
+    $("#loader").css("display", "block");
     // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -8268,6 +8268,9 @@ $(document).on("click", ".edit_checkout", function (e) {
         data: data,
         success: function (response) {
             $(".main-content-wrp").removeClass("blurred");
+            setTimeout(function () {
+                $("#loader").css("display", "none");
+            }, 10000);
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
@@ -8279,9 +8282,9 @@ $(document).on("click", ".edit_checkout", function (e) {
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
-                    // window.location.href="profile";
+                    window.location.href="profile";
                 }
-                $("#eventModal").modal("show");
+                window.location.href = base_url + "home";
             }
         },
         error: function (xhr, status, error) {
@@ -8367,7 +8370,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         return;
     }
     // }
-    $("#loader").css("display", "flex");
+    $("#loader").css("display", "block");
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
@@ -8383,11 +8386,11 @@ $(document).on("click", "#close_editEvent", function (e) {
         data: eventData,
         success: function (response) {
             if (response == 1) {
-                // window.location.href = base_url + "home";
+                window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
-                // setTimeout(function () {
-                //     $("#loader").css("display", "none");
-                // }, 4000);
+                setTimeout(function () {
+                    $("#loader").css("display", "none");
+                }, 10000);
             }
         },
         error: function (xhr, status, error) {

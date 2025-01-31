@@ -695,6 +695,7 @@ $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
     $('.notification-all-event-wrp').removeClass('d-none');
     $('.notification-back').removeClass('d-none');
+  
   })
 
   $(document).on('click','.notification-back',function () {
@@ -801,11 +802,14 @@ $(document).on('change', '.selectedEvents', function () {
     var event_id=$(this).data('event_id');
     // console.log(1);
     if ($(this).is(':checked')) {
-        $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
-        storeFilterData(1,event_id);
+        
+        if ($('.notification-selected-events-wrp .selected-event').text().indexOf(eventname) === -1) {
+            $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+            storeFilterData(1,event_id);    
+        }
     } else {
-        $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
         storeFilterData(0,event_id);
+        $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
 $(document).on('click', '#notification-filter-modal', function () {
@@ -1045,3 +1049,23 @@ $(document).on('input','#search_filter_event',function(){
                       });
 
 });
+// $(document).on('click','.notification-toggle-menu',function(){
+
+//     var search_event=$(this).val();
+//     $('#home_loader').css('display','block');
+//     $.ajax({
+//         url: `${base_url}filter_search_event`,
+//         type: 'GET',        
+//         data: {search_event:""},          
+//         success: function (response) { 
+//             $('.event-search-filter').html('');  
+//             $('.event-search-filter').html(response.view);   
+//             $('#home_loader').css('display','none');
+//         },
+//         error: function (error) {
+//           toastr.error('Something went wrong. Please try again!');
+//         },
+//       });
+
+// });
+

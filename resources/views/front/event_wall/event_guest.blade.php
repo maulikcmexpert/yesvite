@@ -92,11 +92,11 @@
                                                             fill="#0DAD5F" />
                                                     </svg>
                                                 </span>
-                                                <h4> {{ $totalAttending }} Attending</h4>
+                                                <h4 class="totalAttending">{{ $totalAttending }} Attending</h4>
                                             </div>
                                             <div class="d-flex align-items-center">
-                                                <h5>{{ $totalAdults }} <span>Adults</span></h5>
-                                                <h5>{{ $totalKids }} <span>Kids</span></h5>
+                                                <h5 class="totalAdults">{{ $totalAdults }} <span>Adults</span></h5>
+                                                <h5 class="totalKids">{{ $totalKids }} <span>Kids</span></h5>
                                             </div>
                                         </div>
 
