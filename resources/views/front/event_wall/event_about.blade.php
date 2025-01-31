@@ -386,7 +386,7 @@
                                                             </svg>
                                                         </a>
                                                     @endif
-                                                    @if ($rsvpSent['rsvp_status'] == "0")
+                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == "0")
                                                         <a href="#"
                                                             class="rsvp-btn noattending-btn btn {{ $isDisabled }}"data-bs-toggle="modal"
                                                             data-bs-target="#aboutsuccess">Not Attending
@@ -400,7 +400,7 @@
                                                             </svg>
                                                         </a>
                                                     @endif
-                                                    @if ( $rsvpSent['rsvp_status'] == "1")
+                                                    @if ( !empty($rsvpSent) && $rsvpSent['rsvp_status'] == "1")
                                                         <a href="#"
                                                             class="rsvp-btn attending-btn btn {{ $isDisabled }}"
                                                             data-bs-toggle="modal"
