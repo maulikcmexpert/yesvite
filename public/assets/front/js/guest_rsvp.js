@@ -47,13 +47,14 @@ $(document).on('change', '.rsvp_no', function () {
     // Reset adults and kids count to 0
     $('#editrsvp3 .adultcount').val(0);
     $('#editrsvp3 .kidcount').val(0);
-    $('#editrsvp3 .side_menu_minus, #editrsvp3 . side_menu_plus').addClass('disabled-btn').prop('disabled', true);
+  //  $('#editrsvp3 .side_menu_minus, #editrsvp3 . side_menu_plus').addClass('disabled-btn').prop('disabled', true);
+    $('.side_menu_minus, .side_menu_plus').prop('disabled', true); // Enable butto
 });
 $(document).on('change', '.rsvp_yes', function () {
 
 
     // Enable plus and minus buttons
-    $('#editrsvp3 .qty-btn-minus, #editrsvp3 .qty-btn-plus').removeClass('disabled-btn').prop('disabled', false);
+    $('.side_menu_minus, .side_menu_plus').prop('disabled', false);
 });
 $(document).on('click', '.save-rsvp', function () {
     const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
