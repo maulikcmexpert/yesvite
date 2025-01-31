@@ -149,7 +149,7 @@
 
 
                             <div>
-                                <!-- <div class="swiper mySwiper">
+                                <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
                                         @foreach ($groups as $group)
                                             <div class="swiper-slide">
@@ -175,19 +175,7 @@
                                     <div class="swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
                                     <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
 
-                                </div> -->
-                                <div class="slider-container">
-    <button class="slider-button prev">&lt;</button>
-    <div class="slider-wrapper">
-        @foreach ($groups as $group)
-            <div class="slider-slide">
-                <h4>{{ $group->name }}</h4>
-                <p>{{ $group->group_members_count }} Guests</p>
-            </div>
-        @endforeach
-    </div>
-    <button class="slider-button next">&gt;</button>
-</div>
+                                </div>
 
 
                             </div>
