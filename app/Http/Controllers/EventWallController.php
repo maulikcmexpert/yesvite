@@ -1915,82 +1915,81 @@ class EventWallController extends Controller
             ->get();
         $invitedUsers = [];
         if (!empty($eventId)) {
-                $userIds = session()->get('userwall_ids', []);
+            $userIds = session()->get('userwall_ids', []);
 
-                $invitedYesviteUsers = EventInvitedUser::with('user')
-                    ->where('event_id', $eventId)
-                    ->where('is_co_host', '0')
-                    ->whereNotNull('user_id')
-                    ->get();
-                if ($invitedYesviteUsers) {
-                    foreach ($invitedYesviteUsers as $user) {
-                        $userVal = User::select(
-                            'id',
-                            'firstname',
-                            'lastname',
-                            'profile',
-                            'email',
-                            'country_code',
-                            'phone_number',
-                            'app_user',
-                            'prefer_by',
-                            'email_verified_at',
-                            'parent_user_phone_contact',
-                            'visible',
-                            'message_privacy'
-                        )->where('id', $user['user_id'])->first();
+            $invitedYesviteUsers = EventInvitedUser::with('user')
+                ->where('event_id', $eventId)
+                ->where('is_co_host', '0')
+                ->whereNotNull('user_id')
+                ->get();
+            if ($invitedYesviteUsers) {
+                foreach ($invitedYesviteUsers as $user) {
+                    $userVal = User::select(
+                        'id',
+                        'firstname',
+                        'lastname',
+                        'profile',
+                        'email',
+                        'country_code',
+                        'phone_number',
+                        'app_user',
+                        'prefer_by',
+                        'email_verified_at',
+                        'parent_user_phone_contact',
+                        'visible',
+                        'message_privacy'
+                    )->where('id', $user['user_id'])->first();
 
-                        if ($userVal) {
-                            $userEntry = [
-                                'id' => $userVal->id,
-                                'firstname' => $userVal->firstname,
-                                'lastname' => $userVal->lastname,
-                                'prefer_by' => $userVal->prefer_by,
-                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
-                                'profile' => $userVal->profile ?? '',
-                            ];
-                            $userIds[] = $userEntry;
-                        }
+                    if ($userVal) {
+                        $userEntry = [
+                            'id' => $userVal->id,
+                            'firstname' => $userVal->firstname,
+                            'lastname' => $userVal->lastname,
+                            'prefer_by' => $userVal->prefer_by,
+                            'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
+                            'profile' => $userVal->profile ?? '',
+                        ];
+                        $userIds[] = $userEntry;
                     }
-                    session()->put('userwall_ids', $userIds);
-                    Session::save();
                 }
+                session()->put('userwall_ids', $userIds);
+                Session::save();
+            }
 
-                $userIdsSession = session()->get('contactwall_ids', []);
-                $invitedContactUsers = EventInvitedUser::with('user')
-                    ->where('event_id', $eventId)
-                    ->where('is_co_host', '0')
-                    ->whereNull('user_id')
-                    ->get();
-                if ($invitedContactUsers) {
-                    foreach ($invitedContactUsers as $user) {
-                        $userVal = contact_sync::select(
-                            'id',
-                            'firstname',
-                            'lastname',
-                            'photo',
-                            'preferBy',
-                            'phone',
-                            'email'
+            $userIdsSession = session()->get('contactwall_ids', []);
+            $invitedContactUsers = EventInvitedUser::with('user')
+                ->where('event_id', $eventId)
+                ->where('is_co_host', '0')
+                ->whereNull('user_id')
+                ->get();
+            if ($invitedContactUsers) {
+                foreach ($invitedContactUsers as $user) {
+                    $userVal = contact_sync::select(
+                        'id',
+                        'firstname',
+                        'lastname',
+                        'photo',
+                        'preferBy',
+                        'phone',
+                        'email'
 
-                        )->where('id', $user['sync_id'])->first();
-                        if ($userVal) {
-                            $userEntry = [
-                                'sync_id' => $userVal->id,
-                                'firstname' => $userVal->firstname,
-                                'lastname' => $userVal->lastname,
-                                'prefer_by' => $userVal->preferBy,
-                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
-                                'profile' => $userVal->photo ?? '',
+                    )->where('id', $user['sync_id'])->first();
+                    if ($userVal) {
+                        $userEntry = [
+                            'sync_id' => $userVal->id,
+                            'firstname' => $userVal->firstname,
+                            'lastname' => $userVal->lastname,
+                            'prefer_by' => $userVal->preferBy,
+                            'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
+                            'profile' => $userVal->photo ?? '',
 
-                            ];
-                            $userIdsSession[] = $userEntry;
-                        }
+                        ];
+                        $userIdsSession[] = $userEntry;
                     }
-                    session()->put('contactwall_ids', $userIdsSession);
-                    Session::save();
                 }
-
+                session()->put('contactwall_ids', $userIdsSession);
+                Session::save();
+            }
         }
         $selected_yesvite_user = Session::get('userwall_ids');
         $selected_phone_user = Session::get('contactwall_ids');
@@ -2000,8 +1999,8 @@ class EventWallController extends Controller
             'yesviteUsers' => $yesviteUsers,
             'phone_contact' => $phoneContacts,
             'invitedUsers' => $invitedUsers,
-            'selected_yesvite_user'=>$selected_yesvite_user,
-            'selected_phone_user'=>$selected_phone_user,
+            'selected_yesvite_user' => $selected_yesvite_user,
+            'selected_phone_user' => $selected_phone_user,
         ])->render();
 
         // Return response in JSON format
@@ -2010,8 +2009,8 @@ class EventWallController extends Controller
             'message' => 'Contacts retrieved successfully',
             'yesvite_contacts' => $yesviteContactHtml,
             'invited_users' => $invitedUsers,
-            'selected_yesvite_user'=>$selected_yesvite_user,
-            'selected_phone_user'=>$selected_phone_user,
+            'selected_yesvite_user' => $selected_yesvite_user,
+            'selected_phone_user' => $selected_phone_user,
         ]);
     }
 
@@ -2036,7 +2035,7 @@ class EventWallController extends Controller
                     if (!in_array($value['id'], $checkUserInvitation)) {
                         $checkUserExist = contact_sync::where('id', $value['id'])->first();
                         $newUserId = NULL;
-                        
+
                         if ($checkUserExist) {
                             if ($checkUserExist->email != '') {
                                 $newUserId = checkUserEmailExist($checkUserExist);
@@ -2052,7 +2051,7 @@ class EventWallController extends Controller
                         $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $request['event_id'], 'sync_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
-                    }                   
+                    }
                     $newInviteGuest[] = ['id' => $id];
                 } else {
 
@@ -2070,12 +2069,11 @@ class EventWallController extends Controller
                         $updateUser->save();
                     }
                     $newInvite[] = ['id' => $id];
-                
                 }
 
                 $ids[] = $id;
             }
-           
+
             if (isset($newInvite) && !empty($newInvite)) {
                 $filteredIds = array_map(
                     fn($guest) => $guest['id'],
@@ -2087,7 +2085,7 @@ class EventWallController extends Controller
                     'event_id' => $request['event_id'],
                     'newUser' => $filteredIds
                 ];
-                
+
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
             }
@@ -2179,6 +2177,99 @@ class EventWallController extends Controller
             DB::rollBack();
 
             return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
+    }
+
+
+    public function filters(Request $request)
+    {
+
+        $selectedFilters = $request->input('filters');
+        $eventCreator = Event::where('id', $input['event_id'])->first();
+        $eventPostList = EventPost::query();
+        $eventPostList->with(['user', 'post_image'])
+            ->withCount([
+                'event_post_comment' => function ($query) {
+                    $query->where('parent_comment_id', NULL);
+                },
+                'event_post_reaction'
+            ])
+            ->where([
+                'event_id' => $input['event_id'],
+                'is_in_photo_moudle' => '0'
+            ])
+            ->whereDoesntHave('post_control', function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->where('post_control', 'hide_post');
+            });
+        $checkEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
+
+        if ($checkEventOwner == null) {
+            $eventPostList->where(function ($query) use ($user, $input) {
+                $query->where('user_id', $user->id)
+                    ->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $input) {
+                        $subQuery->whereHas('user', function ($userQuery) {
+                            $userQuery->where('app_user', '1');
+                        })
+                            ->where('event_id', $input['event_id'])
+                            ->where('user_id', $user->id)
+                            ->where(function ($privacyQuery) {
+                                $privacyQuery->where(function ($q) {
+                                    $q->where('rsvp_d', '1')
+                                        ->where('rsvp_status', '1')
+                                        ->where('post_privacy', '2');
+                                })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '1')
+                                            ->where('rsvp_status', '0')
+                                            ->where('post_privacy', '3');
+                                    })
+                                    ->orWhere(function ($q) {
+                                        $q->where('rsvp_d', '0')
+                                            ->where('post_privacy', '4');
+                                    })
+                                    ->orWhere(function ($q) {
+                                        // This block is for post_privacy == 1
+                                        $q->where('post_privacy', '1');
+                                    });
+                            });
+                    });
+            });
+        }
+        $eventPostList->orderBy('id', 'DESC');
+        if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
+            $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
+                foreach ($selectedFilters as $filter) {
+                    switch ($filter) {
+                        case 'host_update':
+                            $query->orWhere('user_id', $eventCreator->user_id);
+                            break;
+                        case 'video_uploads':
+                            $query->orWhere(function ($qury) {
+                                $qury->where('post_type', '1')
+                                    ->whereHas('post_image', function ($q) {
+                                        $q->where('type', 'video');
+                                    });
+                            });
+                            break;
+                        case 'photo_uploads':
+                            $query->orWhere(function ($qury) {
+                                $qury->where('post_type', '1')
+                                    ->whereHas('post_image', function ($q) {
+                                        $q->where('type', 'image');
+                                    });
+                            });
+                            break;
+                        case 'polls':
+                            $query->orWhere('post_type', '2');
+                            break;
+                        case 'comments':
+                            $query->orWhere('post_type', '0');
+                            break;
+
+                    }
+                }
+            });
         }
     }
 }

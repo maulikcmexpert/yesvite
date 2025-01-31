@@ -1178,91 +1178,163 @@ $(function () {
     });
 });
 
-$(function () {
-    var selectedDates = new Set();
-    let ed = document.getElementById("event-date");
-    var oldDate = $(ed).attr("data-isDate");
-    $('#event-date').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            format: "MM/DD/YYYY",
-        },
-        showDropdowns: false,
-        startDate: moment().startOf("month"),
-        minDate: moment(),
-        maxSpan: { days: 2 },
-        minSpan: { days: 1 },
-        singleDatePicker: false, // Start with range picker
-        isInvalidDate: function(date) {
-            return date.isBefore(moment(), 'day'); // Disable past dates
-        },
-        // Event to handle Apply button enable/disable
-        applyButtonClasses: 'btn-primary', // Set your button class as needed
-    }, function (start, end, label) {
-        if (start.isSame(end, 'day')) {
-            // Single date selected
-            $('#apply-button').prop('disabled', false); // Enable Apply button
-        } else if (start.isBefore(end)) {
-            // Multiple dates selected
-            $('#apply-button').prop('disabled', false); // Enable Apply button
-        }
-            // const isDate = $(this)  // Get the data attribute inside the callback
-            if (start.diff(end, "days") === 0) {
-                end = start;
-            }
-            selectedDates.clear();
-            // selectedDates.add(start.format("YYYY-MM-DD"));
-            // selectedDates.add(end.format("YYYY-MM-DD"));
-            // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
-            selectedDates.add(start.format("MM-DD-YYYY"));
-            selectedDates.add(end.format("MM-DD-YYYY"));
-            var eventDate =
-                start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
-            rsvp_by_date(start.format("MM-DD-YYYY"));
-            if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
-                eventDate = end.format("MM-DD-YYYY");
-            }
-            $("#event-date").val(eventDate);
-            $(".step_1_activity").html(
-                '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
-            );
+// $(function () {
+//     var selectedDates = new Set();
+//     let ed = document.getElementById("event-date");
+//     var oldDate = $(ed).attr("data-isDate");
+//     $("#event-date").daterangepicker(
+//         {
+//             autoUpdateInput: false,
+//             locale: {
+//                 format: "MM/DD/YYYY",
+//             },
+//             showDropdowns: false,
+//             startDate: moment().startOf("month"),
+//             minDate: moment(),
+//             maxSpan: { days: 2 },
+//             minSpan: { days: 1 },
+//             singleDatePicker: false, // Start with range picker
+//             isInvalidDate: function (date) {
+//                 return date.isBefore(moment(), "day"); // Disable past dates
+//             },
+//             // Event to handle Apply button enable/disable
+//             applyButtonClasses: "btn-primary", // Set your button class as needed
+//         },
+//         function (start, end, label) {
+//             if (start.isSame(end, "day")) {
+//                 // Single date selected
+//                 $("#apply-button").prop("disabled", false); // Enable Apply button
+//             } else if (start.isBefore(end)) {
+//                 // Multiple dates selected
+//                 $("#apply-button").prop("disabled", false); // Enable Apply button
+//             }
+//             // const isDate = $(this)  // Get the data attribute inside the callback
+//             if (start.diff(end, "days") === 0) {
+//                 end = start;
+//             }
+//             selectedDates.clear();
+//             // selectedDates.add(start.format("YYYY-MM-DD"));
+//             // selectedDates.add(end.format("YYYY-MM-DD"));
+//             // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
+//             selectedDates.add(start.format("MM-DD-YYYY"));
+//             selectedDates.add(end.format("MM-DD-YYYY"));
+//             var eventDate =
+//                 start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
+//             rsvp_by_date(start.format("MM-DD-YYYY"));
+//             if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
+//                 eventDate = end.format("MM-DD-YYYY");
+//             }
+//             $("#event-date").val(eventDate);
+//             $(".step_1_activity").html(
+//                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
+//             );
 
-            $("#event-date").val(eventDate).trigger("change");
+//             $("#event-date").val(eventDate).trigger("change");
 
-            $(".activity_bar").children().not(".toggle-wrp").remove();
-            // $('#schedule').prop("checked",false);
-            // $('.add-activity-schedule').hide();
-            if (oldDate != "") {
-                $("#isnewdata").show();
-                $("#isolddata").hide();
-            }
-            // alert();
-            $("#end_time").prop("checked", false);
-            $(".end-time-create").val("");
-            $(".start-time-create").val("");
-            $(".end_time").css("display", "none");
-            if (selectedDates.size > 0) {
-                var activities = {};
-                eventData.activity = {};
-                var total_activities = 0;
-                set_activity_html(selectedDates);
-            }
-        }
-    );
+//             $(".activity_bar").children().not(".toggle-wrp").remove();
+//             // $('#schedule').prop("checked",false);
+//             // $('.add-activity-schedule').hide();
+//             if (oldDate != "") {
+//                 $("#isnewdata").show();
+//                 $("#isolddata").hide();
+//             }
+//             // alert();
+//             $("#end_time").prop("checked", false);
+//             $(".end-time-create").val("");
+//             $(".start-time-create").val("");
+//             $(".end_time").css("display", "none");
+//             if (selectedDates.size > 0) {
+//                 var activities = {};
+//                 eventData.activity = {};
+//                 var total_activities = 0;
+//                 set_activity_html(selectedDates);
+//             }
+//         }
+//     );
 
-    $("#event-date").on("apply.daterangepicker", function (ev, picker) {
-        picker.hide();
-        picker.endDate = picker.startDate; // Ensure both dates are the same
-        $(this).val(picker.startDate.format("MM-DD-YYYY")); // Display selected date
-        $("#event-date").next().addClass("floatingfocus");
-    });
-    $("#event-date").on("hide.daterangepicker", function (ev, picker) {
-        picker.show();
-        $("#event-date").next().addClass("floatingfocus");
-    });
-});
+//     $("#event-date").on("apply.daterangepicker", function (ev, picker) {
+//         picker.hide();
+//         picker.endDate = picker.startDate; // Ensure both dates are the same
+//         $(this).val(picker.startDate.format("MM-DD-YYYY")); // Display selected date
+//         $("#event-date").next().addClass("floatingfocus");
+//     });
+//     $("#event-date").on("hide.daterangepicker", function (ev, picker) {
+//         picker.show();
+//         $("#event-date").next().addClass("floatingfocus");
+//     });
+// });
 // $(document).on('click',,function(){
-
+    $(function () {
+        var selectedDates = new Set();
+        let ed = document.getElementById("event-date");
+        var oldDate = $(ed).attr("data-isDate");
+        $("#event-date").daterangepicker(
+            {
+                autoUpdateInput: false,
+                locale: {
+                    format: "MM/DD/YYYY",
+                },
+                showDropdowns: false,
+                startDate: moment().startOf("month"),
+                // endDate: moment().endOf("month"),
+                // minDate: moment().add(1, 'days'),
+                minDate: moment(),
+                // alwaysShowCalendars: true, // Keep the calendar visible
+                maxSpan: { days: 2 },
+            },
+    
+            function (start, end, label) {
+                // const isDate = $(this)  // Get the data attribute inside the callback
+    
+                selectedDates.clear();
+                // selectedDates.add(start.format("YYYY-MM-DD"));
+                // selectedDates.add(end.format("YYYY-MM-DD"));
+                // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
+                selectedDates.add(start.format("MM-DD-YYYY"));
+                selectedDates.add(end.format("MM-DD-YYYY"));
+                var eventDate =
+                    start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
+                rsvp_by_date(start.format("MM-DD-YYYY"));
+                if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
+                    eventDate = end.format("MM-DD-YYYY");
+                }
+                $("#event-date").val(eventDate);
+                $(".step_1_activity").html(
+                    '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
+                );
+    
+                $("#event-date").val(eventDate).trigger("change");
+    
+                $(".activity_bar").children().not(".toggle-wrp").remove();
+                // $('#schedule').prop("checked",false);
+                // $('.add-activity-schedule').hide();
+                if (oldDate != "") {
+                    $("#isnewdata").show();
+                    $("#isolddata").hide();
+                }
+                // alert();
+                $("#end_time").prop("checked", false);
+                $(".end-time-create").val("");
+                $(".start-time-create").val("");
+                $(".end_time").css("display", "none");
+                if (selectedDates.size > 0) {
+                    var activities = {};
+                    eventData.activity = {};
+                    var total_activities = 0;
+                    set_activity_html(selectedDates);
+                }
+            }
+        );
+    
+        $("#event-date").on("apply.daterangepicker", function (ev, picker) {
+            picker.hide();
+            $("#event-date").next().addClass("floatingfocus");
+        });
+        $("#event-date").on("hide.daterangepicker", function (ev, picker) {
+            picker.show();
+            $("#event-date").next().addClass("floatingfocus");
+        });
+    });
 $(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
     var activities = {};
@@ -8710,6 +8782,26 @@ function updateTOP(categoryIndex) {
             totalOver += inputQty - requiredQty;
         }
     }
+    $("#missing-category-" + categoryIndex).text(totalMissing);
+    $("#extra-category-" + categoryIndex).text(totalOver);
+    if (totalMissing == 0) {
+        // if (response == 0) {
+        var svg =
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>';
+        $(".missing-category-svg-" + categoryIndex).html(svg);
+        $(".missing-category-h6-" + categoryIndex).css("color", "#34C05C");
+    } else {
+        var svg =
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" /></svg>';
+        $(".missing-category-svg-" + categoryIndex).html(svg);
+        $(".missing-category-h6-" + categoryIndex).css("color", "#E20B0B");
+    }
+    if (totalOver > 0) {
+        console.log("");
+        $(".extra-category-h6-" + categoryIndex).show();
+    } else {
+        $(".extra-category-h6-" + categoryIndex).hide();
+    }
 
     console.log("Total Missing Items:", totalMissing);
     console.log("Total Over Items:", totalOver);
@@ -8753,99 +8845,6 @@ function update_self_bring(
                     innerUserQnt + quantity + "/" + categoryItemQuantity
                 );
             }
-            var categoryItem = parseInt(
-                $(".missing-category-h6-" + categoryIndexKey).text()
-            );
-
-            var categoryItemextra = parseInt(
-                $(".extra-category-h6-" + categoryIndexKey).text()
-            );
-            var userQuantity = innerUserQnt + quantity;
-            let remaining_count =
-                innerUserQnt + quantity - categoryItemQuantity;
-
-            if (categoryItem == 0) {
-                $(".extra-category-h6-" + categoryIndexKey).show();
-                $("#extra-category-" + categoryIndexKey).show();
-                if (type == undefined) {
-                } else if (type == "plus") {
-                    remainingCategoryCountn = categoryItemextra + 1;
-                    $("#extra-category-" + categoryIndexKey).text(
-                        remainingCategoryCountn
-                    );
-                } else {
-                    remainingCategoryCountn = categoryItemextra - 1;
-                    $("#extra-category-" + categoryIndexKey).text(
-                        remainingCategoryCountn
-                    );
-                }
-
-                if (remainingCategoryCountn < 0) {
-                    $("#extra-category-" + categoryIndexKey).text(0);
-                    remainingCategoryCount = 1;
-                    $("#missing-category-" + categoryIndexKey).text(
-                        remainingCategoryCount
-                    );
-                }
-
-                if (remainingCategoryCountn == 0) {
-                    $("#extra-category-" + categoryIndexKey).text(0);
-                    $(".extra-category-h6-" + categoryIndexKey).hide();
-                    $("#extra-category-" + categoryIndexKey).hide();
-                }
-            } else {
-                // $(".extra-category-h6-" + categoryIndexKey).hide();
-                // $("#extra-category-" + categoryIndexKey).hide();
-                // $("#extra-category-" + categoryIndexKey).text(0);
-                if (type == undefined) {
-                } else if (type == "plus") {
-                    if (userQuantity > categoryItemQuantity) {
-                        $(".extra-category-h6-" + categoryIndexKey).show();
-                        $("#extra-category-" + categoryIndexKey).show();
-                        remainingCategoryCountn = categoryItemextra + 1;
-                        $("#extra-category-" + categoryIndexKey).text(
-                            remainingCategoryCountn
-                        );
-                    } else {
-                        $(".extra-category-h6-" + categoryIndexKey).hide();
-                        $("#extra-category-" + categoryIndexKey).hide();
-                        // $("#extra-category-" + categoryIndexKey).text(0);
-                        remainingCategoryCount = categoryItem - 1;
-                        $("#missing-category-" + categoryIndexKey).text(
-                            remainingCategoryCount
-                        );
-                    }
-                } else {
-                    if (userQuantity > categoryItemQuantity) {
-                        $(".extra-category-h6-" + categoryIndexKey).show();
-                        $("#extra-category-" + categoryIndexKey).show();
-                        remainingCategoryCountn = categoryItemextra - 1;
-                        $("#extra-category-" + categoryIndexKey).text(
-                            remainingCategoryCountn
-                        );
-                    } else {
-                        $(".extra-category-h6-" + categoryIndexKey).hide();
-                        $("#extra-category-" + categoryIndexKey).hide();
-                        // $("#extra-category-" + categoryIndexKey).text(0);
-                        categoryItemextra = 0;
-                        if (
-                            categoryItemextra == 0 &&
-                            userQuantity == categoryItemQuantity
-                        ) {
-                            remainingCategoryCount = 0 + categoryItem;
-                        } else {
-                            remainingCategoryCount = categoryItem + 1;
-                        }
-                        $("#missing-category-" + categoryIndexKey).text(
-                            remainingCategoryCount
-                        );
-                    }
-                }
-            }
-
-            $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey).data(
-                "extraquantity"
-            );
 
             if (remainingCategoryCount == 0) {
                 // if (response == 0) {

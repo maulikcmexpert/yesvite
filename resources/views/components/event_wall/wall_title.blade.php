@@ -57,3 +57,74 @@
       </svg>
     </button>
   </div>
+  <!-- Modal -->
+  <div class="modal fade create-post-modal all-events-filtermodal" id="main-center-modal-filter" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Filter</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="all-events-filter-wrp">
+                  <form action="">
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault1">
+                          <label class="form-check-label" for="flexCheckDefault1">
+                              All
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault2">
+                          <label class="form-check-label" for="flexCheckDefault2">
+                              Host Updates/Posts
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault3">
+                          <label class="form-check-label" for="flexCheckDefault3">
+                              Video Uploads
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault4">
+                          <label class="form-check-label" for="flexCheckDefault4">
+                              Photo Uploads
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault4">
+                          <label class="form-check-label" for="flexCheckDefault4">
+                              Polls
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault4">
+                          <label class="form-check-label" for="flexCheckDefault4">
+                              Comments
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value=""
+                              id="flexCheckDefault4">
+                          <label class="form-check-label" for="flexCheckDefault4">
+                              RSVP ‘s
+                          </label>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="cmn-btn reset-btn">Reset</button>
+              <button type="button" class="cmn-btn">Apply</button>
+          </div>
+      </div>
+  </div>
+</div>
