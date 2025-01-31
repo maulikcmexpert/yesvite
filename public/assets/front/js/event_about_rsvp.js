@@ -1,30 +1,30 @@
 $(document).ready(function() {
     // // Initially disable the submit button
-     $('#rsvp_yes_no_btn').prop('disabled', true);
+     $('button[type="submit"]').prop('disabled', true);
 
     // Listen for changes in RSVP status (YES/NO)
     $('input[name="rsvp_status"]').change(function () {
         var rsvpStatus = $(this).val();
         console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val();
-            $('input[name="kids"]').val();
+            $('input[name="adults"]').val(0);
+            $('input[name="kids"]').val(0);
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
-            $('#rsvp_yes_no_btn').prop('disabled', false); // Allow submission if RSVP is No
+            $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         }  if (rsvpStatus == "1") {
-            $('input[name="adults"]').val();
-            $('input[name="kids"]').val();
-            console.log($('input[name="adults"]').val());
-            console.log($('input[name="kids"]').val());
+            $('input[name="adults"]').val(0);
+            $('input[name="kids"]').val(0);
+            console.log($('input[name="adults"]').val(0));
+            console.log($('input[name="kids"]').val(0));
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
-            $('#rsvp_yes_no_btn').prop('disabled', true); // Disable submit initially
+            $('button[type="submit"]').prop('disabled', true); // Disable submit initially
         }
         validateForm();
     });
 
     // Listen for changes in the number of adults and kids
     $('input[name="adults"], input[name="kids"]').on('input', function() {
-        // validateForm();
+        validateForm();
     });
 
     // Listen for the click event on the "+" button for adults
@@ -32,13 +32,10 @@ $(document).ready(function() {
         // Find the closest input field and increment its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
-
         input.val(currentValue + 1); // Increment by 1
-        checkAndToggleSubmitButton();
-
 
         // Trigger validation if needed
-        // validateForm();
+        validateForm();
     });
 
     // Listen for the click event on the "-" button
@@ -49,22 +46,10 @@ $(document).ready(function() {
         if (currentValue > 0) {
             input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }
-        checkAndToggleSubmitButton();
-
 
         // Trigger validation if needed
-        // validateForm();
+        validateForm();
     });
-    function checkAndToggleSubmitButton() {
-        let adults = parseInt($('input[name="adults"]').val()) || 0;
-        let kids = parseInt($('input[name="kids"]').val()) || 0;
-
-        if (adults > 0 || kids > 0) {
-            $('#rsvp_yes_no_btn').prop('disabled', false); // Enable button
-        } else {
-            $('#rsvp_yes_no_btn').prop('disabled', true); // Disable button
-        }
-    }
 
     // Submit form validation
     $('form').submit(function (e) {
@@ -85,14 +70,13 @@ $(document).ready(function() {
     var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
     var adults = parseInt($('input[name="adults"]').val()) || 0;
     var kids = parseInt($('input[name="kids"]').val()) || 0;
-// console.log(adults,kids);
+console.log(adults,kids);
     if (rsvpStatus == "0") {
-        $('#rsvp_yes_no_btn').prop('disabled', false);
-    } else if (rsvpStatus == "1" && (adults != 0 || kids != 0)) {
-        alert();
-        $('#rsvp_yes_no_btn').prop('disabled', false);
+        $('button[type="submit"]').prop('disabled', false);
+    } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
+        $('button[type="submit"]').prop('disabled', false);
     } else {
-        $('#rsvp_yes_no_btn').prop('disabled', true);
+        $('button[type="submit"]').prop('disabled', true);
     }
 }
 
@@ -184,15 +168,6 @@ $(document).ready(function() {
         window.open(googleCalendarUrl);
     });
 
-    // $(document).on('click','.rsvp_status_btn',function(){
 
-    //     var kids=parseInt($('#rsvp_status_kids').val());
-    //     var adults=parseInt($('#rsvp_status_adults').val());
-
-    //     if(kids==0 && adults==0){
-    //         alert();
-    //         $('#rsvp_yes_no_btn').prop('disabled', true);
-    //     }
-    // })
 
 });
