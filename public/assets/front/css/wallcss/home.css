@@ -2039,6 +2039,7 @@ main {
   align-items: center;
   width: 100%;
   max-width: 20px;
+  min-width: 20px;
   height: 20px;
 }
 
