@@ -1675,10 +1675,10 @@ $notification_list=getNotificationList();
                                          <a class="nav-link" href="{{ route('about')}}">About</a>
                                      </li>
                                      <li class="nav-item {{ (Request::segment(1) == 'templates')? 'active':'' }}">
-                                      <a class="nav-link" href="{{ route('templates')}}">Design</a>
+                                      <a class="nav-link" href="{{ route('features')}}">Features</a>
                                   </li>
                                   <li class="nav-item {{ (Request::segment(1) == 'price')? 'active':'' }}">
-                                    <a class="nav-link" href="{{ route('price')}}">Price</a>
+                                    <a class="nav-link" href="{{ route('pricing')}}">Pricing</a>
                                 </li>
 
                                      @if(Request::segment(1) !== 'rsvp')
