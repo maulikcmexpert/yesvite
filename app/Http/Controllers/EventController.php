@@ -1080,7 +1080,7 @@ class EventController extends BaseController
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry','eventId'))->render(),
             'success' => true,
             'is_registry' => $gift,
-            'event_id' => $eventId
+            'event_id' => encrypt($eventId)
         ]);
     }
 
