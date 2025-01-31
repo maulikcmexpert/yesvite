@@ -602,7 +602,7 @@
                                                                 if (empty($schedule['start_time']) && empty($schedule['end_time'])) {
                                                                     continue;
                                                                 }
-                                                                $duration=-'';
+                                                                $duration='';
                                                                 $i = 0;
                                                                 $colorClass = $series[$colorIndex % count($series)];
                                                                 $colorIndex++;
