@@ -15,7 +15,7 @@
           $colorClass = $series[$colorIndex % count($series)];
           $colorIndex++;
           @endphp
-    <div href="{{ route('event.event_wall', encrypt($events['id']))  }}" class="home-center-upcoming-events-card mb-3">
+    <a href="{{ route('event.event_wall', encrypt($events['id']))  }}" class="home-center-upcoming-events-card mb-3">
         <div class="home-upcoming-events-card-left">
             <a href="{{ route('event.event_wall', encrypt($events['id']))  }}" class="home-upcoming-events-card-left-profile">
                 <div class="home-upcoming-events-card-left-profile-img">
@@ -130,7 +130,7 @@
         <a href="" class="home-upcoming-events-card-right">
             <img src="{{$events['event_images']}}" loading="lazy" alt="">
         </a>
-    </div>
+    </a>
     @endforeach
   </div>
   @endif
