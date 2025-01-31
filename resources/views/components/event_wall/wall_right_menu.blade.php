@@ -94,8 +94,6 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul id="guestList">
                 @if (!empty($guestArray))
-                @php $i = 0; @endphp
-
                     @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
                             @php
@@ -125,12 +123,8 @@ if ($hostView) {
                                     </div>
                                 </div>
                             </li>
-                            @php $i++; @endphp
                         @endif
                     @endforeach
-                    @if ($i == 7)
-                    @break
-                @endif
                 @endif
             </ul>
 
