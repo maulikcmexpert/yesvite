@@ -1984,10 +1984,32 @@
                             <div class="host-detail">
                                 <h5>Event Details</h5>
                                 <ul>
-                                    <li>RSVP By Sept 20</li>
-                                    <li>+1 (Limit 5)</li>
-                                    <li>Adult Only Event</li>
+                                    @if (!empty($eventDetails['rsvp_by']))
+                                    <li>RSVP By:
+                                        {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                                    </li>
+                                @endif
+                                @if ($eventDetails['podluck'] == 1)
                                     <li>Potluck Event</li>
+                                @endif
+                                @if ($eventDetails['adult_only_party'] == 1)
+                                    <li>Adults Only</li>
+                                @endif
+                                @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
+                                    <li>Multiple Day Event</li>
+                                @endif
+                                @if (!empty($eventDetails['co_hosts']))
+                                    <li>Co-Host</li>
+                                @endif
+                                @if (!empty($eventDetails['gift_registry']))
+                                    <li>Gift Registry</li>
+                                @endif
+                                @if (!empty($eventDetails['event_schedule']))
+                                    <li>Event has schedule</li>
+                                @endif
+                                @if (!empty($eventDetails['allow_limit']))
+                                    <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
+                                @endif
                                 </ul>
                             </div>
                             <input type ="hidden" id="event_id" name="event_id"
