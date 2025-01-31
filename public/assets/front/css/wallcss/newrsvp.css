@@ -1039,7 +1039,7 @@ display:none;}
     font-size: 15px;
 }
 
-.rsvp-slider.slider-count.owl-carousel .owl-dots{
+.rsvp-slider.slider-count.owl-carousel .owl-dots.disabled{
     display: flex !important;
 }
 
