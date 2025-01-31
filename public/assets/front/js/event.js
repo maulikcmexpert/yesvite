@@ -556,12 +556,10 @@ $(document).on('click','.all-event-filter-reset',function(){
     $('.need_to_rsvp_chk').prop('checked', false);
 
     $.ajax({
-                url: `${base_url}filter_search_event`,
+                url: `${base_url}reset_notification_eventId`,
                 type: 'GET',        
-                data: {search_event:""},          
                 success: function (response) { 
  
-                    $('#home_loader').css('display','none');
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
