@@ -2139,7 +2139,11 @@
     background: #3BBEE8 !important;
 }
 
-.home-latest-draf-card progress::after {
+#progress-bar{
+    position: relative;
+}
+
+.home-latest-draf-card #progress-bar::after {
     content: "";
     display: block;
     height: 8px;
@@ -2150,25 +2154,26 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 100;
 }
 
 /* Variants for the progress bar */
-.home-latest-draf-card .progress-bar__wrapper.green progress::after {
+.home-latest-draf-card .progress-bar__wrapper.green #progress-bar::after {
     background: #23AA26;
     width: 75%;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.yellow progress::after {
+.home-latest-draf-card .progress-bar__wrapper.yellow #progress-bar::after {
     background: #FCCD1E;
     width: 50%;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.blue progress::after {
+.home-latest-draf-card .progress-bar__wrapper.blue #progress-bar::after {
     background: #3BBEE8;
     width: 99%;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.red progress::after {
+.home-latest-draf-card .progress-bar__wrapper.red #progress-bar::after {
     background: #E03137;
     width: 25%;
 }
