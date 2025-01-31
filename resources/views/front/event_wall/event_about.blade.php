@@ -511,7 +511,7 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-
+                                                @if (!empty($eventDetails['latitude']) || !empty($eventDetails['longitude']))
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
@@ -531,6 +531,7 @@
                                                     target="_blank" class="direction-btn">
                                                     Directions
                                                 </a>
+                                                @endif
                                             </div>
                                         @endif
                                         {{-- {{dd($eventDetails['event_schedule']);}} --}}
