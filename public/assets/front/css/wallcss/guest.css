@@ -401,6 +401,10 @@
     background-color: #2DA9FC;
 }
 
+.guest-edit-box .qty-container button:disabled{
+    background-color: gray;
+}
+
 .guest-edit-box .qty-container input {
     border: none !important;
     width: 100%;
