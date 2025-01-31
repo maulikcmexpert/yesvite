@@ -572,7 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    @foreach ($eventDetails['event_schedule'] as $key => $schedule)
+                                                    {{-- @foreach ($eventDetails['event_schedule'] as $key = > $schedule)
                                                         @php
                                                             if (
                                                                 empty($schedule['start_time']) &&
@@ -587,27 +587,56 @@
                                                             $colorIndex++;
                                                             $startTime = \Carbon\Carbon::parse($schedule['start_time']);
                                                             $endTime = \Carbon\Carbon::parse($schedule['end_time']);
-                                                            if (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
-                                                                $nextSchedule = $eventDetails['event_schedule'][$key + 1];
-                                                                if (!empty($nextSchedule['start_time'])) {
-                                                                    $startTime = \Carbon\Carbon::parse($nextSchedule['start_time']);
+                                                            if($schedule['start_time']==null || $schedule['start_time']==null){
+                                                                $start
+                                                            }elseif ($schedule['end_time']==null || $schedule['end_time']==null) {
+                                                                
+                                                            }else{
+                                                                $duration = $startTime->diffInHours($endTime) . 'h';
+                                                            }
+                                                        @endphp --}}
+
+                                                        @foreach ($eventDetails['event_schedule'] as $key => $schedule)
+                                                            @php
+                                                                // Skip the iteration if times are missing
+                                                                if (empty($schedule['start_time']) && empty($schedule['end_time'])) {
+                                                                    continue;
                                                                 }
-                                                                $duration = $startTime->diffInHours($endTime) . 'h';
-                                                            }
-                                                            
-                                                            elseif (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
-                                                                $nextSchedule = $eventDetails['event_schedule'][$key + 1];
-                                                                if (!empty($nextSchedule['end_time'])) {
-                                                                    $endTime = \Carbon\Carbon::parse($nextSchedule['end_time']);
+
+                                                                $i = 0;
+                                                                $colorClass = $series[$colorIndex % count($series)];
+                                                                $colorIndex++;
+
+                                                                // Convert times to Unix timestamps for calculation
+                                                                if (!empty($schedule['start_time'])) {
+                                                                    $startTime = strtotime($schedule['start_time']);
                                                                 }
-                                                                $duration = $startTime->diffInHours($endTime) . 'h';
-                                                            }
-                                                          
-                                                            else {
-                                                                $duration = $startTime->diffInHours($endTime) . 'h';
-                                                            }
-                                                            // $duration = $startTime->diffInHours($endTime) . 'h';
-                                                        @endphp
+
+                                                                if (!empty($schedule['end_time'])) {
+                                                                    $endTime = strtotime($schedule['end_time']);
+                                                                }
+
+                                                                // Case 1: If end time is missing, calculate duration based on next schedule's start time
+                                                                if (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
+                                                                    $nextSchedule = $eventDetails['event_schedule'][$key + 1];
+                                                                    if (!empty($nextSchedule['start_time'])) {
+                                                                        $nextStartTime = strtotime($nextSchedule['start_time']);
+                                                                        $duration = round(($nextStartTime - $startTime) / 3600) . 'h'; // Duration in hours
+                                                                    }
+                                                                }
+                                                                // Case 2: If start time is missing, calculate duration based on previous schedule's end time
+                                                                elseif (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key - 1])) {
+                                                                    $prevSchedule = $eventDetails['event_schedule'][$key - 1];
+                                                                    if (!empty($prevSchedule['end_time'])) {
+                                                                        $prevEndTime = strtotime($prevSchedule['end_time']);
+                                                                        $duration = round(($endTime - $prevEndTime) / 3600) . 'h'; // Duration in hours
+                                                                    }
+                                                                }
+                                                                // Case 3: If both start time and end time are available, calculate the duration
+                                                                elseif (!empty($schedule['start_time']) && !empty($schedule['end_time'])) {
+                                                                    $duration = round(($endTime - $startTime) / 3600) . 'h'; // Duration in hours
+                                                                }
+                                                     @endphp
                                                         <div class="shedule-manage-timing">
                                                             <div class="shedule-timing">
                                                                 <h6>{{ $schedule['start_time'] }}</h6>
