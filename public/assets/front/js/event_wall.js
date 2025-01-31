@@ -1190,5 +1190,5 @@ $(document).ready(function () {
 
 });
 $(".modal").on("hidden.bs.modal", function(){
-    $("#postContents").val('');
+    $("#postContent").val('');
 });
