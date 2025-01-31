@@ -802,9 +802,9 @@ $(document).on('change', '.selectedEvents', function () {
     // console.log(1);
     if ($(this).is(':checked')) {
         
-        storeFilterData(1,event_id);
         if ($('.notification-selected-events-wrp .selected-event').text().indexOf(eventname) === -1) {
             $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+            storeFilterData(1,event_id);    
         }
     } else {
         storeFilterData(0,event_id);
