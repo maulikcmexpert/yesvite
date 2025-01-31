@@ -255,48 +255,55 @@ if ($hostView) {
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const seeAllBtn = document.getElementById('seeAllBtn');
-        const guestList = document.getElementById('guestList');
-        const guests = @json($guestArray); // Pass the full guest list as JSON
+    const seeAllBtn = document.getElementById('seeAllBtn');
+    const guestList = document.getElementById('guestList');
+    const guests = @json($guestArray); // Pass the full guest list as JSON
 
-        seeAllBtn.addEventListener('click', function() {
-            // Clear the current guest list and add all guests
-            guestList.innerHTML = '';
+    // Initially show only the first 7 guests (already handled in PHP)
+    const displayedGuests = guests.slice(0, 7);
 
-            guests.forEach((guest, index) => {
-                if (guest.user) {
-                    const user = guest.user;
-                    const firstInitial = user.firstname ? user.firstname[0].toUpperCase() : '';
-                    const secondInitial = user.lastname ? user.lastname[0].toUpperCase() : '';
-                    const initials = firstInitial + secondInitial;
-                    const fontColor = 'fontcolor' + firstInitial.toUpperCase();
+    seeAllBtn.addEventListener('click', function() {
+        // Remove the "See All" button after it's clicked
+        seeAllBtn.style.display = 'none';
 
-                    // Create guest list item
-                    const listItem = document.createElement('li');
-                    listItem.classList.add('guests-listing-info', 'contact', 'contactslist');
-                    listItem.setAttribute('data-guest-id', guest.id);
-                    listItem.setAttribute('data-index', index);
+        // Start appending the remaining guests
+        guests.slice(7).forEach((guest, index) => {
+            if (guest.user) {
+                const user = guest.user;
+                const firstInitial = user.firstname ? user.firstname[0].toUpperCase() : '';
+                const secondInitial = user.lastname ? user.lastname[0].toUpperCase() : '';
+                const initials = firstInitial + secondInitial;
+                const fontColor = 'fontcolor' + firstInitial.toUpperCase();
 
-                    listItem.innerHTML = `
-                        <div class="d-flex align-items-center guest-name">
-                            <div class="guest-profile-pic">
-                                ${user.profile_image ?
-                                    '<img src="' + '/storage/uploads/users/' + user.profile_image + '" alt="">' :
-                                    '<span class="initials ${fontColor}">${initials}</span>'}
-                            </div>
-                            <div class="guest-details">
-                                <h4>${user.firstname} ${user.lastname}</h4>
-                                <p>${user.city}, ${user.state}</p>
-                            </div>
+                // Create guest list item
+                const listItem = document.createElement('li');
+                listItem.classList.add('guests-listing-info', 'contact', 'contactslist');
+                listItem.setAttribute('data-guest-id', guest.id);
+                listItem.setAttribute('data-index', index + 7); // Adjusted index after the first 7 guests
+
+                // Add the guest content HTML
+                listItem.innerHTML = `
+                    <div class="posts-card-head-left guests-listing-left">
+                        <div class="posts-card-head-left-img">
+                            ${user.profile ?
+                                `<img src="/storage/profile/${user.profile}" alt="">` :
+                                `<h5 class="${fontColor}">${initials}</h5>`}
+                            <span class="active-dot"></span>
                         </div>
-                    `;
+                        <div class="posts-card-head-left-content contact_search" data-search="${user.firstname} ${user.lastname}">
+                            <h3>${user.firstname} ${user.lastname}</h3>
+                            ${user.city || user.state ? `<p>${user.city || ''} ${user.city && user.state ? ',' : ''} ${user.state || ''}</p>` : ''}
+                            <input type="hidden" id="eventID" value="${guest.event_id}">
+                            <input type="hidden" id="user_id" value="${guest.user_id}">
+                        </div>
+                    </div>
+                `;
 
-                    guestList.appendChild(listItem);
-                }
-            });
-
-            // // Hide the "See All" button after it has been clicked
-            // seeAllBtn.style.display = 'none';
+                // Append the new guest to the guest list
+                guestList.appendChild(listItem);
+            }
         });
     });
+});
+
 </script>
