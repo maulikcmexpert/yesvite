@@ -511,7 +511,7 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if (!empty($eventDetails['latitude']) || !empty($eventDetails['longitude']))
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&&$eventDetails['longitude']!='')
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
