@@ -6738,7 +6738,7 @@ $(document).on("click", ".invite_group_member", function () {
             const id = $(this).val();
             delete_invited_user(id, '0');
             $("#user-" + id).remove();
-            $(".user_id-" + id).remove();
+            $(".user-" + id).prop('checked', false);
         }
     });
     $.ajax({
@@ -6751,6 +6751,7 @@ $(document).on("click", ".invite_group_member", function () {
             users: selectedValues,
         },
         success: function (response) {
+            toggleSidebar();
             // console.log(response);
             response.data.forEach(function (item, index) {
                 if (

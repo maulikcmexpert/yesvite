@@ -2177,54 +2177,63 @@ class EventController extends BaseController
 
         $users = $request->users;
         $userIds = session()->get('user_ids', []);
-        dd($userIds);
-        foreach ($users as $value) {
-            $id = $value['id'];
-            $user_detail = User::where('id', $value['id'])->first();
-            // dd($user_detail->profile);
-            $userimage = ($user_detail->profile);
-            // $useremail = $user_detail->input('email');
-            // $phone = $user_detail->input('mobile');
-
-            if ($user_detail) {
-
-
-                $userEntry = [
-                    'id' => $value['id'],
-                    'firstname' => $user_detail->firstname,
-                    'lastname' => $user_detail->lastname,
-                    'invited_by' => $value['invited_by'],
-                    'prefer_by' => $value['preferby'],
-                    'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
-                ];
-
-                $userExists = array_filter($userIds, function ($entry) use ($id) {
-                    return $entry['id'] === $id;
-                });
-
-                $userIds = array_filter($userIds, function ($entry) use ($id) {
-                    return $entry['id'] !== $id;
-                });
-
-                $userIds[] = $userEntry;
-
-                if (!empty($userExists)) {
-                    $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
-                } else {
-                    $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
+        // dD($users);
+        // dd($userIds);
+        if(!empty($users)){
+            foreach ($users as $value) {
+                $id = $value['id'];
+                $user_detail = User::where('id', $value['id'])->first();
+                // dd($user_detail->profile);
+                $userimage = ($user_detail->profile);
+                // $useremail = $user_detail->input('email');
+                // $phone = $user_detail->input('mobile');
+    
+                if ($user_detail) {
+    
+    
+                    $userEntry = [
+                        'id' => $value['id'],
+                        'firstname' => $user_detail->firstname,
+                        'lastname' => $user_detail->lastname,
+                        'invited_by' => $value['invited_by'],
+                        'prefer_by' => $value['preferby'],
+                        'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+                    ];
+    
+                    $userExists = array_filter($userIds, function ($entry) use ($id) {
+                        return $entry['id'] === $id;
+                    });
+    
+                    $userIds = array_filter($userIds, function ($entry) use ($id) {
+                        return $entry['id'] !== $id;
+                    });
+    
+                    $userIds[] = $userEntry;
+    
+                    if (!empty($userExists)) {
+                        $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
+                    } else {
+                        $data[] = ['userdata' => $userEntry, 'is_duplicate' => 0];
+                    }
                 }
             }
+            session()->put('user_ids', $userIds);
+            Session::save();
+            $user_list = Session::get('user_ids');
+            // Prepare the view and send the response
+            return response()->json([
+                'view' => view('front.event.guest.addGuest', compact('data'))->render(),
+                'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(),
+                'success' => true,
+                'data' => $data
+            ]);
+        }else{
+            return response()->json([
+                
+                'success' => true,
+               
+            ]);
         }
-        session()->put('user_ids', $userIds);
-        Session::save();
-        $user_list = Session::get('user_ids');
-        // Prepare the view and send the response
-        return response()->json([
-            'view' => view('front.event.guest.addGuest', compact('data'))->render(),
-            'responsive_view' => view('front.event.guest.addguest_responsive', compact('data', 'user_list'))->render(),
-            'success' => true,
-            'data' => $data
-        ]);
     }
 
     public function editEvent(Request $request)
