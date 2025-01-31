@@ -2844,6 +2844,19 @@
     background-color: gray !important;
 }
 
+#all-notification-filter-modal #event_filter .form-check label{
+    padding-right: 30px;
+    word-break: break-all;
+}
+
+.notification-selected-events-wrp, .notification-selected-events-wrp span{
+    word-break: break-all;
+}
+
+.notification-selected-events-wrp span{
+    margin-bottom: 5px;
+}
+
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {
