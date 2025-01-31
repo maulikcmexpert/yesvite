@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.8",
         "nesbot/carbon": "^2.72",
         "owen-oj/laravel-getid3": "^2.2",
+        "pbmedia/laravel-ffmpeg": "^8.6",
         "php-flasher/flasher-laravel": "^1.15",
         "php-flasher/flasher-toastr-laravel": "^1.15",
         "php-flasher/flasher-toastr-symfony": "^1.15",
