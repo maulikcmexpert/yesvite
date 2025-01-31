@@ -616,25 +616,25 @@
                                                                     $endTime = strtotime($schedule['end_time']);
                                                                 }
 
-                                                                // Case 1: If end time is missing, calculate duration based on next schedule's start time
+                                                                
                                                                 if (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
                                                                     $nextSchedule = $eventDetails['event_schedule'][$key + 1];
                                                                     if (!empty($nextSchedule['start_time'])) {
                                                                         $nextStartTime = strtotime($nextSchedule['start_time']);
-                                                                        $duration = round(($nextStartTime - $startTime) / 3600) . 'h'; // Duration in hours
+                                                                        $duration = round(($nextStartTime - $startTime) / 3600) . 'h'; 
                                                                     }
                                                                 }
-                                                                // Case 2: If start time is missing, calculate duration based on previous schedule's end time
+                                                                
                                                                 elseif (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key - 1])) {
                                                                     $prevSchedule = $eventDetails['event_schedule'][$key - 1];
                                                                     if (!empty($prevSchedule['end_time'])) {
                                                                         $prevEndTime = strtotime($prevSchedule['end_time']);
-                                                                        $duration = round(($endTime - $prevEndTime) / 3600) . 'h'; // Duration in hours
+                                                                        $duration = round(($endTime - $prevEndTime) / 3600) . 'h'; 
                                                                     }
                                                                 }
-                                                                // Case 3: If both start time and end time are available, calculate the duration
+                                                          
                                                                 elseif (!empty($schedule['start_time']) && !empty($schedule['end_time'])) {
-                                                                    $duration = round(($endTime - $startTime) / 3600) . 'h'; // Duration in hours
+                                                                    $duration = round(($endTime - $startTime) / 3600) . 'h';
                                                                 }
                                                      @endphp
                                                         <div class="shedule-manage-timing">
