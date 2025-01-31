@@ -1757,7 +1757,7 @@ class EventController extends BaseController
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
                     
                     if ($id == $userVal['user_id']) {
-dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity']);
+dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]);
                         $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type)) ? 0 : $quantity;
                         
                         session()->put('category', $categories);
