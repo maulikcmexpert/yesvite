@@ -336,10 +336,11 @@
     content: "\f00c";
     font-family: "FONTAWESOME";
     position: absolute;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 15px;
+    font-size: 12px;
+    line-height: normal;
 }
 
 .bulk-credit-options-listing-right .form-check-input:focus{
