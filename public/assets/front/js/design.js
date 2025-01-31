@@ -658,7 +658,29 @@ function bindData(current_event_id) {
 
                         const textWidth = textMeasurement.width;
 
-                        console.log(element.text);
+                        if (element.left === undefined) {
+                            let scaleX =
+                                img.width /
+                                (element.width === 0 ? 345 : element.width);
+                            let scaleY =
+                                img.height /
+                                (element.height === 0 ? 490 : element.height);
+                            let scaleFactor = Math.min(scaleX, scaleY);
+
+                            element.left = element.centerX * scaleFactor;
+                        }
+
+                        if (element.top === undefined) {
+                            let scaleX =
+                                img.width /
+                                (element.width === 0 ? 345 : element.width);
+                            let scaleY =
+                                img.height /
+                                (element.height === 0 ? 490 : element.height);
+                            let scaleFactor = Math.min(scaleX, scaleY);
+
+                            element.top = element.centerY * scaleFactor;
+                        }
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
