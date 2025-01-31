@@ -6453,10 +6453,10 @@ $("#YesviteUserAll").on("scroll", function () {
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
     if (scrollTop + elementHeight >= scrollHeight - 2) {
-        busyyesvite = true;
         offsetyesvite += limityesvite;
         // var type="yesvite";
         if (NoMoreDataYesviteAll == false) {
+            busyyesvite = true;
             displayRecords(
                 limityesvite,
                 offsetyesvite,
@@ -6581,6 +6581,8 @@ function displayRecords(
             const coins = $("#coins").val();
             if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
+                busyyesvite=false;
+                NoMoreDataYesviteAll=false;
             } else {
                 create_event_yesvite_scroll = true;
             }
