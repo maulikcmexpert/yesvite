@@ -70,13 +70,14 @@ $(document).ready(function() {
     var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
     var adults = parseInt($('input[name="adults"]').val()) || 0;
     var kids = parseInt($('input[name="kids"]').val()) || 0;
-console.log(adults,kids);
+// console.log(adults,kids);
     if (rsvpStatus == "0") {
-        $('button[type="submit"]').prop('disabled', false);
-    } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
-        $('button[type="submit"]').prop('disabled', false);
+        $('#rsvp_yes_no_btn').prop('disabled', false);
+    } else if (rsvpStatus == "1" && (adults != 0 || kids != 0)) {
+        alert();
+        $('#rsvp_yes_no_btn').prop('disabled', false);
     } else {
-        $('button[type="submit"]').prop('disabled', true);
+        $('#rsvp_yes_no_btn').prop('disabled', true);
     }
 }
 
@@ -168,15 +169,15 @@ console.log(adults,kids);
         window.open(googleCalendarUrl);
     });
 
-    $(document).on('click','.rsvp_status_btn',function(){
+    // $(document).on('click','.rsvp_status_btn',function(){
 
-        var kids=parseInt($('#rsvp_status_kids').val());
-        var adults=parseInt($('#rsvp_status_adults').val());
+    //     var kids=parseInt($('#rsvp_status_kids').val());
+    //     var adults=parseInt($('#rsvp_status_adults').val());
 
-        if(kids==0 && adults==0){
-            alert();
-            $('button[type="submit"]').prop('disabled', true);
-        }
-    })
+    //     if(kids==0 && adults==0){
+    //         alert();
+    //         $('button[type="submit"]').prop('disabled', true);
+    //     }
+    // })
 
 });

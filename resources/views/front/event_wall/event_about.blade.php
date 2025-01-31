@@ -2145,7 +2145,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
+                            <button type="submit" id="rsvp_yes_no_btn" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
                         </div>
                     </form>
                 </div>
