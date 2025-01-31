@@ -175,7 +175,7 @@ if (calender_json != undefined) {
         var today = moment();
 
         const events = JSON.parse(calender_json);
-        console.log(events);
+
         const monthEventCount = events.reduce((acc, event) => {
             const [year, month] = event.date.split("-");
             const key = `${year}-${month}`;
