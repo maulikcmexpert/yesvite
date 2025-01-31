@@ -799,7 +799,7 @@ $(document).on('change', 'input[data-name="all"]', function () {
 $(document).on('change', '.selectedEvents', function () {
     var eventname=$(this).data('event_name');
     var event_id=$(this).data('event_id');
-    console.log(1);
+    // console.log(1);
     if ($(this).is(':checked')) {
         $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
         storeFilterData(1,event_id);

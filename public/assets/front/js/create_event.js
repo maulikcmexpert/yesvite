@@ -218,7 +218,7 @@ $(document).ready(function () {
         const newEndOption = $("<option></option>")
             .val(currentTimeZone)
             .text(currentTimeZone)
-            .prop("selected", true);
+            .prop("selected", true);    
         $("#end-time-zone").append(newEndOption);
     }
 
@@ -3573,19 +3573,19 @@ $(document).on("click", "#close_createEvent", function () {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
 
-    if (event_type == "") {
-        $("#deleteModal").modal("show");
-        // confirm('Event type is empty. Are you sure you want to proceed?')
-        return;
-    }
-    // // if (event_name == "") {
-    // //     $("#deleteModal").modal("show");
-    // //     return;
-    // // }
-    if (event_date == "") {
-        $("#deleteModal").modal("show");
-        return;
-    }
+    // if (event_type == "") {
+    //     $("#deleteModal").modal("show");
+    //     // confirm('Event type is empty. Are you sure you want to proceed?')
+    //     return;
+    // }
+    // // // if (event_name == "") {
+    // // //     $("#deleteModal").modal("show");
+    // // //     return;
+    // // // }
+    // if (event_date == "") {
+    //     $("#deleteModal").modal("show");
+    //     return;
+    // }
 
     // $('#loader').css('display','block');
     $("#loader").css("display", "block");
@@ -3801,6 +3801,19 @@ function savePage1Data(close = null) {
     // }
 
     if (close == null || close == "") {
+        if (event_type == "") {
+            $("#deleteModal").modal("show");
+            // confirm('Event type is empty. Are you sure you want to proceed?')
+            return;
+        }
+        // // if (event_name == "") {
+        // //     $("#deleteModal").modal("show");
+        // //     return;
+        // // }
+        if (event_date == "") {
+            $("#deleteModal").modal("show");
+            return;
+        }
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
         if ($("#schedule").is(":checked")) {
