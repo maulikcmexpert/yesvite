@@ -169,6 +169,7 @@ let calender_json = $("#calender_json").val();
         return el;
     }
 })();
+console.log(calender_json);
 
 if (calender_json != undefined) {
     !(function () {
