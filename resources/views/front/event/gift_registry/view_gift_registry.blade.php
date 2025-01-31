@@ -1,4 +1,3 @@
-<input type="hidden" id="created_event_id" value="{{encrypt($eventId)}}"/>
 @if(isset($registry)&&!empty($registry))
 
 <!-- {dd($registry)}     -->
