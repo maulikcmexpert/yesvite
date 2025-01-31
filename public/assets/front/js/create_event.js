@@ -6495,23 +6495,23 @@ function get_user(type) {
 // });
 
 // After .user-contacts is dynamically added to the DOM
-$("#YesviteUserAll").scroll(function () {
-    var scrollTop = $(this).scrollTop(); // Current scroll position
-    var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
-    var elementHeight = $(this).height(); // Visible height of the element
+// $("#YesviteUserAll").scroll(function () {
+//     var scrollTop = $(this).scrollTop(); // Current scroll position
+//     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
+//     var elementHeight = $(this).height(); // Visible height of the element
 
-    // Check if the user has scrolled to the bottom
-    // if (scrollTop + elementHeight >= scrollHeight) {
-    //     busy = true;
-    //     offset = limit + offset;
-    //     console.log(offset);
-    //     $('#loader').css('display','block');
-    //     setTimeout(function () {
-    //         displayRecords(limit, offset,'all');
+//     // Check if the user has scrolled to the bottom
+//     // if (scrollTop + elementHeight >= scrollHeight) {
+//     //     busy = true;
+//     //     offset = limit + offset;
+//     //     console.log(offset);
+//     //     $('#loader').css('display','block');
+//     //     setTimeout(function () {
+//     //         displayRecords(limit, offset,'all');
 
-    //     }, 1000);
-    // }
-});
+//     //     }, 1000);
+//     // }
+// });
 
 $("#groupUsers").scroll(function () {
     console.log(busyyesvite);
