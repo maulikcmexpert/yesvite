@@ -263,7 +263,7 @@
                                                                 <a href="#" class="guest-img">
                                                                     @if ($user['profile'] != '')
                                                                         <img src="{{ $user['profile'] }}"
-                                                                            alt="guest-img">
+                                                                            alt="">
                                                                     @else
                                                                         @php
 

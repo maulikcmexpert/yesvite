@@ -372,7 +372,7 @@
                                                     @endphp
                                                     {{-- {{ dd($rsvpSent)}} --}}
 
-                                                    @if (!empty($rsvpSent) &&  $rsvpSent['rsvp_status'] == null)
+                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == null)
                                                         <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
                                                             data-bs-toggle="modal" data-bs-target="#aboutsuccess">
                                                             RSVP
@@ -386,7 +386,7 @@
                                                             </svg>
                                                         </a>
                                                     @endif
-                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == "0")
+                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0')
                                                         <a href="#"
                                                             class="rsvp-btn noattending-btn btn {{ $isDisabled }}"data-bs-toggle="modal"
                                                             data-bs-target="#aboutsuccess">Not Attending
@@ -400,7 +400,7 @@
                                                             </svg>
                                                         </a>
                                                     @endif
-                                                    @if ( !empty($rsvpSent) && $rsvpSent['rsvp_status'] == "1")
+                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1')
                                                         <a href="#"
                                                             class="rsvp-btn attending-btn btn {{ $isDisabled }}"
                                                             data-bs-toggle="modal"
@@ -515,10 +515,11 @@
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
-                                                        : '23.020474099698593'; // Default latitude (Ahmedabad)
-                                                    $longitude = !empty($eventDetails['logitude'])
-                                                        ? $eventDetails['logitude']
-                                                        : '72.41493076529625'; // Default longitude (Ahmedabad)
+                                                        : '39.8283'; // Default latitude for the U.S.
+
+                                                    $longitude = !empty($eventDetails['longitude'])
+                                                        ? $eventDetails['longitude']
+                                                        : '-98.5795'; // Default longitude for the U.S.
                                                 @endphp
 
                                                 <iframe
@@ -595,8 +596,8 @@
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
                                                                     <span>{{ $schedule['start_time'] }}
                                                                         @if (!empty($schedule['start_time']))
-                                                                          @endif
-                                                                            @if (!empty($schedule['end_time']))
+                                                                        @endif
+                                                                        @if (!empty($schedule['end_time']))
                                                                             -
                                                                             {{ $schedule['end_time'] }}
                                                                         @endif
@@ -2145,7 +2146,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" id="rsvp_yes_no_btn" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
+                            <button type="submit" id="rsvp_yes_no_btn" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Send</button>
                         </div>
                     </form>
                 </div>
