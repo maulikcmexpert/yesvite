@@ -118,5 +118,24 @@ class HomeFrontController extends BaseController
         ));
     }
 
+    public function homePricing(){
+        $serverKey  = ServerKey::first();
+
+        $title = 'Yesvite-Home';
+        $page = 'front.home_pricing';
+
+        $images = TextData::all();
+        $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
+        $getDesignData =  EventDesignCategory::with('subcategory')->get();
+        $getDesignData = EventDesignCategory::all();
+        $getsubcatData = EventDesignSubCategory::all();
+        return view('layout', compact(
+            'title',
+            'page',
+            'images',
+            'getDesignData',
+            'categories'
+        ));
+    }
 
 }
