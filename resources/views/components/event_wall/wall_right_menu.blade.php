@@ -96,6 +96,9 @@ if ($hostView) {
                 @if (!empty($guestArray))
                     @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
+                                @if ($index == 7)
+                                @break
+                            @endif
                             @php
                                 $user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
