@@ -96,9 +96,6 @@ if ($hostView) {
                 @if (!empty($guestArray))
                     @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
-                                @if ($index == 7)
-                                @break
-                            @endif
                             @php
                                 $user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
@@ -106,7 +103,9 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}">
+
+                            <!-- Hide guests after index 6 (only show first 7 initially) -->
+                            <li class="guests-listing-info contact contactslist {{ $index >= 7 ? 'hidden-guest' : '' }}" data-guest-id="{{ $guest['id'] }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -132,7 +131,7 @@ if ($hostView) {
             </ul>
 
             <div class="guests-listing-buttons">
-                <a href="" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
+                <a href="javascript:void(0);" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1)
                     <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal" data-bs-target="#addguest">
                         <i class="fa-solid fa-plus"></i> Add Guest
@@ -140,6 +139,7 @@ if ($hostView) {
                 @endif
             </div>
         </div>
+
 
     </div>
 
@@ -251,3 +251,14 @@ if ($hostView) {
         </div>
     </div>
 </div>
+<script>
+document.getElementById("seeAllBtn").addEventListener("click", function() {
+    // Show all hidden guests
+    document.querySelectorAll(".hidden-guest").forEach(function(guest) {
+        guest.style.display = "block";
+    });
+
+    // // Hide the "See All" button after clicking
+    // this.style.display = "none";
+});
+</script>
