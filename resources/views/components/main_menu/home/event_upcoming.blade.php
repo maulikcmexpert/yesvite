@@ -16,7 +16,8 @@
           $colorIndex++;
           @endphp
           <!-- <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}"> -->
-            <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-center-upcoming-events-card mb-3">
+            <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="">
+              <div class="home-center-upcoming-events-card mb-3">
                 <div class="home-upcoming-events-card-left">
                     <!-- <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-left-profile"> -->
                     <div href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-left-profile">
@@ -130,9 +131,11 @@
                         @endif
                     </div>
                 </div>
-                <a href="" class="home-upcoming-events-card-right">
+                <div href="" class="home-upcoming-events-card-right">
                     <img src="{{$events['event_images']}}" loading="lazy" alt="">
-                </a>
+                </>
+                </div>
+              </div>
             </a>
           <!-- </a> -->
     @endforeach
