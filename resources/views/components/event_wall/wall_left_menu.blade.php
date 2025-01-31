@@ -1,4 +1,4 @@
-{{dd($eventDetails)}}
+{{-- {{dd($eventDetails)}} --}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
