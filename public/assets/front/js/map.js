@@ -9,7 +9,12 @@ function initMap() {
     var card = document.getElementById("pac-card");
     var input = document.getElementById("address1");
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
+    $(input).on("blur", function () {
+        if ($(this).val().trim() === "") {
+            $("#latitude").val("");
+            $("#longitude").val("");
+        }
+    });
     // Initialize autocomplete and bind it to the map's bounds
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.bindTo("bounds", map);
@@ -74,6 +79,7 @@ function initMap() {
             var typeField = [],
                 typeValLong = [];
             console.log(place.name);
+            let addressadded = false;
             if (place.formatted_address != undefined) {
                 $("#address1").val(place.formatted_address);
                 $("#address1").next().addClass("floatingfocus");
