@@ -370,8 +370,9 @@
                                                         $isDisabled =
                                                             $eventDetails['host_id'] == $login_user_id ? 'd-none' : ''; // Using 'd-none' to hide the link
                                                     @endphp
-                                                    {{ dd($rsvpSent)}}
-                                                    @if (!empty($rsvpSent['rsvp_status'] && $rsvpSent['rsvp_status'] == null))
+                                                    {{-- {{ dd($rsvpSent)}} --}}
+
+                                                    @if (isset($rsvpSent['rsvp_status'] )  || empty($rsvpSent['rsvp_status']))
                                                         <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
                                                             data-bs-toggle="modal" data-bs-target="#aboutsuccess">
                                                             RSVP
