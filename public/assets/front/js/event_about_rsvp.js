@@ -32,13 +32,9 @@ $(document).ready(function() {
         // Find the closest input field and increment its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
-        if (currentValue > 0) {
-            $('#rsvp_yes_no_btn').prop('disabled', false);
-            // input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
-        }else{
-            $('#rsvp_yes_no_btn').prop('disabled', true);
-        }
+
         input.val(currentValue + 1); // Increment by 1
+        checkAndToggleSubmitButton();
 
 
         // Trigger validation if needed
@@ -50,17 +46,25 @@ $(document).ready(function() {
         // Find the closest input field and decrement its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
-        if(currentValue==0){
-            $('#rsvp_yes_no_btn').prop('disabled', true);
-        }
         if (currentValue > 0) {
             input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }
+        checkAndToggleSubmitButton();
 
 
         // Trigger validation if needed
         // validateForm();
     });
+    function checkAndToggleSubmitButton() {
+        let adults = parseInt($('input[name="adults"]').val()) || 0;
+        let kids = parseInt($('input[name="kids"]').val()) || 0;
+
+        if (adults > 0 || kids > 0) {
+            $('#rsvp_yes_no_btn').prop('disabled', false); // Enable button
+        } else {
+            $('#rsvp_yes_no_btn').prop('disabled', true); // Disable button
+        }
+    }
 
     // Submit form validation
     $('form').submit(function (e) {
