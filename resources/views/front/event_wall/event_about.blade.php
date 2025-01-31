@@ -572,7 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    @foreach ($eventDetails['event_schedule'] as $schedule)
+                                                    @foreach ($eventDetails['event_schedule'] as $key = > $schedule)
                                                         @php
                                                             if (
                                                                 empty($schedule['start_time']) &&
@@ -580,12 +580,26 @@
                                                             ) {
                                                                 continue; // Skip this iteration if times are missing
                                                             }
+
+
                                                             $i = 0;
                                                             $colorClass = $series[$colorIndex % count($series)];
                                                             $colorIndex++;
                                                             $startTime = \Carbon\Carbon::parse($schedule['start_time']);
                                                             $endTime = \Carbon\Carbon::parse($schedule['end_time']);
-                                                            $duration = $startTime->diffInHours($endTime) . 'h';
+                                                            if($schedule['start_time']==null || $schedule['start_time']==null){
+                                                                $index = $key +1;
+
+                                                                $startTimenew = $schedule[$index]['start_time'];
+                                                                $duration = $startTimenew->diffInHours($endTime) . 'h';
+                                                            }elseif ($schedule['end_time']==null || $schedule['end_time']==null) {
+                                                                $index = $key +1;
+
+                                                                $endTimenew = $schedule[$index]['end_time'];
+                                                                $duration = $startTime->diffInHours($endTimenew) . 'h';
+                                                            }else{
+                                                                $duration = $startTime->diffInHours($endTime) . 'h';
+                                                            }
                                                         @endphp
                                                         <div class="shedule-manage-timing">
                                                             <div class="shedule-timing">
