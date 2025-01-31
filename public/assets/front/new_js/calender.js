@@ -170,7 +170,7 @@ let calender_json = $("#calender_json").val();
     }
 })();
 
-// if (calender_json != undefined) {    
+if (calender_json != undefined) {
     !(function () {
         var today = moment();
 
@@ -358,4 +358,4 @@ let calender_json = $("#calender_json").val();
             totalmonths
         );
     })();
-// }
+}
