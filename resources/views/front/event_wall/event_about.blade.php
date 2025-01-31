@@ -9,7 +9,7 @@
                 <div class="col-xl-3 col-lg-4">
                     <!-- =============mainleft-====================== -->
 
-                    <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
+                    <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"  :postList="$postList" />
                 </div>
                 <div class="col-xl-6 col-lg-8">
                     <div class="main-content-center">
@@ -572,7 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    @foreach ($eventDetails['event_schedule'] as $key => $schedule)
+                                                    {{-- @foreach ($eventDetails['event_schedule'] as $key = > $schedule)
                                                         @php
                                                             if (
                                                                 empty($schedule['start_time']) &&
@@ -587,27 +587,56 @@
                                                             $colorIndex++;
                                                             $startTime = \Carbon\Carbon::parse($schedule['start_time']);
                                                             $endTime = \Carbon\Carbon::parse($schedule['end_time']);
-                                                            if (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
-                                                                $nextSchedule = $eventDetails['event_schedule'][$key + 1];
-                                                                if (!empty($nextSchedule['start_time'])) {
-                                                                    $startTime = \Carbon\Carbon::parse($nextSchedule['start_time']);
-                                                                }
+                                                            if($schedule['start_time']==null || $schedule['start_time']==null){
+                                                                $start
+                                                            }elseif ($schedule['end_time']==null || $schedule['end_time']==null) {
+                                                                
+                                                            }else{
                                                                 $duration = $startTime->diffInHours($endTime) . 'h';
                                                             }
-                                                            
-                                                            elseif (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
-                                                                $nextSchedule = $eventDetails['event_schedule'][$key + 1];
-                                                                if (!empty($nextSchedule['end_time'])) {
-                                                                    $endTime = \Carbon\Carbon::parse($nextSchedule['end_time']);
+                                                        @endphp --}}
+
+                                                        @foreach ($eventDetails['event_schedule'] as $key => $schedule)
+                                                            @php
+                                                                // Skip the iteration if times are missing
+                                                                if (empty($schedule['start_time']) && empty($schedule['end_time'])) {
+                                                                    continue;
                                                                 }
-                                                                $duration = $startTime->diffInHours($endTime) . 'h';
-                                                            }
+
+                                                                $i = 0;
+                                                                $colorClass = $series[$colorIndex % count($series)];
+                                                                $colorIndex++;
+
+                                                                // Convert times to Unix timestamps for calculation
+                                                                if (!empty($schedule['start_time'])) {
+                                                                    $startTime = strtotime($schedule['start_time']);
+                                                                }
+
+                                                                if (!empty($schedule['end_time'])) {
+                                                                    $endTime = strtotime($schedule['end_time']);
+                                                                }
+
+                                                                
+                                                                if (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
+                                                                    $nextSchedule = $eventDetails['event_schedule'][$key + 1];
+                                                                    if (!empty($nextSchedule['start_time'])) {
+                                                                        $nextStartTime = strtotime($nextSchedule['start_time']);
+                                                                        $duration = round(($nextStartTime - $startTime) / 3600) . 'h'; 
+                                                                    }
+                                                                }
+                                                                
+                                                                elseif (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key - 1])) {
+                                                                    $prevSchedule = $eventDetails['event_schedule'][$key - 1];
+                                                                    if (!empty($prevSchedule['end_time'])) {
+                                                                        $prevEndTime = strtotime($prevSchedule['end_time']);
+                                                                        $duration = round(($endTime - $prevEndTime) / 3600) . 'h'; 
+                                                                    }
+                                                                }
                                                           
-                                                            else {
-                                                                $duration = $startTime->diffInHours($endTime) . 'h';
-                                                            }
-                                                            // $duration = $startTime->diffInHours($endTime) . 'h';
-                                                        @endphp
+                                                                elseif (!empty($schedule['start_time']) && !empty($schedule['end_time'])) {
+                                                                    $duration = round(($endTime - $startTime) / 3600) . 'h';
+                                                                }
+                                                     @endphp
                                                         <div class="shedule-manage-timing">
                                                             <div class="shedule-timing">
                                                                 <h6>{{ $schedule['start_time'] }}</h6>

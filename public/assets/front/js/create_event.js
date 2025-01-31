@@ -6453,10 +6453,10 @@ $("#YesviteUserAll").on("scroll", function () {
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
     if (scrollTop + elementHeight >= scrollHeight - 2) {
-        busyyesvite = true;
         offsetyesvite += limityesvite;
         // var type="yesvite";
         if (NoMoreDataYesviteAll == false) {
+            busyyesvite = true;
             displayRecords(
                 limityesvite,
                 offsetyesvite,
@@ -6581,6 +6581,8 @@ function displayRecords(
             const coins = $("#coins").val();
             if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
+                busyyesvite=false;
+                NoMoreDataYesviteAll=false;
             } else {
                 create_event_yesvite_scroll = true;
             }
@@ -8776,8 +8778,8 @@ function updateTOP(categoryIndex) {
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
         let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
-        if (innerUserQnt && innerUserQnt >= 0) {
-            inputQty = inputQty + innerUserQnt;
+        if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
+            inputQty = inputQty + parseInt(innerUserQnt);
         }
         if (inputQty < requiredQty) {
             totalMissing += requiredQty - inputQty;
