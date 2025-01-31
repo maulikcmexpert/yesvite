@@ -1674,10 +1674,10 @@ $notification_list=getNotificationList();
                                      <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
                                          <a class="nav-link" href="{{ route('about')}}">About</a>
                                      </li>
-                                     <li class="nav-item {{ (Request::segment(1) == 'templates')? 'active':'' }}">
+                                     <li class="nav-item {{ (Request::segment(1) == 'features')? 'active':'' }}">
                                       <a class="nav-link" href="{{ route('features')}}">Features</a>
                                   </li>
-                                  <li class="nav-item {{ (Request::segment(1) == 'price')? 'active':'' }}">
+                                  <li class="nav-item {{ (Request::segment(1) == 'pricing')? 'active':'' }}">
                                     <a class="nav-link" href="{{ route('pricing')}}">Pricing</a>
                                 </li>
 
