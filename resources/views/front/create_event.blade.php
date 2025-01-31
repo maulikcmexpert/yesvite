@@ -22,6 +22,18 @@
 <body>
     <!-- ============ header ========= -->
     --}}
+    @php
+    $userS = Auth::guard('web')->user(); 
+
+    // Get the authenticated user
+    $firstInitialUser = !empty($userS->firstname) ? strtoupper($userS->firstname[0]) : '';
+    $lastInitialUser = !empty($userS->lastname) ? strtoupper($userS->lastname[0]) : '';
+    $initialsUser = $firstInitialUser . $lastInitialUser;
+   
+
+    // This will set the font color class based on the first initial of the user
+    $fontColorUser = 'fontcolor' . $firstInitialUser;
+@endphp
 <header class="login-header new_event_detail_header">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -1372,15 +1384,7 @@
                 <input type="hidden" id="category_count" value="0">
                 @if (isset($eventDetail['podluck_category_list']) && count($eventDetail['podluck_category_list']) > 0)
                     @foreach ($eventDetail['podluck_category_list'] as $index => $data)
-                    @php
-                        $userS = Auth::guard('web')->user(); // Get the authenticated user
-                        $firstInitialUser = !empty($userS->first_name) ? strtoupper($userS->first_name[0]) : '';
-                        $lastInitialUser = !empty($userS->last_name) ? strtoupper($userS->last_name[0]) : '';
-                        $initialsUser = $firstInitialUser . $lastInitialUser;
-
-                        // This will set the font color class based on the first initial of the user
-                        $fontColorUser = 'fontcolor' . $firstInitialUser;
-                    @endphp
+                   
                         <div class="category-main-dishesh potluckmain-{{ $index }}">
                             <div class="category-list">
                                 <div class="list-header">
@@ -1633,8 +1637,8 @@
                                                                     @endphp
                                                                     <h5
                                                                         class="{{ $fontColorUser }} add-item-under-text me-auto">
-                                                                        {{ $initialsUser }}
-                                                                    {{ $user->firstname }} {{ $user->lastname }}
+                                                                        {{ $initialsUser }} </h5>
+                                                                   <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
                                                                 @endif
@@ -1767,12 +1771,12 @@
                                                                     @php
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp
-                                                                    <h5
-                                                                        class="{{ $fontColorUser }} add-item-under-text me-auto">
-                                                                        {{ $initialsUser }}
-                                                                        {{ $user->firstname }} {{ $user->lastname }}
+                                                                     <h5
+                                                                     class="{{ $fontColorUser }} add-item-under-text me-auto">
+                                                                     {{ $initialsUser }} </h5>
+                                                                <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
 
-                                                                    </h5>
+                                                                 </h5>
                                                                 @endif
                                                                 @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
                                                                     <div class="qty-container ms-auto">

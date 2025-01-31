@@ -2139,7 +2139,7 @@
     background: #3BBEE8 !important;
 }
 
-.home-latest-draf-card progress[value]::after {
+.home-latest-draf-card progress::after {
     content: "";
     display: block;
     height: 8px;
@@ -2153,48 +2153,24 @@
 }
 
 /* Variants for the progress bar */
-.home-latest-draf-card .progress-bar__wrapper.green progress[value]::after {
+.home-latest-draf-card .progress-bar__wrapper.green progress::after {
     background: #23AA26;
     width: 75%;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::after {
+.home-latest-draf-card .progress-bar__wrapper.yellow progress::after {
     background: #FCCD1E;
     width: 50%;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::after {
+.home-latest-draf-card .progress-bar__wrapper.blue progress::after {
     background: #3BBEE8;
     width: 99%;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.red progress[value]::after {
+.home-latest-draf-card .progress-bar__wrapper.red progress::after {
     background: #E03137;
     width: 25%;
-}
-
-/* iOS Specific styles (for Safari) */
-@supports (-webkit-appearance:none) {
-    .home-latest-draf-card progress[value]::after {
-        border-radius: 4px; /* iOS adjusts rounded corners */
-    }
-
-    /* For progress bar variants */
-    .home-latest-draf-card .progress-bar__wrapper.green progress[value]::after {
-        background: #23AA26;
-    }
-
-    .home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::after {
-        background: #FCCD1E;
-    }
-
-    .home-latest-draf-card .progress-bar__wrapper.blue progress[value]::after {
-        background: #3BBEE8;
-    }
-
-    .home-latest-draf-card .progress-bar__wrapper.red progress[value]::after {
-        background: #E03137;
-    }
 }
 
 .home-latest-draf-card .progress-bar__wrapper h4 {
