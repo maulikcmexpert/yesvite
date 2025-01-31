@@ -174,9 +174,10 @@ if (calender_json != undefined) {
     !(function () {
         var today = moment();
 
-        const events = JSON.parse(calender_json);
+            const events = JSON.parse(calender_json);
 
         const monthEventCount = events.reduce((acc, event) => {
+            if (!event.date) return acc; // Skip events with null or empty dates
             const [year, month] = event.date.split("-");
             const key = `${year}-${month}`;
             acc[key] = (acc[key] || 0) + 1;
