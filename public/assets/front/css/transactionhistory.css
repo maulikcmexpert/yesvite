@@ -328,6 +328,7 @@
     padding: 0 !important;
     margin-top: 0px !important;
     border-radius: 8px !important;
+    background-image: none !important;
 }
 
 .bulk-credit-options-listing-right .form-check-input:focus{
