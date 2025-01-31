@@ -1182,30 +1182,32 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var oldDate = $(ed).attr("data-isDate");
-    $('#event-date').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            format: "MM/DD/YYYY",
+    $("#event-date").daterangepicker(
+        {
+            autoUpdateInput: false,
+            locale: {
+                format: "MM/DD/YYYY",
+            },
+            showDropdowns: false,
+            startDate: moment().startOf("month"),
+            minDate: moment(),
+            maxSpan: { days: 2 },
+            minSpan: { days: 1 },
+            singleDatePicker: false, // Start with range picker
+            isInvalidDate: function (date) {
+                return date.isBefore(moment(), "day"); // Disable past dates
+            },
+            // Event to handle Apply button enable/disable
+            applyButtonClasses: "btn-primary", // Set your button class as needed
         },
-        showDropdowns: false,
-        startDate: moment().startOf("month"),
-        minDate: moment(),
-        maxSpan: { days: 2 },
-        minSpan: { days: 1 },
-        singleDatePicker: false, // Start with range picker
-        isInvalidDate: function(date) {
-            return date.isBefore(moment(), 'day'); // Disable past dates
-        },
-        // Event to handle Apply button enable/disable
-        applyButtonClasses: 'btn-primary', // Set your button class as needed
-    }, function (start, end, label) {
-        if (start.isSame(end, 'day')) {
-            // Single date selected
-            $('#apply-button').prop('disabled', false); // Enable Apply button
-        } else if (start.isBefore(end)) {
-            // Multiple dates selected
-            $('#apply-button').prop('disabled', false); // Enable Apply button
-        }
+        function (start, end, label) {
+            if (start.isSame(end, "day")) {
+                // Single date selected
+                $("#apply-button").prop("disabled", false); // Enable Apply button
+            } else if (start.isBefore(end)) {
+                // Multiple dates selected
+                $("#apply-button").prop("disabled", false); // Enable Apply button
+            }
             // const isDate = $(this)  // Get the data attribute inside the callback
             if (start.diff(end, "days") === 0) {
                 end = start;
@@ -8725,6 +8727,7 @@ function updateTOP(categoryIndex) {
         $(".missing-category-h6-" + categoryIndex).css("color", "#E20B0B");
     }
     if (totalOver > 0) {
+        console.log("");
         $(".extra-category-h6-" + categoryIndex).show();
     } else {
         $(".extra-category-h6-" + categoryIndex).hide();
@@ -8772,99 +8775,6 @@ function update_self_bring(
                     innerUserQnt + quantity + "/" + categoryItemQuantity
                 );
             }
-            var categoryItem = parseInt(
-                $(".missing-category-h6-" + categoryIndexKey).text()
-            );
-
-            var categoryItemextra = parseInt(
-                $(".extra-category-h6-" + categoryIndexKey).text()
-            );
-            var userQuantity = innerUserQnt + quantity;
-            let remaining_count =
-                innerUserQnt + quantity - categoryItemQuantity;
-
-            if (categoryItem == 0) {
-                $(".extra-category-h6-" + categoryIndexKey).show();
-                $("#extra-category-" + categoryIndexKey).show();
-                if (type == undefined) {
-                } else if (type == "plus") {
-                    remainingCategoryCountn = categoryItemextra + 1;
-                    $("#extra-category-" + categoryIndexKey).text(
-                        remainingCategoryCountn
-                    );
-                } else {
-                    remainingCategoryCountn = categoryItemextra - 1;
-                    $("#extra-category-" + categoryIndexKey).text(
-                        remainingCategoryCountn
-                    );
-                }
-
-                if (remainingCategoryCountn < 0) {
-                    $("#extra-category-" + categoryIndexKey).text(0);
-                    remainingCategoryCount = 1;
-                    $("#missing-category-" + categoryIndexKey).text(
-                        remainingCategoryCount
-                    );
-                }
-
-                if (remainingCategoryCountn == 0) {
-                    $("#extra-category-" + categoryIndexKey).text(0);
-                    $(".extra-category-h6-" + categoryIndexKey).hide();
-                    $("#extra-category-" + categoryIndexKey).hide();
-                }
-            } else {
-                // $(".extra-category-h6-" + categoryIndexKey).hide();
-                // $("#extra-category-" + categoryIndexKey).hide();
-                // $("#extra-category-" + categoryIndexKey).text(0);
-                if (type == undefined) {
-                } else if (type == "plus") {
-                    if (userQuantity > categoryItemQuantity) {
-                        $(".extra-category-h6-" + categoryIndexKey).show();
-                        $("#extra-category-" + categoryIndexKey).show();
-                        remainingCategoryCountn = categoryItemextra + 1;
-                        $("#extra-category-" + categoryIndexKey).text(
-                            remainingCategoryCountn
-                        );
-                    } else {
-                        $(".extra-category-h6-" + categoryIndexKey).hide();
-                        $("#extra-category-" + categoryIndexKey).hide();
-                        // $("#extra-category-" + categoryIndexKey).text(0);
-                        remainingCategoryCount = categoryItem - 1;
-                        $("#missing-category-" + categoryIndexKey).text(
-                            remainingCategoryCount
-                        );
-                    }
-                } else {
-                    if (userQuantity > categoryItemQuantity) {
-                        $(".extra-category-h6-" + categoryIndexKey).show();
-                        $("#extra-category-" + categoryIndexKey).show();
-                        remainingCategoryCountn = categoryItemextra - 1;
-                        $("#extra-category-" + categoryIndexKey).text(
-                            remainingCategoryCountn
-                        );
-                    } else {
-                        $(".extra-category-h6-" + categoryIndexKey).hide();
-                        $("#extra-category-" + categoryIndexKey).hide();
-                        // $("#extra-category-" + categoryIndexKey).text(0);
-                        categoryItemextra = 0;
-                        if (
-                            categoryItemextra == 0 &&
-                            userQuantity == categoryItemQuantity
-                        ) {
-                            remainingCategoryCount = 0 + categoryItem;
-                        } else {
-                            remainingCategoryCount = categoryItem + 1;
-                        }
-                        $("#missing-category-" + categoryIndexKey).text(
-                            remainingCategoryCount
-                        );
-                    }
-                }
-            }
-
-            $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey).data(
-                "extraquantity"
-            );
 
             if (remainingCategoryCount == 0) {
                 // if (response == 0) {
