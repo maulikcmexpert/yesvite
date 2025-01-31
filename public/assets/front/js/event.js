@@ -1049,23 +1049,23 @@ $(document).on('input','#search_filter_event',function(){
                       });
 
 });
-$(document).on('click','.notification-toggle-menu',function(){
+// $(document).on('click','.notification-toggle-menu',function(){
 
-    var search_event=$(this).val();
-    $('#home_loader').css('display','block');
-    $.ajax({
-        url: `${base_url}filter_search_event`,
-        type: 'GET',        
-        data: {search_event:""},          
-        success: function (response) { 
-            $('.event-search-filter').html('');  
-            $('.event-search-filter').html(response.view);   
-            $('#home_loader').css('display','none');
-        },
-        error: function (error) {
-          toastr.error('Something went wrong. Please try again!');
-        },
-      });
+//     var search_event=$(this).val();
+//     $('#home_loader').css('display','block');
+//     $.ajax({
+//         url: `${base_url}filter_search_event`,
+//         type: 'GET',        
+//         data: {search_event:""},          
+//         success: function (response) { 
+//             $('.event-search-filter').html('');  
+//             $('.event-search-filter').html(response.view);   
+//             $('#home_loader').css('display','none');
+//         },
+//         error: function (error) {
+//           toastr.error('Something went wrong. Please try again!');
+//         },
+//       });
 
-});
+// });
 
