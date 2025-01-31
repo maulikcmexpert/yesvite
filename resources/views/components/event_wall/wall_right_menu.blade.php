@@ -218,17 +218,17 @@ if ($hostView) {
                         <div class="guest-edit-box">
                             <p>Adults</p>
                             <div class="qty-container ms-auto">
-                                <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
+                                <button class="qty-btn-minus side_menu_minus" type="button"><i class="fa fa-minus"></i></button>
                                 <input type="number" name="adults" value="0" class="input-qty adultcount" />
-                                <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                                <button class="qty-btn-plus side_menu_plus" type="button"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                         <div class="guest-edit-box">
                             <p>Kids</p>
                             <div class="qty-container ms-auto">
-                                <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
+                                <button class="qty-btn-minus side_menu_minus" type="button"><i class="fa fa-minus"></i></button>
                                 <input type="number" name="kids" value="0" class="input-qty kidcount" />
-                                <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
+                                <button class="qty-btn-plus  side_menu_plus" type="button"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
