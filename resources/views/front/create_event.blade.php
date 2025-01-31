@@ -24,12 +24,12 @@
     --}}
     @php
     $userS = Auth::guard('web')->user(); 
-    dd($userS);
+
     // Get the authenticated user
-    $firstInitialUser = !empty($userS->first_name) ? strtoupper($userS->first_name[0]) : '';
-    $lastInitialUser = !empty($userS->last_name) ? strtoupper($userS->last_name[0]) : '';
+    $firstInitialUser = !empty($userS->firstname) ? strtoupper($userS->firstname[0]) : '';
+    $lastInitialUser = !empty($userS->lastname) ? strtoupper($userS->lastname[0]) : '';
     $initialsUser = $firstInitialUser . $lastInitialUser;
-    dd($initialsUser);
+   
 
     // This will set the font color class based on the first initial of the user
     $fontColorUser = 'fontcolor' . $firstInitialUser;
