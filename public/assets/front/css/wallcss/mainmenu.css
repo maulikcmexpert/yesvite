@@ -2086,12 +2086,53 @@
     margin-top: 16px;
 }
 
+/* Progress Bar Styling */
 .home-latest-draf-card progress {
+    -webkit-appearance: none; /* Fix for iOS */
+    appearance: none;
     width: 100%;
     height: 8px;
     border-radius: 50px;
     background-color: #F1F5F9;
     transition: width 300ms ease;
+    overflow: hidden; /* Prevents visual glitches */
+}
+
+/* .home-latest-draf-card progress[value]::-webkit-progress-bar {
+    background-color: #F1F5F9;
+    border-radius: 50px;
+}
+
+.home-latest-draf-card progress[value]::-webkit-progress-value {
+    background: #E03137 !important;
+    border-radius: 50px;
+    transition: width 300ms ease;
+}
+
+.home-latest-draf-card progress[value]::-moz-progress-bar {
+    background: #E03137;
+    border-radius: 50px;
+}
+
+.home-latest-draf-card .progress-bar__wrapper.green progress[value]::-webkit-progress-value {
+    background: #23AA26 !important;
+}
+.home-latest-draf-card .progress-bar__wrapper.green progress[value]::-moz-progress-bar {
+    background: #23AA26;
+}
+
+.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-webkit-progress-value {
+    background: #FCCD1E !important;
+}
+.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-moz-progress-bar {
+    background: #FCCD1E;
+}
+
+.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-webkit-progress-value {
+    background: #3BBEE8 !important;
+}
+.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-moz-progress-bar {
+    background: #3BBEE8;
 }
 
 .home-latest-draf-card .progress-bar__wrapper h4 {
@@ -2102,57 +2143,51 @@
     color: var(--secondary-black);
 }
 
-.home-latest-draf-card progress[value] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 8px;
-    border-radius: 50px;
-    background-color: #F1F5F9;
-    transition: width 300ms ease;
+.home-latest-draf-card .progress-bar__wrapper .prograsbar-pro {
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 0;
+    color: #FF2A51;
+    text-transform: uppercase;
 }
 
-/* Chrome, Safari (iOS and Mac), Edge */
-.home-latest-draf-card progress[value]::-webkit-progress-bar {
-    background-color: #F1F5F9;
-    border-radius: 50px;
+.home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting {
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 11px;
+    line-height: normal;
+    margin-bottom: 0;
+    color: #23AA26;
+    text-transform: capitalize;
+    background-color: #F0FFE8;
+    padding: 4px 8px;
+    border-radius: 100px;
+    position: relative;
+} */
+
+.home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    background-color: var(--secondary-black);
+    top: 50%;
+    transform: translateY(-50%);
+    right: -5px;
 }
 
-/* Chrome, Safari (iOS and Mac), Edge */
-.home-latest-draf-card progress[value]::-webkit-progress-value {
-    border-radius: 50px;
-    background-color: #E03137;
-    transition: width 300ms ease;
+.home-latest-draf-card .progress-bar__wrapper p {
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Firefox */
-.home-latest-draf-card progress[value]::-moz-progress-bar {
-    background-color: #E03137;
-    border-radius: 50px;
-    transition: width 300ms ease;
-}
-
-/* Different Colors for Different Wrappers */
-.home-latest-draf-card .progress-bar__wrapper.green progress[value]::-webkit-progress-value {
-    background-color: #23AA26 !important;
-}
-.home-latest-draf-card .progress-bar__wrapper.green progress[value]::-moz-progress-bar {
-    background-color: #23AA26 !important;
-}
-
-.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-webkit-progress-value {
-    background-color: #FCCD1E !important;
-}
-.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-moz-progress-bar {
-    background-color: #FCCD1E !important;
-}
-
-.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-webkit-progress-value {
-    background-color: #3BBEE8 !important;
-}
-.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-moz-progress-bar {
-    background-color: #3BBEE8 !important;
+.home-latest-draf-card .progress-bar__value {
+    font-family: var(--SFProDisplay-Semibold) !important;
+    font-size: 14px;
+    color: var(--secondary-black) !important;
+    width: auto;
 }
 
 .home-center-content-head-calender-icon{
