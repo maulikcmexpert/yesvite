@@ -1515,6 +1515,9 @@
                                                                 <p>Requested by: {{ $items['requested_by'] }}</p>
                                                             </div>
                                                         </div>
+                                                        <input type="hidden"
+                                                                            class="innerUserQnt"
+                                                                            value="{{ $items['innerUserQnt'] }}">
                                                         <div class="ms-auto">
 
                                                         </div>
@@ -1596,9 +1599,6 @@
                                                                         <input type="hidden"
                                                                             class="category-item-quantity"
                                                                             value="{{ $items['quantity'] }}">
-                                                                        <input type="hidden"
-                                                                            class="innerUserQnt"
-                                                                            value="{{ $items['innerUserQnt'] }}">
                                                                         <input type="hidden"
                                                                             class="item-quantity-minus"
                                                                             value="0">
@@ -1732,9 +1732,6 @@
                                                                         <input type="hidden"
                                                                             class="item-quantity-minus"
                                                                             value="{{ $values['quantity'] }}">
-                                                                        <input type="hidden"
-                                                                            class="innerUserQnt"
-                                                                            value="{{ $items['innerUserQnt'] }}">
                                                                         <button class="qty-btnminus"
                                                                             type="button"><i
                                                                                 class="fa fa-minus"></i></button>
