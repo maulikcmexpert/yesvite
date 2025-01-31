@@ -39,7 +39,7 @@
                     <p class="host-name-{{$colorClass}}">{{$pastEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$pastEvent['post_time']}}</span></p>
                 </div>
               </a>
-              <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" ></a>
+              <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" >
                     <ul class="home-upcoming-events-card-left-detail">
                         @if($pastEvent['is_event_owner']==1)
                             <li><span>Hosting</span> </li>
