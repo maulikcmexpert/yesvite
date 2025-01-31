@@ -230,7 +230,7 @@
                                                 $guestArray = $eventDetails['event_detail']['guests'] ?? null;
                                                 $totalAdults = 0;
                                                 $totalKids = 0;
-                                                // dd( $guestArray);
+                                                dd( $guestArray);
 
                                                 if ($guestArray) {
                                                     foreach ($guestArray as $guest) {
