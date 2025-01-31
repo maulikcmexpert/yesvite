@@ -39,7 +39,7 @@ $hostView = $eventInfo['host_view'];
 $totalAdults = 0;
 $totalKids = 0;
 $totalGuests = count($guestArray); // Total guests
-$displayGuests = array_slice($guestArray, 0, 7);
+//$displayGuests = array_slice($guestArray, 0, 7);
 
 // Sum up adults and kids
 if ($hostView) {
@@ -96,7 +96,7 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul id="guestList">
                 @if (!empty($guestArray))
-                @foreach ($displayGuests as $index => $guest)
+                @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
                                 @if ($index == 7)
                                 @break
