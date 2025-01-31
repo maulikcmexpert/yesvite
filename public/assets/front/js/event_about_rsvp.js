@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     // Listen for changes in the number of adults and kids
     $('input[name="adults"], input[name="kids"]').on('input', function() {
-        validateForm();
+        // validateForm();
     });
 
     // Listen for the click event on the "+" button for adults
@@ -32,7 +32,14 @@ $(document).ready(function() {
         // Find the closest input field and increment its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
+        if (currentValue > 0) {
+            $('#rsvp_yes_no_btn').prop('disabled', false);
+            // input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
+        }else{
+            $('#rsvp_yes_no_btn').prop('disabled', true);
+        }
         input.val(currentValue + 1); // Increment by 1
+
 
         // Trigger validation if needed
         // validateForm();
@@ -43,10 +50,13 @@ $(document).ready(function() {
         // Find the closest input field and decrement its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
+        if(currentValue==0){
+            $('#rsvp_yes_no_btn').prop('disabled', true);
+        }
         if (currentValue > 0) {
             input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }
-            $('#rsvp_yes_no_btn').prop('disabled', false);
+
 
         // Trigger validation if needed
         // validateForm();
