@@ -215,11 +215,11 @@ $(document).ready(function () {
     });
 
     if (!isOptionExistsend) {
-        const newOption = $("<option></option>")
+        const newEndOption = $("<option></option>")
             .val(currentTimeZone)
             .text(currentTimeZone)
             .prop("selected", true);
-        $("#end-time-zone").append(newOption);
+        $("#end-time-zone").append(newEndOption);
     }
 
     console.log(getTimeZoneAbbreviation());
