@@ -361,7 +361,8 @@
                                                         $isDisabled =
                                                             $eventDetails['host_id'] == $login_user_id ? 'd-none' : ''; // Using 'd-none' to hide the link
                                                     @endphp
-
+                                                   {{ dd($rsvpSent)
+}}
                                                     <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
                                                         data-bs-toggle="modal" data-bs-target="#aboutsuccess">
                                                         RSVP
@@ -374,11 +375,11 @@
                                                         </svg>
                                                     </a>
 
-                                                   <a href="#" class="rsvp-btn noattending-btn btn {{ $isDisabled }}" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
+                                                   {{-- <a href="#" class="rsvp-btn noattending-btn btn {{ $isDisabled }}" data-bs-toggle="modal" data-bs-target="#aboutrsvp">Not Attending
                                                                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                               <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                                               </svg>
-                                                                            </a>
+                                                                            </a> --}}
                                                   {{-- <a href="#" class="rsvp-btn attending-btn btn {{ $isDisabled }}">Attending
                                                                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                               <path d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
