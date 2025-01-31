@@ -329,6 +329,17 @@
     margin-top: 0px !important;
     border-radius: 8px !important;
     background-image: none !important;
+    position:relative;
+}
+
+.bulk-credit-options-listing-right .form-check-input:before{
+    content: "\f00c";
+    font-family: "FONTAWESOME";
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
 }
 
 .bulk-credit-options-listing-right .form-check-input:focus{
