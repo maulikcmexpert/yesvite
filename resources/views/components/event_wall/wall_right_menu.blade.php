@@ -315,7 +315,7 @@ if ($hostView) {
     document.addEventListener('DOMContentLoaded', function() {
         const seeAllBtn = document.getElementById('seeAllBtn');
         const guestList = document.getElementById('guestList');
-        const guests = @json($guestArray); // Pass the full guest list as JSON
+        const guests = $guestArray; // Pass the full guest list as JSON
 
 
 
