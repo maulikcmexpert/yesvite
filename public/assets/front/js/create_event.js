@@ -3749,19 +3749,19 @@ function savePage1Data(close = null) {
     // }
 
     if (close == null || close == "") {
-        if (event_type == "") {
-            $("#deleteModal").modal("show");
-            // confirm('Event type is empty. Are you sure you want to proceed?')
-            return;
-        }
-        // // if (event_name == "") {
-        // //     $("#deleteModal").modal("show");
-        // //     return;
-        // // }
-        if (event_date == "") {
-            $("#deleteModal").modal("show");
-            return;
-        }
+        // if (event_type == "") {
+        //     $("#deleteModal").modal("show");
+        //     // confirm('Event type is empty. Are you sure you want to proceed?')
+        //     return;
+        // }
+        // // // if (event_name == "") {
+        // // //     $("#deleteModal").modal("show");
+        // // //     return;
+        // // // }
+        // if (event_date == "") {
+        //     $("#deleteModal").modal("show");
+        //     return;
+        // }
         // var activity=$('.new_append_activity').length;
         // console.log(activity);
         if ($("#schedule").is(":checked")) {
