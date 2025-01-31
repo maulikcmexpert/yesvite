@@ -96,7 +96,7 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul id="guestList">
                 @if (!empty($guestArray))
-                @foreach ($displayGuests as $index => $guest)
+                @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
                                 @if ($index == 7)
                                 @break
