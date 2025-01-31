@@ -948,6 +948,12 @@ $(document).ready(function () {
 
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
+        var $this = $(this); // Cache the button
+
+        // Prevent multiple clicks
+        if ($this.prop('disabled')) {
+            return;
+        }
         // Check if the poll form exists and is valid
         var pollForm = $('#pollForm');
         var photoForm = $('#photoForm');
