@@ -37,7 +37,7 @@
                                                     </button>
                                                 </h2>
                                                 <div id="collapse{{ $category->id }}"
-                                                    class="accordion-collapse collapse show"
+                                                    class="accordion-collapse collapse"
                                                     aria-labelledby="heading{{ $category->id }}"
                                                     data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">
@@ -884,59 +884,59 @@
                 localStorage.setItem('cookiesBoxDismissed', 'true');
             });
         });
-        $(document).ready(function() {
-            // Handle the "All Categories" checkbox click
-            $('#Allcat').on('change', function() {
-                if ($(this).is(':checked')) {
-                    // Check all individual category checkboxes
-                    $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                    // Show all images
-                    $('.image-item').show();
-                } else {
-                    // Uncheck all individual category checkboxes
+            $(document).ready(function() {
+                // Handle the "All Categories" checkbox click
+                $('#Allcat').on('change', function() {
+                    if ($(this).is(':checked')) {
+                        // Check all individual category checkboxes
+                        $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+                        // Show all images
+                        $('.image-item').show();
+                    } else {
+                        // Uncheck all individual category checkboxes
+                        $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
+                        // Hide all images
+                        $('.image-item').hide();
+                    }
+                });
+
+                // Handle individual category checkboxes
+                $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
+                    // If all individual checkboxes are checked, check "All Categories"
+                    const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
+                    const checkedCheckboxes = $('input[type="checkbox"]:not(#Allcat):checked').length;
+
+                    if (checkedCheckboxes === totalCheckboxes) {
+                        $('#Allcat').prop('checked', true);
+                    } else {
+                        $('#Allcat').prop('checked', false);
+                    }
+
+                    // Filter images based on checked categories
+                    if (checkedCheckboxes > 0) {
+                        $('.image-item').hide(); // Hide all images first
+                        $('input[type="checkbox"]:not(#Allcat):checked').each(function() {
+                            const categoryId = $(this).data('category-id');
+                            const subcategoryId = $(this).data('subcategory-id');
+
+                            // Show images matching the selected categories and subcategories
+                            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                                .show();
+                        });
+                    } else {
+                        $('.image-item').hide(); // Hide all images if no checkboxes are checked
+                    }
+                });
+                $('#resetCategories').on('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
+
+                    // Uncheck all checkboxes
+                    $('#Allcat').prop('checked', false);
                     $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
+
                     // Hide all images
                     $('.image-item').hide();
-                }
+                });
             });
-
-            // Handle individual category checkboxes
-            $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
-                // If all individual checkboxes are checked, check "All Categories"
-                const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
-                const checkedCheckboxes = $('input[type="checkbox"]:not(#Allcat):checked').length;
-
-                if (checkedCheckboxes === totalCheckboxes) {
-                    $('#Allcat').prop('checked', true);
-                } else {
-                    $('#Allcat').prop('checked', false);
-                }
-
-                // Filter images based on checked categories
-                if (checkedCheckboxes > 0) {
-                    $('.image-item').hide(); // Hide all images first
-                    $('input[type="checkbox"]:not(#Allcat):checked').each(function() {
-                        const categoryId = $(this).data('category-id');
-                        const subcategoryId = $(this).data('subcategory-id');
-
-                        // Show images matching the selected categories and subcategories
-                        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-                            .show();
-                    });
-                } else {
-                    $('.image-item').hide(); // Hide all images if no checkboxes are checked
-                }
-            });
-            $('#resetCategories').on('click', function(e) {
-                e.preventDefault(); // Prevent default anchor behavior
-
-                // Uncheck all checkboxes
-                $('#Allcat').prop('checked', false);
-                $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-
-                // Hide all images
-                $('.image-item').hide();
-            });
-        });
     </script>
 @endpush
