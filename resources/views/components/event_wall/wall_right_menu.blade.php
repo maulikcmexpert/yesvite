@@ -94,9 +94,11 @@ if ($hostView) {
         <div class="guests-listing-wrp ">
             <ul>
                 @if (!empty($guestArray))
-                    @foreach ($guestArray as $guest)
+                @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
-
+                        @if ($index == 7)
+                        @break
+                    @endif
 
                             @php
                                 $user = $guest['user']; // Fetch user array
