@@ -177,9 +177,15 @@ if (calender_json != undefined) {
         const events = JSON.parse(calender_json);
 
         const monthEventCount = events.reduce((acc, event) => {
-            const [year, month] = event.date.split("-");
-            const key = `${year}-${month}`;
-            acc[key] = (acc[key] || 0) + 1;
+            // const [year, month] = event.date.split("-");
+            // const key = `${year}-${month}`;
+            // acc[key] = (acc[key] || 0) + 1;
+
+            if (event.date && typeof event.date === "string") {
+                const [year, month] = event.date.split("-");
+                const key = `${year}-${month}`;
+                acc[key] = (acc[key] || 0) + 1;
+            }
 
             return acc;
         }, {});
