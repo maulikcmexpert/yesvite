@@ -149,7 +149,7 @@
 
 
                             <div>
-                                <div class="swiper mySwiper">
+                                <!-- <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
                                         @foreach ($groups as $group)
                                             <div class="swiper-slide">
@@ -175,7 +175,19 @@
                                     <div class="swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
                                     <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
 
-                                </div>
+                                </div> -->
+                                <div class="slider-container">
+    <button class="slider-button prev">&lt;</button>
+    <div class="slider-wrapper">
+        @foreach ($groups as $group)
+            <div class="slider-slide">
+                <h4>{{ $group->name }}</h4>
+                <p>{{ $group->group_members_count }} Guests</p>
+            </div>
+        @endforeach
+    </div>
+    <button class="slider-button next">&gt;</button>
+</div>
 
 
                             </div>
@@ -896,3 +908,42 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sliderWrapper = document.querySelector(".slider-wrapper");
+        const slides = document.querySelectorAll(".slider-slide");
+        const prevButton = document.querySelector(".slider-button.prev");
+        const nextButton = document.querySelector(".slider-button.next");
+
+        let currentIndex = 0;
+        let slideWidth = slides[0].offsetWidth + 20; // Including margin
+
+        function updateSlider() {
+            sliderWrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        }
+
+        nextButton.addEventListener("click", function () {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop back
+            }
+            updateSlider();
+        });
+
+        prevButton.addEventListener("click", function () {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = slides.length - 1; // Loop back
+            }
+            updateSlider();
+        });
+
+        // Auto-adjust slide width on window resize
+        window.addEventListener("resize", function () {
+            slideWidth = slides[0].offsetWidth + 20;
+            updateSlider();
+        });
+    });
+</script>
