@@ -179,7 +179,7 @@
                             </svg>
                             Comments
                         </h5>
-                        <h3 id="comment_{{ $postList['id'] }}">{{ $postList['total_comment'] }}</h3>
+                        <h3 >6</h3>
                     </div>
                     <div class="hosted-by-event-stats-inner">
                         <h5>
