@@ -39,7 +39,7 @@ $hostView = $eventInfo['host_view'];
 $totalAdults = 0;
 $totalKids = 0;
 $totalGuests = count($guestArray); // Total guests
-$displayGuests = array_slice($guestArray, 0, 7);
+//$displayGuests = array_slice($guestArray, 0, 7);
 
 // Sum up adults and kids
 if ($hostView) {
