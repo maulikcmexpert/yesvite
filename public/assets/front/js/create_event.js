@@ -1264,77 +1264,77 @@ $(function () {
 //     });
 // });
 // $(document).on('click',,function(){
-    $(function () {
-        var selectedDates = new Set();
-        let ed = document.getElementById("event-date");
-        var oldDate = $(ed).attr("data-isDate");
-        $("#event-date").daterangepicker(
-            {
-                autoUpdateInput: false,
-                locale: {
-                    format: "MM/DD/YYYY",
-                },
-                showDropdowns: false,
-                startDate: moment().startOf("month"),
-                // endDate: moment().endOf("month"),
-                // minDate: moment().add(1, 'days'),
-                minDate: moment(),
-                // alwaysShowCalendars: true, // Keep the calendar visible
-                maxSpan: { days: 2 },
+$(function () {
+    var selectedDates = new Set();
+    let ed = document.getElementById("event-date");
+    var oldDate = $(ed).attr("data-isDate");
+    $("#event-date").daterangepicker(
+        {
+            autoUpdateInput: false,
+            locale: {
+                format: "MM/DD/YYYY",
             },
-    
-            function (start, end, label) {
-                // const isDate = $(this)  // Get the data attribute inside the callback
-    
-                selectedDates.clear();
-                // selectedDates.add(start.format("YYYY-MM-DD"));
-                // selectedDates.add(end.format("YYYY-MM-DD"));
-                // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
-                selectedDates.add(start.format("MM-DD-YYYY"));
-                selectedDates.add(end.format("MM-DD-YYYY"));
-                var eventDate =
-                    start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
-                rsvp_by_date(start.format("MM-DD-YYYY"));
-                if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
-                    eventDate = end.format("MM-DD-YYYY");
-                }
-                $("#event-date").val(eventDate);
-                $(".step_1_activity").html(
-                    '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
-                );
-    
-                $("#event-date").val(eventDate).trigger("change");
-    
-                $(".activity_bar").children().not(".toggle-wrp").remove();
-                // $('#schedule').prop("checked",false);
-                // $('.add-activity-schedule').hide();
-                if (oldDate != "") {
-                    $("#isnewdata").show();
-                    $("#isolddata").hide();
-                }
-                // alert();
-                $("#end_time").prop("checked", false);
-                $(".end-time-create").val("");
-                $(".start-time-create").val("");
-                $(".end_time").css("display", "none");
-                if (selectedDates.size > 0) {
-                    var activities = {};
-                    eventData.activity = {};
-                    var total_activities = 0;
-                    set_activity_html(selectedDates);
-                }
+            showDropdowns: false,
+            startDate: moment().startOf("month"),
+            // endDate: moment().endOf("month"),
+            // minDate: moment().add(1, 'days'),
+            minDate: moment(),
+            // alwaysShowCalendars: true, // Keep the calendar visible
+            maxSpan: { days: 2 },
+        },
+
+        function (start, end, label) {
+            // const isDate = $(this)  // Get the data attribute inside the callback
+
+            selectedDates.clear();
+            // selectedDates.add(start.format("YYYY-MM-DD"));
+            // selectedDates.add(end.format("YYYY-MM-DD"));
+            // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
+            selectedDates.add(start.format("MM-DD-YYYY"));
+            selectedDates.add(end.format("MM-DD-YYYY"));
+            var eventDate =
+                start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
+            rsvp_by_date(start.format("MM-DD-YYYY"));
+            if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
+                eventDate = end.format("MM-DD-YYYY");
             }
-        );
-    
-        $("#event-date").on("apply.daterangepicker", function (ev, picker) {
-            picker.hide();
-            $("#event-date").next().addClass("floatingfocus");
-        });
-        $("#event-date").on("hide.daterangepicker", function (ev, picker) {
-            picker.show();
-            $("#event-date").next().addClass("floatingfocus");
-        });
+            $("#event-date").val(eventDate);
+            $(".step_1_activity").html(
+                '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
+            );
+
+            $("#event-date").val(eventDate).trigger("change");
+
+            $(".activity_bar").children().not(".toggle-wrp").remove();
+            // $('#schedule').prop("checked",false);
+            // $('.add-activity-schedule').hide();
+            if (oldDate != "") {
+                $("#isnewdata").show();
+                $("#isolddata").hide();
+            }
+            // alert();
+            $("#end_time").prop("checked", false);
+            $(".end-time-create").val("");
+            $(".start-time-create").val("");
+            $(".end_time").css("display", "none");
+            if (selectedDates.size > 0) {
+                var activities = {};
+                eventData.activity = {};
+                var total_activities = 0;
+                set_activity_html(selectedDates);
+            }
+        }
+    );
+
+    $("#event-date").on("apply.daterangepicker", function (ev, picker) {
+        picker.hide();
+        $("#event-date").next().addClass("floatingfocus");
     });
+    $("#event-date").on("hide.daterangepicker", function (ev, picker) {
+        picker.show();
+        $("#event-date").next().addClass("floatingfocus");
+    });
+});
 $(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
     var activities = {};
@@ -6495,23 +6495,23 @@ function get_user(type) {
 // });
 
 // After .user-contacts is dynamically added to the DOM
-$("#YesviteUserAll").scroll(function () {
-    var scrollTop = $(this).scrollTop(); // Current scroll position
-    var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
-    var elementHeight = $(this).height(); // Visible height of the element
+// $("#YesviteUserAll").scroll(function () {
+//     var scrollTop = $(this).scrollTop(); // Current scroll position
+//     var scrollHeight = $(this)[0].scrollHeight; // Total height of the scrollable area
+//     var elementHeight = $(this).height(); // Visible height of the element
 
-    // Check if the user has scrolled to the bottom
-    // if (scrollTop + elementHeight >= scrollHeight) {
-    //     busy = true;
-    //     offset = limit + offset;
-    //     console.log(offset);
-    //     $('#loader').css('display','block');
-    //     setTimeout(function () {
-    //         displayRecords(limit, offset,'all');
+//     // Check if the user has scrolled to the bottom
+//     // if (scrollTop + elementHeight >= scrollHeight) {
+//     //     busy = true;
+//     //     offset = limit + offset;
+//     //     console.log(offset);
+//     //     $('#loader').css('display','block');
+//     //     setTimeout(function () {
+//     //         displayRecords(limit, offset,'all');
 
-    //     }, 1000);
-    // }
-});
+//     //     }, 1000);
+//     // }
+// });
 
 $("#groupUsers").scroll(function () {
     console.log(busyyesvite);
@@ -6579,7 +6579,7 @@ function displayRecords(
         success: function (html) {
             var currentInviteCount = parseInt($("#currentInviteCount").val());
             const coins = $("#coins").val();
-            if (search == "") {
+            if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
             } else {
                 create_event_yesvite_scroll = true;
@@ -8775,7 +8775,10 @@ function updateTOP(categoryIndex) {
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
-
+        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
+        if (innerUserQnt && innerUserQnt >= 0) {
+            inputQty = inputQty + innerUserQnt;
+        }
         if (inputQty < requiredQty) {
             totalMissing += requiredQty - inputQty;
         } else if (inputQty > requiredQty) {
