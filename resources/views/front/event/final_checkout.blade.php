@@ -920,7 +920,7 @@
                 <h5>Event Created Successfully!
                     <span class="invite-count">0</span> Invites sent!
                 </h5>
-                <input type="hidden" id="created_event_id" value="{{encrypt($eventId)}}"/>
+                <!-- <input type="hidden" id="created_event_id" value="{{encrypt($eventId)}}"/> -->
 
                 <p>Order Party Supplies</p>
                 <div class="google-play" id="gift_registry_logo">
