@@ -522,11 +522,12 @@ class HomeController extends BaseController
     {
 
         $user  = Auth::guard( 'web')->user()->id;
-
+        if(isset($request->reset)&&$request->reset==1){
+            Session::forget('notification_event_ids');
+        }
 
         $notfication_data = getNotificationList();
         $eventList= getAllEventList($user);
-
         return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render(),"event_list"=>view('front.notification.search_filter_event', compact('eventList'))->render()]);
     }
 }

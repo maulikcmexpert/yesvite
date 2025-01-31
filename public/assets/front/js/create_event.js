@@ -143,7 +143,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-if (giftRegestryDataRaw!=null && giftRegestryDataRaw?.length > 0 ) {
+if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
         giftRegestryData?.forEach(function (item) {
@@ -218,7 +218,7 @@ $(document).ready(function () {
         const newEndOption = $("<option></option>")
             .val(currentTimeZone)
             .text(currentTimeZone)
-            .prop("selected", true);    
+            .prop("selected", true);
         $("#end-time-zone").append(newEndOption);
     }
 
@@ -1030,7 +1030,7 @@ function startTimePicker() {
             // }
             var picker = $(this).data("DateTimePicker");
             var currentValue = $(this).val();
-    
+
             if (currentValue) {
                 var currentMoment = moment(currentValue, "LT");
                 if (currentMoment.isValid()) {
@@ -1044,8 +1044,7 @@ function startTimePicker() {
         .on("dp.hide", function (e) {
             const selectedTime = e.date ? e.date.format("LT") : "";
             $(this).val(selectedTime);
-            $(this)
-            .data(selectedTime)
+            $(this).data(selectedTime);
             const selectedStartTime = e.date
                 ? e.date
                 : moment().hours(12).minutes(0).seconds(0);
@@ -1183,25 +1182,30 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var oldDate = $(ed).attr("data-isDate");
-    $("#event-date").daterangepicker(
-        {
-            autoUpdateInput: false,
-            locale: {
-                format: "MM/DD/YYYY",
-            },
-            showDropdowns: false,
-            startDate: moment().startOf("month"),
-            // endDate: moment().endOf("month"),
-            // minDate: moment().add(1, 'days'),
-            minDate: moment(),
-            // alwaysShowCalendars: true, // Keep the calendar visible
-            maxSpan: { days: 2 },
-            minSpan: { days: 1 },
-            singleDatePicker: false, // We will enforce single selection manually
-
+    $('#event-date').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            format: "MM/DD/YYYY",
         },
-
-        function (start, end, label) {
+        showDropdowns: false,
+        startDate: moment().startOf("month"),
+        minDate: moment(),
+        maxSpan: { days: 2 },
+        minSpan: { days: 1 },
+        singleDatePicker: false, // Start with range picker
+        isInvalidDate: function(date) {
+            return date.isBefore(moment(), 'day'); // Disable past dates
+        },
+        // Event to handle Apply button enable/disable
+        applyButtonClasses: 'btn-primary', // Set your button class as needed
+    }, function (start, end, label) {
+        if (start.isSame(end, 'day')) {
+            // Single date selected
+            $('#apply-button').prop('disabled', false); // Enable Apply button
+        } else if (start.isBefore(end)) {
+            // Multiple dates selected
+            $('#apply-button').prop('disabled', false); // Enable Apply button
+        }
             // const isDate = $(this)  // Get the data attribute inside the callback
             if (start.diff(end, "days") === 0) {
                 end = start;
@@ -3297,96 +3301,96 @@ $(document).on("click", "#save_activity_schedule", function () {
     //     // toggleSidebar();
     // });
     var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
-    let isendtime =0;
-    let istrue =0;
+    let isendtime = 0;
+    let istrue = 0;
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
         // showAlert = false;
-        isendtime=isendtime +1;
+        isendtime = isendtime + 1;
         var activityWrappers = $(this).find(".activity-main-wrp");
         if (activityWrappers.length === 0) {
             activityendtime = null; // Set to null if no .activity-main-wrp found
         } else {
-        $(this)
-            .find(".activity-main-wrp")
-            .each(function (index) {
-                istrue = istrue+1;
-                var id = $(this).data("id");
-                var description = $(this)
-                    .find('input[name="description[]"]')
-                    .val();
-                var startTime = $(this)
-                    .find('input[name="activity-start-time[]"]')
-                    .val();
-                var endTime = $(this)
-                    .find('input[name="activity-end-time[]"]')
-                    .val();
-                activityendtime = endTime;
+            $(this)
+                .find(".activity-main-wrp")
+                .each(function (index) {
+                    istrue = istrue + 1;
+                    var id = $(this).data("id");
+                    var description = $(this)
+                        .find('input[name="description[]"]')
+                        .val();
+                    var startTime = $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .val();
+                    var endTime = $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .val();
+                    activityendtime = endTime;
 
-                $("#desc-error-" + id).text("");
-                $("#start-error-" + id).text("");
-                $("#end-error-" + id).text("");
+                    $("#desc-error-" + id).text("");
+                    $("#start-error-" + id).text("");
+                    $("#end-error-" + id).text("");
 
-                if (description == "") {
-                    $("#desc-error-" + id)
-                        .text("Description is required")
-                        .css("color", "red");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="description[]"]')
-                    .on("input", function () {
-                        if ($(this).val() != "") {
-                            $("#desc-error-" + id).text("");
-                        }
-                    });
+                    if (description == "") {
+                        $("#desc-error-" + id)
+                            .text("Description is required")
+                            .css("color", "red");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="description[]"]')
+                        .on("input", function () {
+                            if ($(this).val() != "") {
+                                $("#desc-error-" + id).text("");
+                            }
+                        });
 
-                if (startTime == "") {
-                    $("#start-error-" + id).text("Start time is required");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="activity-start-time[]"]')
-                    .on("change", function () {
-                        if ($(this).val() != "") {
-                            $("#start-error-" + id).text("");
-                        }
-                    });
+                    if (startTime == "") {
+                        $("#start-error-" + id).text("Start time is required");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .on("change", function () {
+                            if ($(this).val() != "") {
+                                $("#start-error-" + id).text("");
+                            }
+                        });
 
-                if (endTime == "") {
-                    $("#end-error-" + id).text("End time is required");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="activity-end-time[]"]')
-                    .on("change", function () {
-                        if ($(this).val() != "") {
-                            $("#end-error-" + id).text("");
-                        }
-                    });
+                    if (endTime == "") {
+                        $("#end-error-" + id).text("End time is required");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .on("change", function () {
+                            if ($(this).val() != "") {
+                                $("#end-error-" + id).text("");
+                            }
+                        });
 
-                var activity = {
-                    activity: description,
-                    "start-time": startTime,
-                    "end-time": endTime,
-                };
-                activities[dataId].push(activity);
+                    var activity = {
+                        activity: description,
+                        "start-time": startTime,
+                        "end-time": endTime,
+                    };
+                    activities[dataId].push(activity);
 
-                if (
-                    previousEndTime &&
-                    previousEndTime > startTime &&
-                    !showAlert
-                ) {
-                    toastr.error("Please enter proper time");
-                    showAlert = true;
-                    // return;
-                } else {
-                    showAlert = false;
-                }
-                previousEndTime = endTime;
-            });
+                    if (
+                        previousEndTime &&
+                        previousEndTime > startTime &&
+                        !showAlert
+                    ) {
+                        toastr.error("Please enter proper time");
+                        showAlert = true;
+                        // return;
+                    } else {
+                        showAlert = false;
+                    }
+                    previousEndTime = endTime;
+                });
         }
     });
 
@@ -3398,19 +3402,18 @@ $(document).on("click", "#save_activity_schedule", function () {
     // }
     console.log({ activityendtime });
 
-    if(activityendtime!=null){
+    if (activityendtime != null) {
         let lastendtime = convertTo24Hour(end_time);
         let lastScheduleEndtime = convertTo24Hour(activityendtime);
-    
+
         console.log(lastendtime);
         console.log(lastScheduleEndtime);
-        
+
         if (lastScheduleEndtime > lastendtime) {
             toastr.error("Please enter proper time");
             return;
         }
     }
-   
 
     if (isValid == 0) {
         if (total_activities >= 1) {
@@ -3595,7 +3598,7 @@ $(document).on("click", "#close_createEvent", function () {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
-        
+
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -3636,11 +3639,10 @@ $(document).on("click", "#close_createEvent", function () {
             },
         });
     } else {
-        
         // eventData.step = "1";
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
-        
+
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -4063,10 +4065,10 @@ function savePage1Data(close = null) {
         // $("#CheckCuurentStep").val("1");
 
         // final_step = 3;
-    }else{
-              eventData.event_name = event_name;
-              eventData.hosted_by = hostedby;
-              eventData.event_date = event_date
+    } else {
+        eventData.event_name = event_name;
+        eventData.hosted_by = hostedby;
+        eventData.event_date = event_date;
     }
 
     // eventData.page1 = {
@@ -7272,10 +7274,10 @@ function get_co_host_list(
         .done(function (data) {
             console.log(data);
 
-            if(search_name==""){
-                create_co_event_yesvite_scroll=false
-            }else{
-                create_co_event_yesvite_scroll=true
+            if (search_name == "") {
+                create_co_event_yesvite_scroll = false;
+            } else {
+                create_co_event_yesvite_scroll = true;
             }
             if (data.view == "" && data.scroll == "false") {
                 $(".list_all_invited_user").html("No Data Found");
@@ -7591,7 +7593,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
 let previousScrollTop = 0;
 $("#select_event_cohost").on("scroll", function () {
     // alert();
-    if (cohostbusy||create_co_event_yesvite_scroll) return;
+    if (cohostbusy || create_co_event_yesvite_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
@@ -8170,7 +8172,7 @@ $(document).on("click", ".save-slider-image", function () {
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
-                eventId:eventId,
+                eventId: eventId,
                 imageSources: imageSources,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
@@ -8242,7 +8244,6 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage3Data();
     savePage4Data();
 
-    
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
 
@@ -8253,11 +8254,11 @@ $(document).on("click", ".edit_checkout", function (e) {
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-        $(".step_1").css("display", "none");
-        $(".step_2").css("display", "none");
-        $(".step_3").css("display", "none");
-        $(".step_4").css("display", "none");
-        $(".step_final_checkout").show();
+    $(".step_1").css("display", "none");
+    $(".step_2").css("display", "none");
+    $(".step_3").css("display", "none");
+    $(".step_4").css("display", "none");
+    $(".step_final_checkout").show();
 
     // handleActiveClass(this);
     eventData.isdraft = "0";
@@ -8284,7 +8285,7 @@ $(document).on("click", ".edit_checkout", function (e) {
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
-                    window.location.href="profile";
+                    window.location.href = "profile";
                 }
                 window.location.href = base_url + "home";
             }
@@ -8302,15 +8303,13 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
-            if(imgSrc1!=""){
+            if (imgSrc1 != "") {
                 $(".photo-edit-delete-1").show();
-              
             }
-            if(imgSrc2!=""){
+            if (imgSrc2 != "") {
                 $(".photo-edit-delete-2").show();
-                
             }
-            if(imgSrc3!=""){
+            if (imgSrc3 != "") {
                 $(".photo-edit-delete-3").show();
             }
             console.log(eventData.slider_images);
@@ -8679,6 +8678,45 @@ function step4open() {
 }
 var remainingCategoryCount = 0;
 var remainingCategoryCountn = 0;
+function updateTOP(categoryIndex) {
+    var list = document.getElementsByClassName("list-slide-" + categoryIndex);
+
+    if (list.length === 0) return;
+
+    var accordions = list[0].getElementsByClassName("accordion-flush");
+    var totalItems = accordions.length;
+
+    let totalMissing = 0;
+    let totalOver = 0;
+
+    for (let i = 0; i < totalItems; i++) {
+        let categoryItem = accordions[i];
+
+        // Get the required quantity
+        let requiredQtyInput = categoryItem.querySelector(
+            ".category-item-quantity"
+        );
+        let requiredQty = requiredQtyInput
+            ? parseInt(requiredQtyInput.value)
+            : 0;
+
+        // Get the current user input quantity
+        let inputQtyInput = categoryItem.querySelector(".input-qty");
+        let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
+
+        if (inputQty < requiredQty) {
+            totalMissing += requiredQty - inputQty;
+        } else if (inputQty > requiredQty) {
+            totalOver += inputQty - requiredQty;
+        }
+    }
+
+    console.log("Total Missing Items:", totalMissing);
+    console.log("Total Over Items:", totalOver);
+
+    return { totalMissing, totalOver };
+}
+
 function update_self_bring(
     that,
     innerUserQnt,
@@ -8808,79 +8846,6 @@ function update_self_bring(
             $("#deleteBring-" + categoryItemKey + "-" + categoryIndexKey).data(
                 "extraquantity"
             );
-            // if( categoryItemQuantity < quantity || categoryItem == 0 ){
-
-            //    if(categoryItem == 0){
-            //         $(".extra-category-h6-" + categoryIndexKey).show();
-            //         $("#extra-category-" + categoryIndexKey).show();
-            //         var categoryItemextra = parseInt(
-            //             $(".extra-category-h6-" + categoryIndexKey).text()
-            //         );
-            //         if (type == undefined){
-            //             if(remaining_count  > 0){
-            //                 remainingCategoryCountn = remainingCategoryCountn - remaining_count;
-            //                 $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
-            //             }
-            //             remainingCategoryCount = categoryItem + categoryItemQuantity -  innerUserQnt;
-            //             $("#missing-category-" + categoryIndexKey).text(remainingCategoryCount);
-            //         }
-            //         // else if(type == "plus") {
-            //         //     remainingCategoryCountn = categoryItemextra + 1
-            //         //     $("#extra-category-" + categoryIndexKey).text(extra);
-            //         // }else{
-            //         //     remainingCategoryCountn = categoryItemextra - 1;
-            //         //     $("#extra-category-" + categoryIndexKey).text(extra);
-            //         // }
-            //         // if(remainingCategoryCountn == 0){
-            //         //     $(".extra-category-h6-" + categoryIndexKey).hide();
-            //         //     $("#extra-category-" + categoryIndexKey).hide();
-            //         // }
-
-            //         // if(remainingCategoryCountn >=0){
-            //         //     $("#extra-category-" + categoryIndexKey).text(remainingCategoryCountn);
-            //         // }
-            //         // if(remaining_count  > 0){
-            //         //     $("#missing-category-" + categoryIndexKey).text(0);
-            //         //     var svg =
-            //         //     '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" /></svg>';
-            //         //     $(".missing-category-svg-" + categoryIndexKey).html(svg);
-            //         //     $(".missing-category-h6-" + categoryIndexKey).css(
-            //         //         "color",
-            //         //         "#E20B0B"
-            //         //     );
-            //         // }
-            //     }else{
-            //     if (type == undefined) {
-            //         if (remaining_count > 0) {
-            //             remainingCategoryCountn =
-            //                 remainingCategoryCountn - remaining_count;
-            //             $("#extra-category-" + categoryIndexKey).text(
-            //                 remainingCategoryCountn
-            //             );
-            //         }
-            //         remainingCategoryCount =
-            //             categoryItem + categoryItemQuantity - innerUserQnt;
-            //     }
-            //     // else if (type == "plus") {
-            //     //     remainingCategoryCount = categoryItem - 1;
-            //     // } else {
-            //     //     remainingCategoryCount = categoryItem + 1;
-            //     // }
-            //     if(remainingCategoryCountn == 0){
-            //         $(".extra-category-h6-" + categoryIndexKey).hide();
-            //         $("#extra-category-" + categoryIndexKey).hide();
-            //     }
-            //     $("#missing-category-" + categoryIndexKey).text(
-            //         remainingCategoryCount
-            //     );
-
-            //     }
-            // if(remainingCategoryCount <0){
-            //     $("#extra-category-" + categoryIndexKey).text(remainingCategoryCount);
-            // }else{
-            // }
-
-            // document.getElementById("#missing-category-" + categoryIndexKey).text(response);
 
             if (remainingCategoryCount == 0) {
                 // if (response == 0) {
@@ -8989,6 +8954,7 @@ function update_self_bring(
                     "#danger-svg-" + categoryItemKey + "-" + categoryIndexKey
                 ).show();
             }
+            updateTOP(categoryIndexKey);
 
             // console.log($('#lumpia-collapseOne'+'-'+categoryItemKey+'-'+categoryIndexKey).parent().parent().find('.accordion-item').html());
         },
