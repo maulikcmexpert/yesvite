@@ -6737,7 +6737,8 @@ $(document).on("click", ".invite_group_member", function () {
         }else{
             const id = $(this).val();
             delete_invited_user(id, '0');
-            $('user-'+id).remove();
+            $("#user-" + id).remove();
+            $(".user_id-" + id).remove();
         }
     });
     $.ajax({
