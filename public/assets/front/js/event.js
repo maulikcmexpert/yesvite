@@ -695,7 +695,6 @@ $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
     $('.notification-all-event-wrp').removeClass('d-none');
     $('.notification-back').removeClass('d-none');
-    $('#home_loader').css('display','block');
   
   })
 
@@ -1050,7 +1049,7 @@ $(document).on('input','#search_filter_event',function(){
                       });
 
 });
-$(document).on('input','.notification-toggle-menu',function(){
+$(document).on('click','.notification-toggle-menu',function(){
 
     var search_event=$(this).val();
     $('#home_loader').css('display','block');
