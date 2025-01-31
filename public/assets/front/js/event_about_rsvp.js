@@ -11,7 +11,7 @@ $(document).ready(function() {
             $('input[name="kids"]').val(0);
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
-        } else {
+        }  if (rsvpStatus == "1") {
             $('input[name="adults"]').val(0);
             $('input[name="kids"]').val(0);
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
