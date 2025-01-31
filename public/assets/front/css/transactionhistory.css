@@ -329,6 +329,20 @@
     margin-top: 0px !important;
     border-radius: 8px !important;
     background-image: none !important;
+    position:relative;
+}
+
+.bulk-credit-options-listing-right .form-check-input:before{
+    content: "\f00c";
+    font-family: "FONTAWESOME";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    line-height: normal;
+    color:#fff;
+    display:none;
 }
 
 .bulk-credit-options-listing-right .form-check-input:focus{
@@ -340,6 +354,11 @@
     border-color: #2DA9FC !important;
 
 }
+
+.bulk-credit-options-listing-right .form-check-input:checked:before{
+    display:block;
+} 
+
 .bulk-credit-options-listing-right .form-check{
     display:inline-flex;
     justify-content: center;
