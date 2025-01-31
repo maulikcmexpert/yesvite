@@ -18,7 +18,8 @@
           <!-- <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}"> -->
             <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-center-upcoming-events-card mb-3">
                 <div class="home-upcoming-events-card-left">
-                    <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-left-profile">
+                    <!-- <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-left-profile"> -->
+                    <div href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-left-profile">
                         <div class="home-upcoming-events-card-left-profile-img">
                             {{-- <img src="{{$events['host_profile']}}" class="lazy" alt=""> --}}
                             @if($events['host_profile'] != "")
@@ -39,7 +40,8 @@
                             <h3>{{$events['event_name']}}</h3>
                             <p>{{$events['host_name']}}<span><i class="fa-solid fa-circle"></i> {{$events['post_time']}}</span></p>
                         </div>
-                      </a>
+                      <!-- </a> -->
+                    </div>
                     <ul class="home-upcoming-events-card-left-detail">
                         @if($events['is_event_owner']==1)
                             <li><span>Hosting</span></li>
