@@ -572,7 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    {{dd($eventDetails['event_schedule'])}}
+                                                    {{-- {{dd($eventDetails['event_schedule'])}} --}}
                                                     @foreach ($eventDetails['event_schedule'] as $key => $schedule)
                                                         @php
                                                             if (
