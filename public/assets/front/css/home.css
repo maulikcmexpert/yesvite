@@ -311,7 +311,7 @@
 }
 
 .owl-carousel .owl-dots.disabled {
-    display: block !important;
+    display: flex !important;
 }
 
 .owl-carousel .owl-dots button {
