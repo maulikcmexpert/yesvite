@@ -132,90 +132,21 @@
                 </div>
                 <p class="pro-feacher">1 Credit = 1 Invite</p>
                 <div class="pro-event-box">
+                    @foreach($prices as $key => $price)
+                    @if(!$loop->last)
                     <div class="pro-evnet-data">
                         <div class="pro-evnet-list">
                             <div>
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>15 Credits</h5>
+                                    <h5>{{ $price['coins'] }} Credits</h5>
                                 </div>
-                                <span>$1.39 per credit</span>
+                                <span>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</span>
                             </div>
-                            <h6 class="ms-auto">$21.00</h6>
+                            <h6 class="ms-auto">${{ number_format($price['price'], 2) }}</h6>
                         </div>
                     </div>
-                    <div class="pro-evnet-data">
-                        <div class="pro-evnet-list">
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>30 Credits</h5>
-                                </div>
-                                <span>$1.29 per credit</span>
-                            </div>
-                            <h6 class="ms-auto">$39.00</h6>
-                        </div>
-                    </div>
-                    <div class="pro-evnet-data">
-                        <div class="pro-evnet-list">
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>50 Credits</h5>
-                                </div>
-                                <span>$1.19 per credit</span>
-                            </div>
-                            <h6 class="ms-auto">$60.00</h6>
-                        </div>
-                    </div>
-                    <div class="pro-evnet-data">
-                        <div class="pro-evnet-list">
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>100 Credits</h5>
-                                </div>
-                                <span>$1.00 per credit</span>
-                            </div>
-                            <h6 class="ms-auto">$100.00</h6>
-                        </div>
-                    </div>
-                    <div class="pro-evnet-data">
-                        <div class="pro-evnet-list">
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>200 Credits</h5>
-                                </div>
-                                <span>$0.79 per credit</span>
-                            </div>
-                            <h6 class="ms-auto">$159.00</h6>
-                        </div>
-                    </div>
-                    <div class="pro-evnet-data">
-                        <div class="pro-evnet-list">
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>500 Credits</h5>
-                                </div>
-                                <span>$0.40 per credit</span>
-                            </div>
-                            <h6 class="ms-auto">$200.00</h6>
-                        </div>
-                    </div>
-                    <div class="pro-evnet-data">
-                        <div class="pro-evnet-list">
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>750 Credits</h5>
-                                </div>
-                                <span>$0.30 per credit</span>
-                            </div>
-                            <h6 class="ms-auto">$224.99</h6>
-                        </div>
-                    </div>
+                    @else
                     <div class="pro-evnet-data saving-pro">
                         <div class="deal-wrp">
                             <p>80% Saving over the 15 pack</p>
@@ -225,13 +156,15 @@
                             <div>
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset('assets') }}/coin.svg" alt="coin">
-                                    <h5>1000 Credits</h5>
+                                    <h5>{{ $price['coins'] }} Credits</h5>
                                 </div>
-                                <span>$0.25 per credit</span>
+                                <span>${{ number_format($price['price'] / $price['coins'], 2) }} per credit</span>
                             </div>
-                            <h6 class="ms-auto">$250</h6>
+                            <h6 class="ms-auto">${{ number_format($price['price'], 2) }}</h6>
                         </div>
                     </div>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -1302,7 +1235,7 @@
                                 data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
                                 <a href="#" class="collection-card card-blue">
                                     <div class="card-img">
-                                        <img src="{{ asset('uploads/images/' . $image->filled_image) }}"
+                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                             alt="shower-card">
                                     </div>
                                     <h4>{{ $category->category_name }}</h4>
