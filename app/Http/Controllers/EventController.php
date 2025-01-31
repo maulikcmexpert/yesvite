@@ -471,6 +471,7 @@ class EventController extends BaseController
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $potluckCategory['totalItem'] = $totalItem;
+                        $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                     // Update session after the loop    
