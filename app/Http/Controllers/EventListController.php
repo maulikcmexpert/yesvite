@@ -2653,7 +2653,11 @@ if ($rsvpSent != null) {
         
         foreach ($eventData as $val) {
     
-            $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
+            if($eventName!=""){
+                $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
+            }else{
+                $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->get();
+            }
             foreach ($eventDatas as $vals) {
                 $eventDetail['id'] = $vals->id;
                 $eventDetail['event_name'] = $vals->event_name;
