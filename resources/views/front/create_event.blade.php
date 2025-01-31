@@ -1775,7 +1775,6 @@
                                                                      class="{{ $fontColorUser }} add-item-under-text me-auto">
                                                                      {{ $initialsUser }} </h5>
                                                                 <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
-
                                                                  </h5>
                                                                 @endif
                                                                 @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])

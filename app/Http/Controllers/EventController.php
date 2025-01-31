@@ -2867,7 +2867,7 @@ class EventController extends BaseController
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('desgin_slider');
-
+        dd(session('category'));
         // dd(session('user_ids'),session('contact_ids'));
         $conatctId = session('contact_ids');
         $potluck = session('category');
