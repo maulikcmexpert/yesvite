@@ -32,13 +32,14 @@ $(document).ready(function() {
         // Find the closest input field and increment its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
-        input.val(currentValue + 1); // Increment by 1
         if (currentValue > 0) {
             $('#rsvp_yes_no_btn').prop('disabled', false);
             // input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }else{
             $('#rsvp_yes_no_btn').prop('disabled', true);
         }
+        input.val(currentValue + 1); // Increment by 1
+
 
         // Trigger validation if needed
         // validateForm();
@@ -49,12 +50,13 @@ $(document).ready(function() {
         // Find the closest input field and decrement its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
-        if (currentValue > 0) {
-            input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
-        }
         if(currentValue==0){
             $('#rsvp_yes_no_btn').prop('disabled', true);
         }
+        if (currentValue > 0) {
+            input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
+        }
+
 
         // Trigger validation if needed
         // validateForm();
