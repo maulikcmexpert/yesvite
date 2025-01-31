@@ -17,6 +17,10 @@ main {
   border-radius: 50%;
 }
 
+.hosted-by-info-img img{
+  border-radius: 50%;
+}
+
 .hosted-by-info-img {
   border-radius: 50%;
 }
@@ -161,7 +165,7 @@ main {
   line-height: normal;
   color: var(--pink);
   margin-bottom: 0px;
-  height: 29px;
+  /* height: 29px; */
 }
 
 .hosted-by-date-time-left {

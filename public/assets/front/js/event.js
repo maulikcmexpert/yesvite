@@ -551,10 +551,6 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
 
 $(document).on('click','.all-event-filter-reset',function(){
     // alert();
-    $(".hosting_chk").prop('checked', false);
-    $(".invited_to_chk").prop('checked', false);
-    $('.need_to_rsvp_chk').prop('checked', false);
-
     $.ajax({
                 url: `${base_url}reset_notification_eventId`,
                 type: 'GET',        
@@ -565,6 +561,10 @@ $(document).on('click','.all-event-filter-reset',function(){
                   toastr.error('Something went wrong. Please try again!');
                 },
               });
+
+    $(".hosting_chk").prop('checked', false);
+    $(".invited_to_chk").prop('checked', false);
+    $('.need_to_rsvp_chk').prop('checked', false);
 });
 
 $(document).on("click",".event_nav",function () {
