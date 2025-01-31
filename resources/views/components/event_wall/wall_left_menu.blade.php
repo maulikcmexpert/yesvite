@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{dd($eventDetails)}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -36,7 +36,7 @@
 
         </div>
     </div>
-    {{    dd($eventDetails)}}
+
     <div class="hosted-by-template-slider">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
