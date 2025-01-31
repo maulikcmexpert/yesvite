@@ -467,7 +467,7 @@ class EventController extends BaseController
                             }
                         }
 
-                        $remainingQnt =  $categoryQuantity - $remainingQnt;
+                        $remainingQnt =  $remainingQnt - $categoryQuantity;
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $potluckCategory['totalItem'] = $totalItem;
@@ -1077,7 +1077,7 @@ class EventController extends BaseController
         }
         Session::save();
         return response()->json([
-            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
+            'view' => view('front.event.gift_registry.view_gift_registry', compact('registry','eventId'))->render(),
             'success' => true,
             'is_registry' => $gift,
             'event_id' => $eventId

@@ -96,6 +96,9 @@ if ($hostView) {
                 @if (!empty($guestArray))
                     @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
+                                @if ($index == 7)
+                                @break
+                            @endif
                             @php
                                 $user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
@@ -103,9 +106,7 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-
-                            <!-- Hide guests after index 6 (only show first 7 initially) -->
-                            <li class="guests-listing-info contact contactslist {{ $index >= 7 ? 'hidden-guest' : '' }}" data-guest-id="{{ $guest['id'] }}">
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}"  data-index="{{ $index }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -139,7 +140,6 @@ if ($hostView) {
                 @endif
             </div>
         </div>
-
 
     </div>
 
@@ -253,12 +253,18 @@ if ($hostView) {
 </div>
 <script>
 document.getElementById("seeAllBtn").addEventListener("click", function() {
-    // Show all hidden guests
-    document.querySelectorAll(".hidden-guest").forEach(function(guest) {
-        guest.style.display = "block";
-    });
 
-    // // Hide the "See All" button after clicking
-    // this.style.display = "none";
+    const guests = document.querySelectorAll(".guests-listing-info");
+
+// Show all guests (index >= 7)
+guests.forEach(function(guest) {
+    const index = parseInt(guest.getAttribute("data-index"));
+    if (index >= 7) {
+        guest.style.display = "block";  // Show the guest
+    }
 });
+
+})
+
+
 </script>

@@ -48,7 +48,7 @@
         <div class="all-events-month-wise-support" data-month="{{$pastEvent['event_month']}}">
             <div class="home-center-upcoming-events-card all-event-{{ $colorClass }} mb-3">
                 <div class="home-upcoming-events-card-left">
-                    <a href="" class="home-upcoming-events-card-left-profile">
+                    <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" class="home-upcoming-events-card-left-profile">
                         <div class="home-upcoming-events-card-left-profile-img">
                             {{-- <img src="{{$pastEvent['host_profile']}}" class="lazy" alt=""> --}}
                         @if($pastEvent['host_profile'] != "")
@@ -70,20 +70,22 @@
                             <p class="host-name-{{$colorClass}}">{{$pastEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$pastEvent['post_time']}}</span></p>
                         </div>
                       </a>
-                    <ul class="home-upcoming-events-card-left-detail">
-                        @if($pastEvent['is_event_owner']==1)
-                            <li><span>Hosting</span></li>
-                        @else
-                                @if($pastEvent['rsvp_status'] == '1')
-                                    <li><span>Guest : </span> RSVP - Yes</li>
-                                @elseif($pastEvent['rsvp_status'] == '2')
-                                    <li><span>Guest : </span> RSVP - No</li>
-                                @else
-                                    <li><span>Guest : </span> RSVP - Pending</li>
-                                @endif
-                        @endif
-                    <li><span>{{$pastEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$pastEvent['event_day']}}</span> {{$pastEvent['start_time']}}</li>
-                    </ul>
+                      <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" >
+                        <ul class="home-upcoming-events-card-left-detail">
+                            @if($pastEvent['is_event_owner']==1)
+                                <li><span>Hosting</span></li>
+                            @else
+                                    @if($pastEvent['rsvp_status'] == '1')
+                                        <li><span>Guest : </span> RSVP - Yes</li>
+                                    @elseif($pastEvent['rsvp_status'] == '2')
+                                        <li><span>Guest : </span> RSVP - No</li>
+                                    @else
+                                        <li><span>Guest : </span> RSVP - Pending</li>
+                                    @endif
+                            @endif
+                        <li><span>{{$pastEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$pastEvent['event_day']}}</span> {{$pastEvent['start_time']}}</li>
+                        </ul>
+                    </a>
                     <div class="home-upcoming-events-card-left-foot disable-class">
                         <div class="home-upcoming-events-card-rsvp-data">
                             <h6 class="card-rsvp-done"><i class="fa-regular fa-circle-check"></i> {{$pastEvent['total_accept_event_user']}}</h6>
@@ -141,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="" class="home-upcoming-events-card-right">
+                <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" class="home-upcoming-events-card-right">
                   <img src="{{$pastEvent['event_images']}}" loading="lazy" alt="">
               </a>
             </div>
