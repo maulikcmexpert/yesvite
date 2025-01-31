@@ -1516,7 +1516,7 @@
                                                             </div>
                                                         </div>
                                                         <input type="hidden"
-                                                                            class="innerUserQnt-{{$itemkey}}"
+                                                                            class="innerUserQnt-{{ $itemkey }}-{{ $index }}"
                                                                             value="{{ $items['innerUserQnt'] }}">
                                                         <div class="ms-auto">
 
