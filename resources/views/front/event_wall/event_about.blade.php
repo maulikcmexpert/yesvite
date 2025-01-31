@@ -595,6 +595,8 @@
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
                                                                     <span>{{ $schedule['start_time'] }}
                                                                         @if (!empty($schedule['start_time']))
+                                                                          @endif
+                                                                            @if (!empty($schedule['end_time']))
                                                                             -
                                                                             {{ $schedule['end_time'] }}
                                                                         @endif
@@ -2094,22 +2096,22 @@
                                     <div>
                                         <h6>Adults</h6>
                                         <div class="qty-container ms-auto">
-                                            <button class="btn-minus" type="button"><i
+                                            <button class="btn-minus rsvp_status_btn" type="button"><i
                                                     class="fa fa-minus"></i></button>
-                                            <input type="number" name="adults"
+                                            <input type="number" id="rsvp_status_adults" name="adults"
                                                 value="{{ $rsvpSent['adults'] ?? 0 }}" class="input-qty">
-                                            <button class="btn-plus" type="button"><i
+                                            <button class="btn-plus rsvp_plus" type="button"><i
                                                     class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div>
                                         <h6>Kids</h6>
                                         <div class="qty-container ms-auto">
-                                            <button class="btn-minus" type="button"><i
+                                            <button class="btn-minus rsvp_status_btn" type="button"><i
                                                     class="fa fa-minus"></i></button>
-                                            <input type="number" name="kids"
+                                            <input type="number" id="rsvp_status_kids" name="kids"
                                                 value="{{ $rsvpSent['kids'] ?? 0 }}" class="input-qty">
-                                            <button class="btn-plus" type="button"><i
+                                            <button class="btn-plus rsvp_plus" type="button"><i
                                                     class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
@@ -2143,7 +2145,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
+                            <button type="submit" id="rsvp_yes_no_btn" class="btn btn-secondary" data-bs-dismiss="modal">Send</button>
                         </div>
                     </form>
                 </div>

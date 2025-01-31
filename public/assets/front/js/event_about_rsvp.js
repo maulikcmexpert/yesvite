@@ -5,10 +5,10 @@ $(document).ready(function() {
     // Listen for changes in RSVP status (YES/NO)
     $('input[name="rsvp_status"]').change(function () {
         var rsvpStatus = $(this).val();
-console.log(rsvpStatus);
+        console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
+            $('input[name="adults"]').val('');
+            $('input[name="kids"]').val('');
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         }  if (rsvpStatus == "1") {
@@ -75,8 +75,6 @@ console.log(adults,kids);
         $('button[type="submit"]').prop('disabled', false);
     } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
         $('button[type="submit"]').prop('disabled', false);
-    } else {
-        $('button[type="submit"]').prop('disabled', true);
     }
 }
 
