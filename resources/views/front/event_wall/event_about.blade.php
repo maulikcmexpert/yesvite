@@ -565,8 +565,8 @@
                                             {{-- {{ dd($eventDetails['event_schedule']) }} --}}
                                             <div class="schedule-wrp cmn-card">
                                                 <h4 class="title">Schedule</h4>
-                                                <span class="timing"> {{ date('h:i A', $overallStartTime) }} -
-                                                    {{ date('h:i A', $overallEndTime) }}</span>
+                                                <span class="timing"> {{ $schedule['start_time'] }} -
+                                                    {{ $schedule['end_time'] }}</span>
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">
