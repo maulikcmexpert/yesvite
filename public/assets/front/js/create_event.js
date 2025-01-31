@@ -8712,7 +8712,7 @@ function updateTOP(categoryIndex) {
             totalOver += inputQty - requiredQty;
         }
     }
-    $("#missing-category-0").text(totalMissing);
+    $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {
         // if (response == 0) {
