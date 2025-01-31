@@ -1043,9 +1043,14 @@ display:none;}
     display: flex !important;
 }
 
-.rsvp-slider.owl-carousel .owl-dots{
+/* .rsvp-slider.owl-carousel .owl-dots{
+    display: none !important;
+} */
+
+.rsvp-slider.owl-carousel .owl-dots.disabled{
     display: none !important;
 }
+
 
 .rsvp-slider.owl-carousel.slider-count .owl-nav{
     top: 45% !important;
