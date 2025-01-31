@@ -2113,6 +2113,7 @@
     background: #E03137;
     border-radius: 50px;
 }
+    
 
 .home-latest-draf-card .progress-bar__wrapper.green progress[value]::-webkit-progress-value {
     background: #23AA26 !important;
