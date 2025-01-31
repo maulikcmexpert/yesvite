@@ -1774,12 +1774,11 @@ function sendSMSForApplication($receiverNumber, $message)
             'messagingServiceSid' => 'MGcebfc07e4d04619be31576c5ad1f906d', // Use Messaging Service SID
             'body' => $message
         ]);
-        echo "message send";
-        die;
+
         return  true;
     } catch (Exception $e) {
 
-        dd($e);
+
         return  false;
     }
 }
