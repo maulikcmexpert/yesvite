@@ -2098,7 +2098,7 @@
     overflow: hidden; /* Prevents visual glitches */
 }
 
-/* .home-latest-draf-card progress[value]::-webkit-progress-bar {
+.home-latest-draf-card progress[value]::-webkit-progress-bar {
     background-color: #F1F5F9;
     border-radius: 50px;
 }
@@ -2110,7 +2110,7 @@
 }
 
 .home-latest-draf-card progress[value]::-moz-progress-bar {
-    background: #E03137;
+    background: #E03137 !important;
     border-radius: 50px;
 }
 
@@ -2118,21 +2118,21 @@
     background: #23AA26 !important;
 }
 .home-latest-draf-card .progress-bar__wrapper.green progress[value]::-moz-progress-bar {
-    background: #23AA26;
+    background: #23AA26 !important;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-webkit-progress-value {
     background: #FCCD1E !important;
 }
 .home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-moz-progress-bar {
-    background: #FCCD1E;
+    background: #FCCD1E !important;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-webkit-progress-value {
     background: #3BBEE8 !important;
 }
 .home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-moz-progress-bar {
-    background: #3BBEE8;
+    background: #3BBEE8 !important;
 }
 
 .home-latest-draf-card .progress-bar__wrapper h4 {
@@ -2163,7 +2163,7 @@
     padding: 4px 8px;
     border-radius: 100px;
     position: relative;
-} */
+}
 
 .home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting::before {
     content: "";
