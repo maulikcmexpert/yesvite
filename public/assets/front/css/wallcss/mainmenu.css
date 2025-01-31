@@ -2096,6 +2096,7 @@
     background-color: #F1F5F9;
     transition: width 300ms ease;
     overflow: hidden; /* Prevents visual glitches */
+    position: relative;
 }
 
 .home-latest-draf-card progress[value]::-webkit-progress-bar {
