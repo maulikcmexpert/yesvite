@@ -111,10 +111,8 @@ $(document).on('click', '.save-btn', function () {
                         </div>`;
                     guestContainer.find('.check_status').append(successNoHtml); // Append to the right section
 
-                    // Decrease totals if a guest is marked as NO
-                    totalAttending--;
-                    totalAdults -= adultsCount;
-                    totalKids -= kidsCount;
+
+
                 } else if (response.rsvp_status == null) {
                     // If the guest has no reply
                     const noReplyHtml = `
