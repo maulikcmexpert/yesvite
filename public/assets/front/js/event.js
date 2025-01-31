@@ -38,7 +38,9 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
                 $('.upcoming_event_' + response.event_id).fadeOut(500, function() {
                     $(this).remove();
                 });
-                toastr.success("Event Cancelled successfully");
+                if (!$('.toast').length) {
+                    toastr.success("Event Cancelled successfully");
+                }
                 // $('#cancelevent').modal('hide');
                 window.location.reload();
                 $('#home_loader').css('display','none');
