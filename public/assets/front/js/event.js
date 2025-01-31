@@ -796,17 +796,18 @@ $(document).on('change', 'input[data-name="all"]', function () {
     var isChecked = $(this).is(':checked');
     $("input[name='activityTypes[]']").prop('checked', isChecked);
 });
-$(document).on('change', 'input[name="selectedEvents[]"]', function () {
+$(document).on('change', '.selectedEvents', function () {
     var eventname=$(this).data('event_name');
-    var eventid=$(this).data('event_id');
+    var event_id=$(this).data('event_id');
+
     if ($(this).is(':checked')) {
-        storefilterdata(1,eventid);
+        storeFilterData(1,event_id);
         $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
     } else {
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
-function storefilterdata(status,event_id){
+function storeFilterData(status,event_id){
     $.ajax({
         url: `${base_url}event/store_notification_filter`,
         type: 'GET',        
