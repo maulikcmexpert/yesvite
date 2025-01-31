@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     // Listen for changes in the number of adults and kids
     $('input[name="adults"], input[name="kids"]').on('input', function() {
-        validateForm();
+        // validateForm();
     });
 
     // Listen for the click event on the "+" button for adults
@@ -33,6 +33,12 @@ $(document).ready(function() {
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
         input.val(currentValue + 1); // Increment by 1
+        if (currentValue > 0) {
+            $('#rsvp_yes_no_btn').prop('disabled', false);
+            // input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
+        }else{
+            $('#rsvp_yes_no_btn').prop('disabled', true);
+        }
 
         // Trigger validation if needed
         // validateForm();
@@ -46,7 +52,9 @@ $(document).ready(function() {
         if (currentValue > 0) {
             input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }
-            $('#rsvp_yes_no_btn').prop('disabled', false);
+        if(currentValue==0){
+            $('#rsvp_yes_no_btn').prop('disabled', true);
+        }
 
         // Trigger validation if needed
         // validateForm();
