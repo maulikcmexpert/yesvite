@@ -572,7 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    @foreach ($eventDetails['event_schedule'] as $key = > $schedule)
+                                                    @foreach ($eventDetails['event_schedule'] as $key => $schedule)
                                                         @php
                                                             if (
                                                                 empty($schedule['start_time']) &&
