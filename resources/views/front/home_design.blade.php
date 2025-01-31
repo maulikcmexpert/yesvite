@@ -1,3 +1,7 @@
+@php
+$base_url= url('/');
+dd($base_url);
+@endphp
 <section class="collection-wrapper">
         <div class="container">
             <div class="content">
