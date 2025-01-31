@@ -1182,24 +1182,30 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var oldDate = $(ed).attr("data-isDate");
-    $("#event-date").daterangepicker(
-        {
-            autoUpdateInput: false,
-            locale: {
-                format: "MM/DD/YYYY",
-            },
-            showDropdowns: false,
-            startDate: moment().startOf("month"),
-            // endDate: moment().endOf("month"),
-            // minDate: moment().add(1, 'days'),
-            minDate: moment(),
-            // alwaysShowCalendars: true, // Keep the calendar visible
-            maxSpan: { days: 2 },
-            minSpan: { days: 1 },
-            singleDatePicker: false, // We will enforce single selection manually
+    $('#event-date').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            format: "MM/DD/YYYY",
         },
-
-        function (start, end, label) {
+        showDropdowns: false,
+        startDate: moment().startOf("month"),
+        minDate: moment(),
+        maxSpan: { days: 2 },
+        minSpan: { days: 1 },
+        singleDatePicker: false, // Start with range picker
+        isInvalidDate: function(date) {
+            return date.isBefore(moment(), 'day'); // Disable past dates
+        },
+        // Event to handle Apply button enable/disable
+        applyButtonClasses: 'btn-primary', // Set your button class as needed
+    }, function (start, end, label) {
+        if (start.isSame(end, 'day')) {
+            // Single date selected
+            $('#apply-button').prop('disabled', false); // Enable Apply button
+        } else if (start.isBefore(end)) {
+            // Multiple dates selected
+            $('#apply-button').prop('disabled', false); // Enable Apply button
+        }
             // const isDate = $(this)  // Get the data attribute inside the callback
             if (start.diff(end, "days") === 0) {
                 end = start;

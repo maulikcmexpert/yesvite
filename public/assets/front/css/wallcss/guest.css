@@ -401,6 +401,10 @@
     background-color: #2DA9FC;
 }
 
+.guest-edit-box .qty-container button:disabled{
+    background-color: gray;
+}
+
 .guest-edit-box .qty-container input {
     border: none !important;
     width: 100%;
@@ -464,7 +468,12 @@ display:none;}
 
 .guest-rsvp-attend input[type=radio]:checked + label[for="option2"]:after{
     background-color: var(--pink) !important;
-    padding: 0.3em;
+    padding:3px;
+    border-color: var(--pink) !important;
+}
+.guest-rsvp-attend input[type=radio]:checked + label[for="option3"]:after{
+    background-color: var(--pink) !important;
+    padding:3px;
     border-color: var(--pink) !important;
 }
 
@@ -491,12 +500,16 @@ display:none;}
     margin-left: auto;
 }
 
-
-
 .guest-rsvp-attend input[type=radio]:checked ~ label[for="option1"]:after
 {
     background-color: var(--green) !important;
-    padding: 0.3em ;
+    padding:3px;
+    border-color: var(--green) !important;
+}
+.guest-rsvp-attend input[type=radio]:checked ~ label[for="option4"]:after
+{
+    background-color: var(--green) !important;
+    padding:3px;
     border-color: var(--green) !important;
 }
 
@@ -531,6 +544,14 @@ display:none;}
     border: 1px solid var(--pink) !important;
 }
 .guest-rsvp-attend input[type=radio]:checked ~ label[for="option2"] svg path{
+    stroke: var(--pink) !important;
+}
+.guest-rsvp-attend input[type=radio]:checked ~ label[for="option3"],
+.guest-rsvp-attend input[type=radio]:checked > label[for="option3"]
+{
+    border: 1px solid var(--pink) !important;
+}
+.guest-rsvp-attend input[type=radio]:checked ~ label[for="option3"] svg path{
     stroke: var(--pink) !important;
 }
 
