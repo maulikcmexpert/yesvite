@@ -38,6 +38,8 @@ $hostView = $eventInfo['host_view'];
 // Initialize totals
 $totalAdults = 0;
 $totalKids = 0;
+$totalGuests = count($guestArray); // Total guests
+$displayGuests = array_slice($guestArray, 0, 7);
 
 // Sum up adults and kids
 if ($hostView) {
@@ -94,7 +96,7 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul id="guestList">
                 @if (!empty($guestArray))
-                    @foreach ($guestArray as $index => $guest)
+                @foreach ($displayGuests as $index => $guest)
                         @if (!empty($guest['user']))
                                 @if ($index == 7)
                                 @break
@@ -132,7 +134,7 @@ if ($hostView) {
             </ul>
 
             <div class="guests-listing-buttons">
-                <a href="javascript:void(0);" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
+                <a href="" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1)
                     <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal" data-bs-target="#addguest">
                         <i class="fa-solid fa-plus"></i> Add Guest
@@ -252,19 +254,49 @@ if ($hostView) {
     </div>
 </div>
 <script>
-document.getElementById("seeAllBtn").addEventListener("click", function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const seeAllBtn = document.getElementById('seeAllBtn');
+        const guestList = document.getElementById('guestList');
+        const guests = @json($guestArray); // Pass the full guest list as JSON
 
-    const guests = document.querySelectorAll(".guests-listing-info");
+        seeAllBtn.addEventListener('click', function() {
+            // Clear the current guest list and add all guests
+            guestList.innerHTML = '';
 
-// Show all guests (index >= 7)
-guests.forEach(function(guest) {
-    const index = parseInt(guest.getAttribute("data-index"));
-    if (index >= 7) {
-        guest.style.display = "block";  // Show the guest
-    }
-});
+            guests.forEach((guest, index) => {
+                if (guest.user) {
+                    const user = guest.user;
+                    const firstInitial = user.firstname ? user.firstname[0].toUpperCase() : '';
+                    const secondInitial = user.lastname ? user.lastname[0].toUpperCase() : '';
+                    const initials = firstInitial + secondInitial;
+                    const fontColor = 'fontcolor' + firstInitial.toUpperCase();
 
-})
+                    // Create guest list item
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('guests-listing-info', 'contact', 'contactslist');
+                    listItem.setAttribute('data-guest-id', guest.id);
+                    listItem.setAttribute('data-index', index);
 
+                    listItem.innerHTML = `
+                        <div class="d-flex align-items-center guest-name">
+                            <div class="guest-profile-pic">
+                                ${user.profile_image ?
+                                    '<img src="' + '/storage/uploads/users/' + user.profile_image + '" alt="">' :
+                                    '<span class="initials ${fontColor}">${initials}</span>'}
+                            </div>
+                            <div class="guest-details">
+                                <h4>${user.firstname} ${user.lastname}</h4>
+                                <p>${user.city}, ${user.state}</p>
+                            </div>
+                        </div>
+                    `;
 
+                    guestList.appendChild(listItem);
+                }
+            });
+
+            // // Hide the "See All" button after it has been clicked
+            // seeAllBtn.style.display = 'none';
+        });
+    });
 </script>

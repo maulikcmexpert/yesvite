@@ -2143,7 +2143,7 @@
     content: "";
     display: block;
     height: 8px;
-    width: calc(var(--progress-value, 0) * 1%);
+    width: 0%;
     background-color: #E03137;
     border-radius: 50px;
     transition: width 300ms ease;
@@ -2155,14 +2155,22 @@
 /* Variants */
 .home-latest-draf-card .progress-bar__wrapper.green progress[value]::after {
     background: #23AA26;
+    width: 75%;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::after {
     background: #FCCD1E;
+    width: 50%;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue progress[value]::after {
     background: #3BBEE8;
+    width: 99%;
+}
+
+.home-latest-draf-card .progress-bar__wrapper.red progress[value]::after {
+    background: #E03137;
+    width: 25%;
 }
 
 .home-latest-draf-card .progress-bar__wrapper h4 {
