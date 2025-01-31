@@ -480,7 +480,7 @@ $("#rsvp-yes-modal").on("show.bs.modal", function (e) {
     // e.preventDefault();
 });
 $("#rsvp-no-modal").on("show.bs.modal", function (e) {
-    e.preventDefault();
+    // e.preventDefault();
 });
 $(document).on("click", ".check_rsvp_yes", function (e) {
     e.preventDefault();
