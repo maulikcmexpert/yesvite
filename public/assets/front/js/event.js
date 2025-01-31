@@ -8,7 +8,58 @@ function getActiveTabPage() {
     return activePage;
 }
 getActiveTabPage();
+$(document).on('click','#confirm_cancel_event_btn',function (event) {
+    event.stopPropagation(); // Prevents event bubbling
+    event.preventDefault();
+    var event=parseInt($('#cancel_event_id').val());
+    var reason=$('#reason_to_cancel_event').val();
+    var cancel=$('#type_cancel').val();
 
+
+    if(reason==""){
+        toastr.error("Please Enter Reason");
+        return;
+    }
+
+    if(cancel==""||cancel!="CANCEL"){
+        toastr.error("Please Enter CANCEL");
+        return;
+    }
+    $('#home_loader').css('display','block');
+    console.log(event);
+    $.ajax({
+        url: `${base_url}event/cancel_event`,
+        type: 'POST',
+        data: { event_id: event,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
+        success: function (response) {
+            console.log(response)
+            if(response.status==1){
+                console.log('upcoming_event_'+response.event_id);
+                $('.upcoming_event_' + response.event_id).fadeOut(500, function() {
+                    $(this).remove();
+                });
+                if (!$('.toast').length) {
+                    toastr.success("Event Cancelled successfully");
+                }
+                // $('#cancelevent').modal('hide');
+                window.location.reload();
+                $('#home_loader').css('display','none');
+
+
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            // $('.loader').css('display','none');    
+        },
+        complete: function () {
+         $('#home_loader').css('display','none');    
+        }
+
+    });
+    
+})
 
 var base_url=$('#base_url').val();
 var busy1 = false;
@@ -500,56 +551,56 @@ $(document).on('input', '#type_cancel', function () {
 });
 
 
-$(document).on('click','#confirm_cancel_event_btn',function (event) {
-    event.stopPropagation(); // Prevents event bubbling
-    event.preventDefault();
-    var event=parseInt($('#cancel_event_id').val());
-    var reason=$('#reason_to_cancel_event').val();
-    var cancel=$('#type_cancel').val();
+// $(document).on('click','#confirm_cancel_event_btn',function (event) {
+//     event.stopPropagation(); // Prevents event bubbling
+//     event.preventDefault();
+//     var event=parseInt($('#cancel_event_id').val());
+//     var reason=$('#reason_to_cancel_event').val();
+//     var cancel=$('#type_cancel').val();
 
 
-    if(reason==""){
-        toastr.error("Please Enter Reason");
-        return;
-    }
+//     if(reason==""){
+//         toastr.error("Please Enter Reason");
+//         return;
+//     }
 
-    if(cancel==""||cancel!="CANCEL"){
-        toastr.error("Please Enter CANCEL");
-        return;
-    }
-    $('#home_loader').css('display','block');
-    console.log(event);
-    $.ajax({
-        url: `${base_url}event/cancel_event`,
-        type: 'POST',
-        data: { event_id: event,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
-        success: function (response) {
-            console.log(response)
-            if(response.status==1){
-                console.log('upcoming_event_'+response.event_id);
-                $('.upcoming_event_' + response.event_id).fadeOut(500, function() {
-                    $(this).remove();
-                });
-                toastr.success("Event Cancelled successfully");
-                // $('#cancelevent').modal('hide');
-                window.location.reload();
-                $('#home_loader').css('display','none');
+//     if(cancel==""||cancel!="CANCEL"){
+//         toastr.error("Please Enter CANCEL");
+//         return;
+//     }
+//     $('#home_loader').css('display','block');
+//     console.log(event);
+//     $.ajax({
+//         url: `${base_url}event/cancel_event`,
+//         type: 'POST',
+//         data: { event_id: event,reason:reason, _token: $('meta[name="csrf-token"]').attr("content")},
+//         success: function (response) {
+//             console.log(response)
+//             if(response.status==1){
+//                 console.log('upcoming_event_'+response.event_id);
+//                 $('.upcoming_event_' + response.event_id).fadeOut(500, function() {
+//                     $(this).remove();
+//                 });
+//                 toastr.success("Event Cancelled successfully");
+//                 // $('#cancelevent').modal('hide');
+//                 window.location.reload();
+//                 $('#home_loader').css('display','none');
 
 
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching events:', error);
-            busy = false;
-            // $('.loader').css('display','none');    
-        },
-        complete: function () {
-         $('#home_loader').css('display','none');    
-        }
+//             }
+//         },
+//         error: function (xhr, status, error) {
+//             console.error('Error fetching events:', error);
+//             busy = false;
+//             // $('.loader').css('display','none');    
+//         },
+//         complete: function () {
+//          $('#home_loader').css('display','none');    
+//         }
 
-    });
+//     });
     
-})
+// })
 
 // $(document).on('click','.all-event-filter-reset',function(){
 //     // alert();
