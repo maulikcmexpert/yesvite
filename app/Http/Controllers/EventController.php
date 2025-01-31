@@ -1759,9 +1759,10 @@ class EventController extends BaseController
                     
                     if ($id == $userVal['user_id']) {
                         $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type!='minus' && $request->type !="plus") ? 0 : $quantity;
-                        dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey],);
+                      
                         
                         session()->put('category', $categories);
+                        Session::save();
                     }
                     $total_quantity =  $total_quantity + $userVal['quantity'];
                 }
@@ -1771,7 +1772,7 @@ class EventController extends BaseController
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
                 session()->put('category', $categories);
-
+                Session::save();
                 // dd(2,$categories);
                 $total_quantity =  1;
             }
@@ -1786,7 +1787,7 @@ class EventController extends BaseController
             // }
             // }
         }
-        Session::save();
+       
 
         dd(session('category'));       
         // $total_item = $total_item - $total_quantity ;
