@@ -511,14 +511,14 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&&$eventDetails['logitude']!='')
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
                                                         : '39.8283';
 
-                                                    $longitude = !empty($eventDetails['longitude'])
-                                                        ? $eventDetails['longitude']
+                                                    $longitude = !empty($eventDetails['logitude'])
+                                                        ? $eventDetails['logitude']
                                                         : '-98.5795';
                                                 @endphp
 
@@ -531,6 +531,7 @@
                                                     target="_blank" class="direction-btn">
                                                     Directions
                                                 </a>
+                                                @endif
                                             </div>
                                         @endif
                                         {{-- {{dd($eventDetails['event_schedule']);}} --}}
