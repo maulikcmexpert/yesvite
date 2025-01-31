@@ -58,6 +58,11 @@ $(document).on('click', '.save-btn', function () {
         return;
     }
 
+    // Declare total variables
+    let totalAttending = parseInt($('.totalAttending').text()) || 0;
+    let totalAdults = parseInt($('.totalAdults').text()) || 0;
+    let totalKids = parseInt($('.totalKids').text()) || 0;
+
     // Gather updated data
     const updatedData = {
         guestId: guestId,
@@ -81,6 +86,7 @@ $(document).on('click', '.save-btn', function () {
                 const guestContainer = $('.guest-user-box[data-guest-id="' + guestId + '"]');
                 const adultsCount = parseInt(response.adults) || 0;
                 const kidsCount = parseInt(response.kids) || 0;
+
                 // Find and remove any existing success message for the current guest
                 guestContainer.find('.sucess-yes').remove();
                 guestContainer.find('.sucess-no').remove();
@@ -93,8 +99,8 @@ $(document).on('click', '.save-btn', function () {
                         <div class="sucess-yes" data-guest-id="${response.guest_id}">
                             <h5 class="green">YES</h5>
                             <div class="sucesss-cat ms-auto">
-                                <h5 id="adults${response.guest_id}">${response.adults} Adults</h5>
-                                <h5 id="kids${response.guest_id}">${response.kids} Kids</h5>
+                                <h5 id="adults${response.guest_id}">${adultsCount} Adults</h5>
+                                <h5 id="kids${response.guest_id}">${kidsCount} Kids</h5>
                             </div>
                         </div>`;
                     guestContainer.find('.check_status').append(successYesHtml); // Append to the right section
@@ -111,8 +117,10 @@ $(document).on('click', '.save-btn', function () {
                         </div>`;
                     guestContainer.find('.check_status').append(successNoHtml); // Append to the right section
 
-
-
+                    // Decrease totals if a guest is marked as NO
+                    totalAttending--;
+                    totalAdults -= adultsCount;
+                    totalKids -= kidsCount;
                 } else if (response.rsvp_status == null) {
                     // If the guest has no reply
                     const noReplyHtml = `
@@ -126,7 +134,6 @@ $(document).on('click', '.save-btn', function () {
                 $('.totalAttending').text(totalAttending);
                 $('.totalAdults').text(totalAdults);
                 $('.totalKids').text(totalKids);
-
 
                 // Hide the modal after updating
                 $('#editrsvp').modal('hide');
@@ -150,7 +157,7 @@ $(document).on('click', '.remove_guest_page', function () {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Include CSRF token
         },
-        data: { event_id: eventId ,user_id:userId}, // Pass guestId to the server
+        data: { event_id: eventId, user_id: userId }, // Pass guestId to the server
         success: function (response) {
             console.log("Remove successful: ", response);
 
@@ -222,30 +229,30 @@ $(document).ready(function () {
 });
 $(document).on('click', '.delete_failed_contact', function () {
     let userId = $(this).data('user-id');
-let event_id = $('#event_id').val();
+    let event_id = $('#event_id').val();
 
-        $.ajax({
-            url: base_url + "event_guest/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
-            type: "POST",
-            data: JSON.stringify({ user_id: userId ,event_id:event_id }),
-            contentType: "application/json",
-            headers: {
-                'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
-            },
-            success: function (response) {
-                if (response.status === 1) {
-                    toastr.success(response.message);
-  // // Find the guest container by guestId and remove it from the DOM
-  $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
-                } else {
-                    toastr.error(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                toastr.error("Something went wrong!");
-                console.error(xhr.responseText);
+    $.ajax({
+        url: base_url + "event_guest/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
+        type: "POST",
+        data: JSON.stringify({ user_id: userId, event_id: event_id }),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
+        },
+        success: function (response) {
+            if (response.status === 1) {
+                toastr.success(response.message);
+                // // Find the guest container by guestId and remove it from the DOM
+                $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
+            } else {
+                toastr.error(response.message);
             }
-        });
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        }
+    });
 
 });
