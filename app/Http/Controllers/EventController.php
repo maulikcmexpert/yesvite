@@ -3534,6 +3534,8 @@ class EventController extends BaseController
         $event_id = $request->id;
         $getEventImages = EventImage::where('event_id', $event_id)->get();
         $savedFiles=[];
+        $designImg='';
+        dd($getEventImages)
         if (!empty($getEventImages)) {
             foreach ($getEventImages as $key => $imgVal) {
                 if ($key == 0) {
