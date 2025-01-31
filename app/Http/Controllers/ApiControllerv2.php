@@ -7091,7 +7091,7 @@ class ApiControllerv2 extends Controller
                 }
                 if ($user->id == $request->user_id) {
                     $notificationParam = [
-                        'sync_id'=>"",
+                        'sync_id' => "",
                         'sender_id' => $user->id,
                         'event_id' => $request->event_id,
                         'rsvp_status' => $request->rsvp_status,
@@ -8116,6 +8116,10 @@ class ApiControllerv2 extends Controller
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
+                    if (empty($value->user) || empty($value->user->id)) {
+                        continue;
+                    }
+
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $input['event_id'], 'event_post_id' => $value->id])->first();
@@ -8257,7 +8261,9 @@ class ApiControllerv2 extends Controller
         } else {
             if (count($results) != 0) {
                 foreach ($results as $value) {
-
+                    if (empty($value->user) || empty($value->user->id)) {
+                        continue;
+                    }
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
