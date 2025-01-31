@@ -467,7 +467,7 @@ class EventController extends BaseController
                             }
                         }
 
-                        $remainingQnt = $remainingQnt - $categoryQuantity;
+                        $remainingQnt =  $categoryQuantity - $remainingQnt;
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $potluckCategory['totalItem'] = $totalItem;
@@ -477,7 +477,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    // dd($eventDetail['podluck_category_list']);
+                    dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {

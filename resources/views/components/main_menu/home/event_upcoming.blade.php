@@ -130,7 +130,7 @@
                 @endif
             </div>
         </div>
-        <a href="" class="home-upcoming-events-card-right">
+        <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-right">
             <img src="{{$events['event_images']}}" loading="lazy" alt="">
         </a>
     </div>
