@@ -951,9 +951,12 @@ $(document).ready(function () {
         var $this = $(this); // Cache the button
 
         // Prevent multiple clicks
-        if ($this.prop('disabled')) {
-            return;
-        }
+        setTimeout(function(){
+            $this.prop('disabled', true)
+        },50000)
+        // if ($this.prop('disabled')) {
+        //     return;
+        // }
         // Check if the poll form exists and is valid
         var pollForm = $('#pollForm');
         var photoForm = $('#photoForm');
