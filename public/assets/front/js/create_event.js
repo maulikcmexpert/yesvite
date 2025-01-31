@@ -8775,9 +8775,9 @@ function updateTOP(categoryIndex) {
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
-        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`);
-        if (innerUserQnt && innerUserQnt >= 0) {
-            inputQty = inputQty + innerUserQnt;
+        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
+        if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
+            inputQty = inputQty + parseInt(innerUserQnt);
         }
         if (inputQty < requiredQty) {
             totalMissing += requiredQty - inputQty;
