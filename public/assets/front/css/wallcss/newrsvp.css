@@ -1277,7 +1277,7 @@ label.error {
 
 @media only screen and (max-width: 1399px) {
     .rsvp-hosted-by-date-time{
-        flex-direction: row;
+        flex-direction: row !important;
     }
     .rsvp-form .author-title h4{
         font-size: 26px;
@@ -1562,6 +1562,11 @@ label.error {
     .rsvp-hosted-by-date-time-wrp .hosted-by-date-time-content h3{
         font-size: 16px !important;
     }
+    .rsvp-footer-btn .cmn-btn{
+        width: 50%;
+        max-width: 50%;
+        min-width: auto;
+    }
 }
 
 @media only screen and (max-width: 424px) {
@@ -1574,9 +1579,5 @@ label.error {
         align-items: start;
         gap: 10px;
     }
-    .rsvp-footer-btn .cmn-btn{
-        width: 50%;
-        max-width: 50%;
-        min-width: auto;
-    }
+
 }
