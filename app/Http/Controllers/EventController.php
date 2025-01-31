@@ -1731,6 +1731,7 @@ class EventController extends BaseController
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
+        
         $categories = session()->get('category', []);
 
         $id = Auth::guard('web')->user()->id;
@@ -1757,10 +1758,11 @@ class EventController extends BaseController
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
                     
                     if ($id == $userVal['user_id']) {
-dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]);
-                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type)) ? 0 : $quantity;
+                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type!='minus' && $request->type !="plus") ? 0 : $quantity;
+                      
                         
                         session()->put('category', $categories);
+                        Session::save();
                     }
                     $total_quantity =  $total_quantity + $userVal['quantity'];
                 }
@@ -1770,7 +1772,7 @@ dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
                 session()->put('category', $categories);
-
+                Session::save();
                 // dd(2,$categories);
                 $total_quantity =  1;
             }
@@ -1785,7 +1787,7 @@ dd($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][
             // }
             // }
         }
-        Session::save();
+       
 
         dd(session('category'));       
         // $total_item = $total_item - $total_quantity ;
