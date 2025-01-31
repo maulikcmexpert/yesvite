@@ -1731,6 +1731,7 @@ class EventController extends BaseController
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
+        dd($quantity);
         $categories = session()->get('category', []);
 
         $id = Auth::guard('web')->user()->id;
