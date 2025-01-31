@@ -96,6 +96,10 @@ if ($hostView) {
                 @if (!empty($guestArray))
                     @foreach ($guestArray as $guest)
                         @if (!empty($guest['user']))
+
+                        @if ($index == 7)
+                        @break
+                    @endif
                             @php
                                 $user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
@@ -311,17 +315,16 @@ if ($hostView) {
     document.addEventListener('DOMContentLoaded', function() {
         const seeAllBtn = document.getElementById('seeAllBtn');
         const guestList = document.getElementById('guestList');
-        const guests = @json($guestArray); // Pass the full guest list as JSON
+        const guests = $guestArray; // Pass the full guest list as JSON
 
-        // Initially show only the first 7 guests (already handled in PHP)
-        const displayedGuests = guests.slice(0, 7);
+
 
         seeAllBtn.addEventListener('click', function() {
             // Remove the "See All" button after it's clicked
             seeAllBtn.style.display = 'none';
 
             // Start appending the remaining guests
-            guests.slice(7).forEach((guest, index) => {
+            guests .forEach((guest, index) => {
                 if (guest.user) {
                     const user = guest.user;
                     const firstInitial = user.firstname ? user.firstname[0].toUpperCase() : '';
