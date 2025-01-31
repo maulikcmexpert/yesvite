@@ -36,7 +36,7 @@
 
         </div>
     </div>
-    {{-- {{    dd($eventDetails)}} --}}
+
     <div class="hosted-by-template-slider">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
