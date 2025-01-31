@@ -920,7 +920,7 @@
                 <h5>Event Created Successfully!
                     <span class="invite-count">0</span> Invites sent!
                 </h5>
-                <!-- <input type="hidden" id="created_event_id" value=""/> -->
+                <input type="hidden" id="created_event_id" />
 
                 <p>Order Party Supplies</p>
                 <div class="google-play" id="gift_registry_logo">
@@ -942,7 +942,7 @@
             <a href="{{route('home')}}" class="btn cancel-btn">Done</a>
             {{-- <button type="button" class="btn cancel-btn" data-bs-dismiss="modal">Done</button> --}}
             {{-- <button type="button" class="btn continue-btn">See Invite</button> --}}
-            <a href="{{route('home')}}" id="final_see_invite_btn" class="btn continue-btn">See Invite</a>
+            <a href="" id="final_see_invite_btn" class="btn continue-btn">See Invite</a>
         </div>
     </div>
 </div>

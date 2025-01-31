@@ -5,7 +5,7 @@
             <div class="col-xl-3 col-lg-4">
                 <!-- =============mainleft-====================== -->
 
-                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"  eventInfo="$eventInfo"/>
+                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" :postList="$postList" />
             </div>
             <div class="col-xl-6 col-lg-8">
                 <div class="main-content-center">
