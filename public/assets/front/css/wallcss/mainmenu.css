@@ -2714,6 +2714,7 @@
     bottom: 15px;
     z-index: 10;
     border: none;
+    pointer-events: auto;
 }
 
 .mobile-calender-btn span{
