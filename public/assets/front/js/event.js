@@ -500,7 +500,7 @@ $(document).on('input', '#type_cancel', function () {
 });
 
 
-$(document).on('click','#confirm_cancel_event_btn',function () {
+$(document).on('click','#confirm_cancel_event_btn',function (event) {
     event.stopPropagation(); // Prevents event bubbling
     event.preventDefault();
     var event=parseInt($('#cancel_event_id').val());
