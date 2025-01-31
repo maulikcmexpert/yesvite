@@ -501,6 +501,8 @@ $(document).on('input', '#type_cancel', function () {
 
 
 $(document).on('click','#confirm_cancel_event_btn',function () {
+    event.stopPropagation(); // Prevents event bubbling
+    event.preventDefault();
     var event=parseInt($('#cancel_event_id').val());
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
@@ -529,7 +531,7 @@ $(document).on('click','#confirm_cancel_event_btn',function () {
                     $(this).remove();
                 });
                 toastr.success("Event Cancelled successfully");
-                $('#cancelevent').modal('hide');
+                // $('#cancelevent').modal('hide');
                 window.location.reload();
                 $('#home_loader').css('display','none');
 
