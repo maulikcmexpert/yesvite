@@ -35,7 +35,7 @@ $(document).ready(function() {
         input.val(currentValue + 1); // Increment by 1
 
         // Trigger validation if needed
-        validateForm();
+        // validateForm();
     });
 
     // Listen for the click event on the "-" button
@@ -46,9 +46,10 @@ $(document).ready(function() {
         if (currentValue > 0) {
             input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
         }
+            $('#rsvp_yes_no_btn').prop('disabled', false);
 
         // Trigger validation if needed
-        validateForm();
+        // validateForm();
     });
 
     // Submit form validation
