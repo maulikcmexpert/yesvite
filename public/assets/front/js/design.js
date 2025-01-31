@@ -670,13 +670,17 @@ function bindData(current_event_id) {
 
                         if (element.left === undefined) {
                             console.log(element.centerX);
+                            console.log(scaleFactor);
                             element.left = element.centerX * scaleFactor;
+                            console.log("left", element.left);
                         }
 
                         if (element.top === undefined) {
                             console.log(element.centerY);
+                            console.log(scaleFactor);
 
                             element.top = element.centerY * scaleFactor;
+                            console.log("top", element.top);
                         }
 
                         let textElement = new fabric.Textbox(element.text, {
