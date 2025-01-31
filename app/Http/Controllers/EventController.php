@@ -3555,7 +3555,6 @@ class EventController extends BaseController
     }
 
     public function store_notification_filter(Request $request){
-        dd($request);
         if ($status == 1) {
             $eventIds = session('event_ids', []);
             if (!in_array($event_id, $eventIds)) {

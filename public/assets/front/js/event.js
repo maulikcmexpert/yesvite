@@ -804,6 +804,7 @@ $(document).on('change', '.selectedEvents', function () {
         storeFilterData(1,event_id);
         $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
     } else {
+        storeFilterData(0,event_id);
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
