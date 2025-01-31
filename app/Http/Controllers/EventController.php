@@ -1784,7 +1784,7 @@ class EventController extends BaseController
         }
         Session::save();
 
-        // dd($categories);       
+        dd(session('category'));       
         // $total_item = $total_item - $total_quantity ;
 
         return $total_item;
