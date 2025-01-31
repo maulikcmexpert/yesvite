@@ -796,7 +796,7 @@ $(document).on('change', 'input[data-name="all"]', function () {
     var isChecked = $(this).is(':checked');
     $("input[name='activityTypes[]']").prop('checked', isChecked);
 });
-$(document).on('change', 'input[name="selectedEvents[]"]', function () {
+$(document).on('change', '.selectedEvents', function () {
     var eventname=$(this).data('event_name');
     var event_id=$(this).data('event_id');
 
