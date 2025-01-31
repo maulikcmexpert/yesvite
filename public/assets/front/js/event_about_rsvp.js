@@ -29,9 +29,18 @@ $(document).ready(function() {
 
     // Listen for the click event on the "+" button for adults
     $('.btn-plus').click(function () {
+        var rsvpStatus = $('input[name="rsvp_status"]').val();
         // Find the closest input field and increment its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
+        if(rsvpStatus=='1'){
+            if((currentValue+1) > 0){
+                $('button[type="submit"]').prop('disabled', false);
+           }else{
+                 $('button[type="submit"]').prop('disabled', true);
+           }
+        }
+
         input.val(currentValue + 1); // Increment by 1
 
         // Trigger validation if needed
@@ -40,12 +49,19 @@ $(document).ready(function() {
 
     // Listen for the click event on the "-" button
     $('.btn-minus').click(function () {
-        // Find the closest input field and decrement its value
+        var rsvpStatus = $('input[name="rsvp_status"]').val();
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
         if (currentValue > 0) {
-            input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
-        }
+            if(rsvpStatus=='1'){
+                if((currentValue+1) > 0){
+                    $('button[type="submit"]').prop('disabled', false);
+               }else{
+                     $('button[type="submit"]').prop('disabled', true);
+               }
+            }
+           input.val(currentValue - 1); // Decrement by 1 (minimum value is 0)
+       }
 
         // Trigger validation if needed
         validateForm();
