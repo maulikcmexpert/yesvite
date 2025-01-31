@@ -7,8 +7,8 @@ $(document).ready(function() {
         var rsvpStatus = $(this).val();
         console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val('');
-            $('input[name="kids"]').val('');
+            $('input[name="adults"]').val(0);
+            $('input[name="kids"]').val(0);
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         }  if (rsvpStatus == "1") {
