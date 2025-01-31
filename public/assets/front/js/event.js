@@ -799,9 +799,11 @@ $(document).on('change', 'input[data-name="all"]', function () {
 $(document).on('change', 'input[name="selectedEvents[]"]', function () {
     var eventname=$(this).data('event_name');
     var event_id=$(this).data('event_id');
+    var $selectedEventsWrapper = $('.notification-selected-events-wrp');
+
     if ($(this).is(':checked')) {
         storeFilterData(1,event_id);
-        $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+        $selectedEventsWrapper.append('<span class="selected-event">' + eventname + '</span>');
     } else {
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
