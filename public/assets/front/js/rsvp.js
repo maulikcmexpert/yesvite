@@ -181,6 +181,7 @@ $(document).ready(function () {
             const eventName = $("#eventName").val();
 
             if (!eventDate || !eventTime) {
+                console.log("Please provide both date and time for the event.");
                 toastr.error(
                     "Please provide both date and time for the event."
                 );
@@ -189,7 +190,7 @@ $(document).ready(function () {
 
             const convertTo24HourFormat = (time) => {
                 const [hour, minuteWithPeriod] = time.split(":");
-                const [minute, period] = minuteWithPeriod.split(" ");
+                const [minute, period] = minuteWithPeriod.split(" ");
                 let newHour = parseInt(hour);
                 if (period?.toLowerCase() === "pm" && newHour !== 12) {
                     newHour += 12; // Convert PM time to 24-hour format
@@ -197,6 +198,9 @@ $(document).ready(function () {
                 if (period?.toLowerCase() === "am" && newHour === 12) {
                     newHour = 0; // Handle 12 AM as midnight
                 }
+                minute.toLowerCase().replace("am");
+                minute.toLowerCase().replace("pm");
+
                 return `${newHour}:${minute}`;
             };
 
@@ -205,6 +209,8 @@ $(document).ready(function () {
             const startDateTime = new Date(`${eventDate}T${formattedTime}:00`); // ISO format with correct time
 
             if (isNaN(startDateTime)) {
+                console.log("Please provide both date and time for the event.");
+
                 toastr.error(
                     "Invalid start date or time value. Please check the input."
                 );
