@@ -801,11 +801,11 @@ $(document).on('change', '.selectedEvents', function () {
     var event_id=$(this).data('event_id');
 
     if ($(this).is(':checked')) {
-        storeFilterData(1,event_id);
         $('.notification-selected-events-wrp').append('<span class="selected-event">' + eventname + '</span>');
+        storeFilterData(1,event_id);
     } else {
-        storeFilterData(0,event_id);
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
+        storeFilterData(0,event_id);
     }   
 });
 $(document).on('click', '#notification-filter-modal', function () {
