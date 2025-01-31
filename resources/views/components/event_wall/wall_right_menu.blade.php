@@ -38,8 +38,6 @@ $hostView = $eventInfo['host_view'];
 // Initialize totals
 $totalAdults = 0;
 $totalKids = 0;
-$totalGuests = count($guestArray); // Total guests
-//$displayGuests = array_slice($guestArray, 0, 7);
 
 // Sum up adults and kids
 if ($hostView) {
@@ -96,11 +94,11 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul id="guestList">
                 @if (!empty($guestArray))
-                @foreach ($guestArray as $index => $guest)
+                    @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
-                                @if ($index == 7)
-                                @break
-                            @endif
+                            @if ($index == 7)
+                            @break
+                        @endif
                             @php
                                 $user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
@@ -108,7 +106,7 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}"  data-index="{{ $index }}">
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -254,7 +252,7 @@ if ($hostView) {
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const seeAllBtn = document.getElementById('seeAllBtn');
     const guestList = document.getElementById('guestList');
     const guests = @json($guestArray); // Pass the full guest list as JSON
@@ -306,4 +304,4 @@ if ($hostView) {
     });
 });
 
-</script>
+    </script>
