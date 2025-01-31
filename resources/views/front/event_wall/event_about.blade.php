@@ -372,7 +372,7 @@
                                                     @endphp
                                                     {{-- {{ dd($rsvpSent)}} --}}
 
-                                                    @if (isset($rsvpSent['rsvp_status'] )  || empty($rsvpSent['rsvp_status']))
+                                                    @if (!empty($rsvpSent) && empty($rsvpSent!=null))
                                                         <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
                                                             data-bs-toggle="modal" data-bs-target="#aboutsuccess">
                                                             RSVP
