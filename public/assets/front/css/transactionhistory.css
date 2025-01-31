@@ -246,7 +246,7 @@
 }
 
 .buycreditsmodal .nav-tabs .nav-link{
-    flex-basis: 50%;
+    flex-basis: 50% !important;
 }
 
 .bulk-credit-options-head{
