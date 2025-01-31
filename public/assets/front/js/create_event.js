@@ -6579,7 +6579,7 @@ function displayRecords(
         success: function (html) {
             var currentInviteCount = parseInt($("#currentInviteCount").val());
             const coins = $("#coins").val();
-            if (search == "") {
+            if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
             } else {
                 create_event_yesvite_scroll = true;
