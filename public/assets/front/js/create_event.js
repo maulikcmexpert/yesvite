@@ -4115,6 +4115,10 @@ function savePage1Data(close = null) {
         // $("#CheckCuurentStep").val("1");
 
         // final_step = 3;
+    }else{
+        eventData.event_name = event_name;
+              eventData.hosted_by = hostedby;
+              eventData.event_date = event_date
     }
 
     // eventData.page1 = {
