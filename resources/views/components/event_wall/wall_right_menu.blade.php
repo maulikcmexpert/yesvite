@@ -98,7 +98,7 @@ if ($hostView) {
                         @if (!empty($guest['user']))
                         @if ($index == 7)
                         @break
-                    @endif
+                        @endif
 
                             @php
                                 $user = $guest['user']; // Fetch user array
@@ -324,7 +324,7 @@ if ($hostView) {
             seeAllBtn.style.display = 'none';
 
             // Start appending the remaining guests
-            guests .forEach((guest, index) => {
+            guests.forEach((guest, index) => {
                 if (guest.user) {
                     const user = guest.user;
                     const firstInitial = user.firstname ? user.firstname[0].toUpperCase() : '';
