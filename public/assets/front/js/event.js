@@ -560,8 +560,7 @@ $(document).on('click','.all-event-filter-reset',function(){
                 type: 'GET',        
                 data: {search_event:""},          
                 success: function (response) { 
-                    $('.event-search-filter').html('');  
-                    $('.event-search-filter').html(response.view);   
+ 
                     $('#home_loader').css('display','none');
                 },
                 error: function (error) {
