@@ -98,5 +98,44 @@ class HomeFrontController extends BaseController
         return view('front.homefront', compact('images'));
     }
 
+    public function homeDesign(){
+        $serverKey  = ServerKey::first();
+
+        $title = 'Yesvite-Home';
+        $page = 'front.home_design';
+
+        $images = TextData::all();
+        $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
+        $getDesignData =  EventDesignCategory::with('subcategory')->get();
+        $getDesignData = EventDesignCategory::all();
+        $getsubcatData = EventDesignSubCategory::all();
+        return view('layout', compact(
+            'title',
+            'page',
+            'images',
+            'getDesignData',
+            'categories'
+        ));
+    }
+
+    public function homePricing(){
+        $serverKey  = ServerKey::first();
+
+        $title = 'Yesvite-Home';
+        $page = 'front.home_pricing';
+
+        $images = TextData::all();
+        $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
+        $getDesignData =  EventDesignCategory::with('subcategory')->get();
+        $getDesignData = EventDesignCategory::all();
+        $getsubcatData = EventDesignSubCategory::all();
+        return view('layout', compact(
+            'title',
+            'page',
+            'images',
+            'getDesignData',
+            'categories'
+        ));
+    }
 
 }

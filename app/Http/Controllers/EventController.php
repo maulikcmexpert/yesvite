@@ -1731,6 +1731,7 @@ class EventController extends BaseController
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
+        
         $categories = session()->get('category', []);
 
         $id = Auth::guard('web')->user()->id;
@@ -1749,15 +1750,19 @@ class EventController extends BaseController
         $total_quantity = 0;
 
         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
+        
             // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
             // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
             if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
+                    
                     if ($id == $userVal['user_id']) {
-
-                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = (isset($request->type)) ? 0 : $quantity;
+                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type!='minus' && $request->type !="plus") ? 0 : $quantity;
+                      
+                        
                         session()->put('category', $categories);
+                        Session::save();
                     }
                     $total_quantity =  $total_quantity + $userVal['quantity'];
                 }
@@ -1767,7 +1772,7 @@ class EventController extends BaseController
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
                 session()->put('category', $categories);
-
+                Session::save();
                 // dd(2,$categories);
                 $total_quantity =  1;
             }
@@ -1782,9 +1787,9 @@ class EventController extends BaseController
             // }
             // }
         }
-        Session::save();
+       
 
-        dd(session('category'));       
+        // dd(session('category'));       
         // $total_item = $total_item - $total_quantity ;
 
         return $total_item;
