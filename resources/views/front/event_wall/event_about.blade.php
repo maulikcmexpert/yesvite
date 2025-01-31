@@ -572,6 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
+                                                    {{dd($eventDetails['event_schedule'])}}
                                                     @foreach ($eventDetails['event_schedule'] as $key => $schedule)
                                                         @php
                                                             if (
@@ -609,10 +610,9 @@
                                                                 <div class="shedule-box-left">
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
                                                                     <span>{{ $schedule['start_time'] }}
-                                                                        @if (!empty($schedule['start_time']))
-                                                                        @endif
+                                                                       
                                                                         @if (!empty($schedule['end_time']))
-                                                                            -
+                                                                            
                                                                             {{ $schedule['end_time'] }}
                                                                         @endif
                                                                     </span>
