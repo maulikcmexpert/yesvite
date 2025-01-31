@@ -5,7 +5,7 @@ $(document).ready(function() {
     // Listen for changes in RSVP status (YES/NO)
     $('input[name="rsvp_status"]').change(function () {
         var rsvpStatus = $(this).val();
-console.log(rsvpStatus);
+        console.log(rsvpStatus);
         if (rsvpStatus == "0") {
             $('input[name="adults"]').val(0);
             $('input[name="kids"]').val(0);
@@ -168,6 +168,15 @@ console.log(adults,kids);
         window.open(googleCalendarUrl);
     });
 
+    $(document).on('click','.rsvp_status_btn',function(){
 
+        var kids=parseInt($('#rsvp_status_kids').val());
+        var adults=parseInt($('#rsvp_status_adults').val());
+
+        if(kids==0 && adults==0){
+            alert();
+            $('button[type="submit"]').prop('disabled', true);
+        }
+    })
 
 });
