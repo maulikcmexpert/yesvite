@@ -683,7 +683,7 @@
                                                                     alt="target">
                                                                 <h6>Target</h6>
                                                             </a>
-                                                        @elseif (str_contains(strtolower($gift['registry_recipient_name']), 'amzon'))
+                                                        @elseif (str_contains(strtolower($gift['registry_recipient_name']), 'amazon'))
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn amazon-btn" target="_blank">
                                                                 <img src="{{ asset('assets/front/img/amazon.png') }}"
