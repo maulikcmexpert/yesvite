@@ -1789,7 +1789,7 @@ class EventController extends BaseController
         }
        
 
-        dd(session('category'));       
+        // dd(session('category'));       
         // $total_item = $total_item - $total_quantity ;
 
         return $total_item;
