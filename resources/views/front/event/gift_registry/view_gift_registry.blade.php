@@ -3,6 +3,7 @@
 <!-- {dd($registry)}     -->
 @foreach ($registry as $data )
 <div class="d-flex align-items-center justify-content-center">
+    <input type="hidden" id="created_event_id" value="{{$eventId}}"/>
     <span class="gift-registry-icons">
          @php
                                                     $url=$data['registry_link'];
