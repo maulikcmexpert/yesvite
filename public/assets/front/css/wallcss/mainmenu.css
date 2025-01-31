@@ -2141,11 +2141,14 @@
 .home-latest-draf-card progress[value]::after {
     content: "";
     display: block;
-    height: 100%;
+    height: 8px;
     width: calc(var(--progress-value, 0) * 1%);
     background-color: #E03137;
     border-radius: 50px;
     transition: width 300ms ease;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* Variants */
