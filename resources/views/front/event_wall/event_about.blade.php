@@ -572,8 +572,7 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    {{-- {{dd($eventDetails['event_schedule'])}} --}}
-                                                    @foreach ($eventDetails['event_schedule'] as $key => $schedule)
+                                                    @foreach ($eventDetails['event_schedule'] as $key = > $schedule)
                                                         @php
                                                             if (
                                                                 empty($schedule['start_time']) &&
@@ -589,18 +588,25 @@
                                                             $startTime = \Carbon\Carbon::parse($schedule['start_time']);
                                                             $endTime = \Carbon\Carbon::parse($schedule['end_time']);
                                                             if (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
-                                                                $index = $key +1;
-
-                                                                $startTimenew = $schedule[$index]['start_time'];
-                                                                $duration = $startTimenew->diffInHours($endTime) . 'h';
-                                                            }elseif (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
-                                                                $index = $key +1;
-
-                                                                $endTimenew = $schedule[$index]['end_time'];
-                                                                $duration = $startTime->diffInHours($endTimenew) . 'h';
-                                                            }else{
+                                                                $nextSchedule = $eventDetails['event_schedule'][$key + 1];
+                                                                if (!empty($nextSchedule['start_time'])) {
+                                                                    $startTime = \Carbon\Carbon::parse($nextSchedule['start_time']);
+                                                                }
                                                                 $duration = $startTime->diffInHours($endTime) . 'h';
                                                             }
+                                                            
+                                                            elseif (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
+                                                                $nextSchedule = $eventDetails['event_schedule'][$key + 1];
+                                                                if (!empty($nextSchedule['end_time'])) {
+                                                                    $endTime = \Carbon\Carbon::parse($nextSchedule['end_time']);
+                                                                }
+                                                                $duration = $startTime->diffInHours($endTime) . 'h';
+                                                            }
+                                                          
+                                                            else {
+                                                                $duration = $startTime->diffInHours($endTime) . 'h';
+                                                            }
+                                                            // $duration = $startTime->diffInHours($endTime) . 'h';
                                                         @endphp
                                                         <div class="shedule-manage-timing">
                                                             <div class="shedule-timing">
@@ -610,9 +616,10 @@
                                                                 <div class="shedule-box-left">
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
                                                                     <span>{{ $schedule['start_time'] }}
-                                                                       
+                                                                        @if (!empty($schedule['start_time']))
+                                                                        @endif
                                                                         @if (!empty($schedule['end_time']))
-                                                                            
+                                                                            -
                                                                             {{ $schedule['end_time'] }}
                                                                         @endif
                                                                     </span>
