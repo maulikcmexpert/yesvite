@@ -7,8 +7,8 @@ $(document).ready(function() {
         var rsvpStatus = $(this).val();
 
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
+            $('input[name="adults"]').val();
+            $('input[name="kids"]').val();
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
         } else {
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
