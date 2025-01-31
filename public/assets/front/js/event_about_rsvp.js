@@ -29,7 +29,8 @@ $(document).ready(function() {
 
     // Listen for the click event on the "+" button for adults
     $('.btn-plus').click(function () {
-        var rsvpStatus = $('input[name="rsvp_status"]').val();
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+
         // Find the closest input field and increment its value
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
@@ -49,7 +50,8 @@ $(document).ready(function() {
 
     // Listen for the click event on the "-" button
     $('.btn-minus').click(function () {
-        var rsvpStatus = $('input[name="rsvp_status"]').val();
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+
         let input = $(this).closest('.qty-container').find('input.input-qty');
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
         if (currentValue > 0) {
