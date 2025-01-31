@@ -1,3 +1,45 @@
+<style>
+    .slider-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .slider-wrapper {
+        display: flex;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .slider-slide {
+        min-width: 250px; /* Adjust as needed */
+        margin-right: 20px;
+        flex-shrink: 0;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .slider-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .slider-button.prev {
+        left: 10px;
+    }
+
+    .slider-button.next {
+        right: 10px;
+    }
+</style>
 <div class="step_3" style="display: none;width:100%;">
     <div class="main-content-wrp guest-main-content">
         <div class="guest-wrapper position-relative">
