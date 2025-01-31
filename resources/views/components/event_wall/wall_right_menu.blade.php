@@ -94,16 +94,22 @@ if ($hostView) {
         <div class="guests-listing-wrp">
             <ul id="guestList">
                 @if (!empty($guestArray))
+                @php
+                    $i=0;
+                @endphp
                     @foreach ($guestArray as $index => $guest)
+                        @php
+                        $i++;
+                    @endphp
                         @if (!empty($guest['user']))
                             @php
-                                $user = $guest['user'];
+                                $user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
                                 $secondInitial = isset($user['lastname'][0]) ? strtoupper($user['lastname'][0]) : '';
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info contact contactslist {{ $index >= 7 ? 'hidden' : '' }}" data-guest-id="{{ $guest['id'] }}">
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -113,24 +119,29 @@ if ($hostView) {
                                         @endif
                                         <span class="active-dot"></span>
                                     </div>
-                                    <div class="posts-card-head-left-content contact_search"
-                                         data-search="{{ $user['firstname'] }} {{ $user['lastname'] }}">
+                                    <div class="posts-card-head-left-content contact_search" data-search="{{ $user['firstname'] }} {{ $user['lastname'] }}">
                                         <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
                                         @if (!empty($user['city']) || !empty($user['state']))
                                             <p>{{ $user['city'] ?? '' }}{{ !empty($user['city']) && !empty($user['state']) ? ',' : '' }}{{ $user['state'] ?? '' }}</p>
                                         @endif
+                                        <input type="hidden" id="eventID" value="{{ $guest['event_id'] }}">
+                                        <input type="hidden" id="user_id" value="{{ $guest['user_id'] }}">
                                     </div>
                                 </div>
                             </li>
                         @endif
+                        @php
+                        $i++;
+                        if($i==8){
+                            break;
+                        }
+                    @endphp
                     @endforeach
                 @endif
             </ul>
 
             <div class="guests-listing-buttons">
-                @if(count($guestArray) > 7)
-                    <a href="javascript:void(0);" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
-                @endif
+                <a href="" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1)
                     <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal" data-bs-target="#addguest">
                         <i class="fa-solid fa-plus"></i> Add Guest
@@ -249,11 +260,3 @@ if ($hostView) {
         </div>
     </div>
 </div>
-<script>
-    document.getElementById("seeAllBtn").addEventListener("click", function () {
-        document.querySelectorAll(".guests-listing-info.hidden").forEach(function (el) {
-            el.classList.remove("hidden");
-        });
-        this.style.display = "none"; // Hide "See All" button after clicking
-    });
-</script>
