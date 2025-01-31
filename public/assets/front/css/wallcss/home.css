@@ -2989,7 +2989,7 @@ main {
   }
 
   @media only screen and (max-width: 1199px) {
-    .main-content-right{
+    .new-main-content .main-content-right{
       display: none;
     }
     .event-center-title h2 {
