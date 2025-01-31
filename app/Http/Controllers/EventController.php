@@ -478,7 +478,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
-                    dd($eventDetail['podluck_category_list'],dd(session('category')),dd(session('category_item')));
+                    dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {
