@@ -39,20 +39,23 @@
                     <p>{{$events['host_name']}}<span><i class="fa-solid fa-circle"></i> {{$events['post_time']}}</span></p>
                 </div>
               </a>
-            <ul class="home-upcoming-events-card-left-detail">
-                @if($events['is_event_owner']==1)
-                    <li><span>Hosting</span></li>
-                @else
-                        @if($events['rsvp_status'] == '1')
-                             <li><span>Guest : </span> RSVP - Yes</li>
-                        @elseif($events['rsvp_status'] == '2')
-                             <li><span>Guest : </span> RSVP - No</li>
-                        @else
-                             <li><span>Guest : </span> RSVP - Pending</li>
-                        @endif
-                @endif
-              <li><span>{{$events['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$events['event_day']}}</span> {{$events['start_time']}}</li>
-            </ul>
+              <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}">
+                  <ul class="home-upcoming-events-card-left-detail">
+                      @if($events['is_event_owner']==1)
+                          <li><span>Hosting</span></li>
+                      @else
+                              @if($events['rsvp_status'] == '1')
+                                  <li><span>Guest : </span> RSVP - Yes</li>
+                              @elseif($events['rsvp_status'] == '2')
+                                  <li><span>Guest : </span> RSVP - No</li>
+                              @else
+                                  <li><span>Guest : </span> RSVP - Pending</li>
+                              @endif
+                      @endif
+                    <li><span>{{$events['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$events['event_day']}}</span> {{$events['start_time']}}</li>
+                  </ul>
+              </a>
+                 
             <div class="home-upcoming-events-card-left-foot">
                 <div class="home-upcoming-events-card-rsvp-data">
                     <h6 class="card-rsvp-done"><i class="fa-regular fa-circle-check"></i> {{$events['total_accept_event_user']}}</h6>
