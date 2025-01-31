@@ -1915,7 +1915,7 @@
     </div>
 
     <!-- ====== cancel event ======== -->
-    <div class="modal fade cmn-modal cancel-event" id="cancelevent" tabindex="-1"
+    <div class="modal fade cmn-modal cancel-event" id="cancelevent1" tabindex="-1"
         aria-labelledby="canceleventLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
