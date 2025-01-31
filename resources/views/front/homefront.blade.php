@@ -656,7 +656,7 @@
     </section>
 
     <!-- ========== collection-wrapper ============= -->
-    <section class="collection-wrapper">
+    <!-- <section class="collection-wrapper">
         <div class="container">
             <div class="content">
                 <h2>Find the Perfect <br> Design in Our Collection</h2>
@@ -1376,7 +1376,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- ======= different-wrapper ======== -->
     <section class="different-wrapper">
