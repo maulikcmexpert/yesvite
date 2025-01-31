@@ -166,7 +166,7 @@
                       <a href="{{route('term_and_condition')}}">Terms of Service</a>
                   </li>
                   <li>
-                      <a href="{{route('homeDesign')}}">Privacy Policy</a>
+                      <a href="{{route('privacy_policy')}}">Privacy Policy</a>
                   </li>
               </ul>
           </div>

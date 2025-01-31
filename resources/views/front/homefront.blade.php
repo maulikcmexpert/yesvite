@@ -89,7 +89,7 @@
     </section> --}}
 
     <!-- ======= edit in event ======== -->
-    <section class="event-wrapper pro-event-wrapper">
+    <!-- <section class="event-wrapper pro-event-wrapper">
         <div class="owl-carousel owl-theme events-tab  simple">
             <div class="item"><span>500 Invite Limit</span></div>
             <div class="item"><span>Potluck</span></div>
@@ -235,7 +235,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- ======== features-wrapper ======== -->
     <!-- <section class="features-wrapper">
