@@ -1,23 +1,23 @@
 $(document).ready(function() {
     // // Initially disable the submit button
-     $('button[type="submit"]').prop('disabled', true);
+     $('#rsvp_yes_no_btn').prop('disabled', true);
 
     // Listen for changes in RSVP status (YES/NO)
     $('input[name="rsvp_status"]').change(function () {
         var rsvpStatus = $(this).val();
         console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
+            $('input[name="adults"]').val();
+            $('input[name="kids"]').val();
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
-            $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
+            $('#rsvp_yes_no_btn').prop('disabled', false); // Allow submission if RSVP is No
         }  if (rsvpStatus == "1") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
-            console.log($('input[name="adults"]').val(0));
-            console.log($('input[name="kids"]').val(0));
+            $('input[name="adults"]').val();
+            $('input[name="kids"]').val();
+            console.log($('input[name="adults"]').val());
+            console.log($('input[name="kids"]').val());
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
-            $('button[type="submit"]').prop('disabled', true); // Disable submit initially
+            $('#rsvp_yes_no_btn').prop('disabled', true); // Disable submit initially
         }
         validateForm();
     });
@@ -176,7 +176,7 @@ $(document).ready(function() {
 
     //     if(kids==0 && adults==0){
     //         alert();
-    //         $('button[type="submit"]').prop('disabled', true);
+    //         $('#rsvp_yes_no_btn').prop('disabled', true);
     //     }
     // })
 
