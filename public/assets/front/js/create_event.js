@@ -383,20 +383,33 @@ var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3.5,
     spaceBetween: 20,
     loop: true,
-    loopAdditionalSlides: 1,  // Ensures smooth loop transition
+    loopFillGroupWithBlank: false, // Prevents blank slides at the end
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-        320: { slidesPerView: 1.5 },
-        576: { slidesPerView: 2.5 },
-        768: { slidesPerView: 3.5 },
-        992: { slidesPerView: 2 },
-        1200: { slidesPerView: 2 },
-        1400: { slidesPerView: 3.5 },
+        320: {
+            slidesPerView: 1.5,
+        },
+        576: {
+            slidesPerView: 2.5,
+        },
+        768: {
+            slidesPerView: 3.5,
+        },
+        992: {
+            slidesPerView: 2,
+        },
+        1200: {
+            slidesPerView: 2,
+        },
+        1400: {
+            slidesPerView: 3.5,
+        },
     },
 });
+
 $(document).on("click", ".create-event-btn", function () {
     toggleSidebar("sidebar_create_event");
 });
