@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('event_images', function (Blueprint $table) {
             $table->integer('type')->nullable();
+            
         });
     }
 
