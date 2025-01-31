@@ -78,7 +78,7 @@ $(document).on('click', '.save-rsvp', function () {
             if (response.success) {
                 // Find the guest container by guestId
 
-                const guestContainer = $('.guests-listing-right[data-guest-id="' + guestId + '"]');
+                const guestContainer = $('.guest_rsvp_icon[data-guest-id="' + guestId + '"]');
 
                 // // Remove existing status icon
                 guestContainer.find('span').remove();
