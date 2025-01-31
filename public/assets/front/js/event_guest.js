@@ -48,6 +48,7 @@ $(document).on('change', '.rsvp_status_no', function () {
     $('#editrsvp .adult-count').val(0);
     $('#editrsvp .kid-count').val(0);
 });
+
 $(document).on('click', '.save-btn', function () {
     const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
     console.log('Updating Guest ID:', guestId);
@@ -78,7 +79,8 @@ $(document).on('click', '.save-btn', function () {
             if (response.success) {
                 // Find the guest container by guestId
                 const guestContainer = $('.guest-user-box[data-guest-id="' + guestId + '"]');
-
+                const adultsCount = parseInt(response.adults) || 0;
+                const kidsCount = parseInt(response.kids) || 0;
                 // Find and remove any existing success message for the current guest
                 guestContainer.find('.sucess-yes').remove();
                 guestContainer.find('.sucess-no').remove();
@@ -96,6 +98,11 @@ $(document).on('click', '.save-btn', function () {
                             </div>
                         </div>`;
                     guestContainer.find('.check_status').append(successYesHtml); // Append to the right section
+
+                    // Update total counts
+                    totalAttending++;
+                    totalAdults += adultsCount;
+                    totalKids += kidsCount;
                 } else if (response.rsvp_status == '0') {
                     // If the guest's RSVP is "NO"
                     const successNoHtml = `
@@ -103,6 +110,9 @@ $(document).on('click', '.save-btn', function () {
                             <h5>NO</h5>
                         </div>`;
                     guestContainer.find('.check_status').append(successNoHtml); // Append to the right section
+
+
+
                 } else if (response.rsvp_status == null) {
                     // If the guest has no reply
                     const noReplyHtml = `
@@ -111,6 +121,12 @@ $(document).on('click', '.save-btn', function () {
                         </div>`;
                     guestContainer.find('.check_status').append(noReplyHtml); // Append to the right section
                 }
+
+                // Update the total counts dynamically
+                $('.totalAttending').text(totalAttending);
+                $('.totalAdults').text(totalAdults);
+                $('.totalKids').text(totalKids);
+
 
                 // Hide the modal after updating
                 $('#editrsvp').modal('hide');

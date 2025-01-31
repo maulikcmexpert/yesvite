@@ -1780,6 +1780,8 @@ function sendSMSForApplication($receiverNumber, $message)
 
         return  true;
     } catch (Exception $e) {
+
+
         return  false;
     }
 }
@@ -1875,7 +1877,7 @@ function handleIncomingMessage($receiverNumber, $message)
             ->groupBy('id', 'event_id', 'event_invited_user_id')
             ->get();
         if ($users->isNotEmpty()) { // Corrected check
-            sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
+            // sendSMSForApplication($cleanedNumber, "Yesvite: You have been subscribed to receive SMS invites/messages. . Reply STOP to opt out.");
         }
         foreach ($users as $user) {
             $user->update(['opt_in_status' => true]);
@@ -1889,6 +1891,7 @@ function handleIncomingMessage($receiverNumber, $message)
 
                 $eventLink = route('rsvp', ['event_invited_user_id' => encrypt($user->event_invited_user_id), 'eventId' => encrypt($user->event_id)]);
                 $shortLink = createShortUrl($eventLink);
+                // dd($shortLink);
                 $confirmationMessage = "Yesvite:  \"{$event->event->user->firstname} {$event->event->user->lastname}\" has invited you to  \"{$event->event->event_name}\"  View invite, RSVP and message the host here:\"{$shortLink}\". Reply STOP to opt out.";
                 try {
 

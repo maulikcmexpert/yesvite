@@ -515,11 +515,11 @@
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
-                                                        : '39.8283'; // Default latitude for the U.S.
+                                                        : '39.8283';
 
                                                     $longitude = !empty($eventDetails['longitude'])
                                                         ? $eventDetails['longitude']
-                                                        : '-98.5795'; // Default longitude for the U.S.
+                                                        : '-98.5795';
                                                 @endphp
 
                                                 <iframe
