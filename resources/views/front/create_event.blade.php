@@ -23,7 +23,9 @@
     <!-- ============ header ========= -->
     --}}
     @php
-    $userS = Auth::guard('web')->user(); // Get the authenticated user
+    $userS = Auth::guard('web')->user(); 
+    dd($users);
+    // Get the authenticated user
     $firstInitialUser = !empty($userS->first_name) ? strtoupper($userS->first_name[0]) : '';
     $lastInitialUser = !empty($userS->last_name) ? strtoupper($userS->last_name[0]) : '';
     $initialsUser = $firstInitialUser . $lastInitialUser;
