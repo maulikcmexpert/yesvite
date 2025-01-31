@@ -132,6 +132,7 @@ if ($hostView) {
                                 </div>
 
                                 <div class="guests-listing-right" data-guest-id="{{ $guest['id'] }}">
+                                    <div class="guest_rsvp_icon" data-guest-id="{{ $guest['id'] }}">
                                     @if ($guest['rsvp_status'] == '1')
                                         <!-- Approved -->
                                         <span id="approve" data-guest-id="{{ $guest['id'] }}">
@@ -171,6 +172,7 @@ if ($hostView) {
                                             </svg>
                                         </span>
                                     @endif
+                                    </div>
                                     @if ($eventInfo['guest_view']['is_host'] == 1)
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
                                                 class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"

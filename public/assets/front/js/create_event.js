@@ -143,7 +143,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
     })
     .get();
 
-if (giftRegestryDataRaw!=null && giftRegestryDataRaw?.length > 0 ) {
+if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
         giftRegestryData?.forEach(function (item) {
@@ -218,7 +218,7 @@ $(document).ready(function () {
         const newEndOption = $("<option></option>")
             .val(currentTimeZone)
             .text(currentTimeZone)
-            .prop("selected", true);    
+            .prop("selected", true);
         $("#end-time-zone").append(newEndOption);
     }
 
@@ -1030,7 +1030,7 @@ function startTimePicker() {
             // }
             var picker = $(this).data("DateTimePicker");
             var currentValue = $(this).val();
-    
+
             if (currentValue) {
                 var currentMoment = moment(currentValue, "LT");
                 if (currentMoment.isValid()) {
@@ -1044,8 +1044,7 @@ function startTimePicker() {
         .on("dp.hide", function (e) {
             const selectedTime = e.date ? e.date.format("LT") : "";
             $(this).val(selectedTime);
-            $(this)
-            .data(selectedTime)
+            $(this).data(selectedTime);
             const selectedStartTime = e.date
                 ? e.date
                 : moment().hours(12).minutes(0).seconds(0);
@@ -1198,7 +1197,6 @@ $(function () {
             maxSpan: { days: 2 },
             minSpan: { days: 1 },
             singleDatePicker: false, // We will enforce single selection manually
-
         },
 
         function (start, end, label) {
@@ -3297,96 +3295,96 @@ $(document).on("click", "#save_activity_schedule", function () {
     //     // toggleSidebar();
     // });
     var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
-    let isendtime =0;
-    let istrue =0;
+    let isendtime = 0;
+    let istrue = 0;
     $(".accordion-body.new_activity").each(function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
         // showAlert = false;
-        isendtime=isendtime +1;
+        isendtime = isendtime + 1;
         var activityWrappers = $(this).find(".activity-main-wrp");
         if (activityWrappers.length === 0) {
             activityendtime = null; // Set to null if no .activity-main-wrp found
         } else {
-        $(this)
-            .find(".activity-main-wrp")
-            .each(function (index) {
-                istrue = istrue+1;
-                var id = $(this).data("id");
-                var description = $(this)
-                    .find('input[name="description[]"]')
-                    .val();
-                var startTime = $(this)
-                    .find('input[name="activity-start-time[]"]')
-                    .val();
-                var endTime = $(this)
-                    .find('input[name="activity-end-time[]"]')
-                    .val();
-                activityendtime = endTime;
+            $(this)
+                .find(".activity-main-wrp")
+                .each(function (index) {
+                    istrue = istrue + 1;
+                    var id = $(this).data("id");
+                    var description = $(this)
+                        .find('input[name="description[]"]')
+                        .val();
+                    var startTime = $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .val();
+                    var endTime = $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .val();
+                    activityendtime = endTime;
 
-                $("#desc-error-" + id).text("");
-                $("#start-error-" + id).text("");
-                $("#end-error-" + id).text("");
+                    $("#desc-error-" + id).text("");
+                    $("#start-error-" + id).text("");
+                    $("#end-error-" + id).text("");
 
-                if (description == "") {
-                    $("#desc-error-" + id)
-                        .text("Description is required")
-                        .css("color", "red");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="description[]"]')
-                    .on("input", function () {
-                        if ($(this).val() != "") {
-                            $("#desc-error-" + id).text("");
-                        }
-                    });
+                    if (description == "") {
+                        $("#desc-error-" + id)
+                            .text("Description is required")
+                            .css("color", "red");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="description[]"]')
+                        .on("input", function () {
+                            if ($(this).val() != "") {
+                                $("#desc-error-" + id).text("");
+                            }
+                        });
 
-                if (startTime == "") {
-                    $("#start-error-" + id).text("Start time is required");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="activity-start-time[]"]')
-                    .on("change", function () {
-                        if ($(this).val() != "") {
-                            $("#start-error-" + id).text("");
-                        }
-                    });
+                    if (startTime == "") {
+                        $("#start-error-" + id).text("Start time is required");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .on("change", function () {
+                            if ($(this).val() != "") {
+                                $("#start-error-" + id).text("");
+                            }
+                        });
 
-                if (endTime == "") {
-                    $("#end-error-" + id).text("End time is required");
-                    isValid++;
-                }
-                $(this)
-                    .find('input[name="activity-end-time[]"]')
-                    .on("change", function () {
-                        if ($(this).val() != "") {
-                            $("#end-error-" + id).text("");
-                        }
-                    });
+                    if (endTime == "") {
+                        $("#end-error-" + id).text("End time is required");
+                        isValid++;
+                    }
+                    $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .on("change", function () {
+                            if ($(this).val() != "") {
+                                $("#end-error-" + id).text("");
+                            }
+                        });
 
-                var activity = {
-                    activity: description,
-                    "start-time": startTime,
-                    "end-time": endTime,
-                };
-                activities[dataId].push(activity);
+                    var activity = {
+                        activity: description,
+                        "start-time": startTime,
+                        "end-time": endTime,
+                    };
+                    activities[dataId].push(activity);
 
-                if (
-                    previousEndTime &&
-                    previousEndTime > startTime &&
-                    !showAlert
-                ) {
-                    toastr.error("Please enter proper time");
-                    showAlert = true;
-                    // return;
-                } else {
-                    showAlert = false;
-                }
-                previousEndTime = endTime;
-            });
+                    if (
+                        previousEndTime &&
+                        previousEndTime > startTime &&
+                        !showAlert
+                    ) {
+                        toastr.error("Please enter proper time");
+                        showAlert = true;
+                        // return;
+                    } else {
+                        showAlert = false;
+                    }
+                    previousEndTime = endTime;
+                });
         }
     });
 
@@ -3398,19 +3396,18 @@ $(document).on("click", "#save_activity_schedule", function () {
     // }
     console.log({ activityendtime });
 
-    if(activityendtime!=null){
+    if (activityendtime != null) {
         let lastendtime = convertTo24Hour(end_time);
         let lastScheduleEndtime = convertTo24Hour(activityendtime);
-    
+
         console.log(lastendtime);
         console.log(lastScheduleEndtime);
-        
+
         if (lastScheduleEndtime > lastendtime) {
             toastr.error("Please enter proper time");
             return;
         }
     }
-   
 
     if (isValid == 0) {
         if (total_activities >= 1) {
@@ -3595,7 +3592,7 @@ $(document).on("click", "#close_createEvent", function () {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
-        
+
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -3636,11 +3633,10 @@ $(document).on("click", "#close_createEvent", function () {
             },
         });
     } else {
-        
         // eventData.step = "1";
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
-        
+
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -4063,10 +4059,10 @@ function savePage1Data(close = null) {
         // $("#CheckCuurentStep").val("1");
 
         // final_step = 3;
-    }else{
-              eventData.event_name = event_name;
-              eventData.hosted_by = hostedby;
-              eventData.event_date = event_date
+    } else {
+        eventData.event_name = event_name;
+        eventData.hosted_by = hostedby;
+        eventData.event_date = event_date;
     }
 
     // eventData.page1 = {
@@ -7272,10 +7268,10 @@ function get_co_host_list(
         .done(function (data) {
             console.log(data);
 
-            if(search_name==""){
-                create_co_event_yesvite_scroll=false
-            }else{
-                create_co_event_yesvite_scroll=true
+            if (search_name == "") {
+                create_co_event_yesvite_scroll = false;
+            } else {
+                create_co_event_yesvite_scroll = true;
             }
             if (data.view == "" && data.scroll == "false") {
                 $(".list_all_invited_user").html("No Data Found");
@@ -7591,7 +7587,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
 let previousScrollTop = 0;
 $("#select_event_cohost").on("scroll", function () {
     // alert();
-    if (cohostbusy||create_co_event_yesvite_scroll) return;
+    if (cohostbusy || create_co_event_yesvite_scroll) return;
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
     var elementHeight = $(this).height();
@@ -8170,7 +8166,7 @@ $(document).on("click", ".save-slider-image", function () {
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
-                eventId:eventId,
+                eventId: eventId,
                 imageSources: imageSources,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
@@ -8242,7 +8238,6 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage3Data();
     savePage4Data();
 
-    
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
 
@@ -8253,11 +8248,11 @@ $(document).on("click", ".edit_checkout", function (e) {
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-        $(".step_1").css("display", "none");
-        $(".step_2").css("display", "none");
-        $(".step_3").css("display", "none");
-        $(".step_4").css("display", "none");
-        $(".step_final_checkout").show();
+    $(".step_1").css("display", "none");
+    $(".step_2").css("display", "none");
+    $(".step_3").css("display", "none");
+    $(".step_4").css("display", "none");
+    $(".step_final_checkout").show();
 
     // handleActiveClass(this);
     eventData.isdraft = "0";
@@ -8284,7 +8279,7 @@ $(document).on("click", ".edit_checkout", function (e) {
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
-                    window.location.href="profile";
+                    window.location.href = "profile";
                 }
                 window.location.href = base_url + "home";
             }
@@ -8302,15 +8297,13 @@ $(document).on("click", ".design-sidebar-action", function () {
             var imgSrc1 = $(".photo-slider-1").attr("src");
             var imgSrc2 = $(".photo-slider-2").attr("src");
             var imgSrc3 = $(".photo-slider-3").attr("src");
-            if(imgSrc1!=""){
+            if (imgSrc1 != "") {
                 $(".photo-edit-delete-1").show();
-              
             }
-            if(imgSrc2!=""){
+            if (imgSrc2 != "") {
                 $(".photo-edit-delete-2").show();
-                
             }
-            if(imgSrc3!=""){
+            if (imgSrc3 != "") {
                 $(".photo-edit-delete-3").show();
             }
             console.log(eventData.slider_images);
@@ -8679,6 +8672,45 @@ function step4open() {
 }
 var remainingCategoryCount = 0;
 var remainingCategoryCountn = 0;
+function updateTOP(categoryIndex) {
+    var list = document.getElementsByClassName("list-slide-" + categoryIndex);
+
+    if (list.length === 0) return;
+
+    var accordions = list[0].getElementsByClassName("accordion-flush");
+    var totalItems = accordions.length;
+
+    let totalMissing = 0;
+    let totalOver = 0;
+
+    for (let i = 0; i < totalItems; i++) {
+        let categoryItem = accordions[i];
+
+        // Get the required quantity
+        let requiredQtyInput = categoryItem.querySelector(
+            ".category-item-quantity"
+        );
+        let requiredQty = requiredQtyInput
+            ? parseInt(requiredQtyInput.value)
+            : 0;
+
+        // Get the current user input quantity
+        let inputQtyInput = categoryItem.querySelector(".input-qty");
+        let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
+
+        if (inputQty < requiredQty) {
+            totalMissing += requiredQty - inputQty;
+        } else if (inputQty > requiredQty) {
+            totalOver += inputQty - requiredQty;
+        }
+    }
+
+    console.log("Total Missing Items:", totalMissing);
+    console.log("Total Over Items:", totalOver);
+
+    return { totalMissing, totalOver };
+}
+
 function update_self_bring(
     that,
     innerUserQnt,
@@ -8988,6 +9020,7 @@ function update_self_bring(
                 $(
                     "#danger-svg-" + categoryItemKey + "-" + categoryIndexKey
                 ).show();
+                updateTOP(categoryIndexKey);
             }
 
             // console.log($('#lumpia-collapseOne'+'-'+categoryItemKey+'-'+categoryIndexKey).parent().parent().find('.accordion-item').html());
