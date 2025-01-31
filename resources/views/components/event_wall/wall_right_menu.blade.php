@@ -106,7 +106,7 @@ if ($hostView) {
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}">
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}"  data-index="{{ $index }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
                                         @if (!empty($user['profile']))
@@ -132,7 +132,7 @@ if ($hostView) {
             </ul>
 
             <div class="guests-listing-buttons">
-                <a href="" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
+                <a href="javascript:void(0);" class="cmn-btn see-all-btn" id="seeAllBtn">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1)
                     <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal" data-bs-target="#addguest">
                         <i class="fa-solid fa-plus"></i> Add Guest
