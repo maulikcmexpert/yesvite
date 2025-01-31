@@ -8241,6 +8241,8 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage1Data();
     savePage3Data();
     savePage4Data();
+
+    
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
 
@@ -8251,11 +8253,11 @@ $(document).on("click", ".edit_checkout", function (e) {
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-    //     $(".step_1").css("display", "none");
-    //     $(".step_2").css("display", "none");
-    //     $(".step_3").css("display", "none");
-    //     $(".step_4").css("display", "none");
-    //     $(".step_final_checkout").show();
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $(".step_3").css("display", "none");
+        $(".step_4").css("display", "none");
+        $(".step_final_checkout").show();
 
     // handleActiveClass(this);
     eventData.isdraft = "0";

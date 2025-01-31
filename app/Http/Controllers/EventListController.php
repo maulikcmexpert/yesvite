@@ -2653,13 +2653,8 @@ if ($rsvpSent != null) {
         
         foreach ($eventData as $val) {
     
-            if($eventName!=""){
-                $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
-            }else{
-                $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->get();
-                Session::forget('notification_event_ids');
-
-            }
+        $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
+          
             foreach ($eventDatas as $vals) {
                 $eventDetail['id'] = $vals->id;
                 $eventDetail['event_name'] = $vals->event_name;
@@ -2673,4 +2668,8 @@ if ($rsvpSent != null) {
 
 
     }
+    public function reset_notification_eventId(){
+        Session::forget('notification_event_ids');
+    }
 }
+

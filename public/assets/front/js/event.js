@@ -554,6 +554,17 @@ $(document).on('click','.all-event-filter-reset',function(){
     $(".hosting_chk").prop('checked', false);
     $(".invited_to_chk").prop('checked', false);
     $('.need_to_rsvp_chk').prop('checked', false);
+
+    $.ajax({
+                url: `${base_url}reset_notification_eventId`,
+                type: 'GET',        
+                success: function (response) { 
+ 
+                },
+                error: function (error) {
+                  toastr.error('Something went wrong. Please try again!');
+                },
+              });
 });
 
 $(document).on("click",".event_nav",function () {
