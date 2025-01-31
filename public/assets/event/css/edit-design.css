@@ -910,6 +910,10 @@
     display: block !important;
 }
 
+#edit-design-temp .main-content-right{
+    display: block !important;
+}
+
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
