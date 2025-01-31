@@ -56,7 +56,7 @@ $(document).ready(function() {
         let currentValue = parseInt(input.val()) || 0; // Default to 0 if invalid
         if (currentValue > 0) {
             if(rsvpStatus=='1'){
-                if((currentValue+1) > 0){
+                if((currentValue-1) > 0){
                     $('button[type="submit"]').prop('disabled', false);
                }else{
                      $('button[type="submit"]').prop('disabled', true);
