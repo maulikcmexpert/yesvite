@@ -467,7 +467,7 @@ class EventController extends BaseController
                             }
                         }
 
-                        $remainingQnt =  $categoryQuantity - $remainingQnt;
+                        $remainingQnt =  $remainingQnt - $categoryQuantity;
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $potluckCategory['totalItem'] = $totalItem;
