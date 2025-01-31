@@ -110,7 +110,7 @@ $notification_list=getNotificationList();
               <h5 class="notification_read" data-user_id="{{$user->id}}"style="cursor: pointer;">
                 Mark All Read
                 {{-- <span type="button" data-bs-toggle="modal" data-bs-target="#"> --}}
-                  <span type="button" data-bs-toggle="modal" data-bs-target="#all-notification-filter-modal">
+                  <span id="notification-filter-modal" type="button" data-bs-toggle="modal" data-bs-target="#all-notification-filter-modal">
 
                   <svg
                     viewBox="0 0 20 21"

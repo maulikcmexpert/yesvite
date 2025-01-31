@@ -3560,7 +3560,6 @@ class EventController extends BaseController
     public function store_notification_filter(Request $request){
         $status=$request->status;
         $event_id=$request->event_id;
-        dd(session()->get('notification_event_ids'));
         if ($status == 1) {
             $eventIds = session('notification_event_ids', []);
             if (!in_array($event_id, $eventIds)) {
@@ -3577,6 +3576,10 @@ class EventController extends BaseController
             } else {
                 session()->forget('notification_event_ids');
             }
+        }
+
+        if($status==null&&$event_id==null){
+            Session::forget('notification_event_ids');
         }
     }
 }
