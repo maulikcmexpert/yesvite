@@ -2849,6 +2849,10 @@
     word-break: break-all;
 }
 
+.notification-selected-events-wrp, .notification-selected-events-wrp span{
+    word-break: break-all;
+}
+
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {
