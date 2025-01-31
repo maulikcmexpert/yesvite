@@ -808,7 +808,7 @@ $(document).on('change', '.selectedEvents', function () {
         $('.notification-selected-events-wrp .selected-event:contains(' + eventname + ')').remove();
     }   
 });
-$(document).on('change', '#notification-filter-modal', function () {
+$(document).on('click', '#notification-filter-modal', function () {
         storeFilterData();  
 });
 function storeFilterData(status=null,event_id=null){
