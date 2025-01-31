@@ -510,7 +510,7 @@
                                                     <img src="{{ asset('assets/front/img/location-marker.svg') }}"
                                                         alt="marker" class="marker">
                                                 </div>
-
+                                                @dd($eventDetails);
                                                 @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&&$eventDetails['longitude']!='')
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
