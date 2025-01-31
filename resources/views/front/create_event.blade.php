@@ -1638,7 +1638,7 @@
                                                                     <h5
                                                                         class="{{ $fontColorUser }} add-item-under-text me-auto">
                                                                         {{ $initialsUser }} </h5>
-                                                                   <h5> {{ $user->firstname }} {{ $user->lastname }}
+                                                                   <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
 
                                                                     </h5>
                                                                 @endif
@@ -1774,7 +1774,7 @@
                                                                      <h5
                                                                      class="{{ $fontColorUser }} add-item-under-text me-auto">
                                                                      {{ $initialsUser }} </h5>
-                                                                <h5> {{ $user->firstname }} {{ $user->lastname }}
+                                                                <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
 
                                                                  </h5>
                                                                 @endif
