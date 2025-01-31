@@ -13,6 +13,10 @@ $(document).ready(function() {
         } else {
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
         }
+        if (rsvpStatus == "1") {
+            $('input[name="adults"]').val();
+            $('input[name="kids"]').val();
+            $('button[type="submit"]').prop('disabled', false);
         validateForm();
     });
 
