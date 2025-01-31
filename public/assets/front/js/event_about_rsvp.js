@@ -62,15 +62,21 @@ $(document).ready(function() {
     // Function to validate form and enable/disable submit button
     function validateForm() {
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
-        var adults = parseInt($('input[name="adults"]').val()) || 0;
-        var kids = parseInt($('input[name="kids"]').val()) || 0;
-
-        if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
-            $('button[type="submit"]').prop('disabled', false);
-            $('#error-message').text('');
-        } else {
-            $('button[type="submit"]').prop('disabled', true);
-        }
+    var adults = parseInt($('input[name="adults"]').val()) || 0;
+    var kids = parseInt($('input[name="kids"]').val()) || 0;
+console.log(rsvpStatus,adults,kids)
+    if (rsvpStatus == "0") {
+        // If RSVP is "No", enable submit button
+        $('button[type="submit"]').prop('disabled', false);
+        $('#error-message').text('');
+    } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
+        // If RSVP is "Yes" and at least one adult or kid is selected, enable submit button
+        $('button[type="submit"]').prop('disabled', false);
+        $('#error-message').text('');
+    } else {
+        // Otherwise, disable submit button
+        $('button[type="submit"]').prop('disabled', true);
+    }
     }
 
     // Function to validate form and enable/disable submit button
