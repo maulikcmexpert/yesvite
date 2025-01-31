@@ -146,7 +146,7 @@
 
 
       <!-- ====== cancel event ======== -->
-      <!-- <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel">
+      <!-- <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent3" tabindex="-1" aria-labelledby="canceleventLabel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               
