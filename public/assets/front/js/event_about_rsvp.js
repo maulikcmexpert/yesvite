@@ -7,8 +7,8 @@ $(document).ready(function() {
         var rsvpStatus = $(this).val();
         console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"]').val(0);
-            $('input[name="kids"]').val(0);
+            $('input[name="adults"]').val('');
+            $('input[name="kids"]').val('');
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         }  if (rsvpStatus == "1") {
@@ -72,7 +72,7 @@ $(document).ready(function() {
     var kids = parseInt($('input[name="kids"]').val()) || 0;
 console.log(adults,kids);
     if (rsvpStatus == "0") {
-        $('button[type="submit"]').prop('disabled', false);
+        $('button[type="submit"]').prop('disabled', true);
     } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
         $('button[type="submit"]').prop('disabled', false);
     } else {
