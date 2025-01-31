@@ -335,7 +335,7 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if (!($eventDetails['host_id'] == $login_user_id && $eventDetails['is_host'] == 1 && !empty($eventDetails['co_hosts'])))
+                                                    @if (($eventDetails['host_id'] == $login_user_id && $eventDetails['is_host'] == 1 && !empty($eventDetails['co_hosts'])))
                                                         <a href="#" class="add-calender btn" id="openGoogle">Add to
                                                             calendar
                                                             <svg width="16" height="16" viewBox="0 0 16 16"
@@ -563,10 +563,14 @@
                                                 @endphp
                                             @endforeach
                                             {{-- {{ dd($eventDetails['event_schedule']) }} --}}
+
                                             <div class="schedule-wrp cmn-card">
                                                 <h4 class="title">Schedule</h4>
+
+                                                @foreach ($eventDetails['event_schedule'] as $schedule)
                                                 <span class="timing"> {{ $schedule['start_time'] }} -
                                                     {{ $schedule['end_time'] }}</span>
+                                                    @endforeach
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">
