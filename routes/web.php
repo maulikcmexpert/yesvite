@@ -244,6 +244,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('mark_as_read',  [EventListController::class, 'mark_as_read'])->name('mark_as_read');
     Route::post('store_rsvp',  [EventListController::class, 'store_rsvp'])->name('store_rsvp');
     Route::get('filter_search_event',  [EventListController::class, 'filter_search_event'])->name('filter_search_event');
+    Route::get('reset_notification_eventId',  [EventListController::class, 'reset_notification_eventId'])->name('reset_notification_eventId');
 
 
     // //vrushali
