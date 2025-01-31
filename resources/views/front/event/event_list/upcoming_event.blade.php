@@ -15,7 +15,7 @@
 <div class="all-events-month-wise-support upcoming_event_{{$upcomingEvent['id']}}" data-month="{{$upcomingEvent['event_month']}}">
     <div class="home-center-upcoming-events-card all-event-{{ $colorClass }} mb-3">
         <div class="home-upcoming-events-card-left">
-            <a href="" class="home-upcoming-events-card-left-profile">
+            <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-left-profile">
                 <div class="home-upcoming-events-card-left-profile-img">
                     {{-- <img src="{{$upcomingEvent['host_profile']}}" class="lazy" alt=""> --}}
                     @if($upcomingEvent['host_profile'] != "")
@@ -37,20 +37,22 @@
                     <p class="host-name-{{$colorClass}}">{{$upcomingEvent['host_name']}} <span><i class="fa-solid fa-circle"></i> {{$upcomingEvent['post_time']}}</span></p>
                 </div>
             </a>
-            <ul class="home-upcoming-events-card-left-detail">
-                @if($upcomingEvent['is_event_owner']==1)
-                        <li><span>Hosting</span></li>
-                @else
-                        @if($upcomingEvent['rsvp_status'] == '1')
-                            <li><span>Guest : </span> RSVP - Yes</li>
-                        @elseif($upcomingEvent['rsvp_status'] == '2')
-                            <li><span>Guest : </span> RSVP - No</li>
-                        @else
-                            <li><span>Guest : </span> RSVP - Pending</li>
-                        @endif
-                @endif
-            <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
-            </ul>
+            <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}">
+                <ul class="home-upcoming-events-card-left-detail">
+                    @if($upcomingEvent['is_event_owner']==1)
+                            <li><span>Hosting</span></li>
+                    @else
+                            @if($upcomingEvent['rsvp_status'] == '1')
+                                <li><span>Guest : </span> RSVP - Yes</li>
+                            @elseif($upcomingEvent['rsvp_status'] == '2')
+                                <li><span>Guest : </span> RSVP - No</li>
+                            @else
+                                <li><span>Guest : </span> RSVP - Pending</li>
+                            @endif
+                    @endif
+                <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
+                </ul>
+            </a>   
             <div class="home-upcoming-events-card-left-foot">
                 <div class="home-upcoming-events-card-rsvp-data">
                     <h6 class="card-rsvp-done"><i class="fa-regular fa-circle-check"></i> {{$upcomingEvent['total_accept_event_user']}}</h6>
@@ -134,7 +136,7 @@
                         </div>
             </div>
         </div>
-        <a href="" class="home-upcoming-events-card-right">
+        <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-right">
             <img src="{{$upcomingEvent['event_images']}}" class="lazy" alt="">
         </a>
     </div>
