@@ -572,7 +572,8 @@
                                                         alt="schedule">
                                                 </span>
                                                 <div>
-                                                    @foreach ($eventDetails['event_schedule'] as $key = > $schedule)
+                                                    {{-- {{dd($eventDetails['event_schedule'])}} --}}
+                                                    @foreach ($eventDetails['event_schedule'] as $key => $schedule)
                                                         @php
                                                             if (
                                                                 empty($schedule['start_time']) &&
@@ -587,12 +588,12 @@
                                                             $colorIndex++;
                                                             $startTime = \Carbon\Carbon::parse($schedule['start_time']);
                                                             $endTime = \Carbon\Carbon::parse($schedule['end_time']);
-                                                            if($schedule['start_time']==null || $schedule['start_time']==null){
+                                                            if (empty($schedule['start_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
                                                                 $index = $key +1;
 
                                                                 $startTimenew = $schedule[$index]['start_time'];
                                                                 $duration = $startTimenew->diffInHours($endTime) . 'h';
-                                                            }elseif ($schedule['end_time']==null || $schedule['end_time']==null) {
+                                                            }elseif (empty($schedule['end_time']) && isset($eventDetails['event_schedule'][$key + 1])) {
                                                                 $index = $key +1;
 
                                                                 $endTimenew = $schedule[$index]['end_time'];
@@ -609,10 +610,9 @@
                                                                 <div class="shedule-box-left">
                                                                     <h6>{{ $schedule['activity_title'] }}</h6>
                                                                     <span>{{ $schedule['start_time'] }}
-                                                                        @if (!empty($schedule['start_time']))
-                                                                        @endif
+                                                                       
                                                                         @if (!empty($schedule['end_time']))
-                                                                            -
+                                                                            
                                                                             {{ $schedule['end_time'] }}
                                                                         @endif
                                                                     </span>
