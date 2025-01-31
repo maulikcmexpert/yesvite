@@ -2169,7 +2169,7 @@
 }
 
 .home-latest-draf-card .progress-bar__wrapper.red progress[value]::after {
-    background: #3BBEE8;
+    background: #E03137;
     width: 25%;
 }
 
