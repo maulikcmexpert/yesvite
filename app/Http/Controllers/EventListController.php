@@ -2656,9 +2656,8 @@ if ($rsvpSent != null) {
             if($eventName!=""){
                 $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
             }else{
-                $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->get();
                 Session::forget('notification_event_ids');
-
+                return response()->json(['view' => 'No Data Found']);
             }
             foreach ($eventDatas as $vals) {
                 $eventDetail['id'] = $vals->id;
