@@ -1740,8 +1740,7 @@
                                                         class="accordion-collapse" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample" style="">
                                                         <div class="accordion-body">
-                                                            <div class="accordion-body-content limits-count" style="display: none;">
-                                                                id="user-list-{{ $itemkey }}-{{ $index }}">
+                                                            <div class="accordion-body-content limits-count" style="display: none;" id="user-list-{{ $itemkey }}-{{ $index }}">
 
                                                                 @if (Auth::guard('web')->user()->profile != '')
                                                                     @php
