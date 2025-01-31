@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    // Initially disable the submit button
-    $('button[type="submit"]').prop('disabled', true);
+    // // Initially disable the submit button
+    // $('button[type="submit"]').prop('disabled', true);
 
     // Listen for changes in RSVP status (YES/NO)
     $('input[name="rsvp_status"]').change(function () {
