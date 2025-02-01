@@ -1806,66 +1806,37 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 function updateTimers() {
-    const timeSpans = document.querySelectorAll(".time"); // Select all spans with class "time"
+    const timeSpans = document.querySelectorAll(".time");
 
-    // Step 1: Process spans where data-loop is NOT 0
-    timeSpans.forEach((span, index) => {
-        let dataLoop = parseInt(span.getAttribute("data-loop"));
-        let dataRLoop = parseInt(span.getAttribute("data-rloop"));
-        let dataTime = span.getAttribute("data-time").trim();
-        let timeClass = `rtime_${dataTime.replace(/\s+/g, "")}`; // Create class identifier
+    function processSpans(attribute, stopCondition) {
+        let group = [];
 
-        if (dataLoop !== 0) {
-            span.classList.add(timeClass); // Assign class for grouping
-            let nextIndex = index + 1;
+        timeSpans.forEach((span) => {
+            let attrValue = parseInt(span.getAttribute(attribute), 10);
+            let timeValue = span.getAttribute("data-time")?.trim();
+            let className = `.${span.classList[1]}`; // Get the dynamic class (rtime_X or stime_X)
 
-            // Find the last occurrence before a data-rloop=0
-            while (nextIndex < timeSpans.length) {
-                let nextSpan = timeSpans[nextIndex];
-                let nextDataLoop = parseInt(nextSpan.getAttribute("data-loop"));
-                let nextDataRLoop = parseInt(
-                    nextSpan.getAttribute("data-rloop")
-                );
-
-                if (nextDataLoop === dataLoop && nextDataRLoop !== 0) {
-                    nextIndex++;
-                } else {
-                    timeSpans[nextIndex - 1].innerHTML =
-                        timeSpans[nextIndex - 1].getAttribute("data-time");
-                    break;
+            if (attrValue !== 0) {
+                group.push(span);
+            } else {
+                if (group.length > 0) {
+                    group[group.length - 1].innerHTML = timeValue; // Keep last span in group
+                    group.slice(0, -1).forEach((s) => (s.innerHTML = "")); // Clear others
+                    group = [];
                 }
             }
+        });
+
+        // Handle last group in case no stopCondition found
+        if (group.length > 0) {
+            let last = group[group.length - 1];
+            last.innerHTML = last.getAttribute("data-time");
+            group.slice(0, -1).forEach((s) => (s.innerHTML = ""));
         }
-    });
+    }
 
-    // Step 2: Process spans where data-rloop is NOT 0
-    timeSpans.forEach((span, index) => {
-        let dataLoop = parseInt(span.getAttribute("data-loop"));
-        let dataRLoop = parseInt(span.getAttribute("data-rloop"));
-        let dataTime = span.getAttribute("data-time").trim();
-        let timeClass = `stime_${dataTime.replace(/\s+/g, "")}`;
-
-        if (dataRLoop !== 0) {
-            span.classList.add(timeClass);
-            let nextIndex = index + 1;
-
-            while (nextIndex < timeSpans.length) {
-                let nextSpan = timeSpans[nextIndex];
-                let nextDataLoop = parseInt(nextSpan.getAttribute("data-loop"));
-                let nextDataRLoop = parseInt(
-                    nextSpan.getAttribute("data-rloop")
-                );
-
-                if (nextDataRLoop === dataRLoop && nextDataLoop !== 0) {
-                    nextIndex++;
-                } else {
-                    timeSpans[nextIndex - 1].innerHTML =
-                        timeSpans[nextIndex - 1].getAttribute("data-time");
-                    break;
-                }
-            }
-        }
-    });
+    processSpans("data-loop", "data-rloop");
+    processSpans("data-rloop", "data-loop");
 }
 
 // setInterval(updateTimers, 1000);
