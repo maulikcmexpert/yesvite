@@ -950,12 +950,9 @@ $(document).ready(function () {
     // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .poll-option").each(function (index) {
-            if (index >= 2) {  // Ensuring options 1 & 2 remain unchanged
-                $(this).find(".option-number").text(index + 1);
-            }
+            $(this).find(".option-number").text(index + 3);
         });
     }
-
 
 
     // Submit form on button click
