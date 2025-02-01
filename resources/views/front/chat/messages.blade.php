@@ -925,32 +925,34 @@ use Carbon\Carbon;
 <div class="modal fade cmn-modal" id="submitmsgreport" tabindex="-1" aria-labelledby="submitmsgreportLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
-              <div class="submit-blocks">
-                  <span class="active">Harassment</span> <input type="radio" name="report"/>
-                  <span>Hate</span> <input type="radio" name="report"/>
-                  <span>Threatening Violence</span> <input type="radio" name="report"/>
-                  <span>Spam</span> <input type="radio" name="report"/>
-                  <span>Inappropriate Content</span> <input type="radio" name="report"/>
-                  <span>Violating Platform Policies</span> <input type="radio" name="report"/>
-              </div>
-              
-              <div class="textbox-container">
-                <input type="text" id="violation-textbox" placeholder="Details of Violation (Optional)"/>
-              </div>
-  
-              <div class="review-text">
-                 <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
-          </div>
+            <form name="report" action="">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
+                <div class="submit-blocks">
+                    <span class="active">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
+                    <span>Hate</span> <input type="radio" name="report_type" value="Hate"/>
+                    <span>Threatening Violence</span> <input type="radio" name="report_type" value="Threatening Violence"/>
+                    <span>Spam</span> <input type="radio" name="report_type" value="Spam"/>
+                    <span>Inappropriate Content</span> <input type="radio" name="report_type" value="Inappropriate Content"/>
+                    <span>Violating Platform Policies</span> <input type="radio" name="report_type" value="Violating Platform Policies"/>
+                </div>
+                
+                <div class="textbox-container">
+                    <input type="text" name="report_description" id="violation-textbox" placeholder="Details of Violation (Optional)"/>
+                </div>
+    
+                <div class="review-text">
+                    <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
+                </div>
+            </form>
         </div>
     </div>
   </div>
