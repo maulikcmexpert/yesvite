@@ -1875,6 +1875,8 @@ class EventWallController extends Controller
         $emails = [];
         $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
             ->get();
+
+        // dd($getAllContacts);    
         if ($getAllContacts->isNotEmpty()) {
             $emails = $getAllContacts->pluck('email')->toArray();
         }
