@@ -165,7 +165,7 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->prefer_by,
-                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
+                                'invited_by' => $userVal->prefer_by == 'phone' ? $userVal->phone_number : $userVal->email,
                                 'profile' => $userVal->profile ?? '',
                             ];
                             if ($getEventData->is_draft_save == "0" && $request->iscopy == null) {
@@ -203,7 +203,7 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->preferBy,
-                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
+                                'invited_by' => $userVal->preferBy == 'phone' ? $userVal->phone : $userVal->email,
                                 'profile' => $userVal->photo ?? '',
 
                             ];
