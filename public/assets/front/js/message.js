@@ -1808,14 +1808,13 @@ function addMessageToList(key, messageData, conversationId) {
 function updateTimers() {
     const messages = document.querySelectorAll("li"); // Select all message list items
 
-    let lastSenderTime = null;
-    let lastReceiverTime = null;
     let lastSenderElem = null;
     let lastReceiverElem = null;
 
+    let prevType = null; // Track previous message type (sender/receiver)
+
     messages.forEach((msg, index) => {
         const timeSpan = msg.querySelector(".time");
-
         if (!timeSpan) return; // Skip if no time element
 
         const timeText =
@@ -1824,26 +1823,38 @@ function updateTimers() {
         const isReceiver = msg.classList.contains("receiver");
 
         if (isSender) {
-            if (lastSenderTime === timeText) {
-                if (lastSenderElem) lastSenderElem.innerHTML = ""; // Clear previous sender time
+            if (prevType === "receiver" && lastReceiverElem) {
+                lastReceiverElem.innerHTML =
+                    lastReceiverElem.getAttribute("data-time"); // Retain last receiver time
             }
-            lastSenderTime = timeText;
+
+            if (lastSenderElem) lastSenderElem.innerHTML = ""; // Clear previous sender time
             lastSenderElem = timeSpan; // Update last sender element
+
+            prevType = "sender"; // Update previous message type
         }
 
         if (isReceiver) {
-            if (lastReceiverTime === timeText) {
-                if (lastReceiverElem) lastReceiverElem.innerHTML = ""; // Clear previous receiver time
+            if (prevType === "sender" && lastSenderElem) {
+                lastSenderElem.innerHTML =
+                    lastSenderElem.getAttribute("data-time"); // Retain last sender time
             }
-            lastReceiverTime = timeText;
+
+            if (lastReceiverElem) lastReceiverElem.innerHTML = ""; // Clear previous receiver time
             lastReceiverElem = timeSpan; // Update last receiver element
+
+            prevType = "receiver"; // Update previous message type
         }
     });
 
-    // Ensuring the last messages retain their times
-    if (lastSenderElem) lastSenderElem.innerHTML = lastSenderTime;
-    if (lastReceiverElem) lastReceiverElem.innerHTML = lastReceiverTime;
+    // Ensure last messages of both types keep their timestamps
+    if (lastSenderElem)
+        lastSenderElem.innerHTML = lastSenderElem.getAttribute("data-time");
+    if (lastReceiverElem)
+        lastReceiverElem.innerHTML = lastReceiverElem.getAttribute("data-time");
 }
+
+setInterval(updateTimers, 1000);
 
 var formattedDate = {};
 var messageRcvTime = "";
