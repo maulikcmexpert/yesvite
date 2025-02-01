@@ -114,6 +114,8 @@ class EventAboutController extends Controller
                     $till_days = "Past";
                 }
             }
+            $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
+            $eventDetails['total_event_comments']= $event_comments;
             $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
@@ -195,8 +197,7 @@ class EventAboutController extends Controller
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
-                        ->where('event_id', $eventDetail->id)
-
+                    ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
                         ->get();
 
 
