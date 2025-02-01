@@ -129,7 +129,7 @@ class EventController extends BaseController
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
 
-            
+
             if ($request->id != "") {
                 // dD();
                 $eventDetail['isCohost'] = $getEventData->is_draft_save;
@@ -684,7 +684,10 @@ class EventController extends BaseController
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
-        if($request->isdraft =="0"){
+        if ($request->isCopy != "") {
+            $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
+        }
+        if ($request->isdraft == "0") {
             debit_coins($user_id, $eventId, $get_count_invited_user);
         }
         if (isset($request->event_id) && $request->event_id != NULL) {
@@ -2185,7 +2188,7 @@ class EventController extends BaseController
         $userIds = session()->get('user_ids', []);
         // dD($users);
         // dd($userIds);
-        if(!empty($users)){
+        if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
                 $user_detail = User::where('id', $value['id'])->first();
@@ -2193,10 +2196,10 @@ class EventController extends BaseController
                 $userimage = ($user_detail->profile);
                 // $useremail = $user_detail->input('email');
                 // $phone = $user_detail->input('mobile');
-    
+
                 if ($user_detail) {
-    
-    
+
+
                     $userEntry = [
                         'id' => $value['id'],
                         'firstname' => $user_detail->firstname,
@@ -2205,17 +2208,17 @@ class EventController extends BaseController
                         'prefer_by' => $value['preferby'],
                         'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
                     ];
-    
+
                     $userExists = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] === $id;
                     });
-    
+
                     $userIds = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] !== $id;
                     });
-    
+
                     $userIds[] = $userEntry;
-    
+
                     if (!empty($userExists)) {
                         $data[] = ['userdata' => $userEntry, 'is_duplicate' => 1];
                     } else {
@@ -2233,12 +2236,12 @@ class EventController extends BaseController
                 'success' => true,
                 'data' => $data
             ]);
-        }else{
+        } else {
             return response()->json([
-                
+
                 'success' => true,
-                "isTrue"=>1
-               
+                "isTrue" => 1
+
             ]);
         }
     }
@@ -3273,9 +3276,9 @@ class EventController extends BaseController
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 // if ($request->isdraft == "1") {
-                    EventPotluckCategory::where('event_id', $request->event_id)->delete();
-                    EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
-                    UserPotluckItem::where('event_id', $request->event_id)->delete();
+                EventPotluckCategory::where('event_id', $request->event_id)->delete();
+                EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+                UserPotluckItem::where('event_id', $request->event_id)->delete();
                 // }
                 if (isset($potluck) && !empty($potluck)) {
 
@@ -3387,7 +3390,17 @@ class EventController extends BaseController
                 }
             }
 
-
+                    $get_count_invited_user = 0;
+                    $conatctId = session('contact_ids');
+                    $invitedCount = session('user_ids');
+                    $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
+                    if($request->is_update_event == '1'){
+                        $get_count_invited_user =$get_count_invited_user- $request->Alreadyguest;
+                    }
+                   
+                    if ($request->isDraftEdit == "1" || $request->is_update_event == '1') {
+                        debit_coins($user_id, $eventId, $get_count_invited_user);
+                    }
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
@@ -3514,8 +3527,7 @@ class EventController extends BaseController
                     //     // dd($newInviteGuest);
                     //     sendNotificationGuest('invite', $notificationParam);
                     // }
-                    // $total_count = count($filteredIds) + count($newInviteGuest);
-                    // debit_coins($user->id, $eventData['event_id'], $total_count);
+                    // $total_count = count($filteredIds) + count($newInviteGuest);                  
                 }
             }
 
