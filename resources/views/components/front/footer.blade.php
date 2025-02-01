@@ -272,71 +272,6 @@ defer
 @stack('scripts')
 
 <script>
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import {
-            getDatabase,
-            ref,
-            get,
-            onValue,
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-        // Initialize Firebase and set up the database connection
-        (async function() {
-            const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
-
-            if (userId != undefined) {
-                try {
-                    // Fetch Firebase configuration from firebase_js.json
-                    const response = await fetch("/firebase_js.json");
-                    const firebaseConfig = await response.json();
-
-                    // Initialize Firebase app
-                    const app = initializeApp(firebaseConfig);
-                    const database = getDatabase(app);
-
-                    // Reference to the user's overview data in Firebase
-                    const overviewRef = ref(database, `overview/${userId}`);
-                    console.log({overviewRef})
-                    // Function to calculate unread count
-                    function updateUnreadCount(snapshot) {
-                        let totalUnreadCount = 0;
-
-                        // Check if data exists
-                        if (snapshot.exists()) {
-                            console.log({snapshot})
-                            const conversations = snapshot.val();
-
-                            for (let conversationId in conversations) {
-                                const conversation = conversations[conversationId];
-
-                                if (conversation.unReadCount && conversation.contactName) {
-                                    totalUnreadCount += parseInt(conversation.unReadCount, 10);
-                                }
-                            }
-                        }
-
-                        // Output the total unread count (you can update your UI here)
-                        console.log("Total Unread Count:", totalUnreadCount);
-                        // Optionally, update the UI (e.g., a badge or counter)
-                    }
-
-                    // Listen for real-time changes in the overview data
-                    onValue(overviewRef, (snapshot) => {
-                        updateUnreadCount(snapshot);
-                    });
-
-                    // Initial fetch of the data (optional)
-                    const snapshot = await get(overviewRef);
-                    updateUnreadCount(snapshot);
-
-                } catch (error) {
-                    console.error("Error fetching data from Firebase:", error);
-                }
-            }
-        })();
-
-
-
 
     $(document).on('click','.create_event_with_plan',function(){
     // toggleSidebar('sidebar_change_plan_create');
@@ -451,3 +386,66 @@ defer
         }
     });
     </script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+        getDatabase,
+        ref,
+        get,
+        onValue,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    (async function() {
+        const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
+
+        if (userId != undefined) {
+            try {
+                // Fetch Firebase configuration from firebase_js.json
+                const response = await fetch("/firebase_js.json");
+                const firebaseConfig = await response.json();
+
+                // Initialize Firebase app
+                const app = initializeApp(firebaseConfig);
+                const database = getDatabase(app);
+
+                // Reference to the user's overview data in Firebase
+                const overviewRef = ref(database, `overview/${userId}`);
+
+                // Function to calculate unread count
+                function updateUnreadCount(snapshot) {
+                    let totalUnreadCount = 0;
+
+                    // Check if data exists
+                    if (snapshot.exists()) {
+                        const conversations = snapshot.val();
+
+                        for (let conversationId in conversations) {
+                            const conversation = conversations[conversationId];
+
+                            if (conversation.unReadCount && conversation.contactName) {
+                                totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                            }
+                        }
+                    }
+
+                    // Output the total unread count (you can update your UI here)
+                    console.log("Total Unread Count:", totalUnreadCount);
+                    // Optionally, update the UI (e.g., a badge or counter)
+                }
+
+                // Listen for real-time changes in the overview data
+                onValue(overviewRef, (snapshot) => {
+                    updateUnreadCount(snapshot);
+                });
+
+                // Initial fetch of the data (optional)
+                const snapshot = await get(overviewRef);
+                updateUnreadCount(snapshot);
+
+            } catch (error) {
+                console.error("Error fetching data from Firebase:", error);
+            }
+        }
+    })();
+</script>
