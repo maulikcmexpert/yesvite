@@ -777,7 +777,9 @@ $(document).ready(function () {
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
         const id = $(this).data("id");
-        const isSelected =$(this).data('prefer');
+        // const isSelected =$(this).data('prefer');
+        const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
+
 
             const first_name = $(this).data("name");
             const last_name = $(this).data("last");
