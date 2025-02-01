@@ -1131,6 +1131,19 @@ $(".show-comment-reply-btn").click(function () {
 $(document).ready(function () {
     // Handle Hide/Mute/Report Button Click
     $('.postControlButton').on('click', function () {
+        var muteIcon = $(this).find('#muteIcon');
+    var unmuteIcon = $(this).find('#unmuteIcon');
+
+    // Toggle visibility of icons:
+    // If muteIcon is visible, hide it and show unmuteIcon
+    // If unmuteIcon is visible, hide it and show muteIcon
+    if (muteIcon.is(':visible')) {
+        muteIcon.hide();
+        unmuteIcon.show();
+    } else {
+        muteIcon.show();
+        unmuteIcon.hide();
+    }
         // Retrieve necessary data attributes
         var $button = $(this);
         var eventId = $(this).data('event-id');
