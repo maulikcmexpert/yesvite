@@ -932,12 +932,12 @@ use Carbon\Carbon;
             <div class="modal-body">
               <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
               <div class="submit-blocks">
-                  <span class="active">Harassment</span>
-                  <span>Hate</span>
-                  <span>Threatening Violence</span>
-                  <span>Spam</span>
-                  <span>Inappropriate Content</span>
-                  <span>Violating Platform Policies</span>
+                  <span class="active">Harassment</span> <input type="radio" name="report"/>
+                  <span>Hate</span> <input type="radio" name="report"/>
+                  <span>Threatening Violence</span> <input type="radio" name="report"/>
+                  <span>Spam</span> <input type="radio" name="report"/>
+                  <span>Inappropriate Content</span> <input type="radio" name="report"/>
+                  <span>Violating Platform Policies</span> <input type="radio" name="report"/>
               </div>
               
               <div class="textbox-container">
