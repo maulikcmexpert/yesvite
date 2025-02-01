@@ -1,4 +1,4 @@
-{{-- {{dd($postList  )}} --}}
+{{dd($postList  )}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
