@@ -798,7 +798,7 @@ $(document).ready(function () {
         
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
-            addToGuestPhoneList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
             $(".phoneContact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
