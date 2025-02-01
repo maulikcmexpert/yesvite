@@ -2275,7 +2275,7 @@ class EventController extends BaseController
         // dd($userIds,$users);
         if (!empty($users)) {
             foreach ($users as $value) {
-                $id = intval($value['id']);
+                $id = $value['id'];
                 $user_detail = User::where('id', $id )->first();
                 // dd($user_detail->profile);
                 $userimage = ($user_detail->profile);
