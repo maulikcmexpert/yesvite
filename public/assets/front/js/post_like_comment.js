@@ -250,7 +250,7 @@ $(document).ready(function () {
                     const commentList = $(`.posts-card-show-all-comments-wrp.show_${eventPostId}`).find(".top-level-comments");
 
                     // Check if the comment is already appended
-                    if (commentList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
+                    if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
                         commentList.append(newCommentHTML);
                     }
                 }
@@ -598,7 +598,7 @@ function updateModal(
     updateFunction
 ) {
     const $modalBody = $(modalSelector);
-    $modalBody.empty();
+    // $modalBody.empty();
     contactList.forEach((contact, index) => {
         const profileImage =
             contact.profile ||
