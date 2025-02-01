@@ -588,11 +588,11 @@ $(document).on('click', '.open_photo_model', function () {
                 console.log('Profile Image URL:', profileImage);
                 // Check if profileImage is an image URL or HTML content
                 if (profileImage) {
-                    // If it's a placeholder, insert initials inside a div
-                    $('.posts-card-head-left-img').html(profileImage);
-                } else {
-                    // Otherwise, update the img src
                     $('.posts-card-head-left-img img').attr('src', profileImage);
+
+                } else {
+                      // If it's a placeholder, insert initials inside a div
+                      $('.posts-card-head-left-img').html(profileImage);
                 }
 
                 function generateProfileImage(firstname, lastname) {
