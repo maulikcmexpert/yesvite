@@ -728,7 +728,7 @@ $(document).ready(function () {
         const email = $(this).data("email");
         const profile = $(this).data("profile");
         console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isPhoneSelected}`
+            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
         );
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
@@ -759,7 +759,7 @@ $(document).ready(function () {
         // Add to the guest list if either email or phone is selected
 
         console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isPhoneSelected}`
+            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
         );
         // Add to the guest list, prefer email if selected, else prefer phone
         // addToGuestList(id, isEmailSelected ? "email" : "phone", 0);
