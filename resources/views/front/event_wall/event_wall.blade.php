@@ -52,7 +52,7 @@
                                     <x-event_wall.wall_story :users="$users" :event="$event" :storiesList="$storiesList"
                                         :wallData="$wallData" />
                                     <x-event_wall.wall_crate_poll_photo :users="$users" />
-{{                                    dd($postList)}}
+{{-- {{                                    dd($postList)}} --}}
                                     @foreach ($postList as $post)
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                             data-post-id="{{ $post['id'] }}">
