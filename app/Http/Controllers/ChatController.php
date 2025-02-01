@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\admin\Auth;
 use App\Models\User;
+use App\Models\UserReportChat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use DB;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redis;
+use SendGrid\Mail\Mail;
 
 class ChatController extends Controller
 {
@@ -448,5 +452,58 @@ class ChatController extends Controller
             ->get();
 
         return response()->json($users);
+    }
+
+    public function chatReport(Request $request)
+    {
+        $user  = Auth::guard('web')->user();
+
+        $request->validate([
+            'to_be_reported_user_id' => 'required|string|exists:users,id',
+            'report_conversation_id' => 'required|email',
+        ]);
+
+        try {
+
+            DB::beginTransaction();
+            $reportCreate = new UserReportChat();
+            $reportCreate->reporter_user_id =  $user->id;
+            $reportCreate->to_be_reported_user_id = $request->to_be_reported_user_id;
+            $reportCreate->conversation_id = $request->report_conversation_id;
+            $reportCreate->report_type = $request->report_type;
+            $reportCreate->report_description = $request->report_description;
+            $reportCreate->save();
+            $savedReportId = $reportCreate->id;
+            $createdAt = $reportCreate->created_at;
+            DB::commit();
+            $message = "Reported to admin for this user";
+
+
+            $support_email = env('SUPPORT_MAIL');
+
+            $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->first();
+            $data = [
+                'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
+                'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
+                'report_type' => $request->report_type,
+                'report_description' => $request->report_description,
+                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+                'report_from' => "chat"
+            ];
+
+            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
+                $messages->to($support_email)
+                    ->subject('Chat Report Mail');
+            });
+
+            return response()->json(['status' => 1, 'message' => $message]);
+        } catch (QueryException $e) {
+
+            DB::rollBack();
+
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
     }
 }
