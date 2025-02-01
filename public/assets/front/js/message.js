@@ -2231,7 +2231,8 @@ function createMessageElement(
     );
     let setTimeS = 1;
     let setTimeR = 1;
-
+    console.log({ time });
+    console.log({ msgLoop });
     if (isSender) {
         if (msgLoop != 0) {
             Array.from(time).forEach((timeElement) => {
