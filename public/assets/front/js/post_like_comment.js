@@ -29,6 +29,7 @@ $(document).ready(function () {
         const isLiked = button.hasClass("liked");
         const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
 
+
         // Toggle like button appearance
         if (isLiked) {
             button.removeClass("liked");
@@ -37,6 +38,9 @@ $(document).ready(function () {
             button.addClass("liked");
             button.find("i").removeClass("fa-regular").addClass("fa-solid");
         }
+
+
+        isLiked = button.hasClass("liked");
 
         // AJAX call to update the like state
         const eventId = button.data("event-id");

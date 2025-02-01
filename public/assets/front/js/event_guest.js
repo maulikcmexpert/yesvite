@@ -41,9 +41,9 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     });
 });
 
-// $('#editrsvp').on('hidden.bs.modal', function () {
-//     $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
-// });
+$('#editrsvp').on('hidden.bs.modal', function () {
+    $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
+});
 // Reset adults and kids values when "Not Attending" is selected
 $(document).on('change', '.rsvp_status_no', function () {
     $('.edit-rsvp-qty').prop("disabled",true);
@@ -110,8 +110,23 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
                 guestContainer.find('.sucess-yes').remove();
                 guestContainer.find('.sucess-no').remove();
                 guestContainer.find('.no-reply').remove();
-                window.location.reload();
-                $('#editrsvp').modal('hide');
+                    $('<div id="pageOverlay"></div>').css({
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'rgba(255, 255, 255, 0)', // Transparent background
+                        zIndex: 9999
+                    }).appendTo('body');
+
+                    
+                    $('#editrsvp').modal('hide');
+                    toastr.success('RSVP updated successfully');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 50); 
+
                 // Now append or update the appropriate div based on RSVP status
                 if (response.rsvp_status == '1') {
                     // If the guest's RSVP is "YES"

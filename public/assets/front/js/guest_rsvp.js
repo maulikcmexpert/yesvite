@@ -19,10 +19,15 @@ $(document).on('click', '.edit_rsvp_guest', function () {
 
             // Update the radio buttons based on RSVP status
             if (response.rsvp_status == "1") {
-                $('.rsvp_yes').prop('checked', true); // Attending
+                $('.rsvp_yes').prop('checked', true); 
+                $('.side_menu_minus').prop('disabled',false)
+                $('.side_menu_plus').prop('disabled',false)
+                // Attending
             }
             if (response.rsvp_status == "0") {
-                $('.rsvp_no').prop('checked', true); // Not Attending
+                $('.rsvp_no').prop('checked', true); 
+                $('.side_menu_minus').prop('disabled',true)
+                $('.side_menu_plus').prop('disabled',true)
             }
 
             // Store guest ID in the save button data attribute
@@ -103,8 +108,22 @@ $(document).on('click', '.save-rsvp', function () {
                 // // Remove existing status icon
                 guestContainer.find('span').remove();
 
-                window.location.reload();
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
+
+                
                 $('#editrsvp3').modal('hide');
+                toastr.success('RSVP updated successfully');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 50); 
 
                 // Append new RSVP status based on the response
                 if (response.rsvp_status == '1') {

@@ -552,8 +552,9 @@ class EventController extends BaseController
 
     public function store(Request $request)
     {
-        // $potluck = session('category');
-        // dd($request);
+        $potluck = session('category');
+        dd($potluck);
+        
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('desgin_slider');
@@ -648,37 +649,7 @@ class EventController extends BaseController
         $event_creation->subscription_plan_name = (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro";
         $event_creation->subscription_invite_count = (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15;
         $event_creation->save();
-        // $event_creation = Event::create([
-        //     'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
-        //     'user_id' => $user_id,
-        //     'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
-        //     'hosted_by' => (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "",
-        //     'start_date' => (isset($startDate) && $startDate != "") ? $startDateFormat : null,
-        //     'end_date' => (isset($endDate) && $endDate != "") ? $endDateFormat : null,
-        //     'rsvp_by_date_set' => (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0",
-        //     'rsvp_by_date' => (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null,
-        //     'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
-        //     'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
-        //     'rsvp_end_time' => (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "",
-        //     'rsvp_end_timezone' => (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "",
-        //     'rsvp_end_time_set' => (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "",
-        //     'event_location_name' => (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "",
-        //     'address_1' => (isset($request->address1) && $request->address1 != "") ? $request->address1 : "",
-        //     'address_2' => (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "",
-        //     'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
-        //     'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
-        //     'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
-        //     'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
-        //     'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
-        //     'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
-        //     'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
-        //     'greeting_card_id' => (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0",
-        //     'gift_registry_id' => (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0",
-        //     // 'rsvp_end_time_set' => "",
-        //     // 'address_2' => "",
-        //     'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro",
-        //     'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15,
-        // ]);
+      
         $eventId = $event_creation->id;
         $get_count_invited_user = 0;
         $conatctId = session('contact_ids');
@@ -915,9 +886,50 @@ class EventController extends BaseController
                 }
             }
 
+            // if (isset($request->potluck) && $request->potluck == "1") {
+            //     $potluck = session('category');
+            //     if (isset($potluck) && !empty($potluck)) {
+            //         foreach ($potluck as $category) {
+            //             $eventPodluck = EventPotluckCategory::create([
+            //                 'event_id' => $eventId,
+            //                 'user_id' => $user_id,
+            //                 'category' => $category['category_name'],
+            //                 'quantity' => $category['category_quantity'],
+            //             ]);
+            //             if (isset($category['item'])) {
+            //                 foreach ($category['item'] as $item) {
+            //                     $eventPodluckitem = EventPotluckCategoryItem::create([
+            //                         'event_id' => $eventId,
+            //                         'user_id' => $user_id,
+            //                         'event_potluck_category_id' => $eventPodluck->id,
+            //                         'self_bring_item' =>  $item['self_bring'],
+            //                         'description' => $item['name'],
+            //                         'quantity' => $item['quantity'],
+            //                     ]);
+            //                     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+            //                         UserPotluckItem::Create([
+            //                             'event_id' => $eventId,
+            //                             'user_id' => $user_id,
+            //                             'event_potluck_category_id' => $eventPodluck->id,
+            //                             'event_potluck_item_id' => $eventPodluckitem->id,
+            //                             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+            //                         ]);
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
+                // if ($request->isdraft == "1") {
+                EventPotluckCategory::where('event_id', $request->event_id)->delete();
+                EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+                UserPotluckItem::where('event_id', $request->event_id)->delete();
+                // }
                 if (isset($potluck) && !empty($potluck)) {
+
                     foreach ($potluck as $category) {
                         $eventPodluck = EventPotluckCategory::create([
                             'event_id' => $eventId,
@@ -935,15 +947,29 @@ class EventController extends BaseController
                                     'description' => $item['name'],
                                     'quantity' => $item['quantity'],
                                 ]);
-                                if (isset($item['self_bring']) && $item['self_bring'] == '1') {
-                                    UserPotluckItem::Create([
-                                        'event_id' => $eventId,
-                                        'user_id' => $user_id,
-                                        'event_potluck_category_id' => $eventPodluck->id,
-                                        'event_potluck_item_id' => $eventPodluckitem->id,
-                                        'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
-                                    ]);
+                                if (isset($item['item_carry_users'])) {
+                                    foreach ($item['item_carry_users'] as $user) {
+                                        UserPotluckItem::Create([
+                                            'event_id' => $eventId,
+                                            'user_id' => $user->user_id,
+                                            'event_potluck_category_id' => $eventPodluck->id,
+                                            'event_potluck_item_id' => $eventPodluckitem->id,
+                                            'quantity' => $user->quantity
+                                        ]);
+                                    }
                                 }
+                                // else{
+                                //     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+                                //         UserPotluckItem::Create([
+                                //             'event_id' => $eventId,
+                                //             'user_id' => $user_id,
+                                //             'event_potluck_category_id' => $eventPodluck->id,
+                                //             'event_potluck_item_id' => $eventPodluckitem->id,
+                                //             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+                                //         ]);
+                                //     }
+                                // }
+
                             }
                         }
                     }
@@ -1756,48 +1782,83 @@ class EventController extends BaseController
         $total_item = 0;
         $total_quantity = 0;
 
+        // if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
+
+        //     // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
+        //     // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
+        //     // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
+        //     if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
+        //         foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
+
+        //             if ($id == $userVal['user_id']) {
+        //                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
+
+
+        //                 session()->put('category', $categories);
+        //                 Session::save();
+        //             }
+        //             $total_quantity =  $total_quantity + $userVal['quantity'];
+        //         }
+        //         // dd(1,$categories);
+        //     } else {
+
+        //         $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
+        //         $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
+        //         session()->put('category', $categories);
+        //         Session::save();
+        //         // dd(2,$categories);
+        //         $total_quantity =  1;
+        //     }
+
+
+        //     // $total_item = $total_item + $value['quantity'];
+
+        //     // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+        //     //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+        //     // }else{
+        //     //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+        //     // }
+        //     // }
+        // }
+
         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
 
-            // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
-            // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
-            // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
+            // Check if 'item_carry_users' exists for the current item
             if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
+                
+                // Loop through each user in 'item_carry_users'
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
-
+                    
+                    // Check if the current user matches the provided user ID
                     if ($id == $userVal['user_id']) {
-                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
-
-
+                        // Set the quantity based on the request type
+                        $newQuantity = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
+                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = $newQuantity;
+        
+                        // Save updated categories to the session
                         session()->put('category', $categories);
                         Session::save();
                     }
-                    $total_quantity =  $total_quantity + $userVal['quantity'];
+                    
+                    // Add the user's quantity to the total quantity
+                    $total_quantity += $userVal['quantity'];
                 }
-                // dd(1,$categories);
             } else {
-
-                $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
-                $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
+                // If 'item_carry_users' does not exist, create a new user entry
+                $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0] = [
+                    'quantity' => $quantity,
+                    'user_id' => $id
+                ];
+                
+                // Save updated categories to the session
                 session()->put('category', $categories);
                 Session::save();
-                // dd(2,$categories);
-                $total_quantity =  1;
+                
+                // Initialize total quantity to 1 for the first user
+                $total_quantity = 1;
             }
-
-
-            // $total_item = $total_item + $value['quantity'];
-
-            // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-            //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-            // }else{
-            //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-            // }
-            // }
         }
-
-
-        // dd(session('category'));       
-        // $total_item = $total_item - $total_quantity ;
+        
 
         return $total_item;
     }
@@ -1975,7 +2036,6 @@ class EventController extends BaseController
 
     public function getUserAjax(Request $request)
     {
-
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
@@ -2029,12 +2089,7 @@ class EventController extends BaseController
                 'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
                 'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
                 'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
-                // 'ischecked' => in_array($user->id, $invitedUserIds) ? "1" : "0",
             ];
-            // $yesviteUserDetail['app_user']  = $user->app_user;
-            // $yesviteUserDetail['visible'] =  $user->visible;
-            // $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
-            // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
 
