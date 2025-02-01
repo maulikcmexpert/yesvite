@@ -1754,122 +1754,125 @@
                                                         class="accordion-collapse" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample" style="">
                                                         <div class="accordion-body">
-                                                            <div class="accordion-body-content limits-count" style="display: none;" id="user-list-{{ $itemkey }}-{{ $index }}">
+                                                        @if ($user->id != $values['user_id'])
+                            
+                                                        <div class="accordion-body-content limits-count" style="display: none;" id="user-list-{{ $itemkey }}-{{ $index }}">
 
-                                                                @if (Auth::guard('web')->user()->profile != '')
-                                                                    @php
-                                                                        $user = Auth::guard('web')->user();
-                                                                    @endphp
-                                                                    <img src="{{ url('storage/profile/' . Auth::guard('web')->user()->profile) }}"
-                                                                        alt="">
+                                                            @if (Auth::guard('web')->user()->profile != '')
+                                                                @php
+                                                                    $user = Auth::guard('web')->user();
+                                                                @endphp
+                                                                <img src="{{ url('storage/profile/' . Auth::guard('web')->user()->profile) }}"
+                                                                    alt="">
 
-                                                                    <h5>{{ $user->firstname }} {{ $user->lastname }}
+                                                                <h5>{{ $user->firstname }} {{ $user->lastname }}
 
-                                                                    </h5>
-                                                                @else
-                                                                    {{-- <span class="ms-auto">1</span> --}}
-                                                                    @php
-                                                                        $user = Auth::guard('web')->user();
-                                                                    @endphp
-                                                                     <h5
-                                                                     class="{{ $fontColorUser }} add-item-under-text me-auto">
-                                                                     {{ $initialsUser }} </h5>
-                                                                <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
-                                                                 </h5>
-                                                                @endif
-                                                                @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
-                                                                    <div class="qty-container ms-auto">
-                                                                        <input type="hidden"
-                                                                            class="category-item-key"
-                                                                            value="{{ $itemkey }}">
-                                                                        <input type="hidden"
-                                                                            class="category-index-key"
-                                                                            value="{{ $index }}">
-                                                                        <input type="hidden"
-                                                                            class="category-item-quantity"
-                                                                            value="{{ $items['quantity'] }}">
-                                                                        <input type="hidden"
-                                                                            class="item-quantity-minus"
-                                                                            value="0">
-                                                                        <button class="qty-btnminus"
-                                                                            type="button"><i
-                                                                                class="fa fa-minus"></i></button>
-                                                                        <input type="number" name="qty"
-                                                                            value="0" class="input-qty"
-                                                                            readonly="">
-                                                                        <button class="qty-btnplus"
-                                                                            type="button"><i
-                                                                                class="fa fa-plus"></i></button>
-                                                                    </div>
+                                                                </h5>
+                                                            @else
+                                                                {{-- <span class="ms-auto">1</span> --}}
+                                                                @php
+                                                                    $user = Auth::guard('web')->user();
+                                                                @endphp
+                                                                 <h5
+                                                                 class="{{ $fontColorUser }} add-item-under-text me-auto">
+                                                                 {{ $initialsUser }} </h5>
+                                                            <h5 class="me-auto"> {{ $user->firstname }} {{ $user->lastname }}
+                                                             </h5>
+                                                            @endif
+                                                            @if (Auth::guard('web')->user()->id == $eventDetail['user_id'])
+                                                                <div class="qty-container ms-auto">
+                                                                    <input type="hidden"
+                                                                        class="category-item-key"
+                                                                        value="{{ $itemkey }}">
+                                                                    <input type="hidden"
+                                                                        class="category-index-key"
+                                                                        value="{{ $index }}">
+                                                                    <input type="hidden"
+                                                                        class="category-item-quantity"
+                                                                        value="{{ $items['quantity'] }}">
+                                                                    <input type="hidden"
+                                                                        class="item-quantity-minus"
+                                                                        value="0">
+                                                                    <button class="qty-btnminus"
+                                                                        type="button"><i
+                                                                            class="fa fa-minus"></i></button>
+                                                                    <input type="number" name="qty"
+                                                                        value="0" class="input-qty"
+                                                                        readonly="">
+                                                                    <button class="qty-btnplus"
+                                                                        type="button"><i
+                                                                            class="fa fa-plus"></i></button>
+                                                                </div>
 
-                                                                    <div class="d-flex">
-                                                                        <a href="#" class="me-3">
-                                                                            <svg width="16" height="16"
-                                                                                viewBox="0 0 16 16" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <path
-                                                                                    d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-miterlimit="10"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"></path>
-                                                                                <path
-                                                                                    d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-miterlimit="10"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"></path>
-                                                                            </svg>
-                                                                        </a>
-                                                                        <a href="#" class="delete-self-bring"
-                                                                            id="deleteBring-{{ $itemkey }}-{{ $index }}"
-                                                                            data-categoryitem="{{ $itemkey }}"
-                                                                            data-categoryindex="{{ $index }}"
-                                                                            data-innerUserQnt="{{ $items['innerUserQnt'] }}"
-                                                                            data-userqnt="{{ $values['quantity'] }}",
-                                                                            data-extraquantity="0"
-                                                                            data-itemquantity="{{ $items['quantity'] }}">
-                                                                            <svg width="16" height="16"
-                                                                                viewBox="0 0 16 16" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <path
-                                                                                    d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
-                                                                                    stroke="#F73C71"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round">
-                                                                                </path>
-                                                                                <path
-                                                                                    d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
-                                                                                    stroke="#F73C71"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round">
-                                                                                </path>
-                                                                                <path
-                                                                                    d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
-                                                                                    stroke="#F73C71"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round">
-                                                                                </path>
-                                                                                <path d="M6.88666 11H9.10666"
-                                                                                    stroke="#F73C71"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"></path>
-                                                                                <path d="M6.33331 8.33398H9.66665"
-                                                                                    stroke="#F73C71"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"></path>
-                                                                            </svg>
-                                                                        </a>
-                                                                    </div>
-                                                                @endif
-                                                            </div>
+                                                                <div class="d-flex">
+                                                                    <a href="#" class="me-3">
+                                                                        <svg width="16" height="16"
+                                                                            viewBox="0 0 16 16" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
+                                                                                stroke="#94A3B8"
+                                                                                stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path
+                                                                                d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
+                                                                                stroke="#94A3B8"
+                                                                                stroke-width="1.5"
+                                                                                stroke-miterlimit="10"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </a>
+                                                                    <a href="#" class="delete-self-bring"
+                                                                        id="deleteBring-{{ $itemkey }}-{{ $index }}"
+                                                                        data-categoryitem="{{ $itemkey }}"
+                                                                        data-categoryindex="{{ $index }}"
+                                                                        data-innerUserQnt="{{ $items['innerUserQnt'] }}"
+                                                                        data-userqnt="{{ $values['quantity'] }}",
+                                                                        data-extraquantity="0"
+                                                                        data-itemquantity="{{ $items['quantity'] }}">
+                                                                        <svg width="16" height="16"
+                                                                            viewBox="0 0 16 16" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                            </path>
+                                                                            <path d="M6.88666 11H9.10666"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                            <path d="M6.33331 8.33398H9.66665"
+                                                                                stroke="#F73C71"
+                                                                                stroke-width="1.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></path>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        @endif
                                                             <div class="accordion-body-content limits-count"
                                                                 id="user-list-{{ $itemkey }}-{{ $index }}">
                                                                 @if ($values['profile'] != '')
