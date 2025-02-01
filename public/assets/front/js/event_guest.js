@@ -41,9 +41,9 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     });
 });
 
-// $('#editrsvp').on('hidden.bs.modal', function () {
-//     $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
-// });
+$('#editrsvp').on('hidden.bs.modal', function () {
+    $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
+});
 // Reset adults and kids values when "Not Attending" is selected
 $(document).on('change', '.rsvp_status_no', function () {
     $('.edit-rsvp-qty').prop("disabled",true);
