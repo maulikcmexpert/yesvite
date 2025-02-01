@@ -553,6 +553,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
+        dd($potluck);
         
         Session::forget('desgin');
         Session::forget('shape_image');
@@ -1858,8 +1859,6 @@ class EventController extends BaseController
             }
         }
         
-        // dd(session('category'));       
-        // $total_item = $total_item - $total_quantity ;
 
         return $total_item;
     }
