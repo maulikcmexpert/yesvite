@@ -185,6 +185,7 @@ class EventPhotoController extends Controller
                 }
 
             }
+
             $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
@@ -215,6 +216,8 @@ class EventPhotoController extends Controller
                     $till_days = "Past";
                 }
             }
+            $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
+            $eventDetails['total_event_comments']=$event_comments;
             $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
