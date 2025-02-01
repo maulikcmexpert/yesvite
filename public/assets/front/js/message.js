@@ -2062,7 +2062,13 @@ function createMessageElement(
                 </div>
                 <hr>
                 <div class="reply-massage"> 
-
+                ${
+                    senderprofile != ""
+                        ? isReceiver
+                            ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                            : ""
+                        : ""
+                }
 
                     ${
                         messageData?.type == "1"
