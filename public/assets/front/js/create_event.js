@@ -10,6 +10,7 @@ var selected_co_host_prefer_by =
     $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
 var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
+var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 
 var swiper;
 var isPhonecontact = 0;
@@ -2008,12 +2009,11 @@ function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
     var Alreadyguest = $(".users-data.invited_users").length;
 
-    $("#event_guest_count").text((total_guest + Alreadyguest) + " Guests");
+    $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
-    console.log(total_guest);
-    console.log(max_guest);
-
-    var remainingCount = max_guest - total_guest;
+    
+   var remainingCount = max_guest - (total_guest+Alreadyguest);
+ 
     if (remainingCount < 0) {
         $(".invite-left_d").text("Invites | 0 Left");
     } else {
@@ -9030,9 +9030,14 @@ function sliderImages(id) {
     });
 }
 
-if (eventId != "") {
+if (eventId != "" || isCopy != "") {
     // alert(eventId);
-    sliderImages(eventId);
+    if(eventId){
+        sliderImages(eventId);
+
+    }else{
+        sliderImages(isCopy);
+    }
 }
 
 $(document).on("click",'#final_see_invite_btn', function (event) {
