@@ -8802,7 +8802,7 @@ function step4open() {
 }
 var remainingCategoryCount = 0;
 var remainingCategoryCountn = 0;
-function updateTOP_(categoryIndex) {
+function updateTOP(categoryIndex) {
     var list = document.getElementsByClassName("list-slide-" + categoryIndex);
 
     if (list.length === 0) return;
@@ -8828,7 +8828,7 @@ function updateTOP_(categoryIndex) {
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
-        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
+        let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val();
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
@@ -8868,7 +8868,7 @@ function updateTOP_(categoryIndex) {
     return { totalMissing, totalOver };
 }
 
-function updateTOP(categoryIndex) {
+function updateTOPOLD(categoryIndex) {
     var list = document.getElementsByClassName("list-slide-" + categoryIndex);
 
     if (list.length === 0) return;
@@ -8893,7 +8893,7 @@ function updateTOP(categoryIndex) {
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
-        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
+        let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val();
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
