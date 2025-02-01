@@ -552,8 +552,8 @@ class EventController extends BaseController
 
     public function store(Request $request)
     {
-        // $potluck = session('category');
-        // dd($request);
+        $potluck = session('category');
+        dd($potluck);
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('desgin_slider');
