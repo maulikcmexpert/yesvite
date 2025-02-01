@@ -43,7 +43,7 @@ $(document).on('click', '.edit_guest_rsvp', function () {
 
 $('#editrsvp').on('hidden.bs.modal', function () {
     // Remove the guest ID data when the modal is closed
-    $('#editrsvp .save-btn').removeData('guest-update-id');
+    $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
 });
 // Reset adults and kids values when "Not Attending" is selected
 $(document).on('change', '.rsvp_status_no', function () {
