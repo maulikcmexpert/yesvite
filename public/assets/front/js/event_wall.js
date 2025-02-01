@@ -958,11 +958,9 @@ $(document).ready(function () {
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
         var $this = $(this); // Cache the button
-
+        $this.prop('disabled', true)
         // Prevent multiple clicks
-        setTimeout(function(){
-            $this.prop('disabled', true)
-        },50000)
+      
         // if ($this.prop('disabled')) {
         //     return;
         // }
