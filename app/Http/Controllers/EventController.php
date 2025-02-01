@@ -218,7 +218,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
-            // dd(session('user_ids'));
+            dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
                 if($request->iscopy != null){
