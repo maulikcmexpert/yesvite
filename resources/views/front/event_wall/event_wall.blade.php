@@ -285,7 +285,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="posts-card-like-comment-right emoji_display_like">
-                                                        <button class="posts-card-like-btn" id="likeButton"
+                                                        <button class="posts-card-like-btn liked" id="likeButton"
                                                             data-event-id="{{ $event }}"
                                                             data-event-post-id="{{ $post['id'] }} "
                                                             data-user-id="{{ $login_user_id }}">
