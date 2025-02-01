@@ -941,9 +941,9 @@ $(document).ready(function () {
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
             renumberOptions(); // Call function to renumber options after deletion
-            validateForm();
         });
 
+        renumberOptions(); // Ensure correct numbering
         validateForm();
     });
 
