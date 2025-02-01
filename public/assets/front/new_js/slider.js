@@ -23,6 +23,7 @@ var swiper = new Swiper(".mySwiper", {
     },
 });
 
+
 // ===photo-detal-slider===
 var swiper = new Swiper(".photo-detail-slider", {
     slidesPerView: 1,
@@ -32,8 +33,6 @@ var swiper = new Swiper(".photo-detail-slider", {
         prevEl: ".swiper-button-prev",
     },
 });
-
-
 
 
 //   ===story-slider===
