@@ -413,7 +413,7 @@ defer
                 const overviewRef = ref(database, `overview/${userId}`);
 
                 // Function to calculate unread count
-                function updateUnreadCount(snapshot) {
+                function updateUnreadCountG(snapshot) {
                     let totalUnreadCount = 0;
 
                     // Check if data exists
@@ -429,19 +429,27 @@ defer
                         }
                     }
 
-                    // Output the total unread count (you can update your UI here)
-                    console.log("Total Unread Count:", totalUnreadCount);
-                    // Optionally, update the UI (e.g., a badge or counter)
+                    if (parseInt(totalUnreadCount) > 0) {
+                        $(".badge").show();
+                        $(".g-badge").show();
+                        $(".g-badge").html(parseInt(totalUnreadCount));
+                        $(".badge").html(parseInt(totalUnreadCount));
+                    } else {
+                        $(".g-badge").hide();
+                        $(".badge").hide();
+                        $(".g-badge").html("");
+                        $(".badge").html("");
+                    }
                 }
 
                 // Listen for real-time changes in the overview data
                 onValue(overviewRef, (snapshot) => {
-                    updateUnreadCount(snapshot);
+                    updateUnreadCountG(snapshot);
                 });
 
                 // Initial fetch of the data (optional)
                 const snapshot = await get(overviewRef);
-                updateUnreadCount(snapshot);
+                updateUnreadCountG(snapshot);
 
             } catch (error) {
                 console.error("Error fetching data from Firebase:", error);
