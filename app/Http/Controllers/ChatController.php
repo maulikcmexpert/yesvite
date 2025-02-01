@@ -464,7 +464,7 @@ class ChatController extends Controller
         ]);
 
         try {
-
+            dd($request->all());
             DB::beginTransaction();
             $reportCreate = new UserReportChat();
             $reportCreate->reporter_user_id =  $user->id;
