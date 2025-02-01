@@ -1646,7 +1646,8 @@ $(".send-message").on("keypress", async function (e) {
                     // replyTimeStamp: Date.now(),
                     // replyUserName: senderUserName,
                     replyTimeStamp: replyMessageData.timeStamp,
-                    replyUserName: receiverName,
+                    // replyUserName: receiverName,
+                    replyUserName: senderUserName,
                     replyDocType: "",
                 };
                 messageData.isReply = "1";
