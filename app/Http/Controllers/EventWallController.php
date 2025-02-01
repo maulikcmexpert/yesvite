@@ -560,6 +560,8 @@ class EventWallController extends Controller
         $eventDetails['hosted_by'] = $eventDetail->hosted_by;
         $eventDetails['total_event_comments']=$event_comments;
         $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+        $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+        $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
         $rsvp_status = "";
         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
