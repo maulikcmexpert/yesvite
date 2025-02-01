@@ -4630,9 +4630,17 @@ applyStyles();
 // }
 $("#chatreport").validate({
     rules: {
-        report_type: true,
+        report_type: {
+            required: true, // Specify 'required' instead of 'true'
+        },
+    },
+    messages: {
+        report_type: {
+            required: "Please select a report type.", // Custom error message
+        },
     },
 });
+
 $(document).on(
     "click",
     ".report-single-conversation, .report-conversation",

@@ -954,6 +954,7 @@ use Carbon\Carbon;
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <label id="report_type-error" class="error" for="report_type"></label>
                     <button type="submit" class="btn btn-secondary">Submit Report</button>
                 </div>
             </form>

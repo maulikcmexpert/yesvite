@@ -40,7 +40,7 @@ $(document).ready(function () {
         }
 
 
-        isLiked = button.hasClass("liked");
+
 
         // AJAX call to update the like state
         const eventId = button.data("event-id");
