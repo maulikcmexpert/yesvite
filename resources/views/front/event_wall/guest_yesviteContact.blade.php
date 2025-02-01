@@ -131,7 +131,8 @@
 
                 $email_checked = '';
                 $phone_checked = '';
-                $disabled = '';
+                $e_disabled='';
+                $p_disabled='';                
 
                 $commaoAlredy = '';
                 if (isset($selected_yesvite_user) && !empty($selected_yesvite_user)) {
@@ -372,6 +373,8 @@
                 // dd(1);
                 $email_cont_checked = '';
                 $phone_cont_checked = '';
+                $cont_p_disabled='';
+                $cont_e_disabled='';
                 $disabled = '';
                 $emialAlredy = '';
                 $phoneAlredy = '';
