@@ -658,7 +658,7 @@ class EventController extends BaseController
         if ($request->isCopy != "") {
             $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
         }
-        if ($request->isdraft == "0") {
+        if (isset($request->isdraft) && $request->isdraft == "0") {
             debit_coins($user_id, $eventId, $get_count_invited_user);
         }
         if (isset($request->event_id) && $request->event_id != NULL) {
@@ -1077,10 +1077,19 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                    $get_count_invited_user = 0;
+                    $conatctId = session('contact_ids');
+                    $invitedCount = session('user_ids');
+                    $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
+                    if ($request->isCopy != "") {
+                        $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
+                    }
+                        debit_coins($user_id, $eventId, $get_count_invited_user);
                 }
             }
 
-
+           
+            
             // if ($request->thankyou_message == "1") {
             //     $thankyou_card = session('thankyou_card_data');
             //     if (isset($thankyou_card) && !empty($thankyou_card)) {

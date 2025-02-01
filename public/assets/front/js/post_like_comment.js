@@ -1,3 +1,5 @@
+let guestList = [];
+
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
@@ -467,6 +469,7 @@ $(document).ready(function () {
     const event_id = $('#event_id').val();
 
     $("#allcontact").on("click", function () {
+        guestList=[];
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         if (allContactsSuccess) {
@@ -799,6 +802,14 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         `;
         $modalBody.append(contactHtml);
 
+        const totalHtml = `
+                <a href="#" class="guest-user d-block yesvite ">
+                    <div class="guest-user-img guest-total">
+                        <span class="number" id="total-selected-email">${selectedContacts.length}</span>
+                        <span class="content">Total</span>
+                 </div>
+                 <h6>Sell all</h6>
+                </a>`;
 
         console.log("Updated guest list:", guestList);
     }
@@ -811,36 +822,30 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
-
         console.log("Guest list before submit:", guestList);
-        // Check if there are any guests to send
-
-        // Log guestList before sending the request
         console.log("Sending guest list:", guestList);
-
-        // Send data to the server via AJAX
-        $.ajax({
-            url: base_url + "event_wall/send-invitation", // Your Laravel route
-            method: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: {
-                event_id: $("#event_id").val(), // Event ID from a hidden input
-                guest_list: guestList,
-            },
-            success: function (response) {
-                if (response.status === 1) {
-                    alert(response.message); // Show success message
-                    guestList = []; // Clear guest list after successful submission
-                } else {
-                    alert(response.message); // Show error message
-                }
-            },
-            error: function (xhr) {
-                alert("Something went wrong. Please try again."); // Handle AJAX errors
-            },
-        });
+        // $.ajax({
+        //     url: base_url + "event_wall/send-invitation", // Your Laravel route
+        //     method: "POST",
+        //     headers: {
+        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        //     },
+        //     data: {
+        //         event_id: $("#event_id").val(), // Event ID from a hidden input
+        //         guest_list: guestList,
+        //     },
+        //     success: function (response) {
+        //         if (response.status === 1) {
+        //             alert(response.message); // Show success message
+        //             guestList = []; // Clear guest list after successful submission
+        //         } else {
+        //             alert(response.message); // Show error message
+        //         }
+        //     },
+        //     error: function (xhr) {
+        //         alert("Something went wrong. Please try again."); // Handle AJAX errors
+        //     },
+        // });
     });
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
