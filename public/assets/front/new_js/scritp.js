@@ -358,8 +358,8 @@ const uploadpolldelete = document.querySelector(".upload-poll-delete");
 $("#create-photo-btn").click(function () {
     $(".create-post-upload-img-wrp").removeClass("d-none");
     $(".create-post-poll-wrp").addClass("d-none");
-
-    $("#photoForm")[0].reset();
+    $("#imagePreview").empty();
+    $("#photoForm").reset();
 });
 
 $("#create-poll-btn").click(function () {

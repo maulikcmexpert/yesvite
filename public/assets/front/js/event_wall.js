@@ -1195,6 +1195,7 @@ $(".modal").on("hidden.bs.modal", function(){
     $("#postContent").val('');
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
+    $("#imagePreview").empty();
 
 });
 
