@@ -1806,33 +1806,44 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 function updateTimers() {
-    // Get all time span elements
-    let timeElements = document.querySelectorAll(".time");
+    // Get all message elements
+    let messages = document.querySelectorAll("li");
 
-    // Object to track the latest message for each timestamp
-    let latestMessage = {};
+    // Track the last time for both sender and receiver
+    let lastSenderTime = null;
+    let lastReceiverTime = null;
 
-    // Loop through all time elements
-    timeElements.forEach((span) => {
-        let timeText = span.innerHTML.trim(); // Get time (e.g., "05:06 pm")
-        let classList = span.classList;
+    // Loop through each message
+    messages.forEach((msg) => {
+        let timeSpan = msg.querySelector(".time");
+        if (!timeSpan) return;
 
-        // Check if class starts with rtime_ or stime_
-        let timeClass = [...classList].find(
-            (cls) => cls.startsWith("rtime_") || cls.startsWith("stime_")
-        );
+        // Get time and type (sender or receiver)
+        let timeText =
+            timeSpan.getAttribute("data-time") || timeSpan.innerText.trim();
+        let isSender = msg.classList.contains("sender");
+        let isReceiver = msg.classList.contains("receiver");
 
-        if (timeClass) {
-            // Store the latest span for this timeClass
-            if (latestMessage[timeClass]) {
-                // Remove text from previous spans with the same timestamp
-                latestMessage[timeClass].innerHTML = "";
+        if (isSender) {
+            // If same as previous sender time, clear previous time's HTML
+            if (lastSenderTime && lastSenderTime.time === timeText) {
+                lastSenderTime.element.innerHTML = "";
             }
-            // Update the latest message reference
-            latestMessage[timeClass] = span;
+            // Update last sender time
+            lastSenderTime = { time: timeText, element: timeSpan };
+        }
+
+        if (isReceiver) {
+            // If same as previous receiver time, clear previous time's HTML
+            if (lastReceiverTime && lastReceiverTime.time === timeText) {
+                lastReceiverTime.element.innerHTML = "";
+            }
+            // Update last receiver time
+            lastReceiverTime = { time: timeText, element: timeSpan };
         }
     });
 }
+
 var formattedDate = {};
 var messageRcvTime = "";
 let chatloop = 0;
@@ -2268,15 +2279,13 @@ function createMessageElement(
                 if ($(timeElement).data("loop") > msgLoop) {
                     setTimeS = 0;
                 } else {
-                    $(timeElement).text("");
+                    //$(timeElement).text("");
                 }
             });
         } else {
-            $(time).text("");
+            // $(time).text("");
         }
     } else {
-        console.log({ Rtime });
-        console.log({ recMsgLoop });
         const Rtime = document.getElementsByClassName(
             `rtime_${messageRcvTime.replace(/\s/g, "")}`
         );
@@ -2285,11 +2294,11 @@ function createMessageElement(
                 if ($(timeElement).data("Rloop") > recMsgLoop) {
                     setTimeR = 0;
                 } else {
-                    $(timeElement).text("");
+                    //$(timeElement).text("");
                 }
             });
         } else {
-            $(Rtime).text("");
+            // $(Rtime).text("");
         }
     }
 
@@ -2306,6 +2315,7 @@ function createMessageElement(
         timeClass = `rtime_${messageRcvTime.replace(/\s/g, "")}`;
         msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
+    msgTime = messageRcvTime;
     updateTimers();
     return `<div>
     ${daychange}
@@ -2313,7 +2323,7 @@ function createMessageElement(
             isSender ? "receiver" : "sender"
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" class="time ${timeClass}">${msgTime}</span>            
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}">${msgTime}</span>            
         </li>
     </div>
     `;

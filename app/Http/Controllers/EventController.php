@@ -164,8 +164,8 @@ class EventController extends BaseController
                                 'id' => $userVal->id,
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
-                                'prefer_by' => $user->prefer_by,
-                                'invited_by' => $user->prefer_by == 'phone' ? $userVal->phone_number : $userVal->email,
+                                'prefer_by' => $user['prefer_by'],
+                                'invited_by' => $user['prefer_by'] == 'phone' ? $userVal->phone_number : $userVal->email,
                                 'profile' => $userVal->profile ?? '',
                             ];
                             if ($getEventData->is_draft_save == "0" && $request->iscopy == null) {
@@ -202,8 +202,8 @@ class EventController extends BaseController
                                 'sync_id' => $userVal->id,
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
-                                'prefer_by' => $user->prefer_by,
-                                'invited_by' => $user->prefer_by == 'phone' ? $userVal->phone : $userVal->email,
+                                'prefer_by' => $user['prefer_by'],
+                                'invited_by' => $user['prefer_by'] == 'phone' ? $userVal->phone : $userVal->email,
                                 'profile' => $userVal->photo ?? '',
 
                             ];
@@ -2272,7 +2272,7 @@ class EventController extends BaseController
         $users = $request->users;
         $userIds = session()->get('user_ids', []);
         // dD($users);
-        // dd($userIds);
+        dd($userIds,$users);
         if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
