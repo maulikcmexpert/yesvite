@@ -211,7 +211,7 @@
                         <div class="ms-auto">
                             <input class="form-check-input failed-checkout contact-checkbox email-checkbox"
                                 type="checkbox" data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}"
-                                data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
+                                data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}" data-profile="{{$contact->profile}}"
                                 data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$disabled}}>
                         </div>
                     </div>
