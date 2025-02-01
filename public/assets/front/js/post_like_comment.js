@@ -724,7 +724,7 @@ $(document).ready(function () {
         const first_name = $(this).data("name");
         const last_name = $(this).data("last");
         const email = $(this).data("email");
-        const profile = $(this).data("email");
+        const profile = $(this).data("profile");
         // console.log(
         //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         // );
