@@ -249,28 +249,29 @@
                                             @if (!empty($guestArray))
                                                 @foreach ($guestArray as $guest)
                                                     {{-- {{     dd($guest['id'])}} --}}
-                                                    @if (isset($guest))
+                                                    @if (isset($guest['user']))
                                                         @php
-                                                            // dd($guest['id']);
+                                                            $user = $guest['user']; // Fetch user array
+                                                            // dd($user['id']);
                                                             $isDisabled =
-                                                                $eventDetails['host_id'] == $guest['id'] ? 'd-none' : '';
+                                                                $eventDetails['host_id'] == $user['id'] ? 'd-none' : '';
                                                         @endphp
                                                         <div class="guest-user-box {{ $isDisabled }}"
                                                             data-guest-id="{{ $guest['id'] }}">
                                                             <div class="guest-list-data">
                                                                 <a href="#" class="guest-img">
-                                                                    @if ($guest['profile'] != '')
-                                                                        <img src="{{ $guest['profile']}}"
+                                                                    @if ($user['profile'] != '')
+                                                                        <img src="{{ asset('storage/profile/' . $user['profile']) }}"
                                                                             alt="">
                                                                     @else
                                                                         @php
 
                                                                             // $parts = explode(" ", $name);
-                                                                            $firstInitial = isset($guest['first_name'][0])
-                                                                                ? strtoupper($guest['first_name'][0])
+                                                                            $firstInitial = isset($user['firstname'][0])
+                                                                                ? strtoupper($user['firstname'][0])
                                                                                 : '';
-                                                                            $secondInitial = isset($guest['last_name'][0])
-                                                                                ? strtoupper($guest['last_name'][0])
+                                                                            $secondInitial = isset($user['lastname'][0])
+                                                                                ? strtoupper($user['lastname'][0])
                                                                                 : '';
                                                                             $initials =
                                                                                 strtoupper($firstInitial) .
@@ -284,17 +285,17 @@
                                                                     @endif
 
                                                                     <input type="hidden" id="eventID"
-                                                                        value="{{ $event }}">
+                                                                        value="{{ $guest['event_id'] }}">
                                                                     <input type="hidden" id="user_id"
-                                                                        value="{{ $guest['id'] }}">
+                                                                        value="{{ $guest['user_id'] }}">
 
                                                                 </a>
                                                                 <div class="d-flex flex-column">
                                                                     <a href="#"
-                                                                        class="guest-name">{{ $guest['first_name'] }}
-                                                                        {{ $guest['last_name'] }}</a>
+                                                                        class="guest-name">{{ $user['firstname'] }}
+                                                                        {{ $user['lastname'] }}</a>
                                                                     <span
-                                                                        class="guest-email">{{ $guest['email'] }}</span>
+                                                                        class="guest-email">{{ $user['email'] }}</span>
                                                                 </div>
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
