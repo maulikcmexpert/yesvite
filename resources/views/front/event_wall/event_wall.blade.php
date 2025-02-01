@@ -792,7 +792,7 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                                    {{dd($pollsData)}}
+                                    {{-- {{dd($pollsData)}} --}}
                                     @foreach ($pollsData as $poll)
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                             data-post-id="{{ $poll['event_post_id'] }}">
@@ -936,22 +936,22 @@
                                                         </div>
 
                                                         <h5>
-                                                            @foreach ($postList as $post)
-                                                                @if ($post['rsvp_status'] == '1')
+
+                                                                @if ($poll['rsvp_status'] == '1')
                                                                     <span class="positive-ans">
                                                                         <i
                                                                             class="fa-solid fa-circle-check"></i>Yes</span>
-                                                                @elseif($post['rsvp_status'] == '0')
+                                                                @elseif($poll['rsvp_status'] == '0')
                                                                     <span class="positive-ans not-ans"><i
                                                                             class="fa-solid fa-circle-question"></i>No
                                                                         Answer</span>
-                                                                @elseif($post['rsvp_status'] == '2')
+                                                                @elseif($poll['rsvp_status'] == '2')
                                                                     <span class="positive-ans nagative-ans">
                                                                         <i class="fa-solid fa-circle-xmark"></i>Not
                                                                         Coming
                                                                     </span>
                                                                 @endif
-                                                            @endforeach
+
                                                             {{ $poll['post_time'] }}
                                                         </h5>
 
