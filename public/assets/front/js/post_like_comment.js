@@ -668,11 +668,13 @@ $(document).ready(function () {
             $(this).data("type") === "phone" && $(this).is(":checked");
 
         // Add to the guest list if either email or phone is selected
-
-        console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
-        );
-            addToGuestList(id, isEmailSelected ? "email" : "phone", 1); // App user = 1 for email (app user)
+        const first_name = $(this).data("name");
+        const last_name = $(this).data("last");
+        const email = $(this).data("email");
+        // console.log(
+        //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
+        // );
+            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email); // App user = 1 for email (app user)
         
     });
 
@@ -696,7 +698,7 @@ $(document).ready(function () {
     // Declare guestList outside so it's globally accessible
     let guestList = [];
 
-    function addToGuestList(id, preferBy, appUser) {
+    function addToGuestList(id, preferBy, appUser,first_name,last_name,email) {
         // Check if the contact is already in the guest list to avoid duplicates
         console.log("Adding to guest list:", { id, preferBy, appUser });
 
@@ -716,6 +718,34 @@ $(document).ready(function () {
         } else {
             console.log("Contact already in guest list:", { id });
         }
+
+        const $modalBody = $('.selected-contacts-list');
+    // $modalBody.empty();
+        // const profileImage =
+        //     contact.profile ||
+        //     generateProfileImage(contact.name, contact.lastname);
+            const profileImage =
+          
+            generateProfileImage(first_name,last_name);
+        const contactHtml = `
+            <div class="guest-user" data-id="${index}">
+                <div class="guest-user-img">
+                   ${profileImage}
+                    <a href="#" class="close">
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+                <h6>${first_name} ${last_name}</h6>
+            </div>
+
+        `;
+        $modalBody.append(contactHtml);
+
 
         console.log("Updated guest list:", guestList); // Check the updated guest list
     }
