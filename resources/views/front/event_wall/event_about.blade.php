@@ -418,7 +418,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{      dd($eventDetails)}}
+                                        {{-- {{      dd($eventDetails)}} --}}
                                         <div class="host-users-detail cmn-card">
                                             <h4 class="title">Your hosts</h4>
                                             <div class="host-user-con-box">
@@ -511,7 +511,7 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&& $eventDetails['logitude']!='')
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&& $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null )
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
