@@ -522,9 +522,9 @@
                     </div>
                     <form action="{{ route('event_photo.eventPost') }}" id="textform" method="POST"
                         enctype="multipart/form-data">
-                        <input type="hidden" id="hiddenVisibility" name="post_privacys" value="">
+                        <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
 
-                        <input type="hidden" id="hiddenAllowComments" name="commenting_on_off" value="">
+                        <input type="hidden" class="hiddenAllowComments" name="commenting_on_off" value="">
 
                         <input type="hidden" name="post_type" id="textPostType" value="0">
                         @csrf
@@ -571,10 +571,10 @@
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
                                     <input type="hidden" name="content" id="photoContent">
-                                    <input type="hidden" id="hiddenVisibility" name="post_privacys"
+                                    <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                     value="1">
                                 <input type="hidden" name="post_type" id="photoPostType" value="1">
-                                <input type="hidden" id="hiddenAllowComments" name="commenting_on_off"
+                                <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                     value="1">
                                     <span>
                                         <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
