@@ -920,6 +920,40 @@ use Carbon\Carbon;
         </div>
     </div>
 </div>
+
+<!-- submit msg report Modal -->
+<div class="modal fade cmn-modal" id="submitmsgreport" tabindex="-1" aria-labelledby="submitmsgreportLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
+              <div class="submit-blocks">
+                  <span class="active">Harassment</span>
+                  <span>Hate</span>
+                  <span>Threatening Violence</span>
+                  <span>Spam</span>
+                  <span>Inappropriate Content</span>
+                  <span>Violating Platform Policies</span>
+              </div>
+              
+              <div class="textbox-container">
+                <input type="text" id="violation-textbox" placeholder="Details of Violation (Optional)"/>
+              </div>
+  
+              <div class="review-text">
+                 <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
+          </div>
+        </div>
+    </div>
+  </div>
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
@@ -927,3 +961,4 @@ use Carbon\Carbon;
 <script type="module" src="{{asset('assets/front/js/chat.js')}}"></script>
 <script type="module" src="{{asset('assets/front/js/message.js')}}"></script>
 @endpush
+
