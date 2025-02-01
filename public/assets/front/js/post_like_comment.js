@@ -470,6 +470,7 @@ $(document).ready(function () {
 
     $("#allcontact").on("click", function () {
         guestList=[];
+        $('.remove_new_added_user').remove();
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         if (allContactsSuccess) {
