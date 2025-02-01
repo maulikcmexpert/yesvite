@@ -1131,6 +1131,13 @@ $(".show-comment-reply-btn").click(function () {
 $(document).ready(function () {
     // Handle Hide/Mute/Report Button Click
     $('.postControlButton').on('click', function () {
+        var muteIcon = $(this).find('#muteIcon');
+    var unmuteIcon = $(this).find('#unmuteIcon');
+
+    // Toggle visibility of icons:
+    // If muteIcon is visible, hide it and show unmuteIcon
+    // If unmuteIcon is visible, hide it and show muteIcon
+
         // Retrieve necessary data attributes
         var $button = $(this);
         var eventId = $(this).data('event-id');
@@ -1160,19 +1167,23 @@ $(document).ready(function () {
                     }else if (response.type == "mute") {
                         // Set button for unmuting
                         $button.data('post-control', 'unmute');
-                        $button.text("Unmute");
+                        // $button.text("Unmute");
 
                         // Toggle icon visibility
                         $button.find('#muteIcon').hide();  // Hide mute icon
                         $button.find('#unmuteIcon').show(); // Show unmute icon
+                        $button.find('.unmuteClass').show();
+                        $button.find('.muteClass').hide();
                     } else if (response.type === "unmute") {
                         // Set button for muting
                         $button.data('post-control', 'mute');
-                        $button.text("Mute");
+                        // $button.text("Mute");
 
                         // Toggle icon visibility
                         $button.find('#muteIcon').show();  // Show mute icon
+                        $button.find('.muteClass').show();  // Show mute icon
                         $button.find('#unmuteIcon').hide(); // Hide unmute icon
+                        $button.find('.unmuteClass').hide(); // Hide unmute icon
                     }
 
 

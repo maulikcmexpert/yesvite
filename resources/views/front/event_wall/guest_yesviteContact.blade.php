@@ -131,7 +131,8 @@
 
                 $email_checked = '';
                 $phone_checked = '';
-                $disabled = '';
+                $e_disabled='';
+                $p_disabled='';                
 
                 $commaoAlredy = '';
                 if (isset($selected_yesvite_user) && !empty($selected_yesvite_user)) {
@@ -143,6 +144,8 @@
                         $email_checked = '';
                         $phone_checked = '';
                         $disabled = '';
+                        $e_disabled='';
+                        $p_disabled='';
 
                         $commaoAlredy = '';
                         if ($contact->id === (int) $selected_yesvite_user[$key]['id']) {
@@ -153,10 +156,10 @@
                                     : '';
                             if ($selected_yesvite_user[$key]['prefer_by'] == 'email') {
                                 $email_checked = 'checked';
-                                $disabled='disabled';
+                                $e_disabled='disabled';
                             } elseif ($selected_yesvite_user[$key]['prefer_by'] == 'phone') {
                                 $phone_checked = 'checked';
-                                $disabled='disabled';
+                                $p_disabled='disabled';
                             }
                         }
                     }
@@ -213,7 +216,7 @@
                             <input class="form-check-input failed-checkout contact-checkbox email-checkbox"
                                 type="checkbox" data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}" data-prefer="email"
                                 data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}" data-profile="{{$contact->profile}}"
-                                data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$disabled}}>
+                                data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$e_disabled}}>
                         </div>
                     </div>
                     @if (!empty($contact->phone_number))
@@ -231,7 +234,7 @@
                                 type="checkbox" data-id="{{ $contact->id }}" data-profile="{{$contact->profile}}" data-prefer="phone"
                                 data-name="{{ $contact->firstname }}"
                                 data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
-                                data-phone="{{ $contact->phone_number }}" data-type="phone" {{ $phone_checked }} {{$disabled}}>
+                                data-phone="{{ $contact->phone_number }}" data-type="phone" {{ $phone_checked }} {{$p_disabled}}>
                         </div>
                     @endif
                 </div>
@@ -370,6 +373,8 @@
                 // dd(1);
                 $email_cont_checked = '';
                 $phone_cont_checked = '';
+                $cont_p_disabled='';
+                $cont_e_disabled='';
                 $disabled = '';
                 $emialAlredy = '';
                 $phoneAlredy = '';
@@ -379,13 +384,18 @@
                         $key = array_keys($selected_phone_user)[$foundKey];
                         $email_cont_checked = '';
                         $phone_cont_checked = '';
+                        $cont_p_disabled='';
+                        $cont_e_disabled='';
                         $emialAlredy = '';
                         $phoneAlredy = '';
                         if ($contact->id === (int) $selected_phone_user[$key]['sync_id']) {
                             if ($selected_phone_user[$key]['prefer_by'] == 'email') {
                                 $email_cont_checked = 'checked';
+                                $cont_e_disabled = 'disabled';
                             } elseif ($selected_phone_user[$key]['prefer_by'] == 'phone') {
                                 $phone_cont_checked = 'checked';
+                                $cont_p_disabled = 'disabled';
+
                             }
                         }
                     }
@@ -441,7 +451,7 @@
                                     data-id="{{ $contact->id }}" data-name="{{ $contact->firstName }}"
                                     data-last="{{ $contact->lastName }}" data-email="{{ $contact->email }}"
                                     data-phone="{{ $contact->phoneWithCode }}" data-type="email"
-                                    {{ $email_cont_checked }}>
+                                    {{ $email_cont_checked }} {{$cont_e_disabled}}>
                             </div>
                         </div>
                     @endif
@@ -460,7 +470,7 @@
                                 data-id="{{ $contact->id }}" data-name="{{ $contact->firstName }}"
                                 data-last="{{ $contact->lastName }}" data-email="{{ $contact->email }}"
                                 data-phone="{{ $contact->phoneWithCode }}" data-type="phone"
-                                {{ $phone_cont_checked }}>
+                                {{ $phone_cont_checked }}  {{$cont_p_disabled}}>
                         </div>
                     @endif
                 </div>
