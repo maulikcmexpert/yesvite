@@ -1885,7 +1885,18 @@ class EventWallController extends Controller
         ->where(['app_user' => '1'])
         ->whereIn('email', $emails)
         ->orderBy('firstname')
-        ->get();
+        ->when(!empty($limit), function ($query) use ($limit, $offset) {
+                    $query->limit($limit)
+                        ->offset($offset); // Pagination
+                })
+                ->when(!empty($searchUser), function ($query) use ($searchUser) {
+                    $query->where(function ($q) use ($searchUser) {
+                        $q->where('firstname', 'LIKE', "%{$searchUser}%")
+                            ->orWhere('lastname', 'LIKE', "%{$searchUser}%"); // Search by name
+                    });
+                })
+                ->orderBy('firstname', 'asc') // Order results by first name
+                ->get();
         $yesviteUsers = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
