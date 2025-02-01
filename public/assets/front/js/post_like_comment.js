@@ -733,12 +733,12 @@ $(document).ready(function () {
             `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         );
         if( $(this).is(":checked")){
+            $('.add_yesvite_guest_'+id).remove();
             addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             $(".contact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            $('.add_yesvite_guest_'+id).remove();
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
@@ -770,12 +770,12 @@ $(document).ready(function () {
         
         
         if( $(this).is(":checked")){
+            $('.add_yesvite_guest_'+id).remove();
             addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             $(".phoneContact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            $('.add_yesvite_guest_'+id).remove();
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
