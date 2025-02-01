@@ -52,6 +52,7 @@
                                     <x-event_wall.wall_story :users="$users" :event="$event" :storiesList="$storiesList"
                                         :wallData="$wallData" />
                                     <x-event_wall.wall_crate_poll_photo :users="$users" />
+{{                                    dd($postList)}}
                                     @foreach ($postList as $post)
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                             data-post-id="{{ $post['id'] }}">
@@ -285,7 +286,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="posts-card-like-comment-right emoji_display_like">
-                                                        <button class="posts-card-like-btn liked" id="likeButton"
+                                                        <button class="posts-card-like-btn {{ $isLiked ? 'liked' : '' }}" id="likeButton"
                                                             data-event-id="{{ $event }}"
                                                             data-event-post-id="{{ $post['id'] }} "
                                                             data-user-id="{{ $login_user_id }}">
