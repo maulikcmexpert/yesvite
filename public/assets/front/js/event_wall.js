@@ -1137,13 +1137,7 @@ $(document).ready(function () {
     // Toggle visibility of icons:
     // If muteIcon is visible, hide it and show unmuteIcon
     // If unmuteIcon is visible, hide it and show muteIcon
-    if (muteIcon.is(':visible')) {
-        muteIcon.hide();
-        unmuteIcon.show();
-    } else {
-        muteIcon.show();
-        unmuteIcon.hide();
-    }
+
         // Retrieve necessary data attributes
         var $button = $(this);
         var eventId = $(this).data('event-id');
