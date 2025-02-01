@@ -2006,8 +2006,8 @@ function add_user_counter() {
 }
 
 function guest_counter(total_guest, max_guest) {
-    var total_guest = $(".users-data.invited_user").length;
     var Alreadyguest = $(".users-data.invited_users").length;
+    var total_guest = $(".users-data.invited_user").length;  
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
@@ -9048,3 +9048,12 @@ $(document).on("click",'#final_see_invite_btn', function (event) {
     console.log(base_url + `event_wall/${eventId}`);
     window.location.href = url; // Redirect dynamically
 });
+
+function getcoins(){
+    var Alreadyguest = $(".users-data.invited_users").length;
+    var max_guest = $("#coins").val();
+
+    var AllCoins =max_guest-Alreadyguest;
+    $(".invite-left_d").text("Invites | " + AllCoins + " Left");
+}
+getcoins();

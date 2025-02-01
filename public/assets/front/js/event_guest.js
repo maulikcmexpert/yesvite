@@ -2,7 +2,7 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     // Reset the radio buttons to ensure a clean state for each modal interaction
     $('.rsvp_status_yes').prop('checked', false); // Attending
     $('.rsvp_status_no').prop('checked', false); // Not attending
-    $('#editrsvp').modal('hide'); // Hide the modal initially to set up data
+    $('#editrsvp').modal('show'); // Hide the modal initially to set up data
 
     const guestId = $(this).data('guest-id');
     console.log('Guest ID:', guestId);
@@ -41,9 +41,9 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     });
 });
 
-$('#editrsvp').on('hidden.bs.modal', function () {
-    $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
-});
+// $('#editrsvp').on('hidden.bs.modal', function () {
+//     $('#editrsvp .guest-rsvp-edit-btn').removeData('guest-update-id');
+// });
 // Reset adults and kids values when "Not Attending" is selected
 $(document).on('change', '.rsvp_status_no', function () {
     $('.edit-rsvp-qty').prop("disabled",true);

@@ -112,6 +112,7 @@ Route::post('contact-submit', [ContactUsController::class, 'submit'])->name('con
 
 Route::middleware('checkUserExist')->group(function () {
 
+    Route::post('/chatReport', [ChatController::class, 'chatReport'])->name('chatReport');
     Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
     Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
     Route::post('/check-payment', [PaymentController::class, 'checkPayment'])->name('payment.checkPay');
