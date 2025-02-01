@@ -20,7 +20,7 @@
                   "
                             aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Events</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('event.event_lists')}}">Events</a></li>
                                 <li class="breadcrumb-item">
                                     <a
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
