@@ -1197,3 +1197,5 @@ $(".modal").on("hidden.bs.modal", function(){
     $("#photoForm")[0].reset();
 
 });
+
+
