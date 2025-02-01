@@ -497,14 +497,14 @@ class ChatController extends Controller
             });
 
 
-            return redirect('message')->with('success', 'Report submitted!!!');
+            return redirect('messages')->with('success', 'Report submitted!!!');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
-            return redirect('message')->with('error', 'DB Error');
+            return redirect('messages')->with('error', 'DB Error');
         } catch (\Exception $e) {
-            return redirect('message')->with('error', 'Something went wrong!!!');
+            return redirect('messages')->with('error', 'Something went wrong!!!');
         }
     }
 }
