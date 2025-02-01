@@ -277,8 +277,8 @@ use Carbon\Carbon;
                                                         </svg>
                                                         <span>Block<span></a>
                                                 </li>
-                                                @endif
-                                                <li><a class="dropdown-item report-single-conversation" href="javascript:" data-bs-toggle="modal" data-bs-target="#submitmsgreport" data-conversation="{{$message['conversationId']}}">
+                                                
+                                                <li><a class="dropdown-item report-single-conversation" href="javascript:" data-bs-toggle="modal" data-bs-target="#submitmsgreport" data-conversation="{{$message['conversationId']}}" data-userId="{{@$message['contactId']}}">
                                                         <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M10.4974 18.9577C5.55573 18.9577 1.53906 14.941 1.53906 9.99935C1.53906 5.05768 5.55573 1.04102 10.4974 1.04102C15.4391 1.04102 19.4557 5.05768 19.4557 9.99935C19.4557 14.941 15.4391 18.9577 10.4974 18.9577ZM10.4974 2.29102C6.2474 2.29102 2.78906 5.74935 2.78906 9.99935C2.78906 14.2493 6.2474 17.7077 10.4974 17.7077C14.7474 17.7077 18.2057 14.2493 18.2057 9.99935C18.2057 5.74935 14.7474 2.29102 10.4974 2.29102Z" fill="#94A3B8" />
                                                             <path d="M10.5 11.4577C10.1583 11.4577 9.875 11.1743 9.875 10.8327V6.66602C9.875 6.32435 10.1583 6.04102 10.5 6.04102C10.8417 6.04102 11.125 6.32435 11.125 6.66602V10.8327C11.125 11.1743 10.8417 11.4577 10.5 11.4577Z" fill="#94A3B8" />
@@ -286,6 +286,7 @@ use Carbon\Carbon;
                                                         </svg>
                                                         Report</a>
                                                 </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -925,7 +926,10 @@ use Carbon\Carbon;
 <div class="modal fade cmn-modal" id="submitmsgreport" tabindex="-1" aria-labelledby="submitmsgreportLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form name="chatreport" id="chatreport" action="{{route('chatReport')}}">
+            <form name="chatreport" id="chatreport" action="{{route('chatReport')}}" method="post">
+                @csrf
+                <input name="report_conversation_id" id="report_conversation_id"/>
+                <input name="to_be_reported_user_id" id="to_be_reported_user_id"/>
                 <div class="modal-header">
                     <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
