@@ -270,66 +270,70 @@ defer
 @endif
 
 @stack('scripts')
-<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"></script>
+
 <script>
 <script>
-    (async function() {
-        const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            getDatabase,
+            ref,
+            get,
+            onValue,
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-        if (userId != undefined) {
-            try {
-                // Fetch Firebase configuration from firebase_js.json
-                const response = await fetch("/firebase_js.json");
-                const firebaseConfig = await response.json();
+        // Initialize Firebase and set up the database connection
+        (async function() {
+            const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
 
-                // Import the required Firebase functions
-                const { initializeApp } = firebase;
-                const { getDatabase, ref, get, onValue } = firebase.database;
+            if (userId != undefined) {
+                try {
+                    // Fetch Firebase configuration from firebase_js.json
+                    const response = await fetch("/firebase_js.json");
+                    const firebaseConfig = await response.json();
 
-                // Initialize Firebase
-                const app = initializeApp(firebaseConfig);
+                    // Initialize Firebase app
+                    const app = initializeApp(firebaseConfig);
+                    const database = getDatabase(app);
 
-                // Get a reference to Firebase Database
-                const database = getDatabase(app);
-                const overviewRef = ref(database, `overview/${userId}`);
+                    // Reference to the user's overview data in Firebase
+                    const overviewRef = ref(database, `overview/${userId}`);
 
-                // Function to calculate unread count
-                function updateUnreadCount(snapshot) {
-                    let totalUnreadCount = 0;
+                    // Function to calculate unread count
+                    function updateUnreadCount(snapshot) {
+                        let totalUnreadCount = 0;
 
-                    // Check if data exists
-                    if (snapshot.exists()) {
-                        const conversations = snapshot.val();
+                        // Check if data exists
+                        if (snapshot.exists()) {
+                            const conversations = snapshot.val();
 
-                        for (let conversationId in conversations) {
-                            const conversation = conversations[conversationId];
+                            for (let conversationId in conversations) {
+                                const conversation = conversations[conversationId];
 
-                            if (conversation.unReadCount && conversation.contactName) {
-                                totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                if (conversation.unReadCount && conversation.contactName) {
+                                    totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                }
                             }
                         }
+
+                        // Output the total unread count (you can update your UI here)
+                        console.log("Total Unread Count:", totalUnreadCount);
+                        // Optionally, update the UI (e.g., a badge or counter)
                     }
 
-                    // Output the total unread count
-                    console.log("Total Unread Count:", totalUnreadCount);
-                    // Optionally, update your UI here
-                }
+                    // Listen for real-time changes in the overview data
+                    onValue(overviewRef, (snapshot) => {
+                        updateUnreadCount(snapshot);
+                    });
 
-                // Listen for real-time changes in the overview data
-                onValue(overviewRef, (snapshot) => {
+                    // Initial fetch of the data (optional)
+                    const snapshot = await get(overviewRef);
                     updateUnreadCount(snapshot);
-                });
 
-                // Initial fetch of the data (optional)
-                const snapshot = await get(overviewRef);
-                updateUnreadCount(snapshot);
-
-            } catch (error) {
-                console.error("Error fetching data from Firebase:", error);
+                } catch (error) {
+                    console.error("Error fetching data from Firebase:", error);
+                }
             }
-        }
-    })();
+        })();
 
 
 
