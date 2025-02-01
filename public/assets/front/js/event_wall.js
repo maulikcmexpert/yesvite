@@ -943,7 +943,7 @@ $(document).ready(function () {
             renumberOptions(); // Call function to renumber options after deletion
             validateForm();
         });
-        renumberOptions();
+
         validateForm();
     });
 
