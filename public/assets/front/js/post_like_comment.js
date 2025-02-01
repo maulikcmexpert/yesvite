@@ -733,10 +733,8 @@ $(document).ready(function () {
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
             addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-            $(".contact-checkbox")
-            .filter(`[data-id="${id}"]`)
-            .not(this)
-            .prop("checked", false);
+            $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
+
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
@@ -761,10 +759,8 @@ $(document).ready(function () {
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
             addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-            $(".contact-checkbox")
-            .filter(`[data-id="${id}"]`)
-            .not(this)
-            .prop("checked", false);
+            $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
+
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
