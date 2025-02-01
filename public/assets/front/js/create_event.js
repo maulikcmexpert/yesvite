@@ -2007,15 +2007,15 @@ function add_user_counter() {
 
 function guest_counter(total_guest, max_guest) {
     var Alreadyguest = $(".users-data.invited_users").length;
-    var total_guest = $(".users-data.invited_user").length;  
+    var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
-    var remainingCount = max_guest - (total_guest+Alreadyguest);
-    if(isCopy =="" && isDraftEvent=="0"){
-        remainingCount = max_guest - (total_guest);
+    var remainingCount = max_guest - (total_guest + Alreadyguest);
+    if (isCopy == "" && isDraftEvent == "0") {
+        remainingCount = max_guest - total_guest;
     }
- 
+
     if (remainingCount < 0) {
         $(".invite-left_d").text("Invites | 0 Left");
     } else {
@@ -2419,7 +2419,6 @@ $(document).on("click", ".add_category_item_btn", function () {
         var self_bring = 0;
     }
     var self_bringQuantity = $("#self_bring_qty").val();
-    
 
     $.ajax({
         url: base_url + "event/category_item_session",
@@ -6290,7 +6289,7 @@ $(document).on("click", "#final_create_event", function (e) {
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
-    if(isCopy!=""){
+    if (isCopy != "") {
         savePage1Data();
         savePage3Data();
         savePage4Data();
@@ -6316,7 +6315,7 @@ $(document).on("click", "#final_create_event", function (e) {
         success: function (response) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
-            $('#created_event_id').val(response.event_id);
+            $("#created_event_id").val(response.event_id);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
                 // $('#eventModal').modal('show');
@@ -6621,8 +6620,8 @@ function displayRecords(
             const coins = $("#coins").val();
             if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
-                busyyesvite=false;
-                NoMoreDataYesviteAll=false;
+                busyyesvite = false;
+                NoMoreDataYesviteAll = false;
             } else {
                 create_event_yesvite_scroll = true;
             }
@@ -6774,11 +6773,11 @@ $(document).on("click", ".invite_group_member", function () {
 
             console.log(id);
             console.log(selectedValues);
-        }else{
+        } else {
             const id = $(this).val();
-            delete_invited_user(id, '0');
+            delete_invited_user(id, "0");
             $("#user-" + id).remove();
-            $(".user-" + id).prop('checked', false);
+            $(".user-" + id).prop("checked", false);
         }
     });
     $.ajax({
@@ -6791,27 +6790,27 @@ $(document).on("click", ".invite_group_member", function () {
             users: selectedValues,
         },
         success: function (response) {
-            if(response?.isTrue && response.isTrue){
+            if (response?.isTrue && response.isTrue) {
                 toggleSidebar();
-                return
+                return;
             }
             // console.log(response);
-            
-                response.data.forEach(function (item, index) {
-                    if (
-                        item.is_duplicate == "1" &&
-                        item.userdata &&
-                        item.userdata.id
-                    ) {
-                        console.log(item.is_duplicate);
-                        $("#user-" + item.userdata.id).remove();
-                        $("#user_tel-" + item.userdata.id).remove();
-                        // $(".user_id-" + item.userdata.id).remove();
-                        // $(".user_id_tel-" + item.userdata.id).remove();
-                        // $(".user-list-responsive").empty();
-                    }
-                });
-          
+
+            response.data.forEach(function (item, index) {
+                if (
+                    item.is_duplicate == "1" &&
+                    item.userdata &&
+                    item.userdata.id
+                ) {
+                    console.log(item.is_duplicate);
+                    $("#user-" + item.userdata.id).remove();
+                    $("#user_tel-" + item.userdata.id).remove();
+                    // $(".user_id-" + item.userdata.id).remove();
+                    // $(".user_id_tel-" + item.userdata.id).remove();
+                    // $(".user-list-responsive").empty();
+                }
+            });
+
             $(".user-list-responsive").empty();
             // $(".user-list-responsive").html(response.responsive_view);
             $(".user-list-responsive_yesvite").html(response.responsive_view);
@@ -8803,6 +8802,72 @@ function step4open() {
 }
 var remainingCategoryCount = 0;
 var remainingCategoryCountn = 0;
+function updateTOP_(categoryIndex) {
+    var list = document.getElementsByClassName("list-slide-" + categoryIndex);
+
+    if (list.length === 0) return;
+
+    var accordions = list[0].getElementsByClassName("accordion-flush");
+    var totalItems = accordions.length;
+
+    let totalMissing = 0;
+    let totalRequired = 0;
+    let totalOver = 0;
+
+    for (let i = 0; i < totalItems; i++) {
+        let categoryItem = accordions[i];
+
+        // Get the required quantity
+        let requiredQtyInput = categoryItem.querySelector(
+            ".category-item-quantity"
+        );
+        let requiredQty = requiredQtyInput
+            ? parseInt(requiredQtyInput.value)
+            : 0;
+        totalRequired += requiredQty;
+        // Get the current user input quantity
+        let inputQtyInput = categoryItem.querySelector(".input-qty");
+        let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
+        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
+        if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
+            inputQty = inputQty + parseInt(innerUserQnt);
+        }
+
+        console.log(totalMissing);
+    }
+    if (inputQty < totalRequired) {
+        totalMissing += requiredQty - inputQty;
+    } else if (inputQty > totalRequired) {
+        totalOver += inputQty - requiredQty;
+    }
+    console.log(totalMissing);
+    $("#missing-category-" + categoryIndex).text(totalMissing);
+    $("#extra-category-" + categoryIndex).text(totalOver);
+    if (totalMissing == 0) {
+        // if (response == 0) {
+        var svg =
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>';
+        $(".missing-category-svg-" + categoryIndex).html(svg);
+        $(".missing-category-h6-" + categoryIndex).css("color", "#34C05C");
+    } else {
+        var svg =
+            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" /></svg>';
+        $(".missing-category-svg-" + categoryIndex).html(svg);
+        $(".missing-category-h6-" + categoryIndex).css("color", "#E20B0B");
+    }
+    if (totalOver > 0) {
+        console.log("");
+        $(".extra-category-h6-" + categoryIndex).show();
+    } else {
+        $(".extra-category-h6-" + categoryIndex).hide();
+    }
+
+    console.log("Total Missing Items:", totalMissing);
+    console.log("Total Over Items:", totalOver);
+
+    return { totalMissing, totalOver };
+}
+
 function updateTOP(categoryIndex) {
     var list = document.getElementsByClassName("list-slide-" + categoryIndex);
 
@@ -8837,26 +8902,6 @@ function updateTOP(categoryIndex) {
         } else if (inputQty > requiredQty) {
             totalOver += inputQty - requiredQty;
         }
-    }
-    $("#missing-category-" + categoryIndex).text(totalMissing);
-    $("#extra-category-" + categoryIndex).text(totalOver);
-    if (totalMissing == 0) {
-        // if (response == 0) {
-        var svg =
-            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z" fill="#23AA26"></path></svg>';
-        $(".missing-category-svg-" + categoryIndex).html(svg);
-        $(".missing-category-h6-" + categoryIndex).css("color", "#34C05C");
-    } else {
-        var svg =
-            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z" fill="#F73C71" /></svg>';
-        $(".missing-category-svg-" + categoryIndex).html(svg);
-        $(".missing-category-h6-" + categoryIndex).css("color", "#E20B0B");
-    }
-    if (totalOver > 0) {
-        console.log("");
-        $(".extra-category-h6-" + categoryIndex).show();
-    } else {
-        $(".extra-category-h6-" + categoryIndex).hide();
     }
 
     console.log("Total Missing Items:", totalMissing);
@@ -9041,32 +9086,31 @@ function sliderImages(id) {
 
 if (eventId != "" || isCopy != "") {
     // alert(eventId);
-    if(eventId){
+    if (eventId) {
         sliderImages(eventId);
-
-    }else{
+    } else {
         sliderImages(isCopy);
     }
 }
 
-$(document).on("click",'#final_see_invite_btn', function (event) {
+$(document).on("click", "#final_see_invite_btn", function (event) {
     event.preventDefault(); // Prevent default redirection
-    
-    let eventId = $('#created_event_id').val(); // Replace with dynamic event ID
+
+    let eventId = $("#created_event_id").val(); // Replace with dynamic event ID
     let url = base_url + `event_wall/${eventId}`; // Laravel route format
     console.log(base_url + `event_wall/${eventId}`);
     window.location.href = url; // Redirect dynamically
 });
 
-function getcoins(){
+function getcoins() {
     var Alreadyguest = $(".users-data.invited_users").length;
     var max_guest = $("#coins").val();
-  
-    var AllCoins =max_guest-Alreadyguest;
-    if(isCopy =="" && isDraftEvent=="0"){
-        AllCoins =max_guest;
+
+    var AllCoins = max_guest - Alreadyguest;
+    if (isCopy == "" && isDraftEvent == "0") {
+        AllCoins = max_guest;
     }
-   
+
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
