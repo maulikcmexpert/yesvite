@@ -1173,7 +1173,7 @@ $(document).ready(function () {
                     }else if (response.type == "mute") {
                         // Set button for unmuting
                         $button.data('post-control', 'unmute');
-                        $button.text("Unmute");
+                        // $button.text("Unmute");
 
                         // Toggle icon visibility
                         $button.find('#muteIcon').hide();  // Hide mute icon
@@ -1181,7 +1181,7 @@ $(document).ready(function () {
                     } else if (response.type === "unmute") {
                         // Set button for muting
                         $button.data('post-control', 'mute');
-                        $button.text("Mute");
+                        // $button.text("Mute");
 
                         // Toggle icon visibility
                         $button.find('#muteIcon').show();  // Show mute icon
