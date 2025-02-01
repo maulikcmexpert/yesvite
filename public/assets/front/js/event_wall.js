@@ -936,12 +936,13 @@ $(document).ready(function () {
         `);
 
         pollOptionsContainer.append(newOption);
-        newOption.find(".input-option-delete").on("click", function () {
-            validateForm();
-          newOption.remove();
-        });
-        // Bind delete functionality
 
+        // Bind delete functionality
+        newOption.find(".input-option-delete").on("click", function () {
+            newOption.remove();
+            renumberOptions(); // Call function to renumber options after deletion
+
+        });
 
         validateForm();
     });
@@ -949,7 +950,7 @@ $(document).ready(function () {
     // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .poll-option").each(function (index) {
-            $(this).find(".option-number").text(index + 1);
+            $(this).find(".option-number").text(index + 2);
         });
     }
 
