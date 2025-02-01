@@ -9,7 +9,7 @@
                 <div class="col-xl-3 col-lg-4">
                     <!-- =============mainleft-====================== -->
 
-                    <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"  :postList="$postList" />
+                    <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"/>
                 </div>
                 <div class="col-xl-6 col-lg-8">
                     <div class="main-content-center">
@@ -335,7 +335,7 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if (($eventDetails['host_id'] == $login_user_id && $eventDetails['is_host'] == 1 && !empty($eventDetails['co_hosts'])))
+                                                    @if (($eventDetails['host_id'] != $login_user_id && $eventDetails['is_host'] != "1"))
                                                         <a href="#" class="add-calender btn" id="openGoogle">Add to
                                                             calendar
                                                             <svg width="16" height="16" viewBox="0 0 16 16"
@@ -569,21 +569,21 @@
                                                 <h4 class="title">Schedule</h4>
 
 
-                                
-                                            
+
+
                                             @foreach ($eventDetails['event_schedule'] as $index => $schedule)
                                                 @if ($index == 0)
                                                     <span class="timing">
                                                         {{ Carbon::parse($schedule['start_time'])->format('h:i A') }}
                                                         to
                                                 @endif
-                                            
+
                                                 @if ($loop->last)
                                                     {{ Carbon::parse($schedule['end_time'])->format('h:i A') }}
                                                     </span>
                                                 @endif
                                             @endforeach
-                                            
+
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">
