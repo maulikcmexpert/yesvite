@@ -120,13 +120,13 @@ class EventWallController extends Controller
             ->withCount('user_poll_data')
             ->where(['event_id' => $event])
             ->get();
-            $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
+
 
 
         $pollsData = [];
 
         foreach ($polls as $poll) {
-
+            $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
             $post_time = setpostTime($poll->created_at);
 
