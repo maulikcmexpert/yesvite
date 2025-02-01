@@ -273,7 +273,7 @@ defer
 
 <script>
 <script>
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import {
             getDatabase,
             ref,
@@ -297,13 +297,14 @@ defer
 
                     // Reference to the user's overview data in Firebase
                     const overviewRef = ref(database, `overview/${userId}`);
-
+                    console.log({overviewRef})
                     // Function to calculate unread count
                     function updateUnreadCount(snapshot) {
                         let totalUnreadCount = 0;
 
                         // Check if data exists
                         if (snapshot.exists()) {
+                            console.log({snapshot})
                             const conversations = snapshot.val();
 
                             for (let conversationId in conversations) {
