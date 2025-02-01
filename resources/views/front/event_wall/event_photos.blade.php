@@ -180,7 +180,7 @@
                                                                 <p>{{ $photo['post_time'] }}</p>
                                                             </div>
                                                         </div>
-                                                        <div class="photo-card-head-right">
+                                                        <div class="photo-card-head-right set_emoji_like">
                                                             <button class="posts-card-like-btn like-btn" id="likeButton"
                                                                 data-event-id="{{ $event }}"
                                                                 data-event-post-id="{{ $photo['id'] }} "

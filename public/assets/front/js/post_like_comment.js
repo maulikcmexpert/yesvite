@@ -74,9 +74,10 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#emojiDropdown .emoji", function () {
+
         const selectedEmoji = $(this).data("emoji");
         const button = $(this)
-            .closest(".photo-card-head-right")
+            .closest(".set_emoji_like")
             .find("#likeButton");
         const emojiDisplay = button.find("#show_Emoji");
 
