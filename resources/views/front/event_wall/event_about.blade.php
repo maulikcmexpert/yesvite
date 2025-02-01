@@ -568,10 +568,20 @@
                                             <div class="schedule-wrp cmn-card">
                                                 <h4 class="title">Schedule</h4>
 
-                                                @foreach ($eventDetails['event_schedule'] as $schedule)
+                                                {{-- @foreach ($eventDetails['event_schedule'] as $schedule)
                                                 <span class="timing"> {{ $schedule['start_time'] }} -
                                                     {{ $schedule['end_time'] }}</span>
-                                                    @endforeach
+                                                    @endforeach --}}
+
+                                                    @foreach ($eventDetails['event_schedule'] as $index => $schedule)
+    @if ($index == 0)
+        <span class="timing"> {{ $schedule['start_time'] }} </span> 
+    @endif
+
+    @if ($loop->last)
+        <span class="timing"> {{ $schedule['end_time'] }} </span>
+    @endif
+@endforeach
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">
