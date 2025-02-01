@@ -569,29 +569,21 @@
                                                 <h4 class="title">Schedule</h4>
 
 
-                                                    {{-- @foreach ($eventDetails['event_schedule'] as $index => $schedule)
-    @if ($index == 0)
-        <span class="timing"> {{ $schedule['start_time'] }} </span> 
-    @endif
-
-    @if ($loop->last)
-        <span class="timing"> {{ $schedule['end_time'] }} </span>
-    @endif
-@endforeach --}}
-
-@foreach ($eventDetails['event_schedule'] as $index => $schedule)
-    @if ($index == 0)
-        <span class="timing">
-            {{ Carbon::parse($schedule['start_time'])->format('h:i A') }}
-        </span>
-    @endif
-
-    @if ($loop->last)
-        <span class="timing">
-            {{ Carbon::parse($schedule['end_time'])->format('h:i A') }}
-        </span>
-    @endif
-@endforeach
+                                
+                                            
+                                            @foreach ($eventDetails['event_schedule'] as $index => $schedule)
+                                                @if ($index == 0)
+                                                    <span class="timing">
+                                                        {{ Carbon::parse($schedule['start_time'])->format('h:i A') }}
+                                                        to
+                                                @endif
+                                            
+                                                @if ($loop->last)
+                                                    {{ Carbon::parse($schedule['end_time'])->format('h:i A') }}
+                                                    </span>
+                                                @endif
+                                            @endforeach
+                                            
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">
