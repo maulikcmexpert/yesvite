@@ -143,6 +143,7 @@ class EventController extends BaseController
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
+                        dd($user);
                         $userVal = User::select(
                             'id',
                             'firstname',
