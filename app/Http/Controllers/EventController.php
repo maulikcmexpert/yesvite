@@ -1961,7 +1961,7 @@ class EventController extends BaseController
         //     ->get();
         $selected_user = Session::get('user_ids');
 
-        dd($selected_user);
+        // dd($selected_user);
 
         return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups', 'selected_user'))->render(), "status" => "1"]);
     }
