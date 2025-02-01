@@ -670,10 +670,10 @@ class EventPhotoController extends Controller
         $createEventPost = new EventPost();
         $createEventPost->event_id = $request->event_id;
         $createEventPost->user_id = $user;
-        $createEventPost->post_message = $request->input('content'); // Placeholder, update as necessary
-        $createEventPost->post_privacy = "1"; // Example: public post
+        $createEventPost->post_message =  $request->postContent; // Placeholder, update as necessary
+        $createEventPost->post_privacy = $request->post_privacys; // Example: public post
         $createEventPost->post_type = "1"; // Define post type
-        $createEventPost->commenting_on_off = "1"; // Comments allowed
+        $createEventPost->commenting_on_off =  $request->commenting_on_off;; // Comments allowed
         $createEventPost->is_in_photo_moudle = "1"; // Whether the post contains photos
         $createEventPost->save();
 

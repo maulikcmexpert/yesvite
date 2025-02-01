@@ -660,7 +660,7 @@
                                     stroke-linejoin="round"></path>
                             </svg>
                         </button>
-                        <button class="upload-photo-poll polls" id="create-poll-btn">
+                        {{-- <button class="upload-photo-poll polls" id="create-poll-btn">
                             <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2.16797 18.3334H18.8346" stroke="#94A3B8" stroke-width="1.5"
                                     stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -677,7 +677,7 @@
                                     stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round"></path>
                             </svg>
-                        </button>
+                        </button> --}}
                     </div>
                     <div class="">
                         <button type ="button" class="cmn-btn create_post">
