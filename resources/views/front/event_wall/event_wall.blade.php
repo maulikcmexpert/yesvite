@@ -293,7 +293,7 @@
                                                                 $liked="";
                                                             }
                                                         @endphp
-                                                        <button class="posts-card-like-btn {{$liked}}" id="likeButton"
+                                                        <button class="posts-card-like-btn {{$liked}} set_emoji_like" id="likeButton"
                                                             data-event-id="{{ $event }}"
                                                             data-event-post-id="{{ $post['id'] }} "
                                                             data-user-id="{{ $login_user_id }}">
