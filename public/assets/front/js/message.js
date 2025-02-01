@@ -4621,3 +4621,8 @@ applyStyles();
 //         }
 //     }
 // }
+$("#chatreport").validate({
+    rules: {
+        report_type: true,
+    },
+});
