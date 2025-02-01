@@ -1948,8 +1948,8 @@ function createMessageElement(
                             : ""
                     } 
                     ${reaction}
-                    </div>
-                    ${emoji}
+                </div>
+                    ${emojiAndReplay}
             </div>
             `
             : messageData?.type == "2"
@@ -1968,9 +1968,9 @@ function createMessageElement(
                             : ""
                     } 
                     ${reaction}
-                    </div>
-                    ${emoji}
-                </div>`
+                </div>
+                    ${emojiAndReplay}
+            </div>`
             : messageData?.type == "4"
             ? `
             <div class="media-msg-inline">
@@ -1992,9 +1992,9 @@ function createMessageElement(
                             : ""
                     } 
                     ${reaction}
-                    </div>
-                    ${emoji}
-                </div>`
+                </div>
+                    ${emojiAndReplay}
+            </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg-inline">
             
@@ -2012,7 +2012,8 @@ function createMessageElement(
                 } 
                 ${reaction}
                 </div>
-                ${emoji}
+                
+                ${emojiAndReplay}
             </div>`
             : `
             <div class="simple-message">
