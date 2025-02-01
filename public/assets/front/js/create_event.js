@@ -2007,15 +2007,15 @@ function add_user_counter() {
 
 function guest_counter(total_guest, max_guest) {
     var Alreadyguest = $(".users-data.invited_users").length;
-    var total_guest = $(".users-data.invited_user").length;  
+    var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
-    var remainingCount = max_guest - (total_guest+Alreadyguest);
-    if(isCopy =="" && isDraftEvent=="0"){
-        remainingCount = max_guest - (total_guest);
+    var remainingCount = max_guest - (total_guest + Alreadyguest);
+    if (isCopy == "" && isDraftEvent == "0") {
+        remainingCount = max_guest - total_guest;
     }
- 
+
     if (remainingCount < 0) {
         $(".invite-left_d").text("Invites | 0 Left");
     } else {
@@ -2419,7 +2419,6 @@ $(document).on("click", ".add_category_item_btn", function () {
         var self_bring = 0;
     }
     var self_bringQuantity = $("#self_bring_qty").val();
-    
 
     $.ajax({
         url: base_url + "event/category_item_session",
@@ -6290,7 +6289,7 @@ $(document).on("click", "#final_create_event", function (e) {
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
-    if(isCopy!=""){
+    if (isCopy != "") {
         savePage1Data();
         savePage3Data();
         savePage4Data();
@@ -6316,7 +6315,7 @@ $(document).on("click", "#final_create_event", function (e) {
         success: function (response) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
-            $('#created_event_id').val(response.event_id);
+            $("#created_event_id").val(response.event_id);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
                 // $('#eventModal').modal('show');
@@ -6621,8 +6620,8 @@ function displayRecords(
             const coins = $("#coins").val();
             if (search == "" || search == null) {
                 create_event_yesvite_scroll = false;
-                busyyesvite=false;
-                NoMoreDataYesviteAll=false;
+                busyyesvite = false;
+                NoMoreDataYesviteAll = false;
             } else {
                 create_event_yesvite_scroll = true;
             }
@@ -6774,11 +6773,11 @@ $(document).on("click", ".invite_group_member", function () {
 
             console.log(id);
             console.log(selectedValues);
-        }else{
+        } else {
             const id = $(this).val();
-            delete_invited_user(id, '0');
+            delete_invited_user(id, "0");
             $("#user-" + id).remove();
-            $(".user-" + id).prop('checked', false);
+            $(".user-" + id).prop("checked", false);
         }
     });
     $.ajax({
@@ -6791,27 +6790,27 @@ $(document).on("click", ".invite_group_member", function () {
             users: selectedValues,
         },
         success: function (response) {
-            if(response?.isTrue && response.isTrue){
+            if (response?.isTrue && response.isTrue) {
                 toggleSidebar();
-                return
+                return;
             }
             // console.log(response);
-            
-                response.data.forEach(function (item, index) {
-                    if (
-                        item.is_duplicate == "1" &&
-                        item.userdata &&
-                        item.userdata.id
-                    ) {
-                        console.log(item.is_duplicate);
-                        $("#user-" + item.userdata.id).remove();
-                        $("#user_tel-" + item.userdata.id).remove();
-                        // $(".user_id-" + item.userdata.id).remove();
-                        // $(".user_id_tel-" + item.userdata.id).remove();
-                        // $(".user-list-responsive").empty();
-                    }
-                });
-          
+
+            response.data.forEach(function (item, index) {
+                if (
+                    item.is_duplicate == "1" &&
+                    item.userdata &&
+                    item.userdata.id
+                ) {
+                    console.log(item.is_duplicate);
+                    $("#user-" + item.userdata.id).remove();
+                    $("#user_tel-" + item.userdata.id).remove();
+                    // $(".user_id-" + item.userdata.id).remove();
+                    // $(".user_id_tel-" + item.userdata.id).remove();
+                    // $(".user-list-responsive").empty();
+                }
+            });
+
             $(".user-list-responsive").empty();
             // $(".user-list-responsive").html(response.responsive_view);
             $(".user-list-responsive_yesvite").html(response.responsive_view);
@@ -8812,6 +8811,7 @@ function updateTOP(categoryIndex) {
     var totalItems = accordions.length;
 
     let totalMissing = 0;
+    let totalRequired = 0;
     let totalOver = 0;
 
     for (let i = 0; i < totalItems; i++) {
@@ -8824,20 +8824,23 @@ function updateTOP(categoryIndex) {
         let requiredQty = requiredQtyInput
             ? parseInt(requiredQtyInput.value)
             : 0;
-
+        totalRequired += requiredQty;
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
-        let innerUserQnt = $(`.innerUserQnt-${categoryIndex}-${i}`).val();
+        let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val();
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
-        if (inputQty < requiredQty) {
-            totalMissing += requiredQty - inputQty;
-        } else if (inputQty > requiredQty) {
-            totalOver += inputQty - requiredQty;
-        }
+
+        console.log(totalMissing);
     }
+    if (inputQty < totalRequired) {
+        totalMissing += requiredQty - inputQty;
+    } else if (inputQty > totalRequired) {
+        totalOver += inputQty - requiredQty;
+    }
+    console.log(totalMissing);
     $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {
@@ -8857,6 +8860,48 @@ function updateTOP(categoryIndex) {
         $(".extra-category-h6-" + categoryIndex).show();
     } else {
         $(".extra-category-h6-" + categoryIndex).hide();
+    }
+
+    console.log("Total Missing Items:", totalMissing);
+    console.log("Total Over Items:", totalOver);
+
+    return { totalMissing, totalOver };
+}
+
+function updateTOPOLD(categoryIndex) {
+    var list = document.getElementsByClassName("list-slide-" + categoryIndex);
+
+    if (list.length === 0) return;
+
+    var accordions = list[0].getElementsByClassName("accordion-flush");
+    var totalItems = accordions.length;
+
+    let totalMissing = 0;
+    let totalOver = 0;
+
+    for (let i = 0; i < totalItems; i++) {
+        let categoryItem = accordions[i];
+
+        // Get the required quantity
+        let requiredQtyInput = categoryItem.querySelector(
+            ".category-item-quantity"
+        );
+        let requiredQty = requiredQtyInput
+            ? parseInt(requiredQtyInput.value)
+            : 0;
+
+        // Get the current user input quantity
+        let inputQtyInput = categoryItem.querySelector(".input-qty");
+        let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
+        let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val();
+        if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
+            inputQty = inputQty + parseInt(innerUserQnt);
+        }
+        if (inputQty < requiredQty) {
+            totalMissing += requiredQty - inputQty;
+        } else if (inputQty > requiredQty) {
+            totalOver += inputQty - requiredQty;
+        }
     }
 
     console.log("Total Missing Items:", totalMissing);
@@ -9041,32 +9086,31 @@ function sliderImages(id) {
 
 if (eventId != "" || isCopy != "") {
     // alert(eventId);
-    if(eventId){
+    if (eventId) {
         sliderImages(eventId);
-
-    }else{
+    } else {
         sliderImages(isCopy);
     }
 }
 
-$(document).on("click",'#final_see_invite_btn', function (event) {
+$(document).on("click", "#final_see_invite_btn", function (event) {
     event.preventDefault(); // Prevent default redirection
-    
-    let eventId = $('#created_event_id').val(); // Replace with dynamic event ID
+
+    let eventId = $("#created_event_id").val(); // Replace with dynamic event ID
     let url = base_url + `event_wall/${eventId}`; // Laravel route format
     console.log(base_url + `event_wall/${eventId}`);
     window.location.href = url; // Redirect dynamically
 });
 
-function getcoins(){
+function getcoins() {
     var Alreadyguest = $(".users-data.invited_users").length;
     var max_guest = $("#coins").val();
-  
-    var AllCoins =max_guest-Alreadyguest;
-    if(isCopy =="" && isDraftEvent=="0"){
-        AllCoins =max_guest;
+
+    var AllCoins = max_guest - Alreadyguest;
+    if (isCopy == "" && isDraftEvent == "0") {
+        AllCoins = max_guest;
     }
-   
+
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();

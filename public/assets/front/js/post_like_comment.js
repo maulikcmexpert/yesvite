@@ -471,7 +471,9 @@ $(document).ready(function () {
 
     $("#allcontact").on("click", function () {
         guestList=[];
-        $('.remove_new_added_user').remove();
+        $('.guest_yesvite').remove();
+        $('.phone_yesvite').remove();
+
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         if (allContactsSuccess) {
@@ -777,7 +779,9 @@ $(document).ready(function () {
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
         const id = $(this).data("id");
-        const isSelected =$(this).data('prefer');
+        // const isSelected =$(this).data('prefer');
+        const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
+
 
             const first_name = $(this).data("name");
             const last_name = $(this).data("last");
@@ -801,10 +805,10 @@ $(document).ready(function () {
             .prop("checked", false);
 
         }else{
-            guestPhoneList = guestPhoneList.filter(guest => guest.id !== id);
+            guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
 
-            console.log(guestPhoneList);
+            console.log(guestList);
         }// App user = 0 for phone (non-app user)
     });
 
@@ -834,7 +838,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }
         const $modalBody = $('.selected-contacts-list');
         const contactHtml = `
-            <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
+            <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
                     <a href="#" class="close remove_new_added_user" data-id="${id}">
@@ -867,9 +871,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 
     function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
-        const exists = guestPhoneList.some((contact) => contact.id === id);
+        const exists = guestList.some((contact) => contact.id === id);
         if (!exists) {
-            guestPhoneList.push({
+            guestList.push({
                 id: id,
                 prefer_by: preferBy,
                 app_user: appUser,
@@ -890,7 +894,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         // }
         const $modalBody = $('.selected-phone-list');
         const contactHtml = `
-            <div class="guest-user add_phone_guest_${id}" data-id="${id}">
+            <div class="guest-user guest_phone add_phone_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
                     <a href="#" class="close remove_new_added_user" data-id="${id}">
@@ -917,17 +921,17 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                  <h6>Sell all</h6>
                 </a>`;
 
-        console.log("Updated guest list:", guestPhoneList);
+        console.log("Updated guest list:", guestList);
     }
-        console.log("Updated guest list:", guestPhoneList);
+        console.log("Updated guest list:", guestList);
 
-        console.log("Updated guest list:", guestPhoneList);
+        console.log("Updated guest list:", guestList);
 
 });
 
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
-        console.log("Guest list before submit:", guestPhoneList);
+        console.log("Guest list before submit:", guestList);
         console.log("Sending guest list:", guestList);
         // $.ajax({
         //     url: base_url + "event_wall/send-invitation", // Your Laravel route
@@ -951,7 +955,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         //         alert("Something went wrong. Please try again."); // Handle AJAX errors
         //     },
         // });
-    });
+});
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
