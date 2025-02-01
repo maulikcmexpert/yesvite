@@ -280,7 +280,9 @@
                                                             <p id="likeCount_{{ $post['id'] }}">
                                                                 {{ $post['total_likes'] }} Likes</p>
                                                         </ul>
+                                                        @if($post['commenting_on_off'] == "1")
                                                         <h6 id="comment_{{ $post['id'] }}">{{ $post['total_comment'] }} Comments</h6>
+                                                        @endif
                                                     </div>
                                                     <div class="posts-card-like-comment-right emoji_display_like">
                                                         <button class="posts-card-like-btn" id="likeButton"
