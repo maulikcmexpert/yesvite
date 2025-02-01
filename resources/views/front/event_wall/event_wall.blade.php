@@ -1,4 +1,4 @@
-{{-- {{dd($postList  )}} --}}
+{{dd($postList  )}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -475,19 +475,17 @@
                                                                         </div>
                                                                         <div class="posts-card-like-comment-right">
                                                                             @php
-                                                                            // if($post['self_reaction']=="\u{1F90D}"){
-                                                                            //     $liked='liked';
-                                                                            // }else{
-                                                                            //     $liked="";
-                                                                            // }
+                                                                            if($post['self_reaction']=="\u{1F90D}"){
+                                                                                $liked='liked';
+                                                                            }else{
+                                                                                $liked="";
+                                                                            }
                                                                         @endphp
                                                                             <p>{{ $comment['posttime'] }}</p>
-                                                                            <button class="posts-card-like-btn " id="CommentlikeButton"
+                                                                            <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-id="{{ $post['id'] }} "
-                                                                            data-user-id="{{ $login_user_id }}">
-{{--
-                                                                            @if ($post['self_reaction'] == '\u{2764}')
+                                                                            data-user-id="{{ $login_user_id }}"> @if ($post['self_reaction'] == '\u{2764}')
                                                                             <i class="fa-solid fa-heart" id="show_Emoji"></i>
                                                                         @elseif($post['self_reaction'] == '\u{1F494}')
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
@@ -517,9 +515,7 @@
                                                                                     data-unicode="\\u{1F44F}"></i>
                                                                         @else
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                                        @endif
-                                                                     --}}
-                                                                    </button>
+                                                                        @endif</button>
                                                                         </div>
                                                                     </div>
                                                                     <div class="commented-user-content">
