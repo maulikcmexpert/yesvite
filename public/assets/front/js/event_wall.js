@@ -936,13 +936,12 @@ $(document).ready(function () {
         `);
 
         pollOptionsContainer.append(newOption);
-
-        // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
-            newOption.remove();
-            renumberOptions(); // Call function to renumber options after deletion
             validateForm();
+          newOption.remove();
         });
+        // Bind delete functionality
+
 
         validateForm();
     });
