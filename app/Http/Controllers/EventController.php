@@ -648,37 +648,7 @@ class EventController extends BaseController
         $event_creation->subscription_plan_name = (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro";
         $event_creation->subscription_invite_count = (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15;
         $event_creation->save();
-        // $event_creation = Event::create([
-        //     'event_type_id' => (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "",
-        //     'user_id' => $user_id,
-        //     'event_name' => (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "",
-        //     'hosted_by' => (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "",
-        //     'start_date' => (isset($startDate) && $startDate != "") ? $startDateFormat : null,
-        //     'end_date' => (isset($endDate) && $endDate != "") ? $endDateFormat : null,
-        //     'rsvp_by_date_set' => (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "") ? $request->rsvp_by_date_set : "0",
-        //     'rsvp_by_date' => (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null,
-        //     'rsvp_start_time' => (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "",
-        //     'rsvp_start_timezone' => (isset($request->rsvp_start_timezone) && $request->rsvp_start_timezone != "") ? $request->rsvp_start_timezone : "",
-        //     'rsvp_end_time' => (isset($request->rsvp_end_time) && $request->rsvp_end_time != "") ? $request->rsvp_end_time : "",
-        //     'rsvp_end_timezone' => (isset($request->rsvp_end_timezone) && $request->rsvp_end_timezone != "") ? $request->rsvp_end_timezone : "",
-        //     'rsvp_end_time_set' => (isset($request->rsvp_end_time_set) && $request->rsvp_end_time_set != "") ? $request->rsvp_end_time_set : "",
-        //     'event_location_name' => (isset($request->event_location) && $request->event_location != "") ? $request->event_location : "",
-        //     'address_1' => (isset($request->address1) && $request->address1 != "") ? $request->address1 : "",
-        //     'address_2' => (isset($request->address_2) && $request->address_2 != "") ? $request->address_2 : "",
-        //     'state' => (isset($request->state) && $request->state != "") ? $request->state : "",
-        //     'zip_code' => (isset($request->zipcode) && $request->zipcode) ? $request->zipcode : "",
-        //     'city' => (isset($request->city) && $request->city != "") ? $request->city : "",
-        //     'message_to_guests' => (isset($request->message_to_guests) && $request->message_to_guests != "") ? $request->message_to_guests : "",
-        //     'is_draft_save' => (isset($request->isdraft) && $request->isdraft != "") ? $request->isdraft : "0",
-        //     'latitude' => (isset($request->latitude) && $request->latitude != "") ? $request->latitude : "",
-        //     'longitude' => (isset($request->longitude) && $request->longitude != "") ? $request->longitude : "",
-        //     'greeting_card_id' => (isset($greeting_card_id) && $greeting_card_id != "") ? $greeting_card_id : "0",
-        //     'gift_registry_id' => (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0",
-        //     // 'rsvp_end_time_set' => "",
-        //     // 'address_2' => "",
-        //     'subscription_plan_name' => (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro",
-        //     'subscription_invite_count' => (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15,
-        // ]);
+      
         $eventId = $event_creation->id;
         $get_count_invited_user = 0;
         $conatctId = session('contact_ids');
@@ -915,9 +885,50 @@ class EventController extends BaseController
                 }
             }
 
+            // if (isset($request->potluck) && $request->potluck == "1") {
+            //     $potluck = session('category');
+            //     if (isset($potluck) && !empty($potluck)) {
+            //         foreach ($potluck as $category) {
+            //             $eventPodluck = EventPotluckCategory::create([
+            //                 'event_id' => $eventId,
+            //                 'user_id' => $user_id,
+            //                 'category' => $category['category_name'],
+            //                 'quantity' => $category['category_quantity'],
+            //             ]);
+            //             if (isset($category['item'])) {
+            //                 foreach ($category['item'] as $item) {
+            //                     $eventPodluckitem = EventPotluckCategoryItem::create([
+            //                         'event_id' => $eventId,
+            //                         'user_id' => $user_id,
+            //                         'event_potluck_category_id' => $eventPodluck->id,
+            //                         'self_bring_item' =>  $item['self_bring'],
+            //                         'description' => $item['name'],
+            //                         'quantity' => $item['quantity'],
+            //                     ]);
+            //                     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+            //                         UserPotluckItem::Create([
+            //                             'event_id' => $eventId,
+            //                             'user_id' => $user_id,
+            //                             'event_potluck_category_id' => $eventPodluck->id,
+            //                             'event_potluck_item_id' => $eventPodluckitem->id,
+            //                             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+            //                         ]);
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
+                // if ($request->isdraft == "1") {
+                EventPotluckCategory::where('event_id', $request->event_id)->delete();
+                EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+                UserPotluckItem::where('event_id', $request->event_id)->delete();
+                // }
                 if (isset($potluck) && !empty($potluck)) {
+
                     foreach ($potluck as $category) {
                         $eventPodluck = EventPotluckCategory::create([
                             'event_id' => $eventId,
@@ -935,15 +946,29 @@ class EventController extends BaseController
                                     'description' => $item['name'],
                                     'quantity' => $item['quantity'],
                                 ]);
-                                if (isset($item['self_bring']) && $item['self_bring'] == '1') {
-                                    UserPotluckItem::Create([
-                                        'event_id' => $eventId,
-                                        'user_id' => $user_id,
-                                        'event_potluck_category_id' => $eventPodluck->id,
-                                        'event_potluck_item_id' => $eventPodluckitem->id,
-                                        'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
-                                    ]);
+                                if (isset($item['item_carry_users'])) {
+                                    foreach ($item['item_carry_users'] as $user) {
+                                        UserPotluckItem::Create([
+                                            'event_id' => $eventId,
+                                            'user_id' => $user->user_id,
+                                            'event_potluck_category_id' => $eventPodluck->id,
+                                            'event_potluck_item_id' => $eventPodluckitem->id,
+                                            'quantity' => $user->quantity
+                                        ]);
+                                    }
                                 }
+                                // else{
+                                //     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+                                //         UserPotluckItem::Create([
+                                //             'event_id' => $eventId,
+                                //             'user_id' => $user_id,
+                                //             'event_potluck_category_id' => $eventPodluck->id,
+                                //             'event_potluck_item_id' => $eventPodluckitem->id,
+                                //             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+                                //         ]);
+                                //     }
+                                // }
+
                             }
                         }
                     }
