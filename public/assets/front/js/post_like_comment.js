@@ -724,11 +724,12 @@ $(document).ready(function () {
         const first_name = $(this).data("name");
         const last_name = $(this).data("last");
         const email = $(this).data("email");
+        const profile = $(this).data("email");
         // console.log(
         //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         // );
         if( $(this).is(":checked")){
-            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email); // App user = 1 for email (app user)
+            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
         }else{
             $('.add_yesvite_guest_'+id).remove();
         }
@@ -755,11 +756,8 @@ $(document).ready(function () {
     // Declare guestList outside so it's globally accessible
     let guestList = [];
 
-    function addToGuestList(id, preferBy, appUser,first_name,last_name,email) {
-        // Check if the contact is already in the guest list to avoid duplicates
+function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
-
-        // Check if contact is already in guestList to prevent adding duplicates
         const exists = guestList.some((contact) => contact.id === id);
         if (!exists) {
             guestList.push({
@@ -775,15 +773,14 @@ $(document).ready(function () {
         } else {
             console.log("Contact already in guest list:", { id });
         }
-
+        var  profileImage="";
+        if(profile!=""){
+            profileImage =profile;      
+        }else{
+            profileImage =generateProfileImage(first_name, last_name);      
+        }
         const $modalBody = $('.selected-contacts-list');
-    // $modalBody.empty();
-        // const profileImage =
-        //     contact.profile ||
-        //     generateProfileImage(contact.name, contact.lastname);
-            const profileImage =
-          
-            generateProfileImage(first_name,last_name);
+        const profileImage =profile || generateProfileImage(first_name, last_name);      
         const contactHtml = `
             <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
@@ -802,12 +799,9 @@ $(document).ready(function () {
 
         `;
         $modalBody.append(contactHtml);
-
-
-        console.log("Updated guest list:", guestList); // Check the updated guest list
+        console.log("Updated guest list:", guestList); 
     }
 
-    // Event listener for Add Guest button click
     $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
 
