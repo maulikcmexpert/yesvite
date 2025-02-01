@@ -274,52 +274,62 @@ defer
 <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"></script>
 <script>
 <script>
-(async function() {
-    const userId = {{$UserId}}; // Ensure this is injected from Laravel
+    (async function() {
+        const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
 
-    if (userId != undefined) {
-        try {
-            // Fetch Firebase configuration
-            const response = await fetch("/firebase_js.json");
-            const firebaseConfig = await response.json();
+        if (userId != undefined) {
+            try {
+                // Fetch Firebase configuration from firebase_js.json
+                const response = await fetch("/firebase_js.json");
+                const firebaseConfig = await response.json();
 
-            // Import specific Firebase functions
-            const { initializeApp } = firebase;
-            const { getDatabase, ref, get } = firebase.database;
+                // Import the required Firebase functions
+                const { initializeApp } = firebase;
+                const { getDatabase, ref, get, onValue } = firebase.database;
 
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
 
-            // Get a reference to the Firebase Database
-            const database = getDatabase(app);
-            const overviewRef = ref(database, `overview/${userId}`);
+                // Get a reference to Firebase Database
+                const database = getDatabase(app);
+                const overviewRef = ref(database, `overview/${userId}`);
 
-            // Get the data snapshot
-            const snapshot = await get(overviewRef);
+                // Function to calculate unread count
+                function updateUnreadCount(snapshot) {
+                    let totalUnreadCount = 0;
 
-            let totalUnreadCount = 0;
+                    // Check if data exists
+                    if (snapshot.exists()) {
+                        const conversations = snapshot.val();
 
-            // Check if data exists
-            if (snapshot.exists()) {
-                const conversations = snapshot.val();
+                        for (let conversationId in conversations) {
+                            const conversation = conversations[conversationId];
 
-                // Loop through the conversations and calculate the total unread count
-                for (let conversationId in conversations) {
-                    const conversation = conversations[conversationId];
-
-                    if (conversation.unReadCount && conversation.contactName) {
-                        totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                            if (conversation.unReadCount && conversation.contactName) {
+                                totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                            }
+                        }
                     }
-                }
-            }
 
-            // Optionally, display the total unread count
-            console.log("Total Unread Count:", totalUnreadCount);
-        } catch (error) {
-            console.error("Error fetching data from Firebase:", error);
+                    // Output the total unread count
+                    console.log("Total Unread Count:", totalUnreadCount);
+                    // Optionally, update your UI here
+                }
+
+                // Listen for real-time changes in the overview data
+                onValue(overviewRef, (snapshot) => {
+                    updateUnreadCount(snapshot);
+                });
+
+                // Initial fetch of the data (optional)
+                const snapshot = await get(overviewRef);
+                updateUnreadCount(snapshot);
+
+            } catch (error) {
+                console.error("Error fetching data from Firebase:", error);
+            }
         }
-    }
-})();
+    })();
 
 
 
