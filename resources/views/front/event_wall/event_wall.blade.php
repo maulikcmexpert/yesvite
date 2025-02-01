@@ -173,8 +173,8 @@
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
-                                                                        <span class="muteIcon">Mute</span>
-                                                                        <span style="display:none" class="unmute-icon">Unmute</span>
+                                                                        <span class="muteClass">Mute</span>
+                                                                        <span style="display:none" class="unmuteClass">Unmute</span>
                                                                     </button>
                                                                 </li>
                                                                 <li>

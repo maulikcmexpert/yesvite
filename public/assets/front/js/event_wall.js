@@ -1172,6 +1172,8 @@ $(document).ready(function () {
                         // Toggle icon visibility
                         $button.find('#muteIcon').hide();  // Hide mute icon
                         $button.find('#unmuteIcon').show(); // Show unmute icon
+                        $button.find('.unmuteClass').show();
+                        $button.find('.muteClass').hide();
                     } else if (response.type === "unmute") {
                         // Set button for muting
                         $button.data('post-control', 'mute');
@@ -1179,7 +1181,9 @@ $(document).ready(function () {
 
                         // Toggle icon visibility
                         $button.find('#muteIcon').show();  // Show mute icon
+                        $button.find('.muteClass').show();  // Show mute icon
                         $button.find('#unmuteIcon').hide(); // Hide unmute icon
+                        $button.find('.unmuteClass').hide(); // Hide unmute icon
                     }
 
 
