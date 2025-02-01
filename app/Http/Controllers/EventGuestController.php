@@ -251,14 +251,14 @@ class EventGuestController extends Controller
             $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['rsvp_d' => '1', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+            })->where(['rsvp_d' => '1','is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
 
 
             $todayrsvprate = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])
+            })->where(['rsvp_status' => '1','is_co_host' => '0', 'event_id' => $eventDetail->id])
 
                 ->whereDate('created_at', '=', date('Y-m-d'))
 
@@ -276,12 +276,12 @@ class EventGuestController extends Controller
             $adults = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('adults');
+            })->where(['event_id' => $eventDetail->id,'is_co_host' => '0', 'rsvp_status' => '1'])->sum('adults');
 
             $kids = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('kids');
+            })->where(['event_id' => $eventDetail->id,'is_co_host' => '0', 'rsvp_status' => '1'])->sum('kids');
 
 
             $eventAboutHost['attending'] = $adults + $kids;
