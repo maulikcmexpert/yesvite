@@ -23,6 +23,8 @@ var swiper = new Swiper(".mySwiper", {
     },
 });
 
+<<<<<<< Updated upstream
+
 // ===photo-detal-slider===
 var swiper = new Swiper(".photo-detail-slider", {
     slidesPerView: 1,
@@ -32,8 +34,9 @@ var swiper = new Swiper(".photo-detail-slider", {
         prevEl: ".swiper-button-prev",
     },
 });
-
-
+=======
+//   alert()
+>>>>>>> Stashed changes
 
 
 //   ===story-slider===
