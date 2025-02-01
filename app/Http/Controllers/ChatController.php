@@ -10,8 +10,8 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redis;
-use SendGrid\Mail\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ChatController extends Controller
 {
