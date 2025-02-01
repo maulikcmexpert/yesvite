@@ -81,7 +81,15 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
     var kids=$('#editrsvp input[name="kids"]').val();
 
     console.log({rsvp_status,adults,kids});
-
+    if(rsvp_status==undefined||rsvp_status==""){
+        toastr.error('Please select RSVP');
+        return;
+    }
+    if((rsvp_status=="1")&&(adults=='0'&&kids=='0')){
+        toastr.error('Please select at least one adult or kid');
+        return;
+    }
+   
     $.ajax({
         url: base_url + "event_guest/update_guest/" + guestId, // Endpoint to update guest details
         method: 'POST',
@@ -102,7 +110,8 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
                 guestContainer.find('.sucess-yes').remove();
                 guestContainer.find('.sucess-no').remove();
                 guestContainer.find('.no-reply').remove();
-
+                window.location.reload();
+                $('#editrsvp').modal('hide');
                 // Now append or update the appropriate div based on RSVP status
                 if (response.rsvp_status == '1') {
                     // If the guest's RSVP is "YES"
