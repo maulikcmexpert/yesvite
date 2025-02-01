@@ -845,7 +845,12 @@
                                 Anyone?</h3>
 
                             <div class="posts-card-show-post-wrp">
+<<<<<<< Updated upstream
                                 <div class="swiper photo-detail-slider">
+=======
+                                {{-- <div class="swiper mySwiper photo-detail-slider"  > --}}
+                                <div class="swiper mySwiper photo-detail-slider"  >
+>>>>>>> Stashed changes
                                     <div class="swiper-wrapper" id="media_post">
                                         <!-- Slides -->
                                         <div class="swiper-slide">
@@ -854,6 +859,17 @@
                                                     alt="" loading="lazy" />
                                             </div>
                                         </div>
+                                        {{-- <div class="swiper-slide">
+                                            <div class="posts-card-show-post-img">
+                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
+                                                    alt=""  loading="lazy"/>
+                                            </div>
+                                        </div>   <div class="swiper-slide">
+                                            <div class="posts-card-show-post-img">
+                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
+                                                    alt=""  loading="lazy"/>
+                                            </div>
+                                        </div> --}}
                                         {{-- <div class="swiper-slide">
                                             <div class="posts-card-show-post-img">
                                                 <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
