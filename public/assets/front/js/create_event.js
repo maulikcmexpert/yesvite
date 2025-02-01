@@ -6781,22 +6781,27 @@ $(document).on("click", ".invite_group_member", function () {
             users: selectedValues,
         },
         success: function (response) {
-            toggleSidebar();
+            if(response?.isTrue && response.isTrue){
+                toggleSidebar();
+                return
+            }
             // console.log(response);
-            response.data.forEach(function (item, index) {
-                if (
-                    item.is_duplicate == "1" &&
-                    item.userdata &&
-                    item.userdata.id
-                ) {
-                    console.log(item.is_duplicate);
-                    $("#user-" + item.userdata.id).remove();
-                    $("#user_tel-" + item.userdata.id).remove();
-                    // $(".user_id-" + item.userdata.id).remove();
-                    // $(".user_id_tel-" + item.userdata.id).remove();
-                    // $(".user-list-responsive").empty();
-                }
-            });
+            
+                response.data.forEach(function (item, index) {
+                    if (
+                        item.is_duplicate == "1" &&
+                        item.userdata &&
+                        item.userdata.id
+                    ) {
+                        console.log(item.is_duplicate);
+                        $("#user-" + item.userdata.id).remove();
+                        $("#user_tel-" + item.userdata.id).remove();
+                        // $(".user_id-" + item.userdata.id).remove();
+                        // $(".user_id_tel-" + item.userdata.id).remove();
+                        // $(".user-list-responsive").empty();
+                    }
+                });
+          
             $(".user-list-responsive").empty();
             // $(".user-list-responsive").html(response.responsive_view);
             $(".user-list-responsive_yesvite").html(response.responsive_view);

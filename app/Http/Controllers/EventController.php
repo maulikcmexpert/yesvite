@@ -682,7 +682,9 @@ class EventController extends BaseController
         $conatctId = session('contact_ids');
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
-        debit_coins($user_id, $eventId, $get_count_invited_user);
+        if($request->isdraft =="0"){
+            debit_coins($user_id, $eventId, $get_count_invited_user);
+        }
         if (isset($request->event_id) && $request->event_id != NULL) {
             $step = $event_creation->step;
             if (isset($request->step) && $request->step != '' && $step < $request->step) {
@@ -1961,6 +1963,8 @@ class EventController extends BaseController
         //     ->get();
         $selected_user = Session::get('user_ids');
 
+        // dd($selected_user);
+
         return response()->json(['view' => view('front.event.guest.list_group_member', compact('groups', 'selected_user'))->render(), "status" => "1"]);
     }
 
@@ -2231,6 +2235,7 @@ class EventController extends BaseController
             return response()->json([
                 
                 'success' => true,
+                "isTrue"=>1
                
             ]);
         }

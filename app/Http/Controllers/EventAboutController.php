@@ -114,6 +114,8 @@ class EventAboutController extends Controller
                     $till_days = "Past";
                 }
             }
+            $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
+            $eventDetails['total_event_comments']= $event_comments;
             $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
@@ -130,6 +132,8 @@ class EventAboutController extends Controller
                 $coHosts[] = $coHostDetail;
             }
             $eventDetails['co_hosts'] = $coHosts;
+            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+            $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
             $eventDetails['event_location_name'] = $eventDetail->event_location_name;
             $eventDetails['address_1'] = $eventDetail->address_1;
             $eventDetails['address_2'] = $eventDetail->address_2;
@@ -195,8 +199,7 @@ class EventAboutController extends Controller
                     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                     $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
-                        ->where('event_id', $eventDetail->id)
-
+                    ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
                         ->get();
 
 

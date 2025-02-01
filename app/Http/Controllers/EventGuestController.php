@@ -240,8 +240,8 @@ class EventGuestController extends Controller
             $eventInfo['guest_view'] = $eventDetails;
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id])->count();
+                // $query->where('app_user', '1');
+            })->where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
@@ -251,14 +251,14 @@ class EventGuestController extends Controller
             $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['rsvp_d' => '1', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+            })->where(['rsvp_d' => '1','is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
 
 
             $todayrsvprate = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])
+            })->where(['rsvp_status' => '1','is_co_host' => '0', 'event_id' => $eventDetail->id])
 
                 ->whereDate('created_at', '=', date('Y-m-d'))
 
@@ -268,20 +268,21 @@ class EventGuestController extends Controller
 
             $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0'])->count();
+                // $query->where('app_user', '1');
+            })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+            // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
 
 
 
             $adults = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('adults');
+            })->where(['event_id' => $eventDetail->id,'is_co_host' => '0', 'rsvp_status' => '1'])->sum('adults');
 
             $kids = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('kids');
+            })->where(['event_id' => $eventDetail->id,'is_co_host' => '0', 'rsvp_status' => '1'])->sum('kids');
 
 
             $eventAboutHost['attending'] = $adults + $kids;
@@ -308,7 +309,7 @@ class EventGuestController extends Controller
             $eventAboutHost['invite_view_rate'] = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'read' => '1'])->count();
+            })->where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count();
 
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
@@ -316,7 +317,7 @@ class EventGuestController extends Controller
                 $invite_view_percent = EventInvitedUser::whereHas('user', function ($query) {
 
                     $query->where('app_user', '1');
-                })->where(['event_id' => $eventDetail->id, 'read' => '1'])->count() / $totalEnvitedUser * 100;
+                })->where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
@@ -326,7 +327,7 @@ class EventGuestController extends Controller
                 $today_invite_view_percent =   EventInvitedUser::whereHas('user', function ($query) {
 
                     $query->where('app_user', '1');
-                })->where(['event_id' => $eventDetail->id, 'read' => '1', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
+                })->where(['event_id' => $eventDetail->id, 'read' => '1' ,'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
