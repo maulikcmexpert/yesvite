@@ -2,7 +2,7 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     // Reset the radio buttons to ensure a clean state for each modal interaction
     $('.rsvp_status_yes').prop('checked', false); // Attending
     $('.rsvp_status_no').prop('checked', false); // Not attending
-    $('#editrsvp').modal('hide'); // Hide the modal initially to set up data
+    $('#editrsvp').modal('show'); // Hide the modal initially to set up data
 
     const guestId = $(this).data('guest-id');
     console.log('Guest ID:', guestId);

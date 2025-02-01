@@ -18,7 +18,7 @@
                   "
                             aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Events</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('event.event_lists')}}">Events</a></li>
                                 <li class="breadcrumb-item">
                                     <a
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
@@ -1169,7 +1169,7 @@
     </div>
     {{-- {{      dd($eventDetails['event_detail'][2]);}} --}}
     <!-- ========= edit-rsvp ======== -->
-    <div class="modal fade cmn-modal guest-edit-incress-modal" id="editrsvp" tabindex="-1"
+    <div class="modal fade cmn-modal guest-edit-incress-modal" id="     " tabindex="-1"
         aria-labelledby="editrsvpLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
