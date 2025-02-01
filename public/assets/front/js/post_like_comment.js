@@ -782,7 +782,7 @@ $(document).ready(function () {
             const first_name = $(this).data("name");
             const last_name = $(this).data("last");
             const email = $(this).data("email");
-            const profile = $(this).data("profile");
+            const profile = "";
         // Add to the guest list if either email or phone is selected
 
         console.log(
@@ -802,7 +802,7 @@ $(document).ready(function () {
 
         }else{
             guestPhoneList = guestPhoneList.filter(guest => guest.id !== id);
-            $('.add_yesvite_guest_'+id).remove();
+            $('.add_phone_guest_'+id).remove();
 
             console.log(guestPhoneList);
         }// App user = 0 for phone (non-app user)
@@ -883,11 +883,11 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             console.log("Contact already in guest list:", { id });
         }
         var  profileImage="";
-        if(profile!=""){
-            profileImage = `<img src="${profile}" alt="Profile Image">` ;
-        }else{
+        // if(profile!=""){
+        //     profileImage = `<img src="${profile}" alt="Profile Image">` ;
+        // }else{
             profileImage =generateProfileImage(first_name, last_name);
-        }
+        // }
         const $modalBody = $('.selected-phone-list');
         const contactHtml = `
             <div class="guest-user add_phone_guest_${id}" data-id="${id}">
