@@ -1806,42 +1806,45 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 function updateTimers() {
-    let messages = document.querySelectorAll("li"); // Get all message list items
+    const messages = document.querySelectorAll("li"); // Select all message list items
+
     let lastSenderTime = null;
     let lastReceiverTime = null;
+    let lastSenderElem = null;
+    let lastReceiverElem = null;
 
-    messages.forEach((msg) => {
-        let timeSpan = msg.querySelector(".time"); // Find the time span
-        if (!timeSpan) return;
+    messages.forEach((msg, index) => {
+        const timeSpan = msg.querySelector(".time");
 
-        let timeText = timeSpan.innerHTML.trim();
-        let classList = timeSpan.classList;
+        if (!timeSpan) return; // Skip if no time element
 
-        let timeClass = [...classList].find(
-            (cls) => cls.startsWith("rtime_") || cls.startsWith("stime_")
-        );
-        if (!timeClass) return;
-
-        let isSender = msg.classList.contains("sender");
-        let isReceiver = msg.classList.contains("receiver");
+        const timeText =
+            timeSpan.getAttribute("data-time") || timeSpan.innerText.trim();
+        const isSender = msg.classList.contains("sender");
+        const isReceiver = msg.classList.contains("receiver");
 
         if (isSender) {
-            // If the last message was also a sender with the same time, clear previous time
-            if (lastSenderTime === timeClass) {
-                timeSpan.innerHTML = "";
+            if (lastSenderTime === timeText) {
+                if (lastSenderElem) lastSenderElem.innerHTML = ""; // Clear previous sender time
             }
-            lastSenderTime = timeClass;
+            lastSenderTime = timeText;
+            lastSenderElem = timeSpan; // Update last sender element
         }
 
         if (isReceiver) {
-            // If the last message was also a receiver with the same time, clear previous time
-            if (lastReceiverTime === timeClass) {
-                timeSpan.innerHTML = "";
+            if (lastReceiverTime === timeText) {
+                if (lastReceiverElem) lastReceiverElem.innerHTML = ""; // Clear previous receiver time
             }
-            lastReceiverTime = timeClass;
+            lastReceiverTime = timeText;
+            lastReceiverElem = timeSpan; // Update last receiver element
         }
     });
+
+    // Ensuring the last messages retain their times
+    if (lastSenderElem) lastSenderElem.innerHTML = lastSenderTime;
+    if (lastReceiverElem) lastReceiverElem.innerHTML = lastReceiverTime;
 }
+setInterval(updateTimers, 1000);
 
 var formattedDate = {};
 var messageRcvTime = "";
