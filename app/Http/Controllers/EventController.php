@@ -1975,7 +1975,6 @@ class EventController extends BaseController
 
     public function getUserAjax(Request $request)
     {
-
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
@@ -2029,12 +2028,7 @@ class EventController extends BaseController
                 'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
                 'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
                 'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
-                // 'ischecked' => in_array($user->id, $invitedUserIds) ? "1" : "0",
             ];
-            // $yesviteUserDetail['app_user']  = $user->app_user;
-            // $yesviteUserDetail['visible'] =  $user->visible;
-            // $yesviteUserDetail['message_privacy'] =  $user->message_privacy;
-            // $yesviteUserDetail['prefer_by']  = $user->prefer_by;
             $yesvite_user[] = (object)$yesviteUserDetail;
         }
 
