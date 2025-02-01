@@ -788,6 +788,8 @@ async function updateChatfromGroup(conversationId) {
     $(".member-lists").html("");
     $(".choosen-file").show();
     $(".block-conversation").hide();
+    $(".report-conversation").hide();
+
     $(".conversationId").attr("conversationId", conversationId);
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
