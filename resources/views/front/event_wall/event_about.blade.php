@@ -455,7 +455,7 @@
                                                         </div>
                                                         <h5>{{ $eventDetails['hosted_by'] }}</h5>
                                                         <span>Host</span>
-                                                        <a href="#" class="msg-btn">Message</a>
+                                                        <a href="{{route('message.list')}}" class="msg-btn">Message</a>
                                                     </div>
                                                 @endif
                                                 @if (!empty($eventDetails['co_hosts']))

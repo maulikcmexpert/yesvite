@@ -1808,43 +1808,60 @@ function addMessageToList(key, messageData, conversationId) {
 function updateTimers() {
     const messages = document.querySelectorAll("li"); // Select all message list items
 
-    let lastSenderTime = null;
-    let lastReceiverTime = null;
     let lastSenderElem = null;
     let lastReceiverElem = null;
+    let prevType = null; // Track previous message type (sender/receiver)
 
     messages.forEach((msg, index) => {
         const timeSpan = msg.querySelector(".time");
-
         if (!timeSpan) return; // Skip if no time element
 
-        const timeText =
-            timeSpan.getAttribute("data-time") || timeSpan.innerText.trim();
+        const storedTime = timeSpan.getAttribute("data-time");
         const isSender = msg.classList.contains("sender");
         const isReceiver = msg.classList.contains("receiver");
 
+        // ADD missing time if empty
+        if (!timeSpan.innerHTML.trim() && storedTime) {
+            timeSpan.innerHTML = storedTime;
+        }
+
         if (isSender) {
-            if (lastSenderTime === timeText) {
-                if (lastSenderElem) lastSenderElem.innerHTML = ""; // Clear previous sender time
+            // Retain last receiver's time before switching to sender
+            if (prevType === "receiver" && lastReceiverElem) {
+                lastReceiverElem.innerHTML =
+                    lastReceiverElem.getAttribute("data-time");
             }
-            lastSenderTime = timeText;
-            lastSenderElem = timeSpan; // Update last sender element
+
+            // Remove previous sender's time (to keep only the last one)
+            if (lastSenderElem) lastSenderElem.innerHTML = "";
+
+            lastSenderElem = timeSpan;
+            prevType = "sender";
         }
 
         if (isReceiver) {
-            if (lastReceiverTime === timeText) {
-                if (lastReceiverElem) lastReceiverElem.innerHTML = ""; // Clear previous receiver time
+            // Retain last sender's time before switching to receiver
+            if (prevType === "sender" && lastSenderElem) {
+                lastSenderElem.innerHTML =
+                    lastSenderElem.getAttribute("data-time");
             }
-            lastReceiverTime = timeText;
-            lastReceiverElem = timeSpan; // Update last receiver element
+
+            // Remove previous receiver's time (to keep only the last one)
+            if (lastReceiverElem) lastReceiverElem.innerHTML = "";
+
+            lastReceiverElem = timeSpan;
+            prevType = "receiver";
         }
     });
 
-    // Ensuring the last messages retain their times
-    if (lastSenderElem) lastSenderElem.innerHTML = lastSenderTime;
-    if (lastReceiverElem) lastReceiverElem.innerHTML = lastReceiverTime;
+    // Ensure last messages of both types keep their timestamps
+    if (lastSenderElem)
+        lastSenderElem.innerHTML = lastSenderElem.getAttribute("data-time");
+    if (lastReceiverElem)
+        lastReceiverElem.innerHTML = lastReceiverElem.getAttribute("data-time");
 }
-setInterval(updateTimers, 1000);
+
+// setInterval(updateTimers, 1000);
 
 var formattedDate = {};
 var messageRcvTime = "";
@@ -2318,7 +2335,7 @@ function createMessageElement(
         msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
     msgTime = messageRcvTime;
-    updateTimers();
+    //updateTimers();
     return `<div>
     ${daychange}
         <li class="${

@@ -161,7 +161,7 @@ class EventController extends BaseController
 
                         if ($userVal) {
                             $userEntry = [
-                                'id' => $userVal->id,
+                                'id' => strval($userVal->id),
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $user['prefer_by'],
@@ -199,7 +199,7 @@ class EventController extends BaseController
                         )->where('id', $user['sync_id'])->first();
                         if ($userVal) {
                             $userEntry = [
-                                'sync_id' => $userVal->id,
+                                'sync_id' => strval($userVal->id),
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $user['prefer_by'],
@@ -2272,11 +2272,11 @@ class EventController extends BaseController
         $users = $request->users;
         $userIds = session()->get('user_ids', []);
         // dD($users);
-        dd($userIds,$users);
+        // dd($userIds,$users);
         if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
-                $user_detail = User::where('id', $value['id'])->first();
+                $user_detail = User::where('id', $id )->first();
                 // dd($user_detail->profile);
                 $userimage = ($user_detail->profile);
                 // $useremail = $user_detail->input('email');
@@ -2286,7 +2286,7 @@ class EventController extends BaseController
 
 
                     $userEntry = [
-                        'id' => $value['id'],
+                        'id' => $id,
                         'firstname' => $user_detail->firstname,
                         'lastname' => $user_detail->lastname,
                         'invited_by' => $value['invited_by'],
@@ -2311,7 +2311,7 @@ class EventController extends BaseController
                     }
                 }
             }
-            dd($userIds,$data);
+            
             session()->put('user_ids', $userIds);
             Session::save();
             $user_list = Session::get('user_ids');
