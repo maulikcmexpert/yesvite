@@ -808,8 +808,6 @@ $(document).ready(function () {
     // });
 
     // Declare guestList outside so it's globally accessible
-    let guestList = [];
-
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
