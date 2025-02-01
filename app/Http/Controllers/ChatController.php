@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\admin\Auth;
 use App\Models\User;
 use App\Models\UserReportChat;
 use Carbon\Carbon;
@@ -12,6 +11,7 @@ use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redis;
 use SendGrid\Mail\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
