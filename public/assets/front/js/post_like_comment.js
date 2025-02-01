@@ -231,43 +231,30 @@ $(document).ready(function () {
                 </li>
                 `;
 
-                    if (parentCommentId) {
-                        // Append as a reply to the parent comment
-                        const parentComment = $(
-                            `li[data-comment-id="${parentCommentId}"]`
-                        );
-                        if (parentComment.length > 0) {
-                            let replyList = parentComment.find(
-                                "ul.primary-comment-replies"
-                            );
-                            if (replyList.length === 0) {
-                                replyList = $(
-                                    '<ul class="primary-comment-replies"></ul>'
-                                ).appendTo(parentComment);
-                            }
-
-                            // Check if the reply is already appended
-                            const existingReply = replyList.find(
-                                `li[data-comment-id="${data.comment_id}"]`
-                            );
-                            if (existingReply.length === 0) {
-                                replyList.append(newCommentHTML);
-                            }
+                if (parentCommentId) {
+                    // Append as a reply to the parent comment
+                    const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
+                    if (parentComment.length > 0) {
+                        let replyList = parentComment.find("ul.primary-comment-replies");
+                        if (replyList.length === 0) {
+                            replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
                         }
-                    } else {
-                        // Append as a new top-level comment
-                        const commentList = $(
-                            `.posts-card-show-all-comments-wrp.show_${eventPostId}`
-                        ).find(".top-level-comments");
 
-                        // Check if the comment is already appended
-                        const existingComment = commentList.find(
-                            `li[data-comment-id="${data.comment_id}"]`
-                        );
-                        if (existingComment.length === 0) {
-                            commentList.append(newCommentHTML);
+                        // Check if the reply is already appended
+                        if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
+                            replyList.append(newCommentHTML);
                         }
                     }
+                } else {
+                    // Append as a new top-level comment
+                    const commentList = $(`.posts-card-show-all-comments-wrp.show_${eventPostId}`).find(".top-level-comments");
+
+                    // Check if the comment is already appended
+                    if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
+                        commentList.append(newCommentHTML);
+                    }
+                }
+
                     const commentCountElement = $(`#comment_${eventPostId}`);
                     const currentCount =
                         parseInt(commentCountElement.text()) || 0;

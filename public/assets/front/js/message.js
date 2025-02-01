@@ -2044,6 +2044,13 @@ function createMessageElement(
             ? `
             <div>
             <div class="reply-section">
+             ${
+                 senderprofile != ""
+                     ? isReceiver
+                         ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                         : ""
+                     : ""
+             }
                 <span class="senderName">${senderName}</span>            
                 <div>
                     <span> ${messageData.replyData.replyMessage}</span>
@@ -2062,7 +2069,7 @@ function createMessageElement(
                 </div>
                 <hr>
                 <div class="reply-massage"> 
-
+               
 
                     ${
                         messageData?.type == "1"
