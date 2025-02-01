@@ -2272,11 +2272,11 @@ class EventController extends BaseController
         $users = $request->users;
         $userIds = session()->get('user_ids', []);
         // dD($users);
-        dd($userIds,$users);
+        // dd($userIds,$users);
         if (!empty($users)) {
             foreach ($users as $value) {
-                $id = $value['id'];
-                $user_detail = User::where('id', $value['id'])->first();
+                $id = intval($value['id']);
+                $user_detail = User::where('id', $id )->first();
                 // dd($user_detail->profile);
                 $userimage = ($user_detail->profile);
                 // $useremail = $user_detail->input('email');
@@ -2286,7 +2286,7 @@ class EventController extends BaseController
 
 
                     $userEntry = [
-                        'id' => $value['id'],
+                        'id' => $id,
                         'firstname' => $user_detail->firstname,
                         'lastname' => $user_detail->lastname,
                         'invited_by' => $value['invited_by'],
