@@ -270,12 +270,11 @@ defer
 @endif
 
 @stack('scripts')
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<!-- Firebase Database -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"></script>
+
 <script>
 
-const userId = {{$UserId}};
 (async function() {
     const userId = {{$UserId}}; // Make sure this is properly injected from Laravel
 
@@ -285,15 +284,19 @@ const userId = {{$UserId}};
             const response = await fetch("/firebase_js.json");
             const firebaseConfig = await response.json();
 
-            // Initialize Firebase with the fetched configuration
-            const app = firebase.initializeApp(firebaseConfig);
-            const database = firebase.database();
+            // Initialize Firebase
+            const { initializeApp } = firebase;
+            const app = initializeApp(firebaseConfig);
+            
+            // Import Firebase Database methods
+            const { getDatabase, ref, get } = firebase.database;
+            const database = getDatabase(app);
 
             // Reference to the 'overview/{userId}' node in Firebase
-            const overviewRef = firebase.database().ref(`overview/${userId}`);
-            
+            const overviewRef = ref(database, `overview/${userId}`);
+
             // Fetch the snapshot of the overview data
-            const snapshot = await overviewRef.get();
+            const snapshot = await get(overviewRef);
 
             let totalUnreadCount = 0;
 
