@@ -26,8 +26,8 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             }
             if (response.rsvp_status == "0") {
                 $('.rsvp_no').prop('checked', true); 
-                $('.side_menu_minus').prop('disabled',false)
-                $('.side_menu_plus').prop('disabled',false)
+                $('.side_menu_minus').prop('disabled',true)
+                $('.side_menu_plus').prop('disabled',true)
             }
 
             // Store guest ID in the save button data attribute
