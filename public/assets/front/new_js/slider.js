@@ -39,6 +39,7 @@ var swiper = new Swiper(".photo-detail-slider", {
 >>>>>>> Stashed changes
 
 
+
 //   ===story-slider===
 //   ===story-slider===
 var swiper = new Swiper(".story-slide-slider", {
