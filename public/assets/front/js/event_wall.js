@@ -958,7 +958,7 @@ $(document).ready(function () {
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
         var $this = $(this); // Cache the button
-        $this.prop('disabled', true)
+      
         // Prevent multiple clicks
       
         // if ($this.prop('disabled')) {
@@ -990,6 +990,7 @@ $(document).ready(function () {
             var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
                 toastr.error('Please upload a photo for the photo post.');
+                return
             }
 
 
@@ -998,6 +999,7 @@ $(document).ready(function () {
             document.getElementById('photoPostType').value = 1;
 
             // Submit the form
+            $this.prop('disabled', true)
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
@@ -1006,7 +1008,9 @@ $(document).ready(function () {
                 alert('Please enter some content for the photo post.');
                 return;
             }
+            
             document.getElementById('photoPostType').value = 0; //
+            $this.prop('disabled', true)
             textForm.submit();
         }
         // If no valid content is provided, show an alert
