@@ -270,60 +270,8 @@ defer
 @endif
 
 @stack('scripts')
-<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"></script>
 
 <script>
-
-(async function() {
-    const userId = {{$UserId}}; // Make sure this is properly injected from Laravel
-
-    if (userId != undefined) {
-        try {
-            // Fetch the Firebase configuration from the JSON file
-            const response = await fetch("/firebase_js.json");
-            const firebaseConfig = await response.json();
-
-            // Initialize Firebase
-            const { initializeApp } = firebase;
-            const app = initializeApp(firebaseConfig);
-            
-            // Import Firebase Database methods
-            const { getDatabase, ref, get } = firebase.database;
-            const database = getDatabase(app);
-
-            // Reference to the 'overview/{userId}' node in Firebase
-            const overviewRef = ref(database, `overview/${userId}`);
-
-            // Fetch the snapshot of the overview data
-            const snapshot = await get(overviewRef);
-
-            let totalUnreadCount = 0;
-
-            // Check if the snapshot exists
-            if (snapshot.exists()) {
-                const conversations = snapshot.val();
-
-                // Loop through the conversations and calculate the total unread count
-                for (let conversationId in conversations) {
-                    const conversation = conversations[conversationId];
-
-                    // Check if 'unReadCount' and 'contactName' exist for this conversation
-                    if (conversation.unReadCount && conversation.contactName) {
-                        totalUnreadCount += parseInt(conversation.unReadCount, 10);
-                    }
-                }
-            }
-
-            // Optionally, you can output the result
-            console.log("Total Unread Count:", totalUnreadCount);
-        } catch (error) {
-            console.error("Error fetching data from Firebase:", error);
-        }
-    }
-})();
-
-
 
     $(document).on('click','.create_event_with_plan',function(){
     // toggleSidebar('sidebar_change_plan_create');
@@ -438,3 +386,74 @@ defer
         }
     });
     </script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+        getDatabase,
+        ref,
+        get,
+        onValue,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    (async function() {
+        const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
+
+        if (userId != undefined) {
+            try {
+                // Fetch Firebase configuration from firebase_js.json
+                const response = await fetch("/firebase_js.json");
+                const firebaseConfig = await response.json();
+
+                // Initialize Firebase app
+                const app = initializeApp(firebaseConfig);
+                const database = getDatabase(app);
+
+                // Reference to the user's overview data in Firebase
+                const overviewRef = ref(database, `overview/${userId}`);
+
+                // Function to calculate unread count
+                function updateUnreadCountG(snapshot) {
+                    let totalUnreadCount = 0;
+
+                    // Check if data exists
+                    if (snapshot.exists()) {
+                        const conversations = snapshot.val();
+
+                        for (let conversationId in conversations) {
+                            const conversation = conversations[conversationId];
+
+                            if (conversation.unReadCount && conversation.contactName) {
+                                totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                            }
+                        }
+                    }
+
+                    if (parseInt(totalUnreadCount) > 0) {
+                        $(".badge").show();
+                        $(".g-badge").show();
+                        $(".g-badge").html(parseInt(totalUnreadCount));
+                        $(".badge").html(parseInt(totalUnreadCount));
+                    } else {
+                        $(".g-badge").hide();
+                        $(".badge").hide();
+                        $(".g-badge").html("");
+                        $(".badge").html("");
+                    }
+                }
+
+                // Listen for real-time changes in the overview data
+                onValue(overviewRef, (snapshot) => {
+                    updateUnreadCountG(snapshot);
+                });
+
+                // Initial fetch of the data (optional)
+                const snapshot = await get(overviewRef);
+                updateUnreadCountG(snapshot);
+
+            } catch (error) {
+                console.error("Error fetching data from Firebase:", error);
+            }
+        }
+    })();
+</script>
