@@ -553,7 +553,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
-        dd($potluck);
+       
         
         Session::forget('desgin');
         Session::forget('shape_image');
@@ -924,9 +924,9 @@ class EventController extends BaseController
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 // if ($request->isdraft == "1") {
-                EventPotluckCategory::where('event_id', $request->event_id)->delete();
-                EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
-                UserPotluckItem::where('event_id', $request->event_id)->delete();
+                // EventPotluckCategory::where('event_id', $request->event_id)->delete();
+                // EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+                // UserPotluckItem::where('event_id', $request->event_id)->delete();
                 // }
                 if (isset($potluck) && !empty($potluck)) {
 
@@ -951,10 +951,10 @@ class EventController extends BaseController
                                     foreach ($item['item_carry_users'] as $user) {
                                         UserPotluckItem::Create([
                                             'event_id' => $eventId,
-                                            'user_id' => $user->user_id,
+                                            'user_id' => $user['user_id'],
                                             'event_potluck_category_id' => $eventPodluck->id,
                                             'event_potluck_item_id' => $eventPodluckitem->id,
-                                            'quantity' => $user->quantity
+                                            'quantity' => $user['quantity']
                                         ]);
                                     }
                                 }
@@ -3321,10 +3321,10 @@ class EventController extends BaseController
                                     foreach ($item['item_carry_users'] as $user) {
                                         UserPotluckItem::Create([
                                             'event_id' => $eventId,
-                                            'user_id' => $user->user_id,
+                                            'user_id' => $user['user_id'],
                                             'event_potluck_category_id' => $eventPodluck->id,
                                             'event_potluck_item_id' => $eventPodluckitem->id,
-                                            'quantity' => $user->quantity
+                                            'quantity' => $user['quantity']
                                         ]);
                                     }
                                 }
