@@ -775,7 +775,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }
         var  profileImage="";
         if(profile!=""){
-            profileImage = profile;      
+            profileImage =`<img src="${profileImage}" alt="Profile Image">` ;      
         }else{
             profileImage =generateProfileImage(first_name, last_name);      
         }
