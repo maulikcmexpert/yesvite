@@ -2417,6 +2417,7 @@ $(document).on("click", ".add_category_item_btn", function () {
         var self_bring = 0;
     }
     var self_bringQuantity = $("#self_bring_qty").val();
+    
 
     $.ajax({
         url: base_url + "event/category_item_session",

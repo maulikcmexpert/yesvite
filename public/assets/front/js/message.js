@@ -1549,7 +1549,7 @@ $(".send-message").on("keypress", async function (e) {
                 replyUserName: "",
             },
         };
-
+        const receiverName = $(".selected_name").val();
         // alert(isGroup);
         if (isGroup == true || isGroup == "true") {
             const groupName = $(".selected_name").val();
@@ -1567,7 +1567,8 @@ $(".send-message").on("keypress", async function (e) {
                     replyMessage: replyMessageData ? replyMessageData.data : "",
                     // replyTimeStamp: Date.now(),
                     replyTimeStamp: replyMessageData.timeStamp,
-                    replyUserName: replyMessageData.receiverName,
+                    // replyUserName: replyMessageData.receiverName,
+                    replyUserName: receiverName,
                     replyDocType: "",
                 };
                 messageData.isReply = "1";
@@ -1627,7 +1628,6 @@ $(".send-message").on("keypress", async function (e) {
             // Update all group members' overview
         } else {
             const receiverId = $(".selected_message").val();
-            const receiverName = $(".selected_name").val();
 
             messageData.receiverId = receiverId;
             messageData.receiverName = receiverName;
