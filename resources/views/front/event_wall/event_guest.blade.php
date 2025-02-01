@@ -1,4 +1,3 @@
-{{dd($eventInfo['host_view']);}}
 <main class="new-main-content">
 
     <div class="container">
