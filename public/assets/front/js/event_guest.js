@@ -120,8 +120,9 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
                         zIndex: 9999
                     }).appendTo('body');
 
+                    
                     $('#editrsvp').modal('hide');
-
+                    toastr.success('RSVP updated successfully');
                     setTimeout(() => {
                         window.location.reload();
                     }, 50); 
