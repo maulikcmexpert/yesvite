@@ -276,31 +276,50 @@ defer
 <script>
 
 const userId = {{$UserId}};
-if(userId!=undefined){
+(async function() {
+    const userId = {{$UserId}}; // Make sure this is properly injected from Laravel
 
-    const response = await fetch("/firebase_js.json");
-    const firebaseConfig = await response.json();
-    const app = firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-    const overviewRef = ref(database, `overview/${userId}`);
-    const snapshot = await get(overviewRef);
-    let totalUnreadCount = 0;
-    if (await snapshot.exists()) {
-        const conversations = await snapshot.val();
-        for (let conversationId in conversations) {
-            if (
-                conversations[conversationId].unReadCount &&
-                conversations[conversationId].contactName
-            ) {
-                totalUnreadCount =
-                    totalUnreadCount +
-                    parseInt(conversations[conversationId].unReadCount, 10);
+    if (userId != undefined) {
+        try {
+            // Fetch the Firebase configuration from the JSON file
+            const response = await fetch("/firebase_js.json");
+            const firebaseConfig = await response.json();
 
-                // console.log(totalUnreadCount);
+            // Initialize Firebase with the fetched configuration
+            const app = firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+
+            // Reference to the 'overview/{userId}' node in Firebase
+            const overviewRef = firebase.database().ref(`overview/${userId}`);
+            
+            // Fetch the snapshot of the overview data
+            const snapshot = await overviewRef.get();
+
+            let totalUnreadCount = 0;
+
+            // Check if the snapshot exists
+            if (snapshot.exists()) {
+                const conversations = snapshot.val();
+
+                // Loop through the conversations and calculate the total unread count
+                for (let conversationId in conversations) {
+                    const conversation = conversations[conversationId];
+
+                    // Check if 'unReadCount' and 'contactName' exist for this conversation
+                    if (conversation.unReadCount && conversation.contactName) {
+                        totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                    }
+                }
             }
+
+            // Optionally, you can output the result
+            console.log("Total Unread Count:", totalUnreadCount);
+        } catch (error) {
+            console.error("Error fetching data from Firebase:", error);
         }
     }
-}
+})();
+
 
 
     $(document).on('click','.create_event_with_plan',function(){
