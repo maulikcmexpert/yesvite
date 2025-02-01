@@ -1169,7 +1169,7 @@
     </div>
     {{-- {{      dd($eventDetails['event_detail'][2]);}} --}}
     <!-- ========= edit-rsvp ======== -->
-    <div class="modal fade cmn-modal guest-edit-incress-modal" id="editrsvp" tabindex="-1"
+    <div class="modal fade cmn-modal guest-edit-incress-modal" id="     " tabindex="-1"
         aria-labelledby="editrsvpLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
