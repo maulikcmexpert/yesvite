@@ -958,9 +958,9 @@ $(document).ready(function () {
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
         var $this = $(this); // Cache the button
-      
+
         // Prevent multiple clicks
-      
+
         // if ($this.prop('disabled')) {
         //     return;
         // }
@@ -1008,7 +1008,7 @@ $(document).ready(function () {
                 alert('Please enter some content for the photo post.');
                 return;
             }
-            
+
             document.getElementById('photoPostType').value = 0; //
             $this.prop('disabled', true)
             textForm.submit();
