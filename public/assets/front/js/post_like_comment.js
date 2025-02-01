@@ -722,8 +722,6 @@ $(document).ready(function () {
             $(this).data("type") === "email" && $(this).is(":checked");
         const isPhoneSelected =
             $(this).data("type") === "phone" && $(this).is(":checked");
-
-        // Add to the guest list if either email or phone is selected
         const first_name = $(this).data("name");
         const last_name = $(this).data("last");
         const email = $(this).data("email");
@@ -734,7 +732,10 @@ $(document).ready(function () {
         if( $(this).is(":checked")){
             addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
         }else{
+            guestList = guestList.filter(guest => guest.id !== id);
             $('.add_yesvite_guest_'+id).remove();
+
+            console.log(guestList);
         }
 
     });
