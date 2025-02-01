@@ -661,7 +661,6 @@ function generateProfileImage(firstname, lastname) {
 $(document).ready(function () {
     // Event listener for contact checkboxes
     $(document).on("change", ".contact-checkbox", function () {
-        alert();
         const id = $(this).data("id");
         const isEmailSelected =
             $(this).data("type") === "email" && $(this).is(":checked");
@@ -673,8 +672,8 @@ $(document).ready(function () {
         console.log(
             `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         );
-        // Add to the guest list, prefer email if selected, else prefer phone
-        addToGuestList(id, isEmailSelected ? "email" : "phone", 1); // App user = 1 for email (app user)
+            addToGuestList(id, isEmailSelected ? "email" : "phone", 1); // App user = 1 for email (app user)
+        
     });
 
     // Event listener for phone contact checkboxes
