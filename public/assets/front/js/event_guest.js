@@ -110,7 +110,6 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
                 guestContainer.find('.sucess-yes').remove();
                 guestContainer.find('.sucess-no').remove();
                 guestContainer.find('.no-reply').remove();
-             // Create an overlay to block clicks
                     $('<div id="pageOverlay"></div>').css({
                         position: 'fixed',
                         top: 0,
@@ -121,12 +120,11 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
                         zIndex: 9999
                     }).appendTo('body');
 
-                    // Hide modal and reload page
                     $('#editrsvp').modal('hide');
 
                     setTimeout(() => {
                         window.location.reload();
-                    }, 100); // Small delay before reload
+                    }, 50); 
 
                 // Now append or update the appropriate div based on RSVP status
                 if (response.rsvp_status == '1') {
