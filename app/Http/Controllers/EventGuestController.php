@@ -36,7 +36,7 @@ class EventGuestController extends Controller
         $title = 'event guest';
         $page = 'front.event_wall.event_guest';
         $user  = Auth::guard('web')->user();
-        $js = ['event_guest','post_like_comment'];
+        $js = ['event_guest','post_like_comment','guest_rsvp'];
         $event = decrypt($id);
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -57,6 +57,8 @@ class EventGuestController extends Controller
                     $eventDetails['event_images'][] = asset('storage/event_images/' . $values->image);
                 }
             }
+            $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
+            $eventDetails['total_event_comments']=$event_comments;
             $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
