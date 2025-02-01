@@ -738,7 +738,6 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            $('.add_yesvite_guest_'+id).remove();
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
@@ -775,7 +774,6 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            $('.add_yesvite_guest_'+id).remove();
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
