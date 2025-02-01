@@ -1806,59 +1806,66 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 function updateTimers() {
-    const messages = document.querySelectorAll("li"); // Select all message list items
+    const timeSpans = document.querySelectorAll(".time"); // Select all spans with class "time"
 
-    let lastSenderElem = null;
-    let lastReceiverElem = null;
-    let prevType = null; // Track previous message type (sender/receiver)
+    // Step 1: Process spans where data-loop is NOT 0
+    timeSpans.forEach((span, index) => {
+        let dataLoop = parseInt(span.getAttribute("data-loop"));
+        let dataRLoop = parseInt(span.getAttribute("data-rloop"));
+        let dataTime = span.getAttribute("data-time").trim();
+        let timeClass = `rtime_${dataTime.replace(/\s+/g, "")}`; // Create class identifier
 
-    messages.forEach((msg, index) => {
-        const timeSpan = msg.querySelector(".time");
-        if (!timeSpan) return; // Skip if no time element
+        if (dataLoop !== 0) {
+            span.classList.add(timeClass); // Assign class for grouping
+            let nextIndex = index + 1;
 
-        const storedTime = timeSpan.getAttribute("data-time");
-        const isSender = msg.classList.contains("sender");
-        const isReceiver = msg.classList.contains("receiver");
+            // Find the last occurrence before a data-rloop=0
+            while (nextIndex < timeSpans.length) {
+                let nextSpan = timeSpans[nextIndex];
+                let nextDataLoop = parseInt(nextSpan.getAttribute("data-loop"));
+                let nextDataRLoop = parseInt(
+                    nextSpan.getAttribute("data-rloop")
+                );
 
-        // ADD missing time if empty
-        if (!timeSpan.innerHTML.trim() && storedTime) {
-            timeSpan.innerHTML = storedTime;
-        }
-
-        if (isSender) {
-            // Retain last receiver's time before switching to sender
-            if (prevType === "receiver" && lastReceiverElem) {
-                lastReceiverElem.innerHTML =
-                    lastReceiverElem.getAttribute("data-time");
+                if (nextDataLoop === dataLoop && nextDataRLoop !== 0) {
+                    nextIndex++;
+                } else {
+                    timeSpans[nextIndex - 1].innerHTML =
+                        timeSpans[nextIndex - 1].getAttribute("data-time");
+                    break;
+                }
             }
-
-            // Remove previous sender's time (to keep only the last one)
-            if (lastSenderElem) lastSenderElem.innerHTML = "";
-
-            lastSenderElem = timeSpan;
-            prevType = "sender";
-        }
-
-        if (isReceiver) {
-            // Retain last sender's time before switching to receiver
-            if (prevType === "sender" && lastSenderElem) {
-                lastSenderElem.innerHTML =
-                    lastSenderElem.getAttribute("data-time");
-            }
-
-            // Remove previous receiver's time (to keep only the last one)
-            if (lastReceiverElem) lastReceiverElem.innerHTML = "";
-
-            lastReceiverElem = timeSpan;
-            prevType = "receiver";
         }
     });
 
-    // Ensure last messages of both types keep their timestamps
-    if (lastSenderElem)
-        lastSenderElem.innerHTML = lastSenderElem.getAttribute("data-time");
-    if (lastReceiverElem)
-        lastReceiverElem.innerHTML = lastReceiverElem.getAttribute("data-time");
+    // Step 2: Process spans where data-rloop is NOT 0
+    timeSpans.forEach((span, index) => {
+        let dataLoop = parseInt(span.getAttribute("data-loop"));
+        let dataRLoop = parseInt(span.getAttribute("data-rloop"));
+        let dataTime = span.getAttribute("data-time").trim();
+        let timeClass = `stime_${dataTime.replace(/\s+/g, "")}`;
+
+        if (dataRLoop !== 0) {
+            span.classList.add(timeClass);
+            let nextIndex = index + 1;
+
+            while (nextIndex < timeSpans.length) {
+                let nextSpan = timeSpans[nextIndex];
+                let nextDataLoop = parseInt(nextSpan.getAttribute("data-loop"));
+                let nextDataRLoop = parseInt(
+                    nextSpan.getAttribute("data-rloop")
+                );
+
+                if (nextDataRLoop === dataRLoop && nextDataLoop !== 0) {
+                    nextIndex++;
+                } else {
+                    timeSpans[nextIndex - 1].innerHTML =
+                        timeSpans[nextIndex - 1].getAttribute("data-time");
+                    break;
+                }
+            }
+        }
+    });
 }
 
 // setInterval(updateTimers, 1000);
