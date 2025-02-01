@@ -1285,7 +1285,7 @@
                             <div class="create-post-upload-img-head">
                                 <h4>POLL</h4>
                                 <div>
-                                    <span class="upload-poll-delete">
+                                    <span class="upload-poll-delete delete_poll" id="delete_poll">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M21.875 6.22915C18.4062 5.8854 14.9167 5.70831 11.4375 5.70831C9.375 5.70831 7.3125 5.81248 5.25 6.02081L3.125 6.22915"
