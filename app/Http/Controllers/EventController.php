@@ -2272,7 +2272,7 @@ class EventController extends BaseController
         $users = $request->users;
         $userIds = session()->get('user_ids', []);
         // dD($users);
-        dd($userIds);
+        dd($userIds,$users);
         if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
