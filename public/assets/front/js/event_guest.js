@@ -20,9 +20,12 @@ $(document).on('click', '.edit_guest_rsvp', function () {
             // Update the radio buttons based on RSVP status
             if (response.rsvp_status == "1") {
                 $('.rsvp_status_yes').prop('checked', true); // Attending
+                $('.edit-rsvp-qty').prop("disabled",false); // Not Attending
+
             }
             if (response.rsvp_status == "0") {
-                $('.rsvp_status_no').prop('checked', true); // Not Attending
+                $('.rsvp_status_no').prop('checked', true);
+                $('.edit-rsvp-qty').prop("disabled",true); // Not Attending
             }
 
             // Store guest ID in the save button data attribute
