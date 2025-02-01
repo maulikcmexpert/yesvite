@@ -1769,7 +1769,10 @@ function UpdateMessageToList(key, messageData, conversationId) {
         msgloop,
         dataRloop
     );
-    updateTimers();
+    setTimeout(function () {
+        updateTimers();
+    }, 2500);
+
     $(messageEle).replaceWith(messgeElement);
 }
 function addMessageToList(key, messageData, conversationId) {
@@ -1789,7 +1792,9 @@ function addMessageToList(key, messageData, conversationId) {
     }
 
     const messageElement = createMessageElement(key, messageData, isGroup);
-    updateTimers();
+    setTimeout(function () {
+        updateTimers();
+    }, 2500);
     $(".msg-lists").append(messageElement);
 
     if (
