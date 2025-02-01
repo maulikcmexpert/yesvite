@@ -444,6 +444,7 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
             updateImageProgress();
         }
         else if (type === 'video') {
+            let progressWidth = 0;
             currentVideoElement = element;
             element.play();
 
