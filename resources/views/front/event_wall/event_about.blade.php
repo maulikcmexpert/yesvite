@@ -656,7 +656,11 @@
                                                      @endphp
                                                         <div class="shedule-manage-timing">
                                                             <div class="shedule-timing">
+                                                                @if($schedule['start_time']!="")
                                                                 <h6>{{ $schedule['start_time'] }}</h6>
+                                                                @else
+                                                                <h6>{{ $schedule['end_time'] }}</h6>
+                                                                @endif
                                                             </div>
                                                             <div class="shedule-box {{ $colorClass }}">
                                                                 <div class="shedule-box-left">
