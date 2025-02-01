@@ -2008,7 +2008,7 @@ function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
     var Alreadyguest = $(".users-data.invited_users").length;
 
-    $("#event_guest_count").text(total_guest + " Guests");
+    $("#event_guest_count").text((total_guest + Alreadyguest) + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
     console.log(total_guest);
     console.log(max_guest);
