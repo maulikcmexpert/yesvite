@@ -2047,7 +2047,7 @@ function createMessageElement(
              ${
                  senderprofile != ""
                      ? isReceiver
-                         ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                         ? `<div class="simplemsg-img me-2 user-img new-msg-class replay-img"><span>${senderprofile}<span></div>`
                          : ""
                      : ""
              }
@@ -3031,6 +3031,7 @@ $(".conversationId").click(function () {
     $(".change-group-name").addClass("d-none");
     $(".selected-title").show();
     $("#group-selected-user-id").val("");
+    newSelectedUserIds = [];
     let isGroup = $("#isGroup").val();
     if (isGroup == "true" || isGroup == true) {
         $(".updateGroup").show();
