@@ -1844,6 +1844,7 @@ function updateTimers() {
     if (lastSenderElem) lastSenderElem.innerHTML = lastSenderTime;
     if (lastReceiverElem) lastReceiverElem.innerHTML = lastReceiverTime;
 }
+setInterval(updateTimers, 1000);
 
 var formattedDate = {};
 var messageRcvTime = "";
