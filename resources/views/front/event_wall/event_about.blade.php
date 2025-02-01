@@ -335,7 +335,7 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if (($eventDetails['host_id'] != $login_user_id && $eventDetails['is_host'] != "1"))
+                                                    @if (($eventDetails['host_id'] != $login_user_id  && $eventDetails['is_co_host']=="0"))
                                                         <a href="#" class="add-calender btn" id="openGoogle">Add to
                                                             calendar
                                                             <svg width="16" height="16" viewBox="0 0 16 16"
@@ -386,7 +386,7 @@
                                                             </svg>
                                                         </a>
                                                     @endif
-                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0')
+                                                    @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0')&&($eventDetails['host_id'] != $login_user_id  && $eventDetails['is_co_host']=="0"))
                                                         <a href="#"
                                                             class="rsvp-btn noattending-btn btn {{ $isDisabled }}"data-bs-toggle="modal"
                                                             data-bs-target="#aboutsuccess">Not Attending
@@ -400,7 +400,7 @@
                                                             </svg>
                                                         </a>
                                                     @endif
-                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1')
+                                                    @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1')&&($eventDetails['host_id'] != $login_user_id  && $eventDetails['is_co_host']=="0"))
                                                         <a href="#"
                                                             class="rsvp-btn attending-btn btn {{ $isDisabled }}"
                                                             data-bs-toggle="modal"
@@ -511,7 +511,7 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&&$eventDetails['logitude']!='')
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&& $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null )
                                                 @php
                                                     $latitude = !empty($eventDetails['latitude'])
                                                         ? $eventDetails['latitude']
