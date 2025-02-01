@@ -286,7 +286,7 @@
                                                                     <input type="hidden" id="eventID"
                                                                         value="{{ $event }}">
                                                                     <input type="hidden" id="user_id"
-                                                                        value="{{ $guest['user_id'] }}">
+                                                                        value="{{ $guest['id'] }}">
 
                                                                 </a>
                                                                 <div class="d-flex flex-column">
