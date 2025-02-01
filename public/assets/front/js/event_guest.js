@@ -26,7 +26,7 @@ $(document).on('click', '.edit_guest_rsvp', function () {
             }
 
             // Store guest ID in the save button data attribute
-            $('#editrsvp .save-btn').data('guest-update-id', guestId);
+            $('#editrsvp .guest-rsvp-edit-btn').data('guest-update-id', guestId);
             $('#editrsvp .remove_guest_page').data('guest-update-id', guestId);
             $('#editrsvp .remove_guest_page').data('user-id', response.user_id);
             $('#editrsvp .remove_guest_page').data('event-id', response.event_id);
@@ -44,12 +44,15 @@ $('#editrsvp').on('hidden.bs.modal', function () {
 });
 // Reset adults and kids values when "Not Attending" is selected
 $(document).on('change', '.rsvp_status_no', function () {
-    // Reset adults and kids count to 0
+    $('.edit-rsvp-qty').prop("disabled",true);
     $('#editrsvp .adult-count').val(0);
     $('#editrsvp .kid-count').val(0);
 });
+$(document).on('change', '.rsvp_status_yes', function () {
+    $('.edit-rsvp-qty').prop("disabled",false);
+});
 
-$(document).on('click', '.save-btn', function () {
+$(document).on('click', '.guest-rsvp-edit-btn', function () {
     const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
     console.log('Updating Guest ID:', guestId);
 
