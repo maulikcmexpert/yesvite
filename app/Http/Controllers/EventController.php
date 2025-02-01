@@ -129,7 +129,7 @@ class EventController extends BaseController
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
 
-            $eventDetail['isCopy'] = $request->iscopy;
+            
             if ($request->id != "") {
                 // dD();
                 $eventDetail['isCohost'] = $getEventData->is_draft_save;
@@ -220,6 +220,7 @@ class EventController extends BaseController
             }
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
+                $eventDetail['isCopy'] = $getEventData->id;
                 $eventDetail['inviteCount'] = EventInvitedUser::with('user')
                     ->where('event_id', $request->id)->where('is_co_host', '0')
                     ->count();
