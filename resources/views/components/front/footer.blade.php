@@ -270,34 +270,36 @@ defer
 @endif
 
 @stack('scripts')
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<!-- Firebase Database -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"></script>
 <script>
-
-const userId = {{$UserId}};
+<script>
 (async function() {
-    const userId = {{$UserId}}; // Make sure this is properly injected from Laravel
+    const userId = {{$UserId}}; // Ensure this is injected from Laravel
 
     if (userId != undefined) {
         try {
-            // Fetch the Firebase configuration from the JSON file
+            // Fetch Firebase configuration
             const response = await fetch("/firebase_js.json");
             const firebaseConfig = await response.json();
 
-            // Initialize Firebase with the fetched configuration
-            const app = firebase.initializeApp(firebaseConfig);
-            const database = firebase.database();
+            // Import specific Firebase functions
+            const { initializeApp } = firebase;
+            const { getDatabase, ref, get } = firebase.database;
 
-            // Reference to the 'overview/{userId}' node in Firebase
-            const overviewRef = firebase.database().ref(`overview/${userId}`);
-            
-            // Fetch the snapshot of the overview data
-            const snapshot = await overviewRef.get();
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+
+            // Get a reference to the Firebase Database
+            const database = getDatabase(app);
+            const overviewRef = ref(database, `overview/${userId}`);
+
+            // Get the data snapshot
+            const snapshot = await get(overviewRef);
 
             let totalUnreadCount = 0;
 
-            // Check if the snapshot exists
+            // Check if data exists
             if (snapshot.exists()) {
                 const conversations = snapshot.val();
 
@@ -305,20 +307,20 @@ const userId = {{$UserId}};
                 for (let conversationId in conversations) {
                     const conversation = conversations[conversationId];
 
-                    // Check if 'unReadCount' and 'contactName' exist for this conversation
                     if (conversation.unReadCount && conversation.contactName) {
                         totalUnreadCount += parseInt(conversation.unReadCount, 10);
                     }
                 }
             }
 
-            // Optionally, you can output the result
+            // Optionally, display the total unread count
             console.log("Total Unread Count:", totalUnreadCount);
         } catch (error) {
             console.error("Error fetching data from Firebase:", error);
         }
     }
 })();
+
 
 
 
