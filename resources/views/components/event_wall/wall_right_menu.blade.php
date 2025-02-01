@@ -316,7 +316,7 @@ if ($hostView) {
     // Get the "See All" button and the guest list container
     const seeAllBtn = document.getElementById('seeAllBtn');
     const guestList = document.getElementById('guestList');
-
+alert(1);
     // Assuming $guestArray is passed as a JSON object to JavaScript
     const guests = @json($guestArray);  // Make sure to use Blade to pass PHP data to JS
 
