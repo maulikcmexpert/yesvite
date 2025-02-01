@@ -268,8 +268,9 @@ class EventGuestController extends Controller
 
             $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
+                // $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+            // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
 
 
 

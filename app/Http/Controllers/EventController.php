@@ -2233,6 +2233,7 @@ class EventController extends BaseController
             return response()->json([
                 
                 'success' => true,
+                "isTrue"=>1
                
             ]);
         }
