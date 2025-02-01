@@ -4637,8 +4637,6 @@ $(document).on(
     "click",
     ".report-single-conversation, .report-conversation",
     function () {
-        alert(0); // Debugging alert
-
         var conversation = $(this).attr("data-conversation");
         var userId = $(this).attr("data-userid"); // Ensure the attribute name matches exactly
 
