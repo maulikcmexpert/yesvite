@@ -227,7 +227,7 @@
                                 </svg>
                                 <h6>{{ $contact->phone_number }}</h6>
                             </div>
-                            <input class="form-check-input failed-checkout contact-checkbox phone-checkbox"
+                            <input class="form-check-input failed-checkout phone-checkbox"
                                 type="checkbox" data-id="{{ $contact->id }}" data-profile="{{$contact->profile}}" data-prefer="phone"
                                 data-name="{{ $contact->firstname }}"
                                 data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
