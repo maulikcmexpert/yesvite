@@ -803,10 +803,10 @@ $(document).ready(function () {
             .prop("checked", false);
 
         }else{
-            guestPhoneList = guestPhoneList.filter(guest => guest.id !== id);
+            guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
 
-            console.log(guestPhoneList);
+            console.log(guestList);
         }// App user = 0 for phone (non-app user)
     });
 
@@ -869,9 +869,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 
     function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
-        const exists = guestPhoneList.some((contact) => contact.id === id);
+        const exists = guestList.some((contact) => contact.id === id);
         if (!exists) {
-            guestPhoneList.push({
+            guestList.push({
                 id: id,
                 prefer_by: preferBy,
                 app_user: appUser,
@@ -919,17 +919,17 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                  <h6>Sell all</h6>
                 </a>`;
 
-        console.log("Updated guest list:", guestPhoneList);
+        console.log("Updated guest list:", guestList);
     }
-        console.log("Updated guest list:", guestPhoneList);
+        console.log("Updated guest list:", guestList);
 
-        console.log("Updated guest list:", guestPhoneList);
+        console.log("Updated guest list:", guestList);
 
 });
 
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
-        console.log("Guest list before submit:", guestPhoneList);
+        console.log("Guest list before submit:", guestList);
         console.log("Sending guest list:", guestList);
         // $.ajax({
         //     url: base_url + "event_wall/send-invitation", // Your Laravel route
@@ -953,7 +953,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         //         alert("Something went wrong. Please try again."); // Handle AJAX errors
         //     },
         // });
-    });
+});
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
