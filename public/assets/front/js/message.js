@@ -1913,10 +1913,10 @@ function createMessageElement(
       <span class="reaction-icon" data-message-id="${key}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.5 8H7.51M13.5 8H13.51M8 13C8.32588 13.3326 8.71485 13.5968 9.14413 13.7772C9.57341 13.9576 10.0344 14.0505 10.5 14.0505C10.9656 14.0505 11.4266 13.9576 11.8559 13.7772C12.2852 13.5968 12.6741 13.3326 13 13M19.5 10C19.5 14.9706 15.4706 19 10.5 19C5.52944 19 1.5 14.9706 1.5 10C1.5 5.02944 5.52944 1 10.5 1C15.4706 1 19.5 5.02944 19.5 10Z" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg></span>
-      <span class="reply-icon" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <span class="reply-icon" data-isReceiver="${isReceiver}" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
 </svg></span>`
-        : ` <span class="reply-icon" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        : `<span class="reply-icon" data-isReceiver="${isReceiver}" data-message-id="${key}"><svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5.89687 3.31028V0.238281L0.296875 5.61428L5.89687 10.9903V7.84148C9.89687 7.84148 12.6969 9.07028 14.6969 11.7583C13.8969 7.91828 11.4969 4.07828 5.89687 3.31028Z" fill="#CBD5E1"/>
 </svg></span>`;
     var fileExtension = messageData?.fileName?.substr(
@@ -3403,6 +3403,7 @@ function generateReactionsAndReply() {
     $(document).on("click", ".reply-icon", async function () {
         $(".set-replay-msg").remove();
         replyMessageId = $(this).data("message-id");
+        let isReceiver = $(this).data("isReceiver");
         let conversationId = $(".conversationId").attr("conversationid");
         let replay = "";
         let isGroup = $("#isGroup").val();
@@ -3416,8 +3417,14 @@ function generateReactionsAndReply() {
             replay = `<div class='set-replay-msg'>
                             <div class='replay-child'>
                                 <div class='d-flex flex-column'>
-                                    <span class='replay-user'>${replyMessageData.receiverName}</span>
-                                    <span class='replay-msg'>${replyMessageData.data}</span>
+                                    <span class='replay-user'>${
+                                        !isReceiver
+                                            ? "You"
+                                            : replyMessageData.receiverName
+                                    }</span>
+                                    <span class='replay-msg'>${
+                                        replyMessageData.data
+                                    }</span>
                                 </div>
                                 
                             <span class='close-replay'>&times</span>
@@ -3435,8 +3442,12 @@ function generateReactionsAndReply() {
             replay = `<div class='set-replay-msg'>
             <div class='replay-child'>
               <div class='d-flex flex-column'>
-                        <span class='replay-user'>${senderUserName}</span>
-                        <span class='replay-msg' data-time='${replyMessageData.timeStamp}'>${replyMessageData.data}</span>
+                        <span class='replay-user'>${
+                            !isReceiver ? "You" : senderUserName
+                        }</span>
+                        <span class='replay-msg' data-time='${
+                            replyMessageData.timeStamp
+                        }'>${replyMessageData.data}</span>
                         
                            </div>
                                 
