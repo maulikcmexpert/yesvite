@@ -727,7 +727,11 @@ $(document).ready(function () {
         // console.log(
         //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         // );
+        if( $(this).is(":checked")){
             addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email); // App user = 1 for email (app user)
+        }else{
+            $('.add_yesvite_guest_'+id).remove();
+        }
         
     });
 
@@ -781,7 +785,7 @@ $(document).ready(function () {
           
             generateProfileImage(first_name,last_name);
         const contactHtml = `
-            <div class="guest-user" data-id="${index}">
+            <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
                     <a href="#" class="close">
