@@ -14,7 +14,7 @@ class ShareUserCoins
         $coins = $user ? $user->coins : 0;
 
         View::share('coins', $coins);
-        View::share('UserId', $user->id);
+        View::share('UserId', $user ? $user->id : null);
 
         return $next($request);
     }

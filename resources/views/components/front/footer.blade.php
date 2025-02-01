@@ -399,7 +399,7 @@ defer
     (async function() {
         const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
 
-        if (userId != undefined) {
+        if (userId != undefined && userId !=null) {
             try {
                 // Fetch Firebase configuration from firebase_js.json
                 const response = await fetch("/firebase_js.json");
