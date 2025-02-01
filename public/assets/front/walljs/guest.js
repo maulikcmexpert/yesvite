@@ -7,7 +7,7 @@ if (chartData) {
 
     var options = {
         series: [attending, noReply, declined],
-        labels: ["Attending", "No Reply", "Desclined"],
+        labels: ["Attending", "No Reply", "Declined"],
         chart: {
             width: 350,
             type: "donut",

@@ -162,6 +162,7 @@ if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
 var eventEditId = $("#eventEditId").val();
 var inviteTotalCount = $("#inviteTotalCount").val();
 $(".invite-count").text(inviteTotalCount);
+$("#event_guest_count").text(inviteTotalCount + " Guests");
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
 $("#activity-start-time").val("");
@@ -2007,7 +2008,7 @@ function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
     var Alreadyguest = $(".users-data.invited_users").length;
 
-    $("#event_guest_count").text(total_guest + " Guests");
+    $("#event_guest_count").text((total_guest + Alreadyguest) + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
     console.log(total_guest);
     console.log(max_guest);

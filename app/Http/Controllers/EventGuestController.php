@@ -251,7 +251,7 @@ class EventGuestController extends Controller
             $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['rsvp_d' => '1','is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+            })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
 
 
@@ -726,6 +726,9 @@ class EventGuestController extends Controller
             $guest->adults = $validated['adults'];
             $guest->kids = $validated['kids'];
             $guest->rsvp_status = $validated['rsvp_status'];
+            $guest->read = "1";
+            $guest->rsvp_d = "1";
+
 
             // Save the updated data
             $guest->save();

@@ -121,10 +121,12 @@ class EventWallController extends Controller
             ->where(['event_id' => $event])
             ->get();
 
+
+
         $pollsData = [];
 
         foreach ($polls as $poll) {
-
+            $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
             $post_time = setpostTime($poll->created_at);
 
@@ -144,6 +146,7 @@ class EventWallController extends Controller
                 'total_poll_duration' => $poll->poll_duration,
                 'poll_duration_left' => $pollDuration,
                 'is_expired' => $isExpired,
+                'rsvp_status' => (string)$checkUserRsvp ?? "",
                 'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
                 'reactionList' => $reactionList, // Include the reaction list under pollData
                 'post_time' => $post_time,

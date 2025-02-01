@@ -123,12 +123,13 @@ class EventController extends BaseController
         $eventDetail['eventeditId'] = isset($request->id) ? $request->id : '';
         $eventDetail['inviteCount'] = 0;
         $eventDetail['isCohost'] = "1";
+        $eventDetail['isCopy'] = "";
 
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
 
-
+            $eventDetail['isCopy'] = $request->iscopy;
             if ($request->id != "") {
                 // dD();
                 $eventDetail['isCohost'] = $getEventData->is_draft_save;
