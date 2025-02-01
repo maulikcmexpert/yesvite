@@ -724,7 +724,7 @@ $(document).ready(function () {
         const first_name = $(this).data("name");
         const last_name = $(this).data("last");
         const email = $(this).data("email");
-        const profile = $(this).data("email");
+        const profile = $(this).data("profile");
         // console.log(
         //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         // );
@@ -773,9 +773,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         } else {
             console.log("Contact already in guest list:", { id });
         }
-        var  profileImage="";
+        var profileImage="";
         if(profile!=""){
-            profileImage =profile;      
+            profileImage = profile;      
         }else{
             profileImage =generateProfileImage(first_name, last_name);      
         }
