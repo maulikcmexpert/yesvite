@@ -88,6 +88,14 @@
                                                         </div>
                                                         <div class="posts-card-head-left-content">
                                                             <h3>{{ $post['username'] }}</h3>
+                                                            @if ($post['is_host'] == '1')
+                                                            <span
+                                                                class="host">Host</span>
+                                                        @endif
+                                                        @if ($eventDetails['is_co_host'] == '1')
+                                                        <span
+                                                            class="host">Co Host</span>
+                                                    @endif
                                                             <p>{{ $post['location'] }}</p>
                                                         </div>
                                                     </div>

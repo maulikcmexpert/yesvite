@@ -1834,13 +1834,14 @@ class EventController extends BaseController
     
         // Retrieve the current session category
         $categories = session()->get('category', []);
-    
+        
         // Get the authenticated user's ID
         $id = Auth::guard('web')->user()->id;
-    
+        
         // Set self_bring and self_bring_qty for the item in the category
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
+        // dd($categories);
     
         // Initialize total quantities
         $total_quantity = 0;
