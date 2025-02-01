@@ -721,20 +721,18 @@ $(document).ready(function () {
     // Event listener for contact checkboxes
     $(document).on("change", ".contact-checkbox", function () {
         const id = $(this).data("id");
-        const isEmailSelected =
-            $(this).data("type") === "email" && $(this).is(":checked");
-        const isPhoneSelected =
-            $(this).data("type") === "phone" && $(this).is(":checked");
+        const isSelected =$(this).data('prefer');
+
         const first_name = $(this).data("name");
         const last_name = $(this).data("last");
         const email = $(this).data("email");
         const profile = $(this).data("profile");
         console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
+            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isPhoneSelected}`
         );
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
-            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+            addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             $(".contact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
@@ -752,10 +750,8 @@ $(document).ready(function () {
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
         const id = $(this).data("id");
-        const isEmailSelected =
-            $(this).data("type") === "email" && $(this).is(":checked");
-        const isPhoneSelected =
-            $(this).data("type") === "phone" && $(this).is(":checked");
+        const isSelected =$(this).data('prefer');
+
             const first_name = $(this).data("name");
             const last_name = $(this).data("last");
             const email = $(this).data("email");
@@ -763,7 +759,7 @@ $(document).ready(function () {
         // Add to the guest list if either email or phone is selected
 
         console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
+            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isPhoneSelected}`
         );
         // Add to the guest list, prefer email if selected, else prefer phone
         // addToGuestList(id, isEmailSelected ? "email" : "phone", 0);
@@ -771,7 +767,7 @@ $(document).ready(function () {
         
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
-            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+            addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             $(".phoneContact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
