@@ -461,14 +461,14 @@ class ChatController extends Controller
         // ✅ Correct Validation Rules
         $request->validate([
             'to_be_reported_user_id' => 'required|integer|exists:users,id',
-            'report_conversation_id' => 'required|integer|exists:conversations,id',
+            'report_conversation_id' => 'required|string',
             'report_type' => 'required|string',
             'report_description' => 'nullable|string',
         ]);
 
         try {
             DB::beginTransaction();
-
+            dd($request->all());
             // ✅ Create Report
             $reportCreate = new UserReportChat();
             $reportCreate->reporter_user_id = $user->id;
@@ -503,9 +503,13 @@ class ChatController extends Controller
 
             return redirect('messages')->with('success', 'Report submitted successfully!');
         } catch (QueryException $e) {
+            dd("db");
+
             DB::rollBack();
             return redirect('messages')->with('error', 'Database error occurred!');
         } catch (\Exception $e) {
+            dd($e);
+
             return redirect('messages')->with('error', 'Something went wrong!');
         }
     }
