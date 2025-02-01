@@ -9054,8 +9054,10 @@ $(document).on("click",'#final_see_invite_btn', function (event) {
 function getcoins(){
     var Alreadyguest = $(".users-data.invited_users").length;
     var max_guest = $("#coins").val();
-
     var AllCoins =max_guest-Alreadyguest;
+    if(isCopy =="" && isDraftEvent=="0"){
+        AllCoins =max_guest;
+    }
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
