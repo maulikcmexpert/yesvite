@@ -165,7 +165,7 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->prefer_by,
-                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
+                                'invited_by' => $userVal->prefer_by == 'phone' ? $userVal->phone_number : $userVal->email,
                                 'profile' => $userVal->profile ?? '',
                             ];
                             if ($getEventData->is_draft_save == "0" && $request->iscopy == null) {
@@ -203,7 +203,7 @@ class EventController extends BaseController
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $userVal->preferBy,
-                                'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
+                                'invited_by' => $userVal->preferBy == 'phone' ? $userVal->phone : $userVal->email,
                                 'profile' => $userVal->photo ?? '',
 
                             ];
@@ -218,6 +218,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
+            dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
                 if($request->iscopy != null){
@@ -3357,60 +3358,60 @@ class EventController extends BaseController
                 }
             }
 
-            if (isset($request->potluck) && $request->potluck == "1") {
-                $potluck = session('category');
-                // if ($request->isdraft == "1") {
-                EventPotluckCategory::where('event_id', $request->event_id)->delete();
-                EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
-                UserPotluckItem::where('event_id', $request->event_id)->delete();
-                // }
-                if (isset($potluck) && !empty($potluck)) {
+            // if (isset($request->potluck) && $request->potluck == "1") {
+            //     $potluck = session('category');
+            //     // if ($request->isdraft == "1") {
+            //     EventPotluckCategory::where('event_id', $request->event_id)->delete();
+            //     EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+            //     UserPotluckItem::where('event_id', $request->event_id)->delete();
+            //     // }
+            //     if (isset($potluck) && !empty($potluck)) {
 
-                    foreach ($potluck as $category) {
-                        $eventPodluck = EventPotluckCategory::create([
-                            'event_id' => $eventId,
-                            'user_id' => $user_id,
-                            'category' => $category['category_name'],
-                            'quantity' => $category['category_quantity'],
-                        ]);
-                        if (isset($category['item'])) {
-                            foreach ($category['item'] as $item) {
-                                $eventPodluckitem = EventPotluckCategoryItem::create([
-                                    'event_id' => $eventId,
-                                    'user_id' => $user_id,
-                                    'event_potluck_category_id' => $eventPodluck->id,
-                                    'self_bring_item' =>  $item['self_bring'],
-                                    'description' => $item['name'],
-                                    'quantity' => $item['quantity'],
-                                ]);
-                                if (isset($item['item_carry_users'])) {
-                                    foreach ($item['item_carry_users'] as $user) {
-                                        UserPotluckItem::Create([
-                                            'event_id' => $eventId,
-                                            'user_id' => $user['user_id'],
-                                            'event_potluck_category_id' => $eventPodluck->id,
-                                            'event_potluck_item_id' => $eventPodluckitem->id,
-                                            'quantity' => $user['quantity']
-                                        ]);
-                                    }
-                                }
-                                // else{
-                                //     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
-                                //         UserPotluckItem::Create([
-                                //             'event_id' => $eventId,
-                                //             'user_id' => $user_id,
-                                //             'event_potluck_category_id' => $eventPodluck->id,
-                                //             'event_potluck_item_id' => $eventPodluckitem->id,
-                                //             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
-                                //         ]);
-                                //     }
-                                // }
+            //         foreach ($potluck as $category) {
+            //             $eventPodluck = EventPotluckCategory::create([
+            //                 'event_id' => $eventId,
+            //                 'user_id' => $user_id,
+            //                 'category' => $category['category_name'],
+            //                 'quantity' => $category['category_quantity'],
+            //             ]);
+            //             if (isset($category['item'])) {
+            //                 foreach ($category['item'] as $item) {
+            //                     $eventPodluckitem = EventPotluckCategoryItem::create([
+            //                         'event_id' => $eventId,
+            //                         'user_id' => $user_id,
+            //                         'event_potluck_category_id' => $eventPodluck->id,
+            //                         'self_bring_item' =>  $item['self_bring'],
+            //                         'description' => $item['name'],
+            //                         'quantity' => $item['quantity'],
+            //                     ]);
+            //                     if (isset($item['item_carry_users'])) {
+            //                         foreach ($item['item_carry_users'] as $user) {
+            //                             UserPotluckItem::Create([
+            //                                 'event_id' => $eventId,
+            //                                 'user_id' => $user['user_id'],
+            //                                 'event_potluck_category_id' => $eventPodluck->id,
+            //                                 'event_potluck_item_id' => $eventPodluckitem->id,
+            //                                 'quantity' => $user['quantity']
+            //                             ]);
+            //                         }
+            //                     }
+            //                     // else{
+            //                     //     if (isset($item['self_bring']) && $item['self_bring'] == '1') {
+            //                     //         UserPotluckItem::Create([
+            //                     //             'event_id' => $eventId,
+            //                     //             'user_id' => $user_id,
+            //                     //             'event_potluck_category_id' => $eventPodluck->id,
+            //                     //             'event_potluck_item_id' => $eventPodluckitem->id,
+            //                     //             'quantity' => (isset($item['self_bring_qty']) && @$item['self_bring_qty'] != "") ? $item['self_bring_qty'] : $item['quantity']
+            //                     //         ]);
+            //                     //     }
+            //                     // }
 
-                            }
-                        }
-                    }
-                }
-            }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
             if (isset($request->event_id) && $request->event_id != null && isset($request->events_schedule) && $request->events_schedule == '0') {
                 EventSchedule::where('event_id', $request->event_id)->delete();
             }

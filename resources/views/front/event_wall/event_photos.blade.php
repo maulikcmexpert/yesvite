@@ -845,12 +845,7 @@
                                 Anyone?</h3>
 
                             <div class="posts-card-show-post-wrp">
-<<<<<<< Updated upstream
                                 <div class="swiper photo-detail-slider">
-=======
-                                {{-- <div class="swiper mySwiper photo-detail-slider"  > --}}
-                                <div class="swiper mySwiper photo-detail-slider"  >
->>>>>>> Stashed changes
                                     <div class="swiper-wrapper" id="media_post">
                                         <!-- Slides -->
                                         <div class="swiper-slide">
