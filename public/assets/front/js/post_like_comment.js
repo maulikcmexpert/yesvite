@@ -768,7 +768,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         console.log("Updated guest list:", guestList);
     }
 =======
-        console.log("Updated guest list:", guestList); 
+        console.log("Updated guest list:", guestList);
 }
 >>>>>>> 250db511f37e994ae0a73b745d8bb16fe2563932
 
