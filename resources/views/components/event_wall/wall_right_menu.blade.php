@@ -92,7 +92,7 @@ if ($hostView) {
             </form>
         </div>
         <div class="guests-listing-wrp ">
-            <ul>
+            <ul  id="guestList">
                 @if (!empty($guestArray))
                 @foreach ($guestArray as $index => $guest)
                         @if (!empty($guest['user']))
@@ -316,10 +316,10 @@ if ($hostView) {
     // Get the "See All" button and the guest list container
     const seeAllBtn = document.getElementById('seeAllBtn');
     const guestList = document.getElementById('guestList');
-alert(1);
+// alert(1);
     // Assuming $guestArray is passed as a JSON object to JavaScript
     const guests = @json($guestArray);  // Make sure to use Blade to pass PHP data to JS
-
+console.log(guests)
     // Add an event listener for the "See All" button
     seeAllBtn.addEventListener('click', function() {
         // Hide the "See All" button after it's clicked
