@@ -606,6 +606,7 @@ async function updateChat(user_id) {
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").hide();
+
     if (user_id == "") return loader.hide();
 
     var selected_user = await getUser(user_id);
@@ -656,6 +657,9 @@ async function updateChat(user_id) {
 
     $(".selected_conversasion").val($(".selected_id").val());
     const conversationId = $(".selected_id").val();
+    $(".report-conversation").show();
+    $(".report-conversation").attr("data-conversation", conversationId);
+    $(".report-conversation").attr("data-userId", user_id);
     $(".conversationId").attr("conversationId", conversationId);
     await updateProfileImg(
         profileImageUrl,
@@ -783,6 +787,9 @@ async function updateChatfromGroup(conversationId) {
     $(".msg-lists").html("");
     $(".member-lists").html("");
     $(".choosen-file").show();
+    $(".block-conversation").hide();
+    $(".report-conversation").hide();
+
     $(".conversationId").attr("conversationId", conversationId);
     const groupInfoRef = ref(database, `Groups/${conversationId}/groupInfo`);
     const snapshot = await get(groupInfoRef);
@@ -4623,6 +4630,25 @@ applyStyles();
 // }
 $("#chatreport").validate({
     rules: {
-        report_type: true,
+        report_type: {
+            required: true, // Specify 'required' instead of 'true'
+        },
+    },
+    messages: {
+        report_type: {
+            required: "Please select a report type.", // Custom error message
+        },
     },
 });
+
+$(document).on(
+    "click",
+    ".report-single-conversation, .report-conversation",
+    function () {
+        var conversation = $(this).attr("data-conversation");
+        var userId = $(this).attr("data-userid"); // Ensure the attribute name matches exactly
+
+        $("#report_conversation_id").val(conversation);
+        $("#to_be_reported_user_id").val(userId);
+    }
+);
