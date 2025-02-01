@@ -103,6 +103,9 @@ $(document).on('click', '.save-rsvp', function () {
                 // // Remove existing status icon
                 guestContainer.find('span').remove();
 
+                window.location.reload();
+                $('#editrsvp3').modal('hide');
+
                 // Append new RSVP status based on the response
                 if (response.rsvp_status == '1') {
                     // If the RSVP is "YES"
@@ -137,8 +140,9 @@ $(document).on('click', '.save-rsvp', function () {
                         </span>`;
                     guestContainer.append(pendingHtml);
                 }
+
                 // Hide the modal after updating
-                $('#editrsvp3').modal('hide');
+
             }
         },
         error: function (error) {

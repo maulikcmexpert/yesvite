@@ -110,7 +110,8 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
                 guestContainer.find('.sucess-yes').remove();
                 guestContainer.find('.sucess-no').remove();
                 guestContainer.find('.no-reply').remove();
-
+                window.location.reload();
+                $('#editrsvp').modal('hide');
                 // Now append or update the appropriate div based on RSVP status
                 if (response.rsvp_status == '1') {
                     // If the guest's RSVP is "YES"
