@@ -161,7 +161,7 @@ class EventController extends BaseController
 
                         if ($userVal) {
                             $userEntry = [
-                                'id' => $userVal->id,
+                                'id' => strval($userVal->id),
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $user['prefer_by'],
@@ -199,7 +199,7 @@ class EventController extends BaseController
                         )->where('id', $user['sync_id'])->first();
                         if ($userVal) {
                             $userEntry = [
-                                'sync_id' => $userVal->id,
+                                'sync_id' => strval($userVal->id),
                                 'firstname' => $userVal->firstname,
                                 'lastname' => $userVal->lastname,
                                 'prefer_by' => $user['prefer_by'],
@@ -2311,7 +2311,7 @@ class EventController extends BaseController
                     }
                 }
             }
-            dd($userIds,$data);
+            
             session()->put('user_ids', $userIds);
             Session::save();
             $user_list = Session::get('user_ids');
