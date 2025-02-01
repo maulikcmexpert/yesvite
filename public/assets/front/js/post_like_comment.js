@@ -733,6 +733,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }
         const $modalBody = $('.selected-contacts-list');
 <<<<<<< HEAD
+<<<<<<< HEAD
     // $modalBody.empty();
         // const profileImage =
         //     contact.profile ||
@@ -743,11 +744,13 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 =======
         const profileImage =profile || generateProfileImage(first_name, last_name);
 >>>>>>> 0f83fa20594eecb51e8a3546f87b3c9242f159ba
+=======
+>>>>>>> 250db511f37e994ae0a73b745d8bb16fe2563932
         const contactHtml = `
             <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
-                    <a href="#" class="close">
+                    <a href="#" class="close remove_new_added_user" data-id="${id}">
                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
                             <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
@@ -761,8 +764,13 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 
         `;
         $modalBody.append(contactHtml);
+<<<<<<< HEAD
         console.log("Updated guest list:", guestList);
     }
+=======
+        console.log("Updated guest list:", guestList); 
+}
+>>>>>>> 250db511f37e994ae0a73b745d8bb16fe2563932
 
     $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
