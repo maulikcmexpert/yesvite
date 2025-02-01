@@ -1871,38 +1871,69 @@ class EventWallController extends Controller
         $offset = $request->input('offset');
         $eventId = $request->input('event_id'); // Ma
         // Query yesvite users
-        $yesviteUsers = User::select(
-            'id',
-            'firstname',
-            'profile',
-            'lastname',
-            'email',
-            'country_code',
-            'phone_number',
-            'app_user',
-            'prefer_by',
-            'email_verified_at',
-            'parent_user_phone_contact',
-            'visible',
-            'message_privacy'
-        )
-            ->where('id', '!=', $userId) // Exclude authenticated user
-            ->where('app_user', '1') // Filter by app users
-            ->when(!empty($emails), function ($query) use ($emails) {
-                $query->whereIn('email', $emails); // Filter by provided emails
-            })
-            ->when(!empty($limit), function ($query) use ($limit, $offset) {
-                $query->limit($limit)
-                    ->offset($offset); // Pagination
-            })
-            ->when(!empty($searchUser), function ($query) use ($searchUser) {
-                $query->where(function ($q) use ($searchUser) {
-                    $q->where('firstname', 'LIKE', "%{$searchUser}%")
-                        ->orWhere('lastname', 'LIKE', "%{$searchUser}%"); // Search by name
-                });
-            })
-            ->orderBy('firstname', 'asc') // Order results by first name
+        $id = Auth::guard('web')->user()->id;
+        $emails = [];
+        $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
             ->get();
+        if ($getAllContacts->isNotEmpty()) {
+            $emails = $getAllContacts->pluck('email')->toArray();
+        }
+        $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+        ->where('id', '!=', $id)
+        ->where(['app_user' => '1'])
+        ->whereIn('email', $emails)
+        ->orderBy('firstname')
+        ->get();
+        $yesviteUsers = [];
+        foreach ($yesvite_users as $user) {
+            if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                continue;
+            }
+            $yesviteUserDetail = [
+                'id' => $user->id,
+                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
+                'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
+                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+                'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
+                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
+                'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
+            ];
+            $yesviteUsers[] = (object)$yesviteUserDetail;
+        }
+
+        // $yesviteUsers = User::select(
+        //     'id',
+        //     'firstname',
+        //     'profile',
+        //     'lastname',
+        //     'email',
+        //     'country_code',
+        //     'phone_number',
+        //     'app_user',
+        //     'prefer_by',
+        //     'email_verified_at',
+        //     'parent_user_phone_contact',
+        //     'visible',
+        //     'message_privacy'
+        // )
+        //     ->where('id', '!=', $userId) // Exclude authenticated user
+        //     ->where('app_user', '1') // Filter by app users
+        //     ->when(!empty($emails), function ($query) use ($emails) {
+        //         $query->whereIn('email', $emails); // Filter by provided emails
+        //     })
+        //     ->when(!empty($limit), function ($query) use ($limit, $offset) {
+        //         $query->limit($limit)
+        //             ->offset($offset); // Pagination
+        //     })
+        //     ->when(!empty($searchUser), function ($query) use ($searchUser) {
+        //         $query->where(function ($q) use ($searchUser) {
+        //             $q->where('firstname', 'LIKE', "%{$searchUser}%")
+        //                 ->orWhere('lastname', 'LIKE', "%{$searchUser}%"); // Search by name
+        //         });
+        //     })
+        //     ->orderBy('firstname', 'asc') // Order results by first name
+        //     ->get();
 
         // Query phone contacts
         $phoneContacts = contact_sync::where('contact_id', $userId)

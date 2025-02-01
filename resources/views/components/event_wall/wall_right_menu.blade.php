@@ -223,7 +223,7 @@ if ($hostView) {
                             <p>Adults</p>
                             <div class="qty-container ms-auto">
                                 <button class="qty-btn-minus side_menu_minus" type="button"><i class="fa fa-minus"></i></button>
-                                <input type="number" name="adults" value="0" class="input-qty adultcount" />
+                                <input type="number" name="adults" value="0" class="input-qty adultcount"  readonly/>
                                 <button class="qty-btn-plus side_menu_plus" type="button"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
@@ -231,7 +231,7 @@ if ($hostView) {
                             <p>Kids</p>
                             <div class="qty-container ms-auto">
                                 <button class="qty-btn-minus side_menu_minus" type="button"><i class="fa fa-minus"></i></button>
-                                <input type="number" name="kids" value="0" class="input-qty kidcount" />
+                                <input type="number" name="kids" value="0" class="input-qty kidcount" readonly/>
                                 <button class="qty-btn-plus  side_menu_plus" type="button"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
