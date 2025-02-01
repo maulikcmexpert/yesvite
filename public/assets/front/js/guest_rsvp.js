@@ -72,9 +72,9 @@ $(document).on('click', '.save-rsvp', function () {
         kids: $('#editrsvp3 input[name="kids"]').val(),
         rsvp_status: $('#editrsvp3 input[name="rsvp_status"]:checked').val() // Get the selected RSVP status
     };
-    var rsvp_status= $('#editrsvp input[name="rsvp_status"]:checked').val(); // Get the selected RSVP status
-    var adults= $('#editrsvp input[name="adults"]').val();
-    var kids=$('#editrsvp input[name="kids"]').val();
+    var rsvp_status= $('#editrsvp3 input[name="rsvp_status"]:checked').val(); // Get the selected RSVP status
+    var adults= $('#editrsvp3 input[name="adults"]').val();
+    var kids=$('#editrsvp3 input[name="kids"]').val();
 
     console.log({rsvp_status,adults,kids});
     if(rsvp_status==undefined||rsvp_status==""){
