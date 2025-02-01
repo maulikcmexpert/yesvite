@@ -1,3 +1,4 @@
+{{dd( $eventDetails['event_detail']['guests']);}}
 <main class="new-main-content">
 
     <div class="container">
