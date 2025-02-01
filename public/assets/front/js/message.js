@@ -4633,9 +4633,16 @@ $("#chatreport").validate({
         report_type: true,
     },
 });
-$(document).on("click", ".report-single-conversation", function () {
-    var conversation = $(this).attr("data-conversation");
-    var userId = $(this).attr("data-userId");
-    $("#report_conversation_id").val(conversation);
-    $("#to_be_reported_user_id").val(userId);
-});
+$(document).on(
+    "click",
+    ".report-single-conversation, .report-conversation",
+    function () {
+        alert(0); // Debugging alert
+
+        var conversation = $(this).attr("data-conversation");
+        var userId = $(this).attr("data-userid"); // Ensure the attribute name matches exactly
+
+        $("#report_conversation_id").val(conversation);
+        $("#to_be_reported_user_id").val(userId);
+    }
+);
