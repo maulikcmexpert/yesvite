@@ -807,9 +807,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 
         console.log("Updated guest list:", guestList);
 
-}
+});
 
-    $(document).on("click", ".add_guest", function (e) {
+ $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
 
         console.log("Guest list before submit:", guestList);
@@ -842,7 +842,6 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             },
         });
     });
-});
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
