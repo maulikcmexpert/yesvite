@@ -1949,7 +1949,7 @@ function createMessageElement(
                     } 
                     ${reaction}
                 </div>
-                    ${emoji}
+                    ${emojiAndReplay}
             </div>
             `
             : messageData?.type == "2"
@@ -1969,7 +1969,7 @@ function createMessageElement(
                     } 
                     ${reaction}
                 </div>
-                    ${emoji}
+                    ${emojiAndReplay}
             </div>`
             : messageData?.type == "4"
             ? `
@@ -1993,7 +1993,7 @@ function createMessageElement(
                     } 
                     ${reaction}
                 </div>
-                    ${emoji}
+                    ${emojiAndReplay}
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg-inline">
