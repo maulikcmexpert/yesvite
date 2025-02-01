@@ -611,7 +611,7 @@ function updateModal(
     updateFunction
 ) {
     const $modalBody = $(modalSelector);
-    $modalBody.empty();
+    // $modalBody.empty();
     contactList.forEach((contact, index) => {
         const profileImage =
             contact.profile ||
