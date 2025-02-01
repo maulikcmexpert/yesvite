@@ -271,7 +271,7 @@ if ($hostView) {
                 <button type="button" class="btn btn-secondary remove-btn remove-Rsvp-btn"
                     data-bs-dismiss="modal">Remove
                     Guest</button>
-                <button type="button" class="btn btn-secondary save-rsvp" data-bs-dismiss="modal">Update</button>
+                <button type="button" class="btn btn-secondary save-rsvp">Update</button>
             </div>
         </div>
     </div>

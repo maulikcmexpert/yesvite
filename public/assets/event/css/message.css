@@ -650,6 +650,86 @@ ul.chat-list li:last-child{
     stroke: #fff;
 }
 
+#submitmsgreport .report-pr{
+    font-size: 14px;
+    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Medium);
+    line-height: 22px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+#submitmsgreport .submit-blocks{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+    /* / border-bottom: 1px solid var(--border); / */
+}
+
+#submitmsgreport .submit-blocks span{
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 10px 16px 10px;
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Semibold);
+    color: var(--secondary-black);
+    display: block;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#submitmsgreport .submit-blocks span.active,
+#submitmsgreport .submit-blocks span:hover
+{
+    background-color: #F73C71;
+    color: #fff;
+    border: 1px solid #F73C71;
+}
+
+
+#submitmsgreport .textbox-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#submitmsgreport .textbox-container input {
+    width: 100%;
+    height: 52px;
+    padding: 0px 16px 3px;
+    font-size: 14px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    resize: none;
+    outline: 0;
+}
+
+#submitmsgreport .textbox-container input::placeholder{
+    color: var(--lightgreay);
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Regular);
+}
+
+#submitmsgreport .review-text{
+    margin-top: 24px;
+    margin-bottom: 20px;
+}
+
+#submitmsgreport .review-text p{
+    color: var(--secondary-black);
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Medium);
+    margin-bottom: 0;
+}
+
+#submitmsgreport .review-text p a{
+    color: #0E4AD6;
+}
+
 
 
 /* ======= responsive ======== */

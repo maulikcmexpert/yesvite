@@ -278,7 +278,7 @@ use Carbon\Carbon;
                                                         <span>Block<span></a>
                                                 </li>
                                                 @endif
-                                                <li><a class="dropdown-item report-single-conversation" href="#" data-conversation="{{$message['conversationId']}}">
+                                                <li><a class="dropdown-item report-single-conversation" href="javascript:" data-bs-toggle="modal" data-bs-target="#submitmsgreport" data-conversation="{{$message['conversationId']}}">
                                                         <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M10.4974 18.9577C5.55573 18.9577 1.53906 14.941 1.53906 9.99935C1.53906 5.05768 5.55573 1.04102 10.4974 1.04102C15.4391 1.04102 19.4557 5.05768 19.4557 9.99935C19.4557 14.941 15.4391 18.9577 10.4974 18.9577ZM10.4974 2.29102C6.2474 2.29102 2.78906 5.74935 2.78906 9.99935C2.78906 14.2493 6.2474 17.7077 10.4974 17.7077C14.7474 17.7077 18.2057 14.2493 18.2057 9.99935C18.2057 5.74935 14.7474 2.29102 10.4974 2.29102Z" fill="#94A3B8" />
                                                             <path d="M10.5 11.4577C10.1583 11.4577 9.875 11.1743 9.875 10.8327V6.66602C9.875 6.32435 10.1583 6.04102 10.5 6.04102C10.8417 6.04102 11.125 6.32435 11.125 6.66602V10.8327C11.125 11.1743 10.8417 11.4577 10.5 11.4577Z" fill="#94A3B8" />
@@ -397,7 +397,7 @@ use Carbon\Carbon;
                                                     </svg>
                                                     <span>Block<span></a>
                                             </li>
-                                            <li><a class="dropdown-item report-conversation" href="#">
+                                            <li><a class="dropdown-item report-conversation"  data-bs-toggle="modal" data-bs-target="#submitmsgreport" href="javascript:;">
                                                     <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M10.4974 18.9577C5.55573 18.9577 1.53906 14.941 1.53906 9.99935C1.53906 5.05768 5.55573 1.04102 10.4974 1.04102C15.4391 1.04102 19.4557 5.05768 19.4557 9.99935C19.4557 14.941 15.4391 18.9577 10.4974 18.9577ZM10.4974 2.29102C6.2474 2.29102 2.78906 5.74935 2.78906 9.99935C2.78906 14.2493 6.2474 17.7077 10.4974 17.7077C14.7474 17.7077 18.2057 14.2493 18.2057 9.99935C18.2057 5.74935 14.7474 2.29102 10.4974 2.29102Z" fill="#94A3B8" />
                                                         <path d="M10.5 11.4577C10.1583 11.4577 9.875 11.1743 9.875 10.8327V6.66602C9.875 6.32435 10.1583 6.04102 10.5 6.04102C10.8417 6.04102 11.125 6.32435 11.125 6.66602V10.8327C11.125 11.1743 10.8417 11.4577 10.5 11.4577Z" fill="#94A3B8" />
@@ -925,32 +925,34 @@ use Carbon\Carbon;
 <div class="modal fade cmn-modal" id="submitmsgreport" tabindex="-1" aria-labelledby="submitmsgreportLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
-              <div class="submit-blocks">
-                  <span class="active">Harassment</span>
-                  <span>Hate</span>
-                  <span>Threatening Violence</span>
-                  <span>Spam</span>
-                  <span>Inappropriate Content</span>
-                  <span>Violating Platform Policies</span>
-              </div>
-              
-              <div class="textbox-container">
-                <input type="text" id="violation-textbox" placeholder="Details of Violation (Optional)"/>
-              </div>
-  
-              <div class="review-text">
-                 <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
-          </div>
+            <form name="report" action="">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
+                <div class="submit-blocks">
+                    <span class="active">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
+                    <span>Hate</span> <input type="radio" name="report_type" value="Hate"/>
+                    <span>Threatening Violence</span> <input type="radio" name="report_type" value="Threatening Violence"/>
+                    <span>Spam</span> <input type="radio" name="report_type" value="Spam"/>
+                    <span>Inappropriate Content</span> <input type="radio" name="report_type" value="Inappropriate Content"/>
+                    <span>Violating Platform Policies</span> <input type="radio" name="report_type" value="Violating Platform Policies"/>
+                </div>
+                
+                <div class="textbox-container">
+                    <input type="text" name="report_description" id="violation-textbox" placeholder="Details of Violation (Optional)"/>
+                </div>
+    
+                <div class="review-text">
+                    <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
+                </div>
+            </form>
         </div>
     </div>
   </div>
