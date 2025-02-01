@@ -1769,9 +1769,6 @@ function UpdateMessageToList(key, messageData, conversationId) {
         msgloop,
         dataRloop
     );
-    setTimeout(function () {
-        updateTimers();
-    }, 2500);
 
     $(messageEle).replaceWith(messgeElement);
 }
@@ -1792,9 +1789,7 @@ function addMessageToList(key, messageData, conversationId) {
     }
 
     const messageElement = createMessageElement(key, messageData, isGroup);
-    setTimeout(function () {
-        updateTimers();
-    }, 2500);
+
     $(".msg-lists").append(messageElement);
 
     if (
@@ -2281,11 +2276,11 @@ function createMessageElement(
                 if ($(timeElement).data("loop") > msgLoop) {
                     setTimeS = 0;
                 } else {
-                    //$(timeElement).text("");
+                    $(timeElement).text("");
                 }
             });
         } else {
-            // $(time).text("");
+            $(time).text("");
         }
     } else {
         const Rtime = document.getElementsByClassName(
@@ -2296,11 +2291,11 @@ function createMessageElement(
                 if ($(timeElement).data("Rloop") > recMsgLoop) {
                     setTimeR = 0;
                 } else {
-                    //$(timeElement).text("");
+                    $(timeElement).text("");
                 }
             });
         } else {
-            // $(Rtime).text("");
+            $(Rtime).text("");
         }
     }
 
@@ -2317,7 +2312,7 @@ function createMessageElement(
         timeClass = `rtime_${messageRcvTime.replace(/\s/g, "")}`;
         msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
-    msgTime = messageRcvTime;
+    //msgTime = messageRcvTime;
     //updateTimers();
     return `<div>
     ${daychange}
