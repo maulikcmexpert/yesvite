@@ -471,7 +471,9 @@ $(document).ready(function () {
 
     $("#allcontact").on("click", function () {
         guestList=[];
-        $('.remove_new_added_user').remove();
+        $('.guest_yesvite').remove();
+        $('.phone_yesvite').remove();
+
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         if (allContactsSuccess) {
@@ -836,7 +838,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }
         const $modalBody = $('.selected-contacts-list');
         const contactHtml = `
-            <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
+            <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
                     <a href="#" class="close remove_new_added_user" data-id="${id}">
@@ -892,7 +894,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         // }
         const $modalBody = $('.selected-phone-list');
         const contactHtml = `
-            <div class="guest-user add_phone_guest_${id}" data-id="${id}">
+            <div class="guest-user guest_phone add_phone_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
                     <a href="#" class="close remove_new_added_user" data-id="${id}">
