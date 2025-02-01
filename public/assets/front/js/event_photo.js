@@ -587,12 +587,12 @@ $(document).on('click', '.open_photo_model', function () {
                 const profileImage = data.profile || generateProfileImage(data.firstname, data.lastname);
                 console.log('Profile Image URL:', profileImage);
                 // Check if profileImage is an image URL or HTML content
-                if (profileImage) {
-                    $('.posts-card-head-left-img img').attr('src', profileImage);
-
+                if (profileImage.startsWith('http') || profileImage.startsWith('data:image')) {
+                    // If it's a valid image URL, set it as the src of the image tag
+                    $('.posts-card-head-left-img').html(`<img src="${profileImage}" alt="Profile Image">`);
                 } else {
-                      // If it's a placeholder, insert initials inside a div
-                      $('.posts-card-head-left-img').html(profileImage);
+                    // If it's a placeholder (HTML content), insert it directly inside the div
+                    $('.posts-card-head-left-img').html(profileImage);
                 }
 
                 function generateProfileImage(firstname, lastname) {
