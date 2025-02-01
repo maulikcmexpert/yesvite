@@ -39,7 +39,7 @@ $(document).ready(function () {
             button.find("i").removeClass("fa-regular").addClass("fa-solid");
         }
 
-        // Ensure `isLiked` reflects the new state
+
         isLiked = button.hasClass("liked");
 
         // AJAX call to update the like state
