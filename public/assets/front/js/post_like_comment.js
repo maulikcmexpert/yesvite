@@ -557,12 +557,20 @@ function handleCheckboxState(contact, checkboxSelector) {
 
 // Event listener for contact checkboxes
 $(document).on("change", ".contact-checkbox", function () {
-    handleCheckboxChange(
-        $(this),
-        selectedContacts,
-        "selectedContacts",
-        updateModalContent
-    );
+ 
+     if( $(this).is(":checked")){
+        handleCheckboxChange(
+            $(this),
+            selectedContacts,
+            "selectedContacts",
+            updateModalContent
+        );
+        }else{
+            guestList = guestList.filter(guest => guest.id !== id);
+            $('.add_yesvite_guest_'+id).remove();
+
+            console.log(guestList);
+        }
 });
 
 // Event listener for phone contact checkboxes
@@ -664,7 +672,7 @@ function updateModal(
             <div class="guest-user" data-id="${index}">
                 <div class="guest-user-img">
                    ${profileImage}
-                    <a href="#" class="close">
+                  <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
                             <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
