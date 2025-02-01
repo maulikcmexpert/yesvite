@@ -1806,33 +1806,43 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 function updateTimers() {
-    // Get all time span elements
-    let timeElements = document.querySelectorAll(".time");
+    let messages = document.querySelectorAll("li"); // Get all message list items
+    let lastSenderTime = null;
+    let lastReceiverTime = null;
 
-    // Object to track the latest message for each timestamp
-    let latestMessage = {};
+    messages.forEach((msg) => {
+        let timeSpan = msg.querySelector(".time"); // Find the time span
+        if (!timeSpan) return;
 
-    // Loop through all time elements
-    timeElements.forEach((span) => {
-        let timeText = span.innerHTML.trim(); // Get time (e.g., "05:06 pm")
-        let classList = span.classList;
+        let timeText = timeSpan.innerHTML.trim();
+        let classList = timeSpan.classList;
 
-        // Check if class starts with rtime_ or stime_
         let timeClass = [...classList].find(
             (cls) => cls.startsWith("rtime_") || cls.startsWith("stime_")
         );
+        if (!timeClass) return;
 
-        if (timeClass) {
-            // Store the latest span for this timeClass
-            if (latestMessage[timeClass]) {
-                // Remove text from previous spans with the same timestamp
-                latestMessage[timeClass].innerHTML = "";
+        let isSender = msg.classList.contains("sender");
+        let isReceiver = msg.classList.contains("receiver");
+
+        if (isSender) {
+            // If the last message was also a sender with the same time, clear previous time
+            if (lastSenderTime === timeClass) {
+                timeSpan.innerHTML = "";
             }
-            // Update the latest message reference
-            latestMessage[timeClass] = span;
+            lastSenderTime = timeClass;
+        }
+
+        if (isReceiver) {
+            // If the last message was also a receiver with the same time, clear previous time
+            if (lastReceiverTime === timeClass) {
+                timeSpan.innerHTML = "";
+            }
+            lastReceiverTime = timeClass;
         }
     });
 }
+
 var formattedDate = {};
 var messageRcvTime = "";
 let chatloop = 0;
@@ -2268,15 +2278,13 @@ function createMessageElement(
                 if ($(timeElement).data("loop") > msgLoop) {
                     setTimeS = 0;
                 } else {
-                    $(timeElement).text("");
+                    //$(timeElement).text("");
                 }
             });
         } else {
-            $(time).text("");
+            // $(time).text("");
         }
     } else {
-        console.log({ Rtime });
-        console.log({ recMsgLoop });
         const Rtime = document.getElementsByClassName(
             `rtime_${messageRcvTime.replace(/\s/g, "")}`
         );
@@ -2285,11 +2293,11 @@ function createMessageElement(
                 if ($(timeElement).data("Rloop") > recMsgLoop) {
                     setTimeR = 0;
                 } else {
-                    $(timeElement).text("");
+                    //$(timeElement).text("");
                 }
             });
         } else {
-            $(Rtime).text("");
+            // $(Rtime).text("");
         }
     }
 
@@ -2306,6 +2314,7 @@ function createMessageElement(
         timeClass = `rtime_${messageRcvTime.replace(/\s/g, "")}`;
         msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
+    msgTime = messageRcvTime;
     updateTimers();
     return `<div>
     ${daychange}
@@ -2313,7 +2322,7 @@ function createMessageElement(
             isSender ? "receiver" : "sender"
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" class="time ${timeClass}">${msgTime}</span>            
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}">${msgTime}</span>            
         </li>
     </div>
     `;
