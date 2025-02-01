@@ -1,4 +1,4 @@
-{{-- {{dd($postList)}} --}}
+{{-- {{dd($eventDetails)}} --}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -181,7 +181,7 @@
                             </svg>
                             Comments
                         </h5>
-                        <h3 >6</h3>
+                        <h3 >{{ $eventDetails['total_event_comments'] }}</h3>
                     </div>
                     <div class="hosted-by-event-stats-inner">
                         <h5>
