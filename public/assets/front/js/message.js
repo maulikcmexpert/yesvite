@@ -1805,6 +1805,34 @@ function addMessageToList(key, messageData, conversationId) {
 
     scrollToBottom();
 }
+function updateTimers() {
+    // Get all time span elements
+    let timeElements = document.querySelectorAll(".time");
+
+    // Object to track the latest message for each timestamp
+    let latestMessage = {};
+
+    // Loop through all time elements
+    timeElements.forEach((span) => {
+        let timeText = span.innerHTML.trim(); // Get time (e.g., "05:06 pm")
+        let classList = span.classList;
+
+        // Check if class starts with rtime_ or stime_
+        let timeClass = [...classList].find(
+            (cls) => cls.startsWith("rtime_") || cls.startsWith("stime_")
+        );
+
+        if (timeClass) {
+            // Store the latest span for this timeClass
+            if (latestMessage[timeClass]) {
+                // Remove text from previous spans with the same timestamp
+                latestMessage[timeClass].innerHTML = "";
+            }
+            // Update the latest message reference
+            latestMessage[timeClass] = span;
+        }
+    });
+}
 var formattedDate = {};
 var messageRcvTime = "";
 let chatloop = 0;
@@ -2231,7 +2259,8 @@ function createMessageElement(
     );
     let setTimeS = 1;
     let setTimeR = 1;
-    console.log({ time });
+    console.log(messageRcvTime.replace(/\s/g, ""));
+    console.log({ msgLoop });
     console.log({ msgLoop });
     if (isSender) {
         if (msgLoop != 0) {
@@ -2246,6 +2275,8 @@ function createMessageElement(
             $(time).text("");
         }
     } else {
+        console.log({ Rtime });
+        console.log({ recMsgLoop });
         const Rtime = document.getElementsByClassName(
             `rtime_${messageRcvTime.replace(/\s/g, "")}`
         );
@@ -2275,7 +2306,7 @@ function createMessageElement(
         timeClass = `rtime_${messageRcvTime.replace(/\s/g, "")}`;
         msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
-
+    updateTimers();
     return `<div>
     ${daychange}
         <li class="${
@@ -2287,6 +2318,7 @@ function createMessageElement(
     </div>
     `;
 }
+
 function markMessageAsSeen(conversationId, key) {
     const msgRef = ref(database, `/Messages/${conversationId}/message/${key}`);
     update(msgRef, { isSeen: true });
