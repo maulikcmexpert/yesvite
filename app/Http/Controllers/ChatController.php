@@ -154,7 +154,7 @@ class ChatController extends Controller
             });
         }
         // dd($messages);
-        $title = 'Home';
+        $title = 'Messages';
         $page = 'front.chat.messages';
         $css = 'message.css';
         $css1 = 'audio.css';
