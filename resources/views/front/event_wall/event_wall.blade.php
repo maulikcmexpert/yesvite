@@ -320,6 +320,21 @@
                                                             @else
                                                                 <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                             @endif
+
+                                                            <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
+                                                        style="display: none;">
+                                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji"
+                                                            class="emoji model_emoji" data-emoji="❤️" data-unicode="\\u{2764}">
+                                                        <img src="{{ asset('assets/front/img/thumb-icon.png') }}" alt="Thumb Emoji"
+                                                            class="emoji  model_emoji" data-emoji="👍" data-unicode="\\u{1F44D}">
+                                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="Smiley Emoji"
+                                                            class="emoji model_emoji" data-emoji="😊" data-unicode="\\u{1F604}">
+                                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                            alt="Eye Heart Emoji" class="emoji model_emoji" data-emoji="😍"
+                                                            data-unicode="\\u{1F60D}">
+                                                        <img src="{{ asset('assets/front/img/clap-icon.png') }}" alt="Clap Emoji"
+                                                            class="emoji" data-emoji="👏" data-unicode="\\u{1F44F}">
+                                                    </div>
                                                         </button>
 
                                                    @if($post['commenting_on_off'] == "1")
@@ -340,24 +355,7 @@
                                                             </svg>
                                                         </button>
                                                         @endif
-                                                        <div class="photos-likes-options-wrp emoji-picker"
-                                                            id="emojiDropdown" style="display: none;">
-                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                loading="lazy" alt="Heart Emoji" class="emoji"
-                                                                data-emoji="❤️" data-unicode="\\u{2764}">
-                                                            <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                loading="lazy" alt="Thumb Emoji" class="emoji"
-                                                                data-emoji="👍" data-unicode="\\u{1F44D}">
-                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                loading="lazy" alt="Smiley Emoji" class="emoji"
-                                                                data-emoji="😊" data-unicode="\\u{1F604}">
-                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                loading="lazy" alt="Eye Heart Emoji" class="emoji"
-                                                                data-emoji="😍" data-unicode="\\u{1F60D}">
-                                                            <img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                loading="lazy" alt="Clap Emoji" class="emoji"
-                                                                data-emoji="👏" data-unicode="\\u{1F44F}">
-                                                        </div>
+
                                                     </div>
                                                 </div>
 
