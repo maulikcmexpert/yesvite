@@ -132,6 +132,8 @@ class EventAboutController extends Controller
                 $coHosts[] = $coHostDetail;
             }
             $eventDetails['co_hosts'] = $coHosts;
+            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+            $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
             $eventDetails['event_location_name'] = $eventDetail->event_location_name;
             $eventDetails['address_1'] = $eventDetail->address_1;
             $eventDetails['address_2'] = $eventDetail->address_2;
