@@ -719,57 +719,57 @@ function generateProfileImage(firstname, lastname) {
 // Event listener for contact checkboxes
 $(document).ready(function () {
     // Event listener for contact checkboxes
-    $(document).on("change", ".contact-checkbox", function () {
-        const id = $(this).data("id");
-        const isSelected =$(this).data('prefer');
+        $(document).on("change", ".contact-checkbox", function () {
+            const id = $(this).data("id");
+            const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
 
-        const first_name = $(this).data("name");
-        const last_name = $(this).data("last");
-        const email = $(this).data("email");
-        const profile = $(this).data("profile");
-        console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
-        );
-        if( $(this).is(":checked")){
-            $('.add_yesvite_guest_'+id).remove();
-            addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-            $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-
-
-        }else{
-            guestList = guestList.filter(guest => guest.id !== id);
-            $('.add_yesvite_guest_'+id).remove();
-
-            console.log(guestList);
-        }
-
-    });
-
-    $(document).on("change", ".phone-checkbox", function () {
-        const id = $(this).data("id");
-        const isSelected =$(this).data('prefer');
-
-        const first_name = $(this).data("name");
-        const last_name = $(this).data("last");
-        const email = $(this).data("email");
-        const profile = $(this).data("profile");
-        console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
-        );
-        if( $(this).is(":checked")){
-            $('.add_yesvite_guest_'+id).remove();
-            addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-            $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
+            const first_name = $(this).data("name");
+            const last_name = $(this).data("last");
+            const email = $(this).data("email");
+            const profile = $(this).data("profile");
+            console.log(
+                `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
+            );
+            if( $(this).is(":checked")){
+                $('.add_yesvite_guest_'+id).remove();
+                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+                $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
 
 
-        }else{
-            guestList = guestList.filter(guest => guest.id !== id);
-            $('.add_yesvite_guest_'+id).remove();
+            }else{
+                guestList = guestList.filter(guest => guest.id !== id);
+                $('.add_yesvite_guest_'+id).remove();
 
-            console.log(guestList);
-        }
+                console.log(guestList);
+            }
 
-    });
+        });
+
+        $(document).on("change", ".phone-checkbox", function () {
+            const id = $(this).data("id");
+            const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
+
+            const first_name = $(this).data("name");
+            const last_name = $(this).data("last");
+            const email = $(this).data("email");
+            const profile = $(this).data("profile");
+            console.log(
+                `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
+            );
+            if( $(this).is(":checked")){
+                $('.add_yesvite_guest_'+id).remove();
+                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+                $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
+
+
+            }else{
+                guestList = guestList.filter(guest => guest.id !== id);
+                $('.add_yesvite_guest_'+id).remove();
+
+                console.log(guestList);
+            }
+
+        });
 
     
 
@@ -808,8 +808,6 @@ $(document).ready(function () {
     // });
 
     // Declare guestList outside so it's globally accessible
-    let guestList = [];
-
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
