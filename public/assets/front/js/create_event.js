@@ -2012,7 +2012,7 @@ function guest_counter(total_guest, max_guest) {
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".invite-count").text(total_guest + Alreadyguest);
     
-   var remainingCount = max_guest - (total_guest);
+   var remainingCount = max_guest - (total_guest+Alreadyguest);
  
     if (remainingCount < 0) {
         $(".invite-left_d").text("Invites | 0 Left");
