@@ -270,7 +270,39 @@ defer
 @endif
 
 @stack('scripts')
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<!-- Firebase Database -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 <script>
+
+const userId = {{$UserId}};
+if(userId!=undefined){
+
+    const response = await fetch("/firebase_js.json");
+    const firebaseConfig = await response.json();
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const overviewRef = ref(database, `overview/${userId}`);
+    const snapshot = await get(overviewRef);
+    let totalUnreadCount = 0;
+    if (await snapshot.exists()) {
+        const conversations = await snapshot.val();
+        for (let conversationId in conversations) {
+            if (
+                conversations[conversationId].unReadCount &&
+                conversations[conversationId].contactName
+            ) {
+                totalUnreadCount =
+                    totalUnreadCount +
+                    parseInt(conversations[conversationId].unReadCount, 10);
+
+                // console.log(totalUnreadCount);
+            }
+        }
+    }
+}
+
+
     $(document).on('click','.create_event_with_plan',function(){
     // toggleSidebar('sidebar_change_plan_create');
     // $('input[name="plan_check"]:checked').each(function () {
