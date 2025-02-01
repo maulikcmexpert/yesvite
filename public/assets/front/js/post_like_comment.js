@@ -555,162 +555,156 @@ function handleCheckboxState(contact, checkboxSelector) {
     }
 }
 
-// Event listener for contact checkboxes
-$(document).on("change", ".contact-checkbox", function () {
+// // Event listener for contact checkboxes
+// $(document).on("change", ".contact-checkbox", function () {
  
-     if( $(this).is(":checked")){
-        handleCheckboxChange(
-            $(this),
-            selectedContacts,
-            "selectedContacts",
-            updateModalContent
-        );
-        }else{
-            guestList = guestList.filter(guest => guest.id !== id);
-            $('.add_yesvite_guest_'+id).remove();
+//              handleCheckboxChange(
+//         $(this),
+//         selectedContacts,
+//         "selectedContacts",
+//         updateModalContent
+//     );
+        
+// });
 
-            console.log(guestList);
-        }
-});
+// // Event listener for phone contact checkboxes
+// $(document).on("change", ".phoneContact-checkbox", function () {
+//     handleCheckboxChange(
+//         $(this),
+//         selectedPhoneContacts,
+//         "selectedPhoneContacts",
+//         updatePhoneModalContent
+//     );
+// });
 
-// Event listener for phone contact checkboxes
-$(document).on("change", ".phoneContact-checkbox", function () {
-    handleCheckboxChange(
-        $(this),
-        selectedPhoneContacts,
-        "selectedPhoneContacts",
-        updatePhoneModalContent
-    );
-});
+// // Handle checkbox change for both contact types
+// function handleCheckboxChange(
+//     $checkbox,
+//     contactList,
+//     localStorageKey,
+//     updateFunction
+// ) {
+//     const contactData = {
+//         id: $checkbox.data("id"),
+//         name: $checkbox.data("name"),
+//         lastname: $checkbox.data("last"),
+//         email: $checkbox.data("email"),
+//         phone: $checkbox.data("phone"),
+//         selectedEmail: false,
+//         selectedPhone: false,
+//     };
+//     console.log(contactData);
 
-// Handle checkbox change for both contact types
-function handleCheckboxChange(
-    $checkbox,
-    contactList,
-    localStorageKey,
-    updateFunction
-) {
-    const contactData = {
-        id: $checkbox.data("id"),
-        name: $checkbox.data("name"),
-        lastname: $checkbox.data("last"),
-        email: $checkbox.data("email"),
-        phone: $checkbox.data("phone"),
-        selectedEmail: false,
-        selectedPhone: false,
-    };
-    console.log(contactData);
+//     if ($checkbox.data("type") === "email") {
+//         contactData.selectedEmail = $checkbox.is(":checked");
+//         $(`[data-id="${contactData.id}"][data-type="phone"]`).prop(
+//             "checked",
+//             false
+//         );
+//     } else if ($checkbox.data("type") === "phone") {
+//         contactData.selectedPhone = $checkbox.is(":checked");
+//         $(`[data-id="${contactData.id}"][data-type="email"]`).prop(
+//             "checked",
+//             false
+//         );
+//     }
 
-    if ($checkbox.data("type") === "email") {
-        contactData.selectedEmail = $checkbox.is(":checked");
-        $(`[data-id="${contactData.id}"][data-type="phone"]`).prop(
-            "checked",
-            false
-        );
-    } else if ($checkbox.data("type") === "phone") {
-        contactData.selectedPhone = $checkbox.is(":checked");
-        $(`[data-id="${contactData.id}"][data-type="email"]`).prop(
-            "checked",
-            false
-        );
-    }
+//     // Update the contact list
+//     const existingIndex = contactList.findIndex((c) => c.id === contactData.id);
+//     if (existingIndex !== -1) {
+//         contactList.splice(existingIndex, 1); // Remove the existing entry
+//     }
+//     if (contactData.selectedEmail || contactData.selectedPhone) {
+//         contactList.push(contactData); // Add updated entry
+//     }
 
-    // Update the contact list
-    const existingIndex = contactList.findIndex((c) => c.id === contactData.id);
-    if (existingIndex !== -1) {
-        contactList.splice(existingIndex, 1); // Remove the existing entry
-    }
-    if (contactData.selectedEmail || contactData.selectedPhone) {
-        contactList.push(contactData); // Add updated entry
-    }
+//     // Save to local storage and update UI
+//     localStorage.setItem(localStorageKey, JSON.stringify(contactList));
+//     updateFunction();
+// }
 
-    // Save to local storage and update UI
-    localStorage.setItem(localStorageKey, JSON.stringify(contactList));
-    updateFunction();
-}
+// // Update modal content for email contacts
+// function updateModalContent() {
+//     updateModal(
+//         ".selected-contacts-list",
+//         selectedContacts,
+//         "selectedContacts",
+//         updateModalContent
+//     );
+//     // Update total count for selected contacts
+//     $(".yesvite .number").text(selectedContacts.length);
 
-// Update modal content for email contacts
-function updateModalContent() {
-    updateModal(
-        ".selected-contacts-list",
-        selectedContacts,
-        "selectedContacts",
-        updateModalContent
-    );
-    // Update total count for selected contacts
-    $(".yesvite .number").text(selectedContacts.length);
+// }
 
-}
+// // Update modal content for phone contacts
+// function updatePhoneModalContent() {
+//     updateModal(
+//         ".selected-phone-list",
+//         selectedPhoneContacts,
+//         "selectedPhoneContacts",
+//         updatePhoneModalContent
+//     );
+//     // Update total count for selected phone contacts
+//     $(".phone .number").text(selectedPhoneContacts.length);
 
-// Update modal content for phone contacts
-function updatePhoneModalContent() {
-    updateModal(
-        ".selected-phone-list",
-        selectedPhoneContacts,
-        "selectedPhoneContacts",
-        updatePhoneModalContent
-    );
-    // Update total count for selected phone contacts
-    $(".phone .number").text(selectedPhoneContacts.length);
+// }
 
-}
+// // General modal update function
+// function updateModal(
+//     modalSelector,
+//     contactList,
+//     localStorageKey,
+//     updateFunction
+// ) {
+//     const $modalBody = $(modalSelector);
+//     // $modalBody.empty();
+//     contactList.forEach((contact, index) => {
+//         const profileImage =
+//             contact.profile ||
+//             generateProfileImage(contact.name, contact.lastname);
+//         const contactHtml = `
+//             <div class="guest-user" data-id="${index}">
+//                 <div class="guest-user-img">
+//                    ${profileImage}
+//                   <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
+//                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                             <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+//                             <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+//                             <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+//                             <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+//                         </svg>
+//                     </a>
+//                 </div>
+//                 <h6>${contact.name} ${contact.lastname}</h6>
+//             </div>
 
-// General modal update function
-function updateModal(
-    modalSelector,
-    contactList,
-    localStorageKey,
-    updateFunction
-) {
-    const $modalBody = $(modalSelector);
-    // $modalBody.empty();
-    contactList.forEach((contact, index) => {
-        const profileImage =
-            contact.profile ||
-            generateProfileImage(contact.name, contact.lastname);
-        const contactHtml = `
-            <div class="guest-user" data-id="${index}">
-                <div class="guest-user-img">
-                   ${profileImage}
-                  <div class="guest-user add_yesvite_guest_${index}" data-id="${index}">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-                <h6>${contact.name} ${contact.lastname}</h6>
-            </div>
+//         `;
+//         $modalBody.append(contactHtml);
+//     });
+//     const totalHtml = `
+//         <a href="#" class="guest-user d-block yesvite ">
+//             <div class="guest-user-img guest-total">
+//                 <span class="number" id="total-selected-email">${selectedContacts.length}</span>
+//                 <span class="content">Total</span>
+//          </div>
+//          <h6>Sell all</h6>
+//         </a>
 
-        `;
-        $modalBody.append(contactHtml);
-    });
-    const totalHtml = `
-        <a href="#" class="guest-user d-block yesvite ">
-            <div class="guest-user-img guest-total">
-                <span class="number" id="total-selected-email">${selectedContacts.length}</span>
-                <span class="content">Total</span>
-         </div>
-         <h6>Sell all</h6>
-        </a>
+//     `;
 
-    `;
+//     $modalBody.append(totalHtml);
 
-    $modalBody.append(totalHtml);
+//     // Handle removal of contacts
+//     $modalBody.off("click").on("click", ".close", function (e) {
+//         e.preventDefault();
+//         const contactId = $(this).closest(".guest-user").data("id");
+//         contactList.splice(contactId, 1);
+//         localStorage.setItem(localStorageKey, JSON.stringify(contactList));
+//         updateFunction();
+//     });
+//       // Update total count for selected contacts
 
-    // Handle removal of contacts
-    $modalBody.off("click").on("click", ".close", function (e) {
-        e.preventDefault();
-        const contactId = $(this).closest(".guest-user").data("id");
-        contactList.splice(contactId, 1);
-        localStorage.setItem(localStorageKey, JSON.stringify(contactList));
-        updateFunction();
-    });
-      // Update total count for selected contacts
-
-}
+// }
 
 // Function to generate profile image
 function generateProfileImage(firstname, lastname) {
@@ -735,21 +729,21 @@ $(document).ready(function () {
         const last_name = $(this).data("last");
         const email = $(this).data("email");
         const profile = $(this).data("profile");
-        // console.log(
-        //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
-        // );
-        // if( $(this).is(":checked")){
+        console.log(
+            `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
+        );
+        if( $(this).is(":checked")){
             addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-        //     $(".contact-checkbox")
-        //     .filter(`[data-id="${id}"]`)
-        //     .not(this)
-        //     .prop("checked", false);
-        // }else{
-        //     guestList = guestList.filter(guest => guest.id !== id);
-        //     $('.add_yesvite_guest_'+id).remove();
+            $(".contact-checkbox")
+            .filter(`[data-id="${id}"]`)
+            .not(this)
+            .prop("checked", false);
+        }else{
+            guestList = guestList.filter(guest => guest.id !== id);
+            $('.add_yesvite_guest_'+id).remove();
 
-        //     console.log(guestList);
-        // }
+            console.log(guestList);
+        }
 
     });
 
@@ -797,33 +791,33 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             profileImage =generateProfileImage(first_name, last_name);
         }
         const $modalBody = $('.selected-contacts-list');
-        // const contactHtml = `
-        //     <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
-        //         <div class="guest-user-img">
-        //            ${profileImage}
-        //             <a href="#" class="close remove_new_added_user" data-id="${id}">
-        //                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //                     <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-        //                     <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-        //                     <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-        //                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-        //                 </svg>
-        //             </a>
-        //         </div>
-        //         <h6>${first_name} ${last_name}</h6>
-        //     </div>
+        const contactHtml = `
+            <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
+                <div class="guest-user-img">
+                   ${profileImage}
+                    <a href="#" class="close remove_new_added_user" data-id="${id}">
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+                <h6>${first_name} ${last_name}</h6>
+            </div>
 
-        // `;
-        // $modalBody.append(contactHtml);
+        `;
+        $modalBody.append(contactHtml);
 
-        // const totalHtml = `
-        //         <a href="#" class="guest-user d-block yesvite ">
-        //             <div class="guest-user-img guest-total">
-        //                 <span class="number" id="total-selected-email">${selectedContacts.length}</span>
-        //                 <span class="content">Total</span>
-        //          </div>
-        //          <h6>Sell all</h6>
-        //         </a>`;
+        const totalHtml = `
+                <a href="#" class="guest-user d-block yesvite ">
+                    <div class="guest-user-img guest-total">
+                        <span class="number" id="total-selected-email">${selectedContacts.length}</span>
+                        <span class="content">Total</span>
+                 </div>
+                 <h6>Sell all</h6>
+                </a>`;
 
         console.log("Updated guest list:", guestList);
     }
