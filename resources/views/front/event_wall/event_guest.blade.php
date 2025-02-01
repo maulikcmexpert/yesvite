@@ -1,3 +1,4 @@
+{{dd( $eventDetails['event_detail']['guests']['all_invited_users']);}}
 <main class="new-main-content">
 
     <div class="container">
@@ -226,7 +227,7 @@
                                                 $host_id = $eventDetails['host_id'];
                                                 $userid = $login_user_id;
                                                 //   dd($host_id);if ($guestString !== null) {
-                                                $guestArray = $eventDetails['event_detail']['guests'] ?? null;
+                                                $guestArray = $eventDetails['event_detail']['guests']['all_invited_users'] ?? null;
                                                 $totalAdults = 0;
                                                 $totalKids = 0;
                                                 // dd( $guestArray);
