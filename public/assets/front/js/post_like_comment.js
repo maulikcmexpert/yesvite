@@ -73,10 +73,10 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", "#CommentlikeButton", function () {
-        clearTimeout(longPressTimer); // Clear the long press timer
+        // clearTimeout(longPressTimer); // Clear the long press timer
 
-        // If it's a long press, don't process the click event
-        if (isLongPresss) return;
+        // // If it's a long press, don't process the click event
+        // if (isLongPresss) return;
 
         // Handle single tap like/unlike
         const button = $(this);
@@ -728,7 +728,7 @@ $(document).ready(function () {
         //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         // );
             addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email); // App user = 1 for email (app user)
-        
+
     });
 
     // Event listener for phone contact checkboxes
@@ -778,7 +778,7 @@ $(document).ready(function () {
         //     contact.profile ||
         //     generateProfileImage(contact.name, contact.lastname);
             const profileImage =
-          
+
             generateProfileImage(first_name,last_name);
         const contactHtml = `
             <div class="guest-user" data-id="${index}">
