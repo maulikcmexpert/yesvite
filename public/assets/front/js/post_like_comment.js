@@ -72,7 +72,60 @@ $(document).ready(function () {
             },
         });
     });
+    $(document).on("click", "#CommentlikeButton", function () {
+        clearTimeout(longPressTimer); // Clear the long press timer
 
+        // If it's a long press, don't process the click event
+        if (isLongPresss) return;
+
+        // Handle single tap like/unlike
+        const button = $(this);
+        const isLiked = button.hasClass("liked");
+        const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
+
+
+        // Toggle like button appearance
+        if (isLiked) {
+            button.removeClass("liked");
+            button.find("i").removeClass("fa-solid").addClass("fa-regular");
+        } else {
+            button.addClass("liked");
+            button.find("i").removeClass("fa-regular").addClass("fa-solid");
+        }
+
+
+
+
+        // AJAX call to update the like state
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
+        $.ajax({
+            url: base_url + "event_wall/userPostLikeDislike",
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            contentType: "application/json",
+            data: JSON.stringify({
+                event_id: eventId,
+                event_post_id: eventPostId,
+                reaction: reaction,
+            }),
+            success: function (response) {
+                if (response.status === 1) {
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert("An error occurred. Please try again.");
+            },
+        });
+    });
     $(document).on("click", "#emojiDropdown .emoji", function () {
 
         const selectedEmoji = $(this).data("emoji");
@@ -668,11 +721,17 @@ $(document).ready(function () {
             $(this).data("type") === "phone" && $(this).is(":checked");
 
         // Add to the guest list if either email or phone is selected
-
-        console.log(
-            `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
-        );
-            addToGuestList(id, isEmailSelected ? "email" : "phone", 1); // App user = 1 for email (app user)
+        const first_name = $(this).data("name");
+        const last_name = $(this).data("last");
+        const email = $(this).data("email");
+        // console.log(
+        //     `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
+        // );
+        if( $(this).is(":checked")){
+            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email); // App user = 1 for email (app user)
+        }else{
+            $('.add_yesvite_guest_'+id).remove();
+        }
         
     });
 
@@ -696,7 +755,7 @@ $(document).ready(function () {
     // Declare guestList outside so it's globally accessible
     let guestList = [];
 
-    function addToGuestList(id, preferBy, appUser) {
+    function addToGuestList(id, preferBy, appUser,first_name,last_name,email) {
         // Check if the contact is already in the guest list to avoid duplicates
         console.log("Adding to guest list:", { id, preferBy, appUser });
 
@@ -716,6 +775,34 @@ $(document).ready(function () {
         } else {
             console.log("Contact already in guest list:", { id });
         }
+
+        const $modalBody = $('.selected-contacts-list');
+    // $modalBody.empty();
+        // const profileImage =
+        //     contact.profile ||
+        //     generateProfileImage(contact.name, contact.lastname);
+            const profileImage =
+          
+            generateProfileImage(first_name,last_name);
+        const contactHtml = `
+            <div class="guest-user add_yesvite_guest_${id}" data-id="${id}">
+                <div class="guest-user-img">
+                   ${profileImage}
+                    <a href="#" class="close">
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+                <h6>${first_name} ${last_name}</h6>
+            </div>
+
+        `;
+        $modalBody.append(contactHtml);
+
 
         console.log("Updated guest list:", guestList); // Check the updated guest list
     }

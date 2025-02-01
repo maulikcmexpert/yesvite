@@ -1,4 +1,4 @@
-{{-- {{dd($postList  )}} --}}
+{{dd($postList  )}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -474,8 +474,15 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="posts-card-like-comment-right">
+                                                                            @php
+                                                                            if($post['self_reaction']=="\u{1F90D}"){
+                                                                                $liked='liked';
+                                                                            }else{
+                                                                                $liked="";
+                                                                            }
+                                                                        @endphp
                                                                             <p>{{ $comment['posttime'] }}</p>
-                                                                            <button class="posts-card-like-btn" id="likeButton"
+                                                                            <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-id="{{ $post['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}"> @if ($post['self_reaction'] == '\u{2764}')

@@ -185,6 +185,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal"
                             data-bs-target="#editguest"
+                            data-profile="{{$contact->profile}}"
                             data-search = "{{ $contact->firstname }} {{ $contact->lastname }}">
                             {{ $contact->firstname }} {{ $contact->lastname }}</a>
                     </div>
@@ -210,7 +211,7 @@
                         <div class="ms-auto">
                             <input class="form-check-input failed-checkout contact-checkbox email-checkbox"
                                 type="checkbox" data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}"
-                                data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
+                                data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}" data-profile="{{$contact->profile}}"
                                 data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$disabled}}>
                         </div>
                     </div>
