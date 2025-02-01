@@ -34,11 +34,16 @@ class BaseController extends Controller
         // handleSMSInvite("+91 97238 40340", "yesvite web", "srryghhhggguvj", 814, 2787);
         return [
             '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15, 'price' => 21.00],
-            '30' => ['priceId' => 'price_1QjcKZEunmtSe18EC967NkmQ', 'coins' => 30, 'price' => 36.99],
-            '50' => ['priceId' => 'price_1QjcKZEunmtSe18EDqd3hc04', 'coins' => 50, 'price' => 45.00],
-            '100' => ['priceId' => 'price_1QjcKZEunmtSe18EWVn3qgKG', 'coins' => 100, 'price' => 70.00],
-            '200' => ['priceId' => 'price_1QjcKZEunmtSe18EKDO6nALE', 'coins' => 250, 'price' => 100.00],
-            '500' => ['priceId' => 'price_1QjcKZEunmtSe18EjIk3cpDe', 'coins' => 500, 'price' => 125.99],
+
+            '30' => ['priceId' => 'price_1QnbS0EunmtSe18EFuz4qYpN', 'coins' => 30, 'price' => 36.99],
+
+            '50' => ['priceId' => 'price_1QnbS0EunmtSe18EGEbp4K0L', 'coins' => 50, 'price' => 45.00],
+
+            '100' => ['priceId' => 'price_1QnbR6EunmtSe18EjI3fQkjt', 'coins' => 100, 'price' => 70.00],
+
+            '200' => ['priceId' => 'price_1QnbPnEunmtSe18EWVSpsUKw', 'coins' => 250, 'price' => 100.00],
+
+            '500' => ['priceId' => 'price_1QnbSfEunmtSe18E4DQoalB7', 'coins' => 500, 'price' => 125.99],
         ];
     }
 }
