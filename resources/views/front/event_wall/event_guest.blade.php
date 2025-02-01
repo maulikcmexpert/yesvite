@@ -373,7 +373,14 @@
                                                                                 fill="#23AA26" />
                                                                         </svg> Succesful
                                                                     </h5>
-                                                                    <h5 class="ms-auto">Read</h5>
+                                                                    @php
+                                                                        if($guest['read']=="1"){
+                                                                            $read="Read";
+                                                                        }else{
+                                                                            $read="";
+                                                                        }
+                                                                    @endphp
+                                                                    <h5 class="ms-auto">{{$read}}</h5>
                                                                 </div>
                                                             </div>
                                                             <div class="check_status">
