@@ -5265,6 +5265,7 @@ $(document).on("click", ".self_bring_quantity", function () {
 $(document).on("click", "#delete-self-bring", function () {
     $("#self_bring").prop("checked", false);
     $("#self_bring_quantity_toggle").hide();
+
     $("#self_bring_qty").val(0);
 });
 
@@ -5543,7 +5544,7 @@ $(document).on("click", ".add-user-list", function () {
     var listid = $(this).data("listid");
     var target = $(this).data("bs-target");
     $("#" + listid).show();
-    $(target).toggleClass("collapse show");
+    // $(target).toggleClass("collapse show");
     $(target).removeClass("d-none");
 });
 
