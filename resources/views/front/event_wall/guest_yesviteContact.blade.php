@@ -142,6 +142,7 @@
 
                         $email_checked = '';
                         $phone_checked = '';
+                        $disabled = '';
 
                         $commaoAlredy = '';
                         if ($contact->id === (int) $selected_yesvite_user[$key]['id']) {
@@ -152,6 +153,7 @@
                                     : '';
                             if ($selected_yesvite_user[$key]['prefer_by'] == 'email') {
                                 $email_checked = 'checked';
+                                $disabled='disabled';
                             } elseif ($selected_yesvite_user[$key]['prefer_by'] == 'phone') {
                                 $phone_checked = 'checked';
                             }
@@ -209,7 +211,7 @@
                             <input class="form-check-input failed-checkout contact-checkbox email-checkbox"
                                 type="checkbox" data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}"
                                 data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
-                                data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }}>
+                                data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$disabled}}>
                         </div>
                     </div>
                     @if (!empty($contact->phone_number))

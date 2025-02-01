@@ -10,8 +10,8 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redis;
-use SendGrid\Mail\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ChatController extends Controller
 {
@@ -468,7 +468,7 @@ class ChatController extends Controller
 
         try {
             DB::beginTransaction();
-            dd($request->all());
+
             // ✅ Create Report
             $reportCreate = new UserReportChat();
             $reportCreate->reporter_user_id = $user->id;
@@ -503,12 +503,11 @@ class ChatController extends Controller
 
             return redirect('messages')->with('success', 'Report submitted successfully!');
         } catch (QueryException $e) {
-            dd("db");
+
 
             DB::rollBack();
             return redirect('messages')->with('error', 'Database error occurred!');
         } catch (\Exception $e) {
-            dd($e);
 
             return redirect('messages')->with('error', 'Something went wrong!');
         }
