@@ -345,40 +345,40 @@ $(document).ready(function () {
     $(".search_user").val("");
 });
 
-// var swiper = new Swiper(".mySwiper", {
-//     slidesPerView: 3.5,
-//     spaceBetween: 20,
-//     loop: true,
-//     navigation: {
-//         nextEl: ".swiper-button-next",
-//         prevEl: ".swiper-button-prev",
-//     },
-//     breakpoints: {
-//         320: {
-//             slidesPerView: 1.5,
-//         },
+var swiper = new Swiper(".mySwiper2", {
+    slidesPerView: 3.5,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+        320: {
+            slidesPerView: 1.5,
+        },
 
-//         576: {
-//             slidesPerView: 2.5,
-//         },
+        576: {
+            slidesPerView: 2.5,
+        },
 
-//         768: {
-//             slidesPerView: 3.5,
-//         },
+        768: {
+            slidesPerView: 3.5,
+        },
 
-//         992: {
-//             slidesPerView: 2,
-//         },
+        992: {
+            slidesPerView: 2,
+        },
 
-//         1200: {
-//             slidesPerView: 2,
-//         },
+        1200: {
+            slidesPerView: 2,
+        },
 
-//         1400: {
-//             slidesPerView: 3.5,
-//         },
-//     },
-// });
+        1400: {
+            slidesPerView: 3.5,
+        },
+    },
+});
 // var swiper = new Swiper(".mySwiper", {
 //     slidesPerView: 3.5,
 //     spaceBetween: 20,
@@ -6768,7 +6768,7 @@ $(document).on("click", ".invite_group_member", function () {
             const id = $(this).val();
             delete_invited_user(id, '0');
             $("#user-" + id).remove();
-            $(".user_id-" + id).remove();
+            $(".user-" + id).prop('checked', false);
         }
     });
     $.ajax({
@@ -6781,6 +6781,7 @@ $(document).on("click", ".invite_group_member", function () {
             users: selectedValues,
         },
         success: function (response) {
+            toggleSidebar();
             // console.log(response);
             response.data.forEach(function (item, index) {
                 if (

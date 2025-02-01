@@ -149,7 +149,7 @@
 
 
                             <div>
-                                <div class="swiper mySwiper">
+                                <div class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         @foreach ($groups as $group)
                                             <div class="swiper-slide">
@@ -362,7 +362,7 @@
 
                             <div>
 
-                                <div class="swiper mySwiper">
+                                <div class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         @foreach ($groups as $group)
                                             <div class="swiper-slide">
@@ -465,7 +465,7 @@
 
                             <div>
 
-                                <div class="swiper mySwiper">
+                                <div class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         @foreach ($groups as $group)
                                             <div class="swiper-slide">

@@ -9,7 +9,12 @@ function initMap() {
     var card = document.getElementById("pac-card");
     var input = document.getElementById("address1");
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
+    $(input).on("blur", function () {
+        if ($(this).val().trim() === "") {
+            $("#latitude").val("");
+            $("#longitude").val("");
+        }
+    });
     // Initialize autocomplete and bind it to the map's bounds
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.bindTo("bounds", map);
@@ -74,8 +79,14 @@ function initMap() {
             var typeField = [],
                 typeValLong = [];
             console.log(place.name);
-            $("#address1").val(place.name);
-            $("#address1").next().addClass("floatingfocus");
+            let addressadded = false;
+            if (place.formatted_address != undefined) {
+                $("#address1").val(place.formatted_address);
+                $("#address1").next().addClass("floatingfocus");
+            } else {
+                $("#address1").val(place.name);
+                $("#address1").next().addClass("floatingfocus");
+            }
 
             // Initialize variables to empty string
             let locationName = "";
@@ -105,15 +116,23 @@ function initMap() {
             if (city != "") {
                 $("#city").val(city);
                 $("#city").next().addClass("floatingfocus");
+            } else {
+                $("#city").val("");
+                $("#city").next().removeClass("floatingfocus");
             }
-
             if (state != "") {
-                $("#state").val(city);
+                $("#state").val(place);
                 $("#state").next().addClass("floatingfocus");
+            } else {
+                $("#state").val("");
+                $("#state").next().removeClass("floatingfocus");
             }
             if (zipcode != "") {
-                $("#zipcode").val(city);
+                $("#zipcode").val(zipcode);
                 $("#zipcode").next().addClass("floatingfocus");
+            } else {
+                $("#zipcode").val("");
+                $("#zipcode").next().removeClass("floatingfocus");
             }
 
             $("#latitude").val(latitude);

@@ -645,7 +645,7 @@
                                 data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
                                 <a href="#" class="collection-card card-blue">
                                     <div class="card-img">
-                                        <img src="{{ asset('uploads/images/' . $image->filled_image) }}"
+                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                             alt="shower-card">
                                     </div>
                                     <h4>{{ $category->category_name }}</h4>
