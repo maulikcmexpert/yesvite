@@ -1806,39 +1806,40 @@ function addMessageToList(key, messageData, conversationId) {
     scrollToBottom();
 }
 function updateTimers() {
-    let messages = document.querySelectorAll("li"); // Get all message list items
+    // Get all message elements
+    let messages = document.querySelectorAll("li");
+
+    // Track the last time for both sender and receiver
     let lastSenderTime = null;
     let lastReceiverTime = null;
 
+    // Loop through each message
     messages.forEach((msg) => {
-        let timeSpan = msg.querySelector(".time"); // Find the time span
+        let timeSpan = msg.querySelector(".time");
         if (!timeSpan) return;
 
-        let timeText = timeSpan.innerHTML.trim();
-        let classList = timeSpan.classList;
-
-        let timeClass = [...classList].find(
-            (cls) => cls.startsWith("rtime_") || cls.startsWith("stime_")
-        );
-        if (!timeClass) return;
-
+        // Get time and type (sender or receiver)
+        let timeText =
+            timeSpan.getAttribute("data-time") || timeSpan.innerText.trim();
         let isSender = msg.classList.contains("sender");
         let isReceiver = msg.classList.contains("receiver");
 
         if (isSender) {
-            // If the last message was also a sender with the same time, clear previous time
-            if (lastSenderTime === timeClass) {
-                timeSpan.innerHTML = "";
+            // If same as previous sender time, clear previous time's HTML
+            if (lastSenderTime && lastSenderTime.time === timeText) {
+                lastSenderTime.element.innerHTML = "";
             }
-            lastSenderTime = timeClass;
+            // Update last sender time
+            lastSenderTime = { time: timeText, element: timeSpan };
         }
 
         if (isReceiver) {
-            // If the last message was also a receiver with the same time, clear previous time
-            if (lastReceiverTime === timeClass) {
-                timeSpan.innerHTML = "";
+            // If same as previous receiver time, clear previous time's HTML
+            if (lastReceiverTime && lastReceiverTime.time === timeText) {
+                lastReceiverTime.element.innerHTML = "";
             }
-            lastReceiverTime = timeClass;
+            // Update last receiver time
+            lastReceiverTime = { time: timeText, element: timeSpan };
         }
     });
 }
