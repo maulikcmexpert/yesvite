@@ -251,7 +251,7 @@ class EventGuestController extends Controller
             $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
 
                 $query->where('app_user', '1');
-            })->where(['rsvp_d' => '1', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+            })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
 
 
