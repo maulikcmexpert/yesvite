@@ -9060,6 +9060,8 @@ function getcoins(){
         AllCoins =max_guest;
     }
     alert(AllCoins)
+    alert(isCopy);
+    alert(isDraftEvent);
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
