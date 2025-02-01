@@ -1,4 +1,4 @@
-{{-- {{dd($postList  )}} --}}
+{{dd($postList  )}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -418,7 +418,7 @@
 
                                                     <div class="posts-card-show-all-comments-inner">
                                                         <ul class="top-level-comments">
-{{dd($post['post_comment'])}}
+
 
                                                             @foreach ($post['post_comment'] as $comment)
                                                                 <li class="commented-user-wrp"
