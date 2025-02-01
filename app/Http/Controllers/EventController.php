@@ -1849,11 +1849,16 @@ class EventController extends BaseController
                     'quantity' => $quantity,
                     'user_id' => $id
                 ];
-                
+        
+                // Remove 'i' key if it exists
+                if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['i'])) {
+                    unset($categories[$categoryIndexKey]['item'][$categoryItemKey]['i']);
+                }
+        
                 // Save updated categories to the session
                 session()->put('category', $categories);
                 Session::save();
-                
+        
                 // Initialize total quantity to 1 for the first user
                 $total_quantity = 1;
             }
