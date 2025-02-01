@@ -456,55 +456,57 @@ class ChatController extends Controller
 
     public function chatReport(Request $request)
     {
-        $user  = Auth::guard('web')->user();
+        $user = Auth::guard('web')->user();
 
+        // ✅ Correct Validation Rules
         $request->validate([
-            'to_be_reported_user_id' => 'required|string|exists:users,id',
-            'report_conversation_id' => 'required|email',
+            'to_be_reported_user_id' => 'required|integer|exists:users,id',
+            'report_conversation_id' => 'required|integer|exists:conversations,id',
+            'report_type' => 'required|string',
+            'report_description' => 'nullable|string',
         ]);
 
         try {
-            dd($request->all());
             DB::beginTransaction();
+
+            // ✅ Create Report
             $reportCreate = new UserReportChat();
-            $reportCreate->reporter_user_id =  $user->id;
+            $reportCreate->reporter_user_id = $user->id;
             $reportCreate->to_be_reported_user_id = $request->to_be_reported_user_id;
             $reportCreate->conversation_id = $request->report_conversation_id;
             $reportCreate->report_type = $request->report_type;
             $reportCreate->report_description = $request->report_description;
             $reportCreate->save();
-            $savedReportId = $reportCreate->id;
-            $createdAt = $reportCreate->created_at;
+
             DB::commit();
-            $message = "Reported to admin for this user";
 
+            // ✅ Fetch Report Data
+            $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])
+                ->where('id', $reportCreate->id)
+                ->first();
 
-            $support_email = env('SUPPORT_MAIL');
-
-            $getName = UserReportChat::with(['reporter_user', 'to_reporter_user'])->where('id', $savedReportId)->first();
+            // ✅ Prepare Email Data
             $data = [
                 'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
                 'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
                 'report_type' => $request->report_type,
                 'report_description' => $request->report_description,
-                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+                'report_time' => $reportCreate->created_at->format('Y-m-d h:i A'),
                 'report_from' => "chat"
             ];
 
-            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
-                $messages->to($support_email)
+            // ✅ Send Email
+            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) {
+                $messages->to(env('SUPPORT_MAIL'))
                     ->subject('Chat Report Mail');
             });
 
-
-            return redirect('messages')->with('success', 'Report submitted!!!');
+            return redirect('messages')->with('success', 'Report submitted successfully!');
         } catch (QueryException $e) {
-
             DB::rollBack();
-
-            return redirect('messages')->with('error', 'DB Error');
+            return redirect('messages')->with('error', 'Database error occurred!');
         } catch (\Exception $e) {
-            return redirect('messages')->with('error', 'Something went wrong!!!');
+            return redirect('messages')->with('error', 'Something went wrong!');
         }
     }
 }
