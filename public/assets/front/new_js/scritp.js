@@ -219,6 +219,7 @@ const createpostsettingmainbody = document.querySelector(
 );
 const createpostprofile = document.querySelector(".create-post-profile-wrp");
 const backbtn = document.querySelector(".btn-back");
+const btnBack = document.querySelector(".back-btn");
 
 $(".create-post-profile-wrp").on("click", function () {
     $(".create-post-main-body").addClass("d-none");
@@ -226,6 +227,11 @@ $(".create-post-profile-wrp").on("click", function () {
 });
 
 $(".btn-back").on("click", function () {
+    $(".create-post-setting-main-body").addClass("d-none");
+    $(".create-post-main-body").removeClass("d-none");
+});
+
+$(".back-btn").on("click", function () {
     $(".create-post-setting-main-body").addClass("d-none");
     $(".create-post-main-body").removeClass("d-none");
 });
