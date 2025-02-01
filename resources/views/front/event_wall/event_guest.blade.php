@@ -1247,7 +1247,7 @@
                     <button type="button" class="btn btn-secondary remove-btn remove_guest_page"
                         data-bs-dismiss="modal" data-event-id="{{ $event }}">Remove
                         Guest</button>
-                    <button type="button" class="btn btn-secondary save-btn guest-rsvp-edit-btn" data-bs-dismiss="modal">Update</button>
+                    <button type="button" class="btn btn-secondary save-btn guest-rsvp-edit-btn" >Update</button>
 
                 </div>
 
