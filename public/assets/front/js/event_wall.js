@@ -859,17 +859,22 @@ $(document).ready(function () {
     // Function to update character count
     function updateCharCount(inputField) {
         const maxLength = 140;
-        let charCount = $(inputField).val().length;
+        const charCount = $(inputField).val().length;
 
+        // Update the span element with current character count
         $(inputField)
             .closest(".mb-3")
             .find(".char-count")
             .text(`${charCount}/${maxLength}`);
 
+        // Disable the input field if the maximum length is reached
         if (charCount >= maxLength) {
             $(inputField).val($(inputField).val().substring(0, maxLength));
-            charCount = maxLength;
+            charCount = maxLength; // Adjust count after trimming
         }
+        // } else {
+        //     $(inputField).prop('disabled', false);
+        // }
     }
 
     // Function to validate form fields
@@ -878,26 +883,36 @@ $(document).ready(function () {
         $('#pollForm input[required], #pollForm select[required]').each(function () {
             if ($.trim($(this).val()) === '') {
                 isValid = false;
-                return false;
+                return false; // Break loop
             }
         });
         $('.create_post_btn').prop('disabled', !isValid);
     }
 
-    // Ensuring at least two options exist at page load
-    function ensureMinimumOptions() {
-        const pollOptionsContainer = $(".poll-options");
-        const existingOptions = pollOptionsContainer.children().length;
+    // Apply the maxlength limit and validate form on input load
+    $("input.form-control").each(function () {
+        $(this).attr("maxlength", 140); // Set maxlength for input fields
+        updateCharCount(this); // Initialize character count
+    });
 
-        while (existingOptions < 2) {
-            addPollOption();
-        }
-    }
+    // // Initial form validation
+    // validateForm();
 
-    // Function to add a new poll option dynamically
-    function addPollOption() {
+    // Update character count on input change
+    $('#pollForm').on('input', 'input.form-control', function () {
+        updateCharCount(this); // Update char count
+        validateForm(); // Revalidate the form
+    });
+
+    // Update form validation on select change
+    $('#pollForm').on('change', 'select', function () {
+        validateForm();
+    });
+
+    // Add new poll option dynamically
+    $(".option-add-btn").on("click", function () {
         const pollOptionsContainer = $(".poll-options");
-        const optionCount = pollOptionsContainer.children().length + 1; // Start from 3
+        const optionCount = pollOptionsContainer.children().length + 1;
 
         const newOption = $(`
             <div class="mb-3 poll-option">
@@ -921,67 +936,90 @@ $(document).ready(function () {
         `);
 
         pollOptionsContainer.append(newOption);
-
-        // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
-            newOption.remove();
-            renumberOptions();
             validateForm();
-            ensureMinimumOptions(); // Ensure minimum 2 options remain
+          newOption.remove();
         });
+        // Bind delete functionality
+
 
         validateForm();
-    }
+    });
 
-    // Function to renumber options after deletion
+    // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .poll-option").each(function (index) {
             $(this).find(".option-number").text(index + 1);
         });
     }
 
-    // Ensuring minimum two options exist at page load
-    ensureMinimumOptions();
-
-    // Add new option when button is clicked
-    $(".option-add-btn").on("click", function () {
-        addPollOption();
-    });
 
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
-        var $this = $(this);
+        var $this = $(this); // Cache the button
 
+        // Prevent multiple clicks
+
+        // if ($this.prop('disabled')) {
+        //     return;
+        // }
+        // Check if the poll form exists and is valid
         var pollForm = $('#pollForm');
         var photoForm = $('#photoForm');
         var textForm = $('#textform');
         var postContent = document.getElementById('postContent').value.trim();
-
-        if (pollForm.is(':visible') && pollForm.length > 0) {
+        // Fallback to empty string if #postContent does not exist
+        console.log('Poll Form:', pollForm.length > 0 ? 'Exists' : 'Does not exist');
+        console.log('Photo Form:', photoForm.length > 0 ? 'Exists' : 'Does not exist');
+        console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
+        console.log('Post Content:', postContent);
+        // If a poll form exists and is visible, submit it
+        if (pollForm.is(':visible') && pollForm.length > 0 &&  pollForm !== '') {
+            // if (postContent === '') {
+            //     alert('Please enter some content for the poll.');
+            //     return;
+            // }
+            // Set the value of the hidden input in the poll form
             document.getElementById('pollContent').value = postContent;
             pollForm.submit();
-        } else if (photoForm.is(':visible') && photoForm.length > 0) {
-            var photoInput = document.getElementById('fileInput');
+        }
+        // If a photo form exists and is visible, submit it
+        else if (photoForm.is(':visible') && photoForm.length > 0) {
+            // Check if there's a valid photo (adjust this to your actual field for photo upload)
+            var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
                 toastr.error('Please upload a photo for the photo post.');
-                return;
+                return
             }
 
+
+            // Set the value of the hidden input in the photo form
             document.getElementById('photoContent').value = postContent;
             document.getElementById('photoPostType').value = 1;
 
-            $this.prop('disabled', true);
+            // Submit the form
+            $this.prop('disabled', true)
             photoForm.submit();
-        } else if (textForm.length > 0 && postContent !== '') {
-            document.getElementById('photoPostType').value = 0;
-            $this.prop('disabled', true);
+        }
+        // If neither form exists, check for a plain text post
+        else if (textForm.length > 0 && postContent !== '') {
+            if (postContent === '') {
+                alert('Please enter some content for the photo post.');
+                return;
+            }
+
+            document.getElementById('photoPostType').value = 0; //
+            $this.prop('disabled', true)
             textForm.submit();
-        } else {
+        }
+        // If no valid content is provided, show an alert
+        else {
             alert('Please fill all required fields before submitting.');
         }
     });
-});
 
+
+});
 
 // Wait for the entire page to load
 // window.onload = function () {
