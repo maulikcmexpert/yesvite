@@ -85,7 +85,7 @@ $(document).on('click', '.guest-rsvp-edit-btn', function () {
         toastr.error('Please select RSVP');
         return;
     }
-    if(adults=='0'&&kids=='0'){
+    if((rsvp_status=="1")&&(adults=='0'&&kids=='0')){
         toastr.error('Please select at least one adult or kid');
         return;
     }

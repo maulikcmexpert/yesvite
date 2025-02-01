@@ -77,6 +77,14 @@ $(document).on('click', '.save-rsvp', function () {
     var kids=$('#editrsvp input[name="kids"]').val();
 
     console.log({rsvp_status,adults,kids});
+    if(rsvp_status==undefined||rsvp_status==""){
+        toastr.error('Please select RSVP');
+        return;
+    }
+    if((rsvp_status=="1")&&(adults=='0'&&kids=='0')){
+        toastr.error('Please select at least one adult or kid');
+        return;
+    }
     $.ajax({
         url: base_url + "event_guest/update_guest/" + guestId, // Endpoint to update guest details
         method: 'POST',
