@@ -553,9 +553,12 @@ class EventWallController extends Controller
                 $eventDetails['event_images'][] = asset('storage/event_images/' . $values->image);
             }
         }
+        $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
+
         $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
         $eventDetails['event_name'] = $eventDetail->event_name;
         $eventDetails['hosted_by'] = $eventDetail->hosted_by;
+        $eventDetails['total_event_comments']=$event_comments;
         $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
         $rsvp_status = "";
