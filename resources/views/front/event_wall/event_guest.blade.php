@@ -284,7 +284,7 @@
                                                                     @endif
 
                                                                     <input type="hidden" id="eventID"
-                                                                        value="{{ $guest['event_id'] }}">
+                                                                        value="{{ $event }}">
                                                                     <input type="hidden" id="user_id"
                                                                         value="{{ $guest['user_id'] }}">
 
