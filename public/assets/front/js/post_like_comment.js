@@ -781,7 +781,7 @@ $(document).ready(function () {
           
             generateProfileImage(first_name,last_name);
         const contactHtml = `
-            <div class="guest-user" data-id="${index}">
+            <div class="guest-user" data-id="${id}">
                 <div class="guest-user-img">
                    ${profileImage}
                     <a href="#" class="close">
