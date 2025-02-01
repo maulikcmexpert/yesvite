@@ -738,6 +738,8 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
+            $('.add_yesvite_guest_'+id).remove();
+
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_yesvite_guest_'+id).remove();
@@ -754,14 +756,33 @@ $(document).ready(function () {
             $(this).data("type") === "email" && $(this).is(":checked");
         const isPhoneSelected =
             $(this).data("type") === "phone" && $(this).is(":checked");
-
+            const first_name = $(this).data("name");
+            const last_name = $(this).data("last");
+            const email = $(this).data("email");
+            const profile = $(this).data("profile");
         // Add to the guest list if either email or phone is selected
 
         console.log(
             `Checkbox changed for ID: ${id}, email selected: ${isEmailSelected}, phone selected: ${isPhoneSelected}`
         );
         // Add to the guest list, prefer email if selected, else prefer phone
-        addToGuestList(id, isEmailSelected ? "email" : "phone", 0); // App user = 0 for phone (non-app user)
+        // addToGuestList(id, isEmailSelected ? "email" : "phone", 0);
+        
+        
+        if( $(this).is(":checked")){
+            addToGuestList(id, isEmailSelected ? "email" : "phone", 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+            $(".phoneContact-checkbox")
+            .filter(`[data-id="${id}"]`)
+            .not(this)
+            .prop("checked", false);
+            $('.add_yesvite_guest_'+id).remove();
+
+        }else{
+            guestList = guestList.filter(guest => guest.id !== id);
+            $('.add_yesvite_guest_'+id).remove();
+
+            console.log(guestList);
+        }// App user = 0 for phone (non-app user)
     });
 
     // Declare guestList outside so it's globally accessible
