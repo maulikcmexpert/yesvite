@@ -496,14 +496,15 @@ class ChatController extends Controller
                     ->subject('Chat Report Mail');
             });
 
-            return response()->json(['status' => 1, 'message' => $message]);
+
+            return redirect('message')->with('success', 'Report submitted!!!');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
-            return response()->json(['status' => 0, 'message' => "db error"]);
+            return redirect('message')->with('error', 'DB Error');
         } catch (\Exception $e) {
-            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+            return redirect('message')->with('error', 'Something went wrong!!!');
         }
     }
 }
