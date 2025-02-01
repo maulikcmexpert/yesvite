@@ -1861,7 +1861,7 @@ function updateTimers() {
         lastReceiverElem.innerHTML = lastReceiverElem.getAttribute("data-time");
 }
 
-setInterval(updateTimers, 1000);
+// setInterval(updateTimers, 1000);
 
 var formattedDate = {};
 var messageRcvTime = "";
@@ -2335,7 +2335,7 @@ function createMessageElement(
         msgTime = setTimeR == 1 ? messageRcvTime : "";
     }
     msgTime = messageRcvTime;
-    updateTimers();
+    //updateTimers();
     return `<div>
     ${daychange}
         <li class="${
