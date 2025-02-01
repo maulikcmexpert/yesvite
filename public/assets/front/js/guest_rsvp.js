@@ -19,10 +19,15 @@ $(document).on('click', '.edit_rsvp_guest', function () {
 
             // Update the radio buttons based on RSVP status
             if (response.rsvp_status == "1") {
-                $('.rsvp_yes').prop('checked', true); // Attending
+                $('.rsvp_yes').prop('checked', true); 
+                $('.side_menu_minus').prop('disabled',false)
+                $('.side_menu_plus').prop('disabled',false)
+                // Attending
             }
             if (response.rsvp_status == "0") {
-                $('.rsvp_no').prop('checked', true); // Not Attending
+                $('.rsvp_no').prop('checked', true); 
+                $('.side_menu_minus').prop('disabled',false)
+                $('.side_menu_plus').prop('disabled',false)
             }
 
             // Store guest ID in the save button data attribute
