@@ -388,7 +388,7 @@ defer
     </script>
 
 <script type="module">
-    let page = {{isset($page)? $page : ''}}
+    let page = {{isset($title)? $title : ''}}
     if(page!="Messages"){    
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import {
