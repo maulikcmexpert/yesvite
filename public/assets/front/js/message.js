@@ -1771,6 +1771,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
     );
 
     $(messageEle).replaceWith(messgeElement);
+    updateTimers();
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
@@ -1804,39 +1805,34 @@ function addMessageToList(key, messageData, conversationId) {
     }
 
     scrollToBottom();
+    updateTimers();
 }
+let timerTime = 0;
 function updateTimers() {
-    const timeSpans = document.querySelectorAll(".time");
+    clearTimeout(timerTime);
+    timerTime = setTimeout(() => {
+        let messages = document.querySelectorAll(".chat-box");
+        let lastTime = "";
+        let lastSender = "";
+        let lastElement = null;
 
-    function processSpans(attribute, stopCondition) {
-        let group = [];
+        messages.forEach((msg, index) => {
+            let timeElement = msg.querySelector(".time");
+            let time = timeElement.getAttribute("data-time");
+            let senderType = msg.classList.contains("sender")
+                ? "sender"
+                : "receiver";
 
-        timeSpans.forEach((span) => {
-            let attrValue = parseInt(span.getAttribute(attribute), 10);
-            let timeValue = span.getAttribute("data-time")?.trim();
-            let className = `.${span.classList[1]}`; // Get the dynamic class (rtime_X or stime_X)
-
-            if (attrValue !== 0) {
-                group.push(span);
-            } else {
-                if (group.length > 0) {
-                    group[group.length - 1].innerHTML = timeValue; // Keep last span in group
-                    group.slice(0, -1).forEach((s) => (s.innerHTML = "")); // Clear others
-                    group = [];
-                }
+            if (time === lastTime && senderType === lastSender) {
+                if (lastElement) lastElement.style.display = "none";
             }
+
+            lastTime = time;
+            lastSender = senderType;
+            lastElement = timeElement;
+            timeElement.style.display = "inline";
         });
-
-        // Handle last group in case no stopCondition found
-        if (group.length > 0) {
-            let last = group[group.length - 1];
-            last.innerHTML = last.getAttribute("data-time");
-            group.slice(0, -1).forEach((s) => (s.innerHTML = ""));
-        }
-    }
-
-    processSpans("data-loop", "data-rloop");
-    processSpans("data-rloop", "data-loop");
+    }, 1000);
 }
 
 // setInterval(updateTimers, 1000);
@@ -2267,10 +2263,8 @@ function createMessageElement(
     );
     let setTimeS = 1;
     let setTimeR = 1;
-    console.log(messageRcvTime.replace(/\s/g, ""));
-    console.log({ msgLoop });
-    console.log({ msgLoop });
     if (isSender) {
+        console.log("sender");
         if (msgLoop != 0) {
             Array.from(time).forEach((timeElement) => {
                 if ($(timeElement).data("loop") > msgLoop) {
@@ -2283,6 +2277,7 @@ function createMessageElement(
             $(time).text("");
         }
     } else {
+        console.log("reciver");
         const Rtime = document.getElementsByClassName(
             `rtime_${messageRcvTime.replace(/\s/g, "")}`
         );
@@ -2316,7 +2311,7 @@ function createMessageElement(
     //updateTimers();
     return `<div>
     ${daychange}
-        <li class="${
+        <li class="chat-box ${
             isSender ? "receiver" : "sender"
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
