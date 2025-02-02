@@ -388,72 +388,75 @@ defer
     </script>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-        getDatabase,
-        ref,
-        get,
-        onValue,
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    let page = {{isset($page)? $page : ''}}
+    if(page!="Messages"){    
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            getDatabase,
+            ref,
+            get,
+            onValue,
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    (async function() {
-        const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
+        (async function() {
+            const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
 
-        if (userId != undefined && userId !=null) {
-            try {
-                // Fetch Firebase configuration from firebase_js.json
-                const response = await fetch("/firebase_js.json");
-                const firebaseConfig = await response.json();
+            if (userId != undefined && userId !=null) {
+                try {
+                    // Fetch Firebase configuration from firebase_js.json
+                    const response = await fetch("/firebase_js.json");
+                    const firebaseConfig = await response.json();
 
-                // Initialize Firebase app
-                const app = initializeApp(firebaseConfig);
-                const database = getDatabase(app);
+                    // Initialize Firebase app
+                    const app = initializeApp(firebaseConfig);
+                    const database = getDatabase(app);
 
-                // Reference to the user's overview data in Firebase
-                const overviewRef = ref(database, `overview/${userId}`);
+                    // Reference to the user's overview data in Firebase
+                    const overviewRef = ref(database, `overview/${userId}`);
 
-                // Function to calculate unread count
-                function updateUnreadCountG(snapshot) {
-                    let totalUnreadCount = 0;
+                    // Function to calculate unread count
+                    function updateUnreadCountG(snapshot) {
+                        let totalUnreadCount = 0;
 
-                    // Check if data exists
-                    if (snapshot.exists()) {
-                        const conversations = snapshot.val();
+                        // Check if data exists
+                        if (snapshot.exists()) {
+                            const conversations = snapshot.val();
 
-                        for (let conversationId in conversations) {
-                            const conversation = conversations[conversationId];
+                            for (let conversationId in conversations) {
+                                const conversation = conversations[conversationId];
 
-                            if (conversation.unReadCount && conversation.contactName) {
-                                totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                if (conversation.unReadCount && conversation.contactName) {
+                                    totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                }
                             }
+                        }
+
+                        if (parseInt(totalUnreadCount) > 0) {
+                            $(".badge").show();
+                            $(".g-badge").show();
+                            $(".g-badge").html(parseInt(totalUnreadCount));
+                            $(".badge").html(parseInt(totalUnreadCount));
+                        } else {
+                            $(".g-badge").hide();
+                            $(".badge").hide();
+                            $(".g-badge").html("");
+                            $(".badge").html("");
                         }
                     }
 
-                    if (parseInt(totalUnreadCount) > 0) {
-                        $(".badge").show();
-                        $(".g-badge").show();
-                        $(".g-badge").html(parseInt(totalUnreadCount));
-                        $(".badge").html(parseInt(totalUnreadCount));
-                    } else {
-                        $(".g-badge").hide();
-                        $(".badge").hide();
-                        $(".g-badge").html("");
-                        $(".badge").html("");
-                    }
-                }
+                    // Listen for real-time changes in the overview data
+                    onValue(overviewRef, (snapshot) => {
+                        updateUnreadCountG(snapshot);
+                    });
 
-                // Listen for real-time changes in the overview data
-                onValue(overviewRef, (snapshot) => {
+                    // Initial fetch of the data (optional)
+                    const snapshot = await get(overviewRef);
                     updateUnreadCountG(snapshot);
-                });
 
-                // Initial fetch of the data (optional)
-                const snapshot = await get(overviewRef);
-                updateUnreadCountG(snapshot);
-
-            } catch (error) {
-                console.error("Error fetching data from Firebase:", error);
+                } catch (error) {
+                    console.error("Error fetching data from Firebase:", error);
+                }
             }
-        }
-    })();
+        })();
+    }
 </script>
