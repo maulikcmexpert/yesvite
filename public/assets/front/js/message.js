@@ -2315,7 +2315,7 @@ function createMessageElement(
             isSender ? "receiver" : "sender"
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}">${msgTime}</span>            
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}" style="display: none;">${msgTime}</span>            
         </li>
     </div>
     `;
