@@ -388,9 +388,10 @@ defer
     </script>
 <input type="hidden" id="title" name="" value="{{$title}}" />
 <script type="module">
-    let page = {{ json_encode($title ?? '') }};  // Ensuring safe string handling
+    let currentPage = @json(request()->segment(count(request()->segments())));
+    console.log(currentPage); // Output: messages
 
-    if (page !== "Messages") {
+    if (currentPage !== "messages") {
         (async function () {
             const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
 
