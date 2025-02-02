@@ -386,7 +386,6 @@ defer
         }
     });
     </script>
-<input type="hidden" id="title" name="" value="{{$title}}" />
 <script type="module">
     let currentPage = @json(request()->segment(count(request()->segments())));
     console.log(currentPage); // Output: messages
