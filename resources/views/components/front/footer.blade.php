@@ -388,8 +388,9 @@ defer
     </script>
 
 <script type="module">
-    let page = {{isset($title)? $title : ''}}
-    if(page!="Messages"){    
+    let page = {{isset($title) && $title!='' ? $title : ''}}
+    alert(page)
+    if(page!=undefined && page!="Messages"){    
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import {
             getDatabase,
