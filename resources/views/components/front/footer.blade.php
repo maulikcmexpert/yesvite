@@ -386,7 +386,7 @@ defer
         }
     });
     </script>
-<input type="hidden" id="title" name="" value="{{$title}}"" />
+<input type="hidden" id="title" name="" value="{{$title}}" />
 <script type="module">
     let page = {{ json_encode($title ?? '') }};  // Ensuring safe string handling
 
