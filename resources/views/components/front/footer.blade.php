@@ -388,9 +388,9 @@ defer
     </script>
 
 <script type="module">
-     let page = "{{ isset($title) && $title != '' ? addslashes($title) : '' }}";
+     //let page = "{{ isset($title) && $title != '' ? addslashes($title) : '' }}";
     
-     if (typeof page !== "undefined" && page !== "Messages"){
+    // if (typeof page !== "undefined" && page !== "Messages"){
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import {getDatabase, ref, get, onValue} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -455,5 +455,5 @@ defer
                 }
             }
         })();
-    }
+   // }
 </script>
