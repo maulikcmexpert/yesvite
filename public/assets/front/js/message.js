@@ -1832,7 +1832,7 @@ function updateTimers() {
             lastElement = timeElement;
             timeElement.style.display = "inline";
         });
-    }, 1000);
+    }, 300);
 }
 
 // setInterval(updateTimers, 1000);
