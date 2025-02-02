@@ -388,19 +388,18 @@ defer
     </script>
 
 <script type="module">
-     //let page = "{{ isset($title) && $title != '' ? addslashes($title) : '' }}";
-    
-    // if (typeof page !== "undefined" && page !== "Messages"){
+    let page = "{{ addslashes($title ?? '') }}";
+
+    if (typeof page !== "undefined" && page !== "Messages") {
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import {getDatabase, ref, get, onValue} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+        (async function () {
+            const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
 
-        (async function() {
-            const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
-
-            if (userId != undefined && userId !=null) {
+            if (userId !== null) {
                 try {
-                    // Fetch Firebase configuration from firebase_js.json
+                    // Fetch Firebase configuration
                     const response = await fetch("/firebase_js.json");
                     const firebaseConfig = await response.json();
 
@@ -415,10 +414,8 @@ defer
                     function updateUnreadCountG(snapshot) {
                         let totalUnreadCount = 0;
 
-                        // Check if data exists
                         if (snapshot.exists()) {
                             const conversations = snapshot.val();
-
                             for (let conversationId in conversations) {
                                 const conversation = conversations[conversationId];
 
@@ -428,32 +425,32 @@ defer
                             }
                         }
 
-                        if (parseInt(totalUnreadCount) > 0) {
-                            $(".badge").show();
-                            $(".g-badge").show();
-                            $(".g-badge").html(parseInt(totalUnreadCount));
-                            $(".badge").html(parseInt(totalUnreadCount));
+                        if (totalUnreadCount > 0) {
+                            document.querySelectorAll(".badge, .g-badge").forEach(el => {
+                                el.style.display = "inline";
+                                el.innerHTML = totalUnreadCount;
+                            });
                         } else {
-                            $(".g-badge").hide();
-                            $(".badge").hide();
-                            $(".g-badge").html("");
-                            $(".badge").html("");
+                            document.querySelectorAll(".badge, .g-badge").forEach(el => {
+                                el.style.display = "none";
+                                el.innerHTML = "";
+                            });
                         }
                     }
 
-                    // Listen for real-time changes in the overview data
+                    // Listen for real-time updates
                     onValue(overviewRef, (snapshot) => {
                         updateUnreadCountG(snapshot);
                     });
 
-                    // Initial fetch of the data (optional)
+                    // Initial fetch
                     const snapshot = await get(overviewRef);
                     updateUnreadCountG(snapshot);
-
                 } catch (error) {
-                    console.error("Error fetching data from Firebase:", error);
+                    console.error("Error fetching Firebase data:", error);
                 }
             }
         })();
-   // }
+    }
 </script>
+
