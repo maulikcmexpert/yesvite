@@ -1818,7 +1818,7 @@ function updateTimers(fast = false) {
 }
 
 function processTimers() {
-    let messages = document.querySelectorAll(".chat-box .message");
+    let messages = document.querySelectorAll(".chat-box");
     let lastTime = "";
     let lastSender = "";
     let lastElement = null;
