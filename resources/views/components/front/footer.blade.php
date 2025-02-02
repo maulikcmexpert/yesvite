@@ -386,19 +386,20 @@ defer
         }
     });
     </script>
-
+<input type="hidden" id="title" name="" value="{{$title}}"" />
 <script type="module">
-    let page = "{{ addslashes($title ?? '') }}";
+    let page = {{ json_encode($title ?? '') }};  // Ensuring safe string handling
 
-    if (typeof page !== "undefined" && page !== "Messages") {
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
+    if (page !== "Messages") {
         (async function () {
             const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
 
             if (userId !== null) {
                 try {
+                    // Dynamically import Firebase modules
+                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+                    const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+
                     // Fetch Firebase configuration
                     const response = await fetch("/firebase_js.json");
                     const firebaseConfig = await response.json();
@@ -425,17 +426,11 @@ defer
                             }
                         }
 
-                        if (totalUnreadCount > 0) {
-                            document.querySelectorAll(".badge, .g-badge").forEach(el => {
-                                el.style.display = "inline";
-                                el.innerHTML = totalUnreadCount;
-                            });
-                        } else {
-                            document.querySelectorAll(".badge, .g-badge").forEach(el => {
-                                el.style.display = "none";
-                                el.innerHTML = "";
-                            });
-                        }
+                        // Update badge display
+                        document.querySelectorAll(".badge, .g-badge").forEach(el => {
+                            el.style.display = totalUnreadCount > 0 ? "inline" : "none";
+                            el.innerHTML = totalUnreadCount > 0 ? totalUnreadCount : "";
+                        });
                     }
 
                     // Listen for real-time updates
@@ -453,4 +448,5 @@ defer
         })();
     }
 </script>
+
 
