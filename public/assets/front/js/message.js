@@ -1771,7 +1771,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
     );
 
     $(messageEle).replaceWith(messgeElement);
-    updateTimers();
+    updateTimers(true);
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
@@ -1808,31 +1808,37 @@ function addMessageToList(key, messageData, conversationId) {
     updateTimers();
 }
 let timerTime = 0;
-function updateTimers() {
+function updateTimers(fast = false) {
     clearTimeout(timerTime);
-    timerTime = setTimeout(() => {
-        let messages = document.querySelectorAll(".chat-box");
-        let lastTime = "";
-        let lastSender = "";
-        let lastElement = null;
+    if (fast) {
+        processTimers();
+    } else {
+        timerTime = setTimeout(processTimers, 500);
+    }
+}
 
-        messages.forEach((msg, index) => {
-            let timeElement = msg.querySelector(".time");
-            let time = timeElement.getAttribute("data-time");
-            let senderType = msg.classList.contains("sender")
-                ? "sender"
-                : "receiver";
+function processTimers() {
+    let messages = document.querySelectorAll(".chat-box .message");
+    let lastTime = "";
+    let lastSender = "";
+    let lastElement = null;
 
-            if (time === lastTime && senderType === lastSender) {
-                if (lastElement) lastElement.style.display = "none";
-            }
+    messages.forEach((msg) => {
+        let timeElement = msg.querySelector(".time");
+        let time = timeElement.getAttribute("data-time");
+        let senderType = msg.classList.contains("sender")
+            ? "sender"
+            : "receiver";
 
-            lastTime = time;
-            lastSender = senderType;
-            lastElement = timeElement;
-            timeElement.style.display = "inline";
-        });
-    }, 100);
+        if (time === lastTime && senderType === lastSender) {
+            if (lastElement) lastElement.style.display = "none";
+        }
+
+        lastTime = time;
+        lastSender = senderType;
+        lastElement = timeElement;
+        timeElement.style.display = "inline";
+    });
 }
 
 // setInterval(updateTimers, 1000);
