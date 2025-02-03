@@ -2764,5 +2764,7 @@ if ($rsvpSent != null) {
     
         return session()->get('add_guest_user_id');
     }
+
+    
 }
 
