@@ -439,10 +439,18 @@ async function handleNewConversation(snapshot) {
                     newConversation.contactName
                 )
             );
-        $(conversationElement)
-            .find(".user-img")
-            .find("span")
-            .replaceWith(userStatus);
+        // $(conversationElement)
+        //     .find(".user-img")
+        //     .find("span")
+        //     .replaceWith(userStatus);
+
+        const userImg = $(conversationElement).find(".user-img");
+        const spanElement = userImg.find("span");
+        if (spanElement.length) {
+            spanElement.replaceWith(userStatus);
+        } else {
+            userImg.append(userStatus);
+        }
         const badgeElement = $(conversationElement).find(
             ".ms-auto .d-flex .my-badge"
         );
