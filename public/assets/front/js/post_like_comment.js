@@ -866,7 +866,12 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             profileImage =generateProfileImage(first_name, last_name);
         }
+        var upper_view=$('.selected-contacts-list .guest-users').length;
+        alert(upper_view);
         const $modalBody = $('.selected-contacts-list');
+       
+       
+
         const contactHtml = `
             <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
@@ -884,7 +889,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             </div>
 
         `;
-        $modalBody.append(contactHtml);
+        // $modalBody.append(contactHtml);  
 
         const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite ">
