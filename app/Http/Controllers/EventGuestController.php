@@ -907,7 +907,7 @@ class EventGuestController extends Controller
         $new_added_user=session()->get('add_guest_user_id');
         $yesvite_users_data = [];
         $yesvite_phone_data = [];
-
+        $is_phone=$request->is_phone;
         // dd($new_added_user);
         if(!empty($new_added_user)){
         foreach ($new_added_user as $sesionuser) {
@@ -915,7 +915,7 @@ class EventGuestController extends Controller
             $user = User::find($sesionuser['user_id']);
             $prefer_by=$sesionuser['prefer_by'];
 
-            if ($user) {
+            if ($user && $is_phone=="0") {
                 // If the user exists, add data to the $users_data array
                 $yesvite_users_data[] = [
                     'user_id' => $user->id,
@@ -952,7 +952,7 @@ class EventGuestController extends Controller
                 // dd($users_data);
 
     }
-        return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render()]);
+        return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data','is_phone'))->render()]);
 
     }
 
