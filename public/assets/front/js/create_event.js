@@ -6811,6 +6811,7 @@ $(document).on("click", ".invite_group_member", function () {
     $("#loader").css("display", "block");
     var userId = $(this).val();
     var selectedValues = [];
+    var unselectedValues = [];
     $(".user_group_member").each(function () {
         if ($(this).is(":checked") && !$(this).is(":disabled")) {
             var perferby = $(this).data("preferby");
@@ -6842,11 +6843,19 @@ $(document).on("click", ".invite_group_member", function () {
             console.log(selectedValues);
         } else {
             const id = $(this).val();
+            const isIdExists = unselectedValues.some((item) => item.id === id);
+
+            if (!isIdExists) {
+                unselectedValues.push({
+                    id: id,
+                });
+            }
             delete_invited_user(id, "0");
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
         }
     });
+    
     $.ajax({
         url: base_url + "event/invite_user_by_group",
         type: "POST",
@@ -6855,6 +6864,7 @@ $(document).on("click", ".invite_group_member", function () {
         },
         data: {
             users: selectedValues,
+            unselectedValues:unselectedValues,
         },
         success: function (response) {
             if (response?.isTrue && response.isTrue) {

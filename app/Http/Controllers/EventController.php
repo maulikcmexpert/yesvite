@@ -2288,9 +2288,45 @@ class EventController extends BaseController
     {
 
         $users = $request->users;
+        $unselectusers = $request->unselectedValues;
         $userIds = session()->get('user_ids', []);
+
+        if (!empty($unselectusers)) {
+            $userEntries = []; // This will store all user entries that you need to save
+        
+            foreach ($users as $value) {
+                $id = $value['id'];
+                $user_detail = User::where('id', $id)->first();
+                // Prepare the user entry
+                $userEntry = [
+                    'id' => $id,
+                    'firstname' => $user_detail->firstname,
+                    'lastname' => $user_detail->lastname,
+                    'invited_by' => $value['invited_by'],
+                    'prefer_by' => $value['preferby'],
+                    'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
+                ];
+                
+                // If the user ID is in the unselectusers, remove it from the userIds array
+                if (in_array($id, $unselectusers)) {
+                    // Remove the ID from the session's user_ids array
+                    $userIds = array_filter($userIds, function($userId) use ($id) {
+                        return $userId !== $id;
+                    });
+                } else {
+                    // Add the user entry to the userEntries array
+                    $userEntries[] = $userEntry;
+                }
+            }
+        
+            // Update the session with the new userEntries
+            session()->put('user_ids', $userEntries); // Store filtered user IDs
+            // session()->put('user_entries', $userEntries); // Store all user entries that aren't unselected
+            Session::save();
+        }
         // dD($users);
         // dd($userIds,$users);
+        $userIds = session()->get('user_ids', []);
         if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
