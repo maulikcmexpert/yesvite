@@ -861,11 +861,13 @@ $(document).ready(function () {
     $(document).on('click','.remove_new_added_user',function(){
 
         var user_id=$(this).attr('data-id');
+        const event_id = $('#event_id').val();
+
         $('.add_yesvite_guest_'+user_id).remove();
         $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
         $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
     
-        storeAddNewGuest(user_id,0,'','','yesvite');
+        storeAddNewGuest(user_id,0,'',event_id,'yesvite');
 
        
     });
