@@ -6865,7 +6865,7 @@ $(document).on("click", ".invite_group_member", function () {
                     id: id,
                 });
             }
-            
+            delete_invited_user(id,'0');
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
         }

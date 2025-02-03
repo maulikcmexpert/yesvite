@@ -16,7 +16,7 @@ let event_id = null;
 $(document).ready(function () {
     $("#custom_template").change(function () {
         var file = this.files[0];
-
+        dbJson = null;
         if (!file) return;
 
         var validExtensions = ["image/jpeg", "image/png"];
