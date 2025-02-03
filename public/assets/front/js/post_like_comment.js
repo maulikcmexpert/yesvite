@@ -905,7 +905,8 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                  <h6>Sell all</h6>
                 </a>`; 
                   $modalBody.append(totalHtml);
-            }else{
+            }
+            if(upper_see>0){
                var initial= parseInt($('#total-selected-email').attr('data-count'));
                var new_value= initial+1 ;
                $('#total-selected-email').attr('data-count',new_value);

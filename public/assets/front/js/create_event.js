@@ -4698,7 +4698,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = "";
-function saveDesignData() {
+async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -4765,6 +4765,9 @@ function saveDesignData() {
                         console.log(eventData);
                         eventData.step = final_step;
                         console.log("Image uploaded and saved successfully");
+                        if (direct) {
+                            return true;
+                        }
                         $("#myCustomModal").modal("hide");
                         $("#exampleModal").modal("hide");
                         $("#loader").css("display", "none");
@@ -4807,7 +4810,7 @@ function saveDesignData() {
                         // $('.current_step').text('2 of 4');
                         console.log("handleActiveClass");
 
-                        handleActiveClass(this);
+                        handleActiveClass(".li_event_details");
                         var design = eventData.desgin_selected;
                         $(".li_event_detail")
                             .find(".side-bar-list")
@@ -8308,7 +8311,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     } else {
         eventData.is_update_event = "1";
     }
-    saveDesignData();
+    saveDesignData(true);
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -8347,7 +8350,7 @@ $(document).on("click", ".edit_checkout", function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    window.location.href = base_url + "home";
+                    // window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
