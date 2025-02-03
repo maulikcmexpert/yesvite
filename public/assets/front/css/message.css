@@ -1767,7 +1767,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     font-family: var(--SFProDisplay-Medium);
     line-height: 22px;
     margin-bottom: 24px;
-    padding-bottom: 24px;
+    /* padding-bottom: 24px; */
     /* border-bottom: 1px solid var(--border); */
 }
 
@@ -1800,6 +1800,17 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     border: 1px solid #F73C71;
 }
 
+#submitmsgreport .textbox-container input{
+    width: 100%;
+}
+
+#submitmsgreport .textbox-container input:focus-within{
+    outline: none !important;
+}
+
+#submitmsgreport .textbox-container{
+    margin-bottom: 10px;
+}
 
 /* ======= responsive ======== */
 

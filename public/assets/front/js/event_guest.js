@@ -311,3 +311,31 @@ $(document).on('click', '.delete_failed_contact', function () {
     });
 
 });
+
+$(document).on('click','.add_guest_seeall',function(e){
+    let event_id = $('#event_id').val();
+
+    $.ajax({
+        url: base_url + "event_guest/see_all_invite_yesvite",  // Ensure this route is defined in web.php/api.php
+        type: "POST",
+        data: JSON.stringify({event_id: event_id }),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
+        },
+        success: function (response) {
+            // if (response.status === 1) {
+            //     toastr.success(response.message);
+            //     // // Find the guest container by guestId and remove it from the DOM
+            //     $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
+            // } else {
+            //     toastr.error(response.message);
+            // }
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        }
+    });
+});
