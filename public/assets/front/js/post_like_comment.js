@@ -413,7 +413,9 @@ $(document).ready(function () {
             console.error("Comment input field not found!");
             return;
         }
-        $("#parent_comment_id").val(parentId);
+        const commentIndex = parentWrapper.index() + 1; // Get unique index
+        $("#parent_comment_id_" + commentIndex).val(parentId);
+        // $("#parent_comment_id").val(parentId);
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
@@ -864,25 +866,36 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             profileImage =generateProfileImage(first_name, last_name);
         }
-        const $modalBody = $('.selected-contacts-list');
-        const contactHtml = `
-            <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
-                <div class="guest-user-img">
-                   ${profileImage}
-                    <a href="#" class="close remove_new_added_user" data-id="${id}">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-                <h6>${first_name} ${last_name}</h6>
-            </div>
+        var upper_view=$('.selected-contacts-list .guest-users').length;
 
-        `;
-        $modalBody.append(contactHtml);
+        if(upper_view<4){
+            const $modalBody = $('.selected-contacts-list');
+       
+       
+
+            const contactHtml = `
+                <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
+                    <div class="guest-user-img">
+                       ${profileImage}
+                        <a href="#" class="close remove_new_added_user" data-id="${id}">
+                            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                                <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h6>${first_name} ${last_name}</h6>
+                </div>
+    
+            `;
+            $modalBody.append(contactHtml);      
+        }else{
+            $('.selected-contacts-list .add_guest_seeall').length;
+            alert( $('.selected-contacts-list .add_guest_seeall').length);
+        }
+      
 
         const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite ">
