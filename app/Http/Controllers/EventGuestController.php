@@ -928,7 +928,7 @@ class EventGuestController extends Controller
                     'prefer_by'=>$prefer_by
                 ];
             } else {
-                $contact_sync = contact_sync::find($user['user_id']);
+                $contact_sync = contact_sync::find($sesionuser['user_id']);
                 
                 if ($contact_sync) {
                     $users_data[] = [
