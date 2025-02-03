@@ -1210,12 +1210,17 @@ $(document).ready(function () {
 
 
 });
-$(".modal").on("hidden.bs.modal", function(){
+$(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val('');
-    $("#pollForm")[0].reset(); // Correct way to reset a form
-    $("#photoForm")[0].reset();
-    $("#imagePreview").empty();
+    $("#pollForm")[0].reset(); // Reset poll form
+    $("#photoForm")[0].reset(); // Reset photo form
+    $("#imagePreview").empty(); // Clear image preview
 
+    // Add `d-none` class back to hide the div
+    $(".create-post-upload-img-inner").addClass("d-none");
 });
 
-
+$(".modal").on("shown.bs.modal", function () {
+    // Remove `d-none` class to show the div
+    $(".create-post-upload-img-inner").removeClass("d-none");
+});
