@@ -1741,6 +1741,19 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     right: 30px;
 }
 
+.report-input-wrp{
+    position: relative;
+    display: inline-block;
+}
+
+.report-input-wrp input{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity: 0;
+}
 
 /* ======= responsive ======== */
 

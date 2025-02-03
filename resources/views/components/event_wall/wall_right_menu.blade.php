@@ -310,7 +310,28 @@ if ($hostView) {
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade cmn-modal" id="seeAll" tabindex="-1" aria-labelledby="seeAllLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="seeAllLabel">Add Guests</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body guest-tab">
+                <div class="tab-content seeAllTabContent" id="seeAllTabContent">
+
+                </div>
+            </div>
+            {{-- <input type="hidden" id="event_id" value=""> --}}
+            <!-- <div class="modal-footer rsvp-button-wrp">
+                <button type="button" class="btn btn-secondary success-btn"
+                    data-bs-dismiss="modal">Re-send</button>
+            </div> -->
+        </div>
     </div>
+</div>
     </div>
 </div>
 <script>

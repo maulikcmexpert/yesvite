@@ -101,7 +101,8 @@
                 @php
                     $counter = count($selected_yesvite_user) - 4;
                 @endphp
-                <a href="#" class="guest-user d-block yesvite ">
+                <a href="#" class="guest-user d-block yesvite "  data-bs-toggle="modal"
+                data-bs-target="#seeAll">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-email">+{{ $counter }}</span>
                         <span class="content">Total</span>
@@ -344,7 +345,8 @@
                 @php
                     $counter = count($selected_phone_user) - 4;
                 @endphp
-                <a href="#" class="guest-user d-block yesvite ">
+                <a href="#" class="guest-user d-block yesvite "  data-bs-toggle="modal"
+                data-bs-target="#seeAll">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-email">+{{ $counter }}</span>
                         <span class="content">Total</span>
@@ -371,6 +373,7 @@
         @foreach ($phone_contact as $contact)
             @php
                 // dd(1);
+                $profile=(!empty($contact->photo) && $contact->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact->photo))) ?? '';
                 $email_cont_checked = '';
                 $phone_cont_checked = '';
                 $cont_p_disabled='';
@@ -406,7 +409,7 @@
             @endphp
             <div class="invite-contact phone-contact">
                 <a href="#" class="invite-img">
-                    @if (!empty($contact->photo))
+                    @if (!empty($profile))
                         <img src="{{ $contact->photo }}" alt="invite-img">
                     @else
                         @php
