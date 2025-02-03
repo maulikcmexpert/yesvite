@@ -2406,7 +2406,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             .text("Please enter description.");
         return;
     }
-
+    
     var itemQuantity = $("#item_quantity").val();
     if (itemQuantity == "" || itemQuantity < 1) {
         $("#item_quantity_error")
@@ -2472,6 +2472,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             items++;
             potluck_cateogry_item_count();
             toggleSidebar("sidebar_potluck");
+            updateTOP(category_index);
             if (response.qty == 1) {
                 $("#potluck-" + category_index).hide();
             }
