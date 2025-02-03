@@ -4625,6 +4625,19 @@ function applyStyles() {
         $(document).on("click", "#backtomsg-btn", function () {
             $(".chatbox").css("display", "none");
             $(".chat-lists").css("display", "block");
+
+            $(".selected-user-name").html("Start new chat");
+            updateProfileImg("", "Start New");
+            $(".conversationId").attr("conversationid", "");
+            $(".selected_id").val("");
+            $(".selected_message").val("");
+            $(".selected_message").val("");
+
+            $(".selected_name").val("");
+            $("#isGroup").val("");
+            $("#selected-user-name").html("Start new chat");
+            $("#selected-user-lastseen").html("");
+            $(".selected-title").html("Start new chat");
         });
         // $(document).on('click','.chat-data',function(){
         //   $(".chatbox").css("display", "block");

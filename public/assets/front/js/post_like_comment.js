@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-        $("#parent_comment_id").val() || null; ; // Find active comment if replying
+            $(".commented-user-wrp.active").data("comment-id") || null; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
@@ -366,8 +366,6 @@ $(document).ready(function () {
                             replyList.append(replyHTML);
                         });
                     }
-                    commentInput.val("");
-                    $("#parent_comment_id").val(""); //
                 }
             },
             error: function (xhr) {
@@ -379,9 +377,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".commented-user-reply-btn", function () {
         // Find the closest '.posts-card-main-comment' wrapper (the main post container)
-        const parentWrapper = $(this)
-            .closest(".posts-card-show-all-comments-wrp")
-            .prev(".posts-card-main-comment");
+        const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp").prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
             console.error("Parent wrapper not found!");
@@ -389,34 +385,36 @@ $(document).ready(function () {
         }
 
         // Find the username and comment ID from the current comment being replied to
-        const parentName = $(this)
-            .closest(".commented-user-wrp")
-            .find("h3")
-            .text()
-            .trim();
-        const parentId = $(this)
-            .closest(".commented-user-wrp")
-            .data("comment-id");
+        const parentComment = $(this).closest(".commented-user-wrp"); // Find the closest comment wrapper
+        const parentName = parentComment.find("h3").text().trim();
+        const parentId = parentComment.data("comment-id");
 
         // Debugging information
         console.log("Parent Wrapper:", parentWrapper);
         console.log("Parent Name:", parentName);
         console.log("Parent ID:", parentId);
 
+        if (!parentId) {
+            console.error("Comment ID not found!");
+            return;
+        }
+
         // Set the active class on the currently selected comment
         $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
-        $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
+        parentComment.addClass("active"); // Add 'active' to the current comment
 
-        // Find the comment box inside the parent wrapper and insert the username
-        const commentBox = parentWrapper.find(".post_comment");
+        // Find the comment box inside the parent wrapper
+        const commentBox = parentWrapper.find("#post_comment"); // Ensure it's targeting the correct ID
         if (!commentBox.length) {
             console.error("Comment input field not found!");
             return;
         }
+
+        // Set the parent comment ID and insert the '@username' into the comment box
         $("#parent_comment_id").val(parentId);
-        // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
+
 
     // Handle reply button click (when replying to a comment)
 });
