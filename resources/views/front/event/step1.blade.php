@@ -185,6 +185,7 @@
                         <div class="add-activity-schedule" style="{{ $style }}">
                             <h5 class="step_1_activity">
                                 @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
+                            <input type="hidden" id="TotalSedulare" value="{{ count($eventDetail['events_schedule_list']->data) }}">
                                     <p id="isolddata"> {{ count($eventDetail['events_schedule_list']->data) }}
                                         Activity </p>
                                 @else
