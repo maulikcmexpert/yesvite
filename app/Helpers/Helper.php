@@ -1801,7 +1801,7 @@ function createShortUrl($longUrl)
             'short_url_key' => $shortUrlKey,
             'expires_at' => now()->addDays(90) // Expire after 90 days
         ]);
-        return "https://yesvite.com/invite/{$shortUrlKey}";
+        //return "https://yesvite.com/invite/{$shortUrlKey}";
         // $base_url=config('app.url');
         $base_url = url('/');
         // return "{$base_url}/invite/{$shortUrlKey}";
