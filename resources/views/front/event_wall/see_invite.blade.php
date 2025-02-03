@@ -1,0 +1,25 @@
+<div class="invite-contact yes-contact">
+                <a href="#" class="invite-img">
+                                            <img src="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" alt="invite-img">
+                                    </a>
+                <div class="w-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest" data-profile="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" data-search="fitsz Simon">
+                            fitsz Simon</a>
+                    </div>
+                    <div class="d-flex align-items-center mt-1">
+                        <div class="invite-mail-data faild-content">
+                            <div class="d-flex align-items-center">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.91797 11.9577H4.08464C2.33464 11.9577 1.16797 11.0827 1.16797 9.04102V4.95768C1.16797 2.91602 2.33464 2.04102 4.08464 2.04102H9.91797C11.668 2.04102 12.8346 2.91602 12.8346 4.95768V9.04102C12.8346 11.0827 11.668 11.9577 9.91797 11.9577Z" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                                                    <h6>fitsz@yopmail.com</h6>
+                                                            </div>
+                        </div>
+                        <!-- <div class="ms-auto">
+                            <input class="form-check-input failed-checkout contact-checkbox email-checkbox" type="checkbox" data-id="100" data-name="fitsz" data-prefer="email" data-last="Simon" data-email="fitsz@yopmail.com" data-profile="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" data-phone="" data-type="email" checked="" disabled="">
+                        </div> -->
+                    </div>
+                                    </div>
+            </div>
