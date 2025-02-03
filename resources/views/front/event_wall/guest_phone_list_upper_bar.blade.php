@@ -12,7 +12,7 @@ if($counter > 4){
 break;
 }
 @endphp
-    <div class="guest-users" data-id="{{$guest_user['id']}}">
+    <div class="guest-user-phone" data-id="{{$guest_user['id']}}">
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
                                     <img src="{{ $guest_user['profile'] }}" alt="user-img">
@@ -57,9 +57,9 @@ break;
 @php
 $counter = count($listing) - 4;
 @endphp
-<a href="#" class="guest-user d-block yesvite add_guest_seeall">
+<a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email" data-count="1">+{{$counter}}</span>
+                        <span class="number" id="total-selected-phone" data-count="1">+{{$counter}}</span>
                         <span class="content">Total</span>
                  </div>
                  <h6>Sell all</h6>
