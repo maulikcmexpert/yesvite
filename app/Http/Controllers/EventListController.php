@@ -2709,7 +2709,7 @@ if ($rsvpSent != null) {
             $yesvite_users_data = [];
             $yesvite_phone_data = [];
             $is_phone=$request->is_phone;
-            // dd($new_added_user);
+            dd($yesvite_all_invite);
             if(!empty($new_added_user)){
             foreach ($new_added_user as $sesionuser) {
                 // Try fetching the user from the User table
@@ -2754,7 +2754,7 @@ if ($rsvpSent != null) {
             }
         }
                         // dd($yesvite_all_invite);
-        if(!empty($yesvite_users_data)){
+        if($request->contact=="yesvite"){
             return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"0"]);
         }else{
             return response()->json(['view' => view( 'front.event_wall.guest_phone_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"1"]);
