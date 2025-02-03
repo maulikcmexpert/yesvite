@@ -6865,9 +6865,13 @@ $(document).on("click", ".invite_group_member", function () {
                     id: id,
                 });
             }
-            delete_invited_user(id,'0');
+            // delete_invited_user(id,'0');
+            $("#user_tel-" + id).remove();
+            $(".user_id_tel-" + id).remove();
+            $(".user_id_tel-" + id).remove();
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
+            $(".user_id-" + id).remove()
         }
     });
 
