@@ -784,7 +784,7 @@ $(document).ready(function () {
 
         function storeAddNewGuest(id,status){
             $.ajax({
-                url: `${id}event/store_add_new_guest`,
+                url: base_url+"event_guest/store_add_new_guest",
                 type: 'GET',        
                 data: {status:status,user_id:id},          
                 success: function (response) { 
