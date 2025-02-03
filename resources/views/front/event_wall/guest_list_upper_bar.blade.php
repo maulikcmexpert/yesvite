@@ -9,7 +9,7 @@
     <div class="guest-users" data-id="{{$guest_user['id']}}">
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
-                                    <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                    <img src="{{ $guest_user['profile'] }}" alt="user-img">
                             @else
                                     @php
                                         $firstInitial = !empty($guest_user['first_name'])
@@ -51,7 +51,7 @@
     <div class="guest-users" data-id="{{$guest_user['user_id']}}">
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
-                                    <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                    <img src="{{ $guest_user['profile']}}" alt="user-img">
                             @else
                                     @php
                                         $firstInitial = !empty($guest_user['first_name'])
