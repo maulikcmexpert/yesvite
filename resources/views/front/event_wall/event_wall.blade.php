@@ -1,4 +1,4 @@
-{{dd($postList  )}}
+{{-- {{dd($postList  )}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -486,37 +486,9 @@
                                                                             <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-id="{{ $post['id'] }} "
-                                                                            data-user-id="{{ $login_user_id }}"> @if ($post['self_reaction'] == '\u{2764}')
-                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
-                                                                        @elseif($post['self_reaction'] == '\u{1F494}')
+                                                                            data-user-id="{{ $login_user_id }}">
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                                        @elseif($post['self_reaction'] == '\u{1F44D}')
-                                                                            <i id="show_Emoji"> <img
-                                                                                    src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                                    loading="lazy" alt="Thumb Emoji"
-                                                                                    class="emoji" data-emoji="👍"
-                                                                                    data-unicode="\\u{1F44D}"></i>
-                                                                        @elseif($post['self_reaction'] == '\u{1F604}')
-                                                                            <i id="show_Emoji"> <img
-                                                                                    src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                                    loading="lazy" alt="Smiley Emoji"
-                                                                                    class="emoji" data-emoji="😊"
-                                                                                    data-unicode="\\u{1F604}"></i>
-                                                                        @elseif($post['self_reaction'] == '\u{1F60D}')
-                                                                            <i id="show_Emoji"> <img
-                                                                                    src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                                    loading="lazy" alt="Eye Heart Emoji"
-                                                                                    class="emoji" data-emoji="😍"
-                                                                                    data-unicode="\\u{1F60D}"></i>
-                                                                        @elseif($post['self_reaction'] == '\u{1F44F}')
-                                                                            <i id="show_Emoji"> <img
-                                                                                    src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                                    loading="lazy" alt="Clap Emoji"
-                                                                                    class="emoji" data-emoji="👏"
-                                                                                    data-unicode="\\u{1F44F}"></i>
-                                                                        @else
-                                                                            <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                                        @endif</button>
+                                                                      </button>
                                                                         </div>
                                                                     </div>
                                                                     <div class="commented-user-content">
