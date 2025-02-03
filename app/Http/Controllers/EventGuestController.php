@@ -340,29 +340,31 @@ class EventGuestController extends Controller
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
 
-                $invite_view_percent = EventInvitedUser::whereHas('user', function ($query) {
+                $invite_view_percent = EventInvitedUser::
+                // whereHas('user', function ($query) {
 
-                    // $query->where('app_user', '1');
-                })->where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
+                //     // $query->where('app_user', '1');
+                // })->
+                where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
 
             $today_invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
-                $today_invite_view_percent =   EventInvitedUser::whereHas('user', function ($query) {
+                $today_invite_view_percent =   EventInvitedUser::
+                // whereHas('user', function ($query) {
 
-                    // $query->where('app_user', '1');
-                })->where(['event_id' => $eventDetail->id, 'read' => '1' ,'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
+                //     // $query->where('app_user', '1');
+                // })->
+                where(['event_id' => $eventDetail->id, 'read' => '1' ,'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
 
             $eventAboutHost['rsvp_rate'] = $eventattending;
 
-            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0)
-            ? number_format($eventattending / $totalEnvitedUser * 100, 2) . "%"
-            : "0.00%";
+            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
             $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
