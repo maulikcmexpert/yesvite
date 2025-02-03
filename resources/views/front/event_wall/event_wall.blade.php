@@ -527,7 +527,7 @@
                                                                             class="position-relative d-flex align-items-center gap-2">
                                                                             <button class="posts-card-like-btn" id="likeButton"
                                                                             data-event-id="{{ $event }}"
-                                                                            data-event-post-id="{{ $post['id'] }} "
+                                                                            data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                       </button>

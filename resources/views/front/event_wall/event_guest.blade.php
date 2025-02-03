@@ -296,8 +296,14 @@
                                                                     <a href="#"
                                                                         class="guest-name">{{ $guest['first_name'] }}
                                                                         {{ $guest['last_name'] }}</a>
-                                                                    <span
-                                                                        class="guest-email">{{ $guest['email'] }}</span>
+
+                                                                     @if($guest['prefer_by']=="email")
+                                                                         <span class="guest-email">{{ $guest['email'] }}</span>
+                                                                     @else
+                                                                        <span class="guest-email">{{ $guest['phone_number'] }}</span>
+                                                                    @endif
+
+                                                                     
                                                                 </div>
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
