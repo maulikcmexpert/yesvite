@@ -421,11 +421,11 @@
                                                         <ul class="top-level-comments">
 
 
-                                                            @foreach ($post['post_comment'] as $comment)
+                                                            @foreach ($post['post_comment'] as $key => $comment)
                                                                 <li class="commented-user-wrp"
                                                                     data-comment-id="{{ $comment['id'] }}">
                                                                     <input type="hidden" id="parent_comment_id"
-                                                                        value="{{ $comment['id'] }}">
+                                                                        value="null">
                                                                     <input type="hidden" id="reply_comment_id"
                                                                         value="">
                                                                     <div class="commented-user-head">
