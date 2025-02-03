@@ -101,9 +101,9 @@ $(document).ready(function () {
 
         // AJAX call to update the like state
         const eventId = button.data("event-id");
-        const eventPostId = button.data("event-post-id");
+        const eventPostCommentId = button.data("event-post-comment-id");
         $.ajax({
-            url: base_url + "event_wall/userPostLikeDislike",
+            url: base_url + "event_wall/userPostCommentReplyReaction",
             method: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -111,7 +111,7 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify({
                 event_id: eventId,
-                event_post_id: eventPostId,
+                event_post_comment_id: eventPostCommentId,
                 reaction: reaction,
             }),
             success: function (response) {
