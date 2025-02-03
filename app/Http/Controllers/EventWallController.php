@@ -354,11 +354,11 @@ foreach ($polls as $poll) {
         // if (count($results) != 0) {
         if ($eventPostList != "") {
             foreach ($eventPostList as  $value) {
-                $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->$user->id);
+                $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
                 $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event, 'event_post_id' => $value->id])->first();
                 // dd($postControl);
-                $count_kids_adult = EventInvitedUser::where(['event_id' => $event, 'user_id' => $value->user->id])
+                $count_kids_adult = EventInvitedUser::where(['event_id' => $event, 'user_id' => $user->id])
                     ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                     ->first();
                 if ($postControl != null) {
@@ -388,11 +388,11 @@ foreach ($polls as $poll) {
                     $adults = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                 }
                 $postsNormalDetail['id'] =  $value->id;
-                $postsNormalDetail['user_id'] =  $value->user->id;
+                $postsNormalDetail['user_id'] =  $user->id;
                 // $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-                $postsNormalDetail['is_host'] =  ($value->user->id == $eventCreator->user_id) ? 1 : 0;
+                $postsNormalDetail['is_host'] =  ($user->id == $eventCreator->user_id) ? 1 : 0;
                 $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;

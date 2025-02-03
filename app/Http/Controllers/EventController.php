@@ -3028,6 +3028,7 @@ class EventController extends BaseController
         }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+        $rsvpdateObj = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date);
 
 
         $startDateFormat = "";
@@ -3036,14 +3037,18 @@ class EventController extends BaseController
             $startDateFormat = $startDateObj->format('Y-m-d');
             $endDateFormat = $endDateObj->format('Y-m-d');
         }
-
+        // dd($request->rsvp_by_date);
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
             // dd($carbonDate);
             // if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
             //     $rsvp_by_date = $request->rsvp_by_date;
             // } else {
-            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            if($rsvpdateObj){
+                $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            }else{
+                $rsvp_by_date = $request->rsvp_by_date;     
+            }
             // }
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
 
