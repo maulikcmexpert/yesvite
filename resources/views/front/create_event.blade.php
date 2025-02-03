@@ -153,7 +153,13 @@
                     </svg>
 
                 </a>
+                @if (isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save'] == "0"){}
+                <span>Edit Event</span>
+                    
+                @else
+                    
                 <span>Create New Event</span>
+                @endif
             </div>
             <a class="navbar-brand mobile-header-logo" href="#">
                 <svg width="129" height="36" viewBox="0 0 129 36" fill="none"
