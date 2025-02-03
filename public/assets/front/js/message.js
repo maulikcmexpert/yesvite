@@ -4623,7 +4623,9 @@ function applyStyles() {
             $(".chat-lists").css("display", "none");
         });
         $(document).on("click", "#backtomsg-btn", function () {
-            // $(".msg-lists").html("");
+            $(".chatbox").css("display", "none");
+            $(".chat-lists").css("display", "block");
+
             $(".selected-user-name").html("Start new chat");
             updateProfileImg("", "Start New");
             $(".conversationId").attr("conversationid", "");
