@@ -901,6 +901,10 @@ class EventGuestController extends Controller
     }
 
     public function see_all_invite_yesvite(Request $request){
-        dd($request);
+    
+        $yesvite_all_invite=getInvitedUsersList($request->event_id);
+        
+        dd($yesvite_all_invite);
+
     }
 }

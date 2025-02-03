@@ -1586,18 +1586,18 @@ class EventWallController extends Controller
 
                 $checkcommentReactionData = EventPostCommentReaction::with('event_post_comment')->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->first();
 
-                $notificationParam = [
+                // $notificationParam = [
 
-                    'sender_id' => $user->id,
+                //     'sender_id' => $user->id,
 
-                    'event_id' => $checkcommentReactionData->event_post_comment->event_id,
+                //     'event_id' => $checkcommentReactionData->event_post_comment->event_id,
 
-                    'post_id' => $checkcommentReactionData->event_post_comment->event_post_id,
-                    'comment_id' => $request['event_post_comment_id']
+                //     'post_id' => $checkcommentReactionData->event_post_comment->event_post_id,
+                //     'comment_id' => $request['event_post_comment_id']
 
-                ];
+                // ];
 
-                sendNotification('reply_comment_reaction', $notificationParam);
+                // sendNotification('reply_comment_reaction', $notificationParam);
                 $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
 
                 return response()->json(['status' => 1, 'message' => "Post comment like by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
