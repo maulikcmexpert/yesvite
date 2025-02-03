@@ -22,9 +22,8 @@ $(document).on('click', '.edit_rsvp_guest', function () {
                 $('#editrsvp3 .rsvp-img img').css('display','block');
                 $('#editrsvp3 .rsvp-img img').attr('src', response.profile);
                 $('#editrsvp3 .rsvp-img h5').css('display','none');
-
             }else{
-                $('#editrsvp3 .rsvp-img img').css('display','block');
+                $('#editrsvp3  .rsvp-img h5').css('display','block');
                 $('#editrsvp3 h5').text(`${response.firstname} ${response.lastname}`);
             }
             $('#editrsvp3 .adultcount').val(response.adults || 0);
