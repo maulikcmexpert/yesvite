@@ -909,12 +909,12 @@ class EventGuestController extends Controller
 
         // dd($new_added_user);
         if(!empty($new_added_user)){
-        foreach ($new_added_user as $user) {
+        foreach ($new_added_user as $sesionuser) {
             // Try fetching the user from the User table
-            $user = User::find($user['user_id']);
-            $prefer_by=$user['prefer_by'];
+            $user = User::find($sesionuser['user_id']);
+            $prefer_by=$sesionuser['prefer_by'];
 
-            if ($user) {
+            if ($sesionuser) {
                 // If the user exists, add data to the $users_data array
                 $users_data[] = [
                     'user_id' => $user->id,
