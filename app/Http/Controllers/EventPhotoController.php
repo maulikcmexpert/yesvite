@@ -377,7 +377,7 @@ class EventPhotoController extends Controller
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
                 $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event, 'event_post_id' => $value->id])->first();
                 // dd($postControl);
-                $count_kids_adult = EventInvitedUser::where(['event_id' => $event, 'user_id' => $value->user->id])
+                $count_kids_adult = EventInvitedUser::where(['event_id' => $event, 'user_id' => $user->id])
                     ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
                     ->first();
                 if ($postControl != null) {
