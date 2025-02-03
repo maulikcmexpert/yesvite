@@ -681,7 +681,7 @@ function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(element.left),
                             top: parseFloat(element.top),
-                            width: element.width || textWidth, // Default width if not provided
+                            width: textWidth, // Default width if not provided
                             fontSize: parseFloat(element.fontSize),
                             fill: element.fill,
                             fontFamily: element.fontFamily,
