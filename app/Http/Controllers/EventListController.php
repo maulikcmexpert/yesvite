@@ -2681,6 +2681,7 @@ if ($rsvpSent != null) {
         $userData = session('add_guest_user_data', []);
 
         if ($check_status == 1) {
+
             // Check if user already exists in session
             $exists = false;
             foreach ($userData as &$user) {
@@ -2696,7 +2697,10 @@ if ($rsvpSent != null) {
                     'prefer_by' => $prefer_by
                 ];
             }
+            // dd($userData);
         } else {
+
+            dd($userData,0);
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
         }
     
