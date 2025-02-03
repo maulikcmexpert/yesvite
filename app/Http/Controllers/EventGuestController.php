@@ -907,7 +907,7 @@ class EventGuestController extends Controller
         $new_added_user=session()->get('add_guest_user_id');
         $users_data = [];
 
-        dd($new_added_user);
+        // dd($new_added_user);
         if(!empty($new_added_user)){
         foreach ($new_added_user as $user) {
             // Try fetching the user from the User table
@@ -946,6 +946,9 @@ class EventGuestController extends Controller
             }        
             
         }
+
+                dd($users_data);
+
     }
         return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','users_data'))->render()]);
 
