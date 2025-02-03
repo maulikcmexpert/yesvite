@@ -107,7 +107,7 @@
 @endif
 
 @if(!empty($yesvite_phone_data))
-    @foreach ($yesvite_users_data as $user)
+    @foreach ($yesvite_phone_data as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
                     @if ($user['profile'] != '')
