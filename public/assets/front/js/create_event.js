@@ -4699,6 +4699,10 @@ function edit_design_modal() {
 
 var design_inner_image = "";
 async function saveDesignData(direct = false) {
+    if (typeof canvas == "undefined") {
+        console.log("no canvas found");
+        return;
+    }
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -9145,16 +9149,18 @@ if (category != 0) {
     potluck_cateogry_item_count();
 }
 
-$(document).on('blur change click', '#event-name ,#event-date, #start-time', function() {
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-   
-    if (event_name !== "" && event_date !== "" && start_time !== "") {
-        $(".guestBtn").attr('style', 'color: black !important;');
-    } else {
-        $(".guestBtn").attr('style', 'color: #b5b8bf !important;');
+$(document).on(
+    "blur change click",
+    "#event-name ,#event-date, #start-time",
+    function () {
+        var event_name = $("#event-name").val();
+        var event_date = $("#event-date").val();
+        var start_time = $("#start-time").val();
+
+        if (event_name !== "" && event_date !== "" && start_time !== "") {
+            $(".guestBtn").attr("style", "color: black !important;");
+        } else {
+            $(".guestBtn").attr("style", "color: #b5b8bf !important;");
+        }
     }
-});
-
-
+);
