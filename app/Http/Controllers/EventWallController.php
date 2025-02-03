@@ -122,8 +122,6 @@ class EventWallController extends Controller
             ->where(['event_id' => $event])
             ->get();
 
-
-
         $pollsData = [];
 
         foreach ($polls as $poll) {
@@ -131,15 +129,15 @@ class EventWallController extends Controller
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
             $post_time = setpostTime($poll->created_at);
 
-            // Get the poll duration and check if it is expired for each poll
+            // Get the poll duration and check if it is expired
             $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
             $isExpired = ($pollDuration == "");
 
             // Fetch reaction list for the post (poll)
-            $reactionList = getOnlyReaction($poll->event_post_id); // Corrected from $value->id to $poll->event_post_id
-            $totalComment = $poll->event_post_comment_count;  // Assuming this is available in the `EventPostPoll` model
-            $totalLikes = $poll->event_post_reaction_count;    // As
-            // Construct the poll data with the reaction list
+            $reactionList = getOnlyReaction($poll->event_post_id);
+            $totalLikes = $poll->event_post_reaction_count;
+
+            // Prepare the poll data
             $pollData = [
                 'poll_id' => $poll->id,
                 'event_post_id' => $poll->event_post_id,
@@ -149,13 +147,12 @@ class EventWallController extends Controller
                 'is_expired' => $isExpired,
                 'rsvp_status' => (string)$checkUserRsvp ?? "",
                 'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
-                'reactionList' => $reactionList, // Include the reaction list under pollData
+                'reactionList' => $reactionList,
                 'post_time' => $post_time,
-                'total_comment' => $totalComment,  // Add total comment count
                 'total_likes' => $totalLikes,
                 'total_poll_vote' => $poll->user_poll_data_count,
                 'poll_options' => [],
-
+                'post_comment' => [] // Initialize the comment list here
             ];
 
             // Loop through each poll's options and calculate vote percentages
@@ -169,13 +166,94 @@ class EventWallController extends Controller
                     'total_vote_percentage' => $totalVotes > 0
                         ? round(($optionTotalVotes / $totalVotes) * 100) . '%'
                         : '0%',
-                    'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id), // This should return true/false based on whether the user has voted for this option
+                    'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id),
                 ];
             }
 
-            // Add the poll data to the polls data array
+            // Loop through comments of the poll
+            $postCommentList = [];
+            $postComment = getComments($poll->event_post_id); // Corrected from $value->id to $poll->event_post_id
+
+            foreach ($postComment as $commentVal) {
+                $commentInfo = [
+                    'id' => $commentVal->id,
+                    'event_post_id' => $commentVal->event_post_id,
+                    'comment' => $commentVal->comment_text,
+                    'user_id' => $commentVal->user_id,
+                    'username' => $commentVal->user->firstname . ' ' . $commentVal->user->lastname,
+                    'profile' => (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "",
+                    'location' => $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "",
+                    'comment_total_likes' => $commentVal->post_comment_reaction_count,
+                    'is_like' => checkUserIsLike($commentVal->id, $user->id),
+                    'total_replies' => $commentVal->replies_count,
+                    'created_at' => $commentVal->created_at,
+                    'posttime' => setpostTime($commentVal->created_at),
+                    'comment_replies' => []
+                ];
+
+                // Handle replies
+                foreach ($commentVal->replies as $reply) {
+                    $mainParentId = (new EventPostComment())->getMainParentId($reply->parent_comment_id);
+
+                    $replyCommentInfo = [
+                        'id' => $reply->id,
+                        'event_post_id' => $reply->event_post_id,
+                        'main_comment_id' => $reply->main_parent_comment_id,
+                        'comment' => $reply->comment_text,
+                        'user_id' => $reply->user_id,
+                        'username' => $reply->user->firstname . ' ' . $reply->user->lastname,
+                        'profile' => (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "",
+                        'location' => $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "",
+                        'comment_total_likes' => $reply->post_comment_reaction_count,
+                        'is_like' => checkUserIsLike($reply->id, $user->id),
+                        'total_replies' => $reply->replies_count,
+                        'created_at' => $reply->created_at,
+                        'posttime' => setpostTime($reply->created_at),
+                    ];
+
+                    // Add replies to the comment
+                    $commentInfo['comment_replies'][] = $replyCommentInfo;
+
+                    // Fetch child replies
+                    $replyChildComment =  EventPostComment::with(['user'])
+                        ->withcount('post_comment_reaction', 'replies')
+                        ->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+
+                    foreach ($replyChildComment as $childReplyVal) {
+                        $commentChildReply = [
+                            'id' => $childReplyVal->id,
+                            'event_post_id' => $childReplyVal->event_post_id,
+                            'main_comment_id' => $childReplyVal->main_parent_comment_id,
+                            'comment' => $childReplyVal->comment_text,
+                            'user_id' => $childReplyVal->user_id,
+                            'username' => $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname,
+                            'profile' => (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "",
+                            'location' => (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "",
+                            'comment_total_likes' => $childReplyVal->post_comment_reaction_count,
+                            'is_like' => checkUserIsLike($childReplyVal->id, $user->id),
+                            'total_replies' => $totalReply,
+                            'posttime' => setpostTime($childReplyVal->created_at),
+                            'created_at' => $childReplyVal->created_at,
+                        ];
+
+                        // Add child replies to the main comment
+                        $commentInfo['comment_replies'][] = $commentChildReply;
+                    }
+                }
+
+                // Add the comment to the list
+                $postCommentList[] = $commentInfo;
+            }
+
+            // Add comments to the poll data
+            $pollData['post_comment'] = $postCommentList;
+
+            // Add the poll data to the final polls data array
             $pollsData[] = $pollData;
         }
+
         $wallData['owner_stories'] = [];
 
         $eventLoginUserStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
@@ -565,7 +643,7 @@ class EventWallController extends Controller
         $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
         $eventDetails['event_name'] = $eventDetail->event_name;
         $eventDetails['hosted_by'] = $eventDetail->hosted_by;
-        $eventDetails['total_event_comments']=$event_comments;
+        $eventDetails['total_event_comments'] = $event_comments;
         $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
         $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
         $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
@@ -702,7 +780,7 @@ class EventWallController extends Controller
                 //     ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
                 //     // ->where('user_id', '!=', $user->id)
                 //     ->get();
-                $guestData=getInvitedUsersList($eventDetail->id);
+                $guestData = getInvitedUsersList($eventDetail->id);
 
 
                 $eventData[] = "Number of guests : " . $numberOfGuest;
@@ -1569,50 +1647,48 @@ class EventWallController extends Controller
 
         $user  = Auth::guard('web')->user();
 
-            $checkcommentReaction = EventPostCommentReaction::with(['event_post_comment'])->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->count();
+        $checkcommentReaction = EventPostCommentReaction::with(['event_post_comment'])->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->count();
 
-            if ($checkcommentReaction == 0) {
-                $post_comment_reaction = new EventPostCommentReaction;
+        if ($checkcommentReaction == 0) {
+            $post_comment_reaction = new EventPostCommentReaction;
 
-                $post_comment_reaction->event_post_comment_id = $request['event_post_comment_id'];
+            $post_comment_reaction->event_post_comment_id = $request['event_post_comment_id'];
 
-                $post_comment_reaction->user_id = $user->id;
+            $post_comment_reaction->user_id = $user->id;
 
-                $post_comment_reaction->reaction = $request['reaction'];
+            $post_comment_reaction->reaction = $request['reaction'];
 
-                $post_comment_reaction->save();
-
-
-
-                $checkcommentReactionData = EventPostCommentReaction::with('event_post_comment')->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->first();
-
-                // $notificationParam = [
-
-                //     'sender_id' => $user->id,
-
-                //     'event_id' => $checkcommentReactionData->event_post_comment->event_id,
-
-                //     'post_id' => $checkcommentReactionData->event_post_comment->event_post_id,
-                //     'comment_id' => $request['event_post_comment_id']
-
-                // ];
-
-                // sendNotification('reply_comment_reaction', $notificationParam);
-                $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
-
-                return response()->json(['status' => 1, 'message' => "Post comment like by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
-            } else {
-
-                $checkcommentReaction = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id]);
-
-                $checkcommentReaction->delete();
+            $post_comment_reaction->save();
 
 
-                $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
-                return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
-            }
+
+            $checkcommentReactionData = EventPostCommentReaction::with('event_post_comment')->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->first();
+
+            // $notificationParam = [
+
+            //     'sender_id' => $user->id,
+
+            //     'event_id' => $checkcommentReactionData->event_post_comment->event_id,
+
+            //     'post_id' => $checkcommentReactionData->event_post_comment->event_post_id,
+            //     'comment_id' => $request['event_post_comment_id']
+
+            // ];
+
+            // sendNotification('reply_comment_reaction', $notificationParam);
+            $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
+
+            return response()->json(['status' => 1, 'message' => "Post comment like by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
+        } else {
+
+            $checkcommentReaction = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id]);
+
+            $checkcommentReaction->delete();
 
 
+            $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
+            return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
+        }
     }
     public function userPostComment(Request $request)
 
@@ -1941,22 +2017,22 @@ class EventWallController extends Controller
             $emails = $getAllContacts->pluck('email')->toArray();
         }
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
-        ->where('id', '!=', $id)
-        ->where(['app_user' => '1'])
-        ->whereIn('email', $emails)
-        ->orderBy('firstname')
-        ->when(!empty($limit), function ($query) use ($limit, $offset) {
-                    $query->limit($limit)
-                        ->offset($offset); // Pagination
-                })
-                ->when(!empty($searchUser), function ($query) use ($searchUser) {
-                    $query->where(function ($q) use ($searchUser) {
-                        $q->where('firstname', 'LIKE', "%{$searchUser}%")
-                            ->orWhere('lastname', 'LIKE', "%{$searchUser}%"); // Search by name
-                    });
-                })
-                ->orderBy('firstname', 'asc') // Order results by first name
-                ->get();
+            ->where('id', '!=', $id)
+            ->where(['app_user' => '1'])
+            ->whereIn('email', $emails)
+            ->orderBy('firstname')
+            ->when(!empty($limit), function ($query) use ($limit, $offset) {
+                $query->limit($limit)
+                    ->offset($offset); // Pagination
+            })
+            ->when(!empty($searchUser), function ($query) use ($searchUser) {
+                $query->where(function ($q) use ($searchUser) {
+                    $q->where('firstname', 'LIKE', "%{$searchUser}%")
+                        ->orWhere('lastname', 'LIKE', "%{$searchUser}%"); // Search by name
+                });
+            })
+            ->orderBy('firstname', 'asc') // Order results by first name
+            ->get();
         $yesviteUsers = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
@@ -2378,7 +2454,6 @@ class EventWallController extends Controller
                         case 'comments':
                             $query->orWhere('post_type', '0');
                             break;
-
                     }
                 }
             });
