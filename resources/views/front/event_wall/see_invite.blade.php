@@ -48,8 +48,8 @@
     @endforeach
 @endif
 
-@if(!empty($users_data))
-    @foreach ($users_data as $user)
+@if(!empty($yesvite_users_data))
+    @foreach ($yesvite_users_data as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
                     @if ($user['profile'] != '')
