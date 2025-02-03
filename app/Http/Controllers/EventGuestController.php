@@ -704,7 +704,10 @@ class EventGuestController extends Controller
                 'firstname' => (!empty($guest->contact_sync->firstName) && $guest->contact_sync->firstName != NULL) ? $guest->contact_sync->firstName : "",
                 'lastname' => (!empty($guest->contact_sync->lastName) && $guest->contact_sync->lastName != NULL) ? $guest->contact_sync->lastName : "",
                 'email' =>  (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "",
-                'profile' =>(!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "" ,
+                // 'profile' =>(!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "" ,
+                'profile' => (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($guestVal->contact_sync->photo))) 
+                    ? asset('storage/profile/' . $guestVal->contact_sync->photo) 
+                    : "",
                 'adults' => $guest->adults,
                 'kids' => $guest->kids,
                 'rsvp_status' => $guest->rsvp_status,
