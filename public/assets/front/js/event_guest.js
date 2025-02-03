@@ -7,6 +7,10 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     const guestId = $(this).data('guest-id');
     const is_sync = $(this).data('is_sync');
     console.log('Guest ID:', guestId);
+    $('#editrsvp .rsvp-img img').attr('src',"");
+    $('#editrsvp h5').text("");
+    $('#editrsvp .adult-count').val("");
+    $('#editrsvp .kid-count').val("");
     $.ajax({
         url: base_url + "event_guest/fetch_guest/" + guestId+"/"+is_sync, // Fetch guest data
         method: 'GET',
