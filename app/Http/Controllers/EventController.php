@@ -569,6 +569,7 @@ class EventController extends BaseController
         // dd($potluck);
 
         Session::forget('desgin');
+        Session::forget('custom_image');
         Session::forget('shape_image');
         Session::forget('desgin_slider');
         $user_id =  Auth::guard('web')->user()->id;
@@ -3056,6 +3057,7 @@ class EventController extends BaseController
         // dd($request->slider_images);
         Session::forget('desgin');
         Session::forget('shape_image');
+        Session::forget('custom_image');
         Session::forget('desgin_slider');
 
         // dd(session('user_ids'),session('contact_ids'));
