@@ -371,6 +371,7 @@
         @foreach ($phone_contact as $contact)
             @php
                 // dd(1);
+                $profile=(!empty($contact->photo) && $contact->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact->photo))) ?? '';
                 $email_cont_checked = '';
                 $phone_cont_checked = '';
                 $cont_p_disabled='';
@@ -406,7 +407,7 @@
             @endphp
             <div class="invite-contact phone-contact">
                 <a href="#" class="invite-img">
-                    @if (!empty($contact->photo))
+                    @if (!empty($profile))
                         <img src="{{ $contact->photo }}" alt="invite-img">
                     @else
                         @php
