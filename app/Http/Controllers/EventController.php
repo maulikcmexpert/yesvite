@@ -1370,6 +1370,7 @@ class EventController extends BaseController
 
     public function removeUserId(Request $request)
     {
+      
         $is_contact = $request->input('is_contact');
         if ($is_contact == '1') {
             $userIds = session()->get('contact_ids');
@@ -1387,6 +1388,7 @@ class EventController extends BaseController
         } else {
             $userIds = session()->get('user_ids');
             $userId = $request->input('user_id');
+            dD($userIds,$userId);
             foreach ($userIds as $key => $value) {
                 if ($value['id'] == $userId) {
                     unset($userIds[$key]);
