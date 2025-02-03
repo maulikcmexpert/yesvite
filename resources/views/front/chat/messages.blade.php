@@ -928,14 +928,17 @@ use Carbon\Carbon;
         <div class="modal-content">
             <form name="chatreport" id="chatreport" action="{{route('chatReport')}}" method="post">
                 @csrf
-                <input name="report_conversation_id" id="report_conversation_id"/>
-                <input name="to_be_reported_user_id" id="to_be_reported_user_id"/>
+                <input type="hidden" name="report_conversation_id" id="report_conversation_id"/>
+                <input type="hidden" name="to_be_reported_user_id" id="to_be_reported_user_id"/>
                 <div class="modal-header">
-                    <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
                 </div>
                 <div class="modal-body">
-                    <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
+                    
                     <div class="submit-blocks">
                         <div class="report-input-wrp">
                             <span class="active">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
