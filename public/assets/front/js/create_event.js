@@ -8454,6 +8454,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
 function updateEventData() {
     eventData.isdraft = "0";
+    var data = eventData;
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -8502,7 +8503,6 @@ $(document).on("click", ".edit_checkout", async function (e) {
 
     eventData.isPhonecontact = isPhonecontact;
     eventData.IsPotluck = IsPotluck;
-    var data = eventData;
 
     $("#loader").css("display", "block");
     // $(".main-content-wrp").addClass("blurred");
