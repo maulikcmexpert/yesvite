@@ -511,15 +511,16 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&& $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null )
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null  && $eventDetails['logitude']!=0 )
                                                 @php
-                                                    $latitude = !empty($eventDetails['latitude'])
-                                                        ? $eventDetails['latitude']
-                                                        : '39.8283';
+                                                   $latitude = !empty($eventDetails['latitude'])
+    ? $eventDetails['latitude']
+    : '39.8283'; // Default latitude for the USA
 
-                                                    $longitude = !empty($eventDetails['logitude'])
-                                                        ? $eventDetails['logitude']
-                                                        : '-98.5795';
+$longitude = !empty($eventDetails['longitude'])
+    ? $eventDetails['logitude']
+    : '-98.5795'; // Default longitude for the USA
+
                                                 @endphp
 
                                                 <iframe
