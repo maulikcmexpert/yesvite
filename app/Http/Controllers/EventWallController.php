@@ -354,7 +354,7 @@ foreach ($polls as $poll) {
         // if (count($results) != 0) {
         if ($eventPostList != "") {
             foreach ($eventPostList as  $value) {
-                $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
+                $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
                 $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event, 'event_post_id' => $value->id])->first();
                 // dd($postControl);
