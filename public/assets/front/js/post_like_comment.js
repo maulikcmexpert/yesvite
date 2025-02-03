@@ -864,10 +864,11 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             profileImage =generateProfileImage(first_name, last_name);
         }
-        const $modalBody = $('.selected-contacts-list');
-       
         var upper_view=$('.selected-contacts-list .guest-user').length;
         alert(upper_view);
+        const $modalBody = $('.selected-contacts-list');
+       
+       
 
         const contactHtml = `
             <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
