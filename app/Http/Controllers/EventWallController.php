@@ -388,7 +388,7 @@ foreach ($polls as $poll) {
                     $adults = isset($count_kids_adult['adults']) ? $count_kids_adult['adults'] : 0;
                 }
                 $postsNormalDetail['id'] =  $value->id;
-                $postsNormalDetail['user_id'] =  $value->user->id;
+                $postsNormalDetail['user_id'] =  $user->id;
                 // $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
