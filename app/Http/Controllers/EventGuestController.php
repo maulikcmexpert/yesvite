@@ -375,11 +375,11 @@ class EventGuestController extends Controller
             // $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
             $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) 
-            ? round(($eventattending / $totalEnvitedUser) * 100, 2) . "%" 
+            ? round(($eventattending / $totalEnvitedUser) * 100) . "%" 
             : "0%";
 
 $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) 
-        ? round(($todayrsvprate / $totalEnvitedUser) * 100, 2) . "%" 
+        ? round(($todayrsvprate / $totalEnvitedUser) * 100) . "%" 
         : "0%";
 
             $eventInfo['host_view'] = $eventAboutHost;
