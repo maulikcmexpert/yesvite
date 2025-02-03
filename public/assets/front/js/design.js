@@ -42,6 +42,7 @@ $(document).ready(function () {
                     image = base_url + "storage/event_images/" + response.image;
                     eventData.cutome_image = response.image;
                     eventData.image = response.image;
+                    temp_id = null;
                     dbJson = null;
                     loadAgain();
                 } else {

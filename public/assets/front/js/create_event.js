@@ -6872,7 +6872,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user_id_tel-" + id).remove();
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
-            $(".user_id-" + id).remove()
+            $(".user_id-" + id).remove();
         }
     });
 
