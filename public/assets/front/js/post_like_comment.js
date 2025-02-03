@@ -94,7 +94,7 @@ $(document).ready(function () {
         if (isLiked) {
             button.removeClass("liked");
             mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
-            replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+           replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
         } else {
             button.addClass("liked");
             mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
