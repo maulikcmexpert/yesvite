@@ -326,6 +326,7 @@ $(document).on('click','.add_guest_seeall',function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
         },
         success: function (response) {
+            console.log(response);
             // if (response.status === 1) {
             //     toastr.success(response.message);
             //     // // Find the guest container by guestId and remove it from the DOM
