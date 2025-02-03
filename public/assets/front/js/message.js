@@ -1826,6 +1826,7 @@ function processTimers() {
 
     messages.forEach((msg) => {
         let timeElement = msg.querySelector(".time");
+        let seenStatus = msg.querySelector(".seenStatus");
         let time = timeElement.getAttribute("data-time");
         let senderType = msg.classList.contains("sender")
             ? "sender"
@@ -1833,12 +1834,14 @@ function processTimers() {
 
         if (time === lastTime && senderType === lastSender) {
             if (lastElement) lastElement.style.display = "none";
+            if (seenStatus) seenStatus.style.display = "none";
         }
 
         lastTime = time;
         lastSender = senderType;
         lastElement = timeElement;
         timeElement.style.display = "inline";
+        seenStatus.style.display = "inline";
     });
 }
 
@@ -2283,7 +2286,11 @@ function createMessageElement(
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
             <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}" style="display: none;">${msgTime}</span>            
-            ${isSender ? `<span class="seenStatus ${seenStatus}"></span>` : ""} 
+            ${
+                isSender
+                    ? `<span class="seenStatus ${seenStatus}"  style="display: none;"></span>`
+                    : ""
+            } 
             </li>
     </div>
     `;
