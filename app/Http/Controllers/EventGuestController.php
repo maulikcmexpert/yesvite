@@ -250,10 +250,12 @@ class EventGuestController extends Controller
                 // })->
                 where(['rsvp_status' => '1', 'event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
-            $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
+            $totalEnvitedUser = EventInvitedUser::
+            // whereHas('user', function ($query) {
 
-                // $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
+            //     // $query->where('app_user', '1');
+            // })->
+            where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
             // $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
@@ -336,12 +338,10 @@ class EventGuestController extends Controller
 
             $eventAboutHost['photo_uploaded'] = $total_photos;
 
-            $eventAboutHost['total_invite'] =  count(getEventInvitedUser($event));
+            $eventAboutHost['total_invite'] =  count(getEventInvitedUser($eventDetail->id));
 
-            $eventAboutHost['invite_view_rate'] = EventInvitedUser::whereHas('user', function ($query) {
-
-                $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count();
+            $eventAboutHost['invite_view_rate'] = EventInvitedUser::
+            where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count();
 
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
