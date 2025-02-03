@@ -1841,7 +1841,7 @@ function processTimers() {
         lastSender = senderType;
         lastElement = timeElement;
         timeElement.style.display = "inline";
-        seenStatus.style.display = "inline";
+        if (seenStatus) seenStatus.style.display = "inline";
     });
 }
 
