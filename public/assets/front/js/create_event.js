@@ -4054,7 +4054,7 @@ function savePage1Data(close = null, direct = false) {
 
         // ---------------newcode-------------
         if (direct) {
-            return true;
+            return 8;
         }
         if (close == null || close == "") {
             $(".step_1").css("display", "none");
@@ -4156,7 +4156,7 @@ function savePage3Data(close = null, direct = false) {
     }
 
     if (direct) {
-        return true;
+        return 8;
     }
     $(".list_all_invited_user").empty();
     // $(".list_all_invited_user").append(response);
@@ -8459,15 +8459,20 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
     await saveDesignData(true);
-    savePage1Data(null, true);
-    updateEventData();
+    let save1 = savePage1Data(null, true);
+    if (save1 == 8) {
+        updateEventData();
+    }
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     e.preventDefault();
     await saveDesignData(true);
-    savePage1Data(null, true);
-    savePage3Data(null, true);
-    updateEventData();
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 });
 
 function updateEventData() {
