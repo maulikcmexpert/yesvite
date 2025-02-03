@@ -273,6 +273,10 @@ defer
 
 <script>
 
+$(document).on("click", "#buycreditsmodal", function () {
+    $("input.price-option").prop("checked", false);
+});
+
     $(document).on('click','.create_event_with_plan',function(){
     // toggleSidebar('sidebar_change_plan_create');
     // $('input[name="plan_check"]:checked').each(function () {
