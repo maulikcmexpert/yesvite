@@ -2709,7 +2709,6 @@ if ($rsvpSent != null) {
             $yesvite_users_data = [];
             $yesvite_phone_data = [];
             $is_phone=$request->is_phone;
-            dd($yesvite_all_invite);
             if(!empty($new_added_user)){
             foreach ($new_added_user as $sesionuser) {
                 // Try fetching the user from the User table
