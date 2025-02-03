@@ -6863,11 +6863,9 @@ $(document).on("click", ".invite_group_member", function () {
             if (!isIdExists) {
                 unselectedValues.push({
                     id: id,
-                    preferby: perferby,
-                    invited_by: invited_by,
                 });
             }
-            delete_invited_user(id, "0");
+            
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
         }
