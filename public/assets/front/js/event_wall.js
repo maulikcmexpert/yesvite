@@ -1225,3 +1225,7 @@ $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
     $(".create-post-upload-img-inner").removeClass("d-none");
 });
+
+$(".noattending-btn").on('click',function(){
+    alert();
+})
