@@ -1563,7 +1563,7 @@
                             method. You
                             need to fix all errors before you can re-send.</h5>
                     </div>
-                    <div class="success-box">
+                    <!-- <div class="success-box">
                         <span class="d-flex align-items-center">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -1575,8 +1575,8 @@
                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
-                        <!-- <h5>All clear, invites ready to be re-sent!</h5> -->
-                    </div>
+                        <h5>All clear, invites ready to be re-sent!</h5>
+                    </div> -->
                     @foreach ($eventDetails['failed_invites'] as $key => $invite)
                     <div class="invite-contact-wrp" data-user-id="{{ $invite['id']}}">
                         <div class="invite-contact">
