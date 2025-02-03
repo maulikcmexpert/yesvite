@@ -6884,6 +6884,7 @@ $(document).on("click", ".invite_group_member", function () {
         success: function (response) {
             if (response?.isTrue && response.isTrue) {
                 toggleSidebar();
+                $("#loader").css("display", "none");
                 return;
             }
             // console.log(response);
