@@ -802,11 +802,10 @@ $(document).ready(function () {
                  if(response.is_phone=="1"&&response.view!=""){
                     $('.selected-phone-list').remove('.guest-user-phone');
                     $('.selected-phone-list').html(response.view);
-                    return;
-                }else if(response.view!=""){
+                }
+                 if(response.view!=""&&response.is_phone=="0"){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
-                    return;
                 }
              
                
