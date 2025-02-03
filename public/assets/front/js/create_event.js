@@ -1,6 +1,6 @@
 let eventData = {};
 let isCohost = $("#isCohost").val();
-var total_activities = 0;
+var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
@@ -3341,75 +3341,8 @@ $(document).on("click", "#save_activity_schedule", function () {
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
-    // $(".accordion-body.new_activity").each(function () {
-    //     var dataId = $(this).data("id");
-    //     activities[dataId] = [];
-    //     $(this)
-    //         .find(".activity-main-wrp")
-    //         .each(function (index) {
-    //             var id = $(this).data("id");
-    //             var description = $(this)
-    //                 .find('input[name="description[]"]')
-    //                 .val();
-    //             var startTime = $(this)
-    //                 .find('input[name="activity-start-time[]"]')
-    //                 .val();
-    //             var endTime = $(this)
-    //                 .find('input[name="activity-end-time[]"]')
-    //                 .val();
-    //             activityendtime = endTime;
-    //             $("#desc-error-" + id).text("");
-    //             $("#start-error-" + id).text("");
-    //             $("#end-error-" + id).text("");
 
-    //             if (description == "") {
-    //                 $("#desc-error-" + id)
-    //                     .text("Description is required")
-    //                     .css("color", "red");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="description[]"]')
-    //                 .on("input", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#desc-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             if (startTime == "") {
-    //                 $("#start-error-" + id).text("Start time is required");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="activity-start-time[]"]')
-    //                 .on("change", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#start-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             if (endTime == "") {
-    //                 $("#end-error-" + id).text("End time is required");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="activity-end-time[]"]')
-    //                 .on("change", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#end-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             var activity = {
-    //                 activity: description,
-    //                 "start-time": startTime,
-    //                 "end-time": endTime,
-    //             };
-    //             activities[dataId].push(activity);
-    //         });
-    //     // toggleSidebar();
-    // });
-    var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    var showAlert = false;
     let isendtime = 0;
     let istrue = 0;
     $(".accordion-body.new_activity").each(function () {
@@ -4765,7 +4698,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = "";
-$(document).on("click", ".li_event_details", function () {
+function saveDesignData() {
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -4898,6 +4831,9 @@ $(document).on("click", ".li_event_details", function () {
             });
         $(".main-content-wrp").addClass("blurred");
     }, 500);
+}
+$(document).on("click", ".li_event_details", function () {
+    saveDesignData();
 });
 
 $(document).on("click", ".li_event_detail", function () {
@@ -8372,7 +8308,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     } else {
         eventData.is_update_event = "1";
     }
-    $(".li_event_details").trigger("click");
+    saveDesignData();
     savePage1Data();
     savePage3Data();
     savePage4Data();
