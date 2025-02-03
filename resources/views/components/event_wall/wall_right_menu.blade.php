@@ -124,11 +124,11 @@ if ($hostView) {
                                     <div class="posts-card-head-left-content contact_search"
                                         data-search = "{{ $guest['first_name'] }} {{ $guest['last_name'] }}">
                                         <h3>{{ $guest['first_name'] }} {{ $guest['last_name'] }}</h3>
-                                        <!-- @if (!empty($user['city']) || !empty($user['state']))
-                                            <p>
-                                                {{ $user['city'] ?? '' }}{{ !empty($user['city']) && !empty($user['state']) ? ',' : '' }}{{ $user['state'] ?? '' }}
-                                            </p>
-                                        @endif -->
+                                        @if($guest['prefer_by']=="email")
+                                                                         <p>{{ $guest['email'] }}</p>
+                                                                     @else
+                                                                        <p>{{ $guest['phone_number'] }}</p>
+                                                                    @endif
 
 
                                         <input type="hidden" id="eventID" value="{{ $eventId }}">

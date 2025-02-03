@@ -1381,9 +1381,9 @@
             @endif
             <div class="potluck-category">
                 <h5>Potluck Categories</h5>
-                <input type="hidden" id="category_count" value="0">
                 @if (isset($eventDetail['podluck_category_list']) && count($eventDetail['podluck_category_list']) > 0)
-                    @foreach ($eventDetail['podluck_category_list'] as $index => $data)
+                <input type="hidden" id="category_count" value="{{count($eventDetail['podluck_category_list'])}}">
+                @foreach ($eventDetail['podluck_category_list'] as $index => $data)
                    
                         <div class="category-main-dishesh potluckmain-{{ $index }}">
                             <div class="category-list">
