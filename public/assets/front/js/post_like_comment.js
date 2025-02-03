@@ -894,6 +894,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
+            alert();
             if(upper_see==0){
                 const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite add_guest_seeall">
