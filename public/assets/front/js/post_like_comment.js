@@ -75,60 +75,60 @@ $(document).ready(function () {
             },
         });
     });
-    // $(document).on("click", "#CommentlikeButton", function () {
-    //     clearTimeout(longPressTimer); // Clear the long press timer
+    $(document).on("click", "#CommentlikeButton", function () {
+        clearTimeout(longPressTimer); // Clear the long press timer
 
-    //     // If it's a long press, don't process the click event
-    //     if (isLongPresss) return;
+        // If it's a long press, don't process the click event
+        if (isLongPresss) return;
 
-    //     // Handle single tap like/unlike
-    //     const button = $(this);
-    //     const isLiked = button.hasClass("liked");
-    //     const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
-
-
-    //     // Toggle like button appearance
-    //     if (isLiked) {
-    //         button.removeClass("liked");
-    //         button.find("i").removeClass("fa-solid").addClass("fa-regular");
-    //     } else {
-    //         button.addClass("liked");
-    //         button.find("i").removeClass("fa-regular").addClass("fa-solid");
-    //     }
+        // Handle single tap like/unlike
+        const button = $(this);
+        const isLiked = button.hasClass("liked");
+        const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
 
 
+        // Toggle like button appearance
+        if (isLiked) {
+            button.removeClass("liked");
+            button.find("i").removeClass("fa-solid").addClass("fa-regular");
+        } else {
+            button.addClass("liked");
+            button.find("i").removeClass("fa-regular").addClass("fa-solid");
+        }
 
 
-    //     // AJAX call to update the like state
-    //     const eventId = button.data("event-id");
-    //     const eventPostId = button.data("event-post-id");
-    //     $.ajax({
-    //         url: base_url + "event_wall/userPostLikeDislike",
-    //         method: "POST",
-    //         headers: {
-    //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    //         },
-    //         contentType: "application/json",
-    //         data: JSON.stringify({
-    //             event_id: eventId,
-    //             event_post_id: eventPostId,
-    //             reaction: reaction,
-    //         }),
-    //         success: function (response) {
-    //             if (response.status === 1) {
-    //                 $(`#likeCount_${eventPostId}`).text(
-    //                     `${response.count} Likes`
-    //                 );
-    //             } else {
-    //                 alert(response.message);
-    //             }
-    //         },
-    //         error: function (xhr) {
-    //             console.error(xhr.responseText);
-    //             alert("An error occurred. Please try again.");
-    //         },
-    //     });
-    // });
+
+
+        // AJAX call to update the like state
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
+        $.ajax({
+            url: base_url + "event_wall/userPostLikeDislike",
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            contentType: "application/json",
+            data: JSON.stringify({
+                event_id: eventId,
+                event_post_id: eventPostId,
+                reaction: reaction,
+            }),
+            success: function (response) {
+                if (response.status === 1) {
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert("An error occurred. Please try again.");
+            },
+        });
+    });
     $(document).on("click", "#emojiDropdown .emoji", function () {
 
         const selectedEmoji = $(this).data("emoji");
@@ -235,8 +235,9 @@ $(document).ready(function () {
                     const data = response.data;
 
                     // Generate profile image or initials
-                    const profileImage =
-                        data.profile || generateProfileImage(data.username);
+                    const profileImage = data.profile
+                    ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
+                    : generateProfileImage(data.username);
 
                     function generateProfileImage(username) {
                         if (!username) return ""; // Return an empty string if the username is undefined
@@ -560,14 +561,14 @@ function handleCheckboxState(contact, checkboxSelector) {
 
 // // Event listener for contact checkboxes
 // $(document).on("change", ".contact-checkbox", function () {
- 
+
 //              handleCheckboxChange(
 //         $(this),
 //         selectedContacts,
 //         "selectedContacts",
 //         updateModalContent
 //     );
-        
+
 // });
 
 // // Event listener for phone contact checkboxes
@@ -774,7 +775,7 @@ $(document).ready(function () {
 
         });
 
-    
+
 
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
@@ -794,8 +795,8 @@ $(document).ready(function () {
         );
         // Add to the guest list, prefer email if selected, else prefer phone
         // addToGuestList(id, isEmailSelected ? "email" : "phone", 0);
-        
-        
+
+
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)

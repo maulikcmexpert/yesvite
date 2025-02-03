@@ -364,7 +364,11 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
         if (currentVideoElement) {
             currentVideoElement.pause();
             currentVideoElement.currentTime = 0;
+
+            // Remove previous event listeners
             currentVideoElement.ontimeupdate = null;
+            currentVideoElement.onended = null;
+
             currentVideoElement = null;
         }
     }
@@ -444,8 +448,9 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
             updateImageProgress();
         }
         else if (type === 'video') {
-            let progressWidth = 0;
+            resetCurrentStory();  // Ensure previous video is reset
             currentVideoElement = element;
+            storyContent.appendChild(element);
             element.play();
 
             element.ontimeupdate = function () {
@@ -456,11 +461,13 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
             };
 
             element.onended = function () {
+                index++;  // Increment before calling showStory()
                 showStory(index);
                 console.log("window index" + index);
-                index++;
             };
         }
+
+
     }
 
     var counter = 0;
