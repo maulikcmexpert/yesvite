@@ -1738,6 +1738,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
+                                                
                                                 @foreach ($items['item_carry_users'] as $values)
                                                     @php
                                                         $firstInitial = !empty($values['first_name'])
@@ -1754,7 +1755,7 @@
                                                         class="accordion-collapse" aria-labelledby="lumpia"
                                                         data-bs-parent="#accordionFlushExample" style="">
                                                         <div class="accordion-body">
-                                                        @if ($user->id != $values['user_id'])
+                                                        @if ($userS->id != $values['user_id'])
                             
                                                         <div class="accordion-body-content limits-count" style="display: none;" id="user-list-{{ $itemkey }}-{{ $index }}">
 
