@@ -241,26 +241,43 @@ class EventGuestController extends Controller
 
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
             $eventInfo['guest_view'] = $eventDetails;
+
+
+            
+            $eventattending = EventInvitedUser::
+                // whereHas('user', function ($query) {
+                //     $query->where('app_user', '1');
+                // })->
+                where(['rsvp_status' => '1', 'event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
+
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
 
                 // $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
-            $eventattending = EventInvitedUser::whereHas('user', function ($query) {
+            // $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
-            })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
+            //     $query->where('app_user', '1');
+            // })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
 
-            $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
+            // $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
-            })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+            //     $query->where('app_user', '1');
+            // })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+
+
+
+            $eventNotComing = EventInvitedUser::
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['rsvp_d' => '1', 'is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
 
 
             $todayrsvprate = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
+                // $query->where('app_user', '1');
             })->where(['rsvp_status' => '1','is_co_host' => '0', 'event_id' => $eventDetail->id])
 
                 ->whereDate('created_at', '=', date('Y-m-d'))
@@ -269,22 +286,28 @@ class EventGuestController extends Controller
 
 
 
-            $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
+            // $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                // $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
-            // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+            //     // $query->where('app_user', '1');
+            // })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+            // // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+
+            $pendingUser = EventInvitedUser::
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
 
 
 
             $adults = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
+                // $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id,'is_co_host' => '0', 'rsvp_status' => '1'])->sum('adults');
 
             $kids = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
+                // $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id,'is_co_host' => '0', 'rsvp_status' => '1'])->sum('kids');
 
 
@@ -317,29 +340,31 @@ class EventGuestController extends Controller
             $invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
 
-                $invite_view_percent = EventInvitedUser::whereHas('user', function ($query) {
+                $invite_view_percent = EventInvitedUser::
+                // whereHas('user', function ($query) {
 
-                    $query->where('app_user', '1');
-                })->where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
+                //     // $query->where('app_user', '1');
+                // })->
+                where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
 
             $today_invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
-                $today_invite_view_percent =   EventInvitedUser::whereHas('user', function ($query) {
+                $today_invite_view_percent =   EventInvitedUser::
+                // whereHas('user', function ($query) {
 
-                    $query->where('app_user', '1');
-                })->where(['event_id' => $eventDetail->id, 'read' => '1' ,'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
+                //     // $query->where('app_user', '1');
+                // })->
+                where(['event_id' => $eventDetail->id, 'read' => '1' ,'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
             $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
 
             $eventAboutHost['rsvp_rate'] = $eventattending;
 
-            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0)
-            ? number_format($eventattending / $totalEnvitedUser * 100, 2) . "%"
-            : "0.00%";
+            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
             $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
