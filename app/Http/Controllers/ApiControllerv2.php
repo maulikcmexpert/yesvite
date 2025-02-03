@@ -5867,7 +5867,7 @@ class ApiControllerv2 extends Controller
                     if($key == 0){
                         $i=0;
                     }
-                   
+
                     EventImage::create([
                         'event_id' => $request->event_id,
                         'image' => $imageName,
@@ -8312,8 +8312,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                    $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
-                    $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['post_message'] = empty($value->post_message) ? "" :  $value->post_message;
                     // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
