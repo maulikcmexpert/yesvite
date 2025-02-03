@@ -656,6 +656,12 @@ async function updateChat(user_id) {
               selected_user.userStatus == "online"
             ? "Online"
             : "";
+
+    if (lastseen == "Online" || lastseen == "online") {
+        userStatusSpan = `<span class="active"></span>`;
+    } else {
+        userStatusSpan = `<span class="inactive"></span>`;
+    }
     $("#selected-user-lastseen").html(lastseen);
     $("#selected-user-name").html(selected_user.userName);
 
@@ -666,6 +672,7 @@ async function updateChat(user_id) {
 
     $(".selected_conversasion").val($(".selected_id").val());
     const conversationId = $(".selected_id").val();
+
     $(".report-conversation").show();
     $(".report-conversation").attr("data-conversation", conversationId);
     $(".report-conversation").attr("data-userId", user_id);
@@ -675,7 +682,14 @@ async function updateChat(user_id) {
         selected_user.userName,
         conversationId
     );
+    const userImg = $(conversationId).find(".user-img");
 
+    const spanElement = userImg.find("span");
+    if (spanElement.length) {
+        spanElement.replaceWith(userStatusSpan);
+    } else {
+        userImg.append(userStatusSpan);
+    }
     update(userRef, { userChatId: conversationId });
 
     const messagesRef = ref(database, `Messages/${conversationId}/message`);
