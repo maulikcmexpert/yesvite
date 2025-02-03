@@ -931,7 +931,7 @@ use Carbon\Carbon;
                 <input type="hidden" name="report_conversation_id" id="report_conversation_id"/>
                 <input type="hidden" name="to_be_reported_user_id" id="to_be_reported_user_id"/>
                 <div class="modal-header">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="w-100 d-flex align-items-center justify-content-between">
                         <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
