@@ -425,9 +425,8 @@
                                                                 <li class="commented-user-wrp"
                                                                     data-comment-id="{{ $comment['id'] }}">
                                                                     <input type="hidden" id="parent_comment_id"
-                                                                        value="null">
-                                                                    <input type="hidden" id="reply_comment_id"
                                                                         value="">
+
                                                                     <div class="commented-user-head">
                                                                         <div class="commented-user-profile">
                                                                             <div class="commented-user-profile-img">

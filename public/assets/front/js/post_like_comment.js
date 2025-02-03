@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-            $("#parent_comment_id").val() || null; // Find active comment if replying
+            $("#parent_comment_id").val() ; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
@@ -367,7 +367,7 @@ $(document).ready(function () {
                         });
                     }
                 }
-                commentInput.val("");
+                 commentInput.val("");
                 $("#parent_comment_id").val(""); // Reset parent comment ID
 
             },
