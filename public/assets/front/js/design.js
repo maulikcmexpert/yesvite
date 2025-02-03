@@ -669,11 +669,12 @@ function bindData(current_event_id) {
                         const textWidth = textMeasurement.width;
                         console.log(element.text);
                         if (element.left === undefined) {
-                            element.left = element.centerX;
+                            let width = element.width;
+                            element.left = element.centerX - width;
                         }
 
                         if (element.top === undefined) {
-                            element.top = element.centerY;
+                            element.top = element.centerY - 10;
                         }
 
                         let textElement = new fabric.Textbox(element.text, {
