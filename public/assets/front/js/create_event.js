@@ -2070,16 +2070,17 @@ function delete_invited_user(userId, is_contact = "0") {
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
-            var remainingCount = max_guest - total_guest;
+            guest_counter(0, max_guest);
+            // var remainingCount = max_guest - total_guest;
 
-            if (remainingCount < 0) {
-                $(".invite-left_d").text("Invites | 0 Left");
-            } else {
-                $(".invite-left_d").text(
-                    "Invites | " + remainingCount + " Left"
-                );
-            }
-            $("#event_guest_left_count").val(remainingCount);
+            // if (remainingCount < 0) {
+            //     $(".invite-left_d").text("Invites | 0 Left");
+            // } else {
+            //     $(".invite-left_d").text(
+            //         "Invites | " + remainingCount + " Left"
+            //     );
+            // }
+            // $("#event_guest_left_count").val(remainingCount);
             console.log("User ID deleted successfully.");
 
             $("#loader").css("display", "none");
