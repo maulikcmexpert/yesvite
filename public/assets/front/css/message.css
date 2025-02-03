@@ -1842,8 +1842,8 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
 }
 
 .reply-section-wrp .reaction-ul{
-    left: 5px;
-    bottom: -10px;
+    left: 5px !important;
+    bottom: -10px !important;
 }
 
 .reply-section-wrp .reply-section{
