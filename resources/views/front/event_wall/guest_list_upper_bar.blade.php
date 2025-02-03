@@ -5,7 +5,6 @@
 $counter = 0;
 
 @endphp
-{{dd($listing)}}
 @foreach($listing as $guest_user)
 @php
 $counter++;
@@ -54,7 +53,7 @@ break;
 
 @if($counter > 4)
 @php
-$counter = count($user_list) - 4;
+$counter = count($listing) - 4;
 @endphp
 <a href="#" class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">

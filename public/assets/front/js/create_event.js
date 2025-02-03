@@ -4737,10 +4737,13 @@ async function saveDesignData(direct = false) {
         if (direct) {
             toastr.success("Event Updated Successfully");
             window.location.href = base_url + "home";
+        } else {
+            if (imageResponse && imageResponse.image) {
+                updateUIAfterSave(imageResponse.image);
+            }
         }
-        if (imageResponse && imageResponse.image) {
-            updateUIAfterSave(imageResponse.image);
-        }
+
+        if (direct) return true;
     } catch (error) {
         console.error("Error in saveDesignData:", error);
     } finally {
@@ -6852,6 +6855,8 @@ $(document).on("click", ".invite_group_member", function () {
             if (!isIdExists) {
                 unselectedValues.push({
                     id: id,
+                    preferby: perferby,
+                    invited_by: invited_by,
                 });
             }
             delete_invited_user(id, "0");
@@ -6859,7 +6864,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user-" + id).prop("checked", false);
         }
     });
-    
+
     $.ajax({
         url: base_url + "event/invite_user_by_group",
         type: "POST",
@@ -6868,7 +6873,7 @@ $(document).on("click", ".invite_group_member", function () {
         },
         data: {
             users: selectedValues,
-            unselectedValues:unselectedValues,
+            unselectedValues: unselectedValues,
         },
         success: function (response) {
             if (response?.isTrue && response.isTrue) {
