@@ -923,7 +923,7 @@ $(document).ready(function () {
         const optionCount = pollOptionsContainer.children().length + 1;
 
         const newOption = $(`
-            <div class="mb-3 poll-option">
+            <div class="mb-3 option-poll">
                 <label class="form-label d-flex align-items-center justify-content-between">
                     <p>Option <span class="option-number">${optionCount}</span>*</p>
                     <span class="char-count">0/140</span>
@@ -957,7 +957,7 @@ $(document).ready(function () {
 
     // Function to renumber options correctly after deletion
     function renumberOptions() {
-        $(".poll-options .poll-option").each(function (index) {
+        $(".poll-options .option-poll").each(function (index) {
             $(this).find(".option-number").text(index + 3);
         });
     }
@@ -990,6 +990,7 @@ $(document).ready(function () {
             // }
             // Set the value of the hidden input in the poll form
             document.getElementById('pollContent').value = postContent;
+            $this.prop('disabled', true)
             pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
