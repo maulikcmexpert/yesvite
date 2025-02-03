@@ -5,6 +5,7 @@
 $counter = 0;
 
 @endphp
+{{dd($listing)}}
 @foreach($listing as $guest_user)
 @php
 $counter++;
