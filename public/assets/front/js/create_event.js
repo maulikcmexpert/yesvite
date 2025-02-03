@@ -1203,11 +1203,11 @@ $(function () {
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-        if (picker.startDate.isValid()) {
-            // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-            $(this).val(picker.startDate.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
-        }
+        // if (picker.startDate.isValid()) {
+        //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
     });
 });
 
