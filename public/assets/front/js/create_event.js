@@ -8458,11 +8458,14 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
+    await saveDesignData(true);
     savePage1Data(null, true);
     updateEventData();
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     e.preventDefault();
+    await saveDesignData(true);
+    savePage1Data(null, true);
     savePage3Data(null, true);
     updateEventData();
 });
