@@ -3709,16 +3709,19 @@ class EventController extends BaseController
         $designImg = '';
         // dd($getEventImages)
         if (!empty($getEventImages)) {
+            $i=1;
             foreach ($getEventImages as $key => $imgVal) {
                 if ($key == 0) {
                     $designImg =   $imgVal->image;
                     continue;
+                }else{
+                    $fileName =   $imgVal->image;
+                    $savedFiles[] = [
+                        'fileName' => $fileName,
+                        'deleteId' => strval($i),
+                    ];
+                    $i++;
                 }
-                $fileName =   $imgVal->image;
-                $savedFiles[] = [
-                    'fileName' => $fileName,
-                    'deleteId' => $imgVal->id,
-                ];
             }
 
             // if (empty($savedFiles)) {
