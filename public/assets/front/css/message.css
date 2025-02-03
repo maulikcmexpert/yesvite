@@ -1756,6 +1756,11 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
 }
 
 
+#submitmsgreport .modal-header{
+    flex-direction: column;
+    align-items:start;
+}
+
 #submitmsgreport .report-pr{
     font-size: 14px;
     color: var(--secondary-black);
@@ -1763,7 +1768,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     line-height: 22px;
     margin-bottom: 24px;
     padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
+    /* border-bottom: 1px solid var(--border); */
 }
 
 #submitmsgreport .submit-blocks{
