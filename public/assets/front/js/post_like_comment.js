@@ -867,29 +867,35 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             profileImage =generateProfileImage(first_name, last_name);
         }
         var upper_view=$('.selected-contacts-list .guest-users').length;
-        alert(upper_view);
-        const $modalBody = $('.selected-contacts-list');
+
+        if(upper_view<4){
+            const $modalBody = $('.selected-contacts-list');
        
        
 
-        const contactHtml = `
-            <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
-                <div class="guest-user-img">
-                   ${profileImage}
-                    <a href="#" class="close remove_new_added_user" data-id="${id}">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
+            const contactHtml = `
+                <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
+                    <div class="guest-user-img">
+                       ${profileImage}
+                        <a href="#" class="close remove_new_added_user" data-id="${id}">
+                            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                                <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h6>${first_name} ${last_name}</h6>
                 </div>
-                <h6>${first_name} ${last_name}</h6>
-            </div>
-
-        `;
-        // $modalBody.append(contactHtml);  
+    
+            `;
+            $modalBody.append(contactHtml);      
+        }else{
+            $('.selected-contacts-list .add_guest_seeall').length;
+            alert( $('.selected-contacts-list .add_guest_seeall').length);
+        }
+      
 
         const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite ">
