@@ -2727,7 +2727,8 @@ if ($rsvpSent != null) {
                         'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
                                     ? asset('storage/profile/' . $user->profile) 
                                     : "",
-                        'prefer_by'=>$prefer_by
+                        'prefer_by'=>$prefer_by,
+                        'recent'=>1
                     ];
                 } else {
                     $contact_sync = contact_sync::find($sesionuser['user_id']);
@@ -2742,7 +2743,9 @@ if ($rsvpSent != null) {
                                         ? asset('storage/profile/' . $contact_sync->photo) 
                                         : "",
                             'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
-                            'prefer_by'=>$prefer_by
+                            'prefer_by'=>$prefer_by,
+                            'recent'=>1
+
                
                         ];
                     }

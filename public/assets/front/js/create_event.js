@@ -4733,7 +4733,14 @@ async function saveDesignData(direct = false) {
 
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
-            updateUIAfterSave(imageResponse.image);
+        }
+        if (direct) {
+            toastr.success("Event Updated Successfully");
+            window.location.href = base_url + "home";
+        } else {
+            if (imageResponse && imageResponse.image) {
+                updateUIAfterSave(imageResponse.image);
+            }
         }
 
         if (direct) return true;
@@ -6864,7 +6871,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user-" + id).prop("checked", false);
         }
     });
-    
+
     $.ajax({
         url: base_url + "event/invite_user_by_group",
         type: "POST",
@@ -6873,7 +6880,7 @@ $(document).on("click", ".invite_group_member", function () {
         },
         data: {
             users: selectedValues,
-            unselectedValues:unselectedValues,
+            unselectedValues: unselectedValues,
         },
         success: function (response) {
             if (response?.isTrue && response.isTrue) {
