@@ -1753,6 +1753,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     width:100%;
     height:100%;
     opacity: 0;
+    cursor: pointer;
 }
 
 
@@ -1810,6 +1811,12 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
 
 #submitmsgreport .textbox-container{
     margin-bottom: 10px;
+}
+
+.report-input-wrp input[type="radio"]:checked + span{
+    background-color: #F73C71;
+    color: #fff;
+    border: 1px solid #F73C71;
 }
 
 /* ======= responsive ======== */
