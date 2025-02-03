@@ -235,8 +235,9 @@ $(document).ready(function () {
                     const data = response.data;
 
                     // Generate profile image or initials
-                    const profileImage =
-                        data.profile || generateProfileImage(data.username);
+                    const profileImage = data.profile
+                    ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
+                    : generateProfileImage(data.username);
 
                     function generateProfileImage(username) {
                         if (!username) return ""; // Return an empty string if the username is undefined
@@ -560,14 +561,14 @@ function handleCheckboxState(contact, checkboxSelector) {
 
 // // Event listener for contact checkboxes
 // $(document).on("change", ".contact-checkbox", function () {
- 
+
 //              handleCheckboxChange(
 //         $(this),
 //         selectedContacts,
 //         "selectedContacts",
 //         updateModalContent
 //     );
-        
+
 // });
 
 // // Event listener for phone contact checkboxes
@@ -774,7 +775,7 @@ $(document).ready(function () {
 
         });
 
-    
+
 
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
@@ -794,8 +795,8 @@ $(document).ready(function () {
         );
         // Add to the guest list, prefer email if selected, else prefer phone
         // addToGuestList(id, isEmailSelected ? "email" : "phone", 0);
-        
-        
+
+
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
