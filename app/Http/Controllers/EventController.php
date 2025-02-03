@@ -1370,6 +1370,7 @@ class EventController extends BaseController
 
     public function removeUserId(Request $request)
     {
+      
         $is_contact = $request->input('is_contact');
         if ($is_contact == '1') {
             $userIds = session()->get('contact_ids');
@@ -1386,6 +1387,7 @@ class EventController extends BaseController
             return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true, 'is_phone' => 1]);
         } else {
             $userIds = session()->get('user_ids');
+            dD($userIds);
             $userId = $request->input('user_id');
             foreach ($userIds as $key => $value) {
                 if ($value['id'] == $userId) {
