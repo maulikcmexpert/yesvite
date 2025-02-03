@@ -256,8 +256,8 @@ $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
     const commentId = $('.commented-user-wrp').data('comment-id');
-    const replyParentId = $('.reply-on-comment').data('comment-id');
-    alert(replyParentId);
+    // const replyParentId = $('.reply-on-comment').data('comment-id');
+    // alert(replyParentId);
     if (commentText === '') {
         alert('Please enter a comment');
         return;
@@ -292,13 +292,31 @@ $(document).on('click', '.comment-send-icon', function () {
                 $('#post_comment').val('');
 
                 const data = response.data;
+                const profileImage = data.profile
+                ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
+                : generateProfileImage(data.username);
 
+                function generateProfileImage(username) {
+                    if (!username) return ""; // Return an empty string if the username is undefined
+
+                    // Split the username into parts
+                    const nameParts = username.split(" ");
+                    const firstInitial =
+                        nameParts[0]?.[0]?.toUpperCase() || "";
+                    const secondInitial =
+                        nameParts[1]?.[0]?.toUpperCase() || "";
+                    const initials = `${firstInitial}${secondInitial}`;
+
+                    // Generate a font color class based on the first initial
+                    const fontColor = `fontcolor${firstInitial}`;
+                    return `<h5 class="${fontColor} font_name">${initials}</h5>`;
+                }
                 const newCommentHTML = `
                     <li class="commented-user-wrp" data-comment-id="${data.comment_id}">
                         <div class="commented-user-head">
                             <div class="commented-user-profile">
                                 <div class="commented-user-profile-img">
-                                    <img src="${data.profile}" alt="">
+                                   ${profileImage}
                                 </div>
                                 <div class="commented-user-profile-content">
                                     <h3>${data.username}</h3>
