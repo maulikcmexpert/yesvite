@@ -41,7 +41,7 @@
                                 @endphp
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                             @endif
-                            <a href="#" class="close">
+                            <!-- <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.20312" y="1" width="16" height="16" rx="8"
@@ -53,7 +53,7 @@
                                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <h6 class="guest-name">{{ $guest_user['firstname'] }}
                             {{ $guest_user['lastname'] }}</h6>
@@ -77,7 +77,7 @@
                                 @endphp
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                             @endif
-                            <a href="#" class="close">
+                            <!-- <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.20312" y="1" width="16" height="16" rx="8"
@@ -89,7 +89,7 @@
                                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <h6 class="guest-name">{{ $guest_user['firstname'] }}
                             {{ $guest_user['lastname'] }}</h6>
