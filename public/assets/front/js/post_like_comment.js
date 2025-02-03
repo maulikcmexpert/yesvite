@@ -864,7 +864,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             profileImage =generateProfileImage(first_name, last_name);
         }
-        var upper_view=$('.selected-contacts-list .guest-user').length;
+        var upper_view=$('.selected-contacts-list .guest-users').length;
         alert(upper_view);
         const $modalBody = $('.selected-contacts-list');
        
@@ -887,7 +887,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             </div>
 
         `;
-        // $modalBody.append(contactHtml);
+        // $modalBody.append(contactHtml);  
 
         const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite ">
