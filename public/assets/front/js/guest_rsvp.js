@@ -12,6 +12,7 @@ $(document).on('click', '.edit_rsvp_guest', function () {
     $('#editrsvp3 h5').text("");
     $('#editrsvp3 .adult-count').val("");
     $('#editrsvp3 .kid-count').val("");
+    $('#editrsvp3 .rsvp-img h5').remove();
     $.ajax({
         url: base_url + "event_guest/fetch_guest/" + guestId+"/"+is_sync, // Fetch guest data
         method: 'GET',
@@ -25,7 +26,7 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             }else{
                 $('#editrsvp3 .rsvp-img img').css('display','none');
                 var profile=generateProfileImage(response.firstname,response.lastname);
-                $('#editrsvp3 .rsvp-img').append($profile);
+                $('#editrsvp3 .rsvp-img').append(profile);
             }
             $('#editrsvp3 .adultcount').val(response.adults || 0);
             $('#editrsvp3 .kidcount').val(response.kids || 0);
