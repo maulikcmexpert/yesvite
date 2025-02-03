@@ -3,8 +3,22 @@
 
 <div class="invite-contact yes-contact">
                 <a href="#" class="invite-img">
-                                            <img src="{{$user['profile']}}" alt="invite-img">
-                                    </a>
+                @if ($user['profile'] != '')
+                                <img src="{{ $user['profile']}}" alt="user-img">
+                            @else
+                                @php
+                                    $firstInitial = !empty($user['first_name'])
+                                        ? strtoupper($user['first_name'][0])
+                                        : '';
+                                    $lastInitial = !empty($user['last_name'])
+                                        ? strtoupper($user['last_name'][0])
+                                        : '';
+                                    $initials = $firstInitial . $lastInitial;
+                                    $fontColor = 'fontcolor' . $firstInitial;
+                                @endphp
+                                <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                            @endif
+                                                            </a>
                 <div class="w-100">
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest" data-profile="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" data-search="fitsz Simon">
