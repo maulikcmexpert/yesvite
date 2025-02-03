@@ -501,7 +501,7 @@
                                                                     <div class="commented-user-reply-wrp">
                                                                         <div
                                                                             class="position-relative d-flex align-items-center gap-2">
-                                                                            <button class="posts-card-like-btn" id="likeButton"
+                                                                            <button class="posts-card-like-btn" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
@@ -604,40 +604,16 @@
                                                                                             <button
                                                                                                 class="posts-card-like-btn" id="CommentlikeButton"
                                                                                                 data-event-id="{{ $event }}"
-                                                                                               data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                               data-event-post-comment-id="{{ $reply['id'] }} "
                                                                                                 data-user-id="{{ $login_user_id }}">
-                                                                                                 @if ($post['self_reaction'] == '\u{2764}')
+
+                                                                                                @if($reply['is_like']==1)
                                                                                                 <i class="fa-solid fa-heart" id="show_Emoji"></i>
-                                                                                            @elseif($post['self_reaction'] == '\u{1F494}')
+                                                                                                @elseif($reply['is_like']==0)
                                                                                                 <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                                                            @elseif($post['self_reaction'] == '\u{1F44D}')
-                                                                                                <i id="show_Emoji"> <img
-                                                                                                        src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                                                        loading="lazy" alt="Thumb Emoji"
-                                                                                                        class="emoji" data-emoji="👍"
-                                                                                                        data-unicode="\\u{1F44D}"></i>
-                                                                                            @elseif($post['self_reaction'] == '\u{1F604}')
-                                                                                                <i id="show_Emoji"> <img
-                                                                                                        src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                                                        loading="lazy" alt="Smiley Emoji"
-                                                                                                        class="emoji" data-emoji="😊"
-                                                                                                        data-unicode="\\u{1F604}"></i>
-                                                                                            @elseif($post['self_reaction'] == '\u{1F60D}')
-                                                                                                <i id="show_Emoji"> <img
-                                                                                                        src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                                                        loading="lazy" alt="Eye Heart Emoji"
-                                                                                                        class="emoji" data-emoji="😍"
-                                                                                                        data-unicode="\\u{1F60D}"></i>
-                                                                                            @elseif($post['self_reaction'] == '\u{1F44F}')
-                                                                                                <i id="show_Emoji"> <img
-                                                                                                        src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                                                        loading="lazy" alt="Clap Emoji"
-                                                                                                        class="emoji" data-emoji="👏"
-                                                                                                        data-unicode="\\u{1F44F}"></i>
-                                                                                            @else
-                                                                                                <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                                                            @endif</button>
-                                                                                            <p>{{ $reply['comment_total_likes'] }}
+                                                                                                @endif
+                                                                                              </button>
+                                                                                              <p id="commentTotalLike_{{ $reply['id'] }}">{{ $reply['comment_total_likes'] }}
                                                                                             </p>
                                                                                         </div>
                                                                                         <button
