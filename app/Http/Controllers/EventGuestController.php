@@ -939,7 +939,7 @@ class EventGuestController extends Controller
                         'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
                                     ? asset('storage/profile/' . $contact_sync->photo) 
                                     : "",
-                        'phone_number'=>((!empty($user->phone) && $user->phone != NULL) ? $user->phone : ""),
+                        'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
                         'prefer_by'=>$prefer_by
            
                     ];
@@ -948,7 +948,7 @@ class EventGuestController extends Controller
             
         }
 
-                dd($users_data);
+                // dd($users_data);
 
     }
         return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','users_data'))->render()]);
