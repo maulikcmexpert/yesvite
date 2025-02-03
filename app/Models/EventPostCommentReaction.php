@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\EventPostComment;
 use App\Models\User;
 
-class EventPostCommentReaction extends Model
+class   EventPostCommentReaction extends Model
 {
     use HasFactory;
 
