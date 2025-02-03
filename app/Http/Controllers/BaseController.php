@@ -25,7 +25,7 @@ class BaseController extends Controller
     }
     protected function getPrices()
     {
-        // dd(createShortUrl("yesvite.com"));
+        // dd(createShortUrl("https://yesvite.com"));
 
         // $users = UserOpt::select('id', 'event_id', 'event_invited_user_id')
         //     ->groupBy('event_id')
