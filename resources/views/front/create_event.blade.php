@@ -1636,7 +1636,7 @@
                                                                         $user = Auth::guard('web')->user();
                                                                     @endphp
                                                                     <h5
-                                                                        class="{{ $fontColorUser }} add-item-under-text me-auto">
+                                                                        class="{{ $fontColorUser }} add-item-under-text">
                                                                         {{ $initialsUser }} </h5>
                                                                    <h5 > {{ $user->firstname }} {{ $user->lastname }}
 
@@ -1774,7 +1774,7 @@
                                                                     $user = Auth::guard('web')->user();
                                                                 @endphp
                                                                  <h5
-                                                                 class="{{ $fontColorUser }} add-item-under-text me-auto">
+                                                                 class="{{ $fontColorUser }} add-item-under-text">
                                                                  {{ $initialsUser }} </h5>
                                                             <h5 > {{ $user->firstname }} {{ $user->lastname }}
                                                              </h5>
