@@ -694,7 +694,6 @@ class EventGuestController extends Controller
 
     function fetch_guest($id,$is_sync)
     {
-        dd($id,$is_sync);
         if($is_sync=="1"){
             $guest = EventInvitedUser::with('contact_sync')->findOrFail($id); 
             return response()->json([
