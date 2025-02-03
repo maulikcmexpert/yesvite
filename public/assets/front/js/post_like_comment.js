@@ -91,15 +91,15 @@ $(document).ready(function () {
         const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
 
         // Toggle like button appearance for both elements
-        if (isLiked) {
-            button.removeClass("liked");
-            mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
-           replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
-        } else {
-            button.addClass("liked");
-            mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
-            replyLikeIcon.removeClass("fa-regular").addClass("fa-solid");
-        }
+        // if (isLiked) {
+        //     button.removeClass("liked");
+        //     mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+        //    replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+        // } else {
+        //     button.addClass("liked");
+        //     mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+        //     replyLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+        // }
 
         // AJAX call to update like state
         $.ajax({
@@ -122,7 +122,7 @@ $(document).ready(function () {
                     $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
 
                     // Update the reaction display
-                    // replyLikeIcon.text(`${response.self_reaction}`);
+                    replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
                     alert(response.message);
                 }
