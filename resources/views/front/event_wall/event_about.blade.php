@@ -201,12 +201,12 @@
                                                         </div>
                                                         <div class="hosted-by-date-time-content">
                                                             <h6>Date</h6>
-                                                            <h3>{{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('M d, Y') }}
-                                                                @if (!empty($eventDetails['end_date']))
-                                                                    to
-                                                                    {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('M d, Y') }}
+                                                            <h3>
+                                                                {{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('F d, Y') }}
+                                                                @if (!empty($eventDetails['end_date']) &&
+                                                                     ($eventDetails['event_date'] !== $eventDetails['end_date']))
+                                                                    to {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('F d, Y') }}
                                                                 @endif
-
                                                             </h3>
                                                         </div>
                                                     </div>
@@ -571,7 +571,7 @@
 
 
 
-                                            @foreach ($eventDetails['event_schedule'] as $index => $schedule)
+                                            {{-- @foreach ($eventDetails['event_schedule'] as $index => $schedule)
                                                 @if ($index == 0)
                                                     <span class="timing">
                                                         {{ Carbon::parse($schedule['start_time'])->format('h:i A') }}
@@ -582,8 +582,12 @@
                                                     {{ Carbon::parse($schedule['end_time'])->format('h:i A') }}
                                                     </span>
                                                 @endif
-                                            @endforeach
-
+                                            @endforeach --}}
+                                            <span class="timing">{{ $eventDetails['event_time'] }}
+                                                @if (!empty($eventDetails['end_time']))
+                                                    to {{ $eventDetails['end_time'] }}
+                                                @endif
+                                            </span>
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">

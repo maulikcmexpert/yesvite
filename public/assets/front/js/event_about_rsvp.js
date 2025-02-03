@@ -191,6 +191,25 @@ console.log(adults,kids);
         window.open(googleCalendarUrl);
     });
 
+    $(".noattending-btn").on('click',function(){
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        if(rsvpStatus=='1'){
+            $("#option6").prop('checked',true);
+            $("#rsvp_status_adults").val(0);
+            $("#rsvp_status_kids").val(0);
+        }else{
+            $("#option5").prop('checked',false);
 
+        }
+    })
+    $(".attending-btn").on('click',function(){
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        if(rsvpStatus=='1'){
+            $("#option6").prop('checked',true);
 
+        }else{
+            $("#option5").prop('checked',false);
+
+        }
+    })
 });
