@@ -1826,7 +1826,7 @@ function processTimers() {
 
     messages.forEach((msg) => {
         let timeElement = msg.querySelector(".time");
-        let seenStatus = msg.querySelector(".seenStatus");
+        let seenStatus = timeElement.nextElementSibling;
         let time = timeElement.getAttribute("data-time");
         let senderType = msg.classList.contains("sender")
             ? "sender"
@@ -1834,14 +1834,22 @@ function processTimers() {
 
         if (time === lastTime && senderType === lastSender) {
             if (lastElement) lastElement.style.display = "none";
-            if (seenStatus) seenStatus.style.display = "none";
+            if (
+                lastElement?.nextElementSibling?.classList.contains(
+                    "seenStatus"
+                )
+            ) {
+                lastElement.nextElementSibling.style.display = "none";
+            }
         }
 
         lastTime = time;
         lastSender = senderType;
         lastElement = timeElement;
         timeElement.style.display = "inline";
-        if (seenStatus) seenStatus.style.display = "inline-block";
+        if (seenStatus && seenStatus.classList.contains("seenStatus")) {
+            seenStatus.style.display = "inline-block";
+        }
     });
 }
 
