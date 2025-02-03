@@ -993,7 +993,7 @@ $(document).ready(function () {
             pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
-        else if (photoForm.is(':visible') && photoForm.length > 0) {
+        else if (photoForm.is(':visible') && photoForm.length > 0 &&  photoForm !== '') {
             // Check if there's a valid photo (adjust this to your actual field for photo upload)
             var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
@@ -1017,7 +1017,7 @@ $(document).ready(function () {
                 return;
             }
 
-            document.getElementById('photoPostType').value = 0; //
+            document.getElementById('photoPostType').value = 0;
             $this.prop('disabled', true)
             textForm.submit();
         }
