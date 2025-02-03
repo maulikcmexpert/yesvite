@@ -914,11 +914,11 @@ class EventGuestController extends Controller
                 // If the user exists, add data to the $users_data array
                 $users_data[] = [
                     'user_id' => $user->id,
-                    'firstname' => (!empty($user->firstName) && $user->firstName != NULL) ? $user->firstName : "",
-                    'lastname' => (!empty($user->lastName) && $user->lastName != NULL) ? $user->lastName : "",
+                    'firstname' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
+                    'lastname' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                     'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
-                    'profile' => (!empty($user->photo) && $user->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->photo))) 
-                                ? asset('storage/profile/' . $user->photo) 
+                    'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
+                                ? asset('storage/profile/' . $user->profile) 
                                 : "",
                 ];
             } else {

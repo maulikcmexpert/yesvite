@@ -405,6 +405,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('secondary_user');
         Session::forget('desgin_slider');
         Session::forget('notification_event_ids');
+        Session::forget('add_guest_user_id');
 
         return redirect('login');
     })->name('logout');
