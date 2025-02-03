@@ -5,9 +5,10 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     $('#editrsvp').modal('show'); // Hide the modal initially to set up data
 
     const guestId = $(this).data('guest-id');
+    const is_sync = $(this).data('is_sync');
     console.log('Guest ID:', guestId);
     $.ajax({
-        url: base_url + "event_guest/fetch_guest/" + guestId, // Fetch guest data
+        url: base_url + "event_guest/fetch_guest/" + guestId+"/"+is_sync, // Fetch guest data
         method: 'GET',
         success: function (response) {
             console.log("Response received: ", response); // Debugging line
@@ -30,7 +31,10 @@ $(document).on('click', '.edit_guest_rsvp', function () {
 
             // Store guest ID in the save button data attribute
             $('#editrsvp .guest-rsvp-edit-btn').data('guest-update-id', guestId);
+            $('#editrsvp .guest-rsvp-edit-btn').data('guest-is_sync', is_sync);
+
             $('#editrsvp .remove_guest_page').data('guest-update-id', guestId);
+            $('#editrsvp .remove_guest_page').data('guest-is_sync', is_sync);
             $('#editrsvp .remove_guest_page').data('user-id', response.user_id);
             $('#editrsvp .remove_guest_page').data('event-id', response.event_id);
             $('#editrsvp').modal('show'); // Show the modal

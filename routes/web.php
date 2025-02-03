@@ -284,7 +284,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_photo/userPostCommentReply', [EventPhotoController::class, 'userPostCommentReply']);
     Route::post('event_photo/userPostLikeDislike', [EventPhotoController::class, 'userPostLikeDislike'])->name('event_photo.userPostLikeDislike');
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
-    Route::get('event_guest/fetch_guest/{id}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
+    Route::get('event_guest/fetch_guest/{id}/{is_sync}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
     Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
     Route::post('event_guest/editContact',  [EventGuestController::class, 'editContact']);
     Route::post('event_guest/deleteContact',  [EventGuestController::class, 'deleteContact']);

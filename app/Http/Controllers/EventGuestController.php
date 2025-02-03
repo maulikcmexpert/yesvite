@@ -692,23 +692,41 @@ class EventGuestController extends Controller
         }
     }
 
-    function fetch_guest($id)
+    function fetch_guest($id,$is_sync)
     {
 
-        $guest = EventInvitedUser::with('user')->findOrFail($id); // Eager load the related 'user' model
-
-        return response()->json([
-            'id' => $guest->id,
-            'user_id' => $guest->user_id,
-            'event_id'=> $guest->event_id,
-            'firstname' => $guest->user->firstname,
-            'lastname' => $guest->user->lastname,
-            'email' => $guest->user->email,
-            'profile' => $guest->user->profile ? asset('storage/profile/' . $guest->user->profile) : asset('images/default-profile.png'),
-            'adults' => $guest->adults,
-            'kids' => $guest->kids,
-            'rsvp_status' => $guest->rsvp_status,
-        ]);
+        if($is_sync==1){
+            $guest = EventInvitedUser::with('contact_sync')->findOrFail($id); 
+            return response()->json([
+                'id' => $guest->id,
+                'user_id' => $guest->sync_id,
+                'event_id'=> $guest->event_id,
+                'firstname' => (!empty($guest->contact_sync->firstName) && $guest->contact_sync->firstName != NULL) ? $guest->contact_sync->firstName : "",
+                'lastname' => (!empty($guest->contact_sync->lastName) && $guest->contact_sync->lastName != NULL) ? $guest->contact_sync->lastName : "",
+                'email' =>  (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "",
+                'profile' =>(!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "" ,
+                'adults' => $guest->adults,
+                'kids' => $guest->kids,
+                'rsvp_status' => $guest->rsvp_status,
+                'is_sync'=>1
+            ]);
+        }else{
+            $guest = EventInvitedUser::with('user')->findOrFail($id);
+            return response()->json([
+                'id' => $guest->id,
+                'user_id' => $guest->user_id,
+                'event_id'=> $guest->event_id,
+                'firstname' => $guest->user->firstname!=""? $guest->user->firstname:"",
+                'lastname' => $guest->user->lastname!=""?$guest->user->lastname:"",
+                'email' => $guest->user->email,
+                'profile' => $guest->user->profile ? asset('storage/profile/' . $guest->user->profile) : asset('images/default-profile.png'),
+                'adults' => $guest->adults,
+                'kids' => $guest->kids,
+                'rsvp_status' => $guest->rsvp_status,
+                'is_sync'=>0
+            ]);
+        }
+      
     }
 
     public function updateRsvp(Request $request, $id)
