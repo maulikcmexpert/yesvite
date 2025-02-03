@@ -445,6 +445,14 @@ async function handleNewConversation(snapshot) {
         //     .replaceWith(userStatus);
 
         const userImg = $(conversationElement).find(".user-img");
+        setTimeout(function () {
+            const spanElement = userImg.find("span");
+            if (spanElement.length) {
+                spanElement.replaceWith(userStatus);
+            } else {
+                userImg.append(userStatus);
+            }
+        }, 2000);
         const spanElement = userImg.find("span");
         if (spanElement.length) {
             spanElement.replaceWith(userStatus);
