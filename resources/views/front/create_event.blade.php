@@ -1381,9 +1381,9 @@
             @endif
             <div class="potluck-category">
                 <h5>Potluck Categories</h5>
-                <input type="hidden" id="category_count" value="0">
                 @if (isset($eventDetail['podluck_category_list']) && count($eventDetail['podluck_category_list']) > 0)
-                    @foreach ($eventDetail['podluck_category_list'] as $index => $data)
+                <input type="hidden" id="category_count" value="{{count($eventDetail['podluck_category_list'])}}">
+                @foreach ($eventDetail['podluck_category_list'] as $index => $data)
                    
                         <div class="category-main-dishesh potluckmain-{{ $index }}">
                             <div class="category-list">
@@ -3203,6 +3203,8 @@
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
             ? $eventDetail['co_host_list'][0]['phone_number']
             : '';
+    $totalCategoryItem =
+        isset($eventDetail['totalCategoryItem']) ? $eventDetail['totalCategoryItem']:0;
 @endphp
 <input type="hidden" name="giftRegestryData[]" value="{{ json_encode($giftRegestryData) }}">
 <input type="hidden" id="app_user" value="{{ $app_user }}">
@@ -3222,6 +3224,7 @@
 <input type="hidden" id="cohostemail" value="{{ $cohostemail }}">
 <input type="hidden" id="cohostphone_number" value="{{ $cohostphone_number }}">
 <input type="hidden" id="isCopy" value="{{ $eventDetail['isCopy'] }}">
+<input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
 
 
 
