@@ -2,7 +2,7 @@ let eventData = {};
 let isCohost = $("#isCohost").val();
 var total_activities = 0;
 var category = $("#category_count").val() || 0;
-var items = 0;
+var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
 var activities = {};
 var selected_co_host = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
@@ -9069,4 +9069,6 @@ function getcoins() {
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
-potluck_cateogry_item_count();
+if(category!=0){
+    potluck_cateogry_item_count();
+}

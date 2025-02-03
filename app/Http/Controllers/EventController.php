@@ -392,7 +392,7 @@ class EventController extends BaseController
                     // dd($categories);
                     $categoryNames =  collect($categories)->pluck('category_name')->toArray();
                     $categories_item = Session::get('category_item', []);
-
+                    $totalCategoryItem = 0;
                     foreach ($eventpotluckData as  $key => $value) {
 
                         $potluckCategory['id'] = $value->id;
@@ -469,6 +469,7 @@ class EventController extends BaseController
                                 $potluckItem['innerUserQnt'] =  $innnerUserItem;
 
                                 $potluckCategory['items'][] = $potluckItem;
+                                $totalCategoryItem++;
                             }
                         }
 
@@ -483,6 +484,7 @@ class EventController extends BaseController
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
+                    $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
                     
                 }
             }

@@ -3203,6 +3203,8 @@
         isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
             ? $eventDetail['co_host_list'][0]['phone_number']
             : '';
+    $totalCategoryItem =
+        isset($eventDetail['totalCategoryItem']) ? $eventDetail['totalCategoryItem']:0;
 @endphp
 <input type="hidden" name="giftRegestryData[]" value="{{ json_encode($giftRegestryData) }}">
 <input type="hidden" id="app_user" value="{{ $app_user }}">
@@ -3222,6 +3224,7 @@
 <input type="hidden" id="cohostemail" value="{{ $cohostemail }}">
 <input type="hidden" id="cohostphone_number" value="{{ $cohostphone_number }}">
 <input type="hidden" id="isCopy" value="{{ $eventDetail['isCopy'] }}">
+<input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
 
 
 
