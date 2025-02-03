@@ -19,9 +19,12 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             console.log("Response received: ", response); // Debugging line
             // Populate the modal with fetched data
             if(response.profile!=""){
+                $('#editrsvp3 .rsvp-img img').css('display','block');
                 $('#editrsvp3 .rsvp-img img').attr('src', response.profile);
+                $('#editrsvp3 .rsvp-img h5').css('display','none');
+
             }else{
-                $('#editrsvp3 .rsvp-img img').remove();
+                $('#editrsvp3 .rsvp-img img').css('display','block');
                 $('#editrsvp3 h5').text(`${response.firstname} ${response.lastname}`);
             }
             $('#editrsvp3 .adultcount').val(response.adults || 0);

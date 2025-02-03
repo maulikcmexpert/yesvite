@@ -215,8 +215,9 @@ if ($hostView) {
                 <div class="guest-rsvp-head">
                     <div class="rsvp-img">
                         <img src="{{ asset('assets/front/img/rs-img.png') }}')}}" alt="rs-img">
+                        <h5 style="display:none;"></h5>
                     </div>
-                    <h5>Tiana Dokidis</h5>
+                    <!-- <h5></h5> -->
                 </div>
                 <div class="guest-rsvp-incres">
                     <h6>Guests</h6>
