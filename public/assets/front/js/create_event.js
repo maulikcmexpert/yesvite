@@ -9145,22 +9145,16 @@ if (category != 0) {
     potluck_cateogry_item_count();
 }
 
-$(document).on('blur', '#event-name', function() {
+$(document).on('blur change click', '#event-name ,#event-date, #start-time', function() {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
     var start_time = $("#start-time").val();
-    alert('blur')
+   
+    if (event_name !== "" && event_date !== "" && start_time !== "") {
+        $("#guestBtn").attr('style', 'color: black !important;');
+    } else {
+        $("#guestBtn").attr('style', 'color: #b5b8bf !important;');
+    }
 });
 
-$(document).on('change', '#event-date, #start-time', function() {
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-    alert('change')
-});
-$(document).on('click', '#start-time', function() {
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-    alert('click')
-});
+
