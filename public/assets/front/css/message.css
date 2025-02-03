@@ -1821,7 +1821,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
 }
 
 .reply-section-wrp{
-    align-items: start;
+    align-items: start !important;
 }
 
 .reply-section-wrp .reaction-icon, .reply-section-wrp .reply-icon{
