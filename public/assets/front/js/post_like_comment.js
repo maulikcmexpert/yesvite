@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-            $(".commented-user-wrp.active").data("comment-id") || null; // Find active comment if replying
+            $("#parent_comment_id").val() || null; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
