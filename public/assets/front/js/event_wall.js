@@ -990,6 +990,7 @@ $(document).ready(function () {
             // }
             // Set the value of the hidden input in the poll form
             document.getElementById('pollContent').value = postContent;
+            $this.prop('disabled', true)
             pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
@@ -1224,3 +1225,5 @@ $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
     $(".create-post-upload-img-inner").removeClass("d-none");
 });
+
+

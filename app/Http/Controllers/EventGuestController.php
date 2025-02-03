@@ -19,6 +19,7 @@ use App\Models\{
     EventPostReaction
 };
 
+use App\Models\contact_sync;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -899,28 +900,58 @@ class EventGuestController extends Controller
             }
 
     }
-    public function store_add_new_guest(Request $request){
-        dd($request);
-        $user_id = $request->user_id;
-        $check_status = $request->status;
-        if ($check_status == 1) {
-            $userIds = session('add_guest_user_id', []);
-            if (!in_array($user_id, $userIds)) {
-                $userIds[] = $user_id;
-            }
-            session(['add_guest_user_id' => $userIds]);
-        } else {
-            $userIds = session()->get('add_guest_user_id'); 
-            $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
-            session(['add_guest_user_id' => $userIds]);
-        }
-        // return session()->get('add_guest_user_id');
-    }
+  
     public function see_all_invite_yesvite(Request $request){
     
         $yesvite_all_invite=getInvitedUsersList($request->event_id);
-        
-        return response()->json(['view' => view( 'front.event-wall.see-invite', compact('yesvite_all_invite'))->render()]);
+        $new_added_user=session()->get('add_guest_user_id');
+        $users_data = [];
+
+        // dd($new_added_user);
+        if(!empty($new_added_user)){
+        foreach ($new_added_user as $user) {
+            // Try fetching the user from the User table
+            $user = User::find($user['user_id']);
+            $prefer_by=$user['prefer_by'];
+
+            if ($user) {
+                // If the user exists, add data to the $users_data array
+                $users_data[] = [
+                    'user_id' => $user->id,
+                    'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
+                    'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
+                    'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
+                    'phone_number'=>((!empty($user->phone_number) && $user->phone_number != NULL) ? $user->phone_number : ""),
+                    'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
+                                ? asset('storage/profile/' . $user->profile) 
+                                : "",
+                    'prefer_by'=>$prefer_by
+                ];
+            } else {
+                $contact_sync = contact_sync::find($user['user_id']);
+                
+                if ($contact_sync) {
+                    $users_data[] = [
+                        'user_id' => $contact_sync->sync_id,
+                        'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
+                        'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
+                        'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
+                        'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
+                                    ? asset('storage/profile/' . $contact_sync->photo) 
+                                    : "",
+                        'phone_number'=>((!empty($user->phone) && $user->phone != NULL) ? $user->phone : ""),
+                        'prefer_by'=>$prefer_by
+           
+                    ];
+                }
+            }        
+            
+        }
+
+                dd($users_data);
+
+    }
+        return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','users_data'))->render()]);
 
     }
 

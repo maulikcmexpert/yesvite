@@ -1096,6 +1096,10 @@ main {
   color: var(--light-color);
 }
 
+.create-post-poll-inner form label span.option-number{
+    color: var(--secondary-black) !important;
+}
+
 .create-post-poll-inner form input::placeholder{
     color: var(--primary-black);
 }

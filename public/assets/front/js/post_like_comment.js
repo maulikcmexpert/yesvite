@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-            $(".commented-user-wrp.active").data("comment-id") || null; // Find active comment if replying
+        $("#parent_comment_id").val() || null; ; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
@@ -366,6 +366,8 @@ $(document).ready(function () {
                             replyList.append(replyHTML);
                         });
                     }
+                    commentInput.val("");
+                    $("#parent_comment_id").val(""); //
                 }
             },
             error: function (xhr) {
@@ -411,7 +413,7 @@ $(document).ready(function () {
             console.error("Comment input field not found!");
             return;
         }
-
+        $("#parent_comment_id").val(parentId);
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
@@ -744,12 +746,12 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1);
+                storeAddNewGuest(id,1,isSelected);
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0);
+                storeAddNewGuest(id,0,isSelected);
 
                 console.log(guestList);
             }
@@ -771,25 +773,27 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
+                storeAddNewGuest(id,1,isSelected);
 
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
+                storeAddNewGuest(id,0,isSelected);
 
                 console.log(guestList);
             }
 
         });
 
-        function storeAddNewGuest(id,status){
+        function storeAddNewGuest(id,status,prefer_by){
             $.ajax({
-                url: base_url+"event_guest/store_add_new_guest",
-                type: 'GET',        
-                data: {status:status,user_id:id},          
-                success: function (response) { 
+                url: base_url+"store_add_new_guest",
+                type: 'GET',
+                data: {user_id:id,status:status,prefer_by:prefer_by},
+                success: function (response) {
                  console.log(response);
-                 
+
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
@@ -825,10 +829,12 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
+            storeAddNewGuest(id,1,isSelected);
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
+            storeAddNewGuest(id,0,isSelected);
 
             console.log(guestList);
         }// App user = 0 for phone (non-app user)

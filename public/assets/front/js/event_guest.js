@@ -315,7 +315,6 @@ $(document).on('click', '.delete_failed_contact', function () {
 
 $(document).on('click','.add_guest_seeall',function(){
     let event_id = $('#event_id').val();
-    alert();
     $.ajax({
         url: base_url + "event_guest/see_all_invite_yesvite",  // Ensure this route is defined in web.php/api.php
         type: "POST",
@@ -327,13 +326,12 @@ $(document).on('click','.add_guest_seeall',function(){
         },
         success: function (response) {
             console.log(response);
-            // if (response.status === 1) {
-            //     toastr.success(response.message);
-            //     // // Find the guest container by guestId and remove it from the DOM
-            //     $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
-            // } else {
-            //     toastr.error(response.message);
-            // }
+            if (response.view !="") {
+              $('#seeAllTabContent').html(response.view);
+              $('#seeAll').modal('show');
+            } else {
+                toastr.error(response.message);
+            }
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!");

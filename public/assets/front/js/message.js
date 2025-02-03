@@ -2076,15 +2076,15 @@ function createMessageElement(
     const replySection =
         messageData.replyData && messageData.replyData.replyTimeStamp != 0
             ? `
-            <div>
+            <div class="reply-section-wrp">
+                ${
+                    senderprofile != ""
+                        ? isReceiver
+                            ? `<div class="simplemsg-img me-2 user-img new-msg-class replay-img"><span>${senderprofile}<span></div>`
+                            : ""
+                        : ""
+                }
             <div class="reply-section">
-             ${
-                 senderprofile != ""
-                     ? isReceiver
-                         ? `<div class="simplemsg-img me-2 user-img new-msg-class replay-img"><span>${senderprofile}<span></div>`
-                         : ""
-                     : ""
-             }
                 <span class="senderName">${senderName}</span>            
                 <div>
                     <span> ${messageData.replyData.replyMessage}</span>
