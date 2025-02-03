@@ -3257,7 +3257,7 @@ class EventController extends BaseController
                 }
                 $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
-            // dd($event_creation->design_image);
+            dd($event_creation->design_image);
             $textElemtents = $request->textData['textElements'];
 
             foreach ($textElemtents as $key => $textJson) {
