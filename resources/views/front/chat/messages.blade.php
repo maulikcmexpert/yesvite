@@ -941,7 +941,7 @@ use Carbon\Carbon;
                     
                     <div class="submit-blocks">
                         <div class="report-input-wrp">
-                            <span class="active">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
+                            <span class="">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
                         </div>
                         <div class="report-input-wrp">
                             <span>Hate</span> <input type="radio" name="report_type" value="Hate"/>
