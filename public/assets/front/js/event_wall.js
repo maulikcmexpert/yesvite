@@ -923,9 +923,9 @@ $(document).ready(function () {
         const optionCount = pollOptionsContainer.children().length + 1;
 
         const newOption = $(`
-            <div class="mb-3 poll-option">
+            <div class="mb-3 option-poll">
                 <label class="form-label d-flex align-items-center justify-content-between">
-                    Option <span class="option-number">${optionCount}</span>*
+                    <p>Option <span class="option-number">${optionCount}</span>*</p>
                     <span class="char-count">0/140</span>
                 </label>
                 <div class="position-relative">
@@ -957,7 +957,7 @@ $(document).ready(function () {
 
     // Function to renumber options correctly after deletion
     function renumberOptions() {
-        $(".poll-options .poll-option").each(function (index) {
+        $(".poll-options .option-poll").each(function (index) {
             $(this).find(".option-number").text(index + 3);
         });
     }
@@ -993,7 +993,7 @@ $(document).ready(function () {
             pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
-        else if (photoForm.is(':visible') && photoForm.length > 0) {
+        else if (photoForm.is(':visible') && photoForm.length > 0 &&  photoForm !== '') {
             // Check if there's a valid photo (adjust this to your actual field for photo upload)
             var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
@@ -1017,7 +1017,7 @@ $(document).ready(function () {
                 return;
             }
 
-            document.getElementById('photoPostType').value = 0; //
+            document.getElementById('photoPostType').value = 0;
             $this.prop('disabled', true)
             textForm.submit();
         }

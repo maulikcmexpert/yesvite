@@ -1523,6 +1523,7 @@ main {
     justify-content: center;
     border-radius: 50%;
     font-size: 15px;
+    color: var(--white);
 }
 
 .commented-user-profile-img img{
