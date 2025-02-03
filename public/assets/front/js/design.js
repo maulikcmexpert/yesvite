@@ -671,17 +671,19 @@ function bindData(current_event_id) {
                         if (element.left === undefined) {
                             console.log(element.centerX);
                             console.log(scaleFactor);
+                            console.log(element.width);
                             element.left =
-                                element.centerX - element.width * scaleFactor;
+                                element.centerX + element.width * scaleFactor;
                             console.log("left", element.left);
                         }
 
                         if (element.top === undefined) {
                             console.log(element.centerY);
                             console.log(scaleFactor);
+                            console.log(element.width);
 
                             element.top =
-                                element.centerY - element.width * scaleFactor;
+                                element.centerY + element.width * scaleFactor;
                             console.log("top", element.top);
                         }
 
