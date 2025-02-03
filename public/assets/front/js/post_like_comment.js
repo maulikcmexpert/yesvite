@@ -874,7 +874,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
        
 
             const contactHtml = `
-                <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
+                <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
                        ${profileImage}
                         <a href="#" class="close remove_new_added_user" data-id="${id}">
