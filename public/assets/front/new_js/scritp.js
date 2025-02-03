@@ -347,6 +347,44 @@ $(document).on("change", ".fileInputtype", function (event) {
 //     });
 // });
 
+
+// ===photo-likes-option===
+$(document).ready(function () {
+    $(".photo-card-head-right").each(function () {
+      const $container = $(this); // Get the current container
+      const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+      const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
+      let pressTimer;
+
+      // Handle long press to show emoji dropdown (for both desktop and mobile)
+      $likeButton.on("mousedown touchstart", function () {
+        pressTimer = setTimeout(function () {
+          $emojiDropdown.show(); // Show emoji dropdown after long press
+        }, 500); // Trigger long press after 0.5 seconds
+      });
+
+      $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+        clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+      });
+
+      // Handle emoji click
+      $emojiDropdown.on("click", ".emoji", function () {
+        const emoji = $(this).data("emoji");
+
+        // Remove the heart icon and set emoji inside the button
+        $likeButton.html(`<span class="emoji">${emoji}</span>`); // Show selected emoji inside button
+
+        $emojiDropdown.hide(); // Hide emoji dropdown after selection
+      });
+
+      // Optional: Hide the emoji dropdown if you click outside of it
+      $(document).on("click touchstart", function (e) {
+        if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+          $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+        }
+      });
+    });
+  });
 // ===add-photo-vidoe-div-onclick===
 const createphotobtn = document.getElementById("create-photo-btn");
 const createpollbtn = document.getElementById("create-poll-btn");

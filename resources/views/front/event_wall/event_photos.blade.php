@@ -914,7 +914,7 @@
                                     data-user-id="{{ $login_user_id }}">
                                     <i class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
 
-                                <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown1"
+                                <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
                                     style="display: none;">
                                     <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji"
                                         class="emoji model_emoji" data-emoji="❤️" data-unicode="\\u{2764}">
