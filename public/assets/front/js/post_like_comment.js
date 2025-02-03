@@ -795,7 +795,10 @@ $(document).ready(function () {
                 data: {user_id:id,status:status,prefer_by:prefer_by},
                 success: function (response) {
                  console.log(response);
-
+                if(response.view!=""){
+                    $('.selected-contacts-list').remove('guest-users');
+                    $('.selected-contacts-list').append(response.view);
+                }
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');

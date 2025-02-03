@@ -809,11 +809,11 @@ ul.member-lists li:last-child {
 .msg-body ul li.sender div.media-msg {
     background-color: #F8F9FD;
     padding: 10px;
-    border-radius: 20px 0px 20px 20px;
-    -webkit-border-radius: 20px 0px 20px 20px;
-    -moz-border-radius: 20px 0px 20px 20px;
-    -ms-border-radius: 20px 0px 20px 20px;
-    -o-border-radius: 20px 0px 20px 20px;
+    border-radius: 0px 20px 20px 20px;
+    -webkit-border-radius: 0px 20px 20px 20px;
+    -moz-border-radius: 0px 20px 20px 20px;
+    -ms-border-radius: 0px 20px 20px 20px;
+    -o-border-radius: 0px 20px 20px 20px;
     display: inline-block;
     max-width: 317px;
     /* margin-left: auto; */
@@ -1839,6 +1839,15 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
 
 .reply-section-wrp .reaction-icon, .reply-section-wrp .reply-icon{
     align-self: center;
+}
+
+.reply-section-wrp .reaction-ul{
+    left: 5px !important;
+    bottom: -10px !important;
+}
+
+.reply-section-wrp .reply-section{
+    padding-bottom: 20px !important;
 }
 
 /* ======= responsive ======== */

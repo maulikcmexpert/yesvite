@@ -1079,6 +1079,227 @@
                                                         </svg>
                                                     </span>
                                                 </div>
+
+                                                <div
+                                                class="posts-card-show-all-comments-wrp d-none show_{{ $poll['event_post_id'] }}">
+
+                                                <div class="posts-card-show-all-comments-inner">
+                                                    <ul class="top-level-comments">
+
+
+                                                        @foreach ($post['post_comment'] as $key => $comment)
+                                                            <li class="commented-user-wrp"
+                                                                data-comment-id="{{ $comment['id'] }}">
+                                                                <input type="hidden" id="parent_comment_id"
+                                                                    value="">
+
+                                                                <div class="commented-user-head">
+                                                                    <div class="commented-user-profile">
+                                                                        <div class="commented-user-profile-img">
+                                                                            @if ($comment['profile'] != '')
+                                                                                <img src="{{ $comment['profile'] }}"
+                                                                                    alt="" loading="lazy">
+                                                                            @else
+                                                                                @php
+                                                                                    $nameParts = explode(
+                                                                                        ' ',
+                                                                                        $comment['username'],
+                                                                                    );
+                                                                                    $firstInitial = isset(
+                                                                                        $nameParts[0][0],
+                                                                                    )
+                                                                                        ? strtoupper(
+                                                                                            $nameParts[0][0],
+                                                                                        )
+                                                                                        : '';
+                                                                                    $secondInitial = isset(
+                                                                                        $nameParts[1][0],
+                                                                                    )
+                                                                                        ? strtoupper(
+                                                                                            $nameParts[1][0],
+                                                                                        )
+                                                                                        : '';
+                                                                                    $initials =
+                                                                                        $firstInitial .
+                                                                                        $secondInitial;
+
+                                                                                    // Generate a font color class based on the first initial
+                                                                                    $fontColor =
+                                                                                        'fontcolor' . $firstInitial;
+                                                                                @endphp
+
+                                                                                <h5 class="{{ $fontColor }}">
+                                                                                    {{ $initials }}</h5>
+                                                                            @endif
+
+                                                                        </div>
+                                                                        <div
+                                                                            class="commented-user-profile-content">
+                                                                            <h3>{{ $comment['username'] }}</h3>
+                                                                            <p>{{ $comment['location'] ?? '' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="posts-card-like-comment-right">
+                                                                        @php
+                                                                        if($comment['is_like']==1){
+                                                                            $liked='liked';
+                                                                        }else{
+                                                                            $liked="";
+                                                                        }
+                                                                    @endphp
+                                                                        <p>{{ $comment['posttime'] }}</p>
+                                                                        <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                        data-user-id="{{ $login_user_id }}">
+                                                                        @if($comment['is_like']==1)
+                                                                        <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                        @elseif($comment['is_like']==0)
+                                                                        <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                        @endif
+                                                                  </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="commented-user-content">
+                                                                    <p>{{ $comment['comment'] }}</p>
+                                                                </div>
+                                                                <div class="commented-user-reply-wrp">
+                                                                    <div
+                                                                        class="position-relative d-flex align-items-center gap-2">
+                                                                        <button class="posts-card-like-btn" id="CommentlikeButton"
+                                                                        data-event-id="{{ $event }}"
+                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                        data-user-id="{{ $login_user_id }}">
+                                                                        @if($comment['is_like']==1)
+                                                                        <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                        @elseif($comment['is_like']==0)
+                                                                        <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                        @endif
+                                                                  </button>
+                                                                        <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <button
+                                                                        class="commented-user-reply-btn">Reply</button>
+                                                                </div>
+                                                                @if ($comment['total_replies'] > 0)
+                                                                    <ul>
+                                                                        @foreach ($comment['comment_replies'] as $reply)
+                                                                            <li class="reply-on-comment"
+                                                                                data-comment-id="{{ $reply['id'] }}">
+                                                                                <div class="commented-user-head">
+                                                                                    <div
+                                                                                        class="commented-user-profile">
+                                                                                        <div
+                                                                                            class="commented-user-profile-img">
+                                                                                            @if ($reply['profile'] != '')
+                                                                                                <img src="{{ $reply['profile'] }}"
+                                                                                                    alt=""
+                                                                                                    loading="lazy">
+                                                                                            @else
+                                                                                                @php
+                                                                                                    $nameParts = explode(
+                                                                                                        ' ',
+                                                                                                        $reply[
+                                                                                                            'username'
+                                                                                                        ],
+                                                                                                    );
+                                                                                                    $firstInitial = isset(
+                                                                                                        $nameParts[0][0],
+                                                                                                    )
+                                                                                                        ? strtoupper(
+                                                                                                            $nameParts[0][0],
+                                                                                                        )
+                                                                                                        : '';
+                                                                                                    $secondInitial = isset(
+                                                                                                        $nameParts[1][0],
+                                                                                                    )
+                                                                                                        ? strtoupper(
+                                                                                                            $nameParts[1][0],
+                                                                                                        )
+                                                                                                        : '';
+                                                                                                    $initials =
+                                                                                                        $firstInitial .
+                                                                                                        $secondInitial;
+
+                                                                                                    // Generate a font color class based on the first initial
+                                                                                                    $fontColor =
+                                                                                                        'fontcolor' .
+                                                                                                        $firstInitial;
+                                                                                                @endphp
+
+                                                                                                <h5
+                                                                                                    class="{{ $fontColor }}">
+                                                                                                    {{ $initials }}
+                                                                                                </h5>
+                                                                                            @endif
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="commented-user-profile-content">
+                                                                                            <h3>{{ $reply['username'] }}
+                                                                                            </h3>
+                                                                                            <p>{{ $reply['location'] ?? '' }}
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="posts-card-like-comment-right">
+                                                                                        <p>{{ $reply['posttime'] }}
+                                                                                        </p>
+                                                                                        <button
+                                                                                            class="posts-card-like-btn" id="CommentlikeButton"
+                                                                                            data-event-id="{{ $event }}"
+                                                                                           data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                            data-user-id="{{ $login_user_id }}">
+                                                                                            @if($reply['is_like']==1)
+                                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                                            @elseif($reply['is_like']==0)
+                                                                                            <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                                            @endif</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="commented-user-content">
+                                                                                    <p>{{ $reply['comment'] }}</p>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="commented-user-reply-wrp">
+                                                                                    <div
+                                                                                        class="position-relative d-flex align-items-center gap-2">
+                                                                                        <button
+                                                                                            class="posts-card-like-btn" id="CommentlikeButton"
+                                                                                            data-event-id="{{ $event }}"
+                                                                                           data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                            data-user-id="{{ $login_user_id }}">
+
+                                                                                            @if($reply['is_like']==1)
+                                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                                            @elseif($reply['is_like']==0)
+                                                                                            <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                                            @endif
+                                                                                          </button>
+                                                                                          <p id="commentTotalLike_{{ $reply['id'] }}">{{ $reply['comment_total_likes'] }}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <button
+                                                                                        class="commented-user-reply-btn">Reply</button>
+                                                                                </div>
+                                                                            </li>
+                                                                        @endforeach
+
+                                                                        <!-- Button to show more replies if any -->
+                                                                        <button class="show-comment-reply-btn">Show
+                                                                            {{ $comment['total_replies'] }}
+                                                                            reply</button>
+                                                                    </ul>
+                                                                @endif
+
+
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     @endforeach
