@@ -899,4 +899,8 @@ class EventGuestController extends Controller
             }
 
     }
+
+    public function see_all_invite_yesvite(Request $request){
+        dd($request);
+    }
 }
