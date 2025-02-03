@@ -189,7 +189,9 @@ $(document).ready(function () {
 
             const convertTo24HourFormat = (time) => {
                 const [hour, minuteWithPeriod] = time.split(":");
-                const [minute, period] = minuteWithPeriod.split(" ");
+                let minute = minuteWithPeriod.replace(/(am|pm)/i, "").trim(); // Remove 'am' or 'pm'
+                const period = minuteWithPeriod.match(/(am|pm)/i)?.[0]; // Extract 'am' or 'pm'
+
                 let newHour = parseInt(hour);
                 if (period?.toLowerCase() === "pm" && newHour !== 12) {
                     newHour += 12; // Convert PM time to 24-hour format
@@ -197,6 +199,7 @@ $(document).ready(function () {
                 if (period?.toLowerCase() === "am" && newHour === 12) {
                     newHour = 0; // Handle 12 AM as midnight
                 }
+
                 return `${newHour}:${minute}`;
             };
 
