@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-        $("#parent_comment_id").val() || null; ; // Find active comment if replying
+            $(".commented-user-wrp.active").data("comment-id") || null; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
@@ -366,8 +366,6 @@ $(document).ready(function () {
                             replyList.append(replyHTML);
                         });
                     }
-                    commentInput.val("");
-                    $("#parent_comment_id").val(""); //
                 }
             },
             error: function (xhr) {

@@ -3511,7 +3511,7 @@ $(document).on("click", "#save_activity_schedule", function () {
     console.log({ activityendtime });
 
     if (activityendtime != null) {
-        let lastendtime = convertTo24Hour(end_time);
+    let lastendtime = convertTo24Hour(end_time);
         let lastScheduleEndtime = convertTo24Hour(activityendtime);
 
         console.log(lastendtime);
