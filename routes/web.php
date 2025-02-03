@@ -286,6 +286,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
     Route::get('event_guest/fetch_guest/{id}/{is_sync}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
     Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
+    Route::post('event_guest/see_all_invite_yesvite',  [EventGuestController::class, 'see_all_invite_yesvite']);
     Route::post('event_guest/editContact',  [EventGuestController::class, 'editContact']);
     Route::post('event_guest/deleteContact',  [EventGuestController::class, 'deleteContact']);
     Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
