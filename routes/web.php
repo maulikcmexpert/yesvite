@@ -199,6 +199,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
     Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
     Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    Route::post('event/store_custom_design', [ControllersEventController::class, 'saveCustomDesign']);
     Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
     Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
     Route::post('event/list_group_memeber', [ControllersEventController::class, 'listGroupMember']);
