@@ -7901,6 +7901,7 @@ class ApiControllerv2 extends Controller
 
     public function eventWall(Request $request)
     {
+        dd(1);
         $user  = Auth::guard('api')->user();
 
         $rawData = $request->getContent();
@@ -8157,7 +8158,7 @@ class ApiControllerv2 extends Controller
                     // $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
-                    dd($isCoHost);
+                    // dd($isCoHost);
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
