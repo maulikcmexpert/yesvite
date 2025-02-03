@@ -393,36 +393,36 @@ foreach ($polls as $poll) {
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $postsNormalDetail['is_host'] =  ($user->id == $eventCreator->user_id) ? 1 : 0;
-                $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                $postsNormalDetail['username'] =  $user->firstname . ' ' . $user->lastname;
                 $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                 $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus ?? "";
                 $postsNormalDetail['kids'] = (int)$kids;
                 $postsNormalDetail['adults'] = (int)$adults;
-                $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) . ($value->user->state != "" ? ', ' . $value->user->state : '') : "";
+                $postsNormalDetail['location'] = $user->city != "" ? trim($user->city) . ($user->state != "" ? ', ' . $user->state : '') : "";
                 $postsNormalDetail['post_type'] = $value->post_type;
                 $postsNormalDetail['post_privacy'] = $value->post_privacy;
                 $postsNormalDetail['created_at'] = $value->created_at;
                 $postsNormalDetail['posttime'] = setpostTime($value->created_at);
                 $postsNormalDetail['commenting_on_off'] = $value->commenting_on_off;
                 $postsNormalDetail['post_image'] = [];
-                $totalEvent =  Event::where('user_id', $value->user->id)->count();
-                $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
-                $comments =  EventPostComment::where('user_id', $value->user->id)->count();
+                $totalEvent =  Event::where('user_id', $user->id)->count();
+                $totalEventPhotos =  EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
+                $comments =  EventPostComment::where('user_id', $user->id)->count();
                 $postsNormalDetail['user_profile'] = [
-                    'id' => $value->user->id,
-                    'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
-                    'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
-                    'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
-                    'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                    'location' => ($value->user->city != NULL) ? $value->user->city : "",
-                    'about_me' => ($value->user->about_me != NULL) ? $value->user->about_me : "",
-                    'created_at' => empty($value->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                    'id' => $user->id,
+                    'profile' => empty($user->profile) ? "" : asset('storage/profile/' . $user->profile),
+                    'bg_profile' => empty($user->bg_profile) ? "" : asset('storage/bg_profile/' . $user->bg_profile),
+                    'gender' => ($user->gender != NULL) ? $user->gender : "",
+                    'username' => $user->firstname . ' ' . $user->lastname,
+                    'location' => ($user->city != NULL) ? $user->city : "",
+                    'about_me' => ($user->about_me != NULL) ? $user->about_me : "",
+                    'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
                     'total_events' => $totalEvent,
-                    'visible' => $value->user->visible,
+                    'visible' => $user->visible,
                     'total_photos' => $totalEventPhotos,
                     'comments' => $comments,
-                    'message_privacy' => $value->user->message_privacy
+                    'message_privacy' => $user->message_privacy
                 ];
 
                 if ($value->post_type == '1' && !empty($value->post_image)) {
