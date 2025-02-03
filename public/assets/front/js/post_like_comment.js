@@ -844,7 +844,7 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            storeAddNewGuest(id,1,isSelected);
+            storeAddNewGuest(id,1,isSelected,'phone');
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
