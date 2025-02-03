@@ -907,7 +907,6 @@ class EventGuestController extends Controller
         $new_added_user=session()->get('add_guest_user_id');
         $users_data = [];
 
-        dd($new_added_user);
         if(!empty($new_added_user)){
         foreach ($new_added_user as $user) {
             // Try fetching the user from the User table
