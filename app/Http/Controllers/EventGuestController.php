@@ -916,8 +916,8 @@ class EventGuestController extends Controller
                 // If the user exists, add data to the $users_data array
                 $users_data[] = [
                     'user_id' => $user->id,
-                    'firstname' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
-                    'lastname' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
+                    'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
+                    'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                     'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
                     'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
                                 ? asset('storage/profile/' . $user->profile) 
@@ -929,8 +929,8 @@ class EventGuestController extends Controller
                 if ($contact_sync) {
                     $users_data[] = [
                         'user_id' => $contact_sync->sync_id,
-                        'firstname' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
-                        'lastname' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
+                        'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
+                        'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
                         'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
                         'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
                                     ? asset('storage/profile/' . $contact_sync->photo) 
