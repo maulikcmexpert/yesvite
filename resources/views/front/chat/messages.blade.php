@@ -928,8 +928,8 @@ use Carbon\Carbon;
         <div class="modal-content">
             <form name="chatreport" id="chatreport" action="{{route('chatReport')}}" method="post">
                 @csrf
-                <input name="report_conversation_id" id="report_conversation_id"/>
-                <input name="to_be_reported_user_id" id="to_be_reported_user_id"/>
+                <input type="hidden" name="report_conversation_id" id="report_conversation_id"/>
+                <input type="hidden" name="to_be_reported_user_id" id="to_be_reported_user_id"/>
                 <div class="modal-header">
                     <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

@@ -1801,12 +1801,13 @@ function createShortUrl($longUrl)
             'expires_at' => now()->addDays(90) // Expire after 90 days
         ]);
         // $base_url=config('app.url');
-        $base_url= url('/');
-        return "{$base_url}/{$shortUrlKey}";
+        $base_url = url('/');
+        return "{$base_url}/invite/{$shortUrlKey}";
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     try {

@@ -1755,6 +1755,47 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     opacity: 0;
 }
 
+
+#submitmsgreport .report-pr{
+    font-size: 14px;
+    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Medium);
+    line-height: 22px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+#submitmsgreport .submit-blocks{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+    /* / border-bottom: 1px solid var(--border); / */
+}
+
+#submitmsgreport .submit-blocks span{
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 10px 16px 10px;
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Semibold);
+    color: var(--secondary-black);
+    display: block;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#submitmsgreport .submit-blocks span.active,
+#submitmsgreport .submit-blocks span:hover
+{
+    background-color: #F73C71;
+    color: #fff;
+    border: 1px solid #F73C71;
+}
+
+
 /* ======= responsive ======== */
 
 

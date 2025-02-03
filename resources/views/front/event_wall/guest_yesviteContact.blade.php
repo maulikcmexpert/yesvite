@@ -101,7 +101,8 @@
                 @php
                     $counter = count($selected_yesvite_user) - 4;
                 @endphp
-                <a href="#" class="guest-user d-block yesvite ">
+                <a href="#" class="guest-user d-block yesvite "  data-bs-toggle="modal"
+                data-bs-target="#seeAll">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-email">+{{ $counter }}</span>
                         <span class="content">Total</span>
@@ -344,7 +345,8 @@
                 @php
                     $counter = count($selected_phone_user) - 4;
                 @endphp
-                <a href="#" class="guest-user d-block yesvite ">
+                <a href="#" class="guest-user d-block yesvite "  data-bs-toggle="modal"
+                data-bs-target="#seeAll">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-email">+{{ $counter }}</span>
                         <span class="content">Total</span>
