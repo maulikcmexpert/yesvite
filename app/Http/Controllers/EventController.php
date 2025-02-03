@@ -3545,6 +3545,24 @@ class EventController extends BaseController
                     sendNotification('update_address', $notificationParam);
                 }
 
+                if (isset($request->IsPotluck) && $request->IsPotluck==1) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
+                    );
+
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'from_time' => $oldstart_time,
+                        'to_time' =>  $newstart_time,
+                        'newUser' => $filteredIds
+                    ];
+
+                    sendNotification('update_potluck', $notificationParam);
+                }
+
                 if (isset($istime) && $istime == 1) {
 
                     $filteredIds = array_map(
