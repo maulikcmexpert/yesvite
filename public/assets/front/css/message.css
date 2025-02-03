@@ -1813,10 +1813,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     margin-bottom: 10px;
 }
 
-.report-input-wrp input[type="radio"]:checked + span{
+.report-input-wrp:has(input:checked) span{
     background-color: #F73C71;
-    color: #fff;
-    border: 1px solid #F73C71;
+    color: #fff !important;
+    border: 1px solid #F73C71 !important;
 }
 
 /* ======= responsive ======== */
