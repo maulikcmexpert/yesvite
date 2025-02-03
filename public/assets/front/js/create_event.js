@@ -4733,10 +4733,14 @@ async function saveDesignData(direct = false) {
 
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
+        }
+        if (direct) {
+            toastr.success("Event Updated Successfully");
+            window.location.href = base_url + "home";
+        }
+        if (imageResponse && imageResponse.image) {
             updateUIAfterSave(imageResponse.image);
         }
-
-        if (direct) return true;
     } catch (error) {
         console.error("Error in saveDesignData:", error);
     } finally {
