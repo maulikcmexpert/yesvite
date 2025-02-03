@@ -1,6 +1,6 @@
 let eventData = {};
 let isCohost = $("#isCohost").val();
-var total_activities =$("#TotalSedulare").val();
+var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
@@ -3341,7 +3341,7 @@ $(document).on("click", "#save_activity_schedule", function () {
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
-    
+
     var showAlert = false;
     let isendtime = 0;
     let istrue = 0;
@@ -4698,7 +4698,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = "";
-$(document).on("click", ".li_event_details", function () {
+function saveDesignData() {
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -4831,6 +4831,9 @@ $(document).on("click", ".li_event_details", function () {
             });
         $(".main-content-wrp").addClass("blurred");
     }, 500);
+}
+$(document).on("click", ".li_event_details", function () {
+    saveDesignData();
 });
 
 $(document).on("click", ".li_event_detail", function () {
@@ -8305,7 +8308,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     } else {
         eventData.is_update_event = "1";
     }
-    $(".li_event_details").trigger("click");
+    saveDesignData();
     savePage1Data();
     savePage3Data();
     savePage4Data();
