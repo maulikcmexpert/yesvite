@@ -2677,7 +2677,7 @@ if ($rsvpSent != null) {
         $user_id = $request->user_id;
         $check_status = $request->status;
         $prefer_by=$request->prefer_by;
-        dd($request);
+        // dd($request);
         $userData = session('add_guest_user_data', []);
 
         if ($check_status == 1) {
