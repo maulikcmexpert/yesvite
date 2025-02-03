@@ -8470,7 +8470,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    // window.location.href = base_url + "home";
+                    window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
