@@ -1820,6 +1820,14 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     border: 1px solid #F73C71 !important;
 }
 
+.reply-section-wrp{
+    align-items: start;
+}
+
+.reply-section-wrp .reaction-icon, .reply-section-wrp .reply-icon{
+    align-self: center;
+}
+
 /* ======= responsive ======== */
 
 
