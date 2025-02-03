@@ -8452,6 +8452,12 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     updateEventData();
 });
 
+$(document).on("click", ".saveDetailOnly", async function (e) {
+    e.preventDefault();
+    await saveDesignData(true);
+    updateEventData();
+});
+
 function updateEventData() {
     eventData.isdraft = "0";
     var data = eventData;
@@ -8484,6 +8490,7 @@ function updateEventData() {
             }
         },
         error: function (xhr, status, error) {
+            toastr.error("Something went wrong!!");
             console.log("AJAX error: " + error);
         },
     });
