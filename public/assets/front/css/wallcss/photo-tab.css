@@ -50,6 +50,7 @@
     justify-content: center;
     font-size: 15px;
     margin-bottom: 0;
+    color: var(--white);
 }
 
 .photo-card-head-left-content h3{
