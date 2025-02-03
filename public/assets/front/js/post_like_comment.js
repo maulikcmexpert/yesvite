@@ -871,6 +871,20 @@ $(document).ready(function () {
 
        
     });
+
+    $(document).on('click','.remove_new_phone_added_user',function(){
+
+        var user_id=$(this).attr('data-id');
+        const event_id = $('#event_id').val();
+
+        $('.add_phone_guest_'+user_id).remove();
+        $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
+        // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
+    
+        storeAddNewGuest(user_id,0,'',event_id,'phone');
+
+       
+    });
     // Declare guestList outside so it's globally accessible
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
@@ -980,7 +994,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                 <div class="guest-user-phone guest_yesvite add_phone_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
                        ${profileImage}
-                        <a href="#" class="close remove_new_added_user" data-id="${id}">
+                        <a href="#" class="close remove_new_phone_added_user" data-id="${id}">
                             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
                                 <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
