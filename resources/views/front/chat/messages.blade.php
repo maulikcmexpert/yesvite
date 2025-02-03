@@ -77,7 +77,7 @@ use Carbon\Carbon;
                                             <path d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-                                       
+
                                     </span>
                                     <span class="multi-archive" changeWith="1">
                                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@ use Carbon\Carbon;
 
                             @php
                             $i = 0;
-                        
+
                             @endphp
 
                             @foreach ($messages as $k => $message)
@@ -137,10 +137,10 @@ use Carbon\Carbon;
                             <input type="hidden" id="isGroup" value="{{@$message['group']}}" />
                             @endif
                             <div>
-                                <li data-msgTime="{{$message['timeStamp']}}" data-position="{{$i}}" class="{{@$message['unReadCount'] != '0' ?'active':''}} 
-                                {{$i == 0 ?'active':''}} msg-list {{@$message['isPin']=='1'?'pinned':''}} {{@$message['isMute']=='1'?'muted':''}} 
-                                conversation-{{@$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}" 
-                                data-userId="{{@$message['contactId']}}" data-msgKey={{$k}} data-search="{{$message['contactName']}}" 
+                                <li data-msgTime="{{$message['timeStamp']}}" data-position="{{$i}}" class="{{@$message['unReadCount'] != '0' ?'active':''}}
+                                {{$i == 0 ?'active':''}} msg-list {{@$message['isPin']=='1'?'pinned':''}} {{@$message['isMute']=='1'?'muted':''}}
+                                conversation-{{@$message['conversationId']}} {{@$message['isArchive']=="1"?"archived-list":"unarchived-list"}}"
+                                data-userId="{{@$message['contactId']}}" data-msgKey={{$k}} data-search="{{$message['contactName']}}"
                                 data-group={{@$message['group']}} >
                                     <div class="ms-1 d-none bulk-check">
                                         <input class="form-check-input m-0" type="checkbox" name="checked_conversation[]" value="{{$message['conversationId']}}" isGroup="{{@$message['group']}}">
@@ -225,11 +225,11 @@ use Carbon\Carbon;
                                                             <path d="M10.0234 14.9746L6.4879 18.5101" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                             <path d="M15.6797 3.66211L21.3365 9.31896" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                         </svg>
-                                
+
                                                         <svg class="me-2 unpin-single-conversation unpin1-self-icn {{@$message['isPin']=='1'?'':'d-none'}}" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
                                                             <path d="M680-840v80h-40v327l-80-80v-247H400v87l-87-87-33-33v-47h400ZM480-40l-40-40v-240H240v-80l80-80v-46L56-792l56-56 736 736-58 56-264-264h-6v240l-40 40ZM354-400h92l-44-44-2-2-46 46Zm126-193Zm-78 149Z"></path>
                                                         </svg>
-                                
+
                                                         <span>{{@$message['isPin']=='1'?'Unpin':'Pin'}}</span>
                                                     </a>
                                                 <li><a class="dropdown-item mute-single-conversation" changeWith="{{@$message['isMute']=='1'?'0':'1'}}" href="#" data-conversation="{{$message['conversationId']}}">
@@ -246,8 +246,8 @@ use Carbon\Carbon;
                                                         <path d="M24.5649 3C24.5649 3 25.7321 4.37314 26.2792 5.5C27.1055 7.20198 27.5649 8.4146 27.5649 10.5C27.5649 12.5854 27.1055 13.798 26.2792 15.5C25.7321 16.6269 24.5649 18 24.5649 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M22.5 7C22.5 7 22.8891 7.6408 23.0714 8.16667C23.3469 8.96092 23.5 9.52681 23.5 10.5C23.5 11.4732 23.3469 12.0391 23.0714 12.8333C22.8891 13.3592 22.5 14 22.5 14" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
-    
-                                                    
+
+
 
                                                         <span>{{@$message['isMute']=='1'?'Unmute':'Mute'}}</span></a>
                                                 </li>
@@ -277,7 +277,7 @@ use Carbon\Carbon;
                                                         </svg>
                                                         <span>Block<span></a>
                                                 </li>
-                                                
+
                                                 <li><a class="dropdown-item report-single-conversation" href="javascript:" data-bs-toggle="modal" data-bs-target="#submitmsgreport" data-conversation="{{$message['conversationId']}}" data-userId="{{@$message['contactId']}}">
                                                         <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M10.4974 18.9577C5.55573 18.9577 1.53906 14.941 1.53906 9.99935C1.53906 5.05768 5.55573 1.04102 10.4974 1.04102C15.4391 1.04102 19.4557 5.05768 19.4557 9.99935C19.4557 14.941 15.4391 18.9577 10.4974 18.9577ZM10.4974 2.29102C6.2474 2.29102 2.78906 5.74935 2.78906 9.99935C2.78906 14.2493 6.2474 17.7077 10.4974 17.7077C14.7474 17.7077 18.2057 14.2493 18.2057 9.99935C18.2057 5.74935 14.7474 2.29102 10.4974 2.29102Z" fill="#94A3B8" />
@@ -321,7 +321,7 @@ use Carbon\Carbon;
                                             </svg>
                                         </button>
                                         <a href="javascript:;" class="d-flex conversationId" data-bs-toggle="modal" data-bs-target="#listBox">
-                                            
+
                                             <div class="user-img">
                                                 <img id="selected-user-profile" src="{{asset('assets/front')}}/image/user-img.svg" alt="user-img">
                                                 <!-- <h5 class="fontcolorS">ST</h5> -->
@@ -937,18 +937,30 @@ use Carbon\Carbon;
                 <div class="modal-body">
                     <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
                     <div class="submit-blocks">
-                        <span class="active">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
-                        <span>Hate</span> <input type="radio" name="report_type" value="Hate"/>
-                        <span>Threatening Violence</span> <input type="radio" name="report_type" value="Threatening Violence"/>
-                        <span>Spam</span> <input type="radio" name="report_type" value="Spam"/>
-                        <span>Inappropriate Content</span> <input type="radio" name="report_type" value="Inappropriate Content"/>
-                        <span>Violating Platform Policies</span> <input type="radio" name="report_type" value="Violating Platform Policies"/>
+                        <div class="report-input-wrp">
+                            <span class="active">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
+                        </div>
+                        <div class="report-input-wrp">
+                            <span>Hate</span> <input type="radio" name="report_type" value="Hate"/>
+                        </div>
+                        <div class="report-input-wrp">
+                            <span>Threatening Violence</span> <input type="radio" name="report_type" value="Threatening Violence"/>
+                        </div>
+                        <div class="report-input-wrp">
+                            <span>Spam</span> <input type="radio" name="report_type" value="Spam"/>
+                        </div>
+                        <div class="report-input-wrp">
+                            <span>Inappropriate Content</span> <input type="radio" name="report_type" value="Inappropriate Content"/>
+                        </div>
+                        <div class="report-input-wrp">
+                            <span>Violating Platform Policies</span> <input type="radio" name="report_type" value="Violating Platform Policies"/>
+                        </div>
                     </div>
-                    
+
                     <div class="textbox-container">
                         <input type="text" name="report_description" id="violation-textbox" placeholder="Details of Violation (Optional)"/>
                     </div>
-        
+
                     <div class="review-text">
                         <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
                     </div>

@@ -15,7 +15,6 @@ use App\Models\{
     EventPotluckCategory,
     EventPotluckCategoryItem,
     UserPotluckItem,
-    EventPostCommentReaction,
     PostControl,
     EventPostReaction,
     EventUserStory,
@@ -1558,74 +1557,6 @@ class EventWallController extends Controller
             'reactionList' => $total_counts
         ]);
     }
-
-    public function userPostCommentReplyReaction(Request $request)
-
-    {
-
-        $user  = Auth::guard('web')->user();
-
-
-
-
-
-
-
-
-
-
-
-
-            $checkcommentReaction = EventPostCommentReaction::with(['event_post_comment'])->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->count();
-
-            if ($checkcommentReaction == 0) {
-                $post_comment_reaction = new EventPostCommentReaction;
-
-                $post_comment_reaction->event_post_comment_id = $request['event_post_comment_id'];
-
-                $post_comment_reaction->user_id = $user->id;
-
-                $post_comment_reaction->reaction = $request['reaction'];
-
-                $post_comment_reaction->save();
-
-
-
-                $checkcommentReactionData = EventPostCommentReaction::with('event_post_comment')->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->first();
-
-                $notificationParam = [
-
-                    'sender_id' => $user->id,
-
-                    'event_id' => $checkcommentReactionData->event_post_comment->event_id,
-
-                    'post_id' => $checkcommentReactionData->event_post_comment->event_post_id,
-                    'comment_id' => $request['event_post_comment_id']
-
-                ];
-
-                sendNotification('reply_comment_reaction', $notificationParam);
-                $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
-
-                return response()->json(['status' => 1, 'message' => "Post comment like by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
-            } else {
-
-                $checkcommentReaction = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id]);
-
-                $checkcommentReaction->delete();
-
-
-                $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
-                return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
-            }
-
-        // catch (\Exception $e) {
-
-        //     DB::rollBack();
-
-        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
-        // }
-    }
     public function userPostComment(Request $request)
 
     {
@@ -1947,7 +1878,7 @@ class EventWallController extends Controller
         $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
             ->get();
 
-        // dd($getAllContacts);
+        // dd($getAllContacts);    
         if ($getAllContacts->isNotEmpty()) {
             $emails = $getAllContacts->pluck('email')->toArray();
         }
@@ -2104,7 +2035,7 @@ class EventWallController extends Controller
                             'lastname' => $userVal->lastname,
                             'prefer_by' => $userVal->preferBy,
                             'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
-                            'profile' => $userVal->photo ?? '',
+                            'profile' => (!empty($userVal->photo) && $userVal->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($userVal->photo))) ?? '',
 
                         ];
                         $userIdsSession[] = $userEntry;
