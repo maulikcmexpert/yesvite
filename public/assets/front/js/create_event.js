@@ -2202,15 +2202,15 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
                 var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
-
-                if (remainingCount < 0) {
-                    $(".invite-left_d").text("Invites | 0 Left");
-                } else {
-                    $(".invite-left_d").text(
-                        "Invites | " + remainingCount + " Left"
-                    );
-                }
-                $("#event_guest_left_count").val(remainingCount);
+                guest_counter(0, max_guest);
+                // if (remainingCount < 0) {
+                //     $(".invite-left_d").text("Invites | 0 Left");
+                // } else {
+                //     $(".invite-left_d").text(
+                //         "Invites | " + remainingCount + " Left"
+                //     );
+                // }
+                // $("#event_guest_left_count").val(remainingCount);
                 $("#loader").css("display", "none");
 
                 console.log("User ID deleted successfully.");
