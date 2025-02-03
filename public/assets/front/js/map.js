@@ -97,7 +97,7 @@ function initMap() {
             let longitude = "";
 
             // Loop through address components to find the relevant data
-            addressData.address_components.forEach((component) => {
+            place.formatted_address.address_components.forEach((component) => {
                 if (component.types.includes("locality")) {
                     city = component.long_name;
                 }

@@ -667,7 +667,7 @@ function bindData(current_event_id) {
                         });
 
                         const textWidth = textMeasurement.width;
-
+                        console.log(element.text);
                         if (element.left === undefined) {
                             console.log("centerX", element.centerX);
 
