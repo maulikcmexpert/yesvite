@@ -448,20 +448,17 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 $(document).on("keyup", ".search-phone", function () {
-    var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
+    var searchQuery = $(this).val().toLowerCase(); 
 
-    // If search is empty, show all contacts
     if (searchQuery === "") {
-        $(".phone-contact").show(); // Show all contacts
+        $(".phone-contact").show();
     } else {
-        // Iterate through each invite-contact
         $(".phone-contact").each(function () {
             var contactName = $(this)
                 .find(".phone-search")
                 .data("search")
-                .toLowerCase(); // Get the data-search attribute
+                .toLowerCase(); 
 
-            // If the search query matches part of the contact name, show the contact
             if (contactName.indexOf(searchQuery) !== -1) {
                 $(this).show(); // Show this contact
             } else {
@@ -1042,30 +1039,30 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
         e.preventDefault();
         console.log("Guest list before submit:", guestList);
         console.log("Sending guest list:", guestList);
-        $.ajax({
-            url: base_url + "event_wall/send-invitation", // Your Laravel route
-            method: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: {
-                event_id: $("#event_id").val(), // Event ID from a hidden input
-                guest_list: guestList,
-            },
-            success: function (response) {
-                if (response.status === 1) {
-                    window.location.reload();
-                    toastr.success('Invited successfully');
-                    // alert(response.message); // Show success message
-                    guestList = []; // Clear guest list after successful submission
-                } else {
-                    alert(response.message); // Show error message
-                }
-            },
-            error: function (xhr) {
-                alert("Something went wrong. Please try again."); // Handle AJAX errors
-            },
-        });
+        // $.ajax({
+        //     url: base_url + "event_wall/send-invitation", // Your Laravel route
+        //     method: "POST",
+        //     headers: {
+        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        //     },
+        //     data: {
+        //         event_id: $("#event_id").val(), // Event ID from a hidden input
+        //         guest_list: guestList,
+        //     },
+        //     success: function (response) {
+        //         if (response.status === 1) {
+        //             window.location.reload();
+        //             toastr.success('Invited successfully');
+        //             // alert(response.message); // Show success message
+        //             guestList = []; // Clear guest list after successful submission
+        //         } else {
+        //             alert(response.message); // Show error message
+        //         }
+        //     },
+        //     error: function (xhr) {
+        //         alert("Something went wrong. Please try again."); // Handle AJAX errors
+        //     },
+        // });
 });
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
