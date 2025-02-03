@@ -1,4 +1,3 @@
-{{dd($yesvite_all_invite);}}
 @if(!empty($yesvite_all_invite))
 @foreach($yesvite_all_invite['invited_user_id']as $guest_user)
     <div class="guest-users" data-id="{{$guest_user['id']}}">

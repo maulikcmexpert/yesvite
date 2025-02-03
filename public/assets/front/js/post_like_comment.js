@@ -741,6 +741,8 @@ $(document).ready(function () {
             const last_name = $(this).data("last");
             const email = $(this).data("email");
             const profile = $(this).data("profile");
+            const event_id = $('#event_id').val();
+
             console.log(
                 `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
             );
@@ -748,12 +750,12 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected);
+                storeAddNewGuest(id,1,isSelected,event_id);
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected);
+                storeAddNewGuest(id,0,isSelected,event_id);
 
                 console.log(guestList);
             }
@@ -768,6 +770,8 @@ $(document).ready(function () {
             const last_name = $(this).data("last");
             const email = $(this).data("email");
             const profile = $(this).data("profile");
+            const event_id = $('#event_id').val();
+
             console.log(
                 `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
             );
@@ -775,24 +779,24 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected);
+                storeAddNewGuest(id,1,isSelected,event_id);
 
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected);
+                storeAddNewGuest(id,0,isSelected,event_id);
 
                 console.log(guestList);
             }
 
         });
 
-        function storeAddNewGuest(id,status,prefer_by){
+        function storeAddNewGuest(id,status,prefer_by,event_id){
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',
-                data: {user_id:id,status:status,prefer_by:prefer_by},
+                data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id},
                 success: function (response) {
                  console.log(response);
                 if(response.view!=""){
