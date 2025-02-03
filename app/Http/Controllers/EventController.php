@@ -2292,6 +2292,24 @@ class EventController extends BaseController
         $users = $request->users;
         $unselectusers = $request->unselectedValues;
         $userIds = session()->get('user_ids');
+        if (!empty($unselectusers)) {
+            foreach ($unselectusers as $value) {
+                $id = $value['id'];
+        
+                // Use array_filter to remove the user based on the ID
+                $userIds = array_filter($userIds, function ($value) use ($id) {
+                    return $value['id'] !== $id;  // Keep all users except the one with the given ID
+                });
+            }
+        
+            // Reindex the array after filtering
+            $userIds = array_values($userIds);
+        
+            // Update the session
+            session()->put('user_ids', $userIds);
+        }
+        
+       
         // dD($users);
         // dd($userIds,$users);
         if (!empty($users)) {
