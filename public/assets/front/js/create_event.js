@@ -6839,6 +6839,13 @@ $(document).on("click", ".invite_group_member", function () {
             const isIdExists = selectedValues.some((item) => item.id === id);
 
             if (!isIdExists) {
+                var perferby = $(this).data("preferby");
+            var invited_by = "";
+            if (perferby == "email") {
+                invited_by = $(this).data("email");
+            } else {
+                invited_by = $(this).data("mobile");
+            }
                 selectedValues.push({
                     id: id,
                     preferby: perferby,
