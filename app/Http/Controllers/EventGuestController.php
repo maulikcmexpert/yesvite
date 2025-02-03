@@ -914,7 +914,7 @@ class EventGuestController extends Controller
             $user = User::find($sesionuser['user_id']);
             $prefer_by=$sesionuser['prefer_by'];
 
-            if ($sesionuser) {
+            if ($user) {
                 // If the user exists, add data to the $users_data array
                 $users_data[] = [
                     'user_id' => $user->id,
