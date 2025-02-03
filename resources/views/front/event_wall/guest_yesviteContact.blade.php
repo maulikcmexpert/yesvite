@@ -105,7 +105,7 @@
                 >
                 <!-- data-bs-target="#seeAll" -->
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email">+{{ $counter }}</span>
+                        <span class="number" id="total-selected-email" data-count="{{$counter}}">+{{ $counter }}</span>
                         <span class="content">Total</span>
                     </div>
                     <h6>Sell all</h6>
@@ -349,7 +349,7 @@
                 <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
                 <!-- data-bs-target="#seeAll" -->
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-phone">+{{ $counter }}</span>
+                        <span class="number" id="total-selected-phone" data-count="{{$counter}}">+{{ $counter }}</span>
                         <span class="content">Total</span>
                     </div>
                     <h6>Sell all</h6>
