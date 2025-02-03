@@ -105,7 +105,7 @@
                 >
                 <!-- data-bs-target="#seeAll" -->
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email">+{{ $counter }}</span>
+                        <span class="number" id="total-selected-email" data-count="{{$counter}}">+{{ $counter }}</span>
                         <span class="content">Total</span>
                     </div>
                     <h6>Sell all</h6>
@@ -268,7 +268,7 @@
                     }
                 @endphp
                 @if ($guest_user['prefer_by'] == 'email')
-                    <div class="guest-user" data-id="{{ $guest_user['sync_id'] }}">
+                    <div class="guest-user-phone" data-id="{{ $guest_user['sync_id'] }}">
                         <div class="guest-user-img">
                             <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                             @if ($guest_user['profile'] != '')
@@ -304,7 +304,7 @@
                             {{ $guest_user['lastname'] }}</h6>
                     </div>
                 @elseif ($guest_user['prefer_by'] == 'phone')
-                    <div class="guest-user" data-id="{{ $guest_user['sync_id'] }}">
+                    <div class="guest-user-phone" data-id="{{ $guest_user['sync_id'] }}">
                         <div class="guest-user-img">
                             <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                             @if ($guest_user['profile'] != '')
@@ -349,7 +349,7 @@
                 <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
                 <!-- data-bs-target="#seeAll" -->
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email">+{{ $counter }}</span>
+                        <span class="number" id="total-selected-phone" data-count="{{$counter}}">+{{ $counter }}</span>
                         <span class="content">Total</span>
                     </div>
                     <h6>Sell all</h6>

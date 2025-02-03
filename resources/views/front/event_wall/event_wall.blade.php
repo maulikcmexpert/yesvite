@@ -1,4 +1,4 @@
-{{dd($pollsData )}}
+{{-- {{dd($pollsData )}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -1045,7 +1045,7 @@
                                                         </button>
                                                         <button
                                                             class="posts-card-comm show-comments-btn show-btn-comment"
-                                                            event_p_id="{{ $poll['event_post_id'] }}">
+                                                            event_p_id="{{ $poll['id'] }}">
                                                             <svg viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <path

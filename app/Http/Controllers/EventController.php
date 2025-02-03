@@ -1370,6 +1370,7 @@ class EventController extends BaseController
 
     public function removeUserId(Request $request)
     {
+      
         $is_contact = $request->input('is_contact');
         if ($is_contact == '1') {
             $userIds = session()->get('contact_ids');
@@ -1387,6 +1388,7 @@ class EventController extends BaseController
         } else {
             $userIds = session()->get('user_ids');
             $userId = $request->input('user_id');
+            // dD($userIds,$userId);
             foreach ($userIds as $key => $value) {
                 if ($value['id'] == $userId) {
                     unset($userIds[$key]);
@@ -2289,44 +2291,9 @@ class EventController extends BaseController
 
         $users = $request->users;
         $unselectusers = $request->unselectedValues;
-        $userIds = session()->get('user_ids', []);
-
-        if (!empty($unselectusers)) {
-            $userEntries = []; // This will store all user entries that you need to save
-        
-            foreach ($users as $value) {
-                $id = $value['id'];
-                $user_detail = User::where('id', $id)->first();
-                // Prepare the user entry
-                $userEntry = [
-                    'id' => $id,
-                    'firstname' => $user_detail->firstname,
-                    'lastname' => $user_detail->lastname,
-                    'invited_by' => $value['invited_by'],
-                    'prefer_by' => $value['preferby'],
-                    'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
-                ];
-                
-                // If the user ID is in the unselectusers, remove it from the userIds array
-                if (in_array($id, $unselectusers)) {
-                    // Remove the ID from the session's user_ids array
-                    $userIds = array_filter($userIds, function($userId) use ($id) {
-                        return $userId !== $id;
-                    });
-                } else {
-                    // Add the user entry to the userEntries array
-                    $userEntries[] = $userEntry;
-                }
-            }
-        
-            // Update the session with the new userEntries
-            session()->put('user_ids', $userEntries); // Store filtered user IDs
-            // session()->put('user_entries', $userEntries); // Store all user entries that aren't unselected
-            Session::save();
-        }
+        $userIds = session()->get('user_ids');
         // dD($users);
         // dd($userIds,$users);
-        $userIds = session()->get('user_ids', []);
         if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
@@ -3063,6 +3030,7 @@ class EventController extends BaseController
         }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+        $rsvpdateObj = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date);
 
 
         $startDateFormat = "";
@@ -3071,14 +3039,18 @@ class EventController extends BaseController
             $startDateFormat = $startDateObj->format('Y-m-d');
             $endDateFormat = $endDateObj->format('Y-m-d');
         }
-
+        // dd($request->rsvp_by_date);
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
             // dd($carbonDate);
             // if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
             //     $rsvp_by_date = $request->rsvp_by_date;
             // } else {
-            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            if($rsvpdateObj){
+                $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            }else{
+                $rsvp_by_date = $request->rsvp_by_date;     
+            }
             // }
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
 

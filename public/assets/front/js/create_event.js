@@ -3758,7 +3758,7 @@ $('input[type="text"],textarea').on("paste", function (e) {
     }
 });
 
-function savePage1Data(close = null) {
+function savePage1Data(close = null, direct = false) {
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
@@ -4053,6 +4053,9 @@ function savePage1Data(close = null) {
         // console.log(eventData);
 
         // ---------------newcode-------------
+        if (direct) {
+            return 8;
+        }
         if (close == null || close == "") {
             $(".step_1").css("display", "none");
             $(".step_2").css("display", "none");
@@ -4126,7 +4129,7 @@ function savePage1Data(close = null) {
     // window.location.href = '/create-event-page-2';
 }
 
-function savePage3Data(close = null) {
+function savePage3Data(close = null, direct = false) {
     // let invited_user_ids = [];
 
     // eventData.invited_user_ids = invited_user_ids;
@@ -4150,6 +4153,10 @@ function savePage3Data(close = null) {
 
             return;
         }
+    }
+
+    if (direct) {
+        return 8;
     }
     $(".list_all_invited_user").empty();
     // $(".list_all_invited_user").append(response);
@@ -4735,11 +4742,11 @@ async function saveDesignData(direct = false) {
             eventData.desgin_selected = imageResponse.image;
         }
         if (direct) {
-            toastr.success("Event Updated Successfully");
-            window.location.href = base_url + "home";
-        }
-        if (imageResponse && imageResponse.image) {
-            updateUIAfterSave(imageResponse.image);
+            return true;
+        } else {
+            if (imageResponse && imageResponse.image) {
+                updateUIAfterSave(imageResponse.image);
+            }
         }
     } catch (error) {
         console.error("Error in saveDesignData:", error);
@@ -6836,15 +6843,19 @@ $(document).on("click", ".invite_group_member", function () {
             const isIdExists = selectedValues.some((item) => item.id === id);
 
             if (!isIdExists) {
+                var perferby = $(this).data("preferby");
+                var invited_by = "";
+                if (perferby == "email") {
+                    invited_by = $(this).data("email");
+                } else {
+                    invited_by = $(this).data("mobile");
+                }
                 selectedValues.push({
                     id: id,
                     preferby: perferby,
                     invited_by: invited_by,
                 });
             }
-
-            console.log(id);
-            console.log(selectedValues);
         } else {
             const id = $(this).val();
             const isIdExists = unselectedValues.some((item) => item.id === id);
@@ -6852,6 +6863,8 @@ $(document).on("click", ".invite_group_member", function () {
             if (!isIdExists) {
                 unselectedValues.push({
                     id: id,
+                    preferby: perferby,
+                    invited_by: invited_by,
                 });
             }
             delete_invited_user(id, "0");
@@ -6859,7 +6872,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user-" + id).prop("checked", false);
         }
     });
-    
+
     $.ajax({
         url: base_url + "event/invite_user_by_group",
         type: "POST",
@@ -6868,7 +6881,7 @@ $(document).on("click", ".invite_group_member", function () {
         },
         data: {
             users: selectedValues,
-            unselectedValues:unselectedValues,
+            unselectedValues: unselectedValues,
         },
         success: function (response) {
             if (response?.isTrue && response.isTrue) {
@@ -8437,38 +8450,34 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
-$(document).on("click", ".edit_checkout", async function (e) {
-    var isDraftEdit = $(this).attr("data-isDraftEdit");
-    if (isDraftEdit) {
-        eventData.is_update_event = "0";
-        eventData.isDraftEdit = isDraftEdit;
-    } else {
-        eventData.is_update_event = "1";
-    }
-    await saveDesignData(true);
-    savePage1Data();
-    savePage3Data();
-    savePage4Data();
-
-    eventData.isPhonecontact = isPhonecontact;
-    eventData.IsPotluck = IsPotluck;
-    var data = eventData;
-
-    $("#loader").css("display", "block");
-    // $(".main-content-wrp").addClass("blurred");
-    e.stopPropagation();
+$(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
-    // var imagePath = '';
+    await saveDesignData(true);
+    updateEventData();
+});
 
-    // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-    $(".step_1").css("display", "none");
-    $(".step_2").css("display", "none");
-    $(".step_3").css("display", "none");
-    $(".step_4").css("display", "none");
-    $(".step_final_checkout").show();
+$(document).on("click", ".saveDetailOnly", async function (e) {
+    e.preventDefault();
+    await saveDesignData(true);
+    let save1 = savePage1Data(null, true);
+    if (save1 == 8) {
+        updateEventData();
+    }
+});
+$(document).on("click", ".saveGuestOnly", async function (e) {
+    e.preventDefault();
+    await saveDesignData(true);
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
 
-    // handleActiveClass(this);
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
+});
+
+function updateEventData() {
     eventData.isdraft = "0";
+    var data = eventData;
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -8498,9 +8507,46 @@ $(document).on("click", ".edit_checkout", async function (e) {
             }
         },
         error: function (xhr, status, error) {
+            toastr.error("Something went wrong!!");
             console.log("AJAX error: " + error);
         },
     });
+}
+$(document).on("click", ".edit_checkout", async function (e) {
+    var isDraftEdit = $(this).attr("data-isDraftEdit");
+    if (isDraftEdit) {
+        eventData.is_update_event = "0";
+        eventData.isDraftEdit = isDraftEdit;
+    } else {
+        eventData.is_update_event = "1";
+    }
+    await saveDesignData(true);
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+
+    savePage4Data();
+
+    eventData.isPhonecontact = isPhonecontact;
+    eventData.IsPotluck = IsPotluck;
+
+    $("#loader").css("display", "block");
+    // $(".main-content-wrp").addClass("blurred");
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
+    // var imagePath = '';
+
+    // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
+    $(".step_1").css("display", "none");
+    $(".step_2").css("display", "none");
+    $(".step_3").css("display", "none");
+    $(".step_4").css("display", "none");
+    //$(".step_final_checkout").show();
+
+    // handleActiveClass(this);
 });
 
 $(document).on("click", ".design-sidebar-action", function () {

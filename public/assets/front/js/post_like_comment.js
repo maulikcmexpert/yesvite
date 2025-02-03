@@ -750,12 +750,12 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
@@ -779,30 +779,36 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
 
         });
 
-        function storeAddNewGuest(id,status,prefer_by,event_id){
+        function storeAddNewGuest(id,status,prefer_by,event_id,contact){
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',
-                data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id},
+                data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact},
                 success: function (response) {
                  console.log(response);
-                if(response.view!=""){
+                 if(response.is_phone=="1"&&response.view!=""){
+                    $('.selected-phone-list').remove('.guest-user-phone');
+                    $('.selected-phone-list').html(response.view);
+                }
+                 if(response.view!=""&&response.is_phone=="0"){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
                 }
+             
+               
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
@@ -843,7 +849,7 @@ $(document).ready(function () {
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
-            storeAddNewGuest(id,0,isSelected);
+            storeAddNewGuest(id,0,isSelected,'phone');
 
             console.log(guestList);
         }// App user = 0 for phone (non-app user)
@@ -877,9 +883,6 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 
         if(upper_view<4){
             const $modalBody = $('.selected-contacts-list');
-       
-       
-
             const contactHtml = `
                 <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
@@ -953,40 +956,55 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         // }else{
             profileImage =generateProfileImage(first_name, last_name);
         // }
-        const $modalBody = $('.selected-phone-list');
-        const contactHtml = `
-            <div class="guest-user guest_phone add_phone_guest_${id}" data-id="${id}">
-                <div class="guest-user-img">
-                   ${profileImage}
-                    <a href="#" class="close remove_new_added_user" data-id="${id}">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-                <h6>${first_name} ${last_name}</h6>
-            </div>
+        var upper_phone_view=$('.selected-phone-list .guest-user-phone').length;
 
-        `;
-        $modalBody.append(contactHtml);
+        // if(upper_phone_view<4){
+        //     const $modalBody = $('.selected-phone-list');
+        //     const contactHtml = `
+        //         <div class="guest-user-phone guest_yesvite add_phone_guest_${id}" data-id="${id}">
+        //             <div class="guest-user-img">
+        //                ${profileImage}
+        //                 <a href="#" class="close remove_new_added_user" data-id="${id}">
+        //                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //                         <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+        //                         <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+        //                         <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+        //                         <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+        //                     </svg>
+        //                 </a>
+        //             </div>
+        //             <h6>${first_name} ${last_name}</h6>
+        //         </div>
+    
+        //     `;
+        //     $modalBody.append(contactHtml);      
+        // }else{
+        //     const $modalBody = $('.selected-phone-list');
+        //     var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
+        //     if(upper_see_phone==0){
+        //         const totalHtml = `
+        //         <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
+        //             <div class="guest-user-img guest-total">
+        //                 <span class="number" id="total-selected-phone" data-count="1">+1</span>
+        //                 <span class="content">Total</span>
+        //          </div>
+        //          <h6>Sell all</h6>
+        //         </a>`; 
 
-        const totalHtml = `
-                <a href="#" class="guest-user d-block yesvite ">
-                    <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email">${selectedContacts.length}</span>
-                        <span class="content">Total</span>
-                 </div>
-                 <h6>Sell all</h6>
-                </a>`;
-
-        console.log("Updated guest list:", guestList);
+             
+        //           $modalBody.append(totalHtml);
+        //     }
+        //     if(upper_see_phone>0){
+        //        var initial= parseInt($('#total-selected-phone').attr('data-count'));
+        //        var new_value= initial+1 ;
+        //        alert(initial);
+        //        $('#total-selected-phone').attr('data-count',new_value);
+        //        $('#total-selected-phone').text('+'+new_value);
+        //     }
+      
+        //      }
+      
     }
-        console.log("Updated guest list:", guestList);
-
-        console.log("Updated guest list:", guestList);
 
 });
 

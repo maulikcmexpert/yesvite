@@ -49,9 +49,35 @@
                     <li class="wall-main-story-item story-unseen">
                         <button>
                             <div class="wall-story-item-img">
-                                <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "
-                                    class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
-                                    onclick="AllUserStory( {{ $event }},'{{ $Allstory['id'] }}')" />
+                                @if ($Allstory['profile']  != '')
+
+                                  <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "    class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
+                                  onclick="AllUserStory( {{ $event }},'{{ $Allstory['id'] }}')" />
+                                {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
+                            @else
+                                @php
+                                  $name = $Allstory['username'] ?? ''; // Ensure username is set
+
+// Split the username into words (assuming first and last names)
+$parts = explode(' ', trim($name));
+
+// Get first and second initials
+$firstInitial = isset($parts[0][0]) ? strtoupper($parts[0][0]) : '';
+$secondInitial = isset($parts[1][0]) ? strtoupper($parts[1][0]) : '';
+
+$initials = $firstInitial . $secondInitial;
+
+                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                @endphp
+                                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                    onclick="showStories( {{ $event }},{{ $users->id }})">
+                                    {{ $initials }}
+                                </h5>
+                            @endif
+
+
                             </div>
                             <h4>{{ $Allstory['username'] }}</h4>
                         </button>
