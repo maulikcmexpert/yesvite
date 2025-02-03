@@ -1014,7 +1014,10 @@ function getInvitedUsersList($eventId)
                 $invitedGuestDetail['app_user'] = (!empty($guestVal->contact_sync->isAppUser) && $guestVal->contact_sync->isAppUser != NULL) ? (int)$guestVal->contact_sync->isAppUser : 0;
                 $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
                 // $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
-                $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "";
+                // $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "";
+               $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($guestVal->contact_sync->photo))) 
+                ? asset('storage/profile/' . $guestVal->contact_sync->photo) 
+                : "";
                 $invitedGuestDetail['is_sync'] = 1;
                 $invitedGuestDetail['rsvp_status']= $guestVal->rsvp_status;
                 $invitedGuestDetail['kids']= $guestVal->kids;
