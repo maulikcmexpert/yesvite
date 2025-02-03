@@ -656,7 +656,7 @@ async function updateChat(user_id) {
               selected_user.userStatus == "online"
             ? "Online"
             : "";
-
+    let userStatusSpan = "";
     if (lastseen == "Online" || lastseen == "online") {
         userStatusSpan = `<span class="active"></span>`;
     } else {
@@ -682,7 +682,10 @@ async function updateChat(user_id) {
         selected_user.userName,
         conversationId
     );
-    const userImg = $(conversationId).find(".user-img");
+    const conversationElement = document.getElementsByClassName(
+        `conversation-${conversationId}`
+    );
+    const userImg = $(conversationElement).find(".user-img");
 
     const spanElement = userImg.find("span");
     if (spanElement.length) {
@@ -773,6 +776,7 @@ async function updateChat(user_id) {
         const conversationId = $(".selected_id").val();
         const isGroup = $("#isGroup").val();
         let lastseen = "";
+
         if (isGroup == true || isGroup == "true") {
             lastseen = "";
         } else {
@@ -2010,6 +2014,13 @@ function createMessageElement(
         messageData?.type == "1"
             ? `
             <div class="media-msg-inline">
+            ${
+                senderprofile
+                    ? isReceiver
+                        ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                        : ""
+                    : ""
+            }
                 <div class="media-msg">
                     <img src="${messageData?.url}"/>
                     <span class="media-text"> ${
@@ -2026,6 +2037,13 @@ function createMessageElement(
             : messageData?.type == "2"
             ? `
             <div class="media-msg-inline">
+            ${
+                senderprofile
+                    ? isReceiver
+                        ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                        : ""
+                    : ""
+            }
                 <div class="media-msg">
                     <video src="${messageData?.url}" controls></video>
                     <span class="media-text"> ${
@@ -2041,6 +2059,13 @@ function createMessageElement(
             : messageData?.type == "4"
             ? `
             <div class="media-msg-inline">
+            ${
+                senderprofile
+                    ? isReceiver
+                        ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                        : ""
+                    : ""
+            }
                 <div class="media-msg">
                 ${
                     fileExtension === "pdf" || fileExtension == "PDF"
@@ -2060,7 +2085,13 @@ function createMessageElement(
             </div>`
             : messageData?.type == "3"
             ? `<div class="media-msg-inline">
-            
+            ${
+                senderprofile
+                    ? isReceiver
+                        ? `<div class="simplemsg-img me-2 user-img new-msg-class"><span>${senderprofile}<span></div>`
+                        : ""
+                    : ""
+            }
                 <div class="media-msg">
                 ${musicPlayer(messageData?.url)}
                 <span> ${

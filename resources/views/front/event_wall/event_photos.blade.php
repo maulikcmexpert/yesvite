@@ -185,7 +185,7 @@
                                                                 data-event-id="{{ $event }}"
                                                                 data-event-post-id="{{ $photo['id'] }} "
                                                                 data-user-id="{{ $login_user_id }}">
-                                                                @if ($photo['self_reaction'] == '\u{2764}')
+                                                                {{-- @if ($photo['self_reaction'] == '\u{2764}')
                                                                     <i class="fa-solid fa-heart" id="show_Emoji"></i>
                                                                 @elseif($photo['self_reaction'] == '\u{1F494}')
                                                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
@@ -213,9 +213,9 @@
                                                                             alt="Clap Emoji" class="emoji"
                                                                             data-emoji="👏"
                                                                             data-unicode="\\u{1F44F}"></i>
-                                                                @else
-                                                                    <i class="fa-regular fa-heart" id="show_Emoji"></i>
-                                                                @endif
+                                                                @else --}}
+                                                                    <i class="fa-regular fa-heart" ></i>
+                                                                {{-- @endif --}}
                                                             </button>
 
                                                             <div class="photos-likes-options-wrp emoji-picker"
@@ -914,7 +914,7 @@
                                     data-user-id="{{ $login_user_id }}">
                                     <i class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
 
-                                <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown1"
+                                <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
                                     style="display: none;">
                                     <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji"
                                         class="emoji model_emoji" data-emoji="❤️" data-unicode="\\u{2764}">
