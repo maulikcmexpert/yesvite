@@ -2748,7 +2748,7 @@ if ($rsvpSent != null) {
             }
         }
     
-        return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data','is_phone'))->render()]);
+        return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render()]);
         }
     
         session(['add_guest_user_id' => $userData]);
