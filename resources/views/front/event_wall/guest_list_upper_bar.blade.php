@@ -45,7 +45,7 @@ break;
                                                             stroke-linejoin="round" />
                                                     </svg>
                                                 </a>
-                                @endphp
+                                @endif
                             </div>
                            
                             <h6 class="guest-name">{{$guest_user['first_name']}} {{$guest_user['last_name']}}</h6>
