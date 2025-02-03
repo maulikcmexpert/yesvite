@@ -784,11 +784,11 @@ $(document).ready(function () {
 
         });
 
-        function storeAddNewGuest(id,status){
+        function storeAddNewGuest(id,status,prefer_by){
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',        
-                data: {user_id:id,status:status},          
+                data: {user_id:id,status:status,prefer_by:prefer_by},          
                 success: function (response) { 
                  console.log(response);
                  
