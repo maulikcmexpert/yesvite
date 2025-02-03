@@ -2289,45 +2289,9 @@ class EventController extends BaseController
 
         $users = $request->users;
         $unselectusers = $request->unselectedValues;
-        $userIds = session()->get('user_ids', []);
-
-        if (!empty($unselectusers)) {
-            $userEntries = []; 
-        
-            foreach ($unselectusers as $value) {
-                $id = $value['id'];
-                $user_detail = User::where('id', $id)->first();
-            
-             
-                $userEntry = [
-                    'firstname' => $user_detail->firstname,
-                    'lastname' => $user_detail->lastname,
-                    'invited_by' => $value['invited_by'],
-                    'prefer_by' => $value['preferby'],
-                    'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
-                ];
-            
-                
-                if (in_array($id, array_column($unselectusers, 'id'))) {
-                   
-                    $userIds = array_filter($userIds, function($userId) use ($id) {
-                        return $userId !== $id;
-                    });
-                } else {
-
-                    $userEntries[] = $userEntry;
-                }
-            }
-            
-           
-            session()->put('user_ids', array_values($userIds));
-            session()->put('user_entries', $userEntries); 
-            Session::save();
-            
-        }
+        $userIds = session()->get('user_ids');
         // dD($users);
         // dd($userIds,$users);
-        $userIds = session()->get('user_ids', []);
         if (!empty($users)) {
             foreach ($users as $value) {
                 $id = $value['id'];
