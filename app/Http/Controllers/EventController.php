@@ -1771,127 +1771,126 @@ class EventController extends BaseController
         return response()->json(['message' => 'Greeting card deleted']);
     }
 
-    // public function updateSelfBring(Request $request)
-    // {
-    //     $categoryItemKey = $request->categoryItemKey;
-    //     $categoryIndexKey = $request->categoryIndexKey;
-    //     $quantity = (string)$request->quantity;
-
-    //     $categories = session()->get('category', []);
-
-    //     $id = Auth::guard('web')->user()->id;
-    //     $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
-    //     $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
-
-    //     session()->put('category', $categories);
-
-
-    //     $categories = session()->get('category', []);
-    //     // Session::save();
-
-
-
-    //     $total_item = 0;
-    //     $total_quantity = 0;
-
-    //         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
-
-    //             // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
-    //             // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
-    //             // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
-    //             if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
-    //                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
-
-    //                     if ($id == $userVal['user_id']) {
-    //                         $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
-
-
-    //                         session()->put('category', $categories);
-    //                         Session::save();
-    //                     }
-    //                     $total_quantity =  $total_quantity + $userVal['quantity'];
-    //                 }
-    //                 // dd(1,$categories);
-    //             } else {
-
-    //                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
-    //                 $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
-    //                 session()->put('category', $categories);
-    //                 Session::save();
-    //                 // dd(2,$categories);
-    //                 $total_quantity =  1;
-    //             }
-
-
-    //             // $total_item = $total_item + $value['quantity'];
-
-    //             // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
-    //             //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-    //             // }else{
-    //             //     $total_quantity = $total_quantity + $value['self_bring_qty'];
-    //             // }
-    //             // }
-    //         }
-
-     
-
-    //     return $total_item;
-    // }
     public function updateSelfBring(Request $request)
     {
-        // Retrieving values from the request
         $categoryItemKey = $request->categoryItemKey;
         $categoryIndexKey = $request->categoryIndexKey;
         $quantity = (string)$request->quantity;
-    
-        // Retrieve the current session category
+
         $categories = session()->get('category', []);
-        
-        // Get the authenticated user's ID
+
         $id = Auth::guard('web')->user()->id;
-        
-        // Set self_bring and self_bring_qty for the item in the category
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
-        // dd($categories);
-    
-        // Initialize total quantities
+        session()->put('category', $categories);
+        
+        
+        $categories = session()->get('category', []);
+        // Session::save();
+        
+        
+        
+        $total_item = 0;
         $total_quantity = 0;
-    
-        // Check if the item exists in the category
+        
         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
             
-            // Check if the item has users who are carrying it
-            if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
-                foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
-                    if ($id == $userVal['user_id']) {
-                        // Update the quantity for the specific user
-                        $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
-                        
-                        // Save the session data after the modification
-                        session()->put('category', $categories);
-                        Session::save();
+            // dD($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users']);
+            // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
+                // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
+                    if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
+                        foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
+
+                        if ($id == $userVal['user_id']) {
+                            $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
+
+
+                            session()->put('category', $categories);
+                            Session::save();
+                        }
+                        $total_quantity =  $total_quantity + $userVal['quantity'];
                     }
-                    // Aggregate the total quantity
-                    $total_quantity += $userVal['quantity'];
+                    // dd(1,$categories);
+                } else {
+                    
+                    $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
+                    $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
+                    session()->put('category', $categories);
+                    Session::save();
+                    // dd(2,$categories);
+                    $total_quantity =  1;
                 }
-            } else {
-                // If no item_carry_users exists, add the current user with the specified quantity
-                $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
-                $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
-                
-                // Save the session data
-                session()->put('category', $categories);
-                Session::save();
-                
-                // Set total quantity to 1, as this is the first user
-                $total_quantity = 1;
+
+
+                // $total_item = $total_item + $value['quantity'];
+
+                // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
+                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+                // }else{
+                //     $total_quantity = $total_quantity + $value['self_bring_qty'];
+                // }
+                // }
             }
-        }
-    
-        // Return the total quantity (not total_item, as that seems more relevant to your logic)
-        return $total_quantity;
+
+     
+
+        return $total_item;
     }
+    // public function updateSelfBring(Request $request)
+    // {
+    //     // Retrieving values from the request 
+    //     $categoryItemKey = $request->categoryItemKey;
+    //     $categoryIndexKey = $request->categoryIndexKey;
+    //     $quantity = (string)$request->quantity;
+    
+    //     // Retrieve the current session category
+    //     $categories = session()->get('category', []);
+        
+    //     // Get the authenticated user's ID
+    //     $id = Auth::guard('web')->user()->id;
+        
+    //     // Set self_bring and self_bring_qty for the item in the category
+    //     $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
+    //     $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring_qty'] = $quantity;
+    //     // dd($categories);
+    
+    //     // Initialize total quantities
+    //     $total_quantity = 0;
+    
+    //     // Check if the item exists in the category
+    //     if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]) && !empty($categories[$categoryIndexKey]['item'][$categoryItemKey])) {
+            
+    //         // Check if the item has users who are carrying it
+    //         if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
+    //             foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
+    //                 if ($id == $userVal['user_id']) {
+    //                     // Update the quantity for the specific user
+    //                     $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][$userkey]['quantity'] = ($request->type != 'minus' && $request->type != "plus") ? 0 : $quantity;
+                        
+    //                     // Save the session data after the modification
+    //                     session()->put('category', $categories);
+    //                     Session::save();
+    //                 }
+    //                 // Aggregate the total quantity
+    //                 $total_quantity += $userVal['quantity'];
+    //             }
+    //         } else {
+    //             // If no item_carry_users exists, add the current user with the specified quantity
+    //             $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['quantity'] = $quantity;
+    //             $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][0]['user_id'] = $id;
+                
+    //             // Save the session data
+    //             session()->put('category', $categories);
+    //             Session::save();
+                
+    //             // Set total quantity to 1, as this is the first user
+    //             $total_quantity = 1;
+    //         }
+    //     }
+    
+    //     // Return the total quantity (not total_item, as that seems more relevant to your logic)
+    //     return $total_quantity;
+    // }
     
     public function saveTempDesign(Request $request)
     {
