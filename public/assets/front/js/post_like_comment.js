@@ -799,14 +799,17 @@ $(document).ready(function () {
                 data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id},
                 success: function (response) {
                  console.log(response);
-                if(response.view!=""){
+                 if(response.is_phone=="1"&&response.view!=""){
+                    $('.selected-phone-list').remove('.guest-user-phone');
+                    $('.selected-phone-list').html(response.view);
+                    return;
+                }else if(response.view!=""){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
+                    return;
                 }
-                if(response.is_phone=="1"&&response.view!=""){
-                    $('.selected-phone-list').remove('.guest-user-phone');
-                    $('.selected-phone-list').html(response.view)
-                }
+             
+               
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
