@@ -1804,6 +1804,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     width: 100%;
 }
 
+#submitmsgreport .textbox-container input:focus-within{
+    outline: none !important;
+}
+
 #submitmsgreport .textbox-container{
     margin-bottom: 10px;
 }
