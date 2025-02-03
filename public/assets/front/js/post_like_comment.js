@@ -1014,7 +1014,7 @@ $(document).on('click','.remove_new_added_user',function(){
     $('.add_yesvite_guest_'+user_id).remove();
     $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
     $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    guestList = guestList.filter(guest => guest.id !== user_id);
+    guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
 
     storeAddNewGuest(user_id,0,'',event_id,'yesvite');
 
@@ -1029,7 +1029,7 @@ $(document).on('click','.remove_new_phone_added_user',function(){
     $('.add_phone_guest_'+user_id).remove();
     $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
     // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    guestList = guestList.filter(guest => guest.id !== user_id);
+    guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
 
     storeAddNewGuest(user_id,0,'',event_id,'phone');
 
