@@ -365,12 +365,23 @@ ul.chat-list > div:last-child li {
     top: 3px;
 }
 
-.blue-tick {
+/* .blue-tick {
     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/><path d="M16 19L10.5 13.5L12 12L16 16L26 6L27.5 7.5L16 19Z" fill="%23A9A9A9"/></svg>');
+} */
+.blue-tick {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_4379_99087)"><path d="M5.83594 9.9987L10.0026 14.1654L18.3359 5.83203" stroke="%230084FF" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.66406 9.9987L5.83073 14.1654M9.9974 9.9987L14.1641 5.83203" stroke="%230084FF" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_4379_99087"><rect width="20" height="20" fill="white"/></clipPath></defs></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
 }
 
 .grey-tick {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M9 19L3.5 13.5L5 12L9 16L19 6L20.5 7.5L9 19Z" fill="%23A9A9A9"/></svg>');
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_4379_99087)"><path d="M5.83594 9.9987L10.0026 14.1654L18.3359 5.83203" stroke="%2394A3B8" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.66406 9.9987L5.83073 14.1654M9.9974 9.9987L14.1641 5.83203" stroke="%2394A3B8" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_4379_99087"><rect width="20" height="20" fill="white"/></clipPath></defs></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
 }
 
 .empty-massage .empty-img {
