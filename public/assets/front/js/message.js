@@ -445,6 +445,7 @@ async function handleNewConversation(snapshot) {
         //     .replaceWith(userStatus);
 
         const userImg = $(conversationElement).find(".user-img");
+
         const spanElement = userImg.find("span");
         if (spanElement.length) {
             spanElement.replaceWith(userStatus);

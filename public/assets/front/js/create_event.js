@@ -4699,6 +4699,10 @@ function edit_design_modal() {
 
 var design_inner_image = "";
 async function saveDesignData(direct = false) {
+    if (typeof canvas == "undefined") {
+        console.log("no canvas found");
+        return;
+    }
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -8466,7 +8470,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    // window.location.href = base_url + "home";
+                    window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
@@ -9145,22 +9149,18 @@ if (category != 0) {
     potluck_cateogry_item_count();
 }
 
-$(document).on('blur', '#event-name', function() {
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-    alert('blur')
-});
+$(document).on(
+    "blur change click",
+    "#event-name ,#event-date, #start-time",
+    function () {
+        var event_name = $("#event-name").val();
+        var event_date = $("#event-date").val();
+        var start_time = $("#start-time").val();
 
-$(document).on('change', '#event-date, #start-time', function() {
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-    alert('change')
-});
-$(document).on('click', '#start-time', function() {
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_time = $("#start-time").val();
-    alert('click')
-});
+        if (event_name !== "" && event_date !== "" && start_time !== "") {
+            $(".guestBtn").attr("style", "color: black !important;");
+        } else {
+            $(".guestBtn").attr("style", "color: #b5b8bf !important;");
+        }
+    }
+);

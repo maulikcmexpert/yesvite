@@ -71,7 +71,7 @@
 .photos-main-wrp{
     margin-top: 0px;
     height: 800px;
-    padding: 40px 10px;
+    padding: 10px 10px 40px 10px;
     position: relative;
 }
 
@@ -508,6 +508,7 @@
     max-height: calc(100% - 1%);
     overflow: hidden;
     overflow-y: scroll;
+    padding-top: 40px !important;
 }
 
 /* ===Responsive=== */

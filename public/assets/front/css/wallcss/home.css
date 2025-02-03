@@ -1452,6 +1452,7 @@ main {
   border: transparent;
   width: 100%;
   max-width: 24px;
+  min-width: 24px;
   height: 24px;
   display:flex;
   justify-content: center;
