@@ -8927,7 +8927,7 @@ function update_self_bring(
                     categoryItemKey +
                     "-" +
                     categoryIndexKey
-            ).text(quantity);
+            ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
                 var current_item = parseInt(
