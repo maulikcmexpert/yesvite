@@ -1364,6 +1364,10 @@
     border: 1px dashed var(--green);
 }
 
+.footer-bottom-btn .guestBtn{
+    stroke: #b5b8bf !important;
+}
+
 /* ======Responsiveness===== */
 
 
