@@ -788,6 +788,7 @@ $(document).ready(function () {
                 type: 'GET',        
                 data: {status:status,user_id:id},          
                 success: function (response) { 
+                 console.log(response);
                  
                 },
                 error: function (error) {

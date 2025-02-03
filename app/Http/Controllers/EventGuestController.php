@@ -909,10 +909,11 @@ class EventGuestController extends Controller
             }
             session(['add_guest_user_id' => $userIds]);
         } else {
-            $userIds = session('add_guest_user_id', []); 
+            $userIds = session()->get('add_guest_user_id'); 
             $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
             session(['add_guest_user_id' => $userIds]);
         }
+        return session()->get('add_guest_user_id');
     }
     public function see_all_invite_yesvite(Request $request){
     
