@@ -2671,5 +2671,24 @@ if ($rsvpSent != null) {
     public function reset_notification_eventId(){
         Session::forget('notification_event_ids');
     }
+
+
+    public function store_add_new_guest(Request $request){
+        dd($request);
+        $user_id = $request->user_id;
+        $check_status = $request->status;
+        if ($check_status == 1) {
+            $userIds = session('add_guest_user_id', []);
+            if (!in_array($user_id, $userIds)) {
+                $userIds[] = $user_id;
+            }
+            session(['add_guest_user_id' => $userIds]);
+        } else {
+            $userIds = session()->get('add_guest_user_id'); 
+            $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
+            session(['add_guest_user_id' => $userIds]);
+        }
+        // return session()->get('add_guest_user_id');
+    }
 }
 
