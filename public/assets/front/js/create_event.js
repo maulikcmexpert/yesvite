@@ -9147,9 +9147,20 @@ if (category != 0) {
 
 $(document).on('blur', '#event-name', function() {
     var event_name = $("#event-name").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+    alert('blur')
 });
 
 $(document).on('change', '#event-date, #start-time', function() {
+    var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
     var start_time = $("#start-time").val();
+    alert('change')
+});
+$(document).on('click', '#start-time', function() {
+    var event_name = $("#event-name").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+    alert('click')
 });

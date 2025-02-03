@@ -1081,7 +1081,7 @@
                                                 </div>
 
                                                 <div
-                                                class="posts-card-show-all-comments-wrp d-none show_{{ $poll['id'] }}">
+                                                class="posts-card-show-all-comments-wrp d-none show_{{ $poll['event_post_id'] }}">
 
                                                 <div class="posts-card-show-all-comments-inner">
                                                     <ul class="top-level-comments">
