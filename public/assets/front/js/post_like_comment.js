@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-            $("#parent_comment_id").val() || null; // Find active comment if replying
+            $("#parent_comment_id").val() ; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
@@ -367,9 +367,8 @@ $(document).ready(function () {
                         });
                     }
                 }
-                commentInput.val("");
-                $("#parent_comment_id").val(""); // Reset parent comment ID
-
+                // commentInput.val("");
+                // $("#parent_comment_id").val(""); // Reset parent comment ID
             },
             error: function (xhr) {
                 console.error(xhr.responseText);
@@ -380,7 +379,9 @@ $(document).ready(function () {
 
     $(document).on("click", ".commented-user-reply-btn", function () {
         // Find the closest '.posts-card-main-comment' wrapper (the main post container)
-        const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp").prev(".posts-card-main-comment");
+        const parentWrapper = $(this)
+            .closest(".posts-card-show-all-comments-wrp")
+            .prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
             console.error("Parent wrapper not found!");
@@ -388,36 +389,34 @@ $(document).ready(function () {
         }
 
         // Find the username and comment ID from the current comment being replied to
-        const parentComment = $(this).closest(".commented-user-wrp"); // Find the closest comment wrapper
-        const parentName = parentComment.find("h3").text().trim();
-        const parentId = parentComment.data("comment-id");
+        const parentName = $(this)
+            .closest(".commented-user-wrp")
+            .find("h3")
+            .text()
+            .trim();
+        const parentId = $(this)
+            .closest(".commented-user-wrp")
+            .data("comment-id");
 
         // Debugging information
         console.log("Parent Wrapper:", parentWrapper);
         console.log("Parent Name:", parentName);
         console.log("Parent ID:", parentId);
 
-        if (!parentId) {
-            console.error("Comment ID not found!");
-            return;
-        }
-
         // Set the active class on the currently selected comment
         $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
-        parentComment.addClass("active"); // Add 'active' to the current comment
+        $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
 
-        // Find the comment box inside the parent wrapper
-        const commentBox = parentWrapper.find("#post_comment"); // Ensure it's targeting the correct ID
+        // Find the comment box inside the parent wrapper and insert the username
+        const commentBox = parentWrapper.find(".post_comment");
         if (!commentBox.length) {
             console.error("Comment input field not found!");
             return;
         }
-
-        // Set the parent comment ID and insert the '@username' into the comment box
         $("#parent_comment_id").val(parentId);
+        // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
-
 
     // Handle reply button click (when replying to a comment)
 });
@@ -865,7 +864,12 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             profileImage =generateProfileImage(first_name, last_name);
         }
+        var upper_view=$('.selected-contacts-list .guest-user').length;
+        alert(upper_view);
         const $modalBody = $('.selected-contacts-list');
+       
+       
+
         const contactHtml = `
             <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                 <div class="guest-user-img">
@@ -883,7 +887,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             </div>
 
         `;
-        $modalBody.append(contactHtml);
+        // $modalBody.append(contactHtml);
 
         const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite ">
