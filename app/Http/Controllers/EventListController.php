@@ -2749,7 +2749,7 @@ if ($rsvpSent != null) {
                 
             }
         }
-                        // dd($yesvite_users_data,$yesvite_phone_data);
+                        // dd($yesvite_all_invite);
 
         return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render()]);
         }
