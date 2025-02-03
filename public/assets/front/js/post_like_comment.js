@@ -902,24 +902,26 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             $modalBody.append(contactHtml);      
         }else{
             const $modalBody = $('.selected-phone-list');
-            var upper_see_phone=$('.selected-contacts-list .add_guest_phone_seeall').length;
+            var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
             if(upper_see_phone==0){
                 const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email" data-count="1">+1</span>
+                        <span class="number" id="total-selected-phone" data-count="1">+1</span>
                         <span class="content">Total</span>
                  </div>
                  <h6>Sell all</h6>
                 </a>`; 
+
+             
                   $modalBody.append(totalHtml);
             }
             if(upper_see_phone>0){
-               var initial= parseInt($('#total-selected-email').attr('data-count'));
+               var initial= parseInt($('#total-selected-phone').attr('data-count'));
                var new_value= initial+1 ;
                alert(initial);
-               $('#total-selected-email').attr('data-count',new_value);
-               $('#total-selected-email').text('+'+new_value);
+               $('#total-selected-phone').attr('data-count',new_value);
+               $('#total-selected-phone').text('+'+new_value);
             }
       
              }
