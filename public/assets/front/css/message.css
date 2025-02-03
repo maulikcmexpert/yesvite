@@ -1841,6 +1841,15 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     align-self: center;
 }
 
+.reply-section-wrp .reaction-ul{
+    left: 5px;
+    bottom: -10px;
+}
+
+.reply-section-wrp .reply-section{
+    padding-bottom: 20px !important;
+}
+
 /* ======= responsive ======== */
 
 
