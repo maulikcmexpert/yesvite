@@ -493,7 +493,7 @@ class EventPhotoController extends Controller
                 $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
                 $postsNormalDetail['is_reaction'] = ($checkUserIsReaction != NULL) ? '1' : '0';
                 $postsNormalDetail['self_reaction'] = ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "";
-                $postsNormalDetail['is_owner_post'] = ($value->user->id == $user->id) ? 1 : 0;
+                $postsNormalDetail['is_owner_post'] = ($user->id == $user->id) ? 1 : 0;
                 $postsNormalDetail['is_mute'] =  0;
                 if ($postControl != null) {
                     if ($postControl->post_control == 'mute') {
