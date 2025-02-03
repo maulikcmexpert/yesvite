@@ -909,10 +909,10 @@ class EventGuestController extends Controller
 
         // dd($new_added_user);
         if(!empty($new_added_user)){
-        foreach ($new_added_user as $user) {
+        foreach ($new_added_user as $sesionuser) {
             // Try fetching the user from the User table
-            $user = User::find($user['user_id']);
-            $prefer_by=$user['prefer_by'];
+            $user = User::find($sesionuser['user_id']);
+            $prefer_by=$sesionuser['prefer_by'];
 
             if ($user) {
                 // If the user exists, add data to the $users_data array
@@ -928,18 +928,18 @@ class EventGuestController extends Controller
                     'prefer_by'=>$prefer_by
                 ];
             } else {
-                $contact_sync = contact_sync::find($user['user_id']);
+                $contact_sync = contact_sync::find($sesionuser['user_id']);
                 
                 if ($contact_sync) {
                     $users_data[] = [
-                        'user_id' => $contact_sync->sync_id,
+                        'user_id' => $contact_sync->id,
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
                         'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
                         'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
                         'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
                                     ? asset('storage/profile/' . $contact_sync->photo) 
                                     : "",
-                        'phone_number'=>((!empty($user->phone) && $user->phone != NULL) ? $user->phone : ""),
+                        'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
                         'prefer_by'=>$prefer_by
            
                     ];
@@ -948,7 +948,7 @@ class EventGuestController extends Controller
             
         }
 
-                dd($users_data);
+                // dd($users_data);
 
     }
         return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','users_data'))->render()]);

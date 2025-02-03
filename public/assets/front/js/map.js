@@ -80,13 +80,13 @@ function initMap() {
                 typeValLong = [];
             console.log(place.name);
             let addressadded = false;
-            if (place.formatted_address != undefined) {
-                $("#address1").val(place.formatted_address);
-                $("#address1").next().addClass("floatingfocus");
-            } else {
-                $("#address1").val(place.name);
-                $("#address1").next().addClass("floatingfocus");
-            }
+            // if (place.formatted_address != undefined) {
+            //     $("#address1").val(place.formatted_address);
+            //     $("#address1").next().addClass("floatingfocus");
+            // } else {
+            $("#address1").val(place.name);
+            $("#address1").next().addClass("floatingfocus");
+            // }
 
             // Initialize variables to empty string
             let locationName = "";
