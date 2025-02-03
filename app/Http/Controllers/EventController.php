@@ -3299,6 +3299,8 @@ class EventController extends BaseController
             }
 
             $event_creation->static_information = json_encode($static_data);
+        } else {
+            $event_creation->static_information = null;
         }
         $event_creation->save();
 
