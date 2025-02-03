@@ -912,7 +912,7 @@ class EventGuestController extends Controller
             $userIds = session('add_guest_user_id', []); 
             $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
             session(['add_guest_user_id' => $userIds]);
-        }s
+        }
     }
     public function see_all_invite_yesvite(Request $request){
     
