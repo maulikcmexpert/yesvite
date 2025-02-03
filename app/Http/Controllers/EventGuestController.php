@@ -241,20 +241,37 @@ class EventGuestController extends Controller
 
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
             $eventInfo['guest_view'] = $eventDetails;
+
+
+            
+            $eventattending = EventInvitedUser::
+                // whereHas('user', function ($query) {
+                //     $query->where('app_user', '1');
+                // })->
+                where(['rsvp_status' => '1', 'event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
+
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
 
                 // $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
-            $eventattending = EventInvitedUser::whereHas('user', function ($query) {
+            // $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
-            })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
+            //     $query->where('app_user', '1');
+            // })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
 
-            $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
+            // $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
 
-                $query->where('app_user', '1');
-            })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+            //     $query->where('app_user', '1');
+            // })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+
+
+
+            $eventNotComing = EventInvitedUser::
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['rsvp_d' => '1', 'is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
 
 
 
@@ -269,11 +286,17 @@ class EventGuestController extends Controller
 
 
 
-            $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
+            // $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-                // $query->where('app_user', '1');
-            })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
-            // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+            //     // $query->where('app_user', '1');
+            // })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+            // // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+
+            $pendingUser = EventInvitedUser::
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
 
 
 
