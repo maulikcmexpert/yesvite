@@ -1834,14 +1834,14 @@ function processTimers() {
 
         if (time === lastTime && senderType === lastSender) {
             if (lastElement) lastElement.style.display = "none";
-            if (seenStatus) seenStatus?.style?.display = "none";
+            if (seenStatus) seenStatus.style.display = "none";
         }
 
         lastTime = time;
         lastSender = senderType;
         lastElement = timeElement;
         timeElement.style.display = "inline";
-        seenStatus?.style?.display = "inline";
+        seenStatus.style.display = "inline";
     });
 }
 
