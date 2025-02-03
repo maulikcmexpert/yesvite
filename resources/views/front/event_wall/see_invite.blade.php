@@ -1,5 +1,5 @@
+<div class="guest-user-list-wrp invite-contact-wrp yesvite_contact see_all_invite_data">
 @if(!empty($yesvite_all_invite))
- <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact see_all_invite_data">
     @foreach ($yesvite_all_invite['all_invited_users'] as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
@@ -46,11 +46,9 @@
                                         </div>
     </div>
     @endforeach
-</div>
 @endif
 
 @if(!empty($users_data))
- <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact see_all_invite_data">
     @foreach ($users_data as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
@@ -94,5 +92,5 @@
                                         </div>
     </div>
     @endforeach
-</div>
 @endif
+</div>
