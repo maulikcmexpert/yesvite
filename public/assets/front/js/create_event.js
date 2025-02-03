@@ -4129,7 +4129,7 @@ function savePage1Data(close = null, direct = false) {
     // window.location.href = '/create-event-page-2';
 }
 
-function savePage3Data(close = null) {
+function savePage3Data(close = null, direct = false) {
     // let invited_user_ids = [];
 
     // eventData.invited_user_ids = invited_user_ids;
@@ -4153,6 +4153,10 @@ function savePage3Data(close = null) {
 
             return;
         }
+    }
+
+    if (direct) {
+        return true;
     }
     $(".list_all_invited_user").empty();
     // $(".list_all_invited_user").append(response);
@@ -8457,6 +8461,11 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     savePage1Data(null, true);
     updateEventData();
 });
+$(document).on("click", ".saveGuestOnly", async function (e) {
+    e.preventDefault();
+    savePage3Data(null, true);
+    updateEventData();
+});
 
 function updateEventData() {
     eventData.isdraft = "0";
@@ -8504,8 +8513,8 @@ $(document).on("click", ".edit_checkout", async function (e) {
         eventData.is_update_event = "1";
     }
     await saveDesignData(true);
-    savePage1Data();
-    savePage3Data();
+    savePage1Data(null, true);
+    savePage3Data(null, true);
     savePage4Data();
 
     eventData.isPhonecontact = isPhonecontact;
