@@ -4,7 +4,7 @@
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
                                     <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
-                                @else
+                            @else
                                     @php
                                         $firstInitial = !empty($guest_user['first_name'])
                                             ? strtoupper($guest_user['first_name'][0])
@@ -16,7 +16,7 @@
                                         $fontColor = 'fontcolor' . $firstInitial;
                                     @endphp
                                     <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                                @endif
+                            @endif
                                 <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                                                                 <!-- <img src="https://yesvite.cmexpertiseinfotech.in/storage/profile/73_profile.jpg?v=29" alt="user-img"> -->
                                                             <!-- <a href="#" class="close">
@@ -44,6 +44,21 @@
 @foreach ($yesvite_phone_data as $guest_user)
     <div class="guest-users" data-id="{{$guest_user['user_id']}}">
                             <div class="guest-user-img">
+                            @if ($guest_user['profile'] != '')
+                                    <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                            @else
+                                    @php
+                                        $firstInitial = !empty($guest_user['first_name'])
+                                            ? strtoupper($guest_user['first_name'][0])
+                                            : '';
+                                        $lastInitial = !empty($guest_user['last_name'])
+                                            ? strtoupper($guest_user['last_name'][0])
+                                            : '';
+                                        $initials = $firstInitial . $lastInitial;
+                                        $fontColor = 'fontcolor' . $firstInitial;
+                                    @endphp
+                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                            @endif
                                 <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                                                             <a href="#" class="close">
                                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
@@ -59,21 +74,7 @@
                                     </svg>
                                 </a>
                             </div>
-                            @if ($guest_user['profile'] != '')
-                                    <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
-                                @else
-                                    @php
-                                        $firstInitial = !empty($guest_user['first_name'])
-                                            ? strtoupper($guest_user['first_name'][0])
-                                            : '';
-                                        $lastInitial = !empty($guest_user['last_name'])
-                                            ? strtoupper($guest_user['last_name'][0])
-                                            : '';
-                                        $initials = $firstInitial . $lastInitial;
-                                        $fontColor = 'fontcolor' . $firstInitial;
-                                    @endphp
-                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                                @endif
+                            
                             <!-- <h6 class="guest-name">test01A inserver</h6> -->
     </div>
 @endforeach
