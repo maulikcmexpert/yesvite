@@ -367,8 +367,8 @@ $(document).ready(function () {
                         });
                     }
                 }
-                commentInput.val("");
-                $("#parent_comment_id").val(""); // Reset parent comment ID
+                // commentInput.val("");
+                // $("#parent_comment_id").val(""); // Reset parent comment ID
             },
             error: function (xhr) {
                 console.error(xhr.responseText);
