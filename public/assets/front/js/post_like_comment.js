@@ -800,7 +800,7 @@ $(document).ready(function () {
                 success: function (response) {
                  console.log(response);
                 if(response.view!=""){
-                    $('.selected-contacts-list').remove('guest-users');
+                    $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').append(response.view);
                 }
                 },
