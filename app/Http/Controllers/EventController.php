@@ -3036,7 +3036,7 @@ class EventController extends BaseController
             $startDateFormat = $startDateObj->format('Y-m-d');
             $endDateFormat = $endDateObj->format('Y-m-d');
         }
-
+        dd($request->rsvp_by_date);
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
             // dd($carbonDate);
