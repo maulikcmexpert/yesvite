@@ -117,199 +117,143 @@ class EventWallController extends Controller
         }
 
 
-        $polls = EventPostPoll::with('event_poll_option')
-            ->withCount('user_poll_data')
-            ->where(['event_id' => $event])
-            ->get();
+    $polls = EventPostPoll::with('event_poll_option')
+    ->withCount('user_poll_data')
+    ->where('event_id', $event)
+    ->get();
 
-        $pollsData = [];
+$pollsData = [];
 
-        foreach ($polls as $poll) {
-            $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
-            $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
-            $post_time = setpostTime($poll->created_at);
+foreach ($polls as $poll) {
+    $checkUserRsvp = checkUserAttendOrNot($event, $user->id);
+    $checkUserIsReaction = EventPostReaction::where(['event_id' => $event, 'event_post_id' => $poll->event_post_id, 'user_id' => $user->id])->first();
+    $post_time = setpostTime($poll->created_at);
 
-            // Get the poll duration and check if it is expired
-            $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
-            $isExpired = ($pollDuration == "");
+    // Get the poll duration and check if it is expired
+    $pollDuration = getLeftPollTime($poll->updated_at, $poll->poll_duration);
+    $isExpired = ($pollDuration == "");
 
-            // Fetch reaction list for the post (poll)
-            $reactionList = getOnlyReaction($poll->event_post_id);
-            $totalLikes = $poll->event_post_reaction_count;
+    // Fetch reaction list for the post (poll)
+    $reactionList = getOnlyReaction($poll->event_post_id);
+    $totalLikes = $poll->event_post_reaction_count;
 
-            // Prepare the poll data
-            $pollData = [
-                'poll_id' => $poll->id,
-                'event_post_id' => $poll->event_post_id,
-                'poll_question' => $poll->poll_question,
-                'total_poll_duration' => $poll->poll_duration,
-                'poll_duration_left' => $pollDuration,
-                'is_expired' => $isExpired,
-                'rsvp_status' => (string)$checkUserRsvp ?? "",
-                'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
-                'reactionList' => $reactionList,
-                'post_time' => $post_time,
-                'total_likes' => $totalLikes,
-                'total_poll_vote' => $poll->user_poll_data_count,
-                'poll_options' => [],
-                'post_comment' => [] // Initialize the comment list here
+    // Prepare the poll data
+    $pollData = [
+        'poll_id' => $poll->id,
+        'event_post_id' => $poll->event_post_id,
+        'poll_question' => $poll->poll_question,
+        'total_poll_duration' => $poll->poll_duration,
+        'poll_duration_left' => $pollDuration,
+        'is_expired' => $isExpired,
+        'rsvp_status' => (string) $checkUserRsvp ?? "",
+        'self_reaction' => ($checkUserIsReaction != NULL) ? $checkUserIsReaction->reaction : "",
+        'reactionList' => $reactionList,
+        'post_time' => $post_time,
+        'total_likes' => $totalLikes,
+        'total_poll_vote' => $poll->user_poll_data_count,
+        'poll_options' => [],
+        'post_comment' => [] // Initialize the comment list here
+    ];
+
+    // Loop through each poll's options and calculate vote percentages
+    foreach ($poll->event_poll_option as $option) {
+        $totalVotes = getOptionAllTotalVote($poll->id);
+        $optionTotalVotes = getOptionTotalVote($option->id);
+
+        $pollData['poll_options'][] = [
+            'id' => $option->id,
+            'option' => $option->option,
+            'total_vote_percentage' => $totalVotes > 0 ? round(($optionTotalVotes / $totalVotes) * 100) . '%' : '0%',
+            'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id),
+        ];
+    }
+
+    // Retrieve and loop through post comments
+    $postCommentList = [];
+    $postComment = getComments($poll->event_post_id,);
+
+    foreach ($postComment as $commentVal) {
+        $commentInfo = [
+            'id' => $commentVal->id,
+            'event_post_id' => $commentVal->event_post_id,
+            'comment' => $commentVal->comment_text,
+            'user_id' => $commentVal->user_id,
+            'username' => $commentVal->user->firstname . ' ' . $commentVal->user->lastname,
+            'profile' => (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "",
+            'location' => $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "",
+            'comment_total_likes' => $commentVal->post_comment_reaction_count,
+            'is_like' => checkUserIsLike($commentVal->id, $user->id),
+            'total_replies' => $commentVal->replies_count,
+            'created_at' => $commentVal->created_at,
+            'posttime' => setpostTime($commentVal->created_at),
+            'comment_replies' => [] // Initialize the reply list here
+        ];
+
+        // Retrieve and loop through replies for the comment
+        foreach ($commentVal->replies as $reply) {
+            $mainParentId = (new EventPostComment())->getMainParentId($reply->parent_comment_id);
+
+            $replyCommentInfo = [
+                'id' => $reply->id,
+                'event_post_id' => $reply->event_post_id,
+                'main_comment_id' => $reply->main_parent_comment_id,
+                'comment' => $reply->comment_text,
+                'user_id' => $reply->user_id,
+                'username' => $reply->user->firstname . ' ' . $reply->user->lastname,
+                'profile' => (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "",
+                'location' => $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "",
+                'comment_total_likes' => $reply->post_comment_reaction_count,
+                'is_like' => checkUserIsLike($reply->id, $user->id),
+                'total_replies' => $reply->replies_count,
+                'created_at' => $reply->created_at,
+                'posttime' => setpostTime($reply->created_at),
             ];
 
-            // Loop through each poll's options and calculate vote percentages
-            foreach ($poll->event_poll_option as $option) {
-                $totalVotes = getOptionAllTotalVote($poll->id);
-                $optionTotalVotes = getOptionTotalVote($option->id);
+            $commentInfo['comment_replies'][] = $replyCommentInfo;
 
-                $pollData['poll_options'][] = [
-                    'id' => $option->id,
-                    'option' => $option->option,
-                    'total_vote_percentage' => $totalVotes > 0
-                        ? round(($optionTotalVotes / $totalVotes) * 100) . '%'
-                        : '0%',
-                    'is_poll_selected' => checkUserGivePoll($user, $poll->id, $option->id),
-                ];
-            }
+            // Fetch child replies
+            $replyChildComment = EventPostComment::with(['user'])->withCount('post_comment_reaction', 'replies')
+                ->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])
+                ->orderBy('id', 'DESC')->get();
 
-            $postCommentList = [];
+            foreach ($replyChildComment as $childReplyVal) {
+                if ($childReplyVal->parent_comment_id != $childReplyVal->main_parent_comment_id) {
+                    $totalReply = EventPostComment::withCount('post_comment_reaction')
+                        ->where("parent_comment_id", $childReplyVal->id)
+                        ->count();
 
-            $postComment = getComments($poll->id);
-            foreach ($postComment as $commentVal) {
+                    $commentChildReply = [
+                        'id' => $childReplyVal->id,
+                        'event_post_id' => $childReplyVal->event_post_id,
+                        'main_comment_id' => $childReplyVal->main_parent_comment_id,
+                        'comment' => $childReplyVal->comment_text,
+                        'user_id' => $childReplyVal->user_id,
+                        'username' => $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname,
+                        'profile' => (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "",
+                        'location' => (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "",
+                        'comment_total_likes' => $childReplyVal->post_comment_reaction_count,
+                        'is_like' => checkUserIsLike($childReplyVal->id, $user->id),
+                        'total_replies' => $totalReply,
+                        'posttime' => setpostTime($childReplyVal->created_at),
+                        'created_at' => $childReplyVal->created_at,
+                    ];
 
-
-
-
-                $commentInfo['id'] = $commentVal->id;
-
-                $commentInfo['event_post_id'] = $commentVal->event_post_id;
-
-                $commentInfo['comment'] = $commentVal->comment_text;
-
-                $commentInfo['user_id'] = $commentVal->user_id;
-
-                $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
-
-                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
-                // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
-                // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
-                $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
-
-                $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
-
-                $commentInfo['is_like'] = checkUserIsLike($commentVal->id, $user->id);
-
-                $commentInfo['total_replies'] = $commentVal->replies_count;
-
-                $commentInfo['created_at'] = $commentVal->created_at;
-                $commentInfo['posttime'] = setpostTime($commentVal->created_at);
-
-                $commentInfo['comment_replies'] = [];
-
-                foreach ($commentVal->replies as $reply) {
-                    $mainParentId = (new EventPostComment())->getMainParentId($reply->parent_comment_id);
-
-                    $replyCommentInfo['id'] = $reply->id;
-
-                    $replyCommentInfo['event_post_id'] = $reply->event_post_id;
-                    $replyCommentInfo['main_comment_id'] = $reply->main_parent_comment_id;
-
-                    $replyCommentInfo['comment'] = $reply->comment_text;
-
-                    $replyCommentInfo['user_id'] = $reply->user_id;
-
-                    $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
-
-                    $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
-
-                    // $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
-                    $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
-
-                    $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
-
-                    $replyCommentInfo['is_like'] = checkUserIsLike($reply->id, $user->id);
-
-                    $replyCommentInfo['total_replies'] = $reply->replies_count;
-
-                    $replyCommentInfo['created_at'] = $reply->created_at;
-                    $replyCommentInfo['posttime'] = setpostTime($reply->created_at);
-                    $commentInfo['comment_replies'][] = $replyCommentInfo;
-
-
-                    $replyComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])->orderBy('id', 'DESC')->get();
-
-                    foreach ($replyComment as $childReplyVal) {
-
-                        if ($childReplyVal->parent_comment_id != $childReplyVal->main_parent_comment_id) {
-
-                            $totalReply = EventPostComment::withcount('post_comment_reaction')->where("parent_comment_id", $childReplyVal->id)->count();
-
-
-                            $commentChildReply['id'] = $childReplyVal->id;
-
-                            $commentChildReply['event_post_id'] = $childReplyVal->event_post_id;
-                            $commentChildReply['main_comment_id'] = $childReplyVal->main_parent_comment_id;
-                            $commentChildReply['comment'] = $childReplyVal->comment_text;
-                            $commentChildReply['user_id'] = $childReplyVal->user_id;
-
-                            $commentChildReply['username'] = $childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname;
-
-                            $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
-                            $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
-
-                            $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
-
-                            $commentChildReply['is_like'] = checkUserIsLike($childReplyVal->id, $user->id);
-
-                            $commentChildReply['total_replies'] = $totalReply;
-                            $commentChildReply['posttime'] = setpostTime($childReplyVal->created_at);
-                            $commentChildReply['created_at'] = $childReplyVal->created_at;
-
-                            $commentInfo['comment_replies'][] = $commentChildReply;
-
-                            $replyChildComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $childReplyVal->event_post_id, 'parent_comment_id' => $childReplyVal->id])->orderBy('id', 'DESC')->get();
-
-                            foreach ($replyChildComment as $childInReplyVal) {
-
-                                if ($childInReplyVal->parent_comment_id != $childInReplyVal->main_parent_comment_id) {
-
-                                    $totalReply = EventPostComment::withcount('post_comment_reaction')->where("parent_comment_id", $childInReplyVal->id)->count();
-
-
-                                    $commentChildInReply['id'] = $childInReplyVal->id;
-
-                                    $commentChildInReply['event_post_id'] = $childInReplyVal->event_post_id;
-                                    $commentChildInReply['main_comment_id'] = $childInReplyVal->main_parent_comment_id;
-                                    $commentChildInReply['comment'] = $childInReplyVal->comment_text;
-                                    $commentChildInReply['user_id'] = $childInReplyVal->user_id;
-
-                                    $commentChildInReply['username'] = $childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname;
-
-                                    $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
-                                    $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
-
-                                    $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
-
-                                    $commentChildInReply['is_like'] = checkUserIsLike($childInReplyVal->id, $user->id);
-
-                                    $commentChildInReply['total_replies'] = $totalReply;
-                                    $commentChildInReply['posttime'] = setpostTime($childInReplyVal->created_at);
-                                    $commentChildInReply['created_at'] = $childInReplyVal->created_at;
-
-                                    $commentInfo['comment_replies'][] = $commentChildInReply;
-                                }
-                            }
-                        }
-                    }
+                    $commentInfo['comment_replies'][] = $commentChildReply;
                 }
-
-
-                $postCommentList[] = $commentInfo;
             }
-
-            $pollsData['post_comment'] = $postCommentList;
-
-            // Add the poll data to the final polls data array
-            $pollsData[] = $pollData;
         }
+
+        $postCommentList[] = $commentInfo;
+    }
+
+    $pollData['post_comment'] = $postCommentList;
+
+    // Add the poll data to the final polls data array
+    $pollsData[] = $pollData;
+}
+
+
+
 
         $wallData['owner_stories'] = [];
 

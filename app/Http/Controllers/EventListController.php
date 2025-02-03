@@ -2719,7 +2719,7 @@ if ($rsvpSent != null) {
                 if ($user) {
                     // If the user exists, add data to the $users_data array
                     $yesvite_users_data[] = [
-                        'user_id' => $user->id,
+                        'id' => $user->id,
                         'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
                         'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                         'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
@@ -2734,7 +2734,7 @@ if ($rsvpSent != null) {
                     
                     if ($contact_sync) {
                         $yesvite_phone_data[] = [
-                            'user_id' => $contact_sync->id,
+                            'id' => $contact_sync->id,
                             'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
                             'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
                             'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
