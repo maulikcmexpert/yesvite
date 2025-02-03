@@ -2787,6 +2787,7 @@ class EventController extends BaseController
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
+        // dd($savedFiles);
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
@@ -2991,6 +2992,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
+        dd($request->slider_images);
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('desgin_slider');
