@@ -226,7 +226,7 @@
                                                 $host_id = $eventDetails['host_id'];
                                                 $userid = $login_user_id;
                                                 //   dd($host_id);if ($guestString !== null) {
-                                                $guestArray = $eventDetails['event_detail']['guests'] ?? null;
+                                                $guestArray = $eventDetails['event_detail']['guests']['all_invited_users'] ?? null;
                                                 $totalAdults = 0;
                                                 $totalKids = 0;
                                                 // dd( $guestArray);
@@ -249,29 +249,29 @@
                                             @if (!empty($guestArray))
                                                 @foreach ($guestArray as $guest)
                                                     {{-- {{     dd($guest['id'])}} --}}
-                                                    @if (isset($guest['user']))
+                                                    @if (isset($guest))
                                                         @php
-                                                            $user = $guest['user']; // Fetch user array
+                                                          //  $user = $guest['user']; // Fetch user array
                                                             // dd($user['id']);
                                                             $isDisabled =
-                                                                $eventDetails['host_id'] == $user['id'] ? 'd-none' : '';
+                                                                $eventDetails['host_id'] == $guest['id'] ? 'd-none' : '';
                                                         @endphp
                                                         <div class="guest-user-box {{ $isDisabled }}"
-                                                            data-guest-id="{{ $guest['id'] }}">
+                                                            data-guest-id="{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                             <div class="guest-list-data">
                                                                 <a href="#" class="guest-img">
-                                                                    @if ($user['profile'] != '')
-                                                                        <img src="{{ asset('storage/profile/' . $user['profile']) }}"
+                                                                    @if ($guest['profile'] != '')
+                                                                        <img src="{{$guest['profile']) }}"
                                                                             alt="">
                                                                     @else
                                                                         @php
 
                                                                             // $parts = explode(" ", $name);
-                                                                            $firstInitial = isset($user['firstname'][0])
-                                                                                ? strtoupper($user['firstname'][0])
+                                                                            $firstInitial = isset($guest['first_name'][0])
+                                                                                ? strtoupper($guest['first_name'][0])
                                                                                 : '';
-                                                                            $secondInitial = isset($user['lastname'][0])
-                                                                                ? strtoupper($user['lastname'][0])
+                                                                            $secondInitial = isset($guest['last_name'][0])
+                                                                                ? strtoupper($guest['last_name'][0])
                                                                                 : '';
                                                                             $initials =
                                                                                 strtoupper($firstInitial) .
@@ -285,17 +285,19 @@
                                                                     @endif
 
                                                                     <input type="hidden" id="eventID"
-                                                                        value="{{ $guest['event_id'] }}">
+                                                                        value="{{ $eventDetails['id'] }}">
                                                                     <input type="hidden" id="user_id"
-                                                                        value="{{ $guest['user_id'] }}">
+                                                                        value="{{ $guest['id'] }}">
+                                                                        <input type="hidden" id="is_sync"
+                                                                        value="{{ $guest['is_sync'] }}">
 
                                                                 </a>
                                                                 <div class="d-flex flex-column">
                                                                     <a href="#"
-                                                                        class="guest-name">{{ $user['firstname'] }}
-                                                                        {{ $user['lastname'] }}</a>
+                                                                        class="guest-name">{{ $guest['first_name'] }}
+                                                                        {{ $guest['last_name'] }}</a>
                                                                     <span
-                                                                        class="guest-email">{{ $user['email'] }}</span>
+                                                                        class="guest-email">{{ $guest['email'] }}</span>
                                                                 </div>
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
@@ -309,6 +311,7 @@
                                                                         class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#editrsvp"
+                                                                        data-is_sync="{{ $guest['is_sync'] }}"
                                                                         data-guest-id="{{ $guest['id'] }}">
                                                                         <svg width="20" height="20"
                                                                             viewBox="0 0 20 20" fill="none"
@@ -385,7 +388,7 @@
                                                             <div class="check_status">
                                                                 @if ($guest['rsvp_status'] == '1')
                                                                     <div class="sucess-yes"
-                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        data-guest-id="{{ $guest['id'] }}"   data-is_sync="{{ $guest['is_sync'] }}">
                                                                         <h5 class="green">YES</h5>
                                                                         <div class="sucesss-cat ms-auto">
                                                                             <svg width="15" height="15"
@@ -408,21 +411,21 @@
                                                                                     fill="black"
                                                                                     fill-opacity="0.2" />
                                                                             </svg>
-                                                                            <h5 id="adults{{ $guest['id'] }}">
+                                                                            <h5 id="adults{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                                 {{ $guest['adults'] }}Adults
                                                                             </h5>
-                                                                            <h5 id="kids{{ $guest['id'] }}">
+                                                                            <h5 id="kids{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                                 {{ $guest['kids'] }} Kids</h5>
                                                                         </div>
                                                                     </div>
                                                                 @elseif ($guest['rsvp_status'] == '0')
                                                                     <div class="sucess-no"
-                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        data-guest-id="{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                         <h5>NO</h5>
                                                                     </div>
                                                                 @elseif ($guest['rsvp_status'] == null)
                                                                     <div class="no-reply"
-                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        data-guest-id="{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                         <h5>NO REPLY</h5>
                                                                     </div>
                                                                 @endif

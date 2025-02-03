@@ -386,74 +386,67 @@ defer
         }
     });
     </script>
-
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-        getDatabase,
-        ref,
-        get,
-        onValue,
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    let currentPage = @json(request()->segment(count(request()->segments())));
+    console.log(currentPage); // Output: messages
 
-    (async function() {
-        const userId = {{$UserId}}; // Make sure this is correctly injected from Laravel
+    if (currentPage !== "messages") {
+        (async function () {
+            const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
 
-        if (userId != undefined) {
-            try {
-                // Fetch Firebase configuration from firebase_js.json
-                const response = await fetch("/firebase_js.json");
-                const firebaseConfig = await response.json();
+            if (userId !== null) {
+                try {
+                    // Dynamically import Firebase modules
+                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+                    const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
 
-                // Initialize Firebase app
-                const app = initializeApp(firebaseConfig);
-                const database = getDatabase(app);
+                    // Fetch Firebase configuration
+                    const response = await fetch("/firebase_js.json");
+                    const firebaseConfig = await response.json();
 
-                // Reference to the user's overview data in Firebase
-                const overviewRef = ref(database, `overview/${userId}`);
+                    // Initialize Firebase app
+                    const app = initializeApp(firebaseConfig);
+                    const database = getDatabase(app);
 
-                // Function to calculate unread count
-                function updateUnreadCountG(snapshot) {
-                    let totalUnreadCount = 0;
+                    // Reference to the user's overview data in Firebase
+                    const overviewRef = ref(database, `overview/${userId}`);
 
-                    // Check if data exists
-                    if (snapshot.exists()) {
-                        const conversations = snapshot.val();
+                    // Function to calculate unread count
+                    function updateUnreadCountG(snapshot) {
+                        let totalUnreadCount = 0;
 
-                        for (let conversationId in conversations) {
-                            const conversation = conversations[conversationId];
+                        if (snapshot.exists()) {
+                            const conversations = snapshot.val();
+                            for (let conversationId in conversations) {
+                                const conversation = conversations[conversationId];
 
-                            if (conversation.unReadCount && conversation.contactName) {
-                                totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                if (conversation.unReadCount && conversation.contactName) {
+                                    totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                }
                             }
                         }
+
+                        // Update badge display
+                        document.querySelectorAll(".badge, .g-badge").forEach(el => {
+                            el.style.display = totalUnreadCount > 0 ? "inline" : "none";
+                            el.innerHTML = totalUnreadCount > 0 ? totalUnreadCount : "";
+                        });
                     }
 
-                    if (parseInt(totalUnreadCount) > 0) {
-                        $(".badge").show();
-                        $(".g-badge").show();
-                        $(".g-badge").html(parseInt(totalUnreadCount));
-                        $(".badge").html(parseInt(totalUnreadCount));
-                    } else {
-                        $(".g-badge").hide();
-                        $(".badge").hide();
-                        $(".g-badge").html("");
-                        $(".badge").html("");
-                    }
-                }
+                    // Listen for real-time updates
+                    onValue(overviewRef, (snapshot) => {
+                        updateUnreadCountG(snapshot);
+                    });
 
-                // Listen for real-time changes in the overview data
-                onValue(overviewRef, (snapshot) => {
+                    // Initial fetch
+                    const snapshot = await get(overviewRef);
                     updateUnreadCountG(snapshot);
-                });
-
-                // Initial fetch of the data (optional)
-                const snapshot = await get(overviewRef);
-                updateUnreadCountG(snapshot);
-
-            } catch (error) {
-                console.error("Error fetching data from Firebase:", error);
+                } catch (error) {
+                    console.error("Error fetching Firebase data:", error);
+                }
             }
-        }
-    })();
+        })();
+    }
 </script>
+
+

@@ -1771,6 +1771,7 @@ function UpdateMessageToList(key, messageData, conversationId) {
     );
 
     $(messageEle).replaceWith(messgeElement);
+    updateTimers(true);
 }
 function addMessageToList(key, messageData, conversationId) {
     if ($(".selected_conversasion").val() != conversationId) {
@@ -1804,61 +1805,41 @@ function addMessageToList(key, messageData, conversationId) {
     }
 
     scrollToBottom();
+    updateTimers();
+    scrollToBottom();
 }
-function updateTimers() {
-    const messages = document.querySelectorAll("li"); // Select all message list items
+let timerTime = 0;
+function updateTimers(fast = false) {
+    clearTimeout(timerTime);
+    if (fast) {
+        processTimers();
+    } else {
+        timerTime = setTimeout(processTimers, 500);
+    }
+}
 
-    let lastSenderElem = null;
-    let lastReceiverElem = null;
-    let prevType = null; // Track previous message type (sender/receiver)
+function processTimers() {
+    let messages = document.querySelectorAll(".chat-box");
+    let lastTime = "";
+    let lastSender = "";
+    let lastElement = null;
 
-    messages.forEach((msg, index) => {
-        const timeSpan = msg.querySelector(".time");
-        if (!timeSpan) return; // Skip if no time element
+    messages.forEach((msg) => {
+        let timeElement = msg.querySelector(".time");
+        let time = timeElement.getAttribute("data-time");
+        let senderType = msg.classList.contains("sender")
+            ? "sender"
+            : "receiver";
 
-        const storedTime = timeSpan.getAttribute("data-time");
-        const isSender = msg.classList.contains("sender");
-        const isReceiver = msg.classList.contains("receiver");
-
-        // ADD missing time if empty
-        if (!timeSpan.innerHTML.trim() && storedTime) {
-            timeSpan.innerHTML = storedTime;
+        if (time === lastTime && senderType === lastSender) {
+            if (lastElement) lastElement.style.display = "none";
         }
 
-        if (isSender) {
-            // Retain last receiver's time before switching to sender
-            if (prevType === "receiver" && lastReceiverElem) {
-                lastReceiverElem.innerHTML =
-                    lastReceiverElem.getAttribute("data-time");
-            }
-
-            // Remove previous sender's time (to keep only the last one)
-            if (lastSenderElem) lastSenderElem.innerHTML = "";
-
-            lastSenderElem = timeSpan;
-            prevType = "sender";
-        }
-
-        if (isReceiver) {
-            // Retain last sender's time before switching to receiver
-            if (prevType === "sender" && lastSenderElem) {
-                lastSenderElem.innerHTML =
-                    lastSenderElem.getAttribute("data-time");
-            }
-
-            // Remove previous receiver's time (to keep only the last one)
-            if (lastReceiverElem) lastReceiverElem.innerHTML = "";
-
-            lastReceiverElem = timeSpan;
-            prevType = "receiver";
-        }
+        lastTime = time;
+        lastSender = senderType;
+        lastElement = timeElement;
+        timeElement.style.display = "inline";
     });
-
-    // Ensure last messages of both types keep their timestamps
-    if (lastSenderElem)
-        lastSenderElem.innerHTML = lastSenderElem.getAttribute("data-time");
-    if (lastReceiverElem)
-        lastReceiverElem.innerHTML = lastReceiverElem.getAttribute("data-time");
 }
 
 // setInterval(updateTimers, 1000);
@@ -2289,10 +2270,8 @@ function createMessageElement(
     );
     let setTimeS = 1;
     let setTimeR = 1;
-    console.log(messageRcvTime.replace(/\s/g, ""));
-    console.log({ msgLoop });
-    console.log({ msgLoop });
     if (isSender) {
+        console.log("sender");
         if (msgLoop != 0) {
             Array.from(time).forEach((timeElement) => {
                 if ($(timeElement).data("loop") > msgLoop) {
@@ -2305,6 +2284,7 @@ function createMessageElement(
             // $(time).text("");
         }
     } else {
+        console.log("reciver");
         const Rtime = document.getElementsByClassName(
             `rtime_${messageRcvTime.replace(/\s/g, "")}`
         );
@@ -2313,11 +2293,11 @@ function createMessageElement(
                 if ($(timeElement).data("Rloop") > recMsgLoop) {
                     setTimeR = 0;
                 } else {
-                    //$(timeElement).text("");
+                    // $(timeElement).text("");
                 }
             });
         } else {
-            // $(Rtime).text("");
+            //$(Rtime).text("");
         }
     }
 
@@ -2338,11 +2318,11 @@ function createMessageElement(
     //updateTimers();
     return `<div>
     ${daychange}
-        <li class="${
+        <li class="chat-box ${
             isSender ? "receiver" : "sender"
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}">${msgTime}</span>            
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}" style="display: none;">${msgTime}</span>            
         </li>
     </div>
     `;

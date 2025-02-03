@@ -1014,7 +1014,7 @@ function getInvitedUsersList($eventId)
                 $invitedGuestDetail['visible'] = (!empty($guestVal->contact_sync->visible) && $guestVal->contact_sync->visible != NULL) ? (int)$guestVal->contact_sync->visible : 0;
                 // $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? $guestVal->contact_sync->photo : "";
                 $invitedGuestDetail['profile'] = (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "";
-
+                $invitedGuestDetail['is_sync'] = 1;
                 $invitedGuestDetail['rsvp_status']= $guestVal->rsvp_status;
                 $invitedGuestDetail['kids']= $guestVal->kids;
                 $invitedGuestDetail['adults']= $guestVal->adults;
@@ -1033,6 +1033,7 @@ function getInvitedUsersList($eventId)
                 $invitedUserIdDetail['app_user'] = (!empty($guestVal->user->app_user) && $guestVal->user->app_user != NULL) ? (int)$guestVal->user->app_user : 0;
                 $invitedUserIdDetail['visible'] = (!empty($guestVal->user->visible) && $guestVal->user->visible != NULL) ? (int)$guestVal->user->visible : 0;
                 // $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/').$guestVal->user->profile : "";
+                $invitedUserIdDetail['is_sync'] = 0;
                 $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/' . $guestVal->user->profile) : "";
                 $invitedUserIdDetail['rsvp_status']= $guestVal->rsvp_status;
                 $invitedUserIdDetail['kids']= $guestVal->kids;
