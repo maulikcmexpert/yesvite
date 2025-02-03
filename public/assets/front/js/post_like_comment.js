@@ -122,7 +122,7 @@ $(document).ready(function () {
                     $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
 
                     // Update the reaction display
-                    replyLikeIcon.text(`${response.self_reaction}`);
+                    // replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
                     alert(response.message);
                 }
