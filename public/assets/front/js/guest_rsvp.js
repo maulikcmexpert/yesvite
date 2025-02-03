@@ -5,9 +5,15 @@ $(document).on('click', '.edit_rsvp_guest', function () {
     $('#editrsvp3').modal('hide'); // Hide the modal initially to set up data
 
     const guestId = $(this).data('guest-id');
+    const is_sync = $(this).data('is_sync');
+
     console.log('Guest ID:', guestId);
+    $('#editrsvp3 .rsvp-img img').attr('src',"");
+    $('#editrsvp3 h5').text("");
+    $('#editrsvp3 .adult-count').val("");
+    $('#editrsvp3 .kid-count').val("");
     $.ajax({
-        url: base_url + "event_guest/fetch_guest/" + guestId, // Fetch guest data
+        url: base_url + "event_guest/fetch_guest/" + guestId+"/"+is_sync, // Fetch guest data
         method: 'GET',
         success: function (response) {
             console.log("Response received: ", response); // Debugging line
@@ -32,9 +38,12 @@ $(document).on('click', '.edit_rsvp_guest', function () {
 
             // Store guest ID in the save button data attribute
             $('#editrsvp3 .save-rsvp').data('guest-update-id', guestId);
-            $('#editrsvp .remove-Rsvp-btn').data('guest-update-id', guestId);
-            $('#editrsvp .remove-Rsvp-btn').data('user-id', response.user_id);
-            $('#editrsvp .remove-Rsvp-btn').data('event-id', response.event_id);
+            $('#editrsvp3 .save-rsvp').data('guest-is_sync', is_sync);
+
+            $('#editrsvp3 .remove-Rsvp-btn').data('guest-update-id', guestId);
+            $('#editrsvp3 .remove-Rsvp-btn').data('guest-is_sync', is_sync);
+            $('#editrsvp3 .remove-Rsvp-btn').data('user-id', response.user_id);
+            $('#editrsvp3 .remove-Rsvp-btn').data('event-id', response.event_id);
 
             $('#editrsvp3').modal('show'); // Show the modal
         },
