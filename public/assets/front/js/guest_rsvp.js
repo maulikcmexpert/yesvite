@@ -21,6 +21,7 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             if(response.profile!=""){
                 $('#editrsvp3 .rsvp-img img').attr('src', response.profile);
             }else{
+                $('#editrsvp3 .rsvp-img img').remove();
                 $('#editrsvp3 h5').text(`${response.firstname} ${response.lastname}`);
             }
             $('#editrsvp3 .adultcount').val(response.adults || 0);
