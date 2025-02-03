@@ -475,19 +475,23 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="posts-card-like-comment-right">
-                                                                            {{-- @php
-                                                                            if($post['self_reaction']=="\u{1F90D}"){
+                                                                            @php
+                                                                            if($comment['is_like']==1){
                                                                                 $liked='liked';
                                                                             }else{
                                                                                 $liked="";
                                                                             }
-                                                                        @endphp --}}
+                                                                        @endphp
                                                                             <p>{{ $comment['posttime'] }}</p>
                                                                             <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
-                                                                            data-event-post-id="{{ $post['id'] }} "
+                                                                            data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
+                                                                            @if($comment['is_like']==1)
+                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                            @elseif($comment['is_like']==0)
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                            @endif
                                                                       </button>
                                                                         </div>
                                                                     </div>
