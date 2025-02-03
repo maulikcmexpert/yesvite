@@ -453,12 +453,12 @@
                                     <h5 class="ms-2">Edit Design</h5>
                                 </a>
                                 <button type="button" class="d-flex footer-bottom-btn" id="next_guest_step">
-                                    <h5 class="me-2" id="guestBtn" style="color: #b5b8bf !important;">Next: Guests</h5>
-                                    <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    <h5 class="me-2 guestBtn"  style="color: #b5b8bf !important;">Next: Guests</h5>
+                                    <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
+                                            <path class="guestBtn"
                                                 d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
-                                                stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke="#b5b8bf" stroke-width="1.5" stroke-miterlimit="10"
                                                 stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
                                     </span>

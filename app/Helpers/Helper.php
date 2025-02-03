@@ -1767,6 +1767,9 @@ function sendSMSForApplication($receiverNumber, $message)
     // return true;
     // dd($message);
     try {
+        if (config('app.debug', true)) {
+            return true;
+        }
         // $cleanedNumber = cleanPhoneNumber($phoneNumber);
         // $formattedNumber = validateAndFormatPhoneNumber($receiverNumber);
         $formattedNumber = $receiverNumber;
