@@ -338,10 +338,10 @@ class EventAboutController extends Controller
                 },
                 'event_post_reaction'
             ])
-            ->where([
-                'event_id' => $event,
-                'is_in_photo_moudle' => '0'
-            ])
+            // ->where([
+            //     'event_id' => $event,
+            //     'is_in_photo_moudle' => '0'
+            // ])
             ->whereDoesntHave('post_control', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', 'hide_post');
