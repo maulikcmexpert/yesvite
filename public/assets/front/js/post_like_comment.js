@@ -818,9 +818,7 @@ $(document).ready(function () {
     $(document).on("change", ".phoneContact-checkbox", function () {
         const id = $(this).data("id");
         // const isSelected =$(this).data('prefer');
-        const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
-
-
+            const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
             const first_name = $(this).data("name");
             const last_name = $(this).data("last");
             const email = $(this).data("email");
@@ -863,7 +861,8 @@ $(document).ready(function () {
         $('.add_yesvite_guest_'+user_id).remove();
         $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
         $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    
+        guestList = guestList.filter(guest => guest.id !== user_id);
+
         storeAddNewGuest(user_id,0,'',event_id,'yesvite');
 
        
@@ -877,7 +876,8 @@ $(document).ready(function () {
         $('.add_phone_guest_'+user_id).remove();
         $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
         // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    
+        guestList = guestList.filter(guest => guest.id !== user_id);
+
         storeAddNewGuest(user_id,0,'',event_id,'phone');
 
        
