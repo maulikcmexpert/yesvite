@@ -453,7 +453,7 @@
                                     <h5 class="ms-2">Edit Design</h5>
                                 </a>
                                 <button type="button" class="d-flex footer-bottom-btn" id="next_guest_step">
-                                    <h5 class="me-2">Next: Guests</h5>
+                                    <h5 class="me-2"></h5>
                                     <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -724,70 +724,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="other-activity-schedule">
-                                <div class="extra-border"></div>
-                                <div class="activity-schedule-head">
-                                    <h3>Saturday - March 5, 2024</h3>
-                                </div>
-                                <div class="accordion" id="accordionExample2">
-                                    <div class="accordion-item">
-                                        <div class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                                <div>
-                                                    Other Activities <span>(0 Activities)</span>
-                                                </div>
-                                                <i class="fa-solid fa-angle-down"></i>
-                                            </button>
-                                            <div class="accordion-button-icons">
-                                                <i class="fa-solid fa-circle-plus"></i>
-
-                                            </div>
-                                        </div>
-                                        <div id="collapseTwo" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample2">
-                                            <div class="accordion-body">
-                                                <div class="activity-main-wrp mb-3">
-                                                    <div class="row">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="other-activity-schedule">
-                                <div class="extra-border"></div>
-                                <div class="activity-schedule-head">
-                                    <h3>Saturday - March 5, 2024</h3>
-                                </div>
-                                <div class="accordion" id="accordionExample2">
-                                    <div class="accordion-item">
-                                        <div class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                                <div>
-                                                    Other Activities <span>(0 Activities)</span>
-                                                </div>
-                                                <i class="fa-solid fa-angle-down"></i>
-                                            </button>
-                                            <div class="accordion-button-icons">
-                                                <i class="fa-solid fa-circle-plus"></i>
-
-                                            </div>
-                                        </div>
-                                        <div id="collapseTwo" class="accordion-collapse collapse"
-                                            data-bs-parent="#accordionExample2">
-                                            <div class="accordion-body">
-                                                <div class="activity-main-wrp mb-3">
-                                                    <div class="row">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+                         
                             <div class="ac-end-time" style="display: block;">
                                 <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
                                 <h4 class="mt-3 ">Event Ends</h4>
