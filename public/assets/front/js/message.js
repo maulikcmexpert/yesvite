@@ -4623,19 +4623,14 @@ function applyStyles() {
             $(".chat-lists").css("display", "none");
         });
         $(document).on("click", "#backtomsg-btn", function () {
-            // $(".msg-lists").html("");
-            $(".selected-user-name").html("Start new chat");
-            updateProfileImg("", "Start New");
-            $(".conversationId").attr("conversationid", "");
-            $(".selected_id").val("");
-            $(".selected_message").val("");
-            $(".selected_message").val("");
+            $(".chatbox").css("display", "none");
+            $(".chat-lists").css("display", "block");
+            var msgLists = $(".msg-list");
+            if (msgLists.length > 0) {
+                console.log("from click");
 
-            $(".selected_name").val("");
-            $("#isGroup").val("");
-            $("#selected-user-name").html("Start new chat");
-            $("#selected-user-lastseen").html("");
-            $(".selected-title").html("Start new chat");
+                msgLists.last().click();
+            }
         });
         // $(document).on('click','.chat-data',function(){
         //   $(".chatbox").css("display", "block");
