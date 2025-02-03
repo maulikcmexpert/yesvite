@@ -25,7 +25,7 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             }else{
                 $('#editrsvp3 .rsvp-img img').css('display','none');
                 var profile=generateProfileImage(response.firstname,response.lastname);
-                $('#editrsvp3').append($profile);
+                $('#editrsvp3 .rsvp-img').append($profile);
             }
             $('#editrsvp3 .adultcount').val(response.adults || 0);
             $('#editrsvp3 .kidcount').val(response.kids || 0);
