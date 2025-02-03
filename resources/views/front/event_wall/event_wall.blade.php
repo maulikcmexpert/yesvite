@@ -505,7 +505,11 @@
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
-                                                                            <i class="fa-regular fa-heart" id="comment_like_{{ $comment['id'] }}"></i>
+                                                                            @if($comment['is_like']==1)
+                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                            @elseif($comment['is_like']==0)
+                                                                            <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                            @endif
                                                                       </button>
                                                                             <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
                                                                             </p>

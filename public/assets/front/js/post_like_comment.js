@@ -91,15 +91,15 @@ $(document).ready(function () {
         const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
 
         // Toggle like button appearance for both elements
-        if (isLiked) {
-            button.removeClass("liked");
-            mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
-           replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
-        } else {
-            button.addClass("liked");
-            mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
-            replyLikeIcon.removeClass("fa-regular").addClass("fa-solid");
-        }
+        // if (isLiked) {
+        //     button.removeClass("liked");
+        //     mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+        //    replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+        // } else {
+        //     button.addClass("liked");
+        //     mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+        //     replyLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+        // }
 
         // AJAX call to update like state
         $.ajax({
@@ -122,7 +122,7 @@ $(document).ready(function () {
                     $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
 
                     // Update the reaction display
-                    // replyLikeIcon.text(`${response.self_reaction}`);
+                    replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
                     alert(response.message);
                 }
@@ -744,11 +744,12 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-
+                storeAddNewGuest(id,1);
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
+                storeAddNewGuest(id,0);
 
                 console.log(guestList);
             }
@@ -781,6 +782,20 @@ $(document).ready(function () {
 
         });
 
+        function storeAddNewGuest(id,status){
+            $.ajax({
+                url: base_url+"event_guest/store_add_new_guest",
+                type: 'GET',        
+                data: {status:status,user_id:id},          
+                success: function (response) { 
+                 console.log(response);
+                 
+                },
+                error: function (error) {
+                  toastr.error('Something went wrong. Please try again!');
+                },
+              });
+        }
 
 
     // Event listener for phone contact checkboxes
