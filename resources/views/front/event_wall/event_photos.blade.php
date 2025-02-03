@@ -427,7 +427,7 @@
                                         <div class="phototab-add-new-photos-wrp">
                                             <div class="phototab-add-new-photos-img">
                                                 @if ($photos != '')
-                                                    <img src="{{ $photos }}" alt="" loading="lazy">
+                                                    <img src="{{ asset('storage/profile/' . $photos) }}" alt="" loading="lazy">
                                                 @else
                                                     @php
 
@@ -955,7 +955,7 @@
                                         <div class="commented-user-head">
                                             <div class="commented-user-profile">
                                                 <div class="commented-user-profile-img">
-                                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                                    <img src=""
                                                         alt="">
                                                 </div>
                                                 <div class="commented-user-profile-content">
