@@ -908,9 +908,9 @@ class EventGuestController extends Controller
         $users_data = [];
 
         if(!empty($new_added_user)){
-        foreach ($new_added_user as $user_id) {
+        foreach ($new_added_user as $user) {
             // Try fetching the user from the User table
-            $user = User::find($user_id);
+            $user = User::find($user['user_id']);
 
             if ($user) {
                 // If the user exists, add data to the $users_data array
@@ -922,9 +922,10 @@ class EventGuestController extends Controller
                     'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
                                 ? asset('storage/profile/' . $user->profile) 
                                 : "",
+                    'prefer_by'=>$user['prefer_by']
                 ];
             } else {
-                $contact_sync = contact_sync::find($user_id);
+                $contact_sync = contact_sync::find($user['user_id']);
                 
                 if ($contact_sync) {
                     $users_data[] = [
@@ -935,6 +936,8 @@ class EventGuestController extends Controller
                         'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
                                     ? asset('storage/profile/' . $contact_sync->photo) 
                                     : "",
+                        'prefer_by'=>$user['prefer_by']
+           
                     ];
                 }
             }        

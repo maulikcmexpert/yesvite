@@ -744,12 +744,12 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1);
+                storeAddNewGuest(id,1,isSelected);
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0);
+                storeAddNewGuest(id,0,isSelected);
 
                 console.log(guestList);
             }
@@ -771,11 +771,13 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
+                storeAddNewGuest(id,1,isSelected);
 
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
+                storeAddNewGuest(id,0,isSelected);
 
                 console.log(guestList);
             }
@@ -825,10 +827,12 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
+            storeAddNewGuest(id,1,isSelected);
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
+            storeAddNewGuest(id,0,isSelected);
 
             console.log(guestList);
         }// App user = 0 for phone (non-app user)

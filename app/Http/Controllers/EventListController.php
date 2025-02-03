@@ -2676,17 +2676,31 @@ if ($rsvpSent != null) {
     public function store_add_new_guest(Request $request){
         $user_id = $request->user_id;
         $check_status = $request->status;
+        $prefer_by=$request->isSelected;
+        $userData = session('add_guest_user_data', []);
+
         if ($check_status == 1) {
-            $userIds = session('add_guest_user_id', []);
-            if (!in_array($user_id, $userIds)) {
-                $userIds[] = $user_id;
+            // Check if user already exists in session
+            $exists = false;
+            foreach ($userData as &$user) {
+                if ($user['user_id'] == $user_id) {
+                    $user['prefer_by'] = $prefer_by;
+                    $exists = true;
+                    break;
+                }
             }
-            session(['add_guest_user_id' => $userIds]);
+                if (!$exists) {
+                $userData[] = [
+                    'user_id' => $user_id,
+                    'prefer_by' => $prefer_by
+                ];
+            }
         } else {
-            $userIds = session()->get('add_guest_user_id'); 
-            $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
-            session(['add_guest_user_id' => $userIds]);
+            $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
         }
+    
+        session(['add_guest_user_data' => $userData]);
+    
         return session()->get('add_guest_user_id');
     }
 }

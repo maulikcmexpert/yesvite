@@ -32,10 +32,10 @@
                                         <path d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                         @if($user['prefer_by']=="email")
-                                                                        <h6>{{$user['email']}}</h6>
-                                                                        @else
-                                                                        <h6>{{$user['phone_number']}}</h6>
-                                                                        @endif
+                                            <h6>{{$user['email']}}</h6>
+                                        @else
+                                            <h6>{{$user['phone_number']}}</h6>
+                                        @endif
 
                                                                 </div>
                             </div>
@@ -80,8 +80,11 @@
                                         <path d="M9.91797 11.9577H4.08464C2.33464 11.9577 1.16797 11.0827 1.16797 9.04102V4.95768C1.16797 2.91602 2.33464 2.04102 4.08464 2.04102H9.91797C11.668 2.04102 12.8346 2.91602 12.8346 4.95768V9.04102C12.8346 11.0827 11.668 11.9577 9.91797 11.9577Z" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                         <path d="M9.91536 5.25L8.08953 6.70833C7.4887 7.18667 6.50286 7.18667 5.90203 6.70833L4.08203 5.25" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
-                                                                        <h6>{{$user['email']}}</h6>
-                                                                       
+                                        @if($user['prefer_by']=="email")
+                                            <h6>{{$user['email']}}</h6>
+                                        @else
+                                            <h6>{{$user['phone_number']}}</h6>
+                                        @endif                                                                       
 
                                                                 </div>
                             </div>
