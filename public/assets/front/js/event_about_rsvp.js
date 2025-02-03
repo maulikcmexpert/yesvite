@@ -210,7 +210,7 @@ console.log(adults,kids);
 
         }else{
             $("#option5").prop('checked',true);
-            $('button[type="submit"]').prop('disabled', true);
+            $('button[type="submit"]').prop('disabled', false);
 
         }
     })
