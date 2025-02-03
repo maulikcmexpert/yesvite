@@ -312,9 +312,9 @@ $(document).on('click', '.delete_failed_contact', function () {
 
 });
 
-$(document).on('click','.add_guest_seeall',function(e){
+$('.add_guest_seeall').on('click',function(e){
     let event_id = $('#event_id').val();
-
+    alert();
     $.ajax({
         url: base_url + "event_guest/see_all_invite_yesvite",  // Ensure this route is defined in web.php/api.php
         type: "POST",
