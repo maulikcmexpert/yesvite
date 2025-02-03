@@ -1789,6 +1789,7 @@ function sendSMSForApplication($receiverNumber, $message)
 function createShortUrl($longUrl)
 {
     try {
+        return "check";
         do {
             // Generate a random 15-character key
             $shortUrlKey = Str::random(10);
