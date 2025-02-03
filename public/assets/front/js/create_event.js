@@ -20,6 +20,7 @@ var selected_user_name =
     $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
+var IsPotluck = 0;
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
 
 var selected_prefer_by =
@@ -2275,6 +2276,7 @@ function setPotluckActivekey(key, name) {
 }
 
 $(document).on("click", ".add_category_btn", function () {
+    IsPotluck=1;
     var categoryName = $("#categoryName").val();
     var categoryQuantity = $("#category_quantity").val();
     var edit_category_id = $("#hidden_potluck_key").val();
@@ -2391,6 +2393,7 @@ $(document).on("click", ".add_potluck_item", function () {
 });
 
 $(document).on("click", ".add_category_item_btn", function () {
+    IsPotluck=1;
     var category_index = $("#category_index").val();
     var category_name = $("#hidden_category_name").val();
     var totalmissing = $("#missing-category-" + activePotluck).text();
@@ -5496,6 +5499,7 @@ function update_self_bring_bck(
 }
 
 $(document).on("click", ".delete-self-bring", function () {
+
     var categoryItemKey = $(this).data("categoryitem");
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
@@ -8369,6 +8373,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     savePage4Data();
 
     eventData.isPhonecontact = isPhonecontact;
+    eventData.IsPotluck = IsPotluck;
     var data = eventData;
 
     $("#loader").css("display", "block");
@@ -8873,6 +8878,7 @@ function update_self_bring(
     categoryItemQuantity,
     type
 ) {
+
     $.ajax({
         url: base_url + "event/update_self_bring",
         method: "POST",
@@ -8884,6 +8890,7 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            IsPotluck=1;
             var newdata = $(
                 "#h6-" + categoryItemKey + "-" + categoryIndexKey
             ).text();
