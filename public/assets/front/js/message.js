@@ -1806,7 +1806,9 @@ function addMessageToList(key, messageData, conversationId) {
 
     scrollToBottom();
     updateTimers();
-    scrollToBottom();
+    setTimeout(function () {
+        scrollToBottom();
+    }, 1000);
 }
 let timerTime = 0;
 function updateTimers(fast = false) {
@@ -4625,6 +4627,12 @@ function applyStyles() {
         $(document).on("click", "#backtomsg-btn", function () {
             $(".chatbox").css("display", "none");
             $(".chat-lists").css("display", "block");
+            var msgLists = $(".msg-list");
+            if (msgLists.length > 0) {
+                console.log("from click");
+
+                msgLists.last().click();
+            }
         });
         // $(document).on('click','.chat-data',function(){
         //   $(".chatbox").css("display", "block");

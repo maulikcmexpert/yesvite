@@ -331,6 +331,7 @@ class EventController extends BaseController
                         $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
                     }
                 }
+                // dd($eventDetail['events_schedule_list']);die;
                 $eventDetail['greeting_card_list'] = [];
                 if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
 

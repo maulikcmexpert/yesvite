@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId =
-            $(".commented-user-wrp.active").data("comment-id") || null; // Find active comment if replying
+            $("#parent_comment_id").val() ; // Find active comment if replying
 
         if (commentText === "") {
             alert("Please enter a comment");
@@ -367,6 +367,8 @@ $(document).ready(function () {
                         });
                     }
                 }
+                // commentInput.val("");
+                // $("#parent_comment_id").val(""); // Reset parent comment ID
             },
             error: function (xhr) {
                 console.error(xhr.responseText);
@@ -411,7 +413,9 @@ $(document).ready(function () {
             console.error("Comment input field not found!");
             return;
         }
-
+        const commentIndex = parentWrapper.index() + 1; // Get unique index
+        $("#parent_comment_id_" + commentIndex).val(parentId);
+        // $("#parent_comment_id").val(parentId);
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
@@ -787,11 +791,11 @@ $(document).ready(function () {
         function storeAddNewGuest(id,status,prefer_by){
             $.ajax({
                 url: base_url+"store_add_new_guest",
-                type: 'GET',        
-                data: {user_id:id,status:status,prefer_by:prefer_by},          
-                success: function (response) { 
+                type: 'GET',
+                data: {user_id:id,status:status,prefer_by:prefer_by},
+                success: function (response) {
                  console.log(response);
-                 
+
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
@@ -862,34 +866,57 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             profileImage =generateProfileImage(first_name, last_name);
         }
-        const $modalBody = $('.selected-contacts-list');
-        const contactHtml = `
-            <div class="guest-user guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
-                <div class="guest-user-img">
-                   ${profileImage}
-                    <a href="#" class="close remove_new_added_user" data-id="${id}">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-                            <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-                            <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
+        var upper_view=$('.selected-contacts-list .guest-users').length;
+
+        if(upper_view<4){
+            const $modalBody = $('.selected-contacts-list');
+       
+       
+
+            const contactHtml = `
+                <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
+                    <div class="guest-user-img">
+                       ${profileImage}
+                        <a href="#" class="close remove_new_added_user" data-id="${id}">
+                            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                                <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h6>${first_name} ${last_name}</h6>
                 </div>
-                <h6>${first_name} ${last_name}</h6>
-            </div>
-
-        `;
-        $modalBody.append(contactHtml);
-
-        const totalHtml = `
-                <a href="#" class="guest-user d-block yesvite ">
+    
+            `;
+            $modalBody.append(contactHtml);      
+        }else{
+            const $modalBody = $('.selected-contacts-list');
+            var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
+            alert();
+            if(upper_see==0){
+                const totalHtml = `
+                <a href="#" class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email">${selectedContacts.length}</span>
+                        <span class="number" id="total-selected-email" data-count=1>+1</span>
                         <span class="content">Total</span>
                  </div>
                  <h6>Sell all</h6>
-                </a>`;
+                </a>`; 
+                  $modalBody.append(totalHtml);
+            }
+            if(upper_see>0){
+               var initial= parseInt($('#total-selected-email').attr('data-count'));
+               var new_value= initial+1 ;
+               $('#total-selected-email').attr('data-count',new_value);
+               $('#total-selected-email').text('+'+initial);
+            }
+      
+             }
+      
+
+      
 
         console.log("Updated guest list:", guestList);
     }

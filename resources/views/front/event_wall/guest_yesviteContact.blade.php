@@ -23,7 +23,7 @@
                     }
                 @endphp
                 @if ($guest_user['prefer_by'] == 'email')
-                    <div class="guest-user" data-id="{{ $guest_user['id'] }}">
+                    <div class="guest-users" data-id="{{ $guest_user['id'] }}">
                         <div class="guest-user-img">
                             <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                             @if ($guest_user['profile'] != '')
@@ -41,7 +41,7 @@
                                 @endphp
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                             @endif
-                            <a href="#" class="close">
+                            <!-- <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.20312" y="1" width="16" height="16" rx="8"
@@ -53,13 +53,13 @@
                                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <h6 class="guest-name">{{ $guest_user['firstname'] }}
                             {{ $guest_user['lastname'] }}</h6>
                     </div>
                 @elseif ($guest_user['prefer_by'] == 'phone')
-                    <div class="guest-user" data-id="{{ $guest_user['id'] }}">
+                    <div class="guest-users" data-id="{{ $guest_user['id'] }}">
                         <div class="guest-user-img">
                             <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                             @if ($guest_user['profile'] != '')
@@ -77,7 +77,7 @@
                                 @endphp
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                             @endif
-                            <a href="#" class="close">
+                            <!-- <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.20312" y="1" width="16" height="16" rx="8"
@@ -89,7 +89,7 @@
                                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <h6 class="guest-name">{{ $guest_user['firstname'] }}
                             {{ $guest_user['lastname'] }}</h6>
@@ -286,7 +286,7 @@
                                 @endphp
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                             @endif
-                            <a href="#" class="close">
+                            <!-- <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.20312" y="1" width="16" height="16" rx="8"
@@ -298,7 +298,7 @@
                                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <h6 class="guest-name">{{ $guest_user['firstname'] }}
                             {{ $guest_user['lastname'] }}</h6>
@@ -322,7 +322,7 @@
                                 @endphp
                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
                             @endif
-                            <a href="#" class="close">
+                            <!-- <a href="#" class="close">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1.20312" y="1" width="16" height="16" rx="8"
@@ -334,7 +334,7 @@
                                     <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </a>
+                            </a> -->
                         </div>
                         <h6 class="guest-name">{{ $guest_user['firstname'] }}
                             {{ $guest_user['lastname'] }}</h6>
@@ -346,7 +346,7 @@
                 @php
                     $counter = count($selected_phone_user) - 4;
                 @endphp
-                <a href="#" class="guest-user d-block yesvite add_guest_seeall">
+                <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
                 <!-- data-bs-target="#seeAll" -->
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-email">+{{ $counter }}</span>

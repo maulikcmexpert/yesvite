@@ -1,6 +1,6 @@
 let eventData = {};
 let isCohost = $("#isCohost").val();
-var total_activities = 0;
+var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
@@ -1145,7 +1145,7 @@ function rsvp_by_date(start_time) {
             singleDatePicker: true,
             autoUpdateInput: false,
             //   showDropdowns: true,
-            minYear: 1901,
+            minYear: 2024,
             maxDate: adjustedStartTime,
             minDate: moment(),
             minDate: moment().add(0, "days"),
@@ -1164,10 +1164,10 @@ function rsvp_by_date(start_time) {
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-        if (picker.startDate.isValid()) {
-            $(this).val(picker.startDate.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
-        }
+        // if (picker.startDate.isValid()) {
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
     });
 }
 
@@ -1203,11 +1203,11 @@ $(function () {
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-        if (picker.startDate.isValid()) {
-            // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-            $(this).val(picker.startDate.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
-        }
+        // if (picker.startDate.isValid()) {
+        //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
     });
 });
 
@@ -2276,7 +2276,7 @@ function setPotluckActivekey(key, name) {
 }
 
 $(document).on("click", ".add_category_btn", function () {
-    IsPotluck=1;
+    IsPotluck = 1;
     var categoryName = $("#categoryName").val();
     var categoryQuantity = $("#category_quantity").val();
     var edit_category_id = $("#hidden_potluck_key").val();
@@ -2393,7 +2393,7 @@ $(document).on("click", ".add_potluck_item", function () {
 });
 
 $(document).on("click", ".add_category_item_btn", function () {
-    IsPotluck=1;
+    IsPotluck = 1;
     var category_index = $("#category_index").val();
     var category_name = $("#hidden_category_name").val();
     var totalmissing = $("#missing-category-" + activePotluck).text();
@@ -2472,6 +2472,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             items++;
             potluck_cateogry_item_count();
             toggleSidebar("sidebar_potluck");
+            updateTOP(category_index);
             if (response.qty == 1) {
                 $("#potluck-" + category_index).hide();
             }
@@ -3340,75 +3341,8 @@ $(document).on("click", "#save_activity_schedule", function () {
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
-    // $(".accordion-body.new_activity").each(function () {
-    //     var dataId = $(this).data("id");
-    //     activities[dataId] = [];
-    //     $(this)
-    //         .find(".activity-main-wrp")
-    //         .each(function (index) {
-    //             var id = $(this).data("id");
-    //             var description = $(this)
-    //                 .find('input[name="description[]"]')
-    //                 .val();
-    //             var startTime = $(this)
-    //                 .find('input[name="activity-start-time[]"]')
-    //                 .val();
-    //             var endTime = $(this)
-    //                 .find('input[name="activity-end-time[]"]')
-    //                 .val();
-    //             activityendtime = endTime;
-    //             $("#desc-error-" + id).text("");
-    //             $("#start-error-" + id).text("");
-    //             $("#end-error-" + id).text("");
 
-    //             if (description == "") {
-    //                 $("#desc-error-" + id)
-    //                     .text("Description is required")
-    //                     .css("color", "red");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="description[]"]')
-    //                 .on("input", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#desc-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             if (startTime == "") {
-    //                 $("#start-error-" + id).text("Start time is required");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="activity-start-time[]"]')
-    //                 .on("change", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#start-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             if (endTime == "") {
-    //                 $("#end-error-" + id).text("End time is required");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="activity-end-time[]"]')
-    //                 .on("change", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#end-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             var activity = {
-    //                 activity: description,
-    //                 "start-time": startTime,
-    //                 "end-time": endTime,
-    //             };
-    //             activities[dataId].push(activity);
-    //         });
-    //     // toggleSidebar();
-    // });
-    var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    var showAlert = false;
     let isendtime = 0;
     let istrue = 0;
     $(".accordion-body.new_activity").each(function () {
@@ -4764,7 +4698,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = "";
-$(document).on("click", ".li_event_details", function () {
+async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -4831,6 +4765,9 @@ $(document).on("click", ".li_event_details", function () {
                         console.log(eventData);
                         eventData.step = final_step;
                         console.log("Image uploaded and saved successfully");
+                        if (direct) {
+                            return true;
+                        }
                         $("#myCustomModal").modal("hide");
                         $("#exampleModal").modal("hide");
                         $("#loader").css("display", "none");
@@ -4873,7 +4810,7 @@ $(document).on("click", ".li_event_details", function () {
                         // $('.current_step').text('2 of 4');
                         console.log("handleActiveClass");
 
-                        handleActiveClass(this);
+                        handleActiveClass(".li_event_details");
                         var design = eventData.desgin_selected;
                         $(".li_event_detail")
                             .find(".side-bar-list")
@@ -4897,6 +4834,9 @@ $(document).on("click", ".li_event_details", function () {
             });
         $(".main-content-wrp").addClass("blurred");
     }, 500);
+}
+$(document).on("click", ".li_event_details", function () {
+    saveDesignData();
 });
 
 $(document).on("click", ".li_event_detail", function () {
@@ -5499,7 +5439,6 @@ function update_self_bring_bck(
 }
 
 $(document).on("click", ".delete-self-bring", function () {
-
     var categoryItemKey = $(this).data("categoryitem");
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
@@ -6327,9 +6266,9 @@ $(document).on("click", "#final_create_event", function (e) {
                 toastr.success("Event Created Successfully");
                 // window.location.href="profile";
             }
-            
+
             $("#eventModal").modal("show");
-            $('#eventModal').on('hide.bs.modal', function (event) {
+            $("#eventModal").on("hide.bs.modal", function (event) {
                 event.preventDefault(); // Prevents modal from closing
             });
         },
@@ -8372,6 +8311,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     } else {
         eventData.is_update_event = "1";
     }
+    saveDesignData(true);
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -8410,7 +8350,7 @@ $(document).on("click", ".edit_checkout", function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    window.location.href = base_url + "home";
+                    // window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
@@ -8882,7 +8822,6 @@ function update_self_bring(
     categoryItemQuantity,
     type
 ) {
-
     $.ajax({
         url: base_url + "event/update_self_bring",
         method: "POST",
@@ -8894,14 +8833,17 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            IsPotluck=1;
+            IsPotluck = 1;
             var newdata = $(
                 "#h6-" + categoryItemKey + "-" + categoryIndexKey
             ).text();
             var parts = newdata.split("/");
             var remain = parseInt(parts[0], 10);
             var extra = 0;
-            let innerUserQnt = $(`.innerUserQnt-${categoryItemKey}-${categoryIndexKey}`).val() || 0;
+            let innerUserQnt =
+                $(
+                    `.innerUserQnt-${categoryItemKey}-${categoryIndexKey}`
+                ).val() || 0;
             var misstingquantity = categoryItemQuantity - innerUserQnt;
             if (type == undefined) {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
@@ -8909,7 +8851,10 @@ function update_self_bring(
                 );
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                    parseInt(innerUserQnt) + parseInt(quantity) + "/" + categoryItemQuantity
+                    parseInt(innerUserQnt) +
+                        parseInt(quantity) +
+                        "/" +
+                        categoryItemQuantity
                 );
             }
 
@@ -9080,6 +9025,6 @@ function getcoins() {
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
-if(category!=0){
+if (category != 0) {
     potluck_cateogry_item_count();
 }
