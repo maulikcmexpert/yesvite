@@ -880,6 +880,8 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             </div>
 
         `;
+        var upper_view=$('.selected-contacts-list .guest-user').length;
+        alert(upper_view);
         $modalBody.append(contactHtml);
 
         const totalHtml = `
