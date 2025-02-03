@@ -1050,7 +1050,7 @@ function getInvitedUsersList($eventId)
             }
         }
     }
-    $eventDetail['all_invited_users'] = array_merge($eventDetail['invited_guests'], $eventDetail['invited_user_id']);
+    $eventDetail['all_invited_users'] = array_merge( $eventDetail['invited_user_id'],$eventDetail['invited_guests']);
 
     return $eventDetail;
 }
