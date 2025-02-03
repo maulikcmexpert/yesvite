@@ -711,6 +711,10 @@
     stroke: #000;
 }
 
+.qty-container button:disabled{
+    background-color: gray !important;
+}
+
 
 /* ========= responsive =========== */
 @media only screen and (max-width:1399px){
