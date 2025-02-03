@@ -938,9 +938,9 @@ class EventGuestController extends Controller
             }        
             // $users_data = [];
 
-            dd($yesvite_all_invite,$users_data);
-
+            
         }
+        dd($yesvite_all_invite,$users_data);
         return response()->json(['view' => view( 'front.event-wall.see-invite', compact('yesvite_all_invite'))->render()]);
 
     }
