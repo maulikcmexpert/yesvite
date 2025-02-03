@@ -3758,7 +3758,7 @@ $('input[type="text"],textarea').on("paste", function (e) {
     }
 });
 
-function savePage1Data(close = null) {
+function savePage1Data(close = null, direct = false) {
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
@@ -4053,6 +4053,9 @@ function savePage1Data(close = null) {
         // console.log(eventData);
 
         // ---------------newcode-------------
+        if (direct) {
+            return true;
+        }
         if (close == null || close == "") {
             $(".step_1").css("display", "none");
             $(".step_2").css("display", "none");
@@ -8454,7 +8457,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
-    await saveDesignData(true);
+    savePage1Data(null, true);
     updateEventData();
 });
 
