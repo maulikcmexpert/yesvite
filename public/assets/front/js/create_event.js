@@ -9151,9 +9151,9 @@ $(document).on('blur change click', '#event-name ,#event-date, #start-time', fun
     var start_time = $("#start-time").val();
    
     if (event_name !== "" && event_date !== "" && start_time !== "") {
-        $("#guestBtn").attr('style', 'color: black !important;');
+        $(".guestBtn").attr('style', 'color: black !important;');
     } else {
-        $("#guestBtn").attr('style', 'color: #b5b8bf !important;');
+        $(".guestBtn").attr('style', 'color: #b5b8bf !important;');
     }
 });
 
