@@ -8894,11 +8894,11 @@ function update_self_bring(
             var misstingquantity = categoryItemQuantity - innerUserQnt;
             if (type == undefined) {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                    innerUserQnt + 0 + "/" + categoryItemQuantity
+                    parseInt(innerUserQnt) + 0 + "/" + categoryItemQuantity
                 );
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                    innerUserQnt + quantity + "/" + categoryItemQuantity
+                    parseInt(innerUserQnt) + parseInt(quantity) + "/" + categoryItemQuantity
                 );
             }
 
@@ -8927,7 +8927,7 @@ function update_self_bring(
                     categoryItemKey +
                     "-" +
                     categoryIndexKey
-            ).text(quantity);
+            ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
                 var current_item = parseInt(
