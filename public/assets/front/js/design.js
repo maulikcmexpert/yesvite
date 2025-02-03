@@ -669,7 +669,7 @@ function bindData(current_event_id) {
                         const textWidth = textMeasurement.width;
                         console.log(element.text);
                         if (element.left === undefined) {
-                            let width = element.width;
+                            let width = element.width / 2;
                             element.left = element.centerX - width;
                         }
 
