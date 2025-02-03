@@ -192,9 +192,21 @@ console.log(adults,kids);
     });
 
     $(".noattending-btn").on('click',function(){
-        alert();
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        if(rsvpStatus=='1'){
+            $("#option6").attr('checked',true);
+        }else{
+            $("#option5").attr('checked',false);
+
+        }
     })
     $(".attending-btn").on('click',function(){
-        alert();
+        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        if(rsvpStatus=='1'){
+            $("#option6").attr('checked',true);
+        }else{
+            $("#option5").attr('checked',false);
+
+        }
     })
 });
