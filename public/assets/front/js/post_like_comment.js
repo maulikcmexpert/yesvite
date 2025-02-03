@@ -94,7 +94,7 @@ $(document).ready(function () {
         if (isLiked) {
             button.removeClass("liked");
             mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
-            replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+           replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
         } else {
             button.addClass("liked");
             mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
@@ -122,7 +122,7 @@ $(document).ready(function () {
                     $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
 
                     // Update the reaction display
-                    replyLikeIcon.text(`${response.self_reaction}`);
+                    // replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
                     alert(response.message);
                 }
