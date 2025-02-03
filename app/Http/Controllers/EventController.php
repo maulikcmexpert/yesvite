@@ -3599,7 +3599,7 @@ class EventController extends BaseController
                     sendNotification('update_date', $notificationParam);
                 }
 
-                if (isset($istime) && $istime == 0 && isset($isupdatedate) && $isupdatedate == 0 && $isaddress == 0) {
+                if (isset($istime) && $istime == 0 && isset($isupdatedate) && $isupdatedate == 0 && $isaddress == 0 && isset($request->IsPotluck) && $request->IsPotluck==0) {
 
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
