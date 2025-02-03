@@ -475,13 +475,13 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="posts-card-like-comment-right">
-                                                                            @php
+                                                                            {{-- @php
                                                                             if($post['self_reaction']=="\u{1F90D}"){
                                                                                 $liked='liked';
                                                                             }else{
                                                                                 $liked="";
                                                                             }
-                                                                        @endphp
+                                                                        @endphp --}}
                                                                             <p>{{ $comment['posttime'] }}</p>
                                                                             <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
@@ -503,7 +503,7 @@
                                                                             data-user-id="{{ $login_user_id }}">
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                       </button>
-                                                                            <p>{{ $comment['comment_total_likes'] }}
+                                                                            <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
                                                                             </p>
                                                                         </div>
                                                                         <button
