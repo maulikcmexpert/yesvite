@@ -476,7 +476,7 @@
                                                                         </div>
                                                                         <div class="posts-card-like-comment-right">
                                                                             @php
-                                                                            if($post['self_reaction']=="\u{1F90D}"){
+                                                                            if($comment['is_like']==1){
                                                                                 $liked='liked';
                                                                             }else{
                                                                                 $liked="";
@@ -485,9 +485,13 @@
                                                                             <p>{{ $comment['posttime'] }}</p>
                                                                             <button class="posts-card-like-btn {{$liked}}" id="CommentlikeButton"
                                                                             data-event-id="{{ $event }}"
-                                                                            data-event-post-id="{{ $post['id'] }} "
+                                                                            data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
+                                                                            @if($comment['is_like']==1)
+                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                            @elseif($comment['is_like']==0)
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                            @endif
                                                                       </button>
                                                                         </div>
                                                                     </div>
@@ -501,9 +505,13 @@
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
+                                                                            @if($comment['is_like']==1)
+                                                                            <i class="fa-solid fa-heart" id="show_Emoji"></i>
+                                                                            @elseif($comment['is_like']==0)
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                            @endif
                                                                       </button>
-                                                                            <p>{{ $comment['comment_total_likes'] }}
+                                                                            <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
                                                                             </p>
                                                                         </div>
                                                                         <button

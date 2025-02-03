@@ -1826,6 +1826,7 @@ function processTimers() {
 
     messages.forEach((msg) => {
         let timeElement = msg.querySelector(".time");
+        let seenStatus = timeElement.nextElementSibling;
         let time = timeElement.getAttribute("data-time");
         let senderType = msg.classList.contains("sender")
             ? "sender"
@@ -1833,12 +1834,22 @@ function processTimers() {
 
         if (time === lastTime && senderType === lastSender) {
             if (lastElement) lastElement.style.display = "none";
+            if (
+                lastElement?.nextElementSibling?.classList.contains(
+                    "seenStatus"
+                )
+            ) {
+                lastElement.nextElementSibling.style.display = "none";
+            }
         }
 
         lastTime = time;
         lastSender = senderType;
         lastElement = timeElement;
         timeElement.style.display = "inline";
+        if (seenStatus && seenStatus.classList.contains("seenStatus")) {
+            seenStatus.style.display = "inline-block";
+        }
     });
 }
 
@@ -1981,11 +1992,7 @@ function createMessageElement(
                             ? messageData.data.replace(/\n/g, "<br>")
                             : ""
                     }</span>
-                    ${
-                        isSender
-                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                            : ""
-                    } 
+                    
                     ${reaction}
                 </div>
                     ${emoji}
@@ -2001,11 +2008,7 @@ function createMessageElement(
                             ? messageData.data.replace(/\n/g, "<br>")
                             : ""
                     }</span>
-                    ${
-                        isSender
-                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                            : ""
-                    } 
+                   
                     ${reaction}
                 </div>
                     ${emoji}
@@ -2025,11 +2028,7 @@ function createMessageElement(
                             ? messageData.data.replace(/\n/g, "<br>")
                             : ""
                     }</span>
-                    ${
-                        isSender
-                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                            : ""
-                    } 
+                   
                     ${reaction}
                 </div>
                     ${emoji}
@@ -2044,11 +2043,7 @@ function createMessageElement(
                         ? messageData.data.replace(/\n/g, "<br>")
                         : ""
                 }</span>
-                ${
-                    isSender
-                        ? `<span class="seenStatus ${seenStatus}"></span>`
-                        : ""
-                } 
+                
                 ${reaction}
                 </div>
                 
@@ -2071,11 +2066,7 @@ function createMessageElement(
                              ? messageData.data.replace(/\n/g, "<br>")
                              : ""
                      }
-                    ${
-                        isSender
-                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                            : ""
-                    } 
+                    
                     ${reaction}
                 </div>
                 ${emojiAndReplay}
@@ -2128,11 +2119,7 @@ function createMessageElement(
                                               )
                                             : ""
                                     }</span>
-                                    ${
-                                        isSender
-                                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                                            : ""
-                                    } 
+                                   
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2152,11 +2139,7 @@ function createMessageElement(
                                             : ""
                                     }
                                     }</span>
-                                    ${
-                                        isSender
-                                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                                            : ""
-                                    } 
+                                   
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2174,11 +2157,7 @@ function createMessageElement(
                                             : ""
                                     }
                                     }</span>
-                                    ${
-                                        isSender
-                                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                                            : ""
-                                    } 
+                                    
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2198,11 +2177,7 @@ function createMessageElement(
                                             : ""
                                     }
                                     }</span>
-                                    ${
-                                        isSender
-                                            ? `<span class="seenStatus ${seenStatus}"></span>`
-                                            : ""
-                                    } 
+                                    
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2210,11 +2185,7 @@ function createMessageElement(
                             <span> ${
                                 messageData?.data != "" ? messageData.data : ""
                             }</span>
-                            ${
-                                isSender
-                                    ? `<span class="seenStatus ${seenStatus}"></span>`
-                                    : ""
-                            } 
+                            
                                     ${reaction}
                              `
                     }
@@ -2323,7 +2294,12 @@ function createMessageElement(
         }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
             ${replySection == "" ? dataWithMedia : replySection}        
             <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}" style="display: none;">${msgTime}</span>            
-        </li>
+            ${
+                isSender
+                    ? `<span class="seenStatus ${seenStatus}"  style="display: none;"></span>`
+                    : ""
+            } 
+            </li>
     </div>
     `;
 }

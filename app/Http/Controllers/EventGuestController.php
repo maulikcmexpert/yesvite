@@ -899,12 +899,29 @@ class EventGuestController extends Controller
             }
 
     }
-
+    public function store_add_new_guest(Request $request){
+        $user_id = $request->user_id;
+        $check_status = $request->status;
+        if ($check_status == 1) {
+            $userIds = session('add_guest_user_id', []);
+            if (!in_array($user_id, $userIds)) {
+                $userIds[] = $user_id;
+            }
+            session(['add_guest_user_id' => $userIds]);
+        } else {
+            $userIds = session()->get('add_guest_user_id'); 
+            $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
+            session(['add_guest_user_id' => $userIds]);
+        }
+        return session()->get('add_guest_user_id');
+    }
     public function see_all_invite_yesvite(Request $request){
     
         $yesvite_all_invite=getInvitedUsersList($request->event_id);
         
-        dd($yesvite_all_invite);
+        return response()->json(['view' => view( 'front.event-wall.see-invite', compact('yesvite_all_invite'))->render()]);
 
     }
+
+
 }
