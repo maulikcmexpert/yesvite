@@ -359,9 +359,10 @@ ul.chat-list > div:last-child li {
     width: 16px;
     height: 16px;
     background-size: contain;
-    position: absolute;
-    bottom: 3px;
-    right: 15px;
+    position: relative;
+    /* bottom: 3px; */
+    /* right: 15px; */
+    top: 3px;
 }
 
 .blue-tick {

@@ -76,32 +76,32 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", "#CommentlikeButton", function () {
-        clearTimeout(longPressTimer); // Clear the long press timer
 
-        // If it's a long press, don't process the click event
-        if (isLongPresss) return;
 
-        // Handle single tap like/unlike
         const button = $(this);
         const isLiked = button.hasClass("liked");
         const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
 
-
-        // Toggle like button appearance
-        if (isLiked) {
-            button.removeClass("liked");
-            button.find("i").removeClass("fa-solid").addClass("fa-regular");
-        } else {
-            button.addClass("liked");
-            button.find("i").removeClass("fa-regular").addClass("fa-solid");
-        }
-
-
-
-
-        // AJAX call to update the like state
+        // Extract necessary data
         const eventId = button.data("event-id");
         const eventPostCommentId = button.data("event-post-comment-id");
+
+        // Select both like icons (main comment and nested reply)
+        const mainLikeIcon = button.find("i");
+        const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
+
+        // Toggle like button appearance for both elements
+        if (isLiked) {
+            button.removeClass("liked");
+            mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+            replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+        } else {
+            button.addClass("liked");
+            mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+            replyLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+        }
+
+        // AJAX call to update like state
         $.ajax({
             url: base_url + "event_wall/userPostCommentReplyReaction",
             method: "POST",
@@ -118,7 +118,11 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     console.log(response);
 
+                    // Update like count for both main comment and nested reply
                     $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
+
+                    // Update the reaction display
+                    replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
                     alert(response.message);
                 }
@@ -129,6 +133,7 @@ $(document).ready(function () {
             },
         });
     });
+
     $(document).on("click", "#emojiDropdown .emoji", function () {
 
         const selectedEmoji = $(this).data("emoji");
