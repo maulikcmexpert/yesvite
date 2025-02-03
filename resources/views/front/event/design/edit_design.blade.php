@@ -285,7 +285,7 @@
         @else
         <div class="guest-checkout new-edit-save-btn">
             <div>
-                <a href="#" class="cmn-btn edit_checkout" onclick="savePage4Data()">Save Changes</a>
+                <a href="#" class="cmn-btn edit_checkout">Save Changes</a>
             </div>
         </div>
         @endif
