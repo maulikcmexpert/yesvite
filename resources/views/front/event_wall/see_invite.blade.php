@@ -1,6 +1,6 @@
 @if(!empty($yesvite_all_invite))
 @foreach ($yesvite_all_invite as $user)
-
+{{dd($user);}}
 <div class="invite-contact yes-contact">
                 <a href="#" class="invite-img">
                 @if ($user['profile'] != '')
