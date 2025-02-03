@@ -417,7 +417,7 @@ foreach ($polls as $poll) {
                     'username' => $user->firstname . ' ' . $user->lastname,
                     'location' => ($user->city != NULL) ? $user->city : "",
                     'about_me' => ($user->about_me != NULL) ? $user->about_me : "",
-                    'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->user->created_at))),
+                    'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
                     'total_events' => $totalEvent,
                     'visible' => $user->visible,
                     'total_photos' => $totalEventPhotos,
