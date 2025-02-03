@@ -933,7 +933,7 @@ class EventGuestController extends Controller
                 
                 if ($contact_sync) {
                     $yesvite_phone_data[] = [
-                        'user_id' => $contact_sync->id,
+                        'id' => $contact_sync->id,
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
                         'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
                         'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
