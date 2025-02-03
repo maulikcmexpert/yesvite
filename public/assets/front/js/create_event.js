@@ -6849,9 +6849,6 @@ $(document).on("click", ".invite_group_member", function () {
                     invited_by: invited_by,
                 });
             }
-
-            console.log(id);
-            console.log(selectedValues);
         } else {
             const id = $(this).val();
             const isIdExists = unselectedValues.some((item) => item.id === id);
