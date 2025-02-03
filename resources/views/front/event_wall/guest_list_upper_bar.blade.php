@@ -1,6 +1,6 @@
 
 @if(!empty($yesvite_all_invite))
-@foreach($yesvite_all_invite['invited_user_id']as $guest_user)
+@foreach($yesvite_all_invite->invited_user_id as $guest_user)
     <div class="guest-users" data-id="{{$guest_user['id']}}">
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
