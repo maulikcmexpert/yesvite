@@ -502,6 +502,9 @@
                             @php
                                 $date = Carbon::parse($eventDetail['events_schedule_list']->event_start_date);
                                 $schedule_start_time = Carbon::parse($eventDetail['events_schedule_list']->start_time);
+                                $schedule_end_time = Carbon::parse($eventDetail['rsvp_end_time']);
+                                $endDate = new DateTime($eventDetail['end_date']);
+                                $formattedDate = $endDate->format('Ymd');
                                 $i++;
                             @endphp
                             <h3>{{ $date->format('l - F j, Y') }}</h3>
@@ -860,9 +863,7 @@
                                 @php
                                     $date = Carbon::parse($currentDate);
                                     $schedule_start_time = Carbon::parse($eventDetail['rsvp_start_time']);
-                                    $schedule_end_time = Carbon::parse($eventDetail['rsvp_end_time']);
-                                    $endDate = new DateTime($eventDetail['end_date']);
-                                    $formattedDate = $endDate->format('Ymd');
+                                  
                                     $i++;
                                 @endphp
                                 <h3>{{ $date->format('l - F j, Y') }}</h3>
@@ -931,39 +932,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ac-end-time" style="display: block;">
-                                        <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
-                                        <h4 class="mt-3 ">Event Ends</h4>
-                                        <div class="col-12 ac-end-time" style="display: block;">
-                                            <div class="form-group">
-                                                <label>End Time</label>
-                                                <div class="input-group time ">
-                                                    <input class="form-control end_timepicker"
-                                                        placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time"
-                                                        oninput="clearError()"
-                                                        value="{{ $schedule_end_time->format('g:i A') }}"
-                                                        required="" readonly=""><span
-                                                        class="input-group-append input-group-addon"><span
-                                                            class="input-group-text"><svg width="21"
-                                                                height="20" viewBox="0 0 21 20" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
-                                                                    stroke="#64748B" stroke-width="1.5"
-                                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                                </path>
-                                                                <path
-                                                                    d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
-                                                                    stroke="#64748B" stroke-width="1.5"
-                                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                                </path>
-                                                            </svg></span></span>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
+                                 
                                 </div>
                                 <div class="activity-schedule-inner-btn">
                                     <button class="cmn-btn" id="save_activity_schedule">
