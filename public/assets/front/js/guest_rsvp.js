@@ -18,8 +18,11 @@ $(document).on('click', '.edit_rsvp_guest', function () {
         success: function (response) {
             console.log("Response received: ", response); // Debugging line
             // Populate the modal with fetched data
-            $('#editrsvp3 .rsvp-img img').attr('src', response.profile || asset('images/default-profile.png'));
-            $('#editrsvp3 h5').text(`${response.firstname} ${response.lastname}`);
+            if(response.profile!=""){
+                $('#editrsvp3 .rsvp-img img').attr('src', response.profile);
+            }else{
+                $('#editrsvp3 h5').text(`${response.firstname} ${response.lastname}`);
+            }
             $('#editrsvp3 .adultcount').val(response.adults || 0);
             $('#editrsvp3 .kidcount').val(response.kids || 0);
 
