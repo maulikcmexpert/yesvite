@@ -4737,9 +4737,10 @@ async function saveDesignData(direct = false) {
         if (direct) {
             toastr.success("Event Updated Successfully");
             window.location.href = base_url + "home";
-        }
-        if (imageResponse && imageResponse.image) {
-            updateUIAfterSave(imageResponse.image);
+        } else {
+            if (imageResponse && imageResponse.image) {
+                updateUIAfterSave(imageResponse.image);
+            }
         }
     } catch (error) {
         console.error("Error in saveDesignData:", error);
