@@ -671,7 +671,8 @@ function bindData(current_event_id) {
                         if (element.left === undefined) {
                             console.log(element.centerX);
                             console.log(scaleFactor);
-                            element.left = element.centerX * scaleFactor;
+                            element.left =
+                                element.centerX - element.width * scaleFactor;
                             console.log("left", element.left);
                         }
 
@@ -679,7 +680,8 @@ function bindData(current_event_id) {
                             console.log(element.centerY);
                             console.log(scaleFactor);
 
-                            element.top = element.centerY * scaleFactor;
+                            element.top =
+                                element.centerY - element.width * scaleFactor;
                             console.log("top", element.top);
                         }
 
