@@ -925,7 +925,7 @@ $(document).ready(function () {
         const newOption = $(`
             <div class="mb-3 poll-option">
                 <label class="form-label d-flex align-items-center justify-content-between">
-                    Option <span class="option-number">${optionCount}</span>*
+                    <p>Option <span class="option-number">${optionCount}</span>*</p>
                     <span class="char-count">0/140</span>
                 </label>
                 <div class="position-relative">
