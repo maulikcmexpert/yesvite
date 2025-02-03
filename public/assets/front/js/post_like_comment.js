@@ -894,12 +894,12 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
-            alert();
+            alert(upper_see);
             if(upper_see==0){
                 const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email" data-count=1>+1</span>
+                        <span class="number" id="total-selected-email" data-count="1">+1</span>
                         <span class="content">Total</span>
                  </div>
                  <h6>Sell all</h6>
@@ -909,8 +909,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             if(upper_see>0){
                var initial= parseInt($('#total-selected-email').attr('data-count'));
                var new_value= initial+1 ;
+               alert(initial);
                $('#total-selected-email').attr('data-count',new_value);
-               $('#total-selected-email').text('+'+initial);
+               $('#total-selected-email').text('+'+new_value);
             }
       
              }
