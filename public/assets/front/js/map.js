@@ -97,7 +97,7 @@ function initMap() {
             let longitude = "";
 
             // Loop through address components to find the relevant data
-            place.formatted_address.address_components.forEach((component) => {
+            place.address_components.forEach((component) => {
                 if (component.types.includes("locality")) {
                     city = component.long_name;
                 }
@@ -110,8 +110,8 @@ function initMap() {
             });
 
             // Get latitude and longitude from geometry object
-            latitude = addressData.geometry.location.lat;
-            longitude = addressData.geometry.location.lng;
+            latitude = place.geometry.location.lat;
+            longitude = place.geometry.location.lng;
 
             if (city != "") {
                 $("#city").val(city);
@@ -121,7 +121,7 @@ function initMap() {
                 $("#city").next().removeClass("floatingfocus");
             }
             if (state != "") {
-                $("#state").val(place);
+                $("#state").val(state);
                 $("#state").next().addClass("floatingfocus");
             } else {
                 $("#state").val("");
