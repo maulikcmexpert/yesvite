@@ -571,7 +571,7 @@
 
 
 
-                                            @foreach ($eventDetails['event_schedule'] as $index => $schedule)
+                                            {{-- @foreach ($eventDetails['event_schedule'] as $index => $schedule)
                                                 @if ($index == 0)
                                                     <span class="timing">
                                                         {{ Carbon::parse($schedule['start_time'])->format('h:i A') }}
@@ -582,8 +582,12 @@
                                                     {{ Carbon::parse($schedule['end_time'])->format('h:i A') }}
                                                     </span>
                                                 @endif
-                                            @endforeach
-
+                                            @endforeach --}}
+                                            <span class="timing">{{ $eventDetails['event_time'] }}
+                                                @if (!empty($eventDetails['end_time']))
+                                                    to {{ $eventDetails['end_time'] }}
+                                                @endif
+                                            </span>
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
                                                         alt="schedule">
