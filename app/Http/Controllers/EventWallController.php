@@ -1576,7 +1576,7 @@ class EventWallController extends Controller
 
 
 
-            $checkcommentReaction = EventPostCommentReaction::with(['event_post_comment'])->where(['event_post_comment_id' => $input['event_post_comment_id'], 'user_id' => $user->id])->count();
+            $checkcommentReaction = EventPostCommentReaction::with(['event_post_comment'])->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->count();
 
             if ($checkcommentReaction == 0) {
                 $post_comment_reaction = new EventPostCommentReaction;
@@ -1591,7 +1591,7 @@ class EventWallController extends Controller
 
 
 
-                $checkcommentReactionData = EventPostCommentReaction::with('event_post_comment')->where(['event_post_comment_id' => $input['event_post_comment_id'], 'user_id' => $user->id])->first();
+                $checkcommentReactionData = EventPostCommentReaction::with('event_post_comment')->where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id])->first();
 
                 $notificationParam = [
 
