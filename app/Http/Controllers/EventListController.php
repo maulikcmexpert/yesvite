@@ -10,7 +10,8 @@ use App\Models\{
     EventImage,
     User,
     EventPostCommentReaction,
-    UserPotluckItem
+    UserPotluckItem,
+    contact_sync
 };
 
 use Carbon\Carbon;
