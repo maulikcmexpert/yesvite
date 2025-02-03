@@ -656,7 +656,7 @@ async function updateChat(user_id) {
               selected_user.userStatus == "online"
             ? "Online"
             : "";
-
+    let userStatusSpan = "";
     if (lastseen == "Online" || lastseen == "online") {
         userStatusSpan = `<span class="active"></span>`;
     } else {
@@ -682,7 +682,10 @@ async function updateChat(user_id) {
         selected_user.userName,
         conversationId
     );
-    const userImg = $(conversationId).find(".user-img");
+    const conversationElement = document.getElementsByClassName(
+        `conversation-${conversationId}`
+    );
+    const userImg = $(conversationElement).find(".user-img");
 
     const spanElement = userImg.find("span");
     if (spanElement.length) {
@@ -773,6 +776,7 @@ async function updateChat(user_id) {
         const conversationId = $(".selected_id").val();
         const isGroup = $("#isGroup").val();
         let lastseen = "";
+
         if (isGroup == true || isGroup == "true") {
             lastseen = "";
         } else {
