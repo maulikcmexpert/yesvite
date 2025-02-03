@@ -1800,6 +1800,13 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     border: 1px solid #F73C71;
 }
 
+#submitmsgreport .textbox-container input{
+    width: 100%;
+}
+
+#submitmsgreport .textbox-container{
+    margin-bottom: 10px;
+}
 
 /* ======= responsive ======== */
 
