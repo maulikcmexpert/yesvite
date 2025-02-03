@@ -153,7 +153,7 @@
                     </svg>
 
                 </a>
-                @if ($eventDetail['is_draft_save'] == "0"){}
+                @if (isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save'] == "0")
                 <span>Edit Event</span>
                     
                 @else

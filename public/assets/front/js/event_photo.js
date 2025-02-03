@@ -143,11 +143,11 @@ $(document).on('click', '#likeButton', function () {
 $(document).on('click', '#emojiDropdown .emoji', function () {
     const selectedEmoji = $(this).data('emoji');
     const button = $(this).closest('.photo-card-head-right').find('#likeButton');
-    const emojiDisplay = button.find('#show_Emoji');
+    // const emojiDisplay = button.find('#show_Emoji');
 
     // Replace heart icon with selected emoji
-    emojiDisplay.removeClass();
-    emojiDisplay.text(selectedEmoji);
+    // emojiDisplay.removeClass();
+    // emojiDisplay.text(selectedEmoji);
 
     // AJAX call to update emoji reaction
     const eventId = button.data('event-id');
