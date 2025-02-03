@@ -887,7 +887,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             </div>
 
         `;
-        $modalBody.append(contactHtml);
+        // $modalBody.append(contactHtml);
 
         const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite ">
