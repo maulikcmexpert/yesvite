@@ -257,7 +257,7 @@
                                                                 $eventDetails['host_id'] == $guest['id'] ? 'd-none' : '';
                                                         @endphp
                                                         <div class="guest-user-box {{ $isDisabled }}"
-                                                            data-guest-id="{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                            data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                             <div class="guest-list-data">
                                                                 <a href="#" class="guest-img">
                                                                     @if ($guest['profile'] != '')
@@ -312,7 +312,7 @@
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#editrsvp"
                                                                         data-is_sync="{{ $guest['is_sync'] }}"
-                                                                        data-guest-id="{{ $guest['id'] }}">
+                                                                        data-guest-id="{{ $guest['guest_id'] }}">
                                                                         <svg width="20" height="20"
                                                                             viewBox="0 0 20 20" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -388,7 +388,7 @@
                                                             <div class="check_status">
                                                                 @if ($guest['rsvp_status'] == '1')
                                                                     <div class="sucess-yes"
-                                                                        data-guest-id="{{ $guest['id'] }}"   data-is_sync="{{ $guest['is_sync'] }}">
+                                                                        data-guest-id="{{ $guest['guest_id'] }}"   data-is_sync="{{ $guest['is_sync'] }}">
                                                                         <h5 class="green">YES</h5>
                                                                         <div class="sucesss-cat ms-auto">
                                                                             <svg width="15" height="15"
@@ -411,21 +411,21 @@
                                                                                     fill="black"
                                                                                     fill-opacity="0.2" />
                                                                             </svg>
-                                                                            <h5 id="adults{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                            <h5 id="adults{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                                 {{ $guest['adults'] }}Adults
                                                                             </h5>
-                                                                            <h5 id="kids{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                            <h5 id="kids{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                                 {{ $guest['kids'] }} Kids</h5>
                                                                         </div>
                                                                     </div>
                                                                 @elseif ($guest['rsvp_status'] == '0')
                                                                     <div class="sucess-no"
-                                                                        data-guest-id="{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                        data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                         <h5>NO</h5>
                                                                     </div>
                                                                 @elseif ($guest['rsvp_status'] == null)
                                                                     <div class="no-reply"
-                                                                        data-guest-id="{{ $guest['id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                        data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                         <h5>NO REPLY</h5>
                                                                     </div>
                                                                 @endif
