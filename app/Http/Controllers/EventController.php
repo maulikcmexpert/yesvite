@@ -1370,6 +1370,7 @@ class EventController extends BaseController
 
     public function removeUserId(Request $request)
     {
+      
         $is_contact = $request->input('is_contact');
         if ($is_contact == '1') {
             $userIds = session()->get('contact_ids');
@@ -1386,6 +1387,7 @@ class EventController extends BaseController
             return response()->json(['responsive_view' => view('front.event.guest.addcontact_responsive', compact('user_list'))->render(), 'success' => true, 'is_phone' => 1]);
         } else {
             $userIds = session()->get('user_ids');
+            dD($userIds);
             $userId = $request->input('user_id');
             foreach ($userIds as $key => $value) {
                 if ($value['id'] == $userId) {
@@ -3028,6 +3030,7 @@ class EventController extends BaseController
         }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+        $rsvpdateObj = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date);
 
 
         $startDateFormat = "";
@@ -3036,14 +3039,18 @@ class EventController extends BaseController
             $startDateFormat = $startDateObj->format('Y-m-d');
             $endDateFormat = $endDateObj->format('Y-m-d');
         }
-        dd($request->rsvp_by_date);
+        // dd($request->rsvp_by_date);
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // $carbonDate = Carbon::createFromFormat('Y-m-d', $request->rsvp_by_date);
             // dd($carbonDate);
             // if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
             //     $rsvp_by_date = $request->rsvp_by_date;
             // } else {
-            $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            if($rsvpdateObj){
+                $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
+            }else{
+                $rsvp_by_date = $request->rsvp_by_date;     
+            }
             // }
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
 
