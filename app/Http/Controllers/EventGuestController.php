@@ -918,7 +918,7 @@ class EventGuestController extends Controller
             if ($user && $is_phone==0) {
                 // If the user exists, add data to the $users_data array
                 $yesvite_users_data[] = [
-                    'user_id' => $user->id,
+                    'id' => $user->id,
                     'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
                     'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                     'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
