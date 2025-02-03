@@ -2700,7 +2700,7 @@ if ($rsvpSent != null) {
             // dd($userData);
         } else {
 
-            dd($userData,0);
+            dd($userData,0);    
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
         }
     
