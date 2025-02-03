@@ -116,6 +116,8 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    console.log(response);
+
                     $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
                 } else {
                     alert(response.message);
