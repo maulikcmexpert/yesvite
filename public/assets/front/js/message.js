@@ -1806,7 +1806,9 @@ function addMessageToList(key, messageData, conversationId) {
 
     scrollToBottom();
     updateTimers();
-    scrollToBottom();
+    setTimeout(function () {
+        scrollToBottom();
+    }, 1000);
 }
 let timerTime = 0;
 function updateTimers(fast = false) {
