@@ -505,7 +505,7 @@
                                                                             data-event-id="{{ $event }}"
                                                                             data-event-post-comment-id="{{ $comment['id'] }} "
                                                                             data-user-id="{{ $login_user_id }}">
-                                                                            <i class="fa-regular fa-heart" id="show_Emoji"></i>
+                                                                            <i class="fa-regular fa-heart" id="comment_like_{{ $comment['id'] }}"></i>
                                                                       </button>
                                                                             <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
                                                                             </p>
