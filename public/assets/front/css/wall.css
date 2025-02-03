@@ -534,6 +534,8 @@
 
 }
 
+..qty-container button
+
 
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {
