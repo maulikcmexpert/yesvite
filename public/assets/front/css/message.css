@@ -829,7 +829,8 @@ ul.member-lists li:last-child {
 .msg-body ul li.sender .media-msg-inline {
     position: relative;
     max-width: 317px;
-    display: inherit;
+    display: flex;
+    align-items: start;
 }
 
 .media-msg-inline div.media-msg img{
