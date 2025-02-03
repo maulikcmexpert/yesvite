@@ -1575,7 +1575,7 @@
                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
-                        <h5>All clear, invites ready to be re-sent!</h5>
+                        <!-- <h5>All clear, invites ready to be re-sent!</h5> -->
                     </div>
                     @foreach ($eventDetails['failed_invites'] as $key => $invite)
                     <div class="invite-contact-wrp" data-user-id="{{ $invite['id']}}">
@@ -1744,8 +1744,8 @@
                     @endforeach
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary failed-btn"
-                        data-bs-dismiss="modal">Re-send</button>
+                    <!-- <button type="button" class="btn btn-secondary failed-btn"
+                        data-bs-dismiss="modal">Re-send</button> -->
                     <button type="button" class="btn btn-secondary success-btn"
                         data-bs-dismiss="modal">Re-send</button>
                 </div>
