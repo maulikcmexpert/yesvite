@@ -2,7 +2,7 @@
 @if(isset($prices)&&count($prices)>0)
     
 
-<button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal">buycreditsmodal</button>
+<button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal" class="buynow">buycreditsmodal</button>
 <div class="modal fade cmn-modal buycreditsmodal" id="buycreditsmodal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -273,7 +273,7 @@ defer
 
 <script>
 
-$(document).on("click", "#buycreditsmodal", function () {
+$(document).on("click", ".buynow", function () {
     $("input.price-option").prop("checked", false);
 });
 
