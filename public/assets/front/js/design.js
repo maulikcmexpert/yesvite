@@ -669,15 +669,19 @@ function bindData(current_event_id) {
                         const textWidth = textMeasurement.width;
 
                         if (element.left === undefined) {
-                            console.log(element.centerX);
-                            console.log(scaleFactor);
+                            console.log("centerX", element.centerX);
+
+                            console.log("width", element.width);
+                            console.log({ scaleFactor });
                             element.left = element.centerX * scaleFactor;
                             console.log("left", element.left);
                         }
 
                         if (element.top === undefined) {
-                            console.log(element.centerY);
-                            console.log(scaleFactor);
+                            console.log("centerY", element.centerY);
+
+                            console.log("width", element.height);
+                            console.log({ scaleFactor });
 
                             element.top = element.centerY * scaleFactor;
                             console.log("top", element.top);
