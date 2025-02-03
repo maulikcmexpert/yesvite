@@ -1,6 +1,6 @@
 let eventData = {};
 let isCohost = $("#isCohost").val();
-var total_activities = 0;
+var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
@@ -3341,75 +3341,8 @@ $(document).on("click", "#save_activity_schedule", function () {
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
-    // $(".accordion-body.new_activity").each(function () {
-    //     var dataId = $(this).data("id");
-    //     activities[dataId] = [];
-    //     $(this)
-    //         .find(".activity-main-wrp")
-    //         .each(function (index) {
-    //             var id = $(this).data("id");
-    //             var description = $(this)
-    //                 .find('input[name="description[]"]')
-    //                 .val();
-    //             var startTime = $(this)
-    //                 .find('input[name="activity-start-time[]"]')
-    //                 .val();
-    //             var endTime = $(this)
-    //                 .find('input[name="activity-end-time[]"]')
-    //                 .val();
-    //             activityendtime = endTime;
-    //             $("#desc-error-" + id).text("");
-    //             $("#start-error-" + id).text("");
-    //             $("#end-error-" + id).text("");
 
-    //             if (description == "") {
-    //                 $("#desc-error-" + id)
-    //                     .text("Description is required")
-    //                     .css("color", "red");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="description[]"]')
-    //                 .on("input", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#desc-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             if (startTime == "") {
-    //                 $("#start-error-" + id).text("Start time is required");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="activity-start-time[]"]')
-    //                 .on("change", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#start-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             if (endTime == "") {
-    //                 $("#end-error-" + id).text("End time is required");
-    //                 isValid++;
-    //             }
-    //             $(this)
-    //                 .find('input[name="activity-end-time[]"]')
-    //                 .on("change", function () {
-    //                     if ($(this).val() != "") {
-    //                         $("#end-error-" + id).text("");
-    //                     }
-    //                 });
-
-    //             var activity = {
-    //                 activity: description,
-    //                 "start-time": startTime,
-    //                 "end-time": endTime,
-    //             };
-    //             activities[dataId].push(activity);
-    //         });
-    //     // toggleSidebar();
-    // });
-    var showAlert = false; // Move showAlert outside of the loop so it can be checked globally
+    var showAlert = false;
     let isendtime = 0;
     let istrue = 0;
     $(".accordion-body.new_activity").each(function () {
@@ -4765,7 +4698,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = "";
-$(document).on("click", ".li_event_details", function () {
+async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
@@ -4774,130 +4707,252 @@ $(document).on("click", ".li_event_details", function () {
     canvas.discardActiveObject();
     canvas.getObjects().forEach((obj) => {
         if (obj.type === "group") {
-            canvas.remove(obj); // Your existing function to add icons
+            canvas.remove(obj);
         }
     });
     canvas.renderAll();
-    setTimeout(() => {
-        console.log("here for save image2");
 
-        var downloadImage = document.getElementById("imageEditor1");
-        $("#loader").show();
-        // eventData.desgin_selected = 'dom_to_image_not_working_in_server';
-        $(this).prop("disabled", true);
-        $(".btn-close").prop("disabled", true);
-        dbJson = getTextDataFromCanvas();
-        console.log({ dbJson });
+    $("#loader").show();
+    $(".store_desgin_temp, .btn-close").prop("disabled", true);
+
+    try {
+        const downloadImage = document.getElementById("imageEditor1");
+        const dbJson = getTextDataFromCanvas();
         eventData.textData = dbJson;
         eventData.temp_id = temp_id;
-        console.log(downloadImage);
-        // save_image_design(downloadImage);
-        if ($("#shape_img").attr("src")) {
-            design_inner_image = $("#shape_img").attr("src");
+
+        console.log("Capturing image...");
+        const blob = await captureImage(downloadImage);
+
+        console.log("Uploading image...");
+        const imageResponse = await uploadImage(blob);
+
+        if (imageResponse && imageResponse.image) {
+            eventData.desgin_selected = imageResponse.image;
+            updateUIAfterSave(imageResponse.image);
         }
-        var old_shape_url = $("#first_shape_img").attr("src");
-        console.log("here for save image3");
 
+        if (direct) return true;
+    } catch (error) {
+        console.error("Error in saveDesignData:", error);
+    } finally {
+        $("#loader").hide();
+        $(".store_desgin_temp, .btn-close").prop("disabled", false);
+    }
+}
+function captureImage(element) {
+    return new Promise((resolve, reject) => {
         domtoimage
-            .toBlob(downloadImage)
-            .then(function (blob) {
-                var formData = new FormData();
-                formData.append("image", blob, "design.png");
-                formData.append("design_inner_image", design_inner_image);
-                formData.append("shapeImageUrl", old_shape_url);
-                formData.append("eventId", eventId);
-                $.ajax({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    url: base_url + "event/store_temp_design",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        let image = response.image;
-                        eventData.desgin_selected = image;
-                        console.log("here for save image4");
+            .toBlob(element)
+            .then((blob) => resolve(blob))
+            .catch((error) => reject(error));
+    });
+}
+function uploadImage(blob) {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append("image", blob, "design.png");
+        formData.append(
+            "design_inner_image",
+            $("#shape_img").attr("src") || ""
+        );
+        formData.append(
+            "shapeImageUrl",
+            $("#first_shape_img").attr("src") || ""
+        );
+        formData.append("eventId", eventId);
 
-                        // if(eventData.step == '1'){
-                        //     eventData.step = '2';
-                        // }
-                        console.log(final_step);
-                        if (final_step == 1) {
-                            final_step = 2;
-                        }
-                        console.log(eventData);
-                        eventData.step = final_step;
-                        console.log("Image uploaded and saved successfully");
-                        $("#myCustomModal").modal("hide");
-                        $("#exampleModal").modal("hide");
-                        $("#loader").css("display", "none");
-                        $(".store_desgin_temp").prop("disabled", false);
-                        $(".btn-close").prop("disabled", false);
-                        $(".main-content-wrp").removeClass("blurred");
-                        $(".step_2").hide();
-                        $(".step_4").hide();
-                        $(".step_3").hide();
-                        $("#edit-design-temp").hide();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: base_url + "event/store_temp_design",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: (response) => resolve(response),
+            error: (xhr, status, error) => reject(error),
+        });
+    });
+}
+function updateUIAfterSave(image) {
+    console.log("Image uploaded successfully:", image);
 
-                        // handleActiveClass('.li_guest');
-                        $(".pick-card").addClass("menu-success");
-                        $(".edit-design").addClass("menu-success");
-                        $(".edit-design").removeClass("active");
-                        $(".li_design")
-                            .find(".side-bar-list")
-                            .addClass("menu-success");
-                        $(".li_design").addClass("menu-success");
+    $("#eventImage, #eventTempImage").attr(
+        "src",
+        base_url + "public/storage/event_images/" + image
+    );
 
-                        // active_responsive_dropdown('drop-down-event-guest');
+    final_step = final_step === 1 ? 2 : final_step;
+    eventData.step = final_step;
 
-                        $(".event_create_percent").text("50%");
-                        $(".current_step").text("2 of 4");
+    $("#myCustomModal, #exampleModal").modal("hide");
+    $(".main-content-wrp").removeClass("blurred");
 
-                        console.log(eventData);
+    $(".step_1").show();
+    $(".step_2, .step_3, .step_4, #edit-design-temp").hide();
 
-                        var type = "all";
-                        // get_user(type);
-                        // $('#sidebar_select_design_category').css('display','none');
-                        $(".step_1").show();
-                        // $(".step_2").css("display", "none");
-                        // $("#edit-design-temp").css("display", "none");
-                        // $(".step_3").css("display", "none");
-                        // $(".step_4").css("display", "none");
-                        // $(".step_final_checkout").css("display", "none");
-                        active_responsive_dropdown("drop-down-event-detail");
+    active_responsive_dropdown("drop-down-event-detail");
+    handleActiveClass(".li_event_details");
 
-                        // $('.event_create_percent').text('50%');
-                        // $('.current_step').text('2 of 4');
-                        console.log("handleActiveClass");
+    $(".pick-card, .edit-design").addClass("menu-success");
+}
 
-                        handleActiveClass(this);
-                        var design = eventData.desgin_selected;
-                        $(".li_event_detail")
-                            .find(".side-bar-list")
-                            .addClass("active");
-                        if (design == undefined || design == "") {
-                        } else {
-                            $(".pick-card").addClass("menu-success");
-                            $(".edit-design").addClass("menu-success");
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(
-                            "Failed to upload and save the image:",
-                            error
-                        );
-                    },
-                });
-            })
-            .catch(function (error) {
-                console.error("Error capturing image:", error);
-            });
-        $(".main-content-wrp").addClass("blurred");
-    }, 500);
+// async function saveDesignData(direct = false) {
+//     console.log({ eventData });
+//     console.log("here for save image");
+//     $("#close_createEvent").css("display", "block");
+//     $("#sidebar_select_design_category").css("display", "none");
+
+//     canvas.discardActiveObject();
+//     canvas.getObjects().forEach((obj) => {
+//         if (obj.type === "group") {
+//             canvas.remove(obj); // Your existing function to add icons
+//         }
+//     });
+//     canvas.renderAll();
+//     setTimeout(() => {
+//         console.log("here for save image2");
+
+//         var downloadImage = document.getElementById("imageEditor1");
+//         $("#loader").show();
+//         // eventData.desgin_selected = 'dom_to_image_not_working_in_server';
+//         $(this).prop("disabled", true);
+//         $(".btn-close").prop("disabled", true);
+//         dbJson = getTextDataFromCanvas();
+//         console.log({ dbJson });
+//         eventData.textData = dbJson;
+//         eventData.temp_id = temp_id;
+//         console.log(downloadImage);
+//         // save_image_design(downloadImage);
+//         if ($("#shape_img").attr("src")) {
+//             design_inner_image = $("#shape_img").attr("src");
+//         }
+//         var old_shape_url = $("#first_shape_img").attr("src");
+//         console.log("here for save image3");
+
+//         domtoimage
+//             .toBlob(downloadImage)
+//             .then(function (blob) {
+//                 var formData = new FormData();
+//                 formData.append("image", blob, "design.png");
+//                 formData.append("design_inner_image", design_inner_image);
+//                 formData.append("shapeImageUrl", old_shape_url);
+//                 formData.append("eventId", eventId);
+//                 $.ajax({
+//                     headers: {
+//                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+//                             "content"
+//                         ),
+//                     },
+//                     url: base_url + "event/store_temp_design",
+//                     type: "POST",
+//                     data: formData,
+//                     processData: false,
+//                     contentType: false,
+//                     success: function (response) {
+//                         let image = response.image;
+//                         eventData.desgin_selected = image;
+//                         console.log("here for save image4");
+
+//                         // if(eventData.step == '1'){
+//                         //     eventData.step = '2';
+//                         // }
+//                         console.log(final_step);
+//                         if (final_step == 1) {
+//                             final_step = 2;
+//                         }
+//                         console.log(eventData);
+//                         eventData.step = final_step;
+//                         console.log("Image uploaded and saved successfully");
+
+//                         $("#eventImage").attr(
+//                             "src",
+//                             base_url +
+//                                 "public/storage/event_images/" +
+//                                 eventData.desgin_selected +
+//                                 ""
+//                         );
+//                         $("#eventTempImage").attr(
+//                             "src",
+//                             base_url +
+//                                 "public/storage/event_images/" +
+//                                 eventData.desgin_selected +
+//                                 ""
+//                         );
+//                         if (direct) {
+//                             return true;
+//                         }
+//                         $("#myCustomModal").modal("hide");
+//                         $("#exampleModal").modal("hide");
+//                         $("#loader").css("display", "none");
+//                         $(".store_desgin_temp").prop("disabled", false);
+//                         $(".btn-close").prop("disabled", false);
+//                         $(".main-content-wrp").removeClass("blurred");
+//                         $(".step_2").hide();
+//                         $(".step_4").hide();
+//                         $(".step_3").hide();
+//                         $("#edit-design-temp").hide();
+
+//                         // handleActiveClass('.li_guest');
+//                         $(".pick-card").addClass("menu-success");
+//                         $(".edit-design").addClass("menu-success");
+//                         $(".edit-design").removeClass("active");
+//                         $(".li_design")
+//                             .find(".side-bar-list")
+//                             .addClass("menu-success");
+//                         $(".li_design").addClass("menu-success");
+
+//                         // active_responsive_dropdown('drop-down-event-guest');
+
+//                         $(".event_create_percent").text("50%");
+//                         $(".current_step").text("2 of 4");
+
+//                         console.log(eventData);
+
+//                         var type = "all";
+//                         // get_user(type);
+//                         // $('#sidebar_select_design_category').css('display','none');
+//                         $(".step_1").show();
+//                         // $(".step_2").css("display", "none");
+//                         // $("#edit-design-temp").css("display", "none");
+//                         // $(".step_3").css("display", "none");
+//                         // $(".step_4").css("display", "none");
+//                         // $(".step_final_checkout").css("display", "none");
+//                         active_responsive_dropdown("drop-down-event-detail");
+
+//                         // $('.event_create_percent').text('50%');
+//                         // $('.current_step').text('2 of 4');
+//                         console.log("handleActiveClass");
+
+//                         handleActiveClass(".li_event_details");
+//                         var design = eventData.desgin_selected;
+//                         $(".li_event_detail")
+//                             .find(".side-bar-list")
+//                             .addClass("active");
+//                         if (design == undefined || design == "") {
+//                         } else {
+//                             $(".pick-card").addClass("menu-success");
+//                             $(".edit-design").addClass("menu-success");
+//                         }
+//                     },
+//                     error: function (xhr, status, error) {
+//                         console.error(
+//                             "Failed to upload and save the image:",
+//                             error
+//                         );
+//                     },
+//                 });
+//             })
+//             .catch(function (error) {
+//                 console.error("Error capturing image:", error);
+//             });
+//         $(".main-content-wrp").addClass("blurred");
+//     }, 500);
+// }
+$(document).on("click", ".li_event_details", async function () {
+    await saveDesignData();
 });
 
 $(document).on("click", ".li_event_detail", function () {
@@ -8364,7 +8419,7 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
-$(document).on("click", ".edit_checkout", function (e) {
+$(document).on("click", ".edit_checkout", async function (e) {
     var isDraftEdit = $(this).attr("data-isDraftEdit");
     if (isDraftEdit) {
         eventData.is_update_event = "0";
@@ -8372,7 +8427,7 @@ $(document).on("click", ".edit_checkout", function (e) {
     } else {
         eventData.is_update_event = "1";
     }
-    $(".li_event_details").trigger("click");
+    await saveDesignData(true);
     savePage1Data();
     savePage3Data();
     savePage4Data();
@@ -8411,7 +8466,7 @@ $(document).on("click", ".edit_checkout", function (e) {
             if (response.isupadte == true) {
                 if (response.success == true) {
                     toastr.success("Event Updated Successfully");
-                    window.location.href = base_url + "home";
+                    // window.location.href = base_url + "home";
                 }
             } else {
                 if (response.is_registry == "1") {
