@@ -1802,7 +1802,8 @@ function createShortUrl($longUrl)
         ]);
         // $base_url=config('app.url');
         $base_url = url('/');
-        return "{$base_url}/invite/{$shortUrlKey}";
+        // return "{$base_url}/invite/{$shortUrlKey}";
+        return "https://yesvite.com/invite/{$shortUrlKey}";
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
     }
