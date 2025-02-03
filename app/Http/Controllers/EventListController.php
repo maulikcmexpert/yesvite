@@ -2702,7 +2702,7 @@ if ($rsvpSent != null) {
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
             
             $yesvite_all_invite=getInvitedUsersList($request->event_id);
-            dd($yesvite_all_invite);
+            // dd($yesvite_all_invite);
             $new_added_user=session()->get('add_guest_user_id');
             $yesvite_users_data = [];
             $yesvite_phone_data = [];
@@ -2748,7 +2748,6 @@ if ($rsvpSent != null) {
                 
             }
         }
-    
         return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render()]);
         }
     
