@@ -1,5 +1,5 @@
 @if(!empty($yesvite_all_invite))
- <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact">
+ <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact see_all_invite_data">
     @foreach ($yesvite_all_invite['all_invited_users'] as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
