@@ -261,7 +261,7 @@
                                                             <div class="guest-list-data">
                                                                 <a href="#" class="guest-img">
                                                                     @if ($guest['profile'] != '')
-                                                                        <img src="{{$guest['profile']) }}"
+                                                                        <img src="{{$guest['profile'] }}"
                                                                             alt="">
                                                                     @else
                                                                         @php

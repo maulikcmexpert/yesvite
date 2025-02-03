@@ -1,7 +1,8 @@
 {{-- {{dd($eventInfo)}} --}}
 @php
 
-    $guestArray = $eventInfo['guest_view']['event_detail']['guests'] ?? null;
+    $guestArray = $eventInfo['guest_view']['event_detail']['guests']['all_invited_users'] ?? null;
+    $eventId = $eventInfo['guest_view']['event_detail']['id']?? null;
     $totalAdults = 0;
     $totalKids = 0;
     // dd( $guestArray);
@@ -30,7 +31,7 @@
         </div>
         @php
             // Safely fetch the value of 'event_detail[2]' or set it to null if it doesn't exist
-$guestArray = $eventInfo['guest_view']['event_detail']['guests'] ?? null;
+$guestArray = $eventInfo['guest_view']['event_detail']['guests']['all_invited_users'] ?? null;
 
 // Sample guests array from the provided data
 $hostView = $eventInfo['host_view'];
@@ -95,23 +96,23 @@ if ($hostView) {
             <ul  id="guestList">
                 @if (!empty($guestArray))
                 @foreach ($guestArray as $index => $guest)
-                        @if (!empty($guest['user']))
+                        @if (!empty($guest))
                         @if ($index == 7)
                         @break
                         @endif
 
                             @php
-                                $user = $guest['user']; // Fetch user array
-                                $firstInitial = isset($user['firstname'][0]) ? strtoupper($user['firstname'][0]) : '';
-                                $secondInitial = isset($user['lastname'][0]) ? strtoupper($user['lastname'][0]) : '';
+                                //$user = $guest['user']; // Fetch user array
+                                $firstInitial = isset($guest['first_name'][0]) ? strtoupper($guest['first_name'][0]) : '';
+                                $secondInitial = isset($guest['last_name'][0]) ? strtoupper($guest['last_name'][0]) : '';
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['id'] }}">
+                            <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-sync_id="{{ $guest['is_sync'] }}">
                                 <div class="posts-card-head-left guests-listing-left">
                                     <div class="posts-card-head-left-img">
-                                        @if (!empty($user['profile']))
-                                            <img src="{{ asset('storage/profile/' . $user['profile']) }}"
+                                        @if (!empty($guest['profile']))
+                                            <img src="{{ $guest['profile'] }}"
                                                 alt="">
                                         @else
                                             <h5 class="{{ $fontColor }}">
@@ -121,25 +122,26 @@ if ($hostView) {
                                         <span class="active-dot"></span>
                                     </div>
                                     <div class="posts-card-head-left-content contact_search"
-                                        data-search = "{{ $user['firstname'] }} {{ $user['lastname'] }}">
-                                        <h3>{{ $user['firstname'] }} {{ $user['lastname'] }}</h3>
-                                        @if (!empty($user['city']) || !empty($user['state']))
+                                        data-search = "{{ $guest['first_name'] }} {{ $guest['last_name'] }}">
+                                        <h3>{{ $guest['first_name'] }} {{ $guest['last_name'] }}</h3>
+                                        <!-- @if (!empty($user['city']) || !empty($user['state']))
                                             <p>
                                                 {{ $user['city'] ?? '' }}{{ !empty($user['city']) && !empty($user['state']) ? ',' : '' }}{{ $user['state'] ?? '' }}
                                             </p>
-                                        @endif
+                                        @endif -->
 
 
-                                        <input type="hidden" id="eventID" value="{{ $guest['event_id'] }}">
-                                        <input type="hidden" id="user_id" value="{{ $guest['user_id'] }}">
+                                        <input type="hidden" id="eventID" value="{{ $eventId }}">
+                                        <input type="hidden" id="user_id" value="{{ $guest['id'] }}">
+                                        <input type="hidden" id="sync" value="{{  $guest['is_sync']}}">
                                     </div>
                                 </div>
 
-                                <div class="guests-listing-right" data-guest-id="{{ $guest['id'] }}">
-                                    <div class="guest_rsvp_icon" data-guest-id="{{ $guest['id'] }}">
+                                <div class="guests-listing-right" data-guest-id="{{ $guest['guest_id'] }}"  data-sync_id="{{ $guest['is_sync'] }}">
+                                    <div class="guest_rsvp_icon" data-guest-id="{{ $guest['guest_id'] }}"  data-sync_id="{{ $guest['is_sync'] }}">
                                     @if ($guest['rsvp_status'] == '1')
                                         <!-- Approved -->
-                                        <span id="approve" data-guest-id="{{ $guest['id'] }}">
+                                        <span id="approve" data-guest-id="{{ $guest['guest_id'] }}"  data-sync_id="{{ $guest['is_sync'] }}">
                                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M10.0013 18.4583C5.33578 18.4583 1.54297 14.6655 1.54297 9.99996C1.54297 5.33444 5.33578 1.54163 10.0013 1.54163C14.6668 1.54163 18.4596 5.33444 18.4596 9.99996C18.4596 14.6655 14.6668 18.4583 10.0013 18.4583ZM10.0013 1.79163C5.47516 1.79163 1.79297 5.47382 1.79297 9.99996C1.79297 14.5261 5.47516 18.2083 10.0013 18.2083C14.5274 18.2083 18.2096 14.5261 18.2096 9.99996C18.2096 5.47382 14.5274 1.79163 10.0013 1.79163Z"
@@ -151,7 +153,7 @@ if ($hostView) {
                                         </span>
                                     @elseif ($guest['rsvp_status'] == '0')
                                         <!-- Cancelled -->
-                                        <span id="cancel" data-guest-id="{{ $guest['id'] }}">
+                                        <span id="cancel" data-guest-id="{{ $guest['guest_id'] }}"  data-sync_id="{{ $guest['is_sync'] }}">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="20" height="20" rx="10" fill="#E03137" />
@@ -163,7 +165,7 @@ if ($hostView) {
                                         </span>
                                     @else
                                         <!-- Pending -->
-                                        <span id="pending" data-guest-id="{{ $guest['id'] }}">
+                                        <span id="pending" data-guest-id="{{ $guest['guest_id'] }}"  data-sync_id="{{ $guest['is_sync'] }}">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="20" height="20" rx="10" fill="#94A3B8" />
@@ -180,7 +182,7 @@ if ($hostView) {
                                     @if ($eventInfo['guest_view']['is_host'] == 1)
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
                                                 class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
-                                                data-guest-id="{{ $guest['id'] }}"></i></button>
+                                                data-guest-id="{{ $guest['guest_id'] }}"  data-sync_id="{{ $guest['is_sync'] }}"></i></button>
                                     @endif
                                 </div>
                             </li>
