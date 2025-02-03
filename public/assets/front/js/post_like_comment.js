@@ -750,12 +750,12 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
@@ -779,24 +779,24 @@ $(document).ready(function () {
                 $('.add_yesvite_guest_'+id).remove();
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
 
         });
 
-        function storeAddNewGuest(id,status,prefer_by,event_id){
+        function storeAddNewGuest(id,status,prefer_by,event_id,contact){
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',
-                data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id},
+                data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact},
                 success: function (response) {
                  console.log(response);
                  if(response.is_phone=="1"&&response.view!=""){
@@ -849,7 +849,7 @@ $(document).ready(function () {
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
-            storeAddNewGuest(id,0,isSelected);
+            storeAddNewGuest(id,0,isSelected,'phone');
 
             console.log(guestList);
         }// App user = 0 for phone (non-app user)
