@@ -2643,9 +2643,6 @@ function getTextDataFromCanvas() {
     return dbJson;
 }
 $(".edit-design-sidebar").on("click", function () {
-    if (temp_id == null || temp_id == "") {
-        image = base_url + "storage/event_images/" + "1738599807-design.png";
-    }
     if (imageId != null && imageId != "") {
         loadAgain();
     } else if (image != "") {
