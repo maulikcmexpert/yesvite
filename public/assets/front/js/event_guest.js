@@ -11,14 +11,26 @@ $(document).on('click', '.edit_guest_rsvp', function () {
     $('#editrsvp h5').text("");
     $('#editrsvp .adult-count').val("");
     $('#editrsvp .kid-count').val("");
+    $('#editrsvp .rsvp-img h5').remove();
+
     $.ajax({
         url: base_url + "event_guest/fetch_guest/" + guestId+"/"+is_sync, // Fetch guest data
         method: 'GET',
         success: function (response) {
             console.log("Response received: ", response); // Debugging line
             // Populate the modal with fetched data
-            $('#editrsvp .rsvp-img img').attr('src', response.profile || asset('images/default-profile.png'));
-            $('#editrsvp h5').text(`${response.firstname} ${response.lastname}`);
+            // $('#editrsvp .rsvp-img img').attr('src', response.profile || asset('images/default-profile.png'));
+            // $('#editrsvp h5').text(`${response.firstname} ${response.lastname}`);
+
+            if(response.profile!=""){
+                $('#editrsvp .rsvp-img img').css('display','block');
+                $('#editrsvp .rsvp-img img').attr('src', response.profile);
+                $('#editrsvp .rsvp-img h5').css('display','none');
+            }else{
+                $('#editrsvp .rsvp-img img').css('display','none');
+                var profile=generateProfileImage(response.firstname,response.lastname);
+                $('#editrsvp .rsvp-img').append(profile);
+            }
             $('#editrsvp .adult-count').val(response.adults || 0);
             $('#editrsvp .kid-count').val(response.kids || 0);
 

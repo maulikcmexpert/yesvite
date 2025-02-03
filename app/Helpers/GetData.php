@@ -1020,6 +1020,7 @@ function getInvitedUsersList($eventId)
                 : "";
                 $invitedGuestDetail['is_sync'] = 1;
                 $invitedGuestDetail['rsvp_status']= $guestVal->rsvp_status;
+                $invitedGuestDetail['prefer_by']= $guestVal->prefer_by;
                 $invitedGuestDetail['kids']= $guestVal->kids;
                 $invitedGuestDetail['adults']= $guestVal->adults;
                 $invitedGuestDetail['read']= $guestVal->read;
@@ -1039,6 +1040,7 @@ function getInvitedUsersList($eventId)
                 $invitedUserIdDetail['visible'] = (!empty($guestVal->user->visible) && $guestVal->user->visible != NULL) ? (int)$guestVal->user->visible : 0;
                 // $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/').$guestVal->user->profile : "";
                 $invitedUserIdDetail['is_sync'] = 0;
+                $invitedUserIdDetail['prefer_by']= $guestVal->prefer_by;
                 $invitedUserIdDetail['profile'] = (!empty($guestVal->user->profile) && $guestVal->user->profile != NULL) ? asset('storage/profile/' . $guestVal->user->profile) : "";
                 $invitedUserIdDetail['rsvp_status']= $guestVal->rsvp_status;
                 $invitedUserIdDetail['kids']= $guestVal->kids;
@@ -1050,7 +1052,7 @@ function getInvitedUsersList($eventId)
             }
         }
     }
-    $eventDetail['all_invited_users'] = array_merge($eventDetail['invited_guests'], $eventDetail['invited_user_id']);
+    $eventDetail['all_invited_users'] = array_merge( $eventDetail['invited_user_id'],$eventDetail['invited_guests']);
 
     return $eventDetail;
 }

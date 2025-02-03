@@ -12,6 +12,7 @@ $(document).on('click', '.edit_rsvp_guest', function () {
     $('#editrsvp3 h5').text("");
     $('#editrsvp3 .adult-count').val("");
     $('#editrsvp3 .kid-count').val("");
+    $('#editrsvp3 .rsvp-img h5').remove();
     $.ajax({
         url: base_url + "event_guest/fetch_guest/" + guestId+"/"+is_sync, // Fetch guest data
         method: 'GET',
@@ -19,10 +20,13 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             console.log("Response received: ", response); // Debugging line
             // Populate the modal with fetched data
             if(response.profile!=""){
+                $('#editrsvp3 .rsvp-img img').css('display','block');
                 $('#editrsvp3 .rsvp-img img').attr('src', response.profile);
+                $('#editrsvp3 .rsvp-img h5').css('display','none');
             }else{
-                $('#editrsvp3 .rsvp-img img').remove();
-                $('#editrsvp3 h5').text(`${response.firstname} ${response.lastname}`);
+                $('#editrsvp3 .rsvp-img img').css('display','none');
+                var profile=generateProfileImage(response.firstname,response.lastname);
+                $('#editrsvp3 .rsvp-img').append(profile);
             }
             $('#editrsvp3 .adultcount').val(response.adults || 0);
             $('#editrsvp3 .kidcount').val(response.kids || 0);
@@ -56,6 +60,15 @@ $(document).on('click', '.edit_rsvp_guest', function () {
         }
     });
 });
+function generateProfileImage(firstname, lastname) {
+    firstname = firstname ? String(firstname).trim() : "";
+    lastname = lastname ? String(lastname).trim() : "";
+    const firstInitial = firstname[0] ? firstname[0].toUpperCase() : "";
+    const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
+    const initials = `${firstInitial}${secondInitial}`;
+    const fontColor = `fontcolor${firstInitial}`;
+    return `<h5 class="${fontColor} font_name">${initials || "NA"}</h5>`;
+}
 $('#editrsvp3').on('hidden.bs.modal', function () {
     // Remove the guest ID data when the modal is closed
     $('#editrsvp3 .save-rsvp').removeData('guest-update-id');
