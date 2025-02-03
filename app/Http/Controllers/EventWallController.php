@@ -1975,7 +1975,8 @@ class EventWallController extends Controller
             }
             $yesviteUserDetail = [
                 'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                // 'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                'profile' =>  (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) ,
                 'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
                 'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
                 'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
@@ -2070,7 +2071,7 @@ class EventWallController extends Controller
                             'lastname' => $userVal->lastname,
                             'prefer_by' => $userVal->prefer_by,
                             'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
-                            'profile' => $userVal->profile ?? '',
+                            'profile' => (!empty($userVal->profile) && $userVal->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($userVal->profile))),
                         ];
                         $userIds[] = $userEntry;
                     }
@@ -2104,7 +2105,7 @@ class EventWallController extends Controller
                             'lastname' => $userVal->lastname,
                             'prefer_by' => $userVal->preferBy,
                             'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone,
-                            'profile' => $userVal->photo ?? '',
+                            'profile' => (!empty($userVal->photo) && $userVal->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($userVal->photo))) ?? '',
 
                         ];
                         $userIdsSession[] = $userEntry;
