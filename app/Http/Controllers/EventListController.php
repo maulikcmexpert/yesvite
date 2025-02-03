@@ -2699,13 +2699,12 @@ if ($rsvpSent != null) {
             }
             // dd($userData);
         } else {
-
-            dd($userData,0);    
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
         }
     
         session(['add_guest_user_data' => $userData]);
     
+        dd(session()->get('add_guest_user_id'));
         return session()->get('add_guest_user_id');
     }
 }
