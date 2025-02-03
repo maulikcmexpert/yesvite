@@ -9144,3 +9144,12 @@ getcoins();
 if (category != 0) {
     potluck_cateogry_item_count();
 }
+
+$(document).on('blur', '#event-name', function() {
+    var event_name = $("#event-name").val();
+});
+
+$(document).on('change', '#event-date, #start-time', function() {
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+});
