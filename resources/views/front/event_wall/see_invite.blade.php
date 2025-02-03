@@ -1,7 +1,7 @@
 <div class="guest-user-list-wrp invite-contact-wrp yesvite_contact see_all_invite_data">
 @if(!empty($yesvite_all_invite))
     @php
-    if($is_phone=="0"){
+    if($is_phone==0){
         $listing=$yesvite_all_invite['invited_user_id'] ;
     }else{
         $listing=$yesvite_all_invite['invited_guests'] ;
@@ -57,7 +57,7 @@
     @endforeach
 @endif
 
-@if(!empty($yesvite_users_data))
+@if(!empty($yesvite_users_data)&&$is_phone==0)
     @foreach ($yesvite_users_data as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
@@ -106,7 +106,7 @@
     @endforeach
 @endif
 
-@if(!empty($yesvite_phone_data))
+@if(!empty($yesvite_phone_data)&&$is_phone==1)
     @foreach ($yesvite_phone_data as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
