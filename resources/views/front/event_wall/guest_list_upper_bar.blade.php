@@ -81,7 +81,7 @@
                                 </a>
                             </div>
                             
-                            <!-- <h6 class="guest-name">test01A inserver</h6> -->
+                            <h6 class="guest-name">{{$guest_user['first_name']}} {{$guest_user['last_name']}}</h6>
     </div>
 @endforeach
 @endif
