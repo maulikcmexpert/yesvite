@@ -1789,6 +1789,7 @@ function sendSMSForApplication($receiverNumber, $message)
 function createShortUrl($longUrl)
 {
     try {
+
         do {
             // Generate a random 15-character key
             $shortUrlKey = Str::random(10);
@@ -1800,8 +1801,10 @@ function createShortUrl($longUrl)
             'short_url_key' => $shortUrlKey,
             'expires_at' => now()->addDays(90) // Expire after 90 days
         ]);
+        return "https://yesvite.com/invite/{$shortUrlKey}";
         // $base_url=config('app.url');
         $base_url = url('/');
+        // return "{$base_url}/invite/{$shortUrlKey}";
         return "{$base_url}/invite/{$shortUrlKey}";
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
