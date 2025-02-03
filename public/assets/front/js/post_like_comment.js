@@ -413,7 +413,9 @@ $(document).ready(function () {
             console.error("Comment input field not found!");
             return;
         }
-        $("#parent_comment_id").val(parentId);
+        const commentIndex = parentWrapper.index() + 1; // Get unique index
+        $("#parent_comment_id_" + commentIndex).val(parentId);
+        // $("#parent_comment_id").val(parentId);
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
