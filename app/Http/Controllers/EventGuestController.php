@@ -912,6 +912,7 @@ class EventGuestController extends Controller
         foreach ($new_added_user as $user) {
             // Try fetching the user from the User table
             $user = User::find($user['user_id']);
+            $prefer_by=$user['prefer_by'];
 
             if ($user) {
                 // If the user exists, add data to the $users_data array
@@ -924,7 +925,7 @@ class EventGuestController extends Controller
                     'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
                                 ? asset('storage/profile/' . $user->profile) 
                                 : "",
-                    'prefer_by'=>$user['prefer_by']
+                    'prefer_by'=>$prefer_by
                 ];
             } else {
                 $contact_sync = contact_sync::find($user['user_id']);
@@ -939,7 +940,7 @@ class EventGuestController extends Controller
                                     ? asset('storage/profile/' . $contact_sync->photo) 
                                     : "",
                         'phone_number'=>((!empty($user->phone) && $user->phone != NULL) ? $user->phone : ""),
-                        'prefer_by'=>$user['prefer_by']
+                        'prefer_by'=>$prefer_by
            
                     ];
                 }
