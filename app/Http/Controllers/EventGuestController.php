@@ -915,7 +915,7 @@ class EventGuestController extends Controller
             $user = User::find($sesionuser['user_id']);
             $prefer_by=$sesionuser['prefer_by'];
 
-            if ($user && $is_phone=="0") {
+            if ($user && $is_phone==0) {
                 // If the user exists, add data to the $users_data array
                 $yesvite_users_data[] = [
                     'user_id' => $user->id,
