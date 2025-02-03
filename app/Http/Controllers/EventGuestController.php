@@ -905,7 +905,8 @@ class EventGuestController extends Controller
     
         $yesvite_all_invite=getInvitedUsersList($request->event_id);
         $new_added_user=session()->get('add_guest_user_id');
-        $users_data = [];
+        $yesvite_users_data = [];
+        $yesvite_phone_data = [];
 
         // dd($new_added_user);
         if(!empty($new_added_user)){
@@ -916,7 +917,7 @@ class EventGuestController extends Controller
 
             if ($user) {
                 // If the user exists, add data to the $users_data array
-                $users_data[] = [
+                $yesvite_users_data[] = [
                     'user_id' => $user->id,
                     'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
                     'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
@@ -931,7 +932,7 @@ class EventGuestController extends Controller
                 $contact_sync = contact_sync::find($sesionuser['user_id']);
                 
                 if ($contact_sync) {
-                    $users_data[] = [
+                    $yesvite_phone_data[] = [
                         'user_id' => $contact_sync->id,
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
                         'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
@@ -951,7 +952,7 @@ class EventGuestController extends Controller
                 // dd($users_data);
 
     }
-        return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','users_data'))->render()]);
+        return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render()]);
 
     }
 
