@@ -194,18 +194,18 @@ console.log(adults,kids);
     $(".noattending-btn").on('click',function(){
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
         if(rsvpStatus=='1'){
-            $("#option6").attr('checked',true);
+            $("#option6").prop('checked',true);
         }else{
-            $("#option5").attr('checked',false);
+            $("#option5").prop('checked',false);
 
         }
     })
     $(".attending-btn").on('click',function(){
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
         if(rsvpStatus=='1'){
-            $("#option6").attr('checked',true);
+            $("#option6").prop('checked',true);
         }else{
-            $("#option5").attr('checked',false);
+            $("#option5").prop('checked',false);
 
         }
     })
