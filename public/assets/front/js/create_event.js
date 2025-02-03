@@ -6327,7 +6327,11 @@ $(document).on("click", "#final_create_event", function (e) {
                 toastr.success("Event Created Successfully");
                 // window.location.href="profile";
             }
+            
             $("#eventModal").modal("show");
+            $('#eventModal').on('hide.bs.modal', function (event) {
+                event.preventDefault(); // Prevents modal from closing
+            });
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
