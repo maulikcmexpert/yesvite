@@ -32,14 +32,14 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: base_url + "event/store_temp_design",
+            url: base_url + "event/store_custom_design",
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
                 if (response.image) {
-                    image = base_url + "storage/event_images/" + response.image;
+                    image = base_url + "storage/canvas/" + response.image;
                     eventData.cutome_image = response.image;
                     eventData.image = response.image;
                     temp_id = null;
@@ -2643,6 +2643,9 @@ function getTextDataFromCanvas() {
     return dbJson;
 }
 $(".edit-design-sidebar").on("click", function () {
+    if (temp_id == null || temp_id == "") {
+        image = base_url + "storage/event_images/" + "1738599807-design.png";
+    }
     if (imageId != null && imageId != "") {
         loadAgain();
     } else if (image != "") {

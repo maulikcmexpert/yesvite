@@ -85,6 +85,7 @@ class EventController extends BaseController
         Session::forget('thankyou_card_data');
         $image = Session::get('desgin');
         $slider_image = Session::get('desgin_slider');
+        $custom_image = Session::get('custom_image');
         $shape = Session::get('shape_image');
 
         $useremail = Auth::user()->email;
@@ -100,6 +101,12 @@ class EventController extends BaseController
                 unlink($imagePath);
             }
         }
+        if (isset($custom_image) && $custom_image != "" || $image != NULL) {
+            if (file_exists(public_path('storage/canvas/') . $custom_image)) {
+                $imagePath = public_path('storage/canvas/') . $custom_image;
+                unlink($imagePath);
+            }
+        }
         if (isset($slider_image) && !empty($slider_image)) {
             foreach ($slider_image as $key => $value) {
                 if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
@@ -110,6 +117,7 @@ class EventController extends BaseController
         }
         Session::forget('desgin');
         Session::forget('desgin_slider');
+        Session::forget('custom_image');
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
@@ -1370,7 +1378,7 @@ class EventController extends BaseController
 
     public function removeUserId(Request $request)
     {
-      
+
         $is_contact = $request->input('is_contact');
         if ($is_contact == '1') {
             $userIds = session()->get('contact_ids');
@@ -1803,7 +1811,7 @@ class EventController extends BaseController
             // if (isset($categories[$categoryIndexKey]['item']) && !empty($categories[$categoryIndexKey]['item'])) {
             // foreach ($categories[$categoryIndexKey]['item'] as $key => $value) {
             if (isset($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'])) {
-                
+
                 foreach ($categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'] as $userkey => $userVal) {
 
                     if ($id == $userVal['user_id']) {
@@ -1827,7 +1835,7 @@ class EventController extends BaseController
                     $categories[$categoryIndexKey]['item'][$categoryItemKey]['item_carry_users'][] = [
                         'user_id' => $id,
                         'quantity' => $quantity
-                    ];                    
+                    ];
                     session()->put('category', $categories);
                     Session::save();
                 }
@@ -1967,6 +1975,37 @@ class EventController extends BaseController
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
             $path = $file->move(public_path('storage/event_images'), $fileName);
+            session(['desgin' => $fileName]);
+        }
+        if ($fileName != '') {
+            return response()->json(['status' => 'Image saved successfully', 'image' => $fileName, 'shape_image' => $newImageName]);
+        } else {
+            return response()->json(['status' => 'No image uploaded'], 400);
+        }
+    }
+    public function saveCustomDesign(Request $request)
+    {
+
+        $eventID = $request->eventId;
+        if (isset($eventID) && $eventID != "") {
+            EventImage::where('event_id', $eventID)->where('type', 0)->delete();
+        }
+        $newImageName = '';
+        $fileName = '';
+        $i = 0;
+
+        if ($request->hasFile('image')) {
+            if (session()->has('desgin')) {
+                $oldDesignImage = session('desgin');
+                $oldDesignImagePath = public_path('storage/canvas') . $oldDesignImage;
+                if (file_exists($oldDesignImagePath)) {
+                    unlink($oldDesignImagePath);
+                }
+                session()->forget('desgin');
+            }
+            $file = $request->file('image');
+            $fileName = time() . '-' . $file->getClientOriginalName();
+            $path = $file->move(public_path('storage/canvas'), $fileName);
             session(['desgin' => $fileName]);
         }
         if ($fileName != '') {
@@ -2295,21 +2334,21 @@ class EventController extends BaseController
         if (!empty($unselectusers)) {
             foreach ($unselectusers as $value) {
                 $id = $value['id'];
-        
+
                 // Use array_filter to remove the user based on the ID
                 $userIds = array_filter($userIds, function ($value) use ($id) {
                     return $value['id'] !== $id;  // Keep all users except the one with the given ID
                 });
             }
-        
+
             // Reindex the array after filtering
             $userIds = array_values($userIds);
-        
+
             // Update the session
             session()->put('user_ids', $userIds);
         }
-        
-       
+
+
         // dD($users);
         // dd($userIds,$users);
         if (!empty($users)) {
@@ -3064,10 +3103,10 @@ class EventController extends BaseController
             // if ($carbonDate && $carbonDate->format('Y-m-d') === $request->rsvp_by_date) {
             //     $rsvp_by_date = $request->rsvp_by_date;
             // } else {
-            if($rsvpdateObj){
+            if ($rsvpdateObj) {
                 $rsvp_by_date = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date)->format('Y-m-d');
-            }else{
-                $rsvp_by_date = $request->rsvp_by_date;     
+            } else {
+                $rsvp_by_date = $request->rsvp_by_date;
             }
             // }
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
@@ -3574,7 +3613,7 @@ class EventController extends BaseController
                     sendNotification('update_address', $notificationParam);
                 }
 
-                if (isset($request->IsPotluck) && $request->IsPotluck==1) {
+                if (isset($request->IsPotluck) && $request->IsPotluck == 1) {
 
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
@@ -3628,7 +3667,7 @@ class EventController extends BaseController
                     sendNotification('update_date', $notificationParam);
                 }
 
-                if (isset($istime) && $istime == 0 && isset($isupdatedate) && $isupdatedate == 0 && $isaddress == 0 && isset($request->IsPotluck) && $request->IsPotluck==0) {
+                if (isset($istime) && $istime == 0 && isset($isupdatedate) && $isupdatedate == 0 && $isaddress == 0 && isset($request->IsPotluck) && $request->IsPotluck == 0) {
 
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
@@ -3736,12 +3775,12 @@ class EventController extends BaseController
         $designImg = '';
         // dd($getEventImages)
         if (!empty($getEventImages)) {
-            $i=1;
+            $i = 1;
             foreach ($getEventImages as $key => $imgVal) {
                 if ($key == 0) {
                     $designImg =   $imgVal->image;
                     continue;
-                }else{
+                } else {
                     $fileName =   $imgVal->image;
                     $savedFiles[] = [
                         'fileName' => $fileName,
