@@ -2998,7 +2998,7 @@ class EventController extends BaseController
         // dd(session('user_ids'),session('contact_ids'));
         $conatctId = session('contact_ids');
         $potluck = session('category');
-        dd($potluck);
+        // dd($potluck);
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
         // $potluck = session('category');
