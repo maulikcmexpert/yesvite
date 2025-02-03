@@ -8890,7 +8890,7 @@ function update_self_bring(
             var parts = newdata.split("/");
             var remain = parseInt(parts[0], 10);
             var extra = 0;
-            let innerUserQnt = $(`.innerUserQnt-${categoryItemKey}-${categoryIndexKey}`).val();
+            let innerUserQnt = $(`.innerUserQnt-${categoryItemKey}-${categoryIndexKey}`).val() || 0;
             var misstingquantity = categoryItemQuantity - innerUserQnt;
             if (type == undefined) {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
