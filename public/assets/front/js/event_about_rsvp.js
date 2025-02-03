@@ -77,18 +77,19 @@ $(document).ready(function() {
     });
 
     // Submit form validation
-    $('form').submit(function (e) {
-        $('#error-message').text('');
+    // $('form').submit(function (e) {
+    //     $('#error-message').text('');
 
-        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
-        // var adults = parseInt($('input[name="adults"]').val()) || 0;
-        // var kids = parseInt($('input[name="kids"]').val()) || 0;
+    //     var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+    //     // var adults = parseInt($('input[name="adults"]').val()) || 0;
+    //     // var kids = parseInt($('input[name="kids"]').val()) || 0;
 
-        if (rsvpStatus == "1" && adults <= 0 && kids <= 0) {
-            $('#error-message').text('Please select at least one Adult or Kid.').css('color', 'red');
-            e.preventDefault();
-        }
-    });
+    //     if (rsvpStatus == "1" && adults <= 0 && kids <= 0) {
+
+    //         $('#error-message').text('Please select at least one Adult or Kid.').css('color', 'red');
+    //         e.preventDefault();
+    //     }
+    // });
 
    // Function to validate form and enable/disable submit button
    function validateForm() {
@@ -205,10 +206,11 @@ console.log(adults,kids);
     $(".attending-btn").on('click',function(){
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
         if(rsvpStatus=='1'){
-            $("#option6").prop('checked',true);
+            $("#option6").prop('checked',false);
 
         }else{
-            $("#option5").prop('checked',false);
+            $("#option5").prop('checked',true);
+            $('button[type="submit"]').prop('disabled', true);
 
         }
     })

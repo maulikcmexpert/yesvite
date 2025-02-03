@@ -2676,7 +2676,8 @@ if ($rsvpSent != null) {
     public function store_add_new_guest(Request $request){
         $user_id = $request->user_id;
         $check_status = $request->status;
-        $prefer_by=$request->isSelected;
+        $prefer_by=$request->prefer_by;
+        // dd($request);
         $userData = session('add_guest_user_data', []);
 
         if ($check_status == 1) {
