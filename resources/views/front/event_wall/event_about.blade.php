@@ -3,7 +3,7 @@
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
-        {{ dd($eventDetails) }}
+        {{-- {{ dd($eventDetails) }} --}}
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
@@ -511,14 +511,14 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!=''&& $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null )
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null  && $eventDetails['logitude']!=0 )
                                                 @php
                                                    $latitude = !empty($eventDetails['latitude'])
     ? $eventDetails['latitude']
     : '39.8283'; // Default latitude for the USA
 
 $longitude = !empty($eventDetails['longitude'])
-    ? $eventDetails['longitude']
+    ? $eventDetails['logitude']
     : '-98.5795'; // Default longitude for the USA
 
                                                 @endphp
