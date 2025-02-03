@@ -1145,7 +1145,7 @@ function rsvp_by_date(start_time) {
             singleDatePicker: true,
             autoUpdateInput: false,
             //   showDropdowns: true,
-            minYear: 1901,
+            minYear: 2024,
             maxDate: adjustedStartTime,
             minDate: moment(),
             minDate: moment().add(0, "days"),
@@ -1164,10 +1164,10 @@ function rsvp_by_date(start_time) {
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-        if (picker.startDate.isValid()) {
-            $(this).val(picker.startDate.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
-        }
+        // if (picker.startDate.isValid()) {
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
     });
 }
 
@@ -1203,11 +1203,11 @@ $(function () {
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-        if (picker.startDate.isValid()) {
-            // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-            $(this).val(picker.startDate.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
-        }
+        // if (picker.startDate.isValid()) {
+        //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
     });
 });
 
@@ -2276,7 +2276,7 @@ function setPotluckActivekey(key, name) {
 }
 
 $(document).on("click", ".add_category_btn", function () {
-    IsPotluck=1;
+    IsPotluck = 1;
     var categoryName = $("#categoryName").val();
     var categoryQuantity = $("#category_quantity").val();
     var edit_category_id = $("#hidden_potluck_key").val();
@@ -2393,7 +2393,7 @@ $(document).on("click", ".add_potluck_item", function () {
 });
 
 $(document).on("click", ".add_category_item_btn", function () {
-    IsPotluck=1;
+    IsPotluck = 1;
     var category_index = $("#category_index").val();
     var category_name = $("#hidden_category_name").val();
     var totalmissing = $("#missing-category-" + activePotluck).text();
@@ -2406,7 +2406,7 @@ $(document).on("click", ".add_category_item_btn", function () {
             .text("Please enter description.");
         return;
     }
-    
+
     var itemQuantity = $("#item_quantity").val();
     if (itemQuantity == "" || itemQuantity < 1) {
         $("#item_quantity_error")
@@ -3512,7 +3512,7 @@ $(document).on("click", "#save_activity_schedule", function () {
     console.log({ activityendtime });
 
     if (activityendtime != null) {
-    let lastendtime = convertTo24Hour(end_time);
+        let lastendtime = convertTo24Hour(end_time);
         let lastScheduleEndtime = convertTo24Hour(activityendtime);
 
         console.log(lastendtime);
@@ -5500,7 +5500,6 @@ function update_self_bring_bck(
 }
 
 $(document).on("click", ".delete-self-bring", function () {
-
     var categoryItemKey = $(this).data("categoryitem");
     var categoryIndexKey = $(this).data("categoryindex");
     var itemquantity = $(this).data("itemquantity");
@@ -6328,9 +6327,9 @@ $(document).on("click", "#final_create_event", function (e) {
                 toastr.success("Event Created Successfully");
                 // window.location.href="profile";
             }
-            
+
             $("#eventModal").modal("show");
-            $('#eventModal').on('hide.bs.modal', function (event) {
+            $("#eventModal").on("hide.bs.modal", function (event) {
                 event.preventDefault(); // Prevents modal from closing
             });
         },
@@ -8883,7 +8882,6 @@ function update_self_bring(
     categoryItemQuantity,
     type
 ) {
-
     $.ajax({
         url: base_url + "event/update_self_bring",
         method: "POST",
@@ -8895,14 +8893,17 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            IsPotluck=1;
+            IsPotluck = 1;
             var newdata = $(
                 "#h6-" + categoryItemKey + "-" + categoryIndexKey
             ).text();
             var parts = newdata.split("/");
             var remain = parseInt(parts[0], 10);
             var extra = 0;
-            let innerUserQnt = $(`.innerUserQnt-${categoryItemKey}-${categoryIndexKey}`).val() || 0;
+            let innerUserQnt =
+                $(
+                    `.innerUserQnt-${categoryItemKey}-${categoryIndexKey}`
+                ).val() || 0;
             var misstingquantity = categoryItemQuantity - innerUserQnt;
             if (type == undefined) {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
@@ -8910,7 +8911,10 @@ function update_self_bring(
                 );
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
-                    parseInt(innerUserQnt) + parseInt(quantity) + "/" + categoryItemQuantity
+                    parseInt(innerUserQnt) +
+                        parseInt(quantity) +
+                        "/" +
+                        categoryItemQuantity
                 );
             }
 
@@ -9081,6 +9085,6 @@ function getcoins() {
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
-if(category!=0){
+if (category != 0) {
     potluck_cateogry_item_count();
 }
