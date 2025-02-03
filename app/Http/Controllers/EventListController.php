@@ -2678,7 +2678,7 @@ if ($rsvpSent != null) {
         $check_status = $request->status;
         $prefer_by=$request->prefer_by;
         // dd($request);
-        $userData = session('add_guest_user_data', []);
+        $userData = session('add_guest_user_id', []);
 
         if ($check_status == 1) {
 
@@ -2699,12 +2699,10 @@ if ($rsvpSent != null) {
             }
             // dd($userData);
         } else {
-
-            dd($userData,0);
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
         }
     
-        session(['add_guest_user_data' => $userData]);
+        session(['add_guest_user_id' => $userData]);
     
         return session()->get('add_guest_user_id');
     }

@@ -193,7 +193,7 @@ console.log(adults,kids);
     });
 
     $(".noattending-btn").on('click',function(){
-        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+          var rsvpStatus = $('#statusRsvp').val();
         if(rsvpStatus=='1'){
             $("#option6").prop('checked',true);
             $("#rsvp_status_adults").val(0);
@@ -204,13 +204,13 @@ console.log(adults,kids);
         }
     })
     $(".attending-btn").on('click',function(){
-        var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+        var rsvpStatus = $('#statusRsvp').val();
         if(rsvpStatus=='1'){
             $("#option6").prop('checked',false);
-
+            $('button[type="submit"]').prop('disabled', false);
         }else{
             $("#option5").prop('checked',true);
-            $('button[type="submit"]').prop('disabled', false);
+
 
         }
     })

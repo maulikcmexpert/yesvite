@@ -2089,6 +2089,7 @@
                                     </h4>
                                     <span>Hosted by: <span>{{ $eventDetails['hosted_by'] }}</span></span>
                                 </div>
+                                <input type="hidden" id="statusRsvp" value="{{  $rsvpSent['rsvp_status'] }}">
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>

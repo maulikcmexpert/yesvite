@@ -907,7 +907,6 @@ class EventGuestController extends Controller
         $new_added_user=session()->get('add_guest_user_id');
         $users_data = [];
 
-        dd($new_added_user);
         if(!empty($new_added_user)){
         foreach ($new_added_user as $user) {
             // Try fetching the user from the User table
@@ -920,6 +919,7 @@ class EventGuestController extends Controller
                     'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
                     'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                     'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
+                    'phone_number'=>((!empty($user->phone_number) && $user->phone_number != NULL) ? $user->phone_number : ""),
                     'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
                                 ? asset('storage/profile/' . $user->profile) 
                                 : "",
@@ -937,6 +937,7 @@ class EventGuestController extends Controller
                         'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
                                     ? asset('storage/profile/' . $contact_sync->photo) 
                                     : "",
+                        'phone_number'=>((!empty($user->phone) && $user->phone != NULL) ? $user->phone : ""),
                         'prefer_by'=>$user['prefer_by']
            
                     ];
