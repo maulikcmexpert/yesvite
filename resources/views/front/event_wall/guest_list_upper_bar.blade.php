@@ -1,15 +1,21 @@
 
 @if(!empty($yesvite_all_invite))
 @php
-        $listing=$yesvite_all_invite['invited_user_id'] ;
-   
-    
-    @endphp
+        $listing=array_merge($yesvite_all_invite['invited_user_id'],$yesvite_users_data);
+$counter = 0;
+
+@endphp
 @foreach($listing as $guest_user)
+@php
+$counter++;
+if($counter > 4){
+break;
+}
+@endphp
     <div class="guest-users" data-id="{{$guest_user['id']}}">
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
-                                    <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                    <img src="{{ $guest_user['profile'] }}" alt="user-img">
                             @else
                                     @php
                                         $firstInitial = !empty($guest_user['first_name'])
@@ -45,4 +51,15 @@
 @endforeach
 @endif
 
-
+@if($counter > 4)
+@php
+$counter = count($user_list) - 4;
+@endphp
+<a href="#" class="guest-user d-block yesvite add_guest_seeall">
+                    <div class="guest-user-img guest-total">
+                        <span class="number" id="total-selected-email" data-count="1">+{{$counter}}</span>
+                        <span class="content">Total</span>
+                 </div>
+                 <h6>Sell all</h6>
+                </a>
+@endif
