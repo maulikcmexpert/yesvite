@@ -857,6 +857,20 @@ $(document).ready(function () {
         }// App user = 0 for phone (non-app user)
     });
 
+
+    $(document).on('click','.remove_new_added_user',function(){
+
+        var user_id=$(this).attr('data-id');
+        const event_id = $('#event_id').val();
+
+        $('.add_yesvite_guest_'+user_id).remove();
+        $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
+        $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
+    
+        storeAddNewGuest(user_id,0,'',event_id,'yesvite');
+
+       
+    });
     // Declare guestList outside so it's globally accessible
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });

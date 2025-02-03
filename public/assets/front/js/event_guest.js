@@ -368,12 +368,3 @@ $(document).on('click','.add_guest_phone_seeall',function(){
     });
 });
 
-$(document).on('click','.remove_new_added_user',function(){
-
-    var user_id=$(this).attr('data-id');
-    $('.add_yesvite_guest_'+user_id).remove();
-    $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-
-
-});
