@@ -1807,6 +1807,7 @@ function createShortUrl($longUrl)
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+
 function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $event_invited_user_id)
 {
     try {
