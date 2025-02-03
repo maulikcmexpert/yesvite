@@ -1,7 +1,7 @@
 let eventData = {};
 let isCohost = $("#isCohost").val();
 var total_activities = 0;
-var category = 0;
+var category = $("#category_count").val() || 0;
 var items = 0;
 var eventId = $("#eventID").val();
 var activities = {};
@@ -9069,3 +9069,4 @@ function getcoins() {
     $(".invite-left_d").text("Invites | " + AllCoins + " Left");
 }
 getcoins();
+potluck_cateogry_item_count();
