@@ -1,5 +1,5 @@
 @if(!empty($yesvite_all_invite))
-@foreach ($yesvite_all_invite['invited_guests']as $guest_user);
+@foreach ($yesvite_all_invite['invited_guests']as $guest_user)
     <div class="guest-users" data-id="{{$guest_user['id']}}">
                             <div class="guest-user-img">
                             @if ($guest_user['profile'] != '')
@@ -41,7 +41,7 @@
 
 
 @if(!empty($yesvite_phone_data))
-@foreach ($yesvite_phone_data as $guest_user);
+@foreach ($yesvite_phone_data as $guest_user)
     <div class="guest-users" data-id="{{$guest_user['user_id']}}">
                             <div class="guest-user-img">
                                 <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
