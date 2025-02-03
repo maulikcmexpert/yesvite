@@ -801,7 +801,7 @@ $(document).ready(function () {
                  console.log(response);
                 if(response.view!=""){
                     $('.selected-contacts-list').remove('.guest-users');
-                    $('.selected-contacts-list').append(response.view);
+                    $('.selected-contacts-list').html(response.view);
                 }
                 },
                 error: function (error) {
