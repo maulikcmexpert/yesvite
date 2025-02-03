@@ -828,6 +828,8 @@ $(document).ready(function () {
             const last_name = $(this).data("last");
             const email = $(this).data("email");
             const profile = "";
+            const event_id = $('#event_id').val();
+
         // Add to the guest list if either email or phone is selected
 
         console.log(
@@ -844,12 +846,12 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            storeAddNewGuest(id,1,isSelected,'phone');
+            storeAddNewGuest(id,1,isSelected,event_id,'phone');
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
-            storeAddNewGuest(id,0,isSelected,'phone');
+            storeAddNewGuest(id,0,isSelected,event_id,'phone');
 
             console.log(guestList);
         }// App user = 0 for phone (non-app user)
