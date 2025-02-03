@@ -1226,6 +1226,4 @@ $(".modal").on("shown.bs.modal", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
 });
 
-$(".noattending-btn").on('click',function(){
-    alert();
-})
+

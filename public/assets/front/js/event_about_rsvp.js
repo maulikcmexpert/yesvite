@@ -191,6 +191,10 @@ console.log(adults,kids);
         window.open(googleCalendarUrl);
     });
 
-
-
+    $(".noattending-btn").on('click',function(){
+        alert();
+    })
+    $(".attending-btn").on('click',function(){
+        alert();
+    })
 });
