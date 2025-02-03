@@ -1388,7 +1388,7 @@ class EventController extends BaseController
         } else {
             $userIds = session()->get('user_ids');
             $userId = $request->input('user_id');
-            dD($userIds,$userId);
+            // dD($userIds,$userId);
             foreach ($userIds as $key => $value) {
                 if ($value['id'] == $userId) {
                     unset($userIds[$key]);
