@@ -2674,7 +2674,6 @@ if ($rsvpSent != null) {
 
 
     public function store_add_new_guest(Request $request){
-        dd($request);
         $user_id = $request->user_id;
         $check_status = $request->status;
         if ($check_status == 1) {
@@ -2688,7 +2687,7 @@ if ($rsvpSent != null) {
             $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
             session(['add_guest_user_id' => $userIds]);
         }
-        // return session()->get('add_guest_user_id');
+        return session()->get('add_guest_user_id');
     }
 }
 

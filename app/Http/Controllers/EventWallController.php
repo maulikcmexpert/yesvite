@@ -1919,6 +1919,7 @@ class EventWallController extends Controller
     {
         Session::forget('contactwall_ids');
         Session::forget('userwall_ids');
+        Session::forget('add_guest_user_id');
         // Authenticated user ID
         $userId = Auth::guard('web')->user()->id;
 
