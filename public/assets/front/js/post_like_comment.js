@@ -933,7 +933,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
     }
 
 
-    function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,profile) {
+function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
         if (!exists) {
@@ -958,51 +958,51 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         // }
         var upper_phone_view=$('.selected-phone-list .guest-user-phone').length;
 
-        // if(upper_phone_view<4){
-        //     const $modalBody = $('.selected-phone-list');
-        //     const contactHtml = `
-        //         <div class="guest-user-phone guest_yesvite add_phone_guest_${id}" data-id="${id}">
-        //             <div class="guest-user-img">
-        //                ${profileImage}
-        //                 <a href="#" class="close remove_new_added_user" data-id="${id}">
-        //                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //                         <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
-        //                         <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
-        //                         <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-        //                         <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-        //                     </svg>
-        //                 </a>
-        //             </div>
-        //             <h6>${first_name} ${last_name}</h6>
-        //         </div>
+        if(upper_phone_view<4){
+            const $modalBody = $('.selected-phone-list');
+            const contactHtml = `
+                <div class="guest-user-phone guest_yesvite add_phone_guest_${id}" data-id="${id}">
+                    <div class="guest-user-img">
+                       ${profileImage}
+                        <a href="#" class="close remove_new_added_user" data-id="${id}">
+                            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
+                                <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
+                                <path d="M6.86719 6.66699L11.5335 11.3333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.8649 11.3333L11.5312 6.66699" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h6>${first_name} ${last_name}</h6>
+                </div>
     
-        //     `;
-        //     $modalBody.append(contactHtml);      
-        // }else{
-        //     const $modalBody = $('.selected-phone-list');
-        //     var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
-        //     if(upper_see_phone==0){
-        //         const totalHtml = `
-        //         <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
-        //             <div class="guest-user-img guest-total">
-        //                 <span class="number" id="total-selected-phone" data-count="1">+1</span>
-        //                 <span class="content">Total</span>
-        //          </div>
-        //          <h6>Sell all</h6>
-        //         </a>`; 
+            `;
+            $modalBody.append(contactHtml);      
+        }else{
+            const $modalBody = $('.selected-phone-list');
+            var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
+            if(upper_see_phone==0){
+                const totalHtml = `
+                <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
+                    <div class="guest-user-img guest-total">
+                        <span class="number" id="total-selected-phone" data-count="1">+1</span>
+                        <span class="content">Total</span>
+                 </div>
+                 <h6>Sell all</h6>
+                </a>`; 
 
              
-        //           $modalBody.append(totalHtml);
-        //     }
-        //     if(upper_see_phone>0){
-        //        var initial= parseInt($('#total-selected-phone').attr('data-count'));
-        //        var new_value= initial+1 ;
-        //        alert(initial);
-        //        $('#total-selected-phone').attr('data-count',new_value);
-        //        $('#total-selected-phone').text('+'+new_value);
-        //     }
+                  $modalBody.append(totalHtml);
+            }
+            if(upper_see_phone>0){
+               var initial= parseInt($('#total-selected-phone').attr('data-count'));
+               var new_value= initial+1 ;
+               alert(initial);
+               $('#total-selected-phone').attr('data-count',new_value);
+               $('#total-selected-phone').text('+'+new_value);
+            }
       
-        //      }
+             }
       
     }
 
