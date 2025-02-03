@@ -900,6 +900,7 @@ class EventGuestController extends Controller
 
     }
     public function store_add_new_guest(Request $request){
+        dd($request);
         $user_id = $request->user_id;
         $check_status = $request->status;
         if ($check_status == 1) {
@@ -913,7 +914,7 @@ class EventGuestController extends Controller
             $userIds = array_values(array_filter($userIds, fn($id) => $id != $user_id));
             session(['add_guest_user_id' => $userIds]);
         }
-        return session()->get('add_guest_user_id');
+        // return session()->get('add_guest_user_id');
     }
     public function see_all_invite_yesvite(Request $request){
     
