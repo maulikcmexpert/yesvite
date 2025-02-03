@@ -891,7 +891,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             $modalBody.append(contactHtml);      
         }else{
             $('.selected-contacts-list .add_guest_seeall').length;
-            alert();
+            alert( $('.selected-contacts-list .add_guest_seeall').length);
         }
       
 
