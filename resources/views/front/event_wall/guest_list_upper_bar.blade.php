@@ -40,7 +40,7 @@
 @endif
 
 
-@if(!empty($yesvite_users_data))
+@if($yesvite_users_data!="")
 @foreach($yesvite_users_data as $guest_user)
     <div class="guest-users" data-id="{{$guest_user['user_id']}}">
                             <div class="guest-user-img">
