@@ -315,7 +315,7 @@
                                                                     @endphp
                                                                     @if($guest['is_sync']=="1")
                                                                     <button
-                                                                        class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
+                                                                        class="edit-btn {{ $isDisabled }}"
                                                                       
                                                                         data-is_sync="{{ $guest['is_sync'] }}"
                                                                         data-guest-id="{{ $guest['guest_id'] }}">
