@@ -947,7 +947,10 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
 function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
+        var is_duplicate_phone=0;
+
         if (!exists) {
+            is_duplicate_phone=0;
             guestList.push({
                 id: id,
                 prefer_by: preferBy,
@@ -960,6 +963,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             });
         } else {
             console.log("Contact already in guest list:", { id });
+            is_duplicate_phone=1;
         }
         var  profileImage="";
         // if(profile!=""){
@@ -1006,11 +1010,14 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                   $modalBody.append(totalHtml);
             }
             if(upper_see_phone>0){
-               var initial= parseInt($('#total-selected-phone').attr('data-count'));
-               var new_value= initial+1 ;
-            //    alert(initial);
-               $('#total-selected-phone').attr('data-count',new_value);
-               $('#total-selected-phone').text('+'+new_value);
+                if(is_duplicate_phone==0){
+                    var initial= parseInt($('#total-selected-phone').attr('data-count'));
+                    var new_value= initial+1 ;
+                 //    alert(initial);
+                    $('#total-selected-phone').attr('data-count',new_value);
+                    $('#total-selected-phone').text('+'+new_value);
+                }
+       
             }
 
              }
