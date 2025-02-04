@@ -8316,7 +8316,8 @@ function searchRecords(lim, off, type, search = null) {
     });
 }
 $(document).on("click", ".photo-edit-delete-1", function () {
-    $(".slider_photo").style("display-block");
+    $(".slider_photo").css("display", "block");
+
     $(".slider_photo").trigger("click");
 });
 
