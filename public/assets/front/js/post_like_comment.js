@@ -208,7 +208,6 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         const parentCommentId = parentWrapper.find("#parent_comment_id").val();
-
         console.log("Parent Comment ID:", parentCommentId);
 
         if (commentText === "") {
@@ -379,37 +378,47 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
-        // Find the closest `.commented-user-wrp` to get the comment being replied to
-        const commentWrapper = $(this).closest(".commented-user-wrp");
-        const parentId = commentWrapper.data("comment-id"); // Get the comment ID
-
-        // Find the username of the comment being replied to
-        const parentName = commentWrapper.find("h3").text().trim();
-
-        // Debugging logs (remove after testing)
-        console.log("Parent Comment ID:", parentId);
-        console.log("Parent Name:", parentName);
-
-        // Find the main comment box container
-        const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp").siblings(".posts-card-main-comment");
+        // Find the closest '.posts-card-main-comment' wrapper (the main post container)
+        const parentWrapper = $(this)
+            .closest(".posts-card-show-all-comments-wrp")
+            .prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
-            console.error("Parent comment box not found!");
+            console.error("Parent wrapper not found!");
             return;
         }
 
-        // Set `parent_comment_id` dynamically in the hidden input inside the correct `.posts-card-main-comment`
-        parentWrapper.find("#parent_comment_id").val(parentId);
+        // Find the username and comment ID from the current comment being replied to
+        const parentName = $(this)
+            .closest(".commented-user-wrp")
+            .find("h3")
+            .text()
+            .trim();
+        const parentId = $(this)
+            .closest(".commented-user-wrp")
+            .data("comment-id");
 
-        // Insert the '@username' in the input field and focus on it
+        // Debugging information
+        console.log("Parent Wrapper:", parentWrapper);
+        console.log("Parent Name:", parentName);
+        console.log("Parent ID:", parentId);
+
+        // Set the active class on the currently selected comment
+        $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
+        $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
+
+        // Find the comment box inside the parent wrapper and insert the username
         const commentBox = parentWrapper.find(".post_comment");
+        if (!commentBox.length) {
+            console.error("Comment input field not found!");
+            return;
+        }
+        const commentIndex = parentWrapper.index() + 1; // Get unique index
+        $("#parent_comment_id_" + commentIndex).val(parentId);
+        // $("#parent_comment_id").val(parentId);
+        // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
-
-        // Highlight the active comment for better UI
-        $(".commented-user-wrp").removeClass("active"); // Remove active class from all comments
-        commentWrapper.addClass("active"); // Add active class to the selected comment
     });
-
 
     // Handle reply button click (when replying to a comment)
 });
@@ -1080,3 +1089,29 @@ $(document).on("keyup", ".search_contact", function () {
     }
 });
 
+$(document).on('click','.see-all-guest-right-btn',function(){
+    $.ajax({
+        url: base_url + "event_wall/fetch_all_invited_user", // Your Laravel route
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            event_id: $("#event_id").val(), // Event ID from a hidden input
+            guest_list: guestList,
+        },
+        success: function (response) {
+            if (response.status === 1) {
+                window.location.reload();
+                toastr.success('Invited successfully');
+                // alert(response.message); // Show success message
+                guestList = []; // Clear guest list after successful submission
+            } else {
+                alert(response.message); // Show error message
+            }
+        },
+        error: function (xhr) {
+            alert("Something went wrong. Please try again."); // Handle AJAX errors
+        },
+    });
+});
