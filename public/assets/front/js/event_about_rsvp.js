@@ -194,7 +194,7 @@ console.log(adults,kids);
 
     $(".noattending-btn").on('click',function(){
           var rsvpStatus = $('#statusRsvp').val();
-        if(rsvpStatus=='1'){
+        if(rsvpStatus=='0'){
             $("#option6").prop('checked',true);
             $("#option5").prop('checked',false);
             $('.btn-plus, .btn-minus').prop('disabled', true);
