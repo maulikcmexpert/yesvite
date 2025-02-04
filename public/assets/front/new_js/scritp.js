@@ -399,6 +399,7 @@ $("#create-photo-btn").click(function () {
     $("#imagePreview").empty();
     $("#postContent").val('');
     $(".create-post-upload-img-inner").removeClass("d-none");
+    $('.create_post_btn').prop('disabled', false);
     $("#photoForm").reset();
 });
 
