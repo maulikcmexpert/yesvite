@@ -21,6 +21,7 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var IsPotluck = 0;
+eventData.IsPotluck = 0;
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
 
 var selected_prefer_by =
@@ -8314,7 +8315,10 @@ function searchRecords(lim, off, type, search = null) {
         },
     });
 }
-
+$(document).on("click", ".photo-edit-delete-1", function () {
+    $(".slider_photo").show();
+    $(".slider_photo").trigger("click");
+});
 $(document).on("change", ".slider_photo", function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
@@ -8441,6 +8445,11 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
+                    if (delete_id == 1) {
+                        $(".slider_photo").show();
+                    } else {
+                        $(".slider_photo_" + delete_id).show();
+                    }
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
@@ -8604,7 +8613,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-
+                let i = 0;
                 photoSliders.forEach((sliderClass, index) => {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
@@ -8613,9 +8622,13 @@ $(document).on("click", ".design-sidebar-action", function () {
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         sliderElement.style.display = "block";
-                        console.log({ i });
-                        $(".photo-edit-delete-" + i).show();
 
+                        $(".photo-edit-delete-" + i).show();
+                        if (i == 1) {
+                            $(".slider_photo").hide();
+                        } else {
+                            $(".slider_photo_" + i).hide();
+                        }
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
