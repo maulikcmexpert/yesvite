@@ -328,7 +328,7 @@ class EventAboutController extends Controller
             //     }
             // }
         ///postlist
-        dd( $eventDetails);
+        // dd( $eventDetails);
 
         //    {{ dd($eventDetails);}}
 
