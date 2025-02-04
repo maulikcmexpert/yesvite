@@ -2484,7 +2484,7 @@ foreach ($polls as $poll) {
 
     public function fetch_all_invited_user(Request $request){
 
-        $user  = Auth::guard('api')->user();
+        $user  = Auth::guard('web')->user();
 
         $eventId=$request->event_id;
         $fetch_event_data=Event::where('id',$eventId)->first();
