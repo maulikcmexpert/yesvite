@@ -117,10 +117,12 @@ class EventWallController extends Controller
         }
 
 
-    $polls = EventPostPoll::with('event_poll_option')
-    ->withCount('user_poll_data')
-    ->where('event_id', $event)
-    ->get();
+        $polls = EventPostPoll::with('event_poll_option')
+        ->withCount('user_poll_data')
+        ->where('event_id', $event)
+        ->orderBy('id', 'desc')  // Sorting by created_at in descending order
+        ->get();
+
 
 $pollsData = [];
 
@@ -2121,7 +2123,8 @@ foreach ($polls as $poll) {
                         ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
                 });
             })
-            ->orderBy('firstName', 'asc') // Order results by first name
+            ->orderBy('firstName', 'asc')
+            ->whereNull('userId') // Order results by first name
             ->get();
         $invitedUsers = [];
         if (!empty($eventId)) {
@@ -2170,7 +2173,7 @@ foreach ($polls as $poll) {
             $invitedContactUsers = EventInvitedUser::with('user')
                 ->where('event_id', $eventId)
                 ->where('is_co_host', '0')
-                // ->whereNull('user_id')
+                ->whereNull('user_id')
                 ->get();
             if ($invitedContactUsers) {
                 foreach ($invitedContactUsers as $user) {
@@ -2494,7 +2497,7 @@ foreach ($polls as $poll) {
         }
         $all_invited_user=getInvitedUsersList($eventId);
 
-    
+
         return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user','eventId','is_host'))->render(),'status'=>1]);
 
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);

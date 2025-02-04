@@ -515,8 +515,9 @@ $('.download_img').on('click', function () {
 
 });
 $(document).on('click', '.download_img_single', function () {
-    // Find the image associated with this button
-    const imgSrc = $(this).closest('.downloadImg').data('img-src');
+    // Find the image source stored in the data attribute
+    const imgSrc = $('.downloadImg').data('img-src');
+console.log(imgSrc);
 
     if (imgSrc) {
         // Create an invisible anchor tag to trigger the download
