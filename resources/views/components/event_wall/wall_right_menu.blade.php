@@ -93,6 +93,7 @@ if ($hostView) {
             </form>
         </div>
         <div class="guests-listing-wrp guest-user-list">
+            <input type="hidden" id="eventId" value="{{$event}}" />
             <ul  id="guestList">
                 @if (!empty($guestArray))
                 @foreach ($guestArray as $index => $guest)

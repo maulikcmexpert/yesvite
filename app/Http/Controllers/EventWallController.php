@@ -53,7 +53,7 @@ class EventWallController extends Controller
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
-        $js = ['event_wall', 'post_like_comment', 'guest_rsvp'];
+        $js = ['event_wall', 'post_like_comment', 'guest_rsvp','guest'];
 
         $event = decrypt($id);
         $encrypt_event_id = $id;
@@ -2484,7 +2484,7 @@ foreach ($polls as $poll) {
 
     public function fetch_all_invited_user(Request $request){
 
-        $user  = Auth::guard('api')->user();
+        $user  = Auth::guard('web')->user();
 
         $eventId=$request->event_id;
         $fetch_event_data=Event::where('id',$eventId)->first();

@@ -427,7 +427,7 @@
                                                             @foreach ($post['post_comment'] as $key => $comment)
                                                                 <li class="commented-user-wrp"
                                                                     data-comment-id="{{ $comment['id'] }}">
-                                                                    <input type="hidden" id="parent_comment_id"
+                                                                    <input type="hidden" class="parent_comment_id"
                                                                         value="">
 
                                                                     <div class="commented-user-head">
@@ -1050,7 +1050,7 @@
                                                         </button>
                                                         <button
                                                             class="posts-card-comm show-comments-btn show-btn-comment"
-                                                            event_p_id="{{ $poll['id'] }}">
+                                                            event_p_id="{{ $poll['event_post_id'] }}">
                                                             <svg viewBox="0 0 24 24" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <path

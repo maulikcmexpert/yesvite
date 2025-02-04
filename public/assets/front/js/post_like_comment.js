@@ -207,7 +207,7 @@ $(document).ready(function () {
         parentWrapper.find(".posts-card-comm").show();
 
         const commentText = commentInput.val().trim();
-        const parentCommentId = $("#parent_comment_id").val();
+        const parentCommentId = $(".parent_comment_id").val();
         console.log("Parent Comment ID:", parentCommentId);
 
         if (commentText === "") {
@@ -317,12 +317,7 @@ $(document).ready(function () {
                     }
                 }
 
-                    const commentCountElement = $(`#comment_${eventPostId}`);
-                    const currentCount =
-                        parseInt(commentCountElement.text()) || 0;
-                    commentCountElement.text(`${currentCount + 1} Comments`);
-                    // Clear input field
-                    commentInput.val("");
+
 
                     // Handle replies if any are provided in the response
                     if (
@@ -366,6 +361,15 @@ $(document).ready(function () {
                             replyList.append(replyHTML);
                         });
                     }
+
+
+                    const commentCountElement = $(`#comment_${eventPostId}`);
+                const currentCount = parseInt(commentCountElement.text()) || 0;
+                commentCountElement.text(`${currentCount + 1} Comments`);
+
+                // Clear input field
+                commentInput.val("");
+                $(".parent_comment_id").val(""); // Reset parent comment ID
                 }
                 // commentInput.val("");
                 // $("#parent_comment_id").val(""); // Reset parent comment ID
@@ -378,47 +382,41 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
-        // Find the closest '.posts-card-main-comment' wrapper (the main post container)
-        const parentWrapper = $(this)
-            .closest(".posts-card-show-all-comments-wrp")
-            .prev(".posts-card-main-comment");
+        // Find the closest comment element
+        const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp").prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
             console.error("Parent wrapper not found!");
             return;
         }
 
-        // Find the username and comment ID from the current comment being replied to
-        const parentName = $(this)
-            .closest(".commented-user-wrp")
-            .find("h3")
-            .text()
-            .trim();
-        const parentId = $(this)
-            .closest(".commented-user-wrp")
-            .data("comment-id");
+        // Get the username and comment ID from the current comment being replied to
+        const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
+        const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
 
-        // Debugging information
-        console.log("Parent Wrapper:", parentWrapper);
-        console.log("Parent Name:", parentName);
-        console.log("Parent ID:", parentId);
+        if (!parentId) {
+            console.error("Parent Comment ID is missing!");
+            return;
+        }
+
+        // Set the parent comment ID value in the hidden field for later use in the AJAX request
+        $(".parent_comment_id").val(parentId); // Store parent comment ID in a hidden field
 
         // Set the active class on the currently selected comment
         $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
         $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
 
-        // Find the comment box inside the parent wrapper and insert the username
+        // Focus the comment box and insert the '@username'
         const commentBox = parentWrapper.find(".post_comment");
         if (!commentBox.length) {
             console.error("Comment input field not found!");
             return;
         }
-        const commentIndex = parentWrapper.index() + 1; // Get unique index
-        $("#parent_comment_id_" + commentIndex).val(parentId);
-        // $("#parent_comment_id").val(parentId);
+
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
+
 
     // Handle reply button click (when replying to a comment)
 });
@@ -480,7 +478,9 @@ $(document).ready(function () {
         guestList=[];
         $('.guest_yesvite').remove();
         $('.phone_yesvite').remove();
-
+        $('.phoneContact-checkbox').prop('checked',false);
+        $('.contact-checkbox').prop('checked',false);
+        $('.phone-checkbox').prop('checked',false);
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         if (allContactsSuccess) {
