@@ -338,8 +338,9 @@ $(document).on('click', '.comment-send-icon', function () {
                     let replyList = parentComment.find('ul.primary-comment-replies');
                     if (replyList.length === 0) {
                         replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
+                        // replyList.append(newCommentHTML);
                     }
-                    replyList.append(newCommentHTML);
+
                 } else {
                     // Append new comment
                     $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
