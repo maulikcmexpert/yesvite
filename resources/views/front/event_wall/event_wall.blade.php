@@ -92,7 +92,7 @@
                                                             <span
                                                                 class="host">Host</span>
                                                         @endif
-                                                        @if ($eventDetails['is_co_host'] == '1')
+                                                        @if ($post['is_co_host'] == '1')
                                                         <span
                                                             class="host">Co Host</span>
                                                     @endif
