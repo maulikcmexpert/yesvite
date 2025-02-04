@@ -448,20 +448,17 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 $(document).on("keyup", ".search-phone", function () {
-    var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
+    var searchQuery = $(this).val().toLowerCase(); 
 
-    // If search is empty, show all contacts
     if (searchQuery === "") {
-        $(".phone-contact").show(); // Show all contacts
+        $(".phone-contact").show();
     } else {
-        // Iterate through each invite-contact
         $(".phone-contact").each(function () {
             var contactName = $(this)
                 .find(".phone-search")
                 .data("search")
-                .toLowerCase(); // Get the data-search attribute
+                .toLowerCase(); 
 
-            // If the search query matches part of the contact name, show the contact
             if (contactName.indexOf(searchQuery) !== -1) {
                 $(this).show(); // Show this contact
             } else {
@@ -821,9 +818,7 @@ $(document).ready(function () {
     $(document).on("change", ".phoneContact-checkbox", function () {
         const id = $(this).data("id");
         // const isSelected =$(this).data('prefer');
-        const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
-
-
+            const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
             const first_name = $(this).data("name");
             const last_name = $(this).data("last");
             const email = $(this).data("email");
@@ -858,33 +853,7 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click','.remove_new_added_user',function(){
-
-        var user_id=$(this).attr('data-id');
-        const event_id = $('#event_id').val();
-
-        $('.add_yesvite_guest_'+user_id).remove();
-        $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
-        $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    
-        storeAddNewGuest(user_id,0,'',event_id,'yesvite');
-
-       
-    });
-
-    $(document).on('click','.remove_new_phone_added_user',function(){
-
-        var user_id=$(this).attr('data-id');
-        const event_id = $('#event_id').val();
-
-        $('.add_phone_guest_'+user_id).remove();
-        $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
-        // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    
-        storeAddNewGuest(user_id,0,'',event_id,'phone');
-
-       
-    });
+   
     // Declare guestList outside so it's globally accessible
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
@@ -1037,7 +1006,35 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
     }
 
 });
+$(document).on('click','.remove_new_added_user',function(){
 
+    var user_id=$(this).attr('data-id');
+    const event_id = $('#event_id').val();
+
+    $('.add_yesvite_guest_'+user_id).remove();
+    $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
+    $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
+    guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
+
+    storeAddNewGuest(user_id,0,'',event_id,'yesvite');
+
+   
+});
+
+$(document).on('click','.remove_new_phone_added_user',function(){
+
+    var user_id=$(this).attr('data-id');
+    const event_id = $('#event_id').val();
+
+    $('.add_phone_guest_'+user_id).remove();
+    $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
+    // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
+    guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
+
+    storeAddNewGuest(user_id,0,'',event_id,'phone');
+
+   
+});
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
         console.log("Guest list before submit:", guestList);

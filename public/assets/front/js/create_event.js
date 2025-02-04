@@ -2070,16 +2070,17 @@ function delete_invited_user(userId, is_contact = "0") {
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
-            var remainingCount = max_guest - total_guest;
+            guest_counter(0, max_guest);
+            // var remainingCount = max_guest - total_guest;
 
-            if (remainingCount < 0) {
-                $(".invite-left_d").text("Invites | 0 Left");
-            } else {
-                $(".invite-left_d").text(
-                    "Invites | " + remainingCount + " Left"
-                );
-            }
-            $("#event_guest_left_count").val(remainingCount);
+            // if (remainingCount < 0) {
+            //     $(".invite-left_d").text("Invites | 0 Left");
+            // } else {
+            //     $(".invite-left_d").text(
+            //         "Invites | " + remainingCount + " Left"
+            //     );
+            // }
+            // $("#event_guest_left_count").val(remainingCount);
             console.log("User ID deleted successfully.");
 
             $("#loader").css("display", "none");
@@ -2202,15 +2203,15 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
                 var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
-
-                if (remainingCount < 0) {
-                    $(".invite-left_d").text("Invites | 0 Left");
-                } else {
-                    $(".invite-left_d").text(
-                        "Invites | " + remainingCount + " Left"
-                    );
-                }
-                $("#event_guest_left_count").val(remainingCount);
+                guest_counter(0, max_guest);
+                // if (remainingCount < 0) {
+                //     $(".invite-left_d").text("Invites | 0 Left");
+                // } else {
+                //     $(".invite-left_d").text(
+                //         "Invites | " + remainingCount + " Left"
+                //     );
+                // }
+                // $("#event_guest_left_count").val(remainingCount);
                 $("#loader").css("display", "none");
 
                 console.log("User ID deleted successfully.");
@@ -6475,7 +6476,7 @@ function save_image_design(downloadImage, textData) {
         design_inner_image = $("#shape_img").attr("src");
     }
     var old_shape_url = $("#first_shape_img").attr("src");
-    eventData.cutome_image = image;
+
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
@@ -6871,7 +6872,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user_id_tel-" + id).remove();
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
-            $(".user_id-" + id).remove()
+            $(".user_id-" + id).remove();
         }
     });
 
