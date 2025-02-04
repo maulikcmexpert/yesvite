@@ -634,7 +634,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
 });
 
 async function bindData(current_event_id) {
-    await preloadAllFonts();
     let iw = document.getElementById("imageWrapper");
     function loadTextDataFromDatabase() {
         if (image) {
