@@ -204,36 +204,37 @@ $(document).on('click', '.remove_guest_page', function () {
     const guestId = $(this).data('guest-update-id');
     const eventId = $(this).data('event-id');
     const userId = $(this).data('user-id');
-    console.log({guestId,eventId,userId});
+    // console.log({guestId,eventId,userId});
 
     // Make the AJAX request to remove the guest from the invite
-    // $.ajax({
-    //     url: base_url + "event_guest/removeGuestFromInvite", // Endpoint to remove guest
-    //     method: 'POST',
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-    //     },
-    //     data: { event_id: eventId, user_id: userId }, // Pass guestId to the server
-    //     success: function (response) {
-    //         console.log("Remove successful: ", response);
+    $.ajax({
+        url: base_url + "event_guest/removeGuestFromInvite", // Endpoint to remove guest
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+        },
+        data: { event_id: eventId, user_id: userId }, // Pass guestId to the server
+        success: function (response) {
+            console.log("Remove successful: ", response);
 
-    //         if (response.success) {
-    //             // // Find the guest container by guestId and remove it from the DOM
-    //             $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
+            if (response.success) {
+                // // Find the guest container by guestId and remove it from the DOM
+                $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
 
+                toastr.success('Guest Removed Successfully');
 
-
-    //             // Hide the modal if it's open
-    //             $('#editrsvp').modal('hide');
-    //         } else {
-    //             alert('Failed to remove guest. Please try again.');
-    //         }
-    //     },
-    //     error: function (error) {
-    //         console.error('Error removing guest:', error);
-    //         alert('An error occurred while removing the guest.');
-    //     }
-    // });
+                // Hide the modal if it's open
+                $('#editrsvp').modal('hide');
+                window.location.reload();
+            } else {
+                alert('Failed to remove guest. Please try again.');
+            }
+        },
+        error: function (error) {
+            console.error('Error removing guest:', error);
+            alert('An error occurred while removing the guest.');
+        }
+    });
 });
 
 $(document).ready(function () {
