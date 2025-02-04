@@ -1,6 +1,6 @@
 @php
     use Carbon\Carbon;
-    dd($eventDetails);
+    // dd($eventDetails);
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
