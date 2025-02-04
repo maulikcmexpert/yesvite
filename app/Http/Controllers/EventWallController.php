@@ -120,6 +120,10 @@ class EventWallController extends Controller
         $polls = EventPostPoll::with('event_poll_option')
         ->withCount('user_poll_data')
         ->where('event_id', $event)
+        // ->whereDoesntHave('post_control', function ($query) use ($user) {
+        //     $query->where('user_id', $user->id)
+        //         ->where('post_control', 'hide_post');
+        // })
         ->orderBy('id', 'desc')  // Sorting by created_at in descending order
         ->get();
 

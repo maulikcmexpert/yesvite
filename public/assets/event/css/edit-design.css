@@ -894,6 +894,10 @@
     justify-content: center !important;
 }
 
+.new-edit-save-btn a{
+    width: max-content !important;
+}
+
 .daterangepicker td.active, .daterangepicker td.active:hover{
     background-color: var(--primaryColor) !important;
 }

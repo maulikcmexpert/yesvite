@@ -782,7 +782,7 @@
                                     </div> --}}
                                     {{-- {{dd($pollsData)}} --}}
                                     @foreach ($pollsData as $poll)
-                                        <div class="event-posts-main-wrp common-div-wrp hidden_post"
+                                        <div class="event-posts-main-wrp common-div-wrp hidden_post_poll"
                                             data-post-id="{{ $poll['event_post_id'] }}">
                                             <div class="posts-card-wrp">
                                                 <div class="posts-card-head">
