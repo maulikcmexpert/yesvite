@@ -197,6 +197,7 @@ console.log(adults,kids);
         if(rsvpStatus=='1'){
             $("#option6").prop('checked',true);
             $("#option5").prop('checked',false);
+            $('.btn-plus, .btn-minus').prop('disabled', true);
             $("#rsvp_status_adults").val(0);
             $("#rsvp_status_kids").val(0);
         }
