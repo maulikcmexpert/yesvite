@@ -589,7 +589,7 @@ foreach ($polls as $poll) {
                                 $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                                 $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
 
-                                $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
+                                $commentChildReply['comment_total_likes'] = ($childReplyVal->post_comment_reaction_count!="")?$childReplyVal->post_comment_reaction_count:"0";
 
                                 $commentChildReply['is_like'] = checkUserIsLike($childReplyVal->id, $user->id);
 
@@ -620,7 +620,8 @@ foreach ($polls as $poll) {
                                         $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                         $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
 
-                                        $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
+                                        // $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
+                                        $commentChildInReply['comment_total_likes'] = ($childInReplyVal->post_comment_reaction_count!="")?$childInReplyVal->post_comment_reaction_count:"0";
 
                                         $commentChildInReply['is_like'] = checkUserIsLike($childInReplyVal->id, $user->id);
 
