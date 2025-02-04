@@ -1,5 +1,5 @@
 let eventData = {};
-let isCohost = $("#isCohost").val();
+let isCohost = $("#isCohost").val() || "";
 var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
