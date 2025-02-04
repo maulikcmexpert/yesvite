@@ -837,7 +837,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h5><span class="positive-ans"><i class="fa-solid fa-circle-check"></i>Yes</span> 10m
+                                <h5 id="post_time_details"> 10m
                                 </h5>
                             </div>
                         </div>

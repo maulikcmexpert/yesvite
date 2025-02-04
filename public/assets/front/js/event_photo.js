@@ -638,6 +638,7 @@ $(document).on('click', '.open_photo_model', function () {
 
                 // Post Message
                 $('#post_message').text(data.post_message);
+                $('#post_time_details').text(data.post_time);
 
 
                 $('#likes').text(data.total_likes + ' Likes');
