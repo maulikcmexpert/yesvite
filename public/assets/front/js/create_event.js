@@ -9228,3 +9228,6 @@ $(document).on(
         }
     }
 );
+if(isDraftEvent =="0" && eventId!=""){
+    loadAgain();
+}
