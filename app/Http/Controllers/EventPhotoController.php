@@ -846,31 +846,78 @@ class EventPhotoController extends Controller
         // ->limit(1)
         // ->first();
         // dd($letestComment);
-        $postPhotoDetailcomment=[];
+        $postPhotoDetailcomment = [];
+
         foreach ($letestComment as $values) {
-            // Setting up the latest comment data
             $postCommentList = [
                 'id' => $values->id,
                 'event_post_id' => $values->event_post_id,
                 'comment' => $values->comment_text,
-                'media' => (!empty($values->media)) ? asset('storage/comment_media/' . $values->media) : "",
+                'media' => !empty($values->media) ? asset('storage/comment_media/' . $values->media) : "",
                 'user_id' => $values->user_id,
                 'username' => $values->user->firstname . ' ' . $values->user->lastname,
-                'profile' => (!empty($values->user->profile)) ? asset('storage/profile/' . $values->user->profile) : "",
+                'profile' => !empty($values->user->profile) ? asset('storage/profile/' . $values->user->profile) : "",
                 'comment_total_likes' => $values->post_comment_reaction_count,
-                'location' => $values->user->city . ($values->user->state ? ', ' . $values->user->state : ''),
-                'is_like' => 0, // Adjust based on the user's like status
+                'location' => trim($values->user->city . ($values->user->state ? ', ' . $values->user->state : '')),
+                'is_like' => checkUserIsLike($values->id, $user->id),
                 'created_at' => $values->created_at,
                 'total_replies' => $values->replies_count,
                 'posttime' => setpostTime($values->created_at),
                 'comment_replies' => []
             ];
 
+            // Fetch and organize replies
+            foreach ($values->replies as $reply) {
+                $replyCommentInfo = [
+                    'id' => $reply->id,
+                    'event_post_id' => $reply->event_post_id,
+                    'main_comment_id' => $reply->main_parent_comment_id,
+                    'comment' => $reply->comment_text,
+                    'user_id' => $reply->user_id,
+                    'username' => trim($reply->user->firstname . ' ' . $reply->user->lastname) ?: null,
+                    'profile' => !empty($reply->user->profile) ? asset('storage/profile/' . $reply->user->profile) : "",
+                    'location' => trim(($reply->user->city ?? '') . (($reply->user->state ?? '') ? ', ' . $reply->user->state : '')),
+                    'comment_total_likes' => $reply->post_comment_reaction_count ?? 0,
+                    'is_like' => checkUserIsLike($reply->id, $user->id),
+                    'total_replies' => $reply->replies_count,
+                    'posttime' => setpostTime($reply->created_at),
+                    'created_at' => $reply->created_at,
+                    'comment_replies' => []
+                ];
+
+                // Fetch child replies
+                $childReplies = EventPostComment::with(['user'])
+                    ->withCount(['post_comment_reaction', 'replies'])
+                    ->where(['main_parent_comment_id' => $reply->main_parent_comment_id, 'parent_comment_id' => $reply->id])
+                    ->orderBy('id', 'DESC')
+                    ->get();
+
+                foreach ($childReplies as $childReplyVal) {
+                    $commentChildReply = [
+                        'id' => $childReplyVal->id,
+                        'event_post_id' => $childReplyVal->event_post_id,
+                        'main_comment_id' => $childReplyVal->main_parent_comment_id,
+                        'comment' => $childReplyVal->comment_text,
+                        'user_id' => $childReplyVal->user_id,
+                        'username' => trim($childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname),
+                        'profile' => !empty($childReplyVal->user->profile) ? asset('storage/profile/' . $childReplyVal->user->profile) : "",
+                        'location' => trim(($childReplyVal->user->city ?? '') . (($childReplyVal->user->state ?? '') ? ', ' . $childReplyVal->user->state : '')),
+                        'comment_total_likes' => $childReplyVal->post_comment_reaction_count ?? 0,
+                        'is_like' => checkUserIsLike($childReplyVal->id, $user->id),
+                        'total_replies' => EventPostComment::where("parent_comment_id", $childReplyVal->id)->count(),
+                        'posttime' => setpostTime($childReplyVal->created_at),
+                        'created_at' => $childReplyVal->created_at
+                    ];
+
+                    $replyCommentInfo['comment_replies'][] = $commentChildReply;
+                }
+
+                $postCommentList['comment_replies'][] = $replyCommentInfo;
+            }
+
             $postPhotoDetailcomment[] = $postCommentList;
         }
-        $postPhotoDetail['latest_comment'] = $postPhotoDetailcomment;
-            $postPhotoList[] = $postPhotoDetail;
-        }
+    }
 
         return response()->json([
             'status' => 'success',
