@@ -506,10 +506,15 @@ foreach ($polls as $poll) {
                     // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
                     // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
                     // $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
-                    $city = trim($commentVal->user->city ?? '');
-                    $state = trim($commentVal->user->state ?? '');
+                    $commentInfo['location'] = null; // Default value
 
-                    $commentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                    if (!empty($commentVal->user)) {
+                        $city = trim($commentVal->user->city ?? '');
+                        $state = trim($commentVal->user->state ?? '');
+
+                        $commentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                    }
+
 
                     $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
