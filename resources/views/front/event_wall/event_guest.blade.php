@@ -448,7 +448,7 @@
                                                                                     fill-opacity="0.2" />
                                                                             </svg>
                                                                             <h5 id="adults{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
-                                                                                {{ $guest['adults'] }}Adults
+                                                                                {{ $guest['adults'] }} Adults
                                                                             </h5>
                                                                             <h5 id="kids{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                                 {{ $guest['kids'] }} Kids</h5>
