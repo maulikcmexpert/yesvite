@@ -1301,8 +1301,7 @@ $(function () {
 $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
-    var inputValue = $('#event-date').val();
-    var startDate = inputValue ? inputValue : moment().format('YYYY-MM-DD');
+    
     var oldDate = $(ed).attr("data-isDate");
     $("#event-date").daterangepicker(
         {
@@ -1311,8 +1310,7 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            // startDate: moment().startOf("month"),
-            startDate: startDate,
+            startDate: moment().startOf("month"),
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -9261,19 +9259,25 @@ if (category != 0) {
 
 $(document).on(
     "blur change click",
-    "#event-name ,#event-date, #start-time",
+    "#event-name, #event-date, #start-time",
     function () {
         var event_name = $("#event-name").val();
         var event_date = $("#event-date").val();
         var start_time = $("#start-time").val();
 
+        // Check if all fields are not empty
         if (event_name !== "" && event_date !== "" && start_time !== "") {
-            $(".guestBtn").attr("style", "color: black !important;");
+            // When all fields are filled
+            $(".guestBtn").css("color", "black");  // Set text color to black
+            $('.guestBtn').find('svg').addClass('active-svg');  // Add a class to SVG for active state
         } else {
-            $(".guestBtn").attr("style", "color: #b5b8bf !important;");
+            // When any field is empty
+            $(".guestBtn").css("color", "#b5b8bf");  // Set text color to a light gray
+            $('.guestBtn').find('svg').removeClass('active-svg');  // Remove the class from SVG
         }
     }
 );
+
 if (isDraftEvent == "0" && eventId != "") {
     $(".li_design").addClass("menu-success");
     $(".li_event_detail").addClass("menu-success");
