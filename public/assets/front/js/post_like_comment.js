@@ -908,7 +908,12 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 </div>
 
             `;
-            $modalBody.find(".add_guest_seeall").first().before(contactHtml);
+            // $modalBody.find(".add_guest_seeall").first().before(contactHtml);
+            if ($modalBody.find(".add_guest_seeall").length) {
+                $modalBody.find(".add_guest_seeall").first().before(contactHtml);
+            } else {
+                $modalBody.append(contactHtml);
+            }
 
             // $modalBody.append(contactHtml);
         }else{
