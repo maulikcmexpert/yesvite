@@ -521,12 +521,23 @@ class EventPhotoController extends Controller
 
                     $commentInfo['user_id'] = $commentVal->user_id;
 
-                    $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
+                    $firstName = $commentVal->user->firstname ?? '';
+                    $lastName = $commentVal->user->lastname ?? '';
+
+                    // Concatenate only if at least one value exists
+                    $commentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
 
                     $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
                     // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
                     // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
-                    $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+                    $commentInfo['location'] = null; // Default value
+
+                    if (!empty($commentVal->user)) {
+                        $city = trim($commentVal->user->city ?? '');
+                        $state = trim($commentVal->user->state ?? '');
+
+                        $commentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                    }
 
                     $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
@@ -551,12 +562,24 @@ class EventPhotoController extends Controller
 
                         $replyCommentInfo['user_id'] = $reply->user_id;
 
-                        $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
+                        $firstName = $reply->user->firstname ?? '';
+                        $lastName = $reply->user->lastname ?? '';
+
+                        // Concatenate only if at least one value exists
+                        $replyCommentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
 
                         $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
                         // $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
-                        $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
+                       // $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
+                       $replyCommentInfo['location']  = null; // Default value
+
+                       if (!empty($reply->user)) {
+                           $city = trim($reply->user->city ?? '');
+                           $state = trim($reply->user->state ?? '');
+
+                           $replyCommentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                       }
 
                         $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
 
@@ -590,7 +613,7 @@ class EventPhotoController extends Controller
                                 $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                                 $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
 
-                                $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
+                                $commentChildReply['comment_total_likes'] = ($childReplyVal->post_comment_reaction_count!="")?$childReplyVal->post_comment_reaction_count:"0";
 
                                 $commentChildReply['is_like'] = checkUserIsLike($childReplyVal->id, $user->id);
 
@@ -621,7 +644,7 @@ class EventPhotoController extends Controller
                                         $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                         $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
 
-                                        $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
+                                        $commentChildInReply['comment_total_likes'] = ($childInReplyVal->post_comment_reaction_count!="")?$childInReplyVal->post_comment_reaction_count:"0";
 
                                         $commentChildInReply['is_like'] = checkUserIsLike($childInReplyVal->id, $user->id);
 
