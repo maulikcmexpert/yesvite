@@ -1,5 +1,5 @@
 
-{{-- {{dd($eventDetails);}} --}}
+{{dd($eventDetails);}}
 @php
     use Carbon\Carbon;
 
