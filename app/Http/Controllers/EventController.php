@@ -151,6 +151,10 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
+                    ->orWhereHas('user', function ($query) {
+                        $query->whereNull('app_user')
+                            ->orWhere('app_user','1');
+                    })
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
@@ -192,10 +196,15 @@ class EventController extends BaseController
 
                 $userIdsSession = session()->get('contact_ids', []);
                 $invitedContactUsers = EventInvitedUser::with('user')
-                    ->where('event_id', $request->id)
-                    ->where('is_co_host', '0')
-                    ->whereNull('user_id')
-                    ->get();
+                ->where('event_id', $request->id)
+                ->where('is_co_host', '0')
+                ->whereNull('user_id')
+                ->orWhereHas('user', function ($query) {
+                    $query->whereNull('app_user')
+                        ->orWhere('app_user','0');
+                })
+                ->get();
+            
                 if ($invitedContactUsers) {
                     foreach ($invitedContactUsers as $user) {
                         $userVal = contact_sync::select(
@@ -229,7 +238,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
-            dd(session('contact_ids'));
+            dd(session('contact_ids'),session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
                 if ($request->iscopy != null) {
