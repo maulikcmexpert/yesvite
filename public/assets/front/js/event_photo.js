@@ -256,8 +256,8 @@ $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
     const commentId = $('.commented-user-wrp').data('comment-id');
-    // const replyParentId = $('.reply-on-comment').data('comment-id');
-    // alert(replyParentId);
+    const replyParentId = $('.reply-on-comment').data('comment-id');
+    alert(commentId);
     if (commentText === '') {
         alert('Please enter a comment');
         return;
@@ -385,7 +385,7 @@ $(document).on('click', '.comment-send-icon', function () {
                                     replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment); // Create <ul> if not exists// Create <ul> if not exists
                                 }
                                 // Append the new reply under the parent comment's <ul>
-                                replyList.append(newCommentHTML);
+                                replyList.append(replyHTML);
                             }
                         } else {
                             // If it's a top-level comment, append it to the top-level comment list
