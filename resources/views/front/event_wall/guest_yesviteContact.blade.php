@@ -5,7 +5,7 @@
             <span class="number" id="total-selected">0</span>
             <span class="content">Total</span>
          </div>
-         <h6>Sell all</h6>
+         <h6>See all</h6>
       </a> --}}
 
 
@@ -108,7 +108,7 @@
                         <span class="number" id="total-selected-email" data-count="{{$counter}}">+{{ $counter }}</span>
                         <span class="content">Total</span>
                     </div>
-                    <h6>Sell all</h6>
+                    <h6>See all</h6>
                 </a>
             @endif
         @endif
@@ -251,7 +251,7 @@
             <span class="number">10</span>
             <span class="content">Total</span>
          </div>
-         <h6>Sell all</h6>
+         <h6>See all</h6>
       </a> --}}
 
         @if ($selected_phone_user != null && count($selected_phone_user) > 0)
@@ -352,7 +352,7 @@
                         <span class="number" id="total-selected-phone" data-count="{{$counter}}">+{{ $counter }}</span>
                         <span class="content">Total</span>
                     </div>
-                    <h6>Sell all</h6>
+                    <h6>See all</h6>
                 </a>
             @endif
         @endif
