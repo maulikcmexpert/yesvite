@@ -151,11 +151,6 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
-                    ->orWhere(function($query) {
-                        $query->whereHas('user', function ($query) {
-                            $query->where('app_user', '1');
-                        });
-                    })
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
@@ -200,14 +195,7 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNull('user_id')
-                    ->orWhere(function($query) {
-                        $query->whereHas('user', function ($query) {
-                            $query->where('app_user', '0');
-                        });
-                    })
                     ->get();
-
-            
                 if ($invitedContactUsers) {
                     foreach ($invitedContactUsers as $user) {
                         $userVal = contact_sync::select(
@@ -241,7 +229,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
-            dd(session('contact_ids'),session('user_ids'));
+            // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
                 if ($request->iscopy != null) {
