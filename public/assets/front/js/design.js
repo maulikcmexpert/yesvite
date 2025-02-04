@@ -15,6 +15,7 @@ let redoStack = [];
 let event_id = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded fired");
     preloadAllFonts(); // Load all fonts on page load
 });
 
@@ -38,6 +39,7 @@ function preloadAllFonts() {
 }
 
 $(document).ready(function () {
+    console.log("document.ready fired");
     $("#custom_template").change(function () {
         var file = this.files[0];
         dbJson = null;
@@ -2242,17 +2244,16 @@ function bindData(current_event_id) {
     });
 
     // Function to apply the font (since fonts are already preloaded)
-    function applyFont(font, addToUndo = false) {
-        if (addToUndo) {
-            addToUndoStack(canvas);
-        }
+    function applyFont(font) {
+        addToUndoStack(canvas);
+
         var activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             activeObject.set({ fontFamily: font });
             activeObject.initDimensions();
             canvas.requestRenderAll();
         } else {
-            alert("No object selected");
+            console.log("No object selected");
         }
     }
 
