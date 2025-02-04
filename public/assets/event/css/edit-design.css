@@ -892,6 +892,9 @@
 
 .new-edit-save-btn{
     justify-content: center !important;
+}
+
+.new-edit-save-btn a{
     width: max-content !important;
 }
 
