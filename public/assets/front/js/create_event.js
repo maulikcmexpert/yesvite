@@ -144,7 +144,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
         return $(this).val();
     })
     .get();
-
+alert(giftRegestryDataRaw.length);
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
