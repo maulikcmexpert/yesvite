@@ -2123,7 +2123,8 @@ foreach ($polls as $poll) {
                         ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
                 });
             })
-            ->orderBy('firstName', 'asc') // Order results by first name
+            ->orderBy('firstName', 'asc')
+            ->whereNull('userId') // Order results by first name
             ->get();
         $invitedUsers = [];
         if (!empty($eventId)) {
