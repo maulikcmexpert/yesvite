@@ -2334,6 +2334,7 @@ class EventController extends BaseController
         $users = $request->users;
         $unselectusers = $request->unselectedValues;
         $userIds = session()->get('user_ids');
+        dd($userIds);
         if (!empty($unselectusers)) {
             foreach ($unselectusers as $value) {
                 $id = $value['id'];
