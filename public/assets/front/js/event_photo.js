@@ -622,11 +622,12 @@ $(document).on('click', '.open_photo_model', function () {
                     // Return initials inside an h5 tag with dynamic styling
                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
-                if (data.is_host == 1) {
+                const is_host = data.is_host;
+                if (is_host == 1) {
                     console.log(1);
 
                     // Add the "Host" label next to the user's name
-                    $('#host_display').text('Host');
+                    $('#host_display').text(Host);
                 }
 
                 $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
