@@ -542,8 +542,8 @@ foreach ($polls as $poll) {
                         $lastName = $reply->user->lastname ?? '';
 
                         // Concatenate only if at least one value exists
-                        $commentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
-                        $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
+                        $replyCommentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
+                        // $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
 
                         $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
