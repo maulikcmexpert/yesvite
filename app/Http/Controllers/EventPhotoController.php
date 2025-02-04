@@ -864,6 +864,7 @@ class EventPhotoController extends Controller
                 'total_replies' => $values->replies_count,
                 'posttime' => setpostTime($values->created_at),
                 'comment_replies' => []
+
             ];
 
             $postPhotoDetailcomment[] = $postCommentList;

@@ -151,10 +151,6 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
-                    ->orWhereHas('user', function ($query) {
-                        $query->whereNull('app_user')
-                            ->orWhere('app_user','1');
-                    })
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
@@ -196,15 +192,10 @@ class EventController extends BaseController
 
                 $userIdsSession = session()->get('contact_ids', []);
                 $invitedContactUsers = EventInvitedUser::with('user')
-                ->where('event_id', $request->id)
-                ->where('is_co_host', '0')
-                ->whereNull('user_id')
-                ->orWhereHas('user', function ($query) {
-                    $query->whereNull('app_user')
-                        ->orWhere('app_user','0');
-                })
-                ->get();
-            
+                    ->where('event_id', $request->id)
+                    ->where('is_co_host', '0')
+                    ->whereNull('user_id')
+                    ->get();
                 if ($invitedContactUsers) {
                     foreach ($invitedContactUsers as $user) {
                         $userVal = contact_sync::select(
@@ -238,7 +229,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
-            dd(session('contact_ids'),session('user_ids'));
+            // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
                 if ($request->iscopy != null) {
@@ -1577,7 +1568,8 @@ class EventController extends BaseController
         $categories = Session::get('category', []);
         // dD($categories);
         $category_quantity = $categories[$category_index]['category_quantity'];
-        $category_item = count($categories[$category_index]['item']);
+        // $category_item = count($categories[$category_index]['item']);
+        $last_index = count($categories[$category_index]['item']) - 1;
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$category_index]['item']) && !empty($categories[$category_index]['item'])) {
@@ -1603,7 +1595,7 @@ class EventController extends BaseController
 
         }
         $qty = 0;
-        if ($category_quantity == $category_item) {
+        if ($category_quantity == $last_index) {
             $qty = 1;
         } else {
             $qty = 0;
@@ -1618,7 +1610,7 @@ class EventController extends BaseController
             'self_bring' => $selfBring,
             'self_bring_qty' => $selfBringQuantity,
             'category_index' => $category_index,
-            'category_item' => --$category_item,
+            'category_item' => $last_index,
         ];
 
         // Dd($data)
