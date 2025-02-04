@@ -8662,6 +8662,7 @@ $(document).on("click", "#close_editEvent", function (e) {
 
 if (final_step == "2" && isCohost == "1") {
     $("#loader").css("display", "flex");
+    
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
