@@ -66,7 +66,7 @@ $(document).ready(function () {
                         `${response.count} Likes`
                     );
                 } else {
-                    alert(response.message);
+                    // alert(response.message);
                 }
             },
             error: function (xhr) {
@@ -124,7 +124,7 @@ $(document).ready(function () {
                     // Update the reaction display
                     replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
-                    alert(response.message);
+                    // alert(response.message);
                 }
             },
             error: function (xhr) {
@@ -903,7 +903,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
         }else{
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
-            alert(upper_see);
+            // alert(upper_see);
             if(upper_see==0){
                 const totalHtml = `
                 <a href="#" class="guest-user d-block yesvite add_guest_seeall">
@@ -918,7 +918,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             if(upper_see>0){
                var initial= parseInt($('#total-selected-email').attr('data-count'));
                var new_value= initial+1 ;
-               alert(initial);
+            //    alert(initial);
                $('#total-selected-email').attr('data-count',new_value);
                $('#total-selected-email').text('+'+new_value);
             }
@@ -996,7 +996,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             if(upper_see_phone>0){
                var initial= parseInt($('#total-selected-phone').attr('data-count'));
                var new_value= initial+1 ;
-               alert(initial);
+            //    alert(initial);
                $('#total-selected-phone').attr('data-count',new_value);
                $('#total-selected-phone').text('+'+new_value);
             }
@@ -1056,7 +1056,7 @@ $(document).on('click','.remove_new_phone_added_user',function(){
                     // alert(response.message); // Show success message
                     guestList = []; // Clear guest list after successful submission
                 } else {
-                    alert(response.message); // Show error message
+                    // alert(response.message); // Show error message
                 }
             },
             error: function (xhr) {
