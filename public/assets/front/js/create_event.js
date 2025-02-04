@@ -7489,6 +7489,7 @@ function get_co_host_list(
             app_user: app_user,
             cohostId: cohostId,
             isCohost: isCohost,
+            isCopy:isCopy,
             cohostpreferby: cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
