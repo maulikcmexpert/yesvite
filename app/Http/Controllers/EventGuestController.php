@@ -988,7 +988,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
             
         }
 
-                // dd($yesvite_phone_data);
+                dd($yesvite_users_data);
 
     }
         return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data','is_phone'))->render()]);
