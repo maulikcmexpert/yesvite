@@ -2148,7 +2148,7 @@ foreach ($polls as $poll) {
                         'parent_user_phone_contact',
                         'visible',
                         'message_privacy'
-                    )->where((['id'=> $user['user_id'],'app_user'=>'1']))->first();
+                    )->where('id', $user['user_id'])->first();
 
                     if ($userVal) {
                         $userEntry = [
