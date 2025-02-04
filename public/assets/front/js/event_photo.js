@@ -687,22 +687,26 @@ $(document).on('click', '.open_photo_model', function () {
                         console.log('Emoji Src:', emojiSrc);
 
                         // Define emojis with exact matching Unicode and image source
-                        const heartUnicode = '\u{2764}'; //
-                        const smileUnicode = '\u{1F60D}'; //
-                        const clapUnicode = '\u{1F44F}'; //
+                        const heartUnicode = '\\u{2764}'; //
+                        const smileUnicode = '\\u{1F60D}'; //
+                        const clapUnicode = '\\u{1F44F}'; //
 
 
                         $(this).removeClass('selected').show();
 
                         // Hide and select the correct emoji based on the reaction_store
                         if (reaction_store === heartUnicode && emojiSrc.includes('heart-emoji.png')) {
+                            console.log('Heart emoji selected');
                             $(this).addClass('selected');
-                        } else if (reaction_store === smileUnicode && emojiSrc.includes('eye-heart-emoji.png')) {
+                        } else if (reaction_store === smileUnicode && emojiSrc.includes('smily-emoji.png')) {
+                            console.log('Smile emoji selected');
                             $(this).addClass('selected');
                         } else if (reaction_store === clapUnicode && emojiSrc.includes('clap-icon.png')) {
+                            console.log('Clap emoji selected');
                             $(this).addClass('selected');
                         } else {
                             $(this).hide(); // Hide non-matching emojis
+                            console.log('No matching emoji found');
                         }
                     } else {
                         console.log('No img tag found in this li element.');
