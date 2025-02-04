@@ -70,42 +70,42 @@
               <div class="all-events-filter-wrp">
                   <form action="">
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input select_all_post" type="checkbox" value=""
                               id="flexCheckDefault1">
                           <label class="form-check-label" for="flexCheckDefault1">
                               All
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input wall_post" type="checkbox" value=""
                               id="flexCheckDefault2">
                           <label class="form-check-label" for="flexCheckDefault2">
                               Host Updates/Posts
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input wall_post" type="checkbox" value=""
                               id="flexCheckDefault3">
                           <label class="form-check-label" for="flexCheckDefault3">
                               Video Uploads
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input wall_post" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               Photo Uploads
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input wall_post" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               Polls
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input wall_post" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               Comments
