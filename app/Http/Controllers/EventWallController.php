@@ -2186,7 +2186,8 @@ foreach ($polls as $poll) {
                         'phone',
                         'email'
 
-                    )->where('id', $user['sync_id'])->first();
+                    )->where('id', $user['sync_id'])->whereNull('userId') // Order results by first name
+                    ->first();
                     if ($userVal) {
                         $userEntry = [
                             'sync_id' => $userVal->id,
