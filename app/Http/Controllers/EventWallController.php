@@ -2487,7 +2487,7 @@ foreach ($polls as $poll) {
         $user  = Auth::guard('api')->user();
 
         $eventId=$request->event_id;
-        $fetch_event_data=Event::where('id',$eventId);
+        $fetch_event_data=Event::where('id',$eventId)->first();
         $is_host=0;
         if($fetch_event_data->user_id==$user->id){
             $is_host=1;
