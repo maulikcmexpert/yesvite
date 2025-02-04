@@ -1446,6 +1446,7 @@ class EventController extends BaseController
     public function storeCategoryitemSession(Request $request)
     {
         $user = Auth::guard('web')->user();
+        $id = $user->id;
         $name = $user->firstname . ' ' . $user->lastname;
         $categoryName = $request->input('category_name');
         // $category_quantity = $request->input('category_quantity');
@@ -1570,10 +1571,11 @@ class EventController extends BaseController
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
                 if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
-
-                    foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
-                        $total_quantity = $total_quantity + $userVal['quantity'];
-                    }
+                    
+                    // foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
+                    //     $total_quantity = intva($total_quantity) + intval($userVal['quantity']);
+                    //     dd($categories[$category_index]['item'][$key]['item_carry_users']);
+                    // }
                     // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
                     //     $total_quantity = $total_quantity + $value['self_bring_qty'];
                     // }
