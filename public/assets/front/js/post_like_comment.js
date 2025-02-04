@@ -887,7 +887,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
                        ${profileImage}
-                        <a href="#" class="close remove_new_added_user" data-id="${id}">
+                        <a  class="close remove_new_added_user" data-id="${id}">
                             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
                                 <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
@@ -907,7 +907,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             // alert(upper_see);
             if(upper_see==0){
                 const totalHtml = `
-                <a href="#" class="guest-user d-block yesvite add_guest_seeall">
+                <a class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-email" data-count="1">+1</span>
                         <span class="content">Total</span>
@@ -964,7 +964,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                 <div class="guest-user-phone guest_yesvite add_phone_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
                        ${profileImage}
-                        <a href="#" class="close remove_new_phone_added_user" data-id="${id}">
+                        <a class="close remove_new_phone_added_user" data-id="${id}">
                             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1.20312" y="1" width="16" height="16" rx="8" fill="#F73C71" />
                                 <rect x="1.20312" y="1" width="16" height="16" rx="8" stroke="white" stroke-width="2" />
@@ -983,7 +983,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
             if(upper_see_phone==0){
                 const totalHtml = `
-                <a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
+                <a  class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-phone" data-count="1">+1</span>
                         <span class="content">Total</span>
