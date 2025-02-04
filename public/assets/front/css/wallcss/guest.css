@@ -1434,8 +1434,12 @@ foreignObject{
     width: 50%;
     max-width: 50%;
 }
-
-
+.failed_inivites_mob svg path{
+    stroke: #E03137 !important;
+}
+.failed_inivites_mob h6{
+    color: #E03137 !important;
+}
 /* ======= responsive ====== */
 @media only screen and (max-width:575px){
     .attendence-data h4{
