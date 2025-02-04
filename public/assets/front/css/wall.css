@@ -534,7 +534,21 @@
 
 }
 
+.posts-card-head-left-content{
+    position: relative;
+}
 
+.posts-card-head-left-content span{
+    background-color: #F0FFE8;
+    color: var(--green);
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 14px;
+    margin-bottom: 0;
+    padding: 6px 13px;
+    /* position: absolute;
+    top: 0;
+    right: 0; */
+}
 
 
 /* For mobile responsiveness, adjust button position */

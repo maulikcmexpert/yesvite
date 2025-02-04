@@ -87,15 +87,18 @@
                                                             <span class="active-dot"></span>
                                                         </div>
                                                         <div class="posts-card-head-left-content">
-                                                            <h3>{{ $post['username'] }}</h3>
-                                                            @if ($post['is_host'] == '1')
+                                                            <h3>{{ $post['username'] }}
+                                                                @if ($post['is_host'] == '1')
+
+                                                                <span
+                                                                    class="host">Host</span>
+                                                            @endif
+                                                            @if ($post['is_co_host'] == '1')
+
                                                             <span
-                                                                class="host">Host</span>
-                                                        @endif
-                                                        @if ($eventDetails['is_co_host'] == '1')
-                                                        <span
-                                                            class="host">Co Host</span>
-                                                    @endif
+                                                                class="host">Co Host</span>
+                                                        @endif</h3>
+
                                                             <p>{{ $post['location'] }}</p>
                                                         </div>
                                                     </div>
@@ -612,8 +615,10 @@
                                                                                                 <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                                                 @endif
                                                                                               </button>
-                                                                                              <p id="commentTotalLike_{{ $reply['id'] }}">{{ $reply['comment_total_likes'] }}
+                                                                                              <p id="commentTotalLike_{{ $reply['id'] }}">
+                                                                                                {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
                                                                                             </p>
+
                                                                                         </div>
                                                                                         <button
                                                                                             class="commented-user-reply-btn">Reply</button>
