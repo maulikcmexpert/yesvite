@@ -609,17 +609,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
 function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");
-    var imgWidth = 1035;
-    var imgHeight = 1470;
-
-    // Fixed canvas size
-    var canvasWidth = 345;
-    var canvasHeight = 490;
-
-    var scaleX = canvasWidth / imgWidth;
-    var scaleY = canvasHeight / imgHeight;
-    var scaleFactor = Math.min(scaleX, scaleY);
-    console.log({ scaleFactor });
     function loadTextDataFromDatabase() {
         if (image) {
             console.log(image);
