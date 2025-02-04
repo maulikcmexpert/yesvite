@@ -3139,6 +3139,7 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
+        dD($request);
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('custom_image');
