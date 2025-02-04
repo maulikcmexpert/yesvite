@@ -207,7 +207,7 @@ $(document).ready(function () {
         parentWrapper.find(".posts-card-comm").show();
 
         const commentText = commentInput.val().trim();
-        const parentCommentId = parentWrapper.find("#parent_comment_id").val();
+        const parentCommentId = $("#parent_comment_id").val();
         console.log("Parent Comment ID:", parentCommentId);
 
         if (commentText === "") {
