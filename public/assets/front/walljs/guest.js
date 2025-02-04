@@ -73,32 +73,32 @@ if (chartData) {
     chart.render();
 }
 
-$(document).on('click','.see-all-guest-right-btn',function(){
-    var event_id=$(this).attr('data-eventId');
-    $.ajax({
-        url: base_url + "event_wall/fetch_all_invited_user",
-        method: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            event_id:event_id, 
-        },
-        success: function (response) {
-            console.log(response.view);
+// $(document).on('click','.see-all-guest-right-btn',function(){
+//     var event_id=$('#eventID').val();
+//     $.ajax({
+//         url: base_url + "event_wall/fetch_all_invited_user",
+//         method: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         data: {
+//             event_id:event_id, 
+//         },
+//         success: function (response) {
+//             console.log(response.view);
             
-            if (response.status == 1) {
-                // $('#guestList').html('');
-                // $('#guestList').html(response.view);
-            } else {
+//             if (response.status == 1) {
+//                 $('#guestList').html('');
+//                 $('#guestList').html(response.view);
+//             } else {
              
-            }
-        },
-        error: function (xhr) {
-            alert("Something went wrong. Please try again."); // Handle AJAX errors
-        },
-    });
-});
+//             }
+//         },
+//         error: function (xhr) {
+//             alert("Something went wrong. Please try again."); // Handle AJAX errors
+//         },
+//     });
+// });
 
 //   $(document).ready(function () {
 //     $(".expand-icon").on("click", function () {

@@ -390,7 +390,7 @@ foreach ($polls as $poll) {
                 $postsNormalDetail['user_id'] =  $value->user->id;
                 // $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
-                $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+                $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $postsNormalDetail['is_host'] =  ($value->user->id == $eventCreator->user_id) ? 1 : 0;
                 $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
@@ -2487,6 +2487,7 @@ foreach ($polls as $poll) {
         $event_id=$request->event_id;
         $all_invited_user=getInvitedUsersList($event_id);
 
+    
         return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user'))->render(),'status'=>1]);
 
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);

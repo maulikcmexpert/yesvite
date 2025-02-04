@@ -1,6 +1,8 @@
 
+{{-- {{dd($eventDetails);}} --}}
 @php
     use Carbon\Carbon;
+
 @endphp
 @isset($eventDetails)
     <main class="new-main-content">
