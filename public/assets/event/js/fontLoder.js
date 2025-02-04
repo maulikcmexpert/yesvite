@@ -124,17 +124,17 @@ WebFontConfig = {
         // console.log("inactive");
     },
     fontloading: function (fontFamily, fontDescription) {
-        // console.log(
-        //     "fontloading: " + fontFamily + " (" + fontDescription + ")"
-        // );
+        console.log(
+            "fontloading: " + fontFamily + " (" + fontDescription + ")"
+        );
     },
     fontactive: function (fontFamily, fontDescription) {
         // console.log("fontactive: " + fontFamily + " (" + fontDescription + ")");
     },
     fontinactive: function (fontFamily, fontDescription) {
-        // console.log(
-        //     "fontinactive: " + fontFamily + " (" + fontDescription + ")"
-        // );
+        console.log(
+            "fontinactive: " + fontFamily + " (" + fontDescription + ")"
+        );
     },
 };
 WebFont.load(WebFontConfig);
