@@ -567,7 +567,7 @@ class EventController extends BaseController
     {
         $potluck = session('category');
         // dd($potluck);
-        dd($request);
+        // dd($request);
 
         Session::forget('desgin');
         Session::forget('custom_image');
