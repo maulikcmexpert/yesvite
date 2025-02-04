@@ -8315,16 +8315,16 @@ function searchRecords(lim, off, type, search = null) {
         },
     });
 }
-$(document).on("click", ".photo-edit-delete-1", function () {
-    $(".slider_photo").trigger("click");
-});
+// $(document).on("click", ".photo-edit-delete-1", function () {
+//     $(".slider_photo").trigger("click");
+// });
 
-$(document).on("click", ".photo-edit-delete-2", function () {
-    $(".slider_photo_2").trigger("click");
-});
-$(document).on("click", ".photo-edit-delete-2", function () {
-    $(".slider_photo_3").trigger("click");
-});
+// $(document).on("click", ".photo-edit-delete-2", function () {
+//     $(".slider_photo_2").trigger("click");
+// });
+// $(document).on("click", ".photo-edit-delete-2", function () {
+//     $(".slider_photo_3").trigger("click");
+// });
 $(document).on("change", ".slider_photo", function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {

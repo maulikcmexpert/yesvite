@@ -999,7 +999,13 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                 </div>
 
             `;
-            $modalBody.append(contactHtml);
+            // $modalBody.append(contactHtml);
+
+            if ($modalBody.find(".add_guest_phone_seeall").length) {
+                $modalBody.find(".add_guest_phone_seeall").first().before(contactHtml);
+            } else {
+                $modalBody.append(contactHtml);
+            }
 
         }else{
             const $modalBody = $('.selected-phone-list');
@@ -1015,7 +1021,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                 </a>`;
 
 
-                //   $modalBody.append(totalHtml);
+                  $modalBody.append(totalHtml);
 
             }
             if(upper_see_phone>0){
