@@ -415,13 +415,24 @@ $(document).on('click', '.posts-card-like-btn', function () {
 
 
 $(document).on('click', '.commented-user-reply-btn', function () {
+    // Alert for testing (optional)
+
+
+    // Find the parent comment's username
     const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
+    console.log(parentName);
+
+    // Find the parent comment's id (assuming it’s stored in a data attribute)
     const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
+    const replyParentId = $('.reply-on-comment').data('comment-id'); // Update this according to your HTML structure
+    console.log($(this).closest('.reply-on-comment'));
+    // Insert the parent's name as @ParentName into the input box
+    const commentBox = $('#post_comment'); // Replace with your input box ID or class
+    commentBox.val(`@${parentName} `).focus(); // Add @Name and set focus to the input box
 
-    const commentBox = $('#post_comment');
-    commentBox.val(`@${parentName} `).focus();
-
+    // Set the parent comment ID in a hidden input or store it in a variable
     $('#parent_comment_id').val(parentId);
+    $('#reply_comment_id').val(replyParentId);// Assuming you have a hidden input with id 'parent_comment_id'
 });
 
 // $(document).on('click', '.posts-card-like-btn', function () {
