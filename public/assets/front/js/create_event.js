@@ -8510,6 +8510,10 @@ function updateEventData() {
                     toastr.success("Event Created Successfully");
                     window.location.href = "profile";
                 }
+                $("#eventModal").modal("show");
+                $("#eventModal").on("hide.bs.modal", function (event) {
+                    event.preventDefault(); // Prevents modal from closing
+                });
                 window.location.href = base_url + "home";
             }
         },
