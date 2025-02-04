@@ -15,6 +15,7 @@ let redoStack = [];
 let event_id = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded fired");
     preloadAllFonts(); // Load all fonts on page load
 });
 
@@ -37,29 +38,8 @@ function preloadAllFonts() {
         });
 }
 
-// Click event remains the same but fonts are now preloaded
-document.querySelectorAll(".font-input").forEach(function (input) {
-    input.addEventListener("click", function () {
-        const font = this.getAttribute("data-font");
-        console.log("Selected font:", font);
-        applyFont(font); // Apply preloaded font instantly
-    });
-});
-
-// Function to apply the font (since fonts are already preloaded)
-function applyFont(font) {
-    addToUndoStack(canvas);
-    var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === "textbox") {
-        activeObject.set({ fontFamily: font });
-        activeObject.initDimensions();
-        canvas.requestRenderAll();
-    } else {
-        alert("No object selected");
-    }
-}
-
 $(document).ready(function () {
+    console.log("document.ready fired");
     $("#custom_template").change(function () {
         var file = this.files[0];
         dbJson = null;
@@ -691,6 +671,7 @@ function bindData(current_event_id) {
                 if (staticInfo.textElements != undefined) {
                     console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
+                        // applyFont(element.fontFamily);
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
                             fontFamily: element.fontFamily,
@@ -2251,6 +2232,29 @@ function bindData(current_event_id) {
         canvas.setActiveObject(textbox);
 
         canvas.renderAll();
+    }
+
+    // Click event remains the same but fonts are now preloaded
+    document.querySelectorAll(".font-input").forEach(function (input) {
+        input.addEventListener("click", function () {
+            const font = this.getAttribute("data-font");
+            console.log("Selected font:", font);
+            applyFont(font, true); // Apply preloaded font instantly
+        });
+    });
+
+    // Function to apply the font (since fonts are already preloaded)
+    function applyFont(font) {
+        addToUndoStack(canvas);
+
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            activeObject.set({ fontFamily: font });
+            activeObject.initDimensions();
+            canvas.requestRenderAll();
+        } else {
+            console.log("No object selected");
+        }
     }
 
     // document.querySelectorAll(".form-check-input").forEach(function (input) {
