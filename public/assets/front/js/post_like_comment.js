@@ -502,7 +502,7 @@ $(document).ready(function () {
                 const container = $(".GuestTabContent");
                 container.html(contacts);
                 allContactsSuccess = true;
-
+                $('#addguest').modal('show');
                 const invitedUsers = response.invited_users;
                 // selectedContacts = response.selected_yesvite_user;
                 // selectedPhoneContacts = response.selected_phone_user;
