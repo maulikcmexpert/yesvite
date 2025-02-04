@@ -3837,7 +3837,19 @@ class EventController extends BaseController
         }
 
 
-        $registry = $request->gift_registry_data;
+        $registry = [];
+        if (isset($request->gift_registry_data) && count($request->gift_registry_data) > 0) {
+            foreach ($request->gift_registry_data as $key => $imgVal) {
+                $gr = EventGiftRegistry::where('id', $imgVal['gr_id'])->first();
+                if ($gr) {  // Check if $gr is not null
+                    $registry[] = [
+                        'registry_link' => $gr->registry_link
+                    ];
+                }
+            }
+        }
+
+        // $registry = $request->gift_registry_data;
 
         // dd($registry);
         if (!empty($registry)) {
