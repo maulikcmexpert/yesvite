@@ -207,7 +207,7 @@ $(document).ready(function () {
         parentWrapper.find(".posts-card-comm").show();
 
         const commentText = commentInput.val().trim();
-        const parentCommentId = $(".parent_comment_id").val();
+        const parentCommentId = $(".parent_comment_id").val() || '';
         console.log("Parent Comment ID:", parentCommentId);
 
         if (commentText === "") {
@@ -483,7 +483,7 @@ $(document).ready(function () {
         $('.phoneContact-checkbox:not(:disabled)').prop('checked', false);
         $('.contact-checkbox:not(:disabled)').prop('checked', false);
         $('.phone-checkbox:not(:disabled)').prop('checked', false);
-        
+
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         // if (allContactsSuccess) {
@@ -879,7 +879,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             is_duplicate=1;
         }
 
-        
+
 
         var  profileImage="";
         if(profile!=""){
@@ -939,7 +939,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                     $('#total-selected-email').attr('data-count',new_value);
                     $('#total-selected-email').text('+'+new_value);
                 }
-              
+
             }
 
              }
@@ -1032,7 +1032,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                     $('#total-selected-phone').attr('data-count',new_value);
                     $('#total-selected-phone').text('+'+new_value);
                 }
-       
+
             }
 
              }

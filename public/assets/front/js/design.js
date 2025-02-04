@@ -15,11 +15,12 @@ let redoStack = [];
 let event_id = null;
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded fired");
     preloadAllFonts(); // Load all fonts on page load
 });
 
 // Function to preload all fonts
-function preloadAllFonts() {
+async function preloadAllFonts() {
     let fontsToLoad = []; // Array to store font observers
     document.querySelectorAll(".font-input").forEach(function (input) {
         const font = input.getAttribute("data-font");
@@ -38,6 +39,7 @@ function preloadAllFonts() {
 }
 
 $(document).ready(function () {
+    console.log("document.ready fired");
     $("#custom_template").change(function () {
         var file = this.files[0];
         dbJson = null;
@@ -631,7 +633,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     });
 });
 
-function bindData(current_event_id) {
+async function bindData(current_event_id) {
+    await preloadAllFonts();
     let iw = document.getElementById("imageWrapper");
     function loadTextDataFromDatabase() {
         if (image) {
@@ -669,7 +672,7 @@ function bindData(current_event_id) {
                 if (staticInfo.textElements != undefined) {
                     console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
-                        applyFont(element.fontFamily);
+                        // applyFont(element.fontFamily);
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
                             fontFamily: element.fontFamily,
@@ -2242,17 +2245,16 @@ function bindData(current_event_id) {
     });
 
     // Function to apply the font (since fonts are already preloaded)
-    function applyFont(font, addToUndo = false) {
-        if (addToUndo) {
-            addToUndoStack(canvas);
-        }
+    function applyFont(font) {
+        addToUndoStack(canvas);
+
         var activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             activeObject.set({ fontFamily: font });
             activeObject.initDimensions();
             canvas.requestRenderAll();
         } else {
-            alert("No object selected");
+            console.log("No object selected");
         }
     }
 
