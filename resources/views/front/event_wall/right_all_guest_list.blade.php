@@ -2,8 +2,15 @@
 $invite=$all_invited_user['all_invited_users'];
 @endphp
 
-@if(empty($invite))
+@if(!empty($invite))
 @foreach ($invite as $guest)
+@php
+                                //$user = $guest['user']; // Fetch user array
+                                $firstInitial = isset($guest['first_name'][0]) ? strtoupper($guest['first_name'][0]) : '';
+                                $secondInitial = isset($guest['last_name'][0]) ? strtoupper($guest['last_name'][0]) : '';
+                                $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                            @endphp
 <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
                             <div class="d-flex align-items-center justify-content-between w-100 gap-2">
                                     <div class="posts-card-head-left guests-listing-left">
@@ -75,7 +82,7 @@ $invite=$all_invited_user['all_invited_users'];
                                             </span>
                                         @endif
                                         </div>
-                                        @if ($eventInfo['guest_view']['is_host'] == 1)
+                                        @if ($is_host == 1)
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
                                                     class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
                                                     data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
