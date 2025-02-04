@@ -8315,7 +8315,16 @@ function searchRecords(lim, off, type, search = null) {
         },
     });
 }
+$(document).on("click", ".photo-edit-delete-1", function () {
+    $(".slider_photo").trigger("click");
+});
 
+$(document).on("click", ".photo-edit-delete-2", function () {
+    $(".slider_photo_2").trigger("click");
+});
+$(document).on("click", ".photo-edit-delete-2", function () {
+    $(".slider_photo_3").trigger("click");
+});
 $(document).on("change", ".slider_photo", function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
@@ -8442,11 +8451,11 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                    if (delete_id == 1) {
-                        $(".slider_photo").show();
-                    } else {
-                        $(".slider_photo_" + delete_id).show();
-                    }
+                    //if (delete_id == 1) {
+                    // $(".slider_photo").show();
+                    //} else {
+                    //  $(".slider_photo_" + delete_id).show();
+                    //}
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
@@ -8622,9 +8631,9 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                         $(".photo-edit-delete-" + i).show();
                         if (i == 1) {
-                            $(".slider_photo").hide();
+                            //  $(".slider_photo").hide();
                         } else {
-                            $(".slider_photo_" + i).hide();
+                            //  $(".slider_photo_" + i).hide();
                         }
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
