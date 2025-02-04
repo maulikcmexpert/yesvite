@@ -304,7 +304,7 @@ foreach ($polls as $poll) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', 'hide_post');
             });
-        // dd($eventPostList);
+        dd($eventPostList);
         $checkEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
         // dd($checkEventOwner);
         if ($checkEventOwner == null) {
