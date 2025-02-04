@@ -39,6 +39,7 @@ $(document).ready(function () {
             contentType: false,
             success: function (response) {
                 if (response.image) {
+                    eventData.temp_id = null;
                     image = base_url + "storage/canvas/" + response.image;
                     eventData.cutome_image = response.image;
                     eventData.image = response.image;

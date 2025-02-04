@@ -8316,9 +8316,11 @@ function searchRecords(lim, off, type, search = null) {
     });
 }
 $(document).on("click", ".photo-edit-delete-1", function () {
-    $(".slider_photo").show();
+    $(".slider_photo").css("display", "block");
+
     $(".slider_photo").trigger("click");
 });
+
 $(document).on("change", ".slider_photo", function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
