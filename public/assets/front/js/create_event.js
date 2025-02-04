@@ -8486,6 +8486,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 function updateEventData() {
     eventData.isdraft = "0";
     var data = eventData;
+    $("#loader").css("display", "block");
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -8495,15 +8496,19 @@ function updateEventData() {
         data: data,
         success: function (response) {
             $(".main-content-wrp").removeClass("blurred");
-            setTimeout(function () {
-                $("#loader").css("display", "none");
-            }, 10000);
+            
             if (response.isupadte == true) {
                 if (response.success == true) {
+                    setTimeout(function () {
+                        $("#loader").css("display", "none");
+                    }, 10000);
                     toastr.success("Event Updated Successfully");
                     window.location.href = base_url + "home";
                 }
             } else {
+                
+                    $("#loader").css("display", "none");
+                
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
                     // $('#eventModal').modal('show');
@@ -8517,6 +8522,7 @@ function updateEventData() {
                 });
                 window.location.href = base_url + "home";
             }
+
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!!");
@@ -8541,7 +8547,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
     eventData.isPhonecontact = isPhonecontact;
     eventData.IsPotluck = IsPotluck;
 
-    $("#loader").css("display", "block");
+    
     // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
