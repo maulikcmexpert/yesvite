@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Function to preload all fonts
-function preloadAllFonts() {
+async function preloadAllFonts() {
     let fontsToLoad = []; // Array to store font observers
     document.querySelectorAll(".font-input").forEach(function (input) {
         const font = input.getAttribute("data-font");
@@ -633,8 +633,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     });
 });
 
-function bindData(current_event_id) {
-    preloadAllFonts();
+async function bindData(current_event_id) {
+    await preloadAllFonts();
     let iw = document.getElementById("imageWrapper");
     function loadTextDataFromDatabase() {
         if (image) {
