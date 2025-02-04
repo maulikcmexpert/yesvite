@@ -1921,7 +1921,7 @@
                                                                             value="{{ $items['quantity'] }}">
                                                                         <input type="hidden"
                                                                             class="item-quantity-minus"
-                                                                            value="{{ $values['quantity'] }}">
+                                                                            value="{{ ($values['quantity']  >=1 )?1:0 }}">
                                                                         <button class="qty-btnminus"
                                                                             type="button"><i
                                                                                 class="fa fa-minus"></i></button>
