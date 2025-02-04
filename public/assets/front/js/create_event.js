@@ -7171,7 +7171,7 @@ function checkbox_count() {
     var checkedCount_event_page = $(".event_page_checkbox:checked").length;
     var checkedCount_notification = $(".notification_checkbox:checked").length;
 
-    $("#general_setting_checkbox").text(checkedCount_general_setting + "/7");
+    $("#general_setting_checkbox").text(checkedCount_general_setting + "/6");
     $("#event_page_checkbox").text(checkedCount_event_page + "/2");
     $("#notification_checkbox").text(checkedCount_notification + "/4");
 }
@@ -8514,7 +8514,7 @@ function updateEventData() {
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
-                    window.location.href = "profile";
+                    // window.location.href = "profile";
                 }
                 $("#eventModal").modal("show");
                 $("#eventModal").on("hide.bs.modal", function (event) {
@@ -9250,3 +9250,4 @@ if(isDraftEvent =="0" && eventId!=""){
     $(".li_setting").addClass('menu-success');
     loadAgain();
 }
+checkbox_count()

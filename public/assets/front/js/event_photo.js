@@ -514,27 +514,21 @@ $('.download_img').on('click', function () {
     console.log("Selected Images: ", selectedImages);
 
 });
-$('.download_img_single').on('click', function () {
-    // $('.form-check-input:checked').each(function () {
-    //     console.log('Checkbox selected: ', $(this).data('image-src')); // Check if data-image-src exists
-    // });
+$(document).on('click', '.download_img_single', function () {
+    // Find the image source stored in the data attribute
+    const imgSrc = $(this).closest('.photo-card-photos-wrp').data('img-src');
 
-    // Get selected image URLs from the checkboxes
-    const imageSrc = $(this).data('image-src');
-
-    console.log("Selected Images: ", imageSrc);
-    if (imageSrc) {
-        // Create a temporary link element to trigger the download
-        const link = document.createElement('a');
-        link.href = imageSrc;
-        link.download = imageSrc.split('/').pop(); // Use the file name from the URL
-
-        // Trigger the download by programmatically clicking the link
-        link.click();
+    if (imgSrc) {
+        // Create an invisible anchor tag to trigger the download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imgSrc;
+        downloadLink.download = ''; // Optionally, specify the download filename here
+        downloadLink.click();  // Trigger the click event to start the download
     } else {
-        alert('No image source found!');
+        alert('Image source not found.');
     }
 });
+
 
 $(document).on('click', '.open_photo_model', function () {
     clearTimeout(pressTimer); // Clear the timer

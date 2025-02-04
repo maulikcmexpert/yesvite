@@ -689,6 +689,7 @@ function bindData(current_event_id) {
                             fontWeight: element.fontWeight,
                             fontStyle: element.fontStyle,
                             underline: element.underline,
+                            lineHeight: element.lineHeight,
                             linethrough:
                                 element.linethrough == true ||
                                 element.linethrough == "true" ||
@@ -2189,6 +2190,8 @@ function bindData(current_event_id) {
             cornerSize: 10,
             transparentCorners: false,
             textAlign: "center",
+            lineHeight: 2,
+            letterSpacing: 0,
         });
         textbox.setControlsVisibility({
             mt: false, // Hide middle top control
