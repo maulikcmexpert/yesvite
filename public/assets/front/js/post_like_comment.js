@@ -1007,7 +1007,9 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                 </a>`;
 
 
-                  $modalBody.append(totalHtml);
+                //   $modalBody.append(totalHtml);
+                  $modalBody.find(".add_guest_seeall").first().before(totalHtml);
+
             }
             if(upper_see_phone>0){
                 if(is_duplicate_phone==0){
