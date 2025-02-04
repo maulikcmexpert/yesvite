@@ -9269,12 +9269,12 @@ $(document).on(
         if (event_name !== "" && event_date !== "" && start_time !== "") {
             // When all fields are filled
             $(".guestBtn").css("color", "black");  // Set text color to black
-            $("#guestBtn").addClass('guestBtn');
+            $("#guestBtn").removeClass('guestBtn');
             // Add a class to SVG for active state
         } else {
             // When any field is empty
             $(".guestBtn").css("color", "#b5b8bf");  // Set text color to a light gray
-            $("#guestBtn").removeClass('guestBtn');
+            $("#guestBtn").addClass('guestBtn');
         }
     }
 );
