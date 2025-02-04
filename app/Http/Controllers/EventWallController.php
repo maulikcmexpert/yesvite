@@ -2134,7 +2134,7 @@ foreach ($polls as $poll) {
                 ->where('event_id', $eventId)
                 ->where('is_co_host', '0')
                 ->whereNotNull('user_id')
-                ->whereNull('sync_id')
+                // ->whereNull('sync_id')
                 ->get();
             if ($invitedYesviteUsers) {
                 foreach ($invitedYesviteUsers as $user) {
@@ -2174,7 +2174,7 @@ foreach ($polls as $poll) {
             $invitedContactUsers = EventInvitedUser::with('user')
                 ->where('event_id', $eventId)
                 ->where('is_co_host', '0')
-                ->whereNull('user_id')
+                ->whereNotNull('sync_id')
                 ->get();
             if ($invitedContactUsers) {
                 foreach ($invitedContactUsers as $user) {
@@ -2187,7 +2187,7 @@ foreach ($polls as $poll) {
                         'phone',
                         'email'
 
-                    )->where('id', $user['sync_id'])->whereNull('userId') // Order results by first name
+                    )->where('id', $user['sync_id']) // Order results by first name
                     ->first();
                     if ($userVal) {
                         $userEntry = [

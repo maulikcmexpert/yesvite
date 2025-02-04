@@ -101,7 +101,7 @@ class ContactController extends Controller
 
 
      
-        $getAllContacts = contact_sync::where('contact_id',$id)->orderBy('firstName','asc')->limit(6)
+        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(6)
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
@@ -295,7 +295,7 @@ class ContactController extends Controller
 
         // dd(count($getAllContacts));
 
-        $query = contact_sync::where('contact_id', $id)->orderBy('firstName','asc');
+        $query = contact_sync::where('contact_id', $id)->whereNull('userId')->orderBy('firstName','asc');
       
         
         if (!empty($searchPhone)) {

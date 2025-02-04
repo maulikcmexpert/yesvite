@@ -2730,7 +2730,7 @@ if ($rsvpSent != null) {
                         'recent'=>1
                     ];
                 } else {
-                    $contact_sync = contact_sync::find($sesionuser['user_id']);
+                    $contact_sync = contact_sync::find($sesionuser['user_id'])->whereNull('userId');
                     
                     if ($contact_sync) {
                         $yesvite_phone_data[] = [
