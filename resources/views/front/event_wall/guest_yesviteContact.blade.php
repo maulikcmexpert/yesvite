@@ -218,7 +218,7 @@
                             <input class="form-check-input failed-checkout contact-checkbox email-checkbox"
                                 type="checkbox" data-id="{{ $contact->id }}" data-name="{{ $contact->firstname }}" data-prefer="email"
                                 data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}" data-profile="{{$contact->profile}}"
-                                data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$e_disabled}}>
+                                data-phone="{{ $contact->phone_number }}" data-type="email" {{ $email_checked }} {{$e_disabled}}{{$p_disabled}}>
                         </div>
                     </div>
                     @if (!empty($contact->phone_number))
@@ -236,7 +236,7 @@
                                 type="checkbox" data-id="{{ $contact->id }}" data-profile="{{$contact->profile}}" data-prefer="phone"
                                 data-name="{{ $contact->firstname }}"
                                 data-last="{{ $contact->lastname }}" data-email="{{ $contact->email }}"
-                                data-phone="{{ $contact->phone_number }}" data-type="phone" {{ $phone_checked }} {{$p_disabled}}>
+                                data-phone="{{ $contact->phone_number }}" data-type="phone" {{ $phone_checked }}  {{$e_disabled}}{{$p_disabled}}>
                         </div>
                     @endif
                 </div>
