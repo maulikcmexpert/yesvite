@@ -83,9 +83,15 @@ $invite=$all_invited_user['all_invited_users'];
                                         @endif
                                         </div>
                                         @if ($is_host == 1)
-                                            <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
+                                        @if($guest['is_sync']=="1")
+                                                    <button type="button" ><i
+                                                    class="fa-solid fa-ellipsis-vertical"
+                                                    data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
+                                                    @else
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
                                                     class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
                                                     data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
+                                                    @endif
                                         @endif
                                     </div>
                             </div>
