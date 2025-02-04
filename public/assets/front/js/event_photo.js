@@ -717,6 +717,7 @@ $(document).on('click', '.open_photo_model', function () {
 
                 if (data.latest_comment && Array.isArray(data.latest_comment)) {
                     data.latest_comment.forEach(comment => {
+                        let displayName = comment.username || generatePlaceholderName(comment.username);
                         commentsWrapper.append(`
                             <li class="commented-user-wrp" data-comment-id="${comment.id}">
                               <input type="hidden" id="parent_comment_id" value="${comment.id}">
@@ -753,6 +754,17 @@ $(document).on('click', '.open_photo_model', function () {
                             </li>
                         `);
                     })
+                }
+                function generatePlaceholderName(username) {
+                    const nameParts = username.split(" ");
+                    const firstInitial =
+                        nameParts[0]?.[0]?.toUpperCase() || "";
+                    const secondInitial =
+                        nameParts[1]?.[0]?.toUpperCase() || "";
+                    const initials = `${firstInitial}${secondInitial}`;
+                    const fontColor = `fontcolor${firstInitial}`;
+                    // Return initials inside an h5 tag with dynamic styling
+                    return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
 
             } else {
