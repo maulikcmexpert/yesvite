@@ -2207,13 +2207,60 @@ function bindData(current_event_id) {
         canvas.renderAll();
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+        preloadAllFonts(); // Load all fonts on page load
+    });
+
+    // Function to preload all fonts
+    function preloadAllFonts() {
+        let fontsToLoad = []; // Array to store font observers
+        document
+            .querySelectorAll(".form-check-input")
+            .forEach(function (input) {
+                const font = input.getAttribute("data-font");
+                let fontObserver = new FontFaceObserver(font);
+                fontsToLoad.push(fontObserver.load());
+            });
+
+        // Load all fonts asynchronously
+        Promise.all(fontsToLoad)
+            .then(() => {
+                console.log("All fonts loaded successfully.");
+            })
+            .catch((err) => {
+                console.error("Some fonts failed to load:", err);
+            });
+    }
+
+    // Click event remains the same but fonts are now preloaded
     document.querySelectorAll(".form-check-input").forEach(function (input) {
         input.addEventListener("click", function () {
             const font = this.getAttribute("data-font");
             console.log("Selected font:", font);
-            loadAndUse(font); // Call loadAndUse function with the selected font
+            applyFont(font); // Apply preloaded font instantly
         });
     });
+
+    // Function to apply the font (since fonts are already preloaded)
+    function applyFont(font) {
+        addToUndoStack(canvas);
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            activeObject.set({ fontFamily: font });
+            activeObject.initDimensions();
+            canvas.requestRenderAll();
+        } else {
+            alert("No object selected");
+        }
+    }
+
+    // document.querySelectorAll(".form-check-input").forEach(function (input) {
+    //     input.addEventListener("click", function () {
+    //         const font = this.getAttribute("data-font");
+    //         console.log("Selected font:", font);
+    //         loadAndUse(font); // Call loadAndUse function with the selected font
+    //     });
+    // });
     canvas.on("object:scaling", function (e) {
         var activeObject = e.target;
 
