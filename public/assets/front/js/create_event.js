@@ -8441,6 +8441,11 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
+                    if (delete_id == 1) {
+                        $(".slider_photo").show();
+                    } else {
+                        $(".slider_photo_" + delete_id).show();
+                    }
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
@@ -8613,9 +8618,13 @@ $(document).on("click", ".design-sidebar-action", function () {
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         sliderElement.style.display = "block";
-                        console.log({ i });
-                        $(".photo-edit-delete-" + i).show();
 
+                        $(".photo-edit-delete-" + i).show();
+                        if (i == 0) {
+                            $(".slider_photo").hide();
+                        } else {
+                            $(".slider_photo_" + i).hide();
+                        }
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
