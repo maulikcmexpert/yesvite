@@ -100,6 +100,65 @@ $(document).on('click','.see-all-guest-right-btn',function(){
     });
 });
 
+
+
+
+$(document).on('click','.add_guest_seeall',function(){
+    alert();
+    let event_id = $('#event_id').val();
+    $.ajax({
+        url: base_url + "event_guest/see_all_invite_yesvite",  // Ensure this route is defined in web.php/api.php
+        type: "POST",
+        data: JSON.stringify({event_id: event_id,is_phone:0 }),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.view !="") {
+             $('#seeAllTabContent').html('');
+              $('#seeAllTabContent').html(response.view);
+              $('#seeAll').modal('show');
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+$(document).on('click','.add_guest_phone_seeall',function(){
+    let event_id = $('#event_id').val();
+    $.ajax({
+        url: base_url + "event_guest/see_all_invite_yesvite",  // Ensure this route is defined in web.php/api.php
+        type: "POST",
+        data: JSON.stringify({event_id: event_id,is_phone:1}),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.view !="") {
+              $('#seeAllTabContent').html(response.view);
+              $('#seeAll').modal('show');
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        }
+    });
+});
+
 //   $(document).ready(function () {
 //     $(".expand-icon").on("click", function () {
 //         const textbox = $("#violation-textbox");
