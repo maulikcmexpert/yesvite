@@ -908,7 +908,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 </div>
 
             `;
-            $modalBody.append(contactHtml);
+            $modalBody.find(".add_guest_seeall").first().before(contactHtml);
+
+            // $modalBody.append(contactHtml);
         }else{
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
@@ -993,6 +995,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
 
             `;
             $modalBody.append(contactHtml);
+
         }else{
             const $modalBody = $('.selected-phone-list');
             var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
@@ -1008,7 +1011,6 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
 
 
                 //   $modalBody.append(totalHtml);
-                  $modalBody.find(".add_guest_seeall").first().before(totalHtml);
 
             }
             if(upper_see_phone>0){
