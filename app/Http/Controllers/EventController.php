@@ -3063,6 +3063,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
+        dd($request);
         // dd($request->slider_images);
         Session::forget('desgin');
         Session::forget('shape_image');

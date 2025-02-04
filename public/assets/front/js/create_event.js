@@ -8651,7 +8651,7 @@ $(document).on("click", "#close_editEvent", function (e) {
                 toastr.success("Event Saved as Draft");
                 setTimeout(function () {
                     $("#loader").css("display", "none");
-                }, 10000);
+                }, 1000000);
             }
         },
         error: function (xhr, status, error) {
