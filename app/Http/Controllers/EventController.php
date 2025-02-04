@@ -3127,12 +3127,14 @@ class EventController extends BaseController
 
             $rsvp_by_date_set = '1';
         } else {
-            if ($startDateFormat) {
+            $rsvp_by_date_set = '0';
+            $rsvp_by_date = null;
+            // if ($startDateFormat) {
 
-                $start = new DateTime($startDateFormat);
-                $start->modify('-1 day');
-                $rsvp_by_date = $start->format('Y-m-d');
-            }
+            //     $start = new DateTime($startDateFormat);
+            //     $start->modify('-1 day');
+            //     $rsvp_by_date = $start->format('Y-m-d');
+            // }
         }
 
 
