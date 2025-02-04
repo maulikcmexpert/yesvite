@@ -8598,16 +8598,16 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-
+                let i = 0;
                 photoSliders.forEach((sliderClass, index) => {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
                     );
-                    let i = 0;
+                    i = i + 1;
                     if (sliderElement && sliderImages[index]) {
-                        i = i + 1;
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         sliderElement.style.display = "block";
+                        console.log({ i });
                         $(".photo-edit-delete-" + i).show();
 
                         console.log(
