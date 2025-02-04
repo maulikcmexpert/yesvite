@@ -772,7 +772,7 @@ class EventAboutController extends Controller
                 ];
                 $creatEventPost = new EventPost;
                 $creatEventPost->event_id = $request->event_id;
-                $creatEventPost->user_id = $request->user_id;
+                $creatEventPost->user_id =$user;
                 $creatEventPost->post_message = json_encode($postMessage);
                 $creatEventPost->post_privacy = "1";
                 $creatEventPost->post_type = "4";
