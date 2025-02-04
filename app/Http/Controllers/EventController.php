@@ -3139,6 +3139,7 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
+        // dD($request);
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('custom_image');
@@ -3759,7 +3760,7 @@ class EventController extends BaseController
 
                     sendNotification('update_date', $notificationParam);
                 }
-
+                // dd($istime,$isupdatedate,$isaddress,$request->IsPotluck);
                 if (isset($istime) && $istime == 0 && isset($isupdatedate) && $isupdatedate == 0 && $isaddress == 0 && isset($request->IsPotluck) && $request->IsPotluck == 0) {
 
                     $filteredIds = array_map(

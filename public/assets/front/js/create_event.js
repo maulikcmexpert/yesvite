@@ -21,6 +21,7 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var IsPotluck = 0;
+eventData.IsPotluck=0;
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
 
 var selected_prefer_by =
@@ -144,11 +145,10 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
         return $(this).val();
     })
     .get();
-// alert(giftRegestryDataRaw.length);
+
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
-        alert
         giftRegestryData?.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -4739,7 +4739,7 @@ async function saveDesignData(direct = false) {
 
         console.log("Uploading image...");
         const imageResponse = await uploadImage(blob);
-        console.log("Uploaded image...");
+
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
         }
@@ -8315,9 +8315,11 @@ function searchRecords(lim, off, type, search = null) {
         },
     });
 }
-
+$(".photo-edit-delete-1").on("click", function () {
+    $(".slider_photo").show();
+    $(".slider_photo").trigger("click");
+});
 $(document).on("change", ".slider_photo", function (event) {
-    // alert();
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
         var reader = new FileReader();
@@ -8443,8 +8445,14 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
+                    if (delete_id == 1) {
+                        $(".slider_photo").show();
+                    } else {
+                        $(".slider_photo_" + delete_id).show();
+                    }
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
+                    $(".photo-edit-delete-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
                 },
@@ -8465,12 +8473,14 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     updateEventData();
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     if (save1 == 8) {
@@ -8479,6 +8489,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
@@ -8490,6 +8501,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 
 function updateEventData() {
     eventData.isdraft = "0";
+
     var data = eventData;
     $("#loader").css("display", "block");
     $.ajax({
@@ -8610,9 +8622,13 @@ $(document).on("click", ".design-sidebar-action", function () {
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         sliderElement.style.display = "block";
-                        console.log({ i });
-                        $(".photo-edit-delete-" + i).show();
 
+                        $(".photo-edit-delete-" + i).show();
+                        if (i == 1) {
+                            $(".slider_photo").hide();
+                        } else {
+                            $(".slider_photo_" + i).hide();
+                        }
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
