@@ -117,10 +117,12 @@ class EventWallController extends Controller
         }
 
 
-    $polls = EventPostPoll::with('event_poll_option')
-    ->withCount('user_poll_data')
-    ->where('event_id', $event)
-    ->get();
+        $polls = EventPostPoll::with('event_poll_option')
+        ->withCount('user_poll_data')
+        ->where('event_id', $event)
+        ->orderBy('id', 'desc')  // Sorting by created_at in descending order
+        ->get();
+
 
 $pollsData = [];
 
@@ -2494,7 +2496,7 @@ foreach ($polls as $poll) {
         }
         $all_invited_user=getInvitedUsersList($eventId);
 
-    
+
         return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user','eventId','is_host'))->render(),'status'=>1]);
 
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);

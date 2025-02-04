@@ -516,7 +516,8 @@ $('.download_img').on('click', function () {
 });
 $(document).on('click', '.download_img_single', function () {
     // Find the image source stored in the data attribute
-    const imgSrc = $(this).closest('.photo-card-photos-wrp').data('img-src');
+    const imgSrc = $('.downloadImg').data('img-src');
+console.log(imgSrc);
 
     if (imgSrc) {
         // Create an invisible anchor tag to trigger the download
