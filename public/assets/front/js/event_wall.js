@@ -1257,3 +1257,31 @@ $(document).on('click','.wall_filter_reset',function(){
      $('.select_all_post').prop('checked',false);
      $('.wall_post').prop('checked',false);
  });
+
+
+ $(document).on('click','.wall_apply_filter',function(){
+    let selectedPostTypes = [];
+
+    $(".wall_post:checked").each(function() {
+        selectedPostTypes.push($(this).data("post_type"));
+    });
+
+    console.log(selectedPostTypes);
+    // $.ajax({
+    //     url: base_url + "event_guest/removeGuestFromInvite",
+    //     type: "POST",
+    //     data: JSON.stringify({ user_id: userId, event_id: event_id }),
+    //     contentType: "application/json",
+    //     headers: {
+    //         'Authorization': 'Bearer YOUR_ACCESS_TOKEN', 
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+    //     },
+    //     success: function (response) {
+        
+    //     },
+    //     error: function (xhr, status, error) {
+    //         toastr.error("Something went wrong!");
+    //         console.error(xhr.responseText);
+    //     }
+    // });
+});
