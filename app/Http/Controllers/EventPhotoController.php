@@ -73,6 +73,9 @@ class EventPhotoController extends Controller
                 $postPhotoDetail['user_id'] = $value->user->id;
                 $postPhotoDetail['is_own_post'] = ($value->user->id == $user->id) ? "1" : "0";
                 $postPhotoDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                $isCoHost =  EventInvitedUser::where(['event_id' => $event, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
+                $postPhotoDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+
                 $postPhotoDetail['firstname'] = $value->user->firstname;
                 $postPhotoDetail['lastname'] = $value->user->lastname;
                 $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
