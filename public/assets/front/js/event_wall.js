@@ -1252,3 +1252,8 @@ $(document).on('click','.select_all_post',function(){
     $('.wall_post').prop('checked',false);
    }
 });
+
+$(document).on('click','.wall_filter_reset',function(){
+     $('.select_all_post').prop('checked',false);
+     $('.wall_post').prop('checked',false);
+ });
