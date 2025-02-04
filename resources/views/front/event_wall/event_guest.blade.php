@@ -1744,8 +1744,6 @@
                                             <h6>{{ $invite['email'] }}</h6>
                                         </div>
                                     </div>
-                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
-                                        id="coming">
                                     @endif
 
                                     @if(!empty($invite['prefer_by'] && $invite['prefer_by'] =="email"))
@@ -1765,9 +1763,11 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    @else
                                     <input class="form-check-input failed-checkout" type="checkbox" value=""
-                                        id="coming">
+                                    id="coming">
+                                    @else
+                                    <!-- <input class="form-check-input failed-checkout" type="checkbox" value=""
+                                        id="coming"> -->
                                         @endif
                                 </div>
                             </div>
