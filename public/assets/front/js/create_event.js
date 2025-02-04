@@ -21,6 +21,7 @@ var selected_user_name =
         ? $("#cohostFname").val() + " " + $("#cohostLname").val()
         : "";
 var IsPotluck = 0;
+eventData.IsPotluck=0;
 var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
 
 var selected_prefer_by =
