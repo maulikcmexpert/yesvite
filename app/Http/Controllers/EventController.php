@@ -1568,7 +1568,8 @@ class EventController extends BaseController
         $categories = Session::get('category', []);
         // dD($categories);
         $category_quantity = $categories[$category_index]['category_quantity'];
-        $category_item = count($categories[$category_index]['item']);
+        // $category_item = count($categories[$category_index]['item']);
+        $last_index = count($categories[$category_index]['item']) - 1;
         $total_item = 0;
         $total_quantity = 0;
         if (isset($categories[$category_index]['item']) && !empty($categories[$category_index]['item'])) {
@@ -1594,7 +1595,7 @@ class EventController extends BaseController
 
         }
         $qty = 0;
-        if ($category_quantity == $category_item) {
+        if ($category_quantity == $last_index) {
             $qty = 1;
         } else {
             $qty = 0;
@@ -1609,7 +1610,7 @@ class EventController extends BaseController
             'self_bring' => $selfBring,
             'self_bring_qty' => $selfBringQuantity,
             'category_index' => $category_index,
-            'category_item' => --$category_item,
+            'category_item' => $last_index,
         ];
 
         // Dd($data)
