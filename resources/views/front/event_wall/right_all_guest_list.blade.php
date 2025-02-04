@@ -4,6 +4,13 @@ $invite=$all_invited_user['all_invited_users'];
 
 @if(!empty($invite))
 @foreach ($invite as $guest)
+@php
+                                //$user = $guest['user']; // Fetch user array
+                                $firstInitial = isset($guest['first_name'][0]) ? strtoupper($guest['first_name'][0]) : '';
+                                $secondInitial = isset($guest['last_name'][0]) ? strtoupper($guest['last_name'][0]) : '';
+                                $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                            @endphp
 <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
                             <div class="d-flex align-items-center justify-content-between w-100 gap-2">
                                     <div class="posts-card-head-left guests-listing-left">
