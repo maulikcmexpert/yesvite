@@ -386,7 +386,7 @@
             <h3>Select a Font</h3>
             @foreach ($fonts as $dataFont => $labelClass)
             <div class="font-selector form-check">
-                <input class="form-check-input fontfamily" type="radio" name="flexRadioDefault" data-command="fontName" data-font="{{ $dataFont }}" id="{{ $labelClass }}Button">
+                <input class="form-check-input fontfamily font-input" type="radio" name="flexRadioDefault" data-command="fontName" data-font="{{ $dataFont }}" id="{{ $labelClass }}Button">
                 <label class="form-check-label {{ $labelClass }}" for="{{ $labelClass }}Button">
                     {{ $labelClass }}
                 </label>

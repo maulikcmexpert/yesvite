@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to preload all fonts
 function preloadAllFonts() {
     let fontsToLoad = []; // Array to store font observers
-    document.querySelectorAll(".form-check-input").forEach(function (input) {
+    document.querySelectorAll(".font-input").forEach(function (input) {
         const font = input.getAttribute("data-font");
         let fontObserver = new FontFaceObserver(font);
         fontsToLoad.push(fontObserver.load());
@@ -38,7 +38,7 @@ function preloadAllFonts() {
 }
 
 // Click event remains the same but fonts are now preloaded
-document.querySelectorAll(".form-check-input").forEach(function (input) {
+document.querySelectorAll(".font-input").forEach(function (input) {
     input.addEventListener("click", function () {
         const font = this.getAttribute("data-font");
         console.log("Selected font:", font);
