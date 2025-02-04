@@ -378,9 +378,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
-        // Find the closest '.posts-card-main-comment' wrapper (the main post container)
-        const parentWrapper = $(this)
-            .closest(".posts-card-show-all-comments-wrp")
+        const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp")
             .prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
@@ -388,37 +386,35 @@ $(document).ready(function () {
             return;
         }
 
-        // Find the username and comment ID from the current comment being replied to
-        const parentName = $(this)
-            .closest(".commented-user-wrp")
-            .find("h3")
-            .text()
-            .trim();
-        const parentId = $(this)
-            .closest(".commented-user-wrp")
-            .data("comment-id");
+        // Find the username and comment ID
+        const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
+        const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
 
-        // Debugging information
-        console.log("Parent Wrapper:", parentWrapper);
-        console.log("Parent Name:", parentName);
         console.log("Parent ID:", parentId);
 
-        // Set the active class on the currently selected comment
-        $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
-        $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
+        // Remove 'active' from all comments and set active class on current
+        $(".commented-user-wrp").removeClass("active");
+        $(this).closest(".commented-user-wrp").addClass("active");
 
-        // Find the comment box inside the parent wrapper and insert the username
-        const commentBox = parentWrapper.find(".post_comment");
+        // Find the comment input field in the same post section
+        const commentBox = parentWrapper.find("#post_comment");
+        const hiddenInput = parentWrapper.find("#parent_comment_id"); // Hidden field for storing parent ID
+
         if (!commentBox.length) {
             console.error("Comment input field not found!");
             return;
         }
-        const commentIndex = parentWrapper.index() + 1; // Get unique index
-        $("#parent_comment_id_" + commentIndex).val(parentId);
-        // $("#parent_comment_id").val(parentId);
-        // Insert the '@username' into the comment box and focus
+
+        if (!hiddenInput.length) {
+            console.error("Hidden input #parent_comment_id not found!");
+            return;
+        }
+
+        // Set parent ID and pre-fill input field with @username mention
+        hiddenInput.val(parentId);
         commentBox.val(`@${parentName} `).focus();
     });
+
 
     // Handle reply button click (when replying to a comment)
 });
