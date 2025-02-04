@@ -42,7 +42,7 @@ $invite=$all_invited_user['all_invited_users'];
                                     </div>
                                     <div class="guests-listing-right" data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}">
                                         <div class="guest_rsvp_icon" data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}">
-                                        @if($guest['sync_id']!="1")
+                                        @if($guest['is_sync']!="1")
                                             @if ($guest['rsvp_status'] == '1')
                                                 <!-- Approved -->
                                                 <span id="approve" data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}">
