@@ -50,7 +50,7 @@ class EventAboutController extends Controller
             }, 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
-            dd($eventDetail);
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
@@ -664,7 +664,7 @@ class EventAboutController extends Controller
         //    {{ dd($eventDetails);}}
         }
 //
-        // dd(1,$eventDetails);
+        dd($rsvpSent);
             return view('layout', compact('page', 'title', 'js','postList', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
