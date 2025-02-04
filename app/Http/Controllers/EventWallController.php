@@ -2134,6 +2134,7 @@ foreach ($polls as $poll) {
                 ->where('event_id', $eventId)
                 ->where('is_co_host', '0')
                 ->whereNotNull('user_id')
+                ->whereNull('sync_id')
                 ->get();
             if ($invitedYesviteUsers) {
                 foreach ($invitedYesviteUsers as $user) {
