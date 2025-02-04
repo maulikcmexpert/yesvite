@@ -346,7 +346,9 @@ $(document).on('click', '.comment-send-icon', function () {
                         <ul class="primary-comment-replies"></ul>
                     </li>
                 `;
-
+                if (!commentId) {
+                    $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
+                }
 
                 if (data.comment_replies && data.comment_replies.length > 0) {
                     data.comment_replies.forEach(function (reply) {
@@ -388,8 +390,6 @@ $(document).on('click', '.comment-send-icon', function () {
                                 replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
                             }
                             replyList.append(replyHTML);
-                        } else {
-                            $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
                         }
 
                     const commentCountElement = $(`#comment_${eventPostId}`);
@@ -942,7 +942,7 @@ $(document).on('click', '#likeButtonModel', function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
+    const reaction = isLiked ? '\u{1F90D}' : '\u{2764}'; // Toggle reaction: 💔 or ❤️
     const likeButton = $(this);
     // Toggle like button appearance
     const icon = $(this).find('i');
