@@ -144,10 +144,11 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
         return $(this).val();
     })
     .get();
-alert(giftRegestryDataRaw.length);
+// alert(giftRegestryDataRaw.length);
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+        alert
         giftRegestryData?.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -8437,6 +8438,8 @@ $(document).on("click", ".delete_silder", function (e) {
                 method: "POST",
                 data: {
                     delete_id: delete_id,
+                    eventId: eventId,
+                    src: src,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
