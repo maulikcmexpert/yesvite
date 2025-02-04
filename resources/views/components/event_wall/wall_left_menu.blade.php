@@ -47,8 +47,8 @@
                             <div class="hosted-by-template-slider-img">
                                 <img src="{{ $image }}" alt="Event Image" />
                             </div>
+                            <button class="image-zoom-icon" data-img="{{ $image }}"><img src="{{ asset('assets/front/img/image-zoom-icon.png')}}" alt=""></button>
                         </div>
-                        <button class="image-zoom-icon" data-img="{{ $image }}"><img src="{{ asset('assets/front/img/image-zoom-icon.png')}}" alt=""></button>
                     @endforeach
                 @else
 
