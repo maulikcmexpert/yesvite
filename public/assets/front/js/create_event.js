@@ -8609,7 +8609,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-
+                let i = 0;
                 photoSliders.forEach((sliderClass, index) => {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
