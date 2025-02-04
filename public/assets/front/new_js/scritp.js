@@ -397,11 +397,14 @@ $("#create-photo-btn").click(function () {
     $(".create-post-upload-img-wrp").removeClass("d-none");
     $(".create-post-poll-wrp").addClass("d-none");
     $("#imagePreview").empty();
+    $("#postContent").val('');
+    $(".create-post-upload-img-inner").removeClass("d-none");
     $("#photoForm").reset();
 });
 
 $("#create-poll-btn").click(function () {
     $(".create-post-poll-wrp").removeClass("d-none");
+    $("#postContent").val('');
     $(".create-post-upload-img-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
 });
