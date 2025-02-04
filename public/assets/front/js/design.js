@@ -671,7 +671,7 @@ function bindData(current_event_id) {
                 if (staticInfo.textElements != undefined) {
                     console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
-                        applyFont(element.fontFamily);
+                        // applyFont(element.fontFamily);
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
                             fontFamily: element.fontFamily,
