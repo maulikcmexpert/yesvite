@@ -144,10 +144,11 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
         return $(this).val();
     })
     .get();
-
+// alert(giftRegestryDataRaw.length);
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+        alert
         giftRegestryData?.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -4738,7 +4739,7 @@ async function saveDesignData(direct = false) {
 
         console.log("Uploading image...");
         const imageResponse = await uploadImage(blob);
-
+        console.log("Uploaded image...");
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
         }
@@ -6858,22 +6859,24 @@ $(document).on("click", ".invite_group_member", function () {
                 });
             }
         } else {
-            if(!$(this).is(":disabled")){
-            const id = $(this).val();
-            const isIdExists = unselectedValues.some((item) => item.id === id);
+            if (!$(this).is(":disabled")) {
+                const id = $(this).val();
+                const isIdExists = unselectedValues.some(
+                    (item) => item.id === id
+                );
 
                 if (!isIdExists) {
                     unselectedValues.push({
                         id: id,
                     });
                 }
-          
-               $("#user_tel-" + id).remove();
-               $(".user_id_tel-" + id).remove();
-               $(".user_id_tel-" + id).remove();
-               $("#user-" + id).remove();
-               $(".user-" + id).prop("checked", false);
-               $(".user_id-" + id).remove();
+
+                $("#user_tel-" + id).remove();
+                $(".user_id_tel-" + id).remove();
+                $(".user_id_tel-" + id).remove();
+                $("#user-" + id).remove();
+                $(".user-" + id).prop("checked", false);
+                $(".user_id-" + id).remove();
             }
             // delete_invited_user(id,'0');
         }
@@ -7489,7 +7492,7 @@ function get_co_host_list(
             app_user: app_user,
             cohostId: cohostId,
             isCohost: isCohost,
-            isCopy:isCopy,
+            isCopy: isCopy,
             cohostpreferby: cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -8435,6 +8438,8 @@ $(document).on("click", ".delete_silder", function (e) {
                 method: "POST",
                 data: {
                     delete_id: delete_id,
+                    eventId: eventId,
+                    src: src,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
@@ -8496,7 +8501,7 @@ function updateEventData() {
         data: data,
         success: function (response) {
             $(".main-content-wrp").removeClass("blurred");
-            
+
             if (response.isupadte == true) {
                 if (response.success == true) {
                     setTimeout(function () {
@@ -8506,9 +8511,8 @@ function updateEventData() {
                     window.location.href = base_url + "home";
                 }
             } else {
-                
-                    $("#loader").css("display", "none");
-                
+                $("#loader").css("display", "none");
+
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
                     // $('#eventModal').modal('show');
@@ -8522,7 +8526,6 @@ function updateEventData() {
                 });
                 // window.location.href = base_url + "home";
             }
-
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!!");
@@ -8547,7 +8550,6 @@ $(document).on("click", ".edit_checkout", async function (e) {
     eventData.isPhonecontact = isPhonecontact;
     eventData.IsPotluck = IsPotluck;
 
-    
     // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -8599,14 +8601,18 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-
+                let i = 0;
                 photoSliders.forEach((sliderClass, index) => {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
                     );
-
+                    i = i + 1;
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.style.display = "block";
+                        console.log({ i });
+                        $(".photo-edit-delete-" + i).show();
+
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
@@ -8673,7 +8679,7 @@ $(document).on("click", "#close_editEvent", function (e) {
 
 if (final_step == "2" && isCohost == "1") {
     $("#loader").css("display", "flex");
-    
+
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
@@ -9243,11 +9249,11 @@ $(document).on(
         }
     }
 );
-if(isDraftEvent =="0" && eventId!=""){
-    $(".li_design").addClass('menu-success');
-    $(".li_event_detail").addClass('menu-success');
-    $(".li_guest").addClass('menu-success');
-    $(".li_setting").addClass('menu-success');
+if (isDraftEvent == "0" && eventId != "") {
+    $(".li_design").addClass("menu-success");
+    $(".li_event_detail").addClass("menu-success");
+    $(".li_guest").addClass("menu-success");
+    $(".li_setting").addClass("menu-success");
     loadAgain();
 }
-checkbox_count()
+checkbox_count();

@@ -1173,6 +1173,7 @@ $(document).ready(function () {
                     if (response.type == 'hide_post') {
                         // Find and hide the post using the postId
                         $('.hidden_post[data-post-id="' + postId + '"]').hide();
+                        $('.hidden_post_poll[data-post-id="' + postId + '"]').hide();
                     }else if (response.type == "mute") {
                         // Set button for unmuting
                         $button.data('post-control', 'unmute');

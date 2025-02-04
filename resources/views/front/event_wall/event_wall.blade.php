@@ -513,8 +513,9 @@
                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                             @endif
                                                                       </button>
-                                                                            <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
-                                                                            </p>
+                                                                      {{-- <p id="commentTotalLike_{{ $reply['id'] }}">
+                                                                        {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
+                                                                    </p> --}}
                                                                         </div>
                                                                         <button
                                                                             class="commented-user-reply-btn">Reply</button>
@@ -781,7 +782,7 @@
                                     </div> --}}
                                     {{-- {{dd($pollsData)}} --}}
                                     @foreach ($pollsData as $poll)
-                                        <div class="event-posts-main-wrp common-div-wrp hidden_post"
+                                        <div class="event-posts-main-wrp common-div-wrp hidden_post_poll"
                                             data-post-id="{{ $poll['event_post_id'] }}">
                                             <div class="posts-card-wrp">
                                                 <div class="posts-card-head">
@@ -1181,8 +1182,10 @@
                                                                         <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                         @endif
                                                                   </button>
-                                                                        <p id="commentTotalLike_{{ $comment['id'] }}">{{ $comment['comment_total_likes'] }}
-                                                                        </p>
+                                                                  <p id="commentTotalLike_{{ $reply['id'] }}">
+                                                                    {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
+                                                                </p>
+
                                                                     </div>
                                                                     <button
                                                                         class="commented-user-reply-btn">Reply</button>
@@ -1283,7 +1286,8 @@
                                                                                             <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                                             @endif
                                                                                           </button>
-                                                                                          <p id="commentTotalLike_{{ $reply['id'] }}">{{ $reply['comment_total_likes'] }}
+                                                                                          <p id="commentTotalLike_{{ $reply['id'] }}">
+                                                                                            {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
                                                                                         </p>
                                                                                     </div>
                                                                                     <button
