@@ -144,10 +144,11 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
         return $(this).val();
     })
     .get();
-alert(giftRegestryDataRaw.length);
+// alert(giftRegestryDataRaw.length);
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+        alert
         giftRegestryData?.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
