@@ -861,7 +861,9 @@ $(document).ready(function () {
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
+        const duplicate="";
         if (!exists) {
+            duplicate="0";
             guestList.push({
                 id: id,
                 prefer_by: preferBy,
@@ -874,7 +876,11 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             });
         } else {
             console.log("Contact already in guest list:", { id });
+            duplicate="1";
         }
+
+        console.log(duplicate);
+        
         var  profileImage="";
         if(profile!=""){
             profileImage = `<img src="${profile}" alt="Profile Image">` ;
@@ -919,6 +925,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                   $modalBody.append(totalHtml);
             }
             if(upper_see>0){
+
+
+                
                var initial= parseInt($('#total-selected-email').attr('data-count'));
                var new_value= initial+1 ;
             //    alert(initial);
