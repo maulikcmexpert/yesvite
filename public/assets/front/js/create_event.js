@@ -148,7 +148,7 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
-        alert
+        alert;
         giftRegestryData?.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -8445,6 +8445,7 @@ $(document).on("click", ".delete_silder", function (e) {
                 success: function (response) {
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
+                    $(".photo-edit-delete-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
                 },
