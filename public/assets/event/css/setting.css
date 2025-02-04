@@ -1111,6 +1111,11 @@
     bottom: 5px;
 }
 
+.edit_checkout{
+    width: calc(100% - 5%);
+    text-align: center;
+}
+
 
 /* ============ responsive ============ */
 
