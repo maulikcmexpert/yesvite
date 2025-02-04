@@ -8510,6 +8510,10 @@ function updateEventData() {
                     toastr.success("Event Created Successfully");
                     window.location.href = "profile";
                 }
+                $("#eventModal").modal("show");
+                $("#eventModal").on("hide.bs.modal", function (event) {
+                    event.preventDefault(); // Prevents modal from closing
+                });
                 window.location.href = base_url + "home";
             }
         },
@@ -8666,7 +8670,7 @@ if (final_step == "2" && isCohost == "1") {
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
-        $(".li_guest").addClass("menu-success");
+        // $(".li_guest").addClass("menu-success");
 
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
