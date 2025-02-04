@@ -77,42 +77,42 @@
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input wall_post" type="checkbox" value=""
+                          <input class="form-check-input wall_post" data-post_type="host_update" type="checkbox" value=""
                               id="flexCheckDefault2">
                           <label class="form-check-label" for="flexCheckDefault2">
                               Host Updates/Posts
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input wall_post" type="checkbox" value=""
+                          <input class="form-check-input wall_post" data-post_type="video_uploads" type="checkbox" value=""
                               id="flexCheckDefault3">
                           <label class="form-check-label" for="flexCheckDefault3">
                               Video Uploads
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input wall_post" type="checkbox" value=""
+                          <input class="form-check-input wall_post" data-post_type="photo_uploads" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               Photo Uploads
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input wall_post" type="checkbox" value=""
+                          <input class="form-check-input wall_post" data-post_type="polls" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               Polls
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input wall_post" type="checkbox" value=""
+                          <input class="form-check-input wall_post" data-post_type="comments" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               Comments
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input wall_post" type="checkbox" value=""
+                          <input class="form-check-input wall_post" data-post_type="rsvp" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               RSVP ‘s
@@ -123,7 +123,7 @@
           </div>
           <div class="modal-footer">
               <button type="button" class="cmn-btn reset-btn wall_filter_reset">Reset</button>
-              <button type="button" class="cmn-btn">Apply</button>
+              <button type="button" class="cmn-btn wall_apply_filter">Apply</button>
           </div>
       </div>
   </div>
