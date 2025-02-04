@@ -687,34 +687,34 @@ class EventController extends BaseController
             $event_creation->design_inner_image = $request->shape_image;
         }
 
-        if (isset($request->textData) && json_encode($request->textData) != '') {
-            if ($request->temp_id != '' && $request->temp_id != null) {
-                // dd($request->temp_id);
-                $tempData = TextData::where('id', $request->temp_id)->first();
-                if ($tempData) {
-                    $sourceImagePath = asset('storage/canvas/' . $tempData->image);
-                    $destinationDirectory = public_path('storage/event_images/');
-                    $destinationImagePath = $destinationDirectory . $tempData->image;
-                    if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
-                        $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
-                        $destinationImagePath = $destinationDirectory . $newImageName;
+        if ($request->temp_id != '' && $request->temp_id != null) {
+            // dd($request->temp_id);
+            $tempData = TextData::where('id', $request->temp_id)->first();
+            if ($tempData) {
+                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+                $destinationDirectory = public_path('storage/event_images/');
+                $destinationImagePath = $destinationDirectory . $tempData->image;
+                if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+                    $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                    $destinationImagePath = $destinationDirectory . $newImageName;
 
-                        File::copy($sourceImagePath, $destinationImagePath);
-                        $event_creation->design_image = $tempData->image;
-                    }
+                    File::copy($sourceImagePath, $destinationImagePath);
+                    $event_creation->design_image = $tempData->image;
                 }
-            } else if (isset($request->cutome_image)) {
-
-
-                if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
-                    $pathParts = explode('/', $request->cutome_image);
-                    $event_creation->design_image = end($pathParts);
-                } else {
-                    $event_creation->design_image = $request->cutome_image;
-                }
-                $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
             }
-            // dd($event_creation->design_image);
+        } else if (isset($request->cutome_image)) {
+
+
+            if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
+                $pathParts = explode('/', $request->cutome_image);
+                $event_creation->design_image = end($pathParts);
+            } else {
+                $event_creation->design_image = $request->cutome_image;
+            }
+            $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
+        }
+
+        if (isset($request->textData) && json_encode($request->textData) != '') {
             $textElemtents = $request->textData['textElements'];
 
             foreach ($textElemtents as $key => $textJson) {
@@ -755,6 +755,8 @@ class EventController extends BaseController
             }
 
             $event_creation->static_information = json_encode($static_data);
+        } else {
+            $event_creation->static_information = null;
         }
         $event_creation->save();
         if ($eventId != "") {
