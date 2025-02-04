@@ -9232,5 +9232,9 @@ $(document).on(
     }
 );
 if(isDraftEvent =="0" && eventId!=""){
+    $(".li_design").addClass('menu-success');
+    $(".li_event_detail").addClass('menu-success');
+    $(".li_guest").addClass('menu-success');
+    $(".li_setting").addClass('menu-success');
     loadAgain();
 }
