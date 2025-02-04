@@ -2485,7 +2485,7 @@ foreach ($polls as $poll) {
     public function fetch_all_invited_user(Request $request){
 
         $eventId=$request->event_id;
-        $all_invited_user=getInvitedUsersList($event_id);
+        $all_invited_user=getInvitedUsersList($eventId);
 
     
         return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user','eventId'))->render(),'status'=>1]);
