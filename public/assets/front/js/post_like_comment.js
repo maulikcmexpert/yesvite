@@ -919,11 +919,27 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                   $modalBody.append(totalHtml);
             }
             if(upper_see>0){
-               var initial= parseInt($('#total-selected-email').attr('data-count'));
-               var new_value= initial+1 ;
-            //    alert(initial);
-               $('#total-selected-email').attr('data-count',new_value);
-               $('#total-selected-email').text('+'+new_value);
+
+
+                const exists = guestList.some((contact) => contact.id === id);
+                if (!exists) {
+                    guestList.push({
+                        id: id,
+                        prefer_by: preferBy,
+                        app_user: appUser,
+                    });
+                    console.log("Contact added to guest list:", {
+                        id,
+                        preferBy,
+                        appUser,
+                    });
+                } else {
+                    var initial= parseInt($('#total-selected-email').attr('data-count'));
+                    var new_value= initial+1 ;
+                 //    alert(initial);
+                    $('#total-selected-email').attr('data-count',new_value);
+                    $('#total-selected-email').text('+'+new_value);                }
+          
             }
 
              }
