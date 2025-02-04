@@ -691,15 +691,15 @@ $(document).on('click', '.open_photo_model', function () {
                         console.log('Reaction Store:', reaction_store);
                         console.log('Emoji Src:', emojiSrc);
 
-                        // Ensure we compare reaction_store to actual emoji unicode
-                        const heartUnicode = '\\u{2764}';
-                        const smileUnicode = '\\u{1F60D}';
-                        const clapUnicode = '\\u{1F44F}';
+                        // Define emojis with exact matching Unicode and image source
+                        const heartUnicode = '\\u{2764}'; //
+                        const smileUnicode = '\\u{1F60D}'; //
+                        const clapUnicode = '\\u{1F44F}'; //
 
                         // Reset all emojis: remove 'selected' class and show all emojis
-                        $(this).removeClass('selected').show();  // Remove 'selected' and show
+                        $(this).removeClass('selected').show();  // Reset 'selected' and show
 
-                        // Hide all emojis that don't match the reaction
+                        // Hide and select the correct emoji based on the reaction_store
                         if (reaction_store === heartUnicode && emojiSrc.includes('heart-emoji.png')) {
                             $(this).addClass('selected');
                         } else if (reaction_store === smileUnicode && emojiSrc.includes('eye-heart-emoji.png')) {
@@ -707,13 +707,15 @@ $(document).on('click', '.open_photo_model', function () {
                         } else if (reaction_store === clapUnicode && emojiSrc.includes('clap-icon.png')) {
                             $(this).addClass('selected');
                         } else {
-                            $(this).hide();
+                            $(this).hide(); // Hide non-matching emojis
                         }
                     } else {
                         console.log('No img tag found in this li element.');
                     }
                 });
-                updateReactions(data.reactionList, data.firstname, data.lastname, data.profile,data.location);
+
+                // Make sure you update the reactions after filtering them
+                updateReactions(data.reactionList, data.firstname, data.lastname, data.profile, data.location);
 
                 const commentsWrapper = $('.posts-card-show-all-comments-inner ul');
                 commentsWrapper.empty(); // Clear existing comments

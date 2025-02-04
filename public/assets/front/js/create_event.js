@@ -1,5 +1,5 @@
 let eventData = {};
-let isCohost = $("#isCohost").val();
+let isCohost = $("#isCohost").val() || "";
 var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
@@ -7489,6 +7489,7 @@ function get_co_host_list(
             app_user: app_user,
             cohostId: cohostId,
             isCohost: isCohost,
+            isCopy:isCopy,
             cohostpreferby: cohostpreferby,
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
@@ -8485,6 +8486,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 function updateEventData() {
     eventData.isdraft = "0";
     var data = eventData;
+    $("#loader").css("display", "block");
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -8494,15 +8496,19 @@ function updateEventData() {
         data: data,
         success: function (response) {
             $(".main-content-wrp").removeClass("blurred");
-            setTimeout(function () {
-                $("#loader").css("display", "none");
-            }, 10000);
+            
             if (response.isupadte == true) {
                 if (response.success == true) {
+                    setTimeout(function () {
+                        $("#loader").css("display", "none");
+                    }, 10000);
                     toastr.success("Event Updated Successfully");
                     window.location.href = base_url + "home";
                 }
             } else {
+                
+                    $("#loader").css("display", "none");
+                
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
                     // $('#eventModal').modal('show');
@@ -8514,8 +8520,9 @@ function updateEventData() {
                 $("#eventModal").on("hide.bs.modal", function (event) {
                     event.preventDefault(); // Prevents modal from closing
                 });
-                window.location.href = base_url + "home";
+                // window.location.href = base_url + "home";
             }
+
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!!");
@@ -8540,7 +8547,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
     eventData.isPhonecontact = isPhonecontact;
     eventData.IsPotluck = IsPotluck;
 
-    $("#loader").css("display", "block");
+    
     // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
