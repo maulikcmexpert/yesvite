@@ -544,7 +544,9 @@
     font-family: var(--SFProDisplay-Semibold);
     font-size: 14px;
     margin-bottom: 0;
-    padding: 6px 13px;
+    padding: 4px 9px;
+    border-radius: 100px;
+    margin-left: 5px;
     /* position: absolute;
     top: 0;
     right: 0; */
