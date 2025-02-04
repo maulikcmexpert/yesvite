@@ -155,6 +155,7 @@ $(document).on("click", ".design-cards", function () {
             fontWeight: element.fontWeight,
             fontStyle: element.fontStyle,
             underline: element.underline,
+            lineHeight: element.lineHeight || 2,
             linethrough: element.linethrough,
             backgroundColor: element.backgroundColor,
             textAlign: element.textAlign,
@@ -167,6 +168,7 @@ $(document).on("click", ".design-cards", function () {
             transparentCorners: false,
             isStatic: true,
             angle: element?.rotation ? element?.rotation : 0,
+            letterSpacing: 0,
         });
 
         switch (element.text.toLowerCase()) {
@@ -689,7 +691,8 @@ function bindData(current_event_id) {
                             fontWeight: element.fontWeight,
                             fontStyle: element.fontStyle,
                             underline: element.underline,
-                            lineHeight: element.lineHeight,
+                            lineHeight: element.lineHeight || 2,
+                            letterSpacing: 0,
                             linethrough:
                                 element.linethrough == true ||
                                 element.linethrough == "true" ||
@@ -1842,6 +1845,8 @@ function bindData(current_event_id) {
             isStatic: true,
             visible: true,
             hasControls: true,
+            lineHeight: element.lineHeight || 2,
+            letterSpacing: 0,
         });
 
         // Approximate width based on text length
@@ -2068,6 +2073,8 @@ function bindData(current_event_id) {
             fontFamily: originalTextbox.fontFamily,
             originX: originalTextbox.originX,
             originY: originalTextbox.originY,
+            lineHeight: originalTextbox.lineHeight || 2,
+            letterSpacing: 0,
             hasControls: true,
             hasBorders: true,
             lockScalingFlip: true,
