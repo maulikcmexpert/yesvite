@@ -8603,9 +8603,13 @@ $(document).on("click", ".design-sidebar-action", function () {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
                     );
-
+                    let i = 0;
                     if (sliderElement && sliderImages[index]) {
+                        i = i + 1;
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.style.display = "block";
+                        $(".photo-edit-delete-" + i).show();
+
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
