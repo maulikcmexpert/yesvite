@@ -1695,7 +1695,7 @@
                                 </div>
                                 @if(!empty($invite['phone_number']))
                                 <div class="invite-call-data mt-1">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center failed_inivites_mob">
                                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
