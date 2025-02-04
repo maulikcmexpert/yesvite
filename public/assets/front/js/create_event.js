@@ -6866,13 +6866,15 @@ $(document).on("click", ".invite_group_member", function () {
                     id: id,
                 });
             }
+           if(!$(this).is(":disabled")){
+               $("#user_tel-" + id).remove();
+               $(".user_id_tel-" + id).remove();
+               $(".user_id_tel-" + id).remove();
+               $("#user-" + id).remove();
+               $(".user-" + id).prop("checked", false);
+               $(".user_id-" + id).remove();
+            }
             // delete_invited_user(id,'0');
-            $("#user_tel-" + id).remove();
-            $(".user_id_tel-" + id).remove();
-            $(".user_id_tel-" + id).remove();
-            $("#user-" + id).remove();
-            $(".user-" + id).prop("checked", false);
-            $(".user_id-" + id).remove();
         }
     });
 
