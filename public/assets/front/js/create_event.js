@@ -2065,21 +2065,22 @@ function delete_invited_user(userId, is_contact = "0") {
             }
             var total_guest = $(".users-data.invited_user").length;
             var alreadyguest = $(".users-data.invited_users").length;
-            $("#event_guest_count").text(total_guest + " Guests");
-            $(".invite-count").text(total_guest + alreadyguest);
+            // $("#event_guest_count").text(total_guest + " Guests");
+            // $(".invite-count").text(total_guest + alreadyguest);
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
-            var remainingCount = max_guest - total_guest;
+            guest_counter(0, max_guest);
+            // var remainingCount = max_guest - total_guest;
 
-            if (remainingCount < 0) {
-                $(".invite-left_d").text("Invites | 0 Left");
-            } else {
-                $(".invite-left_d").text(
-                    "Invites | " + remainingCount + " Left"
-                );
-            }
-            $("#event_guest_left_count").val(remainingCount);
+            // if (remainingCount < 0) {
+            //     $(".invite-left_d").text("Invites | 0 Left");
+            // } else {
+            //     $(".invite-left_d").text(
+            //         "Invites | " + remainingCount + " Left"
+            //     );
+            // }
+            // $("#event_guest_left_count").val(remainingCount);
             console.log("User ID deleted successfully.");
 
             $("#loader").css("display", "none");
@@ -2197,20 +2198,20 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $("#currentInviteCount").val(currentInviteCount);
                 var total_guest = $(".users-data.invited_user").length;
                 var alreadyguest = $(".users-data.invited_users").length;
-                $("#event_guest_count").text(total_guest + " Guests");
-                $(".invite-count").text(total_guest + 0);
+                // $("#event_guest_count").text(total_guest + " Guests");
+                // $(".invite-count").text(total_guest + 0);
 
                 var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
-
-                if (remainingCount < 0) {
-                    $(".invite-left_d").text("Invites | 0 Left");
-                } else {
-                    $(".invite-left_d").text(
-                        "Invites | " + remainingCount + " Left"
-                    );
-                }
-                $("#event_guest_left_count").val(remainingCount);
+                guest_counter(0, max_guest);
+                // if (remainingCount < 0) {
+                //     $(".invite-left_d").text("Invites | 0 Left");
+                // } else {
+                //     $(".invite-left_d").text(
+                //         "Invites | " + remainingCount + " Left"
+                //     );
+                // }
+                // $("#event_guest_left_count").val(remainingCount);
                 $("#loader").css("display", "none");
 
                 console.log("User ID deleted successfully.");
@@ -6475,7 +6476,7 @@ function save_image_design(downloadImage, textData) {
         design_inner_image = $("#shape_img").attr("src");
     }
     var old_shape_url = $("#first_shape_img").attr("src");
-    eventData.cutome_image = image;
+
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
@@ -6857,19 +6858,24 @@ $(document).on("click", ".invite_group_member", function () {
                 });
             }
         } else {
+            if(!$(this).is(":disabled")){
             const id = $(this).val();
             const isIdExists = unselectedValues.some((item) => item.id === id);
 
-            if (!isIdExists) {
-                unselectedValues.push({
-                    id: id,
-                    preferby: perferby,
-                    invited_by: invited_by,
-                });
+                if (!isIdExists) {
+                    unselectedValues.push({
+                        id: id,
+                    });
+                }
+          
+               $("#user_tel-" + id).remove();
+               $(".user_id_tel-" + id).remove();
+               $(".user_id_tel-" + id).remove();
+               $("#user-" + id).remove();
+               $(".user-" + id).prop("checked", false);
+               $(".user_id-" + id).remove();
             }
-            delete_invited_user(id, "0");
-            $("#user-" + id).remove();
-            $(".user-" + id).prop("checked", false);
+            // delete_invited_user(id,'0');
         }
     });
 
@@ -6885,6 +6891,7 @@ $(document).on("click", ".invite_group_member", function () {
         },
         success: function (response) {
             if (response?.isTrue && response.isTrue) {
+                $("#loader").css("display", "none");
                 toggleSidebar();
                 return;
             }
@@ -8644,7 +8651,7 @@ $(document).on("click", "#close_editEvent", function (e) {
                 toastr.success("Event Saved as Draft");
                 setTimeout(function () {
                     $("#loader").css("display", "none");
-                }, 10000);
+                }, 1000000);
             }
         },
         error: function (xhr, status, error) {
@@ -9224,3 +9231,6 @@ $(document).on(
         }
     }
 );
+if(isDraftEvent =="0" && eventId!=""){
+    loadAgain();
+}

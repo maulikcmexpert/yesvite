@@ -2065,7 +2065,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0px !important;
 }
 
 .guests-listing-info{
@@ -2911,15 +2912,23 @@ main {
   .guests-listing-wrp .sucess-yes h5.green{
     font-size: 12px !important;
   }
+  .guests-listing-wrp .no-reply h5{
+    font-size: 12px !important;
+  }
+  .guests-listing-wrp .sucess-no h5{
+    font-size: 12px !important;
+  }
+
   .guests-listing-wrp .sucesss-cat h5{
     font-size: 12px !important;
   }
 
-  .guests-listing-wrp .sucess-yes{
+  .guests-listing-wrp .sucess-yes, .guests-listing-wrp .no-reply, .guests-listing-wrp .sucess-no{
     width: 100%;
     max-width: calc(100% - 30px);
     margin: 15px auto;
-    display: none !important;
+    margin-bottom: 0px !important;
+    /* display: none !important; */
   }
 
   .tab-guests-active .guests-listing-buttons{

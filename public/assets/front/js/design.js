@@ -16,7 +16,7 @@ let event_id = null;
 $(document).ready(function () {
     $("#custom_template").change(function () {
         var file = this.files[0];
-
+        dbJson = null;
         if (!file) return;
 
         var validExtensions = ["image/jpeg", "image/png"];
@@ -32,16 +32,17 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            url: base_url + "event/store_temp_design",
+            url: base_url + "event/store_custom_design",
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
                 if (response.image) {
-                    image = base_url + "storage/event_images/" + response.image;
+                    image = base_url + "storage/canvas/" + response.image;
                     eventData.cutome_image = response.image;
                     eventData.image = response.image;
+                    temp_id = null;
                     dbJson = null;
                     loadAgain();
                 } else {

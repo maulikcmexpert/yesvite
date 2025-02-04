@@ -499,7 +499,7 @@
                         <div class="create-post-profile-wrp">
 
                             @if ($photos != '')
-                                <img src="{{$photos}} " alt=""
+                                <img src="{{asset('storage/profile/'.$photos)}} " alt=""
                                     loading="lazy">
                             @else
                                 @php

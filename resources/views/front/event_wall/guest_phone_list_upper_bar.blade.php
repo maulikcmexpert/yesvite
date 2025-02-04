@@ -32,7 +32,7 @@ break;
                                 <!-- <img src="./assets/image/user-img.svg" alt="guest-img"> -->
                                                                 <!-- <img src="https://yesvite.cmexpertiseinfotech.in/storage/profile/73_profile.jpg?v=29" alt="user-img"> -->
                                                       @if(isset($guest_user['recent'])&&$guest_user['recent']=1)           
-                                                                            <a href="#" class="close">
+                                                                            <a href="#" class="close remove_new_phone_added_user" data-id="{{$guest_user['id']}}">
                                                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <rect x="1.20312" y="1" width="16" height="16" rx="8"

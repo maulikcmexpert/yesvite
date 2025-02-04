@@ -199,6 +199,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
     Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
     Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    Route::post('event/store_custom_design', [ControllersEventController::class, 'saveCustomDesign']);
     Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
     Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
     Route::post('event/list_group_memeber', [ControllersEventController::class, 'listGroupMember']);
@@ -306,6 +307,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/get_yesviteContact', [EventWallController::class, 'get_yesviteContact'])->name('event_wall.get_yesviteContact');
     Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
     Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
+    Route::post('event_wall/fetch_all_invited_user', [EventWallController::class, 'fetch_all_invited_user']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 });
 

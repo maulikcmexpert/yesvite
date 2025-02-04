@@ -397,11 +397,15 @@ $("#create-photo-btn").click(function () {
     $(".create-post-upload-img-wrp").removeClass("d-none");
     $(".create-post-poll-wrp").addClass("d-none");
     $("#imagePreview").empty();
+    $("#postContent").val('');
+    $(".create-post-upload-img-inner").removeClass("d-none");
+    $('.create_post_btn').prop('disabled', false);
     $("#photoForm").reset();
 });
 
 $("#create-poll-btn").click(function () {
     $(".create-post-poll-wrp").removeClass("d-none");
+    $("#postContent").val('');
     $(".create-post-upload-img-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
 });
@@ -413,6 +417,7 @@ $(".upload-img-delete").click(function () {
 $(".upload-poll-delete").click(function () {
     $(".create-post-poll-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
+    $('.create_post_btn').prop('disabled', false);
 });
 
 $(document).on("click", ".header-profile-wrp", function () {
