@@ -623,8 +623,10 @@ $(document).on('click', '.open_photo_model', function () {
                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
                 if (data.is_host == 1) {
+                    console.log(1);
+
                     // Add the "Host" label next to the user's name
-                    $('#post_name').append(`<span class="host">Host</span>`);
+                    $('#host_display').text('Host');
                 }
 
                 $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
