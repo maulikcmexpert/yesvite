@@ -2487,6 +2487,7 @@ foreach ($polls as $poll) {
         $event_id=$request->event_id;
         $all_invited_user=getInvitedUsersList($event_id);
 
+    
         return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user'))->render(),'status'=>1]);
 
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);
