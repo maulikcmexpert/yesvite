@@ -2622,6 +2622,8 @@ function getTextDataFromCanvas() {
                 backgroundColor: obj.backgroundColor,
                 fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
+                lineHeight: obj.lineHeight || 2,
+                letterSpacing: obj.letterSpacing || 0,
                 fontWeight: obj.fontWeight,
                 fontStyle: obj.fontStyle,
                 underline: obj.underline,
