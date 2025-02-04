@@ -478,9 +478,10 @@ $(document).ready(function () {
         guestList=[];
         $('.guest_yesvite').remove();
         $('.phone_yesvite').remove();
-        $('.phoneContact-checkbox').prop('checked',false);
-        $('.contact-checkbox').prop('checked',false);
-        $('.phone-checkbox').prop('checked',false);
+        $('.phoneContact-checkbox:not(:disabled)').prop('checked', false);
+        $('.contact-checkbox:not(:disabled)').prop('checked', false);
+        $('.phone-checkbox:not(:disabled)').prop('checked', false);
+        
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
         if (allContactsSuccess) {
