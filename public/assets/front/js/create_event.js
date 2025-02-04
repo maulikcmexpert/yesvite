@@ -8317,10 +8317,23 @@ function searchRecords(lim, off, type, search = null) {
 }
 $(document).on("click", ".photo-edit-delete-1", function () {
     $(".slider_photo").css("display", "block");
-
-    //$(".slider_photo").trigger("click");
+    setTimeout(function () {
+        $(".slider_photo").trigger("click");
+    }, 1000);
 });
 
+$(document).on("click", ".photo-edit-delete-2", function () {
+    $(".slider_photo_1").css("display", "block");
+    setTimeout(function () {
+        $(".slider_photo_1").trigger("click");
+    }, 1000);
+});
+$(document).on("click", ".photo-edit-delete-2", function () {
+    $(".slider_photo_2").css("display", "block");
+    setTimeout(function () {
+        $(".slider_photo_2").trigger("click");
+    }, 1000);
+});
 $(document).on("change", ".slider_photo", function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
