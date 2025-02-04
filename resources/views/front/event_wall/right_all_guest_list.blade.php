@@ -1,5 +1,6 @@
 @php
 $invite=$all_invited_user['all_invited_users'];
+dd($invite);
 @endphp
 
 @if(empty($invite))
