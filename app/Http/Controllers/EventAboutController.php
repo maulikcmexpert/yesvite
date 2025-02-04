@@ -50,7 +50,7 @@ class EventAboutController extends Controller
             }, 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
-            // dd($eventDetail);
+            dd($eventDetail);
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
