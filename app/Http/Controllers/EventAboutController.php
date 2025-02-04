@@ -116,7 +116,7 @@ class EventAboutController extends Controller
             }
             $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
             $eventDetails['total_event_comments']= $event_comments;
-            $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
+            $eventDetails['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
             $eventDetails['message_to_guests'] = $eventDetail->message_to_guests;
@@ -328,6 +328,7 @@ class EventAboutController extends Controller
             //     }
             // }
         ///postlist
+        dd( $eventDetails);
         $postList = [];
         $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::query();
@@ -664,7 +665,7 @@ class EventAboutController extends Controller
         //    {{ dd($eventDetails);}}
         }
 // //
-        dd($eventDetails);
+
             return view('layout', compact('page', 'title', 'js','postList', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
