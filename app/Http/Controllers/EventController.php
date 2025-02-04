@@ -84,37 +84,40 @@ class EventController extends BaseController
         Session::forget('gift_registry_data');
         Session::forget('thankyou_card_data');
         $image = Session::get('desgin');
-        $slider_image = Session::get('desgin_slider');
-        $custom_image = Session::get('custom_image');
+        // $slider_image = Session::get('desgin_slider');
+        $slider_image = Session::forget('desgin_slider');
+        // $custom_image = Session::get('custom_image');
+
+        $custom_image = Session::forget('custom_image');
         $shape = Session::get('shape_image');
 
         $useremail = Auth::user()->email;
-        if (isset($shape) && $shape != "" || $shape != NULL) {
-            if (file_exists(public_path('storage/canvas/') . $shape)) {
-                $shapePath = public_path('storage/canvas/') . $shape;
-                unlink($shapePath);
-            }
-        }
-        if (isset($image) && $image != "" || $image != NULL) {
-            if (file_exists(public_path('storage/event_design_template/') . $image)) {
-                $imagePath = public_path('storage/event_design_template/') . $image;
-                unlink($imagePath);
-            }
-        }
-        if (isset($custom_image) && $custom_image != "" || $image != NULL) {
-            if (file_exists(public_path('storage/canvas/') . $custom_image)) {
-                $imagePath = public_path('storage/canvas/') . $custom_image;
-                unlink($imagePath);
-            }
-        }
-        if (isset($slider_image) && !empty($slider_image)) {
-            foreach ($slider_image as $key => $value) {
-                if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
-                    $imagePath = public_path('storage/event_images/') . $value['fileName'];
-                    unlink($imagePath);
-                }
-            }
-        }
+        // if (isset($shape) && $shape != "" || $shape != NULL) {
+        //     if (file_exists(public_path('storage/canvas/') . $shape)) {
+        //         $shapePath = public_path('storage/canvas/') . $shape;
+        //         unlink($shapePath);
+        //     }
+        // }
+        // if (isset($image) && $image != "" || $image != NULL) {
+        //     if (file_exists(public_path('storage/event_design_template/') . $image)) {
+        //         $imagePath = public_path('storage/event_design_template/') . $image;
+        //         unlink($imagePath);
+        //     }
+        // }
+        // if (isset($custom_image) && $custom_image != "" || $image != NULL) {
+        //     if (file_exists(public_path('storage/canvas/') . $custom_image)) {
+        //         $imagePath = public_path('storage/canvas/') . $custom_image;
+        //         unlink($imagePath);
+        //     }
+        // }
+        // if (isset($slider_image) && !empty($slider_image)) {
+        //     foreach ($slider_image as $key => $value) {
+        //         if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
+        //             $imagePath = public_path('storage/event_images/') . $value['fileName'];
+        //             unlink($imagePath);
+        //         }
+        //     }
+        // }
         Session::forget('desgin');
         Session::forget('desgin_slider');
         Session::forget('custom_image');
