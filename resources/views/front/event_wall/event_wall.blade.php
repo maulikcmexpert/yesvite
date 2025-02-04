@@ -87,17 +87,18 @@
                                                             <span class="active-dot"></span>
                                                         </div>
                                                         <div class="posts-card-head-left-content">
-                                                            <h3>{{ $post['username'] }}</h3>
-                                                            @if ($post['is_host'] == '1')
-                                                            <h3>
+                                                            <h3>{{ $post['username'] }}
+                                                                @if ($post['is_host'] == '1')
+
+                                                                <span
+                                                                    class="host">Host</span>
+                                                            @endif
+                                                            @if ($post['is_co_host'] == '1')
+
                                                             <span
-                                                                class="host">Host</span></h3>
-                                                        @endif
-                                                        @if ($post['is_co_host'] == '1')
-                                                        <h3>
-                                                        <span
-                                                            class="host">Co Host</span></h3>
-                                                    @endif
+                                                                class="host">Co Host</span>
+                                                        @endif</h3>
+
                                                             <p>{{ $post['location'] }}</p>
                                                         </div>
                                                     </div>
