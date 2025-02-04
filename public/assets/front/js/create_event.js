@@ -8437,6 +8437,8 @@ $(document).on("click", ".delete_silder", function (e) {
                 method: "POST",
                 data: {
                     delete_id: delete_id,
+                    eventId: eventId,
+                    src: src,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
