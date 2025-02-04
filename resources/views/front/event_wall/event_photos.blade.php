@@ -1,4 +1,4 @@
-{{dd($postPhotoList)}}
+{{-- {{dd($postPhotoList)}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -771,7 +771,9 @@
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
-                                    <h3 id="post_name">Chance Curtis</h3>
+                                    <h3 id="post_name">Chance Curtis
+                                        </h3>
+                                        <span id="host_display" class="host">Host</span>
                                     <p id="location">New York, NY</p>
                                 </div>
                             </div>
@@ -836,7 +838,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h5><span class="positive-ans"><i class="fa-solid fa-circle-check"></i>Yes</span> 10m
+                                <h5 id="post_time_details"> 10m
                                 </h5>
                             </div>
                         </div>

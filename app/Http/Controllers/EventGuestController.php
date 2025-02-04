@@ -761,7 +761,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 'firstname' => $guest->user->firstname!=""? $guest->user->firstname:"",
                 'lastname' => $guest->user->lastname!=""?$guest->user->lastname:"",
                 'email' => $guest->user->email,
-                'profile' => $guest->user->profile ? asset('storage/profile/' . $guest->user->profile) : asset('images/default-profile.png'),
+                'profile' => $guest->user->profile ? asset('storage/profile/' . $guest->user->profile) : "",
                 'adults' => $guest->adults,
                 'kids' => $guest->kids,
                 'rsvp_status' => $guest->rsvp_status,

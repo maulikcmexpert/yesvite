@@ -57,7 +57,7 @@ break;
 @php
 $counter = count($listing) - 4;
 @endphp
-<a href="#" class="guest-user d-block yesvite add_guest_phone_seeall">
+<a class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">
                         <span class="number" id="total-selected-phone" data-count="1">+{{$counter}}</span>
                         <span class="content">Total</span>

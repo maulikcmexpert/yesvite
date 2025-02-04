@@ -204,6 +204,7 @@ $(document).on('click', '.remove_guest_page', function () {
     const guestId = $(this).data('guest-update-id');
     const eventId = $(this).data('event-id');
     const userId = $(this).data('user-id');
+    // console.log({guestId,eventId,userId});
 
     // Make the AJAX request to remove the guest from the invite
     $.ajax({
@@ -220,10 +221,11 @@ $(document).on('click', '.remove_guest_page', function () {
                 // // Find the guest container by guestId and remove it from the DOM
                 $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
 
-
+                toastr.success('Guest Removed Successfully');
 
                 // Hide the modal if it's open
                 $('#editrsvp').modal('hide');
+                window.location.reload();
             } else {
                 alert('Failed to remove guest. Please try again.');
             }

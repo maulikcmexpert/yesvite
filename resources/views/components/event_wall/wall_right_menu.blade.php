@@ -93,6 +93,7 @@ if ($hostView) {
             </form>
         </div>
         <div class="guests-listing-wrp guest-user-list">
+            <input type="hidden" id="eventId" value="{{$event}}" />
             <ul  id="guestList">
                 @if (!empty($guestArray))
                 @foreach ($guestArray as $index => $guest)
@@ -180,9 +181,17 @@ if ($hostView) {
                                         @endif
                                         </div>
                                         @if ($eventInfo['guest_view']['is_host'] == 1)
-                                            <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
+                                          
+                                                    @if($guest['is_sync']=="1")
+                                                    <button type="button" ><i
+                                                    class="fa-solid fa-ellipsis-vertical"
+                                                    data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
+                                                    @else
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#editrsvp3"><i
                                                     class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
                                                     data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
+                                                    @endif
+                                        
                                         @endif
                                     </div>
                             </div>
@@ -198,8 +207,8 @@ if ($hostView) {
                                             <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
                                             <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
                                             </svg>
-                                            <h5>3 Adults</h5>
-                                            <h5>2 Kids</h5>
+                                            <h5>{{$guest['adults']}} Adults</h5>
+                                            <h5>{{$guest['kids']}} Kids</h5>
                                         </div>
                                   </div>
 

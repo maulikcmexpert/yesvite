@@ -256,8 +256,8 @@ $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
     const commentId = $('.commented-user-wrp').data('comment-id');
-    // const replyParentId = $('.reply-on-comment').data('comment-id');
-    // alert(replyParentId);
+    const replyParentId = $('.reply-on-comment').data('comment-id');
+    alert(commentId);
     if (commentText === '') {
         alert('Please enter a comment');
         return;
@@ -385,7 +385,7 @@ $(document).on('click', '.comment-send-icon', function () {
                                     replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment); // Create <ul> if not exists// Create <ul> if not exists
                                 }
                                 // Append the new reply under the parent comment's <ul>
-                                replyList.append(newCommentHTML);
+                                replyList.append(replyHTML);
                             }
                         } else {
                             // If it's a top-level comment, append it to the top-level comment list
@@ -622,6 +622,12 @@ $(document).on('click', '.open_photo_model', function () {
                     // Return initials inside an h5 tag with dynamic styling
                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
+                  // Host Label Condition
+            if (data.is_host == 'Host') {
+                const host =  `${data.is_host}`;
+                $('#host_display').text(host);
+            }
+
                 $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
                 // Name
                 const fullName = `${data.firstname} ${data.lastname}`;
@@ -633,6 +639,7 @@ $(document).on('click', '.open_photo_model', function () {
 
                 // Post Message
                 $('#post_message').text(data.post_message);
+                $('#post_time_details').text(data.post_time);
 
 
                 $('#likes').text(data.total_likes + ' Likes');
@@ -710,13 +717,14 @@ $(document).on('click', '.open_photo_model', function () {
 
                 if (data.latest_comment && Array.isArray(data.latest_comment)) {
                     data.latest_comment.forEach(comment => {
+                        let displayName = comment.profile || generatePlaceholderName(comment.username);
                         commentsWrapper.append(`
                             <li class="commented-user-wrp" data-comment-id="${comment.id}">
                               <input type="hidden" id="parent_comment_id" value="${comment.id}">
                                 <div class="commented-user-head">
                                     <div class="commented-user-profile">
                                         <div class="commented-user-profile-img">
-                                            <img src="${comment.profile || '{{ asset("assets/front/img/header-profile-img.png") }}'}" alt="">
+                                        ${displayName}
                                         </div>
                                         <div class="commented-user-profile-content">
                                             <h3>${comment.username || ''}</h3>
@@ -746,6 +754,17 @@ $(document).on('click', '.open_photo_model', function () {
                             </li>
                         `);
                     })
+                }
+                function generatePlaceholderName(username) {
+                    const nameParts = username.split(" ");
+                    const firstInitial =
+                        nameParts[0]?.[0]?.toUpperCase() || "";
+                    const secondInitial =
+                        nameParts[1]?.[0]?.toUpperCase() || "";
+                    const initials = `${firstInitial}${secondInitial}`;
+                    const fontColor = `fontcolor${firstInitial}`;
+                    // Return initials inside an h5 tag with dynamic styling
+                    return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
 
             } else {

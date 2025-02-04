@@ -84,37 +84,40 @@ class EventController extends BaseController
         Session::forget('gift_registry_data');
         Session::forget('thankyou_card_data');
         $image = Session::get('desgin');
-        $slider_image = Session::get('desgin_slider');
-        $custom_image = Session::get('custom_image');
+        // $slider_image = Session::get('desgin_slider');
+        $slider_image = Session::forget('desgin_slider');
+        // $custom_image = Session::get('custom_image');
+
+        $custom_image = Session::forget('custom_image');
         $shape = Session::get('shape_image');
 
         $useremail = Auth::user()->email;
-        if (isset($shape) && $shape != "" || $shape != NULL) {
-            if (file_exists(public_path('storage/canvas/') . $shape)) {
-                $shapePath = public_path('storage/canvas/') . $shape;
-                unlink($shapePath);
-            }
-        }
-        if (isset($image) && $image != "" || $image != NULL) {
-            if (file_exists(public_path('storage/event_design_template/') . $image)) {
-                $imagePath = public_path('storage/event_design_template/') . $image;
-                unlink($imagePath);
-            }
-        }
-        if (isset($custom_image) && $custom_image != "" || $image != NULL) {
-            if (file_exists(public_path('storage/canvas/') . $custom_image)) {
-                $imagePath = public_path('storage/canvas/') . $custom_image;
-                unlink($imagePath);
-            }
-        }
-        if (isset($slider_image) && !empty($slider_image)) {
-            foreach ($slider_image as $key => $value) {
-                if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
-                    $imagePath = public_path('storage/event_images/') . $value['fileName'];
-                    unlink($imagePath);
-                }
-            }
-        }
+        // if (isset($shape) && $shape != "" || $shape != NULL) {
+        //     if (file_exists(public_path('storage/canvas/') . $shape)) {
+        //         $shapePath = public_path('storage/canvas/') . $shape;
+        //         unlink($shapePath);
+        //     }
+        // }
+        // if (isset($image) && $image != "" || $image != NULL) {
+        //     if (file_exists(public_path('storage/event_design_template/') . $image)) {
+        //         $imagePath = public_path('storage/event_design_template/') . $image;
+        //         unlink($imagePath);
+        //     }
+        // }
+        // if (isset($custom_image) && $custom_image != "" || $image != NULL) {
+        //     if (file_exists(public_path('storage/canvas/') . $custom_image)) {
+        //         $imagePath = public_path('storage/canvas/') . $custom_image;
+        //         unlink($imagePath);
+        //     }
+        // }
+        // if (isset($slider_image) && !empty($slider_image)) {
+        //     foreach ($slider_image as $key => $value) {
+        //         if (file_exists(public_path('storage/event_images/') . $value['fileName'])) {
+        //             $imagePath = public_path('storage/event_images/') . $value['fileName'];
+        //             unlink($imagePath);
+        //         }
+        //     }
+        // }
         Session::forget('desgin');
         Session::forget('desgin_slider');
         Session::forget('custom_image');
@@ -1446,6 +1449,7 @@ class EventController extends BaseController
     public function storeCategoryitemSession(Request $request)
     {
         $user = Auth::guard('web')->user();
+        $id = $user->id;
         $name = $user->firstname . ' ' . $user->lastname;
         $categoryName = $request->input('category_name');
         // $category_quantity = $request->input('category_quantity');
@@ -1477,34 +1481,70 @@ class EventController extends BaseController
             if (!isset($categories[$category_index]['item'])) {
                 $categories[$category_index]['item'] = [];
             }
-
-            $categories[$category_index]['item'][] = [
+            $item = [
                 'name' => $itemName,
                 'self_bring' => $selfBring,
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
-                'item_carry_users'[0] => [
-                    'user_id' => $user->id,  // Use => for key-value pairs
-                    'quantity' => $itemQuantity,
-                ]
             ];
+            if ($selfBringQuantity != "") {
+                $item['item_carry_users'][] = [
+                    'user_id' => $user->id,
+                    'quantity' => $itemQuantity,
+                ];
+            }
+            $categories[$category_index]['item'][] = $item;
+
+            // $categories[$category_index]['item'][] = [
+            //     'name' => $itemName,
+            //     'self_bring' => $selfBring,
+            //     'self_bring_qty' => $selfBringQuantity,
+            //     'quantity' => $itemQuantity,
+            //     if($selfBringQuantity!=""){
+            //         'item_carry_users' => [
+            //             'user_id' => $user->id,  // Use => for key-value pairs
+            //             'quantity' => $itemQuantity,
+            //         ]
+            //     }
+            // ];
         } else {
-            $categories[$category_index] = [
-                'category_name' => $categoryName, // Use $categoryName from the request
-                'category_quantity' => $request->input('category_quantity', 0), // Provide a default value if not available
+            // $categories[$category_index] = [
+            //     'category_name' => $categoryName, // Use $categoryName from the request
+            //     'category_quantity' => $request->input('category_quantity', 0), // Provide a default value if not available
+            //     'item' => [
+            //         [
+            //             'name' => $itemName,
+            //             // 'self_bring' => $selfBring,
+            //             // 'self_bring_qty' => $selfBringQuantity,
+            //             'quantity' => $itemQuantity,
+            //             if($selfBringQuantity!=""){
+            //             'item_carry_users' => [
+            //                 'user_id' => $user->id,  // Use => for key-value pairs
+            //                 'quantity' => $itemQuantity,
+            //             ]
+            //             }
+            //         ]
+            //     ]
+            // ];
+            $categoryData = [
+                'category_name' => $categoryName,
+                'category_quantity' => $request->input('category_quantity', 0),
                 'item' => [
                     [
                         'name' => $itemName,
-                        // 'self_bring' => $selfBring,
-                        // 'self_bring_qty' => $selfBringQuantity,
                         'quantity' => $itemQuantity,
-                        'item_carry_users'[0] => [
-                            'user_id' => $user->id,  // Use => for key-value pairs
-                            'quantity' => $itemQuantity,
-                        ]
                     ]
                 ]
             ];
+
+            if ($selfBringQuantity != "") {
+                $categoryData['item'][0]['item_carry_users'][] = [
+                    'user_id' => $user->id,
+                    'quantity' => $itemQuantity,
+                ];
+            }
+            $categories[$category_index] = $categoryData;
+
         }
 
         //  else {
@@ -1534,10 +1574,11 @@ class EventController extends BaseController
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
                 if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
-
-                    foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
-                        $total_quantity = $total_quantity + $userVal['quantity'];
-                    }
+                    
+                    // foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
+                    //     $total_quantity = intva($total_quantity) + intval($userVal['quantity']);
+                    //     dd($categories[$category_index]['item'][$key]['item_carry_users']);
+                    // }
                     // if (isset($value['self_bring']) && isset($value['self_bring_qty']) && $value['self_bring'] == 1) {
                     //     $total_quantity = $total_quantity + $value['self_bring_qty'];
                     // }
@@ -3195,7 +3236,7 @@ class EventController extends BaseController
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
         $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
         $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
-        $event_creation->rsvp_by_date_set = (isset($rsvp_by_date) && $rsvp_by_date != "")?"1":"0";
+        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date) && $request->rsvp_by_date != "")?"1":"0";
         // $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         // dd($request->rsvp_by_date_set,$event_creation->rsvp_by_date_set);
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
