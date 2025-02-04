@@ -8323,15 +8323,15 @@ $(document).on("click", ".photo-edit-delete-1", function () {
 });
 
 $(document).on("click", ".photo-edit-delete-2", function () {
-    $(".slider_photo_1").css("display", "block");
-    setTimeout(function () {
-        $(".slider_photo_1").trigger("click");
-    }, 1000);
-});
-$(document).on("click", ".photo-edit-delete-2", function () {
     $(".slider_photo_2").css("display", "block");
     setTimeout(function () {
         $(".slider_photo_2").trigger("click");
+    }, 1000);
+});
+$(document).on("click", ".photo-edit-delete-2", function () {
+    $(".slider_photo_3").css("display", "block");
+    setTimeout(function () {
+        $(".slider_photo_3").trigger("click");
     }, 1000);
 });
 $(document).on("change", ".slider_photo", function (event) {
