@@ -382,7 +382,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
-        // Find the closest '.posts-card-main-comment' wrapper (the main post container)
+        // Find the closest comment element
         const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp").prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
@@ -390,26 +390,33 @@ $(document).ready(function () {
             return;
         }
 
-        // Find the username and comment ID from the current comment being replied to
+        // Get the username and comment ID from the current comment being replied to
         const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
         const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
+
+        if (!parentId) {
+            console.error("Parent Comment ID is missing!");
+            return;
+        }
+
+        // Set the parent comment ID value in the hidden field for later use in the AJAX request
+        $(".parent_comment_id").val(parentId); // Store parent comment ID in a hidden field
 
         // Set the active class on the currently selected comment
         $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
         $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
 
-        // Find the comment box inside the parent wrapper and insert the username
+        // Focus the comment box and insert the '@username'
         const commentBox = parentWrapper.find(".post_comment");
         if (!commentBox.length) {
             console.error("Comment input field not found!");
             return;
         }
 
-        $(".parent_comment_id").val(parentId); // Set the parent comment ID
-
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
+
 
     // Handle reply button click (when replying to a comment)
 });
