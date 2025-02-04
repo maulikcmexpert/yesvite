@@ -484,9 +484,9 @@ $(document).ready(function () {
         
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
-        if (allContactsSuccess) {
-            return;
-        }
+        // if (allContactsSuccess) {
+        //     return;
+        // }
         $.ajax({
             url: yesviteUrl,
             type: "POST",
