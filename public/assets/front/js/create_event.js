@@ -8462,12 +8462,14 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     updateEventData();
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     if (save1 == 8) {
@@ -8476,6 +8478,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
@@ -8487,7 +8490,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 
 function updateEventData() {
     eventData.isdraft = "0";
-    eventData.is_update_event = "1";
+    
     var data = eventData;
     $("#loader").css("display", "block");
     $.ajax({
