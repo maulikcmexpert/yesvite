@@ -1090,5 +1090,28 @@ $(document).on("keyup", ".search_contact", function () {
 });
 
 $(document).on('click','.see-all-guest-right-btn',function(){
-
+    $.ajax({
+        url: base_url + "event_wall/fetch_all_invited_user", // Your Laravel route
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            event_id: $("#event_id").val(), // Event ID from a hidden input
+            guest_list: guestList,
+        },
+        success: function (response) {
+            if (response.status === 1) {
+                window.location.reload();
+                toastr.success('Invited successfully');
+                // alert(response.message); // Show success message
+                guestList = []; // Clear guest list after successful submission
+            } else {
+                alert(response.message); // Show error message
+            }
+        },
+        error: function (xhr) {
+            alert("Something went wrong. Please try again."); // Handle AJAX errors
+        },
+    });
 });

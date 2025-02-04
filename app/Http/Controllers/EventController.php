@@ -2334,22 +2334,21 @@ class EventController extends BaseController
         $users = $request->users;
         $unselectusers = $request->unselectedValues;
         $userIds = session()->get('user_ids');
-        dd($userIds);
+
         if (!empty($unselectusers)) {
             foreach ($unselectusers as $value) {
                 $id = $value['id'];
 
                 // Use array_filter to remove the user based on the ID
                 $userIds = array_filter($userIds, function ($value) use ($id) {
-                    // Skip users where 'isAlready' is "1"
-                    if (isset($value['isAlready']) && $value['isAlready'] == "1") {
+                    // Skip users where 'isAlready' is "1" and the 'id' matches
+                    if (isset($value['isAlready']) && $value['isAlready'] == "1" && $value['id'] == $id) {
                         return false;  // Skip this user
                     }
-                    
+
                     // Keep all users except the one with the given ID
                     return $value['id'] !== $id;
                 });
-                
             }
 
             // Reindex the array after filtering
