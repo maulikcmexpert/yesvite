@@ -549,8 +549,15 @@ foreach ($polls as $poll) {
 
                         // $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
                         $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
+                        $replyCommentInfo['location']  = null; // Default value
 
-                        $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
+                        if (!empty($reply->user)) {
+                            $city = trim($reply->user->city ?? '');
+                            $state = trim($reply->user->state ?? '');
+
+                            $replyCommentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                        }
+                        // $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
 
                         $replyCommentInfo['is_like'] = checkUserIsLike($reply->id, $user->id);
 
