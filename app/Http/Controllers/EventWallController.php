@@ -342,7 +342,7 @@ foreach ($polls as $poll) {
 
         // Execute the query and get the results
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
-        dd($eventPostList);
+        // dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
         // $results = $eventPostList->paginate(10);
         // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
