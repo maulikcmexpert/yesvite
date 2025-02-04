@@ -1088,3 +1088,7 @@ $(document).on("keyup", ".search_contact", function () {
         });
     }
 });
+
+$(document).on('click','.see-all-guest-right-btn',function(){
+
+});
