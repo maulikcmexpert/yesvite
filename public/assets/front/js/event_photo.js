@@ -627,7 +627,7 @@ $(document).on('click', '.open_photo_model', function () {
                     console.log(1);
 
                     // Add the "Host" label next to the user's name
-                    $('#host_display').text(Host);
+                    $('#host_display').text('Host');
                 }
 
                 $('.likeModel').data('event-id', data.event_id).data('event-post-id', data.id);
