@@ -1002,7 +1002,7 @@ function getInvitedUsersList($eventId)
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            if ($guestVal->user_id==null&&$guestVal->sync_id != '') {
+            if (($guestVal->user_id==null&&$guestVal->sync_id != '')) {
     // if ($guestVal->sync_id != '') {
                 $invitedGuestDetail['guest_id'] = $guestVal->id;
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";

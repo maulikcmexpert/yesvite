@@ -611,7 +611,7 @@ class EventController extends BaseController
             $rsvp_by_date_set = '1';
         } else {
             $rsvp_by_date_set = '0';
-            $rsvp_by_date=null;
+            $rsvp_by_date = null;
             if ($startDateFormat) {
                 // $start = new DateTime($startDateFormat);
                 // $start->modify('-1 day');
@@ -1545,7 +1545,6 @@ class EventController extends BaseController
                 ];
             }
             $categories[$category_index] = $categoryData;
-
         }
 
         //  else {
@@ -1576,7 +1575,7 @@ class EventController extends BaseController
             foreach ($categories[$category_index]['item'] as $key => $value) {
                 $total_item = $total_item + $value['quantity'];
                 if (isset($categories[$category_index]['item'][$key]['item_carry_users'])) {
-                    
+
                     // foreach ($categories[$category_index]['item'][$key]['item_carry_users'] as $userkey => $userVal) {
                     //     $total_quantity = intva($total_quantity) + intval($userVal['quantity']);
                     //     dd($categories[$category_index]['item'][$key]['item_carry_users']);
@@ -2792,7 +2791,7 @@ class EventController extends BaseController
             })
             ->get();
 
-        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'isCohost','isCopy', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
+        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'isCohost', 'isCopy', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
     }
 
     public function get_gift_registry(Request $request)
@@ -2912,22 +2911,51 @@ class EventController extends BaseController
     public function deleteSliderImg(Request $request)
     {
         $delete_id = $request->delete_id;
-        $get_slider_data = Session::get('desgin_slider');
-        $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($delete_id) {
-            if ($slider['deleteId'] === $delete_id) {
-                $image = $slider['fileName'];
-                $imagePath = public_path('storage/event_images/') . $image;
-                if (file_exists($imagePath)) {
-                    unlink($imagePath);
-                }
-                return false;
+        $eventId = $request->eventId;
+        $src = $request->src;
+
+        // Extract filename from URL
+        $imageFilename = basename(parse_url($src, PHP_URL_PATH));
+
+        // Check if the image exists in the EventImage table
+        $eventImage = EventImage::where([
+            'event_id' => $eventId,
+            'image' => $imageFilename
+        ])->first();
+
+        if ($eventImage) {
+            // Delete database entry
+            $eventImage->delete();
+
+            // Unlink the image file
+            $imagePath = public_path('storage/event_images/') . $imageFilename;
+            if (file_exists($imagePath)) {
+                @unlink($imagePath);
             }
-            return true;
-        });
-        Session::put('desgin_slider', array_values($filtered_slider_data));
-        Session::save();
+        }
+
+        // Remove from session if exists
+        $get_slider_data = Session::get('desgin_slider');
+        if ($get_slider_data) {
+            $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($imageFilename) {
+                if ($slider['fileName'] === $imageFilename) {
+                    $imagePath = public_path('storage/event_images/') . $slider['fileName'];
+                    if (file_exists($imagePath)) {
+                        @unlink($imagePath);
+                    }
+                    return false; // Remove from session
+                }
+                return true;
+            });
+
+            // Update session data
+            Session::put('desgin_slider', array_values($filtered_slider_data));
+            Session::save();
+        }
+
         return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
     }
+
     public function get_design_edit_page(Request $request)
     {
 
@@ -3109,7 +3137,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-       
+
         // dd($request->slider_images);
         Session::forget('desgin');
         Session::forget('shape_image');
@@ -3427,7 +3455,7 @@ class EventController extends BaseController
 
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 // if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
-                    if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
+                if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
                     $is_cohost = '1';
                     $invited_user = $request->co_host;
                     $prefer_by = $request->co_host_prefer_by;
