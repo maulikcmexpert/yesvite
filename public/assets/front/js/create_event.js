@@ -8520,7 +8520,7 @@ function updateEventData() {
                 $("#eventModal").on("hide.bs.modal", function (event) {
                     event.preventDefault(); // Prevents modal from closing
                 });
-                window.location.href = base_url + "home";
+                // window.location.href = base_url + "home";
             }
 
         },
