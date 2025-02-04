@@ -185,7 +185,9 @@ if ($hostView) {
                                                 data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
                                     @endif
                                 </div>
-                                <div class="sucess-yes">
+                               
+                            </li>
+                            <div class="sucess-yes">
                                         <h5 class="green">YES</h5>
                                         <div class="sucesss-cat ms-auto">
                                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -198,7 +200,6 @@ if ($hostView) {
                                             <h5>2 Kids</h5>
                                         </div>
                                   </div>
-                            </li>
                         @endif
                     @endforeach
                 @endif
