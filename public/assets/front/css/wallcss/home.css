@@ -2066,7 +2066,7 @@ main {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  /* gap: 10px; */
+  gap: 0px !important;
 }
 
 .guests-listing-info{
