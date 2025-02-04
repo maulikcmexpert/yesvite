@@ -196,22 +196,18 @@ console.log(adults,kids);
           var rsvpStatus = $('#statusRsvp').val();
         if(rsvpStatus=='1'){
             $("#option6").prop('checked',true);
+            $("#option5").prop('checked',false);
             $("#rsvp_status_adults").val(0);
             $("#rsvp_status_kids").val(0);
-        }else{
-            $("#option5").prop('checked',false);
-
         }
     })
     $(".attending-btn").on('click',function(){
         var rsvpStatus = $('#statusRsvp').val();
         if(rsvpStatus=='1'){
             $("#option6").prop('checked',false);
-            $('button[type="submit"]').prop('disabled', false);
-        }else{
             $("#option5").prop('checked',true);
-
-
+            $('.btn-plus, .btn-minus').prop('disabled', false);
+            $('button[type="submit"]').prop('disabled', false);
         }
     })
 });
