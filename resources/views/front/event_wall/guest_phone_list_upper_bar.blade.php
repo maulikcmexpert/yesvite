@@ -62,6 +62,6 @@ $counter = count($listing) - 4;
                         <span class="number" id="total-selected-phone" data-count="1">+{{$counter}}</span>
                         <span class="content">Total</span>
                  </div>
-                 <h6>Sell all</h6>
+                 <h6>See all</h6>
                 </a>
 @endif

@@ -912,7 +912,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                         <span class="number" id="total-selected-email" data-count="1">+1</span>
                         <span class="content">Total</span>
                  </div>
-                 <h6>Sell all</h6>
+                 <h6>See all</h6>
                 </a>`;
                   $modalBody.append(totalHtml);
             }
@@ -988,7 +988,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                         <span class="number" id="total-selected-phone" data-count="1">+1</span>
                         <span class="content">Total</span>
                  </div>
-                 <h6>Sell all</h6>
+                 <h6>See all</h6>
                 </a>`;
 
 
@@ -1006,18 +1006,17 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
 
     }
 
-});
 $(document).on('click','.remove_new_added_user',function(){
 
     var user_id=$(this).attr('data-id');
     const event_id = $('#event_id').val();
 
     $('.add_yesvite_guest_'+user_id).remove();
+    storeAddNewGuest(user_id,0,'',event_id,'yesvite');
     $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
     $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
     guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
 
-    storeAddNewGuest(user_id,0,'',event_id,'yesvite');
 
 
 });
@@ -1026,16 +1025,18 @@ $(document).on('click','.remove_new_phone_added_user',function(){
 
     var user_id=$(this).attr('data-id');
     const event_id = $('#event_id').val();
-
+    storeAddNewGuest(user_id,0,'',event_id,'phone');
     $('.add_phone_guest_'+user_id).remove();
     $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
     // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
     guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
 
-    storeAddNewGuest(user_id,0,'',event_id,'phone');
 
 
 });
+
+});
+
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
         console.log("Guest list before submit:", guestList);
