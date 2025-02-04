@@ -1006,7 +1006,6 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
 
     }
 
-});
 $(document).on('click','.remove_new_added_user',function(){
 
     var user_id=$(this).attr('data-id');
@@ -1035,6 +1034,9 @@ $(document).on('click','.remove_new_phone_added_user',function(){
 
 
 });
+
+});
+
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
         console.log("Guest list before submit:", guestList);
