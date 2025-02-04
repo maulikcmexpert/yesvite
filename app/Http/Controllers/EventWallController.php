@@ -2484,11 +2484,18 @@ foreach ($polls as $poll) {
 
     public function fetch_all_invited_user(Request $request){
 
+        $user  = Auth::guard('api')->user();
+
         $eventId=$request->event_id;
+        $fetch_event_data=Event::where('id',$eventId)->first();
+        $is_host=0;
+        if($fetch_event_data->user_id==$user->id){
+            $is_host=1;
+        }
         $all_invited_user=getInvitedUsersList($eventId);
 
     
-        return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user','eventId'))->render(),'status'=>1]);
+        return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user','eventId','is_host'))->render(),'status'=>1]);
 
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);
 
