@@ -2236,7 +2236,7 @@ $longitude = !empty($eventDetails['longitude'])
 
     </main>
 @endisset
-<script>
+{{-- <script>
     // Get event date and time from PHP
     const startdate = "{{ $startdate }}"; // '2025-01-30' format
     const starttime = "{{ $starttime }}"; // '9:30 PM' format
@@ -2274,4 +2274,4 @@ $longitude = !empty($eventDetails['longitude'])
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown(); // Initial call to set the countdown immediately
-</script>
+</script> --}}
