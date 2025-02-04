@@ -397,6 +397,7 @@ $("#create-photo-btn").click(function () {
     $(".create-post-upload-img-wrp").removeClass("d-none");
     $(".create-post-poll-wrp").addClass("d-none");
     $("#imagePreview").empty();
+    $(".create-post-upload-img-inner").removeClass("d-none");
     $("#photoForm").reset();
 });
 
