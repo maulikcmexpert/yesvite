@@ -8315,7 +8315,10 @@ function searchRecords(lim, off, type, search = null) {
         },
     });
 }
-
+$(".photo-edit-delete-1").on("click", function () {
+    $(".slider_photo").show();
+    $(".slider_photo").trigger("click");
+});
 $(document).on("change", ".slider_photo", function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
@@ -8621,7 +8624,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                         sliderElement.style.display = "block";
 
                         $(".photo-edit-delete-" + i).show();
-                        if (i == 0) {
+                        if (i == 1) {
                             $(".slider_photo").hide();
                         } else {
                             $(".slider_photo_" + i).hide();
