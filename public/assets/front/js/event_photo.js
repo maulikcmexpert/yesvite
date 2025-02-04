@@ -687,9 +687,9 @@ $(document).on('click', '.open_photo_model', function () {
                         console.log('Emoji Src:', emojiSrc);
 
                         // Define emojis with exact matching Unicode and image source
-                        const heartUnicode = '\u{2764}'; //
-                        const smileUnicode = '\u{1F60D}'; //
-                        const clapUnicode = '\u{1F44F}'; //
+                        const heartUnicode = '\\u{2764}'; //
+                        const smileUnicode = '\\u{1F60D}'; //
+                        const clapUnicode = '\\u{1F44F}'; //
 
 
                         $(this).removeClass('selected').show();
