@@ -2755,6 +2755,7 @@ class EventController extends BaseController
     {
         $cohostId = $request->cohostId;
         $isCohost = $request->isCohost;
+        $isCopy = $request->isCopy;
         $app_user = $request->app_user;
         $cohostpreferby = $request->cohostpreferby;
         $selected_user = session('user_ids');
@@ -2791,7 +2792,7 @@ class EventController extends BaseController
             })
             ->get();
 
-        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'isCohost', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
+        return response()->json(['view' => view('front.event.guest.allGuestList', compact('users', 'selected_co_host', 'isCohost','isCopy', 'selected_co_host_prefer_by'))->render(), 'scroll' => $request->scroll]);
     }
 
     public function get_gift_registry(Request $request)
