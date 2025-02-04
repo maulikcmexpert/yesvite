@@ -168,6 +168,9 @@ class EventPhotoController extends Controller
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
+            $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
@@ -408,7 +411,9 @@ class EventPhotoController extends Controller
                 }
                 $postsNormalDetail['id'] =  $value->id;
                 $postsNormalDetail['user_id'] =  $value->user->id;
-                $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
+                $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
+                $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+                $postsNormalDetail['is_host'] =  ($value->user->id == $eventCreator->user_id) ? 1 : 0;
                 $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
