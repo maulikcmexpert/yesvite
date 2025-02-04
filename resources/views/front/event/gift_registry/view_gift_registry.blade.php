@@ -1,6 +1,6 @@
 @if(isset($registry)&&!empty($registry))
 
-@php dd($registry) @endphp     
+{{-- @php dd($registry) @endphp      --}}
 @foreach ($registry as $data )
 <div class="d-flex align-items-center justify-content-center">
     <span class="gift-registry-icons">
