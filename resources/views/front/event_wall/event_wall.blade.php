@@ -264,7 +264,35 @@
                                                 </div>
 
 
-                                                p
+                                                <div class="posts-card-like-commnet-wrp">
+                                                    <div class="posts-card-like-comment-left">
+                                                        <ul type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#reaction-modal-{{ $post['id'] }}">
+
+                                                            <!-- Smiley Emoji -->
+                                                            @if ($post['self_reaction'] == '\u{1F604}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji">
+                                                                </li>
+
+                                                                <!-- Eye Heart Emoji -->
+                                                            @elseif ($post['self_reaction'] == '\u{1F60D}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji">
+                                                                </li>
+
+                                                                <!-- Heart Emoji -->
+                                                            @elseif ($post['self_reaction'] == '\u{2764}')
+                                                                <li>
+                                                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                        alt="Heart Emoji">
+                                                                </li>
+                                                            @endif
+                                                            <p id="likeCount_{{ $post['id'] }}">
+                                                                {{ $post['total_likes'] }} Likes</p>
+                                                        </ul>
                                                         @if($post['commenting_on_off'] == "1")
                                                         <h6 id="comment_{{ $post['id'] }}">{{ $post['total_comment'] }} Comments</h6>
                                                         @endif
