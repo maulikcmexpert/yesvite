@@ -6858,15 +6858,16 @@ $(document).on("click", ".invite_group_member", function () {
                 });
             }
         } else {
+            if(!$(this).is(":disabled")){
             const id = $(this).val();
             const isIdExists = unselectedValues.some((item) => item.id === id);
 
-            if (!isIdExists) {
-                unselectedValues.push({
-                    id: id,
-                });
-            }
-           if(!$(this).is(":disabled")){
+                if (!isIdExists) {
+                    unselectedValues.push({
+                        id: id,
+                    });
+                }
+          
                $("#user_tel-" + id).remove();
                $(".user_id_tel-" + id).remove();
                $(".user_id_tel-" + id).remove();
