@@ -979,3 +979,27 @@
         </div>
     </div>
 </main>
+<script>
+    
+preloadAllFonts(); // Load all fonts on page load
+
+// Function to preload all fonts
+async function preloadAllFonts() {
+    let fontsToLoad = []; // Array to store font observers
+    document.querySelectorAll(".font-input").forEach(function (input) {
+        const font = input.getAttribute("data-font");
+        let fontObserver = new FontFaceObserver(font);
+        fontsToLoad.push(fontObserver.load());
+    });
+
+    // Load all fonts asynchronously
+    Promise.all(fontsToLoad)
+        .then(() => {
+            console.log("All fonts loaded successfully.");
+        })
+        .catch((err) => {
+            console.error("Some fonts failed to load:", err);
+        });
+}
+
+</script>
