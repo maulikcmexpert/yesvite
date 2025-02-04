@@ -632,10 +632,14 @@ $(document).on("click", ".edit_design_tem", function (e) {
         error: function (xhr, status, error) {},
     });
 });
-
+fontloadedEnsure = false;
 async function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");
-    await ensureFontsLoaded();
+    if (!fontloadedEnsure) {
+        fontloadedEnsure = true;
+        await ensureFontsLoaded();
+    }
+
     function loadTextDataFromDatabase() {
         if (image) {
             console.log(image);
