@@ -144,11 +144,10 @@ var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
         return $(this).val();
     })
     .get();
-// alert(giftRegestryDataRaw.length);
+
 if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
     try {
         var giftRegestryData = JSON.parse(giftRegestryDataRaw);
-        alert;
         giftRegestryData?.forEach(function (item) {
             selected_gift.push({
                 gr_id: item,
@@ -4739,7 +4738,7 @@ async function saveDesignData(direct = false) {
 
         console.log("Uploading image...");
         const imageResponse = await uploadImage(blob);
-        console.log("Uploaded image...");
+
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
         }
@@ -8466,12 +8465,14 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     updateEventData();
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     if (save1 == 8) {
@@ -8480,6 +8481,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     e.preventDefault();
+    eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
@@ -8491,6 +8493,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 
 function updateEventData() {
     eventData.isdraft = "0";
+
     var data = eventData;
     $("#loader").css("display", "block");
     $.ajax({
@@ -8602,18 +8605,14 @@ $(document).on("click", ".design-sidebar-action", function () {
                 ];
 
                 const sliderImages = eventData.slider_images;
-                let i = 0;
+
                 photoSliders.forEach((sliderClass, index) => {
                     const sliderElement = document.querySelector(
                         `.${sliderClass}`
                     );
-                    i = i + 1;
+
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.style.display = "block";
-                        console.log({ i });
-                        $(".photo-edit-delete-" + i).show();
-
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
