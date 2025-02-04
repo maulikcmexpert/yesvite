@@ -2,7 +2,7 @@
 $invite=$all_invited_user['all_invited_users'];
 @endphp
 
-@if(empty($invite))
+@if(!empty($invite))
 {{dd($invite);}}
 
 @foreach ($invite as $guest)
