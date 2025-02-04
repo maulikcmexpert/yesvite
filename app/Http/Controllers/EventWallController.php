@@ -538,7 +538,11 @@ foreach ($polls as $poll) {
                         $replyCommentInfo['comment'] = $reply->comment_text;
 
                         $replyCommentInfo['user_id'] = $reply->user_id;
+                        $firstName = $reply->user->firstname ?? '';
+                        $lastName = $reply->user->lastname ?? '';
 
+                        // Concatenate only if at least one value exists
+                        $commentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
                         $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
 
                         $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
@@ -2479,6 +2483,6 @@ foreach ($polls as $poll) {
 
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);
 
-    
+
     }
 }
