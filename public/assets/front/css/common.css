@@ -921,7 +921,10 @@ ul.nav-tabs .nav-link:focus {
     max-height: calc(100vh - 210px);
 }
 
-
+.qty-container input:focus{
+    border: none !important;
+    box-shadow: none !important;
+}
 
 
 
