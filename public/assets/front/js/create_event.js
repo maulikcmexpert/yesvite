@@ -8662,6 +8662,7 @@ $(document).on("click", "#close_editEvent", function (e) {
 
 if (final_step == "2" && isCohost == "1") {
     $("#loader").css("display", "flex");
+    
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
@@ -9232,5 +9233,9 @@ $(document).on(
     }
 );
 if(isDraftEvent =="0" && eventId!=""){
+    $(".li_design").addClass('menu-success');
+    $(".li_event_detail").addClass('menu-success');
+    $(".li_guest").addClass('menu-success');
+    $(".li_setting").addClass('menu-success');
     loadAgain();
 }
