@@ -7171,7 +7171,7 @@ function checkbox_count() {
     var checkedCount_event_page = $(".event_page_checkbox:checked").length;
     var checkedCount_notification = $(".notification_checkbox:checked").length;
 
-    $("#general_setting_checkbox").text(checkedCount_general_setting + "/7");
+    $("#general_setting_checkbox").text(checkedCount_general_setting + "/6");
     $("#event_page_checkbox").text(checkedCount_event_page + "/2");
     $("#notification_checkbox").text(checkedCount_notification + "/4");
 }
@@ -8486,6 +8486,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 function updateEventData() {
     eventData.isdraft = "0";
     var data = eventData;
+    $("#loader").css("display", "block");
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -8495,28 +8496,33 @@ function updateEventData() {
         data: data,
         success: function (response) {
             $(".main-content-wrp").removeClass("blurred");
-            setTimeout(function () {
-                $("#loader").css("display", "none");
-            }, 10000);
+            
             if (response.isupadte == true) {
                 if (response.success == true) {
+                    setTimeout(function () {
+                        $("#loader").css("display", "none");
+                    }, 10000);
                     toastr.success("Event Updated Successfully");
                     window.location.href = base_url + "home";
                 }
             } else {
+                
+                    $("#loader").css("display", "none");
+                
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
-                    window.location.href = "profile";
+                    // window.location.href = "profile";
                 }
                 $("#eventModal").modal("show");
                 $("#eventModal").on("hide.bs.modal", function (event) {
                     event.preventDefault(); // Prevents modal from closing
                 });
-                window.location.href = base_url + "home";
+                // window.location.href = base_url + "home";
             }
+
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!!");
@@ -8541,7 +8547,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
     eventData.isPhonecontact = isPhonecontact;
     eventData.IsPotluck = IsPotluck;
 
-    $("#loader").css("display", "block");
+    
     // $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
