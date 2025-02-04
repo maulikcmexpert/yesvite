@@ -255,7 +255,7 @@ $(document).on('click', '#delete_post', function () {
 $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
-    const commentId = $('.commented-user-wrp').data('comment-id');
+    const commentId = $('#parent_comment_id').val();
     const replyParentId = $(this).closest('.reply-on-comment').data('comment-id');
 
     alert(commentId);
@@ -267,11 +267,20 @@ $(document).on('click', '.comment-send-icon', function () {
     const eventId = $('.likeModel').data('event-id'); // Or get this dynamically as needed
     const eventPostId = $('.likeModel').data('event-post-id');
 
+
     let url;
+    let data = {
+        comment: commentText,
+        event_id: eventId,
+        event_post_id: eventPostId
+    };
+
+    // Check if it's a reply or a normal comment
     if (commentId) {
-        url = base_url + "event_photo/userPostCommentReply";
+        url = base_url + "event_photo/userPostCommentReply";  // Reply URL
+        data.parent_comment_id = commentId;  // Add parent comment ID if replying
     } else {
-        url = base_url + "event_photo/userPostComment";
+        url = base_url + "event_photo/userPostComment";  // Normal comment URL
     }
 
     // Example AJAX request to submit the comment
@@ -281,16 +290,11 @@ $(document).on('click', '.comment-send-icon', function () {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        data: {
-            comment: commentText,
-            event_id: eventId,
-            event_post_id: eventPostId,
-            parent_comment_id: commentId
-        },
+        data: data,
         success: function (response) {
             if (response.success) {
                 console.log(response.data);
-                $('#post_comment').val('');
+                $('#post_comment').val('');  // Clear the input
 
                 const data = response.data;
                 const profileImage = data.profile
@@ -415,24 +419,16 @@ $(document).on('click', '.posts-card-like-btn', function () {
 
 
 $(document).on('click', '.commented-user-reply-btn', function () {
-    // Alert for testing (optional)
-
-
-    // Find the parent comment's username
+    // Get the parent's name and comment ID for reply
     const parentName = $(this).closest('.commented-user-wrp').find('h3').text().trim();
-    console.log(parentName);
-
-    // Find the parent comment's id (assuming it’s stored in a data attribute)
     const parentId = $(this).closest('.commented-user-wrp').data('comment-id');
-    const replyParentId = $('.reply-on-comment').data('comment-id'); // Update this according to your HTML structure
-    console.log($(this).closest('.reply-on-comment'));
-    // Insert the parent's name as @ParentName into the input box
-    const commentBox = $('#post_comment'); // Replace with your input box ID or class
-    commentBox.val(`@${parentName} `).focus(); // Add @Name and set focus to the input box
 
-    // Set the parent comment ID in a hidden input or store it in a variable
+    // Insert the parent's name as @ParentName into the input box
+    const commentBox = $('#post_comment');
+    commentBox.val(`@${parentName} `).focus();
+
+    // Set the parent comment ID in a hidden input field
     $('#parent_comment_id').val(parentId);
-    $('#reply_comment_id').val(replyParentId);// Assuming you have a hidden input with id 'parent_comment_id'
 });
 
 // $(document).on('click', '.posts-card-like-btn', function () {
