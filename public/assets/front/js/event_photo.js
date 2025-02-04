@@ -256,7 +256,8 @@ $(document).on('click', '.comment-send-icon', function () {
     const commentInput = $('#post_comment');
     const commentText = commentInput.val().trim();
     const commentId = $('.commented-user-wrp').data('comment-id');
-    const replyParentId = $('.reply-on-comment').data('comment-id');
+    const replyParentId = $(this).closest('.reply-on-comment').data('comment-id');
+
     alert(commentId);
     if (commentText === '') {
         alert('Please enter a comment');
@@ -350,7 +351,7 @@ $(document).on('click', '.comment-send-icon', function () {
                                 <div class="commented-user-head">
                                     <div class="commented-user-profile">
                                         <div class="commented-user-profile-img">
-                                            <img src="${reply.profile || 'default-image.png'}" alt="">
+                                              ${profileImage}
                                         </div>
                                         <div class="commented-user-profile-content">
                                             <h3>${reply.username}</h3>
@@ -377,20 +378,16 @@ $(document).on('click', '.comment-send-icon', function () {
 
                         // Append the reply inside the current comment's reply list
                         if (commentId) {
-                            const parentComment = $(`li[data-comment-id="${commentId}"]`); // Find the parent comment
-                            if (parentComment.length > 0) {
-                                // If the parent comment has no replies, create a new <ul> for replies
-                                let replyList = parentComment.find('ul');
-                                if (replyList.length === 0) {
-                                    replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment); // Create <ul> if not exists// Create <ul> if not exists
-                                }
-                                // Append the new reply under the parent comment's <ul>
-                                replyList.append(replyHTML);
+                            const parentComment = $(`li[data-comment-id="${commentId}"]`);
+                            let replyList = parentComment.find('ul.primary-comment-replies');
+                            if (replyList.length === 0) {
+                                replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
                             }
+                            replyList.append(replyHTML);
                         } else {
-                            // If it's a top-level comment, append it to the top-level comment list
                             $('.posts-card-show-all-comments-inner ul').append(newCommentHTML);
                         }
+
                     });
                 }
             }
@@ -408,18 +405,7 @@ $(document).on('click', '.posts-card-like-btn', function () {
     icon.classList.toggle('fa-solid');
 });
 
-// $(document).on('click', '.posts-card-like-btn', function () {
-//     const heartIcon = $(this).find('i');
 
-//     if (heartIcon.hasClass('fa-regular')) {
-//         heartIcon.removeClass('fa-regular').addClass('fa-solid'); // Toggle to filled heart
-//     } else {
-//         heartIcon.removeClass('fa-solid').addClass('fa-regular'); // Toggle to empty heart
-//     }
-
-//     // Optionally, you can make an AJAX request here to update the server
-//     console.log('Heart button clicked');
-// });
 $(document).on('click', '.commented-user-reply-btn', function () {
     // Alert for testing (optional)
 
@@ -440,6 +426,19 @@ $(document).on('click', '.commented-user-reply-btn', function () {
     $('#parent_comment_id').val(parentId);
     $('#reply_comment_id').val(replyParentId);// Assuming you have a hidden input with id 'parent_comment_id'
 });
+
+// $(document).on('click', '.posts-card-like-btn', function () {
+//     const heartIcon = $(this).find('i');
+
+//     if (heartIcon.hasClass('fa-regular')) {
+//         heartIcon.removeClass('fa-regular').addClass('fa-solid'); // Toggle to filled heart
+//     } else {
+//         heartIcon.removeClass('fa-solid').addClass('fa-regular'); // Toggle to empty heart
+//     }
+
+//     // Optionally, you can make an AJAX request here to update the server
+//     console.log('Heart button clicked');
+// });
 const longPressDelay = 3000; // 3 seconds for long press
 let pressTimer;
 let isLongPress = false;
