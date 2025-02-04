@@ -1488,7 +1488,7 @@ class EventController extends BaseController
                 'quantity' => $itemQuantity,
             ];
             if ($selfBringQuantity != "") {
-                $item['item_carry_users'] = [
+                $item['item_carry_users'][] = [
                     'user_id' => $user->id,
                     'quantity' => $itemQuantity,
                 ];
@@ -1538,7 +1538,7 @@ class EventController extends BaseController
             ];
 
             if ($selfBringQuantity != "") {
-                $categoryData['item'][0]['item_carry_users'] = [
+                $categoryData['item'][0]['item_carry_users'][] = [
                     'user_id' => $user->id,
                     'quantity' => $itemQuantity,
                 ];
