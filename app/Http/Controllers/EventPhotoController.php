@@ -807,7 +807,7 @@ class EventPhotoController extends Controller
             $postPhotoDetail = [
                 'user_id' => $value->user->id,
                 'is_own_post' => ($value->user->id == $user->id) ? "1" : "0",
-                'is_host' => $ischeckEventOwner ? 1 : 0,
+                'is_host' => $ischeckEventOwner ? 'Host' : 'not_host',
                 'firstname' => $value->user->firstname,
                 'lastname' => $value->user->lastname,
                 'location' => $value->user->city . ', ' . $value->user->state,
