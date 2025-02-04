@@ -8606,6 +8606,23 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.style.display = "block";
+                        let editButtons =
+                            sliderElement.nextElementSibling.getElementsByClassName(
+                                "uploaded-img-card-edit"
+                            );
+                        if (editButtons.length > 0) {
+                            editButtons[0].style.display = "block"; // Access first element in collection
+                        }
+
+                        let deleteButtons =
+                            sliderElement.nextElementSibling.getElementsByClassName(
+                                "uploaded-img-card-delete"
+                            );
+                        if (deleteButtons.length > 0) {
+                            deleteButtons[0].style.display = "block"; // Access first element in collection
+                        }
+
                         console.log(
                             `Set src for ${sliderClass}: ${sliderElement.src}`
                         );
