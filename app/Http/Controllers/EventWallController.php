@@ -304,7 +304,6 @@ foreach ($polls as $poll) {
                 $query->where('user_id', $user->id)
                     ->where('post_control', 'hide_post');
             });
-        dd($eventPostList);
         $checkEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
         // dd($checkEventOwner);
         if ($checkEventOwner == null) {
@@ -343,7 +342,7 @@ foreach ($polls as $poll) {
 
         // Execute the query and get the results
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
-        // dd($eventPostList);
+        dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
         // $results = $eventPostList->paginate(10);
         // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
