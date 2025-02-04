@@ -236,9 +236,10 @@ if ($hostView) {
                 <!-- <a href="javascript:void(0);" class="cmn-btn see-all-btn">See All</a> -->
                 <a href="javascript:void(0);" class="cmn-btn see-all-guest-right-btn" data-eventId="{{$eventId}}">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1)
-                    <button class="cmn-btn" type="button" id="allcontact" data-bs-toggle="modal"
-                        data-bs-target="#addguest"><i class="fa-solid fa-plus"></i> Add Guest</button>
-                @endif
+                    <button class="cmn-btn" type="button" id="allcontact"><i class="fa-solid fa-plus"></i> Add Guest</button>
+                    <!-- data-bs-toggle="modal"
+                    data-bs-target="#addguest" -->
+                    @endif
             </div>
         </div>
     </div>

@@ -283,6 +283,10 @@
     cursor: pointer;
 }
 
+.choose-design-search-setting input{
+    background-color: #fff !important;
+}
+
 
 @media only screen and (max-width: 1399px) {
     .design-card {
