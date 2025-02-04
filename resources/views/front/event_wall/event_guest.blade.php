@@ -370,7 +370,7 @@
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
                                                                     </button>
-                                                                    @endphp
+                                                                    @endif
                                                                     <a href="#" class="msg-btn">
                                                                         <svg width="24" height="24"
                                                                             viewBox="0 0 24 24" fill="none"
