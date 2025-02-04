@@ -70,7 +70,7 @@
               <div class="all-events-filter-wrp">
                   <form action="">
                       <div class="form-check">
-                          <input class="form-check-input .select_all_post" type="checkbox" value=""
+                          <input class="form-check-input select_all_post" type="checkbox" value=""
                               id="flexCheckDefault1">
                           <label class="form-check-label" for="flexCheckDefault1">
                               All
