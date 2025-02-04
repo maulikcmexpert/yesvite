@@ -109,7 +109,7 @@ if ($hostView) {
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
                             <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between w-100">
                                     <div class="posts-card-head-left guests-listing-left">
                                         <div class="posts-card-head-left-img">
                                             @if (!empty($guest['profile']))
@@ -187,6 +187,8 @@ if ($hostView) {
                                     </div>
                             </div>
 
+                            @if ($guest['rsvp_status'] == '1')
+
                                 <div class="sucess-yes">
                                         <h5 class="green">YES</h5>
                                         <div class="sucesss-cat ms-auto">
@@ -200,6 +202,18 @@ if ($hostView) {
                                             <h5>2 Kids</h5>
                                         </div>
                                   </div>
+
+                                @elseif($guest['rsvp_status'] == '0')
+                                    <div class="sucess-no">
+                                            <h5>NO</h5>
+                                           
+                                    </div>
+                                  @else
+                                    <div class="no-reply">
+                                                <h5>NO REPLY</h5>
+                                               
+                                        </div>
+                                    @endif
                             </li>
                             
                         @endif
