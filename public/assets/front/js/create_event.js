@@ -6476,7 +6476,7 @@ function save_image_design(downloadImage, textData) {
         design_inner_image = $("#shape_img").attr("src");
     }
     var old_shape_url = $("#first_shape_img").attr("src");
-    eventData.cutome_image = image;
+
     domtoimage
         .toBlob(downloadImage)
         .then(function (blob) {
@@ -6872,7 +6872,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".user_id_tel-" + id).remove();
             $("#user-" + id).remove();
             $(".user-" + id).prop("checked", false);
-            $(".user_id-" + id).remove()
+            $(".user_id-" + id).remove();
         }
     });
 
