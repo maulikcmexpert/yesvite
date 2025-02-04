@@ -2340,8 +2340,15 @@ class EventController extends BaseController
 
                 // Use array_filter to remove the user based on the ID
                 $userIds = array_filter($userIds, function ($value) use ($id) {
-                    return $value['id'] !== $id;  // Keep all users except the one with the given ID
+                    // Skip users where 'isAlready' is "1"
+                    if ($value['isAlready'] == "1") {
+                        return false;  // Skip this user
+                    }
+                    
+                    // Keep all users except the one with the given ID
+                    return $value['id'] !== $id;
                 });
+                
             }
 
             // Reindex the array after filtering
