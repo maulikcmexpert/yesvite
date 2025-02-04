@@ -942,7 +942,7 @@ $(document).on('click', '#likeButtonModel', function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
+    const reaction = isLiked ? '\u{1F90D}' : '\u{2764}'; // Toggle reaction: 💔 or ❤️
     const likeButton = $(this);
     // Toggle like button appearance
     const icon = $(this).find('i');
