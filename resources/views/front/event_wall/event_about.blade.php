@@ -2235,44 +2235,43 @@ $longitude = !empty($eventDetails['longitude'])
 
 
     </main>
-    <script>
-        // Get event date and time from PHP
-        const startdate = "{{ $startdate }}"; // '2025-01-30' format
-        const starttime = "{{ $starttime }}"; // '9:30 PM' format
-
-        // Convert start date and time into a timestamp
-        const eventTimestamp = new Date(`${startdate} ${starttime}`).getTime();
-
-        function updateCountdown() {
-            const currentDate = new Date();
-            const currentTime = currentDate.getTime(); // Use currentDate.getTime() to get current time in milliseconds
-
-            const remainingTime = eventTimestamp - currentTime; // Subtract current time from event timestamp
-
-            if (remainingTime > 0) {
-                // Calculate days, hours, minutes, and seconds
-                const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                // const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-                // Update HTML elements
-                document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
-                document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
-                document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
-                // document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
-            } else {
-                // Event has passed, set everything to "00"
-                document.getElementById('countdownDays').innerText = "00";
-                document.getElementById('countdownHours').innerText = "00";
-                document.getElementById('countdownMinutes').innerText = "00";
-                // document.getElementById('countdownSeconds').innerText = "00";
-            }
-        }
-
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to set the countdown immediately
-    </script>
-
 @endisset
+<script>
+    // Get event date and time from PHP
+    const startdate = "{{ $startdate }}"; // '2025-01-30' format
+    const starttime = "{{ $starttime }}"; // '9:30 PM' format
+
+    // Convert start date and time into a timestamp
+    const eventTimestamp = new Date(`${startdate} ${starttime}`).getTime();
+
+    function updateCountdown() {
+        const currentDate = new Date();
+        const currentTime = currentDate.getTime(); // Use currentDate.getTime() to get current time in milliseconds
+
+        const remainingTime = eventTimestamp - currentTime; // Subtract current time from event timestamp
+
+        if (remainingTime > 0) {
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            // const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            // Update HTML elements
+            document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
+            document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
+            // document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
+        } else {
+            // Event has passed, set everything to "00"
+            document.getElementById('countdownDays').innerText = "00";
+            document.getElementById('countdownHours').innerText = "00";
+            document.getElementById('countdownMinutes').innerText = "00";
+            // document.getElementById('countdownSeconds').innerText = "00";
+        }
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call to set the countdown immediately
+</script>
