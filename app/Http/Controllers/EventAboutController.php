@@ -331,7 +331,7 @@ class EventAboutController extends Controller
         dd( $eventDetails);
 
         //    {{ dd($eventDetails);}}
-        }
+
 // //
 
             return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
