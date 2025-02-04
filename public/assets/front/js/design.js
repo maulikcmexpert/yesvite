@@ -37,28 +37,6 @@ function preloadAllFonts() {
         });
 }
 
-// Click event remains the same but fonts are now preloaded
-document.querySelectorAll(".font-input").forEach(function (input) {
-    input.addEventListener("click", function () {
-        const font = this.getAttribute("data-font");
-        console.log("Selected font:", font);
-        applyFont(font); // Apply preloaded font instantly
-    });
-});
-
-// Function to apply the font (since fonts are already preloaded)
-function applyFont(font) {
-    addToUndoStack(canvas);
-    var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === "textbox") {
-        activeObject.set({ fontFamily: font });
-        activeObject.initDimensions();
-        canvas.requestRenderAll();
-    } else {
-        alert("No object selected");
-    }
-}
-
 $(document).ready(function () {
     $("#custom_template").change(function () {
         var file = this.files[0];
@@ -2252,6 +2230,30 @@ function bindData(current_event_id) {
         canvas.setActiveObject(textbox);
 
         canvas.renderAll();
+    }
+
+    // Click event remains the same but fonts are now preloaded
+    document.querySelectorAll(".font-input").forEach(function (input) {
+        input.addEventListener("click", function () {
+            const font = this.getAttribute("data-font");
+            console.log("Selected font:", font);
+            applyFont(font, true); // Apply preloaded font instantly
+        });
+    });
+
+    // Function to apply the font (since fonts are already preloaded)
+    function applyFont(font, addToUndo = false) {
+        if (addToUndo) {
+            addToUndoStack(canvas);
+        }
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            activeObject.set({ fontFamily: font });
+            activeObject.initDimensions();
+            canvas.requestRenderAll();
+        } else {
+            alert("No object selected");
+        }
     }
 
     // document.querySelectorAll(".form-check-input").forEach(function (input) {
