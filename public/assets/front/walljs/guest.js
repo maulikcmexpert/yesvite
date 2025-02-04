@@ -104,7 +104,6 @@ $(document).on('click','.see-all-guest-right-btn',function(){
 
 
 $(document).on('click','.add_guest_seeall',function(){
-    alert();
     let event_id = $('#event_id').val();
     $.ajax({
         url: base_url + "event_guest/see_all_invite_yesvite",  // Ensure this route is defined in web.php/api.php
