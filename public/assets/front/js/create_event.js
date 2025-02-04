@@ -9250,3 +9250,4 @@ if(isDraftEvent =="0" && eventId!=""){
     $(".li_setting").addClass('menu-success');
     loadAgain();
 }
+checkbox_count()
