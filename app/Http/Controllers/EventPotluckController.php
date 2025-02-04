@@ -37,7 +37,7 @@ class EventPotluckController extends Controller
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
         $event = decrypt($id);
-        $js = ['event_potluck','guest_rsvp','post_like_comment'];
+        $js = ['event_potluck','guest_rsvp','post_like_comment','guest'];
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
