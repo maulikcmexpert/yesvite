@@ -3,8 +3,6 @@ $invite=$all_invited_user['all_invited_users'];
 @endphp
 
 @if(!empty($invite))
-{{dd($invite);}}
-
 @foreach ($invite as $guest)
 <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
                             <div class="d-flex align-items-center justify-content-between w-100 gap-2">
