@@ -487,10 +487,6 @@ foreach ($polls as $poll) {
 
                 $postComment = getComments($value->id);
                 foreach ($postComment as $commentVal) {
-
-
-
-
                     $commentInfo['id'] = $commentVal->id;
 
                     $commentInfo['event_post_id'] = $commentVal->event_post_id;
@@ -499,12 +495,26 @@ foreach ($polls as $poll) {
 
                     $commentInfo['user_id'] = $commentVal->user_id;
 
-                    $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
+                    // $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
+                    $firstName = $commentVal->user->firstname ?? '';
+                    $lastName = $commentVal->user->lastname ?? '';
+
+                    // Concatenate only if at least one value exists
+                    $commentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
 
                     $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
                     // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
                     // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
-                    $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+                    // $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+                    $commentInfo['location'] = null; // Default value
+
+                    if (!empty($commentVal->user)) {
+                        $city = trim($commentVal->user->city ?? '');
+                        $state = trim($commentVal->user->state ?? '');
+
+                        $commentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                    }
+
 
                     $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
@@ -528,15 +538,26 @@ foreach ($polls as $poll) {
                         $replyCommentInfo['comment'] = $reply->comment_text;
 
                         $replyCommentInfo['user_id'] = $reply->user_id;
+                        $firstName = $reply->user->firstname ?? '';
+                        $lastName = $reply->user->lastname ?? '';
 
-                        $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
+                        // Concatenate only if at least one value exists
+                        $replyCommentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
+                        // $replyCommentInfo['username'] = $reply->user->firstname . ' ' . $reply->user->lastname;
 
                         $replyCommentInfo['profile'] = (!empty($reply->user->profile)) ? asset('storage/profile/' . $reply->user->profile) : "";
 
                         // $replyCommentInfo['location'] = ($reply->user->city != NULL) ? $reply->user->city : "";
-                        $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
+                        // $replyCommentInfo['location'] =  $reply->user->city != "" ? trim($reply->user->city) . ($reply->user->state != "" ? ', ' . $reply->user->state : '') : "";
+                        $replyCommentInfo['location']  = null; // Default value
 
-                        $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
+                        if (!empty($reply->user)) {
+                            $city = trim($reply->user->city ?? '');
+                            $state = trim($reply->user->state ?? '');
+
+                            $replyCommentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                        }
+                        // $replyCommentInfo['comment_total_likes'] = $reply->post_comment_reaction_count;
 
                         $replyCommentInfo['is_like'] = checkUserIsLike($reply->id, $user->id);
 
@@ -568,7 +589,7 @@ foreach ($polls as $poll) {
                                 $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                                 $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
 
-                                $commentChildReply['comment_total_likes'] = $childReplyVal->post_comment_reaction_count;
+                                $commentChildReply['comment_total_likes'] = ($childReplyVal->post_comment_reaction_count!="")?$childReplyVal->post_comment_reaction_count:"0";
 
                                 $commentChildReply['is_like'] = checkUserIsLike($childReplyVal->id, $user->id);
 
@@ -599,7 +620,8 @@ foreach ($polls as $poll) {
                                         $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                         $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
 
-                                        $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
+                                        // $commentChildInReply['comment_total_likes'] = $childInReplyVal->post_comment_reaction_count;
+                                        $commentChildInReply['comment_total_likes'] = ($childInReplyVal->post_comment_reaction_count!="")?$childInReplyVal->post_comment_reaction_count:"0";
 
                                         $commentChildInReply['is_like'] = checkUserIsLike($childInReplyVal->id, $user->id);
 
@@ -2458,5 +2480,17 @@ foreach ($polls as $poll) {
                 }
             });
         }
+    }
+
+    public function fetch_all_invited_user(Request $request){
+
+        $event_id=$request->event_id;
+        $all_invited_user=getInvitedUsersList($event_id);
+
+        return response()->json(['view' => view( 'front.event_wall.right_all_guest_list', compact('all_invited_user'))->render(),'status'=>1]);
+
+        // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);
+
+
     }
 }
