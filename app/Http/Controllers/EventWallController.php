@@ -2148,7 +2148,7 @@ foreach ($polls as $poll) {
                         'parent_user_phone_contact',
                         'visible',
                         'message_privacy'
-                    )->where('id', $user['user_id'])->first();
+                    )->where(['id'=> $user['user_id'],'app_user'=>'1'])->first();
 
                     if ($userVal) {
                         $userEntry = [
@@ -2170,7 +2170,7 @@ foreach ($polls as $poll) {
             $invitedContactUsers = EventInvitedUser::with('user')
                 ->where('event_id', $eventId)
                 ->where('is_co_host', '0')
-                ->whereNull('user_id')
+                // ->whereNull('user_id')
                 ->get();
             if ($invitedContactUsers) {
                 foreach ($invitedContactUsers as $user) {

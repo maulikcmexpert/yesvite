@@ -478,6 +478,8 @@ $(document).ready(function () {
         guestList=[];
         $('.guest_yesvite').remove();
         $('.phone_yesvite').remove();
+        $('.see_invite_nav_yesvite').addClass('active');
+        $('.see_invite_nav_phone').removeClass('active');
         $('.phoneContact-checkbox:not(:disabled)').prop('checked', false);
         $('.contact-checkbox:not(:disabled)').prop('checked', false);
         $('.phone-checkbox:not(:disabled)').prop('checked', false);
