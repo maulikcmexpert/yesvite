@@ -2174,7 +2174,7 @@ foreach ($polls as $poll) {
             $invitedContactUsers = EventInvitedUser::with('user')
                 ->where('event_id', $eventId)
                 ->where('is_co_host', '0')
-                ->whereNull('user_id')
+                ->whereNotNull('sync_id')
                 ->get();
             if ($invitedContactUsers) {
                 foreach ($invitedContactUsers as $user) {
