@@ -74,7 +74,7 @@ if (chartData) {
 }
 
 $(document).on('click','.see-all-guest-right-btn',function(){
-    var event_id=$(this).attr('data-eventId');
+    var event_id=$('#eventID').val();
     $.ajax({
         url: base_url + "event_wall/fetch_all_invited_user",
         method: "POST",
