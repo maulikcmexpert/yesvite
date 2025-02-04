@@ -911,6 +911,7 @@
 .co-host-profile-photo {
     width: 100% !important;
     max-width: 24px !important;
+    min-width: 24px !important;
     height: 24px !important;
     border-radius: 50%;
     display: flex;
@@ -1113,17 +1114,17 @@
 
 /* ============ responsive ============ */
 
-@media only screen and (max-width: 1399px) {    
+@media only screen and (max-width: 1399px) {
     .event_images_slider .checkout-data .setting-img{
         border: 1px solid lightgray;
         height: 700px;
         object-fit: contain;
     }
 }
-@media only screen and (max-width: 1199px) {   
+@media only screen and (max-width: 1199px) {
     .event_images_slider {
         max-width: 300px;
-    } 
+    }
     .event_images_slider .setting-img {
         max-width: 300px !important;
         margin: 0px !important;
