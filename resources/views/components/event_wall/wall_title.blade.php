@@ -112,7 +112,7 @@
                           </label>
                       </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value=""
+                          <input class="form-check-input wall_post" type="checkbox" value=""
                               id="flexCheckDefault4">
                           <label class="form-check-label" for="flexCheckDefault4">
                               RSVP ‘s
@@ -122,7 +122,7 @@
               </div>
           </div>
           <div class="modal-footer">
-              <button type="button" class="cmn-btn reset-btn">Reset</button>
+              <button type="button" class="cmn-btn reset-btn wall_filter_reset">Reset</button>
               <button type="button" class="cmn-btn">Apply</button>
           </div>
       </div>
