@@ -8670,7 +8670,7 @@ if (final_step == "2" && isCohost == "1") {
     setTimeout(function () {
         step2Open();
         $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
-        $(".li_guest").addClass("menu-success");
+        // $(".li_guest").addClass("menu-success");
 
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
