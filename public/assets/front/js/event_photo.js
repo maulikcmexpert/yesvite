@@ -687,12 +687,12 @@ $(document).on('click', '.open_photo_model', function () {
                         console.log('Emoji Src:', emojiSrc);
 
                         // Define emojis with exact matching Unicode and image source
-                        const heartUnicode = '\\u{2764}'; //
-                        const smileUnicode = '\\u{1F60D}'; //
-                        const clapUnicode = '\\u{1F44F}'; //
+                        const heartUnicode = '\u{2764}'; //
+                        const smileUnicode = '\u{1F60D}'; //
+                        const clapUnicode = '\u{1F44F}'; //
 
-                        // Reset all emojis: remove 'selected' class and show all emojis
-                        $(this).removeClass('selected').show();  // Reset 'selected' and show
+
+                        $(this).removeClass('selected').show();
 
                         // Hide and select the correct emoji based on the reaction_store
                         if (reaction_store === heartUnicode && emojiSrc.includes('heart-emoji.png')) {

@@ -61,6 +61,7 @@
 
 
             <div class="custom-pagination"></div>
+            <button class="image-zoom-icon"><img src="{{ asset('assets/front/img/image-zoom-icon.png')}}" alt=""></button>
         </div>
     </div>
 
