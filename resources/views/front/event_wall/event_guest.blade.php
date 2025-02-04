@@ -1722,8 +1722,7 @@
                                         </button>
                                     </div>
                                     @else
-                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
-                                        id="coming">
+                                    
                                         @endif
                                 </div>
                                 @endif
@@ -1764,9 +1763,11 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    @else
                                     <input class="form-check-input failed-checkout" type="checkbox" value=""
-                                        id="coming">
+                                    id="coming">
+                                    @else
+                                    <!-- <input class="form-check-input failed-checkout" type="checkbox" value=""
+                                        id="coming"> -->
                                         @endif
                                 </div>
                             </div>
