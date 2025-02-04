@@ -2065,6 +2065,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -2919,7 +2920,7 @@ main {
     width: 100%;
     max-width: calc(100% - 30px);
     margin: 15px auto;
-    display: none !important;
+    /* display: none !important; */
   }
 
   .tab-guests-active .guests-listing-buttons{

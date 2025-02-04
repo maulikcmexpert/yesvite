@@ -92,7 +92,7 @@ if ($hostView) {
                 </div>
             </form>
         </div>
-        <div class="guests-listing-wrp ">
+        <div class="guests-listing-wrp guest-user-list">
             <ul  id="guestList">
                 @if (!empty($guestArray))
                 @foreach ($guestArray as $index => $guest)
@@ -109,7 +109,7 @@ if ($hostView) {
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
                             <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
-                            <div>
+                            <div class="d-flex align-items-center justify-content-between">
                                     <div class="posts-card-head-left guests-listing-left">
                                         <div class="posts-card-head-left-img">
                                             @if (!empty($guest['profile']))
