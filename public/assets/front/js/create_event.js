@@ -1301,6 +1301,8 @@ $(function () {
 $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
+    var inputValue = $('#event-date').val();
+    var startDate = inputValue ? inputValue : moment().format('YYYY-MM-DD');
     var oldDate = $(ed).attr("data-isDate");
     $("#event-date").daterangepicker(
         {
@@ -1309,7 +1311,8 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: moment().startOf("month"),
+            // startDate: moment().startOf("month"),
+            startDate: startDate,
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
