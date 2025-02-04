@@ -608,10 +608,11 @@ class EventController extends BaseController
             $rsvp_by_date_set = '1';
         } else {
             if ($startDateFormat) {
-
-                $start = new DateTime($startDateFormat);
-                $start->modify('-1 day');
-                $rsvp_by_date = $start->format('Y-m-d');
+                $rsvp_by_date_set = '0';
+                $rsvp_by_date=null;
+                // $start = new DateTime($startDateFormat);
+                // $start->modify('-1 day');
+                // $rsvp_by_date = $start->format('Y-m-d');
             }
         }
 
@@ -3126,12 +3127,14 @@ class EventController extends BaseController
 
             $rsvp_by_date_set = '1';
         } else {
-            if ($startDateFormat) {
+            $rsvp_by_date_set = '0';
+            $rsvp_by_date = null;
+            // if ($startDateFormat) {
 
-                $start = new DateTime($startDateFormat);
-                $start->modify('-1 day');
-                $rsvp_by_date = $start->format('Y-m-d');
-            }
+            //     $start = new DateTime($startDateFormat);
+            //     $start->modify('-1 day');
+            //     $rsvp_by_date = $start->format('Y-m-d');
+            // }
         }
 
 
@@ -3192,7 +3195,8 @@ class EventController extends BaseController
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
         $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
         $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
-        $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
+        $event_creation->rsvp_by_date_set = (isset($rsvp_by_date) && $rsvp_by_date != "")?"1":"0";
+        // $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         // dd($request->rsvp_by_date_set,$event_creation->rsvp_by_date_set);
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
         $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";

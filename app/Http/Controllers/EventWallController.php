@@ -487,10 +487,6 @@ foreach ($polls as $poll) {
 
                 $postComment = getComments($value->id);
                 foreach ($postComment as $commentVal) {
-
-
-
-
                     $commentInfo['id'] = $commentVal->id;
 
                     $commentInfo['event_post_id'] = $commentVal->event_post_id;
@@ -499,12 +495,21 @@ foreach ($polls as $poll) {
 
                     $commentInfo['user_id'] = $commentVal->user_id;
 
-                    $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
+                    // $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
+                    $firstName = $commentVal->user->firstname ?? '';
+                    $lastName = $commentVal->user->lastname ?? '';
+
+                    // Concatenate only if at least one value exists
+                    $commentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
 
                     $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
                     // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
                     // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
-                    $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+                    // $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+                    $city = trim($commentVal->user->city ?? '');
+                    $state = trim($commentVal->user->state ?? '');
+
+                    $commentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
 
                     $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
 
