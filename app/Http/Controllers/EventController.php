@@ -74,7 +74,7 @@ class EventController extends BaseController
 {
     public function index(Request $request)
     {
-// dd(1);
+
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
         Session::forget('user_ids');
@@ -566,7 +566,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
-        // dd($potluck);
+        dd($potluck);
         // dd($request);
 
         Session::forget('desgin');
@@ -1477,34 +1477,70 @@ class EventController extends BaseController
             if (!isset($categories[$category_index]['item'])) {
                 $categories[$category_index]['item'] = [];
             }
-
-            $categories[$category_index]['item'][] = [
+            $item = [
                 'name' => $itemName,
                 'self_bring' => $selfBring,
                 'self_bring_qty' => $selfBringQuantity,
                 'quantity' => $itemQuantity,
-                'item_carry_users'[0] => [
-                    'user_id' => $user->id,  // Use => for key-value pairs
-                    'quantity' => $itemQuantity,
-                ]
             ];
+            if ($selfBringQuantity != "") {
+                $item['item_carry_users'] = [
+                    'user_id' => $user->id,
+                    'quantity' => $itemQuantity,
+                ];
+            }
+            $categories[$category_index]['item'][] = $item;
+
+            // $categories[$category_index]['item'][] = [
+            //     'name' => $itemName,
+            //     'self_bring' => $selfBring,
+            //     'self_bring_qty' => $selfBringQuantity,
+            //     'quantity' => $itemQuantity,
+            //     if($selfBringQuantity!=""){
+            //         'item_carry_users' => [
+            //             'user_id' => $user->id,  // Use => for key-value pairs
+            //             'quantity' => $itemQuantity,
+            //         ]
+            //     }
+            // ];
         } else {
-            $categories[$category_index] = [
-                'category_name' => $categoryName, // Use $categoryName from the request
-                'category_quantity' => $request->input('category_quantity', 0), // Provide a default value if not available
+            // $categories[$category_index] = [
+            //     'category_name' => $categoryName, // Use $categoryName from the request
+            //     'category_quantity' => $request->input('category_quantity', 0), // Provide a default value if not available
+            //     'item' => [
+            //         [
+            //             'name' => $itemName,
+            //             // 'self_bring' => $selfBring,
+            //             // 'self_bring_qty' => $selfBringQuantity,
+            //             'quantity' => $itemQuantity,
+            //             if($selfBringQuantity!=""){
+            //             'item_carry_users' => [
+            //                 'user_id' => $user->id,  // Use => for key-value pairs
+            //                 'quantity' => $itemQuantity,
+            //             ]
+            //             }
+            //         ]
+            //     ]
+            // ];
+            $categoryData = [
+                'category_name' => $categoryName,
+                'category_quantity' => $request->input('category_quantity', 0),
                 'item' => [
                     [
                         'name' => $itemName,
-                        // 'self_bring' => $selfBring,
-                        // 'self_bring_qty' => $selfBringQuantity,
                         'quantity' => $itemQuantity,
-                        'item_carry_users'[0] => [
-                            'user_id' => $user->id,  // Use => for key-value pairs
-                            'quantity' => $itemQuantity,
-                        ]
                     ]
                 ]
             ];
+
+            if ($selfBringQuantity != "") {
+                $categoryData['item'][0]['item_carry_users'] = [
+                    'user_id' => $user->id,
+                    'quantity' => $itemQuantity,
+                ];
+            }
+            $categories[$category_index] = $categoryData;
+
         }
 
         //  else {
