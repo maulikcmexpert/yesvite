@@ -861,7 +861,9 @@ $(document).ready(function () {
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
+        var is_duplicate=0;
         if (!exists) {
+            is_duplicate=0;
             guestList.push({
                 id: id,
                 prefer_by: preferBy,
@@ -874,7 +876,12 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             });
         } else {
             console.log("Contact already in guest list:", { id });
+            is_duplicate=1;
         }
+
+        console.log(is_duplicate);
+        
+
         var  profileImage="";
         if(profile!=""){
             profileImage = `<img src="${profile}" alt="Profile Image">` ;
