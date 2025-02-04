@@ -9269,11 +9269,12 @@ $(document).on(
         if (event_name !== "" && event_date !== "" && start_time !== "") {
             // When all fields are filled
             $(".guestBtn").css("color", "black");  // Set text color to black
-            $('.guestBtn').find('svg').addClass('active-svg');  // Add a class to SVG for active state
+            $("#guestBtn").removeClass('guestBtn');
+            // Add a class to SVG for active state
         } else {
             // When any field is empty
             $(".guestBtn").css("color", "#b5b8bf");  // Set text color to a light gray
-            $('.guestBtn').find('svg').removeClass('active-svg');  // Remove the class from SVG
+            $("#guestBtn").addClass('guestBtn');
         }
     }
 );
@@ -9286,3 +9287,22 @@ if (isDraftEvent == "0" && eventId != "") {
     loadAgain();
 }
 checkbox_count();
+
+function colorchange(){
+    var event_name = $("#event-name").val();
+    var event_date = $("#event-date").val();
+    var start_time = $("#start-time").val();
+
+    // Check if all fields are not empty
+    if (event_name !== "" && event_date !== "" && start_time !== "") {
+        // When all fields are filled
+        $(".guestBtn").css("color", "black");  // Set text color to black
+        $("#guestBtn").removeClass('guestBtn');
+        // Add a class to SVG for active state
+    } else {
+        // When any field is empty
+        $(".guestBtn").css("color", "#b5b8bf");  // Set text color to a light gray
+        $("#guestBtn").addClass('guestBtn');
+    }
+}
+colorchange();
