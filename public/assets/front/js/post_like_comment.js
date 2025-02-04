@@ -209,7 +209,7 @@ $(document).ready(function () {
         const commentText = commentInput.val().trim();
         const parentCommentId =
             $("#parent_comment_id").val() ; // Find active comment if replying
-
+console.log(parentCommentId);
         if (commentText === "") {
             alert("Please enter a comment");
             return;
@@ -448,7 +448,7 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 $(document).on("keyup", ".search-phone", function () {
-    var searchQuery = $(this).val().toLowerCase(); 
+    var searchQuery = $(this).val().toLowerCase();
 
     if (searchQuery === "") {
         $(".phone-contact").show();
@@ -457,7 +457,7 @@ $(document).on("keyup", ".search-phone", function () {
             var contactName = $(this)
                 .find(".phone-search")
                 .data("search")
-                .toLowerCase(); 
+                .toLowerCase();
 
             if (contactName.indexOf(searchQuery) !== -1) {
                 $(this).show(); // Show this contact
@@ -804,8 +804,8 @@ $(document).ready(function () {
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
                 }
-             
-               
+
+
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
@@ -853,7 +853,7 @@ $(document).ready(function () {
     });
 
 
-   
+
     // Declare guestList outside so it's globally accessible
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
@@ -897,9 +897,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                     </div>
                     <h6>${first_name} ${last_name}</h6>
                 </div>
-    
+
             `;
-            $modalBody.append(contactHtml);      
+            $modalBody.append(contactHtml);
         }else{
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
@@ -912,7 +912,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                         <span class="content">Total</span>
                  </div>
                  <h6>Sell all</h6>
-                </a>`; 
+                </a>`;
                   $modalBody.append(totalHtml);
             }
             if(upper_see>0){
@@ -922,11 +922,11 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                $('#total-selected-email').attr('data-count',new_value);
                $('#total-selected-email').text('+'+new_value);
             }
-      
-             }
-      
 
-      
+             }
+
+
+
 
         console.log("Updated guest list:", guestList);
     }
@@ -974,9 +974,9 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                     </div>
                     <h6>${first_name} ${last_name}</h6>
                 </div>
-    
+
             `;
-            $modalBody.append(contactHtml);      
+            $modalBody.append(contactHtml);
         }else{
             const $modalBody = $('.selected-phone-list');
             var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
@@ -988,9 +988,9 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                         <span class="content">Total</span>
                  </div>
                  <h6>Sell all</h6>
-                </a>`; 
+                </a>`;
 
-             
+
                   $modalBody.append(totalHtml);
             }
             if(upper_see_phone>0){
@@ -1000,9 +1000,9 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                $('#total-selected-phone').attr('data-count',new_value);
                $('#total-selected-phone').text('+'+new_value);
             }
-      
+
              }
-      
+
     }
 
 });
@@ -1018,7 +1018,7 @@ $(document).on('click','.remove_new_added_user',function(){
 
     storeAddNewGuest(user_id,0,'',event_id,'yesvite');
 
-   
+
 });
 
 $(document).on('click','.remove_new_phone_added_user',function(){
@@ -1033,7 +1033,7 @@ $(document).on('click','.remove_new_phone_added_user',function(){
 
     storeAddNewGuest(user_id,0,'',event_id,'phone');
 
-   
+
 });
  $(document).on("click", ".add_guest", function (e) {
         e.preventDefault();
