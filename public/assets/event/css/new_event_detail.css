@@ -1510,6 +1510,7 @@
 
         /* right: 0px; */
         padding: 0px !important;
+        padding-right: 5px !important;
     }
 
     .timepicker {
