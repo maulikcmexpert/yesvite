@@ -994,17 +994,17 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 </a>`;
                   $modalBody.append(totalHtml);
             }
-            // if(upper_see>0){
-            //     console.log(is_duplicate);
-            //     if(is_duplicate==0){
-            //         var initial= parseInt($('#total-selected-email').attr('data-count'));
-            //         var new_value= initial+1 ;
-            //      //    alert(initial);
-            //         $('#total-selected-email').attr('data-count',new_value);
-            //         $('#total-selected-email').text('+'+new_value);
-            //     }
+            if(upper_see>0){
+                console.log(upper_see,is_duplicate);
+                if(is_duplicate==0){
+                    var initial= parseInt($('#total-selected-email').attr('data-count'));
+                    var new_value= initial+1 ;
+                    alert(new_value);
+                    $('#total-selected-email').attr('data-count',new_value);
+                    $('#total-selected-email').text('+'+new_value);
+                }
 
-            // }
+            }
 
              }
 
@@ -1090,16 +1090,18 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                   $modalBody.append(totalHtml);
 
             }
-            // if(upper_see_phone>0){
-            //     if(is_duplicate_phone==0){
-            //         var initial= parseInt($('#total-selected-phone').attr('data-count'));
-            //         var new_value= initial+1 ;
-            //      //    alert(initial);
-            //         $('#total-selected-phone').attr('data-count',new_value);
-            //         $('#total-selected-phone').text('+'+new_value);
-            //     }
+            if(upper_see_phone>0){
+                console.log(upper_see_phone,is_duplicate_phone);
 
-            // }
+                if(is_duplicate_phone==0){
+                    var initial= parseInt($('#total-selected-phone').attr('data-count'));
+                    var new_value= initial+1 ;
+                 //    alert(initial);
+                    $('#total-selected-phone').attr('data-count',new_value);
+                    $('#total-selected-phone').text('+'+new_value);
+                }
+
+            }
 
              }
 
