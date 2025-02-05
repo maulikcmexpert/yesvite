@@ -127,7 +127,6 @@ class EventWallController extends Controller
             ->orderBy('id', 'desc')  // Sorting by created_at in descending order
             ->get();
 
-        dd(1);
 
 
         $wallData['owner_stories'] = [];
@@ -252,6 +251,9 @@ class EventWallController extends Controller
                 }
             });
         }
+
+        dd(1);
+
         // dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
         // $results = $eventPostList->paginate(10);
