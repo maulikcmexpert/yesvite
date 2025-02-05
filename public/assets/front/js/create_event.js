@@ -1310,10 +1310,13 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var event_date = $("#event-date").val(); // Get the current value of the date input
+    if (event_date == "") {
+        event_date = moment().format("MM/DD/YYYY");
+    }
     let startDate;
     let endDate;
     let check = event_date.split("To");
-    console.log(event_date);
+    console.log(check);
     if (check.length == 2) {
         startDate = check[0];
         endDate = check[1];
