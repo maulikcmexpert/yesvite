@@ -45,7 +45,7 @@ class EventGuestController extends Controller
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
-                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
+                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
             }, 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '0')->with('user');
             }])->where('id', $event)->first();
@@ -65,6 +65,8 @@ class EventGuestController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
+            $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
@@ -243,7 +245,7 @@ class EventGuestController extends Controller
             $eventInfo['guest_view'] = $eventDetails;
 
 
-            
+
             $eventattending = EventInvitedUser::
                 // whereHas('user', function ($query) {
                 //     $query->where('app_user', '1');
@@ -374,12 +376,12 @@ class EventGuestController extends Controller
 
             // $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
-            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) 
-            ? round(($eventattending / $totalEnvitedUser) * 100) . "%" 
+            $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0)
+            ? round(($eventattending / $totalEnvitedUser) * 100) . "%"
             : "0%";
 
-$eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) 
-        ? round(($todayrsvprate / $totalEnvitedUser) * 100) . "%" 
+$eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
+        ? round(($todayrsvprate / $totalEnvitedUser) * 100) . "%"
         : "0%";
 
             $eventInfo['host_view'] = $eventAboutHost;
@@ -735,7 +737,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
     function fetch_guest($id,$is_sync)
     {
         if($is_sync=="1"){
-            $guest = EventInvitedUser::with('contact_sync')->findOrFail($id); 
+            $guest = EventInvitedUser::with('contact_sync')->findOrFail($id);
             return response()->json([
                 'id' => $guest->id,
                 'user_id' => $guest->sync_id,
@@ -744,8 +746,8 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 'lastname' => (!empty($guest->contact_sync->lastName) && $guest->contact_sync->lastName != NULL) ? $guest->contact_sync->lastName : "",
                 'email' =>  (!empty($guestVal->contact_sync->email) && $guestVal->contact_sync->email != NULL) ? $guestVal->contact_sync->email : "",
                 // 'profile' =>(!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL) ? asset('storage/profile/' . $guestVal->contact_sync->photo) : "" ,
-                'profile' => (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($guestVal->contact_sync->photo))) 
-                    ? asset('storage/profile/' . $guestVal->contact_sync->photo) 
+                'profile' => (!empty($guestVal->contact_sync->photo) && $guestVal->contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($guestVal->contact_sync->photo)))
+                    ? asset('storage/profile/' . $guestVal->contact_sync->photo)
                     : "",
                 'adults' => $guest->adults,
                 'kids' => $guest->kids,
@@ -768,7 +770,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 'is_sync'=>0
             ]);
         }
-      
+
     }
 
     public function updateRsvp(Request $request, $id)
@@ -939,9 +941,9 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
             }
 
     }
-  
+
     public function see_all_invite_yesvite(Request $request){
-    
+
         $yesvite_all_invite=getInvitedUsersList($request->event_id);
         $new_added_user=session()->get('add_guest_user_id');
         $yesvite_users_data = [];
@@ -962,30 +964,30 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                     'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
                     'phone_number'=>((!empty($user->phone_number) && $user->phone_number != NULL) ? $user->phone_number : ""),
-                    'profile' => (!empty($user->profile) && $user->profile != NULL) 
-                                ? asset('storage/profile/' . $user->profile) 
+                    'profile' => (!empty($user->profile) && $user->profile != NULL)
+                                ? asset('storage/profile/' . $user->profile)
                                 : "",
                     'prefer_by'=>$prefer_by
                 ];
             } else {
                 $contact_sync = contact_sync::find($sesionuser['user_id']);
-                
+
                 if ($contact_sync) {
                     $yesvite_phone_data[] = [
                         'user_id' => $contact_sync->id,
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
                         'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
                         'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
-                        'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo))) 
-                                    ? asset('storage/profile/' . $contact_sync->photo) 
+                        'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo)))
+                                    ? asset('storage/profile/' . $contact_sync->photo)
                                     : "",
                         'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
                         'prefer_by'=>$prefer_by
-           
+
                     ];
                 }
-            }        
-            
+            }
+
         }
 
 

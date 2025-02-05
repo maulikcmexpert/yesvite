@@ -360,7 +360,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                                 purchaseButton.textContent = `Purchase - $0.00`;
                                 const coinsSpans = document.querySelectorAll('.available-coins');
                                 const coinsInputs = document.querySelectorAll('.hidden-coins');
-            
+                                
                                 // Update the text content for each element
                                 coinsSpans.forEach(span => {
                                     span.textContent = data.data;
@@ -368,6 +368,9 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                                 coinsInputs.forEach(inp => {
                                     inp.value = data.data; 
                                 });
+                                $(".invite-left_d").text(
+                                    "Invites | " + data.data + " Left"
+                                );
                                 $('#buycreditsmodal').modal('hide');
                                 setTimeout(() => {
                                     toastr.success("Payment Successful!");                                    
