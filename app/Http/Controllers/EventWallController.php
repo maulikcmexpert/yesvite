@@ -2604,8 +2604,6 @@ foreach ($polls as $poll) {
                             });
                             break;
                         case 'photo_uploads':
-                            dd('p');
-
                             $query->orWhere(function ($qury) {
                                 $qury->where('post_type', '1')
                                     ->whereHas('post_image', function ($q) {
@@ -2624,7 +2622,6 @@ foreach ($polls as $poll) {
                 }
             });
         }
-        dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
         // $results = $eventPostList->paginate(10);
         // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
