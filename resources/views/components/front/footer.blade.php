@@ -2,7 +2,7 @@
 @if(isset($prices)&&count($prices)>0)
     
 
-<button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal" class="buynow">buycreditsmodal</button>
+<button type="button" data-bs-toggle="modal" data-bs-target="#buycreditsmodal" class="buynow d-none">buycreditsmodal</button>
 <div class="modal fade cmn-modal buycreditsmodal" id="buycreditsmodal" tabindex="-1" aria-labelledby="aboutsuccessLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -360,7 +360,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                                 purchaseButton.textContent = `Purchase - $0.00`;
                                 const coinsSpans = document.querySelectorAll('.available-coins');
                                 const coinsInputs = document.querySelectorAll('.hidden-coins');
-            
+                                
                                 // Update the text content for each element
                                 coinsSpans.forEach(span => {
                                     span.textContent = data.data;
@@ -368,6 +368,9 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                                 coinsInputs.forEach(inp => {
                                     inp.value = data.data; 
                                 });
+                                $(".invite-left_d").text(
+                                    "Invites | " + data.data + " Left"
+                                );
                                 $('#buycreditsmodal').modal('hide');
                                 setTimeout(() => {
                                     toastr.success("Payment Successful!");                                    

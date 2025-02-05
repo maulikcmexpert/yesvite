@@ -87,13 +87,7 @@ class PaymentController extends BaseController
             ]);
         }
         $startDate = Carbon::now();
-        // $new_subscription = new UserSubscription();
-        // $new_subscription->user_id = $user->id;
-        // $new_subscription->device_type = 'WEB';
-        // $new_subscription->startDate = $startDate;
-        // $new_subscription->productId = $validated['priceId'];
-        // $new_subscription->type = 'product';
-        // $new_subscription->save();
+
         // Create a new session with initial status 'idle'
         session()->put($sessionKey, [
             'user_id' => $user->id,

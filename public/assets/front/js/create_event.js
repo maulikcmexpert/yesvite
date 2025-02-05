@@ -12,6 +12,9 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 eventData.isCopy = isCopy;
+var Alreadyguest=$("#alreadyCount").val();
+
+eventData.Alreadyguest=Alreadyguest;
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
@@ -2025,7 +2028,7 @@ function add_user_counter() {
 }
 
 function guest_counter(total_guest, max_guest) {
-    var Alreadyguest = $(".users-data.invited_users").length;
+    Alreadyguest = $(".users-data.invited_users").length;
     var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
@@ -3614,7 +3617,7 @@ $(document).on("click", "#next_setting", function () {
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
     console.log(dbJson);
-    $('.li_event_detail').find('.side-bar-list').removeClass('active')
+    $(".li_event_detail").find(".side-bar-list").removeClass("active");
     loadAgain();
     // $(".step_1").hide();
     // handleActiveClass(".li_design");
@@ -9282,7 +9285,8 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 });
 
 function getcoins() {
-    var Alreadyguest = $(".users-data.invited_users").length;
+     Alreadyguest = $(".users-data.invited_users").length;
+     eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
@@ -9349,4 +9353,12 @@ function colorchange() {
         $("#guestBtn").addClass("guestBtn");
     }
 }
-colorchange();
+    if (final_step == "1" && isCohost == "1") {
+        $('.li_design').find('.side-bar-list').removeClass('menu-success');
+        $('.li_design').addClass('active');
+        $('.pick-card').addClass('active');
+        $('.edit-design-sidebar').removeClass('active');
+        $(".li_event_detail").find('.side-bar-list').removeClass('menu-success');
+        $(".li_guest").find('.side-bar-list').removeClass('menu-success');
+        $(".li_setting").find('.side-bar-list').removeClass('menu-success');
+    }
