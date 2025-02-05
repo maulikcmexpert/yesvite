@@ -1053,8 +1053,9 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
     {
         $search=$request->serach;
         $event_id=$request->event_id;
-        $guestArray=getInvitedUsersListNew($event_id,$request->input('search'));
+        $guest=getInvitedUsersListNew($event_id,$request->input('search'));
 
+        $guestArray=$guest['all_invited_users'];
 
         return response()->json(['view' => view( 'front.event_wall.search_guest_right_list', compact('guestArray'))->render()]);
 

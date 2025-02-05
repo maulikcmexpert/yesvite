@@ -1,3 +1,4 @@
+{{dd($guestArray)}}
 @foreach ($guestArray as $index => $guest)
                             @php
                                 //$user = $guest['user']; // Fetch user array
