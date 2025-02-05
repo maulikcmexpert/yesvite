@@ -2300,7 +2300,7 @@ class EventController extends BaseController
             $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
-
+        dd($selectedContactId)
     
 
         // $getAllContacts = contact_sync::where('contact_id', $id)
@@ -2339,27 +2339,26 @@ class EventController extends BaseController
 
 
             $getAllContacts = contact_sync::where('contact_id', $id)
-            // Only apply whereIn condition if $selectedContactId is not empty
             ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
                 $query->whereIn('id', $selectedContactId);
             })
-            // Apply limit and offset for pagination if provided in the request
+        
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
                       ->offset($request->offset);
             })
-            // Apply search condition if a search term is provided
+         
             ->when(!empty($request->search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstName', 'LIKE', '%' . $search_user . '%')
                       ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
                 });
             })
-            // Group results by 'id'
+         
             ->groupBy('id')
-            // Sort by firstName
+        
             ->orderBy('firstName')
-            // Execute the query and get the results
+  
             ->get();
         
 
