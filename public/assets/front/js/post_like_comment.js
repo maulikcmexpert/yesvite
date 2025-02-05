@@ -1182,7 +1182,8 @@ $(document).on("keyup", ".search_contact", function () {
         },
         success: function (response) {
             console.log(response);
-            // $('.wall-post-content').html();
+            $('#guestList').html('');
+            $('#guestList').html(response.view);
             $('#home_loader').css('loader','none');
 
 

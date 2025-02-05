@@ -1053,10 +1053,12 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
     {
         $search=$request->serach;
         $event_id=$request->event_id;
-        $yesvite=getInvitedUsersListNew($event_id,$request->input('search'));
+        $guestArray=getInvitedUsersListNew($event_id,$request->input('search'));
 
 
-        dd($yesvite['all_invited_users']);
+        return response()->json(['view' => view( 'front.event_wall.see_invite', compact('guestArray'))->render()]);
+
+        // dd($yesvite['all_invited_users']);
     }
 
 
