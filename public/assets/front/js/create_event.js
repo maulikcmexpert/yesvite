@@ -1318,7 +1318,7 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: moment(event_date, "MM/DD/YYYY"), 
+            startDate: moment(event_date, "MM/DD/YYYY"),
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -1925,6 +1925,13 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     if (isChecked == true || isChecked == "true") {
         // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
+        var max_guest = $("#coins").val();
+        console.log({ max_guest });
+        if (max_guest <= 0) {
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").model("show");
+            return;
+        }
         $.ajax({
             url: base_url + "event/store_user_id",
             method: "POST",
@@ -1948,7 +1955,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 }
 
                 var total_guest = 0;
-                var max_guest = $("#coins").val();
+
                 // if (total_guest == max_guest) {
 
                 // } else {
