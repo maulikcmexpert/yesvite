@@ -1,4 +1,4 @@
-
+{{-- {{dd($postList )}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -644,10 +644,7 @@
                                             </div>
 
                                         </div>
-                                    @endforeach
-                                                                                                                
-                                    {{-- {{dd($pollsData)}} --}}
-                                    @foreach ($pollsData as $poll)
+
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post_poll"
                                             data-post-id="{{ $poll['event_post_id'] }}">
                                             <div class="posts-card-wrp">
@@ -952,7 +949,7 @@
                                                     </span>
                                                 </div>
 
-                                                <div
+                                                {{-- <div
                                                 class="posts-card-show-all-comments-wrp d-none show_{{ $poll['event_post_id'] }}">
 
                                                 <div class="posts-card-show-all-comments-inner">
@@ -1175,7 +1172,7 @@
                                                             </li>
                                                         @endforeach
                                                     </ul>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             </div>
                                         </div>
