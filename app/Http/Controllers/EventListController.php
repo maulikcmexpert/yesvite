@@ -2765,8 +2765,8 @@ if ($rsvpSent != null) {
 
             
         } else {
-            $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
-            session(['add_guest_user_id' => $userData]);
+            $usersData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
+            session(['add_guest_user_id' => $usersData]);
 
             $yesvite_all_invite=getInvitedUsersList($request->event_id);
             // dd($yesvite_all_invite);
