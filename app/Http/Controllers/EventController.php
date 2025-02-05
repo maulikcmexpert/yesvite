@@ -2257,7 +2257,7 @@ class EventController extends BaseController
     
         ->groupBy('id') // Grouping by ID to avoid duplicates
         ->get();
-        dd($yesvite_users);
+        
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
