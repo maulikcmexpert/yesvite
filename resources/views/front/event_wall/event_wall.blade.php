@@ -648,7 +648,7 @@
                                                                         {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
                                                                     </p> --}}
                                                                                 </div>
-                                                                                <button
+                                                                                <button data-comment-id="{{ $comment['id'] }}"
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
                                                                             @if ($comment['total_replies'] > 0)
