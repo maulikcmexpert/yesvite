@@ -50,18 +50,19 @@ use FFMpeg\Coordinate\TimeCode;
 function getVideoDuration($filePath)
 {
 
+    $track = GetId3::fromDisk('public')->extractInfo($filePath);
 
-    $track = new GetId3($filePath);
+    // $track = new GetId3($filePath);
 
-    // Use static methods:
-    $track = GetId3::fromUploadedFile($filePath);
+    // // Use static methods:
+    // $track = GetId3::fromUploadedFile($filePath);
 
-    //get all info
-    $track->extractInfo();
+    // //get all info
+    // $track->extractInfo();
 
 
-    //get title
-    $track->getTitle();
+    // //get title
+    // $track->getTitle();
 
     //get playtime
     return  $track->getPlaytime();
@@ -69,13 +70,14 @@ function getVideoDuration($filePath)
 
 
 
-function genrate_thumbnail($fileName) {
+function genrate_thumbnail($fileName)
+{
 
     $videoPath = public_path('storage/post_image/') . $fileName;
     //dd($videoPath);
     $ffmpeg = FFMpeg\FFMpeg::create([
         'ffmpeg.binaries' => exec('which ffmpeg'),
-       'ffprobe.binaries' => exec('which ffprobe'),
+        'ffprobe.binaries' => exec('which ffprobe'),
     ]);
     $video = $ffmpeg->open($videoPath);
 
