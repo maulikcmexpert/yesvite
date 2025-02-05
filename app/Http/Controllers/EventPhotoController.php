@@ -731,7 +731,7 @@ class EventPhotoController extends Controller
                 // Process video
                 if ($checkIsImageOrVideo == 'video') {
                     $postFilePath = public_path('storage/post_image' . $fileName);
-                    dd($postFilePath);
+
                     $duration = getVideoDuration($postFilePath); // Assuming this is a helper function
                     $thumbName = genrate_thumbnail($fileName);
                     $postFile->move(public_path('storage/post_image/'), $fileName);
