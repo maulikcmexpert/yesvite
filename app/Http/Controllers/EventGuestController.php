@@ -974,8 +974,9 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     'prefer_by'=>$prefer_by
                 ];
             }
-             elseif($is_phone==1) {
-                $contact_sync = contact_sync::find($sesionuser['user_id']);;
+             else {
+                // $contact_sync = contact_sync::find($sesionuser['user_id']);;
+                $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
 
                 if ($contact_sync) {
                     $yesvite_phone_data[] = [
