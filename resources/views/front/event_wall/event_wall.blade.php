@@ -318,7 +318,7 @@
                                                                             <h5>NO REPLY</h5>
 
                                                                     </div>
-                                                                    </div>
+                                                                   
                                                 @endif
                                                 @if( $post['post_type'] =="2")
                                                 <div class="posts-card-inner-wrp">
