@@ -1166,16 +1166,16 @@ $(document).on("click", ".mute-conversation", function () {
             $(".unmute-self-icn").hide();
         }
     }
-    // $(".conversation-" + conversationId)
-    //     .find(".chat-data")
-    //     .find(".mute-single-conversation")
-    //     .find("span")
-    //     .text(change == "1" ? "Unmute" : "Mute");
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".mute-single-conversation")
+        .find("span")
+        .text(change == "1" ? "Unmute" : "Mute");
 
-    // $(".conversation-" + conversationId)
-    //     .find(".chat-data")
-    //     .find(".mute-single-conversation")
-    //     .attr("changeWith", change == "1" ? "0" : "1");
+    $(".conversation-" + conversationId)
+        .find(".chat-data")
+        .find(".mute-single-conversation")
+        .attr("changeWith", change == "1" ? "0" : "1");
 });
 
 $(document).on("click", ".mute-single-conversation", function (e) {

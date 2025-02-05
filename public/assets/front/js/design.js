@@ -673,6 +673,10 @@ async function bindData(current_event_id) {
                 if (staticInfo.textElements == undefined) {
                     staticInfo.textElements = jQuery.parseJSON(dbJson).textData;
                 }
+                if (staticInfo.textElements.textElement != undefined) {
+                    staticInfo.textElements =
+                        staticInfo.textElements.textElement;
+                }
                 if (staticInfo.textElements != undefined) {
                     console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
