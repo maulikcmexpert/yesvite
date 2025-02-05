@@ -997,7 +997,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
             // alert(upper_see);
-            if(upper_see==0){
+            if(upper_see==0&&is_duplicate==0){
                 console.log(is_duplicate);
 
                 const totalHtml = `
@@ -1092,7 +1092,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
         }else{
             const $modalBody = $('.selected-phone-list');
             var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
-            if(upper_see_phone==0){
+            if(upper_see_phone==0 && is_duplicate_phone==0){
                 const totalHtml = `
                 <a  class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">
