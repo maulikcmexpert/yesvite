@@ -8,7 +8,10 @@ $counter = 0;
 @endphp
 @foreach($listing as $guest_user)
 @php
-
+$is_duplicate="0";
+if(isset($guest_user['is_duplicate'])){
+$is_duplicate=$guest_user['is_duplicate'];
+}
 if($guest_user['is_duplicate']=="0"){
 $counter++;
 }
