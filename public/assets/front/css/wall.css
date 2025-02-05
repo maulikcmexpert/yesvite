@@ -552,6 +552,10 @@
     right: 0; */
 }
 
+.off-by-host-wrp{
+    padding:30px;
+}
+
 
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {
