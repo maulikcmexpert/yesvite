@@ -9354,6 +9354,10 @@ function colorchange() {
     }
 }
     if (final_step == "1" && isCohost == "1") {
+        $('.li_design').find('.side-bar-list').removeClass('menu-success');
+        $('.li_design').addClass('active');
+        $('.pick-card').addClass('active');
+        $('.edit-design-sidebar').removeClass('active');
         $(".li_event_detail").find('.side-bar-list').removeClass('menu-success');
         $(".li_guest").find('.side-bar-list').removeClass('menu-success');
         $(".li_setting").find('.side-bar-list').removeClass('menu-success');
