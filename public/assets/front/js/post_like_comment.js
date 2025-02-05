@@ -392,11 +392,9 @@ $(document).ready(function () {
             console.error("Parent wrapper not found!");
             return;
         }
-
-        // Get the username and comment ID from the current comment being replied to
         const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
-        const parentId = $(".data_comment_id").val();
-        // const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
+        const parentId =$(this).data("comment-id");
+       
 
         if (!parentId) {
             console.error("Parent Comment ID is missing!");
