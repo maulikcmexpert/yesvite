@@ -1068,7 +1068,7 @@ function getInvitedUsersListNew($eventId,$search=null)
     // dd($search);
 
     if (!empty($search)) {
-        dd($search);
+        // dd($search);
         $invitedUsers->where(function ($query) use ($search) {
             $query->whereHas('user', function ($q) use ($search) {
                 $q->where('firstname', 'LIKE', "%$search%");
