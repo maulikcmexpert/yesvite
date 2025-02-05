@@ -1311,13 +1311,13 @@ $(function () {
     let ed = document.getElementById("event-date");
     var event_date = $("#event-date").val(); // Get the current value of the date input
 
-    // If event_date is not null or empty, format it as MM/DD/YYYY
-    if (event_date) {
-        event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
-    } else {
-        // If no event_date, set it to today's date in MM/DD/YYYY format
-        event_date = moment().format("MM/DD/YYYY");
-    }
+    // // If event_date is not null or empty, format it as MM/DD/YYYY
+    // if (event_date) {
+    //     event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
+    // } else {
+    //     // If no event_date, set it to today's date in MM/DD/YYYY format
+    //     event_date = moment().format("MM/DD/YYYY");
+    // }
     var oldDate = $(ed).attr("data-isDate");
     console.log($("#event-date").val());
     console.log(event_date);
