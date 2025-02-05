@@ -52,6 +52,491 @@ class EventWallController extends Controller
     public function index(String $id)
     {
         $title = 'event wall';
+        $user = Auth::guard('web')->user();
+        $js = ['event_wall', 'post_like_comment', 'guest_rsvp', 'guest'];
+
+        $event = decrypt($id);
+        $encrypt_event_id = $id;
+        $page = 'front.event_wall.event_wall';
+
+        if (!$event) {
+            return response()->json(['status' => 0, 'message' => "Json invalid"]);
+        }
+
+        // Optimize User Query
+        $users = User::withCount([
+            'event' => fn($query) => $query->where('is_draft_save', '0'),
+            'event_post' => fn($query) => $query->where('post_type', '1'),
+            'event_post_comment',
+        ])->findOrFail($user->id);
+
+        $users['events'] = Event::where('user_id', $users->id)->where('is_draft_save', '0')->count();
+        $users['profile'] = $users->profile ? asset("storage/profile/{$users->profile}") : "";
+        $users['bg_profile'] = $users->bg_profile ? asset("storage/bg_profile/{$users->bg_profile}") : asset('assets/front/image/Frame 1000005835.png');
+
+        $currentDateTime = now();
+
+        // Optimize Event Stories Query
+        $eventStoriesLists = EventUserStory::with([
+            'user:id,firstname,lastname,profile',
+            'user_event_story' => fn($query) => $query->where('created_at', '>', now()->subHours(24))
+        ])
+            ->where('created_at', '>', now()->subHours(24))
+            ->where('event_id', $event)
+            ->where('user_id', '!=', $user->id)
+            ->get();
+
+        $storiesList = $eventStoriesLists->map(function ($value) use ($user) {
+            return [
+                'id' => $value->id,
+                'user_id' => $value->user->id,
+                'username' => "{$value->user->firstname} {$value->user->lastname}",
+                'profile' => $value->user->profile ? asset("storage/profile/{$value->user->profile}") : "",
+                'story' => $value->user_event_story->map(function ($storyVal) use ($user) {
+                    return [
+                        'id' => $storyVal->id,
+                        'storyurl' => $storyVal->story ? asset("storage/event_user_stories/{$storyVal->story}") : "",
+                        'type' => $storyVal->type,
+                        'post_time' => $this->setpostTime($storyVal->created_at),
+                        'is_seen' => UserSeenStory::where('user_id', $user->id)->where('user_event_story_id', $storyVal->id)->exists() ? "1" : "0",
+                        'video_duration' => $storyVal->type == 'video' ? ($storyVal->duration ?? "") : "",
+                        'created_at' => $storyVal->created_at
+                    ];
+                })
+            ];
+        });
+
+        // Optimize Polls Query
+        $polls = EventPostPoll::with('event_poll_option')
+            ->withCount('user_poll_data')
+            ->where('event_id', $event)
+            ->orderByDesc('id')
+            ->get();
+
+        $wallData['owner_stories'] = [];
+
+        // Optimize Logged-in User Stories Query
+        $eventLoginUserStoriesList = EventUserStory::with([
+            'user:id,firstname,lastname,profile',
+            'user_event_story' => fn($query) => $query->where('created_at', '>', now()->subHours(24))
+        ])
+            ->where('event_id', $event)
+            ->where('user_id', $user->id)
+            ->where('created_at', '>', now()->subHours(24))
+            ->first();
+
+        if ($eventLoginUserStoriesList) {
+            $wallData['owner_stories'][] = [
+                'id' => $eventLoginUserStoriesList->id,
+                'user_id' => $eventLoginUserStoriesList->user->id,
+                'username' => "{$eventLoginUserStoriesList->user->firstname} {$eventLoginUserStoriesList->user->lastname}",
+                'profile' => $eventLoginUserStoriesList->user->profile ? asset("storage/profile/{$eventLoginUserStoriesList->user->profile}") : "",
+                'story' => $eventLoginUserStoriesList->user_event_story->map(function ($storyVal) use ($user) {
+                    return [
+                        'id' => $storyVal->id,
+                        'storyurl' => $storyVal->story ? asset("storage/event_user_stories/{$storyVal->story}") : "",
+                        'type' => $storyVal->type,
+                        'post_time' => $this->setpostTime($storyVal->updated_at),
+                        'is_seen' => UserSeenStory::where('user_id', $user->id)->where('user_event_story_id', $storyVal->id)->exists() ? "1" : "0",
+                        'video_duration' => $storyVal->type == 'video' ? ($storyVal->duration ?? "") : "",
+                        'created_at' => $storyVal->updated_at
+                    ];
+                })
+            ];
+        }
+        $postList = [];
+        $selectedFilters = "";
+        $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
+
+        $eventPostList = EventPost::with(['user', 'post_image'])
+            ->withCount([
+                'event_post_comment' => fn($query) => $query->whereNull('parent_comment_id'),
+                'event_post_reaction'
+            ])
+            ->where('event_id', $event)
+            ->where('is_in_photo_moudle', '0')
+            ->whereDoesntHave('post_control', fn($query) => $query->where('user_id', $user->id)->where('post_control', 'hide_post'));
+
+        $checkEventOwner = Event::where('id', $event)->where('user_id', $user->id)->exists();
+
+        if (!$checkEventOwner) {
+            $eventPostList->where(function ($query) use ($user, $event) {
+                $query->where('user_id', $user->id)
+                    ->orWhereHas('event.event_invited_user', function ($subQuery) use ($user, $event) {
+                        $subQuery->whereHas('user', fn($userQuery) => $userQuery->where('app_user', '1'))
+                            ->where('event_id', $event)
+                            ->where('user_id', $user->id)
+                            ->where(function ($privacyQuery) {
+                                $privacyQuery->where(fn($q) => $q->where('rsvp_d', '1')->where('rsvp_status', '1')->where('post_privacy', '2'))
+                                    ->orWhere(fn($q) => $q->where('rsvp_d', '1')->where('rsvp_status', '0')->where('post_privacy', '3'))
+                                    ->orWhere(fn($q) => $q->where('rsvp_d', '0')->where('post_privacy', '4'))
+                                    ->orWhere(fn($q) => $q->where('post_privacy', '1'));
+                            });
+                    });
+            });
+        }
+
+        // Execute Query
+        $eventPostList = $eventPostList->orderByDesc('id')->get();
+
+        // Apply Selected Filters
+        if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
+            $eventPostList = $eventPostList->filter(function ($post) use ($selectedFilters, $eventCreatorId) {
+                foreach ($selectedFilters as $filter) {
+                    switch ($filter) {
+                        case 'host_update':
+                            if ($post->user_id == $eventCreatorId) return true;
+                            break;
+                        case 'video_uploads':
+                            if ($post->post_type == '1' && $post->post_image->contains('type', 'video')) return true;
+                            break;
+                        case 'photo_uploads':
+                            if ($post->post_type == '1' && $post->post_image->contains('type', 'image')) return true;
+                            break;
+                        case 'polls':
+                            if ($post->post_type == '2') return true;
+                            break;
+                        case 'comments':
+                            if ($post->post_type == '0') return true;
+                            break;
+                    }
+                }
+                return false;
+            });
+        }
+
+        foreach ($eventPostList as $value) {
+            // Check RSVP status and event ownership only once
+            $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
+            $isEventOwner = $value->user->id === $user->id;
+
+            // Check if post is controlled (e.g., hidden or muted)
+            $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event, 'event_post_id' => $value->id])->first();
+            if ($postControl && $postControl->post_control == 'hide_post') {
+                continue; // Skip hidden posts
+            }
+
+            // Get event invitation data (kids and adults count)
+            $count_kids_adult = EventInvitedUser::where(['event_id' => $event, 'user_id' => $value->user->id])->first();
+
+            // Process RSVP and user data
+            if ($value->post_type == '4' && !empty($value->post_message)) {
+                $EventPostMessageData = json_decode($value->post_message, true);
+                $rsvpstatus = $EventPostMessageData['status'] ?? $checkUserRsvp;
+                $kids = $EventPostMessageData['kids'] ?? 0;
+                $adults = $EventPostMessageData['adults'] ?? 0;
+            } else {
+                $rsvpstatus = $checkUserRsvp;
+                $kids = $count_kids_adult->kids ?? 0;
+                $adults = $count_kids_adult->adults ?? 0;
+            }
+
+            // Build the post details array
+            $postsNormalDetail = [
+                'id' => $value->id,
+                'user_id' => $value->user->id,
+                'is_co_host' => EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0",
+                'is_host' => $value->user->id == $eventCreator->user_id ? 1 : 0,
+                'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                'profile' => asset('storage/profile/' . ($value->user->profile ?? '')),
+                'post_message' => $value->post_type == '4' ? '' : $value->post_message,
+                'rsvp_status' => (string)$rsvpstatus,
+                'kids' => (int)$kids,
+                'adults' => (int)$adults,
+                'location' => trim($value->user->city . ($value->user->state ? ', ' . $value->user->state : '')),
+                'post_type' => $value->post_type,
+                'post_privacy' => $value->post_privacy,
+                'created_at' => $value->created_at,
+                'posttime' => setpostTime($value->created_at),
+                'commenting_on_off' => $value->commenting_on_off,
+                'post_image' => [],
+                'total_poll_vote' => 0,
+                'poll_duration' => '',
+                'is_expired' => false,
+                'poll_id' => 0,
+                'poll_question' => '',
+                'poll_option' => []
+            ];
+
+            // Check if the post type is poll
+            if ($value->post_type == '2') {
+                $polls = $value->eventPostPoll()->with('eventPollOptions')->first();
+                $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count ?? 0;
+                $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
+                $postsNormalDetail['poll_duration'] = $pollDura;
+                $postsNormalDetail['is_expired'] = empty($pollDura);
+                $postsNormalDetail['poll_id'] = $polls->id;
+                $postsNormalDetail['poll_question'] = $polls->poll_question;
+
+                foreach ($polls->eventPollOptions as $optionValue) {
+                    $optionData = [
+                        'id' => $optionValue->id,
+                        'option' => $optionValue->option,
+                        'total_vote' => getOptionAllTotalVote($polls->id) ? round(getOptionTotalVote($optionValue->id) / getOptionAllTotalVote($polls->id) * 100) . "%" : "0%",
+                        'is_poll_selected' => checkUserGivePoll($user->id, $polls->id, $optionValue->id)
+                    ];
+                    $postsNormalDetail['poll_option'][] = $optionData;
+                }
+            }
+
+            // Process post images
+            if ($value->post_type == '1' && !empty($value->post_image)) {
+                foreach ($value->post_image as $imgVal) {
+                    $postMedia = [
+                        'id' => $imgVal->id,
+                        'media_url' => asset('storage/post_image/' . $imgVal->post_image),
+                        'type' => $imgVal->type,
+                        'thumbnail' => $imgVal->thumbnail ? asset('storage/thumbnails/' . $imgVal->thumbnail) : '',
+                        'video_duration' => ($imgVal->type == 'video' && $imgVal->duration) ? $imgVal->duration : null
+                    ];
+                    $postsNormalDetail['post_image'][] = $postMedia;
+                }
+            }
+
+            // Other post details
+            $postsNormalDetail['post_recording'] = $value->post_recording ? asset('storage/event_post_recording/' . $value->post_recording) : "";
+            $postsNormalDetail['reactionList'] = getOnlyReaction($value->id);
+            $postsNormalDetail['total_comment'] = $value->event_post_comment_count;
+            $postsNormalDetail['total_likes'] = $value->event_post_reaction_count;
+            $postsNormalDetail['is_reaction'] = $checkUserIsReaction ? '1' : '0';
+            $postsNormalDetail['self_reaction'] = $checkUserIsReaction ? $checkUserIsReaction->reaction : "";
+            $postsNormalDetail['is_owner_post'] = $value->user->id == $user->id ? 1 : 0;
+            $postsNormalDetail['is_mute'] = $postControl && $postControl->post_control == 'mute' ? 1 : 0;
+
+            $postCommentList = [];
+            $postComment = getComments($value->id);
+
+            // Pre-fetch necessary related data
+            $likes = []; // Store likes data for comments and replies
+            $mainParentIds = []; // Store main parent comment ids for replies
+
+            foreach ($postComment as $commentVal) {
+                $commentInfo = [
+                    'id' => $commentVal->id,
+                    'event_post_id' => $commentVal->event_post_id,
+                    'comment' => $commentVal->comment_text,
+                    'user_id' => $commentVal->user_id,
+                    'username' => trim($commentVal->user->firstname . ' ' . $commentVal->user->lastname) ?: null,
+                    'profile' => $commentVal->user->profile ? asset('storage/profile/' . $commentVal->user->profile) : "",
+                    'location' => null, // Default value
+                    'comment_total_likes' => $commentVal->post_comment_reaction_count,
+                    'is_like' => checkUserIsLike($commentVal->id, $user->id),
+                    'total_replies' => $commentVal->replies_count,
+                    'created_at' => $commentVal->created_at,
+                    'posttime' => setpostTime($commentVal->created_at),
+                    'comment_replies' => [],
+                ];
+
+                // Concatenate city and state for location only if they exist
+                $city = trim($commentVal->user->city ?? '');
+                $state = trim($commentVal->user->state ?? '');
+                if ($city || $state) {
+                    $commentInfo['location'] = $city . ($state ? ', ' . $state : '');
+                }
+
+                // Load replies for the current comment
+                foreach ($commentVal->replies as $reply) {
+                    $mainParentId = $reply->main_parent_comment_id;
+                    if (!isset($mainParentIds[$mainParentId])) {
+                        $mainParentIds[$mainParentId] = EventPostComment::with('user')->withCount('post_comment_reaction', 'replies')->where('main_parent_comment_id', $mainParentId)->get();
+                    }
+                    $replyData = buildReplyData($reply, $user);
+                    $commentInfo['comment_replies'][] = $replyData;
+                }
+
+                // Store comment information
+                $postCommentList[] = $commentInfo;
+            }
+
+            $postsNormalDetail['post_comment'] = $postCommentList;
+            $postList[] = $postsNormalDetail;
+        }
+
+        $eventDetail = Event::with([
+            'user',
+            'event_image',
+            'event_schedule',
+            'event_settings' => function ($query) {
+                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
+            },
+            'event_invited_user' => function ($query) use ($user) {
+                $query->where('is_co_host', '1')->with('user');
+            },
+            'event_invited_user.user' // To avoid multiple queries for the user's profile
+        ])->where('id', $event)->first();
+
+        $eventDetails = [
+            'id' => $eventDetail->id,
+            'event_name' => $eventDetail->event_name,
+            'hosted_by' => $eventDetail->hosted_by,
+            'event_date' => $eventDetail->start_date,
+            'event_time' => $eventDetail->rsvp_start_time,
+            'end_date' => $eventDetail->end_date,
+            'end_time' => $eventDetail->rsvp_end_time,
+            'event_location_name' => $eventDetail->event_location_name,
+            'address_1' => $eventDetail->address_1,
+            'address_2' => $eventDetail->address_2,
+            'state' => $eventDetail->state,
+            'zip_code' => $eventDetail->zip_code,
+            'city' => $eventDetail->city,
+            'latitude' => $eventDetail->latitude ?? '',
+            'longitude' => $eventDetail->longitude ?? '',
+            'guest_list_visible_to_guests' => $eventDetail->event_settings->guest_list_visible_to_guests ?? '',
+            'message_to_guests' => $eventDetail->message_to_guests,
+            'is_host' => ($eventDetail->user_id == $user->id) ? 1 : 0,
+            'is_co_host' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->exists() ? 1 : 0,
+            'podluck' => $eventDetail->event_settings->podluck ?? "",
+            'event_wall' => $eventDetail->event_settings->event_wall ?? "",
+            'total_limit' => $eventDetail->event_settings->allow_limit ?? 0,
+            'allow_limit' => $eventDetail->event_settings->allow_limit ?? 0,
+            'adult_only_party' => $eventDetail->event_settings->adult_only_party ?? 0,
+            'event_created_timestamp' => Carbon::parse($eventDetail->start_date)->timestamp,
+            'event_detail' => [],
+        ];
+
+        // Event Image URLs
+        $eventDetails['event_images'] = $eventDetail->event_image->pluck('image')->map(fn($image) => asset('storage/event_images/' . $image))->toArray();
+
+        // RSVP Status
+        $rsvpStatus = EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id])->first();
+        $eventDetails['rsvp_status'] = $rsvpStatus ? ($rsvpStatus->rsvp_status == '1' ? '1' : '0') : '';
+
+        // Days till Event Calculation
+        $eventDate = Carbon::parse($eventDetail->start_date);
+        $currentDate = Carbon::now();
+        $tillDays = $eventDate->diffInDays($currentDate);
+
+        if ($eventDate >= $currentDate) {
+            $tillDays = $tillDays == 0 ? "Today" : ($tillDays == 1 ? "Tomorrow" : $tillDays);
+        } else {
+            $eventDetails['is_past'] = $eventDetail->end_date < $currentDate ? true : false;
+            $tillDays = "Ongoing";
+        }
+        $eventDetails['days_till_event'] = $tillDays;
+
+        // Event Schedule
+        $eventDetails['event_schedule'] = $eventDetail->event_schedule->map(function ($schedule) {
+            return [
+                'id' => $schedule->id,
+                'activity_title' => $schedule->type == '1' ? "Start Event" : ($schedule->type == '3' ? "End Event" : $schedule->activity_title),
+                'start_time' => $schedule->start_time ?? '',
+                'end_time' => $schedule->end_time ?? '',
+                'type' => $schedule->type
+            ];
+        })->toArray();
+
+        // Co-hosts Info
+        $eventDetails['co_hosts'] = $eventDetail->event_invited_user->map(function ($host) {
+            $user = $host->user;
+            return [
+                'id' => $user->id,
+                'profile' => asset('storage/profile/' . ($user->profile ?? '')),
+                'name' => trim(($user->firstname ?? '') . ' ' . ($user->lastname ?? '')),
+                'email' => $user->email ?? '',
+                'phone_number' => $user->phone_number ?? '',
+            ];
+        })->toArray();
+
+        // Gift Registry
+        $eventDetails['gift_registry'] = [];
+        if (!empty($eventDetail->gift_registry_id)) {
+            $giftRegistryData = EventGiftRegistry::whereIn('id', explode(',', $eventDetail->gift_registry_id))->get();
+            $eventDetails['gift_registry'] = $giftRegistryData->map(function ($registry) {
+                return [
+                    'id' => $registry->id,
+                    'registry_recipient_name' => $registry->registry_recipient_name,
+                    'registry_link' => $registry->registry_link
+                ];
+            })->toArray();
+        }
+
+        // Event About Host
+        $totalInvitedUser = EventInvitedUser::where(['event_id' => $eventDetail->id])->count();
+        $eventAboutHost = [
+            'attending' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('adults') + EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('kids'),
+            'adults' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('adults'),
+            'kids' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->sum('kids'),
+            'not_attending' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '0'])->count(),
+            'pending' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_d' => '0'])->count(),
+            'comment' => EventPostComment::where(['event_id' => $eventDetail->id, 'user_id' => $user->id])->count(),
+            'photo_uploaded' => EventPostImage::where(['event_id' => $eventDetail->id])->count(),
+            'total_invite' => $totalInvitedUser,
+            'rsvp_rate' => EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->count(),
+            'rsvp_rate_percent' => $totalInvitedUser > 0 ? EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->count() / $totalInvitedUser * 100 . "%" : "0%",
+            'today_upstick' => $totalInvitedUser > 0 ? EventInvitedUser::where(['event_id' => $eventDetail->id, 'rsvp_status' => '1'])->whereDate('created_at', Carbon::today())->count() / $totalInvitedUser * 100 . "%" : "0%"
+        ];
+
+        $eventInfo = [
+            'guest_view' => $eventDetails,
+            'host_view' => $eventAboutHost
+        ];
+
+        return view('layout', compact(
+            'title',
+            'page',
+            'users',
+            'event',
+            'eventInfo',
+            'eventDetails',
+            'storiesList',
+            'wallData',
+            'postList',
+            'encrypt_event_id',
+            'current_page',
+            'rsvpSent',
+            'login_user_id',
+            'js'
+        ));
+    }
+
+    function buildReplyData($reply, $user)
+    {
+        $replyInfo = [
+            'id' => $reply->id,
+            'event_post_id' => $reply->event_post_id,
+            'main_comment_id' => $reply->main_parent_comment_id,
+            'comment' => $reply->comment_text,
+            'user_id' => $reply->user_id,
+            'username' => trim($reply->user->firstname . ' ' . $reply->user->lastname) ?: null,
+            'profile' => $reply->user->profile ? asset('storage/profile/' . $reply->user->profile) : "",
+            'location' => null, // Default value
+            'comment_total_likes' => $reply->post_comment_reaction_count,
+            'is_like' => checkUserIsLike($reply->id, $user->id),
+            'total_replies' => $reply->replies_count,
+            'created_at' => $reply->created_at,
+            'posttime' => setpostTime($reply->created_at),
+        ];
+
+        // Concatenate city and state for location only if they exist
+        $city = trim($reply->user->city ?? '');
+        $state = trim($reply->user->state ?? '');
+        if ($city || $state) {
+            $replyInfo['location'] = $city . ($state ? ', ' . $state : '');
+        }
+
+        // Load child replies if necessary (up to a reasonable level of recursion)
+        $replyInfo['comment_replies'] = [];
+        $childReplies = getChildReplies($reply->id, $reply->event_post_id);
+        foreach ($childReplies as $childReply) {
+            $childReplyData = buildReplyData($childReply, $user);
+            $replyInfo['comment_replies'][] = $childReplyData;
+        }
+
+        return $replyInfo;
+    }
+
+    function getChildReplies($parentId, $postId)
+    {
+        return EventPostComment::with('user')->withCount('post_comment_reaction', 'replies')
+            ->where('parent_comment_id', $parentId)
+            ->where('event_post_id', $postId)
+            ->orderBy('id', 'DESC')
+            ->get();
+    }
+
+    public function index_old(String $id)
+    {
+        $title = 'event wall';
         $user  = Auth::guard('web')->user();
         $js = ['event_wall', 'post_like_comment', 'guest_rsvp', 'guest'];
 
@@ -252,17 +737,6 @@ class EventWallController extends Controller
             });
         }
 
-
-
-        // dd($eventPostList);
-        // $totalPostWalls = $eventPostList->count();
-        // $results = $eventPostList->paginate(10);
-        // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
-
-        // dd($checkEventOwner);
-        //if (!empty($checkEventOwner)) {
-        //dd(1);
-        // if (count($results) != 0) {
         if ($eventPostList != "") {
             foreach ($eventPostList as  $value) {
                 $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
