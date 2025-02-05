@@ -360,6 +360,9 @@ class EventController extends BaseController
 
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
                 }
+                $giftRegistryDataVal = Session::get('giftRegistryData', []);
+
+                dd($eventDetail);die;
 
                 $eventDetail['event_setting'] = "";
 
@@ -2300,7 +2303,7 @@ class EventController extends BaseController
             $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
-        dd($selectedContactId);
+        
     
 
         $getAllContacts = contact_sync::where('contact_id', $id)
@@ -2310,6 +2313,12 @@ class EventController extends BaseController
             //             ->skip($request->offset);
             //     });
             // })
+            ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
+                if (!empty($selectedContactId)) {
+                    $query->orWhereIn('id', $selectedContactId);
+                }
+            })
+            
            
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
@@ -2333,6 +2342,7 @@ class EventController extends BaseController
             ->get();
         
 
+            // dd($getAllContacts);
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
