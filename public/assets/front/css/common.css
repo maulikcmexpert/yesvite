@@ -928,6 +928,8 @@ ul.nav-tabs .nav-link:focus {
 
 
 
+
+
 /* ======== Responsive ========= */
 @media (min-width:2000px) and (max-width:10000px) {
     /* footer {
@@ -1021,6 +1023,10 @@ ul.nav-tabs .nav-link:focus {
 
     .new-latest-draf-wrp {
         max-height: calc(100vh - 270px);
+    }
+
+    input, textarea, select{
+        font-size: 16px !important;
     }
 }
 
