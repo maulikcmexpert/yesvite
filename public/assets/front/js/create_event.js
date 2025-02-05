@@ -4511,6 +4511,7 @@ function handleActiveClass(target) {
     $(".edit-design").removeClass("active");
     if(target==".li_event_details"){
         $(".li_design").addClass("menu-success");
+        $(target).find(".side-bar-list").addClass("menu-success");
     }
     if (target == ".li_design .edit-design-sidebar") {
         $(".edit-design-sidebar").addClass("active");
