@@ -88,6 +88,7 @@ $(document).on('change', '.rsvp_yes', function () {
     $('.side_menu_minus, .side_menu_plus').prop('disabled', false);
 });
 $(document).on('click', '.save-rsvp', function () {
+    $eventId = $('#event_id').val();
     const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
     console.log('Updating Guest ID:', guestId);
 
@@ -98,6 +99,7 @@ $(document).on('click', '.save-rsvp', function () {
 
     // Gather updated data
     const updatedData = {
+        event_id:eventId,
         guestId: guestId,
         adults: $('#editrsvp3 input[name="adults"]').val(),
         kids: $('#editrsvp3 input[name="kids"]').val(),
