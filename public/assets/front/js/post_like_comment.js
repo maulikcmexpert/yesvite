@@ -791,9 +791,9 @@ $(document).ready(function () {
 
 
             }else{
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
@@ -815,10 +815,8 @@ $(document).ready(function () {
 
                     // $('#home_loader').css('display', 'none');
 
-                    setTimeout(() => {
                         $('#home_loader').css('display', 'none');   
                     
-                    }, 1000);
         
 
                 }
@@ -826,9 +824,7 @@ $(document).ready(function () {
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
                     // $('#home_loader').css('display', 'none');
-                    setTimeout(() => {
                         $('#home_loader').css('display', 'none');
-                                        }, 1000);
         
 
                 }
@@ -837,6 +833,8 @@ $(document).ready(function () {
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
+                  $('#home_loader').css('display', 'none');   
+
                 },
               });
         }
