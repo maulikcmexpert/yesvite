@@ -3,11 +3,12 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
         @if (
-            ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == "0") ||  // Host and Potluck enabled
-            ($eventDetails['is_co_host'] =="1" && $eventDetails['event_wall'] == " 0" ) // Not host but RSVP confirmed
+            ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == "0") ||
+            ($eventDetails['is_co_host'] == "1" && $eventDetails['event_wall'] == " 0")
         )
-
+            @php $showWall = false; @endphp
         @else
+            @php $showWall = true; @endphp
             <a href="{{ route('event.event_wall', ['id' => encrypt($event)]) }}"
                 class="nav-link {{ $page == 'wall' ? 'active' : '' }}"
                 id="nav-wall-tab"
@@ -15,15 +16,16 @@
                 aria-controls="nav-wall"
                 aria-selected="{{ $page == 'wall' ? 'true' : 'false' }}">
                     Wall
-                </a>
+            </a>
         @endif
+
         <!-- About Tab -->
         <a href="{{ route('event.event_about', ['id' => encrypt($event)]) }}"
-           class="nav-link {{ $page == 'about' ? 'active' : '' }}"
+           class="nav-link {{ ($page == 'about' || !$showWall) ? 'active' : '' }}"
            id="nav-about-tab"
            role="tab"
            aria-controls="nav-about"
-           aria-selected="{{ $page == 'about' ? 'true' : 'false' }}">
+           aria-selected="{{ ($page == 'about' || !$showWall) ? 'true' : 'false' }}">
             About
         </a>
 
