@@ -2691,6 +2691,7 @@ if ($rsvpSent != null) {
             // Check if user already exists in session
 
             $exists = false;
+            if(!empty($userData))
             foreach ($userData as &$user) {
                 if ($user['user_id'] == $user_id) {
                     $user['prefer_by'] = $prefer_by;
