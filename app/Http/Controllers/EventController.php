@@ -363,7 +363,7 @@ class EventController extends BaseController
                     session()->put('giftRegistryData', $gift_registry_ids);
                     Session::save();
                 }
-                dd(session('giftRegistryData'));
+              
               
 
                 $eventDetail['event_setting'] = "";
@@ -2870,10 +2870,34 @@ class EventController extends BaseController
 
     public function get_gift_registry(Request $request)
     {
-        $user_id =  Auth::guard('web')->user()->id;
+        // $giftRegistryData=session('giftRegistryData');
+        // $registry=[];
+        // if(isset($giftRegistryData) && $giftRegistryData!=null && count($giftRegistryData) > 0 ){
+        //     $registry = $giftRegistryData;
+        // }
+        // $user_id =  Auth::guard('web')->user()->id;
 
-        $gift_registry = EventGiftRegistry::where('user_id', $user_id)->get();
-
+        // $gift_registry = EventGiftRegistry::where('user_id', $user_id)   ->when(!empty($registry), function ($query) use ($registry) {
+        //     $query->orWhereIn('id', $selectedId);
+        // })->get();
+        $giftRegistryData = session('giftRegistryData');
+        $registry = [];
+        
+        // Check if giftRegistryData exists and is not empty
+        if (isset($giftRegistryData) && $giftRegistryData != null && count($giftRegistryData) > 0) {
+            $registry = $giftRegistryData; // Assign the session data to $registry
+        }
+        
+        $user_id = Auth::guard('web')->user()->id; // Get the authenticated user's ID
+        
+        // Query for gift registry
+        $gift_registry = EventGiftRegistry::where('user_id', $user_id)
+            ->when(!empty($registry), function ($query) use ($registry) {
+                // Assuming $registry is an array of IDs to search for in the 'id' column
+                $query->orWhereIn('id', $registry); // Use $registry instead of $selectedId
+            })
+            ->get();
+        
         return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
     }
 
