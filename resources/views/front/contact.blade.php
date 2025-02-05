@@ -745,10 +745,11 @@
         const fileSize = document.getElementById("fileSize");
         const progressBar = document.getElementById("progressBar");
         const uploadedFileContainer = document.getElementById("uploadedFileContainer");
-
+        console.log({fileName,fileSize,progressBar,uploadedFileContainer});
+        
         fileName.innerText = file.name;
         fileSize.innerText = `0 KB of ${Math.round(file.size / 1024)} KB`;
-        uploadedFileContainer.style.display = "block"; // Show file container
+        uploadedFileContainer.style.display = "block"; 
 
         let progress = 0;
         const fakeUpload = setInterval(() => {
