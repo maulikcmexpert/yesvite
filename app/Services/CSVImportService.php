@@ -19,6 +19,8 @@ class CSVImportService
         $header = fgetcsv($file); // Assuming the first row contains column headers
         $user = Auth::user();
         $parent_userid = $user->id;
+
+        dd($header);
         while (($row = fgetcsv($file)) !== false) {
             $data = array_combine($header, $row);
             $data['isAppUser'] =  '0';
