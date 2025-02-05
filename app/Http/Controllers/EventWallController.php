@@ -260,7 +260,7 @@ class EventWallController extends Controller
 
             // Check if the post type is poll
             if ($value->post_type == '2') {
-                $polls = $value->eventPostPoll()->with('eventPollOptions')->first();
+                $polls = $value->event_post_poll()->with('eventPollOptions')->first();
                 $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count ?? 0;
                 $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
                 $postsNormalDetail['poll_duration'] = $pollDura;
