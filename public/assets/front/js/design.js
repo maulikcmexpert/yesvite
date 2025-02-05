@@ -666,12 +666,20 @@ async function bindData(current_event_id) {
                 const staticInfo = {};
 
                 if (current_event_id != "" && eventData.desgin_selected == "") {
-                    staticInfo.textElements = dbJson;
+                    if (dbJson.textElements != undefined) {
+                        staticInfo.textElements = dbJson.textElements;
+                    } else {
+                        staticInfo.textElements = dbJson;
+                    }
                 } else {
                     staticInfo.textElements = dbJson.textElements;
                 }
                 if (staticInfo.textElements == undefined) {
                     staticInfo.textElements = jQuery.parseJSON(dbJson).textData;
+                }
+                if (staticInfo.textElements.textElement != undefined) {
+                    staticInfo.textElements =
+                        staticInfo.textElements.textElement;
                 }
                 if (staticInfo.textElements != undefined) {
                     console.log(staticInfo);
