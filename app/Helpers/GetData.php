@@ -1065,7 +1065,8 @@ function getInvitedUsersListNew($eventId,$search=null)
 
     $invitedUsers = EventInvitedUser::query();
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0'])->whereNot('invitation_sent','9');
-    
+    dd($search);
+
     if (!empty($search)) {
         dd($search);
         $invitedUsers->where(function ($query) use ($search) {
