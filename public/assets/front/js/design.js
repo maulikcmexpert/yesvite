@@ -2187,7 +2187,7 @@ async function bindData(current_event_id) {
         discardIfMultipleObjects(options);
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
-
+            eventData.desgin_selected = "";
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
         } else {

@@ -4778,6 +4778,9 @@ async function saveDesignData(direct = false) {
         console.log("no canvas found");
         return;
     }
+    if (eventData.desgin_selected != "") {
+        return;
+    }
     console.log({ eventData });
     console.log("here for save image");
     $("#close_createEvent").css("display", "block");
