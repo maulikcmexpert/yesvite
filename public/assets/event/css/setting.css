@@ -1120,7 +1120,7 @@
     margin-top: 0px !important;
 }
 
-.potluckCategorylist:has(.open-potluck-list) .listing-arrow svg{
+.potluck-category:has(.open-potluck-list) .listing-arrow svg{
     transform: rotate(180deg);
 }
 

@@ -21,11 +21,11 @@
 
         <!-- About Tab -->
         <a href="{{ route('event.event_about', ['id' => encrypt($event)]) }}"
-           class="nav-link {{ ($page == 'about' || !$showWall) ? 'active' : '' }}"
+           class="nav-link {{ $page == 'about'  ? 'active' : '' }}"
            id="nav-about-tab"
            role="tab"
            aria-controls="nav-about"
-           aria-selected="{{ ($page == 'about' || !$showWall) ? 'true' : 'false' }}">
+           aria-selected="{{ ($page == 'about' ? 'true' : 'false') }}">
             About
         </a>
 

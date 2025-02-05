@@ -12,9 +12,9 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 eventData.isCopy = isCopy;
-var Alreadyguest=$("#alreadyCount").val();
+var Alreadyguest = $("#alreadyCount").val();
 
-eventData.Alreadyguest=Alreadyguest;
+eventData.Alreadyguest = Alreadyguest;
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
@@ -902,14 +902,14 @@ function datepicker() {
                     .find("#ac-start-time")
                     .val();
 
-                    console.log(startMoment,22);
+                console.log(startMoment, 22);
 
                 // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
                 let startMoment = startTime
                     ? moment(startTime, "LT")
                     : moment().hours(12).minutes(0).seconds(0);
 
-                    console.log(startMoment,22);
+                console.log(startMoment, 22);
                 const previousActivity =
                     currentActivity.prev(".activity-main-wrp");
 
@@ -1326,7 +1326,8 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: moment(event_date, "MM/DD/YYYY"),
+            //startDate: moment(event_date, "MM/DD/YYYY"),
+            setDate: event_date,
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -2935,18 +2936,17 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         .find('input[name="activity-start-time[]"]')
         .val();
 
-    
     if (check_start == "") {
         $(this).val("");
         toastr.error("First you need to to set Start Time of Event");
         $(this).val("");
-        $(this).datetimepicker("hide"); 
+        $(this).datetimepicker("hide");
         $(this).val("");
         // Hide time picker if open
         $(this).blur();
         return;
     } else {
-        $(this).datetimepicker("show"); 
+        $(this).datetimepicker("show");
     }
 });
 
@@ -9297,8 +9297,8 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 });
 
 function getcoins() {
-     Alreadyguest = $(".users-data.invited_users").length;
-     eventData.Alreadyguest = Alreadyguest;
+    Alreadyguest = $(".users-data.invited_users").length;
+    eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
@@ -9317,23 +9317,7 @@ $(document).on(
     "blur change click",
     "#event-name, #event-date, #start-time",
     function () {
-        var event_name = $("#event-name").val();
-        var event_date = $("#event-date").val();
-        var start_time = $("#start-time").val();
-
-        // Check if all fields are not empty
-        if (event_name !== "" && event_date !== "" && start_time !== "") {
-            // When all fields are filled
-            $(".guestBtn").css("color", "black"); // Set text color to black
-            $("#guestBtn").removeClass("guestBtn");
-            // Add a class to SVG for active state
-        } else {
-            $(".guestBtn").each(function () {
-                $(this).css("color", "gray");
-                this.style.setProperty("color", "gray", "important");
-            });
-            $("#guestBtn").addClass("guestBtn");
-        }
+        colorchange();
     }
 );
 
@@ -9365,12 +9349,12 @@ function colorchange() {
         $("#guestBtn").addClass("guestBtn");
     }
 }
-    if (final_step == "1" && isCohost == "1") {
-        $('.li_design').find('.side-bar-list').removeClass('menu-success');
-        $('.li_design').addClass('active');
-        $('.pick-card').addClass('active');
-        $('.edit-design-sidebar').removeClass('active');
-        $(".li_event_detail").find('.side-bar-list').removeClass('menu-success');
-        $(".li_guest").find('.side-bar-list').removeClass('menu-success');
-        $(".li_setting").find('.side-bar-list').removeClass('menu-success');
-    }
+if (final_step == "1" && isCohost == "1") {
+    $(".li_design").find(".side-bar-list").removeClass("menu-success");
+    $(".li_design").addClass("active");
+    $(".pick-card").addClass("active");
+    $(".edit-design-sidebar").removeClass("active");
+    $(".li_event_detail").find(".side-bar-list").removeClass("menu-success");
+    $(".li_guest").find(".side-bar-list").removeClass("menu-success");
+    $(".li_setting").find(".side-bar-list").removeClass("menu-success");
+}

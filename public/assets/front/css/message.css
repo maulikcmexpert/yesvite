@@ -1713,6 +1713,7 @@ ul.chat-list li.setpink{
 
 .chat-header-searchbar input {
     width: 100% !important;
+    font-size: 16px !important;
 }
 
 .chat-header-searchbar input:focus-visible {
@@ -1850,6 +1851,8 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
 .reply-section-wrp .reply-section{
     padding-bottom: 20px !important;
 }
+
+
 
 /* ======= responsive ======== */
 
@@ -2078,6 +2081,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     }
     .reaction-dialog {
         right: -40px;
+    }
+
+    .selected-tags-container input{
+        font-size: 16px !important;
     }
 }
 

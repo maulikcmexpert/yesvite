@@ -1159,11 +1159,10 @@ $(document).on("click", ".mute-conversation", function () {
         $(".conversation-" + conversationId).addClass("muted");
 
         if (selectedConversationId === conversationId) {
-            //$(".unmute-self-icn").show();
-            // $(".mute-self-icn").hide();
+            $(".mute-self-icn").addClass("d-none");
+            $(".unmute-self-icn").removeClass("d-none");
         }
-        $(".mute-self-icn").addClass("d-none");
-        $(".unmute-self-icn").removeClass("d-none");
+
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".mute-single-conversation")
@@ -1178,11 +1177,9 @@ $(document).on("click", ".mute-conversation", function () {
     } else {
         $(".conversation-" + conversationId).removeClass("muted");
 
-        $(".mute-self-icn").removeClass("d-none");
-        $(".unmute-self-icn").addClass("d-none");
         if (selectedConversationId === conversationId) {
-            //  $(".mute-self-icn").show();
-            // $(".unmute-self-icn").hide();
+            $(".mute-self-icn").removeClass("d-none");
+            $(".unmute-self-icn").addClass("d-none");
         }
 
         $(".conversation-" + conversationId)
@@ -1238,12 +1235,23 @@ $(document).on("click", ".mute-single-conversation", function (e) {
 
         $(this).children(".mute1-self-icn").addClass("d-none");
         $(this).children(".unmute1-self-icn").removeClass("d-none");
+
+        if (selectedConversationId === conversationId) {
+            $(".mute-self-icn").addClass("d-none");
+            $(".unmute-self-icn").removeClass("d-none");
+        }
     } else {
         $(".conversation-" + conversationId).removeClass("muted");
 
         $(this).children(".mute1-self-icn").removeClass("d-none");
         $(this).children(".unmute1-self-icn").addClass("d-none");
+
+        if (selectedConversationId === conversationId) {
+            $(".mute-self-icn").removeClass("d-none");
+            $(".unmute-self-icn").addClass("d-none");
+        }
     }
+    isToMove = false;
 });
 
 $(document).on("click", ".block-conversation", async function () {
