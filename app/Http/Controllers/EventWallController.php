@@ -1365,7 +1365,7 @@ foreach ($polls as $poll) {
         $creatEventPost = new EventPost;
         $creatEventPost->event_id = $request->event_id;
         $creatEventPost->user_id = $user;
-        $creatEventPost->post_message = $request->input('content');
+        // $creatEventPost->post_message = $request->input('content');
 
         if ($request->hasFile('post_recording')) {
             $record = $request->post_recording;
