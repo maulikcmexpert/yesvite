@@ -395,7 +395,7 @@ $(document).ready(function () {
 
         // Get the username and comment ID from the current comment being replied to
         const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
-        const parentId = $("#data_comment_id").val();
+        const parentId = $(".data_comment_id").val();
         // const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
 
         if (!parentId) {
