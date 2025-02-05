@@ -362,7 +362,7 @@ class EventController extends BaseController
                 }
                 $giftRegistryDataVal = Session::get('giftRegistryData', []);
 
-                dd($gift_registry_ids);die;
+                dd($eventDetail);die;
 
                 $eventDetail['event_setting'] = "";
 
