@@ -2589,11 +2589,11 @@ foreach ($polls as $poll) {
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
         // dd($selectedFilters);
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
-            dd(1);
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
                     switch ($filter) {
                         case 'host_update':
+                            dd('h');
                             $query->orWhere('user_id', $eventCreator->user_id);
                             break;
                         case 'video_uploads':
