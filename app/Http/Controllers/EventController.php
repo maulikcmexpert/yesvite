@@ -135,7 +135,7 @@ class EventController extends BaseController
         $eventDetail['inviteCount'] = 0;
         $eventDetail['isCohost'] = "1";
         $eventDetail['isCopy'] = "";
-
+        $eventDetail['alreadyCount']=0;
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
@@ -229,6 +229,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
+            $eventDetail['alreadyCount'] = count(session('contact_ids'))+count(session('user_ids'));
             // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
@@ -3139,7 +3140,7 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
-        dD($request);
+    
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('custom_image');
@@ -3661,7 +3662,7 @@ class EventController extends BaseController
             $invitedCount = session('user_ids');
             $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
             if ($request->is_update_event == '1') {
-                $get_count_invited_user = $get_count_invited_user - $request->Alreadyguest;
+                $get_count_invited_user = $get_count_invited_user - intval($request->Alreadyguest);
             }
 
             if ($request->isDraftEdit == "1" || $request->is_update_event == '1') {
