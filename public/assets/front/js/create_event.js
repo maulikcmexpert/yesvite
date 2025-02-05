@@ -1301,7 +1301,15 @@ $(function () {
 $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
-    var event_date = $("#event-date").val() // is null that time cuuent date show in calender;
+    var event_date = $("#event-date").val(); // Get the current value of the date input
+
+    // If event_date is not null or empty, format it as MM/DD/YYYY
+    if (event_date) {
+        event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
+    } else {
+        // If no event_date, set it to today's date in MM/DD/YYYY format
+        event_date = moment().format("MM/DD/YYYY");
+    }
     var oldDate = $(ed).attr("data-isDate");
     $("#event-date").daterangepicker(
         {
@@ -1310,7 +1318,7 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: event_date ? moment(event_date, "MM/DD/YYYY") : moment(),
+            startDate: moment(event_date, "MM/DD/YYYY"), 
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -4509,7 +4517,7 @@ function handleActiveClass(target) {
     $(".pick-card").removeClass("active");
     $(".edit-design-sidebar").removeClass("active");
     $(".edit-design").removeClass("active");
-    if(target==".li_event_details"){
+    if (target == ".li_event_details") {
         $(".li_design").addClass("menu-success");
         $(".li_design").find(".side-bar-list").addClass("menu-success");
         $(".li_event_detail").find(".side-bar-list").addClass("active");
@@ -8714,7 +8722,9 @@ if (final_step == "2" && isCohost == "1") {
         // // $(".li_guest").addClass("menu-success");
 
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
-        $(".li_event_detail").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_event_detail")
+            .find(".menu-circle-wrp")
+            .removeClass("menu-success");
         $(".li_event_detail").removeClass("menu-success");
         $(".li_design").addClass("menu-success");
         $(".li_design").find(".side-bar-list").addClass("menu-success");
@@ -9281,15 +9291,15 @@ $(document).on(
         // Check if all fields are not empty
         if (event_name !== "" && event_date !== "" && start_time !== "") {
             // When all fields are filled
-            $(".guestBtn").css("color", "black");  // Set text color to black
-            $("#guestBtn").removeClass('guestBtn');
+            $(".guestBtn").css("color", "black"); // Set text color to black
+            $("#guestBtn").removeClass("guestBtn");
             // Add a class to SVG for active state
         } else {
-            $(".guestBtn").each(function() {
+            $(".guestBtn").each(function () {
                 $(this).css("color", "gray");
-                this.style.setProperty('color', 'gray', 'important');
-              });
-            $("#guestBtn").addClass('guestBtn');
+                this.style.setProperty("color", "gray", "important");
+            });
+            $("#guestBtn").addClass("guestBtn");
         }
     }
 );
@@ -9303,23 +9313,23 @@ if (isDraftEvent == "0" && eventId != "") {
 }
 checkbox_count();
 
-function colorchange(){
+function colorchange() {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
     var start_time = $("#start-time").val();
     // Check if all fields are not empty
     if (event_name !== "" && event_date !== "" && start_time !== "") {
         // When all fields are filled
-        $(".guestBtn").css("color", "black");  // Set text color to black
-        $("#guestBtn").removeClass('guestBtn');
+        $(".guestBtn").css("color", "black"); // Set text color to black
+        $("#guestBtn").removeClass("guestBtn");
         // Add a class to SVG for active state
     } else {
         // When any field is empty
-        $(".guestBtn").each(function() {
+        $(".guestBtn").each(function () {
             $(this).css("color", "gray");
-            this.style.setProperty('color', 'gray', 'important');
-          });// Set text color to a light gray
-        $("#guestBtn").addClass('guestBtn');
+            this.style.setProperty("color", "gray", "important");
+        }); // Set text color to a light gray
+        $("#guestBtn").addClass("guestBtn");
     }
 }
 colorchange();
