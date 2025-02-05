@@ -2587,7 +2587,7 @@ foreach ($polls as $poll) {
 
         // Execute the query and get the results
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
-        dd($selectedFilters);
+        // dd($selectedFilters);
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -2622,7 +2622,7 @@ foreach ($polls as $poll) {
                 }
             });
         }
-        // dd($eventPostList);
+        dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
         // $results = $eventPostList->paginate(10);
         // $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
