@@ -541,7 +541,9 @@
                                                                             <input type="hidden"
                                                                                 class="parent_comment_id"
                                                                                 value="">
-
+                                                                                <input type="hidden"
+                                                                                id="data_comment_id"
+                                                                                value="{{ $comment['id'] }}">
                                                                             <div class="commented-user-head">
                                                                                 <div class="commented-user-profile">
                                                                                     <div
