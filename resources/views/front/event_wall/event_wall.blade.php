@@ -291,7 +291,7 @@
                                                     <h5>{{$post['kids']}} Kids</h5>
                                                 </div>
                                         </div>
-@endif
+
                                         @elseif($post['rsvp_status'] == '0')
                                             <div class="sucess-no">
                                                     <h5>NO</h5>

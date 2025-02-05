@@ -1010,6 +1010,8 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     'profile' => !empty($user->profile) ? asset('storage/profile/' . $user->profile) : "",
                     'prefer_by' => $prefer_by
                 ];
+                continue; // Skip searching in contact_sync table
+
             } else {
                 $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
         
