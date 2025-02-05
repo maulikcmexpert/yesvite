@@ -633,11 +633,12 @@ $(document).on("click", ".edit_design_tem", function (e) {
     });
 });
 fontloadedEnsure = false;
+ensureFontsLoaded();
 async function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");
     if (!fontloadedEnsure) {
         fontloadedEnsure = true;
-        await ensureFontsLoaded();
+        // await ensureFontsLoaded();
     }
 
     function loadTextDataFromDatabase() {
