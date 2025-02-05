@@ -810,11 +810,20 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         //         'guest' =>   $guest
         //     ]);
 
+        $checkEvent = Event::where(['id' => $request->event_id])->first();
+
+        if ($checkEvent->end_date < date('Y-m-d')) {
+            // return response()->json(['status' => 0, 'message' => "Event is past , you can't attempt RSVP"]);
+            return redirect()->back()->with('error', 'Event is past , you cant attempt RSVP!');
+        }
+
+
+        $video = "";
             // // Redirect back or return a success message
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                $query->where('app_user', '1');
+                // $query->where('app_user', '1');
             })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
-            dd($rsvpSent);
+            // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
        
             if ($rsvpSent != null) {
