@@ -1116,6 +1116,9 @@
     text-align: center;
 }
 
+.setting-accordion-wrp .button-cover{
+    margin-top: 0px !important;
+}
 
 /* ============ responsive ============ */
 

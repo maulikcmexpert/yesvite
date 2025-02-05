@@ -791,6 +791,14 @@ $(document).ready(function () {
                 `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
             );
             if( $(this).is(":checked")){
+                const exists = guestList.some((contact) => contact.id === id);
+                var is_duplicate=0;
+                if (exists) {
+                    is_duplicate=1;
+                }else{
+                    is_duplicate=0;
+                }
+                console.log(is_duplicate);
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
@@ -870,11 +878,21 @@ $(document).ready(function () {
 
 
         if( $(this).is(":checked")){
+            const exists = guestList.some((contact) => contact.id === id);
+            var is_duplicate=0;
+            if (exists) {
+                is_duplicate=1;
+            }else{
+                is_duplicate=0;
+            }
+            console.log(is_duplicate);
+
             $('.add_yesvite_guest_'+id).remove();
             $(".phoneContact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
+         
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
             $('#home_loader').css('display','none');
@@ -914,6 +932,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             is_duplicate=1;
         }
 
+        
 
 
         var  profileImage="";
@@ -956,6 +975,8 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
             // alert(upper_see);
             if(upper_see==0){
+                console.log(is_duplicate);
+
                 const totalHtml = `
                 <a class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">
@@ -967,6 +988,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                   $modalBody.append(totalHtml);
             }
             if(upper_see>0){
+                console.log(is_duplicate);
                 if(is_duplicate==0){
                     var initial= parseInt($('#total-selected-email').attr('data-count'));
                     var new_value= initial+1 ;
@@ -1007,6 +1029,8 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             console.log("Contact already in guest list:", { id });
             is_duplicate_phone=1;
         }
+
+        console.log(is_duplicate_phone);
         var  profileImage="";
         // if(profile!=""){
         //     profileImage = `<img src="${profile}" alt="Profile Image">` ;
