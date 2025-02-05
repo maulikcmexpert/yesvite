@@ -66,7 +66,7 @@ function genrate_thumbnail($fileName)
 
     $videoPath = public_path('storage/post_image/') . $fileName;
     //dd($videoPath);
-    $ffmpeg = FFMpeg\FFMpeg::create([
+    $ffmpeg = FFMpeg::create([
         'ffmpeg.binaries' => exec('which ffmpeg'),
         'ffprobe.binaries' => exec('which ffprobe'),
     ]);
