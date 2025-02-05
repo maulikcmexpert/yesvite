@@ -70,14 +70,7 @@ function generate_thumbnail($fileName)
             'ffmpeg.binaries' => '/usr/local/bin/ffmpeg',  // Change this path if necessary
             'ffprobe.binaries' => '/usr/local/bin/ffprob', // Change this path if necessary
         ]);
-        // $ffmpeg = FFMpeg::create([
-        //     'ffmpeg.binaries' => exec('which ffmpeg'),
-        //     'ffprobe.binaries' => exec('which ffprobe'),
-        // ]);
 
-        // $ffprobe = FFProbe::create([
-        //     'ffprobe.binaries' => exec('which ffprobe'),  // Make sure this is correct
-        // ]);
         $video = $ffmpeg->open($videoPath);
 
         // Loop through and generate thumbnails at different timestamps
