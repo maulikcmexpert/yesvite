@@ -572,6 +572,7 @@
     font-family: var(--SFProDisplay-Regular);
 }
 
+
 .modal.cmn-modal span.sub-con.floatingfocus span{
     color: var(--lightgreay) !important;
 }
