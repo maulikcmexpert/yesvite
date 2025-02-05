@@ -1056,6 +1056,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         $search=$request->serach;
         $event_id=$request->event_id;
         $eventId=$request->event_id;
+        $see_all=$request->see_all;
         $event_data=Event::where('id',$event_id)->first();
         $is_host=0;
 
@@ -1066,7 +1067,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
         $guestArray=$guest['all_invited_users'];
 
-        return response()->json(['view' => view( 'front.event_wall.search_guest_right_list', compact('guestArray','eventId','is_host'))->render()]);
+        return response()->json(['view' => view( 'front.event_wall.search_guest_right_list', compact('guestArray','eventId','is_host','see_all'))->render()]);
 
         // dd($yesvite['all_invited_users']);
     }

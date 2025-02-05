@@ -1172,11 +1172,12 @@ $(document).on("keyup", ".search_contact", function () {
     const name=$(this).val();
     const event_id = $('#event_id').val();
 
+    var see_all=$(this).data('see_all');
     $('#home_loader').css('display','block');
     $.ajax({
         url: base_url + "event_guest/right_bar_guest_list",
         type: "POST",
-        data: JSON.stringify({ search: name,event_id:event_id}),
+        data: JSON.stringify({ search: name,event_id:event_id,see_all:see_all}),
         contentType: "application/json",
         headers: {
             'Authorization': 'Bearer YOUR_ACCESS_TOKEN',

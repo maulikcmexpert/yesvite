@@ -78,7 +78,7 @@ if ($hostView) {
         <div class="all-events-searchbar-wrp">
             <form>
                 <div class="position-relative">
-                    <input type="text" class="form-control search_contact" id="text" placeholder="Search name">
+                    <input type="text" class="form-control search_contact" data-see_all="0" id="text" placeholder="Search name">
                     <span class="search-icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
