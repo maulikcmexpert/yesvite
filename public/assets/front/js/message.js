@@ -997,6 +997,14 @@ async function updateMore(conversationId) {
                 "changeWith",
                 overviewData.isMute == "1" ? "0" : "1"
             );
+
+            if (overviewData.isMute == "1") {
+                $(".mute-self-icn").addClass("d-none");
+                $(".unmute-self-icn").removeClass("d-none");
+            } else {
+                $(".mute-self-icn").removeClass("d-none");
+                $(".unmute-self-icn").addClass("d-none");
+            }
         }
         if (overviewData.isArchive != undefined) {
             $(".archive-conversation")
