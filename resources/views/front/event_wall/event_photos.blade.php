@@ -346,7 +346,7 @@
                                                             data-bs-target="#detail-photo-modal"
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
-                                                            data-img-src="{{ $photo['mediaData'][0]['post_media'] }}"
+                                                            data-img-src="{{ @$photo['mediaData'][0]['post_media'] }}"
                                                             data-image="{{ json_encode($postMedia ) }}">
 
 

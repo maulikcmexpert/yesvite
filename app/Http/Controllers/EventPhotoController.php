@@ -696,7 +696,8 @@ class EventPhotoController extends Controller
 
     public function createEventPost(Request $request)
     {
-        // dd($request);
+        // dd($request->file('files'));
+        // dd($request->hasFile('files'));
         $user = Auth::guard('web')->user()->id;
 
         // Create new event post
@@ -709,14 +710,14 @@ class EventPhotoController extends Controller
         $createEventPost->commenting_on_off =  $request->commenting_on_off;; // Comments allowed
         $createEventPost->is_in_photo_moudle = "1"; // Whether the post contains photos
         $createEventPost->save();
-
+        // dd($request->hasFile('files'));
         // Check if files were uploaded
-        if ($createEventPost->id && $request->hasFile('files')) {
+        if ($createEventPost->id && $request->file('files')) {
             $postFiles = $request->file('files'); // Get the uploaded files
             $imageUrls = [];
             $videoCount = 0;
             $imageCount = 0;
-
+            // dd($postFiles);
             foreach ($postFiles as $key => $postFile) {
                 $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
 
