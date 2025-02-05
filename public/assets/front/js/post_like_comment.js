@@ -185,6 +185,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
+        var commentVal =  $(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -207,9 +208,13 @@ $(document).ready(function () {
         parentWrapper.find(".posts-card-comm").show();
 
         const commentText = commentInput.val().trim();
-        const parentCommentId = $(".parent_comment_id").val() || '';
+        // const parentCommentId = $(".parent_comment_id").val() || '';
+        const parent_comment_id = $(".parent_comment_id").val()
+        var parentCommentId = (commentVal !== "" && (parent_comment_id !== "undefined" && parent_comment_id !== undefined)) ? parent_comment_id : '';
         console.log("Parent Comment ID:", parentCommentId);
-
+        if(commentVal==""){
+            parentCommentId=""
+        }
         if (commentText === "") {
             alert("Please enter a comment");
             return;
@@ -287,7 +292,7 @@ $(document).ready(function () {
                             <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button class="commented-user-reply-btn">Reply</button>
+                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
                     </div>
                     <ul class="primary-comment-replies"></ul>
                 </li>
@@ -304,7 +309,8 @@ $(document).ready(function () {
 
                         // Check if the reply is already appended
                         if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
-                            replyList.append(newCommentHTML);
+                            replyList.prepend(newCommentHTML);
+                            // replyList.append(newCommentHTML);
                         }
                     }
                 } else {
@@ -313,7 +319,8 @@ $(document).ready(function () {
 
                     // Check if the comment is already appended
                     if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
-                        commentList.append(newCommentHTML);
+                        commentList.prepend(newCommentHTML);
+                        // commentList.append(newCommentHTML);
                     }
                 }
 
@@ -389,10 +396,9 @@ $(document).ready(function () {
             console.error("Parent wrapper not found!");
             return;
         }
-
-        // Get the username and comment ID from the current comment being replied to
         const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
-        const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
+        const parentId =$(this).data("comment-id");
+       
 
         if (!parentId) {
             console.error("Parent Comment ID is missing!");
@@ -1170,11 +1176,14 @@ $(document).on("keyup", ".search_contact", function () {
     const name=$(this).val();
     const event_id = $('#event_id').val();
 
-    // $('#home_loader').css('display','block');
+    var see_all=$(this).attr('data-see_all');
+    console.log(see_all);
+    
+    $('#home_loader').css('display','block');
     $.ajax({
         url: base_url + "event_guest/right_bar_guest_list",
         type: "POST",
-        data: JSON.stringify({ search: name,event_id:event_id}),
+        data: JSON.stringify({ search: name,event_id:event_id,see_all:see_all}),
         contentType: "application/json",
         headers: {
             'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
@@ -1184,7 +1193,7 @@ $(document).on("keyup", ".search_contact", function () {
             console.log(response);
             $('#guestList').html('');
             $('#guestList').html(response.view);
-            $('#home_loader').css('loader','none');
+            $('#home_loader').css('display','none');
 
 
         },
@@ -1224,3 +1233,6 @@ $(document).on("keyup", ".search_contact", function () {
 //         },
 //     });
 // });
+$(document).on('keyup','.post_comment',function(){
+    $(".parent_comment_id").val('');
+})
