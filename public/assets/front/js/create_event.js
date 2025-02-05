@@ -8714,6 +8714,7 @@ if (final_step == "2" && isCohost == "1") {
         // // $(".li_guest").addClass("menu-success");
 
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_event_detail").find(".menu-circle-wrp").removeClass("menu-success");
         $(".li_event_detail").removeClass("menu-success");
         $(".li_design").addClass("menu-success");
         $(".li_design").find(".side-bar-list").addClass("menu-success");
