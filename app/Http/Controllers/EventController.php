@@ -2294,7 +2294,12 @@ class EventController extends BaseController
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
+        $selected_contact = Session::get('contact_ids');
+        $selectedconactId=[];
+        if($selectedconactId!=null &&  count($selected_contact) > 0){
+            $selectedconactId =array_column($selected_contact,'sync_id');
 
+        }
 
         $getAllContacts = contact_sync::where('contact_id', $id)
             // ->when($type != 'group', function ($query) use ($request) {
@@ -2303,6 +2308,9 @@ class EventController extends BaseController
             //             ->skip($request->offset);
             //     });
             // })
+            ->when(!empty($selectedconactId), function ($query) use ($selectedconactId) {
+                $query->orWhereIn('id', $selectedconactId);
+            })
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
