@@ -1929,7 +1929,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         console.log({ max_guest });
         if (max_guest <= 0) {
             $(this).prop("checked", false);
-            $("#buycreditsmodal").model("show");
+            $("#buycreditsmodal").modal("show");
             return;
         }
         $.ajax({
