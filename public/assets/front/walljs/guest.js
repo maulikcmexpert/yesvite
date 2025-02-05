@@ -74,6 +74,7 @@ if (chartData) {
 }
 
 $(document).on('click','.see-all-guest-right-btn',function(){
+    $('.search_contact').attr('data-see_all','1');
     var event_id=$('#eventId').val();
     $.ajax({
         url: base_url + "event_wall/fetch_all_invited_user",
