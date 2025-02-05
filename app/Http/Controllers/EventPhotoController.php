@@ -1141,7 +1141,7 @@ class EventPhotoController extends Controller
         $commentInfo['total_replies'] = $replyList->replies_count;
         $commentInfo['posttime'] = setpostTime($replyList->created_at);
         $commentInfo['comment_replies'] = [];
-        dd($commentInfo);
+        dd($replyList->replies);
 
         if (!empty($replyList->replies)) {
             foreach ($replyList->replies as $replyVal) {
