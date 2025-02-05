@@ -2178,6 +2178,7 @@ class EventController extends BaseController
         $userIds = Session::get('user_ids');
        
         $selectedId =array_column($userIds,'id');
+        dd($selectedId);
        
         // array_values
 
@@ -2244,12 +2245,7 @@ class EventController extends BaseController
             $query->limit($request->limit)
                 ->offset($request->offset);
         })
-        // ->when($type != 'group', function ($query) use ($request) {
-        //     $query->where(function ($q) use ($request) {
-        //         $q->limit($request->limit)
-        //             ->skip($request->offset);
-        //     });
-        // })
+      
         ->when(!empty($request->search_user), function ($query) use ($search_user) {
             $query->where(function ($q) use ($search_user) {
                 $q->where('firstname', 'LIKE', '%' . $search_user . '%')
