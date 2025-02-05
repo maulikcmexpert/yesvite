@@ -1525,7 +1525,7 @@
     }
 
     .new_event_detail_form .input-group.time input{
-        padding-left: 10px !important;
+        padding-left: 5px !important;
     }
 
     .new_event_detail_form .input-group.time input::placeholder{
