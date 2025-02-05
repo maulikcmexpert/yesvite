@@ -541,9 +541,9 @@
                                                                                             </h5>
                                                                                         @endif
 
-                                                                                        <h5>{{ $users['first_name'] }}
+                                                                                        <h4>{{ $users['first_name'] }}
                                                                                             {{ $users['last_name'] }}
-                                                                                        </h5>
+                                                                                        </h4>
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
