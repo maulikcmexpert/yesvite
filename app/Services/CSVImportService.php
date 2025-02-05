@@ -20,6 +20,8 @@ class CSVImportService
         $user = Auth::user();
         $parent_userid = $user->id;
 
+        $updatedContacts=[];
+        $newContact=[];
         // dd($file);
         while (($row = fgetcsv($file)) !== false) {
 
@@ -50,8 +52,8 @@ class CSVImportService
                     $newContact = new contact_sync();
                     $newContact->userId = null;
                     $newContact->contact_id = $user->id;
-                    $newContact->firstName = $data['firstname'] ?? '';
-                    $newContact->lastName = $data['lastname'] ?? '';
+                    $newContact->firstName = $data['firstName'] ?? '';
+                    $newContact->lastName = $data['lastName'] ?? '';
                     $newContact->phone = '';
                     $newContact->email = $data['email'] ?? '';
                     $newContact->photo = $data['photo'] ?? '';
