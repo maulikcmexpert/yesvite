@@ -136,7 +136,7 @@ class EventPotluckController extends Controller
                 }
                 $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
                 $eventDetails['event_name'] = $eventDetail->event_name;
-                $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
+                $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $eventDetails['hosted_by'] = $eventDetail->hosted_by;
                 $eventDetails['podluck'] = $eventDetail->event_settings->podluck;

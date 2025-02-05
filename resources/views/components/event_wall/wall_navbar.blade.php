@@ -29,13 +29,7 @@
             About
         </a>
 
-        <!-- Guests Tab -->
-        @if (
-            ($eventDetails['is_host'] == 1 && $eventDetails[' guest_list_visible_to_guests'] == "0") ||
-            ($eventDetails['is_co_host'] == "1" && $eventDetails[' guest_list_visible_to_guests'] == " 0")
-        )
 
-        @else
         <a href="{{ route('event.event_guest', ['id' => encrypt($event)]) }}"
            class="nav-link {{ $page == 'guest' ? 'active' : '' }}"
            id="nav-guests-tab"
@@ -44,7 +38,7 @@
            aria-selected="{{ $page == 'guest' ? 'true' : 'false' }}">
             Guests
         </a>
-        @endif
+
 
         <!-- Photos Tab -->
         <a href="{{ route('event.event_photos', ['id' => encrypt($event)]) }}"
