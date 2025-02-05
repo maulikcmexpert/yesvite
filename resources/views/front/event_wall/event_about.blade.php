@@ -486,7 +486,7 @@
                                                             </div>
                                                             <h5>{{ $co_host['name'] }}</h5>
                                                             <span>Co-host</span>
-                                                            <a href="#" class="msg-btn">Message</a>
+                                                            <a href="{{route('message.list')}}" class="msg-btn">Message</a>
                                                         </div>
                                                     @endforeach
                                                 @endif
