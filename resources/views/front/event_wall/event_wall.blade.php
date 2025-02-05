@@ -273,7 +273,7 @@
                                                         {{ $post['poll_question'] }}</h3>
                                                 </div>
                                                 <input type="hidden" name="event_post_id" id="event_post_id"
-                                                    value="{{ $post['event_post_id'] }}">
+                                                    value="{{ $post['id'] }}">
                                                 <div class="post-card-poll-wrp">
                                                     <div class="post-card-poll-inner">
                                                         <h5>{{ $post['total_poll_vote'] }} Votes
