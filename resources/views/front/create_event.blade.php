@@ -825,6 +825,7 @@
                             <h5 class="add-item-under-text selected-host-h5"></h5>
                             @if ($eventDetail['isCohost'] == '0')
                             @if($eventDetail['isCopy']=!"")
+                            {{dd(1) }}
                             <a href="#" class="close remove_co_host">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
