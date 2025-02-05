@@ -2225,11 +2225,16 @@ class EventController extends BaseController
         // dd($yesvite_users);
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
-        // ->where('id', '!=', $id)
+        ->where('id', '!=', $id)
         ->where(['app_user' => '1'])
         ->whereIn('email', $emails)
         ->orderBy('firstname')
-        ->whereOr('id',$selectedId)
+        // ->whereOr('id',$selectedId)
+        ->where(function ($query) use ($selectedId) {
+            if (!empty($selectedId)) {
+                $query->orWhereIn('id', $selectedId);
+            }
+        })
 
         ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
             $query->limit($request->limit)
