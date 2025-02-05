@@ -1164,18 +1164,17 @@ $(document).on("click", ".mute-conversation", function () {
         }
         $(".mute-self-icn").addClass("d-none");
         $(".unmute-self-icn").removeClass("d-none");
-
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".mute-single-conversation")
             .find(".mute1-self-icn")
-            .removeClass("d-none");
+            .addClass("d-none");
 
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".mute-single-conversation")
             .find(".unmute1-self-icn")
-            .addClass("d-none");
+            .removeClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("muted");
 
@@ -1190,13 +1189,13 @@ $(document).on("click", ".mute-conversation", function () {
             .find(".chat-data")
             .find(".mute-single-conversation")
             .find(".mute1-self-icn")
-            .addClass("d-none");
+            .removeClass("d-none");
 
         $(".conversation-" + conversationId)
             .find(".chat-data")
             .find(".mute-single-conversation")
             .find(".unmute1-self-icn")
-            .removeClass("d-none");
+            .addClass("d-none");
     }
     $(".conversation-" + conversationId)
         .find(".chat-data")
