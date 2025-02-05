@@ -2288,7 +2288,7 @@ class EventController extends BaseController
                 });
             })
 
-            ->groupBy('id') // Grouping by ID to avoid duplicates
+            // ->groupBy('id') // Grouping by ID to avoid duplicates
             ->get();
 
         $yesvite_user = [];
