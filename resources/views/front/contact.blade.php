@@ -24,7 +24,7 @@
                     <div class="contact-title">
                         <h3>Contacts</h3>
                         <div>
-                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#">Upload CSV</button>
+                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#uploadcsv">Upload CSV</button>
                             
                             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#myModal1">Add New Contact</a>
                         </div>
