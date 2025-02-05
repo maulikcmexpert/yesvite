@@ -47,6 +47,10 @@
                             <!-- ===tab-1-start=== -->
                             <div class="tab-pane fade show active" id="nav-wall" role="tabpanel"
                                 aria-labelledby="nav-wall-tab">
+                                @if ($eventDetails['event_wall'] == 1)
+
+
+
                                 <div class="event-center-wall-main">
                                     <!-- ================story================= -->
                                     <x-event_wall.wall_story :users="$users" :event="$event" :storiesList="$storiesList"
@@ -55,6 +59,8 @@
 {{-- {{                                    dd($postList)}} --}}
                                     <div class="wall-post-content">
                                     @foreach ($postList as $post)
+
+
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                             data-post-id="{{ $post['id'] }}">
 
@@ -1218,6 +1224,10 @@
                                     @endforeach
                                     </div>
                                 </div>
+                                @else
+<div>wall is turn of by host </div>
+@endif
+
                             </div>
                             <!-- ===tab-1-end=== -->
 

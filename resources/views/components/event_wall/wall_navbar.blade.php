@@ -2,6 +2,10 @@
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
+        @if (
+            ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == 0) ||  // Host and Potluck enabled
+            ($eventDetails['is_co_host'] == 1 && $eventDetails['event_wall'] ==  0 ) // Not host but RSVP confirmed
+        )
         <a href="{{ route('event.event_wall', ['id' => encrypt($event)]) }}"
            class="nav-link {{ $page == 'wall' ? 'active' : '' }}"
            id="nav-wall-tab"
@@ -10,7 +14,7 @@
            aria-selected="{{ $page == 'wall' ? 'true' : 'false' }}">
             Wall
         </a>
-
+@endif
         <!-- About Tab -->
         <a href="{{ route('event.event_about', ['id' => encrypt($event)]) }}"
            class="nav-link {{ $page == 'about' ? 'active' : '' }}"
