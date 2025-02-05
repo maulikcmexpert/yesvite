@@ -2247,6 +2247,49 @@ class EventController extends BaseController
 
         // dd($yesvite_users);
 
+        // $yesvite_users = User::select(
+        //     'id',
+        //     'firstname',
+        //     'profile',
+        //     'lastname',
+        //     'email',
+        //     'country_code',
+        //     'phone_number',
+        //     'app_user',
+        //     'prefer_by',
+        //     'email_verified_at',
+        //     'parent_user_phone_contact',
+        //     'visible',
+        //     'message_privacy'
+        // )
+        //     ->where('id', '!=', $id)
+        //     ->where('app_user', '1')
+        //     ->whereIn('email', $emails)
+        //     ->orderBy('firstname')
+
+        //     // Apply 'orWhereIn' for multiple selected IDs
+        //     ->when(!empty($selectedId), function ($query) use ($selectedId) {
+        //         $query->orWhereIn('id', $selectedId);
+        //     })
+
+        //     ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+        //     ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+
+        //     ->when(!empty($request->search_user), function ($query) use ($search_user) {
+        //         $query->where(function ($q) use ($search_user) {
+        //             $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+        //                 ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+        //         });
+        //     })
+
+        //     ->groupBy('id') // Grouping by ID to avoid duplicates
+        //     ->get();
         $yesvite_users = User::select(
             'id',
             'firstname',
@@ -2262,34 +2305,32 @@ class EventController extends BaseController
             'visible',
             'message_privacy'
         )
-            ->where('id', '!=', $id)
-            ->where('app_user', '1')
-            ->whereIn('email', $emails)
-            ->orderBy('firstname')
+        ->where('id', '!=', $id)
+        ->where('app_user', '1')
+        ->whereIn('email', $emails)
+        ->orderBy('firstname')
 
-            // Apply 'orWhereIn' for multiple selected IDs
-            ->when(!empty($selectedId), function ($query) use ($selectedId) {
-                $query->orWhereIn('id', $selectedId);
-            })
+        // Apply 'whereIn' for selected IDs first
+        ->when(!empty($selectedId), function ($query) use ($selectedId) {
+            $query->whereIn('id', $selectedId);
+        })
 
-            ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-            ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
+        // Apply search condition only when 'search_user' is provided
+        ->when(!empty($request->search_user), function ($query) use ($search_user) {
+            $query->where(function ($q) use ($search_user) {
+                $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                    ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+            });
+        })
 
-            ->when(!empty($request->search_user), function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
-                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-                });
-            })
+        // Apply pagination if limit is provided
+        ->when(!empty($request->limit), function ($query) use ($request) {
+            $query->limit($request->limit)
+                  ->offset($request->offset);
+        })
 
-            ->groupBy('id') // Grouping by ID to avoid duplicates
-            ->get();
+        ->groupBy('id') // Group by 'id' to avoid duplicates
+        ->get();
 
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
