@@ -475,6 +475,9 @@ $(document).ready(function () {
     const event_id = $('#event_id').val();
 
     $("#allcontact").on("click", function () {
+
+        $('#home_loader').css('display', 'block');
+
         guestList=[];
         $('.guest_yesvite').remove();
         $('.phone_yesvite').remove();
@@ -506,12 +509,16 @@ $(document).ready(function () {
                 allContactsSuccess = true;
                 $('#addguest').modal('show');
                 const invitedUsers = response.invited_users;
+                $('#home_loader').css('display', 'none');
+
                 // selectedContacts = response.selected_yesvite_user;
                 // selectedPhoneContacts = response.selected_phone_user;
                 // console.log({selectedContacts,selectedPhoneContacts})
             },
             error: function () {
                 toastr.error("No Contacts Found");
+                $('#home_loader').css('display', 'none');
+
                 // alert("Failed to load contacts.");
             },
         });
@@ -760,9 +767,9 @@ $(document).ready(function () {
                 $('#home_loader').css('display','none');
 
             }else{
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
@@ -791,9 +798,9 @@ $(document).ready(function () {
 
 
             }else{
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
@@ -813,20 +820,29 @@ $(document).ready(function () {
                     $('.selected-phone-list').remove('.guest-user-phone');
                     $('.selected-phone-list').html(response.view);
 
-                    $('#home_loader').css('display', 'none');
+                    // $('#home_loader').css('display', 'none');
+
+                        $('#home_loader').css('display', 'none');   
+                    
+        
 
                 }
                  if(response.view!=""&&response.is_phone=="0"){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
-                    $('#home_loader').css('display', 'none');
+                    // $('#home_loader').css('display', 'none');
+                        $('#home_loader').css('display', 'none');
+        
 
                 }
+                $('#home_loader').css('display', 'none');   
 
 
                 },
                 error: function (error) {
                   toastr.error('Something went wrong. Please try again!');
+                  $('#home_loader').css('display', 'none');   
+
                 },
               });
         }
