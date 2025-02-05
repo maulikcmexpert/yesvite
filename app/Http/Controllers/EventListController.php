@@ -2729,7 +2729,7 @@ if ($rsvpSent != null) {
                         'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
                         'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
                         'phone_number'=>((!empty($user->phone_number) && $user->phone_number != NULL) ? $user->phone_number : ""),
-                        'profile' => (!empty($user->profile) && $user->profile != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($user->profile))) 
+                        'profile' => (!empty($user->profile) && $user->profile != NULL ) 
                                     ? asset('storage/profile/' . $user->profile) 
                                     : "",
                         'prefer_by'=>$prefer_by,
