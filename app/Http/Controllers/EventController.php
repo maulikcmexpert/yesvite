@@ -2303,61 +2303,65 @@ class EventController extends BaseController
 
     
 
-        $getAllContacts = contact_sync::where('contact_id', $id)
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
+        // $getAllContacts = contact_sync::where('contact_id', $id)
+        //     // ->when($type != 'group', function ($query) use ($request) {
+        //     //     $query->where(function ($q) use ($request) {
+        //     //         $q->limit($request->limit)
+        //     //             ->skip($request->offset);
+        //     //     });
+        //     // })
 
+        //     ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
+        //         // Use whereIn for matching multiple IDs
+        //         $query->whereIn('id', $selectedContactId);
+        //     })
+           
+        //     ->when(!empty($request->limit), function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+        //     ->when(!empty($request->search_user), function ($query) use ($search_user) {
+        //         $query->where(function ($q) use ($search_user) {
+        //             $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+        //                 ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+        //         });
+        //     })
+        //     // ->when($request->search_user != ''&& $request->search_user!=null, function ($query) use ($search_user) {
+        //     //     $query->where(function ($q) use ($search_user) {
+        //     //         $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+        //     //             ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+        //     //     });
+        //     // })
+
+        //     ->orderBy('firstname')
+
+        //     ->get();
+
+
+            $getAllContacts = contact_sync::where('contact_id', $id)
+            // Only apply whereIn condition if $selectedContactId is not empty
             ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
-                // Use whereIn for matching multiple IDs
                 $query->whereIn('id', $selectedContactId);
             })
-           
+            // Apply limit and offset for pagination if provided in the request
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
-                    ->offset($request->offset);
+                      ->offset($request->offset);
             })
+            // Apply search condition if a search term is provided
             ->when(!empty($request->search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+                      ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
                 });
             })
-            // ->when($request->search_user != ''&& $request->search_user!=null, function ($query) use ($search_user) {
-            //     $query->where(function ($q) use ($search_user) {
-            //         $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-            //             ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
-            //     });
-            // })
-
-            ->orderBy('firstname')
-
+            // Group results by 'id'
+            ->groupBy('id')
+            // Sort by firstName
+            ->orderBy('firstName')
+            // Execute the query and get the results
             ->get();
-
-
-
-    //     $getAllContacts = contact_sync::where('contact_id', $id)
-    //         ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
-    //             // Use whereIn for matching multiple IDs
-    //             $query->whereIn('id', $selectedContactId);
-    //         })
-    //         ->when(!empty($request->limit), function ($query) use ($request) {
-    //             // Apply limit and offset if provided
-    //             $query->limit($request->limit)
-    //                 ->offset($request->offset);
-    //         })
-    //         ->when(!empty($request->search_user), function ($query) use ($search_user) {
-    //             // Add search conditions for firstName or lastName
-    //             $query->where(function ($q) use ($search_user) {
-    //                 $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-    //                 ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
-    //             });
-    //         })
-    //         ->orderBy('firstName')  // Sorting by firstName
-    // ->get();
+        
 
 
         $yesvite_user = [];
