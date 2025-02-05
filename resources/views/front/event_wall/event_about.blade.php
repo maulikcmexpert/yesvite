@@ -715,9 +715,11 @@ $longitude = !empty($eventDetails['longitude'])
                                                                     alt="amazon">
                                                                 {{-- <h6>Amazon</h6> --}}
                                                             </a>
-                                                        @else
+                                                        @elseif (str_contains(strtolower($gift['registry_recipient_name'])))
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn other-btn" target="_blank">
+                                                                <img src="{{ asset('assets/front/img/other.png') }}"
+                                                                alt="">
                                                                 <h6>{{ $gift['registry_recipient_name'] }}</h6>
                                                             </a>
                                                         @endif
