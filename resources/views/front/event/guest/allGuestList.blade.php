@@ -9,14 +9,14 @@ $ischeck= '';
 if($selected_co_host == $user->id){
 if($selected_co_host_prefer_by == 'email'){
 $email_checked = 'checked';
-$ischeck = ($isCohost == "1" && !empty($isCopy)) ? 'checked' : 'disabled';
+$ischeck = ($isCohost == "1" && !empty($isCopy)) ? '' : 'disabled';
 
 }elseif ($selected_co_host_prefer_by == 'phone') {
 $phone_checked = 'checked';
-$ischeck = ($isCohost == "1" && !empty($isCopy)) ? 'checked' : 'disabled';
+$ischeck = ($isCohost == "1" && !empty($isCopy)) ? '' : 'disabled';
 }
 }
-
+// dd($ischeck);
 @endphp
 
 <div class="users-data">
@@ -100,7 +100,7 @@ $ischeck = ($isCohost == "1" && !empty($isCopy)) ? 'checked' : 'disabled';
             @endif
             <input class="form-check-input user-{{$user->id}} user_choice emailCheck" type="checkbox"
                 name="guest_list[]" data-id="user-{{$user->id}}" data-username="{{ $user->firstname }} {{ $user->lastname }}" data-profile_or_text="{{$photo_text}}" data-profile="{{ $profile_photo }}" data-email="{{ $user->email }}"
-                value="{{ $user->id }}" data-prefer_by="email" data-initial="{{$initials}}" {{$email_checked}} >
+                value="{{ $user->id }}" data-prefer_by="email" data-initial="{{$initials}}" {{$email_checked}} {{$ischeck }}>
         </div>
         @endif
         @if(isset($user->phone_number)&&$user->phone_number!="")
@@ -109,7 +109,7 @@ $ischeck = ($isCohost == "1" && !empty($isCopy)) ? 'checked' : 'disabled';
                 name="guest_list[]" data-mobile="{{$user->phone_number}}" data-prefer_by="phone"
                 data-username="{{ $user->firstname }} {{ $user->lastname }}" data-initial="{{$initials}}"
                 data-profile_or_text="{{$photo_text}}" data-profile="{{ $profile_photo }}"
-                value="{{ $user->id }}" {{$phone_checked}} >
+                value="{{ $user->id }}" {{$phone_checked}} {{$ischeck}}>
         </div>
         @endif
     </div>

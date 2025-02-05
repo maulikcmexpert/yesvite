@@ -584,7 +584,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         eventData.temp_id != null &&
         eventData.temp_id == id
     ) {
-        dbJson = eventData.textData;
+        dbJson = json;
         eventData.slider_images = [];
         eventData.desgin_selected = "";
         console.log({ dbJson });
