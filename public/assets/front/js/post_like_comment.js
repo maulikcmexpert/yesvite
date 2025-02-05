@@ -734,8 +734,9 @@ function generateProfileImage(firstname, lastname) {
 $(document).ready(function () {
     // Event listener for contact checkboxes
         $(document).on("change", ".contact-checkbox", function () {
-            $('#home_loader').css('display','block');
-alert();
+            console.log($('#home_loader').length);
+            
+            $('#home_loader').show(); // Alternative way to display
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
 
