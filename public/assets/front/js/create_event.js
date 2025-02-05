@@ -4782,7 +4782,14 @@ async function saveDesignData(direct = false) {
         typeof eventData.desgin_selected != "undefined" &&
         eventData.desgin_selected != ""
     ) {
-        return;
+        if (direct) {
+            return true;
+        } else {
+            if (eventData.desgin_selected) {
+                updateUIAfterSave(eventData.desgin_selected);
+                return;
+            }
+        }
     }
     console.log({ eventData });
     console.log("here for save image");

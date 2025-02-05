@@ -959,7 +959,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
             // Try fetching the user from the User table
             $user = User::find($sesionuser['user_id']);
             $prefer_by=$sesionuser['prefer_by'];
-
+            // && $is_phone==0
             if ($user && $is_phone==0) {
                 // If the user exists, add data to the $users_data array
                 $yesvite_users_data[] = [
@@ -973,10 +973,11 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                                 : "",
                     'prefer_by'=>$prefer_by
                 ];
-            } else {
-                $contact_sync = contact_sync::where('id',$sesionuser['user_id'])->first();
+            }
+             elseif($is_phone==1) {
+                $contact_sync = contact_sync::find($sesionuser['user_id']);;
 
-                if ($contact_sync!=null) {
+                if ($contact_sync) {
                     $yesvite_phone_data[] = [
                         'user_id' => $contact_sync->id,
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
