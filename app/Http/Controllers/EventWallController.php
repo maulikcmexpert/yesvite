@@ -293,7 +293,7 @@ foreach ($polls as $poll) {
         }
         ///postlist
         $postList = [];
-        $selectedFilters = $request->input('filters');
+        $selectedFilters ="";
         $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
