@@ -388,9 +388,9 @@ class HomeController extends BaseController
     }
     public function importCSV(Request $request, CSVImportService $importService)
     {
-        $validator = Validator::make($request->all(), [
-            'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
+        // ]);
 
         if ($validator->fails()) {
             // Validation failed
