@@ -354,15 +354,17 @@ class EventController extends BaseController
                 }
 
                 $eventDetail['gift_registry_list'] = [];
+                Session::get('giftRegistryData', []);
                 if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
 
                     $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
 
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
+                    session()->put('giftRegistryData', $gift_registry_ids);
+                    Session::save();
                 }
-                $giftRegistryDataVal = Session::get('giftRegistryData', []);
-
-                dd($getEventData->gift_registry_id);die;
+                dd(session('giftRegistryData'));
+              
 
                 $eventDetail['event_setting'] = "";
 
