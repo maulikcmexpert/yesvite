@@ -355,19 +355,7 @@ class EventController extends BaseController
                     $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
 
                     $eventDetail['greeting_card_list'] = $greeting_card_ids;
-                    $thankyou_card_count = EventGreeting::where('user_id', $id)
-                        ->when(!empty($greeting_card_ids), function ($query) use ($greeting_card_ids) {
-                            // Assuming $greeting_card_ids is an array of IDs to search for in the 'id' column
-                            $query->whereIn('id', $greeting_card_ids); // Corrected to use whereIn
-                        })
-                        ->groupBy('id') // Grouping by 'id'
-                        ->get(); // Fetch the grouped results
-
-                    // Now, count the number of groups
-                    $thankyou_card_count = $thankyou_card_count->count();
-
-                   
-                    $eventDetail['thankyou_card_count'] =$thankyou_card_count;
+                    $eventDetail['thankyou_card_count'] = count($greeting_card_ids) + $thankyou_card_count;
                     session()->put('greetingCardData', $greeting_card_ids);
                     Session::save();
                 }
@@ -377,17 +365,7 @@ class EventController extends BaseController
                 if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
 
                     $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
-                    $gift_registry_data = EventGiftRegistry::where('user_id', $id)
-                    ->when(!empty($gift_registry_ids), function ($query) use ($gift_registry_ids) {
-                        $query->whereIn('id', $gift_registry_ids); // Ensure we're only selecting the relevant IDs
-                    })
-                    ->groupBy('id') // Group by the 'id' column
-                    ->get(); // Fetch the grouped results
-                
-                // Count how many groups we have
-                $gift_registry_count = $gift_registry_data->count();
-                
-                    $eventDetail['gift_registry_count'] = $gift_registry_count;
+                    $eventDetail['gift_registry_count'] = count($gift_registry_ids) + $gift_registry_count;
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
                     session()->put('giftRegistryData', $gift_registry_ids);
                     Session::save();
