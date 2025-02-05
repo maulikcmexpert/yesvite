@@ -1310,7 +1310,17 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var event_date = $("#event-date").val(); // Get the current value of the date input
-
+    let startDate;
+    let endDate;
+    let check = event_date.split("To");
+    console.log(event_date);
+    if (check.length == 2) {
+        startDate = check[0];
+        endDate = check[1];
+    } else {
+        startDate = check[0];
+        endDate = check[0];
+    }
     // // If event_date is not null or empty, format it as MM/DD/YYYY
     // if (event_date) {
     //     event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
@@ -1328,8 +1338,8 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: event_date,
-            endDate: event_date,
+            startDate: startDate,
+            endDate: endDate,
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
