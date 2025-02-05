@@ -1184,7 +1184,7 @@ $(document).on("keyup", ".search_contact", function () {
             console.log(response);
             $('#guestList').html('');
             $('#guestList').html(response.view);
-            $('#home_loader').css('loader','none');
+            $('#home_loader').css('display','none');
 
 
         },

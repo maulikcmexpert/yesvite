@@ -1288,9 +1288,9 @@ $(document).on('click','.wall_filter_reset',function(){
         },
         success: function (response) {
             console.log(response.view);
-            // $('.wall-post-content').html();
+            $('.wall-post-content').html();
             $('.wall-post-content').html(response.view);
-            $('#home_loader').css('loader','none');
+            $('#home_loader').css('loader','block');
 
             $('#main-center-modal-filter').modal('hide');
 
