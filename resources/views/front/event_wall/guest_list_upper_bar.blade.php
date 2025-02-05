@@ -8,9 +8,7 @@ $counter = 0;
 @foreach($listing as $guest_user)
 @php
 
-if($guest_user['is_duplicate'] != 0){
 $counter++;
-}
 if($counter > 4){
 break;
 }
