@@ -32,6 +32,7 @@
           $month="";
           $current_month = "";
           $month_change = "";
+
         @endphp
         @foreach ( $eventList as $key=>$upcomingEvent)
             @php
@@ -47,11 +48,14 @@
 
             $colorClass = $series[$colorIndex % count($series)];
             $colorIndex++;
+            $eventRoute = ($upcomingEvent['event_wall'] == "0")
+                ? route('event.event_about', encrypt($events['id']))
+                : route('event.event_wall', encrypt($events['id']));
             @endphp
             <div class="all-events-month-wise-support upcoming_event_{{$upcomingEvent['id']}}" data-month="{{$upcomingEvent['event_month']}}">
                 <div class="home-center-upcoming-events-card all-event-{{ $colorClass }} mb-3">
                     <div class="home-upcoming-events-card-left">
-                        <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-left-profile">
+                        <a href="{{ $eventRoute }}" class="home-upcoming-events-card-left-profile">
                             <div class="home-upcoming-events-card-left-profile-img">
                                 @if($upcomingEvent['host_profile'] != "")
                                     <img src="{{$upcomingEvent['host_profile']}}" loading="lazy" alt="">

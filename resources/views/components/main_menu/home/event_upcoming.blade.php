@@ -1,5 +1,5 @@
 
-{{dd($eventList)}}
+{{-- {{dd($eventList)}} --}}
 @if(!empty($eventList))
 <div class="home-center-upcoming-events-wrp">
     <div class="home-center-upcoming-events-title">
