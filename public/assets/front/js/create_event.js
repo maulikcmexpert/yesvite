@@ -2933,6 +2933,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
     if (check_start == "") {
         toastr.error("First you need to to set Start Time of Event");
         $(this).val("");
+        toastr.error("First you need to to set Start Time of Event");
         $(this).datetimepicker("hide"); // Hide time picker if open
         $(this).blur();
         return;
@@ -3031,7 +3032,10 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
         console.log(lastEndTime);
         console.log(eventEndTime);
-        if (lastEndTime != "") {
+
+        if (lastEndTime !== "" && lastEndTime !== undefined && lastEndTime !== null && !isNaN(lastEndTime)) {
+
+        // if (lastEndTime != "") {
             if (
                 convertTimeToMinutes(lastEndTime) >
                 convertTimeToMinutes(eventEndTime)
@@ -3118,7 +3122,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
                 .children()
                 .find(".activity_start_time");
             schedule_start_time.prop("readonly", false);
-            schedule_start_time.val("45555985sdsddsd");
+            schedule_start_time.val("");
             schedule_start_time.prop("readonly", true);
 
             toastr.error("activity can not start before event");
