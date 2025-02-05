@@ -1171,8 +1171,8 @@ $(document).on("click", ".mute-conversation", function () {
     } else {
         $(".conversation-" + conversationId).removeClass("muted");
 
-        $(this).children(".mute1-self-icn").removeClass("d-none");
-        $(this).children(".unmute1-self-icn").addClass("d-none");
+        $(this).children(".mute-self-icn").removeClass("d-none");
+        $(this).children(".unmute-self-icn").addClass("d-none");
         if (selectedConversationId === conversationId) {
             //  $(".mute-self-icn").show();
             // $(".unmute-self-icn").hide();
