@@ -1928,6 +1928,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         var max_guest = $("#coins").val();
         console.log({ max_guest });
         if (max_guest <= 0) {
+            $("#loader").css("display", "none");
             $(this).prop("checked", false);
             $("#buycreditsmodal").modal("show");
             return;
