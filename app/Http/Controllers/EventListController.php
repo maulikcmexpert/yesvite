@@ -2681,8 +2681,11 @@ if ($rsvpSent != null) {
         // $is_duplicate=$request->is_duplicate;
         // dd($request);
         $userData = session('add_guest_user_id', []);
+        $yesvite_users_data = [];
+        $yesvite_phone_data = [];
+        $yesvite_all_invite=getInvitedUsersList($request->event_id);
 
-        if ($check_status == 1) {
+    if ($check_status == 1) {
 
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
             session(['add_guest_user_id' => $userData]);
@@ -2708,11 +2711,10 @@ if ($rsvpSent != null) {
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
             session(['add_guest_user_id' => $userData]);
 
-            $yesvite_all_invite=getInvitedUsersList($request->event_id);
+            // $yesvite_all_invite=getInvitedUsersList($request->event_id);
             // dd($yesvite_all_invite);
             $new_added_user=session()->get('add_guest_user_id');
-            $yesvite_users_data = [];
-            $yesvite_phone_data = [];
+          
             $is_phone=$request->is_phone;
             if(!empty($new_added_user)){
             foreach ($new_added_user as $sesionuser) {
@@ -2768,8 +2770,14 @@ if ($rsvpSent != null) {
         }
     
         session(['add_guest_user_id' => $userData]);
+
+        if($request->contact=="yesvite"){
+            return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"0"]);
+        }else{
+            return response()->json(['view' => view( 'front.event_wall.guest_phone_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"1"]);
+        }
     
-        return session()->get('add_guest_user_id');
+        // return session()->get('add_guest_user_id');
     }
 
     
