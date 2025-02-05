@@ -4785,8 +4785,9 @@ async function saveDesignData(direct = false) {
         if (direct) {
             return true;
         } else {
-            if (imageResponse && imageResponse.image) {
-                updateUIAfterSave(imageResponse.image);
+            if (eventData.desgin_selected) {
+                updateUIAfterSave(eventData.desgin_selected);
+                return;
             }
         }
     }
