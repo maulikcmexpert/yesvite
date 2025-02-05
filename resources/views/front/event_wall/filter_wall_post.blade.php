@@ -1,4 +1,3 @@
-<!-- <div class="wall-post-content"> -->
 @foreach ($postList as $post)
                                                 <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                                     data-post-id="{{ $post['id'] }}">
@@ -1255,4 +1254,3 @@
                                             </div>
                                         </div> --}}
                                             @endforeach
-                                    <!-- </div> -->
