@@ -37,7 +37,8 @@ class ProfileController extends BaseController
         $title = 'Profile';
         $page = 'front.profile';
         $id = Auth::guard('web')->user()->id;
-        $js = ['create_event'];
+        // $js = ['create_event'];
+        $js = [];
 
         $user = User::withCount(
 
@@ -114,7 +115,7 @@ class ProfileController extends BaseController
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
 
-        $user_privacy=UserProfilePrivacy::where('user_id',$user->id)->get();
+        $user_privacy = UserProfilePrivacy::where('user_id', $user->id)->get();
         return view('layout', compact(
             'title',
             'page',
@@ -246,7 +247,7 @@ class ProfileController extends BaseController
             $userUpdate->address = ($request->address != "") ? $request->address : $userUpdate->address;
             $userUpdate->address_2 = (isset($request->address_2)  && $request->address_2 != "" || $request->address_2 != NULL) ? $request->address_2 : $userUpdate->address_2;
             $userUpdate->city = ($request->city != "" || $request->city != NULL) ? $request->city : "";
-            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state :"";
+            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state : "";
             $userUpdate->save();
             DB::commit();
 
@@ -523,7 +524,7 @@ class ProfileController extends BaseController
             return response()->json([
                 'status' => 1,
                 'message' => "Profile Privacy updated successfully",
-                'visible'=>$request->visible
+                'visible' => $request->visible
             ]);
         } catch (QueryException $e) {
             DB::Rollback();
