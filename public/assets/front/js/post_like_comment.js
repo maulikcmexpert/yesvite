@@ -1229,3 +1229,6 @@ $(document).on("keyup", ".search_contact", function () {
 //         },
 //     });
 // });
+$(document).on('keyup','.post_comment',function(){
+    $(".parent_comment_id").val('');
+})
