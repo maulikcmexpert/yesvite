@@ -2632,6 +2632,7 @@ main {
     display:flex;
     align-items: center;
     gap: 15px;
+    padding-top: 10px;
   }
 
   .see-all-btn{
