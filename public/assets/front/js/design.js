@@ -575,7 +575,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     image = $(this).data("image");
     shapeImageUrl = $(this).data("shape_image");
     var json = $(this).data("json");
-    //console.log(json);
+    console.log(json);
     var id = $(this).data("id");
     imageId = id;
     $(".design-sidebar-action").attr("data-id", id);
