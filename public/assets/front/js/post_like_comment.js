@@ -769,7 +769,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
@@ -780,7 +780,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 $('.add_yesvite_guest_'+id).remove();
 
@@ -815,7 +815,7 @@ $(document).ready(function () {
                 console.log(is_duplicate);
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
 
 
@@ -829,7 +829,7 @@ $(document).ready(function () {
                     is_duplicate=0;
                 }
                 $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 console.log(guestList);
             }
@@ -875,7 +875,7 @@ $(document).ready(function () {
             .not(this)
             .prop("checked", false);
          
-            storeAddNewGuest(id,1,isSelected,event_id,'phone',is_duplicate);
+            storeAddNewGuest(id,1,isSelected,event_id,'phone');
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
 
         }else{
@@ -886,15 +886,14 @@ $(document).ready(function () {
         }// App user = 0 for phone (non-app user)
     });
 
-    function storeAddNewGuest(id,status,prefer_by,event_id,contact,is_duplicate){
+    function storeAddNewGuest(id,status,prefer_by,event_id,contact){
         $('#home_loader').css('display', 'block');
-    console.log({id,status,prefer_by,event_id,contact,is_duplicate});
     
     setTimeout(function(){
         $.ajax({
             url: base_url+"store_add_new_guest",
             type: 'GET',
-            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact,is_duplicate:is_duplicate},
+            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact},
             success: function (response) {
              console.log(response);
              if(response.is_phone=="1"&&response.view!=""){
