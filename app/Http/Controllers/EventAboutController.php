@@ -351,115 +351,85 @@ class EventAboutController extends Controller
     }
 
     public function sentRsvpData(Request $request)
-
     {
-        // dd($request);
-        $user  = Auth::guard('web')->user()->id;
+        $user = Auth::guard('web')->user()->id;
 
-
-
-
-        $checkEvent = Event::where(['id' => $request->event_id])->first();
-
-        if ($checkEvent->end_date < date('Y-m-d')) {
-            // return response()->json(['status' => 0, 'message' => "Event is past , you can't attempt RSVP"]);
-            return redirect()->back()->with('error', 'Event is past , you cant attempt RSVP!');
+        // Check if the event exists
+        $checkEvent = Event::where('id', $request->event_id)->first();
+        if (!$checkEvent) {
+            return redirect()->back()->with('error', 'Event not found!');
         }
 
+        // Prevent RSVP for past events
+        if ($checkEvent->end_date < date('Y-m-d')) {
+            return redirect()->back()->with('error', 'Event is past, you cannot attempt RSVP!');
+        }
 
         $video = "";
-        // dd(1);
 
-        // if (!empty($request->message_by_video)) {
-
-
-
-        //     $video = $request->message_by_video;
-
-        //     $videoName = time() . '_' . $video->getClientOriginalName();
-        //     $video->move(public_path('storage/rsvp_video'), $videoName);
-
-
-        //     $video = $videoName;
-        // }
-
-
-
+        // Check if the user has already sent an RSVP
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
-        $rsvpSentAttempt = $rsvpSent->rsvp_status;
-        // dd($rsvpSent);
-        if ($rsvpSent != null) {
+
+        if ($rsvpSent) {
+            // Determine RSVP change status
             $rsvp_attempt = "";
-            if ($rsvpSentAttempt == NULL) {
-                $rsvp_attempt =  'first';
-            } else if ($rsvpSentAttempt == '0' && $request->rsvp_status == '1') {
-                $rsvp_attempt =  'no_to_yes';
-            } else if ($rsvpSentAttempt == '1' && $request->rsvp_status == '0') {
-                $rsvp_attempt =  'yes_to_no';
+            if ($rsvpSent->rsvp_status === NULL) {
+                $rsvp_attempt = 'first';
+            } else if ($rsvpSent->rsvp_status == '0' && $request->rsvp_status == '1') {
+                $rsvp_attempt = 'no_to_yes';
+            } else if ($rsvpSent->rsvp_status == '1' && $request->rsvp_status == '0') {
+                $rsvp_attempt = 'yes_to_no';
             }
 
-            $rsvpSent->event_id = $request->event_id;
-
-            $rsvpSent->user_id = $user;
-
+            // Update RSVP details
             $rsvpSent->rsvp_status = $request->rsvp_status;
-
             $rsvpSent->adults = $request->adults;
-
             $rsvpSent->kids = $request->kids;
-
             $rsvpSent->message_to_host = $request->message_to_host;
             $rsvpSent->rsvp_attempt = $rsvp_attempt;
-
             $rsvpSent->message_by_video = $video;
-
             $rsvpSent->read = '1';
             $rsvpSent->rsvp_d = '1';
-
             $rsvpSent->event_view_date = date('Y-m-d');
-
             $rsvpSent->save();
-            //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes
-            if ($rsvpSent->save()) {
-                $postMessage = [];
+
+            if ($rsvpSent->wasChanged()) {
+                // Prepare the post message
                 $postMessage = [
                     'status' => ($request->rsvp_status == '0') ? '2' : '1',
                     'adults' => $request->adults,
                     'kids' => $request->kids
                 ];
-                $creatEventPost = new EventPost;
-                $creatEventPost->event_id = $request->event_id;
-                $creatEventPost->user_id =$user;
-                $creatEventPost->post_message = json_encode($postMessage);
-                $creatEventPost->post_privacy = "1";
-                $creatEventPost->post_type = "4";
-                $creatEventPost->commenting_on_off = "0";
-                $creatEventPost->is_in_photo_moudle = "0";
-                $creatEventPost->save();
-                // dd($creatEventPost);
+
+                // Check if an RSVP post already exists
+                $existingPost = EventPost::where([
+                    'event_id' => $request->event_id,
+                    'user_id' => $user,
+                    'post_type' => '4'
+                ])->first();
+
+                if ($existingPost) {
+                    // Update existing RSVP post
+                    $existingPost->post_message = json_encode($postMessage);
+                    $existingPost->save();
+                } else {
+                    // Create a new RSVP post
+                    $newPost = new EventPost();
+                    $newPost->event_id = $request->event_id;
+                    $newPost->user_id = $user;
+                    $newPost->post_message = json_encode($postMessage);
+                    $newPost->post_privacy = "1";
+                    $newPost->post_type = "4";
+                    $newPost->commenting_on_off = "0";
+                    $newPost->is_in_photo_moudle = "0";
+                    $newPost->save();
+                }
             }
-            // if ($user->id == $request->user_id) {
-            //     $notificationParam = [
-
-            //         'sender_id' => $user->id,
-            //         'event_id' => $request->event_id,
-            //         'rsvp_status' => $request->rsvp_status,
-            //         'kids' => $request->kids,
-            //         'adults' => $request->adults,
-            //         'rsvp_video' => $video,
-            //         'rsvp_message' => $request->message_to_host,
-            //         'post_id' => "",
-            //         'rsvp_attempt' => $rsvp_attempt
-            //     ];
-            //     // sendNotification('sent_rsvp', $notificationParam);
-            // }
-
-
-
-
         }
-        return redirect()->back()->with('success', 'rsvp updated successfully!');
+
+        return redirect()->back()->with('success', 'RSVP updated successfully!');
     }
+
 }
