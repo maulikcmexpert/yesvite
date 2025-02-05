@@ -823,7 +823,7 @@
                         <div class="guest-img">
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
                             <h5 class="add-item-under-text selected-host-h5"></h5>
-                            @if ($eventDetail['isCohost'] == '1' || (isset($eventDetail['isCopy']) && $eventDetail['isCopy']=!""))
+                            @if ($eventDetail['isCohost'] == '1' || $eventDetail['isCopy']=!"")
                                 <a href="#" class="close remove_co_host">
                                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
