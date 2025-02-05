@@ -560,6 +560,17 @@
     position:relative;
 }
 
+.off-by-host-inner-left:after{
+    content:"";
+    position: absolute;
+    top:50%;
+    right:0;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 100%;
+    background: var(--border);
+}
+
 .off-by-host-inner-left svg{
     width:100%;
     max-width: 25px !important;
@@ -568,6 +579,7 @@
 
 .off-by-host-inner-left svg path{
     fill:var(--green);
+    fill-opacity: 1;
 }
 
 .off-by-host-inner-right svg{
