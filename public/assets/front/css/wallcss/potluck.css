@@ -572,6 +572,10 @@
     font-family: var(--SFProDisplay-Regular);
 }
 
+.modal.cmn-modal span.sub-con.floatingfocus{
+    color: var(--lightgreay) !important;
+}
+
 .modal.cmn-modal .input-form {
     position: relative;
 }
