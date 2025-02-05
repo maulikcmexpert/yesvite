@@ -304,7 +304,7 @@
                                                                                     {{ $post['adults'] }} Adults
                                                                                 </h5>
                                                                                 <h5 id="kids{{ $post['id'] }}">
-                                                                                    {{ $postt['kids'] }} Kids</h5>
+                                                                                    {{ $post['kids'] }} Kids</h5>
                                                                             </div>
                                                                         </div>
                                                                     @elseif ($post['rsvp_status'] == '0')
@@ -312,11 +312,12 @@
                                                                             data-guest-id="{{ $post['id'] }}" >
                                                                             <h5>NO</h5>
                                                                         </div>
-                                                                    @elseif ($guest['rsvp_status'] == null)
+                                                                    @elseif ($post['rsvp_status'] == null)
                                                                         <div class="no-reply"
                                                                             data-guest-id="{{ $post['id'] }}">
                                                                             <h5>NO REPLY</h5>
 
+                                                                    </div>
                                                                     </div>
                                                 @endif
                                                 @if( $post['post_type'] =="2")
