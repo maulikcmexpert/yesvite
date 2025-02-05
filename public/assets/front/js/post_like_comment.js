@@ -292,7 +292,7 @@ $(document).ready(function () {
                             <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button class="commented-user-reply-btn">Reply</button>
+                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
                     </div>
                     <ul class="primary-comment-replies"></ul>
                 </li>
