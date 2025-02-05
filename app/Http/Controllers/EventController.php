@@ -3661,7 +3661,7 @@ class EventController extends BaseController
             $invitedCount = session('user_ids');
             $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
             if ($request->is_update_event == '1') {
-                $get_count_invited_user = $get_count_invited_user - $request->Alreadyguest;
+                $get_count_invited_user = $get_count_invited_user - intval($request->Alreadyguest);
             }
 
             if ($request->isDraftEdit == "1" || $request->is_update_event == '1') {
