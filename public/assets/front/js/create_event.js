@@ -8705,14 +8705,18 @@ async function step2Open() {
     }
 }
 
-function step3open() {
+async function step3open() {
     $("#close_createEvent").css("display", "block");
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
     // if(eventDetail2.static_information != '' && (eventData.desgin_selected === undefined)){
     //     var design = eventData.desgin_selected;
     // }else{
-
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
     var event_date = $("#event-date").val();
@@ -8818,7 +8822,12 @@ function step3open() {
     }
 }
 
-function step4open() {
+async function step4open() {
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     $("#close_createEvent").css("display", "block");
 
     var event_name = $("#event-name").val();
