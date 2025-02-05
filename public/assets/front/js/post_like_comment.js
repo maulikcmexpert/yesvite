@@ -762,7 +762,14 @@ $(document).ready(function () {
             if( $(this).is(":checked")){
                 $('.add_yesvite_guest_'+id).remove();
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
+                const exists = guestList.some((contact) => contact.id === id);
+                var is_duplicate=0;
+                if (exists) {
+                    is_duplicate=1;
+                }else{
+                    is_duplicate=0;
+                }
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $('#home_loader').css('display','none');
 
