@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Models\contact_sync;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -17,15 +18,14 @@ class CSVImportService
         $parent_userid = $user->id;
         while (($row = fgetcsv($file)) !== false) {
             $data = array_combine($header, $row);
-            $data['app_user'] =  '0';
-            $data['prefer_by'] =  'phone';
-            $data['user_parent_id'] =  $parent_userid;
-            $data['is_user_phone_contact'] =  '1';
-            $data['parent_user_phone_contact'] =  $parent_userid;
-            $data['register_type'] =  'CSV import';
-            $user_exist = User::where('email',$data['email'])->first();
+            $data['isAppUser'] =  '0';
+            $data['visible'] =  '0';
+            $data['contact_id'] =  $parent_userid;
+            $user_exist = contact_sync::where('email',$data['email'])
+            ->orWhere('phone', $data['phone'])
+            ->first();
             if($user_exist == null){
-                User::create($data);
+                contact_sync::create($data);
             }
         }
 
