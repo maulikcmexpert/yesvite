@@ -2266,7 +2266,9 @@ class EventController extends BaseController
             ->where('app_user', '1')
             ->whereIn('email', $emails)
             ->orderBy('firstname')
-          
+            ->when(!empty($selectedId), function ($query) use ($selectedId) {
+                $query->orWhereIn('id', $selectedId);
+            })
             ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
@@ -2282,9 +2284,7 @@ class EventController extends BaseController
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
                 });
             })
-            ->when(!empty($selectedId), function ($query) use ($selectedId) {
-                $query->orWhereIn('id', $selectedId);
-            })
+
             ->groupBy('id')
             ->get();
 
