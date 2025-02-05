@@ -1167,26 +1167,33 @@ $(document).on('click','.remove_new_phone_added_user',function(){
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
+    var name=$(this).val();
+    $.ajax({
+        url: base_url + "event_about/right_bar_guest_list",
+        type: "POST",
+        data: JSON.stringify({ name: name}),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            console.log(response.view);
+            // $('.wall-post-content').html();
+            $('.wall-post-content').html(response.view);
+            $('#home_loader').css('loader','none');
 
-    // If search is empty, show all contacts
-    if (searchQuery === "") {
-        $(".contact").show(); // Show all contacts
-    } else {
-        // Iterate through each invite-contact
-        $(".contactslist").each(function () {
-            var contactName = $(this)
-                .find(".contact_search")
-                .data("search")
-                .toLowerCase(); // Get the data-search attribute
+            $('#main-center-modal-filter').modal('hide');
 
-            // If the search query matches part of the contact name, show the contact
-            if (contactName.indexOf(searchQuery) !== -1) {
-                $(this).show(); // Show this contact
-            } else {
-                $(this).hide(); // Hide this contact
-            }
-        });
-    }
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+            $('#home_loader').css('loader','none');
+
+        }
+    });
+   
 });
 
 // $(document).on('click','.see-all-guest-right-btn',function(){
