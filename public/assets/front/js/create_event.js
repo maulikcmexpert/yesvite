@@ -56,7 +56,7 @@ var create_event_phone_scroll = false;
 var create_event_yesvite_scroll = false;
 var create_co_event_phone_scroll = false;
 var create_co_event_yesvite_scroll = false;
-
+var base_url = $("#base_url").val();
 if (final_profile_or_text == "1") {
     $(".guest-img .selected-co-host-image").show();
     $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
@@ -232,7 +232,7 @@ $(document).ready(function () {
     console.log(getTimeZoneAbbreviation());
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-        //  alert(design);
+        console.log(base_url);
         $(".user_choice").prop("checked", false);
         $("#YesviteUserAll").html("");
         $.ajax({
@@ -261,6 +261,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
+                console.log(base_url + "event/delete-session");
                 console.log("AJAX error: " + error);
             },
         });
@@ -5067,7 +5068,6 @@ $(document).on("click", ".download", function () {
 });
 
 function downloadPhotoAndUpload() {
-    var base_url = $("#base_url").text();
     var user_id = $("#user_id").val();
     var user_name = $("#user_name").text();
     var filename = "user.jpg";
