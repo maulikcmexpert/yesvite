@@ -767,8 +767,16 @@ $(document).ready(function () {
                 $('#home_loader').css('display','none');
 
             }else{
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
                 guestList = guestList.filter(guest => guest.id !== id);
+                const exists = guestList.some((contact) => contact.id === id);
+                var is_duplicate=0;
+                if (exists) {
+                    is_duplicate=1;
+                }else{
+                    is_duplicate=0;
+                }
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite',is_duplicate);
+
                 $('.add_yesvite_guest_'+id).remove();
 
                 console.log(guestList);
@@ -806,9 +814,16 @@ $(document).ready(function () {
 
 
             }else{
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
                 guestList = guestList.filter(guest => guest.id !== id);
+                const exists = guestList.some((contact) => contact.id === id);
+                var is_duplicate=0;
+                if (exists) {
+                    is_duplicate=1;
+                }else{
+                    is_duplicate=0;
+                }
                 $('.add_yesvite_guest_'+id).remove();
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite',is_duplicate);
 
                 console.log(guestList);
             }
@@ -817,7 +832,8 @@ $(document).ready(function () {
 
         function storeAddNewGuest(id,status,prefer_by,event_id,contact,is_duplicate){
             $('#home_loader').css('display', 'block');
-
+        console.log({id,status,prefer_by,event_id,contact,is_duplicate});
+        
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',

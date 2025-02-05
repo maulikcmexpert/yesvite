@@ -1,4 +1,5 @@
 
+
 @if(!empty($yesvite_all_invite))
 @php
         $listing=array_merge($yesvite_all_invite['invited_user_id'],$yesvite_users_data);
