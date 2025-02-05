@@ -53,6 +53,7 @@
                                         :wallData="$wallData" />
                                     <x-event_wall.wall_crate_poll_photo :users="$users" />
 {{-- {{                                    dd($postList)}} --}}
+                                    <div class="wall-post-content">
                                     @foreach ($postList as $post)
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                             data-post-id="{{ $post['id'] }}">
@@ -1179,6 +1180,7 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <!-- ===tab-1-end=== -->
