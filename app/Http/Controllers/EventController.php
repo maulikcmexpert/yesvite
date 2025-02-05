@@ -360,6 +360,9 @@ class EventController extends BaseController
 
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
                 }
+                $giftRegistryDataVal = Session::get('giftRegistryData', []);
+
+                dd($eventDetail);die;
 
                 $eventDetail['event_setting'] = "";
 
@@ -2300,7 +2303,7 @@ class EventController extends BaseController
             $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
-
+        
     
 
         $getAllContacts = contact_sync::where('contact_id', $id)
@@ -2310,11 +2313,12 @@ class EventController extends BaseController
             //             ->skip($request->offset);
             //     });
             // })
-
             ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
-                // Use whereIn for matching multiple IDs
-                $query->whereIn('id', $selectedContactId);
+                if (!empty($selectedContactId)) {
+                    $query->orWhereIn('id', $selectedContactId);
+                }
             })
+            
            
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
@@ -2336,29 +2340,9 @@ class EventController extends BaseController
             ->orderBy('firstname')
 
             ->get();
+        
 
-
-
-    //     $getAllContacts = contact_sync::where('contact_id', $id)
-    //         ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
-    //             // Use whereIn for matching multiple IDs
-    //             $query->whereIn('id', $selectedContactId);
-    //         })
-    //         ->when(!empty($request->limit), function ($query) use ($request) {
-    //             // Apply limit and offset if provided
-    //             $query->limit($request->limit)
-    //                 ->offset($request->offset);
-    //         })
-    //         ->when(!empty($request->search_user), function ($query) use ($search_user) {
-    //             // Add search conditions for firstName or lastName
-    //             $query->where(function ($q) use ($search_user) {
-    //                 $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-    //                 ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
-    //             });
-    //         })
-    //         ->orderBy('firstName')  // Sorting by firstName
-    // ->get();
-
+            // dd($getAllContacts);
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
