@@ -8735,6 +8735,9 @@ if (final_step == "3" && isCohost == "1") {
 if (final_step == "4" && isCohost == "1") {
     $("#loader").css("display", "flex");
     setTimeout(function () {
+        $(".li_design").addClass("menu-success");
+        $(".li_event_detail").addClass("menu-success");
+        $(".li_guest").addClass("menu-success");
         step4open();
         $("#loader").css("display", "none");
     }, 1000);
