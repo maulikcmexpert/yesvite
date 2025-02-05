@@ -733,7 +733,7 @@ class EventPhotoController extends Controller
 
 
                     $duration = getVideoDuration($filePath); // Assuming this is a helper function
-                    $thumbName = genrate_thumbnail($fileName);
+                    $thumbName = generate_thumbnail($fileName);
                     $postFile->move(public_path('storage/post_image/'), $fileName);
                 }
 
