@@ -13,7 +13,8 @@ var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 eventData.isCopy = isCopy;
 var Alreadyguest=$("#alreadyCount").val();
-eventData.Alreadyguest=0;
+
+eventData.Alreadyguest=Alreadyguest;
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
@@ -9285,6 +9286,7 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 
 function getcoins() {
      Alreadyguest = $(".users-data.invited_users").length;
+     eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
