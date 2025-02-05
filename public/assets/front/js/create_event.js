@@ -232,7 +232,7 @@ $(document).ready(function () {
     console.log(getTimeZoneAbbreviation());
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-        //  alert(design);
+        alert(base_url);
         $(".user_choice").prop("checked", false);
         $("#YesviteUserAll").html("");
         $.ajax({
