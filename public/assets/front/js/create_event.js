@@ -9302,7 +9302,10 @@ function colorchange(){
         // Add a class to SVG for active state
     } else {
         // When any field is empty
-        $(".guestBtn").css("color", "#b5b8bf");  // Set text color to a light gray
+        $(".guestBtn").each(function() {
+            $(this).css("color", "gray");
+            this.style.setProperty('color', 'gray', 'important');
+          });// Set text color to a light gray
         $("#guestBtn").addClass('guestBtn');
     }
 }
