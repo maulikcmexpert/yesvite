@@ -567,7 +567,7 @@
     color: var(--lightgreay);
     font-size: 14px;
     line-height: 23px;
-    width: auto;
+    width: max-content;
     margin-left: auto;
     font-family: var(--SFProDisplay-Regular);
 }
