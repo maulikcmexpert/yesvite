@@ -995,17 +995,15 @@ function getInvitedUsersList($eventId)
     $eventDetail['invited_user_id'] = [];
 
     $invitedUsers = EventInvitedUser::query();
-    $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0'])->whereNot('invitation_sent','9')->whereHas('contact_sync', function ($query) {
-        $query->whereNull('user_id'); // Checking if user_id is NULL in contact_sync table
-    });
+    $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0'])->whereNot('invitation_sent','9');
     $result = $invitedUsers->get();
 
     // dd($result);
     if (!empty($result)) {
         foreach ($result as $guestVal) {
 
-            // if ($guestVal->user_id==null&&$guestVal->sync_id != '') {
-    if ($guestVal->sync_id != '') {
+            if ($guestVal->user_id==null&&$guestVal->sync_id != '') {
+    // if ($guestVal->sync_id != '') {
                 $invitedGuestDetail['guest_id'] = $guestVal->id;
                 $invitedGuestDetail['first_name'] = (!empty($guestVal->contact_sync->firstName) && $guestVal->contact_sync->firstName != NULL) ? $guestVal->contact_sync->firstName : "";
                 $invitedGuestDetail['last_name'] = (!empty($guestVal->contact_sync->lastName) && $guestVal->contact_sync->lastName != NULL) ? $guestVal->contact_sync->lastName : "";
