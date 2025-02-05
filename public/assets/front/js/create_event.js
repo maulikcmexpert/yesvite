@@ -12,7 +12,7 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 eventData.isCopy = isCopy;
-var Alreadyguest=0;
+var Alreadyguest=$(".users-data.invited_users").length;
 eventData.Alreadyguest=0;
 var swiper;
 var isPhonecontact = 0;
