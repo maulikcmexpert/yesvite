@@ -763,7 +763,7 @@
 
                                                                                                 </div>
                                                                                                 <button
-                                                                                                    class="commented-user-reply-btn">Reply</button>
+                                                                                                    class="commented-user-reply-btn" data-comment-id="{{ $reply['id'] }}">Reply</button>
                                                                                             </div>
                                                                                         </li>
                                                                                     @endforeach
