@@ -56,7 +56,7 @@ var create_event_phone_scroll = false;
 var create_event_yesvite_scroll = false;
 var create_co_event_phone_scroll = false;
 var create_co_event_yesvite_scroll = false;
-var base_url = $("#base_url").text();
+var base_url = $("#base_url").val();
 if (final_profile_or_text == "1") {
     $(".guest-img .selected-co-host-image").show();
     $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
