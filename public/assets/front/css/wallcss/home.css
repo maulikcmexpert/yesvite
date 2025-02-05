@@ -1482,27 +1482,31 @@ main {
   padding-right: 40px
 }
 
-.posts-card-main-comment .comment-send-icon{
+.posts-card-main-comment .comment-send-icon {
     font-size: inherit !important;
     padding: 0 !important;
     left: auto !important;
     right: 15px !important;
+    -webkit-transform: translateY(-50%) !important;
     transform: translateY(-50%) !important;
 }
 
-.comment-send-icon, .comment-microphone-icon, .comment-attech-icon{
-  width: 100%;
-  max-width: 20px;
-  height: 20px;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50% !important;
-  transform: translateY(-50%);
-  right: 15px;
-  cursor: pointer;
-
+.comment-send-icon,
+.comment-microphone-icon,
+.comment-attech-icon {
+    width: 100%;
+    max-width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50% !important;
+    -webkit-transform: translateY(-50%); /* Safari Fix */
+    transform: translateY(-50%);
+    right: 15px;
+    cursor: pointer;
+    -webkit-appearance: none; /* Prevents Safari-specific UI inconsistencies */
 }
 
 .comment-microphone-icon{
