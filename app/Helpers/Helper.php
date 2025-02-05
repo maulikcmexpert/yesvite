@@ -43,7 +43,8 @@ use App\Models\Url;
 use App\Models\UserOpt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-
+use FFMpeg\FFMpeg;
+use FFMpeg\Coordinate\TimeCode;
 // use DB;
 
 function getVideoDuration($filePath)
