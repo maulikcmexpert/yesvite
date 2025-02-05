@@ -1507,6 +1507,7 @@ main {
     right: 15px;
     cursor: pointer;
     -webkit-appearance: none; /* Prevents Safari-specific UI inconsistencies */
+    z-index: 2;
 }
 
 .comment-microphone-icon{
