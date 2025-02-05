@@ -45,55 +45,56 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use FFMpeg\FFMpeg;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\FFProbe;
 // use DB;
 
 function getVideoDuration($filePath)
 {
 
-
     $track = new GetId3($filePath);
 
-    // Use static methods:
-    $track = GetId3::fromUploadedFile($filePath);
-
-    //get all info
-    $track->extractInfo();
-
-
-    //get title
-    $track->getTitle();
-
-    //get playtime
-    return  $track->getPlaytime();
+    // Extract file metadata
+    $info = $track->extractInfo();
+    // dd($info);
+    // Return playtime if available
+    return $info['playtime_seconds'] ?? null;
 }
 
 
-
-function genrate_thumbnail($fileName) {
-
+function generate_thumbnail($fileName)
+{
     $videoPath = public_path('storage/post_image/') . $fileName;
-    //dd($videoPath);
-    $ffmpeg = FFMpeg\FFMpeg::create([
-        'ffmpeg.binaries' => exec('which ffmpeg'),
-       'ffprobe.binaries' => exec('which ffprobe'),
+
+    // Initialize FFMpeg
+    $ffmpeg = FFMpeg::create([
+        'ffmpeg.binaries' => '/usr/local/bin/ffmpeg',  // Change this path if necessary
+        'ffprobe.binaries' => '/usr/local/bin/ffprob', // Change this path if necessary
     ]);
+    // $ffmpeg = FFMpeg::create([
+    //     'ffmpeg.binaries' => exec('which ffmpeg'),
+    //     'ffprobe.binaries' => exec('which ffprobe'),
+    // ]);
+
+    // $ffprobe = FFProbe::create([
+    //     'ffprobe.binaries' => exec('which ffprobe'),  // Make sure this is correct
+    // ]);
     $video = $ffmpeg->open($videoPath);
 
-    $k = 1;
-    for ($i = 0; $i <= 4; $i++) {
-        $imgName = rand(10, 99) . '_' . rand(10000, 99999) . '.jpg';
-        $k++;
+    // Loop through and generate thumbnails at different timestamps
+    for ($i = 0; $i < 5; $i++) {
+        $imgName = uniqid('thumb_', true) . '.jpg';
         $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
-        $video
-            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(7 * $k))
+
+        $video->frame(TimeCode::fromSeconds(7 * ($i + 1)))
             ->save($thumbnailPath);
 
+        // If the file is generated successfully, return it
         if (file_exists($thumbnailPath)) {
             return $imgName;
         }
     }
 
-    return null; // Return null if no thumbnail generated
+    return null; // Return null if no thumbnail is generated
 }
 
 function checkIsimageOrVideo($postImage)

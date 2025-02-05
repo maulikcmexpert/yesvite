@@ -19,8 +19,22 @@
                     </h5>
                 @endif
             </div>
+            <form action="{{ route('event_wall.eventPost') }}" id="textform" method="POST"
+            enctype="multipart/form-data">
+            <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
+            <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
 
-                <input type="text" class="form-control" id="text" placeholder="What’s on your mind?">
+            <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
+                value="">
+
+            <input type="hidden" name="post_type" id="textPostType" value="0">
+            @csrf
+            <div class="create-post-textcontent">
+                <input type="text" class="form-control" rows="3" name="postContent" placeholder="What's on your mind?"
+                    id="postContent" maxlength="140" />
+            </div>
+        </form>
+            {{-- <input type="text" class="form-control" id="text" placeholder="What’s on your mind?" maxlength="140"> --}}
         </div>
         <div class="wall-creat-photo-poll-wrp">
             <button type="button" data-bs-toggle="modal" data-bs-target="#creatpostmodal">

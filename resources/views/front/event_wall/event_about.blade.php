@@ -701,27 +701,25 @@ $longitude = !empty($eventDetails['longitude'])
 
                                                 <div class="play-store">
                                                     @foreach ($eventDetails['gift_registry'] as $gift)
-                                                        @if (str_contains(strtolower($gift['registry_recipient_name']), 'target'))
-                                                            <a href="{{ $gift['registry_link'] }}"
-                                                                class="play-store-btn target-btn" target="_blank">
-                                                                <img src="{{ asset('assets/front/img/target.png') }}"
-                                                                    alt="target">
-                                                                <h6>Target</h6>
-                                                            </a>
-                                                        @elseif (str_contains(strtolower($gift['registry_recipient_name']), 'amazon'))
-                                                            <a href="{{ $gift['registry_link'] }}"
-                                                                class="play-store-btn amazon-btn" target="_blank">
-                                                                <img src="{{ asset('assets/front/img/amazon.png') }}"
-                                                                    alt="amazon">
-                                                                {{-- <h6>Amazon</h6> --}}
-                                                            </a>
-                                                        @else
-                                                            <a href="{{ $gift['registry_link'] }}"
-                                                                class="play-store-btn other-btn" target="_blank">
-                                                                <h6>{{ $gift['registry_recipient_name'] }}</h6>
-                                                            </a>
-                                                        @endif
-                                                    @endforeach
+                                                    @php
+                                                        $registryName = strtolower($gift['registry_recipient_name']);
+                                                    @endphp
+
+                                                    @if (str_contains($registryName, 'target'))
+                                                        <a href="{{ $gift['registry_link'] }}" class="play-store-btn target-btn" target="_blank">
+                                                            <img src="{{ asset('assets/front/img/target.png') }}" alt="target">
+                                                        </a>
+                                                    @elseif (str_contains($registryName, 'amazon'))
+                                                        <a href="{{ $gift['registry_link'] }}" class="play-store-btn amazon-btn" target="_blank">
+                                                            <img src="{{ asset('assets/front/img/amazon.png') }}" alt="amazon">
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ $gift['registry_link'] }}" class="play-store-btn other-btn" target="_blank">
+                                                            <img src="{{ asset('assets/front/img/other.png') }}" alt="other">
+                                                        </a>
+                                                    @endif
+                                                @endforeach
+
                                                 </div>
 
 

@@ -982,7 +982,6 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
             // alert(upper_see);
             if(upper_see==0&&is_duplicate==0){
-                console.log(is_duplicate);
 
                 const totalHtml = `
                 <a class="guest-user d-block yesvite add_guest_seeall">
@@ -994,17 +993,15 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 </a>`;
                   $modalBody.append(totalHtml);
             }
-            // if(upper_see>0){
-            //     console.log(is_duplicate);
-            //     if(is_duplicate==0){
-            //         var initial= parseInt($('#total-selected-email').attr('data-count'));
-            //         var new_value= initial+1 ;
-            //      //    alert(initial);
-            //         $('#total-selected-email').attr('data-count',new_value);
-            //         $('#total-selected-email').text('+'+new_value);
-            //     }
+            if(upper_see>0){
+                if(is_duplicate==0){
+                    var initial= parseInt($('#total-selected-email').attr('data-count'));
+                    var new_value= initial+1 ;
+                    $('#total-selected-email').attr('data-count',new_value);
+                    $('#total-selected-email').text('+'+new_value);
+                }
 
-            // }
+            }
 
              }
 
@@ -1090,16 +1087,18 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                   $modalBody.append(totalHtml);
 
             }
-            // if(upper_see_phone>0){
-            //     if(is_duplicate_phone==0){
-            //         var initial= parseInt($('#total-selected-phone').attr('data-count'));
-            //         var new_value= initial+1 ;
-            //      //    alert(initial);
-            //         $('#total-selected-phone').attr('data-count',new_value);
-            //         $('#total-selected-phone').text('+'+new_value);
-            //     }
+            if(upper_see_phone>0){
+                console.log(upper_see_phone,is_duplicate_phone);
 
-            // }
+                if(is_duplicate_phone==0){
+                    var initial= parseInt($('#total-selected-phone').attr('data-count'));
+                    var new_value= initial+1 ;
+                 //    alert(initial);
+                    $('#total-selected-phone').attr('data-count',new_value);
+                    $('#total-selected-phone').text('+'+new_value);
+                }
+
+            }
 
              }
 
@@ -1168,26 +1167,35 @@ $(document).on('click','.remove_new_phone_added_user',function(){
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
+    const name=$(this).val();
+    const event_id = $('#event_id').val();
 
-    // If search is empty, show all contacts
-    if (searchQuery === "") {
-        $(".contact").show(); // Show all contacts
-    } else {
-        // Iterate through each invite-contact
-        $(".contactslist").each(function () {
-            var contactName = $(this)
-                .find(".contact_search")
-                .data("search")
-                .toLowerCase(); // Get the data-search attribute
+    $('#home_loader').css('display','block');
+    $.ajax({
+        url: base_url + "event_guest/right_bar_guest_list",
+        type: "POST",
+        data: JSON.stringify({ search: name,event_id:event_id}),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            console.log(response);
+            $('#guestList').html('');
+            $('#guestList').html(response.view);
+            $('#home_loader').css('loader','none');
 
-            // If the search query matches part of the contact name, show the contact
-            if (contactName.indexOf(searchQuery) !== -1) {
-                $(this).show(); // Show this contact
-            } else {
-                $(this).hide(); // Hide this contact
-            }
-        });
-    }
+
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+            $('#home_loader').css('loader','none');
+
+        }
+    });
+   
 });
 
 // $(document).on('click','.see-all-guest-right-btn',function(){

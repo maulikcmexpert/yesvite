@@ -584,7 +584,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
         eventData.temp_id != null &&
         eventData.temp_id == id
     ) {
-        dbJson = eventData.textData;
+        dbJson = json;
         eventData.slider_images = [];
         eventData.desgin_selected = "";
         console.log({ dbJson });
@@ -684,6 +684,9 @@ async function bindData(current_event_id) {
                 if (staticInfo.textElements.textElement != undefined) {
                     staticInfo.textElements =
                         staticInfo.textElements.textElement;
+                }
+                if (staticInfo.textElements[0].text == undefined) {
+                    staticInfo.textElements = jQuery.parseJSON(dbJson).textData;
                 }
                 if (staticInfo.textElements != undefined) {
                     console.log(staticInfo);
