@@ -229,12 +229,7 @@
                                                     </h3>
                                                 </div>
 
-                                                @if( $post['post_type'] =="2")
-                                                <div class="posts-card-inner-wrp">
-                                                    <h3 class="posts-card-inner-questions">
-                                                        {{ $post['poll_question'] }}</h3>
-                                                </div>
-                                                @endif
+
                                                 {{-- {{  dd($post['post_image'])}} --}}
                                                 @if( $post['post_type'] =="1")
                                                 <div class="posts-card-show-post-wrp">
@@ -273,6 +268,12 @@
                                                 </div>
                                                 @endif
                                                 @if( $post['post_type'] =="2")
+                                                <div class="posts-card-inner-wrp">
+                                                    <h3 class="posts-card-inner-questions">
+                                                        {{ $post['poll_question'] }}</h3>
+                                                </div>
+                                                <input type="hidden" name="event_post_id" id="event_post_id"
+                                                    value="{{ $post['id'] }}">
                                                 <div class="post-card-poll-wrp">
                                                     <div class="post-card-poll-inner">
                                                         <h5>{{ $post['total_poll_vote'] }} Votes
@@ -851,8 +852,7 @@
                                                     <h3 class="posts-card-inner-questions">
                                                         {{ $poll['poll_question'] }}</h3>
                                                 </div>
-                                                <input type="hidden" name="event_post_id" id="event_post_id"
-                                                    value="{{ $poll['event_post_id'] }}">
+
                                                 <div class="post-card-poll-wrp">
                                                     <div class="post-card-poll-inner">
                                                         <h5>{{ $poll['total_poll_vote'] }} Votes
