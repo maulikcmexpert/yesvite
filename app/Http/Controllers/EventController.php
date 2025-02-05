@@ -358,7 +358,7 @@ class EventController extends BaseController
                     $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
 
                     $eventDetail['greeting_card_list'] = $greeting_card_ids;
-                    if($id != $getEventData->user_id){
+                    if ($id != $getEventData->user_id) {
                         $eventDetail['thankyou_card_count'] = count($greeting_card_ids) + $thankyou_card_count;
                     }
                     session()->put('greetingCardData', $greeting_card_ids);
@@ -370,7 +370,7 @@ class EventController extends BaseController
                 if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
 
                     $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
-                    if($id != $getEventData->user_id){
+                    if ($id != $getEventData->user_id) {
                         $eventDetail['gift_registry_count'] = count($gift_registry_ids) + $gift_registry_count;
                     }
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
@@ -1993,7 +1993,7 @@ class EventController extends BaseController
 
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {
-            EventImage::where('event_id', $eventID)->where('type', 0)->delete();
+            // EventImage::where('event_id', $eventID)->where('type', 0)->delete();
         }
         $newImageName = '';
         $fileName = '';
@@ -3765,7 +3765,17 @@ class EventController extends BaseController
                 $gift_registry = $request->gift_registry_data;
             }
             if (isset($request->desgin_selected) && $request->desgin_selected != "") {
-                EventImage::where('event_id', $eventId)->where('type', 0)->delete();
+                // Handle the design image
+                $image = EventImage::where('event_id', $eventId)->where('type', 0)->first();
+                if ($image) {
+                    $image->delete();
+                    $oldDesignImagePath = public_path('storage/event_images/') . $image->image;
+                    if (file_exists($oldDesignImagePath)) {
+                        @unlink($oldDesignImagePath);
+                    }
+                }
+
+                // Save the new design image
                 EventImage::create([
                     'event_id' => $eventId,
                     'image' => $request->desgin_selected,
@@ -3774,15 +3784,26 @@ class EventController extends BaseController
             }
 
             if (isset($request->slider_images) && !empty($request->slider_images)) {
-                EventImage::where('event_id', $eventId)->where('type', 1)->delete();
-                foreach ($request->slider_images as $key => $value) {
+                // Unlink old slider images
+                $oldSliderImages = EventImage::where('event_id', $eventId)->where('type', 1)->get();
+                foreach ($oldSliderImages as $image) {
+                    $oldSliderImagePath = public_path('storage/event_images/') . $image->image;
+                    if (file_exists($oldSliderImagePath)) {
+                        @unlink($oldSliderImagePath);
+                    }
+                    $image->delete();
+                }
+
+                // Save the new slider images
+                foreach ($request->slider_images as $sliderImage) {
                     EventImage::create([
                         'event_id' => $eventId,
-                        'image' => $value['fileName'],
+                        'image' => $sliderImage['fileName'],
                         'type' => 1
                     ]);
                 }
             }
+
 
             $get_count_invited_user = 0;
             $conatctId = session('contact_ids');
