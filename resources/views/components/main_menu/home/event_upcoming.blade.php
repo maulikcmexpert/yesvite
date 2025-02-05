@@ -14,10 +14,14 @@
           $i=0;
           $colorClass = $series[$colorIndex % count($series)];
           $colorIndex++;
+          $eventRoute = ($events['event_wall'] == "0")
+                ? route('event.event_about', encrypt($events['id']))
+                : route('event.event_wall', encrypt($events['id']));
           @endphp
     <div class="home-center-upcoming-events-card mb-3"  style="cursor: pointer;">
         <div class="home-upcoming-events-card-left">
-            <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-left-profile">
+
+            <a href="{{ $eventRoute   }}" class="home-upcoming-events-card-left-profile">
                 <div class="home-upcoming-events-card-left-profile-img">
                     {{-- <img src="{{$events['host_profile']}}" class="lazy" alt=""> --}}
                     @if($events['host_profile'] != "")
@@ -55,7 +59,7 @@
                     <li><span>{{$events['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$events['event_day']}}</span> {{$events['start_time']}}</li>
                   </ul>
               </a>
-                 
+
             <div class="home-upcoming-events-card-left-foot">
                 <div class="home-upcoming-events-card-rsvp-data">
                     <h6 class="card-rsvp-done"><i class="fa-regular fa-circle-check"></i> {{$events['total_accept_event_user']}}</h6>

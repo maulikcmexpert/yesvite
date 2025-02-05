@@ -2678,7 +2678,7 @@ if ($rsvpSent != null) {
         $user_id = $request->user_id;
         $check_status = $request->status;
         $prefer_by=$request->prefer_by;
-        $is_duplicate=$request->is_duplicate;
+        // $is_duplicate=$request->is_duplicate;
         // dd($request);
         $userData = session('add_guest_user_id', []);
 
@@ -2689,7 +2689,7 @@ if ($rsvpSent != null) {
             foreach ($userData as &$user) {
                 if ($user['user_id'] == $user_id) {
                     $user['prefer_by'] = $prefer_by;
-                    $user['is_duplicate'] =$is_duplicate;
+                    // $user['is_duplicate'] =$is_duplicate;
                     $exists = true;
                     break;
                 }
@@ -2698,7 +2698,7 @@ if ($rsvpSent != null) {
                 $userData[] = [
                     'user_id' => $user_id,
                     'prefer_by' => $prefer_by,
-                    'is_duplicate'=>$is_duplicate
+                    // 'is_duplicate'=>$is_duplicate
                 ];
             }
             // dd($userData);
@@ -2717,7 +2717,7 @@ if ($rsvpSent != null) {
                 // Try fetching the user from the User table
                 $user = User::find($sesionuser['user_id']);
                 $prefer_by=$sesionuser['prefer_by'];
-                $is_duplicate=$sesionuser['is_duplicate'];
+                // $is_duplicate=$sesionuser['is_duplicate'];
     
                 if ($user) {
                     // If the user exists, add data to the $users_data array
@@ -2732,7 +2732,7 @@ if ($rsvpSent != null) {
                                     : "",
                         'prefer_by'=>$prefer_by,
                         'recent'=>1,
-                        'is_duplicate'=>$is_duplicate
+                        // 'is_duplicate'=>$is_duplicate
                     ];
                 } else {
                     $contact_sync = contact_sync::find($sesionuser['user_id']);
@@ -2749,7 +2749,7 @@ if ($rsvpSent != null) {
                             'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
                             'prefer_by'=>$prefer_by,
                             'recent'=>1,
-                            'is_duplicate'=>$is_duplicate
+                            // 'is_duplicate'=>$is_duplicate
 
                
                         ];
@@ -2758,7 +2758,6 @@ if ($rsvpSent != null) {
                 
             }
         }
-                        // dd($yesvite_all_invite);
         if($request->contact=="yesvite"){
             return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"0"]);
         }else{

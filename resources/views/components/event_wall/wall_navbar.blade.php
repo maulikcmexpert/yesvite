@@ -4,24 +4,18 @@
         <!-- Wall Tab -->
         @if (
             ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == "0") ||
-            ($eventDetails['is_co_host'] == "1" && $eventDetails['event_wall'] == "0")
+            ($eventDetails['is_co_host'] == "1" && $eventDetails['event_wall'] == " 0")
         )
-            @php
-                $showWall = false;
-                $defaultRoute = route('event.event_about', ['id' => encrypt($event)]);
-            @endphp
+            @php $showWall = false; @endphp
         @else
-            @php
-                $showWall = true;
-                $defaultRoute = route('event.event_wall', ['id' => encrypt($event)]);
-            @endphp
+            @php $showWall = true; @endphp
             <a href="{{ route('event.event_wall', ['id' => encrypt($event)]) }}"
                 class="nav-link {{ $page == 'wall' ? 'active' : '' }}"
                 id="nav-wall-tab"
                 role="tab"
                 aria-controls="nav-wall"
                 aria-selected="{{ $page == 'wall' ? 'true' : 'false' }}">
-                Wall
+                    Wall
             </a>
         @endif
 
@@ -34,14 +28,6 @@
            aria-selected="{{ ($page == 'about' || !$showWall) ? 'true' : 'false' }}">
             About
         </a>
-
-        <!-- Redirect if Wall is hidden -->
-        @if (!$showWall && $page == 'wall')
-            <script>
-                window.location.href = "{{ route('event.event_about', ['id' => encrypt($event)]) }}";
-            </script>
-        @endif
-
 
         <!-- Guests Tab -->
         @if (
