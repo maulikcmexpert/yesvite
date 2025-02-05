@@ -121,6 +121,8 @@ class EventController extends BaseController
         Session::forget('desgin');
         Session::forget('desgin_slider');
         Session::forget('custom_image');
+        Session::forget('greetingCardData');
+        Session::forget('giftRegistryData');
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
@@ -346,12 +348,16 @@ class EventController extends BaseController
                 }
                 // dd($eventDetail['events_schedule_list']);die;
                 $eventDetail['greeting_card_list'] = [];
+                Session::get('greetingCardData', []);
                 if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
 
 
                     $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
 
                     $eventDetail['greeting_card_list'] = $greeting_card_ids;
+                    $eventDetail['thankyou_card_count'] = count($greeting_card_ids) + $thankyou_card_count;
+                    session()->put('greetingCardData', $greeting_card_ids);
+                    Session::save();
                 }
 
                 $eventDetail['gift_registry_list'] = [];
@@ -2904,10 +2910,20 @@ class EventController extends BaseController
 
     public function get_thank_you_card(Request $request)
     {
-
+        $greetingCardData = session('greetingCardData');
+        $greetingCard = [];
+        
+        // Check if greetingCardData exists and is not empty
+        if (isset($greetingCardData) && $greetingCardData != null && count($greetingCardData) > 0) {
+            $greetingCard = $greetingCardData; // Assign the session data to $registry
+        }
+        Session::get('greetingCardData', []);
         $user_id =  Auth::guard('web')->user()->id;
 
-        $thankyou_card = EventGreeting::where('user_id', $user_id)->get();
+        $thankyou_card = EventGreeting::where('user_id', $user_id)->when(!empty($greetingCard), function ($query) use ($greetingCard) {
+            // Assuming $greetingCard is an array of IDs to search for in the 'id' column
+            $query->orWhereIn('id', $greetingCard); // Use $greetingCard instead of $selectedId
+        })->get();
         // $thankuCardId = $request->thankuCardId;
         // dd($thankuCardId);
         return response()->json(['view' => view('front.event.thankyou_template.add_thankyou_template', compact('thankyou_card'))->render()]);
