@@ -769,7 +769,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
@@ -780,7 +780,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 $('.add_yesvite_guest_'+id).remove();
 
@@ -888,13 +888,12 @@ $(document).ready(function () {
 
     function storeAddNewGuest(id,status,prefer_by,event_id,contact){
         $('#home_loader').css('display', 'block');
-    console.log({id,status,prefer_by,event_id,contact,is_duplicate});
     
     setTimeout(function(){
         $.ajax({
             url: base_url+"store_add_new_guest",
             type: 'GET',
-            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact,is_duplicate:is_duplicate},
+            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact},
             success: function (response) {
              console.log(response);
              if(response.is_phone=="1"&&response.view!=""){
@@ -942,9 +941,6 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             console.log("Contact already in guest list:", { id });
             is_duplicate=1;
         }
-
-        
-
 
         var  profileImage="";
         if(profile!=""){
@@ -998,17 +994,17 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 </a>`;
                   $modalBody.append(totalHtml);
             }
-            if(upper_see>0){
-                console.log(is_duplicate);
-                if(is_duplicate==0){
-                    var initial= parseInt($('#total-selected-email').attr('data-count'));
-                    var new_value= initial+1 ;
-                 //    alert(initial);
-                    $('#total-selected-email').attr('data-count',new_value);
-                    $('#total-selected-email').text('+'+new_value);
-                }
+            // if(upper_see>0){
+            //     console.log(is_duplicate);
+            //     if(is_duplicate==0){
+            //         var initial= parseInt($('#total-selected-email').attr('data-count'));
+            //         var new_value= initial+1 ;
+            //      //    alert(initial);
+            //         $('#total-selected-email').attr('data-count',new_value);
+            //         $('#total-selected-email').text('+'+new_value);
+            //     }
 
-            }
+            // }
 
              }
 
@@ -1094,16 +1090,16 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                   $modalBody.append(totalHtml);
 
             }
-            if(upper_see_phone>0){
-                if(is_duplicate_phone==0){
-                    var initial= parseInt($('#total-selected-phone').attr('data-count'));
-                    var new_value= initial+1 ;
-                 //    alert(initial);
-                    $('#total-selected-phone').attr('data-count',new_value);
-                    $('#total-selected-phone').text('+'+new_value);
-                }
+            // if(upper_see_phone>0){
+            //     if(is_duplicate_phone==0){
+            //         var initial= parseInt($('#total-selected-phone').attr('data-count'));
+            //         var new_value= initial+1 ;
+            //      //    alert(initial);
+            //         $('#total-selected-phone').attr('data-count',new_value);
+            //         $('#total-selected-phone').text('+'+new_value);
+            //     }
 
-            }
+            // }
 
              }
 

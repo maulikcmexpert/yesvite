@@ -8,6 +8,7 @@
         <h5 id="edit_thankyou_template_name">{{$thank['template_name']}}</h5>
         <p id="edit_thankyou_message">{{$thank['message']}}</p>
     </div>
+    @if(Auth::guard('web')->user()->id != $thank['user_id'])
     <div class="d-flex ms-auto">
         <a href="#" class="me-3 edit_thankyou_card" data-id="{{$thank['id']}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" >
                 <path d="M9.1665 1.66699H7.49984C3.33317 1.66699 1.6665 3.33366 1.6665 7.50033V12.5003C1.6665 16.667 3.33317 18.3337 7.49984 18.3337H12.4998C16.6665 18.3337 18.3332 16.667 18.3332 12.5003V10.8337" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -25,5 +26,6 @@
             </svg>
         </a>
     </div>
+    @endif
 </div>
 @endforeach

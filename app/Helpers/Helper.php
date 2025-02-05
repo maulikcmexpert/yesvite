@@ -69,7 +69,7 @@ function getVideoDuration($filePath)
 
 
 
-function genrate_thumbnail($fileName, $video_id) {
+function genrate_thumbnail($fileName) {
 
     $videoPath = public_path('storage/post_image/') . $fileName;
     //dd($videoPath);
