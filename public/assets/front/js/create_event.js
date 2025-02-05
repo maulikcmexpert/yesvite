@@ -4512,6 +4512,7 @@ function handleActiveClass(target) {
     if(target==".li_event_details"){
         $(".li_design").addClass("menu-success");
         $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(this).find(".side-bar-list").addClass("active");
     }
     if (target == ".li_design .edit-design-sidebar") {
         $(".edit-design-sidebar").addClass("active");
