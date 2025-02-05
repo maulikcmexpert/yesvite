@@ -1205,7 +1205,7 @@ class EventPhotoController extends Controller
                 }
             }
         }
-dd($commentInfo);
+// dd($commentInfo);
         return response()->json(['success' => true, 'total_comments' => 0, 'data' => $commentInfo, 'message' => "Post comment replied by you"]);
     }
 
