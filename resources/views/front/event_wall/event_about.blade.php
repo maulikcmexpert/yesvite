@@ -696,7 +696,7 @@ $longitude = !empty($eventDetails['longitude'])
                                         @if (!empty($eventDetails['gift_registry']) && is_array($eventDetails['gift_registry']))
                                             <div class="gift-register cmn-card">
 
-                                                <h4 class="title">Sarah’s Gift Registries</h4>
+                                                <h4 class="title">{{$eventDetails['event_name']}}'s Gift Registries</h4>
                                                 <span>Buy them the gift of their choice.</span>
 
                                                 <div class="play-store">

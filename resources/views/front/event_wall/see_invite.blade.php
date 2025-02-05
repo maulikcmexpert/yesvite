@@ -6,7 +6,6 @@
     }else{
         $listing=$yesvite_all_invite['invited_guests'] ;
     }
-    dd($listing,$yesvite_phone_data,$yesvite_users_data,$is_phone);
     @endphp
        
        
@@ -134,7 +133,7 @@
                     <div class="w-100">
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest" data-profile="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" data-search="fitsz Simon">
-                                {{$user['first_name']}}{{$user['last_name']}}</a>
+                                {{$user['first_name']}} {{$user['last_name']}}</a>
                         </div>
                         <div class="d-flex align-items-center mt-1">
                             <div class="invite-mail-data faild-content">
