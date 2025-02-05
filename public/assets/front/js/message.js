@@ -3172,6 +3172,7 @@ $(".conversationId").click(function () {
         }
     } else {
         $(".updateGroup").hide();
+        $(".new-member").addClass("d-none");
     }
 });
 
