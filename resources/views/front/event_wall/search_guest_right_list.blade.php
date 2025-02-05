@@ -79,7 +79,7 @@
                                             @endif
                                         @endif
                                         </div>
-                                        @if ($eventInfo['guest_view']['is_host'] == 1)
+                                        @if ($is_host == 1)
                                           
                                                     @if($guest['is_sync']=="1")
                                                     <button type="button" ><i
