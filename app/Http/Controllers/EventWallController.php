@@ -49,7 +49,7 @@ class EventWallController extends Controller
     {
         $this->perPage = 5;
     }
-    public function index(String $id)
+    public function index_new(String $id)
     {
         $title = 'event wall';
         $user = Auth::guard('web')->user();
@@ -148,7 +148,7 @@ class EventWallController extends Controller
         $selectedFilters = "";
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
         $eventCreator = Event::where('id', $event)->first();
-        $eventPostList = EventPost::with(['user', 'post_image'])
+        $eventPostList = EventPost::with(['user', 'post_image', 'event_post_poll.eventPollOptions'])
             ->withCount([
                 'event_post_comment' => fn($query) => $query->whereNull('parent_comment_id'),
                 'event_post_reaction'
@@ -260,7 +260,7 @@ class EventWallController extends Controller
 
             // Check if the post type is poll
             if ($value->post_type == '2') {
-                $polls = $value->event_post_poll()->with('eventPollOptions')->first();
+                $poll = $value->event_post_poll->eventPollOptions;
                 $postsNormalDetail['total_poll_vote'] = $polls->user_poll_data_count ?? 0;
                 $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
                 $postsNormalDetail['poll_duration'] = $pollDura;
@@ -534,7 +534,7 @@ class EventWallController extends Controller
             ->get();
     }
 
-    public function index_old(String $id)
+    public function index(String $id)
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();

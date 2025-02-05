@@ -1520,6 +1520,7 @@ main {
 .commented-user-profile-img{
   width: 100%;
   max-width: 40px;
+  min-width: 40px;
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
