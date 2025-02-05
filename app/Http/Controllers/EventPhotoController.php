@@ -1126,7 +1126,7 @@ class EventPhotoController extends Controller
         $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
             $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
         }])->withcount('post_comment_reaction', 'replies')->where(['id' => $mainParentId, 'event_post_id' => $request['event_post_id']])->orderBy('id', 'DESC')->first();
-        dd($replyList);
+        
         
         $commentInfo['id'] = $replyList->id;
         $commentInfo['event_post_id'] = $replyList->event_post_id;
@@ -1141,6 +1141,7 @@ class EventPhotoController extends Controller
         $commentInfo['total_replies'] = $replyList->replies_count;
         $commentInfo['posttime'] = setpostTime($replyList->created_at);
         $commentInfo['comment_replies'] = [];
+        dd($commentInfo);
 
         if (!empty($replyList->replies)) {
             foreach ($replyList->replies as $replyVal) {
