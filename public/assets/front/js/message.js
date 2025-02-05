@@ -1154,17 +1154,41 @@ $(document).on("click", ".mute-conversation", function () {
             $(".unmute-self-icn").show();
             $(".mute-self-icn").hide();
         }
-        $(this).children(".mute1-self-icn").addClass("d-none");
-        $(this).children(".unmute1-self-icn").removeClass("d-none");
+        // $(this).children(".mute-self-icn").addClass("d-none");
+        // $(this).children(".unmute-self-icn").removeClass("d-none");
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".mute-single-conversation")
+            .find(".mute1-self-icn")
+            .removeClass("d-none");
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".mute-single-conversation")
+            .find(".unmute1-self-icn")
+            .addClass("d-none");
     } else {
         $(".conversation-" + conversationId).removeClass("muted");
 
-        $(this).children(".mute1-self-icn").removeClass("d-none");
-        $(this).children(".unmute1-self-icn").addClass("d-none");
+        // $(this).children(".mute1-self-icn").removeClass("d-none");
+        // $(this).children(".unmute1-self-icn").addClass("d-none");
         if (selectedConversationId === conversationId) {
             $(".mute-self-icn").show();
             $(".unmute-self-icn").hide();
         }
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".mute-single-conversation")
+            .find(".mute1-self-icn")
+            .addClass("d-none");
+
+        $(".conversation-" + conversationId)
+            .find(".chat-data")
+            .find(".mute-single-conversation")
+            .find(".unmute1-self-icn")
+            .removeClass("d-none");
     }
     $(".conversation-" + conversationId)
         .find(".chat-data")
