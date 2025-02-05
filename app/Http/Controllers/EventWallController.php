@@ -49,7 +49,7 @@ class EventWallController extends Controller
     {
         $this->perPage = 5;
     }
-    public function index(String $id)
+    public function index_new(String $id)
     {
         $title = 'event wall';
         $user = Auth::guard('web')->user();
@@ -534,7 +534,7 @@ class EventWallController extends Controller
             ->get();
     }
 
-    public function index_old(String $id)
+    public function index(String $id)
     {
         $title = 'event wall';
         $user  = Auth::guard('web')->user();
