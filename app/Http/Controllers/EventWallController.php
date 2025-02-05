@@ -2587,6 +2587,7 @@ foreach ($polls as $poll) {
 
         // Execute the query and get the results
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
+        dd($selectedFilters);
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
