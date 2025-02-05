@@ -982,7 +982,6 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
             // alert(upper_see);
             if(upper_see==0&&is_duplicate==0){
-                console.log(is_duplicate);
 
                 const totalHtml = `
                 <a class="guest-user d-block yesvite add_guest_seeall">
@@ -995,11 +994,9 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                   $modalBody.append(totalHtml);
             }
             if(upper_see>0){
-                console.log(is_duplicate);
                 if(is_duplicate==0){
                     var initial= parseInt($('#total-selected-email').attr('data-count'));
                     var new_value= initial+1 ;
-                 //    alert(initial);
                     $('#total-selected-email').attr('data-count',new_value);
                     $('#total-selected-email').text('+'+new_value);
                 }
@@ -1091,6 +1088,8 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
 
             }
             if(upper_see_phone>0){
+                console.log(upper_see_phone,is_duplicate_phone);
+
                 if(is_duplicate_phone==0){
                     var initial= parseInt($('#total-selected-phone').attr('data-count'));
                     var new_value= initial+1 ;

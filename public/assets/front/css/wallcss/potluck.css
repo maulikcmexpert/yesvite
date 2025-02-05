@@ -567,9 +567,14 @@
     color: var(--lightgreay);
     font-size: 14px;
     line-height: 23px;
-    width: 20px;
+    width: max-content;
     margin-left: auto;
     font-family: var(--SFProDisplay-Regular);
+}
+
+
+.modal.cmn-modal span.sub-con.floatingfocus span{
+    color: var(--lightgreay) !important;
 }
 
 .modal.cmn-modal .input-form {
