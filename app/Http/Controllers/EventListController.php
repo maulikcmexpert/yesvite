@@ -2715,7 +2715,7 @@ if ($rsvpSent != null) {
                 // Try fetching the user from the User table
                 $user = User::find($sesionuser['user_id']);
                 $prefer_by=$sesionuser['prefer_by'];
-                $is_duplicate=$sesionuser['is_duplicate'];
+                // $is_duplicate=$sesionuser['is_duplicate'];
     
                 if ($user) {
                     // If the user exists, add data to the $users_data array
@@ -2730,7 +2730,7 @@ if ($rsvpSent != null) {
                                     : "",
                         'prefer_by'=>$prefer_by,
                         'recent'=>1,
-                        'is_duplicate'=>$is_duplicate
+                        // 'is_duplicate'=>$is_duplicate
                     ];
                 } else {
                     $contact_sync = contact_sync::find($sesionuser['user_id']);
@@ -2747,7 +2747,7 @@ if ($rsvpSent != null) {
                             'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
                             'prefer_by'=>$prefer_by,
                             'recent'=>1,
-                            'is_duplicate'=>$is_duplicate
+                            // 'is_duplicate'=>$is_duplicate
 
                
                         ];
