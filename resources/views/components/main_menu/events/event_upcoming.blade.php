@@ -49,8 +49,8 @@
             $colorClass = $series[$colorIndex % count($series)];
             $colorIndex++;
             $eventRoute = ($upcomingEvent['event_wall'] == "0")
-                ? route('event.event_about', encrypt($events['id']))
-                : route('event.event_wall', encrypt($events['id']));
+                ? route('event.event_about', encrypt($upcomingEvent['id']))
+                : route('event.event_wall', encrypt($upcomingEvent['id']));
             @endphp
             <div class="all-events-month-wise-support upcoming_event_{{$upcomingEvent['id']}}" data-month="{{$upcomingEvent['event_month']}}">
                 <div class="home-center-upcoming-events-card all-event-{{ $colorClass }} mb-3">
