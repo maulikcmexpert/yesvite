@@ -1105,6 +1105,7 @@
 
     .edit-image-main-wrp {
         padding: 0px;
+        padding-bottom: 30px !important;
     }
 
     .edit-image-main-wrp .design-seting {
