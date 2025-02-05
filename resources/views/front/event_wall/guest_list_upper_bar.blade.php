@@ -4,6 +4,7 @@
 @php
         $listing=array_merge($yesvite_all_invite['invited_user_id'],$yesvite_users_data);
 $counter = 0;
+dd($listing);
 @endphp
 
 @foreach($listing as $guest_user)
