@@ -1,4 +1,3 @@
-{{dd($see_all)}}
 @foreach ($guestArray as $index => $guest)
 @php
 if($see_all==0){
