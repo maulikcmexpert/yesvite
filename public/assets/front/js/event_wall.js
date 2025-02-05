@@ -1262,7 +1262,10 @@ $(document).on('click','.wall_filter_reset',function(){
      $('.select_all_post').prop('checked',true);
      $('.wall_post').prop('checked',true);
  });
-
+ $(document).on('click','.view_wall_filter',function(){
+    $('.select_all_post').prop('checked',true);
+    $('.wall_post').prop('checked',true);
+});
 
  $(document).on('click','.wall_apply_filter',function(){
     $('#home_loader').css('loader','block');
