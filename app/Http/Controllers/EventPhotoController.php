@@ -1141,7 +1141,7 @@ class EventPhotoController extends Controller
         $commentInfo['total_replies'] = $replyList->replies_count;
         $commentInfo['posttime'] = setpostTime($replyList->created_at);
         $commentInfo['comment_replies'] = [];
-        dd($replyList->replies);
+      
 
         if (!empty($replyList->replies)) {
             foreach ($replyList->replies as $replyVal) {
@@ -1205,7 +1205,7 @@ class EventPhotoController extends Controller
                 }
             }
         }
-
+dd($commentInfo);
         return response()->json(['success' => true, 'total_comments' => 0, 'data' => $commentInfo, 'message' => "Post comment replied by you"]);
     }
 
