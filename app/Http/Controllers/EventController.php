@@ -2339,7 +2339,7 @@ class EventController extends BaseController
             ->get();
         
 
-            dd($getAllContacts);
+            // dd($getAllContacts);
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
