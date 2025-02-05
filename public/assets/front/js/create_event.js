@@ -8710,10 +8710,13 @@ if (final_step == "2" && isCohost == "1") {
 
     setTimeout(function () {
         step2Open();
-        $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
-        // $(".li_guest").addClass("menu-success");
+        // $(".li_guest").find(".menu-circle-wrp").removeClass("menu-success");
+        // // $(".li_guest").addClass("menu-success");
 
-        $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
+        // $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
+        $(".li_design").addClass("menu-success");
+        $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(".li_event_detail").find(".side-bar-list").addClass("active");
         $("#loader").css("display", "none");
     }, 1000);
 }
