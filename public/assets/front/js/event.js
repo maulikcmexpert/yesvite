@@ -234,7 +234,7 @@ $(document).on('input','#search_upcoming_event',function(){
     clearTimeout(search_user_ajax_timer);
 
     search_user_ajax_timer = setTimeout(function () {
-        $('.home_loader').css('display','block');    
+        $('.loader_up').css('display','block');    
     $.ajax({
         url: `${base_url}search_upcoming_event`,
         type: 'GET',
@@ -253,15 +253,15 @@ $(document).on('input','#search_upcoming_event',function(){
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
-            $('#home_loader').hide();
+            $('#loader').hide();
         },
         error: function (xhr, status, error) {
             console.error('Error fetching events:', error);
             busy = false;
-            $('#home_loader').hide();
+            $('#loader').hide();
         },
         complete: function () {
-            $('.home_loader').css('display','none');    
+            $('.loader_up').css('display','none');    
            }
     });
 }, 750);
