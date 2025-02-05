@@ -2086,6 +2086,12 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     #selected-tags-container input{
         font-size: 16px !important;
     }
+    #msgBox .modal-footer input{
+        font-size: 16px !important;
+    }
+    #message-box{
+        font-size: 16px !important;
+    }
 }
 
 @media only screen and (max-width:420px) {
