@@ -3,8 +3,8 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
         @if (
-            ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == 1) ||  // Host and Potluck enabled
-            ($eventDetails['is_co_host'] == 1 && $eventDetails['event_wall'] == '1' ) // Not host but RSVP confirmed
+            ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == 0) ||  // Host and Potluck enabled
+            ($eventDetails['is_co_host'] == 1 && $eventDetails['event_wall'] ==  0 ) // Not host but RSVP confirmed
         )
         <a href="{{ route('event.event_wall', ['id' => encrypt($event)]) }}"
            class="nav-link {{ $page == 'wall' ? 'active' : '' }}"
