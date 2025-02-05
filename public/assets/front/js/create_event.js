@@ -8656,10 +8656,14 @@ if (final_step == "4" && isCohost == "1") {
     }, 1000);
 }
 
-function step2Open() {
+async function step2Open() {
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     console.log(design);
 
     $(".li_event_detail").find(".side-bar-list").addClass("active");
