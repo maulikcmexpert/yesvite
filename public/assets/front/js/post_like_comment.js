@@ -1172,7 +1172,7 @@ $(document).on("keyup", ".search_contact", function () {
 
     $('#home_loader').css('display','block');
     $.ajax({
-        url: base_url + "event_about/right_bar_guest_list",
+        url: base_url + "event_guest/right_bar_guest_list",
         type: "POST",
         data: JSON.stringify({ search: name,event_id:event_id}),
         contentType: "application/json",
