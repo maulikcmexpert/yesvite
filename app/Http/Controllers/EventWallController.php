@@ -2924,7 +2924,11 @@ foreach ($polls as $poll) {
                 $postsNormalDetail['post_comment'] = $postCommentList;
                 $postList[] = $postsNormalDetail;
             }
-            dd($postList);
+
+            $login_user_id  = $user->id;
+
+            // dd($postList);
+            return response()->json(['view' => view( 'front.event_wall.filter_wall_post', compact('postList','login_user_id','event'))->render()]);
         }
     }
 

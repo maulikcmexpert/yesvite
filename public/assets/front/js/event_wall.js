@@ -1281,7 +1281,8 @@ $(document).on('click','.wall_filter_reset',function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
         },
         success: function (response) {
-        
+            console.log(response.view);
+            
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!");
