@@ -332,6 +332,7 @@
 
 .post-potluck-category .list-slide .accordion-body h5{
     color: var(--white) !important;
+    font-size: 12px !important;
 }
 
 .post-potluck-category .list-slide .accordion-body .accordion-body-content h4{
