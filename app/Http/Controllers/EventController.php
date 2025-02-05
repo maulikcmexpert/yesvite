@@ -189,7 +189,7 @@ class EventController extends BaseController
                     session()->put('user_ids', $userIds);
                     Session::save();
                 }
-                dd(session('user_ids'));
+                
                 $userIdsSession = session()->get('contact_ids', []);
                 $invitedContactUsers = EventInvitedUser::with('user')
                     ->where('event_id', $request->id)
@@ -2175,6 +2175,14 @@ class EventController extends BaseController
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
+        $userIds = Session::get('user_ids');
+        $selectedIds = [];
+
+        foreach ($userIds as $user) {
+
+            $selectedIds = $user->id; 
+
+        }
        
         $type = $request->type;
         $emails = [];
