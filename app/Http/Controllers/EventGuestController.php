@@ -1002,11 +1002,12 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
             $user_id = $sesionuser['user_id'];
             $prefer_by = $sesionuser['prefer_by'];
             // $user = User::find($sesionuser['user_id']);
-            $user = User::where('id', $sesionuser['user_id'])->where('app_user',"1")->first();
       
             if (in_array($user_id, $processed_user_ids)) {
                 continue; // Skip to the next iteration
             }
+            $user = User::where( 'id', $sesionuser['user_id'])->where('app_user',"1")->first();
+
             if ($user && $user->app_user == "1" && $is_phone == 0) {
                 $yesvite_users_data[] = [
                     'user_id' => $user->id,
