@@ -21,7 +21,7 @@
 
         <!-- About Tab -->
         <a href="{{ route('event.event_about', ['id' => encrypt($event)]) }}"
-           class="nav-link {{ $page == 'about' ) ? 'active' : '' }}"
+           class="nav-link {{ $page == 'about'  ? 'active' : '' }}"
            id="nav-about-tab"
            role="tab"
            aria-controls="nav-about"
