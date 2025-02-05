@@ -2092,6 +2092,9 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     #message-box{
         font-size: 16px !important;
     }
+    input, textarea, select{
+        font-size: 16px !important;
+    }
 }
 
 @media only screen and (max-width:420px) {
