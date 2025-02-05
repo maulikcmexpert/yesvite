@@ -358,7 +358,9 @@ class EventController extends BaseController
                     $greeting_card_ids = array_map('intval', explode(',', $getEventData->greeting_card_id));
 
                     $eventDetail['greeting_card_list'] = $greeting_card_ids;
-                    $eventDetail['thankyou_card_count'] = count($greeting_card_ids) + $thankyou_card_count;
+                    if($id != $getEventData->user_id){
+                        $eventDetail['thankyou_card_count'] = count($greeting_card_ids) + $thankyou_card_count;
+                    }
                     session()->put('greetingCardData', $greeting_card_ids);
                     Session::save();
                 }
@@ -368,7 +370,9 @@ class EventController extends BaseController
                 if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
 
                     $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
-                    $eventDetail['gift_registry_count'] = count($gift_registry_ids) + $gift_registry_count;
+                    if($id != $getEventData->user_id){
+                        $eventDetail['gift_registry_count'] = count($gift_registry_ids) + $gift_registry_count;
+                    }
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
                     session()->put('giftRegistryData', $gift_registry_ids);
                     Session::save();
