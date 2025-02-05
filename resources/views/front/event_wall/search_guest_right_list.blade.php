@@ -1,5 +1,4 @@
 @foreach ($guestArray as $index => $guest)
-@if (!empty($guest))
                         @if ($index == 7)
                         @break
                         @endif
