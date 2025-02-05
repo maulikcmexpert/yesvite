@@ -65,7 +65,6 @@ class EventGuestController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
-
             $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
             $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
             $rsvp_status = "";
@@ -90,8 +89,6 @@ class EventGuestController extends Controller
             $eventDetails['host_id'] = $eventDetail->user_id;
             $eventDetails['event_date'] = $eventDetail->start_date;
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
-            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
-            $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 
             //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
@@ -778,8 +775,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
     public function updateRsvp(Request $request, $id)
     {
-        $user  = Auth::guard('web')->user()->id;
-      
+        // Validate the data
         $validated = $request->validate([
             'adults' => 'required|integer|min:0',
             'kids' => 'required|integer|min:0',
@@ -809,6 +805,10 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 'rsvp_status' => $guest->rsvp_status,
                 'guest' =>   $guest
             ]);
+
+            // Redirect back or return a success message
+
+
 
         }
 
@@ -980,7 +980,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
                         'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
                         'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
-                        'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL && preg_match('/\.(jpg|jpeg|png)$/i', basename($contact_sync->photo)))
+                        'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL )
                                     ? asset('storage/profile/' . $contact_sync->photo)
                                     : "",
                         'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
