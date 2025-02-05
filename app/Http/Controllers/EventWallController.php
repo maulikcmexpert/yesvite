@@ -2188,7 +2188,7 @@ class EventWallController extends Controller
 
         $parentCommentId =  $request['parent_comment_id'];
         $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId) ?? "";
-        dd($mainParentId);
+       
 
         $event_post_comment = new EventPostComment;
         $event_post_comment->event_id = $request['event_id'];
