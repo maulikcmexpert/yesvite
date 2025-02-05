@@ -1,12 +1,12 @@
 @foreach ($guestArray as $index => $guest)
 
-                        @php
-                        if($see_all!="1"){
+                        <!-- @php
+                        if($see_all=="0"){
                             $index == 7;
                             break;
                         }
                         @endphp
-                       
+                        -->
                             @php
                                 //$user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($guest['first_name'][0]) ? strtoupper($guest['first_name'][0]) : '';
