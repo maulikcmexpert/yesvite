@@ -135,7 +135,7 @@ class EventController extends BaseController
         $eventDetail['inviteCount'] = 0;
         $eventDetail['isCohost'] = "1";
         $eventDetail['isCopy'] = "";
-
+        $eventDetail['alreadyCount']=0;
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
@@ -229,6 +229,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
+            $eventDetail['alreadyCount'] = count(session('contact_ids'))+count(session('user_ids'));
             // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
