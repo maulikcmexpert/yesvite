@@ -1182,9 +1182,11 @@
                                                                         <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                                                         @endif
                                                                   </button>
-                                                                  <p id="commentTotalLike_{{ $reply['id'] }}">
-                                                                    {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
-                                                                </p>
+                                                                  @isset($reply)
+                                                                    <p id="commentTotalLike_{{ $reply['id'] }}">
+                                                                        {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
+                                                                    </p>
+                                                                @endisset
 
                                                                     </div>
                                                                     <button
