@@ -2286,7 +2286,6 @@ class EventController extends BaseController
         //         $query->orWhereIn('id', $selectedId);
         //     })
         //     ->groupBy('id')
-        //     ->get();
         $yesvite_users = User::select(
             'id',
             'firstname',
@@ -2302,32 +2301,25 @@ class EventController extends BaseController
             'visible',
             'message_privacy'
         )
-        ->where('id', '!=', $id)  // Exclude current user
-        ->where('app_user', 1)    // Only app users
+        ->where('id', '!=', $id) // Exclude current user
+        ->where('app_user', 1) // Only app users
         ->whereIn('email', $emails) // Email filter
-        ->orderBy('firstname')   // Order by firstname
-
-        // Handle limit and offset
         ->when(!empty($request->limit), function ($query) use ($request) {
             $query->limit($request->limit)
                   ->offset($request->offset);
         })
-
-        // Handle $selectedId users
         ->when(!empty($selectedId), function ($query) use ($selectedId) {
             $query->whereIn('id', $selectedId);  // Include only the selected IDs
         })
-
-        // Search logic for firstname and lastname
         ->when(!empty($request->search_user), function ($query) use ($search_user) {
             $query->where(function ($q) use ($search_user) {
                 $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                   ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
             });
         })
-        
-        // Fetch the results
+        ->orderBy('firstname')
         ->get();
+
 
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
