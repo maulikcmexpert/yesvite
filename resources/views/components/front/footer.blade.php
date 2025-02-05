@@ -191,7 +191,7 @@
 
 <script src="{{ asset('assets/front/js/wow.min.js') }}"></script>
 
-<script src="{{ asset('assets/front/js/design.js') }}"></script>
+{{-- <script src="{{ asset('assets/front/js/design.js') }}"></script> --}}
 
 <script src="{{ asset('assets/front/js/map.js') }}"></script>
 {{-- <script src="{{ asset('assets/front/js/map.js') }}"></script> --}}
