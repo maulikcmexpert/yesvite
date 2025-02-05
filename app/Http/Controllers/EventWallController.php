@@ -252,7 +252,7 @@ class EventWallController extends Controller
             });
         }
 
-        dd(1);
+
 
         // dd($eventPostList);
         // $totalPostWalls = $eventPostList->count();
