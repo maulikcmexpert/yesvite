@@ -632,9 +632,14 @@ $(document).on("click", ".edit_design_tem", function (e) {
         error: function (xhr, status, error) {},
     });
 });
-
+fontloadedEnsure = false;
 async function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");
+    if (!fontloadedEnsure) {
+        fontloadedEnsure = true;
+        await ensureFontsLoaded();
+    }
+
     function loadTextDataFromDatabase() {
         if (image) {
             console.log(image);
@@ -2243,6 +2248,26 @@ async function bindData(current_event_id) {
         });
     });
 
+    async function ensureFontsLoaded() {
+        let fontsToLoad = []; // Array to store font observers
+        document.querySelectorAll(".font-input").forEach(function (input) {
+            const font = input.getAttribute("data-font");
+            let fontObserver = new FontFaceObserver(font);
+            fontsToLoad.push(fontObserver.load());
+        });
+
+        const fontLoadPromises = fontsToLoad.map((font) => {
+            return new FontFaceObserver(font).load();
+        });
+
+        try {
+            await Promise.all(fontLoadPromises);
+            console.log("All fonts loaded successfully!");
+        } catch (e) {
+            console.error("Font loading error: ", e);
+        }
+    }
+
     // Function to apply the font (since fonts are already preloaded)
     function applyFont(font) {
         addToUndoStack(canvas);
@@ -2264,6 +2289,7 @@ async function bindData(current_event_id) {
     //         loadAndUse(font); // Call loadAndUse function with the selected font
     //     });
     // });
+
     canvas.on("object:scaling", function (e) {
         var activeObject = e.target;
 
@@ -2302,6 +2328,7 @@ async function bindData(current_event_id) {
     });
     //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
     // });
+
     function loadAndUse(font) {
         var myfont = new FontFaceObserver(font);
         addToUndoStack(canvas);
