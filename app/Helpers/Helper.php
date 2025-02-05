@@ -68,6 +68,32 @@ function getVideoDuration($filePath)
 
 
 
+function genrate_thumbnail($fileName, $video_id) {
+
+    $videoPath = public_path('storage/post_image/') . $fileName;
+    //dd($videoPath);
+    $ffmpeg = FFMpeg\FFMpeg::create([
+        'ffmpeg.binaries' => exec('which ffmpeg'),
+       'ffprobe.binaries' => exec('which ffprobe'),
+    ]);
+    $video = $ffmpeg->open($videoPath);
+
+    $k = 1;
+    for ($i = 0; $i <= 4; $i++) {
+        $imgName = rand(10, 99) . '_' . rand(10000, 99999) . '.jpg';
+        $k++;
+        $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
+        $video
+            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(7 * $k))
+            ->save($thumbnailPath);
+
+        if (file_exists($thumbnailPath)) {
+            return $imgName;
+        }
+    }
+
+    return null; // Return null if no thumbnail generated
+}
 
 function checkIsimageOrVideo($postImage)
 {
@@ -2138,7 +2164,7 @@ function set_android_iap($appid, $productID, $purchaseToken, $type)
     $result = json_decode($result, true);
 
     // if (!$result || !$result["access_token"]) {
-    //     //error  
+    //     //error
     //     // return;
     // }
     if (isset($result['access_token']) && $result['access_token'] != null) {
@@ -2188,7 +2214,7 @@ function set_apple_iap($receipt)
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
-    // Set HTTP Header for POST request 
+    // Set HTTP Header for POST request
     curl_setopt(
         $ch,
         CURLOPT_HTTPHEADER,
