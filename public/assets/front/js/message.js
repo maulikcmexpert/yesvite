@@ -1251,6 +1251,7 @@ $(document).on("click", ".mute-single-conversation", function (e) {
             $(".unmute-self-icn").addClass("d-none");
         }
     }
+    isToMove = false;
 });
 
 $(document).on("click", ".block-conversation", async function () {
