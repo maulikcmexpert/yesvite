@@ -948,7 +948,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
     public function see_all_invite_yesvite(Request $request){
 
-        $yesvite_all_invite=getInvitedUsersListNew($request->event_id);
+        $yesvite_all_invite=getInvitedUsersList($request->event_id);
         $new_added_user=session()->get('add_guest_user_id');
         $yesvite_users_data = [];
         $yesvite_phone_data = [];
