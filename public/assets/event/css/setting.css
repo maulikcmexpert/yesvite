@@ -1120,6 +1120,10 @@
     margin-top: 0px !important;
 }
 
+.potluckCategorylist:has(.open-potluck-list) .listing-arrow svg{
+    transform: rotate(180deg);
+}
+
 /* ============ responsive ============ */
 
 @media only screen and (max-width: 1399px) {
