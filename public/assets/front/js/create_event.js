@@ -1319,6 +1319,7 @@ $(function () {
         event_date = moment().format("MM/DD/YYYY");
     }
     var oldDate = $(ed).attr("data-isDate");
+    console.log(moment(event_date, "MM/DD/YYYY"));
     $("#event-date").daterangepicker(
         {
             autoUpdateInput: false,
@@ -1326,8 +1327,8 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            //startDate: moment(event_date, "MM/DD/YYYY"),
-            setDate: event_date,
+            startDate: moment(event_date, "MM/DD/YYYY"),
+            endDate: moment(event_date, "MM/DD/YYYY"),
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
