@@ -12,6 +12,8 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 eventData.isCopy = isCopy;
+var Alreadyguest=$(".users-data.invited_users").length;
+eventData.Alreadyguest=0;
 var swiper;
 var isPhonecontact = 0;
 var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
@@ -2025,7 +2027,7 @@ function add_user_counter() {
 }
 
 function guest_counter(total_guest, max_guest) {
-    var Alreadyguest = $(".users-data.invited_users").length;
+    Alreadyguest = $(".users-data.invited_users").length;
     var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
@@ -3614,7 +3616,7 @@ $(document).on("click", "#next_setting", function () {
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
     console.log(dbJson);
-    $('.li_event_detail').find('.side-bar-list').removeClass('active')
+    $(".li_event_detail").find(".side-bar-list").removeClass("active");
     loadAgain();
     // $(".step_1").hide();
     // handleActiveClass(".li_design");
@@ -9282,7 +9284,7 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 });
 
 function getcoins() {
-    var Alreadyguest = $(".users-data.invited_users").length;
+     Alreadyguest = $(".users-data.invited_users").length;
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;

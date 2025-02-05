@@ -791,6 +791,14 @@ $(document).ready(function () {
                 `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
             );
             if( $(this).is(":checked")){
+                const exists = guestList.some((contact) => contact.id === id);
+                var is_duplicate=0;
+                if (exists) {
+                    is_duplicate=1;
+                }else{
+                    is_duplicate=0;
+                }
+                console.log(is_duplicate);
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
@@ -870,11 +878,21 @@ $(document).ready(function () {
 
 
         if( $(this).is(":checked")){
+            const exists = guestList.some((contact) => contact.id === id);
+            var is_duplicate=0;
+            if (exists) {
+                is_duplicate=1;
+            }else{
+                is_duplicate=0;
+            }
+            console.log(is_duplicate);
+
             $('.add_yesvite_guest_'+id).remove();
             $(".phoneContact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
+         
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
             $('#home_loader').css('display','none');
