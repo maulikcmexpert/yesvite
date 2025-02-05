@@ -20,8 +20,9 @@ class CSVImportService
         $user = Auth::user();
         $parent_userid = $user->id;
 
-        dd($header);
+        // dd($file);
         while (($row = fgetcsv($file)) !== false) {
+
             $data = array_combine($header, $row);
             $data['isAppUser'] =  '0';
             $data['visible'] =  '0';
