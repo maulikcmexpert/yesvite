@@ -9325,7 +9325,7 @@ $(document).on(
     }
 );
 
-if (isDraftEvent == "0" && eventId != "" && final_step!=1) {
+if (isDraftEvent == "0" && eventId != "") {
     $(".li_design").addClass("menu-success");
     $(".li_event_detail").addClass("menu-success");
     $(".li_guest").addClass("menu-success");
@@ -9353,4 +9353,8 @@ function colorchange() {
         $("#guestBtn").addClass("guestBtn");
     }
 }
-    
+    if (final_step == "1" && isCohost == "1") {
+        $(".li_event_detail").find('.side-bar-list').removeClass('menu-success');
+        $(".li_guest").find('.side-bar-list').removeClass('menu-success');
+        $(".li_setting").find('.side-bar-list').removeClass('menu-success');
+    }
