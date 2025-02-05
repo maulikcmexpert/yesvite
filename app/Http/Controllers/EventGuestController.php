@@ -808,6 +808,8 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
             // Redirect back or return a success message
 
+
+
         }
 
         // Handle the case where guest is not found

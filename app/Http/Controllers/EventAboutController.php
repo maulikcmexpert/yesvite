@@ -355,19 +355,6 @@ class EventAboutController extends Controller
     {
         // dd($request);
         $user  = Auth::guard('web')->user()->id;
-        // dd($user);
-        $input = $request->all();
-
-        // $request->validate([
-        //     'event_id' => 'required',
-        //     'user_id' => 'required',
-        //     'rsvp_status' => 'required|in:0,1',
-        //     'adults' => 'nullable|integer|min:0',
-        //     'kids' => 'nullable|integer|min:0',
-        //     'message_to_host' => 'nullable|string|max:255',
-        //     'message_by_video' => 'nullable|file|mimes:mp4,mov,avi|max:20480',
-        // ]);
-
 
 
 
