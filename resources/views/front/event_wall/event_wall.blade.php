@@ -1,4 +1,4 @@
-
+{{dd($PostList)}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -644,7 +644,7 @@
 
                                         </div>
                                     @endforeach
-                          
+
                                     {{-- {{dd($pollsData)}} --}}
                                     @foreach ($pollsData as $poll)
                                         <div class="event-posts-main-wrp common-div-wrp hidden_post_poll"
