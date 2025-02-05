@@ -1007,6 +1007,8 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             console.log("Contact already in guest list:", { id });
             is_duplicate_phone=1;
         }
+
+        console.log(is_duplicate_phone);
         var  profileImage="";
         // if(profile!=""){
         //     profileImage = `<img src="${profile}" alt="Profile Image">` ;

@@ -1928,8 +1928,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         var max_guest = $("#coins").val();
         console.log({ max_guest });
         if (max_guest <= 0) {
+            $("#loader").css("display", "none");
             $(this).prop("checked", false);
-            $("#buycreditsmodal").model("show");
+            $("#buycreditsmodal").modal("show");
             return;
         }
         $.ajax({
@@ -2118,6 +2119,14 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
+        var max_guest = $("#coins").val();
+        console.log({ max_guest });
+        if (max_guest <= 0) {
+            $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        }
         $("#loader").css("display", "block");
         $.ajax({
             url: base_url + "event/store_user_id",
@@ -2147,7 +2156,6 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
 
-                var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
                 // if(currentInviteCount >= 15){
                 //     $('.user_choice').prop('disabled',true);
@@ -3606,6 +3614,7 @@ $(document).on("click", "#next_setting", function () {
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
     console.log(dbJson);
+    $('.li_event_detail').find('.side-bar-list').removeClass('active')
     loadAgain();
     // $(".step_1").hide();
     // handleActiveClass(".li_design");
@@ -3663,6 +3672,7 @@ $(document).on("click", "#close_createEvent", function () {
             savePage1Data(1);
         }
         if (final_step == 3) {
+            savePage1Data(1);
             var savePage3Result = savePage3Data(1);
             console.log(savePage3Result);
 

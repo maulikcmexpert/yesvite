@@ -1508,7 +1508,9 @@
 
     .new_event_detail_form .input-group.time .input-group-text {
 
-        right: 3px;
+        /* right: 0px; */
+        padding: 0px !important;
+        padding-right: 5px !important;
     }
 
     .timepicker {

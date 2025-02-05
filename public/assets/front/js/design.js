@@ -175,7 +175,7 @@ $(document).on("click", ".design-cards", function () {
         let textElement = new fabric.Textbox(element.text, {
             left: element.left,
             top: element.top,
-            width: textWidth1,
+            width: textWidth1 + 10,
             fontSize: element.fontSize,
             fill: element.fill,
             fontFamily: element.fontFamily,
@@ -706,7 +706,7 @@ async function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(element.left),
                             top: parseFloat(element.top),
-                            width: textWidth, // Default width if not provided
+                            width: textWidth + 10, // Default width if not provided
                             fontSize: parseFloat(element.fontSize),
                             fill: element.fill,
                             fontFamily: element.fontFamily,
@@ -2090,7 +2090,7 @@ async function bindData(current_event_id) {
             top: originalTextbox.top + 30, // Offset position
             fontSize: originalTextbox.fontSize,
             fill: originalTextbox.fill,
-            width: originalTextbox.width,
+            width: originalTextbox.width + 10,
             height: originalTextbox.height,
             fontFamily: originalTextbox.fontFamily,
             originX: originalTextbox.originX,

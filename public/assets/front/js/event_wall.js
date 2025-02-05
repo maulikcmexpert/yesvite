@@ -1260,6 +1260,7 @@ $(document).on('click','.wall_filter_reset',function(){
 
 
  $(document).on('click','.wall_apply_filter',function(){
+    $('#home_loader').css('loader','block');
     let selectedPostTypes = [];
     let event_id=$(this).data('event_id');
     $(".wall_post:checked").each(function() {
@@ -1284,11 +1285,16 @@ $(document).on('click','.wall_filter_reset',function(){
             console.log(response.view);
             // $('.wall-post-content').html();
             $('.wall-post-content').html(response.view);
-            
+            $('#home_loader').css('loader','none');
+
+            $('#main-center-modal-filter').modal('hide');
+
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
+            $('#home_loader').css('loader','none');
+
         }
     });
 });
