@@ -999,10 +999,11 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         $processed_user_ids = []; // Keep track of processed user IDs
 
         foreach ($new_added_user as $sesionuser) {
+            $user_id = $sesionuser['user_id'];
+            $prefer_by = $sesionuser['prefer_by'];
             // $user = User::find($sesionuser['user_id']);
             $user = User::where('id', $sesionuser['user_id'])->where('app_user',"1")->first();
-
-            $prefer_by = $sesionuser['prefer_by'];
+      
             if (in_array($user_id, $processed_user_ids)) {
                 continue; // Skip to the next iteration
             }
