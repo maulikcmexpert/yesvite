@@ -2328,43 +2328,27 @@ class EventController extends BaseController
         }
 
 
-        DB::enableQueryLog();
-        $getAllContacts = contact_sync::where('contact_id', $id)
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
-            ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
-                if (!empty($selectedContactId)) {
-                    $query->orWhereIn('id', $selectedContactId);
-                }
-            })
+       // DB::enableQueryLog();
+        $getAllContacts = contact_sync::where(function ($query) use ($id, $selectedContactId) {
+            $query->where('contact_id', $id)  // contact_id = 118
+                  ->orWhereIn('id', $selectedContactId);  // OR id IN (33435)
+        })
+        ->when(!empty($request->search_user), function ($query) use ($search_user) {
+            // Apply the LIKE condition on firstName and lastName
+            $query->where(function ($q) use ($search_user) {
+                $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+                  ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+            });
+        })
+        ->when(!empty($request->limit), function ($query) use ($request) {
+            // Apply limit and offset for pagination
+            $query->limit($request->limit)
+                  ->offset($request->offset);
+        })
+        ->orderBy('firstName')  // Sorting by firstName
+        ->get();
 
-
-            ->when(!empty($request->limit), function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-            ->when(!empty($request->search_user), function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
-                    $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
-                });
-            })
-            // ->when($request->search_user != ''&& $request->search_user!=null, function ($query) use ($search_user) {
-            //     $query->where(function ($q) use ($search_user) {
-            //         $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-            //             ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
-            //     });
-            // })
-
-            ->orderBy('firstname')
-
-            ->get();
-
-            dd(DB::getQueryLog());
+       //     dd(DB::getQueryLog());
         // dd($getAllContacts);
 
         $yesvite_user = [];
