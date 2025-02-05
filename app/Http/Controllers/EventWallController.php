@@ -2963,6 +2963,9 @@ class EventWallController extends Controller
                         case 'comments':
                             $query->orWhere('post_type', '0');
                             break;
+                        case 'rsvp':
+                                $query->orWhere('post_type', '4');
+                                break;
                             // Add more cases for other filters if needed
                     }
                 }

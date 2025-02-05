@@ -425,7 +425,7 @@ class EventAboutController extends Controller
             $newPost->post_message = json_encode($postMessage);
             $newPost->post_privacy = "1";
             $newPost->post_type = "4";
-            $newPost->commenting_on_off = "0";
+            $newPost->commenting_on_off = "1";
             $newPost->is_in_photo_moudle = "0";
 
             if (!$newPost->save()) {

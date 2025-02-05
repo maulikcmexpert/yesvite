@@ -999,7 +999,7 @@ $(document).ready(function () {
             pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
-        else if (photoForm.is(':visible') && photoForm.length > 0 &&  photoForm !== '') {
+        else if (photoForm.is(':visible') && photoForm.length > 0 ) {
             // Check if there's a valid photo (adjust this to your actual field for photo upload)
             var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
@@ -1019,7 +1019,7 @@ $(document).ready(function () {
         // If neither form exists, check for a plain text post
         else if (textForm.length > 0 && postContent !== '') {
             if (postContent === '') {
-                alert('Please enter some content for the photo post.');
+                toastr.error('Please enter some content for the photo post.');
                 return;
             }
 
@@ -1029,7 +1029,7 @@ $(document).ready(function () {
         }
         // If no valid content is provided, show an alert
         else {
-            alert('Please fill all required fields before submitting.');
+            toastr.error('Please fill all required fields before submitting.');
         }
     });
 
@@ -1288,9 +1288,9 @@ $(document).on('click','.wall_filter_reset',function(){
         },
         success: function (response) {
             console.log(response.view);
-            // $('.wall-post-content').html();
+            $('.wall-post-content').html();
             $('.wall-post-content').html(response.view);
-            $('#home_loader').css('loader','none');
+            $('#home_loader').css('loader','block');
 
             $('#main-center-modal-filter').modal('hide');
 

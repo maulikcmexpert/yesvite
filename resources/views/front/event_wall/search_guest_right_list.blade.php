@@ -1,4 +1,7 @@
 @foreach ($guestArray as $index => $guest)
+                        @if ($index == 7)
+                        @break
+                        @endif
                             @php
                                 //$user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($guest['first_name'][0]) ? strtoupper($guest['first_name'][0]) : '';
@@ -79,7 +82,7 @@
                                             @endif
                                         @endif
                                         </div>
-                                        @if ($eventInfo['guest_view']['is_host'] == 1)
+                                        @if ($is_host == 1)
                                           
                                                     @if($guest['is_sync']=="1")
                                                     <button type="button" ><i

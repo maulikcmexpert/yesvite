@@ -1051,14 +1051,22 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
     public function right_bar_guest_list(Request $request)
     {
+        $user  = Auth::guard('web')->user();
+
         $search=$request->serach;
         $event_id=$request->event_id;
         $eventId=$request->event_id;
+        $event_data=Event::where('id',$event_id)->first();
+        $is_host=0;
+
+        if($event_data->user_id==$user->id){
+            $is_host=1;
+        }
         $guest=getInvitedUsersListNew($event_id,$request->input('search'));
 
         $guestArray=$guest['all_invited_users'];
 
-        return response()->json(['view' => view( 'front.event_wall.search_guest_right_list', compact('guestArray','eventId'))->render()]);
+        return response()->json(['view' => view( 'front.event_wall.search_guest_right_list', compact('guestArray','eventId','is_host'))->render()]);
 
         // dd($yesvite['all_invited_users']);
     }
