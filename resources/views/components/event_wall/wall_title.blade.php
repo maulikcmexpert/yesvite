@@ -1,6 +1,6 @@
 <div class="event-center-title">
     <h2>{{$eventDetails['event_name']}}</h2>
-    <button class="" type="button" data-bs-toggle="modal" data-bs-target="#main-center-modal-filter">
+    <button class="view_wall_filter" type="button" data-bs-toggle="modal" data-bs-target="#main-center-modal-filter">
       <svg
         viewBox="0 0 20 21"
         fill="none"
