@@ -2014,7 +2014,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 $("#loader").css("display", "none");
                 // }
             },
-            error: function (xhr, status, error) {},
+            error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
+            },
         });
     } else {
         if (is_contact != "1") {
@@ -3735,6 +3737,7 @@ $(document).on("click", "#close_createEvent", function () {
                 }
             },
             error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
                 console.log("AJAX error: " + error);
             },
         });
@@ -3778,6 +3781,7 @@ $(document).on("click", "#close_createEvent", function () {
                 }
             },
             error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
                 console.log("AJAX error: " + error);
             },
         });
@@ -4800,7 +4804,7 @@ async function saveDesignData(direct = false) {
 
         console.log("Uploading image...");
         const imageResponse = await uploadImage(blob);
-
+        $("#loader").css("display", "none");
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
         }
@@ -6467,6 +6471,7 @@ $(document).on("click", "#final_create_event", function (e) {
             });
         },
         error: function (xhr, status, error) {
+            $("#loader").css("display", "none");
             console.log("AJAX error: " + error);
         },
     });
@@ -6607,6 +6612,7 @@ function save_image_design(downloadImage, textData) {
                     }
                 },
                 error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
                     console.error(
                         "Failed to upload and save the image:",
                         error
