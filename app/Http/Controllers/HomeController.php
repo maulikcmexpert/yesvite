@@ -392,12 +392,12 @@ class HomeController extends BaseController
         //     'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
         // ]);
 
-        if ($validator->fails()) {
-            // Validation failed
-            $errors = $validator->errors()->first();
-            // Handle the validation errors, log them, or return a response
-            return  redirect()->route('profile')->with('error', $errors);
-        }
+        // if ($validator->fails()) {
+        //     // Validation failed
+        //     $errors = $validator->errors()->first();
+        //     // Handle the validation errors, log them, or return a response
+        //     return  redirect()->route('profile')->with('error', $errors);
+        // }
 
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
