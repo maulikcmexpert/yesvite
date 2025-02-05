@@ -961,7 +961,12 @@ $(document).ready(function () {
             $(this).find(".option-number").text(index + 3);
         });
     }
-
+    $("#postContent").keypress(function (event) {
+        if (event.which === 13 && !event.shiftKey) { // Enter key without Shift
+            event.preventDefault(); // Prevents new line in textarea
+            $("#textform").submit(); // Submit the form
+        }
+    });
 
     // Submit form on button click
     $(document).on('click', '.create_post_btn', function () {
@@ -1231,7 +1236,7 @@ $(".modal").on("shown.bs.modal", function () {
 
 $(document).ready(function () {
     $(".image-zoom-icon").click(function () {
-        var imgSrc = $(this).data("img"); 
+        var imgSrc = $(this).data("img");
 
         $.magnificPopup.open({
             items: {
@@ -1278,8 +1283,8 @@ $(document).on('click','.wall_filter_reset',function(){
         data: JSON.stringify({ event_id: event_id, filters: selectedPostTypes }),
         contentType: "application/json",
         headers: {
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', 
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (response) {
             console.log(response.view);

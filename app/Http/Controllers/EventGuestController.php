@@ -231,7 +231,7 @@ class EventGuestController extends Controller
                     //     ->where(['event_id'=>$eventDetail->id,'is_co_host'=>'0'])
                     //     ->get();
 
-                    $guestData=getInvitedUsersList($eventDetail->id);
+                    $guestData=getInvitedUsersListNew($eventDetail->id);
 
 
 
