@@ -1097,8 +1097,8 @@ class EventPhotoController extends Controller
 
 
         $parentCommentId =  $request['parent_comment_id'];
+        dd($parentCommentId);
         $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId);
-        dd($mainParentId);
         $event_post_comment = new EventPostComment;
         $event_post_comment->event_id = $request['event_id'];
         $event_post_comment->event_post_id = $request['event_post_id'];
