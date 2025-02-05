@@ -1025,7 +1025,6 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 if(!empty($find)){
                             continue;
                 }else{
-  
                 $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
         
                 if ($contact_sync) {
