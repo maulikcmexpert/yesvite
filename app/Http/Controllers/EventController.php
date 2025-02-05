@@ -2246,7 +2246,7 @@ class EventController extends BaseController
         //     ->get();
 
         // dd($yesvite_users);
-
+        DB::enableQueryLog();
         $yesvite_users = User::select(
             'id',
             'firstname',
@@ -2287,6 +2287,8 @@ class EventController extends BaseController
 
             ->groupBy('id')
             ->get();
+
+        dd(DB::getQueryLog());
 
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
