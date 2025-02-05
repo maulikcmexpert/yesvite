@@ -1,7 +1,7 @@
 {{dd($see_all)}}
 @foreach ($guestArray as $index => $guest)
 @php
-if($see_all=="0"){
+if($see_all==0){
     if($index == 7){
         break;
     }
