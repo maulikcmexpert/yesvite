@@ -37,7 +37,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="event-detail-logo">
-                <a class="navbar-brand" href="{{ Auth::guard('web')->check() ? route('profile') : route('front.home') }}">
+                <a class="navbar-brand" href="{{ Auth::guard('web')->check() ? route('front.home') : route('front.home') }}">
                     {{-- <svg width="35" height="36" viewBox="0 0 35 36" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"

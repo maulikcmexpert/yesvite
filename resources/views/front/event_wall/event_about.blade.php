@@ -502,7 +502,7 @@
                                             <div class="location-wrp cmn-card">
                                                 <h4 class="title">Location</h4>
                                                 <h5>{{ $eventDetails['event_location_name'] ?: 'Tom’s House' }}</h5>
-                                                <p>{{ $eventDetails['address_1'] }}, {{ $eventDetails['city'] }},
+                                                <p>{{ $eventDetails['address_1'] }} {{ $eventDetails['city'] }}
                                                     {{ $eventDetails['state'] }} {{ $eventDetails['zip_code'] }}</p>
                                                 <div id="map">
 

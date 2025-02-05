@@ -743,7 +743,7 @@ $(document).ready(function () {
         $(document).on("change", ".contact-checkbox", function () {
             // console.log($('#home_loader').length);
             // setTimeout(() => {
-            //     $('#home_loader').css('display', 'block');
+                // $('#home_loader').css('display', 'block');
             // }, 500);
             
             
@@ -771,8 +771,6 @@ $(document).ready(function () {
                 }
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-                $('#home_loader').css('display','none');
-
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 const exists = guestList.some((contact) => contact.id === id);
@@ -792,6 +790,7 @@ $(document).ready(function () {
         });
 
         $(document).on("change", ".phone-checkbox", function () {
+            // $('#home_loader').css('display', 'block');
 
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
@@ -837,47 +836,7 @@ $(document).ready(function () {
 
         });
 
-        function storeAddNewGuest(id,status,prefer_by,event_id,contact,is_duplicate){
-            $('#home_loader').css('display', 'block');
-        console.log({id,status,prefer_by,event_id,contact,is_duplicate});
-        
-            $.ajax({
-                url: base_url+"store_add_new_guest",
-                type: 'GET',
-                data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact,is_duplicate:is_duplicate},
-                success: function (response) {
-                 console.log(response);
-                 if(response.is_phone=="1"&&response.view!=""){
-                    $('.selected-phone-list').remove('.guest-user-phone');
-                    $('.selected-phone-list').html(response.view);
-
-                    // $('#home_loader').css('display', 'none');
-
-                        $('#home_loader').css('display', 'none');   
-                    
-        
-
-                }
-                 if(response.view!=""&&response.is_phone=="0"){
-                    $('.selected-contacts-list').remove('.guest-users');
-                    $('.selected-contacts-list').html(response.view);
-                    // $('#home_loader').css('display', 'none');
-                        $('#home_loader').css('display', 'none');
-        
-
-                }
-                $('#home_loader').css('display', 'none');   
-
-
-                },
-                error: function (error) {
-                  toastr.error('Something went wrong. Please try again!');
-                  $('#home_loader').css('display', 'none');   
-
-                },
-              });
-        }
-
+       
 
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
@@ -918,18 +877,47 @@ $(document).ready(function () {
          
             storeAddNewGuest(id,1,isSelected,event_id,'phone',is_duplicate);
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
-            $('#home_loader').css('display','none');
-
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
             $('.add_phone_guest_'+id).remove();
             storeAddNewGuest(id,0,isSelected,event_id,'phone');
-            $('#home_loader').css('display','none');
             console.log(guestList);
         }// App user = 0 for phone (non-app user)
     });
 
+    function storeAddNewGuest(id,status,prefer_by,event_id,contact,is_duplicate){
+        $('#home_loader').css('display', 'block');
+    console.log({id,status,prefer_by,event_id,contact,is_duplicate});
+    
+    setTimeout(function(){
+        $.ajax({
+            url: base_url+"store_add_new_guest",
+            type: 'GET',
+            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact,is_duplicate:is_duplicate},
+            success: function (response) {
+             console.log(response);
+             if(response.is_phone=="1"&&response.view!=""){
+                $('.selected-phone-list').remove('.guest-user-phone');
+                $('.selected-phone-list').html(response.view);
+
+            }
+             if(response.view!=""&&response.is_phone=="0"){
+                $('.selected-contacts-list').remove('.guest-users');
+                $('.selected-contacts-list').html(response.view);
+            }
+
+            $('#home_loader').css('display', 'none');   
+
+            },
+            error: function (error) {
+              toastr.error('Something went wrong. Please try again!');
+              $('#home_loader').css('display', 'none');   
+
+            },
+          });
+        }, 500);
+    }
 
 
     // Declare guestList outside so it's globally accessible
@@ -997,7 +985,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             const $modalBody = $('.selected-contacts-list');
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
             // alert(upper_see);
-            if(upper_see==0){
+            if(upper_see==0&&is_duplicate==0){
                 console.log(is_duplicate);
 
                 const totalHtml = `
@@ -1092,7 +1080,7 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
         }else{
             const $modalBody = $('.selected-phone-list');
             var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
-            if(upper_see_phone==0){
+            if(upper_see_phone==0 && is_duplicate_phone==0){
                 const totalHtml = `
                 <a  class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">

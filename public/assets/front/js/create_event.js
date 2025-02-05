@@ -1310,7 +1310,20 @@ $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
     var event_date = $("#event-date").val(); // Get the current value of the date input
-
+    if (event_date == "") {
+        event_date = moment().format("MM/DD/YYYY");
+    }
+    let startDate;
+    let endDate;
+    let check = event_date.split("To");
+    console.log(check);
+    if (check.length == 2) {
+        startDate = check[0];
+        endDate = check[1];
+    } else {
+        startDate = check[0];
+        endDate = check[0];
+    }
     // // If event_date is not null or empty, format it as MM/DD/YYYY
     // if (event_date) {
     //     event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
@@ -1328,8 +1341,8 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: event_date,
-            endDate: event_date,
+            startDate: startDate,
+            endDate: endDate,
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -2001,7 +2014,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 $("#loader").css("display", "none");
                 // }
             },
-            error: function (xhr, status, error) {},
+            error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
+            },
         });
     } else {
         if (is_contact != "1") {
@@ -3722,6 +3737,7 @@ $(document).on("click", "#close_createEvent", function () {
                 }
             },
             error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
                 console.log("AJAX error: " + error);
             },
         });
@@ -3765,6 +3781,7 @@ $(document).on("click", "#close_createEvent", function () {
                 }
             },
             error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
                 console.log("AJAX error: " + error);
             },
         });
@@ -4787,7 +4804,7 @@ async function saveDesignData(direct = false) {
 
         console.log("Uploading image...");
         const imageResponse = await uploadImage(blob);
-
+        $("#loader").css("display", "none");
         if (imageResponse && imageResponse.image) {
             eventData.desgin_selected = imageResponse.image;
         }
@@ -6454,6 +6471,7 @@ $(document).on("click", "#final_create_event", function (e) {
             });
         },
         error: function (xhr, status, error) {
+            $("#loader").css("display", "none");
             console.log("AJAX error: " + error);
         },
     });
@@ -6594,6 +6612,7 @@ function save_image_design(downloadImage, textData) {
                     }
                 },
                 error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
                     console.error(
                         "Failed to upload and save the image:",
                         error
@@ -8501,11 +8520,11 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                    //if (delete_id == 1) {
-                    // $(".slider_photo").show();
-                    //} else {
-                    //  $(".slider_photo_" + delete_id).show();
-                    //}
+                    if (delete_id == 1) {
+                        $(".slider_photo").val("");
+                    } else {
+                        $(".slider_photo_" + delete_id).val("");
+                    }
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
@@ -8519,6 +8538,11 @@ $(document).on("click", ".delete_silder", function (e) {
             $(".photo-slider-" + delete_id).hide();
             $(".photo-edit-delete-" + delete_id).hide();
             $("#loader").css("display", "none");
+            if (delete_id == 1) {
+                $(".slider_photo").val("");
+            } else {
+                $(".slider_photo_" + delete_id).val("");
+            }
             toastr.success("Slider Image Deleted Successfully");
         }
     }
@@ -8696,7 +8720,12 @@ $(document).on("click", ".design-sidebar-action", function () {
                 });
             } else {
                 $(".design-sidebar").addClass("d-none");
-                $(".design-sidebar_" + designId).removeClass("d-none");
+                if (imgSrc1 != "" || imgSrc2 != "" || imgSrc3 != "") {
+                    $(".design-sidebar_7").removeClass("d-none");
+                } else {
+                    $(".design-sidebar_" + designId).removeClass("d-none");
+                }
+
                 $("#sidebar").addClass("design-sidebar_" + designId);
                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
             }
