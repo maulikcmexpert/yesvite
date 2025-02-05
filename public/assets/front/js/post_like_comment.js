@@ -842,6 +842,7 @@ $(document).ready(function () {
             $('#home_loader').css('display', 'block');
         console.log({id,status,prefer_by,event_id,contact,is_duplicate});
         
+        setTimeout(function(){
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',
@@ -867,6 +868,7 @@ $(document).ready(function () {
 
                 },
               });
+            }, 1000);
         }
 
 
