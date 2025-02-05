@@ -88,7 +88,7 @@ $(document).on('change', '.rsvp_yes', function () {
     $('.side_menu_minus, .side_menu_plus').prop('disabled', false);
 });
 $(document).on('click', '.save-rsvp', function () {
-    $eventId = $('#event_id').val();
+    const eventId = $('#event_id').val();
     const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
     console.log('Updating Guest ID:', guestId);
 
