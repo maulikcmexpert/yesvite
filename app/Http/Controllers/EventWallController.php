@@ -147,7 +147,7 @@ class EventWallController extends Controller
         $postList = [];
         $selectedFilters = "";
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
-
+        $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::with(['user', 'post_image'])
             ->withCount([
                 'event_post_comment' => fn($query) => $query->whereNull('parent_comment_id'),
