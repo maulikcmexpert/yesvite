@@ -928,7 +928,6 @@ function datepicker() {
                 // Set the picker date to the adjusted start time (if any)
             })
             .on("dp.close", function () {
-                alert();
                 const picker = $(this).data("DateTimePicker");
                 const startTime = $(this)
                     .closest("div")
@@ -2935,7 +2934,10 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
     if (check_start == "") {
         $(this).val("");
         toastr.error("First you need to to set Start Time of Event");
-        $(this).datetimepicker("hide"); // Hide time picker if open
+        $(this).val("");
+        $(this).datetimepicker("hide"); 
+        $(this).val("");
+        // Hide time picker if open
         $(this).blur();
         return;
     } else {
