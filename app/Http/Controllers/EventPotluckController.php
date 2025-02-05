@@ -158,6 +158,7 @@ class EventPotluckController extends Controller
                     }
 
                 }
+                $eventDetails['rsvp_status'] = $rsvp_status;
                 $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
                 $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
                 $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
