@@ -6,9 +6,10 @@
     }else{
         $listing=$yesvite_all_invite['invited_guests'] ;
     }
-    
+    dd($listing,$yesvite_phone_data,$yesvite_users_data,$is_phone);
     @endphp
-        
+       
+       
     @foreach ($listing as $user)
     <div class="invite-contact yes-contact">
                     <a href="#" class="invite-img">
