@@ -901,6 +901,9 @@ function datepicker() {
                     .closest("div")
                     .find("#ac-start-time")
                     .val();
+
+                    console.log(startMoment,22);
+
                 // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
                 let startMoment = startTime
                     ? moment(startTime, "LT")
@@ -2943,7 +2946,7 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         $(this).blur();
         return;
     } else {
-        // datepicker();
+        $(this).datetimepicker("show"); 
     }
 });
 
