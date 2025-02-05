@@ -308,6 +308,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
     Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
     Route::post('event_wall/fetch_all_invited_user', [EventWallController::class, 'fetch_all_invited_user']);
+    Route::post('event_wall/wallFilters', [EventWallController::class, 'wallFilters']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 });
 

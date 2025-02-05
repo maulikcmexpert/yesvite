@@ -1261,27 +1261,31 @@ $(document).on('click','.wall_filter_reset',function(){
 
  $(document).on('click','.wall_apply_filter',function(){
     let selectedPostTypes = [];
-
+    let event_id=$(this).data('event_id');
     $(".wall_post:checked").each(function() {
         selectedPostTypes.push($(this).data("post_type"));
     });
 
+    $(".select_all_post:checked").each(function() {
+        selectedPostTypes.push($(this).data("post_type"));
+    });
+
     console.log(selectedPostTypes);
-    // $.ajax({
-    //     url: base_url + "event_guest/removeGuestFromInvite",
-    //     type: "POST",
-    //     data: JSON.stringify({ user_id: userId, event_id: event_id }),
-    //     contentType: "application/json",
-    //     headers: {
-    //         'Authorization': 'Bearer YOUR_ACCESS_TOKEN', 
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
-    //     },
-    //     success: function (response) {
+    $.ajax({
+        url: base_url + "event_wall/wallFilters",
+        type: "POST",
+        data: JSON.stringify({ event_id: event_id, filters: selectedPostTypes }),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', 
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+        },
+        success: function (response) {
         
-    //     },
-    //     error: function (xhr, status, error) {
-    //         toastr.error("Something went wrong!");
-    //         console.error(xhr.responseText);
-    //     }
-    // });
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        }
+    });
 });

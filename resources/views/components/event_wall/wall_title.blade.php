@@ -70,7 +70,7 @@
               <div class="all-events-filter-wrp">
                   <form action="">
                       <div class="form-check">
-                          <input class="form-check-input select_all_post" type="checkbox" value=""
+                          <input class="form-check-input select_all_post" data-post_type="all" type="checkbox" value=""
                               id="flexCheckDefault1">
                           <label class="form-check-label" for="flexCheckDefault1">
                               All
@@ -123,7 +123,7 @@
           </div>
           <div class="modal-footer">
               <button type="button" class="cmn-btn reset-btn wall_filter_reset">Reset</button>
-              <button type="button" class="cmn-btn wall_apply_filter" event_id="{{$eventDetails['id']}}">Apply</button>
+              <button type="button" class="cmn-btn wall_apply_filter" data-event_id="{{$eventDetails['id']}}">Apply</button>
           </div>
       </div>
   </div>
