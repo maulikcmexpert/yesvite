@@ -1301,7 +1301,7 @@ $(function () {
 $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
-    
+    var event_date = $("#event-date").val() // is null that time cuuent date show in calender;
     var oldDate = $(ed).attr("data-isDate");
     $("#event-date").daterangepicker(
         {
@@ -1310,7 +1310,7 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: moment().startOf("month"),
+            startDate: event_date ? moment(event_date, "MM/DD/YYYY") : moment(),
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
