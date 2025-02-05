@@ -666,7 +666,11 @@ async function bindData(current_event_id) {
                 const staticInfo = {};
 
                 if (current_event_id != "" && eventData.desgin_selected == "") {
-                    staticInfo.textElements = dbJson;
+                    if (dbJson.textElements != undefined) {
+                        staticInfo.textElements = dbJson.textElements;
+                    } else {
+                        staticInfo.textElements = dbJson;
+                    }
                 } else {
                     staticInfo.textElements = dbJson.textElements;
                 }
