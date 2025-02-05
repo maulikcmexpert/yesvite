@@ -46,7 +46,7 @@ class EventAboutController extends Controller
 
         try {
             $eventDetail = Event::with(['user', 'event_image', 'event_schedule',  'event_settings' => function ($query) {
-                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
+                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
             }, 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
@@ -63,6 +63,8 @@ class EventAboutController extends Controller
             $eventDetails['event_name'] = $eventDetail->event_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
+            $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
+            $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
             $eventDetails['podluck'] = ($eventDetail->event_settings != null && $eventDetail->event_settings->podluck != null) ? $eventDetail->event_settings->podluck : "0";
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
