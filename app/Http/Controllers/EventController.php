@@ -191,7 +191,7 @@ class EventController extends BaseController
                     session()->put('user_ids', $userIds);
                     Session::save();
                 }
-                
+
                 $userIdsSession = session()->get('contact_ids', []);
                 $invitedContactUsers = EventInvitedUser::with('user')
                     ->where('event_id', $request->id)
@@ -235,7 +235,7 @@ class EventController extends BaseController
             // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
-               
+
                 if ($request->iscopy != null) {
                     $eventDetail['isCopy'] = $getEventData->id;
                 }
@@ -370,8 +370,8 @@ class EventController extends BaseController
                     session()->put('giftRegistryData', $gift_registry_ids);
                     Session::save();
                 }
-              
-              
+
+
 
                 $eventDetail['event_setting'] = "";
 
@@ -2188,13 +2188,12 @@ class EventController extends BaseController
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
         $userIds = Session::get('user_ids');
-        $selectedId=[];
-        if($userIds!=null &&  count($userIds) > 0){
-            $selectedId =array_column($userIds,'id');
-
+        $selectedId = [];
+        if ($userIds != null &&  count($userIds) > 0) {
+            $selectedId = array_column($userIds, 'id');
         }
-       
-       
+
+
         // array_values
 
         // if (!empty($userIds)) {
@@ -2202,7 +2201,7 @@ class EventController extends BaseController
         //         $selectedIds[] = $user->id; 
         //     }
         // }
-       
+
         $type = $request->type;
         $emails = [];
         $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
@@ -2241,39 +2240,49 @@ class EventController extends BaseController
         // dd($yesvite_users);
 
         $yesvite_users = User::select(
-            'id', 'firstname', 'profile', 'lastname', 'email', 'country_code',
-            'phone_number', 'app_user', 'prefer_by', 'email_verified_at',
-            'parent_user_phone_contact', 'visible', 'message_privacy'
+            'id',
+            'firstname',
+            'profile',
+            'lastname',
+            'email',
+            'country_code',
+            'phone_number',
+            'app_user',
+            'prefer_by',
+            'email_verified_at',
+            'parent_user_phone_contact',
+            'visible',
+            'message_privacy'
         )
-        ->where('id', '!=', $id)
-        ->where('app_user', '1')
-        ->whereIn('email', $emails)
-        ->orderBy('firstname')
-    
-        // Apply 'orWhereIn' for multiple selected IDs
-        ->when(!empty($selectedId), function ($query) use ($selectedId) {
-            $query->orWhereIn('id', $selectedId);
-        })
-    
-        ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
-            $query->limit($request->limit)
-                  ->offset($request->offset);
-        })
-        ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
-            $query->limit($request->limit)
-                  ->offset($request->offset);
-        })
-    
-        ->when(!empty($request->search_user), function ($query) use ($search_user) {
-            $query->where(function ($q) use ($search_user) {
-                $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                  ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-            });
-        })
-    
-        ->groupBy('id') // Grouping by ID to avoid duplicates
-        ->get();
-        
+            ->where('id', '!=', $id)
+            ->where('app_user', '1')
+            ->whereIn('email', $emails)
+            ->orderBy('firstname')
+
+            // Apply 'orWhereIn' for multiple selected IDs
+            ->when(!empty($selectedId), function ($query) use ($selectedId) {
+                $query->orWhereIn('id', $selectedId);
+            })
+
+            ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset);
+            })
+            ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
+                $query->limit($request->limit)
+                    ->offset($request->offset);
+            })
+
+            ->when(!empty($request->search_user), function ($query) use ($search_user) {
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+
+            ->groupBy('id') // Grouping by ID to avoid duplicates
+            ->get();
+
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
@@ -2293,7 +2302,7 @@ class EventController extends BaseController
         }
 
         $selected_user = Session::get('user_ids');
-        
+
         // dd($selected_user);
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
@@ -2307,13 +2316,12 @@ class EventController extends BaseController
         $type = $request->type;
         $emails = [];
         $selected_contact = Session::get('contact_ids');
-        $selectedContactId=[];
-        if($selected_contact!=null &&  count($selected_contact) > 0){
-            $selectedContactId =array_column($selected_contact,'sync_id');
-
+        $selectedContactId = [];
+        if ($selected_contact != null &&  count($selected_contact) > 0) {
+            $selectedContactId = array_column($selected_contact, 'sync_id');
         }
-        
-    
+
+
 
         $getAllContacts = contact_sync::where('contact_id', $id)
             // ->when($type != 'group', function ($query) use ($request) {
@@ -2327,8 +2335,8 @@ class EventController extends BaseController
                     $query->orWhereIn('id', $selectedContactId);
                 }
             })
-            
-           
+
+
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
@@ -2349,9 +2357,9 @@ class EventController extends BaseController
             ->orderBy('firstname')
 
             ->get();
-        
 
-            // dd($getAllContacts);
+
+        // dd($getAllContacts);
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
@@ -2889,14 +2897,14 @@ class EventController extends BaseController
         // })->get();
         $giftRegistryData = session('giftRegistryData');
         $registry = [];
-        
+
         // Check if giftRegistryData exists and is not empty
         if (isset($giftRegistryData) && $giftRegistryData != null && count($giftRegistryData) > 0) {
             $registry = $giftRegistryData; // Assign the session data to $registry
         }
-        
+
         $user_id = Auth::guard('web')->user()->id; // Get the authenticated user's ID
-        
+
         // Query for gift registry
         $gift_registry = EventGiftRegistry::where('user_id', $user_id)
             ->when(!empty($registry), function ($query) use ($registry) {
@@ -2904,7 +2912,7 @@ class EventController extends BaseController
                 $query->orWhereIn('id', $registry); // Use $registry instead of $selectedId
             })
             ->get();
-        
+
         return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
     }
 
@@ -2912,7 +2920,7 @@ class EventController extends BaseController
     {
         $greetingCardData = session('greetingCardData');
         $greetingCard = [];
-        
+
         // Check if greetingCardData exists and is not empty
         if (isset($greetingCardData) && $greetingCardData != null && count($greetingCardData) > 0) {
             $greetingCard = $greetingCardData; // Assign the session data to $registry
@@ -3998,7 +4006,7 @@ class EventController extends BaseController
         if (!empty($getEventImages)) {
             $i = 1;
             foreach ($getEventImages as $key => $imgVal) {
-                if ($key == 0) {
+                if ($imgVal->type == 0) {
                     $designImg =   $imgVal->image;
                     continue;
                 } else {
