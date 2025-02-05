@@ -1,5 +1,5 @@
 
-{{dd($yesvite_users_data);}}
+
 @if(!empty($yesvite_all_invite))
 @php
         $listing=array_merge($yesvite_all_invite['invited_user_id'],$yesvite_users_data);
@@ -8,8 +8,11 @@ $counter = 0;
 @endphp
 @foreach($listing as $guest_user)
 @php
-
-if($guest_user['is_duplicate']==0){
+$is_duplicate="0";
+if(isset($guest_user['is_duplicate'])){
+$is_duplicate=$guest_user['is_duplicate'];
+}
+if($guest_user['is_duplicate']=="0"){
 $counter++;
 }
 if($counter > 4){

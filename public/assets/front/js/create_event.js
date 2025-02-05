@@ -905,6 +905,8 @@ function datepicker() {
                 let startMoment = startTime
                     ? moment(startTime, "LT")
                     : moment().hours(12).minutes(0).seconds(0);
+
+                    console.log(startMoment,22);
                 const previousActivity =
                     currentActivity.prev(".activity-main-wrp");
 
@@ -2930,10 +2932,14 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         .find('input[name="activity-start-time[]"]')
         .val();
 
+    
     if (check_start == "") {
+        $(this).val("");
         toastr.error("First you need to to set Start Time of Event");
         $(this).val("");
-        $(this).datetimepicker("hide"); // Hide time picker if open
+        $(this).datetimepicker("hide"); 
+        $(this).val("");
+        // Hide time picker if open
         $(this).blur();
         return;
     } else {
@@ -3031,6 +3037,9 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
 
         console.log(lastEndTime);
         console.log(eventEndTime);
+
+        // if (lastEndTime !== "" && lastEndTime !== undefined && lastEndTime !== null && !isNaN(lastEndTime)) {
+
         if (lastEndTime != "") {
             if (
                 convertTimeToMinutes(lastEndTime) >
@@ -3118,7 +3127,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
                 .children()
                 .find(".activity_start_time");
             schedule_start_time.prop("readonly", false);
-            schedule_start_time.val("45555985sdsddsd");
+            schedule_start_time.val("");
             schedule_start_time.prop("readonly", true);
 
             toastr.error("activity can not start before event");
