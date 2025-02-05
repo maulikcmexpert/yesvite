@@ -2642,7 +2642,7 @@ main {
 
   .guests-listing-buttons .cmn-btn:hover{
     border: 1px solid var(--pink) !important;
-    background-color: transparent !important;
+    background-color: var(--white) !important;
     color: var(--pink) !important;
   }
 
