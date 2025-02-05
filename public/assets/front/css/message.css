@@ -1852,6 +1852,8 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     padding-bottom: 20px !important;
 }
 
+
+
 /* ======= responsive ======== */
 
 
@@ -2079,6 +2081,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     }
     .reaction-dialog {
         right: -40px;
+    }
+
+    .selected-tags-container input{
+        font-size: 16px !important;
     }
 }
 

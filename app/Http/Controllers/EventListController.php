@@ -2678,7 +2678,7 @@ if ($rsvpSent != null) {
         $user_id = $request->user_id;
         $check_status = $request->status;
         $prefer_by=$request->prefer_by;
-        $is_duplicate=$request->is_duplicate;
+        // $is_duplicate=$request->is_duplicate;
         // dd($request);
         $userData = session('add_guest_user_id', []);
 
@@ -2689,7 +2689,6 @@ if ($rsvpSent != null) {
             foreach ($userData as &$user) {
                 if ($user['user_id'] == $user_id) {
                     $user['prefer_by'] = $prefer_by;
-                    $user['is_duplicate'] =$is_duplicate;
                     $exists = true;
                     break;
                 }
@@ -2698,7 +2697,6 @@ if ($rsvpSent != null) {
                 $userData[] = [
                     'user_id' => $user_id,
                     'prefer_by' => $prefer_by,
-                    'is_duplicate'=>$is_duplicate
                 ];
             }
             // dd($userData);
