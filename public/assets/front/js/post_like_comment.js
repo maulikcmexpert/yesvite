@@ -753,6 +753,8 @@ $(document).ready(function () {
                 `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
             );
             if( $(this).is(":checked")){
+                $('#home_loader').css('display', 'block');
+
                 $('.add_yesvite_guest_'+id).remove();
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
@@ -784,6 +786,8 @@ $(document).ready(function () {
                 `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
             );
             if( $(this).is(":checked")){
+                $('#home_loader').css('display', 'block');
+
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
