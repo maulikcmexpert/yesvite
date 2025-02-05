@@ -2178,7 +2178,6 @@ class EventController extends BaseController
         $userIds = Session::get('user_ids');
        
         $selectedId =array_column($userIds,'id');
-        dd($selectedId);
        
         // array_values
 
