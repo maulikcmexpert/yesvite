@@ -1301,7 +1301,7 @@ $(function () {
 $(function () {
     var selectedDates = new Set();
     let ed = document.getElementById("event-date");
-    
+    var event_date = $("#event-date").val() // is null that time cuuent date show in calender;
     var oldDate = $(ed).attr("data-isDate");
     $("#event-date").daterangepicker(
         {
@@ -1310,7 +1310,7 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: moment().startOf("month"),
+            startDate: event_date ? moment(event_date, "MM/DD/YYYY") : moment(),
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -8735,6 +8735,9 @@ if (final_step == "3" && isCohost == "1") {
 if (final_step == "4" && isCohost == "1") {
     $("#loader").css("display", "flex");
     setTimeout(function () {
+        $(".li_design").addClass("menu-success");
+        $(".li_event_detail").addClass("menu-success");
+        $(".li_guest").addClass("menu-success");
         step4open();
         $("#loader").css("display", "none");
     }, 1000);

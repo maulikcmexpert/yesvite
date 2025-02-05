@@ -98,7 +98,8 @@
 
                                                             <span
                                                                 class="host">Co Host</span>
-                                                        @endif</h3>
+                                                        @endif
+                                                    </h3>
 
                                                             <p>{{ $post['location'] }}</p>
                                                         </div>
