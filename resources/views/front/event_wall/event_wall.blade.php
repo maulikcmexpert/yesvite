@@ -256,6 +256,16 @@
                                                                         <!-- Slides -->
                                                                         @if (!empty($post['post_image']))
                                                                             @foreach ($post['post_image'] as $image)
+                                                                            @if ($image['type']=='video')
+                                                                            <div class="swiper-slide">
+                                                                                <div
+                                                                                    class="posts-card-show-post-img">
+                                                                                    <video src="{{ $image['media_url'] }}"
+                                                                                        alt=""
+                                                                                        loading="lazy" controls="true" muted />
+                                                                                </div>
+                                                                            </div>
+                                                                            @else
                                                                                 <div class="swiper-slide">
                                                                                     <div
                                                                                         class="posts-card-show-post-img">
@@ -264,6 +274,7 @@
                                                                                             loading="lazy" />
                                                                                     </div>
                                                                                 </div>
+                                                                            @endif
                                                                                 {{-- <div class="swiper-slide">
                                                                 <div class="posts-card-show-post-img">
                                                                     <video width="320" height="240">
