@@ -60,7 +60,7 @@ $counter = count($listing) - 4;
 @endphp
 <a class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">
-                        <span class="number" id="total-selected-email" data-count="1">+{{$counter}}</span>
+                        <span class="number" id="total-selected-email" data-count="{{$counter}}">+{{$counter}}</span>
                         <span class="content">Total</span>
                  </div>
                  <h6>See all</h6>
