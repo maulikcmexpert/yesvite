@@ -8468,7 +8468,9 @@ $(document).on("click", ".save-slider-image", function () {
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
             },
-            error: function (xhr, status, error) {},
+            error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
+            },
         });
     }
 });
