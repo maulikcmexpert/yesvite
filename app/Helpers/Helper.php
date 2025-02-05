@@ -45,6 +45,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use FFMpeg\FFMpeg;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\FFProbe;
 // use DB;
 
 function getVideoDuration($filePath)
@@ -71,7 +72,11 @@ function generate_thumbnail($fileName)
     // ]);
     $ffmpeg = FFMpeg::create([
         'ffmpeg.binaries' => exec('which ffmpeg'),
-        'ffprobe.binaries' => exec('which ffprobe'),
+        // 'ffprobe.binaries' => exec('which ffprobe'),
+    ]);
+
+    $ffprobe = FFProbe::create([
+        'ffprobe.binaries' => exec('which ffprobe'),  // Make sure this is correct
     ]);
     $video = $ffmpeg->open($videoPath);
 
