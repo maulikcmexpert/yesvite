@@ -1312,14 +1312,14 @@ $(function () {
     var event_date = $("#event-date").val(); // Get the current value of the date input
     let startDate;
     let endDate;
-    event_date.split("To");
+    let check = event_date.split("To");
     console.log(event_date);
-    if (event_date.length == 2) {
-        startDate = event_date[0];
-        endDate = event_date[1];
+    if (check.length == 2) {
+        startDate = check[0];
+        endDate = check[1];
     } else {
-        startDate = event_date[0];
-        endDate = event_date[0];
+        startDate = check[0];
+        endDate = check[0];
     }
     // // If event_date is not null or empty, format it as MM/DD/YYYY
     // if (event_date) {
