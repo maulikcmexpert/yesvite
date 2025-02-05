@@ -232,7 +232,7 @@ $(document).ready(function () {
     console.log(getTimeZoneAbbreviation());
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-        alert(base_url);
+        console.log(base_url);
         $(".user_choice").prop("checked", false);
         $("#YesviteUserAll").html("");
         $.ajax({
@@ -261,6 +261,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
+                console.log(base_url + "event/delete-session");
                 console.log("AJAX error: " + error);
             },
         });
