@@ -4509,6 +4509,9 @@ function handleActiveClass(target) {
     $(".pick-card").removeClass("active");
     $(".edit-design-sidebar").removeClass("active");
     $(".edit-design").removeClass("active");
+    if(target==".li_event_details"){
+        $(".li_design").addClass("menu-success");
+    }
     if (target == ".li_design .edit-design-sidebar") {
         $(".edit-design-sidebar").addClass("active");
         $(".pick-card").addClass("menu-success");
