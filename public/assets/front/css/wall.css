@@ -590,6 +590,7 @@
 .off-by-host-inner-left svg{
     width:100%;
     max-width: 25px !important;
+    min-width: 25px !important;
     height:25px !important;
 }
 
@@ -601,6 +602,7 @@
 .off-by-host-inner-right svg{
     width:100%;
     max-width: 25px !important;
+    min-width: 25px !important;
     height:25px !important;
 }
 
@@ -655,7 +657,7 @@
         height: 100%;
     }
     .off-by-host-wrp {
-        padding: 15px 20px;
+        padding: 15px 15px;
     }
 }
 @media only screen and (max-width: 424px) {
