@@ -2177,12 +2177,14 @@ class EventController extends BaseController
         // $invitedUser='';
         $userIds = Session::get('user_ids');
         $selectedIds = [];
+        $selectedIds =array_column($userIds,'id');
+        dd($selectedIds);
 
-        foreach ($userIds as $user) {
-
-            $selectedIds = $user->id; 
-
-        }
+        // if (!empty($userIds)) {
+        //     foreach ($userIds as $user) {
+        //         $selectedIds[] = $user->id; 
+        //     }
+        // }
        
         $type = $request->type;
         $emails = [];
