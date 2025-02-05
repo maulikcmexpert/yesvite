@@ -997,7 +997,9 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         // }
 
         foreach ($new_added_user as $sesionuser) {
-            $user = User::find($sesionuser['user_id']);
+            // $user = User::find($sesionuser['user_id']);
+            $user = User::where('id', $sesionuser['user_id'])->where('app_user',"1")->first();
+
             $prefer_by = $sesionuser['prefer_by'];
         
             if ($user && $user->app_user == "1" && $is_phone == 0) {
@@ -1011,7 +1013,6 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     'prefer_by' => $prefer_by
                 ];
                 continue; // Skip searching in contact_sync table
-
             } else {
                 $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
         
