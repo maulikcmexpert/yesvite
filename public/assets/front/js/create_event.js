@@ -8514,11 +8514,11 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                    //if (delete_id == 1) {
-                    // $(".slider_photo").show();
-                    //} else {
-                    //  $(".slider_photo_" + delete_id).show();
-                    //}
+                    if (delete_id == 1) {
+                        $(".slider_photo").val("");
+                    } else {
+                        $(".slider_photo_" + delete_id).val("");
+                    }
                     $this.parent().find(".slider_img").attr("src", "");
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
@@ -8532,6 +8532,11 @@ $(document).on("click", ".delete_silder", function (e) {
             $(".photo-slider-" + delete_id).hide();
             $(".photo-edit-delete-" + delete_id).hide();
             $("#loader").css("display", "none");
+            if (delete_id == 1) {
+                $(".slider_photo").val("");
+            } else {
+                $(".slider_photo_" + delete_id).val("");
+            }
             toastr.success("Slider Image Deleted Successfully");
         }
     }
