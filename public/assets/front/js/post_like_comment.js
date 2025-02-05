@@ -210,9 +210,11 @@ $(document).ready(function () {
         const commentText = commentInput.val().trim();
         // const parentCommentId = $(".parent_comment_id").val() || '';
         const parent_comment_id = $(".parent_comment_id").val()
-        const parentCommentId = (commentVal !== "" && (parent_comment_id !== "undefined" && parent_comment_id !== undefined)) ? parent_comment_id : '';
+        var parentCommentId = (commentVal !== "" && (parent_comment_id !== "undefined" && parent_comment_id !== undefined)) ? parent_comment_id : '';
         console.log("Parent Comment ID:", parentCommentId);
-
+        if(commentVal==""){
+            parentCommentId=""
+        }
         if (commentText === "") {
             alert("Please enter a comment");
             return;
