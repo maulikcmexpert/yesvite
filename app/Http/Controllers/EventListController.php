@@ -2689,6 +2689,8 @@ if ($rsvpSent != null) {
         
 
             // Check if user already exists in session
+                        dd($userData);
+
             $exists = false;
             foreach ($userData as &$user) {
                 if ($user['user_id'] == $user_id) {
