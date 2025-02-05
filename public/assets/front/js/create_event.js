@@ -928,6 +928,7 @@ function datepicker() {
                 // Set the picker date to the adjusted start time (if any)
             })
             .on("dp.close", function () {
+                alert();
                 const picker = $(this).data("DateTimePicker");
                 const startTime = $(this)
                     .closest("div")
@@ -2930,8 +2931,8 @@ $(document).on("click", 'input[name="activity-end-time[]"]', function (e) {
         .find('input[name="activity-start-time[]"]')
         .val();
 
+    
     if (check_start == "") {
-        toastr.error("First you need to to set Start Time of Event");
         $(this).val("");
         toastr.error("First you need to to set Start Time of Event");
         $(this).datetimepicker("hide"); // Hide time picker if open
@@ -3033,9 +3034,9 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
         console.log(lastEndTime);
         console.log(eventEndTime);
 
-        if (lastEndTime !== "" && lastEndTime !== undefined && lastEndTime !== null && !isNaN(lastEndTime)) {
+        // if (lastEndTime !== "" && lastEndTime !== undefined && lastEndTime !== null && !isNaN(lastEndTime)) {
 
-        // if (lastEndTime != "") {
+        if (lastEndTime != "") {
             if (
                 convertTimeToMinutes(lastEndTime) >
                 convertTimeToMinutes(eventEndTime)
