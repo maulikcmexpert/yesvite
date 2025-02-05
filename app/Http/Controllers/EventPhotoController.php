@@ -34,7 +34,7 @@ class EventPhotoController extends Controller
 {
     public function index(String $id)
     {
-        DD(1);
+        dd(1);
         $title = 'event photos';
         $page = 'front.event_wall.event_photos';
         $user  = Auth::guard('web')->user();
