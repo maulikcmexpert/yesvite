@@ -769,7 +769,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
@@ -780,7 +780,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite',is_duplicate);
+                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
 
                 $('.add_yesvite_guest_'+id).remove();
 
@@ -888,7 +888,6 @@ $(document).ready(function () {
 
     function storeAddNewGuest(id,status,prefer_by,event_id,contact){
         $('#home_loader').css('display', 'block');
-    console.log({id,status,prefer_by,event_id,contact,is_duplicate});
     
     setTimeout(function(){
         $.ajax({
