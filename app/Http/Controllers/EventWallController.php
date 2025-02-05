@@ -2593,7 +2593,6 @@ foreach ($polls as $poll) {
                 foreach ($selectedFilters as $filter) {
                     switch ($filter) {
                         case 'host_update':
-                            dd('h');
                             $query->orWhere('user_id', $eventCreator->user_id);
                             break;
                         case 'video_uploads':
@@ -2605,6 +2604,8 @@ foreach ($polls as $poll) {
                             });
                             break;
                         case 'photo_uploads':
+                            dd('p');
+
                             $query->orWhere(function ($qury) {
                                 $qury->where('post_type', '1')
                                     ->whereHas('post_image', function ($q) {
