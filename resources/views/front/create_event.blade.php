@@ -1389,7 +1389,7 @@
                         value="{{ count($eventDetail['podluck_category_list']) }}">
                     @foreach ($eventDetail['podluck_category_list'] as $index => $data)
                         <div class="category-main-dishesh potluckmain-{{ $index }}">
-                            <div class="category-list">
+                            <div class="category-list potluckCategorylist">
                                 <div class="list-header">
                                     <span
                                         class="me-1 list-sub-head total-self-bring-{{ $index }}">{{ $data['categoryQuantity'] }}</span>
