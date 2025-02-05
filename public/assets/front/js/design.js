@@ -585,13 +585,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
         eventData.temp_id == id
     ) {
         dbJson = eventData.textData;
-        eventData.slider_images = eventData.slider_images;
+        eventData.slider_images = [];
+        eventData.desgin_selected = "";
         console.log({ dbJson });
     } else {
         console.log(json);
         dbJson = json;
         temp_id = id;
         eventData.slider_images = [];
+        eventData.desgin_selected = "";
     }
     // //console.log(dbJson);
     // //console.log(image);

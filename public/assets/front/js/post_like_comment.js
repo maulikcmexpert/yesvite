@@ -769,8 +769,8 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 const exists = guestList.some((contact) => contact.id === id);
@@ -815,8 +815,8 @@ $(document).ready(function () {
                 console.log(is_duplicate);
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
 
             }else{
@@ -874,9 +874,9 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
+            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
          
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
-            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
 
         }else{
             guestList = guestList.filter(guest => guest.id !== id);
@@ -982,7 +982,6 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
             // alert(upper_see);
             if(upper_see==0&&is_duplicate==0){
-                console.log(is_duplicate);
 
                 const totalHtml = `
                 <a class="guest-user d-block yesvite add_guest_seeall">
@@ -994,17 +993,15 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 </a>`;
                   $modalBody.append(totalHtml);
             }
-            // if(upper_see>0){
-            //     console.log(is_duplicate);
-            //     if(is_duplicate==0){
-            //         var initial= parseInt($('#total-selected-email').attr('data-count'));
-            //         var new_value= initial+1 ;
-            //      //    alert(initial);
-            //         $('#total-selected-email').attr('data-count',new_value);
-            //         $('#total-selected-email').text('+'+new_value);
-            //     }
+            if(upper_see>0){
+                if(is_duplicate==0){
+                    var initial= parseInt($('#total-selected-email').attr('data-count'));
+                    var new_value= initial+1 ;
+                    $('#total-selected-email').attr('data-count',new_value);
+                    $('#total-selected-email').text('+'+new_value);
+                }
 
-            // }
+            }
 
              }
 
@@ -1090,16 +1087,18 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                   $modalBody.append(totalHtml);
 
             }
-            // if(upper_see_phone>0){
-            //     if(is_duplicate_phone==0){
-            //         var initial= parseInt($('#total-selected-phone').attr('data-count'));
-            //         var new_value= initial+1 ;
-            //      //    alert(initial);
-            //         $('#total-selected-phone').attr('data-count',new_value);
-            //         $('#total-selected-phone').text('+'+new_value);
-            //     }
+            if(upper_see_phone>0){
+                console.log(upper_see_phone,is_duplicate_phone);
 
-            // }
+                if(is_duplicate_phone==0){
+                    var initial= parseInt($('#total-selected-phone').attr('data-count'));
+                    var new_value= initial+1 ;
+                 //    alert(initial);
+                    $('#total-selected-phone').attr('data-count',new_value);
+                    $('#total-selected-phone').text('+'+new_value);
+                }
+
+            }
 
              }
 

@@ -1013,7 +1013,6 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     'prefer_by' => $prefer_by
                 ];
                 $processed_user_ids[] = $user_id; // Mark this ID as processed
-
             } 
         }
         foreach ($new_added_user as $sesionuser) {
