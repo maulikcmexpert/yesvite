@@ -1077,8 +1077,6 @@ function getInvitedUsersListNew($eventId,$search=null)
                 $q->where('firstName', 'LIKE', "%$search%");
             });
         });
-    }elseif($search===""){
-        $invitedUsers->limit(7);
     }
 
 

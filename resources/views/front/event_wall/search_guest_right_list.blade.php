@@ -1,4 +1,8 @@
 @foreach ($guestArray as $index => $guest)
+@if (!empty($guest))
+                        @if ($index == 7)
+                        @break
+                        @endif
                             @php
                                 //$user = $guest['user']; // Fetch user array
                                 $firstInitial = isset($guest['first_name'][0]) ? strtoupper($guest['first_name'][0]) : '';
