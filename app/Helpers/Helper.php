@@ -63,38 +63,39 @@ function getVideoDuration($filePath)
 
 function generate_thumbnail($fileName)
 {
-    $videoPath = public_path('storage/post_image/') . $fileName;
+    try {
+        $videoPath = public_path('storage/post_image/') . $fileName;
 
-    // Initialize FFMpeg
-    $ffmpeg = FFMpeg::create([
-        'ffmpeg.binaries' => '/usr/local/bin/ffmpeg',  // Change this path if necessary
-        'ffprobe.binaries' => '/usr/local/bin/ffprob', // Change this path if necessary
-    ]);
-    // $ffmpeg = FFMpeg::create([
-    //     'ffmpeg.binaries' => exec('which ffmpeg'),
-    //     'ffprobe.binaries' => exec('which ffprobe'),
-    // ]);
+        $ffmpeg = FFMpeg::create([
+            'ffmpeg.binaries' => "/usr/bin/ffmpeg",  // Change this path if necessary
+            'ffprobe.binaries' => "usr/bin/ffprobe", // Change this path if necessary
+        ]);
 
-    // $ffprobe = FFProbe::create([
-    //     'ffprobe.binaries' => exec('which ffprobe'),  // Make sure this is correct
-    // ]);
-    $video = $ffmpeg->open($videoPath);
+        $video = $ffmpeg->open($videoPath);
 
-    // Loop through and generate thumbnails at different timestamps
-    for ($i = 0; $i < 5; $i++) {
-        $imgName = uniqid('thumb_', true) . '.jpg';
-        $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
+        // Loop through and generate thumbnails at different timestamps
+        for ($i = 0; $i < 5; $i++) {
+            $imgName = uniqid('thumb_', true) . '.jpg';
+            $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
 
-        $video->frame(TimeCode::fromSeconds(7 * ($i + 1)))
-            ->save($thumbnailPath);
+            $video->frame(TimeCode::fromSeconds(7 * ($i + 1)))
+                ->save($thumbnailPath);
 
-        // If the file is generated successfully, return it
-        if (file_exists($thumbnailPath)) {
-            return $imgName;
+            // If the file is generated successfully, return it
+            if (file_exists($thumbnailPath)) {
+                echo $imgName;
+                die;
+                return $imgName;
+            }
         }
+        echo null;
+        die;
+        return null; // Return null if no thumbnail is generated
+    } catch (\Exception $e) {
+        dd($e);
+        die;
+        return null;
     }
-
-    return null; // Return null if no thumbnail is generated
 }
 
 function checkIsimageOrVideo($postImage)
