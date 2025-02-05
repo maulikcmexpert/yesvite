@@ -1234,5 +1234,8 @@ $(document).on("keyup", ".search_contact", function () {
 //     });
 // });
 $(document).on('keyup','.post_comment',function(){
-    $(".parent_comment_id").val('');
+    var commentVal=$(".parent_comment_id").val();
+    if(commentVal==""){
+        $(".parent_comment_id").val('');
+    }
 })
