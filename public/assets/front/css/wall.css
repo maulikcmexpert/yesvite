@@ -553,17 +553,18 @@
 }
 
 .off-by-host-wrp {
-    padding: 30px;
+    padding: 20px 30px;
     border: 2px solid var(--border);
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+    text-align: center;
 }
 
-.off-by-host-inner{
-    display: flex;
+.off-by-host-inner {
+    display: inline-flex;
     align-items: center;
     gap: 25px;
-    border:1px solid #000;
+    border: 1px solid #000;
     border-radius: 20px;
     padding: 15px;
 }
