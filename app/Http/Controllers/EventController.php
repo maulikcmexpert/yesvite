@@ -2295,9 +2295,9 @@ class EventController extends BaseController
         $type = $request->type;
         $emails = [];
         $selected_contact = Session::get('contact_ids');
-        $selectedconactId=[];
-        if($selectedconactId!=null &&  count($selected_contact) > 0){
-            $selectedconactId =array_column($selected_contact,'sync_id');
+        $selectedContactId=[];
+        if($selectedContactId!=null &&  count($selected_contact) > 0){
+            $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
 
