@@ -547,19 +547,25 @@ main {
 }
 
 .wall-creat-photo-poll-wrp button {
-  background-color: #f8f9fd;
-  border: none;
-  height: 45px;
-  font-family: var(--SFProDisplay-Medium);
-  font-size: 15px;
-  line-height: 22.4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 100px;
-  width: 100%;
-  text-align: center;
+    background-color: #f8f9fd;
+    border: none;
+    height: 45px;
+    font-family: var(--SFProDisplay-Medium);
+    color: var(--secondary-black);
+    font-size: 15px;
+    line-height: normal; /* Fix for Safari */
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    gap: 8px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    width: 100%;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
 }
 
 .wall-creat-photo-poll-wrp button span {
