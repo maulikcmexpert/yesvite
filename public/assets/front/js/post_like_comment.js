@@ -743,7 +743,7 @@ $(document).ready(function () {
         $(document).on("change", ".contact-checkbox", function () {
             // console.log($('#home_loader').length);
             // setTimeout(() => {
-            //     $('#home_loader').css('display', 'block');
+                $('#home_loader').css('display', 'block');
             // }, 500);
             
             
@@ -792,6 +792,7 @@ $(document).ready(function () {
         });
 
         $(document).on("change", ".phone-checkbox", function () {
+            $('#home_loader').css('display', 'block');
 
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
