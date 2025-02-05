@@ -2175,6 +2175,7 @@ class EventController extends BaseController
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
+        dd(session('user_ids'));
         $type = $request->type;
         $emails = [];
         $getAllContacts = contact_sync::where('contact_id', $id)->where('email', '!=', '')->orderBy('firstname')
@@ -2230,6 +2231,7 @@ class EventController extends BaseController
         }
 
         $selected_user = Session::get('user_ids');
+        
         // dd($selected_user);
         return response()->json(view('front.event.guest.get_user', compact('yesvite_user', 'type', 'selected_user'))->render());
     }
