@@ -2300,7 +2300,7 @@ class EventController extends BaseController
             $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
-        dd($selectedContactId)
+        dd($selectedContactId);
     
 
         $getAllContacts = contact_sync::where('contact_id', $id)
