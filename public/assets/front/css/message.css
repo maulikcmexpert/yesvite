@@ -2083,7 +2083,16 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
         right: -40px;
     }
 
-    .selected-tags-container input{
+    #selected-tags-container input{
+        font-size: 16px !important;
+    }
+    #msgBox .modal-footer input{
+        font-size: 16px !important;
+    }
+    #message-box{
+        font-size: 16px !important;
+    }
+    input, textarea, select{
         font-size: 16px !important;
     }
 }
