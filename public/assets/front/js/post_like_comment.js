@@ -828,6 +828,7 @@ $(document).ready(function () {
         
 
                 }
+                $('#home_loader').css('display', 'none');   
 
 
                 },
