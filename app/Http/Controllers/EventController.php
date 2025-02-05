@@ -2266,12 +2266,9 @@ class EventController extends BaseController
             ->where('app_user', '1')
             ->whereIn('email', $emails)
             ->orderBy('firstname')
-
-            // Apply 'orWhereIn' for multiple selected IDs
             ->when(!empty($selectedId), function ($query) use ($selectedId) {
                 $query->orWhereIn('id', $selectedId);
             })
-
             ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
@@ -2282,13 +2279,13 @@ class EventController extends BaseController
             })
 
             ->when(!empty($request->search_user), function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
+                $query->orWhere(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
                         ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
                 });
             })
 
-            // ->groupBy('id') // Grouping by ID to avoid duplicates
+            ->groupBy('id')
             ->get();
 
         $yesvite_user = [];

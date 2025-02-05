@@ -709,7 +709,7 @@ $longitude = !empty($eventDetails['longitude'])
                                                         <a href="{{ $gift['registry_link'] }}" class="play-store-btn target-btn" target="_blank">
                                                             <img src="{{ asset('assets/front/img/target.png') }}" alt="target">
                                                         </a>
-                                                    @elseif (str_contains($registryName, 'amzon'))
+                                                    @elseif (str_contains($registryName, 'amazon'))
                                                         <a href="{{ $gift['registry_link'] }}" class="play-store-btn amazon-btn" target="_blank">
                                                             <img src="{{ asset('assets/front/img/amazon.png') }}" alt="amazon">
                                                         </a>

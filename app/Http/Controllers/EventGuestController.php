@@ -1053,7 +1053,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
     {
         $search=$request->serach;
         $event_id=$request->event_id;
-        $yesvite=getInvitedUsersListNew($event_id,$search);
+        $yesvite=getInvitedUsersListNew($event_id,$request->input('search'));
 
 
         dd($yesvite['all_invited_users']);
