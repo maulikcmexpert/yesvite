@@ -1115,11 +1115,10 @@ class EventPhotoController extends Controller
         }
         $event_post_comment->save();
 
-        dd($event_post_comment);
         // $notificationParam = [
-        //     'sender_id' => $user->id,
-        //     'event_id' => $request['event_id'],
-        //     'post_id' => $request['event_post_id'],
+            //     'sender_id' => $user->id,
+            //     'event_id' => $request['event_id'],
+            //     'post_id' => $request['event_post_id'],
         //     'comment_id' => $event_post_comment->id
         // ];
         // sendNotification('reply_on_comment_post', $notificationParam);
@@ -1127,7 +1126,8 @@ class EventPhotoController extends Controller
         $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
             $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
         }])->withcount('post_comment_reaction', 'replies')->where(['id' => $mainParentId, 'event_post_id' => $request['event_post_id']])->orderBy('id', 'DESC')->first();
-
+        dd($replyList);
+        
         $commentInfo['id'] = $replyList->id;
         $commentInfo['event_post_id'] = $replyList->event_post_id;
         $commentInfo['comment'] = $replyList->comment_text;
