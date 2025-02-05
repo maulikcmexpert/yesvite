@@ -778,6 +778,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
     public function updateRsvp(Request $request, $id)
     {
+        $user  = Auth::guard('web')->user()->id;
         // Validate the data
         // $validated = $request->validate([
         //     'adults' => 'required|integer|min:0',
