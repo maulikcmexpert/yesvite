@@ -2684,7 +2684,12 @@ if ($rsvpSent != null) {
 
         if ($check_status == 1) {
 
+            $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
+            session(['add_guest_user_id' => $userData]);
+        
+
             // Check if user already exists in session
+
             $exists = false;
             foreach ($userData as &$user) {
                 if ($user['user_id'] == $user_id) {
@@ -2699,7 +2704,6 @@ if ($rsvpSent != null) {
                     'prefer_by' => $prefer_by,
                 ];
             }
-            // dd($userData);
         } else {
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
             session(['add_guest_user_id' => $userData]);
