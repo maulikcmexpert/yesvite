@@ -905,6 +905,8 @@ function datepicker() {
                 let startMoment = startTime
                     ? moment(startTime, "LT")
                     : moment().hours(12).minutes(0).seconds(0);
+
+                    console.log(startMoment,22);
                 const previousActivity =
                     currentActivity.prev(".activity-main-wrp");
 
