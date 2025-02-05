@@ -1,7 +1,7 @@
 @foreach ($guestArray as $index => $guest)
 
                         @php
-                        if($see_all!="1"){
+                        if($see_all!=="1"){
                             $index == 7;
                             break;
                         }
