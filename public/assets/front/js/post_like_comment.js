@@ -771,8 +771,6 @@ $(document).ready(function () {
                 }
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-                $('#home_loader').css('display','none');
-
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 const exists = guestList.some((contact) => contact.id === id);
@@ -868,7 +866,7 @@ $(document).ready(function () {
 
                 },
               });
-            }, 1000);
+            }, 500);
         }
 
 
