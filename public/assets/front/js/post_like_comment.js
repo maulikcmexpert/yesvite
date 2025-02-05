@@ -893,7 +893,7 @@ $(document).ready(function () {
         $.ajax({
             url: base_url+"store_add_new_guest",
             type: 'GET',
-            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact,is_duplicate:is_duplicate},
+            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact},
             success: function (response) {
              console.log(response);
              if(response.is_phone=="1"&&response.view!=""){
