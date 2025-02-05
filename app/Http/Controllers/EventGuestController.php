@@ -815,7 +815,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 $query->where('app_user', '1');
             })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
-            // dd($rsvpSent);
+            dd($rsvpSent);
             if ($rsvpSent != null) {
                 $rsvp_attempt = "";
                 if ($rsvpSentAttempt == NULL) {
