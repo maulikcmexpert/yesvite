@@ -2760,17 +2760,21 @@ if ($rsvpSent != null) {
                 
             }
         }
+        // if($request->contact=="yesvite"){
+        //     return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"0"]);
+        // }else{
+        //     return response()->json(['view' => view( 'front.event_wall.guest_phone_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"1"]);
+        // }
+        }
+    
+        session(['add_guest_user_id' => $userData]);
+    
         if($request->contact=="yesvite"){
             return response()->json(['view' => view( 'front.event_wall.guest_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"0"]);
         }else{
             return response()->json(['view' => view( 'front.event_wall.guest_phone_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"1"]);
         }
         }
-    
-        session(['add_guest_user_id' => $userData]);
-    
-        return session()->get('add_guest_user_id');
-    }
 
     
 }
