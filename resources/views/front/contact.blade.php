@@ -720,7 +720,7 @@
             </div>
             <div class="modal-footer-wrp">
               <div class="modal-footer rsvp-button-wrp">
-                <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download" data-bs-dismiss="modal">Download CSV</a>
+                <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a>
                 <button type="button" class="cmn-btn click-to-upload-btn"><input type="file"> Click to Upload</button>
               </div>
               <p>Support text/csv, maximum file size of 10Mb</p>
@@ -728,3 +728,12 @@
         </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('download-csv-btn').addEventListener('click', function() {
+        var link = document.createElement('a');
+        link.href = "{{ asset('assets/front/csv/demo.xlsx') }}";
+        link.download = "demo.xlsx"; // Specify the file name
+        link.click();
+    });
+</script>
