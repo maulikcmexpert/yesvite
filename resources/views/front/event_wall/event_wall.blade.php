@@ -277,7 +277,7 @@
                                                 @if( $post['post_type'] =="4")
                                                 <div class="posts-card-show-post-wrp">
                                                     <div class="sucess-yes"
-                                                                            data-post-id="{{ $post['guest_id'] }}"  >
+                                                                            data-post-id="{{ $post['id'] }}"  >
                                                                             <h5 class="green">YES</h5>
                                                                             <div class="sucesss-cat ms-auto">
                                                                                 <svg width="15" height="15"
@@ -300,21 +300,21 @@
                                                                                         fill="black"
                                                                                         fill-opacity="0.2" />
                                                                                 </svg>
-                                                                                <h5 id="adults{{ $guest['guest_id'] }}">
+                                                                                <h5 id="adults{{ $post['id'] }}">
                                                                                     {{ $post['adults'] }} Adults
                                                                                 </h5>
-                                                                                <h5 id="kids{{ $guest['guest_id'] }}">
+                                                                                <h5 id="kids{{ $post['id'] }}">
                                                                                     {{ $postt['kids'] }} Kids</h5>
                                                                             </div>
                                                                         </div>
                                                                     @elseif ($post['rsvp_status'] == '0')
                                                                         <div class="sucess-no"
-                                                                            data-guest-id="{{ $guest['guest_id'] }}" >
+                                                                            data-guest-id="{{ $post['id'] }}" >
                                                                             <h5>NO</h5>
                                                                         </div>
                                                                     @elseif ($guest['rsvp_status'] == null)
                                                                         <div class="no-reply"
-                                                                            data-guest-id="{{ $guest['guest_id'] }}">
+                                                                            data-guest-id="{{ $post['id'] }}">
                                                                             <h5>NO REPLY</h5>
 
                                                                     </div>
