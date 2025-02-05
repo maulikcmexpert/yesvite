@@ -292,7 +292,7 @@ $(document).ready(function () {
                             <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button class="commented-user-reply-btn">Reply</button>
+                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
                     </div>
                     <ul class="primary-comment-replies"></ul>
                 </li>
@@ -309,7 +309,8 @@ $(document).ready(function () {
 
                         // Check if the reply is already appended
                         if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
-                            replyList.append(newCommentHTML);
+                            replyList.prepend(newCommentHTML);
+                            // replyList.append(newCommentHTML);
                         }
                     }
                 } else {
@@ -318,7 +319,8 @@ $(document).ready(function () {
 
                     // Check if the comment is already appended
                     if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
-                        commentList.append(newCommentHTML);
+                        commentList.prepend(newCommentHTML);
+                        // commentList.append(newCommentHTML);
                     }
                 }
 
