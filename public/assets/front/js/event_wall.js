@@ -1282,6 +1282,8 @@ $(document).on('click','.wall_filter_reset',function(){
         },
         success: function (response) {
             console.log(response.view);
+            // $('.wall-post-content').html();
+            $('.wall-post-content').html(response.view);
             
         },
         error: function (xhr, status, error) {

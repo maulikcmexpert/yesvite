@@ -98,7 +98,8 @@
 
                                                             <span
                                                                 class="host">Co Host</span>
-                                                        @endif</h3>
+                                                        @endif
+                                                    </h3>
 
                                                             <p>{{ $post['location'] }}</p>
                                                         </div>
@@ -223,12 +224,15 @@
                                                         </h5>
                                                     </div>
                                                 </div>
+
                                                 <div class="posts-card-inner-wrp">
                                                     <h3 class="posts-card-inner-questions">{{ $post['post_message'] }}
                                                     </h3>
                                                 </div>
-                                                {{-- {{  dd($post['post_image'])}} --}}
 
+
+                                                {{-- {{  dd($post['post_image'])}} --}}
+                                                @if( $post['post_type'] =="1")
                                                 <div class="posts-card-show-post-wrp">
                                                     <div class="swiper posts-card-post">
                                                         <div class="swiper-wrapper">
@@ -263,8 +267,44 @@
                                                         <div class="custom-dots-container"></div>
                                                     </div>
                                                 </div>
+                                                @endif
+                                                @if( $post['post_type'] =="2")
+                                                <div class="posts-card-inner-wrp">
+                                                    <h3 class="posts-card-inner-questions">
+                                                        {{ $post['poll_question'] }}</h3>
+                                                </div>
+                                                <input type="hidden" name="event_post_id" id="event_post_id"
+                                                    value="{{ $post['id'] }}">
+                                                <div class="post-card-poll-wrp">
+                                                    <div class="post-card-poll-inner">
+                                                        <h5>{{ $post['total_poll_vote'] }} Votes
+                                                            <span>{{ $post['poll_duration'] }} left</span>
+                                                        </h5>
+                                                        @foreach ($post['poll_option'] as $index => $option)
+                                                            <div class="poll-click-wrp poll-progress-one"
+                                                                data-poll-id ="{{ $post['poll_id'] }}"
+                                                                data-option-id="{{ $option['id'] }}">
+                                                                <button class="option-button"
+                                                                    data-poll-id="{{ $post['poll_id'] }}"
+                                                                    data-option-id="{{ $option['id'] }}">
+                                                                    {{ $option['option'] }}
+                                                                    <span>{{ $option['total_vote'] }}</span>
+                                                                </button>
+                                                                <span class="poll-click-progress"
+                                                                    style="width: {{ rtrim($option['total_vote'], '%') }}%;"></span>
+                                                            </div>
+                                                        @endforeach
+                                                        <div class="expired-message"
+                                                            style="color: red; display: none;"
+                                                            id="errorMessage-{{ $post['poll_id'] }}"></div>
+                                                        {{-- <div class="poll-click-wrp poll-progress-two">
+                                                        <h4>Yeah, Fine! 🙌 <span>80%</span></h4>
+                                                        <span class="poll-click-progress" style="width: 50%;"></span>
+                                                    </div> --}}
+                                                    </div>
+                                                </div>
 
-
+                                                @endif
                                                 <div class="posts-card-like-commnet-wrp">
                                                     <div class="posts-card-like-comment-left">
                                                         <ul type="button" data-bs-toggle="modal"
@@ -645,7 +685,7 @@
 
                                         </div>
 
-                                        <div class="event-posts-main-wrp common-div-wrp hidden_post_poll"
+                                        {{-- <div class="event-posts-main-wrp common-div-wrp hidden_post_poll"
                                             data-post-id="{{ $poll['event_post_id'] }}">
                                             <div class="posts-card-wrp">
                                                 <div class="posts-card-head">
@@ -813,8 +853,7 @@
                                                     <h3 class="posts-card-inner-questions">
                                                         {{ $poll['poll_question'] }}</h3>
                                                 </div>
-                                                <input type="hidden" name="event_post_id" id="event_post_id"
-                                                    value="{{ $poll['event_post_id'] }}">
+
                                                 <div class="post-card-poll-wrp">
                                                     <div class="post-card-poll-inner">
                                                         <h5>{{ $poll['total_poll_vote'] }} Votes
@@ -840,7 +879,7 @@
                                                         {{-- <div class="poll-click-wrp poll-progress-two">
                                                         <h4>Yeah, Fine! 🙌 <span>80%</span></h4>
                                                         <span class="poll-click-progress" style="width: 50%;"></span>
-                                                    </div> --}}
+                                                    </div>
                                                     </div>
                                                 </div>
 
@@ -949,7 +988,7 @@
                                                     </span>
                                                 </div>
 
-                                                {{-- <div
+                                                <div
                                                 class="posts-card-show-all-comments-wrp d-none show_{{ $poll['event_post_id'] }}">
 
                                                 <div class="posts-card-show-all-comments-inner">
@@ -1172,10 +1211,10 @@
                                                             </li>
                                                         @endforeach
                                                     </ul>
-                                                </div> --}}
+                                                </div>
                                             </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     @endforeach
                                     </div>
                                 </div>
