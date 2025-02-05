@@ -735,7 +735,7 @@ $(document).ready(function () {
     // Event listener for contact checkboxes
         $(document).on("change", ".contact-checkbox", function () {
             $('#home_loader').css('display','block');
-
+alert();
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
 
