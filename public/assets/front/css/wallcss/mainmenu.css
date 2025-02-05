@@ -553,6 +553,10 @@
     border: none;
 }
 
+.upcoming-card-dropdown .dropdown-toggle i{
+    color: var(--secondary-black);
+}
+
 .upcoming-card-dropdown .dropdown-menu {
     border: none;
     padding: 15px;

@@ -354,12 +354,17 @@ class EventController extends BaseController
                 }
 
                 $eventDetail['gift_registry_list'] = [];
+                Session::get('giftRegistryData', []);
                 if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
 
                     $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
 
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
+                    session()->put('giftRegistryData', $gift_registry_ids);
+                    Session::save();
                 }
+              
+              
 
                 $eventDetail['event_setting'] = "";
 
@@ -2300,7 +2305,7 @@ class EventController extends BaseController
             $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
-        dd($selectedContactId);
+        
     
 
         $getAllContacts = contact_sync::where('contact_id', $id)
@@ -2310,6 +2315,12 @@ class EventController extends BaseController
             //             ->skip($request->offset);
             //     });
             // })
+            ->when(!empty($selectedContactId), function ($query) use ($selectedContactId) {
+                if (!empty($selectedContactId)) {
+                    $query->orWhereIn('id', $selectedContactId);
+                }
+            })
+            
            
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
@@ -2333,6 +2344,7 @@ class EventController extends BaseController
             ->get();
         
 
+            // dd($getAllContacts);
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
@@ -2858,10 +2870,34 @@ class EventController extends BaseController
 
     public function get_gift_registry(Request $request)
     {
-        $user_id =  Auth::guard('web')->user()->id;
+        // $giftRegistryData=session('giftRegistryData');
+        // $registry=[];
+        // if(isset($giftRegistryData) && $giftRegistryData!=null && count($giftRegistryData) > 0 ){
+        //     $registry = $giftRegistryData;
+        // }
+        // $user_id =  Auth::guard('web')->user()->id;
 
-        $gift_registry = EventGiftRegistry::where('user_id', $user_id)->get();
-
+        // $gift_registry = EventGiftRegistry::where('user_id', $user_id)   ->when(!empty($registry), function ($query) use ($registry) {
+        //     $query->orWhereIn('id', $selectedId);
+        // })->get();
+        $giftRegistryData = session('giftRegistryData');
+        $registry = [];
+        
+        // Check if giftRegistryData exists and is not empty
+        if (isset($giftRegistryData) && $giftRegistryData != null && count($giftRegistryData) > 0) {
+            $registry = $giftRegistryData; // Assign the session data to $registry
+        }
+        
+        $user_id = Auth::guard('web')->user()->id; // Get the authenticated user's ID
+        
+        // Query for gift registry
+        $gift_registry = EventGiftRegistry::where('user_id', $user_id)
+            ->when(!empty($registry), function ($query) use ($registry) {
+                // Assuming $registry is an array of IDs to search for in the 'id' column
+                $query->orWhereIn('id', $registry); // Use $registry instead of $selectedId
+            })
+            ->get();
+        
         return response()->json(['view' => view('front.event.gift_registry.add_gift_registry', compact('gift_registry'))->render()]);
     }
 
