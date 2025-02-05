@@ -131,10 +131,10 @@ class EventPhotoController extends Controller
                         'comment' => $values->comment_text,
                         'media' => (!empty($values->media)) ? asset('storage/comment_media/' . $values->media) : "",
                         'user_id' => $values->user_id,
-                        'username' => $values->user->firstname . ' ' . $values->user->lastname,
+                        'username' => @$values->user->firstname . ' ' . @$values->user->lastname,
                         'profile' => (!empty($values->user->profile)) ? asset('storage/profile/' . $values->user->profile) : "",
                         'comment_total_likes' => $values->post_comment_reaction_count,
-                        'location' => $values->user->city . ($values->user->state ? ', ' . $values->user->state : ''),
+                        'location' => @$values->user->city . (@$values->user->state ? ', ' . @$values->user->state : ''),
                         'is_like' => 0, // Adjust based on the user's like status
                         'created_at' => $values->created_at,
                         'total_replies' => $values->replies_count,
@@ -735,7 +735,7 @@ class EventPhotoController extends Controller
 
                     $duration = getVideoDuration($filePath); // Assuming this is a helper function
                     $thumbName = generate_thumbnail($fileName);
-                    $postFile->move(public_path('storage/post_image/'), $fileName);
+                    // $postFile->move(public_path('storage/post_image/'), $fileName);
                 }
 
                 //     // Process image
