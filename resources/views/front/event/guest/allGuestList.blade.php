@@ -16,7 +16,7 @@ $phone_checked = 'checked';
 $ischeck = ($isCohost == "1" && !empty($isCopy)) ? '' : 'disabled';
 }
 }
-// dd($ischeck);
+dd($ischeck);
 @endphp
 
 <div class="users-data">
