@@ -330,7 +330,11 @@
     margin-right: 10px;
 }
 
-.post-potluck-category .list-slide .accordion-body h5 {
+.post-potluck-category .list-slide .accordion-body h5{
+    color: var(--white) !important;
+}
+
+.post-potluck-category .list-slide .accordion-body h4 {
     font-size: 12px;
     line-height: 20px;
     color: var(--secondryColor);
