@@ -953,7 +953,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         $yesvite_users_data = [];
         $yesvite_phone_data = [];
         $is_phone=$request->is_phone;
-        // dd($new_added_user);
+        dd($new_added_user);
         if(!empty($new_added_user)){
         foreach ($new_added_user as $sesionuser) {
             // Try fetching the user from the User table
@@ -975,9 +975,10 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                 ];
             }
              else {
-                $contact_sync = contact_sync::where('id',$sesionuser['user_id'])->first();
+                // $contact_sync = contact_sync::find($sesionuser['user_id']);;
+                $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
 
-                if ($contact_sync!=null && $is_phone==1) {
+                if ($contact_sync) {
                     $yesvite_phone_data[] = [
                         'user_id' => $contact_sync->id,
                         'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
