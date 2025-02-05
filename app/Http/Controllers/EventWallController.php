@@ -716,7 +716,7 @@ class EventWallController extends Controller
                 //     ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
                 //     // ->where('user_id', '!=', $user->id)
                 //     ->get();
-                $guestData = getInvitedUsersList($eventDetail->id);
+                $guestData = getInvitedUsersListNew($eventDetail->id);
 
 
                 $eventData[] = "Number of guests : " . $numberOfGuest;
@@ -2816,7 +2816,7 @@ class EventWallController extends Controller
         if ($fetch_event_data->user_id == $user->id) {
             $is_host = 1;
         }
-        $all_invited_user = getInvitedUsersList($eventId);
+        $all_invited_user = getInvitedUsersListNew($eventId);
 
 
         return response()->json(['view' => view('front.event_wall.right_all_guest_list', compact('all_invited_user', 'eventId', 'is_host'))->render(), 'status' => 1]);
