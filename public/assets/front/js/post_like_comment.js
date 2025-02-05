@@ -734,7 +734,11 @@ function generateProfileImage(firstname, lastname) {
 $(document).ready(function () {
     // Event listener for contact checkboxes
         $(document).on("change", ".contact-checkbox", function () {
-            console.log($('#home_loader').length);
+            // console.log($('#home_loader').length);
+            setTimeout(() => {
+                $('#home_loader').css('display', 'block');
+            }, 500);
+            
             
             $('#home_loader').show(); // Alternative way to display
             const id = $(this).data("id");
