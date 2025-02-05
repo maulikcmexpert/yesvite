@@ -2176,11 +2176,11 @@ class EventController extends BaseController
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
         $userIds = Session::get('user_ids');
-    $selectedId = [];
+        $selectedId=[];
+        if($userIds!=null &&  count($userIds) > 0){
+            $selectedId =array_column($userIds,'id');
 
-    if (!empty($userIds)) {
-        $selectedId = array_map(fn($user) => $user->id, $userIds);
-    }
+        }
        
        
         // array_values
