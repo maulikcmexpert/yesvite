@@ -291,19 +291,19 @@
                                                     <h5>{{$post['kids']}} Kids</h5>
                                                 </div>
                                         </div>
-
+@endif
                                         @elseif($post['rsvp_status'] == '0')
                                             <div class="sucess-no">
                                                     <h5>NO</h5>
-                                                
+
                                             </div>
                                         @else
                                             <div class="no-reply">
                                                         <h5>NO REPLY</h5>
-                                                    
+
                                                 </div>
                                             @endif
-                                                                   
+
                                                 @endif
                                                 @if( $post['post_type'] =="2")
                                                 <div class="posts-card-inner-wrp">
