@@ -2296,12 +2296,12 @@ class EventController extends BaseController
         $emails = [];
         $selected_contact = Session::get('contact_ids');
         $selectedContactId=[];
-        if($selectedContactId!=null &&  count($selected_contact) > 0){
+        if($selected_contact!=null &&  count($selected_contact) > 0){
             $selectedContactId =array_column($selected_contact,'sync_id');
 
         }
 
-        dd($selectedContactId,$selected_contact);
+    
 
         // $getAllContacts = contact_sync::where('contact_id', $id)
         //     // ->when($type != 'group', function ($query) use ($request) {
