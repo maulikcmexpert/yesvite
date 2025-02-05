@@ -955,47 +955,97 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         $is_phone=$request->is_phone;
         // dd($new_added_user);
         if(!empty($new_added_user)){
-        foreach ($new_added_user as $sesionuser) {
-            // Try fetching the user from the User table
-            $user = User::find($sesionuser['user_id']);
-            $prefer_by=$sesionuser['prefer_by'];
+        // foreach ($new_added_user as $sesionuser) {
+        //     // Try fetching the user from the User table
+        //     $user = User::find($sesionuser['user_id']);
+        //     $prefer_by=$sesionuser['prefer_by'];
+        //     // && $is_phone==0
+        //     if ($user && $is_phone==0) {
+        //         // If the user exists, add data to the $users_data array
+        //         $yesvite_users_data[] = [
+        //             'user_id' => $user->id,
+        //             'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
+        //             'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
+        //             'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
+        //             'phone_number'=>((!empty($user->phone_number) && $user->phone_number != NULL) ? $user->phone_number : ""),
+        //             'profile' => (!empty($user->profile) && $user->profile != NULL)
+        //                         ? asset('storage/profile/' . $user->profile)
+        //                         : "",
+        //             'prefer_by'=>$prefer_by
+        //         ];
+        //     }
+        //      else {
+        //         // $contact_sync = contact_sync::find($sesionuser['user_id']);;
+        //         $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
 
-            if ($user && $is_phone==0) {
-                // If the user exists, add data to the $users_data array
+        //         if ($contact_sync) {
+        //             $yesvite_phone_data[] = [
+        //                 'user_id' => $contact_sync->id,
+        //                 'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
+        //                 'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
+        //                 'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
+        //                 'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL )
+        //                             ? asset('storage/profile/' . $contact_sync->photo)
+        //                             : "",
+        //                 'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
+        //                 'prefer_by'=>$prefer_by
+
+        //             ];
+        //         }
+        //     }
+
+        // }
+
+        $processed_user_ids = []; // Keep track of processed user IDs
+
+        foreach ($new_added_user as $sesionuser) {
+            $user_id = $sesionuser['user_id'];
+            $prefer_by = $sesionuser['prefer_by'];
+            $user = User::where( 'id', $sesionuser['user_id'])->where('app_user',"1")->first();
+            if ($user && $user->app_user == "1" && $is_phone == 0) {
                 $yesvite_users_data[] = [
                     'user_id' => $user->id,
-                    'first_name' => (!empty($user->firstname) && $user->firstname != NULL) ? $user->firstname : "",
-                    'last_name' => (!empty($user->lastname) && $user->lastname != NULL) ? $user->lastname : "",
-                    'email' => (!empty($user->email) && $user->email != NULL) ? $user->email : "",
-                    'phone_number'=>((!empty($user->phone_number) && $user->phone_number != NULL) ? $user->phone_number : ""),
-                    'profile' => (!empty($user->profile) && $user->profile != NULL)
-                                ? asset('storage/profile/' . $user->profile)
-                                : "",
-                    'prefer_by'=>$prefer_by
+                    'first_name' => !empty($user->firstname) ? $user->firstname : "",
+                    'last_name' => !empty($user->lastname) ? $user->lastname : "",
+                    'email' => !empty($user->email) ? $user->email : "",
+                    'phone_number' => !empty($user->phone_number) ? $user->phone_number : "",
+                    'profile' => !empty($user->profile) ? asset('storage/profile/' . $user->profile) : "",
+                    'prefer_by' => $prefer_by
                 ];
-            } else {
-                $contact_sync = contact_sync::where('id',$sesionuser['user_id']);
+                $processed_user_ids[] = $user_id; // Mark this ID as processed
 
+            } 
+        }
+        foreach ($new_added_user as $sesionuser) {
+            $user_id = $sesionuser['user_id'];
+            $prefer_by = $sesionuser['prefer_by'];
+            // $user = contact_sync::where( 'id', $sesionuser['user_id'])->where('app_user',"1")->first();
+            // if ($user && $user->app_user == "1" && $is_phone == 0) {
+                $find=User::where(['id'=>$user_id,'app_user'=>"1"])->first();
+                if(!empty($find)){
+                            continue;
+                }else{
+                $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
+        
                 if ($contact_sync) {
                     $yesvite_phone_data[] = [
                         'user_id' => $contact_sync->id,
-                        'first_name' => (!empty($contact_sync->firstName) && $contact_sync->firstName != NULL) ? $contact_sync->firstName : "",
-                        'last_name' => (!empty($contact_sync->lastName) && $contact_sync->lastName != NULL) ? $contact_sync->lastName : "",
-                        'email' => (!empty($contact_sync->email) && $contact_sync->email != NULL) ? $contact_sync->email : "",
-                        'profile' => (!empty($contact_sync->photo) && $contact_sync->photo != NULL )
-                                    ? asset('storage/profile/' . $contact_sync->photo)
-                                    : "",
-                        'phone_number'=>((!empty($contact_sync->phone) && $contact_sync->phone != NULL) ? $contact_sync->phone : ""),
-                        'prefer_by'=>$prefer_by
-
+                        'first_name' => !empty($contact_sync->firstName) ? $contact_sync->firstName : "",
+                        'last_name' => !empty($contact_sync->lastName) ? $contact_sync->lastName : "",
+                        'email' => !empty($contact_sync->email) ? $contact_sync->email : "",
+                        'profile' => !empty($contact_sync->photo) ? asset('storage/profile/' . $contact_sync->photo) : "",
+                        'phone_number' => !empty($contact_sync->phone) ? $contact_sync->phone : "",
+                        'prefer_by' => $prefer_by
                     ];
+                    $processed_user_ids[] = $user_id; // Mark this ID as processed even if found in contact_sync
                 }
             }
-
+            }
         }
+        
 
 
-    }
+    
         return response()->json(['view' => view( 'front.event_wall.see_invite', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data','is_phone'))->render()]);
 
     }

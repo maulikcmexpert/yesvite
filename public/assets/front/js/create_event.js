@@ -4778,8 +4778,18 @@ async function saveDesignData(direct = false) {
         console.log("no canvas found");
         return;
     }
-    if (eventData.desgin_selected != "") {
-        return;
+    if (
+        typeof eventData.desgin_selected != "undefined" &&
+        eventData.desgin_selected != ""
+    ) {
+        if (direct) {
+            return true;
+        } else {
+            if (eventData.desgin_selected) {
+                updateUIAfterSave(eventData.desgin_selected);
+                return;
+            }
+        }
     }
     console.log({ eventData });
     console.log("here for save image");
@@ -4884,159 +4894,94 @@ function updateUIAfterSave(image) {
 
     $(".pick-card, .edit-design").addClass("menu-success");
 }
+var design_inner_image = "";
 
-// async function saveDesignData(direct = false) {
-//     console.log({ eventData });
-//     console.log("here for save image");
-//     $("#close_createEvent").css("display", "block");
-//     $("#sidebar_select_design_category").css("display", "none");
+function save_image_design(downloadImage, textData) {
+    if ($("#shape_img").attr("src")) {
+        design_inner_image = $("#shape_img").attr("src");
+    }
+    var old_shape_url = $("#first_shape_img").attr("src");
 
-//     canvas.discardActiveObject();
-//     canvas.getObjects().forEach((obj) => {
-//         if (obj.type === "group") {
-//             canvas.remove(obj); // Your existing function to add icons
-//         }
-//     });
-//     canvas.renderAll();
-//     setTimeout(() => {
-//         console.log("here for save image2");
+    domtoimage
+        .toBlob(downloadImage)
+        .then(function (blob) {
+            console.log({ blob });
 
-//         var downloadImage = document.getElementById("imageEditor1");
-//         $("#loader").show();
-//         // eventData.desgin_selected = 'dom_to_image_not_working_in_server';
-//         $(this).prop("disabled", true);
-//         $(".btn-close").prop("disabled", true);
-//         dbJson = getTextDataFromCanvas();
-//         console.log({ dbJson });
-//         eventData.textData = dbJson;
-//         eventData.temp_id = temp_id;
-//         console.log(downloadImage);
-//         // save_image_design(downloadImage);
-//         if ($("#shape_img").attr("src")) {
-//             design_inner_image = $("#shape_img").attr("src");
-//         }
-//         var old_shape_url = $("#first_shape_img").attr("src");
-//         console.log("here for save image3");
+            var formData = new FormData();
+            formData.append("image", blob, "design.png");
+            formData.append("design_inner_image", design_inner_image);
+            formData.append("shapeImageUrl", old_shape_url);
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: base_url + "event/store_temp_design",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    let image = response.image;
+                    eventData.desgin_selected = image;
 
-//         domtoimage
-//             .toBlob(downloadImage)
-//             .then(function (blob) {
-//                 var formData = new FormData();
-//                 formData.append("image", blob, "design.png");
-//                 formData.append("design_inner_image", design_inner_image);
-//                 formData.append("shapeImageUrl", old_shape_url);
-//                 formData.append("eventId", eventId);
-//                 $.ajax({
-//                     headers: {
-//                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-//                             "content"
-//                         ),
-//                     },
-//                     url: base_url + "event/store_temp_design",
-//                     type: "POST",
-//                     data: formData,
-//                     processData: false,
-//                     contentType: false,
-//                     success: function (response) {
-//                         let image = response.image;
-//                         eventData.desgin_selected = image;
-//                         console.log("here for save image4");
+                    // if(eventData.step == '1'){
+                    //     eventData.step = '2';
+                    // }
+                    console.log(final_step);
+                    if (final_step == 2) {
+                        final_step = 3;
+                    }
+                    console.log(eventData);
+                    eventData.step = final_step;
+                    console.log("Image uploaded and saved successfully");
+                    $("#myCustomModal").modal("hide");
+                    $("#exampleModal").modal("hide");
+                    $("#loader").css("display", "none");
+                    $(".store_desgin_temp").prop("disabled", false);
+                    $(".btn-close").prop("disabled", false);
+                    $(".main-content-wrp").removeClass("blurred");
+                    $(".step_2").hide();
+                    $("#edit-design-temp").hide();
+                    console.log("handleActiveClass");
 
-//                         // if(eventData.step == '1'){
-//                         //     eventData.step = '2';
-//                         // }
-//                         console.log(final_step);
-//                         if (final_step == 1) {
-//                             final_step = 2;
-//                         }
-//                         console.log(eventData);
-//                         eventData.step = final_step;
-//                         console.log("Image uploaded and saved successfully");
+                    handleActiveClass(".li_guest");
+                    $(".pick-card").addClass("menu-success");
+                    $(".edit-design").addClass("menu-success");
+                    $(".edit-design").removeClass("active");
+                    $(".li_design")
+                        .find(".side-bar-list")
+                        .addClass("menu-success");
+                    $(".li_design").addClass("menu-success");
 
-//                         $("#eventImage").attr(
-//                             "src",
-//                             base_url +
-//                                 "public/storage/event_images/" +
-//                                 eventData.desgin_selected +
-//                                 ""
-//                         );
-//                         $("#eventTempImage").attr(
-//                             "src",
-//                             base_url +
-//                                 "public/storage/event_images/" +
-//                                 eventData.desgin_selected +
-//                                 ""
-//                         );
-//                         if (direct) {
-//                             return true;
-//                         }
-//                         $("#myCustomModal").modal("hide");
-//                         $("#exampleModal").modal("hide");
-//                         $("#loader").css("display", "none");
-//                         $(".store_desgin_temp").prop("disabled", false);
-//                         $(".btn-close").prop("disabled", false);
-//                         $(".main-content-wrp").removeClass("blurred");
-//                         $(".step_2").hide();
-//                         $(".step_4").hide();
-//                         $(".step_3").hide();
-//                         $("#edit-design-temp").hide();
+                    active_responsive_dropdown("drop-down-event-guest");
 
-//                         // handleActiveClass('.li_guest');
-//                         $(".pick-card").addClass("menu-success");
-//                         $(".edit-design").addClass("menu-success");
-//                         $(".edit-design").removeClass("active");
-//                         $(".li_design")
-//                             .find(".side-bar-list")
-//                             .addClass("menu-success");
-//                         $(".li_design").addClass("menu-success");
+                    $(".event_create_percent").text("75%");
+                    $(".current_step").text("3 of 4");
 
-//                         // active_responsive_dropdown('drop-down-event-guest');
+                    $(".step_3").show();
+                    console.log(eventData);
 
-//                         $(".event_create_percent").text("50%");
-//                         $(".current_step").text("2 of 4");
-
-//                         console.log(eventData);
-
-//                         var type = "all";
-//                         // get_user(type);
-//                         // $('#sidebar_select_design_category').css('display','none');
-//                         $(".step_1").show();
-//                         // $(".step_2").css("display", "none");
-//                         // $("#edit-design-temp").css("display", "none");
-//                         // $(".step_3").css("display", "none");
-//                         // $(".step_4").css("display", "none");
-//                         // $(".step_final_checkout").css("display", "none");
-//                         active_responsive_dropdown("drop-down-event-detail");
-
-//                         // $('.event_create_percent').text('50%');
-//                         // $('.current_step').text('2 of 4');
-//                         console.log("handleActiveClass");
-
-//                         handleActiveClass(".li_event_details");
-//                         var design = eventData.desgin_selected;
-//                         $(".li_event_detail")
-//                             .find(".side-bar-list")
-//                             .addClass("active");
-//                         if (design == undefined || design == "") {
-//                         } else {
-//                             $(".pick-card").addClass("menu-success");
-//                             $(".edit-design").addClass("menu-success");
-//                         }
-//                     },
-//                     error: function (xhr, status, error) {
-//                         console.error(
-//                             "Failed to upload and save the image:",
-//                             error
-//                         );
-//                     },
-//                 });
-//             })
-//             .catch(function (error) {
-//                 console.error("Error capturing image:", error);
-//             });
-//         $(".main-content-wrp").addClass("blurred");
-//     }, 500);
-// }
+                    var type = "all";
+                    get_user(type);
+                    if (response.shape_image) {
+                        eventData.shape_image = response.shape_image;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
+                    console.error(
+                        "Failed to upload and save the image:",
+                        error
+                    );
+                },
+            });
+        })
+        .catch(function (error) {
+            console.error("Error capturing image:", error);
+        });
+}
 $(document).on("click", ".li_event_details", async function () {
     await saveDesignData();
 });
@@ -6515,118 +6460,8 @@ $(document).on("click", ".store_desgin_temp", function () {
 
 $(document).on("click", "#next_guest_step", function () {
     savePage1Data();
-    // canvas.discardActiveObject();
-    // canvas.getObjects().forEach(obj => {
-    //     if (obj.type === 'group') {
-    //         canvas.remove(obj) // Your existing function to add icons
-    //     }
-    // });
-
-    // canvas.renderAll();
-    // setTimeout(() => {
-    //     var downloadImage = document.getElementById("imageEditor1");
-    //     $("#loader").show();
-    //     $(this).prop("disabled", true);
-    //     $('.btn-close').prop("disabled", true);
-    //     dbJson = getTextDataFromCanvas();
-    //     // console.log(textData);
-    //     // dbJson = {
-    //     //     textElements: textData
-    //     // };
-    //     eventData.textData = dbJson;
-    //     eventData.temp_id = temp_id;
-    //     save_image_design(downloadImage);
-    //     $(".main-content-wrp").addClass("blurred");
-    // }, 500);
 });
 
-var design_inner_image = "";
-function save_image_design(downloadImage, textData) {
-    if ($("#shape_img").attr("src")) {
-        design_inner_image = $("#shape_img").attr("src");
-    }
-    var old_shape_url = $("#first_shape_img").attr("src");
-
-    domtoimage
-        .toBlob(downloadImage)
-        .then(function (blob) {
-            console.log({ blob });
-
-            var formData = new FormData();
-            formData.append("image", blob, "design.png");
-            formData.append("design_inner_image", design_inner_image);
-            formData.append("shapeImageUrl", old_shape_url);
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
-                url: base_url + "event/store_temp_design",
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    let image = response.image;
-                    eventData.desgin_selected = image;
-
-                    // if(eventData.step == '1'){
-                    //     eventData.step = '2';
-                    // }
-                    console.log(final_step);
-                    if (final_step == 2) {
-                        final_step = 3;
-                    }
-                    console.log(eventData);
-                    eventData.step = final_step;
-                    console.log("Image uploaded and saved successfully");
-                    $("#myCustomModal").modal("hide");
-                    $("#exampleModal").modal("hide");
-                    $("#loader").css("display", "none");
-                    $(".store_desgin_temp").prop("disabled", false);
-                    $(".btn-close").prop("disabled", false);
-                    $(".main-content-wrp").removeClass("blurred");
-                    $(".step_2").hide();
-                    $("#edit-design-temp").hide();
-                    console.log("handleActiveClass");
-
-                    handleActiveClass(".li_guest");
-                    $(".pick-card").addClass("menu-success");
-                    $(".edit-design").addClass("menu-success");
-                    $(".edit-design").removeClass("active");
-                    $(".li_design")
-                        .find(".side-bar-list")
-                        .addClass("menu-success");
-                    $(".li_design").addClass("menu-success");
-
-                    active_responsive_dropdown("drop-down-event-guest");
-
-                    $(".event_create_percent").text("75%");
-                    $(".current_step").text("3 of 4");
-
-                    $(".step_3").show();
-                    console.log(eventData);
-
-                    var type = "all";
-                    get_user(type);
-                    if (response.shape_image) {
-                        eventData.shape_image = response.shape_image;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $("#loader").css("display", "none");
-                    console.error(
-                        "Failed to upload and save the image:",
-                        error
-                    );
-                },
-            });
-        })
-        .catch(function (error) {
-            console.error("Error capturing image:", error);
-        });
-}
 var busyyesvite = false;
 var limityesvite = 10;
 var offsetyesvite = 0;
@@ -8821,10 +8656,14 @@ if (final_step == "4" && isCohost == "1") {
     }, 1000);
 }
 
-function step2Open() {
+async function step2Open() {
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     console.log(design);
 
     $(".li_event_detail").find(".side-bar-list").addClass("active");

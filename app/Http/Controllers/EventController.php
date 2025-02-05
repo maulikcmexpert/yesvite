@@ -2176,8 +2176,12 @@ class EventController extends BaseController
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
         $userIds = Session::get('user_ids');
+        $selectedId=[];
+        if($userIds!=null &&  count($userIds) > 0){
+            $selectedId =array_column($userIds,'id');
+
+        }
        
-        $selectedId =array_column($userIds,'id');
        
         // array_values
 
@@ -2290,7 +2294,14 @@ class EventController extends BaseController
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
+        $selected_contact = Session::get('contact_ids');
+        $selectedContactId=[];
+        if($selected_contact!=null &&  count($selected_contact) > 0){
+            $selectedContactId =array_column($selected_contact,'sync_id');
 
+        }
+        dd($selectedContactId);
+    
 
         $getAllContacts = contact_sync::where('contact_id', $id)
             // ->when($type != 'group', function ($query) use ($request) {
@@ -2299,6 +2310,7 @@ class EventController extends BaseController
             //             ->skip($request->offset);
             //     });
             // })
+           
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
@@ -2319,6 +2331,8 @@ class EventController extends BaseController
             ->orderBy('firstname')
 
             ->get();
+        
+
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
