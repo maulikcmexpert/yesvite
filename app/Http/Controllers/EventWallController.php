@@ -62,7 +62,7 @@ class EventWallController extends Controller
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
-        dd(1);
+
         $users = User::withCount(
 
             [
@@ -116,7 +116,7 @@ class EventWallController extends Controller
             }
         }
 
-
+        dd(1);
         $polls = EventPostPoll::with('event_poll_option')
             ->withCount('user_poll_data')
             ->where('event_id', $event)
