@@ -1098,7 +1098,7 @@ class EventPhotoController extends Controller
 
         $parentCommentId =  $request['parent_comment_id'];
         $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId);
-
+        
         $event_post_comment = new EventPostComment;
         $event_post_comment->event_id = $request['event_id'];
         $event_post_comment->event_post_id = $request['event_post_id'];
@@ -1115,11 +1115,10 @@ class EventPhotoController extends Controller
         }
         $event_post_comment->save();
 
-
         // $notificationParam = [
-        //     'sender_id' => $user->id,
-        //     'event_id' => $request['event_id'],
-        //     'post_id' => $request['event_post_id'],
+            //     'sender_id' => $user->id,
+            //     'event_id' => $request['event_id'],
+            //     'post_id' => $request['event_post_id'],
         //     'comment_id' => $event_post_comment->id
         // ];
         // sendNotification('reply_on_comment_post', $notificationParam);
@@ -1127,7 +1126,8 @@ class EventPhotoController extends Controller
         $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
             $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
         }])->withcount('post_comment_reaction', 'replies')->where(['id' => $mainParentId, 'event_post_id' => $request['event_post_id']])->orderBy('id', 'DESC')->first();
-
+        
+        
         $commentInfo['id'] = $replyList->id;
         $commentInfo['event_post_id'] = $replyList->event_post_id;
         $commentInfo['comment'] = $replyList->comment_text;
@@ -1141,6 +1141,7 @@ class EventPhotoController extends Controller
         $commentInfo['total_replies'] = $replyList->replies_count;
         $commentInfo['posttime'] = setpostTime($replyList->created_at);
         $commentInfo['comment_replies'] = [];
+      
 
         if (!empty($replyList->replies)) {
             foreach ($replyList->replies as $replyVal) {
@@ -1204,7 +1205,7 @@ class EventPhotoController extends Controller
                 }
             }
         }
-
+// dd($commentInfo);
         return response()->json(['success' => true, 'total_comments' => 0, 'data' => $commentInfo, 'message' => "Post comment replied by you"]);
     }
 

@@ -24,7 +24,7 @@
                     <div class="contact-title">
                         <h3>Contacts</h3>
                         <div>
-                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#">Upload CSV</button>
+                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#uploadcsv">Upload CSV</button>
                             
                             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#myModal1">Add New Contact</a>
                         </div>
@@ -658,7 +658,7 @@
             </div>
             <div class="modal-body guest-tab">
                 <div class="uploadcsv-wrp">
-                    <img src="./assets/img/uploadcsv-drag-img.png" alt="">
+                    <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
                     <h3>Drag CSV Here</h3>
                     <p>Drag file here or click to upload </p>
                     <input type="file">
@@ -667,7 +667,7 @@
                     <div class="uploadedcvs-file-card home-latest-draf-card">
                         <div class="uploadedcvs-file-card-head">
                           <div class="uploadedcvs-file-card-icon">
-                              <img src="./assets/img/file-format-icon.svg" alt="">
+                          <img src="{{asset('assets/file-format-icon.svg')}}" alt="">
                           </div>
                           <div class="uploadedcvs-file-card-content">
                               <h4>contact.csv</h4>
@@ -691,7 +691,7 @@
                     <div class="uploadedcvs-file-card home-latest-draf-card">
                         <div class="uploadedcvs-file-card-head">
                           <div class="uploadedcvs-file-card-icon">
-                              <img src="./assets/img/file-format-icon.svg" alt="">
+                              <img src="{{asset('assets/file-format-icon.svg')}}" alt="">
                           </div>
                           <div class="uploadedcvs-file-card-content">
                               <h4>contact.csv</h4>
@@ -720,7 +720,7 @@
             </div>
             <div class="modal-footer-wrp">
               <div class="modal-footer rsvp-button-wrp">
-                <button type="button" class="cmn-btn download-csv-btn" data-bs-dismiss="modal">Download CSV</button>
+                <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a>
                 <button type="button" class="cmn-btn click-to-upload-btn"><input type="file"> Click to Upload</button>
               </div>
               <p>Support text/csv, maximum file size of 10Mb</p>
@@ -728,3 +728,12 @@
         </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('download-csv-btn').addEventListener('click', function() {
+        var link = document.createElement('a');
+        link.href = "{{ asset('assets/front/csv/demo.xlsx') }}";
+        link.download = "demo.xlsx"; // Specify the file name
+        link.click();
+    });
+</script>

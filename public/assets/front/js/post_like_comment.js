@@ -185,7 +185,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
-        var commentVal =  $(".post_comment").val();
+        var commentVal = $(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -1234,5 +1234,8 @@ $(document).on("keyup", ".search_contact", function () {
 //     });
 // });
 $(document).on('keyup','.post_comment',function(){
-    $(".parent_comment_id").val('');
+    var commentVal=$(".parent_comment_id").val();
+    if(commentVal==""){
+        $(".parent_comment_id").val('');
+    }
 })
