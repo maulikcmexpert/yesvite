@@ -820,9 +820,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
         $video = "";
             // // Redirect back or return a success message
-            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                // $query->where('app_user', '1');
-            })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
+            $rsvpSent = EventInvitedUser::find($id);
             // dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
        
