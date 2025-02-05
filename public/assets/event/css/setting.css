@@ -1124,6 +1124,10 @@
     transform: rotate(180deg);
 }
 
+.potluck-category .listing-arrow svg{
+    transform: rotate(0deg);
+}
+
 /* ============ responsive ============ */
 
 @media only screen and (max-width: 1399px) {
