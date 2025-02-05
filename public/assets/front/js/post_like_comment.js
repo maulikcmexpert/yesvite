@@ -735,12 +735,11 @@ $(document).ready(function () {
     // Event listener for contact checkboxes
         $(document).on("change", ".contact-checkbox", function () {
             // console.log($('#home_loader').length);
-            setTimeout(() => {
-                $('#home_loader').css('display', 'block');
-            }, 500);
+            // setTimeout(() => {
+            //     $('#home_loader').css('display', 'block');
+            // }, 500);
             
             
-            $('#home_loader').show(); // Alternative way to display
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
 
@@ -755,16 +754,15 @@ $(document).ready(function () {
             );
             if( $(this).is(":checked")){
                 $('.add_yesvite_guest_'+id).remove();
-                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
+                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $('#home_loader').css('display','none');
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
                 storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
-                $('#home_loader').css('display','none');
 
                 console.log(guestList);
             }
@@ -772,7 +770,6 @@ $(document).ready(function () {
         });
 
         $(document).on("change", ".phone-checkbox", function () {
-            $('#home_loader').css('display','block');
 
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
@@ -788,17 +785,15 @@ $(document).ready(function () {
             );
             if( $(this).is(":checked")){
                 $('.add_yesvite_guest_'+id).remove();
-                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
-                $('#home_loader').css('display','none');
+                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
 
 
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 $('.add_yesvite_guest_'+id).remove();
                 storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
-                $('#home_loader').css('display','none');
 
                 console.log(guestList);
             }
@@ -806,6 +801,8 @@ $(document).ready(function () {
         });
 
         function storeAddNewGuest(id,status,prefer_by,event_id,contact){
+            $('#home_loader').css('display', 'block');
+
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',
@@ -815,10 +812,15 @@ $(document).ready(function () {
                  if(response.is_phone=="1"&&response.view!=""){
                     $('.selected-phone-list').remove('.guest-user-phone');
                     $('.selected-phone-list').html(response.view);
+
+                    $('#home_loader').css('display', 'none');
+
                 }
                  if(response.view!=""&&response.is_phone=="0"){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
+                    $('#home_loader').css('display', 'none');
+
                 }
 
 
@@ -832,7 +834,6 @@ $(document).ready(function () {
 
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
-        $('#home_loader').css('display','block');
 
         const id = $(this).data("id");
         // const isSelected =$(this).data('prefer');
@@ -854,12 +855,12 @@ $(document).ready(function () {
 
         if( $(this).is(":checked")){
             $('.add_yesvite_guest_'+id).remove();
-            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
             $(".phoneContact-checkbox")
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
+            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
             $('#home_loader').css('display','none');
 
 
@@ -876,6 +877,7 @@ $(document).ready(function () {
 
     // Declare guestList outside so it's globally accessible
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
+    
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
         var is_duplicate=0;
