@@ -718,6 +718,8 @@ $longitude = !empty($eventDetails['longitude'])
                                                         @else
                                                             <a href="{{ $gift['registry_link'] }}"
                                                                 class="play-store-btn other-btn" target="_blank">
+                                                                <img src="{{ asset('assets/front/img/other.png') }}"
+                                                                alt="other">
                                                                 <h6>{{ $gift['registry_recipient_name'] }}</h6>
                                                             </a>
                                                         @endif
