@@ -814,7 +814,6 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
             $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
-            dd($rsvpSent);
             $rsvpSentAttempt = $rsvpSent->rsvp_status;
        
             if ($rsvpSent != null) {
@@ -1012,7 +1011,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
         if(!empty($new_added_user)){
         foreach ($new_added_user as $sesionuser) {
             // Try fetching the user from the User table
-            $user = User::find($sesionuser['user_id']);
+            $user = User::find($sesionuser['user_id'])->where('');
             $prefer_by=$sesionuser['prefer_by'];
 
             if ($user && $is_phone==0) {

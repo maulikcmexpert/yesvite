@@ -120,7 +120,7 @@ class EventController extends BaseController
         // }
         Session::forget('desgin');
         Session::forget('desgin_slider');
-        Session::forget('custom_image'); 
+        Session::forget('custom_image');
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
@@ -135,7 +135,7 @@ class EventController extends BaseController
         $eventDetail['inviteCount'] = 0;
         $eventDetail['isCohost'] = "1";
         $eventDetail['isCopy'] = "";
-        $eventDetail['alreadyCount']=0;
+        $eventDetail['alreadyCount'] = 0;
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
             $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
@@ -229,7 +229,7 @@ class EventController extends BaseController
                     Session::save();
                 }
             }
-            $eventDetail['alreadyCount'] = count(session('contact_ids'))+count(session('user_ids'));
+            $eventDetail['alreadyCount'] = count(session('contact_ids')) + count(session('user_ids'));
             // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
@@ -507,7 +507,7 @@ class EventController extends BaseController
         $page = 'front.create_event';
 
 
-        $js = ['create_event'];
+        $js = ['design', 'create_event'];
 
         $user = User::withCount(
             [
@@ -3141,7 +3141,7 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
-    
+
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('custom_image');

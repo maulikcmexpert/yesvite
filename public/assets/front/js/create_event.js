@@ -232,7 +232,7 @@ $(document).ready(function () {
     console.log(getTimeZoneAbbreviation());
 
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-        //  alert(design);
+        alert(base_url);
         $(".user_choice").prop("checked", false);
         $("#YesviteUserAll").html("");
         $.ajax({
@@ -8720,7 +8720,12 @@ $(document).on("click", ".design-sidebar-action", function () {
                 });
             } else {
                 $(".design-sidebar").addClass("d-none");
-                $(".design-sidebar_" + designId).removeClass("d-none");
+                if (imgSrc1 != "" || imgSrc2 != "" || imgSrc3 != "") {
+                    $(".design-sidebar_7").removeClass("d-none");
+                } else {
+                    $(".design-sidebar_" + designId).removeClass("d-none");
+                }
+
                 $("#sidebar").addClass("design-sidebar_" + designId);
                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
             }
