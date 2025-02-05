@@ -233,6 +233,7 @@ class EventController extends BaseController
             // dd(session('user_ids'));
             // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
             if ($getEventData != null) {
+               
                 if ($request->iscopy != null) {
                     $eventDetail['isCopy'] = $getEventData->id;
                 }
@@ -358,7 +359,7 @@ class EventController extends BaseController
                 if (!empty($getEventData->gift_registry_id) && $getEventData->gift_registry_id != NULL) {
 
                     $gift_registry_ids = array_map('intval', explode(',', $getEventData->gift_registry_id));
-
+                    $eventDetail['gift_registry_count'] = count($gift_registry_ids) + $gift_registry_count;
                     $eventDetail['gift_registry_list'] = $gift_registry_ids;
                     session()->put('giftRegistryData', $gift_registry_ids);
                     Session::save();
