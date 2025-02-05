@@ -1167,23 +1167,24 @@ $(document).on('click','.remove_new_phone_added_user',function(){
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
-    var name=$(this).val();
+    const name=$(this).val();
+    const event_id = $('#event_id').val();
+
+    $('#home_loader').css('display','block');
     $.ajax({
-        url: base_url + "event_about/right_bar_guest_list",
+        url: base_url + "event_guest/right_bar_guest_list",
         type: "POST",
-        data: JSON.stringify({ name: name}),
+        data: JSON.stringify({ search: name,event_id:event_id}),
         contentType: "application/json",
         headers: {
             'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (response) {
-            console.log(response.view);
+            console.log(response);
             // $('.wall-post-content').html();
-            $('.wall-post-content').html(response.view);
             $('#home_loader').css('loader','none');
 
-            $('#main-center-modal-filter').modal('hide');
 
         },
         error: function (xhr, status, error) {
