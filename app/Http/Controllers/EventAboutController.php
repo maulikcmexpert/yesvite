@@ -365,71 +365,76 @@ class EventAboutController extends Controller
             return redirect()->back()->with('error', 'Event is past, you cannot attempt RSVP!');
         }
 
-        $video = "";
-
-        // Check if the user has already sent an RSVP
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
 
-        if ($rsvpSent) {
-            // Determine RSVP change status
-            $rsvp_attempt = "";
-            if ($rsvpSent->rsvp_status === NULL) {
-                $rsvp_attempt = 'first';
-            } else if ($rsvpSent->rsvp_status == '0' && $request->rsvp_status == '1') {
-                $rsvp_attempt = 'no_to_yes';
-            } else if ($rsvpSent->rsvp_status == '1' && $request->rsvp_status == '0') {
-                $rsvp_attempt = 'yes_to_no';
+        if (!$rsvpSent) {
+            return redirect()->back()->with('error', 'No RSVP record found!');
+        }
+
+        // Determine RSVP change status
+        $rsvp_attempt = "";
+        if ($rsvpSent->rsvp_status === NULL) {
+            $rsvp_attempt = 'first';
+        } elseif ($rsvpSent->rsvp_status == '0' && $request->rsvp_status == '1') {
+            $rsvp_attempt = 'no_to_yes';
+        } elseif ($rsvpSent->rsvp_status == '1' && $request->rsvp_status == '0') {
+            $rsvp_attempt = 'yes_to_no';
+        }
+
+        // Update RSVP details
+        $rsvpSent->rsvp_status = $request->rsvp_status;
+        $rsvpSent->adults = $request->adults;
+        $rsvpSent->kids = $request->kids;
+        $rsvpSent->message_to_host = $request->message_to_host;
+        $rsvpSent->rsvp_attempt = $rsvp_attempt;
+        $rsvpSent->read = '1';
+        $rsvpSent->rsvp_d = '1';
+        $rsvpSent->event_view_date = date('Y-m-d');
+
+        if (!$rsvpSent->save()) {
+            return redirect()->back()->with('error', 'RSVP update failed!');
+        }
+
+        // Prepare post message
+        $postMessage = [
+            'status' => ($request->rsvp_status == '0') ? '2' : '1',
+            'adults' => $request->adults,
+            'kids' => $request->kids
+        ];
+
+        // Check if an RSVP post already exists
+        $existingPost = EventPost::where([
+            'event_id' => $request->event_id,
+            'user_id' => $user,
+            'post_type' => '4'
+        ])->first();
+
+        if ($existingPost) {
+            // Update existing RSVP post
+            $existingPost->post_message = json_encode($postMessage);
+            if (!$existingPost->save()) {
+                return redirect()->back()->with('error', 'RSVP post update failed!');
             }
+        } else {
+            // Create a new RSVP post
+            $newPost = new EventPost();
+            $newPost->event_id = $request->event_id;
+            $newPost->user_id = $user;
+            $newPost->post_message = json_encode($postMessage);
+            $newPost->post_privacy = "1";
+            $newPost->post_type = "4";
+            $newPost->commenting_on_off = "0";
+            $newPost->is_in_photo_moudle = "0";
 
-            // Update RSVP details
-            $rsvpSent->rsvp_status = $request->rsvp_status;
-            $rsvpSent->adults = $request->adults;
-            $rsvpSent->kids = $request->kids;
-            $rsvpSent->message_to_host = $request->message_to_host;
-            $rsvpSent->rsvp_attempt = $rsvp_attempt;
-            $rsvpSent->message_by_video = $video;
-            $rsvpSent->read = '1';
-            $rsvpSent->rsvp_d = '1';
-            $rsvpSent->event_view_date = date('Y-m-d');
-            $rsvpSent->save();
-
-            if ($rsvpSent->wasChanged()) {
-                // Prepare the post message
-                $postMessage = [
-                    'status' => ($request->rsvp_status == '0') ? '2' : '1',
-                    'adults' => $request->adults,
-                    'kids' => $request->kids
-                ];
-
-                // Check if an RSVP post already exists
-                $existingPost = EventPost::where([
-                    'event_id' => $request->event_id,
-                    'user_id' => $user,
-                    'post_type' => '4'
-                ])->first();
-
-                if ($existingPost) {
-                    // Update existing RSVP post
-                    $existingPost->post_message = json_encode($postMessage);
-                    $existingPost->save();
-                } else {
-                    // Create a new RSVP post
-                    $newPost = new EventPost();
-                    $newPost->event_id = $request->event_id;
-                    $newPost->user_id = $user;
-                    $newPost->post_message = json_encode($postMessage);
-                    $newPost->post_privacy = "1";
-                    $newPost->post_type = "4";
-                    $newPost->commenting_on_off = "0";
-                    $newPost->is_in_photo_moudle = "0";
-                    $newPost->save();
-                }
+            if (!$newPost->save()) {
+                return redirect()->back()->with('error', 'New RSVP post creation failed!');
             }
         }
 
         return redirect()->back()->with('success', 'RSVP updated successfully!');
     }
+
 
 }
