@@ -1151,8 +1151,8 @@ $(document).on("click", ".mute-conversation", function () {
         $(".conversation-" + conversationId).addClass("muted");
 
         if (selectedConversationId === conversationId) {
-            $(".unmute-self-icn").show();
-            $(".mute-self-icn").hide();
+            //$(".unmute-self-icn").show();
+            // $(".mute-self-icn").hide();
         }
         $(this).children(".mute-self-icn").addClass("d-none");
         $(this).children(".unmute-self-icn").removeClass("d-none");
@@ -1174,8 +1174,8 @@ $(document).on("click", ".mute-conversation", function () {
         $(this).children(".mute1-self-icn").removeClass("d-none");
         $(this).children(".unmute1-self-icn").addClass("d-none");
         if (selectedConversationId === conversationId) {
-            $(".mute-self-icn").show();
-            $(".unmute-self-icn").hide();
+            //  $(".mute-self-icn").show();
+            // $(".unmute-self-icn").hide();
         }
 
         $(".conversation-" + conversationId)
