@@ -721,7 +721,7 @@ class EventPhotoController extends Controller
                 $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
 
                 // Save file to storage/app/public/post_image/
-                $postFile->move(public_path('storage/post_image'), $fileName);
+                $filePath = $postFile->move(public_path('storage/post_image'), $fileName);
 
 
                 $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // Assuming this is a helper function
@@ -730,7 +730,9 @@ class EventPhotoController extends Controller
 
                 // Process video
                 if ($checkIsImageOrVideo == 'video') {
-                    $duration = getVideoDuration($postFile); // Assuming this is a helper function
+
+
+                    $duration = getVideoDuration($filePath); // Assuming this is a helper function
                     $thumbName = genrate_thumbnail($fileName);
                     $postFile->move(public_path('storage/post_image/'), $fileName);
                 }
