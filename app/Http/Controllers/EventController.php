@@ -2178,7 +2178,6 @@ class EventController extends BaseController
         $userIds = Session::get('user_ids');
        
         $selectedId =array_column($userIds,'id');
-        dd($selectedId);
        
         // array_values
 
@@ -2225,34 +2224,40 @@ class EventController extends BaseController
 
         // dd($yesvite_users);
 
-        $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+        $yesvite_users = User::select(
+            'id', 'firstname', 'profile', 'lastname', 'email', 'country_code',
+            'phone_number', 'app_user', 'prefer_by', 'email_verified_at',
+            'parent_user_phone_contact', 'visible', 'message_privacy'
+        )
         ->where('id', '!=', $id)
-        ->where(['app_user' => '1'])
+        ->where('app_user', '1')
         ->whereIn('email', $emails)
         ->orderBy('firstname')
-        // ->whereOr('id',$selectedId)
-        ->where(function ($query) use ($selectedId) {
-            if (!empty($selectedId)) {
-                $query->orWhereIn('id', $selectedId);
-            }
+    
+        // Apply 'orWhereIn' for multiple selected IDs
+        ->when(!empty($selectedId), function ($query) use ($selectedId) {
+            $query->orWhereIn('id', $selectedId);
         })
-
+    
         ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
             $query->limit($request->limit)
-                ->offset($request->offset);
+                  ->offset($request->offset);
         })
         ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
             $query->limit($request->limit)
-                ->offset($request->offset);
+                  ->offset($request->offset);
         })
-      
+    
         ->when(!empty($request->search_user), function ($query) use ($search_user) {
             $query->where(function ($q) use ($search_user) {
                 $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                    ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                  ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
             });
         })
+    
+        ->groupBy('id') // Grouping by ID to avoid duplicates
         ->get();
+        dd($yesvite_users);
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
