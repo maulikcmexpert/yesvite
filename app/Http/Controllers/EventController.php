@@ -2315,9 +2315,7 @@ class EventController extends BaseController
                 // Use whereIn for matching multiple IDs
                 $query->whereIn('id', $selectedContactId);
             })
-            ->when(!empty($selectedconactId), function ($query) use ($selectedconactId) {
-                $query->orWhereIn('id', $selectedconactId);
-            })
+           
             ->when(!empty($request->limit), function ($query) use ($request) {
                 $query->limit($request->limit)
                     ->offset($request->offset);
