@@ -771,8 +771,6 @@ $(document).ready(function () {
                 }
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite',is_duplicate);
                 addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
-                $('#home_loader').css('display','none');
-
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
                 const exists = guestList.some((contact) => contact.id === id);
@@ -842,6 +840,7 @@ $(document).ready(function () {
             $('#home_loader').css('display', 'block');
         console.log({id,status,prefer_by,event_id,contact,is_duplicate});
         
+        setTimeout(function(){
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',
@@ -852,22 +851,13 @@ $(document).ready(function () {
                     $('.selected-phone-list').remove('.guest-user-phone');
                     $('.selected-phone-list').html(response.view);
 
-                    // $('#home_loader').css('display', 'none');
-
-                        $('#home_loader').css('display', 'none');   
-                    
-        
-
                 }
                  if(response.view!=""&&response.is_phone=="0"){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
-                    // $('#home_loader').css('display', 'none');
-                        $('#home_loader').css('display', 'none');
-        
-
                 }
 
+                $('#home_loader').css('display', 'none');   
 
                 },
                 error: function (error) {
@@ -876,6 +866,7 @@ $(document).ready(function () {
 
                 },
               });
+            }, 500);
         }
 
 

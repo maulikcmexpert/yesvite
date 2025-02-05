@@ -778,94 +778,95 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
     public function updateRsvp(Request $request, $id)
     {
+        $user  = Auth::guard('web')->user()->id;
         // Validate the data
-        $validated = $request->validate([
-            'adults' => 'required|integer|min:0',
-            'kids' => 'required|integer|min:0',
-            'rsvp_status' => 'nullable',
-        ]);
+        // $validated = $request->validate([
+        //     'adults' => 'required|integer|min:0',
+        //     'kids' => 'required|integer|min:0',
+        //     'rsvp_status' => 'nullable',
+        // ]);
 
-        // Find the existing guest by ID
-        $guest = EventInvitedUser::find($id);
-        // dd($guest);
-        if ($guest) {
-            // Update the guest's RSVP details
-            $guest->adults = $validated['adults'];
-            $guest->kids = $validated['kids'];
-            $guest->rsvp_status = $validated['rsvp_status'];
-            $guest->read = "1";
-            $guest->rsvp_d = "1";
+        // // Find the existing guest by ID
+        // $guest = EventInvitedUser::find($id);
+        // // dd($guest);
+        // if ($guest) {
+        //     // Update the guest's RSVP details
+        //     $guest->adults = $validated['adults'];
+        //     $guest->kids = $validated['kids'];
+        //     $guest->rsvp_status = $validated['rsvp_status'];
+        //     $guest->read = "1";
+        //     $guest->rsvp_d = "1";
 
 
-            // Save the updated data
-            $guest->save();
-            return response()->json([
-                'success' => true,
-                'message' => 'RSVP updated successfully',
-                'adults' => $guest->adults,
-                'kids' => $guest->kids,
-                'guest_id' => $guest->id,
-                'rsvp_status' => $guest->rsvp_status,
-                'guest' =>   $guest
-            ]);
+        //     // Save the updated data
+        //     $guest->save();
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'RSVP updated successfully',
+        //         'adults' => $guest->adults,
+        //         'kids' => $guest->kids,
+        //         'guest_id' => $guest->id,
+        //         'rsvp_status' => $guest->rsvp_status,
+        //         'guest' =>   $guest
+        //     ]);
 
             // // Redirect back or return a success message
-            // $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-            //     $query->where('app_user', '1');
-            // })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
-            // $rsvpSentAttempt = $rsvpSent->rsvp_status;
-            // // dd($rsvpSent);
-            // if ($rsvpSent != null) {
-            //     $rsvp_attempt = "";
-            //     if ($rsvpSentAttempt == NULL) {
-            //         $rsvp_attempt =  'first';
-            //     } else if ($rsvpSentAttempt == '0' && $request->rsvp_status == '1') {
-            //         $rsvp_attempt =  'no_to_yes';
-            //     } else if ($rsvpSentAttempt == '1' && $request->rsvp_status == '0') {
-            //         $rsvp_attempt =  'yes_to_no';
-            //     }
+            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                $query->where('app_user', '1');
+            })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
+            $rsvpSentAttempt = $rsvpSent->rsvp_status;
+            // dd($rsvpSent);
+            if ($rsvpSent != null) {
+                $rsvp_attempt = "";
+                if ($rsvpSentAttempt == NULL) {
+                    $rsvp_attempt =  'first';
+                } else if ($rsvpSentAttempt == '0' && $request->rsvp_status == '1') {
+                    $rsvp_attempt =  'no_to_yes';
+                } else if ($rsvpSentAttempt == '1' && $request->rsvp_status == '0') {
+                    $rsvp_attempt =  'yes_to_no';
+                }
 
-            //     $rsvpSent->event_id = $request->event_id;
+                $rsvpSent->event_id = $request->event_id;
 
-            //     $rsvpSent->user_id = $user;
+                $rsvpSent->user_id = $user;
 
-            //     $rsvpSent->rsvp_status = $request->rsvp_status;
+                $rsvpSent->rsvp_status = $request->rsvp_status;
 
-            //     $rsvpSent->adults = $request->adults;
+                $rsvpSent->adults = $request->adults;
 
-            //     $rsvpSent->kids = $request->kids;
+                $rsvpSent->kids = $request->kids;
 
-            //     $rsvpSent->message_to_host = $request->message_to_host;
-            //     $rsvpSent->rsvp_attempt = $rsvp_attempt;
+                $rsvpSent->message_to_host = $request->message_to_host;
+                $rsvpSent->rsvp_attempt = $rsvp_attempt;
 
-            //     $rsvpSent->message_by_video = $video;
+                $rsvpSent->message_by_video = $video;
 
-            //     $rsvpSent->read = '1';
-            //     $rsvpSent->rsvp_d = '1';
+                $rsvpSent->read = '1';
+                $rsvpSent->rsvp_d = '1';
 
-            //     $rsvpSent->event_view_date = date('Y-m-d');
+                $rsvpSent->event_view_date = date('Y-m-d');
 
-            //     $rsvpSent->save();
-            //     //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes
-            //     if ($rsvpSent->save()) {
-            //         $postMessage = [];
-            //         $postMessage = [
-            //             'status' => ($request->rsvp_status == '0') ? '2' : '1',
-            //             'adults' => $request->adults,
-            //             'kids' => $request->kids
-            //         ];
-            //         $creatEventPost = new EventPost;
-            //         $creatEventPost->event_id = $request->event_id;
-            //         $creatEventPost->user_id =$user;
-            //         $creatEventPost->post_message = json_encode($postMessage);
-            //         $creatEventPost->post_privacy = "1";
-            //         $creatEventPost->post_type = "4";
-            //         $creatEventPost->commenting_on_off = "0";
-            //         $creatEventPost->is_in_photo_moudle = "0";
-            //         $creatEventPost->save();
-
-
-        }
+                $rsvpSent->save();
+                //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes
+                if ($rsvpSent->save()) {
+                    $postMessage = [];
+                    $postMessage = [
+                        'status' => ($request->rsvp_status == '0') ? '2' : '1',
+                        'adults' => $request->adults,
+                        'kids' => $request->kids
+                    ];
+                    $creatEventPost = new EventPost;
+                    $creatEventPost->event_id = $request->event_id;
+                    $creatEventPost->user_id =$user;
+                    $creatEventPost->post_message = json_encode($postMessage);
+                    $creatEventPost->post_privacy = "1";
+                    $creatEventPost->post_type = "4";
+                    $creatEventPost->commenting_on_off = "0";
+                    $creatEventPost->is_in_photo_moudle = "0";
+                        
+                                    $creatEventPost->save();
+                }
+            }
 
         // Handle the case where guest is not found
         return redirect()->back()->with('success', 'RSVP updated successfully.');
