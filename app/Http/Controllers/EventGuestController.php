@@ -996,12 +996,17 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
 
         // }
 
+        $processed_user_ids = []; // Keep track of processed user IDs
+
         foreach ($new_added_user as $sesionuser) {
+            $user_id = $sesionuser['user_id'];
+            $prefer_by = $sesionuser['prefer_by'];
             // $user = User::find($sesionuser['user_id']);
             $user = User::where('id', $sesionuser['user_id'])->where('app_user',"1")->first();
-
-            $prefer_by = $sesionuser['prefer_by'];
-        
+      
+            if (in_array($user_id, $processed_user_ids)) {
+                continue; // Skip to the next iteration
+            }
             if ($user && $user->app_user == "1" && $is_phone == 0) {
                 $yesvite_users_data[] = [
                     'user_id' => $user->id,
@@ -1012,7 +1017,8 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     'profile' => !empty($user->profile) ? asset('storage/profile/' . $user->profile) : "",
                     'prefer_by' => $prefer_by
                 ];
-                continue; // Skip searching in contact_sync table
+                $processed_user_ids[] = $user_id; // Mark this ID as processed
+
             } else {
                 $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
         
@@ -1026,6 +1032,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                         'phone_number' => !empty($contact_sync->phone) ? $contact_sync->phone : "",
                         'prefer_by' => $prefer_by
                     ];
+                    $processed_user_ids[] = $user_id; // Mark this ID as processed even if found in contact_sync
                 }
             }
         }
