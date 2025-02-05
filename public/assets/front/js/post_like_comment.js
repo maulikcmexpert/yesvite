@@ -832,7 +832,8 @@ $(document).ready(function () {
 
         function storeAddNewGuest(id,status,prefer_by,event_id,contact,is_duplicate){
             $('#home_loader').css('display', 'block');
-
+        console.log({id,status,prefer_by,event_id,contact,is_duplicate});
+        
             $.ajax({
                 url: base_url+"store_add_new_guest",
                 type: 'GET',

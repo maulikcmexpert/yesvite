@@ -2678,7 +2678,7 @@ if ($rsvpSent != null) {
         $user_id = $request->user_id;
         $check_status = $request->status;
         $prefer_by=$request->prefer_by;
-        $is_duplicate=$request->is_duplicate;
+        // $is_duplicate=$request->is_duplicate;
         // dd($request);
         $userData = session('add_guest_user_id', []);
 
@@ -2717,7 +2717,7 @@ if ($rsvpSent != null) {
                 // Try fetching the user from the User table
                 $user = User::find($sesionuser['user_id']);
                 $prefer_by=$sesionuser['prefer_by'];
-                $is_duplicate=$sesionuser['is_duplicate'];
+                // $is_duplicate=$sesionuser['is_duplicate'];
     
                 if ($user) {
                     // If the user exists, add data to the $users_data array
