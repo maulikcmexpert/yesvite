@@ -309,7 +309,8 @@ $(document).ready(function () {
 
                         // Check if the reply is already appended
                         if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
-                            replyList.append(newCommentHTML);
+                            replyList.prepend(newCommentHTML);
+                            // replyList.append(newCommentHTML);
                         }
                     }
                 } else {
@@ -318,7 +319,8 @@ $(document).ready(function () {
 
                     // Check if the comment is already appended
                     if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
-                        commentList.append(newCommentHTML);
+                        commentList.prepend(newCommentHTML);
+                        // commentList.append(newCommentHTML);
                     }
                 }
 
