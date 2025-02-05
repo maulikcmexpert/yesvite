@@ -50,22 +50,13 @@ use FFMpeg\Coordinate\TimeCode;
 function getVideoDuration($filePath)
 {
 
-    $track = GetId3::fromDisk('public')->extractInfo($filePath);
+    $track = new GetId3($filePath);
 
-    // $track = new GetId3($filePath);
-
-    // // Use static methods:
-    // $track = GetId3::fromUploadedFile($filePath);
-
-    // //get all info
-    // $track->extractInfo();
-
-
-    // //get title
-    // $track->getTitle();
-
-    //get playtime
-    return  $track->getPlaytime();
+    // Extract file metadata
+    $info = $track->extractInfo();
+    dd($info);
+    // Return playtime if available
+    return $info['playtime_seconds'] ?? null;
 }
 
 
