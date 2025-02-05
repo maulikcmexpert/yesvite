@@ -297,12 +297,12 @@ $(document).ready(function () {
                     <ul class="primary-comment-replies"></ul>
                 </li>
                 `;
-
+                var replyList;
                 if (parentCommentId) {
                     // Append as a reply to the parent comment
                     const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
                     if (parentComment.length > 0) {
-                        let replyList = parentComment.find("ul.primary-comment-replies");
+                        replyList= parentComment.find("ul.primary-comment-replies");
                         if (replyList.length === 0) {
                             replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
                         }

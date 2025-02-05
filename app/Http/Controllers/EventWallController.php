@@ -1369,17 +1369,18 @@ class EventWallController extends Controller
 
                 if ($checkIsimageOrVideo == 'video') {
                     $duration = getVideoDuration($postImage);
-                    if (isset($request->thumbnail) && $request->thumbnail != Null) {
-                        $thumbimage = $request->thumbnail[$key];
-                        $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
-                        // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
-                        $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
-                    }
-                    if (file_exists(public_path('storage/post_image/') . $imageName)) {
-                        $imagePath = public_path('storage/post_image/') . $imageName;
-                        unlink($imagePath);
-                    }
-                    $postImage->move(public_path('storage/post_image'), $imageName);
+                    $thumbName = generate_thumbnail($imageName);
+                    // if (isset($request->thumbnail) && $request->thumbnail != Null) {
+                    //     $thumbimage = $request->thumbnail[$key];
+                    //     $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
+                    //     // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
+                    //     $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
+                    // }
+                    // if (file_exists(public_path('storage/post_image/') . $imageName)) {
+                    //     $imagePath = public_path('storage/post_image/') . $imageName;
+                    //     unlink($imagePath);
+                    // }
+                    // $postImage->move(public_path('storage/post_image'), $imageName);
                 }
                 // else {
 
@@ -2183,12 +2184,12 @@ class EventWallController extends Controller
 
     {
         $user  = Auth::guard('web')->user();
-        
-        
+
+
 
         $parentCommentId =  $request['parent_comment_id'];
         $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId) ?? "";
-        dd($mainParentId);
+
 
         $event_post_comment = new EventPostComment;
         $event_post_comment->event_id = $request['event_id'];
@@ -2964,8 +2965,8 @@ class EventWallController extends Controller
                             $query->orWhere('post_type', '0');
                             break;
                         case 'rsvp':
-                                $query->orWhere('post_type', '4');
-                                break;
+                            $query->orWhere('post_type', '4');
+                            break;
                             // Add more cases for other filters if needed
                     }
                 }
