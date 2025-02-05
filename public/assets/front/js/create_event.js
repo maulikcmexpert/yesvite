@@ -9325,7 +9325,7 @@ $(document).on(
     }
 );
 
-if (isDraftEvent == "0" && eventId != "") {
+if (isDraftEvent == "0" && eventId != "" && final_step!=1) {
     $(".li_design").addClass("menu-success");
     $(".li_event_detail").addClass("menu-success");
     $(".li_guest").addClass("menu-success");
@@ -9353,4 +9353,4 @@ function colorchange() {
         $("#guestBtn").addClass("guestBtn");
     }
 }
-colorchange();
+    
