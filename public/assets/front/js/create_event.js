@@ -3616,7 +3616,7 @@ $(document).on("click", "#next_setting", function () {
 $(document).on("click", "#next_design", function () {
     console.log(eventData);
     console.log(dbJson);
-    $('.li_event_detail').find('.side-bar-list').removeClass('active')
+    $(".li_event_detail").find(".side-bar-list").removeClass("active");
     loadAgain();
     // $(".step_1").hide();
     // handleActiveClass(".li_design");
