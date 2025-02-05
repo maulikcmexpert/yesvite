@@ -54,7 +54,7 @@ function getVideoDuration($filePath)
 
     // Extract file metadata
     $info = $track->extractInfo();
-    dd($info);
+    // dd($info);
     // Return playtime if available
     return $info['playtime_seconds'] ?? null;
 }
