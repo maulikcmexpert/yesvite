@@ -8,9 +8,7 @@ $counter = 0;
 @endphp
 @foreach($listing as $guest_user)
 @php
-
 $counter++;
-
 if($counter > 4){
 break;
 }
