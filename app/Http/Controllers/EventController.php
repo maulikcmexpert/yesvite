@@ -2176,9 +2176,10 @@ class EventController extends BaseController
         $id = Auth::guard('web')->user()->id;
         // $invitedUser='';
         $userIds = Session::get('user_ids');
-        $selectedIds = [];
-        $selectedIds =array_column($userIds,'id');
-        dd($selectedIds);
+       
+        $selectedId =array_column($userIds,'id');
+       
+        // array_values
 
         // if (!empty($userIds)) {
         //     foreach ($userIds as $user) {
@@ -2193,35 +2194,64 @@ class EventController extends BaseController
         if ($getAllContacts->isNotEmpty()) {
             $emails = $getAllContacts->pluck('email')->toArray();
         }
-        $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
-            ->where('id', '!=', $id)
-            ->where(['app_user' => '1'])
-            ->whereIn('email', $emails)
-            ->orderBy('firstname')
+        // $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+        //     ->where('id', '!=', $id)
+        //     ->where(['app_user' => '1'])
+        //     ->whereIn('email', $emails)
+        //     ->orderBy('firstname')
 
-            ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-            ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
-            ->when(!empty($request->search_user), function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
-                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-                });
-            })
-            ->get();
+        //     ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+        //     ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+        //     // ->when($type != 'group', function ($query) use ($request) {
+        //     //     $query->where(function ($q) use ($request) {
+        //     //         $q->limit($request->limit)
+        //     //             ->skip($request->offset);
+        //     //     });
+        //     // })
+        //     ->when(!empty($request->search_user), function ($query) use ($search_user) {
+        //         $query->where(function ($q) use ($search_user) {
+        //             $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+        //                 ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+        //         });
+        //     })
+        //     ->get();
 
         // dd($yesvite_users);
+
+        $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
+        // ->where('id', '!=', $id)
+        ->where(['app_user' => '1'])
+        ->whereIn('email', $emails)
+        ->orderBy('firstname')
+        ->whereOr('id',$selectedId)
+
+        ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
+            $query->limit($request->limit)
+                ->offset($request->offset);
+        })
+        ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
+            $query->limit($request->limit)
+                ->offset($request->offset);
+        })
+        // ->when($type != 'group', function ($query) use ($request) {
+        //     $query->where(function ($q) use ($request) {
+        //         $q->limit($request->limit)
+        //             ->skip($request->offset);
+        //     });
+        // })
+        ->when(!empty($request->search_user), function ($query) use ($search_user) {
+            $query->where(function ($q) use ($search_user) {
+                $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                    ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+            });
+        })
+        ->get();
         $yesvite_user = [];
         foreach ($yesvite_users as $user) {
             if ($user->email_verified_at == NULL && $user->app_user == '1') {
