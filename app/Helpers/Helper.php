@@ -64,7 +64,7 @@ function getVideoDuration($filePath)
 function generate_thumbnail($fileName)
 {
     $videoPath = public_path('storage/post_image/') . $fileName;
-
+    dd(exec('which ffmpeg'));
     // Initialize FFMpeg
     $ffmpeg = FFMpeg::create([
         'ffmpeg.binaries' => '/usr/local/bin/ffmpeg',  // Change this path if necessary
