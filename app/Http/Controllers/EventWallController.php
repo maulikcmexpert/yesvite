@@ -840,7 +840,6 @@ class EventWallController extends Controller
             'eventInfo',
             'eventDetails',
             'storiesList',
-            'pollsData',
             'wallData',
             'postList',
             'encrypt_event_id',
