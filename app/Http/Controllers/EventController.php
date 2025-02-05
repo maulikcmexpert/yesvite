@@ -2177,7 +2177,7 @@ class EventController extends BaseController
         // $invitedUser='';
         $userIds = Session::get('user_ids');
         $selectedId=[];
-        if(count($userIds) > 0){
+        if($userIds!=null &&  count($userIds) > 0){
             $selectedId =array_column($userIds,'id');
 
         }
