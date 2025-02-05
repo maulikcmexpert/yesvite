@@ -123,7 +123,7 @@
           </div>
           <div class="modal-footer">
               <button type="button" class="cmn-btn reset-btn wall_filter_reset">Reset</button>
-              <button type="button" class="cmn-btn wall_apply_filter">Apply</button>
+              <button type="button" class="cmn-btn wall_apply_filter" event_id="{{$event}}">Apply</button>
           </div>
       </div>
   </div>
