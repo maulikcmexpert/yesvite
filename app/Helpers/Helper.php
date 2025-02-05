@@ -65,11 +65,14 @@ function generate_thumbnail($fileName)
     $videoPath = public_path('storage/post_image/') . $fileName;
 
     // Initialize FFMpeg
+    // $ffmpeg = FFMpeg::create([
+    //     'ffmpeg.binaries' => '/usr/bin/ffmpeg',  // Change this path if necessary
+    //     'ffprobe.binaries' => '/usr/bin/ffprobe', // Change this path if necessary
+    // ]);
     $ffmpeg = FFMpeg::create([
-        'ffmpeg.binaries' => '/usr/bin/ffmpeg',  // Change this path if necessary
-        'ffprobe.binaries' => '/usr/bin/ffprobe', // Change this path if necessary
+        'ffmpeg.binaries' => exec('which ffmpeg'),
+        'ffprobe.binaries' => exec('which ffprobe'),
     ]);
-
     $video = $ffmpeg->open($videoPath);
 
     // Loop through and generate thumbnails at different timestamps
