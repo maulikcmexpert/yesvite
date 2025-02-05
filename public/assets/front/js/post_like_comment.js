@@ -852,22 +852,13 @@ $(document).ready(function () {
                     $('.selected-phone-list').remove('.guest-user-phone');
                     $('.selected-phone-list').html(response.view);
 
-                    // $('#home_loader').css('display', 'none');
-
-                        $('#home_loader').css('display', 'none');   
-                    
-        
-
                 }
                  if(response.view!=""&&response.is_phone=="0"){
                     $('.selected-contacts-list').remove('.guest-users');
                     $('.selected-contacts-list').html(response.view);
-                    // $('#home_loader').css('display', 'none');
-                        $('#home_loader').css('display', 'none');
-        
-
                 }
 
+                $('#home_loader').css('display', 'none');   
 
                 },
                 error: function (error) {
