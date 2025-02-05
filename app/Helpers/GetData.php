@@ -1058,13 +1058,25 @@ function getInvitedUsersList($eventId)
     return $eventDetail;
 }
 
-function getInvitedUsersListNew($eventId)
+function getInvitedUsersListNew($eventId,$search=null)
 {
     $eventDetail['invited_guests'] = [];
     $eventDetail['invited_user_id'] = [];
 
     $invitedUsers = EventInvitedUser::query();
     $invitedUsers->with(['event', 'user','contact_sync'])->where(['event_id' => $eventId,'is_co_host'=>'0'])->whereNot('invitation_sent','9');
+    
+    if (!empty($search)) {
+        $invitedUsers->where(function ($query) use ($search) {
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('firstname', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('contact_sync', function ($q) use ($search) {
+                $q->where('firstName', 'LIKE', "%$search%");
+            });
+        });
+    }
+    
     $result = $invitedUsers->get();
 
     // dd($result);
