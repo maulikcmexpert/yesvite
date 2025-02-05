@@ -2770,7 +2770,7 @@ if ($rsvpSent != null) {
                 $user = User::where( 'id', $sesionuser['user_id'])->where('app_user',"1")->first();
                 if ($user && $user->app_user == "1" && $is_phone == 0) {
                     $yesvite_users_data[] = [
-                        'user_id' => $user->id,
+                        'id' => $user->id,
                         'first_name' => !empty($user->firstname) ? $user->firstname : "",
                         'last_name' => !empty($user->lastname) ? $user->lastname : "",
                         'email' => !empty($user->email) ? $user->email : "",
@@ -2795,7 +2795,7 @@ if ($rsvpSent != null) {
             
                     if ($contact_sync) {
                         $yesvite_phone_data[] = [
-                            'user_id' => $contact_sync->id,
+                            'id' => $contact_sync->id,
                             'first_name' => !empty($contact_sync->firstName) ? $contact_sync->firstName : "",
                             'last_name' => !empty($contact_sync->lastName) ? $contact_sync->lastName : "",
                             'email' => !empty($contact_sync->email) ? $contact_sync->email : "",

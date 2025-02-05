@@ -330,7 +330,11 @@
     margin-right: 10px;
 }
 
-.post-potluck-category .list-slide .accordion-body h5 {
+.post-potluck-category .list-slide .accordion-body h5{
+    color: var(--white) !important;
+}
+
+.post-potluck-category .list-slide .accordion-body .accordion-body-content h4{
     font-size: 12px;
     line-height: 20px;
     color: var(--secondryColor);
@@ -566,6 +570,10 @@
     width: 20px;
     margin-left: auto;
     font-family: var(--SFProDisplay-Regular);
+}
+
+.modal.cmn-modal span.sub-con.floatingfocus{
+    color: var(--lightgreay) !important;
 }
 
 .modal.cmn-modal .input-form {
