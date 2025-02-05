@@ -1318,7 +1318,7 @@ $(function () {
                 format: "MM/DD/YYYY",
             },
             showDropdowns: false,
-            startDate: moment(event_date, "MM/DD/YYYY"), 
+            startDate: moment(event_date, "MM/DD/YYYY"),
             // endDate: moment().endOf("month"),
             // minDate: moment().add(1, 'days'),
             minDate: moment(),
@@ -1925,6 +1925,14 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     if (isChecked == true || isChecked == "true") {
         // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
+        var max_guest = $("#coins").val();
+        console.log({ max_guest });
+        if (max_guest <= 0) {
+            $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        }
         $.ajax({
             url: base_url + "event/store_user_id",
             method: "POST",
@@ -1948,7 +1956,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 }
 
                 var total_guest = 0;
-                var max_guest = $("#coins").val();
+
                 // if (total_guest == max_guest) {
 
                 // } else {
@@ -2111,6 +2119,14 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
+        var max_guest = $("#coins").val();
+        console.log({ max_guest });
+        if (max_guest <= 0) {
+            $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        }
         $("#loader").css("display", "block");
         $.ajax({
             url: base_url + "event/store_user_id",
@@ -2140,7 +2156,6 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $("#event_guest_count").text(total_guest + " Guests");
                 $(".invite-count").text(total_guest);
 
-                var max_guest = $("#coins").val();
                 var remainingCount = max_guest - total_guest;
                 // if(currentInviteCount >= 15){
                 //     $('.user_choice').prop('disabled',true);
@@ -3656,6 +3671,7 @@ $(document).on("click", "#close_createEvent", function () {
             savePage1Data(1);
         }
         if (final_step == 3) {
+            savePage1Data(1);
             var savePage3Result = savePage3Data(1);
             console.log(savePage3Result);
 
