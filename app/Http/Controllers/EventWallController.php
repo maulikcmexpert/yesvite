@@ -689,7 +689,7 @@ foreach ($polls as $poll) {
         //}
 
         $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
-            $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party');
+            $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
         }, 'event_invited_user' => function ($query) {
             $query->where('is_co_host', '1')->with('user');
         }])->where('id', $event)->first();
@@ -711,6 +711,8 @@ foreach ($polls as $poll) {
         $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
         $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
+        $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
+        $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
         $rsvp_status = "";
         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');
