@@ -65,6 +65,7 @@ class EventGuestController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+
             $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
             $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
             $rsvp_status = "";
@@ -89,6 +90,8 @@ class EventGuestController extends Controller
             $eventDetails['host_id'] = $eventDetail->user_id;
             $eventDetails['event_date'] = $eventDetail->start_date;
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+            $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 
             //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
