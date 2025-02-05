@@ -1022,10 +1022,9 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
             // $user = contact_sync::where( 'id', $sesionuser['user_id'])->where('app_user',"1")->first();
             // if ($user && $user->app_user == "1" && $is_phone == 0) {
                 $find=User::where(['id'=>$user_id,'app_user'=>"1"])->first();
-                if(empty($find)){
+                if(!empty($find)){
                             continue;
-                }
-  
+                }else{
                 $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
         
                 if ($contact_sync) {
@@ -1040,6 +1039,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
                     ];
                     $processed_user_ids[] = $user_id; // Mark this ID as processed even if found in contact_sync
                 }
+            }
             }
         }
         
