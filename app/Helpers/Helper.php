@@ -60,33 +60,33 @@ function getVideoDuration($filePath)
 }
 
 
-
-function genrate_thumbnail($fileName)
+function generate_thumbnail($fileName)
 {
-
     $videoPath = public_path('storage/post_image/') . $fileName;
-    //dd($videoPath);
+
+    // Initialize FFMpeg
     $ffmpeg = FFMpeg::create([
-        'ffmpeg.binaries' => exec('which ffmpeg'),
-        'ffprobe.binaries' => exec('which ffprobe'),
+        'ffmpeg.binaries' => '/usr/bin/ffmpeg',  // Change this path if necessary
+        'ffprobe.binaries' => '/usr/bin/ffprobe', // Change this path if necessary
     ]);
+
     $video = $ffmpeg->open($videoPath);
 
-    $k = 1;
-    for ($i = 0; $i <= 4; $i++) {
-        $imgName = rand(10, 99) . '_' . rand(10000, 99999) . '.jpg';
-        $k++;
+    // Loop through and generate thumbnails at different timestamps
+    for ($i = 0; $i < 5; $i++) {
+        $imgName = uniqid('thumb_', true) . '.jpg';
         $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
-        $video
-            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(7 * $k))
+
+        $video->frame(TimeCode::fromSeconds(7 * ($i + 1)))
             ->save($thumbnailPath);
 
+        // If the file is generated successfully, return it
         if (file_exists($thumbnailPath)) {
             return $imgName;
         }
     }
 
-    return null; // Return null if no thumbnail generated
+    return null; // Return null if no thumbnail is generated
 }
 
 function checkIsimageOrVideo($postImage)
