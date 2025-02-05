@@ -728,3 +728,12 @@
         </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('download-csv-btn').addEventListener('click', function() {
+        var link = document.createElement('a');
+        link.href = "{{ asset('assets/front/csv/demo.xlsx') }}";
+        link.download = "demo.xlsx"; // Specify the file name
+        link.click();
+    });
+</script>
