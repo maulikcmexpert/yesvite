@@ -120,7 +120,7 @@ class EventController extends BaseController
         // }
         Session::forget('desgin');
         Session::forget('desgin_slider');
-        Session::forget('custom_image');
+        Session::forget('custom_image'); 
         Session::save();
         $id = Auth::guard('web')->user()->id;
         $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
@@ -704,8 +704,7 @@ class EventController extends BaseController
                 if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
                     $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
                     $destinationImagePath = $destinationDirectory . $newImageName;
-
-                    File::copy($sourceImagePath, $destinationImagePath);
+                    @File::copy($sourceImagePath, $destinationImagePath);
                     $event_creation->design_image = $tempData->image;
                 }
             }
