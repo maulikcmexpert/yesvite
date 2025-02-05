@@ -999,7 +999,7 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                 if(is_duplicate==0){
                     var initial= parseInt($('#total-selected-email').attr('data-count'));
                     var new_value= initial+1 ;
-                 //    alert(initial);
+                    alert(new_value);
                     $('#total-selected-email').attr('data-count',new_value);
                     $('#total-selected-email').text('+'+new_value);
                 }
