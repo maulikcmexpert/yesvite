@@ -2301,6 +2301,8 @@ class EventController extends BaseController
 
         }
 
+        dd($selectedContactId,$selected_contact);
+
         // $getAllContacts = contact_sync::where('contact_id', $id)
         //     // ->when($type != 'group', function ($query) use ($request) {
         //     //     $query->where(function ($q) use ($request) {
