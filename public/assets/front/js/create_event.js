@@ -3656,6 +3656,7 @@ $(document).on("click", "#close_createEvent", function () {
             savePage1Data(1);
         }
         if (final_step == 3) {
+            savePage1Data(1);
             var savePage3Result = savePage3Data(1);
             console.log(savePage3Result);
 
