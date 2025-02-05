@@ -556,6 +556,26 @@
     padding:30px;
 }
 
+.off-by-host-inner-left{
+    position:relative;
+}
+
+.off-by-host-inner-left svg{
+    width:100%;
+    max-width: 25px !important;
+    height:25px !important;
+}
+
+.off-by-host-inner-left svg path{
+    fill:var(--green);
+}
+
+.off-by-host-inner-right svg{
+    width:100%;
+    max-width: 25px !important;
+    height:25px !important;
+}
+
 
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {
