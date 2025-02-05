@@ -1052,6 +1052,7 @@ $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
     public function right_bar_guest_list(Request $request)
     {
         $search=$request->serach;
+        $event_id=$request->event_id;
         $yesvite=getInvitedUsersListNew($event_id,$search);
 
 
