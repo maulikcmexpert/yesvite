@@ -345,7 +345,7 @@
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
                                                                     </button>
-                                                                    <a href="#" class="msg-btn">
+                                                                    <a href="{{route('message.list',encrypt($guest['id']))}}" class="msg-btn">
                                                                         <svg width="24" height="24"
                                                                             viewBox="0 0 24 24" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">

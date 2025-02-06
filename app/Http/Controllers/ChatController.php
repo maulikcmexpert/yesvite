@@ -65,7 +65,7 @@ class ChatController extends Controller
     {
         $hosts_id="";
         $hosts_name="";
-        $host_profile="";
+        $hosts_profile="";
         if ($id !== null) {
             $hosts_id = decrypt($id);
             $hosts_data = User::where('id', $hosts_id)->first();
