@@ -2285,7 +2285,7 @@
         var marker = new google.maps.Marker({
             position: eventLocation,
             map: map,
-            title: "Event Location",
+            title: "Jhalod",
             icon: {
                 url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png", // Custom marker icon
                 scaledSize: new google.maps.Size(40, 40) // Adjust size
