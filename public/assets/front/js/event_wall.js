@@ -1411,16 +1411,3 @@ function getEmojiUnicode(emoji) {
 const longPressDelay = 3000; // 3 seconds for long press
 let pressTimer;
 let isLongPress = false;
-
-// Function to handle the long press action
-function handleLongPress(element) {
-    console.log("Long press detected");
-    // $('#detail-photo-modal').hide();
-    // Show the button and check the checkbox
-    const photoCard = element.closest('.photo-card-photos-wrp');
-    photoCard.find('.selected-photo-btn').show();
-    photoCard.find('.form-check-input').prop('checked', true);
-
-    // Check if any checkboxes are selected and toggle the visibility of the bulk select wrapper
-    toggleBulkSelectWrapper();
-}
