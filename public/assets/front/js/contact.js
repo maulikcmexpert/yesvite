@@ -716,7 +716,7 @@ $(document).on("keyup", ".search_phone", function () {
 });
 $('label[for="email"]').removeClass("floatingfocus");
 
-$('#uploadForm').on('submit', function (e) {
+$('#upload_csv_contact').on('submit', function (e) {
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
