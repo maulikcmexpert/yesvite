@@ -16,12 +16,12 @@ $(document).ready(function () {
 
         var photoForm = $('#photoForm');
         var textForm = $('#textform');
-        var postContent = document.getElementById('postContent').value.trim();
+     //   var postContent = document.getElementById('postContent').value.trim();
         // Fallback to empty string if #postContent does not exist
 
         console.log('Photo Form:', photoForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Post Content:', postContent);
+       // console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
+        //console.log('Post Content:', postContent);
 
         // If a photo form exists and is visible, submit it
         if (photoForm.is(':visible') && photoForm.length > 0) {
