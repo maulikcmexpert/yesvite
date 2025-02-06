@@ -70,8 +70,8 @@
                                         $fontColor = 'fontcolor' . strtoupper($firstInitial);
                                     @endphp
                                     <h5 class="{{ $fontColor }}" class="profile-pic"
-                                        id="profile-pic-{{ $users->id }}"
-                                        onclick="showStories( {{ $event }},{{ $users->id }})">
+                                        id="profile-pic-{{ $Allstory['id'] }}"
+                                        onclick="showStories( {{ $event }},{{ $Allstory['id'] }})">
                                         {{ $initials }}
                                     </h5>
                                 @endif
