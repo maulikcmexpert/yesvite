@@ -1020,7 +1020,7 @@ $(document).ready(function () {
         if (event.which === 13 && !event.shiftKey) {
             // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
-            document.getElementById("textcontent").value =
+            document.getElementsByClassName("textcontent").value =
                 $("#postContent").val();
             document.getElementById("photoPostType").value = 0;
             $("#photoForm").submit(); // Submit the form
@@ -1069,7 +1069,8 @@ $(document).ready(function () {
                 photoInput.files.length === 0 &&
                 postContent !== ""
             ) {
-                document.getElementById("textcontent").value = postContent;
+                document.getElementsByClassName("textcontent").value =
+                    postContent;
                 document.getElementById("photoPostType").value = 0;
                 $this.prop("disabled", true);
             }
