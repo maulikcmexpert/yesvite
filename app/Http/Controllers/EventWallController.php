@@ -2619,6 +2619,12 @@ class EventWallController extends Controller
     public function sendInvitation(Request $request)
     {
         $user  = Auth::guard('web')->user();
+        $is_failed="0";
+        if(isset($request->is_failed)&&$request->is_failed!=""){
+            $is_failed="1";
+        }
+
+        dd($is_failed);
         // try {
         if (!empty($request['guest_list'])) {
 
