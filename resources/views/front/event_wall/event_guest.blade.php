@@ -1618,7 +1618,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="#" class="invite-user-name">{{ $invite['first_name'] }} {{ $invite['last_name'] }}</a>
                                     <div class="ms-auto">
-                                        <button class="edit-btn failed_contact_edit" data-bs-toggle="modal" data-bs-target="#editguest"
+                                    <!-- data-bs-toggle="modal" data-bs-target="#editguest" -->
+                                        <button class="edit-btn failed_contact_edit" 
                                         data-id="{{ $invite['id'] }}"
                                         data-first_name="{{ $invite['first_name'] }}"
                                         data-last_name="{{ $invite['last_name'] }}"
