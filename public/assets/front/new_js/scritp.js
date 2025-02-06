@@ -114,7 +114,7 @@ $(".notification-btn").on("click", function () {
         },
     });
 });
-$(document).on("click", ".mobile-calender-btn", function () {
+$(document).on("click touchstart ", ".mobile-calender-btn", function () {
     $(".mobile-menu-wrp").removeClass("active");
     $(".line").removeClass("active");
     var text = this.innerText;
@@ -154,7 +154,7 @@ $(document).on("click", ".mobile-calender-btn", function () {
     }
 });
 
-$(document).on("click", ".profile-calender-view", function () {
+$(document).on("click touchstart ", ".profile-calender-view", function () {
     var $textSpan = $(".mobile-calender-btn").find(".responsive-text");
     var $iconSpan = $(".mobile-calender-btn").find(".responsive-icon");
     var listSvg = `<svg class="" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
