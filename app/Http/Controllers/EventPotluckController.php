@@ -545,7 +545,7 @@ class EventPotluckController extends Controller
 
     public function editUserPotluckItem(Request $request)
     {
-        dd($request);
+        dd(1);
         $user  = Auth::guard('web')->user();
 
         $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
