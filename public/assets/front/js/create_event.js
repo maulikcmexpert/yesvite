@@ -3393,7 +3393,7 @@ function convertTo12Hour(time) {
 
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
-    var end_time = $("#ac-end-time").val() || '';
+    var end_time = $("#ac-end-time").val() || "";
 
     let activityendtime;
     // checkEndTimes();
@@ -8420,10 +8420,6 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
-    if(isStartTime == 0){
-        toastr.error("Please enter proper time");
-        return
-    }
     eventData.isdraft = "0";
 
     var data = eventData;
