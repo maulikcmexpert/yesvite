@@ -64,7 +64,7 @@
                                     @elseif($upcomingEvent['rsvp_status'] == '2')
                                         <li><span>Guest : </span> : RSVP - No</li>
                                     @else
-                                        <li><span>Guest : </span> : RSVP - Pending</li>
+                                        <li><span>Guest : </span> : RSVP - Pendinddddddg</li>
                                     @endif
                                 @endif
                             <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
