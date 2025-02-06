@@ -328,9 +328,10 @@ $(document).on('click', '.delete_failed_contact', function () {
 $(document).on('click','.re_send_failed_invites', function() {
     
     let userIds = [];
-    $('.invite-contact-wrp').each(function() {
-        let userId = $(this).data('user-id');  
-        userIds.push(userId);  
+    $('.failed_check_resend_email').each(function() {
+        let userId = $(this).data('id');
+        let preferBy = $(this).data('prefer');
+        userIds.push({ userId: userId, preferBy: preferBy });
     });
     console.log(userIds);
 
