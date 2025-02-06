@@ -72,53 +72,7 @@ $(document).ready(function () {
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
 
                     // **Update Reaction Modal**
-                    let modalId = `#reaction-modal-${eventPostId}`;
-                    let allReactionTab = $(`${modalId} #nav-all-reaction`);
-                    let userReactionItem = $(`${modalId} .reaction-user-${userId}`);
-
-                    // Check if user already reacted
-                    if (userReactionItem.length) {
-                        userReactionItem.find(".reaction-profile-reaction-img img").attr("src", reactionImage);
-                    } else {
-                        // Append new user reaction
-                        allReactionTab.find("ul").append(`
-                            <li class="reaction-info-wrp reaction-user-${userId}">
-                                <div class="commented-user-head">
-                                    <div class="commented-user-profile">
-                                        <div class="commented-user-profile-img">
-                                            <img src="${userProfile}" alt="User Profile">
-                                        </div>
-                                        <div class="commented-user-profile-content">
-                                            <h3>${userName}</h3>
-                                            <p>${userLocation}</p>
-                                        </div>
-                                    </div>
-                                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                        ${reactionImage}
-                                    </div>
-                                </div>
-                            </li>
-                        `);
-                    }
-
-                    // Update the count inside the reaction tabs
-                    let tabButton = $(`${modalId} #nav-${reaction}-reaction-tab-${eventPostId}`);
-                    if (tabButton.length) {
-                        let count = parseInt(tabButton.text().trim()) + 1;
-                        tabButton.html(`${reactionImage} ${count}`);
-                    } else {
-                        // Append a new tab if not exists
-                        $(`${modalId} .reaction-nav-tabs`).append(`
-                            <button class="nav-link" id="nav-${reaction}-reaction-tab-${eventPostId}"
-                                data-bs-toggle="tab"
-                                data-bs-target="#nav-${reaction}-reaction-${eventPostId}"
-                                type="button" role="tab"
-                                aria-controls="nav-${reaction}-reaction"
-                                aria-selected="false">
-                                ${reactionImage} 1
-                            </button>
-                        `);
-                    }
+                    updateReactionModal(eventPostId, response.post_reaction);
                 }
             },
             error: function (xhr) {
@@ -127,6 +81,41 @@ $(document).ready(function () {
             },
         });
     });
+    function updateReactionModal(postId, postReactions) {
+        let reactionListHtml = "";
+        let reactionIcons = {
+            "\\u{2764}": base_url + "assets/front/img/heart-emoji.png",  // ❤️
+            "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png",  // 👍
+            "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+            "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+            "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png",  // 👏
+        };
+
+        postReactions.forEach(reaction => {
+            let profileImage = reaction.profile ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
+                : `<h5 class="fontcolor${reaction.username.charAt(0).toUpperCase()}">${reaction.username.charAt(0).toUpperCase()}</h5>`;
+
+            reactionListHtml += `
+                <li class="reaction-info-wrp">
+                    <div class="commented-user-head">
+                        <div class="commented-user-profile">
+                            <div class="commented-user-profile-img">
+                                ${profileImage}
+                            </div>
+                            <div class="commented-user-profile-content">
+                                <h3>${reaction.username}</h3>
+                                <p>${reaction.location}</p>
+                            </div>
+                        </div>
+                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/default-icon.png'}" alt="${reaction.reaction}">
+                        </div>
+                    </div>
+                </li>`;
+        });
+
+        $(`#nav-all-reaction-${postId} ul`).html(reactionListHtml);
+    }
 
     $(document).on("click", "#CommentlikeButton", function () {
 
