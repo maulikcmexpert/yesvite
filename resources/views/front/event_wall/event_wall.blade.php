@@ -443,6 +443,7 @@
                                                                         <i class="fa-regular fa-heart"
                                                                             id="show_Emoji"></i>
                                                                     @endif
+                                                                    </button>
 
                                                                     <div class="photos-likes-options-wrp emoji-picker"
                                                                         id="emojiDropdown" style="display: none;">
@@ -466,7 +467,6 @@
                                                                             alt="Clap Emoji" class="emoji"
                                                                             data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                     </div>
-                                                                </button>
 
                                                                 @if ($post['commenting_on_off'] == '1')
                                                                     <button
