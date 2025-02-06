@@ -1990,6 +1990,10 @@ class EventWallController extends Controller
             $message = "Post liked by you";
             $isReaction = 1;
         } else {
+            echo $checkReaction->unicode;
+            echo "=============";
+            echo $unicode;
+            die;
             // User has already reacted
             if ($checkReaction->unicode != $unicode) {
                 // Reaction is different from current, update it
