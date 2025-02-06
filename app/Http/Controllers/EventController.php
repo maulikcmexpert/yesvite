@@ -155,6 +155,7 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
+                    ->whereNull('sync_id')
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
