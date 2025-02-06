@@ -385,6 +385,14 @@ $(document).on('change','.failed_check_resend_email', function() {
         $('.re_send_failed_invites').removeClass('success-btn');
         $('.re_send_failed_invites').prop('disabled', true);
     }
+
+    if ($('.failed_check_resend_email:checked').length === $('.failed_check_resend_email').length) {
+        $('.success_list_tip').removeClass('d-none'); 
+        $('.failed_list_tip').addClass('d-none'); 
+    } else {
+        $('.success_list_tip').addClass('d-none'); 
+        $('.failed_list_tip').removeClass('d-none');   
+      }
     console.log(userIds);
 
 
