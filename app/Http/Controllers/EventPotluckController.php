@@ -111,7 +111,7 @@ class EventPotluckController extends Controller
                     $remainingQnt = 0;
                     $totalItem = 0; 
                    
-                    dd($remainingQnt);
+                   
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                         $itemData = [];
@@ -144,7 +144,7 @@ class EventPotluckController extends Controller
                                 }
                             }
                             $totalItem = $totalItem + 1;
-                           
+                            dd($remainingQnt);
                             $remainingQnt = $remainingQnt + $itemValue->quantity;
                             $potluckItem['itmquantity'] =  $itmquantity;
                             $potluckItem['innerUserQnt'] =  $innnerUserItem;
