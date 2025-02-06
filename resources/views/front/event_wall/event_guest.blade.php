@@ -309,7 +309,7 @@
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
                                                                         $isDisabled =
-                                                                           ($eventDetails['is_host']!=1 || $eventDetails['is_co_host']!="1")
+                                                                           ($eventDetails['is_host']==0 || $eventDetails['is_co_host']=="0")
                                                                                 ? 'd-none'
                                                                                 : '';
                                                                         // dd($login_user_id);
