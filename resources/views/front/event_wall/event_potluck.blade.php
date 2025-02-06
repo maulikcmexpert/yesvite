@@ -495,7 +495,7 @@
                                                             @foreach ($category['items'] as $itemkey => $item)
                                                             <input type="hidden"
                                                             class="innerUserQnt-{{ $itemkey }}-{{ $key }}"
-                                                            value="{{ $items['innerUserQnt'] }}">
+                                                            value="{{ 5 }}">
                                                                 <div class="accordion-item active">
                                                                     <input type="hidden" id="category_item_id"
                                                                         name="event_potluck_category_item_id"
