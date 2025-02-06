@@ -289,7 +289,7 @@ $(document).on('click', '.delete_failed_contact', function () {
     let event_id = $('#event_id').val();
 
     $.ajax({
-        url: base_url + "event_wall/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
+        url: base_url + "event_guest/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
         type: "POST",
         data: JSON.stringify({ user_id: userId, event_id: event_id }),
         contentType: "application/json",
