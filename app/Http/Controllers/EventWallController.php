@@ -1990,13 +1990,10 @@ class EventWallController extends Controller
             $message = "Post liked by you";
             $isReaction = 1;
         } else {
-            echo $checkReaction->unicode;
-            echo "=============";
-            echo $unicode;
+
 
             // User has already reacted
-            if ($checkReaction->unicode != $unicode) {
-                echo "here for like";
+            if ($checkReaction->unicode != "00002764") {
 
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;
@@ -2005,7 +2002,7 @@ class EventWallController extends Controller
                 $message = "Post liked by you";
                 $isReaction = 1;
             } else {
-                echo "here for delete";
+
                 // Same reaction, dislike the post
                 $checkReaction->delete();
                 $removeNotification = Notification::where([
@@ -2023,7 +2020,6 @@ class EventWallController extends Controller
             }
         }
 
-        die;
 
         // Get total count of reactions
         $counts = EventPostReaction::where([
