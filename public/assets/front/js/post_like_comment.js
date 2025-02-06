@@ -358,7 +358,7 @@ $(document).ready(function () {
                     }
 
                     const newCommentHTML = `
-                <li class="commented-user-wrp" data-comment-id="${data.id}">
+                
                     <div class="commented-user-head">
                         <div class="commented-user-profile">
                             <div class="commented-user-profile-img">
@@ -386,38 +386,77 @@ $(document).ready(function () {
                             data.id
                         }" class="commented-user-reply-btn">Reply</button>
                     </div>
-                    <ul class="primary-comment-replies"></ul>
-                </li>
+                    
                 `;
                     var replyList;
                     if (parentCommentId) {
-                        // Append as a reply to the parent comment
-                        const parentComment = $(
-                            `li[data-comment-id="${parentCommentId}"]`
-                        );
-                        console.log(`li[data-comment-id="${parentCommentId}"]`);
-                        console.log(parentComment);
-                        if (parentComment.length > 0) {
-                            replyList = parentComment.find(
-                                "ul.primary-comment-replies"
-                            );
-                            if (replyList.length === 0) {
-                                replyList = $(
-                                    '<ul class="primary-comment-replies"></ul>'
-                                ).appendTo(parentComment);
-                            }
+                        const li = `<li class="reply-on-comment" data-comment-id="${data.id}">
+                        ${newCommentHTML}
+                     
+                        </li>`;
 
-                            // Check if the reply is already appended
-                            if (
-                                replyList.find(
-                                    `li[data-comment-id="${data.comment_id}"]`
-                                ).length === 0
-                            ) {
-                                replyList.prepend(newCommentHTML);
-                                // replyList.append(newCommentHTML);
+                        const comments =
+                            document.getElementsByClassName("reply-on-comment");
+
+                        // Convert HTMLCollection to an array and find the target comment
+                        const comment = Array.from(comments).find(
+                            (el) => el.dataset.commentId === parentCommentId
+                        );
+                        console.log(comments);
+                        if (comment) {
+                            console.log(comment);
+                            // Find the previous sibling (the comment before this one)
+                            let previousComment =
+                                comment.previousElementSibling;
+                            const tempDiv = document.createElement("div");
+                            tempDiv.innerHTML = newCommentHTML.trim(); // Convert to an element
+                            const newCommentElement = tempDiv.firstChild;
+                            // Loop until we find the nearest previous <ul> with class "primary-comment-replies"
+                            while (previousComment) {
+                                let parentUl = previousComment.closest(
+                                    ".primary-comment-replies"
+                                );
+                                if (parentUl) {
+                                    console.log("Found the ul:", parentUl);
+                                    parentUl.prepend(li);
+                                    break;
+                                }
+                                previousComment =
+                                    previousComment.previousElementSibling;
                             }
                         }
+                        // Append as a reply to the parent comment
+                        // const parentComment = $(
+                        //     `li[data-comment-id="${parentCommentId}"]`
+                        // );
+                        // console.log(`li[data-comment-id="${parentCommentId}"]`);
+                        // console.log(parentComment);
+                        // if (parentComment.length > 0) {
+                        //     parentComment.parent()
+                        // replyList = parentComment.find(
+                        //     "ul.primary-comment-replies"
+                        // );
+                        // if (replyList.length === 0) {
+                        //     replyList = $(
+                        //         '<ul class="primary-comment-replies"></ul>'
+                        //     ).appendTo(parentComment);
+                        // }
+
+                        // // Check if the reply is already appended
+                        // if (
+                        //     replyList.find(
+                        //         `li[data-comment-id="${data.comment_id}"]`
+                        //     ).length === 0
+                        // ) {
+                        //     replyList.prepend(newCommentHTML);
+                        //     // replyList.append(newCommentHTML);
+                        // }
+                        // }
                     } else {
+                        const li = `<li class="commented-user-wrp" data-comment-id="${data.id}">
+                        ${newCommentHTML}
+                        <ul class="primary-comment-replies"></ul>
+                </li>`;
                         // Append as a new top-level comment
                         const commentList = $(
                             `.posts-card-show-all-comments-wrp.show_${eventPostId}`
@@ -429,7 +468,7 @@ $(document).ready(function () {
                                 `li[data-comment-id="${data.comment_id}"]`
                             )
                         ) {
-                            commentList.prepend(newCommentHTML);
+                            commentList.prepend(li);
                             // commentList.append(newCommentHTML);
                         }
                     }
