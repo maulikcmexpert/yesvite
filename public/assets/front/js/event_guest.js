@@ -301,6 +301,16 @@ $(document).on('click', '.delete_failed_contact', function () {
             if (response.status === 1) {
                 toastr.success(response.message);
                 // // Find the guest container by guestId and remove it from the DOM
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
+                window.location.reload();
                 $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
             } else {
                 toastr.error(response.message);
