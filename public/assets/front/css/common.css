@@ -438,6 +438,7 @@ ul.nav-tabs .nav-link:focus {
     margin-bottom: 7px;
     display: flex;
     align-items: center;
+    word-break: break-all;
 }
 
 .users-data a svg {
