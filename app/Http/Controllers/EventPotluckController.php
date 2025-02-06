@@ -758,7 +758,7 @@ class EventPotluckController extends Controller
                 'item_id' => $itemId,
                 'spoken_for' => $spokenFor,
             ])->render();
-
+                DD($getCarryUser);
             // Return the response
             return response()->json([
                 'status' => 'success',
