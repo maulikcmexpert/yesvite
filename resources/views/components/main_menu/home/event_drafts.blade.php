@@ -53,7 +53,9 @@
                               }
         @endphp
         <div class="progress-bar__wrapper {{$color}}">
-          <progress id="progress-bar" value="{{$percent}}" max="100"></progress>
+          <progress id="progress-bar" value="{{$percent}}" max="100">
+          </progress>
+          <div class="progress-bar-fill"></div>
           <div class="d-flex align-items-center justify-content-between">
               <h4>{{$draft['step']}}/4 Steps - {{$step_name}}</h4>
               {{-- <span class="prograsbar-pro">{{$draft['event_plan_name']}}</span> --}}

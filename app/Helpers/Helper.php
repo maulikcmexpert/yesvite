@@ -244,7 +244,7 @@ function sendNotification($notificationType, $postData)
                     $checkNotificationSetting = checkNotificationSetting($value->user_id);
                     if (!empty($deviceData)) {
 
-                        $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
+                        $notificationImage = EventImage::where('event_id', $postData['event_id'])->orderBy('type', 'ASC')->first();
 
                         $notification_image = "";
                         if ($notificationImage != NULL) {
@@ -411,7 +411,7 @@ function sendNotification($notificationType, $postData)
                         $deviceData = Device::where('user_id', $value->user_id)->first();
                         if (!empty($deviceData)) {
 
-                            $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
+                            $notificationImage = EventImage::where('event_id', $postData['event_id'])->orderBy('type', 'ASC')->first();
 
                             $notification_image = "";
                             if ($notificationImage != NULL) {
@@ -484,7 +484,7 @@ function sendNotification($notificationType, $postData)
                         $deviceData = Device::where('user_id', $value->user_id)->first();
                         if (!empty($deviceData)) {
 
-                            $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
+                            $notificationImage = EventImage::where('event_id', $postData['event_id'])->orderBy('type', 'ASC')->first();
 
                             $notification_image = "";
                             if ($notificationImage != NULL) {
@@ -540,7 +540,7 @@ function sendNotification($notificationType, $postData)
         if ($notification->save()) {
             $deviceData = Device::where('user_id', $getEventOwner->user_id)->first();
             if (!empty($deviceData)) {
-                $notificationImage = EventImage::where('event_id', $postData['event_id'])->first();
+                $notificationImage = EventImage::where('event_id', $postData['event_id'])->orderBy('type', 'ASC')->first();
 
                 $notification_image = '';
                 if ($notificationImage != NULL) {

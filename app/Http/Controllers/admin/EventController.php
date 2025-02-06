@@ -30,42 +30,43 @@ class EventController extends Controller
             $search = $request->input('search')['value'];
 
             $col = $request->input('order')[0]['column'];
-            
+
             $order = $request->input('order')[0]['dir'];
-            
+
             $data = Event::with('user')
-            ->whereHas('user', function ($query) use ($event_type) {
-                if ($event_type == 'normal_user_event') {
-                    $query->where('account_type', '0');
-                } elseif ($event_type == 'professional_event') {
-                    $query->where('account_type', '1');
-                }
-            });
+                ->whereHas('user', function ($query) use ($event_type) {
+                    if ($event_type == 'normal_user_event') {
+                        $query->where('account_type', '0');
+                    } elseif ($event_type == 'professional_event') {
+                        $query->where('account_type', '1');
+                    }
+                });
 
             // dd($data->toSql());
-            if($col=="0"){
-                $data->orderBy('id','desc');
+            if ($col == "0") {
+                $data->orderBy('id', 'desc');
             }
-            if($col=="1"){
-                $data->orderBy('event_name',$order);
-            }if($col=="2"){
-                $data->orderByRaw('(select firstname from users where users.id = events.user_id)' . strtoupper($order)); 
+            if ($col == "1") {
+                $data->orderBy('event_name', $order);
             }
-            if($col=="3"){
-                $data->orderByRaw('(select email from users where users.id = events.user_id)' . strtoupper($order)); 
+            if ($col == "2") {
+                $data->orderByRaw('(select firstname from users where users.id = events.user_id)' . strtoupper($order));
             }
-            if($col=="4"){
-                $data->orderBy('start_date',$order);
+            if ($col == "3") {
+                $data->orderByRaw('(select email from users where users.id = events.user_id)' . strtoupper($order));
             }
-            if($col=="5"){
-                $data->orderBy('end_date',$order);
+            if ($col == "4") {
+                $data->orderBy('start_date', $order);
             }
-            if($col=="6"){
-                $data->orderBy('event_location_nameevent_location_name',$order);
+            if ($col == "5") {
+                $data->orderBy('end_date', $order);
+            }
+            if ($col == "6") {
+                $data->orderBy('event_location_nameevent_location_name', $order);
             }
 
-            
-            if ($eventDate && $status != 'past_events' ) {
+
+            if ($eventDate && $status != 'past_events') {
                 $data->where('start_date', $eventDate);
             }
             if ($status == 'upcoming_events') {
@@ -74,7 +75,7 @@ class EventController extends Controller
             if ($status == 'upcoming_events') {
                 $data->where('start_date', '>', date('Y-m-d'));
             }
-            if ($status == 'past_events') {   
+            if ($status == 'past_events') {
                 $data->where('start_date', '<', date('Y-m-d'));
             }
             if ($status == 'draft_events') {
@@ -88,30 +89,29 @@ class EventController extends Controller
                 ->filter(function ($data) {
                     $search = request()->get('search')['value'];
                     $nameParts = explode(' ', $search);
-                   if($search){
-                       $data->where(function ($q) use ($nameParts, $search) {
+                    if ($search) {
+                        $data->where(function ($q) use ($nameParts, $search) {
                             if (count($nameParts) > 1) {
-                               // Search for firstname and lastname separately
-                               $q->whereHas('user', function ($q) use ($nameParts,$search) {
-                                   $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
-                                     ->where('lastname', 'LIKE', "%{$nameParts[1]}%")
-                                     ->orWhere('email','LIKE',"%{$search}%");
-                               })->orWhere('event_name','LIKE',"%{$search}%")
-                               ->orWhere('start_date','LIKE',"%{$search}%")
-                               ->orWhere('event_location_name','LIKE',"%{$search}%");
+                                // Search for firstname and lastname separately
+                                $q->whereHas('user', function ($q) use ($nameParts, $search) {
+                                    $q->where('firstname', 'LIKE', "%{$nameParts[0]}%")
+                                        ->where('lastname', 'LIKE', "%{$nameParts[1]}%")
+                                        ->orWhere('email', 'LIKE', "%{$search}%");
+                                })->orWhere('event_name', 'LIKE', "%{$search}%")
+                                    ->orWhere('start_date', 'LIKE', "%{$search}%")
+                                    ->orWhere('event_location_name', 'LIKE', "%{$search}%");
                             } else {
-                               // Search for firstname or lastname if only one term is provided
-                               $q->whereHas('user', function ($q) use ($search) {
-                                   $q->where('firstname', 'LIKE', "%{$search}%")
-                                     ->orWhere('lastname', 'LIKE', "%{$search}%")
-                                     ->orwhere('email','LIKE',"%{$search}%");
-                               })->orWhere('event_name','LIKE',"%{$search}%")
-                               ->orWhere('start_date','LIKE',"%{$search}%")
-                               ->orWhere('event_location_name','LIKE',"%{$search}%");
+                                // Search for firstname or lastname if only one term is provided
+                                $q->whereHas('user', function ($q) use ($search) {
+                                    $q->where('firstname', 'LIKE', "%{$search}%")
+                                        ->orWhere('lastname', 'LIKE', "%{$search}%")
+                                        ->orwhere('email', 'LIKE', "%{$search}%");
+                                })->orWhere('event_name', 'LIKE', "%{$search}%")
+                                    ->orWhere('start_date', 'LIKE', "%{$search}%")
+                                    ->orWhere('event_location_name', 'LIKE', "%{$search}%");
                             }
-                       });
-                   }
-                    
+                        });
+                    }
                 })
                 ->addColumn('number', function ($row) {
                     $page = request()->get('start') / request()->get('length') + 1;
@@ -213,7 +213,7 @@ class EventController extends Controller
                 ->make(true);
         }
 
-        
+
 
         $title = 'Event Lists';
 
@@ -256,7 +256,7 @@ class EventController extends Controller
         $page = 'admin.event_management.view';
         $js = 'admin.event_management.eventviewjs';
         $eventDetail =  Event::where('id', $eventId)->first();
-        $eventImage = EventImage::where('event_id', $eventId)->get();
+        $eventImage = EventImage::where('event_id', $eventId)->orderBy('type', 'ASC')->get();
         $eventDate = $eventDetail->start_date;
         $current_date = Carbon::now();
         $datetime1 = Carbon::parse($eventDate);
@@ -280,7 +280,7 @@ class EventController extends Controller
         $eventId = $request->input('eventId');
         $event_id = decrypt($eventId);
 
-        $data =  EventInvitedUser::with(['user','event','contact_sync'])->where('event_id', $event_id)->get();
+        $data =  EventInvitedUser::with(['user', 'event', 'contact_sync'])->where('event_id', $event_id)->get();
         // dd($data);
         return Datatables::of($data)
             ->addIndexColumn()
@@ -294,16 +294,16 @@ class EventController extends Controller
                 if ($row->is_co_host == '1') {
                     $isCoHost =  "<span class='text-success'>Co-host</span>";
                 }
-                if($row->sync_id !=''){
+                if ($row->sync_id != '') {
                     return $row->contact_sync->firstName . ' ' . $row->contact_sync->lastName . ' ' . $isCoHost;
-                }else{
+                } else {
                     return $row->user->firstname . ' ' . $row->user->lastname . ' ' . $isCoHost;
                 }
             })
             ->addColumn('email', function ($row) {
-                if($row->sync_id != ''){
+                if ($row->sync_id != '') {
                     return $row->contact_sync->email;
-                }else{
+                } else {
                     return $row->user->email;
                 }
             })

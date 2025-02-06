@@ -36,7 +36,7 @@ class EventAboutController extends Controller
         $title = 'event about';
         $page = 'front.event_wall.event_about';
         $user  = Auth::guard('web')->user();
-        $js = ['event_about_rsvp','guest_rsvp','post_like_comment','guest'];
+        $js = ['event_about_rsvp', 'guest_rsvp', 'post_like_comment', 'guest'];
         $current_page = "about";
         $login_user_id  = $user->id;
         $event = decrypt($id);
@@ -45,8 +45,10 @@ class EventAboutController extends Controller
         }
 
         try {
-            $eventDetail = Event::with(['user', 'event_image', 'event_schedule',  'event_settings' => function ($query) {
-                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
+            $eventDetail = Event::with(['user', 'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+            }, 'event_schedule',  'event_settings' => function ($query) {
+                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
             }, 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
@@ -64,7 +66,7 @@ class EventAboutController extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-            $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
+            $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
             $eventDetails['podluck'] = ($eventDetail->event_settings != null && $eventDetail->event_settings->podluck != null) ? $eventDetail->event_settings->podluck : "0";
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
@@ -117,7 +119,7 @@ class EventAboutController extends Controller
                 }
             }
             $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
-            $eventDetails['total_event_comments']= $event_comments;
+            $eventDetails['total_event_comments'] = $event_comments;
             $eventDetails['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
@@ -143,7 +145,7 @@ class EventAboutController extends Controller
             $eventDetails['zip_code'] = $eventDetail->zip_code;
             $eventDetails['city'] = $eventDetail->city;
             $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
-            $eventDetails['logitude'] = (!empty($eventDetail->logitude) || $eventDetail->logitude != null) ? $eventDetail->logitude : "";
+            $eventDetails['longitude'] = (!empty($eventDetail->longitude) || $eventDetail->longitude != null) ? $eventDetail->longitude : "";
 
             $eventsScheduleList = [];
             foreach ($eventDetail->event_schedule as $key => $value) {
@@ -204,7 +206,7 @@ class EventAboutController extends Controller
                     // ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
                     //     ->get();
 
-                    $guestData=getInvitedUsersListNew($eventDetail->id);
+                    $guestData = getInvitedUsersListNew($eventDetail->id);
 
                     $eventData[] = "Number of guests : " . $numberOfGuest;
                     $eventData['guests'] = $guestData;
@@ -329,12 +331,12 @@ class EventAboutController extends Controller
             //         $rsvp_attempt =  'yes_to_no';
             //     }
             // }
-        ///postlist
-        // dd( $eventDetails);
+            ///postlist
+            // dd( $eventDetails);
 
-        //    {{ dd($eventDetails);}}
+            //    {{ dd($eventDetails);}}
 
-// //
+            // //
 
             return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
@@ -435,6 +437,4 @@ class EventAboutController extends Controller
 
         return redirect()->back()->with('success', 'RSVP updated successfully!');
     }
-
-
 }

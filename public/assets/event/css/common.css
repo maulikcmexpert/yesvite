@@ -917,6 +917,31 @@ button.toast-close-button {
 #sidebar_add_co_host .nav-tabs{
     height: auto !important;
 }
+
+
+
+.loader {
+    display: flex;
+    gap: 10px;
+}
+
+.loader div {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: bounce 0.8s infinite ease-in-out;
+}
+
+.loader div:nth-child(1) { background-color: #3CBDE7; animation-delay: 0s; } 
+.loader div:nth-child(2) { background-color: #23AA25; animation-delay: 0.15s; }  
+.loader div:nth-child(3) { background-color: #ECAF15; animation-delay: 0.3s; } 
+.loader div:nth-child(4) { background-color: #E93370; animation-delay: 0.45s; } 
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+}
+
 /* ======== Responsive ========= */
 
 @media only screen and (min-width: 1500px) and (max-width: 2600px) {

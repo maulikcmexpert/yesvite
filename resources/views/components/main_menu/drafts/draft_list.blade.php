@@ -63,6 +63,7 @@
                     @endphp
                         <div class="progress-bar__wrapper {{$color}}">
                           <progress id="progress-bar" value="{{$percent}}" max="100"></progress>
+                          <div class="progress-bar-fill"></div>
                           <div class="d-flex align-items-center justify-content-between">
                             @php
                             $step_name="";
