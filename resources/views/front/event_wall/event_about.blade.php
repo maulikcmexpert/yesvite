@@ -518,20 +518,24 @@
                                                 @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['longitude']!=''  && $eventDetails['longitude']!=null  && $eventDetails['longitude']!=0 )
                                                 @php
                                                    $latitude = !empty($eventDetails['latitude'])
-    ? $eventDetails['latitude']
-    : '39.8283'; // Default latitude for the USA
+                                                        ? $eventDetails['latitude']
+                                                        : '39.8283';
 
-$longitude = !empty($eventDetails['longitude'])
-    ? $eventDetails['longitude']
-    : '-98.5795'; // Default longitude for the USA
+                                                    $longitude = !empty($eventDetails['longitude'])
+                                                        ? $eventDetails['longitude']
+                                                        : '-98.5795'; 
 
                                                 @endphp
 
-                                                <iframe
-                                                    src="https://www.google.sk/maps?f=q&amp;output=embed&amp;source=s_q&amp;hl=sk&amp;geocode=&amp;q=https:%2F%2Fwww.google.sk%2Fmaps%2Fms%3Fauthuser%3D0%26vps%3D5%26hl%3Dsk%26ie%3DUTF8%26oe%3DUTF8%26msa%3D0%26output%3Dkml%26msid%3D205427380680792264646.0004fe643d107ef29299a&amp;aq=&amp;sll=48.669026,19.699024&amp;sspn=4.418559,10.821533&amp;ie=UTF8&amp;ll={{ $longitude }},{{ $latitude }}&amp;spn=0.199154,0.399727&amp;t=m&amp;z=3"
-                                                    width="600" height="450" style="border:0;" allowfullscreen=""
-                                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                                </iframe>
+                                                    <iframe 
+                                                    width="600" 
+                                                    height="450" 
+                                                    style="border:0;" 
+                                                    loading="lazy" 
+                                                    allowfullscreen 
+                                                    referrerpolicy="no-referrer-when-downgrade" 
+                                                    src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDPyeIABhKFMSFXrrcR1IE8jBUXJt-2bG4&center=<?php echo $latitude; ?>,<?php echo $longitude; ?>&zoom=14">
+                                                    </iframe>
                                                 <a href="https://www.google.com/maps/dir/?api=1&destination={{ $latitude }},{{ $longitude }}"
                                                     target="_blank" class="direction-btn">
                                                     Directions
