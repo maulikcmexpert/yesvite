@@ -3513,6 +3513,7 @@ $(document).on("click", "#save_activity_schedule", function () {
         if (lastScheduleEndtime > lastendtime) {
             isStartTime = 1;
             toastr.error("Please enter proper time");
+            $("#end-time").val("");
             return;
         }
     }
