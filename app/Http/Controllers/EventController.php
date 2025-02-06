@@ -276,7 +276,7 @@ class EventController extends BaseController
                 $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : null;
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : null;
                 $eventDetail['event_images'] = [];
-                $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+                $getEventImages = EventImage::where('event_id', $getEventData->id)->orderBy('type', 'ASC')->get();
                 if (!empty($getEventImages)) {
                     foreach ($getEventImages as $imgVal) {
                         $eventImageData['id'] = $imgVal->id;
