@@ -79,7 +79,7 @@ class ChatController extends Controller
                 $hosts_profile = !empty($photo_field) ? url('/public/storage/profile/' . $photo_field) : "";
             }
         }
-        
+
         $userId = auth()->id();
         $userData = User::findOrFail($userId);
 
@@ -188,7 +188,7 @@ class ChatController extends Controller
             'userName',
             'hosts_id',
             'hosts_name',
-            'host_profile'
+            'hosts_profile'
         ));
     }
 
