@@ -1701,7 +1701,7 @@
                                     
                                         @endif
                                 </div>
-                                @endif
+                                @else
                                 <div class="d-flex align-items-center justify-content-between mt-1">
                                     @if(!empty($invite['email'] ))
                                     <div class="invite-mail-data faild-content">
@@ -1746,6 +1746,7 @@
                                         id="coming">
                                         @endif
                                 </div>
+                                @endif
                             </div>
                         </div>
 
