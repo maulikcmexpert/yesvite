@@ -469,14 +469,20 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         async function updateUserStatuses() {
             console.log("updating status")
             const users = document.querySelectorAll(".guest-users");
-
+            let i = 0
             for (const userElement of users) {
                 const userId = userElement.getAttribute("data-userid");
                 console.log({userId})
                 if (!userId) continue; // Skip if no userId
 
                 let userData = await getUser(userId);
-                let statusClass = (userData?.userStatus?.toLowerCase() === "online") ? "active-dot" : "inactive-dot";
+                let statusClass;
+                if(userData?.userStatus?.toLowerCase() === "online"){
+                    i = i+1;
+                    statusClass = "active-dot";
+                } else{
+                     statusClass =  "inactive-dot";
+                } 
 
                 // Find the span inside the user element and update its class
                 let statusSpan = userElement.querySelector("span");
@@ -484,6 +490,8 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                     statusSpan.className = statusClass; // Replace class
                 }
             }
+
+            $('.main-right-guests-head').find('p').html(`${i} Active`);
         }
 
         // Call the function to update statuses
