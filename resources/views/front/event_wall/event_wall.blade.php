@@ -785,10 +785,15 @@
                                                                                     @endforeach
 
                                                                                     <!-- Button to show more replies if any -->
-                                                                                    <button
+                                                                                    {{-- <button
                                                                                         class="show-comment-reply-btn">Show
                                                                                         {{ $comment['total_replies'] }}
-                                                                                        reply</button>
+                                                                                        reply
+                                                                                    </button> --}}
+
+                                                                                    <button
+                                                                                    class="show-comment-reply-btn">Show reply
+                                                                                </button>
                                                                                 </ul>
                                                                             @endif
 
