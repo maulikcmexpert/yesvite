@@ -1469,7 +1469,7 @@ class EventController extends BaseController
 
     public function storeCategoryitemSession(Request $request)
     {
-       
+
         $user = Auth::guard('web')->user();
         $id = $user->id;
         $name = $user->firstname . ' ' . $user->lastname;
@@ -2576,7 +2576,7 @@ class EventController extends BaseController
             $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
             $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
             $eventDetail['event_images'] = [];
-            $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+            $getEventImages = EventImage::where('event_id', $getEventData->id)->orderBy('type', 'ASC')->get();
             if (!empty($getEventImages)) {
                 foreach ($getEventImages as $imgVal) {
                     $eventImageData['id'] = $imgVal->id;
@@ -3253,8 +3253,8 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
-        
-        
+
+
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('custom_image');
