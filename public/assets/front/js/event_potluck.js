@@ -117,7 +117,7 @@ $(document).ready(function () {
         console.log(eventid, description, self_bring_item, quantity);
 
         $.ajax({
-            url: base_url + "event_potluck/add-potluck-category-item/", // Update with your URL
+            url: base_url + "event_potluck/add-potluck-category-item", // Update with your URL
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -361,7 +361,7 @@ $(document).on('click', '.saveItemBtn', function () {
     // const quantity = $('#newQuantity').val();
     //    alert(quantity);
     $.ajax({
-        url: base_url + "event_potluck/editUserPotluckItem/", // Update with your URL
+        url: base_url + "event_potluck/editUserPotluckItem", // Update with your URL
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -412,7 +412,7 @@ $(document).on('click', '.plus_icon_user', function () {
 
     // Perform an AJAX call to fetch user details based on itemId and categoryId
     $.ajax({
-        url: base_url + 'event_potluck/fetch-user/',  // Your endpoint to fetch the user data
+        url: base_url + 'event_potluck/fetch-user',  // Your endpoint to fetch the user data
         type: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -516,7 +516,7 @@ $(document).on('click', '.deleteBtn', function () {
     const eventid = $('#event_id').val();
 
     $.ajax({
-        url: base_url + "event_potluck/deleteUserPotluckItem/", // Update with your URL
+        url: base_url + "event_potluck/deleteUserPotluckItem", // Update with your URL
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

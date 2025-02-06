@@ -22,18 +22,17 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#likeButton", function () {
-        clearTimeout(longPressTimer); // Clear the long press timer
-
-        // If it's a long press, don't process the click event
+        clearTimeout(longPressTimer);
         if (isLongPresss) return;
 
-        // Handle single tap like/unlike
         const button = $(this);
         const isLiked = button.hasClass("liked");
-        const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
+        const userId = button.data("user-id"); // Assuming each button has a user ID
+        let reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle between 💔 or ❤️
 
-
-        // Toggle like button appearance
+        // Toggle UI button appearance
         if (isLiked) {
             button.removeClass("liked");
             button.find("i").removeClass("fa-solid").addClass("fa-regular");
@@ -42,12 +41,6 @@ $(document).ready(function () {
             button.find("i").removeClass("fa-regular").addClass("fa-solid");
         }
 
-
-
-
-        // AJAX call to update the like state
-        const eventId = button.data("event-id");
-        const eventPostId = button.data("event-post-id");
         $.ajax({
             url: base_url + "event_wall/userPostLikeDislike",
             method: "POST",
@@ -62,9 +55,10 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
-                    $(`#likeCount_${eventPostId}`).text(
-                        `${response.count} Likes`
-                    );
+                    console.log(response);
+
+                    $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+
                     let reactionImage = "";
                     if (reaction === "\u{1F604}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
@@ -72,15 +66,13 @@ $(document).ready(function () {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
                     } else if (reaction === "\u{2764}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
-                    } else {
-                        reactionImage = "";
                     }
 
-                    // Update the reaction display
+                    // Update the reaction image in post
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
 
-                } else {
-                    // alert(response.message);
+                    // **Update Reaction Modal**
+                    updateReactionModal(eventPostId, response.post_reaction);
                 }
             },
             error: function (xhr) {
@@ -89,6 +81,42 @@ $(document).ready(function () {
             },
         });
     });
+    function updateReactionModal(postId, postReactions) {
+        let reactionListHtml = "";
+        let reactionIcons = {
+            "\\u{2764}": base_url + "assets/front/img/heart-emoji.png",  // ❤️
+            "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png",  // 👍
+            "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+            "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+            "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png",  // 👏
+        };
+
+        postReactions.forEach(reaction => {
+            let profileImage = reaction.profile ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
+                : `<h5 class="fontcolor${reaction.username.charAt(0).toUpperCase()}">${reaction.username.charAt(0).toUpperCase()}</h5>`;
+
+            reactionListHtml += `
+                <li class="reaction-info-wrp">
+                    <div class="commented-user-head">
+                        <div class="commented-user-profile">
+                            <div class="commented-user-profile-img">
+                                ${profileImage}
+                            </div>
+                            <div class="commented-user-profile-content">
+                                <h3>${reaction.username}</h3>
+                                <p>${reaction.location}</p>
+                            </div>
+                        </div>
+                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/default-icon.png'}" alt="${reaction.reaction}">
+                        </div>
+                    </div>
+                </li>`;
+        });
+
+        $(`#nav-all-reaction-${postId} ul`).html(reactionListHtml);
+    }
+
     $(document).on("click", "#CommentlikeButton", function () {
 
 

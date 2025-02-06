@@ -720,8 +720,8 @@ display:none;}
 }
 
 .invite-contact-wrp .invite-contact .form-check-input.failed-checkout:checked{
-    background-color: #2DA9FC !important;
-    border-color: #2DA9FC !important;
+    background-color: var(--green) !important;
+    border-color:var(--green) !important;
 }
 
 #failed .faild-content svg path{

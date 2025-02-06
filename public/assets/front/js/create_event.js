@@ -9242,3 +9242,4 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_guest").find(".side-bar-list").removeClass("menu-success");
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
 }
+colorchange();
