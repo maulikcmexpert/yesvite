@@ -1338,16 +1338,18 @@ $(document).on('mousedown', '#likeButton', function () {
         //button.find('i').text(''); // Clear the heart icon
     }, 500); // 500ms for long press
 });
-// $(document).on('click', function (e) {
-//     if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
-//         $('#emojiDropdown').hide(); // Hide emoji picker when clicked outside
-//     }
-// });
 $(document).on('click', function (e) {
-    if (!$(e.target).closest('.photo-card-head-right').length) {
+    if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
+        $('#emojiDropdown').hide(); 
         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+        // Hide emoji picker when clicked outside
     }
 });
+// $(document).on('click', function (e) {
+//     if (!$(e.target).closest('.photo-card-head-right').length) {
+//         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+//     }
+// });
 // function getEmojiUnicode(emoji) {
 //     switch (emoji) {
 //         case '❤️':
